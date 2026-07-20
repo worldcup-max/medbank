@@ -1,0 +1,27 @@
+{
+  "deck": "Recall Cards",
+  "topic": "Neonatal Jaundice",
+  "cards": [
+    { "q": "Define neonatal jaundice.", "a": "Yellowish discoloration of skin, sclera and mucous membranes in a newborn due to raised serum bilirubin (hyperbilirubinaemia)." },
+    { "q": "At roughly what serum bilirubin level does jaundice become clinically visible?", "a": "About 85 micromol/L (5 mg/dL)." },
+    { "q": "What is bilirubin a breakdown product of?", "a": "Haem, mostly from senescent red blood cells." },
+    { "q": "What is the newborn red cell lifespan compared to an adult's?", "a": "70–90 days in the newborn versus 120 days in the adult." },
+    { "q": "Which hepatic enzyme conjugates bilirubin, and what is its state at birth?", "a": "UDP-glucuronosyltransferase (UGT); it is immature/low at birth." },
+    { "q": "Why does increased enterohepatic circulation raise bilirubin in newborns?", "a": "Gut beta-glucuronidase deconjugates bilirubin, which is then reabsorbed into the blood." },
+    { "q": "Define physiological jaundice by its time course.", "a": "Appears after 24 hours, peaks day 3–5, resolves by day 14; unconjugated and benign." },
+    { "q": "List the four features that make jaundice pathological.", "a": "Onset within the first 24 hours; rapid rise (>85 micromol/L/day); raised conjugated fraction; persistence beyond 14 days." },
+    { "q": "Give the causes of jaundice presenting within the first 24 hours.", "a": "Haemolysis (Rh or ABO incompatibility, G6PD deficiency) and congenital infection." },
+    { "q": "Give causes of jaundice presenting between 24 hours and 14 days.", "a": "Physiological, breastfeeding jaundice, sepsis, polycythaemia, and bruising/cephalhaematoma." },
+    { "q": "Give causes of prolonged jaundice (>14 days).", "a": "Breast-milk jaundice, hypothyroidism, biliary atresia, UTI, and galactosaemia." },
+    { "q": "Which prolonged-jaundice cause is a surgical emergency, and why?", "a": "Biliary atresia — it is conjugated (obstructive) and needs surgery within the first weeks to preserve the liver." },
+    { "q": "What is Kramer's rule?", "a": "Jaundice progresses cephalocaudally — face first, then trunk, then limbs." },
+    { "q": "What does yellowing of the palms and soles indicate?", "a": "Severe jaundice (high bilirubin level)." },
+    { "q": "Why must bilirubin be measured rather than judged by eye?", "a": "Visual assessment is unreliable with darker skin, artificial light, and anaemia; confirm with transcutaneous or serum bilirubin." },
+    { "q": "What is kernicterus?", "a": "Permanent brain injury from unconjugated bilirubin deposition in the basal ganglia — choreoathetoid cerebral palsy, sensorineural hearing loss and gaze palsy." },
+    { "q": "Why can unconjugated (not conjugated) bilirubin cause kernicterus?", "a": "It is fat-soluble and crosses the immature blood–brain barrier; conjugated bilirubin is water-soluble and cannot." },
+    { "q": "List features of acute bilirubin encephalopathy.", "a": "Lethargy, poor feeding, high-pitched cry, hypertonia and opisthotonus." },
+    { "q": "How does phototherapy work and what wavelength is used?", "a": "Blue light at 450–460 nm photoisomerises bilirubin into water-soluble forms excreted without conjugation." },
+    { "q": "When is exchange transfusion indicated?", "a": "Dangerously high or rapidly rising bilirubin, or signs of encephalopathy." },
+    { "q": "What is the role of IV immunoglobulin in neonatal jaundice?", "a": "In isoimmune haemolytic disease it saturates Fc receptors, slowing antibody-mediated red cell destruction and bilirubin production." }
+  ]
+}
