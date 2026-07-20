@@ -15,41 +15,28 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;height:100%}
-body{
-  background:var(--bg);color:var(--text);
-  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--text);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
 a{color:var(--accent);text-decoration:none}
 
-/* ---------- layout ---------- */
 #shell{display:flex;min-height:100%}
-#sidebar{
-  width:248px;flex:0 0 248px;background:var(--panel);border-right:1px solid var(--line);
-  padding:18px 12px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:50;
-}
-#main{margin-left:248px;flex:1;min-width:0;padding:28px 32px 80px;max-width:980px}
-.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px;font-weight:700;font-size:19px;letter-spacing:.2px}
+#sidebar{width:248px;flex:0 0 248px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 12px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:50}
+#main{margin-left:248px;flex:1;min-width:0;padding:28px 32px 80px;max-width:1000px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px;font-weight:700;font-size:19px}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
 .navlabel{font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--dimmer);padding:16px 12px 7px;font-weight:600}
-.navitem{
-  display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;
-  color:var(--dim);cursor:pointer;font-size:14.5px;font-weight:500;margin-bottom:2px;
-  transition:background .12s,color .12s;
-}
+.navitem{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;color:var(--dim);
+  cursor:pointer;font-size:14.5px;font-weight:500;margin-bottom:2px;transition:background .12s,color .12s}
 .navitem:hover{background:var(--panel2);color:var(--text)}
 .navitem.active{background:var(--accent);color:#fff}
 .navitem .ic{width:20px;text-align:center;font-size:15px;flex:0 0 20px}
 .navitem .badge{margin-left:auto;font-size:11px;color:var(--dimmer);font-weight:600}
-.navitem.active .badge{color:rgba(255,255,255,.8)}
+.navitem.active .badge{color:rgba(255,255,255,.85)}
 
-#hamburger{
-  display:none;position:fixed;top:12px;left:12px;z-index:70;
-  background:var(--panel);border:1px solid var(--line);color:var(--text);
-  width:42px;height:42px;border-radius:10px;font-size:19px;cursor:pointer;
-}
+#hamburger{display:none;position:fixed;top:12px;left:12px;z-index:70;background:var(--panel);
+  border:1px solid var(--line);color:var(--text);width:42px;height:42px;border-radius:10px;font-size:19px;cursor:pointer}
 #scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
-
 @media(max-width:820px){
   #sidebar{transform:translateX(-100%);transition:transform .22s ease;width:270px}
   body.navopen #sidebar{transform:none}
@@ -58,42 +45,56 @@ a{color:var(--accent);text-decoration:none}
   #hamburger{display:block}
 }
 
-/* ---------- generic ---------- */
 h1{font-size:27px;margin:0 0 6px;letter-spacing:-.3px}
-h2{font-size:20px;margin:32px 0 10px}
+h2{font-size:20px;margin:34px 0 12px}
 .sub{color:var(--dim);font-size:14.5px;margin:0 0 26px}
 .crumb{font-size:13.5px;color:var(--dim);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.crumb span.sep{color:var(--dimmer)}
+.crumb .sep{color:var(--dimmer)}
 .crumb a{color:var(--dim);cursor:pointer}
 .crumb a:hover{color:var(--accent)}
 .grid{display:grid;gap:13px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:17px 18px;cursor:pointer;transition:border-color .14s,transform .14s,background .14s;
-}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px 18px;
+  cursor:pointer;transition:border-color .14s,transform .14s}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card h3{margin:0 0 5px;font-size:16.5px;font-weight:600}
 .card p{margin:0;color:var(--dim);font-size:13.5px}
-.pill{
-  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
-  padding:3px 9px;border-radius:99px;margin-bottom:9px;
-}
-.empty{
-  border:1px dashed var(--line);border-radius:var(--radius);padding:34px 22px;
-  text-align:center;color:var(--dim);font-size:14.5px;background:var(--panel);
-}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;margin-bottom:9px}
+.empty{border:1px dashed var(--line);border-radius:var(--radius);padding:34px 22px;text-align:center;
+  color:var(--dim);font-size:14.5px;background:var(--panel)}
 .stats{display:flex;gap:11px;flex-wrap:wrap;margin:0 0 28px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:13px 17px;min-width:104px}
 .stat b{display:block;font-size:23px;line-height:1.25}
 .stat span{font-size:12px;color:var(--dim)}
 
-/* ---------- topic page ---------- */
-.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:22px 0 22px;overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{
-  padding:10px 15px;color:var(--dim);cursor:pointer;font-size:14.5px;font-weight:500;
-  border-bottom:2px solid transparent;white-space:nowrap;
+/* topic rows */
+.modhead{font-size:12px;letter-spacing:.9px;text-transform:uppercase;color:var(--dimmer);
+  font-weight:700;margin:30px 0 11px}
+.rows{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+.row{display:flex;align-items:center;gap:13px;padding:12px 15px;border-bottom:1px solid var(--line);
+  cursor:pointer;transition:background .12s}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--panel2)}
+.row .sn{flex:0 0 30px;color:var(--dimmer);font-size:13px;font-variant-numeric:tabular-nums;font-weight:600}
+.row .mid{flex:1;min-width:0}
+.row .tt{font-size:15.2px;font-weight:550;line-height:1.4}
+.row .meta{font-size:12.5px;color:var(--dim);margin-top:2px}
+.row .st{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding:4px 10px;border-radius:99px;white-space:nowrap}
+.st.ready{background:#3ecf8e1f;color:var(--recall)}
+.st.todo{background:#6b78891f;color:var(--dimmer)}
+.row.todo .tt{color:var(--dim);font-weight:500}
+@media(max-width:560px){
+  .row{padding:11px 12px;gap:9px}
+  .row .sn{flex:0 0 22px;font-size:12px}
+  .row .tt{font-size:14.3px}
+  .row .st{font-size:9.5px;padding:3px 7px}
 }
+
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:22px 0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:10px 15px;color:var(--dim);cursor:pointer;font-size:14.5px;font-weight:500;
+  border-bottom:2px solid transparent;white-space:nowrap}
 .tab.active{color:var(--text);border-bottom-color:var(--accent)}
 .md{font-size:16px}
 .md h1{font-size:25px;margin:0 0 14px;padding-bottom:11px;border-bottom:1px solid var(--line)}
@@ -105,62 +106,47 @@ h2{font-size:20px;margin:32px 0 10px}
 .md strong{color:#fff;font-weight:650}
 .md code{background:var(--panel2);padding:2px 6px;border-radius:5px;font-size:14px}
 .md hr{border:0;border-top:1px solid var(--line);margin:26px 0}
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;background:var(--panel);color:var(--text);
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--panel);color:var(--text);
   border:1px solid var(--line);padding:11px 17px;border-radius:10px;cursor:pointer;
-  font-size:14.5px;font-weight:600;font-family:inherit;
-}
+  font-size:14.5px;font-weight:600;font-family:inherit}
 .btn:hover{border-color:var(--accent)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .btn.green{background:var(--recall);border-color:var(--recall);color:#04231a}
 .btn:disabled{opacity:.4;cursor:default}
 
-/* ---------- study ---------- */
 .studywrap{max-width:760px;margin:0 auto}
-.studytop{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.studytop{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .studytop .name{font-weight:650;font-size:15px}
 .counter{margin-left:auto;color:var(--dim);font-size:13.5px;font-variant-numeric:tabular-nums}
 .bar{height:4px;background:var(--panel2);border-radius:9px;overflow:hidden;margin-bottom:22px}
-.bar>div{height:100%;background:var(--accent);transition:width .25s}
-.flash{
-  background:var(--panel);border:1px solid var(--line);border-radius:16px;
-  padding:30px 26px;min-height:230px;cursor:pointer;
-}
+.bar>div{height:100%;transition:width .25s}
+.flash{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px 26px;
+  min-height:230px;cursor:pointer}
 .flash .qlabel{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);font-weight:700;margin-bottom:11px}
 .flash .q{font-size:20.5px;font-weight:600;line-height:1.45}
 .taphint{text-align:center;color:var(--dimmer);font-size:13px;margin-top:26px}
 .ansblock{margin-top:24px;padding-top:22px;border-top:1px solid var(--line);animation:fade .2s ease}
 @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1}}
-.seg{margin-bottom:20px}
-.seg:last-child{margin-bottom:0}
-.seglabel{
-  font-size:11px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;margin-bottom:8px;
-  display:inline-block;padding:3px 9px;border-radius:6px;
-}
-.seg .body{font-size:16px;line-height:1.68;color:var(--text)}
-.seg .body p{margin:0 0 12px}
-.seg .body p:last-child{margin:0}
+.seg{margin-bottom:20px}.seg:last-child{margin-bottom:0}
+.seglabel{font-size:11px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;margin-bottom:8px;
+  display:inline-block;padding:3px 9px;border-radius:6px}
+.seg .body{font-size:16px;line-height:1.68}
+.seg .body p{margin:0 0 12px}.seg .body p:last-child{margin:0}
 .seg.lecturer .body{border-left:3px solid var(--dimmer);padding-left:15px;color:#dfe6f2}
 .navbtns{display:flex;gap:10px;margin-top:22px}
 .navbtns .btn{flex:1;justify-content:center}
 .kbd{color:var(--dimmer);font-size:12.5px;text-align:center;margin-top:16px}
 @media(max-width:820px){.kbd{display:none}.flash{padding:24px 19px}.flash .q{font-size:19px}}
 
-/* ---------- builder ---------- */
 .step{display:flex;gap:15px;margin-bottom:19px;align-items:flex-start}
-.stepnum{
-  flex:0 0 29px;height:29px;border-radius:50%;background:var(--accent);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-top:1px;
-}
-.step .txt{flex:1}
+.stepnum{flex:0 0 29px;height:29px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-top:1px}
 .step .txt b{display:block;margin-bottom:3px;font-size:15.5px}
 .step .txt span{color:var(--dim);font-size:14.5px}
-pre.copy{
-  background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:16px;
+pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:16px;
   white-space:pre-wrap;word-break:break-word;font-size:13.5px;line-height:1.65;color:var(--dim);
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-}
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 </style>
 </head>
 <body>
@@ -178,12 +164,11 @@ pre.copy{
 
 <script src="content.js"></script>
 <script>
-const DB = window.MEDBANK || {subjects:[],stats:{}};
+const DB = window.MEDBANK || {subjects:[],lecturers:[],stats:{}};
 const $ = s => document.querySelector(s);
 const esc = s => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COLOR = {'pediatrics':'var(--ped)','og':'var(--og)','community-medicine':'var(--com)'};
 
-/* ---------- tiny markdown renderer ---------- */
 function md(src){
   if(!src) return '<p style="color:var(--dim)">Nothing here yet.</p>';
   const inline = t => esc(t)
@@ -193,54 +178,60 @@ function md(src){
   const out=[]; let list=null;
   const close=()=>{if(list){out.push('</'+list+'>');list=null;}};
   src.split(/\r?\n/).forEach(raw=>{
-    const l=raw.trim();
-    if(!l){close();return;}
+    const l=raw.trim(); if(!l){close();return;}
     let m;
     if(l==='---'){close();out.push('<hr>');return;}
-    if((m=l.match(/^(#{1,4})\s+(.*)/))){close();const n=m[1].length;out.push(`<h${n}>${inline(m[2])}</h${n}>`);return;}
+    if((m=l.match(/^(#{1,4})\s+(.*)/))){close();out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`);return;}
     if((m=l.match(/^\d+\.\s+(.*)/))){if(list!=='ol'){close();out.push('<ol>');list='ol';}out.push('<li>'+inline(m[1])+'</li>');return;}
     if((m=l.match(/^[-*]\s+(.*)/))){if(list!=='ul'){close();out.push('<ul>');list='ul';}out.push('<li>'+inline(m[1])+'</li>');return;}
     close();out.push('<p>'+inline(l)+'</p>');
   });
-  close();
-  return out.join('');
+  close(); return out.join('');
 }
-const para = t => (t||'').split(/\n\n+/).map(p=>'<p>'+esc(p).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')+'</p>').join('');
+const para = t => (t||'').split(/\n\n+/).map(p=>'<p>'+esc(p)
+  .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')+'</p>').join('');
 
-/* ---------- lookups ---------- */
 const allTopics=[];
-DB.subjects.forEach(s=>s.lecturers.forEach(l=>l.topics.forEach(t=>
-  allTopics.push(Object.assign({subject:s,lecturer:l},t)))));
+DB.subjects.forEach(s=>s.modules.forEach(m=>m.topics.forEach(t=>
+  allTopics.push(Object.assign({subject:s,module:m.name},t)))));
 const subjById = id => DB.subjects.find(s=>s.id===id);
-const lecById = id => {for(const s of DB.subjects){const l=s.lecturers.find(x=>x.id===id);if(l)return{s,l};}return null;};
-const topById = id => allTopics.find(t=>t.id===id);
+const topById  = id => allTopics.find(t=>t.id===id);
+const lecById  = id => DB.lecturers.find(l=>l.id===id);
 
-/* ---------- nav ---------- */
 function renderNav(){
   const r = location.hash.slice(2) || 'home';
-  const item=(route,ic,label,badge,active)=>
+  const it=(route,ic,label,badge,active)=>
     `<div class="navitem ${active?'active':''}" onclick="go('${route}')">
-       <span class="ic">${ic}</span><span>${label}</span>${badge?`<span class="badge">${badge}</span>`:''}
-     </div>`;
-  let h = item('home','⌂','Home','',r==='home');
-  h += item('builder','✎','Note Builder','',r==='builder');
-  h += item('cards','◈','Anki Cards',DB.stats.topics?(DB.stats.primerCards+DB.stats.recallCards):'',r.startsWith('cards')||r.startsWith('study'));
+       <span class="ic">${ic}</span><span>${label}</span>${badge?`<span class="badge">${badge}</span>`:''}</div>`;
+  const cards = (DB.stats.primerCards||0)+(DB.stats.recallCards||0);
+  let h  = it('home','⌂','Home','',r==='home');
+  h += it('builder','✎','Note Builder','',r==='builder');
+  h += it('cards','◈','Anki Cards',cards||'',r.startsWith('cards')||r.startsWith('study'));
+  h += it('lecturers','☰','Lecturers',DB.stats.lecturers||'',r.startsWith('lecturer'));
   h += '<div class="navlabel">Subjects</div>';
   DB.subjects.forEach(s=>{
-    const active = r==='subject/'+s.id || (r.startsWith('lecturer/')&&lecById(r.split('/')[1])?.s.id===s.id)
-                   || (r.startsWith('topic/')&&topById(r.split('/')[1])?.subject.id===s.id);
+    const active = r==='subject/'+s.id || (r.startsWith('topic/')&&topById(r.split('/')[1])?.subject.id===s.id);
     h += `<div class="navitem ${active?'active':''}" onclick="go('subject/${s.id}')">
             <span class="ic" style="color:${active?'#fff':COLOR[s.id]}">●</span>
-            <span>${esc(s.name)}</span><span class="badge">${s.topicCount||0}</span></div>`;
+            <span>${esc(s.name)}</span><span class="badge">${s.readyCount}/${s.topicCount}</span></div>`;
   });
   $('#nav').innerHTML = h;
 }
 function go(route){location.hash='#/'+route;document.body.classList.remove('navopen');}
 function crumbs(parts){
-  return '<div class="crumb">'+parts.map((p,i)=>
-    (i?'<span class="sep">›</span>':'')+(p.route?`<a onclick="go('${p.route}')">${esc(p.label)}</a>`:`<span>${esc(p.label)}</span>`)
-  ).join('')+'</div>';
+  return '<div class="crumb">'+parts.map((p,i)=>(i?'<span class="sep">›</span>':'')+
+    (p.route?`<a onclick="go('${p.route}')">${esc(p.label)}</a>`:`<span>${esc(p.label)}</span>`)).join('')+'</div>';
 }
+const topicRow = (t,showLec) => `
+  <div class="row ${t.ready?'':'todo'}" onclick="go('topic/${t.id}')">
+    <span class="sn">${t.sn??'–'}</span>
+    <span class="mid">
+      <span class="tt">${esc(t.name)}</span>
+      <div class="meta">${[showLec?esc(t.lecturer):'',esc([t.day,t.date,t.time].filter(Boolean).join(' '))].filter(Boolean).join(' · ')}${
+        t.ready?` · ${t.primer.length||t.primer} Primer · ${t.recall.length||t.recall} Recall`:''}</div>
+    </span>
+    <span class="st ${t.ready?'ready':'todo'}">${t.ready?'Ready':'Not built'}</span>
+  </div>`;
 
 /* ---------- pages ---------- */
 function pageHome(){
@@ -248,7 +239,7 @@ function pageHome(){
   return `<h1>MedBank</h1>
   <p class="sub">Your notes and active-recall decks — Pediatrics, O&amp;G and Community Medicine.</p>
   <div class="stats">
-    <div class="stat"><b>${s.topics||0}</b><span>Topics</span></div>
+    <div class="stat"><b>${s.ready||0} <span style="font-size:14px;color:var(--dim)">/ ${s.topics||0}</span></b><span>Topics built</span></div>
     <div class="stat"><b>${s.lecturers||0}</b><span>Lecturers</span></div>
     <div class="stat"><b style="color:var(--primer)">${s.primerCards||0}</b><span>Primer cards</span></div>
     <div class="stat"><b style="color:var(--recall)">${s.recallCards||0}</b><span>Recall cards</span></div>
@@ -258,19 +249,19 @@ function pageHome(){
     <div class="card" onclick="go('subject/${sb.id}')">
       <span class="pill" style="background:${COLOR[sb.id]}22;color:${COLOR[sb.id]}">${esc(sb.short)}</span>
       <h3>${esc(sb.name)}</h3>
-      <p>${sb.lecturers.length} lecturer${sb.lecturers.length===1?'':'s'} · ${sb.topicCount} topic${sb.topicCount===1?'':'s'} · ${sb.cardCount} cards</p>
+      <p>${sb.topicCount} topic${sb.topicCount===1?'':'s'} · ${sb.readyCount} built · ${sb.cardCount} cards</p>
     </div>`).join('')}</div>
   <h2>How the two decks work</h2>
   <div class="grid">
     <div class="card" style="cursor:default">
       <span class="pill" style="background:#4f8cff22;color:var(--primer)">Deck A</span>
       <h3>Primer Cards</h3>
-      <p>Use <b>before</b> reading. Every slide point answered first in the lecturer's own words, then explained from first principles and tied back to the topic.</p>
+      <p>Question and answer, used <b>before</b> reading. The answer comes first in the lecturer's own words, then the concept is explained from first principles and tied back to the topic.</p>
     </div>
     <div class="card" style="cursor:default">
       <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B</span>
       <h3>Recall Cards</h3>
-      <p>Use <b>after</b> reading. Strict question and answer straight from the lecturer's slides — pure retrieval practice.</p>
+      <p>Question and answer, used <b>after</b> reading. Strict Q/A straight from the lecturer's slides — pure retrieval practice.</p>
     </div>
   </div>`;
 }
@@ -279,18 +270,15 @@ function pageBuilder(){
   return `<h1>Note Builder</h1>
   <p class="sub">How to turn a lecture into a full topic entry.</p>
   <div class="card" style="cursor:default;margin-bottom:26px">
-  ${[['Send the material','Open Cowork on your laptop and send photos of your handwritten notes, the lecture slides, or a PDF — plus the subject and lecturer name.'],
+  ${[['Send the material','Open Cowork on your laptop and send photos of your handwritten notes, the lecture slides, or a PDF — and say which topic on the schedule it is.'],
      ['Claude builds the topic','A structured built note, a simplified note, a PDF of the note, a Primer deck (every slide point explained) and a Recall deck (strict Q/A).'],
-     ['It is filed automatically','Saved to MedBank › Subject › Lecturer › Topic, and the site index is rebuilt.'],
-     ['Publish for your phone','Run <b>publish.bat</b> once. Your phone gets the update at your MedBank web address — laptop can then be off.']]
+     ['It is filed automatically','Saved under the right subject, lecturer and topic, and the topic flips from "Not built" to "Ready".'],
+     ['Push it to your phone','Commit and push in GitHub Desktop. About a minute later your phone has it.']]
    .map((s,i)=>`<div class="step"><div class="stepnum">${i+1}</div><div class="txt"><b>${s[0]}</b><span>${s[1]}</span></div></div>`).join('')}
   </div>
   <h2>What to say in Cowork</h2>
-  <pre class="copy">Add a new MedBank topic.
-Subject: Pediatrics
-Lecturer: Dr Adeyemi
-Topic: Acute Glomerulonephritis
-[attach the slides / photos of your notes]
+  <pre class="copy">Build MedBank topic 29 (O&amp;G) - Hypertensive Disorders of Pregnancy
+[attach the slides / photos of your handwritten notes]
 
 Build the note, the simplified note, the PDF,
 Primer Cards and Recall Cards, then rebuild the site.</pre>
@@ -299,34 +287,53 @@ Primer Cards and Recall Cards, then rebuild the site.</pre>
 
 function pageSubject(id){
   const s=subjById(id); if(!s) return pageHome();
-  const body = s.lecturers.length ? `<div class="grid">${s.lecturers.map(l=>`
-      <div class="card" onclick="go('lecturer/${l.id}')">
-        <h3>${esc(l.name)}</h3><p>${l.topics.length} topic${l.topics.length===1?'':'s'}</p>
-      </div>`).join('')}</div>`
-    : `<div class="empty">No lecturers here yet.<br>Send notes for this subject in Cowork and they'll appear here.</div>`;
+  if(!s.topicCount)
+    return crumbs([{label:'Home',route:'home'},{label:s.name}])+
+      `<h1>${esc(s.name)}</h1>
+       <div class="empty">No lecture schedule loaded for this subject yet.<br>Send Claude a photo of the schedule and every topic will be listed here.</div>`;
   return crumbs([{label:'Home',route:'home'},{label:s.name}])+
-    `<h1>${esc(s.name)}</h1><p class="sub">${s.lecturers.length} lecturers · ${s.topicCount} topics · ${s.cardCount} cards</p>`+body;
+    `<h1>${esc(s.name)}</h1>
+     <p class="sub">${s.topicCount} topics · ${s.readyCount} built · ${s.lecturerCount} lecturers · ${s.cardCount} cards</p>`+
+    s.modules.map(m=>`<div class="modhead">${esc(m.name)}</div>
+       <div class="rows">${m.topics.map(t=>topicRow(t,true)).join('')}</div>`).join('');
+}
+
+function pageLecturers(){
+  let h=`<h1>Lecturers</h1><p class="sub">Every lecturer and the topics assigned to them.</p>`;
+  DB.subjects.forEach(s=>{
+    const ls=DB.lecturers.filter(l=>l.subjectId===s.id && l.name!=='To be confirmed');
+    if(!ls.length) return;
+    h+=`<h2><span style="color:${COLOR[s.id]}">●</span> ${esc(s.name)}</h2>
+        <div class="grid">${ls.map(l=>`
+          <div class="card" onclick="go('lecturer/${l.id}')">
+            <h3>${esc(l.name)}</h3>
+            <p>${l.topics.length} topic${l.topics.length===1?'':'s'} · ${l.readyCount} built</p>
+          </div>`).join('')}</div>`;
+  });
+  return h;
 }
 
 function pageLecturer(id){
-  const f=lecById(id); if(!f) return pageHome();
-  const {s,l}=f;
-  return crumbs([{label:'Home',route:'home'},{label:s.name,route:'subject/'+s.id},{label:l.name}])+
-    `<h1>${esc(l.name)}</h1><p class="sub">${esc(s.name)} · ${l.topics.length} topics</p>
-     <div class="grid">${l.topics.map(t=>`
-       <div class="card" onclick="go('topic/${t.id}')">
-         <h3>${esc(t.name)}</h3>
-         <p>${t.primer.length} Primer · ${t.recall.length} Recall</p>
-       </div>`).join('')}</div>`;
+  const l=lecById(id); if(!l) return pageLecturers();
+  return crumbs([{label:'Lecturers',route:'lecturers'},{label:l.subject,route:'subject/'+l.subjectId},{label:l.name}])+
+    `<h1>${esc(l.name)}</h1><p class="sub">${esc(l.subject)} · ${l.topics.length} topics · ${l.readyCount} built</p>
+     <div class="rows">${l.topics.map(t=>topicRow(t,false)).join('')}</div>`;
 }
 
 let topicTab='note', topicTabFor=null;
 function pageTopic(id){
   const t=topById(id); if(!t) return pageHome();
-  if(topicTabFor!==id){ topicTab='note'; topicTabFor=id; }
-  const T = (k,label)=>`<div class="tab ${topicTab===k?'active':''}" onclick="topicTab='${k}';render()">${label}</div>`;
-  let body='';
-  if(topicTab==='note'){
+  if(topicTabFor!==id){ topicTab = t.ready?'note':'cards'; topicTabFor=id; }
+  const T=(k,l)=>`<div class="tab ${topicTab===k?'active':''}" onclick="topicTab='${k}';render()">${l}</div>`;
+  const lecId = DB.lecturers.find(x=>x.subjectId===t.subject.id && x.name===t.lecturer)?.id;
+  let body;
+  if(!t.ready){
+    body = `<div class="empty" style="text-align:left">
+      <b style="color:var(--text)">Not built yet.</b><br><br>
+      Send Claude the slides or your handwritten notes for this lecture and say:<br>
+      <pre class="copy" style="margin-top:14px;text-align:left">Build MedBank topic ${t.sn??''} (${esc(t.subject.short)}) - ${esc(t.name)}</pre>
+      The built note, simplified note, PDF, Primer Cards and Recall Cards will appear right here.</div>`;
+  } else if(topicTab==='note'){
     body = (t.pdf?`<div class="btnrow" style="margin-bottom:18px"><a class="btn" href="${t.pdf}" target="_blank">⬇ Open PDF</a></div>`:'')
          + `<div class="md">${md(t.note)}</div>`;
   } else if(topicTab==='simplified'){
@@ -335,99 +342,85 @@ function pageTopic(id){
     body = `<div class="grid">
       <div class="card" onclick="go('study/${t.id}/primer')">
         <span class="pill" style="background:#4f8cff22;color:var(--primer)">Deck A · before reading</span>
-        <h3>Primer Cards</h3><p>${t.primer.length} cards — lecturer's answer, then the concept explained and tied to the topic.</p>
-      </div>
+        <h3>Primer Cards</h3><p>${t.primer.length} cards — lecturer's answer, then the concept explained and tied to the topic.</p></div>
       <div class="card" onclick="go('study/${t.id}/recall')">
         <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B · after reading</span>
-        <h3>Recall Cards</h3><p>${t.recall.length} cards — strict Q/A from the slides.</p>
-      </div></div>`;
+        <h3>Recall Cards</h3><p>${t.recall.length} cards — strict Q/A from the slides.</p></div></div>`;
   }
   return crumbs([{label:'Home',route:'home'},{label:t.subject.name,route:'subject/'+t.subject.id},
-                 {label:t.lecturer.name,route:'lecturer/'+t.lecturer.id},{label:t.name}])+
-    `<h1>${esc(t.name)}</h1><p class="sub">${esc(t.lecturer.name)} · ${esc(t.subject.name)}</p>
-     <div class="tabs">${T('note','Built note')}${T('simplified','Simplified note')}${T('cards','Anki cards')}</div>${body}`;
+                 lecId?{label:t.lecturer,route:'lecturer/'+lecId}:{label:t.lecturer},{label:t.name}])+
+    `<h1>${t.sn?t.sn+'. ':''}${esc(t.name)}</h1>
+     <p class="sub">${[esc(t.lecturer),esc(t.subject.name),esc([t.day,t.date,t.time].filter(Boolean).join(' '))].filter(Boolean).join(' · ')}</p>
+     ${t.ready?`<div class="tabs">${T('note','Built note')}${T('simplified','Simplified note')}${T('cards','Anki cards')}</div>`:''}
+     ${body}`;
 }
 
 function pageCards(subId){
   if(!subId){
-    return `<h1>Anki Cards</h1><p class="sub">Pick a subject, then a lecturer's topic.</p>
+    return `<h1>Anki Cards</h1><p class="sub">Pick a subject, then a topic.</p>
     <div class="grid">${DB.subjects.map(s=>`
       <div class="card" onclick="go('cards/${s.id}')">
         <span class="pill" style="background:${COLOR[s.id]}22;color:${COLOR[s.id]}">${esc(s.short)}</span>
         <h3>${esc(s.name)} Anki Cards</h3>
-        <p>${s.topicCount} topics · ${s.cardCount} cards</p>
+        <p>${s.readyCount} of ${s.topicCount} topics · ${s.cardCount} cards</p>
       </div>`).join('')}</div>`;
   }
   const s=subjById(subId); if(!s) return pageCards();
-  if(!s.lecturers.length)
-    return crumbs([{label:'Anki Cards',route:'cards'},{label:s.name}])+
-      `<h1>${esc(s.name)} Anki Cards</h1><div class="empty">No cards here yet.</div>`;
-  return crumbs([{label:'Anki Cards',route:'cards'},{label:s.name}])+
-    `<h1>${esc(s.name)} Anki Cards</h1><p class="sub">${s.cardCount} cards across ${s.topicCount} topics</p>`+
-    s.lecturers.map(l=>`<h2>${esc(l.name)}</h2><div class="grid">${l.topics.map(t=>`
-      <div class="card" style="cursor:default">
-        <h3>${esc(t.name)}</h3>
-        <div class="btnrow" style="margin-top:12px">
-          <button class="btn primary" onclick="go('study/${t.id}/primer')">Primer · ${t.primer.length}</button>
-          <button class="btn green" onclick="go('study/${t.id}/recall')">Recall · ${t.recall.length}</button>
-        </div>
-      </div>`).join('')}</div>`).join('');
+  const ready = s.modules.flatMap(m=>m.topics).filter(t=>t.ready);
+  const head = crumbs([{label:'Anki Cards',route:'cards'},{label:s.name}])+
+    `<h1>${esc(s.name)} Anki Cards</h1>`;
+  if(!ready.length)
+    return head+`<div class="empty">No decks built for this subject yet.<br>
+      Open <a onclick="go('subject/${s.id}')">${esc(s.name)}</a> to see the full topic list.</div>`;
+  return head+`<p class="sub">${s.cardCount} cards across ${ready.length} built topics</p>`+
+    ready.map(t=>`<div class="card" style="cursor:default;margin-bottom:12px">
+       <h3>${t.sn?t.sn+'. ':''}${esc(t.name)}</h3><p>${esc(t.lecturer)}</p>
+       <div class="btnrow" style="margin-top:13px">
+         <button class="btn primary" onclick="go('study/${t.id}/primer')">Primer · ${t.primer.length}</button>
+         <button class="btn green" onclick="go('study/${t.id}/recall')">Recall · ${t.recall.length}</button>
+       </div></div>`).join('');
 }
 
-/* ---------- study mode ---------- */
-let S = null;
+/* ---------- study ---------- */
+let S=null;
 function pageStudy(topicId,deck){
   const t=topById(topicId); if(!t) return pageHome();
   const cards = deck==='primer'? t.primer : t.recall;
-  if(!S || S.key!==topicId+deck){
-    S = {key:topicId+deck, i:0, show:false, order:cards.map((_,i)=>i), t, deck, cards};
-  }
+  if(!S || S.key!==topicId+deck) S={key:topicId+deck,i:0,show:false,order:cards.map((_,i)=>i),t,deck,cards};
   if(!cards.length) return `<div class="empty">This deck is empty.</div>`;
-  const c = cards[S.order[S.i]];
-  const isP = deck==='primer';
-  const col = isP?'var(--primer)':'var(--recall)';
-  const pct = ((S.i+1)/cards.length*100).toFixed(1);
-
+  const c=cards[S.order[S.i]], isP=deck==='primer';
+  const col=isP?'var(--primer)':'var(--recall)';
   let ans='';
   if(S.show){
-    if(isP){
-      ans = `<div class="ansblock">
-        <div class="seg lecturer"><div class="seglabel" style="background:#8895aa22;color:var(--dim)">In the lecturer's words</div><div class="body">${para(c.lecturer)}</div></div>
-        <div class="seg"><div class="seglabel" style="background:#4f8cff22;color:var(--primer)">Explained</div><div class="body">${para(c.explain)}</div></div>
-        ${c.tie?`<div class="seg"><div class="seglabel" style="background:#ffb45422;color:var(--com)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
-      </div>`;
-    } else {
-      ans = `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
-    }
+    ans = isP
+      ? `<div class="ansblock">
+          <div class="seg lecturer"><div class="seglabel" style="background:#8895aa22;color:var(--dim)">In the lecturer's words</div><div class="body">${para(c.lecturer)}</div></div>
+          <div class="seg"><div class="seglabel" style="background:#4f8cff22;color:var(--primer)">Explained</div><div class="body">${para(c.explain)}</div></div>
+          ${c.tie?`<div class="seg"><div class="seglabel" style="background:#ffb45422;color:var(--com)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
+        </div>`
+      : `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
   }
-
   return `<div class="studywrap">
     ${crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}])}
     <div class="studytop">
       <span class="pill" style="background:${col}22;color:${col};margin:0">${isP?'Primer · Deck A':'Recall · Deck B'}</span>
       <span class="name">${esc(t.name)}</span>
-      <span class="counter">${S.i+1} / ${cards.length}</span>
-    </div>
-    <div class="bar"><div style="width:${pct}%;background:${col}"></div></div>
+      <span class="counter">${S.i+1} / ${cards.length}</span></div>
+    <div class="bar"><div style="width:${((S.i+1)/cards.length*100).toFixed(1)}%;background:${col}"></div></div>
     <div class="flash" onclick="S.show=!S.show;render()">
-      <div class="qlabel">Question</div>
-      <div class="q">${esc(c.q)}</div>
-      ${ans || '<div class="taphint">Tap to reveal</div>'}
-    </div>
+      <div class="qlabel">Question</div><div class="q">${esc(c.q)}</div>
+      ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
     <div class="navbtns">
       <button class="btn" onclick="event.stopPropagation();step(-1)" ${S.i===0?'disabled':''}>← Prev</button>
       <button class="btn" onclick="event.stopPropagation();S.show=!S.show;render()">${S.show?'Hide':'Reveal'}</button>
-      <button class="btn primary" onclick="event.stopPropagation();step(1)" ${S.i===cards.length-1?'disabled':''}>Next →</button>
-    </div>
+      <button class="btn primary" onclick="event.stopPropagation();step(1)" ${S.i===cards.length-1?'disabled':''}>Next →</button></div>
     <div class="btnrow" style="margin-top:12px;justify-content:center">
       <button class="btn" onclick="shuffle()">⇄ Shuffle</button>
-      <button class="btn" onclick="S.i=0;S.show=false;S.order=S.cards.map((_,i)=>i);render()">↺ Restart</button>
-    </div>
-    <div class="kbd">Space reveals · ← → move between cards</div>
-  </div>`;
+      <button class="btn" onclick="S.i=0;S.show=false;S.order=S.cards.map((_,i)=>i);render()">↺ Restart</button></div>
+    <div class="kbd">Space reveals · ← → move between cards</div></div>`;
 }
-function step(d){ if(!S)return; const n=S.i+d; if(n<0||n>=S.cards.length)return; S.i=n;S.show=false;render();window.scrollTo(0,0); }
-function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;render(); }
+function step(d){if(!S)return;const n=S.i+d;if(n<0||n>=S.cards.length)return;S.i=n;S.show=false;render();window.scrollTo(0,0);}
+function shuffle(){if(!S)return;for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];}S.i=0;S.show=false;render();}
 document.addEventListener('keydown',e=>{
   if(!location.hash.startsWith('#/study'))return;
   if(e.code==='Space'){e.preventDefault();S.show=!S.show;render();}
@@ -435,21 +428,20 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft')step(-1);
 });
 
-/* ---------- router ---------- */
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   let html;
   switch(p[0]){
-    case 'builder': html=pageBuilder(); break;
-    case 'subject': html=pageSubject(p[1]); break;
-    case 'lecturer':html=pageLecturer(p[1]); break;
-    case 'topic':   html=pageTopic(p[1]); break;
-    case 'cards':   html=pageCards(p[1]); break;
-    case 'study':   html=pageStudy(p[1],p[2]); break;
-    default:        html=pageHome();
+    case 'builder':   html=pageBuilder(); break;
+    case 'subject':   html=pageSubject(p[1]); break;
+    case 'lecturers': html=pageLecturers(); break;
+    case 'lecturer':  html=pageLecturer(p[1]); break;
+    case 'topic':     html=pageTopic(p[1]); break;
+    case 'cards':     html=pageCards(p[1]); break;
+    case 'study':     html=pageStudy(p[1],p[2]); break;
+    default:          html=pageHome();
   }
-  $('#main').innerHTML=html;
-  renderNav();
+  $('#main').innerHTML=html; renderNav();
 }
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
 render();
