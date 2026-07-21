@@ -131,9 +131,37 @@ h2{font-size:20px;margin:34px 0 12px}
 .seg{margin-bottom:20px}.seg:last-child{margin-bottom:0}
 .seglabel{font-size:11px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;margin-bottom:8px;
   display:inline-block;padding:3px 9px;border-radius:6px}
-.seg .body{font-size:16px;line-height:1.68}
-.seg .body p{margin:0 0 12px}.seg .body p:last-child{margin:0}
+.seg .body{font-size:16.5px;line-height:1.78;letter-spacing:.1px}
+.seg .body p{margin:0 0 15px}.seg .body p:last-child{margin:0}
 .seg.lecturer .body{border-left:3px solid var(--dimmer);padding-left:15px;color:#dfe6f2}
+.seg .body .stepq{
+  font-size:15px;font-weight:700;color:#fff;margin:30px 0 13px;line-height:1.5;
+  padding-left:13px;border-left:3px solid var(--primer);
+}
+.seg .body .stepq:first-child{margin-top:0}
+.seg .body .substepq{
+  font-size:14.5px;font-weight:650;color:var(--text);margin:22px 0 11px;line-height:1.5;
+  padding-left:13px;border-left:2px solid var(--dimmer);
+}
+.seg .body ul.airy{list-style:none;margin:0 0 16px;padding:0}
+.seg .body ul.airy li{position:relative;padding-left:20px;margin-bottom:9px}
+.seg .body ul.airy li::before{
+  content:"";position:absolute;left:3px;top:11px;width:5px;height:5px;
+  border-radius:50%;background:var(--dimmer);
+}
+.seg .body hr.soft{border:0;border-top:1px solid var(--line);margin:26px 0}
+.seg .body .takeaway{
+  background:#4f8cff14;border-left:3px solid var(--primer);border-radius:0 9px 9px 0;
+  padding:13px 16px;margin:18px 0;font-weight:550;color:#fff;line-height:1.65;
+}
+.seg.tie .body .takeaway{background:#ffb45414;border-left-color:var(--com)}
+.seg .body table.mini{width:100%;border-collapse:collapse;margin:16px 0 20px;font-size:15px}
+.seg .body table.mini th{
+  text-align:left;padding:9px 12px;color:var(--dim);font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);
+}
+.seg .body table.mini td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.seg .body table.mini tr:last-child td{border-bottom:0}
 .navbtns{display:flex;gap:10px;margin-top:22px}
 .navbtns .btn{flex:1;justify-content:center}
 .kbd{color:var(--dimmer);font-size:12.5px;text-align:center;margin-top:16px}
@@ -188,8 +216,43 @@ function md(src){
   });
   close(); return out.join('');
 }
-const para = t => (t||'').split(/\n\n+/).map(p=>'<p>'+esc(p)
-  .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')+'</p>').join('');
+/* airy renderer for card answers:
+   "## text"  -> step heading      "- text" -> bullet
+   "--- "     -> soft divider      ">> text" -> highlighted takeaway
+   blank line -> breathing space                                    */
+function para(src){
+  if(!src) return '';
+  const ln = t => esc(t)
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|[^\*])\*([^\*]+?)\*/g,'$1<em>$2</em>');
+  const out=[]; let ul=false, tbl=null;
+  const closeUl=()=>{ if(ul){out.push('</ul>');ul=false;} };
+  const closeTbl=()=>{
+    if(!tbl) return;
+    const cells=r=>r.replace(/^\||\|$/g,'').split('|').map(c=>ln(c.trim()));
+    let h='<table class="mini"><thead><tr>'+cells(tbl[0]).map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>';
+    tbl.slice(1).forEach(r=>{ h+='<tr>'+cells(r).map(c=>`<td>${c}</td>`).join('')+'</tr>'; });
+    out.push(h+'</tbody></table>'); tbl=null;
+  };
+  (src||'').split(/\r?\n/).forEach(raw=>{
+    const l=raw.trim();
+    if(/^\|.*\|$/.test(l)){
+      if(/^\|[\s:|-]+\|$/.test(l)) return;      // separator row
+      closeUl(); (tbl = tbl || []).push(l); return;
+    }
+    closeTbl();
+    if(!l){ closeUl(); return; }
+    if(/^-{3,}$/.test(l)){ closeUl(); out.push('<hr class="soft">'); return; }
+    let m;
+    if((m=l.match(/^###\s+(.*)/))){ closeUl(); out.push(`<div class="substepq">${ln(m[1])}</div>`); return; }
+    if((m=l.match(/^##\s+(.*)/))){ closeUl(); out.push(`<div class="stepq">${ln(m[1])}</div>`); return; }
+    if((m=l.match(/^>>\s+(.*)/))){ closeUl(); out.push(`<div class="takeaway">${ln(m[1])}</div>`); return; }
+    if((m=l.match(/^[-•]\s+(.*)/))){ if(!ul){out.push('<ul class="airy">');ul=true;} out.push('<li>'+ln(m[1])+'</li>'); return; }
+    closeUl(); out.push('<p>'+ln(l)+'</p>');
+  });
+  closeUl(); closeTbl();
+  return out.join('');
+}
 
 const allTopics=[];
 DB.subjects.forEach(s=>s.modules.forEach(m=>m.topics.forEach(t=>
@@ -396,7 +459,7 @@ function pageStudy(topicId,deck){
       ? `<div class="ansblock">
           <div class="seg lecturer"><div class="seglabel" style="background:#8895aa22;color:var(--dim)">In the lecturer's words</div><div class="body">${para(c.lecturer)}</div></div>
           <div class="seg"><div class="seglabel" style="background:#4f8cff22;color:var(--primer)">Explained</div><div class="body">${para(c.explain)}</div></div>
-          ${c.tie?`<div class="seg"><div class="seglabel" style="background:#ffb45422;color:var(--com)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
+          ${c.tie?`<div class="seg tie"><div class="seglabel" style="background:#ffb45422;color:var(--com)">Why it matters here</div><div class="body">${para(c.tie)}</div></div>`:''}
         </div>`
       : `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer</div><div class="body">${para(c.a)}</div></div></div>`;
   }
