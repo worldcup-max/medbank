@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0f1218"/>
+  <rect x="96" y="96" width="320" height="320" rx="60" fill="#161b24" stroke="#252d3a" stroke-width="8"/>
+  <!-- medical cross -->
+  <rect x="232" y="150" width="48" height="212" rx="14" fill="#3ecf8e"/>
+  <rect x="150" y="232" width="212" height="48" rx="14" fill="#3ecf8e"/>
+  <!-- spark -->
+  <circle cx="256" cy="256" r="26" fill="#0f1218"/>
+  <circle cx="256" cy="256" r="13" fill="#4f8cff"/>
+</svg>
