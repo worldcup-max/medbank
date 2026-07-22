@@ -1,0 +1,422 @@
+{
+  "deck": "Recall Cards",
+  "topic": "Seizure Disorders",
+  "cards": [
+    {
+      "q": "What are the three objectives of this lecture?",
+      "a": "To know what a seizure disorder is and its various types; the mechanisms of seizures; and the treatment and preventive measures."
+    },
+    {
+      "q": "Define a seizure.",
+      "a": "A discrete clinical event (behavioural, emotional, motor or sensory) reflecting a temporary physiologic dysfunction of the brain, characterized by excessive and hypersynchronous discharge of cortical neurons."
+    },
+    {
+      "q": "What is meant by 'hypersynchronous' discharge?",
+      "a": "Neurons that should fire independently instead fire abnormally together, in synchrony."
+    },
+    {
+      "q": "Define a seizure disorder.",
+      "a": "A general term including epilepsy, febrile seizures, and possibly single seizures and symptomatic seizures secondary to metabolic, infectious or other aetiologies."
+    },
+    {
+      "q": "Define epilepsy.",
+      "a": "A chronic disorder characterized by seizures that usually recur unpredictably in the absence of a consistent provoking factor."
+    },
+    {
+      "q": "What two conditions must both be met for epilepsy?",
+      "a": "The seizures must recur (more than one) and be unprovoked (no consistent provoking factor)."
+    },
+    {
+      "q": "Define an epileptic syndrome.",
+      "a": "A disorder manifesting as one or more specific seizure types, with a specific age of onset and a specific prognosis."
+    },
+    {
+      "q": "Define a provoked seizure.",
+      "a": "A seizure occurring secondary to an acute problem (e.g. high fever, infection); it stops when the stimulus is eliminated."
+    },
+    {
+      "q": "Define an unprovoked seizure.",
+      "a": "A seizure with no obvious stimulus — a brain disorder producing recurrent spontaneous paroxysmal discharges of cerebral neurons."
+    },
+    {
+      "q": "What is genetic (idiopathic) epilepsy?",
+      "a": "Seizures without an identifiable cause in a patient with entirely normal neurologic examination and normal intelligence."
+    },
+    {
+      "q": "What is structural (symptomatic) epilepsy?",
+      "a": "An epilepsy syndrome caused by an underlying structural brain disorder, which may or may not be genetic."
+    },
+    {
+      "q": "What are the types of convulsion (involuntary motor seizure)?",
+      "a": "Tonic (sustained contraction), clonic (broken/jerky), and tonic-clonic."
+    },
+    {
+      "q": "Define a febrile seizure.",
+      "a": "A seizure occurring between 6 and 60 months (peak 12-18 months) with a temperature of 38°C or higher, not due to CNS infection or metabolic imbalance, and in the absence of a prior afebrile seizure."
+    },
+    {
+      "q": "How common are seizures in children?",
+      "a": "They occur in about 10% of children, but fewer than 1/3 are caused by epilepsy."
+    },
+    {
+      "q": "What is the cumulative lifetime incidence of epilepsy?",
+      "a": "3% (over half of cases begin in childhood)."
+    },
+    {
+      "q": "What is the annual prevalence of epilepsy, and why is it lower than the incidence?",
+      "a": "0.5-0.8% — lower than the 3% lifetime incidence because many children outgrow epilepsy."
+    },
+    {
+      "q": "What is the male-to-female ratio in epilepsy?",
+      "a": "M:F = 1.5:1 (slight male excess)."
+    },
+    {
+      "q": "How does the incidence of epilepsy differ between industrialized and resource-poor countries?",
+      "a": "40-70/100,000 in industrialized countries versus 100-190/100,000 in resource-poor countries."
+    },
+    {
+      "q": "What are the four onset categories in the 2017 ILAE classification?",
+      "a": "Focal-onset, generalized-onset, unknown onset, and unclassified."
+    },
+    {
+      "q": "Define a generalized seizure.",
+      "a": "One where clinical and EEG changes indicate synchronous involvement of both hemispheres."
+    },
+    {
+      "q": "Define a focal seizure.",
+      "a": "Activation of a system of neurons limited to part of one cerebral hemisphere."
+    },
+    {
+      "q": "What is the difference between 'unknown onset' and 'unclassified' seizures?",
+      "a": "Unknown onset — insufficient information to determine focal or generalized; unclassified — features are so unusual that onset cannot be determined despite adequate workup."
+    },
+    {
+      "q": "What are the two awareness descriptors for focal seizures?",
+      "a": "Aware (formerly simple partial) and impaired awareness (formerly complex partial)."
+    },
+    {
+      "q": "What was 'focal to bilateral tonic-clonic' previously called?",
+      "a": "Secondary generalized seizure."
+    },
+    {
+      "q": "What neurotransmitters mediate excitation and inhibition in the brain?",
+      "a": "Excitation — glutamate and aspartate; inhibition — GABA (gamma-aminobutyric acid)."
+    },
+    {
+      "q": "By what three mechanisms do seizures occur?",
+      "a": "Excessive activation of glutamate receptors (excitation); disruption of GABA production/receptors (inhibition failure); or a combination of both."
+    },
+    {
+      "q": "What are the four sequential mechanistic processes in epilepsy?",
+      "a": "(1) Underlying aetiology; (2) epileptogenesis; (3) epileptic state of increased excitability; (4) seizure-related neuronal injury."
+    },
+    {
+      "q": "List the congenital causes of seizures.",
+      "a": "CNS malformation (neurocutaneous syndromes — neurofibromatosis, tuberous sclerosis, Sturge-Weber; cerebral dysgenesis — porencephaly), genetic syndromes, and intrauterine infections."
+    },
+    {
+      "q": "List the acquired causes of seizures.",
+      "a": "Trauma (birth trauma, asphyxia); infections (meningitis, encephalitis, cerebral malaria); febrile seizure; metabolic (deranged Na, low Ca, Mg, glucose); toxic (lead, drugs); CNS neoplasm; and vascular (AVM, CVA)."
+    },
+    {
+      "q": "Why is it said that a seizure is a symptom, not a diagnosis?",
+      "a": "Because a seizure is the manifestation of many possible underlying causes, so the task is always to find the cause behind it."
+    },
+    {
+      "q": "What is the commonest clinical manifestation of a seizure?",
+      "a": "The generalized tonic-clonic seizure (GTCS)."
+    },
+    {
+      "q": "Describe a generalized tonic-clonic seizure.",
+      "a": "Loss of tone and consciousness, a generalized tonic phase followed by rhythmic clonic contractions alternating with relaxation of all muscle groups, with autonomic effects such as incontinence, apnoea and cyanosis."
+    },
+    {
+      "q": "What is the ictal EEG of a GTCS?",
+      "a": "A burst of spikes and polyspikes at 10-15 Hz in the tonic phase, and diffuse high-voltage slow waves in the clonic phase."
+    },
+    {
+      "q": "Describe a focal seizure with awareness intact (simple partial).",
+      "a": "Mostly motor activity (tonic or clonic of face, neck, extremities), often versive (head turning, conjugate eye movement), ± aura, lasting 10-20 seconds, with no automatism, no postictal phase and intact consciousness."
+    },
+    {
+      "q": "What does a versive seizure (head and eye turning) indicate?",
+      "a": "A lesion in the opposite (contralateral) frontal lobe."
+    },
+    {
+      "q": "Describe a focal seizure with impaired awareness (temporal lobe / complex partial).",
+      "a": "Aura, impaired consciousness, automatic behaviour in 50-70%, duration 1-2 minutes, a postictal phase, and possible secondary generalization to a tonic-clonic convulsion."
+    },
+    {
+      "q": "What does the presence of an aura tell you?",
+      "a": "That the seizure has a focal onset before spreading."
+    },
+    {
+      "q": "Describe benign childhood epilepsy with centrotemporal spikes (Rolandic epilepsy).",
+      "a": "Occurs in primary school children, remits in adolescence, responds to drugs (DOC carbamazepine), almost always at night; EEG shows central and temporal spikes on a normal background."
+    },
+    {
+      "q": "What is the drug of choice for Rolandic epilepsy?",
+      "a": "Carbamazepine."
+    },
+    {
+      "q": "Describe a typical absence seizure.",
+      "a": "Sudden cessation of activity with a blank facial expression, lasting <30 seconds, ± countless per day, onset ~5 years, more in girls, with no loss of tone and no postictal phase — the child resumes preseizure activity."
+    },
+    {
+      "q": "What is the EEG of a typical absence seizure?",
+      "a": "3 per second (3 Hz) generalized spike-and-wave discharge."
+    },
+    {
+      "q": "What distinguishes atypical from typical absence?",
+      "a": "Atypical absence has motor activity and loss of tone, and a slower, irregular EEG."
+    },
+    {
+      "q": "What are the two clinical negatives that characterise absence seizures?",
+      "a": "No loss of tone (no falling) and no postictal phase (immediate resumption of activity)."
+    },
+    {
+      "q": "Describe infantile spasms.",
+      "a": "Onset 4-8 months; flexion, extension (least common) or mixed (commonest) spasms; last <1 second, several episodes/day; 80-90% symptomatic, 10-20% cryptogenic; 80-90% risk of mental retardation."
+    },
+    {
+      "q": "What is the EEG of infantile spasms?",
+      "a": "Hypsarrhythmia — a chaotic pattern of high-voltage, bilaterally asynchronous, slow-wave activity."
+    },
+    {
+      "q": "What is the triad of West syndrome?",
+      "a": "Infantile spasms, mental retardation, and hypsarrhythmia."
+    },
+    {
+      "q": "What is the commonest type of infantile spasm?",
+      "a": "The mixed type (flexion and extension)."
+    },
+    {
+      "q": "How is the diagnosis of epilepsy made?",
+      "a": "It is ultimately clinical, based on a detailed description of the events by the patient or an eyewitness."
+    },
+    {
+      "q": "What three things must the diagnosis of epilepsy determine?",
+      "a": "Whether it is epilepsy or an acute encephalopathy; if epilepsy, categorize the seizure/syndrome; and identify any treatable aetiology."
+    },
+    {
+      "q": "List the investigations used in the diagnosis of epilepsy.",
+      "a": "FBC/ESR, RBS, electrolytes/urea/creatinine with Ca and Mg, anticonvulsant blood levels, blood and urine amino acids, urine organic acids, EEG (awake and sleep, plus special studies), ECG if cardiac disorder suspected, skull X-rays, neuroimaging (CT/MRI, PET, SPECT), and LP if infection suspected with no contraindications."
+    },
+    {
+      "q": "Why should the EEG include both awake and sleep tracings?",
+      "a": "Because some discharges (e.g. Rolandic) appear only in sleep, so a single awake EEG can miss them."
+    },
+    {
+      "q": "List some conditions that mimic seizures.",
+      "a": "Breath-holding spells, gastro-oesophageal reflux, benign paroxysmal vertigo, syncope, night terrors, tics, narcolepsy, cataplexy, sleep apnoea, hypoglycaemia, parasomnias, prolonged QT syndrome, and pseudoseizures (PNES)."
+    },
+    {
+      "q": "What characterises prolonged QT syndrome as a seizure mimic, and why is it important?",
+      "a": "Sudden loss of consciousness during exercise or emotional/stressful experience; it is a cardiac cause that can lead to sudden death, so an ECG is essential."
+    },
+    {
+      "q": "What are pseudoseizures (PNES)?",
+      "a": "Psychogenic non-epileptic seizures — events resembling seizures but of psychological cause, with no epileptic discharge on EEG."
+    },
+    {
+      "q": "What is the stepwise treatment of seizures?",
+      "a": "Step 1 ABC of resuscitation (including RBS); Step 2 abort the seizure; Step 3 detailed evaluation for the cause; Step 4 treat the identifiable cause; Step 5 appropriate ASM with neurology follow-up."
+    },
+    {
+      "q": "What is the ketogenic diet and when is it used?",
+      "a": "A high-fat, low-carbohydrate, low-protein diet used for severe seizure disorders."
+    },
+    {
+      "q": "When is surgery considered for epilepsy?",
+      "a": "For symptomatic localization-related epilepsy refractory to ASM — resection of lesions (tumour, AVM) or lobectomy (e.g. anterior temporal lobectomy)."
+    },
+    {
+      "q": "What is the mechanism and main side effect of phenobarbitone?",
+      "a": "Opens the Cl⁻ channel via the GABA receptor; side effects hyperkinesia and drowsiness."
+    },
+    {
+      "q": "What is the mechanism and characteristic side effect of phenytoin?",
+      "a": "Blocks Na⁺-dependent channels and depolarization-dependent Ca²⁺ uptake; characteristic side effect gum hypertrophy (also acne, ataxia, nystagmus)."
+    },
+    {
+      "q": "What are the side effects of carbamazepine?",
+      "a": "Rashes, ataxia, low Hb, neutropenia and hepatotoxicity."
+    },
+    {
+      "q": "What is the drug of choice for typical absence seizures and its mechanism?",
+      "a": "Ethosuximide — it blocks the Ca²⁺ channel associated with thalamocortical circuitry."
+    },
+    {
+      "q": "For which seizure types is sodium valproate used?",
+      "a": "It is broad spectrum — GTC, absence (typical and atypical), and myoclonic seizures."
+    },
+    {
+      "q": "What is the treatment of infantile spasms and its side effects?",
+      "a": "ACTH; side effects include high glucose, high BP and cushingoid facies."
+    },
+    {
+      "q": "For which seizures are benzodiazepines used?",
+      "a": "GTC, myoclonic, absence and status epilepticus."
+    },
+    {
+      "q": "Which anti-seizure drugs can worsen absence seizures?",
+      "a": "Carbamazepine and phenytoin."
+    },
+    {
+      "q": "Give the old and current definitions of status epilepticus.",
+      "a": "Old — a seizure prolonged >30 minutes, or repeated seizures without recovery of consciousness. Current — a seizure lasting >5 minutes, or more than one seizure within 5 minutes without returning to normal consciousness."
+    },
+    {
+      "q": "Why was the definition of status epilepticus changed to 5 minutes?",
+      "a": "Because most seizures stop by themselves within 2-3 minutes, so one lasting 5 minutes is unlikely to self-terminate and needs treatment immediately, before hypoxia and neuronal injury occur."
+    },
+    {
+      "q": "Why is generalized tonic-clonic status the most alarming?",
+      "a": "Because of the risk of hypoxia from apnoea and cyanosis."
+    },
+    {
+      "q": "List the causes of status epilepticus.",
+      "a": "Febrile seizure, non-compliance with drugs, stress including intercurrent infection, and brain pathology (tumour, trauma, infection, infarction, drugs)."
+    },
+    {
+      "q": "What is the first-line drug treatment in status epilepticus?",
+      "a": "A benzodiazepine — IV diazepam 0.1-0.3 mg/kg (max 3 doses) or IV lorazepam 0.05-0.1 mg/kg; if IV access is difficult, rectal diazepam 0.2-0.5 mg/kg or buccal/nasal midazolam 0.5 mg/kg."
+    },
+    {
+      "q": "What are the second-line drugs in status epilepticus?",
+      "a": "Phenytoin 15-20 mg/kg (fosphenytoin preferred, with ECG monitoring), phenobarbital, sodium valproate IV, and levetiracetam."
+    },
+    {
+      "q": "What is the third-line management of status epilepticus?",
+      "a": "ICU care — induction of anaesthesia (thiopental, midazolam, pentobarbital or propofol), intubation and ventilation, continuous EEG and cardiopulmonary monitoring, and treatment of any cause."
+    },
+    {
+      "q": "What is the main side effect of benzodiazepines in status?",
+      "a": "Respiratory depression (and hypotension)."
+    },
+    {
+      "q": "Why is fosphenytoin preferred over phenytoin, and what monitoring is needed?",
+      "a": "Fosphenytoin is safer to infuse; ECG monitoring is needed because phenytoin can cause arrhythmia."
+    },
+    {
+      "q": "In what proportion of neurologically healthy children do febrile seizures occur?",
+      "a": "2-5%, and they are commoner in males."
+    },
+    {
+      "q": "What are the common causes of the fever in febrile seizures?",
+      "a": "Malaria, upper respiratory tract infection, otitis media, and sore throat/pharyngitis."
+    },
+    {
+      "q": "Classify a simple febrile seizure.",
+      "a": "Brief (<15 minutes), usually a single episode in 24 hours, and generalized."
+    },
+    {
+      "q": "Classify a complex febrile seizure.",
+      "a": "Lasts >15 minutes, usually multiple in 24 hours, and focal."
+    },
+    {
+      "q": "What must be ruled out before diagnosing a febrile seizure?",
+      "a": "Intracranial infection (meningitis/encephalitis)."
+    },
+    {
+      "q": "How is a febrile seizure aborted?",
+      "a": "With diazepam (IV or rectal, 0.1-0.3 mg/kg, given IV slowly to avoid respiratory arrest) or intramuscular paraldehyde (0.1 ml/kg)."
+    },
+    {
+      "q": "What investigations are done for the cause of a febrile seizure?",
+      "a": "FBC, blood film for malaria parasites, and lumbar puncture for CSF analysis."
+    },
+    {
+      "q": "Why is a lumbar puncture especially important in children under 18 months with a febrile seizure?",
+      "a": "Because at that age meningitis may not show the usual signs (e.g. neck stiffness), so the LP is needed to exclude it."
+    },
+    {
+      "q": "List the major risk factors for recurrence of febrile seizures.",
+      "a": "Age <1 year, duration of fever <24 hours, and fever 38-39°C."
+    },
+    {
+      "q": "List the minor risk factors for recurrence of febrile seizures.",
+      "a": "Family history of febrile seizures, family history of epilepsy, complex febrile seizure, daycare, male gender, and lower serum sodium at presentation."
+    },
+    {
+      "q": "What is the risk of subsequent epilepsy after a simple febrile seizure?",
+      "a": "About 1%."
+    },
+    {
+      "q": "What factors raise the risk of subsequent epilepsy after a febrile seizure to the highest levels?",
+      "a": "Family history of epilepsy (18%), complex focal febrile seizures (29%), and neurodevelopmental abnormalities (33%)."
+    },
+    {
+      "q": "How should parents be counselled after a febrile seizure?",
+      "a": "That the disorder is benign but can recur, with advice on home fever management."
+    },
+    {
+      "q": "Outline the levels of prevention of seizure disorders.",
+      "a": "(1) General health promotion (health education, nutrition, immunization, hygiene, female education); (2) specific protection (avoid triggers); (3) prompt diagnosis and treatment; (4) limitation of disability (ASM compliance); (5) rehabilitation (physiotherapy, special school, psychotherapy)."
+    },
+    {
+      "q": "OSPE — How should you systematically read an EEG?",
+      "a": "Confirm calibration/montage; assess the background rhythm (organized or disorganized for age); identify abnormal discharges (spikes, sharp waves, spike-and-wave); note whether focal or generalized; note the frequency; and correlate with the clinical picture."
+    },
+    {
+      "q": "OSPE — Which EEG pattern indicates typical absence seizures?",
+      "a": "3 per second (3 Hz) generalized spike-and-wave discharge."
+    },
+    {
+      "q": "OSPE — Which EEG pattern indicates infantile spasms/West syndrome?",
+      "a": "Hypsarrhythmia — a chaotic, high-voltage, bilaterally asynchronous slow-wave pattern."
+    },
+    {
+      "q": "OSPE — Which EEG pattern indicates benign Rolandic epilepsy?",
+      "a": "Centrotemporal spikes on a normal background."
+    },
+    {
+      "q": "OSPE — Why must you comment on the EEG background?",
+      "a": "Because the background distinguishes Rolandic epilepsy (normal background) from serious generalized epilepsies (disorganized background)."
+    },
+    {
+      "q": "OSPE — Why does a normal EEG not exclude epilepsy?",
+      "a": "Because a person with epilepsy can have a normal EEG between seizures; the EEG supports but does not make the diagnosis, which is clinical."
+    },
+    {
+      "q": "OSPE — What manoeuvre during an EEG can provoke an absence seizure?",
+      "a": "Hyperventilation."
+    },
+    {
+      "q": "CLINICAL — A teacher reports a 6-year-old girl frequently 'daydreams' for seconds with no fall or drowsiness. Diagnosis and treatment?",
+      "a": "Typical absence seizures (childhood absence epilepsy); confirm with EEG showing 3 Hz spike-and-wave; treat with ethosuximide or sodium valproate, avoiding carbamazepine and phenytoin."
+    },
+    {
+      "q": "CLINICAL — An 8-month-old has clusters of brief flexion spasms and developmental regression. Diagnosis, EEG and treatment?",
+      "a": "Infantile spasms (West syndrome if the triad is present); EEG shows hypsarrhythmia; treat with ACTH."
+    },
+    {
+      "q": "CLINICAL — A generalized seizure has continued for 8 minutes. What is this and what is the first drug?",
+      "a": "Status epilepticus (>5 minutes); first-line treatment is a benzodiazepine (IV diazepam or lorazepam, or buccal/nasal midazolam if no IV access), after ABC and glucose check."
+    },
+    {
+      "q": "CLINICAL — A child collapses repeatedly during exercise and emotional stress. What must you exclude and how?",
+      "a": "Prolonged QT syndrome — a cardiac cause of sudden death; exclude it with an ECG."
+    },
+    {
+      "q": "CLINICAL — A child on long-term seizure medication has overgrown gums. Which drug?",
+      "a": "Phenytoin (gum hypertrophy)."
+    },
+    {
+      "q": "CLINICAL — Why must you always check the blood glucose in a fitting child?",
+      "a": "Because hypoglycaemia is a rapidly reversible cause of seizures, and correcting it can stop the seizure at its source."
+    },
+    {
+      "q": "CLINICAL — A known epileptic presents in status epilepticus. What common preventable cause should you ask about?",
+      "a": "Non-compliance with (stopping) anti-seizure medication."
+    },
+    {
+      "q": "CLINICAL — Why is early treatment of infantile spasms critical?",
+      "a": "Because the developmental outcome depends on prompt treatment; delay worsens the already high (80-90%) risk of mental retardation."
+    },
+    {
+      "q": "CLINICAL — How do most anti-seizure drugs relate to the glutamate-GABA balance?",
+      "a": "They push the balance toward inhibition — either by cutting excitation (blocking Na⁺ channels, e.g. phenytoin, carbamazepine, valproate) or by boosting inhibition (enhancing GABA, e.g. phenobarbitone, benzodiazepines)."
+    }
+  ]
+}
