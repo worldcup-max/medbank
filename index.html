@@ -578,7 +578,8 @@ let DATA = (()=>{
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, strict:false, lastNudge:0, quietStart:7, quietEnd:22}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22}, d.settings||{});
+  if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   return d;
@@ -1270,7 +1271,30 @@ function strictOverlay(n){
     <button class="btn" onclick="document.getElementById('strictov').remove()">Snooze</button></div>`;
   document.body.appendChild(o);
 }
-/* the recurring check — fires a nudge every N hours while conditions are met */
+/* Idle Detection (Android/Chrome): nudge sooner when the phone is unlocked & in use.
+   Only runs while MedBank's worker is alive; unsupported/blocked on iPhone. */
+let _idleDet=null;
+async function startIdle(requestIfNeeded){
+  try{
+    if(!DATA.settings.useIdle || !('IdleDetector' in window)) return;
+    let state='denied';
+    try{ state=(await navigator.permissions.query({name:'idle-detection'})).state; }catch(e){}
+    if(state!=='granted'){
+      if(!requestIfNeeded) return;
+      const p=await window.IdleDetector.requestPermission();
+      if(p!=='granted'){ DATA.settings.useIdle=false; persist(); return; }
+    }
+    if(_idleDet) return;                       // already watching
+    _idleDet=new window.IdleDetector();
+    _idleDet.addEventListener('change',()=>{
+      // fire when the user is active AND the screen is unlocked = phone in use
+      if(_idleDet.userState==='active' && _idleDet.screenState==='unlocked') nudgeTick(false);
+    });
+    await _idleDet.start({threshold:60000});
+  }catch(e){}
+}
+
+/* the recurring check — fires a nudge every N minutes while conditions are met */
 let _lastTickShown=0;
 function nudgeTick(force){
   try{
@@ -1279,7 +1303,7 @@ function nudgeTick(force){
     if(!('Notification' in window) || Notification.permission!=='granted') return;
     const hr=new Date().getHours();
     if(!force && (hr<(s.quietStart||7) || hr>=(s.quietEnd||22))) return;   // quiet hours
-    const every=Math.max(1,(s.remindEvery||2))*3600e3;
+    const every=Math.max(5,(s.remindMins||120))*60e3;
     const now=Date.now();
     if(!force && now-(s.lastNudge||0) < every) return;
     if(todayLog().cards>0 && (now-(s.lastNudge||0)) < every) { /* studied recently is fine */ }
@@ -1627,8 +1651,9 @@ function setBudget(v){ v=Math.max(0,Math.min(120,parseInt(v)||0)); DATA.daily.bu
 function setInterleave(on){ DATA.settings.interleave=!!on; persist(); render(); }
 function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exams[subId]; persist(); render(); }
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
-function setRemindEvery(v){ DATA.settings.remindEvery=Math.max(1,Math.min(12,parseInt(v)||2)); persist(); setupReminder&&setupReminder(); render(); }
+function setRemindMins(v){ DATA.settings.remindMins=Math.max(15,Math.min(720,parseInt(v)||120)); persist(); setupReminder&&setupReminder(); render(); }
 function setStrict(on){ DATA.settings.strict=!!on; persist(); render(); }
+async function setUseIdle(on){ DATA.settings.useIdle=!!on; persist(); if(on) await startIdle(true); render(); }
 function setQuiet(which,v){ v=Math.max(0,Math.min(23,parseInt(v)||0)); if(which==='start')DATA.settings.quietStart=v; else DATA.settings.quietEnd=v; persist(); render(); }
 function testNudge(){
   if(!('Notification' in window)){ alert('Notifications are not supported here.'); return; }
@@ -1683,10 +1708,14 @@ function pageSettings(){
       ${s.remindOn?`<button class="btn" onclick="disableReminders()">Turn off</button>`
                   :`<button class="btn primary" onclick="enableReminders()">Turn on</button>`}</div>
     ${s.remindOn?`
-    <div class="setrow"><div><b>Remind me every</b><span>How often to nudge during your active hours.</span></div>
-      <div style="display:flex;align-items:center;gap:8px"><input class="numin" type="number" min="1" max="12" value="${s.remindEvery||2}" onchange="setRemindEvery(this.value)"><span style="font-size:13px;color:var(--dim)">hours</span></div></div>
+    <div class="setrow"><div><b>Remind me every</b><span>How often to nudge during your active hours. Lower it (e.g. 45) to interrupt scrolling more often.</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><input class="numin" type="number" min="15" max="720" step="5" value="${s.remindMins||120}" onchange="setRemindMins(this.value)"><span style="font-size:13px;color:var(--dim)">minutes</span></div></div>
     <div class="setrow"><div><b>Active hours</b><span>No nudges outside this window (so it won’t wake you).</span></div>
       <div style="display:flex;align-items:center;gap:6px"><input class="numin" style="width:56px" type="number" min="0" max="23" value="${s.quietStart}" onchange="setQuiet('start',this.value)"><span style="font-size:13px;color:var(--dim)">to</span><input class="numin" style="width:56px" type="number" min="0" max="23" value="${s.quietEnd}" onchange="setQuiet('end',this.value)"></div></div>
+    <div class="setrow"><div><b>Catch me when I’m on my phone</b><span>${('IdleDetector' in window)
+        ? 'When your screen is unlocked and you’re active, MedBank nudges you sooner — good for interrupting doom-scrolling. It can only see that you’re on your phone (not which app), works only while MedBank runs in the background, and is unavailable on iPhone.'
+        : 'Your browser doesn’t support this (it’s Android/Chrome only and blocked on iPhone). The minutes interval above still works.'}</span></div>
+      <button class="toggle ${s.useIdle?'on':''}" onclick="setUseIdle(${s.useIdle?'false':'true'})"><i></i></button></div>
     <div class="setrow"><div><b>Strict mode</b><span>Persistent notifications that stay until you act, plus a blocking prompt + alarm sound inside the app when a review is overdue.</span></div>
       <button class="toggle ${s.strict?'on':''}" onclick="setStrict(${s.strict?'false':'true'})"><i></i></button></div>
     <div class="setrow"><div><b>Test it now</b><span>Fire a sample nudge so you can set the sound and see the card in your notification shade.</span></div>
@@ -1746,7 +1775,7 @@ function swPing(type,extra){ try{ if(navigator.serviceWorker&&navigator.serviceW
 async function setupReminder(){
   try{
     const reg=await navigator.serviceWorker.ready;
-    const every=Math.max(1,(DATA.settings.remindEvery||2))*3600e3;
+    const every=Math.max(5,(DATA.settings.remindMins||120))*60e3;
     if('periodicSync' in reg){
       const st=await navigator.permissions.query({name:'periodic-background-sync'}).catch(()=>({state:'denied'}));
       if(st.state==='granted'){ try{ await reg.periodicSync.register('medbank-nudge',{minInterval:every}); }catch(e){} }
@@ -1758,6 +1787,7 @@ async function setupReminder(){
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').then(()=>{
     if(DATA.settings.remindOn) setupReminder();
+    if(DATA.settings.useIdle) startIdle(false);
     swPing('hardcount',{n:starCount()});     // keep the SW's hard-card count current
     // catch-up nudge on open, then a recurring check every minute
     setTimeout(()=>nudgeTick(false), 1500);
