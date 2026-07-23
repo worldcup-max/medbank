@@ -1767,6 +1767,29 @@ if('serviceWorker' in navigator){
   document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') nudgeTick(false); });
 }
 
+/* ---- edge-swipe to open/close the sidebar on touch devices ---- */
+(function(){
+  let x0=null,y0=null,t0=0,tracking=false;
+  const isMobile=()=>window.matchMedia('(max-width:820px)').matches;
+  document.addEventListener('touchstart',e=>{
+    if(!isMobile()||e.touches.length!==1){tracking=false;return;}
+    const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now();
+    const open=document.body.classList.contains('navopen');
+    // track an open-swipe only if it begins near the left edge, or any swipe while the menu is open
+    tracking = open || x0 < Math.min(46, window.innerWidth*0.12);
+  },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(!tracking||x0==null){x0=y0=null;return;}
+    const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    const open=document.body.classList.contains('navopen');
+    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.6 && (Date.now()-t0)<700){
+      if(dx>0 && !open) document.body.classList.add('navopen');    // swipe right → open
+      else if(dx<0 && open) document.body.classList.remove('navopen'); // swipe left → close
+    }
+    x0=y0=null; tracking=false;
+  },{passive:true});
+})();
+
 /* debug hook (harmless): lets tooling inspect the live study state */
 window.__mb={get S(){return S;},set S(v){S=v;},get DATA(){return DATA;}};
 render();
