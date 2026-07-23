@@ -812,7 +812,8 @@ function lecProgress(l){
 
 /* ---- hard (starred) cards ---- */
 function isStar(id){ return !!DATA.starred[id]; }
-function toggleStar(id){ if(DATA.starred[id]) delete DATA.starred[id]; else DATA.starred[id]=1; persist(); render(); }
+function toggleStar(id){ if(DATA.starred[id]) delete DATA.starred[id]; else DATA.starred[id]=1; persist();
+  try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} render(); }
 function starCount(){ return Object.keys(DATA.starred).length; }
 function starItems(){
   const out=[];
@@ -1195,6 +1196,14 @@ function nextNewTopic(){
   cands.sort((a,b)=>rank.indexOf(a.subject.id)-rank.indexOf(b.subject.id));
   return cands[0]||null;
 }
+/* a short 3-5 card hard-card review, launched from the notification */
+function startHardQuick(){
+  const all=starItems();
+  for(let i=all.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[all[i],all[j]]=[all[j],all[i]];}
+  const items=all.slice(0,5);
+  S={mode:'hard',key:'hardquick',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length}};
+}
 function startHard(){
   const items=starItems();
   S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
@@ -1565,8 +1574,8 @@ function pageSettings(){
     <h2>Reminders</h2>
     <div class="setrow"><div><b>Daily reminder</b><span>${
       perm==='unsupported'?'Not supported in this browser.':
-      s.remindOn&&perm==='granted'?'On. Install to your home screen (below) for the most reliable nudges.':
-      'Get a notification when cards are due. Works best once installed to your home screen.'}</span></div>
+      s.remindOn&&perm==='granted'?'On. It surfaces 3–5 hard cards to review; tap the notification to drill them. Install to your home screen (below) for the most reliable nudges.':
+      'Get a notification that brings up 3–5 of your hard cards to review. Works best once installed to your home screen.'}</span></div>
       ${s.remindOn?`<button class="btn" onclick="disableReminders()">Turn off</button>`
                   :`<button class="btn primary" onclick="enableReminders()">Turn on</button>`}</div>
     ${s.remindOn?`<div class="setrow"><div><b>Reminder time</b><span>Roughly when you’d like the nudge.</span></div>
@@ -1588,6 +1597,7 @@ function render(){
   switch(p[0]){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
+    case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
     case 'hard':      html=pageHard(); break;
     case 'week':      html=pageWeek(); break;
     case 'search':    html=pageSearch(); break;
@@ -1629,6 +1639,7 @@ async function setupReminder(){
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').then(()=>{
     if(DATA.settings.remindOn) setupReminder();
+    swPing('hardcount',{n:starCount()});     // keep the SW's hard-card count current
     // in-app fallback: if reminders on, time has passed, and not studied today, nudge on open
     try{
       const t=DATA.settings.remindAt||'19:00', now=new Date();
@@ -1636,7 +1647,11 @@ if('serviceWorker' in navigator){
       const studiedToday=(todayLog().cards>0);
       if(DATA.settings.remindOn && 'Notification' in window && Notification.permission==='granted'
          && !studiedToday && (now.getHours()>hh || (now.getHours()===hh && now.getMinutes()>=mm))){
-        swPing('notify',{body:(dueCount()||'Your')+' cards are due — keep your streak alive.'});
+        const hc=starCount(), n=Math.min(5,hc);
+        const body = hc>0 ? `Review ${n} hard card${n===1?'':'s'} to keep them sharp.`
+                          : (dueCount()||'Your')+' cards are due — keep your streak alive.';
+        const url  = hc>0 ? './index.html#/hardnudge' : './index.html#/today';
+        swPing('notify',{body,url});
       }
     }catch(e){}
   }).catch(()=>{}); });

@@ -1,0 +1,378 @@
+{
+  "deck": "Recall Cards",
+  "topic": "Introduction to Pulmonology / Investigations of the Respiratory System",
+  "cards": [
+    {
+      "q": "What is pulmonology?",
+      "a": "A field of medicine that focuses specifically on diagnosing and treating disorders of the respiratory system."
+    },
+    {
+      "q": "What are the other names for pulmonology?",
+      "a": "Respirology, respiratory medicine or chest medicine."
+    },
+    {
+      "q": "From what structure does the respiratory system develop?",
+      "a": "As an outgrowth from the ventral (front) wall of the foregut in week 4."
+    },
+    {
+      "q": "Into what two channels is the foregut split?",
+      "a": "One going to the stomach (the oesophagus) and one going to the lungs (the trachea)."
+    },
+    {
+      "q": "What is the germ-layer origin of the epithelial lining from the larynx to the alveoli?",
+      "a": "Endodermal (from the endoderm)."
+    },
+    {
+      "q": "What is the germ-layer origin of the cartilage and muscle around the airways?",
+      "a": "Mesodermal (from the mesoderm)."
+    },
+    {
+      "q": "What is the oesophagotracheal septum and when does it form?",
+      "a": "The wall of tissue that separates the respiratory bud from the oesophagus; it forms in the 4th week."
+    },
+    {
+      "q": "What does failure of the oesophagotracheal septum cause?",
+      "a": "Tracheo-oesophageal fistula (TOF) — a connection between the airway and the food pipe, a surgical emergency in newborns."
+    },
+    {
+      "q": "Into what two structures does the oesophagotracheal septum divide the foregut?",
+      "a": "The respiratory diverticulum anteriorly (becomes the lungs) and the oesophagus posteriorly."
+    },
+    {
+      "q": "At what single point do the respiratory and oesophageal tubes remain connected?",
+      "a": "Through the larynx."
+    },
+    {
+      "q": "From which branchial arches is the larynx formed?",
+      "a": "The 4th and 6th branchial arches."
+    },
+    {
+      "q": "How many bronchi and lobes does the left lung bud form?",
+      "a": "2 main bronchi and 2 lobes."
+    },
+    {
+      "q": "How many bronchi and lobes does the right lung bud form?",
+      "a": "3 main bronchi and 3 lobes."
+    },
+    {
+      "q": "Why is the adult right lung slightly larger?",
+      "a": "The 3-lobe/2-lobe asymmetry is determined at the embryological lung-bud stage."
+    },
+    {
+      "q": "Name the two developmental phases of the lung given in the lecture and their weeks.",
+      "a": "Pseudoglandular phase (5-17 weeks) and canalicular phase (15-25 weeks)."
+    },
+    {
+      "q": "Why is the pseudoglandular phase called 'false gland'?",
+      "a": "The lung looks gland-like under the microscope and airways are forming, but there is no gas exchange yet."
+    },
+    {
+      "q": "What happens to the bronchiolar lining cells in the canalicular phase?",
+      "a": "They thin out and flatten into type I alveolar epithelial cells — the gas-exchange cells."
+    },
+    {
+      "q": "Which cells produce surfactant, and when do they begin?",
+      "a": "Type II alveolar epithelial cells, beginning in the canalicular phase (15-25 weeks)."
+    },
+    {
+      "q": "What is surfactant?",
+      "a": "A phospholipid coat laid over the alveolar membranes that reduces surface tension at the air-blood capillary interface."
+    },
+    {
+      "q": "What does surfactant do?",
+      "a": "It reduces surface tension so the alveoli do not collapse inward during expiration, keeping them open for the next breath."
+    },
+    {
+      "q": "Why do premature infants develop RDS?",
+      "a": "They are born before sufficient surfactant is produced, so their alveoli keep collapsing and breathing becomes exhausting work."
+    },
+    {
+      "q": "How do the lungs grow after birth?",
+      "a": "By increasing the number of respiratory bronchioles and alveoli — multiplication, not enlargement of existing alveoli."
+    },
+    {
+      "q": "What does 'continuum of mucosal surfaces' mean for the respiratory tract?",
+      "a": "The tract is one connected surface from nose to alveoli, so infection can travel downward along it with no anatomical stop signs."
+    },
+    {
+      "q": "List the respiratory tract in order.",
+      "a": "Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs."
+    },
+    {
+      "q": "At what landmark is the respiratory tract divided into upper and lower?",
+      "a": "At the larynx — above it is upper, below it is lower."
+    },
+    {
+      "q": "What structures make up the upper respiratory tract?",
+      "a": "The nose, paranasal sinuses and pharynx."
+    },
+    {
+      "q": "What structures make up the lower respiratory tract?",
+      "a": "The trachea, bronchi, bronchioles and alveoli."
+    },
+    {
+      "q": "Which serious diseases tend to live in the lower respiratory tract?",
+      "a": "Pneumonia, asthma and bronchiolitis."
+    },
+    {
+      "q": "Where does the trachea start?",
+      "a": "At the lower border of the cricoid cartilage at C6."
+    },
+    {
+      "q": "Where does the trachea bifurcate?",
+      "a": "At the sternal angle of Louis (T4/T5), forming the right and left main bronchi."
+    },
+    {
+      "q": "What are the dimensions of the trachea?",
+      "a": "About four and a half inches long and nearly one inch in diameter."
+    },
+    {
+      "q": "What is the lining of the trachea?",
+      "a": "Ciliated columnar epithelium with goblet cells."
+    },
+    {
+      "q": "What is the function of the tracheal cilia and goblet cells?",
+      "a": "Cilia beat upward to sweep debris out; goblet cells produce mucus to trap pathogens — the first-line defence system."
+    },
+    {
+      "q": "Describe the right main bronchus.",
+      "a": "Wider, shorter and more vertical than the left, leaving at an angle of 25 degrees to the horizontal."
+    },
+    {
+      "q": "Describe the left main bronchus.",
+      "a": "Narrower and steeper, leaving at an angle of 45 degrees."
+    },
+    {
+      "q": "Why do foreign bodies preferentially enter the right bronchus?",
+      "a": "Because it is wider and more vertical — a more direct continuation of the trachea — so aspirated material enters it, particularly the middle and lower lobes of the right lung."
+    },
+    {
+      "q": "If a child inhales something, which side do you examine first?",
+      "a": "The right — look right first."
+    },
+    {
+      "q": "What is the shape of each lung and where is its apex?",
+      "a": "Conical, with a blunt apex projecting above the sternal end of the first rib."
+    },
+    {
+      "q": "Why can a penetrating injury at the base of the neck injure the lung?",
+      "a": "Because the lung apex projects above the first rib, into the root of the neck."
+    },
+    {
+      "q": "How many lobes and fissures does the right lung have?",
+      "a": "Three lobes (upper, middle, lower) divided by two fissures — the oblique and the horizontal."
+    },
+    {
+      "q": "How many lobes and fissures does the left lung have?",
+      "a": "Two lobes (upper and lower) divided by one oblique fissure."
+    },
+    {
+      "q": "Why is the left lung smaller?",
+      "a": "Partly because the heart occupies space on the left side of the chest."
+    },
+    {
+      "q": "Why is downward spread of respiratory infection common?",
+      "a": "Because the tract is one connected surface, so a pathogen spreads along the tracheobronchial tree from a URTI to bronchitis, bronchiolitis or pneumonia."
+    },
+    {
+      "q": "What is the main function of the respiratory system?",
+      "a": "To supply sufficient oxygen to meet metabolic demands and remove carbon dioxide."
+    },
+    {
+      "q": "Which three processes are involved in oxygenation and CO2 removal?",
+      "a": "Ventilation, perfusion and diffusion."
+    },
+    {
+      "q": "What results from abnormality in any one of ventilation, perfusion or diffusion?",
+      "a": "Respiratory failure."
+    },
+    {
+      "q": "How is respiratory tract disease classified?",
+      "a": "Into upper respiratory tract infection (URI/URTI) and lower respiratory tract infection (LRI/LRTI)."
+    },
+    {
+      "q": "What are the three pillars of evaluation, in order?",
+      "a": "History taking, physical examination and laboratory investigation."
+    },
+    {
+      "q": "Why does history come first?",
+      "a": "Because it guides everything else — it tells you what to look for on examination and which investigations to request; without it the workup is unfocused and expensive."
+    },
+    {
+      "q": "What are the five components of the history?",
+      "a": "Bio-data, presenting symptoms, past medical history, family history and social history."
+    },
+    {
+      "q": "What four things does age give insight into?",
+      "a": "Anatomical maturity, physiological reserve, likely diagnosis and risk of deterioration."
+    },
+    {
+      "q": "Why do infants obstruct their airways faster?",
+      "a": "They have smaller airways, and resistance increases dramatically as airway diameter decreases, so small amounts of mucus, oedema or inflammation narrow the airway significantly."
+    },
+    {
+      "q": "Why does the infant chest wall collapse inward during distress?",
+      "a": "It is highly compliant (floppy) — the ribs are soft and horizontal — causing chest recession and quicker respiratory fatigue."
+    },
+    {
+      "q": "Why do young infants tolerate hypoxia poorly?",
+      "a": "They have immature respiratory control and poor hypoxic reserve, and can develop apnoea, especially neonates."
+    },
+    {
+      "q": "Why do infants decompensate faster than older children?",
+      "a": "They have lower physiological reserve — limited oxygen reserve and higher metabolic demand."
+    },
+    {
+      "q": "Are a 2-month-old and an 8-year-old with the same severity of bronchiolitis equally stable?",
+      "a": "No — the infant has less reserve and is at much higher risk of rapid deterioration."
+    },
+    {
+      "q": "What respiratory diagnoses are common in neonates (<28 days)?",
+      "a": "Congenital anomalies, neonatal pneumonia and aspiration."
+    },
+    {
+      "q": "What respiratory diagnoses are common in infants (<1 year)?",
+      "a": "Bronchiolitis and pertussis."
+    },
+    {
+      "q": "What respiratory diagnoses are common in toddlers (1-3 years)?",
+      "a": "Viral wheeze, foreign body aspiration and croup."
+    },
+    {
+      "q": "What respiratory diagnoses are common in school-age children?",
+      "a": "Asthma and pneumonia."
+    },
+    {
+      "q": "What respiratory diagnoses are common in adolescents?",
+      "a": "Asthma and atypical pneumonia."
+    },
+    {
+      "q": "Why does gender matter in respiratory disease?",
+      "a": "Some conditions have a sex predilection — pneumonia and bronchiolitis are more common in males."
+    },
+    {
+      "q": "What are the three major presenting respiratory symptoms?",
+      "a": "Cough, breathlessness and chest pain."
+    },
+    {
+      "q": "How should a cough be characterised?",
+      "a": "By duration, character (barking, whooping, productive), timing (night, morning, after feeding), severity and sputum production."
+    },
+    {
+      "q": "How should breathlessness be characterised?",
+      "a": "By severity, duration and pattern — constant or episodic, with exercise or at rest."
+    },
+    {
+      "q": "How do you distinguish respiratory from cardiac chest pain?",
+      "a": "Respiratory (pleuritic) pain relates to breathing and worsens on inspiration or coughing; cardiac pain has a different character and relates to effort."
+    },
+    {
+      "q": "List the six types of noisy breathing you must know.",
+      "a": "Wheeze, stridor, snuffles, rattles, snoring and grunting."
+    },
+    {
+      "q": "What does stridor indicate versus wheeze?",
+      "a": "Stridor indicates upper airway obstruction; wheeze indicates lower airway narrowing."
+    },
+    {
+      "q": "Why is grunting significant?",
+      "a": "It is a danger sign in a distressed infant, who grunts to keep the alveoli open."
+    },
+    {
+      "q": "What do rhinorrhoea and nasal stuffiness point toward?",
+      "a": "Upper respiratory tract involvement or allergic disease."
+    },
+    {
+      "q": "Why does otitis media accompany URTIs in young children?",
+      "a": "Because of the short, horizontal Eustachian tube, which lets infection track easily from the throat to the middle ear."
+    },
+    {
+      "q": "What does hoarseness suggest?",
+      "a": "Laryngeal involvement — croup, laryngitis, or a foreign body at the level of the larynx."
+    },
+    {
+      "q": "What does sore throat point to?",
+      "a": "Pharyngitis or tonsillitis."
+    },
+    {
+      "q": "Which triad of features is a red flag for TB or lymphoma?",
+      "a": "Weight loss, neck swelling and night sweats."
+    },
+    {
+      "q": "What five things should the past medical history probe?",
+      "a": "Whether it has happened before, whether the child was hospitalised, whether it followed a previous infection, the response to previous treatment (bronchodilators/antibiotics), and any seasonal pattern."
+    },
+    {
+      "q": "What pattern in the past history strongly suggests asthma?",
+      "a": "Recurrent wheezing that responds to bronchodilators and worsens in harmattan."
+    },
+    {
+      "q": "What two things does family history specifically probe?",
+      "a": "Atopic disorders and chronic cough in the family."
+    },
+    {
+      "q": "What is atopy?",
+      "a": "The tendency to develop allergic diseases like asthma, eczema and allergic rhinitis, which runs strongly in families."
+    },
+    {
+      "q": "What conditions might a family history of chronic cough point toward?",
+      "a": "Cystic fibrosis or primary ciliary dyskinesia (genetic bases)."
+    },
+    {
+      "q": "What environmental exposures in the social history can trigger respiratory disease?",
+      "a": "Dust, pets, rugs and fumes."
+    },
+    {
+      "q": "Why is passive smoking a major respiratory risk factor?",
+      "a": "It damages airway mucosa, impairs ciliary function and increases susceptibility to infection."
+    },
+    {
+      "q": "What can exercise trigger in a child with reactive airway disease?",
+      "a": "Bronchospasm."
+    },
+    {
+      "q": "Why is overcrowding a respiratory risk factor?",
+      "a": "It is a major risk factor for the spread of respiratory infections, particularly TB and pneumonia."
+    },
+    {
+      "q": "OSPE — On a diagram of the respiratory tract, name the structures air passes from the nose to the alveoli.",
+      "a": "Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs."
+    },
+    {
+      "q": "OSPE — A diagram shows the two main bronchi. Which is which and how do you tell?",
+      "a": "The right is wider, shorter and more vertical (25 degrees); the left is narrower and steeper (45 degrees)."
+    },
+    {
+      "q": "OSPE — Point to and name the landmark for the tracheal bifurcation on a chest surface diagram.",
+      "a": "The sternal angle of Louis, where the manubrium meets the body of the sternum (T4/T5)."
+    },
+    {
+      "q": "CLINICAL — A newborn chokes, coughs and becomes cyanosed with the first feed. What embryological defect explains this?",
+      "a": "Tracheo-oesophageal fistula from failure of the oesophagotracheal septum — a surgical emergency."
+    },
+    {
+      "q": "CLINICAL — A toddler suddenly chokes while eating groundnuts, then develops right-sided reduced air entry. What is the diagnosis and why the right side?",
+      "a": "Inhaled foreign body — it lodges on the right because the right bronchus is wider and more vertical (a direct continuation of the trachea)."
+    },
+    {
+      "q": "CLINICAL — A premature baby develops worsening respiratory distress soon after birth. What is the underlying deficiency?",
+      "a": "Insufficient surfactant, causing alveolar collapse — respiratory distress syndrome (RDS)."
+    },
+    {
+      "q": "CLINICAL — A child has recurrent wheeze that improves with a bronchodilator and worsens in harmattan. What is the likely diagnosis?",
+      "a": "Bronchial (childhood) asthma — reversible airway obstruction with environmental trigger worsening."
+    },
+    {
+      "q": "CLINICAL — A child presents with chronic cough, weight loss, neck swelling and night sweats. What must you exclude?",
+      "a": "Tuberculosis (and lymphoma) — this red-flag triad must never be missed."
+    },
+    {
+      "q": "CLINICAL — Why can a mild upper respiratory infection in an infant progress to pneumonia within days?",
+      "a": "Because the respiratory tract is one continuous mucosal surface, so the pathogen spreads downward along the tracheobronchial tree."
+    },
+    {
+      "q": "CLINICAL — Why is a barking cough with hoarseness significant, and what does it suggest?",
+      "a": "It indicates laryngeal involvement — croup — reflecting upper-airway/laryngeal narrowing."
+    }
+  ]
+}
