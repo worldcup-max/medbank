@@ -1,0 +1,86 @@
+{
+ "deck": "Recall Cards",
+ "topic": "Common Investigations in Neonatology",
+ "cards": [
+  {
+   "q": "List the common investigations used in neonatology.",
+   "a": "**Blood glucose, blood gas analysis, complete blood count, peripheral blood smear, blood culture, metabolic panel (renal function + electrolytes), liver function tests, bone profile, thyroid profile, urinalysis & culture, and lumbar puncture.**\n\n## Understanding it\nRather than memorise a flat list, group them by purpose:\n- **Homeostasis:** glucose, blood gas, electrolytes, bone profile.\n- **Haematology:** FBC + blood film.\n- **Infection:** blood culture, urinalysis/culture, lumbar puncture (plus CRP).\n- **Organ function:** LFTs, renal panel, thyroid.\n\n>> The neonate can't describe symptoms, so investigations screen several systems at once from tiny samples."
+  },
+  {
+   "q": "What does a complete blood count (CBC) measure in a neonate?",
+   "a": "**Hb and Hct, platelet count, RBC count, reticulocyte count, MCV, MCHC and MCH.**\n\n## Understanding it\nThe CBC answers three practical questions:\n- **Are there enough red cells?** → Hb/Hct.\n- **If anaemic, why?** → reticulocytes (high = blood loss/haemolysis) and MCV (cell size).\n- **Enough platelets?** → platelet count.\n\n>> The **reticulocyte count** is the clever one: a high count means the marrow is responding (blood loss/haemolysis), a low count means it is not — this guides whether to transfuse."
+  },
+  {
+   "q": "What does a low MCV suggest in a newborn?",
+   "a": "**Iron-deficiency anaemia, thalassaemia, and ABO incompatibility.**\n\n## Understanding it\nMCV measures average red-cell size, so a low MCV = small cells (microcytic):\n- **Iron deficiency** and **thalassaemia** both produce small, pale cells.\n- **ABO incompatibility** (a haemolytic process) can also lower the MCV in the newborn.\n\n>> So 'low MCV' points you toward a microcytic cause. Pair it with the reticulocyte count to separate production problems from haemolysis."
+  },
+  {
+   "q": "Why can automated counters over-count white cells in neonates, and what corrects it?",
+   "a": "**Newborns have many nucleated red cells that automated counters miscount as white cells; a manual peripheral blood film review corrects the count.**\n\n## Understanding it\nAutomated analysers count anything with a nucleus in the 'white cell' gate:\n- Newborns normally circulate **nucleated red blood cells (nRBCs)**.\n- The machine counts these as WBCs, **falsely raising** the reported white cell count.\n\n>> So when a newborn's WBC looks oddly high — or when investigating unexplained anaemia/thrombocytopenia — a **manual blood film** verifies the true count and can reveal things like a leukaemoid reaction in trisomy 21."
+  },
+  {
+   "q": "What does neonatal blood gas analysis evaluate?",
+   "a": "**pH, paO₂ and bicarbonate — to assess respiratory function and metabolic acidosis; often drawn preductal to measure ductal shunting.**\n\n## Understanding it\nEach value reports on a different problem:\n- **pH + bicarbonate** → metabolic acidosis (a marker of poor perfusion/hypoxia).\n- **paO₂** → oxygenation and respiratory function.\n\n>> 'Preductal' sampling (right arm, before the ductus arteriosus) lets you compare oxygen before vs after the duct — a way to detect **right-to-left ductal shunting** in conditions like persistent pulmonary hypertension."
+  },
+  {
+   "q": "What is the normal platelet count, and why does sampling technique matter?",
+   "a": "**Normal is 150–450 ×10⁹/L (150,000–450,000). Sampling matters because clumping loses platelets and gives a falsely low count.**\n\n## Understanding it\nPlatelets stick together (clump) if blood is not free-flowing or is mixed roughly:\n- Clumped platelets are not counted, so the machine reports a **falsely low** number.\n- To avoid this, collect the **CBC sample first while free-flowing** and mix gently with the reagent.\n\n>> The practical lesson: before you act on a 'low platelet' result, ask whether it could be a **clumping artefact** — a repeat well-taken sample may be normal."
+  },
+  {
+   "q": "State the platelet transfusion thresholds in neonates.",
+   "a": "**< 25,000 → transfuse even with no bleeding · < 50,000 → if bleeding, coagulopathy, or before surgery · < 100,000 → major bleeding or major surgery (e.g. neurosurgery).**\n\n## Understanding it\nThe threshold rises with how much bleeding risk the situation carries:\n- **Stable, not bleeding:** you only transfuse if the count is very low (**<25,000**).\n- **Bleeding or heading to surgery:** transfuse earlier (**<50,000**).\n- **Major/critical bleeding or neurosurgery:** keep the count highest (**<100,000**), because a bleed there is catastrophic.\n\n>> One logic runs through it: **the higher the stakes, the higher the platelet count you insist on.**"
+  },
+  {
+   "q": "How do red-cell transfusion thresholds change with respiratory support in preterm babies?",
+   "a": "**The more respiratory support a baby needs, the higher the Hb threshold to transfuse. A ventilated baby is transfused at a higher Hb (e.g. 12 g/dl early) than a baby on no support (e.g. 7.5–10 g/dl).**\n\n## Understanding it\nThink about oxygen demand versus supply:\n- A **ventilated / sick** baby has high oxygen needs and little reserve, so you keep the Hb **higher** to guarantee delivery.\n- A **stable** baby on no support tolerates a **lower** Hb before needing blood.\n\n>> The threshold also **falls with age** (a 3-week-old tolerates lower Hb than a day-1 baby). The unifying rule: **sicker + younger = transfuse at a higher Hb.**"
+  },
+  {
+   "q": "What ANC values indicate risk of sepsis, and what is the I:T ratio?",
+   "a": "**ANC < 1500 is low and < 500 is very low — both suggest sepsis risk. The immature:total (I:T) neutrophil ratio is 0–0.2 normal, 0.2–0.25 suggestive of infection, and higher means greater risk.**\n\n## Understanding it\nTwo neutrophil clues point to infection:\n- A **falling ANC** (neutropenia) in a newborn is worrying — the marrow is being consumed/overwhelmed by sepsis. **Very low WBC is more concerning than a high WBC.**\n- The **I:T ratio** counts immature neutrophils (**band cells**, with a C-shaped non-segmented nucleus). A rising proportion of immature cells (a 'left shift') means the marrow is releasing reserves to fight infection.\n\n>> So both **low ANC** and a **high I:T ratio** raise the suspicion of neonatal sepsis."
+  },
+  {
+   "q": "How does CRP behave in neonatal sepsis, and what is its main limitation?",
+   "a": "**CRP is a liver acute-phase protein; normal is < 6.10 mg%, rising and sustained > 40 mg% in bacterial sepsis. Its main limitation is a 12–24 hour lag before it rises, and some extreme preterm babies don't mount a response.**\n\n## Understanding it\nCRP is made by the liver in response to inflammation, but it is slow:\n- Early in infection CRP may still be **normal** because of the **12–24 h lag** — so a single normal CRP does not rule out sepsis.\n- Its real strength is the **trend**: serial CRPs guide how long to continue antibiotics.\n\n>> Bottom line: **treat the baby, not the CRP** early on; use CRP over time to judge response and duration."
+  },
+  {
+   "q": "How does procalcitonin differ from CRP, and when is it useful?",
+   "a": "**Procalcitonin is more expensive, with a quicker rise, higher peak and quicker fall than CRP, but it is unreliable in the first 1–3 days of life. It is useful when clinical features suggest sepsis but CRP is normal.**\n\n## Understanding it\nProcalcitonin trades cost for speed:\n- It **moves faster** than CRP, so it can flag infection earlier and show response sooner.\n- But it is **naturally high in the first 1–3 days**, so it can't be trusted then.\n\n>> The niche: a baby who **looks septic while CRP is still normal** — procalcitonin may reveal the infection CRP hasn't caught yet."
+  },
+  {
+   "q": "How is a neonatal blood culture taken and interpreted?",
+   "a": "**Take 0.5–1 ml with full aseptic precautions (sterile gloves, chlorhexidine skin prep). Most labs report by 36 hours; if the baby is stable with normal markers and a negative culture, antibiotics can often stop then. A positive culture is treated according to organism and CSF findings.**\n\n## Understanding it\nThe culture is the gold standard, so two things protect its value:\n- **Asepsis + adequate volume** — a small or contaminated sample gives false results.\n- **The 36-hour decision point** — negative culture + well baby + normal markers = safe to **stop antibiotics** and avoid overtreatment.\n\n>> A positive culture then drives **rationalising antibiotics** by sensitivity, with duration set by the organism and whether the CSF is involved."
+  },
+  {
+   "q": "When is a lumbar puncture indicated in neonatal sepsis, and what is the one exception?",
+   "a": "**Do an LP in early-onset sepsis for any baby with high CRP, a positive blood culture, or neurologic symptoms, and in late-onset sepsis as part of the screen. The only exception where a positive culture does not mandate LP is coagulase-negative staphylococcal (CoNS) sepsis.**\n\n## Understanding it\nThe reason to LP is to catch **meningitis**, which changes drug choice and duration:\n- A positive blood culture means bacteria are in the blood and may have seeded the CSF — so check it.\n- **CoNS** is the exception because it is often a **skin contaminant or line infection**, not true invasive disease, so a positive CoNS culture does not automatically require an LP.\n\n>> Also: in a baby with rash + sepsis features, or fever + encephalopathy, send **herpes PCR and start aciclovir** while waiting."
+  },
+  {
+   "q": "What is the normal serum sodium, and how is hyponatraemia managed?",
+   "a": "**Normal sodium is 135–145 meq/L. Hyponatraemia is more significant below 130, needs urgent correction below 125, and is dangerous below 120. SIADH is a common cause, treated mainly by fluid restriction.**\n\n## Understanding it\nRead the danger by how low the sodium is:\n- **<130** significant, **<125** urgent, **<120** dangerous (risk of seizures/cerebral oedema).\n- The commonest cause is **SIADH** — the body retains water and dilutes the sodium — so the fix is **fluid restriction**, not giving more salt.\n- Low intake and excess losses also contribute.\n\n>> The trap: hyponatraemia from SIADH is a **water-excess** problem, so pouring in fluids makes it worse."
+  },
+  {
+   "q": "How is neonatal hypernatraemia caused and corrected?",
+   "a": "**Usually from increased free-water loss (insensible loss in extreme preterm) or dehydration from inadequate feeding in term babies. Correct the free-water deficit very slowly so sodium doesn't fall more than 0.5 meq/L per hour, to avoid brain injury.**\n\n## Understanding it\nHypernatraemia is a **water-deficit** state, and the danger is in correcting it too fast:\n- **Preterm:** thin skin → huge insensible water loss.\n- **Term:** poor feeding → dehydration.\n- If you drop the sodium quickly, water rushes into brain cells → **cerebral oedema**.\n\n>> So the rule is deliberately slow: **≤ 0.5 meq/L per hour**. Speed of correction, not just the number, is what injures the brain."
+  },
+  {
+   "q": "Why must you correct magnesium to correct hypocalcaemia?",
+   "a": "**Hypomagnesaemia frequently accompanies hypocalcaemia, and the calcium will not correct until the magnesium is corrected first.**\n\n## Understanding it\nMagnesium is needed for the machinery that regulates calcium:\n- Low magnesium impairs **PTH release and action**, so calcium can't be mobilised.\n- Give calcium alone and it keeps falling back down — the low magnesium blocks the correction.\n\n>> So in **refractory hypocalcaemia**, check and replace **magnesium** — it is the classic reason calcium 'won't come up'. (Normal Mg 1.6–2.8 mg/dl; symptoms — irritability, tremors, seizures — below 1.2.)"
+  },
+  {
+   "q": "Describe the calcium and phosphorus relationship in the newborn.",
+   "a": "**About 99% of calcium and 85% of phosphorus are in bone; term calcium reaches its nadir (1.10–1.36 mmol/L) at 24 hours with ~30% developing early hypocalcaemia, and there is an inverse relationship between serum calcium and phosphorus.**\n\n## Understanding it\nTwo ideas to hold together:\n- **Timing:** term calcium **bottoms out at ~24 hours** of life, and about a third of term babies get **early hypocalcaemia** in the first 2 days (Ca < 1.10 mmol/L or total < 8 mg/dl; preterm < 1 mmol/L or < 7 mg/dl).\n- **Inverse link:** as **calcium rises, phosphate falls** and vice versa — so interpret them as a pair, not separately.\n\n>> Phosphorus is also **higher in formula-fed** than breast-fed babies, which can pull calcium down."
+  },
+  {
+   "q": "What is the role of the thyroid profile in neonatology?",
+   "a": "**TSH is part of the newborn screen. Maternal hypothyroidism alone is not an indication, but past maternal hyperthyroidism warrants free T4 and TSH. It is also part of the prolonged jaundice work-up and failure-to-thrive evaluation.**\n\n## Understanding it\nThe thyroid is screened because **congenital hypothyroidism is common and treatable** — and missing it causes irreversible brain damage:\n- **TSH on the newborn screen** catches congenital hypothyroidism.\n- **Maternal hyperthyroidism** history → the baby can have transient thyroid dysfunction → check free T4 + TSH.\n- **Prolonged jaundice** and **failure to thrive** are both classic presentations of an underactive thyroid.\n\n>> Always use **lab-specific ranges** — neonatal thyroid values vary widely between laboratories."
+  },
+  {
+   "q": "What are the three components of liver function testing?",
+   "a": "**Synthetic function (serum albumin and coagulation profile); liver cell injury (AST/ALT and LDH); and cholestasis (Gamma-GT, alkaline phosphatase and direct bilirubin).**\n\n## Understanding it\nGroup the LFT numbers by what they actually tell you:\n- **Synthetic** — is the liver *making* things? Low **albumin** or deranged **clotting** = poor synthetic function.\n- **Hepatocellular injury** — are liver cells *dying*? Raised **AST/ALT, LDH**.\n- **Cholestasis** — is bile *blocked*? Raised **GGT, ALP, direct bilirubin**.\n\n>> A **raised direct bilirubin** is the key alarm — it signals cholestasis and needs a systematic work-up so serious causes (e.g. biliary atresia) aren't missed. In preterm babies on **TPN**, TPN-induced liver injury is the commonest cause of abnormal LFTs."
+  },
+  {
+   "q": "Match the neonatal imaging modalities to what they assess.",
+   "a": "**Cranial ultrasound → intraventricular haemorrhage, hypoxic-ischaemic damage, brain structure. Chest X-ray → RDS, meconium aspiration, pneumonia. Echocardiography → congenital heart defects, pulmonary hypertension, PDA. Abdominal X-ray/ultrasound → GI anomalies and NEC.**\n\n## Understanding it\nEach modality suits the organ and the baby's fragility:\n- **Cranial ultrasound** is bedside, non-invasive, and passes through the open fontanelle — ideal for scanning the preterm brain for **IVH**.\n- **Chest X-ray** distinguishes the causes of respiratory distress.\n- **Echocardiography** is the go-to for the heart and the ductus (**PDA**).\n- **Abdominal X-ray** shows **NEC** (e.g. gas in the bowel wall).\n\n>> The theme: **ultrasound and X-ray are portable and radiation-light**, which is why cranial US is favoured for the delicate newborn brain."
+  }
+ ]
+}

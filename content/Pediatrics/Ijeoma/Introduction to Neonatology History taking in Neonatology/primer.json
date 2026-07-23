@@ -1,0 +1,42 @@
+{
+ "deck": "Primer Cards",
+ "topic": "Introduction to Neonatology, History Taking & the Newborn",
+ "cards": [
+  {
+   "q": "Define the neonatal and perinatal periods, and say why the neonatal period is so fragile.",
+   "lecturer": "The neonatal period is the first 28 days of life. The perinatal period runs from the 20th–28th week of gestation to the first 7 days of life. The neonatal period is fragile because the infant must transition from intrauterine to extrauterine life, which demands many rapid biochemical and physiologic changes.",
+   "explain": "## Step 1: Fix the two time windows\n\n>> **Neonatal = first 28 days of LIFE (after birth).**\n>> **Perinatal = 20–28 weeks gestation → first 7 days of life (straddles birth).**\n\nThe perinatal window is the one that crosses the delivery — that is why it captures stillbirths plus early neonatal deaths.\n\n## Step 2: Why 'fragile'?\n\nAt birth the baby must suddenly do for itself what the placenta used to do: breathe, keep warm, control glucose, clear bilirubin.\n\n>> Every one of those is a **new biochemical/physiologic job** starting at the same moment — so small errors kill quickly.\n\n## Step 3: Why it matters clinically\n\nThe first 28 days carry the highest death risk of childhood. Knowing the definitions lets you interpret the mortality rates (NMR, PMR) that follow.",
+   "tie": "Definitions are the scaffold: neonatal (28 days) and perinatal (straddles birth) frame every mortality rate and every 'is this baby too young/too old for X' decision in the rest of the topic."
+  },
+  {
+   "q": "State the UNICEF 2020 mortality rates (IMR, PMR, NMR) and what each measures.",
+   "lecturer": "UNICEF 2020: infant mortality rate (IMR) 72/1000 live births; perinatal mortality rate (PMR) 41/1000; neonatal mortality rate (NMR) 35/1000. IMR covers deaths in the first year, NMR the first 28 days, and PMR stillbirths plus early neonatal deaths.",
+   "explain": "## Step 1: Line them up by the window each covers\n\n- **IMR = 72** → deaths in the **first YEAR** per 1000 live births.\n- **NMR = 35** → deaths in the **first 28 days**.\n- **PMR = 41** → **stillbirths + first-7-day** deaths.\n\n## Step 2: Read the relationship\n\n>> NMR (35) is roughly **half** of IMR (72) — meaning about half of all infant deaths happen in the first month alone.\n\nThat single fact is why neonatology gets so much attention: fix the newborn period and you halve infant mortality.\n\n## Step 3: What drives PMR up\n\n>> Prenatal, maternal and fetal factors push PMR up — it is the obstetric-newborn interface.",
+   "tie": "These rates are the *why* of neonatology as a specialty — NMR being half of IMR is the single statistic that justifies focusing resources on the first 28 days."
+  },
+  {
+   "q": "Outline the causes of neonatal mortality by category (fetal, preterm, full-term).",
+   "lecturer": "Overall causes: circumstances of delivery, IUGR, conditions predisposing to asphyxia, overwhelming early-onset infection, prematurity/low birth weight, and congenital malformations. Fetal: placental insufficiency, intrauterine infection, congenital malformation, cord accidents, abruptio placentae, hydrops fetalis. Preterm: severe immaturity, RDS, IVH, congenital abnormalities, infection, NEC, BPD. Full term: congenital abnormalities, birth asphyxia, trauma, infection, meconium aspiration pneumonia, PPHN.",
+   "explain": "## Step 1: Group by WHEN/WHO\n\n- **Fetal** = things that go wrong before/around birth (placenta, cord, infection in utero).\n- **Preterm** = problems of immaturity (lungs = RDS, brain = IVH, gut = NEC).\n- **Full term** = problems of the delivery and structure (asphyxia, trauma, malformation, meconium).\n\n## Step 2: Spot the organ logic in preterm deaths\n\n>> Preterm death = **immature organ fails**: lungs → RDS, brain vessels → IVH, gut → NEC, lungs long-term → BPD.\n\n## Step 3: The big preventable four\n\n>> **Prematurity/LBW, asphyxia, infection, congenital malformation** — memorise these; they dominate the numbers and most are preventable with good obstetric care.",
+   "tie": "The cause list tells you what to prevent and screen for: the big four (prematurity, asphyxia, infection, malformation) reappear in every neonatal history, examination and management plan."
+  },
+  {
+   "q": "Describe the structure of a neonatal history.",
+   "lecturer": "Take socio/demographic data, presenting complaint and HPC (in which the past medical history is often embodied); a detailed pregnancy and birth history (planned or not, antenatal events, how labour started, membrane rupture, mode of delivery); the immediate neonatal period (did the baby cry/need resuscitation, jaundice, cyanosis, seizures); nutritional history; immunisation; and family/social history including previous maternal reproductive problems.",
+   "explain": "## Step 1: The newborn history is really a PREGNANCY history\n\n>> A neonate has almost no past of its own — so the 'past medical history' lives inside the **pregnancy, labour and delivery** story.\n\n## Step 2: Walk the timeline\n\nPregnancy (planned? antenatal illness/drugs/bleeding) → Labour (spontaneous/induced, prolonged, membranes) → Delivery (vaginal vs assisted) → **First minutes** (cried? resuscitated? jaundice/seizures) → Feeding → Immunisation.\n\n## Step 3: Don't skip the family reproductive history\n\n>> Previous **stillbirth, preterm, rhesus isoimmunisation or blood-group incompatibility** flags a baby at risk before you even examine it.",
+   "tie": "The history is your first and cheapest investigation — the pregnancy/birth story flags the at-risk baby before examination, which is why it drives the whole neonatal assessment."
+  },
+  {
+   "q": "State the normal newborn measurements and posture used as a baseline at examination.",
+   "lecturer": "Normal term newborn: weight 2.5–3.5 kg (about 2.9–3 kg in developing countries), length 45–55 cm, occipitofrontal head circumference 35 ± 2 cm, and a posture that is slightly flexed with clenched fists. The aim of the examination is early detection of abnormalities and a baseline for subsequent care.",
+   "explain": "## Step 1: Anchor the four numbers\n\n>> **Weight 2.5–3.5 kg · Length 45–55 cm · OFC 35 ± 2 cm.**\n\nPosture: **flexed limbs, clenched fists** — the well, term flexor tone.\n\n## Step 2: Why a baseline matters\n\nYou are not just screening now — you are writing down the numbers the next doctor compares against.\n\n>> A single reading is a **reference line**: growth, jaundice, and illness are all judged against this first exam.\n\n## Step 3: Posture as a quick neuro screen\n\n>> A floppy, extended baby instead of flexed-with-fists hints at **asphyxia, prematurity or neurologic problems** before any test.",
+   "tie": "These baseline numbers are the reference every later judgement (growth, jaundice by weight, drug dosing) is measured against — get them right at the first examination."
+  },
+  {
+   "q": "Explain APGAR scoring and its interpretation.",
+   "lecturer": "APGAR scores five signs 0/1/2: Appearance (colour), Pulse (heart rate), Grimace (reflex response), Activity (tone) and Respiration (effort). Interpretation: 0–3 severe depression, 4–6 moderate, 7 and above vigorous. It is assessed at 1 and 5 minutes to judge the need for and response to resuscitation.",
+   "explain": "## Step 1: The mnemonic IS the score\n\n>> **A**ppearance · **P**ulse · **G**rimace · **A**ctivity · **R**espiration — each scored **0, 1 or 2**, max **10**.\n\n## Step 2: Learn the pulse and colour cut-offs\n\n- Pulse: absent=0, **<100=1, >100=2**.\n- Colour: blue=0, **pink body/blue limbs=1**, all pink=2.\n\n## Step 3: Read the total\n\n>> **0–3 severe · 4–6 moderate · ≥7 vigorous.**\n\nAPGAR does not decide *whether* to resuscitate (you act before 1 minute) — it grades severity and tracks the response at 1 and 5 minutes.",
+   "tie": "APGAR is the shorthand every clinician uses to communicate how depressed a newborn is and whether resuscitation is working — it links the examination directly to the resuscitation that follows."
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "deck": "Primer Cards",
+ "topic": "Common Investigations in Neonatology",
+ "cards": [
+  {
+   "q": "List the common laboratory investigations used in neonatology.",
+   "lecturer": "Blood glucose, blood gas analysis, complete/full blood count, peripheral blood smear, blood culture, metabolic panel (renal function and serum electrolytes), liver function tests, bone profile (calcium, phosphorus, alkaline phosphatase, vitamin D, PTH), thyroid profile, urinalysis and culture, and lumbar puncture.",
+   "explain": "## Step 1: Group them by what they screen\n\n- **Metabolic/homeostasis:** glucose, blood gas, electrolytes, bone profile.\n- **Haematology:** FBC, blood film.\n- **Infection screen:** blood culture, CRP, urinalysis/culture, lumbar puncture.\n- **Organ function:** LFTs, renal panel, thyroid profile.\n\n## Step 2: Why so many on a small baby?\n\n>> The neonate can't tell you what's wrong, so investigations do the talking — small samples, screening several systems at once.\n\n## Step 3: The admission core\n\n>> On admission the baby usually gets **glucose, gas, FBC and (if sepsis suspected) a culture screen** first; the rest follow the clinical picture.",
+   "tie": "This is the menu the rest of the topic details — knowing the groups (haematology, infection, homeostasis, organ function) lets you order the right panel for a sick baby instead of memorising tests blindly."
+  },
+  {
+   "q": "What does the CBC include, and what does a low MCV suggest in a neonate?",
+   "lecturer": "The CBC includes Hb and Hct, platelet count, RBC count (a low count reflects marrow erythropoiesis), reticulocyte count (supports blood loss or haemolysis and guides transfusion), MCV, MCHC and MCH. A low MCV is seen in iron-deficiency anaemia, thalassaemia and ABO incompatibility.",
+   "explain": "## Step 1: The CBC answers three questions\n\n- **Enough red cells?** Hb/Hct.\n- **Why anaemic?** Reticulocytes (up = blood loss/haemolysis) and MCV (size).\n- **Enough platelets?** Platelet count.\n\n## Step 2: Read the MCV\n\n>> **Low MCV (small cells) → iron deficiency, thalassaemia, ABO incompatibility.**\n\n## Step 3: Newborn caveat\n\n>> Newborns have many **nucleated red cells** that automated counters mis-read as white cells — so a manual **blood film** verifies abnormal counts.",
+   "tie": "The CBC is the single most-ordered neonatal test; understanding the reticulocyte and MCV clues turns a row of numbers into an actual diagnosis of why the baby is anaemic."
+  },
+  {
+   "q": "How do CRP and procalcitonin behave in neonatal sepsis?",
+   "lecturer": "CRP is a liver acute-phase protein; normal is under 6.10 mg%, with a sustained rise over 40 mg% in bacterial sepsis, but it has a 12–24 hour lag before rising and some extreme preterm babies don't mount a response — its trend guides treatment duration. Procalcitonin is another marker: more expensive, with a quicker rise, higher peak and quicker fall, but it is unreliable in the first 1–3 days; it is useful when clinical features suggest sepsis yet CRP is normal.",
+   "explain": "## Step 1: CRP is slow but useful over time\n\n>> CRP **lags 12–24 h** — a normal CRP early does NOT exclude sepsis.\n\nIts real value is the **trend**: rising/falling CRP guides how long to treat.\n\n## Step 2: Procalcitonin is faster\n\n>> Procalcitonin **rises quicker, peaks higher, falls quicker** — but is unreliable in the **first 1–3 days** of life (naturally high).\n\n## Step 3: Use them together\n\n>> Add procalcitonin when the baby looks septic but **CRP is normal** — it can catch what CRP has not yet shown.",
+   "tie": "CRP and procalcitonin decide when to start and — via the trend — when to stop antibiotics, so their timing quirks directly control antibiotic stewardship in the nursery."
+  },
+  {
+   "q": "When is a lumbar puncture indicated in neonatal sepsis, and what is the one exception?",
+   "lecturer": "In early-onset sepsis, LP is done in all babies with a high CRP, positive blood culture or neurologic symptoms; in late-onset sepsis it is part of the sepsis screen. The only exception where a baby with a positive blood culture does not get an LP is coagulase-negative staphylococcal (CoNS) sepsis. Consider herpes PCR (and start aciclovir while waiting) in any newborn with a rash and sepsis features or high fever with encephalopathy.",
+   "explain": "## Step 1: The rule\n\n>> **Positive blood culture, high CRP, or neuro signs → do an LP** to check for meningitis.\n\n## Step 2: The single exception\n\n>> **CoNS sepsis** — a positive culture here is often a skin contaminant/line infection, so LP is not automatically required.\n\n## Step 3: Don't forget herpes\n\n>> Rash + sepsis features, or fever + encephalopathy → send **herpes PCR** and **start aciclovir empirically** — HSV meningoencephalitis is deadly if missed.",
+   "tie": "The LP rule (and its CoNS exception) determines antibiotic choice and duration; missing meningitis or missing herpes is exactly the catastrophe these indications exist to prevent."
+  },
+  {
+   "q": "Summarise the neonatal bone profile (calcium, phosphorus, magnesium) and the calcium–magnesium link.",
+   "lecturer": "Calcium: 99% is in bone; in term infants it reaches a nadir of 1.10–1.36 mmol/L at 24 hours and about 30% develop early hypocalcaemia in the first 2 days (term hypocalcaemia = Ca < 1.10 mmol/L or total < 8 mg/dl). Phosphorus: normal 5–7.8 mg/dl, mostly skeletal, with an inverse relationship to calcium. Magnesium: normal 1.6–2.8 mg/dl; hypomagnesaemia causes irritability, tremors and seizures and frequently accompanies hypocalcaemia — the magnesium must be corrected to correct the calcium.",
+   "explain": "## Step 1: Calcium dips early then recovers\n\n>> Term calcium **bottoms out at ~24 hours**; ~30% get **early hypocalcaemia** in the first 2 days.\n\n## Step 2: Calcium and phosphate move oppositely\n\n>> **Inverse relationship:** as one rises the other falls — read them together.\n\n## Step 3: The magnesium trap\n\n>> Low magnesium and low calcium travel together — and refractory hypocalcaemia **won't correct until you fix the magnesium first.** That is the classic exam pearl.",
+   "tie": "The bone profile ties together three ions whose derangements cause seizures — and the magnesium-first rule is the classic reason a treated hypocalcaemia stubbornly fails to correct."
+  }
+ ]
+}
