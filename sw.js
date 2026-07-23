@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v2';
+const CACHE = 'medbank-v3';
 const ASSETS = ['./', './index.html', './content.js', './icon.svg', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
@@ -55,6 +55,7 @@ async function maybeRemind() {
 /* message channel: page tells the SW its state, stages a card payload, or asks it to notify */
 self.addEventListener('message', e => {
   const d = e.data || {};
+  if (d.type === 'skipWaiting') self.skipWaiting();
   if (d.type === 'studied')   writeFlag('lastStudied', d.date);
   if (d.type === 'hardcount') writeFlag('hardCount', String(d.n || 0));
   if (d.type === 'payload')   { writeFlag('payloadBody', d.body || ''); writeFlag('payloadUrl', d.url || './index.html#/nudge'); }

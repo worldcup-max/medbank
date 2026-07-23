@@ -373,6 +373,11 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .celebits span{position:absolute;top:-30px;animation:cfall 1.7s ease-in forwards}
 @keyframes cfall{0%{transform:translateY(-30px) rotate(0);opacity:0}
   10%{opacity:1}100%{transform:translateY(105vh) rotate(320deg);opacity:0}}
+.updbanner{position:fixed;left:12px;right:12px;bottom:14px;z-index:420;background:var(--panel);
+  border:1px solid var(--accent);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:560px;margin:0 auto}
+.updbanner span{flex:1;font-size:14px;font-weight:600;min-width:160px}
+.updbanner .btn{padding:9px 14px}
 .strictov{position:fixed;inset:0;z-index:400;background:rgba(9,11,15,.86);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
 .strictbox{background:var(--panel);border:1px solid #ff8a4d55;border-radius:18px;padding:30px 26px;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .strictbox .sbig{font-size:46px;line-height:1;margin-bottom:8px}
@@ -562,6 +567,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
+const APP_VERSION='2026.07.23';   // bump this each release
 const LADDER=[3,7,14,30,60];           // days added after each correct answer
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -879,6 +885,7 @@ function renderNav(){
   h += it('cards','◈','Anki Cards',cards||'',r.startsWith('cards')||r.startsWith('study'));
   h += it('lecturers','☰','Lecturers',DB.stats.lecturers||'',r.startsWith('lecturer'));
   h += it('settings','⚙','Settings','',r==='settings');
+  h += `<div class="navitem" onclick="forceUpdate()"><span class="ic">↻</span><span>Check for updates</span></div>`;
   h += '<div class="navlabel">Subjects</div>';
   DB.subjects.forEach(s=>{
     const active = r==='subject/'+s.id || (r.startsWith('topic/')&&topById(r.split('/')[1])?.subject.id===s.id);
@@ -1730,6 +1737,10 @@ function pageSettings(){
       'On iPhone: Share → “Add to Home Screen”. On Android: menu → “Install app”.'}</span></div>
       <button class="btn primary" id="installbtn" onclick="doInstall()" style="display:none">Install</button></div>
 
+    <h2>App</h2>
+    <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
+      <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>
+
     <h2>Data</h2>
     <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. Cannot be undone.</span></div>
       <button class="btn miss" onclick="if(confirm('Reset ALL your progress on this device?')){localStorage.removeItem('${SKEY}');location.reload();}">Reset</button></div>`;
@@ -1761,7 +1772,29 @@ function render(){
 }
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
 
-/* ---------- PWA: install + service worker + reminders ---------- */
+/* ---------- PWA: update, install, service worker, reminders ---------- */
+/* force the newest version: clear caches, update the worker, reload */
+let _updating=false;
+async function forceUpdate(){
+  if(_updating) return; _updating=true;
+  const b=document.getElementById('updbtn'); if(b){ b.textContent='Updating…'; }
+  try{
+    if('caches' in window){ const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k))); }
+    if('serviceWorker' in navigator){
+      const reg=await navigator.serviceWorker.getRegistration();
+      if(reg){ try{ await reg.update(); }catch(e){} if(reg.waiting) reg.waiting.postMessage({type:'skipWaiting'}); }
+    }
+  }catch(e){}
+  setTimeout(()=>{ try{ location.reload(); }catch(e){ location.href=location.href; } }, 250);
+}
+function showUpdateBanner(){
+  if(document.getElementById('updbanner')) return;
+  const b=document.createElement('div'); b.id='updbanner'; b.className='updbanner';
+  b.innerHTML=`<span>🔄 A new version of MedBank is ready.</span>
+     <button class="btn primary" onclick="forceUpdate()">Refresh now</button>
+     <button class="btn" onclick="this.parentNode.remove()">Later</button>`;
+  document.body.appendChild(b);
+}
 let deferredInstall=null;
 window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredInstall=e;
   const b=document.getElementById('installbtn'); if(b) b.style.display='inline-flex'; });
@@ -1785,7 +1818,13 @@ async function setupReminder(){
   }catch(e){}
 }
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').then(()=>{
+  // when a new worker takes control, reload once to load the fresh app
+  let _swReloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(_swReloaded)return; _swReloaded=true; location.reload(); });
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').then(reg=>{
+    // detect a newly downloaded version and offer to refresh
+    reg.addEventListener('updatefound',()=>{ const nw=reg.installing; if(!nw)return;
+      nw.addEventListener('statechange',()=>{ if(nw.state==='installed' && navigator.serviceWorker.controller) showUpdateBanner(); }); });
     if(DATA.settings.remindOn) setupReminder();
     if(DATA.settings.useIdle) startIdle(false);
     swPing('hardcount',{n:starCount()});     // keep the SW's hard-card count current
