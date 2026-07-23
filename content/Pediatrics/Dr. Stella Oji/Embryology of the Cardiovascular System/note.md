@@ -1,6 +1,6 @@
 # Embryology of the Cardiovascular System
 
-*Dr W.E. Sadoh — Department of Child Health, U.B.T.H, Benin City — Paediatrics*
+*Dr Stella Oji — Paediatrics*
 
 ## Outline
 
@@ -328,4 +328,4 @@ The great vessels (aorta, pulmonary arteries, carotids, subclavians) develop fro
 
 ## References
 
-Lecture slides of Dr W.E. Sadoh, Department of Child Health, U.B.T.H, Benin City; standard embryology texts.
+Lecture material of Dr Stella Oji; standard embryology texts.

@@ -373,6 +373,12 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .celebits span{position:absolute;top:-30px;animation:cfall 1.7s ease-in forwards}
 @keyframes cfall{0%{transform:translateY(-30px) rotate(0);opacity:0}
   10%{opacity:1}100%{transform:translateY(105vh) rotate(320deg);opacity:0}}
+.strictov{position:fixed;inset:0;z-index:400;background:rgba(9,11,15,.86);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.strictbox{background:var(--panel);border:1px solid #ff8a4d55;border-radius:18px;padding:30px 26px;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.strictbox .sbig{font-size:46px;line-height:1;margin-bottom:8px}
+.strictbox b{display:block;font-size:20px;margin-bottom:6px}
+.strictbox p{color:var(--dim);font-size:14.5px;margin:0 0 20px}
+.strictbox .btn{width:100%;justify-content:center;margin-bottom:9px}
 .celebanner{position:fixed;top:22%;left:50%;transform:translateX(-50%);background:rgba(15,18,24,.94);
   border:1px solid var(--line);border-radius:14px;padding:14px 22px;font-weight:700;font-size:16px;
   color:#fff;animation:cpop .4s ease;box-shadow:0 10px 40px rgba(0,0,0,.5)}
@@ -572,7 +578,7 @@ let DATA = (()=>{
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, strict:false, lastNudge:0, quietStart:7, quietEnd:22}, d.settings||{});
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   return d;
@@ -1204,6 +1210,91 @@ function startHardQuick(){
   S={mode:'hard',key:'hardquick',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length}};
 }
+/* ---- notification nudge: a MIX of hard + due cards ---- */
+function nudgeItems(max){
+  max=max||8; const today=dayNum();
+  const hard=starItems();
+  const due=[];
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const id=cid(t.id,'recall',c), s=DATA.cards[id];
+    if(s && s.due<=today && !DATA.starred[id]) due.push({t,c,id,deck:'recall'}); }));
+  const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+  sh(hard); sh(due);
+  const out=[]; let hi=0,di=0;                    // interleave ~1 hard : 2 due
+  while(out.length<max && (hi<hard.length||di<due.length)){
+    if(hi<hard.length) out.push(Object.assign({hard:true},hard[hi++]));
+    if(out.length<max && di<due.length) out.push(due[di++]);
+    if(out.length<max && di<due.length) out.push(due[di++]);
+  }
+  return out;
+}
+function startNudgeSession(){
+  const items=nudgeItems(10);
+  S={mode:'daily',key:'nudge',label:'Quick review',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length}};
+}
+/* build the notification body carrying the actual card Q&A */
+function nudgeBody(items){
+  const clip=(s,n)=>{ s=(s||'').replace(/\s+/g,' ').trim(); return s.length>n?s.slice(0,n-1)+'…':s; };
+  const lines=items.slice(0,3).map(it=>{
+    const ic=it.hard?'🔴':'🔵';
+    const a=it.deck==='primer'?(it.c.lecturer||''):it.c.a;
+    return `${ic} ${clip(it.c.q,90)}\n     ↳ ${clip(a,100)}`;
+  });
+  const more=items.length-3;
+  return lines.join('\n\n') + (more>0?`\n\n+ ${more} more · tap to drill`:`\n\nTap to drill`);
+}
+/* short in-app beep alarm (only works while the app is open) */
+function playAlarm(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    const ac=new AC();
+    [0,0.45,0.9].forEach(dt=>{ const o=ac.createOscillator(), g=ac.createGain();
+      o.type='square'; o.frequency.value=880; o.connect(g); g.connect(ac.destination);
+      const t=ac.currentTime+dt;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.3,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
+      o.start(t); o.stop(t+0.34);
+    });
+    setTimeout(()=>{ try{ac.close();}catch(e){} },1600);
+  }catch(e){}
+}
+/* strict-mode blocking prompt shown in-app when a review is overdue */
+function strictOverlay(n){
+  if(document.getElementById('strictov')) return;
+  const o=document.createElement('div'); o.id='strictov'; o.className='strictov';
+  o.innerHTML=`<div class="strictbox"><div class="sbig">⏰</div>
+    <b>Time to review</b>
+    <p>${n} card${n===1?'':'s'} waiting. A two-minute round now keeps them from slipping.</p>
+    <button class="btn primary" onclick="document.getElementById('strictov').remove();go('nudge')">Start review now</button>
+    <button class="btn" onclick="document.getElementById('strictov').remove()">Snooze</button></div>`;
+  document.body.appendChild(o);
+}
+/* the recurring check — fires a nudge every N hours while conditions are met */
+let _lastTickShown=0;
+function nudgeTick(force){
+  try{
+    const s=DATA.settings;
+    if(!s.remindOn) return;
+    if(!('Notification' in window) || Notification.permission!=='granted') return;
+    const hr=new Date().getHours();
+    if(!force && (hr<(s.quietStart||7) || hr>=(s.quietEnd||22))) return;   // quiet hours
+    const every=Math.max(1,(s.remindEvery||2))*3600e3;
+    const now=Date.now();
+    if(!force && now-(s.lastNudge||0) < every) return;
+    if(todayLog().cards>0 && (now-(s.lastNudge||0)) < every) { /* studied recently is fine */ }
+    const items=nudgeItems(10);
+    if(!items.length) return;                     // nothing to review — no nag
+    s.lastNudge=now; persist();
+    const body=nudgeBody(items), url='./index.html#/nudge';
+    swPing('notify',{body,url,strict:s.strict});
+    swPing('payload',{body,url});
+    if(document.visibilityState==='visible' && now-_lastTickShown>5000){
+      _lastTickShown=now; playAlarm();
+      if(s.strict) strictOverlay(items.length);
+    }
+  }catch(e){}
+}
 function startHard(){
   const items=starItems();
   S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
@@ -1536,6 +1627,19 @@ function setBudget(v){ v=Math.max(0,Math.min(120,parseInt(v)||0)); DATA.daily.bu
 function setInterleave(on){ DATA.settings.interleave=!!on; persist(); render(); }
 function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exams[subId]; persist(); render(); }
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
+function setRemindEvery(v){ DATA.settings.remindEvery=Math.max(1,Math.min(12,parseInt(v)||2)); persist(); setupReminder&&setupReminder(); render(); }
+function setStrict(on){ DATA.settings.strict=!!on; persist(); render(); }
+function setQuiet(which,v){ v=Math.max(0,Math.min(23,parseInt(v)||0)); if(which==='start')DATA.settings.quietStart=v; else DATA.settings.quietEnd=v; persist(); render(); }
+function testNudge(){
+  if(!('Notification' in window)){ alert('Notifications are not supported here.'); return; }
+  if(Notification.permission!=='granted'){ enableReminders(); return; }
+  const items=nudgeItems(10);
+  if(!items.length){ alert('No hard or due cards to show yet — study a topic first, then star a few cards.'); return; }
+  DATA.settings.lastNudge=Date.now(); persist();
+  swPing('notify',{body:nudgeBody(items),url:'./index.html#/nudge',strict:DATA.settings.strict});
+  swPing('payload',{body:nudgeBody(items),url:'./index.html#/nudge'});
+  playAlarm();
+}
 async function enableReminders(){
   DATA.settings.remindOn=true; persist();
   try{
@@ -1572,14 +1676,25 @@ function pageSettings(){
         <input class="datein" type="date" value="${DATA.exams[sb.id]||''}" onchange="setExam('${sb.id}',this.value)"></div>`;}).join('')}
 
     <h2>Reminders</h2>
-    <div class="setrow"><div><b>Daily reminder</b><span>${
+    <div class="setrow"><div><b>Study reminders</b><span>${
       perm==='unsupported'?'Not supported in this browser.':
-      s.remindOn&&perm==='granted'?'On. It surfaces 3–5 hard cards to review; tap the notification to drill them. Install to your home screen (below) for the most reliable nudges.':
-      'Get a notification that brings up 3–5 of your hard cards to review. Works best once installed to your home screen.'}</span></div>
+      s.remindOn&&perm==='granted'?'On. Each nudge carries a mix of your hard + due cards (question and answer) so you can review straight from the notification; tap it to drill them.':
+      'Get notifications that carry a mix of your hard + due cards — question and answer — so you can review from the drop-down. Tap to drill.'}</span></div>
       ${s.remindOn?`<button class="btn" onclick="disableReminders()">Turn off</button>`
                   :`<button class="btn primary" onclick="enableReminders()">Turn on</button>`}</div>
-    ${s.remindOn?`<div class="setrow"><div><b>Reminder time</b><span>Roughly when you’d like the nudge.</span></div>
-      <input class="timein" type="time" value="${s.remindAt||'19:00'}" onchange="setRemindAt(this.value)"></div>`:''}
+    ${s.remindOn?`
+    <div class="setrow"><div><b>Remind me every</b><span>How often to nudge during your active hours.</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><input class="numin" type="number" min="1" max="12" value="${s.remindEvery||2}" onchange="setRemindEvery(this.value)"><span style="font-size:13px;color:var(--dim)">hours</span></div></div>
+    <div class="setrow"><div><b>Active hours</b><span>No nudges outside this window (so it won’t wake you).</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><input class="numin" style="width:56px" type="number" min="0" max="23" value="${s.quietStart}" onchange="setQuiet('start',this.value)"><span style="font-size:13px;color:var(--dim)">to</span><input class="numin" style="width:56px" type="number" min="0" max="23" value="${s.quietEnd}" onchange="setQuiet('end',this.value)"></div></div>
+    <div class="setrow"><div><b>Strict mode</b><span>Persistent notifications that stay until you act, plus a blocking prompt + alarm sound inside the app when a review is overdue.</span></div>
+      <button class="toggle ${s.strict?'on':''}" onclick="setStrict(${s.strict?'false':'true'})"><i></i></button></div>
+    <div class="setrow"><div><b>Test it now</b><span>Fire a sample nudge so you can set the sound and see the card in your notification shade.</span></div>
+      <button class="btn" onclick="testNudge()">Send test</button></div>
+    <div class="setrow" style="display:block"><b>To get sound &amp; make it reliable</b>
+      <span style="display:block;margin-top:6px">• <b>Install to your home screen</b> (below) — reminders barely work in a plain browser tab.<br>
+      • <b>Android:</b> long-press a MedBank notification → set its sound to a loud/alarm tone, and allow it through Do Not Disturb. Background nudges are best-effort (the system controls exact timing).<br>
+      • <b>iPhone:</b> Apple blocks background timers for web apps, so 2-hourly nudges only fire while MedBank is open or when you reopen it. Turn on Notifications for MedBank in iOS Settings.</span></div>`:''}
 
     <h2>Install as an app</h2>
     <div class="setrow"><div><b>Add MedBank to your home screen</b><span id="installhint">One-tap, full-screen, works offline. ${
@@ -1598,6 +1713,7 @@ function render(){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
+    case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
     case 'hard':      html=pageHard(); break;
     case 'week':      html=pageWeek(); break;
     case 'search':    html=pageSearch(); break;
@@ -1630,31 +1746,25 @@ function swPing(type,extra){ try{ if(navigator.serviceWorker&&navigator.serviceW
 async function setupReminder(){
   try{
     const reg=await navigator.serviceWorker.ready;
+    const every=Math.max(1,(DATA.settings.remindEvery||2))*3600e3;
     if('periodicSync' in reg){
       const st=await navigator.permissions.query({name:'periodic-background-sync'}).catch(()=>({state:'denied'}));
-      if(st.state==='granted'){ try{ await reg.periodicSync.register('medbank-daily',{minInterval:24*60*60*1000}); }catch(e){} }
+      if(st.state==='granted'){ try{ await reg.periodicSync.register('medbank-nudge',{minInterval:every}); }catch(e){} }
     }
+    // pre-stage current cards so a background notification can carry them
+    const items=nudgeItems(10); if(items.length) swPing('payload',{body:nudgeBody(items),url:'./index.html#/nudge'});
   }catch(e){}
 }
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').then(()=>{
     if(DATA.settings.remindOn) setupReminder();
     swPing('hardcount',{n:starCount()});     // keep the SW's hard-card count current
-    // in-app fallback: if reminders on, time has passed, and not studied today, nudge on open
-    try{
-      const t=DATA.settings.remindAt||'19:00', now=new Date();
-      const [hh,mm]=t.split(':').map(Number);
-      const studiedToday=(todayLog().cards>0);
-      if(DATA.settings.remindOn && 'Notification' in window && Notification.permission==='granted'
-         && !studiedToday && (now.getHours()>hh || (now.getHours()===hh && now.getMinutes()>=mm))){
-        const hc=starCount(), n=Math.min(5,hc);
-        const body = hc>0 ? `Review ${n} hard card${n===1?'':'s'} to keep them sharp.`
-                          : (dueCount()||'Your')+' cards are due — keep your streak alive.';
-        const url  = hc>0 ? './index.html#/hardnudge' : './index.html#/today';
-        swPing('notify',{body,url});
-      }
-    }catch(e){}
+    // catch-up nudge on open, then a recurring check every minute
+    setTimeout(()=>nudgeTick(false), 1500);
+    setInterval(()=>nudgeTick(false), 60e3);
   }).catch(()=>{}); });
+  // re-check whenever the app is brought back to the foreground
+  document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') nudgeTick(false); });
 }
 
 /* debug hook (harmless): lets tooling inspect the live study state */
