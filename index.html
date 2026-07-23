@@ -377,6 +377,65 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   border:1px solid var(--line);border-radius:14px;padding:14px 22px;font-weight:700;font-size:16px;
   color:#fff;animation:cpop .4s ease;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 @keyframes cpop{0%{transform:translateX(-50%) scale(.7);opacity:0}60%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(1);opacity:1}}
+
+/* ---- Active Recall Hub ---- */
+.health{display:flex;align-items:center;gap:20px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:18px 20px;margin-bottom:16px;border-left:4px solid var(--dim)}
+.health.good{border-left-color:var(--recall)}
+.health.ok{border-left-color:var(--com)}
+.health.bad{border-left-color:#ff6a6a}
+.hleft{text-align:center;flex:0 0 auto}
+.hbig{font-size:40px;font-weight:800;line-height:1}
+.hbig span{font-size:18px;color:var(--dim)}
+.hstat{font-size:12.5px;font-weight:600;color:var(--dim);margin-top:3px}
+.hmetrics{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.hmetrics>div{text-align:center}
+.hmetrics b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.hmetrics span{font-size:11.5px;color:var(--dim)}
+@media(max-width:560px){.health{flex-wrap:wrap}.hmetrics{margin-left:0;gap:16px}}
+
+.arcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:26px}
+.artop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.artop b{font-size:16px}
+.artime{font-size:13px;color:var(--dim);font-weight:600}
+.arrows{display:flex;flex-direction:column;gap:2px;margin-bottom:12px}
+.arrow{display:flex;align-items:center;gap:11px;padding:9px 4px;border-bottom:1px solid var(--line)}
+.arrow:last-child{border-bottom:0}
+.arrow .aic{font-size:15px;width:22px;text-align:center}
+.arrow .alabel{flex:1;font-size:14.5px}
+.arrow .acount{font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
+.arover{font-size:12.5px;color:var(--com);margin-bottom:12px}
+.arprog{margin-bottom:14px}
+.arprog .dbar{margin-bottom:6px}
+.arprog span{font-size:12.5px;color:var(--dim)}
+.arstart{width:100%;justify-content:center;font-size:16px;padding:15px}
+
+/* ---- session completion meter ---- */
+.meter{max-width:760px;margin:0 auto 14px}
+.mbar{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;margin-bottom:7px}
+.mbar>div{height:100%;background:linear-gradient(90deg,var(--recall),#6be3ad);transition:width .3s}
+.mrow{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim)}
+.mrow b{color:var(--text)}
+.confbanner{max-width:760px;margin:0 auto 12px;background:#c77dff18;border:1px solid #c77dff44;color:#d8b3ff;
+  border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;text-align:center}
+
+/* ---- done-for-today ---- */
+.donecard{max-width:640px;margin:20px auto;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:30px 26px;text-align:center}
+.donecard.clear{border-color:#3ecf8e55;box-shadow:0 0 40px #3ecf8e14}
+.donetick{font-size:48px;line-height:1;margin-bottom:4px}
+
+/* ---- topic pipeline ---- */
+.pipe{display:flex;align-items:center;gap:0;overflow-x:auto;padding:6px 2px 14px;margin-bottom:6px;scrollbar-width:none}
+.pipe::-webkit-scrollbar{display:none}
+.pstep{display:flex;flex-direction:column;align-items:center;gap:5px;flex:0 0 auto;min-width:58px}
+.pstep i{width:16px;height:16px;border-radius:50%;background:var(--panel2);border:2px solid var(--line)}
+.pstep span{font-size:10.5px;color:var(--dimmer);white-space:nowrap}
+.pstep.done i{background:var(--recall);border-color:var(--recall)}
+.pstep.done span{color:var(--dim)}
+.pstep.on i{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent)22}
+.pstep.on span{color:var(--text);font-weight:700}
+.pline{flex:1;height:2px;background:var(--line);min-width:14px;margin-top:-16px}
 </style>
 </head>
 <body>
@@ -498,7 +557,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    ================================================================== */
 const SKEY='medbank_v1';
 const LADDER=[3,7,14,30,60];           // days added after each correct answer
-const DEFAULTS={goal:40,newPerDay:20,floor:10};
+const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
 let DATA = (()=>{
   let d={};
@@ -647,6 +706,82 @@ function levelInfo(){
   return {name:cur.n, xp, i, next, pct: next?Math.min(100,Math.round((xp-cur.xp)/(next.xp-cur.xp)*100)):100,
           toNext: next?next.xp-xp:0};
 }
+
+/* ============ Active Recall engine ============ */
+const SEC_PER_CARD=20;
+function estMin(n){ return Math.max(1, Math.round(n*SEC_PER_CARD/60)); }
+/* a due card's review-age bucket, from its SRS box */
+function reviewBucket(box,starred){
+  if(starred || box<0) return 'hard';
+  if(box<=0) return 'd1';       // 24-hour (just learned / relapsed-then-passed)
+  if(box===1) return 'd3';      // 3-study-day
+  if(box===2) return 'wk';      // weekend
+  return 'lt';                  // maturing / long-term
+}
+const BUCKETS=[
+  {k:'hard', ic:'🔴', label:'Hard cards'},
+  {k:'new',  ic:'🆕', label:'New cards'},
+  {k:'d1',   ic:'🟡', label:'24-hour reviews'},
+  {k:'d3',   ic:'🔵', label:'3-day reviews'},
+  {k:'wk',   ic:'🟢', label:'Weekend reviews'},
+  {k:'lt',   ic:'🟣', label:'Maturing reviews'},
+  {k:'conf', ic:'🎲', label:'Confidence check'},
+];
+/* build a categorised, time-budgeted Active Recall session */
+function buildRecallSession(){
+  const today=dayNum(), due=[], neu=[];
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
+    const id=cid(t.id,'recall',c), s=DATA.cards[id];
+    if(s){ if(s.due<=today){ due.push({t,c,id,deck:'recall',box:s.box,starred:!!DATA.starred[id]}); } }
+    else neu.push({t,c,id,deck:'recall',isNew:true});
+  }));
+  const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const hard=sh(due.filter(x=>x.starred||x.box<0));
+  const reviews=sh(due.filter(x=>!(x.starred||x.box<0))).sort((a,b)=>a.box-b.box); // youngest interval first
+  const news=sh(neu).slice(0,DATA.daily.newPerDay);
+  const ordered=hard.concat(reviews,news);
+  // time budget (minutes; 0 = unlimited)
+  const budget=DATA.daily.budget||0;
+  let capped=ordered, over=0;
+  if(budget>0){ const max=Math.max(1,Math.floor(budget*60/SEC_PER_CARD));
+    if(ordered.length>max){ capped=ordered.slice(0,max); over=ordered.length-max; } }
+  // confidence check: up to 5 mastered (box>=3), not currently due, not already in session
+  const inSess=new Set(capped.map(x=>x.id)), mastered=[];
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
+    const id=cid(t.id,'recall',c), s=DATA.cards[id];
+    if(s&&s.box>=3&&s.due>today&&!inSess.has(id)) mastered.push({t,c,id,deck:'recall',conf:true});
+  }));
+  const conf=sh(mastered).slice(0,5);
+  // per-bucket counts (from the capped set)
+  const counts={hard:0,new:0,d1:0,d3:0,wk:0,lt:0,conf:conf.length};
+  capped.forEach(x=>{ if(x.isNew) counts.new++; else counts[reviewBucket(x.box,x.starred)]++; });
+  return {hard,reviews,news,capped,over,conf,counts,
+    totalCards:capped.length+conf.length};
+}
+/* review health: how caught-up the whole system is.
+   dueNow = due today or earlier; overdue = strictly past their date (you fell behind). */
+function reviewHealth(){
+  const today=dayNum(); let dueNow=0, overdue=0; const waiting=new Set();
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
+    const s=DATA.cards[cid(t.id,'recall',c)];
+    if(s&&s.due<=today){ dueNow++; waiting.add(t.id); if(s.due<today) overdue++; }
+  }));
+  const goal=DATA.daily.goal||40;
+  let pct = overdue===0 ? 100 : Math.max(20, Math.round(100 - overdue/(2*goal)*100));
+  const st = pct>=85 ? {k:'good',ic:'🟢',label:'On schedule'}
+           : pct>=60 ? {k:'ok',  ic:'🟡',label:'Slightly behind'}
+           :            {k:'bad', ic:'🔴',label:'Falling behind'};
+  return {pct,dueNow,overdue,hard:starCount(),topicsWaiting:waiting.size,status:st};
+}
+/* a topic's position along the spaced-repetition pipeline (0..5), -1 = not reviewed */
+const STAGE_NAMES=['Learning','24-hour','3-day','Weekend','Weekly','Long-term'];
+function topicStage(t){
+  const rc=t.recall||[]; if(!rc.length) return -1;
+  const seen=rc.map(c=>DATA.cards[cid(t.id,'recall',c)]).filter(Boolean);
+  if(!seen.length) return -1;
+  const avg=seen.reduce((a,s)=>a+Math.max(0,s.box),0)/seen.length;
+  return Math.min(5, Math.round(avg));
+}
 function dueCount(){
   const today=dayNum(); let n=0;
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
@@ -729,7 +864,7 @@ function renderNav(){
   const cards = (DB.stats.primerCards||0)+(DB.stats.recallCards||0);
   const st = curStreak();
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
-  h += it('today','◎','Today',dueCount()||'',r==='today'||r==='review');
+  h += it('today','🧠','Active Recall',dueCount()||'',r==='today'||r==='review');
   h += it('hard','★','Hard cards',starCount()||'',r==='hard');
   h += it('search','⌕','Search','',r==='search');
   h += it('builder','✎','Note Builder','',r==='builder');
@@ -825,7 +960,7 @@ function pageHome(){
     ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">
         ${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
     <div class="btnrow" style="margin-top:16px">
-      <button class="btn primary" onclick="go('today')">${due?('Start today · '+due+' due'):'Start today’s review'} →</button>
+      <button class="btn primary" onclick="go('today')">🧠 ${due?('Active Recall · '+due+' due'):'Open Active Recall'} →</button>
       ${resumeBtn}
     </div>
   </div>
@@ -970,11 +1105,23 @@ function pageTopic(id){
     ? `<div class="statusbar"><span class="slabel">Your progress on this topic</span>
          <div class="ssegs">${stbtn('notstarted','○ Not started')}${stbtn('inprogress','◐ In progress')}${stbtn('complete','● Complete')}</div></div>`
     : '';
+  // spaced-repetition pipeline
+  let pipeline='';
+  if(t.ready){
+    const stage=topicStage(t), rd=isRead(t.id);
+    const steps=['Read'].concat(STAGE_NAMES);   // Read, Learning, 24-hour, 3-day, Weekend, Weekly, Long-term
+    const activeIdx = stage<0 ? (rd?0:-1) : stage+1;
+    pipeline = `<div class="pipe">${steps.map((s,i)=>{
+      const done=i<activeIdx, on=i===activeIdx;
+      return `<div class="pstep ${done?'done':''} ${on?'on':''}"><i></i><span>${s}</span></div>`;
+    }).join('<div class="pline"></div>')}</div>`;
+  }
   return crumbs([{label:'Home',route:'home'},{label:t.subject.name,route:'subject/'+t.subject.id},
                  lecId?{label:t.lecturer,route:'lecturer/'+lecId}:{label:t.lecturer},{label:t.name}])+
     `<h1>${t.sn?t.sn+'. ':''}${esc(t.name)}</h1>
      <p class="sub">${[esc(t.lecturer),esc(t.subject.name),esc([t.day,t.date,t.time].filter(Boolean).join(' '))].filter(Boolean).join(' · ')}</p>
      ${statusBar}
+     ${pipeline}
      ${t.ready?`<div class="tabs">${T('note','Built note')}${T('simplified','Simplified note')}${T('cards','Anki cards')}</div>`:''}
      ${body}`;
 }
@@ -1035,6 +1182,13 @@ function startSession(mode){
      session:{done:0,correct:0,total:items.length}};
 }
 function runSession(mode){ startSession(mode); go('review'); }
+/* the full Active Recall session: hard → reviews → new → confidence check, time-budgeted */
+function startRecallSession(){
+  const b=buildRecallSession();
+  const items=b.capped.concat(b.conf);
+  S={mode:'daily',key:'recall',label:'Active Recall',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length,over:b.over,confN:b.conf.length,plan:b.counts}};
+}
 function nextNewTopic(){
   const rank=subjectExamRank();
   const cands=allTopics.filter(t=>t.ready && status(t.id)==='notstarted');
@@ -1057,14 +1211,19 @@ function pageStudy(topicId,deck){
        + cardView(false);
 }
 
-/* daily review runner */
+/* daily review runner with live completion meter */
 function pageReview(){
   if(!S || S.mode!=='daily') startToday();
   if(!S.items.length) return caughtUp();
-  if(S.i>=S.items.length) return sessionSummary('Back to plan','today');
-  IMGBASE = S.items[S.order[S.i]].t.imgBase || '';
-  return `<div class="todaybar"><span class="pill" style="background:#3ecf8e22;color:var(--recall);margin:0">◎ Today’s review</span>
-      <span class="counter">${S.session.done} done · ${Math.max(0,S.items.length-S.i)} left</span></div>`
+  if(S.i>=S.items.length) return sessionSummary('Back to Active Recall','today');
+  const it=S.items[S.order[S.i]];
+  IMGBASE = it.t.imgBase || '';
+  const total=S.items.length, done=S.i, pct=Math.round(done/total*100), left=total-done;
+  return `<div class="meter">
+      <div class="mbar"><div style="width:${pct}%"></div></div>
+      <div class="mrow"><span><b>${done}</b> / ${total} done</span><span>~${estMin(left)} min left</span></div>
+    </div>
+    ${it.conf?'<div class="confbanner">🎲 Confidence check — a mastered card, just making sure it stuck</div>':''}`
     + cardView(true);
 }
 /* hard-card review runner */
@@ -1095,20 +1254,23 @@ function caughtUp(){
 function sessionSummary(backLabel,backRoute){
   const s=S.session, acc=s.done?Math.round(s.correct/s.done*100):0;
   if(s.done>=20 && s.correct===s.done && !DATA.flags.perfect){ DATA.flags.perfect=1; persist(); }
-  const rated = s.correct+ (s.done-s.correct);
-  return `<h1>Session complete</h1>
-    <div class="summary">
+  const remain=dueCount(), cleared=(remain===0);
+  return `<div class="donecard ${cleared?'clear':''}">
+      <div class="donetick">${cleared?'✅':'✓'}</div>
+      <h1 style="margin:6px 0 4px">${cleared?'Today’s Active Recall complete':'Session complete'}</h1>
+      <p class="sub" style="margin-bottom:20px">${cleared?'Next review: tomorrow. Nothing left due today.':`${remain} card${remain===1?'':'s'} still due — do another round when you can.`}</p>
       <div class="sgrid">
         <div class="sm"><b>${s.done}</b><span>cards</span></div>
         <div class="sm"><b style="color:var(--recall)">${s.correct}</b><span>got it</span></div>
         <div class="sm"><b style="color:var(--com)">${Math.max(0,s.done-s.correct)}</b><span>missed</span></div>
         <div class="sm"><b>${acc}%</b><span>accuracy</span></div>
       </div>
+      ${s.confN?`<p class="sub" style="text-align:center;margin-top:14px">🎲 ${s.confN} confidence card${s.confN===1?'':'s'} checked — any you missed quietly re-entered the pipeline.</p>`:''}
+      ${s.over?`<p class="sub" style="text-align:center">${s.over} extra due card${s.over===1?'':'s'} were held for tomorrow to fit your time budget.</p>`:''}
       <div class="sflame">🔥 ${curStreak()}-day streak</div>
-      <p class="sub" style="text-align:center">${s.correct===s.done&&s.done?'Flawless. Future Dr. Frank thanks you.':'Missed cards come back tomorrow — that’s the system working.'}</p>
-      <div class="btnrow" style="justify-content:center">
+      <div class="btnrow" style="justify-content:center;margin-top:16px">
         <button class="btn primary" onclick="go('${backRoute||'home'}')">${backLabel||'Back to dashboard'}</button>
-        ${dueCount()?`<button class="btn" onclick="startToday();go('review')">Keep going · ${dueCount()} due</button>`:''}
+        ${remain?`<button class="btn" onclick="startRecallSession();go('review')">Keep going · ${remain} due</button>`:''}
       </div></div>`;
 }
 
@@ -1125,42 +1287,53 @@ function modesBar(){
     ${b('cram','🎲','Exam cram', started?'random mix':'start a topic', started===0)}
   </div>`;
 }
-/* Smart Today's Plan */
+/* 🧠 Active Recall Hub — one screen that builds and runs your whole session */
 function pageToday(){
-  const q=buildQueue(), due=q.due.length, neu=q.neu.length, tl=todayLog();
-  const nextNew=nextNewTopic();
-  const hard=starCount(), started=startedTopics().length;
-  const reviewClear = due===0;
-  let items='';
-  items += planItem(reviewClear && tl.cards>0 ? 'done':'', '◎',
-    (due+neu>0)?`Review ${due} due${neu?` + ${neu} new`:''} Recall card${(due+neu)===1?'':'s'}`:'Recall review',
-    (due+neu>0)?(DATA.settings.interleave?'Mixed across every topic you’ve started — the daily backbone.':'Grouped by subject (nearest exam first).')
-               :(started?'Nothing due right now. You’re current.':'Start a topic below to begin building your review queue.'),
-    (due+neu>0)?`<button class="btn primary" onclick="go('review')">Start review →</button>`:'');
-  if(nextNew){
-    const exStr=examDays(nextNew.subject.id); const exTag=(exStr!=null&&exStr>=0)?` · ${nextNew.subject.short} exam in ${exStr}d`:'';
-    items += planItem('', '✎', `Learn a new topic: ${esc(nextNew.name)}`,
-      `Read the simplified note, then run its Primer deck once.${exTag}`,
-      `<button class="btn" onclick="go('topic/${nextNew.id}')">Open topic</button>
-       <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`);
-  }
-  if(hard>0){
-    items += planItem('', '★', `Review ${hard} hard card${hard===1?'':'s'}`,
-      'The cards you starred as tricky.',
-      `<button class="btn" onclick="go('hard')">Review hard cards →</button>`);
-  }
-  const goal=DATA.daily.goal, floor=DATA.daily.floor;
+  const h=reviewHealth(), b=buildRecallSession(), tl=todayLog();
+  const nextNew=nextNewTopic(), started=startedTopics().length;
+  const goal=DATA.daily.goal, floor=DATA.daily.floor, budget=DATA.daily.budget||0;
+  const total=b.totalCards;
+  // categorised breakdown (only non-empty)
+  const rows=BUCKETS.filter(x=>b.counts[x.k]>0).map(x=>
+    `<div class="arrow"><span class="aic">${x.ic}</span><span class="alabel">${x.label}</span>
+       <span class="acount">${b.counts[x.k]}</span></div>`).join('');
   const goalPct=Math.min(100,Math.round(tl.cards/goal*100));
   const hitFloor=tl.cards>=floor && tl.cards<goal;
-  return `<h1>Today’s plan</h1>
-    <p class="sub">Do what you can. Even hitting your ${floor}-card floor keeps the streak.</p>
-    <div class="dgoal" style="max-width:520px;margin-bottom:18px">
-      <div class="dgrow"><span>Cards done today</span><b>${tl.cards} / ${goal}</b></div>
-      <div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
-      ${tl.cards>=goal?'<div class="goalhit">🎉 Daily goal complete.</div>':hitFloor?'<div class="goalhit" style="color:var(--com)">✓ Minimum day done — streak safe.</div>':''}
+  return `<h1>🧠 Active Recall</h1>
+    <p class="sub">Open it and go — MedBank decides what to review.</p>
+
+    <div class="health ${h.status.k}">
+      <div class="hleft"><div class="hbig">${h.pct}<span>%</span></div>
+        <div class="hstat">${h.status.ic} ${h.status.label}</div></div>
+      <div class="hmetrics">
+        <div><b>${h.dueNow}</b><span>due now</span></div>
+        <div><b style="${h.overdue?'color:#ff8a4d':''}">${h.overdue}</b><span>overdue</span></div>
+        <div><b>${h.topicsWaiting}</b><span>topics waiting</span></div>
+        <div><b>${h.hard}</b><span>hard cards</span></div>
+      </div>
     </div>
+
+    ${total>0 ? `
+    <div class="arcard">
+      <div class="artop"><b>Today’s session</b><span class="artime">⏱ ~${estMin(total)} min · ${total} card${total===1?'':'s'}</span></div>
+      <div class="arrows">${rows}</div>
+      ${b.over>0?`<div class="arover">+${b.over} more due — held for tomorrow to fit your ${budget}-min budget.</div>`:''}
+      <div class="arprog"><div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
+        <span>${tl.cards} / ${goal} cards today${tl.cards>=goal?' 🎉':hitFloor?' · floor met ✓':''}</span></div>
+      <button class="btn primary arstart" onclick="startRecallSession();go('review')">▶ Start today’s session</button>
+    </div>`
+    : `<div class="arcard"><div class="alldone" style="margin:0;border:0;padding:10px">
+        <div class="big">✓</div><b>${started?'Nothing to review right now.':'Nothing started yet.'}</b>
+        <p>${started?'You’re fully caught up. Learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div></div>`}
+
+    <h2>Or pick a mode</h2>
     ${modesBar()}
-    <div class="plan">${items}</div>`;
+
+    ${nextNew?`<h2>Learn something new</h2>
+      <div class="plan">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
+        `Read the simplified note, then run its Primer once.${(()=>{const e=examDays(nextNew.subject.id);return (e!=null&&e>=0)?` · ${nextNew.subject.short} exam in ${e}d`:'';})()}`,
+        `<button class="btn" onclick="go('topic/${nextNew.id}')">Open topic</button>
+         <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`)}</div>`:''}`;
 }
 function planItem(state,icon,title,desc,action){
   return `<div class="planitem ${state}">
@@ -1254,7 +1427,10 @@ function celebrate(kind,text){
 function rateCard(ok){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor;
-  markActive(); rateSRS(it.id,ok); logRate(ok); touchTopic(it.t.id);
+  markActive();
+  if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
+  else rateSRS(it.id,ok);
+  logRate(ok); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
   persist();
@@ -1347,6 +1523,7 @@ function searchRun(){
 /* ---------- settings ---------- */
 function setGoal(v){ v=Math.max(5,Math.min(300,parseInt(v)||40)); DATA.daily.goal=v; if(DATA.daily.floor>v)DATA.daily.floor=v; persist(); render(); }
 function setFloor(v){ v=Math.max(1,Math.min(DATA.daily.goal,parseInt(v)||10)); DATA.daily.floor=v; persist(); render(); }
+function setBudget(v){ v=Math.max(0,Math.min(120,parseInt(v)||0)); DATA.daily.budget=v; persist(); render(); }
 function setInterleave(on){ DATA.settings.interleave=!!on; persist(); render(); }
 function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exams[subId]; persist(); render(); }
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
@@ -1371,6 +1548,8 @@ function pageSettings(){
       <input class="numin" type="number" min="5" max="300" value="${d.goal}" onchange="setGoal(this.value)"></div>
     <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — hitting it keeps your streak.</span></div>
       <input class="numin" type="number" min="1" max="${d.goal}" value="${d.floor}" onchange="setFloor(this.value)"></div>
+    <div class="setrow"><div><b>Session time budget</b><span>Cap each Active Recall session (minutes). Extra due cards wait for tomorrow. 0 = no limit.</span></div>
+      <input class="numin" type="number" min="0" max="120" value="${d.budget||0}" onchange="setBudget(this.value)"></div>
 
     <h2>Review order</h2>
     <div class="setrow"><div><b>Mix subjects together</b><span>On = interleaved (better for exams). Off = one subject at a time (nearest exam first).</span></div>
