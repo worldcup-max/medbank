@@ -1,0 +1,106 @@
+{
+  "deck": "Recall Cards",
+  "topic": "Chemotherapy / Hormone Therapy in Gynaecology",
+  "cards": [
+    {
+      "q": "Define chemotherapy.",
+      "a": "**The treatment of disease using chemical substances — the ideal agent selectively kills tumour cells with minimal toxicity to normal tissue.**\n\n## Understanding it\nBreak the definition into two halves:\n\n- **\"Chemical substances\"** — drugs, as opposed to surgery (cutting it out) or radiotherapy (radiation).\n- **\"Selectively kills tumour cells with minimal normal-tissue toxicity\"** — this is the *ideal*, the goal every chemo drug aims for.\n\n>> The word **\"ideal\"** matters: no real drug is perfectly selective. That gap between what we want (kill only tumour) and reality (some normal cells die too) is **exactly why side effects exist.**"
+    },
+    {
+      "q": "Do tumour cells divide faster than normal cells? Explain.",
+      "a": "**No — tumour cells do not have a faster generation time. Tumours grow faster because more of their cells are in the active phases of replication.**\n\n## Understanding it\nThis surprises most students, so slow down:\n\n- **Generation time** = how long one cell takes to complete a cycle and divide. In tumour cells this is **not shorter** than normal.\n- What *is* different: a **larger FRACTION** of tumour cells are dividing at any moment.\n\n>> So the tumour grows faster **as a population**, not because each cell is quicker.\n\n**Why this matters:** chemo attacks **dividing** cells. More dividing cells in the tumour → the tumour takes more damage. But fast-dividing normal tissue (marrow, gut, hair) is caught too — which is why those are the classic side effects."
+    },
+    {
+      "q": "What is doubling time, and how does it differ between primary tumours and metastases?",
+      "a": "**Doubling time is the time it takes for a tumour mass to double in size; metastases generally have faster doubling times than the primary lesion.**\n\n## Understanding it\n- **Doubling time** = a simple measure of how fast a tumour grows — how long to become twice as big.\n- It **varies widely** between different tumours.\n\n>> **Metastases double FASTER than the primary.**\n\nWhy does that matter? Because chemo works on dividing cells, faster-doubling metastases can actually be **more responsive** to chemo — but they also **progress faster** if left untreated. Growth rate cuts both ways."
+    },
+    {
+      "q": "How do alkylating agents work, and give examples.",
+      "a": "**They cross-link the strands of DNA, preventing protein synthesis and cell division. Examples: cyclophosphamide, ifosfamide, melphalan.**\n\n## Understanding it\nPicture DNA as a ladder that must **unzip** to be copied.\n\n- Alkylating agents **glue the two strands together** (cross-link them).\n- A glued ladder **can't unzip** → the cell **can't copy its DNA** → it **can't divide.**\n\n>> **Alkylating = \"glue the DNA strands so the cell can't copy them.\"**\n\nRemember the family names by the \"-phosphamide\" ending: **cyclophosphamide, ifosfamide.**"
+    },
+    {
+      "q": "How do antimetabolites work, and give examples.",
+      "a": "**They inhibit metabolic processes required for DNA and/or RNA synthesis. Examples: methotrexate, 5-fluorouracil.**\n\n## Understanding it\nTo build DNA/RNA, a cell needs **raw materials** (nucleotide building blocks) made by specific metabolic steps.\n\n- Antimetabolites **look like** those building blocks or **block the enzymes** that make them.\n- The cell tries to use them, but they **jam the machinery** → no DNA/RNA can be built.\n\n>> **Antimetabolite = \"fake building block that blocks DNA/RNA construction.\"**\n\n**Methotrexate** is the classic — remember it, because it's the drug for low-risk gestational trophoblastic disease."
+    },
+    {
+      "q": "How do plant alkaloids work, and give examples.",
+      "a": "**They arrest cells in metaphase by binding the microtubular protein used to form the mitotic spindle. Examples: vincristine, vinblastine, etoposide, taxol (paclitaxel).**\n\n## Understanding it\nWhen a cell divides, it builds a **mitotic spindle** (made of microtubules) to **pull the chromosomes apart** into the two daughter cells.\n\n- Plant alkaloids **bind the microtubule protein** so the spindle can't work.\n- The cell gets **stuck in metaphase** — chromosomes lined up but unable to separate → division fails.\n\n>> **Plant alkaloid = \"jam the spindle so the cell freezes in metaphase.\"**\n\n**Vincristine** is the one to link with **neurotoxicity** (nerve damage)."
+    },
+    {
+      "q": "What are anti-tumour antibiotics and give examples.",
+      "a": "**Antineoplastic agents isolated as natural products from soil fungi. Examples: bleomycin, adriamycin (doxorubicin), mitomycin, dactinomycin.**\n\n## Understanding it\n- Despite the name \"antibiotics,\" these are **cancer drugs**, not infection drugs.\n- They were **discovered as natural products made by fungi** in the soil.\n\n>> The two to remember for their toxicities: **bleomycin → lungs and skin**, and **adriamycin (doxorubicin) → the heart.**"
+    },
+    {
+      "q": "Explain first-order kinetics in chemotherapy and its clinical implication.",
+      "a": "**Chemotherapy kills a constant FRACTION of cells, not a constant number — so treatment must be given in repeated cycles.**\n\n## Understanding it\nWork through the numbers:\n\n- Suppose a dose kills **99%** of tumour cells.\n- From **1,000,000** cells you go to **10,000** — not to zero.\n- The next identical dose kills 99% of those → **100 left**, and so on.\n\n>> **You can never kill the last cell in one dose** — each dose removes the same *fraction*, never the same *number*.\n\n**The implication:** you need **repeated cycles**, each knocking down another fraction, to keep reducing the tumour toward cure."
+    },
+    {
+      "q": "What is the therapeutic index, and why is haematologic toxicity important?",
+      "a": "**The therapeutic index is the ratio of the therapeutic dose to the toxic dose. Haematologic (bone marrow) toxicity — leukopenia, thrombocytopenia and anaemia — is the most frequent side effect.**\n\n## Understanding it\n- **Therapeutic index** = (dose that helps) ÷ (dose that harms). A **bigger gap = safer drug.**\n- Chemo is deliberately dosed to produce **some** toxicity — that's the price of being maximally effective.\n\n**Why the marrow suffers most:**\n\n>> The bone marrow is a **fast-dividing tissue** (constantly making blood cells) — and chemo attacks dividing cells. So marrow is hit hardest → **low white cells (infection), low platelets (bleeding), low red cells (anaemia).**\n\nThis is why blood counts are monitored before every cycle."
+    },
+    {
+      "q": "What is the Goldie-Coldman hypothesis and why does it favour combination chemotherapy?",
+      "a": "**By the Goldie-Coldman hypothesis, tumour cells start sensitive to drugs but develop resistance at variable rates; a tumour is only curable if no resistant cell line is present or develops. To minimise resistance, multiple-drug regimens are preferred to single-drug therapy.**\n\n## Understanding it\nFollow the logic step by step:\n\n- Most cells begin **sensitive** to chemo.\n- Over time, random mutations create **resistant** clones.\n- If a resistant clone exists or arises, **single-drug therapy can't cure** — that clone survives and regrows.\n\n>> **The fix: give SEVERAL drugs with different mechanisms at once.**\n\n**Why combination works:** a single cell is very unlikely to be resistant to **three or four unrelated mechanisms simultaneously.** Each drug kills from a different angle, catching the cells the others miss."
+    },
+    {
+      "q": "What is pleiotropic (multidrug) resistance?",
+      "a": "**When certain drug-resistance mechanisms confer cross-resistance to structurally dissimilar drugs that have different mechanisms of action.**\n\n## Understanding it\nNormally you'd expect a cell resistant to drug A to still be killed by drug B (which works differently). Pleiotropic resistance breaks that assumption:\n\n- The cell develops a mechanism (e.g. a pump that **ejects drugs**) that works against **many unrelated drugs at once.**\n\n>> So one resistance change makes the cell resistant to **several drugs it has never even seen** — the worst-case scenario, and part of why some tumours become untreatable."
+    },
+    {
+      "q": "Define complete and partial remission.",
+      "a": "**Complete remission is the disappearance of all objective evidence of tumour with complete resolution of all attributable signs and symptoms. Partial remission is a reduction of at least 50% in all measurable lesions, some subjective improvement, and no new lesions during therapy.**\n\n## Understanding it\nThink of them as two levels of response:\n\n- **Complete** = **everything gone** — no measurable tumour, no symptoms. The goal.\n- **Partial** = **at least halved**, patient feels somewhat better, and **crucially no new lesions.**\n\n>> The **\"no new lesions\"** part of partial remission matters: if the main tumour shrinks but new ones appear, that's **not** remission — it's progression."
+    },
+    {
+      "q": "Which gynaecological cancer responds best to chemotherapy, and what is the first-line regimen?",
+      "a": "**Ovarian cancer responds best; chemotherapy is standard after initial surgery, and the first-line regimen is a platinum drug (cisplatin or carboplatin) plus paclitaxel.**\n\n## Understanding it\n- Of all gynae cancers, **ovarian is the most chemosensitive** — so after **surgery** to remove/debulk the tumour, **chemo** is the standard follow-up.\n- First-line = **platinum + paclitaxel** (a plant alkaloid).\n\n>> **Remember the pairing: ovarian cancer = platinum + paclitaxel.**\n\nIf the patient is **hypersensitive to paclitaxel**, substitute **cyclophosphamide or topotecan.** For **malignant germ-cell** ovarian tumours, use **BEP (bleomycin, etoposide, cisplatin).**"
+    },
+    {
+      "q": "How is chemotherapy used in cervical cancer?",
+      "a": "**Squamous cervical cancer is chemosensitive; chemoradiation (chemotherapy combined with concurrent radiotherapy) is now an important modality, using cisplatin or cisplatin + 5-FU. Platinum-based chemoradiation gives about a 30% reduction in the risk of death in locally advanced disease compared with radiotherapy alone.**\n\n## Understanding it\n- Older practice reserved chemo for disease too advanced for surgery/radiotherapy, but results were limited (poor kidney function, fistulae and pelvic sepsis restricted it).\n- The modern approach combines **chemo + radiotherapy at the same time = chemoradiation.**\n\n>> The chemo **sensitises** the tumour to radiation, so together they work better than either alone.\n\n**The number to quote:** platinum-based chemoradiation → **~30% reduction in risk of death** in locally advanced cervical cancer versus radiotherapy alone. Most effective agents: **cisplatin, or cisplatin + 5-FU.**"
+    },
+    {
+      "q": "What is the role of chemotherapy in vaginal cancer?",
+      "a": "**Chemotherapeutic agents, including cisplatin, have NO significant activity in vaginal cancer.**\n\n## Understanding it\nThis is the **exception** worth memorising:\n\n- Squamous cervical cancer responds to cisplatin — you might assume the histologically similar **vaginal** cancer would too.\n- But it **doesn't** — even cisplatin has **no significant activity.**\n\n>> **Vaginal cancer = the gynae cancer where chemo does NOT work.** If an exam asks which gynae cancer is chemo-unresponsive, this is the answer."
+    },
+    {
+      "q": "What are the indications for chemotherapy in gestational trophoblastic disease (GTD)?",
+      "a": "**Beta-hCG exceeding 20,000 IU/ml persisting 4 weeks after evacuation; rising beta-hCG levels; histological identification of choriocarcinoma; and metastasis.**\n\n## Understanding it\nβ-hCG is made by trophoblast, so it is the **tumour marker** — its level tracks how much disease is present. After a molar pregnancy is evacuated, β-hCG should **fall.** Give chemo when the numbers or histology say the disease won't resolve on its own:\n\n- **β-hCG > 20,000 still there at 4 weeks** → too much persistent tissue\n- **Rising β-hCG** → the tumour is growing\n- **Choriocarcinoma on histology** → frank malignancy\n- **Metastasis** → it has spread\n\n>> **The theme: a marker that is high, rising, malignant, or spread = treat.**\n\nGTD is one of the **most chemo-curable** cancers, and β-hCG lets you monitor the response precisely."
+    },
+    {
+      "q": "How is the chemotherapy regimen chosen in GTD by risk?",
+      "a": "**Patients are scored by the WHO system into low risk (0-4) → methotrexate alone (± folinic acid) or actinomycin D; medium risk (5-7) → combination such as EMA-CO; and high risk (>8) → EMA-CO, and if it fails, cisplatin/etoposide/bleomycin/ifosfamide.**\n\n## Understanding it\nThe **WHO score** adds up risk factors (age, antecedent pregnancy, β-hCG level, interval, tumour size, sites and number of metastases, prior chemo), each 0–4, then sorts patients:\n\n- **Low risk** → a **single agent** is enough → **methotrexate.**\n- **Medium/high risk** → need **combination** → **EMA-CO** (etoposide, methotrexate, actinomycin D, cyclophosphamide, vincristine).\n\n>> **The one line to remember: LOW risk = methotrexate; HIGHER risk = EMA-CO.**\n\nThis mirrors the resistance principle — higher-risk (more) disease needs multiple drugs to prevent resistant clones surviving."
+    },
+    {
+      "q": "Which chemotherapy drug is nephrotoxic?",
+      "a": "**Cisplatin (nephrotoxicity is much less with carboplatin).**\n\n## Understanding it\n- **Cisplatin** damages the kidneys — so patients need good hydration and kidney monitoring during treatment.\n- Its cousin **carboplatin** is **much less** nephrotoxic, which is why carboplatin is often preferred when kidney function is a concern.\n\n>> **Memory hook: cisPLATin → the platinum is cleared through the kidneys → kidney toxicity.**"
+    },
+    {
+      "q": "Which chemotherapy drug is cardiotoxic?",
+      "a": "**Adriamycin (doxorubicin).**\n\n## Understanding it\n- **Adriamycin (doxorubicin)** — an anti-tumour antibiotic — damages **heart muscle**, and can cause a dose-related cardiomyopathy.\n- It also causes **phlebitis/sclerosis** of veins (it's a strong sclerosant).\n\n>> **Memory hook: Adriamycin → the \"A\" for heart Attack.** Cardiac function is checked before and during treatment with it."
+    },
+    {
+      "q": "Which chemotherapy drug causes pulmonary toxicity?",
+      "a": "**Bleomycin (methotrexate can also cause pulmonary toxicity).**\n\n## Understanding it\n- **Bleomycin** classically causes **pulmonary fibrosis** (scarred, stiff lungs) — a dose-limiting toxicity.\n- It also causes **skin exfoliation** and **neurologic** effects.\n\n>> **Memory hook: BleomycinB → Breathing (lungs).**\n\nThis matters clinically because bleomycin is part of **BEP** (used in ovarian germ-cell tumours), so lung function is monitored."
+    },
+    {
+      "q": "List the drug-specific toxicities you should know for chemotherapy.",
+      "a": "**Cisplatin → kidney; adriamycin → heart; bleomycin → lung and skin; methotrexate → liver (and lung, GIT, mouth); vincristine/bleomycin → nerves; adriamycin → phlebitis. Bone marrow depression and alopecia occur with almost all agents.**\n\n## Understanding it\nEveryone gets **marrow suppression** (commonest) and **hair loss** — those aren't discriminating. Exams test the **organ-specific** ones, so learn them as pairs:\n\n>> **Cisplatin → Kidney**\n>> **Adriamycin → Heart**\n>> **Bleomycin → Lung (Breathing)**\n>> **Methotrexate → Liver**\n>> **Vincristine → Nerves**\n\n**Memory:** cisplatin-kidney, adriamycin (A = heart Attack), Bleomycin = Breathing, methotrexate-liver, vincristine-nerves. These pairs answer most side-effect questions."
+    },
+    {
+      "q": "What is nausea and vomiting from chemotherapy managed with?",
+      "a": "**Metoclopramide, dexamethasone, lorazepam and 5-HT (serotonin) antagonists.**\n\n## Understanding it\nChemo triggers vomiting through several pathways, so several drug classes are used, often together:\n\n- **5-HT (serotonin) antagonists** (e.g. ondansetron) — the mainstay for chemo-induced vomiting\n- **Dexamethasone** — a steroid that adds anti-emetic effect\n- **Metoclopramide** — speeds gastric emptying\n- **Lorazepam** — helps with anticipatory nausea (anxiety-driven)\n\n>> **Combining agents that work by different routes controls nausea far better than one drug** — the same \"combination beats a single mechanism\" theme seen throughout chemotherapy."
+    },
+    {
+      "q": "What are hormones, and list the broad indications for hormone therapy in gynaecology.",
+      "a": "**Hormones are chemical substances produced by one organ that exert effects on distant target organs. Indications: hormonal contraception, hormone replacement therapy, infertility/assisted reproduction, pregnancy maintenance, abnormal uterine bleeding, hyperandrogenism/hirsutism, gynaecological oncology/endometriosis, and miscellaneous uses.**\n\n## Understanding it\n- The defining feature of a **hormone**: it is **made in one place but acts somewhere else** (a distant target organ), carried by the blood.\n- In gynaecology, hormones are used **all over** — think of the reproductive lifespan:\n\n>> **Prevent pregnancy** (contraception) → **achieve pregnancy** (infertility) → **maintain pregnancy** → **control bleeding** → **treat menopause** (HRT) → **treat hormone-driven disease** (endometriosis, some cancers).\n\nSo hormone therapy spans the whole of a woman's reproductive and post-reproductive life."
+    },
+    {
+      "q": "Describe the Yuzpe regimen for emergency contraception.",
+      "a": "**Two combined pills each containing 50 mcg of ethinylestradiol and 0.5 mg of norgestrel, taken by mouth within 72 hours of unprotected intercourse and repeated 12 hours later.**\n\n## Understanding it\n- **When:** as soon as possible, within **72 hours** of unprotected sex — the sooner the better.\n- **What:** a **high dose of combined oestrogen + progestogen**, given as 2 pills now and 2 more 12 hours later.\n\n>> **The number to remember: within 72 hours, repeated after 12 hours.**\n\nThis is the classic \"morning-after\" combined-pill method. (Other options for emergency contraception include a **copper IUD** or antiprogesterones like mifepristone.)"
+    },
+    {
+      "q": "What are the main indications for hormone replacement therapy (HRT), and the key menopausal hazard?",
+      "a": "**HRT is used for vasomotor symptoms (hot flushes — mainly oestradiol), osteoporosis, genitourinary atrophy (dryness, dyspareunia, itching), hypogonadism, premature ovarian failure, and hypothalamic-pituitary suppression. Osteoporosis is the most important health hazard of menopause, treated with the lowest effective dose (e.g. 0.625 mg conjugated oestradiol).**\n\n## Understanding it\nMenopause = falling **oestrogen**, so HRT replaces it. The main reasons:\n\n- **Hot flushes (vasomotor symptoms)** → **oestrogen** is the key treatment\n- **Genitourinary atrophy** → dryness, painful sex, itching\n- **Osteoporosis** → oestrogen loss weakens bone\n\n>> **The single most important menopausal hazard is OSTEOPOROSIS** — because fragility fractures cause major morbidity and mortality.\n\n**Key safety principle:** use the **lowest effective dose** (e.g. 0.625 mg conjugated oestradiol) to gain benefit while minimising risks."
+    }
+  ]
+}
