@@ -9873,547 +9873,1499 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "What is the integumentary system?",
-         "a": "The skin and its accessory organs — hair, nails and glands."
+         "a": "**The skin together with its accessory organs — hair, nails and glands.**\n\n## Understanding it\n- 'Integument' = covering; the system is the skin **plus** its appendages.\n- Accessory organs: hair, nails, and glands (sebaceous + sweat).\n\n>> Integumentary system = skin + hair + nails + glands.",
+         "opts": [
+          "The epidermis and dermis only",
+          "The skin, subcutaneous fat and muscle",
+          "The skin, mucous membranes and lymph nodes",
+          "The skin plus hair, nails and glands"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the word 'integument' mean?",
-         "a": "Covering. The skin is the outer covering of the body."
+         "a": "**Covering — the skin is the outer covering of the body.**\n\n## Understanding it\n- 'Integument' literally means a **covering/coat**.\n\n>> Integument = covering.",
+         "opts": [
+          "Covering",
+          "Sensation",
+          "Protection",
+          "Barrier"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the accessory organs of the skin.",
-         "a": "Hair, nails and glands."
+         "a": "**Hair, nails and glands.**\n\n## Understanding it\n- The skin's appendages are hair, nails, and glands (sebaceous and sweat).\n\n>> Accessory organs: hair, nails, glands.",
+         "opts": [
+          "Nails, nerves and melanocytes",
+          "Hair, sweat and lymphatics",
+          "Hair, nails and blood vessels",
+          "Hair, nails and glands"
+         ],
+         "ans": 3
         },
         {
          "q": "Your lecturer says the skin is 'more than a simple body covering'. What three specialized components does she list?",
-         "a": "Glands that secrete several types of fluids; nerves that carry impulses; and blood vessels that aid in the regulation of body temperature."
+         "a": "**Glands that secrete fluids; nerves that carry impulses; and blood vessels that aid regulation of body temperature.**\n\n## Understanding it\n- The lecturer highlights glands, nerves and blood vessels as what makes skin 'more than a covering'.\n\n>> Glands, nerves, blood vessels.",
+         "opts": [
+          "Melanocytes, keratinocytes and fibroblasts",
+          "Collagen, elastin and ground substance",
+          "Hair, nails and fat",
+          "Glands, nerves and blood vessels"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is the skin often referred to as the largest body organ?",
-         "a": "Because it covers the entire body surface and serves as the main protective barrier against damage to internal tissues."
+         "a": "**Because it covers the entire body surface and serves as the main protective barrier for internal tissues.**\n\n## Understanding it\n- By surface area and mass, the skin is the body's largest organ, and its primary role is a protective barrier.\n\n>> Largest organ: covers the whole surface, main protective barrier.",
+         "opts": [
+          "It covers the whole body surface as the main protective barrier",
+          "It contains the most blood vessels of any organ",
+          "It weighs more than the liver and brain combined",
+          "It is the only organ with nerve endings"
+         ],
+         "ans": 0
         },
         {
          "q": "Against what five things does the skin protect internal tissues?",
-         "a": "Trauma, ultraviolet light, temperature, toxins and bacteria."
+         "a": "**Trauma, ultraviolet light, temperature, toxins and bacteria.**\n\n## Understanding it\n- The barrier defends against physical (trauma), radiation (UV), thermal, chemical (toxins) and microbial (bacteria) threats.\n\n>> Trauma, UV, temperature, toxins, bacteria.",
+         "opts": [
+          "Trauma, UV light, temperature, toxins, bacteria",
+          "Water, salts, heat, pathogens, allergens",
+          "Trauma, viruses, fungi, cold, radiation",
+          "UV light, trauma, dehydration, cancer, ageing"
+         ],
+         "ans": 0
         },
         {
          "q": "List the four functions of the skin.",
-         "a": "Protection, secretion, sensation and thermoregulation."
+         "a": "**Protection, secretion, sensation and thermoregulation.**\n\n## Understanding it\n- Four core roles: barrier (protection), glandular output (secretion), sensory receptors (sensation), and temperature control.\n\n>> Protection, secretion, sensation, thermoregulation.",
+         "opts": [
+          "Protection, secretion, sensation, thermoregulation",
+          "Protection, absorption, sensation, excretion",
+          "Protection, immunity, synthesis, thermoregulation",
+          "Barrier, vitamin D synthesis, sensation, storage"
+         ],
+         "ans": 0
         },
         {
          "q": "As a protective membrane, what does the skin guard the deeper tissues against?",
-         "a": "Excessive loss of water, salts and heat; and invasion of pathogens and their toxins."
+         "a": "**Excessive loss of water, salts and heat; and invasion of pathogens and their toxins.**\n\n## Understanding it\n- As a barrier it works **both ways** — keeps water/salts/heat in, keeps pathogens/toxins out.\n\n>> Prevents loss of water/salts/heat; blocks pathogens/toxins.",
+         "opts": [
+          "Loss of blood and lymph",
+          "Loss of water/salts/heat and invasion of pathogens/toxins",
+          "Loss of proteins and glucose only",
+          "Entry of UV light and cold only"
+         ],
+         "ans": 1
         },
         {
          "q": "Name the two types of glands in the skin and their secretions.",
-         "a": "Sebaceous glands produce an oily secretion called sebum; sweat glands produce a watery secretion called sweat."
+         "a": "**Sebaceous glands produce oily sebum; sweat glands produce watery sweat.**\n\n## Understanding it\n- Sebaceous → oily **sebum** (lubrication); sweat → watery **sweat** (cooling).\n\n>> Sebaceous = sebum (oil); sweat = sweat (water).",
+         "opts": [
+          "Sebaceous → sweat; sweat → sebum",
+          "Apocrine → sebum; eccrine → keratin",
+          "Sebaceous → melanin; sweat → sebum",
+          "Sebaceous → sebum (oil); sweat → sweat (water)"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the function of sebum?",
-         "a": "It helps to lubricate the surface of the skin."
+         "a": "**It lubricates the surface of the skin.**\n\n## Understanding it\n- Sebum is an oily film that lubricates and helps waterproof the skin.\n\n>> Sebum lubricates the skin.",
+         "opts": [
+          "Lubricates the skin surface",
+          "Fights bacterial infection directly",
+          "Cools the body by evaporation",
+          "Produces skin pigment"
+         ],
+         "ans": 0
         },
         {
          "q": "How does sweat help the body?",
-         "a": "It helps to cool the body as it evaporates from the skin surface."
+         "a": "**It cools the body as it evaporates from the skin surface.**\n\n## Understanding it\n- Evaporation of sweat removes heat → cooling (thermoregulation).\n\n>> Sweat cools by evaporation.",
+         "opts": [
+          "Cools the body by evaporation",
+          "Produces vitamin D",
+          "Lubricates the skin",
+          "Insulates against heat loss"
+         ],
+         "ans": 0
         },
         {
          "q": "What sensations do the nerve fibres under the skin act as receptors for?",
-         "a": "Pain, temperature, pressure and touch."
+         "a": "**Pain, temperature, pressure and touch.**\n\n## Understanding it\n- Cutaneous receptors sense pain, temperature, pressure and touch.\n\n>> Pain, temperature, pressure, touch.",
+         "opts": [
+          "Pressure, stretch, vibration, position",
+          "Pain, temperature, pressure, touch",
+          "Pain, itch, vibration, proprioception",
+          "Touch, taste, smell, temperature"
+         ],
+         "ans": 1
         },
         {
          "q": "What is thermoregulation in the context of the skin?",
-         "a": "Several different tissues in the skin aid in maintaining the body temperature."
+         "a": "**Several different tissues in the skin work together to maintain body temperature.**\n\n## Understanding it\n- Blood vessels (dilate/constrict), sweat glands and subcutaneous fat all contribute to temperature control.\n\n>> Skin tissues jointly maintain body temperature.",
+         "opts": [
+          "The epidermis alone insulates the body",
+          "Only sweat glands control temperature",
+          "Skin tissues cooperate to maintain body temperature",
+          "Melanocytes regulate temperature"
+         ],
+         "ans": 2
         },
         {
          "q": "Name the three layers of the skin from the outer surface inwards.",
-         "a": "1. Epidermis; 2. Corium or dermis; 3. Subcutaneous tissue or hypodermis."
+         "a": "**Epidermis; dermis (corium); subcutaneous tissue (hypodermis).**\n\n## Understanding it\n- Outer → inner: epidermis → dermis → subcutaneous (hypodermis).\n\n>> Epidermis → dermis → hypodermis.",
+         "opts": [
+          "Epidermis, dermis, subcutaneous tissue",
+          "Dermis, epidermis, hypodermis",
+          "Epidermis, hypodermis, dermis",
+          "Stratum corneum, dermis, fascia"
+         ],
+         "ans": 0
         },
         {
          "q": "How does your lecturer describe the epidermis?",
-         "a": "A thin cellular membrane layer."
+         "a": "**A thin cellular membrane layer.**\n\n## Understanding it\n- The epidermis is the **thin, cellular** outermost layer (avascular).\n\n>> Epidermis = thin cellular layer.",
+         "opts": [
+          "A thin cellular membrane layer",
+          "A vascular muscular layer",
+          "A dense fibrous connective-tissue layer",
+          "A thick fat-containing layer"
+         ],
+         "ans": 0
         },
         {
          "q": "How does your lecturer describe the dermis?",
-         "a": "A dense, fibrous connective tissue layer."
+         "a": "**A dense, fibrous connective-tissue layer.**\n\n## Understanding it\n- The dermis is the **dense fibrous** middle layer (collagen/elastin, vessels, appendages).\n\n>> Dermis = dense fibrous connective tissue.",
+         "opts": [
+          "An avascular keratin layer",
+          "A dense fibrous connective-tissue layer",
+          "A thick fat-containing layer",
+          "A thin cellular membrane"
+         ],
+         "ans": 1
         },
         {
          "q": "How does your lecturer describe the subcutaneous tissue?",
-         "a": "A thick, fat-containing tissue."
+         "a": "**A thick, fat-containing tissue.**\n\n## Understanding it\n- The hypodermis is the **thick, adipose (fat)** deepest layer — insulation and cushioning.\n\n>> Subcutaneous = thick fatty layer.",
+         "opts": [
+          "A dense fibrous layer",
+          "A thin cellular membrane",
+          "A keratinised avascular layer",
+          "A thick, fat-containing layer"
+         ],
+         "ans": 3
         },
         {
          "q": "What is another name for the dermis?",
-         "a": "The corium."
+         "a": "**The corium.**\n\n## Understanding it\n- Dermis = corium.\n\n>> Dermis = corium.",
+         "opts": [
+          "Stratum basale",
+          "Subcutis",
+          "Corium",
+          "Hypodermis"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the other names for the hypodermis?",
-         "a": "Subcutaneous tissue or subcutis."
+         "a": "**Subcutaneous tissue or subcutis.**\n\n## Understanding it\n- Hypodermis = subcutaneous tissue = subcutis.\n\n>> Hypodermis = subcutis = subcutaneous tissue.",
+         "opts": [
+          "Corium",
+          "Papillary layer",
+          "Stratum corneum",
+          "Subcutaneous tissue / subcutis"
+         ],
+         "ans": 3
         },
         {
          "q": "In which direction do cells move within the epidermis, and what happens to them?",
-         "a": "Cells move from the base of the epidermis up to the surface, changing shape and structure as they go."
+         "a": "**Cells move from the base of the epidermis up to the surface, changing shape and structure (and dying) as they go.**\n\n## Understanding it\n- Keratinocytes are born at the basal layer and migrate **upward**, keratinising and dying by the surface.\n\n>> Cells migrate base → surface, keratinise and die.",
+         "opts": [
+          "From the dermis into the epidermis",
+          "From the base upward to the surface, dying as they go",
+          "From the surface downward to the base",
+          "They remain fixed and do not migrate"
+         ],
+         "ans": 1
         },
         {
          "q": "Name the five layers of the epidermis from upper to lower.",
-         "a": "Stratum corneum; granular layer; spinous layer; basal layer; basement membrane."
+         "a": "**Stratum corneum; granular layer; spinous layer; basal layer; basement membrane.**\n\n## Understanding it\n- Top → bottom: corneum → granular → spinous → basal → basement membrane.\n\n>> Corneum, granular, spinous, basal, basement membrane.",
+         "opts": [
+          "Corneum, spinous, granular, basal, dermis",
+          "Basal, spinous, granular, corneum, lucidum",
+          "Corneum, granular, spinous, basal, basement membrane",
+          "Corneum, lucidum, granular, spinous, basal"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the stratum corneum made of, and what is its role?",
-         "a": "Stratified squamous epithelium or hardened cells, which play a role in the skin's protective function."
+         "a": "**Stratified squamous epithelium of hardened (dead, keratinised) cells that provide the skin's protective barrier.**\n\n## Understanding it\n- The outermost layer is dead, flattened, keratin-filled cells — the tough barrier.\n\n>> Corneum = hardened dead keratinised cells (barrier).",
+         "opts": [
+          "Hardened, dead keratinised cells forming the barrier",
+          "Living melanocyte-rich cells producing pigment",
+          "Keratohyalin-containing transitional living cells",
+          "Basal stem cells that divide"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the granular layer.",
-         "a": "It is the transitional layer where keratinocyte skin cells develop into their final form and die. It contains keratohyalin and lamellar granules."
+         "a": "**The transitional layer where keratinocytes develop into their final form and die; it contains keratohyalin and lamellar granules.**\n\n## Understanding it\n- Just below the corneum, cells here are **transitioning** — filling with granules and dying.\n\n>> Granular layer = transitional, dying cells with granules.",
+         "opts": [
+          "The layer containing melanocytes",
+          "The deepest dividing layer",
+          "Transitional layer where keratinocytes finalise and die",
+          "The dead, hardened outer layer"
+         ],
+         "ans": 2
         },
         {
          "q": "Which two granules are found in the granular layer?",
-         "a": "Keratohyalin and lamellar granules."
+         "a": "**Keratohyalin and lamellar granules.**\n\n## Understanding it\n- The granular layer contains keratohyalin and lamellar (membrane-coating) granules.\n\n>> Keratohyalin and lamellar granules.",
+         "opts": [
+          "Melanin and keratin granules",
+          "Keratohyalin and lamellar granules",
+          "Basophilic and eosinophilic granules",
+          "Birbeck and Langerhans granules"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the spinous layer.",
-         "a": "Keratin-producing epidermal cells that provide a continuous net-like layer of protection for underlying tissue."
+         "a": "**Keratin-producing epidermal cells forming a continuous net-like layer of protection for underlying tissue.**\n\n## Understanding it\n- The spinous layer's cells are linked by desmosomes ('spines'), producing keratin and giving strength.\n\n>> Spinous layer = keratin-producing, net-like protective cells.",
+         "opts": [
+          "A fat-storing insulating layer",
+          "Dead hardened cells at the surface",
+          "The single layer holding melanocytes",
+          "Keratin-producing cells forming a net-like protective layer"
+         ],
+         "ans": 3
         },
         {
          "q": "What special cells are found in the basal layer?",
-         "a": "Melanocytes."
+         "a": "**Melanocytes.**\n\n## Understanding it\n- The basal layer houses **melanocytes** (pigment cells) among the dividing keratinocytes.\n\n>> Basal layer = melanocytes.",
+         "opts": [
+          "Mast cells",
+          "Melanocytes",
+          "Fibroblasts",
+          "Langerhans cells only"
+         ],
+         "ans": 1
         },
         {
          "q": "What do melanocytes form and contain?",
-         "a": "A black pigment called melanin."
+         "a": "**A black pigment called melanin.**\n\n## Understanding it\n- Melanocytes make and hold **melanin**, which pigments the skin and absorbs UV.\n\n>> Melanocytes contain melanin.",
+         "opts": [
+          "Melanin (a black pigment)",
+          "Keratin",
+          "Sebum",
+          "Keratohyalin"
+         ],
+         "ans": 0
         },
         {
          "q": "Is the number of melanocytes different among the races?",
-         "a": "No — the number of melanocytes in all races is the same."
+         "a": "**No — the number of melanocytes is the same in all races.**\n\n## Understanding it\n- Everyone has roughly the **same number** of melanocytes; only their activity/melanin output differs.\n\n>> Melanocyte number is equal across races.",
+         "opts": [
+          "Yes — it varies with sun exposure",
+          "Yes — lighter skin has more melanocytes",
+          "Yes — darker skin has more melanocytes",
+          "No — melanocyte number is the same in all races"
+         ],
+         "ans": 3
         },
         {
          "q": "What accounts for the colour differences among the races?",
-         "a": "The amount of melanin, not the number of melanocytes."
+         "a": "**The amount of melanin produced, not the number of melanocytes.**\n\n## Understanding it\n- Skin colour depends on **how much melanin** each melanocyte makes, not how many there are.\n\n>> Colour = amount of melanin, not number of melanocytes.",
+         "opts": [
+          "The number of blood vessels",
+          "The thickness of the stratum corneum",
+          "The amount of melanin, not the number of melanocytes",
+          "The number of melanocytes"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the function of the basement membrane?",
-         "a": "It connects and functionally separates the epidermis and the dermis."
+         "a": "**It connects and functionally separates the epidermis and the dermis.**\n\n## Understanding it\n- The basement membrane anchors the epidermis to the dermis while keeping them distinct.\n\n>> Basement membrane: joins yet separates epidermis and dermis.",
+         "opts": [
+          "Supplies blood to the epidermis",
+          "Stores fat for insulation",
+          "Connects yet separates the epidermis and dermis",
+          "Produces melanin for both layers"
+         ],
+         "ans": 2
         },
         {
          "q": "What three things does the epidermis NOT contain?",
-         "a": "Blood vessels, lymphatic vessels and connective tissue (elastic fibres, cartilage, fat)."
+         "a": "**Blood vessels, lymphatic vessels and connective tissue (elastic fibres, cartilage, fat).**\n\n## Understanding it\n- The epidermis is **avascular** — no blood/lymph vessels and no connective tissue.\n\n>> Epidermis lacks blood vessels, lymphatics, connective tissue.",
+         "opts": [
+          "Melanocytes, keratinocytes and desmosomes",
+          "Basal cells, spinous cells and corneocytes",
+          "Blood vessels, lymphatics and connective tissue",
+          "Nerve endings, keratin and granules"
+         ],
+         "ans": 2
         },
         {
          "q": "How is the epidermis nourished?",
-         "a": "It is dependent on the deeper dermis layer and its rich network of capillaries for nourishment."
+         "a": "**It depends on the deeper dermis and its rich capillary network for nourishment (by diffusion).**\n\n## Understanding it\n- Being avascular, the epidermis receives nutrients by **diffusion from dermal capillaries**.\n\n>> Epidermis fed by diffusion from dermal capillaries.",
+         "opts": [
+          "By diffusion from the dermis's capillary network",
+          "By its own capillary network",
+          "From sebaceous gland secretions",
+          "From the subcutaneous fat directly"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the dermis composed of?",
-         "a": "Blood and lymph vessels and nerve fibres, as well as the accessory organs of the skin."
+         "a": "**Blood and lymph vessels and nerve fibres, plus the accessory organs of the skin.**\n\n## Understanding it\n- The dermis holds the vasculature, nerves, and appendages (follicles, glands) in a fibrous matrix.\n\n>> Dermis = vessels, nerves, appendages in fibrous tissue.",
+         "opts": [
+          "Only adipose tissue",
+          "Dead keratinised cells",
+          "Blood/lymph vessels, nerves and skin appendages",
+          "Only keratinocytes and melanocytes"
+         ],
+         "ans": 2
         },
         {
          "q": "Which accessory organs of the skin are located in the dermis?",
-         "a": "The hair follicles, sweat glands and sebaceous glands."
+         "a": "**The hair follicles, sweat glands and sebaceous glands.**\n\n## Understanding it\n- The skin's appendages sit within the **dermis** (some extend into the subcutis).\n\n>> Dermal appendages: hair follicles, sweat glands, sebaceous glands.",
+         "opts": [
+          "Only sweat glands",
+          "Hair follicles, sweat glands, sebaceous glands",
+          "Melanocytes, keratinocytes and mast cells",
+          "Blood vessels and nerves only"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the main function of the dermis?",
-         "a": "To provide physical support and nutrients to the epidermis."
+         "a": "**To provide physical support and nutrients to the epidermis.**\n\n## Understanding it\n- The dermis mechanically supports and nourishes the overlying avascular epidermis.\n\n>> Dermis supports and feeds the epidermis.",
+         "opts": [
+          "Stores the body's fat",
+          "Forms the waterproof barrier",
+          "Produces melanin",
+          "Provides physical support and nutrients to the epidermis"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the two layers of the dermis.",
-         "a": "The papillary layer and the reticular layer."
+         "a": "**The papillary layer and the reticular layer.**\n\n## Understanding it\n- Dermis = superficial **papillary** + deeper **reticular** layers.\n\n>> Papillary (upper) and reticular (lower).",
+         "opts": [
+          "Superficial and deep fascia",
+          "Papillary and reticular layers",
+          "Corneum and granular layers",
+          "Basal and spinous layers"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the papillary dermis contain?",
-         "a": "Smaller blood vessels which supply oxygen, elastic fibres and nutrients to the lower epidermis."
+         "a": "**Smaller blood vessels that supply oxygen and nutrients to the lower epidermis, plus elastic fibres.**\n\n## Understanding it\n- The upper papillary dermis has fine capillaries feeding the epidermis.\n\n>> Papillary dermis: small vessels feeding the epidermis.",
+         "opts": [
+          "Adipose tissue and lobules",
+          "Small vessels supplying the lower epidermis, elastic fibres",
+          "Large vessels and dense collagen bundles",
+          "Only melanocytes"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the reticular dermis contain?",
-         "a": "Dense connective tissue, larger blood vessels, elastic fibres, and bundles of collagen arranged in layers."
+         "a": "**Dense connective tissue, larger blood vessels, elastic fibres, and layered collagen bundles.**\n\n## Understanding it\n- The deeper reticular layer is the thick, strong, collagen-rich part with larger vessels.\n\n>> Reticular dermis: dense collagen, large vessels, elastic fibres.",
+         "opts": [
+          "Keratinised dead cells",
+          "Dense collagen, larger vessels and elastic fibres",
+          "Small capillaries feeding the epidermis only",
+          "Fat lobules"
+         ],
+         "ans": 1
         },
         {
          "q": "Which is the thicker layer of the dermis?",
-         "a": "The reticular dermis."
+         "a": "**The reticular dermis.**\n\n## Understanding it\n- The reticular layer is much thicker than the papillary layer.\n\n>> Reticular > papillary in thickness.",
+         "opts": [
+          "The reticular dermis",
+          "The papillary dermis",
+          "They are equal",
+          "The basement membrane"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the five key cell types or structures within the reticular layer.",
-         "a": "Fibroblasts; mast cells; lymphatic vessels; epidermal appendages or rete pegs; and ground substance."
+         "a": "**Fibroblasts; mast cells; lymphatic vessels; epidermal appendages (rete pegs); and ground substance.**\n\n## Understanding it\n- The reticular dermis contains fibroblasts, mast cells, lymphatics, rete pegs, and ground substance.\n\n>> Fibroblasts, mast cells, lymphatics, rete pegs, ground substance.",
+         "opts": [
+          "Melanocytes, keratinocytes, corneocytes, granules, desmosomes",
+          "Fibroblasts, mast cells, lymphatics, rete pegs, ground substance",
+          "Langerhans cells, Merkel cells, basal cells, sebum, sweat",
+          "Adipocytes, neurons, capillaries, collagen, keratin"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the role of fibroblasts?",
-         "a": "A key cell involved in repairing tissue damage."
+         "a": "**A key cell that repairs tissue damage (and produces collagen/scar).**\n\n## Understanding it\n- Fibroblasts synthesise collagen and drive wound repair and scarring.\n\n>> Fibroblasts repair tissue (make collagen/scar).",
+         "opts": [
+          "Repair tissue damage (produce collagen)",
+          "Produce skin pigment",
+          "Release histamine in allergy",
+          "Carry nerve impulses"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the role of mast cells in the dermis?",
-         "a": "They are involved in fighting infection."
+         "a": "**They are involved in fighting infection (and drive allergic/inflammatory responses via histamine).**\n\n## Understanding it\n- Mast cells participate in defence and release histamine in allergy (producing wheals).\n\n>> Mast cells: defence/allergy — release histamine.",
+         "opts": [
+          "Produce melanin",
+          "Repair tissue and make collagen",
+          "Involved in infection defence and allergy (histamine)",
+          "Store fat"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the role of lymphatic vessels in the dermis?",
-         "a": "The lymphatic system is a key part of the body's defence against infection."
+         "a": "**The lymphatic system is a key part of the body's defence against infection.**\n\n## Understanding it\n- Dermal lymphatics drain fluid and carry immune cells — part of infection defence.\n\n>> Dermal lymphatics: immune defence/drainage.",
+         "opts": [
+          "Supply oxygen to the epidermis",
+          "Part of the body's defence against infection",
+          "Insulate against heat loss",
+          "Produce collagen"
+         ],
+         "ans": 1
         },
         {
          "q": "What are rete pegs and what do they do?",
-         "a": "Epidermal appendages that link the epidermis and dermis together to prevent skin damage."
+         "a": "**Epidermal appendages that interlock (link) the epidermis and dermis together to prevent shearing/skin damage.**\n\n## Understanding it\n- Rete pegs are downward epidermal projections that **anchor** the epidermis to the dermis, resisting shear.\n\n>> Rete pegs interlock epidermis and dermis (resist shear).",
+         "opts": [
+          "Interlock the epidermis and dermis to resist shearing",
+          "Secrete sebum onto the surface",
+          "Produce pigment for the skin",
+          "Store adipose tissue"
+         ],
+         "ans": 0
         },
         {
          "q": "What is ground substance?",
-         "a": "A gel-like substance that helps to support the cells within the dermis and provides structure to the area."
+         "a": "**A gel-like substance that supports the cells within the dermis and provides structure.**\n\n## Understanding it\n- Ground substance is the amorphous gel matrix filling spaces between dermal fibres and cells.\n\n>> Ground substance = gel matrix supporting dermal cells.",
+         "opts": [
+          "A gel-like matrix supporting dermal cells",
+          "A layer of dead keratinised cells",
+          "A network of nerve fibres",
+          "A store of subcutaneous fat"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the subcutaneous layer composed of?",
-         "a": "Adipose tissue or fat tissue."
+         "a": "**Adipose (fat) tissue.**\n\n## Understanding it\n- The hypodermis is mainly fat — insulation and cushioning.\n\n>> Subcutaneous layer = adipose tissue.",
+         "opts": [
+          "Elastic cartilage",
+          "Adipose (fat) tissue",
+          "Stratified squamous epithelium",
+          "Dense collagen bundles"
+         ],
+         "ans": 1
         },
         {
          "q": "State the two functions of the hypodermis.",
-         "a": "Protection of the deeper tissues of the body, and acting as a heat insulator."
+         "a": "**Protection of deeper tissues, and acting as a heat insulator.**\n\n## Understanding it\n- The fatty hypodermis cushions deep structures and insulates against heat loss.\n\n>> Hypodermis: cushioning + heat insulation.",
+         "opts": [
+          "Protects deeper tissues and insulates against heat loss",
+          "Produces sweat and sebum",
+          "Forms the waterproof barrier",
+          "Generates skin pigment"
+         ],
+         "ans": 0
         },
         {
          "q": "Define a skin lesion.",
-         "a": "Any skin area that has different characteristics from the surrounding skin, including colour, shape, size and texture."
+         "a": "**Any area of skin with characteristics (colour, shape, size, texture) different from the surrounding skin.**\n\n## Understanding it\n- A lesion is any localised change that differs from normal adjacent skin.\n\n>> Skin lesion = an area differing from surrounding skin.",
+         "opts": [
+          "Any area of redness only",
+          "A break in the epidermis only",
+          "An area differing in colour/shape/size from surrounding skin",
+          "A fluid-filled swelling only"
+         ],
+         "ans": 2
         },
         {
          "q": "Give two examples of localized damage that produce skin lesions.",
-         "a": "Sunburns and contact dermatitis."
+         "a": "**Sunburns and contact dermatitis.**\n\n## Understanding it\n- Localised external insults (UV → sunburn; irritant/allergen → contact dermatitis) produce lesions.\n\n>> Sunburn and contact dermatitis.",
+         "opts": [
+          "Diabetes and infection",
+          "Sunburn and contact dermatitis",
+          "Vitiligo and albinism",
+          "Psoriasis and eczema"
+         ],
+         "ans": 1
         },
         {
          "q": "Skin lesions can be manifestations of which underlying disorders?",
-         "a": "Underlying disorders such as diabetes and infections."
+         "a": "**Underlying systemic disorders such as diabetes and infections.**\n\n## Understanding it\n- Skin can reflect internal disease (e.g. diabetes, infection).\n\n>> Systemic disease (diabetes, infection) can show in the skin.",
+         "opts": [
+          "Only local trauma",
+          "Only allergic reactions",
+          "Systemic disorders such as diabetes and infections",
+          "Only genetic conditions"
+         ],
+         "ans": 2
         },
         {
          "q": "How are skin lesions classified?",
-         "a": "Into primary lesions and secondary lesions."
+         "a": "**Into primary lesions and secondary lesions.**\n\n## Understanding it\n- The core classification is primary (arising on healthy skin) vs secondary (evolving from a primary lesion).\n\n>> Primary vs secondary lesions.",
+         "opts": [
+          "Benign and malignant lesions",
+          "Acute and chronic lesions",
+          "Flat and raised lesions",
+          "Primary and secondary lesions"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a primary skin lesion.",
-         "a": "One that originates on previously healthy skin and is directly associated with a specific cause."
+         "a": "**One that originates on previously healthy skin and is directly associated with a specific cause.**\n\n## Understanding it\n- Primary lesions arise **de novo** on normal skin from a specific cause.\n\n>> Primary = arises on healthy skin from a specific cause.",
+         "opts": [
+          "A lesion that has become infected",
+          "Any chronic thickened lesion",
+          "Arises on healthy skin, tied to a specific cause",
+          "Develops from another lesion by scratching"
+         ],
+         "ans": 2
         },
         {
          "q": "List the examples of primary skin lesions your lecturer gives.",
-         "a": "Bullae, burrow, macule, nodule, papule, plaque, pustule, tumour, vesicle and wheal."
+         "a": "**Bullae, burrow, macule, nodule, papule, plaque, pustule, tumour, vesicle and wheal.**\n\n## Understanding it\n- Primary lesions include macule/papule/plaque/nodule/tumour (solid), vesicle/bulla/pustule (fluid), wheal, burrow.\n\n>> Macule, papule, plaque, nodule, vesicle, bulla, pustule, wheal, burrow, tumour.",
+         "opts": [
+          "Crust, ulcer, scar, scale, fissure",
+          "Macule, papule, plaque, nodule, vesicle, bulla, pustule, wheal, burrow, tumour",
+          "Excoriation, erosion, lichenification, gangrene",
+          "Erythema, purpura, petechiae, ecchymosis"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a secondary skin lesion.",
-         "a": "One that develops from the evolution of a primary skin lesion, either due to traumatic manipulation such as scratching or rubbing, or due to its treatment or progression."
+         "a": "**One that develops from the evolution of a primary lesion — through traumatic manipulation, treatment, or progression.**\n\n## Understanding it\n- Secondary lesions arise **from** a pre-existing primary lesion.\n\n>> Secondary = evolves from a primary lesion.",
+         "opts": [
+          "Arises on previously healthy skin",
+          "A lesion caused directly by sunlight",
+          "Develops from the evolution of a primary lesion",
+          "A lesion present from birth"
+         ],
+         "ans": 2
         },
         {
          "q": "Name the three ways a primary lesion becomes a secondary lesion.",
-         "a": "Traumatic manipulation (scratching, rubbing); treatment; and progression."
+         "a": "**Traumatic manipulation (scratching/rubbing), treatment, and progression.**\n\n## Understanding it\n- A primary lesion evolves via manipulation, treatment, or natural progression.\n\n>> Manipulation, treatment, progression.",
+         "opts": [
+          "Sunlight, heat, cold",
+          "Traumatic manipulation, treatment, progression",
+          "Genetics, diet, hygiene",
+          "Infection, allergy, trauma"
+         ],
+         "ans": 1
         },
         {
          "q": "List the examples of secondary skin lesions your lecturer gives.",
-         "a": "Crusts, sores, ulcers and scars."
+         "a": "**Crusts, sores, ulcers and scars.**\n\n## Understanding it\n- Secondary lesions include crusts, sores/erosions, ulcers, scars (also scale, fissure, lichenification).\n\n>> Crusts, sores, ulcers, scars.",
+         "opts": [
+          "Burrows, tumours, patches, wheals",
+          "Crusts, sores, ulcers, scars",
+          "Macules, papules, vesicles, wheals",
+          "Nodules, plaques, pustules, bullae"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a vesicle.",
-         "a": "A raised lesion filled with clear fluid that is <1 cm in diameter."
+         "a": "**A raised lesion filled with clear fluid, less than 1 cm in diameter.**\n\n## Understanding it\n- Vesicle = small (<1 cm) raised **clear-fluid** blister.\n\n>> Vesicle = clear fluid, raised, <1 cm.",
+         "opts": [
+          "Raised, clear fluid, <1 cm",
+          "Raised, clear fluid, >1 cm (bulla)",
+          "Flat colour change (macule)",
+          "Raised, pus-filled, <1 cm (pustule)"
+         ],
+         "ans": 0
         },
         {
          "q": "Define a bulla.",
-         "a": "A raised lesion filled with clear fluid >1 cm in diameter."
+         "a": "**A raised lesion filled with clear fluid, greater than 1 cm in diameter.**\n\n## Understanding it\n- Bulla = large (>1 cm) raised **clear-fluid** blister (a big vesicle).\n\n>> Bulla = clear fluid, raised, >1 cm.",
+         "opts": [
+          "Raised, clear fluid, >1 cm",
+          "Raised, pus-filled, >1 cm",
+          "Raised, clear fluid, <1 cm (vesicle)",
+          "Flat patch >1 cm"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the only difference between a vesicle and a bulla?",
-         "a": "Size — vesicle is <1 cm, bulla is >1 cm. Both are raised and filled with clear fluid."
+         "a": "**Size — a vesicle is <1 cm, a bulla is >1 cm; both are raised and filled with clear fluid.**\n\n## Understanding it\n- They differ only in **size** (1 cm cut-off), not contents.\n\n>> Vesicle vs bulla = size only (1 cm).",
+         "opts": [
+          "Contents — vesicle clear, bulla pus",
+          "Size only — vesicle <1 cm, bulla >1 cm",
+          "Colour — vesicle clear, bulla red",
+          "Depth — vesicle epidermal, bulla dermal"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a papule.",
-         "a": "A circumscribed palpable elevation with distinct borders <0.5 cm in diameter."
+         "a": "**A circumscribed, palpable elevation with distinct borders, less than 0.5 cm in diameter.**\n\n## Understanding it\n- Papule = small (<0.5 cm) **solid raised** lesion.\n\n>> Papule = solid, raised, <0.5 cm.",
+         "opts": [
+          "Solid, raised, distinct borders, <0.5 cm",
+          "Solid, raised, >1 cm (plaque)",
+          "Flat colour change (macule)",
+          "Fluid-filled, raised, <1 cm (vesicle)"
+         ],
+         "ans": 0
         },
         {
          "q": "Define a plaque.",
-         "a": "An elevated area of skin, with distinct borders and an epidermal change, >1 cm in diameter."
+         "a": "**An elevated area of skin with distinct borders and an epidermal change, greater than 1 cm in diameter.**\n\n## Understanding it\n- Plaque = large (>1 cm), flat-topped **raised plateau**, often with surface (epidermal) change (e.g. psoriasis).\n\n>> Plaque = raised plateau, >1 cm, epidermal change.",
+         "opts": [
+          "Fluid-filled >1 cm (bulla)",
+          "Raised solid lesion <0.5 cm (papule)",
+          "Flat patch >1 cm (macule/patch)",
+          "Raised plateau with distinct borders, >1 cm"
+         ],
+         "ans": 3
         },
         {
          "q": "Which primary lesion uses a 0.5 cm cut-off rather than 1 cm?",
-         "a": "The papule."
+         "a": "**The papule.**\n\n## Understanding it\n- Most cut-offs are 1 cm, but the **papule** uses 0.5 cm.\n\n>> Papule = the 0.5 cm exception.",
+         "opts": [
+          "The nodule",
+          "The macule",
+          "The vesicle",
+          "The papule"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a macule.",
-         "a": "A circumscribed alteration in the colour of the skin that is flat to the surface of the skin and not palpable, <1 cm in size."
+         "a": "**A circumscribed alteration in skin colour that is flat and not palpable.**\n\n## Understanding it\n- Macule = a **flat, non-palpable** colour change (e.g. a freckle).\n\n>> Macule = flat colour change, cannot be felt.",
+         "opts": [
+          "A transient oedematous swelling (wheal)",
+          "A raised solid lesion <0.5 cm (papule)",
+          "A flat, non-palpable colour change",
+          "A raised fluid-filled lesion (vesicle)"
+         ],
+         "ans": 2
         },
         {
          "q": "Define a patch.",
-         "a": "A large macule, >1 cm in size."
+         "a": "**A large macule, greater than 1 cm in size.**\n\n## Understanding it\n- Patch = a macule >1 cm — still flat and non-palpable.\n\n>> Patch = macule >1 cm (flat).",
+         "opts": [
+          "A flat colour change >1 cm (large macule)",
+          "A raised solid lesion >1 cm (nodule)",
+          "A raised plateau >1 cm (plaque)",
+          "A fluid-filled lesion >1 cm (bulla)"
+         ],
+         "ans": 0
         },
         {
          "q": "Which two words in the definition of a macule tell you it cannot be felt?",
-         "a": "'Flat to the surface of the skin' and 'not palpable'."
+         "a": "**'Flat to the surface of the skin' and 'not palpable'.**\n\n## Understanding it\n- These two phrases confirm the macule is a pure colour change with no elevation.\n\n>> 'Flat' and 'not palpable'.",
+         "opts": [
+          "'Circumscribed' and 'alteration'",
+          "'Raised' and 'solid'",
+          "'Flat to the surface' and 'not palpable'",
+          "'Colour' and 'skin'"
+         ],
+         "ans": 2
         },
         {
          "q": "Define a nodule.",
-         "a": "A circumscribed raised solid lesion ≤1 cm."
+         "a": "**A circumscribed, raised, solid lesion, ≤1 cm (deeper/firmer than a papule).**\n\n## Understanding it\n- Nodule = a solid raised lesion, similar size to a papule but extending deeper.\n\n>> Nodule = solid raised lesion, ≤1 cm, deeper.",
+         "opts": [
+          "A solid raised lesion, ≤1 cm (deeper than a papule)",
+          "A fluid-filled lesion <1 cm (vesicle)",
+          "A raised plateau >1 cm (plaque)",
+          "A flat colour change (macule)"
+         ],
+         "ans": 0
         },
         {
          "q": "Define a wheal.",
-         "a": "A transient area of dermal or dermal and hypodermal oedema, compressible and usually evanescent."
+         "a": "**A transient area of dermal (or dermal and hypodermal) oedema, compressible and usually evanescent.**\n\n## Understanding it\n- Wheal = a fleeting, compressible **oedema** swelling (urticaria/hives).\n\n>> Wheal = transient compressible oedema.",
+         "opts": [
+          "Transient, compressible dermal oedema (evanescent)",
+          "A pus-filled pustule",
+          "A permanent solid nodule",
+          "A dried crust of serum"
+         ],
+         "ans": 0
         },
         {
          "q": "Which primary lesion is defined partly by TIME?",
-         "a": "The wheal — it is transient and usually evanescent."
+         "a": "**The wheal — it is transient and usually evanescent.**\n\n## Understanding it\n- Uniquely, the wheal's definition includes its **short-lived** nature.\n\n>> Wheal = the time-defined lesion (transient).",
+         "opts": [
+          "The burrow",
+          "The nodule",
+          "The plaque",
+          "The wheal (transient/evanescent)"
+         ],
+         "ans": 3
         },
         {
          "q": "What does 'evanescent' mean?",
-         "a": "That the lesion vanishes — it disappears, usually without leaving a mark."
+         "a": "**That the lesion vanishes — it disappears, usually without leaving a mark.**\n\n## Understanding it\n- Evanescent = fleeting; it comes and goes.\n\n>> Evanescent = vanishes/fleeting.",
+         "opts": [
+          "Spreads to distant sites",
+          "Becomes permanently scarred",
+          "Vanishes/fleeting, leaving no mark",
+          "Slowly enlarges over weeks"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is a wheal compressible?",
-         "a": "Because it is made of oedema fluid in the dermis, which can be pushed aside."
+         "a": "**Because it is made of oedema fluid in the dermis, which can be pushed aside.**\n\n## Understanding it\n- Being fluid oedema (not solid), pressure displaces it.\n\n>> Wheal is fluid oedema → compressible.",
+         "opts": [
+          "It is dermal oedema fluid that can be displaced",
+          "It is filled with pus that drains",
+          "It is air trapped under the skin",
+          "It is solid tissue that flattens"
+         ],
+         "ans": 0
         },
         {
          "q": "Define a burrow.",
-         "a": "A small linear tunnel in the skin that houses a parasite such as scabies."
+         "a": "**A small linear tunnel in the skin that houses a parasite such as the scabies mite.**\n\n## Understanding it\n- Burrow = a thin, linear track dug by a parasite (Sarcoptes).\n\n>> Burrow = linear parasite tunnel (scabies).",
+         "opts": [
+          "A flat pigmented streak",
+          "A linear tunnel housing a parasite (scabies)",
+          "A pus-filled cavity in the dermis",
+          "A transient oedematous swelling"
+         ],
+         "ans": 1
         },
         {
          "q": "Which primary lesion's definition names its cause?",
-         "a": "The burrow — its definition states it houses a parasite."
+         "a": "**The burrow — its definition states it houses a parasite.**\n\n## Understanding it\n- The burrow uniquely names its causal organism (a parasite) in its definition.\n\n>> Burrow = the cause-defined lesion (parasite).",
+         "opts": [
+          "The wheal",
+          "The burrow (houses a parasite)",
+          "The pustule",
+          "The vesicle"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a pustule.",
-         "a": "A circumscribed elevation of pus-filled skin lesion <1 cm."
+         "a": "**A circumscribed elevation of skin filled with pus, less than 1 cm.**\n\n## Understanding it\n- Pustule = small raised lesion filled with **pus** (not clear fluid).\n\n>> Pustule = pus-filled, raised, <1 cm.",
+         "opts": [
+          "Raised, clear fluid, >1 cm (bulla)",
+          "Solid, raised, <0.5 cm (papule)",
+          "Raised, pus-filled, <1 cm",
+          "Raised, clear fluid, <1 cm (vesicle)"
+         ],
+         "ans": 2
         },
         {
          "q": "What separates a vesicle from a pustule?",
-         "a": "The contents — a vesicle contains clear fluid, a pustule contains pus."
+         "a": "**The contents — a vesicle contains clear fluid, a pustule contains pus.**\n\n## Understanding it\n- Same shape/size range; the difference is **clear fluid vs pus**.\n\n>> Vesicle = clear fluid; pustule = pus.",
+         "opts": [
+          "Whether it is palpable",
+          "Depth — vesicle deeper",
+          "Size — vesicle <1 cm, pustule >1 cm",
+          "Contents — vesicle clear fluid, pustule pus"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a crust.",
-         "a": "A hard, friable irregular layer of dried blood, serum, pus, tissue debris or any combination of these, adherent to the surface of injured or inflamed skin."
+         "a": "**A hard, friable, irregular layer of dried blood, serum, pus or tissue debris adherent to the skin.**\n\n## Understanding it\n- Crust = dried exudate stuck on the surface (e.g. honey crust of impetigo).\n\n>> Crust = dried exudate on the surface.",
+         "opts": [
+          "Flakes of stratum corneum (scale)",
+          "A linear crack (fissure)",
+          "Dried exudate (serum/pus/blood) adherent to the surface",
+          "Fibrous tissue replacing skin (scar)"
+         ],
+         "ans": 2
         },
         {
          "q": "Define an ulcer.",
-         "a": "An open sore or erosion of the skin or mucous membrane."
+         "a": "**An open sore or erosion of the skin or mucous membrane (extending into the dermis).**\n\n## Understanding it\n- Ulcer = a full-thickness (into dermis) loss of surface → heals with a scar.\n\n>> Ulcer = deep open sore (into dermis).",
+         "opts": [
+          "A dried crust of serum",
+          "Whitish surface flakes (scale)",
+          "An open sore extending into the dermis",
+          "Loss of epidermis only (erosion)"
+         ],
+         "ans": 2
         },
         {
          "q": "Define scaling.",
-         "a": "Whitish plates or flakes of stratum corneum present on the skin surface."
+         "a": "**Whitish plates or flakes of stratum corneum present on the skin surface.**\n\n## Understanding it\n- Scale = visible flakes of the outer keratin layer (e.g. psoriasis, tinea).\n\n>> Scaling = flakes of stratum corneum.",
+         "opts": [
+          "Dried serum/pus adherent to skin (crust)",
+          "Thickened skin from rubbing (lichenification)",
+          "Peeling of large sheets after injury (desquamation)",
+          "Whitish flakes of stratum corneum on the surface"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a scar.",
-         "a": "Fibrous tissue replacing normal tissue destroyed by injury or disease."
+         "a": "**Fibrous tissue replacing normal tissue destroyed by injury or disease.**\n\n## Understanding it\n- Scar = collagen (fibrous) tissue laid down after dermal damage.\n\n>> Scar = fibrous replacement of destroyed tissue.",
+         "opts": [
+          "Flakes of stratum corneum",
+          "A dried crust of serum",
+          "Fibrous tissue replacing tissue destroyed by injury",
+          "A transient oedematous swelling"
+         ],
+         "ans": 2
         },
         {
          "q": "Define erosion and oozing.",
-         "a": "Moist, circumscribed, slightly depressed areas representing a blister base with the roof of the blister removed."
+         "a": "**Moist, circumscribed, slightly depressed areas — a blister base with the roof removed (epidermis only).**\n\n## Understanding it\n- Erosion = loss of **epidermis only** (the floor of a burst blister); heals **without a scar**.\n\n>> Erosion = epidermis-only loss (no scar).",
+         "opts": [
+          "Full-thickness loss into the dermis (ulcer)",
+          "Complete removal of epidermis by scratching (excoriation)",
+          "A moist blister base with the roof removed (epidermis only)",
+          "A linear crack down to the dermis (fissure)"
+         ],
+         "ans": 2
         },
         {
          "q": "Define desquamation, and give the examples your lecturer gives.",
-         "a": "The peeling of sheets of scale after an acute injury to skin — burns, toxic drug reaction."
+         "a": "**The peeling of sheets of scale after an acute skin injury — e.g. burns and toxic drug reactions.**\n\n## Understanding it\n- Desquamation = shedding of **large sheets** after acute injury (vs fine scaling).\n\n>> Desquamation = sheet peeling after acute injury.",
+         "opts": [
+          "Peeling of sheets of scale after acute injury (burns, drug reaction)",
+          "Fine flakes of stratum corneum (scale)",
+          "Dried exudate on the surface (crust)",
+          "Thickened skin from chronic rubbing"
+         ],
+         "ans": 0
         },
         {
          "q": "Define excoriation, and give the example your lecturer gives.",
-         "a": "Oval to linear depressions in the skin with a complete removal of the epidermis, exposing a broad section of the red dermis — atopic dermatitis."
+         "a": "**Oval-to-linear depressions with complete removal of the epidermis (from scratching), exposing the dermis.**\n\n## Understanding it\n- Excoriation = a **scratch mark** removing the epidermis; it tells you the lesion **itches**.\n\n>> Excoriation = scratch-induced epidermal loss (itch marker).",
+         "opts": [
+          "A linear crack to the dermis (fissure)",
+          "Epidermal loss from scratching (an itch marker)",
+          "Peeling of large sheets (desquamation)",
+          "A moist blister base (erosion)"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a fissure, and give the example your lecturer gives.",
-         "a": "Linear, wedge-shaped cracks in the epidermis extending down to the dermis and narrowing at the base — warts."
+         "a": "**Linear, wedge-shaped cracks in the epidermis extending down to the dermis, narrowing at the base — e.g. warts/hyperkeratosis at pressure sites.**\n\n## Understanding it\n- Fissure = a deep **linear crack** through the epidermis into the dermis.\n\n>> Fissure = linear crack into the dermis.",
+         "opts": [
+          "A linear crack extending into the dermis",
+          "A scratch removing the epidermis (excoriation)",
+          "A moist blister base (erosion)",
+          "Dried surface exudate (crust)"
+         ],
+         "ans": 0
         },
         {
          "q": "Define lichenification.",
-         "a": "A thickening of the epidermis (and to some extent also of the dermis) in response to prolonged rubbing."
+         "a": "**Thickening of the epidermis (and somewhat the dermis) in response to prolonged rubbing.**\n\n## Understanding it\n- Lichenification = leathery **skin thickening** with exaggerated markings from chronic rubbing — a chronicity marker.\n\n>> Lichenification = thickened skin from chronic rubbing.",
+         "opts": [
+          "Skin thickening from prolonged rubbing (chronicity marker)",
+          "Complete removal of the epidermis",
+          "Peeling of sheets of scale after acute injury",
+          "A linear crack into the dermis"
+         ],
+         "ans": 0
         },
         {
          "q": "Define gangrene.",
-         "a": "A death of tissue, usually due to loss of blood supply."
+         "a": "**Death of tissue, usually due to loss of blood supply.**\n\n## Understanding it\n- Gangrene = necrosis from ischaemia (loss of blood flow).\n\n>> Gangrene = tissue death from lost blood supply.",
+         "opts": [
+          "Thickened skin from rubbing",
+          "Tissue death from loss of blood supply",
+          "A dried crust of exudate",
+          "Fibrous replacement of tissue (scar)"
+         ],
+         "ans": 1
         },
         {
          "q": "Which two secondary lesions are described as linear?",
-         "a": "Excoriation (oval to linear depressions) and fissure (linear, wedge-shaped cracks)."
+         "a": "**Excoriation (oval-to-linear depressions) and fissure (linear cracks).**\n\n## Understanding it\n- Both excoriation and fissure have a **linear** shape.\n\n>> Linear secondary lesions: excoriation and fissure.",
+         "opts": [
+          "Erosion and lichenification",
+          "Crust and scale",
+          "Excoriation and fissure",
+          "Ulcer and scar"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the difference between scaling and desquamation?",
-         "a": "Scaling is whitish plates or flakes of stratum corneum on the surface; desquamation is the peeling of sheets of scale after acute injury to the skin."
+         "a": "**Scaling is whitish flakes of stratum corneum on the surface; desquamation is peeling of large sheets of scale after acute injury.**\n\n## Understanding it\n- Scale = fine flakes; desquamation = sheets, after acute injury.\n\n>> Fine flakes (scale) vs sheet peeling (desquamation).",
+         "opts": [
+          "Scale = fine flakes; desquamation = sheet peeling after injury",
+          "They are identical",
+          "Scaling occurs only in burns",
+          "Desquamation is dried serum"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the difference between an erosion and an excoriation?",
-         "a": "An erosion is a blister base with the roof removed; an excoriation is complete removal of the epidermis by scratching, exposing red dermis."
+         "a": "**An erosion is a blister base with the roof removed (spontaneous, epidermis lost); an excoriation is complete removal of the epidermis by scratching.**\n\n## Understanding it\n- Both lose epidermis, but excoriation is **scratch-induced** (linear) whereas erosion is the floor of a burst blister.\n\n>> Erosion = burst-blister floor; excoriation = scratch mark.",
+         "opts": [
+          "Erosion = blister base; excoriation = scratch-induced loss",
+          "They are the same lesion",
+          "Excoriation reaches the subcutis",
+          "Erosion is deeper than an ulcer"
+         ],
+         "ans": 0
         },
         {
          "q": "Which secondary lesion tells you the lesion itches?",
-         "a": "Excoriation — it is produced by scratching."
+         "a": "**Excoriation — it is produced by scratching.**\n\n## Understanding it\n- Scratch marks (excoriation) reveal the lesion is itchy.\n\n>> Excoriation = the itch marker.",
+         "opts": [
+          "Crust",
+          "Fissure",
+          "Lichenification",
+          "Excoriation (scratch marks)"
+         ],
+         "ans": 3
         },
         {
          "q": "Which secondary lesion tells you the process is chronic?",
-         "a": "Lichenification — it results from prolonged rubbing."
+         "a": "**Lichenification — it results from prolonged rubbing.**\n\n## Understanding it\n- Leathery thickening (lichenification) implies a **long-standing** process.\n\n>> Lichenification = the chronicity marker.",
+         "opts": [
+          "Vesicle",
+          "Excoriation",
+          "Erosion",
+          "Lichenification (from prolonged rubbing)"
+         ],
+         "ans": 3
         },
         {
          "q": "Which layer of the skin is important as a heat insulator?",
-         "a": "The subcutaneous layer / hypodermis, being composed of adipose tissue."
+         "a": "**The subcutaneous layer / hypodermis, composed of adipose tissue.**\n\n## Understanding it\n- Fat conducts heat poorly, so the fatty hypodermis insulates.\n\n>> Hypodermis (fat) = the heat insulator.",
+         "opts": [
+          "The hypodermis (adipose tissue)",
+          "The epidermis (keratin)",
+          "The dermis (collagen)",
+          "The basement membrane"
+         ],
+         "ans": 0
         },
         {
          "q": "Which layer contains no blood vessels?",
-         "a": "The epidermis."
+         "a": "**The epidermis.**\n\n## Understanding it\n- The epidermis is avascular, fed by diffusion from the dermis.\n\n>> Epidermis = avascular.",
+         "opts": [
+          "The reticular layer",
+          "The epidermis",
+          "The dermis",
+          "The hypodermis"
+         ],
+         "ans": 1
         },
         {
          "q": "Which epidermal layer is the only one that contains melanocytes?",
-         "a": "The basal layer."
+         "a": "**The basal layer.**\n\n## Understanding it\n- Melanocytes reside in the basal (bottom) epidermal layer.\n\n>> Basal layer = melanocytes.",
+         "opts": [
+          "The stratum corneum",
+          "The granular layer",
+          "The spinous layer",
+          "The basal layer"
+         ],
+         "ans": 3
         },
         {
          "q": "Which epidermal layer contains dead, hardened cells?",
-         "a": "The stratum corneum."
+         "a": "**The stratum corneum.**\n\n## Understanding it\n- The outermost corneum is dead, keratinised cells forming the barrier.\n\n>> Stratum corneum = dead hardened cells.",
+         "opts": [
+          "The basal layer",
+          "The spinous layer",
+          "The granular layer",
+          "The stratum corneum"
+         ],
+         "ans": 3
         },
         {
          "q": "Which epidermal layer is described as the transitional layer where cells die?",
-         "a": "The granular layer."
+         "a": "**The granular layer.**\n\n## Understanding it\n- The granular layer is transitional — cells finalise keratinisation and die here.\n\n>> Granular layer = transitional dying cells.",
+         "opts": [
+          "The stratum corneum",
+          "The basal layer",
+          "The granular layer",
+          "The spinous layer"
+         ],
+         "ans": 2
         },
         {
          "q": "Which layer of the dermis supplies the lower epidermis?",
-         "a": "The papillary dermis, through its smaller blood vessels."
+         "a": "**The papillary dermis, through its smaller blood vessels.**\n\n## Understanding it\n- The upper (papillary) dermis's capillaries nourish the overlying epidermis.\n\n>> Papillary dermis feeds the epidermis.",
+         "opts": [
+          "The basement membrane",
+          "The hypodermis",
+          "The reticular dermis",
+          "The papillary dermis (small vessels)"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — What is the golden rule when shown a photograph of a skin lesion?",
-         "a": "Describe before you diagnose. Marks are awarded for accurate descriptive terminology even if the final diagnosis is wrong."
+         "a": "**Describe before you diagnose — marks are awarded for accurate descriptive terminology even if the final diagnosis is wrong.**\n\n## Understanding it\n- In the OSPE, systematic description earns marks and leads to the diagnosis.\n\n>> Describe first, then diagnose.",
+         "opts": [
+          "Describe before you diagnose",
+          "Diagnose immediately to save time",
+          "Always biopsy before describing",
+          "Name the treatment first"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — What is the first question to ask of any skin lesion?",
-         "a": "Is it flat or raised? If raised, what is inside it — clear fluid, pus, solid tissue, or oedema?"
+         "a": "**Is it flat or raised? If raised, what is inside — clear fluid, pus, solid tissue, or oedema?**\n\n## Understanding it\n- Flat vs raised (and, if raised, its contents) is the first branch point in classification.\n\n>> First: flat or raised? then contents.",
+         "opts": [
+          "How long has it been there?",
+          "What colour is it?",
+          "How big is it?",
+          "Flat or raised — and if raised, what is inside"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Give the ten-step sequence for describing a skin lesion.",
-         "a": "Type of lesion; flat or raised and contents; size; colour; shape and border; surface change; arrangement; distribution; secondary changes; then diagnosis."
+         "a": "**Type; flat/raised and contents; size; colour; shape and border; surface change; arrangement; distribution; and associated features.**\n\n## Understanding it\n- A structured description covers morphology, size, colour, border, surface, arrangement, distribution.\n\n>> Type → contents → size → colour → shape/border → surface → arrangement → distribution.",
+         "opts": [
+          "Only the likely diagnosis",
+          "Type, contents, size, colour, border, surface, arrangement, distribution",
+          "Only colour, size and site",
+          "Type, treatment, prognosis, cause"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Which size cut-offs must you quote when describing lesions?",
-         "a": "0.5 cm for the papule; 1 cm for vesicle/bulla, macule/patch, nodule and pustule."
+         "a": "**0.5 cm for the papule; 1 cm for vesicle/bulla, macule/patch, nodule and pustule.**\n\n## Understanding it\n- The papule uses 0.5 cm; the rest hinge on 1 cm.\n\n>> Papule 0.5 cm; others 1 cm.",
+         "opts": [
+          "2 cm for nodules, 0.5 cm for the rest",
+          "0.5 cm for all lesions",
+          "1 cm for all lesions",
+          "0.5 cm (papule); 1 cm (vesicle/bulla, macule/patch, nodule, pustule)"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — What does a LINEAR arrangement of lesions suggest?",
-         "a": "Something external travelled or was applied along that line — a burrow (scabies), dermographism, or a contact reaction."
+         "a": "**Something external travelled or was applied along that line — a burrow (scabies), dermographism, or contact with an external agent.**\n\n## Understanding it\n- Linear = an **external** cause tracked along a line.\n\n>> Linear arrangement = external cause along a line.",
+         "opts": [
+          "An external agent travelled/was applied along a line",
+          "An internal metabolic disease",
+          "A random distribution with no meaning",
+          "A viral bloodstream spread"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — You see a raised lesion but cannot palpate the photograph. How do you tell it is not a macule?",
-         "a": "Raised lesions cast a shadow and distort the surface light; a macule is a pure colour change with no shadow and no texture alteration."
+         "a": "**Raised lesions cast a shadow and distort the surface light; a macule is a pure colour change with no shadow.**\n\n## Understanding it\n- On a photo you judge elevation by shadowing/light distortion — a macule shows none.\n\n>> Raised lesions cast shadows; macules don't.",
+         "opts": [
+          "You cannot tell from a photograph",
+          "Macules are always red",
+          "Raised lesions are always larger",
+          "Raised lesions cast a shadow; a macule shows none"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A lesion is raised, well-demarcated, >1 cm, with silvery scale on the extensor surfaces. Name the lesion and likely diagnosis.",
-         "a": "The lesion is a plaque (elevated, distinct borders, epidermal change, >1 cm). The likely diagnosis is psoriasis."
+         "a": "**The lesion is a plaque; the likely diagnosis is psoriasis.**\n\n## Understanding it\n- A well-demarcated scaly plaque on extensor surfaces is classic psoriasis.\n\n>> Scaly extensor plaque = psoriasis.",
+         "opts": [
+          "Plaque — psoriasis",
+          "Papule — eczema",
+          "Wheal — urticaria",
+          "Patch — pityriasis versicolor"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — You are shown a rash with macules, vesicles and crusts present simultaneously on the trunk and face. What is the diagnosis and what is the clinching feature?",
-         "a": "Chickenpox (varicella). The clinching feature is lesions at different stages of evolution present at the same time, appearing in crops, with a centripetal distribution."
+         "a": "**Chickenpox (varicella); the clinching feature is lesions at different stages of evolution present at the same time.**\n\n## Understanding it\n- Varicella shows all stages at once (macule→vesicle→crust).\n\n>> Lesions at different stages together = chickenpox.",
+         "opts": [
+          "Impetigo — honey crusts only",
+          "Smallpox — all lesions at the same stage",
+          "Measles — macules only",
+          "Chickenpox — lesions at different stages simultaneously"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — How do you distinguish chickenpox from smallpox on lesion staging?",
-         "a": "In chickenpox lesions are at different stages; in smallpox all lesions were at the same stage. Chickenpox is centripetal (trunk and face), smallpox was centrifugal (face and limbs)."
+         "a": "**In chickenpox lesions are at different stages simultaneously; in smallpox all lesions are at the same stage.**\n\n## Understanding it\n- Staging is the discriminator: varicella mixed, smallpox synchronous.\n\n>> Chickenpox = mixed stages; smallpox = same stage.",
+         "opts": [
+          "Chickenpox mixed stages; smallpox all same stage",
+          "Both show mixed stages",
+          "Chickenpox all same stage; smallpox mixed",
+          "Staging cannot distinguish them"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — What is the single test that must never be omitted over a hypopigmented patch, and why?",
-         "a": "Test sensation with cotton wool, eyes closed, comparing with adjacent normal skin. An anaesthetic hypopigmented patch is tuberculoid leprosy."
+         "a": "**Test sensation with cotton wool (eyes closed), comparing with adjacent normal skin — an anaesthetic hypopigmented patch suggests leprosy.**\n\n## Understanding it\n- Loss of sensation over a pale patch points to tuberculoid leprosy.\n\n>> Test sensation — an anaesthetic pale patch = leprosy.",
+         "opts": [
+          "Shine a Wood's lamp only",
+          "Test sensation — anaesthetic patch suggests leprosy",
+          "Measure the patch size only",
+          "Test for fungal scale with a scraping"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Give four differentials for a hypopigmented macule or patch in a child.",
-         "a": "Pityriasis alba; post-inflammatory hypopigmentation; vitiligo; pityriasis versicolor; and tuberculoid leprosy."
+         "a": "**Pityriasis alba; post-inflammatory hypopigmentation; vitiligo; pityriasis versicolor; and tuberculoid leprosy.**\n\n## Understanding it\n- Pale patches span post-inflammatory, fungal, autoimmune, infective causes.\n\n>> Pityriasis alba, post-inflammatory, vitiligo, versicolor, leprosy.",
+         "opts": [
+          "Psoriasis, eczema, impetigo, scabies",
+          "Pityriasis alba, post-inflammatory, vitiligo, versicolor, leprosy",
+          "Melasma, freckles, café-au-lait, naevi",
+          "Cellulitis, erysipelas, folliculitis, boils"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — How does vitiligo differ in appearance from pityriasis alba?",
-         "a": "Vitiligo is completely depigmented (chalk white) with a sharp border; pityriasis alba is only partially hypopigmented with an ill-defined border and fine scale."
+         "a": "**Vitiligo is completely depigmented (chalk-white) with a sharp border; pityriasis alba is only partially hypopigmented with an indistinct, scaly border.**\n\n## Understanding it\n- Vitiligo total/sharp; pityriasis alba partial/fuzzy.\n\n>> Vitiligo chalk-white/sharp; pityriasis alba partial/fuzzy.",
+         "opts": [
+          "Vitiligo chalk-white, sharp border; pityriasis alba partial, indistinct",
+          "Pityriasis alba is chalk-white and sharp",
+          "They look identical",
+          "Vitiligo is scaly and indistinct"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — You are shown raised, pink, linear coalescing lesions produced by stroking the skin minutes earlier. What is this?",
-         "a": "Wheals due to dermographism — a form of physical/inducible urticaria."
+         "a": "**Wheals due to dermographism — a form of physical/inducible urticaria.**\n\n## Understanding it\n- Stroking triggers mast-cell histamine release → linear wheals.\n\n>> Wheals from stroking = dermographism.",
+         "opts": [
+          "Papules of eczema",
+          "Wheals — dermographism (physical urticaria)",
+          "Burrows from scabies",
+          "Excoriations from scratching"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Describe the triple response of Lewis.",
-         "a": "Mechanical stimulation causes mast cell degranulation and histamine release, producing a red line (vasodilatation), a wheal (increased vascular permeability with dermal oedema), and a surrounding flare (axon reflex vasodilatation)."
+         "a": "**Mechanical stimulation causes a red line (capillary dilatation), a flare (arteriolar dilatation), and a wheal (oedema) — via mast-cell histamine.**\n\n## Understanding it\n- Histamine produces red line → flare → wheal.\n\n>> Triple response: red line, flare, wheal.",
+         "opts": [
+          "Red line, flare, and wheal (histamine-mediated)",
+          "Papule, pustule, and ulcer",
+          "Pallor, coldness, and numbness",
+          "Erythema, scaling, and crusting"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Which cell listed in the anatomy of the reticular dermis is responsible for producing a wheal?",
-         "a": "The mast cell — it degranulates and releases histamine."
+         "a": "**The mast cell — it degranulates and releases histamine.**\n\n## Understanding it\n- Mast-cell histamine causes the oedema of a wheal.\n\n>> Mast cell → histamine → wheal.",
+         "opts": [
+          "The melanocyte",
+          "The fibroblast",
+          "The keratinocyte",
+          "The mast cell (releases histamine)"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A fine greyish wavy line 5 mm long with a dark speck at one end is seen in a finger web space. Identify it.",
-         "a": "A burrow — the dark speck is the female Sarcoptes scabiei mite at the advancing end of her tunnel. This is pathognomonic of scabies."
+         "a": "**A burrow — the dark speck is the female Sarcoptes scabiei mite at the advancing end (pathognomonic of scabies).**\n\n## Understanding it\n- The wavy line with a mite at the end is the classic scabies burrow.\n\n>> Burrow with mite = scabies (pathognomonic).",
+         "opts": [
+          "A dermographic wheal",
+          "A fissure",
+          "A scabies burrow (mite at the advancing end)",
+          "An excoriation"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Where do you look for scabies burrows in an older child versus an infant?",
-         "a": "Older child: finger web spaces, flexor wrists, axillae, umbilicus, waistband and genitalia. In infants also the palms, soles, scalp and face."
+         "a": "**Older child: finger web spaces, flexor wrists, axillae, umbilicus, waistband, genitalia. Infants also: palms, soles, face and scalp.**\n\n## Understanding it\n- Older children spare the face; infants get palms/soles/face/scalp too.\n\n>> Older: webs/wrists/axillae/waist/genitalia; infants also palms/soles/face/scalp.",
+         "opts": [
+          "Only the trunk in both",
+          "Older: webs, wrists, axillae, waist, genitalia; infants also palms/soles/face/scalp",
+          "Only the scalp in both",
+          "Only the face in older children"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is scabies itch classically worse at night?",
-         "a": "The skin warms under bedclothes, the mite becomes more active, and there are fewer distractions."
+         "a": "**The skin warms under bedclothes, the mite becomes more active, and there are fewer daytime distractions.**\n\n## Understanding it\n- Warmth + mite activity + fewer distractions intensify night itch.\n\n>> Warmth activates the mite → worse night itch.",
+         "opts": [
+          "Histamine is only made at night",
+          "Cold air at night irritates the skin",
+          "Warmth activates the mite (fewer distractions at night)",
+          "The mite only feeds at midnight"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Outline the treatment of scabies in a child.",
-         "a": "Permethrin 5% cream to the whole body from the neck down (including head, face, palms and soles in infants), left 8–14 hours then washed off, repeated after 7 days; or benzyl benzoate if permethrin is unavailable. Add an oral antihistamine, treat secondary bacterial infection, treat all household contacts simultaneously, and hot-wash and sun-dry clothing and bedding."
+         "a": "**Permethrin 5% cream to the whole body from the neck down (including head/face, palms and soles in infants), left ~8–12 hours then washed off; repeat after 7 days and treat all contacts.**\n\n## Understanding it\n- Whole-body permethrin, repeated at 7 days, with contacts treated.\n\n>> Permethrin 5% whole-body, repeat at 7 days, treat contacts.",
+         "opts": [
+          "Permethrin 5% whole-body, repeat at 7 days, treat contacts",
+          "Topical steroid alone",
+          "Antifungal cream for 2 weeks",
+          "A single antibiotic tablet"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why must scabies treatment be repeated after 7 days?",
-         "a": "The scabicide kills mites but eggs are more resistant. Eggs hatch in 3–4 days, so the second application kills the newly hatched generation before it can lay."
+         "a": "**The scabicide kills mites but eggs are more resistant; eggs hatch in 3–4 days, so the second application kills the newly hatched mites.**\n\n## Understanding it\n- Eggs survive the first dose; the repeat kills mites that hatch afterwards.\n\n>> Repeat kills mites hatched from surviving eggs.",
+         "opts": [
+          "To treat a new infestation",
+          "Because the itch has not settled",
+          "Eggs survive the first dose; the repeat kills newly hatched mites",
+          "The first cream was too weak"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why must all household contacts be treated even if asymptomatic?",
-         "a": "An untreated contact is a reservoir; the child will be reinfested and the treatment will appear to have failed."
+         "a": "**An untreated contact is a reservoir; the child will be reinfested and treatment will appear to have failed.**\n\n## Understanding it\n- Contacts carry the mite silently and reinfect the child.\n\n>> Untreated contacts reinfest — treat all together.",
+         "opts": [
+          "Contacts always have symptoms",
+          "It is a legal requirement only",
+          "They are a silent reservoir that reinfests the child",
+          "To prevent an allergic reaction"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A parent returns saying the itch persists 2 weeks after permethrin. Has treatment failed?",
-         "a": "Not necessarily — post-scabetic itch is an allergic response to dead mite antigen and can persist for 2–4 weeks after successful treatment. Warn parents about this in advance."
+         "a": "**Not necessarily — post-scabetic itch is an allergic response to dead mite antigen and can persist for 2–4 weeks despite successful treatment.**\n\n## Understanding it\n- Ongoing itch after cure is an allergic echo, not failure (if no new burrows).\n\n>> Post-scabetic itch ≠ failure.",
+         "opts": [
+          "Yes — the cream was expired",
+          "Yes — always re-treat immediately",
+          "No — post-scabetic itch (allergy to dead mite) can last weeks",
+          "Yes — the mite is resistant"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why does secondary bacterial infection of scabies matter beyond the skin?",
-         "a": "Streptococcal skin infection is a recognised trigger for post-streptococcal glomerulonephritis, so treating superinfected scabies protects the kidneys."
+         "a": "**Streptococcal skin infection is a recognised trigger for post-streptococcal glomerulonephritis, so treating it protects the kidneys.**\n\n## Understanding it\n- Scratched, infected scabies can seed **strep**, which can cause **PSGN** (a renal complication).\n\n>> Infected scabies → strep → post-strep glomerulonephritis.",
+         "opts": [
+          "It causes rheumatic heart disease directly",
+          "Strep infection can trigger post-streptococcal glomerulonephritis",
+          "It has no consequence beyond the skin",
+          "It leads to skin cancer"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A 6-year-old has an itchy flexural rash with papules, excoriations and lichenification. What is the diagnosis and what does each secondary lesion tell you?",
-         "a": "Atopic dermatitis. The excoriations tell you it itches; the lichenification tells you it has been present for weeks to months."
+         "a": "**Atopic dermatitis; the excoriations tell you it itches, and the lichenification tells you it is chronic (long-standing).**\n\n## Understanding it\n- Flexural itch + excoriation (itch) + lichenification (chronicity) = atopic dermatitis.\n\n>> Atopic dermatitis: excoriation = itch, lichenification = chronic.",
+         "opts": [
+          "Impetigo — honey crusts",
+          "Psoriasis — silvery scale",
+          "Atopic dermatitis — excoriation (itch), lichenification (chronic)",
+          "Scabies — burrows"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — How does the distribution of atopic dermatitis change with age?",
-         "a": "In infants it affects the face and extensor surfaces; in older children it becomes flexural (antecubital and popliteal fossae)."
+         "a": "**In infants it affects the face and extensor surfaces; in older children it becomes flexural (antecubital and popliteal fossae).**\n\n## Understanding it\n- Infant eczema = face/extensors; older children = flexures.\n\n>> Infants: face/extensors; older: flexures.",
+         "opts": [
+          "Infants: flexures; older: face",
+          "Infants: face/extensors; older children: flexures",
+          "Always only the scalp",
+          "Always only the palms and soles"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Describe the itch–scratch cycle in atopic dermatitis.",
-         "a": "Itch leads to scratching, which produces excoriation and breaks the epidermal barrier, causing more irritation and more itch, and eventually lichenification from prolonged rubbing."
+         "a": "**Itch leads to scratching, which excoriates and breaks the epidermal barrier, causing more irritation, more inflammation and more itch — a self-perpetuating loop.**\n\n## Understanding it\n- Scratching damages the barrier → more irritation/inflammation → more itch → more scratching.\n\n>> Itch → scratch → barrier damage → more itch (a loop).",
+         "opts": [
+          "The cycle is unrelated to the barrier",
+          "Itch → scratch → barrier damage → more irritation and itch",
+          "Scratching heals the barrier",
+          "Itch resolves once scratched"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Using the anatomy of the skin, explain why emollients are first-line in atopic dermatitis.",
-         "a": "The defect is a failed stratum corneum barrier, which allows water loss outwards and irritants and allergens inwards. Emollients physically replace that barrier function."
+         "a": "**The defect is a failed stratum-corneum barrier that lets water out and irritants/allergens in; emollients restore the barrier, reducing water loss and irritation.**\n\n## Understanding it\n- Eczema is fundamentally a **barrier defect**; emollients rebuild it, so they are first-line.\n\n>> Emollients restore the failed stratum-corneum barrier.",
+         "opts": [
+          "They restore the failed stratum-corneum barrier",
+          "They numb the itch nerves",
+          "They suppress melanocytes",
+          "They kill the causative bacteria"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A febrile child has red macules. What single bedside test must you do and why?",
-         "a": "Press the lesion or roll a glass over it. A non-blanching macule means blood outside the vessels — petechiae or purpura — and in a febrile child this is meningococcaemia until proven otherwise."
+         "a": "**Press the lesion (or roll a glass over it); a non-blanching macule means blood outside the vessels — petechiae/purpura, suggesting meningococcaemia.**\n\n## Understanding it\n- The glass/pressure test distinguishes blanching erythema from **non-blanching** purpura (a red flag in a febrile child).\n\n>> Do the glass/blanch test — non-blanching = purpura (meningococcaemia).",
+         "opts": [
+          "Test sensation with cotton wool",
+          "Press/roll a glass over it — non-blanching = purpura (meningococcaemia)",
+          "Scrape it for fungal microscopy",
+          "Shine a Wood's lamp"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Distinguish blanching from non-blanching red macules.",
-         "a": "Blanching means blood is still inside dilated vessels (erythema); non-blanching means blood has leaked outside the vessels (petechiae/purpura)."
+         "a": "**Blanching means blood is still inside dilated vessels (erythema); non-blanching means blood has leaked out (petechiae/purpura).**\n\n## Understanding it\n- Blanches = intravascular (erythema); doesn't blanch = extravasated blood (purpura).\n\n>> Blanching = erythema; non-blanching = purpura.",
+         "opts": [
+          "Blanching = erythema (intravascular); non-blanching = purpura (extravasated)",
+          "Only pigmented lesions blanch",
+          "Both mean the same",
+          "Blanching = purpura; non-blanching = erythema"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Give four causes of desquamation in a sick child.",
-         "a": "Burns; toxic drug reaction; scarlet fever; Kawasaki disease; staphylococcal scalded skin syndrome; Stevens-Johnson syndrome / toxic epidermal necrolysis."
+         "a": "**Burns; toxic drug reaction; scarlet fever; Kawasaki disease; staphylococcal scalded skin syndrome; and Stevens-Johnson syndrome.**\n\n## Understanding it\n- Sheet-peeling (desquamation) accompanies burns, drug reactions, scarlet fever, Kawasaki, SSSS, SJS.\n\n>> Burns, drug reaction, scarlet fever, Kawasaki, SSSS, SJS.",
+         "opts": [
+          "Vitiligo, pityriasis alba, versicolor, leprosy",
+          "Measles, mumps, rubella, chickenpox",
+          "Psoriasis, eczema, scabies, impetigo",
+          "Scarlet fever, Kawasaki disease, SSSS, Stevens-Johnson syndrome"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child with sickle cell anaemia has a blackened, cold, dead toe. Name the lesion and explain the mechanism.",
-         "a": "Gangrene — death of tissue due to loss of blood supply. Sickled erythrocytes cause vaso-occlusion, leading to ischaemia, infarction and tissue death."
+         "a": "**Gangrene — death of tissue from loss of blood supply; sickled red cells cause vaso-occlusion, cutting off the blood supply to the toe.**\n\n## Understanding it\n- Sickling occludes vessels → ischaemia → tissue death (gangrene).\n\n>> Gangrene from sickle vaso-occlusion (ischaemia).",
+         "opts": [
+          "A simple bruise",
+          "Gangrene — sickle vaso-occlusion cuts off blood supply",
+          "Cellulitis from infection",
+          "Ulcer from venous stasis"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why does an ulcer scar but an erosion does not?",
-         "a": "Scarring requires dermal damage. An erosion involves the epidermis only, so it heals without a scar; an ulcer extends into the dermis, where fibroblasts lay down collagen to replace destroyed tissue."
+         "a": "**Scarring requires dermal damage; an erosion involves the epidermis only (heals without a scar), whereas an ulcer extends into the dermis.**\n\n## Understanding it\n- No dermal damage (erosion) → no scar; dermal damage (ulcer) → scar.\n\n>> Ulcer reaches the dermis (scars); erosion is epidermal only (no scar).",
+         "opts": [
+          "Erosions are deeper than ulcers",
+          "Ulcers damage the dermis (scar); erosions are epidermal only (no scar)",
+          "Both always scar",
+          "Scarring depends on infection, not depth"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Which dermal cell is responsible for scar formation, and where does it live?",
-         "a": "The fibroblast, which lives in the reticular layer of the dermis."
+         "a": "**The fibroblast, which lives in the reticular layer of the dermis.**\n\n## Understanding it\n- Fibroblasts in the reticular dermis lay down the collagen of a scar.\n\n>> Fibroblast (reticular dermis) makes the scar.",
+         "opts": [
+          "The keratinocyte, in the epidermis",
+          "The melanocyte, in the basal layer",
+          "The mast cell, in the papillary dermis",
+          "The fibroblast, in the reticular dermis"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why is a preterm or malnourished child at high risk of hypothermia, in terms of skin anatomy?",
-         "a": "They have very little subcutaneous adipose tissue (the heat insulator) and a large surface area relative to body weight, so heat is lost rapidly."
+         "a": "**They have very little subcutaneous adipose tissue (the heat insulator) and a large surface area relative to body mass, so they lose heat rapidly.**\n\n## Understanding it\n- Little insulating fat + high surface-area-to-mass ratio = rapid heat loss.\n\n>> Thin subcutaneous fat + high surface-area:mass → heat loss.",
+         "opts": [
+          "They have no melanocytes",
+          "Little insulating subcutaneous fat and a high surface-area-to-mass ratio",
+          "A thick stratum corneum blocks heat",
+          "Too much subcutaneous fat traps cold"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Give three sterile causes of pustules.",
-         "a": "Acne; pustular psoriasis; and erythema toxicum neonatorum."
+         "a": "**Acne; pustular psoriasis; and erythema toxicum neonatorum.**\n\n## Understanding it\n- Not all pustules are infected — acne, pustular psoriasis and ETN are **sterile**.\n\n>> Sterile pustules: acne, pustular psoriasis, erythema toxicum neonatorum.",
+         "opts": [
+          "Cellulitis, erysipelas, abscess",
+          "Scabies, tinea, candidiasis",
+          "Impetigo, folliculitis, boils",
+          "Acne, pustular psoriasis, erythema toxicum neonatorum"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why should a well newborn with sterile pustules not automatically receive antibiotics?",
-         "a": "Erythema toxicum neonatorum produces sterile pustules in a well baby and resolves spontaneously — pus does not always mean infection."
+         "a": "**Erythema toxicum neonatorum produces sterile pustules in a well baby and resolves spontaneously — the pus does not mean infection.**\n\n## Understanding it\n- ETN is benign and self-limiting; pus here is sterile, so antibiotics aren't needed.\n\n>> ETN = sterile, self-resolving pustules → no antibiotics.",
+         "opts": [
+          "All neonatal pustules are sterile",
+          "Antibiotics worsen pustules",
+          "Newborns cannot take antibiotics",
+          "ETN gives sterile, self-resolving pustules in a well baby"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Which primary lesion should prompt you to examine the lips, tongue, eyelids and airway?",
-         "a": "The wheal — because the same histamine-driven process in deeper or airway tissue is angioedema and anaphylaxis."
+         "a": "**The wheal — the same histamine-driven process in deeper/airway tissue is angioedema, which can progress to anaphylaxis.**\n\n## Understanding it\n- Wheals (urticaria) can be accompanied by **angioedema** of lips/tongue/airway → check for airway compromise.\n\n>> Wheal → check for angioedema/anaphylaxis (airway).",
+         "opts": [
+          "The plaque",
+          "The wheal (urticaria) — check for angioedema/anaphylaxis",
+          "The macule",
+          "The scar"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — In which condition does the definition of the lesion itself give you the diagnosis?",
-         "a": "The burrow — its definition states that it houses a parasite such as scabies, making it pathognomonic."
+         "a": "**The burrow — its definition states it houses a parasite such as scabies, making it pathognomonic.**\n\n## Understanding it\n- Uniquely, defining a burrow already names the disease (scabies).\n\n>> Burrow = pathognomonic of scabies (definition = diagnosis).",
+         "opts": [
+          "The plaque (psoriasis)",
+          "The wheal (urticaria)",
+          "The burrow (pathognomonic of scabies)",
+          "The macule"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why is erythema harder to appreciate in darkly pigmented skin, and what should you examine instead?",
-         "a": "Increased melanin masks the colour change. Examine the palms, soles, conjunctivae and mucous membranes instead."
+         "a": "**Increased melanin masks the colour change; examine the palms, soles, conjunctivae and mucous membranes instead.**\n\n## Understanding it\n- Melanin hides redness on pigmented skin — look where pigment is lighter (palms, soles, conjunctivae, mucosae).\n\n>> Melanin masks erythema → check palms/soles/conjunctivae/mucosae.",
+         "opts": [
+          "Melanin masks it — examine palms, soles, conjunctivae, mucosae",
+          "It is easier in dark skin, no change needed",
+          "Use a Wood's lamp on the trunk",
+          "Examine only the scalp"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A child has honey-coloured crusts on the face. What is the likely diagnosis and which lesion type is the crust?",
-         "a": "Impetigo. The crust is a secondary lesion — dried serum, pus and debris adherent to the surface of inflamed skin."
+         "a": "**Impetigo; the crust is a secondary lesion (dried serum, pus and debris adherent to inflamed skin).**\n\n## Understanding it\n- Honey-coloured crusts on the face = impetigo; the crust is a secondary lesion.\n\n>> Honey crusts = impetigo; crust = secondary lesion.",
+         "opts": [
+          "Psoriasis — the crust is a scale",
+          "Eczema — the crust is a wheal",
+          "Impetigo — the crust is a secondary lesion",
+          "Chickenpox — the crust is a primary lesion"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why can partial-thickness burns regenerate skin while full-thickness burns cannot?",
-         "a": "Epithelium regrows outwards from surviving hair follicles and sweat glands, which lie in the dermis. If the whole dermis is destroyed there are no appendages left to regenerate from, so the wound can only scar."
+         "a": "**Epithelium regrows outwards from surviving hair follicles and sweat glands in the dermis; if the dermis (and its appendages) is destroyed (full-thickness), there is no source for regeneration.**\n\n## Understanding it\n- Skin regenerates from **dermal appendages**; full-thickness burns destroy them, so no regrowth (needs grafting).\n\n>> Regrowth comes from dermal appendages — destroyed in full-thickness burns.",
+         "opts": [
+          "Full-thickness burns heal faster",
+          "Partial-thickness burns are sterile",
+          "Epithelium regrows from dermal appendages, destroyed in full-thickness burns",
+          "Full-thickness burns have too much melanin"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": "content/Pediatrics/Ewurum/The%20skin%20as%20an%20organ,%20primary%20&%20secondary%20lesions%201/img/",
