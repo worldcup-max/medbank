@@ -1,0 +1,193 @@
+{
+ "deck": "Recall Cards",
+ "topic": "Failure to Thrive",
+ "cards": [
+  {
+   "q": "Define failure to thrive.",
+   "a": "**Weight consistently below the 3rd–5th percentile for age and sex, OR a progressive fall of weight to below the 3rd–5th percentile, OR a decrease across 2 major growth percentiles in a short period.**\n\n## Understanding it\nThere are three ways to qualify — learn all three:\n- **Sitting low:** weight stays under the 3rd–5th centile.\n- **Falling to low:** weight drops down to under that line.\n- **Crossing lines:** weight falls across 2 major centiles quickly.\n\n>> The key idea is the **downward trend**. A small child tracking steadily along the 3rd centile is not FTT; a child **crossing centiles downward** is — the movement, not the single number, defines it.",
+   "opts": [
+    "Weight below the 3rd–5th percentile, or falling to it, or crossing 2 major centiles",
+    "Weight above the 97th percentile",
+    "Any child shorter than average",
+    "Weight steadily tracking the 50th centile"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the common physiologic basis of all FTT?",
+   "a": "**Inadequate nutrition — whatever the underlying cause.**\n\n## Understanding it\nNo matter how you classify it, every case of FTT ends at the same final pathway:\n- The child is **not receiving, absorbing, retaining, or being able to use enough calories** for growth.\n\n>> This single idea unifies the topic. Organic and non-organic causes differ in *how* nutrition became inadequate, but the endpoint — insufficient nutrition for growth — is always the same, which is why catch-up feeding is central to every treatment plan.",
+   "opts": [
+    "An inherited enzyme defect in every case",
+    "Chronic infection in every case",
+    "Inadequate nutrition, whatever the underlying cause",
+    "Excess growth hormone"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the three aetiological categories of FTT, and which is commonest?",
+   "a": "**Organic, non-organic, and mixed — and most cases are mixed.**\n\n## Understanding it\nSeparate them by *how* nutrition became inadequate:\n- **Organic** — a medical disease blocks nutrition (malabsorption, heart failure, metabolic disease).\n- **Non-organic** — food or stimulation isn't reaching the child (neglect, poverty, feeding problems).\n- **Mixed** — both together.\n\n>> 'Mixed is commonest' is the exam pearl and a clinical warning: a sick child often has a stressed family, and a starved child develops medical problems. So you must **search for organic and psychosocial causes simultaneously** — never stop at the first one you find.",
+   "opts": [
+    "Organic, non-organic, and mixed — and most cases are mixed",
+    "Infective, traumatic and toxic — mostly toxic",
+    "Type 1, 2 and 3 — mostly type 1",
+    "Acute, chronic and congenital — mostly acute"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define organic FTT and give its mechanisms.",
+   "a": "**Organic FTT is growth failure from an acute or chronic disorder that interferes with nutrient intake, absorption, metabolism, or excretion — or that increases energy requirements.**\n\n## Understanding it\nFollow a calorie's journey through the body and break it at each step:\n- **↓ Intake** — cleft palate, cerebral palsy, GERD, pyloric stenosis.\n- **Malabsorption** — coeliac disease, cystic fibrosis, lactase deficiency, IBD, short gut.\n- **Impaired metabolism** — Down/Turner syndrome, galactosaemia, inborn errors.\n- **↑ Excretion** — diabetes mellitus, proteinuria.\n- **↑ Energy requirement** — heart failure, hyperthyroidism, infection, bronchopulmonary dysplasia.\n\n>> **Cystic fibrosis appears twice** (malabsorption + high energy needs) — which is why CF children fail to thrive so severely.",
+   "opts": [
+    "Growth failure purely from neglect",
+    "Growth failure from a disorder of intake, absorption, metabolism, excretion, or increased needs",
+    "Deliberate underfeeding by carers",
+    "Failure to grow with no medical cause"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is non-organic FTT, and how common is it?",
+   "a": "**Non-organic FTT is growth failure from insufficient calorie intake due to psychosocial/environmental causes — and up to 80% of children with growth failure have no organic disorder.**\n\n## Understanding it\nThe striking statistic reframes your priors: most FTT is **not** a hidden disease.\n- Growth fails from **environmental neglect (lack of food), stimulus deprivation, or both**.\n- It usually shows first as **failure to gain weight**, with length and head circumference normal for a time until they too are affected.\n\n>> So when a child fails to thrive with a normal examination, the **leading hypothesis is non-organic** — which shifts the work-up toward diet history, observing feeds, and the family's social situation rather than endless lab tests.",
+   "opts": [
+    "A rare metabolic disease",
+    "Always caused by malabsorption",
+    "Failure from an underlying cardiac defect",
+    "Insufficient calorie intake from psychosocial/environmental causes; up to 80% of cases"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List causes of inadequate food intake in non-organic FTT.",
+   "a": "**Poverty, poor understanding of feeding technique, improperly (over-)diluted formula to stretch it, and an inadequate breast-milk supply (a stressed, exhausted, or poorly nourished mother).**\n\n## Understanding it\nEach cause is a practical, correctable failure of getting calories to the child:\n- **Over-diluting formula** to make it last is a classic poverty-driven cause that a diet history uncovers.\n- **Low milk supply** often traces back to the mother's own stress, exhaustion, or undernutrition.\n\n>> These are why the management is **education and support**, not blame — and why observing an actual feed and taking a careful diet history are diagnostic. Fixing the technique or the formula preparation often fixes the child.",
+   "opts": [
+    "Deliberate overfeeding",
+    "Excessive iron supplementation",
+    "Poverty, poor feeding technique, over-diluted formula, low breast-milk supply",
+    "Too-frequent breastfeeding"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does mental stress cause psychosocial FTT hormonally?",
+   "a": "**Mental stress raises counter-regulatory hormones (corticosteroids and catecholamines) that oppose the effect of growth hormone.**\n\n## Understanding it\nThere is a biochemical route from neglect to poor growth, not just missed meals:\n- Chronic stress → high **cortisol and catecholamines**.\n- These hormones **antagonise growth hormone**, so linear growth slows even when some calories are available.\n\n>> This is why psychosocial FTT can show growth failure that **accompanies or even precedes** poor weight gain — the stress itself blunts growth, adding to the effect of low intake.",
+   "opts": [
+    "Stress causes malabsorption of iron",
+    "Stress raises cortisol and catecholamines that oppose growth hormone",
+    "Stress raises growth hormone excessively",
+    "Stress directly destroys the gut lining"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is 'hospitalism' and how does it relate to non-organic FTT?",
+   "a": "**Hospitalism is a syndrome of depression in infants secondary to stimulus deprivation; the unstimulated child becomes depressed, apathetic, and ultimately anorexic — a psychologic basis similar to some non-organic FTT.**\n\n## Understanding it\nIt shows that FTT can come from lack of *interaction*, not just lack of *food*:\n- A child starved of stimulation becomes **withdrawn and apathetic**.\n- The apathy progresses to **anorexia**, so the child stops eating well and fails to grow.\n\n>> Some of these children are described as **hypervigilant and wary of people, preferring inanimate objects**. It reframes non-organic FTT as partly an **emotional/relational** disorder — which is why the treatment provides toys, play, and parent–child interaction, not only calories.",
+   "opts": [
+    "An infection caught in hospital",
+    "A drug reaction seen in hospital",
+    "Fear of doctors causing crying",
+    "Depression in infants from stimulus deprivation, leading to apathy and anorexia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "In FTT from inadequate intake, in what ORDER do the growth parameters fall?",
+   "a": "**Weight falls first, then length (height), and head circumference falls last.**\n\n## Understanding it\nThe sequence reflects how the body prioritises:\n- **Weight** is the most sensitive indicator, so it drops first with poor intake.\n- **Reduced linear growth (height)** signals **severe, prolonged** undernutrition.\n- **Head circumference falls late** because the **brain is preferentially spared** — so a small head means **very severe or long-standing** undernutrition.\n\n>> This order is diagnostic: **weight-first** points to a nutritional (often non-organic) cause, and a **falling head circumference** is an ominous late sign.",
+   "opts": [
+    "Weight falls first, then length, and head circumference last",
+    "Head circumference falls first",
+    "All three fall at exactly the same time",
+    "Height falls before weight"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What does a SIMULTANEOUS fall of weight and length suggest?",
+   "a": "**A primary disorder of growth (organic) or a prolonged inflammatory state — rather than simple inadequate intake.**\n\n## Understanding it\nThe timing separates the causes:\n- **Inadequate intake** → weight falls *before* length (the child gets thin first).\n- **Weight and length falling together** → the growth process itself is impaired — an **organic** growth disorder or chronic inflammation.\n\n>> So on the growth chart, ask *which fell first*. Weight-first = think nutritional/non-organic; both-together = think organic disease. This single pattern is one of the most useful bedside discriminators in the topic.",
+   "opts": [
+    "An acute, mild illness",
+    "Simple recent underfeeding",
+    "Normal healthy growth",
+    "A primary (organic) growth disorder or prolonged inflammatory state"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Can any single test or feature reliably separate organic from non-organic FTT?",
+   "a": "**No — without specific historic or physical evidence, no single clinical feature or test reliably distinguishes them, and because both can coexist you must search for both simultaneously.**\n\n## Understanding it\nThis is the central diagnostic humility of the topic:\n- There is **no lab test** that says 'organic' or 'non-organic'.\n- Children frequently have **both**, so finding one cause does not exclude the other.\n\n>> The practical consequence is a **multidisciplinary, parallel search** — physician, nurse, social worker, nutritionist, child-development expert (± psychiatrist) — plus **directly observing the child being fed** by staff and by parents. You diagnose by the whole picture, not one result.",
+   "opts": [
+    "Yes — a single blood test is definitive",
+    "Yes — the growth chart alone is definitive",
+    "Yes — response to feeding always distinguishes them",
+    "No — you must search for organic and non-organic causes simultaneously"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why should parents be engaged as 'co-investigators' in FTT?",
+   "a": "**Because it fosters their self-esteem and avoids blaming parents who may already feel frustrated or guilty about a perceived inability to nurture their child.**\n\n## Understanding it\nNon-organic FTT is a sensitive diagnosis that can feel like an accusation:\n- Blaming parents makes them **defensive and disengaged**, which harms the child.\n- Treating them as **partners** in solving the problem keeps them involved, welcome, and willing to feed and interact with the child.\n\n>> Practically: welcome frequent, long visits; support their feeding attempts; provide toys and ideas for play. Suspected abuse/neglect must still be **reported to social services**, but for most families **supportive referral (child care, parenting classes) is more appropriate than blame**.",
+   "opts": [
+    "It fosters self-esteem and avoids blaming already-guilty parents",
+    "To assign legal blame to the parents",
+    "Because parents run the lab tests",
+    "To reduce the doctor's workload"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which screening investigations are recommended when history and exam don't point to a cause?",
+   "a": "**FBC with differential; ESR; urea, creatinine and electrolytes; urinalysis (including concentrating/acidifying ability) and culture; and stool for pH, reducing substances, odour, colour, consistency and fat content.**\n\n## Understanding it\nExtensive testing is usually unproductive, so screening is deliberately limited:\n- **FBC + ESR** — anaemia, inflammation.\n- **U&E/creatinine** — renal/metabolic.\n- **Urinalysis + culture** — occult UTI (some FTT children with UTI have no other signs).\n- **Stool studies** — malabsorption clues (fat, reducing substances).\n\n>> Depending on the community, add **blood lead, HIV, or TB**. The philosophy: **let the history and examination direct testing**, not a scattergun panel.",
+   "opts": [
+    "FBC + differential, ESR, U&E/creatinine, urinalysis + culture, stool studies",
+    "Genetic testing as first-line for all",
+    "Immediate muscle biopsy",
+    "Whole-body CT and MRI for everyone"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "When is a sweat test or growth-hormone assessment appropriate in FTT?",
+   "a": "**A sweat test if there is recurrent respiratory disease, ravenous appetite, foul-smelling bulky stools, hepatomegaly, or a family history of cystic fibrosis. Growth-hormone assessment (fasting IGF-1 and IGFBP-3) when height is more severely affected than weight, or when height and weight fall off simultaneously.**\n\n## Understanding it\nBoth are targeted, not routine:\n- **Sweat test** chases **cystic fibrosis** — even though newborn screening exists, the classic clinical clues still warrant it.\n- **IGF-1 / IGFBP-3** chase a **growth-hormone/endocrine** cause — suspected precisely when **height is hit harder than weight** (the endocrine pattern).\n\n>> Notice the link back to the growth chart: 'height affected more than weight' is the endocrine signature that triggers the GH work-up. Bone age is checked if an endocrine cause is suspected.",
+   "opts": [
+    "Sweat test for cystic-fibrosis clues; GH work-up when height is more affected than weight",
+    "Both are done routinely in every child",
+    "Sweat test only if the child is obese",
+    "Neither is ever indicated"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the three aims of FTT treatment?",
+   "a": "**Sufficient nutrition (catch-up feeding), treatment of any underlying disorder, and long-term social support.**\n\n## Understanding it\nThe triad mirrors the mixed nature of FTT:\n- **Nutrition** — a diet with adequate calories for **catch-up growth, about 150% of the normal requirement**.\n- **Underlying disorder** — treat organic/mixed causes promptly.\n- **Social support** — education and emotional support to repair the parent–child relationship, with referral to community agencies.\n\n>> Because **all children grow when given enough nutrition**, weight gain in hospital alone doesn't prove the cause — you still address the family and any disease. Some cases need foster care, with return based on **demonstrated caregiving ability, not just time passed**.",
+   "opts": [
+    "Bed rest, fasting, and isolation",
+    "Sufficient nutrition, treat any underlying disorder, and long-term social support",
+    "Surgery, steroids, and antibiotics",
+    "Only vitamin supplements"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Roughly how many calories are needed for catch-up growth in FTT?",
+   "a": "**About 150% of the normal caloric requirement for age.**\n\n## Understanding it\nCatch-up growth is faster than normal growth, so it costs extra energy:\n- Maintenance calories only hold weight steady.\n- To **regain lost ground**, the child needs a surplus — roughly **one-and-a-half times** the usual requirement.\n\n>> This is a concrete, examinable number. Undershoot it and the child merely stops falling; hit ~150% and they can climb back up the centiles. It's why simply 'feeding normally' often fails to reverse established FTT.",
+   "opts": [
+    "About 300% of normal",
+    "About 50% of normal",
+    "Exactly the normal requirement",
+    "About 150% of the normal caloric requirement"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the prognosis of non-organic FTT, and who is at highest cognitive risk?",
+   "a": "**Most children over 1 year with non-organic FTT achieve a stable weight above the 3rd percentile; but children who develop FTT before age 1 are at high risk of cognitive delay (especially verbal and maths), with those diagnosed under 6 months at highest risk.**\n\n## Understanding it\nPrognosis hinges on **age at onset** because of brain development:\n- **After age 1** — weight usually recovers to a stable, healthy centile.\n- **Before age 1**, and especially **under 6 months** — this is the period of **maximal postnatal brain growth**, so undernutrition then risks lasting **cognitive (verbal/maths) delay**.\n\n>> About **50% have general behavioural problems**, and eating/elimination problems occur in a similar proportion. The message: **early onset is the danger**, which is why early detection and vigorous treatment matter most in infancy.",
+   "opts": [
+    "Most over-1s recover; onset before age 1 (esp. <6 months) risks cognitive delay",
+    "Older children are at the highest risk",
+    "Age at onset makes no difference",
+    "It always causes permanent severe disability"
+   ],
+   "ans": 0
+  }
+ ]
+}

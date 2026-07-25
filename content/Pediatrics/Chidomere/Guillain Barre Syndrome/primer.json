@@ -1,0 +1,36 @@
+{
+ "deck": "Primer Cards",
+ "topic": "Guillain-Barré Syndrome",
+ "cards": [
+  {
+   "q": "What is Guillain-Barré syndrome?",
+   "lecturer": "GBS is a collection of clinical syndromes manifesting as an acute inflammatory polyradiculoneuropathy with resultant weakness and diminished reflexes. Classically it is a post-infectious demyelinating neuropathy with ascending weakness, characterised by weakness, paraesthesias and hyporeflexia, affecting mainly motor (sometimes sensory) nerves.",
+   "explain": "## Step 1: Unpack the long name\n\n>> **Poly** = many nerves · **radiculo** = the nerve roots at the cord · **neuropathy** = nerve damage.\n\nSo 'acute inflammatory polyradiculoneuropathy' = a sudden, inflammatory attack on many nerves and their roots.\n\n## Step 2: The three classic hallmarks\n\n>> **Weakness + paraesthesias + hyporeflexia**, in an **ascending** pattern (legs → up).\n\n## Step 3: The key word is 'post-infectious'\n\n>> GBS follows an infection — that single fact explains the autoimmune mechanism, the 1–3 week lag, and why history-taking hunts for a recent GI or respiratory illness.",
+   "tie": "This definition frames the whole topic: 'ascending, post-infectious, demyelinating, areflexic weakness' is the pattern you match a patient against, and each word predicts a later section (aetiology, pathophysiology, clinical course)."
+  },
+  {
+   "q": "Describe the pathophysiology and main aetiological triggers of GBS.",
+   "lecturer": "GBS is an autoimmune response triggered by an antecedent (usually viral) infection, with humoral and cell-mediated components. Symptoms usually result from immune-mediated injury to the myelin sheath, causing absent or profoundly delayed conduction in peripheral nerves and spinal roots; cranial nerves are rarely involved. Two-thirds have a preceding GI or respiratory infection 1–3 weeks before onset (e.g. Campylobacter, EBV, CMV, Mycoplasma, HIV); other triggers include vaccinations, lymphoma (Hodgkin), and drugs.",
+   "explain": "## Step 1: Molecular mimicry, in effect\n\n>> An infection primes the immune system, which then **cross-attacks the nerve's myelin** — an autoimmune 'friendly fire'.\n\n## Step 2: Demyelination = conduction failure\n\nStrip the myelin and the nerve **can't conduct** — hence profound slowing or block, producing weakness and areflexia.\n\n## Step 3: The tell-tale 1–3 week gap\n\n>> **Two-thirds** have a GI/respiratory infection **1–3 weeks earlier** — long enough for the immune response to build. **Campylobacter** is the classic culprit.",
+   "tie": "The mechanism explains the treatment: since the damage is antibody/immune-mediated, therapies that remove or neutralise antibodies (plasma exchange, IVIG) work — while the demyelination explains the nerve-conduction findings used to diagnose it."
+  },
+  {
+   "q": "Describe the typical clinical features of GBS.",
+   "lecturer": "GBS presents 2–4 weeks after a benign respiratory or GI illness with rapidly progressive, bilateral, symmetrical weakness that starts in the lower limbs and ascends to the arms, trunk, respiratory and facial muscles, maximal about 2 weeks after onset. Paraesthesias begin in the toes and fingertips; there is aching pain in the shoulder girdle, back, buttocks and thighs; deep tendon reflexes are lost (flaccid paralysis, hypotonia, areflexia). Autonomic instability and respiratory failure (up to one-third need ventilation) may occur.",
+   "explain": "## Step 1: The signature pattern\n\n>> **Ascending, symmetrical, flaccid, areflexic** weakness — starting in the legs and climbing.\n\n## Step 2: Track the danger upward\n\nAs weakness ascends it reaches the **respiratory and bulbar muscles** — this is where GBS kills. **Up to one-third need ventilation.**\n\n## Step 3: Don't forget autonomics\n\n>> Tachy/brady-cardia, labile BP, urinary retention — **autonomic instability** can be as dangerous as the weakness itself.",
+   "tie": "Recognising the ascending, areflexic pattern plus watching for respiratory/bulbar and autonomic involvement is exactly what triggers ICU admission and the bedside NIF monitoring covered under diagnosis and treatment."
+  },
+  {
+   "q": "How is GBS diagnosed?",
+   "lecturer": "CSF shows albuminocytologic (cyto-albuminologic) dissociation — elevated protein (>400 mg/L) with a normal cell count (protein may be normal very early). Nerve conduction studies show demyelination (slowing, prolonged distal latencies, prolonged F-waves, conduction block) 2–3 weeks after onset, and EMG shows acute denervation with reduced recruitment. Serum CK is normal or mildly elevated; serology may show a four-fold antibody rise; ECG may show conduction/rhythm changes; and forced vital capacity / negative inspiratory force monitor respiratory muscle function.",
+   "explain": "## Step 1: The classic CSF finding\n\n>> **Albuminocytologic dissociation** — **high protein, normal cells.** High protein WITHOUT the high white count you'd expect in infection.\n\n## Step 2: Nerve studies confirm demyelination\n\n>> **Conduction slowing, long distal latencies, prolonged F-waves** — but only appear **2–3 weeks** in, so early normal studies don't exclude GBS.\n\n## Step 3: Monitor breathing at the bedside\n\n>> **NIF normally > 60 cm H₂O**; if it **falls toward 20**, get ready to ventilate.",
+   "tie": "The diagnostic triad (clinical pattern + albuminocytologic dissociation + demyelinating nerve studies) confirms GBS, while the FVC/NIF monitoring bridges diagnosis and management — it decides who goes to ICU before respiratory arrest happens."
+  },
+  {
+   "q": "Outline the clinical course and treatment of GBS.",
+   "lecturer": "The course is usually benign, with spontaneous recovery beginning within 2–3 weeks; recovery follows a gradient inverse to involvement (bulbar function recovers first, lower-limb weakness last, reflexes last of all). About one-third need ICU for respiratory failure. Specific treatment is plasma exchange or IVIG, which shorten recovery by up to 50%; prednisolone alone is ineffective. Supportive care includes DVT prophylaxis, autonomic management, respiratory support, and physical/occupational therapy.",
+   "explain": "## Step 1: Reassuring natural history\n\n>> Most recover, starting within **2–3 weeks** — GBS is usually **self-limiting** if the patient is supported through the dangerous phase.\n\n## Step 2: Recovery runs in reverse\n\n>> What went down last comes back first: **bulbar recovers first, legs last, reflexes last of all.**\n\n## Step 3: What actually changes outcome\n\n>> **Plasma exchange or IVIG** cut recovery time by up to **50%**; **steroids alone don't work.** The rest is supportive — but respiratory and autonomic support is what saves lives.",
+   "tie": "The benign-but-dangerous course is why treatment is two-pronged: disease-modifying therapy (IVIG/plasma exchange) to speed recovery, plus intensive supportive care to survive the respiratory/autonomic peak — delay in the latter is what causes death."
+  }
+ ]
+}

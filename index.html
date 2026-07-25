@@ -273,6 +273,29 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .btn.got{background:var(--recall);border-color:var(--recall);color:#04231a}
 .btn.miss{background:#2a1c22;border-color:#7a3b4d;color:#ff9db1}
 
+/* ---- MCQ (Recall Deck B) ---- */
+.mcqopts{margin-top:22px;display:flex;flex-direction:column;gap:10px;animation:fade .18s ease}
+.mcqopt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--panel2);border:1px solid var(--line);color:var(--text);
+  border-radius:12px;padding:14px 15px;cursor:pointer;font-size:15.5px;line-height:1.5;
+  transition:.12s;font-family:inherit}
+.mcqopt:hover:not(:disabled){border-color:var(--accent);background:#1f2735}
+.mcqopt:disabled{cursor:default}
+.mcqtag{flex:0 0 26px;height:26px;border-radius:7px;background:var(--line);color:var(--dim);
+  display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.mcqtext{flex:1}
+.mcqmark{margin-left:auto;font-weight:800;font-size:17px}
+.mcqopt.correct{border-color:var(--recall);background:#3ecf8e1c}
+.mcqopt.correct .mcqtag{background:var(--recall);color:#04231a}
+.mcqopt.correct .mcqmark{color:var(--recall)}
+.mcqopt.wrong{border-color:#7a3b4d;background:#2a1c22}
+.mcqopt.wrong .mcqtag{background:#7a3b4d;color:#ff9db1}
+.mcqopt.wrong .mcqmark{color:#ff9db1}
+.mcqopt.dim{opacity:.45}
+.mcqresult{margin-top:18px;font-weight:700;font-size:15px;padding:11px 14px;border-radius:10px;text-align:center;animation:fade .2s ease}
+.mcqresult.ok{background:#3ecf8e1c;color:var(--recall)}
+.mcqresult.no{background:#2a1c22;color:#ff9db1}
+
 /* ---- topic status selector ---- */
 .statusbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel);
   border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-bottom:18px}
@@ -567,7 +590,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.23b';   // bump this each release
+const APP_VERSION='2026.07.24d';   // bump this each release
 const LADDER=[3,7,14,30,60];           // days added after each correct answer
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -1473,8 +1496,61 @@ function planItem(state,icon,title,desc,action){
        ${action?`<div class="btnrow" style="margin-top:11px">${action}</div>`:''}</div></div>`;
 }
 
+/* MCQ renderer for Recall (Deck B) cards that carry options */
+function mcqView(session){
+  const it=S.items[S.order[S.i]], c=it.c, t=it.t;
+  const col='var(--recall)';
+  const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
+  const picked = S.pick!=null, correct = picked && S.pick===c.ans;
+  let body;
+  if(!S.opts){
+    body = `<div class="taphint">Think of your answer first — then reveal the options.</div>`;
+  }else{
+    const optsHtml = c.opts.map((o,i)=>{
+      let cls='mcqopt';
+      if(picked){ if(i===c.ans) cls+=' correct'; else if(i===S.pick) cls+=' wrong'; else cls+=' dim'; }
+      const mark = picked ? (i===c.ans?'<span class="mcqmark">✓</span>':(i===S.pick?'<span class="mcqmark">✗</span>':'')) : '';
+      return `<button class="${cls}" ${picked?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})">
+          <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span>${mark}</button>`;
+    }).join('');
+    body = `<div class="mcqopts">${optsHtml}</div>`;
+    if(picked){
+      body += `<div class="mcqresult ${correct?'ok':'no'}">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
+            + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`;
+    }
+  }
+  let controls;
+  if(!S.opts){
+    controls = `<div class="navbtns"><button class="btn primary" onclick="event.stopPropagation();showOpts()">Show options</button></div>
+      <div class="kbd">Space / O reveals options — decide your answer first</div>`;
+  }else if(!picked){
+    controls = `<div class="kbd">Tap an option · keys 1–4</div>`;
+  }else{
+    const last=S.i>=n-1;
+    controls = `<div class="navbtns">
+        <button class="btn ${star?'':'got'}" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★ In hard cards':'★ Add to hard'}</button>
+        <button class="btn primary" onclick="event.stopPropagation();mcqNext()" ${(!session&&last)?'disabled':''}>${session&&last?'Finish':'Next →'}</button></div>
+      <div class="kbd">Space → next</div>`;
+  }
+  return `<div class="studywrap">
+    <div class="studytop">
+      <span class="pill" style="background:${col}22;color:${col};margin:0">${session?esc(t.name):'Recall · Deck B'}</span>
+      <span class="name">${session?'◎ Recall (MCQ)':esc(t.name)}</span>
+      <span class="counter">${S.i+1} / ${n}</span></div>
+    <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
+    <div class="flash" onclick="cardTap()">
+      <button class="starbtn ${star?'on':''}" title="Add to hard cards" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
+      <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
+      <div class="q">${esc(c.q)}</div>
+      ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
+      ${body}</div>
+    ${controls}</div>`;
+}
+
 /* shared card renderer — deck mode and session (daily/hard) mode */
 function cardView(session){
+  const it0=S.items[S.order[S.i]];
+  if(it0 && it0.deck!=='primer' && it0.c.opts && it0.c.opts.length) return mcqView(session);
   const it=S.items[S.order[S.i]], c=it.c, t=it.t, deck=it.deck, isP=deck==='primer';
   const col=isP?'var(--primer)':'var(--recall)';
   const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
@@ -1526,23 +1602,69 @@ function cardView(session){
     ${controls}</div>`;
 }
 
+/* ---- MCQ interaction (Recall cards with options) ---- */
+function isMcqCard(it){ return it && it.deck!=='primer' && it.c && it.c.opts && it.c.opts.length; }
+function cardTap(){
+  if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
+  if(isMcqCard(it)){ if(!S.opts) showOpts(); return; }   // options come first; don't leak the answer
+  reveal();
+}
+function showOpts(){
+  if(!S) return; if(S.opts) return; S.opts=true;
+  markActive(); const it=S.items[S.order[S.i]]; if(it) touchTopic(it.t.id);
+  render();
+}
+function pickOpt(i){
+  if(!S) return; const it=S.items[S.order[S.i]]; if(!it||S.pick!=null||!isMcqCard(it)) return;
+  const c=it.c, ok=(i===c.ans);
+  S.pick=i; S.show=true;
+  const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor;
+  markActive();
+  if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
+  else rateSRS(it.id,ok);
+  logRate(ok); touchTopic(it.t.id);
+  S.session.done++; if(ok) S.session.correct++;
+  if(!ok && !it.conf){                                   // failed → auto-add to hard cards
+    DATA.starred[it.id]=1;
+    try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
+  }
+  if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
+  persist();
+  const afterCards=todayLog().cards, afterLvl=levelInfo().i, afterStreak=curStreak();
+  if(afterLvl>beforeLvl)                          celebrate('level','Level up · '+LEVELS[afterLvl].n);
+  else if(beforeCards<goal && afterCards>=goal)   celebrate('goal','🎉 Daily goal complete!');
+  else if(beforeCards<floor && afterCards>=floor) celebrate('floor','✓ Minimum day done');
+  else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
+  render(); window.scrollTo(0,0);
+}
+function mcqNext(){
+  if(!S) return;
+  if(S.i>=S.items.length-1){
+    if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
+    S.show=false;S.opts=false;S.pick=null; render(); return;   // deck: stay on last card
+  }
+  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
+}
+
 function reveal(){
   if(!S) return;
-  if(!S.show){ markActive(); const it=S.items[S.order[S.i]]; if(it) touchTopic(it.t.id); }
+  const it=S.items[S.order[S.i]];
+  if(isMcqCard(it)){ if(!S.opts) showOpts(); else if(S.pick!=null) mcqNext(); return; }
+  if(!S.show){ markActive(); if(it) touchTopic(it.t.id); }
   S.show=!S.show; render();
 }
 function step(d){ if(!S)return; const n=S.i+d; if(n<0||n>=S.items.length)return;
-  S.i=n; S.show=false;
+  S.i=n; S.show=false; S.opts=false; S.pick=null;
   if(S.mode==='deck'){ DATA.pos['pos:'+S.t.id+S.deck]=S.i; persist(); }
   render(); window.scrollTo(0,0);
 }
-function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;render(); }
-function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.order=S.items.map((_,k)=>k);
+function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;render(); }
+function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.order=S.items.map((_,k)=>k);
   if(S.mode==='deck'){DATA.pos['pos:'+S.t.id+S.deck]=0;persist();} render(); }
 function sessionNext(){                       // advance a non-rated (primer) card inside a session
   if(!S) return; S.session.done++;
-  if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false; render(); window.scrollTo(0,0); return; }
-  S.i++; S.show=false; render(); window.scrollTo(0,0);
+  if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0); return; }
+  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
 }
 function celebrate(kind,text){
   try{ if(navigator.vibrate) navigator.vibrate(kind==='goal'||kind==='level'?[30,40,30]:20); }catch(e){}
@@ -1573,16 +1695,23 @@ function rateCard(ok){
   else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
   if(S.i>=S.items.length-1){
     if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
-    S.show=false; render(); return;            // deck: stay on last card
+    S.show=false;S.opts=false;S.pick=null; render(); return;            // deck: stay on last card
   }
-  S.i++; S.show=false; render(); window.scrollTo(0,0);
+  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
 }
 document.addEventListener('keydown',e=>{
   const h=location.hash;
   if(!/^#\/(study|review|hard)/.test(h)) return;
   if(!S) return;
-  if(e.code==='Space'){ e.preventDefault(); reveal(); return; }
   const it=S.items[S.order[S.i]], canRate=it && it.deck!=='primer';
+  if(isMcqCard(it)){                                   // MCQ keyboard flow
+    if(e.code==='Space'){ e.preventDefault(); if(!S.opts) showOpts(); else if(S.pick!=null) mcqNext(); return; }
+    if((e.key==='o'||e.key==='O') && !S.opts){ showOpts(); return; }
+    if(S.opts && S.pick==null && /^[1-9]$/.test(e.key)){ const idx=+e.key-1; if(idx<it.c.opts.length) pickOpt(idx); return; }
+    if(S.pick!=null && e.key==='ArrowRight'){ mcqNext(); return; }
+    return;
+  }
+  if(e.code==='Space'){ e.preventDefault(); reveal(); return; }
   if(canRate && S.show){ if(e.key==='1')rateCard(false); if(e.key==='2')rateCard(true); return; }
   if(!canRate && (S.mode==='daily'||S.mode==='hard') && S.show){ if(e.key==='ArrowRight')sessionNext(); return; }
   if(e.key==='ArrowRight')step(1);

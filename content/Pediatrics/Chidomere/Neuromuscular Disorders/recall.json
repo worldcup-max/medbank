@@ -1,0 +1,215 @@
+{
+ "deck": "Recall Cards",
+ "topic": "Neuromuscular Disorders",
+ "cards": [
+  {
+   "q": "What is a neuromuscular disorder (NMD)?",
+   "a": "**Any disease affecting the motor unit — the functional unit of the muscle — impairing skeletal muscle function directly (muscle disease) or indirectly (disease of nerve or the neuromuscular junction).**\n\n## Understanding it\nThe definition centres on one structure — the **motor unit** — and two routes to weakness:\n- **Direct** — the muscle itself is diseased (muscular dystrophy).\n- **Indirect** — the muscle is healthy but its **signal is cut off** by nerve or junction disease (neuropathy, myasthenia).\n\n>> NMDs present as **motor weakness or unusual fatigability**, sometimes with sensory disturbance or pain. They cause the **greatest burden of chronic disability in children**, and crucially, **many are treatable** — so identifying them matters.",
+   "opts": [
+    "A disorder confined to smooth muscle",
+    "An inflammatory joint disease",
+    "A disease only of the brain and spinal cord",
+    "Any disease affecting the motor unit, impairing skeletal muscle directly or indirectly"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the motor unit, and what are its four components that can be diseased?",
+   "a": "**A motor unit is a motor neuron together with all the muscle fibres it innervates. Disease of any component causes an NMD: the motor neuron (anterior horn cell), the sensory neuron (dorsal root ganglion), the neuromuscular junction, or the muscle itself.**\n\n## Understanding it\nTrace the circuit from spinal cord to muscle and note where each disease sits:\n- **Anterior horn cell** (motor neuron) — spinal muscular atrophy, polio.\n- **Peripheral nerve** — neuropathies, GBS.\n- **Neuromuscular junction** — myasthenia gravis.\n- **Muscle** — muscular dystrophies, myopathies.\n\n>> This is the master framework of the whole topic. When a child presents with weakness, your first job is to **localise the lesion** to one of these four sites — everything else (which tests, which disease) follows from that.",
+   "opts": [
+    "Artery, vein, capillary and lymphatic",
+    "Motor neuron (anterior horn), sensory neuron (dorsal root ganglion), NMJ, and muscle",
+    "Brain, meninges, ventricles and CSF",
+    "Bone, cartilage, tendon and ligament"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How do the aetiology and epidemiology of NMDs break down, especially in Nigeria?",
+   "a": "**NMDs are acquired or genetic (gene mutation), with other causes including autoimmunity, toxins, metabolic and hormonal derangements, and infection. Overall paediatric prevalence is 36.9 per 100,000. In Nigeria, peripheral neuropathy is the most common type (63.0%), and acquired NMDs predominate — possibly due to scarce electrophysiologic and genetic testing.**\n\n## Understanding it\nTwo big buckets, with a local twist:\n- **Genetic** (e.g. Duchenne) vs **acquired** (autoimmune, toxic, infectious).\n- Globally, polio has declined with immunisation.\n\n>> The Nigerian data matter for exams and practice: **acquired peripheral neuropathy dominates (63%)**, partly a real pattern and partly because genetic testing is scarce, so inherited disorders may be under-diagnosed. Context shapes the differential you reach for.",
+   "opts": [
+    "Muscular dystrophy is commonest in Nigeria",
+    "Only caused by vitamin deficiency",
+    "Acquired or genetic; in Nigeria peripheral neuropathy is commonest (63%), acquired predominate",
+    "Entirely genetic with no acquired causes"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What history points toward a neuromuscular disorder?",
+   "a": "**A usually progressive course with frequent falls, difficulty climbing stairs, inability to run or rise from the floor, postural deformities, and hypotonia affecting torso and limbs — plus numbness, paraesthesia, myalgia, fasciculations, poor facial expression, limited ocular tracking, or swallowing difficulty.**\n\n## Understanding it\nThe classic complaints all describe **proximal weakness**:\n- **Difficulty climbing stairs / rising from the floor / frequent falls** = weak **hip and pelvic-girdle** muscles.\n- **Swallowing and facial/ocular** symptoms hint at bulbar/cranial involvement.\n\n>> The word **progressive** is important — most NMDs worsen over time, and parents typically present because the child is falling behind peers or losing an ability they once had. That trajectory, plus proximal weakness, should prompt a neuromuscular work-up.",
+   "opts": [
+    "Fever with a productive cough",
+    "Sudden painless visual loss",
+    "Progressive weakness — frequent falls, trouble climbing stairs, rising from the floor, hypotonia",
+    "Episodic abdominal pain after meals"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the Gowers sign and what does it indicate?",
+   "a": "**Gowers sign is when a child uses their hands to 'walk up' their own legs and thighs in order to rise from a squatting/seated position — indicating weakness of the pelvic girdle or proximal lower-limb muscles.**\n\n## Understanding it\nIt's a compensation for weak hips:\n- Normally you stand up using your hip and thigh muscles.\n- If those **proximal muscles are too weak**, the child must **push on their own thighs with their hands**, effectively climbing up their body to get upright.\n\n>> It's a hallmark of **proximal muscle weakness** and is classically associated with **Duchenne muscular dystrophy** (evident by age 3). Seeing a child rise this way is a strong, examinable clue pointing to a myopathy.",
+   "opts": [
+    "Inability to smell (anosmia)",
+    "A murmur heard on standing",
+    "A brisk knee jerk on tapping",
+    "Using the hands to 'walk up' one's own legs to stand — proximal/pelvic-girdle weakness"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is creatine kinase (CK) used in diagnosing NMDs?",
+   "a": "**CK is normally below 200 IU/L; a rise to at least 3× the upper limit of normal (sometimes over 1000 IU/L) suggests a congenital muscular dystrophy or infantile spinal muscular atrophy.**\n\n## Understanding it\nCK is an enzyme that leaks out of **damaged muscle**:\n- Muscle-fibre necrosis (as in dystrophies) spills large amounts of CK into the blood.\n- So a **markedly elevated CK (≥3× normal)** points strongly to a **primary muscle disease**.\n\n>> In Duchenne the CK is **greatly elevated even at birth**, before symptoms appear — making it a useful early screen. A normal or only mildly raised CK, by contrast, argues against a necrotising myopathy and points elsewhere along the motor unit.",
+   "opts": [
+    "Markedly raised CK (≥3× normal) suggests muscular dystrophy or spinal muscular atrophy",
+    "CK is only raised in Bell's palsy",
+    "CK measures kidney function",
+    "A low CK confirms myasthenia gravis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How do EMG and nerve conduction studies localise an NMD?",
+   "a": "**EMG detects a myopathic pattern in diseases of muscle only, while nerve conduction velocity (NCV) detects loss of motor nerve fibres (a neuropathic/denervation pattern) in motor-neuron disease. Combined, they separate demyelinating neuropathies (markedly prolonged latency, very low conduction velocities) from axonal neuropathies (decreased response with normal latency/velocity).**\n\n## Understanding it\nEach test interrogates a different part of the motor unit:\n- **EMG → the muscle**: a **myopathic pattern** means the muscle itself is diseased.\n- **NCV → the nerve**: a **neuropathic pattern** means motor nerve fibres are lost.\n\n>> Together they answer 'muscle or nerve?', and if nerve, 'demyelinating or axonal?' — **demyelinating** = slow conduction and long latencies (myelin problem); **axonal** = reduced amplitude with normal speed (axon problem). This pairing is the electrophysiological core of localisation.",
+   "opts": [
+    "EMG myopathic = muscle disease; NCV neuropathic = nerve disease",
+    "They measure only heart rhythm",
+    "EMG tests hearing; NCV tests vision",
+    "Both are normal in all NMDs"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is Bell's palsy?",
+   "a": "**Acute dysfunction of the facial nerve — the commonest cause of sudden facial weakness — presenting as an isolated lower motor neurone facial palsy affecting the upper AND lower facial muscles, unilateral in over 99% of cases, with sudden onset over hours to days.**\n\n## Understanding it\nThe key is that it is a **lower motor neuron (LMN)** facial palsy:\n- An LMN lesion weakens the **entire half of the face, including the forehead**.\n- This contrasts with an **upper motor neuron** lesion (like a stroke), which **spares the forehead** because the forehead has bilateral cortical input.\n\n>> So the discriminating question is always: **can the patient wrinkle their forehead?** If the forehead is involved (can't wrinkle it), the lesion is LMN — consistent with Bell's palsy rather than a central cause.",
+   "opts": [
+    "An upper-motor-neuron palsy sparing the forehead",
+    "A bilateral tongue paralysis",
+    "A palsy of the oculomotor nerve",
+    "Acute lower-motor-neuron facial nerve palsy affecting the whole half of the face"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes Bell's palsy and how is it managed?",
+   "a": "**It commonly follows an upper respiratory tract infection (post-infectious demyelination; HSV and others implicated), from oedema and inflammation of the nerve within the facial canal of the temporal bone. Management is largely conservative: eye drops to protect the cornea, prednisolone, and aciclovir if HSV is suspected — with over 85% of children recovering completely, most within 3 weeks.**\n\n## Understanding it\nMechanism drives the treatment:\n- The nerve **swells within the rigid facial canal**, and the tight bony channel compresses it → palsy.\n- **Steroids (prednisolone)** reduce the oedema/inflammation; **aciclovir** targets a suspected herpes trigger.\n- **Eye drops** are essential because the eye can't fully close, risking corneal drying.\n\n>> The reassuring prognosis (**>85% full recovery in children, usually within 3 weeks**) means treatment is supportive and anti-inflammatory rather than aggressive.",
+   "opts": [
+    "A brain tumour; treat with radiotherapy",
+    "Bacterial meningitis; treat with IV penicillin",
+    "Post-viral nerve oedema (HSV); treat with eye care, prednisolone, ± aciclovir",
+    "Stroke; treat with thrombolysis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the pathophysiology of myasthenia gravis?",
+   "a": "**Antibodies are directed against the acetylcholine receptor (AChR) at the neuromuscular junction, reducing the number of available receptors. ACh release from the nerve terminal is normal, but the postsynaptic muscle membrane is less responsive, and this lack of response to ACh produces progressive muscular weakness.**\n\n## Understanding it\nThe defect is at the **receiving end** of the junction:\n- The nerve still **releases ACh normally**.\n- But autoantibodies have **destroyed/blocked many AChRs**, so the muscle membrane can't 'hear' the signal.\n- Fewer working receptors → weaker, less reliable muscle activation.\n\n>> This explains the **fatigability**: with repeated firing, ACh stores dwindle and the already-reduced receptor pool can't sustain contraction, so the muscle tires quickly. It also explains why **cholinesterase inhibitors help** — they keep ACh around longer to compete for the scarce receptors.",
+   "opts": [
+    "Antibodies against acetylcholine receptors reduce available receptors at the NMJ",
+    "Demyelination of peripheral nerves",
+    "Loss of anterior horn cells",
+    "Deficiency of dystrophin in muscle"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the clinical features of myasthenia gravis?",
+   "a": "**Fluctuating weakness increased by exertion, with ptosis and diplopia; proximal-predominant, symmetric limb weakness that spreads ocular → facial → bulbar → truncal/limb. Sensation and deep tendon reflexes are normal, with no fasciculations, no sensory loss and no myalgia. Bulbar weakness causes nasal speech, regurgitation and dysphagia; respiratory muscle weakness can cause fatal respiratory failure.**\n\n## Understanding it\nThe signature is **fatigability** — weakness that **worsens with use and improves with rest**:\n- **Ptosis increases on sustained upgaze (30–90 s)**; repeated fist clenching tires the hand; arms can't stay elevated beyond 1–2 minutes.\n- It typically **starts in the eyes** (ptosis, diplopia) and spreads downward.\n\n>> Two negative findings are diagnostically vital: **normal reflexes and sensation, and no fasciculations.** These place the lesion at the **NMJ** (not nerve or anterior horn), separating MG from neuropathies and motor-neuron disease.",
+   "opts": [
+    "Spasticity and hyperreflexia",
+    "Fixed weakness that improves with exertion",
+    "Areflexia with severe sensory loss",
+    "Fatigable weakness worse with exertion; ptosis and diplopia; normal reflexes and sensation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the clinical types of myasthenia gravis?",
+   "a": "**Acquired (usually autoimmune); Congenital (in infants of non-myasthenic mothers, no spontaneous remission, persists with age); Transient neonatal (in infants of myasthenic mothers via transplacental antibodies, improving as antibodies disappear); and Familial (rare, autosomal recessive, not associated with plasma AChR antibodies).**\n\n## Understanding it\nSeparate them by cause and course:\n- **Acquired** — the classic autoimmune disease.\n- **Transient neonatal** — the baby borrowed the **mother's antibodies** across the placenta; it **resolves** once those antibodies clear (needs cholinesterase inhibitors only briefly).\n- **Congenital** — a genetic NMJ defect in a baby of a **healthy mother**; it **persists** (not antibody-mediated).\n- **Familial** — rare, autosomal recessive, no AChR antibodies.\n\n>> The key contrast: **transient neonatal improves** (maternal antibodies wash out), while **congenital persists** (a structural genetic problem) — and neither congenital nor familial forms respond to thymectomy.",
+   "opts": [
+    "Acquired, congenital, transient neonatal, and familial",
+    "Type 1 and type 2 diabetes-related",
+    "Ascending and descending forms",
+    "Only acquired and traumatic"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the Tensilon (edrophonium) test?",
+   "a": "**A short-acting cholinesterase inhibitor — usually edrophonium chloride (0.2 mg/kg IV) or neostigmine (0.4 mg/kg IM) — is given, and within seconds the ptosis and ophthalmoplegia improve and fatigability decreases, with effects lasting only 1–2 minutes.**\n\n## Understanding it\nIt's a quick pharmacological confirmation of MG:\n- Blocking acetylcholinesterase **lets ACh linger** in the synaptic cleft.\n- More available ACh **outcompetes the antibody problem**, transiently restoring transmission.\n- The dramatic, brief improvement (seconds, lasting 1–2 min) supports the diagnosis.\n\n>> The logic ties straight back to the pathophysiology: if the problem is too few responsive receptors, then **increasing ACh** temporarily overcomes it — a visible, bedside demonstration that the lesion is at the neuromuscular junction.",
+   "opts": [
+    "An antibody blood test taking days",
+    "A cholinesterase inhibitor transiently improves ptosis/ophthalmoplegia within seconds",
+    "An imaging scan of the thymus",
+    "A test that worsens weakness permanently"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is myasthenia gravis investigated (besides Tensilon)?",
+   "a": "**EMG shows a decremental response to repetitive nerve stimulation (reversed by a cholinesterase inhibitor); anti-ACh antibodies may be assayed but are inconsistently demonstrated; serum CK is normal; chest X-ray/CT may reveal an enlarged thymus (usually not a thymoma); and ECG is usually normal.**\n\n## Understanding it\nEach test reflects the NMJ pathology:\n- **Decremental EMG response** — with repeated stimulation the response **fades**, mirroring the clinical fatigability; a cholinesterase inhibitor reverses it.\n- **Normal CK** — because the muscle itself isn't being destroyed (unlike dystrophies).\n- **Enlarged thymus** — the thymus drives the autoimmune process, which is why **thymectomy** can treat it.\n\n>> The **normal CK** is a useful discriminator: it tells you this is **not a primary myopathy**, steering you toward a junction problem confirmed by the decremental EMG.",
+   "opts": [
+    "Decremental EMG response, anti-AChR antibodies, normal CK, CXR for enlarged thymus",
+    "Very high CK with myopathic biopsy",
+    "Albuminocytologic dissociation in CSF",
+    "Elevated F-waves on nerve conduction"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is myasthenia gravis treated?",
+   "a": "**Cholinesterase inhibitors (neostigmine, pyridostigmine) are first-line; long-term prednisolone may be effective; thymectomy is most effective in patients with high anti-AChR titres (but ineffective in congenital and familial forms); and plasmapheresis or IVIG are used for non-responders. Neonatal transient MG needs cholinesterase inhibitors only for a few days.**\n\n## Understanding it\nThe treatments each attack a different level:\n- **Cholinesterase inhibitors** — symptomatic: boost available ACh at the junction.\n- **Steroids / thymectomy** — disease-modifying: dampen or remove the source of the autoimmune attack (thymus).\n- **Plasmapheresis / IVIG** — remove or neutralise the antibodies in resistant cases.\n\n>> Note the caveats: **thymectomy only helps antibody-driven (acquired) disease**, not congenital/familial forms, and beware drugs like **gentamicin** which can precipitate a myasthenic crisis. Transient neonatal MG is self-limiting, needing only brief support.",
+   "opts": [
+    "Lifelong antibiotics",
+    "Only supportive care, no drugs work",
+    "Plasma exchange is contraindicated",
+    "Cholinesterase inhibitors first, then steroids, thymectomy, plasmapheresis/IVIG"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the four obligatory criteria that define a muscular dystrophy?",
+   "a": "**(1) It is a primary myopathy, (2) it has a genetic basis, (3) the course is progressive, and (4) degeneration and death of muscle fibres occur at some stage. Common examples are Duchenne, Becker and limb-girdle muscular dystrophies.**\n\n## Understanding it\nAll four must be present — it's a strict definition:\n- **Primary myopathy** — the disease begins in the muscle itself (not nerve).\n- **Genetic** — inherited, not acquired.\n- **Progressive** — it worsens over time.\n- **Muscle-fibre degeneration/death** — active necrosis, which is why CK is so high.\n\n>> These criteria distinguish dystrophies from all other NMDs: an acquired, non-progressive, or nerve-based weakness fails the definition. Duchenne is the prototype that satisfies every criterion.",
+   "opts": [
+    "Infective, painful, febrile, and self-limiting",
+    "Primary myopathy, genetic basis, progressive course, and muscle-fibre degeneration/death",
+    "Neuropathic, sensory, distal, and symmetric",
+    "Acquired, non-genetic, static, and reversible"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the inheritance and cause of Duchenne muscular dystrophy (DMD).",
+   "a": "**DMD is the most common hereditary neuromuscular disease, inherited as an X-linked recessive trait, affecting boys exclusively, and caused by deficiency of dystrophin with excessive necrosis of muscle fibres. Becker muscular dystrophy is a milder form.**\n\n## Understanding it\nThe genetics explain who gets it:\n- **X-linked recessive** → the gene is on the X chromosome, so **boys (XY) are affected** and mothers are typically carriers.\n- The missing protein is **dystrophin**, which normally anchors and stabilises the muscle-fibre membrane.\n\n>> Without dystrophin, muscle fibres are fragile and undergo **repeated necrosis**, releasing huge amounts of CK. **Becker** dystrophy comes from a partially functional dystrophin, hence its milder course. This dystrophin deficiency underlies every downstream feature of the disease.",
+   "opts": [
+    "X-linked recessive, boys only, from dystrophin deficiency",
+    "Acquired autoimmune destruction of muscle",
+    "Mitochondrial inheritance from the father",
+    "Autosomal dominant affecting both sexes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the classic clinical features of Duchenne muscular dystrophy?",
+   "a": "**Boys exclusively; hip-girdle weakness by the 2nd year, an early Gowers sign by age 3 (fully expressed by 5–6) and a Trendelenburg waddling gait; calf pseudohypertrophy with thigh wasting; gradual loss of deep tendon reflexes; a constant cardiomyopathy; and universal intellectual impairment (significant in 20–30%). Children are wheelchair-bound by early adolescence and typically die of respiratory and cardiac failure by about 18 years.**\n\n## Understanding it\nFollow the progression from toddler to teenager:\n- **Proximal (hip-girdle) weakness** → **Gowers sign** and **waddling gait** in early childhood.\n- **Calf pseudohypertrophy** (enlarged but weak calves, replaced by fat/fibrosis) with **wasted thighs** is the visual hallmark.\n- Weakness is relentless: **wheelchair by adolescence**, with **cardiomyopathy** and respiratory failure causing death by ~18.\n\n>> Two features to underline: the **constant cardiomyopathy** (heart muscle is affected too, needing periodic cardiac assessment) and **pseudohypertrophy** (big calves that are actually weak) — both classic exam points.",
+   "opts": [
+    "Fatigable ptosis relieved by rest",
+    "Sudden facial droop with ear pain",
+    "Gowers sign by 3, waddling gait, calf pseudohypertrophy, cardiomyopathy; wheelchair by adolescence",
+    "Ascending flaccid paralysis after infection"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How is Duchenne muscular dystrophy diagnosed and managed?",
+   "a": "**Diagnosis: CK is greatly elevated even at birth; EMG shows myopathic features with no denervation; nerve conduction is normal; and muscle biopsy is diagnostic, with immunohistochemistry showing deficient or defective dystrophin. Cardiac assessment (echo, ECG, CXR) is done periodically. Management: physiotherapy with orthotics, anti-cardiac-failure treatment (digoxin, diuretics), antibiotics for chest infections, a steroid trial, and gene-based approaches to restore dystrophin.**\n\n## Understanding it\nDiagnosis moves from cheap to definitive:\n- **Very high CK** (even at birth) → screens strongly for a necrotising myopathy.\n- **EMG myopathic, normal nerve conduction** → localises to muscle, not nerve.\n- **Muscle biopsy + dystrophin immunohistochemistry** → confirms the specific dystrophin deficiency.\n\n>> Management is **supportive and multisystem** because there's no cure yet: physiotherapy/orthotics to preserve mobility, **cardiac and respiratory care** (the causes of death), steroids to slow decline, and emerging **gene therapy** to restore dystrophin. Periodic cardiac assessment is essential given the constant cardiomyopathy.",
+   "opts": [
+    "Very high CK (even at birth), myopathic EMG, muscle biopsy with dystrophin stain; supportive care",
+    "Normal CK with denervation on EMG",
+    "Cured by valve ablation",
+    "Diagnosed by the Tensilon test"
+   ],
+   "ans": 0
+  }
+ ]
+}

@@ -1,226 +1,611 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Bronchiolitis",
-  "cards": [
-    {
-      "q": "Define bronchiolitis.",
-      "a": "An inflammatory obstruction of the small airways — the bronchioles and surrounding tissues; an acute, predominantly viral infection of the lower respiratory tract."
-    },
-    {
-      "q": "Is bronchiolitis viral or bacterial?",
-      "a": "Predominantly viral, with few cases attributed to other organisms."
-    },
-    {
-      "q": "When does bronchiolitis peak seasonally?",
-      "a": "During the rainy season in tropical countries (winter in temperate countries)."
-    },
-    {
-      "q": "In which age group does bronchiolitis occur, and what is the peak age?",
-      "a": "The first 2 years of life; peak age 2-8 months (average 6 months)."
-    },
-    {
-      "q": "What is the sex distribution of bronchiolitis?",
-      "a": "Commoner in males, M:F 2:1."
-    },
-    {
-      "q": "How long do most cases of bronchiolitis last?",
-      "a": "Most are mild, lasting 7-10 days."
-    },
-    {
-      "q": "What is the mortality of hospitalized bronchiolitis and who is most affected?",
-      "a": "About 1-2%, occurring most in children under 6 months."
-    },
-    {
-      "q": "List the predisposing factors for bronchiolitis.",
-      "a": "Rainy season; cold dry dusty harmattan; not being breastfed; overcrowding and day-care; cigarette smoke exposure; low birth weight; chronic lung disease; congenital heart lesions; and older family members as a source of infection."
-    },
-    {
-      "q": "What is the commonest cause of bronchiolitis?",
-      "a": "Respiratory syncytial virus (RSV)."
-    },
-    {
-      "q": "List the viral causes of bronchiolitis.",
-      "a": "RSV (commonest), adenovirus, parainfluenza 1/2/3, human metapneumovirus, bocavirus, rhinovirus and influenza virus."
-    },
-    {
-      "q": "Which adenovirus types cause severe bronchiolitis, and what complication?",
-      "a": "Types 7, 11 and 21; more likely to be complicated by bronchiolitis obliterans."
-    },
-    {
-      "q": "Which RSV group is more severe?",
-      "a": "RSV group A (more severe than group B)."
-    },
-    {
-      "q": "How is the pathogen for bronchiolitis acquired?",
-      "a": "By inhalation of infected respiratory droplets, or inoculation of the nostrils/conjunctivae from contaminated hands of contacts."
-    },
-    {
-      "q": "Where does the initial viral infection and replication occur?",
-      "a": "In the infant's upper respiratory tract, before spreading down."
-    },
-    {
-      "q": "What is the dominant host-related factor for severe bronchiolitis?",
-      "a": "Age-related peripheral airway dimension — the innately smaller peripheral airways of infants predispose to severe obstruction."
-    },
-    {
-      "q": "Why does the lack of collateral ventilation channels worsen bronchiolitis in infants?",
-      "a": "Infants have few pores of Kohn and canals of Lambert, so a blocked bronchiole cannot be ventilated around, leading to atelectasis."
-    },
-    {
-      "q": "What other two host factors predispose infants to bronchiolitis?",
-      "a": "A greater number of mucus-secreting goblet cells, and genetic age-related airway hyper-reactivity to RSV and parainfluenza type 3."
-    },
-    {
-      "q": "What immune response does RSV incite?",
-      "a": "Eosinophil degranulation with release of eosinophil cationic protein (cytotoxic to epithelium), increased Toll-like receptor-4 expression, and increased cytokines/chemokines, IgE and inflammatory mediators."
-    },
-    {
-      "q": "List the pathological abnormalities in bronchiolitis.",
-      "a": "Necrosis of the respiratory epithelium, destruction of ciliated cells, intraluminal bronchiolar plugs of sloughed debris and fibrin, and peribronchial mononuclear infiltration."
-    },
-    {
-      "q": "Which pathological features are more prominent in adenovirus than RSV?",
-      "a": "Extensive epithelial destruction, pulmonary parenchymal necrosis and hyaline membrane formation."
-    },
-    {
-      "q": "When does recovery of the airway epithelium and cilia occur?",
-      "a": "Epithelial regeneration begins ~4 days after the acute phase; ciliary activity is restored in ~2 weeks or more."
-    },
-    {
-      "q": "What three changes reduce the bronchiolar lumen in bronchiolitis?",
-      "a": "Oedema of the mucosa, accumulation of mucus and cellular debris, and constriction of the bronchiolar wall muscles."
-    },
-    {
-      "q": "Why does airway resistance rise so steeply in infant bronchiolitis?",
-      "a": "Resistance rises exponentially (four-fold) as airway radius decreases, so small reductions in tiny infant airways cause large increases in resistance and work of breathing."
-    },
-    {
-      "q": "What is ball-valve obstruction and its result?",
-      "a": "Because the airway is narrower during expiration, air enters but cannot leave, causing early air trapping and progressive hyperinflation."
-    },
-    {
-      "q": "What is check-valve obstruction and its result?",
-      "a": "Complete obstruction, so trapped distal air is resorbed and the child develops patchy atelectasis."
-    },
-    {
-      "q": "Why does hypoxaemia occur early in bronchiolitis?",
-      "a": "Because of ventilation-perfusion mismatch — blocked areas receive blood but not air."
-    },
-    {
-      "q": "Why does hypercapnia develop late in bronchiolitis?",
-      "a": "With severe obstruction and tiring of respiratory effort, less air reaches the alveoli to remove CO2, so arterial PCO2 rises."
-    },
-    {
-      "q": "List the symptoms of bronchiolitis.",
-      "a": "Sneezing and clear rhinorrhoea, diminished appetite, fever 38.5-39°C or subnormal temperature, respiratory distress, paroxysmal wheezy cough, dyspnoea, irritability, tachypnoea and apnoea."
-    },
-    {
-      "q": "List the signs of bronchiolitis.",
-      "a": "Markedly increased work of breathing, nasal flaring and retractions, fine inspiratory crepitations, rhonchi, prolonged expiratory phase, reduced breath sounds, and hepatomegaly/splenomegaly."
-    },
-    {
-      "q": "Why are the liver and spleen palpable in bronchiolitis?",
-      "a": "Due to lung hyperinflation pushing the diaphragm down — it is displacement, not true organomegaly."
-    },
-    {
-      "q": "Why is the expiratory phase prolonged in bronchiolitis?",
-      "a": "Because of small-airway obstruction that makes it hard to push air out (ball-valve effect)."
-    },
-    {
-      "q": "List the complications and co-morbidities of bronchiolitis.",
-      "a": "Dehydration; apnoea and bradycardia (especially under 2 months); acute otitis media; hypoxaemia with or without hypercarbia; viral pneumonia; secondary bacterial pneumonia; recurrent wheezing or asthma; and urinary tract infection."
-    },
-    {
-      "q": "Which complications are especially associated with infants under 2 months?",
-      "a": "Apnoea and bradycardia (with features of dehydration)."
-    },
-    {
-      "q": "What long-term respiratory association does bronchiolitis have?",
-      "a": "Recurrent wheezing or asthma."
-    },
-    {
-      "q": "What chest X-ray findings occur in bronchiolitis?",
-      "a": "May be normal; peribronchial thickening; hyperinflation with splayed ribs, flattened diaphragms and relative microcardia; patchy atelectasis; increased bronchovascular markings; interstitial streaks from the hilum; and increased AP diameter on the lateral film."
-    },
-    {
-      "q": "What is the FBC usually like in bronchiolitis?",
-      "a": "The total WBC count and differentials are usually normal (consistent with a viral illness)."
-    },
-    {
-      "q": "What is the role of pulse oximetry in bronchiolitis?",
-      "a": "To detect hypoxaemia and guide the need for supplemental oxygen — the key practical investigation."
-    },
-    {
-      "q": "When is viral testing used in bronchiolitis?",
-      "a": "When the diagnosis is uncertain or for epidemiological purposes (immunofluorescence, PCR or culture)."
-    },
-    {
-      "q": "List the differential diagnoses of bronchiolitis.",
-      "a": "Bronchial asthma, wheeze-associated respiratory infection (WARI), congestive cardiac failure, pertussis, aspirated foreign body, gastro-oesophageal reflux disease, croup, retropharyngeal abscess, acute epiglottitis, and impacted upper-airway foreign body."
-    },
-    {
-      "q": "How do you distinguish bronchiolitis from asthma?",
-      "a": "Bronchiolitis is typically a first wheeze in an infant under 2 in the rainy season; asthma is recurrent, episodic and bronchodilator-responsive with atopy."
-    },
-    {
-      "q": "What is the mainstay of bronchiolitis treatment?",
-      "a": "Supportive care — there is no cure; you support the infant while the virus resolves."
-    },
-    {
-      "q": "List the supportive treatments for bronchiolitis.",
-      "a": "Oxygen therapy, increased fluids and feeds, a trial of bronchodilators, and corticosteroids/anti-inflammatory agents only if benefit outweighs risk."
-    },
-    {
-      "q": "Which single treatment is most important in bronchiolitis?",
-      "a": "Oxygen therapy (for the hypoxaemia)."
-    },
-    {
-      "q": "When is ribavirin used in bronchiolitis and how is it delivered?",
-      "a": "In severe cases, immunocompromised hosts or infants with cyanotic CHD; delivered by a small-particle aerosol generator (SPAG) over 3-5 days, 18-20 hours/day."
-    },
-    {
-      "q": "When are antibiotics indicated in bronchiolitis?",
-      "a": "Only when there is concomitant severe bacterial infection — not routinely."
-    },
-    {
-      "q": "Is physiotherapy routine in bronchiolitis?",
-      "a": "No — it may help mobilise secretions but is not routinely done."
-    },
-    {
-      "q": "Outline the prevention and control of bronchiolitis.",
-      "a": "Palivizumab immunoprophylaxis (IM) for high-risk infants; health education on hand decontamination; encouraging breastfeeding; minimizing spread in creches/nurseries; and discouraging cigarette and domestic smoke exposure."
-    },
-    {
-      "q": "What is palivizumab and how is it given?",
-      "a": "A monoclonal antibody used for immunoprophylaxis in high-risk infants, given intramuscularly."
-    },
-    {
-      "q": "What is the biggest practical preventive measure against bronchiolitis spread?",
-      "a": "Hand decontamination (hand-washing), since it spreads on contaminated hands."
-    },
-    {
-      "q": "OSPE — A chest X-ray of a wheezy infant shows splayed ribs, flat diaphragms and a small-looking heart. What is this and the diagnosis?",
-      "a": "Hyperinflation (with relative microcardia) — consistent with bronchiolitis."
-    },
-    {
-      "q": "CLINICAL — A 6-month-old in the rainy season has coryza progressing to a wheezy cough, tachypnoea, nasal flaring and SpO2 89%. Diagnosis and immediate management?",
-      "a": "Acute bronchiolitis; admit, give oxygen with pulse oximetry, maintain fluids/feeds, trial of bronchodilators, and monitor for apnoea."
-    },
-    {
-      "q": "CLINICAL — Why should you not routinely give antibiotics in bronchiolitis?",
-      "a": "Because it is predominantly viral (RSV), so antibiotics are reserved for concomitant bacterial infection."
-    },
-    {
-      "q": "CLINICAL — A 6-week-old with bronchiolitis has episodes of stopping breathing. What complication is this and why is age relevant?",
-      "a": "Apnoea (with possible bradycardia) — a danger complication especially in infants under 2 months, who may deteriorate suddenly."
-    },
-    {
-      "q": "CLINICAL — A wheezy hyperinflated infant has a liver palpable 3 cm below the costal margin. Is this hepatomegaly?",
-      "a": "No — the hyperinflated lungs push the diaphragm and liver down; it is displacement, not true hepatomegaly."
-    },
-    {
-      "q": "CLINICAL — Which infants qualify for palivizumab prophylaxis?",
-      "a": "High-risk infants, e.g. those with chronic lung disease, congenital heart lesions or prematurity."
-    }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Bronchiolitis",
+ "cards": [
+  {
+   "q": "Define bronchiolitis.",
+   "a": "**Bronchiolitis is an acute, predominantly viral inflammatory obstruction of the small airways — the bronchioles — of the lower respiratory tract.**\n\n## Understanding it\nBreak the word down: *bronchiol-itis* = inflammation of the **bronchioles** (smallest airways).\n- A virus inflames them, so they swell and clog.\n- In a baby these airways are already narrow, so obstruction causes wheeze and distress.\n\n>> It is an obstruction of the **SMALL airways** — hence wheeze in an infant, not the stridor of large-airway disease.",
+   "opts": [
+    "Inflammation of the large airways (trachea)",
+    "A chronic allergic upper-airway disease",
+    "A bacterial infection of the alveoli",
+    "An acute viral inflammatory obstruction of the small airways (bronchioles)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Is bronchiolitis viral or bacterial?",
+   "a": "**Predominantly viral, with only a few cases from other organisms.**\n\n## Understanding it\n- Respiratory **viruses** (RSV most of all) cause almost all cases.\n- Bacteria play little primary role.\n\n>> Because it is **viral**, antibiotics are NOT routine — only for a proven secondary bacterial infection.",
+   "opts": [
+    "Predominantly viral",
+    "Predominantly bacterial",
+    "Equally viral and bacterial",
+    "Fungal in most cases"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "When does bronchiolitis peak seasonally?",
+   "a": "**The rainy season in tropical countries (winter in temperate climates).**\n\n## Understanding it\n- Cold, damp, crowded conditions spread respiratory viruses.\n- Tropics → **rainy season**; temperate → **winter**.\n\n>> A wheezy infant in the rainy season fits bronchiolitis — season is a real clue.",
+   "opts": [
+    "The dry hot season only",
+    "No seasonal pattern",
+    "Summer everywhere",
+    "The rainy season (winter in temperate climates)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "In which age group does bronchiolitis occur, and what is the peak age?",
+   "a": "**The first 2 years of life, peak 2–8 months (average ~6 months).**\n\n## Understanding it\n- A disease of **infants**, essentially never a first diagnosis in older children.\n- Peak ~**6 months**, when airways are tiny and maternal antibody wanes.\n\n>> A first wheeze in an infant under 2 in the rainy season is bronchiolitis until proven otherwise.",
+   "opts": [
+    "Any age, no peak",
+    "Newborns only",
+    "First 2 years, peak 2–8 months",
+    "School age, peak 6 years"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the sex distribution of bronchiolitis?",
+   "a": "**Commoner in males, M:F about 2:1.**\n\n## Understanding it\n- Boys are affected about **twice** as often.\n- Linked to smaller male infant airways relative to lung size.\n\n>> Male sex is a mild risk factor.",
+   "opts": [
+    "Commoner in males, ~2:1",
+    "Only in males",
+    "Equal in both sexes",
+    "Commoner in females, 2:1"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How long do most cases of bronchiolitis last?",
+   "a": "**Most are mild and last about 7–10 days.**\n\n## Understanding it\n- Usually **self-limiting** — the virus runs its course over a week to ten days.\n- The doctor's job is to **support** the infant through the worst.\n\n>> Treatment is supportive, not curative.",
+   "opts": [
+    "Chronic, several months",
+    "Lifelong once acquired",
+    "Mild and self-limiting, 7–10 days",
+    "Only 1–2 days"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the mortality of hospitalized bronchiolitis and who is most affected?",
+   "a": "**About 1–2%, mostly in children under 6 months.**\n\n## Understanding it\n- Overall mild, but **hospitalised** mortality is ~**1–2%**.\n- Deaths cluster in the **youngest** infants with least airway reserve.\n\n>> The very young are watched closely — they can deteriorate.",
+   "opts": [
+    "About 30%, older children",
+    "About 50%",
+    "About 1–2%, mostly under 6 months",
+    "Essentially 0%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the predisposing factors for bronchiolitis.",
+   "a": "**Rainy season/harmattan dust, not breastfeeding, overcrowding/day-care, cigarette smoke, low birth weight, chronic lung disease, congenital heart lesions, and infected older relatives.**\n\n## Understanding it\n- **Environmental** — rainy season, dust, crowding, smoke.\n- **Host** — not breastfed, low birth weight, chronic lung/heart disease.\n- **Source** — older relatives carrying the virus.\n\n>> Many are modifiable: **breastfeeding, avoiding smoke, less crowding**.",
+   "opts": [
+    "Not breastfeeding, crowding, smoke, low birth weight, heart/lung disease",
+    "Older age, dry season only",
+    "Male sex only",
+    "High birth weight and breastfeeding"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the commonest cause of bronchiolitis?",
+   "a": "**Respiratory syncytial virus (RSV).**\n\n## Understanding it\n- RSV is by far the **leading cause** worldwide.\n- Highly contagious, circulates seasonally.\n\n>> Think bronchiolitis → think **RSV** (and palivizumab targets RSV).",
+   "opts": [
+    "Streptococcus pneumoniae",
+    "Adenovirus",
+    "Respiratory syncytial virus (RSV)",
+    "Influenza virus"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the viral causes of bronchiolitis.",
+   "a": "**RSV (commonest), adenovirus, parainfluenza 1/2/3, human metapneumovirus, bocavirus, rhinovirus, influenza.**\n\n## Understanding it\n- **RSV** leads.\n- Many other respiratory viruses cause the same picture.\n\n>> A **viral syndrome** with RSV on top — antibiotics are not first-line.",
+   "opts": [
+    "Fungi and parasites",
+    "RSV, adenovirus, parainfluenza, metapneumovirus, rhinovirus, influenza",
+    "Bacteria like pneumococcus",
+    "Only RSV"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which adenovirus types cause severe bronchiolitis, and what complication?",
+   "a": "**Types 7, 11 and 21, which may be complicated by bronchiolitis obliterans.**\n\n## Understanding it\n- Certain **adenovirus** serotypes (7, 11, 21) cause severe disease.\n- Feared sequel: **bronchiolitis obliterans** (permanent small-airway scarring).\n\n>> Adenovirus 7/11/21 = 'severe, may leave chronic damage'.",
+   "opts": [
+    "All types only mild",
+    "Adenovirus never causes it",
+    "Types 7, 11, 21 → bronchiolitis obliterans",
+    "Types 1 and 2 → always full recovery"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which RSV group is more severe?",
+   "a": "**RSV group A (more severe than group B).**\n\n## Understanding it\n- RSV has two antigenic groups, **A and B**.\n- **Group A** causes more severe illness.\n\n>> RSV **A > B** in severity.",
+   "opts": [
+    "Both identical",
+    "RSV group A",
+    "RSV has no subgroups",
+    "RSV group B"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is the pathogen for bronchiolitis acquired?",
+   "a": "**By inhaling infected droplets, or inoculating the nose/eyes from contaminated hands.**\n\n## Understanding it\n- Two routes: **droplets** in air, and **hands** carrying virus to nose/eyes.\n- The hand route drives spread in households and nurseries.\n\n>> Rationale for **hand-washing** as the best prevention.",
+   "opts": [
+    "Inhaled droplets, or hand-to-nose/eye",
+    "Blood transfusion",
+    "Mosquito bites",
+    "Contaminated food/water"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Where does the initial viral infection and replication occur?",
+   "a": "**In the upper respiratory tract, before spreading down to the bronchioles.**\n\n## Understanding it\n- The virus first multiplies in the **nose/upper airway** (early coryza).\n- It then descends to the **lower** airways, causing obstruction.\n\n>> Classic history: a few days of runny nose that then 'goes to the chest'.",
+   "opts": [
+    "The upper airway, then spreads down",
+    "In the bloodstream first",
+    "In the gut then lungs",
+    "Directly in the alveoli"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the dominant host-related factor for severe bronchiolitis?",
+   "a": "**The age-related small size of the peripheral airways — an infant's tiny bronchioles predispose to severe obstruction.**\n\n## Understanding it\n- The main host factor is **small airway calibre**.\n- A little swelling in a narrow bronchiole causes a big diameter drop.\n\n>> Same virus = a bad wheezy illness in a baby but a cold in an adult — it is about airway **size**.",
+   "opts": [
+    "Weak adult-sized airways",
+    "Innately small peripheral airways of infants",
+    "Excess surfactant",
+    "Large airway diameter"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does the lack of collateral ventilation channels worsen bronchiolitis in infants?",
+   "a": "**Infants have few pores of Kohn and canals of Lambert, so a blocked bronchiole cannot be ventilated around it — leading to atelectasis.**\n\n## Understanding it\n- These channels let air bypass a blockage.\n- Infants have few, so a plugged bronchiole cannot be re-aired and its segment **collapses (atelectasis)**.\n\n>> Fewer collateral channels = a block means collapsed lung, not just reduced flow.",
+   "opts": [
+    "They prevent all atelectasis",
+    "Extra channels that protect infants",
+    "The channels cause hyperinflation",
+    "Few channels → blocked bronchiole → atelectasis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What other two host factors predispose infants to bronchiolitis?",
+   "a": "**More mucus-secreting goblet cells, and genetic age-related airway hyper-reactivity to RSV and parainfluenza type 3.**\n\n## Understanding it\n- **More goblet cells** → more mucus to plug tiny airways.\n- **Hyper-reactive airways** → they constrict readily to the virus.\n\n>> With small airway size, these make the infant airway uniquely obstructable.",
+   "opts": [
+    "Fewer goblet cells, rigid airways",
+    "Extra collateral channels",
+    "A mature adult immune response",
+    "More goblet cells (mucus) and airway hyper-reactivity"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What immune response does RSV incite?",
+   "a": "**Eosinophil degranulation releasing cytotoxic eosinophil cationic protein, increased TLR-4, and raised cytokines, IgE and inflammatory mediators.**\n\n## Understanding it\n- RSV triggers an **eosinophil-driven, IgE-associated** response.\n- Released **eosinophil cationic protein** is toxic to airway epithelium.\n\n>> This allergic-type response partly explains the link between severe RSV and later **wheeze/asthma**.",
+   "opts": [
+    "A neutrophil, pus-forming response",
+    "Instant antibody clearance",
+    "Eosinophil degranulation, raised TLR-4, cytokines and IgE",
+    "No immune response"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the pathological abnormalities in bronchiolitis.",
+   "a": "**Necrosis of the respiratory epithelium, destruction of ciliated cells, intraluminal plugs of debris and fibrin, and peribronchial mononuclear infiltration.**\n\n## Understanding it\n- The virus **kills the lining** (including mucus-clearing cilia).\n- Dead cells + fibrin form **plugs**; inflammatory cells cuff the airway.\n\n>> The tiny airway is **swollen outside and plugged inside** — a double obstruction.",
+   "opts": [
+    "Epithelial necrosis, lost cilia, luminal plugs, peribronchial infiltrate",
+    "Pleural fibrosis only",
+    "Clean airways, no damage",
+    "Alveolar pus and abscesses"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which pathological features are more prominent in adenovirus than RSV?",
+   "a": "**Extensive epithelial destruction, pulmonary parenchymal necrosis, and hyaline membrane formation.**\n\n## Understanding it\n- **Adenovirus** is more destructive than RSV.\n- It damages the **lung tissue itself**, not just the airway lining.\n\n>> This heavier damage links adenovirus to the chronic sequel bronchiolitis obliterans.",
+   "opts": [
+    "Milder than RSV",
+    "No tissue damage",
+    "Only upper-airway inflammation",
+    "Extensive destruction, parenchymal necrosis, hyaline membranes"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When does recovery of the airway epithelium and cilia occur?",
+   "a": "**Epithelial regeneration begins ~4 days after the acute phase; ciliary activity is restored in ~2 weeks or more.**\n\n## Understanding it\n- The lining regrows at **~4 days**.\n- But **cilia** take **2 weeks or longer** to work again.\n\n>> This lag explains the lingering cough after the acute illness settles.",
+   "opts": [
+    "Full recovery in 1 hour",
+    "Cilia never recover",
+    "6 months minimum",
+    "Epithelium ~4 days; cilia ~2 weeks+"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What three changes reduce the bronchiolar lumen in bronchiolitis?",
+   "a": "**Mucosal oedema, accumulated mucus/cellular debris, and constriction of the bronchiolar wall muscle.**\n\n## Understanding it\n- **Wall swells** (oedema) — narrows from outside.\n- **Lumen fills** with mucus/debris — blocks inside.\n- **Muscle constricts** — squeezes shut.\n\n>> All three act on an already-tiny airway → rapid severe obstruction.",
+   "opts": [
+    "Loss of the wall entirely",
+    "Only muscle spasm",
+    "Mucosal oedema, luminal mucus/debris, muscle constriction",
+    "Widening of the airway"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why does airway resistance rise so steeply in infant bronchiolitis?",
+   "a": "**Resistance rises roughly with the 4th power as airway radius falls, so small reductions in a tiny infant airway cause huge increases in resistance and work of breathing.**\n\n## Understanding it\n- By Poiseuille's law, resistance ∝ 1/radius⁴.\n- Halving the radius raises resistance ~**16-fold**; small swelling in a baby's airway multiplies resistance.\n\n>> The physics of why bronchiolitis hits **infants** hardest — tiny airways, dramatic narrowing.",
+   "opts": [
+    "Bigger airways raise resistance more",
+    "Resistance is unrelated to size",
+    "Resistance rises ~4th-power as radius falls",
+    "Resistance falls as airways narrow"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is ball-valve obstruction and its result?",
+   "a": "**A partial block where the airway narrows in expiration, so air enters but cannot fully leave — causing air trapping and hyperinflation.**\n\n## Understanding it\n- Airways widen in **inspiration**, narrow in **expiration**.\n- Partial block: air gets **in** but not **out** → trapped.\n- Trapped air → lungs **hyperinflate**.\n\n>> Mechanism behind the hyperinflated chest and flat diaphragms on X-ray.",
+   "opts": [
+    "Complete block causing collapse",
+    "Partial block: air in, not out → hyperinflation",
+    "No effect on lung volume",
+    "Air out but not in"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is check-valve obstruction and its result?",
+   "a": "**A complete block: no new air enters, so trapped distal air is resorbed and the child develops patchy atelectasis.**\n\n## Understanding it\n- Contrast ball-valve: here the block is **complete**.\n- Distal air is **absorbed** and not replaced → the segment **collapses**.\n\n>> Bronchiolitis shows BOTH hyperinflation and patchy collapse on one X-ray.",
+   "opts": [
+    "Air out but not in",
+    "Complete block → air resorbed → atelectasis",
+    "Partial block → hyperinflation",
+    "Airway widening"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does hypoxaemia occur early in bronchiolitis?",
+   "a": "**Because of ventilation–perfusion (V/Q) mismatch — obstructed areas still get blood but no air, so blood leaves poorly oxygenated.**\n\n## Understanding it\n- Blocked segments are **perfused but not ventilated**.\n- Their blood isn't oxygenated and mixes with the rest → oxygen falls.\n\n>> Hypoxaemia is an **early** sign — hence pulse oximetry is the key monitor.",
+   "opts": [
+    "V/Q mismatch — blocked areas get blood but no air",
+    "Because the heart fails first",
+    "Because CO2 rises first",
+    "From blood loss"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why does hypercapnia develop late in bronchiolitis?",
+   "a": "**Because severe obstruction plus tiring of the respiratory effort means too little air reaches alveoli to wash out CO2, so PCO2 rises.**\n\n## Understanding it\n- CO2 clearance needs **enough ventilation**.\n- Early, the fast-breathing baby keeps CO2 normal/low.\n- Only when the infant **tires** or obstruction is severe does CO2 climb — a **late, ominous** sign.\n\n>> Rising CO2 in a previously tachypnoeic infant = exhaustion and impending respiratory failure.",
+   "opts": [
+    "Early, before hypoxaemia",
+    "CO2 never changes",
+    "From over-breathing",
+    "Late: severe obstruction + tiring → CO2 retained"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the symptoms of bronchiolitis.",
+   "a": "**Sneezing and clear rhinorrhoea, poor appetite, fever 38.5–39°C (or subnormal temperature), respiratory distress, paroxysmal wheezy cough, dyspnoea, irritability, tachypnoea and apnoea.**\n\n## Understanding it\nThe story runs top-down:\n- Starts as a **cold** (sneezing, clear runny nose, poor feeding).\n- Then 'goes to the chest' — **wheezy cough, fast/laboured breathing**, irritability.\n- In young infants it can cause **apnoea** (pauses in breathing).\n\n>> Coryza first, then lower-airway signs — and watch the youngest for apnoea.",
+   "opts": [
+    "Sudden chest pain and haemoptysis",
+    "Barking cough and stridor",
+    "Coryza, wheezy cough, tachypnoea, distress, ± apnoea",
+    "Painless jaundice"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the signs of bronchiolitis.",
+   "a": "**Markedly increased work of breathing, nasal flaring and retractions, fine inspiratory crepitations, rhonchi, a prolonged expiratory phase, reduced breath sounds, and palpable liver/spleen.**\n\n## Understanding it\n- **Increased work** — flaring, recessions, tachypnoea.\n- **On auscultation** — fine crepitations, rhonchi/wheeze, prolonged expiration, reduced air entry.\n- **Palpable liver/spleen** from hyperinflated lungs pushing the diaphragm down.\n\n>> The picture is small-airway obstruction: wheeze, prolonged expiration, hyperinflation.",
+   "opts": [
+    "A loud systolic murmur only",
+    "Neck stiffness and photophobia",
+    "Flaring/retractions, crepitations, rhonchi, prolonged expiration, hyperinflation",
+    "Stridor and a barking cough"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why are the liver and spleen palpable in bronchiolitis?",
+   "a": "**Because lung hyperinflation pushes the diaphragm down — it is displacement, not true organomegaly.**\n\n## Understanding it\n- Trapped air **hyperinflates** the lungs.\n- The flattened diaphragm **pushes the liver and spleen downward**, so their edges become palpable.\n\n>> They feel enlarged but are **normal-sized** and simply displaced — a classic bronchiolitis trap.",
+   "opts": [
+    "Infection of the liver",
+    "Heart failure causing congestion",
+    "True liver and spleen enlargement",
+    "Hyperinflation pushes the diaphragm down (displacement)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is the expiratory phase prolonged in bronchiolitis?",
+   "a": "**Because small-airway obstruction makes it hard to push air out (the ball-valve effect).**\n\n## Understanding it\n- Narrowed bronchioles resist **outflow** more than inflow.\n- Getting air **out** takes longer → the expiratory phase lengthens, often with wheeze.\n\n>> Prolonged expiration is a hallmark of lower-airway (small-airway) obstruction.",
+   "opts": [
+    "Large-airway obstruction",
+    "Weak inspiratory muscles",
+    "Small-airway obstruction makes exhaling hard (ball-valve)",
+    "Excess surfactant"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the complications and co-morbidities of bronchiolitis.",
+   "a": "**Dehydration; apnoea and bradycardia (especially under 2 months); acute otitis media; hypoxaemia ± hypercarbia; viral pneumonia; secondary bacterial pneumonia; recurrent wheezing/asthma; and urinary tract infection.**\n\n## Understanding it\n- **Acute dangers** — dehydration, apnoea/bradycardia, hypoxaemia.\n- **Infective** — otitis media, viral or secondary bacterial pneumonia, UTI.\n- **Long-term** — recurrent wheeze/asthma.\n\n>> The two to fear most in a young infant: **apnoea/bradycardia** and **hypoxaemia**.",
+   "opts": [
+    "Meningitis and septic arthritis",
+    "Dehydration, apnoea/bradycardia, hypoxaemia, pneumonia, later wheeze",
+    "No complications ever",
+    "Only a mild sore throat"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which complications are especially associated with infants under 2 months?",
+   "a": "**Apnoea and bradycardia (with features of dehydration).**\n\n## Understanding it\n- The **youngest infants** have immature respiratory control.\n- They may respond to the viral load with **apnoea** (breathing pauses) and **bradycardia** rather than obvious distress.\n\n>> Under 2 months, apnoea can be the presenting sign — these babies are admitted and monitored.",
+   "opts": [
+    "Chronic lung fibrosis",
+    "Immediate death in all",
+    "A skin rash only",
+    "Apnoea and bradycardia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What long-term respiratory association does bronchiolitis have?",
+   "a": "**Recurrent wheezing or asthma.**\n\n## Understanding it\n- Severe infant bronchiolitis (especially RSV) is linked to **later recurrent wheeze/asthma**.\n- The airway hyper-reactivity and eosinophilic inflammation may persist.\n\n>> Bronchiolitis is not always a one-off — some children go on to recurrent wheeze.",
+   "opts": [
+    "Pulmonary tuberculosis",
+    "Complete lifelong immunity, no sequelae",
+    "Recurrent wheezing or asthma",
+    "Lung cancer"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What chest X-ray findings occur in bronchiolitis?",
+   "a": "**May be normal; otherwise peribronchial thickening, hyperinflation (splayed ribs, flat diaphragms, relative microcardia), patchy atelectasis, increased bronchovascular markings, and increased AP diameter on the lateral film.**\n\n## Understanding it\n- The signature is **hyperinflation**: splayed ribs, flattened diaphragms, a small-looking heart (relative microcardia).\n- Plus **patchy atelectasis** (check-valve collapse) and peribronchial thickening.\n\n>> Hyperinflation + patchy collapse is the classic bronchiolitis X-ray — but it can be normal.",
+   "opts": [
+    "A widened mediastinum",
+    "Hyperinflation (splayed ribs, flat diaphragms, microcardia) ± patchy atelectasis",
+    "A large consolidated lobe with air bronchograms",
+    "A pleural effusion filling one side"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the FBC usually like in bronchiolitis?",
+   "a": "**The total WBC count and differential are usually normal, consistent with a viral illness.**\n\n## Understanding it\n- A **normal WBC** fits a **viral** cause.\n- A markedly raised neutrophil count would instead suggest a bacterial process.\n\n>> A normal FBC supports the viral diagnosis and argues against routine antibiotics.",
+   "opts": [
+    "High eosinophils diagnostic of it",
+    "Usually normal WBC and differential (viral picture)",
+    "Severe anaemia always",
+    "Very high neutrophils (bacterial)"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the role of pulse oximetry in bronchiolitis?",
+   "a": "**To detect hypoxaemia and guide the need for supplemental oxygen — the key practical investigation.**\n\n## Understanding it\n- Hypoxaemia occurs **early** (V/Q mismatch), often before it looks severe.\n- **Pulse oximetry** non-invasively measures SpO2 and tells you when to give oxygen.\n\n>> It is the single most useful bedside test — it directs the most important treatment (oxygen).",
+   "opts": [
+    "Measure the white cell count",
+    "Assess liver function",
+    "Detect hypoxaemia and guide oxygen therapy",
+    "Diagnose the specific virus"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "When is viral testing used in bronchiolitis?",
+   "a": "**When the diagnosis is uncertain or for epidemiological purposes — using immunofluorescence, PCR or culture.**\n\n## Understanding it\n- Bronchiolitis is usually a **clinical** diagnosis, so viral tests aren't routine.\n- They are used to **confirm** an unclear case or for **surveillance/epidemiology**.\n\n>> Identifying the exact virus rarely changes management of a typical case.",
+   "opts": [
+    "When the diagnosis is uncertain, or for epidemiology",
+    "To decide the antibiotic",
+    "Only after the child recovers",
+    "Routinely in every case"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the differential diagnoses of bronchiolitis.",
+   "a": "**Bronchial asthma, wheeze-associated respiratory infection, congestive cardiac failure, pertussis, aspirated foreign body, GORD, croup, retropharyngeal abscess, acute epiglottitis, and upper-airway foreign body.**\n\n## Understanding it\nSort by the noise they make:\n- **Wheeze** — asthma, WARI, cardiac failure, GORD.\n- **Stridor/upper airway** — croup, epiglottitis, retropharyngeal abscess, foreign body.\n- **Paroxysmal cough** — pertussis.\n\n>> The main mimic to exclude in an infant is **first-episode asthma/WARI** and, in the wrong setting, **heart failure**.",
+   "opts": [
+    "Only appendicitis",
+    "Asthma/WARI, heart failure, pertussis, foreign body, croup, epiglottitis",
+    "Diabetes and thyroid disease",
+    "Meningitis and encephalitis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How do you distinguish bronchiolitis from asthma?",
+   "a": "**Bronchiolitis is typically a FIRST wheeze in an infant under 2 in the rainy season; asthma is recurrent, episodic, bronchodilator-responsive, and associated with atopy.**\n\n## Understanding it\n- **Bronchiolitis** — first-ever wheeze, infant, viral prodrome, seasonal.\n- **Asthma** — **recurrent** episodes, responds well to **bronchodilators**, family/personal **atopy**.\n\n>> The clincher is the pattern: one-off viral wheeze in a baby vs recurrent reversible wheeze.",
+   "opts": [
+    "Bronchiolitis is recurrent and atopic",
+    "They are indistinguishable",
+    "Asthma is a single infant episode",
+    "First wheeze in an infant vs recurrent, reversible, atopic asthma"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the mainstay of bronchiolitis treatment?",
+   "a": "**Supportive care — there is no cure; you support the infant while the virus resolves.**\n\n## Understanding it\n- No antiviral cures typical bronchiolitis.\n- Management **supports** oxygenation, hydration and feeding until recovery.\n\n>> 'Supportive care' is the exam answer — oxygen and fluids, not a magic drug.",
+   "opts": [
+    "Routine corticosteroids",
+    "Supportive care (no cure)",
+    "A curative antibiotic",
+    "Surgery"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the supportive treatments for bronchiolitis.",
+   "a": "**Oxygen therapy, increased fluids and feeds, a trial of bronchodilators, and corticosteroids only if benefit outweighs risk.**\n\n## Understanding it\n- **Oxygen** for hypoxaemia (the priority).\n- **Fluids/feeds** to prevent dehydration.\n- **Bronchodilator trial** — continue only if it helps.\n- **Steroids** are not routine.\n\n>> Support the breathing and hydration; drugs are adjuncts of limited/uncertain benefit.",
+   "opts": [
+    "Routine IV antibiotics for all",
+    "Oxygen, fluids/feeds, trial of bronchodilators, selective steroids",
+    "Immediate intubation for everyone",
+    "No treatment at all"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which single treatment is most important in bronchiolitis?",
+   "a": "**Oxygen therapy (for the hypoxaemia).**\n\n## Understanding it\n- Hypoxaemia is the early, dangerous problem.\n- Correcting it with **oxygen** is the single most important intervention.\n\n>> If you remember one treatment: **oxygen**.",
+   "opts": [
+    "Antibiotics",
+    "Corticosteroids",
+    "Chest physiotherapy",
+    "Oxygen therapy"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When is ribavirin used in bronchiolitis and how is it delivered?",
+   "a": "**In severe cases, immunocompromised hosts, or infants with cyanotic congenital heart disease — delivered by a small-particle aerosol generator (SPAG) over 3–5 days, 18–20 hours/day.**\n\n## Understanding it\n- Ribavirin is an **antiviral** reserved for the **highest-risk** infants (severe, immunocompromised, cyanotic CHD).\n- Given as an **aerosol (SPAG)** for many hours daily over several days.\n\n>> Not for routine bronchiolitis — only selected severe/high-risk cases.",
+   "opts": [
+    "Routinely in every infant",
+    "Severe/immunocompromised/cyanotic CHD, via SPAG aerosol 3–5 days",
+    "As an oral tablet for mild cases",
+    "As a one-off injection for prevention"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When are antibiotics indicated in bronchiolitis?",
+   "a": "**Only when there is concomitant severe bacterial infection — not routinely.**\n\n## Understanding it\n- Bronchiolitis is **viral**, so antibiotics do nothing for the virus.\n- They are reserved for a **proven/strongly suspected secondary bacterial** infection (e.g. bacterial pneumonia).\n\n>> No routine antibiotics — a classic exam and stewardship point.",
+   "opts": [
+    "To shorten the viral illness",
+    "Never, under any circumstance",
+    "Only with concomitant bacterial infection",
+    "Routinely for every case"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Is physiotherapy routine in bronchiolitis?",
+   "a": "**No — it may help mobilise secretions but is not done routinely.**\n\n## Understanding it\n- Chest physiotherapy has **not** been shown to help typical bronchiolitis.\n- It may occasionally assist secretion clearance in selected cases.\n\n>> Not a routine treatment.",
+   "opts": [
+    "No — not routine (occasional selective use)",
+    "Yes — it cures bronchiolitis",
+    "It is absolutely contraindicated",
+    "Yes — mandatory for all"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Outline the prevention and control of bronchiolitis.",
+   "a": "**Palivizumab immunoprophylaxis for high-risk infants, health education on hand decontamination, promoting breastfeeding, minimising spread in creches, and avoiding cigarette/domestic smoke.**\n\n## Understanding it\n- **Palivizumab** — passive RSV protection for high-risk babies.\n- **Hand hygiene** — the biggest practical measure.\n- **Breastfeeding** and **smoke avoidance** reduce risk.\n\n>> Prevention = hand-washing + breastfeeding + smoke avoidance, with palivizumab for high-risk infants.",
+   "opts": [
+    "A live RSV vaccine for all infants",
+    "Routine antibiotics as prophylaxis",
+    "Palivizumab (high-risk), hand hygiene, breastfeeding, smoke avoidance",
+    "No prevention is possible"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is palivizumab and how is it given?",
+   "a": "**A monoclonal antibody used for RSV immunoprophylaxis in high-risk infants, given intramuscularly.**\n\n## Understanding it\n- It is a **monoclonal antibody** (passive immunity) against RSV.\n- Given **IM** to **high-risk** infants during the RSV season.\n\n>> Passive protection for high-risk babies — not a treatment for established disease.",
+   "opts": [
+    "An oral antibiotic",
+    "A bronchodilator inhaler",
+    "A live attenuated vaccine",
+    "A monoclonal antibody given IM to high-risk infants"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the biggest practical preventive measure against bronchiolitis spread?",
+   "a": "**Hand decontamination (hand-washing), since the virus spreads on contaminated hands.**\n\n## Understanding it\n- Much spread is by **hands** carrying virus to the nose/eyes.\n- **Hand-washing** interrupts this most effective route.\n\n>> Simple, cheap, and the single most effective preventive measure.",
+   "opts": [
+    "Hand-washing (hand decontamination)",
+    "Antibiotic prophylaxis",
+    "A daily chest X-ray",
+    "Isolating the child for a month"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — A chest X-ray of a wheezy infant shows splayed ribs, flat diaphragms and a small-looking heart. What is this and the diagnosis?",
+   "a": "**Hyperinflation with relative microcardia — consistent with bronchiolitis.**\n\n## Understanding it\n- Splayed ribs + flat diaphragms = **air trapping/hyperinflation**.\n- The over-expanded lungs make the heart look small (**relative microcardia**).\n\n>> This X-ray triad is the classic bronchiolitis picture.",
+   "opts": [
+    "A normal chest X-ray",
+    "Lobar pneumonia",
+    "Hyperinflation (with relative microcardia) — bronchiolitis",
+    "A large pleural effusion"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A 6-month-old in the rainy season has coryza progressing to a wheezy cough, tachypnoea, nasal flaring and SpO2 89%. Diagnosis and immediate management?",
+   "a": "**Acute bronchiolitis — admit, give oxygen with pulse-oximetry monitoring, maintain fluids/feeds, trial of bronchodilators, and watch for apnoea.**\n\n## Understanding it\n- Rainy season + infant + coryza → wheezy cough + tachypnoea + **SpO2 89%** = bronchiolitis with hypoxaemia.\n- Priorities: **oxygen** (SpO2 low), hydration, monitoring.\n\n>> Recognise hypoxaemic bronchiolitis and act: admit + oxygen + fluids + monitor.",
+   "opts": [
+    "Acute bronchiolitis — admit, oxygen, fluids, monitor for apnoea",
+    "Croup — give adrenaline nebuliser",
+    "Asthma — high-dose steroids only",
+    "Bacterial pneumonia — IV antibiotics alone"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why should you not routinely give antibiotics in bronchiolitis?",
+   "a": "**Because it is predominantly viral (RSV), so antibiotics are reserved for concomitant bacterial infection.**\n\n## Understanding it\n- The cause is a **virus** — antibiotics don't treat viruses.\n- Using them routinely adds side-effects and resistance for no benefit.\n\n>> Antibiotics only if a **bacterial** infection is proven/strongly suspected.",
+   "opts": [
+    "They are too expensive to use",
+    "Antibiotics worsen the virus directly",
+    "It is viral (RSV); antibiotics only for bacterial co-infection",
+    "Because it is a fungal infection"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A 6-week-old with bronchiolitis has episodes of stopping breathing. What complication is this and why is age relevant?",
+   "a": "**Apnoea (with possible bradycardia) — a danger complication especially in infants under 2 months, who may deteriorate suddenly.**\n\n## Understanding it\n- A **6-week-old** has immature respiratory control.\n- Bronchiolitis in this age can cause **apnoea/bradycardia**, sometimes before obvious distress.\n\n>> Age matters: under 2 months, apnoea is a real risk — admit and monitor closely.",
+   "opts": [
+    "Simple breath-holding, harmless",
+    "Normal newborn periodic breathing, ignore it",
+    "Apnoea ± bradycardia — a danger of infants under 2 months",
+    "A seizure disorder"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A wheezy hyperinflated infant has a liver palpable 3 cm below the costal margin. Is this hepatomegaly?",
+   "a": "**No — the hyperinflated lungs push the diaphragm and liver down; it is displacement, not true hepatomegaly.**\n\n## Understanding it\n- The infant is **wheezy and hyperinflated**.\n- Trapped air flattens the diaphragm and **pushes the liver down**, so its edge is palpable.\n\n>> Feels enlarged but is **normal and displaced** — don't misdiagnose true hepatomegaly.",
+   "opts": [
+    "Yes — a liver tumour",
+    "Yes — true hepatomegaly from infection",
+    "No — displacement by hyperinflation, not true hepatomegaly",
+    "Yes — heart failure enlarging the liver"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — Which infants qualify for palivizumab prophylaxis?",
+   "a": "**High-risk infants — for example those with chronic lung disease, congenital heart lesions, or prematurity.**\n\n## Understanding it\n- Palivizumab is expensive, so it is targeted at babies most likely to have **severe** RSV.\n- These are infants with **chronic lung disease, congenital heart disease, or prematurity**.\n\n>> Reserve it for the high-risk groups, not every infant.",
+   "opts": [
+    "High-risk infants: chronic lung disease, congenital heart lesions, prematurity",
+    "Adults with asthma",
+    "Only children over 5 years",
+    "Every healthy term infant"
+   ],
+   "ans": 0
+  }
+ ]
 }

@@ -1,0 +1,215 @@
+{
+ "deck": "Recall Cards",
+ "topic": "Guillain-Barré Syndrome",
+ "cards": [
+  {
+   "q": "What is Guillain-Barré syndrome?",
+   "a": "**An acute inflammatory polyradiculoneuropathy — a post-infectious, usually demyelinating attack on peripheral nerves causing ascending weakness and diminished reflexes.**\n\n## Understanding it\nBreak the name into parts:\n- **Poly** = many nerves · **radiculo** = the nerve roots (where nerves leave the cord) · **neuropathy** = nerve damage.\n- 'Acute inflammatory' = it comes on fast, driven by inflammation.\n\n>> The classic picture is **weakness + paraesthesias + hyporeflexia** in an **ascending** pattern (legs upward). The single most important word is **post-infectious** — it explains the autoimmune mechanism and why you hunt for a recent illness.",
+   "opts": [
+    "An acute pyogenic infection of the spinal cord",
+    "A hereditary defect of the neuromuscular junction",
+    "An acute inflammatory demyelinating polyradiculoneuropathy causing ascending weakness",
+    "A chronic degenerative disease of the anterior horn cells"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the other names for GBS.",
+   "a": "**Landry's ascending paralysis, acute idiopathic polyneuritis, acute polyradiculoneuritis, and Guillain-Barré-Strohl syndrome.**\n\n## Understanding it\nThe names each capture a feature:\n- **Landry's ascending paralysis** describes the **upward march** of weakness from legs to trunk to face.\n- **Acute idiopathic polyneuritis / polyradiculoneuritis** describe the **acute inflammation of many nerves and roots**.\n- **Guillain-Barré-Strohl** credits all three physicians who described it in 1916.\n\n>> The eponym GBS stuck, but 'Landry's ascending paralysis' is worth knowing because it literally names the hallmark clinical pattern.",
+   "opts": [
+    "Werdnig-Hoffmann disease",
+    "Charcot-Marie-Tooth disease",
+    "Erb's palsy",
+    "Landry's ascending paralysis / acute idiopathic polyneuritis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the most common form of GBS, and what are the axonal variants?",
+   "a": "**The most common form is AIDP (acute inflammatory demyelinating polyradiculoneuropathy). Variants include AMAN (acute motor axonal neuropathy), AMSAN (acute motor-sensory axonal neuropathy), and Miller-Fisher syndrome.**\n\n## Understanding it\nSeparate them by what is attacked:\n- **AIDP** — the **myelin** is stripped (demyelinating); this is the classic, commonest type.\n- **AMAN / AMSAN** — the **axon itself** is damaged (axonal); AMSAN adds sensory involvement.\n- **Miller-Fisher** — a distinctive variant that **starts with cranial nerve deficits** (ophthalmoplegia, ataxia, areflexia).\n\n>> Knowing AIDP is demyelinating explains the nerve-conduction findings (slowing, block); the axonal variants instead show reduced amplitudes.",
+   "opts": [
+    "AIDP; variants are AMAN, AMSAN and Miller-Fisher",
+    "Duchenne type; variants Becker and limb-girdle",
+    "Congenital type; variants transient and familial",
+    "AMAN; variants Bell's and Todd's"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the epidemiology of GBS.",
+   "a": "**It affects all ages but is uncommon in children; the male:female ratio is about 1.5:1; and it is the most common neuromuscular disorder in the developed world (unlike polio in the developing world).**\n\n## Understanding it\nTwo comparisons anchor this:\n- **Age:** GBS occurs across all ages but is **relatively uncommon in children**.\n- **Geography:** in **developed** countries GBS is the leading acute neuromuscular paralysis, whereas in **developing** regions **polio** still competes as a cause of acute flaccid paralysis.\n\n>> That geographic contrast is clinically important: in a Nigerian child with acute ascending paralysis, **poliomyelitis remains a key differential** alongside GBS.",
+   "opts": [
+    "Commonest in tropical children under 5",
+    "Exclusively affects neonates",
+    "All ages but uncommon in children; commonest neuromuscular disorder in the developed world",
+    "Only occurs in the elderly over 70"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Explain the pathophysiology of GBS.",
+   "a": "**An autoimmune response triggered by an antecedent infection attacks the myelin sheath of peripheral nerves and spinal roots, causing absent or profoundly delayed conduction; cranial nerves are rarely involved. It has both humoral and cell-mediated components, and in a few cases the axon itself is directly attacked.**\n\n## Understanding it\nTrace the sequence:\n- An infection primes the immune system, which then **cross-reacts against nerve myelin** (in effect, molecular mimicry).\n- **Stripping the myelin** blocks or slows conduction → the nerve can't fire → weakness and lost reflexes.\n- Usually the **myelin** is the target; occasionally the **axon** is hit directly (the axonal variants).\n\n>> Because the injury is **immune/antibody-mediated**, treatments that remove or neutralise antibodies — **plasma exchange and IVIG** — logically work.",
+   "opts": [
+    "Direct viral invasion of anterior horn cells",
+    "Autoimmune attack on peripheral-nerve myelin triggered by an antecedent infection",
+    "Genetic deficiency of dystrophin",
+    "Autoantibodies against acetylcholine receptors"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What preceding events and triggers are associated with GBS?",
+   "a": "**Two-thirds have a GI or respiratory infection 1–3 weeks before onset. Triggers include infections (EBV, CMV, Chlamydia, HBV, Campylobacter, Mycoplasma, HIV), vaccinations (rabies, streptococcus, influenza), malignancies (lymphoma, especially Hodgkin disease), and drugs (captopril, gold, penicillamine).**\n\n## Understanding it\nThe unifying theme is an **immune stimulus 1–3 weeks earlier**:\n- **Campylobacter** (a cause of diarrhoea) is the classic and most-cited trigger.\n- Viral infections (EBV, CMV, HIV) and even vaccinations can prime the same response.\n\n>> The **1–3 week lag** is diagnostic gold: when a patient with ascending weakness recalls a diarrhoeal or flu-like illness a couple of weeks ago, GBS jumps to the top of your list.",
+   "opts": [
+    "A GI or respiratory infection 1–3 weeks earlier (e.g. Campylobacter)",
+    "A head injury in the preceding 24 hours",
+    "Prolonged fasting",
+    "Recent heavy exercise"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the typical clinical presentation of GBS?",
+   "a": "**Rapidly progressive, bilateral, symmetrical weakness that starts in the lower limbs and ascends to the arms, trunk, respiratory and facial muscles, typically 2–4 weeks after a benign respiratory or GI illness, reaching maximum severity about 2 weeks after onset.**\n\n## Understanding it\nHold four adjectives for the weakness:\n- **Ascending** (legs first), **symmetrical**, **bilateral**, and **flaccid** (with lost reflexes).\n- It **progresses over hours to days** and peaks at about **2 weeks**.\n\n>> The danger is in the *direction*: as weakness climbs, it reaches the **respiratory and bulbar muscles**. That upward march is why continuous monitoring of breathing and swallowing is essential from the moment GBS is suspected.",
+   "opts": [
+    "Ascending, symmetrical, flaccid, areflexic weakness peaking ~2 weeks",
+    "Descending spastic weakness with brisk reflexes",
+    "Fluctuating fatigable weakness worse in the evening",
+    "Sudden unilateral facial droop only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the sensory features and pain of GBS.",
+   "a": "**Paraesthesias and numbness begin in the toes and fingertips and progress upward, generally not beyond the wrists or ankles. Pain is aching or throbbing, most severe in the shoulder girdle, back, buttocks and thighs, and may occur with even the slightest movement.**\n\n## Understanding it\nTwo sensory clues:\n- The paraesthesias follow a **glove-and-stocking** onset (toes/fingertips) but classically **stay distal** (not past wrists/ankles).\n- The **pain** is prominent and **proximal** (shoulder girdle, back, buttocks, thighs) — often underestimated in GBS.\n\n>> Although GBS is 'mainly motor', these sensory symptoms are common and the **deep aching pain** can be an early or even initial complaint (pain in the lower limb may be the first manifestation).",
+   "opts": [
+    "Distal paraesthesias (toes/fingertips) with aching proximal pain",
+    "No sensory symptoms at all",
+    "A dermatomal vesicular rash",
+    "Complete loss of all sensation below a spinal level"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What autonomic features can occur in GBS?",
+   "a": "**Tachycardia, bradycardia, facial flushing, paroxysmal hypertension, orthostatic hypotension, anhidrosis and/or diaphoresis, and urinary retention.**\n\n## Understanding it\nGBS attacks autonomic nerves too, producing **labile, swinging** dysfunction:\n- The heart rate and blood pressure can **oscillate unpredictably** (brady- and tachycardia, hyper- and hypotension).\n- Sweating (anhidrosis/diaphoresis) and bladder function (retention) are disturbed.\n\n>> This **autonomic instability** is dangerous and sometimes lethal independent of the weakness — which is why patients need **continuous cardiac and blood-pressure monitoring**, and why labile dysautonomia is itself an indication for ICU.",
+   "opts": [
+    "Fixed bradycardia only",
+    "Complete loss of pupillary reflexes",
+    "Labile heart rate and blood pressure, urinary retention, sweating changes",
+    "No autonomic involvement ever"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is respiratory monitoring critical in GBS?",
+   "a": "**Because ascending weakness can reach the diaphragm and respiratory muscles, and ventilatory failure requiring respiratory support occurs in up to one-third of patients at some point.**\n\n## Understanding it\nThe respiratory muscles are just further up the ascending chain:\n- As weakness climbs, **diaphragmatic and intercostal function fails**, causing dyspnoea, poor cough, and eventually ventilatory failure.\n- Bulbar weakness adds risk of **aspiration**.\n\n>> Up to **one-third need ventilation**, so breathing is watched continuously. **Negative inspiratory force (NIF)** is the bedside gauge: normal is **> 60 cm H₂O**, and if it **drops toward 20**, respiratory support must be ready. Waiting for obvious distress is too late.",
+   "opts": [
+    "Ascending weakness can reach respiratory muscles; up to 1/3 need ventilation",
+    "Because GBS always causes pneumonia",
+    "The virus directly infects the lungs",
+    "Steroids suppress breathing"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the neurological SIGNS of GBS on examination?",
+   "a": "**Flaccid paralysis with lost deep tendon reflexes — hypotonia, hyporeflexia or areflexia, and sensory loss.**\n\n## Understanding it\nThese are all **lower motor neuron** signs, because the lesion is in the peripheral nerves:\n- **Flaccid** (not spastic) weakness, **reduced tone**, and **absent reflexes**.\n- Sensory loss accompanies the motor findings.\n\n>> The **areflexia** is a cornerstone — a patient with ascending weakness whose reflexes are **preserved** should make you doubt GBS. Lost reflexes early, out of proportion to weakness, strongly support the diagnosis.",
+   "opts": [
+    "Flaccid paralysis with lost deep tendon reflexes, hypotonia, areflexia",
+    "Spasticity with hyperreflexia and clonus",
+    "Preserved reflexes with fasciculations",
+    "Rigidity and tremor"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does the Miller-Fisher variant differ?",
+   "a": "**In the Miller-Fisher variant, the neuropathy begins with cranial nerve deficits rather than ascending limb weakness.**\n\n## Understanding it\nIt reverses the usual direction:\n- Classic GBS **ascends** (legs → up to cranial nerves last).\n- Miller-Fisher **starts at the top** — with cranial nerve involvement (the classic triad is **ophthalmoplegia, ataxia, and areflexia**).\n\n>> So a patient presenting first with eye-movement problems and unsteadiness, rather than leg weakness, may have this variant. Recognising it prevents you from dismissing GBS just because the weakness didn't start in the legs.",
+   "opts": [
+    "It spares the cranial nerves entirely",
+    "It presents with seizures",
+    "It causes only leg weakness",
+    "It begins with cranial nerve deficits (ophthalmoplegia, ataxia, areflexia)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the clinical course and recovery pattern of GBS.",
+   "a": "**The course is usually benign, with spontaneous recovery beginning within 2–3 weeks. Recovery follows a gradient inverse to the direction of involvement — bulbar function recovers first, lower-limb weakness resolves last, and tendon reflexes are usually the last function to recover.**\n\n## Understanding it\nThink of recovery as the illness running in reverse:\n- Weakness **ascended** (legs → bulbar), so recovery **descends** (bulbar first → legs last).\n- **Reflexes**, lost early and prominently, are the **last** to return.\n\n>> Most patients regain full strength, though some keep residual weakness. The reassuring natural history is real — **but bulbar and respiratory involvement can kill if treatment is delayed**, so 'usually benign' never means 'safe to leave unmonitored'.",
+   "opts": [
+    "No recovery ever occurs",
+    "Recovery in the same order as onset (legs first)",
+    "Always fatal within days",
+    "Usually benign; recovery in reverse — bulbar first, legs and reflexes last"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the classic CSF finding in GBS?",
+   "a": "**Albuminocytologic (cyto-albuminologic) dissociation — elevated CSF protein (>400 mg/L) with no elevation in the cell count. Protein may be normal very early in the disease.**\n\n## Understanding it\nThe name describes the mismatch:\n- **Albumino** = high **protein**; **cytologic dissociation** = **normal cells**.\n- Normally, whatever raises CSF protein (like infection) also raises the cell count. In GBS the **protein rises but cells stay normal** — they are 'dissociated'.\n\n>> One caveat: **very early**, the protein can still be **normal**, so a normal early CSF does not exclude GBS. The high-protein/normal-cell picture is the classic confirmatory finding once it appears.",
+   "opts": [
+    "Albuminocytologic dissociation — high protein, normal cell count",
+    "Low glucose with many neutrophils",
+    "High protein AND high white cell count",
+    "Bloody CSF with xanthochromia"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What do nerve conduction studies and EMG show in GBS, and when?",
+   "a": "**Signs of demyelination — conduction slowing, prolonged distal latencies, prolonged F-waves, and conduction block or dispersion — appearing 2–3 weeks after onset; EMG shows acute denervation with reduced recruitment in weak muscles.**\n\n## Understanding it\nThe findings match the pathology (demyelination) and its timing:\n- **Slowing, prolonged latencies and F-waves, conduction block** all reflect **lost myelin** disrupting conduction.\n- Crucially, these changes take **2–3 weeks** to develop.\n\n>> So **early nerve studies can be normal** — you cannot exclude GBS with a normal NCS in the first days. The diagnosis early on rests more on the clinical pattern and CSF; nerve studies confirm it as the disease matures.",
+   "opts": [
+    "Findings present within the first hour",
+    "Normal studies throughout the illness",
+    "A myopathic pattern with normal nerves",
+    "Demyelination (slowing, block, prolonged F-waves), appearing 2–3 weeks in"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List key differential diagnoses of GBS.",
+   "a": "**Poliomyelitis, hypokalaemia, botulism, cauda equina syndrome, diphtheria, myasthenia gravis, spinal cord injury, transverse myelitis, organophosphate poisoning, hereditary neuropathies, and porphyria.**\n\n## Understanding it\nThese are the other causes of acute weakness/paralysis to exclude:\n- **Poliomyelitis** — crucial in developing regions; it causes **asymmetric** flaccid paralysis (vs GBS's symmetry).\n- **Botulism** — descending weakness (opposite direction).\n- **Myasthenia gravis** — fatigable weakness with **preserved reflexes**.\n- **Hypokalaemia, organophosphate poisoning** — reversible metabolic/toxic causes worth checking quickly.\n\n>> The discriminators are **symmetry, direction (ascending), areflexia, and CSF findings** — using these separates GBS from its mimics.",
+   "opts": [
+    "Poliomyelitis, botulism, myasthenia gravis, transverse myelitis, hypokalaemia",
+    "Migraine and tension headache",
+    "Asthma and bronchiolitis",
+    "Appendicitis and gastroenteritis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the specific treatment of GBS, and what does NOT work?",
+   "a": "**Plasma exchange or IV immunoglobulin (IVIG) — which shorten recovery time by as much as 50%. Prednisolone (2 mg/kg/day) is ineffective by itself, though it may be given alongside plasmapheresis.**\n\n## Understanding it\nThe effective treatments target the **immune attack**:\n- **Plasma exchange** physically removes the offending antibodies; **IVIG** neutralises/modulates them.\n- Both **halve recovery time** — the core disease-modifying options.\n- **Steroids alone don't help** in GBS (unlike many other inflammatory conditions), a classic exam point.\n\n>> Note you generally use **one** of plasma exchange OR IVIG (they aren't combined for added benefit), and start supportive care regardless — the specific therapy speeds recovery but survival depends on respiratory/autonomic support.",
+   "opts": [
+    "Oral antibiotics for 10 days",
+    "Plasma exchange or IVIG; steroids alone are ineffective",
+    "High-dose steroids alone are curative",
+    "Antiviral aciclovir for all cases"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When should a GBS patient be admitted to ICU?",
+   "a": "**For labile dysautonomia, a forced vital capacity of less than 20 mL/kg, or severe bulbar palsy — and any patient with clinical signs of respiratory compromise. About one-third of patients require ICU, mainly for respiratory failure.**\n\n## Understanding it\nEach criterion flags a way GBS can kill quickly:\n- **FVC < 20 mL/kg** — impending ventilatory failure.\n- **Severe bulbar palsy** — loss of airway protection → aspiration.\n- **Labile dysautonomia** — dangerous swings in heart rate and blood pressure.\n\n>> ICU care then provides respiratory therapy, cardiac monitoring, safe nutrition, and surveillance for infection. The threshold is deliberately **low and pre-emptive** — you admit before collapse, guided by falling FVC/NIF, not after respiratory arrest.",
+   "opts": [
+    "Only after full recovery",
+    "All patients routinely regardless of severity",
+    "Any patient with mild tingling",
+    "Labile dysautonomia, FVC < 20 mL/kg, or severe bulbar palsy"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What supportive and rehabilitative measures are used in GBS?",
+   "a": "**DVT prophylaxis, autonomic management (atropine for symptomatic bradycardia; short-acting beta-blocker or nitroprusside for hypertension; IV fluids and supine positioning for hypotension), respiratory support, pain management, and physical and occupational therapy — with monitoring even after recovery as some relapse.**\n\n## Understanding it\nSupportive care covers the complications of being paralysed and dysautonomic:\n- **DVT prophylaxis** because paralysed limbs clot (a major sequela).\n- **Autonomic drugs** to smooth the dangerous BP/HR swings.\n- **Physio/OT** to rebuild strength, mobility, balance and independence during recovery.\n\n>> Because recovery is gradual and **relapse can occur**, monitoring continues after discharge. This supportive scaffold is what carries the patient through the benign-but-dangerous natural course while the specific therapy works.",
+   "opts": [
+    "Strict bed rest with no therapy",
+    "Immediate surgery on the spinal cord",
+    "Lifelong steroids only",
+    "DVT prophylaxis, autonomic management, physio and occupational therapy"
+   ],
+   "ans": 3
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "deck": "Primer Cards",
+ "topic": "Failure to Thrive",
+ "cards": [
+  {
+   "q": "Define failure to thrive (FTT).",
+   "lecturer": "FTT is weight consistently below the 3rd–5th percentile for age and sex, OR a progressive decrease in weight to below the 3rd–5th percentile, OR a decrease across 2 major growth percentiles in a short period.",
+   "explain": "## Step 1: Three ways to meet the definition\n\n- **Static:** weight sits **below the 3rd–5th percentile.**\n- **Dynamic (falling):** weight **drops to** below the 3rd–5th percentile.\n- **Crossing lines:** weight **falls across 2 major percentile lines.**\n\n## Step 2: It's about the TREND, not one point\n\n>> A single low weight can be a small-but-healthy child; **crossing centiles downward** is what defines true failure to thrive.\n\n## Step 3: The common thread\n\n>> Whatever the cause, the final pathway is always **inadequate nutrition** — hold that idea, because it links every aetiology that follows.",
+   "tie": "The definition is the entry gate: everything downstream — deciding it's organic vs non-organic, reading the growth chart, planning catch-up feeding — starts from recognising the centile drop that labels a child as FTT."
+  },
+  {
+   "q": "Classify the aetiology of FTT.",
+   "lecturer": "The physiologic basis of FTT of any cause is inadequate nutrition. It is divided into organic (an acute/chronic disorder interfering with intake, absorption, metabolism or excretion, or increasing energy needs), non-organic (insufficient calorie intake from psychosocial/environmental causes), and mixed — and most cases are mixed.",
+   "explain": "## Step 1: One root cause, three routes\n\n>> Every FTT ends in **inadequate nutrition**; the classification is about **how** the child got there.\n\n## Step 2: The three buckets\n\n- **Organic** = a medical disease blocks nutrition (malabsorption, heart failure, metabolic disease).\n- **Non-organic** = the food/stimulation simply isn't reaching the child (neglect, poverty, feeding problems).\n- **Mixed** = both, and this is the **commonest** reality.\n\n## Step 3: Why 'mixed is commonest' matters\n\n>> A sick child often also has a stressed family, and a starved child develops medical problems — so you must **look for both at once**, never stop at the first cause you find.",
+   "tie": "This split drives the entire work-up and treatment: organic needs disease treatment, non-organic needs social/feeding support, and because most are mixed, the lecture insists on a simultaneous, multidisciplinary search rather than an either/or."
+  },
+  {
+   "q": "List the mechanisms of organic FTT with an example of each.",
+   "lecturer": "Decreased intake (cleft palate, cerebral palsy, GERD, pyloric stenosis); malabsorption (coeliac disease, cystic fibrosis, lactase deficiency, IBD, short gut); impaired metabolism (Down/Turner syndrome, galactosaemia, inborn errors); increased excretion (diabetes mellitus, proteinuria); and increased energy requirement (bronchopulmonary dysplasia, cystic fibrosis, heart failure, hyperthyroidism, infection).",
+   "explain": "## Step 1: Follow the nutrient's journey\n\nOrganic causes break one step of getting calories into and kept in the body:\n- **Getting it in** → intake problems (can't suck/swallow).\n- **Absorbing it** → malabsorption (coeliac, CF).\n- **Using it** → metabolic disease.\n- **Losing it** → excretion (diabetes, proteinuria).\n- **Burning too much** → increased demand (heart failure, hyperthyroidism, infection).\n\n## Step 2: Cystic fibrosis appears twice\n\n>> CF causes **both malabsorption and increased energy needs** — a clue to why CF children fail to thrive so badly.\n\n## Step 3: Use the framework at the bedside\n\n>> Faced with an organic FTT, run these five steps as a checklist — it turns a huge differential into five answerable questions.",
+   "tie": "This mechanistic map is what directs targeted investigation: suspect malabsorption → stool fat and sweat test; suspect increased demand → look for heart failure or infection — so the mechanism chosen decides which tests you order."
+  },
+  {
+   "q": "Explain the psychosocial basis of non-organic FTT.",
+   "lecturer": "Non-organic FTT is due to insufficient calorie intake, usually from environmental neglect or stimulus deprivation. Up to 80% of growth failure has no organic disorder. Psychosocial FTT may arise because mental stress raises counter-regulatory hormones (corticosteroids, catecholamines) that oppose growth hormone. It is often a disordered child–caregiver interaction, sometimes resembling hospitalism (depression from stimulus deprivation making the child apathetic and anorexic).",
+   "explain": "## Step 1: The dominant cause of FTT\n\n>> **Up to 80%** of growth failure is **non-organic** — so 'the child isn't getting enough' is statistically your leading hypothesis.\n\n## Step 2: Two routes to poor intake\n\n- **Lack of food** — poverty, over-diluted formula, poor feeding technique, low milk supply.\n- **Stimulus deprivation** — an unstimulated child becomes **depressed, apathetic, then anorexic** (like hospitalism).\n\n## Step 3: There's even a hormonal route\n\n>> Chronic stress raises **cortisol and catecholamines** that **oppose growth hormone** — so neglect can stunt growth biochemically, not just through missed meals.",
+   "tie": "Understanding the psychosocial mechanism is what makes the treatment make sense: you can't fix non-organic FTT with calories alone — it needs parental support, feeding observation, and community referral, which is exactly what the management section prescribes."
+  },
+  {
+   "q": "How is the growth chart used to distinguish causes, and how is FTT treated?",
+   "lecturer": "Weight is the most sensitive indicator of nutritional status. With inadequate intake, weight falls before length; reduced linear growth means severe prolonged undernutrition; simultaneous fall of weight and length suggests an organic growth disorder; head circumference falls late (brain is spared). Treatment aims at sufficient nutrition (about 150% of normal calories for catch-up growth), treating any underlying disorder, and long-term social support.",
+   "explain": "## Step 1: Read the ORDER in which things fall\n\n>> **Weight first** = a nutritional (often non-organic) problem.\n>> **Weight and height together** = an organic/primary growth disorder.\n>> **Head circumference last** = very severe, long-standing undernutrition.\n\n## Step 2: Why this order exists\n\nStarvation makes a child **thin before short**, and the body **spares the brain** longest — so head growth is the last to suffer.\n\n## Step 3: The treatment triad\n\n>> **Catch-up feeding (~150% of normal calories) + treat the underlying disorder + long-term social support.** All children grow with enough nutrition, so weight gain in hospital alone doesn't prove the cause.",
+   "tie": "This is the synthesis of the whole topic: the chart pattern points you toward organic vs non-organic, and the treatment triad reflects that FTT is rarely just a feeding issue — hence the catch-up calories PLUS disease treatment PLUS social support."
+  }
+ ]
+}

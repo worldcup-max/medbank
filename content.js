@@ -89,103 +89,278 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define growth and development.",
-         "a": "**Growth is the increase in size of a child; development is the progressive acquisition of physical (motor), cognitive, linguistic and social skills — an increase in function and complexity of skills.**\n\n## Understanding it\nKeep the two apart by a single word each:\n- **Growth = SIZE.** Bigger weight, length, head.\n- **Development = SKILLS.** Learning to sit, talk, socialise.\n\n>> Growth is measured with a scale and tape; development is measured by **what the child can DO.** The whole topic divides along this line — anthropometry for growth, milestones for development."
+         "a": "**Growth is the increase in size of a child; development is the progressive acquisition of physical (motor), cognitive, linguistic and social skills — an increase in function and complexity of skills.**\n\n## Understanding it\nKeep the two apart by a single word each:\n- **Growth = SIZE.** Bigger weight, length, head.\n- **Development = SKILLS.** Learning to sit, talk, socialise.\n\n>> Growth is measured with a scale and tape; development is measured by **what the child can DO.** The whole topic divides along this line — anthropometry for growth, milestones for development.",
+         "opts": [
+          "Growth = skills; development = size",
+          "Growth = mental ability; development = weight gain",
+          "Growth = increase in size; development = progressive acquisition of skills",
+          "Both mean the same thing"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the factors affecting growth and development?",
-         "a": "**Biologic (genetic inheritance, intrauterine infection/teratogens, perinatal accidents, neurologic and hormonal maturation); psychological (mother figure, feeding practices, child-rearing environment); and social (socio-economic status, extended family, cultural practices, geo-political milieu).**\n\n## Understanding it\nGroup them into three buckets and one example each:\n- **Biologic** = what the child is *born with or exposed to in the womb/birth* — genes, infections, hormones.\n- **Psychological** = the *emotional/care environment* — the mother, feeding, home.\n- **Social** = the *wider world* — money, family, culture.\n\n>> When a child grows or develops abnormally, scan **all three** — the cause could be genetic, neglect, or poverty."
+         "a": "**Biologic (genetic inheritance, intrauterine infection/teratogens, perinatal accidents, neurologic and hormonal maturation); psychological (mother figure, feeding practices, child-rearing environment); and social (socio-economic status, extended family, cultural practices, geo-political milieu).**\n\n## Understanding it\nGroup them into three buckets and one example each:\n- **Biologic** = what the child is *born with or exposed to in the womb/birth* — genes, infections, hormones.\n- **Psychological** = the *emotional/care environment* — the mother, feeding, home.\n- **Social** = the *wider world* — money, family, culture.\n\n>> When a child grows or develops abnormally, scan **all three** — the cause could be genetic, neglect, or poverty.",
+         "opts": [
+          "Biologic, psychological, and social factors",
+          "Only genetic factors",
+          "Only diet",
+          "Only the child's gender"
+         ],
+         "ans": 0
         },
         {
          "q": "What weight does a normal neonate have, and what happens to weight in the first week?",
-         "a": "**A neonate usually weighs 2,500 g or more (length >45 cm). Weight may drop 3-10% in the first week of life.**\n\n## Understanding it\n- Normal birth weight = **≥ 2,500 g** (below this is low birth weight).\n- Then it **falls 3–10%** in week one — and that's **normal**.\n\n>> **Why the dip?** Loss of extravascular fluid plus low colostrum intake before the milk comes in. It's regained by ~2 weeks — so **don't mistake the normal first-week dip for failure to thrive.**"
+         "a": "**A neonate usually weighs 2,500 g or more (length >45 cm). Weight may drop 3-10% in the first week of life.**\n\n## Understanding it\n- Normal birth weight = **≥ 2,500 g** (below this is low birth weight).\n- Then it **falls 3–10%** in week one — and that's **normal**.\n\n>> **Why the dip?** Loss of extravascular fluid plus low colostrum intake before the milk comes in. It's regained by ~2 weeks — so **don't mistake the normal first-week dip for failure to thrive.**",
+         "opts": [
+          "3.5 kg; no weight change occurs",
+          "≥4 kg; gains 10% in the first week",
+          "1 kg; loses half its weight",
+          "≥2.5 kg; may lose 3–10% in the first week then regain it"
+         ],
+         "ans": 3
         },
         {
          "q": "When does a breastfed baby double and triple its birth weight?",
-         "a": "**An exclusively breastfed term baby doubles birth weight at around 5 months and triples it between 9 and 12 months.**\n\n## Understanding it\nTwo anchor points to memorise:\n- **Double by ~5 months**\n- **Triple by ~1 year**\n\n>> So a 3 kg newborn is roughly **6 kg at 5 months** and **9 kg at 1 year.** These are the two most examinable weight milestones — if a baby is far off them, investigate growth."
+         "a": "**An exclusively breastfed term baby doubles birth weight at around 5 months and triples it between 9 and 12 months.**\n\n## Understanding it\nTwo anchor points to memorise:\n- **Double by ~5 months**\n- **Triple by ~1 year**\n\n>> So a 3 kg newborn is roughly **6 kg at 5 months** and **9 kg at 1 year.** These are the two most examinable weight milestones — if a baby is far off them, investigate growth.",
+         "opts": [
+          "Doubles by 1 month, triples by 3 months",
+          "Doubles by ~5 months, triples by ~1 year",
+          "Never doubles in the first year",
+          "Doubles by 1 year, triples by 2 years"
+         ],
+         "ans": 1
         },
         {
          "q": "How do length and head circumference change over the first year?",
-         "a": "**Length increases from >=45 cm at birth to >=66 cm at 1 year (~2 cm/month average). Head circumference increases from 33 cm at birth to 45 cm at 1 year.**\n\n## Understanding it\n- **Length:** ~45 → 66 cm (about +21 cm, ~2 cm/month).\n- **Head circumference:** 33 → 45 cm (about +12 cm).\n\n>> **Head circumference reflects BRAIN growth** — that's why it's measured routinely. An abnormally small/large head or one crossing percentiles flags a neurological problem (microcephaly, hydrocephalus)."
+         "a": "**Length increases from >=45 cm at birth to >=66 cm at 1 year (~2 cm/month average). Head circumference increases from 33 cm at birth to 45 cm at 1 year.**\n\n## Understanding it\n- **Length:** ~45 → 66 cm (about +21 cm, ~2 cm/month).\n- **Head circumference:** 33 → 45 cm (about +12 cm).\n\n>> **Head circumference reflects BRAIN growth** — that's why it's measured routinely. An abnormally small/large head or one crossing percentiles flags a neurological problem (microcephaly, hydrocephalus).",
+         "opts": [
+          "Length ~50→75 cm; head ~33→45 cm",
+          "Length 50→60 cm; head 33→34 cm",
+          "Both stay unchanged in year one",
+          "Length doubles; head triples"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the weight formula for a child aged 1-6 years?",
-         "a": "**Weight (kg) = (age in years x 2) + 8.**\n\n## Understanding it\nPlug in the age:\n- A **4-year-old** ≈ (4×2)+8 = **16 kg**\n- A **2-year-old** ≈ (2×2)+8 = **12 kg**\n\n>> This gives a **quick weight estimate when there's no scale** — vital for calculating drug and fluid doses in an emergency, and a source of free exam marks."
+         "a": "**Weight (kg) = (age in years x 2) + 8.**\n\n## Understanding it\nPlug in the age:\n- A **4-year-old** ≈ (4×2)+8 = **16 kg**\n- A **2-year-old** ≈ (2×2)+8 = **12 kg**\n\n>> This gives a **quick weight estimate when there's no scale** — vital for calculating drug and fluid doses in an emergency, and a source of free exam marks.",
+         "opts": [
+          "(age × 6) + 77",
+          "(age × 2) + 8 kg",
+          "(age × 7 − 5) ÷ 2",
+          "(age + 9) ÷ 2"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the height formula for children aged 1-12 years?",
-         "a": "**Height (cm) = (age in years x 6) + 77.**\n\n## Understanding it\n- A **5-year-old** ≈ (5×6)+77 = **107 cm**\n- A **10-year-old** ≈ (10×6)+77 = **137 cm**\n\n>> Pair it with the weight formula ((age×2)+8) — together they let you estimate a child's size from age alone, useful clinically and examinable."
+         "a": "**Height (cm) = (age in years x 6) + 77.**\n\n## Understanding it\n- A **5-year-old** ≈ (5×6)+77 = **107 cm**\n- A **10-year-old** ≈ (10×6)+77 = **137 cm**\n\n>> Pair it with the weight formula ((age×2)+8) — together they let you estimate a child's size from age alone, useful clinically and examinable.",
+         "opts": [
+          "(age × 5) + 80",
+          "(age + 9) ÷ 2",
+          "(age × 6) + 77 cm",
+          "(age × 2) + 8"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the weight formula for infants aged 3-12 months?",
-         "a": "**Weight (kg) = (age in months + 9) / 2.**\n\n## Understanding it\n- A **6-month-old** ≈ (6+9)/2 = **7.5 kg**\n- A **9-month-old** ≈ (9+9)/2 = **9 kg**\n\n>> This bridges the gap between birth (~3 kg) and the 1-6 year formula, giving a reasonable estimate across infancy."
+         "a": "**Weight (kg) = (age in months + 9) / 2.**\n\n## Understanding it\n- A **6-month-old** ≈ (6+9)/2 = **7.5 kg**\n- A **9-month-old** ≈ (9+9)/2 = **9 kg**\n\n>> This bridges the gap between birth (~3 kg) and the 1-6 year formula, giving a reasonable estimate across infancy.",
+         "opts": [
+          "(age × 7 − 5) ÷ 2",
+          "(age × 6) + 77",
+          "(age in months + 9) ÷ 2 kg",
+          "(age × 2) + 8"
+         ],
+         "ans": 2
         },
         {
          "q": "List the fields (domains) of development.",
-         "a": "**Gross motor; vision and fine motor; hearing, speech and language (cognitive); social, emotional and behavioural (psychological); and vegetative.**\n\n## Understanding it\nDevelopment isn't one thing — it advances in **parallel streams**, and you assess each:\n- **Gross motor** — big movements (sitting, walking)\n- **Fine motor/vision** — small precise movements (grasp)\n- **Speech/language** — communication (cognitive)\n- **Social/emotional** — interaction (psychological)\n\n>> Assessing each domain separately is what lets you tell an **isolated delay** (e.g. speech only) from a **global delay** (several domains)."
+         "a": "**Gross motor; vision and fine motor; hearing, speech and language (cognitive); social, emotional and behavioural (psychological); and vegetative.**\n\n## Understanding it\nDevelopment isn't one thing — it advances in **parallel streams**, and you assess each:\n- **Gross motor** — big movements (sitting, walking)\n- **Fine motor/vision** — small precise movements (grasp)\n- **Speech/language** — communication (cognitive)\n- **Social/emotional** — interaction (psychological)\n\n>> Assessing each domain separately is what lets you tell an **isolated delay** (e.g. speech only) from a **global delay** (several domains).",
+         "opts": [
+          "Blood, urine, and stool",
+          "Gross motor, fine motor, speech/language, social, cognition",
+          "Heart, lungs, and liver",
+          "Height, weight, and head circumference"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the difference between developmental screening and assessment?",
-         "a": "**Screening is checks of a whole population or groups of children at set ages by trained professionals; assessment is a detailed analysis of overall development or specific areas.**\n\n## Understanding it\n- **Screening = broad and quick**, applied to *everyone* at set ages, to catch children who might have a problem.\n- **Assessment = deep and detailed**, applied to the *individual flagged*, to define the problem.\n\n>> Think of screening as the **net** (catch anyone who might be affected) and assessment as the **microscope** (examine those caught in detail)."
+         "a": "**Screening is checks of a whole population or groups of children at set ages by trained professionals; assessment is a detailed analysis of overall development or specific areas.**\n\n## Understanding it\n- **Screening = broad and quick**, applied to *everyone* at set ages, to catch children who might have a problem.\n- **Assessment = deep and detailed**, applied to the *individual flagged*, to define the problem.\n\n>> Think of screening as the **net** (catch anyone who might be affected) and assessment as the **microscope** (examine those caught in detail).",
+         "opts": [
+          "Screening = checks a whole population; assessment = detailed analysis of an individual",
+          "Assessment is done only after age 18",
+          "Screening is detailed; assessment is quick",
+          "They are identical procedures"
+         ],
+         "ans": 0
         },
         {
          "q": "Define global developmental delay and when the term changes.",
-         "a": "**Global developmental delay is when a child under 5 years is delayed simultaneously in 2 or more spheres; after 5 years the term mental retardation (delayed IQ) is used.**\n\n## Understanding it\nTwo things to fix: the **number** and the **age**.\n- **≥ 2 spheres** delayed = *global* (not just one area).\n- **Under 5** = call it *global developmental delay*.\n- **Over 5** = call it *mental retardation (low IQ)*.\n\n>> **Why the age split?** Formal IQ testing is unreliable before 5, so you describe *delay*; after 5 you can measure *IQ*."
+         "a": "**Global developmental delay is when a child under 5 years is delayed simultaneously in 2 or more spheres; after 5 years the term mental retardation (delayed IQ) is used.**\n\n## Understanding it\nTwo things to fix: the **number** and the **age**.\n- **≥ 2 spheres** delayed = *global* (not just one area).\n- **Under 5** = call it *global developmental delay*.\n- **Over 5** = call it *mental retardation (low IQ)*.\n\n>> **Why the age split?** Formal IQ testing is unreliable before 5, so you describe *delay*; after 5 you can measure *IQ*.",
+         "opts": [
+          "Delay in 1 domain at any age",
+          "Only applies to children over 10",
+          "A temporary delay that always resolves",
+          "Delay in 2+ domains in a child under 5; after 5 it becomes mental retardation"
+         ],
+         "ans": 3
         },
         {
          "q": "List the parameters used in growth assessment.",
-         "a": "**Weight, height, head circumference, mid-arm circumference, skinfold thickness, body proportions, skeletal maturation, dental development, and specialised organ/tissue size, structure and function.**\n\n## Understanding it\nThese fall into groups:\n- **The core four** — weight, height, head circumference, mid-arm circumference\n- **Fat measures** — skinfold thickness\n- **Maturity measures** — skeletal (bone age), dental development\n\n>> The **core four** are what you plot on the growth chart routinely; the others are used when you need more detail (e.g. bone age in short stature)."
+         "a": "**Weight, height, head circumference, mid-arm circumference, skinfold thickness, body proportions, skeletal maturation, dental development, and specialised organ/tissue size, structure and function.**\n\n## Understanding it\nThese fall into groups:\n- **The core four** — weight, height, head circumference, mid-arm circumference\n- **Fat measures** — skinfold thickness\n- **Maturity measures** — skeletal (bone age), dental development\n\n>> The **core four** are what you plot on the growth chart routinely; the others are used when you need more detail (e.g. bone age in short stature).",
+         "opts": [
+          "Weight, height, head circumference, mid-arm circumference, skinfold, proportions, dentition",
+          "Only weight",
+          "Hearing and vision only",
+          "Blood pressure and pulse"
+         ],
+         "ans": 0
         },
         {
          "q": "What is used for growth monitoring, and what shifts across percentile curves are physiologic?",
-         "a": "**The growth chart (an international NCHS reference standard) is used, tracking weight-for-age, height-for-age, head-circumference-for-age and weight-for-height from birth. Physiologic shifts occur with parental genetics (first 2 years), prematurity (needing gestational correction until 18 months for head circumference, 24 months for weight, 40 months for height), and the adolescent growth spurt.**\n\n## Understanding it\n- The **growth chart** is the main tool — each child's parameters are plotted from birth.\n- Some crossing of percentile lines is **normal (physiologic)**, not disease:\n  - **First 2 years** — the baby shifts toward its **genetic** target percentile.\n  - **Prematurity** — correct for gestational age (HC to 18 mo, weight to 24 mo, height to 40 mo).\n  - **Adolescence** — the growth spurt varies in timing.\n\n>> **Don't over-investigate a normal shift** — a preterm baby or a toddler settling onto its genetic curve is not failing."
+         "a": "**The growth chart (an international NCHS reference standard) is used, tracking weight-for-age, height-for-age, head-circumference-for-age and weight-for-height from birth. Physiologic shifts occur with parental genetics (first 2 years), prematurity (needing gestational correction until 18 months for head circumference, 24 months for weight, 40 months for height), and the adolescent growth spurt.**\n\n## Understanding it\n- The **growth chart** is the main tool — each child's parameters are plotted from birth.\n- Some crossing of percentile lines is **normal (physiologic)**, not disease:\n  - **First 2 years** — the baby shifts toward its **genetic** target percentile.\n  - **Prematurity** — correct for gestational age (HC to 18 mo, weight to 24 mo, height to 40 mo).\n  - **Adolescence** — the growth spurt varies in timing.\n\n>> **Don't over-investigate a normal shift** — a preterm baby or a toddler settling onto its genetic curve is not failing.",
+         "opts": [
+          "The APGAR score; no shifts are normal",
+          "A single random weight; all shifts are abnormal",
+          "The Tensilon test",
+          "The growth chart; shifts from parental genetics, prematurity, and the adolescent spurt are physiologic"
+         ],
+         "ans": 3
         },
         {
          "q": "How is failure to thrive defined on the growth chart?",
-         "a": "**Failure to thrive is when the child's weight remains below the 5th percentile or drops below 2 major percentile lines.**\n\n## Understanding it\nThere are two ways to qualify:\n- **Low position** — weight **below the 5th percentile**, OR\n- **Downward crossing** — weight **falling across 2 major percentile lines**\n\n>> The second matters: a child **falling through the lines is failing even if not yet below the 5th percentile.** Watch the *trajectory*, not just the current position."
+         "a": "**Failure to thrive is when the child's weight remains below the 5th percentile or drops below 2 major percentile lines.**\n\n## Understanding it\nThere are two ways to qualify:\n- **Low position** — weight **below the 5th percentile**, OR\n- **Downward crossing** — weight **falling across 2 major percentile lines**\n\n>> The second matters: a child **falling through the lines is failing even if not yet below the 5th percentile.** Watch the *trajectory*, not just the current position.",
+         "opts": [
+          "Height above the 50th percentile",
+          "Weight above the 95th percentile",
+          "Weight below the 5th percentile or crossing down 2 major lines",
+          "Any weight loss of 1 gram"
+         ],
+         "ans": 2
         },
         {
          "q": "How does the growth chart distinguish acute undernutrition (wasting) from stunting?",
-         "a": "**In acute undernutrition, weight-for-age and weight-for-height drop but height-for-age stays normal. In stunting, height-for-age drops while weight-for-height may return towards normal.**\n\n## Understanding it\nIt's a **timing** distinction:\n- **Acute (wasting)** = recent problem → the child gets **thin** (weight down), but there hasn't been time to affect **height**.\n- **Chronic (stunting)** = long-standing problem → **height** is stunted.\n\n>> **Wasting = weight down, height normal (acute). Stunting = height down (chronic).** A child can be both."
+         "a": "**In acute undernutrition, weight-for-age and weight-for-height drop but height-for-age stays normal. In stunting, height-for-age drops while weight-for-height may return towards normal.**\n\n## Understanding it\nIt's a **timing** distinction:\n- **Acute (wasting)** = recent problem → the child gets **thin** (weight down), but there hasn't been time to affect **height**.\n- **Chronic (stunting)** = long-standing problem → **height** is stunted.\n\n>> **Wasting = weight down, height normal (acute). Stunting = height down (chronic).** A child can be both.",
+         "opts": [
+          "They are indistinguishable",
+          "Wasting: weight drops, height normal; stunting: height drops (chronic)",
+          "Wasting: height drops; stunting: weight drops",
+          "Both affect only head size"
+         ],
+         "ans": 1
         },
         {
          "q": "On the growth chart, how do you tell a nutritional cause from an endocrine/genetic cause?",
-         "a": "**In nutritional causes, weight drops before or at the same time as height. In congenital, constitutional, familial and endocrine causes, the height curve is affected first.**\n\n## Understanding it\nThis is the golden rule — reason it out:\n- **Starve a child** → they get **thin before short** → **weight falls first** = nutritional.\n- **Hormone problem** (growth hormone deficiency, hypothyroidism) → stunts **linear growth (height)** while weight may be preserved → **height falls first** = endocrine/genetic.\n\n>> **So a SHORT but well-nourished (even chubby) child points to an ENDOCRINE cause, not malnutrition** — a classic exam discriminator."
+         "a": "**In nutritional causes, weight drops before or at the same time as height. In congenital, constitutional, familial and endocrine causes, the height curve is affected first.**\n\n## Understanding it\nThis is the golden rule — reason it out:\n- **Starve a child** → they get **thin before short** → **weight falls first** = nutritional.\n- **Hormone problem** (growth hormone deficiency, hypothyroidism) → stunts **linear growth (height)** while weight may be preserved → **height falls first** = endocrine/genetic.\n\n>> **So a SHORT but well-nourished (even chubby) child points to an ENDOCRINE cause, not malnutrition** — a classic exam discriminator.",
+         "opts": [
+          "Neither affects the growth chart",
+          "Nutritional → weight drops first; endocrine/genetic → height drops first",
+          "Both always drop head circumference first",
+          "Nutritional → height first; endocrine → weight first"
+         ],
+         "ans": 1
         },
         {
          "q": "How is obesity defined on the growth chart?",
-         "a": "**Weight-for-height exceeding 120% of the median weight-for-height, with an increased body mass index (BMI = weight/height squared).**\n\n## Understanding it\n- **Weight-for-height > 120%** of the median = obese.\n- Confirmed by a raised **BMI** (weight ÷ height²).\n\n>> Using **weight-for-height** (not just weight-for-age) is key — it accounts for the child's height, so a tall heavy child isn't wrongly labelled obese."
+         "a": "**Weight-for-height exceeding 120% of the median weight-for-height, with an increased body mass index (BMI = weight/height squared).**\n\n## Understanding it\n- **Weight-for-height > 120%** of the median = obese.\n- Confirmed by a raised **BMI** (weight ÷ height²).\n\n>> Using **weight-for-height** (not just weight-for-age) is key — it accounts for the child's height, so a tall heavy child isn't wrongly labelled obese.",
+         "opts": [
+          "Weight below the 5th percentile",
+          "Any child heavier than a sibling",
+          "Weight-for-height >120% of median, with raised BMI",
+          "Height above the 97th percentile"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the upper-to-lower (U/L) segment ratio at different ages, and what do abnormal ratios suggest?",
-         "a": "**The U/L ratio is about 1.7 at birth, 1.3 at 3 years, and 1.0 after 7 years. Higher ratios occur in short-limb dwarfism and rickets; lower ratios in some adolescents and sickle cell disease.**\n\n## Understanding it\nDivide the body at the pubis into upper and lower segments.\n- The ratio **falls with age (1.7 → 1.3 → 1.0)** because the **legs grow (catch up)** relative to the trunk.\n- **High ratio = short legs** → **rickets, short-limb dwarfism**.\n- **Low ratio = long legs** → **sickle cell disease**, some adolescents.\n\n>> **Short legs raise the ratio (rickets); long legs lower it (sickle cell).**"
+         "a": "**The U/L ratio is about 1.7 at birth, 1.3 at 3 years, and 1.0 after 7 years. Higher ratios occur in short-limb dwarfism and rickets; lower ratios in some adolescents and sickle cell disease.**\n\n## Understanding it\nDivide the body at the pubis into upper and lower segments.\n- The ratio **falls with age (1.7 → 1.3 → 1.0)** because the **legs grow (catch up)** relative to the trunk.\n- **High ratio = short legs** → **rickets, short-limb dwarfism**.\n- **Low ratio = long legs** → **sickle cell disease**, some adolescents.\n\n>> **Short legs raise the ratio (rickets); long legs lower it (sickle cell).**",
+         "opts": [
+          "1.0 at birth rising to 1.7 in adults",
+          "Always 1.0 at every age",
+          "1.7 at birth → 1.3 at 3 yr → 1.0 after 7 yr; high = rickets, low = sickle cell",
+          "High ratio = long legs"
+         ],
+         "ans": 2
         },
         {
          "q": "What is delayed tooth eruption, and what are its causes?",
-         "a": "**Tooth eruption is delayed if the first tooth has not erupted by the 13th month. Causes include familial, idiopathic, hypothyroidism and rickets.**\n\n## Understanding it\n- The threshold is **13 months** — no first tooth by then = delayed.\n- Causes range from **benign (familial, idiopathic)** to **pathological**:\n\n>> The two pathological causes to remember are **HYPOTHYROIDISM and RICKETS** — both also slow bone/growth generally, so delayed teeth can be a clue to them."
+         "a": "**Tooth eruption is delayed if the first tooth has not erupted by the 13th month. Causes include familial, idiopathic, hypothyroidism and rickets.**\n\n## Understanding it\n- The threshold is **13 months** — no first tooth by then = delayed.\n- Causes range from **benign (familial, idiopathic)** to **pathological**:\n\n>> The two pathological causes to remember are **HYPOTHYROIDISM and RICKETS** — both also slow bone/growth generally, so delayed teeth can be a clue to them.",
+         "opts": [
+          "Loss of teeth after age 20",
+          "No first tooth by 13 months; causes include hypothyroidism and rickets",
+          "Teeth erupting before birth",
+          "No first tooth by 3 months"
+         ],
+         "ans": 1
         },
         {
          "q": "What is early tooth exfoliation and what causes it?",
-         "a": "**Exfoliation (shedding) of teeth before the 5th birthday is considered early; causes include idiopathic, trauma, gingivitis, scurvy and histiocytosis X.**\n\n## Understanding it\n- **Before age 5** = teeth falling out too soon.\n- Causes worth flagging:\n\n>> **SCURVY (vitamin C deficiency, affecting gums/connective tissue) and HISTIOCYTOSIS X** are the notable pathological causes — early tooth loss can be the presenting clue to these."
+         "a": "**Exfoliation (shedding) of teeth before the 5th birthday is considered early; causes include idiopathic, trauma, gingivitis, scurvy and histiocytosis X.**\n\n## Understanding it\n- **Before age 5** = teeth falling out too soon.\n- Causes worth flagging:\n\n>> **SCURVY (vitamin C deficiency, affecting gums/connective tissue) and HISTIOCYTOSIS X** are the notable pathological causes — early tooth loss can be the presenting clue to these.",
+         "opts": [
+          "Extra teeth developing",
+          "Normal loss of milk teeth at age 6",
+          "Teeth lost before age 5; causes include scurvy and histiocytosis X",
+          "Teeth erupting late"
+         ],
+         "ans": 2
         },
         {
          "q": "List the speech and language red flags that warrant early referral.",
-         "a": "**Not talking at all by 2 years; speech largely unintelligible after 3 years; dropping beginning consonants after 3 years; not using 2-3 word sentences by 3 years; mostly vowel sounds; word endings missing after 5 years; and a monotone/too loud/too soft/poor-quality voice.**\n\n## Understanding it\nGroup them by age:\n- **By 2 years** — should be *talking at all*.\n- **By 3 years** — should be *intelligible* and using *2-3 word sentences*.\n- **Any age** — an **odd voice quality** is a red flag.\n\n>> That last one is the clue: a **monotone or abnormal voice may indicate HEARING LOSS** — a child who can't hear can't learn normal speech, so always check hearing."
+         "a": "**Not talking at all by 2 years; speech largely unintelligible after 3 years; dropping beginning consonants after 3 years; not using 2-3 word sentences by 3 years; mostly vowel sounds; word endings missing after 5 years; and a monotone/too loud/too soft/poor-quality voice.**\n\n## Understanding it\nGroup them by age:\n- **By 2 years** — should be *talking at all*.\n- **By 3 years** — should be *intelligible* and using *2-3 word sentences*.\n- **Any age** — an **odd voice quality** is a red flag.\n\n>> That last one is the clue: a **monotone or abnormal voice may indicate HEARING LOSS** — a child who can't hear can't learn normal speech, so always check hearing.",
+         "opts": [
+          "Learning a second language",
+          "Talking in full sentences at age 2",
+          "Babbling at 6 months",
+          "Not talking by 2, unintelligible after 3, no 2–3 word sentences by 3, odd voice"
+         ],
+         "ans": 3
         },
         {
          "q": "What is global inhibition of development versus mental retardation?",
-         "a": "**Global inhibition (delay) of development is when a child under 5 years is delayed simultaneously in 2 or more spheres; after 5 years the term mental retardation (delayed IQ) is used.**\n\n## Understanding it\nSame idea as global developmental delay:\n- **Under 5, ≥ 2 spheres** delayed = **global developmental delay/inhibition**.\n- **Over 5** = **mental retardation** (measurable low IQ).\n\n>> The distinction is about **whether you can reliably measure IQ** — you can't in the very young, so before 5 you describe delay."
+         "a": "**Global inhibition (delay) of development is when a child under 5 years is delayed simultaneously in 2 or more spheres; after 5 years the term mental retardation (delayed IQ) is used.**\n\n## Understanding it\nSame idea as global developmental delay:\n- **Under 5, ≥ 2 spheres** delayed = **global developmental delay/inhibition**.\n- **Over 5** = **mental retardation** (measurable low IQ).\n\n>> The distinction is about **whether you can reliably measure IQ** — you can't in the very young, so before 5 you describe delay.",
+         "opts": [
+          "They are unrelated to age",
+          "Mental retardation is diagnosed under age 1",
+          "Global delay = 2+ areas under 5; mental retardation = low IQ after age 5",
+          "Both mean high intelligence"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the Draw-a-Person test and its calculation.",
-         "a": "**A standardised assessment of intellectual and emotional state (Goodenough 1926, validated for Nigerian children 6-11). 4 points = 1 draw-a-person year; 3 points are added. Maturation age = (points scored / 4) + 3; the quotient = maturation age / chronologic age, normal above 0.75 (>75% = normal IQ).**\n\n## Understanding it\n- The child draws a person; each detail scores a point. **4 points = 1 year.**\n- **Add 3** because children can't score until ~age 4.\n- **Maturation age = (points ÷ 4) + 3.**\n- **Quotient = maturation age ÷ actual age**; **> 0.75 (75%) is normal.**\n\n>> Worked example: a child scores 20 points → maturation age = (20÷4)+3 = **8**. If she is 8 years old, quotient = 8÷8 = **1.0 (normal)**. It's a cheap, locally validated IQ/emotional screen needing only pencil and paper."
+         "a": "**A standardised assessment of intellectual and emotional state (Goodenough 1926, validated for Nigerian children 6-11). 4 points = 1 draw-a-person year; 3 points are added. Maturation age = (points scored / 4) + 3; the quotient = maturation age / chronologic age, normal above 0.75 (>75% = normal IQ).**\n\n## Understanding it\n- The child draws a person; each detail scores a point. **4 points = 1 year.**\n- **Add 3** because children can't score until ~age 4.\n- **Maturation age = (points ÷ 4) + 3.**\n- **Quotient = maturation age ÷ actual age**; **> 0.75 (75%) is normal.**\n\n>> Worked example: a child scores 20 points → maturation age = (20÷4)+3 = **8**. If she is 8 years old, quotient = 8÷8 = **1.0 (normal)**. It's a cheap, locally validated IQ/emotional screen needing only pencil and paper.",
+         "opts": [
+          "IQ/emotional screen; maturation age = (points ÷ 4) + 3; quotient normal >0.75",
+          "A hearing screen using tones",
+          "A test of muscle strength",
+          "A blood test for growth hormone"
+         ],
+         "ans": 0
         },
         {
          "q": "Which instruments are recommended for developmental assessment?",
-         "a": "**Denver II Developmental Screening Test, Bayley Infant Development Scales, Parents' Evaluation of Developmental Status (PEDS), Paediatric Symptom Checklist, and the Modified Checklist for Autism in Toddlers (M-CHAT).**\n\n## Understanding it\nMatch the tool to the purpose:\n- **Denver II** — general developmental screening.\n- **Bayley scales** — detailed infant neurodevelopmental assessment.\n- **PEDS / Paediatric Symptom Checklist** — parent-reported concerns.\n- **M-CHAT** — specifically screens **toddlers for autism**.\n\n>> **M-CHAT is the one to remember for autism screening** in toddlers."
+         "a": "**Denver II Developmental Screening Test, Bayley Infant Development Scales, Parents' Evaluation of Developmental Status (PEDS), Paediatric Symptom Checklist, and the Modified Checklist for Autism in Toddlers (M-CHAT).**\n\n## Understanding it\nMatch the tool to the purpose:\n- **Denver II** — general developmental screening.\n- **Bayley scales** — detailed infant neurodevelopmental assessment.\n- **PEDS / Paediatric Symptom Checklist** — parent-reported concerns.\n- **M-CHAT** — specifically screens **toddlers for autism**.\n\n>> **M-CHAT is the one to remember for autism screening** in toddlers.",
+         "opts": [
+          "APGAR and Ballard scores",
+          "Glasgow Coma Scale only",
+          "Tensilon and edrophonium tests",
+          "Denver II, Bayley scales, PEDS, Paediatric Symptom Checklist, M-CHAT"
+         ],
+         "ans": 3
         },
         {
          "q": "Who assesses child development and for what purpose?",
-         "a": "**Parents and relations assess for reassurance and to detect deviation from the norm; teachers assess for school performance; physicians assess to identify specific delay or disability and plan appropriate intervention in the context of the child's biologic, psychological and social milieu.**\n\n## Understanding it\nThree assessors, three goals:\n- **Parents** — is my child normal? (reassurance/early detection)\n- **Teachers** — how is the child performing at school?\n- **Physician** — what exactly is delayed, why, and what can we do?\n\n>> The physician's role is the deepest: not just *spotting* delay but understanding its **cause** and arranging **intervention** — because early intervention improves outcomes."
+         "a": "**Parents and relations assess for reassurance and to detect deviation from the norm; teachers assess for school performance; physicians assess to identify specific delay or disability and plan appropriate intervention in the context of the child's biologic, psychological and social milieu.**\n\n## Understanding it\nThree assessors, three goals:\n- **Parents** — is my child normal? (reassurance/early detection)\n- **Teachers** — how is the child performing at school?\n- **Physician** — what exactly is delayed, why, and what can we do?\n\n>> The physician's role is the deepest: not just *spotting* delay but understanding its **cause** and arranging **intervention** — because early intervention improves outcomes.",
+         "opts": [
+          "Only laboratory scientists",
+          "Only radiologists",
+          "Only the child themselves",
+          "Parents (reassurance), teachers (school performance), physicians (identify delay/plan intervention)"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": null,
@@ -261,115 +436,311 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "What is the neonatal period?",
-         "a": "**The neonatal period is the first 28 days of life.**\n\n## Understanding it\nCount from the moment of birth:\n- **Day 0 to day 28** = neonatal period.\n- It is often split into **early (first 7 days)** and **late (8–28 days)**.\n\n>> This is the single highest-risk stretch of childhood, which is why it has its own specialty. Anchor the number **28 days** — every neonatal statistic hangs on it."
+         "a": "**The neonatal period is the first 28 days of life.**\n\n## Understanding it\nCount from the moment of birth:\n- **Day 0 to day 28** = neonatal period.\n- It is often split into **early (first 7 days)** and **late (8–28 days)**.\n\n>> This is the single highest-risk stretch of childhood, which is why it has its own specialty. Anchor the number **28 days** — every neonatal statistic hangs on it.",
+         "opts": [
+          "The first 28 days of life",
+          "The first 7 days of life",
+          "The first year of life",
+          "From conception to birth"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the perinatal period?",
-         "a": "**From the 20th–28th week of gestation to the first 7 days of life.**\n\n## Understanding it\nNotice it straddles birth:\n- It **starts before delivery** (20–28 weeks gestation) and **ends at day 7** after birth.\n\n>> Because it crosses the moment of birth, the perinatal period is the one that captures **stillbirths plus early neonatal deaths** — the obstetric–newborn handover zone."
+         "a": "**From the 20th–28th week of gestation to the first 7 days of life.**\n\n## Understanding it\nNotice it straddles birth:\n- It **starts before delivery** (20–28 weeks gestation) and **ends at day 7** after birth.\n\n>> Because it crosses the moment of birth, the perinatal period is the one that captures **stillbirths plus early neonatal deaths** — the obstetric–newborn handover zone.",
+         "opts": [
+          "From 20–28 weeks gestation to the first 7 days of life",
+          "From birth to 1 year",
+          "The first 28 days after birth",
+          "The whole of pregnancy"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is the neonatal period described as fragile?",
-         "a": "**Because the infant must transition from intrauterine to extrauterine life, which requires many rapid biochemical and physiologic changes.**\n\n## Understanding it\nAt birth the placenta is cut off, so the baby must suddenly take over its jobs:\n- **Breathe** (lungs must inflate and clear fluid).\n- **Keep warm** (no longer bathed in the mother's temperature).\n- **Control glucose** and **clear bilirubin** on its own.\n\n>> All of these switch on at the same instant. A small failure in any one — a slow first breath, a cold room — can cascade quickly, which is why the newborn is so vulnerable."
+         "a": "**Because the infant must transition from intrauterine to extrauterine life, which requires many rapid biochemical and physiologic changes.**\n\n## Understanding it\nAt birth the placenta is cut off, so the baby must suddenly take over its jobs:\n- **Breathe** (lungs must inflate and clear fluid).\n- **Keep warm** (no longer bathed in the mother's temperature).\n- **Control glucose** and **clear bilirubin** on its own.\n\n>> All of these switch on at the same instant. A small failure in any one — a slow first breath, a cold room — can cascade quickly, which is why the newborn is so vulnerable.",
+         "opts": [
+          "The infant must transition from intrauterine to extrauterine life via many rapid changes",
+          "There are no physiological changes needed",
+          "The bones are not yet formed",
+          "The immune system is fully mature"
+         ],
+         "ans": 0
         },
         {
          "q": "State the UNICEF 2020 IMR, PMR and NMR.",
-         "a": "**IMR 72/1000 live births · PMR 41/1000 · NMR 35/1000.**\n\n## Understanding it\nEach rate covers a different window:\n- **IMR (infant)** = deaths in the **first year** → 72.\n- **PMR (perinatal)** = stillbirths + first-7-day deaths → 41.\n- **NMR (neonatal)** = deaths in the **first 28 days** → 35.\n\n>> The key insight: NMR (35) is about **half** of IMR (72). Roughly half of all deaths in the first year happen in the first month — so the newborn period is where the biggest lives-saved opportunity sits."
+         "a": "**IMR 72/1000 live births · PMR 41/1000 · NMR 35/1000.**\n\n## Understanding it\nEach rate covers a different window:\n- **IMR (infant)** = deaths in the **first year** → 72.\n- **PMR (perinatal)** = stillbirths + first-7-day deaths → 41.\n- **NMR (neonatal)** = deaths in the **first 28 days** → 35.\n\n>> The key insight: NMR (35) is about **half** of IMR (72). Roughly half of all deaths in the first year happen in the first month — so the newborn period is where the biggest lives-saved opportunity sits.",
+         "opts": [
+          "IMR 35, PMR 72, NMR 41",
+          "IMR 10, PMR 5, NMR 2",
+          "IMR 72, PMR 41, NMR 35 per 1000",
+          "All are under 5 per 1000"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the main causes of neonatal mortality?",
-         "a": "**Circumstances of delivery, IUGR, conditions predisposing to asphyxia, overwhelming early-onset infection, prematurity/low birth weight, and congenital malformations.**\n\n## Understanding it\nSort them into a short high-yield four:\n- **Prematurity / low birth weight** — the immature baby.\n- **Birth asphyxia** — the oxygen-starved baby.\n- **Infection (early-onset sepsis)** — the overwhelmed baby.\n- **Congenital malformation** — the structurally abnormal baby.\n\n>> These four dominate the numbers, and most are **preventable** with good antenatal and delivery care — which is exactly why the lecture pushes prevention so hard."
+         "a": "**Circumstances of delivery, IUGR, conditions predisposing to asphyxia, overwhelming early-onset infection, prematurity/low birth weight, and congenital malformations.**\n\n## Understanding it\nSort them into a short high-yield four:\n- **Prematurity / low birth weight** — the immature baby.\n- **Birth asphyxia** — the oxygen-starved baby.\n- **Infection (early-onset sepsis)** — the overwhelmed baby.\n- **Congenital malformation** — the structurally abnormal baby.\n\n>> These four dominate the numbers, and most are **preventable** with good antenatal and delivery care — which is exactly why the lecture pushes prevention so hard.",
+         "opts": [
+          "Prematurity/LBW, birth asphyxia, infection, congenital malformation",
+          "Old age and dementia",
+          "Cancer and heart attacks",
+          "Trauma, poisoning and drowning"
+         ],
+         "ans": 0
         },
         {
          "q": "List causes of neonatal death that are FETAL in origin.",
-         "a": "**Placental insufficiency, intrauterine infection, congenital malformation, cord accidents, abruptio placentae, and hydrops fetalis.**\n\n## Understanding it\nThese are problems that arise before or around delivery, at the placenta/cord interface:\n- **Placental insufficiency** starves the fetus of oxygen and nutrients.\n- **Cord accidents / abruptio placentae** cut off supply suddenly.\n- **Intrauterine infection** and **hydrops** damage the baby before birth.\n\n>> The theme: the fetus depended on the placenta and cord, so anything that fails that supply line is a 'fetal' cause."
+         "a": "**Placental insufficiency, intrauterine infection, congenital malformation, cord accidents, abruptio placentae, and hydrops fetalis.**\n\n## Understanding it\nThese are problems that arise before or around delivery, at the placenta/cord interface:\n- **Placental insufficiency** starves the fetus of oxygen and nutrients.\n- **Cord accidents / abruptio placentae** cut off supply suddenly.\n- **Intrauterine infection** and **hydrops** damage the baby before birth.\n\n>> The theme: the fetus depended on the placenta and cord, so anything that fails that supply line is a 'fetal' cause.",
+         "opts": [
+          "Meconium aspiration and birth trauma",
+          "Vitamin K deficiency bleeding",
+          "Placental insufficiency, intrauterine infection, cord accidents, abruptio, hydrops",
+          "RDS, IVH and NEC"
+         ],
+         "ans": 2
         },
         {
          "q": "List causes of neonatal death specific to PRETERM babies.",
-         "a": "**Severe immaturity, respiratory distress syndrome (RDS), intraventricular haemorrhage (IVH), congenital abnormalities, infection, necrotising enterocolitis (NEC), and bronchopulmonary dysplasia (BPD).**\n\n## Understanding it\nRead these as 'immature organ fails' — map each to its organ:\n- **Lungs** immature → surfactant lacking → **RDS**, and long term → **BPD**.\n- **Brain** fragile vessels → **IVH**.\n- **Gut** immature → **NEC**.\n\n>> One principle explains the whole list: the preterm baby's organs were not finished, so each undeveloped system has its own failure mode."
+         "a": "**Severe immaturity, respiratory distress syndrome (RDS), intraventricular haemorrhage (IVH), congenital abnormalities, infection, necrotising enterocolitis (NEC), and bronchopulmonary dysplasia (BPD).**\n\n## Understanding it\nRead these as 'immature organ fails' — map each to its organ:\n- **Lungs** immature → surfactant lacking → **RDS**, and long term → **BPD**.\n- **Brain** fragile vessels → **IVH**.\n- **Gut** immature → **NEC**.\n\n>> One principle explains the whole list: the preterm baby's organs were not finished, so each undeveloped system has its own failure mode.",
+         "opts": [
+          "Immaturity, RDS, IVH, NEC, BPD, infection",
+          "Meconium aspiration and PPHN",
+          "Birth trauma from forceps",
+          "Placental insufficiency and cord accidents"
+         ],
+         "ans": 0
         },
         {
          "q": "List causes of neonatal death in FULL-TERM babies.",
-         "a": "**Congenital abnormalities, birth asphyxia, trauma, infection, meconium aspiration pneumonia, and persistent pulmonary hypertension of the newborn (PPHN).**\n\n## Understanding it\nA term baby has mature organs, so its deaths cluster around the delivery itself and structure:\n- **Birth asphyxia / trauma** — problems of the delivery.\n- **Meconium aspiration** — the distressed term baby passes and inhales meconium.\n- **Congenital abnormality** — a structural defect present from formation.\n\n>> Contrast with preterm: term deaths are about **the delivery and anatomy**, not immaturity."
+         "a": "**Congenital abnormalities, birth asphyxia, trauma, infection, meconium aspiration pneumonia, and persistent pulmonary hypertension of the newborn (PPHN).**\n\n## Understanding it\nA term baby has mature organs, so its deaths cluster around the delivery itself and structure:\n- **Birth asphyxia / trauma** — problems of the delivery.\n- **Meconium aspiration** — the distressed term baby passes and inhales meconium.\n- **Congenital abnormality** — a structural defect present from formation.\n\n>> Contrast with preterm: term deaths are about **the delivery and anatomy**, not immaturity.",
+         "opts": [
+          "RDS, IVH and NEC of immaturity",
+          "Bronchopulmonary dysplasia",
+          "Placental insufficiency and hydrops",
+          "Congenital abnormalities, birth asphyxia, trauma, meconium aspiration, PPHN"
+         ],
+         "ans": 3
         },
         {
          "q": "What preventable variables reduce perinatal/neonatal mortality?",
-         "a": "**Health education, prenatal (antenatal) care, nutrition, social support, risk identification, and good obstetric care.**\n\n## Understanding it\nEvery item attacks a cause upstream, before the baby is sick:\n- **Antenatal care + risk identification** catch the high-risk pregnancy early.\n- **Nutrition + health education** improve the mother's reserve.\n- **Obstetric care** manages labour so asphyxia and trauma are avoided.\n\n>> The lecture's message: most neonatal deaths are prevented in the **antenatal clinic and labour ward**, not the nursery. High-risk women (likely to lose >1 L or deliver a sick baby) should deliver where blood and ICU exist."
+         "a": "**Health education, prenatal (antenatal) care, nutrition, social support, risk identification, and good obstetric care.**\n\n## Understanding it\nEvery item attacks a cause upstream, before the baby is sick:\n- **Antenatal care + risk identification** catch the high-risk pregnancy early.\n- **Nutrition + health education** improve the mother's reserve.\n- **Obstetric care** manages labour so asphyxia and trauma are avoided.\n\n>> The lecture's message: most neonatal deaths are prevented in the **antenatal clinic and labour ward**, not the nursery. High-risk women (likely to lose >1 L or deliver a sick baby) should deliver where blood and ICU exist.",
+         "opts": [
+          "Avoiding hospital delivery",
+          "More formula feeding",
+          "Delaying all antenatal visits",
+          "Health education, antenatal care, nutrition, social support, risk identification, obstetric care"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is the newborn's past medical history 'embodied in the HPC'?",
-         "a": "**Because a neonate has almost no independent medical past — its history is really the story of the pregnancy, labour and delivery.**\n\n## Understanding it\nThink about what a 3-day-old baby could have as a 'past':\n- No childhood illnesses, no surgeries, no chronic disease of its own yet.\n- So everything relevant happened **in utero and at birth** — antenatal infections, drugs, how labour went, whether it was resuscitated.\n\n>> That is why the neonatal history leans so heavily on the **pregnancy and birth history**: for a newborn, that IS the past medical history."
+         "a": "**Because a neonate has almost no independent medical past — its history is really the story of the pregnancy, labour and delivery.**\n\n## Understanding it\nThink about what a 3-day-old baby could have as a 'past':\n- No childhood illnesses, no surgeries, no chronic disease of its own yet.\n- So everything relevant happened **in utero and at birth** — antenatal infections, drugs, how labour went, whether it was resuscitated.\n\n>> That is why the neonatal history leans so heavily on the **pregnancy and birth history**: for a newborn, that IS the past medical history.",
+         "opts": [
+          "Newborns have extensive past illnesses",
+          "Past history means the father's illnesses",
+          "The HPC is irrelevant in neonates",
+          "A neonate has little past of its own — its history is the pregnancy/birth story"
+         ],
+         "ans": 3
         },
         {
          "q": "What key items belong in the pregnancy and birth history?",
-         "a": "**Whether pregnancy was noticed early/desired, any attempted termination, antenatal events (bleeding, drug use, acute illness), whether carried to term, how labour started (spontaneous/induced/augmented), whether prolonged, time of membrane rupture, and mode of delivery (spontaneous vaginal vs assisted — forceps/vacuum).**\n\n## Understanding it\nWalk it as a timeline from conception to birth:\n- **Pregnancy:** planned? antenatal illness, bleeding, or drugs that could harm the fetus?\n- **Labour:** spontaneous or induced? prolonged? when did membranes rupture (long rupture = infection risk)?\n- **Delivery:** normal or assisted (forceps/vacuum suggest a difficult birth → trauma/asphyxia risk).\n\n>> Each answer flags a specific newborn risk before you touch the baby."
+         "a": "**Whether pregnancy was noticed early/desired, any attempted termination, antenatal events (bleeding, drug use, acute illness), whether carried to term, how labour started (spontaneous/induced/augmented), whether prolonged, time of membrane rupture, and mode of delivery (spontaneous vaginal vs assisted — forceps/vacuum).**\n\n## Understanding it\nWalk it as a timeline from conception to birth:\n- **Pregnancy:** planned? antenatal illness, bleeding, or drugs that could harm the fetus?\n- **Labour:** spontaneous or induced? prolonged? when did membranes rupture (long rupture = infection risk)?\n- **Delivery:** normal or assisted (forceps/vacuum suggest a difficult birth → trauma/asphyxia risk).\n\n>> Each answer flags a specific newborn risk before you touch the baby.",
+         "opts": [
+          "The baby's future immunisations",
+          "Planned pregnancy, antenatal events, how labour started, membrane rupture, mode of delivery",
+          "The grandparents' occupations",
+          "The child's school performance"
+         ],
+         "ans": 1
         },
         {
          "q": "What must you ask about the immediate neonatal period?",
-         "a": "**Did the baby cry well at birth or need resuscitation, and was there jaundice, cyanosis, pallor, fever, or seizures?**\n\n## Understanding it\nThese questions screen the two biggest early dangers:\n- **'Did it cry / need resuscitation?'** → screens for **birth asphyxia**.\n- **Jaundice, cyanosis, pallor, fever, seizures** → screen for **sepsis, cardiac/respiratory disease, and neurologic injury**.\n\n>> A baby that did not cry promptly and needed resuscitation is your loudest early warning — it reframes everything else in the exam."
+         "a": "**Did the baby cry well at birth or need resuscitation, and was there jaundice, cyanosis, pallor, fever, or seizures?**\n\n## Understanding it\nThese questions screen the two biggest early dangers:\n- **'Did it cry / need resuscitation?'** → screens for **birth asphyxia**.\n- **Jaundice, cyanosis, pallor, fever, seizures** → screen for **sepsis, cardiac/respiratory disease, and neurologic injury**.\n\n>> A baby that did not cry promptly and needed resuscitation is your loudest early warning — it reframes everything else in the exam.",
+         "opts": [
+          "Did the baby cry/need resuscitation; jaundice, cyanosis, pallor, fever, seizures",
+          "The mother's blood pressure at age 40",
+          "The child's exam results",
+          "Details of weaning at 6 months"
+         ],
+         "ans": 0
         },
         {
          "q": "What family/social history is important in a neonate?",
-         "a": "**Birth rank and siblings' ages, parental age/occupation/education, family illnesses (jaundice, diabetes, cardiopulmonary, genetic), and previous maternal reproductive problems (stillbirth, preterm, rhesus isoimmunisation, blood-group incompatibility).**\n\n## Understanding it\nTwo threads matter most:\n- **Heritable/family disease** — a family history of neonatal jaundice or genetic disease predicts risk in this baby.\n- **Previous maternal reproductive problems** — a prior **rhesus isoimmunisation or blood-group incompatibility** can cause severe haemolytic disease in the current baby.\n\n>> The reproductive history is the sleeper here: it can predict a sick newborn before delivery, so never skip it."
+         "a": "**Birth rank and siblings' ages, parental age/occupation/education, family illnesses (jaundice, diabetes, cardiopulmonary, genetic), and previous maternal reproductive problems (stillbirth, preterm, rhesus isoimmunisation, blood-group incompatibility).**\n\n## Understanding it\nTwo threads matter most:\n- **Heritable/family disease** — a family history of neonatal jaundice or genetic disease predicts risk in this baby.\n- **Previous maternal reproductive problems** — a prior **rhesus isoimmunisation or blood-group incompatibility** can cause severe haemolytic disease in the current baby.\n\n>> The reproductive history is the sleeper here: it can predict a sick newborn before delivery, so never skip it.",
+         "opts": [
+          "The colour of the nursery",
+          "The baby's favourite toys",
+          "The family's holiday plans",
+          "Siblings, parental details, family illness, previous maternal reproductive problems"
+         ],
+         "ans": 3
         },
         {
          "q": "State the normal weight, length and head circumference of a term newborn.",
-         "a": "**Weight 2.5–3.5 kg (about 2.9–3 kg in developing countries), length 45–55 cm, and occipitofrontal head circumference (OFC) 35 ± 2 cm.**\n\n## Understanding it\nMemorise the three anchors and their spread:\n- **Weight 2.5–3.5 kg** — below 2.5 kg is low birth weight.\n- **Length 45–55 cm.**\n- **OFC 35 ± 2 cm** (so ~33–37 cm).\n\n>> These are your **baseline** numbers. Everything later — growth, jaundice thresholds by weight, drug doses — is judged against this first recorded set, so they must be accurate."
+         "a": "**Weight 2.5–3.5 kg (about 2.9–3 kg in developing countries), length 45–55 cm, and occipitofrontal head circumference (OFC) 35 ± 2 cm.**\n\n## Understanding it\nMemorise the three anchors and their spread:\n- **Weight 2.5–3.5 kg** — below 2.5 kg is low birth weight.\n- **Length 45–55 cm.**\n- **OFC 35 ± 2 cm** (so ~33–37 cm).\n\n>> These are your **baseline** numbers. Everything later — growth, jaundice thresholds by weight, drug doses — is judged against this first recorded set, so they must be accurate.",
+         "opts": [
+          "Weight 4 kg, length 60 cm, OFC 40 cm",
+          "Weight 2.5–3.5 kg, length 45–55 cm, OFC 35 ± 2 cm",
+          "Weight 5 kg, length 70 cm, OFC 45 cm",
+          "Weight 1 kg, length 30 cm, OFC 20 cm"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the normal posture of a healthy term newborn, and why does it matter?",
-         "a": "**Slightly flexed with clenched fists — the normal flexor tone of a well term baby.**\n\n## Understanding it\nFlexion is active work by the baby's nervous system:\n- A healthy term baby **holds its limbs flexed** and fists clenched.\n- A **floppy, extended** posture means that flexor tone is missing.\n\n>> So posture is a free neurologic screen: loss of flexion points to **asphyxia, prematurity, or a neurologic problem** before you do any special test."
+         "a": "**Slightly flexed with clenched fists — the normal flexor tone of a well term baby.**\n\n## Understanding it\nFlexion is active work by the baby's nervous system:\n- A healthy term baby **holds its limbs flexed** and fists clenched.\n- A **floppy, extended** posture means that flexor tone is missing.\n\n>> So posture is a free neurologic screen: loss of flexion points to **asphyxia, prematurity, or a neurologic problem** before you do any special test.",
+         "opts": [
+          "Asymmetrical fencing posture at rest",
+          "Rigid with arched back",
+          "Slightly flexed with clenched fists (normal flexor tone)",
+          "Fully extended and floppy"
+         ],
+         "ans": 2
         },
         {
          "q": "What normal skin findings are seen in a newborn?",
-         "a": "**Vasomotor instability (mottling, acrocyanosis), lanugo, vernix caseosa, milia, and Mongolian blue spots (slate-grey naevi) over the buttocks/back; peeling and cracking in post-term babies.**\n\n## Understanding it\nThese look alarming to parents but are normal — know each:\n- **Acrocyanosis/mottling** = immature circulation, not true cyanosis.\n- **Lanugo** (fine hair, more in preterm) and **vernix** (white waxy coat) are fetal skin features.\n- **Milia** = tiny white keratin cysts; **Mongolian spots** = benign blue-grey pigmentation, commonly mistaken for bruises.\n\n>> Recognising these as normal stops needless investigation — and stops a Mongolian spot being misread as non-accidental injury."
+         "a": "**Vasomotor instability (mottling, acrocyanosis), lanugo, vernix caseosa, milia, and Mongolian blue spots (slate-grey naevi) over the buttocks/back; peeling and cracking in post-term babies.**\n\n## Understanding it\nThese look alarming to parents but are normal — know each:\n- **Acrocyanosis/mottling** = immature circulation, not true cyanosis.\n- **Lanugo** (fine hair, more in preterm) and **vernix** (white waxy coat) are fetal skin features.\n- **Milia** = tiny white keratin cysts; **Mongolian spots** = benign blue-grey pigmentation, commonly mistaken for bruises.\n\n>> Recognising these as normal stops needless investigation — and stops a Mongolian spot being misread as non-accidental injury.",
+         "opts": [
+          "Deep bruising over the whole body",
+          "Acrocyanosis, lanugo, vernix, milia, Mongolian blue spots",
+          "Widespread blistering and peeling",
+          "A vesicular rash needing antivirals"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the normal features and abnormalities of the newborn head?",
-         "a": "**Anterior fontanelle 0.5–4 cm, soft and normotensive; plus recognisable birth findings — caput succedaneum and cephalhaematoma.**\n\n## Understanding it\nTwo swellings on the head are commonly confused:\n- **Caput succedaneum** = diffuse, soft scalp oedema that **crosses suture lines** (from pressure during delivery).\n- **Cephalhaematoma** = subperiosteal bleed that **does NOT cross sutures** (bounded by one skull bone).\n\n>> The fontanelle is your window on intracranial pressure: a **bulging** AF suggests raised pressure/meningitis, a **sunken** one suggests dehydration. Normal size is **0.5–4 cm**."
+         "a": "**Anterior fontanelle 0.5–4 cm, soft and normotensive; plus recognisable birth findings — caput succedaneum and cephalhaematoma.**\n\n## Understanding it\nTwo swellings on the head are commonly confused:\n- **Caput succedaneum** = diffuse, soft scalp oedema that **crosses suture lines** (from pressure during delivery).\n- **Cephalhaematoma** = subperiosteal bleed that **does NOT cross sutures** (bounded by one skull bone).\n\n>> The fontanelle is your window on intracranial pressure: a **bulging** AF suggests raised pressure/meningitis, a **sunken** one suggests dehydration. Normal size is **0.5–4 cm**.",
+         "opts": [
+          "The fontanelle should be closed at birth",
+          "A bulging fontanelle is always normal",
+          "AF 0.5–4 cm; caput crosses sutures, cephalhaematoma does not",
+          "Caput never crosses sutures"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the normal chest/cardiorespiratory findings in a newborn?",
-         "a": "**Diaphragmatic breathing with a respiratory rate of 30–60/min, sinus arrhythmia, a transient murmur, systolic BP around 45–60 mmHg, and palpable breast tissue.**\n\n## Understanding it\nNewborn cardiorespiratory 'normals' differ from adults:\n- Breathing is **diaphragmatic** (belly moves) and fast — **30–60/min**.\n- A **transient murmur** is common as fetal shunts close, and **sinus arrhythmia** is normal.\n- **Palpable breast tissue** occurs in both sexes from maternal hormones.\n\n>> Knowing these are normal keeps you from over-reacting; a rate persistently **>60** (tachypnoea), however, is a genuine red flag for respiratory distress."
+         "a": "**Diaphragmatic breathing with a respiratory rate of 30–60/min, sinus arrhythmia, a transient murmur, systolic BP around 45–60 mmHg, and palpable breast tissue.**\n\n## Understanding it\nNewborn cardiorespiratory 'normals' differ from adults:\n- Breathing is **diaphragmatic** (belly moves) and fast — **30–60/min**.\n- A **transient murmur** is common as fetal shunts close, and **sinus arrhythmia** is normal.\n- **Palpable breast tissue** occurs in both sexes from maternal hormones.\n\n>> Knowing these are normal keeps you from over-reacting; a rate persistently **>60** (tachypnoea), however, is a genuine red flag for respiratory distress.",
+         "opts": [
+          "RR of 10–15 per minute",
+          "A fixed split second heart sound",
+          "Diaphragmatic breathing, RR 30–60, transient murmur, palpable breast tissue",
+          "Absent breath sounds normally"
+         ],
+         "ans": 2
         },
         {
          "q": "What abdominal finding should make you suspect a diaphragmatic hernia?",
-         "a": "**A scaphoid (sunken) abdomen — this should prompt you to rule out diaphragmatic hernia.**\n\n## Understanding it\nFollow the anatomy:\n- In a diaphragmatic hernia, abdominal organs **herniate up into the chest**.\n- With the gut sitting in the thorax, the belly is left **empty and scaphoid**, and the chest may show respiratory distress.\n\n>> So a sunken abdomen plus respiratory distress is a classic pairing. (Normal newborn abdomen is soft with a weak wall; liver up to 2 cm is palpable, and umbilical hernias are common and benign.)"
+         "a": "**A scaphoid (sunken) abdomen — this should prompt you to rule out diaphragmatic hernia.**\n\n## Understanding it\nFollow the anatomy:\n- In a diaphragmatic hernia, abdominal organs **herniate up into the chest**.\n- With the gut sitting in the thorax, the belly is left **empty and scaphoid**, and the chest may show respiratory distress.\n\n>> So a sunken abdomen plus respiratory distress is a classic pairing. (Normal newborn abdomen is soft with a weak wall; liver up to 2 cm is palpable, and umbilical hernias are common and benign.)",
+         "opts": [
+          "A scaphoid (sunken) abdomen with respiratory distress",
+          "A normal flat abdomen",
+          "Absent bowel sounds only",
+          "A distended, tense abdomen"
+         ],
+         "ans": 0
         },
         {
          "q": "What does failure to pass meconium within 48 hours suggest, and what do you do?",
-         "a": "**It suggests a lower gastrointestinal obstruction (e.g. anorectal malformation); confirm patency of the anus with a rectal tube or X-ray.**\n\n## Understanding it\nNormal newborns pass meconium in the first 24–48 hours, so a delay means something blocks the exit:\n- Check the **anus is patent** — an imperforate anus can be missed on a quick look.\n- Use a **rectal tube or X-ray** to confirm the tract is open.\n\n>> Other causes of delayed meconium include **Hirschsprung disease** and meconium plug. The rule: **no meconium by 48 hours = actively look for obstruction.**"
+         "a": "**It suggests a lower gastrointestinal obstruction (e.g. anorectal malformation); confirm patency of the anus with a rectal tube or X-ray.**\n\n## Understanding it\nNormal newborns pass meconium in the first 24–48 hours, so a delay means something blocks the exit:\n- Check the **anus is patent** — an imperforate anus can be missed on a quick look.\n- Use a **rectal tube or X-ray** to confirm the tract is open.\n\n>> Other causes of delayed meconium include **Hirschsprung disease** and meconium plug. The rule: **no meconium by 48 hours = actively look for obstruction.**",
+         "opts": [
+          "It is always normal, do nothing",
+          "Give a laxative and discharge",
+          "Lower GI obstruction; confirm anal patency with a rectal tube or X-ray",
+          "Immediate laparotomy without imaging"
+         ],
+         "ans": 2
         },
         {
          "q": "List the primitive (newborn) reflexes tested on neurological examination.",
-         "a": "**Rooting, sucking, Moro, grasp (palmar and plantar), and tonic neck reflexes.**\n\n## Understanding it\nEach reflex tests an intact newborn nervous system:\n- **Rooting + sucking** = feeding reflexes (turn to cheek stroke, then suck).\n- **Moro** = the startle/embrace response to a drop in head support.\n- **Grasp** (palmar/plantar) and **tonic neck** ('fencing' posture) complete the set.\n\n>> Their value is symmetry and presence: an **absent or asymmetric** reflex points to injury (e.g. a one-sided absent Moro suggests brachial plexus injury or fracture)."
+         "a": "**Rooting, sucking, Moro, grasp (palmar and plantar), and tonic neck reflexes.**\n\n## Understanding it\nEach reflex tests an intact newborn nervous system:\n- **Rooting + sucking** = feeding reflexes (turn to cheek stroke, then suck).\n- **Moro** = the startle/embrace response to a drop in head support.\n- **Grasp** (palmar/plantar) and **tonic neck** ('fencing' posture) complete the set.\n\n>> Their value is symmetry and presence: an **absent or asymmetric** reflex points to injury (e.g. a one-sided absent Moro suggests brachial plexus injury or fracture).",
+         "opts": [
+          "Knee jerk, ankle jerk, plantar only",
+          "Deep tendon reflexes only",
+          "Rooting, sucking, Moro, grasp (palmar/plantar), tonic neck",
+          "Gag, cough and sneeze only"
+         ],
+         "ans": 2
         },
         {
          "q": "Reproduce the APGAR scoring table.",
-         "a": "**Five signs scored 0/1/2 — Appearance, Pulse, Grimace, Activity, Respiration (max 10):**\n\n| Sign | 0 | 1 | 2 |\n|---|---|---|---|\n| Appearance (colour) | Blue | Pink body, blue limbs | All pink |\n| Pulse (HR) | Absent | <100 | >100 |\n| Grimace (response) | Nil | Grimace | Cry/resist |\n| Activity (tone) | Limp | Some flexion | Active |\n| Respiration | Absent | Slow/irregular | Strong cry |\n\n## Understanding it\nUse the mnemonic **A-P-G-A-R** to recall the five rows, and lock the two numeric cut-offs:\n- **Pulse:** <100 scores 1, >100 scores 2.\n- **Colour:** the '1' is the classic **pink trunk with blue hands/feet**.\n\n>> The score is taken at **1 and 5 minutes** — one number to grade severity, the next to grade the response."
+         "a": "**Five signs scored 0/1/2 — Appearance, Pulse, Grimace, Activity, Respiration (max 10):**\n\n| Sign | 0 | 1 | 2 |\n|---|---|---|---|\n| Appearance (colour) | Blue | Pink body, blue limbs | All pink |\n| Pulse (HR) | Absent | <100 | >100 |\n| Grimace (response) | Nil | Grimace | Cry/resist |\n| Activity (tone) | Limp | Some flexion | Active |\n| Respiration | Absent | Slow/irregular | Strong cry |\n\n## Understanding it\nUse the mnemonic **A-P-G-A-R** to recall the five rows, and lock the two numeric cut-offs:\n- **Pulse:** <100 scores 1, >100 scores 2.\n- **Colour:** the '1' is the classic **pink trunk with blue hands/feet**.\n\n>> The score is taken at **1 and 5 minutes** — one number to grade severity, the next to grade the response.",
+         "opts": [
+          "Weight, Length, Head, Tone, Colour",
+          "Appearance, Pulse, Grimace, Activity, Respiration — each 0/1/2",
+          "Alertness, Pain, Gaze, Arms, Reflexes",
+          "Airway, Breathing, Circulation, Disability, Exposure"
+         ],
+         "ans": 1
         },
         {
          "q": "How do you interpret the APGAR score?",
-         "a": "**0–3 = severe depression · 4–6 = moderate depression · 7 and above = vigorous (normal).**\n\n## Understanding it\nRead the total as a severity band, not a pass/fail:\n- **≥7** = vigorous, routine care.\n- **4–6** = moderately depressed — stimulate, give oxygen, reassess.\n- **0–3** = severely depressed — full resuscitation.\n\n>> Important nuance: you **do not wait for the 1-minute score to start resuscitation** — you act on a baby that is not breathing. APGAR grades severity and tracks whether your resuscitation is working (compare 1-min vs 5-min)."
+         "a": "**0–3 = severe depression · 4–6 = moderate depression · 7 and above = vigorous (normal).**\n\n## Understanding it\nRead the total as a severity band, not a pass/fail:\n- **≥7** = vigorous, routine care.\n- **4–6** = moderately depressed — stimulate, give oxygen, reassess.\n- **0–3** = severely depressed — full resuscitation.\n\n>> Important nuance: you **do not wait for the 1-minute score to start resuscitation** — you act on a baby that is not breathing. APGAR grades severity and tracks whether your resuscitation is working (compare 1-min vs 5-min).",
+         "opts": [
+          "0–3 vigorous, 7+ severe",
+          "Any score below 10 needs resuscitation",
+          "Only a score of 0 matters",
+          "0–3 severe, 4–6 moderate, 7 and above vigorous"
+         ],
+         "ans": 3
         },
         {
          "q": "How do you resuscitate a newborn who is not breathing but has a heart rate ABOVE 60?",
-         "a": "**Ventilate with bag and mask plus oxygen (or bag and endotracheal tube), with proper suctioning — aiming for at least 60 breaths per minute.**\n\n## Understanding it\nThe heart rate tells you how much support is needed:\n- **HR >60** means the heart is still perfusing — the problem is **breathing**, so the fix is **ventilation** alone.\n- Ensure the airway is clear (suction, especially if meconium), then bag-mask ventilate.\n\n>> The lecture's rhythm cue is 'BREATHE 2,3, BREATHE 2,3…' at **≥60 breaths/min**. Ventilation is the single most important step in most newborn resuscitations."
+         "a": "**Ventilate with bag and mask plus oxygen (or bag and endotracheal tube), with proper suctioning — aiming for at least 60 breaths per minute.**\n\n## Understanding it\nThe heart rate tells you how much support is needed:\n- **HR >60** means the heart is still perfusing — the problem is **breathing**, so the fix is **ventilation** alone.\n- Ensure the airway is clear (suction, especially if meconium), then bag-mask ventilate.\n\n>> The lecture's rhythm cue is 'BREATHE 2,3, BREATHE 2,3…' at **≥60 breaths/min**. Ventilation is the single most important step in most newborn resuscitations.",
+         "opts": [
+          "Start chest compressions immediately",
+          "Ventilate with bag and mask plus oxygen, aiming for ≥60 breaths/min",
+          "Do nothing and observe",
+          "Give adrenaline first"
+         ],
+         "ans": 1
         },
         {
          "q": "How does resuscitation change when the heart rate is BELOW 60?",
-         "a": "**Ventilate AND give external cardiac massage AND adrenaline — with monitoring every 15 seconds.**\n\n## Understanding it\nA heart rate under 60 means the heart itself is now failing, so ventilation alone is not enough:\n- Continue **ventilation**, add **chest compressions (external cardiac massage)**, and give **adrenaline**.\n- The cue becomes 'and 1, and 2, and 3, and BREATHE…', reassessing every **15 seconds**.\n\n>> Escalation ladder to remember: **HR >60 → ventilate; HR <60 → ventilate + compressions + adrenaline** (± bicarbonate, saline, NICU care). The heart rate is the dial that decides how aggressive you get."
+         "a": "**Ventilate AND give external cardiac massage AND adrenaline — with monitoring every 15 seconds.**\n\n## Understanding it\nA heart rate under 60 means the heart itself is now failing, so ventilation alone is not enough:\n- Continue **ventilation**, add **chest compressions (external cardiac massage)**, and give **adrenaline**.\n- The cue becomes 'and 1, and 2, and 3, and BREATHE…', reassessing every **15 seconds**.\n\n>> Escalation ladder to remember: **HR >60 → ventilate; HR <60 → ventilate + compressions + adrenaline** (± bicarbonate, saline, NICU care). The heart rate is the dial that decides how aggressive you get.",
+         "opts": [
+          "Ventilation alone is enough",
+          "Ventilate AND give chest compressions AND adrenaline",
+          "Stop all resuscitation",
+          "Give oral feeds"
+         ],
+         "ans": 1
         },
         {
          "q": "What routine eye and cord care is given to the newborn?",
-         "a": "**Eyes: silver nitrate (Credé's procedure). Cord: ligate firmly, then apply chlorhexidine gel/solution after ligation, daily until the stump drops off.**\n\n## Understanding it\nBoth target infection at vulnerable sites:\n- **Credé's procedure** (silver nitrate to the eyes) prevents **ophthalmia neonatorum** — gonococcal/chlamydial conjunctivitis caught during birth.\n- **Chlorhexidine cord care** prevents omphalitis and neonatal tetanus in low-resource settings.\n\n>> Both are cheap, evidence-based prophylaxis given to well babies — classic 'routine care' exam points."
+         "a": "**Eyes: silver nitrate (Credé's procedure). Cord: ligate firmly, then apply chlorhexidine gel/solution after ligation, daily until the stump drops off.**\n\n## Understanding it\nBoth target infection at vulnerable sites:\n- **Credé's procedure** (silver nitrate to the eyes) prevents **ophthalmia neonatorum** — gonococcal/chlamydial conjunctivitis caught during birth.\n- **Chlorhexidine cord care** prevents omphalitis and neonatal tetanus in low-resource settings.\n\n>> Both are cheap, evidence-based prophylaxis given to well babies — classic 'routine care' exam points.",
+         "opts": [
+          "Iodine painting of the whole body",
+          "Silver nitrate (Credé's) to eyes; chlorhexidine to the cord daily",
+          "Nothing is applied routinely",
+          "Antibiotic tablets by mouth"
+         ],
+         "ans": 1
         },
         {
          "q": "Why and how is Vitamin K given to the newborn?",
-         "a": "**Vitamin K 0.5 mg intramuscularly, given once (stat), to prevent haemorrhagic disease of the newborn.**\n\n## Understanding it\nNewborns are relatively vitamin-K deficient:\n- Little crosses the placenta, the gut is sterile at birth (no bacterial synthesis), and breast milk is low in it.\n- Vitamin K is needed to make **clotting factors II, VII, IX, X** — without it the baby can bleed (haemorrhagic disease of the newborn).\n\n>> So a single **IM dose at birth** tops up the stores and prevents potentially fatal bleeding. Dose to remember: **0.5 mg IM stat.**"
+         "a": "**Vitamin K 0.5 mg intramuscularly, given once (stat), to prevent haemorrhagic disease of the newborn.**\n\n## Understanding it\nNewborns are relatively vitamin-K deficient:\n- Little crosses the placenta, the gut is sterile at birth (no bacterial synthesis), and breast milk is low in it.\n- Vitamin K is needed to make **clotting factors II, VII, IX, X** — without it the baby can bleed (haemorrhagic disease of the newborn).\n\n>> So a single **IM dose at birth** tops up the stores and prevents potentially fatal bleeding. Dose to remember: **0.5 mg IM stat.**",
+         "opts": [
+          "Oral vitamin K for a year",
+          "IV vitamin C at birth",
+          "Only if the baby bleeds",
+          "0.5 mg IM stat to prevent haemorrhagic disease of the newborn"
+         ],
+         "ans": 3
         },
         {
          "q": "When should feeding be commenced and why are prelacteal feeds discouraged?",
-         "a": "**Commence feeding within 30 minutes by putting the baby to the breast; prelacteal feeds (water or glucose) are a wrong practice.**\n\n## Understanding it\nEarly breast contact does two jobs:\n- Suckling **triggers let-down** and establishes the milk supply.\n- The first milk (**colostrum**) delivers antibodies and energy.\n\n>> Prelacteal feeds (giving water/glucose before breastfeeding) fill the stomach, reduce suckling, delay let-down, and introduce infection — so they undermine breastfeeding. The rule: **breast within 30 minutes, nothing before it.**"
+         "a": "**Commence feeding within 30 minutes by putting the baby to the breast; prelacteal feeds (water or glucose) are a wrong practice.**\n\n## Understanding it\nEarly breast contact does two jobs:\n- Suckling **triggers let-down** and establishes the milk supply.\n- The first milk (**colostrum**) delivers antibodies and energy.\n\n>> Prelacteal feeds (giving water/glucose before breastfeeding) fill the stomach, reduce suckling, delay let-down, and introduce infection — so they undermine breastfeeding. The rule: **breast within 30 minutes, nothing before it.**",
+         "opts": [
+          "Delay feeding until day 3",
+          "Only formula in the first week",
+          "After 24 hours; give glucose water first",
+          "Within 30 minutes at the breast; prelacteal water/glucose feeds are wrong"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": null,
@@ -422,83 +793,223 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "List the common investigations used in neonatology.",
-         "a": "**Blood glucose, blood gas analysis, complete blood count, peripheral blood smear, blood culture, metabolic panel (renal function + electrolytes), liver function tests, bone profile, thyroid profile, urinalysis & culture, and lumbar puncture.**\n\n## Understanding it\nRather than memorise a flat list, group them by purpose:\n- **Homeostasis:** glucose, blood gas, electrolytes, bone profile.\n- **Haematology:** FBC + blood film.\n- **Infection:** blood culture, urinalysis/culture, lumbar puncture (plus CRP).\n- **Organ function:** LFTs, renal panel, thyroid.\n\n>> The neonate can't describe symptoms, so investigations screen several systems at once from tiny samples."
+         "a": "**Blood glucose, blood gas analysis, complete blood count, peripheral blood smear, blood culture, metabolic panel (renal function + electrolytes), liver function tests, bone profile, thyroid profile, urinalysis & culture, and lumbar puncture.**\n\n## Understanding it\nRather than memorise a flat list, group them by purpose:\n- **Homeostasis:** glucose, blood gas, electrolytes, bone profile.\n- **Haematology:** FBC + blood film.\n- **Infection:** blood culture, urinalysis/culture, lumbar puncture (plus CRP).\n- **Organ function:** LFTs, renal panel, thyroid.\n\n>> The neonate can't describe symptoms, so investigations screen several systems at once from tiny samples.",
+         "opts": [
+          "ECG and echocardiography only",
+          "Only a full blood count",
+          "Skin biopsy and bone marrow only",
+          "Blood glucose, gas, FBC, blood film, culture, electrolytes, LFTs, bone/thyroid profile, urinalysis, LP"
+         ],
+         "ans": 3
         },
         {
          "q": "What does a complete blood count (CBC) measure in a neonate?",
-         "a": "**Hb and Hct, platelet count, RBC count, reticulocyte count, MCV, MCHC and MCH.**\n\n## Understanding it\nThe CBC answers three practical questions:\n- **Are there enough red cells?** → Hb/Hct.\n- **If anaemic, why?** → reticulocytes (high = blood loss/haemolysis) and MCV (cell size).\n- **Enough platelets?** → platelet count.\n\n>> The **reticulocyte count** is the clever one: a high count means the marrow is responding (blood loss/haemolysis), a low count means it is not — this guides whether to transfuse."
+         "a": "**Hb and Hct, platelet count, RBC count, reticulocyte count, MCV, MCHC and MCH.**\n\n## Understanding it\nThe CBC answers three practical questions:\n- **Are there enough red cells?** → Hb/Hct.\n- **If anaemic, why?** → reticulocytes (high = blood loss/haemolysis) and MCV (cell size).\n- **Enough platelets?** → platelet count.\n\n>> The **reticulocyte count** is the clever one: a high count means the marrow is responding (blood loss/haemolysis), a low count means it is not — this guides whether to transfuse.",
+         "opts": [
+          "Hb/Hct, platelets, RBC count, reticulocytes, MCV, MCHC, MCH",
+          "Sodium and potassium",
+          "Only blood glucose",
+          "Liver enzymes and bilirubin"
+         ],
+         "ans": 0
         },
         {
          "q": "What does a low MCV suggest in a newborn?",
-         "a": "**Iron-deficiency anaemia, thalassaemia, and ABO incompatibility.**\n\n## Understanding it\nMCV measures average red-cell size, so a low MCV = small cells (microcytic):\n- **Iron deficiency** and **thalassaemia** both produce small, pale cells.\n- **ABO incompatibility** (a haemolytic process) can also lower the MCV in the newborn.\n\n>> So 'low MCV' points you toward a microcytic cause. Pair it with the reticulocyte count to separate production problems from haemolysis."
+         "a": "**Iron-deficiency anaemia, thalassaemia, and ABO incompatibility.**\n\n## Understanding it\nMCV measures average red-cell size, so a low MCV = small cells (microcytic):\n- **Iron deficiency** and **thalassaemia** both produce small, pale cells.\n- **ABO incompatibility** (a haemolytic process) can also lower the MCV in the newborn.\n\n>> So 'low MCV' points you toward a microcytic cause. Pair it with the reticulocyte count to separate production problems from haemolysis.",
+         "opts": [
+          "Vitamin B12 deficiency only",
+          "Iron-deficiency anaemia, thalassaemia, or ABO incompatibility",
+          "Sepsis with high CRP",
+          "A normal healthy newborn"
+         ],
+         "ans": 1
         },
         {
          "q": "Why can automated counters over-count white cells in neonates, and what corrects it?",
-         "a": "**Newborns have many nucleated red cells that automated counters miscount as white cells; a manual peripheral blood film review corrects the count.**\n\n## Understanding it\nAutomated analysers count anything with a nucleus in the 'white cell' gate:\n- Newborns normally circulate **nucleated red blood cells (nRBCs)**.\n- The machine counts these as WBCs, **falsely raising** the reported white cell count.\n\n>> So when a newborn's WBC looks oddly high — or when investigating unexplained anaemia/thrombocytopenia — a **manual blood film** verifies the true count and can reveal things like a leukaemoid reaction in trisomy 21."
+         "a": "**Newborns have many nucleated red cells that automated counters miscount as white cells; a manual peripheral blood film review corrects the count.**\n\n## Understanding it\nAutomated analysers count anything with a nucleus in the 'white cell' gate:\n- Newborns normally circulate **nucleated red blood cells (nRBCs)**.\n- The machine counts these as WBCs, **falsely raising** the reported white cell count.\n\n>> So when a newborn's WBC looks oddly high — or when investigating unexplained anaemia/thrombocytopenia — a **manual blood film** verifies the true count and can reveal things like a leukaemoid reaction in trisomy 21.",
+         "opts": [
+          "Platelets are counted as white cells",
+          "Newborns have nucleated red cells miscounted as WBCs; a manual blood film corrects it",
+          "The machine is simply faulty",
+          "High glucose inflates the count"
+         ],
+         "ans": 1
         },
         {
          "q": "What does neonatal blood gas analysis evaluate?",
-         "a": "**pH, paO₂ and bicarbonate — to assess respiratory function and metabolic acidosis; often drawn preductal to measure ductal shunting.**\n\n## Understanding it\nEach value reports on a different problem:\n- **pH + bicarbonate** → metabolic acidosis (a marker of poor perfusion/hypoxia).\n- **paO₂** → oxygenation and respiratory function.\n\n>> 'Preductal' sampling (right arm, before the ductus arteriosus) lets you compare oxygen before vs after the duct — a way to detect **right-to-left ductal shunting** in conditions like persistent pulmonary hypertension."
+         "a": "**pH, paO₂ and bicarbonate — to assess respiratory function and metabolic acidosis; often drawn preductal to measure ductal shunting.**\n\n## Understanding it\nEach value reports on a different problem:\n- **pH + bicarbonate** → metabolic acidosis (a marker of poor perfusion/hypoxia).\n- **paO₂** → oxygenation and respiratory function.\n\n>> 'Preductal' sampling (right arm, before the ductus arteriosus) lets you compare oxygen before vs after the duct — a way to detect **right-to-left ductal shunting** in conditions like persistent pulmonary hypertension.",
+         "opts": [
+          "White cell count and platelets",
+          "pH, paO2 and bicarbonate — respiratory function and metabolic acidosis",
+          "Only the haemoglobin level",
+          "Serum bilirubin"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the normal platelet count, and why does sampling technique matter?",
-         "a": "**Normal is 150–450 ×10⁹/L (150,000–450,000). Sampling matters because clumping loses platelets and gives a falsely low count.**\n\n## Understanding it\nPlatelets stick together (clump) if blood is not free-flowing or is mixed roughly:\n- Clumped platelets are not counted, so the machine reports a **falsely low** number.\n- To avoid this, collect the **CBC sample first while free-flowing** and mix gently with the reagent.\n\n>> The practical lesson: before you act on a 'low platelet' result, ask whether it could be a **clumping artefact** — a repeat well-taken sample may be normal."
+         "a": "**Normal is 150–450 ×10⁹/L (150,000–450,000). Sampling matters because clumping loses platelets and gives a falsely low count.**\n\n## Understanding it\nPlatelets stick together (clump) if blood is not free-flowing or is mixed roughly:\n- Clumped platelets are not counted, so the machine reports a **falsely low** number.\n- To avoid this, collect the **CBC sample first while free-flowing** and mix gently with the reagent.\n\n>> The practical lesson: before you act on a 'low platelet' result, ask whether it could be a **clumping artefact** — a repeat well-taken sample may be normal.",
+         "opts": [
+          "1–5 ×10⁹/L; always accurate",
+          "150–450 ×10⁹/L; clumping from poor sampling gives falsely low counts",
+          "50–100 ×10⁹/L; sampling never matters",
+          "500–900 ×10⁹/L; clumping raises the count"
+         ],
+         "ans": 1
         },
         {
          "q": "State the platelet transfusion thresholds in neonates.",
-         "a": "**< 25,000 → transfuse even with no bleeding · < 50,000 → if bleeding, coagulopathy, or before surgery · < 100,000 → major bleeding or major surgery (e.g. neurosurgery).**\n\n## Understanding it\nThe threshold rises with how much bleeding risk the situation carries:\n- **Stable, not bleeding:** you only transfuse if the count is very low (**<25,000**).\n- **Bleeding or heading to surgery:** transfuse earlier (**<50,000**).\n- **Major/critical bleeding or neurosurgery:** keep the count highest (**<100,000**), because a bleed there is catastrophic.\n\n>> One logic runs through it: **the higher the stakes, the higher the platelet count you insist on.**"
+         "a": "**< 25,000 → transfuse even with no bleeding · < 50,000 → if bleeding, coagulopathy, or before surgery · < 100,000 → major bleeding or major surgery (e.g. neurosurgery).**\n\n## Understanding it\nThe threshold rises with how much bleeding risk the situation carries:\n- **Stable, not bleeding:** you only transfuse if the count is very low (**<25,000**).\n- **Bleeding or heading to surgery:** transfuse earlier (**<50,000**).\n- **Major/critical bleeding or neurosurgery:** keep the count highest (**<100,000**), because a bleed there is catastrophic.\n\n>> One logic runs through it: **the higher the stakes, the higher the platelet count you insist on.**",
+         "opts": [
+          "Never transfuse platelets in neonates",
+          "<25k if not bleeding, <50k if bleeding/surgery, <100k for major bleeding/neurosurgery",
+          "Transfuse only below 5k always",
+          "<200k in every neonate"
+         ],
+         "ans": 1
         },
         {
          "q": "How do red-cell transfusion thresholds change with respiratory support in preterm babies?",
-         "a": "**The more respiratory support a baby needs, the higher the Hb threshold to transfuse. A ventilated baby is transfused at a higher Hb (e.g. 12 g/dl early) than a baby on no support (e.g. 7.5–10 g/dl).**\n\n## Understanding it\nThink about oxygen demand versus supply:\n- A **ventilated / sick** baby has high oxygen needs and little reserve, so you keep the Hb **higher** to guarantee delivery.\n- A **stable** baby on no support tolerates a **lower** Hb before needing blood.\n\n>> The threshold also **falls with age** (a 3-week-old tolerates lower Hb than a day-1 baby). The unifying rule: **sicker + younger = transfuse at a higher Hb.**"
+         "a": "**The more respiratory support a baby needs, the higher the Hb threshold to transfuse. A ventilated baby is transfused at a higher Hb (e.g. 12 g/dl early) than a baby on no support (e.g. 7.5–10 g/dl).**\n\n## Understanding it\nThink about oxygen demand versus supply:\n- A **ventilated / sick** baby has high oxygen needs and little reserve, so you keep the Hb **higher** to guarantee delivery.\n- A **stable** baby on no support tolerates a **lower** Hb before needing blood.\n\n>> The threshold also **falls with age** (a 3-week-old tolerates lower Hb than a day-1 baby). The unifying rule: **sicker + younger = transfuse at a higher Hb.**",
+         "opts": [
+          "Only gestation matters, never support",
+          "The sicker/more supported the baby, the higher the Hb threshold to transfuse",
+          "Support level makes no difference",
+          "The sicker the baby, the lower the threshold"
+         ],
+         "ans": 1
         },
         {
          "q": "What ANC values indicate risk of sepsis, and what is the I:T ratio?",
-         "a": "**ANC < 1500 is low and < 500 is very low — both suggest sepsis risk. The immature:total (I:T) neutrophil ratio is 0–0.2 normal, 0.2–0.25 suggestive of infection, and higher means greater risk.**\n\n## Understanding it\nTwo neutrophil clues point to infection:\n- A **falling ANC** (neutropenia) in a newborn is worrying — the marrow is being consumed/overwhelmed by sepsis. **Very low WBC is more concerning than a high WBC.**\n- The **I:T ratio** counts immature neutrophils (**band cells**, with a C-shaped non-segmented nucleus). A rising proportion of immature cells (a 'left shift') means the marrow is releasing reserves to fight infection.\n\n>> So both **low ANC** and a **high I:T ratio** raise the suspicion of neonatal sepsis."
+         "a": "**ANC < 1500 is low and < 500 is very low — both suggest sepsis risk. The immature:total (I:T) neutrophil ratio is 0–0.2 normal, 0.2–0.25 suggestive of infection, and higher means greater risk.**\n\n## Understanding it\nTwo neutrophil clues point to infection:\n- A **falling ANC** (neutropenia) in a newborn is worrying — the marrow is being consumed/overwhelmed by sepsis. **Very low WBC is more concerning than a high WBC.**\n- The **I:T ratio** counts immature neutrophils (**band cells**, with a C-shaped non-segmented nucleus). A rising proportion of immature cells (a 'left shift') means the marrow is releasing reserves to fight infection.\n\n>> So both **low ANC** and a **high I:T ratio** raise the suspicion of neonatal sepsis.",
+         "opts": [
+          "ANC <1500 low, <500 very low; I:T ratio >0.2 suggests infection",
+          "ANC >10000 indicates sepsis",
+          "A high ANC is always reassuring",
+          "The I:T ratio measures anaemia"
+         ],
+         "ans": 0
         },
         {
          "q": "How does CRP behave in neonatal sepsis, and what is its main limitation?",
-         "a": "**CRP is a liver acute-phase protein; normal is < 6.10 mg%, rising and sustained > 40 mg% in bacterial sepsis. Its main limitation is a 12–24 hour lag before it rises, and some extreme preterm babies don't mount a response.**\n\n## Understanding it\nCRP is made by the liver in response to inflammation, but it is slow:\n- Early in infection CRP may still be **normal** because of the **12–24 h lag** — so a single normal CRP does not rule out sepsis.\n- Its real strength is the **trend**: serial CRPs guide how long to continue antibiotics.\n\n>> Bottom line: **treat the baby, not the CRP** early on; use CRP over time to judge response and duration."
+         "a": "**CRP is a liver acute-phase protein; normal is < 6.10 mg%, rising and sustained > 40 mg% in bacterial sepsis. Its main limitation is a 12–24 hour lag before it rises, and some extreme preterm babies don't mount a response.**\n\n## Understanding it\nCRP is made by the liver in response to inflammation, but it is slow:\n- Early in infection CRP may still be **normal** because of the **12–24 h lag** — so a single normal CRP does not rule out sepsis.\n- Its real strength is the **trend**: serial CRPs guide how long to continue antibiotics.\n\n>> Bottom line: **treat the baby, not the CRP** early on; use CRP over time to judge response and duration.",
+         "opts": [
+          "Rises with bacterial sepsis but lags 12–24 h; use the trend",
+          "Falls in bacterial sepsis",
+          "Rises instantly at the onset of infection",
+          "Is unaffected by infection"
+         ],
+         "ans": 0
         },
         {
          "q": "How does procalcitonin differ from CRP, and when is it useful?",
-         "a": "**Procalcitonin is more expensive, with a quicker rise, higher peak and quicker fall than CRP, but it is unreliable in the first 1–3 days of life. It is useful when clinical features suggest sepsis but CRP is normal.**\n\n## Understanding it\nProcalcitonin trades cost for speed:\n- It **moves faster** than CRP, so it can flag infection earlier and show response sooner.\n- But it is **naturally high in the first 1–3 days**, so it can't be trusted then.\n\n>> The niche: a baby who **looks septic while CRP is still normal** — procalcitonin may reveal the infection CRP hasn't caught yet."
+         "a": "**Procalcitonin is more expensive, with a quicker rise, higher peak and quicker fall than CRP, but it is unreliable in the first 1–3 days of life. It is useful when clinical features suggest sepsis but CRP is normal.**\n\n## Understanding it\nProcalcitonin trades cost for speed:\n- It **moves faster** than CRP, so it can flag infection earlier and show response sooner.\n- But it is **naturally high in the first 1–3 days**, so it can't be trusted then.\n\n>> The niche: a baby who **looks septic while CRP is still normal** — procalcitonin may reveal the infection CRP hasn't caught yet.",
+         "opts": [
+          "Identical to CRP in timing",
+          "Faster rise/fall but unreliable in the first 1–3 days; useful when CRP is normal",
+          "Always reliable from birth",
+          "Slower than CRP in every way"
+         ],
+         "ans": 1
         },
         {
          "q": "How is a neonatal blood culture taken and interpreted?",
-         "a": "**Take 0.5–1 ml with full aseptic precautions (sterile gloves, chlorhexidine skin prep). Most labs report by 36 hours; if the baby is stable with normal markers and a negative culture, antibiotics can often stop then. A positive culture is treated according to organism and CSF findings.**\n\n## Understanding it\nThe culture is the gold standard, so two things protect its value:\n- **Asepsis + adequate volume** — a small or contaminated sample gives false results.\n- **The 36-hour decision point** — negative culture + well baby + normal markers = safe to **stop antibiotics** and avoid overtreatment.\n\n>> A positive culture then drives **rationalising antibiotics** by sensitivity, with duration set by the organism and whether the CSF is involved."
+         "a": "**Take 0.5–1 ml with full aseptic precautions (sterile gloves, chlorhexidine skin prep). Most labs report by 36 hours; if the baby is stable with normal markers and a negative culture, antibiotics can often stop then. A positive culture is treated according to organism and CSF findings.**\n\n## Understanding it\nThe culture is the gold standard, so two things protect its value:\n- **Asepsis + adequate volume** — a small or contaminated sample gives false results.\n- **The 36-hour decision point** — negative culture + well baby + normal markers = safe to **stop antibiotics** and avoid overtreatment.\n\n>> A positive culture then drives **rationalising antibiotics** by sensitivity, with duration set by the organism and whether the CSF is involved.",
+         "opts": [
+          "Results are instant",
+          "0.5–1 ml aseptically; reported by ~36 h; stop antibiotics if stable and negative",
+          "Always positive in well babies",
+          "A 10 ml sample without asepsis"
+         ],
+         "ans": 1
         },
         {
          "q": "When is a lumbar puncture indicated in neonatal sepsis, and what is the one exception?",
-         "a": "**Do an LP in early-onset sepsis for any baby with high CRP, a positive blood culture, or neurologic symptoms, and in late-onset sepsis as part of the screen. The only exception where a positive culture does not mandate LP is coagulase-negative staphylococcal (CoNS) sepsis.**\n\n## Understanding it\nThe reason to LP is to catch **meningitis**, which changes drug choice and duration:\n- A positive blood culture means bacteria are in the blood and may have seeded the CSF — so check it.\n- **CoNS** is the exception because it is often a **skin contaminant or line infection**, not true invasive disease, so a positive CoNS culture does not automatically require an LP.\n\n>> Also: in a baby with rash + sepsis features, or fever + encephalopathy, send **herpes PCR and start aciclovir** while waiting."
+         "a": "**Do an LP in early-onset sepsis for any baby with high CRP, a positive blood culture, or neurologic symptoms, and in late-onset sepsis as part of the screen. The only exception where a positive culture does not mandate LP is coagulase-negative staphylococcal (CoNS) sepsis.**\n\n## Understanding it\nThe reason to LP is to catch **meningitis**, which changes drug choice and duration:\n- A positive blood culture means bacteria are in the blood and may have seeded the CSF — so check it.\n- **CoNS** is the exception because it is often a **skin contaminant or line infection**, not true invasive disease, so a positive CoNS culture does not automatically require an LP.\n\n>> Also: in a baby with rash + sepsis features, or fever + encephalopathy, send **herpes PCR and start aciclovir** while waiting.",
+         "opts": [
+          "Never indicated in neonates",
+          "Only for a headache",
+          "Contraindicated if CRP is high",
+          "With high CRP, positive culture or neuro signs; exception is CoNS sepsis"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the normal serum sodium, and how is hyponatraemia managed?",
-         "a": "**Normal sodium is 135–145 meq/L. Hyponatraemia is more significant below 130, needs urgent correction below 125, and is dangerous below 120. SIADH is a common cause, treated mainly by fluid restriction.**\n\n## Understanding it\nRead the danger by how low the sodium is:\n- **<130** significant, **<125** urgent, **<120** dangerous (risk of seizures/cerebral oedema).\n- The commonest cause is **SIADH** — the body retains water and dilutes the sodium — so the fix is **fluid restriction**, not giving more salt.\n- Low intake and excess losses also contribute.\n\n>> The trap: hyponatraemia from SIADH is a **water-excess** problem, so pouring in fluids makes it worse."
+         "a": "**Normal sodium is 135–145 meq/L. Hyponatraemia is more significant below 130, needs urgent correction below 125, and is dangerous below 120. SIADH is a common cause, treated mainly by fluid restriction.**\n\n## Understanding it\nRead the danger by how low the sodium is:\n- **<130** significant, **<125** urgent, **<120** dangerous (risk of seizures/cerebral oedema).\n- The commonest cause is **SIADH** — the body retains water and dilutes the sodium — so the fix is **fluid restriction**, not giving more salt.\n- Low intake and excess losses also contribute.\n\n>> The trap: hyponatraemia from SIADH is a **water-excess** problem, so pouring in fluids makes it worse.",
+         "opts": [
+          "100–110 meq/L; treated with more fluids",
+          "155–165 meq/L; give extra salt",
+          "135–145 meq/L; hyponatraemia (often SIADH) treated with fluid restriction",
+          "Sodium is not measured in neonates"
+         ],
+         "ans": 2
         },
         {
          "q": "How is neonatal hypernatraemia caused and corrected?",
-         "a": "**Usually from increased free-water loss (insensible loss in extreme preterm) or dehydration from inadequate feeding in term babies. Correct the free-water deficit very slowly so sodium doesn't fall more than 0.5 meq/L per hour, to avoid brain injury.**\n\n## Understanding it\nHypernatraemia is a **water-deficit** state, and the danger is in correcting it too fast:\n- **Preterm:** thin skin → huge insensible water loss.\n- **Term:** poor feeding → dehydration.\n- If you drop the sodium quickly, water rushes into brain cells → **cerebral oedema**.\n\n>> So the rule is deliberately slow: **≤ 0.5 meq/L per hour**. Speed of correction, not just the number, is what injures the brain."
+         "a": "**Usually from increased free-water loss (insensible loss in extreme preterm) or dehydration from inadequate feeding in term babies. Correct the free-water deficit very slowly so sodium doesn't fall more than 0.5 meq/L per hour, to avoid brain injury.**\n\n## Understanding it\nHypernatraemia is a **water-deficit** state, and the danger is in correcting it too fast:\n- **Preterm:** thin skin → huge insensible water loss.\n- **Term:** poor feeding → dehydration.\n- If you drop the sodium quickly, water rushes into brain cells → **cerebral oedema**.\n\n>> So the rule is deliberately slow: **≤ 0.5 meq/L per hour**. Speed of correction, not just the number, is what injures the brain.",
+         "opts": [
+          "From free-water loss/dehydration; correct slowly (≤0.5 meq/L per hour)",
+          "It never needs correction",
+          "By giving a salt bolus quickly",
+          "From too much water; correct rapidly"
+         ],
+         "ans": 0
         },
         {
          "q": "Why must you correct magnesium to correct hypocalcaemia?",
-         "a": "**Hypomagnesaemia frequently accompanies hypocalcaemia, and the calcium will not correct until the magnesium is corrected first.**\n\n## Understanding it\nMagnesium is needed for the machinery that regulates calcium:\n- Low magnesium impairs **PTH release and action**, so calcium can't be mobilised.\n- Give calcium alone and it keeps falling back down — the low magnesium blocks the correction.\n\n>> So in **refractory hypocalcaemia**, check and replace **magnesium** — it is the classic reason calcium 'won't come up'. (Normal Mg 1.6–2.8 mg/dl; symptoms — irritability, tremors, seizures — below 1.2.)"
+         "a": "**Hypomagnesaemia frequently accompanies hypocalcaemia, and the calcium will not correct until the magnesium is corrected first.**\n\n## Understanding it\nMagnesium is needed for the machinery that regulates calcium:\n- Low magnesium impairs **PTH release and action**, so calcium can't be mobilised.\n- Give calcium alone and it keeps falling back down — the low magnesium blocks the correction.\n\n>> So in **refractory hypocalcaemia**, check and replace **magnesium** — it is the classic reason calcium 'won't come up'. (Normal Mg 1.6–2.8 mg/dl; symptoms — irritability, tremors, seizures — below 1.2.)",
+         "opts": [
+          "Low magnesium accompanies low calcium and blocks its correction until fixed",
+          "Magnesium and calcium are unrelated",
+          "High magnesium causes hypocalcaemia",
+          "You must lower magnesium first"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the calcium and phosphorus relationship in the newborn.",
-         "a": "**About 99% of calcium and 85% of phosphorus are in bone; term calcium reaches its nadir (1.10–1.36 mmol/L) at 24 hours with ~30% developing early hypocalcaemia, and there is an inverse relationship between serum calcium and phosphorus.**\n\n## Understanding it\nTwo ideas to hold together:\n- **Timing:** term calcium **bottoms out at ~24 hours** of life, and about a third of term babies get **early hypocalcaemia** in the first 2 days (Ca < 1.10 mmol/L or total < 8 mg/dl; preterm < 1 mmol/L or < 7 mg/dl).\n- **Inverse link:** as **calcium rises, phosphate falls** and vice versa — so interpret them as a pair, not separately.\n\n>> Phosphorus is also **higher in formula-fed** than breast-fed babies, which can pull calcium down."
+         "a": "**About 99% of calcium and 85% of phosphorus are in bone; term calcium reaches its nadir (1.10–1.36 mmol/L) at 24 hours with ~30% developing early hypocalcaemia, and there is an inverse relationship between serum calcium and phosphorus.**\n\n## Understanding it\nTwo ideas to hold together:\n- **Timing:** term calcium **bottoms out at ~24 hours** of life, and about a third of term babies get **early hypocalcaemia** in the first 2 days (Ca < 1.10 mmol/L or total < 8 mg/dl; preterm < 1 mmol/L or < 7 mg/dl).\n- **Inverse link:** as **calcium rises, phosphate falls** and vice versa — so interpret them as a pair, not separately.\n\n>> Phosphorus is also **higher in formula-fed** than breast-fed babies, which can pull calcium down.",
+         "opts": [
+          "Calcium and phosphate rise together",
+          "Phosphate is not present in newborns",
+          "Calcium nadirs at 24 h; ~30% get early hypocalcaemia; calcium and phosphate are inversely related",
+          "Calcium peaks at 24 hours"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the role of the thyroid profile in neonatology?",
-         "a": "**TSH is part of the newborn screen. Maternal hypothyroidism alone is not an indication, but past maternal hyperthyroidism warrants free T4 and TSH. It is also part of the prolonged jaundice work-up and failure-to-thrive evaluation.**\n\n## Understanding it\nThe thyroid is screened because **congenital hypothyroidism is common and treatable** — and missing it causes irreversible brain damage:\n- **TSH on the newborn screen** catches congenital hypothyroidism.\n- **Maternal hyperthyroidism** history → the baby can have transient thyroid dysfunction → check free T4 + TSH.\n- **Prolonged jaundice** and **failure to thrive** are both classic presentations of an underactive thyroid.\n\n>> Always use **lab-specific ranges** — neonatal thyroid values vary widely between laboratories."
+         "a": "**TSH is part of the newborn screen. Maternal hypothyroidism alone is not an indication, but past maternal hyperthyroidism warrants free T4 and TSH. It is also part of the prolonged jaundice work-up and failure-to-thrive evaluation.**\n\n## Understanding it\nThe thyroid is screened because **congenital hypothyroidism is common and treatable** — and missing it causes irreversible brain damage:\n- **TSH on the newborn screen** catches congenital hypothyroidism.\n- **Maternal hyperthyroidism** history → the baby can have transient thyroid dysfunction → check free T4 + TSH.\n- **Prolonged jaundice** and **failure to thrive** are both classic presentations of an underactive thyroid.\n\n>> Always use **lab-specific ranges** — neonatal thyroid values vary widely between laboratories.",
+         "opts": [
+          "Only checked after age 5",
+          "TSH on the newborn screen catches congenital hypothyroidism; check in prolonged jaundice/FTT",
+          "Thyroid tests are never done in neonates",
+          "Maternal hypothyroidism alone mandates it"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the three components of liver function testing?",
-         "a": "**Synthetic function (serum albumin and coagulation profile); liver cell injury (AST/ALT and LDH); and cholestasis (Gamma-GT, alkaline phosphatase and direct bilirubin).**\n\n## Understanding it\nGroup the LFT numbers by what they actually tell you:\n- **Synthetic** — is the liver *making* things? Low **albumin** or deranged **clotting** = poor synthetic function.\n- **Hepatocellular injury** — are liver cells *dying*? Raised **AST/ALT, LDH**.\n- **Cholestasis** — is bile *blocked*? Raised **GGT, ALP, direct bilirubin**.\n\n>> A **raised direct bilirubin** is the key alarm — it signals cholestasis and needs a systematic work-up so serious causes (e.g. biliary atresia) aren't missed. In preterm babies on **TPN**, TPN-induced liver injury is the commonest cause of abnormal LFTs."
+         "a": "**Synthetic function (serum albumin and coagulation profile); liver cell injury (AST/ALT and LDH); and cholestasis (Gamma-GT, alkaline phosphatase and direct bilirubin).**\n\n## Understanding it\nGroup the LFT numbers by what they actually tell you:\n- **Synthetic** — is the liver *making* things? Low **albumin** or deranged **clotting** = poor synthetic function.\n- **Hepatocellular injury** — are liver cells *dying*? Raised **AST/ALT, LDH**.\n- **Cholestasis** — is bile *blocked*? Raised **GGT, ALP, direct bilirubin**.\n\n>> A **raised direct bilirubin** is the key alarm — it signals cholestasis and needs a systematic work-up so serious causes (e.g. biliary atresia) aren't missed. In preterm babies on **TPN**, TPN-induced liver injury is the commonest cause of abnormal LFTs.",
+         "opts": [
+          "Hb, Hct and platelets",
+          "Synthetic (albumin, clotting), hepatocellular injury (AST/ALT, LDH), cholestasis (GGT, ALP, direct bilirubin)",
+          "Sodium, potassium and chloride",
+          "pH, pO2 and bicarbonate"
+         ],
+         "ans": 1
         },
         {
          "q": "Match the neonatal imaging modalities to what they assess.",
-         "a": "**Cranial ultrasound → intraventricular haemorrhage, hypoxic-ischaemic damage, brain structure. Chest X-ray → RDS, meconium aspiration, pneumonia. Echocardiography → congenital heart defects, pulmonary hypertension, PDA. Abdominal X-ray/ultrasound → GI anomalies and NEC.**\n\n## Understanding it\nEach modality suits the organ and the baby's fragility:\n- **Cranial ultrasound** is bedside, non-invasive, and passes through the open fontanelle — ideal for scanning the preterm brain for **IVH**.\n- **Chest X-ray** distinguishes the causes of respiratory distress.\n- **Echocardiography** is the go-to for the heart and the ductus (**PDA**).\n- **Abdominal X-ray** shows **NEC** (e.g. gas in the bowel wall).\n\n>> The theme: **ultrasound and X-ray are portable and radiation-light**, which is why cranial US is favoured for the delicate newborn brain."
+         "a": "**Cranial ultrasound → intraventricular haemorrhage, hypoxic-ischaemic damage, brain structure. Chest X-ray → RDS, meconium aspiration, pneumonia. Echocardiography → congenital heart defects, pulmonary hypertension, PDA. Abdominal X-ray/ultrasound → GI anomalies and NEC.**\n\n## Understanding it\nEach modality suits the organ and the baby's fragility:\n- **Cranial ultrasound** is bedside, non-invasive, and passes through the open fontanelle — ideal for scanning the preterm brain for **IVH**.\n- **Chest X-ray** distinguishes the causes of respiratory distress.\n- **Echocardiography** is the go-to for the heart and the ductus (**PDA**).\n- **Abdominal X-ray** shows **NEC** (e.g. gas in the bowel wall).\n\n>> The theme: **ultrasound and X-ray are portable and radiation-light**, which is why cranial US is favoured for the delicate newborn brain.",
+         "opts": [
+          "MRI is the only useful modality",
+          "Ultrasound cannot see the brain",
+          "Imaging is never used in neonates",
+          "Cranial US → IVH; CXR → RDS/pneumonia; echo → PDA; abdominal X-ray → NEC"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": null,
@@ -4222,14 +4733,233 @@ window.MEDBANK = {
        "day": "",
        "date": "18/05/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Failure to Thrive (FTT)\n\n*Dr Ijeoma Stella, Consultant Paediatrician — Paediatrics, topic 22*\n\n## Outline\n\nDefinition · Aetiology (organic, non-organic, mixed) · Mechanisms of organic FTT · Psychosocial basis of non-organic FTT · Diagnosis & the growth chart · Which parameter falls first · Investigations · Treatment · Prognosis\n\n## Definition\n\nFailure to thrive is:\n\n- **Weight consistently below the 3rd–5th percentile** for age and sex, OR\n- **A progressive decrease in weight to below the 3rd–5th percentile**, OR\n- **A decrease across 2 major growth percentiles** in a short period.\n\n## Aetiology\n\n> The physiologic basis of FTT of **any** cause is **inadequate nutrition.** It is divided into **organic, non-organic and mixed** — and **most cases are mixed.**\n\n**Organic FTT** — growth failure due to an acute or chronic disorder that interferes with **nutrient intake, absorption, metabolism or excretion**, or that **increases energy requirements**.\n\n| Mechanism | Example disorders |\n|---|---|\n| **↓ Nutrient intake** | cleft lip/palate, CNS disease (cerebral palsy), GERD, parasites, pyloric stenosis, rumination |\n| **Malabsorption** | coeliac disease, cystic fibrosis, disaccharidase (lactase) deficiency, IBD, short gut |\n| **Impaired metabolism** | chromosomal (Down, Turner), fructose intolerance, classic galactosaemia, inborn errors of metabolism |\n| **↑ Excretion** | diabetes mellitus, proteinuria |\n| **↑ Energy requirement** | bronchopulmonary dysplasia, cystic fibrosis, heart failure, hyperthyroidism, infection |\n\n**Non-organic FTT** — due to **insufficient calorie intake**; usually manifests as **failure to gain weight**, with length and head circumference remaining normal for a time until they too are affected. This is the **most common** pattern.\n\n> **Up to 80% of children with growth failure have no organic disorder** — growth fails because of **environmental neglect (lack of food), stimulus deprivation, or both.**\n\n**Psychosocial FTT** — growth failure accompanies or precedes poor weight gain, thought to arise because **mental stress raises counter-regulatory hormones (corticosteroids, catecholamines)** that oppose growth hormone.\n\nLack of food may be due to **poverty, poor feeding technique, over-diluted formula (to stretch it), or an inadequate breast-milk supply** (stressed, exhausted or poorly nourished mother). Non-organic FTT is often a **disordered child–caregiver interaction**; the psychologic basis can resemble **hospitalism** (depression from stimulus deprivation → apathetic, anorexic child).\n\nThe caregiver may be **depressed/apathetic, have poor parenting skills, be anxious or unfulfilled by the role, feel hostile toward the child, or be responding to external stresses** (other children, marital dysfunction, loss, financial difficulty). But poor caregiving does not explain every case — **the child's temperament shapes nurturance too** (a difficult feeder can uncover a parent–child mismatch).\n\n**Mixed FTT** — organic and non-organic causes overlap: children with organic disease may also have disturbed environments, and severe non-organic undernutrition can produce organic problems.\n\n## Diagnosis\n\nRequires a **thorough medical, family and social history**, a **diet history**, **laboratory testing** and **frequent weight monitoring**.\n\n- Organic FTT can present at **any age**; most non-organic FTT shows growth failure **before age 1 year**, many by **6 months**.\n- Plot age against **weight, height and head size** on WHO charts (0–2 yr) and CDC charts (≥2 yr). **Correct for gestation until 2 years** in premature infants.\n\n> **Weight is the most sensitive indicator of nutritional status.**\n\n**Which parameter falls first tells you the cause:**\n\n- Inadequate intake → **weight falls from its percentile before length.**\n- Reduced **linear growth (height)** = severe, prolonged undernutrition.\n- **Simultaneous** fall of length and weight → suggests a **primary growth disorder or prolonged inflammatory state** (organic).\n- **Head circumference falls late** (the brain is preferentially spared) → indicates **very severe or long-standing** undernutrition.\n\nUnderweight children may be **smaller/shorter**, with **fussiness, lethargy/sleepiness, constipation**, and **physical (sitting, walking), social and (in older children) pubertal delays**.\n\n> **No single test distinguishes organic from non-organic FTT.** Because both can coexist, search **simultaneously** for a physical problem and psychosocial factors. Evaluation is ideally **multidisciplinary** (physician, nurse, social worker, nutritionist, child-development expert, ± psychiatrist/psychologist), and **feeding behaviour must be observed** with both staff and parents.\n\n**Engage parents as co-investigators** — it protects self-esteem and avoids blaming already-guilty parents. Report suspected neglect/abuse to social services, but **referral for preventive support/education is often more appropriate**. Hospitalised children who **gain weight with proper feeding** are more likely to have **non-organic** FTT (though some non-organic children paradoxically lose weight in hospital).\n\n## Investigations\n\nExtensive testing is usually unproductive. If history/examination don't point to a cause, most experts **limit screening** to:\n\n- **FBC with differential**; **ESR**\n- **Urea, creatinine, electrolytes**\n- **Urinalysis** (including concentrating/acidifying ability) **and culture**\n- **Stool** for pH, reducing substances, odour, colour, consistency, fat content\n- Depending on community prevalence: **blood lead, HIV, or TB testing**\n\nSometimes appropriate: **T4 and TSH**; **growth-hormone assessment** (fasting **IGF-1** and **IGFBP-3**) when height is more affected than weight or both fall together; a **sweat test** for cystic fibrosis if recurrent respiratory disease, ravenous appetite, foul bulky stools, hepatomegaly or family history; review **newborn screening** results. Reserve infection work-up for signs of infection (though a **urine culture** helps as some UTIs lack other signs); reserve radiology for anatomic/functional pathology; check **bone age** if an endocrine cause is suspected.\n\n## Treatment\n\nThree aims: **sufficient nutrition, treatment of the underlying disorder, and long-term social support.**\n\n- Provide a nutritious diet with adequate calories for **catch-up growth — about 150% of the normal requirement**.\n- **All children grow when given sufficient nutrition** — so weight gain in hospital does not by itself prove non-organic FTT.\n- Organic/mixed FTT → **treat the underlying disorder promptly.** Non-organic/mixed FTT → **education and emotional support** to repair the parent–child relationship, with **referral to community agencies** (a written predischarge plan with clear accountability is ideal; invite parents to a summary session).\n- Some cases need **foster care**; return to biologic parents should be based on **demonstrated ability to care**, not merely the passage of time.\n\n## Prognosis\n\n- **Organic FTT** — depends on the cause.\n- **Non-organic FTT** — most children **> 1 year** achieve a stable weight above the 3rd percentile.\n- Children who develop FTT **before age 1** are at high risk of **cognitive delay** (verbal and maths), **highest** if diagnosed **< 6 months** (peak postnatal brain growth).\n- **General behavioural problems in ~50%**; eating/elimination problems in a similar proportion.\n\n## References\n\nLecture material of Dr Ijeoma Stella; MSD/Merck Manual; standard paediatric texts.\n",
+       "simplified": "# Failure to Thrive — the simple version\n\n## What it actually means\n\n> **FTT = the child's weight is too low, or is FALLING across the growth chart.**\n\nThree ways to qualify: weight **under the 3rd–5th percentile**, weight **dropping to** under that line, or weight **crossing 2 major centile lines** downward. The trend matters more than one number — a child steadily tracking the 3rd centile is fine; a child *falling* is not.\n\nOne idea unifies everything:\n\n> **Every FTT, whatever the cause, ends in inadequate nutrition.**\n\n---\n\n## The three types (and the big one)\n\n> **Organic** = a disease blocks nutrition. **Non-organic** = food/love isn't reaching the child. **Mixed** = both — and mixed is commonest.\n\nThe statistic that reframes your thinking:\n\n> **Up to 80% of FTT is NON-organic** — neglect, poverty, feeding problems — not a hidden disease.\n\nSo a child failing to thrive with a **normal examination** is most likely non-organic. But because mixed is commonest, **look for both at once** — never stop at the first cause.\n\n---\n\n## Organic causes — follow the calorie\n\n> **Can't get it in** (cleft palate, GERD, pyloric stenosis) · **can't absorb it** (coeliac, cystic fibrosis) · **can't use it** (metabolic disease) · **loses it** (diabetes, proteinuria) · **burns too much** (heart failure, hyperthyroidism, infection).\n\n**Cystic fibrosis appears twice** — malabsorption *and* high energy needs — which is why CF kids fail so hard.\n\n---\n\n## Non-organic — food AND stimulation\n\nTwo ways the child ends up underfed:\n\n> **Lack of food** — poverty, over-diluted formula (to stretch it), low milk supply from a stressed/exhausted mother.\n> **Lack of stimulation** — an unstimulated child gets depressed → apathetic → **stops eating** (this is \"hospitalism\").\n\nThere's even a hormone route: stress raises **cortisol and adrenaline**, which **fight growth hormone**.\n\n---\n\n## Reading the growth chart — the golden pattern\n\n> **Weight falls FIRST** → nutritional (often non-organic). **Weight AND height fall together** → organic growth disorder. **Head circumference falls LAST** → very severe, long-standing (brain is spared longest).\n\nAnd the endocrine clue:\n\n> **Height hit harder than weight** → suspect an endocrine/growth-hormone cause → check IGF-1 & IGFBP-3.\n\n---\n\n## Work-up — don't scattergun\n\n> No single test separates organic from non-organic. **Observe the child being fed**, take a careful **diet + social history**, and limit screening to: **FBC, ESR, U&E/creatinine, urinalysis + culture, stool studies.**\n\nTargeted extras: **sweat test** (CF clues), **T4/TSH**, **growth-hormone** work-up if height is worst.\n\n---\n\n## Treatment — three legs\n\n> **Catch-up feeding (~150% of normal calories)** + **treat any underlying disease** + **long-term social support.**\n\nEngage parents as **partners, not suspects** — blame backfires. Report genuine neglect/abuse, but most families need **support and education**, not blame. Some need foster care; return depends on **demonstrated ability to care**, not just time.\n\n---\n\n## Prognosis — age is everything\n\n> After age 1, most non-organic FTT recovers to a healthy weight. **Onset before age 1 — especially under 6 months — risks lasting cognitive delay**, because that's when the brain grows fastest.\n\n---\n\n## Putting it together\n\nFTT is a **falling weight**, and its final common path is always **inadequate nutrition**. Most cases are **non-organic** (neglect/poverty/feeding), many are **mixed**, so search for medical *and* social causes together. The **growth chart pattern** (weight-first = nutritional; both-together = organic; height-worst = endocrine) points the way. Treat with **catch-up calories (~150%) + disease treatment + social support**, partner with parents, and act early — because **the youngest children have the most to lose.**\n",
+       "pdf": "content/Pediatrics/Ijeoma/Failure%20to%20Thrive/note.pdf",
+       "primer": [
+        {
+         "q": "Define failure to thrive (FTT).",
+         "lecturer": "FTT is weight consistently below the 3rd–5th percentile for age and sex, OR a progressive decrease in weight to below the 3rd–5th percentile, OR a decrease across 2 major growth percentiles in a short period.",
+         "explain": "## Step 1: Three ways to meet the definition\n\n- **Static:** weight sits **below the 3rd–5th percentile.**\n- **Dynamic (falling):** weight **drops to** below the 3rd–5th percentile.\n- **Crossing lines:** weight **falls across 2 major percentile lines.**\n\n## Step 2: It's about the TREND, not one point\n\n>> A single low weight can be a small-but-healthy child; **crossing centiles downward** is what defines true failure to thrive.\n\n## Step 3: The common thread\n\n>> Whatever the cause, the final pathway is always **inadequate nutrition** — hold that idea, because it links every aetiology that follows.",
+         "tie": "The definition is the entry gate: everything downstream — deciding it's organic vs non-organic, reading the growth chart, planning catch-up feeding — starts from recognising the centile drop that labels a child as FTT."
+        },
+        {
+         "q": "Classify the aetiology of FTT.",
+         "lecturer": "The physiologic basis of FTT of any cause is inadequate nutrition. It is divided into organic (an acute/chronic disorder interfering with intake, absorption, metabolism or excretion, or increasing energy needs), non-organic (insufficient calorie intake from psychosocial/environmental causes), and mixed — and most cases are mixed.",
+         "explain": "## Step 1: One root cause, three routes\n\n>> Every FTT ends in **inadequate nutrition**; the classification is about **how** the child got there.\n\n## Step 2: The three buckets\n\n- **Organic** = a medical disease blocks nutrition (malabsorption, heart failure, metabolic disease).\n- **Non-organic** = the food/stimulation simply isn't reaching the child (neglect, poverty, feeding problems).\n- **Mixed** = both, and this is the **commonest** reality.\n\n## Step 3: Why 'mixed is commonest' matters\n\n>> A sick child often also has a stressed family, and a starved child develops medical problems — so you must **look for both at once**, never stop at the first cause you find.",
+         "tie": "This split drives the entire work-up and treatment: organic needs disease treatment, non-organic needs social/feeding support, and because most are mixed, the lecture insists on a simultaneous, multidisciplinary search rather than an either/or."
+        },
+        {
+         "q": "List the mechanisms of organic FTT with an example of each.",
+         "lecturer": "Decreased intake (cleft palate, cerebral palsy, GERD, pyloric stenosis); malabsorption (coeliac disease, cystic fibrosis, lactase deficiency, IBD, short gut); impaired metabolism (Down/Turner syndrome, galactosaemia, inborn errors); increased excretion (diabetes mellitus, proteinuria); and increased energy requirement (bronchopulmonary dysplasia, cystic fibrosis, heart failure, hyperthyroidism, infection).",
+         "explain": "## Step 1: Follow the nutrient's journey\n\nOrganic causes break one step of getting calories into and kept in the body:\n- **Getting it in** → intake problems (can't suck/swallow).\n- **Absorbing it** → malabsorption (coeliac, CF).\n- **Using it** → metabolic disease.\n- **Losing it** → excretion (diabetes, proteinuria).\n- **Burning too much** → increased demand (heart failure, hyperthyroidism, infection).\n\n## Step 2: Cystic fibrosis appears twice\n\n>> CF causes **both malabsorption and increased energy needs** — a clue to why CF children fail to thrive so badly.\n\n## Step 3: Use the framework at the bedside\n\n>> Faced with an organic FTT, run these five steps as a checklist — it turns a huge differential into five answerable questions.",
+         "tie": "This mechanistic map is what directs targeted investigation: suspect malabsorption → stool fat and sweat test; suspect increased demand → look for heart failure or infection — so the mechanism chosen decides which tests you order."
+        },
+        {
+         "q": "Explain the psychosocial basis of non-organic FTT.",
+         "lecturer": "Non-organic FTT is due to insufficient calorie intake, usually from environmental neglect or stimulus deprivation. Up to 80% of growth failure has no organic disorder. Psychosocial FTT may arise because mental stress raises counter-regulatory hormones (corticosteroids, catecholamines) that oppose growth hormone. It is often a disordered child–caregiver interaction, sometimes resembling hospitalism (depression from stimulus deprivation making the child apathetic and anorexic).",
+         "explain": "## Step 1: The dominant cause of FTT\n\n>> **Up to 80%** of growth failure is **non-organic** — so 'the child isn't getting enough' is statistically your leading hypothesis.\n\n## Step 2: Two routes to poor intake\n\n- **Lack of food** — poverty, over-diluted formula, poor feeding technique, low milk supply.\n- **Stimulus deprivation** — an unstimulated child becomes **depressed, apathetic, then anorexic** (like hospitalism).\n\n## Step 3: There's even a hormonal route\n\n>> Chronic stress raises **cortisol and catecholamines** that **oppose growth hormone** — so neglect can stunt growth biochemically, not just through missed meals.",
+         "tie": "Understanding the psychosocial mechanism is what makes the treatment make sense: you can't fix non-organic FTT with calories alone — it needs parental support, feeding observation, and community referral, which is exactly what the management section prescribes."
+        },
+        {
+         "q": "How is the growth chart used to distinguish causes, and how is FTT treated?",
+         "lecturer": "Weight is the most sensitive indicator of nutritional status. With inadequate intake, weight falls before length; reduced linear growth means severe prolonged undernutrition; simultaneous fall of weight and length suggests an organic growth disorder; head circumference falls late (brain is spared). Treatment aims at sufficient nutrition (about 150% of normal calories for catch-up growth), treating any underlying disorder, and long-term social support.",
+         "explain": "## Step 1: Read the ORDER in which things fall\n\n>> **Weight first** = a nutritional (often non-organic) problem.\n>> **Weight and height together** = an organic/primary growth disorder.\n>> **Head circumference last** = very severe, long-standing undernutrition.\n\n## Step 2: Why this order exists\n\nStarvation makes a child **thin before short**, and the body **spares the brain** longest — so head growth is the last to suffer.\n\n## Step 3: The treatment triad\n\n>> **Catch-up feeding (~150% of normal calories) + treat the underlying disorder + long-term social support.** All children grow with enough nutrition, so weight gain in hospital alone doesn't prove the cause.",
+         "tie": "This is the synthesis of the whole topic: the chart pattern points you toward organic vs non-organic, and the treatment triad reflects that FTT is rarely just a feeding issue — hence the catch-up calories PLUS disease treatment PLUS social support."
+        }
+       ],
+       "recall": [
+        {
+         "q": "Define failure to thrive.",
+         "a": "**Weight consistently below the 3rd–5th percentile for age and sex, OR a progressive fall of weight to below the 3rd–5th percentile, OR a decrease across 2 major growth percentiles in a short period.**\n\n## Understanding it\nThere are three ways to qualify — learn all three:\n- **Sitting low:** weight stays under the 3rd–5th centile.\n- **Falling to low:** weight drops down to under that line.\n- **Crossing lines:** weight falls across 2 major centiles quickly.\n\n>> The key idea is the **downward trend**. A small child tracking steadily along the 3rd centile is not FTT; a child **crossing centiles downward** is — the movement, not the single number, defines it.",
+         "opts": [
+          "Weight below the 3rd–5th percentile, or falling to it, or crossing 2 major centiles",
+          "Weight above the 97th percentile",
+          "Any child shorter than average",
+          "Weight steadily tracking the 50th centile"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the common physiologic basis of all FTT?",
+         "a": "**Inadequate nutrition — whatever the underlying cause.**\n\n## Understanding it\nNo matter how you classify it, every case of FTT ends at the same final pathway:\n- The child is **not receiving, absorbing, retaining, or being able to use enough calories** for growth.\n\n>> This single idea unifies the topic. Organic and non-organic causes differ in *how* nutrition became inadequate, but the endpoint — insufficient nutrition for growth — is always the same, which is why catch-up feeding is central to every treatment plan.",
+         "opts": [
+          "An inherited enzyme defect in every case",
+          "Chronic infection in every case",
+          "Inadequate nutrition, whatever the underlying cause",
+          "Excess growth hormone"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What are the three aetiological categories of FTT, and which is commonest?",
+         "a": "**Organic, non-organic, and mixed — and most cases are mixed.**\n\n## Understanding it\nSeparate them by *how* nutrition became inadequate:\n- **Organic** — a medical disease blocks nutrition (malabsorption, heart failure, metabolic disease).\n- **Non-organic** — food or stimulation isn't reaching the child (neglect, poverty, feeding problems).\n- **Mixed** — both together.\n\n>> 'Mixed is commonest' is the exam pearl and a clinical warning: a sick child often has a stressed family, and a starved child develops medical problems. So you must **search for organic and psychosocial causes simultaneously** — never stop at the first one you find.",
+         "opts": [
+          "Organic, non-organic, and mixed — and most cases are mixed",
+          "Infective, traumatic and toxic — mostly toxic",
+          "Type 1, 2 and 3 — mostly type 1",
+          "Acute, chronic and congenital — mostly acute"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Define organic FTT and give its mechanisms.",
+         "a": "**Organic FTT is growth failure from an acute or chronic disorder that interferes with nutrient intake, absorption, metabolism, or excretion — or that increases energy requirements.**\n\n## Understanding it\nFollow a calorie's journey through the body and break it at each step:\n- **↓ Intake** — cleft palate, cerebral palsy, GERD, pyloric stenosis.\n- **Malabsorption** — coeliac disease, cystic fibrosis, lactase deficiency, IBD, short gut.\n- **Impaired metabolism** — Down/Turner syndrome, galactosaemia, inborn errors.\n- **↑ Excretion** — diabetes mellitus, proteinuria.\n- **↑ Energy requirement** — heart failure, hyperthyroidism, infection, bronchopulmonary dysplasia.\n\n>> **Cystic fibrosis appears twice** (malabsorption + high energy needs) — which is why CF children fail to thrive so severely.",
+         "opts": [
+          "Growth failure purely from neglect",
+          "Growth failure from a disorder of intake, absorption, metabolism, excretion, or increased needs",
+          "Deliberate underfeeding by carers",
+          "Failure to grow with no medical cause"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is non-organic FTT, and how common is it?",
+         "a": "**Non-organic FTT is growth failure from insufficient calorie intake due to psychosocial/environmental causes — and up to 80% of children with growth failure have no organic disorder.**\n\n## Understanding it\nThe striking statistic reframes your priors: most FTT is **not** a hidden disease.\n- Growth fails from **environmental neglect (lack of food), stimulus deprivation, or both**.\n- It usually shows first as **failure to gain weight**, with length and head circumference normal for a time until they too are affected.\n\n>> So when a child fails to thrive with a normal examination, the **leading hypothesis is non-organic** — which shifts the work-up toward diet history, observing feeds, and the family's social situation rather than endless lab tests.",
+         "opts": [
+          "A rare metabolic disease",
+          "Always caused by malabsorption",
+          "Failure from an underlying cardiac defect",
+          "Insufficient calorie intake from psychosocial/environmental causes; up to 80% of cases"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "List causes of inadequate food intake in non-organic FTT.",
+         "a": "**Poverty, poor understanding of feeding technique, improperly (over-)diluted formula to stretch it, and an inadequate breast-milk supply (a stressed, exhausted, or poorly nourished mother).**\n\n## Understanding it\nEach cause is a practical, correctable failure of getting calories to the child:\n- **Over-diluting formula** to make it last is a classic poverty-driven cause that a diet history uncovers.\n- **Low milk supply** often traces back to the mother's own stress, exhaustion, or undernutrition.\n\n>> These are why the management is **education and support**, not blame — and why observing an actual feed and taking a careful diet history are diagnostic. Fixing the technique or the formula preparation often fixes the child.",
+         "opts": [
+          "Deliberate overfeeding",
+          "Excessive iron supplementation",
+          "Poverty, poor feeding technique, over-diluted formula, low breast-milk supply",
+          "Too-frequent breastfeeding"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "How does mental stress cause psychosocial FTT hormonally?",
+         "a": "**Mental stress raises counter-regulatory hormones (corticosteroids and catecholamines) that oppose the effect of growth hormone.**\n\n## Understanding it\nThere is a biochemical route from neglect to poor growth, not just missed meals:\n- Chronic stress → high **cortisol and catecholamines**.\n- These hormones **antagonise growth hormone**, so linear growth slows even when some calories are available.\n\n>> This is why psychosocial FTT can show growth failure that **accompanies or even precedes** poor weight gain — the stress itself blunts growth, adding to the effect of low intake.",
+         "opts": [
+          "Stress causes malabsorption of iron",
+          "Stress raises cortisol and catecholamines that oppose growth hormone",
+          "Stress raises growth hormone excessively",
+          "Stress directly destroys the gut lining"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is 'hospitalism' and how does it relate to non-organic FTT?",
+         "a": "**Hospitalism is a syndrome of depression in infants secondary to stimulus deprivation; the unstimulated child becomes depressed, apathetic, and ultimately anorexic — a psychologic basis similar to some non-organic FTT.**\n\n## Understanding it\nIt shows that FTT can come from lack of *interaction*, not just lack of *food*:\n- A child starved of stimulation becomes **withdrawn and apathetic**.\n- The apathy progresses to **anorexia**, so the child stops eating well and fails to grow.\n\n>> Some of these children are described as **hypervigilant and wary of people, preferring inanimate objects**. It reframes non-organic FTT as partly an **emotional/relational** disorder — which is why the treatment provides toys, play, and parent–child interaction, not only calories.",
+         "opts": [
+          "An infection caught in hospital",
+          "A drug reaction seen in hospital",
+          "Fear of doctors causing crying",
+          "Depression in infants from stimulus deprivation, leading to apathy and anorexia"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "In FTT from inadequate intake, in what ORDER do the growth parameters fall?",
+         "a": "**Weight falls first, then length (height), and head circumference falls last.**\n\n## Understanding it\nThe sequence reflects how the body prioritises:\n- **Weight** is the most sensitive indicator, so it drops first with poor intake.\n- **Reduced linear growth (height)** signals **severe, prolonged** undernutrition.\n- **Head circumference falls late** because the **brain is preferentially spared** — so a small head means **very severe or long-standing** undernutrition.\n\n>> This order is diagnostic: **weight-first** points to a nutritional (often non-organic) cause, and a **falling head circumference** is an ominous late sign.",
+         "opts": [
+          "Weight falls first, then length, and head circumference last",
+          "Head circumference falls first",
+          "All three fall at exactly the same time",
+          "Height falls before weight"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What does a SIMULTANEOUS fall of weight and length suggest?",
+         "a": "**A primary disorder of growth (organic) or a prolonged inflammatory state — rather than simple inadequate intake.**\n\n## Understanding it\nThe timing separates the causes:\n- **Inadequate intake** → weight falls *before* length (the child gets thin first).\n- **Weight and length falling together** → the growth process itself is impaired — an **organic** growth disorder or chronic inflammation.\n\n>> So on the growth chart, ask *which fell first*. Weight-first = think nutritional/non-organic; both-together = think organic disease. This single pattern is one of the most useful bedside discriminators in the topic.",
+         "opts": [
+          "An acute, mild illness",
+          "Simple recent underfeeding",
+          "Normal healthy growth",
+          "A primary (organic) growth disorder or prolonged inflammatory state"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Can any single test or feature reliably separate organic from non-organic FTT?",
+         "a": "**No — without specific historic or physical evidence, no single clinical feature or test reliably distinguishes them, and because both can coexist you must search for both simultaneously.**\n\n## Understanding it\nThis is the central diagnostic humility of the topic:\n- There is **no lab test** that says 'organic' or 'non-organic'.\n- Children frequently have **both**, so finding one cause does not exclude the other.\n\n>> The practical consequence is a **multidisciplinary, parallel search** — physician, nurse, social worker, nutritionist, child-development expert (± psychiatrist) — plus **directly observing the child being fed** by staff and by parents. You diagnose by the whole picture, not one result.",
+         "opts": [
+          "Yes — a single blood test is definitive",
+          "Yes — the growth chart alone is definitive",
+          "Yes — response to feeding always distinguishes them",
+          "No — you must search for organic and non-organic causes simultaneously"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Why should parents be engaged as 'co-investigators' in FTT?",
+         "a": "**Because it fosters their self-esteem and avoids blaming parents who may already feel frustrated or guilty about a perceived inability to nurture their child.**\n\n## Understanding it\nNon-organic FTT is a sensitive diagnosis that can feel like an accusation:\n- Blaming parents makes them **defensive and disengaged**, which harms the child.\n- Treating them as **partners** in solving the problem keeps them involved, welcome, and willing to feed and interact with the child.\n\n>> Practically: welcome frequent, long visits; support their feeding attempts; provide toys and ideas for play. Suspected abuse/neglect must still be **reported to social services**, but for most families **supportive referral (child care, parenting classes) is more appropriate than blame**.",
+         "opts": [
+          "It fosters self-esteem and avoids blaming already-guilty parents",
+          "To assign legal blame to the parents",
+          "Because parents run the lab tests",
+          "To reduce the doctor's workload"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Which screening investigations are recommended when history and exam don't point to a cause?",
+         "a": "**FBC with differential; ESR; urea, creatinine and electrolytes; urinalysis (including concentrating/acidifying ability) and culture; and stool for pH, reducing substances, odour, colour, consistency and fat content.**\n\n## Understanding it\nExtensive testing is usually unproductive, so screening is deliberately limited:\n- **FBC + ESR** — anaemia, inflammation.\n- **U&E/creatinine** — renal/metabolic.\n- **Urinalysis + culture** — occult UTI (some FTT children with UTI have no other signs).\n- **Stool studies** — malabsorption clues (fat, reducing substances).\n\n>> Depending on the community, add **blood lead, HIV, or TB**. The philosophy: **let the history and examination direct testing**, not a scattergun panel.",
+         "opts": [
+          "FBC + differential, ESR, U&E/creatinine, urinalysis + culture, stool studies",
+          "Genetic testing as first-line for all",
+          "Immediate muscle biopsy",
+          "Whole-body CT and MRI for everyone"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "When is a sweat test or growth-hormone assessment appropriate in FTT?",
+         "a": "**A sweat test if there is recurrent respiratory disease, ravenous appetite, foul-smelling bulky stools, hepatomegaly, or a family history of cystic fibrosis. Growth-hormone assessment (fasting IGF-1 and IGFBP-3) when height is more severely affected than weight, or when height and weight fall off simultaneously.**\n\n## Understanding it\nBoth are targeted, not routine:\n- **Sweat test** chases **cystic fibrosis** — even though newborn screening exists, the classic clinical clues still warrant it.\n- **IGF-1 / IGFBP-3** chase a **growth-hormone/endocrine** cause — suspected precisely when **height is hit harder than weight** (the endocrine pattern).\n\n>> Notice the link back to the growth chart: 'height affected more than weight' is the endocrine signature that triggers the GH work-up. Bone age is checked if an endocrine cause is suspected.",
+         "opts": [
+          "Sweat test for cystic-fibrosis clues; GH work-up when height is more affected than weight",
+          "Both are done routinely in every child",
+          "Sweat test only if the child is obese",
+          "Neither is ever indicated"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the three aims of FTT treatment?",
+         "a": "**Sufficient nutrition (catch-up feeding), treatment of any underlying disorder, and long-term social support.**\n\n## Understanding it\nThe triad mirrors the mixed nature of FTT:\n- **Nutrition** — a diet with adequate calories for **catch-up growth, about 150% of the normal requirement**.\n- **Underlying disorder** — treat organic/mixed causes promptly.\n- **Social support** — education and emotional support to repair the parent–child relationship, with referral to community agencies.\n\n>> Because **all children grow when given enough nutrition**, weight gain in hospital alone doesn't prove the cause — you still address the family and any disease. Some cases need foster care, with return based on **demonstrated caregiving ability, not just time passed**.",
+         "opts": [
+          "Bed rest, fasting, and isolation",
+          "Sufficient nutrition, treat any underlying disorder, and long-term social support",
+          "Surgery, steroids, and antibiotics",
+          "Only vitamin supplements"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Roughly how many calories are needed for catch-up growth in FTT?",
+         "a": "**About 150% of the normal caloric requirement for age.**\n\n## Understanding it\nCatch-up growth is faster than normal growth, so it costs extra energy:\n- Maintenance calories only hold weight steady.\n- To **regain lost ground**, the child needs a surplus — roughly **one-and-a-half times** the usual requirement.\n\n>> This is a concrete, examinable number. Undershoot it and the child merely stops falling; hit ~150% and they can climb back up the centiles. It's why simply 'feeding normally' often fails to reverse established FTT.",
+         "opts": [
+          "About 300% of normal",
+          "About 50% of normal",
+          "Exactly the normal requirement",
+          "About 150% of the normal caloric requirement"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the prognosis of non-organic FTT, and who is at highest cognitive risk?",
+         "a": "**Most children over 1 year with non-organic FTT achieve a stable weight above the 3rd percentile; but children who develop FTT before age 1 are at high risk of cognitive delay (especially verbal and maths), with those diagnosed under 6 months at highest risk.**\n\n## Understanding it\nPrognosis hinges on **age at onset** because of brain development:\n- **After age 1** — weight usually recovers to a stable, healthy centile.\n- **Before age 1**, and especially **under 6 months** — this is the period of **maximal postnatal brain growth**, so undernutrition then risks lasting **cognitive (verbal/maths) delay**.\n\n>> About **50% have general behavioural problems**, and eating/elimination problems occur in a similar proportion. The message: **early onset is the danger**, which is why early detection and vigorous treatment matter most in infancy.",
+         "opts": [
+          "Most over-1s recover; onset before age 1 (esp. <6 months) risks cognitive delay",
+          "Older children are at the highest risk",
+          "Age at onset makes no difference",
+          "It always causes permanent severe disability"
+         ],
+         "ans": 0
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
       },
       {
        "id": "pediatrics-23",
@@ -7581,14 +8311,272 @@ window.MEDBANK = {
        "day": "",
        "date": "26/05/26",
        "time": "2-4pm",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
-       "imgBase": null,
-       "imgCount": 0,
-       "ready": false
+       "note": "# Congenital Anomalies of the Kidney and Urinary Tract (CAKUT)\n\n*Dr Nwangwa Innocent, Consultant Paediatrician, FMC Umuahia — Paediatrics, topic 36*\n\n## Outline\n\nIntroduction · Epidemiology & risk factors · Embryology · Clinical manifestations · Classification · Renal parenchymal malformations · Migration & fusion anomalies · Collecting-system anomalies (PUJ, VUJ, PUV, MCDK) · Management · Complications · Prognosis · Prevention\n\n## Introduction\n\n**CAKUT** is a spectrum of **structural and developmental abnormalities of the kidneys and urinary tract from disrupted morphogenesis** — anomalies of the kidney parenchyma, collecting system, ureters, bladder and urethra.\n\n> **20–30% of all prenatally diagnosed anomalies are CAKUT.** It is a major cause of paediatric morbidity and the **most common cause of chronic kidney disease (CKD) and end-stage kidney disease (ESKD) in children.**\n\n## Epidemiology & risk factors\n\n- Worldwide prevalence **~3–6 per 1000 births**. In Nigeria, hospital incidence of lower urinary tract anomalies **3.5/1000 LB**, upper tract **1.7/1000 LB**. Many are **asymptomatic** until complications occur.\n- **Males more affected than females.** **30–50% of CAKUT patients develop ESKD**; if undetected in childhood, can cause adult hypertension and proteinuria.\n- **Risk factors:** maternal gestational diabetes, maternal thalassaemia/haemochromatosis, increasing maternal age, maternal obesity, birth parity > 1, poly- or oligohydramnios, prematurity/low birth weight, male gender, chromosomal abnormalities, and associated syndromes (Alagille, Beckwith-Wiedemann, branchio-oto-renal, Frasier, Kallmann, etc.).\n\n## Embryology\n\nThe fetal urinary system develops in the **first trimester** from **intermediate mesoderm**, through **three successive systems**:\n\n![Pronephros, mesonephros and metanephros — the three successive renal systems](img/embryo-kidney-systems.png)\n\n- **Pronephros** — nonfunctional, week 4.\n- **Mesonephros** — temporary (weeks 5–10); forms mesonephric tubules draining into the **mesonephric (Wolffian) duct**; mostly regresses (in males contributes to reproductive ducts; in females largely disappears).\n- **Metanephros** — the **permanent kidney**, from week 10.\n\n![Metanephros — ureteric bud and metanephric mesenchyme](img/embryo-ureteric-bud.png)\n\nThe **metanephros** develops from two tissues requiring **reciprocal induction**:\n\n- **Ureteric bud** → ureter, renal pelvis, major & minor calyces, collecting ducts.\n- **Metanephric mesenchyme** → nephrons.\n\n**Bladder** — derived from the **cloaca**, divided by the urorectal septum into the anterior **urogenital sinus** (→ bladder and most of the urethra) and the posterior anorectal canal. The **trigone** derives from the mesonephric ducts (mesoderm) but is later lined by endoderm.\n\n> **Nephrogenesis ceases at 36 weeks** — ~**1 million glomeruli** in each kidney.\n\n## Clinical manifestations\n\nOften **asymptomatic**. Otherwise: fever, vomiting, diarrhoea, poor feeding, poor weight gain, **poor urinary stream**, palpable abdominal mass, urinary incontinence, abdominal/flank pain, foul-smelling urine, reduced urine volume, other anomalies (**VACTERL**), electrolyte imbalance, delayed puberty, decreased height, pallor, and **high blood pressure**.\n\n## Classification\n\nCAKUT is complex, with variable phenotypes. It may be classified by:\n\n- **Developmental origin:** renal parenchymal malformations · anomalies of renal migration · anomalies of the collecting system.\n- **Clinical presentation:** **syndromic** (with defects outside the urinary tract, e.g. Townes-Brocks, branchio-oto-renal) vs **non-syndromic** (limited to the urinary tract).\n- **Functional impact (radiologic):** **hydronephrotic/obstructive** (PUV, PUJ obstruction, prune belly) vs **non-hydronephrotic** (agenesis, hypoplasia, multicystic dysplastic kidney, bladder exstrophy).\n- **Structure/type:** nephropathies vs uropathies.\n- Kidney **dysgenesis:** agenesis, hypoplastic, dysplastic, aplastic.\n\n## Renal parenchymal malformations\n\n**Renal agenesis** — congenital absence of one or both kidneys.\n\n- **Bilateral (Potter syndrome)** — **fatal**; main abnormality is **pulmonary hypoplasia**. ~1 in 4000 live births.\n- **Unilateral** — ~1 in 500 live births, slight male predilection, usually **asymptomatic** with normal life expectancy.\n\n**Multicystic kidney disease** — a **non-functioning renal unit** of **non-communicating cysts** with intervening solid tissue (fibrosis, primitive tubules, cartilage); **ureteral atresia** usually present.\n\n![Multicystic dysplastic kidney — non-communicating cysts of varying size (ultrasound)](img/multicystic-dysplastic-kidney-us.jpeg)\n\n## Migration & fusion anomalies\n\n- **Renal ectopia** — a kidney fails to ascend from the true pelvis (rarely a superiorly ascended **thoracic** kidney). **Pelvic ectopia** increases the risk of PUJ obstruction, vesicoureteral reflux (VUR), and multicystic dysplasia.\n- **Horseshoe kidney** — the **most common fusion anomaly**: renal parenchyma joined across the midline at the **isthmus**. Ureters course medially and anteriorly over the isthmus and generally drain well; obstruction, if present, is usually from **high ureteric insertion** in the renal pelvis.\n\n![Horseshoe kidney — parenchyma fused across the midline at the isthmus (CT)](img/horseshoe-kidney-ct.png)\n\n## Anomalies of the collecting system\n\nInclude **PUJ obstruction, VUJ obstruction, posterior urethral valve (PUV), and duplicate collecting system.**\n\n**PUJ obstruction** — partial obstruction of urine from the renal pelvis to the ureter; the **most frequent cause of fetal hydronephrosis**. Often asymptomatic/incidental; when symptomatic → recurrent UTIs, stones, palpable flank mass, and classically **intermittent pain after drinking large fluid volumes** (diuresis outstrips outflow). At high risk of renal injury even from minor trauma.\n\n![Obstructive uropathy — grossly distended (hydroureter) versus normal (CT)](img/hydroureter-obstruction-ct.jpeg)\n\n**Posterior urethral valve (PUV)** — also called congenital obstructing posterior urethral membranes (COPUM); the **most common congenital obstructive lesion of the urethra** and a common cause of obstructive uropathy in infancy.\n\n- **Commonest obstructive uropathy in children; common in boys, ~1:5000–8000.** A congenital valve in the posterior urethra from a persistent urogenital membrane; associated with **renal dysplasia** (back-pressure).\n- **Antenatal** (severe): bilateral hydronephrosis, persistently filled bladder, dilated posterior urethra (the **\"keyhole sign\"**), often **oligohydramnios**, SGA fetus.\n- **Postnatal presentation** (commonest in developing countries): **neonate** — abdominal distension, poor urinary stream, respiratory distress, straining to void; **infant** — recurrent UTI/urosepsis, failure to thrive, poor stream; **older child** — poor stream, straining, daytime incontinence, features of CKD.\n- **Surgical intervention is paramount** — valve ablation as soon as possible (antenatally, vesico-amniotic shunting for severe obstruction).\n\n![PUV — the \"keyhole sign\": dilated bladder and dilated posterior urethra](img/puv-keyhole-sign.jpeg)\n\n**Multicystic dysplastic kidney (MCDK)** — a non-functioning kidney replaced by large non-communicating cysts, **no renal cortex**, atretic ureter. **Unilateral, 2× more common in males**; associated with obstruction (PUJO/PUV), VUR, and syndromes (Meckel-Gruber). Usually detected on **antenatal ultrasound**.\n\n## Management\n\n**History and examination** (general; systemic — abdominal mass, palpable bladder).\n\n**Investigations:** ultrasound (oligohydramnios, dysplasia), CT, MRI; **DMSA** (differential function, scarring; no function on the affected side in MCDK, contralateral hypertrophy); **MCUG/VCUG** (detects VUR, PUV); IVU; scintigraphy; urodynamics; **diuretic renogram** (urinary obstruction with persistent hydronephrosis); cystoscopy.\n\n**Treatment:**\n\n- **Conservative** — unilateral agenesis; cysts < 5 cm (high chance of involution). Follow up **BP, urinary protein, renal function**; ultrasound for cyst involution and contralateral growth — up to age 2, then at 5 years if normal.\n- **Nephrectomy** if no involution by 2 years, hypertension, or infection.\n- **RRT** (dialysis/transplant) for ESKD.\n- **Surgical correction** — valve ablation, re-implantation, vesicostomy. **ALL children with PUV should have valve ablation as soon as possible.** Persistent bladder dysfunction, VUR and CKD demand **long-term follow-up even after ablation** (anticholinergics for an overactive, poorly compliant bladder).\n- **Supportive** — correct electrolytes, treat sepsis, control BP, ensure adequate nutrition and growth monitoring.\n\n## Complications\n\nCKD (60% in dysplastic kidney), VUR, bladder dysfunction/incontinence, recurrent UTI, **malignancy** (Wilms tumour, adenocarcinoma, embryonal/carcinoma), hypertension, infection/bleeding/rupture of large cysts, stones and hydronephrosis (secondary PUJO), and death.\n\n## Prognosis\n\n- Severe CAKUT → **ESRD in infancy**; mild cases may reach ESRD by adolescence; **RRT** supports ESRD.\n- **Bilateral agenesis is lethal** (pulmonary hypoplasia the commonest cause of death).\n- **Good prognosis:** mild hydronephrosis, ectopic kidneys/ureters, solitary kidneys.\n\n## Prevention\n\n- **Primary** — preconception care, genetic counselling (family history/known syndrome), control of maternal disease (HTN, diabetes), avoid consanguineous marriage, adequate nutrition; in pregnancy: good glycaemic control, avoid teratogens/radiation, treat infection, **adequate folate**.\n- **Secondary** — antenatal screening of all mothers (**18–22-week anomaly scan**), amniotic fluid assessment, renal ultrasound, DMSA, serum electrolytes/urea/creatinine.\n- **Tertiary** — prompt UTI treatment, antibiotic prophylaxis, surgical correction, BP control, regular renal function tests, growth monitoring, **dialysis**.\n\n## Conclusion\n\nCAKUT is the leading cause of childhood CKD worldwide. Primary prevention is limited (genetic/sporadic causes), so **early antenatal detection and prompt postnatal evaluation** are crucial to prevent renal scarring, hypertension and CKD progression. **Early diagnosis and structured multidisciplinary management** are the cornerstone of preserving renal function.\n\n## References\n\nMedscape; Nelson Textbook of Paediatrics; Nkanginieme, Paediatrics and Child Health in a Tropical Region; lecture material of Dr Nwangwa Innocent.\n",
+       "simplified": "# CAKUT — the simple version\n\n## What it is\n\n> **C**ongenital **A**nomalies of the **K**idney **a**nd **U**rinary **T**ract — birth defects anywhere along **kidney → collecting system → ureter → bladder → urethra.**\n\nThe headline that makes it matter:\n\n> **CAKUT is the #1 cause of chronic kidney disease and kidney failure in children.**\n\nIt's a **spectrum** — from a harmless silent solitary kidney to lethal bilateral agenesis — and many cases are **silent until complications hit**. That's why the whole game is **early detection.**\n\n---\n\n## Embryology in one breath\n\n> **Pro → meso → meta**nephros. Only the **metanephros** becomes the real kidney.\n\nThe metanephros is a **partnership**:\n\n> **Ureteric bud → the plumbing** (ureter, pelvis, calyces, collecting ducts).\n> **Metanephric mesenchyme → the filters** (nephrons).\n\nIf the bud and mesenchyme don't meet and signal each other (**reciprocal induction**), you get agenesis, dysplasia or obstruction — CAKUT is basically **embryology gone wrong.**\n\n> **All nephrons are made by 36 weeks (~1 million per kidney)** — none are added later, which is why prematurity → fewer nephrons → later CKD.\n\n---\n\n## The classification that actually matters\n\n> **Hydronephrotic (obstructive)** — PUV, PUJ obstruction → *needs relief.*\n> **Non-hydronephrotic** — agenesis, hypoplasia, MCDK → *often just watched.*\n\n---\n\n## The big named anomalies\n\n> **Bilateral renal agenesis (Potter) = FATAL** — no fetal urine → oligohydramnios → **pulmonary hypoplasia.** Unilateral agenesis = usually fine (one kidney compensates).\n>\n> **MCDK** — a bag of non-communicating cysts, no cortex, dead kidney. Unilateral, found on antenatal scan.\n>\n> **Horseshoe kidney** — commonest fusion anomaly, joined at the isthmus, usually drains OK.\n>\n> **Pelvic (ectopic) kidney** — failed to ascend; prone to obstruction, reflux, dysplasia.\n\n---\n\n## PUV — the star of the show\n\n> **Posterior Urethral Valve = the commonest obstructive uropathy, BOYS only.** A membrane blocks the urethra → everything upstream dilates.\n\nBack-pressure damage runs upward: **bladder → ureters → kidneys (bilateral hydronephrosis + dysplasia)**, and less fetal urine → **oligohydramnios.**\n\n> **Antenatal clue: the \"keyhole sign\"** (dilated bladder + dilated posterior urethra).\n> **Postnatal red flag: a boy with a poor urinary stream + straining.**\n\nManagement: **ablate the valve ASAP** — but it's **not a cure**, so follow **bladder, reflux and kidney function for life.**\n\n---\n\n## Work-up — right scan for the question\n\n> **Ultrasound** (first look) · **DMSA** (function + scarring) · **VCUG/MCUG** (reflux + PUV) · **diuretic renogram** (true obstruction).\n\n## Treatment ladder\n\n> **Watch** (small cysts, unilateral agenesis) → **operate** (valve ablation, nephrectomy, re-implant) → **replace** (dialysis/transplant for ESKD) — all wrapped in supportive care: **electrolytes, treat sepsis, control BP, feed, monitor growth.**\n\n---\n\n## Prevention — 3 levels\n\n> **Primary** (before/during pregnancy): folate, control diabetes/HTN, avoid teratogens.\n> **Secondary**: the **18–22-week anomaly scan** — the single biggest win.\n> **Tertiary**: treat UTIs fast, prophylaxis, control BP, monitor function.\n\n---\n\n## Putting it together\n\nCAKUT is the **leading cause of childhood kidney failure**, arising from **disrupted embryology** (a failed ureteric-bud / mesenchyme partnership). It's a spectrum from **lethal bilateral agenesis** to **incidental horseshoe kidney**. The most important obstructive lesion is **PUV** — a boy with a poor stream and the antenatal keyhole sign — treated by **prompt valve ablation plus lifelong follow-up**. Because prevention is limited, the win is **early antenatal detection (18–22-week scan) and prompt postnatal management** to save kidney function.\n",
+       "pdf": "content/Pediatrics/Nwangwa/CAKUT/note.pdf",
+       "primer": [
+        {
+         "q": "What is CAKUT, and why is it clinically important?",
+         "lecturer": "CAKUT (congenital anomalies of the kidney and urinary tract) is a spectrum of structural and developmental abnormalities of the kidneys and urinary tract resulting from disrupted morphogenesis — involving the kidney parenchyma, collecting system, ureters, bladder and urethra. It accounts for 20–30% of all prenatally diagnosed anomalies and is the most common cause of chronic kidney disease (CKD) and end-stage kidney disease (ESKD) in children.",
+         "explain": "## Step 1: What the letters mean\n\n>> **C**ongenital **A**nomalies of the **K**idney **a**nd **U**rinary **T**ract — a spectrum, not one disease.\n\nIt spans everything from **kidney tissue → collecting system → ureter → bladder → urethra.**\n\n## Step 2: The headline statistic\n\n>> It is the **#1 cause of CKD and ESKD in children.**\n\n## Step 3: Why 'spectrum' matters\n\n>> Because it ranges from harmless (a silent solitary kidney) to lethal (bilateral agenesis), the same label demands very different responses — which is why classification and early detection dominate the topic.",
+         "tie": "Framing CAKUT as the leading paediatric cause of CKD is what justifies the whole lecture's emphasis on antenatal screening and prompt postnatal work-up — catching it early is the only way to prevent scarring, hypertension and kidney failure."
+        },
+        {
+         "q": "Outline the embryology relevant to CAKUT.",
+         "lecturer": "The urinary system develops in the first trimester from intermediate mesoderm through three successive systems: pronephros (nonfunctional, week 4), mesonephros (temporary, weeks 5–10, draining into the Wolffian duct), and metanephros (the permanent kidney, from week 10). The metanephros forms from the ureteric bud (ureter, pelvis, calyces, collecting ducts) and the metanephric mesenchyme (nephrons), which require reciprocal induction. The bladder derives from the cloaca/urogenital sinus. Nephrogenesis ceases at 36 weeks with about 1 million glomeruli per kidney.",
+         "explain": "## Step 1: Three kidneys in a row\n\n>> **Pro → meso → meta**nephros. Only the **metanephros** becomes the real kidney.\n\n## Step 2: The metanephros is a partnership\n\n>> **Ureteric bud** → the plumbing (ureter, pelvis, calyces, collecting ducts).\n>> **Metanephric mesenchyme** → the filters (nephrons).\nThey need **reciprocal induction** — each signals the other to develop.\n\n## Step 3: Why this explains CAKUT\n\n>> If the bud and mesenchyme fail to meet or signal, you get **agenesis, dysplasia or obstruction** — CAKUT is essentially embryology gone wrong.",
+         "tie": "Understanding that CAKUT arises from disrupted bud–mesenchyme interaction makes the malformation categories (parenchymal, migration, collecting-system) intuitive — each maps onto a step of this developmental sequence."
+        },
+        {
+         "q": "How is CAKUT classified?",
+         "lecturer": "CAKUT can be classified by developmental origin (renal parenchymal malformations, anomalies of renal migration, anomalies of the collecting system), by clinical presentation (syndromic vs non-syndromic), by functional impact on radiology (hydronephrotic/obstructive vs non-hydronephrotic), and by structure/type (nephropathies vs uropathies). Kidney dysgenesis includes agenesis, hypoplastic, dysplastic and aplastic kidneys.",
+         "explain": "## Step 1: Four lenses on the same spectrum\n\n- **Developmental origin** — where in embryology it went wrong (parenchyma, migration, collecting system).\n- **Syndromic vs non-syndromic** — is it part of a wider genetic syndrome?\n- **Functional/radiologic** — does it cause hydronephrosis (obstruction) or not?\n- **Nephropathy vs uropathy** — kidney tissue problem vs drainage problem.\n\n## Step 2: The most useful clinical split\n\n>> **Hydronephrotic (obstructive)** — PUV, PUJ obstruction — vs **non-hydronephrotic** — agenesis, hypoplasia, MCDK.\n\n## Step 3: Why so many schemes\n\n>> CAKUT's phenotypes overlap, so no single scheme captures it — each classification answers a different question (cause, association, drainage, tissue).",
+         "tie": "The functional (hydronephrotic vs not) split is the one that drives imaging and surgery decisions — an obstructive lesion like PUV needs urgent ablation, while a non-obstructive MCDK may just be watched."
+        },
+        {
+         "q": "Describe the key renal parenchymal and fusion/migration anomalies.",
+         "lecturer": "Renal agenesis is congenital absence of one or both kidneys: bilateral (Potter syndrome) is fatal with pulmonary hypoplasia, while unilateral (1 in 500) is usually asymptomatic with normal life expectancy. Multicystic dysplastic kidney is a non-functioning kidney of non-communicating cysts with an atretic ureter. Renal ectopia is failure of ascent (usually pelvic); horseshoe kidney is the most common fusion anomaly, joined at the isthmus, generally draining well.",
+         "explain": "## Step 1: Agenesis — the number of kidneys matters\n\n>> **Bilateral = Potter = fatal** (pulmonary hypoplasia). **Unilateral = usually fine** (asymptomatic, normal lifespan).\n\n## Step 2: Multicystic dysplastic kidney\n\n>> A bag of **non-communicating cysts, no cortex, atretic ureter** — the unit simply doesn't work; usually unilateral and found on antenatal scan.\n\n## Step 3: Where the kidney sits or fuses\n\n>> **Ectopia** = failed ascent (pelvic kidney); **horseshoe** = fused at the isthmus (commonest fusion anomaly). Both usually drain well but raise the risk of obstruction, VUR and stones.",
+         "tie": "These anomalies span the prognosis extremes of CAKUT — from lethal bilateral agenesis to incidental horseshoe kidney — reinforcing why the same diagnosis needs individualised management based on which structure is affected and whether both kidneys work."
+        },
+        {
+         "q": "What is posterior urethral valve (PUV) and how does it present?",
+         "lecturer": "PUV is a congenital valve in the posterior urethra from a persistent urogenital membrane — the most common congenital obstructive lesion of the urethra and the commonest obstructive uropathy in children, occurring almost exclusively in boys (~1:5000–8000) and associated with renal dysplasia from back-pressure. Antenatally it shows bilateral hydronephrosis, a persistently full bladder and dilated posterior urethra (keyhole sign) with oligohydramnios; postnatally, poor urinary stream, straining, recurrent UTI/urosepsis, failure to thrive and CKD. Valve ablation should be done as soon as possible.",
+         "explain": "## Step 1: A one-way obstruction in boys\n\n>> A membrane in the **posterior urethra** blocks outflow — **boys only**, and it is the **commonest obstructive uropathy in children.**\n\n## Step 2: Back-pressure damages everything upstream\n\n>> Urine can't get out → pressure backs up → **bilateral hydronephrosis + renal dysplasia**, and in utero **oligohydramnios** (less fetal urine).\n\n## Step 3: The signs to recognise\n\n>> Antenatal **keyhole sign** (dilated bladder + posterior urethra); postnatal **poor urinary stream and straining.** Treat by **valve ablation ASAP** — but follow long-term, as bladder dysfunction and CKD persist.",
+         "tie": "PUV is the flagship obstructive CAKUT: it ties embryology (persistent urogenital membrane), the hydronephrotic classification, the keyhole-sign imaging, and the management principle that ALL PUV children need prompt ablation plus lifelong follow-up."
+        },
+        {
+         "q": "Summarise the management and prevention of CAKUT.",
+         "lecturer": "Management uses history and examination plus imaging — ultrasound, DMSA (function/scarring), MCUG/VCUG (VUR, PUV), diuretic renogram (obstruction) — with conservative follow-up (BP, urinary protein, renal function) for unilateral agenesis and small cysts, nephrectomy for non-involuting or complicated units, prompt valve ablation for PUV, RRT for ESKD, and supportive care (electrolytes, sepsis, BP, nutrition). Prevention is primary (preconception care, genetic counselling, control of maternal disease, folate), secondary (18–22-week anomaly scan) and tertiary (prompt UTI treatment, prophylaxis, BP control).",
+         "explain": "## Step 1: Diagnose with the right scan for the question\n\n>> **Ultrasound** first; **DMSA** for function/scarring; **MCUG/VCUG** for reflux and PUV; **diuretic renogram** for obstruction.\n\n## Step 2: Match treatment to severity\n\n>> **Watch** (small cysts, unilateral agenesis) → **operate** (valve ablation, nephrectomy) → **replace** (RRT for ESKD).\n\n## Step 3: Prevention across three levels\n\n>> **Primary** (before/during pregnancy — folate, control diabetes/HTN), **secondary** (the 18–22-week anomaly scan), **tertiary** (treat UTIs, control BP, monitor function).",
+         "tie": "This pulls the topic together: because CAKUT is the top cause of childhood CKD and primary prevention is limited, the emphasis falls on the 18–22-week anomaly scan and prompt postnatal management — early detection is what preserves kidney function."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What does CAKUT stand for and what does it include?",
+         "a": "**Congenital Anomalies of the Kidney and Urinary Tract — a spectrum of structural/developmental abnormalities from disrupted morphogenesis, involving the kidney parenchyma, collecting system, ureters, bladder and urethra.**\n\n## Understanding it\nRead it as a whole pathway, not a single defect:\n- It covers everything from **kidney tissue** → **collecting system** → **ureter** → **bladder** → **urethra**.\n- 'Disrupted morphogenesis' means the problem happened during **development in the womb**.\n\n>> The word **spectrum** is key: CAKUT ranges from a harmless silent solitary kidney to lethal bilateral agenesis. That range is why one label needs many different management approaches.",
+         "opts": [
+          "Chronic Acquired Kidney and Ureteric Tumours",
+          "Cystic Adenoma of the Kidney and Ureteric Tract",
+          "Congenital Anomalies of the Kidney and Urinary Tract",
+          "Congenital Anaemia of the Kidney and Urinary Tract"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why is CAKUT clinically important?",
+         "a": "**It accounts for 20–30% of all prenatally diagnosed anomalies and is the most common cause of chronic kidney disease (CKD) and end-stage kidney disease (ESKD) in children.**\n\n## Understanding it\nTwo facts make it a priority:\n- It is a **large share** of everything found on antenatal scans (20–30%).\n- It is the **leading cause of childhood CKD/ESKD** — 30–50% of CAKUT patients develop ESKD.\n\n>> Because many cases are **silent until complications appear**, undetected CAKUT can surface later as adult hypertension and proteinuria. This is exactly why early antenatal detection and postnatal work-up are emphasised — you prevent kidney failure by catching it before scarring sets in.",
+         "opts": [
+          "It is the most common cause of chronic kidney disease and ESKD in children",
+          "It is a rare, benign incidental finding",
+          "It never affects renal function",
+          "It only causes problems in adulthood"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "List important risk factors for CAKUT.",
+         "a": "**Maternal gestational diabetes, maternal thalassaemia/haemochromatosis, increasing maternal age, maternal obesity, birth parity >1, poly- or oligohydramnios, prematurity/low birth weight, male gender, chromosomal abnormalities, and associated syndromes (Alagille, Beckwith-Wiedemann, branchio-oto-renal, Frasier, Kallmann).**\n\n## Understanding it\nGroup them to remember:\n- **Maternal metabolic** — gestational diabetes, obesity, iron-overload states, older age.\n- **Pregnancy clues** — abnormal amniotic fluid (oligo- or polyhydramnios), prematurity/LBW.\n- **Fetal factors** — male sex, chromosomal defects, named syndromes.\n\n>> **Amniotic fluid volume** is a especially useful clue: fetal urine makes amniotic fluid, so **oligohydramnios** can signal a kidney/outflow problem, while syndromic associations prompt a wider search for defects outside the urinary tract.",
+         "opts": [
+          "Maternal exercise and good nutrition",
+          "Female sex and post-term birth",
+          "Maternal diabetes/obesity, abnormal amniotic fluid, prematurity, male sex, syndromes",
+          "Breastfeeding and folate supplements"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Describe the three successive embryonic kidney systems.",
+         "a": "**Pronephros (nonfunctional, week 4), mesonephros (temporary, weeks 5–10, draining into the mesonephric/Wolffian duct), and metanephros (the permanent kidney, from week 10).**\n\n## Understanding it\nThey appear in sequence, each handing over to the next:\n- **Pronephros** — appears and regresses; never works.\n- **Mesonephros** — works temporarily; mostly regresses (in males it contributes to reproductive ducts).\n- **Metanephros** — becomes the **definitive, permanent kidney**.\n\n>> The whole system arises from **intermediate mesoderm** in the first trimester. Only the **metanephros** matters long-term — so anomalies of the definitive kidney trace back to how the metanephros formed.",
+         "opts": [
+          "Glomerulus, tubule and duct",
+          "Pronephros (wk4), mesonephros (temporary), metanephros (permanent kidney)",
+          "Ureter, bladder and urethra",
+          "Cortex, medulla and pelvis"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What two tissues form the metanephros, and what does each become?",
+         "a": "**The ureteric bud (forms the ureter, renal pelvis, major and minor calyces, and collecting ducts) and the metanephric mesenchyme (forms the nephrons) — and they require reciprocal induction.**\n\n## Understanding it\nThink plumbing versus filters:\n- **Ureteric bud → the plumbing** (collecting system that drains urine).\n- **Metanephric mesenchyme → the filters** (the nephrons that make urine).\n- **Reciprocal induction** means each tissue must signal the other to develop properly.\n\n>> This is the crux of CAKUT: if the bud and mesenchyme fail to meet or signal correctly, you get **agenesis, dysplasia, or obstruction**. Nearly every renal malformation is a failure of this bud–mesenchyme partnership.",
+         "opts": [
+          "Ectoderm and endoderm only",
+          "Ureteric bud (collecting system) and metanephric mesenchyme (nephrons)",
+          "Notochord and neural crest",
+          "Wolffian duct and cloaca"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "When does nephrogenesis cease, and how many glomeruli result?",
+         "a": "**Nephrogenesis ceases at 36 weeks, leaving about 1 million glomeruli in each kidney.**\n\n## Understanding it\nTwo implications flow from this:\n- All the nephrons a person will ever have are formed **before term (by 36 weeks)** — none are added after birth.\n- A full complement is roughly **1 million glomeruli per kidney**.\n\n>> This is why **prematurity/low birth weight** is a CAKUT risk factor: babies born before nephrogenesis completes may end up with **fewer nephrons**, predisposing to later hypertension and CKD. You can't grow new nephrons afterwards.",
+         "opts": [
+          "At 36 weeks, leaving about 1 million glomeruli per kidney",
+          "At birth, with 100 glomeruli per kidney",
+          "At 20 weeks, with 5 million per kidney",
+          "In infancy, continuing to add nephrons for years"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the clinical manifestations of CAKUT?",
+         "a": "**Often asymptomatic; otherwise fever, vomiting, diarrhoea, poor feeding/weight gain, poor urinary stream, palpable abdominal mass, incontinence, abdominal/flank pain, foul-smelling urine, reduced urine volume, other anomalies (VACTERL), electrolyte imbalance, delayed puberty, decreased height, pallor and high blood pressure.**\n\n## Understanding it\nSort the clues by what they signal:\n- **Obstruction/outflow** — poor urinary stream, straining, palpable bladder/mass.\n- **Infection** — fever, foul urine, vomiting (UTI/urosepsis).\n- **Established kidney damage** — hypertension, pallor (anaemia), poor growth, delayed puberty, electrolyte problems.\n\n>> The most important point is that **CAKUT is frequently silent** — so a **poor urinary stream** or **unexplained hypertension** in a child should trigger thoughts of an underlying anomaly. VACTERL association means finding one anomaly warrants looking for others.",
+         "opts": [
+          "Always presents with jaundice at birth",
+          "Only ever causes joint pain",
+          "Presents exclusively with seizures",
+          "Often asymptomatic; also poor urinary stream, mass, UTI, hypertension, poor growth"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Name the ways CAKUT can be classified.",
+         "a": "**By developmental origin (parenchymal, migration, collecting-system), by clinical presentation (syndromic vs non-syndromic), by functional impact on radiology (hydronephrotic/obstructive vs non-hydronephrotic), and by structure/type (nephropathies vs uropathies).**\n\n## Understanding it\nEach scheme answers a different question:\n- **Developmental origin** — *where* in embryology it went wrong.\n- **Syndromic vs non-syndromic** — *is it part of a wider genetic syndrome?*\n- **Functional/radiologic** — *does it obstruct (hydronephrosis) or not?*\n- **Nephropathy vs uropathy** — *kidney tissue problem or drainage problem?*\n\n>> The **hydronephrotic vs non-hydronephrotic** split is the most clinically useful, because it separates the **obstructive** lesions (PUV, PUJ obstruction — need relief) from the **non-obstructive** ones (agenesis, MCDK — often watched).",
+         "opts": [
+          "By developmental origin, syndromic vs non-syndromic, hydronephrotic vs not, nephropathy vs uropathy",
+          "By the child's age at diagnosis alone",
+          "By blood group only",
+          "Only as benign vs malignant"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Compare bilateral and unilateral renal agenesis.",
+         "a": "**Bilateral renal agenesis (Potter syndrome) is fatal, with pulmonary hypoplasia as the main resultant abnormality (~1 in 4000). Unilateral agenesis (~1 in 500, slight male predilection) is usually asymptomatic with normal life expectancy.**\n\n## Understanding it\nThe number of functioning kidneys decides the outcome:\n- **Bilateral** — no kidneys → no fetal urine → **oligohydramnios** → lungs can't develop → **pulmonary hypoplasia** → fatal (Potter sequence).\n- **Unilateral** — one healthy kidney compensates, so the child is **usually asymptomatic** and lives normally.\n\n>> The lethal link in bilateral agenesis is not the kidney failure itself but the **pulmonary hypoplasia** driven by oligohydramnios — a recurring theme in severe obstructive/agenesis CAKUT.",
+         "opts": [
+          "Both are harmless incidental findings",
+          "Unilateral is fatal, bilateral is benign",
+          "Both are always fatal",
+          "Bilateral (Potter) is fatal via pulmonary hypoplasia; unilateral is usually asymptomatic"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is a multicystic dysplastic kidney (MCDK)?",
+         "a": "**A non-functioning renal unit replaced by large non-communicating cysts with no renal cortex and an atretic ureter; usually unilateral, about twice as common in males, and typically detected on antenatal ultrasound.**\n\n## Understanding it\nPicture a kidney that never formed properly:\n- It is a **bag of non-communicating cysts** with **no working cortex** — so the unit does **no filtering**.\n- The **ureter is atretic** (blind-ending), and it's associated with obstruction (PUJO/PUV), VUR, and syndromes like Meckel-Gruber.\n\n>> Because it's non-functioning and usually **unilateral**, the healthy contralateral kidney hypertrophies and compensates. Many involute spontaneously, which is why small ones are followed with ultrasound rather than removed immediately.",
+         "opts": [
+          "A cancerous renal tumour",
+          "An infected kidney full of pus",
+          "A non-functioning kidney of non-communicating cysts with an atretic ureter",
+          "A normal variant of kidney shape"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is a horseshoe kidney?",
+         "a": "**The most common fusion anomaly, where renal parenchyma on each side of the vertebral column is joined at the isthmus; the ureters course medially and anteriorly over the isthmus and generally drain well.**\n\n## Understanding it\nIt's a fusion, not a loss of tissue:\n- The two kidneys are **joined across the midline** (usually at their lower poles) forming an isthmus.\n- Drainage is **usually adequate**, but the ureters passing over the isthmus can get kinked.\n\n>> Obstruction, when it occurs, is usually due to **high insertion of the ureter into the renal pelvis**. Horseshoe kidneys are often incidental and benign, but carry a slightly raised risk of **PUJ obstruction, stones, and infection** because of the abnormal drainage angle.",
+         "opts": [
+          "Complete absence of both kidneys",
+          "The commonest fusion anomaly, joined at the isthmus, usually drains well",
+          "A kidney replaced entirely by cysts",
+          "A kidney that ascended into the chest"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is renal ectopia and what does pelvic ectopia predispose to?",
+         "a": "**Renal ectopia is failure of a kidney to ascend from its origin in the true pelvis (rarely a superiorly ascended thoracic kidney). Pelvic ectopia increases the incidence of ureteropelvic junction (PUJ) obstruction, vesicoureteral reflux, and multicystic renal dysplasia.**\n\n## Understanding it\nThe kidney normally ascends from the pelvis to the flank during development:\n- If it **fails to ascend**, it stays low (**pelvic kidney**); rarely it ascends **too far** (thoracic kidney).\n- An abnormally positioned kidney has an **abnormal ureter and blood supply**, predisposing to drainage problems.\n\n>> Hence the associations: **PUJ obstruction, VUR, and multicystic dysplasia**. Position matters because it determines how well urine drains — a mal-positioned kidney is prone to obstruction and reflux.",
+         "opts": [
+          "A kidney that filters at twice the normal rate",
+          "Failure of a kidney to ascend (usually pelvic); predisposes to PUJ obstruction, VUR, dysplasia",
+          "A kidney fused across the midline",
+          "An extra third kidney"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is PUJ obstruction and how does it present?",
+         "a": "**Partial obstruction of urine flow from the renal pelvis to the ureter — the most frequent cause of fetal hydronephrosis. Often asymptomatic/incidental; when symptomatic, recurrent UTIs, stone formation, a palpable flank mass, and classically intermittent pain after drinking large fluid volumes.**\n\n## Understanding it\nThe block is at the **pelvi-ureteric junction**, where the pelvis meets the ureter:\n- Urine pools in the pelvis → **hydronephrosis** (the commonest fetal cause).\n- The **classic symptom** — pain after a large fluid or diuretic load — happens because the sudden urine surge **outstrips the narrow outflow**, distending the pelvis.\n\n>> These kidneys are also **at high risk of injury from even minor trauma** because the distended pelvis is vulnerable. Many are picked up incidentally on imaging done for other reasons.",
+         "opts": [
+          "Complete absence of the ureter",
+          "Obstruction of the urethra by a valve",
+          "Reflux of urine up to the kidney",
+          "Partial block of urine from pelvis to ureter — commonest cause of fetal hydronephrosis"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Describe posterior urethral valve (PUV) — who gets it and the antenatal signs.",
+         "a": "**PUV is a congenital valve in the posterior urethra from a persistent urogenital membrane — the commonest obstructive uropathy in children, occurring in boys (~1:5000–8000) and associated with renal dysplasia from back-pressure. Antenatally: bilateral hydronephrosis, a persistently full bladder, and a dilated posterior urethra (the keyhole sign), often with oligohydramnios and an SGA fetus.**\n\n## Understanding it\nIt's a **boys-only outflow obstruction** with damage that runs upstream:\n- The valve blocks the urethra → urine backs up → **bladder distends → ureters and kidneys dilate (bilateral hydronephrosis) → renal dysplasia**.\n- Less fetal urine out → **oligohydramnios**.\n\n>> The **keyhole sign** on antenatal ultrasound (dilated bladder + dilated posterior urethra, together resembling a keyhole) is the classic clue. Severe cases are diagnosed antenatally; oligohydramnios warns of pulmonary hypoplasia.",
+         "opts": [
+          "An acquired adult condition",
+          "A benign bladder polyp in neonates",
+          "A ureteric problem in girls only",
+          "A urethral membrane in BOYS; antenatal bilateral hydronephrosis and the keyhole sign"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "How does PUV present postnatally at different ages?",
+         "a": "**Neonate: abdominal distension, poor urinary stream, respiratory distress, straining to void. Infant: recurrent UTI/urosepsis, abdominal distension, failure to thrive, poor stream and straining. Older child: poor urinary stream, straining, daytime incontinence, repeated UTI, and features of CKD.**\n\n## Understanding it\nThe presentation matures with the child but keeps one theme — **poor outflow**:\n- **Neonate** — the acute obstructed baby (distension, respiratory distress from pulmonary hypoplasia).\n- **Infant** — infection and growth failure dominate (UTI, urosepsis, FTT).\n- **Older child** — chronic bladder dysfunction and kidney damage (incontinence, CKD).\n\n>> The unifying red flag across all ages is a **poor urinary stream and straining to void** in a boy — this should always prompt evaluation for PUV. Postnatal presentation is the commonest route in developing countries.",
+         "opts": [
+          "Always completely asymptomatic",
+          "Only ever with painless haematuria",
+          "Identical presentation at every age",
+          "Neonate: poor stream/distension; infant: UTI, FTT; older child: incontinence, CKD"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the management principle for PUV?",
+         "a": "**Surgical relief of the obstruction is paramount — all children with PUV should have valve ablation as soon as possible (vesico-amniotic shunting for severe antenatal obstruction) — plus long-term follow-up because bladder dysfunction, VUR and CKD persist even after ablation.**\n\n## Understanding it\nTwo-part logic:\n- **Relieve the obstruction fast** — ablate the valve to stop ongoing back-pressure damage. Severe fetal cases may need a **vesico-amniotic shunt** before birth.\n- **But ablation is not a cure** — the bladder was damaged by chronic obstruction, so an **overactive, poorly compliant bladder, VUR and CKD** need lifelong monitoring (anticholinergics may help the bladder).\n\n>> The exam-worthy phrase is that **ALL PUV children need prompt valve ablation** — but the equally important clinical point is the **long-term follow-up**, since kidney and bladder damage continue after the valve is gone.",
+         "opts": [
+          "Observation only, never operate",
+          "A single antibiotic course cures it",
+          "Immediate bilateral nephrectomy",
+          "Prompt valve ablation plus lifelong follow-up (bladder dysfunction, VUR, CKD persist)"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Which investigations are used to work up CAKUT?",
+         "a": "**Ultrasound (oligohydramnios, dysplasia), CT, MRI; DMSA (differential function and scarring); MCUG/VCUG (detects VUR and PUV); IVU; scintigraphy; urodynamic studies; diuretic renogram (obstruction with persistent hydronephrosis); and cystoscopy.**\n\n## Understanding it\nChoose the test for the question you're asking:\n- **Ultrasound** — first-line, shows the anatomy and hydronephrosis.\n- **DMSA** — how much each kidney *works* and whether it's *scarred*.\n- **MCUG/VCUG** — detects **reflux (VUR)** and **PUV** (needs a voiding study).\n- **Diuretic renogram** — separates true **obstruction** from a baggy but non-obstructed system.\n\n>> The key pairing to remember: **DMSA for function/scarring, VCUG for reflux/PUV, diuretic renogram for obstruction.** Each answers a distinct clinical question rather than being interchangeable.",
+         "opts": [
+          "Chest X-ray alone",
+          "A single blood glucose test",
+          "Ultrasound, DMSA (function/scarring), VCUG (reflux/PUV), diuretic renogram (obstruction)",
+          "Skin biopsy"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Outline the treatment approach for CAKUT.",
+         "a": "**Conservative follow-up (BP, urinary protein, renal function; serial ultrasound) for unilateral agenesis and small cysts (<5 cm, likely to involute); nephrectomy if no involution by 2 years, hypertension or infection; prompt valve ablation for PUV; RRT for ESKD; surgical correction (re-implantation, vesicostomy); and supportive care (correct electrolytes, treat sepsis, control BP, ensure nutrition and growth).**\n\n## Understanding it\nMatch intensity to severity — a ladder:\n- **Watch** — unilateral agenesis, small cysts (follow BP, protein, function; US to 2 years, then 5 years).\n- **Operate** — valve ablation (PUV), nephrectomy (non-involuting/complicated units), re-implantation for reflux.\n- **Replace** — RRT (dialysis/transplant) once in ESKD.\n\n>> Running through all of it is **supportive nephrology**: correcting electrolytes, treating infection, controlling blood pressure, and monitoring growth — because preserving the remaining kidney function is the real goal.",
+         "opts": [
+          "Watch (small cysts) → operate (ablation, nephrectomy) → replace (RRT); plus supportive care",
+          "Always immediate transplant",
+          "Steroids for every case",
+          "No treatment is ever needed"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the major complications and prognosis of CAKUT?",
+         "a": "**Complications: CKD (60% in dysplastic kidney), VUR, bladder dysfunction/incontinence, recurrent UTI, malignancy (Wilms tumour, adenocarcinoma), hypertension, cyst infection/bleeding/rupture, stones and death. Prognosis: severe CAKUT causes ESRD in infancy, mild cases by adolescence; bilateral agenesis is lethal (pulmonary hypoplasia); mild hydronephrosis, ectopic/solitary kidneys have a good prognosis.**\n\n## Understanding it\nPrognosis tracks how much functioning kidney survives:\n- **Worst** — bilateral agenesis (lethal via pulmonary hypoplasia) and severe bilateral disease (infant ESRD).\n- **Guarded** — dysplastic kidneys (high CKD rate), needing RRT eventually.\n- **Good** — solitary/ectopic kidneys and mild hydronephrosis, where enough function remains.\n\n>> Note the **malignancy risk** (Wilms tumour) in dysplastic tissue — a reason non-involuting units are sometimes removed. Overall, outcome depends on **residual renal function and how early it was managed.**",
+         "opts": [
+          "Only cosmetic problems result",
+          "Always full recovery with no sequelae",
+          "No complications ever occur",
+          "CKD, VUR, recurrent UTI, hypertension, malignancy; bilateral agenesis is lethal"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "How is CAKUT prevented at the three levels?",
+         "a": "**Primary: preconception care, genetic counselling, control of maternal disease (HTN, diabetes), avoiding consanguinity and teratogens, adequate folate. Secondary: antenatal screening of all mothers (18–22-week anomaly scan), amniotic fluid assessment, renal ultrasound, DMSA. Tertiary: prompt UTI treatment, antibiotic prophylaxis, surgical correction, BP control, regular renal function tests, growth monitoring, and dialysis.**\n\n## Understanding it\nThe three levels map onto before, during, and after:\n- **Primary (prevent it occurring)** — optimise the pregnancy: control diabetes/HTN, folate, avoid teratogens.\n- **Secondary (detect it early)** — the **18–22-week anomaly scan** is the centrepiece.\n- **Tertiary (limit the damage)** — treat UTIs promptly, control BP, monitor function, and provide RRT when needed.\n\n>> Because CAKUT is largely **genetic/sporadic**, primary prevention is limited — so the lecture stresses that the **18–22-week scan and prompt postnatal work-up** are where the real gains in preventing kidney failure are made.",
+         "opts": [
+          "It cannot be detected before birth",
+          "By avoiding all fluids in pregnancy",
+          "Only by surgery after symptoms appear",
+          "Primary (preconception/folate), secondary (18–22-week anomaly scan), tertiary (treat UTI, control BP)"
+         ],
+         "ans": 3
+        }
+       ],
+       "imgBase": "content/Pediatrics/Nwangwa/CAKUT/img/",
+       "imgCount": 6,
+       "ready": true
       },
       {
        "id": "pediatrics-37",
@@ -7689,223 +8677,608 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define bronchiolitis.",
-         "a": "An inflammatory obstruction of the small airways — the bronchioles and surrounding tissues; an acute, predominantly viral infection of the lower respiratory tract."
+         "a": "**Bronchiolitis is an acute, predominantly viral inflammatory obstruction of the small airways — the bronchioles — of the lower respiratory tract.**\n\n## Understanding it\nBreak the word down: *bronchiol-itis* = inflammation of the **bronchioles** (smallest airways).\n- A virus inflames them, so they swell and clog.\n- In a baby these airways are already narrow, so obstruction causes wheeze and distress.\n\n>> It is an obstruction of the **SMALL airways** — hence wheeze in an infant, not the stridor of large-airway disease.",
+         "opts": [
+          "Inflammation of the large airways (trachea)",
+          "A chronic allergic upper-airway disease",
+          "A bacterial infection of the alveoli",
+          "An acute viral inflammatory obstruction of the small airways (bronchioles)"
+         ],
+         "ans": 3
         },
         {
          "q": "Is bronchiolitis viral or bacterial?",
-         "a": "Predominantly viral, with few cases attributed to other organisms."
+         "a": "**Predominantly viral, with only a few cases from other organisms.**\n\n## Understanding it\n- Respiratory **viruses** (RSV most of all) cause almost all cases.\n- Bacteria play little primary role.\n\n>> Because it is **viral**, antibiotics are NOT routine — only for a proven secondary bacterial infection.",
+         "opts": [
+          "Predominantly viral",
+          "Predominantly bacterial",
+          "Equally viral and bacterial",
+          "Fungal in most cases"
+         ],
+         "ans": 0
         },
         {
          "q": "When does bronchiolitis peak seasonally?",
-         "a": "During the rainy season in tropical countries (winter in temperate countries)."
+         "a": "**The rainy season in tropical countries (winter in temperate climates).**\n\n## Understanding it\n- Cold, damp, crowded conditions spread respiratory viruses.\n- Tropics → **rainy season**; temperate → **winter**.\n\n>> A wheezy infant in the rainy season fits bronchiolitis — season is a real clue.",
+         "opts": [
+          "The dry hot season only",
+          "No seasonal pattern",
+          "Summer everywhere",
+          "The rainy season (winter in temperate climates)"
+         ],
+         "ans": 3
         },
         {
          "q": "In which age group does bronchiolitis occur, and what is the peak age?",
-         "a": "The first 2 years of life; peak age 2-8 months (average 6 months)."
+         "a": "**The first 2 years of life, peak 2–8 months (average ~6 months).**\n\n## Understanding it\n- A disease of **infants**, essentially never a first diagnosis in older children.\n- Peak ~**6 months**, when airways are tiny and maternal antibody wanes.\n\n>> A first wheeze in an infant under 2 in the rainy season is bronchiolitis until proven otherwise.",
+         "opts": [
+          "Any age, no peak",
+          "Newborns only",
+          "First 2 years, peak 2–8 months",
+          "School age, peak 6 years"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the sex distribution of bronchiolitis?",
-         "a": "Commoner in males, M:F 2:1."
+         "a": "**Commoner in males, M:F about 2:1.**\n\n## Understanding it\n- Boys are affected about **twice** as often.\n- Linked to smaller male infant airways relative to lung size.\n\n>> Male sex is a mild risk factor.",
+         "opts": [
+          "Commoner in males, ~2:1",
+          "Only in males",
+          "Equal in both sexes",
+          "Commoner in females, 2:1"
+         ],
+         "ans": 0
         },
         {
          "q": "How long do most cases of bronchiolitis last?",
-         "a": "Most are mild, lasting 7-10 days."
+         "a": "**Most are mild and last about 7–10 days.**\n\n## Understanding it\n- Usually **self-limiting** — the virus runs its course over a week to ten days.\n- The doctor's job is to **support** the infant through the worst.\n\n>> Treatment is supportive, not curative.",
+         "opts": [
+          "Chronic, several months",
+          "Lifelong once acquired",
+          "Mild and self-limiting, 7–10 days",
+          "Only 1–2 days"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the mortality of hospitalized bronchiolitis and who is most affected?",
-         "a": "About 1-2%, occurring most in children under 6 months."
+         "a": "**About 1–2%, mostly in children under 6 months.**\n\n## Understanding it\n- Overall mild, but **hospitalised** mortality is ~**1–2%**.\n- Deaths cluster in the **youngest** infants with least airway reserve.\n\n>> The very young are watched closely — they can deteriorate.",
+         "opts": [
+          "About 30%, older children",
+          "About 50%",
+          "About 1–2%, mostly under 6 months",
+          "Essentially 0%"
+         ],
+         "ans": 2
         },
         {
          "q": "List the predisposing factors for bronchiolitis.",
-         "a": "Rainy season; cold dry dusty harmattan; not being breastfed; overcrowding and day-care; cigarette smoke exposure; low birth weight; chronic lung disease; congenital heart lesions; and older family members as a source of infection."
+         "a": "**Rainy season/harmattan dust, not breastfeeding, overcrowding/day-care, cigarette smoke, low birth weight, chronic lung disease, congenital heart lesions, and infected older relatives.**\n\n## Understanding it\n- **Environmental** — rainy season, dust, crowding, smoke.\n- **Host** — not breastfed, low birth weight, chronic lung/heart disease.\n- **Source** — older relatives carrying the virus.\n\n>> Many are modifiable: **breastfeeding, avoiding smoke, less crowding**.",
+         "opts": [
+          "Not breastfeeding, crowding, smoke, low birth weight, heart/lung disease",
+          "Older age, dry season only",
+          "Male sex only",
+          "High birth weight and breastfeeding"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the commonest cause of bronchiolitis?",
-         "a": "Respiratory syncytial virus (RSV)."
+         "a": "**Respiratory syncytial virus (RSV).**\n\n## Understanding it\n- RSV is by far the **leading cause** worldwide.\n- Highly contagious, circulates seasonally.\n\n>> Think bronchiolitis → think **RSV** (and palivizumab targets RSV).",
+         "opts": [
+          "Streptococcus pneumoniae",
+          "Adenovirus",
+          "Respiratory syncytial virus (RSV)",
+          "Influenza virus"
+         ],
+         "ans": 2
         },
         {
          "q": "List the viral causes of bronchiolitis.",
-         "a": "RSV (commonest), adenovirus, parainfluenza 1/2/3, human metapneumovirus, bocavirus, rhinovirus and influenza virus."
+         "a": "**RSV (commonest), adenovirus, parainfluenza 1/2/3, human metapneumovirus, bocavirus, rhinovirus, influenza.**\n\n## Understanding it\n- **RSV** leads.\n- Many other respiratory viruses cause the same picture.\n\n>> A **viral syndrome** with RSV on top — antibiotics are not first-line.",
+         "opts": [
+          "Fungi and parasites",
+          "RSV, adenovirus, parainfluenza, metapneumovirus, rhinovirus, influenza",
+          "Bacteria like pneumococcus",
+          "Only RSV"
+         ],
+         "ans": 1
         },
         {
          "q": "Which adenovirus types cause severe bronchiolitis, and what complication?",
-         "a": "Types 7, 11 and 21; more likely to be complicated by bronchiolitis obliterans."
+         "a": "**Types 7, 11 and 21, which may be complicated by bronchiolitis obliterans.**\n\n## Understanding it\n- Certain **adenovirus** serotypes (7, 11, 21) cause severe disease.\n- Feared sequel: **bronchiolitis obliterans** (permanent small-airway scarring).\n\n>> Adenovirus 7/11/21 = 'severe, may leave chronic damage'.",
+         "opts": [
+          "All types only mild",
+          "Adenovirus never causes it",
+          "Types 7, 11, 21 → bronchiolitis obliterans",
+          "Types 1 and 2 → always full recovery"
+         ],
+         "ans": 2
         },
         {
          "q": "Which RSV group is more severe?",
-         "a": "RSV group A (more severe than group B)."
+         "a": "**RSV group A (more severe than group B).**\n\n## Understanding it\n- RSV has two antigenic groups, **A and B**.\n- **Group A** causes more severe illness.\n\n>> RSV **A > B** in severity.",
+         "opts": [
+          "Both identical",
+          "RSV group A",
+          "RSV has no subgroups",
+          "RSV group B"
+         ],
+         "ans": 1
         },
         {
          "q": "How is the pathogen for bronchiolitis acquired?",
-         "a": "By inhalation of infected respiratory droplets, or inoculation of the nostrils/conjunctivae from contaminated hands of contacts."
+         "a": "**By inhaling infected droplets, or inoculating the nose/eyes from contaminated hands.**\n\n## Understanding it\n- Two routes: **droplets** in air, and **hands** carrying virus to nose/eyes.\n- The hand route drives spread in households and nurseries.\n\n>> Rationale for **hand-washing** as the best prevention.",
+         "opts": [
+          "Inhaled droplets, or hand-to-nose/eye",
+          "Blood transfusion",
+          "Mosquito bites",
+          "Contaminated food/water"
+         ],
+         "ans": 0
         },
         {
          "q": "Where does the initial viral infection and replication occur?",
-         "a": "In the infant's upper respiratory tract, before spreading down."
+         "a": "**In the upper respiratory tract, before spreading down to the bronchioles.**\n\n## Understanding it\n- The virus first multiplies in the **nose/upper airway** (early coryza).\n- It then descends to the **lower** airways, causing obstruction.\n\n>> Classic history: a few days of runny nose that then 'goes to the chest'.",
+         "opts": [
+          "The upper airway, then spreads down",
+          "In the bloodstream first",
+          "In the gut then lungs",
+          "Directly in the alveoli"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the dominant host-related factor for severe bronchiolitis?",
-         "a": "Age-related peripheral airway dimension — the innately smaller peripheral airways of infants predispose to severe obstruction."
+         "a": "**The age-related small size of the peripheral airways — an infant's tiny bronchioles predispose to severe obstruction.**\n\n## Understanding it\n- The main host factor is **small airway calibre**.\n- A little swelling in a narrow bronchiole causes a big diameter drop.\n\n>> Same virus = a bad wheezy illness in a baby but a cold in an adult — it is about airway **size**.",
+         "opts": [
+          "Weak adult-sized airways",
+          "Innately small peripheral airways of infants",
+          "Excess surfactant",
+          "Large airway diameter"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does the lack of collateral ventilation channels worsen bronchiolitis in infants?",
-         "a": "Infants have few pores of Kohn and canals of Lambert, so a blocked bronchiole cannot be ventilated around, leading to atelectasis."
+         "a": "**Infants have few pores of Kohn and canals of Lambert, so a blocked bronchiole cannot be ventilated around it — leading to atelectasis.**\n\n## Understanding it\n- These channels let air bypass a blockage.\n- Infants have few, so a plugged bronchiole cannot be re-aired and its segment **collapses (atelectasis)**.\n\n>> Fewer collateral channels = a block means collapsed lung, not just reduced flow.",
+         "opts": [
+          "They prevent all atelectasis",
+          "Extra channels that protect infants",
+          "The channels cause hyperinflation",
+          "Few channels → blocked bronchiole → atelectasis"
+         ],
+         "ans": 3
         },
         {
          "q": "What other two host factors predispose infants to bronchiolitis?",
-         "a": "A greater number of mucus-secreting goblet cells, and genetic age-related airway hyper-reactivity to RSV and parainfluenza type 3."
+         "a": "**More mucus-secreting goblet cells, and genetic age-related airway hyper-reactivity to RSV and parainfluenza type 3.**\n\n## Understanding it\n- **More goblet cells** → more mucus to plug tiny airways.\n- **Hyper-reactive airways** → they constrict readily to the virus.\n\n>> With small airway size, these make the infant airway uniquely obstructable.",
+         "opts": [
+          "Fewer goblet cells, rigid airways",
+          "Extra collateral channels",
+          "A mature adult immune response",
+          "More goblet cells (mucus) and airway hyper-reactivity"
+         ],
+         "ans": 3
         },
         {
          "q": "What immune response does RSV incite?",
-         "a": "Eosinophil degranulation with release of eosinophil cationic protein (cytotoxic to epithelium), increased Toll-like receptor-4 expression, and increased cytokines/chemokines, IgE and inflammatory mediators."
+         "a": "**Eosinophil degranulation releasing cytotoxic eosinophil cationic protein, increased TLR-4, and raised cytokines, IgE and inflammatory mediators.**\n\n## Understanding it\n- RSV triggers an **eosinophil-driven, IgE-associated** response.\n- Released **eosinophil cationic protein** is toxic to airway epithelium.\n\n>> This allergic-type response partly explains the link between severe RSV and later **wheeze/asthma**.",
+         "opts": [
+          "A neutrophil, pus-forming response",
+          "Instant antibody clearance",
+          "Eosinophil degranulation, raised TLR-4, cytokines and IgE",
+          "No immune response"
+         ],
+         "ans": 2
         },
         {
          "q": "List the pathological abnormalities in bronchiolitis.",
-         "a": "Necrosis of the respiratory epithelium, destruction of ciliated cells, intraluminal bronchiolar plugs of sloughed debris and fibrin, and peribronchial mononuclear infiltration."
+         "a": "**Necrosis of the respiratory epithelium, destruction of ciliated cells, intraluminal plugs of debris and fibrin, and peribronchial mononuclear infiltration.**\n\n## Understanding it\n- The virus **kills the lining** (including mucus-clearing cilia).\n- Dead cells + fibrin form **plugs**; inflammatory cells cuff the airway.\n\n>> The tiny airway is **swollen outside and plugged inside** — a double obstruction.",
+         "opts": [
+          "Epithelial necrosis, lost cilia, luminal plugs, peribronchial infiltrate",
+          "Pleural fibrosis only",
+          "Clean airways, no damage",
+          "Alveolar pus and abscesses"
+         ],
+         "ans": 0
         },
         {
          "q": "Which pathological features are more prominent in adenovirus than RSV?",
-         "a": "Extensive epithelial destruction, pulmonary parenchymal necrosis and hyaline membrane formation."
+         "a": "**Extensive epithelial destruction, pulmonary parenchymal necrosis, and hyaline membrane formation.**\n\n## Understanding it\n- **Adenovirus** is more destructive than RSV.\n- It damages the **lung tissue itself**, not just the airway lining.\n\n>> This heavier damage links adenovirus to the chronic sequel bronchiolitis obliterans.",
+         "opts": [
+          "Milder than RSV",
+          "No tissue damage",
+          "Only upper-airway inflammation",
+          "Extensive destruction, parenchymal necrosis, hyaline membranes"
+         ],
+         "ans": 3
         },
         {
          "q": "When does recovery of the airway epithelium and cilia occur?",
-         "a": "Epithelial regeneration begins ~4 days after the acute phase; ciliary activity is restored in ~2 weeks or more."
+         "a": "**Epithelial regeneration begins ~4 days after the acute phase; ciliary activity is restored in ~2 weeks or more.**\n\n## Understanding it\n- The lining regrows at **~4 days**.\n- But **cilia** take **2 weeks or longer** to work again.\n\n>> This lag explains the lingering cough after the acute illness settles.",
+         "opts": [
+          "Full recovery in 1 hour",
+          "Cilia never recover",
+          "6 months minimum",
+          "Epithelium ~4 days; cilia ~2 weeks+"
+         ],
+         "ans": 3
         },
         {
          "q": "What three changes reduce the bronchiolar lumen in bronchiolitis?",
-         "a": "Oedema of the mucosa, accumulation of mucus and cellular debris, and constriction of the bronchiolar wall muscles."
+         "a": "**Mucosal oedema, accumulated mucus/cellular debris, and constriction of the bronchiolar wall muscle.**\n\n## Understanding it\n- **Wall swells** (oedema) — narrows from outside.\n- **Lumen fills** with mucus/debris — blocks inside.\n- **Muscle constricts** — squeezes shut.\n\n>> All three act on an already-tiny airway → rapid severe obstruction.",
+         "opts": [
+          "Loss of the wall entirely",
+          "Only muscle spasm",
+          "Mucosal oedema, luminal mucus/debris, muscle constriction",
+          "Widening of the airway"
+         ],
+         "ans": 2
         },
         {
          "q": "Why does airway resistance rise so steeply in infant bronchiolitis?",
-         "a": "Resistance rises exponentially (four-fold) as airway radius decreases, so small reductions in tiny infant airways cause large increases in resistance and work of breathing."
+         "a": "**Resistance rises roughly with the 4th power as airway radius falls, so small reductions in a tiny infant airway cause huge increases in resistance and work of breathing.**\n\n## Understanding it\n- By Poiseuille's law, resistance ∝ 1/radius⁴.\n- Halving the radius raises resistance ~**16-fold**; small swelling in a baby's airway multiplies resistance.\n\n>> The physics of why bronchiolitis hits **infants** hardest — tiny airways, dramatic narrowing.",
+         "opts": [
+          "Bigger airways raise resistance more",
+          "Resistance is unrelated to size",
+          "Resistance rises ~4th-power as radius falls",
+          "Resistance falls as airways narrow"
+         ],
+         "ans": 2
         },
         {
          "q": "What is ball-valve obstruction and its result?",
-         "a": "Because the airway is narrower during expiration, air enters but cannot leave, causing early air trapping and progressive hyperinflation."
+         "a": "**A partial block where the airway narrows in expiration, so air enters but cannot fully leave — causing air trapping and hyperinflation.**\n\n## Understanding it\n- Airways widen in **inspiration**, narrow in **expiration**.\n- Partial block: air gets **in** but not **out** → trapped.\n- Trapped air → lungs **hyperinflate**.\n\n>> Mechanism behind the hyperinflated chest and flat diaphragms on X-ray.",
+         "opts": [
+          "Complete block causing collapse",
+          "Partial block: air in, not out → hyperinflation",
+          "No effect on lung volume",
+          "Air out but not in"
+         ],
+         "ans": 1
         },
         {
          "q": "What is check-valve obstruction and its result?",
-         "a": "Complete obstruction, so trapped distal air is resorbed and the child develops patchy atelectasis."
+         "a": "**A complete block: no new air enters, so trapped distal air is resorbed and the child develops patchy atelectasis.**\n\n## Understanding it\n- Contrast ball-valve: here the block is **complete**.\n- Distal air is **absorbed** and not replaced → the segment **collapses**.\n\n>> Bronchiolitis shows BOTH hyperinflation and patchy collapse on one X-ray.",
+         "opts": [
+          "Air out but not in",
+          "Complete block → air resorbed → atelectasis",
+          "Partial block → hyperinflation",
+          "Airway widening"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does hypoxaemia occur early in bronchiolitis?",
-         "a": "Because of ventilation-perfusion mismatch — blocked areas receive blood but not air."
+         "a": "**Because of ventilation–perfusion (V/Q) mismatch — obstructed areas still get blood but no air, so blood leaves poorly oxygenated.**\n\n## Understanding it\n- Blocked segments are **perfused but not ventilated**.\n- Their blood isn't oxygenated and mixes with the rest → oxygen falls.\n\n>> Hypoxaemia is an **early** sign — hence pulse oximetry is the key monitor.",
+         "opts": [
+          "V/Q mismatch — blocked areas get blood but no air",
+          "Because the heart fails first",
+          "Because CO2 rises first",
+          "From blood loss"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does hypercapnia develop late in bronchiolitis?",
-         "a": "With severe obstruction and tiring of respiratory effort, less air reaches the alveoli to remove CO2, so arterial PCO2 rises."
+         "a": "**Because severe obstruction plus tiring of the respiratory effort means too little air reaches alveoli to wash out CO2, so PCO2 rises.**\n\n## Understanding it\n- CO2 clearance needs **enough ventilation**.\n- Early, the fast-breathing baby keeps CO2 normal/low.\n- Only when the infant **tires** or obstruction is severe does CO2 climb — a **late, ominous** sign.\n\n>> Rising CO2 in a previously tachypnoeic infant = exhaustion and impending respiratory failure.",
+         "opts": [
+          "Early, before hypoxaemia",
+          "CO2 never changes",
+          "From over-breathing",
+          "Late: severe obstruction + tiring → CO2 retained"
+         ],
+         "ans": 3
         },
         {
          "q": "List the symptoms of bronchiolitis.",
-         "a": "Sneezing and clear rhinorrhoea, diminished appetite, fever 38.5-39°C or subnormal temperature, respiratory distress, paroxysmal wheezy cough, dyspnoea, irritability, tachypnoea and apnoea."
+         "a": "**Sneezing and clear rhinorrhoea, poor appetite, fever 38.5–39°C (or subnormal temperature), respiratory distress, paroxysmal wheezy cough, dyspnoea, irritability, tachypnoea and apnoea.**\n\n## Understanding it\nThe story runs top-down:\n- Starts as a **cold** (sneezing, clear runny nose, poor feeding).\n- Then 'goes to the chest' — **wheezy cough, fast/laboured breathing**, irritability.\n- In young infants it can cause **apnoea** (pauses in breathing).\n\n>> Coryza first, then lower-airway signs — and watch the youngest for apnoea.",
+         "opts": [
+          "Sudden chest pain and haemoptysis",
+          "Barking cough and stridor",
+          "Coryza, wheezy cough, tachypnoea, distress, ± apnoea",
+          "Painless jaundice"
+         ],
+         "ans": 2
         },
         {
          "q": "List the signs of bronchiolitis.",
-         "a": "Markedly increased work of breathing, nasal flaring and retractions, fine inspiratory crepitations, rhonchi, prolonged expiratory phase, reduced breath sounds, and hepatomegaly/splenomegaly."
+         "a": "**Markedly increased work of breathing, nasal flaring and retractions, fine inspiratory crepitations, rhonchi, a prolonged expiratory phase, reduced breath sounds, and palpable liver/spleen.**\n\n## Understanding it\n- **Increased work** — flaring, recessions, tachypnoea.\n- **On auscultation** — fine crepitations, rhonchi/wheeze, prolonged expiration, reduced air entry.\n- **Palpable liver/spleen** from hyperinflated lungs pushing the diaphragm down.\n\n>> The picture is small-airway obstruction: wheeze, prolonged expiration, hyperinflation.",
+         "opts": [
+          "A loud systolic murmur only",
+          "Neck stiffness and photophobia",
+          "Flaring/retractions, crepitations, rhonchi, prolonged expiration, hyperinflation",
+          "Stridor and a barking cough"
+         ],
+         "ans": 2
         },
         {
          "q": "Why are the liver and spleen palpable in bronchiolitis?",
-         "a": "Due to lung hyperinflation pushing the diaphragm down — it is displacement, not true organomegaly."
+         "a": "**Because lung hyperinflation pushes the diaphragm down — it is displacement, not true organomegaly.**\n\n## Understanding it\n- Trapped air **hyperinflates** the lungs.\n- The flattened diaphragm **pushes the liver and spleen downward**, so their edges become palpable.\n\n>> They feel enlarged but are **normal-sized** and simply displaced — a classic bronchiolitis trap.",
+         "opts": [
+          "Infection of the liver",
+          "Heart failure causing congestion",
+          "True liver and spleen enlargement",
+          "Hyperinflation pushes the diaphragm down (displacement)"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is the expiratory phase prolonged in bronchiolitis?",
-         "a": "Because of small-airway obstruction that makes it hard to push air out (ball-valve effect)."
+         "a": "**Because small-airway obstruction makes it hard to push air out (the ball-valve effect).**\n\n## Understanding it\n- Narrowed bronchioles resist **outflow** more than inflow.\n- Getting air **out** takes longer → the expiratory phase lengthens, often with wheeze.\n\n>> Prolonged expiration is a hallmark of lower-airway (small-airway) obstruction.",
+         "opts": [
+          "Large-airway obstruction",
+          "Weak inspiratory muscles",
+          "Small-airway obstruction makes exhaling hard (ball-valve)",
+          "Excess surfactant"
+         ],
+         "ans": 2
         },
         {
          "q": "List the complications and co-morbidities of bronchiolitis.",
-         "a": "Dehydration; apnoea and bradycardia (especially under 2 months); acute otitis media; hypoxaemia with or without hypercarbia; viral pneumonia; secondary bacterial pneumonia; recurrent wheezing or asthma; and urinary tract infection."
+         "a": "**Dehydration; apnoea and bradycardia (especially under 2 months); acute otitis media; hypoxaemia ± hypercarbia; viral pneumonia; secondary bacterial pneumonia; recurrent wheezing/asthma; and urinary tract infection.**\n\n## Understanding it\n- **Acute dangers** — dehydration, apnoea/bradycardia, hypoxaemia.\n- **Infective** — otitis media, viral or secondary bacterial pneumonia, UTI.\n- **Long-term** — recurrent wheeze/asthma.\n\n>> The two to fear most in a young infant: **apnoea/bradycardia** and **hypoxaemia**.",
+         "opts": [
+          "Meningitis and septic arthritis",
+          "Dehydration, apnoea/bradycardia, hypoxaemia, pneumonia, later wheeze",
+          "No complications ever",
+          "Only a mild sore throat"
+         ],
+         "ans": 1
         },
         {
          "q": "Which complications are especially associated with infants under 2 months?",
-         "a": "Apnoea and bradycardia (with features of dehydration)."
+         "a": "**Apnoea and bradycardia (with features of dehydration).**\n\n## Understanding it\n- The **youngest infants** have immature respiratory control.\n- They may respond to the viral load with **apnoea** (breathing pauses) and **bradycardia** rather than obvious distress.\n\n>> Under 2 months, apnoea can be the presenting sign — these babies are admitted and monitored.",
+         "opts": [
+          "Chronic lung fibrosis",
+          "Immediate death in all",
+          "A skin rash only",
+          "Apnoea and bradycardia"
+         ],
+         "ans": 3
         },
         {
          "q": "What long-term respiratory association does bronchiolitis have?",
-         "a": "Recurrent wheezing or asthma."
+         "a": "**Recurrent wheezing or asthma.**\n\n## Understanding it\n- Severe infant bronchiolitis (especially RSV) is linked to **later recurrent wheeze/asthma**.\n- The airway hyper-reactivity and eosinophilic inflammation may persist.\n\n>> Bronchiolitis is not always a one-off — some children go on to recurrent wheeze.",
+         "opts": [
+          "Pulmonary tuberculosis",
+          "Complete lifelong immunity, no sequelae",
+          "Recurrent wheezing or asthma",
+          "Lung cancer"
+         ],
+         "ans": 2
         },
         {
          "q": "What chest X-ray findings occur in bronchiolitis?",
-         "a": "May be normal; peribronchial thickening; hyperinflation with splayed ribs, flattened diaphragms and relative microcardia; patchy atelectasis; increased bronchovascular markings; interstitial streaks from the hilum; and increased AP diameter on the lateral film."
+         "a": "**May be normal; otherwise peribronchial thickening, hyperinflation (splayed ribs, flat diaphragms, relative microcardia), patchy atelectasis, increased bronchovascular markings, and increased AP diameter on the lateral film.**\n\n## Understanding it\n- The signature is **hyperinflation**: splayed ribs, flattened diaphragms, a small-looking heart (relative microcardia).\n- Plus **patchy atelectasis** (check-valve collapse) and peribronchial thickening.\n\n>> Hyperinflation + patchy collapse is the classic bronchiolitis X-ray — but it can be normal.",
+         "opts": [
+          "A widened mediastinum",
+          "Hyperinflation (splayed ribs, flat diaphragms, microcardia) ± patchy atelectasis",
+          "A large consolidated lobe with air bronchograms",
+          "A pleural effusion filling one side"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the FBC usually like in bronchiolitis?",
-         "a": "The total WBC count and differentials are usually normal (consistent with a viral illness)."
+         "a": "**The total WBC count and differential are usually normal, consistent with a viral illness.**\n\n## Understanding it\n- A **normal WBC** fits a **viral** cause.\n- A markedly raised neutrophil count would instead suggest a bacterial process.\n\n>> A normal FBC supports the viral diagnosis and argues against routine antibiotics.",
+         "opts": [
+          "High eosinophils diagnostic of it",
+          "Usually normal WBC and differential (viral picture)",
+          "Severe anaemia always",
+          "Very high neutrophils (bacterial)"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the role of pulse oximetry in bronchiolitis?",
-         "a": "To detect hypoxaemia and guide the need for supplemental oxygen — the key practical investigation."
+         "a": "**To detect hypoxaemia and guide the need for supplemental oxygen — the key practical investigation.**\n\n## Understanding it\n- Hypoxaemia occurs **early** (V/Q mismatch), often before it looks severe.\n- **Pulse oximetry** non-invasively measures SpO2 and tells you when to give oxygen.\n\n>> It is the single most useful bedside test — it directs the most important treatment (oxygen).",
+         "opts": [
+          "Measure the white cell count",
+          "Assess liver function",
+          "Detect hypoxaemia and guide oxygen therapy",
+          "Diagnose the specific virus"
+         ],
+         "ans": 2
         },
         {
          "q": "When is viral testing used in bronchiolitis?",
-         "a": "When the diagnosis is uncertain or for epidemiological purposes (immunofluorescence, PCR or culture)."
+         "a": "**When the diagnosis is uncertain or for epidemiological purposes — using immunofluorescence, PCR or culture.**\n\n## Understanding it\n- Bronchiolitis is usually a **clinical** diagnosis, so viral tests aren't routine.\n- They are used to **confirm** an unclear case or for **surveillance/epidemiology**.\n\n>> Identifying the exact virus rarely changes management of a typical case.",
+         "opts": [
+          "When the diagnosis is uncertain, or for epidemiology",
+          "To decide the antibiotic",
+          "Only after the child recovers",
+          "Routinely in every case"
+         ],
+         "ans": 0
         },
         {
          "q": "List the differential diagnoses of bronchiolitis.",
-         "a": "Bronchial asthma, wheeze-associated respiratory infection (WARI), congestive cardiac failure, pertussis, aspirated foreign body, gastro-oesophageal reflux disease, croup, retropharyngeal abscess, acute epiglottitis, and impacted upper-airway foreign body."
+         "a": "**Bronchial asthma, wheeze-associated respiratory infection, congestive cardiac failure, pertussis, aspirated foreign body, GORD, croup, retropharyngeal abscess, acute epiglottitis, and upper-airway foreign body.**\n\n## Understanding it\nSort by the noise they make:\n- **Wheeze** — asthma, WARI, cardiac failure, GORD.\n- **Stridor/upper airway** — croup, epiglottitis, retropharyngeal abscess, foreign body.\n- **Paroxysmal cough** — pertussis.\n\n>> The main mimic to exclude in an infant is **first-episode asthma/WARI** and, in the wrong setting, **heart failure**.",
+         "opts": [
+          "Only appendicitis",
+          "Asthma/WARI, heart failure, pertussis, foreign body, croup, epiglottitis",
+          "Diabetes and thyroid disease",
+          "Meningitis and encephalitis"
+         ],
+         "ans": 1
         },
         {
          "q": "How do you distinguish bronchiolitis from asthma?",
-         "a": "Bronchiolitis is typically a first wheeze in an infant under 2 in the rainy season; asthma is recurrent, episodic and bronchodilator-responsive with atopy."
+         "a": "**Bronchiolitis is typically a FIRST wheeze in an infant under 2 in the rainy season; asthma is recurrent, episodic, bronchodilator-responsive, and associated with atopy.**\n\n## Understanding it\n- **Bronchiolitis** — first-ever wheeze, infant, viral prodrome, seasonal.\n- **Asthma** — **recurrent** episodes, responds well to **bronchodilators**, family/personal **atopy**.\n\n>> The clincher is the pattern: one-off viral wheeze in a baby vs recurrent reversible wheeze.",
+         "opts": [
+          "Bronchiolitis is recurrent and atopic",
+          "They are indistinguishable",
+          "Asthma is a single infant episode",
+          "First wheeze in an infant vs recurrent, reversible, atopic asthma"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the mainstay of bronchiolitis treatment?",
-         "a": "Supportive care — there is no cure; you support the infant while the virus resolves."
+         "a": "**Supportive care — there is no cure; you support the infant while the virus resolves.**\n\n## Understanding it\n- No antiviral cures typical bronchiolitis.\n- Management **supports** oxygenation, hydration and feeding until recovery.\n\n>> 'Supportive care' is the exam answer — oxygen and fluids, not a magic drug.",
+         "opts": [
+          "Routine corticosteroids",
+          "Supportive care (no cure)",
+          "A curative antibiotic",
+          "Surgery"
+         ],
+         "ans": 1
         },
         {
          "q": "List the supportive treatments for bronchiolitis.",
-         "a": "Oxygen therapy, increased fluids and feeds, a trial of bronchodilators, and corticosteroids/anti-inflammatory agents only if benefit outweighs risk."
+         "a": "**Oxygen therapy, increased fluids and feeds, a trial of bronchodilators, and corticosteroids only if benefit outweighs risk.**\n\n## Understanding it\n- **Oxygen** for hypoxaemia (the priority).\n- **Fluids/feeds** to prevent dehydration.\n- **Bronchodilator trial** — continue only if it helps.\n- **Steroids** are not routine.\n\n>> Support the breathing and hydration; drugs are adjuncts of limited/uncertain benefit.",
+         "opts": [
+          "Routine IV antibiotics for all",
+          "Oxygen, fluids/feeds, trial of bronchodilators, selective steroids",
+          "Immediate intubation for everyone",
+          "No treatment at all"
+         ],
+         "ans": 1
         },
         {
          "q": "Which single treatment is most important in bronchiolitis?",
-         "a": "Oxygen therapy (for the hypoxaemia)."
+         "a": "**Oxygen therapy (for the hypoxaemia).**\n\n## Understanding it\n- Hypoxaemia is the early, dangerous problem.\n- Correcting it with **oxygen** is the single most important intervention.\n\n>> If you remember one treatment: **oxygen**.",
+         "opts": [
+          "Antibiotics",
+          "Corticosteroids",
+          "Chest physiotherapy",
+          "Oxygen therapy"
+         ],
+         "ans": 3
         },
         {
          "q": "When is ribavirin used in bronchiolitis and how is it delivered?",
-         "a": "In severe cases, immunocompromised hosts or infants with cyanotic CHD; delivered by a small-particle aerosol generator (SPAG) over 3-5 days, 18-20 hours/day."
+         "a": "**In severe cases, immunocompromised hosts, or infants with cyanotic congenital heart disease — delivered by a small-particle aerosol generator (SPAG) over 3–5 days, 18–20 hours/day.**\n\n## Understanding it\n- Ribavirin is an **antiviral** reserved for the **highest-risk** infants (severe, immunocompromised, cyanotic CHD).\n- Given as an **aerosol (SPAG)** for many hours daily over several days.\n\n>> Not for routine bronchiolitis — only selected severe/high-risk cases.",
+         "opts": [
+          "Routinely in every infant",
+          "Severe/immunocompromised/cyanotic CHD, via SPAG aerosol 3–5 days",
+          "As an oral tablet for mild cases",
+          "As a one-off injection for prevention"
+         ],
+         "ans": 1
         },
         {
          "q": "When are antibiotics indicated in bronchiolitis?",
-         "a": "Only when there is concomitant severe bacterial infection — not routinely."
+         "a": "**Only when there is concomitant severe bacterial infection — not routinely.**\n\n## Understanding it\n- Bronchiolitis is **viral**, so antibiotics do nothing for the virus.\n- They are reserved for a **proven/strongly suspected secondary bacterial** infection (e.g. bacterial pneumonia).\n\n>> No routine antibiotics — a classic exam and stewardship point.",
+         "opts": [
+          "To shorten the viral illness",
+          "Never, under any circumstance",
+          "Only with concomitant bacterial infection",
+          "Routinely for every case"
+         ],
+         "ans": 2
         },
         {
          "q": "Is physiotherapy routine in bronchiolitis?",
-         "a": "No — it may help mobilise secretions but is not routinely done."
+         "a": "**No — it may help mobilise secretions but is not done routinely.**\n\n## Understanding it\n- Chest physiotherapy has **not** been shown to help typical bronchiolitis.\n- It may occasionally assist secretion clearance in selected cases.\n\n>> Not a routine treatment.",
+         "opts": [
+          "No — not routine (occasional selective use)",
+          "Yes — it cures bronchiolitis",
+          "It is absolutely contraindicated",
+          "Yes — mandatory for all"
+         ],
+         "ans": 0
         },
         {
          "q": "Outline the prevention and control of bronchiolitis.",
-         "a": "Palivizumab immunoprophylaxis (IM) for high-risk infants; health education on hand decontamination; encouraging breastfeeding; minimizing spread in creches/nurseries; and discouraging cigarette and domestic smoke exposure."
+         "a": "**Palivizumab immunoprophylaxis for high-risk infants, health education on hand decontamination, promoting breastfeeding, minimising spread in creches, and avoiding cigarette/domestic smoke.**\n\n## Understanding it\n- **Palivizumab** — passive RSV protection for high-risk babies.\n- **Hand hygiene** — the biggest practical measure.\n- **Breastfeeding** and **smoke avoidance** reduce risk.\n\n>> Prevention = hand-washing + breastfeeding + smoke avoidance, with palivizumab for high-risk infants.",
+         "opts": [
+          "A live RSV vaccine for all infants",
+          "Routine antibiotics as prophylaxis",
+          "Palivizumab (high-risk), hand hygiene, breastfeeding, smoke avoidance",
+          "No prevention is possible"
+         ],
+         "ans": 2
         },
         {
          "q": "What is palivizumab and how is it given?",
-         "a": "A monoclonal antibody used for immunoprophylaxis in high-risk infants, given intramuscularly."
+         "a": "**A monoclonal antibody used for RSV immunoprophylaxis in high-risk infants, given intramuscularly.**\n\n## Understanding it\n- It is a **monoclonal antibody** (passive immunity) against RSV.\n- Given **IM** to **high-risk** infants during the RSV season.\n\n>> Passive protection for high-risk babies — not a treatment for established disease.",
+         "opts": [
+          "An oral antibiotic",
+          "A bronchodilator inhaler",
+          "A live attenuated vaccine",
+          "A monoclonal antibody given IM to high-risk infants"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the biggest practical preventive measure against bronchiolitis spread?",
-         "a": "Hand decontamination (hand-washing), since it spreads on contaminated hands."
+         "a": "**Hand decontamination (hand-washing), since the virus spreads on contaminated hands.**\n\n## Understanding it\n- Much spread is by **hands** carrying virus to the nose/eyes.\n- **Hand-washing** interrupts this most effective route.\n\n>> Simple, cheap, and the single most effective preventive measure.",
+         "opts": [
+          "Hand-washing (hand decontamination)",
+          "Antibiotic prophylaxis",
+          "A daily chest X-ray",
+          "Isolating the child for a month"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — A chest X-ray of a wheezy infant shows splayed ribs, flat diaphragms and a small-looking heart. What is this and the diagnosis?",
-         "a": "Hyperinflation (with relative microcardia) — consistent with bronchiolitis."
+         "a": "**Hyperinflation with relative microcardia — consistent with bronchiolitis.**\n\n## Understanding it\n- Splayed ribs + flat diaphragms = **air trapping/hyperinflation**.\n- The over-expanded lungs make the heart look small (**relative microcardia**).\n\n>> This X-ray triad is the classic bronchiolitis picture.",
+         "opts": [
+          "A normal chest X-ray",
+          "Lobar pneumonia",
+          "Hyperinflation (with relative microcardia) — bronchiolitis",
+          "A large pleural effusion"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A 6-month-old in the rainy season has coryza progressing to a wheezy cough, tachypnoea, nasal flaring and SpO2 89%. Diagnosis and immediate management?",
-         "a": "Acute bronchiolitis; admit, give oxygen with pulse oximetry, maintain fluids/feeds, trial of bronchodilators, and monitor for apnoea."
+         "a": "**Acute bronchiolitis — admit, give oxygen with pulse-oximetry monitoring, maintain fluids/feeds, trial of bronchodilators, and watch for apnoea.**\n\n## Understanding it\n- Rainy season + infant + coryza → wheezy cough + tachypnoea + **SpO2 89%** = bronchiolitis with hypoxaemia.\n- Priorities: **oxygen** (SpO2 low), hydration, monitoring.\n\n>> Recognise hypoxaemic bronchiolitis and act: admit + oxygen + fluids + monitor.",
+         "opts": [
+          "Acute bronchiolitis — admit, oxygen, fluids, monitor for apnoea",
+          "Croup — give adrenaline nebuliser",
+          "Asthma — high-dose steroids only",
+          "Bacterial pneumonia — IV antibiotics alone"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why should you not routinely give antibiotics in bronchiolitis?",
-         "a": "Because it is predominantly viral (RSV), so antibiotics are reserved for concomitant bacterial infection."
+         "a": "**Because it is predominantly viral (RSV), so antibiotics are reserved for concomitant bacterial infection.**\n\n## Understanding it\n- The cause is a **virus** — antibiotics don't treat viruses.\n- Using them routinely adds side-effects and resistance for no benefit.\n\n>> Antibiotics only if a **bacterial** infection is proven/strongly suspected.",
+         "opts": [
+          "They are too expensive to use",
+          "Antibiotics worsen the virus directly",
+          "It is viral (RSV); antibiotics only for bacterial co-infection",
+          "Because it is a fungal infection"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A 6-week-old with bronchiolitis has episodes of stopping breathing. What complication is this and why is age relevant?",
-         "a": "Apnoea (with possible bradycardia) — a danger complication especially in infants under 2 months, who may deteriorate suddenly."
+         "a": "**Apnoea (with possible bradycardia) — a danger complication especially in infants under 2 months, who may deteriorate suddenly.**\n\n## Understanding it\n- A **6-week-old** has immature respiratory control.\n- Bronchiolitis in this age can cause **apnoea/bradycardia**, sometimes before obvious distress.\n\n>> Age matters: under 2 months, apnoea is a real risk — admit and monitor closely.",
+         "opts": [
+          "Simple breath-holding, harmless",
+          "Normal newborn periodic breathing, ignore it",
+          "Apnoea ± bradycardia — a danger of infants under 2 months",
+          "A seizure disorder"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A wheezy hyperinflated infant has a liver palpable 3 cm below the costal margin. Is this hepatomegaly?",
-         "a": "No — the hyperinflated lungs push the diaphragm and liver down; it is displacement, not true hepatomegaly."
+         "a": "**No — the hyperinflated lungs push the diaphragm and liver down; it is displacement, not true hepatomegaly.**\n\n## Understanding it\n- The infant is **wheezy and hyperinflated**.\n- Trapped air flattens the diaphragm and **pushes the liver down**, so its edge is palpable.\n\n>> Feels enlarged but is **normal and displaced** — don't misdiagnose true hepatomegaly.",
+         "opts": [
+          "Yes — a liver tumour",
+          "Yes — true hepatomegaly from infection",
+          "No — displacement by hyperinflation, not true hepatomegaly",
+          "Yes — heart failure enlarging the liver"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Which infants qualify for palivizumab prophylaxis?",
-         "a": "High-risk infants, e.g. those with chronic lung disease, congenital heart lesions or prematurity."
+         "a": "**High-risk infants — for example those with chronic lung disease, congenital heart lesions, or prematurity.**\n\n## Understanding it\n- Palivizumab is expensive, so it is targeted at babies most likely to have **severe** RSV.\n- These are infants with **chronic lung disease, congenital heart disease, or prematurity**.\n\n>> Reserve it for the high-risk groups, not every infant.",
+         "opts": [
+          "High-risk infants: chronic lung disease, congenital heart lesions, prematurity",
+          "Adults with asthma",
+          "Only children over 5 years",
+          "Every healthy term infant"
+         ],
+         "ans": 0
         }
        ],
        "imgBase": null,
@@ -8095,14 +9468,255 @@ window.MEDBANK = {
        "day": "",
        "date": "04/06/26",
        "time": "2-4pm",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Guillain-Barré Syndrome (GBS)\n\n*Dr Chidomere R.I., Paediatrician/Child Neurologist — Paediatrics, topic 49*\n\n## Outline\n\nIntroduction & names · Variants · Epidemiology · Pathophysiology · Aetiology · Clinical features · Clinical course · Diagnosis · Differentials & complications · Treatment\n\n## Introduction\n\nGuillain-Barré syndrome is a collection of clinical syndromes manifesting as an **acute inflammatory polyradiculoneuropathy** with resultant **weakness and diminished reflexes**.\n\n**Other names:** Landry's ascending paralysis (weakness starts in the legs and moves up toward trunk and face); acute idiopathic polyneuritis; acute polyradiculoneuritis; Guillain-Barré-Strohl syndrome.\n\n> **Classic description:** a **demyelinating neuropathy with ascending weakness**, characterised by **weakness, paraesthesias and hyporeflexia.** It is a **post-infectious** polyneuropathy causing demyelination of **mainly motor** (sometimes also sensory) nerves. In severe cases, muscle weakness leads to **respiratory failure**, and **labile autonomic dysfunction** may occur.\n\n**History:** In 1859 **Landry** reported 10 patients with ascending paralysis. In 1916, **Guillain, Barré and Strohl** described 2 French soldiers with motor weakness, areflexia, **CSF albuminocytologic dissociation**, and diminished deep tendon reflexes.\n\n**AIDP** (acute inflammatory demyelinating polyradiculoneuropathy) is the most widely recognised form. *Poly* = many nerves; *radiculo* = the nerve roots (where nerves exit the spinal cord); *neuropathy* = disease/damage of nerve tissue.\n\n**Variants:** Acute motor axonal neuropathy (**AMAN**); acute motor-sensory axonal neuropathy (**AMSAN**); **Miller-Fisher syndrome**.\n\n## Epidemiology\n\n- Affects **all ages but uncommon in children**.\n- **Male:female ≈ 1.5:1**.\n- The **most common neuromuscular disorder in the developed world** (unlike polio in the developing world).\n\n## Pathophysiology\n\nCharacterised by **absent or profoundly delayed conduction** in nerve fibres, from **demyelination of peripheral nerves and spinal roots**. **Cranial nerves are rarely involved.**\n\n> GBS is an **autoimmune response triggered by an antecedent viral infection**, with both **humoral and cell-mediated** components. Symptoms usually result from **immune-mediated injury to the myelin sheath**; in a few cases **axonal damage** results from a direct cellular immune attack on the axon itself.\n\n## Aetiology\n\n- **Two-thirds** have a preceding **GI or respiratory infection 1–3 weeks** before the weakness.\n- **Infections:** EBV, CMV, Chlamydia, HBV, **Campylobacter**, Mycoplasma, HIV.\n- **Vaccinations:** rabies, streptococcus, influenza.\n- **Malignancies:** lymphomas, particularly **Hodgkin disease**.\n- **Drugs:** captopril, gold, penicillamine.\n\n## Clinical features\n\nTypically presents **2–4 weeks after a benign respiratory or GI illness**. Weakness may progress over **hours to days** to involve arms, trunk, cranial nerves and muscles of respiration.\n\n- **Sensory:** most complain of **paraesthesias/numbness**, beginning in the **toes and fingertips** and progressing up, generally **not beyond the wrists or ankles**. **Pain** is aching/throbbing, worst in the **shoulder girdle, back, buttocks and thighs**, provoked by the slightest movement.\n- **Motor:** rapidly progressive weakness usually **starts in the lower limbs and ascends** to the upper limbs, respiratory and facial muscles. **Bilateral and symmetrical.** Cranial nerve involvement → facial weakness, dysphagia, drooling, dysarthria. In the **Miller-Fisher variant**, neuropathy **begins with cranial nerve deficits**. Usually **maximal in severity ~2 weeks** after onset.\n- **Autonomic:** tachycardia, bradycardia, facial flushing, paroxysmal hypertension, orthostatic hypotension, anhidrosis/diaphoresis, urinary retention.\n- **Respiratory:** dyspnoea on exertion, shortness of breath, difficulty swallowing, slurred speech. **Ventilatory failure requiring support occurs in up to one-third** of patients at some point.\n- **Signs:** flaccid paralysis with **lost deep tendon reflexes**; **hypotonia, hyporeflexia/areflexia and sensory loss.**\n\n## Clinical course\n\nUsually **benign**. Spontaneous recovery begins within **2–3 weeks**. Most regain full strength, though some have residual weakness.\n\n> Recovery follows a gradient **inverse to the direction of involvement** — **bulbar function recovers first, lower-limb weakness resolves last**, and **tendon reflexes are usually the last to recover.** Bulbar and respiratory involvement may lead to **death if treatment is delayed.**\n\n## Diagnosis\n\n- **CSF analysis:** elevated CSF protein (**> 400 mg/L**) with **no rise in cell count** — **cyto-albuminologic (albuminocytologic) dissociation**. Protein may be **normal very early**.\n- **Serology:** four-fold rise in serum antibodies against microbes.\n- **EMG:** acute denervation of muscle; **weak muscles show reduced recruitment**.\n- **Serum CK:** mildly elevated or normal. **Muscle biopsy** not usually required.\n- **Nerve conduction studies:** slowing **2–3 weeks** after onset — signs of demyelination: **conduction slowing, prolonged distal latencies, prolonged F-waves, conduction block/dispersion**.\n- **ECG:** may show conduction/rhythm disorders.\n- **Lung function:** forced vital capacity in respiratory involvement.\n\n> **Negative inspiratory force (NIF)** is an easy bedside test of respiratory muscle function; **normal is > 60 cm H₂O.** If NIF is **dropping or nears 20 cm H₂O**, respiratory support must be available.\n\n## Differentials & complications\n\n**Differentials:** poliomyelitis, hypokalaemia, botulism, cauda equina syndrome, diphtheria, myasthenia gravis, spinal cord injury, transverse myelitis, organophosphate poisoning, hereditary neuropathies, porphyria.\n\n**Complications:** respiratory failure, hypotension/hypertension, thromboembolism (DVT), hypostatic pneumonia, decubitus ulcers, cardiac arrhythmia, ileus, aspiration, urinary retention.\n\n## Treatment\n\n- About **one-third require ICU admission**, mainly for **respiratory failure**. Consider ICU for **labile dysautonomia, FVC < 20 mL/kg, or severe bulbar palsy**, or any sign of respiratory compromise.\n- **Specific therapy:** **plasma exchange** or **IV immunoglobulin (IVIG)** — shown to **shorten recovery time by as much as 50%.**\n- **Prednisolone 2 mg/kg/day is ineffective by itself** (may be given alongside plasmapheresis).\n- **DVT prophylaxis** for the paralysed extremities.\n- **Autonomic management:** atropine for symptomatic bradycardia; short-acting agents (beta-blocker or nitroprusside) for hypertension; IV fluids and supine positioning for hypotension. Tachycardia rarely needs treatment.\n- **Supportive/rehabilitation:** respiratory support, cardiac monitoring, safe nutrition, monitoring for infection; **physical and occupational therapy** to regain strength, mobility, coordination and independence; pain management; regular monitoring (some relapse).\n\n## References\n\nNelson Textbook of Paediatrics; Azubuike & Nkanginieme, Paediatrics and Child Health in a Tropical Region; lecture material of Dr Chidomere R.I.\n",
+       "simplified": "# Guillain-Barré Syndrome — the simple version\n\n## The one-line picture\n\n> **A post-infectious autoimmune attack strips the myelin off peripheral nerves, causing weakness that starts in the legs and CLIMBS upward — with lost reflexes.**\n\nThree hallmarks: **weakness + paraesthesias + hyporeflexia**, in an **ascending** pattern. The most important word is **post-infectious** — that's the whole mechanism in one word.\n\n---\n\n## How it happens\n\n> An infection 1–3 weeks ago primed the immune system, which now cross-attacks **nerve myelin** (\"friendly fire\"). No myelin → no conduction → weakness + areflexia.\n\nThe classic trigger is **Campylobacter** (diarrhoea); others are EBV, CMV, HIV, Mycoplasma, even vaccines. **Two-thirds** recall a GI or respiratory illness a couple of weeks earlier — that lag is your biggest diagnostic clue.\n\nBecause it's **antibody-driven**, treatments that remove antibodies (**plasma exchange, IVIG**) work.\n\n---\n\n## The weakness — four words\n\n> **Ascending · symmetrical · flaccid · areflexic.** Legs first, climbing to arms, trunk, breathing and face, peaking around 2 weeks.\n\nThe danger is the *direction*: as it climbs it reaches the **breathing and swallowing muscles**.\n\n> **Up to 1 in 3 patients need a ventilator.**\n\nWatch breathing with **NIF** (negative inspiratory force): **normal > 60 cm H₂O; heading toward 20 → get ready to ventilate.**\n\nAlso watch the **autonomics** — swinging heart rate and blood pressure can kill on their own.\n\n---\n\n## Diagnosis — two classics\n\n> **CSF: albuminocytologic dissociation** — HIGH protein, NORMAL cells (protein without the white cells you'd expect in infection). May be normal very early.\n> **Nerve studies: demyelination** (slowing, block, long F-waves) — but only after **2–3 weeks**, so early-normal doesn't rule it out.\n\nDon't forget the mimics: in Nigeria, **polio** is a key differential (but polio is *asymmetric*). Others: botulism (descends), myasthenia (reflexes preserved), hypokalaemia, organophosphates.\n\n---\n\n## The course — reassuring but dangerous\n\n> Usually **benign**: recovery starts in **2–3 weeks** and runs in reverse — **bulbar recovers first, legs last, reflexes last of all.**\n\nBut \"usually benign\" ≠ safe: **bulbar and respiratory involvement kills if treatment is delayed.**\n\n---\n\n## Treatment\n\n> **Plasma exchange OR IVIG** — cut recovery time by up to **50%.**\n> **Steroids alone DON'T work** (classic exam point).\n\nEverything else is support: **ICU** if FVC < 20 mL/kg, severe bulbar palsy, or labile autonomics; **DVT prophylaxis** for paralysed limbs; autonomic drugs; and **physio/OT** to rebuild strength. Keep monitoring after recovery — some relapse.\n\n---\n\n## Putting it together\n\nGBS is **ascending, symmetrical, flaccid, areflexic** weakness, **1–3 weeks after an infection** (think Campylobacter). It's an **autoimmune demyelination**, confirmed by **albuminocytologic dissociation** in CSF and **demyelinating nerve studies** (which lag 2–3 weeks). It's usually **self-limiting**, but **respiratory and autonomic failure** can kill — so monitor **NIF/FVC**, admit early to ICU, give **IVIG or plasma exchange** (not steroids alone), and support the patient through the peak.\n",
+       "pdf": "content/Pediatrics/Chidomere/Guillain%20Barre%20Syndrome/note.pdf",
+       "primer": [
+        {
+         "q": "What is Guillain-Barré syndrome?",
+         "lecturer": "GBS is a collection of clinical syndromes manifesting as an acute inflammatory polyradiculoneuropathy with resultant weakness and diminished reflexes. Classically it is a post-infectious demyelinating neuropathy with ascending weakness, characterised by weakness, paraesthesias and hyporeflexia, affecting mainly motor (sometimes sensory) nerves.",
+         "explain": "## Step 1: Unpack the long name\n\n>> **Poly** = many nerves · **radiculo** = the nerve roots at the cord · **neuropathy** = nerve damage.\n\nSo 'acute inflammatory polyradiculoneuropathy' = a sudden, inflammatory attack on many nerves and their roots.\n\n## Step 2: The three classic hallmarks\n\n>> **Weakness + paraesthesias + hyporeflexia**, in an **ascending** pattern (legs → up).\n\n## Step 3: The key word is 'post-infectious'\n\n>> GBS follows an infection — that single fact explains the autoimmune mechanism, the 1–3 week lag, and why history-taking hunts for a recent GI or respiratory illness.",
+         "tie": "This definition frames the whole topic: 'ascending, post-infectious, demyelinating, areflexic weakness' is the pattern you match a patient against, and each word predicts a later section (aetiology, pathophysiology, clinical course)."
+        },
+        {
+         "q": "Describe the pathophysiology and main aetiological triggers of GBS.",
+         "lecturer": "GBS is an autoimmune response triggered by an antecedent (usually viral) infection, with humoral and cell-mediated components. Symptoms usually result from immune-mediated injury to the myelin sheath, causing absent or profoundly delayed conduction in peripheral nerves and spinal roots; cranial nerves are rarely involved. Two-thirds have a preceding GI or respiratory infection 1–3 weeks before onset (e.g. Campylobacter, EBV, CMV, Mycoplasma, HIV); other triggers include vaccinations, lymphoma (Hodgkin), and drugs.",
+         "explain": "## Step 1: Molecular mimicry, in effect\n\n>> An infection primes the immune system, which then **cross-attacks the nerve's myelin** — an autoimmune 'friendly fire'.\n\n## Step 2: Demyelination = conduction failure\n\nStrip the myelin and the nerve **can't conduct** — hence profound slowing or block, producing weakness and areflexia.\n\n## Step 3: The tell-tale 1–3 week gap\n\n>> **Two-thirds** have a GI/respiratory infection **1–3 weeks earlier** — long enough for the immune response to build. **Campylobacter** is the classic culprit.",
+         "tie": "The mechanism explains the treatment: since the damage is antibody/immune-mediated, therapies that remove or neutralise antibodies (plasma exchange, IVIG) work — while the demyelination explains the nerve-conduction findings used to diagnose it."
+        },
+        {
+         "q": "Describe the typical clinical features of GBS.",
+         "lecturer": "GBS presents 2–4 weeks after a benign respiratory or GI illness with rapidly progressive, bilateral, symmetrical weakness that starts in the lower limbs and ascends to the arms, trunk, respiratory and facial muscles, maximal about 2 weeks after onset. Paraesthesias begin in the toes and fingertips; there is aching pain in the shoulder girdle, back, buttocks and thighs; deep tendon reflexes are lost (flaccid paralysis, hypotonia, areflexia). Autonomic instability and respiratory failure (up to one-third need ventilation) may occur.",
+         "explain": "## Step 1: The signature pattern\n\n>> **Ascending, symmetrical, flaccid, areflexic** weakness — starting in the legs and climbing.\n\n## Step 2: Track the danger upward\n\nAs weakness ascends it reaches the **respiratory and bulbar muscles** — this is where GBS kills. **Up to one-third need ventilation.**\n\n## Step 3: Don't forget autonomics\n\n>> Tachy/brady-cardia, labile BP, urinary retention — **autonomic instability** can be as dangerous as the weakness itself.",
+         "tie": "Recognising the ascending, areflexic pattern plus watching for respiratory/bulbar and autonomic involvement is exactly what triggers ICU admission and the bedside NIF monitoring covered under diagnosis and treatment."
+        },
+        {
+         "q": "How is GBS diagnosed?",
+         "lecturer": "CSF shows albuminocytologic (cyto-albuminologic) dissociation — elevated protein (>400 mg/L) with a normal cell count (protein may be normal very early). Nerve conduction studies show demyelination (slowing, prolonged distal latencies, prolonged F-waves, conduction block) 2–3 weeks after onset, and EMG shows acute denervation with reduced recruitment. Serum CK is normal or mildly elevated; serology may show a four-fold antibody rise; ECG may show conduction/rhythm changes; and forced vital capacity / negative inspiratory force monitor respiratory muscle function.",
+         "explain": "## Step 1: The classic CSF finding\n\n>> **Albuminocytologic dissociation** — **high protein, normal cells.** High protein WITHOUT the high white count you'd expect in infection.\n\n## Step 2: Nerve studies confirm demyelination\n\n>> **Conduction slowing, long distal latencies, prolonged F-waves** — but only appear **2–3 weeks** in, so early normal studies don't exclude GBS.\n\n## Step 3: Monitor breathing at the bedside\n\n>> **NIF normally > 60 cm H₂O**; if it **falls toward 20**, get ready to ventilate.",
+         "tie": "The diagnostic triad (clinical pattern + albuminocytologic dissociation + demyelinating nerve studies) confirms GBS, while the FVC/NIF monitoring bridges diagnosis and management — it decides who goes to ICU before respiratory arrest happens."
+        },
+        {
+         "q": "Outline the clinical course and treatment of GBS.",
+         "lecturer": "The course is usually benign, with spontaneous recovery beginning within 2–3 weeks; recovery follows a gradient inverse to involvement (bulbar function recovers first, lower-limb weakness last, reflexes last of all). About one-third need ICU for respiratory failure. Specific treatment is plasma exchange or IVIG, which shorten recovery by up to 50%; prednisolone alone is ineffective. Supportive care includes DVT prophylaxis, autonomic management, respiratory support, and physical/occupational therapy.",
+         "explain": "## Step 1: Reassuring natural history\n\n>> Most recover, starting within **2–3 weeks** — GBS is usually **self-limiting** if the patient is supported through the dangerous phase.\n\n## Step 2: Recovery runs in reverse\n\n>> What went down last comes back first: **bulbar recovers first, legs last, reflexes last of all.**\n\n## Step 3: What actually changes outcome\n\n>> **Plasma exchange or IVIG** cut recovery time by up to **50%**; **steroids alone don't work.** The rest is supportive — but respiratory and autonomic support is what saves lives.",
+         "tie": "The benign-but-dangerous course is why treatment is two-pronged: disease-modifying therapy (IVIG/plasma exchange) to speed recovery, plus intensive supportive care to survive the respiratory/autonomic peak — delay in the latter is what causes death."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is Guillain-Barré syndrome?",
+         "a": "**An acute inflammatory polyradiculoneuropathy — a post-infectious, usually demyelinating attack on peripheral nerves causing ascending weakness and diminished reflexes.**\n\n## Understanding it\nBreak the name into parts:\n- **Poly** = many nerves · **radiculo** = the nerve roots (where nerves leave the cord) · **neuropathy** = nerve damage.\n- 'Acute inflammatory' = it comes on fast, driven by inflammation.\n\n>> The classic picture is **weakness + paraesthesias + hyporeflexia** in an **ascending** pattern (legs upward). The single most important word is **post-infectious** — it explains the autoimmune mechanism and why you hunt for a recent illness.",
+         "opts": [
+          "An acute pyogenic infection of the spinal cord",
+          "A hereditary defect of the neuromuscular junction",
+          "An acute inflammatory demyelinating polyradiculoneuropathy causing ascending weakness",
+          "A chronic degenerative disease of the anterior horn cells"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "List the other names for GBS.",
+         "a": "**Landry's ascending paralysis, acute idiopathic polyneuritis, acute polyradiculoneuritis, and Guillain-Barré-Strohl syndrome.**\n\n## Understanding it\nThe names each capture a feature:\n- **Landry's ascending paralysis** describes the **upward march** of weakness from legs to trunk to face.\n- **Acute idiopathic polyneuritis / polyradiculoneuritis** describe the **acute inflammation of many nerves and roots**.\n- **Guillain-Barré-Strohl** credits all three physicians who described it in 1916.\n\n>> The eponym GBS stuck, but 'Landry's ascending paralysis' is worth knowing because it literally names the hallmark clinical pattern.",
+         "opts": [
+          "Werdnig-Hoffmann disease",
+          "Charcot-Marie-Tooth disease",
+          "Erb's palsy",
+          "Landry's ascending paralysis / acute idiopathic polyneuritis"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the most common form of GBS, and what are the axonal variants?",
+         "a": "**The most common form is AIDP (acute inflammatory demyelinating polyradiculoneuropathy). Variants include AMAN (acute motor axonal neuropathy), AMSAN (acute motor-sensory axonal neuropathy), and Miller-Fisher syndrome.**\n\n## Understanding it\nSeparate them by what is attacked:\n- **AIDP** — the **myelin** is stripped (demyelinating); this is the classic, commonest type.\n- **AMAN / AMSAN** — the **axon itself** is damaged (axonal); AMSAN adds sensory involvement.\n- **Miller-Fisher** — a distinctive variant that **starts with cranial nerve deficits** (ophthalmoplegia, ataxia, areflexia).\n\n>> Knowing AIDP is demyelinating explains the nerve-conduction findings (slowing, block); the axonal variants instead show reduced amplitudes.",
+         "opts": [
+          "AIDP; variants are AMAN, AMSAN and Miller-Fisher",
+          "Duchenne type; variants Becker and limb-girdle",
+          "Congenital type; variants transient and familial",
+          "AMAN; variants Bell's and Todd's"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Describe the epidemiology of GBS.",
+         "a": "**It affects all ages but is uncommon in children; the male:female ratio is about 1.5:1; and it is the most common neuromuscular disorder in the developed world (unlike polio in the developing world).**\n\n## Understanding it\nTwo comparisons anchor this:\n- **Age:** GBS occurs across all ages but is **relatively uncommon in children**.\n- **Geography:** in **developed** countries GBS is the leading acute neuromuscular paralysis, whereas in **developing** regions **polio** still competes as a cause of acute flaccid paralysis.\n\n>> That geographic contrast is clinically important: in a Nigerian child with acute ascending paralysis, **poliomyelitis remains a key differential** alongside GBS.",
+         "opts": [
+          "Commonest in tropical children under 5",
+          "Exclusively affects neonates",
+          "All ages but uncommon in children; commonest neuromuscular disorder in the developed world",
+          "Only occurs in the elderly over 70"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Explain the pathophysiology of GBS.",
+         "a": "**An autoimmune response triggered by an antecedent infection attacks the myelin sheath of peripheral nerves and spinal roots, causing absent or profoundly delayed conduction; cranial nerves are rarely involved. It has both humoral and cell-mediated components, and in a few cases the axon itself is directly attacked.**\n\n## Understanding it\nTrace the sequence:\n- An infection primes the immune system, which then **cross-reacts against nerve myelin** (in effect, molecular mimicry).\n- **Stripping the myelin** blocks or slows conduction → the nerve can't fire → weakness and lost reflexes.\n- Usually the **myelin** is the target; occasionally the **axon** is hit directly (the axonal variants).\n\n>> Because the injury is **immune/antibody-mediated**, treatments that remove or neutralise antibodies — **plasma exchange and IVIG** — logically work.",
+         "opts": [
+          "Direct viral invasion of anterior horn cells",
+          "Autoimmune attack on peripheral-nerve myelin triggered by an antecedent infection",
+          "Genetic deficiency of dystrophin",
+          "Autoantibodies against acetylcholine receptors"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What preceding events and triggers are associated with GBS?",
+         "a": "**Two-thirds have a GI or respiratory infection 1–3 weeks before onset. Triggers include infections (EBV, CMV, Chlamydia, HBV, Campylobacter, Mycoplasma, HIV), vaccinations (rabies, streptococcus, influenza), malignancies (lymphoma, especially Hodgkin disease), and drugs (captopril, gold, penicillamine).**\n\n## Understanding it\nThe unifying theme is an **immune stimulus 1–3 weeks earlier**:\n- **Campylobacter** (a cause of diarrhoea) is the classic and most-cited trigger.\n- Viral infections (EBV, CMV, HIV) and even vaccinations can prime the same response.\n\n>> The **1–3 week lag** is diagnostic gold: when a patient with ascending weakness recalls a diarrhoeal or flu-like illness a couple of weeks ago, GBS jumps to the top of your list.",
+         "opts": [
+          "A GI or respiratory infection 1–3 weeks earlier (e.g. Campylobacter)",
+          "A head injury in the preceding 24 hours",
+          "Prolonged fasting",
+          "Recent heavy exercise"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the typical clinical presentation of GBS?",
+         "a": "**Rapidly progressive, bilateral, symmetrical weakness that starts in the lower limbs and ascends to the arms, trunk, respiratory and facial muscles, typically 2–4 weeks after a benign respiratory or GI illness, reaching maximum severity about 2 weeks after onset.**\n\n## Understanding it\nHold four adjectives for the weakness:\n- **Ascending** (legs first), **symmetrical**, **bilateral**, and **flaccid** (with lost reflexes).\n- It **progresses over hours to days** and peaks at about **2 weeks**.\n\n>> The danger is in the *direction*: as weakness climbs, it reaches the **respiratory and bulbar muscles**. That upward march is why continuous monitoring of breathing and swallowing is essential from the moment GBS is suspected.",
+         "opts": [
+          "Ascending, symmetrical, flaccid, areflexic weakness peaking ~2 weeks",
+          "Descending spastic weakness with brisk reflexes",
+          "Fluctuating fatigable weakness worse in the evening",
+          "Sudden unilateral facial droop only"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Describe the sensory features and pain of GBS.",
+         "a": "**Paraesthesias and numbness begin in the toes and fingertips and progress upward, generally not beyond the wrists or ankles. Pain is aching or throbbing, most severe in the shoulder girdle, back, buttocks and thighs, and may occur with even the slightest movement.**\n\n## Understanding it\nTwo sensory clues:\n- The paraesthesias follow a **glove-and-stocking** onset (toes/fingertips) but classically **stay distal** (not past wrists/ankles).\n- The **pain** is prominent and **proximal** (shoulder girdle, back, buttocks, thighs) — often underestimated in GBS.\n\n>> Although GBS is 'mainly motor', these sensory symptoms are common and the **deep aching pain** can be an early or even initial complaint (pain in the lower limb may be the first manifestation).",
+         "opts": [
+          "Distal paraesthesias (toes/fingertips) with aching proximal pain",
+          "No sensory symptoms at all",
+          "A dermatomal vesicular rash",
+          "Complete loss of all sensation below a spinal level"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What autonomic features can occur in GBS?",
+         "a": "**Tachycardia, bradycardia, facial flushing, paroxysmal hypertension, orthostatic hypotension, anhidrosis and/or diaphoresis, and urinary retention.**\n\n## Understanding it\nGBS attacks autonomic nerves too, producing **labile, swinging** dysfunction:\n- The heart rate and blood pressure can **oscillate unpredictably** (brady- and tachycardia, hyper- and hypotension).\n- Sweating (anhidrosis/diaphoresis) and bladder function (retention) are disturbed.\n\n>> This **autonomic instability** is dangerous and sometimes lethal independent of the weakness — which is why patients need **continuous cardiac and blood-pressure monitoring**, and why labile dysautonomia is itself an indication for ICU.",
+         "opts": [
+          "Fixed bradycardia only",
+          "Complete loss of pupillary reflexes",
+          "Labile heart rate and blood pressure, urinary retention, sweating changes",
+          "No autonomic involvement ever"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why is respiratory monitoring critical in GBS?",
+         "a": "**Because ascending weakness can reach the diaphragm and respiratory muscles, and ventilatory failure requiring respiratory support occurs in up to one-third of patients at some point.**\n\n## Understanding it\nThe respiratory muscles are just further up the ascending chain:\n- As weakness climbs, **diaphragmatic and intercostal function fails**, causing dyspnoea, poor cough, and eventually ventilatory failure.\n- Bulbar weakness adds risk of **aspiration**.\n\n>> Up to **one-third need ventilation**, so breathing is watched continuously. **Negative inspiratory force (NIF)** is the bedside gauge: normal is **> 60 cm H₂O**, and if it **drops toward 20**, respiratory support must be ready. Waiting for obvious distress is too late.",
+         "opts": [
+          "Ascending weakness can reach respiratory muscles; up to 1/3 need ventilation",
+          "Because GBS always causes pneumonia",
+          "The virus directly infects the lungs",
+          "Steroids suppress breathing"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the neurological SIGNS of GBS on examination?",
+         "a": "**Flaccid paralysis with lost deep tendon reflexes — hypotonia, hyporeflexia or areflexia, and sensory loss.**\n\n## Understanding it\nThese are all **lower motor neuron** signs, because the lesion is in the peripheral nerves:\n- **Flaccid** (not spastic) weakness, **reduced tone**, and **absent reflexes**.\n- Sensory loss accompanies the motor findings.\n\n>> The **areflexia** is a cornerstone — a patient with ascending weakness whose reflexes are **preserved** should make you doubt GBS. Lost reflexes early, out of proportion to weakness, strongly support the diagnosis.",
+         "opts": [
+          "Flaccid paralysis with lost deep tendon reflexes, hypotonia, areflexia",
+          "Spasticity with hyperreflexia and clonus",
+          "Preserved reflexes with fasciculations",
+          "Rigidity and tremor"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How does the Miller-Fisher variant differ?",
+         "a": "**In the Miller-Fisher variant, the neuropathy begins with cranial nerve deficits rather than ascending limb weakness.**\n\n## Understanding it\nIt reverses the usual direction:\n- Classic GBS **ascends** (legs → up to cranial nerves last).\n- Miller-Fisher **starts at the top** — with cranial nerve involvement (the classic triad is **ophthalmoplegia, ataxia, and areflexia**).\n\n>> So a patient presenting first with eye-movement problems and unsteadiness, rather than leg weakness, may have this variant. Recognising it prevents you from dismissing GBS just because the weakness didn't start in the legs.",
+         "opts": [
+          "It spares the cranial nerves entirely",
+          "It presents with seizures",
+          "It causes only leg weakness",
+          "It begins with cranial nerve deficits (ophthalmoplegia, ataxia, areflexia)"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Describe the clinical course and recovery pattern of GBS.",
+         "a": "**The course is usually benign, with spontaneous recovery beginning within 2–3 weeks. Recovery follows a gradient inverse to the direction of involvement — bulbar function recovers first, lower-limb weakness resolves last, and tendon reflexes are usually the last function to recover.**\n\n## Understanding it\nThink of recovery as the illness running in reverse:\n- Weakness **ascended** (legs → bulbar), so recovery **descends** (bulbar first → legs last).\n- **Reflexes**, lost early and prominently, are the **last** to return.\n\n>> Most patients regain full strength, though some keep residual weakness. The reassuring natural history is real — **but bulbar and respiratory involvement can kill if treatment is delayed**, so 'usually benign' never means 'safe to leave unmonitored'.",
+         "opts": [
+          "No recovery ever occurs",
+          "Recovery in the same order as onset (legs first)",
+          "Always fatal within days",
+          "Usually benign; recovery in reverse — bulbar first, legs and reflexes last"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the classic CSF finding in GBS?",
+         "a": "**Albuminocytologic (cyto-albuminologic) dissociation — elevated CSF protein (>400 mg/L) with no elevation in the cell count. Protein may be normal very early in the disease.**\n\n## Understanding it\nThe name describes the mismatch:\n- **Albumino** = high **protein**; **cytologic dissociation** = **normal cells**.\n- Normally, whatever raises CSF protein (like infection) also raises the cell count. In GBS the **protein rises but cells stay normal** — they are 'dissociated'.\n\n>> One caveat: **very early**, the protein can still be **normal**, so a normal early CSF does not exclude GBS. The high-protein/normal-cell picture is the classic confirmatory finding once it appears.",
+         "opts": [
+          "Albuminocytologic dissociation — high protein, normal cell count",
+          "Low glucose with many neutrophils",
+          "High protein AND high white cell count",
+          "Bloody CSF with xanthochromia"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What do nerve conduction studies and EMG show in GBS, and when?",
+         "a": "**Signs of demyelination — conduction slowing, prolonged distal latencies, prolonged F-waves, and conduction block or dispersion — appearing 2–3 weeks after onset; EMG shows acute denervation with reduced recruitment in weak muscles.**\n\n## Understanding it\nThe findings match the pathology (demyelination) and its timing:\n- **Slowing, prolonged latencies and F-waves, conduction block** all reflect **lost myelin** disrupting conduction.\n- Crucially, these changes take **2–3 weeks** to develop.\n\n>> So **early nerve studies can be normal** — you cannot exclude GBS with a normal NCS in the first days. The diagnosis early on rests more on the clinical pattern and CSF; nerve studies confirm it as the disease matures.",
+         "opts": [
+          "Findings present within the first hour",
+          "Normal studies throughout the illness",
+          "A myopathic pattern with normal nerves",
+          "Demyelination (slowing, block, prolonged F-waves), appearing 2–3 weeks in"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "List key differential diagnoses of GBS.",
+         "a": "**Poliomyelitis, hypokalaemia, botulism, cauda equina syndrome, diphtheria, myasthenia gravis, spinal cord injury, transverse myelitis, organophosphate poisoning, hereditary neuropathies, and porphyria.**\n\n## Understanding it\nThese are the other causes of acute weakness/paralysis to exclude:\n- **Poliomyelitis** — crucial in developing regions; it causes **asymmetric** flaccid paralysis (vs GBS's symmetry).\n- **Botulism** — descending weakness (opposite direction).\n- **Myasthenia gravis** — fatigable weakness with **preserved reflexes**.\n- **Hypokalaemia, organophosphate poisoning** — reversible metabolic/toxic causes worth checking quickly.\n\n>> The discriminators are **symmetry, direction (ascending), areflexia, and CSF findings** — using these separates GBS from its mimics.",
+         "opts": [
+          "Poliomyelitis, botulism, myasthenia gravis, transverse myelitis, hypokalaemia",
+          "Migraine and tension headache",
+          "Asthma and bronchiolitis",
+          "Appendicitis and gastroenteritis"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the specific treatment of GBS, and what does NOT work?",
+         "a": "**Plasma exchange or IV immunoglobulin (IVIG) — which shorten recovery time by as much as 50%. Prednisolone (2 mg/kg/day) is ineffective by itself, though it may be given alongside plasmapheresis.**\n\n## Understanding it\nThe effective treatments target the **immune attack**:\n- **Plasma exchange** physically removes the offending antibodies; **IVIG** neutralises/modulates them.\n- Both **halve recovery time** — the core disease-modifying options.\n- **Steroids alone don't help** in GBS (unlike many other inflammatory conditions), a classic exam point.\n\n>> Note you generally use **one** of plasma exchange OR IVIG (they aren't combined for added benefit), and start supportive care regardless — the specific therapy speeds recovery but survival depends on respiratory/autonomic support.",
+         "opts": [
+          "Oral antibiotics for 10 days",
+          "Plasma exchange or IVIG; steroids alone are ineffective",
+          "High-dose steroids alone are curative",
+          "Antiviral aciclovir for all cases"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "When should a GBS patient be admitted to ICU?",
+         "a": "**For labile dysautonomia, a forced vital capacity of less than 20 mL/kg, or severe bulbar palsy — and any patient with clinical signs of respiratory compromise. About one-third of patients require ICU, mainly for respiratory failure.**\n\n## Understanding it\nEach criterion flags a way GBS can kill quickly:\n- **FVC < 20 mL/kg** — impending ventilatory failure.\n- **Severe bulbar palsy** — loss of airway protection → aspiration.\n- **Labile dysautonomia** — dangerous swings in heart rate and blood pressure.\n\n>> ICU care then provides respiratory therapy, cardiac monitoring, safe nutrition, and surveillance for infection. The threshold is deliberately **low and pre-emptive** — you admit before collapse, guided by falling FVC/NIF, not after respiratory arrest.",
+         "opts": [
+          "Only after full recovery",
+          "All patients routinely regardless of severity",
+          "Any patient with mild tingling",
+          "Labile dysautonomia, FVC < 20 mL/kg, or severe bulbar palsy"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What supportive and rehabilitative measures are used in GBS?",
+         "a": "**DVT prophylaxis, autonomic management (atropine for symptomatic bradycardia; short-acting beta-blocker or nitroprusside for hypertension; IV fluids and supine positioning for hypotension), respiratory support, pain management, and physical and occupational therapy — with monitoring even after recovery as some relapse.**\n\n## Understanding it\nSupportive care covers the complications of being paralysed and dysautonomic:\n- **DVT prophylaxis** because paralysed limbs clot (a major sequela).\n- **Autonomic drugs** to smooth the dangerous BP/HR swings.\n- **Physio/OT** to rebuild strength, mobility, balance and independence during recovery.\n\n>> Because recovery is gradual and **relapse can occur**, monitoring continues after discharge. This supportive scaffold is what carries the patient through the benign-but-dangerous natural course while the specific therapy works.",
+         "opts": [
+          "Strict bed rest with no therapy",
+          "Immediate surgery on the spinal cord",
+          "Lifelong steroids only",
+          "DVT prophylaxis, autonomic management, physio and occupational therapy"
+         ],
+         "ans": 3
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
       },
       {
        "id": "pediatrics-50",
@@ -11737,14 +13351,255 @@ window.MEDBANK = {
        "day": "",
        "date": "05/08/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
-       "imgBase": null,
-       "imgCount": 0,
-       "ready": false
+       "note": "# Neuromuscular Disorders (NMD)\n\n*Dr Chidomere R.I., Paediatrician/Child Neurologist — Paediatrics, topic 139*\n\n## Outline\n\nIntroduction · The motor unit · Types & aetiology · Epidemiology · Pathophysiology · Diagnosis (history, Gowers sign, investigations, EMG/NCV) · Common NMDs — Bell's palsy, Myasthenia gravis, Muscular dystrophies (Duchenne)\n\n## Introduction\n\n**Neuromuscular disorder (NMD)** is a broad term for many diseases affecting the **motor unit — the functional unit of the muscle.** They impair skeletal muscle function either **directly** (pathologies of muscle) or **indirectly** (pathologies of nerves or the neuromuscular junction).\n\n> NMDs are characterised by **motor weakness or unusual muscular fatigue**; in some, sensory disturbances and pain are prominent. Aetiologies are **genetic, degenerative, toxic-metabolic and immune-mediated.**\n\nThey account for the **greatest burden of chronic disability in children.** Many are treatable; others progress relentlessly. Quality of life may improve with timely, adequate treatment.\n\n## The motor unit\n\n![The motor unit — a motor neuron and the muscle fibres it innervates](img/motor-unit.jpeg)\n\nEach muscle fibre has a single motor end-plate, though a motor neuron's axon branches to many fibres; when an impulse is transmitted, all connected fibres contract together. **A motor unit = a motor neuron and the muscle fibres it innervates.**\n\n![Components of the motor unit — anterior horn cell, dorsal root ganglion, nerve, NMJ, muscle](img/motor-unit-reflex-arc.png)\n\nAny pathology interfering with a component of the motor unit causes an NMD:\n\n- The **motor neuron** (cell body in the **anterior horn** of the spinal cord)\n- The **sensory neuron** (cell body in the **dorsal root ganglion**)\n- The **neuromuscular junction**\n- The **muscle** itself\n\n## Types, aetiology & epidemiology\n\n![Neuromuscular disorders in children — genetic vs acquired](img/nmd-classification.jpeg)\n\nNMDs are **acquired or genetic (gene mutation)**. Other causes: degeneration, autoimmunity, toxins, medications, malnutrition, metabolic derangements, hormone imbalance, infection, nerve compression/entrapment, compromised blood supply, trauma, and unknown factors.\n\n- Overall paediatric prevalence **36.9 per 100,000**. Poliomyelitis has declined globally with immunisation.\n- **In Nigeria: peripheral neuropathy is the most common type (63.0%)** (hospital-based, Oluwatosin et al 2021, Ile-Ife). **Acquired NMDs predominate**, possibly due to scarce electrophysiologic and genetic testing.\n\n## Diagnosis\n\n**History** — NMDs are usually **progressive** and often cause **postural abnormalities and deformities**. Parents seek help because of **frequent falls, difficulty climbing stairs, or inability to run or rise from the floor**. For acquired types, ask about preceding/ongoing acute illness. **Hypotonia** (diffuse/paralytic) affects torso and limbs. Symptoms: decreased strength, numbness, paraesthesia, muscle atrophy, myalgia, fasciculations; paucity of facial expression, limited ocular tracking, swallowing disorders.\n\n**Examination — motor function:**\n\n- **Inspection** — muscle atrophy, **Gower sign**, fasciculations.\n- **Palpation** — tone (hypotonia), reflexes (reduced/absent), power (reduced).\n\n> **Gowers sign** appears with weakness of the **pelvic girdle or proximal lower-limb muscles**: the child must use the **hands and arms to \"walk\" up their own body** from a squatting position.\n\n**Investigations:**\n\n- **Muscle enzymes — creatine kinase (CK):** normally **< 200 IU/L**. A rise to **at least 3× the upper limit** (sometimes > 1000 IU/L) suggests **congenital muscular dystrophy or infantile spinal muscular atrophy.**\n- **EMG** — tests muscle response to stimulation/contraction; detects a **myopathic pattern** (disease of muscle only).\n- **Nerve conduction velocity (NCV)** — detects **loss of motor nerve fibres (neuropathic/denervation pattern)** in motor-neuron disease.\n- Combining EMG + NCV separates **demyelinating** neuropathies (marked latency prolongation, very low conduction velocities) from **axonal** neuropathies (decreased response, normal latency/velocity).\n- **Muscle and nerve biopsy; CSF analysis; genetic testing** (important for inherited NMDs).\n\n## Bell's palsy\n\n**Acute dysfunction of the facial nerve** — the commonest cause of sudden facial weakness. An **isolated lower motor neurone facial nerve palsy** not associated with other cranial neuropathies.\n\n- **Partial or complete paralysis of upper AND lower facial muscles**, **unilateral in > 99%**, either side, sexes equal. **Sudden onset** developing over hours to a few days. **Ear pain near the mastoid** is the first sign half the time; also neck pain and tingling around the lips.\n- Commonly follows **upper respiratory tract infection** (post-infectious demyelination); viruses implicated — **HSV**, EBV, mumps, rubella. Results from **oedema and inflammation of the nerve within the facial canal** (temporal bone).\n- **Diagnosis** — mainly clinical; **Bell's phenomenon** present; EMG for facial muscle activity.\n- **Management** — mostly conservative: **eye drops** to keep the cornea moist, **prednisolone** (useful), **aciclovir** if HSV suspected. **Prognosis** — good in children; **> 85% recover completely**, most within 3 weeks.\n\n## Myasthenia gravis (MG)\n\nAn **acquired autoimmune neuromuscular blockade**, characterised by **weakness of skeletal muscles and fatigability on exertion.**\n\n![The neuromuscular junction — ACh release, receptors and acetylcholinesterase](img/neuromuscular-junction.jpeg)\n\n- **Epidemiology** — US incidence 2/1,000,000; **female:male = 6:4**; all ages but uncommon in childhood; occurs in infancy as congenital or transient neonatal MG.\n- **Clinical types:** **Acquired** (autoimmune); **Congenital** (in infants of non-myasthenic mothers, no remission, persists); **Transient** (infants of myasthenic mothers via transplacental antibodies, improves as antibodies disappear); **Familial** (rare, autosomal recessive, no AChR antibodies).\n- **Pathophysiology:** antibodies target the **acetylcholine receptor (AChR)** at the NMJ → **fewer available receptors.** ACh release is normal but the postsynaptic membrane is **less responsive** → progressive muscular weakness.\n- **Clinical features:** **fluctuating weakness increased by exertion**; **ptosis and diplopia**; proximal > distal limb weakness; spreads **ocular → facial → bulbar → truncal/limb.** Sensation and deep tendon reflexes **normal**; **no fasciculations, no sensory loss, no myalgia.** Bulbar weakness (nasal speech, regurgitation, dysphagia); respiratory muscle weakness may cause **fatal respiratory failure.** Ptosis increases on sustained upgaze (30–90 s); repetitive fist opening/closing fatigues hand muscles. May coexist with other autoimmune diseases (Graves, SLE, JRA).\n- **Investigations:** **EMG — decremental response to repetitive stimulation** (reversed by a cholinesterase inhibitor); anti-AChR antibodies (inconsistent); **normal CK**; **chest X-ray/CT — enlarged thymus** (usually not thymoma); **Tensilon (edrophonium 0.2 mg/kg IV or neostigmine 0.4 mg/kg IM) test** — ptosis and ophthalmoplegia improve within seconds, lasting 1–2 min.\n- **Treatment:** **cholinesterase inhibitors** (neostigmine, pyridostigmine) are first-line; **prednisolone** for long-term; **thymectomy** (most effective with high anti-AChR titres; ineffective in congenital/familial forms); **plasmapheresis** and **IVIG** for non-responders. Neonatal transient MG needs cholinesterase inhibitors only briefly.\n- **Complications:** intercurrent infection (aminoglycosides like **gentamicin can precipitate myasthenic crisis**), acute respiratory failure, aspiration pneumonitis, malnutrition from dysphagia.\n\n## Muscular dystrophies\n\nDistinguished by **four obligatory criteria:** (1) a **primary myopathy**, (2) a **genetic basis**, (3) a **progressive course**, and (4) **degeneration and death of muscle fibres** at some stage. Common examples: **Duchenne, Becker, and limb-girdle.**\n\n### Duchenne muscular dystrophy (DMD)\n\n![Duchenne muscular dystrophy — classic clinical signs](img/dmd-clinical-signs.jpeg)\n\nThe **most common hereditary neuromuscular disease**, affecting all races; **X-linked recessive**; due to **deficiency of dystrophin** with excessive muscle-fibre necrosis. **Becker** is a milder form.\n\n- **Clinical:** **boys exclusively**; rarely symptomatic at birth; early gross motor skills normal or slightly delayed. Hip-girdle weakness by the **2nd year**; an early **Gowers sign by age 3**, fully expressed by 5–6; a **Trendelenburg (waddling) gait**. Weakness progresses into the 2nd decade; distal muscles relatively spared. Respiratory involvement → weak cough, frequent chest infections; pharyngeal weakness → aspiration, nasal speech. Late: incontinence, contractures (ankles, knees, hips, elbows), scoliosis/lordosis.\n- **Classic signs:** **calf pseudohypertrophy** with thigh wasting; hypertrophied tongue (no fasciculations); **gradual loss of deep tendon reflexes**. **Cardiomyopathy is a constant feature.** Intellectual impairment in all (significant in 20–30%). Wheelchair-bound by early adolescence; **death from respiratory failure and cardiac failure by ~18 years.**\n\n![DMD progression — from early walking to wheelchair dependence](img/dmd-progression-timeline.jpeg)\n\n- **Diagnosis:** **CK greatly elevated even at birth**; cardiac assessment (echo, ECG, CXR) periodically; **EMG — myopathic, no denervation**; normal nerve conduction; **muscle biopsy diagnostic**; immunohistochemistry for deficient/defective **dystrophin.**\n- **Management:** physiotherapy with orthotics; anti-cardiac-failure regimen (digoxin, diuretics); antibiotics for chest infections; **steroid trial**; gene-based approaches to restore dystrophin.\n\n## References\n\nNelson Textbook of Paediatrics; Azubuike & Nkanginieme, Paediatrics and Child Health in a Tropical Region; lecture material of Dr Chidomere R.I.\n",
+       "simplified": "# Neuromuscular Disorders — the simple version\n\n## The master idea: localise along the motor unit\n\n> **A motor unit = one motor neuron + all the muscle fibres it controls.** An NMD is anything that breaks this circuit.\n\nFour places it can break — memorise these, because every disease in the topic lives at one of them:\n\n> **Anterior horn cell** (SMA, polio) · **peripheral nerve** (neuropathy, GBS) · **neuromuscular junction** (myasthenia) · **muscle** (dystrophies).\n\nYour whole job when a child is weak: **which of the four is it?**\n\n---\n\n## The clues that localise\n\n**History = proximal weakness:**\n\n> **Frequent falls, can't climb stairs, can't get up off the floor** → weak hips/pelvic girdle.\n\n**Gowers sign:**\n\n> The child **\"climbs up their own legs\"** with their hands to stand — classic proximal weakness (think Duchenne).\n\n**Three tests:**\n\n> **CK ≥3× normal → muscle disease** (dystrophy/SMA). **EMG myopathic → muscle. NCV neuropathic → nerve.** Together: demyelinating (slow) vs axonal (low amplitude, normal speed).\n\n---\n\n## Bell's palsy — the forehead question\n\n> **Bell's = a lower motor neuron facial palsy → the WHOLE half of the face, forehead included.**\n\nThat's the exam discriminator:\n\n> **Can't wrinkle the forehead → LMN (Bell's).** Forehead spared → UMN (stroke — worry).\n\nPost-viral swelling of the nerve in its bony canal (HSV). Treat: **eye drops (cornea!) + prednisolone ± aciclovir.** Kids do great — **>85% fully recover, usually within 3 weeks.**\n\n---\n\n## Myasthenia gravis — fatigability\n\n> **Antibodies destroy acetylcholine RECEPTORS at the junction.** ACh is released fine, but the muscle can't \"hear\" it.\n\nThe signature:\n\n> **Weakness that WORSENS with use, improves with rest.** Starts in the eyes (ptosis, diplopia), spreads down.\n\nTwo vital *normals* that place it at the junction:\n\n> **Normal reflexes, normal sensation, NO fasciculations.**\n\nConfirm: **decremental EMG** and the **Tensilon test** (give a cholinesterase inhibitor → weakness melts away for 1–2 min). Treat: **cholinesterase inhibitors** first, then **steroids/thymectomy** (thymectomy only helps the antibody-driven type), **plasmapheresis/IVIG** for resistant cases. Beware **gentamicin** — it can trigger a crisis.\n\n---\n\n## Duchenne muscular dystrophy — the prototype\n\nA dystrophy must be all four: **primary muscle disease · genetic · progressive · muscle fibres die.**\n\n> **DMD: X-linked recessive → BOYS only. No dystrophin → fragile muscle → necrosis.**\n\nWatch the toddler-to-teen story:\n\n> **Gowers sign by 3 · waddling gait · big weak calves (pseudohypertrophy) + wasted thighs · constant cardiomyopathy · wheelchair by adolescence · death ~18** from respiratory/cardiac failure.\n\nDiagnose: **huge CK (even at birth) → myopathic EMG → muscle biopsy + dystrophin stain.** Manage (no cure yet): **physio/orthotics, heart-failure meds, steroids, treat chest infections, gene therapy.**\n\n---\n\n## Putting it together\n\nEvery NMD sits at one of **four points on the motor unit** — anterior horn, nerve, junction, or muscle — and the whole skill is **localising**. Proximal weakness + **Gowers sign** + **very high CK** point to **muscle** (Duchenne). **Fatigability with normal reflexes/sensation** points to the **junction** (myasthenia). A **whole-side facial palsy including the forehead** is **Bell's** (LMN, benign). Use **CK, EMG and NCV** to nail down muscle vs nerve, and remember the treatable ones — Bell's recovers, myasthenia responds to cholinesterase inhibitors, while Duchenne is managed supportively.\n",
+       "pdf": "content/Pediatrics/Chidomere/Neuromuscular%20Disorders/note.pdf",
+       "primer": [
+        {
+         "q": "What is a neuromuscular disorder, and what is the motor unit?",
+         "lecturer": "A neuromuscular disorder (NMD) is any disease affecting the motor unit — the functional unit of the muscle — impairing skeletal muscle function either directly (muscle disease) or indirectly (disease of nerve or the neuromuscular junction). A motor unit is a motor neuron together with all the muscle fibres it innervates. Pathology in any component — the motor neuron (anterior horn), sensory neuron (dorsal root ganglion), neuromuscular junction, or muscle — produces an NMD.",
+         "explain": "## Step 1: The motor unit is the whole circuit\n\n>> **Motor unit = one motor neuron + all the muscle fibres it controls.**\n\n## Step 2: Four places it can break\n\n- **Anterior horn cell** (motor neuron) — e.g. SMA, polio.\n- **Peripheral nerve** — neuropathies, GBS.\n- **Neuromuscular junction** — myasthenia gravis.\n- **Muscle** — muscular dystrophies, myopathies.\n\n## Step 3: Direct vs indirect\n\n>> Muscle disease weakens muscle **directly**; nerve/NMJ disease weakens it **indirectly** by cutting off its signal. Localising the lesion to one of the four sites is the whole diagnostic game.",
+         "tie": "This anatomical framework organises every specific disease in the topic — Bell's palsy (nerve), myasthenia gravis (NMJ), Duchenne (muscle) — so learning to localise along the motor unit is the master skill that makes the rest fall into place."
+        },
+        {
+         "q": "How are neuromuscular disorders diagnosed, including the Gowers sign and CK?",
+         "lecturer": "NMDs are usually progressive, presenting with frequent falls, difficulty climbing stairs, inability to rise from the floor, and hypotonia. Examination shows muscle atrophy, fasciculations, the Gowers sign, reduced tone, power and reflexes. The Gowers sign — using the hands to walk up one's own body from squatting — indicates pelvic-girdle/proximal weakness. Creatine kinase (normally <200 IU/L) rising to at least 3× normal (sometimes >1000) suggests muscular dystrophy or spinal muscular atrophy. EMG shows a myopathic pattern in muscle disease; nerve conduction velocity shows a neuropathic pattern in nerve disease.",
+         "explain": "## Step 1: The history is proximal weakness\n\n>> **Frequent falls, can't climb stairs, can't rise from the floor** — all point to **proximal (pelvic-girdle)** weakness.\n\n## Step 2: Gowers sign explained\n\n>> With weak hips, the child **'climbs up their own legs'** with their hands to stand — a classic sign of proximal lower-limb weakness.\n\n## Step 3: CK and EMG/NCV localise\n\n>> **CK >3× normal** → muscle disease (dystrophy/SMA). **EMG myopathic** = muscle; **NCV neuropathic** = nerve. Together they separate demyelinating from axonal neuropathies.",
+         "tie": "These tools operationalise the localisation principle: the Gowers sign flags proximal muscle weakness, a very high CK points to the muscle, and EMG/NCV pin the lesion to muscle vs nerve — directly guiding which of the specific NMDs you're dealing with."
+        },
+        {
+         "q": "Describe Bell's palsy and its management.",
+         "lecturer": "Bell's palsy is acute dysfunction of the facial nerve — the commonest cause of sudden facial weakness — presenting as an isolated lower motor neurone facial palsy affecting upper AND lower facial muscles, unilateral in over 99% of cases, with sudden onset over hours to days and often initial ear pain near the mastoid. It commonly follows an upper respiratory tract infection (implicated viruses include HSV), from oedema and inflammation of the nerve in the facial canal. Diagnosis is mainly clinical (Bell's phenomenon present). Management is largely conservative — eye drops to protect the cornea, prednisolone, and aciclovir if HSV is suspected — with over 85% of children recovering completely, most within 3 weeks.",
+         "explain": "## Step 1: It's a lower motor neuron facial palsy\n\n>> LMN palsy weakens the **whole side of the face, upper AND lower** — unlike an upper motor neuron lesion (e.g. stroke) which spares the forehead.\n\n## Step 2: Why the forehead matters\n\n>> Because Bell's affects the forehead too, the patient **can't wrinkle the brow or close the eye** — hence eye drops to protect the exposed cornea.\n\n## Step 3: Cause and cure\n\n>> Post-viral **oedema/inflammation in the facial canal** (HSV etc.) → treat with **steroids ± aciclovir**; prognosis in children is excellent (>85% full recovery).",
+         "tie": "Bell's palsy is the topic's example of an isolated peripheral-nerve NMD, and the upper-vs-lower-face distinction is the high-yield clinical discriminator that separates a benign LMN Bell's palsy from a dangerous UMN cause like stroke."
+        },
+        {
+         "q": "Explain the pathophysiology, clinical features and Tensilon test of myasthenia gravis.",
+         "lecturer": "Myasthenia gravis is an acquired autoimmune blockade in which antibodies target the acetylcholine receptor at the neuromuscular junction, reducing available receptors so that the postsynaptic membrane is less responsive despite normal ACh release — causing progressive, fatigable weakness. It presents with fluctuating weakness worsened by exertion, ptosis and diplopia, proximal-predominant limb weakness spreading ocular→facial→bulbar→limb, with normal sensation and reflexes and no fasciculations. EMG shows a decremental response to repetitive stimulation; the Tensilon (edrophonium) test transiently improves ptosis and ophthalmoplegia within seconds.",
+         "explain": "## Step 1: The lesion is the receptor\n\n>> Antibodies destroy **AChR** at the NMJ. ACh is released normally but there are **too few receptors to respond** → weakness.\n\n## Step 2: The signature is FATIGABILITY\n\n>> Weakness **worsens with use and improves with rest** — ptosis increases on sustained upgaze; fists tire on repeated clenching. It starts **ocular (ptosis, diplopia)** and spreads.\n\n## Step 3: Confirming it\n\n>> **EMG decremental response**; the **Tensilon test** (a cholinesterase inhibitor) briefly floods the junction with ACh and **transiently reverses** the weakness.\n\n>> Note: **reflexes and sensation are NORMAL; no fasciculations** — this separates MG from nerve/muscle disease.",
+         "tie": "MG is the topic's neuromuscular-junction disease, and its hallmark fatigability plus normal reflexes/sensation is the clinical fingerprint that localises the lesion to the NMJ — while its treatment (cholinesterase inhibitors, thymectomy) follows directly from the receptor pathophysiology."
+        },
+        {
+         "q": "Describe Duchenne muscular dystrophy — inheritance, features and diagnosis.",
+         "lecturer": "Duchenne muscular dystrophy is the most common hereditary neuromuscular disease, X-linked recessive, affecting boys exclusively, caused by deficiency of dystrophin with excessive muscle-fibre necrosis. Hip-girdle weakness appears by the 2nd year, an early Gowers sign by age 3 (fully expressed by 5–6), and a Trendelenburg waddling gait; classic signs are calf pseudohypertrophy with thigh wasting and gradual loss of reflexes. Cardiomyopathy is constant and intellectual impairment universal; children are wheelchair-bound by early adolescence and die of respiratory/cardiac failure by about 18. CK is greatly elevated even at birth, EMG is myopathic, and muscle biopsy with dystrophin immunohistochemistry is diagnostic.",
+         "explain": "## Step 1: The dystrophy criteria and the gene\n\n>> Dystrophies are **primary, genetic, progressive** myopathies with **muscle-fibre death**. DMD = **X-linked recessive** → **boys only**, from **absent dystrophin**.\n\n## Step 2: The classic signs\n\n>> **Gowers sign by age 3**, **waddling gait**, **calf pseudohypertrophy** with wasted thighs, and a **constant cardiomyopathy**.\n\n## Step 3: Diagnosis and course\n\n>> **CK is huge, even at birth**; **muscle biopsy + dystrophin immunohistochemistry** confirm it. Relentless: **wheelchair by adolescence, death ~18** from respiratory/cardiac failure.",
+         "tie": "DMD is the topic's flagship muscle (dystrophic) disease and ties the whole lecture together — the Gowers sign links back to proximal weakness, the enormous CK to muscle-fibre necrosis, and dystrophin to the genetic basis, illustrating a primary myopathy end to end."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is a neuromuscular disorder (NMD)?",
+         "a": "**Any disease affecting the motor unit — the functional unit of the muscle — impairing skeletal muscle function directly (muscle disease) or indirectly (disease of nerve or the neuromuscular junction).**\n\n## Understanding it\nThe definition centres on one structure — the **motor unit** — and two routes to weakness:\n- **Direct** — the muscle itself is diseased (muscular dystrophy).\n- **Indirect** — the muscle is healthy but its **signal is cut off** by nerve or junction disease (neuropathy, myasthenia).\n\n>> NMDs present as **motor weakness or unusual fatigability**, sometimes with sensory disturbance or pain. They cause the **greatest burden of chronic disability in children**, and crucially, **many are treatable** — so identifying them matters.",
+         "opts": [
+          "A disorder confined to smooth muscle",
+          "An inflammatory joint disease",
+          "A disease only of the brain and spinal cord",
+          "Any disease affecting the motor unit, impairing skeletal muscle directly or indirectly"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the motor unit, and what are its four components that can be diseased?",
+         "a": "**A motor unit is a motor neuron together with all the muscle fibres it innervates. Disease of any component causes an NMD: the motor neuron (anterior horn cell), the sensory neuron (dorsal root ganglion), the neuromuscular junction, or the muscle itself.**\n\n## Understanding it\nTrace the circuit from spinal cord to muscle and note where each disease sits:\n- **Anterior horn cell** (motor neuron) — spinal muscular atrophy, polio.\n- **Peripheral nerve** — neuropathies, GBS.\n- **Neuromuscular junction** — myasthenia gravis.\n- **Muscle** — muscular dystrophies, myopathies.\n\n>> This is the master framework of the whole topic. When a child presents with weakness, your first job is to **localise the lesion** to one of these four sites — everything else (which tests, which disease) follows from that.",
+         "opts": [
+          "Artery, vein, capillary and lymphatic",
+          "Motor neuron (anterior horn), sensory neuron (dorsal root ganglion), NMJ, and muscle",
+          "Brain, meninges, ventricles and CSF",
+          "Bone, cartilage, tendon and ligament"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How do the aetiology and epidemiology of NMDs break down, especially in Nigeria?",
+         "a": "**NMDs are acquired or genetic (gene mutation), with other causes including autoimmunity, toxins, metabolic and hormonal derangements, and infection. Overall paediatric prevalence is 36.9 per 100,000. In Nigeria, peripheral neuropathy is the most common type (63.0%), and acquired NMDs predominate — possibly due to scarce electrophysiologic and genetic testing.**\n\n## Understanding it\nTwo big buckets, with a local twist:\n- **Genetic** (e.g. Duchenne) vs **acquired** (autoimmune, toxic, infectious).\n- Globally, polio has declined with immunisation.\n\n>> The Nigerian data matter for exams and practice: **acquired peripheral neuropathy dominates (63%)**, partly a real pattern and partly because genetic testing is scarce, so inherited disorders may be under-diagnosed. Context shapes the differential you reach for.",
+         "opts": [
+          "Muscular dystrophy is commonest in Nigeria",
+          "Only caused by vitamin deficiency",
+          "Acquired or genetic; in Nigeria peripheral neuropathy is commonest (63%), acquired predominate",
+          "Entirely genetic with no acquired causes"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What history points toward a neuromuscular disorder?",
+         "a": "**A usually progressive course with frequent falls, difficulty climbing stairs, inability to run or rise from the floor, postural deformities, and hypotonia affecting torso and limbs — plus numbness, paraesthesia, myalgia, fasciculations, poor facial expression, limited ocular tracking, or swallowing difficulty.**\n\n## Understanding it\nThe classic complaints all describe **proximal weakness**:\n- **Difficulty climbing stairs / rising from the floor / frequent falls** = weak **hip and pelvic-girdle** muscles.\n- **Swallowing and facial/ocular** symptoms hint at bulbar/cranial involvement.\n\n>> The word **progressive** is important — most NMDs worsen over time, and parents typically present because the child is falling behind peers or losing an ability they once had. That trajectory, plus proximal weakness, should prompt a neuromuscular work-up.",
+         "opts": [
+          "Fever with a productive cough",
+          "Sudden painless visual loss",
+          "Progressive weakness — frequent falls, trouble climbing stairs, rising from the floor, hypotonia",
+          "Episodic abdominal pain after meals"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the Gowers sign and what does it indicate?",
+         "a": "**Gowers sign is when a child uses their hands to 'walk up' their own legs and thighs in order to rise from a squatting/seated position — indicating weakness of the pelvic girdle or proximal lower-limb muscles.**\n\n## Understanding it\nIt's a compensation for weak hips:\n- Normally you stand up using your hip and thigh muscles.\n- If those **proximal muscles are too weak**, the child must **push on their own thighs with their hands**, effectively climbing up their body to get upright.\n\n>> It's a hallmark of **proximal muscle weakness** and is classically associated with **Duchenne muscular dystrophy** (evident by age 3). Seeing a child rise this way is a strong, examinable clue pointing to a myopathy.",
+         "opts": [
+          "Inability to smell (anosmia)",
+          "A murmur heard on standing",
+          "A brisk knee jerk on tapping",
+          "Using the hands to 'walk up' one's own legs to stand — proximal/pelvic-girdle weakness"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "How is creatine kinase (CK) used in diagnosing NMDs?",
+         "a": "**CK is normally below 200 IU/L; a rise to at least 3× the upper limit of normal (sometimes over 1000 IU/L) suggests a congenital muscular dystrophy or infantile spinal muscular atrophy.**\n\n## Understanding it\nCK is an enzyme that leaks out of **damaged muscle**:\n- Muscle-fibre necrosis (as in dystrophies) spills large amounts of CK into the blood.\n- So a **markedly elevated CK (≥3× normal)** points strongly to a **primary muscle disease**.\n\n>> In Duchenne the CK is **greatly elevated even at birth**, before symptoms appear — making it a useful early screen. A normal or only mildly raised CK, by contrast, argues against a necrotising myopathy and points elsewhere along the motor unit.",
+         "opts": [
+          "Markedly raised CK (≥3× normal) suggests muscular dystrophy or spinal muscular atrophy",
+          "CK is only raised in Bell's palsy",
+          "CK measures kidney function",
+          "A low CK confirms myasthenia gravis"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How do EMG and nerve conduction studies localise an NMD?",
+         "a": "**EMG detects a myopathic pattern in diseases of muscle only, while nerve conduction velocity (NCV) detects loss of motor nerve fibres (a neuropathic/denervation pattern) in motor-neuron disease. Combined, they separate demyelinating neuropathies (markedly prolonged latency, very low conduction velocities) from axonal neuropathies (decreased response with normal latency/velocity).**\n\n## Understanding it\nEach test interrogates a different part of the motor unit:\n- **EMG → the muscle**: a **myopathic pattern** means the muscle itself is diseased.\n- **NCV → the nerve**: a **neuropathic pattern** means motor nerve fibres are lost.\n\n>> Together they answer 'muscle or nerve?', and if nerve, 'demyelinating or axonal?' — **demyelinating** = slow conduction and long latencies (myelin problem); **axonal** = reduced amplitude with normal speed (axon problem). This pairing is the electrophysiological core of localisation.",
+         "opts": [
+          "EMG myopathic = muscle disease; NCV neuropathic = nerve disease",
+          "They measure only heart rhythm",
+          "EMG tests hearing; NCV tests vision",
+          "Both are normal in all NMDs"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is Bell's palsy?",
+         "a": "**Acute dysfunction of the facial nerve — the commonest cause of sudden facial weakness — presenting as an isolated lower motor neurone facial palsy affecting the upper AND lower facial muscles, unilateral in over 99% of cases, with sudden onset over hours to days.**\n\n## Understanding it\nThe key is that it is a **lower motor neuron (LMN)** facial palsy:\n- An LMN lesion weakens the **entire half of the face, including the forehead**.\n- This contrasts with an **upper motor neuron** lesion (like a stroke), which **spares the forehead** because the forehead has bilateral cortical input.\n\n>> So the discriminating question is always: **can the patient wrinkle their forehead?** If the forehead is involved (can't wrinkle it), the lesion is LMN — consistent with Bell's palsy rather than a central cause.",
+         "opts": [
+          "An upper-motor-neuron palsy sparing the forehead",
+          "A bilateral tongue paralysis",
+          "A palsy of the oculomotor nerve",
+          "Acute lower-motor-neuron facial nerve palsy affecting the whole half of the face"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What causes Bell's palsy and how is it managed?",
+         "a": "**It commonly follows an upper respiratory tract infection (post-infectious demyelination; HSV and others implicated), from oedema and inflammation of the nerve within the facial canal of the temporal bone. Management is largely conservative: eye drops to protect the cornea, prednisolone, and aciclovir if HSV is suspected — with over 85% of children recovering completely, most within 3 weeks.**\n\n## Understanding it\nMechanism drives the treatment:\n- The nerve **swells within the rigid facial canal**, and the tight bony channel compresses it → palsy.\n- **Steroids (prednisolone)** reduce the oedema/inflammation; **aciclovir** targets a suspected herpes trigger.\n- **Eye drops** are essential because the eye can't fully close, risking corneal drying.\n\n>> The reassuring prognosis (**>85% full recovery in children, usually within 3 weeks**) means treatment is supportive and anti-inflammatory rather than aggressive.",
+         "opts": [
+          "A brain tumour; treat with radiotherapy",
+          "Bacterial meningitis; treat with IV penicillin",
+          "Post-viral nerve oedema (HSV); treat with eye care, prednisolone, ± aciclovir",
+          "Stroke; treat with thrombolysis"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the pathophysiology of myasthenia gravis?",
+         "a": "**Antibodies are directed against the acetylcholine receptor (AChR) at the neuromuscular junction, reducing the number of available receptors. ACh release from the nerve terminal is normal, but the postsynaptic muscle membrane is less responsive, and this lack of response to ACh produces progressive muscular weakness.**\n\n## Understanding it\nThe defect is at the **receiving end** of the junction:\n- The nerve still **releases ACh normally**.\n- But autoantibodies have **destroyed/blocked many AChRs**, so the muscle membrane can't 'hear' the signal.\n- Fewer working receptors → weaker, less reliable muscle activation.\n\n>> This explains the **fatigability**: with repeated firing, ACh stores dwindle and the already-reduced receptor pool can't sustain contraction, so the muscle tires quickly. It also explains why **cholinesterase inhibitors help** — they keep ACh around longer to compete for the scarce receptors.",
+         "opts": [
+          "Antibodies against acetylcholine receptors reduce available receptors at the NMJ",
+          "Demyelination of peripheral nerves",
+          "Loss of anterior horn cells",
+          "Deficiency of dystrophin in muscle"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the clinical features of myasthenia gravis?",
+         "a": "**Fluctuating weakness increased by exertion, with ptosis and diplopia; proximal-predominant, symmetric limb weakness that spreads ocular → facial → bulbar → truncal/limb. Sensation and deep tendon reflexes are normal, with no fasciculations, no sensory loss and no myalgia. Bulbar weakness causes nasal speech, regurgitation and dysphagia; respiratory muscle weakness can cause fatal respiratory failure.**\n\n## Understanding it\nThe signature is **fatigability** — weakness that **worsens with use and improves with rest**:\n- **Ptosis increases on sustained upgaze (30–90 s)**; repeated fist clenching tires the hand; arms can't stay elevated beyond 1–2 minutes.\n- It typically **starts in the eyes** (ptosis, diplopia) and spreads downward.\n\n>> Two negative findings are diagnostically vital: **normal reflexes and sensation, and no fasciculations.** These place the lesion at the **NMJ** (not nerve or anterior horn), separating MG from neuropathies and motor-neuron disease.",
+         "opts": [
+          "Spasticity and hyperreflexia",
+          "Fixed weakness that improves with exertion",
+          "Areflexia with severe sensory loss",
+          "Fatigable weakness worse with exertion; ptosis and diplopia; normal reflexes and sensation"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the clinical types of myasthenia gravis?",
+         "a": "**Acquired (usually autoimmune); Congenital (in infants of non-myasthenic mothers, no spontaneous remission, persists with age); Transient neonatal (in infants of myasthenic mothers via transplacental antibodies, improving as antibodies disappear); and Familial (rare, autosomal recessive, not associated with plasma AChR antibodies).**\n\n## Understanding it\nSeparate them by cause and course:\n- **Acquired** — the classic autoimmune disease.\n- **Transient neonatal** — the baby borrowed the **mother's antibodies** across the placenta; it **resolves** once those antibodies clear (needs cholinesterase inhibitors only briefly).\n- **Congenital** — a genetic NMJ defect in a baby of a **healthy mother**; it **persists** (not antibody-mediated).\n- **Familial** — rare, autosomal recessive, no AChR antibodies.\n\n>> The key contrast: **transient neonatal improves** (maternal antibodies wash out), while **congenital persists** (a structural genetic problem) — and neither congenital nor familial forms respond to thymectomy.",
+         "opts": [
+          "Acquired, congenital, transient neonatal, and familial",
+          "Type 1 and type 2 diabetes-related",
+          "Ascending and descending forms",
+          "Only acquired and traumatic"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the Tensilon (edrophonium) test?",
+         "a": "**A short-acting cholinesterase inhibitor — usually edrophonium chloride (0.2 mg/kg IV) or neostigmine (0.4 mg/kg IM) — is given, and within seconds the ptosis and ophthalmoplegia improve and fatigability decreases, with effects lasting only 1–2 minutes.**\n\n## Understanding it\nIt's a quick pharmacological confirmation of MG:\n- Blocking acetylcholinesterase **lets ACh linger** in the synaptic cleft.\n- More available ACh **outcompetes the antibody problem**, transiently restoring transmission.\n- The dramatic, brief improvement (seconds, lasting 1–2 min) supports the diagnosis.\n\n>> The logic ties straight back to the pathophysiology: if the problem is too few responsive receptors, then **increasing ACh** temporarily overcomes it — a visible, bedside demonstration that the lesion is at the neuromuscular junction.",
+         "opts": [
+          "An antibody blood test taking days",
+          "A cholinesterase inhibitor transiently improves ptosis/ophthalmoplegia within seconds",
+          "An imaging scan of the thymus",
+          "A test that worsens weakness permanently"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is myasthenia gravis investigated (besides Tensilon)?",
+         "a": "**EMG shows a decremental response to repetitive nerve stimulation (reversed by a cholinesterase inhibitor); anti-ACh antibodies may be assayed but are inconsistently demonstrated; serum CK is normal; chest X-ray/CT may reveal an enlarged thymus (usually not a thymoma); and ECG is usually normal.**\n\n## Understanding it\nEach test reflects the NMJ pathology:\n- **Decremental EMG response** — with repeated stimulation the response **fades**, mirroring the clinical fatigability; a cholinesterase inhibitor reverses it.\n- **Normal CK** — because the muscle itself isn't being destroyed (unlike dystrophies).\n- **Enlarged thymus** — the thymus drives the autoimmune process, which is why **thymectomy** can treat it.\n\n>> The **normal CK** is a useful discriminator: it tells you this is **not a primary myopathy**, steering you toward a junction problem confirmed by the decremental EMG.",
+         "opts": [
+          "Decremental EMG response, anti-AChR antibodies, normal CK, CXR for enlarged thymus",
+          "Very high CK with myopathic biopsy",
+          "Albuminocytologic dissociation in CSF",
+          "Elevated F-waves on nerve conduction"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How is myasthenia gravis treated?",
+         "a": "**Cholinesterase inhibitors (neostigmine, pyridostigmine) are first-line; long-term prednisolone may be effective; thymectomy is most effective in patients with high anti-AChR titres (but ineffective in congenital and familial forms); and plasmapheresis or IVIG are used for non-responders. Neonatal transient MG needs cholinesterase inhibitors only for a few days.**\n\n## Understanding it\nThe treatments each attack a different level:\n- **Cholinesterase inhibitors** — symptomatic: boost available ACh at the junction.\n- **Steroids / thymectomy** — disease-modifying: dampen or remove the source of the autoimmune attack (thymus).\n- **Plasmapheresis / IVIG** — remove or neutralise the antibodies in resistant cases.\n\n>> Note the caveats: **thymectomy only helps antibody-driven (acquired) disease**, not congenital/familial forms, and beware drugs like **gentamicin** which can precipitate a myasthenic crisis. Transient neonatal MG is self-limiting, needing only brief support.",
+         "opts": [
+          "Lifelong antibiotics",
+          "Only supportive care, no drugs work",
+          "Plasma exchange is contraindicated",
+          "Cholinesterase inhibitors first, then steroids, thymectomy, plasmapheresis/IVIG"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the four obligatory criteria that define a muscular dystrophy?",
+         "a": "**(1) It is a primary myopathy, (2) it has a genetic basis, (3) the course is progressive, and (4) degeneration and death of muscle fibres occur at some stage. Common examples are Duchenne, Becker and limb-girdle muscular dystrophies.**\n\n## Understanding it\nAll four must be present — it's a strict definition:\n- **Primary myopathy** — the disease begins in the muscle itself (not nerve).\n- **Genetic** — inherited, not acquired.\n- **Progressive** — it worsens over time.\n- **Muscle-fibre degeneration/death** — active necrosis, which is why CK is so high.\n\n>> These criteria distinguish dystrophies from all other NMDs: an acquired, non-progressive, or nerve-based weakness fails the definition. Duchenne is the prototype that satisfies every criterion.",
+         "opts": [
+          "Infective, painful, febrile, and self-limiting",
+          "Primary myopathy, genetic basis, progressive course, and muscle-fibre degeneration/death",
+          "Neuropathic, sensory, distal, and symmetric",
+          "Acquired, non-genetic, static, and reversible"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Describe the inheritance and cause of Duchenne muscular dystrophy (DMD).",
+         "a": "**DMD is the most common hereditary neuromuscular disease, inherited as an X-linked recessive trait, affecting boys exclusively, and caused by deficiency of dystrophin with excessive necrosis of muscle fibres. Becker muscular dystrophy is a milder form.**\n\n## Understanding it\nThe genetics explain who gets it:\n- **X-linked recessive** → the gene is on the X chromosome, so **boys (XY) are affected** and mothers are typically carriers.\n- The missing protein is **dystrophin**, which normally anchors and stabilises the muscle-fibre membrane.\n\n>> Without dystrophin, muscle fibres are fragile and undergo **repeated necrosis**, releasing huge amounts of CK. **Becker** dystrophy comes from a partially functional dystrophin, hence its milder course. This dystrophin deficiency underlies every downstream feature of the disease.",
+         "opts": [
+          "X-linked recessive, boys only, from dystrophin deficiency",
+          "Acquired autoimmune destruction of muscle",
+          "Mitochondrial inheritance from the father",
+          "Autosomal dominant affecting both sexes"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the classic clinical features of Duchenne muscular dystrophy?",
+         "a": "**Boys exclusively; hip-girdle weakness by the 2nd year, an early Gowers sign by age 3 (fully expressed by 5–6) and a Trendelenburg waddling gait; calf pseudohypertrophy with thigh wasting; gradual loss of deep tendon reflexes; a constant cardiomyopathy; and universal intellectual impairment (significant in 20–30%). Children are wheelchair-bound by early adolescence and typically die of respiratory and cardiac failure by about 18 years.**\n\n## Understanding it\nFollow the progression from toddler to teenager:\n- **Proximal (hip-girdle) weakness** → **Gowers sign** and **waddling gait** in early childhood.\n- **Calf pseudohypertrophy** (enlarged but weak calves, replaced by fat/fibrosis) with **wasted thighs** is the visual hallmark.\n- Weakness is relentless: **wheelchair by adolescence**, with **cardiomyopathy** and respiratory failure causing death by ~18.\n\n>> Two features to underline: the **constant cardiomyopathy** (heart muscle is affected too, needing periodic cardiac assessment) and **pseudohypertrophy** (big calves that are actually weak) — both classic exam points.",
+         "opts": [
+          "Fatigable ptosis relieved by rest",
+          "Sudden facial droop with ear pain",
+          "Gowers sign by 3, waddling gait, calf pseudohypertrophy, cardiomyopathy; wheelchair by adolescence",
+          "Ascending flaccid paralysis after infection"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "How is Duchenne muscular dystrophy diagnosed and managed?",
+         "a": "**Diagnosis: CK is greatly elevated even at birth; EMG shows myopathic features with no denervation; nerve conduction is normal; and muscle biopsy is diagnostic, with immunohistochemistry showing deficient or defective dystrophin. Cardiac assessment (echo, ECG, CXR) is done periodically. Management: physiotherapy with orthotics, anti-cardiac-failure treatment (digoxin, diuretics), antibiotics for chest infections, a steroid trial, and gene-based approaches to restore dystrophin.**\n\n## Understanding it\nDiagnosis moves from cheap to definitive:\n- **Very high CK** (even at birth) → screens strongly for a necrotising myopathy.\n- **EMG myopathic, normal nerve conduction** → localises to muscle, not nerve.\n- **Muscle biopsy + dystrophin immunohistochemistry** → confirms the specific dystrophin deficiency.\n\n>> Management is **supportive and multisystem** because there's no cure yet: physiotherapy/orthotics to preserve mobility, **cardiac and respiratory care** (the causes of death), steroids to slow decline, and emerging **gene therapy** to restore dystrophin. Periodic cardiac assessment is essential given the constant cardiomyopathy.",
+         "opts": [
+          "Very high CK (even at birth), myopathic EMG, muscle biopsy with dystrophin stain; supportive care",
+          "Normal CK with denervation on EMG",
+          "Cured by valve ablation",
+          "Diagnosed by the Tensilon test"
+         ],
+         "ans": 0
+        }
+       ],
+       "imgBase": "content/Pediatrics/Chidomere/Neuromuscular%20Disorders/img/",
+       "imgCount": 6,
+       "ready": true
       },
       {
        "id": "pediatrics-140",
@@ -12940,8 +14795,8 @@ window.MEDBANK = {
    ],
    "hasSyllabus": true,
    "topicCount": 175,
-   "readyCount": 21,
-   "cardCount": 2251,
+   "readyCount": 25,
+   "cardCount": 2347,
    "lecturerCount": 18
   },
   {
@@ -13740,103 +15595,278 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define chemotherapy.",
-         "a": "**The treatment of disease using chemical substances — the ideal agent selectively kills tumour cells with minimal toxicity to normal tissue.**\n\n## Understanding it\nBreak the definition into two halves:\n\n- **\"Chemical substances\"** — drugs, as opposed to surgery (cutting it out) or radiotherapy (radiation).\n- **\"Selectively kills tumour cells with minimal normal-tissue toxicity\"** — this is the *ideal*, the goal every chemo drug aims for.\n\n>> The word **\"ideal\"** matters: no real drug is perfectly selective. That gap between what we want (kill only tumour) and reality (some normal cells die too) is **exactly why side effects exist.**"
+         "a": "**The treatment of disease using chemical substances — the ideal agent selectively kills tumour cells with minimal toxicity to normal tissue.**\n\n## Understanding it\nBreak the definition into two halves:\n\n- **\"Chemical substances\"** — drugs, as opposed to surgery (cutting it out) or radiotherapy (radiation).\n- **\"Selectively kills tumour cells with minimal normal-tissue toxicity\"** — this is the *ideal*, the goal every chemo drug aims for.\n\n>> The word **\"ideal\"** matters: no real drug is perfectly selective. That gap between what we want (kill only tumour) and reality (some normal cells die too) is **exactly why side effects exist.**",
+         "opts": [
+          "The use of cytotoxic drugs to kill or stop the growth of cancer cells",
+          "Surgical removal of tumours",
+          "The use of radiation to shrink tumours",
+          "Hormone tablets to prevent pregnancy"
+         ],
+         "ans": 0
         },
         {
          "q": "Do tumour cells divide faster than normal cells? Explain.",
-         "a": "**No — tumour cells do not have a faster generation time. Tumours grow faster because more of their cells are in the active phases of replication.**\n\n## Understanding it\nThis surprises most students, so slow down:\n\n- **Generation time** = how long one cell takes to complete a cycle and divide. In tumour cells this is **not shorter** than normal.\n- What *is* different: a **larger FRACTION** of tumour cells are dividing at any moment.\n\n>> So the tumour grows faster **as a population**, not because each cell is quicker.\n\n**Why this matters:** chemo attacks **dividing** cells. More dividing cells in the tumour → the tumour takes more damage. But fast-dividing normal tissue (marrow, gut, hair) is caught too — which is why those are the classic side effects."
+         "a": "**No — tumour cells do not have a faster generation time. Tumours grow faster because more of their cells are in the active phases of replication.**\n\n## Understanding it\nThis surprises most students, so slow down:\n\n- **Generation time** = how long one cell takes to complete a cycle and divide. In tumour cells this is **not shorter** than normal.\n- What *is* different: a **larger FRACTION** of tumour cells are dividing at any moment.\n\n>> So the tumour grows faster **as a population**, not because each cell is quicker.\n\n**Why this matters:** chemo attacks **dividing** cells. More dividing cells in the tumour → the tumour takes more damage. But fast-dividing normal tissue (marrow, gut, hair) is caught too — which is why those are the classic side effects.",
+         "opts": [
+          "Tumour cells never divide",
+          "They divide only once then die",
+          "No — generation time is not shorter; more cells are in active replication",
+          "Yes — each tumour cell divides much faster"
+         ],
+         "ans": 2
         },
         {
          "q": "What is doubling time, and how does it differ between primary tumours and metastases?",
-         "a": "**Doubling time is the time it takes for a tumour mass to double in size; metastases generally have faster doubling times than the primary lesion.**\n\n## Understanding it\n- **Doubling time** = a simple measure of how fast a tumour grows — how long to become twice as big.\n- It **varies widely** between different tumours.\n\n>> **Metastases double FASTER than the primary.**\n\nWhy does that matter? Because chemo works on dividing cells, faster-doubling metastases can actually be **more responsive** to chemo — but they also **progress faster** if left untreated. Growth rate cuts both ways."
+         "a": "**Doubling time is the time it takes for a tumour mass to double in size; metastases generally have faster doubling times than the primary lesion.**\n\n## Understanding it\n- **Doubling time** = a simple measure of how fast a tumour grows — how long to become twice as big.\n- It **varies widely** between different tumours.\n\n>> **Metastases double FASTER than the primary.**\n\nWhy does that matter? Because chemo works on dividing cells, faster-doubling metastases can actually be **more responsive** to chemo — but they also **progress faster** if left untreated. Growth rate cuts both ways.",
+         "opts": [
+          "The interval between chemo cycles",
+          "The time for a drug to halve in the blood",
+          "Time for a tumour to double in size; metastases often grow faster than the primary",
+          "The time to double the drug dose"
+         ],
+         "ans": 2
         },
         {
          "q": "How do alkylating agents work, and give examples.",
-         "a": "**They cross-link the strands of DNA, preventing protein synthesis and cell division. Examples: cyclophosphamide, ifosfamide, melphalan.**\n\n## Understanding it\nPicture DNA as a ladder that must **unzip** to be copied.\n\n- Alkylating agents **glue the two strands together** (cross-link them).\n- A glued ladder **can't unzip** → the cell **can't copy its DNA** → it **can't divide.**\n\n>> **Alkylating = \"glue the DNA strands so the cell can't copy them.\"**\n\nRemember the family names by the \"-phosphamide\" ending: **cyclophosphamide, ifosfamide.**"
+         "a": "**They cross-link the strands of DNA, preventing protein synthesis and cell division. Examples: cyclophosphamide, ifosfamide, melphalan.**\n\n## Understanding it\nPicture DNA as a ladder that must **unzip** to be copied.\n\n- Alkylating agents **glue the two strands together** (cross-link them).\n- A glued ladder **can't unzip** → the cell **can't copy its DNA** → it **can't divide.**\n\n>> **Alkylating = \"glue the DNA strands so the cell can't copy them.\"**\n\nRemember the family names by the \"-phosphamide\" ending: **cyclophosphamide, ifosfamide.**",
+         "opts": [
+          "Inhibit microtubules; e.g. vincristine",
+          "Block folate metabolism; e.g. methotrexate",
+          "Intercalate as antibiotics; e.g. doxorubicin",
+          "Cross-link DNA to block replication; e.g. cyclophosphamide, cisplatin"
+         ],
+         "ans": 3
         },
         {
          "q": "How do antimetabolites work, and give examples.",
-         "a": "**They inhibit metabolic processes required for DNA and/or RNA synthesis. Examples: methotrexate, 5-fluorouracil.**\n\n## Understanding it\nTo build DNA/RNA, a cell needs **raw materials** (nucleotide building blocks) made by specific metabolic steps.\n\n- Antimetabolites **look like** those building blocks or **block the enzymes** that make them.\n- The cell tries to use them, but they **jam the machinery** → no DNA/RNA can be built.\n\n>> **Antimetabolite = \"fake building block that blocks DNA/RNA construction.\"**\n\n**Methotrexate** is the classic — remember it, because it's the drug for low-risk gestational trophoblastic disease."
+         "a": "**They inhibit metabolic processes required for DNA and/or RNA synthesis. Examples: methotrexate, 5-fluorouracil.**\n\n## Understanding it\nTo build DNA/RNA, a cell needs **raw materials** (nucleotide building blocks) made by specific metabolic steps.\n\n- Antimetabolites **look like** those building blocks or **block the enzymes** that make them.\n- The cell tries to use them, but they **jam the machinery** → no DNA/RNA can be built.\n\n>> **Antimetabolite = \"fake building block that blocks DNA/RNA construction.\"**\n\n**Methotrexate** is the classic — remember it, because it's the drug for low-risk gestational trophoblastic disease.",
+         "opts": [
+          "Damage DNA as antibiotics; e.g. bleomycin",
+          "Inhibit the mitotic spindle; e.g. vinblastine",
+          "Cross-link DNA; e.g. cyclophosphamide",
+          "Mimic normal metabolites to block DNA synthesis; e.g. methotrexate, 5-FU"
+         ],
+         "ans": 3
         },
         {
          "q": "How do plant alkaloids work, and give examples.",
-         "a": "**They arrest cells in metaphase by binding the microtubular protein used to form the mitotic spindle. Examples: vincristine, vinblastine, etoposide, taxol (paclitaxel).**\n\n## Understanding it\nWhen a cell divides, it builds a **mitotic spindle** (made of microtubules) to **pull the chromosomes apart** into the two daughter cells.\n\n- Plant alkaloids **bind the microtubule protein** so the spindle can't work.\n- The cell gets **stuck in metaphase** — chromosomes lined up but unable to separate → division fails.\n\n>> **Plant alkaloid = \"jam the spindle so the cell freezes in metaphase.\"**\n\n**Vincristine** is the one to link with **neurotoxicity** (nerve damage)."
+         "a": "**They arrest cells in metaphase by binding the microtubular protein used to form the mitotic spindle. Examples: vincristine, vinblastine, etoposide, taxol (paclitaxel).**\n\n## Understanding it\nWhen a cell divides, it builds a **mitotic spindle** (made of microtubules) to **pull the chromosomes apart** into the two daughter cells.\n\n- Plant alkaloids **bind the microtubule protein** so the spindle can't work.\n- The cell gets **stuck in metaphase** — chromosomes lined up but unable to separate → division fails.\n\n>> **Plant alkaloid = \"jam the spindle so the cell freezes in metaphase.\"**\n\n**Vincristine** is the one to link with **neurotoxicity** (nerve damage).",
+         "opts": [
+          "Act as hormones; e.g. tamoxifen",
+          "Cross-link DNA; e.g. cisplatin",
+          "Disrupt microtubules/mitotic spindle; e.g. vincristine, vinblastine, taxanes",
+          "Block folate; e.g. methotrexate"
+         ],
+         "ans": 2
         },
         {
          "q": "What are anti-tumour antibiotics and give examples.",
-         "a": "**Antineoplastic agents isolated as natural products from soil fungi. Examples: bleomycin, adriamycin (doxorubicin), mitomycin, dactinomycin.**\n\n## Understanding it\n- Despite the name \"antibiotics,\" these are **cancer drugs**, not infection drugs.\n- They were **discovered as natural products made by fungi** in the soil.\n\n>> The two to remember for their toxicities: **bleomycin → lungs and skin**, and **adriamycin (doxorubicin) → the heart.**"
+         "a": "**Antineoplastic agents isolated as natural products from soil fungi. Examples: bleomycin, adriamycin (doxorubicin), mitomycin, dactinomycin.**\n\n## Understanding it\n- Despite the name \"antibiotics,\" these are **cancer drugs**, not infection drugs.\n- They were **discovered as natural products made by fungi** in the soil.\n\n>> The two to remember for their toxicities: **bleomycin → lungs and skin**, and **adriamycin (doxorubicin) → the heart.**",
+         "opts": [
+          "Intercalate DNA/generate free radicals; e.g. doxorubicin, bleomycin, actinomycin",
+          "Alkylating agents like cisplatin",
+          "Folate antagonists like methotrexate",
+          "Antibiotics that treat bacterial infection"
+         ],
+         "ans": 0
         },
         {
          "q": "Explain first-order kinetics in chemotherapy and its clinical implication.",
-         "a": "**Chemotherapy kills a constant FRACTION of cells, not a constant number — so treatment must be given in repeated cycles.**\n\n## Understanding it\nWork through the numbers:\n\n- Suppose a dose kills **99%** of tumour cells.\n- From **1,000,000** cells you go to **10,000** — not to zero.\n- The next identical dose kills 99% of those → **100 left**, and so on.\n\n>> **You can never kill the last cell in one dose** — each dose removes the same *fraction*, never the same *number*.\n\n**The implication:** you need **repeated cycles**, each knocking down another fraction, to keep reducing the tumour toward cure."
+         "a": "**Chemotherapy kills a constant FRACTION of cells, not a constant number — so treatment must be given in repeated cycles.**\n\n## Understanding it\nWork through the numbers:\n\n- Suppose a dose kills **99%** of tumour cells.\n- From **1,000,000** cells you go to **10,000** — not to zero.\n- The next identical dose kills 99% of those → **100 left**, and so on.\n\n>> **You can never kill the last cell in one dose** — each dose removes the same *fraction*, never the same *number*.\n\n**The implication:** you need **repeated cycles**, each knocking down another fraction, to keep reducing the tumour toward cure.",
+         "opts": [
+          "A dose kills a fixed NUMBER of cells",
+          "One dose cures every tumour",
+          "A given dose kills a constant FRACTION (not number) of cells, so repeated cycles are needed",
+          "Kinetics do not apply to chemotherapy"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the therapeutic index, and why is haematologic toxicity important?",
-         "a": "**The therapeutic index is the ratio of the therapeutic dose to the toxic dose. Haematologic (bone marrow) toxicity — leukopenia, thrombocytopenia and anaemia — is the most frequent side effect.**\n\n## Understanding it\n- **Therapeutic index** = (dose that helps) ÷ (dose that harms). A **bigger gap = safer drug.**\n- Chemo is deliberately dosed to produce **some** toxicity — that's the price of being maximally effective.\n\n**Why the marrow suffers most:**\n\n>> The bone marrow is a **fast-dividing tissue** (constantly making blood cells) — and chemo attacks dividing cells. So marrow is hit hardest → **low white cells (infection), low platelets (bleeding), low red cells (anaemia).**\n\nThis is why blood counts are monitored before every cycle."
+         "a": "**The therapeutic index is the ratio of the therapeutic dose to the toxic dose. Haematologic (bone marrow) toxicity — leukopenia, thrombocytopenia and anaemia — is the most frequent side effect.**\n\n## Understanding it\n- **Therapeutic index** = (dose that helps) ÷ (dose that harms). A **bigger gap = safer drug.**\n- Chemo is deliberately dosed to produce **some** toxicity — that's the price of being maximally effective.\n\n**Why the marrow suffers most:**\n\n>> The bone marrow is a **fast-dividing tissue** (constantly making blood cells) — and chemo attacks dividing cells. So marrow is hit hardest → **low white cells (infection), low platelets (bleeding), low red cells (anaemia).**\n\nThis is why blood counts are monitored before every cycle.",
+         "opts": [
+          "The number of drugs in a regimen",
+          "The gap between effective and toxic dose; bone marrow is the dose-limiting tissue",
+          "The tumour's doubling time",
+          "The cost of the drug"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the Goldie-Coldman hypothesis and why does it favour combination chemotherapy?",
-         "a": "**By the Goldie-Coldman hypothesis, tumour cells start sensitive to drugs but develop resistance at variable rates; a tumour is only curable if no resistant cell line is present or develops. To minimise resistance, multiple-drug regimens are preferred to single-drug therapy.**\n\n## Understanding it\nFollow the logic step by step:\n\n- Most cells begin **sensitive** to chemo.\n- Over time, random mutations create **resistant** clones.\n- If a resistant clone exists or arises, **single-drug therapy can't cure** — that clone survives and regrows.\n\n>> **The fix: give SEVERAL drugs with different mechanisms at once.**\n\n**Why combination works:** a single cell is very unlikely to be resistant to **three or four unrelated mechanisms simultaneously.** Each drug kills from a different angle, catching the cells the others miss."
+         "a": "**By the Goldie-Coldman hypothesis, tumour cells start sensitive to drugs but develop resistance at variable rates; a tumour is only curable if no resistant cell line is present or develops. To minimise resistance, multiple-drug regimens are preferred to single-drug therapy.**\n\n## Understanding it\nFollow the logic step by step:\n\n- Most cells begin **sensitive** to chemo.\n- Over time, random mutations create **resistant** clones.\n- If a resistant clone exists or arises, **single-drug therapy can't cure** — that clone survives and regrows.\n\n>> **The fix: give SEVERAL drugs with different mechanisms at once.**\n\n**Why combination works:** a single cell is very unlikely to be resistant to **three or four unrelated mechanisms simultaneously.** Each drug kills from a different angle, catching the cells the others miss.",
+         "opts": [
+          "Resistance never develops",
+          "Tumours spontaneously mutate to resistance, so use combinations early to hit all clones",
+          "Single agents are always best",
+          "Delay treatment as long as possible"
+         ],
+         "ans": 1
         },
         {
          "q": "What is pleiotropic (multidrug) resistance?",
-         "a": "**When certain drug-resistance mechanisms confer cross-resistance to structurally dissimilar drugs that have different mechanisms of action.**\n\n## Understanding it\nNormally you'd expect a cell resistant to drug A to still be killed by drug B (which works differently). Pleiotropic resistance breaks that assumption:\n\n- The cell develops a mechanism (e.g. a pump that **ejects drugs**) that works against **many unrelated drugs at once.**\n\n>> So one resistance change makes the cell resistant to **several drugs it has never even seen** — the worst-case scenario, and part of why some tumours become untreatable."
+         "a": "**When certain drug-resistance mechanisms confer cross-resistance to structurally dissimilar drugs that have different mechanisms of action.**\n\n## Understanding it\nNormally you'd expect a cell resistant to drug A to still be killed by drug B (which works differently). Pleiotropic resistance breaks that assumption:\n\n- The cell develops a mechanism (e.g. a pump that **ejects drugs**) that works against **many unrelated drugs at once.**\n\n>> So one resistance change makes the cell resistant to **several drugs it has never even seen** — the worst-case scenario, and part of why some tumours become untreatable.",
+         "opts": [
+          "Resistance to many unrelated drugs, often via drug-efflux pumps (P-glycoprotein)",
+          "A type of complete remission",
+          "Resistance caused by radiotherapy",
+          "Resistance to just one specific drug"
+         ],
+         "ans": 0
         },
         {
          "q": "Define complete and partial remission.",
-         "a": "**Complete remission is the disappearance of all objective evidence of tumour with complete resolution of all attributable signs and symptoms. Partial remission is a reduction of at least 50% in all measurable lesions, some subjective improvement, and no new lesions during therapy.**\n\n## Understanding it\nThink of them as two levels of response:\n\n- **Complete** = **everything gone** — no measurable tumour, no symptoms. The goal.\n- **Partial** = **at least halved**, patient feels somewhat better, and **crucially no new lesions.**\n\n>> The **\"no new lesions\"** part of partial remission matters: if the main tumour shrinks but new ones appear, that's **not** remission — it's progression."
+         "a": "**Complete remission is the disappearance of all objective evidence of tumour with complete resolution of all attributable signs and symptoms. Partial remission is a reduction of at least 50% in all measurable lesions, some subjective improvement, and no new lesions during therapy.**\n\n## Understanding it\nThink of them as two levels of response:\n\n- **Complete** = **everything gone** — no measurable tumour, no symptoms. The goal.\n- **Partial** = **at least halved**, patient feels somewhat better, and **crucially no new lesions.**\n\n>> The **\"no new lesions\"** part of partial remission matters: if the main tumour shrinks but new ones appear, that's **not** remission — it's progression.",
+         "opts": [
+          "Both mean the tumour is cured",
+          "Complete = 50% smaller; partial = no change",
+          "Complete = no detectable tumour; partial = ≥50% reduction",
+          "Remission means the tumour has grown"
+         ],
+         "ans": 2
         },
         {
          "q": "Which gynaecological cancer responds best to chemotherapy, and what is the first-line regimen?",
-         "a": "**Ovarian cancer responds best; chemotherapy is standard after initial surgery, and the first-line regimen is a platinum drug (cisplatin or carboplatin) plus paclitaxel.**\n\n## Understanding it\n- Of all gynae cancers, **ovarian is the most chemosensitive** — so after **surgery** to remove/debulk the tumour, **chemo** is the standard follow-up.\n- First-line = **platinum + paclitaxel** (a plant alkaloid).\n\n>> **Remember the pairing: ovarian cancer = platinum + paclitaxel.**\n\nIf the patient is **hypersensitive to paclitaxel**, substitute **cyclophosphamide or topotecan.** For **malignant germ-cell** ovarian tumours, use **BEP (bleomycin, etoposide, cisplatin).**"
+         "a": "**Ovarian cancer responds best; chemotherapy is standard after initial surgery, and the first-line regimen is a platinum drug (cisplatin or carboplatin) plus paclitaxel.**\n\n## Understanding it\n- Of all gynae cancers, **ovarian is the most chemosensitive** — so after **surgery** to remove/debulk the tumour, **chemo** is the standard follow-up.\n- First-line = **platinum + paclitaxel** (a plant alkaloid).\n\n>> **Remember the pairing: ovarian cancer = platinum + paclitaxel.**\n\nIf the patient is **hypersensitive to paclitaxel**, substitute **cyclophosphamide or topotecan.** For **malignant germ-cell** ovarian tumours, use **BEP (bleomycin, etoposide, cisplatin).**",
+         "opts": [
+          "Vulval cancer; first-line is methotrexate",
+          "Endometrial cancer; first-line is tamoxifen",
+          "Cervical cancer; first-line is bleomycin alone",
+          "Ovarian cancer; first-line is platinum + taxane (carboplatin + paclitaxel)"
+         ],
+         "ans": 3
         },
         {
          "q": "How is chemotherapy used in cervical cancer?",
-         "a": "**Squamous cervical cancer is chemosensitive; chemoradiation (chemotherapy combined with concurrent radiotherapy) is now an important modality, using cisplatin or cisplatin + 5-FU. Platinum-based chemoradiation gives about a 30% reduction in the risk of death in locally advanced disease compared with radiotherapy alone.**\n\n## Understanding it\n- Older practice reserved chemo for disease too advanced for surgery/radiotherapy, but results were limited (poor kidney function, fistulae and pelvic sepsis restricted it).\n- The modern approach combines **chemo + radiotherapy at the same time = chemoradiation.**\n\n>> The chemo **sensitises** the tumour to radiation, so together they work better than either alone.\n\n**The number to quote:** platinum-based chemoradiation → **~30% reduction in risk of death** in locally advanced cervical cancer versus radiotherapy alone. Most effective agents: **cisplatin, or cisplatin + 5-FU.**"
+         "a": "**Squamous cervical cancer is chemosensitive; chemoradiation (chemotherapy combined with concurrent radiotherapy) is now an important modality, using cisplatin or cisplatin + 5-FU. Platinum-based chemoradiation gives about a 30% reduction in the risk of death in locally advanced disease compared with radiotherapy alone.**\n\n## Understanding it\n- Older practice reserved chemo for disease too advanced for surgery/radiotherapy, but results were limited (poor kidney function, fistulae and pelvic sepsis restricted it).\n- The modern approach combines **chemo + radiotherapy at the same time = chemoradiation.**\n\n>> The chemo **sensitises** the tumour to radiation, so together they work better than either alone.\n\n**The number to quote:** platinum-based chemoradiation → **~30% reduction in risk of death** in locally advanced cervical cancer versus radiotherapy alone. Most effective agents: **cisplatin, or cisplatin + 5-FU.**",
+         "opts": [
+          "As sole curative therapy replacing surgery",
+          "Only as hormone therapy",
+          "Never used in cervical cancer",
+          "Mainly as concurrent chemoradiation (radiosensitiser, e.g. cisplatin)"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the role of chemotherapy in vaginal cancer?",
-         "a": "**Chemotherapeutic agents, including cisplatin, have NO significant activity in vaginal cancer.**\n\n## Understanding it\nThis is the **exception** worth memorising:\n\n- Squamous cervical cancer responds to cisplatin — you might assume the histologically similar **vaginal** cancer would too.\n- But it **doesn't** — even cisplatin has **no significant activity.**\n\n>> **Vaginal cancer = the gynae cancer where chemo does NOT work.** If an exam asks which gynae cancer is chemo-unresponsive, this is the answer."
+         "a": "**Chemotherapeutic agents, including cisplatin, have NO significant activity in vaginal cancer.**\n\n## Understanding it\nThis is the **exception** worth memorising:\n\n- Squamous cervical cancer responds to cisplatin — you might assume the histologically similar **vaginal** cancer would too.\n- But it **doesn't** — even cisplatin has **no significant activity.**\n\n>> **Vaginal cancer = the gynae cancer where chemo does NOT work.** If an exam asks which gynae cancer is chemo-unresponsive, this is the answer.",
+         "opts": [
+          "The only treatment ever used",
+          "Curative as a single agent",
+          "Contraindicated entirely",
+          "Adjunct/radiosensitiser alongside radiotherapy (limited role)"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the indications for chemotherapy in gestational trophoblastic disease (GTD)?",
-         "a": "**Beta-hCG exceeding 20,000 IU/ml persisting 4 weeks after evacuation; rising beta-hCG levels; histological identification of choriocarcinoma; and metastasis.**\n\n## Understanding it\nβ-hCG is made by trophoblast, so it is the **tumour marker** — its level tracks how much disease is present. After a molar pregnancy is evacuated, β-hCG should **fall.** Give chemo when the numbers or histology say the disease won't resolve on its own:\n\n- **β-hCG > 20,000 still there at 4 weeks** → too much persistent tissue\n- **Rising β-hCG** → the tumour is growing\n- **Choriocarcinoma on histology** → frank malignancy\n- **Metastasis** → it has spread\n\n>> **The theme: a marker that is high, rising, malignant, or spread = treat.**\n\nGTD is one of the **most chemo-curable** cancers, and β-hCG lets you monitor the response precisely."
+         "a": "**Beta-hCG exceeding 20,000 IU/ml persisting 4 weeks after evacuation; rising beta-hCG levels; histological identification of choriocarcinoma; and metastasis.**\n\n## Understanding it\nβ-hCG is made by trophoblast, so it is the **tumour marker** — its level tracks how much disease is present. After a molar pregnancy is evacuated, β-hCG should **fall.** Give chemo when the numbers or histology say the disease won't resolve on its own:\n\n- **β-hCG > 20,000 still there at 4 weeks** → too much persistent tissue\n- **Rising β-hCG** → the tumour is growing\n- **Choriocarcinoma on histology** → frank malignancy\n- **Metastasis** → it has spread\n\n>> **The theme: a marker that is high, rising, malignant, or spread = treat.**\n\nGTD is one of the **most chemo-curable** cancers, and β-hCG lets you monitor the response precisely.",
+         "opts": [
+          "Rising/plateauing hCG, metastases, or histological choriocarcinoma",
+          "A normal delivery",
+          "Any positive pregnancy test",
+          "Simple menstrual irregularity"
+         ],
+         "ans": 0
         },
         {
          "q": "How is the chemotherapy regimen chosen in GTD by risk?",
-         "a": "**Patients are scored by the WHO system into low risk (0-4) → methotrexate alone (± folinic acid) or actinomycin D; medium risk (5-7) → combination such as EMA-CO; and high risk (>8) → EMA-CO, and if it fails, cisplatin/etoposide/bleomycin/ifosfamide.**\n\n## Understanding it\nThe **WHO score** adds up risk factors (age, antecedent pregnancy, β-hCG level, interval, tumour size, sites and number of metastases, prior chemo), each 0–4, then sorts patients:\n\n- **Low risk** → a **single agent** is enough → **methotrexate.**\n- **Medium/high risk** → need **combination** → **EMA-CO** (etoposide, methotrexate, actinomycin D, cyclophosphamide, vincristine).\n\n>> **The one line to remember: LOW risk = methotrexate; HIGHER risk = EMA-CO.**\n\nThis mirrors the resistance principle — higher-risk (more) disease needs multiple drugs to prevent resistant clones surviving."
+         "a": "**Patients are scored by the WHO system into low risk (0-4) → methotrexate alone (± folinic acid) or actinomycin D; medium risk (5-7) → combination such as EMA-CO; and high risk (>8) → EMA-CO, and if it fails, cisplatin/etoposide/bleomycin/ifosfamide.**\n\n## Understanding it\nThe **WHO score** adds up risk factors (age, antecedent pregnancy, β-hCG level, interval, tumour size, sites and number of metastases, prior chemo), each 0–4, then sorts patients:\n\n- **Low risk** → a **single agent** is enough → **methotrexate.**\n- **Medium/high risk** → need **combination** → **EMA-CO** (etoposide, methotrexate, actinomycin D, cyclophosphamide, vincristine).\n\n>> **The one line to remember: LOW risk = methotrexate; HIGHER risk = EMA-CO.**\n\nThis mirrors the resistance principle — higher-risk (more) disease needs multiple drugs to prevent resistant clones surviving.",
+         "opts": [
+          "Low-risk → surgery only",
+          "High-risk → methotrexate alone",
+          "Risk does not affect the regimen",
+          "Low-risk → single agent (methotrexate); high-risk → combination (e.g. EMA-CO)"
+         ],
+         "ans": 3
         },
         {
          "q": "Which chemotherapy drug is nephrotoxic?",
-         "a": "**Cisplatin (nephrotoxicity is much less with carboplatin).**\n\n## Understanding it\n- **Cisplatin** damages the kidneys — so patients need good hydration and kidney monitoring during treatment.\n- Its cousin **carboplatin** is **much less** nephrotoxic, which is why carboplatin is often preferred when kidney function is a concern.\n\n>> **Memory hook: cisPLATin → the platinum is cleared through the kidneys → kidney toxicity.**"
+         "a": "**Cisplatin (nephrotoxicity is much less with carboplatin).**\n\n## Understanding it\n- **Cisplatin** damages the kidneys — so patients need good hydration and kidney monitoring during treatment.\n- Its cousin **carboplatin** is **much less** nephrotoxic, which is why carboplatin is often preferred when kidney function is a concern.\n\n>> **Memory hook: cisPLATin → the platinum is cleared through the kidneys → kidney toxicity.**",
+         "opts": [
+          "Cisplatin",
+          "Vincristine",
+          "Bleomycin",
+          "Doxorubicin"
+         ],
+         "ans": 0
         },
         {
          "q": "Which chemotherapy drug is cardiotoxic?",
-         "a": "**Adriamycin (doxorubicin).**\n\n## Understanding it\n- **Adriamycin (doxorubicin)** — an anti-tumour antibiotic — damages **heart muscle**, and can cause a dose-related cardiomyopathy.\n- It also causes **phlebitis/sclerosis** of veins (it's a strong sclerosant).\n\n>> **Memory hook: Adriamycin → the \"A\" for heart Attack.** Cardiac function is checked before and during treatment with it."
+         "a": "**Adriamycin (doxorubicin).**\n\n## Understanding it\n- **Adriamycin (doxorubicin)** — an anti-tumour antibiotic — damages **heart muscle**, and can cause a dose-related cardiomyopathy.\n- It also causes **phlebitis/sclerosis** of veins (it's a strong sclerosant).\n\n>> **Memory hook: Adriamycin → the \"A\" for heart Attack.** Cardiac function is checked before and during treatment with it.",
+         "opts": [
+          "Cisplatin",
+          "Bleomycin",
+          "Methotrexate",
+          "Doxorubicin (anthracyclines)"
+         ],
+         "ans": 3
         },
         {
          "q": "Which chemotherapy drug causes pulmonary toxicity?",
-         "a": "**Bleomycin (methotrexate can also cause pulmonary toxicity).**\n\n## Understanding it\n- **Bleomycin** classically causes **pulmonary fibrosis** (scarred, stiff lungs) — a dose-limiting toxicity.\n- It also causes **skin exfoliation** and **neurologic** effects.\n\n>> **Memory hook: BleomycinB → Breathing (lungs).**\n\nThis matters clinically because bleomycin is part of **BEP** (used in ovarian germ-cell tumours), so lung function is monitored."
+         "a": "**Bleomycin (methotrexate can also cause pulmonary toxicity).**\n\n## Understanding it\n- **Bleomycin** classically causes **pulmonary fibrosis** (scarred, stiff lungs) — a dose-limiting toxicity.\n- It also causes **skin exfoliation** and **neurologic** effects.\n\n>> **Memory hook: BleomycinB → Breathing (lungs).**\n\nThis matters clinically because bleomycin is part of **BEP** (used in ovarian germ-cell tumours), so lung function is monitored.",
+         "opts": [
+          "Bleomycin",
+          "Cisplatin",
+          "5-fluorouracil",
+          "Doxorubicin"
+         ],
+         "ans": 0
         },
         {
          "q": "List the drug-specific toxicities you should know for chemotherapy.",
-         "a": "**Cisplatin → kidney; adriamycin → heart; bleomycin → lung and skin; methotrexate → liver (and lung, GIT, mouth); vincristine/bleomycin → nerves; adriamycin → phlebitis. Bone marrow depression and alopecia occur with almost all agents.**\n\n## Understanding it\nEveryone gets **marrow suppression** (commonest) and **hair loss** — those aren't discriminating. Exams test the **organ-specific** ones, so learn them as pairs:\n\n>> **Cisplatin → Kidney**\n>> **Adriamycin → Heart**\n>> **Bleomycin → Lung (Breathing)**\n>> **Methotrexate → Liver**\n>> **Vincristine → Nerves**\n\n**Memory:** cisplatin-kidney, adriamycin (A = heart Attack), Bleomycin = Breathing, methotrexate-liver, vincristine-nerves. These pairs answer most side-effect questions."
+         "a": "**Cisplatin → kidney; adriamycin → heart; bleomycin → lung and skin; methotrexate → liver (and lung, GIT, mouth); vincristine/bleomycin → nerves; adriamycin → phlebitis. Bone marrow depression and alopecia occur with almost all agents.**\n\n## Understanding it\nEveryone gets **marrow suppression** (commonest) and **hair loss** — those aren't discriminating. Exams test the **organ-specific** ones, so learn them as pairs:\n\n>> **Cisplatin → Kidney**\n>> **Adriamycin → Heart**\n>> **Bleomycin → Lung (Breathing)**\n>> **Methotrexate → Liver**\n>> **Vincristine → Nerves**\n\n**Memory:** cisplatin-kidney, adriamycin (A = heart Attack), Bleomycin = Breathing, methotrexate-liver, vincristine-nerves. These pairs answer most side-effect questions.",
+         "opts": [
+          "Cisplatin→kidney, doxorubicin→heart, bleomycin→lung, vincristine→nerves, cyclophosphamide→bladder",
+          "None of these drugs are toxic",
+          "All chemo drugs share identical toxicity",
+          "Toxicity is unpredictable and unknowable"
+         ],
+         "ans": 0
         },
         {
          "q": "What is nausea and vomiting from chemotherapy managed with?",
-         "a": "**Metoclopramide, dexamethasone, lorazepam and 5-HT (serotonin) antagonists.**\n\n## Understanding it\nChemo triggers vomiting through several pathways, so several drug classes are used, often together:\n\n- **5-HT (serotonin) antagonists** (e.g. ondansetron) — the mainstay for chemo-induced vomiting\n- **Dexamethasone** — a steroid that adds anti-emetic effect\n- **Metoclopramide** — speeds gastric emptying\n- **Lorazepam** — helps with anticipatory nausea (anxiety-driven)\n\n>> **Combining agents that work by different routes controls nausea far better than one drug** — the same \"combination beats a single mechanism\" theme seen throughout chemotherapy."
+         "a": "**Metoclopramide, dexamethasone, lorazepam and 5-HT (serotonin) antagonists.**\n\n## Understanding it\nChemo triggers vomiting through several pathways, so several drug classes are used, often together:\n\n- **5-HT (serotonin) antagonists** (e.g. ondansetron) — the mainstay for chemo-induced vomiting\n- **Dexamethasone** — a steroid that adds anti-emetic effect\n- **Metoclopramide** — speeds gastric emptying\n- **Lorazepam** — helps with anticipatory nausea (anxiety-driven)\n\n>> **Combining agents that work by different routes controls nausea far better than one drug** — the same \"combination beats a single mechanism\" theme seen throughout chemotherapy.",
+         "opts": [
+          "More chemotherapy",
+          "Antibiotics",
+          "No treatment is available",
+          "Antiemetics — 5-HT3 antagonists (e.g. ondansetron), dexamethasone"
+         ],
+         "ans": 3
         },
         {
          "q": "What are hormones, and list the broad indications for hormone therapy in gynaecology.",
-         "a": "**Hormones are chemical substances produced by one organ that exert effects on distant target organs. Indications: hormonal contraception, hormone replacement therapy, infertility/assisted reproduction, pregnancy maintenance, abnormal uterine bleeding, hyperandrogenism/hirsutism, gynaecological oncology/endometriosis, and miscellaneous uses.**\n\n## Understanding it\n- The defining feature of a **hormone**: it is **made in one place but acts somewhere else** (a distant target organ), carried by the blood.\n- In gynaecology, hormones are used **all over** — think of the reproductive lifespan:\n\n>> **Prevent pregnancy** (contraception) → **achieve pregnancy** (infertility) → **maintain pregnancy** → **control bleeding** → **treat menopause** (HRT) → **treat hormone-driven disease** (endometriosis, some cancers).\n\nSo hormone therapy spans the whole of a woman's reproductive and post-reproductive life."
+         "a": "**Hormones are chemical substances produced by one organ that exert effects on distant target organs. Indications: hormonal contraception, hormone replacement therapy, infertility/assisted reproduction, pregnancy maintenance, abnormal uterine bleeding, hyperandrogenism/hirsutism, gynaecological oncology/endometriosis, and miscellaneous uses.**\n\n## Understanding it\n- The defining feature of a **hormone**: it is **made in one place but acts somewhere else** (a distant target organ), carried by the blood.\n- In gynaecology, hormones are used **all over** — think of the reproductive lifespan:\n\n>> **Prevent pregnancy** (contraception) → **achieve pregnancy** (infertility) → **maintain pregnancy** → **control bleeding** → **treat menopause** (HRT) → **treat hormone-driven disease** (endometriosis, some cancers).\n\nSo hormone therapy spans the whole of a woman's reproductive and post-reproductive life.",
+         "opts": [
+          "Cytotoxic drugs used only for cancer",
+          "Chemical messengers; used for contraception, HRT, endometriosis, bleeding, some cancers",
+          "Vitamins with no gynaecological use",
+          "Antibiotics for pelvic infection"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the Yuzpe regimen for emergency contraception.",
-         "a": "**Two combined pills each containing 50 mcg of ethinylestradiol and 0.5 mg of norgestrel, taken by mouth within 72 hours of unprotected intercourse and repeated 12 hours later.**\n\n## Understanding it\n- **When:** as soon as possible, within **72 hours** of unprotected sex — the sooner the better.\n- **What:** a **high dose of combined oestrogen + progestogen**, given as 2 pills now and 2 more 12 hours later.\n\n>> **The number to remember: within 72 hours, repeated after 12 hours.**\n\nThis is the classic \"morning-after\" combined-pill method. (Other options for emergency contraception include a **copper IUD** or antiprogesterones like mifepristone.)"
+         "a": "**Two combined pills each containing 50 mcg of ethinylestradiol and 0.5 mg of norgestrel, taken by mouth within 72 hours of unprotected intercourse and repeated 12 hours later.**\n\n## Understanding it\n- **When:** as soon as possible, within **72 hours** of unprotected sex — the sooner the better.\n- **What:** a **high dose of combined oestrogen + progestogen**, given as 2 pills now and 2 more 12 hours later.\n\n>> **The number to remember: within 72 hours, repeated after 12 hours.**\n\nThis is the classic \"morning-after\" combined-pill method. (Other options for emergency contraception include a **copper IUD** or antiprogesterones like mifepristone.)",
+         "opts": [
+          "Combined oestrogen-progestogen emergency contraception given within 72 hours, repeated in 12 h",
+          "A long-term HRT schedule",
+          "A single dose of chemotherapy",
+          "An antibiotic course for PID"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the main indications for hormone replacement therapy (HRT), and the key menopausal hazard?",
-         "a": "**HRT is used for vasomotor symptoms (hot flushes — mainly oestradiol), osteoporosis, genitourinary atrophy (dryness, dyspareunia, itching), hypogonadism, premature ovarian failure, and hypothalamic-pituitary suppression. Osteoporosis is the most important health hazard of menopause, treated with the lowest effective dose (e.g. 0.625 mg conjugated oestradiol).**\n\n## Understanding it\nMenopause = falling **oestrogen**, so HRT replaces it. The main reasons:\n\n- **Hot flushes (vasomotor symptoms)** → **oestrogen** is the key treatment\n- **Genitourinary atrophy** → dryness, painful sex, itching\n- **Osteoporosis** → oestrogen loss weakens bone\n\n>> **The single most important menopausal hazard is OSTEOPOROSIS** — because fragility fractures cause major morbidity and mortality.\n\n**Key safety principle:** use the **lowest effective dose** (e.g. 0.625 mg conjugated oestradiol) to gain benefit while minimising risks."
+         "a": "**HRT is used for vasomotor symptoms (hot flushes — mainly oestradiol), osteoporosis, genitourinary atrophy (dryness, dyspareunia, itching), hypogonadism, premature ovarian failure, and hypothalamic-pituitary suppression. Osteoporosis is the most important health hazard of menopause, treated with the lowest effective dose (e.g. 0.625 mg conjugated oestradiol).**\n\n## Understanding it\nMenopause = falling **oestrogen**, so HRT replaces it. The main reasons:\n\n- **Hot flushes (vasomotor symptoms)** → **oestrogen** is the key treatment\n- **Genitourinary atrophy** → dryness, painful sex, itching\n- **Osteoporosis** → oestrogen loss weakens bone\n\n>> **The single most important menopausal hazard is OSTEOPOROSIS** — because fragility fractures cause major morbidity and mortality.\n\n**Key safety principle:** use the **lowest effective dose** (e.g. 0.625 mg conjugated oestradiol) to gain benefit while minimising risks.",
+         "opts": [
+          "Used for contraception with no hazards",
+          "Relieves menopausal symptoms/osteoporosis; key hazard is increased breast cancer (and VTE) risk",
+          "Used to induce ovulation; hazard is twins",
+          "Prevents all cancers with no risk"
+         ],
+         "ans": 1
         }
        ],
        "imgBase": null,
@@ -17243,9 +19273,9 @@ window.MEDBANK = {
      "id": "pediatrics-49",
      "sn": 49,
      "name": "Guillain Barre Syndrome",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 5,
+     "recall": 19
     },
     {
      "id": "pediatrics-52",
@@ -17307,9 +19337,9 @@ window.MEDBANK = {
      "id": "pediatrics-139",
      "sn": 139,
      "name": "Neuromuscular disorders",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 5,
+     "recall": 19
     },
     {
      "id": "pediatrics-140",
@@ -17328,7 +19358,7 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 3
+   "readyCount": 5
   },
   {
    "id": "pediatrics-dr-stella-oji",
@@ -17537,9 +19567,9 @@ window.MEDBANK = {
      "id": "pediatrics-22",
      "sn": 22,
      "name": "Failure to thrive",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 5,
+     "recall": 17
     },
     {
      "id": "pediatrics-26",
@@ -17622,7 +19652,7 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 7
+   "readyCount": 8
   },
   {
    "id": "pediatrics-ikonne",
@@ -17943,9 +19973,9 @@ window.MEDBANK = {
      "id": "pediatrics-36",
      "sn": 36,
      "name": "CAKUT",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 6,
+     "recall": 20
     },
     {
      "id": "pediatrics-50",
@@ -18060,7 +20090,7 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 1
+   "readyCount": 2
   },
   {
    "id": "pediatrics-ogbonna",
@@ -18691,9 +20721,9 @@ window.MEDBANK = {
  ],
  "stats": {
   "topics": 286,
-  "ready": 25,
-  "primerCards": 366,
-  "recallCards": 2131,
+  "ready": 29,
+  "primerCards": 387,
+  "recallCards": 2206,
   "lecturers": 36
  }
 };
