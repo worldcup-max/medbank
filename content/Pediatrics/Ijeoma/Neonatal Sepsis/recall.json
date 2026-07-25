@@ -1,101 +1,1051 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Neonatal Sepsis",
-  "cards": [
-    { "q": "List the outline of this lecture.", "a": "Introduction and definitions; epidemiology; aetiology; risk factors and host factors; clinical features; differential diagnosis; investigations; treatment; complications; prognosis; and prevention." },
-    { "q": "What complicates the diagnosis of neonatal sepsis?", "a": "The frequent presence of non-infectious conditions that resemble sepsis, especially in preterm infants (e.g. RDS, CHD); the absence of optimal or definitive diagnostic tests; and viral and fungal infections in newborns that mimic bacterial infections." },
-    { "q": "What is 'Rule Out Sepsis Syndrome' (ROSS)?", "a": "Because neonatal sepsis is a high-risk disease, clinicians are compelled to empirically administer antibiotics to infants with risk factors and/or signs of suspected sepsis." },
-    { "q": "Where does neonatal sepsis rank as a cause of neonatal mortality?", "a": "It is the 3rd leading cause, after asphyxia and LBW/prematurity." },
-    { "q": "What are the top 4 diagnoses in most newborn units?", "a": "Asphyxia, neonatal sepsis, preterm/LBW, and jaundice." },
-    { "q": "What proportion of neonatal mortality and of first-week deaths is due to neonatal sepsis?", "a": "13% of all neonatal mortality, and 42% of deaths in the first week of life." },
-    { "q": "What proportion of neonatal deaths in Nigeria does neonatal sepsis explain?", "a": "About a quarter (25%)." },
-    { "q": "What are the risks of overuse of antibiotics in neonatal sepsis?", "a": "Increased antibiotic resistance; negative effects of altering the microbiome; an increased rate of serious necrotising enterocolitis; and increased mortality." },
-    { "q": "Define bacteraemia.", "a": "The presence of viable bacteria in the blood." },
-    { "q": "Define septicaemia.", "a": "Systemic infection confirmed by the presence of actively multiplying bacteria in the blood." },
-    { "q": "Define neonatal sepsis.", "a": "A clinical syndrome characterised by systemic signs of infection (the infant is looking ill), accompanied by bacteraemia, in the first 28 days of life." },
-    { "q": "Define suspected sepsis.", "a": "Regardless of whether there is a clinical symptom or not, the presence of sepsis risk factors in the baby, or findings suggesting sepsis in follow-up." },
-    { "q": "Define clinical sepsis.", "a": "Clinical and laboratory findings are present, but there is failure to show the causative microorganism." },
-    { "q": "Define proven sepsis.", "a": "Clinical and laboratory findings are present, with demonstration of the pathogenic microorganism in cultures taken from a sterile field; or a positive blood culture or PCR in the presence of clinical signs and symptoms of infection." },
-    { "q": "What is required to diagnose coagulase-negative sepsis?", "a": "Two positive blood cultures, or one positive blood culture plus a positive CRP." },
-    { "q": "Define probable sepsis.", "a": "Presence of signs and symptoms of infection plus at least two abnormal laboratory results, when blood culture is negative." },
-    { "q": "Define possible sepsis.", "a": "Presence of clinical signs and symptoms of infection plus raised CRP or IL-6/IL-8 level, when blood culture is negative." },
-    { "q": "What is SIRS, and how does it relate to sepsis?", "a": "SIRS is the physiologic response to inflammation from any source including infection; sepsis = SIRS + focus of infection." },
-    { "q": "Why is SIRS limited in neonates?", "a": "Because many neonates with sepsis lack a specific focus and signs, especially preterms; and SIRS has not made early diagnosis realizable because of absence of specific symptoms and the suboptimal diagnostic value of laboratory findings." },
-    { "q": "How many SIRS criteria are needed, and what is the extra requirement?", "a": "At least two of the four criteria, one of which must be abnormal temperature or leukocyte count." },
-    { "q": "State the temperature criterion for SIRS.", "a": "Core temperature > 38.5 °C or < 36 °C." },
-    { "q": "State the tachycardia and bradycardia criteria for SIRS.", "a": "Tachycardia — mean heart rate 2 SD above normal for age in the absence of external stimulus. Bradycardia — mean heart rate < 10th centile (provided no external vagal stimulus, beta-blockers or CHD), or unexplained bradycardia of > 30 minutes." },
-    { "q": "State the respiratory and leukocyte criteria for SIRS.", "a": "Mean respiratory rate 2 SD above normal for age (40–60/min); and leukocyte count elevated or depressed for age, or 10% immature neutrophils." },
-    { "q": "Define severe sepsis.", "a": "Sepsis plus one of: cardiovascular organ dysfunction; acute respiratory distress syndrome (ARDS); or ≥ 2 organ dysfunctions (respiratory, renal, neurologic, haematologic or hepatic). Or sepsis plus signs of end organ damage or hypoperfusion." },
-    { "q": "List the signs of end organ damage.", "a": "Low PaO2/FiO2 (acute lung injury); lack of bowel sounds (ileus); oliguria; increased total bilirubin; and thrombocytopenia." },
-    { "q": "List the signs of hypoperfusion or cardiovascular dysfunction.", "a": "Increased lactic acid; low blood pressure; decreased capillary refill; and change in mental status." },
-    { "q": "Define septic shock.", "a": "Severe sepsis plus sepsis-induced hypotension that is refractory to fluid resuscitation." },
-    { "q": "How does the incidence of neonatal sepsis vary?", "a": "Across regions; across centres within the same region; and from time to time within the same centre. It is commoner in developing than developed nations, and worse in preterms than terms; prevalent organisms and antibiotic sensitivity also vary from time to time." },
-    { "q": "Define early onset neonatal sepsis.", "a": "Symptoms occurring at less than 72 hours — various cut-offs from 48 hours to 7 days exist, but most epidemiological studies use 72 hours." },
-    { "q": "Define late onset and very late onset neonatal sepsis.", "a": "Late onset — cases diagnosed on the 4th to 30th days of life. Very late onset — cases diagnosed in infants hospitalized in the NICU from the first 30 days of life until discharge." },
-    { "q": "Where do early onset and late onset pathogens come from?", "a": "Early onset pathogens are related to the maternal genital tract, with Group B Streptococcus, and the delivery area; late onset pathogens reflect contamination at a later date and nosocomial infection." },
-    { "q": "Why is the classification different in developing countries?", "a": "Because similar organisms are usually found before and after 72 hours; most deliveries at home, by TBAs and in maternity centres are infected with community-acquired pathogens, and unclean delivery practices lead to infection with nosocomial organisms early in life. Hence classification into community acquired and hospital acquired." },
-    { "q": "List the causes of early onset sepsis in developed countries.", "a": "Group B Streptococcus 43–58%, E. coli, other gram-negative bacteria, S. aureus, coagulase-negative Staphylococcus, and L. monocytogenes." },
-    { "q": "List the causes of late onset sepsis in developed countries.", "a": "Coagulase-negative Staphylococcus, E. coli, Klebsiella sp., S. aureus, Candida albicans, Enterococcus sp., P. aeruginosa, and other Candida sp." },
-    { "q": "List the community-acquired causes of neonatal sepsis in developing countries.", "a": "Klebsiella sp., S. aureus, E. coli, Group B Streptococcus, S. pneumoniae, and Salmonella sp." },
-    { "q": "List the hospital-acquired causes of neonatal sepsis in developing countries.", "a": "Klebsiella sp., S. aureus, E. coli, coagulase-negative Staphylococcus, Pseudomonas sp., Enterobacter sp., and Candida sp." },
-    { "q": "List the MAJOR maternal risk factors for neonatal sepsis.", "a": "ROM > 18 hours or PROM; intrapartum maternal fever > 38.0 ºC; chorioamnionitis; malodorous liquor; and sustained fetal heart rate > 160 beats/min." },
-    { "q": "List the fetal/neonatal risk factors.", "a": "Congenital malformations and preterm/LBW especially VLBW and ELBW — including ectopia vesicae, neural tube defects, cutis aplasia, exomphalos/omphalocoele/gastroschisis, and obstructive problems of GIT, GUT, CVS etc." },
-    { "q": "List the environmental risk factors.", "a": "Home, TBA, road/taxi/casualty deliveries; nursery and environmental circumstances and practices (poor soap and water use, poor spacing); overcrowding; and poor, inadequate or infrequent hand washing." },
-    { "q": "List the MINOR risk factors for neonatal sepsis.", "a": "Peri/intrapartum maternal fever > 37.5 ºC but < 38.5 ºC; twin gestation; prematurity < 37 weeks; maternal WBC > 15,000; ROM > 12 hours; tachypnoea; maternal GBS colonization; low APGAR < 5 at 1 minute; mode of delivery; and instrumentation and manipulations." },
-    { "q": "List further minor risk factors relating to family and maternal history.", "a": "Family history of a sibling with systemic bacterial disease under 3 months of age; urinary tract infection; maternal substance abuse; history of recurrent abortion; and poor maternal nutrition." },
-    { "q": "List the labour characteristics that increase risk.", "a": "Preterm labour; premature or prolonged time between rupture of membranes and delivery; fetal tachycardia without maternal fever, blood loss, hypotension or tachycardia-inducing medication; foul lochia; and rupture of membranes > 12 hours." },
-    { "q": "List the infant characteristics that increase risk.", "a": "Apgar < 6 at 5 minutes; meconium-stained amniotic fluid; oxygen requirement; respiratory distress; neutropenia; male sex; congenital anomalies causing breakdown of anatomic barriers to infection; and polymorphonuclear leucocytes with intracellular organisms in gastric aspirate." },
-    { "q": "State the stages of sepsis development (seed-soil principle).", "a": "Skin/mucosa contamination → invasion of skin/mucosa → multiplication of organisms → demonstration of immunocompetence and antibody responses." },
-    { "q": "List the non-specific mechanisms that are poorly developed in the newborn.", "a": "Skin and mucosal barriers are weak and fragile; neutrophil and monocyte response (chemotaxis) is slow and inadequate; poor opsonin support; hypocomplementaemia; and intracellular killing of ingested bacteria is weak." },
-    { "q": "Describe the deficient intracellular killing mechanisms in the newborn.", "a": "Oxygen-dependent mechanisms (OH–, O– formation) are poorly developed; and non-oxygen dependent mechanisms are also poorly developed (lysosomal enzymes)." },
-    { "q": "Describe the state of specific immunity in the newborn.", "a": "Humoral and cellular immunity are weak and ineffective, with relative hypo-immunoglobulinaemia." },
-    { "q": "Which scores and tools are used in the diagnosis of neonatal sepsis?", "a": "Sepsis score, SOFA score, Töllner sepsis score, the Paediatric Committee (PDCO) of the European Medicines Agency (EMA) score, and sepsis calculators for EOS." },
-    { "q": "Describe the nature of early clinical signs in neonatal sepsis.", "a": "They are non-specific, non-localizing and subtle; they do not distinguish among organisms and are often not organ specific — e.g. meningitis presenting with respiratory distress or diarrhoea. Signs can be rapidly progressive and easily involve multiple organs or systems." },
-    { "q": "List the GENERAL clinical features of neonatal sepsis.", "a": "Fever, temperature instability, poor colour, dusky colour, 'not doing well', poor feeding, sclerema, and oedema." },
-    { "q": "List the GASTROINTESTINAL features of neonatal sepsis.", "a": "Poor feeding, poor swallowing/sucking, abdominal distension, vomiting, diarrhoea, water brash/excessive salivation and secretions, feed intolerance, increased feed aspirate, and hepatomegaly." },
-    { "q": "List the RESPIRATORY features of neonatal sepsis.", "a": "Respiratory distress; increased nasal secretions; dyspnoea (flaring, chest retractions/recession); tachypnoea; bradypnoea/apnoea; noisy breathing (worsening stridor, grunting, wheezing); cheek puffing; and cyanosis." },
-    { "q": "List the RENAL and CARDIOVASCULAR features of neonatal sepsis.", "a": "Renal — oliguria, haematuria, dribbling. Cardiovascular — pallor, dusky colour, mottling, cold clammy skin, tachycardia, bradycardia, cyanosis, hypotension, oedema and dysrhythmias." },
-    { "q": "List the CNS features of neonatal sepsis.", "a": "Poor activity, weakness, excessive sleep or poor sleep, apnoea, lethargy, irritability, tremors, seizures, reduced primitive reflexes (poor sucking, swallowing, rooting, abnormal Moro), hyporeflexia, hypotonia, irregular respiration, full fontanelle, and high-pitched cry." },
-    { "q": "List the HAEMATOLOGIC and METABOLIC features of neonatal sepsis.", "a": "Haematologic — jaundice, pallor, petechiae, purpura, bleeding, ecchymosis, splenomegaly. Metabolic — unexplained hypoglycaemia, hyperglycaemia, acidosis (respiratory or metabolic), and hyponatraemia." },
-    { "q": "List the seven WHO clinical signs indicating neonatal sepsis for immediate referral.", "a": "Difficulty feeding; convulsions; movement only when stimulated; respiratory rate > 60 per minute; severe chest indrawing; axillary temperature > 37.5 °C or < 35.5 °C; and cyanosis and grunting." },
-    { "q": "List the suspicious clinical signs of neonatal sepsis.", "a": "Petechiae and purpura in the setting of haemodynamic instability; fever; cough; hypoxaemia with leukocytosis and pulmonary infiltrates; and a distended tympanitic abdomen with fever and leukocytosis associated with a perforated bowel." },
-    { "q": "List the clinical variables in the criteria for diagnosis of neonatal sepsis.", "a": "Temperature instability; heart rate ≥ 180 or ≤ 100 beats/min; respiratory rate > 40 breaths/min plus grunting or desaturations; lethargy or altered mental status; glucose intolerance (plasma glucose > 10 mmol/L); and feed intolerance." },
-    { "q": "State the haemodynamic variables in neonatal sepsis.", "a": "Blood pressure 2 SD below normal for age; systolic pressure < 50 mmHg in a newborn on day 1; and systolic pressure < 65 mmHg in infants ≤ 1 month." },
-    { "q": "State the tissue perfusion variables in neonatal sepsis.", "a": "Capillary refill > 3 seconds, and plasma lactate > 3 mmol/L." },
-    { "q": "List the NEUROLOGIC differential diagnoses of neonatal sepsis.", "a": "Hypoxic ischaemic encephalopathy, neonatal seizure, and intracranial haemorrhage." },
-    { "q": "List the RESPIRATORY differential diagnoses of neonatal sepsis.", "a": "Respiratory distress syndrome especially in preterms; aspiration pneumonia (amniotic fluid or gastric contents); tracheo-oesophageal fistula; and transient tachypnoea of the newborn." },
-    { "q": "List the CARDIOVASCULAR and GASTROINTESTINAL differential diagnoses.", "a": "Cardiovascular — congenital hypoplastic left heart syndrome and other structural diseases, persistent pulmonary hypertension of the newborn, and acquired causes such as myocarditis and hypovolaemic or cardiogenic shock. Gastrointestinal — necrotizing enterocolitis and spontaneous GI perforations." },
-    { "q": "List the METABOLIC differential diagnoses of neonatal sepsis.", "a": "Hypoglycaemia; adrenal disorders (adrenal haemorrhage and/or insufficiency, CAH); and inborn errors of metabolism (organic acidurias, lactic acidosis, urea cycle disorder)." },
-    { "q": "List the HAEMATOLOGIC differential diagnoses of neonatal sepsis.", "a": "Vitamin K clotting factor deficiency; neonatal purpura fulminans; immune mediated thrombocytopenia; immune mediated neutropenia; anaemia from other causes; haemolytic disorders (ABO, Rh isoimmunization, G6PD deficiency); and other hereditary clotting disorders." },
-    { "q": "State the principles of management of neonatal sepsis.", "a": "Review clinical features and have a high index of suspicion, balancing risks against features seen; investigate and take necessary culture samples; commence antibiotic treatment immediately, especially with major risk factors; review treatment with clinical progress and laboratory results; and repeat investigations when necessary, since sudden deterioration may occur." },
-    { "q": "What does the sepsis screen consist of?", "a": "Full blood count, blood cultures, CSF examination, urine cultures, culture of other relevant body fluids or effluents, and chest radiograph if indicated." },
-    { "q": "State the complete blood count findings suggestive of sepsis.", "a": "White blood cell count decreased < 5,000/mm³ or increased > 34,000/mm³; absolute neutrophil < 1,000/mm³; bands to total neutrophil count ratio > 0.2; and immature to mature neutrophil count ratio > 0.2." },
-    { "q": "When is urinalysis and urine culture indicated?", "a": "Indicated for late onset sepsis; not useful in early onset sepsis." },
-    { "q": "State the Töllner score interpretation.", "a": "Less than 5 — normal; 5–10 — suspected; more than 10 points — definite sepsis. It combines clinical and laboratory findings." },
-    { "q": "State the normal neutrophil band to total neutrophil ratio.", "a": "Less than 0.16 at 12 hours of life, and less than 0.12 after 60 hours." },
-    { "q": "List the acute phase reactants and cut-offs used in neonatal sepsis.", "a": "Elevated micro erythrocyte sedimentation rate; elevated C-reactive protein; elevated high sensitivity CRP > 1 mg/L; and elevated procalcitonin > 2–2.5 ng/mL after postnatal 72 hours." },
-    { "q": "List the cytokines, chemokines and other ancillary markers used.", "a": "CD11b, CD64, IL-6 and IL-8 as markers of inflammation; also monokines, RANTES, MCP-1 and IP-10; plus haptoglobulin, buffy coat smear, Serum Amyloid A (SAA), and Lipopolysaccharide Binding Protein (LBP)." },
-    { "q": "State the other laboratory findings supporting neonatal sepsis.", "a": "Immature neutrophils > 10%; immature:total neutrophil ratio > 0.2; thrombocytopenia < 100,000 × 10⁹/L; CRP > 10 mg/L or 2 SD above normal; procalcitonin > 8.1 mg/dL or 2 SD above normal; IL-6 or IL-8 > 70 pg/mL; and 16S PCR positive." },
-    { "q": "List other investigations used in neonatal sepsis.", "a": "Polymerase chain reaction techniques to recover bacteria; latex agglutination tests; clotting profile; liver function test to rule out bacterial hepatitis; blood glucose; electrolytes; and renal function because of aminoglycosides." },
-    { "q": "In what percentage of neonatal sepsis is blood culture positive?", "a": "Only 5–10%." },
-    { "q": "When is arterial blood gas indicated?", "a": "For signs or symptoms of hypoxia." },
-    { "q": "List the indications for lumbar puncture in neonatal sepsis.", "a": "Primary diagnosis of sepsis; positive blood culture; and neurological signs or symptoms." },
-    { "q": "Why are superficial swab cultures not recommended?", "a": "Cultures from superficial regions such as the axilla, umbilical cord, outer ear canal, nasopharynx and orogastric tubes show poor correlation; routine collection is therefore not recommended." },
-    { "q": "Why are tracheal aspirate cultures not recommended in prolonged intubation?", "a": "Because of rapid colonization following intubation." },
-    { "q": "Define rational use of antibiotics.", "a": "The correct use of quality antibiotics, in the right dosage, with wide microbial coverage, for the right duration, via the right mode of delivery, for the right patient." },
-    { "q": "How is nosocomial neonatal sepsis often treated?", "a": "With vancomycin or fluoroquinolones plus amikacin." },
-    { "q": "State the resistance rates of Klebsiella species given in the lecture.", "a": "Resistance to gentamicin is about 60–72%, and to 3rd generation cephalosporins 57–66%." },
-    { "q": "How is response to antibiotic treatment monitored?", "a": "With clinical state, CRP, procalcitonin, and immature/total neutrophil levels." },
-    { "q": "On what is the choice of initial antibiotics based?", "a": "The sensitivity pattern in the local setting, and review of the response of the patient, especially where laboratory evaluation is poor." },
-    { "q": "State the WHO first line antibiotic recommendation.", "a": "Penicillin (benzylpenicillin, ampicillin or amoxicillin) plus an aminoglycoside (gentamicin); and then vancomycin or cloxacillin plus an aminoglycoside (amikacin)." },
-    { "q": "State the WHO second line antibiotic recommendation.", "a": "Penicillin or cephalosporin (cefotaxime or ceftriaxone) plus an aminoglycoside (amikacin)." },
-    { "q": "List the supportive therapy in neonatal sepsis.", "a": "Correction of anaemia, electrolyte and acid/base imbalances; prevention of hypoxia and hypoglycaemia/hyperglycaemia; maintaining a thermoneutral environment; exchange blood transfusion and buffy coat transfusion; treatment with recombinant cytokines; and management of hypotension and shock." },
-    { "q": "What are the indications for exchange blood transfusion in neonatal sepsis?", "a": "Sclerema, bacterial hepatitis with high conjugated bilirubin, and leucopenia." },
-    { "q": "Which ancillary treatments are of doubtful use in neonatal sepsis?", "a": "Treatments that increase the number or function of neutrophils — granulocyte transfusions, granulocyte-macrophage colony-stimulating factor (GM-CSF), and intravenous immune globulin (IVIG)." },
-    { "q": "How does pentoxifylline work, and what was its effect?", "a": "It reduces TNF-α concentrations associated with sepsis and improves microcirculation; it showed better survival." },
-    { "q": "What intrapartum prophylaxis reduces early onset sepsis, and when is it given?", "a": "Intrapartum penicillin prophylaxis 2–4 hours before spontaneous vaginal delivery, especially in mothers culture-positive for GBS — this significantly reduces EOS." },
-    { "q": "What eye care and cord care are recommended for prevention?", "a": "Eye care with 0.5% erythromycin eye ointment stat; and cord care with 4% chlorhexidine gel once daily for 5–7 days." },
-    { "q": "What immediate post-delivery measure is recommended, and for how long?", "a": "Deliver the baby on the mother's abdomen for skin-to-skin contact for the critical 1 hour." },
-    { "q": "List the remaining preventive measures for neonatal sepsis.", "a": "Minimise or reduce risk factors; good antenatal care to avoid preterm/LBW and asphyxiated deliveries; regular hand washing to reduce skin/mucosa contamination; early and exclusive breastfeeding; reduce traffic flow in the newborn unit; personalize facilities among newborns on admission; sepsis control in the newborn unit; and rational use of antibiotics." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Neonatal Sepsis",
+ "cards": [
+  {
+   "q": "List the outline of this lecture.",
+   "a": "**Introduction/definitions; epidemiology; aetiology; risk factors/host factors; pathogenesis; clinical features/diagnosis; investigations; management; and prevention.**\n\n## Understanding it\n- A standard disease framework applied to neonatal sepsis.\n\n>> Definitions → epidemiology → aetiology → risk → pathogenesis → features → investigations → management → prevention.",
+   "opts": [
+    "Definitions, epidemiology, aetiology, risk, pathogenesis, features, investigations, management, prevention",
+    "Only the definitions",
+    "Only the antibiotic regimens",
+    "Only prevention"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What complicates the diagnosis of neonatal sepsis?",
+   "a": "**The frequent presence of non-infectious conditions that mimic sepsis, especially in the newborn.**\n\n## Understanding it\n- Many non-infective neonatal problems **look like sepsis**, so signs are non-specific.\n\n>> Non-infectious mimics make diagnosis hard.",
+   "opts": [
+    "There are specific confirmatory bedside tests",
+    "Non-infectious conditions that resemble sepsis",
+    "Blood culture is always positive",
+    "Sepsis is always obvious"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is 'Rule Out Sepsis Syndrome' (ROSS)?",
+   "a": "**Because neonatal sepsis is high-risk, clinicians are compelled to empirically treat many babies for possible sepsis (over-investigating/over-treating to avoid missing it).**\n\n## Understanding it\n- The danger of missing sepsis drives **empirical 'rule-out' treatment** of many well babies.\n\n>> ROSS = empirically treating many babies to avoid missing sepsis.",
+   "opts": [
+    "Empirically treating many babies to avoid missing sepsis",
+    "A confirmatory diagnostic test",
+    "A rule that sepsis never occurs",
+    "A vaccine against sepsis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Where does neonatal sepsis rank as a cause of neonatal mortality?",
+   "a": "**The 3rd leading cause, after asphyxia and low birth weight/prematurity.**\n\n## Understanding it\n- Sepsis is the **3rd** biggest neonatal killer (behind asphyxia and prematurity/LBW).\n\n>> 3rd leading cause (after asphyxia and LBW/prematurity).",
+   "opts": [
+    "1st, ahead of all causes",
+    "3rd, after asphyxia and LBW/prematurity",
+    "2nd, after jaundice",
+    "Last among causes"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the top 4 diagnoses in most newborn units?",
+   "a": "**Asphyxia, neonatal sepsis, preterm/LBW, and jaundice.**\n\n## Understanding it\n- The 'big four' of newborn units: asphyxia, sepsis, prematurity/LBW, jaundice.\n\n>> Asphyxia, sepsis, preterm/LBW, jaundice.",
+   "opts": [
+    "Diarrhoea, malaria, pneumonia, measles",
+    "Cancer, stroke, seizure, coma",
+    "Asphyxia, sepsis, preterm/LBW, jaundice",
+    "Trauma, poisoning, drowning, burns"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What proportion of neonatal mortality and of first-week deaths is due to neonatal sepsis?",
+   "a": "**13% of all neonatal mortality, and 42% of deaths in the first week of life.**\n\n## Understanding it\n- Sepsis causes **13%** of neonatal deaths overall but a large **42%** of first-week deaths.\n\n>> 13% overall; 42% of first-week deaths.",
+   "opts": [
+    "13% of neonatal deaths; 42% of first-week deaths",
+    "No measurable proportion",
+    "1% overall; 90% of first-week",
+    "50% overall; 5% of first-week"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What proportion of neonatal deaths in Nigeria does neonatal sepsis explain?",
+   "a": "**About a quarter (25%).**\n\n## Understanding it\n- In Nigeria, sepsis accounts for roughly **25%** of neonatal deaths.\n\n>> ~25% in Nigeria.",
+   "opts": [
+    "About 75%",
+    "About 25%",
+    "About 1%",
+    "About 50%"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the risks of overuse of antibiotics in neonatal sepsis?",
+   "a": "**Increased antibiotic resistance; harmful alteration of the microbiome; and drug toxicity/side effects.**\n\n## Understanding it\n- Over-treating drives **resistance**, disrupts the **microbiome**, and risks **toxicity** — hence antibiotic stewardship.\n\n>> Resistance, microbiome disruption, toxicity.",
+   "opts": [
+    "Resistance, microbiome disruption, and drug toxicity",
+    "No risks at all",
+    "Only mild rashes",
+    "It cures sepsis faster with no downside"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define bacteraemia.",
+   "a": "**The presence of viable bacteria in the blood.**\n\n## Understanding it\n- Bacteraemia = **bacteria present in the blood** (may be transient, without systemic illness).\n\n>> Bacteraemia = viable bacteria in the blood.",
+   "opts": [
+    "A negative blood culture with symptoms",
+    "Bacteria only in the urine",
+    "The presence of viable bacteria in the blood",
+    "Systemic inflammation from any cause"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define septicaemia.",
+   "a": "**Systemic infection confirmed by actively multiplying bacteria in the blood, with systemic effects.**\n\n## Understanding it\n- Septicaemia = **multiplying bacteria in blood causing systemic illness** (worse than simple bacteraemia).\n\n>> Septicaemia = multiplying bacteria in blood with systemic effects.",
+   "opts": [
+    "Bacteria transiently in the blood, no effect",
+    "Systemic infection with actively multiplying bacteria in the blood",
+    "A viral bloodstream infection",
+    "Infection confined to the skin"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define neonatal sepsis.",
+   "a": "**A clinical syndrome of systemic signs of infection (the infant is unwell) in the first month of life, with or without a positive culture.**\n\n## Understanding it\n- A **clinical syndrome** — the baby shows systemic signs of infection; culture may be negative.\n\n>> Clinical syndrome of systemic infection in the newborn.",
+   "opts": [
+    "A localised skin infection",
+    "Any fever in a child",
+    "Only a positive blood culture",
+    "A clinical syndrome of systemic infection signs in the newborn"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define suspected sepsis.",
+   "a": "**The presence of sepsis risk factors, with or without clinical symptoms — prompting evaluation/empirical treatment.**\n\n## Understanding it\n- Based mainly on **risk factors**, regardless of symptoms.\n\n>> Suspected = risk factors present (± symptoms).",
+   "opts": [
+    "Risk factors present, with or without symptoms",
+    "Clinical + lab findings but negative culture",
+    "Positive culture with symptoms",
+    "No risk factors at all"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define clinical sepsis.",
+   "a": "**Clinical and laboratory findings of sepsis are present, but the pathogen is not demonstrated (culture-negative).**\n\n## Understanding it\n- The baby looks and tests septic, but **cultures fail to grow** the organism.\n\n>> Clinical + lab findings, but culture-negative.",
+   "opts": [
+    "Clinical and lab findings present, but culture-negative",
+    "No clinical findings at all",
+    "Only risk factors, no findings",
+    "Culture-positive with clinical findings"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define proven sepsis.",
+   "a": "**Clinical and laboratory findings are present, with demonstration of the pathogen (positive culture).**\n\n## Understanding it\n- Proven = the organism is **actually isolated** (positive culture) alongside the clinical picture.\n\n>> Proven = culture-positive with clinical/lab findings.",
+   "opts": [
+    "Only risk factors present",
+    "A single raised CRP alone",
+    "Findings present but culture-negative",
+    "Clinical/lab findings plus a positive culture (pathogen demonstrated)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is required to diagnose coagulase-negative sepsis?",
+   "a": "**Two positive blood cultures, or one positive culture plus a positive CRP (because CoNS is often a contaminant).**\n\n## Understanding it\n- Since CoNS commonly **contaminates**, you need corroboration: two cultures or one culture + raised CRP.\n\n>> Two positive cultures, or one plus a raised CRP.",
+   "opts": [
+    "No culture is needed",
+    "A single positive culture is enough",
+    "A negative culture with symptoms",
+    "Two positive cultures, or one plus a raised CRP"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define probable sepsis.",
+   "a": "**Signs and symptoms of infection plus at least two abnormal laboratory results (but no positive culture).**\n\n## Understanding it\n- Clinical signs **plus ≥2 abnormal labs** make sepsis probable.\n\n>> Symptoms + ≥2 abnormal labs.",
+   "opts": [
+    "A positive culture only",
+    "Only one abnormal lab result",
+    "No symptoms, just risk factors",
+    "Signs/symptoms plus at least two abnormal lab results"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define possible sepsis.",
+   "a": "**Clinical signs and symptoms of infection plus a raised CRP or IL-6/IL-8.**\n\n## Understanding it\n- Symptoms **plus a single raised inflammatory marker** (CRP/IL-6/IL-8).\n\n>> Symptoms + raised CRP or IL-6/IL-8.",
+   "opts": [
+    "No clinical signs",
+    "Signs/symptoms plus raised CRP or IL-6/IL-8",
+    "Only a positive urine culture",
+    "Two positive blood cultures"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is SIRS, and how does it relate to sepsis?",
+   "a": "**SIRS is the physiological response to inflammation from any source (including infection); sepsis is SIRS due to (suspected/proven) infection.**\n\n## Understanding it\n- SIRS = the inflammatory response to **any** insult; **sepsis = SIRS + infection**.\n\n>> SIRS = inflammatory response; sepsis = SIRS due to infection.",
+   "opts": [
+    "Sepsis and SIRS are unrelated",
+    "SIRS is inflammation from any source; sepsis is SIRS due to infection",
+    "SIRS only occurs in infection",
+    "SIRS means a positive blood culture"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why is SIRS limited in neonates?",
+   "a": "**Because many septic neonates lack a specific focus and clear signs, especially the very preterm — SIRS criteria are insensitive.**\n\n## Understanding it\n- Neonates (esp. preterm) show **subtle, non-specific** signs, so SIRS criteria miss cases.\n\n>> Neonatal signs are subtle/non-specific → SIRS is insensitive.",
+   "opts": [
+    "SIRS is perfectly specific in neonates",
+    "Septic neonates often lack clear signs, so SIRS is insensitive",
+    "Neonates never develop SIRS",
+    "SIRS only applies to adults legally"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How many SIRS criteria are needed, and what is the extra requirement?",
+   "a": "**At least two of four criteria, one of which must be an abnormal temperature or leukocyte count.**\n\n## Understanding it\n- Need **≥2 criteria**, and one must be **temperature or white-cell** abnormality (not just HR/RR).\n\n>> ≥2 criteria; one must be temperature or leukocyte count.",
+   "opts": [
+    "At least two, one being abnormal temperature or leukocyte count",
+    "Only one criterion",
+    "Two, but must include heart rate",
+    "All four criteria"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the temperature criterion for SIRS.",
+   "a": "**Core temperature > 38.5 °C or < 36 °C.**\n\n## Understanding it\n- Either **fever (>38.5)** or **hypothermia (<36)** counts — neonates often go hypothermic.\n\n>> >38.5 °C or <36 °C.",
+   "opts": [
+    "<30 °C only",
+    ">37 °C only",
+    "Core temperature >38.5 °C or <36 °C",
+    ">40 °C only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the tachycardia and bradycardia criteria for SIRS.",
+   "a": "**Tachycardia = mean heart rate >2 SD above normal for age (no external stimulus); bradycardia (in neonates) = mean HR <10th percentile for age.**\n\n## Understanding it\n- Both **tachy- and brady-cardia** count in neonates (defined relative to age norms).\n\n>> HR >2 SD above (tachy) or below-normal (brady) for age.",
+   "opts": [
+    "HR >2 SD above normal (tachy) or below-normal (brady) for age",
+    "Only a fixed HR of 100",
+    "HR is not a criterion",
+    "Only tachycardia counts"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the respiratory and leukocyte criteria for SIRS.",
+   "a": "**Mean respiratory rate >2 SD above normal for age; and leukocyte count elevated or depressed for age (or >10% immature neutrophils).**\n\n## Understanding it\n- Abnormal **respiratory rate** and abnormal **white-cell count** (high, low, or left shift) are criteria.\n\n>> RR >2 SD above normal; abnormal WBC (± >10% bands).",
+   "opts": [
+    "Neither is a criterion",
+    "Only a slow respiratory rate",
+    "RR >2 SD above normal; abnormal leukocyte count (± >10% bands)",
+    "Only a normal WBC"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define severe sepsis.",
+   "a": "**Sepsis plus one of: cardiovascular organ dysfunction, acute respiratory distress syndrome, or two or more other organ dysfunctions.**\n\n## Understanding it\n- Severe sepsis = sepsis **with organ dysfunction** (cardiovascular, respiratory, or ≥2 organs).\n\n>> Sepsis + organ dysfunction.",
+   "opts": [
+    "Sepsis plus cardiovascular/respiratory or ≥2 organ dysfunctions",
+    "Sepsis with only a fever",
+    "Bacteraemia without symptoms",
+    "Sepsis with a normal examination"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the signs of end organ damage.",
+   "a": "**Low PaO2/FiO2 (acute lung injury); absent bowel sounds (ileus); oliguria; and rising creatinine — reflecting failing organs.**\n\n## Understanding it\n- End-organ damage shows as **lung (low PaO2/FiO2), gut (ileus), kidney (oliguria, ↑creatinine)** failure.\n\n>> Low PaO2/FiO2, ileus, oliguria, rising creatinine.",
+   "opts": [
+    "Only a fever",
+    "A single raised CRP",
+    "Normal urine output and bowel sounds",
+    "Low PaO2/FiO2, ileus, oliguria, rising creatinine"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the signs of hypoperfusion or cardiovascular dysfunction.",
+   "a": "**Increased lactic acid; low blood pressure; decreased capillary refill; and changes in mental state/colour.**\n\n## Understanding it\n- Poor perfusion → **raised lactate, hypotension, slow capillary refill, altered colour/mentation**.\n\n>> ↑ lactate, hypotension, slow cap refill, altered state.",
+   "opts": [
+    "Raised lactate, hypotension, slow capillary refill, altered state",
+    "Normal lactate and BP",
+    "Bounding pulses and warm skin",
+    "Fast capillary refill"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define septic shock.",
+   "a": "**Severe sepsis plus sepsis-induced hypotension that is refractory to fluid resuscitation (requiring inotropes).**\n\n## Understanding it\n- Septic shock = severe sepsis with **hypotension that fluids can't fix**.\n\n>> Severe sepsis + fluid-refractory hypotension.",
+   "opts": [
+    "Severe sepsis plus fluid-refractory hypotension",
+    "Bacteraemia alone",
+    "Sepsis with normal blood pressure",
+    "Any low blood pressure in a well baby"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does the incidence of neonatal sepsis vary?",
+   "a": "**Across regions, across centres within the same region, and over time within the same centre.**\n\n## Understanding it\n- Incidence is **highly variable** by place and time.\n\n>> Varies by region, by centre, and over time.",
+   "opts": [
+    "Only by the baby's sex",
+    "It never changes over time",
+    "It is identical everywhere",
+    "By region, by centre, and over time"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define early onset neonatal sepsis.",
+   "a": "**Symptoms occurring at less than 72 hours (various cut-offs range from 48 hours to 7 days are used).**\n\n## Understanding it\n- Early-onset = **within ~72 hours** (often maternal-genital-tract organisms).\n\n>> EOS = <72 hours (cut-offs vary 48 h–7 d).",
+   "opts": [
+    "Symptoms after 1 month",
+    "Symptoms at <72 hours (cut-offs vary)",
+    "Symptoms after 7 days",
+    "Symptoms only at birth"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define late onset and very late onset neonatal sepsis.",
+   "a": "**Late onset — diagnosed on days 4–30 of life; very late onset — after 30 days (e.g. in very preterm infants still hospitalised).**\n\n## Understanding it\n- Late onset (days 4–30) is often **hospital/community-acquired**; very late onset is after 30 days.\n\n>> Late onset days 4–30; very late onset >30 days.",
+   "opts": [
+    "Late onset days 4–30; very late onset after 30 days",
+    "Both within 24 hours",
+    "Late onset before 72 hours",
+    "Very late onset at birth"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Where do early onset and late onset pathogens come from?",
+   "a": "**Early onset pathogens come from the maternal genital tract (e.g. Group B Streptococcus, E. coli); late onset pathogens are hospital/community-acquired (postnatal environment).**\n\n## Understanding it\n- EOS = **maternal genital flora**; LOS = **environmental/nosocomial** organisms.\n\n>> EOS from maternal tract; LOS from the environment.",
+   "opts": [
+    "Both airborne",
+    "EOS from the maternal genital tract; LOS from the environment/hospital",
+    "EOS from the environment; LOS from the mother",
+    "Both from the maternal tract"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why is the classification different in developing countries?",
+   "a": "**Because similar organisms are found before and after 72 hours, and most deliveries are outside hospital, so the neat early/late split is less applicable.**\n\n## Understanding it\n- In developing settings the **same organisms** cause EOS and LOS, blurring the classification.\n\n>> Similar organisms before/after 72 h → the split blurs.",
+   "opts": [
+    "The organisms are completely different",
+    "Similar organisms occur before and after 72 hours (split is blurred)",
+    "Sepsis does not occur there",
+    "Classification is legally banned"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the causes of early onset sepsis in developed countries.",
+   "a": "**Group B Streptococcus (43–58%), E. coli, other gram-negatives, S. aureus, and Listeria.**\n\n## Understanding it\n- In the developed world, **GBS dominates** early-onset sepsis (plus E. coli, Listeria).\n\n>> GBS (top), E. coli, gram-negatives, S. aureus, Listeria.",
+   "opts": [
+    "Only coagulase-negative Staphylococcus",
+    "Only Candida",
+    "Only Pseudomonas",
+    "GBS (top), E. coli, other gram-negatives, S. aureus, Listeria"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the causes of late onset sepsis in developed countries.",
+   "a": "**Coagulase-negative Staphylococcus, E. coli, Klebsiella, S. aureus, and Candida.**\n\n## Understanding it\n- Late-onset in the developed world is dominated by **CoNS** (line infections) and gram-negatives/Candida.\n\n>> CoNS, E. coli, Klebsiella, S. aureus, Candida.",
+   "opts": [
+    "CoNS, E. coli, Klebsiella, S. aureus, Candida",
+    "Only S. pneumoniae",
+    "Only Listeria",
+    "Only Group B Streptococcus"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the community-acquired causes of neonatal sepsis in developing countries.",
+   "a": "**Klebsiella, S. aureus, E. coli, Group B Streptococcus, S. pneumoniae, and others.**\n\n## Understanding it\n- In the community, **Klebsiella, S. aureus, E. coli** predominate (a different mix from developed-world GBS dominance).\n\n>> Klebsiella, S. aureus, E. coli, GBS, S. pneumoniae.",
+   "opts": [
+    "Klebsiella, S. aureus, E. coli, GBS, S. pneumoniae",
+    "Only Listeria",
+    "Only Candida",
+    "Only coagulase-negative Staphylococcus"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the hospital-acquired causes of neonatal sepsis in developing countries.",
+   "a": "**Klebsiella, S. aureus, E. coli, coagulase-negative Staphylococcus, and Pseudomonas (often multidrug-resistant).**\n\n## Understanding it\n- Nosocomial organisms (Klebsiella, Pseudomonas, CoNS) are common and often **resistant**.\n\n>> Klebsiella, S. aureus, E. coli, CoNS, Pseudomonas.",
+   "opts": [
+    "Only Group B Streptococcus",
+    "Only S. pneumoniae",
+    "Only Listeria",
+    "Klebsiella, S. aureus, E. coli, CoNS, Pseudomonas"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the MAJOR maternal risk factors for neonatal sepsis.",
+   "a": "**Rupture of membranes >18 hours (or PROM); intrapartum maternal fever >38.0 °C; and chorioamnionitis.**\n\n## Understanding it\n- The big maternal risks: **prolonged ROM, maternal fever, chorioamnionitis** — signs of ascending infection.\n\n>> ROM >18 h, maternal fever >38 °C, chorioamnionitis.",
+   "opts": [
+    "ROM >18 h, intrapartum fever >38 °C, chorioamnionitis",
+    "Maternal good health and term delivery",
+    "Breastfeeding",
+    "Elective caesarean with intact membranes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the fetal/neonatal risk factors.",
+   "a": "**Congenital malformations and preterm/low birth weight — especially VLBW and ELBW.**\n\n## Understanding it\n- The most vulnerable babies are the **preterm/very-low-birth-weight** and those with malformations.\n\n>> Malformations, preterm/LBW (esp. VLBW/ELBW).",
+   "opts": [
+    "Breastfed babies",
+    "Congenital malformations and preterm/LBW (esp. VLBW/ELBW)",
+    "Post-term large babies only",
+    "Term, normal-weight, healthy infants"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the environmental risk factors.",
+   "a": "**Home/TBA/road/taxi/casualty deliveries; and nursery/environmental circumstances (crowding, poor hygiene).**\n\n## Understanding it\n- Unsanitary delivery settings and contaminated nursery environments raise risk.\n\n>> Unsanitary delivery settings; nursery/environmental contamination.",
+   "opts": [
+    "Sterile hospital delivery only",
+    "Unsanitary delivery settings and nursery/environmental contamination",
+    "Good hygiene",
+    "Skin-to-skin contact"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the MINOR risk factors for neonatal sepsis.",
+   "a": "**Peri/intrapartum maternal fever 37.5–38.5 °C; twin gestation; and prematurity (as a lesser contributor).**\n\n## Understanding it\n- Lesser risks: **mild maternal fever, twins, prematurity** — additive with major factors.\n\n>> Mild maternal fever, twin gestation, prematurity.",
+   "opts": [
+    "ROM >18 h and chorioamnionitis",
+    "Mild maternal fever (37.5–38.5 °C), twin gestation, prematurity",
+    "Term singleton delivery",
+    "Maternal good health"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List further minor risk factors relating to family and maternal history.",
+   "a": "**A family history of a sibling with systemic bacterial disease under 3 months of age (and related maternal history).**\n\n## Understanding it\n- A **previous infant with early systemic infection** flags recurrent maternal colonisation (e.g. GBS).\n\n>> Sibling with systemic bacterial disease <3 months.",
+   "opts": [
+    "A sibling with a birthmark",
+    "A sibling with eczema",
+    "A sibling with systemic bacterial disease under 3 months of age",
+    "No family history at all"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the labour characteristics that increase risk.",
+   "a": "**Preterm labour, and premature or prolonged time between rupture of membranes and delivery.**\n\n## Understanding it\n- **Preterm labour** and **prolonged ROM** allow ascending infection.\n\n>> Preterm labour; prolonged ROM-to-delivery interval.",
+   "opts": [
+    "Elective term caesarean",
+    "Short labour with intact membranes",
+    "Preterm labour and prolonged ROM-to-delivery interval",
+    "Planned home birth by a doctor"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the infant characteristics that increase risk.",
+   "a": "**Apgar <6 at 5 minutes; meconium-stained amniotic fluid; oxygen requirement; and resuscitation at birth.**\n\n## Understanding it\n- A **depressed, meconium-exposed baby needing resuscitation/oxygen** is at higher risk.\n\n>> Low Apgar, meconium, oxygen need, resuscitation.",
+   "opts": [
+    "Clear liquor and good tone",
+    "Apgar <6 at 5 min, meconium staining, oxygen need, resuscitation",
+    "No resuscitation needed",
+    "Apgar 9–10 and vigorous"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the stages of sepsis development (seed-soil principle).",
+   "a": "**Skin/mucosal contamination → invasion of skin/mucosa → multiplication of organisms → systemic spread (bacteraemia/sepsis).**\n\n## Understanding it\n- Sepsis develops in steps: **contaminate → invade → multiply → disseminate**.\n\n>> Contamination → invasion → multiplication → systemic spread.",
+   "opts": [
+    "Contamination → invasion → multiplication → systemic spread",
+    "Only local skin infection ever",
+    "Airborne lung entry only",
+    "Immediate bloodstream infection with no steps"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the non-specific mechanisms that are poorly developed in the newborn.",
+   "a": "**Weak/fragile skin and mucosal barriers, and impaired neutrophil/monocyte responses (chemotaxis, phagocytosis).**\n\n## Understanding it\n- The newborn's **physical barriers and phagocytes are immature** → easy invasion.\n\n>> Weak barriers; poor neutrophil/monocyte function.",
+   "opts": [
+    "Fully mature barriers and phagocytes",
+    "Fragile skin/mucosal barriers and poor neutrophil/monocyte responses",
+    "Excess antibody from birth",
+    "A strong adult-like immune system"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the deficient intracellular killing mechanisms in the newborn.",
+   "a": "**Oxygen-dependent killing (OH–, O– radical formation) is poorly developed, and non-oxidative mechanisms are also reduced.**\n\n## Understanding it\n- Newborn phagocytes are **poor at the oxidative (respiratory) burst** that kills ingested bacteria.\n\n>> Weak oxygen-dependent (and non-oxidative) intracellular killing.",
+   "opts": [
+    "Killing is fully mature",
+    "Poor oxygen-dependent (and non-oxidative) intracellular killing",
+    "Excess reactive oxygen species",
+    "No phagocytes are present"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the state of specific immunity in the newborn.",
+   "a": "**Humoral and cellular immunity are weak/ineffective, with relative hypo-immunoglobulinaemia (esp. IgM and IgA, which don't cross the placenta).**\n\n## Understanding it\n- Adaptive immunity is **immature**; the baby lacks its own IgM/IgA.\n\n>> Weak humoral/cellular immunity; low IgM/IgA.",
+   "opts": [
+    "No need for maternal antibody",
+    "Fully developed adaptive immunity",
+    "High IgM and IgA from birth",
+    "Weak humoral/cellular immunity with low IgM/IgA"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which scores and tools are used in the diagnosis of neonatal sepsis?",
+   "a": "**Sepsis score, SOFA score, Töllner sepsis score, and paediatric scoring committee tools.**\n\n## Understanding it\n- Several **composite scores** aid diagnosis (Töllner, SOFA, sepsis score).\n\n>> Sepsis score, SOFA, Töllner score.",
+   "opts": [
+    "Sepsis score, SOFA, Töllner sepsis score",
+    "APGAR score only",
+    "A single blood culture",
+    "Glasgow Coma Scale only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the nature of early clinical signs in neonatal sepsis.",
+   "a": "**Non-specific, non-localising and subtle; they do not distinguish among the possible causes.**\n\n## Understanding it\n- Early signs are **vague** ('not doing well') — a high index of suspicion is essential.\n\n>> Subtle, non-specific, non-localising.",
+   "opts": [
+    "Always a focal rash",
+    "Highly specific and obvious",
+    "Always a high fever",
+    "Subtle, non-specific and non-localising"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the GENERAL clinical features of neonatal sepsis.",
+   "a": "**Fever or temperature instability, poor/dusky colour, 'not doing well', and poor feeding/lethargy.**\n\n## Understanding it\n- Vague general signs: **temperature instability, poor colour, lethargy, 'not right'**.\n\n>> Temperature instability, poor colour, 'not doing well'.",
+   "opts": [
+    "Fever/temperature instability, poor colour, 'not doing well'",
+    "Loud crying and vigor",
+    "A specific rash only",
+    "A single high fever always"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the GASTROINTESTINAL features of neonatal sepsis.",
+   "a": "**Poor feeding, poor sucking/swallowing, abdominal distension, vomiting, and diarrhoea.**\n\n## Understanding it\n- GI signs: **poor feeding, distension, vomiting, diarrhoea**.\n\n>> Poor feeding, distension, vomiting, diarrhoea.",
+   "opts": [
+    "Only constipation",
+    "Increased appetite",
+    "No GI symptoms ever",
+    "Poor feeding, abdominal distension, vomiting, diarrhoea"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the RESPIRATORY features of neonatal sepsis.",
+   "a": "**Respiratory distress; increased nasal secretions; dyspnoea (flaring, chest retractions); apnoea; and cyanosis.**\n\n## Understanding it\n- Respiratory signs: **distress, flaring/retractions, apnoea, cyanosis**.\n\n>> Distress, flaring/retractions, apnoea, cyanosis.",
+   "opts": [
+    "Slow calm breathing",
+    "Respiratory distress, flaring/retractions, apnoea, cyanosis",
+    "Only a barking cough",
+    "No respiratory signs"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the RENAL and CARDIOVASCULAR features of neonatal sepsis.",
+   "a": "**Renal — oliguria, haematuria, dribbling. Cardiovascular — pallor, dusky colour, poor perfusion, hypotension, tachy- or brady-cardia.**\n\n## Understanding it\n- Renal (low/abnormal urine) and cardiovascular (poor perfusion, BP/HR changes) involvement.\n\n>> Oliguria/haematuria; pallor, poor perfusion, BP/HR changes.",
+   "opts": [
+    "Bounding pulses and warm skin",
+    "No cardiovascular signs",
+    "Oliguria/haematuria; pallor, poor perfusion, hypotension, HR changes",
+    "Polyuria and hypertension only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the CNS features of neonatal sepsis.",
+   "a": "**Poor activity/weakness, excessive or poor sleep, apnoea, lethargy, irritability, seizures, and a bulging fontanelle.**\n\n## Understanding it\n- CNS signs: **lethargy/irritability, apnoea, seizures, bulging fontanelle** (meningitis).\n\n>> Lethargy/irritability, apnoea, seizures, bulging fontanelle.",
+   "opts": [
+    "No neurological signs",
+    "Hyperalertness and vigor",
+    "Only a headache",
+    "Lethargy/irritability, apnoea, seizures, bulging fontanelle"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the HAEMATOLOGIC and METABOLIC features of neonatal sepsis.",
+   "a": "**Haematologic — jaundice, pallor, petechiae/purpura, bleeding, splenomegaly. Metabolic — hypo/hyperglycaemia, metabolic acidosis.**\n\n## Understanding it\n- Bleeding/DIC signs (petechiae, purpura, jaundice) plus **glucose and acid-base derangements**.\n\n>> Jaundice/petechiae/bleeding; glucose and acid-base derangements.",
+   "opts": [
+    "Jaundice, petechiae/purpura, bleeding; glucose/acid-base derangements",
+    "No haematologic signs",
+    "Polycythaemia only",
+    "Normal clotting and glucose"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the seven WHO clinical signs indicating neonatal sepsis for immediate referral.",
+   "a": "**Difficulty feeding; convulsions; movement only when stimulated; fast breathing (≥60/min); severe chest in-drawing; fever (≥37.5 °C); and low temperature (<35.5 °C).**\n\n## Understanding it\n- WHO 'danger signs' for **urgent referral** — feeding difficulty, convulsions, lethargy, fast breathing, in-drawing, fever, hypothermia.\n\n>> The WHO danger signs → immediate referral.",
+   "opts": [
+    "Only a rash",
+    "Feeding difficulty, convulsions, lethargy, fast breathing, in-drawing, fever, hypothermia",
+    "Good feeding and vigor",
+    "A single mild cough"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the suspicious clinical signs of neonatal sepsis.",
+   "a": "**Petechiae/purpura with haemodynamic instability; fever; cough; and other signs of systemic illness.**\n\n## Understanding it\n- **Petechiae/purpura + instability** are especially suspicious (meningococcaemia/DIC).\n\n>> Petechiae/purpura with instability; fever; cough.",
+   "opts": [
+    "Petechiae/purpura with haemodynamic instability, fever, cough",
+    "Only mild jaundice",
+    "A healthy vigorous baby",
+    "Good feeding"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the clinical variables in the criteria for diagnosis of neonatal sepsis.",
+   "a": "**Temperature instability; heart rate ≥180 or ≤100/min; respiratory rate/effort abnormalities; and altered activity/perfusion.**\n\n## Understanding it\n- Objective clinical variables: **abnormal temperature, HR (≥180 or ≤100), RR, perfusion**.\n\n>> Temperature instability, HR ≥180/≤100, abnormal RR/perfusion.",
+   "opts": [
+    "No measurable variables",
+    "Temperature instability, HR ≥180 or ≤100, abnormal RR/perfusion",
+    "A fixed normal heart rate",
+    "Normal temperature only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the haemodynamic variables in neonatal sepsis.",
+   "a": "**Blood pressure >2 SD below normal for age; systolic pressure <50 mmHg in a newborn.**\n\n## Understanding it\n- Hypotension: **>2 SD below normal**, or **systolic <50 mmHg** in a newborn.\n\n>> BP >2 SD below normal; systolic <50 mmHg.",
+   "opts": [
+    "BP >2 SD below normal; systolic <50 mmHg in a newborn",
+    "Blood pressure is not measured",
+    "Systolic >120 mmHg",
+    "BP above normal"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the tissue perfusion variables in neonatal sepsis.",
+   "a": "**Capillary refill >3 seconds, and plasma lactate >3 mmol/L.**\n\n## Understanding it\n- Poor perfusion: **slow capillary refill (>3 s)** and **raised lactate (>3 mmol/L)**.\n\n>> Cap refill >3 s; lactate >3 mmol/L.",
+   "opts": [
+    "Capillary refill <1 s and low lactate",
+    "Capillary refill >3 s and plasma lactate >3 mmol/L",
+    "Normal lactate always",
+    "Perfusion is not assessed"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the NEUROLOGIC differential diagnoses of neonatal sepsis.",
+   "a": "**Hypoxic-ischaemic encephalopathy, neonatal seizure, and intracranial haemorrhage.**\n\n## Understanding it\n- Non-infective CNS problems (HIE, seizures, ICH) can mimic sepsis.\n\n>> HIE, neonatal seizure, intracranial haemorrhage.",
+   "opts": [
+    "Gastroenteritis",
+    "Bronchiolitis and asthma",
+    "HIE, neonatal seizure, intracranial haemorrhage",
+    "Eczema"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the RESPIRATORY differential diagnoses of neonatal sepsis.",
+   "a": "**Respiratory distress syndrome (esp. preterm), aspiration pneumonia (amniotic/meconium), and transient tachypnoea of the newborn.**\n\n## Understanding it\n- Non-infective respiratory causes: **RDS, aspiration, TTN** — mimic septic tachypnoea.\n\n>> RDS, aspiration pneumonia, TTN.",
+   "opts": [
+    "Hypoglycaemia",
+    "RDS, aspiration pneumonia, transient tachypnoea of the newborn",
+    "Meningitis and seizures",
+    "Congenital heart block"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the CARDIOVASCULAR and GASTROINTESTINAL differential diagnoses.",
+   "a": "**Cardiovascular — hypoplastic left heart and other structural heart disease. Gastrointestinal — necrotising enterocolitis and other GI pathology.**\n\n## Understanding it\n- Structural heart disease and **NEC** can present like sepsis.\n\n>> Structural heart disease; necrotising enterocolitis.",
+   "opts": [
+    "Only asthma and croup",
+    "Only eczema",
+    "Only meningitis",
+    "Structural heart disease; necrotising enterocolitis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the METABOLIC differential diagnoses of neonatal sepsis.",
+   "a": "**Hypoglycaemia; adrenal disorders (adrenal haemorrhage/insufficiency, CAH); and inborn errors of metabolism.**\n\n## Understanding it\n- Metabolic mimics: **hypoglycaemia, adrenal insufficiency/CAH, inborn errors**.\n\n>> Hypoglycaemia, adrenal disorders, inborn errors of metabolism.",
+   "opts": [
+    "Intracranial haemorrhage",
+    "Bronchiolitis and pneumonia",
+    "Hypoglycaemia, adrenal disorders (CAH), inborn errors of metabolism",
+    "Necrotising enterocolitis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the HAEMATOLOGIC differential diagnoses of neonatal sepsis.",
+   "a": "**Vitamin K clotting-factor deficiency, neonatal purpura fulminans, and immune-mediated (alloimmune) thrombocytopenia.**\n\n## Understanding it\n- Non-septic bleeding/purpura causes: **vitamin K deficiency bleeding, purpura fulminans, immune thrombocytopenia**.\n\n>> Vitamin K deficiency, purpura fulminans, immune thrombocytopenia.",
+   "opts": [
+    "Meningitis and seizures",
+    "Necrotising enterocolitis",
+    "RDS and TTN",
+    "Vitamin K deficiency, purpura fulminans, immune thrombocytopenia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the principles of management of neonatal sepsis.",
+   "a": "**Have a high index of suspicion (review clinical features), balancing the risks of under- vs over-treatment; investigate; and start prompt empirical antibiotics plus supportive care.**\n\n## Understanding it\n- Suspect early, weigh risks, investigate, and **treat promptly with antibiotics + support**.\n\n>> High suspicion, investigate, prompt empirical antibiotics + support.",
+   "opts": [
+    "Wait for a positive culture before any treatment",
+    "Discharge and review in a week",
+    "High suspicion, investigate, prompt empirical antibiotics and supportive care",
+    "Give antibiotics only if febrile"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does the sepsis screen consist of?",
+   "a": "**Full blood count, blood cultures, CSF examination, urine cultures, and cultures of other relevant sites (± CRP/markers).**\n\n## Understanding it\n- The screen samples **blood, CSF, urine** plus the FBC/markers to find/support infection.\n\n>> FBC, blood culture, CSF, urine culture (± markers).",
+   "opts": [
+    "Only a chest X-ray",
+    "Only a single blood glucose",
+    "FBC, blood cultures, CSF examination, urine cultures",
+    "Only a skin swab"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the complete blood count findings suggestive of sepsis.",
+   "a": "**White cell count <5,000/mm³ or >34,000/mm³; abnormal absolute neutrophil count; and thrombocytopenia.**\n\n## Understanding it\n- Either **leukopenia or leukocytosis** (very low WBC is especially worrying), with abnormal neutrophils and low platelets.\n\n>> WBC <5,000 or >34,000; abnormal ANC; thrombocytopenia.",
+   "opts": [
+    "High platelets only",
+    "WBC <5,000 or >34,000/mm³, abnormal ANC, thrombocytopenia",
+    "Only a mildly high WBC",
+    "A normal FBC excludes sepsis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When is urinalysis and urine culture indicated?",
+   "a": "**In late-onset sepsis; it is not useful in early-onset sepsis.**\n\n## Understanding it\n- Urine culture matters for **late-onset** sepsis (haematogenous seeding); not helpful early.\n\n>> Urine culture: late-onset (not early-onset).",
+   "opts": [
+    "In late-onset sepsis (not early-onset)",
+    "Never useful",
+    "Only in early-onset sepsis",
+    "In every case at birth"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the Töllner score interpretation.",
+   "a": "**Less than 5 — normal; 5–10 — suspected sepsis; more than 10 — definite sepsis.**\n\n## Understanding it\n- Töllner: **<5 normal, 5–10 suspected, >10 definite**.\n\n>> <5 normal; 5–10 suspected; >10 definite.",
+   "opts": [
+    "Only >20 is significant",
+    "<5 normal; 5–10 suspected; >10 definite",
+    "<5 definite; >10 normal",
+    "Any score means sepsis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the normal neutrophil band to total neutrophil ratio.",
+   "a": "**Less than 0.16 at 12 hours of life, and less than 0.12 after 60 hours.**\n\n## Understanding it\n- A rising **immature:total (band) ratio** suggests sepsis; normal is **<0.16 early, <0.12 later**.\n\n>> Normal I:T <0.16 (12 h), <0.12 (after 60 h).",
+   "opts": [
+    "Always >0.2",
+    "<0.16 at 12 h; <0.12 after 60 h",
+    "The ratio is not used",
+    "<0.5 at all ages"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the acute phase reactants and cut-offs used in neonatal sepsis.",
+   "a": "**Raised micro-ESR; raised C-reactive protein; and raised procalcitonin.**\n\n## Understanding it\n- Inflammatory markers: **micro-ESR, CRP, procalcitonin** support (not confirm) sepsis.\n\n>> Micro-ESR, CRP, procalcitonin.",
+   "opts": [
+    "Micro-ESR, CRP, and procalcitonin",
+    "Only serum sodium",
+    "Only blood glucose",
+    "Only haemoglobin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the cytokines, chemokines and other ancillary markers used.",
+   "a": "**CD11b, CD64, IL-6 and IL-8 (markers of inflammation), plus monokines, RANTES and others.**\n\n## Understanding it\n- Newer markers (**CD64, IL-6/IL-8, CD11b**) can flag sepsis earlier than CRP.\n\n>> CD11b, CD64, IL-6, IL-8.",
+   "opts": [
+    "Haemoglobin and haematocrit",
+    "Sodium and potassium",
+    "CD11b, CD64, IL-6, IL-8",
+    "Bilirubin only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the other laboratory findings supporting neonatal sepsis.",
+   "a": "**Immature neutrophils >10%; immature:total neutrophil ratio >0.2; and thrombocytopenia.**\n\n## Understanding it\n- A **left shift (>10% immature, I:T >0.2)** and **low platelets** support sepsis.\n\n>> >10% immature neutrophils, I:T >0.2, thrombocytopenia.",
+   "opts": [
+    "Normal neutrophils and high platelets",
+    ">10% immature neutrophils, I:T >0.2, thrombocytopenia",
+    "High haemoglobin",
+    "A single normal CRP"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List other investigations used in neonatal sepsis.",
+   "a": "**PCR to detect bacteria, and latex agglutination for bacterial antigens.**\n\n## Understanding it\n- Molecular/antigen tests (**PCR, latex agglutination**) can identify organisms faster than culture.\n\n>> PCR and latex agglutination.",
+   "opts": [
+    "Only a chest X-ray",
+    "Skin biopsy",
+    "Only blood film",
+    "PCR and latex agglutination for organisms/antigens"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "In what percentage of neonatal sepsis is blood culture positive?",
+   "a": "**Only 5–10%.**\n\n## Understanding it\n- Blood culture is the gold standard but is **positive in only ~5–10%**, so a negative culture doesn't exclude sepsis.\n\n>> Only 5–10% culture-positive.",
+   "opts": [
+    "Nearly 100%",
+    "About 50%",
+    "About 80%",
+    "Only 5–10%"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When is arterial blood gas indicated?",
+   "a": "**For signs or symptoms of hypoxia (to assess oxygenation and acid-base status).**\n\n## Understanding it\n- ABG is done when the baby shows **hypoxia/respiratory compromise**.\n\n>> ABG for signs of hypoxia.",
+   "opts": [
+    "Never in neonates",
+    "Routinely in every baby",
+    "For signs/symptoms of hypoxia",
+    "Only if there is jaundice"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the indications for lumbar puncture in neonatal sepsis.",
+   "a": "**Primary diagnosis of sepsis (part of the full screen), a positive blood culture, and neurological signs/symptoms.**\n\n## Understanding it\n- LP to check for **meningitis**: at diagnosis, with a positive culture, or with neuro signs.\n\n>> Primary work-up, positive culture, or neuro signs.",
+   "opts": [
+    "Primary sepsis work-up, positive blood culture, or neurological signs",
+    "Only if the baby is well",
+    "Only after discharge",
+    "Never indicated"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why are superficial swab cultures not recommended?",
+   "a": "**Because cultures from superficial sites (axilla, umbilical cord, outer ear) reflect skin colonisation, not true invasive infection.**\n\n## Understanding it\n- Surface swabs grow **colonising flora**, giving misleading results — use blood/CSF/urine instead.\n\n>> Superficial swabs show colonisation, not infection.",
+   "opts": [
+    "They are more accurate than blood culture",
+    "They cost too much",
+    "They are painful to obtain",
+    "They reflect colonisation, not true invasive infection"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why are tracheal aspirate cultures not recommended in prolonged intubation?",
+   "a": "**Because of rapid colonisation of the tube after intubation (the culture reflects colonisers, not the true pathogen).**\n\n## Understanding it\n- An intubated airway is quickly **colonised**, so late tracheal aspirates mislead.\n\n>> Post-intubation colonisation makes aspirates unreliable.",
+   "opts": [
+    "Aspirates are always sterile",
+    "Intubation prevents any colonisation",
+    "They are the gold standard",
+    "Rapid colonisation after intubation makes them unreliable"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define rational use of antibiotics.",
+   "a": "**The correct use of quality antibiotics, in the right dosage, with a suitable (narrow-when-possible) microbial spectrum, for the right duration.**\n\n## Understanding it\n- Rational use = **right drug, right dose, right spectrum, right duration** — the core of stewardship.\n\n>> Right drug/dose/spectrum/duration (quality antibiotics).",
+   "opts": [
+    "Antibiotics only after culture results",
+    "The cheapest drug regardless of sensitivity",
+    "Broad-spectrum antibiotics for everyone indefinitely",
+    "Right drug, dose, spectrum and duration (quality antibiotics)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is nosocomial neonatal sepsis often treated?",
+   "a": "**With vancomycin or a fluoroquinolone plus amikacin (targeting resistant hospital organisms/MRSA/CoNS).**\n\n## Understanding it\n- Hospital-acquired sepsis needs cover for **resistant organisms** — vancomycin (MRSA/CoNS) ± amikacin/fluoroquinolone.\n\n>> Vancomycin or fluoroquinolone + amikacin.",
+   "opts": [
+    "Vancomycin or a fluoroquinolone plus amikacin",
+    "Topical antibiotic only",
+    "No antibiotics",
+    "Oral amoxicillin alone"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the resistance rates of Klebsiella species given in the lecture.",
+   "a": "**Resistance to gentamicin is about 60–72%, and high resistance to 3rd-generation cephalosporins.**\n\n## Understanding it\n- Klebsiella is highly resistant (**~60–72% to gentamicin**, and to 3rd-gen cephalosporins) — a major stewardship problem.\n\n>> Gentamicin ~60–72%; high 3rd-gen cephalosporin resistance.",
+   "opts": [
+    "~60–72% to gentamicin; high 3rd-generation cephalosporin resistance",
+    "Resistant only to penicillin",
+    "Under 5% resistance",
+    "Fully sensitive to all antibiotics"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is response to antibiotic treatment monitored?",
+   "a": "**With the clinical state, CRP, procalcitonin, and immature:total neutrophil levels.**\n\n## Understanding it\n- Track the **trend** of clinical state + CRP/procalcitonin/I:T to judge response and duration.\n\n>> Clinical state + CRP + procalcitonin + I:T ratio.",
+   "opts": [
+    "The haemoglobin only",
+    "The blood group",
+    "A single blood glucose",
+    "Clinical state, CRP, procalcitonin, and I:T neutrophil ratio"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "On what is the choice of initial antibiotics based?",
+   "a": "**On the local sensitivity pattern, and review of how organisms have responded in that setting.**\n\n## Understanding it\n- Empirical choice follows **local antibiograms/resistance patterns**, not a fixed global recipe.\n\n>> Guided by local sensitivity patterns.",
+   "opts": [
+    "The cheapest available drug",
+    "The newest drug on the market",
+    "Local sensitivity patterns and local response data",
+    "The parents' preference"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the WHO first line antibiotic recommendation.",
+   "a": "**Penicillin (benzylpenicillin, ampicillin or amoxicillin) plus an aminoglycoside (e.g. gentamicin).**\n\n## Understanding it\n- WHO first-line = **penicillin + aminoglycoside** (covers GBS/Listeria + gram-negatives).\n\n>> Penicillin + aminoglycoside.",
+   "opts": [
+    "A single oral cephalosporin",
+    "Vancomycin plus a fluoroquinolone",
+    "Metronidazole alone",
+    "Penicillin (benzylpenicillin/ampicillin) plus an aminoglycoside"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the WHO second line antibiotic recommendation.",
+   "a": "**Penicillin or a cephalosporin (cefotaxime or ceftriaxone) plus an aminoglycoside.**\n\n## Understanding it\n- Second-line adds/uses a **3rd-generation cephalosporin** with an aminoglycoside.\n\n>> Penicillin/cephalosporin + aminoglycoside.",
+   "opts": [
+    "Oral amoxicillin alone",
+    "Topical treatment only",
+    "No antibiotics",
+    "Penicillin or a cephalosporin (cefotaxime/ceftriaxone) plus an aminoglycoside"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the supportive therapy in neonatal sepsis.",
+   "a": "**Correct anaemia, electrolyte and acid-base imbalances; prevent/treat hypoglycaemia and hypothermia; give oxygen/ventilation and fluids/inotropes as needed.**\n\n## Understanding it\n- Beyond antibiotics: **fix glucose, temperature, electrolytes, acid-base; support breathing and circulation**.\n\n>> Correct glucose/temperature/electrolytes/acid-base; respiratory & circulatory support.",
+   "opts": [
+    "Withhold all fluids",
+    "Correct anaemia/electrolytes/acid-base; prevent hypoglycaemia/hypothermia; oxygen and fluids",
+    "Only vitamin supplements",
+    "Antibiotics alone, no support"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the indications for exchange blood transfusion in neonatal sepsis?",
+   "a": "**Sclerema, bacterial hepatitis with high conjugated bilirubin, and leucopenia.**\n\n## Understanding it\n- Exchange transfusion is reserved for severe sepsis features: **sclerema, severe conjugated hyperbilirubinaemia, leucopenia**.\n\n>> Sclerema, bacterial hepatitis (high conjugated bilirubin), leucopenia.",
+   "opts": [
+    "Any mild fever",
+    "Routinely in all sepsis",
+    "A single high WBC",
+    "Sclerema, bacterial hepatitis with high conjugated bilirubin, leucopenia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which ancillary treatments are of doubtful use in neonatal sepsis?",
+   "a": "**Treatments that increase neutrophil number/function — granulocyte transfusions and colony-stimulating factors (G-CSF/GM-CSF) — are of uncertain benefit.**\n\n## Understanding it\n- Boosting neutrophils (granulocyte transfusion, G-CSF/GM-CSF) has **unproven** benefit.\n\n>> Granulocyte transfusion and CSFs — doubtful benefit.",
+   "opts": [
+    "Antibiotics",
+    "Oxygen therapy",
+    "Granulocyte transfusions and colony-stimulating factors (G-CSF/GM-CSF)",
+    "Correcting hypoglycaemia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does pentoxifylline work, and what was its effect?",
+   "a": "**It reduces TNF-α associated with sepsis and improves the microcirculation (a possible adjunct).**\n\n## Understanding it\n- Pentoxifylline lowers **TNF-α** and improves **microcirculatory** flow, showing some benefit as an adjunct.\n\n>> ↓ TNF-α, improves microcirculation.",
+   "opts": [
+    "It increases TNF-α",
+    "Reduces TNF-α and improves the microcirculation",
+    "It is a broad-spectrum antibiotic",
+    "It replaces fluids"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What intrapartum prophylaxis reduces early onset sepsis, and when is it given?",
+   "a": "**Intrapartum penicillin, given 2–4 hours before delivery (to GBS-colonised/at-risk mothers).**\n\n## Understanding it\n- **Intrapartum penicillin 2–4 h before delivery** cuts early-onset (GBS) sepsis.\n\n>> Intrapartum penicillin, 2–4 h before delivery.",
+   "opts": [
+    "Antibiotics only after delivery",
+    "Oral antibiotics for the baby after birth",
+    "Intrapartum penicillin, 2–4 hours before delivery",
+    "No prophylaxis is effective"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What eye care and cord care are recommended for prevention?",
+   "a": "**Eye care with 0.5% erythromycin ointment (stat), and cord care with 4% chlorhexidine.**\n\n## Understanding it\n- **Erythromycin eye ointment** prevents ophthalmia neonatorum; **chlorhexidine** cord care prevents omphalitis/sepsis.\n\n>> Erythromycin eye ointment; chlorhexidine cord care.",
+   "opts": [
+    "Silver nitrate to the cord",
+    "Antibiotic tablets by mouth",
+    "0.5% erythromycin eye ointment; 4% chlorhexidine cord care",
+    "No eye or cord care"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What immediate post-delivery measure is recommended, and for how long?",
+   "a": "**Deliver the baby onto the mother's abdomen for skin-to-skin contact for the critical early period (helps colonisation with maternal flora, warmth and breastfeeding).**\n\n## Understanding it\n- **Early skin-to-skin** promotes protective maternal colonisation, warmth and breastfeeding.\n\n>> Immediate skin-to-skin contact on the mother.",
+   "opts": [
+    "Formula feeding first",
+    "Immediate skin-to-skin contact on the mother's abdomen",
+    "Immediate separation and isolation",
+    "A warm-water bath first"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the remaining preventive measures for neonatal sepsis.",
+   "a": "**Minimise/reduce risk factors; good antenatal care to prevent preterm/LBW; clean delivery and cord care; breastfeeding; and hand hygiene/infection control.**\n\n## Understanding it\n- Prevention spans **antenatal care, clean delivery, breastfeeding, hygiene** to cut risk.\n\n>> Reduce risk factors; antenatal care; clean delivery; breastfeeding; hygiene.",
+   "opts": [
+    "Reduce risk factors, antenatal care, clean delivery, breastfeeding, hand hygiene",
+    "Avoiding breastfeeding",
+    "Isolating every baby from the mother",
+    "Routine antibiotics for all newborns"
+   ],
+   "ans": 0
+  }
+ ]
 }
