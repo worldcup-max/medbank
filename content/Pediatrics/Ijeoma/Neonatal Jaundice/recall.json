@@ -1,132 +1,1392 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Neonatal Jaundice",
-  "cards": [
-    { "q": "Define neonatal jaundice.", "a": "The yellowish discoloration of the eyes, skin and mucous membranes in the first month of life, due to an elevated level of bilirubin in the blood." },
-    { "q": "Apart from yellow eyes and skin, what other symptoms may neonatal jaundice present with?", "a": "Yellowing of the palms; dark, yellow urine (a newborn's urine should be colourless); and pale-coloured stool (should be yellow or orange)." },
-    { "q": "Elevation of which bilirubin fraction may cause the yellow discoloration?", "a": "Either the unconjugated or the conjugated fraction." },
-    { "q": "What possible physiologic role may bilirubin have?", "a": "It may act as an antioxidant." },
-    { "q": "Which bilirubin fraction is potentially neurotoxic?", "a": "Indirect, unconjugated bilirubin." },
-    { "q": "Is conjugated bilirubin neurotoxic, and what does a raised direct bilirubin indicate?", "a": "It is not neurotoxic, but direct hyperbilirubinaemia indicates a potentially serious hepatic disorder or a systemic illness." },
-    { "q": "What can poor management of neonatal jaundice result in?", "a": "Either death or serious neurological problems." },
-    { "q": "How long ago was neonatal jaundice first described in a child textbook?", "a": "1000 years ago." },
-    { "q": "Who first described yellow staining of the brain, in what year, and who named the pattern kernicterus?", "a": "Orth first described it in 1875; the pattern was later referred to by Schmorl as kernicterus." },
-    { "q": "What unconjugated bilirubin level does almost every newborn develop in the first week of life?", "a": "More than 30 µmol/L (1.8 mg/dL)." },
-    { "q": "How does the incidence of neonatal jaundice vary with ethnicity?", "a": "Higher in East Asians and American Indians, and lower in Africans." },
-    { "q": "How does altitude affect the incidence of neonatal jaundice?", "a": "Incidence is higher in populations living at high altitudes." },
-    { "q": "Which sex is at higher risk of developing significant neonatal jaundice?", "a": "Male infants." },
-    { "q": "What is the estimated prevalence of neonatal jaundice in hospital practice, and how does it differ between preterm and term infants?", "a": "50–80% overall; about 80% in preterm and about 50% in term infants." },
-    { "q": "What are the two broad categories of the cause of neonatal jaundice?", "a": "Physiologic and pathologic." },
-    { "q": "Give the first cause of physiological jaundice relating to red cells.", "a": "Decreased RBC survival (less than 90 days), increased RBC volume per kg, and polycythaemia of the newborn." },
-    { "q": "Give the second cause of physiological jaundice, relating to the liver.", "a": "Poor hepatic uptake due to an immature liver — decreased ligandin or Y-protein." },
-    { "q": "Give the third cause of physiological jaundice, and its three components.", "a": "Increased enterohepatic circulation, due to a high level of intestinal beta-glucuronidase, delayed colonisation by bacteria, and decreased gut motility." },
-    { "q": "How is pathological jaundice classified?", "a": "Into unconjugated hyperbilirubinaemia (haemolytic or non-haemolytic) and conjugated hyperbilirubinaemia (hepatic or post-hepatic)." },
-    { "q": "Name the Coombs test POSITIVE haemolytic causes of unconjugated pathological jaundice.", "a": "ABO incompatibility and Rh incompatibility." },
-    { "q": "Name the Coombs test NEGATIVE haemolytic causes of unconjugated pathological jaundice.", "a": "RBC membrane defects (spherocytosis, elliptocytosis), RBC enzyme defects (G6PD), haemoglobinopathies, sepsis, DIC, haematomas and polycythaemia." },
-    { "q": "Which drugs are listed as a haemolytic cause of neonatal jaundice?", "a": "Diazepam and oxytocin." },
-    { "q": "List the non-haemolytic causes of unconjugated pathological jaundice.", "a": "Breast milk jaundice, Crigler–Najjar syndrome types I and II, Gilbert syndrome, and hypothyroidism." },
-    { "q": "List the HEPATIC causes of conjugated pathological jaundice.", "a": "Idiopathic neonatal hepatitis, Dubin–Johnson syndrome, Rotor's syndrome, infections (TORCH, sepsis), and inborn errors of metabolism (galactosaemia, tyrosinaemia)." },
-    { "q": "List the POST-HEPATIC causes of conjugated pathological jaundice.", "a": "Biliary atresia, bile duct stenosis, and choledochal cyst." },
-    { "q": "List the common causes of neonatal jaundice in our environment.", "a": "Physiological, blood group incompatibility, G6PD deficiency, breast milk jaundice, sepsis, and cephalhaematoma." },
-    { "q": "List the clinical presentations of neonatal jaundice.", "a": "Yellowness of the eyes or body, fever, vomiting, inability to suck, features of failure to thrive, abdominal distension, and passage of pale stool." },
-    { "q": "What should be asked about the jaundice itself in the history?", "a": "Onset, duration and progression, and the colour of the urine and stool." },
-    { "q": "What items of maternal history are relevant in neonatal jaundice?", "a": "Antenatal history — booking, illness and infections; drugs — sulfa, NSAIDs, herbal; and medical history — blood group, haemolytic diseases and liver disease." },
-    { "q": "What features of the birth history are relevant?", "a": "Birth trauma and delayed cord clamping." },
-    { "q": "What other history items should be covered?", "a": "Biodata, vomiting, feeding history and loss of weight." },
-    { "q": "What are the two colour patterns of jaundice on examination, and what does each suggest?", "a": "Bright yellow or orange, and greenish or muddy yellow." },
-    { "q": "Describe the direction in which jaundice progresses in the newborn.", "a": "Cephalocaudal — starting on the face and progressing to the abdomen and then the feet as serum levels increase." },
-    { "q": "Kramer's index zone 1 — area and bilirubin level.", "a": "Face — 4–6 mg/dL." },
-    { "q": "Kramer's index zone 2 — area and bilirubin level.", "a": "Chest and upper trunk — 8–10 mg/dL." },
-    { "q": "Kramer's index zone 3 — area and bilirubin level.", "a": "Lower abdomen and thigh — 12–14 mg/dL." },
-    { "q": "Kramer's index zone 4 — area and bilirubin level.", "a": "Forearms and lower legs — 15–18 mg/dL." },
-    { "q": "Kramer's index zone 5 — area and bilirubin level.", "a": "Palms and soles — greater than 15–20 mg/dL." },
-    { "q": "Apart from jaundice, what should be looked for on examination?", "a": "Pallor, dehydration, weight loss, fever or hypothermia, hepato/splenomegaly, evidence of birth trauma or injuries, and evidence of kernicterus." },
-    { "q": "What are the two methods of bilirubin measurement?", "a": "Serum bilirubin (total and direct), and transcutaneous measurement using a bilirubinometer or icterometer." },
-    { "q": "Which haematological investigations are done in neonatal jaundice?", "a": "Full blood count and blood smear, haemoglobin concentration, reticulocyte count, blood group and Coombs test." },
-    { "q": "Which urine investigations are done?", "a": "Urinalysis for reducing substances, and urine microscopy, culture and sensitivity." },
-    { "q": "Which biochemical and other investigations are done?", "a": "Electrolytes, urea and creatinine; liver function tests (AST/ALT, ALP/GGT); G6PD assay; ultrasound scan; thyroid scan and thyroid function tests." },
-    { "q": "Which babies aged 38 weeks or more are eligible for transcutaneous bilirubin estimation?", "a": "Those visibly jaundiced after 24 hours of age, until 14 days." },
-    { "q": "Which babies of 34–37+6 weeks gestation are eligible for TcB?", "a": "Those who are 72 hours old or more, until 14 days." },
-    { "q": "What is the third eligibility criterion for TcB?", "a": "The baby must not be on phototherapy." },
-    { "q": "List the three contraindications to transcutaneous bilirubin measurement.", "a": "Babies with pathological jaundice; babies less than 24 hours old; and babies on phototherapy or who have undergone phototherapy or exchange transfusion." },
-    { "q": "What proportion of breastfed infants get breast milk jaundice, and what proportion get breastfeeding jaundice?", "a": "Breast milk jaundice 2%; breastfeeding jaundice 13%." },
-    { "q": "When does breast milk jaundice occur and when does it peak?", "a": "After the 7th day, peaking at 2–3 weeks." },
-    { "q": "When does breastfeeding jaundice occur?", "a": "Within 1 week." },
-    { "q": "What maximum bilirubin levels are reached in breast milk jaundice and in breastfeeding jaundice?", "a": "Breast milk jaundice may reach 10–30 mg/dL; breastfeeding jaundice may reach more than 12 mg/dL." },
-    { "q": "What happens to the serum bilirubin in breast milk jaundice if breastfeeding stops, and what does it respond to?", "a": "The serum bilirubin falls gradually if breastfeeding stops; it responds to phototherapy." },
-    { "q": "What does breastfeeding jaundice respond to?", "a": "Frequent breastfeeding." },
-    { "q": "What is the aetiology of breast milk jaundice?", "a": "Not clear; it is associated with glucuronidase in the milk." },
-    { "q": "What causes breastfeeding jaundice?", "a": "Decreased milk intake, dehydration, reduced caloric intake, and glucose water supplementation." },
-    { "q": "What are the two aims of treating unconjugated hyperbilirubinaemia?", "a": "To reduce the incidence of severe hyperbilirubinaemia, and to prevent bilirubin encephalopathy (kernicterus)." },
-    { "q": "What are the three treatment modalities for unconjugated hyperbilirubinaemia?", "a": "Phototherapy, exchange blood transfusion, and pharmacotherapy." },
-    { "q": "Define phototherapy.", "a": "The use of high intensity light energy to reduce bilirubin levels on the skin surface." },
-    { "q": "Which light wavelengths/colours are used in phototherapy, and where does bilirubin absorb maximally?", "a": "White, blue, turquoise and green light is used; bilirubin absorbs light maximally in the blue range, 420–470 nm." },
-    { "q": "By how much should adequately delivered phototherapy lower bilirubin, and over what period?", "a": "By 1–2 mg/dL over 4–6 hours." },
-    { "q": "What is the overall mechanism of action of phototherapy?", "a": "Conversion of insoluble bilirubin into soluble bilirubin." },
-    { "q": "What is structural isomerization in phototherapy?", "a": "Conversion of bilirubin to lumirubin, which is rapidly excreted in bile and urine." },
-    { "q": "What is photoisomerisation in phototherapy?", "a": "Conversion of bilirubin (4Z,15Z) to soluble isomers such as 4Z,15E without conjugation, which are excreted into bile." },
-    { "q": "Name the third mechanism of phototherapy.", "a": "Photooxidation." },
-    { "q": "State the bilirubin thresholds that indicate phototherapy.", "a": "TSB above 15 mg/dL in term; above 12 mg/dL in preterm; and above 5 mg/dL within 24 hours." },
-    { "q": "Apart from bilirubin thresholds, what are the other indications for phototherapy?", "a": "As an adjuvant to exchange transfusion; and prophylactic phototherapy in ELBW infants, bruised babies, haemolytic disease of the newborn, and VLBW infants with perinatal risk factors." },
-    { "q": "List the contraindications to phototherapy.", "a": "Porphyria; conjugated hyperbilirubinaemia (causes bronze baby syndrome); unconjugated hyperbilirubinaemia of 20 mg/dL or more; and diseases with hypersensitivity to light." },
-    { "q": "What distance should the phototherapy unit be from the skin, in standard and in intensive phototherapy?", "a": "45 cm for standard phototherapy, and 15–20 cm for intensive phototherapy." },
-    { "q": "What space should be left between the phototherapy unit and the incubator?", "a": "5–8 cm." },
-    { "q": "How can double surface phototherapy be delivered?", "a": "By fibre-optic blankets (biliblankets)." },
-    { "q": "Which parts of the baby must be covered during phototherapy?", "a": "The eyes and the genitals." },
-    { "q": "How often should the baby's position be changed during phototherapy, and how often should the bilirubin level be checked?", "a": "Position changed every 2–4 hours; level checked every 10–20 hours." },
-    { "q": "What supplemental hydration is given during phototherapy?", "a": "10–25 mL/kg/day." },
-    { "q": "What other monitoring is required during phototherapy?", "a": "Frequent temperature monitoring, daily weight check, distancing the child from others not needing phototherapy, and watching for side effects." },
-    { "q": "List the EARLY complications of phototherapy.", "a": "Loose stools, dehydration, skin rashes, hyperpigmentation, upset of maternal–infant interaction (bonding), hyperthermia, and bronze baby syndrome." },
-    { "q": "List the LATE complications of phototherapy.", "a": "Skin malignancy, damage to DNA, patent ductus arteriosus, gonadal damage, retinal damage, and disturbance of circadian rhythm." },
-    { "q": "What is the purpose of exchange blood transfusion?", "a": "To rapidly lower the serum bilirubin concentration and/or prevent a further rise in serum bilirubin." },
-    { "q": "State the bilirubin level indications for exchange transfusion in term and in LBW preterm infants.", "a": "Unconjugated hyperbilirubinaemia of 20 mg/dL and above in term, or 15 mg/dL and above in LBW preterm infants." },
-    { "q": "What is the exchange transfusion threshold for other preterm infants?", "a": "A serum bilirubin up to 10 mg/dL." },
-    { "q": "What rate of rise of bilirubin indicates exchange transfusion?", "a": "A bilirubin level rising rapidly, up to 5 mg/dL per day." },
-    { "q": "What early bilirubin levels indicate exchange transfusion?", "a": "Serum bilirubin above 10 mg/dL on the first day of life, or 15 mg/dL at 48 hours of life." },
-    { "q": "What clinical and other indications exist for exchange transfusion?", "a": "Clinical signs of kernicterus; and others such as severe anaemia and DIC." },
-    { "q": "What technique and access is commonly used for exchange transfusion?", "a": "The 'push–pull' method using an umbilical vein catheter." },
-    { "q": "Which blood is preferred for exchange transfusion, and what alternatives may be used?", "a": "Heparinised, fresh whole blood is preferred; ACD or CPD blood can also be used." },
-    { "q": "What quantity of blood is exchanged, and over what time?", "a": "Twice the blood volume of the patient (160–170 mL/kg), over 60–90 minutes." },
-    { "q": "In what aliquots is blood exchanged?", "a": "In aliquots of 5, 10 or 20 mL, or smaller volumes for small infants." },
-    { "q": "How does priming with albumin increase the efficiency of exchange transfusion, and what dose is used?", "a": "Infusion of 1 mg/kg of salt-poor albumin a few hours before the exchange increases efficiency." },
-    { "q": "Why is the stomach emptied before exchange transfusion?", "a": "To prevent aspiration." },
-    { "q": "What measurements are taken before and after exchange transfusion?", "a": "Pre-EBT and post-EBT packed cell volume and serum bilirubin." },
-    { "q": "How much calcium gluconate is given during exchange transfusion, how often, and with what precaution?", "a": "1 mL of 10% calcium gluconate after every 100 mL, given slowly while listening to the heart alongside." },
-    { "q": "Why must drugs be replaced after exchange transfusion?", "a": "All drugs given earlier must be replaced if it is not yet time for the next dose, since they were removed with the exchanged blood." },
-    { "q": "How is hypoglycaemia prevented after exchange transfusion?", "a": "With 200 mg/kg of IV glucose." },
-    { "q": "What should follow an exchange transfusion?", "a": "Adjuvant phototherapy." },
-    { "q": "List the complications of catheterisation during exchange transfusion.", "a": "Gut perforation and peritonitis; wrong position of the catheter tip (which may excite cardiac arrhythmia if in the right atrium); necrotising enterocolitis; and liver cirrhosis as a long-term complication." },
-    { "q": "List the complications of blood transfusion during exchange transfusion.", "a": "Transmission of infection (malaria, hepatitis B, HIV); transfusion reactions, immediate and delayed; and thromboembolism." },
-    { "q": "List the complications of the exchange process itself.", "a": "Haemodynamic changes from the push–pull process (hypovolaemia, hypervolaemia); electrolyte changes (hyperkalaemia, hypocalcaemia, hypomagnesaemia); acid/base imbalance; and changes in cerebral blood flow." },
-    { "q": "Why is pharmacotherapy not routine in neonatal jaundice?", "a": "Because of its ineffectiveness." },
-    { "q": "What is the mechanism of action of phenobarbitone in neonatal jaundice?", "a": "It augments hepatic uptake of bilirubin and increases the activity of glucuronyl transferase (UDPG-T) enzyme." },
-    { "q": "How long does phenobarbitone take to reach therapeutic level, what is the dose, and what is its main side effect?", "a": "48–72 hours; dose 5–8 mg/kg/day; it sedates, making the baby difficult to assess." },
-    { "q": "In which condition is phenobarbitone particularly useful?", "a": "Crigler–Najjar disease." },
-    { "q": "What is the mechanism of metalloprotoporphyrins such as tin mesoporphyrin?", "a": "They are competitive inhibitors of haem oxygenase; they are experimental but showing prospects." },
-    { "q": "How does oral agar (e.g. cholestyramine) work in neonatal jaundice?", "a": "It decreases the enterohepatic circulation." },
-    { "q": "How does albumin infusion help in neonatal jaundice?", "a": "It increases albumin binding to bilirubin for easy transport." },
-    { "q": "What is the indication, mechanism and dose of intravenous immunoglobulin in neonatal jaundice?", "a": "Used for infants with Rh or ABO isoimmunisation; it inhibits haemolysis; dose 0.5–1 g/kg/dose IV, repeated in 12 hours." },
-    { "q": "Define kernicterus.", "a": "The pathologic diagnosis referring to the yellow staining of the brain caused by bilirubin deposition, associated with neuronal necrosis and gliosis." },
-    { "q": "Kernicterus is a direct consequence of what?", "a": "Very high levels of unconjugated bilirubin." },
-    { "q": "Which parts of the brain are commonly affected in kernicterus?", "a": "Basal ganglia, brain stem nuclei, cerebellar nuclei, hippocampus, and anterior horn cells of the spinal cord." },
-    { "q": "In what proportion of infants does kernicterus develop by pathologic criteria, and under what conditions?", "a": "In 30% of infants with untreated haemolytic disease and bilirubin levels above 25–30 mg/dL." },
-    { "q": "What is the prognosis once overt neurologic signs of kernicterus appear?", "a": "Grave — more than 75% of infants die, and 80% of affected survivors have bilateral choreoathetosis with involuntary muscle spasms." },
-    { "q": "Describe phase 1 of acute bilirubin encephalopathy, including its timing.", "a": "Days 1–3: hypotonia, lethargy, high-pitched cry, poor suck, and loss of the Moro reflex." },
-    { "q": "Describe phase 2 of acute bilirubin encephalopathy, including its timing.", "a": "Middle of the first week: hypertonia, opisthotonus, rigidity, oculogyric crisis, retrocollis, fever and seizures. Those who survive develop chronic bilirubin encephalopathy." },
-    { "q": "Describe phase 3 of acute bilirubin encephalopathy.", "a": "After the first week, hypotonia replaces hypertonia." },
-    { "q": "How does chronic bilirubin encephalopathy manifest in the first year?", "a": "Hypotonia, active deep tendon reflexes, obligatory tonic neck reflexes, and delayed motor skills." },
-    { "q": "How does chronic bilirubin encephalopathy manifest after the first year?", "a": "Movement disorders (choreoathetosis, ballismus, tremor), upward gaze, and sensorineural hearing loss." },
-    { "q": "What is the treatment of established kernicterus?", "a": "Counselling and training the parents on coping with the sequelae; management of feeding difficulty; physiotherapy for limitation of disability; speech and language therapy (SALT); and follow-up appointments." },
-    { "q": "What is the general approach to treating conjugated hyperbilirubinaemia?", "a": "Mainly supportive." },
-    { "q": "Which vitamins are given in conjugated hyperbilirubinaemia and why?", "a": "Parenteral vitamin K; and vitamin A and D supplementation, which prevents rickets." },
-    { "q": "What diet is recommended in conjugated hyperbilirubinaemia?", "a": "Low fat, with medium chain triglycerides." },
-    { "q": "What is the role of phenobarbitone in conjugated hyperbilirubinaemia, and when is surgery needed?", "a": "Phenobarbitone helps bile excretion; surgery may be needed, but not usually in the neonatal period." },
-    { "q": "What does prevention of neonatal jaundice entail?", "a": "Prevention of neonatal jaundice, and the treatment and prevention of its complications when it occurs — following the 5 levels of prevention." },
-    { "q": "Level 1 of prevention — general health promotion. What does it involve?", "a": "Educating the masses about neonatal jaundice and how to prevent it, and lifestyle modification." },
-    { "q": "Level 2 of prevention — specific protection. What does it involve?", "a": "Identifying risks and instituting preventive measures." },
-    { "q": "Level 3 of prevention. What does it involve?", "a": "Early diagnosis and adequate treatment — identifying and treating jaundice promptly." },
-    { "q": "Levels 4 and 5 of prevention. What do they involve?", "a": "Level 4, limitation of disability — physiotherapy. Level 5, rehabilitation — integration of the baby and the mother into the community." },
-    { "q": "What is the conclusion of the lecture regarding the burden of neonatal jaundice?", "a": "It still contributes significantly to neonatal morbidity, mortality and long-term handicap, especially in developing countries — made worse by ignorance on the part of parents and health workers, which delays proper medical care." },
-    { "q": "What measures does the lecture conclude will prevent jaundice-associated problems?", "a": "Education at primary health care level, prompt diagnosis, and referral to the appropriate specialist — so that death is averted and the child has a good quality of life." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Neonatal Jaundice",
+ "cards": [
+  {
+   "q": "Define neonatal jaundice.",
+   "a": "**The yellowish discoloration of the eyes, skin and mucous membranes in a newborn, due to raised serum bilirubin.**\n\n## Understanding it\n- Jaundice = **yellow discoloration** from **hyperbilirubinaemia** in the newborn.\n\n>> Yellow eyes/skin/mucosa from raised bilirubin.",
+   "opts": [
+    "Yellow discoloration of eyes/skin/mucosa from raised bilirubin",
+    "Yellow discoloration from anaemia",
+    "Pallor from low haemoglobin",
+    "A rash from infection"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Apart from yellow eyes and skin, what other symptoms may neonatal jaundice present with?",
+   "a": "**Yellowing of the palms; dark, yellow urine (a newborn's urine should be colourless); and pale stools.**\n\n## Understanding it\n- Beyond yellow eyes/skin: **yellow palms, dark urine, pale stools** (the last two suggest a conjugated/obstructive picture).\n\n>> Yellow palms, dark urine, pale stools.",
+   "opts": [
+    "Bloody stools and vomiting",
+    "Blue extremities and a rash",
+    "Clear urine and dark stools",
+    "Yellow palms, dark urine, and pale stools"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Elevation of which bilirubin fraction may cause the yellow discoloration?",
+   "a": "**Either the unconjugated or the conjugated fraction.**\n\n## Understanding it\n- Jaundice can be from **either** fraction (unconjugated or conjugated) — the distinction guides the cause.\n\n>> Either unconjugated or conjugated bilirubin.",
+   "opts": [
+    "Neither — it is from haemoglobin",
+    "Only conjugated",
+    "Only unconjugated",
+    "Either unconjugated or conjugated bilirubin"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What possible physiologic role may bilirubin have?",
+   "a": "**It may act as an antioxidant.**\n\n## Understanding it\n- Bilirubin has a possible **antioxidant** role (a nuance beyond its toxicity).\n\n>> Bilirubin may act as an antioxidant.",
+   "opts": [
+    "It fights infection directly",
+    "It clots the blood",
+    "It carries oxygen",
+    "It may act as an antioxidant"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which bilirubin fraction is potentially neurotoxic?",
+   "a": "**Indirect, unconjugated bilirubin.**\n\n## Understanding it\n- **Unconjugated (indirect)** bilirubin is fat-soluble, crosses the blood-brain barrier, and is neurotoxic (kernicterus).\n\n>> Unconjugated (indirect) bilirubin is neurotoxic.",
+   "opts": [
+    "Neither is neurotoxic",
+    "Direct (conjugated) bilirubin",
+    "Indirect (unconjugated) bilirubin",
+    "Both equally"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Is conjugated bilirubin neurotoxic, and what does a raised direct bilirubin indicate?",
+   "a": "**It is not neurotoxic, but direct (conjugated) hyperbilirubinaemia indicates a potentially serious underlying (hepatobiliary) disease.**\n\n## Understanding it\n- Conjugated bilirubin **doesn't cross into the brain**, but its elevation signals **liver/biliary disease** to investigate.\n\n>> Not neurotoxic, but flags serious hepatobiliary disease.",
+   "opts": [
+    "Meaningless — always normal",
+    "Neurotoxic like unconjugated",
+    "Not neurotoxic, but signals serious hepatobiliary disease",
+    "Neurotoxic and always benign"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What can poor management of neonatal jaundice result in?",
+   "a": "**Either death or serious neurological problems (kernicterus).**\n\n## Understanding it\n- Untreated severe jaundice can cause **death or permanent brain injury (kernicterus)**.\n\n>> Death or serious neurological damage.",
+   "opts": [
+    "Death or serious neurological problems",
+    "Temporary yellow skin only",
+    "No consequences",
+    "Only a mild rash"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How long ago was neonatal jaundice first described in a child textbook?",
+   "a": "**About 1000 years ago.**\n\n## Understanding it\n- It has been recognised for **~1000 years** in paediatric writing.\n\n>> ~1000 years ago.",
+   "opts": [
+    "About 50 years ago",
+    "In 1875",
+    "Only recently discovered",
+    "About 1000 years ago"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Who first described yellow staining of the brain, in what year, and who named the pattern kernicterus?",
+   "a": "**Orth first described it in 1875; the pattern was later named kernicterus (by Schmorl).**\n\n## Understanding it\n- **Orth (1875)** described the brain staining; **kernicterus** was the later term.\n\n>> Orth, 1875; later named kernicterus.",
+   "opts": [
+    "Pasteur in 1885",
+    "Orth in 1875; later named kernicterus",
+    "Jenner in 1798",
+    "Down in 1866"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What unconjugated bilirubin level does almost every newborn develop in the first week of life?",
+   "a": "**More than 30 µmol/L (1.8 mg/dL).**\n\n## Understanding it\n- Nearly all newborns have a **mild unconjugated rise (>1.8 mg/dL)** — physiological.\n\n>> >30 µmol/L (1.8 mg/dL) in almost all.",
+   "opts": [
+    "More than 20 mg/dL",
+    "Zero — newborns have none",
+    "More than 30 µmol/L (1.8 mg/dL)",
+    "More than 100 mg/dL"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does the incidence of neonatal jaundice vary with ethnicity?",
+   "a": "**Higher in East Asians and American Indians, and lower in Africans.**\n\n## Understanding it\n- Ethnic variation: **higher in East Asians/American Indians, lower in Africans**.\n\n>> Higher in East Asians/American Indians; lower in Africans.",
+   "opts": [
+    "Higher in Africans; lower in Asians",
+    "Identical across all groups",
+    "Higher in East Asians/American Indians; lower in Africans",
+    "Only occurs in Europeans"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does altitude affect the incidence of neonatal jaundice?",
+   "a": "**Incidence is higher in populations living at high altitudes.**\n\n## Understanding it\n- **High altitude** increases the incidence (relative polycythaemia/red-cell turnover).\n\n>> Higher at high altitude.",
+   "opts": [
+    "Higher at high altitudes",
+    "No effect of altitude",
+    "Only at sea level",
+    "Lower at high altitudes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which sex is at higher risk of developing significant neonatal jaundice?",
+   "a": "**Male infants.**\n\n## Understanding it\n- **Boys** are at higher risk of significant jaundice.\n\n>> Male infants.",
+   "opts": [
+    "Neither — equal risk",
+    "Only twins",
+    "Female infants",
+    "Male infants"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the estimated prevalence of neonatal jaundice in hospital practice, and how does it differ between preterm and term infants?",
+   "a": "**50–80% overall; about 80% in preterm and about 50% in term infants.**\n\n## Understanding it\n- Very common (**50–80%**), and **higher in preterm (~80%)** than term (~50%).\n\n>> 50–80% overall; ~80% preterm, ~50% term.",
+   "opts": [
+    "Higher in term than preterm",
+    "50–80% overall; ~80% preterm, ~50% term",
+    "Under 5% overall",
+    "100% in all babies"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the two broad categories of the cause of neonatal jaundice?",
+   "a": "**Physiologic and pathologic.**\n\n## Understanding it\n- The first split is **physiological vs pathological** jaundice.\n\n>> Physiologic and pathologic.",
+   "opts": [
+    "Haemolytic and non-haemolytic only",
+    "Early and late only",
+    "Mild and severe only",
+    "Physiologic and pathologic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the first cause of physiological jaundice relating to red cells.",
+   "a": "**Decreased RBC survival (<90 days) and increased RBC volume per kg — so more bilirubin is produced.**\n\n## Understanding it\n- Newborn red cells are **more numerous and shorter-lived**, producing more bilirubin.\n\n>> Short-lived, high-volume RBCs → more bilirubin.",
+   "opts": [
+    "Biliary obstruction",
+    "Shorter RBC survival and higher RBC volume → more bilirubin",
+    "Immature liver enzymes",
+    "Increased enterohepatic circulation"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the second cause of physiological jaundice, relating to the liver.",
+   "a": "**Poor hepatic uptake due to an immature liver — decreased ligandin (Y protein) and low glucuronyl transferase activity.**\n\n## Understanding it\n- The **immature liver** takes up and conjugates bilirubin poorly (low ligandin/glucuronyl transferase).\n\n>> Immature liver: poor uptake/conjugation.",
+   "opts": [
+    "Excess milk glucuronidase",
+    "Biliary atresia",
+    "Immature liver — poor uptake/conjugation (low ligandin/transferase)",
+    "Short RBC survival"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give the third cause of physiological jaundice, and its three components.",
+   "a": "**Increased enterohepatic circulation — from high intestinal beta-glucuronidase, sterile gut (few bacteria), and delayed feeding/meconium passage.**\n\n## Understanding it\n- Bilirubin is **reabsorbed from the gut** (deconjugated by glucuronidase, sterile gut, delayed passage) → recycled.\n\n>> Enterohepatic recycling (glucuronidase, sterile gut, delayed feeding).",
+   "opts": [
+    "Biliary obstruction",
+    "Increased enterohepatic circulation (glucuronidase, sterile gut, delayed feeding)",
+    "Rapid gut transit and full feeding",
+    "Excess liver enzymes"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is pathological jaundice classified?",
+   "a": "**Into unconjugated hyperbilirubinaemia (haemolytic or non-haemolytic) and conjugated hyperbilirubinaemia.**\n\n## Understanding it\n- Pathological jaundice splits into **unconjugated (haemolytic/non-haemolytic)** and **conjugated**.\n\n>> Unconjugated (haemolytic/non-haemolytic) vs conjugated.",
+   "opts": [
+    "Unconjugated (haemolytic/non-haemolytic) and conjugated",
+    "Mild and severe only",
+    "Early and late only",
+    "Physiologic and breast-milk only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the Coombs test POSITIVE haemolytic causes of unconjugated pathological jaundice.",
+   "a": "**ABO incompatibility and Rh incompatibility (immune/isoimmune haemolysis).**\n\n## Understanding it\n- Coombs-positive (immune) haemolysis = **ABO and Rh incompatibility**.\n\n>> ABO and Rh incompatibility.",
+   "opts": [
+    "Spherocytosis and G6PD deficiency",
+    "ABO and Rh incompatibility",
+    "Breast milk jaundice",
+    "Sepsis and cephalhaematoma"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Name the Coombs test NEGATIVE haemolytic causes of unconjugated pathological jaundice.",
+   "a": "**RBC membrane defects (spherocytosis, elliptocytosis), RBC enzyme defects (G6PD deficiency), sepsis, and extravasated blood (cephalhaematoma).**\n\n## Understanding it\n- Coombs-negative (non-immune) haemolysis = **membrane/enzyme defects, sepsis, sequestered blood**.\n\n>> Spherocytosis, G6PD deficiency, sepsis, cephalhaematoma.",
+   "opts": [
+    "Spherocytosis, G6PD deficiency, sepsis, cephalhaematoma",
+    "Biliary atresia",
+    "ABO and Rh incompatibility",
+    "Crigler-Najjar syndrome"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which drugs are listed as a haemolytic cause of neonatal jaundice?",
+   "a": "**Diazepam and oxytocin.**\n\n## Understanding it\n- The lecture lists **diazepam and oxytocin** as drug-related haemolytic causes.\n\n>> Diazepam and oxytocin.",
+   "opts": [
+    "Phenobarbitone and phenytoin",
+    "Paracetamol and ibuprofen",
+    "Diazepam and oxytocin",
+    "Penicillin and gentamicin"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the non-haemolytic causes of unconjugated pathological jaundice.",
+   "a": "**Breast milk jaundice, Crigler-Najjar syndrome types I and II, Gilbert syndrome, hypothyroidism, and infants of diabetic mothers.**\n\n## Understanding it\n- Non-haemolytic unconjugated causes: **breast milk jaundice, Crigler-Najjar, Gilbert, hypothyroidism, IDM**.\n\n>> Breast milk, Crigler-Najjar, Gilbert, hypothyroidism, IDM.",
+   "opts": [
+    "ABO/Rh incompatibility",
+    "G6PD deficiency",
+    "Biliary atresia",
+    "Breast milk jaundice, Crigler-Najjar, Gilbert, hypothyroidism, IDM"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the HEPATIC causes of conjugated pathological jaundice.",
+   "a": "**Idiopathic neonatal hepatitis, Dubin-Johnson syndrome, Rotor's syndrome, infections (TORCH), and metabolic disorders.**\n\n## Understanding it\n- Hepatic (liver-cell) conjugated causes: **neonatal hepatitis, Dubin-Johnson, Rotor, infections, metabolic**.\n\n>> Neonatal hepatitis, Dubin-Johnson, Rotor, infections, metabolic.",
+   "opts": [
+    "Biliary atresia and choledochal cyst",
+    "ABO/Rh incompatibility",
+    "Breast milk jaundice",
+    "Neonatal hepatitis, Dubin-Johnson, Rotor, infections, metabolic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the POST-HEPATIC causes of conjugated pathological jaundice.",
+   "a": "**Biliary atresia, bile duct stenosis, and choledochal cyst (obstructive causes).**\n\n## Understanding it\n- Post-hepatic (obstructive) conjugated causes: **biliary atresia, bile duct stenosis, choledochal cyst**.\n\n>> Biliary atresia, bile duct stenosis, choledochal cyst.",
+   "opts": [
+    "ABO/Rh incompatibility",
+    "Biliary atresia, bile duct stenosis, choledochal cyst",
+    "Gilbert syndrome",
+    "Neonatal hepatitis and Rotor syndrome"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the common causes of neonatal jaundice in our environment.",
+   "a": "**Physiological, blood group incompatibility, G6PD deficiency, breast milk jaundice, sepsis, and prematurity.**\n\n## Understanding it\n- In this setting, common causes are **physiological, ABO/Rh, G6PD, breast milk, sepsis, prematurity**.\n\n>> Physiological, ABO/Rh, G6PD, breast milk, sepsis, prematurity.",
+   "opts": [
+    "Only choledochal cyst",
+    "Physiological, blood-group incompatibility, G6PD, breast milk, sepsis, prematurity",
+    "Only Crigler-Najjar syndrome",
+    "Only biliary atresia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the clinical presentations of neonatal jaundice.",
+   "a": "**Yellowness of the eyes/body, fever, vomiting, inability to suck, poor feeding, and (in severe cases) neurological signs.**\n\n## Understanding it\n- Beyond the yellow colour, look for **feeding difficulty, fever/vomiting, and neuro signs** (severity clues).\n\n>> Yellow colour, fever/vomiting, poor sucking/feeding.",
+   "opts": [
+    "Only diarrhoea",
+    "Only cough",
+    "Yellow eyes/body, fever, vomiting, poor sucking/feeding",
+    "Only a rash"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What should be asked about the jaundice itself in the history?",
+   "a": "**Its onset, duration and progression, and the colour of the urine and stool.**\n\n## Understanding it\n- Ask **when it started, how it progressed, and urine/stool colour** (dark urine + pale stool = conjugated/obstructive).\n\n>> Onset, duration, progression; urine and stool colour.",
+   "opts": [
+    "Only the baby's weight",
+    "Only the mother's diet",
+    "Onset, duration, progression, and urine/stool colour",
+    "Only the delivery time"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What items of maternal history are relevant in neonatal jaundice?",
+   "a": "**Antenatal history (booking, illness, infections), drugs (sulfa, NSAIDs, oxytocin), and blood group/Rh status.**\n\n## Understanding it\n- Maternal **infections, drugs, and blood group** shape the jaundice risk (e.g. Rh incompatibility, drug haemolysis).\n\n>> Antenatal infections, drugs, and maternal blood group.",
+   "opts": [
+    "Only the mother's age",
+    "Only the father's history",
+    "Antenatal infections, drugs (sulfa/oxytocin), and blood group/Rh",
+    "Only her occupation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What features of the birth history are relevant?",
+   "a": "**Birth trauma and delayed cord clamping.**\n\n## Understanding it\n- **Birth trauma (bruising/cephalhaematoma)** and **delayed cord clamping (polycythaemia)** raise bilirubin.\n\n>> Birth trauma and delayed cord clamping.",
+   "opts": [
+    "The season of birth",
+    "Birth trauma and delayed cord clamping",
+    "The father's occupation",
+    "The hospital name"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What other history items should be covered?",
+   "a": "**Biodata, vomiting, feeding history, and loss of weight.**\n\n## Understanding it\n- Also ask about **feeding, vomiting and weight loss** (dehydration worsens jaundice).\n\n>> Biodata, feeding, vomiting, weight loss.",
+   "opts": [
+    "Only the immunisation record",
+    "Biodata, feeding history, vomiting, and weight loss",
+    "Only the birth length",
+    "Only the family income"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the two colour patterns of jaundice on examination, and what does each suggest?",
+   "a": "**Bright yellow or orange (unconjugated), and greenish or muddy yellow (conjugated/obstructive).**\n\n## Understanding it\n- **Bright yellow/orange = unconjugated**; **greenish/muddy = conjugated** (biliary obstruction).\n\n>> Bright/orange = unconjugated; greenish/muddy = conjugated.",
+   "opts": [
+    "Both mean unconjugated",
+    "Colour has no meaning",
+    "Both mean infection",
+    "Bright/orange (unconjugated) vs greenish/muddy (conjugated)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the direction in which jaundice progresses in the newborn.",
+   "a": "**Cephalocaudal — starting on the face and progressing down to the abdomen and then the limbs/soles.**\n\n## Understanding it\n- Jaundice advances **head-to-toe (cephalocaudal)** as bilirubin rises — the basis of Kramer's index.\n\n>> Cephalocaudal (face → trunk → limbs).",
+   "opts": [
+    "Cephalocaudal — face first, then trunk and limbs",
+    "Only on the palms first",
+    "Randomly over the body",
+    "Caudocephalic — feet first"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Kramer's index zone 1 — area and bilirubin level.",
+   "a": "**Face — 4–6 mg/dL.**\n\n## Understanding it\n- Zone 1 (face) ≈ **4–6 mg/dL** — the lowest zone.\n\n>> Face = 4–6 mg/dL.",
+   "opts": [
+    "Legs — 15–18 mg/dL",
+    "Face — 4–6 mg/dL",
+    "Chest — 8–10 mg/dL",
+    "Palms/soles — >20 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Kramer's index zone 2 — area and bilirubin level.",
+   "a": "**Chest and upper trunk — 8–10 mg/dL.**\n\n## Understanding it\n- Zone 2 (chest/upper trunk) ≈ **8–10 mg/dL**.\n\n>> Chest/upper trunk = 8–10 mg/dL.",
+   "opts": [
+    "Chest and upper trunk — 8–10 mg/dL",
+    "Forearms/legs — 15–18 mg/dL",
+    "Face — 4–6 mg/dL",
+    "Palms/soles — >20 mg/dL"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Kramer's index zone 3 — area and bilirubin level.",
+   "a": "**Lower abdomen and thigh — 12–14 mg/dL.**\n\n## Understanding it\n- Zone 3 (lower abdomen/thigh) ≈ **12–14 mg/dL**.\n\n>> Lower abdomen/thigh = 12–14 mg/dL.",
+   "opts": [
+    "Chest — 8–10 mg/dL",
+    "Lower abdomen and thigh — 12–14 mg/dL",
+    "Face — 4–6 mg/dL",
+    "Palms/soles — >20 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Kramer's index zone 4 — area and bilirubin level.",
+   "a": "**Forearms and lower legs — 15–18 mg/dL.**\n\n## Understanding it\n- Zone 4 (forearms/lower legs) ≈ **15–18 mg/dL**.\n\n>> Forearms/lower legs = 15–18 mg/dL.",
+   "opts": [
+    "Face — 4–6 mg/dL",
+    "Chest — 8–10 mg/dL",
+    "Forearms and lower legs — 15–18 mg/dL",
+    "Palms/soles — >20 mg/dL"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Kramer's index zone 5 — area and bilirubin level.",
+   "a": "**Palms and soles — greater than 15–20 mg/dL (the highest zone).**\n\n## Understanding it\n- Zone 5 (palms/soles) = **>15–20 mg/dL** — jaundice reaching the palms/soles is severe.\n\n>> Palms/soles = >15–20 mg/dL (severe).",
+   "opts": [
+    "Chest — 8–10 mg/dL",
+    "Palms and soles — >15–20 mg/dL",
+    "Face — 4–6 mg/dL",
+    "Lower abdomen — 12–14 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Apart from jaundice, what should be looked for on examination?",
+   "a": "**Pallor, dehydration, weight loss, fever or hypothermia, and hepato/splenomegaly (± neurological signs).**\n\n## Understanding it\n- Look for **anaemia (pallor), dehydration, temperature instability, organomegaly** — clues to cause/severity.\n\n>> Pallor, dehydration, weight loss, fever/hypothermia, hepatosplenomegaly.",
+   "opts": [
+    "Only the yellow colour",
+    "Only the heart sounds",
+    "Only a rash",
+    "Pallor, dehydration, weight loss, temperature instability, hepatosplenomegaly"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the two methods of bilirubin measurement?",
+   "a": "**Serum bilirubin (total and direct), and transcutaneous measurement (TcB) using a bilimeter.**\n\n## Understanding it\n- Bilirubin is measured by **blood (serum, total + direct)** or **transcutaneously (TcB)**.\n\n>> Serum bilirubin and transcutaneous (TcB).",
+   "opts": [
+    "Only a blood film",
+    "Only urine dipstick",
+    "Only clinical estimation",
+    "Serum bilirubin (total/direct) and transcutaneous (TcB)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which haematological investigations are done in neonatal jaundice?",
+   "a": "**FBC and blood smear, haemoglobin concentration, reticulocyte count, blood group/Rh, and Coombs test.**\n\n## Understanding it\n- To find haemolysis: **FBC/film, Hb, reticulocytes, blood group, Coombs**.\n\n>> FBC/film, Hb, reticulocytes, blood group, Coombs.",
+   "opts": [
+    "Only liver ultrasound",
+    "Only serum electrolytes",
+    "FBC/blood smear, Hb, reticulocytes, blood group, Coombs test",
+    "Only a chest X-ray"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which urine investigations are done?",
+   "a": "**Urinalysis for reducing substances, and urine microscopy, culture and sensitivity.**\n\n## Understanding it\n- Urine testing checks for **galactosaemia (reducing substances)** and **UTI (culture)**.\n\n>> Urinalysis (reducing substances) + microscopy/culture.",
+   "opts": [
+    "Only a pregnancy test",
+    "Only blood glucose",
+    "Urinalysis for reducing substances, and microscopy/culture",
+    "Only bilirubin in blood"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which biochemical and other investigations are done?",
+   "a": "**Electrolytes, urea and creatinine; liver function tests (AST/ALT, ALP, GGT); G6PD assay; thyroid function; and septic screen if indicated.**\n\n## Understanding it\n- Biochemistry: **LFTs, U&E, G6PD, thyroid**, plus a **septic screen** when sepsis is suspected.\n\n>> LFTs, U&E, G6PD, thyroid, septic screen.",
+   "opts": [
+    "LFTs, U&E, G6PD assay, thyroid function, septic screen",
+    "Only a blood film",
+    "Only a full blood count",
+    "Only urinalysis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which babies aged 38 weeks or more are eligible for transcutaneous bilirubin estimation?",
+   "a": "**Those visibly jaundiced after 24 hours of age, until 14 days.**\n\n## Understanding it\n- Term (≥38 wk) TcB eligibility: **visibly jaundiced after 24 h, up to 14 days**.\n\n>> ≥38 wk: jaundiced after 24 h, until day 14.",
+   "opts": [
+    "Only in the first 24 hours",
+    "Only if on phototherapy",
+    "Only after 1 month",
+    "Visibly jaundiced after 24 hours, until 14 days"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which babies of 34–37+6 weeks gestation are eligible for TcB?",
+   "a": "**Those who are 72 hours old or more, until 14 days.**\n\n## Understanding it\n- Late-preterm (34–37+6 wk) TcB eligibility: **≥72 hours old, up to 14 days**.\n\n>> 34–37+6 wk: ≥72 h old, until day 14.",
+   "opts": [
+    "Only after 1 month",
+    "72 hours old or more, until 14 days",
+    "In the first hour of life",
+    "Only if pathological"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the third eligibility criterion for TcB?",
+   "a": "**The baby must not be on phototherapy.**\n\n## Understanding it\n- TcB is **unreliable during phototherapy** (light bleaches the skin), so it's not used then.\n\n>> Not on phototherapy.",
+   "opts": [
+    "The baby must be febrile",
+    "The baby must be preterm",
+    "The baby must be over 1 month",
+    "The baby must not be on phototherapy"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the three contraindications to transcutaneous bilirubin measurement.",
+   "a": "**Babies with pathological jaundice; babies less than 24 hours old; and babies on phototherapy.**\n\n## Understanding it\n- Don't rely on TcB in **pathological jaundice, <24 h old, or on phototherapy** — use serum bilirubin.\n\n>> Pathological jaundice, <24 h old, on phototherapy.",
+   "opts": [
+    "Pathological jaundice, <24 hours old, on phototherapy",
+    "Any visibly jaundiced baby",
+    "Babies over 14 days",
+    "Term, healthy, day-3 babies"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What proportion of breastfed infants get breast milk jaundice, and what proportion get breastfeeding jaundice?",
+   "a": "**Breast milk jaundice ~2%; breastfeeding jaundice ~13%.**\n\n## Understanding it\n- **Breast milk jaundice ~2%** (late, milk factor); **breastfeeding (breast-non-feeding) jaundice ~13%** (early, poor intake).\n\n>> Breast milk 2%; breastfeeding 13%.",
+   "opts": [
+    "Breast milk 13%; breastfeeding 2%",
+    "Both ~50%",
+    "Breast milk jaundice ~2%; breastfeeding jaundice ~13%",
+    "Both under 1%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "When does breast milk jaundice occur and when does it peak?",
+   "a": "**After the 7th day, peaking at 2–3 weeks.**\n\n## Understanding it\n- **Breast milk jaundice is late** — starts after day 7, peaks at 2–3 weeks.\n\n>> After day 7; peaks at 2–3 weeks.",
+   "opts": [
+    "Within the first day",
+    "Only after 2 months",
+    "In the first week (breastfeeding jaundice)",
+    "After the 7th day, peaking at 2–3 weeks"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When does breastfeeding jaundice occur?",
+   "a": "**Within the first week (early).**\n\n## Understanding it\n- **Breastfeeding jaundice is early** — within the first week (from poor intake/dehydration).\n\n>> Within the first week.",
+   "opts": [
+    "Within the first week",
+    "In the second trimester",
+    "After the 7th day (breast milk jaundice)",
+    "Only after 1 month"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What maximum bilirubin levels are reached in breast milk jaundice and in breastfeeding jaundice?",
+   "a": "**Breast milk jaundice may reach 10–30 mg/dL; breastfeeding jaundice may reach higher (severe) levels if untreated.**\n\n## Understanding it\n- Breast milk jaundice can be quite high (**10–30 mg/dL**); breastfeeding jaundice can also become severe.\n\n>> Breast milk 10–30 mg/dL; breastfeeding can be high.",
+   "opts": [
+    "Both over 50 mg/dL",
+    "Breast milk jaundice 10–30 mg/dL; breastfeeding jaundice can be high",
+    "Neither exceeds 2 mg/dL",
+    "Both under 5 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens to the serum bilirubin in breast milk jaundice if breastfeeding stops, and what does it respond to?",
+   "a": "**It falls gradually if breastfeeding is stopped; it responds to (temporary) interruption of breastfeeding (and phototherapy if high).**\n\n## Understanding it\n- Stopping breast milk **lowers** the bilirubin — a diagnostic and therapeutic clue.\n\n>> Falls if breastfeeding stops; responds to interruption.",
+   "opts": [
+    "Rises further when stopped",
+    "Is unaffected by feeding",
+    "Only responds to surgery",
+    "Falls if breastfeeding is stopped; responds to interruption"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does breastfeeding jaundice respond to?",
+   "a": "**Frequent breastfeeding (more feeds, better intake/hydration).**\n\n## Understanding it\n- Breastfeeding jaundice is from **poor intake**, so it improves with **more frequent feeding**.\n\n>> Frequent breastfeeding.",
+   "opts": [
+    "Stopping breastfeeding",
+    "IV antibiotics",
+    "Frequent breastfeeding",
+    "Surgery"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the aetiology of breast milk jaundice?",
+   "a": "**Not clearly established; it is associated with glucuronidase (and other factors) in the breast milk.**\n\n## Understanding it\n- The cause is unclear but linked to **milk beta-glucuronidase** increasing enterohepatic recycling.\n\n>> Unclear; linked to milk glucuronidase.",
+   "opts": [
+    "Poor milk intake",
+    "Biliary obstruction",
+    "Definitely a genetic enzyme defect",
+    "Unclear; associated with glucuronidase in the milk"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes breastfeeding jaundice?",
+   "a": "**Decreased milk intake, dehydration, reduced caloric intake, and increased enterohepatic circulation (from delayed feeding).**\n\n## Understanding it\n- Breastfeeding jaundice = **inadequate intake/dehydration** → more enterohepatic recycling.\n\n>> Poor intake/dehydration → enterohepatic recycling.",
+   "opts": [
+    "Rh incompatibility",
+    "Biliary atresia",
+    "Poor milk intake, dehydration, and increased enterohepatic circulation",
+    "A factor in the milk itself (breast milk jaundice)"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the two aims of treating unconjugated hyperbilirubinaemia?",
+   "a": "**To reduce the incidence of severe hyperbilirubinaemia, and to prevent kernicterus (bilirubin brain injury).**\n\n## Understanding it\n- Treatment aims to **keep bilirubin down** and **prevent kernicterus**.\n\n>> Reduce severe hyperbilirubinaemia; prevent kernicterus.",
+   "opts": [
+    "Increase bilirubin production",
+    "Reduce severe hyperbilirubinaemia and prevent kernicterus",
+    "Only improve the skin colour",
+    "Cure the underlying liver disease"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the three treatment modalities for unconjugated hyperbilirubinaemia?",
+   "a": "**Phototherapy, exchange blood transfusion, and pharmacotherapy.**\n\n## Understanding it\n- Three tools: **phototherapy (first-line), exchange transfusion (severe), pharmacotherapy (adjunct)**.\n\n>> Phototherapy, exchange transfusion, pharmacotherapy.",
+   "opts": [
+    "Phototherapy, exchange blood transfusion, pharmacotherapy",
+    "Antibiotics, surgery, steroids",
+    "Only exchange transfusion",
+    "Only phototherapy"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define phototherapy.",
+   "a": "**The use of high-intensity light energy to reduce bilirubin levels in the skin (converting it to excretable forms).**\n\n## Understanding it\n- Phototherapy uses **light** to convert skin bilirubin into water-soluble, excretable products.\n\n>> Light energy that converts bilirubin for excretion.",
+   "opts": [
+    "High-intensity light that converts bilirubin for excretion",
+    "Warming the baby",
+    "A blood transfusion",
+    "A drug that blocks bilirubin production"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which light wavelengths/colours are used in phototherapy, and where does bilirubin absorb maximally?",
+   "a": "**White, blue, turquoise and green light; bilirubin absorbs light maximally in the blue range (~450 nm).**\n\n## Understanding it\n- **Blue light (~450 nm)** matches bilirubin's peak absorption — the most effective.\n\n>> Blue/white/green/turquoise; peak absorption ~450 nm (blue).",
+   "opts": [
+    "Infrared only",
+    "Red light; absorbs in the red range",
+    "Ultraviolet only",
+    "Blue/white/turquoise/green light; peak absorption ~450 nm (blue)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much should adequately delivered phototherapy lower bilirubin, and over what period?",
+   "a": "**By 1–2 mg/dL over 4–6 hours.**\n\n## Understanding it\n- Effective phototherapy drops bilirubin **~1–2 mg/dL every 4–6 hours** — check the trend.\n\n>> ~1–2 mg/dL per 4–6 hours.",
+   "opts": [
+    "By 1–2 mg/dL over 4–6 hours",
+    "No measurable change",
+    "Only after 2 weeks",
+    "By 20 mg/dL in 1 hour"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the overall mechanism of action of phototherapy?",
+   "a": "**Conversion of insoluble (fat-soluble) bilirubin into soluble (excretable) forms.**\n\n## Understanding it\n- Light makes bilirubin **water-soluble** so it can be excreted **without conjugation**.\n\n>> Converts insoluble bilirubin to soluble, excretable forms.",
+   "opts": [
+    "Converts insoluble bilirubin into soluble, excretable forms",
+    "Destroys red blood cells",
+    "Blocks bilirubin production",
+    "Warms the skin only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is structural isomerization in phototherapy?",
+   "a": "**Conversion of bilirubin to lumirubin, which is rapidly excreted in bile and urine (irreversible).**\n\n## Understanding it\n- **Lumirubin** formation is irreversible and **rapidly excreted** — the most important mechanism.\n\n>> Bilirubin → lumirubin (rapidly excreted).",
+   "opts": [
+    "Bilirubin → lumirubin (rapidly and irreversibly excreted)",
+    "Bilirubin → biliverdin",
+    "Destruction of bilirubin to CO2 (photooxidation)",
+    "Bilirubin → haem"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is photoisomerisation in phototherapy?",
+   "a": "**Conversion of bilirubin (4Z,15Z) to soluble configurational isomers (e.g. 4Z,15E) that are excreted without conjugation (reversible).**\n\n## Understanding it\n- A **reversible** shape change to a water-soluble isomer, excreted in bile.\n\n>> Reversible isomerisation to a soluble form (4Z,15E).",
+   "opts": [
+    "Reversible conversion to soluble isomers (e.g. 4Z,15E)",
+    "Destruction of red cells",
+    "Photooxidation to CO2",
+    "Irreversible lumirubin formation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the third mechanism of phototherapy.",
+   "a": "**Photooxidation.**\n\n## Understanding it\n- The three phototherapy mechanisms are structural isomerisation (lumirubin), photoisomerisation, and **photooxidation** (minor).\n\n>> Photooxidation (the third, minor mechanism).",
+   "opts": [
+    "Photooxidation",
+    "Exchange transfusion",
+    "Haemolysis",
+    "Conjugation in the liver"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the bilirubin thresholds that indicate phototherapy.",
+   "a": "**TSB above ~15 mg/dL in term, above ~12 mg/dL in preterm, and above ~5 mg/dL in the first day/very low birth weight (thresholds are lower for less mature/sicker babies).**\n\n## Understanding it\n- Start phototherapy at **lower** thresholds for **preterm/sick/early** babies.\n\n>> ~15 term, ~12 preterm, lower early/preterm.",
+   "opts": [
+    "Only if the baby is febrile",
+    "~15 mg/dL term, ~12 mg/dL preterm, lower early/VLBW",
+    "The same for all babies",
+    "Only above 40 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Apart from bilirubin thresholds, what are the other indications for phototherapy?",
+   "a": "**As an adjuvant to exchange transfusion, and as prophylactic phototherapy in very high-risk infants (e.g. extreme prematurity, haemolysis).**\n\n## Understanding it\n- Also used **alongside exchange transfusion** and **prophylactically** in high-risk babies.\n\n>> Adjuvant to exchange transfusion; prophylaxis in high-risk.",
+   "opts": [
+    "Only for term healthy babies",
+    "Adjuvant to exchange transfusion; prophylaxis in high-risk infants",
+    "Only for conjugated jaundice",
+    "Never used except at 40 mg/dL"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the contraindications to phototherapy.",
+   "a": "**Porphyria, and conjugated hyperbilirubinaemia (which causes bronze baby syndrome).**\n\n## Understanding it\n- Avoid phototherapy in **porphyria** and **conjugated (direct) jaundice** (→ bronze baby syndrome).\n\n>> Porphyria and conjugated hyperbilirubinaemia.",
+   "opts": [
+    "Prematurity",
+    "Porphyria and conjugated hyperbilirubinaemia (bronze baby)",
+    "High unconjugated bilirubin",
+    "ABO incompatibility"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What distance should the phototherapy unit be from the skin, in standard and in intensive phototherapy?",
+   "a": "**45 cm for standard phototherapy, and 15–20 cm for intensive phototherapy (closer = more intense).**\n\n## Understanding it\n- Bringing the light **closer (15–20 cm)** increases irradiance for **intensive** therapy (standard is 45 cm).\n\n>> Standard 45 cm; intensive 15–20 cm.",
+   "opts": [
+    "1 m for both",
+    "15 cm standard; 45 cm intensive",
+    "45 cm standard; 15–20 cm intensive",
+    "Distance does not matter"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What space should be left between the phototherapy unit and the incubator?",
+   "a": "**5–8 cm.**\n\n## Understanding it\n- Leave **5–8 cm** between the unit and incubator (ventilation/heat safety).\n\n>> 5–8 cm.",
+   "opts": [
+    "50 cm",
+    "5–8 cm",
+    "1 m",
+    "No space needed"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How can double surface phototherapy be delivered?",
+   "a": "**By fibre-optic blankets (biliblankets) placed under the baby, adding a second illuminated surface.**\n\n## Understanding it\n- A **biliblanket** underneath + overhead lights = **double-surface** phototherapy (more effective).\n\n>> Fibre-optic blankets (biliblankets).",
+   "opts": [
+    "By a single overhead lamp",
+    "By exchange transfusion",
+    "By sunlight only",
+    "By fibre-optic blankets (biliblankets)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which parts of the baby must be covered during phototherapy?",
+   "a": "**The eyes and the genitals.**\n\n## Understanding it\n- Protect the **eyes (retinal damage)** and **genitals** from the light.\n\n>> Cover the eyes and genitals.",
+   "opts": [
+    "Only the hands",
+    "The eyes and the genitals",
+    "The whole body except the face",
+    "Nothing needs covering"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How often should the baby's position be changed during phototherapy, and how often should the bilirubin level be checked?",
+   "a": "**Position changed every 2–4 hours; bilirubin checked every 10–20 hours.**\n\n## Understanding it\n- Turn the baby **every 2–4 h** (expose more skin) and recheck bilirubin **every 10–20 h**.\n\n>> Reposition every 2–4 h; check bilirubin every 10–20 h.",
+   "opts": [
+    "Reposition every 2–4 h; check bilirubin every 10–20 h",
+    "No monitoring needed",
+    "Reposition daily; check weekly",
+    "Never move; check every hour"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What supplemental hydration is given during phototherapy?",
+   "a": "**10–25 mL/kg/day (extra fluid to offset insensible losses).**\n\n## Understanding it\n- Phototherapy increases **insensible water loss**, so give extra fluids (~10–25 mL/kg/day).\n\n>> 10–25 mL/kg/day extra.",
+   "opts": [
+    "200 mL/kg/hour",
+    "10–25 mL/kg/day",
+    "No extra fluid",
+    "Fluid restriction"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What other monitoring is required during phototherapy?",
+   "a": "**Frequent temperature monitoring, daily weight checks, and maintaining the correct light distance (plus bilirubin trends).**\n\n## Understanding it\n- Watch **temperature, weight (hydration), and light distance** during therapy.\n\n>> Temperature, weight, and light distance.",
+   "opts": [
+    "Only the heart rate",
+    "Frequent temperature, daily weight, and correct light distance",
+    "Only the blood group",
+    "No monitoring"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the EARLY complications of phototherapy.",
+   "a": "**Loose stools, dehydration, skin rashes, hyperpigmentation, and disruption of maternal-infant bonding.**\n\n## Understanding it\n- Early effects: **diarrhoea/dehydration, rash/hyperpigmentation, bonding upset**.\n\n>> Loose stools, dehydration, rash, hyperpigmentation, bonding upset.",
+   "opts": [
+    "Loose stools, dehydration, rash, hyperpigmentation, bonding upset",
+    "Kernicterus",
+    "Biliary atresia",
+    "Skin cancer and DNA damage (late)"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the LATE complications of phototherapy.",
+   "a": "**Skin malignancy, DNA damage, patent ductus arteriosus, and gonadal damage (theoretical long-term risks).**\n\n## Understanding it\n- Potential **late** risks: skin malignancy, DNA damage, PDA, gonadal damage.\n\n>> Skin malignancy, DNA damage, PDA, gonadal damage.",
+   "opts": [
+    "Loose stools and rash (early)",
+    "Kernicterus",
+    "Immediate dehydration",
+    "Skin malignancy, DNA damage, PDA, gonadal damage"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the purpose of exchange blood transfusion?",
+   "a": "**To rapidly lower the serum bilirubin and/or prevent a further rise (and remove antibody-coated red cells in haemolytic disease).**\n\n## Understanding it\n- Exchange transfusion **quickly removes bilirubin** (and offending antibodies/sensitised cells) when levels are dangerous.\n\n>> Rapidly lower bilirubin (and remove antibodies/sensitised cells).",
+   "opts": [
+    "Increase bilirubin production",
+    "Warm the baby",
+    "Treat conjugated jaundice mainly",
+    "Rapidly lower bilirubin and remove antibody-coated cells"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the bilirubin level indications for exchange transfusion in term and in LBW preterm infants.",
+   "a": "**≥20 mg/dL in term infants, or ≥15 mg/dL in low-birth-weight preterm infants.**\n\n## Understanding it\n- Exchange thresholds are **lower for preterm** (~15) than term (~20) mg/dL.\n\n>> ≥20 term; ≥15 LBW preterm.",
+   "opts": [
+    "The same for all babies",
+    "≥40 mg/dL for all",
+    "≥5 mg/dL for term",
+    "≥20 mg/dL term; ≥15 mg/dL LBW preterm"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the exchange transfusion threshold for other preterm infants?",
+   "a": "**A serum bilirubin up to about 10 mg/dL (the smallest/sickest have the lowest thresholds).**\n\n## Understanding it\n- Very preterm/sick babies have the **lowest** exchange threshold (~10 mg/dL).\n\n>> ~10 mg/dL for other (small/sick) preterms.",
+   "opts": [
+    "Above 30 mg/dL",
+    "Up to about 10 mg/dL",
+    "The same as term",
+    "No threshold — never exchange"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What rate of rise of bilirubin indicates exchange transfusion?",
+   "a": "**A bilirubin rising rapidly (up to ~5 mg/dL per day, or ~0.5 mg/dL/hr despite phototherapy).**\n\n## Understanding it\n- A **fast rate of rise** (not just the level) can indicate exchange transfusion.\n\n>> Rapid rise (~5 mg/dL/day).",
+   "opts": [
+    "A rapid rise, up to ~5 mg/dL per day",
+    "Only a level above 40",
+    "Any fall in bilirubin",
+    "A stable level"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What early bilirubin levels indicate exchange transfusion?",
+   "a": "**Serum bilirubin above ~10 mg/dL on the first day of life, or above ~15 mg/dL later — early high levels prompt exchange.**\n\n## Understanding it\n- **Early (day 1) high** bilirubin (>10) or >15 later is an indication (early jaundice is worrying).\n\n>> >10 mg/dL day 1, or >15 later.",
+   "opts": [
+    "Never in the first day",
+    "Any level after 2 weeks",
+    "Only above 40 mg/dL",
+    ">10 mg/dL on day 1, or >15 mg/dL later"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What clinical and other indications exist for exchange transfusion?",
+   "a": "**Clinical signs of kernicterus; and others such as severe anaemia and DIC (in haemolytic disease).**\n\n## Understanding it\n- **Kernicterus signs** mandate exchange; also **severe anaemia/DIC** in haemolytic disease.\n\n>> Signs of kernicterus; severe anaemia/DIC.",
+   "opts": [
+    "A normal examination",
+    "Clinical signs of kernicterus; severe anaemia and DIC",
+    "Conjugated jaundice only",
+    "Mild physiological jaundice"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What technique and access is commonly used for exchange transfusion?",
+   "a": "**The 'push–pull' method using an umbilical vein catheter.**\n\n## Understanding it\n- Blood is exchanged in aliquots via the **umbilical vein** using the **push–pull** technique.\n\n>> Push–pull via an umbilical vein catheter.",
+   "opts": [
+    "Direct cardiac puncture",
+    "A peripheral IV drip only",
+    "Intramuscular injection",
+    "The push–pull method via an umbilical vein catheter"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which blood is preferred for exchange transfusion, and what alternatives may be used?",
+   "a": "**Fresh, heparinised whole blood is preferred; ACD or CPD (citrated) blood may be used as alternatives.**\n\n## Understanding it\n- **Fresh heparinised whole blood** is ideal; citrated (ACD/CPD) blood is an alternative (needs calcium supplementation).\n\n>> Fresh heparinised whole blood (ACD/CPD alternatives).",
+   "opts": [
+    "Fresh heparinised whole blood (ACD/CPD as alternatives)",
+    "Fresh frozen plasma only",
+    "Packed cells only",
+    "Platelets only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What quantity of blood is exchanged, and over what time?",
+   "a": "**Twice the patient's blood volume (about 160–170 mL/kg), over 60–90 minutes.**\n\n## Understanding it\n- A **double-volume** exchange (~160–170 mL/kg) removes most of the bilirubin/sensitised cells, over ~1–1.5 h.\n\n>> Double volume (160–170 mL/kg) over 60–90 min.",
+   "opts": [
+    "10 mL total",
+    "Half the blood volume in 5 minutes",
+    "Ten times the blood volume",
+    "Twice the blood volume (~160–170 mL/kg) over 60–90 min"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "In what aliquots is blood exchanged?",
+   "a": "**In aliquots of 5, 10 or 20 mL (smaller volumes for small infants).**\n\n## Understanding it\n- Exchange in **small aliquots (5–20 mL)** to avoid haemodynamic swings.\n\n>> 5, 10 or 20 mL aliquots (smaller for small infants).",
+   "opts": [
+    "100 mL aliquots always",
+    "1 mL aliquots only",
+    "The whole volume at once",
+    "5, 10 or 20 mL aliquots (smaller for small infants)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How does priming with albumin increase the efficiency of exchange transfusion, and what dose is used?",
+   "a": "**Infusing salt-poor albumin (~1 g/kg) a few hours before draws tissue bilirubin into the circulation, so more is removed; dose ~1 g/kg.**\n\n## Understanding it\n- Pre-exchange **albumin** pulls bilirubin **into the blood**, making the exchange more effective.\n\n>> Albumin (~1 g/kg) pre-exchange mobilises bilirubin into blood.",
+   "opts": [
+    "It has no effect",
+    "It causes haemolysis",
+    "Albumin (~1 g/kg) pre-exchange draws bilirubin into the blood",
+    "It lowers albumin binding"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is the stomach emptied before exchange transfusion?",
+   "a": "**To prevent aspiration (the procedure and handling can cause vomiting).**\n\n## Understanding it\n- Emptying the stomach reduces the **aspiration** risk during the procedure.\n\n>> To prevent aspiration.",
+   "opts": [
+    "To prevent aspiration",
+    "To warm the baby",
+    "To lower the bilirubin",
+    "To speed up the transfusion"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What measurements are taken before and after exchange transfusion?",
+   "a": "**Pre- and post-exchange packed cell volume (PCV) and serum bilirubin.**\n\n## Understanding it\n- Check **PCV and bilirubin before and after** to confirm effect and detect complications.\n\n>> Pre/post PCV and serum bilirubin.",
+   "opts": [
+    "Pre- and post-exchange PCV and serum bilirubin",
+    "Only the weight",
+    "Only the blood group",
+    "Only the temperature"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How much calcium gluconate is given during exchange transfusion, how often, and with what precaution?",
+   "a": "**1 mL of 10% calcium gluconate after every 100 mL exchanged, given slowly while monitoring the heart (citrated blood binds calcium).**\n\n## Understanding it\n- Citrated blood causes **hypocalcaemia**, so give calcium gluconate **slowly** (cardiac monitoring) after each 100 mL.\n\n>> 1 mL 10% Ca gluconate per 100 mL, slowly, with cardiac monitoring.",
+   "opts": [
+    "A large bolus rapidly",
+    "No calcium is needed",
+    "1 mL 10% Ca gluconate per 100 mL, given slowly with cardiac monitoring",
+    "Calcium chloride IM"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why must drugs be replaced after exchange transfusion?",
+   "a": "**Because the exchange removes drugs given earlier — they must be replaced (redosed) if it is not yet time for the next dose.**\n\n## Understanding it\n- Exchange transfusion **washes out** previously given drugs, so they may need **redosing**.\n\n>> Exchange removes earlier drugs → redose them.",
+   "opts": [
+    "To increase bilirubin",
+    "Drugs are never affected",
+    "Drugs become toxic after exchange",
+    "The exchange removes earlier drugs, so they must be redosed"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is hypoglycaemia prevented after exchange transfusion?",
+   "a": "**With IV glucose (about 200 mg/kg) — because citrated donor blood and rebound insulin can cause hypoglycaemia.**\n\n## Understanding it\n- Post-exchange **rebound hypoglycaemia** is prevented with **IV glucose (~200 mg/kg)**.\n\n>> IV glucose ~200 mg/kg.",
+   "opts": [
+    "IV glucose (~200 mg/kg)",
+    "Giving insulin",
+    "Withholding all feeds",
+    "No action needed"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What should follow an exchange transfusion?",
+   "a": "**Adjuvant (continued) phototherapy.**\n\n## Understanding it\n- After an exchange, **continue phototherapy** to control any rebound rise.\n\n>> Continue phototherapy after exchange.",
+   "opts": [
+    "Immediate discharge",
+    "Adjuvant (continued) phototherapy",
+    "A second exchange routinely",
+    "Stop all treatment"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the complications of catheterisation during exchange transfusion.",
+   "a": "**Gut perforation and peritonitis; malposition of the catheter tip; vessel thrombosis/embolism; and haemorrhage.**\n\n## Understanding it\n- Umbilical catheterisation risks **perforation, malposition, thrombosis, bleeding**.\n\n>> Gut perforation, malposition, thrombosis, haemorrhage.",
+   "opts": [
+    "Gut perforation/peritonitis, catheter malposition, thrombosis, haemorrhage",
+    "Kernicterus",
+    "Skin cancer and DNA damage",
+    "Only mild bruising"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the complications of blood transfusion during exchange transfusion.",
+   "a": "**Transmission of infection (malaria, hepatitis B, HIV) and transfusion reactions.**\n\n## Understanding it\n- Donor blood carries **infection and reaction** risks.\n\n>> Infection (malaria/HBV/HIV) and transfusion reactions.",
+   "opts": [
+    "Infection (malaria/HBV/HIV) and transfusion reactions",
+    "Skin malignancy",
+    "Gut perforation",
+    "Kernicterus"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the complications of the exchange process itself.",
+   "a": "**Haemodynamic changes from the push–pull process (hypovolaemia, hypervolaemia), electrolyte disturbances (hypocalcaemia, hyperkalaemia), hypoglycaemia, and hypothermia.**\n\n## Understanding it\n- The **process** causes volume swings, **electrolyte/glucose/temperature** disturbances.\n\n>> Volume swings, electrolyte/glucose/temperature disturbances.",
+   "opts": [
+    "Only infection",
+    "No complications",
+    "Only catheter malposition",
+    "Haemodynamic swings, hypocalcaemia/hyperkalaemia, hypoglycaemia, hypothermia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is pharmacotherapy not routine in neonatal jaundice?",
+   "a": "**Because of its (relative) ineffectiveness compared with phototherapy/exchange transfusion.**\n\n## Understanding it\n- Drugs are **less effective**, so they are adjuncts, not routine.\n\n>> Drugs are relatively ineffective (adjuncts only).",
+   "opts": [
+    "It is contraindicated in all babies",
+    "It is too effective",
+    "It is the first-line",
+    "It is relatively ineffective compared with phototherapy/exchange"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the mechanism of action of phenobarbitone in neonatal jaundice?",
+   "a": "**It augments hepatic uptake of bilirubin and increases the activity of glucuronyl transferase (enhancing conjugation).**\n\n## Understanding it\n- Phenobarbitone **induces the liver enzymes** that conjugate bilirubin, improving uptake/conjugation.\n\n>> Boosts hepatic uptake and glucuronyl transferase.",
+   "opts": [
+    "It blocks haem oxygenase",
+    "It binds bilirubin in plasma",
+    "Increases hepatic uptake and glucuronyl transferase activity",
+    "It decreases enterohepatic circulation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How long does phenobarbitone take to reach therapeutic level, what is the dose, and what is its main side effect?",
+   "a": "**48–72 hours; dose 5–8 mg/kg/day; main side effect is sedation (making the baby difficult to feed).**\n\n## Understanding it\n- Slow onset (**48–72 h**), **5–8 mg/kg/day**, causes **sedation**.\n\n>> 48–72 h; 5–8 mg/kg/day; sedation.",
+   "opts": [
+    "48–72 h; 5–8 mg/kg/day; causes sedation",
+    "Instant; 50 mg/kg; causes fever",
+    "1 week; 1 mg/kg; no side effects",
+    "Immediate; causes hyperactivity"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "In which condition is phenobarbitone particularly useful?",
+   "a": "**Crigler-Najjar disease (type II) — where enzyme induction helps.**\n\n## Understanding it\n- Phenobarbitone is especially useful in **Crigler-Najjar** (enzyme-deficiency states responsive to induction).\n\n>> Crigler-Najjar disease.",
+   "opts": [
+    "Physiological jaundice only",
+    "ABO incompatibility",
+    "Crigler-Najjar disease",
+    "Biliary atresia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the mechanism of metalloprotoporphyrins such as tin mesoporphyrin?",
+   "a": "**They are competitive inhibitors of haem oxygenase (reducing bilirubin production); experimental.**\n\n## Understanding it\n- Tin mesoporphyrin **blocks haem oxygenase**, cutting bilirubin production at source (still experimental).\n\n>> Inhibit haem oxygenase (block bilirubin production).",
+   "opts": [
+    "Enzyme inducers like phenobarbitone",
+    "Decrease enterohepatic circulation",
+    "Bind bilirubin in plasma",
+    "Competitive inhibitors of haem oxygenase (reduce bilirubin production)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How does oral agar (e.g. cholestyramine) work in neonatal jaundice?",
+   "a": "**It decreases the enterohepatic circulation (binds bilirubin in the gut so it is excreted, not reabsorbed).**\n\n## Understanding it\n- Gut binders like agar/cholestyramine **trap bilirubin in the stool**, reducing reabsorption.\n\n>> Reduce enterohepatic circulation (bind gut bilirubin).",
+   "opts": [
+    "Induces liver enzymes",
+    "Binds bilirubin in plasma",
+    "Decreases enterohepatic circulation (binds gut bilirubin)",
+    "Inhibits haem oxygenase"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does albumin infusion help in neonatal jaundice?",
+   "a": "**It increases albumin binding of bilirubin, allowing easier transport (and mobilises tissue bilirubin, protecting the brain).**\n\n## Understanding it\n- More albumin **binds free bilirubin**, keeping it out of the brain and aiding removal.\n\n>> Increases albumin binding/transport of bilirubin.",
+   "opts": [
+    "Reduces enterohepatic circulation",
+    "Blocks bilirubin production",
+    "Increases albumin binding/transport of bilirubin",
+    "Destroys red cells"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the indication, mechanism and dose of intravenous immunoglobulin in neonatal jaundice?",
+   "a": "**Used for Rh or ABO isoimmunisation; it inhibits haemolysis (blocks antibody-mediated red-cell destruction); given as ~0.5–1 g/kg.**\n\n## Understanding it\n- IVIG blocks the **antibody-mediated haemolysis** in isoimmune disease, reducing the need for exchange.\n\n>> Isoimmunisation; inhibits haemolysis; ~0.5–1 g/kg.",
+   "opts": [
+    "Any jaundice; induces liver enzymes",
+    "Biliary atresia; a laxative",
+    "Isoimmunisation; inhibits haemolysis; ~0.5–1 g/kg",
+    "Physiological jaundice; boosts haemolysis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define kernicterus.",
+   "a": "**The pathologic diagnosis referring to the yellow staining of the brain (basal ganglia/brainstem nuclei) by bilirubin, with associated neuronal injury.**\n\n## Understanding it\n- Kernicterus = **bilirubin staining and damage** of specific brain nuclei.\n\n>> Bilirubin staining/injury of the brain nuclei.",
+   "opts": [
+    "Liver inflammation",
+    "Yellow staining of the skin",
+    "A reversible skin condition",
+    "Yellow bilirubin staining and injury of brain nuclei"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Kernicterus is a direct consequence of what?",
+   "a": "**Very high levels of unconjugated (indirect) bilirubin.**\n\n## Understanding it\n- Kernicterus follows **very high unconjugated bilirubin** crossing into the brain.\n\n>> Very high unconjugated bilirubin.",
+   "opts": [
+    "Low bilirubin",
+    "Very high unconjugated bilirubin",
+    "Liver enzyme deficiency alone",
+    "High conjugated bilirubin"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which parts of the brain are commonly affected in kernicterus?",
+   "a": "**The basal ganglia, brainstem nuclei, cerebellar nuclei, hippocampus, and (cranial nerve) nuclei.**\n\n## Understanding it\n- Bilirubin preferentially injures the **basal ganglia and brainstem/cerebellar nuclei**.\n\n>> Basal ganglia, brainstem, cerebellar nuclei, hippocampus.",
+   "opts": [
+    "The cerebral cortex only",
+    "Basal ganglia, brainstem, cerebellar nuclei, hippocampus",
+    "The meninges only",
+    "The spinal cord only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "In what proportion of infants does kernicterus develop by pathologic criteria, and under what conditions?",
+   "a": "**In about 30% of infants with untreated haemolytic disease and very high bilirubin levels (>25–30 mg/dL).**\n\n## Understanding it\n- ~**30%** of untreated haemolytic disease with **very high bilirubin** develop kernicterus.\n\n>> ~30% of untreated haemolytic disease with very high bilirubin.",
+   "opts": [
+    "Under 0.1% ever",
+    "~30% of untreated haemolytic disease with very high bilirubin",
+    "100% of all jaundiced babies",
+    "Only in conjugated jaundice"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the prognosis once overt neurologic signs of kernicterus appear?",
+   "a": "**Grave — more than 75% of affected infants die, and ~80% of survivors have severe sequelae.**\n\n## Understanding it\n- Once overt signs appear, outcome is **grave** (high mortality; severe disability in survivors) — so prevention is key.\n\n>> Grave: >75% die, ~80% of survivors disabled.",
+   "opts": [
+    "Grave — >75% die, ~80% of survivors severely disabled",
+    "Excellent — full recovery",
+    "Reversible with phototherapy",
+    "Mild — no long-term effects"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe phase 1 of acute bilirubin encephalopathy, including its timing.",
+   "a": "**Days 1–3: hypotonia, lethargy, high-pitched cry, poor suck, and loss of the Moro reflex.**\n\n## Understanding it\n- Early (days 1–3): **hypotonia, lethargy, poor feeding, high-pitched cry**.\n\n>> Days 1–3: hypotonia, lethargy, poor suck, high-pitched cry.",
+   "opts": [
+    "Movement disorders (chronic)",
+    "Days 1–3: hypotonia, lethargy, poor suck, high-pitched cry",
+    "No symptoms",
+    "Hypertonia and opisthotonus (phase 2)"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe phase 2 of acute bilirubin encephalopathy, including its timing.",
+   "a": "**Middle of the first week: hypertonia, opisthotonus, rigidity, oculogyric crises, and fever.**\n\n## Understanding it\n- Mid-first-week: **hypertonia/opisthotonus, rigidity, fever** (the alarming phase).\n\n>> Mid-first-week: hypertonia, opisthotonus, rigidity, fever.",
+   "opts": [
+    "Mid-first-week: hypertonia, opisthotonus, rigidity, fever",
+    "Movement disorders after a year",
+    "Hypotonia replacing hypertonia (phase 3)",
+    "Days 1–3: hypotonia and lethargy"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe phase 3 of acute bilirubin encephalopathy.",
+   "a": "**After the first week, hypotonia replaces the hypertonia.**\n\n## Understanding it\n- Phase 3 (after week 1): the earlier hypertonia gives way to **hypotonia**.\n\n>> Hypotonia replaces hypertonia after week 1.",
+   "opts": [
+    "After the first week, hypotonia replaces hypertonia",
+    "Hypertonia begins",
+    "No change occurs",
+    "Movement disorders appear immediately"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does chronic bilirubin encephalopathy manifest in the first year?",
+   "a": "**Hypotonia, active deep tendon reflexes, obligatory tonic neck reflexes, and delayed motor development.**\n\n## Understanding it\n- First year: **hypotonia, brisk reflexes, persistent tonic neck reflex, motor delay**.\n\n>> Hypotonia, brisk reflexes, tonic neck reflexes, motor delay.",
+   "opts": [
+    "No neurological signs",
+    "Only a skin change",
+    "Movement disorders and gaze palsy (after year 1)",
+    "Hypotonia, brisk reflexes, obligatory tonic neck reflexes, motor delay"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How does chronic bilirubin encephalopathy manifest after the first year?",
+   "a": "**Movement disorders (choreoathetosis, ballismus, tremor), upward gaze palsy, sensorineural hearing loss, and dental dysplasia.**\n\n## Understanding it\n- The classic kernicterus tetrad: **choreoathetoid CP, upgaze palsy, hearing loss, dental dysplasia**.\n\n>> Movement disorder, upgaze palsy, hearing loss, dental dysplasia.",
+   "opts": [
+    "No long-term signs",
+    "Hypotonia and brisk reflexes (first year)",
+    "Movement disorders, upward gaze palsy, hearing loss, dental dysplasia",
+    "Acute lethargy and poor suck"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the treatment of established kernicterus?",
+   "a": "**Counselling and training the parents to cope with the sequelae, and managing the disabilities (multidisciplinary supportive/rehabilitative care) — there is no cure.**\n\n## Understanding it\n- Established kernicterus is **irreversible**; care is **supportive/rehabilitative** with parental counselling.\n\n>> Supportive/rehabilitative care + parental counselling (no cure).",
+   "opts": [
+    "A single curative drug",
+    "Supportive care, rehabilitation, and parental counselling (no cure)",
+    "Phototherapy cures it",
+    "Exchange transfusion reverses it"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the general approach to treating conjugated hyperbilirubinaemia?",
+   "a": "**Mainly supportive (plus treating the specific underlying cause).**\n\n## Understanding it\n- Conjugated jaundice management is **supportive** while addressing the cause — phototherapy is NOT used (bronze baby).\n\n>> Mainly supportive (treat the cause).",
+   "opts": [
+    "Phototherapy first-line",
+    "Exchange transfusion first-line",
+    "Ignore it — it is benign",
+    "Mainly supportive (and treat the underlying cause)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which vitamins are given in conjugated hyperbilirubinaemia and why?",
+   "a": "**Parenteral vitamin K, and vitamin A and D supplementation — to prevent deficiency of the fat-soluble vitamins (malabsorbed in cholestasis).**\n\n## Understanding it\n- Cholestasis impairs **fat-soluble vitamin absorption**, so supplement **A, D, (E) and K**.\n\n>> Fat-soluble vitamins (K, A, D) — malabsorbed in cholestasis.",
+   "opts": [
+    "Vitamin C only",
+    "Only iron",
+    "Fat-soluble vitamins (K, A, D) — malabsorbed in cholestasis",
+    "No vitamins are needed"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What diet is recommended in conjugated hyperbilirubinaemia?",
+   "a": "**A low-fat diet with medium-chain triglycerides (MCTs, which are absorbed without bile).**\n\n## Understanding it\n- **MCTs** don't need bile for absorption, so they suit cholestatic (conjugated) jaundice.\n\n>> Low-fat with medium-chain triglycerides.",
+   "opts": [
+    "Protein-free diet",
+    "High-fat, high long-chain fat",
+    "Low-fat with medium-chain triglycerides (MCTs)",
+    "No dietary change"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the role of phenobarbitone in conjugated hyperbilirubinaemia, and when is surgery needed?",
+   "a": "**Phenobarbitone helps bile excretion; surgery may be needed (e.g. for biliary atresia — Kasai procedure) but is not usually the first step.**\n\n## Understanding it\n- Phenobarbitone **promotes bile flow**; **surgery** (e.g. Kasai) is for obstructive causes like biliary atresia.\n\n>> Phenobarbitone aids bile flow; surgery for obstructive causes.",
+   "opts": [
+    "Phenobarbitone cures it; no surgery ever",
+    "Surgery for every case",
+    "Phenobarbitone aids bile excretion; surgery for obstructive causes (e.g. biliary atresia)",
+    "It is contraindicated"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does prevention of neonatal jaundice entail?",
+   "a": "**Preventing neonatal jaundice, and the treatment/prevention of its complications (kernicterus) — across the levels of prevention.**\n\n## Understanding it\n- Prevention covers **avoiding jaundice** and **preventing its complications** at all levels.\n\n>> Prevent jaundice and prevent its complications.",
+   "opts": [
+    "Only treating established kernicterus",
+    "Nothing can be prevented",
+    "Preventing jaundice and preventing/treating its complications",
+    "Only phototherapy"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Level 1 of prevention — general health promotion. What does it involve?",
+   "a": "**Educating the masses about neonatal jaundice and how to prevent it, and general health promotion (nutrition, antenatal care).**\n\n## Understanding it\n- Level 1 = **health education/promotion** about jaundice.\n\n>> Public education and health promotion.",
+   "opts": [
+    "Rehabilitation",
+    "Phototherapy",
+    "Exchange transfusion",
+    "Public education and general health promotion"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Level 2 of prevention — specific protection. What does it involve?",
+   "a": "**Identifying risks and instituting preventive measures (e.g. anti-D for Rh-negative mothers, G6PD screening, avoiding trigger drugs).**\n\n## Understanding it\n- Level 2 = **specific protection** — target known risks (Rh prophylaxis, G6PD screening).\n\n>> Identify risks and take specific preventive measures.",
+   "opts": [
+    "Early diagnosis and treatment",
+    "Rehabilitation",
+    "Public education only",
+    "Identifying risks and instituting specific preventive measures"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Level 3 of prevention. What does it involve?",
+   "a": "**Early diagnosis and adequate treatment — identifying and treating jaundice promptly (phototherapy/exchange).**\n\n## Understanding it\n- Level 3 = **early diagnosis + prompt treatment** to prevent progression.\n\n>> Early diagnosis and prompt adequate treatment.",
+   "opts": [
+    "Physiotherapy only",
+    "Public education",
+    "Early diagnosis and adequate (prompt) treatment",
+    "Rehabilitation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Levels 4 and 5 of prevention. What do they involve?",
+   "a": "**Level 4 — limitation of disability (physiotherapy); Level 5 — rehabilitation (helping the child function with any sequelae).**\n\n## Understanding it\n- Level 4 = **limit disability (physiotherapy)**; Level 5 = **rehabilitation**.\n\n>> Level 4 limit disability; Level 5 rehabilitation.",
+   "opts": [
+    "Level 4 limitation of disability (physiotherapy); Level 5 rehabilitation",
+    "Both are public education",
+    "Both are phototherapy",
+    "Both are antenatal care"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the conclusion of the lecture regarding the burden of neonatal jaundice?",
+   "a": "**That it still contributes significantly to neonatal morbidity, mortality and long-term disability.**\n\n## Understanding it\n- Jaundice remains a **major cause of death and disability** in newborns — hence the emphasis on prevention.\n\n>> Still a major cause of neonatal morbidity/mortality/disability.",
+   "opts": [
+    "It is a trivial, harmless condition",
+    "It only causes a cosmetic problem",
+    "It is now completely eliminated",
+    "It still causes significant neonatal morbidity, mortality and disability"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What measures does the lecture conclude will prevent jaundice-associated problems?",
+   "a": "**Education at primary-health-care level, prompt diagnosis, and timely referral/treatment.**\n\n## Understanding it\n- The key preventive measures: **education, prompt diagnosis, and timely referral**.\n\n>> Education, prompt diagnosis, timely referral.",
+   "opts": [
+    "Only exchange transfusion",
+    "Only rehabilitation",
+    "Doing nothing",
+    "PHC-level education, prompt diagnosis, and timely referral"
+   ],
+   "ans": 3
+  }
+ ]
 }
