@@ -19190,275 +19190,751 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "List the general objectives of this lecture.",
-         "a": "Define immunization; significance of immunization; types of immunity; immunizing agents; national immunization schedule; contraindications to vaccinations; and reactions to vaccines."
+         "a": "**Define immunization; its significance; types of immunity; immunizing agents; the immunization schedule; cold chain; and related concepts.**\n\n## Understanding it\n- A framework: definition → significance → immunity types → agents → schedule → cold chain.\n\n>> Define, significance, types, agents, schedule, cold chain.",
+         "opts": [
+          "Only the cold chain",
+          "Only the vaccine schedule",
+          "Only the history of vaccines",
+          "Definition, significance, types of immunity, agents, schedule, cold chain"
+         ],
+         "ans": 3
         },
         {
          "q": "Define immunization.",
-         "a": "The procedure by which the body is prepared to fight against specific disease; it is used to induce the immune resistance of the body to a specific disease."
+         "a": "**The procedure by which the body is prepared to fight a specific disease — inducing immunity.**\n\n## Understanding it\n- Immunization **primes the body's defences** against a particular disease.\n\n>> Immunization = preparing the body to resist a specific disease.",
+         "opts": [
+          "Giving antibiotics prophylactically",
+          "Sterilising the environment",
+          "Preparing the body to fight a specific disease (inducing immunity)",
+          "Treating an established infection"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the two types of immunization?",
-         "a": "Passive immunization and active immunization."
+         "a": "**Passive and active immunization.**\n\n## Understanding it\n- Passive = ready-made antibodies given; active = the body makes its own.\n\n>> Passive and active.",
+         "opts": [
+          "Primary and booster only",
+          "Live and killed only",
+          "Natural and toxoid",
+          "Passive and active immunization"
+         ],
+         "ans": 3
         },
         {
          "q": "How is passive immunization produced?",
-         "a": "Without challenging the immune system of the body — by administration of serum or gamma globulins from a person who is already immunized to a non-immune person."
+         "a": "**Without challenging the immune system — by administering pre-formed antibodies (serum/immunoglobulin).**\n\n## Understanding it\n- The body **receives ready-made antibodies** rather than making its own → immediate but short-lived.\n\n>> Give pre-formed antibodies (no immune challenge).",
+         "opts": [
+          "By giving pre-formed antibodies without challenging the immune system",
+          "By natural infection",
+          "By stimulating T cells with a toxoid",
+          "By giving a live vaccine"
+         ],
+         "ans": 0
         },
         {
          "q": "How is passive immunization acquired?",
-         "a": "Either naturally or artificially."
+         "a": "**Either naturally or artificially.**\n\n## Understanding it\n- Passive immunity comes **naturally** (mother→baby) or **artificially** (injected antibodies).\n\n>> Naturally or artificially.",
+         "opts": [
+          "Only by vaccination",
+          "Only after an infection",
+          "Naturally or artificially",
+          "Only artificially"
+         ],
+         "ans": 2
         },
         {
          "q": "How is passive natural immunization acquired before birth?",
-         "a": "Immunity is transferred from mother to fetus in the form of maternal antibodies — mainly IgG — through the placenta."
+         "a": "**Maternal antibodies (IgG) are transferred from mother to fetus across the placenta.**\n\n## Understanding it\n- **IgG crosses the placenta**, giving the newborn temporary protection.\n\n>> Transplacental maternal IgG.",
+         "opts": [
+          "IgA through breast milk",
+          "The baby's own antibodies",
+          "Injected immunoglobulin",
+          "Transplacental transfer of maternal IgG"
+         ],
+         "ans": 3
         },
         {
          "q": "How is passive natural immunization acquired after birth?",
-         "a": "Antibodies (IgA) are transferred through breast milk."
+         "a": "**Antibodies (IgA) are transferred through breast milk.**\n\n## Understanding it\n- After birth, **breast-milk IgA** protects the gut mucosa.\n\n>> Breast-milk IgA.",
+         "opts": [
+          "IgA through breast milk",
+          "Injected antitoxin",
+          "A live vaccine",
+          "Transplacental IgG"
+         ],
+         "ans": 0
         },
         {
          "q": "How is passive artificial immunization developed, and what is it useful for?",
-         "a": "By injecting previously preformed antibodies using serum from humans or animals; useful for providing immediate protection against acute infections like tetanus and measles."
+         "a": "**By injecting pre-formed antibodies (serum from humans/animals); useful for immediate, short-term protection (e.g. post-exposure).**\n\n## Understanding it\n- Injected antibodies give **instant but temporary** protection — good for post-exposure prophylaxis.\n\n>> Injected antibodies; immediate short-term protection.",
+         "opts": [
+          "Breastfeeding",
+          "Natural infection",
+          "Giving a vaccine for long-term immunity",
+          "Injecting pre-formed antibodies for immediate short-term protection"
+         ],
+         "ans": 3
         },
         {
          "q": "How is active immunization acquired?",
-         "a": "By activating the immune system of the body — the body develops resistance by producing antibodies following exposure to antigens; acquired either naturally or artificially."
+         "a": "**By activating the body's own immune system so it produces resistance (antibodies/cells).**\n\n## Understanding it\n- The body **makes its own** immunity — slower to develop but long-lasting.\n\n>> The body produces its own immunity.",
+         "opts": [
+          "Through breast milk",
+          "Across the placenta",
+          "By receiving ready-made antibodies",
+          "By the body producing its own immunity"
+         ],
+         "ans": 3
         },
         {
          "q": "What is active natural immunization?",
-         "a": "Activation of the immune system in the body to produce antibodies; achieved in both clinical and subclinical infections."
+         "a": "**Activation of the immune system to produce antibodies, achieved by having the natural infection (recovering from disease).**\n\n## Understanding it\n- **Getting and recovering from the disease** naturally builds active immunity.\n\n>> Immunity from natural infection.",
+         "opts": [
+          "Immunity from a vaccine",
+          "Immunity produced by recovering from natural infection",
+          "Placental antibody transfer",
+          "Immunity from injected antibodies"
+         ],
+         "ans": 1
         },
         {
          "q": "What is active artificial immunization?",
-         "a": "Immunization achieved by the administration of vaccines or toxoids."
+         "a": "**Immunity achieved by administering vaccines or toxoids.**\n\n## Understanding it\n- **Vaccines/toxoids** train the immune system without causing the disease.\n\n>> Immunity from vaccines/toxoids.",
+         "opts": [
+          "Immunity from natural infection",
+          "Breast-milk antibodies",
+          "Injected pre-formed antibodies",
+          "Immunity produced by vaccines or toxoids"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a vaccine.",
-         "a": "A substance introduced into the body to prevent the disease produced by certain pathogens; it consists of dead pathogens or live but attenuated (artificially weakened) organisms."
+         "a": "**A substance introduced into the body to prevent a disease caused by specific organisms.**\n\n## Understanding it\n- A vaccine **trains the immune system** to prevent a particular infection.\n\n>> Vaccine = a preparation that prevents a specific disease.",
+         "opts": [
+          "A ready-made antibody injection",
+          "A preparation given to prevent a specific disease",
+          "An antiseptic",
+          "A drug that treats infection"
+         ],
+         "ans": 1
         },
         {
          "q": "How does a vaccine induce immunity?",
-         "a": "Either by production of antibodies, or by activation of T-lymphocytes."
+         "a": "**Either by stimulating antibody production, or by activating T-lymphocytes.**\n\n## Understanding it\n- Vaccines work via **humoral (antibody)** and/or **cell-mediated (T-cell)** immunity.\n\n>> Antibodies and/or T-cell activation.",
+         "opts": [
+          "Only by killing the organism directly",
+          "By sterilising the gut",
+          "Only by giving ready-made antibodies",
+          "By antibody production and/or T-lymphocyte activation"
+         ],
+         "ans": 3
         },
         {
          "q": "Who produced the first live vaccine, and from what?",
-         "a": "Edward Jenner — he produced the vaccine for smallpox from cowpox virus."
+         "a": "**Edward Jenner — the smallpox vaccine, from cowpox virus.**\n\n## Understanding it\n- Jenner used **cowpox** to protect against smallpox — the first vaccine.\n\n>> Jenner; smallpox vaccine from cowpox.",
+         "opts": [
+          "Robert Koch — TB from cattle",
+          "Jonas Salk — polio from monkeys",
+          "Louis Pasteur — rabies from dogs",
+          "Edward Jenner — smallpox vaccine from cowpox"
+         ],
+         "ans": 3
         },
         {
          "q": "Define vaccination.",
-         "a": "The process of distributing and administering vaccine."
+         "a": "**The process of distributing and administering vaccine.**\n\n## Understanding it\n- Vaccination = the **act of giving** the vaccine (immunization is the broader process of inducing immunity).\n\n>> Vaccination = distributing/administering vaccine.",
+         "opts": [
+          "The body producing antibodies",
+          "The process of distributing and administering vaccine",
+          "Recovering from a disease",
+          "Storing vaccines in the cold chain"
+         ],
+         "ans": 1
         },
         {
          "q": "What was the case fatality rate of smallpox, and what happened to survivors?",
-         "a": "20–30% case fatality rates, leaving survivors scarred for life."
+         "a": "**20–30% case fatality, leaving survivors scarred for life.**\n\n## Understanding it\n- Smallpox killed **20–30%** and disfigured many survivors — hence eradication mattered.\n\n>> 20–30% fatality; survivors scarred.",
+         "opts": [
+          "5% fatality; blindness only",
+          "Under 1% fatality; no scarring",
+          "90% fatality; full recovery",
+          "20–30% fatality; survivors left scarred"
+         ],
+         "ans": 3
         },
         {
          "q": "When was variolation practised, and when did Edward Jenner publish?",
-         "a": "Variolation was practised as early as the 10th century AD; Edward Jenner was first to publish, in 1796."
+         "a": "**Variolation was practised as early as the 10th century AD; Jenner first published in 1798.**\n\n## Understanding it\n- Variolation is ancient (**10th century**); Jenner's vaccination was published in **1798**.\n\n>> Variolation ~10th century; Jenner 1798.",
+         "opts": [
+          "Both began in 1900",
+          "Both in the 20th century",
+          "Variolation in 1798; Jenner in the 10th century",
+          "Variolation ~10th century AD; Jenner published in 1798"
+         ],
+         "ans": 3
         },
         {
          "q": "Who produced the rabies vaccine, and when?",
-         "a": "Louis Pasteur, 100 years after Jenner."
+         "a": "**Louis Pasteur, about 100 years after Jenner.**\n\n## Understanding it\n- **Pasteur** developed the rabies vaccine roughly a century after Jenner.\n\n>> Pasteur; ~100 years after Jenner.",
+         "opts": [
+          "Edward Jenner, in 1798",
+          "Jonas Salk, in the 1950s",
+          "Robert Koch, in the 1880s",
+          "Louis Pasteur, ~100 years after Jenner"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a vaccine as an immunizing agent.",
-         "a": "Any preparation which, when administered, is able to stimulate the immune system to produce specific responses that inactivate, destroy or suppress a given pathogen."
+         "a": "**Any preparation that, when administered, stimulates the immune system to produce protective immunity.**\n\n## Understanding it\n- As an agent, a vaccine is **anything that provokes protective immunity**.\n\n>> A preparation that stimulates protective immunity.",
+         "opts": [
+          "A ready-made antibody",
+          "A disinfectant",
+          "An antibiotic that kills bacteria",
+          "A preparation that stimulates the immune system to protect"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the two categories of vaccine?",
-         "a": "Live attenuated and inactivated."
+         "a": "**Live attenuated and inactivated (killed).**\n\n## Understanding it\n- The two broad classes: **live attenuated** vs **inactivated**.\n\n>> Live attenuated and inactivated.",
+         "opts": [
+          "Live attenuated and inactivated",
+          "Primary and booster",
+          "Passive and active",
+          "Oral and injectable only"
+         ],
+         "ans": 0
         },
         {
          "q": "How are live attenuated vaccines produced?",
-         "a": "By modifying a naturally occurring (wild) organism, usually by repeated culturing."
+         "a": "**By modifying a wild organism — usually by repeated culturing — to weaken (attenuate) it.**\n\n## Understanding it\n- The organism is **weakened** (attenuated) so it replicates but doesn't cause disease.\n\n>> Weaken (attenuate) the wild organism by repeated culture.",
+         "opts": [
+          "By recombinant DNA only",
+          "By weakening a wild organism through repeated culturing",
+          "By killing it with heat/chemicals",
+          "By extracting a single protein"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the properties of live attenuated vaccines?",
-         "a": "They retain the ability to replicate and produce an immune response similar to natural infection; circulating antibody may interfere with the response; they give long lasting immunity; and one dose usually suffices."
+         "a": "**They retain the ability to replicate and produce an immune response similar to natural infection (strong, long-lasting), but can be affected by circulating antibodies and are risky in the immunocompromised.**\n\n## Understanding it\n- Live vaccines mimic natural infection → **robust immunity**, but must be used cautiously in immunocompromised hosts.\n\n>> Replicate; strong, natural-like immunity (caution if immunocompromised).",
+         "opts": [
+          "Cannot replicate and give weak immunity",
+          "Are always safest in immunodeficiency",
+          "Replicate to give strong, natural-like immunity (caution if immunocompromised)",
+          "Never require boosters ever"
+         ],
+         "ans": 2
         },
         {
          "q": "Give examples of live attenuated VIRUSES.",
-         "a": "Poliomyelitis, measles, rubella, mumps, rabies, varicella, yellow fever, rotavirus, and influenza."
+         "a": "**Poliomyelitis (oral), measles, rubella, mumps, rabies, varicella, yellow fever, and rotavirus.**\n\n## Understanding it\n- Classic live viral vaccines: OPV, MMR, varicella, yellow fever, rotavirus.\n\n>> OPV, measles, mumps, rubella, varicella, yellow fever, rotavirus.",
+         "opts": [
+          "Diphtheria and tetanus toxoids",
+          "OPV, measles, mumps, rubella, varicella, yellow fever, rotavirus",
+          "Hepatitis B, HPV, influenza subunit",
+          "Pertussis, cholera, typhoid (killed)"
+         ],
+         "ans": 1
         },
         {
          "q": "Give examples of live attenuated BACTERIA.",
-         "a": "Bacille Calmette-Guérin (BCG) and typhoid."
+         "a": "**Bacille Calmette-Guérin (BCG) and typhoid (oral).**\n\n## Understanding it\n- The main live bacterial vaccines are **BCG** and **oral typhoid**.\n\n>> BCG and oral typhoid.",
+         "opts": [
+          "Pertussis and cholera",
+          "Diphtheria and tetanus",
+          "BCG and oral typhoid",
+          "Hepatitis B and Hib"
+         ],
+         "ans": 2
         },
         {
          "q": "How are inactivated vaccines made?",
-         "a": "The organism is inactivated with heat and/or chemicals (formalin); with fractional vaccines it is further treated to purify only those components to be included in the vaccine."
+         "a": "**The organism is inactivated with heat and/or chemicals (e.g. formalin), or made from fractions/subunits.**\n\n## Understanding it\n- The organism is **killed** (heat/formalin) or a **piece** of it is used.\n\n>> Killed by heat/chemicals, or a subunit is used.",
+         "opts": [
+          "By recombinant DNA only",
+          "By killing the organism with heat/chemicals (or using a fraction)",
+          "By natural infection",
+          "By weakening a live organism"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the properties of inactivated vaccines?",
-         "a": "Non-replicating so cannot cause disease; less interference from circulating antibodies; requires more doses (3–5); mostly humoral immune response; and antibody titres diminish with time."
+         "a": "**Non-replicating (cannot cause disease); less interference from circulating antibodies; but generally need multiple doses/boosters.**\n\n## Understanding it\n- **Can't cause disease** (safe in immunocompromised) but immunity is weaker → **boosters needed**.\n\n>> Non-replicating, safe; need boosters.",
+         "opts": [
+          "Non-replicating and safe, but usually need boosters",
+          "Always give lifelong immunity in one dose",
+          "Replicate like natural infection",
+          "Are dangerous in immunodeficiency"
+         ],
+         "ans": 0
         },
         {
          "q": "Give examples of inactivated VIRAL vaccines.",
-         "a": "Poliomyelitis (Salk), hepatitis A, rabies, and influenza."
+         "a": "**Poliomyelitis (Salk/IPV), hepatitis A, rabies, and influenza (injected).**\n\n## Understanding it\n- Killed viral vaccines: **IPV (Salk), hepatitis A, rabies, influenza**.\n\n>> IPV, hepatitis A, rabies, influenza.",
+         "opts": [
+          "BCG and yellow fever",
+          "OPV, measles, mumps, rubella",
+          "Rotavirus and varicella",
+          "IPV (Salk), hepatitis A, rabies, influenza"
+         ],
+         "ans": 3
         },
         {
          "q": "Give examples of inactivated BACTERIAL vaccines.",
-         "a": "Pertussis, typhoid, cholera, plague, and anthrax."
+         "a": "**Pertussis (whole-cell), typhoid (injectable), cholera, plague, and anthrax.**\n\n## Understanding it\n- Killed bacterial vaccines: **pertussis, typhoid, cholera, plague, anthrax**.\n\n>> Pertussis, typhoid, cholera, plague, anthrax.",
+         "opts": [
+          "Pertussis, typhoid, cholera, plague, anthrax",
+          "Measles and rubella",
+          "BCG and oral typhoid",
+          "Diphtheria and tetanus toxoids"
+         ],
+         "ans": 0
         },
         {
          "q": "What are subunit vaccines, and give examples.",
-         "a": "Fractional vaccines made from a single protein — hepatitis B, acellular pertussis, and human papilloma virus."
+         "a": "**Fractional vaccines made from a single protein — hepatitis B, acellular pertussis.**\n\n## Understanding it\n- Subunit = **one purified protein** of the organism (safer, fewer side effects).\n\n>> Single-protein vaccines (hep B, acellular pertussis).",
+         "opts": [
+          "Whole live organisms",
+          "Pooled human antibodies",
+          "Single-protein vaccines — hepatitis B, acellular pertussis",
+          "Toxoids only"
+         ],
+         "ans": 2
         },
         {
          "q": "Which vaccines are toxoids?",
-         "a": "Diphtheria and tetanus."
+         "a": "**Diphtheria and tetanus.**\n\n## Understanding it\n- Toxoids are **inactivated toxins** — diphtheria and tetanus.\n\n>> Diphtheria and tetanus toxoids.",
+         "opts": [
+          "Measles and mumps",
+          "BCG and OPV",
+          "Diphtheria and tetanus",
+          "Hepatitis B and HPV"
+         ],
+         "ans": 2
         },
         {
          "q": "Give examples of polysaccharide vaccines.",
-         "a": "Pneumococcal, meningococcal, and Salmonella typhi."
+         "a": "**Pneumococcal, meningococcal, and Salmonella typhi (Vi).**\n\n## Understanding it\n- Plain **polysaccharide** capsule vaccines: pneumococcal, meningococcal, typhoid Vi.\n\n>> Pneumococcal, meningococcal, typhoid Vi.",
+         "opts": [
+          "Pneumococcal, meningococcal, Salmonella typhi",
+          "Hepatitis B and HPV",
+          "Diphtheria and tetanus toxoids",
+          "Measles and rubella"
+         ],
+         "ans": 0
         },
         {
          "q": "Give examples of conjugate polysaccharide vaccines.",
-         "a": "Hib, pneumococcal, and meningococcal."
+         "a": "**Hib, pneumococcal (conjugate), and meningococcal (conjugate).**\n\n## Understanding it\n- **Conjugating** the sugar to a protein makes it immunogenic in infants — Hib, PCV, MenC.\n\n>> Hib, pneumococcal, meningococcal conjugates.",
+         "opts": [
+          "BCG and OPV",
+          "Diphtheria and tetanus",
+          "Hepatitis A and rabies",
+          "Hib, pneumococcal and meningococcal conjugates"
+         ],
+         "ans": 3
         },
         {
          "q": "Give examples of recombinant vaccines.",
-         "a": "Hepatitis B, human papilloma virus, and influenza — made from recombinant DNA technology."
+         "a": "**Hepatitis B, human papillomavirus (HPV), and influenza — made using recombinant DNA technology.**\n\n## Understanding it\n- **Recombinant DNA** produces the antigen (hep B, HPV, some influenza).\n\n>> Hepatitis B, HPV, influenza (recombinant).",
+         "opts": [
+          "Diphtheria and tetanus toxoids",
+          "BCG and OPV",
+          "Hepatitis B, HPV, influenza (recombinant DNA)",
+          "Measles and mumps"
+         ],
+         "ans": 2
         },
         {
          "q": "What is immune globulin, and what is it used for?",
-         "a": "Homologous pooled antibody from many adults, containing antibodies to many antigens — used for hepatitis A and measles."
+         "a": "**Homologous pooled antibody from many adults, containing antibodies to many antigens; used to provide broad short-term passive protection (e.g. antibody replacement, some exposures).**\n\n## Understanding it\n- Pooled human immunoglobulin gives **broad, ready-made** antibodies for passive protection.\n\n>> Pooled human antibody for broad passive protection.",
+         "opts": [
+          "A single-antigen animal antitoxin",
+          "A vaccine for active immunity",
+          "A toxoid",
+          "Pooled human antibody for broad short-term passive protection"
+         ],
+         "ans": 3
         },
         {
          "q": "What is homologous human hyperimmune globulin, and what is it used for?",
-         "a": "Antibody from humans with high levels of specific antibodies — used for post-exposure prophylaxis of hepatitis B, rabies, tetanus and varicella."
+         "a": "**Antibody from humans with high levels of a specific antibody — used for post-exposure prophylaxis (e.g. hepatitis B, rabies, tetanus, varicella).**\n\n## Understanding it\n- **Specific** high-titre human antibody for targeted **post-exposure** protection.\n\n>> High-titre specific human antibody for post-exposure prophylaxis.",
+         "opts": [
+          "High-titre specific human antibody for post-exposure prophylaxis",
+          "Animal antitoxin",
+          "A live vaccine",
+          "Broad pooled antibody"
+         ],
+         "ans": 0
         },
         {
          "q": "What is heterologous hyperimmune serum, and what is it used for?",
-         "a": "Antitoxin from animals — used for botulism and diphtheria."
+         "a": "**Antitoxin from animals — used for botulism and diphtheria.**\n\n## Understanding it\n- **Animal-derived antitoxin** (heterologous) for botulism/diphtheria — carries serum-sickness risk.\n\n>> Animal antitoxin (botulism, diphtheria).",
+         "opts": [
+          "Human specific antibody for hepatitis B",
+          "Pooled human immunoglobulin",
+          "Animal-derived antitoxin — for botulism and diphtheria",
+          "A recombinant vaccine"
+         ],
+         "ans": 2
         },
         {
          "q": "What are monoclonal antibodies, and give an example.",
-         "a": "Antibodies derived from a clone of antibody-producing cells — e.g. palivizumab for RSV."
+         "a": "**Antibodies from a single clone of antibody-producing cells — e.g. palivizumab for RSV prophylaxis.**\n\n## Understanding it\n- Monoclonals are **identical, targeted** antibodies; **palivizumab** protects high-risk infants against RSV.\n\n>> Single-clone antibodies; palivizumab (RSV).",
+         "opts": [
+          "Pooled polyclonal human antibody",
+          "Single-clone identical antibodies — e.g. palivizumab (RSV)",
+          "A toxoid vaccine",
+          "An animal antitoxin"
+         ],
+         "ans": 1
         },
         {
          "q": "List the vaccine-related determinants of immune response.",
-         "a": "Chemical and physical state of the vaccine; route/site of administration; vaccine dose; and immunogenicity of the vaccine."
+         "a": "**The chemical/physical state of the vaccine; route and site of administration; the vaccine dose; and the presence of adjuvants.**\n\n## Understanding it\n- Response depends on the **vaccine itself** — its form, dose, route/site, and adjuvant.\n\n>> Vaccine form, dose, route/site, adjuvant.",
+         "opts": [
+          "Only the weather",
+          "Vaccine form, dose, route/site of administration, and adjuvant",
+          "The colour of the vial",
+          "Only the patient's age"
+         ],
+         "ans": 1
         },
         {
          "q": "List the host factors determining immune response.",
-         "a": "Age, sex, nutrition, pre-existing antibodies, genetics, immune status, and pregnancy."
+         "a": "**Age, sex, nutrition, pre-existing antibodies, genetics, immune status, and pregnancy.**\n\n## Understanding it\n- The **patient's** characteristics (age, nutrition, immune status, maternal antibody, genetics) shape the response.\n\n>> Age, sex, nutrition, pre-existing antibody, genetics, immune status.",
+         "opts": [
+          "Only the storage temperature",
+          "Age, sex, nutrition, pre-existing antibody, genetics, immune status",
+          "Only the vaccine dose",
+          "The route of administration"
+         ],
+         "ans": 1
         },
         {
          "q": "What do antitoxins do?",
-         "a": "Inactivate soluble toxic protein products."
+         "a": "**Inactivate soluble toxic protein products (toxins).**\n\n## Understanding it\n- Antitoxins **neutralise toxins** (e.g. tetanus/diphtheria toxin).\n\n>> Antitoxins neutralise toxins.",
+         "opts": [
+          "Neutralise soluble toxins",
+          "Activate complement (lysins)",
+          "Prevent mucosal adhesion (antiadhesins)",
+          "Facilitate phagocytosis (opsonins)"
+         ],
+         "ans": 0
         },
         {
          "q": "What do opsonins do?",
-         "a": "Facilitate phagocytosis."
+         "a": "**Facilitate phagocytosis (coat organisms so phagocytes engulf them).**\n\n## Understanding it\n- Opsonins **tag** microbes for phagocytosis.\n\n>> Opsonins promote phagocytosis.",
+         "opts": [
+          "Prevent mucosal adhesion",
+          "Neutralise toxins",
+          "Facilitate phagocytosis",
+          "Block viral replication"
+         ],
+         "ans": 2
         },
         {
          "q": "What do lysins do?",
-         "a": "Interact with components of serum complement."
+         "a": "**Interact with serum complement to lyse (destroy) the organism.**\n\n## Understanding it\n- Lysins work with **complement** to kill microbes.\n\n>> Lysins activate complement to lyse organisms.",
+         "opts": [
+          "Interact with complement to lyse organisms",
+          "Neutralise toxins",
+          "Facilitate phagocytosis",
+          "Prevent viral proliferation"
+         ],
+         "ans": 0
         },
         {
          "q": "What do neutralising antibodies do?",
-         "a": "Prevent proliferation of infectious virus."
+         "a": "**Prevent the proliferation of infectious virus.**\n\n## Understanding it\n- Neutralising antibodies **block virus** from infecting cells/replicating.\n\n>> Neutralising antibodies block viral infection.",
+         "opts": [
+          "Prevent proliferation of infectious virus",
+          "Facilitate phagocytosis",
+          "Activate complement",
+          "Neutralise bacterial toxins"
+         ],
+         "ans": 0
         },
         {
          "q": "What do antiadhesins do?",
-         "a": "Prevent adhesion to mucosal surfaces."
+         "a": "**Prevent adhesion of organisms to mucosal surfaces.**\n\n## Understanding it\n- Antiadhesins stop microbes **sticking to mucosa** (the first step of infection).\n\n>> Antiadhesins block mucosal adhesion.",
+         "opts": [
+          "Neutralise toxins",
+          "Prevent adhesion to mucosal surfaces",
+          "Lyse organisms via complement",
+          "Facilitate phagocytosis"
+         ],
+         "ans": 1
         },
         {
          "q": "List the factors to consider in vaccine recommendation.",
-         "a": "Epidemiology (incidence, age, sex); age-specific morbidity and mortality; risk of adverse events; cost effectiveness; age of recommended health care visits; and efficacy of the vaccine."
+         "a": "**Epidemiology (incidence, age, sex); age-specific morbidity/mortality; risk of exposure; and vaccine efficacy/safety/cost.**\n\n## Understanding it\n- Recommendations weigh **disease burden, who is at risk, and the vaccine's efficacy/safety/cost**.\n\n>> Epidemiology, age-specific burden, exposure risk, vaccine efficacy/safety.",
+         "opts": [
+          "Only the vaccine's price",
+          "Only the manufacturer",
+          "Epidemiology, age-specific morbidity/mortality, exposure risk, vaccine efficacy",
+          "The colour of the vaccine"
+         ],
+         "ans": 2
         },
         {
          "q": "At what ages are vaccinations generally recommended?",
-         "a": "At the age of significant risk of disease and complications, and at the age of protective immunologic response."
+         "a": "**At the age of significant risk of disease/complications, and at the age of predictable good immune response.**\n\n## Understanding it\n- Vaccinate **when the child is at risk** and **old enough to respond well**.\n\n>> At the age of risk + the age of good immune response.",
+         "opts": [
+          "At the age of disease risk and of a good immune response",
+          "Only after age 5",
+          "At any random age",
+          "Only at birth"
+         ],
+         "ans": 0
         },
         {
          "q": "List the objectives of the immunization programme.",
-         "a": "Not just individual protection; to decrease morbidity and mortality from target diseases; and to increase herd immunity — which requires high coverage."
+         "a": "**Not just individual protection — to decrease morbidity and mortality from target diseases, and ultimately control/eliminate/eradicate them (via herd immunity).**\n\n## Understanding it\n- The programme aims at the **population**: cut disease burden and control/eradicate diseases.\n\n>> Reduce population morbidity/mortality; control/eradicate disease.",
+         "opts": [
+          "Only make money for manufacturers",
+          "Only protect the vaccinated individual",
+          "Reduce population morbidity/mortality and control/eradicate disease",
+          "Only treat sick children"
+         ],
+         "ans": 2
         },
         {
          "q": "Define herd immunity.",
-         "a": "The resistance of a group to invasion and spread of an infectious agent, due to immunity of a large proportion of the group."
+         "a": "**The resistance of a group to spread of an infectious agent because a high proportion are immune, protecting even the unvaccinated.**\n\n## Understanding it\n- When enough people are immune, the pathogen **can't spread**, indirectly protecting the non-immune.\n\n>> Herd immunity = group resistance protecting even the unimmunised.",
+         "opts": [
+          "Group resistance from a high proportion being immune (protects the unvaccinated)",
+          "Immunity from breastfeeding",
+          "Immunity in one individual only",
+          "Immunity present from birth in everyone"
+         ],
+         "ans": 0
         },
         {
          "q": "List the methods of vaccine delivery.",
-         "a": "Routine immunization; response to an epidemic; supplemental immunization activities; mop up immunization; and mobile or fixed locations."
+         "a": "**Routine immunization; response to an epidemic; and supplemental immunization activities (SIAs/campaigns).**\n\n## Understanding it\n- Vaccines are delivered by **routine schedule, outbreak response, and mass campaigns**.\n\n>> Routine, epidemic response, and supplemental campaigns.",
+         "opts": [
+          "Routine immunization, epidemic response, and supplemental campaigns",
+          "Only at birth in hospital",
+          "Only mass campaigns",
+          "Only when a child is sick"
+         ],
+         "ans": 0
         },
         {
          "q": "In which conditions is pneumococcal polysaccharide vaccine indicated?",
-         "a": "Sickle cell anaemia, anatomic asplenia, nephrotic syndrome, renal failure, HIV, and organ transplant."
+         "a": "**Sickle cell anaemia, anatomic asplenia, nephrotic syndrome, renal failure, HIV, and other immunocompromising conditions.**\n\n## Understanding it\n- High-risk (esp. **asplenic/immunocompromised**) children need extra pneumococcal protection.\n\n>> Sickle cell, asplenia, nephrotic syndrome, renal failure, HIV.",
+         "opts": [
+          "Sickle cell, asplenia, nephrotic syndrome, renal failure, HIV",
+          "Only children with eczema",
+          "Only healthy full-term infants",
+          "Everyone at birth routinely"
+         ],
+         "ans": 0
         },
         {
          "q": "Which vaccines may be given in HIV, and which are contraindicated?",
-         "a": "All vaccines if asymptomatic; BCG and yellow fever are contraindicated if symptomatic; and IPV is preferred to OPV."
+         "a": "**All vaccines may be given if the child is asymptomatic; BCG and yellow fever are contraindicated if symptomatic.**\n\n## Understanding it\n- Asymptomatic HIV → give vaccines; symptomatic → avoid **live BCG and yellow fever**.\n\n>> Asymptomatic: all; symptomatic: avoid BCG and yellow fever.",
+         "opts": [
+          "All if asymptomatic; avoid BCG and yellow fever if symptomatic",
+          "Only killed vaccines, never any live",
+          "All live vaccines are always safe",
+          "No vaccines are ever given"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the general rule about live vaccines in immunocompromised children?",
-         "a": "Live vaccines are generally not given to immunocompromised children."
+         "a": "**Live vaccines are generally NOT given to immunocompromised children.**\n\n## Understanding it\n- A weakened live organism can cause disease in the immunocompromised → **avoid live vaccines**.\n\n>> Avoid live vaccines in immunocompromise.",
+         "opts": [
+          "Only live vaccines should be given",
+          "Live vaccines cure immunodeficiency",
+          "Live vaccines are generally avoided in the immunocompromised",
+          "Live vaccines are always safe"
+         ],
+         "ans": 2
         },
         {
          "q": "List the contraindications to vaccination.",
-         "a": "Anaphylaxis; encephalopathy; progressive neurologic disorders; immunodeficiency disorder and immunosuppressive therapy; pregnancy; and any illness requiring admission to hospital — defer immunization."
+         "a": "**Anaphylaxis to a previous dose/component; encephalopathy after a previous dose; progressive neurological disorders; and immunodeficiency (for live vaccines).**\n\n## Understanding it\n- True contraindications are **serious reactions** and **immunodeficiency (for live vaccines)**.\n\n>> Anaphylaxis, encephalopathy, progressive neuro disorder, immunodeficiency (live).",
+         "opts": [
+          "Being breastfed",
+          "Diarrhoea",
+          "Anaphylaxis, encephalopathy, progressive neuro disorder, immunodeficiency (live vaccines)",
+          "Mild fever and a cold"
+         ],
+         "ans": 2
         },
         {
          "q": "List the precautions in vaccination.",
-         "a": "Fever above 40.5 °C; collapse or shock; inconsolable crying; Guillain–Barré syndrome; and for MMR, blood transfusion and thrombocytopenia."
+         "a": "**Fever above 40.5 °C, collapse/shock, inconsolable crying, or Guillain-Barré syndrome after a previous dose.**\n\n## Understanding it\n- Precautions (not absolute bans) — reactions after a previous dose that warrant caution/assessment.\n\n>> High fever, collapse, inconsolable crying, GBS after a prior dose.",
+         "opts": [
+          "High fever, collapse/shock, inconsolable crying, prior GBS",
+          "Family history of allergy",
+          "Mild diarrhoea",
+          "A runny nose"
+         ],
+         "ans": 0
         },
         {
          "q": "List the things that are NOT contraindications to vaccination.",
-         "a": "Upper respiratory tract infection; mild fever; diarrhoea (but repeat the dose); cerebral palsy; breastfeeding; and antimicrobial therapy."
+         "a": "**Upper respiratory infection, mild fever, mild diarrhoea (still give — repeat OPV dose), and being on antibiotics/recovering illness.**\n\n## Understanding it\n- Minor illnesses do **not** justify delaying vaccination — a common cause of missed opportunities.\n\n>> Minor illness (mild fever/URTI/diarrhoea) is NOT a contraindication.",
+         "opts": [
+          "Anaphylaxis to a prior dose",
+          "Encephalopathy after a prior dose",
+          "Severe immunodeficiency (for live vaccines)",
+          "Mild fever, URTI, and mild diarrhoea (still vaccinate)"
+         ],
+         "ans": 3
         },
         {
          "q": "List the adverse reactions to vaccines.",
-         "a": "Pain, swelling, redness and soreness; fever; anaphylaxis; encephalopathy (convulsions, coma); and rash or urticaria."
+         "a": "**Local pain/swelling/redness/soreness; fever; anaphylaxis; and rarely encephalopathy/convulsions.**\n\n## Understanding it\n- Mostly **mild local reactions and fever**; rarely serious (anaphylaxis, encephalopathy).\n\n>> Local reactions, fever; rarely anaphylaxis/encephalopathy.",
+         "opts": [
+          "Local pain/swelling/redness, fever; rarely anaphylaxis/encephalopathy",
+          "Only permanent paralysis",
+          "No reactions ever occur",
+          "Only diarrhoea"
+         ],
+         "ans": 0
         },
         {
          "q": "List the elements of cost effectiveness of immunization.",
-         "a": "Savings on treatment cost; decreased mortality; decreased morbidity and disability; avoidance of intangible costs (suffering); and external or spillover benefits."
+         "a": "**Savings on treatment costs, decreased mortality, and decreased morbidity/disability.**\n\n## Understanding it\n- Vaccines save money by **preventing treatment costs, deaths, and disability**.\n\n>> Lower treatment cost, mortality, and morbidity/disability.",
+         "opts": [
+          "No measurable benefit",
+          "More expensive than treatment",
+          "Savings on treatment, decreased mortality, decreased morbidity/disability",
+          "Higher hospital admissions"
+         ],
+         "ans": 2
         },
         {
          "q": "How much did smallpox eradication save?",
-         "a": "32 billion dollars."
+         "a": "**About 32 billion dollars.**\n\n## Understanding it\n- Eradicating smallpox saved roughly **$32 billion** — a landmark cost-benefit example.\n\n>> ~$32 billion.",
+         "opts": [
+          "About 32 million dollars",
+          "About 1 billion dollars",
+          "It cost more than it saved",
+          "About 32 billion dollars"
+         ],
+         "ans": 3
         },
         {
          "q": "Define immunization coverage, and in which age group is it often evaluated?",
-         "a": "The percentage of the target population that have received immunization; often evaluated in children aged 12–23 months, which estimates recent immunization performance."
+         "a": "**The percentage of the target population that has received immunization; often evaluated in children by 1 year (12 months) of age.**\n\n## Understanding it\n- Coverage = **% of the target group vaccinated**, commonly measured in the **first year**.\n\n>> % of target vaccinated; assessed by ~12 months.",
+         "opts": [
+          "% of adults vaccinated",
+          "% of the target population vaccinated; assessed by ~12 months",
+          "The number of clinics",
+          "The number of vaccines available"
+         ],
+         "ans": 1
         },
         {
          "q": "Define a missed opportunity.",
-         "a": "When an individual in whom there is no contraindication does not receive the vaccine(s) for which he or she is eligible, when he or she visits a health facility; it can occur during curative or preventive visits."
+         "a": "**When an individual with no contraindication does not receive a due vaccine during a health contact.**\n\n## Understanding it\n- A **missed opportunity** is failing to vaccinate an eligible child who is already present.\n\n>> Not vaccinating an eligible child at a health contact.",
+         "opts": [
+          "Vaccinating too early",
+          "Giving an extra dose",
+          "Deliberately delaying for a contraindication",
+          "Failing to vaccinate an eligible child at a health contact"
+         ],
+         "ans": 3
         },
         {
          "q": "List the causes of missed opportunities.",
-         "a": "Non-availability of vaccine; not checking immune status; failure to give simultaneous injections; failure to provide information to parents; and failure to immunize every day."
+         "a": "**Non-availability of vaccine; failure to check immune status; not giving simultaneous vaccines; false contraindications; and health-worker attitudes.**\n\n## Understanding it\n- Both **system** (no vaccine) and **provider** (not checking, false contraindications) causes.\n\n>> No vaccine, not checking status, false contraindications, missing simultaneous doses.",
+         "opts": [
+          "Only the child being too old",
+          "Only parental refusal",
+          "No vaccine, not checking status, false contraindications, missing simultaneous doses",
+          "Only cold-chain failure"
+         ],
+         "ans": 2
         },
         {
          "q": "Define the cold chain, and why is it necessary?",
-         "a": "A system of storage and transport of vaccines at low temperatures by the manufacturer to the actual vaccination site; necessary because vaccine failure may occur due to failure of storage and transport under strict temperature controls."
+         "a": "**A system of storing and transporting vaccines at low temperatures from manufacturer to point of use, to keep them potent.**\n\n## Understanding it\n- Vaccines lose potency if warmed, so an unbroken **cold chain** preserves their effectiveness.\n\n>> Cold chain = low-temperature storage/transport to keep vaccines potent.",
+         "opts": [
+          "Low-temperature storage/transport to keep vaccines potent",
+          "A list of vaccine schedules",
+          "A method of sterilising vaccines",
+          "A way to warm vaccines before use"
+         ],
+         "ans": 0
         },
         {
          "q": "Which vaccines are stored in the freezer compartment?",
-         "a": "Polio and measles."
+         "a": "**Polio (OPV) and measles.**\n\n## Understanding it\n- Freeze-tolerant vaccines — **OPV and measles** — go in the freezer.\n\n>> Polio and measles in the freezer.",
+         "opts": [
+          "All vaccines",
+          "Hepatitis B only",
+          "BCG, DPT and TT",
+          "Polio (OPV) and measles"
+         ],
+         "ans": 3
         },
         {
          "q": "Which vaccines must be stored in the cold compartment and never allowed to freeze?",
-         "a": "BCG, DPT, DT, TT, typhoid, and diluents."
+         "a": "**BCG, DPT, DT, TT, typhoid, and diluents.**\n\n## Understanding it\n- Freeze-sensitive vaccines (**DPT/DT/TT, BCG, typhoid, diluents**) must be kept cold but **never frozen**.\n\n>> BCG, DPT, DT, TT, typhoid, diluents — never freeze.",
+         "opts": [
+          "All vaccines can be frozen",
+          "Polio and measles",
+          "Only measles",
+          "BCG, DPT, DT, TT, typhoid, diluents (never freeze)"
+         ],
+         "ans": 3
         },
         {
          "q": "What two things must vaccines be protected from?",
-         "a": "Sunlight, and contact with antiseptics."
+         "a": "**Sunlight, and contact with antiseptics.**\n\n## Understanding it\n- Light degrades some vaccines, and **antiseptics inactivate** live vaccines → protect from both.\n\n>> Sunlight and antiseptics.",
+         "opts": [
+          "Water and air",
+          "Sunlight and contact with antiseptics",
+          "Refrigeration",
+          "Cold and darkness"
+         ],
+         "ans": 1
         },
         {
          "q": "How long can most vaccines be stored at health centres, and at what temperature?",
-         "a": "Up to 5 weeks (except polio), if the refrigerator temperature is strictly kept between 4 °C and 8 °C."
+         "a": "**Up to 5 weeks (except polio), if the refrigerator is strictly kept at the recommended cold temperature (~2–8 °C).**\n\n## Understanding it\n- At a health centre, most vaccines keep **~5 weeks** at proper fridge temperature.\n\n>> ~5 weeks at recommended fridge temperature (except polio).",
+         "opts": [
+          "Up to 2 years at room temperature",
+          "Up to 5 weeks at recommended fridge temperature (except polio)",
+          "Indefinitely if frozen",
+          "Only 1 day"
+         ],
+         "ans": 1
         },
         {
          "q": "How long may an opened vial be stored, with and without preservatives?",
-         "a": "With preservatives, up to 3 hours; without preservatives, up to 1 hour."
+         "a": "**With preservatives, up to 3 hours; without preservatives, up to 1 hour.**\n\n## Understanding it\n- Once opened, use quickly — **3 h with preservative, 1 h without**.\n\n>> Opened vial: 3 h (with preservative), 1 h (without).",
+         "opts": [
+          "Indefinitely",
+          "Up to a week either way",
+          "24 hours regardless",
+          "With preservatives up to 3 hours; without, up to 1 hour"
+         ],
+         "ans": 3
         },
         {
          "q": "List the cold chain equipment.",
-         "a": "Walk-in cold rooms, deep freezer, small deep freezer, cold boxes, vaccine carrier, day carrier, and ice packs."
+         "a": "**Walk-in cold rooms, deep freezers, small deep freezers, cold boxes, vaccine carriers, and ice packs.**\n\n## Understanding it\n- A hierarchy of **refrigeration and transport** equipment maintains the cold chain.\n\n>> Cold rooms, freezers, cold boxes, vaccine carriers, ice packs.",
+         "opts": [
+          "Cold rooms, deep freezers, cold boxes, vaccine carriers, ice packs",
+          "Ordinary shelves",
+          "Ovens and warmers",
+          "Autoclaves and incubators"
+         ],
+         "ans": 0
         }
        ],
        "imgBase": null,
@@ -23983,267 +24459,729 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define pre-operative care.",
-         "a": "All the preparations made to ensure that a successful outcome is obtained in any surgery."
+         "a": "**All the preparations made to ensure a successful outcome in any surgical procedure.**\n\n## Understanding it\n- It is the **whole preparation package** that maximises the chance of a good surgical result.\n\n>> Pre-op care = all preparation for a successful operation.",
+         "opts": [
+          "Only the anaesthetic assessment",
+          "Only obtaining consent",
+          "All preparations to ensure a successful surgical outcome",
+          "The care given after the operation"
+         ],
+         "ans": 2
         },
         {
          "q": "What are pre-operative measures directed at?",
-         "a": "Ensuring the patient is in the best possible condition physically and psychologically for the surgery, and that post-operative recovery is satisfactory — thereby reducing the risks of both short and long term complications or morbidity."
+         "a": "**Ensuring the patient is in the best possible condition, physically and psychologically, for surgery.**\n\n## Understanding it\n- Optimise the patient **body and mind** before theatre.\n\n>> Best possible physical and psychological condition.",
+         "opts": [
+          "Speeding up the operation",
+          "Reducing hospital costs only",
+          "Getting the patient in the best physical and psychological condition",
+          "Choosing the surgeon"
+         ],
+         "ans": 2
         },
         {
          "q": "Who must pre-operative care involve?",
-         "a": "The spectrum of medical care workers."
+         "a": "**The whole spectrum of medical care workers (a multidisciplinary team).**\n\n## Understanding it\n- Surgeons, anaesthetists, nurses, physicians and others all contribute.\n\n>> A multidisciplinary team.",
+         "opts": [
+          "Only the nurses",
+          "The whole spectrum of medical care workers",
+          "Only the anaesthetist",
+          "Only the surgeon"
+         ],
+         "ans": 1
         },
         {
          "q": "List the six ways gynaecological operations may be classified.",
-         "a": "Elective or emergency; major or minor; day case or in-patient; abdominal or vaginal; diagnostic or therapeutic; and minimal access surgery."
+         "a": "**Elective or emergency; major or minor; day-case or in-patient; abdominal or vaginal; and by whether they are diagnostic or therapeutic (and by anaesthetic type).**\n\n## Understanding it\n- Multiple axes: urgency, size, setting, route, purpose.\n\n>> Elective/emergency, major/minor, day/inpatient, abdominal/vaginal, etc.",
+         "opts": [
+          "Only by the surgeon's grade",
+          "By the day of the week",
+          "Elective/emergency, major/minor, day/inpatient, abdominal/vaginal, etc.",
+          "Only elective vs emergency"
+         ],
+         "ans": 2
         },
         {
          "q": "What should the pre-operative history include?",
-         "a": "Presenting complaints, gynaecological and obstetric history, past medical and surgical history, past and present drug use, family and social history, and a review of systems."
+         "a": "**Presenting complaints, gynaecological and obstetric history, past medical and surgical history, drug/allergy history, and social/family history.**\n\n## Understanding it\n- A **full history** — not just the gynae complaint but medical, surgical, drug and social background.\n\n>> Full history: PC, gynae/obstetric, medical/surgical, drugs, social.",
+         "opts": [
+          "PC, gynae/obstetric, past medical/surgical, drug and social history",
+          "Only the surgical history",
+          "Only the family history",
+          "Only the presenting complaint"
+         ],
+         "ans": 0
         },
         {
          "q": "Where does history taking begin and when is it continued?",
-         "a": "It begins in the outpatient department and is continued on admission, prior to surgery — especially for elective cases."
+         "a": "**It begins in the outpatient department and is continued on admission, prior to surgery.**\n\n## Understanding it\n- Start in clinic (OPD), then **update at admission** before theatre.\n\n>> Begins in OPD; continued at admission.",
+         "opts": [
+          "Only during anaesthesia",
+          "Only after the operation",
+          "In the outpatient department, continued on admission",
+          "Only in theatre"
+         ],
+         "ans": 2
         },
         {
          "q": "How is history taking handled in emergency operations?",
-         "a": "Rapid preparations are carried out as the patient is admitted."
+         "a": "**Rapid preparations are carried out as the patient is admitted (a condensed, focused work-up).**\n\n## Understanding it\n- In emergencies there's no time for a leisurely work-up — **prepare rapidly** on admission.\n\n>> Rapid, focused preparation on admission.",
+         "opts": [
+          "Rapid preparation is done as the patient is admitted",
+          "History is skipped entirely",
+          "The operation is delayed for full work-up",
+          "It is identical to elective timing"
+         ],
+         "ans": 0
         },
         {
          "q": "What should the pre-operative physical examination pay particular attention to?",
-         "a": "The extragenital systems."
+         "a": "**The extragenital systems (cardiovascular, respiratory, etc.), not just the pelvis.**\n\n## Understanding it\n- Because anaesthesia/surgery stress the whole body, examine the **other (extragenital) systems** carefully.\n\n>> Focus on the extragenital systems.",
+         "opts": [
+          "Only the abdomen",
+          "Only the skin",
+          "The extragenital systems (heart, lungs, etc.)",
+          "Only the pelvic organs"
+         ],
+         "ans": 2
         },
         {
          "q": "Which are described as the most important components of pre-operative assessment, and what do they determine?",
-         "a": "History taking and physical examination — they dictate the need for other perioperative measures including laboratory tests."
+         "a": "**History taking and physical examination — they dictate the need for other perioperative investigations.**\n\n## Understanding it\n- The **history and examination** are central; they decide which tests are actually needed.\n\n>> History + examination guide which investigations to order.",
+         "opts": [
+          "The anaesthetist's preference only",
+          "The imaging alone",
+          "The blood tests alone",
+          "History and examination — they determine which investigations are needed"
+         ],
+         "ans": 3
         },
         {
          "q": "What may general examination reveal, and what does each suggest?",
-         "a": "Pallor, suggesting anaemia; and jaundice, which may point to liver disease."
+         "a": "**Pallor, suggesting anaemia; and jaundice, which may point to liver disease.**\n\n## Understanding it\n- Simple inspection: **pallor → anaemia**, **jaundice → liver disease**.\n\n>> Pallor = anaemia; jaundice = liver disease.",
+         "opts": [
+          "Pallor (anaemia) and jaundice (liver disease)",
+          "Nothing of value",
+          "Cyanosis (dehydration) and oedema (infection)",
+          "Clubbing (anaemia) only"
+         ],
+         "ans": 0
         },
         {
          "q": "What four things should minimally be checked in the cardiovascular system?",
-         "a": "Pulse, blood pressure, heart sounds, and presence or absence of dependent oedema."
+         "a": "**Pulse, blood pressure, heart sounds, and presence/absence of dependent oedema.**\n\n## Understanding it\n- Minimum CVS check: pulse, BP, heart sounds, oedema.\n\n>> Pulse, BP, heart sounds, dependent oedema.",
+         "opts": [
+          "Only blood pressure",
+          "Pulse, blood pressure, heart sounds, dependent oedema",
+          "JVP and apex beat only",
+          "Only the pulse"
+         ],
+         "ans": 1
         },
         {
          "q": "What is usually the first sign of cardiovascular compromise, and in which condition is it especially important?",
-         "a": "Tachycardia — an important sign in ectopic pregnancy."
+         "a": "**Tachycardia — an important sign in ectopic pregnancy.**\n\n## Understanding it\n- A fast pulse is the **earliest** sign of compromise/blood loss — critical in a bleeding **ectopic**.\n\n>> Tachycardia (early sign; key in ectopic pregnancy).",
+         "opts": [
+          "Bradycardia — in anaemia",
+          "Hypertension — in fibroids",
+          "Tachycardia — especially important in ectopic pregnancy",
+          "Oedema — in infection"
+         ],
+         "ans": 2
         },
         {
          "q": "How do hypertension and hypotension affect pre-operative assessment?",
-         "a": "They would influence the assessment of anaesthetic or surgical risks."
+         "a": "**They influence the assessment of anaesthetic and surgical risk.**\n\n## Understanding it\n- Abnormal BP raises **anaesthetic/surgical risk**, guiding optimisation before theatre.\n\n>> They alter anaesthetic/surgical risk.",
+         "opts": [
+          "They determine the incision site",
+          "They have no bearing on surgery",
+          "They only matter after surgery",
+          "They influence anaesthetic and surgical risk assessment"
+         ],
+         "ans": 3
         },
         {
          "q": "What may heart sounds provide evidence of?",
-         "a": "Cardiac disease."
+         "a": "**Cardiac disease.**\n\n## Understanding it\n- Abnormal/added heart sounds or murmurs point to **cardiac disease** needing evaluation.\n\n>> Heart sounds → evidence of cardiac disease.",
+         "opts": [
+          "Liver disease",
+          "Respiratory infection",
+          "Anaemia",
+          "Cardiac disease"
+         ],
+         "ans": 3
         },
         {
          "q": "What may respiratory assessment reveal, and what may result?",
-         "a": "Respiratory infections including tuberculosis, which may necessitate postponement of elective surgery or influence the choice of anaesthetic agent."
+         "a": "**Respiratory infections including tuberculosis — which may necessitate postponement of surgery.**\n\n## Understanding it\n- Active chest infection/TB may mean **postponing** elective surgery until treated.\n\n>> Respiratory infection/TB → may postpone surgery.",
+         "opts": [
+          "Cardiac disease requiring surgery",
+          "Liver disease",
+          "Anaemia requiring transfusion",
+          "Respiratory infection/TB — may require postponing surgery"
+         ],
+         "ans": 3
         },
         {
          "q": "Which chronic respiratory disease should be considered when deciding on anaesthetics?",
-         "a": "Asthma."
+         "a": "**Asthma.**\n\n## Understanding it\n- **Asthma** affects anaesthetic choice (airway reactivity), so it must be identified.\n\n>> Asthma influences the anaesthetic.",
+         "opts": [
+          "Epilepsy",
+          "Hypertension",
+          "Asthma",
+          "Diabetes mellitus"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the GIT considerations in pre-operative assessment.",
-         "a": "Gynaecological symptoms may be due to GIT disorders — e.g. appendicitis may mimic ectopic pregnancy; and liver diseases may affect metabolism of anaesthetic drugs."
+         "a": "**Gynaecological symptoms may be due to GIT disorders — e.g. appendicitis may mimic gynaecological pathology.**\n\n## Understanding it\n- The **gut can mimic** gynae disease (appendicitis vs adnexal pathology) — don't be fooled.\n\n>> GIT disease can mimic gynae symptoms (e.g. appendicitis).",
+         "opts": [
+          "The GIT is irrelevant pre-op",
+          "GIT disease may mimic gynaecological pathology (e.g. appendicitis)",
+          "Only bowel obstruction matters",
+          "Gynae symptoms never relate to the gut"
+         ],
+         "ans": 1
         },
         {
          "q": "What must be excluded in the urinary system, and what should be borne in mind?",
-         "a": "Exclude UTI; and bear in mind that obstructive uropathy may occur with pelvic tumours such as fibroids, or as part of a malignant process."
+         "a": "**Exclude urinary tract infection; and remember obstructive uropathy may occur with pelvic tumours.**\n\n## Understanding it\n- Rule out **UTI**, and be aware pelvic masses can obstruct the ureters (**obstructive uropathy**).\n\n>> Exclude UTI; watch for obstructive uropathy with pelvic tumours.",
+         "opts": [
+          "Nothing needs excluding",
+          "Exclude diabetes only",
+          "Exclude UTI; consider obstructive uropathy from pelvic tumours",
+          "Only check the bladder capacity"
+         ],
+         "ans": 2
         },
         {
          "q": "Which endocrine disorders should be excluded pre-operatively, and how are they suspected?",
-         "a": "Diabetes mellitus and thyroid disease — suggested by the patient's history and physical examination findings, requiring further investigation."
+         "a": "**Diabetes mellitus and thyroid disease — suspected from the history and physical examination.**\n\n## Understanding it\n- Screen for **diabetes and thyroid disease**, prompted by history/exam clues.\n\n>> Diabetes and thyroid disease (from history/exam).",
+         "opts": [
+          "Diabetes and thyroid disease, suspected from history/examination",
+          "Only thyroid disease",
+          "Only diabetes, from urine only",
+          "No endocrine screening is needed"
+         ],
+         "ans": 0
         },
         {
          "q": "Why are pre-operative investigations done?",
-         "a": "To confirm diagnosis, and to assess surgical and anaesthetic risk."
+         "a": "**To confirm the diagnosis, and to assess surgical and anaesthetic risk.**\n\n## Understanding it\n- Investigations **confirm the diagnosis** and **gauge operative/anaesthetic risk**.\n\n>> Confirm diagnosis + assess surgical/anaesthetic risk.",
+         "opts": [
+          "To confirm the diagnosis and assess surgical/anaesthetic risk",
+          "To justify the hospital stay",
+          "To fill in the notes",
+          "To choose the theatre"
+         ],
+         "ans": 0
         },
         {
          "q": "What determines which investigations are actually done?",
-         "a": "They are variable and individualised, and dependent on the procedure."
+         "a": "**They are variable, individualised, and dependent on the procedure.**\n\n## Understanding it\n- Tests are **tailored** to the patient and the specific operation — not a fixed panel.\n\n>> Individualised to the patient/procedure.",
+         "opts": [
+          "A fixed panel for everyone",
+          "The day of admission",
+          "Individualised and dependent on the procedure",
+          "The patient's request"
+         ],
+         "ans": 2
         },
         {
          "q": "Why should a battery of investigations not be done routinely?",
-         "a": "Because it would increase cost."
+         "a": "**Because it would increase cost (without benefit).**\n\n## Understanding it\n- Blanket testing wastes money and adds no value → test **selectively**.\n\n>> Routine batteries raise cost needlessly.",
+         "opts": [
+          "It is illegal",
+          "It increases cost without benefit",
+          "Labs refuse to do them",
+          "It delays the operation by years"
+         ],
+         "ans": 1
         },
         {
          "q": "Which investigation should be determined for ALL patients?",
-         "a": "Haemoglobin concentration."
+         "a": "**Haemoglobin concentration.**\n\n## Understanding it\n- The one universal test is **haemoglobin** (surgery risks blood loss).\n\n>> Hb for every patient.",
+         "opts": [
+          "Thyroid function tests",
+          "Haemoglobin concentration",
+          "Chest X-ray",
+          "ECG"
+         ],
+         "ans": 1
         },
         {
          "q": "What minimum haemoglobin is traditionally accepted for elective procedures?",
-         "a": "10 g/dL."
+         "a": "**10 g/dL.**\n\n## Understanding it\n- Traditionally, elective surgery proceeds at **Hb ≥10 g/dL** (optimise below that).\n\n>> Elective minimum Hb = 10 g/dL.",
+         "opts": [
+          "5 g/dL",
+          "7 g/dL",
+          "10 g/dL",
+          "13 g/dL"
+         ],
+         "ans": 2
         },
         {
          "q": "Should a low haemoglobin prevent surgery in a ruptured ectopic pregnancy, and why?",
-         "a": "No — low Hb should not preclude surgery in emergencies, since the aim is prompt arrest of bleeding."
+         "a": "**No — a low Hb should not preclude surgery in emergencies, since the aim is prompt arrest of bleeding.**\n\n## Understanding it\n- In a life-threatening bleed, **operate to stop the haemorrhage** — the low Hb is a reason to hurry, not delay.\n\n>> No — operate promptly to stop the bleeding.",
+         "opts": [
+          "Yes — treat with iron for weeks first",
+          "No — operate promptly to arrest the haemorrhage",
+          "Yes — always transfuse to 10 first",
+          "Yes — postpone until Hb is normal"
+         ],
+         "ans": 1
         },
         {
          "q": "When is a platelet count necessary?",
-         "a": "In a missed abortion, or where there may be a problem with coagulation."
+         "a": "**In a missed abortion, or where there may be a coagulation problem.**\n\n## Understanding it\n- Check platelets when **DIC/coagulopathy** is a risk — e.g. missed abortion.\n\n>> Missed abortion or suspected coagulopathy.",
+         "opts": [
+          "Only in day cases",
+          "Never needed",
+          "In missed abortion or possible coagulation problems",
+          "In every elective case"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is Hb genotype necessary pre-operatively?",
-         "a": "Because anaesthesia may trigger sickling crises."
+         "a": "**Because anaesthesia may trigger sickling crises.**\n\n## Understanding it\n- Hypoxia/stress of anaesthesia can precipitate **sickling** in sickle-cell disease → know the genotype.\n\n>> Anaesthesia can trigger sickling → check genotype.",
+         "opts": [
+          "It is a legal formality",
+          "Anaesthesia may precipitate a sickling crisis",
+          "It predicts the blood group",
+          "It affects the incision"
+         ],
+         "ans": 1
         },
         {
          "q": "When is blood grouping and cross-matching indicated?",
-         "a": "Where excessive blood loss is a distinct possibility."
+         "a": "**Where excessive blood loss is a distinct possibility.**\n\n## Understanding it\n- Group and cross-match when the operation carries a real risk of **major bleeding**.\n\n>> When major blood loss is likely.",
+         "opts": [
+          "For every minor procedure",
+          "When excessive blood loss is likely",
+          "Only after surgery",
+          "Never in gynaecology"
+         ],
+         "ans": 1
         },
         {
          "q": "What caution is given about blood transfusion?",
-         "a": "It should not be undertaken lightly in the face of the AIDS pandemic and the risk of other transfusion-transmitted infections; consideration should be given to alternatives to heterologous blood transfusion."
+         "a": "**It should not be undertaken lightly, given the AIDS pandemic and the risk of transfusion-transmitted infection.**\n\n## Understanding it\n- Transfusion carries **infection risk (HIV/hepatitis)** → use it judiciously.\n\n>> Don't transfuse lightly (transfusion-transmitted infection risk).",
+         "opts": [
+          "Transfuse everyone prophylactically",
+          "Avoid transfusing lightly due to transfusion-transmitted infection risk",
+          "Transfusion has no risks",
+          "Only whole blood should ever be used"
+         ],
+         "ans": 1
         },
         {
          "q": "What may an ultrasound scan be useful for pre-operatively?",
-         "a": "To exclude pregnancy, or obstructive uropathy."
+         "a": "**To exclude pregnancy, or obstructive uropathy.**\n\n## Understanding it\n- Ultrasound can rule out an unexpected **pregnancy** and detect **obstructive uropathy** from a pelvic mass.\n\n>> Exclude pregnancy / obstructive uropathy.",
+         "opts": [
+          "To type the blood group",
+          "To exclude pregnancy or obstructive uropathy",
+          "To measure haemoglobin",
+          "To assess the anaesthetic risk directly"
+         ],
+         "ans": 1
         },
         {
          "q": "When should a chest X-ray be done?",
-         "a": "If there is hypertension, or known cardiac or respiratory problems; and routinely if over 50 years."
+         "a": "**If there is hypertension, or known cardiac/respiratory problems; and routinely in older patients per local policy.**\n\n## Understanding it\n- CXR is **selective** — for cardiorespiratory disease/hypertension (or older-age policy), not for everyone.\n\n>> CXR when cardiorespiratory disease/HTN (or older-age policy).",
+         "opts": [
+          "Only for day cases",
+          "If hypertensive or with known cardiac/respiratory disease",
+          "Never needed pre-op",
+          "Routinely for every patient"
+         ],
+         "ans": 1
         },
         {
          "q": "When is an ECG indicated?",
-         "a": "In women over 60 years, those who are hypertensive, or those with known cardiac disease."
+         "a": "**In women over 60, those who are hypertensive, or those with known cardiac disease.**\n\n## Understanding it\n- ECG is targeted: **age >60, hypertension, or cardiac disease**.\n\n>> ECG for >60, hypertensive, or cardiac disease.",
+         "opts": [
+          "Age over 60, hypertensive, or known cardiac disease",
+          "Every patient routinely",
+          "Only in emergencies",
+          "Only patients under 30"
+         ],
+         "ans": 0
         },
         {
          "q": "What determines the duration of admission prior to surgery?",
-         "a": "The type of surgery and the need for in-patient preparation."
+         "a": "**The type of surgery and the need for in-patient preparation.**\n\n## Understanding it\n- How long before theatre depends on the **operation and preparation required**.\n\n>> Type of surgery + preparation needs.",
+         "opts": [
+          "The type of surgery and preparation needed",
+          "A fixed 1-week rule",
+          "The surgeon's availability only",
+          "The patient's wishes only"
+         ],
+         "ans": 0
         },
         {
          "q": "Give three reasons why pre-operative admission should not be unnecessarily long.",
-         "a": "Because of psychological and economic resources, and so as not to deny bed space to patients who require hospitalisation."
+         "a": "**Psychological burden on the patient, economic cost, and to avoid denying bed space to others.**\n\n## Understanding it\n- Long admissions stress the patient, cost money, and **block beds** for others.\n\n>> Psychological, economic, and bed-space reasons.",
+         "opts": [
+          "It increases surgical success",
+          "It shortens the operation",
+          "Psychological burden, economic cost, and bed-space for others",
+          "There is no downside to long stays"
+         ],
+         "ans": 2
         },
         {
          "q": "What three things are done on re-evaluation at admission?",
-         "a": "Clerk again in detail; check investigations for completeness; and check diagnosis and intended operation."
+         "a": "**Clerk again in detail; check investigations for completeness; and re-check/confirm the diagnosis.**\n\n## Understanding it\n- At admission: **re-clerk, verify results, confirm the diagnosis** before proceeding.\n\n>> Re-clerk, check investigations, confirm diagnosis.",
+         "opts": [
+          "Re-clerk, check investigations, confirm the diagnosis",
+          "Only book the theatre",
+          "Only start the drip",
+          "Only sign the consent"
+         ],
+         "ans": 0
         },
         {
          "q": "List the five points to consider on re-evaluation.",
-         "a": "Any change in the patient's condition; any intercurrent illness; is the procedure still necessary; is it the best for the patient; and any additional procedure to be done at the same time."
+         "a": "**Any change in condition; any intercurrent illness; whether the procedure is still appropriate/indicated; readiness for surgery; and completeness of preparation.**\n\n## Understanding it\n- Reassess: has anything changed, is the patient well, is the operation still right, is she ready and fully prepared.\n\n>> Change in condition, intercurrent illness, still indicated, readiness, preparation.",
+         "opts": [
+          "Only the theatre order",
+          "Only the patient's age",
+          "Only the consent form",
+          "Change in condition, intercurrent illness, still indicated, readiness, preparation"
+         ],
+         "ans": 3
         },
         {
          "q": "What guides consultation with other specialties?",
-         "a": "The patient's condition."
+         "a": "**The patient's condition (comorbidities).**\n\n## Understanding it\n- Referrals to other specialties are driven by the patient's **medical condition**.\n\n>> The patient's condition guides consultation.",
+         "opts": [
+          "The patient's condition/comorbidities",
+          "The day of the week",
+          "The hospital's budget only",
+          "The surgeon's mood"
+         ],
+         "ans": 0
         },
         {
          "q": "For which patients is medical consultation required?",
-         "a": "Women with diabetes mellitus, hypertension or other medical disorders."
+         "a": "**Women with diabetes mellitus, hypertension or other medical disorders.**\n\n## Understanding it\n- Comorbid patients (diabetes, HTN, etc.) need **physician input** to optimise them.\n\n>> Diabetics, hypertensives, and others with medical disease.",
+         "opts": [
+          "No one needs it",
+          "Women with diabetes, hypertension or other medical disorders",
+          "Only day cases",
+          "Only healthy young women"
+         ],
+         "ans": 1
         },
         {
          "q": "When should pre-operative surgical consultation be considered?",
-         "a": "If there is a possibility of bowel surgery or involvement of abdominal organs, as in known or suspected malignant disease, or septic abortion."
+         "a": "**If there is a possibility of bowel surgery or involvement of abdominal organs.**\n\n## Understanding it\n- Involve **general surgeons** when the operation may extend to bowel/other abdominal organs.\n\n>> When bowel/abdominal organ involvement is possible.",
+         "opts": [
+          "For every gynae operation",
+          "Only for minor day cases",
+          "When bowel surgery or abdominal organ involvement is possible",
+          "Never necessary"
+         ],
+         "ans": 2
         },
         {
          "q": "How must informed consent be obtained?",
-         "a": "Without duress, and involving a discussion with the patient in words that she can easily understand."
+         "a": "**Without duress, through discussion with the patient in words she can understand.**\n\n## Understanding it\n- Consent must be **voluntary and understood** — no coercion, in lay language.\n\n>> Voluntary, understandable discussion (no duress).",
+         "opts": [
+          "With a technical, jargon-heavy form",
+          "By the nurse signing for her",
+          "Voluntarily, in words the patient understands (no duress)",
+          "Under time pressure in theatre"
+         ],
+         "ans": 2
         },
         {
          "q": "What must be explained when taking informed consent?",
-         "a": "The planned procedure, its indication and alternatives; and the anticipated outcome with potential benefits and complications."
+         "a": "**The planned procedure, its indication and alternatives, and the anticipated outcome (and risks).**\n\n## Understanding it\n- Explain **what, why, alternatives, and expected outcome/risks**.\n\n>> Procedure, indication, alternatives, outcome/risks.",
+         "opts": [
+          "The procedure, its indication, alternatives and anticipated outcome",
+          "Only the cost",
+          "Only the date of surgery",
+          "Only the surgeon's name"
+         ],
+         "ans": 0
         },
         {
          "q": "What caution is given about explaining complications during consent?",
-         "a": "Ensure that the patient is not terrified into rejecting a beneficial operation."
+         "a": "**Ensure the patient is not terrified into rejecting a beneficial operation.**\n\n## Understanding it\n- Be honest about risks but **balanced**, so fear doesn't make her refuse a helpful operation.\n\n>> Don't frighten her out of a beneficial operation.",
+         "opts": [
+          "Do not terrify the patient into refusing a beneficial operation",
+          "List only fatal complications",
+          "Hide all complications from her",
+          "Refuse to discuss risks"
+         ],
+         "ans": 0
         },
         {
          "q": "Who signs the consent form, and what if the patient is a minor?",
-         "a": "The patient signs it; but if a minor, consent should be obtained from parents or guardian."
+         "a": "**The patient signs it; if a minor, consent is obtained from the parents or guardian.**\n\n## Understanding it\n- The **patient** consents; for a **minor**, a parent/guardian does.\n\n>> Patient signs; parent/guardian if a minor.",
+         "opts": [
+          "The patient (or a parent/guardian if she is a minor)",
+          "No signature is needed",
+          "A nurse signs for everyone",
+          "The surgeon always signs"
+         ],
+         "ans": 0
         },
         {
          "q": "Why should consent not be restrictive?",
-         "a": "So that the surgeon is able to carry out additional procedures that may be necessary intra-operatively."
+         "a": "**So the surgeon can carry out additional procedures that become necessary during the operation.**\n\n## Understanding it\n- Non-restrictive consent lets the surgeon act on **unexpected findings** safely.\n\n>> To allow necessary additional procedures found at surgery.",
+         "opts": [
+          "To avoid explaining the operation",
+          "So consent is never needed",
+          "To let the surgeon do anything at all",
+          "To allow necessary additional procedures discovered at surgery"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the operation list identify?",
-         "a": "The patients for surgery, and the order in which the operations should be performed."
+         "a": "**The patients for surgery and the order in which the operations are performed.**\n\n## Understanding it\n- The list names **who** is operated on and in **what order**.\n\n>> Patients and their operative order.",
+         "opts": [
+          "Only the surgeons on duty",
+          "Only the anaesthetic drugs",
+          "The hospital's finances",
+          "The patients and the order of their operations"
+         ],
+         "ans": 3
         },
         {
          "q": "With whom should the operation list be agreed, and when should it be submitted to theatre?",
-         "a": "In agreement with the anaesthetist, and submitted to the theatre well in advance."
+         "a": "**In agreement with the anaesthetist, and submitted to theatre well in advance.**\n\n## Understanding it\n- Agree the list with the **anaesthetist** and send it **early** to theatre.\n\n>> Agreed with anaesthetist; sent to theatre in advance.",
+         "opts": [
+          "With the patient, on the day",
+          "With the anaesthetist, submitted to theatre well in advance",
+          "No agreement is needed",
+          "With the porter, after surgery"
+         ],
+         "ans": 1
         },
         {
          "q": "Why must the operation list reach theatre well in advance?",
-         "a": "To enable theatre staff to make adequate arrangements for special equipment or materials if need be."
+         "a": "**To enable theatre staff to arrange special equipment or materials.**\n\n## Understanding it\n- Advance notice lets theatre **prepare instruments/equipment** in time.\n\n>> So theatre can prepare special equipment.",
+         "opts": [
+          "So theatre staff can arrange special equipment/materials",
+          "It makes no difference",
+          "So the surgeon can cancel easily",
+          "To increase the waiting time"
+         ],
+         "ans": 0
         },
         {
          "q": "Who performs the pre-anaesthetic visit, and what is their described role?",
-         "a": "The anaesthetist, who is the final clinical gatekeeper."
+         "a": "**The anaesthetist, who is the final clinical gatekeeper.**\n\n## Understanding it\n- The **anaesthetist** does the pre-anaesthetic visit and is the **final gatekeeper** to theatre.\n\n>> Anaesthetist — the final gatekeeper.",
+         "opts": [
+          "The theatre porter",
+          "The anaesthetist — the final clinical gatekeeper",
+          "The surgeon",
+          "The ward nurse"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the pre-anaesthetic visit achieve?",
-         "a": "It helps establish rapport and allay anxiety, and prescribes the type of anaesthesia and premedication."
+         "a": "**It establishes rapport and allays anxiety, and prescribes the type of anaesthesia and premedication.**\n\n## Understanding it\n- The visit **reassures** the patient and **decides the anaesthetic/premed**.\n\n>> Builds rapport, reduces anxiety, prescribes anaesthesia/premed.",
+         "opts": [
+          "Only records the weight",
+          "Performs the operation",
+          "Builds rapport, allays anxiety, and prescribes anaesthesia/premedication",
+          "Takes the consent instead of the surgeon"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the traditional NPO period, and why?",
-         "a": "8 hours before anaesthesia, to ensure the stomach is empty and to prevent regurgitation and aspiration."
+         "a": "**8 hours before anaesthesia, to ensure the stomach is empty and prevent regurgitation/aspiration.**\n\n## Understanding it\n- Fasting empties the stomach so the patient doesn't **aspirate** under anaesthesia.\n\n>> NPO 8 h to prevent aspiration.",
+         "opts": [
+          "1 hour — for comfort",
+          "8 hours — to empty the stomach and prevent aspiration",
+          "No fasting is needed",
+          "24 hours — to lose weight"
+         ],
+         "ans": 1
         },
         {
          "q": "How is NPO achieved in elective cases, and what must be avoided?",
-         "a": "By an overnight fast; but prolonged fasting must be avoided to prevent hypoglycaemia."
+         "a": "**By an overnight fast; but prolonged fasting must be avoided to prevent hypoglycaemia (and dehydration).**\n\n## Understanding it\n- Overnight fast is enough; **over-fasting** risks hypoglycaemia/dehydration.\n\n>> Overnight fast; avoid prolonged fasting.",
+         "opts": [
+          "No fast at all",
+          "An overnight fast; avoid prolonged fasting (hypoglycaemia)",
+          "A 3-day fast",
+          "Fasting only from water"
+         ],
+         "ans": 1
         },
         {
          "q": "What maximum fasting period is now being advocated?",
-         "a": "Guidelines preventing pre-operative fasting beyond 6 hours."
+         "a": "**Guidelines preventing pre-operative fasting beyond 6 hours.**\n\n## Understanding it\n- Modern guidance caps fasting at **~6 hours** (for solids) to reduce harm.\n\n>> No fasting beyond ~6 hours.",
+         "opts": [
+          "Fasting beyond 12 hours",
+          "No limit on fasting",
+          "Fasting for at least 24 hours",
+          "No fasting beyond 6 hours"
+         ],
+         "ans": 3
         },
         {
          "q": "What should be done about hairstyles and hairpieces?",
-         "a": "Elaborate hairstyles and hairpieces should be removed."
+         "a": "**Elaborate hairstyles and hairpieces should be removed.**\n\n## Understanding it\n- Remove **hairpieces/elaborate styles** (fire/anaesthetic-airway and hygiene reasons).\n\n>> Remove elaborate hairstyles and hairpieces.",
+         "opts": [
+          "They should be left in place",
+          "Elaborate hairstyles and hairpieces should be removed",
+          "They must be cut off completely",
+          "They improve anaesthetic monitoring"
+         ],
+         "ans": 1
         },
         {
          "q": "Where should pre-operative hair removal be done, and when?",
-         "a": "Limited to the area of incision if required; and the risk of infection is reduced if done shortly before surgery, compared to the previous night."
+         "a": "**Limited to the incision area if required; and doing it close to surgery reduces infection risk.**\n\n## Understanding it\n- Shave only the **incision site**, and **just before** surgery to minimise infection.\n\n>> Only at the incision site, close to the time of surgery.",
+         "opts": [
+          "The scalp, the night before",
+          "The whole body, days before",
+          "Only at the incision site, close to the time of surgery",
+          "Never remove any hair"
+         ],
+         "ans": 2
         },
         {
          "q": "Why should nail polish be removed?",
-         "a": "Because it may affect pulse oximeter readings."
+         "a": "**Because it may affect pulse-oximeter readings.**\n\n## Understanding it\n- Polish blocks the oximeter light → **inaccurate oxygen saturation**.\n\n>> Polish disturbs pulse-oximetry.",
+         "opts": [
+          "It stains the instruments",
+          "It reacts with anaesthetic gas",
+          "It interferes with pulse-oximeter readings",
+          "It causes wound infection"
+         ],
+         "ans": 2
         },
         {
          "q": "Why should lipstick be washed off, and in which patients especially?",
-         "a": "Because it may affect assessment — especially for day cases."
+         "a": "**Because it may affect assessment (e.g. of colour/cyanosis) — especially in day cases.**\n\n## Understanding it\n- Lipstick can **mask colour changes** (cyanosis) needed for assessment, notably in day cases.\n\n>> It hampers colour/cyanosis assessment (esp. day cases).",
+         "opts": [
+          "It can mask colour changes (cyanosis) — especially in day cases",
+          "It has no clinical relevance",
+          "It causes bleeding",
+          "It reacts with the anaesthetic"
+         ],
+         "ans": 0
         },
         {
          "q": "Is bowel preparation routine, and when is it indicated?",
-         "a": "Not routinely done; indicated when bowel surgery is anticipated."
+         "a": "**Not routinely done; indicated when bowel surgery is anticipated.**\n\n## Understanding it\n- Skip bowel prep unless the **bowel may be operated on**.\n\n>> Not routine; only if bowel surgery is anticipated.",
+         "opts": [
+          "Never done under any circumstance",
+          "Routine for every operation",
+          "Not routine; only when bowel surgery is anticipated",
+          "Only for day cases"
+         ],
+         "ans": 2
         },
         {
          "q": "Where should bladder catheterisation be done if required?",
-         "a": "In theatre, under anaesthesia."
+         "a": "**In theatre, under anaesthesia.**\n\n## Understanding it\n- Catheterise (if needed) **in theatre under anaesthesia** — more comfortable and sterile.\n\n>> In theatre, under anaesthesia.",
+         "opts": [
+          "In theatre, under anaesthesia",
+          "At home",
+          "It is never done",
+          "On the ward, hours before"
+         ],
+         "ans": 0
         },
         {
          "q": "Is pre-operative cleansing of the vagina routine?",
-         "a": "No — it is not routinely done, and has been shown not to be useful."
+         "a": "**No — it is not routinely done and has been shown not to be useful.**\n\n## Understanding it\n- Routine vaginal cleansing offers **no proven benefit**, so it's not standard.\n\n>> Not routine (no proven benefit).",
+         "opts": [
+          "Yes — always required",
+          "Yes — with antiseptic daily for a week",
+          "No — not routine (shown not to be useful)",
+          "Only for day cases"
+         ],
+         "ans": 2
         },
         {
          "q": "According to whose prescription is pre-medication administered?",
-         "a": "According to the anaesthetic prescription."
+         "a": "**According to the anaesthetic prescription.**\n\n## Understanding it\n- Premedication follows the **anaesthetist's** prescription.\n\n>> As prescribed by the anaesthetist.",
+         "opts": [
+          "The surgeon's verbal order",
+          "According to the anaesthetist's prescription",
+          "The nurse's discretion",
+          "The patient's request"
+         ],
+         "ans": 1
         },
         {
          "q": "Who usually performs patient preparation in the ward, and what is required of them?",
-         "a": "The nursing staff, who must be friendly disposed to the patient."
+         "a": "**The nursing staff, who must be friendly/kind toward the patient.**\n\n## Understanding it\n- Ward **nurses** prepare the patient and should be **reassuring and kind**.\n\n>> Nurses, who must be friendly toward the patient.",
+         "opts": [
+          "The nursing staff, who must be friendly and reassuring",
+          "The porter",
+          "The surgeon alone",
+          "The patient's relatives"
+         ],
+         "ans": 0
         },
         {
          "q": "What makes the patient relaxed and ready for surgery?",
-         "a": "A good night's sleep and friendly faces."
+         "a": "**A good night's sleep and friendly faces.**\n\n## Understanding it\n- Rest and a **reassuring, kind environment** calm the patient.\n\n>> Good sleep and friendly faces.",
+         "opts": [
+          "A good night's sleep and friendly faces",
+          "A crowded noisy ward",
+          "A long fast",
+          "Withholding all information"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is pre-operative antibiotic prophylaxis preferred?",
-         "a": "It has been shown to be more cost effective than post-operative therapy for seven days."
+         "a": "**It has been shown to be more cost-effective than post-operative therapy (for the relevant procedures).**\n\n## Understanding it\n- Giving antibiotics **before** contamination prevents infection more cost-effectively than treating it after.\n\n>> Pre-op prophylaxis is more cost-effective than post-op treatment.",
+         "opts": [
+          "It is more cost-effective than post-operative treatment",
+          "It is only for minor cases",
+          "It replaces the need for sterile technique",
+          "Post-operative therapy is always better"
+         ],
+         "ans": 0
         },
         {
          "q": "What determines the choice of prophylactic antibiotic?",
-         "a": "Local sensitivity patterns."
+         "a": "**Local sensitivity patterns.**\n\n## Understanding it\n- Pick the antibiotic based on **local microbial sensitivities/resistance**.\n\n>> Guided by local sensitivity patterns.",
+         "opts": [
+          "The cheapest available drug",
+          "Local antibiotic sensitivity patterns",
+          "The surgeon's habit alone",
+          "The patient's preference"
+         ],
+         "ans": 1
         },
         {
          "q": "Give three examples of DVT prophylaxis.",
-         "a": "Adequate hydration, graduated compression stockings, and heparin."
+         "a": "**Adequate hydration, graduated compression stockings, and heparin.**\n\n## Understanding it\n- Prevent clots with **hydration, compression stockings, and heparin**.\n\n>> Hydration, compression stockings, heparin.",
+         "opts": [
+          "Warm blankets only",
+          "Prolonged bed rest and fasting",
+          "Adequate hydration, compression stockings, and heparin",
+          "Aspirin and immobilisation"
+         ],
+         "ans": 2
         },
         {
          "q": "What effect may prolonged pre-operative bed rest have?",
-         "a": "It may increase the risk of post-operative thromboembolism."
+         "a": "**It may increase the risk of post-operative thromboembolism.**\n\n## Understanding it\n- Immobility promotes venous stasis → **more thromboembolism**; so avoid unnecessary bed rest.\n\n>> Prolonged bed rest raises thromboembolism risk.",
+         "opts": [
+          "It reduces clot risk",
+          "It has no effect",
+          "It speeds wound healing",
+          "It increases the risk of postoperative thromboembolism"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": null,
