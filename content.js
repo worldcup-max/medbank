@@ -23330,455 +23330,1246 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "When does the cardiovascular system develop?",
-         "a": "From 18 days to 12 weeks — it is the earliest functional system in the body."
+         "a": "**From about 18 days to 12 weeks — it is the earliest functional system in the body.**\n\n## Understanding it\n- The CVS is the **first** organ system to function (~18 days), completing by ~12 weeks.\n\n>> 18 days–12 weeks; the earliest functional system.",
+         "opts": [
+          "18 days to 12 weeks — the earliest functional system",
+          "At birth",
+          "From 8 to 40 weeks",
+          "Only in the third trimester"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does the CVS form so early?",
-         "a": "Because the embryo has grown too big for simple diffusion to meet oxygen and nutrient demands, so a delivery system is needed by about the 3rd week."
+         "a": "**Because the embryo has grown too big for simple diffusion to meet its oxygen/nutrient needs, so it needs circulation.**\n\n## Understanding it\n- Once the embryo outgrows **diffusion distances**, it must have a working circulation.\n\n>> Diffusion can no longer supply the growing embryo.",
+         "opts": [
+          "Diffusion can no longer meet the growing embryo's needs",
+          "To make the heart beat for fun",
+          "To store blood",
+          "Because the lungs are working"
+         ],
+         "ans": 0
         },
         {
          "q": "List the five sources of the CVS.",
-         "a": "Splanchnic mesoderm; paraxial and lateral mesoderm; otic placodes; neural crest cells; and the primordium of the labyrinth of the internal ear."
+         "a": "**Splanchnic mesoderm; paraxial and lateral mesoderm; otic placodes; neural crest cells; and (endothelial) precursors.**\n\n## Understanding it\n- The CVS draws on several sources — chiefly **splanchnic mesoderm** (heart) and **neural crest** (outflow tract).\n\n>> Splanchnic + paraxial/lateral mesoderm, otic placodes, neural crest.",
+         "opts": [
+          "Only endoderm",
+          "Splanchnic mesoderm, paraxial/lateral mesoderm, otic placodes, neural crest",
+          "Only ectoderm",
+          "Only the notochord"
+         ],
+         "ans": 1
         },
         {
          "q": "What does splanchnic mesoderm contribute to the heart?",
-         "a": "The primordium (foundation) of the heart — heart muscle and lining."
+         "a": "**The primordium (foundation) of the heart — heart muscle and lining.**\n\n## Understanding it\n- Splanchnic mesoderm forms the **heart muscle and endocardial lining**.\n\n>> Splanchnic mesoderm → heart muscle and lining.",
+         "opts": [
+          "Blood cells only",
+          "The great-vessel walls",
+          "The outflow tract septum",
+          "The heart primordium — muscle and lining"
+         ],
+         "ans": 3
         },
         {
          "q": "What do the paraxial and lateral mesoderm contribute?",
-         "a": "Blood vessel walls and connective tissue."
+         "a": "**Blood vessel walls and connective tissue.**\n\n## Understanding it\n- These mesoderms build **vessel walls and connective tissue** (not the heart muscle itself).\n\n>> Vessel walls and connective tissue.",
+         "opts": [
+          "Blood vessel walls and connective tissue",
+          "Outflow tract septation",
+          "Heart muscle and lining",
+          "The conduction system"
+         ],
+         "ans": 0
         },
         {
          "q": "What do neural crest cells contribute?",
-         "a": "Outflow tract septation and the great vessel walls — defects here cause TGA, TOF and Truncus arteriosus."
+         "a": "**Outflow tract septation and the great-vessel walls — defects here cause cono-truncal anomalies (TGA, TOF, truncus).**\n\n## Understanding it\n- Neural crest builds the **outflow tract septum and great-vessel walls**; their failure causes the classic cono-truncal defects.\n\n>> Outflow tract septation and great-vessel walls.",
+         "opts": [
+          "The atrial septum only",
+          "Outflow tract septation and great-vessel walls",
+          "Heart muscle and lining",
+          "Blood cells"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the two most important sources to remember and their products?",
-         "a": "Splanchnic mesoderm (heart muscle and lining) and neural crest cells (outflow tract)."
+         "a": "**Splanchnic mesoderm (heart muscle and lining) and neural crest cells (outflow tract septation and great vessels).**\n\n## Understanding it\n- Remember the pair: **splanchnic mesoderm = the heart**; **neural crest = the outflow tract**.\n\n>> Splanchnic (heart) + neural crest (outflow tract).",
+         "opts": [
+          "Splanchnic mesoderm (heart) and neural crest (outflow tract)",
+          "Endoderm and notochord",
+          "Otic placodes and ectoderm",
+          "Paraxial and lateral mesoderm"
+         ],
+         "ans": 0
         },
         {
          "q": "What are myoblasts?",
-         "a": "Cardiac progenitor cells (future heart-muscle cells) that cluster in the cardiogenic field."
+         "a": "**Cardiac progenitor cells (future heart-muscle cells) that cluster in the cardiogenic field.**\n\n## Understanding it\n- Myoblasts are the **early heart-muscle precursors**.\n\n>> Myoblasts = cardiac muscle progenitor cells.",
+         "opts": [
+          "Cardiac progenitor (future heart-muscle) cells",
+          "Blood-cell precursors",
+          "Endothelial lining cells only",
+          "Neural crest cells"
+         ],
+         "ans": 0
         },
         {
          "q": "What are angioblastic cords?",
-         "a": "Cord-like structures formed by the myoblasts, which hollow out and fuse to form the primitive heart tube."
+         "a": "**Cord-like structures formed by the myoblasts, which hollow out and fuse to form the heart tube/vessels.**\n\n## Understanding it\n- Angioblastic cords **hollow out and fuse** into the primitive heart tube and vessels.\n\n>> Cords that hollow/fuse into the heart tube.",
+         "opts": [
+          "Solid muscle blocks",
+          "Neural crest streams",
+          "The atrial septa",
+          "Cords that hollow out and fuse into the heart tube"
+         ],
+         "ans": 3
         },
         {
          "q": "Where is the cardiogenic field located?",
-         "a": "Anterior (in front) to the endodermal primitive pharynx, initially cephalad (near the head)."
+         "a": "**Anterior (in front) to the endodermal primitive pharynx, initially cephalad (head end) to the embryo.**\n\n## Understanding it\n- It begins **at the head end**, in front of the pharynx, before folding brings it to the chest.\n\n>> In front of the pharynx, initially cephalad.",
+         "opts": [
+          "Behind the spinal cord",
+          "Anterior to the primitive pharynx, initially cephalad",
+          "Below the diaphragm",
+          "In the pelvis"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does the heart end up in the chest despite starting cephalad?",
-         "a": "Because the embryo folds craniocaudally in weeks 3-4, carrying the heart down into the thoracic region."
+         "a": "**Because the embryo folds craniocaudally in weeks 3–4, carrying the heart down into the thorax.**\n\n## Understanding it\n- **Craniocaudal folding** relocates the head-end heart into the chest.\n\n>> Craniocaudal folding carries the heart into the thorax.",
+         "opts": [
+          "It grows a new heart in the chest",
+          "Craniocaudal folding carries it into the thorax",
+          "Gravity pulls it down",
+          "The heart migrates through the blood"
+         ],
+         "ans": 1
         },
         {
          "q": "When does the primitive heart tube form and from what?",
-         "a": "By the 4th week, from the two angioblastic cords hollowing out and fusing into one straight tube."
+         "a": "**By the 4th week, from the two angioblastic cords hollowing out and fusing.**\n\n## Understanding it\n- The single heart tube forms by **week 4** from fused angioblastic cords.\n\n>> Week 4, from fused angioblastic cords.",
+         "opts": [
+          "Week 1, from the notochord",
+          "Week 12, from mesoderm blocks",
+          "By week 4, from two fused angioblastic cords",
+          "At birth, from the atria"
+         ],
+         "ans": 2
         },
         {
          "q": "What anchors the caudal (lower) end of the heart tube?",
-         "a": "The septum transversum (a block of mesoderm that later helps form the diaphragm)."
+         "a": "**The septum transversum (a mesoderm block that helps form the diaphragm).**\n\n## Understanding it\n- The **caudal** end is fixed by the **septum transversum**.\n\n>> Caudal anchor = septum transversum.",
+         "opts": [
+          "The neural tube",
+          "The septum transversum",
+          "The 6 arterial arches",
+          "The endocardial cushions"
+         ],
+         "ans": 1
         },
         {
          "q": "What anchors the cephalad (upper) end of the heart tube?",
-         "a": "The 6 arterial arches."
+         "a": "**The six arterial (aortic) arches.**\n\n## Understanding it\n- The **cephalad** end is fixed by the **six arterial arches**.\n\n>> Cephalad anchor = the 6 arterial arches.",
+         "opts": [
+          "The umbilical vein",
+          "The 6 arterial arches",
+          "The septum transversum",
+          "The diaphragm"
+         ],
+         "ans": 1
         },
         {
          "q": "When does dilatation of the heart tube become visible?",
-         "a": "Days 21 to 24."
+         "a": "**Days 21 to 24.**\n\n## Understanding it\n- The tube's regional dilatations appear around **days 21–24**.\n\n>> Days 21–24.",
+         "opts": [
+          "At birth",
+          "Week 12",
+          "Days 60 to 70",
+          "Days 21 to 24"
+         ],
+         "ans": 3
         },
         {
          "q": "What will the venous (caudal) end of the heart tube become?",
-         "a": "The atria."
+         "a": "**The atria.**\n\n## Understanding it\n- The **venous (caudal)** end forms the **atria**.\n\n>> Venous end → atria.",
+         "opts": [
+          "The ventricles",
+          "The atria",
+          "The outflow tract",
+          "The great vessels"
+         ],
+         "ans": 1
         },
         {
          "q": "What will the arterial (cephalad) end of the heart tube become?",
-         "a": "The ventricles and outflow tract."
+         "a": "**The ventricles and outflow tract.**\n\n## Understanding it\n- The **arterial (cephalad)** end forms the **ventricles and outflow tract**.\n\n>> Arterial end → ventricles and outflow tract.",
+         "opts": [
+          "The coronary sinus",
+          "The atria",
+          "The ventricles and outflow tract",
+          "The pulmonary veins"
+         ],
+         "ans": 2
         },
         {
          "q": "Why does the heart tube loop?",
-         "a": "It is anchored at both ends in the limited pericardial cavity and growing rapidly with nowhere to elongate, so it bends and loops on itself."
+         "a": "**Because it is anchored at both ends in the limited pericardial cavity and grows faster than the space allows, so it bends/loops.**\n\n## Understanding it\n- Fixed ends + rapid growth in a small space force the tube to **loop**.\n\n>> Fixed ends + fast growth in small space → looping.",
+         "opts": [
+          "The blood pushes it into a loop",
+          "It loops by chance",
+          "Gravity bends it",
+          "It is fixed at both ends and outgrows the pericardial space"
+         ],
+         "ans": 3
         },
         {
          "q": "What abnormality results from looping in the wrong direction?",
-         "a": "Dextrocardia (heart on the wrong side)."
+         "a": "**Dextrocardia (heart on the wrong side).**\n\n## Understanding it\n- Looping to the **left instead of right** gives **dextrocardia**.\n\n>> Wrong-direction looping → dextrocardia.",
+         "opts": [
+          "Atrial septal defect",
+          "Dextrocardia",
+          "Ventricular septal defect",
+          "Patent ductus arteriosus"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe stage 1 of looping (atrial looping).",
-         "a": "A right-angle bend between the primitive atrium and the interventricular region, driven by differential growth — the posterior-left grows slowly and the anterior-right grows fast."
+         "a": "**A right-angle bend between the primitive atrium and the interventricular region.**\n\n## Understanding it\n- Stage 1 = a **right-angle bend** at the atrial/interventricular junction.\n\n>> Stage 1 = a right-angle atrial bend.",
+         "opts": [
+          "A 180° ventricular flexure",
+          "Complete inversion of the heart",
+          "No bending at all",
+          "A right-angle bend between atrium and interventricular region"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe stage 2 of looping (ventricular looping).",
-         "a": "A dramatic 180-degree flexure between the interventricular region and the outlet ventricle, after which the tube resembles the definitive heart."
+         "a": "**A dramatic 180-degree flexure between the interventricular region and the bulbus cordis.**\n\n## Understanding it\n- Stage 2 = a **180° flexure** that positions the ventricles.\n\n>> Stage 2 = a 180° ventricular flexure.",
+         "opts": [
+          "Complete looping reversal",
+          "A straight tube with no flexure",
+          "A 180° flexure between interventricular region and bulbus cordis",
+          "A right-angle atrial bend"
+         ],
+         "ans": 2
         },
         {
          "q": "What does looping achieve overall?",
-         "a": "It repositions the atria behind and above the ventricles, with the ventricles anterior and inferior — the adult arrangement."
+         "a": "**It repositions the atria behind and above the ventricles, with the ventricles side by side — the mature spatial arrangement.**\n\n## Understanding it\n- Looping puts **atria behind/above, ventricles below** — the adult layout.\n\n>> Atria behind/above; ventricles side by side.",
+         "opts": [
+          "The heart on the right side",
+          "No spatial change",
+          "Atria behind/above the ventricles; ventricles side by side",
+          "Atria below the ventricles"
+         ],
+         "ans": 2
         },
         {
          "q": "What problem do convergence and wedging solve?",
-         "a": "After looping, the inlets and outlets are not yet aligned over their correct ventricles; convergence and wedging realign them before septation."
+         "a": "**After looping, the inlets and outlets are not yet aligned over their correct ventricles — convergence and wedging align them.**\n\n## Understanding it\n- These movements **align the inlets/outlets** over the proper ventricles.\n\n>> They align inlets/outlets with the correct ventricles.",
+         "opts": [
+          "Closing the ductus arteriosus",
+          "Making the heart beat",
+          "Forming the atrial septum",
+          "Aligning the inlets and outlets over the correct ventricles"
+         ],
+         "ans": 3
         },
         {
          "q": "What is convergence?",
-         "a": "The AV canal (inlet) and bulbus cordis (outlet) move closer toward each other into the same plane."
+         "a": "**The AV canal (inlet) and bulbus cordis (outlet) move closer toward each other/the midline.**\n\n## Understanding it\n- Convergence brings the **inlet and outlet closer** together.\n\n>> Inlet (AV canal) and outlet (bulbus) move together.",
+         "opts": [
+          "The atria move apart",
+          "The great vessels separate",
+          "The ventricles fuse",
+          "The AV canal (inlet) and bulbus cordis (outlet) move closer together"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe wedging.",
-         "a": "A two-part movement: the AV canal shifts to the right so each AV orifice sits over its ventricle, and the bulbus cordis shifts to the left so half the outlet sits over each ventricular outflow tract."
+         "a": "**A two-part movement: the AV canal shifts to the right so each AV orifice sits over its own ventricle, and the aorta wedges between the two AV valves.**\n\n## Understanding it\n- Wedging positions each **AV valve over the right ventricle** and slots the **aorta between them** (over the LV).\n\n>> AV canal shifts right; aorta wedges between the AV valves.",
+         "opts": [
+          "The ventricles fuse into one",
+          "The atria separate",
+          "The heart tube straightens",
+          "AV canal shifts right and the aorta wedges between the AV valves"
+         ],
+         "ans": 3
         },
         {
          "q": "After wedging, over which ventricles do the valves and great vessels sit?",
-         "a": "Tricuspid over the RV, mitral over the LV, aorta over the LV (wedged between the AV valves), and pulmonary trunk over the RV."
+         "a": "**Tricuspid over the RV, mitral over the LV, and aorta over the LV (wedged between the AV valves).**\n\n## Understanding it\n- Correct alignment: **tricuspid→RV, mitral→LV, aorta→LV**.\n\n>> Tricuspid→RV, mitral→LV, aorta→LV.",
+         "opts": [
+          "Tricuspid over RV, mitral over LV, aorta over LV",
+          "Both valves over the RV",
+          "Both great vessels over the LV",
+          "Aorta over the RV"
+         ],
+         "ans": 0
         },
         {
          "q": "What defect results from failed wedging?",
-         "a": "Double Outlet Right Ventricle (DORV) — both aorta and pulmonary trunk over the RV."
+         "a": "**Double Outlet Right Ventricle (DORV) — both the aorta and pulmonary trunk arise over the RV.**\n\n## Understanding it\n- Failed wedging leaves **both great arteries over the RV** = DORV.\n\n>> Failed wedging → DORV.",
+         "opts": [
+          "Double Inlet Left Ventricle",
+          "Transposition of the great arteries",
+          "Atrial septal defect",
+          "Double Outlet Right Ventricle (DORV)"
+         ],
+         "ans": 3
         },
         {
          "q": "What defect results from abnormal convergence?",
-         "a": "Double Inlet Left Ventricle (DILV) — both AV valves drain into the LV."
+         "a": "**Double Inlet Left Ventricle (DILV) — both AV valves drain into the LV.**\n\n## Understanding it\n- Abnormal convergence sends **both AV valves into the LV** = DILV.\n\n>> Abnormal convergence → DILV.",
+         "opts": [
+          "Tetralogy of Fallot",
+          "Double Inlet Left Ventricle (DILV)",
+          "Double Outlet Right Ventricle",
+          "Patent ductus arteriosus"
+         ],
+         "ans": 1
         },
         {
          "q": "Which three paired veins drain into the sinus venosus?",
-         "a": "The vitelline vein, the umbilical vein, and the common cardinal vein."
+         "a": "**The vitelline vein, the umbilical vein, and the common cardinal vein.**\n\n## Understanding it\n- Three venous inputs: **vitelline (yolk sac), umbilical (placenta), cardinal (body)**.\n\n>> Vitelline, umbilical, common cardinal veins.",
+         "opts": [
+          "Pulmonary, coronary, and hepatic veins",
+          "Vitelline, umbilical, and common cardinal veins",
+          "Aorta, pulmonary trunk, ductus",
+          "SVC, IVC, and azygos veins"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the function and adult fate of the vitelline vein?",
-         "a": "Returns deoxygenated blood from the yolk sac; becomes the hepatic veins and portal vein."
+         "a": "**Returns deoxygenated blood from the yolk sac; becomes the hepatic veins, portal system and part of the IVC.**\n\n## Understanding it\n- Vitelline vein → **hepatic/portal system** (and part of the IVC).\n\n>> Yolk-sac drainage; becomes hepatic/portal veins.",
+         "opts": [
+          "Carries placental blood; becomes ductus venosus",
+          "Drains the yolk sac; becomes hepatic/portal veins (and part of IVC)",
+          "Drains the head; becomes the SVC",
+          "Becomes the pulmonary veins"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the function of the umbilical vein and why is it unusual?",
-         "a": "It carries oxygenated blood from the placenta to the embryo — unusual for a vein — because in fetal life the placenta is the lung."
+         "a": "**It carries oxygenated blood from the placenta to the embryo — unusual because veins usually carry deoxygenated blood.**\n\n## Understanding it\n- The umbilical **vein carries OXYGENATED** placental blood — the exception to the vein rule.\n\n>> Umbilical vein carries oxygenated placental blood (a vein exception).",
+         "opts": [
+          "Carries oxygenated placental blood (unusual for a vein)",
+          "Carries deoxygenated blood from the body",
+          "Drains the head",
+          "Carries deoxygenated blood from the yolk sac"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the adult fate of the umbilical vein?",
-         "a": "It forms the ductus venosus, which becomes the ligamentum venosum at birth."
+         "a": "**It forms the ductus venosus, which becomes the ligamentum venosum at birth.**\n\n## Understanding it\n- Umbilical vein → **ductus venosus** → **ligamentum venosum** after birth.\n\n>> Ductus venosus → ligamentum venosum.",
+         "opts": [
+          "Becomes the SVC",
+          "Forms the ductus venosus → ligamentum venosum",
+          "Becomes the hepatic veins",
+          "Becomes the coronary sinus"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the role of the ductus venosus?",
-         "a": "It allows oxygenated blood from the placenta to bypass the liver and go directly to the heart; it closes at birth."
+         "a": "**It allows oxygenated blood from the placenta to bypass the liver and go straight to the IVC/heart.**\n\n## Understanding it\n- The ductus venosus is a **liver bypass** for oxygenated placental blood.\n\n>> Bypasses the liver to the IVC.",
+         "opts": [
+          "Lets placental blood bypass the liver to the IVC",
+          "Drains the head",
+          "Connects the atria",
+          "Bypasses the lungs"
+         ],
+         "ans": 0
         },
         {
          "q": "What does the common cardinal vein return, and what does it form?",
-         "a": "Deoxygenated blood from the body; it forms the SVC and IVC."
+         "a": "**Deoxygenated blood from the body; it forms the SVC and IVC (systemic venous return).**\n\n## Understanding it\n- The cardinal system drains the **body** and forms the great systemic veins (**SVC/IVC**).\n\n>> Drains the body; forms the SVC and IVC.",
+         "opts": [
+          "Drains the yolk sac; forms the portal vein",
+          "Drains the body; forms the SVC and IVC",
+          "Drains the placenta; forms the ductus venosus",
+          "Forms the pulmonary veins"
+         ],
+         "ans": 1
         },
         {
          "q": "What two tributaries form each common cardinal vein?",
-         "a": "The anterior cardinal vein (drains the head) and the posterior cardinal vein (drains the lower body)."
+         "a": "**The anterior cardinal vein (drains the head) and the posterior cardinal vein (drains the body/trunk).**\n\n## Understanding it\n- **Anterior cardinal = head; posterior cardinal = body**, joining as the common cardinal.\n\n>> Anterior (head) + posterior (body) cardinal veins.",
+         "opts": [
+          "Vitelline and umbilical veins",
+          "Pulmonary and coronary veins",
+          "Anterior cardinal (head) and posterior cardinal (body)",
+          "SVC and IVC"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the adult fate of the right anterior cardinal vein?",
-         "a": "It becomes the superior vena cava (SVC)."
+         "a": "**It becomes the superior vena cava (SVC).**\n\n## Understanding it\n- The **right** anterior cardinal vein → **SVC** (right-sided dominance).\n\n>> Right anterior cardinal → SVC.",
+         "opts": [
+          "The pulmonary veins",
+          "The superior vena cava (SVC)",
+          "The coronary sinus",
+          "The IVC"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the fate of the left anterior cardinal vein?",
-         "a": "It largely regresses."
+         "a": "**It largely regresses.**\n\n## Understanding it\n- The **left** anterior cardinal vein mostly **disappears** (failure to regress → persistent left SVC).\n\n>> Left anterior cardinal largely regresses.",
+         "opts": [
+          "It becomes the IVC",
+          "It becomes the aorta",
+          "It becomes the SVC",
+          "It largely regresses"
+         ],
+         "ans": 3
         },
         {
          "q": "From how many segments is the IVC assembled, and name them.",
-         "a": "Four: hepatic veins, right subcardinal vein, right supracardinal vein, and the subcardinal-supracardinal anastomosis."
+         "a": "**Four: hepatic veins, right subcardinal vein, right supracardinal vein, and a hepatic segment (from the vitelline system).**\n\n## Understanding it\n- The IVC is a **composite of four segments**, which is why segmental failure causes anomalies.\n\n>> Four segments (hepatic, subcardinal, supracardinal, etc.).",
+         "opts": [
+          "Two segments only",
+          "A single continuous vein",
+          "The aortic arches",
+          "Four segments (hepatic, subcardinal, supracardinal, etc.)"
+         ],
+         "ans": 3
         },
         {
          "q": "Give examples of IVC anomalies from segmental failure.",
-         "a": "Absent infrarenal IVC, interrupted IVC with azygos continuation, and double IVC."
+         "a": "**Absent infrarenal IVC, interrupted IVC with azygos continuation, and double IVC.**\n\n## Understanding it\n- Because it is built from segments, the IVC can be **absent, interrupted (azygos continuation), or doubled**.\n\n>> Absent, interrupted (azygos continuation), or double IVC.",
+         "opts": [
+          "Absent infrarenal IVC, interrupted IVC with azygos continuation, double IVC",
+          "Patent ductus arteriosus",
+          "Atrial septal defect",
+          "Transposition of the great arteries"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the recurring theme of systemic venous development?",
-         "a": "Right-sided dominance — the right cardinal system forms the SVC and IVC while the left mostly regresses."
+         "a": "**Right-sided dominance — the right cardinal system forms the SVC and IVC while the left largely regresses.**\n\n## Understanding it\n- The **right** venous channels persist; the **left** regress — 'right-sided dominance'.\n\n>> Right-sided dominance of the venous system.",
+         "opts": [
+          "Left-sided dominance",
+          "Both sides persist equally",
+          "Right-sided dominance (right cardinal system persists)",
+          "No consistent pattern"
+         ],
+         "ans": 2
         },
         {
          "q": "Why can the atria not be completely sealed in fetal life?",
-         "a": "Because the fetus does not use its lungs; oxygenated placental blood must bypass the pulmonary circulation and reach the left heart via the foramen ovale."
+         "a": "**Because the fetus does not use its lungs; oxygenated placental blood must cross from right to left through the atrial septum.**\n\n## Understanding it\n- With the lungs bypassed, blood must **shunt right→left** across the atria (via the foramen ovale).\n\n>> Fetal lungs are bypassed → right-to-left atrial shunt needed.",
+         "opts": [
+          "To let deoxygenated blood into the aorta",
+          "The atria never form a septum",
+          "The fetus bypasses the lungs, so blood must shunt right→left across the atria",
+          "The lungs are already working"
+         ],
+         "ans": 2
         },
         {
          "q": "How does septum primum grow, and what gap does it leave?",
-         "a": "It grows down from the roof of the atrium toward the endocardial cushions; the gap below its free edge is the foramen primum."
+         "a": "**It grows down from the roof of the atrium toward the endocardial cushions, leaving a gap below it called the foramen primum.**\n\n## Understanding it\n- Septum primum descends, and the gap beneath it is the **foramen primum**.\n\n>> Grows down from the roof; leaves the foramen primum.",
+         "opts": [
+          "Grows sideways, leaving no gap",
+          "Forms the ventricular septum",
+          "Grows down from the roof, leaving the foramen primum below",
+          "Grows up from the floor, leaving the foramen ovale"
+         ],
+         "ans": 2
         },
         {
          "q": "How does the foramen secundum form?",
-         "a": "As septum primum reaches the floor and closes the foramen primum, perforations appear higher up in septum primum and coalesce into the foramen secundum."
+         "a": "**As septum primum reaches the floor and closes the foramen primum, perforations appear high in septum primum, coalescing into the foramen secundum.**\n\n## Understanding it\n- As the foramen primum closes, **holes high in septum primum** merge into the foramen secundum (keeping the shunt open).\n\n>> Perforations high in septum primum coalesce → foramen secundum.",
+         "opts": [
+          "The endocardial cushions perforate",
+          "Septum secundum perforates",
+          "The ventricular septum opens",
+          "Perforations high in septum primum coalesce into the foramen secundum"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe septum secundum.",
-         "a": "An invagination of the roof of the atrium growing down to the right of septum primum; it is thicker and more muscular, and stops short to leave the foramen ovale."
+         "a": "**An invagination of the atrial roof growing down to the right of septum primum, thick and muscular.**\n\n## Understanding it\n- Septum secundum is a **thick, muscular** partition to the **right** of septum primum.\n\n>> Thick muscular septum, right of septum primum.",
+         "opts": [
+          "Part of the ventricular septum",
+          "The endocardial cushion",
+          "A thin flap left of septum primum",
+          "A thick muscular partition growing down right of septum primum"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is septum secundum thicker and more muscular than septum primum?",
-         "a": "To withstand the higher pressure and blood flow in the right atrium during fetal life."
+         "a": "**To withstand the higher pressure and blood flow in the right atrium during fetal life.**\n\n## Understanding it\n- The **right atrium is higher-pressure** in the fetus, so septum secundum is built stronger.\n\n>> To withstand higher right-atrial pressure.",
+         "opts": [
+          "It has no functional reason",
+          "It carries the electrical signal",
+          "It forms the valves",
+          "To withstand higher right-atrial pressure and flow"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the foramen ovale?",
-         "a": "The gap left because septum secundum grows down but stops short of the endocardial cushions, not fully covering the foramen secundum."
+         "a": "**The gap left because septum secundum grows down but stops short of the endocardial cushions (offset from the foramen secundum).**\n\n## Understanding it\n- The foramen ovale is the **incomplete gap in septum secundum**, offset from septum primum's opening — forming a flap valve.\n\n>> The incomplete gap in septum secundum (a flap valve with septum primum).",
+         "opts": [
+          "A hole in the endocardial cushion",
+          "A ventricular defect",
+          "The gap where septum secundum stops short (a flap valve)",
+          "The gap below septum primum"
+         ],
+         "ans": 2
         },
         {
          "q": "In fetal life, why is the foramen ovale open?",
-         "a": "Right atrial pressure exceeds left (lungs not working), pushing septum primum leftward and opening the foramen ovale so blood flows right to left."
+         "a": "**Right atrial pressure exceeds left (lungs not working), pushing septum primum aside so blood shunts right to left.**\n\n## Understanding it\n- Higher **right-atrial pressure** holds the flap open, allowing the essential right→left shunt.\n\n>> High RA pressure holds the flap open (right→left shunt).",
+         "opts": [
+          "The septa never form",
+          "High right-atrial pressure holds the flap open (right→left shunt)",
+          "The lungs are already working",
+          "Left atrial pressure is higher"
+         ],
+         "ans": 1
         },
         {
          "q": "At birth, why does the foramen ovale close?",
-         "a": "The first breath expands the lungs, pulmonary pressure drops and left atrial pressure rises above the right, pushing septum primum rightward against septum secundum."
+         "a": "**The first breath expands the lungs, pulmonary pressure drops, left atrial pressure rises above the right, pressing septum primum against septum secundum.**\n\n## Understanding it\n- Breathing reverses the pressure gradient → **left > right**, sealing the flap.\n\n>> First breath → LA pressure > RA → flap seals.",
+         "opts": [
+          "The ductus arteriosus opens",
+          "The septa are surgically closed",
+          "The first breath raises LA pressure above RA, sealing the flap",
+          "RA pressure rises further"
+         ],
+         "ans": 2
         },
         {
          "q": "What does the foramen ovale become in the adult?",
-         "a": "The fossa ovalis (after the two septa fuse)."
+         "a": "**The fossa ovalis (after the two septa fuse).**\n\n## Understanding it\n- The closed foramen ovale leaves the **fossa ovalis** on the atrial septum.\n\n>> Fossa ovalis.",
+         "opts": [
+          "The crista terminalis",
+          "The coronary sinus",
+          "The ligamentum venosum",
+          "The fossa ovalis"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the endocardial cushions, and what three things do they contribute to?",
-         "a": "Masses of tissue in the AV canal region; they help close the foramen primum, contribute to the mitral and tricuspid valves, and contribute to the membranous part of the interventricular septum."
+         "a": "**Masses of tissue in the AV canal region; they help close the foramen primum, divide the AV canal into two orifices, and contribute to the AV valves and membranous septum.**\n\n## Understanding it\n- The endocardial cushions build the **AV septum, AV valves, and part of the membranous ventricular septum**.\n\n>> Close foramen primum; split the AV canal; form AV valves/membranous septum.",
+         "opts": [
+          "Only form the SVC",
+          "Only the conduction system",
+          "Close the foramen primum, split the AV canal, form AV valves/membranous septum",
+          "Only form the aortic arch"
+         ],
+         "ans": 2
         },
         {
          "q": "What defect results from endocardial cushion failure, and which syndrome is it associated with?",
-         "a": "AV septal defect (AVSD), commonly associated with Down syndrome."
+         "a": "**Atrioventricular septal defect (AVSD), commonly associated with Down syndrome.**\n\n## Understanding it\n- Failed cushions → **AVSD**, classically in **Down syndrome**.\n\n>> AVSD (endocardial cushion defect), linked to Down syndrome.",
+         "opts": [
+          "Coarctation of the aorta",
+          "Transposition of the great arteries",
+          "Patent ductus arteriosus",
+          "AVSD (endocardial cushion defect) — Down syndrome"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes ASD secundum, the most common ASD?",
-         "a": "Excessive resorption of septum primum or a foramen ovale that is too large."
+         "a": "**Excessive resorption of septum primum, or a foramen ovale that is too large (septum secundum too small).**\n\n## Understanding it\n- Secundum ASD = **too much septum primum resorption or too-large foramen ovale**.\n\n>> Excess septum primum resorption / too-large foramen ovale.",
+         "opts": [
+          "Failure of septum primum to fuse with cushions",
+          "Excess resorption of septum primum or a too-large foramen ovale",
+          "Failed neural crest migration",
+          "Complete failure of atrial septation"
+         ],
+         "ans": 1
         },
         {
          "q": "What causes ASD primum?",
-         "a": "Failure of septum primum to fuse with the endocardial cushions."
+         "a": "**Failure of septum primum to fuse with the endocardial cushions.**\n\n## Understanding it\n- Primum ASD = **septum primum doesn't fuse with the cushions** (near the AV valves; overlaps AVSD spectrum).\n\n>> Septum primum fails to fuse with the cushions.",
+         "opts": [
+          "Excess resorption of septum primum",
+          "A too-large foramen ovale",
+          "Failure of septum primum to fuse with the endocardial cushions",
+          "Non-spiral outflow division"
+         ],
+         "ans": 2
         },
         {
          "q": "What causes a patent foramen ovale, and how common is it?",
-         "a": "The septa form but never permanently fuse; present in about 25% of adults."
+         "a": "**The septa form but never permanently fuse; present in about 25% of adults.**\n\n## Understanding it\n- PFO = the flap **never fully seals**; common (**~25%**) and often benign.\n\n>> Septa don't fuse; ~25% of adults.",
+         "opts": [
+          "The septa never permanently fuse; ~25% of adults",
+          "Excess resorption of septum secundum; 90%",
+          "Complete absence of the septa; rare",
+          "Failed neural crest migration; 1%"
+         ],
+         "ans": 0
         },
         {
          "q": "What causes a common atrium?",
-         "a": "Complete failure of atrial septation."
+         "a": "**Complete failure of atrial septation (no septum forms).**\n\n## Understanding it\n- A single common atrium = **total failure of septation**.\n\n>> Complete failure of atrial septation.",
+         "opts": [
+          "Failure of septum primum to fuse with cushions",
+          "Excess septum secundum growth",
+          "Complete failure of atrial septation",
+          "A too-large foramen ovale"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the two horns of the sinus venosus and their broad fates?",
-         "a": "The right horn is absorbed into the right atrium; the left horn shrinks dramatically."
+         "a": "**The right horn is absorbed into the right atrium; the left horn shrinks to form the coronary sinus (and oblique vein of the left atrium).**\n\n## Understanding it\n- **Right horn → right atrium (smooth part); left horn → coronary sinus** (right-sided dominance again).\n\n>> Right horn → RA; left horn → coronary sinus.",
+         "opts": [
+          "Right horn → right atrium; left horn → coronary sinus",
+          "Both regress completely",
+          "Both become the SVC",
+          "Left horn → right atrium; right horn → coronary sinus"
+         ],
+         "ans": 0
         },
         {
          "q": "What does the left sinus horn form?",
-         "a": "The coronary sinus and the oblique vein of the left atrium."
+         "a": "**The coronary sinus and the oblique vein of the left atrium.**\n\n## Understanding it\n- The **left** sinus horn → **coronary sinus** (+ oblique vein of the LA).\n\n>> Left sinus horn → coronary sinus.",
+         "opts": [
+          "The SVC",
+          "The coronary sinus (and oblique vein of the left atrium)",
+          "The smooth-walled right atrium",
+          "The pulmonary veins"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the right sinus horn form?",
-         "a": "The smooth-walled sinus venarum of the right atrium and the valve of the IVC (Eustachian valve)."
+         "a": "**The smooth-walled sinus venarum of the right atrium and the valve of the IVC/SVC.**\n\n## Understanding it\n- The **right** sinus horn → **smooth part (sinus venarum) of the RA**.\n\n>> Right sinus horn → smooth-walled RA (sinus venarum).",
+         "opts": [
+          "The pulmonary veins",
+          "The coronary sinus",
+          "The left atrium's smooth wall",
+          "The smooth-walled sinus venarum of the right atrium"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the two parts of the adult right atrium and their origins?",
-         "a": "The rough/trabeculated part (pectinate muscles) from the primitive atrium, and the smooth part (sinus venarum) from the absorbed right sinus horn."
+         "a": "**The rough/trabeculated part (pectinate muscles) from the primitive atrium; and the smooth part (sinus venarum) from the absorbed right sinus horn.**\n\n## Understanding it\n- RA = **rough (primitive atrium) + smooth (right sinus horn)**, separated by the crista terminalis.\n\n>> Rough (primitive atrium) + smooth (right sinus horn).",
+         "opts": [
+          "Rough from the sinus horn; smooth from primitive atrium",
+          "Both from the pulmonary veins",
+          "Both parts from the sinus venosus",
+          "Rough part from the primitive atrium; smooth part from the right sinus horn"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the crista terminalis?",
-         "a": "The muscular ridge marking the internal boundary between the rough and smooth parts of the right atrium (externally, the sulcus terminalis)."
+         "a": "**The muscular ridge marking the internal boundary between the rough (trabeculated) and smooth parts of the right atrium.**\n\n## Understanding it\n- The crista terminalis is the **junction** between the two RA parts (and site of the SA node).\n\n>> Ridge between rough and smooth RA.",
+         "opts": [
+          "The ridge between the rough and smooth parts of the right atrium",
+          "The boundary of the left atrium",
+          "The ventricular septum",
+          "The atrial septum"
+         ],
+         "ans": 0
         },
         {
          "q": "What is persistent left superior vena cava (PLSVC)?",
-         "a": "The left anterior cardinal vein fails to regress, leaving a left SVC that drains into the coronary sinus; it is the commonest thoracic venous anomaly and usually asymptomatic."
+         "a": "**The left anterior cardinal vein fails to regress, leaving a left-sided SVC that usually drains into the coronary sinus.**\n\n## Understanding it\n- Failure of the **left anterior cardinal** to regress leaves a **left SVC** (often draining to the coronary sinus).\n\n>> Left anterior cardinal persists → left SVC.",
+         "opts": [
+          "Absence of the right SVC",
+          "An unroofed coronary sinus only",
+          "A double IVC",
+          "A left SVC from failure of the left anterior cardinal vein to regress"
+         ],
+         "ans": 3
         },
         {
          "q": "What is a coronary sinus ASD?",
-         "a": "An unroofed coronary sinus open to the left atrium, creating a shunt."
+         "a": "**An unroofed coronary sinus open to the left atrium, creating a shunt between the atria.**\n\n## Understanding it\n- An **unroofed coronary sinus** connects LA to RA (via the sinus) = a form of ASD.\n\n>> Unroofed coronary sinus → atrial shunt.",
+         "opts": [
+          "Failure of septum primum",
+          "A ventricular defect",
+          "A too-large foramen ovale",
+          "An unroofed coronary sinus open to the left atrium (a shunt)"
+         ],
+         "ans": 3
         },
         {
          "q": "How does the left atrium get its smooth wall?",
-         "a": "By absorbing the pulmonary veins — the LA grows an outgrowth that meets and progressively absorbs the pulmonary veins, so one trunk becomes four openings."
+         "a": "**By absorbing the pulmonary veins — the LA grows an outgrowth that meets and incorporates the pulmonary venous trunk.**\n\n## Understanding it\n- The LA's smooth wall comes from **absorbed pulmonary veins** (mirroring the RA absorbing the sinus horn).\n\n>> LA smooth wall = absorbed pulmonary veins.",
+         "opts": [
+          "By absorbing the pulmonary veins",
+          "By absorbing the sinus venosus",
+          "From the endocardial cushions",
+          "From the ventricular septum"
+         ],
+         "ans": 0
         },
         {
          "q": "How many pulmonary vein openings result, and why?",
-         "a": "Four — as the original single trunk is absorbed, its branches become the four separate openings."
+         "a": "**Four — as the original single pulmonary trunk is absorbed, its four branches become separate openings.**\n\n## Understanding it\n- Absorbing the common pulmonary trunk to its **four branches** leaves **four openings**.\n\n>> Four openings (from the absorbed four branches).",
+         "opts": [
+          "Two openings",
+          "Four — the absorbed trunk's four branches become the openings",
+          "Six openings",
+          "One opening"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the origin of the smooth wall of each atrium?",
-         "a": "Right atrium — from the absorbed right sinus horn; left atrium — from the absorbed pulmonary veins. Both have rough anterior walls from the primitive atrium."
+         "a": "**Right atrium — from the absorbed right sinus horn; left atrium — from the absorbed pulmonary veins.**\n\n## Understanding it\n- Smooth walls: **RA from the sinus horn, LA from pulmonary veins**.\n\n>> RA smooth ← sinus horn; LA smooth ← pulmonary veins.",
+         "opts": [
+          "RA smooth from the sinus horn; LA smooth from the pulmonary veins",
+          "RA from pulmonary veins; LA from sinus horn",
+          "Both from the sinus horn",
+          "Both from the pulmonary veins"
+         ],
+         "ans": 0
         },
         {
          "q": "Where does the conduction system develop from?",
-         "a": "Specialised cells in the right atrium close to where the sinus venosus connected."
+         "a": "**Specialised cells in the right atrium, close to where the sinus venosus connects.**\n\n## Understanding it\n- The conduction tissue arises in the **sinus venosus region of the RA** — which is why sinus venosus defects can cause arrhythmias.\n\n>> RA near the sinus venosus.",
+         "opts": [
+          "The aortic arch",
+          "The left ventricle apex",
+          "The endocardial cushions only",
+          "Specialised cells in the right atrium near the sinus venosus"
+         ],
+         "ans": 3
         },
         {
          "q": "What two structures does the conduction system form and their functions?",
-         "a": "The AV node (delays the atrial signal before the ventricles) and the Purkinje fibres (rapidly conduct through the ventricular walls)."
+         "a": "**The AV node (delays the atrial signal before the ventricles) and the Purkinje fibres (rapidly conduct the impulse through the ventricles).**\n\n## Understanding it\n- AV node = **delay**; Purkinje fibres = **fast ventricular spread**.\n\n>> AV node (delay) and Purkinje fibres (fast conduction).",
+         "opts": [
+          "The atrial septa",
+          "The SVC and IVC",
+          "The AV node (delays the signal) and Purkinje fibres (fast ventricular conduction)",
+          "The coronary arteries"
+         ],
+         "ans": 2
         },
         {
          "q": "What is partial versus total anomalous pulmonary venous drainage?",
-         "a": "Partial APVD — some pulmonary veins drain to the wrong place (RA, SVC, IVC); Total APVD — all four drain abnormally so no oxygenated blood enters the LA directly."
+         "a": "**Partial (PAPVD) — some pulmonary veins drain to the wrong place (RA/SVC/IVC); total (TAPVD) — ALL pulmonary veins drain to the systemic venous side, so no oxygenated blood reaches the LA directly.**\n\n## Understanding it\n- Partial = **some** veins misconnect; total = **all** do (a cyanotic emergency).\n\n>> Partial = some veins wrong; total = all veins wrong.",
+         "opts": [
+          "Partial = some veins misconnect; total = all veins misconnect",
+          "Partial = all veins; total = none",
+          "Partial affects the aorta",
+          "They are identical"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is total APVD a surgical emergency?",
-         "a": "Because oxygenated blood never reaches the left side of the heart properly."
+         "a": "**Because oxygenated blood never reaches the left side of the heart directly — the baby depends on a shunt (e.g. ASD) to survive.**\n\n## Understanding it\n- In TAPVD, **no pulmonary venous return reaches the LA**; survival needs an atrial shunt → urgent surgery.\n\n>> No oxygenated blood reaches the LA → emergency.",
+         "opts": [
+          "It has no effect on oxygenation",
+          "It self-corrects after birth",
+          "Oxygenated blood never reaches the left heart directly",
+          "It causes only a mild murmur"
+         ],
+         "ans": 2
         },
         {
          "q": "Why can sinus venosus defects cause arrhythmias?",
-         "a": "Because the conduction system develops from the sinus venosus region, so structural defects there disturb conduction tissue, causing sick sinus syndrome and heart block."
+         "a": "**Because the conduction system develops from the sinus venosus region, so defects there disturb the SA node/conduction tissue.**\n\n## Understanding it\n- The conduction tissue shares the **sinus venosus origin**, so defects there provoke arrhythmias.\n\n>> Conduction tissue arises there → defects cause arrhythmias.",
+         "opts": [
+          "They block the coronary arteries",
+          "They have no link to rhythm",
+          "They damage the ventricular muscle",
+          "The conduction system arises from the sinus venosus region"
+         ],
+         "ans": 3
         },
         {
          "q": "How does ventricular septation differ from atrial septation in direction?",
-         "a": "In the atria the wall grows downward from the roof; in the ventricles the wall grows upward from the floor."
+         "a": "**In the atria the wall grows downward from the roof; in the ventricles the muscular septum grows upward from the apex/floor.**\n\n## Understanding it\n- Atrial septum grows **down from the roof**; ventricular septum grows **up from the floor**.\n\n>> Atria: top-down; ventricles: bottom-up.",
+         "opts": [
+          "Both grow downward",
+          "Ventricular grows down; atrial grows up",
+          "Atrial septum grows down from the roof; ventricular septum grows up from the floor",
+          "Both grow upward"
+         ],
+         "ans": 2
         },
         {
          "q": "From how many components is the ventricular septum assembled, and name them.",
-         "a": "Four: the inlet, the outlet, the trabecular/muscular part, and the membranous septum."
+         "a": "**Four: the inlet, the outlet, the trabecular/muscular part, and the membranous part.**\n\n## Understanding it\n- Four contributions (**inlet, outlet, muscular, membranous**) — the multiple joints explain why VSD is common.\n\n>> Inlet, outlet, muscular, membranous.",
+         "opts": [
+          "Two parts only",
+          "The endocardial cushions alone",
+          "Inlet, outlet, trabecular/muscular, and membranous parts",
+          "A single continuous wall"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is VSD the most common congenital heart defect?",
-         "a": "Because the ventricular septum is assembled from four separate components, giving four separate opportunities for something to go wrong."
+         "a": "**Because the ventricular septum is assembled from four separate components, giving many junctions where fusion can fail.**\n\n## Understanding it\n- **Four components = many potential failure points** → VSD is the commonest CHD.\n\n>> Multi-component assembly → many failure points → common VSD.",
+         "opts": [
+          "The septum never forms at all",
+          "It is caused by a single gene",
+          "VSD is actually rare",
+          "It is assembled from four components with many fusion points"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the membranous septum and its clinical importance.",
-         "a": "It is the last part to close and the smallest, a tiny fibrous patch just below the aortic valve; it is responsible for the perimembranous VSD, about 80% of all VSDs."
+         "a": "**It is the last part to close and the smallest — a tiny fibrous patch just below the aortic valve; most VSDs are perimembranous (occur here).**\n\n## Understanding it\n- The **membranous** part closes **last** and is the **commonest VSD site** (perimembranous).\n\n>> Membranous = last to close; commonest VSD site.",
+         "opts": [
+          "Part of the atrial septum",
+          "The largest muscular part",
+          "First to close; VSDs never occur here",
+          "Last to close, smallest; the commonest VSD site (perimembranous)"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the cono-truncal region made of?",
-         "a": "Two stacked segments: the bulbus cordis (conus, lower) and the truncus arteriosus (upper)."
+         "a": "**Two stacked segments: the bulbus cordis (conus, lower) and the truncus arteriosus (upper).**\n\n## Understanding it\n- Cono-truncal = **conus (bulbus cordis) + truncus arteriosus** — the outflow that must be divided.\n\n>> Bulbus cordis (conus) + truncus arteriosus.",
+         "opts": [
+          "The sinus venosus horns",
+          "The two ventricles",
+          "The two atria",
+          "The bulbus cordis (conus) and the truncus arteriosus"
+         ],
+         "ans": 3
         },
         {
          "q": "What must the cono-truncal region be divided into?",
-         "a": "The aorta (for the LV) and the pulmonary trunk (for the RV)."
+         "a": "**The aorta (for the left ventricle) and the pulmonary trunk (for the right ventricle).**\n\n## Understanding it\n- The single outflow must split into **aorta (LV) and pulmonary trunk (RV)**.\n\n>> Into the aorta (LV) and pulmonary trunk (RV).",
+         "opts": [
+          "Two aortas",
+          "The SVC and IVC",
+          "Two pulmonary trunks",
+          "The aorta (LV) and the pulmonary trunk (RV)"
+         ],
+         "ans": 3
         },
         {
          "q": "Why does the cono-truncal septum grow in a spiral?",
-         "a": "Because in the adult heart the pulmonary trunk spirals around the aorta; the spiral septation produces that arrangement."
+         "a": "**Because in the adult heart the pulmonary trunk spirals around the aorta; the spiral septum reproduces this crossing relationship.**\n\n## Understanding it\n- A **spiral** septum creates the normal **crossing** of the great arteries.\n\n>> Spiral septum → the great arteries cross correctly.",
+         "opts": [
+          "To make the heart beat",
+          "The great arteries normally spiral/cross, so the septum spirals",
+          "To keep them straight and parallel",
+          "There is no reason"
+         ],
+         "ans": 1
         },
         {
          "q": "What defect results from straight (non-spiral) cono-truncal division?",
-         "a": "Transposition of the Great Arteries (TGA) — aorta off the RV and pulmonary trunk off the LV."
+         "a": "**Transposition of the Great Arteries (TGA) — aorta off the RV and pulmonary trunk off the LV.**\n\n## Understanding it\n- A **straight (non-spiral)** septum → **TGA** (great arteries connected to the wrong ventricles).\n\n>> Straight division → TGA.",
+         "opts": [
+          "Truncus arteriosus",
+          "Tetralogy of Fallot",
+          "Transposition of the Great Arteries (TGA)",
+          "Atrial septal defect"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the role of neural crest cells in cono-truncal septation?",
-         "a": "They migrate into the region, populate the aorticopulmonary ridges, and are essential for proper fusion."
+         "a": "**They migrate into the region, populate the aorticopulmonary ridges, and drive the septation of the outflow tract.**\n\n## Understanding it\n- Neural crest cells **build the aorticopulmonary septum** that divides the outflow.\n\n>> Neural crest populates the aorticopulmonary ridges (septation).",
+         "opts": [
+          "They make the conduction system",
+          "They form the pulmonary veins",
+          "They form the atrial septum",
+          "They populate the aorticopulmonary ridges and drive outflow septation"
+         ],
+         "ans": 3
         },
         {
          "q": "What defects result from failed neural crest cell migration in the outflow tract?",
-         "a": "Truncus arteriosus and Tetralogy of Fallot."
+         "a": "**Truncus arteriosus and Tetralogy of Fallot.**\n\n## Understanding it\n- Failed neural crest migration → **truncus arteriosus and TOF** (and other cono-truncal defects).\n\n>> Failed neural crest → truncus arteriosus and TOF.",
+         "opts": [
+          "Coarctation of the aorta",
+          "Atrial septal defect",
+          "Truncus arteriosus and Tetralogy of Fallot",
+          "A patent foramen ovale"
+         ],
+         "ans": 2
         },
         {
          "q": "Why are outlet VSDs often associated with cono-truncal anomalies?",
-         "a": "The cono-truncal septum also grows down to close the outlet part of the interventricular septum, so a failure affects both the outflow division and the outlet septum."
+         "a": "**Because the cono-truncal septum also grows down to close the outlet part of the ventricular septum, so its failure causes both.**\n\n## Understanding it\n- The **same septum** closes the outlet VSD and divides the outflow → failure links them.\n\n>> The cono-truncal septum also closes the outlet VSD.",
+         "opts": [
+          "The cono-truncal septum also closes the outlet ventricular septum",
+          "Outlet VSDs are never associated",
+          "They are unrelated",
+          "The atrial septum closes the outlet"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the mechanism of Truncus arteriosus.",
-         "a": "Complete failure of aorticopulmonary ridge fusion — a single common arterial trunk persists."
+         "a": "**Complete failure of aorticopulmonary ridge fusion — a single common arterial trunk overrides both ventricles.**\n\n## Understanding it\n- No septation of the outflow → **one common trunk** (truncus arteriosus).\n\n>> Failed aorticopulmonary fusion → one common trunk.",
+         "opts": [
+          "Failed atrial septation",
+          "Straight division (TGA)",
+          "Unequal conal division (TOF)",
+          "Failed aorticopulmonary ridge fusion — a single common trunk"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the mechanism of Tetralogy of Fallot.",
-         "a": "Unequal division of the conus — the pulmonary side gets too little, causing pulmonary stenosis, overriding aorta, outlet VSD and RVH."
+         "a": "**Unequal division of the conus — the pulmonary side gets too little, causing pulmonary stenosis, overriding aorta, VSD and RVH.**\n\n## Understanding it\n- **Unequal (anterior) conal division** narrows the pulmonary outflow → the four features of TOF.\n\n>> Unequal conal division → pulmonary stenosis + TOF features.",
+         "opts": [
+          "A single common trunk (truncus)",
+          "Unequal conal division (small pulmonary side) → the four TOF features",
+          "Failed wedging (DORV)",
+          "Straight division (TGA)"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the mechanism of Double Outlet RV.",
-         "a": "Abnormal wedging plus failure of neural crest cell migration — both great vessels over the RV."
+         "a": "**Abnormal wedging plus failure of neural crest cell migration — both great arteries arise over the RV.**\n\n## Understanding it\n- DORV = **failed wedging + neural crest failure**, so both great vessels sit over the RV.\n\n>> Abnormal wedging + neural crest failure → DORV.",
+         "opts": [
+          "Straight cono-truncal division",
+          "A single common trunk",
+          "Abnormal wedging plus neural crest migration failure",
+          "Failed atrial septation"
+         ],
+         "ans": 2
         },
         {
          "q": "From what do the great vessels develop?",
-         "a": "Six paired arterial arches that form sequentially around the pharynx."
+         "a": "**Six paired arterial (aortic) arches that form sequentially around the pharynx.**\n\n## Understanding it\n- The great vessels derive from the **six pairs of aortic arches** (most regress).\n\n>> Six paired aortic arches.",
+         "opts": [
+          "The endocardial cushions",
+          "Six paired aortic (arterial) arches around the pharynx",
+          "The pulmonary veins",
+          "The sinus venosus"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the general fate of the aortic arches?",
-         "a": "Most regress (like scaffolding demolished after use), keeping only the parts needed for the adult arterial system."
+         "a": "**Most regress (like scaffolding removed after use), keeping only the parts needed for the adult great vessels.**\n\n## Understanding it\n- Only a **few** arches persist; the rest **regress**.\n\n>> Most regress; a few persist as great vessels.",
+         "opts": [
+          "They become the atria",
+          "None persist at all",
+          "Most regress; only selected parts persist as great vessels",
+          "All six persist unchanged"
+         ],
+         "ans": 2
         },
         {
          "q": "What does the 3rd aortic arch become?",
-         "a": "The common carotid artery, the external carotid artery, and the proximal (first part of the) internal carotid artery, bilaterally."
+         "a": "**The common carotid artery, the external carotid, and the proximal internal carotid artery.**\n\n## Understanding it\n- 3rd arch → **carotid system**.\n\n>> 3rd arch → carotids.",
+         "opts": [
+          "The subclavian arteries only",
+          "The carotid arteries (common/external/proximal internal)",
+          "The aortic arch",
+          "The pulmonary arteries"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the left 4th aortic arch become?",
-         "a": "Part of the arch of the aorta."
+         "a": "**Part of the arch of the aorta.**\n\n## Understanding it\n- The **left 4th** arch → the **aortic arch** (why the arch is left-sided).\n\n>> Left 4th → aortic arch.",
+         "opts": [
+          "The pulmonary trunk",
+          "The right subclavian artery",
+          "The carotid arteries",
+          "Part of the arch of the aorta"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the right 4th aortic arch become?",
-         "a": "The most proximal segment of the right subclavian artery."
+         "a": "**The most proximal segment of the right subclavian artery.**\n\n## Understanding it\n- The **right 4th** arch → **proximal right subclavian artery**.\n\n>> Right 4th → proximal right subclavian.",
+         "opts": [
+          "The pulmonary artery",
+          "The aortic arch",
+          "The proximal right subclavian artery",
+          "The carotid arteries"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is the aortic arch left-sided in normal adults?",
-         "a": "Because only the left 4th arch persists to form it."
+         "a": "**Because only the left 4th arch persists to form it (the right 4th becomes the subclavian).**\n\n## Understanding it\n- The **left 4th arch persists** → left-sided aortic arch.\n\n>> Only the left 4th arch persists.",
+         "opts": [
+          "Only the left 4th arch persists to form it",
+          "The 6th arch forms it",
+          "The right 4th arch persists",
+          "Both 4th arches persist"
+         ],
+         "ans": 0
         },
         {
          "q": "What does the 5th aortic arch become?",
-         "a": "Nothing — it regresses completely."
+         "a": "**Nothing — it regresses completely (or never fully forms).**\n\n## Understanding it\n- The **5th arch** leaves **no adult derivative**.\n\n>> 5th arch → nothing.",
+         "opts": [
+          "The aortic arch",
+          "The carotids",
+          "Nothing — it regresses completely",
+          "The pulmonary arteries"
+         ],
+         "ans": 2
         },
         {
          "q": "What does the left 6th aortic arch become?",
-         "a": "The proximal left pulmonary artery and, distally, the ductus arteriosus."
+         "a": "**The proximal left pulmonary artery and, distally, the ductus arteriosus.**\n\n## Understanding it\n- **Left 6th** arch → **left pulmonary artery + ductus arteriosus**.\n\n>> Left 6th → left PA + ductus arteriosus.",
+         "opts": [
+          "The aortic arch",
+          "The carotids",
+          "The right subclavian",
+          "The proximal left pulmonary artery and the ductus arteriosus"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the right 6th aortic arch become?",
-         "a": "The proximal segment of the right pulmonary artery only (the distal part regresses)."
+         "a": "**The proximal segment of the right pulmonary artery only (the distal part regresses).**\n\n## Understanding it\n- **Right 6th** arch → **proximal right pulmonary artery** (no ductus on the right).\n\n>> Right 6th → proximal right PA only.",
+         "opts": [
+          "The right subclavian",
+          "The ductus arteriosus",
+          "The aortic arch",
+          "The proximal right pulmonary artery only"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the ductus arteriosus and its fate?",
-         "a": "The fetal shunt connecting the pulmonary trunk to the descending aorta, bypassing the fetal lungs; at birth it closes to become the ligamentum arteriosum."
+         "a": "**The fetal shunt connecting the pulmonary trunk to the descending aorta; it closes after birth to become the ligamentum arteriosum.**\n\n## Understanding it\n- The ductus shunts blood **past the lungs** in the fetus, then closes → **ligamentum arteriosum**.\n\n>> Fetal pulmonary→aortic shunt; becomes ligamentum arteriosum.",
+         "opts": [
+          "A liver bypass; becomes ligamentum venosum",
+          "An atrial shunt; becomes the fossa ovalis",
+          "A fetal pulmonary-trunk-to-aorta shunt; becomes the ligamentum arteriosum",
+          "A carotid artery"
+         ],
+         "ans": 2
         },
         {
          "q": "What is patent ductus arteriosus (PDA)?",
-         "a": "Failure of the ductus arteriosus (6th arch) to close after birth — one of the commonest congenital heart defects."
+         "a": "**Failure of the ductus arteriosus (6th arch) to close after birth — one of the commonest CHDs, especially in preterm infants.**\n\n## Understanding it\n- PDA = the **ductus stays open** after birth (continuous murmur; common in preterms).\n\n>> PDA = ductus fails to close after birth.",
+         "opts": [
+          "A ventricular septal defect",
+          "Failure of the foramen ovale to close",
+          "Failure of the aortic arch",
+          "Failure of the ductus arteriosus to close after birth"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes a right-sided aortic arch?",
-         "a": "The right 4th arch persists instead of the left."
+         "a": "**The right 4th arch persists instead of the left.**\n\n## Understanding it\n- If the **right 4th arch persists** (and the left regresses), the arch is **right-sided**.\n\n>> Right 4th arch persists → right-sided arch.",
+         "opts": [
+          "The left 4th arch persists",
+          "The right 4th arch persists instead of the left",
+          "The 3rd arch persists",
+          "The 6th arch persists"
+         ],
+         "ans": 1
         },
         {
          "q": "What is an aberrant right subclavian artery, and what symptom can it cause?",
-         "a": "A 4th arch and right dorsal aorta abnormality where the artery crosses behind the oesophagus, causing dysphagia lusoria."
+         "a": "**A 4th arch / right dorsal aorta abnormality where the right subclavian crosses behind the oesophagus, which can cause difficulty swallowing (dysphagia lusoria).**\n\n## Understanding it\n- An **aberrant right subclavian** passes behind the oesophagus → **dysphagia lusoria**.\n\n>> Aberrant right subclavian behind oesophagus → dysphagia.",
+         "opts": [
+          "A pulmonary artery defect causing cyanosis",
+          "A right subclavian crossing behind the oesophagus → dysphagia",
+          "An atrial defect causing a murmur",
+          "A left-sided aortic arch, causing no symptoms"
+         ],
+         "ans": 1
         },
         {
          "q": "What is an interrupted aortic arch?",
-         "a": "A 4th arch defect producing a gap in the aortic arch."
+         "a": "**A 4th arch defect producing a gap (discontinuity) in the aortic arch.**\n\n## Understanding it\n- Interrupted aortic arch = a **break** in the arch (a duct-dependent lesion).\n\n>> A gap/discontinuity in the aortic arch.",
+         "opts": [
+          "An extra aortic arch",
+          "A narrowed but continuous arch",
+          "A patent ductus",
+          "A gap (discontinuity) in the aortic arch"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the embryological cause of dextrocardia?",
-         "a": "The heart tube loops to the left instead of the right — abnormal looping."
+         "a": "**The heart tube loops to the left instead of the right (abnormal looping).**\n\n## Understanding it\n- Dextrocardia = **left-ward (reversed) looping** of the heart tube.\n\n>> Left-ward (abnormal) looping → dextrocardia.",
+         "opts": [
+          "Non-spiral outflow division",
+          "Failed neural crest migration",
+          "Left-ward (abnormal) looping of the heart tube",
+          "Failed atrial septation"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the embryological cause of ASD?",
-         "a": "Failure of atrial septation."
+         "a": "**Failure of atrial septation.**\n\n## Understanding it\n- ASD = a **failure of the atrial septum** to form/close properly.\n\n>> ASD = failed atrial septation.",
+         "opts": [
+          "Failure of atrial septation",
+          "Abnormal looping",
+          "Non-spiral outflow division",
+          "Failure of ventricular septation"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the embryological cause of VSD?",
-         "a": "Failure of ventricular septation."
+         "a": "**Failure of ventricular septation.**\n\n## Understanding it\n- VSD = a **failure of the ventricular septum** components to fuse.\n\n>> VSD = failed ventricular septation.",
+         "opts": [
+          "Failed neural crest migration",
+          "Failure of ventricular septation",
+          "Abnormal looping",
+          "Failure of atrial septation"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the embryological cause of transposition of the great arteries?",
-         "a": "Non-spiral (straight) division of the bulbus cordis — the conal growth hypothesis."
+         "a": "**Non-spiral (straight) division of the bulbus cordis — the conal septum grows straight instead of spiralling.**\n\n## Understanding it\n- TGA = **straight (non-spiral)** cono-truncal division → great arteries on the wrong ventricles.\n\n>> TGA = straight (non-spiral) outflow division.",
+         "opts": [
+          "Failed atrial septation",
+          "Straight (non-spiral) division of the bulbus cordis/outflow",
+          "Unequal conal division (TOF)",
+          "Abnormal looping"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the embryological cause of hypoplastic left heart syndrome?",
-         "a": "Failure of migration of the neural crest cells."
+         "a": "**Failure of migration of the neural crest cells (affecting left-heart/outflow development).**\n\n## Understanding it\n- Per this lecture, HLHS is attributed to **failed neural crest migration**.\n\n>> HLHS = failed neural crest migration.",
+         "opts": [
+          "Failure of neural crest cell migration",
+          "Failed atrial septation",
+          "Abnormal looping",
+          "Non-spiral outflow division"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the embryological cause of double inlet LV?",
-         "a": "Abnormal wedging and failure of neural crest cell migration."
+         "a": "**Abnormal wedging and failure of neural crest cell migration.**\n\n## Understanding it\n- DILV arises from **abnormal wedging + neural crest failure** (both AV valves into the LV).\n\n>> DILV = abnormal wedging + neural crest failure.",
+         "opts": [
+          "Abnormal looping alone",
+          "Non-spiral outflow division alone",
+          "Abnormal wedging and failure of neural crest migration",
+          "Failed atrial septation"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — On a diagram of the primitive heart tube, name the regions from the venous to the arterial end.",
-         "a": "Sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus."
+         "a": "**Sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus.**\n\n## Understanding it\n- Venous→arterial order: **sinus venosus → atrium → ventricle → bulbus cordis → truncus arteriosus**.\n\n>> Sinus venosus → atrium → ventricle → bulbus → truncus.",
+         "opts": [
+          "Truncus, bulbus, ventricle, atrium, sinus venosus (reversed)",
+          "Sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus",
+          "Atrium, ventricle, aorta, pulmonary trunk, SVC",
+          "SVC, RA, RV, LV, aorta"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — A diagram shows two atrial septa with an offset gap acting as a flap valve. Name the septa and the gap.",
-         "a": "Septum primum (thin flap) and septum secundum (thick muscular wall); the gap is the foramen ovale."
+         "a": "**Septum primum (the thin flap) and septum secundum (the thick muscular wall); the offset gap is the foramen ovale.**\n\n## Understanding it\n- Thin flap (septum primum) + thick wall (septum secundum), gap = **foramen ovale** (a flap valve).\n\n>> Septum primum (flap) + septum secundum (wall); foramen ovale.",
+         "opts": [
+          "Two ventricular septa; the VSD",
+          "Septum primum (flap) and septum secundum (wall); the foramen ovale",
+          "The crista terminalis; the fossa ovalis",
+          "The endocardial cushions; the foramen primum"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Identify the arch derivatives numbered 3, 4 and 6.",
-         "a": "3rd = carotid system; 4th = aortic arch (left) / right subclavian (right); 6th = pulmonary arteries + ductus arteriosus (left)."
+         "a": "**3rd = carotid system; 4th = aortic arch (left) / right subclavian (right); 6th = pulmonary arteries and ductus arteriosus (left).**\n\n## Understanding it\n- Remember: **3 = carotids, 4 = aortic arch/subclavian, 6 = pulmonary arteries + ductus**.\n\n>> 3 carotids; 4 aortic arch/subclavian; 6 pulmonary/ductus.",
+         "opts": [
+          "3 = pulmonary; 4 = carotids; 6 = aorta",
+          "3 = aortic arch; 4 = carotids; 6 = subclavian",
+          "All form the carotids",
+          "3 = carotids; 4 = aortic arch/right subclavian; 6 = pulmonary arteries/ductus"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A newborn with Down syndrome has a murmur and a single AV valve on echo. What is the defect and its embryological cause?",
-         "a": "AV septal defect (AVSD) — failure of endocardial cushion development."
+         "a": "**Atrioventricular septal defect (AVSD) — from failure of endocardial cushion development.**\n\n## Understanding it\n- Down syndrome + single AV valve = **AVSD (endocardial cushion defect)**.\n\n>> AVSD from endocardial cushion failure.",
+         "opts": [
+          "Tetralogy of Fallot — unequal conal division",
+          "Transposition — non-spiral division",
+          "AVSD — failure of endocardial cushion development",
+          "PDA — failed ductus closure"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A cyanotic newborn has the aorta arising from the right ventricle and the pulmonary trunk from the left. What is the diagnosis and cause?",
-         "a": "Transposition of the great arteries — straight (non-spiral) division of the cono-truncal region."
+         "a": "**Transposition of the great arteries — from straight (non-spiral) division of the outflow tract.**\n\n## Understanding it\n- Great arteries on the wrong ventricles = **TGA (straight cono-truncal division)**.\n\n>> TGA from non-spiral outflow division.",
+         "opts": [
+          "Tetralogy of Fallot — unequal conal division",
+          "AVSD — cushion failure",
+          "Truncus arteriosus — failed ridge fusion",
+          "Transposition of the great arteries — straight outflow division"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A cyanotic child has pulmonary stenosis, overriding aorta, VSD and RVH. What is the diagnosis and embryological cause?",
-         "a": "Tetralogy of Fallot — unequal conal division / failure of neural crest cell migration."
+         "a": "**Tetralogy of Fallot — from unequal conal division / failure of neural crest cell migration.**\n\n## Understanding it\n- The four features = **TOF** (unequal conal division).\n\n>> TOF from unequal conal division.",
+         "opts": [
+          "Truncus arteriosus — failed ridge fusion",
+          "Tetralogy of Fallot — unequal conal division / neural crest failure",
+          "AVSD — cushion failure",
+          "Transposition — straight division"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A term newborn is deeply cyanosed and no oxygenated blood reaches the left atrium. What is the likely diagnosis?",
-         "a": "Total anomalous pulmonary venous drainage (TAPVD) — a surgical emergency."
+         "a": "**Total anomalous pulmonary venous drainage (TAPVD) — a surgical emergency.**\n\n## Understanding it\n- Deeply cyanosed newborn with **no pulmonary venous return to the LA** = **TAPVD**.\n\n>> TAPVD (surgical emergency).",
+         "opts": [
+          "Total anomalous pulmonary venous drainage (TAPVD)",
+          "Tetralogy of Fallot",
+          "Patent ductus arteriosus",
+          "Transposition of the great arteries"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A preterm infant has a continuous murmur and a shunt between the pulmonary trunk and aorta. What is the defect and its arch origin?",
-         "a": "Patent ductus arteriosus — failure of the 6th arch ductus arteriosus to close."
+         "a": "**Patent ductus arteriosus — failure of the 6th-arch ductus arteriosus to close.**\n\n## Understanding it\n- Preterm + continuous murmur + pulmonary-trunk-to-aorta shunt = **PDA (6th arch)**.\n\n>> PDA from failed ductus (6th arch) closure.",
+         "opts": [
+          "TAPVD",
+          "VSD — failed ventricular septation",
+          "Patent ductus arteriosus — failed 6th-arch ductus closure",
+          "ASD — failed atrial septation"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Which single cell type, when it fails to migrate, explains TGA, TOF and Truncus arteriosus?",
-         "a": "Neural crest cells."
+         "a": "**Neural crest cells.**\n\n## Understanding it\n- The unifying cause of the cono-truncal defects (TGA, TOF, truncus) is **failed neural crest migration**.\n\n>> Neural crest cells.",
+         "opts": [
+          "Endocardial cushion cells",
+          "Endothelial precursors",
+          "Neural crest cells",
+          "Myoblasts"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": "content/Pediatrics/Dr.%20Stella%20Oji/Embryology%20of%20the%20Cardiovascular%20System/img/",
