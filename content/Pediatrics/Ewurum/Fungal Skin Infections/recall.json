@@ -1,69 +1,699 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Fungal Skin Infections",
-  "cards": [
-    { "q": "In what environment do spores of fungi occur?", "a": "In the hot and humid, or arid, tropical environment." },
-    { "q": "What factors favour the spread of fungal infections among children?", "a": "Poor personal and community hygiene; closeness among large families; and institutions such as schools, camps and barracks." },
-    { "q": "Which body structures do most fungal infections affect?", "a": "The skin, hair, nails and mucosa." },
-    { "q": "List the five superficial fungal skin infections.", "a": "Candidiasis, tinea capitis, tinea corporis, tinea pedis, and pityriasis versicolor." },
-    { "q": "List the five deep fungal skin infections.", "a": "Mycetoma (Madura foot), blastomycosis, coccidiomycosis, histoplasmosis, and sporotrichosis." },
-    { "q": "Which organisms cause candidiasis?", "a": "Candida albicans, C. tropicalis, C. stellatoidea, C. krusei, or other yeasts of the genus Candida." },
-    { "q": "Where do candida infections usually occur?", "a": "On the skin, mucous membranes, nail folds and nails, gastrointestinal tract and genital tract; in systemic infections the viscera may be involved." },
-    { "q": "Describe the skin lesions of candidiasis and where they occur.", "a": "Dusky red macerated or erosive lesions in the skin folds of the neck, flanks, large flexures and limbs." },
-    { "q": "What may follow scratching of candidal skin lesions?", "a": "Fissuring and bleeding, with occurrence of secondary bacterial infection." },
-    { "q": "Which organism most commonly causes oral thrush?", "a": "Candida albicans." },
-    { "q": "Describe the lesions of oral candidiasis.", "a": "Curdy or whitish-grey, friable, cheesy pseudomembranous patches or plaques on markedly reddened mucosa." },
-    { "q": "Where may the plaques of thrush be found?", "a": "On the lips, buccal mucosa, tongue and palate, extending to the oesophagus/pharynx — they invade the mucosa superficially." },
-    { "q": "What happens on removal of the plaques of thrush, and why is this useful?", "a": "It may cause mild punctate areas of bleeding, which helps to confirm the diagnosis." },
-    { "q": "List the factors predisposing to candidiasis.", "a": "Diabetes mellitus, retroviral disease, prolonged antibiotic and corticosteroid use, and leukaemia." },
-    { "q": "Give the treatment of oral candidiasis.", "a": "Antifungal drugs such as clotrimazole, nystatin, amphotericin B or miconazole gel; and proper oral hygiene." },
-    { "q": "What is tinea capitis and which organism most often causes it?", "a": "A dermatophyte infection of the scalp, most often caused by Trichophyton tonsurans; occasionally by Microsporum canis, and much less commonly by other Microsporum and Trichophyton species." },
-    { "q": "Describe the lesions and hairs in tinea capitis.", "a": "Erythematous and scaly circular plaques (ringworm), within which the infected hairs become brittle and broken with different lengths." },
-    { "q": "What appearance do multiple affected sites produce in tinea capitis?", "a": "A moth-eaten appearance of the hair." },
-    { "q": "What else may develop in tinea capitis?", "a": "Numerous confluent patches of alopecia; scaling and inflammation of the scalp are variable, and patients may complain of severe pruritus." },
-    { "q": "What is a kerion and what causes it?", "a": "An inflammatory and infected boggy mass covered in crusts, pus-filled bumps and localized hair loss — caused by the host's cellular immune response to tinea capitis." },
-    { "q": "What is favus and which organism causes it?", "a": "A severe, chronic form of tinea capitis, typically caused by the dermatophyte Trichophyton schoenleinii." },
-    { "q": "Describe the lesions of favus.", "a": "Thick, yellowish, cup-shaped yellow crusts called scutula that develop around hair follicles, often accompanied by a distinctive mousy odour; also termed honey-combed scalp lesions with yellow crusts and scales." },
-    { "q": "What happens if favus is left untreated?", "a": "It destroys the hair follicles, causes matting of the hair, and causes permanent scarring hair loss (alopecia)." },
-    { "q": "How is tinea capitis diagnosed and treated?", "a": "Diagnosis by scraping and KOH examination; treatment with oral griseofulvin, itraconazole or terbinafine, plus topical antifungal cream or shampoo." },
-    { "q": "Define tinea corporis.", "a": "A fungal infection of the glabrous skin, excluding the palms, soles and groin." },
-    { "q": "Which organisms most commonly cause tinea corporis?", "a": "Trichophyton rubrum and Trichophyton mentagrophytes; infections with Microsporum canis are also frequent." },
-    { "q": "Describe the characteristic lesion of tinea corporis.", "a": "A dry, mildly erythematous, elevated, scaly papule or plaque that spreads centrifugally and clears centrally to form the characteristic annular lesion; the active edge shows vesicles and pustules." },
-    { "q": "How is tinea corporis acquired?", "a": "Usually by direct contact from an infected person, surfaces, and pets (M. canis)." },
-    { "q": "Name the forms of tinea corporis according to site.", "a": "Tinea faciale (face), tinea axillaris (axilla), tinea cruris (groin), tinea manuum (hands), and tinea unguium (nails)." },
-    { "q": "How is tinea corporis diagnosed?", "a": "Clinically; by skin scraping and KOH examination; and by culture of skin scrapings for identifying the species of dermatophyte." },
-    { "q": "Give the treatment of tinea corporis.", "a": "Topical antifungal agents such as imidazoles, terbinafine or naftifine; and in severe cases oral griseofulvin or itraconazole." },
-    { "q": "What is tinea pedis and which organisms cause it?", "a": "Athlete's foot — a fungal infection of the toe webs and soles of the feet, caused by Trichophyton rubrum, Trichophyton mentagrophytes and Epidermophyton floccosum." },
-    { "q": "Describe the usual appearance of tinea pedis.", "a": "The subdigital crevices are fissured, with maceration and peeling of the surrounding skin." },
-    { "q": "Describe the less common presentations of tinea pedis.", "a": "Less commonly, a chronic diffuse hyperkeratosis of the sole of the foot occurs with only mild erythema; occasionally the papules progress to vesicles and bullae that may become pustular." },
-    { "q": "Which symptoms are characteristic of tinea pedis?", "a": "Severe tenderness, itching, and a persistent foul odour." },
-    { "q": "How is tinea pedis diagnosed and treated?", "a": "Diagnosis by fungal mycelia seen on microscopic examination of a KOH preparation, or by culture. Treatment: avoidance of occlusive footwear, careful drying between the toes after bathing, topical zinc undecylenate powder, imidazole cream, and oral griseofulvin." },
-    { "q": "What is pityriasis versicolor and which organism causes it?", "a": "A common chronic fungal infection of the stratum corneum, caused by the dimorphic yeast Malassezia furfur, found in areas of skin rich in sebum production." },
-    { "q": "In whom is pityriasis versicolor most prevalent?", "a": "Adolescents and young adults." },
-    { "q": "List the predisposing factors to pityriasis versicolor.", "a": "A warm humid environment, excessive sweating, occlusion, high plasma cortisol levels, immunosuppression, malnourishment, and genetically determined susceptibility." },
-    { "q": "Describe the lesions of pityriasis versicolor and their sites.", "a": "Hypopigmented or hyperpigmented macules covered with a fine scale, often merging to form confluent patches; most commonly on the neck, upper chest, back and upper arms." },
-    { "q": "How is pityriasis versicolor diagnosed?", "a": "Wood lamp, KOH preparation of scrapings, and skin biopsy." },
-    { "q": "Give the treatment of pityriasis versicolor.", "a": "Selenium sulfide suspension applied overnight; imidazole or terbinafine cream twice daily for 2–4 weeks; and oral therapy with ketoconazole, fluconazole or itraconazole." },
-    { "q": "What causes histoplasmosis and how is it acquired?", "a": "Histoplasma capsulatum and H. duboisii — dimorphic fungi acquired by inhalation of fungal spores." },
-    { "q": "Where are the fungi of histoplasmosis found?", "a": "In the soil and in the droppings of some animals, e.g. bats and poultry." },
-    { "q": "Describe the spread of histoplasmosis.", "a": "The primary infection is in the lungs, with haematogenous spread to the liver, bone marrow, spleen, lymph nodes and subcutaneous tissue." },
-    { "q": "How does African histoplasmosis (H. duboisii) present?", "a": "As subcutaneous nodules which tend to umbilicate and suppurate or ulcerate as they grow." },
-    { "q": "How does H. capsulatum characteristically present?", "a": "It affects the lungs, and may present with productive cough and constitutional symptoms." },
-    { "q": "How is histoplasmosis diagnosed and treated?", "a": "By isolation and identification of the causative fungus in cultures from sputum, bone marrow, lymph node biopsy, or pus or scrapings from ulcers. Treatment: IV amphotericin B; oral itraconazole or ketoconazole." },
-    { "q": "What causes sporotrichosis and how is it acquired?", "a": "Accidental implantation into the skin of Sporothrix schenckii, which grows on thorny plants." },
-    { "q": "Describe the initial lesion of sporotrichosis.", "a": "A firm, painless or mildly tender subcutaneous nodule at the site of skin trauma, presenting as a purple, violaceous, hyperpigmented brown, or dark grey nodule." },
-    { "q": "How does the sporotrichosis nodule progress?", "a": "The primary nodule grows larger, becomes pustular, and may open into a chronic, hollowed-out sore (ulceration)." },
-    { "q": "How may sporotrichosis spread?", "a": "By lymphatic or haematogenous routes to muscles, bones, joints or other tissues; inhalation of spores may cause lung infection." },
-    { "q": "How is sporotrichosis diagnosed and treated?", "a": "Diagnosis by microscopic demonstration of the fungus in preparations from scrapings or biopsy. Treatment: potassium iodide, IV amphotericin B, or oral itraconazole." },
-    { "q": "What causes blastomycosis and how is it acquired?", "a": "Blastomyces dermatitidis, acquired by inhalation of fungal spores." },
-    { "q": "Describe the spread and skin lesions of blastomycosis.", "a": "Primary infection is in the lungs with haematogenous spread to the skin, bone and genital tract; it presents as irregularly crusted plaques, superficial ulcerative lesions, or firm subcutaneous nodules on exposed parts of the body." },
-    { "q": "How is blastomycosis diagnosed and treated?", "a": "Diagnosis by characteristic budding cells seen in KOH preparation of materials from the lesion; treatment with IV amphotericin B." },
-    { "q": "What causes coccidiomycosis and how does it spread?", "a": "Coccidioides immitis, a dimorphic fungus acquired by inhalation of fungal spores; primary infection is in the lungs with haematogenous spread to the skin, subcutaneous tissue and bones." },
-    { "q": "What do the skin lesions of coccidiomycosis consist of, and how is it treated?", "a": "Panniculitis, abscesses and draining sinuses; treated with oral ketoconazole or itraconazole." },
-    { "q": "What is mycetoma and which structures does it affect?", "a": "Madura foot — a chronic infection of the skin, subcutaneous tissue and bones of the feet." },
-    { "q": "How does mycetoma develop, and in whom is it common?", "a": "It takes a very long time to develop and is rare in children; the microorganisms are typically introduced through minor injuries like a splinter or thorn prick, which is why it is common among agricultural workers." },
-    { "q": "Distinguish eumycetoma from actinomycetoma.", "a": "Eumycetoma is caused by fungi; actinomycetoma is caused by filamentous bacteria." },
-    { "q": "Name the causative organisms of mycetoma.", "a": "Actinomycetes such as Nocardia brasiliensis, Actinomadura madurae and Streptomyces somaliensis; and fungi such as Pseudallescheria boydii, Madurella grisea or Madurella mycetomatis." },
-    { "q": "What is the treatment of mycetoma?", "a": "Itraconazole." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Fungal Skin Infections",
+ "cards": [
+  {
+   "q": "In what environment do spores of fungi occur?",
+   "a": "**In hot and humid, or arid, tropical environments.**\n\n## Understanding it\n- Fungi thrive where it is warm — both humid and dry tropical settings.\n\n>> Warm tropical environments (humid or arid).",
+   "opts": [
+    "Hot and humid, or arid, tropical environments",
+    "Only cold, dry climates",
+    "Only in fresh water",
+    "Only sterile hospital surfaces"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What factors favour the spread of fungal infections among children?",
+   "a": "**Poor personal/community hygiene; closeness among large families; and institutions (e.g. schools, orphanages).**\n\n## Understanding it\n- Crowding, close contact and poor hygiene spread the spores.\n\n>> Poor hygiene, crowding, institutions.",
+   "opts": [
+    "Poor hygiene, crowding in large families, institutions",
+    "Vaccination status",
+    "Good hygiene and isolation",
+    "Cold, dry weather"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which body structures do most fungal infections affect?",
+   "a": "**The skin, hair, nails and mucosa.**\n\n## Understanding it\n- Superficial fungi favour **keratinised** tissues (skin, hair, nails) and mucosa.\n\n>> Skin, hair, nails, mucosa.",
+   "opts": [
+    "The bloodstream and heart",
+    "Muscle and tendon",
+    "Skin, hair, nails and mucosa",
+    "Bone and joints only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the five superficial fungal skin infections.",
+   "a": "**Candidiasis, tinea capitis, tinea corporis, tinea pedis, and pityriasis versicolor.**\n\n## Understanding it\n- Superficial = candida + the tineas + pityriasis versicolor (stratum corneum/keratin).\n\n>> Candidiasis, tinea capitis/corporis/pedis, pityriasis versicolor.",
+   "opts": [
+    "Mycetoma, blastomycosis, histoplasmosis, sporotrichosis",
+    "Cellulitis, impetigo, folliculitis, SSSS",
+    "Scabies, pediculosis, larva migrans, myiasis",
+    "Candidiasis, tinea capitis, tinea corporis, tinea pedis, pityriasis versicolor"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the five deep fungal skin infections.",
+   "a": "**Mycetoma (Madura foot), blastomycosis, coccidioidomycosis, histoplasmosis, and sporotrichosis.**\n\n## Understanding it\n- Deep mycoses invade subcutaneous tissue/organs (often after inhalation or implantation).\n\n>> Mycetoma, blastomycosis, coccidioidomycosis, histoplasmosis, sporotrichosis.",
+   "opts": [
+    "Mycetoma, blastomycosis, coccidioidomycosis, histoplasmosis, sporotrichosis",
+    "Eczema, psoriasis, vitiligo, urticaria",
+    "Impetigo, cellulitis, folliculitis, SSSS",
+    "Candidiasis, tinea capitis/corporis/pedis, versicolor"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which organisms cause candidiasis?",
+   "a": "**Candida albicans (and C. tropicalis, C. stellatoidea, C. krusei) — yeasts of the genus Candida.**\n\n## Understanding it\n- Candidiasis is caused by yeasts, chiefly **C. albicans**.\n\n>> Candida species (mainly C. albicans).",
+   "opts": [
+    "Sporothrix schenckii",
+    "Candida species (chiefly C. albicans)",
+    "Malassezia furfur",
+    "Trichophyton species (dermatophytes)"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where do candida infections usually occur?",
+   "a": "**On the skin, mucous membranes, nail folds and nails, GI tract and genital tract.**\n\n## Understanding it\n- Candida favours warm, moist surfaces — mucosa, skin folds, nails, gut, genitals.\n\n>> Skin, mucosa, nails, GI and genital tract.",
+   "opts": [
+    "Only the deep subcutaneous tissue",
+    "Skin, mucosa, nail folds, GI and genital tract",
+    "Only the lungs",
+    "Only the scalp hair"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the skin lesions of candidiasis and where they occur.",
+   "a": "**Dusky red, macerated or erosive lesions in skin folds (neck, flanks, large flexures) — moist, intertriginous areas.**\n\n## Understanding it\n- Candida loves warm moist **flexures/folds** → red macerated intertrigo, often with satellite lesions.\n\n>> Red macerated lesions in moist skin folds.",
+   "opts": [
+    "Scaly annular plaques on dry skin",
+    "Dusky red, macerated lesions in moist skin folds",
+    "Yellow cup-shaped scalp crusts",
+    "Painless subcutaneous nodules"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What may follow scratching of candidal skin lesions?",
+   "a": "**Fissuring and bleeding, with secondary bacterial infection.**\n\n## Understanding it\n- Scratching breaks the macerated skin → fissures, bleeding and secondary bacterial infection.\n\n>> Fissuring, bleeding, secondary bacterial infection.",
+   "opts": [
+    "Spontaneous complete healing",
+    "Fissuring, bleeding and secondary bacterial infection",
+    "Conversion to a deep mycosis",
+    "Permanent depigmentation only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which organism most commonly causes oral thrush?",
+   "a": "**Candida albicans.**\n\n## Understanding it\n- Oral thrush is almost always **C. albicans**.\n\n>> Oral thrush = C. albicans.",
+   "opts": [
+    "Trichophyton tonsurans",
+    "Candida albicans",
+    "Malassezia furfur",
+    "Streptococcus pyogenes"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the lesions of oral candidiasis.",
+   "a": "**Curdy or whitish-grey, friable, cheesy pseudomembranous patches/plaques on markedly red mucosa.**\n\n## Understanding it\n- White 'cheesy' plaques on inflamed mucosa that **rub off** (unlike leukoplakia).\n\n>> White cheesy pseudomembranous plaques on red mucosa.",
+   "opts": [
+    "White cheesy pseudomembranous plaques on red mucosa",
+    "Annular scaly plaques",
+    "Painless firm nodules",
+    "Honey-coloured crusts"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Where may the plaques of thrush be found?",
+   "a": "**On the lips, buccal mucosa, tongue and palate, extending to the pharynx/oesophagus (the tract lining is continuous).**\n\n## Understanding it\n- Thrush can spread along the continuous mucosa into the oesophagus/pharynx.\n\n>> Lips, cheeks, tongue, palate — may reach the oesophagus.",
+   "opts": [
+    "Only the nail folds",
+    "Only the soles of the feet",
+    "Only the scalp",
+    "Lips, buccal mucosa, tongue, palate — may extend to the oesophagus"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What happens on removal of the plaques of thrush, and why is this useful?",
+   "a": "**Removal may cause mild punctate bleeding, which helps confirm the diagnosis.**\n\n## Understanding it\n- Scraping thrush leaves a raw, **pinpoint-bleeding** base — a useful bedside clue (unlike leukoplakia).\n\n>> Plaques rub off leaving pinpoint bleeding (diagnostic clue).",
+   "opts": [
+    "They turn black on removal",
+    "They rub off, leaving punctate bleeding (a diagnostic clue)",
+    "They leave a permanent scar",
+    "They cannot be removed at all"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the factors predisposing to candidiasis.",
+   "a": "**Diabetes mellitus, retroviral disease (HIV), prolonged antibiotic and corticosteroid use, and immunosuppression.**\n\n## Understanding it\n- Candida overgrows when **immunity is low** or **normal flora is wiped out** (antibiotics).\n\n>> Diabetes, HIV, antibiotics/steroids, immunosuppression.",
+   "opts": [
+    "Cold, dry climate",
+    "Diabetes, HIV, prolonged antibiotics/steroids, immunosuppression",
+    "Good nutrition and intact immunity",
+    "Vaccination"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the treatment of oral candidiasis.",
+   "a": "**Topical antifungals (clotrimazole, nystatin, amphotericin B, or miconazole gel), plus treating any predisposing factor.**\n\n## Understanding it\n- Local antifungals for thrush, and fix the underlying cause (e.g. control diabetes, review antibiotics/steroids).\n\n>> Nystatin/clotrimazole/miconazole + treat the cause.",
+   "opts": [
+    "Nystatin/clotrimazole/miconazole, and treat predisposing factors",
+    "Topical steroid alone",
+    "A single antibiotic course",
+    "Oral griseofulvin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is tinea capitis and which organism most often causes it?",
+   "a": "**A dermatophyte infection of the scalp, most often caused by Trichophyton tonsurans.**\n\n## Understanding it\n- Tinea capitis = scalp ringworm, usually **T. tonsurans**.\n\n>> Scalp dermatophytosis; usually T. tonsurans.",
+   "opts": [
+    "A bacterial folliculitis",
+    "A Malassezia infection",
+    "Scalp dermatophyte infection — usually T. tonsurans",
+    "A candida infection of the scalp"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Describe the lesions and hairs in tinea capitis.",
+   "a": "**Erythematous, scaly, circular (ring) plaques within which the infected hairs break off.**\n\n## Understanding it\n- Ringworm plaques on the scalp with **broken hairs** (leaving black dots/stubble).\n\n>> Scaly ring plaques with broken-off hairs.",
+   "opts": [
+    "Painless subcutaneous nodules",
+    "Scaly circular plaques with broken-off hairs",
+    "White cheesy plaques that rub off",
+    "Yellow cup-shaped crusts only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What appearance do multiple affected sites produce in tinea capitis?",
+   "a": "**A moth-eaten appearance of the hair.**\n\n## Understanding it\n- Multiple patches of broken hair give a patchy 'moth-eaten' look.\n\n>> Moth-eaten hair appearance.",
+   "opts": [
+    "A scaly annular body rash",
+    "A moth-eaten appearance of the hair",
+    "A honey-crusted rash",
+    "A uniform bald scalp"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What else may develop in tinea capitis?",
+   "a": "**Numerous confluent patches of alopecia, with variable scaling and scalp inflammation.**\n\n## Understanding it\n- Hair loss (alopecia) plus scaling/inflammation of variable severity.\n\n>> Patchy alopecia with scaling/inflammation.",
+   "opts": [
+    "Deep subcutaneous nodules",
+    "Confluent patches of alopecia with scaling/inflammation",
+    "Permanent depigmentation",
+    "Honey crusts on the face"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is a kerion and what causes it?",
+   "a": "**An inflammatory, boggy, pus-covered mass — a severe hypersensitivity/inflammatory reaction to the scalp dermatophyte.**\n\n## Understanding it\n- A kerion is an intense **inflammatory** response to tinea capitis; it can scar if untreated.\n\n>> Kerion = boggy inflamed pustular scalp mass (severe tinea reaction).",
+   "opts": [
+    "A painless lymphatic nodule chain",
+    "A hypopigmented scaly macule",
+    "A boggy, inflamed, pustular scalp mass (severe tinea reaction)",
+    "A white curdy oral plaque"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is favus and which organism causes it?",
+   "a": "**A severe, chronic form of tinea capitis, typically caused by Trichophyton schoenleinii.**\n\n## Understanding it\n- Favus is chronic scalp tinea (T. schoenleinii) forming cup-shaped crusts (scutula).\n\n>> Favus = chronic tinea capitis (T. schoenleinii).",
+   "opts": [
+    "Candidiasis of the scalp",
+    "A bacterial carbuncle",
+    "Pityriasis versicolor",
+    "Chronic tinea capitis caused by T. schoenleinii"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the lesions of favus.",
+   "a": "**Thick, yellowish, cup-shaped crusts (scutula) that develop around hair follicles.**\n\n## Understanding it\n- The hallmark is **scutula** — yellow cup-shaped crusts around follicles.\n\n>> Yellow cup-shaped scutula around follicles.",
+   "opts": [
+    "Honey-coloured facial crusts",
+    "Yellow cup-shaped crusts (scutula) around follicles",
+    "Silvery scaly plaques",
+    "White cheesy plaques"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens if favus is left untreated?",
+   "a": "**It destroys hair follicles, mats the hair, and causes permanent scarring alopecia.**\n\n## Understanding it\n- Untreated favus scars the scalp → **permanent (scarring) hair loss**.\n\n>> Untreated favus → permanent scarring alopecia.",
+   "opts": [
+    "Follicle destruction, matting, and permanent scarring alopecia",
+    "Only temporary hair thinning",
+    "Conversion to candidiasis",
+    "Complete spontaneous recovery"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is tinea capitis diagnosed and treated?",
+   "a": "**Diagnosis by scraping + KOH microscopy (± Wood lamp/culture); treatment needs ORAL antifungals (griseofulvin, itraconazole or terbinafine).**\n\n## Understanding it\n- Because the fungus is **inside the hair shaft**, topical treatment can't reach it — **oral** antifungals are required.\n\n>> KOH scraping; ORAL griseofulvin/itraconazole/terbinafine.",
+   "opts": [
+    "Blood culture; IV antibiotics",
+    "KOH scraping; oral griseofulvin/itraconazole/terbinafine",
+    "KOH scraping; topical cream alone",
+    "Biopsy; oral steroids"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define tinea corporis.",
+   "a": "**A fungal (dermatophyte) infection of the glabrous (hairless) skin, excluding palms, soles and groin.**\n\n## Understanding it\n- Tinea corporis = ringworm of the **body skin** (not palms/soles/groin, which have their own names).\n\n>> Ringworm of glabrous body skin (not palms/soles/groin).",
+   "opts": [
+    "Infection of the scalp hair",
+    "Infection of the oral mucosa",
+    "Infection of the toe webs",
+    "Dermatophyte infection of glabrous body skin"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which organisms most commonly cause tinea corporis?",
+   "a": "**Trichophyton rubrum and T. mentagrophytes (also Microsporum canis and Epidermophyton).**\n\n## Understanding it\n- Dermatophytes — chiefly **T. rubrum/mentagrophytes**; M. canis comes from pets.\n\n>> T. rubrum/mentagrophytes (M. canis from pets).",
+   "opts": [
+    "Trichophyton rubrum and T. mentagrophytes",
+    "Candida albicans",
+    "Staphylococcus aureus",
+    "Malassezia furfur"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the characteristic lesion of tinea corporis.",
+   "a": "**A dry, mildly erythematous, elevated, scaly papule/plaque that spreads centrifugally with central clearing (an active advancing edge).**\n\n## Understanding it\n- The classic **annular ('ring') lesion** — active scaly border, clearing centre.\n\n>> Annular plaque: active scaly edge, central clearing.",
+   "opts": [
+    "Annular scaly plaque with an active edge and central clearing",
+    "Yellow cup-shaped crusts",
+    "A white curdy plaque",
+    "A macerated red flexural rash"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is tinea corporis acquired?",
+   "a": "**By direct contact from an infected person, contaminated surfaces, or pets (M. canis).**\n\n## Understanding it\n- Spread by contact — people, fomites, and animals (kittens/puppies for M. canis).\n\n>> Contact with infected people, surfaces, or pets.",
+   "opts": [
+    "Contaminated food",
+    "Mosquito bites",
+    "Direct contact with infected people, surfaces or pets",
+    "Inhalation of spores"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Name the forms of tinea corporis according to site.",
+   "a": "**Tinea faciale (face), tinea axillaris (axilla), tinea cruris (groin), tinea manuum (hand), etc. — named by body region.**\n\n## Understanding it\n- The same infection is named by **site** (faciale, cruris, manuum, pedis, capitis).\n\n>> Named by region: faciale, cruris, manuum, etc.",
+   "opts": [
+    "Named by body region (faciale, cruris, manuum, etc.)",
+    "Named by the causative organism",
+    "Named by severity grade",
+    "Named by the patient's age"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is tinea corporis diagnosed?",
+   "a": "**Clinically; by skin scraping + KOH microscopy; and by culture of scrapings for identification.**\n\n## Understanding it\n- KOH microscopy of the **advancing scaly edge** shows hyphae; culture identifies the species.\n\n>> Clinical + KOH scraping (± culture).",
+   "opts": [
+    "Blood culture only",
+    "Wood lamp alone is definitive",
+    "Skin biopsy is always required",
+    "Clinically and by KOH microscopy of scrapings (± culture)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the treatment of tinea corporis.",
+   "a": "**Topical antifungals (imidazoles, terbinafine or naftifine); oral antifungals in severe/extensive cases.**\n\n## Understanding it\n- Localised disease → **topical** antifungal; widespread → oral.\n\n>> Topical antifungal (oral if severe).",
+   "opts": [
+    "Topical antifungals (oral if severe/extensive)",
+    "Nystatin mouth gel",
+    "Oral antibiotics",
+    "Topical steroid alone"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is tinea pedis and which organisms cause it?",
+   "a": "**Athlete's foot — infection of the toe webs and soles, caused by Trichophyton (rubrum/mentagrophytes) and Epidermophyton.**\n\n## Understanding it\n- Tinea pedis = foot dermatophytosis (toe webs/soles), classic dermatophytes.\n\n>> Athlete's foot; Trichophyton/Epidermophyton.",
+   "opts": [
+    "A bacterial cellulitis",
+    "A candida infection of the feet",
+    "A Malassezia infection",
+    "Athlete's foot — Trichophyton/Epidermophyton"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the usual appearance of tinea pedis.",
+   "a": "**The subdigital (toe-web) crevices are fissured, with maceration and peeling of the surrounding skin.**\n\n## Understanding it\n- Classic interdigital tinea pedis: **macerated, fissured, peeling toe webs** (esp. 4th web).\n\n>> Macerated, fissured, peeling toe webs.",
+   "opts": [
+    "White curdy oral plaques",
+    "Annular plaques on the trunk",
+    "Yellow cup-shaped crusts",
+    "Macerated, fissured, peeling toe webs"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the less common presentations of tinea pedis.",
+   "a": "**A chronic diffuse hyperkeratosis of the sole ('moccasin' pattern) with only slight erythema.**\n\n## Understanding it\n- Besides toe-web disease, tinea pedis can cause a dry **scaly thickening of the whole sole** (moccasin type).\n\n>> Chronic hyperkeratotic 'moccasin' sole.",
+   "opts": [
+    "Chronic diffuse hyperkeratosis of the sole (moccasin type)",
+    "Deep subcutaneous nodules",
+    "Honey-crusted erosions",
+    "Hypopigmented trunk macules"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which symptoms are characteristic of tinea pedis?",
+   "a": "**Severe tenderness, itching, and a persistent foul odour.**\n\n## Understanding it\n- Itch, tenderness and a characteristic **foul smell** of the feet.\n\n>> Itching, tenderness, foul odour.",
+   "opts": [
+    "A sweet fruity smell",
+    "Tenderness, itching, and foul odour",
+    "Painless numbness",
+    "No symptoms at all"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is tinea pedis diagnosed and treated?",
+   "a": "**Diagnosis by fungal hyphae on KOH microscopy (± culture); treatment with topical antifungals (and keeping the feet dry), oral antifungals if severe.**\n\n## Understanding it\n- KOH shows hyphae; treat with topical antifungal + moisture control; oral for resistant/severe.\n\n>> KOH; topical antifungal + dry feet (oral if severe).",
+   "opts": [
+    "Biopsy; nystatin gel",
+    "Blood culture; IV antibiotics",
+    "Wood lamp; oral steroids",
+    "KOH microscopy; topical antifungals and keeping feet dry"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is pityriasis versicolor and which organism causes it?",
+   "a": "**A common chronic infection of the stratum corneum caused by the dimorphic yeast Malassezia furfur (Pityrosporum).**\n\n## Understanding it\n- Not a dermatophyte — caused by **Malassezia**, a lipophilic skin yeast.\n\n>> Malassezia furfur infection of the stratum corneum.",
+   "opts": [
+    "A bacterial infection",
+    "A Candida infection",
+    "Malassezia furfur infection of the stratum corneum",
+    "A Trichophyton (dermatophyte) infection"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "In whom is pityriasis versicolor most prevalent?",
+   "a": "**Adolescents and young adults.**\n\n## Understanding it\n- It peaks in **adolescents/young adults** (active sebaceous glands feed the lipophilic yeast).\n\n>> Adolescents and young adults.",
+   "opts": [
+    "Only immunocompromised infants",
+    "Adolescents and young adults",
+    "Neonates only",
+    "The elderly only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the predisposing factors to pityriasis versicolor.",
+   "a": "**A warm humid environment, excessive sweating, occlusion, high plasma cortisol, and immunosuppression.**\n\n## Understanding it\n- Heat, sweat, occlusion and high cortisol/immunosuppression favour Malassezia overgrowth.\n\n>> Heat, sweating, occlusion, high cortisol, immunosuppression.",
+   "opts": [
+    "Cold dry climate and good hygiene",
+    "Old age alone",
+    "Warm humid climate, sweating, occlusion, high cortisol, immunosuppression",
+    "Vaccination"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Describe the lesions of pityriasis versicolor and their sites.",
+   "a": "**Hypo- or hyperpigmented macules with a fine scale, often merging into patches, mainly on the trunk, neck and upper arms.**\n\n## Understanding it\n- Variably-coloured ('versicolor') finely-scaly macules on the **upper trunk**.\n\n>> Hypo/hyperpigmented finely-scaly macules on the trunk.",
+   "opts": [
+    "Yellow cup-shaped scalp crusts",
+    "White curdy plaques on mucosa",
+    "Hypo/hyperpigmented finely-scaly macules on the trunk",
+    "Annular plaques with central clearing"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How is pityriasis versicolor diagnosed?",
+   "a": "**Wood lamp (yellow fluorescence), KOH preparation of scrapings ('spaghetti and meatballs'), and skin biopsy.**\n\n## Understanding it\n- KOH shows the classic **short hyphae + spores** ('spaghetti and meatballs'); Wood lamp fluoresces.\n\n>> Wood lamp + KOH ('spaghetti and meatballs').",
+   "opts": [
+    "Wood lamp, KOH scrapings, and biopsy",
+    "Sensation testing with cotton wool",
+    "A glass tumbler blanch test",
+    "Blood culture only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give the treatment of pityriasis versicolor.",
+   "a": "**Selenium sulfide suspension overnight; imidazole or terbinafine cream twice daily; oral antifungals for extensive disease.**\n\n## Understanding it\n- Topical selenium sulfide/azoles; oral azoles if widespread. (Repigmentation lags after cure.)\n\n>> Selenium sulfide/azole cream (oral if extensive).",
+   "opts": [
+    "Systemic steroids",
+    "Topical antibiotic",
+    "Selenium sulfide and azole/terbinafine creams (oral if extensive)",
+    "Oral griseofulvin"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What causes histoplasmosis and how is it acquired?",
+   "a": "**Histoplasma capsulatum and H. duboisii — dimorphic fungi acquired by inhaling fungal spores.**\n\n## Understanding it\n- A **deep mycosis** acquired by **inhalation** (not skin contact).\n\n>> Histoplasma; inhaled spores.",
+   "opts": [
+    "Sporothrix implanted by a thorn",
+    "Histoplasma (capsulatum/duboisii), inhaled spores",
+    "A dermatophyte from skin contact",
+    "Candida from the gut"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where are the fungi of histoplasmosis found?",
+   "a": "**In soil and in the droppings of some animals — e.g. bats and poultry.**\n\n## Understanding it\n- Histoplasma grows in soil enriched with **bat/bird droppings**.\n\n>> Soil with bat/bird droppings.",
+   "opts": [
+    "On thorny plants",
+    "Soil and bat/bird droppings",
+    "Only in fresh water",
+    "In the human gut"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the spread of histoplasmosis.",
+   "a": "**Primary infection is in the lungs, with haematogenous spread to the liver, bone marrow, spleen and other organs.**\n\n## Understanding it\n- Starts in the **lungs**, then disseminates via the blood to reticuloendothelial organs.\n\n>> Lungs first, then blood-borne spread to organs.",
+   "opts": [
+    "Lungs first, then haematogenous spread to organs",
+    "Skin first, then along lymphatics",
+    "Only local skin involvement",
+    "Gut first, then the brain"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does African histoplasmosis (H. duboisii) present?",
+   "a": "**As subcutaneous nodules that tend to umbilicate and suppurate or ulcerate as they grow.**\n\n## Understanding it\n- H. duboisii (African) is more **cutaneous/subcutaneous and bony** than pulmonary.\n\n>> Subcutaneous nodules that umbilicate/ulcerate.",
+   "opts": [
+    "Annular scaly body plaques",
+    "White oral plaques",
+    "Purely a lung infection",
+    "Subcutaneous nodules that umbilicate and ulcerate"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How does H. capsulatum characteristically present?",
+   "a": "**It affects the lungs, presenting with productive cough and constitutional symptoms.**\n\n## Understanding it\n- Classic H. capsulatum is a **pulmonary** illness (cough + constitutional symptoms).\n\n>> Pulmonary — cough and constitutional symptoms.",
+   "opts": [
+    "A scalp kerion",
+    "Purely subcutaneous nodules",
+    "Oral thrush",
+    "Pulmonary — productive cough and constitutional symptoms"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is histoplasmosis diagnosed and treated?",
+   "a": "**By isolating/identifying the fungus in cultures (sputum, bone marrow, etc.); treated with antifungals such as amphotericin B or itraconazole.**\n\n## Understanding it\n- Culture/identification confirms it; treat with **amphotericin B/itraconazole**.\n\n>> Culture; amphotericin B/itraconazole.",
+   "opts": [
+    "Culture/identification; amphotericin B or itraconazole",
+    "Wood lamp; selenium sulfide",
+    "KOH scraping; topical cream",
+    "Blood film; antibiotics"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What causes sporotrichosis and how is it acquired?",
+   "a": "**Accidental implantation into the skin of Sporothrix schenckii, which grows on thorny plants/vegetation.**\n\n## Understanding it\n- The 'rose-gardener's disease' — **implanted** by a thorn prick, not inhaled.\n\n>> Sporothrix schenckii, implanted by thorns.",
+   "opts": [
+    "Sporothrix schenckii, implanted through skin trauma (thorns)",
+    "Inhaled Histoplasma spores",
+    "A dermatophyte via contact",
+    "Candida overgrowth"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the initial lesion of sporotrichosis.",
+   "a": "**A firm, painless or mildly tender subcutaneous nodule at the site of skin trauma.**\n\n## Understanding it\n- Starts as a solitary **subcutaneous nodule** at the inoculation site.\n\n>> Painless subcutaneous nodule at the trauma site.",
+   "opts": [
+    "A boggy scalp mass",
+    "An annular scaly plaque",
+    "A painless/mildly tender subcutaneous nodule at the injury site",
+    "A white oral plaque"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does the sporotrichosis nodule progress?",
+   "a": "**The primary nodule enlarges, becomes pustular, and may open into a chronic ulcer, with new nodules tracking along lymphatics.**\n\n## Understanding it\n- Classic **lymphocutaneous** spread — a chain of nodules/ulcers along the draining lymphatics.\n\n>> Ulcerates and spreads along lymphatics (nodular chain).",
+   "opts": [
+    "Spreads by inhalation to the lungs",
+    "Heals within a day",
+    "Ulcerates and spreads along lymphatics as a nodular chain",
+    "Becomes a white mucosal plaque"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How may sporotrichosis spread?",
+   "a": "**By lymphatic or haematogenous routes to muscles, bones, joints or other tissues (inhalation can cause pulmonary disease).**\n\n## Understanding it\n- Mostly lymphocutaneous, but can disseminate to bone/joint or (rarely, if inhaled) the lungs.\n\n>> Lymphatic/haematogenous spread (± pulmonary if inhaled).",
+   "opts": [
+    "Only by direct skin contact",
+    "It never spreads beyond the skin",
+    "Only through the gut",
+    "Lymphatic/haematogenous spread to bone, joints, etc."
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is sporotrichosis diagnosed and treated?",
+   "a": "**Diagnosis by microscopy/culture of the fungus from scrapings or biopsy; treated with itraconazole (or potassium iodide; amphotericin B for severe/systemic).**\n\n## Understanding it\n- Culture confirms; **itraconazole** is standard (KI historically; amphotericin for systemic).\n\n>> Culture; itraconazole (± KI / amphotericin B).",
+   "opts": [
+    "Wood lamp; selenium sulfide",
+    "Blood film; penicillin",
+    "Culture/microscopy; itraconazole (± potassium iodide)",
+    "KOH; topical steroid"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What causes blastomycosis and how is it acquired?",
+   "a": "**Blastomyces dermatitidis, acquired by inhaling fungal spores.**\n\n## Understanding it\n- A deep mycosis acquired by **inhalation** (lungs first).\n\n>> Blastomyces dermatitidis; inhaled.",
+   "opts": [
+    "Candida overgrowth",
+    "A dermatophyte via skin contact",
+    "Blastomyces dermatitidis, inhaled",
+    "Sporothrix via a thorn"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Describe the spread and skin lesions of blastomycosis.",
+   "a": "**Primary lung infection with haematogenous spread to skin, bone and genitalia; skin lesions are verrucous/ulcerated.**\n\n## Understanding it\n- Lungs → blood → **skin (warty/ulcerated), bone, GU tract**.\n\n>> Lungs first; then skin (verrucous), bone, GU.",
+   "opts": [
+    "Lungs first, then skin (verrucous/ulcerated), bone and GU",
+    "White oral plaques only",
+    "Purely a scalp infection",
+    "Skin only, spreading along lymphatics"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is blastomycosis diagnosed and treated?",
+   "a": "**Diagnosis by characteristic broad-based budding yeast on KOH of specimens (± culture); treated with amphotericin B or itraconazole.**\n\n## Understanding it\n- Broad-based **budding yeast** on microscopy; treat with amphotericin B/itraconazole.\n\n>> Broad-based budding yeast; amphotericin B/itraconazole.",
+   "opts": [
+    "Broad-based budding yeast on KOH; amphotericin B/itraconazole",
+    "Gram stain; penicillin",
+    "Spaghetti-and-meatballs on KOH; selenium sulfide",
+    "Wood lamp; griseofulvin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What causes coccidiomycosis and how does it spread?",
+   "a": "**Coccidioides immitis, a dimorphic fungus acquired by inhaling spores; primary infection is pulmonary with possible dissemination.**\n\n## Understanding it\n- Inhaled Coccidioides → **lung** infection that may disseminate.\n\n>> Coccidioides immitis, inhaled; pulmonary then disseminates.",
+   "opts": [
+    "Implanted by a thorn",
+    "Coccidioides immitis, inhaled; pulmonary then may disseminate",
+    "Candida from the gut",
+    "A dermatophyte via contact"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What do the skin lesions of coccidiomycosis consist of, and how is it treated?",
+   "a": "**Panniculitis, abscesses and draining sinuses; treated with oral ketoconazole or itraconazole (amphotericin B for severe disease).**\n\n## Understanding it\n- Cutaneous coccidioidomycosis: **panniculitis/abscesses/sinuses**; azoles (± amphotericin).\n\n>> Panniculitis/abscesses/sinuses; ketoconazole/itraconazole.",
+   "opts": [
+    "Panniculitis, abscesses, draining sinuses; ketoconazole/itraconazole",
+    "Annular scaly plaques; topical cream",
+    "Honey crusts; mupirocin",
+    "White oral plaques; nystatin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is mycetoma and which structures does it affect?",
+   "a": "**Madura foot — a chronic infection of the skin, subcutaneous tissue and bones of the feet.**\n\n## Understanding it\n- Mycetoma ('Madura foot') chronically destroys the **skin, subcutis and bone** of the foot.\n\n>> Chronic skin/subcutaneous/bone infection of the foot.",
+   "opts": [
+    "Chronic infection of skin, subcutaneous tissue and bone of the foot",
+    "An acute lung infection",
+    "A scalp hair infection",
+    "An oral mucosal infection"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does mycetoma develop, and in whom is it common?",
+   "a": "**It develops very slowly and is rare in children; organisms are implanted through the skin (typically in adults doing barefoot outdoor work).**\n\n## Understanding it\n- A slow, chronic implantation infection — **rare in children**, common in barefoot rural adults.\n\n>> Slow-developing; rare in children (implanted through skin).",
+   "opts": [
+    "Spread person-to-person",
+    "Inhaled and acute",
+    "Rapidly developing; common in neonates",
+    "Very slow-developing; rare in children (skin implantation)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Distinguish eumycetoma from actinomycetoma.",
+   "a": "**Eumycetoma is caused by true fungi; actinomycetoma is caused by filamentous bacteria (actinomycetes).**\n\n## Understanding it\n- Same clinical picture, two causes: **fungi (eu-)** vs **bacteria (actino-)** — which matters for treatment.\n\n>> Eumycetoma = fungi; actinomycetoma = filamentous bacteria.",
+   "opts": [
+    "Both are caused by viruses",
+    "Both are caused by dermatophytes",
+    "Eumycetoma = bacteria; actinomycetoma = fungi",
+    "Eumycetoma = fungi; actinomycetoma = filamentous bacteria"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the causative organisms of mycetoma.",
+   "a": "**Actinomycetes such as Nocardia brasiliensis, Actinomadura madurae and Streptomyces somaliensis (plus true fungi in eumycetoma).**\n\n## Understanding it\n- Actinomycetoma organisms: **Nocardia, Actinomadura, Streptomyces**; eumycetoma is true fungi.\n\n>> Nocardia, Actinomadura, Streptomyces (± true fungi).",
+   "opts": [
+    "Nocardia, Actinomadura, Streptomyces (and true fungi in eumycetoma)",
+    "Only Trichophyton species",
+    "Only Staphylococcus aureus",
+    "Only Candida species"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the treatment of mycetoma?",
+   "a": "**Itraconazole (with prolonged therapy; actinomycetoma also needs antibacterials such as co-trimoxazole).**\n\n## Understanding it\n- Prolonged antifungal (itraconazole) for eumycetoma; actinomycetoma additionally needs antibacterials.\n\n>> Itraconazole (prolonged; antibacterials for actinomycetoma).",
+   "opts": [
+    "No treatment is effective",
+    "Topical antifungal cream only",
+    "Itraconazole (prolonged; antibacterials for actinomycetoma)",
+    "A single antibiotic dose"
+   ],
+   "ans": 2
+  }
+ ]
 }

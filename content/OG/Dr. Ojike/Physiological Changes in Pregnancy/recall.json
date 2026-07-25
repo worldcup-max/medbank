@@ -1,69 +1,699 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Physiological Changes in Pregnancy",
-  "cards": [
-    { "q": "What does pregnancy represent physiologically?", "a": "A unique physiological state, characterised by profound, reversible adaptations across virtually every organ system in the maternal body." },
-    { "q": "Are the adaptations of pregnancy pathological?", "a": "No — they are not pathological; rather they are highly coordinated responses." },
-    { "q": "State the three purposes of the physiological adaptations of pregnancy.", "a": "(1) To support the metabolic demands of the growing fetus and placenta; (2) to protect the mother from the physiological stressors of pregnancy and parturition, especially haemorrhage during delivery; and (3) to ensure adequate utero-placental perfusion for nutrient and gas exchange." },
-    { "q": "When do the changes of pregnancy start, and what drives them?", "a": "They start after conception, and are driven primarily by endocrine signals from the corpus luteum and the developing placenta — notably oestrogen, progesterone and human chorionic gonadotropin (hCG)." },
-    { "q": "What does the cardiovascular adaptation of pregnancy ensure?", "a": "That oxygen and nutrients are delivered to the uterus and placenta." },
-    { "q": "What two effects do elevated oestrogen and progesterone have on the cardiovascular system?", "a": "They cause systemic vascular resistance to be lowered, and cardiac output to increase." },
-    { "q": "By how much does plasma volume increase in pregnancy?", "a": "By 40%–50% above the non-pregnant level." },
-    { "q": "By how much does red blood cell mass increase, and what stimulates it?", "a": "By only 15%–20%, stimulated by increased erythropoietin production." },
-    { "q": "What is the physiological anaemia of pregnancy?", "a": "Plasma volume expansion far outpaces the rise in RBC mass, leading to haemodilution — a fall in haemoglobin concentration and haematocrit." },
-    { "q": "What is the clinical importance of the physiological anaemia of pregnancy?", "a": "In pregnancy, haemoglobin levels of 10.5 g/dL to 11 g/dL are considered physiologically normal." },
-    { "q": "By how much does cardiac output increase in pregnancy?", "a": "By 30%–50%." },
-    { "q": "State the equation for cardiac output.", "a": "Cardiac output (CO) = Heart Rate (HR) × Stroke Volume (SV)." },
-    { "q": "By how much does stroke volume increase, when, and why?", "a": "By 20–30%, early in pregnancy, due to increased end-diastolic volume and myocardial hypertrophy." },
-    { "q": "How does heart rate change in pregnancy?", "a": "It increases progressively throughout pregnancy, by 15–20 beats per minute above baseline." },
-    { "q": "By how much does systemic vascular resistance decrease?", "a": "By 25%–30%." },
-    { "q": "State the three drivers of the fall in systemic vascular resistance.", "a": "(i) The smooth muscle relaxing effect of progesterone; (ii) increased local production of vasodilators — nitric oxide (NO) and prostacyclin (PGI2); and (iii) the creation of a low-resistance, high-flow utero-placental circuit." },
-    { "q": "Why does blood pressure fall in pregnancy despite the increase in cardiac output?", "a": "Because of the massive drop in systemic vascular resistance." },
-    { "q": "Which falls more in pregnancy, the systolic or the diastolic blood pressure?", "a": "The diastolic drops more than the systolic." },
-    { "q": "When is the lowest blood pressure reached in pregnancy, and what happens afterwards?", "a": "Around 20–24 weeks, before gradually returning to the pre-pregnancy baseline at term." },
-    { "q": "Why is 20 weeks gestation used as the cut-off for gestational hypertension (PIH)?", "a": "Because the blood pressure physiologically falls to its lowest around 20–24 weeks before returning to baseline — so hypertension after 20 weeks can be attributed to the pregnancy." },
-    { "q": "What happens when a pregnant woman lies supine?", "a": "The gravid uterus compresses the inferior vena cava (IVC) and the lower aorta, leading to reduced venous return to the heart." },
-    { "q": "What are the consequences of aortocaval compression?", "a": "A drop in stroke volume and cardiac output, leading to supine hypotensive syndrome — dizziness, pallor and placental hypoperfusion." },
-    { "q": "How should pregnant women in late pregnancy lie, and why?", "a": "Always in left lateral tilt, to displace the uterus off the great vessels." },
-    { "q": "What does the respiratory system adapt to ensure?", "a": "That the increased metabolic demand for oxygen — elevated by roughly 20% — is met, and that fetal waste carbon dioxide is effectively cleared." },
-    { "q": "By how much does tidal volume increase in pregnancy?", "a": "By 30%–40%." },
-    { "q": "What happens to functional residual capacity in pregnancy?", "a": "It is reduced by 10–20%." },
-    { "q": "What is minute ventilation, and how does it change in pregnancy?", "a": "Minute ventilation = tidal volume × respiratory rate; it increases by 30–40%." },
-    { "q": "What happens to residual volume in pregnancy?", "a": "It decreases by 15–20%." },
-    { "q": "What happens to vital capacity in pregnancy?", "a": "It is unchanged." },
-    { "q": "What must the maternal kidneys process in pregnancy?", "a": "Both maternal waste and fetal metabolic byproducts." },
-    { "q": "What are the anatomical renal changes of pregnancy?", "a": "Hydronephrosis and hydroureters." },
-    { "q": "What are the two causes of hydronephrosis and hydroureter in pregnancy?", "a": "(i) Progesterone-induced smooth muscle relaxation; and (ii) compression of the ureters at the pelvic brim by the expanding uterus." },
-    { "q": "Why is hydronephrosis worse on the right than the left in pregnancy?", "a": "Because of the dextrorotation of the uterus, and the cushioning effect on the left ureter by the sigmoid colon." },
-    { "q": "What is the clinical significance of urinary stasis in pregnancy?", "a": "It increases the risk of progression from asymptomatic bacteriuria to acute pyelonephritis." },
-    { "q": "By how much does renal plasma flow increase in pregnancy?", "a": "By up to 50%–80%." },
-    { "q": "By how much does the glomerular filtration rate increase in pregnancy?", "a": "By up to 50%." },
-    { "q": "What does hyperfiltration lead to in pregnancy?", "a": "Clearance of creatinine, urea and uric acid is highly elevated, leading to a decreased serum creatinine." },
-    { "q": "What is the serum creatinine level in pregnancy, and what is the non-pregnant level?", "a": "0.4–0.6 mg/dL in pregnancy, against a non-pregnant level of 0.8 mg/dL." },
-    { "q": "What does a creatinine of 0.8 mg/dL or higher in pregnancy indicate?", "a": "It warrants evaluation for underlying renal impairment or pre-eclampsia." },
-    { "q": "Why does glycosuria occur in pregnancy?", "a": "Because the high GFR leads to exceeding the renal threshold for complete glucose reabsorption." },
-    { "q": "What happens to urinary protein excretion in pregnancy?", "a": "There is a mild increase." },
-    { "q": "What is the nature of the GI changes of pregnancy, and what drives them?", "a": "They are primarily functional, driven by the smooth muscle relaxant properties of progesterone." },
-    { "q": "What effect does high progesterone have on the lower oesophageal sphincter, and what results?", "a": "It decreases lower oesophageal sphincter (LES) tone, resulting in GERD (gastro-oesophageal reflux disease)." },
-    { "q": "What two factors combine to cause GERD in pregnancy?", "a": "Decreased LES tone, combined with increased intra-abdominal pressure from the expanding uterus." },
-    { "q": "What are the other effects of progesterone on the GI tract?", "a": "Decreased intestinal motility; decreased gall bladder motility, leading to cholelithiasis; and constipation." },
-    { "q": "What effect does oestrogen have on the gums in pregnancy?", "a": "It causes gingival hyperplasia and bleeding gums — epulis gravidarum." },
-    { "q": "What causes haemorrhoids in pregnancy?", "a": "Constipation, and elevated venous pressure in the pelvic veins due to uterine compression of the vena cava." },
-    { "q": "What happens to alkaline phosphatase in pregnancy, and why?", "a": "It doubles or triples, due to placental production." },
-    { "q": "How is the haematological state of pregnancy described, and why?", "a": "As a hypercoagulable state — an evolutionary adaptation to prevent fatal postpartum haemorrhage, but one that carries significant risk of venous thromboembolism." },
-    { "q": "Which procoagulant factors increase in pregnancy?", "a": "Fibrinogen, VII, VIII, IX and XII, as well as von Willebrand factor." },
-    { "q": "Which anticoagulant decreases in pregnancy, and what happens to fibrinolysis?", "a": "Protein S decreases, and fibrinolysis is decreased." },
-    { "q": "By how much is the risk of DVT and pulmonary embolism increased in pregnancy?", "a": "Up to 4–5 fold." },
-    { "q": "What happens to the white cell count in pregnancy?", "a": "There is leucocytosis." },
-    { "q": "What is the purpose of the endocrine changes of pregnancy?", "a": "The endocrine milieu undergoes a complete revolution, transforming maternal metabolism to prioritise the continuous supply of glucose and amino acids to the fetus." },
-    { "q": "Which hormones increase to produce insulin resistance in pregnancy?", "a": "Oestrogen, human placental lactogen, progesterone, cortisol, and placental growth hormone." },
-    { "q": "What must the maternal response be to hormone-induced insulin resistance?", "a": "It must increase insulin secretion to maintain euglycaemia." },
-    { "q": "When does gestational diabetes mellitus occur?", "a": "When the maternal pancreatic response is insufficient to overcome the hormone-induced insulin resistance." },
-    { "q": "By how much does the pituitary gland enlarge in pregnancy, and why?", "a": "Up to 135%, due to primary hypertrophy and hyperplasia of lactotrophs (prolactin-producing cells), stimulated by oestrogen." },
-    { "q": "What is the pituitary prone to in pregnancy, and under what circumstances?", "a": "Sheehan syndrome, if severe postpartum haemorrhage and hypovolaemic shock occur." },
-    { "q": "What causes hyperpigmentation in pregnancy?", "a": "Elevated MSH (melanocyte stimulating hormone) and oestrogen." },
-    { "q": "Which areas darken in pregnancy?", "a": "The areolae, the perineum, the axillae, and the midline of the abdomen (linea nigra)." },
-    { "q": "Name the other skin changes of pregnancy.", "a": "Melasma (chloasma); striae gravidarum; and vascular changes — palmar erythema and spider angiomas." },
-    { "q": "What are the musculoskeletal changes of pregnancy?", "a": "Progressive lumbar lordosis and joint laxity." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Physiological Changes in Pregnancy",
+ "cards": [
+  {
+   "q": "What does pregnancy represent physiologically?",
+   "a": "**A unique physiological state characterised by profound, reversible adaptations across body systems.**\n\n## Understanding it\n- Pregnancy is a normal, **coordinated, reversible** remodelling — not disease.\n\n>> Pregnancy = profound reversible physiological adaptation.",
+   "opts": [
+    "A purely hormonal change with no system effects",
+    "An irreversible permanent change",
+    "A profound, reversible physiological adaptation across systems",
+    "A pathological, disease-like state"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Are the adaptations of pregnancy pathological?",
+   "a": "**No — they are not pathological; they are highly coordinated (physiological) responses.**\n\n## Understanding it\n- The changes are **adaptive and normal**, evolved to support the fetus.\n\n>> Adaptations are physiological, not pathological.",
+   "opts": [
+    "They only occur in complicated pregnancies",
+    "No — they are coordinated physiological responses",
+    "Yes — they are always pathological",
+    "They are random and uncoordinated"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the three purposes of the physiological adaptations of pregnancy.",
+   "a": "**To support the metabolic demands of the growing fetus/placenta; to protect the mother from complications (e.g. haemorrhage); and to prepare for labour, delivery and lactation.**\n\n## Understanding it\n- Support the fetus, protect the mother, prepare for birth/lactation.\n\n>> Support fetus, protect mother, prepare for delivery/lactation.",
+   "opts": [
+    "To cause disease that resolves after birth",
+    "Support the fetus, protect the mother, prepare for delivery/lactation",
+    "Only to increase the mother's weight",
+    "Only to raise blood pressure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When do the changes of pregnancy start, and what drives them?",
+   "a": "**They start after conception, driven primarily by endocrine signals from the conceptus/placenta.**\n\n## Understanding it\n- Hormones from the developing pregnancy (placenta) **drive** the adaptations from conception.\n\n>> Begin at conception; driven by placental/endocrine signals.",
+   "opts": [
+    "After conception; driven by placental/endocrine signals",
+    "Driven mainly by maternal exercise",
+    "Only in the third trimester",
+    "Only after labour begins"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What does the cardiovascular adaptation of pregnancy ensure?",
+   "a": "**That oxygen and nutrients are delivered to the uterus and placenta.**\n\n## Understanding it\n- The CV changes exist to **perfuse the uteroplacental unit**.\n\n>> Deliver oxygen/nutrients to the uterus and placenta.",
+   "opts": [
+    "Delivery of oxygen and nutrients to the uterus/placenta",
+    "Reduced blood flow to conserve energy",
+    "Increased blood pressure to protect the mother",
+    "Delivery of blood only to the brain"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What two effects do elevated oestrogen and progesterone have on the cardiovascular system?",
+   "a": "**They lower systemic vascular resistance and increase cardiac output.**\n\n## Understanding it\n- The sex steroids **vasodilate** (↓SVR) and drive a **higher cardiac output**.\n\n>> ↓ SVR and ↑ cardiac output.",
+   "opts": [
+    "Lower systemic vascular resistance and raise cardiac output",
+    "Have no cardiovascular effect",
+    "Raise both SVR and blood pressure",
+    "Raise SVR and lower cardiac output"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "By how much does plasma volume increase in pregnancy?",
+   "a": "**By 40%–50% above the non-pregnant level.**\n\n## Understanding it\n- Plasma volume rises **~40–50%** — the biggest fluid change of pregnancy.\n\n>> Plasma volume ↑ 40–50%.",
+   "opts": [
+    "By 40–50%",
+    "It does not change",
+    "By 100%",
+    "By 10%"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "By how much does red blood cell mass increase, and what stimulates it?",
+   "a": "**By only 15%–20%, stimulated by increased erythropoietin.**\n\n## Understanding it\n- RBC mass rises modestly (**15–20%**) via **erythropoietin** — less than the plasma rise.\n\n>> RBC mass ↑ 15–20% (erythropoietin).",
+   "opts": [
+    "By 40–50%, matching plasma",
+    "By 15–20%, driven by erythropoietin",
+    "It decreases in pregnancy",
+    "By 50%, driven by iron"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the physiological anaemia of pregnancy?",
+   "a": "**Plasma volume expansion outpaces the rise in RBC mass, causing haemodilution (a lower measured haemoglobin).**\n\n## Understanding it\n- Plasma (↑40–50%) rises far more than red cells (↑15–20%) → **diluted** Hb, even with more total red cells.\n\n>> Dilutional anaemia: plasma rises more than red-cell mass.",
+   "opts": [
+    "Loss of red cells to the fetus",
+    "Bone marrow failure",
+    "Haemodilution — plasma rises more than red-cell mass",
+    "A true iron-deficiency anaemia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the clinical importance of the physiological anaemia of pregnancy?",
+   "a": "**Haemoglobin of 10.5–11 g/dL is considered physiologically normal in pregnancy (a lower threshold than in non-pregnant women).**\n\n## Understanding it\n- Because of dilution, a lower Hb (down to ~10.5–11) is **normal**, so the anaemia cut-off is adjusted.\n\n>> Hb ~10.5–11 g/dL is normal in pregnancy.",
+   "opts": [
+    "Any Hb below 13 needs transfusion",
+    "Hb should rise above non-pregnant levels",
+    "It always indicates iron deficiency",
+    "Hb of 10.5–11 g/dL is physiologically normal"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much does cardiac output increase in pregnancy?",
+   "a": "**By 30%–50%.**\n\n## Understanding it\n- Cardiac output rises **~30–50%** to perfuse the uteroplacental unit.\n\n>> Cardiac output ↑ 30–50%.",
+   "opts": [
+    "It falls by 20%",
+    "By 5%",
+    "By 30–50%",
+    "By 100%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the equation for cardiac output.",
+   "a": "**Cardiac output = heart rate × stroke volume.**\n\n## Understanding it\n- CO = HR × SV; both rise in pregnancy, raising CO.\n\n>> CO = HR × SV.",
+   "opts": [
+    "CO = stroke volume ÷ heart rate",
+    "CO = blood pressure ÷ SVR",
+    "CO = SVR × heart rate",
+    "CO = heart rate × stroke volume"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much does stroke volume increase, when, and why?",
+   "a": "**By 20–30%, early in pregnancy, due to increased end-diastolic volume and myocardial hypertrophy.**\n\n## Understanding it\n- More preload (↑EDV) and a mildly hypertrophied heart raise **stroke volume early**.\n\n>> SV ↑ 20–30% early (↑EDV + hypertrophy).",
+   "opts": [
+    "By 20–30%, early, from ↑EDV and myocardial hypertrophy",
+    "By 50%, late, from tachycardia",
+    "No change occurs",
+    "It falls due to lower preload"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does heart rate change in pregnancy?",
+   "a": "**It increases progressively, by 15–20 bpm above baseline.**\n\n## Understanding it\n- HR climbs steadily through pregnancy (**~15–20 bpm** higher).\n\n>> HR ↑ ~15–20 bpm progressively.",
+   "opts": [
+    "Falls by 15–20 bpm",
+    "Increases progressively by 15–20 bpm",
+    "Stays exactly the same",
+    "Rises only in the first trimester then falls"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "By how much does systemic vascular resistance decrease?",
+   "a": "**By 25%–30%.**\n\n## Understanding it\n- Vasodilation drops SVR by **~25–30%**, which lowers blood pressure despite higher CO.\n\n>> SVR ↓ 25–30%.",
+   "opts": [
+    "It increases by 25%",
+    "No change",
+    "By 5%",
+    "By 25–30%"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the three drivers of the fall in systemic vascular resistance.",
+   "a": "**Progesterone's smooth-muscle-relaxing effect; increased local vasodilators (e.g. nitric oxide/prostacyclin); and the low-resistance uteroplacental circulation.**\n\n## Understanding it\n- Progesterone + vasodilator mediators + the low-resistance placental bed all lower SVR.\n\n>> Progesterone, vasodilator mediators, low-resistance placenta.",
+   "opts": [
+    "Adrenaline, cortisol, and cold",
+    "Increased SVR from oestrogen",
+    "Reduced blood volume",
+    "Progesterone, local vasodilators (NO/prostacyclin), low-resistance placenta"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why does blood pressure fall in pregnancy despite the increase in cardiac output?",
+   "a": "**Because of the large drop in systemic vascular resistance.**\n\n## Understanding it\n- BP = CO × SVR; the **big SVR fall** outweighs the CO rise, so BP falls.\n\n>> The SVR fall dominates → BP falls.",
+   "opts": [
+    "The large fall in systemic vascular resistance dominates",
+    "Because cardiac output actually falls",
+    "Because blood volume falls",
+    "Because heart rate slows"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which falls more in pregnancy, the systolic or the diastolic blood pressure?",
+   "a": "**The diastolic falls more than the systolic.**\n\n## Understanding it\n- Vasodilation lowers the **diastolic** more, widening the pulse pressure.\n\n>> Diastolic falls more than systolic.",
+   "opts": [
+    "Neither changes",
+    "The systolic",
+    "They fall equally",
+    "The diastolic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When is the lowest blood pressure reached in pregnancy, and what happens afterwards?",
+   "a": "**Around 20–24 weeks, then it gradually returns toward the pre-pregnancy baseline by term.**\n\n## Understanding it\n- BP nadirs at **~20–24 weeks**, then climbs back to baseline.\n\n>> Nadir ~20–24 weeks; back to baseline by term.",
+   "opts": [
+    "Around 20–24 weeks, then rises back to baseline by term",
+    "It never changes",
+    "At term, then stays low",
+    "In the first week, then rises steadily"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is 20 weeks gestation used as the cut-off for gestational hypertension (PIH)?",
+   "a": "**Because BP physiologically falls to its lowest around 20–24 weeks; hypertension appearing after 20 weeks is therefore pathological, not the normal dip.**\n\n## Understanding it\n- Since BP is naturally **low** at ~20 weeks, a rise after 20 weeks signals true gestational hypertension.\n\n>> BP is naturally low at 20 wk; new HTN after that is pathological.",
+   "opts": [
+    "Because the fetus is viable at 20 weeks",
+    "BP naturally nadirs ~20 wk, so new HTN after that is pathological",
+    "Because the uterus reaches the umbilicus",
+    "It is an arbitrary legal cut-off"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens when a pregnant woman lies supine?",
+   "a": "**The gravid uterus compresses the IVC and lower aorta (aortocaval compression), reducing venous return.**\n\n## Understanding it\n- Lying flat lets the heavy uterus **squeeze the great vessels**, cutting venous return.\n\n>> Supine → aortocaval compression → ↓ venous return.",
+   "opts": [
+    "Venous return increases",
+    "The uterus compresses the IVC and aorta (aortocaval compression)",
+    "Blood pressure rises sharply",
+    "Nothing happens"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the consequences of aortocaval compression?",
+   "a": "**A drop in stroke volume and cardiac output → supine hypotensive syndrome (dizziness, hypotension, fetal compromise).**\n\n## Understanding it\n- Less venous return → less CO → **maternal hypotension and reduced placental perfusion**.\n\n>> ↓ venous return → ↓ CO → supine hypotension.",
+   "opts": [
+    "↓ stroke volume/CO → supine hypotensive syndrome",
+    "Increased maternal blood pressure",
+    "Improved placental blood flow",
+    "A rise in cardiac output"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How should pregnant women in late pregnancy lie, and why?",
+   "a": "**In the left lateral tilt, to displace the uterus off the great vessels.**\n\n## Understanding it\n- Tilting **left** moves the uterus off the IVC/aorta, restoring venous return.\n\n>> Left lateral tilt relieves aortocaval compression.",
+   "opts": [
+    "Flat on the back for comfort",
+    "Sitting fully upright always",
+    "Right lateral only",
+    "Left lateral tilt — to displace the uterus off the great vessels"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does the respiratory system adapt to ensure?",
+   "a": "**That the ~20% increased oxygen demand is met and CO2 is cleared efficiently.**\n\n## Understanding it\n- Breathing adapts to a **higher oxygen requirement** and to remove more CO2.\n\n>> Meet ↑ oxygen demand and clear CO2.",
+   "opts": [
+    "Reduce oxygen use to conserve energy",
+    "Meet the ~20% higher oxygen demand and clear CO2",
+    "Retain CO2 deliberately",
+    "Decrease the metabolic rate"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "By how much does tidal volume increase in pregnancy?",
+   "a": "**By 30%–40%.**\n\n## Understanding it\n- Deeper breaths: tidal volume rises **~30–40%** (the main driver of higher minute ventilation).\n\n>> Tidal volume ↑ 30–40%.",
+   "opts": [
+    "No change",
+    "It falls by 30%",
+    "By 5%",
+    "By 30–40%"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What happens to functional residual capacity in pregnancy?",
+   "a": "**It is reduced by 10–20%.**\n\n## Understanding it\n- The enlarging uterus pushes the diaphragm up, **reducing FRC by 10–20%**.\n\n>> FRC ↓ 10–20%.",
+   "opts": [
+    "Increased by 10–20%",
+    "Unchanged",
+    "Reduced by 10–20%",
+    "Reduced by 50%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is minute ventilation, and how does it change in pregnancy?",
+   "a": "**Minute ventilation = tidal volume × respiratory rate; it increases by 30–40% (mainly from the tidal volume rise).**\n\n## Understanding it\n- MV rises **~30–40%**, driven chiefly by deeper breaths → a mild respiratory alkalosis.\n\n>> MV = TV × RR; ↑ 30–40%.",
+   "opts": [
+    "MV = TV ÷ RR; unchanged",
+    "It falls by 30–40%",
+    "MV = FRC × RR",
+    "MV = TV × RR; increased by 30–40%"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What happens to residual volume in pregnancy?",
+   "a": "**It decreases by 15–20%.**\n\n## Understanding it\n- Residual volume falls (**~15–20%**) as the diaphragm is elevated.\n\n>> RV ↓ 15–20%.",
+   "opts": [
+    "Doubles",
+    "Decreases by 15–20%",
+    "Increases by 15–20%",
+    "Unchanged"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens to vital capacity in pregnancy?",
+   "a": "**It is unchanged.**\n\n## Understanding it\n- Despite the other changes, **vital capacity stays the same**.\n\n>> Vital capacity unchanged.",
+   "opts": [
+    "Falls markedly",
+    "Falls by 50%",
+    "Unchanged",
+    "Doubles"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What must the maternal kidneys process in pregnancy?",
+   "a": "**Both maternal waste and fetal metabolic byproducts.**\n\n## Understanding it\n- The mother's kidneys clear waste for **two** — herself and the fetus.\n\n>> Maternal + fetal waste.",
+   "opts": [
+    "Both maternal and fetal metabolic waste",
+    "Only fetal waste",
+    "Neither — the placenta does it all",
+    "Only maternal waste"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the anatomical renal changes of pregnancy?",
+   "a": "**Hydronephrosis and hydroureter (dilatation of the renal pelvis and ureters).**\n\n## Understanding it\n- The collecting system **dilates** (physiological hydronephrosis/hydroureter).\n\n>> Hydronephrosis and hydroureter.",
+   "opts": [
+    "Complete ureteric obstruction",
+    "Renal shrinkage and fibrosis",
+    "No anatomical change",
+    "Hydronephrosis and hydroureter"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the two causes of hydronephrosis and hydroureter in pregnancy?",
+   "a": "**Progesterone-induced smooth-muscle relaxation, and mechanical compression of the ureters by the gravid uterus.**\n\n## Understanding it\n- Hormonal relaxation **plus** physical compression dilate the ureters.\n\n>> Progesterone relaxation + uterine compression.",
+   "opts": [
+    "High blood pressure alone",
+    "Kidney stones and infection",
+    "Excess fluid intake",
+    "Progesterone relaxation and uterine compression of the ureters"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is hydronephrosis worse on the right than the left in pregnancy?",
+   "a": "**Because of dextrorotation of the uterus, plus a cushioning effect on the left ureter from the sigmoid colon.**\n\n## Understanding it\n- The uterus rotates rightward (dextrorotation) and the sigmoid colon protects the left ureter → **right side worse**.\n\n>> Dextrorotation + sigmoid cushions the left → right worse.",
+   "opts": [
+    "Uterine dextrorotation; the sigmoid cushions the left ureter",
+    "Right-sided stones are more common",
+    "The right kidney is larger",
+    "The left ureter is congenitally absent"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the clinical significance of urinary stasis in pregnancy?",
+   "a": "**It increases the risk of progression from asymptomatic bacteriuria to acute pyelonephritis.**\n\n## Understanding it\n- Stagnant urine lets bacteria ascend → **asymptomatic bacteriuria can become pyelonephritis** (hence screening/treatment).\n\n>> Stasis → bacteriuria progresses to pyelonephritis.",
+   "opts": [
+    "It causes kidney stones only",
+    "Bacteriuria may progress to acute pyelonephritis",
+    "It lowers blood pressure",
+    "It has no clinical importance"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "By how much does renal plasma flow increase in pregnancy?",
+   "a": "**By up to 50%–80%.**\n\n## Understanding it\n- Renal plasma flow rises markedly (**up to 50–80%**), raising GFR.\n\n>> RPF ↑ up to 50–80%.",
+   "opts": [
+    "It falls by 50%",
+    "By 5%",
+    "No change",
+    "By up to 50–80%"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much does the glomerular filtration rate increase in pregnancy?",
+   "a": "**By up to 50%.**\n\n## Understanding it\n- GFR rises **~50%**, so creatinine/urea are cleared faster and their blood levels fall.\n\n>> GFR ↑ up to 50%.",
+   "opts": [
+    "By 5%",
+    "Unchanged",
+    "By up to 50%",
+    "It falls by 50%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does hyperfiltration lead to in pregnancy?",
+   "a": "**Increased clearance of creatinine, urea and uric acid, so their serum levels decrease.**\n\n## Understanding it\n- Higher GFR **washes out** creatinine/urea/urate → their blood levels drop (so 'normal' non-pregnant values are actually high).\n\n>> More clearance → lower serum creatinine/urea/urate.",
+   "opts": [
+    "Higher serum creatinine",
+    "Retention of creatinine and urea",
+    "No change in clearance",
+    "Greater clearance → lower serum creatinine, urea and urate"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the serum creatinine level in pregnancy, and what is the non-pregnant level?",
+   "a": "**0.4–0.6 mg/dL in pregnancy, versus about 0.8 mg/dL non-pregnant.**\n\n## Understanding it\n- Because of hyperfiltration, pregnant creatinine is **lower** (~0.4–0.6) than non-pregnant (~0.8).\n\n>> Pregnancy 0.4–0.6; non-pregnant ~0.8 mg/dL.",
+   "opts": [
+    "Both are 0.8 mg/dL",
+    "0.8 mg/dL vs 0.4 mg/dL",
+    "0.4–0.6 mg/dL (pregnant) vs ~0.8 mg/dL (non-pregnant)",
+    "1.5 mg/dL vs 0.8 mg/dL"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does a creatinine of 0.8 mg/dL or higher in pregnancy indicate?",
+   "a": "**It warrants evaluation for underlying renal impairment or pre-eclampsia.**\n\n## Understanding it\n- A creatinine that would be 'normal' non-pregnant is **relatively high** in pregnancy → investigate.\n\n>> ≥0.8 mg/dL is abnormal in pregnancy → evaluate.",
+   "opts": [
+    "It confirms good kidney function",
+    "It indicates dehydration only",
+    "Possible renal impairment or pre-eclampsia — needs evaluation",
+    "It is completely normal in pregnancy"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why does glycosuria occur in pregnancy?",
+   "a": "**Because the high GFR exceeds the renal threshold for complete glucose reabsorption.**\n\n## Understanding it\n- More glucose is filtered than the tubules can reabsorb → **glucose spills into urine** (often benign in pregnancy).\n\n>> High GFR exceeds glucose reabsorption threshold → glycosuria.",
+   "opts": [
+    "The kidney makes glucose",
+    "High GFR exceeds the tubular glucose reabsorption threshold",
+    "The blood glucose is always very high",
+    "It always means diabetes"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens to urinary protein excretion in pregnancy?",
+   "a": "**There is a mild increase.**\n\n## Understanding it\n- A **small** rise in proteinuria is physiological (heavy proteinuria is not).\n\n>> Mild increase in urinary protein.",
+   "opts": [
+    "A large increase (nephrotic range)",
+    "It halves",
+    "A mild increase",
+    "It stops completely"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the nature of the GI changes of pregnancy, and what drives them?",
+   "a": "**Primarily functional, driven by the smooth-muscle-relaxant effect of progesterone.**\n\n## Understanding it\n- GI changes are mostly **motility (functional)**, from **progesterone** relaxing smooth muscle.\n\n>> Functional, progesterone-driven smooth-muscle relaxation.",
+   "opts": [
+    "Driven by oestrogen only",
+    "Functional, driven by progesterone's smooth-muscle relaxation",
+    "Caused by fetal hormones directly",
+    "Structural destruction of the gut"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What effect does high progesterone have on the lower oesophageal sphincter, and what results?",
+   "a": "**It decreases LES tone, resulting in gastro-oesophageal reflux (GERD/heartburn).**\n\n## Understanding it\n- A relaxed LES lets acid reflux up → **heartburn**.\n\n>> ↓ LES tone → reflux (heartburn).",
+   "opts": [
+    "Lowers LES tone → gastro-oesophageal reflux",
+    "Closes the LES tightly",
+    "Raises LES tone → constipation",
+    "No effect on the LES"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What two factors combine to cause GERD in pregnancy?",
+   "a": "**Decreased LES tone plus increased intra-abdominal pressure from the expanding uterus.**\n\n## Understanding it\n- A weaker sphincter **and** more pressure pushing up from below → reflux.\n\n>> ↓ LES tone + ↑ intra-abdominal pressure.",
+   "opts": [
+    "Reduced LES tone and raised intra-abdominal pressure",
+    "Increased gastric emptying and low pressure",
+    "High LES tone and low pressure",
+    "Reduced stomach acid"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the other effects of progesterone on the GI tract?",
+   "a": "**Decreased intestinal motility (constipation) and decreased gall bladder motility (predisposing to gallstones/cholelithiasis).**\n\n## Understanding it\n- Slower gut → **constipation**; sluggish gallbladder → **gallstones**.\n\n>> Constipation and gallstone risk.",
+   "opts": [
+    "Constipation and reduced gallbladder motility (gallstones)",
+    "No GI effect",
+    "Increased motility everywhere",
+    "Diarrhoea and rapid emptying"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What effect does oestrogen have on the gums in pregnancy?",
+   "a": "**It causes gingival hyperplasia and bleeding gums — epulis gravidarum ('pregnancy tumour').**\n\n## Understanding it\n- Oestrogen makes gums **swollen and bleed easily** (pregnancy gingivitis/epulis).\n\n>> Gingival hyperplasia/bleeding — epulis gravidarum.",
+   "opts": [
+    "No oral change",
+    "Loss of all teeth",
+    "Gum recession and dryness",
+    "Gingival hyperplasia and bleeding gums (epulis gravidarum)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes haemorrhoids in pregnancy?",
+   "a": "**Constipation plus elevated pelvic venous pressure from uterine compression.**\n\n## Understanding it\n- Straining (constipation) and **raised pelvic venous pressure** engorge the rectal veins → haemorrhoids.\n\n>> Constipation + raised pelvic venous pressure.",
+   "opts": [
+    "Iron deficiency",
+    "Low blood pressure",
+    "Constipation and raised pelvic venous pressure",
+    "Excess exercise"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What happens to alkaline phosphatase in pregnancy, and why?",
+   "a": "**It doubles or triples, due to placental production.**\n\n## Understanding it\n- The **placenta makes ALP**, so a high ALP is normal in pregnancy (not liver/bone disease).\n\n>> ALP ↑ 2–3× (placental).",
+   "opts": [
+    "Falls to zero",
+    "Rises only from liver disease",
+    "Doubles/triples — from placental production",
+    "Is unchanged"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How is the haematological state of pregnancy described, and why?",
+   "a": "**As a hypercoagulable state — an evolutionary adaptation to prevent fatal postpartum haemorrhage.**\n\n## Understanding it\n- Blood is made **more clottable** to limit bleeding at delivery — but this raises clot (VTE) risk.\n\n>> Hypercoagulable — to reduce postpartum haemorrhage.",
+   "opts": [
+    "Hypercoagulable — to prevent fatal postpartum haemorrhage",
+    "Anticoagulated to protect the fetus",
+    "Unchanged from non-pregnant",
+    "Hypocoagulable — to prevent clots"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which procoagulant factors increase in pregnancy?",
+   "a": "**Fibrinogen and factors VII, VIII, IX and XII, plus von Willebrand factor.**\n\n## Understanding it\n- Many clotting factors rise (fibrinogen, VII/VIII/IX/XII, vWF) → hypercoagulability.\n\n>> Fibrinogen, VII/VIII/IX/XII, vWF ↑.",
+   "opts": [
+    "Fibrinogen, factors VII/VIII/IX/XII, and vWF",
+    "Antithrombin only",
+    "No factors change",
+    "Protein C and S"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which anticoagulant decreases in pregnancy, and what happens to fibrinolysis?",
+   "a": "**Protein S decreases, and fibrinolysis is decreased.**\n\n## Understanding it\n- Falling **protein S** and reduced clot breakdown (fibrinolysis) add to the hypercoagulable state.\n\n>> ↓ Protein S; ↓ fibrinolysis.",
+   "opts": [
+    "Protein S rises and fibrinolysis increases",
+    "Fibrinogen falls",
+    "Nothing changes",
+    "Protein S falls and fibrinolysis is reduced"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much is the risk of DVT and pulmonary embolism increased in pregnancy?",
+   "a": "**Up to 4–5 fold.**\n\n## Understanding it\n- Hypercoagulability + venous stasis raise VTE risk **~4–5×** — a leading cause of maternal death.\n\n>> DVT/PE risk ↑ 4–5 fold.",
+   "opts": [
+    "Up to 4–5 fold",
+    "Reduced by half",
+    "Unchanged",
+    "100 fold"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What happens to the white cell count in pregnancy?",
+   "a": "**There is a physiological leucocytosis.**\n\n## Understanding it\n- The WBC count **rises** normally in pregnancy (and further in labour) — not necessarily infection.\n\n>> Physiological leucocytosis.",
+   "opts": [
+    "Leucopenia (low WBC)",
+    "A fall to zero",
+    "No change",
+    "A physiological leucocytosis (raised WBC)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the purpose of the endocrine changes of pregnancy?",
+   "a": "**To transform maternal metabolism to prioritise fetal nutrient supply (a complete endocrine 'revolution').**\n\n## Understanding it\n- Hormones reprogram metabolism so **glucose/nutrients flow to the fetus**.\n\n>> Redirect maternal metabolism to feed the fetus.",
+   "opts": [
+    "Reprogram maternal metabolism to supply the fetus",
+    "Have no metabolic effect",
+    "Reduce fetal nutrient supply",
+    "Shut down maternal metabolism"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which hormones increase to produce insulin resistance in pregnancy?",
+   "a": "**Oestrogen, human placental lactogen, progesterone, cortisol, and placental growth hormone.**\n\n## Understanding it\n- These placental/maternal hormones **oppose insulin**, diverting glucose to the fetus.\n\n>> Oestrogen, hPL, progesterone, cortisol, placental GH.",
+   "opts": [
+    "Oestrogen, hPL, progesterone, cortisol, placental GH",
+    "Insulin and glucagon only",
+    "Thyroxine and calcitonin",
+    "No hormones cause it"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What must the maternal response be to hormone-induced insulin resistance?",
+   "a": "**She must increase insulin secretion to maintain euglycaemia.**\n\n## Understanding it\n- To counter the resistance and keep glucose normal, the pancreas **secretes more insulin**.\n\n>> ↑ Insulin secretion to stay euglycaemic.",
+   "opts": [
+    "Decrease insulin secretion",
+    "Increase insulin secretion to maintain normal glucose",
+    "Produce more glucagon",
+    "Stop eating carbohydrates"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When does gestational diabetes mellitus occur?",
+   "a": "**When the maternal pancreatic response is insufficient to overcome the hormone-induced insulin resistance.**\n\n## Understanding it\n- If the pancreas **can't make enough insulin** to beat the resistance, blood glucose rises → GDM.\n\n>> Pancreas can't overcome the insulin resistance → GDM.",
+   "opts": [
+    "When the fetus makes insulin",
+    "Only in women with type 1 diabetes",
+    "When too much insulin is made",
+    "When insulin secretion can't overcome the resistance"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "By how much does the pituitary gland enlarge in pregnancy, and why?",
+   "a": "**By up to 135%, due to hypertrophy and hyperplasia of the prolactin-producing lactotrophs.**\n\n## Understanding it\n- The pituitary grows (**~135%**) as **lactotrophs** expand to prepare for lactation.\n\n>> ↑ ~135% (lactotroph hypertrophy/hyperplasia).",
+   "opts": [
+    "No change occurs",
+    "It shrinks by 135%",
+    "Up to 135% — lactotroph hypertrophy and hyperplasia",
+    "Due to tumour growth"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the pituitary prone to in pregnancy, and under what circumstances?",
+   "a": "**Sheehan syndrome (pituitary infarction/necrosis) if severe postpartum haemorrhage and hypovolaemic shock occur.**\n\n## Understanding it\n- The enlarged, vascular pituitary is vulnerable; **severe PPH/shock** can infarct it → Sheehan syndrome (hypopituitarism).\n\n>> Sheehan syndrome after severe PPH/shock.",
+   "opts": [
+    "No specific risk",
+    "Diabetes insipidus, from dehydration",
+    "A pituitary tumour, from oestrogen",
+    "Sheehan syndrome, after severe postpartum haemorrhage/shock"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes hyperpigmentation in pregnancy?",
+   "a": "**Elevated MSH (melanocyte-stimulating hormone) and oestrogen.**\n\n## Understanding it\n- **MSH and oestrogen** stimulate melanocytes → darkening.\n\n>> ↑ MSH and oestrogen → hyperpigmentation.",
+   "opts": [
+    "Iron deposition in the skin",
+    "Raised insulin",
+    "Low oestrogen",
+    "Raised MSH and oestrogen"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which areas darken in pregnancy?",
+   "a": "**The areolae, perineum, axillae, and the midline of the abdomen (linea nigra).**\n\n## Understanding it\n- Classic darkening: **areolae, perineum, axillae, linea nigra**.\n\n>> Areolae, perineum, axillae, linea nigra.",
+   "opts": [
+    "The whole body uniformly",
+    "Only the palms and soles",
+    "Only the face",
+    "Areolae, perineum, axillae, and linea nigra"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the other skin changes of pregnancy.",
+   "a": "**Melasma (chloasma); striae gravidarum; and vascular changes — palmar erythema and spider naevi.**\n\n## Understanding it\n- Also: facial melasma, stretch marks (striae), and vascular signs (palmar erythema, spider naevi) from high oestrogen.\n\n>> Melasma, striae, palmar erythema, spider naevi.",
+   "opts": [
+    "Melasma, striae gravidarum, palmar erythema, spider naevi",
+    "Honey-coloured crusts",
+    "Psoriatic plaques",
+    "Vitiligo and hypopigmentation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the musculoskeletal changes of pregnancy?",
+   "a": "**Progressive lumbar lordosis and joint laxity.**\n\n## Understanding it\n- The growing uterus shifts the centre of gravity (**lordosis**), and relaxin loosens joints (**laxity**) → back/pelvic pain.\n\n>> Lumbar lordosis and joint laxity.",
+   "opts": [
+    "Loss of bone density only",
+    "Reduced lordosis and stiff joints",
+    "No musculoskeletal change",
+    "Progressive lumbar lordosis and joint laxity"
+   ],
+   "ans": 3
+  }
+ ]
 }

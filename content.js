@@ -17942,255 +17942,696 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "In what environment do spores of fungi occur?",
-         "a": "In the hot and humid, or arid, tropical environment."
+         "a": "**In hot and humid, or arid, tropical environments.**\n\n## Understanding it\n- Fungi thrive where it is warm — both humid and dry tropical settings.\n\n>> Warm tropical environments (humid or arid).",
+         "opts": [
+          "Hot and humid, or arid, tropical environments",
+          "Only cold, dry climates",
+          "Only in fresh water",
+          "Only sterile hospital surfaces"
+         ],
+         "ans": 0
         },
         {
          "q": "What factors favour the spread of fungal infections among children?",
-         "a": "Poor personal and community hygiene; closeness among large families; and institutions such as schools, camps and barracks."
+         "a": "**Poor personal/community hygiene; closeness among large families; and institutions (e.g. schools, orphanages).**\n\n## Understanding it\n- Crowding, close contact and poor hygiene spread the spores.\n\n>> Poor hygiene, crowding, institutions.",
+         "opts": [
+          "Poor hygiene, crowding in large families, institutions",
+          "Vaccination status",
+          "Good hygiene and isolation",
+          "Cold, dry weather"
+         ],
+         "ans": 0
         },
         {
          "q": "Which body structures do most fungal infections affect?",
-         "a": "The skin, hair, nails and mucosa."
+         "a": "**The skin, hair, nails and mucosa.**\n\n## Understanding it\n- Superficial fungi favour **keratinised** tissues (skin, hair, nails) and mucosa.\n\n>> Skin, hair, nails, mucosa.",
+         "opts": [
+          "The bloodstream and heart",
+          "Muscle and tendon",
+          "Skin, hair, nails and mucosa",
+          "Bone and joints only"
+         ],
+         "ans": 2
         },
         {
          "q": "List the five superficial fungal skin infections.",
-         "a": "Candidiasis, tinea capitis, tinea corporis, tinea pedis, and pityriasis versicolor."
+         "a": "**Candidiasis, tinea capitis, tinea corporis, tinea pedis, and pityriasis versicolor.**\n\n## Understanding it\n- Superficial = candida + the tineas + pityriasis versicolor (stratum corneum/keratin).\n\n>> Candidiasis, tinea capitis/corporis/pedis, pityriasis versicolor.",
+         "opts": [
+          "Mycetoma, blastomycosis, histoplasmosis, sporotrichosis",
+          "Cellulitis, impetigo, folliculitis, SSSS",
+          "Scabies, pediculosis, larva migrans, myiasis",
+          "Candidiasis, tinea capitis, tinea corporis, tinea pedis, pityriasis versicolor"
+         ],
+         "ans": 3
         },
         {
          "q": "List the five deep fungal skin infections.",
-         "a": "Mycetoma (Madura foot), blastomycosis, coccidiomycosis, histoplasmosis, and sporotrichosis."
+         "a": "**Mycetoma (Madura foot), blastomycosis, coccidioidomycosis, histoplasmosis, and sporotrichosis.**\n\n## Understanding it\n- Deep mycoses invade subcutaneous tissue/organs (often after inhalation or implantation).\n\n>> Mycetoma, blastomycosis, coccidioidomycosis, histoplasmosis, sporotrichosis.",
+         "opts": [
+          "Mycetoma, blastomycosis, coccidioidomycosis, histoplasmosis, sporotrichosis",
+          "Eczema, psoriasis, vitiligo, urticaria",
+          "Impetigo, cellulitis, folliculitis, SSSS",
+          "Candidiasis, tinea capitis/corporis/pedis, versicolor"
+         ],
+         "ans": 0
         },
         {
          "q": "Which organisms cause candidiasis?",
-         "a": "Candida albicans, C. tropicalis, C. stellatoidea, C. krusei, or other yeasts of the genus Candida."
+         "a": "**Candida albicans (and C. tropicalis, C. stellatoidea, C. krusei) — yeasts of the genus Candida.**\n\n## Understanding it\n- Candidiasis is caused by yeasts, chiefly **C. albicans**.\n\n>> Candida species (mainly C. albicans).",
+         "opts": [
+          "Sporothrix schenckii",
+          "Candida species (chiefly C. albicans)",
+          "Malassezia furfur",
+          "Trichophyton species (dermatophytes)"
+         ],
+         "ans": 1
         },
         {
          "q": "Where do candida infections usually occur?",
-         "a": "On the skin, mucous membranes, nail folds and nails, gastrointestinal tract and genital tract; in systemic infections the viscera may be involved."
+         "a": "**On the skin, mucous membranes, nail folds and nails, GI tract and genital tract.**\n\n## Understanding it\n- Candida favours warm, moist surfaces — mucosa, skin folds, nails, gut, genitals.\n\n>> Skin, mucosa, nails, GI and genital tract.",
+         "opts": [
+          "Only the deep subcutaneous tissue",
+          "Skin, mucosa, nail folds, GI and genital tract",
+          "Only the lungs",
+          "Only the scalp hair"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the skin lesions of candidiasis and where they occur.",
-         "a": "Dusky red macerated or erosive lesions in the skin folds of the neck, flanks, large flexures and limbs."
+         "a": "**Dusky red, macerated or erosive lesions in skin folds (neck, flanks, large flexures) — moist, intertriginous areas.**\n\n## Understanding it\n- Candida loves warm moist **flexures/folds** → red macerated intertrigo, often with satellite lesions.\n\n>> Red macerated lesions in moist skin folds.",
+         "opts": [
+          "Scaly annular plaques on dry skin",
+          "Dusky red, macerated lesions in moist skin folds",
+          "Yellow cup-shaped scalp crusts",
+          "Painless subcutaneous nodules"
+         ],
+         "ans": 1
         },
         {
          "q": "What may follow scratching of candidal skin lesions?",
-         "a": "Fissuring and bleeding, with occurrence of secondary bacterial infection."
+         "a": "**Fissuring and bleeding, with secondary bacterial infection.**\n\n## Understanding it\n- Scratching breaks the macerated skin → fissures, bleeding and secondary bacterial infection.\n\n>> Fissuring, bleeding, secondary bacterial infection.",
+         "opts": [
+          "Spontaneous complete healing",
+          "Fissuring, bleeding and secondary bacterial infection",
+          "Conversion to a deep mycosis",
+          "Permanent depigmentation only"
+         ],
+         "ans": 1
         },
         {
          "q": "Which organism most commonly causes oral thrush?",
-         "a": "Candida albicans."
+         "a": "**Candida albicans.**\n\n## Understanding it\n- Oral thrush is almost always **C. albicans**.\n\n>> Oral thrush = C. albicans.",
+         "opts": [
+          "Trichophyton tonsurans",
+          "Candida albicans",
+          "Malassezia furfur",
+          "Streptococcus pyogenes"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the lesions of oral candidiasis.",
-         "a": "Curdy or whitish-grey, friable, cheesy pseudomembranous patches or plaques on markedly reddened mucosa."
+         "a": "**Curdy or whitish-grey, friable, cheesy pseudomembranous patches/plaques on markedly red mucosa.**\n\n## Understanding it\n- White 'cheesy' plaques on inflamed mucosa that **rub off** (unlike leukoplakia).\n\n>> White cheesy pseudomembranous plaques on red mucosa.",
+         "opts": [
+          "White cheesy pseudomembranous plaques on red mucosa",
+          "Annular scaly plaques",
+          "Painless firm nodules",
+          "Honey-coloured crusts"
+         ],
+         "ans": 0
         },
         {
          "q": "Where may the plaques of thrush be found?",
-         "a": "On the lips, buccal mucosa, tongue and palate, extending to the oesophagus/pharynx — they invade the mucosa superficially."
+         "a": "**On the lips, buccal mucosa, tongue and palate, extending to the pharynx/oesophagus (the tract lining is continuous).**\n\n## Understanding it\n- Thrush can spread along the continuous mucosa into the oesophagus/pharynx.\n\n>> Lips, cheeks, tongue, palate — may reach the oesophagus.",
+         "opts": [
+          "Only the nail folds",
+          "Only the soles of the feet",
+          "Only the scalp",
+          "Lips, buccal mucosa, tongue, palate — may extend to the oesophagus"
+         ],
+         "ans": 3
         },
         {
          "q": "What happens on removal of the plaques of thrush, and why is this useful?",
-         "a": "It may cause mild punctate areas of bleeding, which helps to confirm the diagnosis."
+         "a": "**Removal may cause mild punctate bleeding, which helps confirm the diagnosis.**\n\n## Understanding it\n- Scraping thrush leaves a raw, **pinpoint-bleeding** base — a useful bedside clue (unlike leukoplakia).\n\n>> Plaques rub off leaving pinpoint bleeding (diagnostic clue).",
+         "opts": [
+          "They turn black on removal",
+          "They rub off, leaving punctate bleeding (a diagnostic clue)",
+          "They leave a permanent scar",
+          "They cannot be removed at all"
+         ],
+         "ans": 1
         },
         {
          "q": "List the factors predisposing to candidiasis.",
-         "a": "Diabetes mellitus, retroviral disease, prolonged antibiotic and corticosteroid use, and leukaemia."
+         "a": "**Diabetes mellitus, retroviral disease (HIV), prolonged antibiotic and corticosteroid use, and immunosuppression.**\n\n## Understanding it\n- Candida overgrows when **immunity is low** or **normal flora is wiped out** (antibiotics).\n\n>> Diabetes, HIV, antibiotics/steroids, immunosuppression.",
+         "opts": [
+          "Cold, dry climate",
+          "Diabetes, HIV, prolonged antibiotics/steroids, immunosuppression",
+          "Good nutrition and intact immunity",
+          "Vaccination"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the treatment of oral candidiasis.",
-         "a": "Antifungal drugs such as clotrimazole, nystatin, amphotericin B or miconazole gel; and proper oral hygiene."
+         "a": "**Topical antifungals (clotrimazole, nystatin, amphotericin B, or miconazole gel), plus treating any predisposing factor.**\n\n## Understanding it\n- Local antifungals for thrush, and fix the underlying cause (e.g. control diabetes, review antibiotics/steroids).\n\n>> Nystatin/clotrimazole/miconazole + treat the cause.",
+         "opts": [
+          "Nystatin/clotrimazole/miconazole, and treat predisposing factors",
+          "Topical steroid alone",
+          "A single antibiotic course",
+          "Oral griseofulvin"
+         ],
+         "ans": 0
         },
         {
          "q": "What is tinea capitis and which organism most often causes it?",
-         "a": "A dermatophyte infection of the scalp, most often caused by Trichophyton tonsurans; occasionally by Microsporum canis, and much less commonly by other Microsporum and Trichophyton species."
+         "a": "**A dermatophyte infection of the scalp, most often caused by Trichophyton tonsurans.**\n\n## Understanding it\n- Tinea capitis = scalp ringworm, usually **T. tonsurans**.\n\n>> Scalp dermatophytosis; usually T. tonsurans.",
+         "opts": [
+          "A bacterial folliculitis",
+          "A Malassezia infection",
+          "Scalp dermatophyte infection — usually T. tonsurans",
+          "A candida infection of the scalp"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the lesions and hairs in tinea capitis.",
-         "a": "Erythematous and scaly circular plaques (ringworm), within which the infected hairs become brittle and broken with different lengths."
+         "a": "**Erythematous, scaly, circular (ring) plaques within which the infected hairs break off.**\n\n## Understanding it\n- Ringworm plaques on the scalp with **broken hairs** (leaving black dots/stubble).\n\n>> Scaly ring plaques with broken-off hairs.",
+         "opts": [
+          "Painless subcutaneous nodules",
+          "Scaly circular plaques with broken-off hairs",
+          "White cheesy plaques that rub off",
+          "Yellow cup-shaped crusts only"
+         ],
+         "ans": 1
         },
         {
          "q": "What appearance do multiple affected sites produce in tinea capitis?",
-         "a": "A moth-eaten appearance of the hair."
+         "a": "**A moth-eaten appearance of the hair.**\n\n## Understanding it\n- Multiple patches of broken hair give a patchy 'moth-eaten' look.\n\n>> Moth-eaten hair appearance.",
+         "opts": [
+          "A scaly annular body rash",
+          "A moth-eaten appearance of the hair",
+          "A honey-crusted rash",
+          "A uniform bald scalp"
+         ],
+         "ans": 1
         },
         {
          "q": "What else may develop in tinea capitis?",
-         "a": "Numerous confluent patches of alopecia; scaling and inflammation of the scalp are variable, and patients may complain of severe pruritus."
+         "a": "**Numerous confluent patches of alopecia, with variable scaling and scalp inflammation.**\n\n## Understanding it\n- Hair loss (alopecia) plus scaling/inflammation of variable severity.\n\n>> Patchy alopecia with scaling/inflammation.",
+         "opts": [
+          "Deep subcutaneous nodules",
+          "Confluent patches of alopecia with scaling/inflammation",
+          "Permanent depigmentation",
+          "Honey crusts on the face"
+         ],
+         "ans": 1
         },
         {
          "q": "What is a kerion and what causes it?",
-         "a": "An inflammatory and infected boggy mass covered in crusts, pus-filled bumps and localized hair loss — caused by the host's cellular immune response to tinea capitis."
+         "a": "**An inflammatory, boggy, pus-covered mass — a severe hypersensitivity/inflammatory reaction to the scalp dermatophyte.**\n\n## Understanding it\n- A kerion is an intense **inflammatory** response to tinea capitis; it can scar if untreated.\n\n>> Kerion = boggy inflamed pustular scalp mass (severe tinea reaction).",
+         "opts": [
+          "A painless lymphatic nodule chain",
+          "A hypopigmented scaly macule",
+          "A boggy, inflamed, pustular scalp mass (severe tinea reaction)",
+          "A white curdy oral plaque"
+         ],
+         "ans": 2
         },
         {
          "q": "What is favus and which organism causes it?",
-         "a": "A severe, chronic form of tinea capitis, typically caused by the dermatophyte Trichophyton schoenleinii."
+         "a": "**A severe, chronic form of tinea capitis, typically caused by Trichophyton schoenleinii.**\n\n## Understanding it\n- Favus is chronic scalp tinea (T. schoenleinii) forming cup-shaped crusts (scutula).\n\n>> Favus = chronic tinea capitis (T. schoenleinii).",
+         "opts": [
+          "Candidiasis of the scalp",
+          "A bacterial carbuncle",
+          "Pityriasis versicolor",
+          "Chronic tinea capitis caused by T. schoenleinii"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the lesions of favus.",
-         "a": "Thick, yellowish, cup-shaped yellow crusts called scutula that develop around hair follicles, often accompanied by a distinctive mousy odour; also termed honey-combed scalp lesions with yellow crusts and scales."
+         "a": "**Thick, yellowish, cup-shaped crusts (scutula) that develop around hair follicles.**\n\n## Understanding it\n- The hallmark is **scutula** — yellow cup-shaped crusts around follicles.\n\n>> Yellow cup-shaped scutula around follicles.",
+         "opts": [
+          "Honey-coloured facial crusts",
+          "Yellow cup-shaped crusts (scutula) around follicles",
+          "Silvery scaly plaques",
+          "White cheesy plaques"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens if favus is left untreated?",
-         "a": "It destroys the hair follicles, causes matting of the hair, and causes permanent scarring hair loss (alopecia)."
+         "a": "**It destroys hair follicles, mats the hair, and causes permanent scarring alopecia.**\n\n## Understanding it\n- Untreated favus scars the scalp → **permanent (scarring) hair loss**.\n\n>> Untreated favus → permanent scarring alopecia.",
+         "opts": [
+          "Follicle destruction, matting, and permanent scarring alopecia",
+          "Only temporary hair thinning",
+          "Conversion to candidiasis",
+          "Complete spontaneous recovery"
+         ],
+         "ans": 0
         },
         {
          "q": "How is tinea capitis diagnosed and treated?",
-         "a": "Diagnosis by scraping and KOH examination; treatment with oral griseofulvin, itraconazole or terbinafine, plus topical antifungal cream or shampoo."
+         "a": "**Diagnosis by scraping + KOH microscopy (± Wood lamp/culture); treatment needs ORAL antifungals (griseofulvin, itraconazole or terbinafine).**\n\n## Understanding it\n- Because the fungus is **inside the hair shaft**, topical treatment can't reach it — **oral** antifungals are required.\n\n>> KOH scraping; ORAL griseofulvin/itraconazole/terbinafine.",
+         "opts": [
+          "Blood culture; IV antibiotics",
+          "KOH scraping; oral griseofulvin/itraconazole/terbinafine",
+          "KOH scraping; topical cream alone",
+          "Biopsy; oral steroids"
+         ],
+         "ans": 1
         },
         {
          "q": "Define tinea corporis.",
-         "a": "A fungal infection of the glabrous skin, excluding the palms, soles and groin."
+         "a": "**A fungal (dermatophyte) infection of the glabrous (hairless) skin, excluding palms, soles and groin.**\n\n## Understanding it\n- Tinea corporis = ringworm of the **body skin** (not palms/soles/groin, which have their own names).\n\n>> Ringworm of glabrous body skin (not palms/soles/groin).",
+         "opts": [
+          "Infection of the scalp hair",
+          "Infection of the oral mucosa",
+          "Infection of the toe webs",
+          "Dermatophyte infection of glabrous body skin"
+         ],
+         "ans": 3
         },
         {
          "q": "Which organisms most commonly cause tinea corporis?",
-         "a": "Trichophyton rubrum and Trichophyton mentagrophytes; infections with Microsporum canis are also frequent."
+         "a": "**Trichophyton rubrum and T. mentagrophytes (also Microsporum canis and Epidermophyton).**\n\n## Understanding it\n- Dermatophytes — chiefly **T. rubrum/mentagrophytes**; M. canis comes from pets.\n\n>> T. rubrum/mentagrophytes (M. canis from pets).",
+         "opts": [
+          "Trichophyton rubrum and T. mentagrophytes",
+          "Candida albicans",
+          "Staphylococcus aureus",
+          "Malassezia furfur"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the characteristic lesion of tinea corporis.",
-         "a": "A dry, mildly erythematous, elevated, scaly papule or plaque that spreads centrifugally and clears centrally to form the characteristic annular lesion; the active edge shows vesicles and pustules."
+         "a": "**A dry, mildly erythematous, elevated, scaly papule/plaque that spreads centrifugally with central clearing (an active advancing edge).**\n\n## Understanding it\n- The classic **annular ('ring') lesion** — active scaly border, clearing centre.\n\n>> Annular plaque: active scaly edge, central clearing.",
+         "opts": [
+          "Annular scaly plaque with an active edge and central clearing",
+          "Yellow cup-shaped crusts",
+          "A white curdy plaque",
+          "A macerated red flexural rash"
+         ],
+         "ans": 0
         },
         {
          "q": "How is tinea corporis acquired?",
-         "a": "Usually by direct contact from an infected person, surfaces, and pets (M. canis)."
+         "a": "**By direct contact from an infected person, contaminated surfaces, or pets (M. canis).**\n\n## Understanding it\n- Spread by contact — people, fomites, and animals (kittens/puppies for M. canis).\n\n>> Contact with infected people, surfaces, or pets.",
+         "opts": [
+          "Contaminated food",
+          "Mosquito bites",
+          "Direct contact with infected people, surfaces or pets",
+          "Inhalation of spores"
+         ],
+         "ans": 2
         },
         {
          "q": "Name the forms of tinea corporis according to site.",
-         "a": "Tinea faciale (face), tinea axillaris (axilla), tinea cruris (groin), tinea manuum (hands), and tinea unguium (nails)."
+         "a": "**Tinea faciale (face), tinea axillaris (axilla), tinea cruris (groin), tinea manuum (hand), etc. — named by body region.**\n\n## Understanding it\n- The same infection is named by **site** (faciale, cruris, manuum, pedis, capitis).\n\n>> Named by region: faciale, cruris, manuum, etc.",
+         "opts": [
+          "Named by body region (faciale, cruris, manuum, etc.)",
+          "Named by the causative organism",
+          "Named by severity grade",
+          "Named by the patient's age"
+         ],
+         "ans": 0
         },
         {
          "q": "How is tinea corporis diagnosed?",
-         "a": "Clinically; by skin scraping and KOH examination; and by culture of skin scrapings for identifying the species of dermatophyte."
+         "a": "**Clinically; by skin scraping + KOH microscopy; and by culture of scrapings for identification.**\n\n## Understanding it\n- KOH microscopy of the **advancing scaly edge** shows hyphae; culture identifies the species.\n\n>> Clinical + KOH scraping (± culture).",
+         "opts": [
+          "Blood culture only",
+          "Wood lamp alone is definitive",
+          "Skin biopsy is always required",
+          "Clinically and by KOH microscopy of scrapings (± culture)"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the treatment of tinea corporis.",
-         "a": "Topical antifungal agents such as imidazoles, terbinafine or naftifine; and in severe cases oral griseofulvin or itraconazole."
+         "a": "**Topical antifungals (imidazoles, terbinafine or naftifine); oral antifungals in severe/extensive cases.**\n\n## Understanding it\n- Localised disease → **topical** antifungal; widespread → oral.\n\n>> Topical antifungal (oral if severe).",
+         "opts": [
+          "Topical antifungals (oral if severe/extensive)",
+          "Nystatin mouth gel",
+          "Oral antibiotics",
+          "Topical steroid alone"
+         ],
+         "ans": 0
         },
         {
          "q": "What is tinea pedis and which organisms cause it?",
-         "a": "Athlete's foot — a fungal infection of the toe webs and soles of the feet, caused by Trichophyton rubrum, Trichophyton mentagrophytes and Epidermophyton floccosum."
+         "a": "**Athlete's foot — infection of the toe webs and soles, caused by Trichophyton (rubrum/mentagrophytes) and Epidermophyton.**\n\n## Understanding it\n- Tinea pedis = foot dermatophytosis (toe webs/soles), classic dermatophytes.\n\n>> Athlete's foot; Trichophyton/Epidermophyton.",
+         "opts": [
+          "A bacterial cellulitis",
+          "A candida infection of the feet",
+          "A Malassezia infection",
+          "Athlete's foot — Trichophyton/Epidermophyton"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the usual appearance of tinea pedis.",
-         "a": "The subdigital crevices are fissured, with maceration and peeling of the surrounding skin."
+         "a": "**The subdigital (toe-web) crevices are fissured, with maceration and peeling of the surrounding skin.**\n\n## Understanding it\n- Classic interdigital tinea pedis: **macerated, fissured, peeling toe webs** (esp. 4th web).\n\n>> Macerated, fissured, peeling toe webs.",
+         "opts": [
+          "White curdy oral plaques",
+          "Annular plaques on the trunk",
+          "Yellow cup-shaped crusts",
+          "Macerated, fissured, peeling toe webs"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the less common presentations of tinea pedis.",
-         "a": "Less commonly, a chronic diffuse hyperkeratosis of the sole of the foot occurs with only mild erythema; occasionally the papules progress to vesicles and bullae that may become pustular."
+         "a": "**A chronic diffuse hyperkeratosis of the sole ('moccasin' pattern) with only slight erythema.**\n\n## Understanding it\n- Besides toe-web disease, tinea pedis can cause a dry **scaly thickening of the whole sole** (moccasin type).\n\n>> Chronic hyperkeratotic 'moccasin' sole.",
+         "opts": [
+          "Chronic diffuse hyperkeratosis of the sole (moccasin type)",
+          "Deep subcutaneous nodules",
+          "Honey-crusted erosions",
+          "Hypopigmented trunk macules"
+         ],
+         "ans": 0
         },
         {
          "q": "Which symptoms are characteristic of tinea pedis?",
-         "a": "Severe tenderness, itching, and a persistent foul odour."
+         "a": "**Severe tenderness, itching, and a persistent foul odour.**\n\n## Understanding it\n- Itch, tenderness and a characteristic **foul smell** of the feet.\n\n>> Itching, tenderness, foul odour.",
+         "opts": [
+          "A sweet fruity smell",
+          "Tenderness, itching, and foul odour",
+          "Painless numbness",
+          "No symptoms at all"
+         ],
+         "ans": 1
         },
         {
          "q": "How is tinea pedis diagnosed and treated?",
-         "a": "Diagnosis by fungal mycelia seen on microscopic examination of a KOH preparation, or by culture. Treatment: avoidance of occlusive footwear, careful drying between the toes after bathing, topical zinc undecylenate powder, imidazole cream, and oral griseofulvin."
+         "a": "**Diagnosis by fungal hyphae on KOH microscopy (± culture); treatment with topical antifungals (and keeping the feet dry), oral antifungals if severe.**\n\n## Understanding it\n- KOH shows hyphae; treat with topical antifungal + moisture control; oral for resistant/severe.\n\n>> KOH; topical antifungal + dry feet (oral if severe).",
+         "opts": [
+          "Biopsy; nystatin gel",
+          "Blood culture; IV antibiotics",
+          "Wood lamp; oral steroids",
+          "KOH microscopy; topical antifungals and keeping feet dry"
+         ],
+         "ans": 3
         },
         {
          "q": "What is pityriasis versicolor and which organism causes it?",
-         "a": "A common chronic fungal infection of the stratum corneum, caused by the dimorphic yeast Malassezia furfur, found in areas of skin rich in sebum production."
+         "a": "**A common chronic infection of the stratum corneum caused by the dimorphic yeast Malassezia furfur (Pityrosporum).**\n\n## Understanding it\n- Not a dermatophyte — caused by **Malassezia**, a lipophilic skin yeast.\n\n>> Malassezia furfur infection of the stratum corneum.",
+         "opts": [
+          "A bacterial infection",
+          "A Candida infection",
+          "Malassezia furfur infection of the stratum corneum",
+          "A Trichophyton (dermatophyte) infection"
+         ],
+         "ans": 2
         },
         {
          "q": "In whom is pityriasis versicolor most prevalent?",
-         "a": "Adolescents and young adults."
+         "a": "**Adolescents and young adults.**\n\n## Understanding it\n- It peaks in **adolescents/young adults** (active sebaceous glands feed the lipophilic yeast).\n\n>> Adolescents and young adults.",
+         "opts": [
+          "Only immunocompromised infants",
+          "Adolescents and young adults",
+          "Neonates only",
+          "The elderly only"
+         ],
+         "ans": 1
         },
         {
          "q": "List the predisposing factors to pityriasis versicolor.",
-         "a": "A warm humid environment, excessive sweating, occlusion, high plasma cortisol levels, immunosuppression, malnourishment, and genetically determined susceptibility."
+         "a": "**A warm humid environment, excessive sweating, occlusion, high plasma cortisol, and immunosuppression.**\n\n## Understanding it\n- Heat, sweat, occlusion and high cortisol/immunosuppression favour Malassezia overgrowth.\n\n>> Heat, sweating, occlusion, high cortisol, immunosuppression.",
+         "opts": [
+          "Cold dry climate and good hygiene",
+          "Old age alone",
+          "Warm humid climate, sweating, occlusion, high cortisol, immunosuppression",
+          "Vaccination"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the lesions of pityriasis versicolor and their sites.",
-         "a": "Hypopigmented or hyperpigmented macules covered with a fine scale, often merging to form confluent patches; most commonly on the neck, upper chest, back and upper arms."
+         "a": "**Hypo- or hyperpigmented macules with a fine scale, often merging into patches, mainly on the trunk, neck and upper arms.**\n\n## Understanding it\n- Variably-coloured ('versicolor') finely-scaly macules on the **upper trunk**.\n\n>> Hypo/hyperpigmented finely-scaly macules on the trunk.",
+         "opts": [
+          "Yellow cup-shaped scalp crusts",
+          "White curdy plaques on mucosa",
+          "Hypo/hyperpigmented finely-scaly macules on the trunk",
+          "Annular plaques with central clearing"
+         ],
+         "ans": 2
         },
         {
          "q": "How is pityriasis versicolor diagnosed?",
-         "a": "Wood lamp, KOH preparation of scrapings, and skin biopsy."
+         "a": "**Wood lamp (yellow fluorescence), KOH preparation of scrapings ('spaghetti and meatballs'), and skin biopsy.**\n\n## Understanding it\n- KOH shows the classic **short hyphae + spores** ('spaghetti and meatballs'); Wood lamp fluoresces.\n\n>> Wood lamp + KOH ('spaghetti and meatballs').",
+         "opts": [
+          "Wood lamp, KOH scrapings, and biopsy",
+          "Sensation testing with cotton wool",
+          "A glass tumbler blanch test",
+          "Blood culture only"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the treatment of pityriasis versicolor.",
-         "a": "Selenium sulfide suspension applied overnight; imidazole or terbinafine cream twice daily for 2–4 weeks; and oral therapy with ketoconazole, fluconazole or itraconazole."
+         "a": "**Selenium sulfide suspension overnight; imidazole or terbinafine cream twice daily; oral antifungals for extensive disease.**\n\n## Understanding it\n- Topical selenium sulfide/azoles; oral azoles if widespread. (Repigmentation lags after cure.)\n\n>> Selenium sulfide/azole cream (oral if extensive).",
+         "opts": [
+          "Systemic steroids",
+          "Topical antibiotic",
+          "Selenium sulfide and azole/terbinafine creams (oral if extensive)",
+          "Oral griseofulvin"
+         ],
+         "ans": 2
         },
         {
          "q": "What causes histoplasmosis and how is it acquired?",
-         "a": "Histoplasma capsulatum and H. duboisii — dimorphic fungi acquired by inhalation of fungal spores."
+         "a": "**Histoplasma capsulatum and H. duboisii — dimorphic fungi acquired by inhaling fungal spores.**\n\n## Understanding it\n- A **deep mycosis** acquired by **inhalation** (not skin contact).\n\n>> Histoplasma; inhaled spores.",
+         "opts": [
+          "Sporothrix implanted by a thorn",
+          "Histoplasma (capsulatum/duboisii), inhaled spores",
+          "A dermatophyte from skin contact",
+          "Candida from the gut"
+         ],
+         "ans": 1
         },
         {
          "q": "Where are the fungi of histoplasmosis found?",
-         "a": "In the soil and in the droppings of some animals, e.g. bats and poultry."
+         "a": "**In soil and in the droppings of some animals — e.g. bats and poultry.**\n\n## Understanding it\n- Histoplasma grows in soil enriched with **bat/bird droppings**.\n\n>> Soil with bat/bird droppings.",
+         "opts": [
+          "On thorny plants",
+          "Soil and bat/bird droppings",
+          "Only in fresh water",
+          "In the human gut"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the spread of histoplasmosis.",
-         "a": "The primary infection is in the lungs, with haematogenous spread to the liver, bone marrow, spleen, lymph nodes and subcutaneous tissue."
+         "a": "**Primary infection is in the lungs, with haematogenous spread to the liver, bone marrow, spleen and other organs.**\n\n## Understanding it\n- Starts in the **lungs**, then disseminates via the blood to reticuloendothelial organs.\n\n>> Lungs first, then blood-borne spread to organs.",
+         "opts": [
+          "Lungs first, then haematogenous spread to organs",
+          "Skin first, then along lymphatics",
+          "Only local skin involvement",
+          "Gut first, then the brain"
+         ],
+         "ans": 0
         },
         {
          "q": "How does African histoplasmosis (H. duboisii) present?",
-         "a": "As subcutaneous nodules which tend to umbilicate and suppurate or ulcerate as they grow."
+         "a": "**As subcutaneous nodules that tend to umbilicate and suppurate or ulcerate as they grow.**\n\n## Understanding it\n- H. duboisii (African) is more **cutaneous/subcutaneous and bony** than pulmonary.\n\n>> Subcutaneous nodules that umbilicate/ulcerate.",
+         "opts": [
+          "Annular scaly body plaques",
+          "White oral plaques",
+          "Purely a lung infection",
+          "Subcutaneous nodules that umbilicate and ulcerate"
+         ],
+         "ans": 3
         },
         {
          "q": "How does H. capsulatum characteristically present?",
-         "a": "It affects the lungs, and may present with productive cough and constitutional symptoms."
+         "a": "**It affects the lungs, presenting with productive cough and constitutional symptoms.**\n\n## Understanding it\n- Classic H. capsulatum is a **pulmonary** illness (cough + constitutional symptoms).\n\n>> Pulmonary — cough and constitutional symptoms.",
+         "opts": [
+          "A scalp kerion",
+          "Purely subcutaneous nodules",
+          "Oral thrush",
+          "Pulmonary — productive cough and constitutional symptoms"
+         ],
+         "ans": 3
         },
         {
          "q": "How is histoplasmosis diagnosed and treated?",
-         "a": "By isolation and identification of the causative fungus in cultures from sputum, bone marrow, lymph node biopsy, or pus or scrapings from ulcers. Treatment: IV amphotericin B; oral itraconazole or ketoconazole."
+         "a": "**By isolating/identifying the fungus in cultures (sputum, bone marrow, etc.); treated with antifungals such as amphotericin B or itraconazole.**\n\n## Understanding it\n- Culture/identification confirms it; treat with **amphotericin B/itraconazole**.\n\n>> Culture; amphotericin B/itraconazole.",
+         "opts": [
+          "Culture/identification; amphotericin B or itraconazole",
+          "Wood lamp; selenium sulfide",
+          "KOH scraping; topical cream",
+          "Blood film; antibiotics"
+         ],
+         "ans": 0
         },
         {
          "q": "What causes sporotrichosis and how is it acquired?",
-         "a": "Accidental implantation into the skin of Sporothrix schenckii, which grows on thorny plants."
+         "a": "**Accidental implantation into the skin of Sporothrix schenckii, which grows on thorny plants/vegetation.**\n\n## Understanding it\n- The 'rose-gardener's disease' — **implanted** by a thorn prick, not inhaled.\n\n>> Sporothrix schenckii, implanted by thorns.",
+         "opts": [
+          "Sporothrix schenckii, implanted through skin trauma (thorns)",
+          "Inhaled Histoplasma spores",
+          "A dermatophyte via contact",
+          "Candida overgrowth"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the initial lesion of sporotrichosis.",
-         "a": "A firm, painless or mildly tender subcutaneous nodule at the site of skin trauma, presenting as a purple, violaceous, hyperpigmented brown, or dark grey nodule."
+         "a": "**A firm, painless or mildly tender subcutaneous nodule at the site of skin trauma.**\n\n## Understanding it\n- Starts as a solitary **subcutaneous nodule** at the inoculation site.\n\n>> Painless subcutaneous nodule at the trauma site.",
+         "opts": [
+          "A boggy scalp mass",
+          "An annular scaly plaque",
+          "A painless/mildly tender subcutaneous nodule at the injury site",
+          "A white oral plaque"
+         ],
+         "ans": 2
         },
         {
          "q": "How does the sporotrichosis nodule progress?",
-         "a": "The primary nodule grows larger, becomes pustular, and may open into a chronic, hollowed-out sore (ulceration)."
+         "a": "**The primary nodule enlarges, becomes pustular, and may open into a chronic ulcer, with new nodules tracking along lymphatics.**\n\n## Understanding it\n- Classic **lymphocutaneous** spread — a chain of nodules/ulcers along the draining lymphatics.\n\n>> Ulcerates and spreads along lymphatics (nodular chain).",
+         "opts": [
+          "Spreads by inhalation to the lungs",
+          "Heals within a day",
+          "Ulcerates and spreads along lymphatics as a nodular chain",
+          "Becomes a white mucosal plaque"
+         ],
+         "ans": 2
         },
         {
          "q": "How may sporotrichosis spread?",
-         "a": "By lymphatic or haematogenous routes to muscles, bones, joints or other tissues; inhalation of spores may cause lung infection."
+         "a": "**By lymphatic or haematogenous routes to muscles, bones, joints or other tissues (inhalation can cause pulmonary disease).**\n\n## Understanding it\n- Mostly lymphocutaneous, but can disseminate to bone/joint or (rarely, if inhaled) the lungs.\n\n>> Lymphatic/haematogenous spread (± pulmonary if inhaled).",
+         "opts": [
+          "Only by direct skin contact",
+          "It never spreads beyond the skin",
+          "Only through the gut",
+          "Lymphatic/haematogenous spread to bone, joints, etc."
+         ],
+         "ans": 3
         },
         {
          "q": "How is sporotrichosis diagnosed and treated?",
-         "a": "Diagnosis by microscopic demonstration of the fungus in preparations from scrapings or biopsy. Treatment: potassium iodide, IV amphotericin B, or oral itraconazole."
+         "a": "**Diagnosis by microscopy/culture of the fungus from scrapings or biopsy; treated with itraconazole (or potassium iodide; amphotericin B for severe/systemic).**\n\n## Understanding it\n- Culture confirms; **itraconazole** is standard (KI historically; amphotericin for systemic).\n\n>> Culture; itraconazole (± KI / amphotericin B).",
+         "opts": [
+          "Wood lamp; selenium sulfide",
+          "Blood film; penicillin",
+          "Culture/microscopy; itraconazole (± potassium iodide)",
+          "KOH; topical steroid"
+         ],
+         "ans": 2
         },
         {
          "q": "What causes blastomycosis and how is it acquired?",
-         "a": "Blastomyces dermatitidis, acquired by inhalation of fungal spores."
+         "a": "**Blastomyces dermatitidis, acquired by inhaling fungal spores.**\n\n## Understanding it\n- A deep mycosis acquired by **inhalation** (lungs first).\n\n>> Blastomyces dermatitidis; inhaled.",
+         "opts": [
+          "Candida overgrowth",
+          "A dermatophyte via skin contact",
+          "Blastomyces dermatitidis, inhaled",
+          "Sporothrix via a thorn"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the spread and skin lesions of blastomycosis.",
-         "a": "Primary infection is in the lungs with haematogenous spread to the skin, bone and genital tract; it presents as irregularly crusted plaques, superficial ulcerative lesions, or firm subcutaneous nodules on exposed parts of the body."
+         "a": "**Primary lung infection with haematogenous spread to skin, bone and genitalia; skin lesions are verrucous/ulcerated.**\n\n## Understanding it\n- Lungs → blood → **skin (warty/ulcerated), bone, GU tract**.\n\n>> Lungs first; then skin (verrucous), bone, GU.",
+         "opts": [
+          "Lungs first, then skin (verrucous/ulcerated), bone and GU",
+          "White oral plaques only",
+          "Purely a scalp infection",
+          "Skin only, spreading along lymphatics"
+         ],
+         "ans": 0
         },
         {
          "q": "How is blastomycosis diagnosed and treated?",
-         "a": "Diagnosis by characteristic budding cells seen in KOH preparation of materials from the lesion; treatment with IV amphotericin B."
+         "a": "**Diagnosis by characteristic broad-based budding yeast on KOH of specimens (± culture); treated with amphotericin B or itraconazole.**\n\n## Understanding it\n- Broad-based **budding yeast** on microscopy; treat with amphotericin B/itraconazole.\n\n>> Broad-based budding yeast; amphotericin B/itraconazole.",
+         "opts": [
+          "Broad-based budding yeast on KOH; amphotericin B/itraconazole",
+          "Gram stain; penicillin",
+          "Spaghetti-and-meatballs on KOH; selenium sulfide",
+          "Wood lamp; griseofulvin"
+         ],
+         "ans": 0
         },
         {
          "q": "What causes coccidiomycosis and how does it spread?",
-         "a": "Coccidioides immitis, a dimorphic fungus acquired by inhalation of fungal spores; primary infection is in the lungs with haematogenous spread to the skin, subcutaneous tissue and bones."
+         "a": "**Coccidioides immitis, a dimorphic fungus acquired by inhaling spores; primary infection is pulmonary with possible dissemination.**\n\n## Understanding it\n- Inhaled Coccidioides → **lung** infection that may disseminate.\n\n>> Coccidioides immitis, inhaled; pulmonary then disseminates.",
+         "opts": [
+          "Implanted by a thorn",
+          "Coccidioides immitis, inhaled; pulmonary then may disseminate",
+          "Candida from the gut",
+          "A dermatophyte via contact"
+         ],
+         "ans": 1
         },
         {
          "q": "What do the skin lesions of coccidiomycosis consist of, and how is it treated?",
-         "a": "Panniculitis, abscesses and draining sinuses; treated with oral ketoconazole or itraconazole."
+         "a": "**Panniculitis, abscesses and draining sinuses; treated with oral ketoconazole or itraconazole (amphotericin B for severe disease).**\n\n## Understanding it\n- Cutaneous coccidioidomycosis: **panniculitis/abscesses/sinuses**; azoles (± amphotericin).\n\n>> Panniculitis/abscesses/sinuses; ketoconazole/itraconazole.",
+         "opts": [
+          "Panniculitis, abscesses, draining sinuses; ketoconazole/itraconazole",
+          "Annular scaly plaques; topical cream",
+          "Honey crusts; mupirocin",
+          "White oral plaques; nystatin"
+         ],
+         "ans": 0
         },
         {
          "q": "What is mycetoma and which structures does it affect?",
-         "a": "Madura foot — a chronic infection of the skin, subcutaneous tissue and bones of the feet."
+         "a": "**Madura foot — a chronic infection of the skin, subcutaneous tissue and bones of the feet.**\n\n## Understanding it\n- Mycetoma ('Madura foot') chronically destroys the **skin, subcutis and bone** of the foot.\n\n>> Chronic skin/subcutaneous/bone infection of the foot.",
+         "opts": [
+          "Chronic infection of skin, subcutaneous tissue and bone of the foot",
+          "An acute lung infection",
+          "A scalp hair infection",
+          "An oral mucosal infection"
+         ],
+         "ans": 0
         },
         {
          "q": "How does mycetoma develop, and in whom is it common?",
-         "a": "It takes a very long time to develop and is rare in children; the microorganisms are typically introduced through minor injuries like a splinter or thorn prick, which is why it is common among agricultural workers."
+         "a": "**It develops very slowly and is rare in children; organisms are implanted through the skin (typically in adults doing barefoot outdoor work).**\n\n## Understanding it\n- A slow, chronic implantation infection — **rare in children**, common in barefoot rural adults.\n\n>> Slow-developing; rare in children (implanted through skin).",
+         "opts": [
+          "Spread person-to-person",
+          "Inhaled and acute",
+          "Rapidly developing; common in neonates",
+          "Very slow-developing; rare in children (skin implantation)"
+         ],
+         "ans": 3
         },
         {
          "q": "Distinguish eumycetoma from actinomycetoma.",
-         "a": "Eumycetoma is caused by fungi; actinomycetoma is caused by filamentous bacteria."
+         "a": "**Eumycetoma is caused by true fungi; actinomycetoma is caused by filamentous bacteria (actinomycetes).**\n\n## Understanding it\n- Same clinical picture, two causes: **fungi (eu-)** vs **bacteria (actino-)** — which matters for treatment.\n\n>> Eumycetoma = fungi; actinomycetoma = filamentous bacteria.",
+         "opts": [
+          "Both are caused by viruses",
+          "Both are caused by dermatophytes",
+          "Eumycetoma = bacteria; actinomycetoma = fungi",
+          "Eumycetoma = fungi; actinomycetoma = filamentous bacteria"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the causative organisms of mycetoma.",
-         "a": "Actinomycetes such as Nocardia brasiliensis, Actinomadura madurae and Streptomyces somaliensis; and fungi such as Pseudallescheria boydii, Madurella grisea or Madurella mycetomatis."
+         "a": "**Actinomycetes such as Nocardia brasiliensis, Actinomadura madurae and Streptomyces somaliensis (plus true fungi in eumycetoma).**\n\n## Understanding it\n- Actinomycetoma organisms: **Nocardia, Actinomadura, Streptomyces**; eumycetoma is true fungi.\n\n>> Nocardia, Actinomadura, Streptomyces (± true fungi).",
+         "opts": [
+          "Nocardia, Actinomadura, Streptomyces (and true fungi in eumycetoma)",
+          "Only Trichophyton species",
+          "Only Staphylococcus aureus",
+          "Only Candida species"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the treatment of mycetoma?",
-         "a": "Itraconazole."
+         "a": "**Itraconazole (with prolonged therapy; actinomycetoma also needs antibacterials such as co-trimoxazole).**\n\n## Understanding it\n- Prolonged antifungal (itraconazole) for eumycetoma; actinomycetoma additionally needs antibacterials.\n\n>> Itraconazole (prolonged; antibacterials for actinomycetoma).",
+         "opts": [
+          "No treatment is effective",
+          "Topical antifungal cream only",
+          "Itraconazole (prolonged; antibacterials for actinomycetoma)",
+          "A single antibiotic dose"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": null,
@@ -21684,255 +22125,696 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "What does pregnancy represent physiologically?",
-         "a": "A unique physiological state, characterised by profound, reversible adaptations across virtually every organ system in the maternal body."
+         "a": "**A unique physiological state characterised by profound, reversible adaptations across body systems.**\n\n## Understanding it\n- Pregnancy is a normal, **coordinated, reversible** remodelling — not disease.\n\n>> Pregnancy = profound reversible physiological adaptation.",
+         "opts": [
+          "A purely hormonal change with no system effects",
+          "An irreversible permanent change",
+          "A profound, reversible physiological adaptation across systems",
+          "A pathological, disease-like state"
+         ],
+         "ans": 2
         },
         {
          "q": "Are the adaptations of pregnancy pathological?",
-         "a": "No — they are not pathological; rather they are highly coordinated responses."
+         "a": "**No — they are not pathological; they are highly coordinated (physiological) responses.**\n\n## Understanding it\n- The changes are **adaptive and normal**, evolved to support the fetus.\n\n>> Adaptations are physiological, not pathological.",
+         "opts": [
+          "They only occur in complicated pregnancies",
+          "No — they are coordinated physiological responses",
+          "Yes — they are always pathological",
+          "They are random and uncoordinated"
+         ],
+         "ans": 1
         },
         {
          "q": "State the three purposes of the physiological adaptations of pregnancy.",
-         "a": "(1) To support the metabolic demands of the growing fetus and placenta; (2) to protect the mother from the physiological stressors of pregnancy and parturition, especially haemorrhage during delivery; and (3) to ensure adequate utero-placental perfusion for nutrient and gas exchange."
+         "a": "**To support the metabolic demands of the growing fetus/placenta; to protect the mother from complications (e.g. haemorrhage); and to prepare for labour, delivery and lactation.**\n\n## Understanding it\n- Support the fetus, protect the mother, prepare for birth/lactation.\n\n>> Support fetus, protect mother, prepare for delivery/lactation.",
+         "opts": [
+          "To cause disease that resolves after birth",
+          "Support the fetus, protect the mother, prepare for delivery/lactation",
+          "Only to increase the mother's weight",
+          "Only to raise blood pressure"
+         ],
+         "ans": 1
         },
         {
          "q": "When do the changes of pregnancy start, and what drives them?",
-         "a": "They start after conception, and are driven primarily by endocrine signals from the corpus luteum and the developing placenta — notably oestrogen, progesterone and human chorionic gonadotropin (hCG)."
+         "a": "**They start after conception, driven primarily by endocrine signals from the conceptus/placenta.**\n\n## Understanding it\n- Hormones from the developing pregnancy (placenta) **drive** the adaptations from conception.\n\n>> Begin at conception; driven by placental/endocrine signals.",
+         "opts": [
+          "After conception; driven by placental/endocrine signals",
+          "Driven mainly by maternal exercise",
+          "Only in the third trimester",
+          "Only after labour begins"
+         ],
+         "ans": 0
         },
         {
          "q": "What does the cardiovascular adaptation of pregnancy ensure?",
-         "a": "That oxygen and nutrients are delivered to the uterus and placenta."
+         "a": "**That oxygen and nutrients are delivered to the uterus and placenta.**\n\n## Understanding it\n- The CV changes exist to **perfuse the uteroplacental unit**.\n\n>> Deliver oxygen/nutrients to the uterus and placenta.",
+         "opts": [
+          "Delivery of oxygen and nutrients to the uterus/placenta",
+          "Reduced blood flow to conserve energy",
+          "Increased blood pressure to protect the mother",
+          "Delivery of blood only to the brain"
+         ],
+         "ans": 0
         },
         {
          "q": "What two effects do elevated oestrogen and progesterone have on the cardiovascular system?",
-         "a": "They cause systemic vascular resistance to be lowered, and cardiac output to increase."
+         "a": "**They lower systemic vascular resistance and increase cardiac output.**\n\n## Understanding it\n- The sex steroids **vasodilate** (↓SVR) and drive a **higher cardiac output**.\n\n>> ↓ SVR and ↑ cardiac output.",
+         "opts": [
+          "Lower systemic vascular resistance and raise cardiac output",
+          "Have no cardiovascular effect",
+          "Raise both SVR and blood pressure",
+          "Raise SVR and lower cardiac output"
+         ],
+         "ans": 0
         },
         {
          "q": "By how much does plasma volume increase in pregnancy?",
-         "a": "By 40%–50% above the non-pregnant level."
+         "a": "**By 40%–50% above the non-pregnant level.**\n\n## Understanding it\n- Plasma volume rises **~40–50%** — the biggest fluid change of pregnancy.\n\n>> Plasma volume ↑ 40–50%.",
+         "opts": [
+          "By 40–50%",
+          "It does not change",
+          "By 100%",
+          "By 10%"
+         ],
+         "ans": 0
         },
         {
          "q": "By how much does red blood cell mass increase, and what stimulates it?",
-         "a": "By only 15%–20%, stimulated by increased erythropoietin production."
+         "a": "**By only 15%–20%, stimulated by increased erythropoietin.**\n\n## Understanding it\n- RBC mass rises modestly (**15–20%**) via **erythropoietin** — less than the plasma rise.\n\n>> RBC mass ↑ 15–20% (erythropoietin).",
+         "opts": [
+          "By 40–50%, matching plasma",
+          "By 15–20%, driven by erythropoietin",
+          "It decreases in pregnancy",
+          "By 50%, driven by iron"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the physiological anaemia of pregnancy?",
-         "a": "Plasma volume expansion far outpaces the rise in RBC mass, leading to haemodilution — a fall in haemoglobin concentration and haematocrit."
+         "a": "**Plasma volume expansion outpaces the rise in RBC mass, causing haemodilution (a lower measured haemoglobin).**\n\n## Understanding it\n- Plasma (↑40–50%) rises far more than red cells (↑15–20%) → **diluted** Hb, even with more total red cells.\n\n>> Dilutional anaemia: plasma rises more than red-cell mass.",
+         "opts": [
+          "Loss of red cells to the fetus",
+          "Bone marrow failure",
+          "Haemodilution — plasma rises more than red-cell mass",
+          "A true iron-deficiency anaemia"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the clinical importance of the physiological anaemia of pregnancy?",
-         "a": "In pregnancy, haemoglobin levels of 10.5 g/dL to 11 g/dL are considered physiologically normal."
+         "a": "**Haemoglobin of 10.5–11 g/dL is considered physiologically normal in pregnancy (a lower threshold than in non-pregnant women).**\n\n## Understanding it\n- Because of dilution, a lower Hb (down to ~10.5–11) is **normal**, so the anaemia cut-off is adjusted.\n\n>> Hb ~10.5–11 g/dL is normal in pregnancy.",
+         "opts": [
+          "Any Hb below 13 needs transfusion",
+          "Hb should rise above non-pregnant levels",
+          "It always indicates iron deficiency",
+          "Hb of 10.5–11 g/dL is physiologically normal"
+         ],
+         "ans": 3
         },
         {
          "q": "By how much does cardiac output increase in pregnancy?",
-         "a": "By 30%–50%."
+         "a": "**By 30%–50%.**\n\n## Understanding it\n- Cardiac output rises **~30–50%** to perfuse the uteroplacental unit.\n\n>> Cardiac output ↑ 30–50%.",
+         "opts": [
+          "It falls by 20%",
+          "By 5%",
+          "By 30–50%",
+          "By 100%"
+         ],
+         "ans": 2
         },
         {
          "q": "State the equation for cardiac output.",
-         "a": "Cardiac output (CO) = Heart Rate (HR) × Stroke Volume (SV)."
+         "a": "**Cardiac output = heart rate × stroke volume.**\n\n## Understanding it\n- CO = HR × SV; both rise in pregnancy, raising CO.\n\n>> CO = HR × SV.",
+         "opts": [
+          "CO = stroke volume ÷ heart rate",
+          "CO = blood pressure ÷ SVR",
+          "CO = SVR × heart rate",
+          "CO = heart rate × stroke volume"
+         ],
+         "ans": 3
         },
         {
          "q": "By how much does stroke volume increase, when, and why?",
-         "a": "By 20–30%, early in pregnancy, due to increased end-diastolic volume and myocardial hypertrophy."
+         "a": "**By 20–30%, early in pregnancy, due to increased end-diastolic volume and myocardial hypertrophy.**\n\n## Understanding it\n- More preload (↑EDV) and a mildly hypertrophied heart raise **stroke volume early**.\n\n>> SV ↑ 20–30% early (↑EDV + hypertrophy).",
+         "opts": [
+          "By 20–30%, early, from ↑EDV and myocardial hypertrophy",
+          "By 50%, late, from tachycardia",
+          "No change occurs",
+          "It falls due to lower preload"
+         ],
+         "ans": 0
         },
         {
          "q": "How does heart rate change in pregnancy?",
-         "a": "It increases progressively throughout pregnancy, by 15–20 beats per minute above baseline."
+         "a": "**It increases progressively, by 15–20 bpm above baseline.**\n\n## Understanding it\n- HR climbs steadily through pregnancy (**~15–20 bpm** higher).\n\n>> HR ↑ ~15–20 bpm progressively.",
+         "opts": [
+          "Falls by 15–20 bpm",
+          "Increases progressively by 15–20 bpm",
+          "Stays exactly the same",
+          "Rises only in the first trimester then falls"
+         ],
+         "ans": 1
         },
         {
          "q": "By how much does systemic vascular resistance decrease?",
-         "a": "By 25%–30%."
+         "a": "**By 25%–30%.**\n\n## Understanding it\n- Vasodilation drops SVR by **~25–30%**, which lowers blood pressure despite higher CO.\n\n>> SVR ↓ 25–30%.",
+         "opts": [
+          "It increases by 25%",
+          "No change",
+          "By 5%",
+          "By 25–30%"
+         ],
+         "ans": 3
         },
         {
          "q": "State the three drivers of the fall in systemic vascular resistance.",
-         "a": "(i) The smooth muscle relaxing effect of progesterone; (ii) increased local production of vasodilators — nitric oxide (NO) and prostacyclin (PGI2); and (iii) the creation of a low-resistance, high-flow utero-placental circuit."
+         "a": "**Progesterone's smooth-muscle-relaxing effect; increased local vasodilators (e.g. nitric oxide/prostacyclin); and the low-resistance uteroplacental circulation.**\n\n## Understanding it\n- Progesterone + vasodilator mediators + the low-resistance placental bed all lower SVR.\n\n>> Progesterone, vasodilator mediators, low-resistance placenta.",
+         "opts": [
+          "Adrenaline, cortisol, and cold",
+          "Increased SVR from oestrogen",
+          "Reduced blood volume",
+          "Progesterone, local vasodilators (NO/prostacyclin), low-resistance placenta"
+         ],
+         "ans": 3
         },
         {
          "q": "Why does blood pressure fall in pregnancy despite the increase in cardiac output?",
-         "a": "Because of the massive drop in systemic vascular resistance."
+         "a": "**Because of the large drop in systemic vascular resistance.**\n\n## Understanding it\n- BP = CO × SVR; the **big SVR fall** outweighs the CO rise, so BP falls.\n\n>> The SVR fall dominates → BP falls.",
+         "opts": [
+          "The large fall in systemic vascular resistance dominates",
+          "Because cardiac output actually falls",
+          "Because blood volume falls",
+          "Because heart rate slows"
+         ],
+         "ans": 0
         },
         {
          "q": "Which falls more in pregnancy, the systolic or the diastolic blood pressure?",
-         "a": "The diastolic drops more than the systolic."
+         "a": "**The diastolic falls more than the systolic.**\n\n## Understanding it\n- Vasodilation lowers the **diastolic** more, widening the pulse pressure.\n\n>> Diastolic falls more than systolic.",
+         "opts": [
+          "Neither changes",
+          "The systolic",
+          "They fall equally",
+          "The diastolic"
+         ],
+         "ans": 3
         },
         {
          "q": "When is the lowest blood pressure reached in pregnancy, and what happens afterwards?",
-         "a": "Around 20–24 weeks, before gradually returning to the pre-pregnancy baseline at term."
+         "a": "**Around 20–24 weeks, then it gradually returns toward the pre-pregnancy baseline by term.**\n\n## Understanding it\n- BP nadirs at **~20–24 weeks**, then climbs back to baseline.\n\n>> Nadir ~20–24 weeks; back to baseline by term.",
+         "opts": [
+          "Around 20–24 weeks, then rises back to baseline by term",
+          "It never changes",
+          "At term, then stays low",
+          "In the first week, then rises steadily"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is 20 weeks gestation used as the cut-off for gestational hypertension (PIH)?",
-         "a": "Because the blood pressure physiologically falls to its lowest around 20–24 weeks before returning to baseline — so hypertension after 20 weeks can be attributed to the pregnancy."
+         "a": "**Because BP physiologically falls to its lowest around 20–24 weeks; hypertension appearing after 20 weeks is therefore pathological, not the normal dip.**\n\n## Understanding it\n- Since BP is naturally **low** at ~20 weeks, a rise after 20 weeks signals true gestational hypertension.\n\n>> BP is naturally low at 20 wk; new HTN after that is pathological.",
+         "opts": [
+          "Because the fetus is viable at 20 weeks",
+          "BP naturally nadirs ~20 wk, so new HTN after that is pathological",
+          "Because the uterus reaches the umbilicus",
+          "It is an arbitrary legal cut-off"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens when a pregnant woman lies supine?",
-         "a": "The gravid uterus compresses the inferior vena cava (IVC) and the lower aorta, leading to reduced venous return to the heart."
+         "a": "**The gravid uterus compresses the IVC and lower aorta (aortocaval compression), reducing venous return.**\n\n## Understanding it\n- Lying flat lets the heavy uterus **squeeze the great vessels**, cutting venous return.\n\n>> Supine → aortocaval compression → ↓ venous return.",
+         "opts": [
+          "Venous return increases",
+          "The uterus compresses the IVC and aorta (aortocaval compression)",
+          "Blood pressure rises sharply",
+          "Nothing happens"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the consequences of aortocaval compression?",
-         "a": "A drop in stroke volume and cardiac output, leading to supine hypotensive syndrome — dizziness, pallor and placental hypoperfusion."
+         "a": "**A drop in stroke volume and cardiac output → supine hypotensive syndrome (dizziness, hypotension, fetal compromise).**\n\n## Understanding it\n- Less venous return → less CO → **maternal hypotension and reduced placental perfusion**.\n\n>> ↓ venous return → ↓ CO → supine hypotension.",
+         "opts": [
+          "↓ stroke volume/CO → supine hypotensive syndrome",
+          "Increased maternal blood pressure",
+          "Improved placental blood flow",
+          "A rise in cardiac output"
+         ],
+         "ans": 0
         },
         {
          "q": "How should pregnant women in late pregnancy lie, and why?",
-         "a": "Always in left lateral tilt, to displace the uterus off the great vessels."
+         "a": "**In the left lateral tilt, to displace the uterus off the great vessels.**\n\n## Understanding it\n- Tilting **left** moves the uterus off the IVC/aorta, restoring venous return.\n\n>> Left lateral tilt relieves aortocaval compression.",
+         "opts": [
+          "Flat on the back for comfort",
+          "Sitting fully upright always",
+          "Right lateral only",
+          "Left lateral tilt — to displace the uterus off the great vessels"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the respiratory system adapt to ensure?",
-         "a": "That the increased metabolic demand for oxygen — elevated by roughly 20% — is met, and that fetal waste carbon dioxide is effectively cleared."
+         "a": "**That the ~20% increased oxygen demand is met and CO2 is cleared efficiently.**\n\n## Understanding it\n- Breathing adapts to a **higher oxygen requirement** and to remove more CO2.\n\n>> Meet ↑ oxygen demand and clear CO2.",
+         "opts": [
+          "Reduce oxygen use to conserve energy",
+          "Meet the ~20% higher oxygen demand and clear CO2",
+          "Retain CO2 deliberately",
+          "Decrease the metabolic rate"
+         ],
+         "ans": 1
         },
         {
          "q": "By how much does tidal volume increase in pregnancy?",
-         "a": "By 30%–40%."
+         "a": "**By 30%–40%.**\n\n## Understanding it\n- Deeper breaths: tidal volume rises **~30–40%** (the main driver of higher minute ventilation).\n\n>> Tidal volume ↑ 30–40%.",
+         "opts": [
+          "No change",
+          "It falls by 30%",
+          "By 5%",
+          "By 30–40%"
+         ],
+         "ans": 3
         },
         {
          "q": "What happens to functional residual capacity in pregnancy?",
-         "a": "It is reduced by 10–20%."
+         "a": "**It is reduced by 10–20%.**\n\n## Understanding it\n- The enlarging uterus pushes the diaphragm up, **reducing FRC by 10–20%**.\n\n>> FRC ↓ 10–20%.",
+         "opts": [
+          "Increased by 10–20%",
+          "Unchanged",
+          "Reduced by 10–20%",
+          "Reduced by 50%"
+         ],
+         "ans": 2
         },
         {
          "q": "What is minute ventilation, and how does it change in pregnancy?",
-         "a": "Minute ventilation = tidal volume × respiratory rate; it increases by 30–40%."
+         "a": "**Minute ventilation = tidal volume × respiratory rate; it increases by 30–40% (mainly from the tidal volume rise).**\n\n## Understanding it\n- MV rises **~30–40%**, driven chiefly by deeper breaths → a mild respiratory alkalosis.\n\n>> MV = TV × RR; ↑ 30–40%.",
+         "opts": [
+          "MV = TV ÷ RR; unchanged",
+          "It falls by 30–40%",
+          "MV = FRC × RR",
+          "MV = TV × RR; increased by 30–40%"
+         ],
+         "ans": 3
         },
         {
          "q": "What happens to residual volume in pregnancy?",
-         "a": "It decreases by 15–20%."
+         "a": "**It decreases by 15–20%.**\n\n## Understanding it\n- Residual volume falls (**~15–20%**) as the diaphragm is elevated.\n\n>> RV ↓ 15–20%.",
+         "opts": [
+          "Doubles",
+          "Decreases by 15–20%",
+          "Increases by 15–20%",
+          "Unchanged"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens to vital capacity in pregnancy?",
-         "a": "It is unchanged."
+         "a": "**It is unchanged.**\n\n## Understanding it\n- Despite the other changes, **vital capacity stays the same**.\n\n>> Vital capacity unchanged.",
+         "opts": [
+          "Falls markedly",
+          "Falls by 50%",
+          "Unchanged",
+          "Doubles"
+         ],
+         "ans": 2
         },
         {
          "q": "What must the maternal kidneys process in pregnancy?",
-         "a": "Both maternal waste and fetal metabolic byproducts."
+         "a": "**Both maternal waste and fetal metabolic byproducts.**\n\n## Understanding it\n- The mother's kidneys clear waste for **two** — herself and the fetus.\n\n>> Maternal + fetal waste.",
+         "opts": [
+          "Both maternal and fetal metabolic waste",
+          "Only fetal waste",
+          "Neither — the placenta does it all",
+          "Only maternal waste"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the anatomical renal changes of pregnancy?",
-         "a": "Hydronephrosis and hydroureters."
+         "a": "**Hydronephrosis and hydroureter (dilatation of the renal pelvis and ureters).**\n\n## Understanding it\n- The collecting system **dilates** (physiological hydronephrosis/hydroureter).\n\n>> Hydronephrosis and hydroureter.",
+         "opts": [
+          "Complete ureteric obstruction",
+          "Renal shrinkage and fibrosis",
+          "No anatomical change",
+          "Hydronephrosis and hydroureter"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the two causes of hydronephrosis and hydroureter in pregnancy?",
-         "a": "(i) Progesterone-induced smooth muscle relaxation; and (ii) compression of the ureters at the pelvic brim by the expanding uterus."
+         "a": "**Progesterone-induced smooth-muscle relaxation, and mechanical compression of the ureters by the gravid uterus.**\n\n## Understanding it\n- Hormonal relaxation **plus** physical compression dilate the ureters.\n\n>> Progesterone relaxation + uterine compression.",
+         "opts": [
+          "High blood pressure alone",
+          "Kidney stones and infection",
+          "Excess fluid intake",
+          "Progesterone relaxation and uterine compression of the ureters"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is hydronephrosis worse on the right than the left in pregnancy?",
-         "a": "Because of the dextrorotation of the uterus, and the cushioning effect on the left ureter by the sigmoid colon."
+         "a": "**Because of dextrorotation of the uterus, plus a cushioning effect on the left ureter from the sigmoid colon.**\n\n## Understanding it\n- The uterus rotates rightward (dextrorotation) and the sigmoid colon protects the left ureter → **right side worse**.\n\n>> Dextrorotation + sigmoid cushions the left → right worse.",
+         "opts": [
+          "Uterine dextrorotation; the sigmoid cushions the left ureter",
+          "Right-sided stones are more common",
+          "The right kidney is larger",
+          "The left ureter is congenitally absent"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the clinical significance of urinary stasis in pregnancy?",
-         "a": "It increases the risk of progression from asymptomatic bacteriuria to acute pyelonephritis."
+         "a": "**It increases the risk of progression from asymptomatic bacteriuria to acute pyelonephritis.**\n\n## Understanding it\n- Stagnant urine lets bacteria ascend → **asymptomatic bacteriuria can become pyelonephritis** (hence screening/treatment).\n\n>> Stasis → bacteriuria progresses to pyelonephritis.",
+         "opts": [
+          "It causes kidney stones only",
+          "Bacteriuria may progress to acute pyelonephritis",
+          "It lowers blood pressure",
+          "It has no clinical importance"
+         ],
+         "ans": 1
         },
         {
          "q": "By how much does renal plasma flow increase in pregnancy?",
-         "a": "By up to 50%–80%."
+         "a": "**By up to 50%–80%.**\n\n## Understanding it\n- Renal plasma flow rises markedly (**up to 50–80%**), raising GFR.\n\n>> RPF ↑ up to 50–80%.",
+         "opts": [
+          "It falls by 50%",
+          "By 5%",
+          "No change",
+          "By up to 50–80%"
+         ],
+         "ans": 3
         },
         {
          "q": "By how much does the glomerular filtration rate increase in pregnancy?",
-         "a": "By up to 50%."
+         "a": "**By up to 50%.**\n\n## Understanding it\n- GFR rises **~50%**, so creatinine/urea are cleared faster and their blood levels fall.\n\n>> GFR ↑ up to 50%.",
+         "opts": [
+          "By 5%",
+          "Unchanged",
+          "By up to 50%",
+          "It falls by 50%"
+         ],
+         "ans": 2
         },
         {
          "q": "What does hyperfiltration lead to in pregnancy?",
-         "a": "Clearance of creatinine, urea and uric acid is highly elevated, leading to a decreased serum creatinine."
+         "a": "**Increased clearance of creatinine, urea and uric acid, so their serum levels decrease.**\n\n## Understanding it\n- Higher GFR **washes out** creatinine/urea/urate → their blood levels drop (so 'normal' non-pregnant values are actually high).\n\n>> More clearance → lower serum creatinine/urea/urate.",
+         "opts": [
+          "Higher serum creatinine",
+          "Retention of creatinine and urea",
+          "No change in clearance",
+          "Greater clearance → lower serum creatinine, urea and urate"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the serum creatinine level in pregnancy, and what is the non-pregnant level?",
-         "a": "0.4–0.6 mg/dL in pregnancy, against a non-pregnant level of 0.8 mg/dL."
+         "a": "**0.4–0.6 mg/dL in pregnancy, versus about 0.8 mg/dL non-pregnant.**\n\n## Understanding it\n- Because of hyperfiltration, pregnant creatinine is **lower** (~0.4–0.6) than non-pregnant (~0.8).\n\n>> Pregnancy 0.4–0.6; non-pregnant ~0.8 mg/dL.",
+         "opts": [
+          "Both are 0.8 mg/dL",
+          "0.8 mg/dL vs 0.4 mg/dL",
+          "0.4–0.6 mg/dL (pregnant) vs ~0.8 mg/dL (non-pregnant)",
+          "1.5 mg/dL vs 0.8 mg/dL"
+         ],
+         "ans": 2
         },
         {
          "q": "What does a creatinine of 0.8 mg/dL or higher in pregnancy indicate?",
-         "a": "It warrants evaluation for underlying renal impairment or pre-eclampsia."
+         "a": "**It warrants evaluation for underlying renal impairment or pre-eclampsia.**\n\n## Understanding it\n- A creatinine that would be 'normal' non-pregnant is **relatively high** in pregnancy → investigate.\n\n>> ≥0.8 mg/dL is abnormal in pregnancy → evaluate.",
+         "opts": [
+          "It confirms good kidney function",
+          "It indicates dehydration only",
+          "Possible renal impairment or pre-eclampsia — needs evaluation",
+          "It is completely normal in pregnancy"
+         ],
+         "ans": 2
         },
         {
          "q": "Why does glycosuria occur in pregnancy?",
-         "a": "Because the high GFR leads to exceeding the renal threshold for complete glucose reabsorption."
+         "a": "**Because the high GFR exceeds the renal threshold for complete glucose reabsorption.**\n\n## Understanding it\n- More glucose is filtered than the tubules can reabsorb → **glucose spills into urine** (often benign in pregnancy).\n\n>> High GFR exceeds glucose reabsorption threshold → glycosuria.",
+         "opts": [
+          "The kidney makes glucose",
+          "High GFR exceeds the tubular glucose reabsorption threshold",
+          "The blood glucose is always very high",
+          "It always means diabetes"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens to urinary protein excretion in pregnancy?",
-         "a": "There is a mild increase."
+         "a": "**There is a mild increase.**\n\n## Understanding it\n- A **small** rise in proteinuria is physiological (heavy proteinuria is not).\n\n>> Mild increase in urinary protein.",
+         "opts": [
+          "A large increase (nephrotic range)",
+          "It halves",
+          "A mild increase",
+          "It stops completely"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the nature of the GI changes of pregnancy, and what drives them?",
-         "a": "They are primarily functional, driven by the smooth muscle relaxant properties of progesterone."
+         "a": "**Primarily functional, driven by the smooth-muscle-relaxant effect of progesterone.**\n\n## Understanding it\n- GI changes are mostly **motility (functional)**, from **progesterone** relaxing smooth muscle.\n\n>> Functional, progesterone-driven smooth-muscle relaxation.",
+         "opts": [
+          "Driven by oestrogen only",
+          "Functional, driven by progesterone's smooth-muscle relaxation",
+          "Caused by fetal hormones directly",
+          "Structural destruction of the gut"
+         ],
+         "ans": 1
         },
         {
          "q": "What effect does high progesterone have on the lower oesophageal sphincter, and what results?",
-         "a": "It decreases lower oesophageal sphincter (LES) tone, resulting in GERD (gastro-oesophageal reflux disease)."
+         "a": "**It decreases LES tone, resulting in gastro-oesophageal reflux (GERD/heartburn).**\n\n## Understanding it\n- A relaxed LES lets acid reflux up → **heartburn**.\n\n>> ↓ LES tone → reflux (heartburn).",
+         "opts": [
+          "Lowers LES tone → gastro-oesophageal reflux",
+          "Closes the LES tightly",
+          "Raises LES tone → constipation",
+          "No effect on the LES"
+         ],
+         "ans": 0
         },
         {
          "q": "What two factors combine to cause GERD in pregnancy?",
-         "a": "Decreased LES tone, combined with increased intra-abdominal pressure from the expanding uterus."
+         "a": "**Decreased LES tone plus increased intra-abdominal pressure from the expanding uterus.**\n\n## Understanding it\n- A weaker sphincter **and** more pressure pushing up from below → reflux.\n\n>> ↓ LES tone + ↑ intra-abdominal pressure.",
+         "opts": [
+          "Reduced LES tone and raised intra-abdominal pressure",
+          "Increased gastric emptying and low pressure",
+          "High LES tone and low pressure",
+          "Reduced stomach acid"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the other effects of progesterone on the GI tract?",
-         "a": "Decreased intestinal motility; decreased gall bladder motility, leading to cholelithiasis; and constipation."
+         "a": "**Decreased intestinal motility (constipation) and decreased gall bladder motility (predisposing to gallstones/cholelithiasis).**\n\n## Understanding it\n- Slower gut → **constipation**; sluggish gallbladder → **gallstones**.\n\n>> Constipation and gallstone risk.",
+         "opts": [
+          "Constipation and reduced gallbladder motility (gallstones)",
+          "No GI effect",
+          "Increased motility everywhere",
+          "Diarrhoea and rapid emptying"
+         ],
+         "ans": 0
         },
         {
          "q": "What effect does oestrogen have on the gums in pregnancy?",
-         "a": "It causes gingival hyperplasia and bleeding gums — epulis gravidarum."
+         "a": "**It causes gingival hyperplasia and bleeding gums — epulis gravidarum ('pregnancy tumour').**\n\n## Understanding it\n- Oestrogen makes gums **swollen and bleed easily** (pregnancy gingivitis/epulis).\n\n>> Gingival hyperplasia/bleeding — epulis gravidarum.",
+         "opts": [
+          "No oral change",
+          "Loss of all teeth",
+          "Gum recession and dryness",
+          "Gingival hyperplasia and bleeding gums (epulis gravidarum)"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes haemorrhoids in pregnancy?",
-         "a": "Constipation, and elevated venous pressure in the pelvic veins due to uterine compression of the vena cava."
+         "a": "**Constipation plus elevated pelvic venous pressure from uterine compression.**\n\n## Understanding it\n- Straining (constipation) and **raised pelvic venous pressure** engorge the rectal veins → haemorrhoids.\n\n>> Constipation + raised pelvic venous pressure.",
+         "opts": [
+          "Iron deficiency",
+          "Low blood pressure",
+          "Constipation and raised pelvic venous pressure",
+          "Excess exercise"
+         ],
+         "ans": 2
         },
         {
          "q": "What happens to alkaline phosphatase in pregnancy, and why?",
-         "a": "It doubles or triples, due to placental production."
+         "a": "**It doubles or triples, due to placental production.**\n\n## Understanding it\n- The **placenta makes ALP**, so a high ALP is normal in pregnancy (not liver/bone disease).\n\n>> ALP ↑ 2–3× (placental).",
+         "opts": [
+          "Falls to zero",
+          "Rises only from liver disease",
+          "Doubles/triples — from placental production",
+          "Is unchanged"
+         ],
+         "ans": 2
         },
         {
          "q": "How is the haematological state of pregnancy described, and why?",
-         "a": "As a hypercoagulable state — an evolutionary adaptation to prevent fatal postpartum haemorrhage, but one that carries significant risk of venous thromboembolism."
+         "a": "**As a hypercoagulable state — an evolutionary adaptation to prevent fatal postpartum haemorrhage.**\n\n## Understanding it\n- Blood is made **more clottable** to limit bleeding at delivery — but this raises clot (VTE) risk.\n\n>> Hypercoagulable — to reduce postpartum haemorrhage.",
+         "opts": [
+          "Hypercoagulable — to prevent fatal postpartum haemorrhage",
+          "Anticoagulated to protect the fetus",
+          "Unchanged from non-pregnant",
+          "Hypocoagulable — to prevent clots"
+         ],
+         "ans": 0
         },
         {
          "q": "Which procoagulant factors increase in pregnancy?",
-         "a": "Fibrinogen, VII, VIII, IX and XII, as well as von Willebrand factor."
+         "a": "**Fibrinogen and factors VII, VIII, IX and XII, plus von Willebrand factor.**\n\n## Understanding it\n- Many clotting factors rise (fibrinogen, VII/VIII/IX/XII, vWF) → hypercoagulability.\n\n>> Fibrinogen, VII/VIII/IX/XII, vWF ↑.",
+         "opts": [
+          "Fibrinogen, factors VII/VIII/IX/XII, and vWF",
+          "Antithrombin only",
+          "No factors change",
+          "Protein C and S"
+         ],
+         "ans": 0
         },
         {
          "q": "Which anticoagulant decreases in pregnancy, and what happens to fibrinolysis?",
-         "a": "Protein S decreases, and fibrinolysis is decreased."
+         "a": "**Protein S decreases, and fibrinolysis is decreased.**\n\n## Understanding it\n- Falling **protein S** and reduced clot breakdown (fibrinolysis) add to the hypercoagulable state.\n\n>> ↓ Protein S; ↓ fibrinolysis.",
+         "opts": [
+          "Protein S rises and fibrinolysis increases",
+          "Fibrinogen falls",
+          "Nothing changes",
+          "Protein S falls and fibrinolysis is reduced"
+         ],
+         "ans": 3
         },
         {
          "q": "By how much is the risk of DVT and pulmonary embolism increased in pregnancy?",
-         "a": "Up to 4–5 fold."
+         "a": "**Up to 4–5 fold.**\n\n## Understanding it\n- Hypercoagulability + venous stasis raise VTE risk **~4–5×** — a leading cause of maternal death.\n\n>> DVT/PE risk ↑ 4–5 fold.",
+         "opts": [
+          "Up to 4–5 fold",
+          "Reduced by half",
+          "Unchanged",
+          "100 fold"
+         ],
+         "ans": 0
         },
         {
          "q": "What happens to the white cell count in pregnancy?",
-         "a": "There is leucocytosis."
+         "a": "**There is a physiological leucocytosis.**\n\n## Understanding it\n- The WBC count **rises** normally in pregnancy (and further in labour) — not necessarily infection.\n\n>> Physiological leucocytosis.",
+         "opts": [
+          "Leucopenia (low WBC)",
+          "A fall to zero",
+          "No change",
+          "A physiological leucocytosis (raised WBC)"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the purpose of the endocrine changes of pregnancy?",
-         "a": "The endocrine milieu undergoes a complete revolution, transforming maternal metabolism to prioritise the continuous supply of glucose and amino acids to the fetus."
+         "a": "**To transform maternal metabolism to prioritise fetal nutrient supply (a complete endocrine 'revolution').**\n\n## Understanding it\n- Hormones reprogram metabolism so **glucose/nutrients flow to the fetus**.\n\n>> Redirect maternal metabolism to feed the fetus.",
+         "opts": [
+          "Reprogram maternal metabolism to supply the fetus",
+          "Have no metabolic effect",
+          "Reduce fetal nutrient supply",
+          "Shut down maternal metabolism"
+         ],
+         "ans": 0
         },
         {
          "q": "Which hormones increase to produce insulin resistance in pregnancy?",
-         "a": "Oestrogen, human placental lactogen, progesterone, cortisol, and placental growth hormone."
+         "a": "**Oestrogen, human placental lactogen, progesterone, cortisol, and placental growth hormone.**\n\n## Understanding it\n- These placental/maternal hormones **oppose insulin**, diverting glucose to the fetus.\n\n>> Oestrogen, hPL, progesterone, cortisol, placental GH.",
+         "opts": [
+          "Oestrogen, hPL, progesterone, cortisol, placental GH",
+          "Insulin and glucagon only",
+          "Thyroxine and calcitonin",
+          "No hormones cause it"
+         ],
+         "ans": 0
         },
         {
          "q": "What must the maternal response be to hormone-induced insulin resistance?",
-         "a": "It must increase insulin secretion to maintain euglycaemia."
+         "a": "**She must increase insulin secretion to maintain euglycaemia.**\n\n## Understanding it\n- To counter the resistance and keep glucose normal, the pancreas **secretes more insulin**.\n\n>> ↑ Insulin secretion to stay euglycaemic.",
+         "opts": [
+          "Decrease insulin secretion",
+          "Increase insulin secretion to maintain normal glucose",
+          "Produce more glucagon",
+          "Stop eating carbohydrates"
+         ],
+         "ans": 1
         },
         {
          "q": "When does gestational diabetes mellitus occur?",
-         "a": "When the maternal pancreatic response is insufficient to overcome the hormone-induced insulin resistance."
+         "a": "**When the maternal pancreatic response is insufficient to overcome the hormone-induced insulin resistance.**\n\n## Understanding it\n- If the pancreas **can't make enough insulin** to beat the resistance, blood glucose rises → GDM.\n\n>> Pancreas can't overcome the insulin resistance → GDM.",
+         "opts": [
+          "When the fetus makes insulin",
+          "Only in women with type 1 diabetes",
+          "When too much insulin is made",
+          "When insulin secretion can't overcome the resistance"
+         ],
+         "ans": 3
         },
         {
          "q": "By how much does the pituitary gland enlarge in pregnancy, and why?",
-         "a": "Up to 135%, due to primary hypertrophy and hyperplasia of lactotrophs (prolactin-producing cells), stimulated by oestrogen."
+         "a": "**By up to 135%, due to hypertrophy and hyperplasia of the prolactin-producing lactotrophs.**\n\n## Understanding it\n- The pituitary grows (**~135%**) as **lactotrophs** expand to prepare for lactation.\n\n>> ↑ ~135% (lactotroph hypertrophy/hyperplasia).",
+         "opts": [
+          "No change occurs",
+          "It shrinks by 135%",
+          "Up to 135% — lactotroph hypertrophy and hyperplasia",
+          "Due to tumour growth"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the pituitary prone to in pregnancy, and under what circumstances?",
-         "a": "Sheehan syndrome, if severe postpartum haemorrhage and hypovolaemic shock occur."
+         "a": "**Sheehan syndrome (pituitary infarction/necrosis) if severe postpartum haemorrhage and hypovolaemic shock occur.**\n\n## Understanding it\n- The enlarged, vascular pituitary is vulnerable; **severe PPH/shock** can infarct it → Sheehan syndrome (hypopituitarism).\n\n>> Sheehan syndrome after severe PPH/shock.",
+         "opts": [
+          "No specific risk",
+          "Diabetes insipidus, from dehydration",
+          "A pituitary tumour, from oestrogen",
+          "Sheehan syndrome, after severe postpartum haemorrhage/shock"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes hyperpigmentation in pregnancy?",
-         "a": "Elevated MSH (melanocyte stimulating hormone) and oestrogen."
+         "a": "**Elevated MSH (melanocyte-stimulating hormone) and oestrogen.**\n\n## Understanding it\n- **MSH and oestrogen** stimulate melanocytes → darkening.\n\n>> ↑ MSH and oestrogen → hyperpigmentation.",
+         "opts": [
+          "Iron deposition in the skin",
+          "Raised insulin",
+          "Low oestrogen",
+          "Raised MSH and oestrogen"
+         ],
+         "ans": 3
         },
         {
          "q": "Which areas darken in pregnancy?",
-         "a": "The areolae, the perineum, the axillae, and the midline of the abdomen (linea nigra)."
+         "a": "**The areolae, perineum, axillae, and the midline of the abdomen (linea nigra).**\n\n## Understanding it\n- Classic darkening: **areolae, perineum, axillae, linea nigra**.\n\n>> Areolae, perineum, axillae, linea nigra.",
+         "opts": [
+          "The whole body uniformly",
+          "Only the palms and soles",
+          "Only the face",
+          "Areolae, perineum, axillae, and linea nigra"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the other skin changes of pregnancy.",
-         "a": "Melasma (chloasma); striae gravidarum; and vascular changes — palmar erythema and spider angiomas."
+         "a": "**Melasma (chloasma); striae gravidarum; and vascular changes — palmar erythema and spider naevi.**\n\n## Understanding it\n- Also: facial melasma, stretch marks (striae), and vascular signs (palmar erythema, spider naevi) from high oestrogen.\n\n>> Melasma, striae, palmar erythema, spider naevi.",
+         "opts": [
+          "Melasma, striae gravidarum, palmar erythema, spider naevi",
+          "Honey-coloured crusts",
+          "Psoriatic plaques",
+          "Vitiligo and hypopigmentation"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the musculoskeletal changes of pregnancy?",
-         "a": "Progressive lumbar lordosis and joint laxity."
+         "a": "**Progressive lumbar lordosis and joint laxity.**\n\n## Understanding it\n- The growing uterus shifts the centre of gravity (**lordosis**), and relaxin loosens joints (**laxity**) → back/pelvic pain.\n\n>> Lumbar lordosis and joint laxity.",
+         "opts": [
+          "Loss of bone density only",
+          "Reduced lordosis and stiff joints",
+          "No musculoskeletal change",
+          "Progressive lumbar lordosis and joint laxity"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": null,
