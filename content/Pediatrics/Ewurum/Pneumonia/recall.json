@@ -1,562 +1,1535 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Pneumonia — Lobar and Bronchopneumonia",
-  "cards": [
-    {
-      "q": "Define pneumonia.",
-      "a": "Inflammation of the parenchyma of the lung caused by microorganisms."
-    },
-    {
-      "q": "What does the lung parenchyma consist of?",
-      "a": "Respiratory bronchioles, alveolar ducts, alveolar sacs, alveoli and interstitial tissue."
-    },
-    {
-      "q": "What is the difference between pneumonia and pneumonitis/alveolitis?",
-      "a": "Pneumonia is caused by microorganisms; pneumonitis or alveolitis is caused by chemical or physical injury such as burns."
-    },
-    {
-      "q": "What does 'resolution may be partial or complete' imply clinically?",
-      "a": "Complete resolution restores normal lung; partial resolution leaves permanent damage and can lead to bronchiectasis."
-    },
-    {
-      "q": "Classify pneumonia based on probable origin.",
-      "a": "Community acquired; hospital acquired (nosocomial/healthcare associated); aspiration; and pneumonia in the immunocompromised."
-    },
-    {
-      "q": "Classify pneumonia based on anatomical involvement/pattern of distribution.",
-      "a": "Bronchopneumonia; and lobar or segmental pneumonia."
-    },
-    {
-      "q": "Classify pneumonia based on type of infecting organism.",
-      "a": "Viral, bacterial, fungal, atypical and parasitic."
-    },
-    {
-      "q": "Classify pneumonia based on the actual infecting organism.",
-      "a": "Pneumococcal, streptococcal, staphylococcal; Haemophilus influenzae; and tuberculous."
-    },
-    {
-      "q": "How high does pneumonia rank as a cause of childhood illness?",
-      "a": "It ranks high amongst the causes of childhood morbidity and mortality."
-    },
-    {
-      "q": "Which age group is most frequently affected by pneumonia?",
-      "a": "Infants and toddlers, more than older children."
-    },
-    {
-      "q": "What is the seasonal pattern of pneumonia in Nigeria?",
-      "a": "It occurs throughout the year but is more common during the rainy and harmattan seasons."
-    },
-    {
-      "q": "Why is pneumonia usually more severe in less privileged communities?",
-      "a": "Because the risk factors cluster in poverty — no exclusive breastfeeding, malnutrition, overcrowding, indoor smoke and delayed presentation."
-    },
-    {
-      "q": "How often does a child die of pneumonia globally?",
-      "a": "Every 43 seconds."
-    },
-    {
-      "q": "How many under-5 children did pneumonia kill in 2021?",
-      "a": "More than 700,000 — around 2,000 every day (UNICEF data)."
-    },
-    {
-      "q": "What percentage of all under-5 deaths does pneumonia account for?",
-      "a": "15%."
-    },
-    {
-      "q": "What is the global incidence of childhood pneumonia?",
-      "a": "Over 1,400 cases per 100,000 children, or 1 case per 71 children every year."
-    },
-    {
-      "q": "List the risk factors for pneumonia.",
-      "a": "Lack of breastfeeding especially exclusive; malnutrition including vitamin A deficiency; poor socio-economic status; large family size; young age especially under 2 years; low birth weight; overcrowding; previous illness (HIV, sickle cell anaemia, congenital lung/airway disorders); and indoor and outdoor pollution including smoking."
-    },
-    {
-      "q": "Why does vitamin A deficiency predispose to pneumonia?",
-      "a": "Vitamin A maintains the respiratory epithelium and cilia; deficiency damages mucociliary clearance."
-    },
-    {
-      "q": "How does breastfeeding protect the lung?",
-      "a": "Breast milk supplies maternal secretory IgA, one of the lung's own defences, at an age when the infant cannot make enough of its own."
-    },
-    {
-      "q": "What is the most common cause of pneumonia in children overall?",
-      "a": "Viruses — accounting for approximately 50% at all ages but up to 80% in children under 2 years."
-    },
-    {
-      "q": "What is the commonest single virus causing pneumonia?",
-      "a": "Respiratory syncytial virus (RSV)."
-    },
-    {
-      "q": "List the bacterial causes of pneumonia in neonates.",
-      "a": "Escherichia coli, Klebsiella, Group B streptococcus and Staphylococcus aureus."
-    },
-    {
-      "q": "Which organism accounts for over 70% of bacterial pneumonia in the 3 months to 3 years age group?",
-      "a": "Streptococcus pneumoniae."
-    },
-    {
-      "q": "Besides Strep pneumoniae, what bacterium is important in the 3 months to 3 years group?",
-      "a": "Haemophilus influenzae."
-    },
-    {
-      "q": "List the bacterial causes of pneumonia in children over 3 years.",
-      "a": "Streptococcus pneumoniae, Streptococcus pyogenes, Bordetella pertussis and Staphylococcus aureus."
-    },
-    {
-      "q": "Why do neonates get E. coli, Klebsiella and Group B strep pneumonia?",
-      "a": "These are gut and genital tract organisms acquired during passage through the birth canal, not inhaled — so neonatal pneumonia is usually part of systemic sepsis."
-    },
-    {
-      "q": "Name the atypical organisms causing pneumonia.",
-      "a": "Mycoplasma, chlamydia, Pneumocystis jiroveci and moraxella."
-    },
-    {
-      "q": "Which atypical organism is implicated in neonates?",
-      "a": "Chlamydia trachomatis."
-    },
-    {
-      "q": "Which atypical organism is implicated in the over-3-years group?",
-      "a": "Mycoplasma pneumoniae."
-    },
-    {
-      "q": "Which atypical organism is implicated in HIV/immunocompromised children?",
-      "a": "Pneumocystis jiroveci."
-    },
-    {
-      "q": "Why does mycoplasma pneumonia not respond to penicillin?",
-      "a": "Mycoplasma has no cell wall, so it needs a macrolide instead."
-    },
-    {
-      "q": "List the fungal causes of pneumonia.",
-      "a": "Coccidioides, Aspergillus, Cryptococcus and Histoplasma."
-    },
-    {
-      "q": "List the parasitic causes of pneumonia.",
-      "a": "Ascaris, toxoplasma and schistosoma."
-    },
-    {
-      "q": "In what proportion of pneumonias is no pathogen identified?",
-      "a": "In 20-60% of cases."
-    },
-    {
-      "q": "Why is treatment of pneumonia usually empiric?",
-      "a": "Because no pathogen is identified in 20-60% of cases and blood culture yields only 20-30%, so age is the main guide to the likely organism."
-    },
-    {
-      "q": "Name the three physiologic defence mechanisms that keep the lower respiratory tract sterile.",
-      "a": "Mucociliary clearance; secretory immunoglobulin A (IgA); and clearing of the airway by coughing."
-    },
-    {
-      "q": "Name the immunologic defence mechanisms of the lung.",
-      "a": "Macrophages present in alveoli and bronchioles; secretory IgA; and other immunoglobulins."
-    },
-    {
-      "q": "By what four routes do pathogens enter the lower respiratory tract?",
-      "a": "Inhalation of airborne droplets; descending from URTI or another LRTI; aspiration; and haematogenous spread."
-    },
-    {
-      "q": "Where do organisms first establish themselves in the lung?",
-      "a": "In the small bronchioles and alveoli, from where they spread to other parts of the lungs."
-    },
-    {
-      "q": "Which immune cells engulf the pathogens and release cytokines in pneumonia?",
-      "a": "Alveolar macrophages, neutrophils, lymphocytes and eosinophils."
-    },
-    {
-      "q": "What does the inflammatory response (apoptosis, vascular permeability with oedema, cytokines) cause?",
-      "a": "Cell destruction and alveolar congestion, which interrupts the exchange of oxygen across the alveolar membranes."
-    },
-    {
-      "q": "On what three factors do the virulence and severity of pneumonia depend?",
-      "a": "The health of the individual, the causative microorganism, and the size of the inoculum."
-    },
-    {
-      "q": "Name the four stages of inflammation in pneumonia.",
-      "a": "Vascular congestion; red hepatization; grey hepatization; and resolution."
-    },
-    {
-      "q": "When does vascular congestion occur and what are its features?",
-      "a": "Within 24 hours; marked capillary engorgement/congestion and alveolar oedema, with protein-rich fluid containing numerous bacteria and few neutrophils. Produces clear sputum."
-    },
-    {
-      "q": "What type of sputum is produced in vascular congestion?",
-      "a": "Clear sputum."
-    },
-    {
-      "q": "When does red hepatization occur and what are its features?",
-      "a": "2nd-4th day; many RBCs, neutrophils, desquamated epithelial cells and fibrin enter the alveoli; lung appears red, liver-like. Produces rusty sputum."
-    },
-    {
-      "q": "What type of sputum is produced in red hepatization?",
-      "a": "Rusty sputum."
-    },
-    {
-      "q": "Why is the sputum rusty in red hepatization?",
-      "a": "Because red blood cells enter the alveoli and are partly broken down."
-    },
-    {
-      "q": "When does grey hepatization occur and what are its features?",
-      "a": "4th-6th day; alveoli filled with fibrinopurulent exudate of haemolysed RBCs, degranulated neutrophils and macrophages; haemosiderin gives a grey-brown to yellow colour and firm consistency; lungs no longer congested."
-    },
-    {
-      "q": "Why does the lung turn grey in grey hepatization?",
-      "a": "Haemoglobin from the haemolysed red cells is broken down to haemosiderin, a grey-brown pigment."
-    },
-    {
-      "q": "When does resolution occur and what happens?",
-      "a": "8th-9th day; resolution of inflammatory exudates and restoration of pulmonary architecture by the breakdown of exudates by enzymes."
-    },
-    {
-      "q": "What does the word 'hepatization' mean?",
-      "a": "That the lung has become as solid and firm as liver (hepar = liver), because the alveoli are packed with exudate instead of air."
-    },
-    {
-      "q": "Define lobar pneumonia.",
-      "a": "A type of pneumonia involving one or more lobes or part of a lobe of the lungs, in which the consolidation is virtually homogenous."
-    },
-    {
-      "q": "List the bacterial causes of lobar pneumonia.",
-      "a": "Streptococcus pneumoniae, Haemophilus influenzae, Staphylococcus pyogenes, Streptococcus pyogenes, Klebsiella pneumoniae, Pseudomonas, Proteus species and Mycobacterium tuberculosis."
-    },
-    {
-      "q": "List the symptoms of lobar pneumonia.",
-      "a": "Fever, rigours, productive cough, breathlessness, anorexia, pleuritic chest pain, restlessness, cyanosis, upper abdominal pain, vomiting and diarrhoea, and occasionally haemoptysis."
-    },
-    {
-      "q": "List the signs of lobar pneumonia.",
-      "a": "Ill, anxious, restless, toxic, cyanosed child; tachycardia, dyspnoea, tachypnoea; central trachea with diminished chest expansion over the affected lobe; dull percussion notes; increased tactile and vocal fremitus on the affected side; diminished then bronchial breath sounds, later replaced by crepitations."
-    },
-    {
-      "q": "Why is percussion dull in lobar pneumonia?",
-      "a": "Because the consolidated tissue is solid; solid tissue does not resonate the way air-filled lung does."
-    },
-    {
-      "q": "Why is tactile and vocal fremitus increased over consolidation?",
-      "a": "Because solid consolidated tissue conducts sound better than air-filled lung."
-    },
-    {
-      "q": "Why does the trachea remain central in lobar pneumonia?",
-      "a": "Because consolidation replaces air with fluid inside the lung without changing its volume — nothing pushes or pulls the trachea."
-    },
-    {
-      "q": "Why is there pleuritic chest pain in lobar pneumonia?",
-      "a": "Because a whole lobe reaches the parietal pleura, which has pain fibres; inflammation there causes sharp pain worse on inspiration and coughing."
-    },
-    {
-      "q": "Why may lobar pneumonia cause abdominal pain, vomiting and diarrhoea?",
-      "a": "Lower lobe pneumonia irritates the diaphragmatic pleura, referring pain to the abdomen; and systemic toxaemia causes vomiting and loose stools."
-    },
-    {
-      "q": "Define bronchopneumonia.",
-      "a": "Pneumonia with patchy consolidation throughout a lobe or the lungs."
-    },
-    {
-      "q": "What is the commonest cause of bronchopneumonia?",
-      "a": "Respiratory syncytial virus (viral); it is probably the commonest cause."
-    },
-    {
-      "q": "List the viral causes of bronchopneumonia.",
-      "a": "RSV (commonest), influenza, parainfluenza, adenoviruses, rhinovirus and measles."
-    },
-    {
-      "q": "List the bacterial causes of bronchopneumonia.",
-      "a": "Staphylococcus pyogenes, Streptococcus pneumoniae, Haemophilus influenzae and Mycobacterium tuberculosis."
-    },
-    {
-      "q": "List the symptoms of bronchopneumonia.",
-      "a": "Fever, cough, breathlessness, anorexia, restlessness, cyanosis, upper abdominal pain, vomiting and diarrhoea; chest pain is unusual."
-    },
-    {
-      "q": "List the signs of bronchopneumonia.",
-      "a": "Central trachea; resonant percussion notes equal on both sides; crepitations (fine or coarse); and diminished breath sounds."
-    },
-    {
-      "q": "Why is chest pain unusual in bronchopneumonia?",
-      "a": "Because the patchy consolidation is scattered in the lung substance and often does not reach the parietal pleura."
-    },
-    {
-      "q": "Why are the percussion notes resonant and equal in bronchopneumonia?",
-      "a": "Because the consolidation is patchy with normal aerated lung in between, on both sides, so air still dominates."
-    },
-    {
-      "q": "Give the key differences between lobar and bronchopneumonia.",
-      "a": "Lobar: homogenous, usually bacterial, dull percussion, increased fremitus, bronchial breathing, pleuritic pain present. Bronchopneumonia: patchy, usually viral, resonant equal percussion, crepitations, chest pain unusual. Trachea is central in both."
-    },
-    {
-      "q": "List the goals of investigation in pneumonia.",
-      "a": "To confirm the diagnosis; determine the severity; establish complications; exclude close differentials; determine the causative organism; and monitor response to treatment."
-    },
-    {
-      "q": "List the radiological investigations in pneumonia.",
-      "a": "Chest X-ray, chest computed tomography, and magnetic resonance imaging."
-    },
-    {
-      "q": "List the microbiological investigations in pneumonia.",
-      "a": "Nasal washings/nasopharyngeal swabs, blood culture, sputum culture, pleural fluid culture, bronchoscopic fluid/BAL washings, lung aspirate studies, serology, nucleic acid amplification test, and countercurrent immuno-electrophoresis of urine."
-    },
-    {
-      "q": "What are the two main uses of the chest X-ray in pneumonia?",
-      "a": "To confirm the diagnosis, and to indicate a complication such as pleural effusion or empyema."
-    },
-    {
-      "q": "What is the chest X-ray appearance of viral pneumonia?",
-      "a": "Hyperinflation with bilateral interstitial infiltrates and peribronchial cuffing."
-    },
-    {
-      "q": "What is the chest X-ray appearance of pneumococcal pneumonia?",
-      "a": "Confluent lobar consolidation."
-    },
-    {
-      "q": "List the radiological findings in pneumonia.",
-      "a": "Peribronchial infiltrates, lobar/segmental consolidation, air bronchograms, airspace obliteration, and hilar lymphadenopathy."
-    },
-    {
-      "q": "What is an air bronchogram and what does it signify?",
-      "a": "A black branching air-filled bronchus seen against white exudate-filled alveoli; it signifies alveolar filling (consolidation) and excludes collapse and pleural effusion."
-    },
-    {
-      "q": "What is the significance of blood culture in pneumonia?",
-      "a": "The definitive diagnosis of bacterial infection may require isolation of an organism from blood, but blood culture correctly identifies the organism in only 20-30% of patients."
-    },
-    {
-      "q": "Why is sputum m/c/s unreliable in children?",
-      "a": "Because the sputum is contaminated by upper airway flora."
-    },
-    {
-      "q": "Why are nasopharyngeal and throat swabs unreliable in children?",
-      "a": "They may identify only normal commensal organisms of the nasopharynx and throat."
-    },
-    {
-      "q": "How long does growth of respiratory viruses in tissue culture take?",
-      "a": "5-10 days."
-    },
-    {
-      "q": "On what does definitive diagnosis of a bacterial pneumonia depend?",
-      "a": "Isolation of an organism from the blood, pleural fluid or lung."
-    },
-    {
-      "q": "What is the value of countercurrent immuno-electrophoresis of urine?",
-      "a": "It identifies bacterial antigens of capsulated bacteria like S. pneumoniae and H. influenzae, even after antimicrobial treatment has begun."
-    },
-    {
-      "q": "What does the nucleic acid amplification test (e.g. PCR) do?",
-      "a": "Provides rapid detection of pathogens difficult to culture, using respiratory secretions, lung aspirate samples or blood."
-    },
-    {
-      "q": "How is Mycoplasma pneumoniae infection diagnosed?",
-      "a": "On the basis of a positive PCR test or seroconversion in an IgG assay."
-    },
-    {
-      "q": "What serological marker is useful in group A streptococcal pneumonia?",
-      "a": "The anti-streptolysin O (ASO) titre."
-    },
-    {
-      "q": "What is the WBC picture in viral pneumonia?",
-      "a": "The count can be normal or elevated but usually not higher than 20,000/mm³, with a lymphocyte predominance."
-    },
-    {
-      "q": "What is the WBC picture in bacterial pneumonia?",
-      "a": "Often elevated, in the range of 15,000-40,000/mm³, with a predominance of granulocytes."
-    },
-    {
-      "q": "What does arterial blood gas analysis assess in pneumonia?",
-      "a": "The degree of hypoxia and the need for oxygen administration."
-    },
-    {
-      "q": "Why is serial pulse oximetry valuable?",
-      "a": "It is non-invasive, instant and repeatable, and the trend across readings shows whether the child is improving or deteriorating."
-    },
-    {
-      "q": "List the differential diagnoses of pneumonia.",
-      "a": "Bronchiolitis, bronchial asthma, bronchitis, bronchiectasis, lung abscess, pulmonary oedema, atelectasis due to foreign body or thick mucus, and chemical pneumonitis."
-    },
-    {
-      "q": "How do you distinguish bronchiolitis from bronchopneumonia?",
-      "a": "Bronchiolitis is typically under 12 months with a dominant wheeze and marked hyperinflation but no consolidation; bronchopneumonia has dominant crepitations with patchy consolidation on X-ray."
-    },
-    {
-      "q": "How do you distinguish asthma from pneumonia?",
-      "a": "Asthma is recurrent and episodic with complete recovery between attacks, triggers, atopy, reversibility with bronchodilators, wheeze rather than crepitations, and is usually afebrile."
-    },
-    {
-      "q": "What clue points to an inhaled foreign body rather than pneumonia?",
-      "a": "Sudden onset of choking while eating in a previously well child, unilateral signs, mediastinal shift, and obstructive hyperinflation on an expiratory film."
-    },
-    {
-      "q": "List the acute complications of pneumonia (SHARE 4Ps).",
-      "a": "Septicaemia, Heart failure, Atelectasis, Respiratory failure, Empyema, Pleural effusion, Pyo-pneumothorax, Pneumothorax, Pneumatocele (and subcutaneous emphysema, rare except in measles)."
-    },
-    {
-      "q": "List the chronic complications of pneumonia.",
-      "a": "Lung abscess and bronchiectasis."
-    },
-    {
-      "q": "What is a pneumatocele and which organism is classically associated with it?",
-      "a": "A thin-walled air-filled cyst in the lung formed by a ball-valve effect in necrotic lung; classically associated with Staphylococcus aureus."
-    },
-    {
-      "q": "In which infection is subcutaneous emphysema seen as a complication of pneumonia?",
-      "a": "Measles infection (giant cell pneumonia)."
-    },
-    {
-      "q": "Explain the progression from pleural effusion to pyo-pneumothorax.",
-      "a": "Pleural inflammation exudes fluid (effusion); the fluid becomes infected and purulent (empyema); the lung ruptures into the infected space giving pus and air together (pyo-pneumothorax)."
-    },
-    {
-      "q": "Why does bronchiectasis develop after pneumonia?",
-      "a": "It is the result of partial (incomplete) resolution, with residual inflammation and destruction of the bronchial wall."
-    },
-    {
-      "q": "State the three principles of treatment of pneumonia.",
-      "a": "Eradicate the infection; give supportive treatment; and manage the complications."
-    },
-    {
-      "q": "What constitutes specific treatment of pneumonia?",
-      "a": "Antibiotics, antivirals and antifungal drugs."
-    },
-    {
-      "q": "By what is antimicrobial treatment of pneumonia guided?",
-      "a": "Age of the patient, immune status, local epidemiologic information, radiologic findings, and microbiology results if available."
-    },
-    {
-      "q": "List the supportive treatments for pneumonia.",
-      "a": "Hospital admission when necessary; oxygen therapy with ABG monitoring; antipyretics; fluid therapy; trial of bronchodilators; nursing care; appropriate feeding; and chest physiotherapy (percussion, postural drainage, tracheal suction)."
-    },
-    {
-      "q": "Which single supportive measure is most important in pneumonia?",
-      "a": "Oxygen therapy, because it directly addresses the failure of oxygen exchange across the alveolar membrane."
-    },
-    {
-      "q": "List the indications for hospitalization in pneumonia.",
-      "a": "Age <6 months; sickle cell anaemia with acute chest syndrome; multiple lobe involvement; immunocompromised state; toxic appearance; severe respiratory distress; requirement for supplemental oxygen; dehydration; vomiting; no response to appropriate oral antibiotics; and noncompliant parents."
-    },
-    {
-      "q": "What are the three specific treatments for complications your lecturer lists?",
-      "a": "Digitalize in CCF; drain pleural fluid; and transfuse if the patient is anaemic."
-    },
-    {
-      "q": "Why are antipyretics important in pneumonia, beyond comfort?",
-      "a": "Fever raises the metabolic oxygen demand, which a hypoxic child cannot afford."
-    },
-    {
-      "q": "Outline the prevention of pneumonia.",
-      "a": "Immunization against respiratory pathogens (measles, diphtheria, pertussis, H. influenzae); health education (reduce overcrowding, adequate nutrition, breastfeeding, avoid kissing children when having an RTI, reduce cigarette and wood smoke); and legislation to reduce environmental pollution and discourage smoking."
-    },
-    {
-      "q": "Which immunizations help prevent pneumonia?",
-      "a": "Vaccines against measles, diphtheria, pertussis and H. influenzae (and pneumococcal vaccine against Strep pneumoniae)."
-    },
-    {
-      "q": "Why is legislation needed in pneumonia prevention?",
-      "a": "Because structural risks like environmental pollution and tobacco smoke cannot be avoided by an individual family and require government action."
-    },
-    {
-      "q": "OSPE — What is the golden rule when presenting a chest X-ray?",
-      "a": "Assess details and technical adequacy first, then read systematically (ABCDE), and give the diagnosis last — never start by describing the obvious abnormality."
-    },
-    {
-      "q": "OSPE — What does RIPE stand for in assessing X-ray adequacy?",
-      "a": "Rotation (clavicles equidistant from spinous processes), Inspiration (5-6 anterior ribs in a child), Penetration (vertebrae just visible behind the heart), and Everything included."
-    },
-    {
-      "q": "OSPE — What does the ABCDE system for reading a chest X-ray stand for?",
-      "a": "Airway (trachea), Breathing (lung fields zone by zone), Circulation (heart and mediastinum), Diaphragm (and costophrenic angles), Everything else (bones, soft tissues, lines)."
-    },
-    {
-      "q": "OSPE — Why can't you reliably comment on heart size on a paediatric AP film?",
-      "a": "Because the AP projection magnifies the heart, so apparent cardiomegaly may be artefactual."
-    },
-    {
-      "q": "OSPE — A rotated or expiratory film can mimic what abnormality?",
-      "a": "Rotation makes one lung look whiter (false consolidation); an expiratory film crowds the bases and enlarges the heart (false consolidation and false cardiomegaly)."
-    },
-    {
-      "q": "OSPE — A homogenous opacity with a sharp upper border and air bronchograms, trachea central. Diagnosis?",
-      "a": "Lobar (e.g. right lower lobe) pneumonia; the sharp border is a fissure and the air bronchogram confirms alveolar consolidation."
-    },
-    {
-      "q": "OSPE — What does an air bronchogram allow you to exclude?",
-      "a": "Collapse (blocked airway, no air in bronchus) and pleural effusion (fluid outside the lung) — because in both there would be no air-filled bronchus within the opacity."
-    },
-    {
-      "q": "OSPE — Bilateral patchy opacities, hyperinflation with flat diaphragms and 8 anterior ribs, peribronchial cuffing. Diagnosis and likely organism in an infant?",
-      "a": "Viral bronchopneumonia; in an infant following coryza the likely organism is RSV."
-    },
-    {
-      "q": "OSPE — How is hyperinflation identified on a chest X-ray?",
-      "a": "Flattened diaphragms and more than 6 anterior ribs visible above the diaphragm."
-    },
-    {
-      "q": "OSPE — Why does viral infection cause hyperinflation?",
-      "a": "Inflammation narrows the small airways; air enters on inspiration but cannot escape on expiration, causing air trapping."
-    },
-    {
-      "q": "OSPE — What is peribronchial cuffing?",
-      "a": "Thickened, oedematous bronchial walls seen end-on as a thick dark ring (doughnut), indicating airway-centred (viral) pathology."
-    },
-    {
-      "q": "OSPE — Which film should you request if you suspect an inhaled foreign body?",
-      "a": "An expiratory film — the obstructed side stays inflated (ball-valve) while the normal lung empties, making the difference obvious."
-    },
-    {
-      "q": "CLINICAL — What respiratory rate defines tachypnoea in a 1-5 year old (WHO)?",
-      "a": "More than 40 breaths per minute."
-    },
-    {
-      "q": "CLINICAL — What signs indicate severe pneumonia?",
-      "a": "Tachypnoea, hypoxaemia (low SpO2), and increased work of breathing — subcostal recession, nasal flaring, grunting; plus a toxic appearance."
-    },
-    {
-      "q": "CLINICAL — Why is a falling respiratory rate with a calm, drowsy child alarming in pneumonia?",
-      "a": "It signals exhaustion and impending respiratory failure — a pre-terminal sign — not improvement. Look for rising CO2 on ABG."
-    },
-    {
-      "q": "CLINICAL — In a severe pneumonia with SpO2 88%, what is the first action?",
-      "a": "Give oxygen immediately, before completing the history, then continue assessment with serial pulse oximetry and ABG."
-    },
-    {
-      "q": "CLINICAL — A child with pneumonia deteriorates with stony dullness, absent breath sounds and trachea deviated to the opposite side. What has happened?",
-      "a": "A large pleural effusion or empyema has developed — a space-occupying collection pushing the trachea away."
-    },
-    {
-      "q": "CLINICAL — Why does an empyema not respond to antibiotics alone?",
-      "a": "Antibiotics penetrate a pleural collection (pus in a closed space) poorly; the treatment is drainage, not a stronger antibiotic."
-    },
-    {
-      "q": "CLINICAL — How do you manage a suspected empyema?",
-      "a": "Chest X-ray and ultrasound to confirm and assess loculation; diagnostic and therapeutic thoracocentesis with fluid sent for microscopy, culture, Gram stain, protein, glucose and cytology; drainage; escalate antibiotics per culture; and consider TB."
-    },
-    {
-      "q": "CLINICAL — Why is pleural fluid a valuable microbiological specimen?",
-      "a": "Because definitive bacterial diagnosis can be made from pleural fluid, which has a much higher yield than blood culture's 20-30%."
-    },
-    {
-      "q": "CLINICAL — A previously well toddler chokes on groundnuts, then presents 2 weeks later with fever and reduced air entry on one side. Diagnosis?",
-      "a": "Inhaled foreign body with secondary post-obstructive pneumonia."
-    },
-    {
-      "q": "CLINICAL — Why must a foreign body be removed by bronchoscopy rather than treated with antibiotics alone?",
-      "a": "The obstruction causes stasis and recurrent infection; antibiotics cannot resolve the pneumonia while the foreign body and obstruction remain."
-    },
-    {
-      "q": "CLINICAL — Why should you always ask about a choking episode in a child with unilateral chest signs?",
-      "a": "Because after aspiration there is a silent interval when the child seems well and the choking is often not volunteered, so the foreign body is easily missed."
-    },
-    {
-      "q": "CLINICAL — What does a mediastinal shift tell you in a child you thought had pneumonia?",
-      "a": "It indicates a complication or alternative diagnosis — collapse (trachea towards), or effusion/pneumothorax/obstructive hyperinflation (trachea away) — because simple consolidation keeps the trachea central."
-    },
-    {
-      "q": "CLINICAL — Which important condition mimics pneumonia in a sickle cell child and how is it managed?",
-      "a": "Acute chest syndrome — a medical emergency managed with oxygen, hydration, analgesia, antibiotics and often transfusion."
-    },
-    {
-      "q": "CLINICAL — Why must tuberculosis always be considered in a non-resolving pneumonia in our setting?",
-      "a": "Because Mycobacterium tuberculosis is a listed cause of both lobar and bronchopneumonia and can present as pneumonia that fails to respond to standard antibiotics; send AFB/GeneXpert."
-    },
-    {
-      "q": "CLINICAL — Why does the appearance of crepitations over consolidation suggest improvement?",
-      "a": "Because as the exudate breaks up and air re-enters the previously solid alveoli, crepitations are heard — a sign of resolution rather than deterioration."
-    }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Pneumonia — Lobar and Bronchopneumonia",
+ "cards": [
+  {
+   "q": "Define pneumonia.",
+   "a": "**Inflammation of the parenchyma of the lung caused by microorganisms.**\n\n## Understanding it\n- Pneumonia = **infective inflammation of the lung parenchyma** (alveoli/distal airways).\n\n>> Pneumonia = microbial inflammation of lung parenchyma.",
+   "opts": [
+    "Inflammation of the large airways (bronchitis)",
+    "Non-infective lung inflammation (pneumonitis)",
+    "Inflammation of lung parenchyma caused by microorganisms",
+    "Inflammation of the pleura"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does the lung parenchyma consist of?",
+   "a": "**Respiratory bronchioles, alveolar ducts, alveolar sacs, alveoli and the interstitium (the gas-exchanging tissue).**\n\n## Understanding it\n- Parenchyma = the **gas-exchange tissue** (bronchioles → alveoli), not the large airways.\n\n>> Respiratory bronchioles, ducts, sacs, alveoli, interstitium.",
+   "opts": [
+    "The heart and great vessels",
+    "Respiratory bronchioles, alveolar ducts/sacs, alveoli, interstitium",
+    "The pleura and chest wall",
+    "The trachea and main bronchi"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the difference between pneumonia and pneumonitis/alveolitis?",
+   "a": "**Pneumonia is caused by microorganisms; pneumonitis/alveolitis is inflammation from non-infective causes (e.g. chemicals, aspiration, radiation).**\n\n## Understanding it\n- Same tissue, different trigger: **pneumonia = infective**; **pneumonitis = non-infective**.\n\n>> Pneumonia = infective; pneumonitis = non-infective.",
+   "opts": [
+    "Pneumonia affects only the pleura",
+    "Pneumonia is infective; pneumonitis is non-infective inflammation",
+    "They are identical",
+    "Pneumonitis is always bacterial"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does 'resolution may be partial or complete' imply clinically?",
+   "a": "**Complete resolution restores normal lung; partial resolution leaves residual damage (e.g. bronchiectasis, fibrosis).**\n\n## Understanding it\n- **Complete** = normal lung; **partial** = permanent damage (bronchiectasis).\n\n>> Complete = normal lung; partial = residual damage.",
+   "opts": [
+    "Complete restores normal lung; partial leaves residual damage",
+    "Partial resolution is always fatal",
+    "Both always leave scarring",
+    "Both restore normal lung"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Classify pneumonia based on probable origin.",
+   "a": "**Community-acquired and hospital-acquired (nosocomial/healthcare-associated).**\n\n## Understanding it\n- By origin: **community- vs hospital-acquired** (different likely organisms/resistance).\n\n>> Community-acquired vs hospital-acquired.",
+   "opts": [
+    "Acute and chronic",
+    "Community-acquired and hospital-acquired",
+    "Viral and bacterial",
+    "Lobar and bronchopneumonia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Classify pneumonia based on anatomical involvement/pattern of distribution.",
+   "a": "**Bronchopneumonia, and lobar or segmental pneumonia.**\n\n## Understanding it\n- By pattern: **bronchopneumonia (patchy)** vs **lobar/segmental (homogeneous)**.\n\n>> Bronchopneumonia vs lobar/segmental.",
+   "opts": [
+    "Community vs hospital acquired",
+    "Bronchopneumonia, and lobar/segmental pneumonia",
+    "Viral vs bacterial",
+    "Acute vs chronic"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Classify pneumonia based on type of infecting organism.",
+   "a": "**Viral, bacterial, fungal, atypical, and parasitic.**\n\n## Understanding it\n- By organism type: **viral, bacterial, fungal, atypical, parasitic**.\n\n>> Viral, bacterial, fungal, atypical, parasitic.",
+   "opts": [
+    "Lobar and bronchopneumonia",
+    "Mild and severe",
+    "Community and hospital acquired",
+    "Viral, bacterial, fungal, atypical, parasitic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Classify pneumonia based on the actual infecting organism.",
+   "a": "**By the specific organism — e.g. pneumococcal, streptococcal, staphylococcal, Haemophilus, etc.**\n\n## Understanding it\n- The most specific classification **names the organism** (pneumococcal, staphylococcal, etc.).\n\n>> By the named organism (pneumococcal, staphylococcal…).",
+   "opts": [
+    "Only viral vs bacterial",
+    "By the specific named organism (pneumococcal, staphylococcal, etc.)",
+    "Only lobar vs bronchopneumonia",
+    "Only acute vs chronic"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How high does pneumonia rank as a cause of childhood illness?",
+   "a": "**It ranks high among the causes of childhood morbidity and mortality (a leading killer of under-5s).**\n\n## Understanding it\n- Pneumonia is a **leading cause** of child death worldwide.\n\n>> A leading cause of childhood morbidity/mortality.",
+   "opts": [
+    "Never fatal",
+    "A leading cause of childhood morbidity and mortality",
+    "A rare, trivial illness",
+    "Only affects adults"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which age group is most frequently affected by pneumonia?",
+   "a": "**Infants and toddlers, more than older children.**\n\n## Understanding it\n- The **youngest** children (infants/toddlers) are most affected.\n\n>> Infants and toddlers.",
+   "opts": [
+    "Infants and toddlers",
+    "School-age children only",
+    "The elderly only",
+    "Teenagers only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the seasonal pattern of pneumonia in Nigeria?",
+   "a": "**It occurs throughout the year but is more common during the rainy (harmattan/cold) season.**\n\n## Understanding it\n- Year-round, but **peaks in the rainy/cold season**.\n\n>> All year, more in the rainy season.",
+   "opts": [
+    "All year, more common in the rainy season",
+    "Only in the dry season",
+    "No seasonal pattern",
+    "Only in summer"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is pneumonia usually more severe in less privileged communities?",
+   "a": "**Because the risk factors cluster in poverty — no exclusive breastfeeding, malnutrition, overcrowding, smoke exposure, and poor access to care.**\n\n## Understanding it\n- **Poverty concentrates risk factors** (malnutrition, crowding, smoke, poor care), worsening outcomes.\n\n>> Poverty clusters the risk factors.",
+   "opts": [
+    "The organisms are more virulent there",
+    "Wealthy children never get it",
+    "It only occurs in the poor",
+    "Poverty clusters the risk factors (malnutrition, crowding, smoke)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How often does a child die of pneumonia globally?",
+   "a": "**Every 43 seconds.**\n\n## Understanding it\n- A striking statistic: a child dies of pneumonia roughly **every 43 seconds**.\n\n>> Every 43 seconds.",
+   "opts": [
+    "Every 43 hours",
+    "Every 43 minutes",
+    "Every 43 seconds",
+    "Once a year"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How many under-5 children did pneumonia kill in 2021?",
+   "a": "**More than 700,000 — around 2,000 every day.**\n\n## Understanding it\n- ~**700,000+** under-5 deaths in 2021 (~2,000/day).\n\n>> >700,000 in 2021 (~2,000/day).",
+   "opts": [
+    "More than 700,000 (about 2,000 per day)",
+    "About 7,000",
+    "Fewer than 100",
+    "About 70 million"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What percentage of all under-5 deaths does pneumonia account for?",
+   "a": "**15%.**\n\n## Understanding it\n- Pneumonia causes about **15%** of all under-5 deaths — the single largest infectious cause.\n\n>> 15% of under-5 deaths.",
+   "opts": [
+    "50%",
+    "15%",
+    "1%",
+    "90%"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the global incidence of childhood pneumonia?",
+   "a": "**Over 1,400 cases per 100,000 children (about 1 case per 71 children per year).**\n\n## Understanding it\n- Very common: **~1,400/100,000** children (~1 in 71 per year).\n\n>> ~1,400/100,000 (1 in 71/year).",
+   "opts": [
+    "1 in 10,000 children",
+    "It is a rare disease",
+    "Over 1,400 per 100,000 (about 1 in 71 children/year)",
+    "About 10 per 100,000"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the risk factors for pneumonia.",
+   "a": "**Lack of (exclusive) breastfeeding; malnutrition including vitamin A deficiency; overcrowding; indoor smoke/air pollution; incomplete immunization; prematurity/low birth weight; and immunodeficiency (e.g. HIV).**\n\n## Understanding it\n- Risk factors weaken defences or increase exposure — **nutrition, crowding, smoke, immunisation gaps, immunodeficiency**.\n\n>> No breastfeeding, malnutrition, crowding, smoke, poor immunisation, immunodeficiency.",
+   "opts": [
+    "Older age and wealth",
+    "Breastfeeding and good nutrition",
+    "No breastfeeding, malnutrition, crowding, smoke, poor immunisation, immunodeficiency",
+    "Vaccination and clean air"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why does vitamin A deficiency predispose to pneumonia?",
+   "a": "**Vitamin A maintains the respiratory epithelium and cilia; deficiency impairs this barrier, so infection takes hold more easily.**\n\n## Understanding it\n- Vitamin A keeps the **airway lining/cilia** healthy; without it the barrier fails.\n\n>> Vitamin A maintains airway epithelium/cilia; deficiency weakens the barrier.",
+   "opts": [
+    "It kills bacteria directly",
+    "It provides oxygen",
+    "It maintains airway epithelium/cilia; deficiency weakens the barrier",
+    "It has no role in the lung"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does breastfeeding protect the lung?",
+   "a": "**Breast milk supplies maternal secretory IgA, one of the lung's own defences, plus other protective factors.**\n\n## Understanding it\n- Breast milk gives **secretory IgA** (and other factors) that defend the respiratory mucosa.\n\n>> Breast milk provides protective secretory IgA.",
+   "opts": [
+    "It supplies protective maternal secretory IgA",
+    "It provides extra oxygen",
+    "It sterilises the airway",
+    "It has no protective role"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the most common cause of pneumonia in children overall?",
+   "a": "**Viruses — accounting for ~50% at all ages and up to ~80% in the youngest children.**\n\n## Understanding it\n- **Viruses** are the commonest overall cause (especially in infants).\n\n>> Viruses (most common overall).",
+   "opts": [
+    "Bacteria in all cases",
+    "Parasites",
+    "Viruses (about 50%, up to ~80% in the youngest)",
+    "Fungi"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the commonest single virus causing pneumonia?",
+   "a": "**Respiratory syncytial virus (RSV).**\n\n## Understanding it\n- **RSV** is the single commonest viral cause.\n\n>> RSV.",
+   "opts": [
+    "Adenovirus",
+    "Rhinovirus",
+    "Respiratory syncytial virus (RSV)",
+    "Influenza virus"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the bacterial causes of pneumonia in neonates.",
+   "a": "**Escherichia coli, Klebsiella, Group B streptococcus, and Staphylococcus aureus.**\n\n## Understanding it\n- Neonatal bacteria = **maternal genital/gut flora** (E. coli, Klebsiella, GBS) plus S. aureus.\n\n>> E. coli, Klebsiella, GBS, S. aureus.",
+   "opts": [
+    "Mycoplasma pneumoniae",
+    "Bordetella pertussis",
+    "Streptococcus pneumoniae only",
+    "E. coli, Klebsiella, Group B streptococcus, S. aureus"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which organism accounts for over 70% of bacterial pneumonia in the 3 months to 3 years age group?",
+   "a": "**Streptococcus pneumoniae (the pneumococcus).**\n\n## Understanding it\n- **Pneumococcus** dominates bacterial pneumonia in this age group (>70%).\n\n>> Streptococcus pneumoniae.",
+   "opts": [
+    "Mycoplasma pneumoniae",
+    "Group B streptococcus",
+    "Streptococcus pneumoniae",
+    "Haemophilus influenzae"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Besides Strep pneumoniae, what bacterium is important in the 3 months to 3 years group?",
+   "a": "**Haemophilus influenzae.**\n\n## Understanding it\n- After pneumococcus, **H. influenzae** is important in this age group (vaccine-preventable).\n\n>> Haemophilus influenzae.",
+   "opts": [
+    "Mycoplasma pneumoniae",
+    "Pneumocystis jiroveci",
+    "Haemophilus influenzae",
+    "Group B streptococcus"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the bacterial causes of pneumonia in children over 3 years.",
+   "a": "**Streptococcus pneumoniae, Streptococcus pyogenes, Bordetella pertussis, Mycobacterium tuberculosis, and Mycoplasma pneumoniae.**\n\n## Understanding it\n- Over-3s: pneumococcus + **pyogenes, pertussis, TB, mycoplasma** (atypicals become important).\n\n>> Pneumococcus, S. pyogenes, pertussis, TB, mycoplasma.",
+   "opts": [
+    "Only Group B streptococcus",
+    "Only E. coli and Klebsiella",
+    "Only Pneumocystis",
+    "Pneumococcus, S. pyogenes, pertussis, TB, mycoplasma"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why do neonates get E. coli, Klebsiella and Group B strep pneumonia?",
+   "a": "**Because these are gut and genital-tract organisms acquired during passage through the birth canal.**\n\n## Understanding it\n- The neonate is colonised by **maternal genital/gut flora** at birth.\n\n>> Acquired from maternal genital/gut flora at birth.",
+   "opts": [
+    "They are hospital-only organisms",
+    "They are maternal genital/gut organisms acquired at birth",
+    "They are airborne only",
+    "They come from breast milk"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Name the atypical organisms causing pneumonia.",
+   "a": "**Mycoplasma, Chlamydia, Pneumocystis jiroveci, and Moraxella.**\n\n## Understanding it\n- Atypicals: **Mycoplasma, Chlamydia, Pneumocystis, Moraxella** (don't respond to standard penicillins).\n\n>> Mycoplasma, Chlamydia, Pneumocystis, Moraxella.",
+   "opts": [
+    "Mycoplasma, Chlamydia, Pneumocystis jiroveci, Moraxella",
+    "RSV and influenza",
+    "E. coli and Klebsiella",
+    "Streptococcus and Staphylococcus"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which atypical organism is implicated in neonates?",
+   "a": "**Chlamydia trachomatis.**\n\n## Understanding it\n- Neonatal atypical pneumonia = **Chlamydia trachomatis** (acquired from the maternal genital tract at birth).\n\n>> Chlamydia trachomatis.",
+   "opts": [
+    "Chlamydia trachomatis",
+    "Pneumocystis jiroveci",
+    "Mycoplasma pneumoniae",
+    "Moraxella catarrhalis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which atypical organism is implicated in the over-3-years group?",
+   "a": "**Mycoplasma pneumoniae.**\n\n## Understanding it\n- In older children the atypical of note is **Mycoplasma pneumoniae** (walking pneumonia).\n\n>> Mycoplasma pneumoniae.",
+   "opts": [
+    "Pneumocystis jiroveci",
+    "Coccidioides",
+    "Chlamydia trachomatis",
+    "Mycoplasma pneumoniae"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which atypical organism is implicated in HIV/immunocompromised children?",
+   "a": "**Pneumocystis jiroveci.**\n\n## Understanding it\n- In HIV/immunocompromised children think **Pneumocystis jiroveci (PCP)**.\n\n>> Pneumocystis jiroveci.",
+   "opts": [
+    "Aspergillus",
+    "Chlamydia trachomatis",
+    "Pneumocystis jiroveci",
+    "Mycoplasma pneumoniae"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why does mycoplasma pneumonia not respond to penicillin?",
+   "a": "**Mycoplasma has no cell wall, so β-lactams (which target cell-wall synthesis) can't work — a macrolide is needed.**\n\n## Understanding it\n- Penicillins attack the **cell wall**; Mycoplasma has none → use a **macrolide**.\n\n>> No cell wall → penicillin useless → give a macrolide.",
+   "opts": [
+    "Mycoplasma has no cell wall, so penicillin can't act; use a macrolide",
+    "Mycoplasma is a virus",
+    "Mycoplasma is always penicillin-resistant by enzyme",
+    "Penicillin is inactivated by fever"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the fungal causes of pneumonia.",
+   "a": "**Coccidioides, Aspergillus, Cryptococcus and Histoplasma.**\n\n## Understanding it\n- Fungal causes = **Coccidioides, Aspergillus, Cryptococcus, Histoplasma**.\n\n>> Coccidioides, Aspergillus, Cryptococcus, Histoplasma.",
+   "opts": [
+    "RSV and influenza",
+    "Ascaris and toxoplasma",
+    "Coccidioides, Aspergillus, Cryptococcus, Histoplasma",
+    "Mycoplasma and Chlamydia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the parasitic causes of pneumonia.",
+   "a": "**Ascaris, toxoplasma and schistosoma.**\n\n## Understanding it\n- Parasitic causes = **Ascaris, Toxoplasma, Schistosoma**.\n\n>> Ascaris, Toxoplasma, Schistosoma.",
+   "opts": [
+    "Aspergillus and Cryptococcus",
+    "Mycoplasma and Moraxella",
+    "Ascaris, toxoplasma and schistosoma",
+    "RSV and adenovirus"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "In what proportion of pneumonias is no pathogen identified?",
+   "a": "**In 20–60% of cases.**\n\n## Understanding it\n- A pathogen is **often never found** (20–60%), which is why treatment is empiric.\n\n>> No pathogen in 20–60%.",
+   "opts": [
+    "In 20–60% of cases",
+    "In under 1% of cases",
+    "In exactly 100% of cases",
+    "In 5% of cases"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is treatment of pneumonia usually empiric?",
+   "a": "**Because a pathogen is not identified in 20–60% of cases and blood culture is positive in only 20–30%, so you cannot wait for a specific result.**\n\n## Understanding it\n- The organism is **usually unknown/slow to grow**, so you treat by best guess (empirically).\n\n>> Pathogen often unknown/slow → treat empirically.",
+   "opts": [
+    "Because all pneumonia is viral",
+    "Because the pathogen is often unidentified and cultures are low-yield/slow",
+    "Because antibiotics never work anyway",
+    "Because culture is always positive"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Name the three physiologic defence mechanisms that keep the lower respiratory tract sterile.",
+   "a": "**Mucociliary clearance; secretory IgA; and clearing of the airway by coughing.**\n\n## Understanding it\n- Physiologic (mechanical) defences: **mucociliary escalator, secretory IgA, cough**.\n\n>> Mucociliary clearance, secretory IgA, cough.",
+   "opts": [
+    "Alveolar macrophages only",
+    "Fever and rigors",
+    "Mucociliary clearance; secretory IgA; cough",
+    "Surfactant production only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Name the immunologic defence mechanisms of the lung.",
+   "a": "**Alveolar and bronchiolar macrophages; secretory IgA; and other immunoglobulins.**\n\n## Understanding it\n- Immunologic defences: **macrophages + secretory IgA + other immunoglobulins**.\n\n>> Macrophages, secretory IgA, other immunoglobulins.",
+   "opts": [
+    "Alveolar/bronchiolar macrophages; secretory IgA; other immunoglobulins",
+    "The mucociliary escalator only",
+    "Coughing and sneezing only",
+    "Surfactant only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "By what four routes do pathogens enter the lower respiratory tract?",
+   "a": "**Inhalation of airborne droplets; descending spread from a URTI/LRTI; aspiration; and haematogenous (blood-borne) spread.**\n\n## Understanding it\n- Four entry routes: **inhalation, descending spread, aspiration, blood-borne**.\n\n>> Inhalation, descending spread, aspiration, haematogenous.",
+   "opts": [
+    "Only inhalation of droplets",
+    "Only by aspiration",
+    "Inhalation, descending spread, aspiration, haematogenous spread",
+    "Only through the bloodstream"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where do organisms first establish themselves in the lung?",
+   "a": "**In the small bronchioles and alveoli, from where they spread to the rest of the lung.**\n\n## Understanding it\n- Infection begins **distally** (small bronchioles/alveoli) then spreads.\n\n>> Small bronchioles and alveoli first.",
+   "opts": [
+    "In the pulmonary artery",
+    "In the small bronchioles and alveoli",
+    "In the pleural space",
+    "In the trachea"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which immune cells engulf the pathogens and release cytokines in pneumonia?",
+   "a": "**Alveolar macrophages, neutrophils, lymphocytes and eosinophils.**\n\n## Understanding it\n- Responding cells: **macrophages, neutrophils, lymphocytes, eosinophils**.\n\n>> Macrophages, neutrophils, lymphocytes, eosinophils.",
+   "opts": [
+    "Alveolar macrophages, neutrophils, lymphocytes, eosinophils",
+    "Red blood cells and platelets",
+    "Only mast cells",
+    "Only surfactant cells"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What does the inflammatory response (apoptosis, vascular permeability with oedema, cytokines) cause?",
+   "a": "**Cell destruction and alveolar congestion, which interrupts oxygen exchange across the alveolar membrane.**\n\n## Understanding it\n- Inflammation floods/damages alveoli → **impaired gas exchange** (hypoxia).\n\n>> Alveolar congestion → impaired oxygen exchange.",
+   "opts": [
+    "Cell destruction and alveolar congestion impairing oxygen exchange",
+    "Improved oxygen exchange",
+    "Bronchodilation",
+    "Increased lung compliance"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "On what three factors do the virulence and severity of pneumonia depend?",
+   "a": "**The health of the individual, the causative microorganism, and the size of the inoculum.**\n\n## Understanding it\n- Severity = **host health × organism virulence × inoculum size**.\n\n>> Host health, organism, inoculum size.",
+   "opts": [
+    "Only the antibiotic used",
+    "Only the child's age",
+    "Only the season",
+    "Host health, the causative organism, and the inoculum size"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the four stages of inflammation in pneumonia.",
+   "a": "**Vascular congestion; red hepatization; grey hepatization; and resolution.**\n\n## Understanding it\n- Classic lobar stages: **congestion → red → grey hepatization → resolution**.\n\n>> Congestion, red hep, grey hep, resolution.",
+   "opts": [
+    "Congestion, oedema, fibrosis, cavitation",
+    "Vascular congestion; red hepatization; grey hepatization; resolution",
+    "Red, white, blue, grey hepatization",
+    "Exudation, cavitation, calcification, healing"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When does vascular congestion occur and what are its features?",
+   "a": "**Within 24 hours — marked capillary engorgement and alveolar oedema with protein-rich fluid; clear sputum.**\n\n## Understanding it\n- Stage 1 (<24 h): **congested capillaries + oedema**, clear sputum.\n\n>> <24 h: capillary congestion + oedema.",
+   "opts": [
+    "Within 24 hours; capillary engorgement and alveolar oedema",
+    "After 2 weeks; fibrosis",
+    "On the 4th day; grey lung",
+    "On the 8th day; complete healing"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What type of sputum is produced in vascular congestion?",
+   "a": "**Clear sputum.**\n\n## Understanding it\n- Vascular-congestion stage → **clear** sputum (before red cells arrive).\n\n>> Clear sputum.",
+   "opts": [
+    "Frothy pink sputum",
+    "Clear sputum",
+    "Rusty sputum",
+    "Green purulent sputum"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When does red hepatization occur and what are its features?",
+   "a": "**2nd–4th day — alveoli fill with RBCs, neutrophils, desquamated epithelium and fibrin; lung is red, solid and airless.**\n\n## Understanding it\n- Stage 2 (day 2–4): **RBCs + fibrin + neutrophils** → red, liver-like lung.\n\n>> Day 2–4: RBCs/fibrin fill alveoli.",
+   "opts": [
+    "Only in bronchopneumonia",
+    "8th–9th day; resolution",
+    "Within 24 hours; just oedema",
+    "2nd–4th day; RBCs, neutrophils and fibrin fill the alveoli"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What type of sputum is produced in red hepatization?",
+   "a": "**Rusty sputum.**\n\n## Understanding it\n- Red hepatization → **rusty** sputum (broken-down RBCs).\n\n>> Rusty sputum.",
+   "opts": [
+    "Rusty sputum",
+    "Grey sputum",
+    "Bright red frank blood",
+    "Clear sputum"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is the sputum rusty in red hepatization?",
+   "a": "**Because red blood cells enter the alveoli and are partly broken down, staining the sputum rusty.**\n\n## Understanding it\n- Rusty colour = **partly degraded RBCs** in the alveolar exudate.\n\n>> Broken-down RBCs stain sputum rusty.",
+   "opts": [
+    "Because of inhaled dust",
+    "Because RBCs in the alveoli are partly broken down",
+    "Because of pus only",
+    "Because of bile pigment"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When does grey hepatization occur and what are its features?",
+   "a": "**4th–6th day — alveoli filled with fibrinopurulent exudate of haemolysed RBCs and degraded cells; lung is grey and solid.**\n\n## Understanding it\n- Stage 3 (day 4–6): **RBCs lysed, fibrinopurulent exudate** → grey lung.\n\n>> Day 4–6: grey, fibrinopurulent exudate.",
+   "opts": [
+    "8th–9th day; normal lung restored",
+    "2nd–4th day; red lung",
+    "4th–6th day; fibrinopurulent exudate, haemolysed RBCs",
+    "Within 24 hours; oedema only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why does the lung turn grey in grey hepatization?",
+   "a": "**Haemoglobin from the haemolysed red cells is broken down to haemosiderin, a grey-brown pigment.**\n\n## Understanding it\n- Grey colour = **haemosiderin** from broken-down haemoglobin.\n\n>> Haemosiderin from lysed RBCs turns lung grey.",
+   "opts": [
+    "Bile stains the lung",
+    "Air re-enters the alveoli",
+    "Haemoglobin from lysed RBCs is broken down to haemosiderin",
+    "The lung fills with pus only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "When does resolution occur and what happens?",
+   "a": "**8th–9th day — inflammatory exudate is cleared and normal pulmonary architecture is restored.**\n\n## Understanding it\n- Stage 4 (day 8–9): **exudate cleared, lung returns to normal**.\n\n>> Day 8–9: exudate cleared, lung normal.",
+   "opts": [
+    "Never — the lung stays solid",
+    "8th–9th day; exudate resolves and lung architecture is restored",
+    "Day 3; red hepatization",
+    "Day 1; oedema begins"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does the word 'hepatization' mean?",
+   "a": "**That the lung has become as solid and firm as liver (hepar = liver) because the alveoli are packed with exudate instead of air.**\n\n## Understanding it\n- Hepatization = lung feels **liver-like/solid** (airless, exudate-filled).\n\n>> Lung as solid as liver (hepar).",
+   "opts": [
+    "The lung has cavitated",
+    "The liver is inflamed",
+    "The lung has become as solid/firm as liver, being airless",
+    "The lung is infected by the liver"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define lobar pneumonia.",
+   "a": "**Pneumonia involving one or more whole lobes (or part of a lobe) with homogeneous consolidation of the affected lobe.**\n\n## Understanding it\n- Lobar = **whole-lobe, homogeneous** consolidation.\n\n>> Homogeneous consolidation of a whole lobe.",
+   "opts": [
+    "Inflammation of the pleura only",
+    "Patchy consolidation scattered through the lung",
+    "Inflammation of the bronchi only",
+    "Pneumonia with homogeneous consolidation of a whole lobe"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the bacterial causes of lobar pneumonia.",
+   "a": "**Streptococcus pneumoniae (chief), Haemophilus influenzae, Staphylococcus and Streptococcus pyogenes, and Klebsiella.**\n\n## Understanding it\n- Lobar pneumonia is **classically pneumococcal**, with H. influenzae, staph/strep pyogenes and Klebsiella.\n\n>> Pneumococcus mainly; also H. influenzae, staph/strep, Klebsiella.",
+   "opts": [
+    "RSV and influenza",
+    "Mycoplasma and Chlamydia",
+    "Pneumocystis and Aspergillus",
+    "Pneumococcus (mainly), H. influenzae, staph/strep pyogenes, Klebsiella"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the symptoms of lobar pneumonia.",
+   "a": "**Fever, rigors, productive cough, breathlessness, anorexia, pleuritic chest pain, restlessness and cyanosis.**\n\n## Understanding it\n- Lobar symptoms include the tell-tale **rigors + pleuritic chest pain + rusty productive cough**.\n\n>> Fever/rigors, productive cough, pleuritic pain, breathlessness.",
+   "opts": [
+    "Painless dry cough with no fever",
+    "Fever, rigors, productive cough, pleuritic chest pain, breathlessness",
+    "Chronic weight loss only",
+    "Wheeze with complete recovery between attacks"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the signs of lobar pneumonia.",
+   "a": "**Toxic, cyanosed, tachypnoeic child; central trachea, dull percussion, increased fremitus, bronchial breathing and crepitations over the affected lobe.**\n\n## Understanding it\n- Consolidation signs: **dull percussion, increased fremitus, bronchial breathing**, trachea central.\n\n>> Dull, increased fremitus, bronchial breathing, central trachea.",
+   "opts": [
+    "Central trachea, dull percussion, increased fremitus, bronchial breathing",
+    "Resonant equal percussion with widespread wheeze",
+    "Normal chest examination",
+    "Deviated trachea, hyper-resonance, absent breath sounds"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is percussion dull in lobar pneumonia?",
+   "a": "**Because consolidated tissue is solid and airless; solid tissue does not resonate like air-filled lung.**\n\n## Understanding it\n- Air resonates, **solid consolidation is dull**.\n\n>> Airless solid consolidation → dull note.",
+   "opts": [
+    "The lung is full of air",
+    "The pleura is thickened by fat",
+    "Consolidated tissue is solid/airless and doesn't resonate",
+    "There is a pneumothorax"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is tactile and vocal fremitus increased over consolidation?",
+   "a": "**Because solid consolidated tissue conducts sound (vibration) better than air-filled lung.**\n\n## Understanding it\n- Solid conducts vibration better than air → **increased fremitus**.\n\n>> Solid consolidation conducts sound better → ↑ fremitus.",
+   "opts": [
+    "Fremitus is always decreased in pneumonia",
+    "Solid consolidation conducts sound better than air-filled lung",
+    "The pleura blocks sound",
+    "Air conducts sound better than solid"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does the trachea remain central in lobar pneumonia?",
+   "a": "**Because consolidation replaces air with fluid inside the lung without changing lung volume — nothing pushes or pulls the trachea.**\n\n## Understanding it\n- Consolidation keeps **volume unchanged**, so no mediastinal shift.\n\n>> Volume unchanged → trachea stays central.",
+   "opts": [
+    "Consolidation replaces air with fluid without changing lung volume",
+    "The trachea is fixed and never moves",
+    "Because of collapse pulling it centrally",
+    "Because a large effusion pushes it back to centre"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is there pleuritic chest pain in lobar pneumonia?",
+   "a": "**Because a whole lobe reaches the parietal pleura, which has pain fibres; inflammation there causes sharp pain worsened by breathing.**\n\n## Understanding it\n- Lobar inflammation reaches the **pain-sensitive parietal pleura** → pleuritic pain.\n\n>> Inflammation reaches pain-sensitive parietal pleura.",
+   "opts": [
+    "The heart is compressed",
+    "Air trapped in the pleura stretches it",
+    "The lung parenchyma itself has many pain fibres",
+    "Inflammation reaches the pain-sensitive parietal pleura"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why may lobar pneumonia cause abdominal pain, vomiting and diarrhoea?",
+   "a": "**Lower-lobe pneumonia irritates the diaphragmatic pleura, referring pain to the abdomen; systemic illness also causes GI upset.**\n\n## Understanding it\n- Diaphragmatic pleural irritation **refers pain to the abdomen** (mimics a surgical abdomen).\n\n>> Diaphragmatic pleura irritation → referred abdominal pain.",
+   "opts": [
+    "The pneumonia spreads to the bowel",
+    "Lower-lobe irritation of the diaphragmatic pleura refers pain to the abdomen",
+    "There is always co-existing appendicitis",
+    "The antibiotics cause it"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define bronchopneumonia.",
+   "a": "**Pneumonia with patchy consolidation scattered through a lobe or throughout the lungs.**\n\n## Understanding it\n- Bronchopneumonia = **patchy, scattered** consolidation (vs homogeneous lobar).\n\n>> Patchy scattered consolidation.",
+   "opts": [
+    "Homogeneous consolidation of a whole lobe",
+    "Inflammation confined to the pleura",
+    "Pneumonia with patchy consolidation scattered through the lungs",
+    "Inflammation of the trachea"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the commonest cause of bronchopneumonia?",
+   "a": "**Respiratory syncytial virus (RSV) — probably the commonest cause.**\n\n## Understanding it\n- Bronchopneumonia is most often **viral (RSV)**.\n\n>> RSV.",
+   "opts": [
+    "Streptococcus pneumoniae",
+    "Mycobacterium tuberculosis",
+    "Klebsiella",
+    "Respiratory syncytial virus (RSV)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the viral causes of bronchopneumonia.",
+   "a": "**RSV (commonest), influenza, parainfluenza, adenovirus, rhinovirus and measles.**\n\n## Understanding it\n- Viral causes: **RSV, influenza, parainfluenza, adenovirus, rhinovirus, measles**.\n\n>> RSV, influenza, parainfluenza, adenovirus, rhinovirus, measles.",
+   "opts": [
+    "Aspergillus and Cryptococcus",
+    "Pneumococcus and Klebsiella",
+    "Mycoplasma and Chlamydia",
+    "RSV, influenza, parainfluenza, adenovirus, rhinovirus, measles"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the bacterial causes of bronchopneumonia.",
+   "a": "**Staphylococcus pyogenes, Streptococcus pneumoniae, Haemophilus influenzae and Mycobacterium tuberculosis.**\n\n## Understanding it\n- Bacterial bronchopneumonia: **staph, pneumococcus, H. influenzae, TB**.\n\n>> Staph, pneumococcus, H. influenzae, TB.",
+   "opts": [
+    "RSV and influenza",
+    "Staphylococcus, pneumococcus, H. influenzae, M. tuberculosis",
+    "Ascaris and schistosoma",
+    "Pneumocystis only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the symptoms of bronchopneumonia.",
+   "a": "**Fever, cough, breathlessness, anorexia, restlessness, cyanosis, upper abdominal pain, vomiting and diarrhoea.**\n\n## Understanding it\n- Similar to lobar but **chest pain is unusual**; GI symptoms common in children.\n\n>> Fever, cough, breathlessness, GI upset; chest pain unusual.",
+   "opts": [
+    "Pleuritic chest pain and rusty sputum prominently",
+    "Fever, cough, breathlessness, anorexia, cyanosis, GI upset",
+    "Chronic weight loss only",
+    "Painless wheeze with full recovery between attacks"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the signs of bronchopneumonia.",
+   "a": "**Central trachea; resonant, equal percussion notes on both sides; widespread crepitations; and possibly rhonchi.**\n\n## Understanding it\n- Bronchopneumonia signs: **resonant equal percussion + widespread crepitations** (patchy).\n\n>> Central trachea, resonant equal percussion, widespread crepitations.",
+   "opts": [
+    "Central trachea, resonant equal percussion, widespread crepitations",
+    "Completely normal chest",
+    "Deviated trachea and absent breath sounds",
+    "Dull percussion with bronchial breathing over one lobe"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is chest pain unusual in bronchopneumonia?",
+   "a": "**Because the patchy consolidation is scattered in the lung substance and often does not reach the pain-sensitive parietal pleura.**\n\n## Understanding it\n- Patchy consolidation usually **doesn't reach the parietal pleura** → little pain.\n\n>> Patchy consolidation rarely reaches the pleura.",
+   "opts": [
+    "Bronchopneumonia has no inflammation",
+    "Children can't feel chest pain",
+    "The pleura is anaesthetised",
+    "Patchy consolidation rarely reaches the pain-sensitive parietal pleura"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why are the percussion notes resonant and equal in bronchopneumonia?",
+   "a": "**Because consolidation is patchy with normal aerated lung in between, on both sides, so air still resonates.**\n\n## Understanding it\n- Patchy disease leaves **aerated lung between**, keeping percussion resonant.\n\n>> Patchy disease + aerated lung between → resonant.",
+   "opts": [
+    "There is a tension pneumothorax",
+    "The whole lung is solid",
+    "There is a large pleural effusion",
+    "Patchy consolidation with aerated lung between keeps it resonant"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the key differences between lobar and bronchopneumonia.",
+   "a": "**Lobar: homogeneous, usually bacterial, dull percussion, increased fremitus, bronchial breathing, pleuritic pain. Bronchopneumonia: patchy, often viral, resonant percussion, widespread crepitations, chest pain unusual.**\n\n## Understanding it\n- Lobar = **homogeneous/bacterial/dull**; broncho = **patchy/viral/resonant**.\n\n>> Lobar homogeneous & dull; broncho patchy & resonant.",
+   "opts": [
+    "Lobar is always viral, broncho always bacterial",
+    "Lobar: homogeneous, dull, bronchial breathing; broncho: patchy, resonant, crepitations",
+    "They are clinically identical",
+    "Lobar is patchy, broncho is homogeneous"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the goals of investigation in pneumonia.",
+   "a": "**To confirm the diagnosis; determine severity; establish complications; and exclude close differentials.**\n\n## Understanding it\n- Investigations aim to **confirm, grade severity, find complications, exclude mimics**.\n\n>> Confirm, grade severity, find complications, exclude differentials.",
+   "opts": [
+    "Confirm diagnosis, assess severity, find complications, exclude differentials",
+    "Only to satisfy the parents",
+    "Only to justify surgery",
+    "Only to name the exact organism"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the radiological investigations in pneumonia.",
+   "a": "**Chest X-ray, chest CT, and MRI.**\n\n## Understanding it\n- Imaging = **CXR (first), CT, MRI**.\n\n>> CXR, CT, MRI.",
+   "opts": [
+    "Blood culture and sputum culture",
+    "Chest X-ray, chest CT, and MRI",
+    "Full blood count and ESR",
+    "Pulse oximetry and ABG"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the microbiological investigations in pneumonia.",
+   "a": "**Nasopharyngeal swabs/washings, blood culture, sputum culture, pleural fluid culture, and bronchoscopic/lung aspirate samples.**\n\n## Understanding it\n- Microbiology samples: **nasopharyngeal, blood, sputum, pleural fluid, lung aspirate**.\n\n>> NP swab, blood, sputum, pleural fluid, lung aspirate cultures.",
+   "opts": [
+    "Chest X-ray and CT",
+    "ASO titre only",
+    "Pulse oximetry only",
+    "Nasopharyngeal swabs, blood, sputum, pleural fluid, lung aspirate cultures"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the two main uses of the chest X-ray in pneumonia?",
+   "a": "**To confirm the diagnosis, and to indicate a complication such as pleural effusion or empyema.**\n\n## Understanding it\n- CXR **confirms** pneumonia and **reveals complications** (effusion/empyema).\n\n>> Confirm diagnosis + detect complications.",
+   "opts": [
+    "To confirm the diagnosis and detect complications like effusion/empyema",
+    "To replace blood culture",
+    "To measure oxygen saturation",
+    "To identify the exact organism"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the chest X-ray appearance of viral pneumonia?",
+   "a": "**Hyperinflation with bilateral interstitial infiltrates and peribronchial cuffing.**\n\n## Understanding it\n- Viral CXR = **hyperinflation + bilateral interstitial infiltrates + peribronchial cuffing**.\n\n>> Hyperinflation, interstitial infiltrates, peribronchial cuffing.",
+   "opts": [
+    "A single round abscess cavity",
+    "Confluent lobar consolidation",
+    "Hyperinflation, bilateral interstitial infiltrates, peribronchial cuffing",
+    "A completely clear film"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the chest X-ray appearance of pneumococcal pneumonia?",
+   "a": "**Confluent lobar consolidation.**\n\n## Understanding it\n- Pneumococcus classically → **confluent lobar consolidation**.\n\n>> Confluent lobar consolidation.",
+   "opts": [
+    "Confluent lobar consolidation",
+    "Multiple thin-walled pneumatoceles",
+    "A normal chest film",
+    "Bilateral interstitial infiltrates with hyperinflation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the radiological findings in pneumonia.",
+   "a": "**Peribronchial infiltrates, lobar/segmental consolidation, air bronchograms, airspace obliteration, and pleural effusion.**\n\n## Understanding it\n- Findings: **infiltrates, consolidation, air bronchograms, effusion**.\n\n>> Infiltrates, consolidation, air bronchograms, effusion.",
+   "opts": [
+    "Peribronchial infiltrates, consolidation, air bronchograms, effusion",
+    "Only cardiomegaly",
+    "Only rib fractures",
+    "Only a normal film"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is an air bronchogram and what does it signify?",
+   "a": "**A black, branching air-filled bronchus seen against white exudate-filled alveoli; it signifies alveolar (airspace) consolidation.**\n\n## Understanding it\n- Air bronchogram = **patent air-filled bronchus outlined by consolidated alveoli** → airspace disease.\n\n>> Air-filled bronchus against consolidated alveoli = airspace disease.",
+   "opts": [
+    "A collapsed bronchus signifying obstruction",
+    "A calcified lymph node",
+    "Free air in the pleura",
+    "A patent bronchus outlined by consolidated alveoli, signifying airspace disease"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the significance of blood culture in pneumonia?",
+   "a": "**Definitive diagnosis of bacterial pneumonia may require isolating an organism from blood, but it is positive in only ~20–30% of cases.**\n\n## Understanding it\n- Blood culture is **definitive but low-yield** (~20–30%).\n\n>> Definitive but positive in only 20–30%.",
+   "opts": [
+    "Faster than a chest X-ray",
+    "Never useful in pneumonia",
+    "Always positive and essential",
+    "Definitive when positive but low-yield (positive in only ~20–30%)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is sputum m/c/s unreliable in children?",
+   "a": "**Because the sputum is contaminated by upper-airway (commensal) flora, and children rarely expectorate a clean sample.**\n\n## Understanding it\n- Child sputum is **contaminated by mouth/upper-airway flora** → unreliable.\n\n>> Contaminated by upper-airway flora.",
+   "opts": [
+    "It always grows the wrong pathogen deliberately",
+    "Sputum is contaminated by upper-airway commensal flora",
+    "Sputum culture is too fast",
+    "Children have no bacteria in sputum"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why are nasopharyngeal and throat swabs unreliable in children?",
+   "a": "**They may grow only the normal commensal organisms of the nasopharynx and throat, not the true lower-airway pathogen.**\n\n## Understanding it\n- Upper-airway swabs reflect **commensals**, not the deep lung pathogen.\n\n>> They grow upper-airway commensals, not the true pathogen.",
+   "opts": [
+    "They only work in adults",
+    "They may grow only normal nasopharyngeal/throat commensals",
+    "They are too slow to process",
+    "They kill the pathogen on contact"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How long does growth of respiratory viruses in tissue culture take?",
+   "a": "**5–10 days.**\n\n## Understanding it\n- Viral culture is **slow (5–10 days)** — too slow to guide acute treatment.\n\n>> 5–10 days.",
+   "opts": [
+    "A few minutes",
+    "24 hours",
+    "5–10 days",
+    "6 weeks"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "On what does definitive diagnosis of a bacterial pneumonia depend?",
+   "a": "**Isolation of an organism from the blood, pleural fluid or lung.**\n\n## Understanding it\n- Definitive proof = organism from a **normally sterile site** (blood, pleural fluid, lung).\n\n>> Isolate organism from blood, pleural fluid or lung.",
+   "opts": [
+    "A raised WBC count",
+    "A positive throat swab",
+    "A typical chest X-ray",
+    "Isolation of an organism from blood, pleural fluid or lung"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the value of countercurrent immuno-electrophoresis of urine?",
+   "a": "**It identifies bacterial antigens of capsulated organisms (S. pneumoniae, H. influenzae) even after antibiotics have started.**\n\n## Understanding it\n- Detects **capsular antigens** in urine — still positive **after antibiotics begun**.\n\n>> Detects capsular antigens even after antibiotics started.",
+   "opts": [
+    "It grows the live organism",
+    "It replaces the chest X-ray",
+    "It detects capsular antigens of pneumococcus/H. influenzae even post-antibiotics",
+    "It measures oxygen levels"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does the nucleic acid amplification test (e.g. PCR) do?",
+   "a": "**Provides rapid detection of pathogens difficult to culture, using respiratory secretions, lung aspirate or blood.**\n\n## Understanding it\n- PCR/NAAT = **fast detection of hard-to-culture organisms**.\n\n>> Rapid detection of hard-to-culture pathogens.",
+   "opts": [
+    "A slow 6-week culture",
+    "A measure of blood oxygen",
+    "An imaging technique",
+    "Rapid detection of hard-to-culture pathogens from secretions/aspirate/blood"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is Mycoplasma pneumoniae infection diagnosed?",
+   "a": "**By a positive PCR test or seroconversion on an IgG assay.**\n\n## Understanding it\n- Mycoplasma dx = **PCR or IgG seroconversion** (won't grow on routine culture).\n\n>> PCR or IgG seroconversion.",
+   "opts": [
+    "A rusty sputum sample",
+    "A positive PCR or seroconversion on IgG assay",
+    "A raised ASO titre",
+    "Routine blood culture"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What serological marker is useful in group A streptococcal pneumonia?",
+   "a": "**The anti-streptolysin O (ASO) titre.**\n\n## Understanding it\n- Group A strep → rising **ASO titre**.\n\n>> ASO titre.",
+   "opts": [
+    "The IgG PCR",
+    "Pulse oximetry",
+    "The anti-streptolysin O (ASO) titre",
+    "Countercurrent immuno-electrophoresis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the WBC picture in viral pneumonia?",
+   "a": "**Normal or elevated but usually not above 20,000/mm³, with a lymphocyte predominance.**\n\n## Understanding it\n- Viral: **≤20,000/mm³, lymphocyte-predominant**.\n\n>> ≤20,000, lymphocytes predominate.",
+   "opts": [
+    "Always exactly 20,000 eosinophils",
+    "Always below 1,000/mm³",
+    "40,000/mm³ with granulocyte predominance",
+    "Normal or ≤20,000/mm³ with lymphocyte predominance"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the WBC picture in bacterial pneumonia?",
+   "a": "**Often elevated, 15,000–40,000/mm³, with a predominance of granulocytes (neutrophils).**\n\n## Understanding it\n- Bacterial: **15,000–40,000/mm³, neutrophil (granulocyte)-predominant**.\n\n>> 15,000–40,000, granulocytes predominate.",
+   "opts": [
+    "Below 20,000 with lymphocyte predominance",
+    "Elevated 15,000–40,000/mm³ with granulocyte predominance",
+    "Always normal",
+    "Predominant eosinophils"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does arterial blood gas analysis assess in pneumonia?",
+   "a": "**The degree of hypoxia and the need for oxygen administration.**\n\n## Understanding it\n- ABG quantifies **hypoxia** and guides **oxygen need**.\n\n>> Degree of hypoxia and oxygen need.",
+   "opts": [
+    "The chest X-ray appearance",
+    "The exact bacterial species",
+    "The degree of hypoxia and the need for oxygen",
+    "The WBC count"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is serial pulse oximetry valuable?",
+   "a": "**It is non-invasive, instant and repeatable, and the trend across readings shows whether the child is improving or deteriorating.**\n\n## Understanding it\n- Pulse oximetry = **non-invasive, repeatable trend** of oxygenation.\n\n>> Non-invasive, repeatable trend of oxygenation.",
+   "opts": [
+    "It is non-invasive, instant, repeatable, and trends show progress",
+    "It measures WBC count",
+    "It is a one-off invasive test",
+    "It identifies the organism"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the differential diagnoses of pneumonia.",
+   "a": "**Bronchiolitis, asthma, bronchitis, bronchiectasis, lung abscess, pulmonary oedema, atelectasis (foreign body/mucus), and chemical pneumonitis.**\n\n## Understanding it\n- Differentials: other causes of **cough/breathlessness/opacity** — bronchiolitis, asthma, abscess, foreign body, etc.\n\n>> Bronchiolitis, asthma, bronchitis, abscess, foreign body, pneumonitis.",
+   "opts": [
+    "Bronchiolitis, asthma, bronchitis, bronchiectasis, abscess, foreign body, pneumonitis",
+    "There are no differentials",
+    "Only asthma",
+    "Only tuberculosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How do you distinguish bronchiolitis from bronchopneumonia?",
+   "a": "**Bronchiolitis is typically under 12 months with dominant wheeze and marked hyperinflation but no consolidation; bronchopneumonia has dominant crepitations with patchy consolidation on X-ray.**\n\n## Understanding it\n- Bronchiolitis = **infant + wheeze + hyperinflation, no consolidation**; broncho = **crepitations + patchy consolidation**.\n\n>> Bronchiolitis: wheeze, no consolidation; broncho: crepitations + consolidation.",
+   "opts": [
+    "They are indistinguishable",
+    "Bronchopneumonia only causes wheeze",
+    "Bronchiolitis: infant, wheeze, no consolidation; broncho: crepitations + patchy consolidation",
+    "Bronchiolitis has lobar consolidation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How do you distinguish asthma from pneumonia?",
+   "a": "**Asthma is recurrent and episodic with full recovery between attacks, triggers, atopy, reversible wheeze with bronchodilators, and is usually afebrile.**\n\n## Understanding it\n- Asthma = **episodic, reversible wheeze, afebrile**; pneumonia = **febrile, crepitations, consolidation**.\n\n>> Asthma: episodic, reversible, afebrile wheeze.",
+   "opts": [
+    "Asthma: episodic, reversible wheeze, atopy, usually afebrile",
+    "Asthma is a single febrile illness with consolidation",
+    "Pneumonia fully reverses with bronchodilators",
+    "Asthma never wheezes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What clue points to an inhaled foreign body rather than pneumonia?",
+   "a": "**Sudden choking while eating in a previously well child, unilateral signs, mediastinal shift, and obstructive hyperinflation on an expiratory film.**\n\n## Understanding it\n- Foreign body clue = **sudden choking + unilateral signs + obstructive hyperinflation**.\n\n>> Sudden choking, unilateral signs, obstructive hyperinflation.",
+   "opts": [
+    "A slowly worsening cough over weeks",
+    "Sudden choking while eating, unilateral signs, obstructive hyperinflation",
+    "Gradual bilateral crepitations with fever",
+    "Symmetrical hyperinflation from birth"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the acute complications of pneumonia (SHARE 4Ps).",
+   "a": "**Septicaemia, Heart failure, Atelectasis, Respiratory failure, Empyema, Pleural effusion, Pyo-pneumothorax, Pneumothorax and Pneumatocele.**\n\n## Understanding it\n- Acute complications (SHARE + 4Ps): sepsis, heart failure, atelectasis, respiratory failure, empyema; and the pleural/air problems.\n\n>> Sepsis, heart failure, atelectasis, respiratory failure, empyema, effusion, pyo-/pneumothorax, pneumatocele.",
+   "opts": [
+    "Only a mild cough",
+    "Septicaemia, heart failure, atelectasis, respiratory failure, empyema, effusion, pneumothorax, pneumatocele",
+    "Asthma and atopy",
+    "Lung abscess and bronchiectasis (chronic)"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the chronic complications of pneumonia.",
+   "a": "**Lung abscess and bronchiectasis.**\n\n## Understanding it\n- Chronic complications = **lung abscess and bronchiectasis** (from incomplete resolution).\n\n>> Lung abscess and bronchiectasis.",
+   "opts": [
+    "Empyema and pneumothorax",
+    "Septicaemia and heart failure",
+    "Respiratory failure and atelectasis",
+    "Lung abscess and bronchiectasis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is a pneumatocele and which organism is classically associated with it?",
+   "a": "**A thin-walled air-filled cyst formed by a ball-valve effect in necrotic lung; classically associated with Staphylococcus aureus.**\n\n## Understanding it\n- Pneumatocele = **thin-walled air cyst**, classically **Staph aureus**.\n\n>> Thin-walled air cyst; Staph aureus.",
+   "opts": [
+    "A thin-walled air-filled cyst, classically due to Staphylococcus aureus",
+    "A solid tumour due to Klebsiella",
+    "A pus collection due to pneumococcus",
+    "A calcified nodule due to TB"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "In which infection is subcutaneous emphysema seen as a complication of pneumonia?",
+   "a": "**In measles infection (giant cell pneumonia).**\n\n## Understanding it\n- Subcutaneous emphysema complicating pneumonia is classically seen in **measles (giant cell) pneumonia**.\n\n>> Measles (giant cell) pneumonia.",
+   "opts": [
+    "RSV bronchiolitis",
+    "Measles infection (giant cell pneumonia)",
+    "Mycoplasma pneumonia",
+    "Pneumococcal lobar pneumonia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Explain the progression from pleural effusion to pyo-pneumothorax.",
+   "a": "**Pleural inflammation exudes fluid (effusion); the fluid becomes infected/purulent (empyema); the lung ruptures into the infected space giving pus and air together (pyo-pneumothorax).**\n\n## Understanding it\n- Sequence: **effusion → empyema → pyo-pneumothorax** (lung ruptures adding air).\n\n>> Effusion → empyema → pyo-pneumothorax.",
+   "opts": [
+    "Pneumothorax → effusion → abscess",
+    "Effusion → infected/purulent (empyema) → lung ruptures adding air (pyo-pneumothorax)",
+    "Abscess → bronchiectasis → effusion",
+    "There is no progression"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does bronchiectasis develop after pneumonia?",
+   "a": "**It results from partial (incomplete) resolution, with residual inflammation and destruction of the bronchial wall.**\n\n## Understanding it\n- Bronchiectasis = **incomplete resolution → bronchial wall destruction/dilatation**.\n\n>> Incomplete resolution destroys the bronchial wall.",
+   "opts": [
+    "From a single dose of antibiotics",
+    "From complete resolution",
+    "From incomplete resolution with destruction of the bronchial wall",
+    "From too much oxygen"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the three principles of treatment of pneumonia.",
+   "a": "**Eradicate the infection; give supportive treatment; and manage the complications.**\n\n## Understanding it\n- Three pillars: **kill the bug, support the child, treat complications**.\n\n>> Eradicate infection, support, manage complications.",
+   "opts": [
+    "Oxygen, fluids, discharge",
+    "Eradicate infection, give supportive treatment, manage complications",
+    "Culture, isolate, quarantine",
+    "Vaccinate, educate, legislate"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What constitutes specific treatment of pneumonia?",
+   "a": "**Antibiotics, antivirals and antifungal drugs.**\n\n## Understanding it\n- Specific (anti-microbial) treatment = **antibiotics, antivirals, antifungals**.\n\n>> Antibiotics, antivirals, antifungals.",
+   "opts": [
+    "Oxygen, fluids and antipyretics",
+    "Antibiotics, antivirals and antifungal drugs",
+    "Bronchodilators only",
+    "Physiotherapy and feeding"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "By what is antimicrobial treatment of pneumonia guided?",
+   "a": "**Age, immune status, local epidemiology, radiologic findings, and microbiology results if available.**\n\n## Understanding it\n- Empiric choice is guided by **age, immunity, local epidemiology, imaging, and any micro results**.\n\n>> Age, immunity, local epidemiology, imaging, micro.",
+   "opts": [
+    "Only the parents' preference",
+    "Only the WBC count",
+    "Only the child's weight",
+    "Age, immune status, local epidemiology, imaging, microbiology"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the supportive treatments for pneumonia.",
+   "a": "**Admission when needed; oxygen with monitoring; antipyretics; fluids; a bronchodilator trial; nursing care; appropriate feeding; and chest physiotherapy.**\n\n## Understanding it\n- Supportive care = **oxygen, antipyretics, fluids, feeding, physiotherapy, nursing**.\n\n>> Oxygen, antipyretics, fluids, feeding, physiotherapy, nursing.",
+   "opts": [
+    "Antibiotics and antivirals only",
+    "Surgery in every case",
+    "Nothing beyond antibiotics",
+    "Oxygen, antipyretics, fluids, feeding, physiotherapy, nursing care"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which single supportive measure is most important in pneumonia?",
+   "a": "**Oxygen therapy, because it directly addresses the failure of oxygen exchange across the alveolar membrane.**\n\n## Understanding it\n- Oxygen is key — it **directly corrects the hypoxia** that kills.\n\n>> Oxygen — corrects the core problem, hypoxia.",
+   "opts": [
+    "Antipyretics",
+    "Chest physiotherapy",
+    "Oxygen therapy — it directly corrects the impaired gas exchange",
+    "Bronchodilators"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the indications for hospitalization in pneumonia.",
+   "a": "**Age <6 months; sickle-cell acute chest syndrome; multilobe involvement; immunocompromise; toxic appearance; severe respiratory distress; oxygen requirement; dehydration/vomiting; failure of oral antibiotics; and noncompliant parents.**\n\n## Understanding it\n- Admit the **very young, hypoxic, toxic, dehydrated, immunocompromised, or failing outpatient treatment**.\n\n>> <6 months, hypoxia, toxic, multilobe, immunocompromised, oral-treatment failure.",
+   "opts": [
+    "Age <6 months, hypoxia, toxic/severe distress, immunocompromise, oral-treatment failure",
+    "Only children over 10 years",
+    "Any child with a cough",
+    "Only mild afebrile cases"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the three specific treatments for complications your lecturer lists?",
+   "a": "**Digitalize in congestive cardiac failure; drain pleural fluid; and transfuse if anaemic.**\n\n## Understanding it\n- Complication-specific: **digoxin for CCF, drain effusion, transfuse anaemia**.\n\n>> Digoxin (CCF), drain effusion, transfuse anaemia.",
+   "opts": [
+    "More oxygen, more fluids, more antibiotics",
+    "Physiotherapy, feeding, nursing",
+    "Steroids, insulin, dialysis",
+    "Digitalize in CCF, drain pleural fluid, transfuse if anaemic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why are antipyretics important in pneumonia, beyond comfort?",
+   "a": "**Fever raises the metabolic oxygen demand, which a hypoxic child cannot afford.**\n\n## Understanding it\n- Fever **increases oxygen demand**; lowering it eases the hypoxic child.\n\n>> Fever raises oxygen demand a hypoxic child can't meet.",
+   "opts": [
+    "Fever raises metabolic oxygen demand a hypoxic child cannot afford",
+    "Antipyretics kill bacteria",
+    "Fever causes bronchiectasis",
+    "Fever spreads the infection"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Outline the prevention of pneumonia.",
+   "a": "**Immunization against respiratory pathogens; health education (reduce crowding, good nutrition, breastfeeding, avoid smoke); and legislation against pollution and smoking.**\n\n## Understanding it\n- Prevention = **immunize + educate + legislate**.\n\n>> Immunization, health education, legislation.",
+   "opts": [
+    "Only antibiotics",
+    "Only isolation of the sick",
+    "Only chest physiotherapy",
+    "Immunization, health education, and legislation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which immunizations help prevent pneumonia?",
+   "a": "**Vaccines against measles, diphtheria, pertussis and H. influenzae, plus pneumococcal vaccine against Strep pneumoniae.**\n\n## Understanding it\n- Key vaccines: **measles, DPT, Hib, pneumococcal**.\n\n>> Measles, diphtheria, pertussis, Hib, pneumococcal.",
+   "opts": [
+    "Only the BCG vaccine",
+    "Only the hepatitis B vaccine",
+    "No vaccine prevents pneumonia",
+    "Measles, diphtheria, pertussis, H. influenzae, and pneumococcal vaccines"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is legislation needed in pneumonia prevention?",
+   "a": "**Because structural risks like environmental pollution and tobacco smoke cannot be avoided by an individual family and require government action.**\n\n## Understanding it\n- Some risks (pollution, smoke) are **societal**, needing law, not just family effort.\n\n>> Structural risks (pollution/smoke) need government action.",
+   "opts": [
+    "Families can fix pollution alone",
+    "Vaccines are illegal without laws",
+    "Doctors legally must be paid more",
+    "Structural risks like pollution and smoke need government action"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — What is the golden rule when presenting a chest X-ray?",
+   "a": "**Assess details and technical adequacy first, then read systematically (ABCDE), and give the diagnosis last — never start with the obvious abnormality.**\n\n## Understanding it\n- Golden rule: **adequacy → systematic ABCDE → diagnosis last**.\n\n>> Adequacy first, systematic read, diagnosis last.",
+   "opts": [
+    "Only comment on the heart",
+    "Check adequacy, read systematically (ABCDE), give diagnosis last",
+    "Blurt out the obvious abnormality first",
+    "Give the diagnosis before looking"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — What does RIPE stand for in assessing X-ray adequacy?",
+   "a": "**Rotation (clavicles equidistant from spinous processes), Inspiration (5–6 anterior ribs in a child), Penetration (vertebrae just visible behind the heart), and Everything included.**\n\n## Understanding it\n- RIPE = **Rotation, Inspiration, Penetration, Everything** — the adequacy check.\n\n>> Rotation, Inspiration, Penetration, Everything.",
+   "opts": [
+    "Rotation, Infiltrate, Pneumonia, Emphysema",
+    "Ribs, Infection, Pleura, Effusion",
+    "Rotation, Inspiration, Penetration, Everything included",
+    "Right, Interstitial, Parenchyma, Edge"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What does the ABCDE system for reading a chest X-ray stand for?",
+   "a": "**Airway (trachea), Breathing (lung fields), Circulation (heart/mediastinum), Diaphragm (and costophrenic angles), Everything else (bones, soft tissues, lines).**\n\n## Understanding it\n- ABCDE = **Airway, Breathing, Circulation, Diaphragm, Everything else**.\n\n>> Airway, Breathing, Circulation, Diaphragm, Everything else.",
+   "opts": [
+    "Airway, Breathing, Circulation, Diaphragm, Everything else",
+    "Airway, Bones, Cardiac, Danger, Exposure",
+    "Alveoli, Bronchi, Cavity, Density, Edge",
+    "Assess, Breathe, Confirm, Diagnose, Explain"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why can't you reliably comment on heart size on a paediatric AP film?",
+   "a": "**Because the AP projection magnifies the heart, so apparent cardiomegaly may be artefactual.**\n\n## Understanding it\n- AP films **magnify the heart** → can't judge true size.\n\n>> AP projection magnifies the heart.",
+   "opts": [
+    "The heart is never visible in children",
+    "Children have no heart shadow",
+    "AP films shrink the heart",
+    "The AP projection magnifies the heart, so cardiomegaly may be artefactual"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A rotated or expiratory film can mimic what abnormality?",
+   "a": "**Rotation makes one lung look whiter (false consolidation); an expiratory film crowds the bases and enlarges the heart (false consolidation and false cardiomegaly).**\n\n## Understanding it\n- Poor technique fakes **consolidation and cardiomegaly**.\n\n>> Rotation/expiration mimic consolidation and cardiomegaly.",
+   "opts": [
+    "False consolidation (rotation) and false consolidation/cardiomegaly (expiration)",
+    "A rib fracture",
+    "A pneumothorax",
+    "A normal film always"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — A homogenous opacity with a sharp upper border and air bronchograms, trachea central. Diagnosis?",
+   "a": "**Lobar (e.g. right lower lobe) pneumonia; the sharp border is a fissure and the air bronchogram confirms alveolar consolidation.**\n\n## Understanding it\n- Central trachea + air bronchogram + sharp fissure border = **lobar pneumonia** (not collapse/effusion).\n\n>> Lobar pneumonia (fissure border, air bronchogram).",
+   "opts": [
+    "Lobar pneumonia — fissure border, air bronchogram, central trachea",
+    "Lobar collapse pulling the trachea over",
+    "A large pleural effusion",
+    "A tension pneumothorax"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — What does an air bronchogram allow you to exclude?",
+   "a": "**Collapse (blocked airway, no air in bronchus) and pleural effusion (fluid outside the lung) — because in both there is no air-filled bronchus within the opacity.**\n\n## Understanding it\n- An air bronchogram means **airspace disease**, so it excludes **collapse and effusion**.\n\n>> Excludes collapse and pleural effusion.",
+   "opts": [
+    "Cardiomegaly and effusion",
+    "Nothing at all",
+    "Consolidation and pneumonia",
+    "Collapse and pleural effusion (neither has an air-filled bronchus in the opacity)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Bilateral patchy opacities, hyperinflation with flat diaphragms and 8 anterior ribs, peribronchial cuffing. Diagnosis and likely organism in an infant?",
+   "a": "**Viral bronchopneumonia; in an infant following coryza the likely organism is RSV.**\n\n## Understanding it\n- Bilateral patchy + hyperinflation + peribronchial cuffing = **viral bronchopneumonia (RSV in an infant)**.\n\n>> Viral bronchopneumonia — RSV in an infant.",
+   "opts": [
+    "Lobar pneumococcal pneumonia",
+    "Tuberculosis",
+    "Viral bronchopneumonia; RSV in an infant",
+    "A pleural effusion"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — How is hyperinflation identified on a chest X-ray?",
+   "a": "**Flattened diaphragms and more than 6 anterior ribs visible above the diaphragm.**\n\n## Understanding it\n- Hyperinflation = **flat diaphragms + >6 anterior ribs**.\n\n>> Flat diaphragms, >6 anterior ribs.",
+   "opts": [
+    "Flattened diaphragms and more than 6 anterior ribs above the diaphragm",
+    "Fewer than 4 ribs visible",
+    "A raised, domed diaphragm",
+    "A small heart shadow"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why does viral infection cause hyperinflation?",
+   "a": "**Inflammation narrows the small airways; air enters on inspiration but cannot escape on expiration, causing air trapping.**\n\n## Understanding it\n- Narrowed airways → **air trapped** (in, not out) → hyperinflation.\n\n>> Narrowed airways trap air on expiration.",
+   "opts": [
+    "Narrowed airways trap air on expiration (air in, not out)",
+    "Consolidation fills the lung with fluid",
+    "The lungs make extra air",
+    "The diaphragm is paralysed"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — What is peribronchial cuffing?",
+   "a": "**Thickened, oedematous bronchial walls seen end-on as a thick dark ring (doughnut), indicating airway-centred (viral) pathology.**\n\n## Understanding it\n- Peribronchial cuffing = **thick oedematous bronchial wall (doughnut ring)** → viral/airway disease.\n\n>> Thickened bronchial wall ring; airway-centred disease.",
+   "opts": [
+    "Thickened oedematous bronchial walls (doughnut ring), airway-centred pathology",
+    "A calcified lymph node",
+    "An air-filled cavity",
+    "Fluid in the pleural space"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Which film should you request if you suspect an inhaled foreign body?",
+   "a": "**An expiratory film — the obstructed side stays inflated (ball-valve) while the normal lung empties, making the difference obvious.**\n\n## Understanding it\n- Expiratory film exposes the **ball-valve air trapping** on the obstructed side.\n\n>> Expiratory film (ball-valve air trapping).",
+   "opts": [
+    "An expiratory film — the obstructed side stays inflated (ball-valve)",
+    "A lateral skull film",
+    "No film is needed",
+    "An inspiratory film only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — What respiratory rate defines tachypnoea in a 1-5 year old (WHO)?",
+   "a": "**More than 40 breaths per minute.**\n\n## Understanding it\n- WHO tachypnoea (1–5 years) = **>40/min**.\n\n>> >40 breaths/min.",
+   "opts": [
+    "More than 60 per minute",
+    "More than 100 per minute",
+    "More than 20 per minute",
+    "More than 40 breaths per minute"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — What signs indicate severe pneumonia?",
+   "a": "**Tachypnoea, hypoxaemia (low SpO2), and increased work of breathing — subcostal recession, nasal flaring, grunting — plus a toxic appearance.**\n\n## Understanding it\n- Severity = **tachypnoea + hypoxia + increased work of breathing + toxic look**.\n\n>> Tachypnoea, hypoxaemia, recession/flaring/grunting, toxic.",
+   "opts": [
+    "A mild cough with normal SpO2",
+    "Tachypnoea, hypoxaemia, recession/flaring/grunting, toxic appearance",
+    "Fever alone",
+    "A clear chest with good saturations"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Why is a falling respiratory rate with a calm, drowsy child alarming in pneumonia?",
+   "a": "**It signals exhaustion and impending respiratory failure — a pre-terminal sign — not improvement; look for rising CO2 on ABG.**\n\n## Understanding it\n- A tiring child slows down — **exhaustion, not recovery** (rising CO2).\n\n>> Exhaustion/impending respiratory failure, not improvement.",
+   "opts": [
+    "It means the fever has resolved",
+    "It signals exhaustion and impending respiratory failure, not improvement",
+    "It means the child has recovered",
+    "It is a normal finding"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — In a severe pneumonia with SpO2 88%, what is the first action?",
+   "a": "**Give oxygen immediately, before completing the history, then continue assessment with serial pulse oximetry and ABG.**\n\n## Understanding it\n- Hypoxia is an emergency — **oxygen first**, assess after.\n\n>> Give oxygen immediately.",
+   "opts": [
+    "Finish the full history first",
+    "Order a chest X-ray before anything",
+    "Give oxygen immediately, then continue assessment",
+    "Start oral antibiotics and send home"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A child with pneumonia deteriorates with stony dullness, absent breath sounds and trachea deviated to the opposite side. What has happened?",
+   "a": "**A large pleural effusion or empyema has developed — a space-occupying collection pushing the trachea away.**\n\n## Understanding it\n- Stony dull + absent sounds + trachea pushed away = **large effusion/empyema**.\n\n>> Large pleural effusion/empyema pushing trachea away.",
+   "opts": [
+    "A large pleural effusion or empyema pushing the trachea away",
+    "Lobar collapse pulling the trachea over",
+    "Simple consolidation",
+    "A resolving pneumonia"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why does an empyema not respond to antibiotics alone?",
+   "a": "**Antibiotics penetrate a closed pus collection poorly; the treatment is drainage, not a stronger antibiotic.**\n\n## Understanding it\n- Pus in a closed space needs **drainage** — antibiotics can't get in well.\n\n>> Closed pus collection needs drainage, not stronger antibiotics.",
+   "opts": [
+    "Empyema is viral",
+    "Antibiotics penetrate a closed pus collection poorly; it needs drainage",
+    "Empyema always resolves on its own",
+    "The antibiotic dose is always too low"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — How do you manage a suspected empyema?",
+   "a": "**Chest X-ray and ultrasound to confirm/assess loculation; diagnostic and therapeutic thoracocentesis (fluid for microscopy, culture, Gram stain, protein, glucose, cytology); drainage; escalate antibiotics per culture; and consider TB.**\n\n## Understanding it\n- Empyema: **image → tap/analyse fluid → drain → targeted antibiotics → consider TB**.\n\n>> Image, tap and analyse, drain, targeted antibiotics, consider TB.",
+   "opts": [
+    "Oral antibiotics alone at home",
+    "Observation only",
+    "Bronchodilators and discharge",
+    "Image, thoracocentesis with fluid analysis, drainage, targeted antibiotics, consider TB"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why is pleural fluid a valuable microbiological specimen?",
+   "a": "**Because definitive bacterial diagnosis can be made from pleural fluid, which has a much higher yield than blood culture's 20–30%.**\n\n## Understanding it\n- Pleural fluid is a **sterile-site sample with higher yield** than blood culture.\n\n>> Sterile-site sample, higher yield than blood culture.",
+   "opts": [
+    "It never grows organisms",
+    "Definitive diagnosis with higher yield than blood culture's 20–30%",
+    "It is contaminated by mouth flora",
+    "It is the same yield as a throat swab"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A previously well toddler chokes on groundnuts, then presents 2 weeks later with fever and reduced air entry on one side. Diagnosis?",
+   "a": "**Inhaled foreign body with secondary post-obstructive pneumonia.**\n\n## Understanding it\n- Choking + delayed unilateral signs = **foreign body + post-obstructive pneumonia**.\n\n>> Inhaled foreign body with post-obstructive pneumonia.",
+   "opts": [
+    "Inhaled foreign body with secondary post-obstructive pneumonia",
+    "Simple lobar pneumonia",
+    "Bronchiolitis",
+    "Pulmonary tuberculosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why must a foreign body be removed by bronchoscopy rather than treated with antibiotics alone?",
+   "a": "**The obstruction causes stasis and recurrent infection; antibiotics cannot clear the pneumonia while the foreign body and obstruction remain.**\n\n## Understanding it\n- Remove the cause — **obstruction sustains infection** despite antibiotics.\n\n>> Obstruction sustains infection; must remove it.",
+   "opts": [
+    "Foreign bodies always pass on their own",
+    "Bronchoscopy is only diagnostic",
+    "The obstruction causes ongoing stasis/infection antibiotics cannot clear",
+    "Antibiotics dissolve the foreign body"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — Why should you always ask about a choking episode in a child with unilateral chest signs?",
+   "a": "**Because after aspiration there is a silent interval when the child seems well and the choking is often not volunteered, so the foreign body is easily missed.**\n\n## Understanding it\n- A **silent interval** hides the aspiration → easily missed unless you ask.\n\n>> Silent interval hides aspiration; ask directly.",
+   "opts": [
+    "Choking is irrelevant to the lungs",
+    "There is a silent interval after aspiration and the choking is easily missed",
+    "Unilateral signs are always asthma",
+    "Parents always report it spontaneously"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — What does a mediastinal shift tell you in a child you thought had pneumonia?",
+   "a": "**A complication or alternative diagnosis — collapse (trachea towards), or effusion/pneumothorax/obstructive hyperinflation (trachea away) — because simple consolidation keeps the trachea central.**\n\n## Understanding it\n- Simple consolidation is **central**; a shift means **collapse (toward) or effusion/pneumothorax (away)**.\n\n>> Shift = complication; toward = collapse, away = effusion/pneumothorax.",
+   "opts": [
+    "That the pneumonia has resolved",
+    "Normal simple consolidation",
+    "A complication: collapse (towards) or effusion/pneumothorax (away)",
+    "Nothing of significance"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — Which important condition mimics pneumonia in a sickle cell child and how is it managed?",
+   "a": "**Acute chest syndrome — a medical emergency managed with oxygen, hydration, analgesia, antibiotics and often transfusion.**\n\n## Understanding it\n- Sickle cell + chest signs = **acute chest syndrome**; treat with oxygen, fluids, analgesia, antibiotics, transfusion.\n\n>> Acute chest syndrome; oxygen, fluids, analgesia, antibiotics, transfusion.",
+   "opts": [
+    "Tuberculosis — anti-TB drugs only",
+    "Acute chest syndrome — oxygen, hydration, analgesia, antibiotics, transfusion",
+    "Asthma — bronchodilators only",
+    "Simple viral bronchiolitis — observe only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Why must tuberculosis always be considered in a non-resolving pneumonia in our setting?",
+   "a": "**Because M. tuberculosis is a cause of both lobar and bronchopneumonia and can present as pneumonia that fails to respond to standard antibiotics; send AFB/GeneXpert.**\n\n## Understanding it\n- TB is endemic and causes **antibiotic-non-responsive pneumonia** → test with AFB/GeneXpert.\n\n>> TB causes non-resolving pneumonia; test AFB/GeneXpert.",
+   "opts": [
+    "TB only occurs in adults",
+    "TB always resolves with penicillin",
+    "TB never affects the lung",
+    "TB causes pneumonia that fails standard antibiotics; send AFB/GeneXpert"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why does the appearance of crepitations over consolidation suggest improvement?",
+   "a": "**Because as the exudate breaks up and air re-enters the previously solid alveoli, crepitations are heard — a sign of resolution rather than deterioration.**\n\n## Understanding it\n- Air re-entering resolving alveoli **crackles** — that's recovery, not worsening.\n\n>> Air re-entering resolving alveoli → crepitations = recovery.",
+   "opts": [
+    "It always means empyema",
+    "It means a new infection has started",
+    "It means the lung is collapsing",
+    "Air re-entering resolving alveoli produces crepitations — a sign of resolution"
+   ],
+   "ans": 3
+  }
+ ]
 }
