@@ -11518,339 +11518,927 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "List the learning objectives of this lecture.",
-         "a": "Definition; risk factors/aetiology of neonatal tetanus; pathophysiology; clinical features and complications; differential diagnosis; investigations; treatment; and preventive measures."
+         "a": "**Definition; risk factors/aetiology; pathophysiology; clinical features and diagnosis; management; and prevention of neonatal tetanus.**\n\n## Understanding it\n- A standard disease framework: define → cause → mechanism → features/diagnosis → treat → prevent.\n\n>> Definition, aetiology, pathophysiology, features, management, prevention.",
+         "opts": [
+          "Only the microbiology of the organism",
+          "Definition, aetiology, pathophysiology, features, management, prevention",
+          "Only the treatment regimens",
+          "Only the prevention strategies"
+         ],
+         "ans": 1
         },
         {
          "q": "Define tetanus.",
-         "a": "An acute, potentially lethal disease of the nervous system caused by a toxin (tetanospasmin) produced by Clostridium tetani."
+         "a": "**An acute, potentially lethal disease of the nervous system caused by the toxin tetanospasmin, produced by Clostridium tetani.**\n\n## Understanding it\n- It is a **toxin-mediated** neurological disease (the bacterium stays local; the toxin does the damage).\n\n>> Tetanus = toxin (tetanospasmin) disease of the nervous system.",
+         "opts": [
+          "An inherited neuromuscular disorder",
+          "A toxin (tetanospasmin) disease of the nervous system",
+          "A viral encephalitis",
+          "A bacterial bloodstream infection (septicaemia)"
+         ],
+         "ans": 1
         },
         {
          "q": "When do initial symptoms appear in neonates?",
-         "a": "Within 3 to 4 days of birth."
+         "a": "**Within 3 to 4 days of birth.**\n\n## Understanding it\n- Neonatal symptoms typically begin around **day 3–4** (incubation from cord contamination).\n\n>> Neonatal tetanus symptoms: ~3–4 days after birth.",
+         "opts": [
+          "Within 3 to 4 days of birth",
+          "At 3 months of age",
+          "At 2–3 weeks of age",
+          "Within the first 24 hours"
+         ],
+         "ans": 0
         },
         {
          "q": "What three features characterise tetanus?",
-         "a": "Acute onset of hypertonia; painful muscular contractions (usually of the muscles of the jaw and neck); and generalized muscle spasms, without other apparent medical causes."
+         "a": "**Acute onset of hypertonia; painful muscular contractions (usually jaw and neck); and generalised muscle spasms without other apparent cause.**\n\n## Understanding it\n- The triad is increased tone, painful contractions (jaw/neck), and generalised spasms.\n\n>> Hypertonia, painful jaw/neck contractions, generalised spasms.",
+         "opts": [
+          "Hypertonia, painful jaw/neck contractions, generalised spasms",
+          "Fluctuating fatigable weakness",
+          "Flaccid paralysis, areflexia, sensory loss",
+          "Fever, rash, and lymphadenopathy"
+         ],
+         "ans": 0
         },
         {
          "q": "Does tetanus still occur in the United States despite immunization since the 1940s?",
-         "a": "Yes — despite widespread immunization of infants and children since the 1940s, tetanus still occurs in the United States."
+         "a": "**Yes — despite widespread immunization since the 1940s, tetanus still occurs (mainly in the under-immunized).**\n\n## Understanding it\n- Immunization dramatically reduced but did not eliminate it; spores persist in the environment.\n\n>> Yes — it persists, especially in the under-immunized.",
+         "opts": [
+          "No — only in tropical countries",
+          "Yes — but only in vaccinated people",
+          "Yes — it still occurs, mainly in the under-immunized",
+          "No — it was eradicated in the 1940s"
+         ],
+         "ans": 2
         },
         {
          "q": "Where is Clostridium tetani found?",
-         "a": "Worldwide in soil, in the inanimate environment, in animal faeces and occasionally human faeces; also in house dust and animal intestines."
+         "a": "**Worldwide in soil, the inanimate environment, animal faeces and occasionally human faeces.**\n\n## Understanding it\n- The spores are ubiquitous in soil and faeces — impossible to eradicate from the environment.\n\n>> Soil, environment, animal (± human) faeces, worldwide.",
+         "opts": [
+          "Only in tropical soil",
+          "Soil, environment, and animal/human faeces worldwide",
+          "Only in hospital surfaces",
+          "Only in contaminated water"
+         ],
+         "ans": 1
         },
         {
          "q": "List the four types of tetanus.",
-         "a": "Generalised, localised, cephalic, and neonatal."
+         "a": "**Generalised, localised, cephalic, and neonatal.**\n\n## Understanding it\n- Four clinical forms: generalised (commonest), localised, cephalic (head), neonatal.\n\n>> Generalised, localised, cephalic, neonatal.",
+         "opts": [
+          "Acute, chronic, latent, recurrent",
+          "Spinal, bulbar, autonomic, mixed",
+          "Generalised, localised, cephalic, neonatal",
+          "Mild, moderate, severe, fulminant"
+         ],
+         "ans": 2
         },
         {
          "q": "Within what period does generalised tetanus manifest, and how does it present?",
-         "a": "Within 3–14 days of birth, as progressive difficulty in feeding associated with hunger and crying, paralysis or diminished movement, stiffness, rigidity to touch, and spasms with or without opisthotonos."
+         "a": "**Within 3–14 days of birth, presenting as progressive difficulty feeding with hunger and crying.**\n\n## Understanding it\n- Generalised (neonatal) tetanus appears within ~3–14 days as feeding difficulty (from trismus).\n\n>> 3–14 days; presents with feeding difficulty, hunger, crying.",
+         "opts": [
+          "At 1 month; with flaccid weakness",
+          "3–14 days; progressive feeding difficulty with hunger/crying",
+          "At birth; with jaundice",
+          "Within 24 hours; with a rash"
+         ],
+         "ans": 1
         },
         {
          "q": "What proportion of generalised tetanus cases present with trismus, and what causes it?",
-         "a": "Approximately 50–75%; it is inability to open the mouth secondary to masseter muscle spasm."
+         "a": "**About 50–75%; trismus is inability to open the mouth due to masseter muscle spasm.**\n\n## Understanding it\n- Masseter spasm causes 'lockjaw' (trismus) — the commonest presenting sign.\n\n>> 50–75%; trismus = masseter spasm (lockjaw).",
+         "opts": [
+          "~30%; from pharyngeal spasm",
+          "~100%; from facial nerve palsy",
+          "~50–75%; trismus from masseter spasm",
+          "~10%; from tongue paralysis"
+         ],
+         "ans": 2
         },
         {
          "q": "What is risus sardonicus and what causes it?",
-         "a": "The scornful smile of tetanus, resulting from facial muscle involvement."
+         "a": "**The scornful 'sardonic smile' of tetanus, resulting from sustained facial muscle contraction.**\n\n## Understanding it\n- Facial muscle spasm fixes the face into a grimacing smile — risus sardonicus.\n\n>> Risus sardonicus = sardonic smile from facial muscle spasm.",
+         "opts": [
+          "A rash across the cheeks",
+          "Drooling from bulbar weakness",
+          "A facial droop from nerve palsy",
+          "A fixed sardonic smile from facial muscle spasm"
+         ],
+         "ans": 3
         },
         {
          "q": "Which two early complaints are associated with risus sardonicus?",
-         "a": "Nuchal rigidity and dysphagia."
+         "a": "**Nuchal rigidity and dysphagia.**\n\n## Understanding it\n- Neck stiffness (nuchal rigidity) and difficulty swallowing accompany the facial spasm.\n\n>> Nuchal rigidity and dysphagia.",
+         "opts": [
+          "Nuchal rigidity and dysphagia",
+          "Photophobia and vomiting",
+          "Ptosis and diplopia",
+          "Fever and headache"
+         ],
+         "ans": 0
         },
         {
          "q": "What stimuli provoke generalized muscle spasms as the disease progresses?",
-         "a": "Stimuli such as noise and touch (also light)."
+         "a": "**Noise and touch (and light).**\n\n## Understanding it\n- Minor sensory stimuli (sound, touch, light) trigger spasms — hence the quiet dark room.\n\n>> Noise, touch, light provoke spasms.",
+         "opts": [
+          "Only bright sunlight",
+          "Noise, touch and light",
+          "Only cold temperature",
+          "Only deep pain"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the posture of opisthotonos.",
-         "a": "Flexion and adduction of the arms, clenching of the fists, and extension of the lower extremities."
+         "a": "**Flexion and adduction of the arms, clenched fists, and extension of the lower extremities, with the back arched backward.**\n\n## Understanding it\n- Opisthotonos is a rigid backward-arched posture (paraspinal spasm) with flexed arms and extended legs.\n\n>> Opisthotonos = arched back, flexed arms, extended legs.",
+         "opts": [
+          "Arched back, flexed adducted arms, extended legs",
+          "Asymmetric fencing posture",
+          "Curled forward in a fetal position",
+          "Flaccid, floppy limbs"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the state of consciousness and sensation during tetanic spasms?",
-         "a": "Patients have an intact sensorium and feel severe pain."
+         "a": "**Patients have an intact sensorium and feel severe pain.**\n\n## Understanding it\n- The toxin doesn't affect consciousness or sensation — the child is **awake and in pain** during spasms.\n\n>> Conscious, intact sensation, severe pain.",
+         "opts": [
+          "Fully conscious with intact sensation — severe pain",
+          "Sedated and pain-free",
+          "Comatose and unaware",
+          "Confused with no pain"
+         ],
+         "ans": 0
         },
         {
          "q": "What three serious events can the spasms themselves cause?",
-         "a": "Fractures, tendon ruptures, and acute respiratory failure."
+         "a": "**Fractures, tendon ruptures, and acute respiratory failure.**\n\n## Understanding it\n- Violent spasms can break bones, rupture tendons, and cause respiratory failure (the main killer).\n\n>> Fractures, tendon ruptures, respiratory failure.",
+         "opts": [
+          "Bleeding, jaundice, and shock",
+          "Diarrhoea, vomiting, and dehydration",
+          "Stroke, seizure, and coma",
+          "Fractures, tendon ruptures, acute respiratory failure"
+         ],
+         "ans": 3
         },
         {
          "q": "What is localised tetanus, and what causes the muscular rigidity?",
-         "a": "Painful spasms of the muscles adjacent to the wound site; the rigidity is caused by dysfunction in the interneurons that inhibit the alpha motor neurons of the affected muscles."
+         "a": "**Painful spasms of muscles adjacent to the wound; the rigidity is caused by dysfunction of the interneurons that normally inhibit those motor neurons.**\n\n## Understanding it\n- In localised tetanus, only muscles near the wound are affected, from local loss of inhibition.\n\n>> Localised = spasm near the wound (local loss of inhibition).",
+         "opts": [
+          "Spasms only of the jaw",
+          "Spasms of muscles near the wound (local loss of inhibition)",
+          "Generalised spasms from the start",
+          "Flaccid paralysis of the limb"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the outcome and mortality of localised tetanus?",
-         "a": "No further CNS involvement occurs, and mortality is very low; but it may proceed to generalized tetanus."
+         "a": "**No further CNS involvement usually occurs and mortality is very low, but it may progress to generalised tetanus.**\n\n## Understanding it\n- Localised tetanus is usually mild but can become generalised.\n\n>> Low mortality; may progress to generalised.",
+         "opts": [
+          "No risk of progression",
+          "Always fatal",
+          "Always progresses to cephalic tetanus",
+          "Low mortality; may progress to generalised tetanus"
+         ],
+         "ans": 3
         },
         {
          "q": "What is cephalic tetanus and what is it associated with?",
-         "a": "A rare form of localized tetanus involving the bulbar or facial muscles, associated with chronic otitis media; it usually occurs after head trauma or otitis media."
+         "a": "**A rare form of localised tetanus involving the bulbar/facial muscles, associated with chronic otitis media or head/face wounds.**\n\n## Understanding it\n- Cephalic tetanus follows head/ear injuries and involves cranial-nerve-supplied muscles.\n\n>> Cephalic = head/facial tetanus (otitis media, head wounds).",
+         "opts": [
+          "Generalised tetanus with opisthotonos",
+          "Tetanus from an umbilical wound",
+          "Localised tetanus of bulbar/facial muscles (ear/head wounds)",
+          "A viral facial nerve palsy"
+         ],
+         "ans": 2
         },
         {
          "q": "List the features of cephalic tetanus.",
-         "a": "Retracted eyelids, deviated gaze, trismus, risus sardonicus, and spastic paralysis of the tongue and pharyngeal musculature; patients present with cranial nerve palsies."
+         "a": "**Retracted eyelids, deviated gaze, trismus, risus sardonicus, and spastic paralysis of the tongue and pharyngeal muscles.**\n\n## Understanding it\n- Cranial muscle involvement: eyelid/gaze changes, trismus, risus sardonicus, tongue/pharyngeal spasm.\n\n>> Eyelid/gaze changes, trismus, risus sardonicus, tongue/pharyngeal spasm.",
+         "opts": [
+          "Fever with neck stiffness",
+          "Eyelid retraction, deviated gaze, trismus, risus sardonicus, tongue/pharyngeal spasm",
+          "Generalised limb spasms only",
+          "Flaccid facial droop and ptosis"
+         ],
+         "ans": 1
         },
         {
          "q": "What is another name for neonatal tetanus, and what is its epidemiological importance?",
-         "a": "Tetanus neonatorum — a major cause of infant mortality in underdeveloped countries, but rare in the U.S."
+         "a": "**Tetanus neonatorum — a major cause of infant mortality in underdeveloped countries but rare in the developed world.**\n\n## Understanding it\n- Neonatal tetanus (tetanus neonatorum) is a big killer where deliveries are unsanitary and mothers unimmunised.\n\n>> Tetanus neonatorum: major infant killer in poor settings.",
+         "opts": [
+          "Erythema toxicum — a benign rash",
+          "Neonatal sepsis — a viral illness",
+          "Tetanus neonatorum — major infant killer in poor settings",
+          "Kernicterus — a bilirubin disease"
+         ],
+         "ans": 2
         },
         {
          "q": "How does infection occur in neonatal tetanus?",
-         "a": "From umbilical cord contamination during unsanitary delivery, coupled with a lack of maternal immunization."
+         "a": "**From umbilical cord contamination during unsanitary delivery, coupled with lack of maternal immunity.**\n\n## Understanding it\n- Spores enter the **cut umbilical stump**; without maternal antibodies the baby is unprotected.\n\n>> Contaminated cord + no maternal immunity.",
+         "opts": [
+          "Transplacental viral transfer",
+          "Airborne droplet spread",
+          "Umbilical cord contamination plus lack of maternal immunity",
+          "Contaminated breast milk"
+         ],
+         "ans": 2
         },
         {
          "q": "How do infants with neonatal tetanus present, and when?",
-         "a": "At the end of the first week of life, they become irritable, feed poorly, and develop rigidity with spasms."
+         "a": "**At the end of the first week they become irritable, feed poorly, and develop rigidity with spasms.**\n\n## Understanding it\n- Around day 7: irritability, poor feeding (trismus), then rigidity/spasms.\n\n>> End of week 1: irritable, poor feeding, rigidity/spasms.",
+         "opts": [
+          "At 1 month with flaccid weakness",
+          "At birth with jaundice",
+          "At 3 months with a rash",
+          "End of the first week: irritable, poor feeding, rigidity/spasms"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the prognosis of neonatal tetanus, and what is the ultimate management strategy?",
-         "a": "It has a very poor prognosis; early diagnosis and intervention are life saving, and prevention is the ultimate management strategy."
+         "a": "**Very poor prognosis; early diagnosis and intervention are life-saving, but prevention (immunization + clean delivery) is the ultimate strategy.**\n\n## Understanding it\n- High mortality; the real answer is **prevention** (maternal immunization, clean cord care).\n\n>> Poor prognosis; prevention is the ultimate strategy.",
+         "opts": [
+          "Poor prognosis; prevention (immunization + clean delivery) is key",
+          "Excellent prognosis; no prevention needed",
+          "Prevention is impossible",
+          "Good prognosis with antibiotics alone"
+         ],
+         "ans": 0
         },
         {
          "q": "List the umbilical risk factors for neonatal tetanus.",
-         "a": "Inadequate immunization of the mother; unsterile cutting or care of the umbilicus; and application of foreign material on the umbilicus, e.g. animal dung."
+         "a": "**Inadequate maternal immunization; unsterile cutting/care of the umbilicus; and application of contaminated substances to the stump.**\n\n## Understanding it\n- The three umbilical risks: unimmunised mother, dirty cord cutting, and dirty applications to the stump.\n\n>> Unimmunised mother; unsterile cord cutting; contaminated applications.",
+         "opts": [
+          "Preterm birth, low weight, male sex",
+          "Caesarean delivery and hospital birth",
+          "Unimmunised mother, unsterile cord cutting, contaminated applications",
+          "Breastfeeding and skin-to-skin contact"
+         ],
+         "ans": 2
         },
         {
          "q": "What percentage of puncture wounds was accounted for by stepping on a nail?",
-         "a": "32%."
+         "a": "**32%.**\n\n## Understanding it\n- Stepping on a nail is a classic puncture-wound source (~32% in the cited data).\n\n>> ~32% of puncture wounds.",
+         "opts": [
+          "75%",
+          "50%",
+          "32%",
+          "10%"
+         ],
+         "ans": 2
         },
         {
          "q": "In which other groups has tetanus been found to occur?",
-         "a": "Burn victims; patients receiving IM injections; persons obtaining tattoos; and persons with frostbite, dental infections (e.g. periodontal abscesses), penetrating eye injuries, and umbilical stump infections."
+         "a": "**Burn victims; patients receiving IM injections; persons obtaining tattoos; and persons with frostbite.**\n\n## Understanding it\n- Any breach that seeds spores into low-oxygen tissue can cause tetanus (burns, injections, tattoos, frostbite).\n\n>> Burns, IM injections, tattoos, frostbite.",
+         "opts": [
+          "Only farmers",
+          "Only newborns",
+          "Burn victims, IM injections, tattoos, frostbite",
+          "Only surgical patients"
+         ],
+         "ans": 2
         },
         {
          "q": "Give four other general risk factors for tetanus.",
-         "a": "Diabetes; chronic wounds (chronic wounds, abscesses or gangrene); parenteral drug abuse; and recent surgery."
+         "a": "**Diabetes; chronic wounds (abscesses or gangrene); parenteral drug abuse; and repeated injury.**\n\n## Understanding it\n- Poor-healing/low-oxygen wound states (diabetes, chronic wounds, IV drug use) favour tetanus.\n\n>> Diabetes, chronic wounds, IV drug use, repeated injury.",
+         "opts": [
+          "Anaemia, jaundice, dehydration, fever",
+          "Hypertension, obesity, smoking, alcohol",
+          "Diabetes, chronic wounds, parenteral drug abuse, repeated injury",
+          "Asthma, eczema, allergy, atopy"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe Clostridium tetani as an organism.",
-         "a": "An obligate, anaerobic, motile, gram-positive bacillus; non-encapsulated, and forms spores."
+         "a": "**An obligate anaerobic, motile, gram-positive bacillus; non-encapsulated and spore-forming.**\n\n## Understanding it\n- C. tetani is a spore-forming, motile, gram-positive **anaerobe**.\n\n>> Anaerobic, motile, gram-positive, spore-forming bacillus.",
+         "opts": [
+          "Obligate anaerobic, motile, gram-positive, spore-forming bacillus",
+          "Encapsulated gram-positive diplococcus",
+          "A virus with an RNA genome",
+          "Aerobic, gram-negative coccus"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the tetanus spores resistant to?",
-         "a": "Heat, desiccation, and disinfectants."
+         "a": "**Heat, desiccation, and disinfectants.**\n\n## Understanding it\n- The spores are extremely hardy — resisting heat, drying, and chemical disinfectants.\n\n>> Resist heat, desiccation, disinfectants.",
+         "opts": [
+          "Heat, desiccation, and disinfectants",
+          "Antibiotics but not heat",
+          "Only ultraviolet light",
+          "Only cold temperatures"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does C. tetani resemble a turkey leg?",
-         "a": "Because the colourless spores are located at one end of the bacillus."
+         "a": "**Because the colourless spore sits at one end of the bacillus (a terminal spore → 'drumstick' appearance).**\n\n## Understanding it\n- The terminal spore gives a 'drumstick'/tennis-racket look.\n\n>> Terminal spore → drumstick ('turkey leg') appearance.",
+         "opts": [
+          "It forms grape-like clusters",
+          "It is shaped like a coiled spiral",
+          "A terminal spore at one end (drumstick appearance)",
+          "It has a central swelling"
+         ],
+         "ans": 2
         },
         {
          "q": "How long can tetanus spores persist in normal tissue?",
-         "a": "For months to years."
+         "a": "**For months to years.**\n\n## Understanding it\n- Dormant spores can lie in tissue for months to years, germinating when conditions turn anaerobic.\n\n>> Months to years.",
+         "opts": [
+          "Decades to a lifetime",
+          "Months to years",
+          "A few hours",
+          "Only days"
+         ],
+         "ans": 1
         },
         {
          "q": "What conditions do the spores require to germinate?",
-         "a": "Specific anaerobic conditions — wounds with low oxidation-reduction potential, e.g. dead or devitalized tissue, foreign body, or active infection."
+         "a": "**Anaerobic conditions — wounds with low oxidation-reduction potential (e.g. dead/devitalised tissue).**\n\n## Understanding it\n- Spores need **low-oxygen (anaerobic)** wounds with dead tissue to germinate into toxin-producing bacteria.\n\n>> Low-oxygen (anaerobic) wounds with devitalised tissue.",
+         "opts": [
+          "Anaerobic wounds with low redox potential (devitalised tissue)",
+          "Aerobic culture media",
+          "Well-oxygenated clean wounds",
+          "Dry intact skin"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does the portal of entry look benign in tetanus?",
-         "a": "Because of the inability of the organism to evoke an inflammatory response — unless coinfection with other organisms develops."
+         "a": "**Because the organism cannot evoke an inflammatory response (unless there is co-infection), so the wound looks unremarkable.**\n\n## Understanding it\n- C. tetani doesn't inflame tissue, so a **trivial-looking** wound can still cause tetanus.\n\n>> No inflammation → benign-looking wound.",
+         "opts": [
+          "It evokes no inflammatory response, so the wound looks trivial",
+          "It causes obvious pus and swelling",
+          "It always forms an abscess",
+          "It heals faster than normal"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the two toxins produced by C. tetani.",
-         "a": "Tetanolysin and tetanospasmin."
+         "a": "**Tetanolysin and tetanospasmin.**\n\n## Understanding it\n- Two toxins: **tetanolysin** (haemolysin, minor) and **tetanospasmin** (the disease-causing neurotoxin).\n\n>> Tetanolysin and tetanospasmin.",
+         "opts": [
+          "Exotoxin A and endotoxin",
+          "Tetanolysin and tetanospasmin",
+          "Tetanospasmin and botulinum toxin",
+          "Alpha and beta haemolysin only"
+         ],
+         "ans": 1
         },
         {
          "q": "What is tetanolysin, and what is its pathologic activity?",
-         "a": "A haemolysin, with no recognized pathologic activity."
+         "a": "**A haemolysin with no recognised pathologic activity.**\n\n## Understanding it\n- Tetanolysin lyses red cells in vitro but has no known clinical role.\n\n>> Tetanolysin = a haemolysin, no clinical significance.",
+         "opts": [
+          "A haemolysin with no recognised pathologic activity",
+          "The main neurotoxin causing spasms",
+          "A potent enterotoxin",
+          "The toxin blocking acetylcholine"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the estimated minimum lethal dose of tetanospasmin?",
-         "a": "2.5 ng/kg body weight — by weight, one of the most potent toxins known."
+         "a": "**About 2.5 ng/kg body weight — by weight one of the most potent toxins known.**\n\n## Understanding it\n- Extraordinarily potent: a few nanograms per kg can be lethal.\n\n>> ~2.5 ng/kg — one of the most potent toxins.",
+         "opts": [
+          "~2.5 ng/kg (one of the most potent toxins known)",
+          "~2.5 g/kg",
+          "~2.5 mg/kg",
+          "~250 mg/kg"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the molecular structure of tetanospasmin.",
-         "a": "Synthesized as a 150-kd protein consisting of a 100-kd heavy chain and a 50-kd light chain joined by a disulphide bond."
+         "a": "**A 150-kd protein: a 100-kd heavy chain and a 50-kd light chain joined by a disulfide bond.**\n\n## Understanding it\n- Made as a 150-kd protein cleaved into heavy (binding) and light (active) chains.\n\n>> 150-kd: 100-kd heavy + 50-kd light chain (disulfide-linked).",
+         "opts": [
+          "A single 50-kd peptide",
+          "A lipopolysaccharide endotoxin",
+          "150-kd: 100-kd heavy + 50-kd light chain (disulfide-linked)",
+          "Two identical 75-kd chains"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the function of the heavy chain of tetanospasmin?",
-         "a": "It mediates binding of tetanospasmin to the presynaptic motor neuron."
+         "a": "**It mediates binding of tetanospasmin to the presynaptic motor neuron.**\n\n## Understanding it\n- Heavy chain = **binding** to the motor neuron; light chain = the enzymatic action.\n\n>> Heavy chain binds the presynaptic motor neuron.",
+         "opts": [
+          "It lyses red cells",
+          "It cleaves synaptobrevin",
+          "It travels up the axon",
+          "It binds the toxin to the presynaptic motor neuron"
+         ],
+         "ans": 3
         },
         {
          "q": "How does the light chain travel to the spinal cord, and how long does it take?",
-         "a": "By retrograde axonal transport from the contaminated site to the spinal cord, in 2–14 days."
+         "a": "**By retrograde axonal transport from the contaminated site to the spinal cord, taking 2–14 days.**\n\n## Understanding it\n- The active light chain moves **backward up the axon** to the CNS over 2–14 days (the incubation).\n\n>> Retrograde axonal transport; 2–14 days.",
+         "opts": [
+          "Retrograde axonal transport; 2–14 days",
+          "Via the bloodstream; within minutes",
+          "Through CSF; over months",
+          "Anterograde transport; instantly"
+         ],
+         "ans": 0
         },
         {
          "q": "Which neurons does the toxin enter when it reaches the spinal cord?",
-         "a": "Central inhibitory neurons."
+         "a": "**Central inhibitory neurons.**\n\n## Understanding it\n- The toxin targets the **inhibitory** interneurons of the spinal cord.\n\n>> Central inhibitory neurons.",
+         "opts": [
+          "Central inhibitory neurons",
+          "Sensory neurons",
+          "Excitatory motor neurons",
+          "Autonomic ganglion cells only"
+         ],
+         "ans": 0
         },
         {
          "q": "Which protein does the light chain cleave, and what is that protein's role?",
-         "a": "Synaptobrevin — which is integral to the binding of neurotransmitter-containing vesicles to the cell membrane."
+         "a": "**Synaptobrevin — which is essential for binding neurotransmitter vesicles to the presynaptic membrane for release.**\n\n## Understanding it\n- Cleaving **synaptobrevin** blocks vesicle fusion, so inhibitory neurotransmitter can't be released.\n\n>> Cleaves synaptobrevin (needed for vesicle release).",
+         "opts": [
+          "Dystrophin — stabilises muscle",
+          "Myelin basic protein",
+          "Synaptobrevin — needed for neurotransmitter vesicle release",
+          "Acetylcholinesterase — breaks down ACh"
+         ],
+         "ans": 2
         },
         {
          "q": "Which two neurotransmitters fail to be released, and with what result?",
-         "a": "GABA and glycine — leading to loss of inhibitory action on motor and autonomic neurons."
+         "a": "**GABA and glycine — so inhibition of motor and autonomic neurons is lost.**\n\n## Understanding it\n- Blocking the release of the inhibitory transmitters **GABA and glycine** removes the 'brakes' → spasms and autonomic overactivity.\n\n>> GABA and glycine blocked → loss of inhibition.",
+         "opts": [
+          "Glutamate and aspartate",
+          "Serotonin and noradrenaline",
+          "GABA and glycine — loss of inhibitory control",
+          "Acetylcholine and dopamine"
+         ],
+         "ans": 2
         },
         {
          "q": "What two clinical consequences follow the loss of inhibition?",
-         "a": "Autonomic hyperactivity, and uncontrolled muscle contraction (spasms) in response to normal stimuli such as noises or lights."
+         "a": "**Autonomic hyperactivity, and uncontrolled muscle contraction (spasms) to normal stimuli.**\n\n## Understanding it\n- Losing inhibition unleashes **muscle spasms** and **autonomic instability**.\n\n>> Autonomic hyperactivity and uncontrolled spasms.",
+         "opts": [
+          "Flaccid paralysis and sensory loss",
+          "Coma and areflexia",
+          "Fever and rash",
+          "Autonomic hyperactivity and uncontrolled muscle spasms"
+         ],
+         "ans": 3
         },
         {
          "q": "Can antitoxin neutralise toxin once it is fixed to neurons?",
-         "a": "No — once the toxin becomes fixed to neurons it cannot be neutralized with antitoxin."
+         "a": "**No — once the toxin is fixed to neurons it cannot be neutralised by antitoxin.**\n\n## Understanding it\n- Antitoxin only mops up **unbound (circulating)** toxin; bound toxin is untouchable — hence give it early.\n\n>> No — bound toxin can't be neutralised (treat only free toxin early).",
+         "opts": [
+          "Antitoxin removes toxin from neurons",
+          "No — fixed toxin cannot be neutralised (only free toxin)",
+          "Yes — antitoxin reverses fixed toxin",
+          "Yes — but only with high doses"
+         ],
+         "ans": 1
         },
         {
          "q": "What does recovery of nerve function from tetanus toxin require?",
-         "a": "Sprouting of new nerve terminals and formation of synapses."
+         "a": "**Sprouting of new nerve terminals and formation of new synapses.**\n\n## Understanding it\n- Because the toxin permanently disables the synapse, recovery needs the nerve to **regrow new terminals/synapses** (slow).\n\n>> Recovery needs new nerve sprouting and new synapses.",
+         "opts": [
+          "Nothing — it recovers within hours",
+          "Immediate reversal once antitoxin is given",
+          "Sprouting of new nerve terminals and new synapses",
+          "Regeneration of the whole neuron"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the first clinical features of neonatal tetanus?",
-         "a": "Poor sucking and difficulty in swallowing."
+         "a": "**Poor sucking and difficulty swallowing.**\n\n## Understanding it\n- Trismus makes the baby unable to suck/swallow — the earliest sign.\n\n>> Poor sucking and difficulty swallowing.",
+         "opts": [
+          "Flaccid weakness",
+          "A vesicular rash",
+          "High fever and vomiting",
+          "Poor sucking and difficulty swallowing"
+         ],
+         "ans": 3
         },
         {
          "q": "List the muscular clinical features of neonatal tetanus.",
-         "a": "Generalised muscle rigidity and painful spasm — e.g. opisthotonos position, stiffness of the jaw, and laryngospasm."
+         "a": "**Generalised muscle rigidity and painful spasms — e.g. opisthotonos, stiff jaw (trismus).**\n\n## Understanding it\n- Rigidity + spasms (opisthotonos, trismus) dominate.\n\n>> Rigidity and painful spasms (opisthotonos, trismus).",
+         "opts": [
+          "Fasciculations without spasm",
+          "Flaccid, floppy limbs",
+          "Generalised rigidity and painful spasms (opisthotonos, trismus)",
+          "Unilateral weakness"
+         ],
+         "ans": 2
         },
         {
          "q": "List the respiratory clinical features of neonatal tetanus.",
-         "a": "Difficulty in breathing, fast breathing, apnoea, and cyanosis."
+         "a": "**Difficulty breathing, fast breathing, apnoea, and cyanosis.**\n\n## Understanding it\n- Respiratory muscle spasm/failure causes distress, apnoea, cyanosis — the main cause of death.\n\n>> Breathing difficulty, tachypnoea, apnoea, cyanosis.",
+         "opts": [
+          "Wheeze only",
+          "Barking cough and stridor",
+          "Breathing difficulty, fast breathing, apnoea, cyanosis",
+          "No respiratory involvement"
+         ],
+         "ans": 2
         },
         {
          "q": "What other general clinical features occur?",
-         "a": "Restlessness, irritability, weak cry, and sardonic smile (risus sardonicus)."
+         "a": "**Restlessness, irritability, weak cry, and the sardonic smile (risus sardonicus).**\n\n## Understanding it\n- Plus general signs: irritable, restless, weak cry, risus sardonicus.\n\n>> Restlessness, irritability, weak cry, risus sardonicus.",
+         "opts": [
+          "Jaundice and pallor",
+          "Diarrhoea and vomiting",
+          "Restlessness, irritability, weak cry, risus sardonicus",
+          "Lethargy, hypotonia, and a strong cry"
+         ],
+         "ans": 2
         },
         {
          "q": "What three disturbances can set off spasms?",
-         "a": "Noises, light, and touch."
+         "a": "**Noises, light, and touch.**\n\n## Understanding it\n- Sensory stimuli (sound, light, touch) trigger spasms — manage in a quiet, dark room.\n\n>> Noise, light, touch.",
+         "opts": [
+          "Only deep pain",
+          "Only feeding",
+          "Noises, light, and touch",
+          "Only bright sunlight"
+         ],
+         "ans": 2
         },
         {
          "q": "List the complications of neonatal tetanus.",
-         "a": "Aspiration pneumonia, pneumothorax, seizures, spinal fractures, pulmonary embolism, gastric ulceration, and mediastinal emphysema."
+         "a": "**Aspiration pneumonia, pneumothorax, seizures, spinal fractures, pulmonary embolism, and gastric ulceration.**\n\n## Understanding it\n- Spasms and immobility cause respiratory, skeletal, and thromboembolic complications.\n\n>> Aspiration pneumonia, pneumothorax, seizures, fractures, PE, gastric ulcer.",
+         "opts": [
+          "Diarrhoea, dehydration, and shock only",
+          "Aspiration pneumonia, pneumothorax, seizures, fractures, PE, gastric ulcer",
+          "Jaundice, anaemia, and bleeding",
+          "Meningitis, otitis, and sinusitis"
+         ],
+         "ans": 1
         },
         {
          "q": "List the differential diagnoses of neonatal tetanus.",
-         "a": "Acute encephalitis, epileptic seizures, parapharyngeal abscess, retropharyngeal abscess, rabies, and meningitis/encephalitis."
+         "a": "**Acute encephalitis, epileptic seizures, parapharyngeal/retropharyngeal abscess, rabies, and meningitis.**\n\n## Understanding it\n- Consider other causes of stiffness/spasm/rigidity in a neonate.\n\n>> Encephalitis, seizures, pharyngeal abscess, rabies, meningitis.",
+         "opts": [
+          "Encephalitis, seizures, pharyngeal abscess, rabies, meningitis",
+          "Eczema, psoriasis, scabies",
+          "Bronchiolitis, asthma, croup",
+          "Gastroenteritis and UTI"
+         ],
+         "ans": 0
         },
         {
          "q": "List the conditions that produce trismus.",
-         "a": "Alveolar abscess, strychnine poisoning, dystonic drug reactions, and hypocalcaemic tetany."
+         "a": "**Alveolar (dental) abscess, strychnine poisoning, dystonic drug reactions, and hypocalcaemic tetany.**\n\n## Understanding it\n- Other causes of lockjaw: dental abscess, strychnine, drug dystonia, hypocalcaemia.\n\n>> Dental abscess, strychnine, drug dystonia, hypocalcaemic tetany.",
+         "opts": [
+          "Meningitis, encephalitis, stroke",
+          "Asthma, croup, epiglottitis",
+          "Dental abscess, strychnine poisoning, drug dystonia, hypocalcaemic tetany",
+          "Bronchiolitis and pneumonia"
+         ],
+         "ans": 2
         },
         {
          "q": "Which pattern of findings suggests tetanus rather than another cause?",
-         "a": "Marked increased tone in central muscles with superimposed generalized spasms and relative sparing of the hands and feet."
+         "a": "**Marked increased tone in central (axial) muscles with superimposed generalised spasms and relative sparing of the hands and feet.**\n\n## Understanding it\n- Axial (trunk/neck/face) rigidity with spasms, sparing distal hands/feet, points to tetanus.\n\n>> Central rigidity + spasms, distal sparing = tetanus.",
+         "opts": [
+          "Distal weakness with normal trunk",
+          "Unilateral facial droop",
+          "Flaccid areflexia",
+          "Central rigidity with spasms, relative sparing of hands/feet"
+         ],
+         "ans": 3
         },
         {
          "q": "How is the diagnosis of tetanus made?",
-         "a": "Basically clinically, with proper history taking and examination — there are no specific confirmatory tests."
+         "a": "**Basically clinically — from history and examination; there are no specific confirmatory laboratory tests.**\n\n## Understanding it\n- Tetanus is a **clinical diagnosis**; cultures are often negative and add little.\n\n>> Clinical diagnosis (no specific confirmatory test).",
+         "opts": [
+          "By a specific serum antibody test",
+          "By blood culture of C. tetani",
+          "By CSF PCR",
+          "Clinically, from history and examination (no confirmatory test)"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes peripheral leukocytosis in tetanus?",
-         "a": "Secondary infection of the wound."
+         "a": "**Secondary infection of the wound.**\n\n## Understanding it\n- Tetanus itself doesn't raise the white count; a high WBC reflects a **secondary wound infection**.\n\n>> Leukocytosis = secondary wound infection.",
+         "opts": [
+          "Dehydration",
+          "A viral co-infection",
+          "Secondary infection of the wound",
+          "The tetanospasmin toxin itself"
+         ],
+         "ans": 2
         },
         {
          "q": "What caution applies to CSF examination in tetanus?",
-         "a": "Intense muscle contractions may raise intracranial pressure."
+         "a": "**Intense muscle contractions may raise intracranial pressure.**\n\n## Understanding it\n- Spasms can transiently raise ICP, so lumbar puncture carries added caution.\n\n>> Spasms raise ICP — caution with LP.",
+         "opts": [
+          "Muscle spasms may raise intracranial pressure",
+          "CSF glucose is always low",
+          "The CSF is always purulent",
+          "LP cures the spasms"
+         ],
+         "ans": 0
         },
         {
          "q": "Which other investigations may be done?",
-         "a": "Electroencephalogram, blood culture, and random blood glucose."
+         "a": "**Electroencephalogram, blood culture, and random blood glucose.**\n\n## Understanding it\n- Supportive tests (EEG, blood culture, glucose) help exclude mimics/complications, not confirm tetanus.\n\n>> EEG, blood culture, random blood glucose.",
+         "opts": [
+          "EEG, blood culture, random blood glucose",
+          "A specific tetanus antibody assay",
+          "Nerve conduction studies",
+          "Muscle biopsy"
+         ],
+         "ans": 0
         },
         {
          "q": "List the six general management measures for neonatal tetanus.",
-         "a": "Supportive measures (IV fluid, oxygen, quiet dark room); antibiotics to eradicate the source; antitoxin (TIG or TAT) to neutralize circulating toxin; control of muscle spasms with diazepam; respiratory care (gentle suctioning, tracheostomy); and management of complications."
+         "a": "**Supportive care (IV fluids, oxygen, quiet dark room); antibiotics to eradicate the source; antitoxin/immunoglobulin; muscle-relaxant/anticonvulsant control of spasms; wound/cord care; and active immunization.**\n\n## Understanding it\n- Support + kill the bug + neutralise free toxin + control spasms + clean the wound + immunise.\n\n>> Support, antibiotics, antitoxin, spasm control, wound care, immunise.",
+         "opts": [
+          "Support, antibiotics, antitoxin, spasm control, wound care, immunisation",
+          "Only IV fluids and oxygen",
+          "Only antibiotics",
+          "Only sedation"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the two non-pharmacological supportive measures?",
-         "a": "Control light or noise in the room to avoid provoking spasms; and rigorously cleanse the umbilical stump to stop the production of toxin at the site of infection."
+         "a": "**Control light/noise in the room to avoid provoking spasms; and rigorously cleanse the umbilical stump.**\n\n## Understanding it\n- Quiet, dark environment + meticulous cord cleaning are the key non-drug measures.\n\n>> Quiet dark room + clean the cord.",
+         "opts": [
+          "Bright light and stimulation",
+          "Physiotherapy and massage",
+          "Early mobilisation",
+          "Minimise light/noise; rigorously clean the umbilicus"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the amoxicillin-clavulanate regimen for neonatal tetanus.",
-         "a": "20–30 mg/kg/day orally via nasogastric tube, divided 8 hourly, for 7 days."
+         "a": "**20–30 mg/kg/day orally via nasogastric tube, divided 8-hourly, for 7 days.**\n\n## Understanding it\n- Given via NG tube (the baby can't suck) 8-hourly for a week.\n\n>> 20–30 mg/kg/day NG, 8-hourly, 7 days.",
+         "opts": [
+          "200 mg/kg/day IV once daily",
+          "5 mg/kg single oral dose",
+          "20–30 mg/kg/day NG, 8-hourly, for 7 days",
+          "2 g IV 12-hourly for 14 days"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the metronidazole dosing in neonatal tetanus.",
-         "a": "7.5 mg/kg for postnatal age ≤ 7 days; weighing 1200–2000 g: 7.5 mg/kg/day every 24 hours; > 2000 g: 15 mg/kg/day in divided doses every 12 hours; > 2000 g: 30 mg/kg/day in divided doses every 12 hours — for 7 days."
+         "a": "**7.5 mg/kg for postnatal age ≤ 7 days (e.g. 1200–2000 g: 7.5 mg/kg/day every 24 hours), adjusted by weight/age.**\n\n## Understanding it\n- Metronidazole is a key anti-anaerobe; dose ~7.5 mg/kg, interval by age/weight.\n\n>> ~7.5 mg/kg, interval by postnatal age/weight.",
+         "opts": [
+          "A single 1 g dose",
+          "~7.5 mg/kg, dosing interval by age/weight",
+          "75 mg/kg every hour",
+          "Contraindicated in neonates"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the ceftriaxone and cefotaxime regimens.",
-         "a": "Ceftriaxone IV 2 g (50 mg/kg in paediatric patients older than 1 month) 12 hourly for 7 days; cefotaxime IV 2 g (50 mg/kg) in paediatric patients older than 1 month, 6 hourly for 5 days."
+         "a": "**Ceftriaxone IV (50 mg/kg in children >1 month) 12-hourly for 7 days; cefotaxime as an alternative.**\n\n## Understanding it\n- Third-generation cephalosporins are alternative antibiotics for the wound source.\n\n>> Ceftriaxone 50 mg/kg 12-hourly ×7 days (cefotaxime alternative).",
+         "opts": [
+          "500 mg/kg once weekly",
+          "They are contraindicated in tetanus",
+          "Ceftriaxone 50 mg/kg 12-hourly for 7 days (cefotaxime alternative)",
+          "A single oral dose of each"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the dose and route of tetanus immunoglobulin (TIG)?",
-         "a": "250–500 units intramuscularly, as a single dose."
+         "a": "**250–500 units intramuscularly, as a single dose.**\n\n## Understanding it\n- Human TIG neutralises **circulating (unbound)** toxin — give a single IM dose early.\n\n>> TIG 250–500 units IM, single dose.",
+         "opts": [
+          "A single oral dose",
+          "5000 units IV daily for a week",
+          "It is given only after recovery",
+          "250–500 units IM, single dose"
+         ],
+         "ans": 3
         },
         {
          "q": "What is given if human tetanus immunoglobulin is unavailable, and what precaution applies?",
-         "a": "Tetanus antitoxin (TAT) 1500 IU single dose IM — assuming sensitivity reactions to horse serum are negative."
+         "a": "**Tetanus antitoxin (TAT) 1500 IU single IM dose — after testing for hypersensitivity to horse serum (risk of serum sickness/anaphylaxis).**\n\n## Understanding it\n- Equine TAT substitutes for TIG but is horse-derived → test for hypersensitivity first.\n\n>> TAT 1500 IU IM; beware horse-serum sensitivity.",
+         "opts": [
+          "TAT 1500 IU IM — test for horse-serum hypersensitivity first",
+          "An oral antitoxin",
+          "More TIG at double dose",
+          "No alternative exists"
+         ],
+         "ans": 0
         },
         {
          "q": "What vaccine is additionally recommended in the treatment of tetanus?",
-         "a": "A single dose of the DT vaccine."
+         "a": "**A single dose of the DT vaccine (active immunization, since infection doesn't confer immunity).**\n\n## Understanding it\n- Because natural infection gives no immunity, active immunization (DT) is started during treatment.\n\n>> Give DT vaccine (active immunization).",
+         "opts": [
+          "No vaccine is needed after infection",
+          "A single dose of DT vaccine (active immunization)",
+          "The BCG vaccine",
+          "The oral polio vaccine"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the diazepam regimen for control of tetanic spasms.",
-         "a": "0.1–0.2 mg/kg every 3–6 hours intravenously, subsequently titrated to control the tetanic spasms."
+         "a": "**0.1–0.2 mg/kg every 3–6 hours IV, then titrated to control the spasms.**\n\n## Understanding it\n- Diazepam (a GABA-enhancer) is first-line for spasm control, titrated to effect.\n\n>> Diazepam 0.1–0.2 mg/kg IV every 3–6 h, titrated.",
+         "opts": [
+          "A single IM dose",
+          "2 mg/kg once daily orally",
+          "Only when the child is awake",
+          "0.1–0.2 mg/kg IV every 3–6 h, titrated to effect"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the chlorpromazine dose for spasm control.",
-         "a": "1–5 mg/kg/dose every 8 hours."
+         "a": "**1–5 mg/kg/dose every 8 hours.**\n\n## Understanding it\n- Chlorpromazine is an adjunct for spasm control, dosed 8-hourly.\n\n>> Chlorpromazine 1–5 mg/kg every 8 h.",
+         "opts": [
+          "1–5 mg/kg every 8 hours",
+          "50 mg/kg every hour",
+          "It is contraindicated in tetanus",
+          "A single oral dose"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the phenobarbitone regimen for spasm control.",
-         "a": "Loading dose 20 mg/kg, then 2.5 mg/kg/dose every 12 hours, increased to a maximum of 5 mg/kg/dose every 12 hours."
+         "a": "**Loading 20 mg/kg, then 2.5 mg/kg/dose every 12 hours (up to a maximum of 5 mg/kg/dose).**\n\n## Understanding it\n- Phenobarbitone (loading then maintenance) is used with diazepam/chlorpromazine in a rotating schedule.\n\n>> Load 20 mg/kg, then 2.5 mg/kg 12-hourly (max 5).",
+         "opts": [
+          "A single 1 g dose",
+          "5 mg/kg once weekly",
+          "It is not used in tetanus",
+          "Load 20 mg/kg, then 2.5 mg/kg every 12 h (max 5 mg/kg)"
+         ],
+         "ans": 3
         },
         {
          "q": "State the rotating hourly schedule for the three spasm-control drugs.",
-         "a": "Diazepam at 0, 3, 9, 15, 21 and 24 hours; chlorpromazine at 3, 9, 15 and 21 hours; phenobarbitone at 0, 6 and 21 hours."
+         "a": "**Diazepam at 0, 3, 9, 15, 21 and 24 h; chlorpromazine at 3, 9, 15 and 21 h; phenobarbitone at 6, 12, 18 and 24 h — staggered so sedation is continuous.**\n\n## Understanding it\n- The three drugs are staggered around the clock to keep the child continuously sedated and spasm-free.\n\n>> Diazepam/chlorpromazine/phenobarbitone staggered around the clock.",
+         "opts": [
+          "Only one drug ever at a time",
+          "Given only when spasms occur",
+          "All three given together once daily",
+          "Staggered around the clock (diazepam, chlorpromazine, phenobarbitone)"
+         ],
+         "ans": 3
         },
         {
          "q": "Which drug is used for autonomic system complications, and how may it be combined?",
-         "a": "Magnesium sulphate — used alone or in combination with benzodiazepines."
+         "a": "**Magnesium sulphate — used alone or combined with benzodiazepines.**\n\n## Understanding it\n- Magnesium controls the **autonomic instability** and reduces spasms, alone or with benzodiazepines.\n\n>> Magnesium sulphate (± benzodiazepines) for autonomic complications.",
+         "opts": [
+          "Atropine alone",
+          "Digoxin",
+          "Adrenaline alone",
+          "Magnesium sulphate, alone or with benzodiazepines"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the magnesium sulphate loading dose and infusion rate.",
-         "a": "IV loading dose of 5 g (or 75 mg/kg), followed by continuous infusion at 2.3 g/h until spasm control is achieved."
+         "a": "**IV loading dose of 5 g (or 75 mg/kg), then a continuous infusion at ~2.3 g/h until spasm control.**\n\n## Understanding it\n- Load then infuse magnesium, titrating to spasm control while watching for toxicity.\n\n>> Load 5 g (75 mg/kg), infuse ~2.3 g/h.",
+         "opts": [
+          "Load 5 g (75 mg/kg), then ~2.3 g/h infusion",
+          "1 g once daily",
+          "A single oral dose",
+          "10 g bolus with no infusion"
+         ],
+         "ans": 0
         },
         {
          "q": "What must be monitored during magnesium sulphate therapy, and what does its loss indicate?",
-         "a": "The patellar reflex — areflexia occurs at the upper end of the therapeutic range (4 mmol/L); if areflexia develops, the dosage should be reduced."
+         "a": "**The patellar (knee) reflex — areflexia occurs at the upper therapeutic range (~4 mmol/L) and warns of impending magnesium toxicity.**\n\n## Understanding it\n- Losing the knee-jerk signals **magnesium approaching toxic levels** → stop/reduce.\n\n>> Watch the patellar reflex; its loss warns of magnesium toxicity.",
+         "opts": [
+          "The pupillary reflex — its loss means cure",
+          "The gag reflex — unrelated to magnesium",
+          "The patellar reflex — its loss warns of magnesium toxicity",
+          "No monitoring is needed"
+         ],
+         "ans": 2
         },
         {
          "q": "How many doses of tetanus toxoid should the mother and other pregnant women in the locality receive?",
-         "a": "At least 2 doses."
+         "a": "**At least 2 doses.**\n\n## Understanding it\n- Maternal immunization (≥2 doses of tetanus toxoid) protects the newborn via transplacental antibody.\n\n>> At least 2 doses of tetanus toxoid.",
+         "opts": [
+          "At least 6 doses",
+          "At least 2 doses",
+          "A single dose is sufficient",
+          "No maternal doses are needed"
+         ],
+         "ans": 1
         },
         {
          "q": "What supplemental immunization activity is recommended?",
-         "a": "A supplemental immunization activity for women of childbearing age in the locality."
+         "a": "**A supplemental immunization activity for all women of childbearing age in the locality.**\n\n## Understanding it\n- Beyond pregnant women, immunise **all women of childbearing age** to eliminate neonatal tetanus locally.\n\n>> Immunise all women of childbearing age.",
+         "opts": [
+          "No supplemental activity is needed",
+          "Immunise only the newborns",
+          "Immunise all women of childbearing age in the locality",
+          "Immunise only health workers"
+         ],
+         "ans": 2
         },
         {
          "q": "What should birth attendants and women of childbearing age be educated about?",
-         "a": "The need for clean cord cutting and care — and the number of trained birth attendants should be increased."
+         "a": "**The need for clean cord cutting and care — and the number of trained birth attendants should be increased.**\n\n## Understanding it\n- Education on **clean delivery/cord care** plus more trained attendants prevents neonatal tetanus.\n\n>> Clean cord cutting/care; train more birth attendants.",
+         "opts": [
+          "Clean cord cutting/care (and train more birth attendants)",
+          "Family planning only",
+          "Breastfeeding techniques only",
+          "Nutrition only"
+         ],
+         "ans": 0
         },
         {
          "q": "When are tetanus toxoid boosters given?",
-         "a": "At 10 years."
+         "a": "**At 10 years (i.e. every 10 years).**\n\n## Understanding it\n- After the primary course, boosters are given every 10 years to maintain immunity.\n\n>> Boosters every 10 years.",
+         "opts": [
+          "Every 6 months",
+          "Only once in a lifetime",
+          "Every year",
+          "Every 10 years"
+         ],
+         "ans": 3
         },
         {
          "q": "What is recommended for prompt cleaning of wounds?",
-         "a": "Hydrogen peroxide."
+         "a": "**Hydrogen peroxide.**\n\n## Understanding it\n- Hydrogen peroxide (releases oxygen) is used to clean wounds — raising oxygen tension discourages the anaerobe.\n\n>> Hydrogen peroxide for wound cleaning.",
+         "opts": [
+          "Alcohol swab only",
+          "No cleaning is needed",
+          "Hydrogen peroxide",
+          "Plain water only"
+         ],
+         "ans": 2
         },
         {
          "q": "How is tetanus completely preventable?",
-         "a": "By active tetanus immunization."
+         "a": "**By active tetanus immunization.**\n\n## Understanding it\n- Tetanus is **100% preventable** by vaccination — the central public-health message.\n\n>> Active immunization prevents tetanus entirely.",
+         "opts": [
+          "By antibiotics after every wound",
+          "By active tetanus immunization",
+          "By avoiding all soil contact",
+          "It is not preventable"
+         ],
+         "ans": 1
         },
         {
          "q": "What cord practices prevent neonatal tetanus?",
-         "a": "Cutting of the umbilical stump with a sterile instrument; observing simple cleanliness at birth; and hygienic handling and care of the umbilical cord."
+         "a": "**Cutting the umbilical stump with a sterile instrument and observing simple cleanliness at birth.**\n\n## Understanding it\n- Sterile cord cutting + clean delivery stop spores entering the stump.\n\n>> Sterile cord cutting + clean birth practices.",
+         "opts": [
+          "Applying cow dung to the stump",
+          "Sterile cord cutting and clean birth practices",
+          "Bathing the stump in unboiled water",
+          "Leaving the cord uncut"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the mortality of neonatal tetanus?",
-         "a": "About 90%."
+         "a": "**About 90%.**\n\n## Understanding it\n- Neonatal tetanus is highly lethal — around **90%** mortality without excellent intensive care.\n\n>> ~90% mortality.",
+         "opts": [
+          "About 50%",
+          "About 90%",
+          "Under 1%",
+          "About 10%"
+         ],
+         "ans": 1
         },
         {
          "q": "List the four bad prognostic signs in neonatal tetanus.",
-         "a": "Onset in the first week of life; interval between lockjaw (trismus) and onset of muscle spasms less than 48 hours; high fever; and tachycardia."
+         "a": "**Onset in the first week of life; a short interval between trismus and the onset of spasms; frequent/severe spasms; and fever/autonomic instability.**\n\n## Understanding it\n- Earlier onset and shorter incubation/onset intervals predict worse outcomes.\n\n>> Early onset, short trismus-to-spasm interval, severe spasms, fever.",
+         "opts": [
+          "Absence of fever",
+          "Early onset, short trismus-to-spasm interval, severe spasms, fever/autonomic instability",
+          "Late onset and mild spasms",
+          "A long incubation period"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the quality of recovery in survivors?",
-         "a": "Recovery is almost complete."
+         "a": "**Recovery is almost complete.**\n\n## Understanding it\n- Those who survive usually recover fully (as new synapses form) — mortality is the problem, not disability.\n\n>> Survivors recover almost completely.",
+         "opts": [
+          "No recovery is possible",
+          "Permanent severe disability in all",
+          "Almost complete recovery",
+          "Recovery with lifelong paralysis"
+         ],
+         "ans": 2
         },
         {
          "q": "Does an attack of tetanus confer immunity?",
-         "a": "No — an attack of tetanus does not confer immunity, so active immunization following recovery is a must."
+         "a": "**No — an attack does not confer immunity, so active immunization after recovery is essential.**\n\n## Understanding it\n- The lethal dose of toxin is too small to immunise, so survivors can get tetanus again → must be vaccinated.\n\n>> No immunity from infection — vaccinate after recovery.",
+         "opts": [
+          "Yes — immunity for 1 year",
+          "Yes — for about 10 years",
+          "No — vaccinate after recovery (infection gives no immunity)",
+          "Yes — lifelong immunity"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": null,
@@ -15625,243 +16213,663 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Does intact normal skin resist bacterial infection?",
-         "a": "Yes — bacteria exist in the external environment, but intact normal skin has a strong resistance to bacterial multiplication and invasion."
+         "a": "**Yes — although bacteria are all around, intact normal skin has strong resistance to invasion.**\n\n## Understanding it\n- The skin is a highly effective barrier; infection usually needs a **breach** or a predisposing factor.\n\n>> Intact skin resists bacteria well.",
+         "opts": [
+          "No — intact skin is easily infected",
+          "Only in adults, not children",
+          "Only if the skin is sterile",
+          "Yes — intact skin strongly resists bacterial invasion"
+         ],
+         "ans": 3
         },
         {
          "q": "List the first four factors that enhance skin resistance to bacteria.",
-         "a": "Relative dryness of normal skin; low skin pH of 5.5; unsaturated long chain fatty acids in skin lipids; and natural antibacterial substances in the sebum."
+         "a": "**Relative dryness of normal skin; low skin pH (5.5); unsaturated long-chain fatty acids; and rapid turnover/shedding of the epidermis.**\n\n## Understanding it\n- Physical/chemical defences: dry, acidic, fatty-acid-coated, constantly-shedding surface.\n\n>> Dryness, acid pH, fatty acids, epidermal turnover.",
+         "opts": [
+          "Blood supply, nerves, melanin, hair",
+          "Sebum, sweat, warmth, humidity",
+          "Moisture, alkaline pH, sweat, thick keratin",
+          "Dryness, low pH, fatty acids, epidermal turnover"
+         ],
+         "ans": 3
         },
         {
          "q": "List the last four factors that enhance skin resistance to bacteria.",
-         "a": "Circulating immunoglobulins; cellular immunity; delayed hypersensitivity; and bacterial interference."
+         "a": "**Circulating immunoglobulins; cellular immunity; delayed hypersensitivity; and bacterial interference.**\n\n## Understanding it\n- Immunological defences plus **bacterial interference** (normal flora suppressing pathogens).\n\n>> Antibodies, cellular immunity, delayed hypersensitivity, bacterial interference.",
+         "opts": [
+          "Melanin, keratin, sebum, sweat",
+          "Blood supply, lymphatics, nerves, fat",
+          "Dryness, low pH, fatty acids, shedding",
+          "Immunoglobulins, cellular immunity, delayed hypersensitivity, bacterial interference"
+         ],
+         "ans": 3
         },
         {
          "q": "What is bacterial interference?",
-         "a": "The suppression of bacterial species or strains by other bacteria."
+         "a": "**The suppression of one bacterial species/strain by other bacteria (the normal flora).**\n\n## Understanding it\n- Commensal skin bacteria **crowd out** pathogens — a natural protective mechanism.\n\n>> Bacterial interference = normal flora suppress pathogens.",
+         "opts": [
+          "Antibiotics killing skin bacteria",
+          "Bacteria producing toxins to invade",
+          "The immune system attacking bacteria",
+          "Normal flora suppressing pathogenic bacteria"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the normal pH of skin?",
-         "a": "5.5."
+         "a": "**5.5 (mildly acidic).**\n\n## Understanding it\n- The skin's 'acid mantle' (pH ~5.5) inhibits many pathogens.\n\n>> Skin pH ≈ 5.5.",
+         "opts": [
+          "7.4",
+          "8.5",
+          "5.5",
+          "2.0"
+         ],
+         "ans": 2
         },
         {
          "q": "List the nine factors that favour bacterial skin infections.",
-         "a": "Trauma (abrasions, scratches, cuts); insect bites; increased humidity; malnutrition; severe illness; low standards of personal or community hygiene; coexisting skin disorders such as atopic dermatitis; natural or acquired immune depression; and iatrogenic immune suppression."
+         "a": "**Trauma (abrasions/scratches/cuts); insect bites; increased humidity; malnutrition; severe systemic disease; immunodeficiency; poor hygiene; pre-existing skin disease; and warm climate.**\n\n## Understanding it\n- Anything that **breaches the barrier or lowers defences** favours infection.\n\n>> Trauma, bites, humidity, malnutrition, illness, immunodeficiency, poor hygiene, skin disease, heat.",
+         "opts": [
+          "Trauma, bites, humidity, malnutrition, immunodeficiency, poor hygiene, skin disease",
+          "Dryness, acid pH and fatty acids",
+          "Vaccination and good nutrition",
+          "Cold, dry climate and intact skin"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the six common bacterial skin infections in this lecture.",
-         "a": "Folliculitis, furunculosis, carbuncles, impetigo, cellulitis, and staphylococcal scalded skin syndrome."
+         "a": "**Folliculitis, furunculosis, carbuncles, impetigo, cellulitis, and staphylococcal scalded skin syndrome (SSSS).**\n\n## Understanding it\n- The follicular group (folliculitis→furuncle→carbuncle), impetigo, cellulitis, and SSSS.\n\n>> Folliculitis, furunculosis, carbuncles, impetigo, cellulitis, SSSS.",
+         "opts": [
+          "Tinea, candidiasis, pityriasis, scabies",
+          "Folliculitis, furunculosis, carbuncles, impetigo, cellulitis, SSSS",
+          "Eczema, psoriasis, vitiligo, urticaria",
+          "Herpes, warts, molluscum, measles"
+         ],
+         "ans": 1
         },
         {
          "q": "Define folliculitis.",
-         "a": "The superficial inflammation and infection of a single hair follicle, appearing as small, itchy, pus-filled bumps."
+         "a": "**Superficial inflammation and infection of a single hair follicle, appearing as small, tender pustules around the follicle.**\n\n## Understanding it\n- The mildest follicular infection — confined to a **single, superficial** follicle.\n\n>> Folliculitis = superficial infection of one hair follicle.",
+         "opts": [
+          "A toxin-mediated blistering disease",
+          "Superficial infection of a single hair follicle",
+          "Infection of the deeper dermis (cellulitis)",
+          "Deep infection of multiple contiguous follicles (carbuncle)"
+         ],
+         "ans": 1
         },
         {
          "q": "List the four aetiological categories of folliculitis.",
-         "a": "Bacterial, fungal, viral, and parasitic."
+         "a": "**Bacterial, fungal, viral, and parasitic.**\n\n## Understanding it\n- Although usually bacterial, folliculitis can also be fungal, viral or parasitic.\n\n>> Bacterial, fungal, viral, parasitic.",
+         "opts": [
+          "Allergic, toxic, autoimmune, genetic",
+          "Only bacterial",
+          "Bacterial, fungal, viral, parasitic",
+          "Traumatic, thermal, chemical, radiation"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the appearance of bacterial folliculitis.",
-         "a": "Small, tender, red or pus-filled bumps clustered around hair follicles; each bump resembles a small pimple with a hair sticking out of the centre, surrounded by inflamed, red and warm skin."
+         "a": "**Small, tender, red or pus-filled bumps clustered around hair follicles; each bump resembles a pimple with a central hair.**\n\n## Understanding it\n- Superficial pustules, each pierced by a hair — clustered where hair grows.\n\n>> Small pustules around follicles, each with a central hair.",
+         "opts": [
+          "Small pustular bumps around follicles, each with a central hair",
+          "A single large necrotic ulcer",
+          "Diffuse red swelling of the deep skin",
+          "Widespread flaccid blisters"
+         ],
+         "ans": 0
         },
         {
          "q": "Where does bacterial folliculitis most commonly appear?",
-         "a": "On the face, scalp, thighs, or buttocks."
+         "a": "**On the face, scalp, thighs, or buttocks.**\n\n## Understanding it\n- It favours hair-bearing, friction-prone sites.\n\n>> Face, scalp, thighs, buttocks.",
+         "opts": [
+          "Only the trunk",
+          "Face, scalp, thighs, buttocks",
+          "Only mucous membranes",
+          "Palms and soles"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the treatment of bacterial folliculitis.",
-         "a": "Warm compresses; antibacterial washes such as benzoyl peroxide; topical antibiotics such as mupirocin or clindamycin; oral antibiotics such as cephalexin or doxycycline in severe or stubborn cases; avoid shaving, picking the bumps and tight clothing; and good personal hygiene."
+         "a": "**Warm compresses; antibacterial washes (e.g. benzoyl peroxide); topical antibiotics (e.g. mupirocin/clindamycin); and oral antibiotics if extensive.**\n\n## Understanding it\n- Mostly local care; oral antibiotics for widespread disease.\n\n>> Warm compresses, antibacterial washes, topical antibiotics.",
+         "opts": [
+          "No treatment is ever needed",
+          "Warm compresses, antibacterial washes, topical antibiotics",
+          "Immediate wide surgical excision",
+          "Systemic antifungals"
+         ],
+         "ans": 1
         },
         {
          "q": "Define furunculosis.",
-         "a": "The condition of having multiple, deeper and more severe infections of the hair follicles, known as boils (furuncles), which extend into subcutaneous tissue."
+         "a": "**Multiple, deeper and more severe infections of the hair follicles (boils).**\n\n## Understanding it\n- A furuncle (boil) is a **deeper** follicular infection than folliculitis.\n\n>> Furunculosis = deep follicular boils.",
+         "opts": [
+          "Superficial single-follicle pustules",
+          "Toxin-mediated skin peeling",
+          "Deeper, more severe follicular infections (boils)",
+          "Infection of the deep fascia only"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the causative agent of furunculosis, and how does it gain entry?",
-         "a": "Usually S. aureus, which penetrates abraded perifollicular skin."
+         "a": "**Usually Staphylococcus aureus, penetrating abraded perifollicular skin.**\n\n## Understanding it\n- S. aureus enters through **broken skin around a follicle**.\n\n>> S. aureus via abraded perifollicular skin.",
+         "opts": [
+          "S. aureus, via abraded perifollicular skin",
+          "Streptococcus pyogenes via the bloodstream",
+          "A virus via respiratory droplets",
+          "A fungus via intact skin"
+         ],
+         "ans": 0
         },
         {
          "q": "How may furuncles originate?",
-         "a": "From a preceding folliculitis, or they may arise initially as a deep-seated, tender, erythematous, perifollicular nodule."
+         "a": "**From a preceding folliculitis, or arising initially as a deep-seated, tender, erythematous nodule.**\n\n## Understanding it\n- A boil can **evolve from folliculitis** or start de novo.\n\n>> From prior folliculitis, or as a new deep tender nodule.",
+         "opts": [
+          "Only from a burn",
+          "Always from a carbuncle",
+          "Only from an insect bite",
+          "From prior folliculitis or as a new deep tender nodule"
+         ],
+         "ans": 3
         },
         {
          "q": "State the progression of a furuncle.",
-         "a": "Indurated lesion → central necrosis → suppuration → rupture and discharge of a central core of necrotic tissue → destruction of the follicle."
+         "a": "**Indurated lesion → central necrosis → suppuration → rupture and discharge of a central core (slough).**\n\n## Understanding it\n- The boil hardens, its centre dies, fills with pus, then bursts to discharge a core.\n\n>> Induration → necrosis → pus → ruptures/discharges a core.",
+         "opts": [
+          "Redness → spreading warmth → sepsis",
+          "Blister → deroofing → peeling",
+          "Induration → necrosis → suppuration → discharge of a core",
+          "Crusting → scaling → resolution"
+         ],
+         "ans": 2
         },
         {
          "q": "How does a furuncle heal?",
-         "a": "With scar formation."
+         "a": "**With scar formation.**\n\n## Understanding it\n- Because a boil damages the dermis, it heals by **scarring**.\n\n>> Furuncles heal with a scar.",
+         "opts": [
+          "With scar formation",
+          "Without any mark",
+          "By forming a bulla",
+          "With permanent depigmentation only"
+         ],
+         "ans": 0
         },
         {
          "q": "List the sites of predilection for furuncles.",
-         "a": "The hair-bearing areas — scalp, face, back of neck, axillae, buttocks, and groin."
+         "a": "**Hair-bearing areas — scalp, face, back of neck, axillae, buttocks, and groin.**\n\n## Understanding it\n- Boils favour hairy, sweaty, friction-prone regions.\n\n>> Scalp, face, neck, axillae, buttocks, groin.",
+         "opts": [
+          "Palms and soles",
+          "Scalp, face, neck, axillae, buttocks, groin",
+          "Only the trunk",
+          "Only mucous membranes"
+         ],
+         "ans": 1
         },
         {
          "q": "List the five predisposing factors to furuncle formation.",
-         "a": "Obesity, hyperhidrosis, maceration, friction, and pre-existing dermatitis."
+         "a": "**Obesity, hyperhidrosis, maceration, friction, and pre-existing dermatitis.**\n\n## Understanding it\n- Warm, moist, rubbing, already-inflamed skin favours boils.\n\n>> Obesity, sweating, maceration, friction, dermatitis.",
+         "opts": [
+          "Cold climate and thin build",
+          "Vaccination and nutrition",
+          "Obesity, hyperhidrosis, maceration, friction, dermatitis",
+          "Dry skin and good hygiene"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the treatment of furunculosis.",
-         "a": "Antibiotics, personal hygiene, hot moist compress, and incision and drainage."
+         "a": "**Antibiotics, personal hygiene, hot moist compresses, and incision and drainage.**\n\n## Understanding it\n- A pointing/fluctuant boil needs **incision and drainage** plus antibiotics.\n\n>> Antibiotics + hygiene + hot compress + incision & drainage.",
+         "opts": [
+          "No treatment needed",
+          "Topical antifungal only",
+          "Antibiotics, hygiene, hot compresses, incision and drainage",
+          "Emollients only"
+         ],
+         "ans": 2
         },
         {
          "q": "What organism causes carbuncles?",
-         "a": "Staphylococcus aureus."
+         "a": "**Staphylococcus aureus.**\n\n## Understanding it\n- Like furuncles, carbuncles are caused by **S. aureus**.\n\n>> Carbuncle = S. aureus.",
+         "opts": [
+          "Streptococcus pyogenes",
+          "Pseudomonas aeruginosa",
+          "A dermatophyte fungus",
+          "Staphylococcus aureus"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a carbuncle.",
-         "a": "An infection of a group of contiguous follicles, with multiple drainage points, accompanied by inflammatory changes in the surrounding connective tissue."
+         "a": "**An infection of a group of contiguous follicles with multiple drainage points, accompanied by connecting sinuses.**\n\n## Understanding it\n- A carbuncle is a **cluster of boils** joined together, with several draining openings.\n\n>> Carbuncle = coalesced boils with multiple drainage points.",
+         "opts": [
+          "Multiple contiguous follicles infected, with several drainage points",
+          "Diffuse deep-skin infection (cellulitis)",
+          "A single boil (furuncle)",
+          "A single superficial follicle (folliculitis)"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the lesions of a carbuncle.",
-         "a": "Painful, tender, firm to hard, indurated lumps."
+         "a": "**Painful, tender, firm-to-hard, indurated lumps.**\n\n## Understanding it\n- Larger, deeper, harder and more painful than a single boil.\n\n>> Painful, hard, indurated lumps.",
+         "opts": [
+          "Painless flat patches",
+          "Fine scaly plaques",
+          "Painful, firm, indurated lumps",
+          "Superficial flaccid blisters"
+         ],
+         "ans": 2
         },
         {
          "q": "What systemic features may accompany a carbuncle?",
-         "a": "Fever, leukocytosis, and bacteraemia."
+         "a": "**Fever, leukocytosis, and bacteraemia.**\n\n## Understanding it\n- Being deeper/larger, a carbuncle can cause systemic upset and bloodstream spread.\n\n>> Fever, leukocytosis, bacteraemia.",
+         "opts": [
+          "Jaundice and anaemia",
+          "Fever, leukocytosis, bacteraemia",
+          "No systemic features ever",
+          "Hypotension and bradycardia only"
+         ],
+         "ans": 1
         },
         {
          "q": "List the sites of predilection for carbuncles.",
-         "a": "Back of neck, shoulder, hip, and thigh."
+         "a": "**Back of neck, shoulder, hip, and thigh.**\n\n## Understanding it\n- Carbuncles favour thick-skinned areas like the nape of the neck and back.\n\n>> Back of neck, shoulder, hip, thigh.",
+         "opts": [
+          "Palms and soles",
+          "Back of neck, shoulder, hip, thigh",
+          "Mucous membranes",
+          "Eyelids and lips"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the antibiotic treatment of carbuncles.",
-         "a": "Oral or parenteral antibiotics such as cloxacillin or cephalexin; cephalosporin, clindamycin or erythromycin for penicillin-allergic patients; and rifampicin or cotrimoxazole in MRSA. Plus attention to personal hygiene."
+         "a": "**Oral or parenteral anti-staphylococcal antibiotics — e.g. cloxacillin or cephalexin (cephalosporin/clindamycin as alternatives) — plus incision and drainage.**\n\n## Understanding it\n- Anti-staph antibiotics plus surgical drainage.\n\n>> Cloxacillin/cephalexin (± clindamycin) + drainage.",
+         "opts": [
+          "Oral antivirals",
+          "Cloxacillin or cephalexin (anti-staph), plus drainage",
+          "Topical antifungal only",
+          "Metronidazole alone"
+         ],
+         "ans": 1
         },
         {
          "q": "Define impetigo.",
-         "a": "A contagious bacterial infection of the epidermis."
+         "a": "**A contagious bacterial infection of the epidermis.**\n\n## Understanding it\n- Impetigo is a **superficial (epidermal), highly contagious** infection.\n\n>> Impetigo = contagious epidermal infection.",
+         "opts": [
+          "A contagious infection of the epidermis",
+          "A follicular boil",
+          "A deep dermal/subcutaneous infection",
+          "A toxin-mediated peeling disease"
+         ],
+         "ans": 0
         },
         {
          "q": "How is impetigo transmitted?",
-         "a": "By direct contact with infected persons or fomites."
+         "a": "**By direct contact with infected persons or fomites.**\n\n## Understanding it\n- Spreads by touching infected skin or contaminated objects.\n\n>> Direct contact or fomites.",
+         "opts": [
+          "Airborne droplets only",
+          "Direct contact with infected persons or fomites",
+          "Mosquito bites",
+          "Contaminated food and water"
+         ],
+         "ans": 1
         },
         {
          "q": "Which regions does impetigo most commonly affect, and at what age?",
-         "a": "Any skin region, but most commonly the face around the nose, mouth and hand; commonly affects children aged 4–7 years."
+         "a": "**Any region, but most commonly the face around the nose and mouth (and hands); commonly affects children.**\n\n## Understanding it\n- Classic site: **peri-oral/peri-nasal face** in **children**.\n\n>> Face (around nose/mouth), in children.",
+         "opts": [
+          "Palms and soles, in adults",
+          "Only mucous membranes",
+          "Face around nose/mouth, in children",
+          "Only the trunk, in neonates"
+         ],
+         "ans": 2
         },
         {
          "q": "Distinguish primary from secondary impetigo.",
-         "a": "Primary impetigo is more common in children, with infection through minor breaks in the skin; secondary impetigo occurs at any age, on secondary infection of trauma or wounds."
+         "a": "**Primary impetigo is direct bacterial invasion of previously normal skin (through minor breaks), common in children; secondary impetigo (impetiginisation) is infection superimposed on a pre-existing skin disease.**\n\n## Understanding it\n- Primary = new infection of normal skin; secondary = infection **on top of** existing dermatitis/lesions.\n\n>> Primary = normal skin; secondary = on existing skin disease.",
+         "opts": [
+          "Primary = normal skin; secondary = on pre-existing skin disease",
+          "They are the same thing",
+          "Primary = adults; secondary = children",
+          "Primary is deep; secondary is superficial"
+         ],
+         "ans": 0
         },
         {
          "q": "How does the honey-coloured crust of impetigo form?",
-         "a": "Superficial blisters rupture easily, releasing yellow exudate that dries and forms a honey-coloured crust."
+         "a": "**Superficial blisters rupture easily, releasing yellow exudate that dries into a honey-coloured crust.**\n\n## Understanding it\n- Fragile epidermal blisters burst → serous/purulent fluid dries → the classic **honey crust**.\n\n>> Burst blisters → dried exudate → honey crust.",
+         "opts": [
+          "Blood clots on the surface",
+          "Fungal spores forming a plaque",
+          "Dead epidermis peeling in sheets",
+          "Ruptured superficial blisters leak exudate that dries to a honey crust"
+         ],
+         "ans": 3
         },
         {
          "q": "How is impetigo diagnosed?",
-         "a": "Clinically — but it can be confirmed by gram stain or culture of crust or fluid from the bullae."
+         "a": "**Clinically — but it can be confirmed by Gram stain or culture of crust or blister fluid.**\n\n## Understanding it\n- Usually a **clinical** diagnosis; Gram stain/culture confirm the organism if needed.\n\n>> Clinical; confirm with Gram stain/culture.",
+         "opts": [
+          "Only by skin biopsy",
+          "By a Wood's lamp",
+          "Only by blood culture",
+          "Clinically (confirmed by Gram stain/culture if needed)"
+         ],
+         "ans": 3
         },
         {
          "q": "What organism always causes bullous impetigo?",
-         "a": "S. aureus phage group 2."
+         "a": "**Staphylococcus aureus (phage group 2).**\n\n## Understanding it\n- Bullous impetigo is **always S. aureus** (exfoliative-toxin-producing phage group 2).\n\n>> Bullous impetigo = S. aureus (phage group 2).",
+         "opts": [
+          "Streptococcus pyogenes",
+          "S. aureus (phage group 2)",
+          "A dermatophyte fungus",
+          "Mixed staph and strep"
+         ],
+         "ans": 1
         },
         {
          "q": "On what type of skin does bullous impetigo develop, and what are the lesions?",
-         "a": "On intact skin; vesicles and flaccid transparent bullae containing clear yellow or slightly turbid fluid, with or without surrounding erythema."
+         "a": "**On intact skin; vesicles and flaccid transparent bullae containing clear yellow (later cloudy) fluid.**\n\n## Understanding it\n- Bullous impetigo forms on **intact** skin as flaccid, clear-fluid blisters (toxin-mediated).\n\n>> Intact skin; flaccid clear-fluid bullae.",
+         "opts": [
+          "Deep dermis; indurated nodules",
+          "Broken skin; honey-crusted erosions",
+          "Hair follicles; pustules",
+          "Intact skin; flaccid transparent bullae with clear fluid"
+         ],
+         "ans": 3
         },
         {
          "q": "Where does bullous impetigo occur, and in whom?",
-         "a": "More on the face, buttocks, trunk, perineum and extremities; common in neonates and children under 5 years, and systemic symptoms are common."
+         "a": "**More on the face, buttocks, trunk, perineum and extremities; common in neonates and children.**\n\n## Understanding it\n- Widespread sites, especially in **neonates/young children**.\n\n>> Face/trunk/perineum/limbs, in neonates and children.",
+         "opts": [
+          "Only the palms, in adults",
+          "Only mucous membranes",
+          "Only the scalp",
+          "Face, trunk, perineum, extremities — neonates and children"
+         ],
+         "ans": 3
         },
         {
          "q": "Which organisms cause non-bullous impetigo, and which sites does it affect?",
-         "a": "Usually S. aureus or S. pyogenes, or mixed infection; it typically affects trauma sites."
+         "a": "**Usually S. aureus or S. pyogenes (or mixed); it typically affects trauma sites.**\n\n## Understanding it\n- Non-bullous impetigo is staph and/or strep, on **broken/traumatised** skin.\n\n>> Staph ± strep; on trauma sites.",
+         "opts": [
+          "Only Pseudomonas",
+          "Only phage-group-2 staph on intact skin",
+          "S. aureus and/or S. pyogenes; on trauma sites",
+          "Only a fungus"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the lesions of non-bullous impetigo.",
-         "a": "Scattered discrete 1–3 cm lesions with honey-coloured crust and surrounding erythema, most commonly around the mouth and nose; patients may have lymphadenopathy."
+         "a": "**Scattered discrete 1–3 cm lesions with honey-coloured crust and surrounding erythema, most often on the face.**\n\n## Understanding it\n- Classic **honey-crusted** erosions with a red rim — the common form.\n\n>> Honey-crusted erosions with erythema (face).",
+         "opts": [
+          "Honey-crusted erosions with surrounding erythema",
+          "Flaccid clear bullae on intact skin",
+          "Fine scaly annular plaques",
+          "Deep indurated nodules"
+         ],
+         "ans": 0
         },
         {
          "q": "Which type of impetigo is more common?",
-         "a": "Non-bullous impetigo."
+         "a": "**Non-bullous impetigo.**\n\n## Understanding it\n- The honey-crusted **non-bullous** form is the more common of the two.\n\n>> Non-bullous is commoner.",
+         "opts": [
+          "Non-bullous impetigo",
+          "Bullous impetigo",
+          "Ecthyma",
+          "They are equally common"
+         ],
+         "ans": 0
         },
         {
          "q": "List the predisposing lesions for impetigo.",
-         "a": "Insect bites, abrasions, lacerations, chickenpox, scabies, pediculosis, and burns."
+         "a": "**Insect bites, abrasions, lacerations, chickenpox, scabies, pediculosis, and burns.**\n\n## Understanding it\n- Any **break in the skin** (bites, scratches, chickenpox, scabies, lice, burns) can be secondarily impetiginised.\n\n>> Bites, abrasions, chickenpox, scabies, lice, burns.",
+         "opts": [
+          "Vaccination and good hygiene",
+          "Sun exposure only",
+          "Dry intact skin",
+          "Insect bites, abrasions, chickenpox, scabies, pediculosis, burns"
+         ],
+         "ans": 3
         },
         {
          "q": "How may impetigo spread to other parts of the body?",
-         "a": "By the fingers, clothing, and towels."
+         "a": "**By the fingers, clothing, and towels (autoinoculation).**\n\n## Understanding it\n- Scratching carries bacteria to new sites; shared items spread it too.\n\n>> Fingers, clothing, towels (autoinoculation).",
+         "opts": [
+          "By airborne droplets",
+          "Through the bloodstream",
+          "By mosquito bites",
+          "Fingers, clothing and towels (autoinoculation)"
+         ],
+         "ans": 3
         },
         {
          "q": "How are local impetigo infections treated?",
-         "a": "With topical saline or aluminium acetate, then 2% mupirocin ointment."
+         "a": "**Topical saline or aluminium acetate, then 2% mupirocin ointment.**\n\n## Understanding it\n- Clean/de-crust, then apply a **topical antibiotic (mupirocin)** for localised disease.\n\n>> Clean, then topical mupirocin.",
+         "opts": [
+          "Systemic steroids",
+          "Oral antifungals",
+          "Saline/aluminium acetate, then topical mupirocin",
+          "Wide surgical excision"
+         ],
+         "ans": 2
         },
         {
          "q": "What helps remove the crusts in impetigo?",
-         "a": "Normal saline or potassium permanganate soaks."
+         "a": "**Normal saline or potassium permanganate soaks.**\n\n## Understanding it\n- Gentle soaks soften and remove the honey crusts before topical antibiotic.\n\n>> Saline or potassium permanganate soaks.",
+         "opts": [
+          "Dry brushing",
+          "Applying more crust",
+          "Alcohol scrubbing",
+          "Normal saline or potassium permanganate soaks"
+         ],
+         "ans": 3
         },
         {
          "q": "Which topical antibiotics are used in impetigo?",
-         "a": "Mupirocin ointment or fusidic acid."
+         "a": "**Mupirocin ointment or fusidic acid.**\n\n## Understanding it\n- The two standard topical antibiotics for impetigo are **mupirocin** and **fusidic acid**.\n\n>> Mupirocin or fusidic acid.",
+         "opts": [
+          "Permethrin or benzyl benzoate",
+          "Mupirocin or fusidic acid",
+          "Aciclovir or ganciclovir",
+          "Clotrimazole or terbinafine"
+         ],
+         "ans": 1
         },
         {
          "q": "What is used if systemic symptoms are present in impetigo?",
-         "a": "Cloxacillin or a beta-lactamase resistant antibiotic, e.g. cephalexin."
+         "a": "**Cloxacillin or a beta-lactamase-resistant antibiotic (e.g. cephalexin).**\n\n## Understanding it\n- Widespread/systemic impetigo needs **oral anti-staph** antibiotics.\n\n>> Cloxacillin/cephalexin (systemic).",
+         "opts": [
+          "An oral antifungal",
+          "Topical mupirocin alone",
+          "Cloxacillin or cephalexin (oral anti-staph)",
+          "An antiviral"
+         ],
+         "ans": 2
         },
         {
          "q": "What is used if impetigo is due to MRSA?",
-         "a": "Clindamycin."
+         "a": "**Clindamycin.**\n\n## Understanding it\n- For **MRSA**, use clindamycin (a non-beta-lactam option).\n\n>> MRSA impetigo → clindamycin.",
+         "opts": [
+          "Clindamycin",
+          "Cloxacillin",
+          "Cephalexin",
+          "Penicillin V"
+         ],
+         "ans": 0
         },
         {
          "q": "Define cellulitis.",
-         "a": "A serious bacterial skin infection that affects the deeper layers of the skin and underlying tissues."
+         "a": "**A serious bacterial infection of the deeper layers of the skin and underlying subcutaneous tissue.**\n\n## Understanding it\n- Cellulitis is **deep** (dermis/subcutis), unlike superficial impetigo.\n\n>> Cellulitis = deep dermal/subcutaneous infection.",
+         "opts": [
+          "Deep infection of the dermis and subcutaneous tissue",
+          "Infection of a single follicle",
+          "Superficial epidermal infection (impetigo)",
+          "A toxin-mediated peeling disease"
+         ],
+         "ans": 0
         },
         {
          "q": "When does cellulitis occur, and what does it look like?",
-         "a": "When bacteria normally found on the skin surface breach the protective barrier; it appears as a painful, red, swollen and warm area that can spread quickly."
+         "a": "**When bacteria breach the protective barrier; it appears as an expanding area of red, hot, swollen, tender skin with poorly-defined borders.**\n\n## Understanding it\n- A barrier breach lets bacteria into the deep skin → spreading red, warm, tender swelling.\n\n>> Barrier breach → spreading red, hot, tender swelling.",
+         "opts": [
+          "Widespread flaccid blisters",
+          "Follicular pustules with central hairs",
+          "Intact skin → honey crusts",
+          "Barrier breach → spreading red, hot, tender swelling"
+         ],
+         "ans": 3
         },
         {
          "q": "Which organisms primarily cause cellulitis?",
-         "a": "Staphylococcus (staph) or Streptococcus (strep) bacteria, entering through a break in the skin."
+         "a": "**Staphylococcus or Streptococcus, entering through a break in the skin.**\n\n## Understanding it\n- The two main causes are **staph and strep** via a skin breach.\n\n>> Staph or strep via a skin break.",
+         "opts": [
+          "Only phage-group-2 staph",
+          "A dermatophyte fungus",
+          "Staphylococcus or Streptococcus, via a skin break",
+          "Pseudomonas only"
+         ],
+         "ans": 2
         },
         {
          "q": "List the four categories of predisposing and risk factors for cellulitis.",
-         "a": "Skin injuries (cuts, surgical wounds, insect bites, tattoos, piercings); pre-existing skin conditions (eczema, athlete's foot, psoriasis); weakened immune system (diabetes, HIV, immunosuppressant medications); and poor circulation (lymphoedema, obesity)."
+         "a": "**Skin injuries (cuts, wounds, bites, tattoos, piercings); pre-existing skin conditions; lymphoedema/impaired circulation; and immunosuppression/systemic illness (e.g. diabetes).**\n\n## Understanding it\n- Anything that breaches skin, impairs drainage, or weakens defences predisposes to cellulitis.\n\n>> Skin injury, skin disease, poor circulation/lymphoedema, immunosuppression.",
+         "opts": [
+          "Vaccination, hygiene, dry skin, youth",
+          "Skin injury, skin disease, lymphoedema/poor circulation, immunosuppression",
+          "Cold climate only",
+          "Good nutrition and intact skin"
+         ],
+         "ans": 1
         },
         {
          "q": "List the clinical features of cellulitis.",
-         "a": "Redness and swelling of the skin; pain or tenderness to touch; a feeling of warmth in the affected area; and blisters, fever or swollen lymph nodes in severe cases."
+         "a": "**Redness and swelling; pain/tenderness; warmth; and sometimes fever, with an expanding poorly-demarcated area.**\n\n## Understanding it\n- The cardinal signs of inflammation in a spreading, ill-defined area, ± systemic upset.\n\n>> Red, swollen, warm, tender, spreading (± fever).",
+         "opts": [
+          "Flaccid blisters that deroof",
+          "Painless honey crusts",
+          "Redness, swelling, warmth, tenderness (± fever), spreading",
+          "Fine scaling with a clear centre"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the treatment of cellulitis.",
-         "a": "Oral and IV antibiotics targeting Streptococcus and Staphylococcus; wound care and drainage, keeping open wounds clean and covered; elevation above the level of the heart and rest; and pain management with analgesics such as ibuprofen or paracetamol."
+         "a": "**Oral and IV antibiotics targeting Streptococcus and Staphylococcus, plus wound care and drainage of any abscess.**\n\n## Understanding it\n- Systemic anti-staph/strep antibiotics (IV if severe), with drainage of any collection.\n\n>> Anti-staph/strep antibiotics (± IV) + wound care/drainage.",
+         "opts": [
+          "Antifungals",
+          "Topical antibiotic alone",
+          "Anti-staph/strep antibiotics (± IV), wound care and drainage",
+          "No antibiotics, just elevation"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is the affected limb elevated in cellulitis?",
-         "a": "Resting and elevating it above the level of the heart reduces swelling and improves blood flow."
+         "a": "**Resting and elevating it above heart level reduces swelling and improves drainage/blood flow.**\n\n## Understanding it\n- Elevation aids venous/lymphatic drainage → less oedema and faster recovery.\n\n>> Elevate to reduce swelling and aid drainage.",
+         "opts": [
+          "Elevation reduces swelling and improves drainage",
+          "It has no real benefit",
+          "To increase blood flow to the infection",
+          "To spread the antibiotic faster"
+         ],
+         "ans": 0
         },
         {
          "q": "List the complications of cellulitis.",
-         "a": "Bacteraemia, endocarditis, osteomyelitis, suppurative arthritis, and thrombophlebitis."
+         "a": "**Bacteraemia, endocarditis, osteomyelitis, suppurative arthritis, and thrombophlebitis.**\n\n## Understanding it\n- The infection can spread to blood, heart, bone, joints and veins.\n\n>> Bacteraemia, endocarditis, osteomyelitis, septic arthritis, thrombophlebitis.",
+         "opts": [
+          "Vitiligo and hypopigmentation",
+          "Bacteraemia, endocarditis, osteomyelitis, septic arthritis, thrombophlebitis",
+          "Only mild scarring",
+          "Only local itching"
+         ],
+         "ans": 1
         },
         {
          "q": "What causes staphylococcal scalded skin syndrome, and what is its other name?",
-         "a": "Exfoliative toxins A and B produced by Staphylococcus aureus belonging to phage group B; also called Ritter's disease."
+         "a": "**Exfoliative toxins A and B from Staphylococcus aureus (phage group 2); also called Ritter disease.**\n\n## Understanding it\n- SSSS is **toxin-mediated** (exfoliative toxins) — the bacteria stay localised while the toxin peels distant skin.\n\n>> SSSS = S. aureus exfoliative toxins (Ritter disease).",
+         "opts": [
+          "Streptococcal toxins",
+          "S. aureus exfoliative toxins A/B (Ritter disease)",
+          "An autoimmune reaction",
+          "Direct staph invasion of the deep skin"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the erythema of SSSS and its distribution.",
-         "a": "Scarlatiniform erythema develops diffusely, with a predilection for flexural and periorificial areas."
+         "a": "**A scarlatiniform (sandpaper-like) erythema develops diffusely, favouring flexural and periorificial areas.**\n\n## Understanding it\n- Diffuse red rash, worst in **flexures and around orifices**.\n\n>> Diffuse scarlatiniform erythema, flexural/periorificial.",
+         "opts": [
+          "A localised abscess",
+          "Follicular pustules",
+          "Diffuse scarlatiniform erythema, flexural/periorificial",
+          "A single honey-crusted plaque"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the blisters of SSSS.",
-         "a": "Extensive superficial sterile flaccid blisters or bullae, which become deroofed revealing large areas of raw red moist skin similar to a hot water burn."
+         "a": "**Extensive superficial, sterile, flaccid blisters/bullae that deroof to reveal moist erythematous skin.**\n\n## Understanding it\n- Toxin splits the upper epidermis → **sterile, superficial** peeling (the pus is not at the blister; culture is negative there).\n\n>> Superficial sterile flaccid blisters that deroof.",
+         "opts": [
+          "Honey-crusted erosions",
+          "Deep pus-filled abscesses",
+          "Superficial sterile flaccid blisters that deroof",
+          "Indurated follicular nodules"
+         ],
+         "ans": 2
         },
         {
          "q": "What features may occur prior to the onset of the rash in SSSS?",
-         "a": "Fever, rhinitis, conjunctivitis, irritability, malaise, poor feeding, and exquisite tenderness."
+         "a": "**Fever, rhinitis, conjunctivitis, irritability, malaise, poor feeding, and exquisite skin tenderness.**\n\n## Understanding it\n- A prodrome of systemic upset and painful skin precedes the rash.\n\n>> Fever, coryza/conjunctivitis, irritability, poor feeding, tender skin.",
+         "opts": [
+          "No prodrome ever",
+          "Painless crusting only",
+          "Fever, coryza, conjunctivitis, irritability, poor feeding, tender skin",
+          "Chronic itching for weeks"
+         ],
+         "ans": 2
         },
         {
          "q": "What facial features are characteristically prominent in SSSS?",
-         "a": "Circumpolar erythema, and radial crusting and fissuring around the eyes, mouth and nose; the child may appear toxic."
+         "a": "**Circumoral/circumpolar erythema with radial crusting and fissuring around the eyes, mouth and nose.**\n\n## Understanding it\n- The classic 'sad-face' look: radial fissures/crusts around the mouth, nose and eyes.\n\n>> Radial perioral/perinasal/periocular crusting and fissuring.",
+         "opts": [
+          "Honey crusts on the chin only",
+          "No facial involvement",
+          "Radial crusting and fissuring around eyes, mouth and nose",
+          "A butterfly rash across the cheeks"
+         ],
+         "ans": 2
         },
         {
          "q": "What is Nikolsky's sign, and is it positive in SSSS?",
-         "a": "Separation of areas of epidermis in response to shearing pressure on the skin — and it is positive in SSSS."
+         "a": "**Separation of the epidermis with shearing/lateral pressure on the skin — and it is positive in SSSS.**\n\n## Understanding it\n- Gentle sideways pressure peels the fragile epidermis → **Nikolsky positive** (also seen in TEN/pemphigus).\n\n>> Nikolsky = shear-induced peeling; positive in SSSS.",
+         "opts": [
+          "Blanching of a rash — negative in SSSS",
+          "Shear-induced epidermal peeling — positive in SSSS",
+          "A wheal on stroking — positive",
+          "Loss of sensation — positive"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the treatment of SSSS.",
-         "a": "Antibiotics such as flucloxacillin or erythromycin; analgesics; application of an emollient and cleaning with isotonic saline; and correction of fluid and electrolyte balance."
+         "a": "**Anti-staphylococcal antibiotics (flucloxacillin or erythromycin); analgesia; emollients; and fluid/electrolyte care.**\n\n## Understanding it\n- Kill the toxin-producing staph (flucloxacillin/erythromycin), relieve pain, protect the skin, and manage fluid loss (like a burn).\n\n>> Flucloxacillin/erythromycin + analgesia + emollient + fluids.",
+         "opts": [
+          "No treatment; it self-resolves",
+          "Systemic steroids alone",
+          "Flucloxacillin/erythromycin, analgesia, emollients, fluids",
+          "Topical antifungals only"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": null,
@@ -21035,191 +22043,520 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Why is blood transfusion especially important in tropical obstetrics?",
-         "a": "Because haemorrhage is the number one cause of maternal mortality and morbidity."
+         "a": "**Because haemorrhage is the number-one cause of maternal mortality and morbidity.**\n\n## Understanding it\n- In tropical obstetrics, bleeding kills more mothers than anything else, so blood is a core life-saving resource.\n\n>> Haemorrhage is the leading cause of maternal death → transfusion is life-saving.",
+         "opts": [
+          "Most women refuse other treatments",
+          "Blood is cheaper than other treatments",
+          "Anaemia is rare in pregnancy there",
+          "Haemorrhage is the leading cause of maternal death"
+         ],
+         "ans": 3
         },
         {
          "q": "What principle governs the use of blood transfusion in O&G?",
-         "a": "It should be used only to save the mother's life, given HIV/AIDS risk and difficulty recruiting voluntary donors."
+         "a": "**It should be used only to save the mother's life, given the HIV/AIDS risk and difficulty recruiting voluntary donors.**\n\n## Understanding it\n- Blood carries real risks and is scarce, so it is reserved for **life-threatening** situations.\n\n>> Transfuse only to save life (blood is risky and scarce).",
+         "opts": [
+          "Avoid transfusion entirely in pregnancy",
+          "Transfuse whenever Hb is below 10 g/dl",
+          "Use it only to save the mother's life",
+          "Transfuse liberally to correct any anaemia"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the criticism often made of transfusion in maternal deaths?",
-         "a": "That it was 'too little, too late'."
+         "a": "**That it was 'too little, too late'.**\n\n## Understanding it\n- Reviews of maternal deaths repeatedly find transfusion was delayed and under-dosed.\n\n>> The classic failing: 'too little, too late'.",
+         "opts": [
+          "'Too much, too soon'",
+          "'Too little, too late'",
+          "'Wrong group, right time'",
+          "'Right blood, wrong patient'"
+         ],
+         "ans": 1
         },
         {
          "q": "Where should women at high risk of losing >1000 ml deliver?",
-         "a": "In a setting where blood transfusion and intensive care facilities are available."
+         "a": "**Where blood transfusion and intensive-care facilities are available.**\n\n## Understanding it\n- Anticipate massive loss and deliver high-risk women where blood/ICU is on hand.\n\n>> High bleeding risk → deliver where blood and ICU exist.",
+         "opts": [
+          "Wherever is nearest and cheapest",
+          "In any primary health centre",
+          "At home to avoid hospital infection",
+          "Where transfusion and intensive care are available"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the major risk of blood transfusion?",
-         "a": "The patient receiving an incorrect blood component."
+         "a": "**The patient receiving an incorrect blood component (wrong blood to the wrong patient).**\n\n## Understanding it\n- The single biggest danger is a **clerical/identification error** giving incompatible blood.\n\n>> Major risk = the wrong blood component to the wrong patient.",
+         "opts": [
+          "Receiving the wrong blood component",
+          "Iron overload from one unit",
+          "A mild allergic rash",
+          "Transmitting malaria"
+         ],
+         "ans": 0
         },
         {
          "q": "What is component therapy?",
-         "a": "Separating a unit of whole blood into components (red cells plus platelets, cryoprecipitate or FFP) and giving only the specific component needed."
+         "a": "**Separating a unit of whole blood into components — red cells plus platelets, cryoprecipitate or fresh frozen plasma.**\n\n## Understanding it\n- One donation is split so each patient gets **only the part they need**.\n\n>> Component therapy = split whole blood into its parts.",
+         "opts": [
+          "Separating whole blood into its components",
+          "Warming whole blood before use",
+          "Irradiating red cells only",
+          "Pooling several donors' blood into one bag"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is component therapy the standard method?",
-         "a": "It provides better targeted treatment and conserves blood, since components from one unit can treat several patients; it has made whole blood rarely necessary."
+         "a": "**It gives better targeted treatment and conserves blood, since components from one unit can treat several patients.**\n\n## Understanding it\n- Give **only what's needed** and **one unit helps several patients**.\n\n>> Targeted treatment + one unit treats several patients.",
+         "opts": [
+          "Targeted treatment and one unit can treat several patients",
+          "It avoids the need for cross-matching",
+          "It removes all infection risk",
+          "It is cheaper than whole blood to collect"
+         ],
+         "ans": 0
         },
         {
          "q": "List the indications for transfusion in O&G.",
-         "a": "Symptomatic anaemia including heart failure; Hb less than 5.6 g/dl; anaemia very close to term; anaemia in labour; and acute haemorrhage/operative loss >30% of blood volume or >500 ml not maintained by plasma expanders."
+         "a": "**Symptomatic anaemia (including heart failure); Hb <5.6 g/dl; anaemia very close to term; anaemia in labour; and acute loss >30% blood volume (or >500 ml) not corrected by fluids.**\n\n## Understanding it\n- The theme is **low reserve near delivery** or **active major bleeding**.\n\n>> Symptomatic anaemia, Hb <5.6, near-term/labour anaemia, or major acute loss.",
+         "opts": [
+          "Only after 2 litres of blood loss",
+          "Any Hb below 10 g/dl",
+          "Routinely before every caesarean",
+          "Symptomatic anaemia, Hb <5.6, near-term/labour anaemia, major acute loss"
+         ],
+         "ans": 3
         },
         {
          "q": "At what Hb level is transfusion indicated?",
-         "a": "A very low Hb of less than 5.6 g/dl."
+         "a": "**A very low Hb of less than 5.6 g/dl.**\n\n## Understanding it\n- The quoted numeric threshold is **Hb <5.6 g/dl** (with clinical judgement).\n\n>> Hb <5.6 g/dl.",
+         "opts": [
+          "Less than 2 g/dl",
+          "Less than 8 g/dl",
+          "Less than 5.6 g/dl",
+          "Less than 10 g/dl"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the indication for red blood cells?",
-         "a": "To increase oxygen-carrying capacity in anaemic women and for orthostatic hypotension from blood loss."
+         "a": "**To increase oxygen-carrying capacity in anaemic women, and for orthostatic hypotension from blood loss.**\n\n## Understanding it\n- Red cells replace **oxygen-carrying capacity** — for anaemia/hypoxia, not volume alone.\n\n>> Red cells = restore oxygen-carrying capacity.",
+         "opts": [
+          "Stop platelet-related bleeding",
+          "Correct clotting-factor deficiency",
+          "Increase oxygen-carrying capacity in anaemia",
+          "Replace fibrinogen"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the indication for platelet concentrates?",
-         "a": "To control or prevent bleeding associated with deficiencies in platelet number or function."
+         "a": "**To control or prevent bleeding from deficiencies in platelet number or function.**\n\n## Understanding it\n- Platelets are given when bleeding is due to **too few or poorly functioning platelets**.\n\n>> Platelets = for platelet-related bleeding.",
+         "opts": [
+          "General clotting-factor deficiency",
+          "Low oxygen-carrying capacity",
+          "Fibrinogen deficiency",
+          "Bleeding from platelet number/function deficiency"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the indication for fresh frozen plasma?",
-         "a": "To increase the level of clotting factors in patients with demonstrated deficiency."
+         "a": "**To increase the level of clotting factors in patients with a demonstrated deficiency.**\n\n## Understanding it\n- FFP is the **general clotting-factor** product.\n\n>> FFP = replace clotting factors (general deficiency).",
+         "opts": [
+          "Replace only fibrinogen and factor VIII",
+          "Increase clotting factors in demonstrated deficiency",
+          "Increase oxygen-carrying capacity",
+          "Correct thrombocytopenia"
+         ],
+         "ans": 1
         },
         {
          "q": "What does cryoprecipitate contain and when is it used?",
-         "a": "Factors I, V, VIII, XIII, von Willebrand factor and fibronectin; used for deficiency of fibrinogen, factor VIII, factor XIII, fibronectin or vWF."
+         "a": "**Factors I (fibrinogen), V, VIII, XIII, von Willebrand factor and fibronectin; used for deficiency of fibrinogen, factor VIII, XIII, fibronectin or vWF.**\n\n## Understanding it\n- Cryoprecipitate is the concentrated **fibrinogen/vWF/factor VIII** product (vs FFP, the general factor product).\n\n>> Cryoprecipitate = fibrinogen/vWF/factor VIII product.",
+         "opts": [
+          "Fibrinogen, vWF, factors VIII/XIII — for those deficiencies",
+          "All plasma proteins including albumin",
+          "Red cells — for anaemia",
+          "Platelets — for thrombocytopenia"
+         ],
+         "ans": 0
         },
         {
          "q": "List the types of transfusion.",
-         "a": "Whole blood, packed cells (sedimented blood), blood component therapy, exchange blood transfusion and autologous blood transfusion."
+         "a": "**Whole blood, packed cells, blood component therapy, exchange blood transfusion, and autologous transfusion.**\n\n## Understanding it\n- Five categories, from whole blood through components to the patient's own blood.\n\n>> Whole blood, packed cells, components, exchange, autologous.",
+         "opts": [
+          "Only autologous and component therapy",
+          "Whole blood, packed cells, components, exchange, autologous",
+          "Only exchange and whole blood",
+          "Only whole blood and packed cells"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the only indication for exchange blood transfusion in anaemia of pregnancy?",
-         "a": "When correction of anaemia must be made very quickly — e.g. severe anaemia in early labour."
+         "a": "**When anaemia must be corrected very quickly — e.g. severe anaemia in early labour.**\n\n## Understanding it\n- Exchange transfusion is expensive/laborious; its niche is **very rapid** correction.\n\n>> EBT only when correction must be very rapid (severe anaemia in early labour).",
+         "opts": [
+          "To conserve blood in mild anaemia",
+          "As the routine first-line for anaemia",
+          "When correction must be very rapid (severe anaemia in early labour)",
+          "For every anaemic pregnant woman"
+         ],
+         "ans": 2
         },
         {
          "q": "What is autologous transfusion?",
-         "a": "The collection and reinfusion of the patient's own blood."
+         "a": "**The collection and reinfusion of the patient's own blood.**\n\n## Understanding it\n- Autologous = the patient donates/receives **their own** blood.\n\n>> Autologous = the patient's own blood back to them.",
+         "opts": [
+          "Pooled donor blood",
+          "Blood from a matched relative",
+          "Collection and reinfusion of the patient's own blood",
+          "Artificial blood substitute"
+         ],
+         "ans": 2
         },
         {
          "q": "Name the three autologous techniques.",
-         "a": "Preoperative autologous blood donation, intraoperative blood (cell) salvage, and acute normovolaemic haemodilution."
+         "a": "**Preoperative autologous donation, intraoperative blood (cell) salvage, and acute normovolaemic haemodilution.**\n\n## Understanding it\n- Three ways to use the patient's own blood: pre-donate, salvage during surgery, or dilute-and-return.\n\n>> Pre-op donation, cell salvage, normovolaemic haemodilution.",
+         "opts": [
+          "Cryoprecipitate, FFP, platelets",
+          "Pre-op donation, cell salvage, acute normovolaemic haemodilution",
+          "Directed donation, apheresis, irradiation",
+          "Exchange, whole blood, packed cells"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the requirements for preoperative autologous donation?",
-         "a": "Donation at least 2 weeks before surgery/delivery, with an adequate Hb of 11 g/dl or more."
+         "a": "**Donation at least 2 weeks before surgery/delivery, with an adequate Hb of 11 g/dl or more.**\n\n## Understanding it\n- The patient needs time to regenerate blood (**≥2 weeks**) and an adequate **Hb ≥11**.\n\n>> ≥2 weeks ahead, Hb ≥11 g/dl.",
+         "opts": [
+          "Only if Hb is below 5.6",
+          "6 months before, Hb ≥8",
+          "At least 2 weeks before, Hb ≥11 g/dl",
+          "The day before, any Hb"
+         ],
+         "ans": 2
         },
         {
          "q": "Is pre-delivery autologous donation routinely recommended?",
-         "a": "No — few parturients require transfusion, so routine donation is not justified; but it may be appropriate for placenta praevia."
+         "a": "**No — few parturients require transfusion, so routine donation isn't justified (though it may suit placenta praevia).**\n\n## Understanding it\n- Most women never need transfusion; reserve pre-donation for high-bleeding-risk cases.\n\n>> Not routine; consider it for placenta praevia.",
+         "opts": [
+          "No — not routine (consider it for placenta praevia)",
+          "No — it is never appropriate",
+          "Yes — for all caesareans",
+          "Yes — for every pregnant woman"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the rate of vasovagal reactions in autologous donors?",
-         "a": "About 2-5%."
+         "a": "**About 2–5%.**\n\n## Understanding it\n- Autologous donation is safe; the main minor risk is a vasovagal reaction in **~2–5%**.\n\n>> ~2–5% vasovagal reactions.",
+         "opts": [
+          "About 50%",
+          "About 2–5%",
+          "Less than 0.1%",
+          "About 20–25%"
+         ],
+         "ans": 1
         },
         {
          "q": "What is intraoperative cell salvage (IOCS)?",
-         "a": "The sterile collection, washing and reinfusion of shed blood, using a continuous-flow centrifugation device such as a Cell Saver."
+         "a": "**The sterile collection, washing and reinfusion of shed blood, using a continuous-flow centrifugation device (Cell Saver).**\n\n## Understanding it\n- Blood lost during surgery is **collected, washed, and returned**.\n\n>> IOCS = collect, wash and reinfuse shed blood (Cell Saver).",
+         "opts": [
+          "Collecting, washing and reinfusing shed blood (Cell Saver)",
+          "Diluting blood with crystalloid",
+          "Pre-donating blood weeks earlier",
+          "Exchanging blood in early labour"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the contraindications to intraoperative cell salvage?",
-         "a": "Infection, contamination with malignant cells, and penetrating bowel wounds."
+         "a": "**Infection, contamination with malignant cells, and penetrating bowel wounds.**\n\n## Understanding it\n- Don't reinfuse blood contaminated by **infection, cancer cells, or bowel contents**.\n\n>> Contraindicated: infection, malignant cells, bowel injury.",
+         "opts": [
+          "Anaemia and low Hb",
+          "Placenta praevia",
+          "A caesarean delivery",
+          "Infection, malignant cells, penetrating bowel wounds"
+         ],
+         "ans": 3
         },
         {
          "q": "How long can salvaged blood be stored, and can it be given to others?",
-         "a": "At room temperature up to 4 hours (or ≤24 h in the blood bank if properly identified); it must never be transfused to any other patient."
+         "a": "**At room temperature up to 4 hours (or ≤24 h in the blood bank if properly identified); it must NOT be given to another patient.**\n\n## Understanding it\n- Salvaged blood is the patient's own — never transfuse it to someone else, and use it within tight limits.\n\n>> ≤4 h room temp (≤24 h banked); never give to another patient.",
+         "opts": [
+          "Indefinitely if frozen",
+          "≤4 h at room temp (≤24 h banked); never to another patient",
+          "Up to 42 days like donor blood",
+          "It can be given to any matched patient"
+         ],
+         "ans": 1
         },
         {
          "q": "What is acute normovolaemic haemodilution?",
-         "a": "Removal of blood before/after induction of anaesthesia with simultaneous crystalloid to maintain normovolaemia, and reinfusion of the patient's RBCs at the end of surgery."
+         "a": "**Removal of blood before/after induction of anaesthesia with simultaneous crystalloid to maintain normovolaemia, reinfusing the patient's RBCs at the end.**\n\n## Understanding it\n- Take blood, replace volume with fluid, so surgical loss is **dilute**, then give the concentrated blood back after.\n\n>> Dilute the blood before surgery, return concentrated blood after.",
+         "opts": [
+          "Salvage shed blood during surgery",
+          "Exchange all the blood at once",
+          "Pre-donate blood 2 weeks earlier",
+          "Remove blood + give fluid, reinfuse the RBCs at the end"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the benefits of acute normovolaemic haemodilution?",
-         "a": "Fewer RBCs are lost during surgery (lower Hb concentration), fresh whole blood is available, and lower blood viscosity improves tissue perfusion and oxygenation."
+         "a": "**Fewer RBCs are lost during surgery (lower Hb concentration), fresh whole blood is available, and lower viscosity improves tissue perfusion.**\n\n## Understanding it\n- Diluting the blood means each ml lost contains fewer red cells; the withdrawn fresh blood is returned later.\n\n>> Fewer red cells lost, fresh blood available, better perfusion.",
+         "opts": [
+          "It shortens the operation",
+          "Fewer RBCs lost, fresh blood available, better perfusion",
+          "It removes all infection risk",
+          "It replaces clotting factors"
+         ],
+         "ans": 1
         },
         {
          "q": "When should blood group and antibody status be checked in pregnancy?",
-         "a": "At booking and at 28 weeks gestation."
+         "a": "**At booking and at 28 weeks gestation.**\n\n## Understanding it\n- Group and antibody screen at **booking** and again at **28 weeks** to detect alloimmunisation before delivery.\n\n>> At booking and at 28 weeks.",
+         "opts": [
+          "Only in labour",
+          "Only if bleeding occurs",
+          "At booking and at 28 weeks",
+          "At every antenatal visit"
+         ],
+         "ans": 2
         },
         {
          "q": "What compatibility is required for red cell transfusion?",
-         "a": "ABO, RhD and K (Kell) compatibility."
+         "a": "**ABO, RhD and K (Kell) compatibility.**\n\n## Understanding it\n- Match not just ABO/RhD but also **Kell**, which is highly immunogenic in women of childbearing age.\n\n>> ABO + RhD + Kell compatible.",
+         "opts": [
+          "RhD only",
+          "ABO and Duffy only",
+          "ABO, RhD and Kell compatible",
+          "ABO only"
+         ],
+         "ans": 2
         },
         {
          "q": "What blood is issued in a major obstetric haemorrhage before the group is known?",
-         "a": "Group O RhD-negative, K-negative units, switching to group-specific blood as soon as feasible."
+         "a": "**Group O RhD-negative, K-negative units, switching to group-specific blood as soon as feasible.**\n\n## Understanding it\n- In an emergency give the universal **O RhD-neg, Kell-neg** blood, then change to group-specific once cross-matched.\n\n>> Emergency: O RhD-negative, Kell-negative.",
+         "opts": [
+          "Group-specific only after full cross-match",
+          "O RhD-negative, Kell-negative units",
+          "AB RhD-positive units",
+          "The patient's stored autologous blood"
+         ],
+         "ans": 1
         },
         {
          "q": "What type of blood should be used for elective transfusion in pregnancy and intrauterine transfusion?",
-         "a": "CMV-seronegative blood (and components)."
+         "a": "**CMV-seronegative blood (and components).**\n\n## Understanding it\n- To protect the fetus/immunocompromised, use **CMV-negative** blood for pregnancy and intrauterine transfusion.\n\n>> CMV-seronegative blood.",
+         "opts": [
+          "Any ABO-compatible blood",
+          "Only irradiated Rh-positive blood",
+          "CMV-seronegative blood",
+          "Whole blood only"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is correct identification of each unit critical?",
-         "a": "Because the major risk is giving the wrong blood; it often requires a second individual to cross-check before transfusion."
+         "a": "**Because the major risk is giving the wrong blood; it often requires a second individual to cross-check before transfusion.**\n\n## Understanding it\n- Wrong-blood-to-wrong-patient is the biggest danger, so a **two-person bedside check** is standard.\n\n>> Wrong blood is the top risk → two-person check.",
+         "opts": [
+          "To warm the blood correctly",
+          "To measure the exact volume",
+          "Wrong blood is the biggest risk → two-person check",
+          "To record the donor's name"
+         ],
+         "ans": 2
         },
         {
          "q": "When is warming of blood needed before transfusion?",
-         "a": "Rarely — only when the rate exceeds 50 ml/kg/hr (risk of transfusion-induced hypothermia) or in cold agglutinin disease."
+         "a": "**Rarely — only when the rate exceeds 50 ml/kg/hr (risk of transfusion-induced hypothermia) or in cold agglutinin disease.**\n\n## Understanding it\n- Routine warming is unnecessary; it's needed only for very rapid transfusion or cold agglutinins.\n\n>> Warm only for very fast transfusion or cold agglutinin disease.",
+         "opts": [
+          "Only for platelet transfusions",
+          "Never, under any circumstance",
+          "Always, for every unit",
+          "Only for very rapid transfusion or cold agglutinin disease"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the purpose of a leucocyte filter?",
-         "a": "To prevent febrile non-haemolytic transfusion reactions and lower the risk of CMV infection (but it removes most platelets if used for platelet transfusion)."
+         "a": "**To prevent febrile non-haemolytic transfusion reactions and lower the risk of CMV infection.**\n\n## Understanding it\n- Removing white cells reduces **febrile non-haemolytic reactions** and CMV transmission.\n\n>> Leucocyte filter → fewer febrile reactions and less CMV.",
+         "opts": [
+          "Warm the blood as it runs",
+          "Concentrate the platelets",
+          "Prevent febrile non-haemolytic reactions and reduce CMV",
+          "Remove bacteria from the blood"
+         ],
+         "ans": 2
         },
         {
          "q": "Which fluid may be infused through the same line as blood, and why only that one?",
-         "a": "Only normal saline (0.9%); other crystalloids cause agglutination/haemolysis, and calcium-containing solutions cause clotting in the tubing."
+         "a": "**Only normal saline (0.9%); other crystalloids cause agglutination/haemolysis, and calcium-containing fluids clot the tubing.**\n\n## Understanding it\n- **Normal saline only** — dextrose lyses cells and calcium (e.g. Ringer's) triggers clotting in the line.\n\n>> Only normal saline shares the line with blood.",
+         "opts": [
+          "5% dextrose",
+          "Only 0.9% normal saline",
+          "Any crystalloid is fine",
+          "Ringer's lactate"
+         ],
+         "ans": 1
         },
         {
          "q": "Why should medications not be added to a unit of blood?",
-         "a": "Interactions are unpredictable, reactions become hard to attribute, and stopping the transfusion means an incomplete drug dose."
+         "a": "**Interactions are unpredictable, reactions become hard to attribute, and stopping the transfusion means an incomplete drug dose.**\n\n## Understanding it\n- Adding drugs to blood is unsafe — unpredictable interactions, confused adverse-reaction attribution, and dosing problems.\n\n>> Never add drugs to blood (unpredictable, confounds reactions, dosing).",
+         "opts": [
+          "It speeds up the transfusion dangerously",
+          "Drugs make the blood clot faster",
+          "Unpredictable interactions; reactions hard to attribute; dosing problems",
+          "It is allowed if the drug is an antibiotic"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the major complications of blood transfusion?",
-         "a": "Infections, alloimmunisation and transfusion reactions."
+         "a": "**Infections, alloimmunisation, and transfusion reactions.**\n\n## Understanding it\n- Three headline complication groups: transmitted infection, immune alloimmunisation, and reactions.\n\n>> Infections, alloimmunisation, transfusion reactions.",
+         "opts": [
+          "Only clotting problems",
+          "Only mild allergy",
+          "Only iron overload",
+          "Infections, alloimmunisation, transfusion reactions"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes acute haemolytic transfusion reactions and what are the features?",
-         "a": "Usually ABO incompatibility causing intravascular haemolysis, with chills, fever, chest and flank pain, nausea, cardiovascular collapse and DIC."
+         "a": "**Usually ABO incompatibility causing intravascular haemolysis — chills, fever, chest/flank pain, nausea, cardiovascular collapse and DIC.**\n\n## Understanding it\n- The immediate 'wrong blood' catastrophe: ABO mismatch → intravascular haemolysis with collapse and DIC.\n\n>> ABO mismatch → intravascular haemolysis, collapse, DIC.",
+         "opts": [
+          "Kidd/Duffy antibodies → jaundice days later",
+          "Antibodies to white cells → fever only",
+          "Bacterial contamination → a rash",
+          "ABO incompatibility → intravascular haemolysis, collapse, DIC"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes febrile non-haemolytic reactions and how are they managed?",
-         "a": "Recipient antibodies against leucocyte and platelet antigens; managed with antipyretics, and leucocyte-reduced components if recurrent."
+         "a": "**Recipient antibodies against leucocyte/platelet antigens; managed with antipyretics and leucocyte-reduced components if recurrent.**\n\n## Understanding it\n- The common, mild reaction — antibodies to donor white cells cause **fever only**; treat with antipyretics.\n\n>> Anti-leucocyte antibodies → fever; antipyretics, leucodepletion.",
+         "opts": [
+          "Calcium in the line → clotting",
+          "IgA deficiency → anaphylaxis",
+          "ABO mismatch → collapse and DIC",
+          "Anti-leucocyte/platelet antibodies → fever; antipyretics, leucodepletion"
+         ],
+         "ans": 3
         },
         {
          "q": "Which blood groups cause delayed haemolytic reactions and what are the features?",
-         "a": "Kidd (Jk), Duffy (Fy) and Kell; usually extravascular, with fever, anaemia, hyperbilirubinaemia and a positive direct Coombs test, occurring 7-10 days after transfusion."
+         "a": "**Kidd (Jk), Duffy (Fy) and Kell; usually extravascular, with fever, anaemia, hyperbilirubinaemia (jaundice) and a positive direct Coombs test ~7–10 days later.**\n\n## Understanding it\n- The 'sneaky, late' reaction from minor blood-group antibodies — jaundice/anaemia days later, Coombs-positive.\n\n>> Kidd/Duffy/Kell → delayed (7–10 d) extravascular haemolysis, Coombs+.",
+         "opts": [
+          "ABO → immediate intravascular haemolysis",
+          "Anti-leucocyte antibodies → immediate fever",
+          "Kidd/Duffy/Kell → delayed extravascular haemolysis (Coombs+)",
+          "IgA deficiency → anaphylaxis"
+         ],
+         "ans": 2
         },
         {
          "q": "Why should CMV-negative blood be used in the undelivered parturient?",
-         "a": "Because of the fetal immune status — to avoid CMV transmission via intrauterine or maternal transfusion."
+         "a": "**Because of the fetal immune status — to avoid CMV transmission via intrauterine or maternal transfusion.**\n\n## Understanding it\n- The fetus is immunologically vulnerable, so CMV-negative blood protects it from congenital CMV.\n\n>> CMV-negative protects the vulnerable fetus.",
+         "opts": [
+          "CMV status is irrelevant in pregnancy",
+          "To protect the immunologically vulnerable fetus from CMV",
+          "To reduce febrile reactions only",
+          "To prevent ABO incompatibility"
+         ],
+         "ans": 1
         },
         {
          "q": "What is Patient Blood Management (PBM)?",
-         "a": "An all-encompassing approach to avoid unnecessary transfusion: optimise pre-delivery Hb, avoid over-transfusion, use cell salvage, accept lower transfusion triggers, and use IV/oral iron in stable non-bleeding women."
+         "a": "**An all-encompassing approach to avoid unnecessary transfusion: optimise pre-delivery Hb (iron), avoid over-transfusion, use cell salvage, accept lower triggers, and give iron to the stable non-bleeding woman.**\n\n## Understanding it\n- PBM is a **prevent-transfusion-by-planning** philosophy centred on iron and conservative triggers.\n\n>> PBM = plan ahead (iron, conservative triggers, salvage) to avoid transfusion.",
+         "opts": [
+          "Transfuse early and generously",
+          "Prevent transfusion by planning: iron, lower triggers, cell salvage",
+          "Give whole blood to everyone",
+          "Avoid iron in pregnancy"
+         ],
+         "ans": 1
         },
         {
          "q": "Outline the management of a pregnant Jehovah's Witness refusing transfusion.",
-         "a": "Multidisciplinary antenatal planning to minimise anaemia and manage blood loss; early iron replacement including IV iron; discuss and document consent/refusal antenatally; use pharmacological, mechanical and surgical measures early to avoid banked blood; and fully inform her of the risks sensitively, without coercion."
+         "a": "**Multidisciplinary antenatal planning to minimise anaemia and manage blood loss; early (IV) iron; document refusal/consent antenatally; use drugs/surgery to avoid banked blood; inform of risks without coercion.**\n\n## Understanding it\n- Plan **early and sensitively**: optimise iron, document consent, use blood-sparing techniques, respect autonomy.\n\n>> Early multidisciplinary plan, iron, documented consent, blood-sparing techniques.",
+         "opts": [
+          "Delay all planning until labour",
+          "Refuse to care for her",
+          "Early multidisciplinary plan, IV iron, documented consent, blood-sparing measures",
+          "Transfuse anyway in an emergency"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — In major PPH with unknown group, what red cells do you give first?",
-         "a": "Group O RhD-negative, K (Kell)-negative red cells, switching to group-specific as soon as feasible."
+         "a": "**Group O RhD-negative, Kell-negative red cells, switching to group-specific as soon as feasible.**\n\n## Understanding it\n- The universal emergency choice is **O RhD-neg, Kell-neg**, changed to group-specific once cross-matched.\n\n>> O RhD-negative, Kell-negative first.",
+         "opts": [
+          "O RhD-negative, Kell-negative red cells",
+          "Fresh frozen plasma only",
+          "AB RhD-positive red cells",
+          "Wait for a full cross-match"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A patient develops chills, fever, flank pain and collapse minutes into a transfusion. What is the reaction and cause?",
-         "a": "An acute haemolytic reaction from ABO incompatibility (intravascular haemolysis) — stop the transfusion immediately."
+         "a": "**An acute haemolytic reaction from ABO incompatibility (intravascular haemolysis) — stop the transfusion immediately and resuscitate.**\n\n## Understanding it\n- Immediate onset + collapse + flank/chest pain = the 'wrong blood' ABO catastrophe. Stop transfusing, resuscitate, keep the line with saline.\n\n>> Acute ABO haemolytic reaction — stop and resuscitate.",
+         "opts": [
+          "Febrile non-haemolytic reaction — give antipyretics",
+          "A simple allergic reaction",
+          "Acute haemolytic reaction (ABO incompatibility) — stop transfusing",
+          "Delayed haemolytic reaction"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A patient develops jaundice, anaemia and a positive Coombs test 8 days after transfusion. What is this?",
-         "a": "A delayed haemolytic reaction, typically from Kidd, Duffy or Kell antibodies (extravascular haemolysis)."
+         "a": "**A delayed haemolytic reaction, typically from Kidd, Duffy or Kell antibodies (extravascular haemolysis).**\n\n## Understanding it\n- Onset **~a week later** with jaundice/anaemia and positive Coombs = delayed (extravascular) haemolysis from minor group antibodies.\n\n>> Delayed haemolytic reaction (Kidd/Duffy/Kell), Coombs+.",
+         "opts": [
+          "Transfusion-related circulatory overload",
+          "Febrile non-haemolytic reaction",
+          "Delayed haemolytic reaction (Kidd/Duffy/Kell)",
+          "Acute ABO haemolytic reaction"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A patient develops an isolated fever during transfusion with no haemolysis. Reaction and management?",
-         "a": "Febrile non-haemolytic reaction; give antipyretics and use leucocyte-reduced components if it recurs."
+         "a": "**A febrile non-haemolytic reaction; give antipyretics and use leucocyte-reduced components if it recurs.**\n\n## Understanding it\n- Fever alone, no haemolysis = the common, mild febrile non-haemolytic reaction (anti-leucocyte antibodies).\n\n>> Febrile non-haemolytic reaction — antipyretics, leucodepletion.",
+         "opts": [
+          "Delayed haemolytic reaction",
+          "Febrile non-haemolytic reaction — antipyretics, leucodepletion",
+          "Anaphylaxis from IgA deficiency",
+          "Acute ABO haemolytic reaction"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Which obstetric condition makes preoperative autologous donation appropriate?",
-         "a": "Placenta praevia (a known high bleeding risk)."
+         "a": "**Placenta praevia (a known high bleeding risk).**\n\n## Understanding it\n- Because praevia carries a high, predictable bleeding risk, pre-donating the woman's own blood is justified there.\n\n>> Placenta praevia = the classic indication for pre-op autologous donation.",
+         "opts": [
+          "An uncomplicated term pregnancy",
+          "Placenta praevia",
+          "Gestational diabetes",
+          "Mild iron-deficiency anaemia"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why can't you run Ringer's lactate with blood?",
-         "a": "It contains calcium, which causes clotting in the tubing; only normal saline may share the line."
+         "a": "**It contains calcium, which causes clotting in the tubing; only normal saline may share the line.**\n\n## Understanding it\n- Ringer's **calcium** reverses the citrate anticoagulant in stored blood → clots in the line. Use saline instead.\n\n>> Ringer's calcium clots the line — use normal saline only.",
+         "opts": [
+          "It causes fever",
+          "Its calcium causes clotting in the line (use saline only)",
+          "It dilutes the blood too much",
+          "It is too acidic and lyses cells"
+         ],
+         "ans": 1
         }
        ],
        "imgBase": null,

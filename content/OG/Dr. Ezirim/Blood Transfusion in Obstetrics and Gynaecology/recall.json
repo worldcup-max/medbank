@@ -1,194 +1,523 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Blood Transfusion in Obstetrics & Gynaecology",
-  "cards": [
-    {
-      "q": "Why is blood transfusion especially important in tropical obstetrics?",
-      "a": "Because haemorrhage is the number one cause of maternal mortality and morbidity."
-    },
-    {
-      "q": "What principle governs the use of blood transfusion in O&G?",
-      "a": "It should be used only to save the mother's life, given HIV/AIDS risk and difficulty recruiting voluntary donors."
-    },
-    {
-      "q": "What is the criticism often made of transfusion in maternal deaths?",
-      "a": "That it was 'too little, too late'."
-    },
-    {
-      "q": "Where should women at high risk of losing >1000 ml deliver?",
-      "a": "In a setting where blood transfusion and intensive care facilities are available."
-    },
-    {
-      "q": "What is the major risk of blood transfusion?",
-      "a": "The patient receiving an incorrect blood component."
-    },
-    {
-      "q": "What is component therapy?",
-      "a": "Separating a unit of whole blood into components (red cells plus platelets, cryoprecipitate or FFP) and giving only the specific component needed."
-    },
-    {
-      "q": "Why is component therapy the standard method?",
-      "a": "It provides better targeted treatment and conserves blood, since components from one unit can treat several patients; it has made whole blood rarely necessary."
-    },
-    {
-      "q": "List the indications for transfusion in O&G.",
-      "a": "Symptomatic anaemia including heart failure; Hb less than 5.6 g/dl; anaemia very close to term; anaemia in labour; and acute haemorrhage/operative loss >30% of blood volume or >500 ml not maintained by plasma expanders."
-    },
-    {
-      "q": "At what Hb level is transfusion indicated?",
-      "a": "A very low Hb of less than 5.6 g/dl."
-    },
-    {
-      "q": "What is the indication for red blood cells?",
-      "a": "To increase oxygen-carrying capacity in anaemic women and for orthostatic hypotension from blood loss."
-    },
-    {
-      "q": "What is the indication for platelet concentrates?",
-      "a": "To control or prevent bleeding associated with deficiencies in platelet number or function."
-    },
-    {
-      "q": "What is the indication for fresh frozen plasma?",
-      "a": "To increase the level of clotting factors in patients with demonstrated deficiency."
-    },
-    {
-      "q": "What does cryoprecipitate contain and when is it used?",
-      "a": "Factors I, V, VIII, XIII, von Willebrand factor and fibronectin; used for deficiency of fibrinogen, factor VIII, factor XIII, fibronectin or vWF."
-    },
-    {
-      "q": "List the types of transfusion.",
-      "a": "Whole blood, packed cells (sedimented blood), blood component therapy, exchange blood transfusion and autologous blood transfusion."
-    },
-    {
-      "q": "What is the only indication for exchange blood transfusion in anaemia of pregnancy?",
-      "a": "When correction of anaemia must be made very quickly — e.g. severe anaemia in early labour."
-    },
-    {
-      "q": "What is autologous transfusion?",
-      "a": "The collection and reinfusion of the patient's own blood."
-    },
-    {
-      "q": "Name the three autologous techniques.",
-      "a": "Preoperative autologous blood donation, intraoperative blood (cell) salvage, and acute normovolaemic haemodilution."
-    },
-    {
-      "q": "What are the requirements for preoperative autologous donation?",
-      "a": "Donation at least 2 weeks before surgery/delivery, with an adequate Hb of 11 g/dl or more."
-    },
-    {
-      "q": "Is pre-delivery autologous donation routinely recommended?",
-      "a": "No — few parturients require transfusion, so routine donation is not justified; but it may be appropriate for placenta praevia."
-    },
-    {
-      "q": "What is the rate of vasovagal reactions in autologous donors?",
-      "a": "About 2-5%."
-    },
-    {
-      "q": "What is intraoperative cell salvage (IOCS)?",
-      "a": "The sterile collection, washing and reinfusion of shed blood, using a continuous-flow centrifugation device such as a Cell Saver."
-    },
-    {
-      "q": "What are the contraindications to intraoperative cell salvage?",
-      "a": "Infection, contamination with malignant cells, and penetrating bowel wounds."
-    },
-    {
-      "q": "How long can salvaged blood be stored, and can it be given to others?",
-      "a": "At room temperature up to 4 hours (or ≤24 h in the blood bank if properly identified); it must never be transfused to any other patient."
-    },
-    {
-      "q": "What is acute normovolaemic haemodilution?",
-      "a": "Removal of blood before/after induction of anaesthesia with simultaneous crystalloid to maintain normovolaemia, and reinfusion of the patient's RBCs at the end of surgery."
-    },
-    {
-      "q": "What are the benefits of acute normovolaemic haemodilution?",
-      "a": "Fewer RBCs are lost during surgery (lower Hb concentration), fresh whole blood is available, and lower blood viscosity improves tissue perfusion and oxygenation."
-    },
-    {
-      "q": "When should blood group and antibody status be checked in pregnancy?",
-      "a": "At booking and at 28 weeks gestation."
-    },
-    {
-      "q": "What compatibility is required for red cell transfusion?",
-      "a": "ABO, RhD and K (Kell) compatibility."
-    },
-    {
-      "q": "What blood is issued in a major obstetric haemorrhage before the group is known?",
-      "a": "Group O RhD-negative, K-negative units, switching to group-specific blood as soon as feasible."
-    },
-    {
-      "q": "What type of blood should be used for elective transfusion in pregnancy and intrauterine transfusion?",
-      "a": "CMV-seronegative blood (and components)."
-    },
-    {
-      "q": "Why is correct identification of each unit critical?",
-      "a": "Because the major risk is giving the wrong blood; it often requires a second individual to cross-check before transfusion."
-    },
-    {
-      "q": "When is warming of blood needed before transfusion?",
-      "a": "Rarely — only when the rate exceeds 50 ml/kg/hr (risk of transfusion-induced hypothermia) or in cold agglutinin disease."
-    },
-    {
-      "q": "What is the purpose of a leucocyte filter?",
-      "a": "To prevent febrile non-haemolytic transfusion reactions and lower the risk of CMV infection (but it removes most platelets if used for platelet transfusion)."
-    },
-    {
-      "q": "Which fluid may be infused through the same line as blood, and why only that one?",
-      "a": "Only normal saline (0.9%); other crystalloids cause agglutination/haemolysis, and calcium-containing solutions cause clotting in the tubing."
-    },
-    {
-      "q": "Why should medications not be added to a unit of blood?",
-      "a": "Interactions are unpredictable, reactions become hard to attribute, and stopping the transfusion means an incomplete drug dose."
-    },
-    {
-      "q": "What are the major complications of blood transfusion?",
-      "a": "Infections, alloimmunisation and transfusion reactions."
-    },
-    {
-      "q": "What causes acute haemolytic transfusion reactions and what are the features?",
-      "a": "Usually ABO incompatibility causing intravascular haemolysis, with chills, fever, chest and flank pain, nausea, cardiovascular collapse and DIC."
-    },
-    {
-      "q": "What causes febrile non-haemolytic reactions and how are they managed?",
-      "a": "Recipient antibodies against leucocyte and platelet antigens; managed with antipyretics, and leucocyte-reduced components if recurrent."
-    },
-    {
-      "q": "Which blood groups cause delayed haemolytic reactions and what are the features?",
-      "a": "Kidd (Jk), Duffy (Fy) and Kell; usually extravascular, with fever, anaemia, hyperbilirubinaemia and a positive direct Coombs test, occurring 7-10 days after transfusion."
-    },
-    {
-      "q": "Why should CMV-negative blood be used in the undelivered parturient?",
-      "a": "Because of the fetal immune status — to avoid CMV transmission via intrauterine or maternal transfusion."
-    },
-    {
-      "q": "What is Patient Blood Management (PBM)?",
-      "a": "An all-encompassing approach to avoid unnecessary transfusion: optimise pre-delivery Hb, avoid over-transfusion, use cell salvage, accept lower transfusion triggers, and use IV/oral iron in stable non-bleeding women."
-    },
-    {
-      "q": "Outline the management of a pregnant Jehovah's Witness refusing transfusion.",
-      "a": "Multidisciplinary antenatal planning to minimise anaemia and manage blood loss; early iron replacement including IV iron; discuss and document consent/refusal antenatally; use pharmacological, mechanical and surgical measures early to avoid banked blood; and fully inform her of the risks sensitively, without coercion."
-    },
-    {
-      "q": "CLINICAL — In major PPH with unknown group, what red cells do you give first?",
-      "a": "Group O RhD-negative, K (Kell)-negative red cells, switching to group-specific as soon as feasible."
-    },
-    {
-      "q": "CLINICAL — A patient develops chills, fever, flank pain and collapse minutes into a transfusion. What is the reaction and cause?",
-      "a": "An acute haemolytic reaction from ABO incompatibility (intravascular haemolysis) — stop the transfusion immediately."
-    },
-    {
-      "q": "CLINICAL — A patient develops jaundice, anaemia and a positive Coombs test 8 days after transfusion. What is this?",
-      "a": "A delayed haemolytic reaction, typically from Kidd, Duffy or Kell antibodies (extravascular haemolysis)."
-    },
-    {
-      "q": "CLINICAL — A patient develops an isolated fever during transfusion with no haemolysis. Reaction and management?",
-      "a": "Febrile non-haemolytic reaction; give antipyretics and use leucocyte-reduced components if it recurs."
-    },
-    {
-      "q": "CLINICAL — Which obstetric condition makes preoperative autologous donation appropriate?",
-      "a": "Placenta praevia (a known high bleeding risk)."
-    },
-    {
-      "q": "CLINICAL — Why can't you run Ringer's lactate with blood?",
-      "a": "It contains calcium, which causes clotting in the tubing; only normal saline may share the line."
-    }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Blood Transfusion in Obstetrics & Gynaecology",
+ "cards": [
+  {
+   "q": "Why is blood transfusion especially important in tropical obstetrics?",
+   "a": "**Because haemorrhage is the number-one cause of maternal mortality and morbidity.**\n\n## Understanding it\n- In tropical obstetrics, bleeding kills more mothers than anything else, so blood is a core life-saving resource.\n\n>> Haemorrhage is the leading cause of maternal death → transfusion is life-saving.",
+   "opts": [
+    "Most women refuse other treatments",
+    "Blood is cheaper than other treatments",
+    "Anaemia is rare in pregnancy there",
+    "Haemorrhage is the leading cause of maternal death"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What principle governs the use of blood transfusion in O&G?",
+   "a": "**It should be used only to save the mother's life, given the HIV/AIDS risk and difficulty recruiting voluntary donors.**\n\n## Understanding it\n- Blood carries real risks and is scarce, so it is reserved for **life-threatening** situations.\n\n>> Transfuse only to save life (blood is risky and scarce).",
+   "opts": [
+    "Avoid transfusion entirely in pregnancy",
+    "Transfuse whenever Hb is below 10 g/dl",
+    "Use it only to save the mother's life",
+    "Transfuse liberally to correct any anaemia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the criticism often made of transfusion in maternal deaths?",
+   "a": "**That it was 'too little, too late'.**\n\n## Understanding it\n- Reviews of maternal deaths repeatedly find transfusion was delayed and under-dosed.\n\n>> The classic failing: 'too little, too late'.",
+   "opts": [
+    "'Too much, too soon'",
+    "'Too little, too late'",
+    "'Wrong group, right time'",
+    "'Right blood, wrong patient'"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where should women at high risk of losing >1000 ml deliver?",
+   "a": "**Where blood transfusion and intensive-care facilities are available.**\n\n## Understanding it\n- Anticipate massive loss and deliver high-risk women where blood/ICU is on hand.\n\n>> High bleeding risk → deliver where blood and ICU exist.",
+   "opts": [
+    "Wherever is nearest and cheapest",
+    "In any primary health centre",
+    "At home to avoid hospital infection",
+    "Where transfusion and intensive care are available"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the major risk of blood transfusion?",
+   "a": "**The patient receiving an incorrect blood component (wrong blood to the wrong patient).**\n\n## Understanding it\n- The single biggest danger is a **clerical/identification error** giving incompatible blood.\n\n>> Major risk = the wrong blood component to the wrong patient.",
+   "opts": [
+    "Receiving the wrong blood component",
+    "Iron overload from one unit",
+    "A mild allergic rash",
+    "Transmitting malaria"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is component therapy?",
+   "a": "**Separating a unit of whole blood into components — red cells plus platelets, cryoprecipitate or fresh frozen plasma.**\n\n## Understanding it\n- One donation is split so each patient gets **only the part they need**.\n\n>> Component therapy = split whole blood into its parts.",
+   "opts": [
+    "Separating whole blood into its components",
+    "Warming whole blood before use",
+    "Irradiating red cells only",
+    "Pooling several donors' blood into one bag"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is component therapy the standard method?",
+   "a": "**It gives better targeted treatment and conserves blood, since components from one unit can treat several patients.**\n\n## Understanding it\n- Give **only what's needed** and **one unit helps several patients**.\n\n>> Targeted treatment + one unit treats several patients.",
+   "opts": [
+    "Targeted treatment and one unit can treat several patients",
+    "It avoids the need for cross-matching",
+    "It removes all infection risk",
+    "It is cheaper than whole blood to collect"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the indications for transfusion in O&G.",
+   "a": "**Symptomatic anaemia (including heart failure); Hb <5.6 g/dl; anaemia very close to term; anaemia in labour; and acute loss >30% blood volume (or >500 ml) not corrected by fluids.**\n\n## Understanding it\n- The theme is **low reserve near delivery** or **active major bleeding**.\n\n>> Symptomatic anaemia, Hb <5.6, near-term/labour anaemia, or major acute loss.",
+   "opts": [
+    "Only after 2 litres of blood loss",
+    "Any Hb below 10 g/dl",
+    "Routinely before every caesarean",
+    "Symptomatic anaemia, Hb <5.6, near-term/labour anaemia, major acute loss"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "At what Hb level is transfusion indicated?",
+   "a": "**A very low Hb of less than 5.6 g/dl.**\n\n## Understanding it\n- The quoted numeric threshold is **Hb <5.6 g/dl** (with clinical judgement).\n\n>> Hb <5.6 g/dl.",
+   "opts": [
+    "Less than 2 g/dl",
+    "Less than 8 g/dl",
+    "Less than 5.6 g/dl",
+    "Less than 10 g/dl"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the indication for red blood cells?",
+   "a": "**To increase oxygen-carrying capacity in anaemic women, and for orthostatic hypotension from blood loss.**\n\n## Understanding it\n- Red cells replace **oxygen-carrying capacity** — for anaemia/hypoxia, not volume alone.\n\n>> Red cells = restore oxygen-carrying capacity.",
+   "opts": [
+    "Stop platelet-related bleeding",
+    "Correct clotting-factor deficiency",
+    "Increase oxygen-carrying capacity in anaemia",
+    "Replace fibrinogen"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the indication for platelet concentrates?",
+   "a": "**To control or prevent bleeding from deficiencies in platelet number or function.**\n\n## Understanding it\n- Platelets are given when bleeding is due to **too few or poorly functioning platelets**.\n\n>> Platelets = for platelet-related bleeding.",
+   "opts": [
+    "General clotting-factor deficiency",
+    "Low oxygen-carrying capacity",
+    "Fibrinogen deficiency",
+    "Bleeding from platelet number/function deficiency"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the indication for fresh frozen plasma?",
+   "a": "**To increase the level of clotting factors in patients with a demonstrated deficiency.**\n\n## Understanding it\n- FFP is the **general clotting-factor** product.\n\n>> FFP = replace clotting factors (general deficiency).",
+   "opts": [
+    "Replace only fibrinogen and factor VIII",
+    "Increase clotting factors in demonstrated deficiency",
+    "Increase oxygen-carrying capacity",
+    "Correct thrombocytopenia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does cryoprecipitate contain and when is it used?",
+   "a": "**Factors I (fibrinogen), V, VIII, XIII, von Willebrand factor and fibronectin; used for deficiency of fibrinogen, factor VIII, XIII, fibronectin or vWF.**\n\n## Understanding it\n- Cryoprecipitate is the concentrated **fibrinogen/vWF/factor VIII** product (vs FFP, the general factor product).\n\n>> Cryoprecipitate = fibrinogen/vWF/factor VIII product.",
+   "opts": [
+    "Fibrinogen, vWF, factors VIII/XIII — for those deficiencies",
+    "All plasma proteins including albumin",
+    "Red cells — for anaemia",
+    "Platelets — for thrombocytopenia"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the types of transfusion.",
+   "a": "**Whole blood, packed cells, blood component therapy, exchange blood transfusion, and autologous transfusion.**\n\n## Understanding it\n- Five categories, from whole blood through components to the patient's own blood.\n\n>> Whole blood, packed cells, components, exchange, autologous.",
+   "opts": [
+    "Only autologous and component therapy",
+    "Whole blood, packed cells, components, exchange, autologous",
+    "Only exchange and whole blood",
+    "Only whole blood and packed cells"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the only indication for exchange blood transfusion in anaemia of pregnancy?",
+   "a": "**When anaemia must be corrected very quickly — e.g. severe anaemia in early labour.**\n\n## Understanding it\n- Exchange transfusion is expensive/laborious; its niche is **very rapid** correction.\n\n>> EBT only when correction must be very rapid (severe anaemia in early labour).",
+   "opts": [
+    "To conserve blood in mild anaemia",
+    "As the routine first-line for anaemia",
+    "When correction must be very rapid (severe anaemia in early labour)",
+    "For every anaemic pregnant woman"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is autologous transfusion?",
+   "a": "**The collection and reinfusion of the patient's own blood.**\n\n## Understanding it\n- Autologous = the patient donates/receives **their own** blood.\n\n>> Autologous = the patient's own blood back to them.",
+   "opts": [
+    "Pooled donor blood",
+    "Blood from a matched relative",
+    "Collection and reinfusion of the patient's own blood",
+    "Artificial blood substitute"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Name the three autologous techniques.",
+   "a": "**Preoperative autologous donation, intraoperative blood (cell) salvage, and acute normovolaemic haemodilution.**\n\n## Understanding it\n- Three ways to use the patient's own blood: pre-donate, salvage during surgery, or dilute-and-return.\n\n>> Pre-op donation, cell salvage, normovolaemic haemodilution.",
+   "opts": [
+    "Cryoprecipitate, FFP, platelets",
+    "Pre-op donation, cell salvage, acute normovolaemic haemodilution",
+    "Directed donation, apheresis, irradiation",
+    "Exchange, whole blood, packed cells"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the requirements for preoperative autologous donation?",
+   "a": "**Donation at least 2 weeks before surgery/delivery, with an adequate Hb of 11 g/dl or more.**\n\n## Understanding it\n- The patient needs time to regenerate blood (**≥2 weeks**) and an adequate **Hb ≥11**.\n\n>> ≥2 weeks ahead, Hb ≥11 g/dl.",
+   "opts": [
+    "Only if Hb is below 5.6",
+    "6 months before, Hb ≥8",
+    "At least 2 weeks before, Hb ≥11 g/dl",
+    "The day before, any Hb"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Is pre-delivery autologous donation routinely recommended?",
+   "a": "**No — few parturients require transfusion, so routine donation isn't justified (though it may suit placenta praevia).**\n\n## Understanding it\n- Most women never need transfusion; reserve pre-donation for high-bleeding-risk cases.\n\n>> Not routine; consider it for placenta praevia.",
+   "opts": [
+    "No — not routine (consider it for placenta praevia)",
+    "No — it is never appropriate",
+    "Yes — for all caesareans",
+    "Yes — for every pregnant woman"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the rate of vasovagal reactions in autologous donors?",
+   "a": "**About 2–5%.**\n\n## Understanding it\n- Autologous donation is safe; the main minor risk is a vasovagal reaction in **~2–5%**.\n\n>> ~2–5% vasovagal reactions.",
+   "opts": [
+    "About 50%",
+    "About 2–5%",
+    "Less than 0.1%",
+    "About 20–25%"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is intraoperative cell salvage (IOCS)?",
+   "a": "**The sterile collection, washing and reinfusion of shed blood, using a continuous-flow centrifugation device (Cell Saver).**\n\n## Understanding it\n- Blood lost during surgery is **collected, washed, and returned**.\n\n>> IOCS = collect, wash and reinfuse shed blood (Cell Saver).",
+   "opts": [
+    "Collecting, washing and reinfusing shed blood (Cell Saver)",
+    "Diluting blood with crystalloid",
+    "Pre-donating blood weeks earlier",
+    "Exchanging blood in early labour"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the contraindications to intraoperative cell salvage?",
+   "a": "**Infection, contamination with malignant cells, and penetrating bowel wounds.**\n\n## Understanding it\n- Don't reinfuse blood contaminated by **infection, cancer cells, or bowel contents**.\n\n>> Contraindicated: infection, malignant cells, bowel injury.",
+   "opts": [
+    "Anaemia and low Hb",
+    "Placenta praevia",
+    "A caesarean delivery",
+    "Infection, malignant cells, penetrating bowel wounds"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How long can salvaged blood be stored, and can it be given to others?",
+   "a": "**At room temperature up to 4 hours (or ≤24 h in the blood bank if properly identified); it must NOT be given to another patient.**\n\n## Understanding it\n- Salvaged blood is the patient's own — never transfuse it to someone else, and use it within tight limits.\n\n>> ≤4 h room temp (≤24 h banked); never give to another patient.",
+   "opts": [
+    "Indefinitely if frozen",
+    "≤4 h at room temp (≤24 h banked); never to another patient",
+    "Up to 42 days like donor blood",
+    "It can be given to any matched patient"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is acute normovolaemic haemodilution?",
+   "a": "**Removal of blood before/after induction of anaesthesia with simultaneous crystalloid to maintain normovolaemia, reinfusing the patient's RBCs at the end.**\n\n## Understanding it\n- Take blood, replace volume with fluid, so surgical loss is **dilute**, then give the concentrated blood back after.\n\n>> Dilute the blood before surgery, return concentrated blood after.",
+   "opts": [
+    "Salvage shed blood during surgery",
+    "Exchange all the blood at once",
+    "Pre-donate blood 2 weeks earlier",
+    "Remove blood + give fluid, reinfuse the RBCs at the end"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the benefits of acute normovolaemic haemodilution?",
+   "a": "**Fewer RBCs are lost during surgery (lower Hb concentration), fresh whole blood is available, and lower viscosity improves tissue perfusion.**\n\n## Understanding it\n- Diluting the blood means each ml lost contains fewer red cells; the withdrawn fresh blood is returned later.\n\n>> Fewer red cells lost, fresh blood available, better perfusion.",
+   "opts": [
+    "It shortens the operation",
+    "Fewer RBCs lost, fresh blood available, better perfusion",
+    "It removes all infection risk",
+    "It replaces clotting factors"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When should blood group and antibody status be checked in pregnancy?",
+   "a": "**At booking and at 28 weeks gestation.**\n\n## Understanding it\n- Group and antibody screen at **booking** and again at **28 weeks** to detect alloimmunisation before delivery.\n\n>> At booking and at 28 weeks.",
+   "opts": [
+    "Only in labour",
+    "Only if bleeding occurs",
+    "At booking and at 28 weeks",
+    "At every antenatal visit"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What compatibility is required for red cell transfusion?",
+   "a": "**ABO, RhD and K (Kell) compatibility.**\n\n## Understanding it\n- Match not just ABO/RhD but also **Kell**, which is highly immunogenic in women of childbearing age.\n\n>> ABO + RhD + Kell compatible.",
+   "opts": [
+    "RhD only",
+    "ABO and Duffy only",
+    "ABO, RhD and Kell compatible",
+    "ABO only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What blood is issued in a major obstetric haemorrhage before the group is known?",
+   "a": "**Group O RhD-negative, K-negative units, switching to group-specific blood as soon as feasible.**\n\n## Understanding it\n- In an emergency give the universal **O RhD-neg, Kell-neg** blood, then change to group-specific once cross-matched.\n\n>> Emergency: O RhD-negative, Kell-negative.",
+   "opts": [
+    "Group-specific only after full cross-match",
+    "O RhD-negative, Kell-negative units",
+    "AB RhD-positive units",
+    "The patient's stored autologous blood"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What type of blood should be used for elective transfusion in pregnancy and intrauterine transfusion?",
+   "a": "**CMV-seronegative blood (and components).**\n\n## Understanding it\n- To protect the fetus/immunocompromised, use **CMV-negative** blood for pregnancy and intrauterine transfusion.\n\n>> CMV-seronegative blood.",
+   "opts": [
+    "Any ABO-compatible blood",
+    "Only irradiated Rh-positive blood",
+    "CMV-seronegative blood",
+    "Whole blood only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is correct identification of each unit critical?",
+   "a": "**Because the major risk is giving the wrong blood; it often requires a second individual to cross-check before transfusion.**\n\n## Understanding it\n- Wrong-blood-to-wrong-patient is the biggest danger, so a **two-person bedside check** is standard.\n\n>> Wrong blood is the top risk → two-person check.",
+   "opts": [
+    "To warm the blood correctly",
+    "To measure the exact volume",
+    "Wrong blood is the biggest risk → two-person check",
+    "To record the donor's name"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "When is warming of blood needed before transfusion?",
+   "a": "**Rarely — only when the rate exceeds 50 ml/kg/hr (risk of transfusion-induced hypothermia) or in cold agglutinin disease.**\n\n## Understanding it\n- Routine warming is unnecessary; it's needed only for very rapid transfusion or cold agglutinins.\n\n>> Warm only for very fast transfusion or cold agglutinin disease.",
+   "opts": [
+    "Only for platelet transfusions",
+    "Never, under any circumstance",
+    "Always, for every unit",
+    "Only for very rapid transfusion or cold agglutinin disease"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the purpose of a leucocyte filter?",
+   "a": "**To prevent febrile non-haemolytic transfusion reactions and lower the risk of CMV infection.**\n\n## Understanding it\n- Removing white cells reduces **febrile non-haemolytic reactions** and CMV transmission.\n\n>> Leucocyte filter → fewer febrile reactions and less CMV.",
+   "opts": [
+    "Warm the blood as it runs",
+    "Concentrate the platelets",
+    "Prevent febrile non-haemolytic reactions and reduce CMV",
+    "Remove bacteria from the blood"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which fluid may be infused through the same line as blood, and why only that one?",
+   "a": "**Only normal saline (0.9%); other crystalloids cause agglutination/haemolysis, and calcium-containing fluids clot the tubing.**\n\n## Understanding it\n- **Normal saline only** — dextrose lyses cells and calcium (e.g. Ringer's) triggers clotting in the line.\n\n>> Only normal saline shares the line with blood.",
+   "opts": [
+    "5% dextrose",
+    "Only 0.9% normal saline",
+    "Any crystalloid is fine",
+    "Ringer's lactate"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why should medications not be added to a unit of blood?",
+   "a": "**Interactions are unpredictable, reactions become hard to attribute, and stopping the transfusion means an incomplete drug dose.**\n\n## Understanding it\n- Adding drugs to blood is unsafe — unpredictable interactions, confused adverse-reaction attribution, and dosing problems.\n\n>> Never add drugs to blood (unpredictable, confounds reactions, dosing).",
+   "opts": [
+    "It speeds up the transfusion dangerously",
+    "Drugs make the blood clot faster",
+    "Unpredictable interactions; reactions hard to attribute; dosing problems",
+    "It is allowed if the drug is an antibiotic"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the major complications of blood transfusion?",
+   "a": "**Infections, alloimmunisation, and transfusion reactions.**\n\n## Understanding it\n- Three headline complication groups: transmitted infection, immune alloimmunisation, and reactions.\n\n>> Infections, alloimmunisation, transfusion reactions.",
+   "opts": [
+    "Only clotting problems",
+    "Only mild allergy",
+    "Only iron overload",
+    "Infections, alloimmunisation, transfusion reactions"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes acute haemolytic transfusion reactions and what are the features?",
+   "a": "**Usually ABO incompatibility causing intravascular haemolysis — chills, fever, chest/flank pain, nausea, cardiovascular collapse and DIC.**\n\n## Understanding it\n- The immediate 'wrong blood' catastrophe: ABO mismatch → intravascular haemolysis with collapse and DIC.\n\n>> ABO mismatch → intravascular haemolysis, collapse, DIC.",
+   "opts": [
+    "Kidd/Duffy antibodies → jaundice days later",
+    "Antibodies to white cells → fever only",
+    "Bacterial contamination → a rash",
+    "ABO incompatibility → intravascular haemolysis, collapse, DIC"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes febrile non-haemolytic reactions and how are they managed?",
+   "a": "**Recipient antibodies against leucocyte/platelet antigens; managed with antipyretics and leucocyte-reduced components if recurrent.**\n\n## Understanding it\n- The common, mild reaction — antibodies to donor white cells cause **fever only**; treat with antipyretics.\n\n>> Anti-leucocyte antibodies → fever; antipyretics, leucodepletion.",
+   "opts": [
+    "Calcium in the line → clotting",
+    "IgA deficiency → anaphylaxis",
+    "ABO mismatch → collapse and DIC",
+    "Anti-leucocyte/platelet antibodies → fever; antipyretics, leucodepletion"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which blood groups cause delayed haemolytic reactions and what are the features?",
+   "a": "**Kidd (Jk), Duffy (Fy) and Kell; usually extravascular, with fever, anaemia, hyperbilirubinaemia (jaundice) and a positive direct Coombs test ~7–10 days later.**\n\n## Understanding it\n- The 'sneaky, late' reaction from minor blood-group antibodies — jaundice/anaemia days later, Coombs-positive.\n\n>> Kidd/Duffy/Kell → delayed (7–10 d) extravascular haemolysis, Coombs+.",
+   "opts": [
+    "ABO → immediate intravascular haemolysis",
+    "Anti-leucocyte antibodies → immediate fever",
+    "Kidd/Duffy/Kell → delayed extravascular haemolysis (Coombs+)",
+    "IgA deficiency → anaphylaxis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why should CMV-negative blood be used in the undelivered parturient?",
+   "a": "**Because of the fetal immune status — to avoid CMV transmission via intrauterine or maternal transfusion.**\n\n## Understanding it\n- The fetus is immunologically vulnerable, so CMV-negative blood protects it from congenital CMV.\n\n>> CMV-negative protects the vulnerable fetus.",
+   "opts": [
+    "CMV status is irrelevant in pregnancy",
+    "To protect the immunologically vulnerable fetus from CMV",
+    "To reduce febrile reactions only",
+    "To prevent ABO incompatibility"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is Patient Blood Management (PBM)?",
+   "a": "**An all-encompassing approach to avoid unnecessary transfusion: optimise pre-delivery Hb (iron), avoid over-transfusion, use cell salvage, accept lower triggers, and give iron to the stable non-bleeding woman.**\n\n## Understanding it\n- PBM is a **prevent-transfusion-by-planning** philosophy centred on iron and conservative triggers.\n\n>> PBM = plan ahead (iron, conservative triggers, salvage) to avoid transfusion.",
+   "opts": [
+    "Transfuse early and generously",
+    "Prevent transfusion by planning: iron, lower triggers, cell salvage",
+    "Give whole blood to everyone",
+    "Avoid iron in pregnancy"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Outline the management of a pregnant Jehovah's Witness refusing transfusion.",
+   "a": "**Multidisciplinary antenatal planning to minimise anaemia and manage blood loss; early (IV) iron; document refusal/consent antenatally; use drugs/surgery to avoid banked blood; inform of risks without coercion.**\n\n## Understanding it\n- Plan **early and sensitively**: optimise iron, document consent, use blood-sparing techniques, respect autonomy.\n\n>> Early multidisciplinary plan, iron, documented consent, blood-sparing techniques.",
+   "opts": [
+    "Delay all planning until labour",
+    "Refuse to care for her",
+    "Early multidisciplinary plan, IV iron, documented consent, blood-sparing measures",
+    "Transfuse anyway in an emergency"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — In major PPH with unknown group, what red cells do you give first?",
+   "a": "**Group O RhD-negative, Kell-negative red cells, switching to group-specific as soon as feasible.**\n\n## Understanding it\n- The universal emergency choice is **O RhD-neg, Kell-neg**, changed to group-specific once cross-matched.\n\n>> O RhD-negative, Kell-negative first.",
+   "opts": [
+    "O RhD-negative, Kell-negative red cells",
+    "Fresh frozen plasma only",
+    "AB RhD-positive red cells",
+    "Wait for a full cross-match"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A patient develops chills, fever, flank pain and collapse minutes into a transfusion. What is the reaction and cause?",
+   "a": "**An acute haemolytic reaction from ABO incompatibility (intravascular haemolysis) — stop the transfusion immediately and resuscitate.**\n\n## Understanding it\n- Immediate onset + collapse + flank/chest pain = the 'wrong blood' ABO catastrophe. Stop transfusing, resuscitate, keep the line with saline.\n\n>> Acute ABO haemolytic reaction — stop and resuscitate.",
+   "opts": [
+    "Febrile non-haemolytic reaction — give antipyretics",
+    "A simple allergic reaction",
+    "Acute haemolytic reaction (ABO incompatibility) — stop transfusing",
+    "Delayed haemolytic reaction"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A patient develops jaundice, anaemia and a positive Coombs test 8 days after transfusion. What is this?",
+   "a": "**A delayed haemolytic reaction, typically from Kidd, Duffy or Kell antibodies (extravascular haemolysis).**\n\n## Understanding it\n- Onset **~a week later** with jaundice/anaemia and positive Coombs = delayed (extravascular) haemolysis from minor group antibodies.\n\n>> Delayed haemolytic reaction (Kidd/Duffy/Kell), Coombs+.",
+   "opts": [
+    "Transfusion-related circulatory overload",
+    "Febrile non-haemolytic reaction",
+    "Delayed haemolytic reaction (Kidd/Duffy/Kell)",
+    "Acute ABO haemolytic reaction"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A patient develops an isolated fever during transfusion with no haemolysis. Reaction and management?",
+   "a": "**A febrile non-haemolytic reaction; give antipyretics and use leucocyte-reduced components if it recurs.**\n\n## Understanding it\n- Fever alone, no haemolysis = the common, mild febrile non-haemolytic reaction (anti-leucocyte antibodies).\n\n>> Febrile non-haemolytic reaction — antipyretics, leucodepletion.",
+   "opts": [
+    "Delayed haemolytic reaction",
+    "Febrile non-haemolytic reaction — antipyretics, leucodepletion",
+    "Anaphylaxis from IgA deficiency",
+    "Acute ABO haemolytic reaction"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Which obstetric condition makes preoperative autologous donation appropriate?",
+   "a": "**Placenta praevia (a known high bleeding risk).**\n\n## Understanding it\n- Because praevia carries a high, predictable bleeding risk, pre-donating the woman's own blood is justified there.\n\n>> Placenta praevia = the classic indication for pre-op autologous donation.",
+   "opts": [
+    "An uncomplicated term pregnancy",
+    "Placenta praevia",
+    "Gestational diabetes",
+    "Mild iron-deficiency anaemia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Why can't you run Ringer's lactate with blood?",
+   "a": "**It contains calcium, which causes clotting in the tubing; only normal saline may share the line.**\n\n## Understanding it\n- Ringer's **calcium** reverses the citrate anticoagulant in stored blood → clots in the line. Use saline instead.\n\n>> Ringer's calcium clots the line — use normal saline only.",
+   "opts": [
+    "It causes fever",
+    "Its calcium causes clotting in the line (use saline only)",
+    "It dilutes the blood too much",
+    "It is too acidic and lyses cells"
+   ],
+   "ans": 1
+  }
+ ]
 }
