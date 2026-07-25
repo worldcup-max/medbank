@@ -1,370 +1,1007 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Introduction to Cardiology / Investigations of the Cardiac System",
-  "cards": [
-    {
-      "q": "Define investigations in cardiology.",
-      "a": "Tests or procedures for evaluation of cardiovascular diseases."
-    },
-    {
-      "q": "Where are cardiological investigations carried out?",
-      "a": "Either at the bedside and/or in laboratories."
-    },
-    {
-      "q": "List the seven objectives of investigations in cardiology.",
-      "a": "To (1) establish the diagnosis, (2) determine the aetiology, (3) identify the risk factors, (4) detect the complications, (5) monitor the disease progression, (6) evaluate associated co-morbidities, and (7) make prognosis."
-    },
-    {
-      "q": "List the twelve investigations in cardiology.",
-      "a": "Chest X-ray; electrocardiogram; electrophysiological studies; echocardiography; cardiac MRI; cardiac catheterization; coronary arteriography; cardiac enzymes and troponins; brain natriuretic peptide; lipid profiles; blood sugar; and electrolytes, urea and creatinine."
-    },
-    {
-      "q": "Define non-invasive investigations and give examples.",
-      "a": "Procedures or tests limited to the body surface — e.g. standard 12-lead ECG and transthoracic echocardiography."
-    },
-    {
-      "q": "Define invasive investigations and give examples.",
-      "a": "Procedures or tests that involve penetration of the vascular system or body tissues — e.g. electrophysiological studies, cardiac catheterization, transoesophageal echocardiography and angiography."
-    },
-    {
-      "q": "What does a chest X-ray utilize, and what is it mainly useful for in cardiology?",
-      "a": "It utilizes ionizing radiation called X-ray; it is mainly useful in the study of cardiac structure and changes in the pulmonary circulation which may be of cardiac origin."
-    },
-    {
-      "q": "List the uses of chest X-ray in cardiology.",
-      "a": "To diagnose cardiomegaly; to identify features of heart diseases such as hypertension, heart failure, cardiomyopathy, congenital heart diseases, pericardial effusion, coarctation of aorta, and valvular and pericardial calcifications; to diagnose acute pulmonary oedema; and to identify precipitants of heart failure e.g. chest infection."
-    },
-    {
-      "q": "State the two chest X-ray criteria for diagnosis of cardiomegaly in adults.",
-      "a": "Cardiothoracic ratio (CTR) greater than 50%, and maximum transverse cardiac diameter greater than 15.5 cm."
-    },
-    {
-      "q": "Define the cardiothoracic ratio.",
-      "a": "The ratio of the maximum transverse cardiac diameter to the maximum internal diameter of the thoracic cage, expressed as a percentage."
-    },
-    {
-      "q": "Define the electrocardiogram.",
-      "a": "The graphical record of the electrical activities of the heart obtained at the body surface."
-    },
-    {
-      "q": "Describe the standard 12-lead ECG.",
-      "a": "It utilizes 12 leads, is recorded at rest over a period of 10–20 seconds, and is the most widely used form of ECG."
-    },
-    {
-      "q": "What is Holter monitoring, and for how long does it record?",
-      "a": "Ambulatory ECG — it records the ECG for 24 hours."
-    },
-    {
-      "q": "What is a stress ECG?",
-      "a": "An ECG recorded during exercise."
-    },
-    {
-      "q": "Give the chamber and rhythm indications for ECG.",
-      "a": "Chamber abnormalities e.g. ventricular hypertrophy and left atrial abnormalities; cardiac arrhythmias; heart blocks (atrioventricular and bundle branch blocks); pre-excitation syndromes e.g. Wolff-Parkinson-White syndrome; and cardiac arrest."
-    },
-    {
-      "q": "Give the myocardial and pericardial indications for ECG.",
-      "a": "Ischaemic heart diseases, myocarditis, cardiomyopathies, pericardial diseases, and congenital heart diseases."
-    },
-    {
-      "q": "Give the extracardiac indications for ECG.",
-      "a": "Electrolyte derangement e.g. hyperkalaemia and hypokalaemia; drug effect e.g. digoxin toxicity; pulmonary embolism; and cor pulmonale."
-    },
-    {
-      "q": "What are electrophysiological studies used for?",
-      "a": "They are invasive procedures for studying cardiac arrhythmias and pre-excitation syndromes such as Wolff-Parkinson-White syndrome."
-    },
-    {
-      "q": "Define echocardiography.",
-      "a": "Cardiac imaging using ultrasound; it is otherwise known as cardiac ultrasound."
-    },
-    {
-      "q": "Describe transthoracic echocardiography.",
-      "a": "It utilizes a transthoracic probe or transducer to obtain cardiac imaging from the body surface."
-    },
-    {
-      "q": "Describe transoesophageal echocardiography.",
-      "a": "It utilizes a transoesophageal probe or transducer to obtain cardiac images very close to the heart."
-    },
-    {
-      "q": "List the uses of the echocardiogram.",
-      "a": "To evaluate cardiac structures, functions and dysfunctions; to establish diagnosis of some cardiovascular diseases; and to detect complications of cardiovascular diseases."
-    },
-    {
-      "q": "List the ten indications for echocardiogram.",
-      "a": "Hypertensive heart diseases; congenital heart diseases; rheumatic heart diseases; valvular heart diseases; infective endocarditis; cardiomyopathies; pericardial diseases especially pericardial effusion; ischaemic heart disease; heart failure; and cardiac masses e.g. intramural thrombus and atrial myxoma."
-    },
-    {
-      "q": "How does cardiac MRI work?",
-      "a": "It utilizes a powerful magnetic field to align the nuclear magnetization of hydrogen atoms in water in the body."
-    },
-    {
-      "q": "State two key facts about cardiac MRI.",
-      "a": "It does not use ionizing radiation, and it is the current gold standard for evaluation of left ventricular hypertrophy. It is useful in the study of cardiac structure."
-    },
-    {
-      "q": "Describe cardiac catheterization.",
-      "a": "An invasive procedure involving introduction of a catheter through the veins into the heart under fluoroscopy guidance."
-    },
-    {
-      "q": "What is cardiac catheterization useful for?",
-      "a": "Evaluation of intracardiac pressures; and it may also serve therapeutic value in the management of valvular lesions or congenital heart diseases such as atrial or ventricular septal defects."
-    },
-    {
-      "q": "Describe coronary arteriography and its use.",
-      "a": "An invasive procedure which involves the use of contrast agents for evaluation of the coronary arteries; it is useful in the diagnosis and management of coronary artery diseases."
-    },
-    {
-      "q": "What are cardiac enzymes and troponins, and when are they elevated?",
-      "a": "They are markers of myocardial injury, and are elevated in myocardial infarction."
-    },
-    {
-      "q": "Name the three cardiac enzymes.",
-      "a": "Creatine phosphokinase (CK), aspartate aminotransferase (AST), and lactate dehydrogenase (LDH)."
-    },
-    {
-      "q": "Name the troponins.",
-      "a": "Troponin I and troponin T."
-    },
-    {
-      "q": "What is BNP, and where is it produced?",
-      "a": "A 32-amino acid polypeptide produced by the ventricles."
-    },
-    {
-      "q": "What is NT-proBNP?",
-      "a": "A 76 amino acid N-terminal fragment polypeptide co-secreted with BNP."
-    },
-    {
-      "q": "What are BNP and NT-proBNP useful for?",
-      "a": "Both are useful in the screening and diagnosis of heart failure, and they are very useful in establishing prognosis of heart failure."
-    },
-    {
-      "q": "What is the purpose of the other, supportive investigations?",
-      "a": "They are useful in detecting risk factors, complications or co-morbidities."
-    },
-    {
-      "q": "List the components of the fasting lipid profile.",
-      "a": "Total cholesterol (TC), low density lipoprotein (LDL), high density lipoprotein (HDL), and triglycerides (TG)."
-    },
-    {
-      "q": "Why is blood sugar measured, and which tests are used?",
-      "a": "To exclude the presence or not of diabetes mellitus; using fasting blood sugar (FBS) and 2-hour postprandial sugar (2HPPS)."
-    },
-    {
-      "q": "Which electrolytes are measured in cardiological assessment?",
-      "a": "Na⁺, K⁺, Ca²⁺ and HCO₃⁻."
-    },
-    {
-      "q": "Why are urea and creatinine analysed in cardiological assessment?",
-      "a": "(1) To exclude effects of electrolytes as being responsible for the cardiovascular dysfunction; and (2) to detect whether or not renal disease is present in the patient."
-    },
-    {
-      "q": "OSPE — Before commenting on heart size on a chest X-ray, what three checks must you make?",
-      "a": "Is it PA or AP (heart size can only be assessed on PA); is the patient rotated (medial ends of both clavicles equidistant from the spinous processes); and is inspiration adequate (5–7 anterior ribs visible above the diaphragm)."
-    },
-    {
-      "q": "OSPE — Why can cardiomegaly not be diagnosed on an AP chest film?",
-      "a": "Because the heart lies anteriorly and is therefore far from the film in an AP projection, so it is magnified by the diverging X-ray beam."
-    },
-    {
-      "q": "OSPE — Between which two points is the maximum transverse cardiac diameter measured?",
-      "a": "From the most rightward point of the right heart border to the most leftward point of the left heart border — the two points are usually at different heights."
-    },
-    {
-      "q": "OSPE — When measuring the thoracic diameter for the CTR, do you measure to the inner or outer rib edge?",
-      "a": "The INNER edge — it is the maximum INTERNAL diameter of the thoracic cage."
-    },
-    {
-      "q": "OSPE — State the standard ECG paper speed and calibration, and what one small square represents.",
-      "a": "25 mm/s and 10 mm/mV; one small square = 0.04 s horizontally and 0.1 mV vertically, and one large square = 0.20 s."
-    },
-    {
-      "q": "OSPE — How do you calculate the rate on a REGULAR ECG rhythm?",
-      "a": "300 divided by the number of large squares between two R waves — giving the sequence 300, 150, 100, 75, 60, 50."
-    },
-    {
-      "q": "OSPE — How do you calculate the rate on an IRREGULAR rhythm?",
-      "a": "Count the QRS complexes on the 10-second rhythm strip and multiply by 6."
-    },
-    {
-      "q": "OSPE — State the systematic sequence for reading a 12-lead ECG.",
-      "a": "Patient details and calibration; rate; rhythm; axis; P waves; PR interval; QRS; ST segment; T waves; QT interval; then summary and conclusion."
-    },
-    {
-      "q": "OSPE — Using leads I and aVF, how do you determine the axis?",
-      "a": "Both upright = normal axis; lead I up with aVF down = left axis deviation; lead I down with aVF up = right axis deviation; both down = extreme axis."
-    },
-    {
-      "q": "OSPE — Which ECG leads correspond to the inferior, anterior and lateral territories?",
-      "a": "Inferior: II, III and aVF. Anterior: V1–V4. Lateral: I, aVL, V5 and V6."
-    },
-    {
-      "q": "OSPE — An ECG is irregularly irregular with absent P waves and a fine fibrillatory baseline. Diagnosis?",
-      "a": "Atrial fibrillation."
-    },
-    {
-      "q": "OSPE — Why are P waves absent in atrial fibrillation?",
-      "a": "Because hundreds of chaotic atrial circuits fire simultaneously, so there is no single organised atrial depolarisation to produce a P wave — only a fibrillatory baseline."
-    },
-    {
-      "q": "OSPE — Why is the ventricular rhythm irregular in atrial fibrillation?",
-      "a": "Because the AV node blocks most of the chaotic atrial impulses and conducts others at random, so the ventricles are stimulated at random intervals."
-    },
-    {
-      "q": "OSPE — In a patient with atrial fibrillation, why is an echocardiogram requested?",
-      "a": "To look for structural heart disease, valvular disease (especially rheumatic mitral stenosis), and atrial thrombus — cardiac masses such as intramural thrombus being a listed echo indication."
-    },
-    {
-      "q": "OSPE — An ECG shows tall tented T waves, flattened P waves and a widening QRS in a patient with chronic kidney disease. Diagnosis?",
-      "a": "Hyperkalaemia — a medical emergency which may progress to a sine wave pattern and cardiac arrest."
-    },
-    {
-      "q": "OSPE — State the sequence of ECG changes as potassium rises.",
-      "a": "Tall tented T waves; flattening then loss of P waves; lengthening PR interval; widening QRS; QRS merging with T to form a sine wave; then ventricular fibrillation or asystole."
-    },
-    {
-      "q": "OSPE — How do you distinguish a hyperkalaemic T wave from other tall T waves?",
-      "a": "The hyperkalaemic T wave is narrow-based, pointed and symmetrical — 'tented' like a church spire — whereas other tall T waves are broad-based."
-    },
-    {
-      "q": "OSPE — What is the order of treatment in hyperkalaemia, and what does each step do?",
-      "a": "Stabilise, shift, remove: calcium gluconate stabilises the myocardium (it does not lower potassium); insulin with dextrose and salbutamol shift potassium into cells; dialysis or excretion removes it from the body."
-    },
-    {
-      "q": "OSPE — What ECG changes occur in HYPOkalaemia?",
-      "a": "Flattened T waves, appearance of U waves, and ST depression; with risk of torsades de pointes."
-    },
-    {
-      "q": "OSPE — On an ECG the P waves are regular but bear no relationship to the QRS complexes, which are wide and slow. Diagnosis?",
-      "a": "Complete (third degree) atrioventricular heart block, with a ventricular escape rhythm."
-    },
-    {
-      "q": "OSPE — Why does a WIDE QRS in complete heart block indicate a more dangerous situation?",
-      "a": "Because a wide QRS indicates a ventricular escape rhythm (20–40/min), which is slower and less reliable than a narrow-complex junctional escape (40–60/min) and may fail, causing asystole."
-    },
-    {
-      "q": "OSPE — Why must you look for inferior myocardial infarction in a patient with complete heart block?",
-      "a": "Because in most people the right coronary artery supplies both the inferior wall and the AV node, so occlusion causes inferior infarction and heart block together."
-    },
-    {
-      "q": "OSPE — How do you distinguish first degree, Mobitz I, Mobitz II and complete heart block?",
-      "a": "First degree: PR > 0.20 s but every P conducts. Mobitz I: PR progressively lengthens then a beat is dropped. Mobitz II: PR constant then a beat is suddenly dropped. Complete: no relationship at all between P waves and QRS complexes."
-    },
-    {
-      "q": "OSPE — ST elevation in leads II, III and aVF. What is the diagnosis and which artery?",
-      "a": "Acute inferior ST-elevation myocardial infarction, usually due to occlusion of the right coronary artery."
-    },
-    {
-      "q": "OSPE — In which leads would you look for reciprocal changes in an inferior myocardial infarction?",
-      "a": "Leads I and aVL."
-    },
-    {
-      "q": "OSPE — How does the ST elevation of pericarditis differ from that of myocardial infarction?",
-      "a": "Pericarditis causes widespread, saddle-shaped ST elevation with NO reciprocal depression, whereas infarction causes territorial ST elevation with reciprocal depression in the opposite leads."
-    },
-    {
-      "q": "OSPE — Should you wait for the troponin result before treating a STEMI?",
-      "a": "No — the ECG diagnosis is sufficient. Troponin takes hours to rise, and myocardium is dying meanwhile. Troponin confirms; the ECG decides."
-    },
-    {
-      "q": "OSPE — Why are troponins preferred to CK, AST and LDH?",
-      "a": "Because troponin I and T are essentially specific to heart muscle, whereas CK is also in skeletal muscle, AST also in liver, and LDH in almost every tissue."
-    },
-    {
-      "q": "OSPE — An ECG shows a short PR interval with a slurred upstroke of the QRS. What is this?",
-      "a": "A delta wave — indicating Wolff-Parkinson-White syndrome, a pre-excitation syndrome."
-    },
-    {
-      "q": "OSPE — An ECG shows downsloping ST depression with a 'reverse tick' appearance. What is the likely cause?",
-      "a": "Digoxin effect — drug effect being a listed indication for ECG."
-    },
-    {
-      "q": "OSPE — On an echocardiogram there is a large black echo-free space surrounding the heart. What is it, and why is it black?",
-      "a": "A pericardial effusion; fluid appears black on ultrasound because it does not reflect the ultrasound beam."
-    },
-    {
-      "q": "OSPE — On echocardiography, what finding indicates that a pericardial effusion has caused tamponade?",
-      "a": "Collapse of the right-sided chambers, which are thin-walled and low-pressure and therefore compress first."
-    },
-    {
-      "q": "OSPE — Why does cardiac tamponade cause shock?",
-      "a": "Because raised pericardial pressure prevents the chambers FILLING, so stroke volume and cardiac output fall — it impairs filling rather than squeezing the pump."
-    },
-    {
-      "q": "OSPE — Why are IV fluids given, and diuretics avoided, in cardiac tamponade?",
-      "a": "Because the problem is inadequate filling; fluids raise filling pressure and help chambers resist collapse, whereas diuretics and vasodilators reduce filling pressure and worsen it."
-    },
-    {
-      "q": "OSPE — What is Beck's triad?",
-      "a": "Hypotension, raised JVP and muffled heart sounds — the classic triad of cardiac tamponade."
-    },
-    {
-      "q": "OSPE — Give the chest X-ray appearance suggesting pericardial effusion rather than cardiomegaly.",
-      "a": "A globular, 'water-bottle' shaped cardiac shadow with CLEAR lung fields — whereas heart failure gives a big heart with wet lungs. Only echocardiography distinguishes them definitively."
-    },
-    {
-      "q": "OSPE — What is the earliest chest X-ray sign of left heart failure?",
-      "a": "Upper lobe venous diversion — the upper zone vessels become as large as or larger than the lower zone vessels, reversing the normal pattern."
-    },
-    {
-      "q": "OSPE — What does blunting of the costophrenic angles indicate, and what does bilateral blunting suggest?",
-      "a": "A pleural effusion; bilateral blunting suggests a systemic cause such as heart failure rather than a local lung problem."
-    },
-    {
-      "q": "OSPE — Give the mnemonic for the chest X-ray features of heart failure.",
-      "a": "ABCDE — Alveolar oedema, kerley B lines, Cardiomegaly, upper lobe Diversion, and pleural Effusions."
-    },
-    {
-      "q": "CLINICAL — A patient complains of intermittent palpitations but the 12-lead ECG is normal. What investigation is indicated and why?",
-      "a": "Holter or ambulatory ECG, which records for 24 hours — because a standard ECG records only 10–20 seconds and will miss an intermittent arrhythmia."
-    },
-    {
-      "q": "CLINICAL — A patient has chest pain only on exertion, with a normal resting ECG. What investigation is indicated and why?",
-      "a": "A stress ECG, recorded during exercise — because at rest the coronary supply is adequate, and only increased demand unmasks the ischaemia."
-    },
-    {
-      "q": "CLINICAL — A breathless patient may have cardiac or respiratory disease. Which blood test helps most, and how?",
-      "a": "BNP or NT-proBNP — a normal level makes heart failure unlikely, so attention shifts to the lungs."
-    },
-    {
-      "q": "CLINICAL — Why must a patient's renal function be known before coronary arteriography?",
-      "a": "Because the procedure uses contrast agents, which are nephrotoxic; and urea and creatinine are analysed to detect whether renal disease is present."
-    },
-    {
-      "q": "CLINICAL — In suspected infective endocarditis, why may transoesophageal echocardiography be needed?",
-      "a": "Because vegetations are small, and the transoesophageal probe images the heart very close up, giving far better resolution than the transthoracic view."
-    },
-    {
-      "q": "CLINICAL — Why is a fasting sample required for a lipid profile?",
-      "a": "Because triglycerides rise sharply after a meal, which falsely raises the TG and distorts the calculated LDL; cholesterol changes little with food."
-    },
-    {
-      "q": "CLINICAL — Which lipid fraction is harmful and which is protective, and why?",
-      "a": "LDL is harmful because it carries cholesterol from the liver to the tissues including artery walls; HDL is protective because it carries cholesterol from the tissues back to the liver."
-    },
-    {
-      "q": "CLINICAL — Why may a diabetic patient have a myocardial infarction without chest pain?",
-      "a": "Because diabetic neuropathy damages the nerves carrying cardiac pain, producing silent myocardial infarction."
-    },
-    {
-      "q": "CLINICAL — Why are FBS and 2HPPS both used rather than one alone?",
-      "a": "FBS detects those whose baseline sugar is already raised; 2HPPS detects those with a normal fasting sugar who cannot handle a glucose load — an earlier stage the FBS would miss."
-    },
-    {
-      "q": "CLINICAL — A patient presents with a dangerous arrhythmia. Why must electrolytes be checked before assuming heart disease?",
-      "a": "Because abnormal potassium or calcium alone causes arrhythmias in a structurally normal heart — electrolytes must be excluded as being responsible for the cardiovascular dysfunction."
-    },
-    {
-      "q": "CLINICAL — Why does heart failure require both BNP and echocardiography?",
-      "a": "BNP answers whether it is heart failure; echocardiography answers what kind — reduced or preserved ejection fraction — which determines treatment."
-    },
-    {
-      "q": "CLINICAL — Why is the ECG the most valuable investigation in acute cardiology?",
-      "a": "Because it is instant, bedside and non-invasive, whereas laboratory tests take time."
-    },
-    {
-      "q": "CLINICAL — A patient has an ECG showing electrical activity but no palpable pulse. What does this illustrate?",
-      "a": "That the ECG records electricity only and not pumping — this is pulseless electrical activity, a cardiac arrest rhythm."
-    }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Introduction to Cardiology / Investigations of the Cardiac System",
+ "cards": [
+  {
+   "q": "Define investigations in cardiology.",
+   "a": "**Tests or procedures for the evaluation of cardiovascular diseases.**\n\n## Understanding it\n- They are the tools used to look for, confirm and follow up heart disease.\n- Some are done at the **bedside**, others in the **laboratory**.\n\n>> Think of them as the cardiologist's 'evidence-gathering' toolkit — from a simple ECG to cardiac catheterisation.",
+   "opts": [
+    "Physiotherapy for cardiac patients",
+    "Tests or procedures for evaluating cardiovascular disease",
+    "Drugs used to treat heart disease",
+    "Surgical operations on the heart"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where are cardiological investigations carried out?",
+   "a": "**Either at the bedside and/or in laboratories.**\n\n## Understanding it\n- **Bedside** — e.g. ECG, echo done at the patient.\n- **Laboratory** — e.g. cardiac enzymes, lipid profile.\n\n>> The split matters: bedside tests are fast and available in emergencies, lab tests take time.",
+   "opts": [
+    "At the bedside and/or in laboratories",
+    "Only in theatre",
+    "Only at home",
+    "Only in a specialist laboratory"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the seven objectives of investigations in cardiology.",
+   "a": "**To establish the diagnosis, determine the aetiology, identify risk factors, detect complications, monitor progression, assess response to treatment, and establish prognosis.**\n\n## Understanding it\nGroup the seven by stage of care:\n- **Diagnose** — what and why (diagnosis, aetiology, risk factors).\n- **Detect problems** — complications.\n- **Follow up** — monitor progression, response to treatment, prognosis.\n\n>> Investigations serve the whole journey — not just making the first diagnosis.",
+   "opts": [
+    "Only to choose the surgery",
+    "Only to make the diagnosis",
+    "Only to bill the patient",
+    "Diagnosis, aetiology, risk factors, complications, monitoring, treatment response, prognosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the twelve investigations in cardiology.",
+   "a": "**Chest X-ray, ECG, electrophysiological studies, echocardiography, cardiac MRI, cardiac catheterization, coronary arteriography, cardiac enzymes/troponins, BNP/NT-proBNP, lipid profile, blood sugar, and electrolytes/urea/creatinine.**\n\n## Understanding it\nGroup them:\n- **Imaging** — CXR, echo, cardiac MRI.\n- **Electrical** — ECG, EP studies.\n- **Invasive** — catheterization, coronary arteriography.\n- **Bloods** — enzymes/troponins, BNP, lipids, sugar, electrolytes.\n\n>> A structured list beats rote memory — imaging, electrical, invasive, bloods.",
+   "opts": [
+    "Only ECG and echo",
+    "Only chest X-ray",
+    "CXR, ECG, EP studies, echo, cardiac MRI, catheterization, angiography, enzymes, BNP, lipids, sugar, U&E",
+    "Only blood tests"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define non-invasive investigations and give examples.",
+   "a": "**Procedures limited to the body surface — e.g. the standard 12-lead ECG and transthoracic echocardiography.**\n\n## Understanding it\n- **Non-invasive** = nothing pierces the skin or enters a vessel.\n- Examples: surface **ECG**, **transthoracic echo**.\n\n>> Safer and first-line; you escalate to invasive tests only when needed.",
+   "opts": [
+    "Tests that enter the vessels — e.g. catheterization",
+    "Only surgical procedures",
+    "Surface tests — e.g. 12-lead ECG, transthoracic echo",
+    "Any test needing anaesthesia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define invasive investigations and give examples.",
+   "a": "**Procedures that penetrate the vascular system or body tissues — e.g. electrophysiological studies, cardiac catheterization, and transoesophageal echocardiography.**\n\n## Understanding it\n- **Invasive** = something enters a vessel or tissue.\n- Examples: **EP studies, cardiac catheterization, transoesophageal echo** (probe down the gullet).\n\n>> Higher risk but higher resolution/detail — reserved for when non-invasive tests aren't enough.",
+   "opts": [
+    "Chest X-ray",
+    "Tests entering vessels/tissue — EP studies, catheterization, TOE",
+    "Surface-only tests like ECG",
+    "Blood tests from a finger prick"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does a chest X-ray utilize, and what is it mainly useful for in cardiology?",
+   "a": "**It uses ionizing radiation (X-rays); it is mainly useful for studying cardiac structure and changes in the pulmonary circulation of cardiac origin.**\n\n## Understanding it\n- Uses **ionizing radiation** to create the image.\n- In cardiology it shows **heart size/shape** and **lung changes** (e.g. pulmonary congestion).\n\n>> The CXR reads the heart's *silhouette* and the *lungs behind it* — great for heart failure and cardiomegaly.",
+   "opts": [
+    "A magnetic field; shows soft tissue",
+    "Electricity; shows rhythm",
+    "Ionizing radiation; shows cardiac structure and pulmonary circulation",
+    "Ultrasound; shows valve motion"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the uses of chest X-ray in cardiology.",
+   "a": "**To diagnose cardiomegaly and identify features of hypertension, heart failure, cardiomyopathy, congenital heart disease, and pericardial effusion.**\n\n## Understanding it\n- Its headline use is **cardiomegaly** (an enlarged heart shadow).\n- It also shows **heart-failure lungs**, **pericardial effusion** (globular heart), and clues to congenital/hypertensive disease.\n\n>> Cheap and quick — the CXR screens heart size and the state of the lungs.",
+   "opts": [
+    "Cardiomegaly, heart failure, cardiomyopathy, congenital disease, effusion",
+    "The cardiac rhythm",
+    "The exact ejection fraction",
+    "The coronary artery anatomy in detail"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the two chest X-ray criteria for diagnosis of cardiomegaly in adults.",
+   "a": "**A cardiothoracic ratio (CTR) greater than 50%, and a maximum transverse cardiac diameter greater than 15.5 cm.**\n\n## Understanding it\n- **CTR > 50%** — the heart is more than half the chest width.\n- **Transverse diameter > 15.5 cm** — an absolute size cut-off.\n\n>> Both are measured on a **PA** film; CTR > 50% is the classic exam answer.",
+   "opts": [
+    "CTR > 30% and diameter > 10 cm",
+    "CTR > 80% only",
+    "Any visible heart shadow",
+    "CTR > 50% and transverse cardiac diameter > 15.5 cm"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define the cardiothoracic ratio.",
+   "a": "**The ratio of the maximum transverse cardiac diameter to the maximum internal diameter of the thoracic cage, expressed as a percentage.**\n\n## Understanding it\n- **Numerator** — widest width of the heart shadow.\n- **Denominator** — widest **internal** width of the ribcage.\n- Expressed as a **percentage**; normal ≤ 50%.\n\n>> It normalises heart size to chest size, so it works across different body sizes.",
+   "opts": [
+    "Weight of the heart ÷ body weight",
+    "Lung width ÷ heart width",
+    "Max cardiac width ÷ max internal thoracic width, as a percentage",
+    "Heart length ÷ heart width"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Define the electrocardiogram.",
+   "a": "**The graphical record of the electrical activity of the heart obtained at the body surface.**\n\n## Understanding it\n- The heart generates electrical signals with each beat.\n- The ECG **records these signals** from electrodes on the skin as a tracing.\n\n>> It shows the heart's **electricity**, not its pumping — a key distinction (see pulseless electrical activity).",
+   "opts": [
+    "A surface graphical record of the heart's electrical activity",
+    "An ultrasound picture of the heart",
+    "An X-ray of the heart",
+    "A record of the heart's pumping pressure"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the standard 12-lead ECG.",
+   "a": "**It uses 12 leads, is recorded at rest over about 10–20 seconds, and is the most widely used form of ECG.**\n\n## Understanding it\n- **12 leads** give 12 electrical 'views' of the heart.\n- Recorded briefly (**10–20 s**) at rest.\n\n>> Because it samples only seconds, it can **miss intermittent** arrhythmias — hence Holter monitoring exists.",
+   "opts": [
+    "A continuous 48-hour recording",
+    "12 leads, at rest, over ~10–20 seconds",
+    "12 leads recorded during exercise only",
+    "1 lead recorded over 24 hours"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is Holter monitoring, and for how long does it record?",
+   "a": "**Ambulatory ECG — it records the ECG continuously for 24 hours.**\n\n## Understanding it\n- The patient wears it during **normal daily activity**.\n- It records for **24 hours** (or longer), capturing events a brief ECG would miss.\n\n>> Ideal for **intermittent palpitations** — you catch the arrhythmia when it actually happens.",
+   "opts": [
+    "Ambulatory ECG recording for 24 hours",
+    "A 10-second resting ECG",
+    "An implanted pacemaker",
+    "An ECG during exercise"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is a stress ECG?",
+   "a": "**An ECG recorded during exercise.**\n\n## Understanding it\n- At rest, coronary supply may be adequate and the ECG normal.\n- **Exercise raises demand**, which can unmask ischaemia (ST changes).\n\n>> Used for **exertional chest pain with a normal resting ECG** — you stress the heart to reveal the problem.",
+   "opts": [
+    "An ECG recorded during sleep",
+    "A 24-hour ambulatory ECG",
+    "An ECG done under anaesthesia",
+    "An ECG recorded during exercise"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the chamber and rhythm indications for ECG.",
+   "a": "**Chamber abnormalities (e.g. ventricular hypertrophy, left atrial abnormality), cardiac arrhythmias, and heart blocks (AV and bundle branch blocks).**\n\n## Understanding it\n- **Chambers** — hypertrophy/enlargement change the ECG voltages/shapes.\n- **Rhythm** — arrhythmias and conduction blocks are seen directly.\n\n>> The ECG is the definitive test for **rhythm and conduction** problems.",
+   "opts": [
+    "Only pericardial fluid",
+    "Only coronary anatomy",
+    "Ventricular hypertrophy, atrial abnormality, arrhythmias, heart blocks",
+    "Only valve stenosis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give the myocardial and pericardial indications for ECG.",
+   "a": "**Ischaemic heart disease, myocarditis, cardiomyopathies, pericardial disease, and congenital heart disease.**\n\n## Understanding it\n- **Myocardium** — ischaemia/infarction, myocarditis, cardiomyopathy alter the ECG.\n- **Pericardium** — pericarditis gives characteristic widespread ST changes.\n\n>> The ECG reflects disease of both the **heart muscle** and its **covering**.",
+   "opts": [
+    "Only thyroid disease",
+    "Only anaemia",
+    "Only lung disease",
+    "Ischaemic disease, myocarditis, cardiomyopathy, pericardial and congenital disease"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the extracardiac indications for ECG.",
+   "a": "**Electrolyte derangement (e.g. hyper/hypokalaemia), drug effects (e.g. digoxin toxicity), pulmonary embolism, and cor pulmonale.**\n\n## Understanding it\n- The ECG reflects problems **outside** the heart too.\n- **Potassium** changes the T waves; **digoxin** gives a reverse-tick; **PE/cor pulmonale** give right-heart strain.\n\n>> A 'cardiac' tracing can reveal an **electrolyte or drug** emergency.",
+   "opts": [
+    "Nothing outside the heart",
+    "Only valve infections",
+    "Electrolyte changes, drug effects (digoxin), PE, cor pulmonale",
+    "Only structural heart disease"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are electrophysiological studies used for?",
+   "a": "**Invasive procedures for studying cardiac arrhythmias and pre-excitation syndromes such as Wolff-Parkinson-White syndrome.**\n\n## Understanding it\n- Catheters are placed inside the heart to **map its electrical circuits**.\n- Used to characterise **arrhythmias** and pre-excitation (e.g. **WPW**), and to guide ablation.\n\n>> The detailed, invasive way to study rhythm when the surface ECG isn't enough.",
+   "opts": [
+    "Invasive study of arrhythmias and pre-excitation (e.g. WPW)",
+    "Measuring cholesterol",
+    "Imaging of valves",
+    "Assessing lung function"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define echocardiography.",
+   "a": "**Cardiac imaging using ultrasound — also called cardiac ultrasound.**\n\n## Understanding it\n- Uses **ultrasound** (no radiation) to image the heart in motion.\n- Shows **structure and function** — chambers, valves, wall movement, ejection fraction.\n\n>> The workhorse for anatomy and pump function; safe and repeatable.",
+   "opts": [
+    "Imaging using X-rays",
+    "Cardiac imaging using ultrasound",
+    "A recording of electrical activity",
+    "Imaging using a magnetic field"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe transthoracic echocardiography.",
+   "a": "**It uses a transthoracic probe on the body surface to image the heart.**\n\n## Understanding it\n- The probe sits on the **chest wall**.\n- Non-invasive and first-line for most cardiac imaging.\n\n>> Good general views, but the chest wall/lung can limit resolution — hence transoesophageal echo for fine detail.",
+   "opts": [
+    "A surface (chest-wall) probe images the heart",
+    "A catheter inside the heart",
+    "A probe in the oesophagus",
+    "An X-ray beam"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe transoesophageal echocardiography.",
+   "a": "**It uses a probe in the oesophagus to image the heart very close up.**\n\n## Understanding it\n- The oesophagus sits **right behind the heart**.\n- A probe there gives **far higher resolution** than the transthoracic view.\n\n>> Best for small structures — **vegetations** in endocarditis, atrial thrombus, prosthetic valves.",
+   "opts": [
+    "A wrist probe",
+    "An external X-ray",
+    "An oesophageal probe images the heart close up",
+    "A chest-wall probe"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the uses of the echocardiogram.",
+   "a": "**To evaluate cardiac structure, function and dysfunction, to establish the diagnosis of some cardiovascular diseases, and to detect their complications.**\n\n## Understanding it\n- **Structure/function** — chambers, valves, ejection fraction.\n- **Diagnosis** — e.g. valve lesions, effusion.\n- **Complications** — e.g. thrombus, tamponade.\n\n>> One test that answers *what is wrong* and *how well the heart pumps*.",
+   "opts": [
+    "Record the heart rhythm only",
+    "Measure serum cholesterol",
+    "Evaluate structure/function, diagnose disease, detect complications",
+    "Assess kidney function"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the ten indications for echocardiogram.",
+   "a": "**Hypertensive, congenital, rheumatic and valvular heart disease, infective endocarditis, cardiomyopathies, pericardial disease, heart failure, cardiac masses/thrombus, and to assess ventricular function.**\n\n## Understanding it\n- Structural diseases (valves, congenital, hypertensive, cardiomyopathy).\n- Complications (endocarditis vegetations, pericardial effusion, thrombus).\n- Function (heart failure, ejection fraction).\n\n>> If a question is about **structure or pump function**, echo is the answer.",
+   "opts": [
+    "Only diagnosing arrhythmias",
+    "Valvular/congenital/hypertensive disease, endocarditis, cardiomyopathy, effusion, masses, function",
+    "Only measuring potassium",
+    "Only coronary artery imaging"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How does cardiac MRI work?",
+   "a": "**It uses a powerful magnetic field to align the nuclear magnetization of hydrogen atoms in body water.**\n\n## Understanding it\n- A strong **magnet** aligns hydrogen nuclei in water; radio pulses then produce signals mapped into images.\n- **No ionizing radiation** is used.\n\n>> High-detail soft-tissue imaging without radiation — the basis for its 'gold standard' roles.",
+   "opts": [
+    "Ultrasound reflections",
+    "Electrical signals from the skin",
+    "A magnetic field aligns hydrogen nuclei in body water",
+    "X-rays passing through the chest"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State two key facts about cardiac MRI.",
+   "a": "**It does not use ionizing radiation, and it is the current gold standard for evaluating left ventricular hypertrophy.**\n\n## Understanding it\n- **No radiation** — safer for repeated imaging.\n- **Gold standard for LV hypertrophy** (and detailed structure/tissue characterisation).\n\n>> When precise LV mass/structure matters, cardiac MRI is the reference test.",
+   "opts": [
+    "Only shows the rhythm",
+    "No ionizing radiation; gold standard for LV hypertrophy",
+    "Uses high radiation; poor for LVH",
+    "Is an invasive procedure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe cardiac catheterization.",
+   "a": "**An invasive procedure introducing a catheter through the veins into the heart under fluoroscopy guidance.**\n\n## Understanding it\n- A catheter is threaded through a **vessel into the heart** under X-ray (fluoroscopy).\n- Allows direct measurement and intervention.\n\n>> Invasive, but it can both **measure pressures** and **treat** (e.g. close an ASD, open a valve).",
+   "opts": [
+    "A resting ECG",
+    "A surface ultrasound scan",
+    "A blood test for troponin",
+    "A catheter passed into the heart under fluoroscopy"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is cardiac catheterization useful for?",
+   "a": "**Evaluating intracardiac pressures, and it may be therapeutic — e.g. treating valvular lesions or congenital defects such as atrial septal defect.**\n\n## Understanding it\n- **Diagnostic** — measures pressures inside the chambers.\n- **Therapeutic** — device closure/valvuloplasty for congenital or valve disease.\n\n>> It both diagnoses (pressures) and treats (interventions) — a dual role.",
+   "opts": [
+    "Measuring intracardiac pressures; also therapeutic (valve/ASD)",
+    "Only imaging the lungs",
+    "Only measuring cholesterol",
+    "Only recording rhythm"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe coronary arteriography and its use.",
+   "a": "**An invasive procedure using contrast agents to evaluate the coronary arteries; useful in diagnosing and managing coronary artery disease.**\n\n## Understanding it\n- **Contrast dye** is injected into the coronaries and X-rayed.\n- Shows **narrowing/blockage** and guides stenting/bypass.\n\n>> The definitive test for **coronary artery disease** — but the contrast is nephrotoxic (check renal function first).",
+   "opts": [
+    "Contrast imaging of the coronary arteries for coronary disease",
+    "A measure of serum potassium",
+    "Ultrasound of the valves",
+    "A test of lung function"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are cardiac enzymes and troponins, and when are they elevated?",
+   "a": "**They are markers of myocardial injury, elevated in myocardial infarction.**\n\n## Understanding it\n- When heart muscle is damaged, these proteins **leak into the blood**.\n- A rise signals **myocardial injury/infarction**.\n\n>> Troponins are the most specific; they **confirm** an MI (but the ECG decides treatment first).",
+   "opts": [
+    "Cholesterol fractions",
+    "Markers of kidney failure",
+    "Clotting factors",
+    "Markers of myocardial injury, raised in MI"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the three cardiac enzymes.",
+   "a": "**Creatine phosphokinase (CK), aspartate aminotransferase (AST), and lactate dehydrogenase (LDH).**\n\n## Understanding it\n- **CK, AST, LDH** rise after myocardial injury.\n- But each is also found in other tissues (skeletal muscle, liver, almost everywhere), so they are **less specific** than troponins.\n\n>> Know them, but remember troponins are preferred for specificity.",
+   "opts": [
+    "Urea and creatinine",
+    "BNP and NT-proBNP",
+    "Troponin I and T only",
+    "CK, AST and LDH"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the troponins.",
+   "a": "**Troponin I and troponin T.**\n\n## Understanding it\n- The two clinically used cardiac troponins are **I** and **T**.\n- They are **essentially specific to heart muscle**.\n\n>> This specificity is why troponins are preferred over CK/AST/LDH for diagnosing MI.",
+   "opts": [
+    "Troponin C and D",
+    "CK and LDH",
+    "Troponin I and troponin T",
+    "Troponin A and B"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is BNP, and where is it produced?",
+   "a": "**A 32-amino-acid polypeptide produced by the ventricles.**\n\n## Understanding it\n- **B-type natriuretic peptide** is released by stretched **ventricular** muscle.\n- The more the ventricle is stretched (as in heart failure), the more BNP is released.\n\n>> A raised BNP flags a **failing, overstretched ventricle** — the basis for its use in heart failure.",
+   "opts": [
+    "A clotting factor from platelets",
+    "A hormone from the adrenal gland",
+    "A 32-amino-acid peptide made by the ventricles",
+    "An enzyme from the liver"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is NT-proBNP?",
+   "a": "**A 76-amino-acid N-terminal fragment co-secreted with BNP.**\n\n## Understanding it\n- When proBNP is cleaved, it releases active **BNP** and an inactive **N-terminal fragment (NT-proBNP)**.\n- Both rise together, so NT-proBNP is an equally useful marker.\n\n>> NT-proBNP is measured as a stable surrogate for BNP in heart failure.",
+   "opts": [
+    "A 76-amino-acid N-terminal fragment co-secreted with BNP",
+    "A form of cholesterol",
+    "A cardiac enzyme",
+    "A breakdown product of troponin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are BNP and NT-proBNP useful for?",
+   "a": "**Screening and diagnosing heart failure, and establishing its prognosis.**\n\n## Understanding it\n- A **normal** level makes heart failure **unlikely** (good rule-out test).\n- Higher levels support the diagnosis and predict **worse prognosis**.\n\n>> Use them to answer 'is this breathlessness cardiac?' — then echo answers 'what kind'.",
+   "opts": [
+    "Assessing valve area",
+    "Measuring coronary blockage",
+    "Screening/diagnosing heart failure and its prognosis",
+    "Diagnosing myocardial infarction"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the purpose of the other, supportive investigations?",
+   "a": "**They help detect risk factors, complications, or co-morbidities.**\n\n## Understanding it\n- Beyond diagnosing the heart problem itself, tests like **lipids, glucose, electrolytes, renal function** map the wider picture.\n- They reveal **why** (risk factors) and **what else** (co-morbidities/complications).\n\n>> Supportive bloods complete the assessment — they don't diagnose the heart lesion but shape management.",
+   "opts": [
+    "Directly image the coronary arteries",
+    "Detect risk factors, complications and co-morbidities",
+    "Measure ejection fraction",
+    "Replace the ECG"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the components of the fasting lipid profile.",
+   "a": "**Total cholesterol, LDL, HDL, and triglycerides.**\n\n## Understanding it\n- **TC** — overall cholesterol.\n- **LDL** — the harmful fraction (to tissues/arteries).\n- **HDL** — the protective fraction (back to liver).\n- **TG** — triglycerides (rise after meals, hence fasting).\n\n>> LDL harmful, HDL protective — the core of cardiovascular risk assessment.",
+   "opts": [
+    "Only total cholesterol",
+    "Sodium, potassium and calcium",
+    "Troponin and BNP",
+    "Total cholesterol, LDL, HDL and triglycerides"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is blood sugar measured, and which tests are used?",
+   "a": "**To exclude diabetes mellitus, using fasting blood sugar (FBS) and 2-hour postprandial sugar (2HPPS).**\n\n## Understanding it\n- Diabetes is a major **cardiovascular risk factor**.\n- **FBS** detects a raised baseline; **2HPPS** detects an impaired response to a glucose load.\n\n>> Using both catches diabetes at an earlier stage than either alone.",
+   "opts": [
+    "To exclude diabetes, via FBS and 2HPPS",
+    "To measure cholesterol",
+    "To check potassium",
+    "To assess kidney function"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which electrolytes are measured in cardiological assessment?",
+   "a": "**Na⁺, K⁺, Ca²⁺ and HCO₃⁻.**\n\n## Understanding it\n- **Potassium and calcium** especially affect cardiac rhythm.\n- **Sodium and bicarbonate** reflect fluid/acid–base status relevant to heart disease and its drugs.\n\n>> Abnormal electrolytes can cause arrhythmias in a structurally **normal** heart — always check them.",
+   "opts": [
+    "Only sodium",
+    "Glucose and cholesterol",
+    "Iron and magnesium only",
+    "Na⁺, K⁺, Ca²⁺ and HCO₃⁻"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why are urea and creatinine analysed in cardiological assessment?",
+   "a": "**To exclude electrolyte-driven cardiac dysfunction, and to detect renal disease (which coexists with and affects cardiac disease and its treatment).**\n\n## Understanding it\n- Kidneys handle the **electrolytes and fluid** that affect the heart.\n- Renal impairment changes **drug choice/dosing** and raises risk with **contrast** procedures.\n\n>> Know renal function before contrast angiography — the dye is nephrotoxic.",
+   "opts": [
+    "To exclude electrolyte causes and detect renal disease",
+    "To diagnose infection",
+    "To measure cholesterol",
+    "To assess the valves"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Before commenting on heart size on a chest X-ray, what three checks must you make?",
+   "a": "**Is the film PA or AP (heart size is only assessable on PA), is the patient rotated, and is the film adequately inspired.**\n\n## Understanding it\nBefore judging heart size, confirm the film is valid:\n- **PA vs AP** — AP magnifies the heart.\n- **Rotation** — check the clavicle heads are equidistant from the spinous processes.\n- **Inspiration** — a poorly inspired film crowds and falsely enlarges the heart.\n\n>> A 'big heart' on a bad film may be an artefact — check projection, rotation, inspiration first.",
+   "opts": [
+    "The time of day",
+    "The patient's age, sex and weight",
+    "The X-ray machine's brand",
+    "Projection (PA/AP), rotation, and inspiration"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Why can cardiomegaly not be diagnosed on an AP chest film?",
+   "a": "**Because the heart lies anteriorly and is far from the film in an AP projection, so the diverging X-ray beam magnifies it.**\n\n## Understanding it\n- In **AP**, the beam enters the front; the anterior heart is **far from the detector**.\n- The diverging beam **magnifies** distant structures → the heart looks bigger than it is.\n\n>> Only a **PA** film (heart close to detector) gives a true heart size.",
+   "opts": [
+    "AP films shrink the heart",
+    "AP films are too dark to read",
+    "The heart moves in AP films",
+    "The anterior heart is far from the film and gets magnified"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Between which two points is the maximum transverse cardiac diameter measured?",
+   "a": "**From the most rightward point of the right heart border to the most leftward point of the left heart border (the two points are usually at different heights).**\n\n## Understanding it\n- Find the widest point of the heart on each side and sum the distances from the midline.\n- The right-border and left-border points are **not** at the same level.\n\n>> It's the total width of the heart shadow — the numerator of the CTR.",
+   "opts": [
+    "Between the two clavicles",
+    "Rightmost right-border point to leftmost left-border point",
+    "Top to bottom of the heart",
+    "Across the aortic arch"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — When measuring the thoracic diameter for the CTR, do you measure to the inner or outer rib edge?",
+   "a": "**The INNER edge — it is the maximum INTERNAL diameter of the thoracic cage.**\n\n## Understanding it\n- The CTR denominator is the **internal** chest width.\n- Measure to the **inner** rib margins, at the widest point.\n\n>> Using the inner edge keeps the ratio standardised — a common OSPE trap.",
+   "opts": [
+    "The inner edge (internal thoracic diameter)",
+    "The outer edge of the ribs",
+    "The midline of the spine",
+    "The skin surface"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — State the standard ECG paper speed and calibration, and what one small square represents.",
+   "a": "**25 mm/s and 10 mm/mV; one small square = 0.04 s horizontally and 0.1 mV vertically, and one large square = 0.20 s.**\n\n## Understanding it\n- **Speed 25 mm/s** sets the time scale; **10 mm/mV** sets the voltage scale.\n- Small square = **0.04 s**; large square (5 small) = **0.20 s**.\n\n>> These values underpin every rate and interval measurement — memorise them.",
+   "opts": [
+    "No fixed calibration",
+    "25 mm/s, 10 mm/mV; small square 0.04 s, large 0.20 s",
+    "50 mm/s, 5 mm/mV; small square 0.02 s",
+    "10 mm/s, 20 mm/mV; large square 1 s"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — How do you calculate the rate on a REGULAR ECG rhythm?",
+   "a": "**300 divided by the number of large squares between two R waves — giving 300, 150, 100, 75, 60, 50.**\n\n## Understanding it\n- Each large square is 0.20 s, so 300 large squares = 1 minute.\n- **Rate = 300 ÷ (large squares between R waves)**.\n\n>> Learn the sequence 300-150-100-75-60-50 for instant rate reading on regular rhythms.",
+   "opts": [
+    "Count P waves in 6 seconds",
+    "Number of small squares × 10",
+    "300 ÷ large squares between R waves",
+    "Always 60 divided by QRS width"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — How do you calculate the rate on an IRREGULAR rhythm?",
+   "a": "**Count the QRS complexes on the 10-second rhythm strip and multiply by 6.**\n\n## Understanding it\n- With an irregular rhythm, R-R distances vary, so the '300 rule' fails.\n- Count beats over the **10-second** strip and **× 6** to get beats per minute.\n\n>> Use this for atrial fibrillation and other irregular rhythms.",
+   "opts": [
+    "Count P waves × 10",
+    "Measure the QT interval",
+    "300 ÷ large squares",
+    "Count QRS on the 10-second strip × 6"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — State the systematic sequence for reading a 12-lead ECG.",
+   "a": "**Patient details/calibration, rate, rhythm, axis, P waves, PR interval, QRS, ST segment, T waves, QT interval, then summary/conclusion.**\n\n## Understanding it\n- Go in a **fixed order** so nothing is missed.\n- Rate → rhythm → axis → then each waveform/interval in turn.\n\n>> A systematic sequence prevents you overlooking subtle but critical findings.",
+   "opts": [
+    "Start with the T wave",
+    "Just look for obvious abnormalities",
+    "Details, rate, rhythm, axis, P, PR, QRS, ST, T, QT, summary",
+    "Read only leads II and V1"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Using leads I and aVF, how do you determine the axis?",
+   "a": "**Both upright = normal axis; I up, aVF down = left axis deviation; I down, aVF up = right axis deviation; both down = extreme axis.**\n\n## Understanding it\n- Lead I looks leftward, aVF looks downward.\n- Their combined directions place the axis in one of four quadrants.\n\n>> The quick two-lead method: 'both up = normal; leaving each other = LAD; reaching each other = RAD'.",
+   "opts": [
+    "aVF alone gives the axis",
+    "Axis cannot be found from I and aVF",
+    "Both up = right axis deviation",
+    "Both up = normal; I up/aVF down = LAD; I down/aVF up = RAD; both down = extreme"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Which ECG leads correspond to the inferior, anterior and lateral territories?",
+   "a": "**Inferior: II, III, aVF. Anterior: V1–V4. Lateral: I, aVL, V5, V6.**\n\n## Understanding it\n- Each region of the heart is 'watched' by particular leads.\n- **Inferior** = II/III/aVF; **anterior** = V1–V4; **lateral** = I/aVL/V5/V6.\n\n>> Knowing the territories lets you localise an infarct and predict the culprit artery.",
+   "opts": [
+    "Inferior V1–V4; anterior II/III/aVF",
+    "Lateral is V1–V2 only",
+    "Inferior II/III/aVF; anterior V1–V4; lateral I/aVL/V5/V6",
+    "All territories use only lead II"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — An ECG is irregularly irregular with absent P waves and a fine fibrillatory baseline. Diagnosis?",
+   "a": "**Atrial fibrillation.**\n\n## Understanding it\n- **Irregularly irregular** rhythm + **no P waves** + a **fibrillatory baseline** = AF.\n- The atria quiver chaotically instead of contracting.\n\n>> This triad (no P, irregular, fibrillatory baseline) is the classic AF recognition.",
+   "opts": [
+    "Complete heart block",
+    "Ventricular tachycardia",
+    "Sinus tachycardia",
+    "Atrial fibrillation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Why are P waves absent in atrial fibrillation?",
+   "a": "**Because hundreds of chaotic atrial circuits fire at once, so there is no single organised atrial depolarisation to make a P wave — only a fibrillatory baseline.**\n\n## Understanding it\n- A P wave needs a **coordinated** atrial contraction from the SA node.\n- In AF the atria are electrically **chaotic**, so no discrete P wave forms.\n\n>> No organised atrial activity = no P wave, just a wavy baseline.",
+   "opts": [
+    "The AV node blocks the P waves",
+    "Chaotic multiple atrial circuits prevent an organised P wave",
+    "The SA node is firing too fast",
+    "The P waves are hidden in the QRS"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is the ventricular rhythm irregular in atrial fibrillation?",
+   "a": "**Because the AV node blocks most of the chaotic atrial impulses and conducts the rest at random, so the ventricles are stimulated at irregular intervals.**\n\n## Understanding it\n- The AV node is bombarded by chaotic impulses.\n- It passes only **some, unpredictably** → ventricles fire at random times.\n\n>> Random AV conduction of chaotic atrial activity = the 'irregularly irregular' pulse.",
+   "opts": [
+    "Random AV-nodal conduction of chaotic atrial impulses",
+    "The SA node is irregular",
+    "Bundle branch block",
+    "The ventricles have their own irregular pacemaker"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — In a patient with atrial fibrillation, why is an echocardiogram requested?",
+   "a": "**To look for structural/valvular disease (especially rheumatic mitral stenosis) and atrial thrombus.**\n\n## Understanding it\n- AF is often **caused by** underlying structural/valve disease.\n- The stagnant fibrillating atrium can form a **thrombus** (stroke risk).\n\n>> Echo finds the cause (e.g. mitral stenosis) and the danger (atrial clot).",
+   "opts": [
+    "To measure serum potassium",
+    "To find structural/valve disease and atrial thrombus",
+    "To image the coronary arteries",
+    "To record the rhythm again"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — An ECG shows tall tented T waves, flattened P waves and a widening QRS in a patient with chronic kidney disease. Diagnosis?",
+   "a": "**Hyperkalaemia — a medical emergency that may progress to a sine-wave pattern and cardiac arrest.**\n\n## Understanding it\n- Rising potassium first produces **tall, tented (peaked) T waves**.\n- In CKD (poor potassium excretion) this is a classic scenario.\n\n>> Tented T waves + CKD = hyperkalaemia — act fast; it can end in a sine wave and arrest.",
+   "opts": [
+    "Hypercalcaemia",
+    "Hypokalaemia",
+    "Hyperkalaemia",
+    "Normal ECG"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — State the sequence of ECG changes as potassium rises.",
+   "a": "**Tall tented T waves → flattening/loss of P waves → PR lengthening → widening QRS → QRS merges with T (sine wave) → ventricular fibrillation/asystole.**\n\n## Understanding it\n- Follow potassium upward: T waves peak, P waves vanish, PR and QRS widen.\n- Eventually QRS and T fuse into a **sine wave** → arrest.\n\n>> A stepwise deterioration — the later the change, the more urgent the threat.",
+   "opts": [
+    "Tented T → lost P → wide QRS → sine wave → VF/asystole",
+    "U waves then flat T waves",
+    "ST elevation then Q waves",
+    "No ECG change at all"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — How do you distinguish a hyperkalaemic T wave from other tall T waves?",
+   "a": "**The hyperkalaemic T wave is narrow-based, pointed and symmetrical — 'tented' like a church spire — whereas other tall T waves are broad-based.**\n\n## Understanding it\n- **Hyperkalaemia** — narrow, peaked, symmetrical 'tent'.\n- Other causes (e.g. early MI, normal variant) — **broad-based** tall T waves.\n\n>> It's the **shape** (narrow tent) not just height that flags hyperkalaemia.",
+   "opts": [
+    "Narrow-based, pointed, symmetrical ('tented')",
+    "Notched and wide",
+    "Broad-based and rounded",
+    "Inverted and deep"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — What is the order of treatment in hyperkalaemia, and what does each step do?",
+   "a": "**Stabilise, shift, remove: calcium gluconate stabilises the myocardium (it does not lower K⁺); insulin+dextrose and salbutamol shift K⁺ into cells; then remove K⁺ (resins, diuretics, dialysis).**\n\n## Understanding it\n- **Stabilise** the heart first (calcium) — buys time.\n- **Shift** potassium into cells (insulin/dextrose, salbutamol) — fast but temporary.\n- **Remove** it from the body (resins/diuretics/dialysis) — definitive.\n\n>> Calcium protects the heart but doesn't lower potassium — a key exam distinction.",
+   "opts": [
+    "Give potassium to normalise it",
+    "Only dialysis, nothing else",
+    "Stabilise (calcium) → shift (insulin/dextrose, salbutamol) → remove",
+    "Diuretics first, calcium last"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What ECG changes occur in HYPOkalaemia?",
+   "a": "**Flattened T waves, U waves, and ST depression — with a risk of torsades de pointes.**\n\n## Understanding it\n- Low potassium **flattens T waves** and brings out **U waves**, with ST depression.\n- It prolongs repolarisation → risk of **torsades de pointes**.\n\n>> Mirror image of hyperkalaemia: think 'flat T, U wave, torsades'.",
+   "opts": [
+    "Flat T waves, U waves, ST depression (torsades risk)",
+    "ST elevation",
+    "Wide QRS and lost P waves",
+    "Tall tented T waves"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — On an ECG the P waves are regular but bear no relationship to the QRS complexes, which are wide and slow. Diagnosis?",
+   "a": "**Complete (third-degree) atrioventricular heart block, with a ventricular escape rhythm.**\n\n## Understanding it\n- P waves march at their own rate; QRS complexes march at theirs — **no relationship** (AV dissociation).\n- The ventricles are driven by a slow **escape** pacemaker.\n\n>> P and QRS 'doing their own thing' = complete heart block.",
+   "opts": [
+    "Complete (third-degree) AV block",
+    "Sinus arrhythmia",
+    "First-degree AV block",
+    "Atrial fibrillation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why does a WIDE QRS in complete heart block indicate a more dangerous situation?",
+   "a": "**Because a wide QRS indicates a ventricular escape rhythm (20–40/min), which is slower and less reliable than a narrow junctional escape (40–60/min) and more likely to fail.**\n\n## Understanding it\n- A **narrow** escape arises high (junctional) — faster, more reliable.\n- A **wide** escape arises low (ventricular) — slower, unstable, prone to asystole.\n\n>> Wide-complex escape = a lower, more dangerous pacemaker → urgent pacing.",
+   "opts": [
+    "Wide QRS is always normal",
+    "It indicates the atria are failing",
+    "Wide QRS = slow, unreliable ventricular escape (20–40/min)",
+    "Wide QRS means a fast safe rhythm"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Why must you look for inferior myocardial infarction in a patient with complete heart block?",
+   "a": "**Because in most people the right coronary artery supplies both the inferior wall and the AV node, so its occlusion causes inferior infarction and heart block together.**\n\n## Understanding it\n- The **RCA** feeds the **inferior wall** and the **AV node** in most people.\n- Block the RCA → inferior MI **and** AV block at the same time.\n\n>> New complete heart block + inferior ST elevation = one RCA lesion causing both.",
+   "opts": [
+    "Heart block always causes infarction",
+    "The RCA supplies both the inferior wall and the AV node",
+    "They are unrelated coincidences",
+    "The left coronary supplies the AV node"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — How do you distinguish first degree, Mobitz I, Mobitz II and complete heart block?",
+   "a": "**First degree: PR > 0.20 s but every P conducts. Mobitz I: PR progressively lengthens then a beat drops. Mobitz II: PR constant then a beat suddenly drops. Complete: P and QRS are unrelated.**\n\n## Understanding it\n- **1st degree** — long PR, but nothing dropped.\n- **Mobitz I (Wenckebach)** — PR creeps longer until a beat is dropped.\n- **Mobitz II** — PR fixed, then a sudden dropped beat (dangerous).\n- **Complete** — total AV dissociation.\n\n>> The PR behaviour separates them: fixed-long, lengthening, or fixed-then-dropped.",
+   "opts": [
+    "First degree drops every other beat",
+    "All four are identical",
+    "1°: long PR all conduct; MI: PR lengthens then drops; MII: fixed then drops; complete: dissociated",
+    "Mobitz II has lengthening PR"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — ST elevation in leads II, III and aVF. What is the diagnosis and which artery?",
+   "a": "**Acute inferior ST-elevation myocardial infarction, usually from occlusion of the right coronary artery.**\n\n## Understanding it\n- **II, III, aVF** are the **inferior** leads.\n- ST elevation there = inferior STEMI, typically an **RCA** occlusion.\n\n>> Match the territory to the artery: inferior leads → RCA.",
+   "opts": [
+    "Inferior STEMI — right coronary artery",
+    "Anterior STEMI — LAD",
+    "Lateral STEMI — circumflex",
+    "Pericarditis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — In which leads would you look for reciprocal changes in an inferior myocardial infarction?",
+   "a": "**Leads I and aVL.**\n\n## Understanding it\n- Reciprocal (mirror-image ST **depression**) appears in leads opposite the infarct.\n- For an **inferior** MI, look at the **high lateral** leads **I and aVL**.\n\n>> Reciprocal change supports a true STEMI over a mimic.",
+   "opts": [
+    "Leads V1–V4",
+    "Lead aVR only",
+    "Leads I and aVL",
+    "Leads II, III, aVF"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — How does the ST elevation of pericarditis differ from that of myocardial infarction?",
+   "a": "**Pericarditis causes widespread, saddle-shaped ST elevation with NO reciprocal depression, whereas infarction causes territorial ST elevation WITH reciprocal depression.**\n\n## Understanding it\n- **Pericarditis** — diffuse (many leads), saddle-shaped, **no** reciprocal changes.\n- **MI** — confined to a **territory**, with **reciprocal** ST depression elsewhere.\n\n>> Widespread + saddle + no reciprocals = pericarditis; territorial + reciprocals = MI.",
+   "opts": [
+    "MI never has reciprocal changes",
+    "Pericarditis is always territorial",
+    "They look identical",
+    "Pericarditis: widespread saddle ST, no reciprocals; MI: territorial with reciprocals"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Should you wait for the troponin result before treating a STEMI?",
+   "a": "**No — the ECG diagnosis is sufficient. Troponin takes hours to rise while myocardium dies; troponin confirms, the ECG decides.**\n\n## Understanding it\n- A STEMI is diagnosed on the **ECG** immediately.\n- **Troponin** rises over hours — waiting for it wastes precious muscle-saving time.\n\n>> 'Time is muscle': treat the STEMI on the ECG; troponin is confirmatory, not gatekeeping.",
+   "opts": [
+    "Yes — troponin decides treatment",
+    "Wait for the echocardiogram first",
+    "No — treat on the ECG; troponin only confirms later",
+    "Yes — always wait for troponin"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Why are troponins preferred to CK, AST and LDH?",
+   "a": "**Because troponin I and T are essentially specific to heart muscle, whereas CK is also in skeletal muscle, AST also in liver, and LDH in almost every tissue.**\n\n## Understanding it\n- The enzymes rise with heart injury **but also** from other tissues.\n- **Troponins** are near-exclusive to cardiac muscle → far fewer false positives.\n\n>> Specificity wins: troponins pinpoint the heart, the enzymes don't.",
+   "opts": [
+    "Troponins are heart-specific; CK/AST/LDH are also in other tissues",
+    "The enzymes cannot be measured",
+    "The enzymes are more expensive",
+    "Troponins rise faster than any test"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — An ECG shows a short PR interval with a slurred upstroke of the QRS. What is this?",
+   "a": "**A delta wave — indicating Wolff-Parkinson-White syndrome, a pre-excitation syndrome.**\n\n## Understanding it\n- An accessory pathway lets the impulse **bypass** the AV node, pre-exciting the ventricle.\n- This gives a **short PR** and a slurred QRS upstroke (**delta wave**).\n\n>> Short PR + delta wave = WPW (pre-excitation).",
+   "opts": [
+    "A J wave — hypothermia",
+    "A delta wave — Wolff-Parkinson-White syndrome",
+    "A U wave — hypokalaemia",
+    "A Q wave — old infarct"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — An ECG shows downsloping ST depression with a 'reverse tick' appearance. What is the likely cause?",
+   "a": "**Digoxin effect — drug effect being a listed indication for the ECG.**\n\n## Understanding it\n- Digoxin classically produces a **downsloping ('reverse tick' / Salvador Dalí) ST depression**.\n- This is the *effect* of the drug (at therapeutic levels), distinct from digoxin *toxicity*.\n\n>> Reverse-tick ST depression = digoxin effect.",
+   "opts": [
+    "Pericarditis",
+    "Hyperkalaemia",
+    "Acute STEMI",
+    "Digoxin effect"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — On an echocardiogram there is a large black echo-free space surrounding the heart. What is it, and why is it black?",
+   "a": "**A pericardial effusion; fluid appears black on ultrasound because it does not reflect the ultrasound beam.**\n\n## Understanding it\n- Fluid is **echo-free (anechoic)** → it appears **black** on echo.\n- A black rim around the heart = **pericardial effusion**.\n\n>> On echo: black = fluid; a black space around the heart = pericardial effusion.",
+   "opts": [
+    "Normal heart muscle",
+    "Pericardial effusion (fluid is echo-free/black)",
+    "Air in the chest",
+    "A solid tumour"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — On echocardiography, what finding indicates that a pericardial effusion has caused tamponade?",
+   "a": "**Collapse of the right-sided chambers, which are thin-walled and low-pressure and therefore compress first.**\n\n## Understanding it\n- As pericardial pressure rises, it squeezes the **lowest-pressure** chambers first.\n- The **thin-walled right atrium/ventricle collapse** — the echo sign of tamponade.\n\n>> Right-heart chamber collapse on echo = effusion has become tamponade.",
+   "opts": [
+    "A dilated aorta",
+    "Fast valve opening",
+    "Collapse of the thin-walled right-sided chambers",
+    "Thickening of the left ventricle"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Why does cardiac tamponade cause shock?",
+   "a": "**Because raised pericardial pressure prevents the chambers FILLING, so stroke volume and cardiac output fall — it impairs filling, not the squeeze.**\n\n## Understanding it\n- The pump muscle is fine; the problem is the heart **can't fill** against the surrounding fluid pressure.\n- Low filling → low stroke volume → **low output → shock**.\n\n>> Tamponade is a **filling** failure (diastolic), not a contraction failure.",
+   "opts": [
+    "Raised pericardial pressure blocks filling → low output",
+    "Massive blood loss",
+    "A valve suddenly ruptures",
+    "The heart muscle stops contracting"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why are IV fluids given, and diuretics avoided, in cardiac tamponade?",
+   "a": "**Because the problem is inadequate filling; fluids raise filling pressure and help chambers resist collapse, whereas diuretics/vasodilators reduce filling and worsen it.**\n\n## Understanding it\n- More **filling pressure** helps the heart fill against the external squeeze → give **fluids**.\n- **Diuretics/vasodilators** drop filling pressure → the chambers collapse further → catastrophe.\n\n>> Fill the tamponade patient up; never dry them out.",
+   "opts": [
+    "Fluids are dangerous; diuretics help",
+    "Neither affects filling",
+    "Fluids raise filling pressure; diuretics reduce it and worsen tamponade",
+    "Both fluids and diuretics are given"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What is Beck's triad?",
+   "a": "**Hypotension, raised JVP, and muffled heart sounds — the classic triad of cardiac tamponade.**\n\n## Understanding it\n- **Low BP** (falling output), **raised JVP** (backed-up venous return), **muffled sounds** (fluid around the heart).\n- All three point to **tamponade**.\n\n>> Beck's triad = the bedside recognition of tamponade.",
+   "opts": [
+    "Hypotension, raised JVP, muffled heart sounds",
+    "Bradycardia, hypertension, wide pulse pressure",
+    "Fever, cough, chest pain",
+    "Murmur, clubbing, cyanosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Give the chest X-ray appearance suggesting pericardial effusion rather than cardiomegaly.",
+   "a": "**A globular, 'water-bottle'-shaped cardiac shadow with CLEAR lung fields — whereas heart failure gives a big heart with wet lungs; only echo truly distinguishes them.**\n\n## Understanding it\n- **Effusion** — enlarged, smooth, globular ('water bottle') heart with **clear** lungs.\n- **Heart failure** — big heart **plus** congested (wet) lungs.\n\n>> Big heart + clear lungs suggests effusion; big heart + wet lungs suggests failure — confirm with echo.",
+   "opts": [
+    "Big heart with wet, congested lungs",
+    "Globular 'water-bottle' heart with clear lungs",
+    "A small heart with clear lungs",
+    "A normal-sized heart"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — What is the earliest chest X-ray sign of left heart failure?",
+   "a": "**Upper-lobe venous diversion — the upper-zone vessels become as large as or larger than the lower-zone vessels, reversing the normal pattern.**\n\n## Understanding it\n- Normally lower-zone vessels are larger (gravity).\n- Rising left atrial pressure diverts blood to the **upper lobes**, so upper vessels enlarge — the **earliest** sign.\n\n>> Upper-lobe diversion appears before frank oedema — the first radiological clue of LVF.",
+   "opts": [
+    "Kerley B lines only",
+    "Upper-lobe venous diversion",
+    "Bilateral pleural effusions",
+    "Massive cardiomegaly"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — What does blunting of the costophrenic angles indicate, and what does bilateral blunting suggest?",
+   "a": "**A pleural effusion; bilateral blunting suggests a systemic cause such as heart failure rather than a local lung problem.**\n\n## Understanding it\n- Fluid in the pleural space **blunts the sharp costophrenic angle**.\n- **Bilateral** blunting points to a **systemic** cause (e.g. heart failure); unilateral suggests a local cause.\n\n>> Blunted angles = effusion; both sides = think heart failure.",
+   "opts": [
+    "Consolidation of the lung",
+    "A normal finding",
+    "Pneumothorax; always one-sided",
+    "Pleural effusion; bilateral suggests heart failure"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Give the mnemonic for the chest X-ray features of heart failure.",
+   "a": "**ABCDE — Alveolar oedema, kerley B lines, Cardiomegaly, upper-lobe Diversion, and pleural Effusions.**\n\n## Understanding it\n- **A** — alveolar oedema (bat-wing).\n- **B** — Kerley B lines.\n- **C** — cardiomegaly.\n- **D** — upper-lobe diversion.\n- **E** — effusions.\n\n>> 'ABCDE' captures the full radiological picture of heart failure.",
+   "opts": [
+    "ABCDE: Alveolar oedema, B lines, Cardiomegaly, Diversion, Effusions",
+    "PQRST waves",
+    "ABCD: Airway, Breathing, Circulation, Disability",
+    "The four heart valves"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A patient complains of intermittent palpitations but the 12-lead ECG is normal. What investigation is indicated and why?",
+   "a": "**Holter (ambulatory) ECG, which records for 24 hours — because a standard ECG records only 10–20 seconds and misses an intermittent arrhythmia.**\n\n## Understanding it\n- A brief resting ECG will be **normal between episodes**.\n- A **24-hour Holter** captures the arrhythmia during a real-life episode.\n\n>> Intermittent symptom + normal ECG → prolonged (Holter) monitoring.",
+   "opts": [
+    "Repeat the same 12-lead ECG",
+    "A lipid profile",
+    "Coronary angiography",
+    "Holter (24-hour ambulatory) ECG"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A patient has chest pain only on exertion, with a normal resting ECG. What investigation is indicated and why?",
+   "a": "**A stress ECG, recorded during exercise — because at rest the coronary supply is adequate and only increased demand unmasks the ischaemia.**\n\n## Understanding it\n- Rest ECG is normal because supply meets demand.\n- **Exercise raises demand**, exposing the coronary limitation (ST changes).\n\n>> Exertional pain + normal rest ECG → stress ECG to provoke the ischaemia.",
+   "opts": [
+    "An echocardiogram at rest",
+    "A chest X-ray",
+    "A stress (exercise) ECG",
+    "A Holter monitor"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A breathless patient may have cardiac or respiratory disease. Which blood test helps most, and how?",
+   "a": "**BNP or NT-proBNP — a normal level makes heart failure unlikely, so attention shifts to the lungs.**\n\n## Understanding it\n- Breathlessness could be **heart** or **lung**.\n- A **normal BNP** effectively **rules out** heart failure → look to the lungs.\n\n>> BNP is the great 'is it the heart?' triage test in breathlessness.",
+   "opts": [
+    "Serum potassium",
+    "Troponin — to diagnose the cause",
+    "A lipid profile",
+    "BNP/NT-proBNP — normal makes heart failure unlikely"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why must a patient's renal function be known before coronary arteriography?",
+   "a": "**Because the procedure uses contrast agents, which are nephrotoxic; urea and creatinine detect pre-existing renal disease.**\n\n## Understanding it\n- Angiography needs **iodinated contrast**, which can damage the kidneys.\n- Knowing **renal function** first lets you protect the kidneys or reconsider.\n\n>> Always check urea/creatinine before contrast — the dye is nephrotoxic.",
+   "opts": [
+    "To measure cholesterol first",
+    "The dye affects the liver only",
+    "Contrast is nephrotoxic; check renal function first",
+    "Contrast is cardiotoxic"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — In suspected infective endocarditis, why may transoesophageal echocardiography be needed?",
+   "a": "**Because vegetations are small, and the transoesophageal probe images the heart very close up, giving far better resolution than the transthoracic view.**\n\n## Understanding it\n- **Vegetations** are tiny and easily missed from the chest wall.\n- **TOE** sits just behind the heart → superior resolution to detect them.\n\n>> Suspected endocarditis with a normal TTE → do a TOE.",
+   "opts": [
+    "Vegetations are small; TOE gives close-up, high-resolution views",
+    "TTE cannot see the heart at all",
+    "TOE avoids all radiation",
+    "TOE is quicker to perform"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why is a fasting sample required for a lipid profile?",
+   "a": "**Because triglycerides rise sharply after a meal, falsely raising TG and distorting the calculated LDL; cholesterol changes little with food.**\n\n## Understanding it\n- Eating spikes **triglycerides**, which throws off the **calculated LDL**.\n- Fasting gives a true, comparable measurement.\n\n>> Fast before lipids so the triglyceride-dependent LDL isn't falsely distorted.",
+   "opts": [
+    "Cholesterol vanishes after eating",
+    "Triglycerides rise after eating, distorting TG and calculated LDL",
+    "Food destroys HDL",
+    "Fasting raises all lipids"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Which lipid fraction is harmful and which is protective, and why?",
+   "a": "**LDL is harmful (carries cholesterol from the liver to tissues including artery walls); HDL is protective (carries cholesterol from tissues back to the liver).**\n\n## Understanding it\n- **LDL** delivers cholesterol **to** tissues/arteries → plaque.\n- **HDL** removes cholesterol **from** tissues **back** to the liver → protective.\n\n>> LDL = 'Lousy' (to arteries); HDL = 'Healthy' (reverse transport).",
+   "opts": [
+    "Both are equally harmful",
+    "LDL harmful (to tissues); HDL protective (back to liver)",
+    "Neither affects arteries",
+    "HDL harmful; LDL protective"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Why may a diabetic patient have a myocardial infarction without chest pain?",
+   "a": "**Because diabetic neuropathy damages the nerves carrying cardiac pain, producing a silent myocardial infarction.**\n\n## Understanding it\n- Diabetes damages **autonomic/sensory nerves** (neuropathy).\n- The nerves that signal cardiac ischaemic pain are blunted → the MI is **silent** (painless).\n\n>> In diabetics, suspect MI even without chest pain — it can be silent.",
+   "opts": [
+    "Diabetic neuropathy blunts cardiac pain (silent MI)",
+    "Their coronaries are protected",
+    "High sugar cures the pain",
+    "Diabetics never have MIs"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why are FBS and 2HPPS both used rather than one alone?",
+   "a": "**FBS detects those with a raised baseline sugar; 2HPPS detects those with normal fasting sugar who cannot handle a glucose load — an earlier stage that FBS misses.**\n\n## Understanding it\n- **FBS** catches established fasting hyperglycaemia.\n- **2HPPS** catches **impaired glucose handling** before fasting sugar rises.\n\n>> Using both detects diabetes/pre-diabetes earlier than either alone.",
+   "opts": [
+    "FBS is only for children",
+    "FBS catches raised baseline; 2HPPS catches impaired glucose handling",
+    "2HPPS measures cholesterol",
+    "They measure exactly the same thing"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A patient presents with a dangerous arrhythmia. Why must electrolytes be checked before assuming heart disease?",
+   "a": "**Because abnormal potassium or calcium alone can cause arrhythmias in a structurally normal heart — electrolytes must be excluded as the cause.**\n\n## Understanding it\n- **K⁺ and Ca²⁺** disturbances trigger arrhythmias without any structural disease.\n- They are **rapidly correctable**, so exclude them before assuming heart disease.\n\n>> Always check electrolytes in an arrhythmia — a reversible cause you don't want to miss.",
+   "opts": [
+    "To measure cholesterol",
+    "Only structural disease matters",
+    "Electrolytes never affect rhythm",
+    "Electrolyte disturbances alone can cause arrhythmias"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why does heart failure require both BNP and echocardiography?",
+   "a": "**BNP answers WHETHER it is heart failure; echocardiography answers WHAT KIND — reduced or preserved ejection fraction — which determines treatment.**\n\n## Understanding it\n- **BNP** — confirms/refutes heart failure.\n- **Echo** — classifies it (HFrEF vs HFpEF) and finds the cause → guides therapy.\n\n>> BNP = 'is it?', echo = 'what kind?' — you need both.",
+   "opts": [
+    "Echo rules heart failure in or out alone",
+    "They give identical information",
+    "BNP shows the ejection fraction",
+    "BNP = whether; echo = what kind (EF), guiding treatment"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why is the ECG the most valuable investigation in acute cardiology?",
+   "a": "**Because it is instant, bedside and non-invasive, whereas laboratory tests take time.**\n\n## Understanding it\n- In an emergency, minutes matter.\n- The ECG gives an **immediate** answer at the bedside, unlike bloods that must be processed.\n\n>> Speed + availability make the ECG the first and most valuable acute test.",
+   "opts": [
+    "It images the coronary arteries",
+    "It is the most expensive test",
+    "It replaces all other tests",
+    "It is instant, bedside and non-invasive"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A patient has an ECG showing electrical activity but no palpable pulse. What does this illustrate?",
+   "a": "**That the ECG records electricity only, not pumping — this is pulseless electrical activity, a cardiac arrest rhythm.**\n\n## Understanding it\n- The ECG can show organised electrical activity while the heart **isn't actually pumping**.\n- No pulse despite electrical activity = **PEA**, a form of cardiac arrest.\n\n>> The ECG shows electricity, not output — hence you always check the pulse.",
+   "opts": [
+    "It proves the heart is fine",
+    "The ECG shows electricity, not pumping — pulseless electrical activity",
+    "The ECG machine is faulty",
+    "It is normal sinus rhythm"
+   ],
+   "ans": 1
+  }
+ ]
 }

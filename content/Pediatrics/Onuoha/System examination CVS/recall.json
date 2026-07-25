@@ -1,534 +1,1458 @@
 {
-  "deck": "Recall Cards",
-  "topic": "System Examination (CVS)",
-  "cards": [
-    {
-      "q": "What are the seven questions a paediatric CVS history should answer?",
-      "a": "(1) Are there symptoms of heart disease? (2) Congenital or acquired? (3) If congenital, cyanotic or acyanotic? (4) If cyanotic, which CHD? (5) If acyanotic, which CHD? (6) Rheumatic fever or RHD, and which valves? (7) Any complications?"
-    },
-    {
-      "q": "List some symptoms suggesting heart disease in a child.",
-      "a": "Feeding difficulties, poor weight gain, irritability, excessive crying, bluish extremities, excessive perspiration, wheezing, noisy laboured breathing, frequent RTIs, oliguria, breathlessness, fatigue, cough, chest pain, swelling of feet, joint pain, painful finger-pulp swelling, syncope, involuntary movements and haemoptysis."
-    },
-    {
-      "q": "How do you distinguish congenital from acquired heart disease on history?",
-      "a": "Congenital: symptoms from infancy, feeding difficulties, failure to thrive, recurrent admissions. Acquired: e.g. rheumatic fever with fever, joint pain and chorea."
-    },
-    {
-      "q": "How is cyanotic CHD classified?",
-      "a": "By pulmonary blood flow: decreased PBF (TOF, tricuspid atresia, TGA with PS, single ventricle with PS) and increased PBF (truncus arteriosus, TAPVC, single ventricle without PS)."
-    },
-    {
-      "q": "How is acyanotic CHD classified?",
-      "a": "By overload type: volume overload/shunt (ASD, VSD, PDA) and pressure overload/obstruction (PS, AS, CoA)."
-    },
-    {
-      "q": "What are the three complications to look for in the CVS history?",
-      "a": "CCF (congestive cardiac failure), infective endocarditis, and pulmonary hypertension."
-    },
-    {
-      "q": "What is the mechanism of central cyanosis?",
-      "a": "Diminished arterial oxygen saturation."
-    },
-    {
-      "q": "What is the mechanism of peripheral cyanosis?",
-      "a": "Diminished flow of blood to the local part."
-    },
-    {
-      "q": "Where is central cyanosis seen?",
-      "a": "At the mucous membranes — tongue, lips and cheeks."
-    },
-    {
-      "q": "Where is peripheral cyanosis seen?",
-      "a": "On the skin only."
-    },
-    {
-      "q": "Is the limb warm or cold in central versus peripheral cyanosis?",
-      "a": "Warm in central cyanosis; cold in peripheral cyanosis."
-    },
-    {
-      "q": "What happens to central and peripheral cyanosis on applying local heat?",
-      "a": "Central cyanosis remains; peripheral cyanosis is abolished."
-    },
-    {
-      "q": "What happens to central and peripheral cyanosis on breathing pure oxygen?",
-      "a": "Central cyanosis decreases; peripheral cyanosis persists."
-    },
-    {
-      "q": "Which type of cyanosis is associated with clubbing and polycythaemia?",
-      "a": "Central cyanosis."
-    },
-    {
-      "q": "State Nada's major criteria for the presence of heart disease.",
-      "a": "Systolic murmur grade III or more, diastolic murmur, cyanosis, and congestive heart failure."
-    },
-    {
-      "q": "State Nada's minor criteria.",
-      "a": "Systolic murmur grade II or less, abnormal second sound, abnormal ECG, abnormal CXR, and abnormal BP."
-    },
-    {
-      "q": "How many of Nada's criteria suggest heart disease?",
-      "a": "The presence of 1 major or 2 minor criteria suggests the presence of heart disease."
-    },
-    {
-      "q": "What cardiac defects are expected with maternal diabetes?",
-      "a": "TGA, VSD, PDA and HOCM."
-    },
-    {
-      "q": "What cardiac defect is expected with maternal SLE?",
-      "a": "Congenital heart block."
-    },
-    {
-      "q": "What cardiac defects are expected with maternal phenylketonuria?",
-      "a": "TOF, VSD, ASD, PDA and CoA."
-    },
-    {
-      "q": "Which cardiac defect does lithium in pregnancy cause?",
-      "a": "Ebstein's anomaly."
-    },
-    {
-      "q": "Which cardiac defects does alcohol in pregnancy cause?",
-      "a": "VSD, PDA, ASD and TOF."
-    },
-    {
-      "q": "What does indomethacin do to the ductus arteriosus?",
-      "a": "Causes intrauterine closure of the PDA."
-    },
-    {
-      "q": "Which cardiac defects are associated with Down syndrome?",
-      "a": "Endocardial cushion defect (ECD) and VSD."
-    },
-    {
-      "q": "Which cardiac defect is associated with Noonan syndrome?",
-      "a": "Pulmonary stenosis (PS)."
-    },
-    {
-      "q": "Which cardiac defects are associated with Turner syndrome?",
-      "a": "Coarctation of the aorta, AS and ASD."
-    },
-    {
-      "q": "Which cardiac defects are associated with Marfan syndrome?",
-      "a": "Aortic regurgitation (AR) and mitral valve prolapse (MVP)."
-    },
-    {
-      "q": "Which cardiac defect is associated with Holt-Oram syndrome?",
-      "a": "ASD (ostium primum)."
-    },
-    {
-      "q": "What does clubbing suggest in the CVS examination?",
-      "a": "Infective endocarditis or cyanotic heart disease."
-    },
-    {
-      "q": "What is the sequence of the CVS examination?",
-      "a": "Pulse, BP, JVP, inspection of the precordium, palpation, percussion, and auscultation."
-    },
-    {
-      "q": "Define a pulse.",
-      "a": "A waveform felt by the finger, produced during cardiac systole, which travels along the arterial tree at a rate much faster than that of the blood column."
-    },
-    {
-      "q": "List the features assessed in the pulse.",
-      "a": "Rate, rhythm, volume, character, pulse deficit, condition of the vessel wall, radio-femoral delay, and symmetry."
-    },
-    {
-      "q": "How is the pulse rate counted?",
-      "a": "For a full minute by palpating the radial artery."
-    },
-    {
-      "q": "Give the causes of tachycardia.",
-      "a": "Rheumatic fever, congestive cardiac failure and arrhythmias."
-    },
-    {
-      "q": "Give the causes of bradycardia.",
-      "a": "Complete heart block and sick sinus syndrome (sino-atrial disease)."
-    },
-    {
-      "q": "What rhythm is 'regularly irregular' and what does it indicate?",
-      "a": "Sinus arrhythmia — a normal variant in which the rate rises on inspiration and falls on expiration."
-    },
-    {
-      "q": "What rhythm is 'irregularly irregular' and what does it indicate?",
-      "a": "Atrial fibrillation, or atrial flutter with varying degrees of heart block."
-    },
-    {
-      "q": "How is pulse volume assessed, and what gives the accurate measurement?",
-      "a": "By palpating the carotid artery; pulse pressure (PP) gives the accurate measurement."
-    },
-    {
-      "q": "Give the pulse pressure values for normal, low and high volume pulses.",
-      "a": "Normal 30-60 mmHg; low volume <30 mmHg; high volume >60 mmHg."
-    },
-    {
-      "q": "Give the causes of a large volume (bounding) pulse.",
-      "a": "Aortic incompetence (AR), PDA, A-V fistula and persistent truncus arteriosus."
-    },
-    {
-      "q": "Give the causes of a small volume (weak, thready) pulse.",
-      "a": "CCF, pericardial effusion, constrictive pericarditis, and the lower limb in coarctation of the aorta."
-    },
-    {
-      "q": "What is an anacrotic (parvus et tardus) pulse and its cause?",
-      "a": "A low-amplitude, slow-rising pulse with a late peak; seen in aortic stenosis."
-    },
-    {
-      "q": "What is a collapsing pulse and its cause?",
-      "a": "A pulse with a rapid upstroke and rapid downstroke and large stroke volume; seen in aortic regurgitation and PDA."
-    },
-    {
-      "q": "What is pulsus alterans and its cause?",
-      "a": "Alternating small and large volume pulse; seen in severe left ventricular failure."
-    },
-    {
-      "q": "What is pulsus paradoxus and its causes?",
-      "a": "A fall in blood pressure of more than 10 mmHg during inspiration; seen in cardiac tamponade and constrictive pericarditis."
-    },
-    {
-      "q": "What is pulse deficit and what causes it?",
-      "a": "The difference between heart rate and pulse rate counted simultaneously for 1 minute; caused by atrial fibrillation and ventricular premature contractions."
-    },
-    {
-      "q": "What causes radio-radial delay?",
-      "a": "Pre-subclavian coarctation and supravalvular AS."
-    },
-    {
-      "q": "What causes radio-femoral delay?",
-      "a": "Coarctation of the aorta and aortic embolism."
-    },
-    {
-      "q": "What are the correct blood pressure cuff dimensions?",
-      "a": "Width 40% of the arm circumference; length 80-100% of the arm circumference."
-    },
-    {
-      "q": "What is the effect of using a BP cuff that is too small?",
-      "a": "It reads falsely high."
-    },
-    {
-      "q": "What is the effect of using a BP cuff that is too large?",
-      "a": "It reads falsely low."
-    },
-    {
-      "q": "How is the JVP expressed and at what angle is the patient?",
-      "a": "As the vertical height from the sternal angle to the zone of transition of the distended and collapsed internal jugular vein, with the patient at 45 degrees."
-    },
-    {
-      "q": "What does the JVP indicate?",
-      "a": "Right atrial pressure."
-    },
-    {
-      "q": "Give the formula for right atrial pressure from the JVP.",
-      "a": "Right atrial pressure = vertical height of the blood column + 5 cm (cm H2O), because the centre of the RA is about 5 cm from the sternal angle."
-    },
-    {
-      "q": "What is the normal JVP?",
-      "a": "Less than 8 cm of H2O, or less than 6 mmHg."
-    },
-    {
-      "q": "Give the causes of an elevated JVP.",
-      "a": "CCF, tricuspid stenosis, tricuspid regurgitation, constrictive pericarditis and cardiac tamponade."
-    },
-    {
-      "q": "Give the causes of a low JVP.",
-      "a": "Hypovolaemia and shock."
-    },
-    {
-      "q": "What is Kussmaul's sign and its causes?",
-      "a": "A paradoxical rise in JVP on inspiration; seen in constrictive pericarditis, cardiac tamponade and RV failure."
-    },
-    {
-      "q": "What is Friedreich's sign?",
-      "a": "A rapid fall and rise of the JVP; seen in TR and constrictive pericarditis."
-    },
-    {
-      "q": "What does a visible precordial bulge suggest?",
-      "a": "Long-standing cardiac disease."
-    },
-    {
-      "q": "Give the causes of visible carotid pulsations.",
-      "a": "Hyperdynamic states, AR and CoA."
-    },
-    {
-      "q": "Give the causes of visible epigastric pulsations.",
-      "a": "Pulsation of the liver in CHF with TR, RVH, abdominal aortic aneurysm and tricuspid stenosis."
-    },
-    {
-      "q": "State the general rule for which part of the hand detects pulsations, thrills and heaves.",
-      "a": "Fingertips feel pulsations; the base of the fingers feels thrills; the base of the hand (ulnar aspect) feels heaves."
-    },
-    {
-      "q": "Define the apical impulse.",
-      "a": "The lowermost and outermost point of definite cardiac impulse, which gives maximum thrust to the palpating finger."
-    },
-    {
-      "q": "Where is the normal apical impulse in infancy?",
-      "a": "Left 4th intercostal space, lateral to the mid-clavicular line."
-    },
-    {
-      "q": "Where is the normal apical impulse at approximately 5 years?",
-      "a": "Left 5th intercostal space, in the mid-clavicular line."
-    },
-    {
-      "q": "Where is the normal apical impulse in older children?",
-      "a": "Left 5th intercostal space, medial to the mid-clavicular line."
-    },
-    {
-      "q": "What is a tapping apex and what does it indicate?",
-      "a": "A palpable S1; seen in mitral stenosis."
-    },
-    {
-      "q": "What is a hyperdynamic apex and what does it indicate?",
-      "a": "A diffuse, displaced apex; characteristic of ventricular dilatation (volume overload)."
-    },
-    {
-      "q": "What is a heaving apex and what does it indicate?",
-      "a": "A sustained, forceful apex; characteristic of ventricular hypertrophy (pressure overload)."
-    },
-    {
-      "q": "What is a parasternal heave and what does it indicate?",
-      "a": "A palpable thrust that lifts the palpating hand; seen in RVH and left atrial enlargement, palpated with the ulnar aspect of the hand."
-    },
-    {
-      "q": "How is a parasternal heave graded?",
-      "a": "(1) instant lift, visible not palpable; (2) visible and palpable, can be obliterated; (3) visible and palpable, cannot be obliterated."
-    },
-    {
-      "q": "What is a thrill and what grade of murmur does it accompany?",
-      "a": "A palpable vibration of a murmur, accompanying any organic murmur of grade 3 or more (present from grade 4 upward)."
-    },
-    {
-      "q": "What are heart sounds produced by?",
-      "a": "Closure of the heart valves."
-    },
-    {
-      "q": "What produces the first heart sound (S1)?",
-      "a": "Closure of the atrioventricular (mitral and tricuspid) valves at the start of systole."
-    },
-    {
-      "q": "What produces the second heart sound (S2)?",
-      "a": "Closure of the semilunar (aortic and pulmonary) valves at the end of systole."
-    },
-    {
-      "q": "Where is the aortic area?",
-      "a": "2nd intercostal space, right sternal border."
-    },
-    {
-      "q": "Where is the pulmonary area?",
-      "a": "2nd intercostal space, left sternal border."
-    },
-    {
-      "q": "Where is the tricuspid area?",
-      "a": "Left lower sternal border."
-    },
-    {
-      "q": "Where is the mitral area?",
-      "a": "5th intercostal space, mid-clavicular line (the apex)."
-    },
-    {
-      "q": "Give causes of a soft S1.",
-      "a": "MR, TR and calcification of the AV valves."
-    },
-    {
-      "q": "Give causes of a loud S1.",
-      "a": "MS, TS and high-output states."
-    },
-    {
-      "q": "Give causes of a loud P2.",
-      "a": "Pulmonary hypertension, ASD, PDA and large VSD."
-    },
-    {
-      "q": "Give causes of an absent P2.",
-      "a": "PS, TOF and TGA."
-    },
-    {
-      "q": "What are the four patterns of S2 splitting and their causes?",
-      "a": "Wide fixed (ASD); wide variable (VSD, RBBB); narrow (severe AS, severe PS); reversed (aortic stenosis, HOCM)."
-    },
-    {
-      "q": "Why does the second heart sound split during inspiration?",
-      "a": "Negative intrathoracic pressure increases right heart filling; the RV takes longer to empty the greater volume, delaying pulmonary valve closure relative to aortic closure."
-    },
-    {
-      "q": "Why does an ASD cause a fixed split S2?",
-      "a": "The left-to-right shunt keeps the right ventricle volume-overloaded all the time, so respiration causes no further change in the split."
-    },
-    {
-      "q": "Why does pulmonary stenosis cause a widely split S2?",
-      "a": "The RV takes notably longer to empty through the narrow pulmonary valve, delaying pulmonary closure."
-    },
-    {
-      "q": "Give the causes of a physiological S3.",
-      "a": "Children and young adults."
-    },
-    {
-      "q": "Give the causes of a pathological S3.",
-      "a": "High-output states, CHD (ASD, VSD, PDA), and MR, TR, AR."
-    },
-    {
-      "q": "What is an opening snap and where is it heard?",
-      "a": "A sound from opening of the AV valves; heard at the apex (MS, MR, VSD, PDA) or the parasternal region (TS, TR, ASD)."
-    },
-    {
-      "q": "What is an ejection click and when is it seen?",
-      "a": "A sharp clicking sound from sudden swelling of the pulmonary artery or dilatation of the aorta; early ejection click in aortic and pulmonary valve stenosis, mid-systolic click in floppy mitral valve."
-    },
-    {
-      "q": "Describe a pericardial rub.",
-      "a": "Due to sliding of two inflamed pericardial layers; scratching and grating, triphasic, best heard along the left sternal edge in the 3rd-4th ICS."
-    },
-    {
-      "q": "What causes a murmur?",
-      "a": "Turbulence — either increased flow through a normal/stenosed valve, or normal flow through a stenosed valve/orifice."
-    },
-    {
-      "q": "List the features used to describe a murmur.",
-      "a": "Pitch, timing and character, systolic/diastolic, area best heard, intensity, bell or diaphragm, conduction, variation with respiration, posture, and variation with dynamic auscultation."
-    },
-    {
-      "q": "Give the causes of a pansystolic murmur and where each is loudest.",
-      "a": "Mitral regurgitation (mitral area), tricuspid regurgitation (left sternal border), and VSD (left lower sternal border)."
-    },
-    {
-      "q": "Give the causes of an ejection-systolic murmur and where each is loudest.",
-      "a": "Aortic stenosis (aortic area), pulmonary stenosis (pulmonary area), and HOCM (4th ICS left sternal border)."
-    },
-    {
-      "q": "What character does an ejection-systolic murmur have and why?",
-      "a": "Crescendo-decrescendo, matching systolic flow which is slowest at the start and end and fastest in the middle."
-    },
-    {
-      "q": "Give the causes of an early diastolic murmur.",
-      "a": "Aortic regurgitation and pulmonary regurgitation."
-    },
-    {
-      "q": "Give the cause of a mid-diastolic murmur.",
-      "a": "Mitral stenosis."
-    },
-    {
-      "q": "Give the causes of a late diastolic murmur.",
-      "a": "MS, TS and atrial myxomas."
-    },
-    {
-      "q": "Give the causes of a continuous murmur.",
-      "a": "PDA, ruptured sinus of Valsalva and coronary AV fistula."
-    },
-    {
-      "q": "Grade a systolic murmur from 1 to 6.",
-      "a": "1 very soft (quiet room); 2 soft, easily audible; 3 moderate, no thrill; 4 loud with thrill; 5 very loud with thrill, stethoscope barely on chest; 6 audible with stethoscope off the chest wall."
-    },
-    {
-      "q": "List the characteristic 'S' features of an innocent murmur.",
-      "a": "Soft, Single, Short, Sweet, Systolic, Symptomless, Sensitive, and Situation-dependent (quieter on standing or only when unwell/feverish)."
-    },
-    {
-      "q": "What supporting findings accompany an innocent murmur?",
-      "a": "Less than grade 3, no cyanosis, normal pulses, normal heart sounds, and a normal cardiac silhouette on CXR."
-    },
-    {
-      "q": "What features of a murmur should prompt referral?",
-      "a": "Murmur louder than 2/6, diastolic murmurs, louder on standing, or symptoms such as failure to thrive, feeding difficulty, cyanosis or shortness of breath."
-    },
-    {
-      "q": "Why does an atrial septal defect cause a fixed split second heart sound?",
-      "a": "Blood flows from left to right atrium, increasing RV volume; this fixed extra volume means the split does not vary with inspiration and expiration."
-    },
-    {
-      "q": "What is the effect of respiration on murmurs during dynamic auscultation?",
-      "a": "During inspiration, right-sided murmurs become louder while left-sided murmurs become softer or unchanged; expiration has the opposite effect."
-    },
-    {
-      "q": "What is the effect of the Valsalva manoeuvre on murmurs?",
-      "a": "It increases intrathoracic pressure; the murmurs of MVP and HOCM become louder, while the ESM of AS decreases."
-    },
-    {
-      "q": "What is the effect of squatting on the HOCM murmur?",
-      "a": "It becomes softer, because squatting increases venous return and diastolic volume."
-    },
-    {
-      "q": "What is the effect of isometric hand grip on murmurs?",
-      "a": "It increases systemic vascular resistance; regurgitant murmurs (MR, VSD) become louder while the murmur of AS becomes softer."
-    },
-    {
-      "q": "OSPE — What is the correct sequence of the CVS examination check-off?",
-      "a": "Courtesy; inspection; pulse palpation with synchrony; blood pressure; JVP; precordium (inspection, apex, heave/thrill, percussion, liver, ascites); and auscultation."
-    },
-    {
-      "q": "OSPE — What comes first in the CVS examination and why does it earn marks?",
-      "a": "Courtesy — introduction, explanation, consent and positioning; the check-off explicitly scores courtesy and attention to sequence."
-    },
-    {
-      "q": "OSPE — What should you inspect for at the start of the CVS examination?",
-      "a": "Respiratory distress, pallor, cyanosis, digital clubbing, neck pulsations, and oedema (presence, extent, pitting, level)."
-    },
-    {
-      "q": "OSPE — With which arteries should the radial pulse be checked for synchrony?",
-      "a": "The other radial, femoral, carotid, brachial, popliteal and dorsalis pedis arteries."
-    },
-    {
-      "q": "OSPE — Why is palpating the femoral pulse a compulsory part of the examination?",
-      "a": "To detect radio-femoral delay, which indicates coarctation of the aorta."
-    },
-    {
-      "q": "OSPE — Why should systolic BP be estimated by palpation before auscultation?",
-      "a": "To avoid being misled by the auscultatory gap and to know how high to inflate the cuff."
-    },
-    {
-      "q": "OSPE — Why are the liver and shifting dullness examined during a CVS examination?",
-      "a": "Because right heart failure causes hepatomegaly and ascites, so the abdomen is part of the cardiovascular examination."
-    },
-    {
-      "q": "OSPE — During auscultation, where should you listen for radiation of murmurs?",
-      "a": "To the axilla (MR), up the neck (AS), and to the back (coarctation), as well as the abdomen and the base of the lungs."
-    },
-    {
-      "q": "OSPE — A slow-rising, low-amplitude pulse with a late peak is shown. Diagnosis?",
-      "a": "Anacrotic pulse (parvus et tardus) — aortic stenosis."
-    },
-    {
-      "q": "OSPE — A pulse with a rapid upstroke and rapid collapse is shown. Diagnosis?",
-      "a": "Collapsing (water-hammer) pulse — aortic regurgitation or PDA."
-    },
-    {
-      "q": "OSPE — A waveform alternating between large and small volume beats is shown. Diagnosis?",
-      "a": "Pulsus alternans — severe left ventricular failure."
-    },
-    {
-      "q": "CLINICAL — A newborn has weak, delayed femoral pulses and higher BP in the arms than the legs. Diagnosis?",
-      "a": "Coarctation of the aorta."
-    },
-    {
-      "q": "CLINICAL — Why is duct-dependent coarctation a neonatal emergency, and how is it managed acutely?",
-      "a": "Closure of the ductus arteriosus cuts off flow to the lower body, causing shock and collapse; the duct is kept open with prostaglandin E1 while surgical or catheter correction is arranged."
-    },
-    {
-      "q": "CLINICAL — A child has raised JVP, muffled heart sounds and hypotension. What is the triad and the diagnosis?",
-      "a": "Beck's triad — raised JVP, muffled heart sounds and hypotension — indicating cardiac tamponade."
-    },
-    {
-      "q": "CLINICAL — What sign confirms tamponade when the BP falls more than 10 mmHg on inspiration?",
-      "a": "Pulsus paradoxus."
-    },
-    {
-      "q": "CLINICAL — How is cardiac tamponade managed?",
-      "a": "Urgent pericardiocentesis to drain the fluid, plus treatment of the underlying cause (infective/purulent pericarditis if febrile)."
-    },
-    {
-      "q": "CLINICAL — A heaving apex with an ejection systolic murmur at the aortic area suggests what?",
-      "a": "Aortic stenosis — pressure overload causing left ventricular hypertrophy."
-    },
-    {
-      "q": "CLINICAL — A hyperdynamic apex with a pansystolic murmur at the apex radiating to the axilla suggests what?",
-      "a": "Mitral regurgitation — volume overload causing left ventricular dilatation."
-    },
-    {
-      "q": "CLINICAL — Why is a murmur that becomes louder on standing a red flag?",
-      "a": "Standing reduces venous return; most murmurs soften, but HOCM (and MVP) become louder, and HOCM causes sudden cardiac death — so it warrants referral."
-    },
-    {
-      "q": "CLINICAL — Which single murmur characteristic is always pathological?",
-      "a": "Any diastolic murmur — no diastolic murmur is ever innocent."
-    },
-    {
-      "q": "CLINICAL — What must you exclude before diagnosing hypertension in a child?",
-      "a": "That the correct cuff size was used (width 40%, length 80-100% of arm circumference), since a small cuff reads falsely high."
-    }
-  ]
+ "deck": "Recall Cards",
+ "topic": "System Examination (CVS)",
+ "cards": [
+  {
+   "q": "What are the seven questions a paediatric CVS history should answer?",
+   "a": "**(1) Are there symptoms of heart disease? (2) Congenital or acquired? (3) If congenital, cyanotic or acyanotic? (4) Any complications? plus aetiology, severity and functional status.**\n\n## Understanding it\n- The history works top-down: is there disease → what type → what subtype → what complications.\n\n>> Symptoms? → congenital/acquired? → cyanotic/acyanotic? → complications?",
+   "opts": [
+    "Only the immunisation status",
+    "Only the child's age and weight",
+    "Is there disease, congenital vs acquired, cyanotic vs acyanotic, complications",
+    "Only the family income"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List some symptoms suggesting heart disease in a child.",
+   "a": "**Feeding difficulties, poor weight gain, irritability, excessive crying, bluish extremities, excessive sweating, fast breathing and recurrent chest infections.**\n\n## Understanding it\n- In infants, heart failure shows as **feeding/growth** problems and **sweating/tachypnoea**, not classic adult symptoms.\n\n>> Poor feeding + poor growth + sweating + fast breathing = infant heart disease.",
+   "opts": [
+    "Jaundice and pale stools",
+    "Headache and neck stiffness",
+    "Joint swelling only",
+    "Poor feeding/growth, sweating, fast breathing, cyanosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How do you distinguish congenital from acquired heart disease on history?",
+   "a": "**Congenital: symptoms from infancy (feeding difficulty, failure to thrive, recurrent admissions). Acquired: later onset, often after an illness (e.g. rheumatic fever).**\n\n## Understanding it\n- **Timing** is the key: from birth/infancy = congenital; later, post-infective = acquired.\n\n>> From infancy = congenital; later onset = acquired.",
+   "opts": [
+    "Congenital = from infancy; acquired = later onset (often post-illness)",
+    "Acquired is always from birth",
+    "They are indistinguishable",
+    "Both always present at birth"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is cyanotic CHD classified?",
+   "a": "**By pulmonary blood flow: decreased PBF (TOF, tricuspid atresia) versus increased PBF (TGA, TAPVC, truncus arteriosus).**\n\n## Understanding it\n- Cyanotic lesions split by whether the lungs get **too little** or **too much** blood.\n\n>> Cyanotic CHD: decreased vs increased pulmonary blood flow.",
+   "opts": [
+    "Alphabetically",
+    "By murmur grade only",
+    "By pulmonary blood flow (decreased vs increased)",
+    "By the child's weight"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How is acyanotic CHD classified?",
+   "a": "**By overload type: volume overload/shunt (ASD, VSD, PDA) versus pressure overload/obstruction (PS, AS, coarctation).**\n\n## Understanding it\n- Acyanotic lesions are either a **left-to-right shunt (volume)** or an **obstruction (pressure)**.\n\n>> Acyanotic CHD: volume-overload shunts vs pressure-overload obstructions.",
+   "opts": [
+    "By cyanosis severity",
+    "By skin colour",
+    "By the child's age only",
+    "By overload: volume (shunts) vs pressure (obstructions)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the three complications to look for in the CVS history?",
+   "a": "**Congestive cardiac failure, infective endocarditis, and pulmonary hypertension.**\n\n## Understanding it\n- These are the main sequelae of untreated heart disease to screen for.\n\n>> CCF, infective endocarditis, pulmonary hypertension.",
+   "opts": [
+    "CCF, infective endocarditis, pulmonary hypertension",
+    "UTI, otitis, tonsillitis",
+    "Fracture, stroke, seizure",
+    "Anaemia, jaundice, rash"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the mechanism of central cyanosis?",
+   "a": "**Diminished arterial oxygen saturation.**\n\n## Understanding it\n- Central cyanosis = the blood leaving the heart is **under-oxygenated** (cardiac/respiratory shunt).\n\n>> Central cyanosis = low arterial O2 saturation.",
+   "opts": [
+    "Anaemia only",
+    "Diminished arterial oxygen saturation",
+    "Increased oxygen saturation",
+    "Reduced local blood flow"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the mechanism of peripheral cyanosis?",
+   "a": "**Diminished flow of blood to the local part.**\n\n## Understanding it\n- Peripheral cyanosis = the blood is fine but **flows slowly** to the periphery, which extracts more O2 (cold, shock).\n\n>> Peripheral cyanosis = poor local blood flow.",
+   "opts": [
+    "Low arterial saturation",
+    "Polycythaemia",
+    "Diminished local blood flow",
+    "A lung shunt"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where is central cyanosis seen?",
+   "a": "**At the mucous membranes — tongue, lips and cheeks.**\n\n## Understanding it\n- Central cyanosis shows in warm, well-perfused **mucous membranes** (tongue).\n\n>> Central cyanosis: tongue, lips, mucous membranes.",
+   "opts": [
+    "Only the fingertips",
+    "Only the toes",
+    "The whole body evenly",
+    "Mucous membranes — tongue, lips, cheeks"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Where is peripheral cyanosis seen?",
+   "a": "**On the skin only (e.g. fingers, toes) — not the mucous membranes.**\n\n## Understanding it\n- Peripheral cyanosis affects the cold **extremities' skin**, sparing the tongue.\n\n>> Peripheral cyanosis: skin/extremities, tongue spared.",
+   "opts": [
+    "On the skin/extremities only (tongue spared)",
+    "Everywhere including the tongue",
+    "On the tongue",
+    "On mucous membranes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Is the limb warm or cold in central versus peripheral cyanosis?",
+   "a": "**Warm in central cyanosis; cold in peripheral cyanosis.**\n\n## Understanding it\n- Central: perfusion is fine (warm) but oxygen is low. Peripheral: poor flow makes it **cold**.\n\n>> Central = warm; peripheral = cold.",
+   "opts": [
+    "Cold in central; warm in peripheral",
+    "Warm in central; cold in peripheral",
+    "Warm in both",
+    "Cold in both"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What happens to central and peripheral cyanosis on applying local heat?",
+   "a": "**Central cyanosis remains; peripheral cyanosis is abolished.**\n\n## Understanding it\n- Warming improves local **flow**, so peripheral cyanosis clears; central (low O2) is unaffected.\n\n>> Heat abolishes peripheral cyanosis, not central.",
+   "opts": [
+    "Central remains; peripheral abolished",
+    "Both remain",
+    "Central abolished; peripheral remains",
+    "Both abolished"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What happens to central and peripheral cyanosis on breathing pure oxygen?",
+   "a": "**Central cyanosis decreases; peripheral cyanosis persists.**\n\n## Understanding it\n- Oxygen raises arterial saturation, improving **central** cyanosis; peripheral (flow problem) persists.\n\n>> Oxygen improves central, not peripheral, cyanosis.",
+   "opts": [
+    "Peripheral clears; central persists",
+    "Both persist",
+    "Both clear",
+    "Central decreases; peripheral persists"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which type of cyanosis is associated with clubbing and polycythaemia?",
+   "a": "**Central cyanosis.**\n\n## Understanding it\n- Chronic low arterial O2 (central cyanosis) drives **clubbing** and **polycythaemia** (compensatory red-cell rise).\n\n>> Clubbing + polycythaemia = chronic central cyanosis.",
+   "opts": [
+    "Peripheral cyanosis",
+    "Neither",
+    "Both equally",
+    "Central cyanosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State Nada's major criteria for the presence of heart disease.",
+   "a": "**Systolic murmur grade III or more, diastolic murmur, cyanosis, and congestive heart failure.**\n\n## Understanding it\n- The **major** criteria are the strong markers of true heart disease.\n\n>> Major: loud systolic murmur, any diastolic murmur, cyanosis, CCF.",
+   "opts": [
+    "Fever and rash",
+    "Only a soft murmur",
+    "Grade ≥III systolic murmur, diastolic murmur, cyanosis, CCF",
+    "Only an abnormal ECG"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State Nada's minor criteria.",
+   "a": "**Systolic murmur grade II or less, abnormal second sound, abnormal ECG, abnormal CXR, and abnormal blood pressure.**\n\n## Understanding it\n- The **minor** criteria are softer, supportive signs.\n\n>> Minor: soft murmur, abnormal S2/ECG/CXR/BP.",
+   "opts": [
+    "A loud diastolic murmur",
+    "Soft murmur, abnormal S2, abnormal ECG/CXR/BP",
+    "Clubbing only",
+    "Cyanosis and CCF"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How many of Nada's criteria suggest heart disease?",
+   "a": "**The presence of 1 major or 2 minor criteria suggests heart disease.**\n\n## Understanding it\n- One strong (major) sign, or two supportive (minor) signs, indicates disease.\n\n>> 1 major OR 2 minor = heart disease.",
+   "opts": [
+    "1 minor criterion alone",
+    "All criteria must be present",
+    "1 major or 2 minor criteria",
+    "3 major criteria only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What cardiac defects are expected with maternal diabetes?",
+   "a": "**TGA, VSD, PDA and HOCM.**\n\n## Understanding it\n- Maternal diabetes is linked to transposition, septal defects, PDA and hypertrophic cardiomyopathy.\n\n>> Maternal diabetes → TGA, VSD, PDA, HOCM.",
+   "opts": [
+    "Congenital heart block",
+    "Ebstein's anomaly",
+    "TGA, VSD, PDA, HOCM",
+    "Coarctation only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What cardiac defect is expected with maternal SLE?",
+   "a": "**Congenital heart block.**\n\n## Understanding it\n- Maternal anti-Ro/La antibodies (SLE) cross the placenta and damage the conducting system → **congenital heart block**.\n\n>> Maternal SLE → congenital heart block.",
+   "opts": [
+    "Congenital heart block",
+    "Ebstein's anomaly",
+    "TGA",
+    "Pulmonary stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What cardiac defects are expected with maternal phenylketonuria?",
+   "a": "**TOF, VSD, ASD, PDA and CoA.**\n\n## Understanding it\n- Uncontrolled maternal PKU is teratogenic, causing a range of defects.\n\n>> Maternal PKU → TOF, VSD, ASD, PDA, CoA.",
+   "opts": [
+    "Congenital heart block",
+    "Aortic regurgitation only",
+    "TOF, VSD, ASD, PDA, CoA",
+    "Only Ebstein's anomaly"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which cardiac defect does lithium in pregnancy cause?",
+   "a": "**Ebstein's anomaly.**\n\n## Understanding it\n- Lithium is classically linked to **Ebstein's anomaly** (downward-displaced tricuspid valve).\n\n>> Lithium → Ebstein's anomaly.",
+   "opts": [
+    "Transposition of the great arteries",
+    "Congenital heart block",
+    "Coarctation",
+    "Ebstein's anomaly"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which cardiac defects does alcohol in pregnancy cause?",
+   "a": "**VSD, PDA, ASD and TOF.**\n\n## Understanding it\n- Fetal alcohol exposure causes septal defects, PDA and TOF.\n\n>> Alcohol → VSD, PDA, ASD, TOF.",
+   "opts": [
+    "Ebstein's anomaly only",
+    "Congenital heart block",
+    "VSD, PDA, ASD, TOF",
+    "No cardiac effect"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does indomethacin do to the ductus arteriosus?",
+   "a": "**Causes intrauterine closure of the PDA.**\n\n## Understanding it\n- Indomethacin blocks prostaglandins that keep the duct open → the duct **closes**.\n- (Postnatally, indomethacin is used to close a PDA.)\n\n>> Indomethacin closes the ductus arteriosus.",
+   "opts": [
+    "Causes closure of the ductus arteriosus",
+    "Has no effect on the duct",
+    "Keeps the duct open",
+    "Causes coarctation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which cardiac defects are associated with Down syndrome?",
+   "a": "**Endocardial cushion defect (AVSD) and VSD.**\n\n## Understanding it\n- Trisomy 21 is classically linked to **atrioventricular septal (endocardial cushion) defects**.\n\n>> Down syndrome → endocardial cushion defect (AVSD), VSD.",
+   "opts": [
+    "Coarctation and ASD",
+    "Endocardial cushion defect (AVSD) and VSD",
+    "Ebstein's anomaly",
+    "Pulmonary stenosis only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which cardiac defect is associated with Noonan syndrome?",
+   "a": "**Pulmonary stenosis.**\n\n## Understanding it\n- Noonan syndrome is classically associated with **pulmonary stenosis**.\n\n>> Noonan → pulmonary stenosis.",
+   "opts": [
+    "Coarctation of the aorta",
+    "Congenital heart block",
+    "Aortic regurgitation",
+    "Pulmonary stenosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which cardiac defects are associated with Turner syndrome?",
+   "a": "**Coarctation of the aorta, aortic stenosis and ASD.**\n\n## Understanding it\n- Turner syndrome features **left-sided/aortic** lesions, classically **coarctation**.\n\n>> Turner → coarctation, AS, ASD.",
+   "opts": [
+    "Congenital heart block",
+    "Pulmonary stenosis only",
+    "Ebstein's anomaly",
+    "Coarctation, aortic stenosis, ASD"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which cardiac defects are associated with Marfan syndrome?",
+   "a": "**Aortic regurgitation and mitral valve prolapse.**\n\n## Understanding it\n- Marfan's connective-tissue defect weakens the aorta and mitral valve → **AR and MVP** (± aortic dissection).\n\n>> Marfan → aortic regurgitation, mitral valve prolapse.",
+   "opts": [
+    "Pulmonary stenosis",
+    "Aortic regurgitation and mitral valve prolapse",
+    "Coarctation",
+    "VSD only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which cardiac defect is associated with Holt-Oram syndrome?",
+   "a": "**ASD (ostium primum), with upper-limb (radial) anomalies.**\n\n## Understanding it\n- Holt-Oram ('heart-hand') syndrome pairs an **ASD** with radial/upper-limb defects.\n\n>> Holt-Oram → ASD (+ limb anomalies).",
+   "opts": [
+    "Ebstein's anomaly",
+    "Pulmonary stenosis",
+    "Coarctation",
+    "ASD (ostium primum)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does clubbing suggest in the CVS examination?",
+   "a": "**Infective endocarditis or cyanotic heart disease.**\n\n## Understanding it\n- Clubbing points to **chronic hypoxia (cyanotic CHD)** or **infective endocarditis**.\n\n>> Clubbing → cyanotic CHD or infective endocarditis.",
+   "opts": [
+    "Anaemia",
+    "A normal finding",
+    "Infective endocarditis or cyanotic heart disease",
+    "Acute rheumatic fever only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the sequence of the CVS examination?",
+   "a": "**Pulse, blood pressure, JVP, inspection of the precordium, palpation, percussion, then auscultation.**\n\n## Understanding it\n- A fixed head-to-heart order ensures nothing is missed.\n\n>> Pulse → BP → JVP → inspect → palpate → percuss → auscultate.",
+   "opts": [
+    "BP then straight to the heart sounds",
+    "Only auscultation",
+    "Auscultation first, then pulse",
+    "Pulse, BP, JVP, inspection, palpation, percussion, auscultation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define a pulse.",
+   "a": "**A waveform felt by the finger, produced during cardiac systole, that travels along the arterial wall.**\n\n## Understanding it\n- Each heartbeat sends a pressure wave along the arteries — that is the pulse.\n\n>> Pulse = the systolic pressure wave felt in an artery.",
+   "opts": [
+    "The heart's electrical activity",
+    "A systolic pressure waveform felt in an artery",
+    "A heart sound",
+    "The venous pressure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the features assessed in the pulse.",
+   "a": "**Rate, rhythm, volume, character, pulse deficit, condition of the vessel wall, and radio-femoral/radio-radial delay.**\n\n## Understanding it\n- A full pulse exam covers how fast, how regular, how big, its shape, and symmetry/delays.\n\n>> Rate, rhythm, volume, character, deficit, vessel wall, delays.",
+   "opts": [
+    "Rate, rhythm, volume, character, deficit, vessel wall, delays",
+    "Only the rate",
+    "Colour and temperature only",
+    "Only the rhythm"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is the pulse rate counted?",
+   "a": "**For a full minute by palpating the radial artery.**\n\n## Understanding it\n- Counting a full minute (not extrapolating) catches irregularity accurately.\n\n>> Radial pulse, full minute.",
+   "opts": [
+    "From the ECG only",
+    "Carotid, for 10 seconds",
+    "Radial artery, for a full minute",
+    "At the apex for 15 seconds"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give the causes of tachycardia.",
+   "a": "**Rheumatic fever, congestive cardiac failure and arrhythmias.**\n\n## Understanding it\n- A fast pulse in cardiology points to fever/inflammation (rheumatic fever), failure, or arrhythmia.\n\n>> Tachycardia: rheumatic fever, CCF, arrhythmias.",
+   "opts": [
+    "Hypothermia",
+    "Rheumatic fever, CCF, arrhythmias",
+    "Complete heart block",
+    "Sick sinus syndrome"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the causes of bradycardia.",
+   "a": "**Complete heart block and sick sinus syndrome (sino-atrial disease).**\n\n## Understanding it\n- A slow pulse points to a **conduction/pacemaker** problem.\n\n>> Bradycardia: complete heart block, sick sinus syndrome.",
+   "opts": [
+    "Rheumatic fever",
+    "Complete heart block, sick sinus syndrome",
+    "Fever",
+    "Congestive cardiac failure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What rhythm is 'regularly irregular' and what does it indicate?",
+   "a": "**Sinus arrhythmia — a normal variant where the rate rises on inspiration and falls on expiration.**\n\n## Understanding it\n- A **predictable** irregularity linked to breathing is benign sinus arrhythmia (vagal tone).\n\n>> Regularly irregular = sinus arrhythmia (normal).",
+   "opts": [
+    "Ventricular tachycardia",
+    "Complete heart block",
+    "Sinus arrhythmia (normal — varies with breathing)",
+    "Atrial fibrillation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What rhythm is 'irregularly irregular' and what does it indicate?",
+   "a": "**Atrial fibrillation, or atrial flutter with varying heart block.**\n\n## Understanding it\n- A **chaotic, unpredictable** rhythm = AF (or variable-block flutter).\n\n>> Irregularly irregular = atrial fibrillation.",
+   "opts": [
+    "Atrial fibrillation (or variable-block flutter)",
+    "Complete heart block",
+    "Normal rhythm",
+    "Sinus arrhythmia"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is pulse volume assessed, and what gives the accurate measurement?",
+   "a": "**By palpating the carotid artery; pulse pressure gives the accurate measurement.**\n\n## Understanding it\n- Volume is judged at the large **carotid**; the true measure is the **pulse pressure** (systolic − diastolic).\n\n>> Assess volume at the carotid; pulse pressure quantifies it.",
+   "opts": [
+    "Palpate the carotid; pulse pressure quantifies it",
+    "From the ECG",
+    "By the murmur grade",
+    "Palpate the toe; heart rate quantifies it"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give the pulse pressure values for normal, low and high volume pulses.",
+   "a": "**Normal 30–60 mmHg; low volume <30 mmHg; high volume >60 mmHg.**\n\n## Understanding it\n- Pulse pressure = systolic − diastolic; outside 30–60 signals low/high volume pulses.\n\n>> Normal 30–60; <30 low; >60 high.",
+   "opts": [
+    "Low >60; high <30",
+    "Normal 100–120",
+    "There is no normal range",
+    "Normal 30–60; low <30; high >60 mmHg"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of a large volume (bounding) pulse.",
+   "a": "**Aortic incompetence (AR), PDA, arteriovenous fistula, and persistent truncus arteriosus.**\n\n## Understanding it\n- A big pulse pressure (bounding) comes from **run-off** lesions (blood leaks back or shunts away in diastole).\n\n>> Bounding pulse: AR, PDA, AV fistula, truncus.",
+   "opts": [
+    "Coarctation (lower limb)",
+    "Aortic stenosis",
+    "Pericardial effusion",
+    "AR, PDA, AV fistula, truncus arteriosus"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of a small volume (weak, thready) pulse.",
+   "a": "**CCF, pericardial effusion, constrictive pericarditis, and the lower limb in coarctation.**\n\n## Understanding it\n- Low stroke volume/output (failure, tamponade physiology, obstruction) gives a **weak** pulse.\n\n>> Weak pulse: CCF, effusion, constriction, coarctation (legs).",
+   "opts": [
+    "CCF, pericardial effusion, constriction, coarctation (legs)",
+    "PDA",
+    "AV fistula",
+    "Aortic regurgitation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is an anacrotic (parvus et tardus) pulse and its cause?",
+   "a": "**A low-amplitude, slow-rising pulse with a late peak; seen in aortic stenosis.**\n\n## Understanding it\n- A stenosed aortic valve makes the pulse rise **slowly and small** ('parvus et tardus').\n\n>> Slow-rising, small pulse = aortic stenosis.",
+   "opts": [
+    "Alternating pulse — LVF",
+    "Slow-rising, low-amplitude pulse — aortic stenosis",
+    "Rapid collapsing pulse — AR",
+    "Paradoxical pulse — tamponade"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is a collapsing pulse and its cause?",
+   "a": "**A pulse with a rapid upstroke and rapid downstroke and large stroke volume; seen in aortic regurgitation.**\n\n## Understanding it\n- Blood leaks back in diastole, so the pulse rises fast then **collapses** ('water-hammer').\n\n>> Collapsing (water-hammer) pulse = aortic regurgitation (and PDA).",
+   "opts": [
+    "Rapid rise and collapse — aortic regurgitation",
+    "Alternating — LVF",
+    "Paradoxical — tamponade",
+    "Slow-rising — aortic stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is pulsus alterans and its cause?",
+   "a": "**Alternating small- and large-volume beats; seen in severe left ventricular failure.**\n\n## Understanding it\n- A failing LV can't contract equally each beat → alternating strong/weak pulses.\n\n>> Pulsus alternans = severe LV failure.",
+   "opts": [
+    "Alternating strong/weak beats — severe LV failure",
+    "Collapsing — AR",
+    "Paradoxical — tamponade",
+    "Slow-rising — aortic stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is pulsus paradoxus and its causes?",
+   "a": "**A fall in blood pressure of more than 10 mmHg during inspiration; seen in cardiac tamponade and constrictive pericarditis (and severe asthma).**\n\n## Understanding it\n- An exaggeration of the normal inspiratory BP drop; the compressed heart can't fill enough on inspiration.\n\n>> Pulsus paradoxus (>10 mmHg inspiratory drop) = tamponade/constriction.",
+   "opts": [
+    "Rapid collapsing pulse",
+    "A normal finding",
+    "Aortic stenosis",
+    "Inspiratory BP fall >10 mmHg — tamponade/constriction"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is pulse deficit and what causes it?",
+   "a": "**The difference between heart rate and pulse rate counted simultaneously; caused by atrial fibrillation (some beats are too weak to reach the wrist).**\n\n## Understanding it\n- In AF, some ventricular beats are too weak to produce a palpable pulse → apical rate > radial rate.\n\n>> Pulse deficit (apical > radial) = atrial fibrillation.",
+   "opts": [
+    "Apical−radial rate difference — atrial fibrillation",
+    "A normal variant",
+    "Bradycardia",
+    "Aortic stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What causes radio-radial delay?",
+   "a": "**Pre-subclavian coarctation and supravalvular aortic stenosis.**\n\n## Understanding it\n- A delay between the two radial pulses means an obstruction **before/around the subclavian origin**.\n\n>> Radio-radial delay: pre-subclavian coarctation, supravalvular AS.",
+   "opts": [
+    "Normal finding",
+    "Aortic regurgitation",
+    "Atrial fibrillation",
+    "Pre-subclavian coarctation, supravalvular AS"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes radio-femoral delay?",
+   "a": "**Coarctation of the aorta and aortic embolism.**\n\n## Understanding it\n- A delay between arm and leg pulses means an aortic obstruction **between them** — classically **coarctation**.\n\n>> Radio-femoral delay = coarctation of the aorta.",
+   "opts": [
+    "A normal finding",
+    "Coarctation of the aorta (and aortic embolism)",
+    "Atrial fibrillation",
+    "Aortic regurgitation"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the correct blood pressure cuff dimensions?",
+   "a": "**Width 40% of the arm circumference; length 80–100% of the arm circumference.**\n\n## Understanding it\n- Cuff size must match the arm or the reading is falsely high/low.\n\n>> Width 40%, length 80–100% of arm circumference.",
+   "opts": [
+    "Width 80%, length 40%",
+    "Width 40%, length 80–100% of arm circumference",
+    "Width 10%, length 20%",
+    "One size fits all"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the effect of using a BP cuff that is too small?",
+   "a": "**It reads falsely high.**\n\n## Understanding it\n- A small cuff needs extra pressure to compress the artery → **overestimates** BP.\n\n>> Too-small cuff → falsely high BP.",
+   "opts": [
+    "It cannot measure at all",
+    "It reads falsely high",
+    "It reads falsely low",
+    "No effect"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the effect of using a BP cuff that is too large?",
+   "a": "**It reads falsely low.**\n\n## Understanding it\n- A large cuff compresses the artery too easily → **underestimates** BP.\n\n>> Too-large cuff → falsely low BP.",
+   "opts": [
+    "It reads falsely low",
+    "No effect",
+    "It reads falsely high",
+    "It doubles the reading"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is the JVP expressed and at what angle is the patient?",
+   "a": "**As the vertical height from the sternal angle to the top of the distended internal jugular vein, with the patient reclined at 45°.**\n\n## Understanding it\n- The JVP is measured **vertically from the sternal angle** at **45°**.\n\n>> Vertical height above the sternal angle, patient at 45°.",
+   "opts": [
+    "From the umbilicus, lying flat",
+    "From the chin, patient upright",
+    "Vertical height above the sternal angle, patient at 45°",
+    "Measured horizontally"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does the JVP indicate?",
+   "a": "**Right atrial pressure.**\n\n## Understanding it\n- The internal jugular connects directly to the right atrium, so its level reflects **right atrial pressure**.\n\n>> JVP = right atrial pressure.",
+   "opts": [
+    "Pulmonary artery pressure",
+    "Right atrial pressure",
+    "Left atrial pressure",
+    "Arterial pressure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the formula for right atrial pressure from the JVP.",
+   "a": "**Right atrial pressure = vertical height of the blood column + 5 cm H2O (the sternal angle sits ~5 cm above the right atrium).**\n\n## Understanding it\n- Add ~5 cm because the reference (sternal angle) is 5 cm above the atrium.\n\n>> RA pressure = JVP height + 5 cm H2O.",
+   "opts": [
+    "JVP height − 5",
+    "JVP height × 2",
+    "JVP height + 5 cm H2O",
+    "JVP height alone"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the normal JVP?",
+   "a": "**Less than 8 cm H2O, or less than 6 mmHg.**\n\n## Understanding it\n- Normal right atrial pressure keeps the JVP low (<8 cm H2O / <6 mmHg).\n\n>> Normal JVP <8 cm H2O (<6 mmHg).",
+   "opts": [
+    "There is no normal value",
+    "<40 cm H2O",
+    "<120 mmHg",
+    "<8 cm H2O (<6 mmHg)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of an elevated JVP.",
+   "a": "**CCF, tricuspid stenosis, tricuspid regurgitation, constrictive pericarditis and cardiac tamponade.**\n\n## Understanding it\n- Anything that raises **right atrial pressure** or impairs filling raises the JVP.\n\n>> Elevated JVP: CCF, TS, TR, constriction, tamponade.",
+   "opts": [
+    "Hypovolaemia",
+    "CCF, TS, TR, constrictive pericarditis, tamponade",
+    "Shock",
+    "Dehydration"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the causes of a low JVP.",
+   "a": "**Hypovolaemia and shock.**\n\n## Understanding it\n- Low circulating volume drops right atrial pressure → **low JVP**.\n\n>> Low JVP = hypovolaemia/shock.",
+   "opts": [
+    "Tamponade",
+    "Hypovolaemia and shock",
+    "Tricuspid stenosis",
+    "Heart failure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is Kussmaul's sign and its causes?",
+   "a": "**A paradoxical rise in JVP on inspiration; seen in constrictive pericarditis, cardiac tamponade and restrictive cardiomyopathy.**\n\n## Understanding it\n- Normally the JVP falls on inspiration; if the right heart can't accommodate the extra venous return, the JVP **rises** instead.\n\n>> Kussmaul's sign (JVP rises on inspiration) = constriction/tamponade/restriction.",
+   "opts": [
+    "Hypovolaemia",
+    "JVP falls on inspiration (normal)",
+    "Aortic stenosis",
+    "JVP rises on inspiration — constriction/tamponade/restriction"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is Friedreich's sign?",
+   "a": "**A rapid fall and rise of the JVP; seen in tricuspid regurgitation and constrictive pericarditis.**\n\n## Understanding it\n- A sharp collapse and rebound of the venous pulse in constriction/TR.\n\n>> Friedreich's sign: rapid JVP fall-and-rise (TR, constriction).",
+   "opts": [
+    "A slow steady JVP rise",
+    "A normal finding",
+    "Rapid fall-and-rise of the JVP — TR/constriction",
+    "Aortic stenosis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does a visible precordial bulge suggest?",
+   "a": "**Long-standing cardiac disease.**\n\n## Understanding it\n- Chronic cardiac enlargement in childhood, while the chest is still pliable, deforms the precordium.\n\n>> Precordial bulge = long-standing (childhood) heart disease.",
+   "opts": [
+    "A normal chest",
+    "Long-standing cardiac disease",
+    "An acute infection",
+    "A lung tumour"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the causes of visible carotid pulsations.",
+   "a": "**Hyperdynamic states, aortic regurgitation and coarctation.**\n\n## Understanding it\n- Big-stroke-volume/bounding states make the carotids visibly pulsate (Corrigan's sign in AR).\n\n>> Visible carotids: hyperdynamic states, AR, coarctation.",
+   "opts": [
+    "Hyperdynamic states, AR, coarctation",
+    "Hypovolaemia",
+    "Pericardial effusion",
+    "Aortic stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give the causes of visible epigastric pulsations.",
+   "a": "**Pulsation of the liver in CHF with TR, RVH, abdominal aortic aneurysm and tricuspid stenosis.**\n\n## Understanding it\n- Epigastric pulsation reflects a **pulsatile liver (TR/CHF)**, **RVH**, or an **aortic aneurysm**.\n\n>> Epigastric pulsation: pulsatile liver (TR/CHF), RVH, AAA.",
+   "opts": [
+    "A normal finding",
+    "Pulsatile liver (TR/CHF), RVH, aortic aneurysm",
+    "Aortic stenosis only",
+    "Peripheral cyanosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the general rule for which part of the hand detects pulsations, thrills and heaves.",
+   "a": "**Fingertips feel pulsations; the base of the fingers feels thrills; the base of the hand (ulnar border) feels heaves.**\n\n## Understanding it\n- Different sensitivities: tips for fine pulsation, finger-bases for vibratory thrills, palm-base for sustained heaves.\n\n>> Tips = pulsations; finger bases = thrills; palm base = heaves.",
+   "opts": [
+    "Palm base for everything",
+    "Fingertips pulsations, finger bases thrills, palm base heaves",
+    "Only the thumb is used",
+    "Fingertips for everything"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define the apical impulse.",
+   "a": "**The lowermost and outermost point of definite cardiac impulse that gives maximum thrust to the palpating finger.**\n\n## Understanding it\n- The apex beat is the **most inferolateral** point where the heart's impulse is clearly felt.\n\n>> Apical impulse = the lowest, most lateral definite cardiac thrust.",
+   "opts": [
+    "The lowest, most lateral point of definite cardiac impulse",
+    "The liver edge",
+    "The carotid pulsation",
+    "The point over the aortic valve"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Where is the normal apical impulse in infancy?",
+   "a": "**Left 4th intercostal space, lateral to the mid-clavicular line.**\n\n## Understanding it\n- In infants the apex is one space higher and more lateral than in adults.\n\n>> Infancy: 4th ICS, lateral to MCL.",
+   "opts": [
+    "5th ICS, medial to MCL",
+    "Left 4th ICS, lateral to the mid-clavicular line",
+    "2nd ICS right border",
+    "At the xiphisternum"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where is the normal apical impulse at approximately 5 years?",
+   "a": "**Left 5th intercostal space, in the mid-clavicular line.**\n\n## Understanding it\n- By ~5 years the apex settles at the classic **5th ICS, MCL**.\n\n>> Age 5: 5th ICS, in the MCL.",
+   "opts": [
+    "4th ICS lateral to MCL",
+    "At the apex of the axilla",
+    "Left 5th ICS, in the mid-clavicular line",
+    "2nd ICS left border"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where is the normal apical impulse in older children?",
+   "a": "**Left 5th intercostal space, medial to the mid-clavicular line.**\n\n## Understanding it\n- In older children it lies just **medial** to the MCL at the 5th ICS.\n\n>> Older children: 5th ICS, medial to MCL.",
+   "opts": [
+    "Left 5th ICS, medial to the mid-clavicular line",
+    "At the epigastrium",
+    "2nd ICS right border",
+    "4th ICS lateral to MCL"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is a tapping apex and what does it indicate?",
+   "a": "**A palpable first heart sound; seen in mitral stenosis.**\n\n## Understanding it\n- A loud, palpable S1 gives a 'tapping' quality — classic for **mitral stenosis**.\n\n>> Tapping apex = palpable S1 = mitral stenosis.",
+   "opts": [
+    "A palpable S1 — mitral stenosis",
+    "A sustained apex — hypertrophy",
+    "A displaced apex — dilatation",
+    "A normal apex"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is a hyperdynamic apex and what does it indicate?",
+   "a": "**A diffuse, displaced apex; characteristic of ventricular dilatation (volume overload).**\n\n## Understanding it\n- Volume overload dilates the ventricle → a **diffuse, displaced** (hyperdynamic) apex.\n\n>> Hyperdynamic (diffuse, displaced) apex = volume overload/dilatation.",
+   "opts": [
+    "A normal apex",
+    "Diffuse, displaced apex — volume overload (dilatation)",
+    "Tapping apex — mitral stenosis",
+    "Sustained apex — pressure overload"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is a heaving apex and what does it indicate?",
+   "a": "**A sustained, forceful apex; characteristic of ventricular hypertrophy (pressure overload).**\n\n## Understanding it\n- Pressure overload thickens the ventricle → a **sustained, forceful (heaving)** apex.\n\n>> Heaving (sustained) apex = pressure overload/hypertrophy.",
+   "opts": [
+    "Sustained, forceful apex — pressure overload (hypertrophy)",
+    "A normal apex",
+    "Tapping apex — mitral stenosis",
+    "Diffuse apex — dilatation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is a parasternal heave and what does it indicate?",
+   "a": "**A palpable thrust lifting the hand at the left sternal edge; seen in right ventricular hypertrophy and left atrial enlargement.**\n\n## Understanding it\n- A left parasternal heave reflects an enlarged/overloaded **right ventricle** (or big left atrium pushing forward).\n\n>> Parasternal heave = RVH (or left atrial enlargement).",
+   "opts": [
+    "Left ventricular hypertrophy only",
+    "A normal finding",
+    "Aortic stenosis",
+    "RVH and left atrial enlargement"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is a parasternal heave graded?",
+   "a": "**(1) instant lift, visible not palpable; (2) visible and palpable, obliterable; (3) visible, palpable and not obliterable.**\n\n## Understanding it\n- Graded 1–3 by whether it's palpable and whether hand pressure can obliterate it.\n\n>> Grade 1 visible only → grade 3 palpable and non-obliterable.",
+   "opts": [
+    "Grade 1 visible; 2 palpable/obliterable; 3 palpable/non-obliterable",
+    "Grades 1–6 like murmurs",
+    "Present or absent only",
+    "Graded by loudness"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is a thrill and what grade of murmur does it accompany?",
+   "a": "**A palpable vibration of a murmur, accompanying any organic murmur of grade 3 or more.**\n\n## Understanding it\n- A thrill is a **felt** murmur; by definition it means the murmur is **≥ grade 4/6** (or grade 3 in the 1–4 scale used here).\n\n>> Thrill = palpable murmur = grade ≥3 (organic).",
+   "opts": [
+    "Present only in diastole",
+    "A palpable murmur — grade ≥3 (organic)",
+    "Always innocent",
+    "A heart sound"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are heart sounds produced by?",
+   "a": "**Closure of the heart valves.**\n\n## Understanding it\n- The audible heart sounds come from **valve closure**, not opening.\n\n>> Heart sounds = valve closure.",
+   "opts": [
+    "Opening of the valves",
+    "Muscle contraction alone",
+    "Closure of the heart valves",
+    "Blood hitting the chest wall"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What produces the first heart sound (S1)?",
+   "a": "**Closure of the atrioventricular (mitral and tricuspid) valves at the start of systole.**\n\n## Understanding it\n- S1 = AV valve closure, marking the **beginning of systole**.\n\n>> S1 = mitral + tricuspid closure (start of systole).",
+   "opts": [
+    "Valve opening",
+    "Aortic+pulmonary closure",
+    "Atrial contraction",
+    "AV (mitral+tricuspid) valve closure — start of systole"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What produces the second heart sound (S2)?",
+   "a": "**Closure of the semilunar (aortic and pulmonary) valves at the end of systole.**\n\n## Understanding it\n- S2 = aortic + pulmonary closure, marking the **end of systole**.\n\n>> S2 = aortic + pulmonary closure (end of systole).",
+   "opts": [
+    "Mitral+tricuspid closure",
+    "Ventricular filling",
+    "Semilunar (aortic+pulmonary) closure — end of systole",
+    "Valve opening"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where is the aortic area?",
+   "a": "**2nd intercostal space, right sternal border.**\n\n## Understanding it\n- Aortic valve sounds are best heard at the **right 2nd ICS**.\n\n>> Aortic area: right 2nd ICS.",
+   "opts": [
+    "Left lower sternal border",
+    "5th ICS mid-clavicular",
+    "2nd ICS, right sternal border",
+    "2nd ICS left border"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where is the pulmonary area?",
+   "a": "**2nd intercostal space, left sternal border.**\n\n## Understanding it\n- Pulmonary valve sounds are best heard at the **left 2nd ICS**.\n\n>> Pulmonary area: left 2nd ICS.",
+   "opts": [
+    "2nd ICS right border",
+    "2nd ICS, left sternal border",
+    "Left lower sternal border",
+    "Apex"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where is the tricuspid area?",
+   "a": "**Left lower sternal border.**\n\n## Understanding it\n- Tricuspid sounds are best heard at the **left lower sternal edge**.\n\n>> Tricuspid area: left lower sternal border.",
+   "opts": [
+    "Left 2nd ICS",
+    "Left lower sternal border",
+    "Apex (5th ICS MCL)",
+    "Right 2nd ICS"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where is the mitral area?",
+   "a": "**5th intercostal space, mid-clavicular line (the apex).**\n\n## Understanding it\n- Mitral sounds are best heard at the **apex** (5th ICS, MCL).\n\n>> Mitral area = the apex (5th ICS, MCL).",
+   "opts": [
+    "Right 2nd ICS",
+    "5th ICS, mid-clavicular line (apex)",
+    "Left lower sternal border",
+    "Left 2nd ICS"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give causes of a soft S1.",
+   "a": "**Mitral regurgitation, tricuspid regurgitation, and calcification of the AV valves.**\n\n## Understanding it\n- A leaky or stiff/calcified AV valve closes poorly → **soft S1**.\n\n>> Soft S1: MR, TR, AV valve calcification.",
+   "opts": [
+    "MR, TR, AV valve calcification",
+    "Mitral stenosis",
+    "High-output states",
+    "Tricuspid stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give causes of a loud S1.",
+   "a": "**Mitral stenosis, tricuspid stenosis, and high-output states.**\n\n## Understanding it\n- A stenosed AV valve slams shut from a wide-open position → **loud S1** (also high-output/tachycardia).\n\n>> Loud S1: MS, TS, high-output states.",
+   "opts": [
+    "AV valve calcification",
+    "Mitral regurgitation",
+    "MS, TS, high-output states",
+    "Aortic regurgitation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give causes of a loud P2.",
+   "a": "**Pulmonary hypertension, ASD, PDA and large VSD.**\n\n## Understanding it\n- Raised pulmonary pressure (directly or via a big left-to-right shunt) makes the **pulmonary component of S2 loud**.\n\n>> Loud P2: pulmonary hypertension, ASD, PDA, large VSD.",
+   "opts": [
+    "TOF",
+    "TGA",
+    "Pulmonary hypertension, ASD, PDA, large VSD",
+    "Pulmonary stenosis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give causes of an absent P2.",
+   "a": "**Pulmonary stenosis, TOF and TGA.**\n\n## Understanding it\n- A stenosed/malpositioned pulmonary valve closes feebly → **soft or absent P2**.\n\n>> Absent P2: PS, TOF, TGA.",
+   "opts": [
+    "Pulmonary stenosis, TOF, TGA",
+    "Pulmonary hypertension",
+    "Large VSD",
+    "ASD"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the four patterns of S2 splitting and their causes?",
+   "a": "**Wide fixed (ASD); wide variable (VSD, RBBB, PS); narrow (severe AS/PS); and reversed (aortic stenosis, LBBB).**\n\n## Understanding it\n- The pattern of S2 splitting localises the problem: fixed split is the ASD hallmark.\n\n>> Wide-fixed = ASD; reversed = AS/LBBB.",
+   "opts": [
+    "Splitting is always abnormal",
+    "Wide-fixed (ASD), wide-variable, narrow, reversed (AS/LBBB)",
+    "Only one pattern exists",
+    "Splitting only occurs in diastole"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does the second heart sound split during inspiration?",
+   "a": "**Negative intrathoracic pressure increases right heart filling, so the RV takes longer to empty and the pulmonary valve closes later than the aortic.**\n\n## Understanding it\n- Inspiration → more venous return to the RV → **delayed P2** → audible split.\n\n>> Inspiration delays P2 (more RV filling) → physiological split.",
+   "opts": [
+    "It is always pathological",
+    "Inspiration increases RV filling, delaying pulmonary valve closure",
+    "Inspiration delays aortic closure",
+    "The valves close simultaneously"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does an ASD cause a fixed split S2?",
+   "a": "**The left-to-right shunt keeps the right ventricle volume-overloaded all the time, so respiration no longer changes the timing — the split is fixed.**\n\n## Understanding it\n- The constant extra RV volume overrides the normal respiratory variation → the split doesn't change with breathing.\n\n>> ASD's constant RV overload → fixed (unvarying) split S2.",
+   "opts": [
+    "Constant RV volume overload removes respiratory variation",
+    "There is no shunt",
+    "The aortic valve is absent",
+    "It varies widely with breathing"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why does pulmonary stenosis cause a widely split S2?",
+   "a": "**The RV takes notably longer to empty through the narrow pulmonary valve, delaying pulmonary closure and widening the split.**\n\n## Understanding it\n- A tight pulmonary valve slows RV emptying → **late P2** → wide split.\n\n>> PS delays P2 → widely split S2.",
+   "opts": [
+    "There is no shunt",
+    "The valves close together",
+    "The RV empties slowly through the narrow valve, delaying P2",
+    "The aortic valve closes late"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give the causes of a physiological S3.",
+   "a": "**Children and young adults (a normal finding).**\n\n## Understanding it\n- A soft S3 from rapid ventricular filling is normal in the young.\n\n>> Physiological S3: normal in children/young adults.",
+   "opts": [
+    "Only in the elderly",
+    "Normal in children and young adults",
+    "Always pathological",
+    "Aortic stenosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the causes of a pathological S3.",
+   "a": "**High-output states, CHD with shunts (ASD, VSD, PDA), and MR, TR, AR.**\n\n## Understanding it\n- In older patients or with volume overload, an S3 signals **failure or a large shunt/regurgitation**.\n\n>> Pathological S3: high output, big shunts, MR/TR/AR.",
+   "opts": [
+    "Normal childhood finding",
+    "Aortic stenosis",
+    "Pulmonary stenosis",
+    "High-output states, ASD/VSD/PDA, MR/TR/AR"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is an opening snap and where is it heard?",
+   "a": "**A high-pitched sound from opening of a stenosed AV valve; heard at the apex (mitral) or lower sternal border (tricuspid).**\n\n## Understanding it\n- A stiff but mobile stenosed valve **snaps open** — classic for **mitral stenosis**.\n\n>> Opening snap = AV-valve opening in stenosis (mitral → apex).",
+   "opts": [
+    "A normal S1",
+    "AV-valve opening in stenosis — apex (mitral)/LSB (tricuspid)",
+    "At the aortic area only",
+    "Semilunar valve closure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is an ejection click and when is it seen?",
+   "a": "**A sharp click from sudden swelling of the pulmonary artery or aorta; seen in valvular AS/PS and dilated great arteries.**\n\n## Understanding it\n- A doming stenosed semilunar valve or a dilated great artery produces an early **ejection click**.\n\n>> Ejection click = valvular AS/PS or dilated aorta/PA.",
+   "opts": [
+    "AV-valve stenosis",
+    "Mitral regurgitation",
+    "A normal S2",
+    "Valvular AS/PS or dilated great artery"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe a pericardial rub.",
+   "a": "**Due to two inflamed pericardial layers sliding; a scratching, grating, triphasic sound best heard leaning forward at the left sternal edge.**\n\n## Understanding it\n- Inflamed pericardium rubs with each cardiac movement → a rough **triphasic** sound (pericarditis).\n\n>> Pericardial rub = scratchy, triphasic, leaning forward (pericarditis).",
+   "opts": [
+    "A soft blowing murmur",
+    "Opening of a valve",
+    "Scratchy, triphasic sound of inflamed pericardium (pericarditis)",
+    "A normal heart sound"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What causes a murmur?",
+   "a": "**Turbulence — increased flow through a normal/stenosed valve, or normal flow through a stenosed/regurgitant valve.**\n\n## Understanding it\n- Murmurs are **turbulent blood flow** — either too much flow or an abnormal valve/opening.\n\n>> Murmur = turbulent flow (high flow or abnormal valve).",
+   "opts": [
+    "Turbulent blood flow (high flow or abnormal valve)",
+    "The heartbeat itself",
+    "Valve closure",
+    "Normal laminar flow"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the features used to describe a murmur.",
+   "a": "**Pitch, timing/character, systolic or diastolic, area best heard, intensity (grade), radiation, and response to manoeuvres.**\n\n## Understanding it\n- Fully characterising a murmur pins down its cause.\n\n>> Timing, area, grade, character, radiation, dynamic response.",
+   "opts": [
+    "Only how loud it is",
+    "Colour and temperature",
+    "Only the patient's age",
+    "Timing, area, grade, character, radiation, dynamic response"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of a pansystolic murmur and where each is loudest.",
+   "a": "**Mitral regurgitation (apex), tricuspid regurgitation (left sternal border), and VSD (left sternal border).**\n\n## Understanding it\n- Pansystolic (holosystolic) murmurs come from **regurgitation** or a **VSD**, each with its own site.\n\n>> Pansystolic: MR (apex), TR (LSB), VSD (LSB).",
+   "opts": [
+    "Mitral stenosis (apex)",
+    "Only PDA",
+    "Aortic stenosis (aortic area)",
+    "MR (apex), TR (LSB), VSD (LSB)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of an ejection-systolic murmur and where each is loudest.",
+   "a": "**Aortic stenosis (aortic area), pulmonary stenosis (pulmonary area), and HOCM (left sternal edge).**\n\n## Understanding it\n- Ejection-systolic (crescendo-decrescendo) murmurs come from **outflow obstruction**.\n\n>> Ejection-systolic: AS (aortic), PS (pulmonary), HOCM (LSE).",
+   "opts": [
+    "AS (aortic area), PS (pulmonary area), HOCM (LSE)",
+    "Mitral regurgitation (apex)",
+    "PDA (continuous)",
+    "VSD (LSB)"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What character does an ejection-systolic murmur have and why?",
+   "a": "**Crescendo-decrescendo — it matches systolic flow, which is slowest at the start and end and fastest in mid-systole.**\n\n## Understanding it\n- Flow (and turbulence) rises then falls through systole, so the murmur **grows then fades**.\n\n>> Ejection-systolic = crescendo-decrescendo (peaks in mid-systole).",
+   "opts": [
+    "Crescendo-decrescendo, matching mid-systolic peak flow",
+    "Loudest at the very end",
+    "Only in diastole",
+    "Uniform throughout (plateau)"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give the causes of an early diastolic murmur.",
+   "a": "**Aortic regurgitation and pulmonary regurgitation.**\n\n## Understanding it\n- Leaking **semilunar** valves cause blood to fall back right after S2 → an **early diastolic** murmur.\n\n>> Early diastolic: AR, PR.",
+   "opts": [
+    "VSD",
+    "Aortic regurgitation and pulmonary regurgitation",
+    "Mitral stenosis",
+    "Aortic stenosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the cause of a mid-diastolic murmur.",
+   "a": "**Mitral stenosis.**\n\n## Understanding it\n- A stenosed mitral valve obstructs ventricular filling in **mid-diastole**.\n\n>> Mid-diastolic murmur = mitral stenosis.",
+   "opts": [
+    "Aortic stenosis",
+    "Aortic regurgitation",
+    "PDA",
+    "Mitral stenosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Give the causes of a late diastolic murmur.",
+   "a": "**Mitral stenosis, tricuspid stenosis and atrial myxomas.**\n\n## Understanding it\n- Presystolic accentuation (atrial contraction pushing through a stenosed AV valve) gives a **late diastolic** murmur.\n\n>> Late diastolic: MS, TS, atrial myxoma.",
+   "opts": [
+    "Aortic regurgitation",
+    "MS, TS, atrial myxoma",
+    "VSD",
+    "Aortic stenosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Give the causes of a continuous murmur.",
+   "a": "**PDA, ruptured sinus of Valsalva and coronary AV fistula.**\n\n## Understanding it\n- Continuous murmurs come from a persistent pressure gradient across **systole and diastole** (e.g. aorta→PA in PDA).\n\n>> Continuous: PDA, ruptured sinus of Valsalva, coronary AV fistula.",
+   "opts": [
+    "Mitral stenosis",
+    "Aortic stenosis",
+    "VSD",
+    "PDA, ruptured sinus of Valsalva, coronary AV fistula"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Grade a systolic murmur from 1 to 6.",
+   "a": "**1 very soft; 2 soft, easily audible; 3 moderate, no thrill; 4 loud with thrill; 5 audible with stethoscope barely on the chest; 6 audible with the stethoscope off the chest.**\n\n## Understanding it\n- The **thrill starts at grade 4**; grades 5–6 are audible with minimal/no contact.\n\n>> 1–3 no thrill; ≥4 has a thrill; 6 audible off the chest.",
+   "opts": [
+    "1–4 scale only",
+    "1–3 no thrill; 4 loud+thrill; 5 near-off; 6 off the chest",
+    "Graded by pitch",
+    "Loudness doesn't matter"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the characteristic 'S' features of an innocent murmur.",
+   "a": "**Soft, Single (S1/S2 normal), Short, Sweet (musical), Systolic, Symptomless, Sensitive (varies with position), and Situation-dependent (quieter on standing).**\n\n## Understanding it\n- The many 'S' words all describe a **benign, position-sensitive systolic** murmur.\n\n>> Innocent = the 'S' murmur: soft, short, systolic, symptomless, position-sensitive.",
+   "opts": [
+    "Continuous with cyanosis",
+    "Always grade 4+",
+    "Soft, short, systolic, symptomless, position-sensitive ('S' features)",
+    "Loud, diastolic, with a thrill"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What supporting findings accompany an innocent murmur?",
+   "a": "**Less than grade 3, no cyanosis, normal pulses, normal heart sounds, and a normal cardiac silhouette.**\n\n## Understanding it\n- An innocent murmur sits with an otherwise **entirely normal** cardiovascular exam.\n\n>> Innocent murmur: <grade 3, normal pulses/sounds/CXR, no cyanosis.",
+   "opts": [
+    "A diastolic component",
+    "Grade 4 with a thrill",
+    "Cyanosis and clubbing",
+    "<grade 3, normal pulses/sounds/CXR, no cyanosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What features of a murmur should prompt referral?",
+   "a": "**A murmur louder than 2/6, any diastolic murmur, one louder on standing, or associated symptoms (failure to thrive, cyanosis).**\n\n## Understanding it\n- Loud, diastolic, dynamic-suspicious, or symptomatic murmurs are **pathological** → refer.\n\n>> Refer: >2/6, any diastolic, louder standing, or symptomatic.",
+   "opts": [
+    ">2/6, diastolic, louder on standing, or symptomatic",
+    "A murmur that softens on standing",
+    "Symptomless grade 1",
+    "Soft short systolic murmur"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why does an atrial septal defect cause a fixed split second heart sound?",
+   "a": "**Blood flows left-to-right into the right atrium, keeping RV volume constantly increased, so respiration no longer changes the timing — the split is fixed.**\n\n## Understanding it\n- The steady extra RV volume overrides normal respiratory variation → **fixed split**.\n\n>> ASD = constant RV overload → fixed split S2.",
+   "opts": [
+    "The aortic valve closes late",
+    "It varies widely with breathing",
+    "Constant RV volume overload removes respiratory variation",
+    "There is no shunt"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the effect of respiration on murmurs during dynamic auscultation?",
+   "a": "**During inspiration, right-sided murmurs become louder while left-sided murmurs become softer or unchanged.**\n\n## Understanding it\n- Inspiration increases venous return to the **right** heart → right-sided murmurs (TR, PS) **louder** (Rivero-Carvallo sign).\n\n>> Inspiration → louder RIGHT-sided murmurs.",
+   "opts": [
+    "Inspiration louder right-sided; left-sided softer/unchanged",
+    "All murmurs vanish on inspiration",
+    "No murmur changes with breathing",
+    "Inspiration louder left-sided"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the effect of the Valsalva manoeuvre on murmurs?",
+   "a": "**It raises intrathoracic pressure and reduces venous return; the murmurs of MVP and HOCM become louder, while most others (e.g. AS ejection murmur) become softer.**\n\n## Understanding it\n- Less filling → smaller ventricle → **HOCM/MVP louder** (paradoxically), others softer.\n\n>> Valsalva: HOCM and MVP louder; most others softer.",
+   "opts": [
+    "All murmurs softer",
+    "No effect",
+    "All murmurs louder",
+    "HOCM and MVP louder; most others softer"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the effect of squatting on the HOCM murmur?",
+   "a": "**It becomes softer, because squatting increases venous return and diastolic (ventricular) volume.**\n\n## Understanding it\n- More filling → larger LV cavity → less outflow obstruction → **HOCM murmur softer**.\n\n>> Squatting → bigger LV → HOCM murmur softer.",
+   "opts": [
+    "Louder — less filling",
+    "Softer — squatting increases venous return/LV volume",
+    "It disappears the pulse",
+    "No change"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the effect of isometric hand grip on murmurs?",
+   "a": "**It increases systemic vascular resistance; regurgitant murmurs (MR, VSD, AR) become louder, while the AS ejection murmur and HOCM become softer.**\n\n## Understanding it\n- Higher afterload favours **backward (regurgitant)** flow → MR/VSD/AR **louder**; forward-obstruction murmurs softer.\n\n>> Hand grip (↑afterload): regurgitant murmurs louder; AS/HOCM softer.",
+   "opts": [
+    "All murmurs softer",
+    "AS becomes louder",
+    "Regurgitant murmurs (MR/VSD/AR) louder; AS/HOCM softer",
+    "No effect"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What is the correct sequence of the CVS examination check-off?",
+   "a": "**Courtesy; inspection; pulse palpation with synchrony; blood pressure; JVP; precordium (inspection, palpation); then auscultation.**\n\n## Understanding it\n- The OSPE check-off runs from **courtesy → inspection → peripheral pulses → BP → JVP → precordium → auscultation**.\n\n>> Courtesy → inspect → pulses → BP → JVP → precordium → auscultate.",
+   "opts": [
+    "Courtesy, inspection, pulses, BP, JVP, precordium, auscultation",
+    "BP then straight to the heart",
+    "Only auscultation",
+    "Auscultation first"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — What comes first in the CVS examination and why does it earn marks?",
+   "a": "**Courtesy — introduction, explanation, consent and positioning; the check-off explicitly scores it.**\n\n## Understanding it\n- Marks are awarded for **professional courtesy** (introduce, explain, consent, position) before touching the patient.\n\n>> Start with courtesy — it is explicitly scored.",
+   "opts": [
+    "Auscultation",
+    "Courtesy (introduce, explain, consent, position)",
+    "Palpating the apex",
+    "Measuring BP"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — What should you inspect for at the start of the CVS examination?",
+   "a": "**Respiratory distress, pallor, cyanosis, digital clubbing, neck pulsations and oedema.**\n\n## Understanding it\n- General inspection screens for the peripheral signs of cardiac disease before palpation.\n\n>> Inspect: distress, pallor, cyanosis, clubbing, neck pulsations, oedema.",
+   "opts": [
+    "Only the apex beat",
+    "The reflexes",
+    "Distress, pallor, cyanosis, clubbing, neck pulsations, oedema",
+    "The abdomen only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — With which arteries should the radial pulse be checked for synchrony?",
+   "a": "**The other radial, femoral, carotid, brachial, popliteal and dorsalis pedis arteries.**\n\n## Understanding it\n- Check the radial against other pulses to detect **delays/absences** (e.g. radio-femoral delay).\n\n>> Compare radial with the other radial, femoral, carotid, brachial, popliteal, dorsalis pedis.",
+   "opts": [
+    "Other radial, femoral, carotid, brachial, popliteal, dorsalis pedis",
+    "No comparison is needed",
+    "Only the carotid",
+    "Only the other radial"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why is palpating the femoral pulse a compulsory part of the examination?",
+   "a": "**To detect radio-femoral delay, which indicates coarctation of the aorta.**\n\n## Understanding it\n- Missing/delayed femoral pulses reveal **coarctation** — easily missed if you skip the femorals.\n\n>> Always feel the femorals — to catch coarctation (radio-femoral delay).",
+   "opts": [
+    "To assess the JVP",
+    "To detect radio-femoral delay (coarctation)",
+    "It is not compulsory",
+    "To measure blood pressure"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why should systolic BP be estimated by palpation before auscultation?",
+   "a": "**To avoid being misled by the auscultatory gap and to know how high to inflate the cuff.**\n\n## Understanding it\n- Palpating first sets the inflation level and prevents under-reading systolic BP due to the silent **auscultatory gap**.\n\n>> Palpate first: beat the auscultatory gap and gauge inflation.",
+   "opts": [
+    "It is not necessary",
+    "To avoid the auscultatory gap and gauge cuff inflation",
+    "To save time only",
+    "To measure the pulse rate"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why are the liver and shifting dullness examined during a CVS examination?",
+   "a": "**Because right heart failure causes hepatomegaly and ascites, so the abdomen is part of the cardiac assessment.**\n\n## Understanding it\n- Right-sided failure backs blood up into the **liver (hepatomegaly)** and peritoneum (**ascites**).\n\n>> Check liver/ascites — signs of right heart failure.",
+   "opts": [
+    "To find the spleen only",
+    "The liver makes heart sounds",
+    "Right heart failure causes hepatomegaly and ascites",
+    "It is unrelated to the heart"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — During auscultation, where should you listen for radiation of murmurs?",
+   "a": "**To the axilla (MR), up the neck/carotids (AS), and to the back (coarctation), plus the abdomen.**\n\n## Understanding it\n- Radiation localises the lesion: MR → axilla, AS → carotids, coarctation → back.\n\n>> Radiation: MR→axilla, AS→neck, coarctation→back.",
+   "opts": [
+    "Only to the abdomen",
+    "Axilla (MR), neck (AS), back (coarctation)",
+    "Only over the apex",
+    "Nowhere — murmurs don't radiate"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — A slow-rising, low-amplitude pulse with a late peak is shown. Diagnosis?",
+   "a": "**Anacrotic pulse (parvus et tardus) — aortic stenosis.**\n\n## Understanding it\n- A tight aortic valve makes the pulse small and slow-rising.\n\n>> Parvus et tardus = aortic stenosis.",
+   "opts": [
+    "Pulsus paradoxus — tamponade",
+    "Anacrotic (parvus et tardus) — aortic stenosis",
+    "Collapsing pulse — AR",
+    "Pulsus alternans — LVF"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — A pulse with a rapid upstroke and rapid collapse is shown. Diagnosis?",
+   "a": "**Collapsing (water-hammer) pulse — aortic regurgitation or PDA.**\n\n## Understanding it\n- Diastolic run-off makes the pulse rise fast then collapse.\n\n>> Water-hammer pulse = aortic regurgitation (or PDA).",
+   "opts": [
+    "Anacrotic — aortic stenosis",
+    "Pulsus alternans — LVF",
+    "Pulsus paradoxus — tamponade",
+    "Collapsing (water-hammer) — aortic regurgitation/PDA"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A waveform alternating between large and small volume beats is shown. Diagnosis?",
+   "a": "**Pulsus alternans — severe left ventricular failure.**\n\n## Understanding it\n- A failing LV alternates strong and weak beats.\n\n>> Pulsus alternans = severe LV failure.",
+   "opts": [
+    "Anacrotic — aortic stenosis",
+    "Pulsus alternans — severe LV failure",
+    "Pulsus paradoxus — tamponade",
+    "Collapsing pulse — AR"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A newborn has weak, delayed femoral pulses and higher BP in the arms than the legs. Diagnosis?",
+   "a": "**Coarctation of the aorta.**\n\n## Understanding it\n- A narrowing of the aorta after the arm vessels → **higher arm BP, weak/delayed femorals**.\n\n>> Weak femorals + arm>leg BP = coarctation of the aorta.",
+   "opts": [
+    "PDA",
+    "Aortic regurgitation",
+    "Atrial septal defect",
+    "Coarctation of the aorta"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why is duct-dependent coarctation a neonatal emergency, and how is it managed acutely?",
+   "a": "**Closure of the ductus arteriosus cuts off flow to the lower body, causing shock and collapse; keep the duct open with a prostaglandin E1 infusion.**\n\n## Understanding it\n- In severe coarctation, the lower body is perfused via the duct; when it closes, the baby collapses.\n- **Prostaglandin E1** reopens/maintains the duct as a bridge to surgery.\n\n>> Duct closes → shock; give prostaglandin E1 to keep it open.",
+   "opts": [
+    "Give a diuretic and discharge",
+    "Give indomethacin to close the duct",
+    "Observe only",
+    "Duct closure causes shock; give prostaglandin E1 to keep it open"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A child has raised JVP, muffled heart sounds and hypotension. What is the triad and the diagnosis?",
+   "a": "**Beck's triad — raised JVP, muffled heart sounds and hypotension — indicating cardiac tamponade.**\n\n## Understanding it\n- Fluid around the heart raises venous pressure, muffles sounds, and drops BP.\n\n>> Beck's triad = cardiac tamponade.",
+   "opts": [
+    "A normal finding",
+    "Beck's triad — cardiac tamponade",
+    "Beck's triad — heart failure",
+    "Aortic stenosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — What sign confirms tamponade when the BP falls more than 10 mmHg on inspiration?",
+   "a": "**Pulsus paradoxus.**\n\n## Understanding it\n- An exaggerated inspiratory BP drop (>10 mmHg) supports tamponade.\n\n>> >10 mmHg inspiratory BP fall = pulsus paradoxus.",
+   "opts": [
+    "Kussmaul's sign",
+    "Pulsus alternans",
+    "Pulsus paradoxus",
+    "Collapsing pulse"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — How is cardiac tamponade managed?",
+   "a": "**Urgent pericardiocentesis to drain the fluid, plus treatment of the underlying cause.**\n\n## Understanding it\n- Relieve the compression by **draining the pericardial fluid** (pericardiocentesis), then treat the cause.\n\n>> Tamponade → urgent pericardiocentesis.",
+   "opts": [
+    "Increase the heart rate with drugs",
+    "Urgent pericardiocentesis (± treat the cause)",
+    "Give diuretics and vasodilators",
+    "Observe only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A heaving apex with an ejection systolic murmur at the aortic area suggests what?",
+   "a": "**Aortic stenosis — pressure overload causing left ventricular hypertrophy.**\n\n## Understanding it\n- A sustained (heaving) apex + ejection-systolic murmur at the aortic area = **pressure-overload AS with LVH**.\n\n>> Heaving apex + aortic ESM = aortic stenosis (LVH).",
+   "opts": [
+    "Aortic stenosis (pressure overload, LVH)",
+    "Mitral regurgitation",
+    "Atrial septal defect",
+    "PDA"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A hyperdynamic apex with a pansystolic murmur at the apex radiating to the axilla suggests what?",
+   "a": "**Mitral regurgitation — volume overload causing left ventricular dilatation.**\n\n## Understanding it\n- A diffuse (hyperdynamic) apex + apical pansystolic murmur radiating to the **axilla** = **MR with volume-overload dilatation**.\n\n>> Hyperdynamic apex + apical PSM to axilla = mitral regurgitation.",
+   "opts": [
+    "Coarctation",
+    "Aortic stenosis",
+    "Mitral regurgitation (volume overload, LV dilatation)",
+    "Pulmonary stenosis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — Why is a murmur that becomes louder on standing a red flag?",
+   "a": "**Standing reduces venous return; most murmurs soften, but HOCM (and MVP) become louder — HOCM can cause sudden death.**\n\n## Understanding it\n- Standing shrinks the ventricle; a murmur that gets **louder** points to **HOCM/MVP** (dangerous).\n\n>> Louder on standing = HOCM/MVP (a red flag).",
+   "opts": [
+    "Most murmurs soften; HOCM/MVP get louder (dangerous)",
+    "It is always innocent",
+    "Standing has no effect on murmurs",
+    "It means aortic stenosis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Which single murmur characteristic is always pathological?",
+   "a": "**Any diastolic murmur — no diastolic murmur is ever innocent.**\n\n## Understanding it\n- Innocent murmurs are always **systolic**; a **diastolic** murmur is always pathological.\n\n>> Any diastolic murmur = always pathological.",
+   "opts": [
+    "A murmur that varies with position",
+    "Any diastolic murmur",
+    "A soft systolic murmur",
+    "A grade 1 systolic murmur"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — What must you exclude before diagnosing hypertension in a child?",
+   "a": "**That the correct cuff size was used (width 40%, length 80–100% of arm circumference), since a small cuff reads falsely high.**\n\n## Understanding it\n- A too-small cuff **overestimates** BP, causing spurious 'hypertension'.\n\n>> Exclude a too-small cuff before diagnosing hypertension.",
+   "opts": [
+    "The child's blood group",
+    "That the child is asleep",
+    "The room temperature",
+    "That a correctly-sized cuff was used (small cuff reads high)"
+   ],
+   "ans": 3
+  }
+ ]
 }

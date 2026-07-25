@@ -295,6 +295,32 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .mcqresult{margin-top:18px;font-weight:700;font-size:15px;padding:11px 14px;border-radius:10px;text-align:center;animation:fade .2s ease}
 .mcqresult.ok{background:#3ecf8e1c;color:var(--recall)}
 .mcqresult.no{background:#2a1c22;color:#ff9db1}
+.nextrev{margin-top:9px;font-size:13.5px;text-align:center;color:var(--dim)}
+.nextrev b{color:var(--text)}
+.nextrev.no b{color:#ff9db1}
+.revtoast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:120;
+  background:var(--panel2);border:1px solid var(--line);color:var(--text);
+  padding:11px 18px;border-radius:22px;font-size:14px;font-weight:600;
+  box-shadow:0 10px 34px rgba(0,0,0,.5);animation:fade .2s ease;max-width:90vw}
+.revtoast .rt{color:var(--recall)}.revtoast .rt.no{color:#ff9db1}
+
+/* ---- weekly progress + jump back in ---- */
+.wkcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px}
+.wktitle{font-size:12px;letter-spacing:.7px;text-transform:uppercase;color:var(--dimmer);font-weight:700;margin-bottom:12px}
+.wkmetrics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.wm{flex:1;min-width:70px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 8px;text-align:center}
+.wm b{display:block;font-size:22px;line-height:1}.wm span{font-size:11.5px;color:var(--dim)}
+.jb-day{margin-bottom:18px}
+.jb-dh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.jb-dh b{font-size:15.5px}.jb-dh span{font-size:12.5px;color:var(--dim)}
+.jb-row{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px;cursor:pointer}
+.jb-row:hover{border-color:var(--accent)}
+.jb-name{flex:1;font-size:14.5px;font-weight:600}
+.jb-st{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.jb-st.done{background:#3ecf8e22;color:var(--recall)}
+.jb-st.learn{background:#ffb45422;color:var(--com)}
+.jb-st.new{background:var(--panel2);color:var(--dim)}
+@media(max-width:560px){.jb-row{flex-wrap:wrap}.jb-row .btn{width:100%;justify-content:center}}
 
 /* ---- topic status selector ---- */
 .statusbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel);
@@ -590,8 +616,8 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.24d';   // bump this each release
-const LADDER=[3,7,14,30,60];           // days added after each correct answer
+const APP_VERSION='2026.07.25';   // bump this each release
+const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
 let DATA = (()=>{
@@ -605,6 +631,7 @@ let DATA = (()=>{
   d.streak.frozen = d.streak.frozen || [];
   d.starred  = d.starred  || {};  // cardId -> 1  (hard cards)
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
+  d.dayTopics= d.dayTopics|| {};  // 'YYYY-MM-DD' -> { topicId: 1 }  (topics touched that day)
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22}, d.settings||{});
@@ -632,7 +659,18 @@ function setStatus(id,s){
   else delete DATA.done[id];
   persist();
 }
-function touchTopic(id){ if(status(id)==='notstarted'){ DATA.topics[id]='inprogress'; persist(); } }
+function touchTopic(id){ logDayTopic(id); if(status(id)==='notstarted'){ DATA.topics[id]='inprogress'; persist(); } }
+function logDayTopic(id){ const d=dstr(); (DATA.dayTopics[d]=DATA.dayTopics[d]||{})[id]=1; }
+/* format the interval (in days) until a card's next review, in plain words */
+function intervalPhrase(days){
+  if(days<=1) return 'tomorrow';
+  if(days<7)  return 'in '+days+' days';
+  if(days<14) return 'in a week';
+  if(days<21) return 'in 2 weeks';
+  if(days%7===0) return 'in '+(days/7)+' weeks';
+  return 'in '+days+' days';
+}
+function reviewIntervalText(id){ const s=DATA.cards[id]; if(!s) return ''; return intervalPhrase(s.due-dayNum()); }
 
 /* ---- streak / daily log ---- */
 function markActive(){
@@ -673,7 +711,8 @@ function logRate(ok){
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
   const today=dayNum(), s=DATA.cards[id]||{box:-1};
-  if(ok){ s.box=Math.min((s.box<0?-1:s.box)+1, LADDER.length-1); s.due=today+LADDER[s.box]; }
+  if(ok){ s.box=Math.min((s.box<0?-1:s.box)+1, LADDER.length-1); s.due=today+LADDER[s.box];
+          if(DATA.starred[id]) delete DATA.starred[id]; }   // passed → graduate out of hard cards
   else  { s.box=-1; s.due=today+1; s.lapses=(s.lapses||0)+1; }
   s.seen=today; DATA.cards[id]=s;
 }
@@ -902,6 +941,7 @@ function renderNav(){
   const st = curStreak();
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += it('today','🧠','Active Recall',dueCount()||'',r==='today'||r==='review');
+  h += it('jumpback','↩','Jump back in','',r==='jumpback');
   h += it('hard','★','Hard cards',starCount()||'',r==='hard');
   h += it('search','⌕','Search','',r==='search');
   h += it('builder','✎','Note Builder','',r==='builder');
@@ -1002,6 +1042,17 @@ function pageHome(){
       ${resumeBtn}
     </div>
   </div>
+
+  <h2>This week</h2>
+  ${(()=>{ const wp=weekProgress(); return `<div class="wkcard">
+      <div class="wkmetrics">
+        <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
+        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b>${wp.notStarted}</b><span>not started</span></div>
+        <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
+      </div>
+      <button class="btn primary" style="width:100%;justify-content:center;margin-top:4px" onclick="go('jumpback')">↩ Jump back into a topic</button>
+    </div>`; })()}
 
   <h2>Your progress</h2>
   <div class="rings">${DB.subjects.map(sb=>{ const p=subjProgress(sb);
@@ -1515,7 +1566,9 @@ function mcqView(session){
     }).join('');
     body = `<div class="mcqopts">${optsHtml}</div>`;
     if(picked){
+      const revTxt=reviewIntervalText(it.id);
       body += `<div class="mcqresult ${correct?'ok':'no'}">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
+            + `<div class="nextrev ${correct?'ok':'no'}">↻ You'll see this again <b>${revTxt}</b>${correct?'':' · it\'s now a hard card (also in your reminders)'}</div>`
             + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`;
     }
   }
@@ -1666,6 +1719,13 @@ function sessionNext(){                       // advance a non-rated (primer) ca
   if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0); return; }
   S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
 }
+function flashReview(id,ok){
+  const txt=reviewIntervalText(id);
+  const host=document.createElement('div'); host.className='revtoast';
+  host.innerHTML=`<span class="rt ${ok?'':'no'}">${ok?'✓':'✗ hard card ·'}</span> next review <b>${txt}</b>`;
+  document.body.appendChild(host);
+  setTimeout(()=>{ host.style.transition='opacity .4s'; host.style.opacity='0'; setTimeout(()=>host.remove(),400); }, 1600);
+}
 function celebrate(kind,text){
   try{ if(navigator.vibrate) navigator.vibrate(kind==='goal'||kind==='level'?[30,40,30]:20); }catch(e){}
   const host=document.createElement('div'); host.className='celebrate';
@@ -1685,8 +1745,10 @@ function rateCard(ok){
   else rateSRS(it.id,ok);
   logRate(ok); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
+  if(!ok && !it.conf){ DATA.starred[it.id]=1; try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
   persist();
+  if(!it.conf) flashReview(it.id, ok);
   // micro-celebrations
   const afterCards=todayLog().cards, afterLvl=levelInfo().i, afterStreak=curStreak();
   if(afterLvl>beforeLvl)                         celebrate('level','Level up · '+LEVELS[afterLvl].n);
@@ -1717,6 +1779,55 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')step(1);
   if(e.key==='ArrowLeft')step(-1);
 });
+
+/* ---------- jump back in / weekly progress ---------- */
+function weekDayStrs(){                       // dates of the current week (Sun→today), oldest→newest
+  const today=new Date(); const start=new Date(today); start.setDate(start.getDate()-start.getDay());
+  const out=[]; for(let d=new Date(start); d<=today; d.setDate(d.getDate()+1)) out.push(dstr(new Date(d)));
+  return out;
+}
+function weekProgress(){
+  const days=weekDayStrs(), touched=new Set();
+  days.forEach(d=>Object.keys(DATA.dayTopics[d]||{}).forEach(id=>touched.add(id)));
+  let complete=0, inprog=0;
+  touched.forEach(id=>{ if(status(id)==='complete') complete++; else inprog++; });
+  const notStarted = allTopics.filter(t=>t.ready && status(t.id)==='notstarted').length;
+  return {touched:touched.size, complete, inprog, notStarted};
+}
+function dayLabel(ds){
+  if(ds===dstr()) return 'Today';
+  if(ds===yesterdayStr()) return 'Yesterday';
+  return new Date(ds+'T00:00').toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'});
+}
+function pageJumpback(){
+  const wp=weekProgress();
+  const days=Object.keys(DATA.dayTopics).filter(d=>Object.keys(DATA.dayTopics[d]||{}).length)
+                .sort().reverse().slice(0,14);
+  const blocks = days.map(ds=>{
+    const ids=Object.keys(DATA.dayTopics[ds]);
+    const rows=ids.map(id=>{ const t=topById(id); if(!t) return '';
+      const s=status(id), chip = s==='complete'?'<span class="jb-st done">✓ completed</span>'
+        : s==='inprogress'?'<span class="jb-st learn">◐ in progress</span>':'<span class="jb-st new">○ touched</span>';
+      return `<div class="jb-row" onclick="go('topic/${t.id}')">
+        <span class="jb-name">${esc(t.name)}</span>${chip}
+        <button class="btn" onclick="event.stopPropagation();go('study/${t.id}/recall')">Continue →</button></div>`;
+    }).join('');
+    const done=ids.filter(id=>status(id)==='complete').length;
+    return `<div class="jb-day"><div class="jb-dh"><b>${dayLabel(ds)}</b>
+        <span>${ids.length} topic${ids.length===1?'':'s'} · ${done} completed</span></div>${rows}</div>`;
+  }).join('');
+  return `<h1>↩ Jump back in</h1>
+    <p class="sub">Pick up where you left off — the topics you touched each day.</p>
+    <div class="wkcard">
+      <div class="wktitle">This week so far</div>
+      <div class="wkmetrics">
+        <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
+        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
+      </div>
+    </div>
+    ${blocks || '<div class="alldone" style="margin-top:20px"><div class="big">◔</div><b>Nothing yet.</b><p>Study a topic and it will show up here so you can jump back to it.</p></div>'}`;
+}
 
 /* ---------- weekly report ---------- */
 function pageWeek(){
@@ -1885,6 +1996,7 @@ function render(){
     case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
     case 'hard':      html=pageHard(); break;
     case 'week':      html=pageWeek(); break;
+    case 'jumpback':  html=pageJumpback(); break;
     case 'search':    html=pageSearch(); break;
     case 'settings':  html=pageSettings(); break;
     case 'builder':   html=pageBuilder(); break;

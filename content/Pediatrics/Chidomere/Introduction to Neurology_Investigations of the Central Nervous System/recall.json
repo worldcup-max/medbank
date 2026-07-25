@@ -1,126 +1,1326 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Introduction to Neurology / Investigations of the CNS",
-  "cards": [
-    { "q": "State the two objectives of this lecture.", "a": "To know the clinical approach to neurological cases via history taking and physical examination; and to know the relevant investigations." },
-    { "q": "Define neurology.", "a": "The branch of medicine concerned with the study and treatment of disorders of the nervous system." },
-    { "q": "What does the nervous system do, and what does it comprise?", "a": "It is a complex, sophisticated system that regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nerves." },
-    { "q": "Name the four regions of the brain.", "a": "The cerebrum; the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus); the brainstem (midbrain, pons and medulla); and the cerebellum." },
-    { "q": "Describe the cerebrum.", "a": "The cerebral hemispheres constitute the greatest mass of brain tissue; the outer layers are formed by the cellular grey matter known as the cerebral cortex." },
-    { "q": "What does consciousness depend on?", "a": "Interaction between intact cerebral hemispheres and the activating (or arousal) system that lies in the diencephalon and upper brainstem." },
-    { "q": "What two types of lesion may impair consciousness to the point of coma?", "a": "Either extensive disease of the cerebral cortex, or damage to the activating system." },
-    { "q": "What is the cerebellum primarily concerned with?", "a": "Coordination and balance — it refines movements." },
-    { "q": "What is the brainstem crucial for, and what are its three sections?", "a": "Vital functions — breathing, heart rate, blood pressure and sleep-wake cycles; its three sections are the midbrain, pons and medulla." },
-    { "q": "Describe the spinal cord and its two functions.", "a": "A cylindrical mass of nervous tissue encased within the bony vertebral column; it contains long tracts connecting the brain with the peripheral nervous system, and it mediates reflex activity." },
-    { "q": "What are the three basic components of a reflex?", "a": "A receiving apparatus, a nerve centre, and a responding apparatus." },
-    { "q": "List the conventional order of clerking in medicine.", "a": "Presenting complaint; history of the presenting complaint; past medical history; past surgical history; pregnancy/perinatal/postnatal history; immunization; developmental milestones; family and social history; and drug history/allergy." },
-    { "q": "What is described as the cornerstone of neurologic assessment, and who should the informants be?", "a": "A detailed history; informants should be the parents, and older children (over 3–4 years) should be questioned." },
-    { "q": "How should the history begin?", "a": "With the chief complaint and its significance in the context of normal development." },
-    { "q": "What six features should the history of the presenting complaint address?", "a": "Location, quality, intensity, duration, associated features, and alleviating or exacerbating factors." },
-    { "q": "Which pregnancy complications should be asked about in a neurological history?", "a": "Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls." },
-    { "q": "What substances should be asked about in the pregnancy history?", "a": "Drugs — prescription, herbal and illicit — and alcohol use." },
-    { "q": "What does reduced or absent fetal movement suggest?", "a": "Neuromuscular disorders." },
-    { "q": "What delivery details should be recorded?", "a": "Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication); presence or absence of fetal distress; any resuscitation; birth weight; and any complicated hospital stay." },
-    { "q": "If the infant had jaundice, what two things must be determined?", "a": "Both the degree of jaundice and how it was managed." },
-    { "q": "Name the four domains of development.", "a": "Social, cognitive, language, and motor skills (fine and gross)." },
-    { "q": "Distinguish isolated from global developmental delay.", "a": "Isolated delay affects one domain; global delay affects two or more domains." },
-    { "q": "What does a static abnormality in development from birth suggest?", "a": "A congenital, intrauterine, or perinatal cause." },
-    { "q": "What does a loss of skills (regression) over time strongly suggest?", "a": "An underlying degenerative disease of the CNS, such as an inborn error of metabolism." },
-    { "q": "State the milestones at 3 months.", "a": "Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos and laughs." },
-    { "q": "State the milestones at 6 months.", "a": "Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes and dislikes. Language: babbles." },
-    { "q": "State the milestones at 9 months.", "a": "Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake and peek-a-boo. Language: imitates sounds." },
-    { "q": "State the milestones at 12 months.", "a": "Gross motor: walks with 1 hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 meaningful words." },
-    { "q": "State the milestones at 18 months.", "a": "Gross motor: walks upstairs with assistance. Fine motor: feeds self from spoon. Social: mimics actions of others. Language: at least 6 words." },
-    { "q": "State the milestones at 24 months.", "a": "Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2- to 3-word sentences." },
-    { "q": "What should the family history cover in neurology?", "a": "History of neurologic disease including developmental delay and inherited disorders for all first- and second-degree relatives; miscarriages or fetal deaths (gender and gestational age at demise); and ethnic background, including whether the parents are related." },
-    { "q": "Why is consanguinity important in a neurological history?", "a": "Because the incidence of metabolic and degenerative disorders of the CNS is increased significantly in children of consanguineous marriages." },
-    { "q": "What should the social history detail?", "a": "The child's current living environment and relationship with family members; recent stressors such as divorce, remarriage, birth of a sibling or death of a loved one; academic and social performance with attention to abrupt changes; and peer relationships." },
-    { "q": "What may it indicate if a child cannot name at least two or three playmates?", "a": "Abnormal social development." },
-    { "q": "Why is a review of systems essential in neurology?", "a": "Because abnormalities of the CNS often manifest with vague, non-focal symptoms that may be misattributed to other organ systems — e.g. vomiting, constipation and urinary incontinence." },
-    { "q": "How should the physical examination of a child be conducted?", "a": "In a non-threatening, child-friendly setting, allowing the child to sit where most comfortable — on a parent's lap or on the floor." },
-    { "q": "Which tests should be reserved for the end of the examination, and why?", "a": "Invasive, painful or discomforting tests such as measurement of head circumference and the gag reflex — because the more the examination seems like a game, the more the child will cooperate." },
-    { "q": "What does general observation include?", "a": "The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head — size, shape, fontanels and OFC." },
-    { "q": "When does the examination begin?", "a": "During the interview — observing the child's appearance and movements, dysmorphic facies, abnormality of motor function such as hemiparesis or gait disturbance, and behaviour while playing." },
-    { "q": "What is the normal pattern of a child's behaviour during a consultation?", "a": "A normal child usually plays independently early in the visit but then engages in the interview process." },
-    { "q": "What does microcephaly reflect, and what causes it?", "a": "A small head frequently reflects a small brain; the cause is a perinatal or postnatal insult to the brain." },
-    { "q": "What are the causes of macrocephaly?", "a": "Most commonly familial; but it may be from a disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus." },
-    { "q": "What is craniosynostosis?", "a": "Premature closure of cranial sutures, causing a variety of abnormal head shapes." },
-    { "q": "What head shape suggests chronic subdural haemorrhage, and why?", "a": "A square or box-like shape, due to the long-standing presence of fluid in the subdural space." },
-    { "q": "What is plagiocephaly, and in which infants is it particularly prominent?", "a": "Flattening of the skull; it can be seen in normal infants but may be particularly prominent in hypotonic or weak infants, who are less mobile." },
-    { "q": "Describe the anterior fontanel.", "a": "Diamond-shaped, at the junction of the frontal and parietal bones, measuring 2 × 2 cm, and closing at 9–18 months." },
-    { "q": "Describe the posterior fontanel.", "a": "Triangular in shape, at the junction of the parietal and occipital bones, closing at 6–8 weeks." },
-    { "q": "What does a bulging fontanel indicate, and what is the important caveat?", "a": "Increased intracranial pressure — but it also occurs with vigorous crying in a normal infant." },
-    { "q": "What might a very small or absent anterior fontanel at birth indicate?", "a": "Craniosynostosis or microcephaly." },
-    { "q": "What does the occipitofrontal circumference reflect?", "a": "Brain growth — it should be measured and documented." },
-    { "q": "State the average head circumference of a term infant at birth and its rate of growth in the first year.", "a": "34–35 cm at birth; increasing by 2 cm/month for the 1st 3 months, 1 cm/month for the 2nd 3 months, and 0.5 cm/month for the last 6 months." },
-    { "q": "State the rate of head growth after the first year.", "a": "0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant." },
-    { "q": "State the average rate of head growth in a healthy premature infant.", "a": "0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week of development." },
-    { "q": "List the eight steps in the sequence of central nervous system examination.", "a": "Higher function; cranial nerves; motor functions (posture, nutrition of muscle, DTR, power, superficial reflexes); sensory; autonomic function; soft neurologic signs; cerebellar function; and gait." },
-    { "q": "What is assessed under sensory examination?", "a": "Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign." },
-    { "q": "What is assessed under autonomic function and soft neurologic signs?", "a": "Autonomic: rest and exercise pulse and blood pressure. Soft neurologic signs: neck stiffness, Kernig's sign and Brudzinski's sign." },
-    { "q": "What is assessed under cerebellar function?", "a": "Intention tremor, nystagmus and dysdiadochokinesia." },
-    { "q": "Name the six gait patterns listed.", "a": "Hemiparetic; ataxic (cerebellar and sensory); spastic; steppage; myopathic; and waddling." },
-    { "q": "On what will the examiner's assessment of candidates be based?", "a": "Overall attention to sequence, composure, and speed of performance." },
-    { "q": "List the five instruments for neurologic examination.", "a": "Inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool." },
-    { "q": "State the levels of consciousness.", "a": "Conscious, lethargic, obtundation, stupor, and coma." },
-    { "q": "Distinguish aphasia from dysarthria.", "a": "Aphasia is inability to speak, due to damage to Broca's area; dysarthria is inability to speak properly, due to damage to the articulation system." },
-    { "q": "What else is assessed under higher function?", "a": "Intelligence and memory (alertness in a younger child, simple arithmetic in an older child); orientation of time, place and person; and cerebral dominance — most people are left." },
-    { "q": "Name the twelve cranial nerves in order.", "a": "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, and hypoglossal." },
-    { "q": "Which cranial nerves are tested by visual acuity, fields, colour vision and fundi, and by pupillary reactions?", "a": "Visual acuity, field of vision, colour vision and ocular fundi test CN 2; pupillary reactions test CN 2 and 3." },
-    { "q": "Which cranial nerves are tested by extraocular movements, and by corneal reflexes and jaw movements?", "a": "Extraocular movements test CN 3, 4 and 6; corneal reflexes and jaw movements test CN 5." },
-    { "q": "Which cranial nerves are tested by facial movements, hearing, swallowing and palate, voice, speech and tongue movement?", "a": "Facial movements CN 7; hearing CN 8; swallowing and rise of palate CN 9 and 10; voice CN 10; speech CN 5, 7, 10 and 12; tongue movement CN 12." },
-    { "q": "State the four tests used to assess muscle tone and the findings in hypotonia.", "a": "Palpation of muscles — flabby; posture of limb — limp; resistance to passive movement — decreased; range of passive movement — increased." },
-    { "q": "State the findings of the four tone tests in hypertonia.", "a": "Palpation — rigid; posture of limb — stiff; resistance to passive movement — increased; range of passive movement — decreased." },
-    { "q": "Define opisthotonos and state when it occurs.", "a": "Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; it may be exhibited by patients with either spasticity or rigidity." },
-    { "q": "State the muscle power grading scale from 0 to 5.", "a": "0 none; 1 flickering movement; 2 movement possible after elimination of gravity; 3 movement possible against gravity but not against resistance; 4 movement possible against gravity and against some resistance; 5 normal power." },
-    { "q": "State the reflex grading scale.", "a": "0 absent; 1+ sluggish (seen with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus." },
-    { "q": "Define lumbar puncture and give its other name.", "a": "A clinical procedure in which a needle is inserted into the spinal canal, most commonly to collect CSF for diagnostic testing; also known as a spinal tap." },
-    { "q": "State three procedural principles of lumbar puncture.", "a": "It is invasive and hence requires consent; strict asepsis is required; and it can also be performed for therapeutic purposes." },
-    { "q": "List the nine requirements for the LP procedure.", "a": "Indications; rule out contraindications; vital signs; pre-procedure concomitant RBS; position; needle insertion point and needle type; asepsis; pain control; and specimen collection." },
-    { "q": "List the indications for lumbar puncture.", "a": "Meningitis; encephalitis (autoimmune, infectious); idiopathic intracranial hypertension; and it is often helpful in assessing subarachnoid haemorrhage, demyelinating, degenerative and collagen vascular diseases, and intracranial neoplasms." },
-    { "q": "List the contraindications to lumbar puncture.", "a": "Suspected mass lesion of the brain, especially posterior fossa or above the tentorium causing midline shift; suspected mass lesion of the spinal cord; symptoms and signs of impending cerebral herniation in a child with probable meningitis; critical illness; skin infection at the site; and thrombocytopenia with a platelet count below 20 × 10⁹/L." },
-    { "q": "Describe the position for lumbar puncture and the reason for it.", "a": "Lateral decubitus or seated position, with neck and legs flexed to enlarge the intervertebral spaces, while shoulders and hips are kept straight to prevent rotating the spine." },
-    { "q": "Where is the needle inserted for a lumbar puncture, and how is the site identified?", "a": "At the L3–L4 or L4–L5 interspace, identified by drawing an imaginary line from the iliac crest downward, perpendicular to the vertebral column." },
-    { "q": "Describe the asepsis required for lumbar puncture.", "a": "The physician dons a mask, gown and sterile gloves; the skin is thoroughly prepared with a cleansing agent, and sterile drapes are applied." },
-    { "q": "Describe pain control for lumbar puncture.", "a": "Injecting a local anaesthetic such as 1% lidocaine at the time of the procedure, or applying a eutectic mixture of lidocaine and prilocaine (EMLA) to the skin 30 minutes before the procedure." },
-    { "q": "Describe the needle used for lumbar puncture and how it is introduced.", "a": "A 22-gauge, 1.5- to 3.0-inch, sharp, bevelled spinal needle with a properly fitting stylet, introduced in the midsagittal plane and directed slightly cephalad." },
-    { "q": "What is the diagnostic utility of skull X-rays?", "a": "Limited — they can demonstrate fractures, bony defects, intracranial calcifications, or indirect evidence of increased intracranial pressure." },
-    { "q": "What is cranial ultrasonography the imaging method of choice for, and in whom?", "a": "For detecting intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with patent anterior fontanels." },
-    { "q": "What is cranial CT valuable for?", "a": "The evaluation of many neurologic emergencies, as well as some non-emergent conditions." },
-    { "q": "What is brain MRI well suited for?", "a": "It is a non-invasive procedure well suited for detecting a variety of abnormalities, including those of the posterior fossa and spinal cord." },
-    { "q": "Name the other neuroradiologic procedures.", "a": "Cranial CT angiography, MR angiography and MR venography; proton MR spectroscopy; catheter angiography; and positron emission tomography." },
-    { "q": "What unique information does PET provide?", "a": "Information on brain metabolism and perfusion, by measuring blood flow, oxygen uptake, and/or glucose consumption." },
-    { "q": "What is EEG used for?", "a": "The diagnosis of epilepsy and brain dysfunction." },
-    { "q": "Define an evoked potential.", "a": "An electrical signal recorded from the CNS following the presentation of a specific visual, auditory, or sensory stimulus." },
-    { "q": "How are children with intellectual disability or developmental delay often evaluated?", "a": "With metabolic and/or genetic testing." },
-    { "q": "OSPE — A child has always been behind but has never lost a skill. What does this pattern indicate?", "a": "A static abnormality in development from birth — suggesting a congenital, intrauterine or perinatal cause." },
-    { "q": "OSPE — A child developed normally then began losing skills across several domains. What does this indicate and what investigation is needed?", "a": "Global developmental regression, suggesting a degenerative CNS disease such as an inborn error of metabolism — requiring metabolic and/or genetic testing." },
-    { "q": "OSPE — What single question best detects developmental regression?", "a": "'Is there anything he used to be able to do that he cannot do now?'" },
-    { "q": "OSPE — An infant's head circumference is crossing centile lines upward. Why is this different from a single large measurement?", "a": "Because macrocephaly is most commonly familial, but a head crossing centiles indicates something actively expanding inside the skull — it cannot be familial." },
-    { "q": "OSPE — How should a fontanel be assessed to avoid a false positive?", "a": "With the infant calm and sitting up — because vigorous crying and lying flat both cause the fontanel to bulge in a normal infant." },
-    { "q": "OSPE — A drowsy child with meningitis has a unilaterally dilated pupil, hypertension and bradycardia. What is happening and what must NOT be done?", "a": "Impending cerebral herniation with raised intracranial pressure — lumbar puncture is contraindicated, as it may precipitate coning and brainstem compression." },
-    { "q": "OSPE — Why does a unilaterally dilated pupil occur in raised intracranial pressure?", "a": "Because the temporal lobe is pushed down over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil." },
-    { "q": "OSPE — What is the combination of hypertension with bradycardia in raised ICP called, and why does it occur?", "a": "Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised intracranial pressure, and baroreceptors reflexly slow the heart." },
-    { "q": "OSPE — In a child with meningitis and signs of raised ICP, what is the correct order of management?", "a": "Give empirical intravenous antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT; and defer the lumbar puncture. Never delay antibiotics for an LP." },
-    { "q": "OSPE — Why must a lumbar puncture never be performed when there is a mass lesion or raised ICP?", "a": "Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downwards — coning — which compresses the centres for breathing, heart rate and blood pressure." },
-    { "q": "OSPE — Why is a random blood sugar taken before a lumbar puncture?", "a": "Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it, the CSF glucose result cannot be interpreted." },
-    { "q": "OSPE — Why is the LP performed at L3–L4 or L4–L5 and not higher?", "a": "Because the spinal cord ends at about L1–L2; below that level there are only the loose nerve roots of the cauda equina, which move out of the needle's way." },
-    { "q": "OSPE — Why must the stylet be kept in the needle during skin puncture?", "a": "To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour." },
-    { "q": "OSPE — An infant with an open fontanel needs brain imaging for suspected hydrocephalus. Which investigation and why?", "a": "Cranial ultrasonography — the fontanel provides an acoustic window; it uses no radiation, is portable, needs no sedation and can be repeated for serial monitoring." },
-    { "q": "OSPE — Why can cranial ultrasound not be used once the fontanel has closed?", "a": "Because ultrasound cannot pass through bone; the open fontanel is the only acoustic window into the infant brain." },
-    { "q": "OSPE — Why is CT preferred to MRI in a neurological emergency?", "a": "Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI takes far longer and often requires sedation in a child." },
-    { "q": "OSPE — Why is MRI superior to CT for the posterior fossa?", "a": "Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone — important since most childhood brain tumours are in the posterior fossa." },
-    { "q": "OSPE — Why can imaging not diagnose epilepsy?", "a": "Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal, so an EEG is required." },
-    { "q": "OSPE — Which combination of tone and reflexes indicates an upper motor neurone lesion?", "a": "Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord." },
-    { "q": "OSPE — Which combination of tone and reflexes indicates a lower motor neurone lesion?", "a": "Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle." },
-    { "q": "OSPE — How do you distinguish power grade 2 from grade 3?", "a": "Grade 2 can move the limb only with gravity eliminated (horizontally); grade 3 can lift the limb against gravity but not against resistance." },
-    { "q": "OSPE — What is reinforcement, and why does it matter in grading reflexes?", "a": "Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only with reinforcement is graded 1+, not 0 — and a truly absent reflex means the reflex arc is broken." },
-    { "q": "OSPE — What is Romberg's sign, and what does a positive sign indicate?", "a": "The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory ataxia rather than cerebellar ataxia, in which the patient is unsteady with eyes open as well." },
-    { "q": "CLINICAL — A mother reports reduced fetal movements during pregnancy. What does this suggest and why?", "a": "A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was in effect observing the neurological examination in utero." },
-    { "q": "CLINICAL — Why must the indication for an emergency caesarean section be asked, not just the mode of delivery?", "a": "Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption." },
-    { "q": "CLINICAL — A child with a movement disorder and deafness was 'very yellow' as a newborn and untreated. What is the likely diagnosis?", "a": "Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed." },
-    { "q": "CLINICAL — A child presents with recurrent early morning vomiting and has been treated repeatedly for gastritis. What neurological cause must be excluded?", "a": "Raised intracranial pressure — CNS disease often manifests with vague, non-focal symptoms misattributed to other systems." },
-    { "q": "CLINICAL — A previously dry child becomes incontinent of urine. What neurological cause should be considered?", "a": "A spinal cord lesion — since urinary incontinence is listed among the non-focal symptoms of CNS disease." },
-    { "q": "CLINICAL — Why does headache worse on lying down, coughing or straining matter?", "a": "Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP — it is elicited by asking about alleviating and exacerbating factors." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Introduction to Neurology / Investigations of the CNS",
+ "cards": [
+  {
+   "q": "State the two objectives of this lecture.",
+   "a": "**To learn the clinical approach to neurological cases through history and examination, and to know the relevant investigations of the CNS.**\n\n## Understanding it\n- Objective 1 — the **clinical method** (history + examination).\n- Objective 2 — the **investigations** that back it up.\n\n>> Clinical assessment first, investigations second — the theme of the whole topic.",
+   "opts": [
+    "Clinical approach (history/exam) and relevant CNS investigations",
+    "Only brain anatomy",
+    "Only how to do a lumbar puncture",
+    "How to prescribe antibiotics"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define neurology.",
+   "a": "**The branch of medicine concerned with the study and treatment of disorders of the nervous system.**\n\n## Understanding it\n- It deals with the **brain, spinal cord, and nerves**.\n- Both **diagnosis and treatment** of their disorders.\n\n>> Neurology = medicine of the nervous system.",
+   "opts": [
+    "Surgery of the brain only",
+    "Medicine of nervous-system disorders",
+    "Study of the heart",
+    "Study of muscles only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does the nervous system do, and what does it comprise?",
+   "a": "**It regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nervous system.**\n\n## Understanding it\n- **Function** — regulate and coordinate the body.\n- **Parts** — CNS (brain + cord) and PNS (nerves).\n\n>> Coordinates the body via CNS + PNS.",
+   "opts": [
+    "Regulates/coordinates the body; CNS (brain+cord) + PNS",
+    "Digests food; gut",
+    "Pumps blood; heart and vessels",
+    "Filters waste; kidneys"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the four regions of the brain.",
+   "a": "**The cerebrum, the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus), the brainstem (midbrain, pons, medulla), and the cerebellum.**\n\n## Understanding it\n- **Cerebrum** — the bulk (thinking, movement, sensation).\n- **Diencephalon** — thalamus/hypothalamus etc.\n- **Brainstem** — vital functions.\n- **Cerebellum** — coordination.\n\n>> Four regions: cerebrum, diencephalon, brainstem, cerebellum.",
+   "opts": [
+    "Cerebrum, diencephalon, brainstem, cerebellum",
+    "Cortex, medulla, pons, cord",
+    "Frontal, parietal, temporal, occipital only",
+    "Left and right hemispheres only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the cerebrum.",
+   "a": "**The cerebral hemispheres form the greatest mass of brain tissue; the outer layer is cellular grey matter (cortex).**\n\n## Understanding it\n- The cerebrum is the **largest** part.\n- Its **outer cortex** is grey matter (cell bodies); the inner is white matter (tracts).\n\n>> Cerebrum = biggest part, grey-matter cortex on the outside.",
+   "opts": [
+    "The smallest brain region",
+    "Part of the spinal cord",
+    "The coordination centre only",
+    "The largest brain mass, with a grey-matter cortex"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does consciousness depend on?",
+   "a": "**Interaction between intact cerebral hemispheres and the activating (arousal) system in the diencephalon and brainstem.**\n\n## Understanding it\n- Consciousness needs **both** the cortex (content) and the **reticular activating system** (arousal).\n- Damage to either can impair it.\n\n>> Consciousness = cortex + activating system working together.",
+   "opts": [
+    "Intact cortex plus the brainstem/diencephalon activating system",
+    "Only the cerebellum",
+    "Only the spinal cord",
+    "Only the peripheral nerves"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What two types of lesion may impair consciousness to the point of coma?",
+   "a": "**Either extensive disease of the cerebral cortex, or damage to the activating system.**\n\n## Understanding it\n- **Widespread cortical** damage removes the 'content'.\n- **Activating-system** damage removes the 'arousal'.\n- Either can cause coma.\n\n>> Coma = diffuse cortical injury OR activating-system injury.",
+   "opts": [
+    "Extensive cortical disease or damage to the activating system",
+    "A single small cortical spot",
+    "A peripheral nerve injury",
+    "A muscle disease"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the cerebellum primarily concerned with?",
+   "a": "**Coordination and balance — it refines movements.**\n\n## Understanding it\n- The cerebellum **fine-tunes** movement and maintains **balance**.\n- Its disease causes ataxia, intention tremor, nystagmus.\n\n>> Cerebellum = coordination and balance.",
+   "opts": [
+    "Thinking and memory",
+    "Vital functions like breathing",
+    "Producing hormones",
+    "Coordination and balance"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the brainstem crucial for, and what are its three sections?",
+   "a": "**Vital functions — breathing, heart rate, blood pressure, sleep-wake cycles; its three sections are the midbrain, pons and medulla.**\n\n## Understanding it\n- The brainstem runs **life-support** functions.\n- Sections: **midbrain, pons, medulla**.\n\n>> Brainstem = vital functions; midbrain/pons/medulla.",
+   "opts": [
+    "Coordination; three lobes",
+    "Memory; two hemispheres",
+    "Vital functions; midbrain, pons, medulla",
+    "Vision; four regions"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Describe the spinal cord and its two functions.",
+   "a": "**A cylindrical mass of nervous tissue in the vertebral column; it carries long tracts connecting the brain to the body, and mediates reflexes.**\n\n## Understanding it\n- **Conduction** — long ascending/descending tracts link brain and body.\n- **Reflexes** — it integrates spinal reflex arcs.\n\n>> Cord = a conduction cable and a reflex centre.",
+   "opts": [
+    "Pumps blood to the brain",
+    "Only produces CSF",
+    "Only stores memory",
+    "Conduction (long tracts) and reflex mediation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the three basic components of a reflex?",
+   "a": "**A receiving apparatus, a nerve centre, and a responding apparatus.**\n\n## Understanding it\n- **Receptor** (senses) → **centre** (processes) → **effector** (responds).\n- This is the reflex arc.\n\n>> Reflex = receptor → centre → effector.",
+   "opts": [
+    "Receptor, nerve centre, effector",
+    "Artery, vein, capillary",
+    "Only a single nerve",
+    "Bone, muscle, tendon"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the conventional order of clerking in medicine.",
+   "a": "**Presenting complaint; history of presenting complaint; past medical history; past surgical history; pregnancy/perinatal history; then developmental, family and social history.**\n\n## Understanding it\n- A **fixed order** ensures completeness.\n- In children, pregnancy/perinatal and developmental history are essential extras.\n\n>> Follow the standard clerking sequence, adding perinatal + developmental history in children.",
+   "opts": [
+    "PC, HPC, PMH, PSH, perinatal, developmental, family, social",
+    "Investigations first",
+    "Only the presenting complaint",
+    "Examination then history"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is described as the cornerstone of neurologic assessment, and who should the informants be?",
+   "a": "**A detailed history is the cornerstone; informants should be the parents, and older children (over 3–4 years) should also be questioned.**\n\n## Understanding it\n- The **history** is the most important part.\n- **Parents** are the main informants; **older children** can contribute directly.\n\n>> History is king; ask parents and the older child.",
+   "opts": [
+    "Blood tests; only doctors",
+    "A brain scan; only the child",
+    "The examination; only nurses",
+    "A detailed history; parents (and children over 3–4)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How should the history begin?",
+   "a": "**With the chief complaint and its significance in the context of normal development.**\n\n## Understanding it\n- Start with **why they came** (chief complaint).\n- Interpret it against **normal development** for the age.\n\n>> Begin with the complaint, framed by developmental norms.",
+   "opts": [
+    "With the chief complaint, in the context of normal development",
+    "With the family tree",
+    "With the drug history",
+    "With the examination"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What six features should the history of the presenting complaint address?",
+   "a": "**Location, quality, intensity, duration, associated features, and alleviating/exacerbating factors.**\n\n## Understanding it\n- A symptom is characterised by these **six attributes**.\n- E.g. a headache: where, what kind, how bad, how long, what else, what changes it.\n\n>> Six features fully describe any symptom.",
+   "opts": [
+    "Location, quality, intensity, duration, associated features, aggravating/relieving factors",
+    "Only the family history",
+    "Only the child's age",
+    "Only how long it lasts"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which pregnancy complications should be asked about in a neurological history?",
+   "a": "**Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls.**\n\n## Understanding it\n- These maternal problems can **injure the developing brain**.\n- Each is a recognised antenatal risk for neurological disease.\n\n>> Ask about PIH/pre-eclampsia, GDM, bleeding, infections, trauma.",
+   "opts": [
+    "Only the baby's weight",
+    "Only the delivery method",
+    "Only the mother's age",
+    "PIH, pre-eclampsia, GDM, bleeding, infections, falls"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What substances should be asked about in the pregnancy history?",
+   "a": "**Drugs — prescription, herbal and illicit — and alcohol use.**\n\n## Understanding it\n- Many drugs and **alcohol** are teratogenic/neurotoxic to the fetus.\n- Include **prescription, herbal and illicit** substances.\n\n>> Ask about all drugs and alcohol in pregnancy.",
+   "opts": [
+    "Only prescription drugs",
+    "Prescription, herbal and illicit drugs, and alcohol",
+    "No substances are relevant",
+    "Only alcohol"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does reduced or absent fetal movement suggest?",
+   "a": "**Neuromuscular disorders.**\n\n## Understanding it\n- Fetal movement needs **working nerves and muscles**.\n- Reduced movement is an early clue to a **neuromuscular** problem.\n\n>> Poor fetal movement → suspect neuromuscular disease.",
+   "opts": [
+    "A healthy pregnancy",
+    "Gestational diabetes",
+    "A skin disorder",
+    "Neuromuscular disorders"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What delivery details should be recorded?",
+   "a": "**Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication).**\n\n## Understanding it\n- **Gestation** and **mode of delivery** matter.\n- For a caesarean, the **indication** may itself be the neurological event (e.g. fetal distress).\n\n>> Record gestation, mode of delivery, and the reason for any operative delivery.",
+   "opts": [
+    "Only the baby's name",
+    "The hospital's address",
+    "Only the time of day",
+    "Gestational age and mode of delivery (incl. C/S indication)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "If the infant had jaundice, what two things must be determined?",
+   "a": "**Both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe, untreated jaundice can cause **kernicterus** (brain injury).\n- So establish **how bad** it was and **whether it was treated**.\n\n>> Jaundice history: how severe, and how managed (to detect kernicterus risk).",
+   "opts": [
+    "Only the date it started",
+    "The degree of jaundice and how it was managed",
+    "Only the baby's weight",
+    "The mother's blood group only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Name the four domains of development.",
+   "a": "**Social, cognitive, language, and motor skills (fine and gross).**\n\n## Understanding it\n- Development is tracked across **four domains**.\n- **Motor** splits into fine and gross.\n\n>> Domains: social, cognitive, language, motor.",
+   "opts": [
+    "Vision, hearing, taste, smell",
+    "Social, cognitive, language, motor",
+    "Height, weight, head, teeth",
+    "Reflexes, tone, power, sensation"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Distinguish isolated from global developmental delay.",
+   "a": "**Isolated delay affects one domain; global delay affects two or more domains.**\n\n## Understanding it\n- **Isolated** — a single area lags (e.g. only speech).\n- **Global** — **two or more** areas lag together.\n\n>> One domain = isolated; ≥2 domains = global.",
+   "opts": [
+    "They are the same",
+    "Isolated = one domain; global = two or more",
+    "Isolated = all domains; global = one",
+    "Global affects only motor"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does a static abnormality in development from birth suggest?",
+   "a": "**A congenital, intrauterine, or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never lost a skill' = a **fixed (static)** deficit present from birth.\n- Points to a **congenital/perinatal** injury, not a progressive disease.\n\n>> Static from birth = congenital/perinatal cause.",
+   "opts": [
+    "A progressive degenerative disease",
+    "A recent infection",
+    "A nutritional deficiency only",
+    "A congenital, intrauterine or perinatal cause"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does a loss of skills (regression) over time strongly suggest?",
+   "a": "**An underlying degenerative disease of the CNS, such as an inborn error of metabolism.**\n\n## Understanding it\n- **Losing** previously acquired skills (regression) is different from never gaining them.\n- It points to an **active, progressive** process — a neurodegenerative/metabolic disease.\n\n>> Regression (skill loss) = degenerative CNS disease until proven otherwise.",
+   "opts": [
+    "Normal development",
+    "A simple delay that will catch up",
+    "A degenerative CNS disease (e.g. inborn error of metabolism)",
+    "A static perinatal injury"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the milestones at 3 months.",
+   "a": "**Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos/vocalises.**\n\n## Understanding it\n- 3 months: **forearm support** (prone), **hands open**, **social smile**, **cooing**.\n\n>> 3 months = forearm support, social smile.",
+   "opts": [
+    "Walks with one hand held",
+    "Sits and transfers objects",
+    "Forearm support, hands open, social smile, coos",
+    "Runs and builds a tower"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the milestones at 6 months.",
+   "a": "**Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes/dislikes. Language: babbles.**\n\n## Understanding it\n- 6 months: **sits momentarily**, **transfers** objects hand-to-hand, **babbles**.\n\n>> 6 months = sits briefly, transfers, babbles.",
+   "opts": [
+    "Runs and builds towers",
+    "Walks and says 2–3 word sentences",
+    "Sits momentarily, transfers objects, babbles",
+    "Pincer grasp and pat-a-cake"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the milestones at 9 months.",
+   "a": "**Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake/peek-a-boo. Language: imitates sounds.**\n\n## Understanding it\n- 9 months: **pulls to stand**, **pincer grasp**, plays **pat-a-cake**, **imitates sounds**.\n\n>> 9 months = pulls to stand, pincer grasp.",
+   "opts": [
+    "Only smiles and coos",
+    "Pulls to stand, pincer grasp, pat-a-cake, imitates sounds",
+    "Walks upstairs alone",
+    "Runs and builds a 6-block tower"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the milestones at 12 months.",
+   "a": "**Gross motor: walks with one hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 words.**\n\n## Understanding it\n- 12 months: **walks with one hand held**, **releases on command**, **1–2 words**.\n\n>> 12 months = walks with hand held, 1–2 words.",
+   "opts": [
+    "Walks with one hand held, releases on command, 1–2 words",
+    "Only sits momentarily",
+    "Runs and speaks in sentences",
+    "Pincer grasp and babbles"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the milestones at 18 months.",
+   "a": "**Gross motor: walks upstairs with assistance. Fine motor: feeds self from a spoon. Social: mimics others. Language: several words.**\n\n## Understanding it\n- 18 months: **stairs with help**, **self-feeds with spoon**, **mimics**, several words.\n\n>> 18 months = stairs with help, self-feeds.",
+   "opts": [
+    "Walks upstairs assisted, self-feeds with spoon, mimics others",
+    "Only babbles",
+    "Pincer grasp",
+    "Runs and builds a tower of 6"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the milestones at 24 months.",
+   "a": "**Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2–3-word sentences.**\n\n## Understanding it\n- 24 months: **runs**, **tower of 6**, **plays with others**, **2–3-word sentences**.\n\n>> 24 months = runs, tower of 6, 2–3 word sentences.",
+   "opts": [
+    "Sits momentarily, babbles",
+    "Walks with one hand held, 1–2 words",
+    "Runs, tower of 6 blocks, plays with others, 2–3-word sentences",
+    "Pulls to stand, pincer grasp"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What should the family history cover in neurology?",
+   "a": "**Neurologic disease including developmental delay and inherited disorders, in all first- and second-degree relatives.**\n\n## Understanding it\n- Many neurological conditions are **inherited**.\n- Ask about neurologic disease/developmental delay in **close relatives**.\n\n>> Family history hunts for inherited neuro disease in first/second-degree relatives.",
+   "opts": [
+    "Neurologic disease/developmental delay in first- and second-degree relatives",
+    "Only the mother's diet",
+    "No family history is needed",
+    "Only the father's height"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is consanguinity important in a neurological history?",
+   "a": "**Because the incidence of metabolic and degenerative CNS disorders is significantly increased in children of consanguineous unions.**\n\n## Understanding it\n- Related parents share more genes, raising the chance both carry the same **recessive** mutation.\n- This increases **autosomal recessive** metabolic/degenerative disease.\n\n>> Consanguinity → higher recessive metabolic/degenerative disease risk.",
+   "opts": [
+    "It only affects blood group",
+    "It protects against disease",
+    "It raises the risk of recessive metabolic/degenerative CNS disease",
+    "It has no genetic effect"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What should the social history detail?",
+   "a": "**The child's living environment and family relationships; recent stressors such as divorce, remarriage or bereavement.**\n\n## Understanding it\n- The **home environment** and **relationships** affect a child's neurodevelopment and behaviour.\n- **Recent stressors** may explain behavioural/functional changes.\n\n>> Social history = environment, relationships, recent stressors.",
+   "opts": [
+    "Living environment, family relationships, recent stressors",
+    "The parents' blood pressure",
+    "Only the school name",
+    "Only the family income"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What may it indicate if a child cannot name at least two or three playmates?",
+   "a": "**Abnormal social development.**\n\n## Understanding it\n- Naming playmates reflects normal **social** interaction for age.\n- Inability suggests a **social developmental** problem (e.g. autism spectrum).\n\n>> Can't name playmates → possible abnormal social development.",
+   "opts": [
+    "Abnormal social development",
+    "A hearing defect only",
+    "Normal development",
+    "A motor problem"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is a review of systems essential in neurology?",
+   "a": "**Because CNS abnormalities often present with vague, non-focal symptoms that may be misattributed to other organ systems.**\n\n## Understanding it\n- Neurological disease can masquerade as **GI, urinary or general** complaints (e.g. morning vomiting from raised ICP).\n- A systems review catches these misleading clues.\n\n>> Non-focal symptoms hide CNS disease — the ROS uncovers them.",
+   "opts": [
+    "It replaces the examination",
+    "CNS disease often presents with vague, non-focal symptoms",
+    "To save time",
+    "Neurology never affects other systems"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How should the physical examination of a child be conducted?",
+   "a": "**In a non-threatening, child-friendly setting, letting the child sit where most comfortable — on a parent's lap or the floor.**\n\n## Understanding it\n- A frightened child won't cooperate.\n- Examine **opportunistically** in a comfortable, non-threatening way.\n\n>> Child-friendly, non-threatening, opportunistic examination.",
+   "opts": [
+    "In a child-friendly setting, where the child is comfortable",
+    "Only after sedation",
+    "Standing at attention",
+    "Strapped to a couch"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which tests should be reserved for the end of the examination, and why?",
+   "a": "**Invasive, painful or uncomfortable tests such as head-circumference measurement and the gag reflex — because they upset the child.**\n\n## Understanding it\n- Save the **distressing** manoeuvres for last so the child stays cooperative for everything else.\n- Examples: gag reflex, head circumference.\n\n>> Do the upsetting parts last.",
+   "opts": [
+    "Painful/uncomfortable tests (e.g. gag reflex, head circumference)",
+    "The general observation",
+    "The first thing you do",
+    "Watching the child play"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What does general observation include?",
+   "a": "**The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head (size, shape, fontanelles).**\n\n## Understanding it\n- Much neurological information comes from just **watching**.\n- Note appearance, behaviour, posture, movements, and the head.\n\n>> Observation alone yields a huge amount before you touch the child.",
+   "opts": [
+    "Only the reflexes",
+    "Only the pupils",
+    "Only the blood pressure",
+    "Appearance, behaviour, mental state, posture/movement, head"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When does the examination begin?",
+   "a": "**During the interview — observing the child's appearance, movements, dysmorphic facies and motor function while talking to the parents.**\n\n## Understanding it\n- Examination starts the moment you **see** the child, not when you lay hands on them.\n- Watch during history-taking.\n\n>> The exam begins with observation during the interview.",
+   "opts": [
+    "Only in a dark room",
+    "Only after the history is finished",
+    "After investigations",
+    "During the interview, by observation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the normal pattern of a child's behaviour during a consultation?",
+   "a": "**A normal child usually plays independently early in the visit, then engages in the interview process.**\n\n## Understanding it\n- Normal children **explore/play** at first, then interact.\n- Deviations (no play, no engagement) may signal a problem.\n\n>> Normal: plays first, then engages.",
+   "opts": [
+    "Plays independently early, then engages",
+    "Sits perfectly still throughout",
+    "Never interacts at all",
+    "Cries the entire visit"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What does microcephaly reflect, and what causes it?",
+   "a": "**A small head frequently reflects a small brain; it results from a perinatal or postnatal insult to the brain.**\n\n## Understanding it\n- Skull growth follows **brain** growth.\n- A small head often means a **small/injured brain** (perinatal/postnatal insult).\n\n>> Microcephaly ≈ small brain from a perinatal/postnatal insult.",
+   "opts": [
+    "A small brain, from a perinatal/postnatal insult",
+    "A large brain",
+    "A normal variant only",
+    "Excess CSF"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the causes of macrocephaly?",
+   "a": "**Most commonly familial; but also disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus.**\n\n## Understanding it\n- The commonest cause is **benign familial** big heads.\n- Pathological causes include **hydrocephalus, storage disorders, chromosomal defects**.\n\n>> Macrocephaly: usually familial, but exclude hydrocephalus/storage disease.",
+   "opts": [
+    "Only microcephaly's opposite artefact",
+    "Most commonly familial; also hydrocephalus, storage/chromosomal disorders",
+    "Always a tumour",
+    "Always hydrocephalus"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is craniosynostosis?",
+   "a": "**Premature closure of cranial sutures, causing a variety of abnormal head shapes.**\n\n## Understanding it\n- Sutures normally stay open to let the skull grow.\n- **Early fusion** distorts skull shape.\n\n>> Craniosynostosis = premature suture fusion → abnormal head shape.",
+   "opts": [
+    "Widening of the sutures",
+    "A brain tumour",
+    "Premature closure of cranial sutures",
+    "Excess CSF in the ventricles"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What head shape suggests chronic subdural haemorrhage, and why?",
+   "a": "**A square or box-like head, due to long-standing fluid in the subdural space.**\n\n## Understanding it\n- Chronic subdural fluid slowly expands the skull into a **box-like** shape.\n\n>> Box-shaped head = chronic subdural collection.",
+   "opts": [
+    "A perfectly round head",
+    "A pointed (tower) head",
+    "A square/box-like head",
+    "A flattened occiput"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is plagiocephaly, and in which infants is it particularly prominent?",
+   "a": "**Flattening of the skull; it occurs in normal infants but is particularly prominent in hypotonic or weak infants.**\n\n## Understanding it\n- **Positional flattening** of one part of the skull.\n- More marked in **hypotonic/weak** infants who lie in one position.\n\n>> Plagiocephaly = skull flattening, worse in hypotonic infants.",
+   "opts": [
+    "A box-shaped head",
+    "Skull flattening, prominent in hypotonic/weak infants",
+    "Excess CSF",
+    "Premature suture fusion"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the anterior fontanel.",
+   "a": "**Diamond-shaped, at the junction of the frontal and parietal bones, measuring about 2 × 2 cm, closing at 9–18 months.**\n\n## Understanding it\n- **Diamond** shape, front of the skull.\n- Closes late — **9–18 months**.\n\n>> Anterior fontanelle: diamond, ~2×2 cm, closes 9–18 months.",
+   "opts": [
+    "Square, closes at 5 years",
+    "Round, closes at birth",
+    "Triangular, closes at 6–8 weeks",
+    "Diamond-shaped, ~2×2 cm, closes at 9–18 months"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the posterior fontanel.",
+   "a": "**Triangular, at the junction of the parietal and occipital bones, closing at 6–8 weeks.**\n\n## Understanding it\n- **Triangular** shape, back of the skull.\n- Closes **early** — 6–8 weeks.\n\n>> Posterior fontanelle: triangular, closes 6–8 weeks.",
+   "opts": [
+    "Square, never closes",
+    "Triangular, closes at 6–8 weeks",
+    "Round, closes at 1 year",
+    "Diamond-shaped, closes at 18 months"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does a bulging fontanel indicate, and what is the important caveat?",
+   "a": "**Increased intracranial pressure — but it also bulges with vigorous crying in a normal infant.**\n\n## Understanding it\n- A tense/bulging fontanelle suggests **raised ICP**.\n- **Caveat:** crying (and lying flat) bulges it normally — assess when **calm and upright**.\n\n>> Bulging = raised ICP, unless the baby is crying.",
+   "opts": [
+    "Raised ICP — but crying also bulges it normally",
+    "Always normal",
+    "Always dehydration",
+    "Low intracranial pressure"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What might a very small or absent anterior fontanel at birth indicate?",
+   "a": "**Craniosynostosis or microcephaly.**\n\n## Understanding it\n- If the fontanelle is tiny/absent at birth, the skull may have **fused early** (craniosynostosis) or the **brain is small** (microcephaly).\n\n>> Small/absent AF at birth → craniosynostosis or microcephaly.",
+   "opts": [
+    "Normal finding",
+    "Hydrocephalus",
+    "Raised ICP",
+    "Craniosynostosis or microcephaly"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does the occipitofrontal circumference reflect?",
+   "a": "**Brain growth — it should be measured and documented.**\n\n## Understanding it\n- Head (occipitofrontal) circumference tracks **brain growth**.\n- Serial measurements plotted on a chart are essential.\n\n>> OFC = a proxy for brain growth; always measure and plot.",
+   "opts": [
+    "Body weight",
+    "Chest size",
+    "Brain growth",
+    "Blood pressure"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the average head circumference of a term infant at birth and its rate of growth in the first year.",
+   "a": "**34–35 cm at birth; increasing by 2 cm/month for the first 3 months, 1 cm/month for the second 3 months, and 0.5 cm/month for the last 6 months.**\n\n## Understanding it\n- Birth OFC ≈ **34–35 cm**.\n- Year 1 growth: **2 → 1 → 0.5 cm/month** across the three periods.\n\n>> 34–35 cm at birth; 2,1,0.5 cm/month by trimester of infancy.",
+   "opts": [
+    "20 cm at birth; no growth",
+    "34–35 cm at birth; 2, 1, 0.5 cm/month across year one",
+    "45 cm at birth; 5 cm/month",
+    "30 cm; 1 cm/year"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the rate of head growth after the first year.",
+   "a": "**0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant.**\n\n## Understanding it\n- Growth **slows sharply** after infancy.\n- 1–3 yr: 0.25 cm/month; 3–6 yr: 0.5 cm/year; after 6 yr, no longer clinically tracked.\n\n>> Head growth tails off after year 1 and stops mattering after 6.",
+   "opts": [
+    "Stops entirely at age 1",
+    "1 cm/month lifelong",
+    "Continues at 2 cm/month",
+    "0.25 cm/month (1–3 yr), 0.5 cm/year (to 6 yr), then irrelevant"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the average rate of head growth in a healthy premature infant.",
+   "a": "**0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week.**\n\n## Understanding it\n- Preterm head growth **accelerates** over the first weeks: 0.5 → 0.75 → 1.0 cm/week.\n- Continues at ~1 cm/week until term (40 weeks).\n\n>> Preterm: 0.5, 0.75, then 1.0 cm/week to term.",
+   "opts": [
+    "No growth until term",
+    "0.1 cm/month",
+    "2 cm/week from birth",
+    "0.5 cm (wk 1–2), 0.75 cm (wk 3), 1.0 cm/week thereafter to 40 wk"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the eight steps in the sequence of central nervous system examination.",
+   "a": "**Higher function; cranial nerves; motor functions (posture, muscle nutrition, DTRs, power, superficial reflexes); sensory; cerebellar; autonomic/soft signs; gait; and meningeal signs.**\n\n## Understanding it\n- Work **top-down**: mind → cranial nerves → motor → sensory → cerebellar → autonomic → gait.\n- A fixed sequence prevents omissions.\n\n>> Higher function → cranial nerves → motor → sensory → cerebellar → gait.",
+   "opts": [
+    "Only the cranial nerves",
+    "Higher function, cranial nerves, motor, sensory, cerebellar, autonomic, gait",
+    "Just check reflexes",
+    "Start with gait then stop"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is assessed under sensory examination?",
+   "a": "**Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign.**\n\n## Understanding it\n- Tests both **superficial** (touch, pain, temperature) and **deep** (joint position, vibration) sensation.\n- Plus cortical (stereognosis) and Romberg's.\n\n>> Sensory exam = touch, pain, temp, proprioception, vibration, stereognosis, Romberg.",
+   "opts": [
+    "Only reflexes",
+    "Only the cranial nerves",
+    "Touch, pain, temperature, proprioception, vibration, stereognosis, Romberg",
+    "Only power and tone"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is assessed under autonomic function and soft neurologic signs?",
+   "a": "**Autonomic: pulse and blood pressure at rest and on exercise. Soft signs: neck stiffness, Kernig's and Brudzinski's signs.**\n\n## Understanding it\n- **Autonomic** — cardiovascular responses (pulse/BP).\n- **Soft/meningeal signs** — neck stiffness, Kernig's, Brudzinski's (meningeal irritation).\n\n>> Autonomic = pulse/BP; soft signs = meningeal (Kernig/Brudzinski).",
+   "opts": [
+    "Only gait",
+    "Only muscle power",
+    "Only cranial nerves",
+    "Autonomic: pulse/BP; soft signs: neck stiffness, Kernig's, Brudzinski's"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is assessed under cerebellar function?",
+   "a": "**Intention tremor, nystagmus and dysdiadochokinesia.**\n\n## Understanding it\n- Cerebellar signs: **intention tremor** (worsens near target), **nystagmus**, and **dysdiadochokinesia** (impaired rapid alternating movement).\n\n>> Cerebellar: intention tremor, nystagmus, dysdiadochokinesia.",
+   "opts": [
+    "Intention tremor, nystagmus, dysdiadochokinesia",
+    "Neck stiffness and Kernig's",
+    "Ptosis, miosis, anhidrosis",
+    "Power and tone"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the six gait patterns listed.",
+   "a": "**Hemiparetic, ataxic (cerebellar and sensory), spastic, steppage, myopathic, and waddling.**\n\n## Understanding it\n- Each abnormal gait maps to a lesion: **hemiparetic** (stroke), **ataxic** (cerebellar/sensory), **spastic**, **steppage** (foot drop), **myopathic/waddling** (proximal weakness).\n\n>> Six gaits: hemiparetic, ataxic, spastic, steppage, myopathic, waddling.",
+   "opts": [
+    "Hemiparetic, ataxic, spastic, steppage, myopathic, waddling",
+    "Left and right only",
+    "Fast and slow only",
+    "Only normal and abnormal"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "On what will the examiner's assessment of candidates be based?",
+   "a": "**Overall attention to sequence, composure, and speed of performance.**\n\n## Understanding it\n- In the OSPE, marks go for a **systematic sequence**, staying **composed**, and reasonable **speed**.\n\n>> Be systematic, calm, and efficient.",
+   "opts": [
+    "Only the final diagnosis",
+    "The equipment brand",
+    "Attention to sequence, composure, and speed",
+    "How fast you talk"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the five instruments for neurologic examination.",
+   "a": "**An inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool.**\n\n## Understanding it\n- Each tool matches a test: **tape** (head circumference), **torch** (pupils), **256 Hz fork** (vibration), **hammer** (reflexes), **cotton wool** (light touch).\n\n>> Tape, torch, 256 Hz fork, hammer, cotton wool.",
+   "opts": [
+    "Measuring tape, pen torch, 256 Hz tuning fork, tendon hammer, cotton wool",
+    "Scalpel and forceps",
+    "Stethoscope and BP cuff only",
+    "Ophthalmoscope only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the levels of consciousness.",
+   "a": "**Conscious, lethargic, obtundation, stupor, and coma.**\n\n## Understanding it\n- A graded scale of **decreasing arousal**: alert → lethargic → obtunded → stupor → coma.\n\n>> Conscious → lethargic → obtundation → stupor → coma.",
+   "opts": [
+    "Grades 0–5",
+    "Awake and asleep only",
+    "Conscious, lethargic, obtundation, stupor, coma",
+    "Mild, moderate, severe"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Distinguish aphasia from dysarthria.",
+   "a": "**Aphasia is inability to speak (language) from damage to Broca's area; dysarthria is inability to articulate properly from damage to the motor/muscular apparatus of speech.**\n\n## Understanding it\n- **Aphasia** — a **language** problem (Broca's area) — the words themselves are wrong/absent.\n- **Dysarthria** — a **motor** problem — words are right but slurred.\n\n>> Aphasia = language (Broca); dysarthria = articulation (muscles).",
+   "opts": [
+    "Aphasia = language loss (Broca's); dysarthria = poor articulation (motor)",
+    "They are identical",
+    "Both are hearing problems",
+    "Aphasia is slurring; dysarthria is word loss"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What else is assessed under higher function?",
+   "a": "**Intelligence and memory (alertness in younger children, arithmetic in older ones), plus orientation to time, place and person.**\n\n## Understanding it\n- Higher function also covers **intelligence/memory** and **orientation** (time/place/person).\n- Age-appropriate tasks are used.\n\n>> Higher function = intelligence, memory, orientation.",
+   "opts": [
+    "Intelligence, memory, and orientation (time/place/person)",
+    "Only the pupils",
+    "Only reflexes",
+    "Only muscle power"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the twelve cranial nerves in order.",
+   "a": "**Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory (vestibulocochlear), glossopharyngeal, vagus, accessory, hypoglossal.**\n\n## Understanding it\n- CN I–XII in order; classic mnemonics exist ('On Old Olympus...').\n- Know the sequence for systematic testing.\n\n>> I–XII: olfactory → optic → oculomotor → trochlear → trigeminal → abducent → facial → auditory → glossopharyngeal → vagus → accessory → hypoglossal.",
+   "opts": [
+    "In reverse order XII–I",
+    "Only the optic and facial",
+    "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, hypoglossal",
+    "Only 10 nerves exist"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which cranial nerves are tested by visual acuity, fields, colour vision and fundi, and by pupillary reactions?",
+   "a": "**Acuity, fields, colour vision and fundi test CN II (optic); pupillary reactions test CN II and III.**\n\n## Understanding it\n- **CN II** carries vision (acuity/fields/colour/fundi).\n- The pupillary light reflex needs **CN II (afferent)** and **CN III (efferent)**.\n\n>> Vision = CN II; pupil reflex = CN II + III.",
+   "opts": [
+    "Vision → CN III only",
+    "Pupils → CN IV and VI",
+    "Vision → CN II; pupillary reactions → CN II and III",
+    "All test CN VII"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which cranial nerves are tested by extraocular movements, and by corneal reflexes and jaw movements?",
+   "a": "**Extraocular movements test CN III, IV and VI; corneal reflexes and jaw movements test CN V.**\n\n## Understanding it\n- Eye movements need **III, IV, VI**.\n- The **corneal reflex** (sensory) and **jaw** (motor) are **CN V (trigeminal)**.\n\n>> Eye movement = III/IV/VI; corneal + jaw = V.",
+   "opts": [
+    "Corneal reflex → VII only",
+    "All test CN II",
+    "Eye movement → III/IV/VI; corneal reflex and jaw → V",
+    "Eye movement → V; jaw → VI"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which cranial nerves are tested by facial movements, hearing, swallowing and palate, voice, speech and tongue movement?",
+   "a": "**Facial movements CN VII; hearing CN VIII; swallowing/palate CN IX and X; voice CN X; speech CN V, VII, X and XII; tongue CN XII.**\n\n## Understanding it\n- Map each function to its nerve(s): face (VII), hearing (VIII), swallow/palate (IX/X), voice (X), tongue (XII).\n- Speech needs several nerves together.\n\n>> Face VII, hear VIII, swallow IX/X, voice X, tongue XII.",
+   "opts": [
+    "Face VII; hearing VIII; swallow/palate IX–X; voice X; tongue XII",
+    "Face VIII; hearing VII",
+    "All are CN II",
+    "Tongue is CN X"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the four tests used to assess muscle tone and the findings in hypotonia.",
+   "a": "**Palpation (flabby), posture of the limb (limp), resistance to passive movement (decreased), and range of passive movement (increased) — in hypotonia.**\n\n## Understanding it\n- Four tone checks: palpation, resting posture, resistance, and range.\n- **Hypotonia** = flabby, limp, low resistance, **increased** range.\n\n>> Hypotonia: flabby, limp, low resistance, hypermobile.",
+   "opts": [
+    "Rigid, stiff, high resistance",
+    "No change from normal",
+    "All findings increased",
+    "Palpation flabby, posture limp, resistance decreased, range increased"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the findings of the four tone tests in hypertonia.",
+   "a": "**Palpation (rigid), posture of the limb (stiff), resistance to passive movement (increased), and range of passive movement (decreased).**\n\n## Understanding it\n- **Hypertonia** is the mirror of hypotonia: rigid, stiff, **high** resistance, **reduced** range.\n\n>> Hypertonia: rigid, stiff, high resistance, restricted range.",
+   "opts": [
+    "Palpation rigid, posture stiff, resistance increased, range decreased",
+    "No change",
+    "Flabby, limp, low resistance",
+    "All decreased"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define opisthotonos and state when it occurs.",
+   "a": "**Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; seen with severe hypertonia (e.g. kernicterus, tetanus, meningitis).**\n\n## Understanding it\n- The back arches strongly backward due to **paraspinal hypertonia**.\n- A sign of severe CNS irritation/injury.\n\n>> Opisthotonos = arched-back hyperextension from paraspinal hypertonia.",
+   "opts": [
+    "Flaccid limbs",
+    "A normal resting posture",
+    "Backward spinal hyperextension from paraspinal hypertonia",
+    "Forward flexion of the spine"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the muscle power grading scale from 0 to 5.",
+   "a": "**0 none; 1 flicker; 2 movement with gravity eliminated; 3 movement against gravity but not resistance; 4 movement against some resistance; 5 normal power.**\n\n## Understanding it\n- The MRC scale runs **0–5**.\n- Key steps: **2** = only with gravity removed, **3** = against gravity, **4** = against resistance, **5** = normal.\n\n>> 0 none → 5 normal, with gravity and resistance as the milestones.",
+   "opts": [
+    "1 normal to 5 paralysed",
+    "A percentage scale",
+    "0 none, 1 flicker, 2 gravity-eliminated, 3 vs gravity, 4 vs resistance, 5 normal",
+    "0–3 only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the reflex grading scale.",
+   "a": "**0 absent; 1+ sluggish (present with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus.**\n\n## Understanding it\n- Reflexes graded **0 to 4+**.\n- **2+** is normal; **3+/4+** suggest upper motor neurone; **0/1+** suggest lower motor neurone.\n\n>> 0 absent → 4+ clonus; 2+ is normal.",
+   "opts": [
+    "Only present or absent",
+    "1 normal to 5 absent",
+    "0–10 scale",
+    "0 absent, 1+ sluggish, 2+ normal, 3+ brisk, 4+ clonus"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define lumbar puncture and give its other name.",
+   "a": "**A procedure inserting a needle into the spinal canal, usually to collect CSF for diagnosis; also called a spinal tap.**\n\n## Understanding it\n- A needle enters the **subarachnoid space** (below the cord) to sample **CSF**.\n- Also known as a **spinal tap**.\n\n>> LP = spinal tap; needle into the spinal canal to obtain CSF.",
+   "opts": [
+    "A needle into the spinal canal to obtain CSF (spinal tap)",
+    "A brain biopsy",
+    "A skull X-ray",
+    "An injection into a vein"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State three procedural principles of lumbar puncture.",
+   "a": "**It is invasive and requires consent; strict asepsis is required; and it can be therapeutic as well as diagnostic.**\n\n## Understanding it\n- **Consent** (invasive), **asepsis** (meningitis risk), and it can **treat** (e.g. remove CSF in raised-pressure states) as well as **diagnose**.\n\n>> Consent + asepsis + can be therapeutic.",
+   "opts": [
+    "No consent needed",
+    "Purely diagnostic, never therapeutic",
+    "Asepsis is optional",
+    "Invasive (needs consent), strict asepsis, can be therapeutic"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the nine requirements for the LP procedure.",
+   "a": "**Indications; ruling out contraindications; vital signs; pre-procedure random blood sugar; positioning; correct insertion point and asepsis; anaesthesia; the correct needle; and correct technique.**\n\n## Understanding it\n- A checklist ensuring safety and validity: check indications/contraindications, vitals, **paired blood glucose**, position, site/asepsis, anaesthesia, needle, technique.\n\n>> A safety checklist — note the paired RBS and contraindication check.",
+   "opts": [
+    "Just insert the needle",
+    "Only consent",
+    "Indications, contraindications, vitals, RBS, position, site/asepsis, anaesthesia, needle, technique",
+    "Only positioning"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the indications for lumbar puncture.",
+   "a": "**Meningitis, encephalitis (infectious or autoimmune), idiopathic intracranial hypertension, and assessing certain neurological conditions.**\n\n## Understanding it\n- Mostly to diagnose **CNS infection/inflammation** (meningitis/encephalitis).\n- Also to measure/relieve pressure in **IIH**.\n\n>> LP indications: meningitis, encephalitis, IIH.",
+   "opts": [
+    "Routine screening of all children",
+    "Meningitis, encephalitis, idiopathic intracranial hypertension",
+    "A simple headache",
+    "A skin rash"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the contraindications to lumbar puncture.",
+   "a": "**A suspected brain mass (especially posterior fossa or above the tentorium causing midline shift), raised ICP, and other signs of impending herniation.**\n\n## Understanding it\n- Removing CSF below a **mass/raised ICP** creates a pressure gradient → **brain herniation**.\n- So exclude a mass/raised ICP first (often with CT).\n\n>> Never LP with a mass lesion or raised ICP — risk of herniation.",
+   "opts": [
+    "Any headache at all",
+    "A mass lesion / raised ICP (herniation risk)",
+    "A high fever",
+    "Meningitis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the position for lumbar puncture and the reason for it.",
+   "a": "**Lateral decubitus or seated, with neck and legs flexed to open the intervertebral spaces, keeping the shoulders and hips vertical.**\n\n## Understanding it\n- **Flexing** the spine spreads the vertebrae apart, widening the gap for the needle.\n- Keep the back straight/vertical to stay in the midline.\n\n>> Curl up to open the spaces; stay square to keep the midline.",
+   "opts": [
+    "Lying flat with legs straight",
+    "Lateral/seated with spine flexed to open intervertebral spaces",
+    "Prone and extended",
+    "Standing upright"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Where is the needle inserted for a lumbar puncture, and how is the site identified?",
+   "a": "**At the L3–L4 or L4–L5 interspace, identified by a line from the top of the iliac crest (which crosses ~L4).**\n\n## Understanding it\n- The **iliac crest line** crosses roughly **L4**, marking the safe level.\n- This is **below the cord** (ends ~L1–L2).\n\n>> L3–4 or L4–5, found from the iliac crest line — safely below the cord.",
+   "opts": [
+    "At the base of the skull",
+    "T4–T5, at the sternal angle",
+    "C6, at the cricoid",
+    "L3–L4 or L4–L5, located from the iliac crest line"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the asepsis required for lumbar puncture.",
+   "a": "**The physician wears a mask, gown and sterile gloves; the skin is cleaned with an antiseptic and sterile drapes are applied.**\n\n## Understanding it\n- The needle enters the **sterile CSF space**, so any contamination risks **meningitis**.\n- Full aseptic technique is mandatory.\n\n>> Full sterile technique — the CSF space must not be contaminated.",
+   "opts": [
+    "Only a glove on one hand",
+    "Clean hands are enough",
+    "No precautions needed",
+    "Mask, gown, sterile gloves, antiseptic skin prep and drapes"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe pain control for lumbar puncture.",
+   "a": "**Injecting a local anaesthetic such as 1% lidocaine at the time, or applying a eutectic mixture (EMLA) beforehand.**\n\n## Understanding it\n- **Lidocaine** infiltration numbs the site during the procedure.\n- **EMLA** cream applied earlier numbs the skin painlessly (useful in children).\n\n>> Lidocaine at the time, or EMLA cream beforehand.",
+   "opts": [
+    "No anaesthesia is used",
+    "Local lidocaine, or EMLA cream applied beforehand",
+    "Oral paracetamol only",
+    "General anaesthesia always"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the needle used for lumbar puncture and how it is introduced.",
+   "a": "**A 22-gauge, 1.5–3.0 inch bevelled spinal needle with a stylet, introduced in the midsagittal plane with the stylet in place.**\n\n## Understanding it\n- A **spinal needle with a stylet** is used, aimed in the **midline**.\n- Keeping the **stylet in** during skin puncture prevents coring skin into the canal.\n\n>> 22G spinal needle with stylet, midline; keep the stylet in on the way through skin.",
+   "opts": [
+    "A 22G bevelled spinal needle with stylet, midline",
+    "A wide surgical scalpel",
+    "A butterfly needle in a vein",
+    "A biopsy gun"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the diagnostic utility of skull X-rays?",
+   "a": "**Limited — they can show fractures, bony defects, intracranial calcifications, or indirect signs of raised ICP.**\n\n## Understanding it\n- Plain skull films are largely **superseded** by CT/MRI.\n- They still show **fractures, calcifications, bony defects**.\n\n>> Skull X-ray = limited; mainly bone/calcification, not brain detail.",
+   "opts": [
+    "Shows the CSF clearly",
+    "The gold standard for tumours",
+    "Limited — fractures, bony defects, calcifications, indirect ICP signs",
+    "Excellent for brain tissue detail"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is cranial ultrasonography the imaging method of choice for, and in whom?",
+   "a": "**For intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with an open (patent) anterior fontanelle.**\n\n## Understanding it\n- The **open fontanelle** is an acoustic window for ultrasound.\n- Ideal for the **preterm/infant brain** (IVH, PVL, hydrocephalus) — no radiation, portable.\n\n>> Cranial US = the infant-brain test, through the open fontanelle.",
+   "opts": [
+    "Adults with closed sutures",
+    "Bone fractures",
+    "Spinal cord tumours",
+    "IVH, PVL, hydrocephalus — in infants with an open fontanelle"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is cranial CT valuable for?",
+   "a": "**The evaluation of many neurologic emergencies, as well as some non-emergent conditions.**\n\n## Understanding it\n- CT is **fast and widely available**, showing acute blood and bone well.\n- The go-to first scan in **emergencies** (trauma, haemorrhage).\n\n>> CT = the emergency brain scan.",
+   "opts": [
+    "Neurologic emergencies (and some non-emergent conditions)",
+    "Diagnosing epilepsy",
+    "Only chronic conditions",
+    "Only the spinal cord"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is brain MRI well suited for?",
+   "a": "**A non-invasive test well suited to detecting many abnormalities, including those of the posterior fossa and soft-tissue detail.**\n\n## Understanding it\n- MRI gives superb **soft-tissue** contrast and **no radiation**.\n- Superior for the **posterior fossa** and subtle lesions.\n\n>> MRI = detailed, radiation-free soft-tissue imaging (best for posterior fossa).",
+   "opts": [
+    "Acute bleeding in seconds",
+    "Bone fractures only",
+    "Diagnosing epilepsy directly",
+    "Detailed soft-tissue imaging, including the posterior fossa"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Name the other neuroradiologic procedures.",
+   "a": "**CT angiography, MR angiography and venography; proton MR spectroscopy; catheter angiography; and PET.**\n\n## Understanding it\n- Vascular imaging (CTA/MRA/MRV, catheter angiography), metabolic (MR spectroscopy, PET).\n\n>> Extra tools: CTA/MRA/MRV, MR spectroscopy, catheter angiography, PET.",
+   "opts": [
+    "Only EEG",
+    "Only ultrasound",
+    "CTA, MRA/MRV, MR spectroscopy, catheter angiography, PET",
+    "Only plain X-ray"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What unique information does PET provide?",
+   "a": "**Information on brain metabolism and perfusion — measuring blood flow, oxygen uptake, and/or glucose consumption.**\n\n## Understanding it\n- PET is a **functional/metabolic** scan (not just structure).\n- It maps **blood flow, oxygen and glucose use**.\n\n>> PET shows brain metabolism/perfusion, not just anatomy.",
+   "opts": [
+    "Brain metabolism and perfusion (blood flow, oxygen, glucose)",
+    "The CSF pressure",
+    "Only the skull shape",
+    "Only bone anatomy"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is EEG used for?",
+   "a": "**The diagnosis of epilepsy and brain dysfunction.**\n\n## Understanding it\n- EEG records the brain's **electrical activity**.\n- It is the key test for **epilepsy** and diffuse brain dysfunction.\n\n>> EEG = the electrical test for epilepsy/brain dysfunction.",
+   "opts": [
+    "Measuring CSF pressure",
+    "Imaging brain structure",
+    "Assessing bone fractures",
+    "Diagnosis of epilepsy and brain dysfunction"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Define an evoked potential.",
+   "a": "**An electrical signal recorded from the CNS following a specific visual, auditory, or sensory stimulus.**\n\n## Understanding it\n- A stimulus is given and the **brain's electrical response** is recorded.\n- Tests the integrity of the **sensory pathway** (visual/auditory/somatosensory).\n\n>> Evoked potential = the CNS's electrical response to a stimulus.",
+   "opts": [
+    "A CNS electrical response to a visual/auditory/sensory stimulus",
+    "A reflex hammer test",
+    "A CSF sample",
+    "A brain scan image"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How are children with intellectual disability or developmental delay often evaluated?",
+   "a": "**With metabolic and/or genetic testing.**\n\n## Understanding it\n- Unexplained delay/intellectual disability often has a **metabolic or genetic** cause.\n- These tests are commonly used in the work-up.\n\n>> Delay/ID work-up: metabolic and genetic testing.",
+   "opts": [
+    "No investigation is done",
+    "Only an EEG",
+    "Only a skull X-ray",
+    "Metabolic and/or genetic testing"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A child has always been behind but has never lost a skill. What does this pattern indicate?",
+   "a": "**A static abnormality from birth — suggesting a congenital, intrauterine or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never regressed' = a **fixed (static)** deficit.\n- Points to an **early (congenital/perinatal)** injury, not a progressive disease.\n\n>> Static from birth → congenital/perinatal cause.",
+   "opts": [
+    "A recent infection",
+    "A progressive degenerative disease",
+    "Normal development",
+    "A static, congenital/perinatal deficit"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A child developed normally then began losing skills across several domains. What does this indicate and what investigation is needed?",
+   "a": "**Global developmental regression, suggesting a degenerative CNS disease (e.g. inborn error of metabolism) — requiring metabolic/genetic investigation.**\n\n## Understanding it\n- **Normal then regressing** = an active, progressive process.\n- Across **several domains** = global regression → neurodegenerative/metabolic disease.\n\n>> Regression across domains → degenerative disease; investigate metabolically/genetically.",
+   "opts": [
+    "A static perinatal injury",
+    "A behavioural phase",
+    "Global regression from a degenerative disease → metabolic/genetic work-up",
+    "Normal variation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What single question best detects developmental regression?",
+   "a": "**'Is there anything he used to be able to do that he cannot do now?'**\n\n## Understanding it\n- Regression is defined by **losing** acquired skills.\n- Asking directly about **lost abilities** is the most sensitive screen.\n\n>> Ask what the child could do before but can't now.",
+   "opts": [
+    "'Is he eating well?'",
+    "'How old is the child?'",
+    "'Is there anything he used to do that he cannot do now?'",
+    "'Does he have a fever?'"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — An infant's head circumference is crossing centile lines upward. Why is this different from a single large measurement?",
+   "a": "**Because macrocephaly is usually familial, but a head crossing centiles indicates something actively expanding inside the skull.**\n\n## Understanding it\n- A single large head can be **benign/familial**.\n- A head **crossing centiles upward** means **active expansion** (e.g. hydrocephalus, mass) — a red flag.\n\n>> Static big head = often familial; crossing centiles = active pathology.",
+   "opts": [
+    "Crossing centiles is less worrying",
+    "Both are always normal",
+    "Crossing centiles indicates active intracranial expansion (e.g. hydrocephalus)",
+    "It only reflects height"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — How should a fontanel be assessed to avoid a false positive?",
+   "a": "**With the infant calm and sitting up — because vigorous crying and lying flat both cause a normal fontanelle to bulge.**\n\n## Understanding it\n- Crying and a flat position **raise** fontanelle pressure normally.\n- Assess when the baby is **calm and upright** to avoid a false 'bulging' sign.\n\n>> Calm + upright = a true fontanelle assessment.",
+   "opts": [
+    "With the infant calm and upright",
+    "During feeding",
+    "Lying flat on the back",
+    "While the baby is crying"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — A drowsy child with meningitis has a unilaterally dilated pupil, hypertension and bradycardia. What is happening and what must NOT be done?",
+   "a": "**Impending cerebral herniation from raised ICP — a lumbar puncture is contraindicated as it may precipitate herniation.**\n\n## Understanding it\n- Unilateral dilated pupil + hypertension + bradycardia = **raised ICP / herniation**.\n- **Do NOT do an LP** — it can trigger fatal herniation.\n\n>> These signs = raised ICP → LP is contraindicated.",
+   "opts": [
+    "Mild dehydration — do an LP",
+    "Normal findings — proceed",
+    "Impending herniation from raised ICP — do NOT do an LP",
+    "Low ICP — give fluids"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Why does a unilaterally dilated pupil occur in raised intracranial pressure?",
+   "a": "**Because the temporal lobe (uncus) is pushed over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil.**\n\n## Understanding it\n- Rising pressure herniates the **uncus** over the tentorium.\n- It squeezes **CN III**, knocking out its **pupil-constricting** parasympathetic fibres → the pupil dilates.\n\n>> Uncal herniation compresses CN III → a blown (dilated) pupil.",
+   "opts": [
+    "Bright light in one eye",
+    "The optic nerve is cut",
+    "Uncal herniation compresses CN III (pupilloconstrictor fibres)",
+    "A cataract forms"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — What is the combination of hypertension with bradycardia in raised ICP called, and why does it occur?",
+   "a": "**Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised ICP, and the resulting baroreflex causes bradycardia.**\n\n## Understanding it\n- To keep blood reaching the brain, **BP rises**.\n- Baroreceptors sense the high BP and reflexively **slow the heart** (bradycardia).\n\n>> Cushing's response = hypertension + bradycardia (a raised-ICP danger sign).",
+   "opts": [
+    "Simple anxiety",
+    "A normal exercise response",
+    "Septic shock",
+    "Cushing's response — HTN to perfuse the brain, reflex bradycardia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — In a child with meningitis and signs of raised ICP, what is the correct order of management?",
+   "a": "**Give empirical IV antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT — and defer LP until safe.**\n\n## Understanding it\n- **Do not delay antibiotics** waiting for an LP in meningitis with raised ICP.\n- Stabilise ABC, image with **CT** first, and only LP when safe.\n\n>> Antibiotics + ABC + CT first; LP is deferred, not first.",
+   "opts": [
+    "Wait for the CT before antibiotics",
+    "LP first, then antibiotics",
+    "Do nothing until fully awake",
+    "Immediate IV antibiotics, stabilise ABC, urgent CT; defer LP"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Why must a lumbar puncture never be performed when there is a mass lesion or raised ICP?",
+   "a": "**Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downward (herniation).**\n\n## Understanding it\n- With a mass/high ICP, the pressure above and below become unequal when CSF is drained below.\n- The **brainstem is pushed down** through the foramen magnum → fatal herniation ('coning').\n\n>> LP + raised ICP = coning; never do it.",
+   "opts": [
+    "It causes a mild headache only",
+    "It creates a gradient that herniates the brainstem (coning)",
+    "It cannot reach the CSF",
+    "It is simply too painful"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is a random blood sugar taken before a lumbar puncture?",
+   "a": "**Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it the CSF glucose result is uninterpretable.**\n\n## Understanding it\n- CSF glucose is judged **relative to blood glucose** (normally ~⅔).\n- You need a **paired** blood sugar to interpret it (low ratio suggests bacterial meningitis).\n\n>> Pair the CSF glucose with a simultaneous blood glucose.",
+   "opts": [
+    "To check for diabetes",
+    "CSF glucose is a ratio to simultaneous blood glucose",
+    "To choose the needle size",
+    "It is unrelated to the LP"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is the LP performed at L3–L4 or L4–L5 and not higher?",
+   "a": "**Because the spinal cord ends at about L1–L2; below that there are only the loose nerve roots of the cauda equina, which the needle can safely part.**\n\n## Understanding it\n- Above L1–L2 you risk spearing the **spinal cord**.\n- Below it, the **cauda equina** roots float in CSF and are pushed aside safely.\n\n>> Go below where the cord ends (L1–2) to avoid injuring it.",
+   "opts": [
+    "There is no CSF higher up",
+    "The cord ends ~L1–L2; below are the mobile cauda equina roots",
+    "The vertebrae are fused higher up",
+    "Higher levels are more painful only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why must the stylet be kept in the needle during skin puncture?",
+   "a": "**To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour.**\n\n## Understanding it\n- Without the stylet, the needle can **punch out skin** and carry it inward.\n- Implanted skin cells can grow into an **epidermoid tumour** years later.\n\n>> Stylet in = no skin plug = no future epidermoid tumour.",
+   "opts": [
+    "To keep the needle sterile only",
+    "To make it hurt less",
+    "To speed up the flow of CSF",
+    "To avoid coring skin that could become an epidermoid tumour"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — An infant with an open fontanel needs brain imaging for suspected hydrocephalus. Which investigation and why?",
+   "a": "**Cranial ultrasonography — the fontanelle is an acoustic window; it uses no radiation, is portable and needs no sedation.**\n\n## Understanding it\n- The **open fontanelle** lets ultrasound see the brain.\n- Ideal for infants: **no radiation, portable, no sedation**.\n\n>> Open fontanelle + suspected hydrocephalus = cranial ultrasound.",
+   "opts": [
+    "CT with contrast",
+    "Cranial ultrasound (via the fontanelle; no radiation/sedation)",
+    "PET scan",
+    "Skull X-ray"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why can cranial ultrasound not be used once the fontanel has closed?",
+   "a": "**Because ultrasound cannot pass through bone; the open fontanelle is the only acoustic window into the infant brain.**\n\n## Understanding it\n- Ultrasound is **blocked by bone**.\n- Once the fontanelle **fuses**, there's no window → you must use CT/MRI.\n\n>> No fontanelle, no ultrasound window (bone blocks it).",
+   "opts": [
+    "Ultrasound needs radiation then",
+    "Ultrasound can't pass through bone; the fontanelle is the only window",
+    "The brain shrinks",
+    "It becomes too painful"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is CT preferred to MRI in a neurological emergency?",
+   "a": "**Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI is slow.**\n\n## Understanding it\n- In an emergency, **speed and availability** matter most.\n- CT quickly reveals **acute haemorrhage and fractures**; MRI takes much longer.\n\n>> Emergency = CT (fast, shows blood/bone); MRI is too slow.",
+   "opts": [
+    "CT gives no radiation",
+    "MRI is faster than CT",
+    "CT is fast, available, and shows acute blood/bone",
+    "MRI cannot show the brain"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Why is MRI superior to CT for the posterior fossa?",
+   "a": "**Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone.**\n\n## Understanding it\n- The posterior fossa is encased in **thick bone** that creates CT **artefact**.\n- **MRI** isn't affected by bone, so it images this region clearly.\n\n>> Bone artefact blinds CT in the posterior fossa; MRI sees through it.",
+   "opts": [
+    "CT suffers bone artefact there; MRI is unaffected by bone",
+    "The posterior fossa has no bone",
+    "CT is always superior",
+    "MRI is faster"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why can imaging not diagnose epilepsy?",
+   "a": "**Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal.**\n\n## Understanding it\n- Epilepsy is an **electrical** problem — diagnosed by **EEG**, not pictures.\n- Structural scans can be **normal** in epilepsy.\n\n>> Imaging shows structure; epilepsy is electrical → use EEG.",
+   "opts": [
+    "Imaging diagnoses it perfectly",
+    "The brain is always abnormal on scans",
+    "Imaging is too expensive",
+    "Epilepsy is electrical (EEG); imaging shows only structure"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Which combination of tone and reflexes indicates an upper motor neurone lesion?",
+   "a": "**Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord.**\n\n## Understanding it\n- UMN lesions release lower centres from inhibition → **increased tone and brisk reflexes**.\n- Located in the **brain or spinal cord**.\n\n>> UMN = high tone + brisk reflexes (± clonus).",
+   "opts": [
+    "Increased tone with brisk reflexes (UMN, brain/cord lesion)",
+    "Flaccid limbs with fasciculations",
+    "Decreased tone with absent reflexes",
+    "Normal tone and reflexes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Which combination of tone and reflexes indicates a lower motor neurone lesion?",
+   "a": "**Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle.**\n\n## Understanding it\n- LMN lesions cut the reflex arc's output → **low tone, reduced/absent reflexes** (± wasting/fasciculations).\n- Located in the **anterior horn, nerve, or muscle**.\n\n>> LMN = low tone + reduced/absent reflexes.",
+   "opts": [
+    "Decreased tone with reduced/absent reflexes (LMN lesion)",
+    "Increased tone with brisk reflexes",
+    "Normal tone and reflexes",
+    "Brisk reflexes with clonus"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — How do you distinguish power grade 2 from grade 3?",
+   "a": "**Grade 2 moves the limb only with gravity eliminated (horizontally); grade 3 lifts the limb against gravity but not against resistance.**\n\n## Understanding it\n- The dividing line is **gravity**: grade 2 can't beat it (needs it removed), grade 3 can.\n- Grade 3 still fails against added **resistance** (that's grade 4).\n\n>> Grade 2 = only without gravity; grade 3 = against gravity.",
+   "opts": [
+    "Grade 3 is total paralysis",
+    "Grade 2 = gravity eliminated; grade 3 = against gravity",
+    "Grade 2 beats resistance; grade 3 doesn't move",
+    "They are identical"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — What is reinforcement, and why does it matter in grading reflexes?",
+   "a": "**Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only on reinforcement is graded 1+ (sluggish).**\n\n## Understanding it\n- Reinforcement **distracts** the patient and **augments** a weak reflex so it isn't missed.\n- A reflex that appears **only** with reinforcement is **sluggish (1+)**, not truly absent.\n\n>> Reinforcement unmasks weak reflexes → grade 1+ if only present with it.",
+   "opts": [
+    "It has no effect on grading",
+    "A way to abolish reflexes",
+    "A drug that boosts reflexes",
+    "A distraction manoeuvre that augments weak reflexes (present only then = 1+)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — What is Romberg's sign, and what does a positive sign indicate?",
+   "a": "**The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory (proprioceptive) ataxia rather than cerebellar ataxia.**\n\n## Understanding it\n- With eyes **open**, vision compensates; with eyes **closed**, only proprioception remains.\n- Falling when eyes close = the **proprioceptive** pathway is faulty (sensory ataxia).\n- Cerebellar ataxia is unsteady with eyes **open too**.\n\n>> Positive Romberg = sensory (proprioceptive) ataxia, not cerebellar.",
+   "opts": [
+    "A normal finding",
+    "Unsteady only with eyes closed = sensory (proprioceptive) ataxia",
+    "Unsteady with eyes open = cerebellar ataxia",
+    "A test of hearing"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A mother reports reduced fetal movements during pregnancy. What does this suggest and why?",
+   "a": "**A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was effectively observing the baby's motor system.**\n\n## Understanding it\n- Movement needs **intact nerves and muscles**.\n- Reduced fetal movement is an **antenatal window** onto a neuromuscular problem.\n\n>> Poor fetal movement → suspect a fetal neuromuscular disorder.",
+   "opts": [
+    "A placental issue only",
+    "A normal pregnancy",
+    "A maternal heart problem",
+    "A neuromuscular disorder (movement needs working nerves/muscles)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why must the indication for an emergency caesarean section be asked, not just the mode of delivery?",
+   "a": "**Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption.**\n\n## Understanding it\n- The **reason** for the emergency section (e.g. fetal distress/hypoxia) may be the very insult that injured the brain.\n- The mode of delivery alone doesn't capture this.\n\n>> Ask *why* the C/S was done — the reason may be the neurological insult.",
+   "opts": [
+    "It is just for paperwork",
+    "It is irrelevant",
+    "The mode alone tells you everything",
+    "The indication may be the neurological insult (distress, prolapse, abruption)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A child with a movement disorder and deafness was 'very yellow' as a newborn and untreated. What is the likely diagnosis?",
+   "a": "**Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe untreated neonatal jaundice → **bilirubin brain injury (kernicterus)**.\n- Classic sequelae: **movement disorder (choreoathetoid CP) + sensorineural deafness**.\n\n>> 'Very yellow' newborn + later movement disorder + deafness = kernicterus.",
+   "opts": [
+    "Meningitis",
+    "Cerebellar tumour",
+    "Normal ageing",
+    "Kernicterus (untreated severe neonatal jaundice)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A child presents with recurrent early morning vomiting and has been treated repeatedly for gastritis. What neurological cause must be excluded?",
+   "a": "**Raised intracranial pressure — CNS disease often presents with vague, non-focal symptoms misattributed to other systems.**\n\n## Understanding it\n- **Early-morning vomiting** is a classic feature of **raised ICP** (worse when lying flat overnight).\n- It is easily mislabelled as a GI problem.\n\n>> Morning vomiting mistaken for gastritis → exclude raised ICP.",
+   "opts": [
+    "Raised intracranial pressure",
+    "Simple gastritis",
+    "Food allergy",
+    "A normal finding"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A previously dry child becomes incontinent of urine. What neurological cause should be considered?",
+   "a": "**A spinal cord lesion — urinary incontinence is among the non-focal symptoms of CNS disease.**\n\n## Understanding it\n- New incontinence in a previously continent child can signal a **spinal cord** problem (e.g. tumour, tethering).\n- It's a subtle CNS red flag.\n\n>> New incontinence → consider a spinal cord lesion.",
+   "opts": [
+    "A kidney stone",
+    "A spinal cord lesion",
+    "A urinary tract infection only",
+    "Normal behaviour"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — Why does headache worse on lying down, coughing or straining matter?",
+   "a": "**Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP.**\n\n## Understanding it\n- Lying flat, coughing and straining all **increase ICP**.\n- A headache that **worsens** with them fits a **raised-ICP** cause (e.g. tumour).\n\n>> Headache worse lying/coughing/straining = raised-ICP pattern.",
+   "opts": [
+    "They lower ICP",
+    "It indicates a tension headache",
+    "It is always migraine",
+    "They raise ICP — the pattern suggests raised intracranial pressure"
+   ],
+   "ans": 3
+  }
+ ]
 }

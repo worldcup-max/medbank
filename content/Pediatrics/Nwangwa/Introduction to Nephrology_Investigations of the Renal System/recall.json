@@ -1,125 +1,1315 @@
 {
-  "deck": "Recall Cards",
-  "topic": "Introduction to Nephrology / Investigations of the Renal System",
-  "cards": [
-    { "q": "Define paediatric nephrology.", "a": "The branch of paediatrics responsible for the diagnosis, evaluation and management of the disorders of the kidneys and urinary tract in children." },
-    { "q": "What five things should a nephrologist be able to do?", "a": "Evaluate and diagnose renal pathology; institute appropriate treatment; monitor growth and development in children with kidney disorders; provide renal replacement therapy; and educate and counsel families on reno-prevention and long term care." },
-    { "q": "Describe the position and covering of the kidneys.", "a": "Paired, bean-shaped, retroperitoneal organs located between T12 and L3 vertebrae, with the left kidney more superior than the right; covered by the renal fascia — Gerota's fascia." },
-    { "q": "State the weight and dimensions of the kidneys.", "a": "About 150 g in males and 135 g in females; 10–12 cm in length, 5–7 cm in width, and 2–3 cm in thickness." },
-    { "q": "What proportion of cardiac output do the kidneys receive, and at what level do the renal arteries arise?", "a": "About 20% of cardiac output, from the paired renal arteries at the level of L2." },
-    { "q": "Describe the innervation of the kidney.", "a": "Sympathetic innervation arises from the spinal cord at T8–L1, and parasympathetic from the vagus nerves; these cause vasoconstriction and vasodilation respectively." },
-    { "q": "List the components of the nephron in order.", "a": "The renal corpuscle (glomerulus and Bowman's capsule); the PCT in the renal cortex; the descending loop of Henle from cortex to medulla; the ascending limb; the distal convoluted tubule in the cortex; and the collecting duct, from cortex through medulla to renal pelvis." },
-    { "q": "List the seven functions of the kidneys.", "a": "Filtration and excretion of metabolic waste products; fluid and electrolyte balance; blood pressure regulation; endocrine function; acid-base homeostasis; regulation of red blood cell production; and calcium and bone metabolism." },
-    { "q": "List the common renal disorders.", "a": "CAKUT, UTI, nephrotic syndrome, AGN, AKI, CKD, vesicoureteric reflux, haemolytic uraemic syndrome, and renal tubular disorders." },
-    { "q": "List the risk factors for renal disorders.", "a": "Drug toxicity, family history/genetics, obesity, hypertension, prematurity, diabetes, and autoimmune disorders." },
-    { "q": "List the clinical features of renal disorders.", "a": "Oliguria/anuria, oedema, haematuria, proteinuria, hypertension, electrolyte imbalance, and lower abdominal pain." },
-    { "q": "State the rationale for investigations in nephrology.", "a": "To confirm a clinical diagnosis; to assess structural and functional integrity of the kidneys and urinary tract; to assess the severity and extent of the disease; for prognostication; and to exclude other co-morbidities." },
-    { "q": "What four considerations are important when choosing an investigation?", "a": "Diagnostic value, availability, cost and sustainability." },
-    { "q": "List the seven classes of investigation in nephrology.", "a": "Urine examinations; blood investigations; GFR estimation; assessment of tubular function; imaging; biopsy; and bladder function assessment." },
-    { "q": "Why must urine samples be examined freshly, and how may they be stored?", "a": "To avoid disintegration of cellular elements and bacterial overgrowth; urine can be stored in the refrigerator at 4 °C." },
-    { "q": "List the methods of urine collection.", "a": "MSU (with a long bladder time); clean catch method; bagging; suprapubic aspiration (SPA); catheterization; and use of a mid-stream urinary collector." },
-    { "q": "What is the drawback of bagging, and what is its value?", "a": "It is associated with a high risk of contamination and the bag must be removed as soon as urine is passed; it is important for its negative predictive value." },
-    { "q": "Which method of urine collection is most reliable, and in whom is it useful?", "a": "Suprapubic aspiration — useful in children less than 2 years." },
-    { "q": "State the significant colony counts for SPA, CSU and MSU.", "a": "SPA — any growth is significant, because bladder urine is supposed to be sterile. CSU — ≥ 10⁴ CFU/mL. MSU — ≥ 10⁵ CFU/mL." },
-    { "q": "What growth indicates UTI on catheterization in a girl, or midstream clean-void in a circumcised boy?", "a": "Usually > 50,000 CFU/mL of a single urinary pathogen; however UTI may be present with 10,000–50,000 CFU/mL of a single organism." },
-    { "q": "What growth indicates UTI on midstream clean-void collection in a girl or uncircumcised boy?", "a": "> 100,000 CFU/mL of a single urinary pathogen in a symptomatic patient, with pyuria usually present; UTI may be present with 10,000–50,000 CFU/mL." },
-    { "q": "In an asymptomatic patient, how is bacterial growth interpreted?", "a": "Growth is usually > 100,000 CFU/mL of the same organism on different days; and if pyuria is absent, the result probably indicates colonization rather than infection." },
-    { "q": "Which patients are most likely to have a UTI with low colony counts, and why?", "a": "Patients with urinary frequency — because decreased bladder incubation time gives bacteria less opportunity to proliferate." },
-    { "q": "List the parameters on a routine urine dipstick.", "a": "Leukocyte, nitrite, protein, pH, blood, specific gravity, ketone, bilirubin, glucose, ascorbic acid, and urobilinogen." },
-    { "q": "State the principle of the urine dipstick.", "a": "Urine constituents react with a chemical impregnated in the specific pad on the strip, producing a colour change; the intensity of colour gives a qualitative grading read off the chart on the container." },
-    { "q": "What determines the quality of a dipstick result?", "a": "Strict adherence to the manufacturer's instructions." },
-    { "q": "State the estimated urine protein concentration for each dipstick grade.", "a": "Trace < 30 mg/dL; + 30 mg/dL; 2+ 100 mg/dL; 3+ 300 mg/dL; 4+ > 1000 mg/dL." },
-    { "q": "List the causes of false negative proteinuria.", "a": "Dilute or very acidic urine, and proteinuria from other proteins." },
-    { "q": "List the causes of false positive proteinuria.", "a": "Concentrated urine, alkaline urine, gross haematuria, delay in reading, and urine contamination with vaginal secretions or antiseptic." },
-    { "q": "What other urine examinations are performed?", "a": "Urine macroscopy (appearance, colour change, odour); urine microscopy for RBC, WBC, casts and crystals; urine culture and sensitivity; and spot urine protein-creatinine ratio." },
-    { "q": "List the blood tests used in nephrology.", "a": "Serum electrolytes, urea and creatinine, calcium, phosphate, magnesium and vitamin D assay; FBC, MP and ESR; arterial blood gases; and immunologic tests." },
-    { "q": "List the immunologic tests used in nephrology and what they indicate.", "a": "C3, C4, CH50; ASO titre; anti-DNAse B; IgG and IgA for SLE and JRA; ANCA for Wegener granulomatosis and crescentic glomerulonephritis; and hormonal profile — T3, T4, TSH." },
-    { "q": "Why is GFR estimated?", "a": "To assess renal function, detect renal disease, assess severity, and for prognostication." },
-    { "q": "Name the commonly used markers for GFR estimation.", "a": "Inulin, polyfructose, Cr-EDTA, creatinine, cystatin C, and urea." },
-    { "q": "State the three properties of an ideal marker for GFR estimation.", "a": "It should be freely filtered at the glomerulus; should achieve a stable plasma concentration; and should not be reabsorbed, secreted or metabolized by the kidney." },
-    { "q": "Why is creatinine not an ideal marker for GFR?", "a": "Because it is secreted in the proximal tubule, and its concentration is influenced by age, sex, height and dietary protein." },
-    { "q": "How is creatinine clearance measured?", "a": "Using a timed urine collection — 24 hours, or 6–12 hours." },
-    { "q": "Why is urea not an ideal marker for GFR?", "a": "Because it is reabsorbed by the renal tubules, and its plasma level is affected by dietary protein intake and state of hydration." },
-    { "q": "State the Schwartz formula.", "a": "GFR (mL/min/1.73 m²) = 0.413 × height (cm) / serum creatinine (mg/dL)." },
-    { "q": "Why is GFR expressed per 1.73 m²?", "a": "Because 1.73 m² is the average body surface area of an ideal adult, allowing comparison across body sizes." },
-    { "q": "State the formula for fractional excretion of sodium.", "a": "FENa (%) = quantity of Na excreted / quantity of Na filtered × 100 = (UNa × Pcr) / (PNa × Ucr) × 100." },
-    { "q": "What determines urinary sodium excretion normally, and how is FENa interpreted?", "a": "Extracellular fluid volume normally determines urinary sodium excretion; FENa is ≤ 1 in normovolaemia and pre-renal AKI, and > 1 in impaired tubular transport such as ATN." },
-    { "q": "Name the tests of renal tubular function other than fractional excretion.", "a": "Concentrating ability test (osmolality, pH); water deprivation test; diluting ability test; and urine acidification test." },
-    { "q": "What is the water deprivation test used to differentiate?", "a": "Central diabetes insipidus from nephrogenic diabetes insipidus." },
-    { "q": "What is the diluting ability test used for?", "a": "Assessment of unexplained hyponatraemia." },
-    { "q": "What does the urine acidification test involve?", "a": "Serial urine pH, bicarbonate excretion, titratable acid, NH₃ excretion, and the ammonium chloride challenge test." },
-    { "q": "How does ultrasonography work?", "a": "It uses sound waves beyond human auditory capability (> 20 kHz); the transducer produces the sound wave and also receives the reflected wave, converting the echoes to electrical impulses which are displayed as images on the monitor." },
-    { "q": "List the uses of renal ultrasonography.", "a": "Investigating causes of urinary tract infections; checking for causes of urinary tract obstruction; diagnosing kidney stones, masses, cysts and tumours; evaluating congenital urinary tract abnormality; assessing kidney injury from trauma; and monitoring kidney transplant status or vascular issues." },
-    { "q": "List the merits of ultrasonography.", "a": "No ionizing radiation; real time images; readily available; relatively cheap; and portable, point-of-care option." },
-    { "q": "List the demerits of ultrasonography.", "a": "Cannot see through compact bone (posterior acoustic shadow); gas distorts the image; user dependence; and depth limitation." },
-    { "q": "List the radiographic imaging modalities in nephrology.", "a": "Plain film; intravenous urography; voiding cysto-urethrography; antegrade and retrograde pyelography; and renal arteriography." },
-    { "q": "What is a plain film used for in nephrology?", "a": "Diagnosis of nephrocalcinosis and radio-opaque stones in the pelvis, ureters and bladder; diagnosis of congenital spinal abnormalities with urinary symptom manifestation; and before injecting contrast material for intravenous urography. It is declining with the advent of USS." },
-    { "q": "What is intravenous urography used for?", "a": "To demonstrate anatomy of the urinary tract, giving details of the calyces and ureters; in the diagnosis of occult duplex kidney, malrotation, site of urinary tract obstruction and calculi; and it can detect renal scars." },
-    { "q": "List the demerits of intravenous urography.", "a": "High radiation exposure; low sensitivity for renal scar detection; potential reaction to contrast; and it is not used in neonates, young infants, or patients with renal failure." },
-    { "q": "What is voiding cysto-urethrography, and what is it the gold standard for?", "a": "The definitive method for demonstrating the lower urinary tract; it is the gold standard for diagnosing and grading VUR and PUV obstruction." },
-    { "q": "How is a VCUG performed?", "a": "Contrast is injected into the bladder to the upper tract, and films are taken during instillation, voiding and post-voiding." },
-    { "q": "List the indications for VCUG.", "a": "Suspected ureteric dilatation; small contracted kidneys; renal failure of indeterminate cause; terminal haematuria; voiding difficulties; and a thick walled bladder seen by ultrasound." },
-    { "q": "What are the demerits of VCUG?", "a": "High dose of radiation, and risk of UTI." },
-    { "q": "Which radioisotopes are used in dynamic renography, and what are its uses?", "a": "Technetium-labelled DTPA (Tc-DTPA) and Tc-MAG3; used for determining differential renal function, indirect voiding cystography, evaluation of post-transplantation state, and evaluating surgical treatment involving the kidneys." },
-    { "q": "What are the merits and demerits of dynamic renography?", "a": "It has a low dose of radiation; demerits are poor visualization of the renal cortex, and it cannot be used to evaluate renal size or morphology." },
-    { "q": "List the uses of the static renal scan.", "a": "In renovascular diseases and dribbling urinary incontinence; location of ectopic or absent kidney; detection of renal scars; the acute phase of pyelonephritis to demonstrate parenchymal involvement; and to detect focal parenchymal abnormalities." },
-    { "q": "What are the drawbacks of the static renal scan?", "a": "It is time-consuming, and does not give information on the function of the urinary tract." },
-    { "q": "What are the indications and merits of CT in nephrology?", "a": "Indications are similar to those of ultrasound; it gives clearer resolution, can detect fine calcifications within the renal parenchyma and collecting system, and with contrast enhancement can evaluate masses in the pelvis or bladder such as Wilms tumour. It is expensive and carries a risk of considerable radiation." },
-    { "q": "What are the uses and drawbacks of MRI in nephrology?", "a": "For detailed evaluation of complex urinary system disorders; it gives excellent pelvic floor details and is good for renal masses and cystic lesions, with no radiation exposure — but heavy sedation is needed." },
-    { "q": "Define renal biopsy and list its types.", "a": "The process of obtaining tissue from the kidney for histopathological evaluation; types are percutaneous, transvenous or transjugular, laparoscopic, and open surgical — the percutaneous approach is preferred by the paediatric nephrologist." },
-    { "q": "Name the renal biopsy needles.", "a": "Vim-Silverman needle; manual Tru-cut biopsy needle; semi-automatic Tru-cut biopsy needle; and the Tru-cut spring-loaded automatic biopsy system." },
-    { "q": "List the general indications for renal biopsy.", "a": "Establishment of the exact diagnosis; as an aid to determine the nature of recommended therapy; to help decide when treatment is futile; to ascertain the degree of active (potentially reversible) and chronic (irreversible) changes; follow up of treatment or disease; and research." },
-    { "q": "What limits the accuracy of prognostication from a renal biopsy?", "a": "Sample size, especially in focal lesions — biopsies with fewer than 5 glomeruli may not be accurate." },
-    { "q": "State the indications for biopsy in nephrotic syndrome.", "a": "Age less than 1 or greater than 7 years; steroid-resistant nephrotic syndrome; and those with evidence of nephritis — hypertension, haematuria, low C3, or decreased renal function persisting in spite of volume correction." },
-    { "q": "State the indications for biopsy in acute glomerulonephritis.", "a": "A course not typical of PSAGN; HSP or SLE; assessment of severity of injury to guide therapy and prognosis; differentiation of specific types of proliferative lesions such as MPGN and C3 glomerulopathies including dense deposit disease; and recurrent persistent haematuria or proteinuria." },
-    { "q": "State the indications for biopsy in AKI.", "a": "Unexplained AKI when pre- and post-renal causes are excluded; AKI associated with nephritis, nephrotic syndrome, vasculitis or systemic disease; persisting ATN when the cause remains uncertain after complete evaluation; and suspected RPGN." },
-    { "q": "Which serological and immunofluorescence tests accompany biopsy in suspected RPGN?", "a": "Serology — anti-GBM antibody and ANCA as screening tests for necrotizing vasculitides; immunofluorescence — p-ANCA, c-ANCA, MPO or PR3." },
-    { "q": "State the indications for biopsy in CKD.", "a": "When kidneys are not shrunken; diagnosis of primary disease; assessment of severity of morphologic lesions; determination of risk of recurrence in eventual renal transplant; and suitability of deceased versus living-related donor transplantation." },
-    { "q": "State the indications for biopsy in systemic disease and renal transplant.", "a": "Systemic disease — to assess severity of renal disease e.g. SLE and atypical HUS, and in diabetics with a course atypical of diabetic nephropathy. Transplant — acute rejection, recurrence of kidney disease, calcineurin toxicity, some infections, and chronic allograft rejection." },
-    { "q": "List the conditions NOT requiring renal biopsy.", "a": "Isolated glomerular haematuria (microscopic); isolated non-nephrotic haematuria; childhood nephrotic syndrome aged over 1 year and under 7 years; and frequently relapsing nephrotic syndrome." },
-    { "q": "State the transport medium for each biopsy examination.", "a": "Light microscopy — 10% buffered formalin; immunofluorescence — Michel's transport media; electron microscopy — glutaraldehyde." },
-    { "q": "What is the absolute contraindication to renal biopsy?", "a": "Uncorrectable bleeding diathesis." },
-    { "q": "List the other contraindications to renal biopsy.", "a": "Uncontrolled hypertension; active renal or peri-renal infection; hydronephrosis; obesity; ascites; small shrunken kidneys; tumours, large cysts, abscesses or pyelonephritis; solitary, ectopic or horseshoe kidney; uncooperative patient; skin infection over the biopsy site; and when a skilled operator or appropriate pathology support is not available." },
-    { "q": "How is a patient prepared for renal biopsy?", "a": "Admit at least the day before; take a history of bleeding disorders; ensure the patient is not on warfarin, any anticoagulant or antithrombotic agent, and has had no aspirin or other NSAID for at least 7 days; control hypertension before biopsy; and inform the patient and parents, explain risks and obtain consent." },
-    { "q": "State the laboratory requirements before renal biopsy.", "a": "PCV > 24–30%; platelet count at least 100,000/mm³; INR < 1.2; APTT < 2× control or < 40 seconds; plus E&U and creatinine, abdominal USS KUB, urinalysis, urine m/c/s, and group and cross-match of 1 unit of blood." },
-    { "q": "Why is an abdominal USS KUB done before renal biopsy?", "a": "To assess whether the patient has two kidneys, and to assess kidney sizes." },
-    { "q": "How long after haemodialysis should a renal biopsy be performed?", "a": "After at least 24 hours from the last dialysis session." },
-    { "q": "What is given for patients with a prolonged bleeding time before biopsy?", "a": "IV desmopressin 0.3 µg/kg 30 minutes prior, or intranasal DDAVP 2–4 µg/kg 2 hours before the procedure." },
-    { "q": "State the premedication for renal biopsy.", "a": "NPO 4 hours before, commencing 5% dextrose water at maintenance; local anaesthesia and sedation with 1–2 doses of midazolam (0.1 mg/kg) and ketamine 0.5–1.0 mg/kg, with an anaesthetist; ± IV atropine 0.01 mg/kg 1–2 minutes after midazolam." },
-    { "q": "What positions are used for renal biopsy?", "a": "Prone for biopsy of the native kidney; supine for a graft kidney; and lateral decubitus in conditions such as abdominal distension and ascites." },
-    { "q": "Which kidney is usually biopsied, and from which part?", "a": "The left kidney is usually biopsied; the lower pole is identified under real-time ultrasound, and the sample is obtained from the renal cortex." },
-    { "q": "Describe the technique of percutaneous renal biopsy.", "a": "Clean the skin with methylated spirit and povidone iodine; give local anaesthesia with 1% lignocaine under ultrasound guidance; make a nick on the skin; advance the biopsy needle under real-time ultrasound into the cortex; using a 16G or 18G needle; 2–3 passes; and the core can be examined for the presence of glomeruli." },
-    { "q": "State the post-biopsy monitoring schedule.", "a": "Vital signs — BP, heart rate, respiratory rate and temperature — quarter-hourly for 1 hour, half-hourly for 2 hours, hourly for 4 hours, then 4-hourly for 24 hours." },
-    { "q": "What other post-biopsy instructions apply?", "a": "Do a post-biopsy clinical evaluation; keep a urine rack; give IV 10% dextrose at maintenance; monitor fluid input and output; allow the patient to eat once fully conscious; and watch out for gross haematuria, abdominal pain or flank pain." },
-    { "q": "List the complications of renal biopsy.", "a": "Significant haematuria; anaemia and hypotension; bowel or solid organ perforation or laceration; loss of a kidney; death; AV malformation; hypertension; and persistent loin pain." },
-    { "q": "Define urodynamic studies and state when they are useful.", "a": "Investigations done to evaluate the anatomy and physiology of the lower urinary tract, especially the filling and emptying of the bladder and urethra; useful in neurogenic bladder, urinary incontinence, voiding dysfunction, VUR, and anorectal malformations." },
-    { "q": "Name the non-invasive and invasive urodynamic studies.", "a": "Non-invasive — uroflow study/uroflowmetry, which measures urine speed and volume, and post-void residual urine estimation. Invasive — cystometry studies, pressure flow study, and electromyography." },
-    { "q": "OSPE — Why is the left kidney usually chosen for biopsy?", "a": "Because the liver pushes the right kidney downward, so the left kidney lies more superior and is easier and safer to reach." },
-    { "q": "OSPE — Why must the biopsy sample come from the renal cortex?", "a": "Because the glomeruli are located in the cortex; a medullary sample contains no glomeruli and is diagnostically useless." },
-    { "q": "OSPE — Why is the lower pole targeted in renal biopsy?", "a": "Because it is furthest from the renal hilum where the large vessels enter, reducing the risk of major vascular injury." },
-    { "q": "OSPE — Why is the prone position used for native renal biopsy?", "a": "Because the kidneys are retroperitoneal and are therefore approached from the back; a graft kidney lies in the iliac fossa anteriorly, so the supine position is used." },
-    { "q": "OSPE — Why must aspirin be stopped 7 days before renal biopsy?", "a": "Because aspirin irreversibly inhibits platelets, which live 7–10 days; the entire affected platelet population must be replaced." },
-    { "q": "OSPE — Why are so many biopsy contraindications related to bleeding?", "a": "Because the kidneys receive about 20% of cardiac output, making them one of the most vascular organs in the body." },
-    { "q": "OSPE — Why are small shrunken kidneys a contraindication to biopsy?", "a": "Because they indicate end-stage irreversible disease, so the biopsy carries all the risk without changing management." },
-    { "q": "OSPE — A child has nephrotic syndrome aged 4 with normal BP, no haematuria and normal C3. Is biopsy indicated?", "a": "No — childhood nephrotic syndrome aged over 1 and under 7 years without evidence of nephritis does not require biopsy; treat with steroids and observe the response." },
-    { "q": "OSPE — What is the difference between frequently relapsing and steroid-resistant nephrotic syndrome regarding biopsy?", "a": "Frequently relapsing nephrotic syndrome does NOT require biopsy, because it still responds to steroids; steroid-resistant nephrotic syndrome DOES require biopsy, because it never responded." },
-    { "q": "OSPE — Why does the phrase 'persisting in spite of volume correction' matter in nephrotic syndrome?", "a": "Because a nephrotic child is intravascularly depleted despite being oedematous, which raises creatinine pre-renally; only if the impairment persists after volume correction does it indicate intrinsic renal damage." },
-    { "q": "OSPE — A child has oliguria and rising creatinine after gastroenteritis. Which test distinguishes pre-renal AKI from ATN?", "a": "Fractional excretion of sodium — FENa ≤ 1 indicates pre-renal AKI with working tubules; FENa > 1 indicates ATN with impaired tubular transport." },
-    { "q": "OSPE — Why is a low FENa reassuring?", "a": "Because it shows the tubules are actively reabsorbing sodium — they are alive and responding correctly to volume depletion elsewhere in the body." },
-    { "q": "OSPE — Why does distinguishing pre-renal AKI from ATN change management?", "a": "Pre-renal AKI responds to volume replacement; in ATN, aggressive fluid loading will not restore function and will cause fluid overload, pulmonary oedema and hypertension." },
-    { "q": "OSPE — Why does urea rise disproportionately in pre-renal AKI?", "a": "Because urea is reabsorbed by the renal tubules along with water, and in volume depletion the kidney reabsorbs water avidly." },
-    { "q": "OSPE — Ultrasound shows a dilated ureter and thick-walled bladder in a boy with recurrent febrile UTI. Which investigation is indicated?", "a": "Voiding cysto-urethrography — the gold standard for diagnosing and grading VUR and PUV obstruction; suspected ureteric dilatation and a thick-walled bladder seen on US are both listed indications." },
-    { "q": "OSPE — Why must films be taken during voiding in a VCUG?", "a": "Because bladder pressure is highest during voiding, so reflux is most likely to be demonstrated then; a study without voiding films can miss the diagnosis." },
-    { "q": "OSPE — What complication is being prevented by diagnosing VUR early?", "a": "Renal scarring from recurrent pyelonephritis, which leads to hypertension and chronic kidney disease." },
-    { "q": "OSPE — Which investigation best detects renal scars, and why?", "a": "The static renal scan — the tracer is taken up only by functioning tubular cells, so a scar appears as a cold defect. IVU has low sensitivity for renal scar detection." },
-    { "q": "OSPE — Which investigation determines differential renal function, and why does it matter?", "a": "Dynamic renography with Tc-DTPA or Tc-MAG3 — it shows how much each kidney contributes, which determines whether an obstructed kidney should be repaired or removed." },
-    { "q": "OSPE — Why can ultrasound not be used to assess renal function?", "a": "Because it shows structure only; two normal-looking kidneys may be in complete failure." },
-    { "q": "OSPE — Why is IVU contraindicated in renal failure?", "a": "Because the test depends on the kidney excreting the contrast; a failing kidney gives a poor image and is exposed to a nephrotoxic contrast load." },
-    { "q": "OSPE — Why does a stone cast a shadow on ultrasound?", "a": "Because it reflects almost all the ultrasound beam, so nothing passes behind it — the same posterior acoustic shadow produced by bone." },
-    { "q": "CLINICAL — Why does chronic kidney disease cause anaemia?", "a": "Because the kidney produces erythropoietin, which stimulates red cell production in the bone marrow; its loss is a hormone deficiency, not blood loss." },
-    { "q": "CLINICAL — Why does chronic kidney disease cause bone disease?", "a": "Because the kidney performs the final hydroxylation that activates vitamin D; without it, calcium is not absorbed, blood calcium falls, PTH rises and calcium is drawn from bone." },
-    { "q": "CLINICAL — Why must growth and development be monitored in a child with kidney disease?", "a": "Because chronic acidosis, anaemia and impaired calcium and bone metabolism all impair growth — the kidney's endocrine functions directly affect it." },
-    { "q": "CLINICAL — A dipstick shows no protein in a child with suspected nephrotic syndrome. What might explain a false negative?", "a": "Dilute urine or very acidic urine, or proteinuria consisting of proteins other than albumin, which the strip mainly detects." },
-    { "q": "CLINICAL — Why is a bag urine specimen of limited value in a febrile infant?", "a": "Because of the high risk of contamination; it is useful mainly for its negative predictive value — a negative result is reassuring, a positive one is unreliable." }
-  ]
+ "deck": "Recall Cards",
+ "topic": "Introduction to Nephrology / Investigations of the Renal System",
+ "cards": [
+  {
+   "q": "Define paediatric nephrology.",
+   "a": "**The branch of paediatrics responsible for the diagnosis, evaluation and management of disorders of the kidney and urinary tract in children.**\n\n## Understanding it\n- It focuses on the **kidneys and urinary tract** in children.\n- Covers **diagnosis, evaluation and management**.\n\n>> Paediatric nephrology = children's kidney/urinary-tract medicine.",
+   "opts": [
+    "Surgery of the bladder only",
+    "The paediatric field for kidney/urinary-tract disorders",
+    "The study of the heart in children",
+    "Adult kidney medicine"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What five things should a nephrologist be able to do?",
+   "a": "**Evaluate and diagnose renal pathology; institute treatment; monitor growth and development; provide long-term follow-up; and counsel families.**\n\n## Understanding it\n- Beyond diagnosis and treatment, chronic renal disease needs **growth monitoring, follow-up, and family counselling**.\n\n>> Diagnose, treat, monitor growth, follow up, counsel.",
+   "opts": [
+    "Only perform surgery",
+    "Only read scans",
+    "Only prescribe dialysis",
+    "Diagnose, treat, monitor growth/development, follow up, counsel families"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the position and covering of the kidneys.",
+   "a": "**Paired, bean-shaped, retroperitoneal organs between T12 and L3, with the left kidney lying slightly higher than the right.**\n\n## Understanding it\n- **Retroperitoneal** (behind the peritoneum), at **T12–L3**.\n- The **liver** pushes the **right** kidney down, so the **left is higher**.\n\n>> Retroperitoneal, T12–L3, left higher than right.",
+   "opts": [
+    "Retroperitoneal, T12–L3, left slightly higher",
+    "Attached to the bladder",
+    "Intraperitoneal, in the pelvis",
+    "In the chest, right higher"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the weight and dimensions of the kidneys.",
+   "a": "**About 150 g (male) / 135 g (female); 10–12 cm long, 5–7 cm wide, 2–3 cm thick.**\n\n## Understanding it\n- Adult kidney ≈ **150/135 g**, roughly a fist-sized bean.\n\n>> ~150 g, ~10–12 cm long.",
+   "opts": [
+    "~150 g male/135 g female; 10–12 × 5–7 × 2–3 cm",
+    "30 cm long",
+    "~1 kg each",
+    "~5 g each"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What proportion of cardiac output do the kidneys receive, and at what level do the renal arteries arise?",
+   "a": "**About 20% of cardiac output, from the renal arteries at the level of L2.**\n\n## Understanding it\n- The kidneys are **highly vascular** — ~**20%** of cardiac output.\n- Renal arteries arise at **L2**.\n\n>> 20% of cardiac output; renal arteries at L2. (This vascularity underlies bleeding risk in biopsy.)",
+   "opts": [
+    "~20% of cardiac output; renal arteries at L2",
+    "~50% of output; at L5",
+    "No significant blood flow",
+    "~2% of output; at T4"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the innervation of the kidney.",
+   "a": "**Sympathetic from the spinal cord at T8–L1, and parasympathetic from the vagus nerves.**\n\n## Understanding it\n- **Sympathetic** — T8–L1.\n- **Parasympathetic** — vagus (CN X).\n\n>> Sympathetic T8–L1; parasympathetic vagus.",
+   "opts": [
+    "No innervation",
+    "Cranial nerve V",
+    "Only somatic nerves",
+    "Sympathetic T8–L1; parasympathetic vagus"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the components of the nephron in order.",
+   "a": "**Renal corpuscle (glomerulus + Bowman's capsule), proximal convoluted tubule, loop of Henle, distal convoluted tubule, then collecting duct.**\n\n## Understanding it\n- Follow the filtrate: **corpuscle → PCT → loop of Henle → DCT → collecting duct**.\n\n>> Corpuscle → PCT → loop → DCT → collecting duct.",
+   "opts": [
+    "Cortex, medulla, pelvis",
+    "Artery, vein, capillary",
+    "Corpuscle, PCT, loop of Henle, DCT, collecting duct",
+    "Bladder, ureter, urethra"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the seven functions of the kidneys.",
+   "a": "**Filtration/excretion of waste; fluid and electrolyte balance; blood-pressure regulation; acid–base balance; erythropoietin production; vitamin D activation; and hormone/drug metabolism.**\n\n## Understanding it\n- Beyond making urine, the kidney regulates **BP, acid–base**, makes **EPO**, activates **vitamin D**.\n- These explain CKD complications (anaemia, bone disease).\n\n>> Excrete waste, balance fluid/electrolytes/acid-base, regulate BP, make EPO, activate vitamin D.",
+   "opts": [
+    "Pumps blood",
+    "Digests food",
+    "Only makes urine",
+    "Waste excretion, fluid/electrolyte/acid-base balance, BP, EPO, vitamin D activation"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the common renal disorders.",
+   "a": "**CAKUT, UTI, nephrotic syndrome, acute glomerulonephritis, AKI, CKD, vesicoureteric reflux, haemolytic uraemic syndrome, and renal stones.**\n\n## Understanding it\n- A spread across structural (CAKUT, VUR), infective (UTI), glomerular (nephrotic, AGN), and functional (AKI, CKD) disease.\n\n>> Know the list: CAKUT, UTI, nephrotic, AGN, AKI, CKD, VUR, HUS, stones.",
+   "opts": [
+    "Only diabetes",
+    "CAKUT, UTI, nephrotic, AGN, AKI, CKD, VUR, HUS, stones",
+    "Only heart failure",
+    "Only kidney stones"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the risk factors for renal disorders.",
+   "a": "**Drug toxicity, family history/genetics, obesity, hypertension, prematurity, diabetes, and autoimmune disorders.**\n\n## Understanding it\n- Mix of **modifiable** (obesity, HTN, diabetes, nephrotoxic drugs) and **non-modifiable** (genetics, prematurity, autoimmune).\n\n>> Drugs, genetics, obesity, HTN, prematurity, diabetes, autoimmune.",
+   "opts": [
+    "Only old age",
+    "Nephrotoxic drugs, genetics, obesity, HTN, prematurity, diabetes, autoimmune",
+    "No risk factors exist",
+    "Only male sex"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the clinical features of renal disorders.",
+   "a": "**Oliguria/anuria, oedema, haematuria, proteinuria, hypertension, electrolyte imbalance, and lower abdominal pain.**\n\n## Understanding it\n- Reflect impaired **excretion** (oliguria), **barrier** damage (haematuria/proteinuria), and **fluid/BP** dysregulation (oedema, HTN).\n\n>> Oliguria, oedema, haematuria, proteinuria, hypertension.",
+   "opts": [
+    "Only a rash",
+    "Only a cough",
+    "Oliguria/anuria, oedema, haematuria, proteinuria, hypertension",
+    "Only joint pain"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the rationale for investigations in nephrology.",
+   "a": "**To confirm a clinical diagnosis and to assess the structural and functional integrity of the kidneys and urinary tract.**\n\n## Understanding it\n- Two aims: **confirm the diagnosis** and **assess structure + function**.\n\n>> Confirm the diagnosis; assess structure and function.",
+   "opts": [
+    "To avoid examination",
+    "Only to image bones",
+    "To bill the patient",
+    "Confirm the diagnosis; assess structure and function"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What four considerations are important when choosing an investigation?",
+   "a": "**Diagnostic value, availability, cost, and sustainability.**\n\n## Understanding it\n- Choose a test that is **useful, available, affordable, and repeatable** in the setting.\n\n>> Value, availability, cost, sustainability.",
+   "opts": [
+    "Colour of the machine",
+    "Only the newest technology",
+    "Only what the patient requests",
+    "Diagnostic value, availability, cost, sustainability"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the seven classes of investigation in nephrology.",
+   "a": "**Urine examinations; blood investigations; GFR estimation; assessment of tubular function; imaging; biopsy; and urodynamic studies.**\n\n## Understanding it\n- Grouped from **least to most invasive**: urine/blood → GFR/tubular function → imaging → biopsy/urodynamics.\n\n>> Urine, blood, GFR, tubular function, imaging, biopsy, urodynamics.",
+   "opts": [
+    "Only urine and blood",
+    "Only imaging",
+    "Urine, blood, GFR, tubular function, imaging, biopsy, urodynamics",
+    "Only biopsy"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why must urine samples be examined freshly, and how may they be stored?",
+   "a": "**To avoid disintegration of cellular elements and bacterial overgrowth; if delayed, urine can be refrigerated.**\n\n## Understanding it\n- Standing urine → **cells break down** and **bacteria multiply**, giving false results.\n- If it can't be examined promptly, **refrigerate** it.\n\n>> Examine fresh (cells lyse, bacteria grow); otherwise refrigerate.",
+   "opts": [
+    "Freshness is irrelevant",
+    "Add sugar to preserve it",
+    "Leave at room temperature for days",
+    "To prevent cell breakdown and bacterial overgrowth; refrigerate if delayed"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the methods of urine collection.",
+   "a": "**Midstream urine, clean-catch, bag collection, suprapubic aspiration (SPA), and catheterization.**\n\n## Understanding it\n- Range from **non-invasive** (MSU, clean catch, bag) to **invasive/reliable** (SPA, catheter).\n\n>> MSU, clean catch, bag, SPA, catheter.",
+   "opts": [
+    "Only a swab",
+    "MSU, clean catch, bag, suprapubic aspiration, catheter",
+    "Only a blood draw",
+    "Only a 24-hour bottle"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the drawback of bagging, and what is its value?",
+   "a": "**High risk of contamination (the bag must be removed as soon as urine is passed); its value is mainly a good negative predictive value.**\n\n## Understanding it\n- Bag urine is **easily contaminated** by skin flora → false positives.\n- But a **negative** bag result is reassuring (good negative predictive value).\n\n>> Bag: contamination-prone, useful mainly when negative.",
+   "opts": [
+    "It is painful",
+    "It is the most sterile method",
+    "It requires anaesthesia",
+    "High contamination risk; useful for its negative predictive value"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which method of urine collection is most reliable, and in whom is it useful?",
+   "a": "**Suprapubic aspiration — most reliable; useful in children under 2 years.**\n\n## Understanding it\n- **SPA** samples bladder urine directly, bypassing skin contamination → the **gold standard** for sterility.\n- Especially useful in **infants under 2**.\n\n>> SPA = most reliable; used in under-2s.",
+   "opts": [
+    "Bag collection; all ages",
+    "A dipstick; adults only",
+    "Suprapubic aspiration; children under 2 years",
+    "Clean catch; neonates only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the significant colony counts for SPA, CSU and MSU.",
+   "a": "**SPA — any growth is significant (bladder urine should be sterile); CSU — ≥ 10⁴ CFU/mL; MSU — ≥ 10⁵ CFU/mL.**\n\n## Understanding it\n- The **cleaner** the sample, the **lower** the threshold: SPA (any) < catheter (10⁴) < midstream (10⁵).\n\n>> SPA any growth; CSU 10⁴; MSU 10⁵.",
+   "opts": [
+    "There are no thresholds",
+    "SPA needs 10⁶",
+    "All require 10⁵",
+    "SPA any growth; CSU ≥10⁴; MSU ≥10⁵ CFU/mL"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What growth indicates UTI on catheterization in a girl, or midstream clean-void in a circumcised boy?",
+   "a": "**Usually > 50,000 CFU/mL of a single urinary pathogen; UTI may be present with 10,000–50,000 CFU/mL if symptomatic.**\n\n## Understanding it\n- For these relatively clean samples, **>50,000 CFU/mL** of one pathogen indicates UTI.\n- Lower counts (10,000–50,000) can still be UTI if the child is **symptomatic**.\n\n>> >50,000 CFU/mL (single pathogen); lower counts count if symptomatic.",
+   "opts": [
+    "Any growth at all",
+    "Growth is never significant",
+    ">50,000 CFU/mL of a single pathogen (lower if symptomatic)",
+    "Only >1,000,000 CFU/mL"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What growth indicates UTI on midstream clean-void collection in a girl or uncircumcised boy?",
+   "a": "**> 100,000 CFU/mL of a single urinary pathogen in a symptomatic patient, usually with pyuria; UTI may still be present at lower counts.**\n\n## Understanding it\n- These samples are more contamination-prone, so the threshold is **higher: >100,000 CFU/mL**.\n- **Pyuria** usually accompanies true infection.\n\n>> >100,000 CFU/mL (single pathogen) with pyuria.",
+   "opts": [
+    ">1,000 CFU/mL",
+    ">100,000 CFU/mL of a single pathogen with pyuria",
+    "No threshold applies",
+    "Any mixed growth"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "In an asymptomatic patient, how is bacterial growth interpreted?",
+   "a": "**Growth is usually significant if > 100,000 CFU/mL of the same organism on different days; absent pyuria makes the result less likely to be a true infection.**\n\n## Understanding it\n- Without symptoms, you need **repeated high counts of the same organism** to call it real.\n- **No pyuria** argues against true infection (may be asymptomatic bacteriuria/contamination).\n\n>> Asymptomatic: >100,000 of the same organism on separate days; no pyuria = doubt it.",
+   "opts": [
+    "Any single growth is a UTI",
+    "It is always contamination",
+    "Significant if >100,000 of the same organism on different days",
+    "Pyuria is irrelevant"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which patients are most likely to have a UTI with low colony counts, and why?",
+   "a": "**Patients with urinary frequency — because the shortened bladder incubation time gives bacteria less opportunity to multiply.**\n\n## Understanding it\n- Bacteria multiply while urine **sits** in the bladder.\n- Frequent voiding = **short incubation** = lower counts despite real infection.\n\n>> Frequency → short incubation → true UTI at low counts.",
+   "opts": [
+    "Patients with frequency (short bladder incubation time)",
+    "It never happens",
+    "Patients who drink no water",
+    "Only elderly patients"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the parameters on a routine urine dipstick.",
+   "a": "**Leukocytes, nitrite, protein, pH, blood, specific gravity, ketones, bilirubin, glucose, ascorbic acid, and urobilinogen.**\n\n## Understanding it\n- Key renal/UTI ones: **leukocytes + nitrite** (infection), **protein + blood** (glomerular), **specific gravity/pH** (concentration/acid-base).\n\n>> Dipstick: leukocytes, nitrite, protein, blood, pH, SG, glucose, ketones, bilirubin.",
+   "opts": [
+    "Leukocytes, nitrite, protein, pH, blood, SG, ketones, glucose, bilirubin",
+    "Serum electrolytes",
+    "Only glucose",
+    "Only pH"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the principle of the urine dipstick.",
+   "a": "**Urine constituents react with a chemical impregnated in each pad on the strip, producing a colour change read against a chart.**\n\n## Understanding it\n- Each **reagent pad** reacts with a specific substance → a **colour change** proportional to concentration.\n\n>> Chemical pads change colour with urine constituents.",
+   "opts": [
+    "It measures temperature",
+    "It cultures bacteria",
+    "Constituents react with reagent pads, giving a colour change",
+    "It weighs the urine"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What determines the quality of a dipstick result?",
+   "a": "**Strict adherence to the manufacturer's instructions.**\n\n## Understanding it\n- Timing, storage, and reading must follow the **manufacturer's protocol** or results are unreliable.\n\n>> Follow the instructions exactly for a valid result.",
+   "opts": [
+    "Strict adherence to the manufacturer's instructions",
+    "The patient's age",
+    "The colour of the container",
+    "How fast you shake it"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the estimated urine protein concentration for each dipstick grade.",
+   "a": "**Trace < 30 mg/dL; + 30 mg/dL; 2+ 100 mg/dL; 3+ 300 mg/dL; 4+ > 1000 mg/dL.**\n\n## Understanding it\n- Each '+' corresponds to a rising protein concentration; **3+/4+** suggest heavy (nephrotic-range) proteinuria.\n\n>> Trace<30, +30, 2+100, 3+300, 4+>1000 mg/dL.",
+   "opts": [
+    "All grades mean the same",
+    "Trace = 500 mg/dL",
+    "Trace<30, +30, 2+100, 3+300, 4+>1000 mg/dL",
+    "+ = 1000 mg/dL"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the causes of false negative proteinuria.",
+   "a": "**Dilute or very acidic urine, and proteinuria composed of proteins other than albumin.**\n\n## Understanding it\n- The dipstick mainly detects **albumin**, in reasonably concentrated urine.\n- **Dilute/acidic** urine or **non-albumin** proteins → falsely negative.\n\n>> Dilute/acidic urine or non-albumin protein → false negative.",
+   "opts": [
+    "Gross haematuria",
+    "Dilute/acidic urine; non-albumin proteinuria",
+    "Concentrated alkaline urine",
+    "Contamination with discharge"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the causes of false positive proteinuria.",
+   "a": "**Concentrated urine, alkaline urine, gross haematuria, delay in reading, and contamination (e.g. vaginal discharge).**\n\n## Understanding it\n- Very **concentrated/alkaline** urine, **blood**, delayed reading, or **contamination** can falsely raise the protein reading.\n\n>> Concentrated/alkaline urine, haematuria, delay, contamination → false positive.",
+   "opts": [
+    "Concentrated/alkaline urine, gross haematuria, delayed reading, contamination",
+    "Dilute acidic urine",
+    "Refrigerated urine",
+    "Non-albumin protein"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What other urine examinations are performed?",
+   "a": "**Urine macroscopy (appearance, colour, odour), microscopy (RBCs, WBCs, casts, crystals), and urine culture.**\n\n## Understanding it\n- Beyond the dipstick: **look** (macroscopy), **microscope** (cells/casts/crystals), and **culture** (organism + sensitivity).\n\n>> Macroscopy + microscopy (cells/casts) + culture.",
+   "opts": [
+    "Macroscopy, microscopy (cells/casts/crystals), and culture",
+    "Only a blood test",
+    "Only imaging",
+    "Only the dipstick"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the blood tests used in nephrology.",
+   "a": "**Serum electrolytes, urea and creatinine, calcium, phosphate, magnesium and vitamin D; plus FBC, malaria parasites, and ESR.**\n\n## Understanding it\n- **Renal function** (U&E, creatinine), **bone/mineral** (Ca, PO4, Mg, vit D), and **general** (FBC, MP, ESR).\n\n>> U&E/creatinine, Ca/PO4/Mg/vit D, FBC/MP/ESR.",
+   "opts": [
+    "Only a full blood count",
+    "Electrolytes, urea/creatinine, Ca/PO4/Mg/vit D, FBC, MP, ESR",
+    "Only glucose",
+    "Only cholesterol"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the immunologic tests used in nephrology and what they indicate.",
+   "a": "**C3/C4/CH50 (complement), ASO titre and anti-DNAse B (streptococcal infection), IgG/IgA (SLE, JRA), and ANCA (Wegener's/vasculitis).**\n\n## Understanding it\n- **Complement** (low in post-strep GN, SLE), **ASO/anti-DNAse B** (recent strep), **ANCA** (vasculitis).\n\n>> Complement, ASO/anti-DNAse B, ANCA — for glomerulonephritis/vasculitis work-up.",
+   "opts": [
+    "Only blood glucose",
+    "Only vitamin D",
+    "Complement (C3/C4), ASO/anti-DNAse B, IgG/IgA, ANCA",
+    "Only electrolytes"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is GFR estimated?",
+   "a": "**To assess renal function, detect renal disease, assess its severity, and for prognostication.**\n\n## Understanding it\n- GFR is the **best overall measure of kidney function**.\n- It detects disease, grades **severity (CKD stage)**, and predicts outcome.\n\n>> GFR = the master measure of renal function/severity/prognosis.",
+   "opts": [
+    "To image the kidney",
+    "To measure blood pressure",
+    "To assess function, detect/grade disease, and prognosticate",
+    "To diagnose infection"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Name the commonly used markers for GFR estimation.",
+   "a": "**Inulin, polyfructose, Cr-EDTA, creatinine, cystatin C, and urea.**\n\n## Understanding it\n- **Inulin** is the gold-standard research marker; **creatinine/cystatin C** are practical clinical markers.\n\n>> Inulin (ideal), Cr-EDTA, creatinine, cystatin C, urea.",
+   "opts": [
+    "Only haemoglobin",
+    "Only glucose",
+    "Inulin, Cr-EDTA, creatinine, cystatin C, urea",
+    "Only sodium"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the three properties of an ideal marker for GFR estimation.",
+   "a": "**It should be freely filtered at the glomerulus, achieve a stable plasma concentration, and be neither secreted nor reabsorbed by the tubules.**\n\n## Understanding it\n- A true GFR marker must be **filtered only** — not handled further by the tubules — with a **steady** blood level.\n- Inulin fits; creatinine (secreted) and urea (reabsorbed) don't perfectly.\n\n>> Freely filtered, stable level, not secreted/reabsorbed.",
+   "opts": [
+    "Secreted heavily",
+    "Freely filtered, stable plasma level, not secreted or reabsorbed",
+    "Reabsorbed by the tubule",
+    "Bound to plasma proteins"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why is creatinine not an ideal marker for GFR?",
+   "a": "**Because it is secreted by the proximal tubule, and its level is influenced by age, sex, height and muscle mass.**\n\n## Understanding it\n- Tubular **secretion** means creatinine clearance slightly **overestimates** GFR.\n- Its production varies with **muscle mass**, so the same creatinine means different GFR in different people.\n\n>> Creatinine is secreted and muscle-dependent → imperfect.",
+   "opts": [
+    "It is reabsorbed entirely",
+    "It is secreted by the tubule and varies with muscle mass",
+    "It is never filtered",
+    "It is unaffected by anything"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is creatinine clearance measured?",
+   "a": "**Using a timed urine collection — 24 hours, or 6–12 hours.**\n\n## Understanding it\n- Collect **all** urine over a set time and compare urine to plasma creatinine.\n- Standard is **24 hours** (shorter timed collections are alternatives).\n\n>> Timed (usually 24-hour) urine collection.",
+   "opts": [
+    "A timed (e.g. 24-hour) urine collection",
+    "A single spot blood test",
+    "A dipstick reading",
+    "An ultrasound"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is urea not an ideal marker for GFR?",
+   "a": "**Because it is reabsorbed by the renal tubules, and its plasma level is affected by dietary protein intake.**\n\n## Understanding it\n- Tubular **reabsorption** means urea **underestimates** GFR.\n- **Diet (protein)** and hydration also change urea independent of GFR.\n\n>> Urea is reabsorbed and diet-dependent → imperfect.",
+   "opts": [
+    "It is unaffected by diet",
+    "It is never in the blood",
+    "It is secreted heavily",
+    "It is reabsorbed and affected by dietary protein"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the Schwartz formula.",
+   "a": "**GFR (mL/min/1.73 m²) = 0.413 × height (cm) / serum creatinine (mg/dL).**\n\n## Understanding it\n- A paediatric bedside estimate of GFR using **height and creatinine**.\n- The constant (0.413) accounts for muscle mass relative to height.\n\n>> Schwartz: GFR = 0.413 × height / creatinine.",
+   "opts": [
+    "GFR = height + creatinine",
+    "GFR = 300 / creatinine",
+    "GFR = 0.413 × height(cm) / creatinine(mg/dL)",
+    "GFR = weight × creatinine"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is GFR expressed per 1.73 m²?",
+   "a": "**Because 1.73 m² is the average body surface area of an ideal adult, allowing comparison across body sizes.**\n\n## Understanding it\n- Normalising GFR to a **standard body surface area** lets you compare a child and an adult fairly.\n\n>> Per 1.73 m² standardises GFR across body sizes.",
+   "opts": [
+    "It is the kidney's surface area",
+    "The bladder capacity",
+    "1.73 m² is a standard body surface area for comparison",
+    "A random number"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the formula for fractional excretion of sodium.",
+   "a": "**FENa (%) = (UNa × Pcr) / (PNa × Ucr) × 100.**\n\n## Understanding it\n- FENa compares **sodium excreted** to **sodium filtered**, using paired urine and plasma sodium and creatinine.\n\n>> FENa = (UNa × Pcr)/(PNa × Ucr) × 100.",
+   "opts": [
+    "FENa = height/creatinine",
+    "FENa = creatinine clearance",
+    "FENa = UNa/PNa only",
+    "FENa = (UNa × Pcr)/(PNa × Ucr) × 100"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What determines urinary sodium excretion normally, and how is FENa interpreted?",
+   "a": "**Extracellular fluid volume normally determines sodium excretion; FENa ≤ 1 in normovolaemia/pre-renal states and > 1 in tubular damage (ATN).**\n\n## Understanding it\n- Healthy tubules **retain sodium** when volume-depleted → **FENa ≤ 1** (pre-renal AKI).\n- Damaged tubules **leak sodium** → **FENa > 1** (ATN).\n\n>> FENa ≤1 = pre-renal (tubules working); >1 = ATN (tubules damaged).",
+   "opts": [
+    "ECF volume determines it; FENa ≤1 pre-renal, >1 ATN",
+    "FENa >1 means pre-renal",
+    "Volume has no effect",
+    "FENa is always 5"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the tests of renal tubular function other than fractional excretion.",
+   "a": "**Concentrating ability test (osmolality, pH), water deprivation test, diluting ability test, and urine acidification test.**\n\n## Understanding it\n- These probe the tubule's ability to **concentrate, dilute, and acidify** urine.\n\n>> Concentrating, water deprivation, diluting, and acidification tests.",
+   "opts": [
+    "Only the dipstick",
+    "Only GFR",
+    "Concentrating, water deprivation, diluting, and acidification tests",
+    "Only culture"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the water deprivation test used to differentiate?",
+   "a": "**Central diabetes insipidus from nephrogenic diabetes insipidus.**\n\n## Understanding it\n- Withhold water, then give **desmopressin (ADH)**.\n- **Central DI** responds to ADH (concentrates urine); **nephrogenic DI** does not (kidney can't respond).\n\n>> Water deprivation ± ADH separates central from nephrogenic DI.",
+   "opts": [
+    "SLE from vasculitis",
+    "Pre-renal from ATN",
+    "Central from nephrogenic diabetes insipidus",
+    "UTI from stones"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the diluting ability test used for?",
+   "a": "**Assessment of unexplained hyponatraemia.**\n\n## Understanding it\n- It tests whether the kidney can appropriately **dilute** urine to excrete free water.\n- Useful when **hyponatraemia** has no obvious cause (e.g. SIADH).\n\n>> Diluting test → work up unexplained hyponatraemia.",
+   "opts": [
+    "Diagnosing UTI",
+    "Grading VUR",
+    "Measuring GFR",
+    "Assessing unexplained hyponatraemia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does the urine acidification test involve?",
+   "a": "**Serial urine pH, bicarbonate excretion, titratable acid, ammonia excretion, and the ammonium chloride challenge.**\n\n## Understanding it\n- It assesses the tubule's ability to **acidify urine** (excrete acid) — key in **renal tubular acidosis**.\n- The **ammonium chloride load** stresses the system.\n\n>> Acidification test → diagnoses renal tubular acidosis.",
+   "opts": [
+    "Serial pH, bicarbonate/acid excretion, and an ammonium chloride challenge",
+    "A single blood pH",
+    "A urine culture",
+    "An ultrasound scan"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does ultrasonography work?",
+   "a": "**It uses sound waves beyond human hearing (> 20 kHz); the transducer emits the wave and detects the echoes to build an image.**\n\n## Understanding it\n- **High-frequency sound** is sent in and its **echoes** are reconstructed into an image.\n- No ionizing radiation.\n\n>> Ultrasound = sound waves in, echoes out → image.",
+   "opts": [
+    "X-rays through the body",
+    "High-frequency sound waves and their echoes form an image",
+    "Radioactive tracer",
+    "A magnetic field"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the uses of renal ultrasonography.",
+   "a": "**Investigating causes of UTI, checking for obstruction, diagnosing structural anomalies, guiding biopsy, and assessing kidney size.**\n\n## Understanding it\n- The **first-line** imaging: size, structure, obstruction (hydronephrosis), and biopsy guidance.\n\n>> US: structure, size, obstruction, anomalies, biopsy guidance.",
+   "opts": [
+    "Diagnose epilepsy",
+    "Culture bacteria",
+    "Measure kidney function",
+    "Assess structure/size, detect obstruction/anomalies, guide biopsy"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the merits of ultrasonography.",
+   "a": "**No ionizing radiation, real-time images, readily available, relatively cheap, and portable (point-of-care).**\n\n## Understanding it\n- Safe (no radiation), fast, cheap, bedside — ideal for children.\n\n>> Safe, real-time, available, cheap, portable.",
+   "opts": [
+    "High radiation but cheap",
+    "Requires sedation always",
+    "Very expensive and fixed",
+    "No radiation, real-time, available, cheap, portable"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the demerits of ultrasonography.",
+   "a": "**Cannot see through compact bone (posterior acoustic shadow), gas distorts the image, it is user-dependent, and it gives no functional information.**\n\n## Understanding it\n- **Bone and gas** block/distort the beam; results depend on the **operator's** skill.\n- It shows **structure only**, not function.\n\n>> Blocked by bone/gas, operator-dependent, structure-only.",
+   "opts": [
+    "Always perfectly accurate",
+    "Shows renal function well",
+    "Blocked by bone/gas, user-dependent, no functional data",
+    "Uses high radiation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the radiographic imaging modalities in nephrology.",
+   "a": "**Plain film, intravenous urography, voiding cysto-urethrography, antegrade and retrograde pyelography, and CT/MRI.**\n\n## Understanding it\n- A range of **X-ray/contrast** studies plus cross-sectional imaging (CT/MRI).\n\n>> Plain film, IVU, VCUG, pyelography, CT/MRI.",
+   "opts": [
+    "Only EEG",
+    "Only biopsy",
+    "Only ultrasound",
+    "Plain film, IVU, VCUG, pyelography, CT/MRI"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is a plain film used for in nephrology?",
+   "a": "**Diagnosing nephrocalcinosis and radio-opaque stones in the pelvis, ureters and bladder, and detecting congenital bony/spinal anomalies.**\n\n## Understanding it\n- A plain X-ray (KUB) shows **calcium-containing stones** and **calcification**.\n- Radiolucent stones are missed.\n\n>> Plain film = radio-opaque stones and nephrocalcinosis.",
+   "opts": [
+    "Renal function",
+    "Bacterial growth",
+    "Soft-tissue tumours",
+    "Radio-opaque stones and nephrocalcinosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is intravenous urography used for?",
+   "a": "**To demonstrate the anatomy of the urinary tract (calyces and ureters) and to diagnose obstruction and some structural lesions.**\n\n## Understanding it\n- IV contrast is **excreted** by the kidney, outlining the **collecting system and ureters**.\n- Shows anatomy and obstruction.\n\n>> IVU = contrast outlines the calyces/ureters (needs working kidneys).",
+   "opts": [
+    "Culturing urine",
+    "Measuring GFR precisely",
+    "Showing renal blood flow only",
+    "Demonstrating collecting-system anatomy and obstruction"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the demerits of intravenous urography.",
+   "a": "**High radiation exposure, low sensitivity for renal scars, potential contrast reactions, and dependence on kidney excretion (poor in renal failure).**\n\n## Understanding it\n- Lots of **radiation**, poor at scars, **contrast risk**, and useless if the kidney can't excrete the dye.\n\n>> High radiation, misses scars, contrast risk, fails in renal failure.",
+   "opts": [
+    "Works in complete failure",
+    "Best test for scars",
+    "High radiation, misses scars, contrast risk, fails in renal failure",
+    "No radiation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is voiding cysto-urethrography, and what is it the gold standard for?",
+   "a": "**The definitive method for demonstrating the lower urinary tract; it is the gold standard for diagnosing and grading vesicoureteric reflux (and posterior urethral valves).**\n\n## Understanding it\n- Contrast in the **bladder** is imaged during voiding to catch **reflux (VUR)** and **PUV**.\n\n>> VCUG = gold standard for VUR (and PUV).",
+   "opts": [
+    "Best for stones",
+    "Gold standard for GFR",
+    "Gold standard for VUR (and PUV) — the lower urinary tract",
+    "Best for renal scars"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How is a VCUG performed?",
+   "a": "**Contrast is instilled into the bladder up toward the upper tract, and films are taken during instillation, voiding, and after voiding.**\n\n## Understanding it\n- Fill the bladder with contrast, then image while the child **voids** — when reflux is most likely.\n\n>> Fill the bladder, image during voiding (± before/after).",
+   "opts": [
+    "Contrast is injected into a vein",
+    "A tracer is inhaled",
+    "No contrast is used",
+    "Bladder is filled with contrast and imaged during voiding"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the indications for VCUG.",
+   "a": "**Suspected ureteric dilatation, small contracted kidneys, renal failure of indeterminate cause, terminal haematuria, and recurrent/febrile UTI (to look for reflux).**\n\n## Understanding it\n- Mainly to evaluate **reflux/obstruction** — e.g. after a **febrile UTI** or when the ureter is dilated.\n\n>> VCUG when reflux/PUV is suspected (febrile UTI, dilated ureter).",
+   "opts": [
+    "Simple dehydration",
+    "A cough",
+    "Every routine check-up",
+    "Suspected reflux/obstruction (febrile UTI, dilated ureter, contracted kidneys)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the demerits of VCUG?",
+   "a": "**A high dose of radiation and a risk of introducing UTI.**\n\n## Understanding it\n- It's an **X-ray/contrast** study (**radiation**) and involves **catheterising** the bladder (**infection risk**).\n\n>> VCUG downsides: radiation and catheter-related UTI.",
+   "opts": [
+    "It measures GFR poorly",
+    "It requires surgery",
+    "High radiation and risk of UTI",
+    "No radiation and no infection risk"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which radioisotopes are used in dynamic renography, and what are its uses?",
+   "a": "**Technetium-labelled DTPA (Tc-DTPA) and Tc-MAG3; used for differential renal function, drainage, and detecting obstruction.**\n\n## Understanding it\n- These tracers are **filtered/excreted**, so their passage shows **how each kidney works and drains**.\n- Key for **differential function** and **obstruction**.\n\n>> Dynamic renography (Tc-DTPA/MAG3) = differential function + drainage/obstruction.",
+   "opts": [
+    "Barium; for the gut",
+    "Iodine tablets; for stones",
+    "No isotopes are used",
+    "Tc-DTPA and Tc-MAG3; differential function and obstruction"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the merits and demerits of dynamic renography?",
+   "a": "**Merit: low radiation dose. Demerits: poor visualisation of the renal cortex, and it cannot be used in poor renal function.**\n\n## Understanding it\n- **Low radiation**, functional information.\n- But it shows the **cortex poorly** and **fails** when kidney function is poor (tracer not handled).\n\n>> Low dose, functional; but poor cortex detail and useless in failure.",
+   "opts": [
+    "Cannot show function",
+    "Low radiation; poor cortex detail, fails in poor function",
+    "No downsides",
+    "High radiation, excellent cortex"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the uses of the static renal scan.",
+   "a": "**Renovascular disease and dribbling incontinence, locating an ectopic or absent kidney, and detecting renal scars.**\n\n## Understanding it\n- A **static (DMSA)** scan maps **functioning cortex**, so it excels at finding **scars** and locating/assessing kidneys.\n\n>> Static (DMSA) scan = scars and kidney location/function per side.",
+   "opts": [
+    "Measuring GFR precisely",
+    "Diagnosing UTI",
+    "Detecting scars, locating ectopic/absent kidney, renovascular disease",
+    "Imaging the bladder during voiding"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the drawbacks of the static renal scan?",
+   "a": "**It is time-consuming and gives no information on the function of the urinary tract (drainage).**\n\n## Understanding it\n- DMSA shows **cortical uptake**, not **drainage/flow** — so it doesn't assess obstruction.\n- It also takes time.\n\n>> Static scan: slow, and no drainage/flow information.",
+   "opts": [
+    "Very fast and shows drainage",
+    "Time-consuming; no information on urinary-tract drainage",
+    "Uses no tracer",
+    "Shows obstruction best"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the indications and merits of CT in nephrology?",
+   "a": "**Indications similar to ultrasound; it gives clearer resolution and can detect fine calcification and small stones.**\n\n## Understanding it\n- CT is a **high-resolution cross-sectional** test — better than US for **small stones and fine calcification**.\n\n>> CT = high-resolution; best for small stones/calcification.",
+   "opts": [
+    "Uses no radiation",
+    "Similar to US but higher resolution; detects fine calcification/stones",
+    "Only for the bladder",
+    "Cannot see stones"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the uses and drawbacks of MRI in nephrology?",
+   "a": "**For detailed evaluation of complex urinary-system disorders, with excellent pelvic-floor and soft-tissue detail; drawbacks include cost, availability, and the need for sedation in young children.**\n\n## Understanding it\n- MRI gives superb **soft-tissue** detail with **no radiation**, for complex cases.\n- But it is **expensive, less available, slow** (sedation needed in small children).\n\n>> MRI: detailed, no radiation, but costly/slow (sedation in children).",
+   "opts": [
+    "Detailed complex-case imaging; but costly, less available, needs sedation",
+    "Cannot show soft tissue",
+    "Uses high radiation",
+    "Cheap and instant"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Define renal biopsy and list its types.",
+   "a": "**Obtaining kidney tissue for histopathology; types are percutaneous, open (surgical), transjugular, and laparoscopic.**\n\n## Understanding it\n- A **tissue sample** for microscopy.\n- **Percutaneous** (needle through the skin) is standard; others for special situations.\n\n>> Renal biopsy = kidney tissue sample; percutaneous, open, transjugular, laparoscopic.",
+   "opts": [
+    "Kidney tissue sampling; percutaneous, open, transjugular, laparoscopic",
+    "A urine culture",
+    "An imaging scan",
+    "A blood test only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Name the renal biopsy needles.",
+   "a": "**Vim-Silverman needle, manual Tru-cut, semi-automatic Tru-cut, and automatic Tru-cut (biopsy gun) needles.**\n\n## Understanding it\n- A family of **core-biopsy** needles; the **automated gun** is most common now.\n\n>> Vim-Silverman and Tru-cut (manual/semi/automatic) needles.",
+   "opts": [
+    "No special needle",
+    "A spinal needle",
+    "Vim-Silverman and Tru-cut (manual/semi-auto/auto) needles",
+    "A simple hypodermic needle"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "List the general indications for renal biopsy.",
+   "a": "**To establish the exact diagnosis, guide the choice of therapy, and help determine prognosis.**\n\n## Understanding it\n- Biopsy answers **what** the disease is, **how** to treat, and the **likely outcome**.\n\n>> Diagnosis, therapy guidance, prognosis.",
+   "opts": [
+    "To culture urine",
+    "To measure GFR",
+    "To relieve obstruction",
+    "Establish diagnosis, guide therapy, determine prognosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What limits the accuracy of prognostication from a renal biopsy?",
+   "a": "**Sample size — especially in focal lesions; a biopsy with fewer than 5 glomeruli may be inaccurate.**\n\n## Understanding it\n- **Focal** diseases affect only some glomeruli, so a small sample may **miss** them.\n- **≥ 5 glomeruli** is generally needed for reliability.\n\n>> Too few glomeruli (esp. in focal disease) = unreliable biopsy.",
+   "opts": [
+    "The needle colour",
+    "Too large a sample",
+    "The patient's age",
+    "Small sample size (especially focal lesions; <5 glomeruli)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the indications for biopsy in nephrotic syndrome.",
+   "a": "**Age under 1 or over 7 years, steroid-resistant nephrotic syndrome, and evidence of nephritis (haematuria, hypertension, low complement, impaired function).**\n\n## Understanding it\n- Typical **childhood (1–7 yr) steroid-responsive** nephrotic syndrome is **minimal change** and does **not** need biopsy.\n- Atypical **age** or **steroid resistance/nephritic features** warrant biopsy.\n\n>> Biopsy nephrotic syndrome if <1 or >7 yr, steroid-resistant, or nephritic features.",
+   "opts": [
+    "Every nephrotic child",
+    "Never",
+    "Only if BP is normal",
+    "Age <1 or >7, steroid resistance, or nephritic features"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the indications for biopsy in acute glomerulonephritis.",
+   "a": "**A course not typical of post-streptococcal GN, features of HSP or SLE, and to assess severity to guide therapy/prognosis.**\n\n## Understanding it\n- Typical **PSAGN** resolves and is **not** biopsied.\n- **Atypical course** or a **systemic cause (HSP/SLE)** prompts biopsy.\n\n>> Biopsy AGN if atypical, or HSP/SLE, or to grade severity.",
+   "opts": [
+    "All cases of AGN",
+    "Atypical course, HSP/SLE, or to assess severity",
+    "Only typical PSAGN",
+    "Never in AGN"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the indications for biopsy in AKI.",
+   "a": "**Unexplained AKI when pre- and post-renal causes are excluded, and AKI associated with nephritis, nephrotic syndrome or systemic disease.**\n\n## Understanding it\n- Biopsy AKI when it's **intrinsic and unexplained** (pre-/post-renal ruled out) or tied to a **glomerular/systemic** disease.\n\n>> Biopsy AKI when intrinsic/unexplained or with nephritic/systemic features.",
+   "opts": [
+    "Unexplained intrinsic AKI, or AKI with nephritis/systemic disease",
+    "Simple dehydration AKI",
+    "Every case of AKI",
+    "Post-renal obstruction"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Which serological and immunofluorescence tests accompany biopsy in suspected RPGN?",
+   "a": "**Serology: anti-GBM antibody and ANCA (screening for necrotising vasculitides); immunofluorescence: to define the pattern of immune deposits.**\n\n## Understanding it\n- Rapidly progressive GN needs **anti-GBM and ANCA** serology, plus **immunofluorescence** on the biopsy to classify it (linear, granular, pauci-immune).\n\n>> RPGN work-up: anti-GBM + ANCA serology and biopsy immunofluorescence.",
+   "opts": [
+    "Only a urine culture",
+    "Anti-GBM and ANCA serology; biopsy immunofluorescence",
+    "Only serum glucose",
+    "Only ultrasound"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the indications for biopsy in CKD.",
+   "a": "**When the kidneys are not shrunken, to diagnose the primary disease and assess the severity of morphologic lesions.**\n\n## Understanding it\n- Biopsy is useful only if there's **salvageable tissue** — i.e. **not** small end-stage kidneys.\n- It defines the **cause and severity**.\n\n>> Biopsy CKD only if kidneys aren't shrunken (still informative/reversible).",
+   "opts": [
+    "Never in CKD",
+    "When kidneys are tiny/end-stage",
+    "When kidneys are not shrunken — to diagnose and grade disease",
+    "Only in dialysis patients"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "State the indications for biopsy in systemic disease and renal transplant.",
+   "a": "**Systemic disease: to assess severity (e.g. SLE, atypical HUS, diabetics with atypical features). Transplant: to diagnose rejection or graft dysfunction.**\n\n## Understanding it\n- In **SLE/HUS/atypical diabetic** renal disease, biopsy grades severity to guide treatment.\n- In a **transplant**, it distinguishes **rejection** from other graft problems.\n\n>> Biopsy grades systemic renal disease and diagnoses transplant rejection.",
+   "opts": [
+    "Only for stones",
+    "Grade systemic renal disease; diagnose transplant rejection",
+    "Only to measure GFR",
+    "Never indicated"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the conditions NOT requiring renal biopsy.",
+   "a": "**Isolated microscopic glomerular haematuria, isolated non-nephrotic haematuria, and typical childhood (steroid-responsive) nephrotic syndrome.**\n\n## Understanding it\n- Benign, **isolated haematuria** and **classic steroid-responsive** nephrotic syndrome behave predictably → biopsy adds risk without benefit.\n\n>> Don't biopsy isolated haematuria or typical childhood nephrotic syndrome.",
+   "opts": [
+    "RPGN",
+    "Steroid-resistant nephrotic syndrome",
+    "Unexplained AKI",
+    "Isolated haematuria; typical childhood nephrotic syndrome"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "State the transport medium for each biopsy examination.",
+   "a": "**Light microscopy — 10% buffered formalin; immunofluorescence — Michel's transport medium; electron microscopy — glutaraldehyde.**\n\n## Understanding it\n- Each technique needs its **own fixative**: formalin (light), Michel's (IF), glutaraldehyde (EM).\n- Using the wrong medium ruins that study.\n\n>> Formalin (LM), Michel's (IF), glutaraldehyde (EM).",
+   "opts": [
+    "Formalin (LM), Michel's (IF), glutaraldehyde (EM)",
+    "All in glutaraldehyde",
+    "All in plain water",
+    "All in formalin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the absolute contraindication to renal biopsy?",
+   "a": "**An uncorrectable bleeding diathesis.**\n\n## Understanding it\n- The kidney is **highly vascular**, so uncontrollable bleeding tendency makes biopsy **too dangerous**.\n\n>> Uncorrectable bleeding disorder = absolute contraindication.",
+   "opts": [
+    "An uncorrectable bleeding diathesis",
+    "A single UTI",
+    "Mild hypertension",
+    "Normal clotting"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "List the other contraindications to renal biopsy.",
+   "a": "**Uncontrolled hypertension, active renal/perirenal infection, hydronephrosis, obesity, ascites, small shrunken kidneys, and a solitary kidney.**\n\n## Understanding it\n- These raise **bleeding/complication risk** or make the biopsy **unhelpful** (small end-stage kidneys) or **unsafe** (solitary kidney).\n\n>> Uncontrolled HTN, infection, hydronephrosis, obesity/ascites, small or solitary kidney.",
+   "opts": [
+    "Two healthy kidneys",
+    "Uncontrolled HTN, infection, hydronephrosis, obesity, ascites, small/solitary kidney",
+    "Normal blood pressure",
+    "Good clotting"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is a patient prepared for renal biopsy?",
+   "a": "**Admit at least the day before, take a bleeding history, stop anticoagulants (e.g. warfarin) and antiplatelets, and check baseline bloods.**\n\n## Understanding it\n- The focus is **bleeding prevention**: history, stop blood thinners, confirm normal clotting.\n\n>> Admit early, screen/stop bleeding risks before biopsy.",
+   "opts": [
+    "Same-day, no preparation",
+    "Admit early, bleeding history, stop anticoagulants/antiplatelets, baseline bloods",
+    "No blood tests needed",
+    "Continue warfarin"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "State the laboratory requirements before renal biopsy.",
+   "a": "**PCV > 24–30%, platelets ≥ 100,000/mm³, INR < 1.2, APTT < 2× control (or < 40 s), plus electrolytes/urea.**\n\n## Understanding it\n- All aimed at ensuring **safe clotting** and adequate red-cell reserve before an invasive vascular procedure.\n\n>> Adequate PCV, platelets ≥100k, INR <1.2, normal APTT.",
+   "opts": [
+    "INR >3 acceptable",
+    "Any values are fine",
+    "Platelets <20k acceptable",
+    "PCV >24–30%, platelets ≥100k, INR <1.2, APTT <40s"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why is an abdominal USS KUB done before renal biopsy?",
+   "a": "**To confirm the patient has two kidneys and to assess kidney sizes.**\n\n## Understanding it\n- You must not biopsy a **solitary** kidney, and **small** kidneys are a contraindication.\n- Ultrasound confirms **number and size** first.\n\n>> Pre-biopsy US: check for two kidneys and adequate size.",
+   "opts": [
+    "To measure GFR",
+    "To confirm two kidneys and assess their size",
+    "To culture urine",
+    "To grade reflux"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How long after haemodialysis should a renal biopsy be performed?",
+   "a": "**At least 24 hours after the last dialysis session.**\n\n## Understanding it\n- Dialysis uses **heparin**, raising bleeding risk.\n- Waiting **≥ 24 hours** lets the anticoagulant effect wear off.\n\n>> Biopsy ≥24 h after dialysis (heparin washout).",
+   "opts": [
+    "During dialysis",
+    "Immediately after dialysis",
+    "At least 24 hours after the last session",
+    "Only before the first dialysis"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is given for patients with a prolonged bleeding time before biopsy?",
+   "a": "**IV desmopressin 0.3 µg/kg 30 minutes before, or intranasal DDAVP 2–4 µg/kg 2 hours before.**\n\n## Understanding it\n- **Desmopressin (DDAVP)** boosts von Willebrand factor/platelet function, improving haemostasis before biopsy.\n\n>> DDAVP (IV or intranasal) corrects a prolonged bleeding time pre-biopsy.",
+   "opts": [
+    "Desmopressin (DDAVP), IV or intranasal, before the procedure",
+    "More warfarin",
+    "A platelet-lowering drug",
+    "Nothing is given"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the premedication for renal biopsy.",
+   "a": "**NPO 4 hours before with maintenance 5% dextrose, local anaesthesia, and sedation (e.g. 1–2 mg/kg).**\n\n## Understanding it\n- **Fast (NPO)** with IV fluids, then **local anaesthetic + sedation** to keep the child still and comfortable.\n\n>> NPO + IV dextrose, local anaesthesia, sedation.",
+   "opts": [
+    "NPO with IV dextrose, local anaesthesia and sedation",
+    "No preparation",
+    "A full meal beforehand",
+    "General anaesthesia always"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What positions are used for renal biopsy?",
+   "a": "**Prone for a native kidney, supine for a graft (transplant) kidney, and lateral decubitus in special conditions (e.g. obesity/ascites).**\n\n## Understanding it\n- Native kidneys are **retroperitoneal** → approached from the **back (prone)**.\n- A transplant sits in the **pelvis anteriorly** → **supine**.\n\n>> Prone (native), supine (graft), lateral (special cases).",
+   "opts": [
+    "Always prone",
+    "Always supine",
+    "Prone (native), supine (graft), lateral decubitus (special cases)",
+    "Always standing"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which kidney is usually biopsied, and from which part?",
+   "a": "**The left kidney, from the lower pole, identified under real-time ultrasound.**\n\n## Understanding it\n- The **left** kidney is more accessible (liver pushes the right one down).\n- The **lower pole** is targeted (furthest from the hilar vessels).\n\n>> Left kidney, lower pole, under ultrasound guidance.",
+   "opts": [
+    "The bladder",
+    "The right kidney, upper pole",
+    "Either kidney, the hilum",
+    "The left kidney, lower pole, under ultrasound"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Describe the technique of percutaneous renal biopsy.",
+   "a": "**Clean and anaesthetise the skin over the lower pole, then under real-time ultrasound advance a core needle into the renal cortex and fire to obtain a sample.**\n\n## Understanding it\n- Asepsis + local anaesthetic at the site.\n- Ultrasound-guided needle to the **lower-pole cortex**, then fire.\n\n>> Clean, anaesthetise, US-guide to the lower-pole cortex, fire.",
+   "opts": [
+    "Aseptic, US-guided core needle into the lower-pole cortex",
+    "Aspirating urine only",
+    "Open surgical removal of the kidney",
+    "A blind stab without imaging"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "State the post-biopsy monitoring schedule.",
+   "a": "**Vital signs quarter-hourly for 1 hour, then half-hourly, then hourly — watching for bleeding.**\n\n## Understanding it\n- The main risk is **bleeding**, so monitor frequently early, spacing out with stability.\n\n>> Frequent vitals early, tapering.",
+   "opts": [
+    "Vitals once a day",
+    "No monitoring needed",
+    "Vitals ¼-hourly for 1 h, then half-hourly, then hourly",
+    "Only temperature"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What other post-biopsy instructions apply?",
+   "a": "**Keep a urine rack to watch for haematuria, give IV fluids at maintenance, monitor fluid balance, and enforce bed rest.**\n\n## Understanding it\n- Watch urine colour for bleeding, keep hydrated, rest.\n\n>> Urine watch, IV fluids, monitor balance, bed rest.",
+   "opts": [
+    "Ignore the urine colour",
+    "Urine rack for haematuria, IV fluids, fluid balance, bed rest",
+    "Immediate discharge and exercise",
+    "No fluids"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the complications of renal biopsy.",
+   "a": "**Significant haematuria, anaemia and hypotension, organ perforation, loss of the kidney, arteriovenous fistula, infection, and pain.**\n\n## Understanding it\n- Dominant theme is **bleeding**; plus organ injury and infection.\n\n>> Mostly bleeding-related, plus organ injury/infection.",
+   "opts": [
+    "Only mild bruising",
+    "Bleeding, organ injury, AV fistula, infection",
+    "No complications occur",
+    "Improved kidney function"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Define urodynamic studies and state when they are useful.",
+   "a": "**Investigations of the lower urinary tract's anatomy and physiology — especially bladder filling and voiding — useful in voiding dysfunction and neurogenic bladder.**\n\n## Understanding it\n- Assess how the **bladder fills and empties**.\n\n>> Urodynamics = bladder filling/voiding function.",
+   "opts": [
+    "Measure GFR",
+    "Evaluate bladder filling/voiding; for voiding dysfunction",
+    "Image the kidney cortex",
+    "Culture urine"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Name the non-invasive and invasive urodynamic studies.",
+   "a": "**Non-invasive: uroflowmetry and post-void residual. Invasive: cystometry and pressure-flow studies.**\n\n## Understanding it\n- Non-invasive = uroflow/residual; invasive = catheter pressure/flow.\n\n>> Non-invasive uroflow; invasive cystometry.",
+   "opts": [
+    "Non-invasive: uroflowmetry/residual; invasive: cystometry",
+    "There is only one type",
+    "Both need surgery",
+    "Both are blood tests"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why is the left kidney usually chosen for biopsy?",
+   "a": "**Because the liver pushes the right kidney downward, so the left lies more superior and is easier and safer to access.**\n\n## Understanding it\n- Liver displaces the right kidney; the left is more accessible.\n\n>> Liver crowds the right → biopsy the left.",
+   "opts": [
+    "The liver displaces the right kidney, making the left easier",
+    "The left kidney is larger",
+    "There is no reason",
+    "The right has no cortex"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why must the biopsy sample come from the renal cortex?",
+   "a": "**Because the glomeruli are in the cortex; a medullary sample has no glomeruli and is non-diagnostic.**\n\n## Understanding it\n- Glomerular diagnoses need glomeruli (in the cortex).\n\n>> Glomeruli are in the cortex → sample the cortex.",
+   "opts": [
+    "The medulla bleeds less",
+    "The glomeruli are in the cortex (medulla has none)",
+    "Either part works equally",
+    "The cortex has no vessels"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is the lower pole targeted in renal biopsy?",
+   "a": "**Because it is furthest from the renal hilum where the large vessels enter, reducing major vascular injury.**\n\n## Understanding it\n- Hilar vessels enter medially; the lower pole is farthest → safest.\n\n>> Lower pole = away from the big vessels = safer.",
+   "opts": [
+    "It has the most glomeruli",
+    "Furthest from the hilar vessels, reducing bleeding risk",
+    "Closest to the skin",
+    "The upper pole has no cortex"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is the prone position used for native renal biopsy?",
+   "a": "**Because the kidneys are retroperitoneal and approached from the back; a graft kidney lies anteriorly in the pelvis and is biopsied supine.**\n\n## Understanding it\n- Native kidneys sit behind → prone; transplant sits in front pelvis → supine.\n\n>> Native = prone; graft = supine.",
+   "opts": [
+    "Native kidneys are retroperitoneal, approached from the back",
+    "Supine for native kidneys",
+    "The kidney is in the chest",
+    "Prone reduces radiation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why must aspirin be stopped 7 days before renal biopsy?",
+   "a": "**Because aspirin irreversibly inhibits platelets (lifespan 7–10 days); stopping ~7 days lets new functional platelets appear.**\n\n## Understanding it\n- Aspirin permanently disables platelets it touches; new ones take ~7–10 days.\n\n>> Stop aspirin ~7 days ahead.",
+   "opts": [
+    "Aspirin irreversibly inhibits platelets (lifespan 7–10 days)",
+    "It is only cleared in 7 days",
+    "It thins blood for 1 hour",
+    "It reduces the pain"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why are so many biopsy contraindications related to bleeding?",
+   "a": "**Because the kidneys receive about 20% of cardiac output, making them one of the most vascular organs — so bleeding tendency is dangerous.**\n\n## Understanding it\n- ~20% of output → heavy bleeding risk from a needle.\n\n>> Super-vascular kidneys → bleeding is the key risk.",
+   "opts": [
+    "The kidney has no blood supply",
+    "The kidneys are highly vascular (~20% of cardiac output)",
+    "They receive only 1% of output",
+    "Bleeding is never a concern"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why are small shrunken kidneys a contraindication to biopsy?",
+   "a": "**Because they indicate end-stage irreversible disease, so the biopsy carries all the risk without changing management.**\n\n## Understanding it\n- Small = scarred end-stage tissue → no treatable cause to find.\n\n>> Shrunken kidneys = end-stage → pointless and risky.",
+   "opts": [
+    "Easier to biopsy",
+    "They bleed less",
+    "Too many glomeruli",
+    "They indicate end-stage disease — risk without benefit"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A child has nephrotic syndrome aged 4 with normal BP, no haematuria and normal C3. Is biopsy indicated?",
+   "a": "**No — typical childhood nephrotic syndrome (aged 1–7, no nephritic features) is presumed minimal-change and treated with steroids without biopsy.**\n\n## Understanding it\n- Classic steroid-responsive minimal change → treat, don't biopsy.\n\n>> Typical childhood nephrotic syndrome → treat, don't biopsy.",
+   "opts": [
+    "Yes — because BP is normal",
+    "Yes — biopsy every case",
+    "Yes — because C3 is normal",
+    "No — typical childhood nephrotic syndrome, treat with steroids"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — What is the difference between frequently relapsing and steroid-resistant nephrotic syndrome regarding biopsy?",
+   "a": "**Frequently relapsing does NOT need biopsy (still steroid-responsive); steroid-resistant DOES need biopsy.**\n\n## Understanding it\n- Steroid responsiveness is key: responsive → no biopsy; resistant → biopsy.\n\n>> Relapsing = no biopsy; resistant = biopsy.",
+   "opts": [
+    "Both need biopsy",
+    "Relapsing = no biopsy; steroid-resistant = biopsy",
+    "Neither needs biopsy",
+    "Only relapsing needs biopsy"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why does the phrase 'persisting in spite of volume correction' matter in nephrotic syndrome?",
+   "a": "**Because a nephrotic child is intravascularly depleted despite oedema, so creatinine can rise from hypovolaemia; a rise persisting after volume correction means true intrinsic disease.**\n\n## Understanding it\n- Oedematous but intravascularly dry → pre-renal rise; if it stays up after fluids, the kidney is damaged.\n\n>> Fix volume first — a persisting rise = intrinsic disease.",
+   "opts": [
+    "It is irrelevant",
+    "Oedema means overfilled vessels",
+    "Volume never affects creatinine",
+    "It separates pre-renal (volume) rise from true intrinsic disease"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — A child has oliguria and rising creatinine after gastroenteritis. Which test distinguishes pre-renal AKI from ATN?",
+   "a": "**Fractional excretion of sodium — FENa ≤ 1 = pre-renal AKI (working tubules); FENa > 1 = acute tubular necrosis.**\n\n## Understanding it\n- Pre-renal: tubules retain sodium → FENa ≤ 1. ATN: leak sodium → FENa > 1.\n\n>> FENa ≤1 pre-renal; >1 ATN.",
+   "opts": [
+    "Serum cholesterol",
+    "Fractional excretion of sodium (≤1 pre-renal, >1 ATN)",
+    "Urine culture",
+    "A renal biopsy first"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why is a low FENa reassuring?",
+   "a": "**Because it shows the tubules are actively reabsorbing sodium — alive and responding to hypovolaemia.**\n\n## Understanding it\n- Low FENa = tubules doing their job → tissue intact → reversible volume problem.\n\n>> Low FENa = living tubules = reversible.",
+   "opts": [
+    "It is a bad sign",
+    "It shows the tubules are alive and reabsorbing sodium",
+    "The tubules are dead",
+    "It indicates ATN"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why does distinguishing pre-renal AKI from ATN change management?",
+   "a": "**Pre-renal AKI responds to volume replacement; in ATN aggressive fluid won't restore function and risks overload.**\n\n## Understanding it\n- Pre-renal → give fluids; ATN → fluid just overloads.\n\n>> Fluids cure pre-renal but harm ATN.",
+   "opts": [
+    "Pre-renal needs fluids; ATN won't respond and risks overload",
+    "Both treated identically",
+    "ATN always needs more fluid",
+    "Neither needs treatment"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why does urea rise disproportionately in pre-renal AKI?",
+   "a": "**Because urea is reabsorbed with water; in volume depletion the kidney reabsorbs more water and urea, raising urea more than creatinine.**\n\n## Understanding it\n- Creatinine isn't reabsorbed, so urea rises out of proportion → high urea:creatinine.\n\n>> Pre-renal reabsorbs water+urea → high ratio.",
+   "opts": [
+    "Urea is made in the kidney",
+    "Urea is reabsorbed with water, avidly in volume depletion",
+    "Creatinine is reabsorbed, not urea",
+    "They always rise equally"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Ultrasound shows a dilated ureter and thick-walled bladder in a boy with recurrent febrile UTI. Which investigation is indicated?",
+   "a": "**Voiding cysto-urethrography — the gold standard for diagnosing/grading vesicoureteric reflux and posterior urethral valves.**\n\n## Understanding it\n- Boy + dilated ureter + thick bladder + febrile UTIs → VUR/PUV → VCUG.\n\n>> Suspected VUR/PUV in a boy → VCUG.",
+   "opts": [
+    "A static DMSA scan only",
+    "Voiding cysto-urethrography (VCUG)",
+    "A plain abdominal X-ray",
+    "A blood culture"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "OSPE — Why must films be taken during voiding in a VCUG?",
+   "a": "**Because bladder pressure is highest during voiding, so reflux is most likely to be demonstrated then.**\n\n## Understanding it\n- Voiding = peak bladder pressure → forces urine back if reflux exists.\n\n>> Reflux shows at peak (voiding) pressure.",
+   "opts": [
+    "Bladder pressure peaks during voiding, revealing reflux",
+    "It reduces radiation",
+    "Filling shows reflux best",
+    "Voiding empties the contrast"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — What complication is being prevented by diagnosing VUR early?",
+   "a": "**Renal scarring from recurrent pyelonephritis, which leads to hypertension and chronic kidney disease.**\n\n## Understanding it\n- Reflux → pyelonephritis → scarring → HTN/CKD.\n\n>> Early VUR diagnosis prevents scarring → HTN/CKD.",
+   "opts": [
+    "A skin rash",
+    "A single mild UTI",
+    "Renal scarring → hypertension and chronic kidney disease",
+    "Bladder cancer"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "OSPE — Which investigation best detects renal scars, and why?",
+   "a": "**The static (DMSA) renal scan — the tracer is taken up only by functioning tubular cells, so a scar is a cold (photopenic) defect.**\n\n## Understanding it\n- DMSA binds functioning cortex; scars take up no tracer.\n\n>> DMSA = scar-detecting scan.",
+   "opts": [
+    "Ultrasound",
+    "IVU",
+    "A plain X-ray",
+    "The static (DMSA) scan — scars show as cold defects"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Which investigation determines differential renal function, and why does it matter?",
+   "a": "**Dynamic renography with Tc-DTPA or Tc-MAG3 — shows each kidney's contribution, guiding whether to remove a poorly functioning kidney.**\n\n## Understanding it\n- Measures split function between the kidneys.\n\n>> Dynamic renography = split function.",
+   "opts": [
+    "Dynamic renography (Tc-DTPA/MAG3) — split function",
+    "Plain X-ray",
+    "Urine dipstick",
+    "Ultrasound — shows function"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why can ultrasound not be used to assess renal function?",
+   "a": "**Because it shows structure only; two normal-looking kidneys may be in complete failure.**\n\n## Understanding it\n- US images anatomy, not filtration.\n\n>> US = structure, not function.",
+   "opts": [
+    "It uses too much radiation",
+    "It only shows the bladder",
+    "It measures GFR directly",
+    "It shows structure only, not function"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSPE — Why is IVU contraindicated in renal failure?",
+   "a": "**Because the test depends on the kidney excreting the contrast; a failing kidney gives poor images and the contrast is nephrotoxic.**\n\n## Understanding it\n- IVU needs excretion; a failing kidney can't, and the dye worsens injury.\n\n>> IVU needs working kidneys.",
+   "opts": [
+    "It relies on excretion (poor in failure) and contrast is nephrotoxic",
+    "Failing kidneys excrete it faster",
+    "Best test in failure",
+    "It uses no contrast"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "OSPE — Why does a stone cast a shadow on ultrasound?",
+   "a": "**Because it reflects almost all the ultrasound beam, so nothing passes behind it — a posterior acoustic shadow.**\n\n## Understanding it\n- A dense stone reflects the beam; no echoes return behind it.\n\n>> Stones reflect the beam → acoustic shadow.",
+   "opts": [
+    "Fluid behind appears black",
+    "It glows on ultrasound",
+    "It absorbs all light",
+    "It reflects the beam, leaving a posterior acoustic shadow"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why does chronic kidney disease cause anaemia?",
+   "a": "**Because the kidney produces erythropoietin, which stimulates red-cell production; in CKD it falls and anaemia results.**\n\n## Understanding it\n- Diseased kidneys make less EPO → anaemia.\n\n>> No kidney EPO → anaemia.",
+   "opts": [
+    "Reduced erythropoietin production by the diseased kidney",
+    "Iron overload",
+    "Too many red cells made",
+    "Blood loss in the urine only"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why does chronic kidney disease cause bone disease?",
+   "a": "**Because the kidney does the final hydroxylation that activates vitamin D; without it calcium is poorly absorbed, causing renal bone disease.**\n\n## Understanding it\n- No active vitamin D → poor calcium absorption → high PTH → renal osteodystrophy.\n\n>> No active vitamin D → bone disease.",
+   "opts": [
+    "The kidney makes bone directly",
+    "No effect on bone",
+    "The kidney activates vitamin D; without it calcium/bone metabolism fails",
+    "Too much calcium absorbed"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — Why must growth and development be monitored in a child with kidney disease?",
+   "a": "**Because chronic acidosis, anaemia and impaired calcium/bone metabolism all impair growth — the kidney's failures directly stunt the child.**\n\n## Understanding it\n- CKD → acidosis + anaemia + bone disease, all of which stunt growth.\n\n>> CKD stunts growth → monitor it.",
+   "opts": [
+    "Acidosis, anaemia and bone/mineral disturbance impair growth",
+    "Kidney disease speeds up growth",
+    "Only weight matters",
+    "Growth is unaffected"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A dipstick shows no protein in a child with suspected nephrotic syndrome. What might explain a false negative?",
+   "a": "**Dilute or very acidic urine, or proteinuria of proteins other than albumin, which the dipstick mainly detects.**\n\n## Understanding it\n- The dipstick detects albumin in concentrated urine; dilute/acidic urine or non-albumin protein → false negative.\n\n>> False-negative protein: dilute/acidic urine or non-albumin proteinuria.",
+   "opts": [
+    "Dilute/acidic urine or non-albumin proteinuria",
+    "Contamination raising it",
+    "Concentrated urine",
+    "Gross haematuria"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — Why is a bag urine specimen of limited value in a febrile infant?",
+   "a": "**Because of the high risk of contamination; it is useful mainly for its negative predictive value — a negative helps rule out UTI, a positive needs confirmation.**\n\n## Understanding it\n- Bag urine is easily contaminated → false positives; trust a negative, confirm a positive.\n\n>> Bag urine: trust a negative, confirm a positive.",
+   "opts": [
+    "It is the most sterile method",
+    "It is painful",
+    "High contamination risk; useful mainly for its negative predictive value",
+    "A positive is always true"
+   ],
+   "ans": 2
+  }
+ ]
 }

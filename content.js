@@ -1185,367 +1185,1004 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define investigations in cardiology.",
-         "a": "Tests or procedures for evaluation of cardiovascular diseases."
+         "a": "**Tests or procedures for the evaluation of cardiovascular diseases.**\n\n## Understanding it\n- They are the tools used to look for, confirm and follow up heart disease.\n- Some are done at the **bedside**, others in the **laboratory**.\n\n>> Think of them as the cardiologist's 'evidence-gathering' toolkit — from a simple ECG to cardiac catheterisation.",
+         "opts": [
+          "Physiotherapy for cardiac patients",
+          "Tests or procedures for evaluating cardiovascular disease",
+          "Drugs used to treat heart disease",
+          "Surgical operations on the heart"
+         ],
+         "ans": 1
         },
         {
          "q": "Where are cardiological investigations carried out?",
-         "a": "Either at the bedside and/or in laboratories."
+         "a": "**Either at the bedside and/or in laboratories.**\n\n## Understanding it\n- **Bedside** — e.g. ECG, echo done at the patient.\n- **Laboratory** — e.g. cardiac enzymes, lipid profile.\n\n>> The split matters: bedside tests are fast and available in emergencies, lab tests take time.",
+         "opts": [
+          "At the bedside and/or in laboratories",
+          "Only in theatre",
+          "Only at home",
+          "Only in a specialist laboratory"
+         ],
+         "ans": 0
         },
         {
          "q": "List the seven objectives of investigations in cardiology.",
-         "a": "To (1) establish the diagnosis, (2) determine the aetiology, (3) identify the risk factors, (4) detect the complications, (5) monitor the disease progression, (6) evaluate associated co-morbidities, and (7) make prognosis."
+         "a": "**To establish the diagnosis, determine the aetiology, identify risk factors, detect complications, monitor progression, assess response to treatment, and establish prognosis.**\n\n## Understanding it\nGroup the seven by stage of care:\n- **Diagnose** — what and why (diagnosis, aetiology, risk factors).\n- **Detect problems** — complications.\n- **Follow up** — monitor progression, response to treatment, prognosis.\n\n>> Investigations serve the whole journey — not just making the first diagnosis.",
+         "opts": [
+          "Only to choose the surgery",
+          "Only to make the diagnosis",
+          "Only to bill the patient",
+          "Diagnosis, aetiology, risk factors, complications, monitoring, treatment response, prognosis"
+         ],
+         "ans": 3
         },
         {
          "q": "List the twelve investigations in cardiology.",
-         "a": "Chest X-ray; electrocardiogram; electrophysiological studies; echocardiography; cardiac MRI; cardiac catheterization; coronary arteriography; cardiac enzymes and troponins; brain natriuretic peptide; lipid profiles; blood sugar; and electrolytes, urea and creatinine."
+         "a": "**Chest X-ray, ECG, electrophysiological studies, echocardiography, cardiac MRI, cardiac catheterization, coronary arteriography, cardiac enzymes/troponins, BNP/NT-proBNP, lipid profile, blood sugar, and electrolytes/urea/creatinine.**\n\n## Understanding it\nGroup them:\n- **Imaging** — CXR, echo, cardiac MRI.\n- **Electrical** — ECG, EP studies.\n- **Invasive** — catheterization, coronary arteriography.\n- **Bloods** — enzymes/troponins, BNP, lipids, sugar, electrolytes.\n\n>> A structured list beats rote memory — imaging, electrical, invasive, bloods.",
+         "opts": [
+          "Only ECG and echo",
+          "Only chest X-ray",
+          "CXR, ECG, EP studies, echo, cardiac MRI, catheterization, angiography, enzymes, BNP, lipids, sugar, U&E",
+          "Only blood tests"
+         ],
+         "ans": 2
         },
         {
          "q": "Define non-invasive investigations and give examples.",
-         "a": "Procedures or tests limited to the body surface — e.g. standard 12-lead ECG and transthoracic echocardiography."
+         "a": "**Procedures limited to the body surface — e.g. the standard 12-lead ECG and transthoracic echocardiography.**\n\n## Understanding it\n- **Non-invasive** = nothing pierces the skin or enters a vessel.\n- Examples: surface **ECG**, **transthoracic echo**.\n\n>> Safer and first-line; you escalate to invasive tests only when needed.",
+         "opts": [
+          "Tests that enter the vessels — e.g. catheterization",
+          "Only surgical procedures",
+          "Surface tests — e.g. 12-lead ECG, transthoracic echo",
+          "Any test needing anaesthesia"
+         ],
+         "ans": 2
         },
         {
          "q": "Define invasive investigations and give examples.",
-         "a": "Procedures or tests that involve penetration of the vascular system or body tissues — e.g. electrophysiological studies, cardiac catheterization, transoesophageal echocardiography and angiography."
+         "a": "**Procedures that penetrate the vascular system or body tissues — e.g. electrophysiological studies, cardiac catheterization, and transoesophageal echocardiography.**\n\n## Understanding it\n- **Invasive** = something enters a vessel or tissue.\n- Examples: **EP studies, cardiac catheterization, transoesophageal echo** (probe down the gullet).\n\n>> Higher risk but higher resolution/detail — reserved for when non-invasive tests aren't enough.",
+         "opts": [
+          "Chest X-ray",
+          "Tests entering vessels/tissue — EP studies, catheterization, TOE",
+          "Surface-only tests like ECG",
+          "Blood tests from a finger prick"
+         ],
+         "ans": 1
         },
         {
          "q": "What does a chest X-ray utilize, and what is it mainly useful for in cardiology?",
-         "a": "It utilizes ionizing radiation called X-ray; it is mainly useful in the study of cardiac structure and changes in the pulmonary circulation which may be of cardiac origin."
+         "a": "**It uses ionizing radiation (X-rays); it is mainly useful for studying cardiac structure and changes in the pulmonary circulation of cardiac origin.**\n\n## Understanding it\n- Uses **ionizing radiation** to create the image.\n- In cardiology it shows **heart size/shape** and **lung changes** (e.g. pulmonary congestion).\n\n>> The CXR reads the heart's *silhouette* and the *lungs behind it* — great for heart failure and cardiomegaly.",
+         "opts": [
+          "A magnetic field; shows soft tissue",
+          "Electricity; shows rhythm",
+          "Ionizing radiation; shows cardiac structure and pulmonary circulation",
+          "Ultrasound; shows valve motion"
+         ],
+         "ans": 2
         },
         {
          "q": "List the uses of chest X-ray in cardiology.",
-         "a": "To diagnose cardiomegaly; to identify features of heart diseases such as hypertension, heart failure, cardiomyopathy, congenital heart diseases, pericardial effusion, coarctation of aorta, and valvular and pericardial calcifications; to diagnose acute pulmonary oedema; and to identify precipitants of heart failure e.g. chest infection."
+         "a": "**To diagnose cardiomegaly and identify features of hypertension, heart failure, cardiomyopathy, congenital heart disease, and pericardial effusion.**\n\n## Understanding it\n- Its headline use is **cardiomegaly** (an enlarged heart shadow).\n- It also shows **heart-failure lungs**, **pericardial effusion** (globular heart), and clues to congenital/hypertensive disease.\n\n>> Cheap and quick — the CXR screens heart size and the state of the lungs.",
+         "opts": [
+          "Cardiomegaly, heart failure, cardiomyopathy, congenital disease, effusion",
+          "The cardiac rhythm",
+          "The exact ejection fraction",
+          "The coronary artery anatomy in detail"
+         ],
+         "ans": 0
         },
         {
          "q": "State the two chest X-ray criteria for diagnosis of cardiomegaly in adults.",
-         "a": "Cardiothoracic ratio (CTR) greater than 50%, and maximum transverse cardiac diameter greater than 15.5 cm."
+         "a": "**A cardiothoracic ratio (CTR) greater than 50%, and a maximum transverse cardiac diameter greater than 15.5 cm.**\n\n## Understanding it\n- **CTR > 50%** — the heart is more than half the chest width.\n- **Transverse diameter > 15.5 cm** — an absolute size cut-off.\n\n>> Both are measured on a **PA** film; CTR > 50% is the classic exam answer.",
+         "opts": [
+          "CTR > 30% and diameter > 10 cm",
+          "CTR > 80% only",
+          "Any visible heart shadow",
+          "CTR > 50% and transverse cardiac diameter > 15.5 cm"
+         ],
+         "ans": 3
         },
         {
          "q": "Define the cardiothoracic ratio.",
-         "a": "The ratio of the maximum transverse cardiac diameter to the maximum internal diameter of the thoracic cage, expressed as a percentage."
+         "a": "**The ratio of the maximum transverse cardiac diameter to the maximum internal diameter of the thoracic cage, expressed as a percentage.**\n\n## Understanding it\n- **Numerator** — widest width of the heart shadow.\n- **Denominator** — widest **internal** width of the ribcage.\n- Expressed as a **percentage**; normal ≤ 50%.\n\n>> It normalises heart size to chest size, so it works across different body sizes.",
+         "opts": [
+          "Weight of the heart ÷ body weight",
+          "Lung width ÷ heart width",
+          "Max cardiac width ÷ max internal thoracic width, as a percentage",
+          "Heart length ÷ heart width"
+         ],
+         "ans": 2
         },
         {
          "q": "Define the electrocardiogram.",
-         "a": "The graphical record of the electrical activities of the heart obtained at the body surface."
+         "a": "**The graphical record of the electrical activity of the heart obtained at the body surface.**\n\n## Understanding it\n- The heart generates electrical signals with each beat.\n- The ECG **records these signals** from electrodes on the skin as a tracing.\n\n>> It shows the heart's **electricity**, not its pumping — a key distinction (see pulseless electrical activity).",
+         "opts": [
+          "A surface graphical record of the heart's electrical activity",
+          "An ultrasound picture of the heart",
+          "An X-ray of the heart",
+          "A record of the heart's pumping pressure"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the standard 12-lead ECG.",
-         "a": "It utilizes 12 leads, is recorded at rest over a period of 10–20 seconds, and is the most widely used form of ECG."
+         "a": "**It uses 12 leads, is recorded at rest over about 10–20 seconds, and is the most widely used form of ECG.**\n\n## Understanding it\n- **12 leads** give 12 electrical 'views' of the heart.\n- Recorded briefly (**10–20 s**) at rest.\n\n>> Because it samples only seconds, it can **miss intermittent** arrhythmias — hence Holter monitoring exists.",
+         "opts": [
+          "A continuous 48-hour recording",
+          "12 leads, at rest, over ~10–20 seconds",
+          "12 leads recorded during exercise only",
+          "1 lead recorded over 24 hours"
+         ],
+         "ans": 1
         },
         {
          "q": "What is Holter monitoring, and for how long does it record?",
-         "a": "Ambulatory ECG — it records the ECG for 24 hours."
+         "a": "**Ambulatory ECG — it records the ECG continuously for 24 hours.**\n\n## Understanding it\n- The patient wears it during **normal daily activity**.\n- It records for **24 hours** (or longer), capturing events a brief ECG would miss.\n\n>> Ideal for **intermittent palpitations** — you catch the arrhythmia when it actually happens.",
+         "opts": [
+          "Ambulatory ECG recording for 24 hours",
+          "A 10-second resting ECG",
+          "An implanted pacemaker",
+          "An ECG during exercise"
+         ],
+         "ans": 0
         },
         {
          "q": "What is a stress ECG?",
-         "a": "An ECG recorded during exercise."
+         "a": "**An ECG recorded during exercise.**\n\n## Understanding it\n- At rest, coronary supply may be adequate and the ECG normal.\n- **Exercise raises demand**, which can unmask ischaemia (ST changes).\n\n>> Used for **exertional chest pain with a normal resting ECG** — you stress the heart to reveal the problem.",
+         "opts": [
+          "An ECG recorded during sleep",
+          "A 24-hour ambulatory ECG",
+          "An ECG done under anaesthesia",
+          "An ECG recorded during exercise"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the chamber and rhythm indications for ECG.",
-         "a": "Chamber abnormalities e.g. ventricular hypertrophy and left atrial abnormalities; cardiac arrhythmias; heart blocks (atrioventricular and bundle branch blocks); pre-excitation syndromes e.g. Wolff-Parkinson-White syndrome; and cardiac arrest."
+         "a": "**Chamber abnormalities (e.g. ventricular hypertrophy, left atrial abnormality), cardiac arrhythmias, and heart blocks (AV and bundle branch blocks).**\n\n## Understanding it\n- **Chambers** — hypertrophy/enlargement change the ECG voltages/shapes.\n- **Rhythm** — arrhythmias and conduction blocks are seen directly.\n\n>> The ECG is the definitive test for **rhythm and conduction** problems.",
+         "opts": [
+          "Only pericardial fluid",
+          "Only coronary anatomy",
+          "Ventricular hypertrophy, atrial abnormality, arrhythmias, heart blocks",
+          "Only valve stenosis"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the myocardial and pericardial indications for ECG.",
-         "a": "Ischaemic heart diseases, myocarditis, cardiomyopathies, pericardial diseases, and congenital heart diseases."
+         "a": "**Ischaemic heart disease, myocarditis, cardiomyopathies, pericardial disease, and congenital heart disease.**\n\n## Understanding it\n- **Myocardium** — ischaemia/infarction, myocarditis, cardiomyopathy alter the ECG.\n- **Pericardium** — pericarditis gives characteristic widespread ST changes.\n\n>> The ECG reflects disease of both the **heart muscle** and its **covering**.",
+         "opts": [
+          "Only thyroid disease",
+          "Only anaemia",
+          "Only lung disease",
+          "Ischaemic disease, myocarditis, cardiomyopathy, pericardial and congenital disease"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the extracardiac indications for ECG.",
-         "a": "Electrolyte derangement e.g. hyperkalaemia and hypokalaemia; drug effect e.g. digoxin toxicity; pulmonary embolism; and cor pulmonale."
+         "a": "**Electrolyte derangement (e.g. hyper/hypokalaemia), drug effects (e.g. digoxin toxicity), pulmonary embolism, and cor pulmonale.**\n\n## Understanding it\n- The ECG reflects problems **outside** the heart too.\n- **Potassium** changes the T waves; **digoxin** gives a reverse-tick; **PE/cor pulmonale** give right-heart strain.\n\n>> A 'cardiac' tracing can reveal an **electrolyte or drug** emergency.",
+         "opts": [
+          "Nothing outside the heart",
+          "Only valve infections",
+          "Electrolyte changes, drug effects (digoxin), PE, cor pulmonale",
+          "Only structural heart disease"
+         ],
+         "ans": 2
         },
         {
          "q": "What are electrophysiological studies used for?",
-         "a": "They are invasive procedures for studying cardiac arrhythmias and pre-excitation syndromes such as Wolff-Parkinson-White syndrome."
+         "a": "**Invasive procedures for studying cardiac arrhythmias and pre-excitation syndromes such as Wolff-Parkinson-White syndrome.**\n\n## Understanding it\n- Catheters are placed inside the heart to **map its electrical circuits**.\n- Used to characterise **arrhythmias** and pre-excitation (e.g. **WPW**), and to guide ablation.\n\n>> The detailed, invasive way to study rhythm when the surface ECG isn't enough.",
+         "opts": [
+          "Invasive study of arrhythmias and pre-excitation (e.g. WPW)",
+          "Measuring cholesterol",
+          "Imaging of valves",
+          "Assessing lung function"
+         ],
+         "ans": 0
         },
         {
          "q": "Define echocardiography.",
-         "a": "Cardiac imaging using ultrasound; it is otherwise known as cardiac ultrasound."
+         "a": "**Cardiac imaging using ultrasound — also called cardiac ultrasound.**\n\n## Understanding it\n- Uses **ultrasound** (no radiation) to image the heart in motion.\n- Shows **structure and function** — chambers, valves, wall movement, ejection fraction.\n\n>> The workhorse for anatomy and pump function; safe and repeatable.",
+         "opts": [
+          "Imaging using X-rays",
+          "Cardiac imaging using ultrasound",
+          "A recording of electrical activity",
+          "Imaging using a magnetic field"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe transthoracic echocardiography.",
-         "a": "It utilizes a transthoracic probe or transducer to obtain cardiac imaging from the body surface."
+         "a": "**It uses a transthoracic probe on the body surface to image the heart.**\n\n## Understanding it\n- The probe sits on the **chest wall**.\n- Non-invasive and first-line for most cardiac imaging.\n\n>> Good general views, but the chest wall/lung can limit resolution — hence transoesophageal echo for fine detail.",
+         "opts": [
+          "A surface (chest-wall) probe images the heart",
+          "A catheter inside the heart",
+          "A probe in the oesophagus",
+          "An X-ray beam"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe transoesophageal echocardiography.",
-         "a": "It utilizes a transoesophageal probe or transducer to obtain cardiac images very close to the heart."
+         "a": "**It uses a probe in the oesophagus to image the heart very close up.**\n\n## Understanding it\n- The oesophagus sits **right behind the heart**.\n- A probe there gives **far higher resolution** than the transthoracic view.\n\n>> Best for small structures — **vegetations** in endocarditis, atrial thrombus, prosthetic valves.",
+         "opts": [
+          "A wrist probe",
+          "An external X-ray",
+          "An oesophageal probe images the heart close up",
+          "A chest-wall probe"
+         ],
+         "ans": 2
         },
         {
          "q": "List the uses of the echocardiogram.",
-         "a": "To evaluate cardiac structures, functions and dysfunctions; to establish diagnosis of some cardiovascular diseases; and to detect complications of cardiovascular diseases."
+         "a": "**To evaluate cardiac structure, function and dysfunction, to establish the diagnosis of some cardiovascular diseases, and to detect their complications.**\n\n## Understanding it\n- **Structure/function** — chambers, valves, ejection fraction.\n- **Diagnosis** — e.g. valve lesions, effusion.\n- **Complications** — e.g. thrombus, tamponade.\n\n>> One test that answers *what is wrong* and *how well the heart pumps*.",
+         "opts": [
+          "Record the heart rhythm only",
+          "Measure serum cholesterol",
+          "Evaluate structure/function, diagnose disease, detect complications",
+          "Assess kidney function"
+         ],
+         "ans": 2
         },
         {
          "q": "List the ten indications for echocardiogram.",
-         "a": "Hypertensive heart diseases; congenital heart diseases; rheumatic heart diseases; valvular heart diseases; infective endocarditis; cardiomyopathies; pericardial diseases especially pericardial effusion; ischaemic heart disease; heart failure; and cardiac masses e.g. intramural thrombus and atrial myxoma."
+         "a": "**Hypertensive, congenital, rheumatic and valvular heart disease, infective endocarditis, cardiomyopathies, pericardial disease, heart failure, cardiac masses/thrombus, and to assess ventricular function.**\n\n## Understanding it\n- Structural diseases (valves, congenital, hypertensive, cardiomyopathy).\n- Complications (endocarditis vegetations, pericardial effusion, thrombus).\n- Function (heart failure, ejection fraction).\n\n>> If a question is about **structure or pump function**, echo is the answer.",
+         "opts": [
+          "Only diagnosing arrhythmias",
+          "Valvular/congenital/hypertensive disease, endocarditis, cardiomyopathy, effusion, masses, function",
+          "Only measuring potassium",
+          "Only coronary artery imaging"
+         ],
+         "ans": 1
         },
         {
          "q": "How does cardiac MRI work?",
-         "a": "It utilizes a powerful magnetic field to align the nuclear magnetization of hydrogen atoms in water in the body."
+         "a": "**It uses a powerful magnetic field to align the nuclear magnetization of hydrogen atoms in body water.**\n\n## Understanding it\n- A strong **magnet** aligns hydrogen nuclei in water; radio pulses then produce signals mapped into images.\n- **No ionizing radiation** is used.\n\n>> High-detail soft-tissue imaging without radiation — the basis for its 'gold standard' roles.",
+         "opts": [
+          "Ultrasound reflections",
+          "Electrical signals from the skin",
+          "A magnetic field aligns hydrogen nuclei in body water",
+          "X-rays passing through the chest"
+         ],
+         "ans": 2
         },
         {
          "q": "State two key facts about cardiac MRI.",
-         "a": "It does not use ionizing radiation, and it is the current gold standard for evaluation of left ventricular hypertrophy. It is useful in the study of cardiac structure."
+         "a": "**It does not use ionizing radiation, and it is the current gold standard for evaluating left ventricular hypertrophy.**\n\n## Understanding it\n- **No radiation** — safer for repeated imaging.\n- **Gold standard for LV hypertrophy** (and detailed structure/tissue characterisation).\n\n>> When precise LV mass/structure matters, cardiac MRI is the reference test.",
+         "opts": [
+          "Only shows the rhythm",
+          "No ionizing radiation; gold standard for LV hypertrophy",
+          "Uses high radiation; poor for LVH",
+          "Is an invasive procedure"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe cardiac catheterization.",
-         "a": "An invasive procedure involving introduction of a catheter through the veins into the heart under fluoroscopy guidance."
+         "a": "**An invasive procedure introducing a catheter through the veins into the heart under fluoroscopy guidance.**\n\n## Understanding it\n- A catheter is threaded through a **vessel into the heart** under X-ray (fluoroscopy).\n- Allows direct measurement and intervention.\n\n>> Invasive, but it can both **measure pressures** and **treat** (e.g. close an ASD, open a valve).",
+         "opts": [
+          "A resting ECG",
+          "A surface ultrasound scan",
+          "A blood test for troponin",
+          "A catheter passed into the heart under fluoroscopy"
+         ],
+         "ans": 3
         },
         {
          "q": "What is cardiac catheterization useful for?",
-         "a": "Evaluation of intracardiac pressures; and it may also serve therapeutic value in the management of valvular lesions or congenital heart diseases such as atrial or ventricular septal defects."
+         "a": "**Evaluating intracardiac pressures, and it may be therapeutic — e.g. treating valvular lesions or congenital defects such as atrial septal defect.**\n\n## Understanding it\n- **Diagnostic** — measures pressures inside the chambers.\n- **Therapeutic** — device closure/valvuloplasty for congenital or valve disease.\n\n>> It both diagnoses (pressures) and treats (interventions) — a dual role.",
+         "opts": [
+          "Measuring intracardiac pressures; also therapeutic (valve/ASD)",
+          "Only imaging the lungs",
+          "Only measuring cholesterol",
+          "Only recording rhythm"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe coronary arteriography and its use.",
-         "a": "An invasive procedure which involves the use of contrast agents for evaluation of the coronary arteries; it is useful in the diagnosis and management of coronary artery diseases."
+         "a": "**An invasive procedure using contrast agents to evaluate the coronary arteries; useful in diagnosing and managing coronary artery disease.**\n\n## Understanding it\n- **Contrast dye** is injected into the coronaries and X-rayed.\n- Shows **narrowing/blockage** and guides stenting/bypass.\n\n>> The definitive test for **coronary artery disease** — but the contrast is nephrotoxic (check renal function first).",
+         "opts": [
+          "Contrast imaging of the coronary arteries for coronary disease",
+          "A measure of serum potassium",
+          "Ultrasound of the valves",
+          "A test of lung function"
+         ],
+         "ans": 0
         },
         {
          "q": "What are cardiac enzymes and troponins, and when are they elevated?",
-         "a": "They are markers of myocardial injury, and are elevated in myocardial infarction."
+         "a": "**They are markers of myocardial injury, elevated in myocardial infarction.**\n\n## Understanding it\n- When heart muscle is damaged, these proteins **leak into the blood**.\n- A rise signals **myocardial injury/infarction**.\n\n>> Troponins are the most specific; they **confirm** an MI (but the ECG decides treatment first).",
+         "opts": [
+          "Cholesterol fractions",
+          "Markers of kidney failure",
+          "Clotting factors",
+          "Markers of myocardial injury, raised in MI"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the three cardiac enzymes.",
-         "a": "Creatine phosphokinase (CK), aspartate aminotransferase (AST), and lactate dehydrogenase (LDH)."
+         "a": "**Creatine phosphokinase (CK), aspartate aminotransferase (AST), and lactate dehydrogenase (LDH).**\n\n## Understanding it\n- **CK, AST, LDH** rise after myocardial injury.\n- But each is also found in other tissues (skeletal muscle, liver, almost everywhere), so they are **less specific** than troponins.\n\n>> Know them, but remember troponins are preferred for specificity.",
+         "opts": [
+          "Urea and creatinine",
+          "BNP and NT-proBNP",
+          "Troponin I and T only",
+          "CK, AST and LDH"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the troponins.",
-         "a": "Troponin I and troponin T."
+         "a": "**Troponin I and troponin T.**\n\n## Understanding it\n- The two clinically used cardiac troponins are **I** and **T**.\n- They are **essentially specific to heart muscle**.\n\n>> This specificity is why troponins are preferred over CK/AST/LDH for diagnosing MI.",
+         "opts": [
+          "Troponin C and D",
+          "CK and LDH",
+          "Troponin I and troponin T",
+          "Troponin A and B"
+         ],
+         "ans": 2
         },
         {
          "q": "What is BNP, and where is it produced?",
-         "a": "A 32-amino acid polypeptide produced by the ventricles."
+         "a": "**A 32-amino-acid polypeptide produced by the ventricles.**\n\n## Understanding it\n- **B-type natriuretic peptide** is released by stretched **ventricular** muscle.\n- The more the ventricle is stretched (as in heart failure), the more BNP is released.\n\n>> A raised BNP flags a **failing, overstretched ventricle** — the basis for its use in heart failure.",
+         "opts": [
+          "A clotting factor from platelets",
+          "A hormone from the adrenal gland",
+          "A 32-amino-acid peptide made by the ventricles",
+          "An enzyme from the liver"
+         ],
+         "ans": 2
         },
         {
          "q": "What is NT-proBNP?",
-         "a": "A 76 amino acid N-terminal fragment polypeptide co-secreted with BNP."
+         "a": "**A 76-amino-acid N-terminal fragment co-secreted with BNP.**\n\n## Understanding it\n- When proBNP is cleaved, it releases active **BNP** and an inactive **N-terminal fragment (NT-proBNP)**.\n- Both rise together, so NT-proBNP is an equally useful marker.\n\n>> NT-proBNP is measured as a stable surrogate for BNP in heart failure.",
+         "opts": [
+          "A 76-amino-acid N-terminal fragment co-secreted with BNP",
+          "A form of cholesterol",
+          "A cardiac enzyme",
+          "A breakdown product of troponin"
+         ],
+         "ans": 0
         },
         {
          "q": "What are BNP and NT-proBNP useful for?",
-         "a": "Both are useful in the screening and diagnosis of heart failure, and they are very useful in establishing prognosis of heart failure."
+         "a": "**Screening and diagnosing heart failure, and establishing its prognosis.**\n\n## Understanding it\n- A **normal** level makes heart failure **unlikely** (good rule-out test).\n- Higher levels support the diagnosis and predict **worse prognosis**.\n\n>> Use them to answer 'is this breathlessness cardiac?' — then echo answers 'what kind'.",
+         "opts": [
+          "Assessing valve area",
+          "Measuring coronary blockage",
+          "Screening/diagnosing heart failure and its prognosis",
+          "Diagnosing myocardial infarction"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the purpose of the other, supportive investigations?",
-         "a": "They are useful in detecting risk factors, complications or co-morbidities."
+         "a": "**They help detect risk factors, complications, or co-morbidities.**\n\n## Understanding it\n- Beyond diagnosing the heart problem itself, tests like **lipids, glucose, electrolytes, renal function** map the wider picture.\n- They reveal **why** (risk factors) and **what else** (co-morbidities/complications).\n\n>> Supportive bloods complete the assessment — they don't diagnose the heart lesion but shape management.",
+         "opts": [
+          "Directly image the coronary arteries",
+          "Detect risk factors, complications and co-morbidities",
+          "Measure ejection fraction",
+          "Replace the ECG"
+         ],
+         "ans": 1
         },
         {
          "q": "List the components of the fasting lipid profile.",
-         "a": "Total cholesterol (TC), low density lipoprotein (LDL), high density lipoprotein (HDL), and triglycerides (TG)."
+         "a": "**Total cholesterol, LDL, HDL, and triglycerides.**\n\n## Understanding it\n- **TC** — overall cholesterol.\n- **LDL** — the harmful fraction (to tissues/arteries).\n- **HDL** — the protective fraction (back to liver).\n- **TG** — triglycerides (rise after meals, hence fasting).\n\n>> LDL harmful, HDL protective — the core of cardiovascular risk assessment.",
+         "opts": [
+          "Only total cholesterol",
+          "Sodium, potassium and calcium",
+          "Troponin and BNP",
+          "Total cholesterol, LDL, HDL and triglycerides"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is blood sugar measured, and which tests are used?",
-         "a": "To exclude the presence or not of diabetes mellitus; using fasting blood sugar (FBS) and 2-hour postprandial sugar (2HPPS)."
+         "a": "**To exclude diabetes mellitus, using fasting blood sugar (FBS) and 2-hour postprandial sugar (2HPPS).**\n\n## Understanding it\n- Diabetes is a major **cardiovascular risk factor**.\n- **FBS** detects a raised baseline; **2HPPS** detects an impaired response to a glucose load.\n\n>> Using both catches diabetes at an earlier stage than either alone.",
+         "opts": [
+          "To exclude diabetes, via FBS and 2HPPS",
+          "To measure cholesterol",
+          "To check potassium",
+          "To assess kidney function"
+         ],
+         "ans": 0
         },
         {
          "q": "Which electrolytes are measured in cardiological assessment?",
-         "a": "Na⁺, K⁺, Ca²⁺ and HCO₃⁻."
+         "a": "**Na⁺, K⁺, Ca²⁺ and HCO₃⁻.**\n\n## Understanding it\n- **Potassium and calcium** especially affect cardiac rhythm.\n- **Sodium and bicarbonate** reflect fluid/acid–base status relevant to heart disease and its drugs.\n\n>> Abnormal electrolytes can cause arrhythmias in a structurally **normal** heart — always check them.",
+         "opts": [
+          "Only sodium",
+          "Glucose and cholesterol",
+          "Iron and magnesium only",
+          "Na⁺, K⁺, Ca²⁺ and HCO₃⁻"
+         ],
+         "ans": 3
         },
         {
          "q": "Why are urea and creatinine analysed in cardiological assessment?",
-         "a": "(1) To exclude effects of electrolytes as being responsible for the cardiovascular dysfunction; and (2) to detect whether or not renal disease is present in the patient."
+         "a": "**To exclude electrolyte-driven cardiac dysfunction, and to detect renal disease (which coexists with and affects cardiac disease and its treatment).**\n\n## Understanding it\n- Kidneys handle the **electrolytes and fluid** that affect the heart.\n- Renal impairment changes **drug choice/dosing** and raises risk with **contrast** procedures.\n\n>> Know renal function before contrast angiography — the dye is nephrotoxic.",
+         "opts": [
+          "To exclude electrolyte causes and detect renal disease",
+          "To diagnose infection",
+          "To measure cholesterol",
+          "To assess the valves"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Before commenting on heart size on a chest X-ray, what three checks must you make?",
-         "a": "Is it PA or AP (heart size can only be assessed on PA); is the patient rotated (medial ends of both clavicles equidistant from the spinous processes); and is inspiration adequate (5–7 anterior ribs visible above the diaphragm)."
+         "a": "**Is the film PA or AP (heart size is only assessable on PA), is the patient rotated, and is the film adequately inspired.**\n\n## Understanding it\nBefore judging heart size, confirm the film is valid:\n- **PA vs AP** — AP magnifies the heart.\n- **Rotation** — check the clavicle heads are equidistant from the spinous processes.\n- **Inspiration** — a poorly inspired film crowds and falsely enlarges the heart.\n\n>> A 'big heart' on a bad film may be an artefact — check projection, rotation, inspiration first.",
+         "opts": [
+          "The time of day",
+          "The patient's age, sex and weight",
+          "The X-ray machine's brand",
+          "Projection (PA/AP), rotation, and inspiration"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Why can cardiomegaly not be diagnosed on an AP chest film?",
-         "a": "Because the heart lies anteriorly and is therefore far from the film in an AP projection, so it is magnified by the diverging X-ray beam."
+         "a": "**Because the heart lies anteriorly and is far from the film in an AP projection, so the diverging X-ray beam magnifies it.**\n\n## Understanding it\n- In **AP**, the beam enters the front; the anterior heart is **far from the detector**.\n- The diverging beam **magnifies** distant structures → the heart looks bigger than it is.\n\n>> Only a **PA** film (heart close to detector) gives a true heart size.",
+         "opts": [
+          "AP films shrink the heart",
+          "AP films are too dark to read",
+          "The heart moves in AP films",
+          "The anterior heart is far from the film and gets magnified"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Between which two points is the maximum transverse cardiac diameter measured?",
-         "a": "From the most rightward point of the right heart border to the most leftward point of the left heart border — the two points are usually at different heights."
+         "a": "**From the most rightward point of the right heart border to the most leftward point of the left heart border (the two points are usually at different heights).**\n\n## Understanding it\n- Find the widest point of the heart on each side and sum the distances from the midline.\n- The right-border and left-border points are **not** at the same level.\n\n>> It's the total width of the heart shadow — the numerator of the CTR.",
+         "opts": [
+          "Between the two clavicles",
+          "Rightmost right-border point to leftmost left-border point",
+          "Top to bottom of the heart",
+          "Across the aortic arch"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — When measuring the thoracic diameter for the CTR, do you measure to the inner or outer rib edge?",
-         "a": "The INNER edge — it is the maximum INTERNAL diameter of the thoracic cage."
+         "a": "**The INNER edge — it is the maximum INTERNAL diameter of the thoracic cage.**\n\n## Understanding it\n- The CTR denominator is the **internal** chest width.\n- Measure to the **inner** rib margins, at the widest point.\n\n>> Using the inner edge keeps the ratio standardised — a common OSPE trap.",
+         "opts": [
+          "The inner edge (internal thoracic diameter)",
+          "The outer edge of the ribs",
+          "The midline of the spine",
+          "The skin surface"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — State the standard ECG paper speed and calibration, and what one small square represents.",
-         "a": "25 mm/s and 10 mm/mV; one small square = 0.04 s horizontally and 0.1 mV vertically, and one large square = 0.20 s."
+         "a": "**25 mm/s and 10 mm/mV; one small square = 0.04 s horizontally and 0.1 mV vertically, and one large square = 0.20 s.**\n\n## Understanding it\n- **Speed 25 mm/s** sets the time scale; **10 mm/mV** sets the voltage scale.\n- Small square = **0.04 s**; large square (5 small) = **0.20 s**.\n\n>> These values underpin every rate and interval measurement — memorise them.",
+         "opts": [
+          "No fixed calibration",
+          "25 mm/s, 10 mm/mV; small square 0.04 s, large 0.20 s",
+          "50 mm/s, 5 mm/mV; small square 0.02 s",
+          "10 mm/s, 20 mm/mV; large square 1 s"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — How do you calculate the rate on a REGULAR ECG rhythm?",
-         "a": "300 divided by the number of large squares between two R waves — giving the sequence 300, 150, 100, 75, 60, 50."
+         "a": "**300 divided by the number of large squares between two R waves — giving 300, 150, 100, 75, 60, 50.**\n\n## Understanding it\n- Each large square is 0.20 s, so 300 large squares = 1 minute.\n- **Rate = 300 ÷ (large squares between R waves)**.\n\n>> Learn the sequence 300-150-100-75-60-50 for instant rate reading on regular rhythms.",
+         "opts": [
+          "Count P waves in 6 seconds",
+          "Number of small squares × 10",
+          "300 ÷ large squares between R waves",
+          "Always 60 divided by QRS width"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — How do you calculate the rate on an IRREGULAR rhythm?",
-         "a": "Count the QRS complexes on the 10-second rhythm strip and multiply by 6."
+         "a": "**Count the QRS complexes on the 10-second rhythm strip and multiply by 6.**\n\n## Understanding it\n- With an irregular rhythm, R-R distances vary, so the '300 rule' fails.\n- Count beats over the **10-second** strip and **× 6** to get beats per minute.\n\n>> Use this for atrial fibrillation and other irregular rhythms.",
+         "opts": [
+          "Count P waves × 10",
+          "Measure the QT interval",
+          "300 ÷ large squares",
+          "Count QRS on the 10-second strip × 6"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — State the systematic sequence for reading a 12-lead ECG.",
-         "a": "Patient details and calibration; rate; rhythm; axis; P waves; PR interval; QRS; ST segment; T waves; QT interval; then summary and conclusion."
+         "a": "**Patient details/calibration, rate, rhythm, axis, P waves, PR interval, QRS, ST segment, T waves, QT interval, then summary/conclusion.**\n\n## Understanding it\n- Go in a **fixed order** so nothing is missed.\n- Rate → rhythm → axis → then each waveform/interval in turn.\n\n>> A systematic sequence prevents you overlooking subtle but critical findings.",
+         "opts": [
+          "Start with the T wave",
+          "Just look for obvious abnormalities",
+          "Details, rate, rhythm, axis, P, PR, QRS, ST, T, QT, summary",
+          "Read only leads II and V1"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Using leads I and aVF, how do you determine the axis?",
-         "a": "Both upright = normal axis; lead I up with aVF down = left axis deviation; lead I down with aVF up = right axis deviation; both down = extreme axis."
+         "a": "**Both upright = normal axis; I up, aVF down = left axis deviation; I down, aVF up = right axis deviation; both down = extreme axis.**\n\n## Understanding it\n- Lead I looks leftward, aVF looks downward.\n- Their combined directions place the axis in one of four quadrants.\n\n>> The quick two-lead method: 'both up = normal; leaving each other = LAD; reaching each other = RAD'.",
+         "opts": [
+          "aVF alone gives the axis",
+          "Axis cannot be found from I and aVF",
+          "Both up = right axis deviation",
+          "Both up = normal; I up/aVF down = LAD; I down/aVF up = RAD; both down = extreme"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Which ECG leads correspond to the inferior, anterior and lateral territories?",
-         "a": "Inferior: II, III and aVF. Anterior: V1–V4. Lateral: I, aVL, V5 and V6."
+         "a": "**Inferior: II, III, aVF. Anterior: V1–V4. Lateral: I, aVL, V5, V6.**\n\n## Understanding it\n- Each region of the heart is 'watched' by particular leads.\n- **Inferior** = II/III/aVF; **anterior** = V1–V4; **lateral** = I/aVL/V5/V6.\n\n>> Knowing the territories lets you localise an infarct and predict the culprit artery.",
+         "opts": [
+          "Inferior V1–V4; anterior II/III/aVF",
+          "Lateral is V1–V2 only",
+          "Inferior II/III/aVF; anterior V1–V4; lateral I/aVL/V5/V6",
+          "All territories use only lead II"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — An ECG is irregularly irregular with absent P waves and a fine fibrillatory baseline. Diagnosis?",
-         "a": "Atrial fibrillation."
+         "a": "**Atrial fibrillation.**\n\n## Understanding it\n- **Irregularly irregular** rhythm + **no P waves** + a **fibrillatory baseline** = AF.\n- The atria quiver chaotically instead of contracting.\n\n>> This triad (no P, irregular, fibrillatory baseline) is the classic AF recognition.",
+         "opts": [
+          "Complete heart block",
+          "Ventricular tachycardia",
+          "Sinus tachycardia",
+          "Atrial fibrillation"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Why are P waves absent in atrial fibrillation?",
-         "a": "Because hundreds of chaotic atrial circuits fire simultaneously, so there is no single organised atrial depolarisation to produce a P wave — only a fibrillatory baseline."
+         "a": "**Because hundreds of chaotic atrial circuits fire at once, so there is no single organised atrial depolarisation to make a P wave — only a fibrillatory baseline.**\n\n## Understanding it\n- A P wave needs a **coordinated** atrial contraction from the SA node.\n- In AF the atria are electrically **chaotic**, so no discrete P wave forms.\n\n>> No organised atrial activity = no P wave, just a wavy baseline.",
+         "opts": [
+          "The AV node blocks the P waves",
+          "Chaotic multiple atrial circuits prevent an organised P wave",
+          "The SA node is firing too fast",
+          "The P waves are hidden in the QRS"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is the ventricular rhythm irregular in atrial fibrillation?",
-         "a": "Because the AV node blocks most of the chaotic atrial impulses and conducts others at random, so the ventricles are stimulated at random intervals."
+         "a": "**Because the AV node blocks most of the chaotic atrial impulses and conducts the rest at random, so the ventricles are stimulated at irregular intervals.**\n\n## Understanding it\n- The AV node is bombarded by chaotic impulses.\n- It passes only **some, unpredictably** → ventricles fire at random times.\n\n>> Random AV conduction of chaotic atrial activity = the 'irregularly irregular' pulse.",
+         "opts": [
+          "Random AV-nodal conduction of chaotic atrial impulses",
+          "The SA node is irregular",
+          "Bundle branch block",
+          "The ventricles have their own irregular pacemaker"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — In a patient with atrial fibrillation, why is an echocardiogram requested?",
-         "a": "To look for structural heart disease, valvular disease (especially rheumatic mitral stenosis), and atrial thrombus — cardiac masses such as intramural thrombus being a listed echo indication."
+         "a": "**To look for structural/valvular disease (especially rheumatic mitral stenosis) and atrial thrombus.**\n\n## Understanding it\n- AF is often **caused by** underlying structural/valve disease.\n- The stagnant fibrillating atrium can form a **thrombus** (stroke risk).\n\n>> Echo finds the cause (e.g. mitral stenosis) and the danger (atrial clot).",
+         "opts": [
+          "To measure serum potassium",
+          "To find structural/valve disease and atrial thrombus",
+          "To image the coronary arteries",
+          "To record the rhythm again"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — An ECG shows tall tented T waves, flattened P waves and a widening QRS in a patient with chronic kidney disease. Diagnosis?",
-         "a": "Hyperkalaemia — a medical emergency which may progress to a sine wave pattern and cardiac arrest."
+         "a": "**Hyperkalaemia — a medical emergency that may progress to a sine-wave pattern and cardiac arrest.**\n\n## Understanding it\n- Rising potassium first produces **tall, tented (peaked) T waves**.\n- In CKD (poor potassium excretion) this is a classic scenario.\n\n>> Tented T waves + CKD = hyperkalaemia — act fast; it can end in a sine wave and arrest.",
+         "opts": [
+          "Hypercalcaemia",
+          "Hypokalaemia",
+          "Hyperkalaemia",
+          "Normal ECG"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — State the sequence of ECG changes as potassium rises.",
-         "a": "Tall tented T waves; flattening then loss of P waves; lengthening PR interval; widening QRS; QRS merging with T to form a sine wave; then ventricular fibrillation or asystole."
+         "a": "**Tall tented T waves → flattening/loss of P waves → PR lengthening → widening QRS → QRS merges with T (sine wave) → ventricular fibrillation/asystole.**\n\n## Understanding it\n- Follow potassium upward: T waves peak, P waves vanish, PR and QRS widen.\n- Eventually QRS and T fuse into a **sine wave** → arrest.\n\n>> A stepwise deterioration — the later the change, the more urgent the threat.",
+         "opts": [
+          "Tented T → lost P → wide QRS → sine wave → VF/asystole",
+          "U waves then flat T waves",
+          "ST elevation then Q waves",
+          "No ECG change at all"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — How do you distinguish a hyperkalaemic T wave from other tall T waves?",
-         "a": "The hyperkalaemic T wave is narrow-based, pointed and symmetrical — 'tented' like a church spire — whereas other tall T waves are broad-based."
+         "a": "**The hyperkalaemic T wave is narrow-based, pointed and symmetrical — 'tented' like a church spire — whereas other tall T waves are broad-based.**\n\n## Understanding it\n- **Hyperkalaemia** — narrow, peaked, symmetrical 'tent'.\n- Other causes (e.g. early MI, normal variant) — **broad-based** tall T waves.\n\n>> It's the **shape** (narrow tent) not just height that flags hyperkalaemia.",
+         "opts": [
+          "Narrow-based, pointed, symmetrical ('tented')",
+          "Notched and wide",
+          "Broad-based and rounded",
+          "Inverted and deep"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — What is the order of treatment in hyperkalaemia, and what does each step do?",
-         "a": "Stabilise, shift, remove: calcium gluconate stabilises the myocardium (it does not lower potassium); insulin with dextrose and salbutamol shift potassium into cells; dialysis or excretion removes it from the body."
+         "a": "**Stabilise, shift, remove: calcium gluconate stabilises the myocardium (it does not lower K⁺); insulin+dextrose and salbutamol shift K⁺ into cells; then remove K⁺ (resins, diuretics, dialysis).**\n\n## Understanding it\n- **Stabilise** the heart first (calcium) — buys time.\n- **Shift** potassium into cells (insulin/dextrose, salbutamol) — fast but temporary.\n- **Remove** it from the body (resins/diuretics/dialysis) — definitive.\n\n>> Calcium protects the heart but doesn't lower potassium — a key exam distinction.",
+         "opts": [
+          "Give potassium to normalise it",
+          "Only dialysis, nothing else",
+          "Stabilise (calcium) → shift (insulin/dextrose, salbutamol) → remove",
+          "Diuretics first, calcium last"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What ECG changes occur in HYPOkalaemia?",
-         "a": "Flattened T waves, appearance of U waves, and ST depression; with risk of torsades de pointes."
+         "a": "**Flattened T waves, U waves, and ST depression — with a risk of torsades de pointes.**\n\n## Understanding it\n- Low potassium **flattens T waves** and brings out **U waves**, with ST depression.\n- It prolongs repolarisation → risk of **torsades de pointes**.\n\n>> Mirror image of hyperkalaemia: think 'flat T, U wave, torsades'.",
+         "opts": [
+          "Flat T waves, U waves, ST depression (torsades risk)",
+          "ST elevation",
+          "Wide QRS and lost P waves",
+          "Tall tented T waves"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — On an ECG the P waves are regular but bear no relationship to the QRS complexes, which are wide and slow. Diagnosis?",
-         "a": "Complete (third degree) atrioventricular heart block, with a ventricular escape rhythm."
+         "a": "**Complete (third-degree) atrioventricular heart block, with a ventricular escape rhythm.**\n\n## Understanding it\n- P waves march at their own rate; QRS complexes march at theirs — **no relationship** (AV dissociation).\n- The ventricles are driven by a slow **escape** pacemaker.\n\n>> P and QRS 'doing their own thing' = complete heart block.",
+         "opts": [
+          "Complete (third-degree) AV block",
+          "Sinus arrhythmia",
+          "First-degree AV block",
+          "Atrial fibrillation"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why does a WIDE QRS in complete heart block indicate a more dangerous situation?",
-         "a": "Because a wide QRS indicates a ventricular escape rhythm (20–40/min), which is slower and less reliable than a narrow-complex junctional escape (40–60/min) and may fail, causing asystole."
+         "a": "**Because a wide QRS indicates a ventricular escape rhythm (20–40/min), which is slower and less reliable than a narrow junctional escape (40–60/min) and more likely to fail.**\n\n## Understanding it\n- A **narrow** escape arises high (junctional) — faster, more reliable.\n- A **wide** escape arises low (ventricular) — slower, unstable, prone to asystole.\n\n>> Wide-complex escape = a lower, more dangerous pacemaker → urgent pacing.",
+         "opts": [
+          "Wide QRS is always normal",
+          "It indicates the atria are failing",
+          "Wide QRS = slow, unreliable ventricular escape (20–40/min)",
+          "Wide QRS means a fast safe rhythm"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why must you look for inferior myocardial infarction in a patient with complete heart block?",
-         "a": "Because in most people the right coronary artery supplies both the inferior wall and the AV node, so occlusion causes inferior infarction and heart block together."
+         "a": "**Because in most people the right coronary artery supplies both the inferior wall and the AV node, so its occlusion causes inferior infarction and heart block together.**\n\n## Understanding it\n- The **RCA** feeds the **inferior wall** and the **AV node** in most people.\n- Block the RCA → inferior MI **and** AV block at the same time.\n\n>> New complete heart block + inferior ST elevation = one RCA lesion causing both.",
+         "opts": [
+          "Heart block always causes infarction",
+          "The RCA supplies both the inferior wall and the AV node",
+          "They are unrelated coincidences",
+          "The left coronary supplies the AV node"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — How do you distinguish first degree, Mobitz I, Mobitz II and complete heart block?",
-         "a": "First degree: PR > 0.20 s but every P conducts. Mobitz I: PR progressively lengthens then a beat is dropped. Mobitz II: PR constant then a beat is suddenly dropped. Complete: no relationship at all between P waves and QRS complexes."
+         "a": "**First degree: PR > 0.20 s but every P conducts. Mobitz I: PR progressively lengthens then a beat drops. Mobitz II: PR constant then a beat suddenly drops. Complete: P and QRS are unrelated.**\n\n## Understanding it\n- **1st degree** — long PR, but nothing dropped.\n- **Mobitz I (Wenckebach)** — PR creeps longer until a beat is dropped.\n- **Mobitz II** — PR fixed, then a sudden dropped beat (dangerous).\n- **Complete** — total AV dissociation.\n\n>> The PR behaviour separates them: fixed-long, lengthening, or fixed-then-dropped.",
+         "opts": [
+          "First degree drops every other beat",
+          "All four are identical",
+          "1°: long PR all conduct; MI: PR lengthens then drops; MII: fixed then drops; complete: dissociated",
+          "Mobitz II has lengthening PR"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — ST elevation in leads II, III and aVF. What is the diagnosis and which artery?",
-         "a": "Acute inferior ST-elevation myocardial infarction, usually due to occlusion of the right coronary artery."
+         "a": "**Acute inferior ST-elevation myocardial infarction, usually from occlusion of the right coronary artery.**\n\n## Understanding it\n- **II, III, aVF** are the **inferior** leads.\n- ST elevation there = inferior STEMI, typically an **RCA** occlusion.\n\n>> Match the territory to the artery: inferior leads → RCA.",
+         "opts": [
+          "Inferior STEMI — right coronary artery",
+          "Anterior STEMI — LAD",
+          "Lateral STEMI — circumflex",
+          "Pericarditis"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — In which leads would you look for reciprocal changes in an inferior myocardial infarction?",
-         "a": "Leads I and aVL."
+         "a": "**Leads I and aVL.**\n\n## Understanding it\n- Reciprocal (mirror-image ST **depression**) appears in leads opposite the infarct.\n- For an **inferior** MI, look at the **high lateral** leads **I and aVL**.\n\n>> Reciprocal change supports a true STEMI over a mimic.",
+         "opts": [
+          "Leads V1–V4",
+          "Lead aVR only",
+          "Leads I and aVL",
+          "Leads II, III, aVF"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — How does the ST elevation of pericarditis differ from that of myocardial infarction?",
-         "a": "Pericarditis causes widespread, saddle-shaped ST elevation with NO reciprocal depression, whereas infarction causes territorial ST elevation with reciprocal depression in the opposite leads."
+         "a": "**Pericarditis causes widespread, saddle-shaped ST elevation with NO reciprocal depression, whereas infarction causes territorial ST elevation WITH reciprocal depression.**\n\n## Understanding it\n- **Pericarditis** — diffuse (many leads), saddle-shaped, **no** reciprocal changes.\n- **MI** — confined to a **territory**, with **reciprocal** ST depression elsewhere.\n\n>> Widespread + saddle + no reciprocals = pericarditis; territorial + reciprocals = MI.",
+         "opts": [
+          "MI never has reciprocal changes",
+          "Pericarditis is always territorial",
+          "They look identical",
+          "Pericarditis: widespread saddle ST, no reciprocals; MI: territorial with reciprocals"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Should you wait for the troponin result before treating a STEMI?",
-         "a": "No — the ECG diagnosis is sufficient. Troponin takes hours to rise, and myocardium is dying meanwhile. Troponin confirms; the ECG decides."
+         "a": "**No — the ECG diagnosis is sufficient. Troponin takes hours to rise while myocardium dies; troponin confirms, the ECG decides.**\n\n## Understanding it\n- A STEMI is diagnosed on the **ECG** immediately.\n- **Troponin** rises over hours — waiting for it wastes precious muscle-saving time.\n\n>> 'Time is muscle': treat the STEMI on the ECG; troponin is confirmatory, not gatekeeping.",
+         "opts": [
+          "Yes — troponin decides treatment",
+          "Wait for the echocardiogram first",
+          "No — treat on the ECG; troponin only confirms later",
+          "Yes — always wait for troponin"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why are troponins preferred to CK, AST and LDH?",
-         "a": "Because troponin I and T are essentially specific to heart muscle, whereas CK is also in skeletal muscle, AST also in liver, and LDH in almost every tissue."
+         "a": "**Because troponin I and T are essentially specific to heart muscle, whereas CK is also in skeletal muscle, AST also in liver, and LDH in almost every tissue.**\n\n## Understanding it\n- The enzymes rise with heart injury **but also** from other tissues.\n- **Troponins** are near-exclusive to cardiac muscle → far fewer false positives.\n\n>> Specificity wins: troponins pinpoint the heart, the enzymes don't.",
+         "opts": [
+          "Troponins are heart-specific; CK/AST/LDH are also in other tissues",
+          "The enzymes cannot be measured",
+          "The enzymes are more expensive",
+          "Troponins rise faster than any test"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — An ECG shows a short PR interval with a slurred upstroke of the QRS. What is this?",
-         "a": "A delta wave — indicating Wolff-Parkinson-White syndrome, a pre-excitation syndrome."
+         "a": "**A delta wave — indicating Wolff-Parkinson-White syndrome, a pre-excitation syndrome.**\n\n## Understanding it\n- An accessory pathway lets the impulse **bypass** the AV node, pre-exciting the ventricle.\n- This gives a **short PR** and a slurred QRS upstroke (**delta wave**).\n\n>> Short PR + delta wave = WPW (pre-excitation).",
+         "opts": [
+          "A J wave — hypothermia",
+          "A delta wave — Wolff-Parkinson-White syndrome",
+          "A U wave — hypokalaemia",
+          "A Q wave — old infarct"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — An ECG shows downsloping ST depression with a 'reverse tick' appearance. What is the likely cause?",
-         "a": "Digoxin effect — drug effect being a listed indication for ECG."
+         "a": "**Digoxin effect — drug effect being a listed indication for the ECG.**\n\n## Understanding it\n- Digoxin classically produces a **downsloping ('reverse tick' / Salvador Dalí) ST depression**.\n- This is the *effect* of the drug (at therapeutic levels), distinct from digoxin *toxicity*.\n\n>> Reverse-tick ST depression = digoxin effect.",
+         "opts": [
+          "Pericarditis",
+          "Hyperkalaemia",
+          "Acute STEMI",
+          "Digoxin effect"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — On an echocardiogram there is a large black echo-free space surrounding the heart. What is it, and why is it black?",
-         "a": "A pericardial effusion; fluid appears black on ultrasound because it does not reflect the ultrasound beam."
+         "a": "**A pericardial effusion; fluid appears black on ultrasound because it does not reflect the ultrasound beam.**\n\n## Understanding it\n- Fluid is **echo-free (anechoic)** → it appears **black** on echo.\n- A black rim around the heart = **pericardial effusion**.\n\n>> On echo: black = fluid; a black space around the heart = pericardial effusion.",
+         "opts": [
+          "Normal heart muscle",
+          "Pericardial effusion (fluid is echo-free/black)",
+          "Air in the chest",
+          "A solid tumour"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — On echocardiography, what finding indicates that a pericardial effusion has caused tamponade?",
-         "a": "Collapse of the right-sided chambers, which are thin-walled and low-pressure and therefore compress first."
+         "a": "**Collapse of the right-sided chambers, which are thin-walled and low-pressure and therefore compress first.**\n\n## Understanding it\n- As pericardial pressure rises, it squeezes the **lowest-pressure** chambers first.\n- The **thin-walled right atrium/ventricle collapse** — the echo sign of tamponade.\n\n>> Right-heart chamber collapse on echo = effusion has become tamponade.",
+         "opts": [
+          "A dilated aorta",
+          "Fast valve opening",
+          "Collapse of the thin-walled right-sided chambers",
+          "Thickening of the left ventricle"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why does cardiac tamponade cause shock?",
-         "a": "Because raised pericardial pressure prevents the chambers FILLING, so stroke volume and cardiac output fall — it impairs filling rather than squeezing the pump."
+         "a": "**Because raised pericardial pressure prevents the chambers FILLING, so stroke volume and cardiac output fall — it impairs filling, not the squeeze.**\n\n## Understanding it\n- The pump muscle is fine; the problem is the heart **can't fill** against the surrounding fluid pressure.\n- Low filling → low stroke volume → **low output → shock**.\n\n>> Tamponade is a **filling** failure (diastolic), not a contraction failure.",
+         "opts": [
+          "Raised pericardial pressure blocks filling → low output",
+          "Massive blood loss",
+          "A valve suddenly ruptures",
+          "The heart muscle stops contracting"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why are IV fluids given, and diuretics avoided, in cardiac tamponade?",
-         "a": "Because the problem is inadequate filling; fluids raise filling pressure and help chambers resist collapse, whereas diuretics and vasodilators reduce filling pressure and worsen it."
+         "a": "**Because the problem is inadequate filling; fluids raise filling pressure and help chambers resist collapse, whereas diuretics/vasodilators reduce filling and worsen it.**\n\n## Understanding it\n- More **filling pressure** helps the heart fill against the external squeeze → give **fluids**.\n- **Diuretics/vasodilators** drop filling pressure → the chambers collapse further → catastrophe.\n\n>> Fill the tamponade patient up; never dry them out.",
+         "opts": [
+          "Fluids are dangerous; diuretics help",
+          "Neither affects filling",
+          "Fluids raise filling pressure; diuretics reduce it and worsen tamponade",
+          "Both fluids and diuretics are given"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What is Beck's triad?",
-         "a": "Hypotension, raised JVP and muffled heart sounds — the classic triad of cardiac tamponade."
+         "a": "**Hypotension, raised JVP, and muffled heart sounds — the classic triad of cardiac tamponade.**\n\n## Understanding it\n- **Low BP** (falling output), **raised JVP** (backed-up venous return), **muffled sounds** (fluid around the heart).\n- All three point to **tamponade**.\n\n>> Beck's triad = the bedside recognition of tamponade.",
+         "opts": [
+          "Hypotension, raised JVP, muffled heart sounds",
+          "Bradycardia, hypertension, wide pulse pressure",
+          "Fever, cough, chest pain",
+          "Murmur, clubbing, cyanosis"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Give the chest X-ray appearance suggesting pericardial effusion rather than cardiomegaly.",
-         "a": "A globular, 'water-bottle' shaped cardiac shadow with CLEAR lung fields — whereas heart failure gives a big heart with wet lungs. Only echocardiography distinguishes them definitively."
+         "a": "**A globular, 'water-bottle'-shaped cardiac shadow with CLEAR lung fields — whereas heart failure gives a big heart with wet lungs; only echo truly distinguishes them.**\n\n## Understanding it\n- **Effusion** — enlarged, smooth, globular ('water bottle') heart with **clear** lungs.\n- **Heart failure** — big heart **plus** congested (wet) lungs.\n\n>> Big heart + clear lungs suggests effusion; big heart + wet lungs suggests failure — confirm with echo.",
+         "opts": [
+          "Big heart with wet, congested lungs",
+          "Globular 'water-bottle' heart with clear lungs",
+          "A small heart with clear lungs",
+          "A normal-sized heart"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — What is the earliest chest X-ray sign of left heart failure?",
-         "a": "Upper lobe venous diversion — the upper zone vessels become as large as or larger than the lower zone vessels, reversing the normal pattern."
+         "a": "**Upper-lobe venous diversion — the upper-zone vessels become as large as or larger than the lower-zone vessels, reversing the normal pattern.**\n\n## Understanding it\n- Normally lower-zone vessels are larger (gravity).\n- Rising left atrial pressure diverts blood to the **upper lobes**, so upper vessels enlarge — the **earliest** sign.\n\n>> Upper-lobe diversion appears before frank oedema — the first radiological clue of LVF.",
+         "opts": [
+          "Kerley B lines only",
+          "Upper-lobe venous diversion",
+          "Bilateral pleural effusions",
+          "Massive cardiomegaly"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — What does blunting of the costophrenic angles indicate, and what does bilateral blunting suggest?",
-         "a": "A pleural effusion; bilateral blunting suggests a systemic cause such as heart failure rather than a local lung problem."
+         "a": "**A pleural effusion; bilateral blunting suggests a systemic cause such as heart failure rather than a local lung problem.**\n\n## Understanding it\n- Fluid in the pleural space **blunts the sharp costophrenic angle**.\n- **Bilateral** blunting points to a **systemic** cause (e.g. heart failure); unilateral suggests a local cause.\n\n>> Blunted angles = effusion; both sides = think heart failure.",
+         "opts": [
+          "Consolidation of the lung",
+          "A normal finding",
+          "Pneumothorax; always one-sided",
+          "Pleural effusion; bilateral suggests heart failure"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Give the mnemonic for the chest X-ray features of heart failure.",
-         "a": "ABCDE — Alveolar oedema, kerley B lines, Cardiomegaly, upper lobe Diversion, and pleural Effusions."
+         "a": "**ABCDE — Alveolar oedema, kerley B lines, Cardiomegaly, upper-lobe Diversion, and pleural Effusions.**\n\n## Understanding it\n- **A** — alveolar oedema (bat-wing).\n- **B** — Kerley B lines.\n- **C** — cardiomegaly.\n- **D** — upper-lobe diversion.\n- **E** — effusions.\n\n>> 'ABCDE' captures the full radiological picture of heart failure.",
+         "opts": [
+          "ABCDE: Alveolar oedema, B lines, Cardiomegaly, Diversion, Effusions",
+          "PQRST waves",
+          "ABCD: Airway, Breathing, Circulation, Disability",
+          "The four heart valves"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A patient complains of intermittent palpitations but the 12-lead ECG is normal. What investigation is indicated and why?",
-         "a": "Holter or ambulatory ECG, which records for 24 hours — because a standard ECG records only 10–20 seconds and will miss an intermittent arrhythmia."
+         "a": "**Holter (ambulatory) ECG, which records for 24 hours — because a standard ECG records only 10–20 seconds and misses an intermittent arrhythmia.**\n\n## Understanding it\n- A brief resting ECG will be **normal between episodes**.\n- A **24-hour Holter** captures the arrhythmia during a real-life episode.\n\n>> Intermittent symptom + normal ECG → prolonged (Holter) monitoring.",
+         "opts": [
+          "Repeat the same 12-lead ECG",
+          "A lipid profile",
+          "Coronary angiography",
+          "Holter (24-hour ambulatory) ECG"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A patient has chest pain only on exertion, with a normal resting ECG. What investigation is indicated and why?",
-         "a": "A stress ECG, recorded during exercise — because at rest the coronary supply is adequate, and only increased demand unmasks the ischaemia."
+         "a": "**A stress ECG, recorded during exercise — because at rest the coronary supply is adequate and only increased demand unmasks the ischaemia.**\n\n## Understanding it\n- Rest ECG is normal because supply meets demand.\n- **Exercise raises demand**, exposing the coronary limitation (ST changes).\n\n>> Exertional pain + normal rest ECG → stress ECG to provoke the ischaemia.",
+         "opts": [
+          "An echocardiogram at rest",
+          "A chest X-ray",
+          "A stress (exercise) ECG",
+          "A Holter monitor"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — A breathless patient may have cardiac or respiratory disease. Which blood test helps most, and how?",
-         "a": "BNP or NT-proBNP — a normal level makes heart failure unlikely, so attention shifts to the lungs."
+         "a": "**BNP or NT-proBNP — a normal level makes heart failure unlikely, so attention shifts to the lungs.**\n\n## Understanding it\n- Breathlessness could be **heart** or **lung**.\n- A **normal BNP** effectively **rules out** heart failure → look to the lungs.\n\n>> BNP is the great 'is it the heart?' triage test in breathlessness.",
+         "opts": [
+          "Serum potassium",
+          "Troponin — to diagnose the cause",
+          "A lipid profile",
+          "BNP/NT-proBNP — normal makes heart failure unlikely"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why must a patient's renal function be known before coronary arteriography?",
-         "a": "Because the procedure uses contrast agents, which are nephrotoxic; and urea and creatinine are analysed to detect whether renal disease is present."
+         "a": "**Because the procedure uses contrast agents, which are nephrotoxic; urea and creatinine detect pre-existing renal disease.**\n\n## Understanding it\n- Angiography needs **iodinated contrast**, which can damage the kidneys.\n- Knowing **renal function** first lets you protect the kidneys or reconsider.\n\n>> Always check urea/creatinine before contrast — the dye is nephrotoxic.",
+         "opts": [
+          "To measure cholesterol first",
+          "The dye affects the liver only",
+          "Contrast is nephrotoxic; check renal function first",
+          "Contrast is cardiotoxic"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — In suspected infective endocarditis, why may transoesophageal echocardiography be needed?",
-         "a": "Because vegetations are small, and the transoesophageal probe images the heart very close up, giving far better resolution than the transthoracic view."
+         "a": "**Because vegetations are small, and the transoesophageal probe images the heart very close up, giving far better resolution than the transthoracic view.**\n\n## Understanding it\n- **Vegetations** are tiny and easily missed from the chest wall.\n- **TOE** sits just behind the heart → superior resolution to detect them.\n\n>> Suspected endocarditis with a normal TTE → do a TOE.",
+         "opts": [
+          "Vegetations are small; TOE gives close-up, high-resolution views",
+          "TTE cannot see the heart at all",
+          "TOE avoids all radiation",
+          "TOE is quicker to perform"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why is a fasting sample required for a lipid profile?",
-         "a": "Because triglycerides rise sharply after a meal, which falsely raises the TG and distorts the calculated LDL; cholesterol changes little with food."
+         "a": "**Because triglycerides rise sharply after a meal, falsely raising TG and distorting the calculated LDL; cholesterol changes little with food.**\n\n## Understanding it\n- Eating spikes **triglycerides**, which throws off the **calculated LDL**.\n- Fasting gives a true, comparable measurement.\n\n>> Fast before lipids so the triglyceride-dependent LDL isn't falsely distorted.",
+         "opts": [
+          "Cholesterol vanishes after eating",
+          "Triglycerides rise after eating, distorting TG and calculated LDL",
+          "Food destroys HDL",
+          "Fasting raises all lipids"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Which lipid fraction is harmful and which is protective, and why?",
-         "a": "LDL is harmful because it carries cholesterol from the liver to the tissues including artery walls; HDL is protective because it carries cholesterol from the tissues back to the liver."
+         "a": "**LDL is harmful (carries cholesterol from the liver to tissues including artery walls); HDL is protective (carries cholesterol from tissues back to the liver).**\n\n## Understanding it\n- **LDL** delivers cholesterol **to** tissues/arteries → plaque.\n- **HDL** removes cholesterol **from** tissues **back** to the liver → protective.\n\n>> LDL = 'Lousy' (to arteries); HDL = 'Healthy' (reverse transport).",
+         "opts": [
+          "Both are equally harmful",
+          "LDL harmful (to tissues); HDL protective (back to liver)",
+          "Neither affects arteries",
+          "HDL harmful; LDL protective"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why may a diabetic patient have a myocardial infarction without chest pain?",
-         "a": "Because diabetic neuropathy damages the nerves carrying cardiac pain, producing silent myocardial infarction."
+         "a": "**Because diabetic neuropathy damages the nerves carrying cardiac pain, producing a silent myocardial infarction.**\n\n## Understanding it\n- Diabetes damages **autonomic/sensory nerves** (neuropathy).\n- The nerves that signal cardiac ischaemic pain are blunted → the MI is **silent** (painless).\n\n>> In diabetics, suspect MI even without chest pain — it can be silent.",
+         "opts": [
+          "Diabetic neuropathy blunts cardiac pain (silent MI)",
+          "Their coronaries are protected",
+          "High sugar cures the pain",
+          "Diabetics never have MIs"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why are FBS and 2HPPS both used rather than one alone?",
-         "a": "FBS detects those whose baseline sugar is already raised; 2HPPS detects those with a normal fasting sugar who cannot handle a glucose load — an earlier stage the FBS would miss."
+         "a": "**FBS detects those with a raised baseline sugar; 2HPPS detects those with normal fasting sugar who cannot handle a glucose load — an earlier stage that FBS misses.**\n\n## Understanding it\n- **FBS** catches established fasting hyperglycaemia.\n- **2HPPS** catches **impaired glucose handling** before fasting sugar rises.\n\n>> Using both detects diabetes/pre-diabetes earlier than either alone.",
+         "opts": [
+          "FBS is only for children",
+          "FBS catches raised baseline; 2HPPS catches impaired glucose handling",
+          "2HPPS measures cholesterol",
+          "They measure exactly the same thing"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A patient presents with a dangerous arrhythmia. Why must electrolytes be checked before assuming heart disease?",
-         "a": "Because abnormal potassium or calcium alone causes arrhythmias in a structurally normal heart — electrolytes must be excluded as being responsible for the cardiovascular dysfunction."
+         "a": "**Because abnormal potassium or calcium alone can cause arrhythmias in a structurally normal heart — electrolytes must be excluded as the cause.**\n\n## Understanding it\n- **K⁺ and Ca²⁺** disturbances trigger arrhythmias without any structural disease.\n- They are **rapidly correctable**, so exclude them before assuming heart disease.\n\n>> Always check electrolytes in an arrhythmia — a reversible cause you don't want to miss.",
+         "opts": [
+          "To measure cholesterol",
+          "Only structural disease matters",
+          "Electrolytes never affect rhythm",
+          "Electrolyte disturbances alone can cause arrhythmias"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why does heart failure require both BNP and echocardiography?",
-         "a": "BNP answers whether it is heart failure; echocardiography answers what kind — reduced or preserved ejection fraction — which determines treatment."
+         "a": "**BNP answers WHETHER it is heart failure; echocardiography answers WHAT KIND — reduced or preserved ejection fraction — which determines treatment.**\n\n## Understanding it\n- **BNP** — confirms/refutes heart failure.\n- **Echo** — classifies it (HFrEF vs HFpEF) and finds the cause → guides therapy.\n\n>> BNP = 'is it?', echo = 'what kind?' — you need both.",
+         "opts": [
+          "Echo rules heart failure in or out alone",
+          "They give identical information",
+          "BNP shows the ejection fraction",
+          "BNP = whether; echo = what kind (EF), guiding treatment"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why is the ECG the most valuable investigation in acute cardiology?",
-         "a": "Because it is instant, bedside and non-invasive, whereas laboratory tests take time."
+         "a": "**Because it is instant, bedside and non-invasive, whereas laboratory tests take time.**\n\n## Understanding it\n- In an emergency, minutes matter.\n- The ECG gives an **immediate** answer at the bedside, unlike bloods that must be processed.\n\n>> Speed + availability make the ECG the first and most valuable acute test.",
+         "opts": [
+          "It images the coronary arteries",
+          "It is the most expensive test",
+          "It replaces all other tests",
+          "It is instant, bedside and non-invasive"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A patient has an ECG showing electrical activity but no palpable pulse. What does this illustrate?",
-         "a": "That the ECG records electricity only and not pumping — this is pulseless electrical activity, a cardiac arrest rhythm."
+         "a": "**That the ECG records electricity only, not pumping — this is pulseless electrical activity, a cardiac arrest rhythm.**\n\n## Understanding it\n- The ECG can show organised electrical activity while the heart **isn't actually pumping**.\n- No pulse despite electrical activity = **PEA**, a form of cardiac arrest.\n\n>> The ECG shows electricity, not output — hence you always check the pulse.",
+         "opts": [
+          "It proves the heart is fine",
+          "The ECG shows electricity, not pumping — pulseless electrical activity",
+          "The ECG machine is faulty",
+          "It is normal sinus rhythm"
+         ],
+         "ans": 1
         }
        ],
        "imgBase": "content/Pediatrics/Onuoha/Introduction%20to%20Cardiology%20_Investigations%20of%20the%20Cardiac%20System/img/",
@@ -1695,375 +2332,1026 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "What is pulmonology?",
-         "a": "A field of medicine that focuses specifically on diagnosing and treating disorders of the respiratory system."
+         "a": "**A field of medicine focused on diagnosing and treating disorders of the respiratory system.**\n\n## Understanding it\n- It covers the airways and lungs — from nose to alveoli.\n- Its scope is **diagnosis and treatment** of respiratory disease.\n\n>> Pulmonology = the 'lung and airways' specialty.",
+         "opts": [
+          "The study of the kidneys",
+          "The medical field for respiratory-system disorders",
+          "The study of blood cells",
+          "The study of the heart"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the other names for pulmonology?",
-         "a": "Respirology, respiratory medicine or chest medicine."
+         "a": "**Respirology, respiratory medicine, or chest medicine.**\n\n## Understanding it\n- Different regions use different names for the same specialty.\n- All refer to the medicine of the **lungs and airways**.\n\n>> Respirology / respiratory medicine / chest medicine = pulmonology.",
+         "opts": [
+          "Nephrology",
+          "Cardiology",
+          "Respirology, respiratory medicine, chest medicine",
+          "Neurology"
+         ],
+         "ans": 2
         },
         {
          "q": "From what structure does the respiratory system develop?",
-         "a": "As an outgrowth from the ventral (front) wall of the foregut in week 4."
+         "a": "**As an outgrowth from the ventral (front) wall of the foregut in week 4.**\n\n## Understanding it\n- The respiratory tract buds off the **front wall of the foregut**.\n- This happens in the **4th week** of development.\n\n>> Lungs sprout from the foregut — which is why airway and gut anomalies (e.g. TOF) are linked.",
+         "opts": [
+          "From the neural tube",
+          "From the heart tube",
+          "A ventral outgrowth of the foregut in week 4",
+          "From the hindgut in week 8"
+         ],
+         "ans": 2
         },
         {
          "q": "Into what two channels is the foregut split?",
-         "a": "One going to the stomach (the oesophagus) and one going to the lungs (the trachea)."
+         "a": "**One going to the stomach (the oesophagus) and one going to the lungs (the trachea).**\n\n## Understanding it\n- The single foregut tube divides into a **food** channel (oesophagus) and an **air** channel (trachea).\n- A faulty division links the two (tracheo-oesophageal fistula).\n\n>> Two tubes from one: oesophagus (food) and trachea (air).",
+         "opts": [
+          "Trachea and bronchus only",
+          "Two stomachs",
+          "Larynx and pharynx",
+          "Oesophagus (to stomach) and trachea (to lungs)"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the germ-layer origin of the epithelial lining from the larynx to the alveoli?",
-         "a": "Endodermal (from the endoderm)."
+         "a": "**Endodermal — the lining from larynx to alveoli comes from endoderm.**\n\n## Understanding it\n- The **inner lining** of the airways is **endoderm** (like the gut lining it budded from).\n- The surrounding cartilage/muscle is a different layer (mesoderm).\n\n>> Lining = endoderm; scaffolding = mesoderm.",
+         "opts": [
+          "Mesodermal",
+          "Endodermal",
+          "Neural crest",
+          "Ectodermal"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the germ-layer origin of the cartilage and muscle around the airways?",
-         "a": "Mesodermal (from the mesoderm)."
+         "a": "**Mesodermal — the cartilage and muscle around the airways come from mesoderm.**\n\n## Understanding it\n- The **structural** components (cartilage rings, smooth muscle) are **mesoderm**.\n- The lining is endoderm.\n\n>> Airway wall support = mesoderm.",
+         "opts": [
+          "Endodermal",
+          "Neural tube",
+          "Mesodermal",
+          "Ectodermal"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the oesophagotracheal septum and when does it form?",
-         "a": "The wall of tissue that separates the respiratory bud from the oesophagus; it forms in the 4th week."
+         "a": "**The wall of tissue that separates the respiratory bud from the oesophagus; it forms in the 4th week.**\n\n## Understanding it\n- It is the **partition** that splits the foregut into airway and food pipe.\n- Forms in **week 4**.\n\n>> If this septum fails, the trachea and oesophagus stay connected (TOF).",
+         "opts": [
+          "The pleural membrane",
+          "The wall between the two lungs",
+          "The partition separating trachea from oesophagus, formed in week 4",
+          "The diaphragm"
+         ],
+         "ans": 2
         },
         {
          "q": "What does failure of the oesophagotracheal septum cause?",
-         "a": "Tracheo-oesophageal fistula (TOF) — a connection between the airway and the food pipe, a surgical emergency in newborns."
+         "a": "**Tracheo-oesophageal fistula (TOF) — an abnormal connection between the airway and food pipe, a surgical emergency in newborns.**\n\n## Understanding it\n- The septum failed to separate the tubes → they stay **connected**.\n- Milk can enter the airway → choking, cyanosis with feeds.\n\n>> Failed septum = TOF, a neonatal surgical emergency.",
+         "opts": [
+          "Cleft palate",
+          "Diaphragmatic hernia",
+          "Tracheo-oesophageal fistula (TOF)",
+          "Pyloric stenosis"
+         ],
+         "ans": 2
         },
         {
          "q": "Into what two structures does the oesophagotracheal septum divide the foregut?",
-         "a": "The respiratory diverticulum anteriorly (becomes the lungs) and the oesophagus posteriorly."
+         "a": "**The respiratory diverticulum anteriorly (becomes the lungs) and the oesophagus posteriorly.**\n\n## Understanding it\n- **Anterior** part → respiratory diverticulum → lungs.\n- **Posterior** part → oesophagus.\n\n>> Air in front, food behind — a recurring orientation in the neck/chest.",
+         "opts": [
+          "Larynx and pharynx",
+          "Two bronchi",
+          "Stomach and duodenum",
+          "Respiratory diverticulum (front) and oesophagus (back)"
+         ],
+         "ans": 3
         },
         {
          "q": "At what single point do the respiratory and oesophageal tubes remain connected?",
-         "a": "Through the larynx."
+         "a": "**Through the larynx.**\n\n## Understanding it\n- After separating, the two tubes still meet at the **larynx** (the shared upper opening).\n- This is why the airway and food pathway cross at the throat.\n\n>> The larynx is the crossroad — hence the epiglottis guards it during swallowing.",
+         "opts": [
+          "Through the alveoli",
+          "Through the stomach",
+          "Through the larynx",
+          "Through the diaphragm"
+         ],
+         "ans": 2
         },
         {
          "q": "From which branchial arches is the larynx formed?",
-         "a": "The 4th and 6th branchial arches."
+         "a": "**The 4th and 6th branchial arches.**\n\n## Understanding it\n- The larynx develops from the **4th and 6th** pharyngeal (branchial) arches.\n- These arches also supply its cartilages and nerves (vagus branches).\n\n>> Larynx = 4th + 6th arches.",
+         "opts": [
+          "1st and 2nd arches",
+          "3rd arch only",
+          "4th and 6th branchial arches",
+          "5th and 7th arches"
+         ],
+         "ans": 2
         },
         {
          "q": "How many bronchi and lobes does the left lung bud form?",
-         "a": "2 main bronchi and 2 lobes."
+         "a": "**2 main bronchi and 2 lobes.**\n\n## Understanding it\n- The **left** lung bud forms **2** bronchi and **2** lobes.\n- The heart takes up space on the left, matching the smaller two-lobe lung.\n\n>> Left = 2 (and shares its side with the heart).",
+         "opts": [
+          "2 bronchi and 2 lobes",
+          "4 bronchi and 4 lobes",
+          "1 bronchus and 1 lobe",
+          "3 bronchi and 3 lobes"
+         ],
+         "ans": 0
         },
         {
          "q": "How many bronchi and lobes does the right lung bud form?",
-         "a": "3 main bronchi and 3 lobes."
+         "a": "**3 main bronchi and 3 lobes.**\n\n## Understanding it\n- The **right** lung bud forms **3** bronchi and **3** lobes.\n- This makes the adult right lung slightly larger.\n\n>> Right = 3.",
+         "opts": [
+          "5 bronchi and 5 lobes",
+          "1 bronchus and 1 lobe",
+          "2 bronchi and 2 lobes",
+          "3 bronchi and 3 lobes"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is the adult right lung slightly larger?",
-         "a": "The 3-lobe/2-lobe asymmetry is determined at the embryological lung-bud stage."
+         "a": "**Because the 3-lobe/2-lobe asymmetry is set at the embryological lung-bud stage.**\n\n## Understanding it\n- The right bud makes **3 lobes**, the left only **2** (heart takes the space).\n- This early difference persists into adult anatomy.\n\n>> The right-larger pattern is decided in the embryo.",
+         "opts": [
+          "The right lung grows faster after birth",
+          "Breathing inflates the right more",
+          "The left lung is diseased",
+          "The 3-lobe vs 2-lobe asymmetry is set at the bud stage"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the two developmental phases of the lung given in the lecture and their weeks.",
-         "a": "Pseudoglandular phase (5-17 weeks) and canalicular phase (15-25 weeks)."
+         "a": "**The pseudoglandular phase (5–17 weeks) and the canalicular phase (15–25 weeks).**\n\n## Understanding it\n- **Pseudoglandular (5–17 wk)** — airways forming, gland-like, no gas exchange.\n- **Canalicular (15–25 wk)** — gas-exchange surfaces and surfactant begin.\n\n>> Pseudoglandular = plumbing; canalicular = making it work (gas exchange + surfactant).",
+         "opts": [
+          "Pseudoglandular (5–17 wk) and canalicular (15–25 wk)",
+          "Alveolar and saccular only",
+          "Embryonic and fetal only",
+          "Neonatal and infant"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is the pseudoglandular phase called 'false gland'?",
-         "a": "The lung looks gland-like under the microscope and airways are forming, but there is no gas exchange yet."
+         "a": "**Because the developing lung looks gland-like under the microscope and airways are forming, but there is no gas exchange yet.**\n\n## Understanding it\n- Histologically it **resembles a gland**, hence 'pseudo-glandular'.\n- Airways are being built, but the lung cannot yet exchange gas.\n\n>> It looks like a gland but doesn't breathe — plumbing before function.",
+         "opts": [
+          "It is the birth phase",
+          "It looks gland-like but has no gas exchange yet",
+          "It is when surfactant peaks",
+          "It actually secretes hormones"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens to the bronchiolar lining cells in the canalicular phase?",
-         "a": "They thin out and flatten into type I alveolar epithelial cells — the gas-exchange cells."
+         "a": "**They thin out and flatten into type I alveolar epithelial cells — the gas-exchange cells.**\n\n## Understanding it\n- The cuboidal lining **flattens** into thin **type I** cells.\n- Thin cells allow gases to diffuse across easily.\n\n>> Type I cells = the thin gas-exchange surface.",
+         "opts": [
+          "They disappear entirely",
+          "They become goblet cells",
+          "They flatten into type I gas-exchange cells",
+          "They thicken into muscle"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cells produce surfactant, and when do they begin?",
-         "a": "Type II alveolar epithelial cells, beginning in the canalicular phase (15-25 weeks)."
+         "a": "**Type II alveolar epithelial cells, beginning in the canalicular phase (15–25 weeks).**\n\n## Understanding it\n- **Type II** cells make **surfactant**, starting in the canalicular phase.\n- Adequate surfactant is needed for the alveoli to stay open at birth.\n\n>> Type II = surfactant factory (from ~15–25 weeks).",
+         "opts": [
+          "Type I cells, at birth",
+          "Ciliated cells, before week 5",
+          "Goblet cells, in infancy",
+          "Type II alveolar cells, from the canalicular phase"
+         ],
+         "ans": 3
         },
         {
          "q": "What is surfactant?",
-         "a": "A phospholipid coat laid over the alveolar membranes that reduces surface tension at the air-blood capillary interface."
+         "a": "**A phospholipid coat laid over the alveolar membranes that reduces surface tension at the air–blood interface.**\n\n## Understanding it\n- It is a **phospholipid** film lining the alveoli.\n- It lowers **surface tension** so alveoli resist collapse.\n\n>> Surfactant = the anti-collapse film on the alveoli.",
+         "opts": [
+          "A phospholipid film that lowers alveolar surface tension",
+          "A muscle that opens the airway",
+          "A mucus that traps bacteria",
+          "A hormone controlling breathing"
+         ],
+         "ans": 0
         },
         {
          "q": "What does surfactant do?",
-         "a": "It reduces surface tension so the alveoli do not collapse inward during expiration, keeping them open for the next breath."
+         "a": "**It reduces surface tension so the alveoli do not collapse during expiration, keeping them open for the next breath.**\n\n## Understanding it\n- Without it, high surface tension would **collapse** the alveoli at end-expiration.\n- Surfactant keeps them **open**, so the next breath doesn't have to re-inflate from scratch.\n\n>> Keeps alveoli open → breathing is easy, not exhausting.",
+         "opts": [
+          "Lowers surface tension so alveoli stay open in expiration",
+          "Warms the inhaled air",
+          "Contracts the alveoli shut",
+          "Increases surface tension"
+         ],
+         "ans": 0
         },
         {
          "q": "Why do premature infants develop RDS?",
-         "a": "They are born before sufficient surfactant is produced, so their alveoli keep collapsing and breathing becomes exhausting work."
+         "a": "**Because they are born before enough surfactant is produced, so their alveoli keep collapsing and breathing becomes exhausting.**\n\n## Understanding it\n- Surfactant is inadequate before ~34 weeks.\n- Without it, alveoli **collapse repeatedly** → respiratory distress syndrome (RDS).\n\n>> Premature = surfactant deficient = RDS.",
+         "opts": [
+          "They lack surfactant, so alveoli collapse (RDS)",
+          "Their airways are blocked by mucus",
+          "They have too much surfactant",
+          "They inhale meconium"
+         ],
+         "ans": 0
         },
         {
          "q": "How do the lungs grow after birth?",
-         "a": "By increasing the number of respiratory bronchioles and alveoli — multiplication, not enlargement of existing alveoli."
+         "a": "**By increasing the number of respiratory bronchioles and alveoli — multiplication, not enlargement of existing alveoli.**\n\n## Understanding it\n- Postnatal lung growth adds **new** alveoli rather than inflating old ones.\n- This is why early lung injury can permanently limit alveolar number.\n\n>> Growth = more alveoli, not bigger ones.",
+         "opts": [
+          "By adding new lobes",
+          "By multiplying alveoli and bronchioles",
+          "The lungs do not grow after birth",
+          "By enlarging existing alveoli only"
+         ],
+         "ans": 1
         },
         {
          "q": "What does 'continuum of mucosal surfaces' mean for the respiratory tract?",
-         "a": "The tract is one connected surface from nose to alveoli, so infection can travel downward along it with no anatomical stop signs."
+         "a": "**The tract is one connected surface from nose to alveoli, so infection can travel downward with no anatomical stop signs.**\n\n## Understanding it\n- The lining is **continuous** from the nose to the alveoli.\n- A pathogen can **spread down** the tract unimpeded.\n\n>> One continuous surface = a URTI can descend to pneumonia.",
+         "opts": [
+          "The tract has valves stopping spread",
+          "Only the nose is lined",
+          "Separate sealed compartments",
+          "One continuous lining lets infection spread downward"
+         ],
+         "ans": 3
         },
         {
          "q": "List the respiratory tract in order.",
-         "a": "Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs."
+         "a": "**Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs.**\n\n## Understanding it\n- Trace the air's path from the **nose** down to the **alveoli**.\n- Order: nasal cavity → pharynx → epiglottis → larynx → trachea → bronchi → bronchioles → alveolar sacs.\n\n>> Follow the air: nose to alveoli in sequence.",
+         "opts": [
+          "Nasal cavity → pharynx → larynx → trachea → bronchi → bronchioles → alveoli",
+          "Alveoli → bronchi → trachea → nose",
+          "Nose → oesophagus → stomach",
+          "Larynx → nose → trachea"
+         ],
+         "ans": 0
         },
         {
          "q": "At what landmark is the respiratory tract divided into upper and lower?",
-         "a": "At the larynx — above it is upper, below it is lower."
+         "a": "**At the larynx — above it is upper, below it is lower.**\n\n## Understanding it\n- The **larynx** is the dividing landmark.\n- **Above** = upper respiratory tract; **below** = lower respiratory tract.\n\n>> Larynx splits upper from lower airway.",
+         "opts": [
+          "At the nose",
+          "At the larynx",
+          "At the diaphragm",
+          "At the trachea's bifurcation"
+         ],
+         "ans": 1
         },
         {
          "q": "What structures make up the upper respiratory tract?",
-         "a": "The nose, paranasal sinuses and pharynx."
+         "a": "**The nose, paranasal sinuses and pharynx.**\n\n## Understanding it\n- The **upper** tract = nose + paranasal sinuses + pharynx (above the larynx).\n- These are the first line the air (and pathogens) meet.\n\n>> Upper = nose, sinuses, pharynx.",
+         "opts": [
+          "Larynx and lungs",
+          "Nose, paranasal sinuses and pharynx",
+          "Trachea, bronchi and alveoli",
+          "Bronchioles only"
+         ],
+         "ans": 1
         },
         {
          "q": "What structures make up the lower respiratory tract?",
-         "a": "The trachea, bronchi, bronchioles and alveoli."
+         "a": "**The trachea, bronchi, bronchioles and alveoli.**\n\n## Understanding it\n- The **lower** tract = everything from the trachea down to the alveoli (below the larynx).\n- This is where serious diseases like pneumonia sit.\n\n>> Lower = trachea, bronchi, bronchioles, alveoli.",
+         "opts": [
+          "Mouth and tongue",
+          "Trachea, bronchi, bronchioles and alveoli",
+          "Pharynx and larynx",
+          "Nose and sinuses"
+         ],
+         "ans": 1
         },
         {
          "q": "Which serious diseases tend to live in the lower respiratory tract?",
-         "a": "Pneumonia, asthma and bronchiolitis."
+         "a": "**Pneumonia, asthma and bronchiolitis.**\n\n## Understanding it\n- The **lower** tract hosts the more dangerous conditions.\n- Classic examples: **pneumonia, asthma, bronchiolitis**.\n\n>> Lower-tract 'big three': pneumonia, asthma, bronchiolitis.",
+         "opts": [
+          "Common cold and sinusitis",
+          "Otitis media",
+          "Pneumonia, asthma and bronchiolitis",
+          "Pharyngitis and tonsillitis"
+         ],
+         "ans": 2
         },
         {
          "q": "Where does the trachea start?",
-         "a": "At the lower border of the cricoid cartilage at C6."
+         "a": "**At the lower border of the cricoid cartilage at C6.**\n\n## Understanding it\n- The trachea begins where the larynx ends — the **cricoid cartilage at C6**.\n- It then runs down to its bifurcation in the chest.\n\n>> Trachea starts at C6 (lower cricoid).",
+         "opts": [
+          "At C1",
+          "At the sternal angle (T4/T5)",
+          "Lower border of the cricoid cartilage at C6",
+          "At the nose"
+         ],
+         "ans": 2
         },
         {
          "q": "Where does the trachea bifurcate?",
-         "a": "At the sternal angle of Louis (T4/T5), forming the right and left main bronchi."
+         "a": "**At the sternal angle of Louis (T4/T5), forming the right and left main bronchi.**\n\n## Understanding it\n- The trachea divides at the **sternal angle (angle of Louis)**, level **T4/T5**.\n- Here it splits into the right and left main bronchi (the carina).\n\n>> Bifurcation = sternal angle of Louis, T4/T5.",
+         "opts": [
+          "At the diaphragm",
+          "At the sternal angle of Louis (T4/T5)",
+          "At C6 (cricoid)",
+          "At the first rib"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the dimensions of the trachea?",
-         "a": "About four and a half inches long and nearly one inch in diameter."
+         "a": "**About four and a half inches long and nearly one inch in diameter.**\n\n## Understanding it\n- Adult trachea ≈ **4.5 inches (≈11 cm)** long, ≈ **1 inch (≈2.5 cm)** wide.\n- A short, wide tube conducting air to the bronchi.\n\n>> Rough adult size: ~4.5 inches long, ~1 inch across.",
+         "opts": [
+          "~2 feet long",
+          "~12 inches long, ~3 inches wide",
+          "~4.5 inches long, ~1 inch in diameter",
+          "~1 inch long, ~0.1 inch wide"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the lining of the trachea?",
-         "a": "Ciliated columnar epithelium with goblet cells."
+         "a": "**Ciliated columnar epithelium with goblet cells.**\n\n## Understanding it\n- **Ciliated columnar** cells sweep debris upward.\n- **Goblet cells** secrete mucus to trap particles.\n\n>> This lining is the airway's built-in cleaning system.",
+         "opts": [
+          "Keratinised skin",
+          "Ciliated columnar epithelium with goblet cells",
+          "Simple squamous epithelium",
+          "Cartilage only"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the function of the tracheal cilia and goblet cells?",
-         "a": "Cilia beat upward to sweep debris out; goblet cells produce mucus to trap pathogens — the first-line defence system."
+         "a": "**Cilia beat upward to sweep debris out; goblet cells produce mucus to trap pathogens — the first-line defence.**\n\n## Understanding it\n- **Goblet cells** trap dust/pathogens in **mucus**.\n- **Cilia** waft the mucus **upward** to be cleared (the mucociliary escalator).\n\n>> Trap (mucus) and sweep (cilia) = airway defence; smoking wrecks it.",
+         "opts": [
+          "They produce surfactant",
+          "They warm the blood",
+          "Mucus traps pathogens; cilia sweep it upward (mucociliary escalator)",
+          "They exchange gases"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the right main bronchus.",
-         "a": "Wider, shorter and more vertical than the left, leaving at an angle of 25 degrees to the horizontal."
+         "a": "**Wider, shorter and more vertical than the left, leaving at about 25° to the horizontal.**\n\n## Understanding it\n- The **right** bronchus is **wide, short, vertical** (~25°).\n- It is almost a straight continuation of the trachea.\n\n>> Right = wide, short, vertical → aspirated objects go right.",
+         "opts": [
+          "Identical to the left",
+          "Horizontal",
+          "Narrow, long and steep (45°)",
+          "Wider, shorter, more vertical (~25°)"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the left main bronchus.",
-         "a": "Narrower and steeper, leaving at an angle of 45 degrees."
+         "a": "**Narrower and steeper, leaving at about 45°.**\n\n## Understanding it\n- The **left** bronchus is **narrower and more angled** (~45°).\n- Its steeper angle makes aspiration into it less likely.\n\n>> Left = narrow, steep (45°).",
+         "opts": [
+          "The same as the right",
+          "Wider, shorter, vertical (25°)",
+          "Narrower and steeper (~45°)",
+          "Horizontal"
+         ],
+         "ans": 2
         },
         {
          "q": "Why do foreign bodies preferentially enter the right bronchus?",
-         "a": "Because it is wider and more vertical — a more direct continuation of the trachea — so aspirated material enters it, particularly the middle and lower lobes of the right lung."
+         "a": "**Because it is wider and more vertical — a direct continuation of the trachea — so aspirated material enters it, especially the middle and lower lobes.**\n\n## Understanding it\n- Gravity + the **straight, wide** right bronchus funnel objects to the right.\n- The left's angle deflects them.\n\n>> Wide + vertical right bronchus = the usual home of an inhaled foreign body.",
+         "opts": [
+          "It is narrower than the left",
+          "It is wider and more vertical (a direct tracheal continuation)",
+          "Foreign bodies always go left",
+          "The left bronchus is blocked"
+         ],
+         "ans": 1
         },
         {
          "q": "If a child inhales something, which side do you examine first?",
-         "a": "The right — look right first."
+         "a": "**The right — look right first.**\n\n## Understanding it\n- Because aspiration favours the **right** bronchus, examine the **right** lung first.\n- Expect reduced air entry there.\n\n>> Inhaled object → 'look right first'.",
+         "opts": [
+          "The upper lobes only",
+          "The left side",
+          "Both are equal, start left",
+          "The right side"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the shape of each lung and where is its apex?",
-         "a": "Conical, with a blunt apex projecting above the sternal end of the first rib."
+         "a": "**Conical, with a blunt apex projecting above the sternal end of the first rib.**\n\n## Understanding it\n- Each lung is **cone-shaped**.\n- Its **apex** rises **above the first rib** into the root of the neck.\n\n>> The lung apex peeks above the first rib — vulnerable to neck injuries.",
+         "opts": [
+          "Spherical, apex at the diaphragm",
+          "Flat, no apex",
+          "Cubic, apex at the heart",
+          "Conical, apex above the first rib"
+         ],
+         "ans": 3
         },
         {
          "q": "Why can a penetrating injury at the base of the neck injure the lung?",
-         "a": "Because the lung apex projects above the first rib, into the root of the neck."
+         "a": "**Because the lung apex projects above the first rib, into the root of the neck.**\n\n## Understanding it\n- The apex sits **above the clavicle/first rib**, in the lower neck.\n- A stab there can reach the lung → pneumothorax.\n\n>> Neck-base wounds can hit the lung apex.",
+         "opts": [
+          "The trachea is in the neck only",
+          "The heart is in the neck",
+          "The lung apex extends above the first rib into the neck",
+          "The lung fills the whole neck"
+         ],
+         "ans": 2
         },
         {
          "q": "How many lobes and fissures does the right lung have?",
-         "a": "Three lobes (upper, middle, lower) divided by two fissures — the oblique and the horizontal."
+         "a": "**Three lobes (upper, middle, lower) divided by two fissures — the oblique and the horizontal.**\n\n## Understanding it\n- **3 lobes**, separated by the **oblique** and **horizontal** fissures.\n- The horizontal fissure is unique to the right lung.\n\n>> Right = 3 lobes, 2 fissures (oblique + horizontal).",
+         "opts": [
+          "2 lobes, 1 fissure",
+          "3 lobes, 2 fissures (oblique + horizontal)",
+          "4 lobes, 3 fissures",
+          "1 lobe, no fissure"
+         ],
+         "ans": 1
         },
         {
          "q": "How many lobes and fissures does the left lung have?",
-         "a": "Two lobes (upper and lower) divided by one oblique fissure."
+         "a": "**Two lobes (upper and lower) divided by one oblique fissure.**\n\n## Understanding it\n- **2 lobes**, one **oblique** fissure.\n- No horizontal fissure (and space taken by the heart).\n\n>> Left = 2 lobes, 1 fissure.",
+         "opts": [
+          "4 lobes",
+          "3 lobes, 2 fissures",
+          "2 lobes, 1 oblique fissure",
+          "1 lobe, no fissure"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is the left lung smaller?",
-         "a": "Partly because the heart occupies space on the left side of the chest."
+         "a": "**Partly because the heart occupies space on the left side of the chest.**\n\n## Understanding it\n- The **heart** sits mostly on the **left**, leaving less room.\n- Hence the left lung has 2 lobes and a cardiac notch.\n\n>> Heart on the left → smaller left lung.",
+         "opts": [
+          "The heart occupies space on the left",
+          "It develops later",
+          "The diaphragm is higher on the right",
+          "It has three lobes"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is downward spread of respiratory infection common?",
-         "a": "Because the tract is one connected surface, so a pathogen spreads along the tracheobronchial tree from a URTI to bronchitis, bronchiolitis or pneumonia."
+         "a": "**Because the tract is one connected surface, so a pathogen spreads along the tracheobronchial tree from a URTI to bronchitis, bronchiolitis or pneumonia.**\n\n## Understanding it\n- The **continuous mucosa** offers no barrier.\n- An upper-tract infection can **descend** to the lower tract.\n\n>> One surface = URTI can become pneumonia.",
+         "opts": [
+          "Infections jump through the blood only",
+          "The lungs are sterile normally",
+          "The continuous mucosa lets pathogens descend the airway",
+          "There are valves that fail"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the main function of the respiratory system?",
-         "a": "To supply sufficient oxygen to meet metabolic demands and remove carbon dioxide."
+         "a": "**To supply enough oxygen for metabolic demands and remove carbon dioxide.**\n\n## Understanding it\n- Two jobs: **deliver O2** and **clear CO2**.\n- Both must match the body's metabolic needs.\n\n>> In = oxygen, out = carbon dioxide.",
+         "opts": [
+          "Supply oxygen and remove carbon dioxide",
+          "Filter the blood",
+          "Pump blood around the body",
+          "Produce hormones"
+         ],
+         "ans": 0
         },
         {
          "q": "Which three processes are involved in oxygenation and CO2 removal?",
-         "a": "Ventilation, perfusion and diffusion."
+         "a": "**Ventilation, perfusion and diffusion.**\n\n## Understanding it\n- **Ventilation** — air moving in/out.\n- **Perfusion** — blood flowing past alveoli.\n- **Diffusion** — gases crossing the membrane.\n\n>> Air (ventilation) + blood (perfusion) + crossing (diffusion) = gas exchange.",
+         "opts": [
+          "Inspiration only",
+          "Systole, diastole, ejection",
+          "Filtration, secretion, absorption",
+          "Ventilation, perfusion and diffusion"
+         ],
+         "ans": 3
         },
         {
          "q": "What results from abnormality in any one of ventilation, perfusion or diffusion?",
-         "a": "Respiratory failure."
+         "a": "**Respiratory failure.**\n\n## Understanding it\n- Gas exchange needs all three working.\n- Break **any one** (ventilation, perfusion, or diffusion) → inadequate oxygenation/CO2 clearance → **respiratory failure**.\n\n>> One broken link in the chain → respiratory failure.",
+         "opts": [
+          "Heart failure only",
+          "No consequence",
+          "Respiratory failure",
+          "Immediate recovery"
+         ],
+         "ans": 2
         },
         {
          "q": "How is respiratory tract disease classified?",
-         "a": "Into upper respiratory tract infection (URI/URTI) and lower respiratory tract infection (LRI/LRTI)."
+         "a": "**Into upper respiratory tract infection (URI/URTI) and lower respiratory tract infection (LRI/LRTI).**\n\n## Understanding it\n- Diseases are split by **level**: above the larynx (upper) or below (lower).\n- This split guides likely organisms and severity.\n\n>> Classify by location: URTI vs LRTI.",
+         "opts": [
+          "Left vs right lung",
+          "Acute vs chronic only",
+          "Upper (URTI) vs lower (LRTI) respiratory tract",
+          "Viral vs fungal only"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the three pillars of evaluation, in order?",
-         "a": "History taking, physical examination and laboratory investigation."
+         "a": "**History taking, physical examination, and laboratory investigation — in that order.**\n\n## Understanding it\n- Start with the **history**, then **examine**, then **investigate**.\n- Each step narrows the diagnosis for the next.\n\n>> History → examination → investigation.",
+         "opts": [
+          "Investigation, then history",
+          "History, examination, then investigation",
+          "Examination only",
+          "Imaging first"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does history come first?",
-         "a": "Because it guides everything else — it tells you what to look for on examination and which investigations to request; without it the workup is unfocused and expensive."
+         "a": "**Because it guides everything else — it tells you what to look for on examination and which investigations to request; without it the workup is unfocused.**\n\n## Understanding it\n- The history generates the **differential** you then test.\n- Skipping it makes examination and tests aimless.\n\n>> A good history directs the whole workup.",
+         "opts": [
+          "It replaces examination",
+          "It is the least useful step",
+          "It directs the examination and investigations",
+          "It is a legal requirement only"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the five components of the history?",
-         "a": "Bio-data, presenting symptoms, past medical history, family history and social history."
+         "a": "**Bio-data, presenting symptoms, past medical history, family history, and social history.**\n\n## Understanding it\n- **Bio-data** (age/sex), **presenting symptoms**, **past history**, **family history**, **social history**.\n- Each adds a different clue (e.g. family → atopy; social → smoke exposure).\n\n>> Five parts: bio-data, symptoms, past, family, social.",
+         "opts": [
+          "Only examination findings",
+          "Bio-data, symptoms, past, family, social history",
+          "Only the presenting symptom",
+          "Blood results and imaging"
+         ],
+         "ans": 1
         },
         {
          "q": "What four things does age give insight into?",
-         "a": "Anatomical maturity, physiological reserve, likely diagnosis and risk of deterioration."
+         "a": "**Anatomical maturity, physiological reserve, likely diagnosis, and risk of deterioration.**\n\n## Understanding it\n- Age predicts **how developed** the airway is, **how much reserve** the child has, the **likely diagnosis** (age-specific), and **how fast** they may crash.\n\n>> Age tells you maturity, reserve, likely diagnosis, and danger.",
+         "opts": [
+          "Nothing clinically useful",
+          "Anatomical maturity, reserve, likely diagnosis, deterioration risk",
+          "Only the child's weight",
+          "Only the drug dose"
+         ],
+         "ans": 1
         },
         {
          "q": "Why do infants obstruct their airways faster?",
-         "a": "They have smaller airways, and resistance increases dramatically as airway diameter decreases, so small amounts of mucus, oedema or inflammation narrow the airway significantly."
+         "a": "**Because they have smaller airways, and resistance rises sharply as diameter falls, so a little mucus, oedema or inflammation narrows them critically.**\n\n## Understanding it\n- Resistance ∝ 1/radius⁴, and infant airways are **tiny** to begin with.\n- Small swelling causes a **big** rise in resistance → rapid obstruction.\n\n>> Tiny airways + 4th-power law = infants block fast.",
+         "opts": [
+          "They produce no mucus",
+          "Their airways are larger",
+          "Small airways: resistance rises steeply as diameter falls",
+          "They have extra collateral channels"
+         ],
+         "ans": 2
         },
         {
          "q": "Why does the infant chest wall collapse inward during distress?",
-         "a": "It is highly compliant (floppy) — the ribs are soft and horizontal — causing chest recession and quicker respiratory fatigue."
+         "a": "**Because it is highly compliant (floppy) — soft, horizontal ribs — causing chest recession and quicker respiratory fatigue.**\n\n## Understanding it\n- The infant ribcage is **soft and horizontal**, not rigid.\n- Hard inspiratory effort **sucks it inward** (recession) instead of expanding it → tires quickly.\n\n>> A floppy chest wall recedes and fatigues → recession is a distress sign.",
+         "opts": [
+          "The ribs are rigid and strong",
+          "The diaphragm is absent",
+          "There is no chest wall",
+          "The compliant, soft chest wall recedes under effort"
+         ],
+         "ans": 3
         },
         {
          "q": "Why do young infants tolerate hypoxia poorly?",
-         "a": "They have immature respiratory control and poor hypoxic reserve, and can develop apnoea, especially neonates."
+         "a": "**Because they have immature respiratory control and poor hypoxic reserve, and can develop apnoea, especially neonates.**\n\n## Understanding it\n- Their **breathing control centre is immature**.\n- Instead of compensating, they may respond to hypoxia with **apnoea**.\n\n>> Immature control → apnoea rather than compensation.",
+         "opts": [
+          "They have huge oxygen reserves",
+          "They never desaturate",
+          "Their control is fully mature",
+          "Immature respiratory control → apnoea, poor reserve"
+         ],
+         "ans": 3
         },
         {
          "q": "Why do infants decompensate faster than older children?",
-         "a": "They have lower physiological reserve — limited oxygen reserve and higher metabolic demand."
+         "a": "**Because they have lower physiological reserve — limited oxygen reserve and higher metabolic demand.**\n\n## Understanding it\n- Small reserve + high oxygen consumption = little buffer.\n- When stressed, they run out of reserve **quickly**.\n\n>> Low reserve + high demand = fast decompensation.",
+         "opts": [
+          "They have more reserve than adults",
+          "Slower metabolism protects them",
+          "They compensate indefinitely",
+          "Low reserve and high metabolic demand"
+         ],
+         "ans": 3
         },
         {
          "q": "Are a 2-month-old and an 8-year-old with the same severity of bronchiolitis equally stable?",
-         "a": "No — the infant has less reserve and is at much higher risk of rapid deterioration."
+         "a": "**No — the infant has less reserve and is at much higher risk of rapid deterioration.**\n\n## Understanding it\n- Same disease severity ≠ same danger.\n- The **infant's** smaller reserve makes it **less stable** and more likely to crash.\n\n>> Age changes the risk even at equal severity — the infant is more fragile.",
+         "opts": [
+          "The 8-year-old is more fragile",
+          "No — the infant has less reserve and higher risk",
+          "Yes — they are equally stable",
+          "Age is irrelevant"
+         ],
+         "ans": 1
         },
         {
          "q": "What respiratory diagnoses are common in neonates (<28 days)?",
-         "a": "Congenital anomalies, neonatal pneumonia and aspiration."
+         "a": "**Congenital anomalies, neonatal pneumonia and aspiration.**\n\n## Understanding it\n- **Neonates (<28 days)** — think structural (congenital) problems, neonatal pneumonia, and aspiration.\n\n>> Neonatal respiratory trouble: congenital, pneumonia, aspiration.",
+         "opts": [
+          "Foreign body aspiration",
+          "Croup and viral wheeze",
+          "Congenital anomalies, neonatal pneumonia, aspiration",
+          "Asthma and atypical pneumonia"
+         ],
+         "ans": 2
         },
         {
          "q": "What respiratory diagnoses are common in infants (<1 year)?",
-         "a": "Bronchiolitis and pertussis."
+         "a": "**Bronchiolitis and pertussis.**\n\n## Understanding it\n- **Infants (<1 year)** — the classic causes are **bronchiolitis** (RSV) and **pertussis** (whooping cough).\n\n>> Infant wheeze/cough: bronchiolitis and pertussis.",
+         "opts": [
+          "Bronchiolitis and pertussis",
+          "Congenital anomalies",
+          "Atypical pneumonia",
+          "Asthma and TB"
+         ],
+         "ans": 0
         },
         {
          "q": "What respiratory diagnoses are common in toddlers (1-3 years)?",
-         "a": "Viral wheeze, foreign body aspiration and croup."
+         "a": "**Viral wheeze, foreign body aspiration and croup.**\n\n## Understanding it\n- **Toddlers (1–3 yr)** explore and inhale things → **foreign body**; plus **viral wheeze** and **croup**.\n\n>> Toddler airway: viral wheeze, foreign body, croup.",
+         "opts": [
+          "Viral wheeze, foreign body aspiration, croup",
+          "Atypical pneumonia",
+          "Neonatal pneumonia",
+          "Bronchiolitis and pertussis"
+         ],
+         "ans": 0
         },
         {
          "q": "What respiratory diagnoses are common in school-age children?",
-         "a": "Asthma and pneumonia."
+         "a": "**Asthma and pneumonia.**\n\n## Understanding it\n- **School age** — the dominant respiratory diagnoses are **asthma** and **pneumonia**.\n\n>> School age: asthma and pneumonia.",
+         "opts": [
+          "Bronchiolitis and pertussis",
+          "Asthma and pneumonia",
+          "Congenital anomalies",
+          "Croup and foreign body"
+         ],
+         "ans": 1
         },
         {
          "q": "What respiratory diagnoses are common in adolescents?",
-         "a": "Asthma and atypical pneumonia."
+         "a": "**Asthma and atypical pneumonia.**\n\n## Understanding it\n- **Adolescents** — **asthma** persists, and **atypical** (e.g. mycoplasma) pneumonia becomes common.\n\n>> Adolescents: asthma and atypical pneumonia.",
+         "opts": [
+          "Bronchiolitis and pertussis",
+          "Asthma and atypical pneumonia",
+          "Croup",
+          "Neonatal pneumonia"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does gender matter in respiratory disease?",
-         "a": "Some conditions have a sex predilection — pneumonia and bronchiolitis are more common in males."
+         "a": "**Because some conditions have a sex predilection — pneumonia and bronchiolitis are commoner in males.**\n\n## Understanding it\n- Sex shifts the pre-test probability of certain diseases.\n- **Pneumonia and bronchiolitis** occur more in **boys**.\n\n>> Male sex slightly raises the odds of pneumonia/bronchiolitis.",
+         "opts": [
+          "Only girls get asthma",
+          "Gender has no effect",
+          "Girls never get respiratory disease",
+          "Some diseases (pneumonia, bronchiolitis) are commoner in males"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the three major presenting respiratory symptoms?",
-         "a": "Cough, breathlessness and chest pain."
+         "a": "**Cough, breathlessness and chest pain.**\n\n## Understanding it\n- The core respiratory complaints are **cough, breathlessness (dyspnoea), and chest pain**.\n- Characterising each narrows the diagnosis.\n\n>> The big three: cough, breathlessness, chest pain.",
+         "opts": [
+          "Diarrhoea and weight gain",
+          "Headache, dizziness, fainting",
+          "Cough, breathlessness and chest pain",
+          "Fever, rash and vomiting"
+         ],
+         "ans": 2
         },
         {
          "q": "How should a cough be characterised?",
-         "a": "By duration, character (barking, whooping, productive), timing (night, morning, after feeding), severity and sputum production."
+         "a": "**By duration, character (barking, whooping, productive), timing (night, morning, after feeding), severity, and sputum.**\n\n## Understanding it\n- Ask **how long, what it sounds like, when, how bad, and what it brings up**.\n- E.g. barking = croup; whooping = pertussis; nocturnal = asthma.\n\n>> The cough's pattern often names the diagnosis.",
+         "opts": [
+          "The colour of the tongue",
+          "Only how loud it is",
+          "Only the child's age",
+          "Duration, character, timing, severity, sputum"
+         ],
+         "ans": 3
         },
         {
          "q": "How should breathlessness be characterised?",
-         "a": "By severity, duration and pattern — constant or episodic, with exercise or at rest."
+         "a": "**By severity, duration and pattern — constant or episodic, with exercise or at rest.**\n\n## Understanding it\n- Ask **how bad, how long, and the pattern** (constant vs episodic, exertional vs at rest).\n- Episodic exertional breathlessness suggests asthma; constant suggests structural disease.\n\n>> Pattern of breathlessness points to the cause.",
+         "opts": [
+          "Only the respiratory rate",
+          "Only the oxygen saturation",
+          "The colour of sputum only",
+          "Severity, duration, and pattern (constant/episodic, exertional/rest)"
+         ],
+         "ans": 3
         },
         {
          "q": "How do you distinguish respiratory from cardiac chest pain?",
-         "a": "Respiratory (pleuritic) pain relates to breathing and worsens on inspiration or coughing; cardiac pain has a different character and relates to effort."
+         "a": "**Respiratory (pleuritic) pain relates to breathing and worsens on inspiration or coughing; cardiac pain has a different character and relates to effort.**\n\n## Understanding it\n- **Pleuritic** pain — sharp, worse on **breathing in/coughing**.\n- **Cardiac** pain — relates to **exertion**, different quality.\n\n>> Worse on breathing = pleuritic; worse on exertion = cardiac.",
+         "opts": [
+          "They are identical",
+          "Respiratory pain relates to meals",
+          "Cardiac pain worsens on inspiration",
+          "Pleuritic pain worsens on breathing/coughing; cardiac relates to effort"
+         ],
+         "ans": 3
         },
         {
          "q": "List the six types of noisy breathing you must know.",
-         "a": "Wheeze, stridor, snuffles, rattles, snoring and grunting."
+         "a": "**Wheeze, stridor, snuffles, rattles, snoring and grunting.**\n\n## Understanding it\n- Each noise localises a problem: **stridor** (upper airway), **wheeze** (lower airway), **grunting** (distress), plus snuffles, rattles, snoring.\n\n>> Six noises to know — the sound tells you the level and severity.",
+         "opts": [
+          "Wheeze, stridor, snuffles, rattles, snoring, grunting",
+          "Murmur, click, rub",
+          "Only wheeze and stridor",
+          "Cough, sneeze, hiccup only"
+         ],
+         "ans": 0
         },
         {
          "q": "What does stridor indicate versus wheeze?",
-         "a": "Stridor indicates upper airway obstruction; wheeze indicates lower airway narrowing."
+         "a": "**Stridor indicates upper-airway obstruction; wheeze indicates lower-airway narrowing.**\n\n## Understanding it\n- **Stridor** — harsh, mainly inspiratory → **upper** airway (larynx/trachea).\n- **Wheeze** — musical, mainly expiratory → **lower** airway (bronchioles).\n\n>> Stridor = upper; wheeze = lower.",
+         "opts": [
+          "Stridor = lower; wheeze = upper",
+          "Stridor = upper-airway obstruction; wheeze = lower-airway narrowing",
+          "Both are normal sounds",
+          "Both mean lower-airway disease"
+         ],
+         "ans": 1
         },
         {
          "q": "Why is grunting significant?",
-         "a": "It is a danger sign in a distressed infant, who grunts to keep the alveoli open."
+         "a": "**It is a danger sign in a distressed infant, who grunts to keep the alveoli open.**\n\n## Understanding it\n- Grunting is **auto-PEEP** — the infant exhales against a partly closed glottis to keep alveoli open.\n- It signals **significant respiratory distress**.\n\n>> Grunting = a red flag; the baby is fighting to stay oxygenated.",
+         "opts": [
+          "A minor upper-airway noise",
+          "A sign of hunger",
+          "A normal happy sound",
+          "A danger sign — the infant grunts to keep alveoli open"
+         ],
+         "ans": 3
         },
         {
          "q": "What do rhinorrhoea and nasal stuffiness point toward?",
-         "a": "Upper respiratory tract involvement or allergic disease."
+         "a": "**Upper respiratory tract involvement or allergic disease.**\n\n## Understanding it\n- A runny/blocked nose localises to the **upper** tract.\n- If persistent/seasonal, think **allergic** disease.\n\n>> Nasal symptoms = upper tract or allergy.",
+         "opts": [
+          "Pneumonia in the lower lobe",
+          "Heart failure",
+          "Upper respiratory tract involvement or allergy",
+          "A foreign body in the bronchus"
+         ],
+         "ans": 2
         },
         {
          "q": "Why does otitis media accompany URTIs in young children?",
-         "a": "Because of the short, horizontal Eustachian tube, which lets infection track easily from the throat to the middle ear."
+         "a": "**Because of the short, horizontal Eustachian tube, which lets infection track easily from the throat to the middle ear.**\n\n## Understanding it\n- A child's Eustachian tube is **short and horizontal**.\n- Pathogens pass readily from the nasopharynx to the **middle ear** → otitis media.\n\n>> Short horizontal tube = easy ear infection with URTIs.",
+         "opts": [
+          "The ear connects to the lung",
+          "Children have larger ears",
+          "The short, horizontal Eustachian tube lets infection reach the ear",
+          "It is unrelated to URTIs"
+         ],
+         "ans": 2
         },
         {
          "q": "What does hoarseness suggest?",
-         "a": "Laryngeal involvement — croup, laryngitis, or a foreign body at the level of the larynx."
+         "a": "**Laryngeal involvement — croup, laryngitis, or a foreign body at the larynx.**\n\n## Understanding it\n- The voice box (**larynx**) is affected when the voice changes.\n- Causes: **croup, laryngitis, laryngeal foreign body**.\n\n>> Hoarseness localises to the larynx.",
+         "opts": [
+          "Lower-lobe pneumonia",
+          "Nasal allergy",
+          "A gut problem",
+          "Laryngeal involvement (croup, laryngitis, foreign body)"
+         ],
+         "ans": 3
         },
         {
          "q": "What does sore throat point to?",
-         "a": "Pharyngitis or tonsillitis."
+         "a": "**Pharyngitis or tonsillitis.**\n\n## Understanding it\n- A sore throat localises to the **pharynx/tonsils**.\n- Common causes are viral or streptococcal pharyngitis/tonsillitis.\n\n>> Sore throat = pharyngitis/tonsillitis.",
+         "opts": [
+          "Asthma",
+          "Pharyngitis or tonsillitis",
+          "Bronchiolitis",
+          "Pneumothorax"
+         ],
+         "ans": 1
         },
         {
          "q": "Which triad of features is a red flag for TB or lymphoma?",
-         "a": "Weight loss, neck swelling and night sweats."
+         "a": "**Weight loss, neck swelling and night sweats.**\n\n## Understanding it\n- This **constitutional triad** raises the alarm for **TB or lymphoma**.\n- It must never be dismissed as a simple infection.\n\n>> Weight loss + neck swelling + night sweats = exclude TB/lymphoma.",
+         "opts": [
+          "Fever, cough, coryza",
+          "Runny nose, sneeze, itch",
+          "Weight loss, neck swelling, night sweats",
+          "Wheeze, stridor, grunt"
+         ],
+         "ans": 2
         },
         {
          "q": "What five things should the past medical history probe?",
-         "a": "Whether it has happened before, whether the child was hospitalised, whether it followed a previous infection, the response to previous treatment (bronchodilators/antibiotics), and any seasonal pattern."
+         "a": "**Whether it happened before, whether the child was hospitalised, whether it followed a previous infection, the response to previous treatment (e.g. bronchodilators), and drug/allergy history.**\n\n## Understanding it\n- Recurrence, severity (hospitalisation), triggers (post-infective), **treatment response**, and allergies all shape the diagnosis.\n- A good bronchodilator response, for instance, points to asthma.\n\n>> Past history hunts for recurrence, severity, triggers, and treatment response.",
+         "opts": [
+          "Only the birth weight",
+          "Prior episodes, hospitalisation, post-infective onset, treatment response, drugs/allergy",
+          "The child's favourite food",
+          "Only the family income"
+         ],
+         "ans": 1
         },
         {
          "q": "What pattern in the past history strongly suggests asthma?",
-         "a": "Recurrent wheezing that responds to bronchodilators and worsens in harmattan."
+         "a": "**Recurrent wheezing that responds to bronchodilators and worsens in harmattan.**\n\n## Understanding it\n- **Recurrent, reversible** wheeze + **bronchodilator response** + **environmental trigger** (harmattan) = asthma.\n\n>> Recurrent reversible wheeze with triggers = asthma.",
+         "opts": [
+          "Recurrent wheeze, bronchodilator-responsive, harmattan-triggered",
+          "Wheeze only in the first month of life",
+          "A single wheeze that never returns",
+          "Wheeze unresponsive to any treatment"
+         ],
+         "ans": 0
         },
         {
          "q": "What two things does family history specifically probe?",
-         "a": "Atopic disorders and chronic cough in the family."
+         "a": "**Atopic disorders and chronic cough in the family.**\n\n## Understanding it\n- **Atopy** (asthma, eczema, allergic rhinitis) clusters in families.\n- **Familial chronic cough** may hint at inherited disease (CF, PCD).\n\n>> Ask about family atopy and chronic cough.",
+         "opts": [
+          "Family atopy and chronic cough",
+          "Family blood group",
+          "Family occupation only",
+          "Nothing respiratory"
+         ],
+         "ans": 0
         },
         {
          "q": "What is atopy?",
-         "a": "The tendency to develop allergic diseases like asthma, eczema and allergic rhinitis, which runs strongly in families."
+         "a": "**The tendency to develop allergic diseases — asthma, eczema and allergic rhinitis — which runs strongly in families.**\n\n## Understanding it\n- Atopy is an inherited **allergic predisposition**.\n- It manifests as the triad of **asthma, eczema, allergic rhinitis**.\n\n>> Atopy = an inherited allergic tendency (asthma/eczema/rhinitis).",
+         "opts": [
+          "A type of pneumonia",
+          "An inherited tendency to allergic disease (asthma, eczema, rhinitis)",
+          "An airway infection",
+          "A congenital heart defect"
+         ],
+         "ans": 1
         },
         {
          "q": "What conditions might a family history of chronic cough point toward?",
-         "a": "Cystic fibrosis or primary ciliary dyskinesia (genetic bases)."
+         "a": "**Cystic fibrosis or primary ciliary dyskinesia (genetic bases).**\n\n## Understanding it\n- Inherited causes of chronic cough include **CF** and **PCD** (defective mucus clearance/cilia).\n- A familial pattern raises suspicion for these.\n\n>> Familial chronic cough → think CF or PCD.",
+         "opts": [
+          "Allergic rhinitis only",
+          "Cystic fibrosis or primary ciliary dyskinesia",
+          "A one-off pneumonia",
+          "Simple viral colds"
+         ],
+         "ans": 1
         },
         {
          "q": "What environmental exposures in the social history can trigger respiratory disease?",
-         "a": "Dust, pets, rugs and fumes."
+         "a": "**Dust, pets, rugs and fumes.**\n\n## Understanding it\n- Indoor **allergens and irritants** — dust, pet dander, rugs, fumes — trigger airway disease.\n- Identifying them allows avoidance.\n\n>> Home triggers: dust, pets, rugs, fumes.",
+         "opts": [
+          "Vaccination status",
+          "Sunlight and altitude only",
+          "Diet and exercise only",
+          "Dust, pets, rugs and fumes"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is passive smoking a major respiratory risk factor?",
-         "a": "It damages airway mucosa, impairs ciliary function and increases susceptibility to infection."
+         "a": "**Because it damages the airway mucosa, impairs ciliary function, and increases susceptibility to infection.**\n\n## Understanding it\n- Second-hand smoke **injures the lining** and **paralyses cilia** (the cleaning escalator).\n- Poor clearance → more infections and wheeze.\n\n>> Passive smoke wrecks the mucociliary defence → more disease.",
+         "opts": [
+          "It strengthens the airways",
+          "It has no effect on children",
+          "It only affects the smoker",
+          "It damages mucosa and cilia, raising infection risk"
+         ],
+         "ans": 3
         },
         {
          "q": "What can exercise trigger in a child with reactive airway disease?",
-         "a": "Bronchospasm."
+         "a": "**Bronchospasm.**\n\n## Understanding it\n- In reactive airways (asthma), **exercise** can provoke **bronchospasm** (exercise-induced wheeze).\n\n>> Exercise → bronchospasm in asthma.",
+         "opts": [
+          "Pneumonia",
+          "Bronchospasm",
+          "Heart failure",
+          "A foreign body"
+         ],
+         "ans": 1
         },
         {
          "q": "Why is overcrowding a respiratory risk factor?",
-         "a": "It is a major risk factor for the spread of respiratory infections, particularly TB and pneumonia."
+         "a": "**Because it is a major factor in the spread of respiratory infections, particularly TB and pneumonia.**\n\n## Understanding it\n- Crowding means **close contact** and poor ventilation.\n- This spreads airborne infections like **TB and pneumonia**.\n\n>> Overcrowding fuels TB and pneumonia transmission.",
+         "opts": [
+          "It has no effect",
+          "It spreads respiratory infections like TB and pneumonia",
+          "It improves ventilation",
+          "It only affects adults"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — On a diagram of the respiratory tract, name the structures air passes from the nose to the alveoli.",
-         "a": "Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs."
+         "a": "**Nasal cavity, pharynx, epiglottis, larynx, trachea, bronchi, bronchioles, alveolar sacs.**\n\n## Understanding it\n- Trace the path in order from the **nose** to the **alveoli**.\n- This is the standard OSPE labelling sequence.\n\n>> Nose → pharynx → larynx → trachea → bronchi → bronchioles → alveoli.",
+         "opts": [
+          "Nose, sinus, ear",
+          "Alveoli, bronchi, trachea, nose",
+          "Nasal cavity, pharynx, larynx, trachea, bronchi, bronchioles, alveoli",
+          "Mouth, oesophagus, stomach"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — A diagram shows the two main bronchi. Which is which and how do you tell?",
-         "a": "The right is wider, shorter and more vertical (25 degrees); the left is narrower and steeper (45 degrees)."
+         "a": "**The right is wider, shorter and more vertical (≈25°); the left is narrower and steeper (≈45°).**\n\n## Understanding it\n- **Right** = wide, short, vertical (25°).\n- **Left** = narrow, steep (45°).\n- The right's near-vertical course explains foreign-body aspiration to the right.\n\n>> Right vertical (25°), left angled (45°).",
+         "opts": [
+          "Right: wide/short/vertical (25°); left: narrow/steep (45°)",
+          "Both identical",
+          "Left is the wider one",
+          "Right: narrow/steep; left: wide/vertical"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Point to and name the landmark for the tracheal bifurcation on a chest surface diagram.",
-         "a": "The sternal angle of Louis, where the manubrium meets the body of the sternum (T4/T5)."
+         "a": "**The sternal angle of Louis, where the manubrium meets the body of the sternum (T4/T5).**\n\n## Understanding it\n- Surface landmark = **sternal angle of Louis** (manubriosternal joint), level **T4/T5**.\n- This marks the **carina** where the trachea divides.\n\n>> Bifurcation surface marker = sternal angle of Louis (T4/T5).",
+         "opts": [
+          "The umbilicus",
+          "The sternal angle of Louis (T4/T5)",
+          "The xiphisternum",
+          "The suprasternal notch"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A newborn chokes, coughs and becomes cyanosed with the first feed. What embryological defect explains this?",
-         "a": "Tracheo-oesophageal fistula from failure of the oesophagotracheal septum — a surgical emergency."
+         "a": "**Tracheo-oesophageal fistula from failure of the oesophagotracheal septum — a surgical emergency.**\n\n## Understanding it\n- Choking/cyanosis with the **first feed** = milk entering the airway via an abnormal connection.\n- Cause: **failed oesophagotracheal septum → TOF**.\n\n>> First-feed choking + cyanosis = TOF (surgical emergency).",
+         "opts": [
+          "Tracheo-oesophageal fistula (failed oesophagotracheal septum)",
+          "A normal feed",
+          "Simple reflux",
+          "Bronchiolitis"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A toddler suddenly chokes while eating groundnuts, then develops right-sided reduced air entry. What is the diagnosis and why the right side?",
-         "a": "Inhaled foreign body — it lodges on the right because the right bronchus is wider and more vertical (a direct continuation of the trachea)."
+         "a": "**Inhaled foreign body — it lodges on the right because the right bronchus is wider and more vertical (a direct continuation of the trachea).**\n\n## Understanding it\n- Sudden choking while eating + **unilateral reduced air entry** = **foreign body**.\n- It goes **right** due to the wide, vertical right bronchus.\n\n>> Sudden choke + right-sided reduced air entry = right-bronchus foreign body.",
+         "opts": [
+          "Asthma attack",
+          "Inhaled foreign body in the right bronchus (wide, vertical)",
+          "Pneumonia",
+          "Croup"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A premature baby develops worsening respiratory distress soon after birth. What is the underlying deficiency?",
-         "a": "Insufficient surfactant, causing alveolar collapse — respiratory distress syndrome (RDS)."
+         "a": "**Insufficient surfactant, causing alveolar collapse — respiratory distress syndrome (RDS).**\n\n## Understanding it\n- Preterm lungs lack **surfactant**.\n- Alveoli **collapse repeatedly** → worsening distress = **RDS**.\n\n>> Preterm + early worsening distress = surfactant-deficient RDS.",
+         "opts": [
+          "Asthma",
+          "Surfactant deficiency causing alveolar collapse (RDS)",
+          "A foreign body",
+          "Tracheo-oesophageal fistula"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A child has recurrent wheeze that improves with a bronchodilator and worsens in harmattan. What is the likely diagnosis?",
-         "a": "Bronchial (childhood) asthma — reversible airway obstruction with environmental trigger worsening."
+         "a": "**Bronchial (childhood) asthma — reversible airway obstruction worsened by environmental triggers.**\n\n## Understanding it\n- **Recurrent + reversible (bronchodilator-responsive)** wheeze with a trigger = **asthma**.\n\n>> Reversible recurrent wheeze with triggers = asthma.",
+         "opts": [
+          "Bronchial (childhood) asthma",
+          "Pneumonia",
+          "Foreign body",
+          "Bronchiolitis"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A child presents with chronic cough, weight loss, neck swelling and night sweats. What must you exclude?",
-         "a": "Tuberculosis (and lymphoma) — this red-flag triad must never be missed."
+         "a": "**Tuberculosis (and lymphoma) — this red-flag triad must never be missed.**\n\n## Understanding it\n- Chronic cough + **weight loss + neck swelling + night sweats** = constitutional red flags.\n- Exclude **TB** (and lymphoma).\n\n>> This triad = exclude TB/lymphoma.",
+         "opts": [
+          "Allergic rhinitis",
+          "Tuberculosis (and lymphoma)",
+          "Exercise-induced asthma",
+          "A simple cold"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why can a mild upper respiratory infection in an infant progress to pneumonia within days?",
-         "a": "Because the respiratory tract is one continuous mucosal surface, so the pathogen spreads downward along the tracheobronchial tree."
+         "a": "**Because the respiratory tract is one continuous mucosal surface, so the pathogen spreads downward along the tracheobronchial tree.**\n\n## Understanding it\n- No anatomical barrier separates upper from lower tract.\n- Infection **descends** from the nose/throat to the lungs.\n\n>> Continuous mucosa lets a cold become pneumonia.",
+         "opts": [
+          "Infants have no immune system",
+          "It spread through the blood only",
+          "Antibiotics caused it",
+          "The continuous mucosa lets infection descend to the lungs"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why is a barking cough with hoarseness significant, and what does it suggest?",
-         "a": "It indicates laryngeal involvement — croup — reflecting upper-airway/laryngeal narrowing."
+         "a": "**It indicates laryngeal involvement — croup — reflecting upper-airway/laryngeal narrowing.**\n\n## Understanding it\n- A **barking** cough + **hoarseness** localise to the **larynx**.\n- The classic cause is **croup** (laryngotracheitis).\n\n>> Barking cough + hoarse voice = croup (laryngeal narrowing).",
+         "opts": [
+          "Lower-lobe pneumonia",
+          "Bronchiolitis",
+          "A normal cough",
+          "Laryngeal involvement — croup"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": "content/Pediatrics/Ewurum/Introduction%20to%20Pulmonology_Investigations%20of%20the%20Respiratory%20System/img/",
@@ -2186,483 +3474,1323 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "State the two objectives of this lecture.",
-         "a": "To know the clinical approach to neurological cases via history taking and physical examination; and to know the relevant investigations."
+         "a": "**To learn the clinical approach to neurological cases through history and examination, and to know the relevant investigations of the CNS.**\n\n## Understanding it\n- Objective 1 — the **clinical method** (history + examination).\n- Objective 2 — the **investigations** that back it up.\n\n>> Clinical assessment first, investigations second — the theme of the whole topic.",
+         "opts": [
+          "Clinical approach (history/exam) and relevant CNS investigations",
+          "Only brain anatomy",
+          "Only how to do a lumbar puncture",
+          "How to prescribe antibiotics"
+         ],
+         "ans": 0
         },
         {
          "q": "Define neurology.",
-         "a": "The branch of medicine concerned with the study and treatment of disorders of the nervous system."
+         "a": "**The branch of medicine concerned with the study and treatment of disorders of the nervous system.**\n\n## Understanding it\n- It deals with the **brain, spinal cord, and nerves**.\n- Both **diagnosis and treatment** of their disorders.\n\n>> Neurology = medicine of the nervous system.",
+         "opts": [
+          "Surgery of the brain only",
+          "Medicine of nervous-system disorders",
+          "Study of the heart",
+          "Study of muscles only"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the nervous system do, and what does it comprise?",
-         "a": "It is a complex, sophisticated system that regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nerves."
+         "a": "**It regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nervous system.**\n\n## Understanding it\n- **Function** — regulate and coordinate the body.\n- **Parts** — CNS (brain + cord) and PNS (nerves).\n\n>> Coordinates the body via CNS + PNS.",
+         "opts": [
+          "Regulates/coordinates the body; CNS (brain+cord) + PNS",
+          "Digests food; gut",
+          "Pumps blood; heart and vessels",
+          "Filters waste; kidneys"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the four regions of the brain.",
-         "a": "The cerebrum; the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus); the brainstem (midbrain, pons and medulla); and the cerebellum."
+         "a": "**The cerebrum, the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus), the brainstem (midbrain, pons, medulla), and the cerebellum.**\n\n## Understanding it\n- **Cerebrum** — the bulk (thinking, movement, sensation).\n- **Diencephalon** — thalamus/hypothalamus etc.\n- **Brainstem** — vital functions.\n- **Cerebellum** — coordination.\n\n>> Four regions: cerebrum, diencephalon, brainstem, cerebellum.",
+         "opts": [
+          "Cerebrum, diencephalon, brainstem, cerebellum",
+          "Cortex, medulla, pons, cord",
+          "Frontal, parietal, temporal, occipital only",
+          "Left and right hemispheres only"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the cerebrum.",
-         "a": "The cerebral hemispheres constitute the greatest mass of brain tissue; the outer layers are formed by the cellular grey matter known as the cerebral cortex."
+         "a": "**The cerebral hemispheres form the greatest mass of brain tissue; the outer layer is cellular grey matter (cortex).**\n\n## Understanding it\n- The cerebrum is the **largest** part.\n- Its **outer cortex** is grey matter (cell bodies); the inner is white matter (tracts).\n\n>> Cerebrum = biggest part, grey-matter cortex on the outside.",
+         "opts": [
+          "The smallest brain region",
+          "Part of the spinal cord",
+          "The coordination centre only",
+          "The largest brain mass, with a grey-matter cortex"
+         ],
+         "ans": 3
         },
         {
          "q": "What does consciousness depend on?",
-         "a": "Interaction between intact cerebral hemispheres and the activating (or arousal) system that lies in the diencephalon and upper brainstem."
+         "a": "**Interaction between intact cerebral hemispheres and the activating (arousal) system in the diencephalon and brainstem.**\n\n## Understanding it\n- Consciousness needs **both** the cortex (content) and the **reticular activating system** (arousal).\n- Damage to either can impair it.\n\n>> Consciousness = cortex + activating system working together.",
+         "opts": [
+          "Intact cortex plus the brainstem/diencephalon activating system",
+          "Only the cerebellum",
+          "Only the spinal cord",
+          "Only the peripheral nerves"
+         ],
+         "ans": 0
         },
         {
          "q": "What two types of lesion may impair consciousness to the point of coma?",
-         "a": "Either extensive disease of the cerebral cortex, or damage to the activating system."
+         "a": "**Either extensive disease of the cerebral cortex, or damage to the activating system.**\n\n## Understanding it\n- **Widespread cortical** damage removes the 'content'.\n- **Activating-system** damage removes the 'arousal'.\n- Either can cause coma.\n\n>> Coma = diffuse cortical injury OR activating-system injury.",
+         "opts": [
+          "Extensive cortical disease or damage to the activating system",
+          "A single small cortical spot",
+          "A peripheral nerve injury",
+          "A muscle disease"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the cerebellum primarily concerned with?",
-         "a": "Coordination and balance — it refines movements."
+         "a": "**Coordination and balance — it refines movements.**\n\n## Understanding it\n- The cerebellum **fine-tunes** movement and maintains **balance**.\n- Its disease causes ataxia, intention tremor, nystagmus.\n\n>> Cerebellum = coordination and balance.",
+         "opts": [
+          "Thinking and memory",
+          "Vital functions like breathing",
+          "Producing hormones",
+          "Coordination and balance"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the brainstem crucial for, and what are its three sections?",
-         "a": "Vital functions — breathing, heart rate, blood pressure and sleep-wake cycles; its three sections are the midbrain, pons and medulla."
+         "a": "**Vital functions — breathing, heart rate, blood pressure, sleep-wake cycles; its three sections are the midbrain, pons and medulla.**\n\n## Understanding it\n- The brainstem runs **life-support** functions.\n- Sections: **midbrain, pons, medulla**.\n\n>> Brainstem = vital functions; midbrain/pons/medulla.",
+         "opts": [
+          "Coordination; three lobes",
+          "Memory; two hemispheres",
+          "Vital functions; midbrain, pons, medulla",
+          "Vision; four regions"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the spinal cord and its two functions.",
-         "a": "A cylindrical mass of nervous tissue encased within the bony vertebral column; it contains long tracts connecting the brain with the peripheral nervous system, and it mediates reflex activity."
+         "a": "**A cylindrical mass of nervous tissue in the vertebral column; it carries long tracts connecting the brain to the body, and mediates reflexes.**\n\n## Understanding it\n- **Conduction** — long ascending/descending tracts link brain and body.\n- **Reflexes** — it integrates spinal reflex arcs.\n\n>> Cord = a conduction cable and a reflex centre.",
+         "opts": [
+          "Pumps blood to the brain",
+          "Only produces CSF",
+          "Only stores memory",
+          "Conduction (long tracts) and reflex mediation"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the three basic components of a reflex?",
-         "a": "A receiving apparatus, a nerve centre, and a responding apparatus."
+         "a": "**A receiving apparatus, a nerve centre, and a responding apparatus.**\n\n## Understanding it\n- **Receptor** (senses) → **centre** (processes) → **effector** (responds).\n- This is the reflex arc.\n\n>> Reflex = receptor → centre → effector.",
+         "opts": [
+          "Receptor, nerve centre, effector",
+          "Artery, vein, capillary",
+          "Only a single nerve",
+          "Bone, muscle, tendon"
+         ],
+         "ans": 0
         },
         {
          "q": "List the conventional order of clerking in medicine.",
-         "a": "Presenting complaint; history of the presenting complaint; past medical history; past surgical history; pregnancy/perinatal/postnatal history; immunization; developmental milestones; family and social history; and drug history/allergy."
+         "a": "**Presenting complaint; history of presenting complaint; past medical history; past surgical history; pregnancy/perinatal history; then developmental, family and social history.**\n\n## Understanding it\n- A **fixed order** ensures completeness.\n- In children, pregnancy/perinatal and developmental history are essential extras.\n\n>> Follow the standard clerking sequence, adding perinatal + developmental history in children.",
+         "opts": [
+          "PC, HPC, PMH, PSH, perinatal, developmental, family, social",
+          "Investigations first",
+          "Only the presenting complaint",
+          "Examination then history"
+         ],
+         "ans": 0
         },
         {
          "q": "What is described as the cornerstone of neurologic assessment, and who should the informants be?",
-         "a": "A detailed history; informants should be the parents, and older children (over 3–4 years) should be questioned."
+         "a": "**A detailed history is the cornerstone; informants should be the parents, and older children (over 3–4 years) should also be questioned.**\n\n## Understanding it\n- The **history** is the most important part.\n- **Parents** are the main informants; **older children** can contribute directly.\n\n>> History is king; ask parents and the older child.",
+         "opts": [
+          "Blood tests; only doctors",
+          "A brain scan; only the child",
+          "The examination; only nurses",
+          "A detailed history; parents (and children over 3–4)"
+         ],
+         "ans": 3
         },
         {
          "q": "How should the history begin?",
-         "a": "With the chief complaint and its significance in the context of normal development."
+         "a": "**With the chief complaint and its significance in the context of normal development.**\n\n## Understanding it\n- Start with **why they came** (chief complaint).\n- Interpret it against **normal development** for the age.\n\n>> Begin with the complaint, framed by developmental norms.",
+         "opts": [
+          "With the chief complaint, in the context of normal development",
+          "With the family tree",
+          "With the drug history",
+          "With the examination"
+         ],
+         "ans": 0
         },
         {
          "q": "What six features should the history of the presenting complaint address?",
-         "a": "Location, quality, intensity, duration, associated features, and alleviating or exacerbating factors."
+         "a": "**Location, quality, intensity, duration, associated features, and alleviating/exacerbating factors.**\n\n## Understanding it\n- A symptom is characterised by these **six attributes**.\n- E.g. a headache: where, what kind, how bad, how long, what else, what changes it.\n\n>> Six features fully describe any symptom.",
+         "opts": [
+          "Location, quality, intensity, duration, associated features, aggravating/relieving factors",
+          "Only the family history",
+          "Only the child's age",
+          "Only how long it lasts"
+         ],
+         "ans": 0
         },
         {
          "q": "Which pregnancy complications should be asked about in a neurological history?",
-         "a": "Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls."
+         "a": "**Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls.**\n\n## Understanding it\n- These maternal problems can **injure the developing brain**.\n- Each is a recognised antenatal risk for neurological disease.\n\n>> Ask about PIH/pre-eclampsia, GDM, bleeding, infections, trauma.",
+         "opts": [
+          "Only the baby's weight",
+          "Only the delivery method",
+          "Only the mother's age",
+          "PIH, pre-eclampsia, GDM, bleeding, infections, falls"
+         ],
+         "ans": 3
         },
         {
          "q": "What substances should be asked about in the pregnancy history?",
-         "a": "Drugs — prescription, herbal and illicit — and alcohol use."
+         "a": "**Drugs — prescription, herbal and illicit — and alcohol use.**\n\n## Understanding it\n- Many drugs and **alcohol** are teratogenic/neurotoxic to the fetus.\n- Include **prescription, herbal and illicit** substances.\n\n>> Ask about all drugs and alcohol in pregnancy.",
+         "opts": [
+          "Only prescription drugs",
+          "Prescription, herbal and illicit drugs, and alcohol",
+          "No substances are relevant",
+          "Only alcohol"
+         ],
+         "ans": 1
         },
         {
          "q": "What does reduced or absent fetal movement suggest?",
-         "a": "Neuromuscular disorders."
+         "a": "**Neuromuscular disorders.**\n\n## Understanding it\n- Fetal movement needs **working nerves and muscles**.\n- Reduced movement is an early clue to a **neuromuscular** problem.\n\n>> Poor fetal movement → suspect neuromuscular disease.",
+         "opts": [
+          "A healthy pregnancy",
+          "Gestational diabetes",
+          "A skin disorder",
+          "Neuromuscular disorders"
+         ],
+         "ans": 3
         },
         {
          "q": "What delivery details should be recorded?",
-         "a": "Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication); presence or absence of fetal distress; any resuscitation; birth weight; and any complicated hospital stay."
+         "a": "**Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication).**\n\n## Understanding it\n- **Gestation** and **mode of delivery** matter.\n- For a caesarean, the **indication** may itself be the neurological event (e.g. fetal distress).\n\n>> Record gestation, mode of delivery, and the reason for any operative delivery.",
+         "opts": [
+          "Only the baby's name",
+          "The hospital's address",
+          "Only the time of day",
+          "Gestational age and mode of delivery (incl. C/S indication)"
+         ],
+         "ans": 3
         },
         {
          "q": "If the infant had jaundice, what two things must be determined?",
-         "a": "Both the degree of jaundice and how it was managed."
+         "a": "**Both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe, untreated jaundice can cause **kernicterus** (brain injury).\n- So establish **how bad** it was and **whether it was treated**.\n\n>> Jaundice history: how severe, and how managed (to detect kernicterus risk).",
+         "opts": [
+          "Only the date it started",
+          "The degree of jaundice and how it was managed",
+          "Only the baby's weight",
+          "The mother's blood group only"
+         ],
+         "ans": 1
         },
         {
          "q": "Name the four domains of development.",
-         "a": "Social, cognitive, language, and motor skills (fine and gross)."
+         "a": "**Social, cognitive, language, and motor skills (fine and gross).**\n\n## Understanding it\n- Development is tracked across **four domains**.\n- **Motor** splits into fine and gross.\n\n>> Domains: social, cognitive, language, motor.",
+         "opts": [
+          "Vision, hearing, taste, smell",
+          "Social, cognitive, language, motor",
+          "Height, weight, head, teeth",
+          "Reflexes, tone, power, sensation"
+         ],
+         "ans": 1
         },
         {
          "q": "Distinguish isolated from global developmental delay.",
-         "a": "Isolated delay affects one domain; global delay affects two or more domains."
+         "a": "**Isolated delay affects one domain; global delay affects two or more domains.**\n\n## Understanding it\n- **Isolated** — a single area lags (e.g. only speech).\n- **Global** — **two or more** areas lag together.\n\n>> One domain = isolated; ≥2 domains = global.",
+         "opts": [
+          "They are the same",
+          "Isolated = one domain; global = two or more",
+          "Isolated = all domains; global = one",
+          "Global affects only motor"
+         ],
+         "ans": 1
         },
         {
          "q": "What does a static abnormality in development from birth suggest?",
-         "a": "A congenital, intrauterine, or perinatal cause."
+         "a": "**A congenital, intrauterine, or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never lost a skill' = a **fixed (static)** deficit present from birth.\n- Points to a **congenital/perinatal** injury, not a progressive disease.\n\n>> Static from birth = congenital/perinatal cause.",
+         "opts": [
+          "A progressive degenerative disease",
+          "A recent infection",
+          "A nutritional deficiency only",
+          "A congenital, intrauterine or perinatal cause"
+         ],
+         "ans": 3
         },
         {
          "q": "What does a loss of skills (regression) over time strongly suggest?",
-         "a": "An underlying degenerative disease of the CNS, such as an inborn error of metabolism."
+         "a": "**An underlying degenerative disease of the CNS, such as an inborn error of metabolism.**\n\n## Understanding it\n- **Losing** previously acquired skills (regression) is different from never gaining them.\n- It points to an **active, progressive** process — a neurodegenerative/metabolic disease.\n\n>> Regression (skill loss) = degenerative CNS disease until proven otherwise.",
+         "opts": [
+          "Normal development",
+          "A simple delay that will catch up",
+          "A degenerative CNS disease (e.g. inborn error of metabolism)",
+          "A static perinatal injury"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 3 months.",
-         "a": "Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos and laughs."
+         "a": "**Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos/vocalises.**\n\n## Understanding it\n- 3 months: **forearm support** (prone), **hands open**, **social smile**, **cooing**.\n\n>> 3 months = forearm support, social smile.",
+         "opts": [
+          "Walks with one hand held",
+          "Sits and transfers objects",
+          "Forearm support, hands open, social smile, coos",
+          "Runs and builds a tower"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 6 months.",
-         "a": "Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes and dislikes. Language: babbles."
+         "a": "**Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes/dislikes. Language: babbles.**\n\n## Understanding it\n- 6 months: **sits momentarily**, **transfers** objects hand-to-hand, **babbles**.\n\n>> 6 months = sits briefly, transfers, babbles.",
+         "opts": [
+          "Runs and builds towers",
+          "Walks and says 2–3 word sentences",
+          "Sits momentarily, transfers objects, babbles",
+          "Pincer grasp and pat-a-cake"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 9 months.",
-         "a": "Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake and peek-a-boo. Language: imitates sounds."
+         "a": "**Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake/peek-a-boo. Language: imitates sounds.**\n\n## Understanding it\n- 9 months: **pulls to stand**, **pincer grasp**, plays **pat-a-cake**, **imitates sounds**.\n\n>> 9 months = pulls to stand, pincer grasp.",
+         "opts": [
+          "Only smiles and coos",
+          "Pulls to stand, pincer grasp, pat-a-cake, imitates sounds",
+          "Walks upstairs alone",
+          "Runs and builds a 6-block tower"
+         ],
+         "ans": 1
         },
         {
          "q": "State the milestones at 12 months.",
-         "a": "Gross motor: walks with 1 hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 meaningful words."
+         "a": "**Gross motor: walks with one hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 words.**\n\n## Understanding it\n- 12 months: **walks with one hand held**, **releases on command**, **1–2 words**.\n\n>> 12 months = walks with hand held, 1–2 words.",
+         "opts": [
+          "Walks with one hand held, releases on command, 1–2 words",
+          "Only sits momentarily",
+          "Runs and speaks in sentences",
+          "Pincer grasp and babbles"
+         ],
+         "ans": 0
         },
         {
          "q": "State the milestones at 18 months.",
-         "a": "Gross motor: walks upstairs with assistance. Fine motor: feeds self from spoon. Social: mimics actions of others. Language: at least 6 words."
+         "a": "**Gross motor: walks upstairs with assistance. Fine motor: feeds self from a spoon. Social: mimics others. Language: several words.**\n\n## Understanding it\n- 18 months: **stairs with help**, **self-feeds with spoon**, **mimics**, several words.\n\n>> 18 months = stairs with help, self-feeds.",
+         "opts": [
+          "Walks upstairs assisted, self-feeds with spoon, mimics others",
+          "Only babbles",
+          "Pincer grasp",
+          "Runs and builds a tower of 6"
+         ],
+         "ans": 0
         },
         {
          "q": "State the milestones at 24 months.",
-         "a": "Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2- to 3-word sentences."
+         "a": "**Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2–3-word sentences.**\n\n## Understanding it\n- 24 months: **runs**, **tower of 6**, **plays with others**, **2–3-word sentences**.\n\n>> 24 months = runs, tower of 6, 2–3 word sentences.",
+         "opts": [
+          "Sits momentarily, babbles",
+          "Walks with one hand held, 1–2 words",
+          "Runs, tower of 6 blocks, plays with others, 2–3-word sentences",
+          "Pulls to stand, pincer grasp"
+         ],
+         "ans": 2
         },
         {
          "q": "What should the family history cover in neurology?",
-         "a": "History of neurologic disease including developmental delay and inherited disorders for all first- and second-degree relatives; miscarriages or fetal deaths (gender and gestational age at demise); and ethnic background, including whether the parents are related."
+         "a": "**Neurologic disease including developmental delay and inherited disorders, in all first- and second-degree relatives.**\n\n## Understanding it\n- Many neurological conditions are **inherited**.\n- Ask about neurologic disease/developmental delay in **close relatives**.\n\n>> Family history hunts for inherited neuro disease in first/second-degree relatives.",
+         "opts": [
+          "Neurologic disease/developmental delay in first- and second-degree relatives",
+          "Only the mother's diet",
+          "No family history is needed",
+          "Only the father's height"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is consanguinity important in a neurological history?",
-         "a": "Because the incidence of metabolic and degenerative disorders of the CNS is increased significantly in children of consanguineous marriages."
+         "a": "**Because the incidence of metabolic and degenerative CNS disorders is significantly increased in children of consanguineous unions.**\n\n## Understanding it\n- Related parents share more genes, raising the chance both carry the same **recessive** mutation.\n- This increases **autosomal recessive** metabolic/degenerative disease.\n\n>> Consanguinity → higher recessive metabolic/degenerative disease risk.",
+         "opts": [
+          "It only affects blood group",
+          "It protects against disease",
+          "It raises the risk of recessive metabolic/degenerative CNS disease",
+          "It has no genetic effect"
+         ],
+         "ans": 2
         },
         {
          "q": "What should the social history detail?",
-         "a": "The child's current living environment and relationship with family members; recent stressors such as divorce, remarriage, birth of a sibling or death of a loved one; academic and social performance with attention to abrupt changes; and peer relationships."
+         "a": "**The child's living environment and family relationships; recent stressors such as divorce, remarriage or bereavement.**\n\n## Understanding it\n- The **home environment** and **relationships** affect a child's neurodevelopment and behaviour.\n- **Recent stressors** may explain behavioural/functional changes.\n\n>> Social history = environment, relationships, recent stressors.",
+         "opts": [
+          "Living environment, family relationships, recent stressors",
+          "The parents' blood pressure",
+          "Only the school name",
+          "Only the family income"
+         ],
+         "ans": 0
         },
         {
          "q": "What may it indicate if a child cannot name at least two or three playmates?",
-         "a": "Abnormal social development."
+         "a": "**Abnormal social development.**\n\n## Understanding it\n- Naming playmates reflects normal **social** interaction for age.\n- Inability suggests a **social developmental** problem (e.g. autism spectrum).\n\n>> Can't name playmates → possible abnormal social development.",
+         "opts": [
+          "Abnormal social development",
+          "A hearing defect only",
+          "Normal development",
+          "A motor problem"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is a review of systems essential in neurology?",
-         "a": "Because abnormalities of the CNS often manifest with vague, non-focal symptoms that may be misattributed to other organ systems — e.g. vomiting, constipation and urinary incontinence."
+         "a": "**Because CNS abnormalities often present with vague, non-focal symptoms that may be misattributed to other organ systems.**\n\n## Understanding it\n- Neurological disease can masquerade as **GI, urinary or general** complaints (e.g. morning vomiting from raised ICP).\n- A systems review catches these misleading clues.\n\n>> Non-focal symptoms hide CNS disease — the ROS uncovers them.",
+         "opts": [
+          "It replaces the examination",
+          "CNS disease often presents with vague, non-focal symptoms",
+          "To save time",
+          "Neurology never affects other systems"
+         ],
+         "ans": 1
         },
         {
          "q": "How should the physical examination of a child be conducted?",
-         "a": "In a non-threatening, child-friendly setting, allowing the child to sit where most comfortable — on a parent's lap or on the floor."
+         "a": "**In a non-threatening, child-friendly setting, letting the child sit where most comfortable — on a parent's lap or the floor.**\n\n## Understanding it\n- A frightened child won't cooperate.\n- Examine **opportunistically** in a comfortable, non-threatening way.\n\n>> Child-friendly, non-threatening, opportunistic examination.",
+         "opts": [
+          "In a child-friendly setting, where the child is comfortable",
+          "Only after sedation",
+          "Standing at attention",
+          "Strapped to a couch"
+         ],
+         "ans": 0
         },
         {
          "q": "Which tests should be reserved for the end of the examination, and why?",
-         "a": "Invasive, painful or discomforting tests such as measurement of head circumference and the gag reflex — because the more the examination seems like a game, the more the child will cooperate."
+         "a": "**Invasive, painful or uncomfortable tests such as head-circumference measurement and the gag reflex — because they upset the child.**\n\n## Understanding it\n- Save the **distressing** manoeuvres for last so the child stays cooperative for everything else.\n- Examples: gag reflex, head circumference.\n\n>> Do the upsetting parts last.",
+         "opts": [
+          "Painful/uncomfortable tests (e.g. gag reflex, head circumference)",
+          "The general observation",
+          "The first thing you do",
+          "Watching the child play"
+         ],
+         "ans": 0
         },
         {
          "q": "What does general observation include?",
-         "a": "The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head — size, shape, fontanels and OFC."
+         "a": "**The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head (size, shape, fontanelles).**\n\n## Understanding it\n- Much neurological information comes from just **watching**.\n- Note appearance, behaviour, posture, movements, and the head.\n\n>> Observation alone yields a huge amount before you touch the child.",
+         "opts": [
+          "Only the reflexes",
+          "Only the pupils",
+          "Only the blood pressure",
+          "Appearance, behaviour, mental state, posture/movement, head"
+         ],
+         "ans": 3
         },
         {
          "q": "When does the examination begin?",
-         "a": "During the interview — observing the child's appearance and movements, dysmorphic facies, abnormality of motor function such as hemiparesis or gait disturbance, and behaviour while playing."
+         "a": "**During the interview — observing the child's appearance, movements, dysmorphic facies and motor function while talking to the parents.**\n\n## Understanding it\n- Examination starts the moment you **see** the child, not when you lay hands on them.\n- Watch during history-taking.\n\n>> The exam begins with observation during the interview.",
+         "opts": [
+          "Only in a dark room",
+          "Only after the history is finished",
+          "After investigations",
+          "During the interview, by observation"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the normal pattern of a child's behaviour during a consultation?",
-         "a": "A normal child usually plays independently early in the visit but then engages in the interview process."
+         "a": "**A normal child usually plays independently early in the visit, then engages in the interview process.**\n\n## Understanding it\n- Normal children **explore/play** at first, then interact.\n- Deviations (no play, no engagement) may signal a problem.\n\n>> Normal: plays first, then engages.",
+         "opts": [
+          "Plays independently early, then engages",
+          "Sits perfectly still throughout",
+          "Never interacts at all",
+          "Cries the entire visit"
+         ],
+         "ans": 0
         },
         {
          "q": "What does microcephaly reflect, and what causes it?",
-         "a": "A small head frequently reflects a small brain; the cause is a perinatal or postnatal insult to the brain."
+         "a": "**A small head frequently reflects a small brain; it results from a perinatal or postnatal insult to the brain.**\n\n## Understanding it\n- Skull growth follows **brain** growth.\n- A small head often means a **small/injured brain** (perinatal/postnatal insult).\n\n>> Microcephaly ≈ small brain from a perinatal/postnatal insult.",
+         "opts": [
+          "A small brain, from a perinatal/postnatal insult",
+          "A large brain",
+          "A normal variant only",
+          "Excess CSF"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the causes of macrocephaly?",
-         "a": "Most commonly familial; but it may be from a disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus."
+         "a": "**Most commonly familial; but also disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus.**\n\n## Understanding it\n- The commonest cause is **benign familial** big heads.\n- Pathological causes include **hydrocephalus, storage disorders, chromosomal defects**.\n\n>> Macrocephaly: usually familial, but exclude hydrocephalus/storage disease.",
+         "opts": [
+          "Only microcephaly's opposite artefact",
+          "Most commonly familial; also hydrocephalus, storage/chromosomal disorders",
+          "Always a tumour",
+          "Always hydrocephalus"
+         ],
+         "ans": 1
         },
         {
          "q": "What is craniosynostosis?",
-         "a": "Premature closure of cranial sutures, causing a variety of abnormal head shapes."
+         "a": "**Premature closure of cranial sutures, causing a variety of abnormal head shapes.**\n\n## Understanding it\n- Sutures normally stay open to let the skull grow.\n- **Early fusion** distorts skull shape.\n\n>> Craniosynostosis = premature suture fusion → abnormal head shape.",
+         "opts": [
+          "Widening of the sutures",
+          "A brain tumour",
+          "Premature closure of cranial sutures",
+          "Excess CSF in the ventricles"
+         ],
+         "ans": 2
         },
         {
          "q": "What head shape suggests chronic subdural haemorrhage, and why?",
-         "a": "A square or box-like shape, due to the long-standing presence of fluid in the subdural space."
+         "a": "**A square or box-like head, due to long-standing fluid in the subdural space.**\n\n## Understanding it\n- Chronic subdural fluid slowly expands the skull into a **box-like** shape.\n\n>> Box-shaped head = chronic subdural collection.",
+         "opts": [
+          "A perfectly round head",
+          "A pointed (tower) head",
+          "A square/box-like head",
+          "A flattened occiput"
+         ],
+         "ans": 2
         },
         {
          "q": "What is plagiocephaly, and in which infants is it particularly prominent?",
-         "a": "Flattening of the skull; it can be seen in normal infants but may be particularly prominent in hypotonic or weak infants, who are less mobile."
+         "a": "**Flattening of the skull; it occurs in normal infants but is particularly prominent in hypotonic or weak infants.**\n\n## Understanding it\n- **Positional flattening** of one part of the skull.\n- More marked in **hypotonic/weak** infants who lie in one position.\n\n>> Plagiocephaly = skull flattening, worse in hypotonic infants.",
+         "opts": [
+          "A box-shaped head",
+          "Skull flattening, prominent in hypotonic/weak infants",
+          "Excess CSF",
+          "Premature suture fusion"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the anterior fontanel.",
-         "a": "Diamond-shaped, at the junction of the frontal and parietal bones, measuring 2 × 2 cm, and closing at 9–18 months."
+         "a": "**Diamond-shaped, at the junction of the frontal and parietal bones, measuring about 2 × 2 cm, closing at 9–18 months.**\n\n## Understanding it\n- **Diamond** shape, front of the skull.\n- Closes late — **9–18 months**.\n\n>> Anterior fontanelle: diamond, ~2×2 cm, closes 9–18 months.",
+         "opts": [
+          "Square, closes at 5 years",
+          "Round, closes at birth",
+          "Triangular, closes at 6–8 weeks",
+          "Diamond-shaped, ~2×2 cm, closes at 9–18 months"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the posterior fontanel.",
-         "a": "Triangular in shape, at the junction of the parietal and occipital bones, closing at 6–8 weeks."
+         "a": "**Triangular, at the junction of the parietal and occipital bones, closing at 6–8 weeks.**\n\n## Understanding it\n- **Triangular** shape, back of the skull.\n- Closes **early** — 6–8 weeks.\n\n>> Posterior fontanelle: triangular, closes 6–8 weeks.",
+         "opts": [
+          "Square, never closes",
+          "Triangular, closes at 6–8 weeks",
+          "Round, closes at 1 year",
+          "Diamond-shaped, closes at 18 months"
+         ],
+         "ans": 1
         },
         {
          "q": "What does a bulging fontanel indicate, and what is the important caveat?",
-         "a": "Increased intracranial pressure — but it also occurs with vigorous crying in a normal infant."
+         "a": "**Increased intracranial pressure — but it also bulges with vigorous crying in a normal infant.**\n\n## Understanding it\n- A tense/bulging fontanelle suggests **raised ICP**.\n- **Caveat:** crying (and lying flat) bulges it normally — assess when **calm and upright**.\n\n>> Bulging = raised ICP, unless the baby is crying.",
+         "opts": [
+          "Raised ICP — but crying also bulges it normally",
+          "Always normal",
+          "Always dehydration",
+          "Low intracranial pressure"
+         ],
+         "ans": 0
         },
         {
          "q": "What might a very small or absent anterior fontanel at birth indicate?",
-         "a": "Craniosynostosis or microcephaly."
+         "a": "**Craniosynostosis or microcephaly.**\n\n## Understanding it\n- If the fontanelle is tiny/absent at birth, the skull may have **fused early** (craniosynostosis) or the **brain is small** (microcephaly).\n\n>> Small/absent AF at birth → craniosynostosis or microcephaly.",
+         "opts": [
+          "Normal finding",
+          "Hydrocephalus",
+          "Raised ICP",
+          "Craniosynostosis or microcephaly"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the occipitofrontal circumference reflect?",
-         "a": "Brain growth — it should be measured and documented."
+         "a": "**Brain growth — it should be measured and documented.**\n\n## Understanding it\n- Head (occipitofrontal) circumference tracks **brain growth**.\n- Serial measurements plotted on a chart are essential.\n\n>> OFC = a proxy for brain growth; always measure and plot.",
+         "opts": [
+          "Body weight",
+          "Chest size",
+          "Brain growth",
+          "Blood pressure"
+         ],
+         "ans": 2
         },
         {
          "q": "State the average head circumference of a term infant at birth and its rate of growth in the first year.",
-         "a": "34–35 cm at birth; increasing by 2 cm/month for the 1st 3 months, 1 cm/month for the 2nd 3 months, and 0.5 cm/month for the last 6 months."
+         "a": "**34–35 cm at birth; increasing by 2 cm/month for the first 3 months, 1 cm/month for the second 3 months, and 0.5 cm/month for the last 6 months.**\n\n## Understanding it\n- Birth OFC ≈ **34–35 cm**.\n- Year 1 growth: **2 → 1 → 0.5 cm/month** across the three periods.\n\n>> 34–35 cm at birth; 2,1,0.5 cm/month by trimester of infancy.",
+         "opts": [
+          "20 cm at birth; no growth",
+          "34–35 cm at birth; 2, 1, 0.5 cm/month across year one",
+          "45 cm at birth; 5 cm/month",
+          "30 cm; 1 cm/year"
+         ],
+         "ans": 1
         },
         {
          "q": "State the rate of head growth after the first year.",
-         "a": "0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant."
+         "a": "**0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant.**\n\n## Understanding it\n- Growth **slows sharply** after infancy.\n- 1–3 yr: 0.25 cm/month; 3–6 yr: 0.5 cm/year; after 6 yr, no longer clinically tracked.\n\n>> Head growth tails off after year 1 and stops mattering after 6.",
+         "opts": [
+          "Stops entirely at age 1",
+          "1 cm/month lifelong",
+          "Continues at 2 cm/month",
+          "0.25 cm/month (1–3 yr), 0.5 cm/year (to 6 yr), then irrelevant"
+         ],
+         "ans": 3
         },
         {
          "q": "State the average rate of head growth in a healthy premature infant.",
-         "a": "0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week of development."
+         "a": "**0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week.**\n\n## Understanding it\n- Preterm head growth **accelerates** over the first weeks: 0.5 → 0.75 → 1.0 cm/week.\n- Continues at ~1 cm/week until term (40 weeks).\n\n>> Preterm: 0.5, 0.75, then 1.0 cm/week to term.",
+         "opts": [
+          "No growth until term",
+          "0.1 cm/month",
+          "2 cm/week from birth",
+          "0.5 cm (wk 1–2), 0.75 cm (wk 3), 1.0 cm/week thereafter to 40 wk"
+         ],
+         "ans": 3
         },
         {
          "q": "List the eight steps in the sequence of central nervous system examination.",
-         "a": "Higher function; cranial nerves; motor functions (posture, nutrition of muscle, DTR, power, superficial reflexes); sensory; autonomic function; soft neurologic signs; cerebellar function; and gait."
+         "a": "**Higher function; cranial nerves; motor functions (posture, muscle nutrition, DTRs, power, superficial reflexes); sensory; cerebellar; autonomic/soft signs; gait; and meningeal signs.**\n\n## Understanding it\n- Work **top-down**: mind → cranial nerves → motor → sensory → cerebellar → autonomic → gait.\n- A fixed sequence prevents omissions.\n\n>> Higher function → cranial nerves → motor → sensory → cerebellar → gait.",
+         "opts": [
+          "Only the cranial nerves",
+          "Higher function, cranial nerves, motor, sensory, cerebellar, autonomic, gait",
+          "Just check reflexes",
+          "Start with gait then stop"
+         ],
+         "ans": 1
         },
         {
          "q": "What is assessed under sensory examination?",
-         "a": "Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign."
+         "a": "**Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign.**\n\n## Understanding it\n- Tests both **superficial** (touch, pain, temperature) and **deep** (joint position, vibration) sensation.\n- Plus cortical (stereognosis) and Romberg's.\n\n>> Sensory exam = touch, pain, temp, proprioception, vibration, stereognosis, Romberg.",
+         "opts": [
+          "Only reflexes",
+          "Only the cranial nerves",
+          "Touch, pain, temperature, proprioception, vibration, stereognosis, Romberg",
+          "Only power and tone"
+         ],
+         "ans": 2
         },
         {
          "q": "What is assessed under autonomic function and soft neurologic signs?",
-         "a": "Autonomic: rest and exercise pulse and blood pressure. Soft neurologic signs: neck stiffness, Kernig's sign and Brudzinski's sign."
+         "a": "**Autonomic: pulse and blood pressure at rest and on exercise. Soft signs: neck stiffness, Kernig's and Brudzinski's signs.**\n\n## Understanding it\n- **Autonomic** — cardiovascular responses (pulse/BP).\n- **Soft/meningeal signs** — neck stiffness, Kernig's, Brudzinski's (meningeal irritation).\n\n>> Autonomic = pulse/BP; soft signs = meningeal (Kernig/Brudzinski).",
+         "opts": [
+          "Only gait",
+          "Only muscle power",
+          "Only cranial nerves",
+          "Autonomic: pulse/BP; soft signs: neck stiffness, Kernig's, Brudzinski's"
+         ],
+         "ans": 3
         },
         {
          "q": "What is assessed under cerebellar function?",
-         "a": "Intention tremor, nystagmus and dysdiadochokinesia."
+         "a": "**Intention tremor, nystagmus and dysdiadochokinesia.**\n\n## Understanding it\n- Cerebellar signs: **intention tremor** (worsens near target), **nystagmus**, and **dysdiadochokinesia** (impaired rapid alternating movement).\n\n>> Cerebellar: intention tremor, nystagmus, dysdiadochokinesia.",
+         "opts": [
+          "Intention tremor, nystagmus, dysdiadochokinesia",
+          "Neck stiffness and Kernig's",
+          "Ptosis, miosis, anhidrosis",
+          "Power and tone"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the six gait patterns listed.",
-         "a": "Hemiparetic; ataxic (cerebellar and sensory); spastic; steppage; myopathic; and waddling."
+         "a": "**Hemiparetic, ataxic (cerebellar and sensory), spastic, steppage, myopathic, and waddling.**\n\n## Understanding it\n- Each abnormal gait maps to a lesion: **hemiparetic** (stroke), **ataxic** (cerebellar/sensory), **spastic**, **steppage** (foot drop), **myopathic/waddling** (proximal weakness).\n\n>> Six gaits: hemiparetic, ataxic, spastic, steppage, myopathic, waddling.",
+         "opts": [
+          "Hemiparetic, ataxic, spastic, steppage, myopathic, waddling",
+          "Left and right only",
+          "Fast and slow only",
+          "Only normal and abnormal"
+         ],
+         "ans": 0
         },
         {
          "q": "On what will the examiner's assessment of candidates be based?",
-         "a": "Overall attention to sequence, composure, and speed of performance."
+         "a": "**Overall attention to sequence, composure, and speed of performance.**\n\n## Understanding it\n- In the OSPE, marks go for a **systematic sequence**, staying **composed**, and reasonable **speed**.\n\n>> Be systematic, calm, and efficient.",
+         "opts": [
+          "Only the final diagnosis",
+          "The equipment brand",
+          "Attention to sequence, composure, and speed",
+          "How fast you talk"
+         ],
+         "ans": 2
         },
         {
          "q": "List the five instruments for neurologic examination.",
-         "a": "Inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool."
+         "a": "**An inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool.**\n\n## Understanding it\n- Each tool matches a test: **tape** (head circumference), **torch** (pupils), **256 Hz fork** (vibration), **hammer** (reflexes), **cotton wool** (light touch).\n\n>> Tape, torch, 256 Hz fork, hammer, cotton wool.",
+         "opts": [
+          "Measuring tape, pen torch, 256 Hz tuning fork, tendon hammer, cotton wool",
+          "Scalpel and forceps",
+          "Stethoscope and BP cuff only",
+          "Ophthalmoscope only"
+         ],
+         "ans": 0
         },
         {
          "q": "State the levels of consciousness.",
-         "a": "Conscious, lethargic, obtundation, stupor, and coma."
+         "a": "**Conscious, lethargic, obtundation, stupor, and coma.**\n\n## Understanding it\n- A graded scale of **decreasing arousal**: alert → lethargic → obtunded → stupor → coma.\n\n>> Conscious → lethargic → obtundation → stupor → coma.",
+         "opts": [
+          "Grades 0–5",
+          "Awake and asleep only",
+          "Conscious, lethargic, obtundation, stupor, coma",
+          "Mild, moderate, severe"
+         ],
+         "ans": 2
         },
         {
          "q": "Distinguish aphasia from dysarthria.",
-         "a": "Aphasia is inability to speak, due to damage to Broca's area; dysarthria is inability to speak properly, due to damage to the articulation system."
+         "a": "**Aphasia is inability to speak (language) from damage to Broca's area; dysarthria is inability to articulate properly from damage to the motor/muscular apparatus of speech.**\n\n## Understanding it\n- **Aphasia** — a **language** problem (Broca's area) — the words themselves are wrong/absent.\n- **Dysarthria** — a **motor** problem — words are right but slurred.\n\n>> Aphasia = language (Broca); dysarthria = articulation (muscles).",
+         "opts": [
+          "Aphasia = language loss (Broca's); dysarthria = poor articulation (motor)",
+          "They are identical",
+          "Both are hearing problems",
+          "Aphasia is slurring; dysarthria is word loss"
+         ],
+         "ans": 0
         },
         {
          "q": "What else is assessed under higher function?",
-         "a": "Intelligence and memory (alertness in a younger child, simple arithmetic in an older child); orientation of time, place and person; and cerebral dominance — most people are left."
+         "a": "**Intelligence and memory (alertness in younger children, arithmetic in older ones), plus orientation to time, place and person.**\n\n## Understanding it\n- Higher function also covers **intelligence/memory** and **orientation** (time/place/person).\n- Age-appropriate tasks are used.\n\n>> Higher function = intelligence, memory, orientation.",
+         "opts": [
+          "Intelligence, memory, and orientation (time/place/person)",
+          "Only the pupils",
+          "Only reflexes",
+          "Only muscle power"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the twelve cranial nerves in order.",
-         "a": "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, and hypoglossal."
+         "a": "**Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory (vestibulocochlear), glossopharyngeal, vagus, accessory, hypoglossal.**\n\n## Understanding it\n- CN I–XII in order; classic mnemonics exist ('On Old Olympus...').\n- Know the sequence for systematic testing.\n\n>> I–XII: olfactory → optic → oculomotor → trochlear → trigeminal → abducent → facial → auditory → glossopharyngeal → vagus → accessory → hypoglossal.",
+         "opts": [
+          "In reverse order XII–I",
+          "Only the optic and facial",
+          "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, hypoglossal",
+          "Only 10 nerves exist"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by visual acuity, fields, colour vision and fundi, and by pupillary reactions?",
-         "a": "Visual acuity, field of vision, colour vision and ocular fundi test CN 2; pupillary reactions test CN 2 and 3."
+         "a": "**Acuity, fields, colour vision and fundi test CN II (optic); pupillary reactions test CN II and III.**\n\n## Understanding it\n- **CN II** carries vision (acuity/fields/colour/fundi).\n- The pupillary light reflex needs **CN II (afferent)** and **CN III (efferent)**.\n\n>> Vision = CN II; pupil reflex = CN II + III.",
+         "opts": [
+          "Vision → CN III only",
+          "Pupils → CN IV and VI",
+          "Vision → CN II; pupillary reactions → CN II and III",
+          "All test CN VII"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by extraocular movements, and by corneal reflexes and jaw movements?",
-         "a": "Extraocular movements test CN 3, 4 and 6; corneal reflexes and jaw movements test CN 5."
+         "a": "**Extraocular movements test CN III, IV and VI; corneal reflexes and jaw movements test CN V.**\n\n## Understanding it\n- Eye movements need **III, IV, VI**.\n- The **corneal reflex** (sensory) and **jaw** (motor) are **CN V (trigeminal)**.\n\n>> Eye movement = III/IV/VI; corneal + jaw = V.",
+         "opts": [
+          "Corneal reflex → VII only",
+          "All test CN II",
+          "Eye movement → III/IV/VI; corneal reflex and jaw → V",
+          "Eye movement → V; jaw → VI"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by facial movements, hearing, swallowing and palate, voice, speech and tongue movement?",
-         "a": "Facial movements CN 7; hearing CN 8; swallowing and rise of palate CN 9 and 10; voice CN 10; speech CN 5, 7, 10 and 12; tongue movement CN 12."
+         "a": "**Facial movements CN VII; hearing CN VIII; swallowing/palate CN IX and X; voice CN X; speech CN V, VII, X and XII; tongue CN XII.**\n\n## Understanding it\n- Map each function to its nerve(s): face (VII), hearing (VIII), swallow/palate (IX/X), voice (X), tongue (XII).\n- Speech needs several nerves together.\n\n>> Face VII, hear VIII, swallow IX/X, voice X, tongue XII.",
+         "opts": [
+          "Face VII; hearing VIII; swallow/palate IX–X; voice X; tongue XII",
+          "Face VIII; hearing VII",
+          "All are CN II",
+          "Tongue is CN X"
+         ],
+         "ans": 0
         },
         {
          "q": "State the four tests used to assess muscle tone and the findings in hypotonia.",
-         "a": "Palpation of muscles — flabby; posture of limb — limp; resistance to passive movement — decreased; range of passive movement — increased."
+         "a": "**Palpation (flabby), posture of the limb (limp), resistance to passive movement (decreased), and range of passive movement (increased) — in hypotonia.**\n\n## Understanding it\n- Four tone checks: palpation, resting posture, resistance, and range.\n- **Hypotonia** = flabby, limp, low resistance, **increased** range.\n\n>> Hypotonia: flabby, limp, low resistance, hypermobile.",
+         "opts": [
+          "Rigid, stiff, high resistance",
+          "No change from normal",
+          "All findings increased",
+          "Palpation flabby, posture limp, resistance decreased, range increased"
+         ],
+         "ans": 3
         },
         {
          "q": "State the findings of the four tone tests in hypertonia.",
-         "a": "Palpation — rigid; posture of limb — stiff; resistance to passive movement — increased; range of passive movement — decreased."
+         "a": "**Palpation (rigid), posture of the limb (stiff), resistance to passive movement (increased), and range of passive movement (decreased).**\n\n## Understanding it\n- **Hypertonia** is the mirror of hypotonia: rigid, stiff, **high** resistance, **reduced** range.\n\n>> Hypertonia: rigid, stiff, high resistance, restricted range.",
+         "opts": [
+          "Palpation rigid, posture stiff, resistance increased, range decreased",
+          "No change",
+          "Flabby, limp, low resistance",
+          "All decreased"
+         ],
+         "ans": 0
         },
         {
          "q": "Define opisthotonos and state when it occurs.",
-         "a": "Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; it may be exhibited by patients with either spasticity or rigidity."
+         "a": "**Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; seen with severe hypertonia (e.g. kernicterus, tetanus, meningitis).**\n\n## Understanding it\n- The back arches strongly backward due to **paraspinal hypertonia**.\n- A sign of severe CNS irritation/injury.\n\n>> Opisthotonos = arched-back hyperextension from paraspinal hypertonia.",
+         "opts": [
+          "Flaccid limbs",
+          "A normal resting posture",
+          "Backward spinal hyperextension from paraspinal hypertonia",
+          "Forward flexion of the spine"
+         ],
+         "ans": 2
         },
         {
          "q": "State the muscle power grading scale from 0 to 5.",
-         "a": "0 none; 1 flickering movement; 2 movement possible after elimination of gravity; 3 movement possible against gravity but not against resistance; 4 movement possible against gravity and against some resistance; 5 normal power."
+         "a": "**0 none; 1 flicker; 2 movement with gravity eliminated; 3 movement against gravity but not resistance; 4 movement against some resistance; 5 normal power.**\n\n## Understanding it\n- The MRC scale runs **0–5**.\n- Key steps: **2** = only with gravity removed, **3** = against gravity, **4** = against resistance, **5** = normal.\n\n>> 0 none → 5 normal, with gravity and resistance as the milestones.",
+         "opts": [
+          "1 normal to 5 paralysed",
+          "A percentage scale",
+          "0 none, 1 flicker, 2 gravity-eliminated, 3 vs gravity, 4 vs resistance, 5 normal",
+          "0–3 only"
+         ],
+         "ans": 2
         },
         {
          "q": "State the reflex grading scale.",
-         "a": "0 absent; 1+ sluggish (seen with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus."
+         "a": "**0 absent; 1+ sluggish (present with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus.**\n\n## Understanding it\n- Reflexes graded **0 to 4+**.\n- **2+** is normal; **3+/4+** suggest upper motor neurone; **0/1+** suggest lower motor neurone.\n\n>> 0 absent → 4+ clonus; 2+ is normal.",
+         "opts": [
+          "Only present or absent",
+          "1 normal to 5 absent",
+          "0–10 scale",
+          "0 absent, 1+ sluggish, 2+ normal, 3+ brisk, 4+ clonus"
+         ],
+         "ans": 3
         },
         {
          "q": "Define lumbar puncture and give its other name.",
-         "a": "A clinical procedure in which a needle is inserted into the spinal canal, most commonly to collect CSF for diagnostic testing; also known as a spinal tap."
+         "a": "**A procedure inserting a needle into the spinal canal, usually to collect CSF for diagnosis; also called a spinal tap.**\n\n## Understanding it\n- A needle enters the **subarachnoid space** (below the cord) to sample **CSF**.\n- Also known as a **spinal tap**.\n\n>> LP = spinal tap; needle into the spinal canal to obtain CSF.",
+         "opts": [
+          "A needle into the spinal canal to obtain CSF (spinal tap)",
+          "A brain biopsy",
+          "A skull X-ray",
+          "An injection into a vein"
+         ],
+         "ans": 0
         },
         {
          "q": "State three procedural principles of lumbar puncture.",
-         "a": "It is invasive and hence requires consent; strict asepsis is required; and it can also be performed for therapeutic purposes."
+         "a": "**It is invasive and requires consent; strict asepsis is required; and it can be therapeutic as well as diagnostic.**\n\n## Understanding it\n- **Consent** (invasive), **asepsis** (meningitis risk), and it can **treat** (e.g. remove CSF in raised-pressure states) as well as **diagnose**.\n\n>> Consent + asepsis + can be therapeutic.",
+         "opts": [
+          "No consent needed",
+          "Purely diagnostic, never therapeutic",
+          "Asepsis is optional",
+          "Invasive (needs consent), strict asepsis, can be therapeutic"
+         ],
+         "ans": 3
         },
         {
          "q": "List the nine requirements for the LP procedure.",
-         "a": "Indications; rule out contraindications; vital signs; pre-procedure concomitant RBS; position; needle insertion point and needle type; asepsis; pain control; and specimen collection."
+         "a": "**Indications; ruling out contraindications; vital signs; pre-procedure random blood sugar; positioning; correct insertion point and asepsis; anaesthesia; the correct needle; and correct technique.**\n\n## Understanding it\n- A checklist ensuring safety and validity: check indications/contraindications, vitals, **paired blood glucose**, position, site/asepsis, anaesthesia, needle, technique.\n\n>> A safety checklist — note the paired RBS and contraindication check.",
+         "opts": [
+          "Just insert the needle",
+          "Only consent",
+          "Indications, contraindications, vitals, RBS, position, site/asepsis, anaesthesia, needle, technique",
+          "Only positioning"
+         ],
+         "ans": 2
         },
         {
          "q": "List the indications for lumbar puncture.",
-         "a": "Meningitis; encephalitis (autoimmune, infectious); idiopathic intracranial hypertension; and it is often helpful in assessing subarachnoid haemorrhage, demyelinating, degenerative and collagen vascular diseases, and intracranial neoplasms."
+         "a": "**Meningitis, encephalitis (infectious or autoimmune), idiopathic intracranial hypertension, and assessing certain neurological conditions.**\n\n## Understanding it\n- Mostly to diagnose **CNS infection/inflammation** (meningitis/encephalitis).\n- Also to measure/relieve pressure in **IIH**.\n\n>> LP indications: meningitis, encephalitis, IIH.",
+         "opts": [
+          "Routine screening of all children",
+          "Meningitis, encephalitis, idiopathic intracranial hypertension",
+          "A simple headache",
+          "A skin rash"
+         ],
+         "ans": 1
         },
         {
          "q": "List the contraindications to lumbar puncture.",
-         "a": "Suspected mass lesion of the brain, especially posterior fossa or above the tentorium causing midline shift; suspected mass lesion of the spinal cord; symptoms and signs of impending cerebral herniation in a child with probable meningitis; critical illness; skin infection at the site; and thrombocytopenia with a platelet count below 20 × 10⁹/L."
+         "a": "**A suspected brain mass (especially posterior fossa or above the tentorium causing midline shift), raised ICP, and other signs of impending herniation.**\n\n## Understanding it\n- Removing CSF below a **mass/raised ICP** creates a pressure gradient → **brain herniation**.\n- So exclude a mass/raised ICP first (often with CT).\n\n>> Never LP with a mass lesion or raised ICP — risk of herniation.",
+         "opts": [
+          "Any headache at all",
+          "A mass lesion / raised ICP (herniation risk)",
+          "A high fever",
+          "Meningitis"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the position for lumbar puncture and the reason for it.",
-         "a": "Lateral decubitus or seated position, with neck and legs flexed to enlarge the intervertebral spaces, while shoulders and hips are kept straight to prevent rotating the spine."
+         "a": "**Lateral decubitus or seated, with neck and legs flexed to open the intervertebral spaces, keeping the shoulders and hips vertical.**\n\n## Understanding it\n- **Flexing** the spine spreads the vertebrae apart, widening the gap for the needle.\n- Keep the back straight/vertical to stay in the midline.\n\n>> Curl up to open the spaces; stay square to keep the midline.",
+         "opts": [
+          "Lying flat with legs straight",
+          "Lateral/seated with spine flexed to open intervertebral spaces",
+          "Prone and extended",
+          "Standing upright"
+         ],
+         "ans": 1
         },
         {
          "q": "Where is the needle inserted for a lumbar puncture, and how is the site identified?",
-         "a": "At the L3–L4 or L4–L5 interspace, identified by drawing an imaginary line from the iliac crest downward, perpendicular to the vertebral column."
+         "a": "**At the L3–L4 or L4–L5 interspace, identified by a line from the top of the iliac crest (which crosses ~L4).**\n\n## Understanding it\n- The **iliac crest line** crosses roughly **L4**, marking the safe level.\n- This is **below the cord** (ends ~L1–L2).\n\n>> L3–4 or L4–5, found from the iliac crest line — safely below the cord.",
+         "opts": [
+          "At the base of the skull",
+          "T4–T5, at the sternal angle",
+          "C6, at the cricoid",
+          "L3–L4 or L4–L5, located from the iliac crest line"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the asepsis required for lumbar puncture.",
-         "a": "The physician dons a mask, gown and sterile gloves; the skin is thoroughly prepared with a cleansing agent, and sterile drapes are applied."
+         "a": "**The physician wears a mask, gown and sterile gloves; the skin is cleaned with an antiseptic and sterile drapes are applied.**\n\n## Understanding it\n- The needle enters the **sterile CSF space**, so any contamination risks **meningitis**.\n- Full aseptic technique is mandatory.\n\n>> Full sterile technique — the CSF space must not be contaminated.",
+         "opts": [
+          "Only a glove on one hand",
+          "Clean hands are enough",
+          "No precautions needed",
+          "Mask, gown, sterile gloves, antiseptic skin prep and drapes"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe pain control for lumbar puncture.",
-         "a": "Injecting a local anaesthetic such as 1% lidocaine at the time of the procedure, or applying a eutectic mixture of lidocaine and prilocaine (EMLA) to the skin 30 minutes before the procedure."
+         "a": "**Injecting a local anaesthetic such as 1% lidocaine at the time, or applying a eutectic mixture (EMLA) beforehand.**\n\n## Understanding it\n- **Lidocaine** infiltration numbs the site during the procedure.\n- **EMLA** cream applied earlier numbs the skin painlessly (useful in children).\n\n>> Lidocaine at the time, or EMLA cream beforehand.",
+         "opts": [
+          "No anaesthesia is used",
+          "Local lidocaine, or EMLA cream applied beforehand",
+          "Oral paracetamol only",
+          "General anaesthesia always"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the needle used for lumbar puncture and how it is introduced.",
-         "a": "A 22-gauge, 1.5- to 3.0-inch, sharp, bevelled spinal needle with a properly fitting stylet, introduced in the midsagittal plane and directed slightly cephalad."
+         "a": "**A 22-gauge, 1.5–3.0 inch bevelled spinal needle with a stylet, introduced in the midsagittal plane with the stylet in place.**\n\n## Understanding it\n- A **spinal needle with a stylet** is used, aimed in the **midline**.\n- Keeping the **stylet in** during skin puncture prevents coring skin into the canal.\n\n>> 22G spinal needle with stylet, midline; keep the stylet in on the way through skin.",
+         "opts": [
+          "A 22G bevelled spinal needle with stylet, midline",
+          "A wide surgical scalpel",
+          "A butterfly needle in a vein",
+          "A biopsy gun"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the diagnostic utility of skull X-rays?",
-         "a": "Limited — they can demonstrate fractures, bony defects, intracranial calcifications, or indirect evidence of increased intracranial pressure."
+         "a": "**Limited — they can show fractures, bony defects, intracranial calcifications, or indirect signs of raised ICP.**\n\n## Understanding it\n- Plain skull films are largely **superseded** by CT/MRI.\n- They still show **fractures, calcifications, bony defects**.\n\n>> Skull X-ray = limited; mainly bone/calcification, not brain detail.",
+         "opts": [
+          "Shows the CSF clearly",
+          "The gold standard for tumours",
+          "Limited — fractures, bony defects, calcifications, indirect ICP signs",
+          "Excellent for brain tissue detail"
+         ],
+         "ans": 2
         },
         {
          "q": "What is cranial ultrasonography the imaging method of choice for, and in whom?",
-         "a": "For detecting intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with patent anterior fontanels."
+         "a": "**For intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with an open (patent) anterior fontanelle.**\n\n## Understanding it\n- The **open fontanelle** is an acoustic window for ultrasound.\n- Ideal for the **preterm/infant brain** (IVH, PVL, hydrocephalus) — no radiation, portable.\n\n>> Cranial US = the infant-brain test, through the open fontanelle.",
+         "opts": [
+          "Adults with closed sutures",
+          "Bone fractures",
+          "Spinal cord tumours",
+          "IVH, PVL, hydrocephalus — in infants with an open fontanelle"
+         ],
+         "ans": 3
         },
         {
          "q": "What is cranial CT valuable for?",
-         "a": "The evaluation of many neurologic emergencies, as well as some non-emergent conditions."
+         "a": "**The evaluation of many neurologic emergencies, as well as some non-emergent conditions.**\n\n## Understanding it\n- CT is **fast and widely available**, showing acute blood and bone well.\n- The go-to first scan in **emergencies** (trauma, haemorrhage).\n\n>> CT = the emergency brain scan.",
+         "opts": [
+          "Neurologic emergencies (and some non-emergent conditions)",
+          "Diagnosing epilepsy",
+          "Only chronic conditions",
+          "Only the spinal cord"
+         ],
+         "ans": 0
         },
         {
          "q": "What is brain MRI well suited for?",
-         "a": "It is a non-invasive procedure well suited for detecting a variety of abnormalities, including those of the posterior fossa and spinal cord."
+         "a": "**A non-invasive test well suited to detecting many abnormalities, including those of the posterior fossa and soft-tissue detail.**\n\n## Understanding it\n- MRI gives superb **soft-tissue** contrast and **no radiation**.\n- Superior for the **posterior fossa** and subtle lesions.\n\n>> MRI = detailed, radiation-free soft-tissue imaging (best for posterior fossa).",
+         "opts": [
+          "Acute bleeding in seconds",
+          "Bone fractures only",
+          "Diagnosing epilepsy directly",
+          "Detailed soft-tissue imaging, including the posterior fossa"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the other neuroradiologic procedures.",
-         "a": "Cranial CT angiography, MR angiography and MR venography; proton MR spectroscopy; catheter angiography; and positron emission tomography."
+         "a": "**CT angiography, MR angiography and venography; proton MR spectroscopy; catheter angiography; and PET.**\n\n## Understanding it\n- Vascular imaging (CTA/MRA/MRV, catheter angiography), metabolic (MR spectroscopy, PET).\n\n>> Extra tools: CTA/MRA/MRV, MR spectroscopy, catheter angiography, PET.",
+         "opts": [
+          "Only EEG",
+          "Only ultrasound",
+          "CTA, MRA/MRV, MR spectroscopy, catheter angiography, PET",
+          "Only plain X-ray"
+         ],
+         "ans": 2
         },
         {
          "q": "What unique information does PET provide?",
-         "a": "Information on brain metabolism and perfusion, by measuring blood flow, oxygen uptake, and/or glucose consumption."
+         "a": "**Information on brain metabolism and perfusion — measuring blood flow, oxygen uptake, and/or glucose consumption.**\n\n## Understanding it\n- PET is a **functional/metabolic** scan (not just structure).\n- It maps **blood flow, oxygen and glucose use**.\n\n>> PET shows brain metabolism/perfusion, not just anatomy.",
+         "opts": [
+          "Brain metabolism and perfusion (blood flow, oxygen, glucose)",
+          "The CSF pressure",
+          "Only the skull shape",
+          "Only bone anatomy"
+         ],
+         "ans": 0
         },
         {
          "q": "What is EEG used for?",
-         "a": "The diagnosis of epilepsy and brain dysfunction."
+         "a": "**The diagnosis of epilepsy and brain dysfunction.**\n\n## Understanding it\n- EEG records the brain's **electrical activity**.\n- It is the key test for **epilepsy** and diffuse brain dysfunction.\n\n>> EEG = the electrical test for epilepsy/brain dysfunction.",
+         "opts": [
+          "Measuring CSF pressure",
+          "Imaging brain structure",
+          "Assessing bone fractures",
+          "Diagnosis of epilepsy and brain dysfunction"
+         ],
+         "ans": 3
         },
         {
          "q": "Define an evoked potential.",
-         "a": "An electrical signal recorded from the CNS following the presentation of a specific visual, auditory, or sensory stimulus."
+         "a": "**An electrical signal recorded from the CNS following a specific visual, auditory, or sensory stimulus.**\n\n## Understanding it\n- A stimulus is given and the **brain's electrical response** is recorded.\n- Tests the integrity of the **sensory pathway** (visual/auditory/somatosensory).\n\n>> Evoked potential = the CNS's electrical response to a stimulus.",
+         "opts": [
+          "A CNS electrical response to a visual/auditory/sensory stimulus",
+          "A reflex hammer test",
+          "A CSF sample",
+          "A brain scan image"
+         ],
+         "ans": 0
         },
         {
          "q": "How are children with intellectual disability or developmental delay often evaluated?",
-         "a": "With metabolic and/or genetic testing."
+         "a": "**With metabolic and/or genetic testing.**\n\n## Understanding it\n- Unexplained delay/intellectual disability often has a **metabolic or genetic** cause.\n- These tests are commonly used in the work-up.\n\n>> Delay/ID work-up: metabolic and genetic testing.",
+         "opts": [
+          "No investigation is done",
+          "Only an EEG",
+          "Only a skull X-ray",
+          "Metabolic and/or genetic testing"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child has always been behind but has never lost a skill. What does this pattern indicate?",
-         "a": "A static abnormality in development from birth — suggesting a congenital, intrauterine or perinatal cause."
+         "a": "**A static abnormality from birth — suggesting a congenital, intrauterine or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never regressed' = a **fixed (static)** deficit.\n- Points to an **early (congenital/perinatal)** injury, not a progressive disease.\n\n>> Static from birth → congenital/perinatal cause.",
+         "opts": [
+          "A recent infection",
+          "A progressive degenerative disease",
+          "Normal development",
+          "A static, congenital/perinatal deficit"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child developed normally then began losing skills across several domains. What does this indicate and what investigation is needed?",
-         "a": "Global developmental regression, suggesting a degenerative CNS disease such as an inborn error of metabolism — requiring metabolic and/or genetic testing."
+         "a": "**Global developmental regression, suggesting a degenerative CNS disease (e.g. inborn error of metabolism) — requiring metabolic/genetic investigation.**\n\n## Understanding it\n- **Normal then regressing** = an active, progressive process.\n- Across **several domains** = global regression → neurodegenerative/metabolic disease.\n\n>> Regression across domains → degenerative disease; investigate metabolically/genetically.",
+         "opts": [
+          "A static perinatal injury",
+          "A behavioural phase",
+          "Global regression from a degenerative disease → metabolic/genetic work-up",
+          "Normal variation"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What single question best detects developmental regression?",
-         "a": "'Is there anything he used to be able to do that he cannot do now?'"
+         "a": "**'Is there anything he used to be able to do that he cannot do now?'**\n\n## Understanding it\n- Regression is defined by **losing** acquired skills.\n- Asking directly about **lost abilities** is the most sensitive screen.\n\n>> Ask what the child could do before but can't now.",
+         "opts": [
+          "'Is he eating well?'",
+          "'How old is the child?'",
+          "'Is there anything he used to do that he cannot do now?'",
+          "'Does he have a fever?'"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — An infant's head circumference is crossing centile lines upward. Why is this different from a single large measurement?",
-         "a": "Because macrocephaly is most commonly familial, but a head crossing centiles indicates something actively expanding inside the skull — it cannot be familial."
+         "a": "**Because macrocephaly is usually familial, but a head crossing centiles indicates something actively expanding inside the skull.**\n\n## Understanding it\n- A single large head can be **benign/familial**.\n- A head **crossing centiles upward** means **active expansion** (e.g. hydrocephalus, mass) — a red flag.\n\n>> Static big head = often familial; crossing centiles = active pathology.",
+         "opts": [
+          "Crossing centiles is less worrying",
+          "Both are always normal",
+          "Crossing centiles indicates active intracranial expansion (e.g. hydrocephalus)",
+          "It only reflects height"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — How should a fontanel be assessed to avoid a false positive?",
-         "a": "With the infant calm and sitting up — because vigorous crying and lying flat both cause the fontanel to bulge in a normal infant."
+         "a": "**With the infant calm and sitting up — because vigorous crying and lying flat both cause a normal fontanelle to bulge.**\n\n## Understanding it\n- Crying and a flat position **raise** fontanelle pressure normally.\n- Assess when the baby is **calm and upright** to avoid a false 'bulging' sign.\n\n>> Calm + upright = a true fontanelle assessment.",
+         "opts": [
+          "With the infant calm and upright",
+          "During feeding",
+          "Lying flat on the back",
+          "While the baby is crying"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — A drowsy child with meningitis has a unilaterally dilated pupil, hypertension and bradycardia. What is happening and what must NOT be done?",
-         "a": "Impending cerebral herniation with raised intracranial pressure — lumbar puncture is contraindicated, as it may precipitate coning and brainstem compression."
+         "a": "**Impending cerebral herniation from raised ICP — a lumbar puncture is contraindicated as it may precipitate herniation.**\n\n## Understanding it\n- Unilateral dilated pupil + hypertension + bradycardia = **raised ICP / herniation**.\n- **Do NOT do an LP** — it can trigger fatal herniation.\n\n>> These signs = raised ICP → LP is contraindicated.",
+         "opts": [
+          "Mild dehydration — do an LP",
+          "Normal findings — proceed",
+          "Impending herniation from raised ICP — do NOT do an LP",
+          "Low ICP — give fluids"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why does a unilaterally dilated pupil occur in raised intracranial pressure?",
-         "a": "Because the temporal lobe is pushed down over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil."
+         "a": "**Because the temporal lobe (uncus) is pushed over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil.**\n\n## Understanding it\n- Rising pressure herniates the **uncus** over the tentorium.\n- It squeezes **CN III**, knocking out its **pupil-constricting** parasympathetic fibres → the pupil dilates.\n\n>> Uncal herniation compresses CN III → a blown (dilated) pupil.",
+         "opts": [
+          "Bright light in one eye",
+          "The optic nerve is cut",
+          "Uncal herniation compresses CN III (pupilloconstrictor fibres)",
+          "A cataract forms"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What is the combination of hypertension with bradycardia in raised ICP called, and why does it occur?",
-         "a": "Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised intracranial pressure, and baroreceptors reflexly slow the heart."
+         "a": "**Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised ICP, and the resulting baroreflex causes bradycardia.**\n\n## Understanding it\n- To keep blood reaching the brain, **BP rises**.\n- Baroreceptors sense the high BP and reflexively **slow the heart** (bradycardia).\n\n>> Cushing's response = hypertension + bradycardia (a raised-ICP danger sign).",
+         "opts": [
+          "Simple anxiety",
+          "A normal exercise response",
+          "Septic shock",
+          "Cushing's response — HTN to perfuse the brain, reflex bradycardia"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — In a child with meningitis and signs of raised ICP, what is the correct order of management?",
-         "a": "Give empirical intravenous antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT; and defer the lumbar puncture. Never delay antibiotics for an LP."
+         "a": "**Give empirical IV antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT — and defer LP until safe.**\n\n## Understanding it\n- **Do not delay antibiotics** waiting for an LP in meningitis with raised ICP.\n- Stabilise ABC, image with **CT** first, and only LP when safe.\n\n>> Antibiotics + ABC + CT first; LP is deferred, not first.",
+         "opts": [
+          "Wait for the CT before antibiotics",
+          "LP first, then antibiotics",
+          "Do nothing until fully awake",
+          "Immediate IV antibiotics, stabilise ABC, urgent CT; defer LP"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Why must a lumbar puncture never be performed when there is a mass lesion or raised ICP?",
-         "a": "Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downwards — coning — which compresses the centres for breathing, heart rate and blood pressure."
+         "a": "**Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downward (herniation).**\n\n## Understanding it\n- With a mass/high ICP, the pressure above and below become unequal when CSF is drained below.\n- The **brainstem is pushed down** through the foramen magnum → fatal herniation ('coning').\n\n>> LP + raised ICP = coning; never do it.",
+         "opts": [
+          "It causes a mild headache only",
+          "It creates a gradient that herniates the brainstem (coning)",
+          "It cannot reach the CSF",
+          "It is simply too painful"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is a random blood sugar taken before a lumbar puncture?",
-         "a": "Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it, the CSF glucose result cannot be interpreted."
+         "a": "**Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it the CSF glucose result is uninterpretable.**\n\n## Understanding it\n- CSF glucose is judged **relative to blood glucose** (normally ~⅔).\n- You need a **paired** blood sugar to interpret it (low ratio suggests bacterial meningitis).\n\n>> Pair the CSF glucose with a simultaneous blood glucose.",
+         "opts": [
+          "To check for diabetes",
+          "CSF glucose is a ratio to simultaneous blood glucose",
+          "To choose the needle size",
+          "It is unrelated to the LP"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is the LP performed at L3–L4 or L4–L5 and not higher?",
-         "a": "Because the spinal cord ends at about L1–L2; below that level there are only the loose nerve roots of the cauda equina, which move out of the needle's way."
+         "a": "**Because the spinal cord ends at about L1–L2; below that there are only the loose nerve roots of the cauda equina, which the needle can safely part.**\n\n## Understanding it\n- Above L1–L2 you risk spearing the **spinal cord**.\n- Below it, the **cauda equina** roots float in CSF and are pushed aside safely.\n\n>> Go below where the cord ends (L1–2) to avoid injuring it.",
+         "opts": [
+          "There is no CSF higher up",
+          "The cord ends ~L1–L2; below are the mobile cauda equina roots",
+          "The vertebrae are fused higher up",
+          "Higher levels are more painful only"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why must the stylet be kept in the needle during skin puncture?",
-         "a": "To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour."
+         "a": "**To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour.**\n\n## Understanding it\n- Without the stylet, the needle can **punch out skin** and carry it inward.\n- Implanted skin cells can grow into an **epidermoid tumour** years later.\n\n>> Stylet in = no skin plug = no future epidermoid tumour.",
+         "opts": [
+          "To keep the needle sterile only",
+          "To make it hurt less",
+          "To speed up the flow of CSF",
+          "To avoid coring skin that could become an epidermoid tumour"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — An infant with an open fontanel needs brain imaging for suspected hydrocephalus. Which investigation and why?",
-         "a": "Cranial ultrasonography — the fontanel provides an acoustic window; it uses no radiation, is portable, needs no sedation and can be repeated for serial monitoring."
+         "a": "**Cranial ultrasonography — the fontanelle is an acoustic window; it uses no radiation, is portable and needs no sedation.**\n\n## Understanding it\n- The **open fontanelle** lets ultrasound see the brain.\n- Ideal for infants: **no radiation, portable, no sedation**.\n\n>> Open fontanelle + suspected hydrocephalus = cranial ultrasound.",
+         "opts": [
+          "CT with contrast",
+          "Cranial ultrasound (via the fontanelle; no radiation/sedation)",
+          "PET scan",
+          "Skull X-ray"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why can cranial ultrasound not be used once the fontanel has closed?",
-         "a": "Because ultrasound cannot pass through bone; the open fontanel is the only acoustic window into the infant brain."
+         "a": "**Because ultrasound cannot pass through bone; the open fontanelle is the only acoustic window into the infant brain.**\n\n## Understanding it\n- Ultrasound is **blocked by bone**.\n- Once the fontanelle **fuses**, there's no window → you must use CT/MRI.\n\n>> No fontanelle, no ultrasound window (bone blocks it).",
+         "opts": [
+          "Ultrasound needs radiation then",
+          "Ultrasound can't pass through bone; the fontanelle is the only window",
+          "The brain shrinks",
+          "It becomes too painful"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is CT preferred to MRI in a neurological emergency?",
-         "a": "Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI takes far longer and often requires sedation in a child."
+         "a": "**Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI is slow.**\n\n## Understanding it\n- In an emergency, **speed and availability** matter most.\n- CT quickly reveals **acute haemorrhage and fractures**; MRI takes much longer.\n\n>> Emergency = CT (fast, shows blood/bone); MRI is too slow.",
+         "opts": [
+          "CT gives no radiation",
+          "MRI is faster than CT",
+          "CT is fast, available, and shows acute blood/bone",
+          "MRI cannot show the brain"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why is MRI superior to CT for the posterior fossa?",
-         "a": "Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone — important since most childhood brain tumours are in the posterior fossa."
+         "a": "**Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone.**\n\n## Understanding it\n- The posterior fossa is encased in **thick bone** that creates CT **artefact**.\n- **MRI** isn't affected by bone, so it images this region clearly.\n\n>> Bone artefact blinds CT in the posterior fossa; MRI sees through it.",
+         "opts": [
+          "CT suffers bone artefact there; MRI is unaffected by bone",
+          "The posterior fossa has no bone",
+          "CT is always superior",
+          "MRI is faster"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why can imaging not diagnose epilepsy?",
-         "a": "Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal, so an EEG is required."
+         "a": "**Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal.**\n\n## Understanding it\n- Epilepsy is an **electrical** problem — diagnosed by **EEG**, not pictures.\n- Structural scans can be **normal** in epilepsy.\n\n>> Imaging shows structure; epilepsy is electrical → use EEG.",
+         "opts": [
+          "Imaging diagnoses it perfectly",
+          "The brain is always abnormal on scans",
+          "Imaging is too expensive",
+          "Epilepsy is electrical (EEG); imaging shows only structure"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Which combination of tone and reflexes indicates an upper motor neurone lesion?",
-         "a": "Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord."
+         "a": "**Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord.**\n\n## Understanding it\n- UMN lesions release lower centres from inhibition → **increased tone and brisk reflexes**.\n- Located in the **brain or spinal cord**.\n\n>> UMN = high tone + brisk reflexes (± clonus).",
+         "opts": [
+          "Increased tone with brisk reflexes (UMN, brain/cord lesion)",
+          "Flaccid limbs with fasciculations",
+          "Decreased tone with absent reflexes",
+          "Normal tone and reflexes"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Which combination of tone and reflexes indicates a lower motor neurone lesion?",
-         "a": "Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle."
+         "a": "**Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle.**\n\n## Understanding it\n- LMN lesions cut the reflex arc's output → **low tone, reduced/absent reflexes** (± wasting/fasciculations).\n- Located in the **anterior horn, nerve, or muscle**.\n\n>> LMN = low tone + reduced/absent reflexes.",
+         "opts": [
+          "Decreased tone with reduced/absent reflexes (LMN lesion)",
+          "Increased tone with brisk reflexes",
+          "Normal tone and reflexes",
+          "Brisk reflexes with clonus"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — How do you distinguish power grade 2 from grade 3?",
-         "a": "Grade 2 can move the limb only with gravity eliminated (horizontally); grade 3 can lift the limb against gravity but not against resistance."
+         "a": "**Grade 2 moves the limb only with gravity eliminated (horizontally); grade 3 lifts the limb against gravity but not against resistance.**\n\n## Understanding it\n- The dividing line is **gravity**: grade 2 can't beat it (needs it removed), grade 3 can.\n- Grade 3 still fails against added **resistance** (that's grade 4).\n\n>> Grade 2 = only without gravity; grade 3 = against gravity.",
+         "opts": [
+          "Grade 3 is total paralysis",
+          "Grade 2 = gravity eliminated; grade 3 = against gravity",
+          "Grade 2 beats resistance; grade 3 doesn't move",
+          "They are identical"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — What is reinforcement, and why does it matter in grading reflexes?",
-         "a": "Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only with reinforcement is graded 1+, not 0 — and a truly absent reflex means the reflex arc is broken."
+         "a": "**Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only on reinforcement is graded 1+ (sluggish).**\n\n## Understanding it\n- Reinforcement **distracts** the patient and **augments** a weak reflex so it isn't missed.\n- A reflex that appears **only** with reinforcement is **sluggish (1+)**, not truly absent.\n\n>> Reinforcement unmasks weak reflexes → grade 1+ if only present with it.",
+         "opts": [
+          "It has no effect on grading",
+          "A way to abolish reflexes",
+          "A drug that boosts reflexes",
+          "A distraction manoeuvre that augments weak reflexes (present only then = 1+)"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — What is Romberg's sign, and what does a positive sign indicate?",
-         "a": "The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory ataxia rather than cerebellar ataxia, in which the patient is unsteady with eyes open as well."
+         "a": "**The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory (proprioceptive) ataxia rather than cerebellar ataxia.**\n\n## Understanding it\n- With eyes **open**, vision compensates; with eyes **closed**, only proprioception remains.\n- Falling when eyes close = the **proprioceptive** pathway is faulty (sensory ataxia).\n- Cerebellar ataxia is unsteady with eyes **open too**.\n\n>> Positive Romberg = sensory (proprioceptive) ataxia, not cerebellar.",
+         "opts": [
+          "A normal finding",
+          "Unsteady only with eyes closed = sensory (proprioceptive) ataxia",
+          "Unsteady with eyes open = cerebellar ataxia",
+          "A test of hearing"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A mother reports reduced fetal movements during pregnancy. What does this suggest and why?",
-         "a": "A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was in effect observing the neurological examination in utero."
+         "a": "**A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was effectively observing the baby's motor system.**\n\n## Understanding it\n- Movement needs **intact nerves and muscles**.\n- Reduced fetal movement is an **antenatal window** onto a neuromuscular problem.\n\n>> Poor fetal movement → suspect a fetal neuromuscular disorder.",
+         "opts": [
+          "A placental issue only",
+          "A normal pregnancy",
+          "A maternal heart problem",
+          "A neuromuscular disorder (movement needs working nerves/muscles)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why must the indication for an emergency caesarean section be asked, not just the mode of delivery?",
-         "a": "Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption."
+         "a": "**Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption.**\n\n## Understanding it\n- The **reason** for the emergency section (e.g. fetal distress/hypoxia) may be the very insult that injured the brain.\n- The mode of delivery alone doesn't capture this.\n\n>> Ask *why* the C/S was done — the reason may be the neurological insult.",
+         "opts": [
+          "It is just for paperwork",
+          "It is irrelevant",
+          "The mode alone tells you everything",
+          "The indication may be the neurological insult (distress, prolapse, abruption)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child with a movement disorder and deafness was 'very yellow' as a newborn and untreated. What is the likely diagnosis?",
-         "a": "Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed."
+         "a": "**Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe untreated neonatal jaundice → **bilirubin brain injury (kernicterus)**.\n- Classic sequelae: **movement disorder (choreoathetoid CP) + sensorineural deafness**.\n\n>> 'Very yellow' newborn + later movement disorder + deafness = kernicterus.",
+         "opts": [
+          "Meningitis",
+          "Cerebellar tumour",
+          "Normal ageing",
+          "Kernicterus (untreated severe neonatal jaundice)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child presents with recurrent early morning vomiting and has been treated repeatedly for gastritis. What neurological cause must be excluded?",
-         "a": "Raised intracranial pressure — CNS disease often manifests with vague, non-focal symptoms misattributed to other systems."
+         "a": "**Raised intracranial pressure — CNS disease often presents with vague, non-focal symptoms misattributed to other systems.**\n\n## Understanding it\n- **Early-morning vomiting** is a classic feature of **raised ICP** (worse when lying flat overnight).\n- It is easily mislabelled as a GI problem.\n\n>> Morning vomiting mistaken for gastritis → exclude raised ICP.",
+         "opts": [
+          "Raised intracranial pressure",
+          "Simple gastritis",
+          "Food allergy",
+          "A normal finding"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A previously dry child becomes incontinent of urine. What neurological cause should be considered?",
-         "a": "A spinal cord lesion — since urinary incontinence is listed among the non-focal symptoms of CNS disease."
+         "a": "**A spinal cord lesion — urinary incontinence is among the non-focal symptoms of CNS disease.**\n\n## Understanding it\n- New incontinence in a previously continent child can signal a **spinal cord** problem (e.g. tumour, tethering).\n- It's a subtle CNS red flag.\n\n>> New incontinence → consider a spinal cord lesion.",
+         "opts": [
+          "A kidney stone",
+          "A spinal cord lesion",
+          "A urinary tract infection only",
+          "Normal behaviour"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why does headache worse on lying down, coughing or straining matter?",
-         "a": "Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP — it is elicited by asking about alleviating and exacerbating factors."
+         "a": "**Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP.**\n\n## Understanding it\n- Lying flat, coughing and straining all **increase ICP**.\n- A headache that **worsens** with them fits a **raised-ICP** cause (e.g. tumour).\n\n>> Headache worse lying/coughing/straining = raised-ICP pattern.",
+         "opts": [
+          "They lower ICP",
+          "It indicates a tension headache",
+          "It is always migraine",
+          "They raise ICP — the pattern suggests raised intracranial pressure"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": "content/Pediatrics/Chidomere/Introduction%20to%20Neurology_Investigations%20of%20the%20Central%20Nervous%20System/img/",
@@ -2785,483 +4913,1323 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "State the two objectives of this lecture.",
-         "a": "To know the clinical approach to neurological cases via history taking and physical examination; and to know the relevant investigations."
+         "a": "**To learn the clinical approach to neurological cases through history and examination, and to know the relevant investigations of the CNS.**\n\n## Understanding it\n- Objective 1 — the **clinical method** (history + examination).\n- Objective 2 — the **investigations** that back it up.\n\n>> Clinical assessment first, investigations second — the theme of the whole topic.",
+         "opts": [
+          "Clinical approach (history/exam) and relevant CNS investigations",
+          "Only brain anatomy",
+          "Only how to do a lumbar puncture",
+          "How to prescribe antibiotics"
+         ],
+         "ans": 0
         },
         {
          "q": "Define neurology.",
-         "a": "The branch of medicine concerned with the study and treatment of disorders of the nervous system."
+         "a": "**The branch of medicine concerned with the study and treatment of disorders of the nervous system.**\n\n## Understanding it\n- It deals with the **brain, spinal cord, and nerves**.\n- Both **diagnosis and treatment** of their disorders.\n\n>> Neurology = medicine of the nervous system.",
+         "opts": [
+          "Surgery of the brain only",
+          "Medicine of nervous-system disorders",
+          "Study of the heart",
+          "Study of muscles only"
+         ],
+         "ans": 1
         },
         {
          "q": "What does the nervous system do, and what does it comprise?",
-         "a": "It is a complex, sophisticated system that regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nerves."
+         "a": "**It regulates and coordinates body activities; it comprises the central nervous system (brain and spinal cord) and the peripheral nervous system.**\n\n## Understanding it\n- **Function** — regulate and coordinate the body.\n- **Parts** — CNS (brain + cord) and PNS (nerves).\n\n>> Coordinates the body via CNS + PNS.",
+         "opts": [
+          "Regulates/coordinates the body; CNS (brain+cord) + PNS",
+          "Digests food; gut",
+          "Pumps blood; heart and vessels",
+          "Filters waste; kidneys"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the four regions of the brain.",
-         "a": "The cerebrum; the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus); the brainstem (midbrain, pons and medulla); and the cerebellum."
+         "a": "**The cerebrum, the diencephalon (thalamus, hypothalamus, subthalamus, epithalamus), the brainstem (midbrain, pons, medulla), and the cerebellum.**\n\n## Understanding it\n- **Cerebrum** — the bulk (thinking, movement, sensation).\n- **Diencephalon** — thalamus/hypothalamus etc.\n- **Brainstem** — vital functions.\n- **Cerebellum** — coordination.\n\n>> Four regions: cerebrum, diencephalon, brainstem, cerebellum.",
+         "opts": [
+          "Cerebrum, diencephalon, brainstem, cerebellum",
+          "Cortex, medulla, pons, cord",
+          "Frontal, parietal, temporal, occipital only",
+          "Left and right hemispheres only"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the cerebrum.",
-         "a": "The cerebral hemispheres constitute the greatest mass of brain tissue; the outer layers are formed by the cellular grey matter known as the cerebral cortex."
+         "a": "**The cerebral hemispheres form the greatest mass of brain tissue; the outer layer is cellular grey matter (cortex).**\n\n## Understanding it\n- The cerebrum is the **largest** part.\n- Its **outer cortex** is grey matter (cell bodies); the inner is white matter (tracts).\n\n>> Cerebrum = biggest part, grey-matter cortex on the outside.",
+         "opts": [
+          "The smallest brain region",
+          "Part of the spinal cord",
+          "The coordination centre only",
+          "The largest brain mass, with a grey-matter cortex"
+         ],
+         "ans": 3
         },
         {
          "q": "What does consciousness depend on?",
-         "a": "Interaction between intact cerebral hemispheres and the activating (or arousal) system that lies in the diencephalon and upper brainstem."
+         "a": "**Interaction between intact cerebral hemispheres and the activating (arousal) system in the diencephalon and brainstem.**\n\n## Understanding it\n- Consciousness needs **both** the cortex (content) and the **reticular activating system** (arousal).\n- Damage to either can impair it.\n\n>> Consciousness = cortex + activating system working together.",
+         "opts": [
+          "Intact cortex plus the brainstem/diencephalon activating system",
+          "Only the cerebellum",
+          "Only the spinal cord",
+          "Only the peripheral nerves"
+         ],
+         "ans": 0
         },
         {
          "q": "What two types of lesion may impair consciousness to the point of coma?",
-         "a": "Either extensive disease of the cerebral cortex, or damage to the activating system."
+         "a": "**Either extensive disease of the cerebral cortex, or damage to the activating system.**\n\n## Understanding it\n- **Widespread cortical** damage removes the 'content'.\n- **Activating-system** damage removes the 'arousal'.\n- Either can cause coma.\n\n>> Coma = diffuse cortical injury OR activating-system injury.",
+         "opts": [
+          "Extensive cortical disease or damage to the activating system",
+          "A single small cortical spot",
+          "A peripheral nerve injury",
+          "A muscle disease"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the cerebellum primarily concerned with?",
-         "a": "Coordination and balance — it refines movements."
+         "a": "**Coordination and balance — it refines movements.**\n\n## Understanding it\n- The cerebellum **fine-tunes** movement and maintains **balance**.\n- Its disease causes ataxia, intention tremor, nystagmus.\n\n>> Cerebellum = coordination and balance.",
+         "opts": [
+          "Thinking and memory",
+          "Vital functions like breathing",
+          "Producing hormones",
+          "Coordination and balance"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the brainstem crucial for, and what are its three sections?",
-         "a": "Vital functions — breathing, heart rate, blood pressure and sleep-wake cycles; its three sections are the midbrain, pons and medulla."
+         "a": "**Vital functions — breathing, heart rate, blood pressure, sleep-wake cycles; its three sections are the midbrain, pons and medulla.**\n\n## Understanding it\n- The brainstem runs **life-support** functions.\n- Sections: **midbrain, pons, medulla**.\n\n>> Brainstem = vital functions; midbrain/pons/medulla.",
+         "opts": [
+          "Coordination; three lobes",
+          "Memory; two hemispheres",
+          "Vital functions; midbrain, pons, medulla",
+          "Vision; four regions"
+         ],
+         "ans": 2
         },
         {
          "q": "Describe the spinal cord and its two functions.",
-         "a": "A cylindrical mass of nervous tissue encased within the bony vertebral column; it contains long tracts connecting the brain with the peripheral nervous system, and it mediates reflex activity."
+         "a": "**A cylindrical mass of nervous tissue in the vertebral column; it carries long tracts connecting the brain to the body, and mediates reflexes.**\n\n## Understanding it\n- **Conduction** — long ascending/descending tracts link brain and body.\n- **Reflexes** — it integrates spinal reflex arcs.\n\n>> Cord = a conduction cable and a reflex centre.",
+         "opts": [
+          "Pumps blood to the brain",
+          "Only produces CSF",
+          "Only stores memory",
+          "Conduction (long tracts) and reflex mediation"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the three basic components of a reflex?",
-         "a": "A receiving apparatus, a nerve centre, and a responding apparatus."
+         "a": "**A receiving apparatus, a nerve centre, and a responding apparatus.**\n\n## Understanding it\n- **Receptor** (senses) → **centre** (processes) → **effector** (responds).\n- This is the reflex arc.\n\n>> Reflex = receptor → centre → effector.",
+         "opts": [
+          "Receptor, nerve centre, effector",
+          "Artery, vein, capillary",
+          "Only a single nerve",
+          "Bone, muscle, tendon"
+         ],
+         "ans": 0
         },
         {
          "q": "List the conventional order of clerking in medicine.",
-         "a": "Presenting complaint; history of the presenting complaint; past medical history; past surgical history; pregnancy/perinatal/postnatal history; immunization; developmental milestones; family and social history; and drug history/allergy."
+         "a": "**Presenting complaint; history of presenting complaint; past medical history; past surgical history; pregnancy/perinatal history; then developmental, family and social history.**\n\n## Understanding it\n- A **fixed order** ensures completeness.\n- In children, pregnancy/perinatal and developmental history are essential extras.\n\n>> Follow the standard clerking sequence, adding perinatal + developmental history in children.",
+         "opts": [
+          "PC, HPC, PMH, PSH, perinatal, developmental, family, social",
+          "Investigations first",
+          "Only the presenting complaint",
+          "Examination then history"
+         ],
+         "ans": 0
         },
         {
          "q": "What is described as the cornerstone of neurologic assessment, and who should the informants be?",
-         "a": "A detailed history; informants should be the parents, and older children (over 3–4 years) should be questioned."
+         "a": "**A detailed history is the cornerstone; informants should be the parents, and older children (over 3–4 years) should also be questioned.**\n\n## Understanding it\n- The **history** is the most important part.\n- **Parents** are the main informants; **older children** can contribute directly.\n\n>> History is king; ask parents and the older child.",
+         "opts": [
+          "Blood tests; only doctors",
+          "A brain scan; only the child",
+          "The examination; only nurses",
+          "A detailed history; parents (and children over 3–4)"
+         ],
+         "ans": 3
         },
         {
          "q": "How should the history begin?",
-         "a": "With the chief complaint and its significance in the context of normal development."
+         "a": "**With the chief complaint and its significance in the context of normal development.**\n\n## Understanding it\n- Start with **why they came** (chief complaint).\n- Interpret it against **normal development** for the age.\n\n>> Begin with the complaint, framed by developmental norms.",
+         "opts": [
+          "With the chief complaint, in the context of normal development",
+          "With the family tree",
+          "With the drug history",
+          "With the examination"
+         ],
+         "ans": 0
         },
         {
          "q": "What six features should the history of the presenting complaint address?",
-         "a": "Location, quality, intensity, duration, associated features, and alleviating or exacerbating factors."
+         "a": "**Location, quality, intensity, duration, associated features, and alleviating/exacerbating factors.**\n\n## Understanding it\n- A symptom is characterised by these **six attributes**.\n- E.g. a headache: where, what kind, how bad, how long, what else, what changes it.\n\n>> Six features fully describe any symptom.",
+         "opts": [
+          "Location, quality, intensity, duration, associated features, aggravating/relieving factors",
+          "Only the family history",
+          "Only the child's age",
+          "Only how long it lasts"
+         ],
+         "ans": 0
         },
         {
          "q": "Which pregnancy complications should be asked about in a neurological history?",
-         "a": "Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls."
+         "a": "**Pregnancy-induced hypertension, pre-eclampsia, gestational diabetes, vaginal bleeding, infections, and falls.**\n\n## Understanding it\n- These maternal problems can **injure the developing brain**.\n- Each is a recognised antenatal risk for neurological disease.\n\n>> Ask about PIH/pre-eclampsia, GDM, bleeding, infections, trauma.",
+         "opts": [
+          "Only the baby's weight",
+          "Only the delivery method",
+          "Only the mother's age",
+          "PIH, pre-eclampsia, GDM, bleeding, infections, falls"
+         ],
+         "ans": 3
         },
         {
          "q": "What substances should be asked about in the pregnancy history?",
-         "a": "Drugs — prescription, herbal and illicit — and alcohol use."
+         "a": "**Drugs — prescription, herbal and illicit — and alcohol use.**\n\n## Understanding it\n- Many drugs and **alcohol** are teratogenic/neurotoxic to the fetus.\n- Include **prescription, herbal and illicit** substances.\n\n>> Ask about all drugs and alcohol in pregnancy.",
+         "opts": [
+          "Only prescription drugs",
+          "Prescription, herbal and illicit drugs, and alcohol",
+          "No substances are relevant",
+          "Only alcohol"
+         ],
+         "ans": 1
         },
         {
          "q": "What does reduced or absent fetal movement suggest?",
-         "a": "Neuromuscular disorders."
+         "a": "**Neuromuscular disorders.**\n\n## Understanding it\n- Fetal movement needs **working nerves and muscles**.\n- Reduced movement is an early clue to a **neuromuscular** problem.\n\n>> Poor fetal movement → suspect neuromuscular disease.",
+         "opts": [
+          "A healthy pregnancy",
+          "Gestational diabetes",
+          "A skin disorder",
+          "Neuromuscular disorders"
+         ],
+         "ans": 3
         },
         {
          "q": "What delivery details should be recorded?",
-         "a": "Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication); presence or absence of fetal distress; any resuscitation; birth weight; and any complicated hospital stay."
+         "a": "**Gestational age at birth and mode of delivery — SVD, vacuum- or forceps-assisted, or C/S (elective or emergency, and the indication).**\n\n## Understanding it\n- **Gestation** and **mode of delivery** matter.\n- For a caesarean, the **indication** may itself be the neurological event (e.g. fetal distress).\n\n>> Record gestation, mode of delivery, and the reason for any operative delivery.",
+         "opts": [
+          "Only the baby's name",
+          "The hospital's address",
+          "Only the time of day",
+          "Gestational age and mode of delivery (incl. C/S indication)"
+         ],
+         "ans": 3
         },
         {
          "q": "If the infant had jaundice, what two things must be determined?",
-         "a": "Both the degree of jaundice and how it was managed."
+         "a": "**Both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe, untreated jaundice can cause **kernicterus** (brain injury).\n- So establish **how bad** it was and **whether it was treated**.\n\n>> Jaundice history: how severe, and how managed (to detect kernicterus risk).",
+         "opts": [
+          "Only the date it started",
+          "The degree of jaundice and how it was managed",
+          "Only the baby's weight",
+          "The mother's blood group only"
+         ],
+         "ans": 1
         },
         {
          "q": "Name the four domains of development.",
-         "a": "Social, cognitive, language, and motor skills (fine and gross)."
+         "a": "**Social, cognitive, language, and motor skills (fine and gross).**\n\n## Understanding it\n- Development is tracked across **four domains**.\n- **Motor** splits into fine and gross.\n\n>> Domains: social, cognitive, language, motor.",
+         "opts": [
+          "Vision, hearing, taste, smell",
+          "Social, cognitive, language, motor",
+          "Height, weight, head, teeth",
+          "Reflexes, tone, power, sensation"
+         ],
+         "ans": 1
         },
         {
          "q": "Distinguish isolated from global developmental delay.",
-         "a": "Isolated delay affects one domain; global delay affects two or more domains."
+         "a": "**Isolated delay affects one domain; global delay affects two or more domains.**\n\n## Understanding it\n- **Isolated** — a single area lags (e.g. only speech).\n- **Global** — **two or more** areas lag together.\n\n>> One domain = isolated; ≥2 domains = global.",
+         "opts": [
+          "They are the same",
+          "Isolated = one domain; global = two or more",
+          "Isolated = all domains; global = one",
+          "Global affects only motor"
+         ],
+         "ans": 1
         },
         {
          "q": "What does a static abnormality in development from birth suggest?",
-         "a": "A congenital, intrauterine, or perinatal cause."
+         "a": "**A congenital, intrauterine, or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never lost a skill' = a **fixed (static)** deficit present from birth.\n- Points to a **congenital/perinatal** injury, not a progressive disease.\n\n>> Static from birth = congenital/perinatal cause.",
+         "opts": [
+          "A progressive degenerative disease",
+          "A recent infection",
+          "A nutritional deficiency only",
+          "A congenital, intrauterine or perinatal cause"
+         ],
+         "ans": 3
         },
         {
          "q": "What does a loss of skills (regression) over time strongly suggest?",
-         "a": "An underlying degenerative disease of the CNS, such as an inborn error of metabolism."
+         "a": "**An underlying degenerative disease of the CNS, such as an inborn error of metabolism.**\n\n## Understanding it\n- **Losing** previously acquired skills (regression) is different from never gaining them.\n- It points to an **active, progressive** process — a neurodegenerative/metabolic disease.\n\n>> Regression (skill loss) = degenerative CNS disease until proven otherwise.",
+         "opts": [
+          "Normal development",
+          "A simple delay that will catch up",
+          "A degenerative CNS disease (e.g. inborn error of metabolism)",
+          "A static perinatal injury"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 3 months.",
-         "a": "Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos and laughs."
+         "a": "**Gross motor: supports weight on forearms. Fine motor: opens hands spontaneously. Social: smiles appropriately. Language: coos/vocalises.**\n\n## Understanding it\n- 3 months: **forearm support** (prone), **hands open**, **social smile**, **cooing**.\n\n>> 3 months = forearm support, social smile.",
+         "opts": [
+          "Walks with one hand held",
+          "Sits and transfers objects",
+          "Forearm support, hands open, social smile, coos",
+          "Runs and builds a tower"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 6 months.",
-         "a": "Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes and dislikes. Language: babbles."
+         "a": "**Gross motor: sits momentarily. Fine motor: transfers objects. Social: shows likes/dislikes. Language: babbles.**\n\n## Understanding it\n- 6 months: **sits momentarily**, **transfers** objects hand-to-hand, **babbles**.\n\n>> 6 months = sits briefly, transfers, babbles.",
+         "opts": [
+          "Runs and builds towers",
+          "Walks and says 2–3 word sentences",
+          "Sits momentarily, transfers objects, babbles",
+          "Pincer grasp and pat-a-cake"
+         ],
+         "ans": 2
         },
         {
          "q": "State the milestones at 9 months.",
-         "a": "Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake and peek-a-boo. Language: imitates sounds."
+         "a": "**Gross motor: pulls to stand. Fine motor: pincer grasp. Social: plays pat-a-cake/peek-a-boo. Language: imitates sounds.**\n\n## Understanding it\n- 9 months: **pulls to stand**, **pincer grasp**, plays **pat-a-cake**, **imitates sounds**.\n\n>> 9 months = pulls to stand, pincer grasp.",
+         "opts": [
+          "Only smiles and coos",
+          "Pulls to stand, pincer grasp, pat-a-cake, imitates sounds",
+          "Walks upstairs alone",
+          "Runs and builds a 6-block tower"
+         ],
+         "ans": 1
         },
         {
          "q": "State the milestones at 12 months.",
-         "a": "Gross motor: walks with 1 hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 meaningful words."
+         "a": "**Gross motor: walks with one hand held. Fine motor: releases an object on command. Social: comes when called. Language: 1–2 words.**\n\n## Understanding it\n- 12 months: **walks with one hand held**, **releases on command**, **1–2 words**.\n\n>> 12 months = walks with hand held, 1–2 words.",
+         "opts": [
+          "Walks with one hand held, releases on command, 1–2 words",
+          "Only sits momentarily",
+          "Runs and speaks in sentences",
+          "Pincer grasp and babbles"
+         ],
+         "ans": 0
         },
         {
          "q": "State the milestones at 18 months.",
-         "a": "Gross motor: walks upstairs with assistance. Fine motor: feeds self from spoon. Social: mimics actions of others. Language: at least 6 words."
+         "a": "**Gross motor: walks upstairs with assistance. Fine motor: feeds self from a spoon. Social: mimics others. Language: several words.**\n\n## Understanding it\n- 18 months: **stairs with help**, **self-feeds with spoon**, **mimics**, several words.\n\n>> 18 months = stairs with help, self-feeds.",
+         "opts": [
+          "Walks upstairs assisted, self-feeds with spoon, mimics others",
+          "Only babbles",
+          "Pincer grasp",
+          "Runs and builds a tower of 6"
+         ],
+         "ans": 0
         },
         {
          "q": "State the milestones at 24 months.",
-         "a": "Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2- to 3-word sentences."
+         "a": "**Gross motor: runs. Fine motor: builds a tower of 6 blocks. Social: plays with others. Language: 2–3-word sentences.**\n\n## Understanding it\n- 24 months: **runs**, **tower of 6**, **plays with others**, **2–3-word sentences**.\n\n>> 24 months = runs, tower of 6, 2–3 word sentences.",
+         "opts": [
+          "Sits momentarily, babbles",
+          "Walks with one hand held, 1–2 words",
+          "Runs, tower of 6 blocks, plays with others, 2–3-word sentences",
+          "Pulls to stand, pincer grasp"
+         ],
+         "ans": 2
         },
         {
          "q": "What should the family history cover in neurology?",
-         "a": "History of neurologic disease including developmental delay and inherited disorders for all first- and second-degree relatives; miscarriages or fetal deaths (gender and gestational age at demise); and ethnic background, including whether the parents are related."
+         "a": "**Neurologic disease including developmental delay and inherited disorders, in all first- and second-degree relatives.**\n\n## Understanding it\n- Many neurological conditions are **inherited**.\n- Ask about neurologic disease/developmental delay in **close relatives**.\n\n>> Family history hunts for inherited neuro disease in first/second-degree relatives.",
+         "opts": [
+          "Neurologic disease/developmental delay in first- and second-degree relatives",
+          "Only the mother's diet",
+          "No family history is needed",
+          "Only the father's height"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is consanguinity important in a neurological history?",
-         "a": "Because the incidence of metabolic and degenerative disorders of the CNS is increased significantly in children of consanguineous marriages."
+         "a": "**Because the incidence of metabolic and degenerative CNS disorders is significantly increased in children of consanguineous unions.**\n\n## Understanding it\n- Related parents share more genes, raising the chance both carry the same **recessive** mutation.\n- This increases **autosomal recessive** metabolic/degenerative disease.\n\n>> Consanguinity → higher recessive metabolic/degenerative disease risk.",
+         "opts": [
+          "It only affects blood group",
+          "It protects against disease",
+          "It raises the risk of recessive metabolic/degenerative CNS disease",
+          "It has no genetic effect"
+         ],
+         "ans": 2
         },
         {
          "q": "What should the social history detail?",
-         "a": "The child's current living environment and relationship with family members; recent stressors such as divorce, remarriage, birth of a sibling or death of a loved one; academic and social performance with attention to abrupt changes; and peer relationships."
+         "a": "**The child's living environment and family relationships; recent stressors such as divorce, remarriage or bereavement.**\n\n## Understanding it\n- The **home environment** and **relationships** affect a child's neurodevelopment and behaviour.\n- **Recent stressors** may explain behavioural/functional changes.\n\n>> Social history = environment, relationships, recent stressors.",
+         "opts": [
+          "Living environment, family relationships, recent stressors",
+          "The parents' blood pressure",
+          "Only the school name",
+          "Only the family income"
+         ],
+         "ans": 0
         },
         {
          "q": "What may it indicate if a child cannot name at least two or three playmates?",
-         "a": "Abnormal social development."
+         "a": "**Abnormal social development.**\n\n## Understanding it\n- Naming playmates reflects normal **social** interaction for age.\n- Inability suggests a **social developmental** problem (e.g. autism spectrum).\n\n>> Can't name playmates → possible abnormal social development.",
+         "opts": [
+          "Abnormal social development",
+          "A hearing defect only",
+          "Normal development",
+          "A motor problem"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is a review of systems essential in neurology?",
-         "a": "Because abnormalities of the CNS often manifest with vague, non-focal symptoms that may be misattributed to other organ systems — e.g. vomiting, constipation and urinary incontinence."
+         "a": "**Because CNS abnormalities often present with vague, non-focal symptoms that may be misattributed to other organ systems.**\n\n## Understanding it\n- Neurological disease can masquerade as **GI, urinary or general** complaints (e.g. morning vomiting from raised ICP).\n- A systems review catches these misleading clues.\n\n>> Non-focal symptoms hide CNS disease — the ROS uncovers them.",
+         "opts": [
+          "It replaces the examination",
+          "CNS disease often presents with vague, non-focal symptoms",
+          "To save time",
+          "Neurology never affects other systems"
+         ],
+         "ans": 1
         },
         {
          "q": "How should the physical examination of a child be conducted?",
-         "a": "In a non-threatening, child-friendly setting, allowing the child to sit where most comfortable — on a parent's lap or on the floor."
+         "a": "**In a non-threatening, child-friendly setting, letting the child sit where most comfortable — on a parent's lap or the floor.**\n\n## Understanding it\n- A frightened child won't cooperate.\n- Examine **opportunistically** in a comfortable, non-threatening way.\n\n>> Child-friendly, non-threatening, opportunistic examination.",
+         "opts": [
+          "In a child-friendly setting, where the child is comfortable",
+          "Only after sedation",
+          "Standing at attention",
+          "Strapped to a couch"
+         ],
+         "ans": 0
         },
         {
          "q": "Which tests should be reserved for the end of the examination, and why?",
-         "a": "Invasive, painful or discomforting tests such as measurement of head circumference and the gag reflex — because the more the examination seems like a game, the more the child will cooperate."
+         "a": "**Invasive, painful or uncomfortable tests such as head-circumference measurement and the gag reflex — because they upset the child.**\n\n## Understanding it\n- Save the **distressing** manoeuvres for last so the child stays cooperative for everything else.\n- Examples: gag reflex, head circumference.\n\n>> Do the upsetting parts last.",
+         "opts": [
+          "Painful/uncomfortable tests (e.g. gag reflex, head circumference)",
+          "The general observation",
+          "The first thing you do",
+          "Watching the child play"
+         ],
+         "ans": 0
         },
         {
          "q": "What does general observation include?",
-         "a": "The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head — size, shape, fontanels and OFC."
+         "a": "**The child's appearance, behaviour, mental state, abnormal posture or motor function, and the head (size, shape, fontanelles).**\n\n## Understanding it\n- Much neurological information comes from just **watching**.\n- Note appearance, behaviour, posture, movements, and the head.\n\n>> Observation alone yields a huge amount before you touch the child.",
+         "opts": [
+          "Only the reflexes",
+          "Only the pupils",
+          "Only the blood pressure",
+          "Appearance, behaviour, mental state, posture/movement, head"
+         ],
+         "ans": 3
         },
         {
          "q": "When does the examination begin?",
-         "a": "During the interview — observing the child's appearance and movements, dysmorphic facies, abnormality of motor function such as hemiparesis or gait disturbance, and behaviour while playing."
+         "a": "**During the interview — observing the child's appearance, movements, dysmorphic facies and motor function while talking to the parents.**\n\n## Understanding it\n- Examination starts the moment you **see** the child, not when you lay hands on them.\n- Watch during history-taking.\n\n>> The exam begins with observation during the interview.",
+         "opts": [
+          "Only in a dark room",
+          "Only after the history is finished",
+          "After investigations",
+          "During the interview, by observation"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the normal pattern of a child's behaviour during a consultation?",
-         "a": "A normal child usually plays independently early in the visit but then engages in the interview process."
+         "a": "**A normal child usually plays independently early in the visit, then engages in the interview process.**\n\n## Understanding it\n- Normal children **explore/play** at first, then interact.\n- Deviations (no play, no engagement) may signal a problem.\n\n>> Normal: plays first, then engages.",
+         "opts": [
+          "Plays independently early, then engages",
+          "Sits perfectly still throughout",
+          "Never interacts at all",
+          "Cries the entire visit"
+         ],
+         "ans": 0
         },
         {
          "q": "What does microcephaly reflect, and what causes it?",
-         "a": "A small head frequently reflects a small brain; the cause is a perinatal or postnatal insult to the brain."
+         "a": "**A small head frequently reflects a small brain; it results from a perinatal or postnatal insult to the brain.**\n\n## Understanding it\n- Skull growth follows **brain** growth.\n- A small head often means a **small/injured brain** (perinatal/postnatal insult).\n\n>> Microcephaly ≈ small brain from a perinatal/postnatal insult.",
+         "opts": [
+          "A small brain, from a perinatal/postnatal insult",
+          "A large brain",
+          "A normal variant only",
+          "Excess CSF"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the causes of macrocephaly?",
-         "a": "Most commonly familial; but it may be from a disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus."
+         "a": "**Most commonly familial; but also disturbance of growth, chromosomal defect, storage disorder, or hydrocephalus.**\n\n## Understanding it\n- The commonest cause is **benign familial** big heads.\n- Pathological causes include **hydrocephalus, storage disorders, chromosomal defects**.\n\n>> Macrocephaly: usually familial, but exclude hydrocephalus/storage disease.",
+         "opts": [
+          "Only microcephaly's opposite artefact",
+          "Most commonly familial; also hydrocephalus, storage/chromosomal disorders",
+          "Always a tumour",
+          "Always hydrocephalus"
+         ],
+         "ans": 1
         },
         {
          "q": "What is craniosynostosis?",
-         "a": "Premature closure of cranial sutures, causing a variety of abnormal head shapes."
+         "a": "**Premature closure of cranial sutures, causing a variety of abnormal head shapes.**\n\n## Understanding it\n- Sutures normally stay open to let the skull grow.\n- **Early fusion** distorts skull shape.\n\n>> Craniosynostosis = premature suture fusion → abnormal head shape.",
+         "opts": [
+          "Widening of the sutures",
+          "A brain tumour",
+          "Premature closure of cranial sutures",
+          "Excess CSF in the ventricles"
+         ],
+         "ans": 2
         },
         {
          "q": "What head shape suggests chronic subdural haemorrhage, and why?",
-         "a": "A square or box-like shape, due to the long-standing presence of fluid in the subdural space."
+         "a": "**A square or box-like head, due to long-standing fluid in the subdural space.**\n\n## Understanding it\n- Chronic subdural fluid slowly expands the skull into a **box-like** shape.\n\n>> Box-shaped head = chronic subdural collection.",
+         "opts": [
+          "A perfectly round head",
+          "A pointed (tower) head",
+          "A square/box-like head",
+          "A flattened occiput"
+         ],
+         "ans": 2
         },
         {
          "q": "What is plagiocephaly, and in which infants is it particularly prominent?",
-         "a": "Flattening of the skull; it can be seen in normal infants but may be particularly prominent in hypotonic or weak infants, who are less mobile."
+         "a": "**Flattening of the skull; it occurs in normal infants but is particularly prominent in hypotonic or weak infants.**\n\n## Understanding it\n- **Positional flattening** of one part of the skull.\n- More marked in **hypotonic/weak** infants who lie in one position.\n\n>> Plagiocephaly = skull flattening, worse in hypotonic infants.",
+         "opts": [
+          "A box-shaped head",
+          "Skull flattening, prominent in hypotonic/weak infants",
+          "Excess CSF",
+          "Premature suture fusion"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the anterior fontanel.",
-         "a": "Diamond-shaped, at the junction of the frontal and parietal bones, measuring 2 × 2 cm, and closing at 9–18 months."
+         "a": "**Diamond-shaped, at the junction of the frontal and parietal bones, measuring about 2 × 2 cm, closing at 9–18 months.**\n\n## Understanding it\n- **Diamond** shape, front of the skull.\n- Closes late — **9–18 months**.\n\n>> Anterior fontanelle: diamond, ~2×2 cm, closes 9–18 months.",
+         "opts": [
+          "Square, closes at 5 years",
+          "Round, closes at birth",
+          "Triangular, closes at 6–8 weeks",
+          "Diamond-shaped, ~2×2 cm, closes at 9–18 months"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the posterior fontanel.",
-         "a": "Triangular in shape, at the junction of the parietal and occipital bones, closing at 6–8 weeks."
+         "a": "**Triangular, at the junction of the parietal and occipital bones, closing at 6–8 weeks.**\n\n## Understanding it\n- **Triangular** shape, back of the skull.\n- Closes **early** — 6–8 weeks.\n\n>> Posterior fontanelle: triangular, closes 6–8 weeks.",
+         "opts": [
+          "Square, never closes",
+          "Triangular, closes at 6–8 weeks",
+          "Round, closes at 1 year",
+          "Diamond-shaped, closes at 18 months"
+         ],
+         "ans": 1
         },
         {
          "q": "What does a bulging fontanel indicate, and what is the important caveat?",
-         "a": "Increased intracranial pressure — but it also occurs with vigorous crying in a normal infant."
+         "a": "**Increased intracranial pressure — but it also bulges with vigorous crying in a normal infant.**\n\n## Understanding it\n- A tense/bulging fontanelle suggests **raised ICP**.\n- **Caveat:** crying (and lying flat) bulges it normally — assess when **calm and upright**.\n\n>> Bulging = raised ICP, unless the baby is crying.",
+         "opts": [
+          "Raised ICP — but crying also bulges it normally",
+          "Always normal",
+          "Always dehydration",
+          "Low intracranial pressure"
+         ],
+         "ans": 0
         },
         {
          "q": "What might a very small or absent anterior fontanel at birth indicate?",
-         "a": "Craniosynostosis or microcephaly."
+         "a": "**Craniosynostosis or microcephaly.**\n\n## Understanding it\n- If the fontanelle is tiny/absent at birth, the skull may have **fused early** (craniosynostosis) or the **brain is small** (microcephaly).\n\n>> Small/absent AF at birth → craniosynostosis or microcephaly.",
+         "opts": [
+          "Normal finding",
+          "Hydrocephalus",
+          "Raised ICP",
+          "Craniosynostosis or microcephaly"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the occipitofrontal circumference reflect?",
-         "a": "Brain growth — it should be measured and documented."
+         "a": "**Brain growth — it should be measured and documented.**\n\n## Understanding it\n- Head (occipitofrontal) circumference tracks **brain growth**.\n- Serial measurements plotted on a chart are essential.\n\n>> OFC = a proxy for brain growth; always measure and plot.",
+         "opts": [
+          "Body weight",
+          "Chest size",
+          "Brain growth",
+          "Blood pressure"
+         ],
+         "ans": 2
         },
         {
          "q": "State the average head circumference of a term infant at birth and its rate of growth in the first year.",
-         "a": "34–35 cm at birth; increasing by 2 cm/month for the 1st 3 months, 1 cm/month for the 2nd 3 months, and 0.5 cm/month for the last 6 months."
+         "a": "**34–35 cm at birth; increasing by 2 cm/month for the first 3 months, 1 cm/month for the second 3 months, and 0.5 cm/month for the last 6 months.**\n\n## Understanding it\n- Birth OFC ≈ **34–35 cm**.\n- Year 1 growth: **2 → 1 → 0.5 cm/month** across the three periods.\n\n>> 34–35 cm at birth; 2,1,0.5 cm/month by trimester of infancy.",
+         "opts": [
+          "20 cm at birth; no growth",
+          "34–35 cm at birth; 2, 1, 0.5 cm/month across year one",
+          "45 cm at birth; 5 cm/month",
+          "30 cm; 1 cm/year"
+         ],
+         "ans": 1
         },
         {
          "q": "State the rate of head growth after the first year.",
-         "a": "0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant."
+         "a": "**0.25 cm/month from 1–3 years, then 0.5 cm/year up to 6 years; after 6 years it ceases to be relevant.**\n\n## Understanding it\n- Growth **slows sharply** after infancy.\n- 1–3 yr: 0.25 cm/month; 3–6 yr: 0.5 cm/year; after 6 yr, no longer clinically tracked.\n\n>> Head growth tails off after year 1 and stops mattering after 6.",
+         "opts": [
+          "Stops entirely at age 1",
+          "1 cm/month lifelong",
+          "Continues at 2 cm/month",
+          "0.25 cm/month (1–3 yr), 0.5 cm/year (to 6 yr), then irrelevant"
+         ],
+         "ans": 3
         },
         {
          "q": "State the average rate of head growth in a healthy premature infant.",
-         "a": "0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week of development."
+         "a": "**0.5 cm in the first 2 weeks, 0.75 cm in the 3rd week, and 1.0 cm in the 4th week and every week thereafter until the 40th week.**\n\n## Understanding it\n- Preterm head growth **accelerates** over the first weeks: 0.5 → 0.75 → 1.0 cm/week.\n- Continues at ~1 cm/week until term (40 weeks).\n\n>> Preterm: 0.5, 0.75, then 1.0 cm/week to term.",
+         "opts": [
+          "No growth until term",
+          "0.1 cm/month",
+          "2 cm/week from birth",
+          "0.5 cm (wk 1–2), 0.75 cm (wk 3), 1.0 cm/week thereafter to 40 wk"
+         ],
+         "ans": 3
         },
         {
          "q": "List the eight steps in the sequence of central nervous system examination.",
-         "a": "Higher function; cranial nerves; motor functions (posture, nutrition of muscle, DTR, power, superficial reflexes); sensory; autonomic function; soft neurologic signs; cerebellar function; and gait."
+         "a": "**Higher function; cranial nerves; motor functions (posture, muscle nutrition, DTRs, power, superficial reflexes); sensory; cerebellar; autonomic/soft signs; gait; and meningeal signs.**\n\n## Understanding it\n- Work **top-down**: mind → cranial nerves → motor → sensory → cerebellar → autonomic → gait.\n- A fixed sequence prevents omissions.\n\n>> Higher function → cranial nerves → motor → sensory → cerebellar → gait.",
+         "opts": [
+          "Only the cranial nerves",
+          "Higher function, cranial nerves, motor, sensory, cerebellar, autonomic, gait",
+          "Just check reflexes",
+          "Start with gait then stop"
+         ],
+         "ans": 1
         },
         {
          "q": "What is assessed under sensory examination?",
-         "a": "Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign."
+         "a": "**Light touch, pain, temperature, joint position, vibration, stereognosis, and Romberg's sign.**\n\n## Understanding it\n- Tests both **superficial** (touch, pain, temperature) and **deep** (joint position, vibration) sensation.\n- Plus cortical (stereognosis) and Romberg's.\n\n>> Sensory exam = touch, pain, temp, proprioception, vibration, stereognosis, Romberg.",
+         "opts": [
+          "Only reflexes",
+          "Only the cranial nerves",
+          "Touch, pain, temperature, proprioception, vibration, stereognosis, Romberg",
+          "Only power and tone"
+         ],
+         "ans": 2
         },
         {
          "q": "What is assessed under autonomic function and soft neurologic signs?",
-         "a": "Autonomic: rest and exercise pulse and blood pressure. Soft neurologic signs: neck stiffness, Kernig's sign and Brudzinski's sign."
+         "a": "**Autonomic: pulse and blood pressure at rest and on exercise. Soft signs: neck stiffness, Kernig's and Brudzinski's signs.**\n\n## Understanding it\n- **Autonomic** — cardiovascular responses (pulse/BP).\n- **Soft/meningeal signs** — neck stiffness, Kernig's, Brudzinski's (meningeal irritation).\n\n>> Autonomic = pulse/BP; soft signs = meningeal (Kernig/Brudzinski).",
+         "opts": [
+          "Only gait",
+          "Only muscle power",
+          "Only cranial nerves",
+          "Autonomic: pulse/BP; soft signs: neck stiffness, Kernig's, Brudzinski's"
+         ],
+         "ans": 3
         },
         {
          "q": "What is assessed under cerebellar function?",
-         "a": "Intention tremor, nystagmus and dysdiadochokinesia."
+         "a": "**Intention tremor, nystagmus and dysdiadochokinesia.**\n\n## Understanding it\n- Cerebellar signs: **intention tremor** (worsens near target), **nystagmus**, and **dysdiadochokinesia** (impaired rapid alternating movement).\n\n>> Cerebellar: intention tremor, nystagmus, dysdiadochokinesia.",
+         "opts": [
+          "Intention tremor, nystagmus, dysdiadochokinesia",
+          "Neck stiffness and Kernig's",
+          "Ptosis, miosis, anhidrosis",
+          "Power and tone"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the six gait patterns listed.",
-         "a": "Hemiparetic; ataxic (cerebellar and sensory); spastic; steppage; myopathic; and waddling."
+         "a": "**Hemiparetic, ataxic (cerebellar and sensory), spastic, steppage, myopathic, and waddling.**\n\n## Understanding it\n- Each abnormal gait maps to a lesion: **hemiparetic** (stroke), **ataxic** (cerebellar/sensory), **spastic**, **steppage** (foot drop), **myopathic/waddling** (proximal weakness).\n\n>> Six gaits: hemiparetic, ataxic, spastic, steppage, myopathic, waddling.",
+         "opts": [
+          "Hemiparetic, ataxic, spastic, steppage, myopathic, waddling",
+          "Left and right only",
+          "Fast and slow only",
+          "Only normal and abnormal"
+         ],
+         "ans": 0
         },
         {
          "q": "On what will the examiner's assessment of candidates be based?",
-         "a": "Overall attention to sequence, composure, and speed of performance."
+         "a": "**Overall attention to sequence, composure, and speed of performance.**\n\n## Understanding it\n- In the OSPE, marks go for a **systematic sequence**, staying **composed**, and reasonable **speed**.\n\n>> Be systematic, calm, and efficient.",
+         "opts": [
+          "Only the final diagnosis",
+          "The equipment brand",
+          "Attention to sequence, composure, and speed",
+          "How fast you talk"
+         ],
+         "ans": 2
         },
         {
          "q": "List the five instruments for neurologic examination.",
-         "a": "Inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool."
+         "a": "**An inelastic measuring tape, pen torch, tuning fork (256 Hz), tendon hammer, and cotton wool.**\n\n## Understanding it\n- Each tool matches a test: **tape** (head circumference), **torch** (pupils), **256 Hz fork** (vibration), **hammer** (reflexes), **cotton wool** (light touch).\n\n>> Tape, torch, 256 Hz fork, hammer, cotton wool.",
+         "opts": [
+          "Measuring tape, pen torch, 256 Hz tuning fork, tendon hammer, cotton wool",
+          "Scalpel and forceps",
+          "Stethoscope and BP cuff only",
+          "Ophthalmoscope only"
+         ],
+         "ans": 0
         },
         {
          "q": "State the levels of consciousness.",
-         "a": "Conscious, lethargic, obtundation, stupor, and coma."
+         "a": "**Conscious, lethargic, obtundation, stupor, and coma.**\n\n## Understanding it\n- A graded scale of **decreasing arousal**: alert → lethargic → obtunded → stupor → coma.\n\n>> Conscious → lethargic → obtundation → stupor → coma.",
+         "opts": [
+          "Grades 0–5",
+          "Awake and asleep only",
+          "Conscious, lethargic, obtundation, stupor, coma",
+          "Mild, moderate, severe"
+         ],
+         "ans": 2
         },
         {
          "q": "Distinguish aphasia from dysarthria.",
-         "a": "Aphasia is inability to speak, due to damage to Broca's area; dysarthria is inability to speak properly, due to damage to the articulation system."
+         "a": "**Aphasia is inability to speak (language) from damage to Broca's area; dysarthria is inability to articulate properly from damage to the motor/muscular apparatus of speech.**\n\n## Understanding it\n- **Aphasia** — a **language** problem (Broca's area) — the words themselves are wrong/absent.\n- **Dysarthria** — a **motor** problem — words are right but slurred.\n\n>> Aphasia = language (Broca); dysarthria = articulation (muscles).",
+         "opts": [
+          "Aphasia = language loss (Broca's); dysarthria = poor articulation (motor)",
+          "They are identical",
+          "Both are hearing problems",
+          "Aphasia is slurring; dysarthria is word loss"
+         ],
+         "ans": 0
         },
         {
          "q": "What else is assessed under higher function?",
-         "a": "Intelligence and memory (alertness in a younger child, simple arithmetic in an older child); orientation of time, place and person; and cerebral dominance — most people are left."
+         "a": "**Intelligence and memory (alertness in younger children, arithmetic in older ones), plus orientation to time, place and person.**\n\n## Understanding it\n- Higher function also covers **intelligence/memory** and **orientation** (time/place/person).\n- Age-appropriate tasks are used.\n\n>> Higher function = intelligence, memory, orientation.",
+         "opts": [
+          "Intelligence, memory, and orientation (time/place/person)",
+          "Only the pupils",
+          "Only reflexes",
+          "Only muscle power"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the twelve cranial nerves in order.",
-         "a": "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, and hypoglossal."
+         "a": "**Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory (vestibulocochlear), glossopharyngeal, vagus, accessory, hypoglossal.**\n\n## Understanding it\n- CN I–XII in order; classic mnemonics exist ('On Old Olympus...').\n- Know the sequence for systematic testing.\n\n>> I–XII: olfactory → optic → oculomotor → trochlear → trigeminal → abducent → facial → auditory → glossopharyngeal → vagus → accessory → hypoglossal.",
+         "opts": [
+          "In reverse order XII–I",
+          "Only the optic and facial",
+          "Olfactory, optic, oculomotor, trochlear, trigeminal, abducent, facial, auditory, glossopharyngeal, vagus, accessory, hypoglossal",
+          "Only 10 nerves exist"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by visual acuity, fields, colour vision and fundi, and by pupillary reactions?",
-         "a": "Visual acuity, field of vision, colour vision and ocular fundi test CN 2; pupillary reactions test CN 2 and 3."
+         "a": "**Acuity, fields, colour vision and fundi test CN II (optic); pupillary reactions test CN II and III.**\n\n## Understanding it\n- **CN II** carries vision (acuity/fields/colour/fundi).\n- The pupillary light reflex needs **CN II (afferent)** and **CN III (efferent)**.\n\n>> Vision = CN II; pupil reflex = CN II + III.",
+         "opts": [
+          "Vision → CN III only",
+          "Pupils → CN IV and VI",
+          "Vision → CN II; pupillary reactions → CN II and III",
+          "All test CN VII"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by extraocular movements, and by corneal reflexes and jaw movements?",
-         "a": "Extraocular movements test CN 3, 4 and 6; corneal reflexes and jaw movements test CN 5."
+         "a": "**Extraocular movements test CN III, IV and VI; corneal reflexes and jaw movements test CN V.**\n\n## Understanding it\n- Eye movements need **III, IV, VI**.\n- The **corneal reflex** (sensory) and **jaw** (motor) are **CN V (trigeminal)**.\n\n>> Eye movement = III/IV/VI; corneal + jaw = V.",
+         "opts": [
+          "Corneal reflex → VII only",
+          "All test CN II",
+          "Eye movement → III/IV/VI; corneal reflex and jaw → V",
+          "Eye movement → V; jaw → VI"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cranial nerves are tested by facial movements, hearing, swallowing and palate, voice, speech and tongue movement?",
-         "a": "Facial movements CN 7; hearing CN 8; swallowing and rise of palate CN 9 and 10; voice CN 10; speech CN 5, 7, 10 and 12; tongue movement CN 12."
+         "a": "**Facial movements CN VII; hearing CN VIII; swallowing/palate CN IX and X; voice CN X; speech CN V, VII, X and XII; tongue CN XII.**\n\n## Understanding it\n- Map each function to its nerve(s): face (VII), hearing (VIII), swallow/palate (IX/X), voice (X), tongue (XII).\n- Speech needs several nerves together.\n\n>> Face VII, hear VIII, swallow IX/X, voice X, tongue XII.",
+         "opts": [
+          "Face VII; hearing VIII; swallow/palate IX–X; voice X; tongue XII",
+          "Face VIII; hearing VII",
+          "All are CN II",
+          "Tongue is CN X"
+         ],
+         "ans": 0
         },
         {
          "q": "State the four tests used to assess muscle tone and the findings in hypotonia.",
-         "a": "Palpation of muscles — flabby; posture of limb — limp; resistance to passive movement — decreased; range of passive movement — increased."
+         "a": "**Palpation (flabby), posture of the limb (limp), resistance to passive movement (decreased), and range of passive movement (increased) — in hypotonia.**\n\n## Understanding it\n- Four tone checks: palpation, resting posture, resistance, and range.\n- **Hypotonia** = flabby, limp, low resistance, **increased** range.\n\n>> Hypotonia: flabby, limp, low resistance, hypermobile.",
+         "opts": [
+          "Rigid, stiff, high resistance",
+          "No change from normal",
+          "All findings increased",
+          "Palpation flabby, posture limp, resistance decreased, range increased"
+         ],
+         "ans": 3
         },
         {
          "q": "State the findings of the four tone tests in hypertonia.",
-         "a": "Palpation — rigid; posture of limb — stiff; resistance to passive movement — increased; range of passive movement — decreased."
+         "a": "**Palpation (rigid), posture of the limb (stiff), resistance to passive movement (increased), and range of passive movement (decreased).**\n\n## Understanding it\n- **Hypertonia** is the mirror of hypotonia: rigid, stiff, **high** resistance, **reduced** range.\n\n>> Hypertonia: rigid, stiff, high resistance, restricted range.",
+         "opts": [
+          "Palpation rigid, posture stiff, resistance increased, range decreased",
+          "No change",
+          "Flabby, limp, low resistance",
+          "All decreased"
+         ],
+         "ans": 0
         },
         {
          "q": "Define opisthotonos and state when it occurs.",
-         "a": "Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; it may be exhibited by patients with either spasticity or rigidity."
+         "a": "**Severe hyperextension of the spine caused by hypertonia of the paraspinal muscles; seen with severe hypertonia (e.g. kernicterus, tetanus, meningitis).**\n\n## Understanding it\n- The back arches strongly backward due to **paraspinal hypertonia**.\n- A sign of severe CNS irritation/injury.\n\n>> Opisthotonos = arched-back hyperextension from paraspinal hypertonia.",
+         "opts": [
+          "Flaccid limbs",
+          "A normal resting posture",
+          "Backward spinal hyperextension from paraspinal hypertonia",
+          "Forward flexion of the spine"
+         ],
+         "ans": 2
         },
         {
          "q": "State the muscle power grading scale from 0 to 5.",
-         "a": "0 none; 1 flickering movement; 2 movement possible after elimination of gravity; 3 movement possible against gravity but not against resistance; 4 movement possible against gravity and against some resistance; 5 normal power."
+         "a": "**0 none; 1 flicker; 2 movement with gravity eliminated; 3 movement against gravity but not resistance; 4 movement against some resistance; 5 normal power.**\n\n## Understanding it\n- The MRC scale runs **0–5**.\n- Key steps: **2** = only with gravity removed, **3** = against gravity, **4** = against resistance, **5** = normal.\n\n>> 0 none → 5 normal, with gravity and resistance as the milestones.",
+         "opts": [
+          "1 normal to 5 paralysed",
+          "A percentage scale",
+          "0 none, 1 flicker, 2 gravity-eliminated, 3 vs gravity, 4 vs resistance, 5 normal",
+          "0–3 only"
+         ],
+         "ans": 2
         },
         {
          "q": "State the reflex grading scale.",
-         "a": "0 absent; 1+ sluggish (seen with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus."
+         "a": "**0 absent; 1+ sluggish (present with reinforcement); 2+ normal; 3+ brisk; 4+ brisk with clonus.**\n\n## Understanding it\n- Reflexes graded **0 to 4+**.\n- **2+** is normal; **3+/4+** suggest upper motor neurone; **0/1+** suggest lower motor neurone.\n\n>> 0 absent → 4+ clonus; 2+ is normal.",
+         "opts": [
+          "Only present or absent",
+          "1 normal to 5 absent",
+          "0–10 scale",
+          "0 absent, 1+ sluggish, 2+ normal, 3+ brisk, 4+ clonus"
+         ],
+         "ans": 3
         },
         {
          "q": "Define lumbar puncture and give its other name.",
-         "a": "A clinical procedure in which a needle is inserted into the spinal canal, most commonly to collect CSF for diagnostic testing; also known as a spinal tap."
+         "a": "**A procedure inserting a needle into the spinal canal, usually to collect CSF for diagnosis; also called a spinal tap.**\n\n## Understanding it\n- A needle enters the **subarachnoid space** (below the cord) to sample **CSF**.\n- Also known as a **spinal tap**.\n\n>> LP = spinal tap; needle into the spinal canal to obtain CSF.",
+         "opts": [
+          "A needle into the spinal canal to obtain CSF (spinal tap)",
+          "A brain biopsy",
+          "A skull X-ray",
+          "An injection into a vein"
+         ],
+         "ans": 0
         },
         {
          "q": "State three procedural principles of lumbar puncture.",
-         "a": "It is invasive and hence requires consent; strict asepsis is required; and it can also be performed for therapeutic purposes."
+         "a": "**It is invasive and requires consent; strict asepsis is required; and it can be therapeutic as well as diagnostic.**\n\n## Understanding it\n- **Consent** (invasive), **asepsis** (meningitis risk), and it can **treat** (e.g. remove CSF in raised-pressure states) as well as **diagnose**.\n\n>> Consent + asepsis + can be therapeutic.",
+         "opts": [
+          "No consent needed",
+          "Purely diagnostic, never therapeutic",
+          "Asepsis is optional",
+          "Invasive (needs consent), strict asepsis, can be therapeutic"
+         ],
+         "ans": 3
         },
         {
          "q": "List the nine requirements for the LP procedure.",
-         "a": "Indications; rule out contraindications; vital signs; pre-procedure concomitant RBS; position; needle insertion point and needle type; asepsis; pain control; and specimen collection."
+         "a": "**Indications; ruling out contraindications; vital signs; pre-procedure random blood sugar; positioning; correct insertion point and asepsis; anaesthesia; the correct needle; and correct technique.**\n\n## Understanding it\n- A checklist ensuring safety and validity: check indications/contraindications, vitals, **paired blood glucose**, position, site/asepsis, anaesthesia, needle, technique.\n\n>> A safety checklist — note the paired RBS and contraindication check.",
+         "opts": [
+          "Just insert the needle",
+          "Only consent",
+          "Indications, contraindications, vitals, RBS, position, site/asepsis, anaesthesia, needle, technique",
+          "Only positioning"
+         ],
+         "ans": 2
         },
         {
          "q": "List the indications for lumbar puncture.",
-         "a": "Meningitis; encephalitis (autoimmune, infectious); idiopathic intracranial hypertension; and it is often helpful in assessing subarachnoid haemorrhage, demyelinating, degenerative and collagen vascular diseases, and intracranial neoplasms."
+         "a": "**Meningitis, encephalitis (infectious or autoimmune), idiopathic intracranial hypertension, and assessing certain neurological conditions.**\n\n## Understanding it\n- Mostly to diagnose **CNS infection/inflammation** (meningitis/encephalitis).\n- Also to measure/relieve pressure in **IIH**.\n\n>> LP indications: meningitis, encephalitis, IIH.",
+         "opts": [
+          "Routine screening of all children",
+          "Meningitis, encephalitis, idiopathic intracranial hypertension",
+          "A simple headache",
+          "A skin rash"
+         ],
+         "ans": 1
         },
         {
          "q": "List the contraindications to lumbar puncture.",
-         "a": "Suspected mass lesion of the brain, especially posterior fossa or above the tentorium causing midline shift; suspected mass lesion of the spinal cord; symptoms and signs of impending cerebral herniation in a child with probable meningitis; critical illness; skin infection at the site; and thrombocytopenia with a platelet count below 20 × 10⁹/L."
+         "a": "**A suspected brain mass (especially posterior fossa or above the tentorium causing midline shift), raised ICP, and other signs of impending herniation.**\n\n## Understanding it\n- Removing CSF below a **mass/raised ICP** creates a pressure gradient → **brain herniation**.\n- So exclude a mass/raised ICP first (often with CT).\n\n>> Never LP with a mass lesion or raised ICP — risk of herniation.",
+         "opts": [
+          "Any headache at all",
+          "A mass lesion / raised ICP (herniation risk)",
+          "A high fever",
+          "Meningitis"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the position for lumbar puncture and the reason for it.",
-         "a": "Lateral decubitus or seated position, with neck and legs flexed to enlarge the intervertebral spaces, while shoulders and hips are kept straight to prevent rotating the spine."
+         "a": "**Lateral decubitus or seated, with neck and legs flexed to open the intervertebral spaces, keeping the shoulders and hips vertical.**\n\n## Understanding it\n- **Flexing** the spine spreads the vertebrae apart, widening the gap for the needle.\n- Keep the back straight/vertical to stay in the midline.\n\n>> Curl up to open the spaces; stay square to keep the midline.",
+         "opts": [
+          "Lying flat with legs straight",
+          "Lateral/seated with spine flexed to open intervertebral spaces",
+          "Prone and extended",
+          "Standing upright"
+         ],
+         "ans": 1
         },
         {
          "q": "Where is the needle inserted for a lumbar puncture, and how is the site identified?",
-         "a": "At the L3–L4 or L4–L5 interspace, identified by drawing an imaginary line from the iliac crest downward, perpendicular to the vertebral column."
+         "a": "**At the L3–L4 or L4–L5 interspace, identified by a line from the top of the iliac crest (which crosses ~L4).**\n\n## Understanding it\n- The **iliac crest line** crosses roughly **L4**, marking the safe level.\n- This is **below the cord** (ends ~L1–L2).\n\n>> L3–4 or L4–5, found from the iliac crest line — safely below the cord.",
+         "opts": [
+          "At the base of the skull",
+          "T4–T5, at the sternal angle",
+          "C6, at the cricoid",
+          "L3–L4 or L4–L5, located from the iliac crest line"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the asepsis required for lumbar puncture.",
-         "a": "The physician dons a mask, gown and sterile gloves; the skin is thoroughly prepared with a cleansing agent, and sterile drapes are applied."
+         "a": "**The physician wears a mask, gown and sterile gloves; the skin is cleaned with an antiseptic and sterile drapes are applied.**\n\n## Understanding it\n- The needle enters the **sterile CSF space**, so any contamination risks **meningitis**.\n- Full aseptic technique is mandatory.\n\n>> Full sterile technique — the CSF space must not be contaminated.",
+         "opts": [
+          "Only a glove on one hand",
+          "Clean hands are enough",
+          "No precautions needed",
+          "Mask, gown, sterile gloves, antiseptic skin prep and drapes"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe pain control for lumbar puncture.",
-         "a": "Injecting a local anaesthetic such as 1% lidocaine at the time of the procedure, or applying a eutectic mixture of lidocaine and prilocaine (EMLA) to the skin 30 minutes before the procedure."
+         "a": "**Injecting a local anaesthetic such as 1% lidocaine at the time, or applying a eutectic mixture (EMLA) beforehand.**\n\n## Understanding it\n- **Lidocaine** infiltration numbs the site during the procedure.\n- **EMLA** cream applied earlier numbs the skin painlessly (useful in children).\n\n>> Lidocaine at the time, or EMLA cream beforehand.",
+         "opts": [
+          "No anaesthesia is used",
+          "Local lidocaine, or EMLA cream applied beforehand",
+          "Oral paracetamol only",
+          "General anaesthesia always"
+         ],
+         "ans": 1
         },
         {
          "q": "Describe the needle used for lumbar puncture and how it is introduced.",
-         "a": "A 22-gauge, 1.5- to 3.0-inch, sharp, bevelled spinal needle with a properly fitting stylet, introduced in the midsagittal plane and directed slightly cephalad."
+         "a": "**A 22-gauge, 1.5–3.0 inch bevelled spinal needle with a stylet, introduced in the midsagittal plane with the stylet in place.**\n\n## Understanding it\n- A **spinal needle with a stylet** is used, aimed in the **midline**.\n- Keeping the **stylet in** during skin puncture prevents coring skin into the canal.\n\n>> 22G spinal needle with stylet, midline; keep the stylet in on the way through skin.",
+         "opts": [
+          "A 22G bevelled spinal needle with stylet, midline",
+          "A wide surgical scalpel",
+          "A butterfly needle in a vein",
+          "A biopsy gun"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the diagnostic utility of skull X-rays?",
-         "a": "Limited — they can demonstrate fractures, bony defects, intracranial calcifications, or indirect evidence of increased intracranial pressure."
+         "a": "**Limited — they can show fractures, bony defects, intracranial calcifications, or indirect signs of raised ICP.**\n\n## Understanding it\n- Plain skull films are largely **superseded** by CT/MRI.\n- They still show **fractures, calcifications, bony defects**.\n\n>> Skull X-ray = limited; mainly bone/calcification, not brain detail.",
+         "opts": [
+          "Shows the CSF clearly",
+          "The gold standard for tumours",
+          "Limited — fractures, bony defects, calcifications, indirect ICP signs",
+          "Excellent for brain tissue detail"
+         ],
+         "ans": 2
         },
         {
          "q": "What is cranial ultrasonography the imaging method of choice for, and in whom?",
-         "a": "For detecting intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with patent anterior fontanels."
+         "a": "**For intracranial haemorrhage, periventricular leukomalacia and hydrocephalus — in infants with an open (patent) anterior fontanelle.**\n\n## Understanding it\n- The **open fontanelle** is an acoustic window for ultrasound.\n- Ideal for the **preterm/infant brain** (IVH, PVL, hydrocephalus) — no radiation, portable.\n\n>> Cranial US = the infant-brain test, through the open fontanelle.",
+         "opts": [
+          "Adults with closed sutures",
+          "Bone fractures",
+          "Spinal cord tumours",
+          "IVH, PVL, hydrocephalus — in infants with an open fontanelle"
+         ],
+         "ans": 3
         },
         {
          "q": "What is cranial CT valuable for?",
-         "a": "The evaluation of many neurologic emergencies, as well as some non-emergent conditions."
+         "a": "**The evaluation of many neurologic emergencies, as well as some non-emergent conditions.**\n\n## Understanding it\n- CT is **fast and widely available**, showing acute blood and bone well.\n- The go-to first scan in **emergencies** (trauma, haemorrhage).\n\n>> CT = the emergency brain scan.",
+         "opts": [
+          "Neurologic emergencies (and some non-emergent conditions)",
+          "Diagnosing epilepsy",
+          "Only chronic conditions",
+          "Only the spinal cord"
+         ],
+         "ans": 0
         },
         {
          "q": "What is brain MRI well suited for?",
-         "a": "It is a non-invasive procedure well suited for detecting a variety of abnormalities, including those of the posterior fossa and spinal cord."
+         "a": "**A non-invasive test well suited to detecting many abnormalities, including those of the posterior fossa and soft-tissue detail.**\n\n## Understanding it\n- MRI gives superb **soft-tissue** contrast and **no radiation**.\n- Superior for the **posterior fossa** and subtle lesions.\n\n>> MRI = detailed, radiation-free soft-tissue imaging (best for posterior fossa).",
+         "opts": [
+          "Acute bleeding in seconds",
+          "Bone fractures only",
+          "Diagnosing epilepsy directly",
+          "Detailed soft-tissue imaging, including the posterior fossa"
+         ],
+         "ans": 3
         },
         {
          "q": "Name the other neuroradiologic procedures.",
-         "a": "Cranial CT angiography, MR angiography and MR venography; proton MR spectroscopy; catheter angiography; and positron emission tomography."
+         "a": "**CT angiography, MR angiography and venography; proton MR spectroscopy; catheter angiography; and PET.**\n\n## Understanding it\n- Vascular imaging (CTA/MRA/MRV, catheter angiography), metabolic (MR spectroscopy, PET).\n\n>> Extra tools: CTA/MRA/MRV, MR spectroscopy, catheter angiography, PET.",
+         "opts": [
+          "Only EEG",
+          "Only ultrasound",
+          "CTA, MRA/MRV, MR spectroscopy, catheter angiography, PET",
+          "Only plain X-ray"
+         ],
+         "ans": 2
         },
         {
          "q": "What unique information does PET provide?",
-         "a": "Information on brain metabolism and perfusion, by measuring blood flow, oxygen uptake, and/or glucose consumption."
+         "a": "**Information on brain metabolism and perfusion — measuring blood flow, oxygen uptake, and/or glucose consumption.**\n\n## Understanding it\n- PET is a **functional/metabolic** scan (not just structure).\n- It maps **blood flow, oxygen and glucose use**.\n\n>> PET shows brain metabolism/perfusion, not just anatomy.",
+         "opts": [
+          "Brain metabolism and perfusion (blood flow, oxygen, glucose)",
+          "The CSF pressure",
+          "Only the skull shape",
+          "Only bone anatomy"
+         ],
+         "ans": 0
         },
         {
          "q": "What is EEG used for?",
-         "a": "The diagnosis of epilepsy and brain dysfunction."
+         "a": "**The diagnosis of epilepsy and brain dysfunction.**\n\n## Understanding it\n- EEG records the brain's **electrical activity**.\n- It is the key test for **epilepsy** and diffuse brain dysfunction.\n\n>> EEG = the electrical test for epilepsy/brain dysfunction.",
+         "opts": [
+          "Measuring CSF pressure",
+          "Imaging brain structure",
+          "Assessing bone fractures",
+          "Diagnosis of epilepsy and brain dysfunction"
+         ],
+         "ans": 3
         },
         {
          "q": "Define an evoked potential.",
-         "a": "An electrical signal recorded from the CNS following the presentation of a specific visual, auditory, or sensory stimulus."
+         "a": "**An electrical signal recorded from the CNS following a specific visual, auditory, or sensory stimulus.**\n\n## Understanding it\n- A stimulus is given and the **brain's electrical response** is recorded.\n- Tests the integrity of the **sensory pathway** (visual/auditory/somatosensory).\n\n>> Evoked potential = the CNS's electrical response to a stimulus.",
+         "opts": [
+          "A CNS electrical response to a visual/auditory/sensory stimulus",
+          "A reflex hammer test",
+          "A CSF sample",
+          "A brain scan image"
+         ],
+         "ans": 0
         },
         {
          "q": "How are children with intellectual disability or developmental delay often evaluated?",
-         "a": "With metabolic and/or genetic testing."
+         "a": "**With metabolic and/or genetic testing.**\n\n## Understanding it\n- Unexplained delay/intellectual disability often has a **metabolic or genetic** cause.\n- These tests are commonly used in the work-up.\n\n>> Delay/ID work-up: metabolic and genetic testing.",
+         "opts": [
+          "No investigation is done",
+          "Only an EEG",
+          "Only a skull X-ray",
+          "Metabolic and/or genetic testing"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child has always been behind but has never lost a skill. What does this pattern indicate?",
-         "a": "A static abnormality in development from birth — suggesting a congenital, intrauterine or perinatal cause."
+         "a": "**A static abnormality from birth — suggesting a congenital, intrauterine or perinatal cause.**\n\n## Understanding it\n- 'Always behind, never regressed' = a **fixed (static)** deficit.\n- Points to an **early (congenital/perinatal)** injury, not a progressive disease.\n\n>> Static from birth → congenital/perinatal cause.",
+         "opts": [
+          "A recent infection",
+          "A progressive degenerative disease",
+          "Normal development",
+          "A static, congenital/perinatal deficit"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child developed normally then began losing skills across several domains. What does this indicate and what investigation is needed?",
-         "a": "Global developmental regression, suggesting a degenerative CNS disease such as an inborn error of metabolism — requiring metabolic and/or genetic testing."
+         "a": "**Global developmental regression, suggesting a degenerative CNS disease (e.g. inborn error of metabolism) — requiring metabolic/genetic investigation.**\n\n## Understanding it\n- **Normal then regressing** = an active, progressive process.\n- Across **several domains** = global regression → neurodegenerative/metabolic disease.\n\n>> Regression across domains → degenerative disease; investigate metabolically/genetically.",
+         "opts": [
+          "A static perinatal injury",
+          "A behavioural phase",
+          "Global regression from a degenerative disease → metabolic/genetic work-up",
+          "Normal variation"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What single question best detects developmental regression?",
-         "a": "'Is there anything he used to be able to do that he cannot do now?'"
+         "a": "**'Is there anything he used to be able to do that he cannot do now?'**\n\n## Understanding it\n- Regression is defined by **losing** acquired skills.\n- Asking directly about **lost abilities** is the most sensitive screen.\n\n>> Ask what the child could do before but can't now.",
+         "opts": [
+          "'Is he eating well?'",
+          "'How old is the child?'",
+          "'Is there anything he used to do that he cannot do now?'",
+          "'Does he have a fever?'"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — An infant's head circumference is crossing centile lines upward. Why is this different from a single large measurement?",
-         "a": "Because macrocephaly is most commonly familial, but a head crossing centiles indicates something actively expanding inside the skull — it cannot be familial."
+         "a": "**Because macrocephaly is usually familial, but a head crossing centiles indicates something actively expanding inside the skull.**\n\n## Understanding it\n- A single large head can be **benign/familial**.\n- A head **crossing centiles upward** means **active expansion** (e.g. hydrocephalus, mass) — a red flag.\n\n>> Static big head = often familial; crossing centiles = active pathology.",
+         "opts": [
+          "Crossing centiles is less worrying",
+          "Both are always normal",
+          "Crossing centiles indicates active intracranial expansion (e.g. hydrocephalus)",
+          "It only reflects height"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — How should a fontanel be assessed to avoid a false positive?",
-         "a": "With the infant calm and sitting up — because vigorous crying and lying flat both cause the fontanel to bulge in a normal infant."
+         "a": "**With the infant calm and sitting up — because vigorous crying and lying flat both cause a normal fontanelle to bulge.**\n\n## Understanding it\n- Crying and a flat position **raise** fontanelle pressure normally.\n- Assess when the baby is **calm and upright** to avoid a false 'bulging' sign.\n\n>> Calm + upright = a true fontanelle assessment.",
+         "opts": [
+          "With the infant calm and upright",
+          "During feeding",
+          "Lying flat on the back",
+          "While the baby is crying"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — A drowsy child with meningitis has a unilaterally dilated pupil, hypertension and bradycardia. What is happening and what must NOT be done?",
-         "a": "Impending cerebral herniation with raised intracranial pressure — lumbar puncture is contraindicated, as it may precipitate coning and brainstem compression."
+         "a": "**Impending cerebral herniation from raised ICP — a lumbar puncture is contraindicated as it may precipitate herniation.**\n\n## Understanding it\n- Unilateral dilated pupil + hypertension + bradycardia = **raised ICP / herniation**.\n- **Do NOT do an LP** — it can trigger fatal herniation.\n\n>> These signs = raised ICP → LP is contraindicated.",
+         "opts": [
+          "Mild dehydration — do an LP",
+          "Normal findings — proceed",
+          "Impending herniation from raised ICP — do NOT do an LP",
+          "Low ICP — give fluids"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why does a unilaterally dilated pupil occur in raised intracranial pressure?",
-         "a": "Because the temporal lobe is pushed down over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil."
+         "a": "**Because the temporal lobe (uncus) is pushed over the tentorium and compresses the third cranial nerve, whose parasympathetic fibres constrict the pupil.**\n\n## Understanding it\n- Rising pressure herniates the **uncus** over the tentorium.\n- It squeezes **CN III**, knocking out its **pupil-constricting** parasympathetic fibres → the pupil dilates.\n\n>> Uncal herniation compresses CN III → a blown (dilated) pupil.",
+         "opts": [
+          "Bright light in one eye",
+          "The optic nerve is cut",
+          "Uncal herniation compresses CN III (pupilloconstrictor fibres)",
+          "A cataract forms"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What is the combination of hypertension with bradycardia in raised ICP called, and why does it occur?",
-         "a": "Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised intracranial pressure, and baroreceptors reflexly slow the heart."
+         "a": "**Cushing's response — blood pressure rises to maintain cerebral perfusion against the raised ICP, and the resulting baroreflex causes bradycardia.**\n\n## Understanding it\n- To keep blood reaching the brain, **BP rises**.\n- Baroreceptors sense the high BP and reflexively **slow the heart** (bradycardia).\n\n>> Cushing's response = hypertension + bradycardia (a raised-ICP danger sign).",
+         "opts": [
+          "Simple anxiety",
+          "A normal exercise response",
+          "Septic shock",
+          "Cushing's response — HTN to perfuse the brain, reflex bradycardia"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — In a child with meningitis and signs of raised ICP, what is the correct order of management?",
-         "a": "Give empirical intravenous antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT; and defer the lumbar puncture. Never delay antibiotics for an LP."
+         "a": "**Give empirical IV antibiotics immediately; stabilise airway, breathing and circulation; obtain urgent cranial CT — and defer LP until safe.**\n\n## Understanding it\n- **Do not delay antibiotics** waiting for an LP in meningitis with raised ICP.\n- Stabilise ABC, image with **CT** first, and only LP when safe.\n\n>> Antibiotics + ABC + CT first; LP is deferred, not first.",
+         "opts": [
+          "Wait for the CT before antibiotics",
+          "LP first, then antibiotics",
+          "Do nothing until fully awake",
+          "Immediate IV antibiotics, stabilise ABC, urgent CT; defer LP"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Why must a lumbar puncture never be performed when there is a mass lesion or raised ICP?",
-         "a": "Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downwards — coning — which compresses the centres for breathing, heart rate and blood pressure."
+         "a": "**Because removing CSF from below creates a pressure gradient across the foramen magnum, forcing the brainstem downward (herniation).**\n\n## Understanding it\n- With a mass/high ICP, the pressure above and below become unequal when CSF is drained below.\n- The **brainstem is pushed down** through the foramen magnum → fatal herniation ('coning').\n\n>> LP + raised ICP = coning; never do it.",
+         "opts": [
+          "It causes a mild headache only",
+          "It creates a gradient that herniates the brainstem (coning)",
+          "It cannot reach the CSF",
+          "It is simply too painful"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is a random blood sugar taken before a lumbar puncture?",
-         "a": "Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it, the CSF glucose result cannot be interpreted."
+         "a": "**Because CSF glucose is interpreted as a ratio to the blood glucose taken at the same time; without it the CSF glucose result is uninterpretable.**\n\n## Understanding it\n- CSF glucose is judged **relative to blood glucose** (normally ~⅔).\n- You need a **paired** blood sugar to interpret it (low ratio suggests bacterial meningitis).\n\n>> Pair the CSF glucose with a simultaneous blood glucose.",
+         "opts": [
+          "To check for diabetes",
+          "CSF glucose is a ratio to simultaneous blood glucose",
+          "To choose the needle size",
+          "It is unrelated to the LP"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is the LP performed at L3–L4 or L4–L5 and not higher?",
-         "a": "Because the spinal cord ends at about L1–L2; below that level there are only the loose nerve roots of the cauda equina, which move out of the needle's way."
+         "a": "**Because the spinal cord ends at about L1–L2; below that there are only the loose nerve roots of the cauda equina, which the needle can safely part.**\n\n## Understanding it\n- Above L1–L2 you risk spearing the **spinal cord**.\n- Below it, the **cauda equina** roots float in CSF and are pushed aside safely.\n\n>> Go below where the cord ends (L1–2) to avoid injuring it.",
+         "opts": [
+          "There is no CSF higher up",
+          "The cord ends ~L1–L2; below are the mobile cauda equina roots",
+          "The vertebrae are fused higher up",
+          "Higher levels are more painful only"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why must the stylet be kept in the needle during skin puncture?",
-         "a": "To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour."
+         "a": "**To prevent coring a plug of skin into the spinal canal, which can later grow into an epidermoid tumour.**\n\n## Understanding it\n- Without the stylet, the needle can **punch out skin** and carry it inward.\n- Implanted skin cells can grow into an **epidermoid tumour** years later.\n\n>> Stylet in = no skin plug = no future epidermoid tumour.",
+         "opts": [
+          "To keep the needle sterile only",
+          "To make it hurt less",
+          "To speed up the flow of CSF",
+          "To avoid coring skin that could become an epidermoid tumour"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — An infant with an open fontanel needs brain imaging for suspected hydrocephalus. Which investigation and why?",
-         "a": "Cranial ultrasonography — the fontanel provides an acoustic window; it uses no radiation, is portable, needs no sedation and can be repeated for serial monitoring."
+         "a": "**Cranial ultrasonography — the fontanelle is an acoustic window; it uses no radiation, is portable and needs no sedation.**\n\n## Understanding it\n- The **open fontanelle** lets ultrasound see the brain.\n- Ideal for infants: **no radiation, portable, no sedation**.\n\n>> Open fontanelle + suspected hydrocephalus = cranial ultrasound.",
+         "opts": [
+          "CT with contrast",
+          "Cranial ultrasound (via the fontanelle; no radiation/sedation)",
+          "PET scan",
+          "Skull X-ray"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why can cranial ultrasound not be used once the fontanel has closed?",
-         "a": "Because ultrasound cannot pass through bone; the open fontanel is the only acoustic window into the infant brain."
+         "a": "**Because ultrasound cannot pass through bone; the open fontanelle is the only acoustic window into the infant brain.**\n\n## Understanding it\n- Ultrasound is **blocked by bone**.\n- Once the fontanelle **fuses**, there's no window → you must use CT/MRI.\n\n>> No fontanelle, no ultrasound window (bone blocks it).",
+         "opts": [
+          "Ultrasound needs radiation then",
+          "Ultrasound can't pass through bone; the fontanelle is the only window",
+          "The brain shrinks",
+          "It becomes too painful"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is CT preferred to MRI in a neurological emergency?",
-         "a": "Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI takes far longer and often requires sedation in a child."
+         "a": "**Because CT is fast, widely available, usually needs no sedation, and shows acute blood and bone well — whereas MRI is slow.**\n\n## Understanding it\n- In an emergency, **speed and availability** matter most.\n- CT quickly reveals **acute haemorrhage and fractures**; MRI takes much longer.\n\n>> Emergency = CT (fast, shows blood/bone); MRI is too slow.",
+         "opts": [
+          "CT gives no radiation",
+          "MRI is faster than CT",
+          "CT is fast, available, and shows acute blood/bone",
+          "MRI cannot show the brain"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Why is MRI superior to CT for the posterior fossa?",
-         "a": "Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone — important since most childhood brain tumours are in the posterior fossa."
+         "a": "**Because CT is degraded by artefact from the dense surrounding bone, whereas MRI uses a magnetic field and is unaffected by bone.**\n\n## Understanding it\n- The posterior fossa is encased in **thick bone** that creates CT **artefact**.\n- **MRI** isn't affected by bone, so it images this region clearly.\n\n>> Bone artefact blinds CT in the posterior fossa; MRI sees through it.",
+         "opts": [
+          "CT suffers bone artefact there; MRI is unaffected by bone",
+          "The posterior fossa has no bone",
+          "CT is always superior",
+          "MRI is faster"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why can imaging not diagnose epilepsy?",
-         "a": "Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal, so an EEG is required."
+         "a": "**Because epilepsy is a disorder of electrical activity while imaging shows structure; the brain may look entirely normal.**\n\n## Understanding it\n- Epilepsy is an **electrical** problem — diagnosed by **EEG**, not pictures.\n- Structural scans can be **normal** in epilepsy.\n\n>> Imaging shows structure; epilepsy is electrical → use EEG.",
+         "opts": [
+          "Imaging diagnoses it perfectly",
+          "The brain is always abnormal on scans",
+          "Imaging is too expensive",
+          "Epilepsy is electrical (EEG); imaging shows only structure"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Which combination of tone and reflexes indicates an upper motor neurone lesion?",
-         "a": "Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord."
+         "a": "**Increased tone with brisk reflexes (3+ or 4+ with clonus) — indicating a lesion in the brain or spinal cord.**\n\n## Understanding it\n- UMN lesions release lower centres from inhibition → **increased tone and brisk reflexes**.\n- Located in the **brain or spinal cord**.\n\n>> UMN = high tone + brisk reflexes (± clonus).",
+         "opts": [
+          "Increased tone with brisk reflexes (UMN, brain/cord lesion)",
+          "Flaccid limbs with fasciculations",
+          "Decreased tone with absent reflexes",
+          "Normal tone and reflexes"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Which combination of tone and reflexes indicates a lower motor neurone lesion?",
-         "a": "Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle."
+         "a": "**Decreased tone with absent or reduced reflexes — indicating a lesion in the anterior horn, nerve or muscle.**\n\n## Understanding it\n- LMN lesions cut the reflex arc's output → **low tone, reduced/absent reflexes** (± wasting/fasciculations).\n- Located in the **anterior horn, nerve, or muscle**.\n\n>> LMN = low tone + reduced/absent reflexes.",
+         "opts": [
+          "Decreased tone with reduced/absent reflexes (LMN lesion)",
+          "Increased tone with brisk reflexes",
+          "Normal tone and reflexes",
+          "Brisk reflexes with clonus"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — How do you distinguish power grade 2 from grade 3?",
-         "a": "Grade 2 can move the limb only with gravity eliminated (horizontally); grade 3 can lift the limb against gravity but not against resistance."
+         "a": "**Grade 2 moves the limb only with gravity eliminated (horizontally); grade 3 lifts the limb against gravity but not against resistance.**\n\n## Understanding it\n- The dividing line is **gravity**: grade 2 can't beat it (needs it removed), grade 3 can.\n- Grade 3 still fails against added **resistance** (that's grade 4).\n\n>> Grade 2 = only without gravity; grade 3 = against gravity.",
+         "opts": [
+          "Grade 3 is total paralysis",
+          "Grade 2 = gravity eliminated; grade 3 = against gravity",
+          "Grade 2 beats resistance; grade 3 doesn't move",
+          "They are identical"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — What is reinforcement, and why does it matter in grading reflexes?",
-         "a": "Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only with reinforcement is graded 1+, not 0 — and a truly absent reflex means the reflex arc is broken."
+         "a": "**Asking the patient to clench the teeth or pull interlocked fingers apart while the reflex is tested; a reflex present only on reinforcement is graded 1+ (sluggish).**\n\n## Understanding it\n- Reinforcement **distracts** the patient and **augments** a weak reflex so it isn't missed.\n- A reflex that appears **only** with reinforcement is **sluggish (1+)**, not truly absent.\n\n>> Reinforcement unmasks weak reflexes → grade 1+ if only present with it.",
+         "opts": [
+          "It has no effect on grading",
+          "A way to abolish reflexes",
+          "A drug that boosts reflexes",
+          "A distraction manoeuvre that augments weak reflexes (present only then = 1+)"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — What is Romberg's sign, and what does a positive sign indicate?",
-         "a": "The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory ataxia rather than cerebellar ataxia, in which the patient is unsteady with eyes open as well."
+         "a": "**The patient stands steady with eyes open but becomes unsteady with eyes closed — indicating sensory (proprioceptive) ataxia rather than cerebellar ataxia.**\n\n## Understanding it\n- With eyes **open**, vision compensates; with eyes **closed**, only proprioception remains.\n- Falling when eyes close = the **proprioceptive** pathway is faulty (sensory ataxia).\n- Cerebellar ataxia is unsteady with eyes **open too**.\n\n>> Positive Romberg = sensory (proprioceptive) ataxia, not cerebellar.",
+         "opts": [
+          "A normal finding",
+          "Unsteady only with eyes closed = sensory (proprioceptive) ataxia",
+          "Unsteady with eyes open = cerebellar ataxia",
+          "A test of hearing"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A mother reports reduced fetal movements during pregnancy. What does this suggest and why?",
-         "a": "A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was in effect observing the neurological examination in utero."
+         "a": "**A neuromuscular disorder — because fetal movement requires functioning nerves and muscles, so the mother was effectively observing the baby's motor system.**\n\n## Understanding it\n- Movement needs **intact nerves and muscles**.\n- Reduced fetal movement is an **antenatal window** onto a neuromuscular problem.\n\n>> Poor fetal movement → suspect a fetal neuromuscular disorder.",
+         "opts": [
+          "A placental issue only",
+          "A normal pregnancy",
+          "A maternal heart problem",
+          "A neuromuscular disorder (movement needs working nerves/muscles)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why must the indication for an emergency caesarean section be asked, not just the mode of delivery?",
-         "a": "Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption."
+         "a": "**Because the indication is often the neurological event itself — fetal distress, cord prolapse or abruption.**\n\n## Understanding it\n- The **reason** for the emergency section (e.g. fetal distress/hypoxia) may be the very insult that injured the brain.\n- The mode of delivery alone doesn't capture this.\n\n>> Ask *why* the C/S was done — the reason may be the neurological insult.",
+         "opts": [
+          "It is just for paperwork",
+          "It is irrelevant",
+          "The mode alone tells you everything",
+          "The indication may be the neurological insult (distress, prolapse, abruption)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child with a movement disorder and deafness was 'very yellow' as a newborn and untreated. What is the likely diagnosis?",
-         "a": "Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed."
+         "a": "**Kernicterus — which is why the birth history must establish both the degree of jaundice and how it was managed.**\n\n## Understanding it\n- Severe untreated neonatal jaundice → **bilirubin brain injury (kernicterus)**.\n- Classic sequelae: **movement disorder (choreoathetoid CP) + sensorineural deafness**.\n\n>> 'Very yellow' newborn + later movement disorder + deafness = kernicterus.",
+         "opts": [
+          "Meningitis",
+          "Cerebellar tumour",
+          "Normal ageing",
+          "Kernicterus (untreated severe neonatal jaundice)"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child presents with recurrent early morning vomiting and has been treated repeatedly for gastritis. What neurological cause must be excluded?",
-         "a": "Raised intracranial pressure — CNS disease often manifests with vague, non-focal symptoms misattributed to other systems."
+         "a": "**Raised intracranial pressure — CNS disease often presents with vague, non-focal symptoms misattributed to other systems.**\n\n## Understanding it\n- **Early-morning vomiting** is a classic feature of **raised ICP** (worse when lying flat overnight).\n- It is easily mislabelled as a GI problem.\n\n>> Morning vomiting mistaken for gastritis → exclude raised ICP.",
+         "opts": [
+          "Raised intracranial pressure",
+          "Simple gastritis",
+          "Food allergy",
+          "A normal finding"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A previously dry child becomes incontinent of urine. What neurological cause should be considered?",
-         "a": "A spinal cord lesion — since urinary incontinence is listed among the non-focal symptoms of CNS disease."
+         "a": "**A spinal cord lesion — urinary incontinence is among the non-focal symptoms of CNS disease.**\n\n## Understanding it\n- New incontinence in a previously continent child can signal a **spinal cord** problem (e.g. tumour, tethering).\n- It's a subtle CNS red flag.\n\n>> New incontinence → consider a spinal cord lesion.",
+         "opts": [
+          "A kidney stone",
+          "A spinal cord lesion",
+          "A urinary tract infection only",
+          "Normal behaviour"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — Why does headache worse on lying down, coughing or straining matter?",
-         "a": "Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP — it is elicited by asking about alleviating and exacerbating factors."
+         "a": "**Because these manoeuvres raise intracranial pressure, so the pattern suggests raised ICP.**\n\n## Understanding it\n- Lying flat, coughing and straining all **increase ICP**.\n- A headache that **worsens** with them fits a **raised-ICP** cause (e.g. tumour).\n\n>> Headache worse lying/coughing/straining = raised-ICP pattern.",
+         "opts": [
+          "They lower ICP",
+          "It indicates a tension headache",
+          "It is always migraine",
+          "They raise ICP — the pattern suggests raised intracranial pressure"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": "content/Pediatrics/Chidomere/Introduction%20to%20Neurology_Investigations%20of%20the%20Central%20Nervous%20System/img/",
@@ -3419,479 +6387,1312 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "Define paediatric nephrology.",
-         "a": "The branch of paediatrics responsible for the diagnosis, evaluation and management of the disorders of the kidneys and urinary tract in children."
+         "a": "**The branch of paediatrics responsible for the diagnosis, evaluation and management of disorders of the kidney and urinary tract in children.**\n\n## Understanding it\n- It focuses on the **kidneys and urinary tract** in children.\n- Covers **diagnosis, evaluation and management**.\n\n>> Paediatric nephrology = children's kidney/urinary-tract medicine.",
+         "opts": [
+          "Surgery of the bladder only",
+          "The paediatric field for kidney/urinary-tract disorders",
+          "The study of the heart in children",
+          "Adult kidney medicine"
+         ],
+         "ans": 1
         },
         {
          "q": "What five things should a nephrologist be able to do?",
-         "a": "Evaluate and diagnose renal pathology; institute appropriate treatment; monitor growth and development in children with kidney disorders; provide renal replacement therapy; and educate and counsel families on reno-prevention and long term care."
+         "a": "**Evaluate and diagnose renal pathology; institute treatment; monitor growth and development; provide long-term follow-up; and counsel families.**\n\n## Understanding it\n- Beyond diagnosis and treatment, chronic renal disease needs **growth monitoring, follow-up, and family counselling**.\n\n>> Diagnose, treat, monitor growth, follow up, counsel.",
+         "opts": [
+          "Only perform surgery",
+          "Only read scans",
+          "Only prescribe dialysis",
+          "Diagnose, treat, monitor growth/development, follow up, counsel families"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the position and covering of the kidneys.",
-         "a": "Paired, bean-shaped, retroperitoneal organs located between T12 and L3 vertebrae, with the left kidney more superior than the right; covered by the renal fascia — Gerota's fascia."
+         "a": "**Paired, bean-shaped, retroperitoneal organs between T12 and L3, with the left kidney lying slightly higher than the right.**\n\n## Understanding it\n- **Retroperitoneal** (behind the peritoneum), at **T12–L3**.\n- The **liver** pushes the **right** kidney down, so the **left is higher**.\n\n>> Retroperitoneal, T12–L3, left higher than right.",
+         "opts": [
+          "Retroperitoneal, T12–L3, left slightly higher",
+          "Attached to the bladder",
+          "Intraperitoneal, in the pelvis",
+          "In the chest, right higher"
+         ],
+         "ans": 0
         },
         {
          "q": "State the weight and dimensions of the kidneys.",
-         "a": "About 150 g in males and 135 g in females; 10–12 cm in length, 5–7 cm in width, and 2–3 cm in thickness."
+         "a": "**About 150 g (male) / 135 g (female); 10–12 cm long, 5–7 cm wide, 2–3 cm thick.**\n\n## Understanding it\n- Adult kidney ≈ **150/135 g**, roughly a fist-sized bean.\n\n>> ~150 g, ~10–12 cm long.",
+         "opts": [
+          "~150 g male/135 g female; 10–12 × 5–7 × 2–3 cm",
+          "30 cm long",
+          "~1 kg each",
+          "~5 g each"
+         ],
+         "ans": 0
         },
         {
          "q": "What proportion of cardiac output do the kidneys receive, and at what level do the renal arteries arise?",
-         "a": "About 20% of cardiac output, from the paired renal arteries at the level of L2."
+         "a": "**About 20% of cardiac output, from the renal arteries at the level of L2.**\n\n## Understanding it\n- The kidneys are **highly vascular** — ~**20%** of cardiac output.\n- Renal arteries arise at **L2**.\n\n>> 20% of cardiac output; renal arteries at L2. (This vascularity underlies bleeding risk in biopsy.)",
+         "opts": [
+          "~20% of cardiac output; renal arteries at L2",
+          "~50% of output; at L5",
+          "No significant blood flow",
+          "~2% of output; at T4"
+         ],
+         "ans": 0
         },
         {
          "q": "Describe the innervation of the kidney.",
-         "a": "Sympathetic innervation arises from the spinal cord at T8–L1, and parasympathetic from the vagus nerves; these cause vasoconstriction and vasodilation respectively."
+         "a": "**Sympathetic from the spinal cord at T8–L1, and parasympathetic from the vagus nerves.**\n\n## Understanding it\n- **Sympathetic** — T8–L1.\n- **Parasympathetic** — vagus (CN X).\n\n>> Sympathetic T8–L1; parasympathetic vagus.",
+         "opts": [
+          "No innervation",
+          "Cranial nerve V",
+          "Only somatic nerves",
+          "Sympathetic T8–L1; parasympathetic vagus"
+         ],
+         "ans": 3
         },
         {
          "q": "List the components of the nephron in order.",
-         "a": "The renal corpuscle (glomerulus and Bowman's capsule); the PCT in the renal cortex; the descending loop of Henle from cortex to medulla; the ascending limb; the distal convoluted tubule in the cortex; and the collecting duct, from cortex through medulla to renal pelvis."
+         "a": "**Renal corpuscle (glomerulus + Bowman's capsule), proximal convoluted tubule, loop of Henle, distal convoluted tubule, then collecting duct.**\n\n## Understanding it\n- Follow the filtrate: **corpuscle → PCT → loop of Henle → DCT → collecting duct**.\n\n>> Corpuscle → PCT → loop → DCT → collecting duct.",
+         "opts": [
+          "Cortex, medulla, pelvis",
+          "Artery, vein, capillary",
+          "Corpuscle, PCT, loop of Henle, DCT, collecting duct",
+          "Bladder, ureter, urethra"
+         ],
+         "ans": 2
         },
         {
          "q": "List the seven functions of the kidneys.",
-         "a": "Filtration and excretion of metabolic waste products; fluid and electrolyte balance; blood pressure regulation; endocrine function; acid-base homeostasis; regulation of red blood cell production; and calcium and bone metabolism."
+         "a": "**Filtration/excretion of waste; fluid and electrolyte balance; blood-pressure regulation; acid–base balance; erythropoietin production; vitamin D activation; and hormone/drug metabolism.**\n\n## Understanding it\n- Beyond making urine, the kidney regulates **BP, acid–base**, makes **EPO**, activates **vitamin D**.\n- These explain CKD complications (anaemia, bone disease).\n\n>> Excrete waste, balance fluid/electrolytes/acid-base, regulate BP, make EPO, activate vitamin D.",
+         "opts": [
+          "Pumps blood",
+          "Digests food",
+          "Only makes urine",
+          "Waste excretion, fluid/electrolyte/acid-base balance, BP, EPO, vitamin D activation"
+         ],
+         "ans": 3
         },
         {
          "q": "List the common renal disorders.",
-         "a": "CAKUT, UTI, nephrotic syndrome, AGN, AKI, CKD, vesicoureteric reflux, haemolytic uraemic syndrome, and renal tubular disorders."
+         "a": "**CAKUT, UTI, nephrotic syndrome, acute glomerulonephritis, AKI, CKD, vesicoureteric reflux, haemolytic uraemic syndrome, and renal stones.**\n\n## Understanding it\n- A spread across structural (CAKUT, VUR), infective (UTI), glomerular (nephrotic, AGN), and functional (AKI, CKD) disease.\n\n>> Know the list: CAKUT, UTI, nephrotic, AGN, AKI, CKD, VUR, HUS, stones.",
+         "opts": [
+          "Only diabetes",
+          "CAKUT, UTI, nephrotic, AGN, AKI, CKD, VUR, HUS, stones",
+          "Only heart failure",
+          "Only kidney stones"
+         ],
+         "ans": 1
         },
         {
          "q": "List the risk factors for renal disorders.",
-         "a": "Drug toxicity, family history/genetics, obesity, hypertension, prematurity, diabetes, and autoimmune disorders."
+         "a": "**Drug toxicity, family history/genetics, obesity, hypertension, prematurity, diabetes, and autoimmune disorders.**\n\n## Understanding it\n- Mix of **modifiable** (obesity, HTN, diabetes, nephrotoxic drugs) and **non-modifiable** (genetics, prematurity, autoimmune).\n\n>> Drugs, genetics, obesity, HTN, prematurity, diabetes, autoimmune.",
+         "opts": [
+          "Only old age",
+          "Nephrotoxic drugs, genetics, obesity, HTN, prematurity, diabetes, autoimmune",
+          "No risk factors exist",
+          "Only male sex"
+         ],
+         "ans": 1
         },
         {
          "q": "List the clinical features of renal disorders.",
-         "a": "Oliguria/anuria, oedema, haematuria, proteinuria, hypertension, electrolyte imbalance, and lower abdominal pain."
+         "a": "**Oliguria/anuria, oedema, haematuria, proteinuria, hypertension, electrolyte imbalance, and lower abdominal pain.**\n\n## Understanding it\n- Reflect impaired **excretion** (oliguria), **barrier** damage (haematuria/proteinuria), and **fluid/BP** dysregulation (oedema, HTN).\n\n>> Oliguria, oedema, haematuria, proteinuria, hypertension.",
+         "opts": [
+          "Only a rash",
+          "Only a cough",
+          "Oliguria/anuria, oedema, haematuria, proteinuria, hypertension",
+          "Only joint pain"
+         ],
+         "ans": 2
         },
         {
          "q": "State the rationale for investigations in nephrology.",
-         "a": "To confirm a clinical diagnosis; to assess structural and functional integrity of the kidneys and urinary tract; to assess the severity and extent of the disease; for prognostication; and to exclude other co-morbidities."
+         "a": "**To confirm a clinical diagnosis and to assess the structural and functional integrity of the kidneys and urinary tract.**\n\n## Understanding it\n- Two aims: **confirm the diagnosis** and **assess structure + function**.\n\n>> Confirm the diagnosis; assess structure and function.",
+         "opts": [
+          "To avoid examination",
+          "Only to image bones",
+          "To bill the patient",
+          "Confirm the diagnosis; assess structure and function"
+         ],
+         "ans": 3
         },
         {
          "q": "What four considerations are important when choosing an investigation?",
-         "a": "Diagnostic value, availability, cost and sustainability."
+         "a": "**Diagnostic value, availability, cost, and sustainability.**\n\n## Understanding it\n- Choose a test that is **useful, available, affordable, and repeatable** in the setting.\n\n>> Value, availability, cost, sustainability.",
+         "opts": [
+          "Colour of the machine",
+          "Only the newest technology",
+          "Only what the patient requests",
+          "Diagnostic value, availability, cost, sustainability"
+         ],
+         "ans": 3
         },
         {
          "q": "List the seven classes of investigation in nephrology.",
-         "a": "Urine examinations; blood investigations; GFR estimation; assessment of tubular function; imaging; biopsy; and bladder function assessment."
+         "a": "**Urine examinations; blood investigations; GFR estimation; assessment of tubular function; imaging; biopsy; and urodynamic studies.**\n\n## Understanding it\n- Grouped from **least to most invasive**: urine/blood → GFR/tubular function → imaging → biopsy/urodynamics.\n\n>> Urine, blood, GFR, tubular function, imaging, biopsy, urodynamics.",
+         "opts": [
+          "Only urine and blood",
+          "Only imaging",
+          "Urine, blood, GFR, tubular function, imaging, biopsy, urodynamics",
+          "Only biopsy"
+         ],
+         "ans": 2
         },
         {
          "q": "Why must urine samples be examined freshly, and how may they be stored?",
-         "a": "To avoid disintegration of cellular elements and bacterial overgrowth; urine can be stored in the refrigerator at 4 °C."
+         "a": "**To avoid disintegration of cellular elements and bacterial overgrowth; if delayed, urine can be refrigerated.**\n\n## Understanding it\n- Standing urine → **cells break down** and **bacteria multiply**, giving false results.\n- If it can't be examined promptly, **refrigerate** it.\n\n>> Examine fresh (cells lyse, bacteria grow); otherwise refrigerate.",
+         "opts": [
+          "Freshness is irrelevant",
+          "Add sugar to preserve it",
+          "Leave at room temperature for days",
+          "To prevent cell breakdown and bacterial overgrowth; refrigerate if delayed"
+         ],
+         "ans": 3
         },
         {
          "q": "List the methods of urine collection.",
-         "a": "MSU (with a long bladder time); clean catch method; bagging; suprapubic aspiration (SPA); catheterization; and use of a mid-stream urinary collector."
+         "a": "**Midstream urine, clean-catch, bag collection, suprapubic aspiration (SPA), and catheterization.**\n\n## Understanding it\n- Range from **non-invasive** (MSU, clean catch, bag) to **invasive/reliable** (SPA, catheter).\n\n>> MSU, clean catch, bag, SPA, catheter.",
+         "opts": [
+          "Only a swab",
+          "MSU, clean catch, bag, suprapubic aspiration, catheter",
+          "Only a blood draw",
+          "Only a 24-hour bottle"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the drawback of bagging, and what is its value?",
-         "a": "It is associated with a high risk of contamination and the bag must be removed as soon as urine is passed; it is important for its negative predictive value."
+         "a": "**High risk of contamination (the bag must be removed as soon as urine is passed); its value is mainly a good negative predictive value.**\n\n## Understanding it\n- Bag urine is **easily contaminated** by skin flora → false positives.\n- But a **negative** bag result is reassuring (good negative predictive value).\n\n>> Bag: contamination-prone, useful mainly when negative.",
+         "opts": [
+          "It is painful",
+          "It is the most sterile method",
+          "It requires anaesthesia",
+          "High contamination risk; useful for its negative predictive value"
+         ],
+         "ans": 3
         },
         {
          "q": "Which method of urine collection is most reliable, and in whom is it useful?",
-         "a": "Suprapubic aspiration — useful in children less than 2 years."
+         "a": "**Suprapubic aspiration — most reliable; useful in children under 2 years.**\n\n## Understanding it\n- **SPA** samples bladder urine directly, bypassing skin contamination → the **gold standard** for sterility.\n- Especially useful in **infants under 2**.\n\n>> SPA = most reliable; used in under-2s.",
+         "opts": [
+          "Bag collection; all ages",
+          "A dipstick; adults only",
+          "Suprapubic aspiration; children under 2 years",
+          "Clean catch; neonates only"
+         ],
+         "ans": 2
         },
         {
          "q": "State the significant colony counts for SPA, CSU and MSU.",
-         "a": "SPA — any growth is significant, because bladder urine is supposed to be sterile. CSU — ≥ 10⁴ CFU/mL. MSU — ≥ 10⁵ CFU/mL."
+         "a": "**SPA — any growth is significant (bladder urine should be sterile); CSU — ≥ 10⁴ CFU/mL; MSU — ≥ 10⁵ CFU/mL.**\n\n## Understanding it\n- The **cleaner** the sample, the **lower** the threshold: SPA (any) < catheter (10⁴) < midstream (10⁵).\n\n>> SPA any growth; CSU 10⁴; MSU 10⁵.",
+         "opts": [
+          "There are no thresholds",
+          "SPA needs 10⁶",
+          "All require 10⁵",
+          "SPA any growth; CSU ≥10⁴; MSU ≥10⁵ CFU/mL"
+         ],
+         "ans": 3
         },
         {
          "q": "What growth indicates UTI on catheterization in a girl, or midstream clean-void in a circumcised boy?",
-         "a": "Usually > 50,000 CFU/mL of a single urinary pathogen; however UTI may be present with 10,000–50,000 CFU/mL of a single organism."
+         "a": "**Usually > 50,000 CFU/mL of a single urinary pathogen; UTI may be present with 10,000–50,000 CFU/mL if symptomatic.**\n\n## Understanding it\n- For these relatively clean samples, **>50,000 CFU/mL** of one pathogen indicates UTI.\n- Lower counts (10,000–50,000) can still be UTI if the child is **symptomatic**.\n\n>> >50,000 CFU/mL (single pathogen); lower counts count if symptomatic.",
+         "opts": [
+          "Any growth at all",
+          "Growth is never significant",
+          ">50,000 CFU/mL of a single pathogen (lower if symptomatic)",
+          "Only >1,000,000 CFU/mL"
+         ],
+         "ans": 2
         },
         {
          "q": "What growth indicates UTI on midstream clean-void collection in a girl or uncircumcised boy?",
-         "a": "> 100,000 CFU/mL of a single urinary pathogen in a symptomatic patient, with pyuria usually present; UTI may be present with 10,000–50,000 CFU/mL."
+         "a": "**> 100,000 CFU/mL of a single urinary pathogen in a symptomatic patient, usually with pyuria; UTI may still be present at lower counts.**\n\n## Understanding it\n- These samples are more contamination-prone, so the threshold is **higher: >100,000 CFU/mL**.\n- **Pyuria** usually accompanies true infection.\n\n>> >100,000 CFU/mL (single pathogen) with pyuria.",
+         "opts": [
+          ">1,000 CFU/mL",
+          ">100,000 CFU/mL of a single pathogen with pyuria",
+          "No threshold applies",
+          "Any mixed growth"
+         ],
+         "ans": 1
         },
         {
          "q": "In an asymptomatic patient, how is bacterial growth interpreted?",
-         "a": "Growth is usually > 100,000 CFU/mL of the same organism on different days; and if pyuria is absent, the result probably indicates colonization rather than infection."
+         "a": "**Growth is usually significant if > 100,000 CFU/mL of the same organism on different days; absent pyuria makes the result less likely to be a true infection.**\n\n## Understanding it\n- Without symptoms, you need **repeated high counts of the same organism** to call it real.\n- **No pyuria** argues against true infection (may be asymptomatic bacteriuria/contamination).\n\n>> Asymptomatic: >100,000 of the same organism on separate days; no pyuria = doubt it.",
+         "opts": [
+          "Any single growth is a UTI",
+          "It is always contamination",
+          "Significant if >100,000 of the same organism on different days",
+          "Pyuria is irrelevant"
+         ],
+         "ans": 2
         },
         {
          "q": "Which patients are most likely to have a UTI with low colony counts, and why?",
-         "a": "Patients with urinary frequency — because decreased bladder incubation time gives bacteria less opportunity to proliferate."
+         "a": "**Patients with urinary frequency — because the shortened bladder incubation time gives bacteria less opportunity to multiply.**\n\n## Understanding it\n- Bacteria multiply while urine **sits** in the bladder.\n- Frequent voiding = **short incubation** = lower counts despite real infection.\n\n>> Frequency → short incubation → true UTI at low counts.",
+         "opts": [
+          "Patients with frequency (short bladder incubation time)",
+          "It never happens",
+          "Patients who drink no water",
+          "Only elderly patients"
+         ],
+         "ans": 0
         },
         {
          "q": "List the parameters on a routine urine dipstick.",
-         "a": "Leukocyte, nitrite, protein, pH, blood, specific gravity, ketone, bilirubin, glucose, ascorbic acid, and urobilinogen."
+         "a": "**Leukocytes, nitrite, protein, pH, blood, specific gravity, ketones, bilirubin, glucose, ascorbic acid, and urobilinogen.**\n\n## Understanding it\n- Key renal/UTI ones: **leukocytes + nitrite** (infection), **protein + blood** (glomerular), **specific gravity/pH** (concentration/acid-base).\n\n>> Dipstick: leukocytes, nitrite, protein, blood, pH, SG, glucose, ketones, bilirubin.",
+         "opts": [
+          "Leukocytes, nitrite, protein, pH, blood, SG, ketones, glucose, bilirubin",
+          "Serum electrolytes",
+          "Only glucose",
+          "Only pH"
+         ],
+         "ans": 0
         },
         {
          "q": "State the principle of the urine dipstick.",
-         "a": "Urine constituents react with a chemical impregnated in the specific pad on the strip, producing a colour change; the intensity of colour gives a qualitative grading read off the chart on the container."
+         "a": "**Urine constituents react with a chemical impregnated in each pad on the strip, producing a colour change read against a chart.**\n\n## Understanding it\n- Each **reagent pad** reacts with a specific substance → a **colour change** proportional to concentration.\n\n>> Chemical pads change colour with urine constituents.",
+         "opts": [
+          "It measures temperature",
+          "It cultures bacteria",
+          "Constituents react with reagent pads, giving a colour change",
+          "It weighs the urine"
+         ],
+         "ans": 2
         },
         {
          "q": "What determines the quality of a dipstick result?",
-         "a": "Strict adherence to the manufacturer's instructions."
+         "a": "**Strict adherence to the manufacturer's instructions.**\n\n## Understanding it\n- Timing, storage, and reading must follow the **manufacturer's protocol** or results are unreliable.\n\n>> Follow the instructions exactly for a valid result.",
+         "opts": [
+          "Strict adherence to the manufacturer's instructions",
+          "The patient's age",
+          "The colour of the container",
+          "How fast you shake it"
+         ],
+         "ans": 0
         },
         {
          "q": "State the estimated urine protein concentration for each dipstick grade.",
-         "a": "Trace < 30 mg/dL; + 30 mg/dL; 2+ 100 mg/dL; 3+ 300 mg/dL; 4+ > 1000 mg/dL."
+         "a": "**Trace < 30 mg/dL; + 30 mg/dL; 2+ 100 mg/dL; 3+ 300 mg/dL; 4+ > 1000 mg/dL.**\n\n## Understanding it\n- Each '+' corresponds to a rising protein concentration; **3+/4+** suggest heavy (nephrotic-range) proteinuria.\n\n>> Trace<30, +30, 2+100, 3+300, 4+>1000 mg/dL.",
+         "opts": [
+          "All grades mean the same",
+          "Trace = 500 mg/dL",
+          "Trace<30, +30, 2+100, 3+300, 4+>1000 mg/dL",
+          "+ = 1000 mg/dL"
+         ],
+         "ans": 2
         },
         {
          "q": "List the causes of false negative proteinuria.",
-         "a": "Dilute or very acidic urine, and proteinuria from other proteins."
+         "a": "**Dilute or very acidic urine, and proteinuria composed of proteins other than albumin.**\n\n## Understanding it\n- The dipstick mainly detects **albumin**, in reasonably concentrated urine.\n- **Dilute/acidic** urine or **non-albumin** proteins → falsely negative.\n\n>> Dilute/acidic urine or non-albumin protein → false negative.",
+         "opts": [
+          "Gross haematuria",
+          "Dilute/acidic urine; non-albumin proteinuria",
+          "Concentrated alkaline urine",
+          "Contamination with discharge"
+         ],
+         "ans": 1
         },
         {
          "q": "List the causes of false positive proteinuria.",
-         "a": "Concentrated urine, alkaline urine, gross haematuria, delay in reading, and urine contamination with vaginal secretions or antiseptic."
+         "a": "**Concentrated urine, alkaline urine, gross haematuria, delay in reading, and contamination (e.g. vaginal discharge).**\n\n## Understanding it\n- Very **concentrated/alkaline** urine, **blood**, delayed reading, or **contamination** can falsely raise the protein reading.\n\n>> Concentrated/alkaline urine, haematuria, delay, contamination → false positive.",
+         "opts": [
+          "Concentrated/alkaline urine, gross haematuria, delayed reading, contamination",
+          "Dilute acidic urine",
+          "Refrigerated urine",
+          "Non-albumin protein"
+         ],
+         "ans": 0
         },
         {
          "q": "What other urine examinations are performed?",
-         "a": "Urine macroscopy (appearance, colour change, odour); urine microscopy for RBC, WBC, casts and crystals; urine culture and sensitivity; and spot urine protein-creatinine ratio."
+         "a": "**Urine macroscopy (appearance, colour, odour), microscopy (RBCs, WBCs, casts, crystals), and urine culture.**\n\n## Understanding it\n- Beyond the dipstick: **look** (macroscopy), **microscope** (cells/casts/crystals), and **culture** (organism + sensitivity).\n\n>> Macroscopy + microscopy (cells/casts) + culture.",
+         "opts": [
+          "Macroscopy, microscopy (cells/casts/crystals), and culture",
+          "Only a blood test",
+          "Only imaging",
+          "Only the dipstick"
+         ],
+         "ans": 0
         },
         {
          "q": "List the blood tests used in nephrology.",
-         "a": "Serum electrolytes, urea and creatinine, calcium, phosphate, magnesium and vitamin D assay; FBC, MP and ESR; arterial blood gases; and immunologic tests."
+         "a": "**Serum electrolytes, urea and creatinine, calcium, phosphate, magnesium and vitamin D; plus FBC, malaria parasites, and ESR.**\n\n## Understanding it\n- **Renal function** (U&E, creatinine), **bone/mineral** (Ca, PO4, Mg, vit D), and **general** (FBC, MP, ESR).\n\n>> U&E/creatinine, Ca/PO4/Mg/vit D, FBC/MP/ESR.",
+         "opts": [
+          "Only a full blood count",
+          "Electrolytes, urea/creatinine, Ca/PO4/Mg/vit D, FBC, MP, ESR",
+          "Only glucose",
+          "Only cholesterol"
+         ],
+         "ans": 1
         },
         {
          "q": "List the immunologic tests used in nephrology and what they indicate.",
-         "a": "C3, C4, CH50; ASO titre; anti-DNAse B; IgG and IgA for SLE and JRA; ANCA for Wegener granulomatosis and crescentic glomerulonephritis; and hormonal profile — T3, T4, TSH."
+         "a": "**C3/C4/CH50 (complement), ASO titre and anti-DNAse B (streptococcal infection), IgG/IgA (SLE, JRA), and ANCA (Wegener's/vasculitis).**\n\n## Understanding it\n- **Complement** (low in post-strep GN, SLE), **ASO/anti-DNAse B** (recent strep), **ANCA** (vasculitis).\n\n>> Complement, ASO/anti-DNAse B, ANCA — for glomerulonephritis/vasculitis work-up.",
+         "opts": [
+          "Only blood glucose",
+          "Only vitamin D",
+          "Complement (C3/C4), ASO/anti-DNAse B, IgG/IgA, ANCA",
+          "Only electrolytes"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is GFR estimated?",
-         "a": "To assess renal function, detect renal disease, assess severity, and for prognostication."
+         "a": "**To assess renal function, detect renal disease, assess its severity, and for prognostication.**\n\n## Understanding it\n- GFR is the **best overall measure of kidney function**.\n- It detects disease, grades **severity (CKD stage)**, and predicts outcome.\n\n>> GFR = the master measure of renal function/severity/prognosis.",
+         "opts": [
+          "To image the kidney",
+          "To measure blood pressure",
+          "To assess function, detect/grade disease, and prognosticate",
+          "To diagnose infection"
+         ],
+         "ans": 2
         },
         {
          "q": "Name the commonly used markers for GFR estimation.",
-         "a": "Inulin, polyfructose, Cr-EDTA, creatinine, cystatin C, and urea."
+         "a": "**Inulin, polyfructose, Cr-EDTA, creatinine, cystatin C, and urea.**\n\n## Understanding it\n- **Inulin** is the gold-standard research marker; **creatinine/cystatin C** are practical clinical markers.\n\n>> Inulin (ideal), Cr-EDTA, creatinine, cystatin C, urea.",
+         "opts": [
+          "Only haemoglobin",
+          "Only glucose",
+          "Inulin, Cr-EDTA, creatinine, cystatin C, urea",
+          "Only sodium"
+         ],
+         "ans": 2
         },
         {
          "q": "State the three properties of an ideal marker for GFR estimation.",
-         "a": "It should be freely filtered at the glomerulus; should achieve a stable plasma concentration; and should not be reabsorbed, secreted or metabolized by the kidney."
+         "a": "**It should be freely filtered at the glomerulus, achieve a stable plasma concentration, and be neither secreted nor reabsorbed by the tubules.**\n\n## Understanding it\n- A true GFR marker must be **filtered only** — not handled further by the tubules — with a **steady** blood level.\n- Inulin fits; creatinine (secreted) and urea (reabsorbed) don't perfectly.\n\n>> Freely filtered, stable level, not secreted/reabsorbed.",
+         "opts": [
+          "Secreted heavily",
+          "Freely filtered, stable plasma level, not secreted or reabsorbed",
+          "Reabsorbed by the tubule",
+          "Bound to plasma proteins"
+         ],
+         "ans": 1
         },
         {
          "q": "Why is creatinine not an ideal marker for GFR?",
-         "a": "Because it is secreted in the proximal tubule, and its concentration is influenced by age, sex, height and dietary protein."
+         "a": "**Because it is secreted by the proximal tubule, and its level is influenced by age, sex, height and muscle mass.**\n\n## Understanding it\n- Tubular **secretion** means creatinine clearance slightly **overestimates** GFR.\n- Its production varies with **muscle mass**, so the same creatinine means different GFR in different people.\n\n>> Creatinine is secreted and muscle-dependent → imperfect.",
+         "opts": [
+          "It is reabsorbed entirely",
+          "It is secreted by the tubule and varies with muscle mass",
+          "It is never filtered",
+          "It is unaffected by anything"
+         ],
+         "ans": 1
         },
         {
          "q": "How is creatinine clearance measured?",
-         "a": "Using a timed urine collection — 24 hours, or 6–12 hours."
+         "a": "**Using a timed urine collection — 24 hours, or 6–12 hours.**\n\n## Understanding it\n- Collect **all** urine over a set time and compare urine to plasma creatinine.\n- Standard is **24 hours** (shorter timed collections are alternatives).\n\n>> Timed (usually 24-hour) urine collection.",
+         "opts": [
+          "A timed (e.g. 24-hour) urine collection",
+          "A single spot blood test",
+          "A dipstick reading",
+          "An ultrasound"
+         ],
+         "ans": 0
         },
         {
          "q": "Why is urea not an ideal marker for GFR?",
-         "a": "Because it is reabsorbed by the renal tubules, and its plasma level is affected by dietary protein intake and state of hydration."
+         "a": "**Because it is reabsorbed by the renal tubules, and its plasma level is affected by dietary protein intake.**\n\n## Understanding it\n- Tubular **reabsorption** means urea **underestimates** GFR.\n- **Diet (protein)** and hydration also change urea independent of GFR.\n\n>> Urea is reabsorbed and diet-dependent → imperfect.",
+         "opts": [
+          "It is unaffected by diet",
+          "It is never in the blood",
+          "It is secreted heavily",
+          "It is reabsorbed and affected by dietary protein"
+         ],
+         "ans": 3
         },
         {
          "q": "State the Schwartz formula.",
-         "a": "GFR (mL/min/1.73 m²) = 0.413 × height (cm) / serum creatinine (mg/dL)."
+         "a": "**GFR (mL/min/1.73 m²) = 0.413 × height (cm) / serum creatinine (mg/dL).**\n\n## Understanding it\n- A paediatric bedside estimate of GFR using **height and creatinine**.\n- The constant (0.413) accounts for muscle mass relative to height.\n\n>> Schwartz: GFR = 0.413 × height / creatinine.",
+         "opts": [
+          "GFR = height + creatinine",
+          "GFR = 300 / creatinine",
+          "GFR = 0.413 × height(cm) / creatinine(mg/dL)",
+          "GFR = weight × creatinine"
+         ],
+         "ans": 2
         },
         {
          "q": "Why is GFR expressed per 1.73 m²?",
-         "a": "Because 1.73 m² is the average body surface area of an ideal adult, allowing comparison across body sizes."
+         "a": "**Because 1.73 m² is the average body surface area of an ideal adult, allowing comparison across body sizes.**\n\n## Understanding it\n- Normalising GFR to a **standard body surface area** lets you compare a child and an adult fairly.\n\n>> Per 1.73 m² standardises GFR across body sizes.",
+         "opts": [
+          "It is the kidney's surface area",
+          "The bladder capacity",
+          "1.73 m² is a standard body surface area for comparison",
+          "A random number"
+         ],
+         "ans": 2
         },
         {
          "q": "State the formula for fractional excretion of sodium.",
-         "a": "FENa (%) = quantity of Na excreted / quantity of Na filtered × 100 = (UNa × Pcr) / (PNa × Ucr) × 100."
+         "a": "**FENa (%) = (UNa × Pcr) / (PNa × Ucr) × 100.**\n\n## Understanding it\n- FENa compares **sodium excreted** to **sodium filtered**, using paired urine and plasma sodium and creatinine.\n\n>> FENa = (UNa × Pcr)/(PNa × Ucr) × 100.",
+         "opts": [
+          "FENa = height/creatinine",
+          "FENa = creatinine clearance",
+          "FENa = UNa/PNa only",
+          "FENa = (UNa × Pcr)/(PNa × Ucr) × 100"
+         ],
+         "ans": 3
         },
         {
          "q": "What determines urinary sodium excretion normally, and how is FENa interpreted?",
-         "a": "Extracellular fluid volume normally determines urinary sodium excretion; FENa is ≤ 1 in normovolaemia and pre-renal AKI, and > 1 in impaired tubular transport such as ATN."
+         "a": "**Extracellular fluid volume normally determines sodium excretion; FENa ≤ 1 in normovolaemia/pre-renal states and > 1 in tubular damage (ATN).**\n\n## Understanding it\n- Healthy tubules **retain sodium** when volume-depleted → **FENa ≤ 1** (pre-renal AKI).\n- Damaged tubules **leak sodium** → **FENa > 1** (ATN).\n\n>> FENa ≤1 = pre-renal (tubules working); >1 = ATN (tubules damaged).",
+         "opts": [
+          "ECF volume determines it; FENa ≤1 pre-renal, >1 ATN",
+          "FENa >1 means pre-renal",
+          "Volume has no effect",
+          "FENa is always 5"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the tests of renal tubular function other than fractional excretion.",
-         "a": "Concentrating ability test (osmolality, pH); water deprivation test; diluting ability test; and urine acidification test."
+         "a": "**Concentrating ability test (osmolality, pH), water deprivation test, diluting ability test, and urine acidification test.**\n\n## Understanding it\n- These probe the tubule's ability to **concentrate, dilute, and acidify** urine.\n\n>> Concentrating, water deprivation, diluting, and acidification tests.",
+         "opts": [
+          "Only the dipstick",
+          "Only GFR",
+          "Concentrating, water deprivation, diluting, and acidification tests",
+          "Only culture"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the water deprivation test used to differentiate?",
-         "a": "Central diabetes insipidus from nephrogenic diabetes insipidus."
+         "a": "**Central diabetes insipidus from nephrogenic diabetes insipidus.**\n\n## Understanding it\n- Withhold water, then give **desmopressin (ADH)**.\n- **Central DI** responds to ADH (concentrates urine); **nephrogenic DI** does not (kidney can't respond).\n\n>> Water deprivation ± ADH separates central from nephrogenic DI.",
+         "opts": [
+          "SLE from vasculitis",
+          "Pre-renal from ATN",
+          "Central from nephrogenic diabetes insipidus",
+          "UTI from stones"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the diluting ability test used for?",
-         "a": "Assessment of unexplained hyponatraemia."
+         "a": "**Assessment of unexplained hyponatraemia.**\n\n## Understanding it\n- It tests whether the kidney can appropriately **dilute** urine to excrete free water.\n- Useful when **hyponatraemia** has no obvious cause (e.g. SIADH).\n\n>> Diluting test → work up unexplained hyponatraemia.",
+         "opts": [
+          "Diagnosing UTI",
+          "Grading VUR",
+          "Measuring GFR",
+          "Assessing unexplained hyponatraemia"
+         ],
+         "ans": 3
         },
         {
          "q": "What does the urine acidification test involve?",
-         "a": "Serial urine pH, bicarbonate excretion, titratable acid, NH₃ excretion, and the ammonium chloride challenge test."
+         "a": "**Serial urine pH, bicarbonate excretion, titratable acid, ammonia excretion, and the ammonium chloride challenge.**\n\n## Understanding it\n- It assesses the tubule's ability to **acidify urine** (excrete acid) — key in **renal tubular acidosis**.\n- The **ammonium chloride load** stresses the system.\n\n>> Acidification test → diagnoses renal tubular acidosis.",
+         "opts": [
+          "Serial pH, bicarbonate/acid excretion, and an ammonium chloride challenge",
+          "A single blood pH",
+          "A urine culture",
+          "An ultrasound scan"
+         ],
+         "ans": 0
         },
         {
          "q": "How does ultrasonography work?",
-         "a": "It uses sound waves beyond human auditory capability (> 20 kHz); the transducer produces the sound wave and also receives the reflected wave, converting the echoes to electrical impulses which are displayed as images on the monitor."
+         "a": "**It uses sound waves beyond human hearing (> 20 kHz); the transducer emits the wave and detects the echoes to build an image.**\n\n## Understanding it\n- **High-frequency sound** is sent in and its **echoes** are reconstructed into an image.\n- No ionizing radiation.\n\n>> Ultrasound = sound waves in, echoes out → image.",
+         "opts": [
+          "X-rays through the body",
+          "High-frequency sound waves and their echoes form an image",
+          "Radioactive tracer",
+          "A magnetic field"
+         ],
+         "ans": 1
         },
         {
          "q": "List the uses of renal ultrasonography.",
-         "a": "Investigating causes of urinary tract infections; checking for causes of urinary tract obstruction; diagnosing kidney stones, masses, cysts and tumours; evaluating congenital urinary tract abnormality; assessing kidney injury from trauma; and monitoring kidney transplant status or vascular issues."
+         "a": "**Investigating causes of UTI, checking for obstruction, diagnosing structural anomalies, guiding biopsy, and assessing kidney size.**\n\n## Understanding it\n- The **first-line** imaging: size, structure, obstruction (hydronephrosis), and biopsy guidance.\n\n>> US: structure, size, obstruction, anomalies, biopsy guidance.",
+         "opts": [
+          "Diagnose epilepsy",
+          "Culture bacteria",
+          "Measure kidney function",
+          "Assess structure/size, detect obstruction/anomalies, guide biopsy"
+         ],
+         "ans": 3
         },
         {
          "q": "List the merits of ultrasonography.",
-         "a": "No ionizing radiation; real time images; readily available; relatively cheap; and portable, point-of-care option."
+         "a": "**No ionizing radiation, real-time images, readily available, relatively cheap, and portable (point-of-care).**\n\n## Understanding it\n- Safe (no radiation), fast, cheap, bedside — ideal for children.\n\n>> Safe, real-time, available, cheap, portable.",
+         "opts": [
+          "High radiation but cheap",
+          "Requires sedation always",
+          "Very expensive and fixed",
+          "No radiation, real-time, available, cheap, portable"
+         ],
+         "ans": 3
         },
         {
          "q": "List the demerits of ultrasonography.",
-         "a": "Cannot see through compact bone (posterior acoustic shadow); gas distorts the image; user dependence; and depth limitation."
+         "a": "**Cannot see through compact bone (posterior acoustic shadow), gas distorts the image, it is user-dependent, and it gives no functional information.**\n\n## Understanding it\n- **Bone and gas** block/distort the beam; results depend on the **operator's** skill.\n- It shows **structure only**, not function.\n\n>> Blocked by bone/gas, operator-dependent, structure-only.",
+         "opts": [
+          "Always perfectly accurate",
+          "Shows renal function well",
+          "Blocked by bone/gas, user-dependent, no functional data",
+          "Uses high radiation"
+         ],
+         "ans": 2
         },
         {
          "q": "List the radiographic imaging modalities in nephrology.",
-         "a": "Plain film; intravenous urography; voiding cysto-urethrography; antegrade and retrograde pyelography; and renal arteriography."
+         "a": "**Plain film, intravenous urography, voiding cysto-urethrography, antegrade and retrograde pyelography, and CT/MRI.**\n\n## Understanding it\n- A range of **X-ray/contrast** studies plus cross-sectional imaging (CT/MRI).\n\n>> Plain film, IVU, VCUG, pyelography, CT/MRI.",
+         "opts": [
+          "Only EEG",
+          "Only biopsy",
+          "Only ultrasound",
+          "Plain film, IVU, VCUG, pyelography, CT/MRI"
+         ],
+         "ans": 3
         },
         {
          "q": "What is a plain film used for in nephrology?",
-         "a": "Diagnosis of nephrocalcinosis and radio-opaque stones in the pelvis, ureters and bladder; diagnosis of congenital spinal abnormalities with urinary symptom manifestation; and before injecting contrast material for intravenous urography. It is declining with the advent of USS."
+         "a": "**Diagnosing nephrocalcinosis and radio-opaque stones in the pelvis, ureters and bladder, and detecting congenital bony/spinal anomalies.**\n\n## Understanding it\n- A plain X-ray (KUB) shows **calcium-containing stones** and **calcification**.\n- Radiolucent stones are missed.\n\n>> Plain film = radio-opaque stones and nephrocalcinosis.",
+         "opts": [
+          "Renal function",
+          "Bacterial growth",
+          "Soft-tissue tumours",
+          "Radio-opaque stones and nephrocalcinosis"
+         ],
+         "ans": 3
         },
         {
          "q": "What is intravenous urography used for?",
-         "a": "To demonstrate anatomy of the urinary tract, giving details of the calyces and ureters; in the diagnosis of occult duplex kidney, malrotation, site of urinary tract obstruction and calculi; and it can detect renal scars."
+         "a": "**To demonstrate the anatomy of the urinary tract (calyces and ureters) and to diagnose obstruction and some structural lesions.**\n\n## Understanding it\n- IV contrast is **excreted** by the kidney, outlining the **collecting system and ureters**.\n- Shows anatomy and obstruction.\n\n>> IVU = contrast outlines the calyces/ureters (needs working kidneys).",
+         "opts": [
+          "Culturing urine",
+          "Measuring GFR precisely",
+          "Showing renal blood flow only",
+          "Demonstrating collecting-system anatomy and obstruction"
+         ],
+         "ans": 3
         },
         {
          "q": "List the demerits of intravenous urography.",
-         "a": "High radiation exposure; low sensitivity for renal scar detection; potential reaction to contrast; and it is not used in neonates, young infants, or patients with renal failure."
+         "a": "**High radiation exposure, low sensitivity for renal scars, potential contrast reactions, and dependence on kidney excretion (poor in renal failure).**\n\n## Understanding it\n- Lots of **radiation**, poor at scars, **contrast risk**, and useless if the kidney can't excrete the dye.\n\n>> High radiation, misses scars, contrast risk, fails in renal failure.",
+         "opts": [
+          "Works in complete failure",
+          "Best test for scars",
+          "High radiation, misses scars, contrast risk, fails in renal failure",
+          "No radiation"
+         ],
+         "ans": 2
         },
         {
          "q": "What is voiding cysto-urethrography, and what is it the gold standard for?",
-         "a": "The definitive method for demonstrating the lower urinary tract; it is the gold standard for diagnosing and grading VUR and PUV obstruction."
+         "a": "**The definitive method for demonstrating the lower urinary tract; it is the gold standard for diagnosing and grading vesicoureteric reflux (and posterior urethral valves).**\n\n## Understanding it\n- Contrast in the **bladder** is imaged during voiding to catch **reflux (VUR)** and **PUV**.\n\n>> VCUG = gold standard for VUR (and PUV).",
+         "opts": [
+          "Best for stones",
+          "Gold standard for GFR",
+          "Gold standard for VUR (and PUV) — the lower urinary tract",
+          "Best for renal scars"
+         ],
+         "ans": 2
         },
         {
          "q": "How is a VCUG performed?",
-         "a": "Contrast is injected into the bladder to the upper tract, and films are taken during instillation, voiding and post-voiding."
+         "a": "**Contrast is instilled into the bladder up toward the upper tract, and films are taken during instillation, voiding, and after voiding.**\n\n## Understanding it\n- Fill the bladder with contrast, then image while the child **voids** — when reflux is most likely.\n\n>> Fill the bladder, image during voiding (± before/after).",
+         "opts": [
+          "Contrast is injected into a vein",
+          "A tracer is inhaled",
+          "No contrast is used",
+          "Bladder is filled with contrast and imaged during voiding"
+         ],
+         "ans": 3
         },
         {
          "q": "List the indications for VCUG.",
-         "a": "Suspected ureteric dilatation; small contracted kidneys; renal failure of indeterminate cause; terminal haematuria; voiding difficulties; and a thick walled bladder seen by ultrasound."
+         "a": "**Suspected ureteric dilatation, small contracted kidneys, renal failure of indeterminate cause, terminal haematuria, and recurrent/febrile UTI (to look for reflux).**\n\n## Understanding it\n- Mainly to evaluate **reflux/obstruction** — e.g. after a **febrile UTI** or when the ureter is dilated.\n\n>> VCUG when reflux/PUV is suspected (febrile UTI, dilated ureter).",
+         "opts": [
+          "Simple dehydration",
+          "A cough",
+          "Every routine check-up",
+          "Suspected reflux/obstruction (febrile UTI, dilated ureter, contracted kidneys)"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the demerits of VCUG?",
-         "a": "High dose of radiation, and risk of UTI."
+         "a": "**A high dose of radiation and a risk of introducing UTI.**\n\n## Understanding it\n- It's an **X-ray/contrast** study (**radiation**) and involves **catheterising** the bladder (**infection risk**).\n\n>> VCUG downsides: radiation and catheter-related UTI.",
+         "opts": [
+          "It measures GFR poorly",
+          "It requires surgery",
+          "High radiation and risk of UTI",
+          "No radiation and no infection risk"
+         ],
+         "ans": 2
         },
         {
          "q": "Which radioisotopes are used in dynamic renography, and what are its uses?",
-         "a": "Technetium-labelled DTPA (Tc-DTPA) and Tc-MAG3; used for determining differential renal function, indirect voiding cystography, evaluation of post-transplantation state, and evaluating surgical treatment involving the kidneys."
+         "a": "**Technetium-labelled DTPA (Tc-DTPA) and Tc-MAG3; used for differential renal function, drainage, and detecting obstruction.**\n\n## Understanding it\n- These tracers are **filtered/excreted**, so their passage shows **how each kidney works and drains**.\n- Key for **differential function** and **obstruction**.\n\n>> Dynamic renography (Tc-DTPA/MAG3) = differential function + drainage/obstruction.",
+         "opts": [
+          "Barium; for the gut",
+          "Iodine tablets; for stones",
+          "No isotopes are used",
+          "Tc-DTPA and Tc-MAG3; differential function and obstruction"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the merits and demerits of dynamic renography?",
-         "a": "It has a low dose of radiation; demerits are poor visualization of the renal cortex, and it cannot be used to evaluate renal size or morphology."
+         "a": "**Merit: low radiation dose. Demerits: poor visualisation of the renal cortex, and it cannot be used in poor renal function.**\n\n## Understanding it\n- **Low radiation**, functional information.\n- But it shows the **cortex poorly** and **fails** when kidney function is poor (tracer not handled).\n\n>> Low dose, functional; but poor cortex detail and useless in failure.",
+         "opts": [
+          "Cannot show function",
+          "Low radiation; poor cortex detail, fails in poor function",
+          "No downsides",
+          "High radiation, excellent cortex"
+         ],
+         "ans": 1
         },
         {
          "q": "List the uses of the static renal scan.",
-         "a": "In renovascular diseases and dribbling urinary incontinence; location of ectopic or absent kidney; detection of renal scars; the acute phase of pyelonephritis to demonstrate parenchymal involvement; and to detect focal parenchymal abnormalities."
+         "a": "**Renovascular disease and dribbling incontinence, locating an ectopic or absent kidney, and detecting renal scars.**\n\n## Understanding it\n- A **static (DMSA)** scan maps **functioning cortex**, so it excels at finding **scars** and locating/assessing kidneys.\n\n>> Static (DMSA) scan = scars and kidney location/function per side.",
+         "opts": [
+          "Measuring GFR precisely",
+          "Diagnosing UTI",
+          "Detecting scars, locating ectopic/absent kidney, renovascular disease",
+          "Imaging the bladder during voiding"
+         ],
+         "ans": 2
         },
         {
          "q": "What are the drawbacks of the static renal scan?",
-         "a": "It is time-consuming, and does not give information on the function of the urinary tract."
+         "a": "**It is time-consuming and gives no information on the function of the urinary tract (drainage).**\n\n## Understanding it\n- DMSA shows **cortical uptake**, not **drainage/flow** — so it doesn't assess obstruction.\n- It also takes time.\n\n>> Static scan: slow, and no drainage/flow information.",
+         "opts": [
+          "Very fast and shows drainage",
+          "Time-consuming; no information on urinary-tract drainage",
+          "Uses no tracer",
+          "Shows obstruction best"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the indications and merits of CT in nephrology?",
-         "a": "Indications are similar to those of ultrasound; it gives clearer resolution, can detect fine calcifications within the renal parenchyma and collecting system, and with contrast enhancement can evaluate masses in the pelvis or bladder such as Wilms tumour. It is expensive and carries a risk of considerable radiation."
+         "a": "**Indications similar to ultrasound; it gives clearer resolution and can detect fine calcification and small stones.**\n\n## Understanding it\n- CT is a **high-resolution cross-sectional** test — better than US for **small stones and fine calcification**.\n\n>> CT = high-resolution; best for small stones/calcification.",
+         "opts": [
+          "Uses no radiation",
+          "Similar to US but higher resolution; detects fine calcification/stones",
+          "Only for the bladder",
+          "Cannot see stones"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the uses and drawbacks of MRI in nephrology?",
-         "a": "For detailed evaluation of complex urinary system disorders; it gives excellent pelvic floor details and is good for renal masses and cystic lesions, with no radiation exposure — but heavy sedation is needed."
+         "a": "**For detailed evaluation of complex urinary-system disorders, with excellent pelvic-floor and soft-tissue detail; drawbacks include cost, availability, and the need for sedation in young children.**\n\n## Understanding it\n- MRI gives superb **soft-tissue** detail with **no radiation**, for complex cases.\n- But it is **expensive, less available, slow** (sedation needed in small children).\n\n>> MRI: detailed, no radiation, but costly/slow (sedation in children).",
+         "opts": [
+          "Detailed complex-case imaging; but costly, less available, needs sedation",
+          "Cannot show soft tissue",
+          "Uses high radiation",
+          "Cheap and instant"
+         ],
+         "ans": 0
         },
         {
          "q": "Define renal biopsy and list its types.",
-         "a": "The process of obtaining tissue from the kidney for histopathological evaluation; types are percutaneous, transvenous or transjugular, laparoscopic, and open surgical — the percutaneous approach is preferred by the paediatric nephrologist."
+         "a": "**Obtaining kidney tissue for histopathology; types are percutaneous, open (surgical), transjugular, and laparoscopic.**\n\n## Understanding it\n- A **tissue sample** for microscopy.\n- **Percutaneous** (needle through the skin) is standard; others for special situations.\n\n>> Renal biopsy = kidney tissue sample; percutaneous, open, transjugular, laparoscopic.",
+         "opts": [
+          "Kidney tissue sampling; percutaneous, open, transjugular, laparoscopic",
+          "A urine culture",
+          "An imaging scan",
+          "A blood test only"
+         ],
+         "ans": 0
         },
         {
          "q": "Name the renal biopsy needles.",
-         "a": "Vim-Silverman needle; manual Tru-cut biopsy needle; semi-automatic Tru-cut biopsy needle; and the Tru-cut spring-loaded automatic biopsy system."
+         "a": "**Vim-Silverman needle, manual Tru-cut, semi-automatic Tru-cut, and automatic Tru-cut (biopsy gun) needles.**\n\n## Understanding it\n- A family of **core-biopsy** needles; the **automated gun** is most common now.\n\n>> Vim-Silverman and Tru-cut (manual/semi/automatic) needles.",
+         "opts": [
+          "No special needle",
+          "A spinal needle",
+          "Vim-Silverman and Tru-cut (manual/semi-auto/auto) needles",
+          "A simple hypodermic needle"
+         ],
+         "ans": 2
         },
         {
          "q": "List the general indications for renal biopsy.",
-         "a": "Establishment of the exact diagnosis; as an aid to determine the nature of recommended therapy; to help decide when treatment is futile; to ascertain the degree of active (potentially reversible) and chronic (irreversible) changes; follow up of treatment or disease; and research."
+         "a": "**To establish the exact diagnosis, guide the choice of therapy, and help determine prognosis.**\n\n## Understanding it\n- Biopsy answers **what** the disease is, **how** to treat, and the **likely outcome**.\n\n>> Diagnosis, therapy guidance, prognosis.",
+         "opts": [
+          "To culture urine",
+          "To measure GFR",
+          "To relieve obstruction",
+          "Establish diagnosis, guide therapy, determine prognosis"
+         ],
+         "ans": 3
         },
         {
          "q": "What limits the accuracy of prognostication from a renal biopsy?",
-         "a": "Sample size, especially in focal lesions — biopsies with fewer than 5 glomeruli may not be accurate."
+         "a": "**Sample size — especially in focal lesions; a biopsy with fewer than 5 glomeruli may be inaccurate.**\n\n## Understanding it\n- **Focal** diseases affect only some glomeruli, so a small sample may **miss** them.\n- **≥ 5 glomeruli** is generally needed for reliability.\n\n>> Too few glomeruli (esp. in focal disease) = unreliable biopsy.",
+         "opts": [
+          "The needle colour",
+          "Too large a sample",
+          "The patient's age",
+          "Small sample size (especially focal lesions; <5 glomeruli)"
+         ],
+         "ans": 3
         },
         {
          "q": "State the indications for biopsy in nephrotic syndrome.",
-         "a": "Age less than 1 or greater than 7 years; steroid-resistant nephrotic syndrome; and those with evidence of nephritis — hypertension, haematuria, low C3, or decreased renal function persisting in spite of volume correction."
+         "a": "**Age under 1 or over 7 years, steroid-resistant nephrotic syndrome, and evidence of nephritis (haematuria, hypertension, low complement, impaired function).**\n\n## Understanding it\n- Typical **childhood (1–7 yr) steroid-responsive** nephrotic syndrome is **minimal change** and does **not** need biopsy.\n- Atypical **age** or **steroid resistance/nephritic features** warrant biopsy.\n\n>> Biopsy nephrotic syndrome if <1 or >7 yr, steroid-resistant, or nephritic features.",
+         "opts": [
+          "Every nephrotic child",
+          "Never",
+          "Only if BP is normal",
+          "Age <1 or >7, steroid resistance, or nephritic features"
+         ],
+         "ans": 3
         },
         {
          "q": "State the indications for biopsy in acute glomerulonephritis.",
-         "a": "A course not typical of PSAGN; HSP or SLE; assessment of severity of injury to guide therapy and prognosis; differentiation of specific types of proliferative lesions such as MPGN and C3 glomerulopathies including dense deposit disease; and recurrent persistent haematuria or proteinuria."
+         "a": "**A course not typical of post-streptococcal GN, features of HSP or SLE, and to assess severity to guide therapy/prognosis.**\n\n## Understanding it\n- Typical **PSAGN** resolves and is **not** biopsied.\n- **Atypical course** or a **systemic cause (HSP/SLE)** prompts biopsy.\n\n>> Biopsy AGN if atypical, or HSP/SLE, or to grade severity.",
+         "opts": [
+          "All cases of AGN",
+          "Atypical course, HSP/SLE, or to assess severity",
+          "Only typical PSAGN",
+          "Never in AGN"
+         ],
+         "ans": 1
         },
         {
          "q": "State the indications for biopsy in AKI.",
-         "a": "Unexplained AKI when pre- and post-renal causes are excluded; AKI associated with nephritis, nephrotic syndrome, vasculitis or systemic disease; persisting ATN when the cause remains uncertain after complete evaluation; and suspected RPGN."
+         "a": "**Unexplained AKI when pre- and post-renal causes are excluded, and AKI associated with nephritis, nephrotic syndrome or systemic disease.**\n\n## Understanding it\n- Biopsy AKI when it's **intrinsic and unexplained** (pre-/post-renal ruled out) or tied to a **glomerular/systemic** disease.\n\n>> Biopsy AKI when intrinsic/unexplained or with nephritic/systemic features.",
+         "opts": [
+          "Unexplained intrinsic AKI, or AKI with nephritis/systemic disease",
+          "Simple dehydration AKI",
+          "Every case of AKI",
+          "Post-renal obstruction"
+         ],
+         "ans": 0
         },
         {
          "q": "Which serological and immunofluorescence tests accompany biopsy in suspected RPGN?",
-         "a": "Serology — anti-GBM antibody and ANCA as screening tests for necrotizing vasculitides; immunofluorescence — p-ANCA, c-ANCA, MPO or PR3."
+         "a": "**Serology: anti-GBM antibody and ANCA (screening for necrotising vasculitides); immunofluorescence: to define the pattern of immune deposits.**\n\n## Understanding it\n- Rapidly progressive GN needs **anti-GBM and ANCA** serology, plus **immunofluorescence** on the biopsy to classify it (linear, granular, pauci-immune).\n\n>> RPGN work-up: anti-GBM + ANCA serology and biopsy immunofluorescence.",
+         "opts": [
+          "Only a urine culture",
+          "Anti-GBM and ANCA serology; biopsy immunofluorescence",
+          "Only serum glucose",
+          "Only ultrasound"
+         ],
+         "ans": 1
         },
         {
          "q": "State the indications for biopsy in CKD.",
-         "a": "When kidneys are not shrunken; diagnosis of primary disease; assessment of severity of morphologic lesions; determination of risk of recurrence in eventual renal transplant; and suitability of deceased versus living-related donor transplantation."
+         "a": "**When the kidneys are not shrunken, to diagnose the primary disease and assess the severity of morphologic lesions.**\n\n## Understanding it\n- Biopsy is useful only if there's **salvageable tissue** — i.e. **not** small end-stage kidneys.\n- It defines the **cause and severity**.\n\n>> Biopsy CKD only if kidneys aren't shrunken (still informative/reversible).",
+         "opts": [
+          "Never in CKD",
+          "When kidneys are tiny/end-stage",
+          "When kidneys are not shrunken — to diagnose and grade disease",
+          "Only in dialysis patients"
+         ],
+         "ans": 2
         },
         {
          "q": "State the indications for biopsy in systemic disease and renal transplant.",
-         "a": "Systemic disease — to assess severity of renal disease e.g. SLE and atypical HUS, and in diabetics with a course atypical of diabetic nephropathy. Transplant — acute rejection, recurrence of kidney disease, calcineurin toxicity, some infections, and chronic allograft rejection."
+         "a": "**Systemic disease: to assess severity (e.g. SLE, atypical HUS, diabetics with atypical features). Transplant: to diagnose rejection or graft dysfunction.**\n\n## Understanding it\n- In **SLE/HUS/atypical diabetic** renal disease, biopsy grades severity to guide treatment.\n- In a **transplant**, it distinguishes **rejection** from other graft problems.\n\n>> Biopsy grades systemic renal disease and diagnoses transplant rejection.",
+         "opts": [
+          "Only for stones",
+          "Grade systemic renal disease; diagnose transplant rejection",
+          "Only to measure GFR",
+          "Never indicated"
+         ],
+         "ans": 1
         },
         {
          "q": "List the conditions NOT requiring renal biopsy.",
-         "a": "Isolated glomerular haematuria (microscopic); isolated non-nephrotic haematuria; childhood nephrotic syndrome aged over 1 year and under 7 years; and frequently relapsing nephrotic syndrome."
+         "a": "**Isolated microscopic glomerular haematuria, isolated non-nephrotic haematuria, and typical childhood (steroid-responsive) nephrotic syndrome.**\n\n## Understanding it\n- Benign, **isolated haematuria** and **classic steroid-responsive** nephrotic syndrome behave predictably → biopsy adds risk without benefit.\n\n>> Don't biopsy isolated haematuria or typical childhood nephrotic syndrome.",
+         "opts": [
+          "RPGN",
+          "Steroid-resistant nephrotic syndrome",
+          "Unexplained AKI",
+          "Isolated haematuria; typical childhood nephrotic syndrome"
+         ],
+         "ans": 3
         },
         {
          "q": "State the transport medium for each biopsy examination.",
-         "a": "Light microscopy — 10% buffered formalin; immunofluorescence — Michel's transport media; electron microscopy — glutaraldehyde."
+         "a": "**Light microscopy — 10% buffered formalin; immunofluorescence — Michel's transport medium; electron microscopy — glutaraldehyde.**\n\n## Understanding it\n- Each technique needs its **own fixative**: formalin (light), Michel's (IF), glutaraldehyde (EM).\n- Using the wrong medium ruins that study.\n\n>> Formalin (LM), Michel's (IF), glutaraldehyde (EM).",
+         "opts": [
+          "Formalin (LM), Michel's (IF), glutaraldehyde (EM)",
+          "All in glutaraldehyde",
+          "All in plain water",
+          "All in formalin"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the absolute contraindication to renal biopsy?",
-         "a": "Uncorrectable bleeding diathesis."
+         "a": "**An uncorrectable bleeding diathesis.**\n\n## Understanding it\n- The kidney is **highly vascular**, so uncontrollable bleeding tendency makes biopsy **too dangerous**.\n\n>> Uncorrectable bleeding disorder = absolute contraindication.",
+         "opts": [
+          "An uncorrectable bleeding diathesis",
+          "A single UTI",
+          "Mild hypertension",
+          "Normal clotting"
+         ],
+         "ans": 0
         },
         {
          "q": "List the other contraindications to renal biopsy.",
-         "a": "Uncontrolled hypertension; active renal or peri-renal infection; hydronephrosis; obesity; ascites; small shrunken kidneys; tumours, large cysts, abscesses or pyelonephritis; solitary, ectopic or horseshoe kidney; uncooperative patient; skin infection over the biopsy site; and when a skilled operator or appropriate pathology support is not available."
+         "a": "**Uncontrolled hypertension, active renal/perirenal infection, hydronephrosis, obesity, ascites, small shrunken kidneys, and a solitary kidney.**\n\n## Understanding it\n- These raise **bleeding/complication risk** or make the biopsy **unhelpful** (small end-stage kidneys) or **unsafe** (solitary kidney).\n\n>> Uncontrolled HTN, infection, hydronephrosis, obesity/ascites, small or solitary kidney.",
+         "opts": [
+          "Two healthy kidneys",
+          "Uncontrolled HTN, infection, hydronephrosis, obesity, ascites, small/solitary kidney",
+          "Normal blood pressure",
+          "Good clotting"
+         ],
+         "ans": 1
         },
         {
          "q": "How is a patient prepared for renal biopsy?",
-         "a": "Admit at least the day before; take a history of bleeding disorders; ensure the patient is not on warfarin, any anticoagulant or antithrombotic agent, and has had no aspirin or other NSAID for at least 7 days; control hypertension before biopsy; and inform the patient and parents, explain risks and obtain consent."
+         "a": "**Admit at least the day before, take a bleeding history, stop anticoagulants (e.g. warfarin) and antiplatelets, and check baseline bloods.**\n\n## Understanding it\n- The focus is **bleeding prevention**: history, stop blood thinners, confirm normal clotting.\n\n>> Admit early, screen/stop bleeding risks before biopsy.",
+         "opts": [
+          "Same-day, no preparation",
+          "Admit early, bleeding history, stop anticoagulants/antiplatelets, baseline bloods",
+          "No blood tests needed",
+          "Continue warfarin"
+         ],
+         "ans": 1
         },
         {
          "q": "State the laboratory requirements before renal biopsy.",
-         "a": "PCV > 24–30%; platelet count at least 100,000/mm³; INR < 1.2; APTT < 2× control or < 40 seconds; plus E&U and creatinine, abdominal USS KUB, urinalysis, urine m/c/s, and group and cross-match of 1 unit of blood."
+         "a": "**PCV > 24–30%, platelets ≥ 100,000/mm³, INR < 1.2, APTT < 2× control (or < 40 s), plus electrolytes/urea.**\n\n## Understanding it\n- All aimed at ensuring **safe clotting** and adequate red-cell reserve before an invasive vascular procedure.\n\n>> Adequate PCV, platelets ≥100k, INR <1.2, normal APTT.",
+         "opts": [
+          "INR >3 acceptable",
+          "Any values are fine",
+          "Platelets <20k acceptable",
+          "PCV >24–30%, platelets ≥100k, INR <1.2, APTT <40s"
+         ],
+         "ans": 3
         },
         {
          "q": "Why is an abdominal USS KUB done before renal biopsy?",
-         "a": "To assess whether the patient has two kidneys, and to assess kidney sizes."
+         "a": "**To confirm the patient has two kidneys and to assess kidney sizes.**\n\n## Understanding it\n- You must not biopsy a **solitary** kidney, and **small** kidneys are a contraindication.\n- Ultrasound confirms **number and size** first.\n\n>> Pre-biopsy US: check for two kidneys and adequate size.",
+         "opts": [
+          "To measure GFR",
+          "To confirm two kidneys and assess their size",
+          "To culture urine",
+          "To grade reflux"
+         ],
+         "ans": 1
         },
         {
          "q": "How long after haemodialysis should a renal biopsy be performed?",
-         "a": "After at least 24 hours from the last dialysis session."
+         "a": "**At least 24 hours after the last dialysis session.**\n\n## Understanding it\n- Dialysis uses **heparin**, raising bleeding risk.\n- Waiting **≥ 24 hours** lets the anticoagulant effect wear off.\n\n>> Biopsy ≥24 h after dialysis (heparin washout).",
+         "opts": [
+          "During dialysis",
+          "Immediately after dialysis",
+          "At least 24 hours after the last session",
+          "Only before the first dialysis"
+         ],
+         "ans": 2
         },
         {
          "q": "What is given for patients with a prolonged bleeding time before biopsy?",
-         "a": "IV desmopressin 0.3 µg/kg 30 minutes prior, or intranasal DDAVP 2–4 µg/kg 2 hours before the procedure."
+         "a": "**IV desmopressin 0.3 µg/kg 30 minutes before, or intranasal DDAVP 2–4 µg/kg 2 hours before.**\n\n## Understanding it\n- **Desmopressin (DDAVP)** boosts von Willebrand factor/platelet function, improving haemostasis before biopsy.\n\n>> DDAVP (IV or intranasal) corrects a prolonged bleeding time pre-biopsy.",
+         "opts": [
+          "Desmopressin (DDAVP), IV or intranasal, before the procedure",
+          "More warfarin",
+          "A platelet-lowering drug",
+          "Nothing is given"
+         ],
+         "ans": 0
         },
         {
          "q": "State the premedication for renal biopsy.",
-         "a": "NPO 4 hours before, commencing 5% dextrose water at maintenance; local anaesthesia and sedation with 1–2 doses of midazolam (0.1 mg/kg) and ketamine 0.5–1.0 mg/kg, with an anaesthetist; ± IV atropine 0.01 mg/kg 1–2 minutes after midazolam."
+         "a": "**NPO 4 hours before with maintenance 5% dextrose, local anaesthesia, and sedation (e.g. 1–2 mg/kg).**\n\n## Understanding it\n- **Fast (NPO)** with IV fluids, then **local anaesthetic + sedation** to keep the child still and comfortable.\n\n>> NPO + IV dextrose, local anaesthesia, sedation.",
+         "opts": [
+          "NPO with IV dextrose, local anaesthesia and sedation",
+          "No preparation",
+          "A full meal beforehand",
+          "General anaesthesia always"
+         ],
+         "ans": 0
         },
         {
          "q": "What positions are used for renal biopsy?",
-         "a": "Prone for biopsy of the native kidney; supine for a graft kidney; and lateral decubitus in conditions such as abdominal distension and ascites."
+         "a": "**Prone for a native kidney, supine for a graft (transplant) kidney, and lateral decubitus in special conditions (e.g. obesity/ascites).**\n\n## Understanding it\n- Native kidneys are **retroperitoneal** → approached from the **back (prone)**.\n- A transplant sits in the **pelvis anteriorly** → **supine**.\n\n>> Prone (native), supine (graft), lateral (special cases).",
+         "opts": [
+          "Always prone",
+          "Always supine",
+          "Prone (native), supine (graft), lateral decubitus (special cases)",
+          "Always standing"
+         ],
+         "ans": 2
         },
         {
          "q": "Which kidney is usually biopsied, and from which part?",
-         "a": "The left kidney is usually biopsied; the lower pole is identified under real-time ultrasound, and the sample is obtained from the renal cortex."
+         "a": "**The left kidney, from the lower pole, identified under real-time ultrasound.**\n\n## Understanding it\n- The **left** kidney is more accessible (liver pushes the right one down).\n- The **lower pole** is targeted (furthest from the hilar vessels).\n\n>> Left kidney, lower pole, under ultrasound guidance.",
+         "opts": [
+          "The bladder",
+          "The right kidney, upper pole",
+          "Either kidney, the hilum",
+          "The left kidney, lower pole, under ultrasound"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe the technique of percutaneous renal biopsy.",
-         "a": "Clean the skin with methylated spirit and povidone iodine; give local anaesthesia with 1% lignocaine under ultrasound guidance; make a nick on the skin; advance the biopsy needle under real-time ultrasound into the cortex; using a 16G or 18G needle; 2–3 passes; and the core can be examined for the presence of glomeruli."
+         "a": "**Clean and anaesthetise the skin over the lower pole, then under real-time ultrasound advance a core needle into the renal cortex and fire to obtain a sample.**\n\n## Understanding it\n- Asepsis + local anaesthetic at the site.\n- Ultrasound-guided needle to the **lower-pole cortex**, then fire.\n\n>> Clean, anaesthetise, US-guide to the lower-pole cortex, fire.",
+         "opts": [
+          "Aseptic, US-guided core needle into the lower-pole cortex",
+          "Aspirating urine only",
+          "Open surgical removal of the kidney",
+          "A blind stab without imaging"
+         ],
+         "ans": 0
         },
         {
          "q": "State the post-biopsy monitoring schedule.",
-         "a": "Vital signs — BP, heart rate, respiratory rate and temperature — quarter-hourly for 1 hour, half-hourly for 2 hours, hourly for 4 hours, then 4-hourly for 24 hours."
+         "a": "**Vital signs quarter-hourly for 1 hour, then half-hourly, then hourly — watching for bleeding.**\n\n## Understanding it\n- The main risk is **bleeding**, so monitor frequently early, spacing out with stability.\n\n>> Frequent vitals early, tapering.",
+         "opts": [
+          "Vitals once a day",
+          "No monitoring needed",
+          "Vitals ¼-hourly for 1 h, then half-hourly, then hourly",
+          "Only temperature"
+         ],
+         "ans": 2
         },
         {
          "q": "What other post-biopsy instructions apply?",
-         "a": "Do a post-biopsy clinical evaluation; keep a urine rack; give IV 10% dextrose at maintenance; monitor fluid input and output; allow the patient to eat once fully conscious; and watch out for gross haematuria, abdominal pain or flank pain."
+         "a": "**Keep a urine rack to watch for haematuria, give IV fluids at maintenance, monitor fluid balance, and enforce bed rest.**\n\n## Understanding it\n- Watch urine colour for bleeding, keep hydrated, rest.\n\n>> Urine watch, IV fluids, monitor balance, bed rest.",
+         "opts": [
+          "Ignore the urine colour",
+          "Urine rack for haematuria, IV fluids, fluid balance, bed rest",
+          "Immediate discharge and exercise",
+          "No fluids"
+         ],
+         "ans": 1
         },
         {
          "q": "List the complications of renal biopsy.",
-         "a": "Significant haematuria; anaemia and hypotension; bowel or solid organ perforation or laceration; loss of a kidney; death; AV malformation; hypertension; and persistent loin pain."
+         "a": "**Significant haematuria, anaemia and hypotension, organ perforation, loss of the kidney, arteriovenous fistula, infection, and pain.**\n\n## Understanding it\n- Dominant theme is **bleeding**; plus organ injury and infection.\n\n>> Mostly bleeding-related, plus organ injury/infection.",
+         "opts": [
+          "Only mild bruising",
+          "Bleeding, organ injury, AV fistula, infection",
+          "No complications occur",
+          "Improved kidney function"
+         ],
+         "ans": 1
         },
         {
          "q": "Define urodynamic studies and state when they are useful.",
-         "a": "Investigations done to evaluate the anatomy and physiology of the lower urinary tract, especially the filling and emptying of the bladder and urethra; useful in neurogenic bladder, urinary incontinence, voiding dysfunction, VUR, and anorectal malformations."
+         "a": "**Investigations of the lower urinary tract's anatomy and physiology — especially bladder filling and voiding — useful in voiding dysfunction and neurogenic bladder.**\n\n## Understanding it\n- Assess how the **bladder fills and empties**.\n\n>> Urodynamics = bladder filling/voiding function.",
+         "opts": [
+          "Measure GFR",
+          "Evaluate bladder filling/voiding; for voiding dysfunction",
+          "Image the kidney cortex",
+          "Culture urine"
+         ],
+         "ans": 1
         },
         {
          "q": "Name the non-invasive and invasive urodynamic studies.",
-         "a": "Non-invasive — uroflow study/uroflowmetry, which measures urine speed and volume, and post-void residual urine estimation. Invasive — cystometry studies, pressure flow study, and electromyography."
+         "a": "**Non-invasive: uroflowmetry and post-void residual. Invasive: cystometry and pressure-flow studies.**\n\n## Understanding it\n- Non-invasive = uroflow/residual; invasive = catheter pressure/flow.\n\n>> Non-invasive uroflow; invasive cystometry.",
+         "opts": [
+          "Non-invasive: uroflowmetry/residual; invasive: cystometry",
+          "There is only one type",
+          "Both need surgery",
+          "Both are blood tests"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why is the left kidney usually chosen for biopsy?",
-         "a": "Because the liver pushes the right kidney downward, so the left kidney lies more superior and is easier and safer to reach."
+         "a": "**Because the liver pushes the right kidney downward, so the left lies more superior and is easier and safer to access.**\n\n## Understanding it\n- Liver displaces the right kidney; the left is more accessible.\n\n>> Liver crowds the right → biopsy the left.",
+         "opts": [
+          "The liver displaces the right kidney, making the left easier",
+          "The left kidney is larger",
+          "There is no reason",
+          "The right has no cortex"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why must the biopsy sample come from the renal cortex?",
-         "a": "Because the glomeruli are located in the cortex; a medullary sample contains no glomeruli and is diagnostically useless."
+         "a": "**Because the glomeruli are in the cortex; a medullary sample has no glomeruli and is non-diagnostic.**\n\n## Understanding it\n- Glomerular diagnoses need glomeruli (in the cortex).\n\n>> Glomeruli are in the cortex → sample the cortex.",
+         "opts": [
+          "The medulla bleeds less",
+          "The glomeruli are in the cortex (medulla has none)",
+          "Either part works equally",
+          "The cortex has no vessels"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is the lower pole targeted in renal biopsy?",
-         "a": "Because it is furthest from the renal hilum where the large vessels enter, reducing the risk of major vascular injury."
+         "a": "**Because it is furthest from the renal hilum where the large vessels enter, reducing major vascular injury.**\n\n## Understanding it\n- Hilar vessels enter medially; the lower pole is farthest → safest.\n\n>> Lower pole = away from the big vessels = safer.",
+         "opts": [
+          "It has the most glomeruli",
+          "Furthest from the hilar vessels, reducing bleeding risk",
+          "Closest to the skin",
+          "The upper pole has no cortex"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is the prone position used for native renal biopsy?",
-         "a": "Because the kidneys are retroperitoneal and are therefore approached from the back; a graft kidney lies in the iliac fossa anteriorly, so the supine position is used."
+         "a": "**Because the kidneys are retroperitoneal and approached from the back; a graft kidney lies anteriorly in the pelvis and is biopsied supine.**\n\n## Understanding it\n- Native kidneys sit behind → prone; transplant sits in front pelvis → supine.\n\n>> Native = prone; graft = supine.",
+         "opts": [
+          "Native kidneys are retroperitoneal, approached from the back",
+          "Supine for native kidneys",
+          "The kidney is in the chest",
+          "Prone reduces radiation"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why must aspirin be stopped 7 days before renal biopsy?",
-         "a": "Because aspirin irreversibly inhibits platelets, which live 7–10 days; the entire affected platelet population must be replaced."
+         "a": "**Because aspirin irreversibly inhibits platelets (lifespan 7–10 days); stopping ~7 days lets new functional platelets appear.**\n\n## Understanding it\n- Aspirin permanently disables platelets it touches; new ones take ~7–10 days.\n\n>> Stop aspirin ~7 days ahead.",
+         "opts": [
+          "Aspirin irreversibly inhibits platelets (lifespan 7–10 days)",
+          "It is only cleared in 7 days",
+          "It thins blood for 1 hour",
+          "It reduces the pain"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why are so many biopsy contraindications related to bleeding?",
-         "a": "Because the kidneys receive about 20% of cardiac output, making them one of the most vascular organs in the body."
+         "a": "**Because the kidneys receive about 20% of cardiac output, making them one of the most vascular organs — so bleeding tendency is dangerous.**\n\n## Understanding it\n- ~20% of output → heavy bleeding risk from a needle.\n\n>> Super-vascular kidneys → bleeding is the key risk.",
+         "opts": [
+          "The kidney has no blood supply",
+          "The kidneys are highly vascular (~20% of cardiac output)",
+          "They receive only 1% of output",
+          "Bleeding is never a concern"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why are small shrunken kidneys a contraindication to biopsy?",
-         "a": "Because they indicate end-stage irreversible disease, so the biopsy carries all the risk without changing management."
+         "a": "**Because they indicate end-stage irreversible disease, so the biopsy carries all the risk without changing management.**\n\n## Understanding it\n- Small = scarred end-stage tissue → no treatable cause to find.\n\n>> Shrunken kidneys = end-stage → pointless and risky.",
+         "opts": [
+          "Easier to biopsy",
+          "They bleed less",
+          "Too many glomeruli",
+          "They indicate end-stage disease — risk without benefit"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child has nephrotic syndrome aged 4 with normal BP, no haematuria and normal C3. Is biopsy indicated?",
-         "a": "No — childhood nephrotic syndrome aged over 1 and under 7 years without evidence of nephritis does not require biopsy; treat with steroids and observe the response."
+         "a": "**No — typical childhood nephrotic syndrome (aged 1–7, no nephritic features) is presumed minimal-change and treated with steroids without biopsy.**\n\n## Understanding it\n- Classic steroid-responsive minimal change → treat, don't biopsy.\n\n>> Typical childhood nephrotic syndrome → treat, don't biopsy.",
+         "opts": [
+          "Yes — because BP is normal",
+          "Yes — biopsy every case",
+          "Yes — because C3 is normal",
+          "No — typical childhood nephrotic syndrome, treat with steroids"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — What is the difference between frequently relapsing and steroid-resistant nephrotic syndrome regarding biopsy?",
-         "a": "Frequently relapsing nephrotic syndrome does NOT require biopsy, because it still responds to steroids; steroid-resistant nephrotic syndrome DOES require biopsy, because it never responded."
+         "a": "**Frequently relapsing does NOT need biopsy (still steroid-responsive); steroid-resistant DOES need biopsy.**\n\n## Understanding it\n- Steroid responsiveness is key: responsive → no biopsy; resistant → biopsy.\n\n>> Relapsing = no biopsy; resistant = biopsy.",
+         "opts": [
+          "Both need biopsy",
+          "Relapsing = no biopsy; steroid-resistant = biopsy",
+          "Neither needs biopsy",
+          "Only relapsing needs biopsy"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why does the phrase 'persisting in spite of volume correction' matter in nephrotic syndrome?",
-         "a": "Because a nephrotic child is intravascularly depleted despite being oedematous, which raises creatinine pre-renally; only if the impairment persists after volume correction does it indicate intrinsic renal damage."
+         "a": "**Because a nephrotic child is intravascularly depleted despite oedema, so creatinine can rise from hypovolaemia; a rise persisting after volume correction means true intrinsic disease.**\n\n## Understanding it\n- Oedematous but intravascularly dry → pre-renal rise; if it stays up after fluids, the kidney is damaged.\n\n>> Fix volume first — a persisting rise = intrinsic disease.",
+         "opts": [
+          "It is irrelevant",
+          "Oedema means overfilled vessels",
+          "Volume never affects creatinine",
+          "It separates pre-renal (volume) rise from true intrinsic disease"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A child has oliguria and rising creatinine after gastroenteritis. Which test distinguishes pre-renal AKI from ATN?",
-         "a": "Fractional excretion of sodium — FENa ≤ 1 indicates pre-renal AKI with working tubules; FENa > 1 indicates ATN with impaired tubular transport."
+         "a": "**Fractional excretion of sodium — FENa ≤ 1 = pre-renal AKI (working tubules); FENa > 1 = acute tubular necrosis.**\n\n## Understanding it\n- Pre-renal: tubules retain sodium → FENa ≤ 1. ATN: leak sodium → FENa > 1.\n\n>> FENa ≤1 pre-renal; >1 ATN.",
+         "opts": [
+          "Serum cholesterol",
+          "Fractional excretion of sodium (≤1 pre-renal, >1 ATN)",
+          "Urine culture",
+          "A renal biopsy first"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why is a low FENa reassuring?",
-         "a": "Because it shows the tubules are actively reabsorbing sodium — they are alive and responding correctly to volume depletion elsewhere in the body."
+         "a": "**Because it shows the tubules are actively reabsorbing sodium — alive and responding to hypovolaemia.**\n\n## Understanding it\n- Low FENa = tubules doing their job → tissue intact → reversible volume problem.\n\n>> Low FENa = living tubules = reversible.",
+         "opts": [
+          "It is a bad sign",
+          "It shows the tubules are alive and reabsorbing sodium",
+          "The tubules are dead",
+          "It indicates ATN"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why does distinguishing pre-renal AKI from ATN change management?",
-         "a": "Pre-renal AKI responds to volume replacement; in ATN, aggressive fluid loading will not restore function and will cause fluid overload, pulmonary oedema and hypertension."
+         "a": "**Pre-renal AKI responds to volume replacement; in ATN aggressive fluid won't restore function and risks overload.**\n\n## Understanding it\n- Pre-renal → give fluids; ATN → fluid just overloads.\n\n>> Fluids cure pre-renal but harm ATN.",
+         "opts": [
+          "Pre-renal needs fluids; ATN won't respond and risks overload",
+          "Both treated identically",
+          "ATN always needs more fluid",
+          "Neither needs treatment"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why does urea rise disproportionately in pre-renal AKI?",
-         "a": "Because urea is reabsorbed by the renal tubules along with water, and in volume depletion the kidney reabsorbs water avidly."
+         "a": "**Because urea is reabsorbed with water; in volume depletion the kidney reabsorbs more water and urea, raising urea more than creatinine.**\n\n## Understanding it\n- Creatinine isn't reabsorbed, so urea rises out of proportion → high urea:creatinine.\n\n>> Pre-renal reabsorbs water+urea → high ratio.",
+         "opts": [
+          "Urea is made in the kidney",
+          "Urea is reabsorbed with water, avidly in volume depletion",
+          "Creatinine is reabsorbed, not urea",
+          "They always rise equally"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Ultrasound shows a dilated ureter and thick-walled bladder in a boy with recurrent febrile UTI. Which investigation is indicated?",
-         "a": "Voiding cysto-urethrography — the gold standard for diagnosing and grading VUR and PUV obstruction; suspected ureteric dilatation and a thick-walled bladder seen on US are both listed indications."
+         "a": "**Voiding cysto-urethrography — the gold standard for diagnosing/grading vesicoureteric reflux and posterior urethral valves.**\n\n## Understanding it\n- Boy + dilated ureter + thick bladder + febrile UTIs → VUR/PUV → VCUG.\n\n>> Suspected VUR/PUV in a boy → VCUG.",
+         "opts": [
+          "A static DMSA scan only",
+          "Voiding cysto-urethrography (VCUG)",
+          "A plain abdominal X-ray",
+          "A blood culture"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why must films be taken during voiding in a VCUG?",
-         "a": "Because bladder pressure is highest during voiding, so reflux is most likely to be demonstrated then; a study without voiding films can miss the diagnosis."
+         "a": "**Because bladder pressure is highest during voiding, so reflux is most likely to be demonstrated then.**\n\n## Understanding it\n- Voiding = peak bladder pressure → forces urine back if reflux exists.\n\n>> Reflux shows at peak (voiding) pressure.",
+         "opts": [
+          "Bladder pressure peaks during voiding, revealing reflux",
+          "It reduces radiation",
+          "Filling shows reflux best",
+          "Voiding empties the contrast"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — What complication is being prevented by diagnosing VUR early?",
-         "a": "Renal scarring from recurrent pyelonephritis, which leads to hypertension and chronic kidney disease."
+         "a": "**Renal scarring from recurrent pyelonephritis, which leads to hypertension and chronic kidney disease.**\n\n## Understanding it\n- Reflux → pyelonephritis → scarring → HTN/CKD.\n\n>> Early VUR diagnosis prevents scarring → HTN/CKD.",
+         "opts": [
+          "A skin rash",
+          "A single mild UTI",
+          "Renal scarring → hypertension and chronic kidney disease",
+          "Bladder cancer"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — Which investigation best detects renal scars, and why?",
-         "a": "The static renal scan — the tracer is taken up only by functioning tubular cells, so a scar appears as a cold defect. IVU has low sensitivity for renal scar detection."
+         "a": "**The static (DMSA) renal scan — the tracer is taken up only by functioning tubular cells, so a scar is a cold (photopenic) defect.**\n\n## Understanding it\n- DMSA binds functioning cortex; scars take up no tracer.\n\n>> DMSA = scar-detecting scan.",
+         "opts": [
+          "Ultrasound",
+          "IVU",
+          "A plain X-ray",
+          "The static (DMSA) scan — scars show as cold defects"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Which investigation determines differential renal function, and why does it matter?",
-         "a": "Dynamic renography with Tc-DTPA or Tc-MAG3 — it shows how much each kidney contributes, which determines whether an obstructed kidney should be repaired or removed."
+         "a": "**Dynamic renography with Tc-DTPA or Tc-MAG3 — shows each kidney's contribution, guiding whether to remove a poorly functioning kidney.**\n\n## Understanding it\n- Measures split function between the kidneys.\n\n>> Dynamic renography = split function.",
+         "opts": [
+          "Dynamic renography (Tc-DTPA/MAG3) — split function",
+          "Plain X-ray",
+          "Urine dipstick",
+          "Ultrasound — shows function"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why can ultrasound not be used to assess renal function?",
-         "a": "Because it shows structure only; two normal-looking kidneys may be in complete failure."
+         "a": "**Because it shows structure only; two normal-looking kidneys may be in complete failure.**\n\n## Understanding it\n- US images anatomy, not filtration.\n\n>> US = structure, not function.",
+         "opts": [
+          "It uses too much radiation",
+          "It only shows the bladder",
+          "It measures GFR directly",
+          "It shows structure only, not function"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — Why is IVU contraindicated in renal failure?",
-         "a": "Because the test depends on the kidney excreting the contrast; a failing kidney gives a poor image and is exposed to a nephrotoxic contrast load."
+         "a": "**Because the test depends on the kidney excreting the contrast; a failing kidney gives poor images and the contrast is nephrotoxic.**\n\n## Understanding it\n- IVU needs excretion; a failing kidney can't, and the dye worsens injury.\n\n>> IVU needs working kidneys.",
+         "opts": [
+          "It relies on excretion (poor in failure) and contrast is nephrotoxic",
+          "Failing kidneys excrete it faster",
+          "Best test in failure",
+          "It uses no contrast"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why does a stone cast a shadow on ultrasound?",
-         "a": "Because it reflects almost all the ultrasound beam, so nothing passes behind it — the same posterior acoustic shadow produced by bone."
+         "a": "**Because it reflects almost all the ultrasound beam, so nothing passes behind it — a posterior acoustic shadow.**\n\n## Understanding it\n- A dense stone reflects the beam; no echoes return behind it.\n\n>> Stones reflect the beam → acoustic shadow.",
+         "opts": [
+          "Fluid behind appears black",
+          "It glows on ultrasound",
+          "It absorbs all light",
+          "It reflects the beam, leaving a posterior acoustic shadow"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why does chronic kidney disease cause anaemia?",
-         "a": "Because the kidney produces erythropoietin, which stimulates red cell production in the bone marrow; its loss is a hormone deficiency, not blood loss."
+         "a": "**Because the kidney produces erythropoietin, which stimulates red-cell production; in CKD it falls and anaemia results.**\n\n## Understanding it\n- Diseased kidneys make less EPO → anaemia.\n\n>> No kidney EPO → anaemia.",
+         "opts": [
+          "Reduced erythropoietin production by the diseased kidney",
+          "Iron overload",
+          "Too many red cells made",
+          "Blood loss in the urine only"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why does chronic kidney disease cause bone disease?",
-         "a": "Because the kidney performs the final hydroxylation that activates vitamin D; without it, calcium is not absorbed, blood calcium falls, PTH rises and calcium is drawn from bone."
+         "a": "**Because the kidney does the final hydroxylation that activates vitamin D; without it calcium is poorly absorbed, causing renal bone disease.**\n\n## Understanding it\n- No active vitamin D → poor calcium absorption → high PTH → renal osteodystrophy.\n\n>> No active vitamin D → bone disease.",
+         "opts": [
+          "The kidney makes bone directly",
+          "No effect on bone",
+          "The kidney activates vitamin D; without it calcium/bone metabolism fails",
+          "Too much calcium absorbed"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why must growth and development be monitored in a child with kidney disease?",
-         "a": "Because chronic acidosis, anaemia and impaired calcium and bone metabolism all impair growth — the kidney's endocrine functions directly affect it."
+         "a": "**Because chronic acidosis, anaemia and impaired calcium/bone metabolism all impair growth — the kidney's failures directly stunt the child.**\n\n## Understanding it\n- CKD → acidosis + anaemia + bone disease, all of which stunt growth.\n\n>> CKD stunts growth → monitor it.",
+         "opts": [
+          "Acidosis, anaemia and bone/mineral disturbance impair growth",
+          "Kidney disease speeds up growth",
+          "Only weight matters",
+          "Growth is unaffected"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A dipstick shows no protein in a child with suspected nephrotic syndrome. What might explain a false negative?",
-         "a": "Dilute urine or very acidic urine, or proteinuria consisting of proteins other than albumin, which the strip mainly detects."
+         "a": "**Dilute or very acidic urine, or proteinuria of proteins other than albumin, which the dipstick mainly detects.**\n\n## Understanding it\n- The dipstick detects albumin in concentrated urine; dilute/acidic urine or non-albumin protein → false negative.\n\n>> False-negative protein: dilute/acidic urine or non-albumin proteinuria.",
+         "opts": [
+          "Dilute/acidic urine or non-albumin proteinuria",
+          "Contamination raising it",
+          "Concentrated urine",
+          "Gross haematuria"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Why is a bag urine specimen of limited value in a febrile infant?",
-         "a": "Because of the high risk of contamination; it is useful mainly for its negative predictive value — a negative result is reassuring, a positive one is unreliable."
+         "a": "**Because of the high risk of contamination; it is useful mainly for its negative predictive value — a negative helps rule out UTI, a positive needs confirmation.**\n\n## Understanding it\n- Bag urine is easily contaminated → false positives; trust a negative, confirm a positive.\n\n>> Bag urine: trust a negative, confirm a positive.",
+         "opts": [
+          "It is the most sterile method",
+          "It is painful",
+          "High contamination risk; useful mainly for its negative predictive value",
+          "A positive is always true"
+         ],
+         "ans": 2
         }
        ],
        "imgBase": "content/Pediatrics/Nwangwa/Introduction%20to%20Nephrology_Investigations%20of%20the%20Renal%20System/img/",
@@ -4194,531 +7995,1455 @@ window.MEDBANK = {
        "recall": [
         {
          "q": "What are the seven questions a paediatric CVS history should answer?",
-         "a": "(1) Are there symptoms of heart disease? (2) Congenital or acquired? (3) If congenital, cyanotic or acyanotic? (4) If cyanotic, which CHD? (5) If acyanotic, which CHD? (6) Rheumatic fever or RHD, and which valves? (7) Any complications?"
+         "a": "**(1) Are there symptoms of heart disease? (2) Congenital or acquired? (3) If congenital, cyanotic or acyanotic? (4) Any complications? plus aetiology, severity and functional status.**\n\n## Understanding it\n- The history works top-down: is there disease → what type → what subtype → what complications.\n\n>> Symptoms? → congenital/acquired? → cyanotic/acyanotic? → complications?",
+         "opts": [
+          "Only the immunisation status",
+          "Only the child's age and weight",
+          "Is there disease, congenital vs acquired, cyanotic vs acyanotic, complications",
+          "Only the family income"
+         ],
+         "ans": 2
         },
         {
          "q": "List some symptoms suggesting heart disease in a child.",
-         "a": "Feeding difficulties, poor weight gain, irritability, excessive crying, bluish extremities, excessive perspiration, wheezing, noisy laboured breathing, frequent RTIs, oliguria, breathlessness, fatigue, cough, chest pain, swelling of feet, joint pain, painful finger-pulp swelling, syncope, involuntary movements and haemoptysis."
+         "a": "**Feeding difficulties, poor weight gain, irritability, excessive crying, bluish extremities, excessive sweating, fast breathing and recurrent chest infections.**\n\n## Understanding it\n- In infants, heart failure shows as **feeding/growth** problems and **sweating/tachypnoea**, not classic adult symptoms.\n\n>> Poor feeding + poor growth + sweating + fast breathing = infant heart disease.",
+         "opts": [
+          "Jaundice and pale stools",
+          "Headache and neck stiffness",
+          "Joint swelling only",
+          "Poor feeding/growth, sweating, fast breathing, cyanosis"
+         ],
+         "ans": 3
         },
         {
          "q": "How do you distinguish congenital from acquired heart disease on history?",
-         "a": "Congenital: symptoms from infancy, feeding difficulties, failure to thrive, recurrent admissions. Acquired: e.g. rheumatic fever with fever, joint pain and chorea."
+         "a": "**Congenital: symptoms from infancy (feeding difficulty, failure to thrive, recurrent admissions). Acquired: later onset, often after an illness (e.g. rheumatic fever).**\n\n## Understanding it\n- **Timing** is the key: from birth/infancy = congenital; later, post-infective = acquired.\n\n>> From infancy = congenital; later onset = acquired.",
+         "opts": [
+          "Congenital = from infancy; acquired = later onset (often post-illness)",
+          "Acquired is always from birth",
+          "They are indistinguishable",
+          "Both always present at birth"
+         ],
+         "ans": 0
         },
         {
          "q": "How is cyanotic CHD classified?",
-         "a": "By pulmonary blood flow: decreased PBF (TOF, tricuspid atresia, TGA with PS, single ventricle with PS) and increased PBF (truncus arteriosus, TAPVC, single ventricle without PS)."
+         "a": "**By pulmonary blood flow: decreased PBF (TOF, tricuspid atresia) versus increased PBF (TGA, TAPVC, truncus arteriosus).**\n\n## Understanding it\n- Cyanotic lesions split by whether the lungs get **too little** or **too much** blood.\n\n>> Cyanotic CHD: decreased vs increased pulmonary blood flow.",
+         "opts": [
+          "Alphabetically",
+          "By murmur grade only",
+          "By pulmonary blood flow (decreased vs increased)",
+          "By the child's weight"
+         ],
+         "ans": 2
         },
         {
          "q": "How is acyanotic CHD classified?",
-         "a": "By overload type: volume overload/shunt (ASD, VSD, PDA) and pressure overload/obstruction (PS, AS, CoA)."
+         "a": "**By overload type: volume overload/shunt (ASD, VSD, PDA) versus pressure overload/obstruction (PS, AS, coarctation).**\n\n## Understanding it\n- Acyanotic lesions are either a **left-to-right shunt (volume)** or an **obstruction (pressure)**.\n\n>> Acyanotic CHD: volume-overload shunts vs pressure-overload obstructions.",
+         "opts": [
+          "By cyanosis severity",
+          "By skin colour",
+          "By the child's age only",
+          "By overload: volume (shunts) vs pressure (obstructions)"
+         ],
+         "ans": 3
         },
         {
          "q": "What are the three complications to look for in the CVS history?",
-         "a": "CCF (congestive cardiac failure), infective endocarditis, and pulmonary hypertension."
+         "a": "**Congestive cardiac failure, infective endocarditis, and pulmonary hypertension.**\n\n## Understanding it\n- These are the main sequelae of untreated heart disease to screen for.\n\n>> CCF, infective endocarditis, pulmonary hypertension.",
+         "opts": [
+          "CCF, infective endocarditis, pulmonary hypertension",
+          "UTI, otitis, tonsillitis",
+          "Fracture, stroke, seizure",
+          "Anaemia, jaundice, rash"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the mechanism of central cyanosis?",
-         "a": "Diminished arterial oxygen saturation."
+         "a": "**Diminished arterial oxygen saturation.**\n\n## Understanding it\n- Central cyanosis = the blood leaving the heart is **under-oxygenated** (cardiac/respiratory shunt).\n\n>> Central cyanosis = low arterial O2 saturation.",
+         "opts": [
+          "Anaemia only",
+          "Diminished arterial oxygen saturation",
+          "Increased oxygen saturation",
+          "Reduced local blood flow"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the mechanism of peripheral cyanosis?",
-         "a": "Diminished flow of blood to the local part."
+         "a": "**Diminished flow of blood to the local part.**\n\n## Understanding it\n- Peripheral cyanosis = the blood is fine but **flows slowly** to the periphery, which extracts more O2 (cold, shock).\n\n>> Peripheral cyanosis = poor local blood flow.",
+         "opts": [
+          "Low arterial saturation",
+          "Polycythaemia",
+          "Diminished local blood flow",
+          "A lung shunt"
+         ],
+         "ans": 2
         },
         {
          "q": "Where is central cyanosis seen?",
-         "a": "At the mucous membranes — tongue, lips and cheeks."
+         "a": "**At the mucous membranes — tongue, lips and cheeks.**\n\n## Understanding it\n- Central cyanosis shows in warm, well-perfused **mucous membranes** (tongue).\n\n>> Central cyanosis: tongue, lips, mucous membranes.",
+         "opts": [
+          "Only the fingertips",
+          "Only the toes",
+          "The whole body evenly",
+          "Mucous membranes — tongue, lips, cheeks"
+         ],
+         "ans": 3
         },
         {
          "q": "Where is peripheral cyanosis seen?",
-         "a": "On the skin only."
+         "a": "**On the skin only (e.g. fingers, toes) — not the mucous membranes.**\n\n## Understanding it\n- Peripheral cyanosis affects the cold **extremities' skin**, sparing the tongue.\n\n>> Peripheral cyanosis: skin/extremities, tongue spared.",
+         "opts": [
+          "On the skin/extremities only (tongue spared)",
+          "Everywhere including the tongue",
+          "On the tongue",
+          "On mucous membranes"
+         ],
+         "ans": 0
         },
         {
          "q": "Is the limb warm or cold in central versus peripheral cyanosis?",
-         "a": "Warm in central cyanosis; cold in peripheral cyanosis."
+         "a": "**Warm in central cyanosis; cold in peripheral cyanosis.**\n\n## Understanding it\n- Central: perfusion is fine (warm) but oxygen is low. Peripheral: poor flow makes it **cold**.\n\n>> Central = warm; peripheral = cold.",
+         "opts": [
+          "Cold in central; warm in peripheral",
+          "Warm in central; cold in peripheral",
+          "Warm in both",
+          "Cold in both"
+         ],
+         "ans": 1
         },
         {
          "q": "What happens to central and peripheral cyanosis on applying local heat?",
-         "a": "Central cyanosis remains; peripheral cyanosis is abolished."
+         "a": "**Central cyanosis remains; peripheral cyanosis is abolished.**\n\n## Understanding it\n- Warming improves local **flow**, so peripheral cyanosis clears; central (low O2) is unaffected.\n\n>> Heat abolishes peripheral cyanosis, not central.",
+         "opts": [
+          "Central remains; peripheral abolished",
+          "Both remain",
+          "Central abolished; peripheral remains",
+          "Both abolished"
+         ],
+         "ans": 0
         },
         {
          "q": "What happens to central and peripheral cyanosis on breathing pure oxygen?",
-         "a": "Central cyanosis decreases; peripheral cyanosis persists."
+         "a": "**Central cyanosis decreases; peripheral cyanosis persists.**\n\n## Understanding it\n- Oxygen raises arterial saturation, improving **central** cyanosis; peripheral (flow problem) persists.\n\n>> Oxygen improves central, not peripheral, cyanosis.",
+         "opts": [
+          "Peripheral clears; central persists",
+          "Both persist",
+          "Both clear",
+          "Central decreases; peripheral persists"
+         ],
+         "ans": 3
         },
         {
          "q": "Which type of cyanosis is associated with clubbing and polycythaemia?",
-         "a": "Central cyanosis."
+         "a": "**Central cyanosis.**\n\n## Understanding it\n- Chronic low arterial O2 (central cyanosis) drives **clubbing** and **polycythaemia** (compensatory red-cell rise).\n\n>> Clubbing + polycythaemia = chronic central cyanosis.",
+         "opts": [
+          "Peripheral cyanosis",
+          "Neither",
+          "Both equally",
+          "Central cyanosis"
+         ],
+         "ans": 3
         },
         {
          "q": "State Nada's major criteria for the presence of heart disease.",
-         "a": "Systolic murmur grade III or more, diastolic murmur, cyanosis, and congestive heart failure."
+         "a": "**Systolic murmur grade III or more, diastolic murmur, cyanosis, and congestive heart failure.**\n\n## Understanding it\n- The **major** criteria are the strong markers of true heart disease.\n\n>> Major: loud systolic murmur, any diastolic murmur, cyanosis, CCF.",
+         "opts": [
+          "Fever and rash",
+          "Only a soft murmur",
+          "Grade ≥III systolic murmur, diastolic murmur, cyanosis, CCF",
+          "Only an abnormal ECG"
+         ],
+         "ans": 2
         },
         {
          "q": "State Nada's minor criteria.",
-         "a": "Systolic murmur grade II or less, abnormal second sound, abnormal ECG, abnormal CXR, and abnormal BP."
+         "a": "**Systolic murmur grade II or less, abnormal second sound, abnormal ECG, abnormal CXR, and abnormal blood pressure.**\n\n## Understanding it\n- The **minor** criteria are softer, supportive signs.\n\n>> Minor: soft murmur, abnormal S2/ECG/CXR/BP.",
+         "opts": [
+          "A loud diastolic murmur",
+          "Soft murmur, abnormal S2, abnormal ECG/CXR/BP",
+          "Clubbing only",
+          "Cyanosis and CCF"
+         ],
+         "ans": 1
         },
         {
          "q": "How many of Nada's criteria suggest heart disease?",
-         "a": "The presence of 1 major or 2 minor criteria suggests the presence of heart disease."
+         "a": "**The presence of 1 major or 2 minor criteria suggests heart disease.**\n\n## Understanding it\n- One strong (major) sign, or two supportive (minor) signs, indicates disease.\n\n>> 1 major OR 2 minor = heart disease.",
+         "opts": [
+          "1 minor criterion alone",
+          "All criteria must be present",
+          "1 major or 2 minor criteria",
+          "3 major criteria only"
+         ],
+         "ans": 2
         },
         {
          "q": "What cardiac defects are expected with maternal diabetes?",
-         "a": "TGA, VSD, PDA and HOCM."
+         "a": "**TGA, VSD, PDA and HOCM.**\n\n## Understanding it\n- Maternal diabetes is linked to transposition, septal defects, PDA and hypertrophic cardiomyopathy.\n\n>> Maternal diabetes → TGA, VSD, PDA, HOCM.",
+         "opts": [
+          "Congenital heart block",
+          "Ebstein's anomaly",
+          "TGA, VSD, PDA, HOCM",
+          "Coarctation only"
+         ],
+         "ans": 2
         },
         {
          "q": "What cardiac defect is expected with maternal SLE?",
-         "a": "Congenital heart block."
+         "a": "**Congenital heart block.**\n\n## Understanding it\n- Maternal anti-Ro/La antibodies (SLE) cross the placenta and damage the conducting system → **congenital heart block**.\n\n>> Maternal SLE → congenital heart block.",
+         "opts": [
+          "Congenital heart block",
+          "Ebstein's anomaly",
+          "TGA",
+          "Pulmonary stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "What cardiac defects are expected with maternal phenylketonuria?",
-         "a": "TOF, VSD, ASD, PDA and CoA."
+         "a": "**TOF, VSD, ASD, PDA and CoA.**\n\n## Understanding it\n- Uncontrolled maternal PKU is teratogenic, causing a range of defects.\n\n>> Maternal PKU → TOF, VSD, ASD, PDA, CoA.",
+         "opts": [
+          "Congenital heart block",
+          "Aortic regurgitation only",
+          "TOF, VSD, ASD, PDA, CoA",
+          "Only Ebstein's anomaly"
+         ],
+         "ans": 2
         },
         {
          "q": "Which cardiac defect does lithium in pregnancy cause?",
-         "a": "Ebstein's anomaly."
+         "a": "**Ebstein's anomaly.**\n\n## Understanding it\n- Lithium is classically linked to **Ebstein's anomaly** (downward-displaced tricuspid valve).\n\n>> Lithium → Ebstein's anomaly.",
+         "opts": [
+          "Transposition of the great arteries",
+          "Congenital heart block",
+          "Coarctation",
+          "Ebstein's anomaly"
+         ],
+         "ans": 3
         },
         {
          "q": "Which cardiac defects does alcohol in pregnancy cause?",
-         "a": "VSD, PDA, ASD and TOF."
+         "a": "**VSD, PDA, ASD and TOF.**\n\n## Understanding it\n- Fetal alcohol exposure causes septal defects, PDA and TOF.\n\n>> Alcohol → VSD, PDA, ASD, TOF.",
+         "opts": [
+          "Ebstein's anomaly only",
+          "Congenital heart block",
+          "VSD, PDA, ASD, TOF",
+          "No cardiac effect"
+         ],
+         "ans": 2
         },
         {
          "q": "What does indomethacin do to the ductus arteriosus?",
-         "a": "Causes intrauterine closure of the PDA."
+         "a": "**Causes intrauterine closure of the PDA.**\n\n## Understanding it\n- Indomethacin blocks prostaglandins that keep the duct open → the duct **closes**.\n- (Postnatally, indomethacin is used to close a PDA.)\n\n>> Indomethacin closes the ductus arteriosus.",
+         "opts": [
+          "Causes closure of the ductus arteriosus",
+          "Has no effect on the duct",
+          "Keeps the duct open",
+          "Causes coarctation"
+         ],
+         "ans": 0
         },
         {
          "q": "Which cardiac defects are associated with Down syndrome?",
-         "a": "Endocardial cushion defect (ECD) and VSD."
+         "a": "**Endocardial cushion defect (AVSD) and VSD.**\n\n## Understanding it\n- Trisomy 21 is classically linked to **atrioventricular septal (endocardial cushion) defects**.\n\n>> Down syndrome → endocardial cushion defect (AVSD), VSD.",
+         "opts": [
+          "Coarctation and ASD",
+          "Endocardial cushion defect (AVSD) and VSD",
+          "Ebstein's anomaly",
+          "Pulmonary stenosis only"
+         ],
+         "ans": 1
         },
         {
          "q": "Which cardiac defect is associated with Noonan syndrome?",
-         "a": "Pulmonary stenosis (PS)."
+         "a": "**Pulmonary stenosis.**\n\n## Understanding it\n- Noonan syndrome is classically associated with **pulmonary stenosis**.\n\n>> Noonan → pulmonary stenosis.",
+         "opts": [
+          "Coarctation of the aorta",
+          "Congenital heart block",
+          "Aortic regurgitation",
+          "Pulmonary stenosis"
+         ],
+         "ans": 3
         },
         {
          "q": "Which cardiac defects are associated with Turner syndrome?",
-         "a": "Coarctation of the aorta, AS and ASD."
+         "a": "**Coarctation of the aorta, aortic stenosis and ASD.**\n\n## Understanding it\n- Turner syndrome features **left-sided/aortic** lesions, classically **coarctation**.\n\n>> Turner → coarctation, AS, ASD.",
+         "opts": [
+          "Congenital heart block",
+          "Pulmonary stenosis only",
+          "Ebstein's anomaly",
+          "Coarctation, aortic stenosis, ASD"
+         ],
+         "ans": 3
         },
         {
          "q": "Which cardiac defects are associated with Marfan syndrome?",
-         "a": "Aortic regurgitation (AR) and mitral valve prolapse (MVP)."
+         "a": "**Aortic regurgitation and mitral valve prolapse.**\n\n## Understanding it\n- Marfan's connective-tissue defect weakens the aorta and mitral valve → **AR and MVP** (± aortic dissection).\n\n>> Marfan → aortic regurgitation, mitral valve prolapse.",
+         "opts": [
+          "Pulmonary stenosis",
+          "Aortic regurgitation and mitral valve prolapse",
+          "Coarctation",
+          "VSD only"
+         ],
+         "ans": 1
         },
         {
          "q": "Which cardiac defect is associated with Holt-Oram syndrome?",
-         "a": "ASD (ostium primum)."
+         "a": "**ASD (ostium primum), with upper-limb (radial) anomalies.**\n\n## Understanding it\n- Holt-Oram ('heart-hand') syndrome pairs an **ASD** with radial/upper-limb defects.\n\n>> Holt-Oram → ASD (+ limb anomalies).",
+         "opts": [
+          "Ebstein's anomaly",
+          "Pulmonary stenosis",
+          "Coarctation",
+          "ASD (ostium primum)"
+         ],
+         "ans": 3
         },
         {
          "q": "What does clubbing suggest in the CVS examination?",
-         "a": "Infective endocarditis or cyanotic heart disease."
+         "a": "**Infective endocarditis or cyanotic heart disease.**\n\n## Understanding it\n- Clubbing points to **chronic hypoxia (cyanotic CHD)** or **infective endocarditis**.\n\n>> Clubbing → cyanotic CHD or infective endocarditis.",
+         "opts": [
+          "Anaemia",
+          "A normal finding",
+          "Infective endocarditis or cyanotic heart disease",
+          "Acute rheumatic fever only"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the sequence of the CVS examination?",
-         "a": "Pulse, BP, JVP, inspection of the precordium, palpation, percussion, and auscultation."
+         "a": "**Pulse, blood pressure, JVP, inspection of the precordium, palpation, percussion, then auscultation.**\n\n## Understanding it\n- A fixed head-to-heart order ensures nothing is missed.\n\n>> Pulse → BP → JVP → inspect → palpate → percuss → auscultate.",
+         "opts": [
+          "BP then straight to the heart sounds",
+          "Only auscultation",
+          "Auscultation first, then pulse",
+          "Pulse, BP, JVP, inspection, palpation, percussion, auscultation"
+         ],
+         "ans": 3
         },
         {
          "q": "Define a pulse.",
-         "a": "A waveform felt by the finger, produced during cardiac systole, which travels along the arterial tree at a rate much faster than that of the blood column."
+         "a": "**A waveform felt by the finger, produced during cardiac systole, that travels along the arterial wall.**\n\n## Understanding it\n- Each heartbeat sends a pressure wave along the arteries — that is the pulse.\n\n>> Pulse = the systolic pressure wave felt in an artery.",
+         "opts": [
+          "The heart's electrical activity",
+          "A systolic pressure waveform felt in an artery",
+          "A heart sound",
+          "The venous pressure"
+         ],
+         "ans": 1
         },
         {
          "q": "List the features assessed in the pulse.",
-         "a": "Rate, rhythm, volume, character, pulse deficit, condition of the vessel wall, radio-femoral delay, and symmetry."
+         "a": "**Rate, rhythm, volume, character, pulse deficit, condition of the vessel wall, and radio-femoral/radio-radial delay.**\n\n## Understanding it\n- A full pulse exam covers how fast, how regular, how big, its shape, and symmetry/delays.\n\n>> Rate, rhythm, volume, character, deficit, vessel wall, delays.",
+         "opts": [
+          "Rate, rhythm, volume, character, deficit, vessel wall, delays",
+          "Only the rate",
+          "Colour and temperature only",
+          "Only the rhythm"
+         ],
+         "ans": 0
         },
         {
          "q": "How is the pulse rate counted?",
-         "a": "For a full minute by palpating the radial artery."
+         "a": "**For a full minute by palpating the radial artery.**\n\n## Understanding it\n- Counting a full minute (not extrapolating) catches irregularity accurately.\n\n>> Radial pulse, full minute.",
+         "opts": [
+          "From the ECG only",
+          "Carotid, for 10 seconds",
+          "Radial artery, for a full minute",
+          "At the apex for 15 seconds"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the causes of tachycardia.",
-         "a": "Rheumatic fever, congestive cardiac failure and arrhythmias."
+         "a": "**Rheumatic fever, congestive cardiac failure and arrhythmias.**\n\n## Understanding it\n- A fast pulse in cardiology points to fever/inflammation (rheumatic fever), failure, or arrhythmia.\n\n>> Tachycardia: rheumatic fever, CCF, arrhythmias.",
+         "opts": [
+          "Hypothermia",
+          "Rheumatic fever, CCF, arrhythmias",
+          "Complete heart block",
+          "Sick sinus syndrome"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the causes of bradycardia.",
-         "a": "Complete heart block and sick sinus syndrome (sino-atrial disease)."
+         "a": "**Complete heart block and sick sinus syndrome (sino-atrial disease).**\n\n## Understanding it\n- A slow pulse points to a **conduction/pacemaker** problem.\n\n>> Bradycardia: complete heart block, sick sinus syndrome.",
+         "opts": [
+          "Rheumatic fever",
+          "Complete heart block, sick sinus syndrome",
+          "Fever",
+          "Congestive cardiac failure"
+         ],
+         "ans": 1
         },
         {
          "q": "What rhythm is 'regularly irregular' and what does it indicate?",
-         "a": "Sinus arrhythmia — a normal variant in which the rate rises on inspiration and falls on expiration."
+         "a": "**Sinus arrhythmia — a normal variant where the rate rises on inspiration and falls on expiration.**\n\n## Understanding it\n- A **predictable** irregularity linked to breathing is benign sinus arrhythmia (vagal tone).\n\n>> Regularly irregular = sinus arrhythmia (normal).",
+         "opts": [
+          "Ventricular tachycardia",
+          "Complete heart block",
+          "Sinus arrhythmia (normal — varies with breathing)",
+          "Atrial fibrillation"
+         ],
+         "ans": 2
         },
         {
          "q": "What rhythm is 'irregularly irregular' and what does it indicate?",
-         "a": "Atrial fibrillation, or atrial flutter with varying degrees of heart block."
+         "a": "**Atrial fibrillation, or atrial flutter with varying heart block.**\n\n## Understanding it\n- A **chaotic, unpredictable** rhythm = AF (or variable-block flutter).\n\n>> Irregularly irregular = atrial fibrillation.",
+         "opts": [
+          "Atrial fibrillation (or variable-block flutter)",
+          "Complete heart block",
+          "Normal rhythm",
+          "Sinus arrhythmia"
+         ],
+         "ans": 0
         },
         {
          "q": "How is pulse volume assessed, and what gives the accurate measurement?",
-         "a": "By palpating the carotid artery; pulse pressure (PP) gives the accurate measurement."
+         "a": "**By palpating the carotid artery; pulse pressure gives the accurate measurement.**\n\n## Understanding it\n- Volume is judged at the large **carotid**; the true measure is the **pulse pressure** (systolic − diastolic).\n\n>> Assess volume at the carotid; pulse pressure quantifies it.",
+         "opts": [
+          "Palpate the carotid; pulse pressure quantifies it",
+          "From the ECG",
+          "By the murmur grade",
+          "Palpate the toe; heart rate quantifies it"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the pulse pressure values for normal, low and high volume pulses.",
-         "a": "Normal 30-60 mmHg; low volume <30 mmHg; high volume >60 mmHg."
+         "a": "**Normal 30–60 mmHg; low volume <30 mmHg; high volume >60 mmHg.**\n\n## Understanding it\n- Pulse pressure = systolic − diastolic; outside 30–60 signals low/high volume pulses.\n\n>> Normal 30–60; <30 low; >60 high.",
+         "opts": [
+          "Low >60; high <30",
+          "Normal 100–120",
+          "There is no normal range",
+          "Normal 30–60; low <30; high >60 mmHg"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of a large volume (bounding) pulse.",
-         "a": "Aortic incompetence (AR), PDA, A-V fistula and persistent truncus arteriosus."
+         "a": "**Aortic incompetence (AR), PDA, arteriovenous fistula, and persistent truncus arteriosus.**\n\n## Understanding it\n- A big pulse pressure (bounding) comes from **run-off** lesions (blood leaks back or shunts away in diastole).\n\n>> Bounding pulse: AR, PDA, AV fistula, truncus.",
+         "opts": [
+          "Coarctation (lower limb)",
+          "Aortic stenosis",
+          "Pericardial effusion",
+          "AR, PDA, AV fistula, truncus arteriosus"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of a small volume (weak, thready) pulse.",
-         "a": "CCF, pericardial effusion, constrictive pericarditis, and the lower limb in coarctation of the aorta."
+         "a": "**CCF, pericardial effusion, constrictive pericarditis, and the lower limb in coarctation.**\n\n## Understanding it\n- Low stroke volume/output (failure, tamponade physiology, obstruction) gives a **weak** pulse.\n\n>> Weak pulse: CCF, effusion, constriction, coarctation (legs).",
+         "opts": [
+          "CCF, pericardial effusion, constriction, coarctation (legs)",
+          "PDA",
+          "AV fistula",
+          "Aortic regurgitation"
+         ],
+         "ans": 0
         },
         {
          "q": "What is an anacrotic (parvus et tardus) pulse and its cause?",
-         "a": "A low-amplitude, slow-rising pulse with a late peak; seen in aortic stenosis."
+         "a": "**A low-amplitude, slow-rising pulse with a late peak; seen in aortic stenosis.**\n\n## Understanding it\n- A stenosed aortic valve makes the pulse rise **slowly and small** ('parvus et tardus').\n\n>> Slow-rising, small pulse = aortic stenosis.",
+         "opts": [
+          "Alternating pulse — LVF",
+          "Slow-rising, low-amplitude pulse — aortic stenosis",
+          "Rapid collapsing pulse — AR",
+          "Paradoxical pulse — tamponade"
+         ],
+         "ans": 1
         },
         {
          "q": "What is a collapsing pulse and its cause?",
-         "a": "A pulse with a rapid upstroke and rapid downstroke and large stroke volume; seen in aortic regurgitation and PDA."
+         "a": "**A pulse with a rapid upstroke and rapid downstroke and large stroke volume; seen in aortic regurgitation.**\n\n## Understanding it\n- Blood leaks back in diastole, so the pulse rises fast then **collapses** ('water-hammer').\n\n>> Collapsing (water-hammer) pulse = aortic regurgitation (and PDA).",
+         "opts": [
+          "Rapid rise and collapse — aortic regurgitation",
+          "Alternating — LVF",
+          "Paradoxical — tamponade",
+          "Slow-rising — aortic stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "What is pulsus alterans and its cause?",
-         "a": "Alternating small and large volume pulse; seen in severe left ventricular failure."
+         "a": "**Alternating small- and large-volume beats; seen in severe left ventricular failure.**\n\n## Understanding it\n- A failing LV can't contract equally each beat → alternating strong/weak pulses.\n\n>> Pulsus alternans = severe LV failure.",
+         "opts": [
+          "Alternating strong/weak beats — severe LV failure",
+          "Collapsing — AR",
+          "Paradoxical — tamponade",
+          "Slow-rising — aortic stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "What is pulsus paradoxus and its causes?",
-         "a": "A fall in blood pressure of more than 10 mmHg during inspiration; seen in cardiac tamponade and constrictive pericarditis."
+         "a": "**A fall in blood pressure of more than 10 mmHg during inspiration; seen in cardiac tamponade and constrictive pericarditis (and severe asthma).**\n\n## Understanding it\n- An exaggeration of the normal inspiratory BP drop; the compressed heart can't fill enough on inspiration.\n\n>> Pulsus paradoxus (>10 mmHg inspiratory drop) = tamponade/constriction.",
+         "opts": [
+          "Rapid collapsing pulse",
+          "A normal finding",
+          "Aortic stenosis",
+          "Inspiratory BP fall >10 mmHg — tamponade/constriction"
+         ],
+         "ans": 3
         },
         {
          "q": "What is pulse deficit and what causes it?",
-         "a": "The difference between heart rate and pulse rate counted simultaneously for 1 minute; caused by atrial fibrillation and ventricular premature contractions."
+         "a": "**The difference between heart rate and pulse rate counted simultaneously; caused by atrial fibrillation (some beats are too weak to reach the wrist).**\n\n## Understanding it\n- In AF, some ventricular beats are too weak to produce a palpable pulse → apical rate > radial rate.\n\n>> Pulse deficit (apical > radial) = atrial fibrillation.",
+         "opts": [
+          "Apical−radial rate difference — atrial fibrillation",
+          "A normal variant",
+          "Bradycardia",
+          "Aortic stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "What causes radio-radial delay?",
-         "a": "Pre-subclavian coarctation and supravalvular AS."
+         "a": "**Pre-subclavian coarctation and supravalvular aortic stenosis.**\n\n## Understanding it\n- A delay between the two radial pulses means an obstruction **before/around the subclavian origin**.\n\n>> Radio-radial delay: pre-subclavian coarctation, supravalvular AS.",
+         "opts": [
+          "Normal finding",
+          "Aortic regurgitation",
+          "Atrial fibrillation",
+          "Pre-subclavian coarctation, supravalvular AS"
+         ],
+         "ans": 3
         },
         {
          "q": "What causes radio-femoral delay?",
-         "a": "Coarctation of the aorta and aortic embolism."
+         "a": "**Coarctation of the aorta and aortic embolism.**\n\n## Understanding it\n- A delay between arm and leg pulses means an aortic obstruction **between them** — classically **coarctation**.\n\n>> Radio-femoral delay = coarctation of the aorta.",
+         "opts": [
+          "A normal finding",
+          "Coarctation of the aorta (and aortic embolism)",
+          "Atrial fibrillation",
+          "Aortic regurgitation"
+         ],
+         "ans": 1
         },
         {
          "q": "What are the correct blood pressure cuff dimensions?",
-         "a": "Width 40% of the arm circumference; length 80-100% of the arm circumference."
+         "a": "**Width 40% of the arm circumference; length 80–100% of the arm circumference.**\n\n## Understanding it\n- Cuff size must match the arm or the reading is falsely high/low.\n\n>> Width 40%, length 80–100% of arm circumference.",
+         "opts": [
+          "Width 80%, length 40%",
+          "Width 40%, length 80–100% of arm circumference",
+          "Width 10%, length 20%",
+          "One size fits all"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the effect of using a BP cuff that is too small?",
-         "a": "It reads falsely high."
+         "a": "**It reads falsely high.**\n\n## Understanding it\n- A small cuff needs extra pressure to compress the artery → **overestimates** BP.\n\n>> Too-small cuff → falsely high BP.",
+         "opts": [
+          "It cannot measure at all",
+          "It reads falsely high",
+          "It reads falsely low",
+          "No effect"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the effect of using a BP cuff that is too large?",
-         "a": "It reads falsely low."
+         "a": "**It reads falsely low.**\n\n## Understanding it\n- A large cuff compresses the artery too easily → **underestimates** BP.\n\n>> Too-large cuff → falsely low BP.",
+         "opts": [
+          "It reads falsely low",
+          "No effect",
+          "It reads falsely high",
+          "It doubles the reading"
+         ],
+         "ans": 0
         },
         {
          "q": "How is the JVP expressed and at what angle is the patient?",
-         "a": "As the vertical height from the sternal angle to the zone of transition of the distended and collapsed internal jugular vein, with the patient at 45 degrees."
+         "a": "**As the vertical height from the sternal angle to the top of the distended internal jugular vein, with the patient reclined at 45°.**\n\n## Understanding it\n- The JVP is measured **vertically from the sternal angle** at **45°**.\n\n>> Vertical height above the sternal angle, patient at 45°.",
+         "opts": [
+          "From the umbilicus, lying flat",
+          "From the chin, patient upright",
+          "Vertical height above the sternal angle, patient at 45°",
+          "Measured horizontally"
+         ],
+         "ans": 2
         },
         {
          "q": "What does the JVP indicate?",
-         "a": "Right atrial pressure."
+         "a": "**Right atrial pressure.**\n\n## Understanding it\n- The internal jugular connects directly to the right atrium, so its level reflects **right atrial pressure**.\n\n>> JVP = right atrial pressure.",
+         "opts": [
+          "Pulmonary artery pressure",
+          "Right atrial pressure",
+          "Left atrial pressure",
+          "Arterial pressure"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the formula for right atrial pressure from the JVP.",
-         "a": "Right atrial pressure = vertical height of the blood column + 5 cm (cm H2O), because the centre of the RA is about 5 cm from the sternal angle."
+         "a": "**Right atrial pressure = vertical height of the blood column + 5 cm H2O (the sternal angle sits ~5 cm above the right atrium).**\n\n## Understanding it\n- Add ~5 cm because the reference (sternal angle) is 5 cm above the atrium.\n\n>> RA pressure = JVP height + 5 cm H2O.",
+         "opts": [
+          "JVP height − 5",
+          "JVP height × 2",
+          "JVP height + 5 cm H2O",
+          "JVP height alone"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the normal JVP?",
-         "a": "Less than 8 cm of H2O, or less than 6 mmHg."
+         "a": "**Less than 8 cm H2O, or less than 6 mmHg.**\n\n## Understanding it\n- Normal right atrial pressure keeps the JVP low (<8 cm H2O / <6 mmHg).\n\n>> Normal JVP <8 cm H2O (<6 mmHg).",
+         "opts": [
+          "There is no normal value",
+          "<40 cm H2O",
+          "<120 mmHg",
+          "<8 cm H2O (<6 mmHg)"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of an elevated JVP.",
-         "a": "CCF, tricuspid stenosis, tricuspid regurgitation, constrictive pericarditis and cardiac tamponade."
+         "a": "**CCF, tricuspid stenosis, tricuspid regurgitation, constrictive pericarditis and cardiac tamponade.**\n\n## Understanding it\n- Anything that raises **right atrial pressure** or impairs filling raises the JVP.\n\n>> Elevated JVP: CCF, TS, TR, constriction, tamponade.",
+         "opts": [
+          "Hypovolaemia",
+          "CCF, TS, TR, constrictive pericarditis, tamponade",
+          "Shock",
+          "Dehydration"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the causes of a low JVP.",
-         "a": "Hypovolaemia and shock."
+         "a": "**Hypovolaemia and shock.**\n\n## Understanding it\n- Low circulating volume drops right atrial pressure → **low JVP**.\n\n>> Low JVP = hypovolaemia/shock.",
+         "opts": [
+          "Tamponade",
+          "Hypovolaemia and shock",
+          "Tricuspid stenosis",
+          "Heart failure"
+         ],
+         "ans": 1
         },
         {
          "q": "What is Kussmaul's sign and its causes?",
-         "a": "A paradoxical rise in JVP on inspiration; seen in constrictive pericarditis, cardiac tamponade and RV failure."
+         "a": "**A paradoxical rise in JVP on inspiration; seen in constrictive pericarditis, cardiac tamponade and restrictive cardiomyopathy.**\n\n## Understanding it\n- Normally the JVP falls on inspiration; if the right heart can't accommodate the extra venous return, the JVP **rises** instead.\n\n>> Kussmaul's sign (JVP rises on inspiration) = constriction/tamponade/restriction.",
+         "opts": [
+          "Hypovolaemia",
+          "JVP falls on inspiration (normal)",
+          "Aortic stenosis",
+          "JVP rises on inspiration — constriction/tamponade/restriction"
+         ],
+         "ans": 3
         },
         {
          "q": "What is Friedreich's sign?",
-         "a": "A rapid fall and rise of the JVP; seen in TR and constrictive pericarditis."
+         "a": "**A rapid fall and rise of the JVP; seen in tricuspid regurgitation and constrictive pericarditis.**\n\n## Understanding it\n- A sharp collapse and rebound of the venous pulse in constriction/TR.\n\n>> Friedreich's sign: rapid JVP fall-and-rise (TR, constriction).",
+         "opts": [
+          "A slow steady JVP rise",
+          "A normal finding",
+          "Rapid fall-and-rise of the JVP — TR/constriction",
+          "Aortic stenosis"
+         ],
+         "ans": 2
         },
         {
          "q": "What does a visible precordial bulge suggest?",
-         "a": "Long-standing cardiac disease."
+         "a": "**Long-standing cardiac disease.**\n\n## Understanding it\n- Chronic cardiac enlargement in childhood, while the chest is still pliable, deforms the precordium.\n\n>> Precordial bulge = long-standing (childhood) heart disease.",
+         "opts": [
+          "A normal chest",
+          "Long-standing cardiac disease",
+          "An acute infection",
+          "A lung tumour"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the causes of visible carotid pulsations.",
-         "a": "Hyperdynamic states, AR and CoA."
+         "a": "**Hyperdynamic states, aortic regurgitation and coarctation.**\n\n## Understanding it\n- Big-stroke-volume/bounding states make the carotids visibly pulsate (Corrigan's sign in AR).\n\n>> Visible carotids: hyperdynamic states, AR, coarctation.",
+         "opts": [
+          "Hyperdynamic states, AR, coarctation",
+          "Hypovolaemia",
+          "Pericardial effusion",
+          "Aortic stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the causes of visible epigastric pulsations.",
-         "a": "Pulsation of the liver in CHF with TR, RVH, abdominal aortic aneurysm and tricuspid stenosis."
+         "a": "**Pulsation of the liver in CHF with TR, RVH, abdominal aortic aneurysm and tricuspid stenosis.**\n\n## Understanding it\n- Epigastric pulsation reflects a **pulsatile liver (TR/CHF)**, **RVH**, or an **aortic aneurysm**.\n\n>> Epigastric pulsation: pulsatile liver (TR/CHF), RVH, AAA.",
+         "opts": [
+          "A normal finding",
+          "Pulsatile liver (TR/CHF), RVH, aortic aneurysm",
+          "Aortic stenosis only",
+          "Peripheral cyanosis"
+         ],
+         "ans": 1
         },
         {
          "q": "State the general rule for which part of the hand detects pulsations, thrills and heaves.",
-         "a": "Fingertips feel pulsations; the base of the fingers feels thrills; the base of the hand (ulnar aspect) feels heaves."
+         "a": "**Fingertips feel pulsations; the base of the fingers feels thrills; the base of the hand (ulnar border) feels heaves.**\n\n## Understanding it\n- Different sensitivities: tips for fine pulsation, finger-bases for vibratory thrills, palm-base for sustained heaves.\n\n>> Tips = pulsations; finger bases = thrills; palm base = heaves.",
+         "opts": [
+          "Palm base for everything",
+          "Fingertips pulsations, finger bases thrills, palm base heaves",
+          "Only the thumb is used",
+          "Fingertips for everything"
+         ],
+         "ans": 1
         },
         {
          "q": "Define the apical impulse.",
-         "a": "The lowermost and outermost point of definite cardiac impulse, which gives maximum thrust to the palpating finger."
+         "a": "**The lowermost and outermost point of definite cardiac impulse that gives maximum thrust to the palpating finger.**\n\n## Understanding it\n- The apex beat is the **most inferolateral** point where the heart's impulse is clearly felt.\n\n>> Apical impulse = the lowest, most lateral definite cardiac thrust.",
+         "opts": [
+          "The lowest, most lateral point of definite cardiac impulse",
+          "The liver edge",
+          "The carotid pulsation",
+          "The point over the aortic valve"
+         ],
+         "ans": 0
         },
         {
          "q": "Where is the normal apical impulse in infancy?",
-         "a": "Left 4th intercostal space, lateral to the mid-clavicular line."
+         "a": "**Left 4th intercostal space, lateral to the mid-clavicular line.**\n\n## Understanding it\n- In infants the apex is one space higher and more lateral than in adults.\n\n>> Infancy: 4th ICS, lateral to MCL.",
+         "opts": [
+          "5th ICS, medial to MCL",
+          "Left 4th ICS, lateral to the mid-clavicular line",
+          "2nd ICS right border",
+          "At the xiphisternum"
+         ],
+         "ans": 1
         },
         {
          "q": "Where is the normal apical impulse at approximately 5 years?",
-         "a": "Left 5th intercostal space, in the mid-clavicular line."
+         "a": "**Left 5th intercostal space, in the mid-clavicular line.**\n\n## Understanding it\n- By ~5 years the apex settles at the classic **5th ICS, MCL**.\n\n>> Age 5: 5th ICS, in the MCL.",
+         "opts": [
+          "4th ICS lateral to MCL",
+          "At the apex of the axilla",
+          "Left 5th ICS, in the mid-clavicular line",
+          "2nd ICS left border"
+         ],
+         "ans": 2
         },
         {
          "q": "Where is the normal apical impulse in older children?",
-         "a": "Left 5th intercostal space, medial to the mid-clavicular line."
+         "a": "**Left 5th intercostal space, medial to the mid-clavicular line.**\n\n## Understanding it\n- In older children it lies just **medial** to the MCL at the 5th ICS.\n\n>> Older children: 5th ICS, medial to MCL.",
+         "opts": [
+          "Left 5th ICS, medial to the mid-clavicular line",
+          "At the epigastrium",
+          "2nd ICS right border",
+          "4th ICS lateral to MCL"
+         ],
+         "ans": 0
         },
         {
          "q": "What is a tapping apex and what does it indicate?",
-         "a": "A palpable S1; seen in mitral stenosis."
+         "a": "**A palpable first heart sound; seen in mitral stenosis.**\n\n## Understanding it\n- A loud, palpable S1 gives a 'tapping' quality — classic for **mitral stenosis**.\n\n>> Tapping apex = palpable S1 = mitral stenosis.",
+         "opts": [
+          "A palpable S1 — mitral stenosis",
+          "A sustained apex — hypertrophy",
+          "A displaced apex — dilatation",
+          "A normal apex"
+         ],
+         "ans": 0
         },
         {
          "q": "What is a hyperdynamic apex and what does it indicate?",
-         "a": "A diffuse, displaced apex; characteristic of ventricular dilatation (volume overload)."
+         "a": "**A diffuse, displaced apex; characteristic of ventricular dilatation (volume overload).**\n\n## Understanding it\n- Volume overload dilates the ventricle → a **diffuse, displaced** (hyperdynamic) apex.\n\n>> Hyperdynamic (diffuse, displaced) apex = volume overload/dilatation.",
+         "opts": [
+          "A normal apex",
+          "Diffuse, displaced apex — volume overload (dilatation)",
+          "Tapping apex — mitral stenosis",
+          "Sustained apex — pressure overload"
+         ],
+         "ans": 1
         },
         {
          "q": "What is a heaving apex and what does it indicate?",
-         "a": "A sustained, forceful apex; characteristic of ventricular hypertrophy (pressure overload)."
+         "a": "**A sustained, forceful apex; characteristic of ventricular hypertrophy (pressure overload).**\n\n## Understanding it\n- Pressure overload thickens the ventricle → a **sustained, forceful (heaving)** apex.\n\n>> Heaving (sustained) apex = pressure overload/hypertrophy.",
+         "opts": [
+          "Sustained, forceful apex — pressure overload (hypertrophy)",
+          "A normal apex",
+          "Tapping apex — mitral stenosis",
+          "Diffuse apex — dilatation"
+         ],
+         "ans": 0
         },
         {
          "q": "What is a parasternal heave and what does it indicate?",
-         "a": "A palpable thrust that lifts the palpating hand; seen in RVH and left atrial enlargement, palpated with the ulnar aspect of the hand."
+         "a": "**A palpable thrust lifting the hand at the left sternal edge; seen in right ventricular hypertrophy and left atrial enlargement.**\n\n## Understanding it\n- A left parasternal heave reflects an enlarged/overloaded **right ventricle** (or big left atrium pushing forward).\n\n>> Parasternal heave = RVH (or left atrial enlargement).",
+         "opts": [
+          "Left ventricular hypertrophy only",
+          "A normal finding",
+          "Aortic stenosis",
+          "RVH and left atrial enlargement"
+         ],
+         "ans": 3
         },
         {
          "q": "How is a parasternal heave graded?",
-         "a": "(1) instant lift, visible not palpable; (2) visible and palpable, can be obliterated; (3) visible and palpable, cannot be obliterated."
+         "a": "**(1) instant lift, visible not palpable; (2) visible and palpable, obliterable; (3) visible, palpable and not obliterable.**\n\n## Understanding it\n- Graded 1–3 by whether it's palpable and whether hand pressure can obliterate it.\n\n>> Grade 1 visible only → grade 3 palpable and non-obliterable.",
+         "opts": [
+          "Grade 1 visible; 2 palpable/obliterable; 3 palpable/non-obliterable",
+          "Grades 1–6 like murmurs",
+          "Present or absent only",
+          "Graded by loudness"
+         ],
+         "ans": 0
         },
         {
          "q": "What is a thrill and what grade of murmur does it accompany?",
-         "a": "A palpable vibration of a murmur, accompanying any organic murmur of grade 3 or more (present from grade 4 upward)."
+         "a": "**A palpable vibration of a murmur, accompanying any organic murmur of grade 3 or more.**\n\n## Understanding it\n- A thrill is a **felt** murmur; by definition it means the murmur is **≥ grade 4/6** (or grade 3 in the 1–4 scale used here).\n\n>> Thrill = palpable murmur = grade ≥3 (organic).",
+         "opts": [
+          "Present only in diastole",
+          "A palpable murmur — grade ≥3 (organic)",
+          "Always innocent",
+          "A heart sound"
+         ],
+         "ans": 1
         },
         {
          "q": "What are heart sounds produced by?",
-         "a": "Closure of the heart valves."
+         "a": "**Closure of the heart valves.**\n\n## Understanding it\n- The audible heart sounds come from **valve closure**, not opening.\n\n>> Heart sounds = valve closure.",
+         "opts": [
+          "Opening of the valves",
+          "Muscle contraction alone",
+          "Closure of the heart valves",
+          "Blood hitting the chest wall"
+         ],
+         "ans": 2
         },
         {
          "q": "What produces the first heart sound (S1)?",
-         "a": "Closure of the atrioventricular (mitral and tricuspid) valves at the start of systole."
+         "a": "**Closure of the atrioventricular (mitral and tricuspid) valves at the start of systole.**\n\n## Understanding it\n- S1 = AV valve closure, marking the **beginning of systole**.\n\n>> S1 = mitral + tricuspid closure (start of systole).",
+         "opts": [
+          "Valve opening",
+          "Aortic+pulmonary closure",
+          "Atrial contraction",
+          "AV (mitral+tricuspid) valve closure — start of systole"
+         ],
+         "ans": 3
         },
         {
          "q": "What produces the second heart sound (S2)?",
-         "a": "Closure of the semilunar (aortic and pulmonary) valves at the end of systole."
+         "a": "**Closure of the semilunar (aortic and pulmonary) valves at the end of systole.**\n\n## Understanding it\n- S2 = aortic + pulmonary closure, marking the **end of systole**.\n\n>> S2 = aortic + pulmonary closure (end of systole).",
+         "opts": [
+          "Mitral+tricuspid closure",
+          "Ventricular filling",
+          "Semilunar (aortic+pulmonary) closure — end of systole",
+          "Valve opening"
+         ],
+         "ans": 2
         },
         {
          "q": "Where is the aortic area?",
-         "a": "2nd intercostal space, right sternal border."
+         "a": "**2nd intercostal space, right sternal border.**\n\n## Understanding it\n- Aortic valve sounds are best heard at the **right 2nd ICS**.\n\n>> Aortic area: right 2nd ICS.",
+         "opts": [
+          "Left lower sternal border",
+          "5th ICS mid-clavicular",
+          "2nd ICS, right sternal border",
+          "2nd ICS left border"
+         ],
+         "ans": 2
         },
         {
          "q": "Where is the pulmonary area?",
-         "a": "2nd intercostal space, left sternal border."
+         "a": "**2nd intercostal space, left sternal border.**\n\n## Understanding it\n- Pulmonary valve sounds are best heard at the **left 2nd ICS**.\n\n>> Pulmonary area: left 2nd ICS.",
+         "opts": [
+          "2nd ICS right border",
+          "2nd ICS, left sternal border",
+          "Left lower sternal border",
+          "Apex"
+         ],
+         "ans": 1
         },
         {
          "q": "Where is the tricuspid area?",
-         "a": "Left lower sternal border."
+         "a": "**Left lower sternal border.**\n\n## Understanding it\n- Tricuspid sounds are best heard at the **left lower sternal edge**.\n\n>> Tricuspid area: left lower sternal border.",
+         "opts": [
+          "Left 2nd ICS",
+          "Left lower sternal border",
+          "Apex (5th ICS MCL)",
+          "Right 2nd ICS"
+         ],
+         "ans": 1
         },
         {
          "q": "Where is the mitral area?",
-         "a": "5th intercostal space, mid-clavicular line (the apex)."
+         "a": "**5th intercostal space, mid-clavicular line (the apex).**\n\n## Understanding it\n- Mitral sounds are best heard at the **apex** (5th ICS, MCL).\n\n>> Mitral area = the apex (5th ICS, MCL).",
+         "opts": [
+          "Right 2nd ICS",
+          "5th ICS, mid-clavicular line (apex)",
+          "Left lower sternal border",
+          "Left 2nd ICS"
+         ],
+         "ans": 1
         },
         {
          "q": "Give causes of a soft S1.",
-         "a": "MR, TR and calcification of the AV valves."
+         "a": "**Mitral regurgitation, tricuspid regurgitation, and calcification of the AV valves.**\n\n## Understanding it\n- A leaky or stiff/calcified AV valve closes poorly → **soft S1**.\n\n>> Soft S1: MR, TR, AV valve calcification.",
+         "opts": [
+          "MR, TR, AV valve calcification",
+          "Mitral stenosis",
+          "High-output states",
+          "Tricuspid stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "Give causes of a loud S1.",
-         "a": "MS, TS and high-output states."
+         "a": "**Mitral stenosis, tricuspid stenosis, and high-output states.**\n\n## Understanding it\n- A stenosed AV valve slams shut from a wide-open position → **loud S1** (also high-output/tachycardia).\n\n>> Loud S1: MS, TS, high-output states.",
+         "opts": [
+          "AV valve calcification",
+          "Mitral regurgitation",
+          "MS, TS, high-output states",
+          "Aortic regurgitation"
+         ],
+         "ans": 2
         },
         {
          "q": "Give causes of a loud P2.",
-         "a": "Pulmonary hypertension, ASD, PDA and large VSD."
+         "a": "**Pulmonary hypertension, ASD, PDA and large VSD.**\n\n## Understanding it\n- Raised pulmonary pressure (directly or via a big left-to-right shunt) makes the **pulmonary component of S2 loud**.\n\n>> Loud P2: pulmonary hypertension, ASD, PDA, large VSD.",
+         "opts": [
+          "TOF",
+          "TGA",
+          "Pulmonary hypertension, ASD, PDA, large VSD",
+          "Pulmonary stenosis"
+         ],
+         "ans": 2
         },
         {
          "q": "Give causes of an absent P2.",
-         "a": "PS, TOF and TGA."
+         "a": "**Pulmonary stenosis, TOF and TGA.**\n\n## Understanding it\n- A stenosed/malpositioned pulmonary valve closes feebly → **soft or absent P2**.\n\n>> Absent P2: PS, TOF, TGA.",
+         "opts": [
+          "Pulmonary stenosis, TOF, TGA",
+          "Pulmonary hypertension",
+          "Large VSD",
+          "ASD"
+         ],
+         "ans": 0
         },
         {
          "q": "What are the four patterns of S2 splitting and their causes?",
-         "a": "Wide fixed (ASD); wide variable (VSD, RBBB); narrow (severe AS, severe PS); reversed (aortic stenosis, HOCM)."
+         "a": "**Wide fixed (ASD); wide variable (VSD, RBBB, PS); narrow (severe AS/PS); and reversed (aortic stenosis, LBBB).**\n\n## Understanding it\n- The pattern of S2 splitting localises the problem: fixed split is the ASD hallmark.\n\n>> Wide-fixed = ASD; reversed = AS/LBBB.",
+         "opts": [
+          "Splitting is always abnormal",
+          "Wide-fixed (ASD), wide-variable, narrow, reversed (AS/LBBB)",
+          "Only one pattern exists",
+          "Splitting only occurs in diastole"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does the second heart sound split during inspiration?",
-         "a": "Negative intrathoracic pressure increases right heart filling; the RV takes longer to empty the greater volume, delaying pulmonary valve closure relative to aortic closure."
+         "a": "**Negative intrathoracic pressure increases right heart filling, so the RV takes longer to empty and the pulmonary valve closes later than the aortic.**\n\n## Understanding it\n- Inspiration → more venous return to the RV → **delayed P2** → audible split.\n\n>> Inspiration delays P2 (more RV filling) → physiological split.",
+         "opts": [
+          "It is always pathological",
+          "Inspiration increases RV filling, delaying pulmonary valve closure",
+          "Inspiration delays aortic closure",
+          "The valves close simultaneously"
+         ],
+         "ans": 1
         },
         {
          "q": "Why does an ASD cause a fixed split S2?",
-         "a": "The left-to-right shunt keeps the right ventricle volume-overloaded all the time, so respiration causes no further change in the split."
+         "a": "**The left-to-right shunt keeps the right ventricle volume-overloaded all the time, so respiration no longer changes the timing — the split is fixed.**\n\n## Understanding it\n- The constant extra RV volume overrides the normal respiratory variation → the split doesn't change with breathing.\n\n>> ASD's constant RV overload → fixed (unvarying) split S2.",
+         "opts": [
+          "Constant RV volume overload removes respiratory variation",
+          "There is no shunt",
+          "The aortic valve is absent",
+          "It varies widely with breathing"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does pulmonary stenosis cause a widely split S2?",
-         "a": "The RV takes notably longer to empty through the narrow pulmonary valve, delaying pulmonary closure."
+         "a": "**The RV takes notably longer to empty through the narrow pulmonary valve, delaying pulmonary closure and widening the split.**\n\n## Understanding it\n- A tight pulmonary valve slows RV emptying → **late P2** → wide split.\n\n>> PS delays P2 → widely split S2.",
+         "opts": [
+          "There is no shunt",
+          "The valves close together",
+          "The RV empties slowly through the narrow valve, delaying P2",
+          "The aortic valve closes late"
+         ],
+         "ans": 2
         },
         {
          "q": "Give the causes of a physiological S3.",
-         "a": "Children and young adults."
+         "a": "**Children and young adults (a normal finding).**\n\n## Understanding it\n- A soft S3 from rapid ventricular filling is normal in the young.\n\n>> Physiological S3: normal in children/young adults.",
+         "opts": [
+          "Only in the elderly",
+          "Normal in children and young adults",
+          "Always pathological",
+          "Aortic stenosis"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the causes of a pathological S3.",
-         "a": "High-output states, CHD (ASD, VSD, PDA), and MR, TR, AR."
+         "a": "**High-output states, CHD with shunts (ASD, VSD, PDA), and MR, TR, AR.**\n\n## Understanding it\n- In older patients or with volume overload, an S3 signals **failure or a large shunt/regurgitation**.\n\n>> Pathological S3: high output, big shunts, MR/TR/AR.",
+         "opts": [
+          "Normal childhood finding",
+          "Aortic stenosis",
+          "Pulmonary stenosis",
+          "High-output states, ASD/VSD/PDA, MR/TR/AR"
+         ],
+         "ans": 3
         },
         {
          "q": "What is an opening snap and where is it heard?",
-         "a": "A sound from opening of the AV valves; heard at the apex (MS, MR, VSD, PDA) or the parasternal region (TS, TR, ASD)."
+         "a": "**A high-pitched sound from opening of a stenosed AV valve; heard at the apex (mitral) or lower sternal border (tricuspid).**\n\n## Understanding it\n- A stiff but mobile stenosed valve **snaps open** — classic for **mitral stenosis**.\n\n>> Opening snap = AV-valve opening in stenosis (mitral → apex).",
+         "opts": [
+          "A normal S1",
+          "AV-valve opening in stenosis — apex (mitral)/LSB (tricuspid)",
+          "At the aortic area only",
+          "Semilunar valve closure"
+         ],
+         "ans": 1
         },
         {
          "q": "What is an ejection click and when is it seen?",
-         "a": "A sharp clicking sound from sudden swelling of the pulmonary artery or dilatation of the aorta; early ejection click in aortic and pulmonary valve stenosis, mid-systolic click in floppy mitral valve."
+         "a": "**A sharp click from sudden swelling of the pulmonary artery or aorta; seen in valvular AS/PS and dilated great arteries.**\n\n## Understanding it\n- A doming stenosed semilunar valve or a dilated great artery produces an early **ejection click**.\n\n>> Ejection click = valvular AS/PS or dilated aorta/PA.",
+         "opts": [
+          "AV-valve stenosis",
+          "Mitral regurgitation",
+          "A normal S2",
+          "Valvular AS/PS or dilated great artery"
+         ],
+         "ans": 3
         },
         {
          "q": "Describe a pericardial rub.",
-         "a": "Due to sliding of two inflamed pericardial layers; scratching and grating, triphasic, best heard along the left sternal edge in the 3rd-4th ICS."
+         "a": "**Due to two inflamed pericardial layers sliding; a scratching, grating, triphasic sound best heard leaning forward at the left sternal edge.**\n\n## Understanding it\n- Inflamed pericardium rubs with each cardiac movement → a rough **triphasic** sound (pericarditis).\n\n>> Pericardial rub = scratchy, triphasic, leaning forward (pericarditis).",
+         "opts": [
+          "A soft blowing murmur",
+          "Opening of a valve",
+          "Scratchy, triphasic sound of inflamed pericardium (pericarditis)",
+          "A normal heart sound"
+         ],
+         "ans": 2
         },
         {
          "q": "What causes a murmur?",
-         "a": "Turbulence — either increased flow through a normal/stenosed valve, or normal flow through a stenosed valve/orifice."
+         "a": "**Turbulence — increased flow through a normal/stenosed valve, or normal flow through a stenosed/regurgitant valve.**\n\n## Understanding it\n- Murmurs are **turbulent blood flow** — either too much flow or an abnormal valve/opening.\n\n>> Murmur = turbulent flow (high flow or abnormal valve).",
+         "opts": [
+          "Turbulent blood flow (high flow or abnormal valve)",
+          "The heartbeat itself",
+          "Valve closure",
+          "Normal laminar flow"
+         ],
+         "ans": 0
         },
         {
          "q": "List the features used to describe a murmur.",
-         "a": "Pitch, timing and character, systolic/diastolic, area best heard, intensity, bell or diaphragm, conduction, variation with respiration, posture, and variation with dynamic auscultation."
+         "a": "**Pitch, timing/character, systolic or diastolic, area best heard, intensity (grade), radiation, and response to manoeuvres.**\n\n## Understanding it\n- Fully characterising a murmur pins down its cause.\n\n>> Timing, area, grade, character, radiation, dynamic response.",
+         "opts": [
+          "Only how loud it is",
+          "Colour and temperature",
+          "Only the patient's age",
+          "Timing, area, grade, character, radiation, dynamic response"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of a pansystolic murmur and where each is loudest.",
-         "a": "Mitral regurgitation (mitral area), tricuspid regurgitation (left sternal border), and VSD (left lower sternal border)."
+         "a": "**Mitral regurgitation (apex), tricuspid regurgitation (left sternal border), and VSD (left sternal border).**\n\n## Understanding it\n- Pansystolic (holosystolic) murmurs come from **regurgitation** or a **VSD**, each with its own site.\n\n>> Pansystolic: MR (apex), TR (LSB), VSD (LSB).",
+         "opts": [
+          "Mitral stenosis (apex)",
+          "Only PDA",
+          "Aortic stenosis (aortic area)",
+          "MR (apex), TR (LSB), VSD (LSB)"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of an ejection-systolic murmur and where each is loudest.",
-         "a": "Aortic stenosis (aortic area), pulmonary stenosis (pulmonary area), and HOCM (4th ICS left sternal border)."
+         "a": "**Aortic stenosis (aortic area), pulmonary stenosis (pulmonary area), and HOCM (left sternal edge).**\n\n## Understanding it\n- Ejection-systolic (crescendo-decrescendo) murmurs come from **outflow obstruction**.\n\n>> Ejection-systolic: AS (aortic), PS (pulmonary), HOCM (LSE).",
+         "opts": [
+          "AS (aortic area), PS (pulmonary area), HOCM (LSE)",
+          "Mitral regurgitation (apex)",
+          "PDA (continuous)",
+          "VSD (LSB)"
+         ],
+         "ans": 0
         },
         {
          "q": "What character does an ejection-systolic murmur have and why?",
-         "a": "Crescendo-decrescendo, matching systolic flow which is slowest at the start and end and fastest in the middle."
+         "a": "**Crescendo-decrescendo — it matches systolic flow, which is slowest at the start and end and fastest in mid-systole.**\n\n## Understanding it\n- Flow (and turbulence) rises then falls through systole, so the murmur **grows then fades**.\n\n>> Ejection-systolic = crescendo-decrescendo (peaks in mid-systole).",
+         "opts": [
+          "Crescendo-decrescendo, matching mid-systolic peak flow",
+          "Loudest at the very end",
+          "Only in diastole",
+          "Uniform throughout (plateau)"
+         ],
+         "ans": 0
         },
         {
          "q": "Give the causes of an early diastolic murmur.",
-         "a": "Aortic regurgitation and pulmonary regurgitation."
+         "a": "**Aortic regurgitation and pulmonary regurgitation.**\n\n## Understanding it\n- Leaking **semilunar** valves cause blood to fall back right after S2 → an **early diastolic** murmur.\n\n>> Early diastolic: AR, PR.",
+         "opts": [
+          "VSD",
+          "Aortic regurgitation and pulmonary regurgitation",
+          "Mitral stenosis",
+          "Aortic stenosis"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the cause of a mid-diastolic murmur.",
-         "a": "Mitral stenosis."
+         "a": "**Mitral stenosis.**\n\n## Understanding it\n- A stenosed mitral valve obstructs ventricular filling in **mid-diastole**.\n\n>> Mid-diastolic murmur = mitral stenosis.",
+         "opts": [
+          "Aortic stenosis",
+          "Aortic regurgitation",
+          "PDA",
+          "Mitral stenosis"
+         ],
+         "ans": 3
         },
         {
          "q": "Give the causes of a late diastolic murmur.",
-         "a": "MS, TS and atrial myxomas."
+         "a": "**Mitral stenosis, tricuspid stenosis and atrial myxomas.**\n\n## Understanding it\n- Presystolic accentuation (atrial contraction pushing through a stenosed AV valve) gives a **late diastolic** murmur.\n\n>> Late diastolic: MS, TS, atrial myxoma.",
+         "opts": [
+          "Aortic regurgitation",
+          "MS, TS, atrial myxoma",
+          "VSD",
+          "Aortic stenosis"
+         ],
+         "ans": 1
         },
         {
          "q": "Give the causes of a continuous murmur.",
-         "a": "PDA, ruptured sinus of Valsalva and coronary AV fistula."
+         "a": "**PDA, ruptured sinus of Valsalva and coronary AV fistula.**\n\n## Understanding it\n- Continuous murmurs come from a persistent pressure gradient across **systole and diastole** (e.g. aorta→PA in PDA).\n\n>> Continuous: PDA, ruptured sinus of Valsalva, coronary AV fistula.",
+         "opts": [
+          "Mitral stenosis",
+          "Aortic stenosis",
+          "VSD",
+          "PDA, ruptured sinus of Valsalva, coronary AV fistula"
+         ],
+         "ans": 3
         },
         {
          "q": "Grade a systolic murmur from 1 to 6.",
-         "a": "1 very soft (quiet room); 2 soft, easily audible; 3 moderate, no thrill; 4 loud with thrill; 5 very loud with thrill, stethoscope barely on chest; 6 audible with stethoscope off the chest wall."
+         "a": "**1 very soft; 2 soft, easily audible; 3 moderate, no thrill; 4 loud with thrill; 5 audible with stethoscope barely on the chest; 6 audible with the stethoscope off the chest.**\n\n## Understanding it\n- The **thrill starts at grade 4**; grades 5–6 are audible with minimal/no contact.\n\n>> 1–3 no thrill; ≥4 has a thrill; 6 audible off the chest.",
+         "opts": [
+          "1–4 scale only",
+          "1–3 no thrill; 4 loud+thrill; 5 near-off; 6 off the chest",
+          "Graded by pitch",
+          "Loudness doesn't matter"
+         ],
+         "ans": 1
         },
         {
          "q": "List the characteristic 'S' features of an innocent murmur.",
-         "a": "Soft, Single, Short, Sweet, Systolic, Symptomless, Sensitive, and Situation-dependent (quieter on standing or only when unwell/feverish)."
+         "a": "**Soft, Single (S1/S2 normal), Short, Sweet (musical), Systolic, Symptomless, Sensitive (varies with position), and Situation-dependent (quieter on standing).**\n\n## Understanding it\n- The many 'S' words all describe a **benign, position-sensitive systolic** murmur.\n\n>> Innocent = the 'S' murmur: soft, short, systolic, symptomless, position-sensitive.",
+         "opts": [
+          "Continuous with cyanosis",
+          "Always grade 4+",
+          "Soft, short, systolic, symptomless, position-sensitive ('S' features)",
+          "Loud, diastolic, with a thrill"
+         ],
+         "ans": 2
         },
         {
          "q": "What supporting findings accompany an innocent murmur?",
-         "a": "Less than grade 3, no cyanosis, normal pulses, normal heart sounds, and a normal cardiac silhouette on CXR."
+         "a": "**Less than grade 3, no cyanosis, normal pulses, normal heart sounds, and a normal cardiac silhouette.**\n\n## Understanding it\n- An innocent murmur sits with an otherwise **entirely normal** cardiovascular exam.\n\n>> Innocent murmur: <grade 3, normal pulses/sounds/CXR, no cyanosis.",
+         "opts": [
+          "A diastolic component",
+          "Grade 4 with a thrill",
+          "Cyanosis and clubbing",
+          "<grade 3, normal pulses/sounds/CXR, no cyanosis"
+         ],
+         "ans": 3
         },
         {
          "q": "What features of a murmur should prompt referral?",
-         "a": "Murmur louder than 2/6, diastolic murmurs, louder on standing, or symptoms such as failure to thrive, feeding difficulty, cyanosis or shortness of breath."
+         "a": "**A murmur louder than 2/6, any diastolic murmur, one louder on standing, or associated symptoms (failure to thrive, cyanosis).**\n\n## Understanding it\n- Loud, diastolic, dynamic-suspicious, or symptomatic murmurs are **pathological** → refer.\n\n>> Refer: >2/6, any diastolic, louder standing, or symptomatic.",
+         "opts": [
+          ">2/6, diastolic, louder on standing, or symptomatic",
+          "A murmur that softens on standing",
+          "Symptomless grade 1",
+          "Soft short systolic murmur"
+         ],
+         "ans": 0
         },
         {
          "q": "Why does an atrial septal defect cause a fixed split second heart sound?",
-         "a": "Blood flows from left to right atrium, increasing RV volume; this fixed extra volume means the split does not vary with inspiration and expiration."
+         "a": "**Blood flows left-to-right into the right atrium, keeping RV volume constantly increased, so respiration no longer changes the timing — the split is fixed.**\n\n## Understanding it\n- The steady extra RV volume overrides normal respiratory variation → **fixed split**.\n\n>> ASD = constant RV overload → fixed split S2.",
+         "opts": [
+          "The aortic valve closes late",
+          "It varies widely with breathing",
+          "Constant RV volume overload removes respiratory variation",
+          "There is no shunt"
+         ],
+         "ans": 2
         },
         {
          "q": "What is the effect of respiration on murmurs during dynamic auscultation?",
-         "a": "During inspiration, right-sided murmurs become louder while left-sided murmurs become softer or unchanged; expiration has the opposite effect."
+         "a": "**During inspiration, right-sided murmurs become louder while left-sided murmurs become softer or unchanged.**\n\n## Understanding it\n- Inspiration increases venous return to the **right** heart → right-sided murmurs (TR, PS) **louder** (Rivero-Carvallo sign).\n\n>> Inspiration → louder RIGHT-sided murmurs.",
+         "opts": [
+          "Inspiration louder right-sided; left-sided softer/unchanged",
+          "All murmurs vanish on inspiration",
+          "No murmur changes with breathing",
+          "Inspiration louder left-sided"
+         ],
+         "ans": 0
         },
         {
          "q": "What is the effect of the Valsalva manoeuvre on murmurs?",
-         "a": "It increases intrathoracic pressure; the murmurs of MVP and HOCM become louder, while the ESM of AS decreases."
+         "a": "**It raises intrathoracic pressure and reduces venous return; the murmurs of MVP and HOCM become louder, while most others (e.g. AS ejection murmur) become softer.**\n\n## Understanding it\n- Less filling → smaller ventricle → **HOCM/MVP louder** (paradoxically), others softer.\n\n>> Valsalva: HOCM and MVP louder; most others softer.",
+         "opts": [
+          "All murmurs softer",
+          "No effect",
+          "All murmurs louder",
+          "HOCM and MVP louder; most others softer"
+         ],
+         "ans": 3
         },
         {
          "q": "What is the effect of squatting on the HOCM murmur?",
-         "a": "It becomes softer, because squatting increases venous return and diastolic volume."
+         "a": "**It becomes softer, because squatting increases venous return and diastolic (ventricular) volume.**\n\n## Understanding it\n- More filling → larger LV cavity → less outflow obstruction → **HOCM murmur softer**.\n\n>> Squatting → bigger LV → HOCM murmur softer.",
+         "opts": [
+          "Louder — less filling",
+          "Softer — squatting increases venous return/LV volume",
+          "It disappears the pulse",
+          "No change"
+         ],
+         "ans": 1
         },
         {
          "q": "What is the effect of isometric hand grip on murmurs?",
-         "a": "It increases systemic vascular resistance; regurgitant murmurs (MR, VSD) become louder while the murmur of AS becomes softer."
+         "a": "**It increases systemic vascular resistance; regurgitant murmurs (MR, VSD, AR) become louder, while the AS ejection murmur and HOCM become softer.**\n\n## Understanding it\n- Higher afterload favours **backward (regurgitant)** flow → MR/VSD/AR **louder**; forward-obstruction murmurs softer.\n\n>> Hand grip (↑afterload): regurgitant murmurs louder; AS/HOCM softer.",
+         "opts": [
+          "All murmurs softer",
+          "AS becomes louder",
+          "Regurgitant murmurs (MR/VSD/AR) louder; AS/HOCM softer",
+          "No effect"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — What is the correct sequence of the CVS examination check-off?",
-         "a": "Courtesy; inspection; pulse palpation with synchrony; blood pressure; JVP; precordium (inspection, apex, heave/thrill, percussion, liver, ascites); and auscultation."
+         "a": "**Courtesy; inspection; pulse palpation with synchrony; blood pressure; JVP; precordium (inspection, palpation); then auscultation.**\n\n## Understanding it\n- The OSPE check-off runs from **courtesy → inspection → peripheral pulses → BP → JVP → precordium → auscultation**.\n\n>> Courtesy → inspect → pulses → BP → JVP → precordium → auscultate.",
+         "opts": [
+          "Courtesy, inspection, pulses, BP, JVP, precordium, auscultation",
+          "BP then straight to the heart",
+          "Only auscultation",
+          "Auscultation first"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — What comes first in the CVS examination and why does it earn marks?",
-         "a": "Courtesy — introduction, explanation, consent and positioning; the check-off explicitly scores courtesy and attention to sequence."
+         "a": "**Courtesy — introduction, explanation, consent and positioning; the check-off explicitly scores it.**\n\n## Understanding it\n- Marks are awarded for **professional courtesy** (introduce, explain, consent, position) before touching the patient.\n\n>> Start with courtesy — it is explicitly scored.",
+         "opts": [
+          "Auscultation",
+          "Courtesy (introduce, explain, consent, position)",
+          "Palpating the apex",
+          "Measuring BP"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — What should you inspect for at the start of the CVS examination?",
-         "a": "Respiratory distress, pallor, cyanosis, digital clubbing, neck pulsations, and oedema (presence, extent, pitting, level)."
+         "a": "**Respiratory distress, pallor, cyanosis, digital clubbing, neck pulsations and oedema.**\n\n## Understanding it\n- General inspection screens for the peripheral signs of cardiac disease before palpation.\n\n>> Inspect: distress, pallor, cyanosis, clubbing, neck pulsations, oedema.",
+         "opts": [
+          "Only the apex beat",
+          "The reflexes",
+          "Distress, pallor, cyanosis, clubbing, neck pulsations, oedema",
+          "The abdomen only"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — With which arteries should the radial pulse be checked for synchrony?",
-         "a": "The other radial, femoral, carotid, brachial, popliteal and dorsalis pedis arteries."
+         "a": "**The other radial, femoral, carotid, brachial, popliteal and dorsalis pedis arteries.**\n\n## Understanding it\n- Check the radial against other pulses to detect **delays/absences** (e.g. radio-femoral delay).\n\n>> Compare radial with the other radial, femoral, carotid, brachial, popliteal, dorsalis pedis.",
+         "opts": [
+          "Other radial, femoral, carotid, brachial, popliteal, dorsalis pedis",
+          "No comparison is needed",
+          "Only the carotid",
+          "Only the other radial"
+         ],
+         "ans": 0
         },
         {
          "q": "OSPE — Why is palpating the femoral pulse a compulsory part of the examination?",
-         "a": "To detect radio-femoral delay, which indicates coarctation of the aorta."
+         "a": "**To detect radio-femoral delay, which indicates coarctation of the aorta.**\n\n## Understanding it\n- Missing/delayed femoral pulses reveal **coarctation** — easily missed if you skip the femorals.\n\n>> Always feel the femorals — to catch coarctation (radio-femoral delay).",
+         "opts": [
+          "To assess the JVP",
+          "To detect radio-femoral delay (coarctation)",
+          "It is not compulsory",
+          "To measure blood pressure"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why should systolic BP be estimated by palpation before auscultation?",
-         "a": "To avoid being misled by the auscultatory gap and to know how high to inflate the cuff."
+         "a": "**To avoid being misled by the auscultatory gap and to know how high to inflate the cuff.**\n\n## Understanding it\n- Palpating first sets the inflation level and prevents under-reading systolic BP due to the silent **auscultatory gap**.\n\n>> Palpate first: beat the auscultatory gap and gauge inflation.",
+         "opts": [
+          "It is not necessary",
+          "To avoid the auscultatory gap and gauge cuff inflation",
+          "To save time only",
+          "To measure the pulse rate"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — Why are the liver and shifting dullness examined during a CVS examination?",
-         "a": "Because right heart failure causes hepatomegaly and ascites, so the abdomen is part of the cardiovascular examination."
+         "a": "**Because right heart failure causes hepatomegaly and ascites, so the abdomen is part of the cardiac assessment.**\n\n## Understanding it\n- Right-sided failure backs blood up into the **liver (hepatomegaly)** and peritoneum (**ascites**).\n\n>> Check liver/ascites — signs of right heart failure.",
+         "opts": [
+          "To find the spleen only",
+          "The liver makes heart sounds",
+          "Right heart failure causes hepatomegaly and ascites",
+          "It is unrelated to the heart"
+         ],
+         "ans": 2
         },
         {
          "q": "OSPE — During auscultation, where should you listen for radiation of murmurs?",
-         "a": "To the axilla (MR), up the neck (AS), and to the back (coarctation), as well as the abdomen and the base of the lungs."
+         "a": "**To the axilla (MR), up the neck/carotids (AS), and to the back (coarctation), plus the abdomen.**\n\n## Understanding it\n- Radiation localises the lesion: MR → axilla, AS → carotids, coarctation → back.\n\n>> Radiation: MR→axilla, AS→neck, coarctation→back.",
+         "opts": [
+          "Only to the abdomen",
+          "Axilla (MR), neck (AS), back (coarctation)",
+          "Only over the apex",
+          "Nowhere — murmurs don't radiate"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — A slow-rising, low-amplitude pulse with a late peak is shown. Diagnosis?",
-         "a": "Anacrotic pulse (parvus et tardus) — aortic stenosis."
+         "a": "**Anacrotic pulse (parvus et tardus) — aortic stenosis.**\n\n## Understanding it\n- A tight aortic valve makes the pulse small and slow-rising.\n\n>> Parvus et tardus = aortic stenosis.",
+         "opts": [
+          "Pulsus paradoxus — tamponade",
+          "Anacrotic (parvus et tardus) — aortic stenosis",
+          "Collapsing pulse — AR",
+          "Pulsus alternans — LVF"
+         ],
+         "ans": 1
         },
         {
          "q": "OSPE — A pulse with a rapid upstroke and rapid collapse is shown. Diagnosis?",
-         "a": "Collapsing (water-hammer) pulse — aortic regurgitation or PDA."
+         "a": "**Collapsing (water-hammer) pulse — aortic regurgitation or PDA.**\n\n## Understanding it\n- Diastolic run-off makes the pulse rise fast then collapse.\n\n>> Water-hammer pulse = aortic regurgitation (or PDA).",
+         "opts": [
+          "Anacrotic — aortic stenosis",
+          "Pulsus alternans — LVF",
+          "Pulsus paradoxus — tamponade",
+          "Collapsing (water-hammer) — aortic regurgitation/PDA"
+         ],
+         "ans": 3
         },
         {
          "q": "OSPE — A waveform alternating between large and small volume beats is shown. Diagnosis?",
-         "a": "Pulsus alternans — severe left ventricular failure."
+         "a": "**Pulsus alternans — severe left ventricular failure.**\n\n## Understanding it\n- A failing LV alternates strong and weak beats.\n\n>> Pulsus alternans = severe LV failure.",
+         "opts": [
+          "Anacrotic — aortic stenosis",
+          "Pulsus alternans — severe LV failure",
+          "Pulsus paradoxus — tamponade",
+          "Collapsing pulse — AR"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A newborn has weak, delayed femoral pulses and higher BP in the arms than the legs. Diagnosis?",
-         "a": "Coarctation of the aorta."
+         "a": "**Coarctation of the aorta.**\n\n## Understanding it\n- A narrowing of the aorta after the arm vessels → **higher arm BP, weak/delayed femorals**.\n\n>> Weak femorals + arm>leg BP = coarctation of the aorta.",
+         "opts": [
+          "PDA",
+          "Aortic regurgitation",
+          "Atrial septal defect",
+          "Coarctation of the aorta"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — Why is duct-dependent coarctation a neonatal emergency, and how is it managed acutely?",
-         "a": "Closure of the ductus arteriosus cuts off flow to the lower body, causing shock and collapse; the duct is kept open with prostaglandin E1 while surgical or catheter correction is arranged."
+         "a": "**Closure of the ductus arteriosus cuts off flow to the lower body, causing shock and collapse; keep the duct open with a prostaglandin E1 infusion.**\n\n## Understanding it\n- In severe coarctation, the lower body is perfused via the duct; when it closes, the baby collapses.\n- **Prostaglandin E1** reopens/maintains the duct as a bridge to surgery.\n\n>> Duct closes → shock; give prostaglandin E1 to keep it open.",
+         "opts": [
+          "Give a diuretic and discharge",
+          "Give indomethacin to close the duct",
+          "Observe only",
+          "Duct closure causes shock; give prostaglandin E1 to keep it open"
+         ],
+         "ans": 3
         },
         {
          "q": "CLINICAL — A child has raised JVP, muffled heart sounds and hypotension. What is the triad and the diagnosis?",
-         "a": "Beck's triad — raised JVP, muffled heart sounds and hypotension — indicating cardiac tamponade."
+         "a": "**Beck's triad — raised JVP, muffled heart sounds and hypotension — indicating cardiac tamponade.**\n\n## Understanding it\n- Fluid around the heart raises venous pressure, muffles sounds, and drops BP.\n\n>> Beck's triad = cardiac tamponade.",
+         "opts": [
+          "A normal finding",
+          "Beck's triad — cardiac tamponade",
+          "Beck's triad — heart failure",
+          "Aortic stenosis"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — What sign confirms tamponade when the BP falls more than 10 mmHg on inspiration?",
-         "a": "Pulsus paradoxus."
+         "a": "**Pulsus paradoxus.**\n\n## Understanding it\n- An exaggerated inspiratory BP drop (>10 mmHg) supports tamponade.\n\n>> >10 mmHg inspiratory BP fall = pulsus paradoxus.",
+         "opts": [
+          "Kussmaul's sign",
+          "Pulsus alternans",
+          "Pulsus paradoxus",
+          "Collapsing pulse"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — How is cardiac tamponade managed?",
-         "a": "Urgent pericardiocentesis to drain the fluid, plus treatment of the underlying cause (infective/purulent pericarditis if febrile)."
+         "a": "**Urgent pericardiocentesis to drain the fluid, plus treatment of the underlying cause.**\n\n## Understanding it\n- Relieve the compression by **draining the pericardial fluid** (pericardiocentesis), then treat the cause.\n\n>> Tamponade → urgent pericardiocentesis.",
+         "opts": [
+          "Increase the heart rate with drugs",
+          "Urgent pericardiocentesis (± treat the cause)",
+          "Give diuretics and vasodilators",
+          "Observe only"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — A heaving apex with an ejection systolic murmur at the aortic area suggests what?",
-         "a": "Aortic stenosis — pressure overload causing left ventricular hypertrophy."
+         "a": "**Aortic stenosis — pressure overload causing left ventricular hypertrophy.**\n\n## Understanding it\n- A sustained (heaving) apex + ejection-systolic murmur at the aortic area = **pressure-overload AS with LVH**.\n\n>> Heaving apex + aortic ESM = aortic stenosis (LVH).",
+         "opts": [
+          "Aortic stenosis (pressure overload, LVH)",
+          "Mitral regurgitation",
+          "Atrial septal defect",
+          "PDA"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — A hyperdynamic apex with a pansystolic murmur at the apex radiating to the axilla suggests what?",
-         "a": "Mitral regurgitation — volume overload causing left ventricular dilatation."
+         "a": "**Mitral regurgitation — volume overload causing left ventricular dilatation.**\n\n## Understanding it\n- A diffuse (hyperdynamic) apex + apical pansystolic murmur radiating to the **axilla** = **MR with volume-overload dilatation**.\n\n>> Hyperdynamic apex + apical PSM to axilla = mitral regurgitation.",
+         "opts": [
+          "Coarctation",
+          "Aortic stenosis",
+          "Mitral regurgitation (volume overload, LV dilatation)",
+          "Pulmonary stenosis"
+         ],
+         "ans": 2
         },
         {
          "q": "CLINICAL — Why is a murmur that becomes louder on standing a red flag?",
-         "a": "Standing reduces venous return; most murmurs soften, but HOCM (and MVP) become louder, and HOCM causes sudden cardiac death — so it warrants referral."
+         "a": "**Standing reduces venous return; most murmurs soften, but HOCM (and MVP) become louder — HOCM can cause sudden death.**\n\n## Understanding it\n- Standing shrinks the ventricle; a murmur that gets **louder** points to **HOCM/MVP** (dangerous).\n\n>> Louder on standing = HOCM/MVP (a red flag).",
+         "opts": [
+          "Most murmurs soften; HOCM/MVP get louder (dangerous)",
+          "It is always innocent",
+          "Standing has no effect on murmurs",
+          "It means aortic stenosis"
+         ],
+         "ans": 0
         },
         {
          "q": "CLINICAL — Which single murmur characteristic is always pathological?",
-         "a": "Any diastolic murmur — no diastolic murmur is ever innocent."
+         "a": "**Any diastolic murmur — no diastolic murmur is ever innocent.**\n\n## Understanding it\n- Innocent murmurs are always **systolic**; a **diastolic** murmur is always pathological.\n\n>> Any diastolic murmur = always pathological.",
+         "opts": [
+          "A murmur that varies with position",
+          "Any diastolic murmur",
+          "A soft systolic murmur",
+          "A grade 1 systolic murmur"
+         ],
+         "ans": 1
         },
         {
          "q": "CLINICAL — What must you exclude before diagnosing hypertension in a child?",
-         "a": "That the correct cuff size was used (width 40%, length 80-100% of arm circumference), since a small cuff reads falsely high."
+         "a": "**That the correct cuff size was used (width 40%, length 80–100% of arm circumference), since a small cuff reads falsely high.**\n\n## Understanding it\n- A too-small cuff **overestimates** BP, causing spurious 'hypertension'.\n\n>> Exclude a too-small cuff before diagnosing hypertension.",
+         "opts": [
+          "The child's blood group",
+          "That the child is asleep",
+          "The room temperature",
+          "That a correctly-sized cuff was used (small cuff reads high)"
+         ],
+         "ans": 3
         }
        ],
        "imgBase": "content/Pediatrics/Onuoha/System%20examination%20CVS/img/",
