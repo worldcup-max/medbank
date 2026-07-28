@@ -447,6 +447,25 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .exopt.bad{background:#ff6b6b18;color:#ff9db1}
 .exopt.good{background:#3ecf8e18;color:var(--recall)}
 .exexpl{margin-top:8px;font-size:13.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
+/* AI tutor */
+.aikey{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+.aikey b{font-size:15px}
+.aiwrap{display:flex;flex-direction:column;gap:10px}
+.aitools{display:flex;gap:8px;flex-wrap:wrap}
+.aichat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:240px;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.aihint{color:var(--dim);font-size:13.5px;text-align:center;margin:auto;padding:16px}
+.aimsg{display:flex}
+.aimsg.user{justify-content:flex-end}
+.aibub{max-width:82%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.4;white-space:pre-wrap}
+.aimsg.user .aibub{background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.aimsg.model .aibub{background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.aibub.typing{letter-spacing:3px;color:var(--dim);animation:aipulse 1s infinite}
+@keyframes aipulse{50%{opacity:.4}}
+.ailisten{display:flex;align-items:center;gap:12px;justify-content:center;background:var(--panel);border:1px solid var(--accent);border-radius:10px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.airow{display:flex;gap:8px;align-items:center}
+.aiin{flex:1;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font:inherit;font-size:14.5px}
+.micbtn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:19px}
+.micbtn:hover{border-color:var(--accent)}
 
 /* ---- settings ---- */
 .setrow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);
@@ -663,7 +682,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28d';   // bump this each release
+const APP_VERSION='2026.07.28e';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -683,7 +702,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.0-flash'}, d.settings||{});
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
@@ -1317,6 +1336,7 @@ function pageTopic(id){
         <div class="pbar" style="margin-top:10px"><div style="width:${mast}%;background:var(--recall)"></div></div>
         <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards answered right at least once</p></div></div>
       <div class="btnrow" style="margin-top:14px">
+        <button class="btn primary" onclick="go('ai/${t.id}')">🎙 AI tutor</button>
         <button class="btn" onclick="go('cram/${t.id}')">📄 Cram sheet</button>
         ${clinInDeck(t)?`<button class="btn" onclick="go('study/${t.id}/recall')">🩺 ${clinInDeck(t)} clinical scenario${clinInDeck(t)===1?'':'s'}</button>`:''}</div>`;
   }
@@ -2272,6 +2292,13 @@ function pageSettings(){
     <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
       <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>
 
+    <h2>AI tutor</h2>
+    <p class="sub" style="margin-bottom:12px">Powers the per-topic voice tutor (🎙 AI tutor on each topic). Get a free key at <b>aistudio.google.com/apikey</b> — it's stored only on this device.</p>
+    <div class="setrow"><div><b>Gemini API key</b><span>${s.geminiKey?'Key saved. Paste a new one to replace it.':'Paste your free Google Gemini key to enable the tutor.'}</span></div>
+      <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
+    <div class="setrow"><div><b>Model</b><span>Default gemini-2.0-flash. Only change this if a newer free model name works better for you.</span></div>
+      <input class="numin" style="width:170px" type="text" value="${esc(s.geminiModel||'gemini-2.0-flash')}" onchange="setGemModel(this.value)"></div>
+
     <h2>Backup &amp; restore</h2>
     <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Turn on automatic backup so your progress is saved to a file continuously — then you can restore it if you clear the app or switch phones.</p>
     ${(()=>{
@@ -2424,6 +2451,110 @@ function examResult(){
     ${missed.length?`<h2>Review — what you missed</h2><div class="exmisslist">${missRows}</div>`:''}`;
 }
 
+/* ===== AI voice tutor (per topic, Gemini) ===== */
+let AICHAT={};                 // topicId -> [{role:'user'|'model', text}]
+let AIBUSY=false;
+let VOICE={on:false, rec:null, topic:null, phase:''};
+const SRClass = window.SpeechRecognition||window.webkitSpeechRecognition;
+function sttSupported(){ return !!SRClass; }
+function setGemKey(v){ DATA.settings.geminiKey=(v||'').trim(); persist(); render(); }
+function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-2.0-flash'; persist(); render(); }
+function speakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&cb(); return; }
+  const u=new SpeechSynthesisUtterance(stripMd(text)); u.rate=1; u.pitch=1;
+  u.onend=()=>cb&&cb(); u.onerror=()=>cb&&cb();
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}catch(e){ cb&&cb(); } }
+function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
+async function aiSend(topicId, text){
+  const key=(DATA.settings.geminiKey||'').trim();
+  if(!key){ go('settings'); return; }
+  if(AIBUSY) return;
+  const t=topById(topicId); if(!t) return;
+  AICHAT[topicId]=AICHAT[topicId]||[];
+  AICHAT[topicId].push({role:'user',text});
+  AIBUSY=true; render(); aiScroll();
+  try{
+    const model=(DATA.settings.geminiModel||'gemini-2.0-flash').trim();
+    const cards=(t.recall||[]).map((c,i)=>`${i+1}. Q: ${c.q}\n   A: ${stripMd(c.a)}`).join('\n');
+    const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth. How to behave: ask ONE question at a time; after the student answers, start your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then immediately ask the next question. Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. If the student asks you to explain rather than quiz, explain simply from the answer key. Never invent facts outside the answer key. ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
+    const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:m.text}]}));
+    const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
+      generationConfig:{temperature:0.6, maxOutputTokens:500} };
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const j=await r.json();
+    if(!r.ok) throw new Error((j.error&&j.error.message)||('HTTP '+r.status));
+    const reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text || '(no reply — try again)';
+    AICHAT[topicId].push({role:'model',text:reply});
+    AIBUSY=false; render(); aiScroll();
+    if(VOICE.on && VOICE.topic===topicId){ VOICE.phase='speak'; render();
+      speakThen(reply, ()=>{ if(VOICE.on && VOICE.topic===topicId) aiListen(topicId); }); }
+  }catch(e){
+    AICHAT[topicId].push({role:'model',text:'⚠️ '+e.message+'  (check your key/model in Settings, or your data connection)'});
+    AIBUSY=false; VOICE.on=false; render(); aiScroll();
+  }
+}
+function aiListen(topicId){
+  if(!VOICE.on || !SRClass) return;
+  try{
+    const rec=new SRClass(); VOICE.rec=rec; VOICE.phase='listen'; rec.lang='en-US';
+    rec.interimResults=false; rec.maxAlternatives=1;
+    rec.onresult=(e)=>{ const tx=e.results[0][0].transcript; VOICE.rec=null; aiSend(topicId, tx); };
+    rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
+    rec.onend=()=>{ if(VOICE.phase==='listen'){ VOICE.rec=null; VOICE.phase=''; render(); } };
+    rec.start(); render();
+  }catch(e){ VOICE.phase=''; }
+}
+function startVoiceQuiz(topicId){
+  VOICE.on=true; VOICE.topic=topicId; VOICE.phase='';
+  if(!sttSupported()) alert('Voice input needs Chrome (Android or desktop). You can still type — the tutor will read its replies aloud.');
+  if(!(AICHAT[topicId]&&AICHAT[topicId].length)) aiSend(topicId, 'Start quizzing me now. Ask your first question.');
+  else { render(); if(sttSupported()) aiListen(topicId); }
+}
+function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} render(); }
+function aiMicOnce(topicId){
+  if(!SRClass){ alert('Voice input needs Chrome (Android or desktop).'); return; }
+  try{ const rec=new SRClass(); rec.lang='en-US'; rec.interimResults=false;
+    VOICE.phase='listen'; VOICE.rec=rec; render();
+    rec.onresult=(e)=>{ VOICE.rec=null; VOICE.phase=''; aiSend(topicId, e.results[0][0].transcript); };
+    rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
+    rec.onend=()=>{ if(!AIBUSY){ VOICE.rec=null; VOICE.phase=''; render(); } };
+    rec.start();
+  }catch(e){ VOICE.phase=''; }
+}
+function aiSendFromInput(topicId){ const el=document.getElementById('aiin'); if(!el)return;
+  const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
+function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
+function pageAI(topicId){
+  const t=topById(topicId); if(!t||!t.ready) return pageHome();
+  const key=(DATA.settings.geminiKey||'').trim();
+  const head=crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}])
+    +`<h1>🎙 AI tutor</h1><p class="sub">${esc(t.name)} · a tutor that quizzes and grades you on this topic's ${t.recall.length} cards. ${sttSupported()?'Speak or type.':'Type your answers; replies are read aloud.'}</p>`;
+  if(!key) return head+`<div class="aikey"><b>Add your free Gemini key to start.</b>
+      <p class="sub">Get one free at aistudio.google.com/apikey, then paste it in Settings → AI tutor. It stays only on this device.</p>
+      <button class="btn primary" onclick="go('settings')">Open Settings</button></div>`;
+  const msgs=AICHAT[topicId]||[];
+  const bubbles = msgs.length
+    ? msgs.map(m=>`<div class="aimsg ${m.role}"><div class="aibub">${esc(m.text)}</div></div>`).join('')
+    : `<div class="aihint">Tap <b>🎤 Voice quiz</b> to be examined aloud, or type below. Try: <i>"Quiz me"</i>, <i>"Explain the key points"</i>, or <i>"Give me a clinical scenario"</i>.</div>`;
+  const busy = AIBUSY?`<div class="aimsg model"><div class="aibub typing">● ● ●</div></div>`:'';
+  const listening = VOICE.on
+    ? `<div class="ailisten">${VOICE.phase==='listen'?'🎧 Listening… speak your answer':VOICE.phase==='speak'?'🔊 Tutor speaking…':'…'} <button class="btn" onclick="stopVoice()">Stop voice</button></div>`
+    : '';
+  return head + `<div class="aiwrap">
+    <div class="aitools">
+      ${VOICE.on?'':`<button class="btn primary" onclick="startVoiceQuiz('${t.id}')">🎤 Voice quiz</button>`}
+      <button class="btn" onclick="clearAI('${t.id}')">Clear chat</button>
+    </div>
+    <div class="aichat" id="aichat">${bubbles}${busy}</div>
+    ${listening}
+    <div class="airow">
+      <button class="micbtn" onclick="aiMicOnce('${t.id}')" title="Speak once">🎤</button>
+      <input id="aiin" class="aiin" placeholder="Type to the tutor…" onkeydown="if(event.key==='Enter')aiSendFromInput('${t.id}')">
+      <button class="btn primary" onclick="aiSendFromInput('${t.id}')">Send</button>
+    </div></div>`;
+}
+
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   let html;
@@ -2436,6 +2567,7 @@ function render(){
     case 'leeches':   html=pageLeeches(); break;
     case 'mistakes':  html=pageMistakes(); break;
     case 'exam':      html=pageExam(); break;
+    case 'ai':        html=pageAI(p[1]); break;
     case 'cram':      html=pageCram(p[1]); break;
     case 'week':      html=pageWeek(); break;
     case 'jumpback':  html=pageJumpback(); break;
@@ -2452,6 +2584,7 @@ function render(){
   }
   $('#main').innerHTML=html; renderNav();
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
+  if(p[0]==='ai') aiScroll();
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
