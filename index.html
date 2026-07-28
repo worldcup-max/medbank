@@ -663,7 +663,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28c';   // bump this each release
+const APP_VERSION='2026.07.28d';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -683,13 +683,14 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0}, d.settings||{});
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   return d;
 })();
-function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){} }
+function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}
+  try{ if(typeof scheduleBackup==='function') scheduleBackup(); }catch(e){} }
 
 /* ---- dates ---- */
 function dayNum(d=new Date()){ return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5); }
@@ -812,8 +813,8 @@ function speakCurrent(){ if(!S)return; const it=S.items[S.order[S.i]]; if(!it)re
   speakSeq(ansShown && ans ? [c.q, ans] : [c.q]); }
 function ttsBtn(){ return (ttsOn()&&DATA.settings.tts)?`<button class="iconbtn" title="Read aloud" onclick="event.stopPropagation();speakCurrent()">🔊</button>`:''; }
 function noteBlock(it){ const note=getNote(it.id);
-  return `<details class="notewrap" ${note?'open':''} onclick="event.stopPropagation()">
-     <summary>✎ ${note?'My note / mnemonic':'Add a note / mnemonic'}</summary>
+  return `<details class="notewrap" onclick="event.stopPropagation()">
+     <summary>✎ ${note?'My note / mnemonic — tap to read':'Add a note / mnemonic'}</summary>
      <textarea class="notebox" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${it.id}',this.value)">${esc(note)}</textarea>
    </details>`; }
 
@@ -1807,7 +1808,7 @@ function mcqView(session){
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${body}</div>
-    ${noteBlock(it)}
+    ${picked?noteBlock(it):''}
     ${controls}</div>`;
 }
 
@@ -1863,7 +1864,7 @@ function cardView(session){
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
-    ${noteBlock(it)}
+    ${S.show?noteBlock(it):''}
     ${controls}</div>`;
 }
 
@@ -2136,6 +2137,56 @@ function importData(input){ const f=input.files&&input.files[0]; if(!f) return; 
       localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
     }catch(e){ alert('Import failed: '+e.message); } };
   rd.readAsText(f); }
+
+/* ---- automatic backup to a file (File System Access API) ---- */
+function idbSet(k,v){ return new Promise((res,rej)=>{ const o=indexedDB.open('medbank_fs',1);
+  o.onupgradeneeded=()=>{ if(!o.result.objectStoreNames.contains('h')) o.result.createObjectStore('h'); };
+  o.onsuccess=()=>{ const tx=o.result.transaction('h','readwrite'); tx.objectStore('h').put(v,k);
+    tx.oncomplete=()=>{o.result.close();res();}; tx.onerror=()=>rej(tx.error); }; o.onerror=()=>rej(o.error); }); }
+function idbGet(k){ return new Promise((res,rej)=>{ const o=indexedDB.open('medbank_fs',1);
+  o.onupgradeneeded=()=>{ if(!o.result.objectStoreNames.contains('h')) o.result.createObjectStore('h'); };
+  o.onsuccess=()=>{ const tx=o.result.transaction('h','readonly'); const r=tx.objectStore('h').get(k);
+    r.onsuccess=()=>{o.result.close();res(r.result);}; r.onerror=()=>rej(r.error); }; o.onerror=()=>rej(o.error); }); }
+let _bakHandle=null,_bakTimer=null,_bakBusy=false,_bakPaused=false;
+function fsSupported(){ return typeof window.showSaveFilePicker==='function'; }
+async function _perm(h,req){ if(!h||!h.queryPermission) return false; const o={mode:'readwrite'};
+  if((await h.queryPermission(o))==='granted') return true;
+  if(req && (await h.requestPermission(o))==='granted') return true; return false; }
+async function writeBackup(force){
+  if(_bakBusy||!_bakHandle||!DATA.settings.autoBackup) return;
+  _bakBusy=true;
+  try{
+    if(await _perm(_bakHandle,!!force)){
+      const ws=await _bakHandle.createWritable(); await ws.write(JSON.stringify(DATA)); await ws.close();
+      _bakPaused=false; DATA.settings.lastBackup=Date.now();
+      try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}   // persist timestamp without re-scheduling
+    } else { _bakPaused=true; }
+  }catch(e){ _bakPaused=true; }
+  _bakBusy=false;
+}
+function scheduleBackup(){ if(!DATA.settings.autoBackup||!_bakHandle) return;
+  clearTimeout(_bakTimer); _bakTimer=setTimeout(()=>writeBackup(false),1200); }   // debounced auto-save
+async function enableAutoBackup(){
+  if(!fsSupported()){ alert('Automatic file backup needs Chrome or Edge (works on Android Chrome and desktop). On this browser, use Export / Import below instead.'); return; }
+  try{
+    const h=await window.showSaveFilePicker({suggestedName:'medbank-backup.json',
+      types:[{description:'MedBank backup',accept:{'application/json':['.json']}}]});
+    _bakHandle=h; _bakPaused=false; await idbSet('bakHandle',h);
+    DATA.settings.autoBackup=true; persist(); await writeBackup(true); render();
+  }catch(e){ /* user cancelled the file picker */ }
+}
+async function disableAutoBackup(){ DATA.settings.autoBackup=false; persist(); _bakHandle=null;
+  try{ await idbSet('bakHandle',null); }catch(e){} render(); }
+async function resumeAutoBackup(){ await writeBackup(true); render(); }
+async function initAutoBackup(){
+  if(!DATA.settings.autoBackup||!fsSupported()) return;
+  try{ const h=await idbGet('bakHandle'); if(h){ _bakHandle=h; _bakPaused=!(await _perm(h,false));
+    if(!_bakPaused) writeBackup(false); render(); } }catch(e){}
+}
+function backupRel(){ const t=DATA.settings.lastBackup; if(!t) return 'not yet';
+  const s=Math.floor((Date.now()-t)/1000);
+  if(s<60) return 'just now'; if(s<3600) return Math.floor(s/60)+' min ago';
+  if(s<86400) return Math.floor(s/3600)+' h ago'; return Math.floor(s/86400)+' d ago'; }
 async function setUseIdle(on){ DATA.settings.useIdle=!!on; persist(); if(on) await startIdle(true); render(); }
 function setQuiet(which,v){ v=Math.max(0,Math.min(23,parseInt(v)||0)); if(which==='start')DATA.settings.quietStart=v; else DATA.settings.quietEnd=v; persist(); render(); }
 function testNudge(){
@@ -2222,7 +2273,21 @@ function pageSettings(){
       <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>
 
     <h2>Backup &amp; restore</h2>
-    <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Export a backup file regularly — then you can restore it here if you clear the app or switch phones.</p>
+    <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Turn on automatic backup so your progress is saved to a file continuously — then you can restore it if you clear the app or switch phones.</p>
+    ${(()=>{
+      const on=s.autoBackup, sup=fsSupported();
+      if(on && sup && _bakPaused)
+        return `<div class="setrow"><div><b>🔄 Automatic backup — paused</b><span>Your browser needs one tap to keep writing to the backup file. Last saved ${backupRel()}.</span></div>
+          <div class="btnrow"><button class="btn primary" onclick="resumeAutoBackup()">Resume</button><button class="btn" onclick="disableAutoBackup()">Turn off</button></div></div>`;
+      if(on && sup)
+        return `<div class="setrow"><div><b>🔄 Automatic backup — on</b><span>Your progress saves to your chosen file automatically. Last saved ${backupRel()}.</span></div>
+          <div class="btnrow"><button class="btn" onclick="writeBackup(true)">Back up now</button><button class="btn" onclick="disableAutoBackup()">Turn off</button></div></div>`;
+      if(!sup)
+        return `<div class="setrow"><div><b>Automatic backup</b><span>Continuous auto-backup needs Chrome or Edge (works on Android Chrome and desktop). On this browser, use Export / Import below.</span></div>
+          <button class="btn" disabled>Unavailable here</button></div>`;
+      return `<div class="setrow"><div><b>🔄 Automatic backup</b><span>Pick a backup file once; MedBank then keeps it up to date automatically after every session — no need to remember.</span></div>
+          <button class="btn primary" onclick="enableAutoBackup()">Turn on</button></div>`;
+    })()}
     <div class="setrow"><div><b>Export a backup</b><span>Downloads all your progress (streak, SRS schedule, notes, statuses) as a file.</span></div>
       <button class="btn primary" onclick="exportData()">⬇ Export</button></div>
     <div class="setrow"><div><b>Restore from a backup</b><span>Pick a previously exported file. This replaces all current progress on this device.</span></div>
@@ -2487,6 +2552,7 @@ if('serviceWorker' in navigator){
 /* debug hook (harmless): lets tooling inspect the live study state */
 window.__mb={get S(){return S;},set S(v){S=v;},get DATA(){return DATA;}};
 render();
+try{ if(typeof initAutoBackup==='function') initAutoBackup(); }catch(e){}
 </script>
 </body>
 </html>
