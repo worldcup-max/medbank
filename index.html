@@ -454,25 +454,61 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .exopt.bad{background:#ff6b6b18;color:#ff9db1}
 .exopt.good{background:#3ecf8e18;color:var(--recall)}
 .exexpl{margin-top:8px;font-size:13.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
-/* AI tutor */
-.aikey{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+/* AI tutor — modern chat */
+.aikey{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center}
 .aikey b{font-size:15px}
-.aiwrap{display:flex;flex-direction:column;gap:10px}
-.aitools{display:flex;gap:8px;flex-wrap:wrap}
-.aichat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:240px;max-height:52vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
-.aihint{color:var(--dim);font-size:13.5px;text-align:center;margin:auto;padding:16px}
-.aimsg{display:flex}
-.aimsg.user{justify-content:flex-end}
-.aibub{max-width:82%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.4;white-space:pre-wrap}
-.aimsg.user .aibub{background:var(--accent);color:#fff;border-bottom-right-radius:4px}
-.aimsg.model .aibub{background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
-.aibub.typing{letter-spacing:3px;color:var(--dim);animation:aipulse 1s infinite}
-@keyframes aipulse{50%{opacity:.4}}
-.ailisten{display:flex;align-items:center;gap:12px;justify-content:center;background:var(--panel);border:1px solid var(--accent);border-radius:10px;padding:9px 13px;font-size:13.5px;font-weight:600}
-.airow{display:flex;gap:8px;align-items:center}
-.aiin{flex:1;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font:inherit;font-size:14.5px}
-.micbtn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:19px}
-.micbtn:hover{border-color:var(--accent)}
+.ai2{display:flex;flex-direction:column;gap:12px}
+.ai2head{display:flex;align-items:center;gap:12px;padding:2px}
+.ai2orb{width:40px;height:40px;border-radius:50%;flex:none;background:conic-gradient(from 0deg,#4f8cff,#a35bff,#3ecf8e,#4f8cff);animation:aispin 6s linear infinite;box-shadow:0 0 14px rgba(99,140,255,.45)}
+.ai2orb.listen{background:conic-gradient(from 0deg,#ff5a7a,#ff9d5c,#ff5a7a);box-shadow:0 0 18px rgba(255,90,122,.6)}
+.ai2orb.speak{background:conic-gradient(from 0deg,#3ecf8e,#4f8cff,#3ecf8e);box-shadow:0 0 18px rgba(62,207,142,.6)}
+.ai2orb.think{animation-duration:1.3s}
+@keyframes aispin{to{transform:rotate(360deg)}}
+.ai2meta b{display:block;font-size:15px}
+.ai2meta span{font-size:12px;color:var(--dim);text-transform:capitalize}
+.ai2chat{background:linear-gradient(180deg,rgba(79,140,255,.05),rgba(0,0,0,0));border:1px solid var(--line);border-radius:16px;padding:14px;min-height:230px;max-height:48vh;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.ai2hint{color:var(--dim);font-size:13.5px;text-align:center;margin:auto;padding:18px;line-height:1.65}
+.ai2msg{display:flex;align-items:flex-end;gap:8px}
+.ai2msg.user{justify-content:flex-end}
+.ai2av{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 0 10px rgba(99,140,255,.4)}
+.ai2bub{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.ai2msg.user .ai2bub{background:linear-gradient(135deg,#4f8cff,#6aa0ff);color:#fff;border-bottom-right-radius:5px}
+.ai2msg.bot .ai2bub{background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:5px}
+.ai2chat .ai2msg:last-child{animation:aislide .28s ease}
+@keyframes aislide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tdot{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--dim);animation:tbounce 1s infinite}
+.tdot:nth-child(2){animation-delay:.15s}.tdot:nth-child(3){animation-delay:.3s}
+@keyframes tbounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+/* voice stage */
+.vstage{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:22px 16px;border-radius:18px;color:#4f8cff;
+  background:radial-gradient(120% 120% at 50% 0%,rgba(79,140,255,.14),rgba(0,0,0,0));border:1px solid var(--line)}
+.vstage.listen{color:#ff5a7a;background:radial-gradient(120% 120% at 50% 0%,rgba(255,90,122,.18),rgba(0,0,0,0));border-color:rgba(255,90,122,.5)}
+.vstage.speak{color:#3ecf8e;background:radial-gradient(120% 120% at 50% 0%,rgba(62,207,142,.16),rgba(0,0,0,0));border-color:rgba(62,207,142,.45)}
+.orb{position:relative;width:96px;height:96px;display:grid;place-items:center}
+.ocore{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:30px;z-index:2;background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 6px 22px rgba(99,140,255,.5)}
+.vstage.listen .ocore{background:linear-gradient(135deg,#ff5a7a,#ff9d5c);box-shadow:0 6px 22px rgba(255,90,122,.55)}
+.vstage.speak .ocore{background:linear-gradient(135deg,#3ecf8e,#4f8cff);box-shadow:0 6px 22px rgba(62,207,142,.5)}
+.oring{position:absolute;inset:0;border-radius:50%;border:2px solid currentColor;opacity:0}
+.vstage.listen .oring,.vstage.speak .oring{animation:pulsering 1.8s ease-out infinite}
+.oring:nth-child(2){animation-delay:.6s}.oring:nth-child(3){animation-delay:1.2s}
+@keyframes pulsering{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+.vstage.listen .ocore,.vstage.speak .ocore{animation:breathe 1.6s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.07)}}
+.vbig{font-size:15px;font-weight:700;color:var(--text)}
+.veq{display:flex;gap:4px;align-items:flex-end;height:22px}
+.veq i{width:4px;height:6px;border-radius:2px;background:var(--dim)}
+.vstage.listen .veq i,.vstage.speak .veq i{background:currentColor;animation:eqbar .9s ease-in-out infinite}
+.veq i:nth-child(2){animation-delay:.15s}.veq i:nth-child(3){animation-delay:.3s}.veq i:nth-child(4){animation-delay:.45s}.veq i:nth-child(5){animation-delay:.6s}
+@keyframes eqbar{0%,100%{height:6px}50%{height:20px}}
+.vbtns{display:flex;gap:10px}
+.btn.danger{background:#ff5a7a;color:#fff;border-color:#ff5a7a}
+/* input bar */
+.ai2bar{display:flex;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:6px}
+.micbtn{flex:none;width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(135deg,#4f8cff,#a35bff);color:#fff;cursor:pointer;font-size:18px}
+.micbtn.live{background:linear-gradient(135deg,#ff5a7a,#ff9d5c);animation:breathe 1s infinite}
+.aiin{flex:1;background:transparent;color:var(--text);border:0;outline:none;padding:10px 6px;font:inherit;font-size:14.5px}
+.sendbtn{flex:none;width:42px;height:42px;border-radius:50%;border:0;background:var(--accent,#4f8cff);color:#fff;cursor:pointer;font-size:16px}
+.ai2tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 
 /* ---- settings ---- */
 .setrow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);
@@ -689,7 +725,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28g';   // bump this each release
+const APP_VERSION='2026.07.28h';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -709,7 +745,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-flash-latest'}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-flash-latest', ttsVoice:'', sttLang:'en-US'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5)-flash/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-flash-latest';  // migrate retired models
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
@@ -828,11 +864,28 @@ function saveNoteFromBox(id,el){ setNote(id,el.value); }
 function ttsOn(){ return 'speechSynthesis' in window; }
 function stripMd(s){ return (s||'').replace(/\*\*/g,'').replace(/^##\s*/gm,'').replace(/^>>\s*/gm,'')
   .replace(/[#>*_`]/g,'').replace(/\s+/g,' ').trim(); }
-function speak(text){ try{ if(!ttsOn())return; const u=new SpeechSynthesisUtterance(stripMd(text));
-  u.rate=0.98; u.pitch=1; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
+/* ---- voice selection: pick a good voice, not the flat default ---- */
+let VOICES=[];
+function loadVoices(){ try{ VOICES=(speechSynthesis.getVoices()||[]); }catch(e){ VOICES=[]; } }
+if('speechSynthesis' in window){ loadVoices(); try{ speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
+function enVoices(){ if(!VOICES.length) loadVoices(); return VOICES.filter(v=>/^en(-|_|$)/i.test(v.lang)); }
+function pickVoice(){
+  if(!VOICES.length) loadVoices();
+  const want=(DATA.settings.ttsVoice||'').trim();
+  if(want){ const v=VOICES.find(v=>v.name===want); if(v) return v; }
+  const en=enVoices();
+  // prefer premium / neural / named voices over the basic default
+  const pref=[/siri/i,/\bava\b/i,/samantha/i,/\ballison\b/i,/\bnicky\b/i,/\baaron\b/i,/natasha/i,/\bzoe\b/i,
+    /enhanced/i,/premium/i,/neural/i,/google us english/i,/google uk english female/i,/microsoft (aria|jenny|guy|libby|sonia)/i];
+  for(const rx of pref){ const v=en.find(v=>rx.test(v.name)); if(v) return v; }
+  return en.find(v=>/en[-_]US/i.test(v.lang)) || en[0] || VOICES[0] || null;
+}
+function tuneUtter(u){ const v=pickVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.04; u.volume=1; return u; }
+function speak(text){ try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
+  speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
 function speakSeq(parts){ try{ if(!ttsOn())return; speechSynthesis.cancel();
-  parts.forEach((p,i)=>{ const u=new SpeechSynthesisUtterance(stripMd(p)); u.rate=0.98;
-    if(i<parts.length-1) u.text=stripMd(p)+' …'; speechSynthesis.speak(u); }); }catch(e){} }
+  parts.forEach((p,i)=>{ const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(p)+(i<parts.length-1?' …':'')));
+    speechSynthesis.speak(u); }); }catch(e){} }
 function stopSpeak(){ try{ if(ttsOn()) speechSynthesis.cancel(); }catch(e){} }
 function speakCurrent(){ if(!S)return; const it=S.items[S.order[S.i]]; if(!it)return; const c=it.c;
   const ansShown = S.show || (S.pick!=null);
@@ -2342,8 +2395,19 @@ function pageSettings(){
     <p class="sub" style="margin-bottom:12px">Powers the per-topic voice tutor (🎙 AI tutor on each topic). Get a free key at <b>aistudio.google.com/apikey</b> — it's stored only on this device.</p>
     <div class="setrow"><div><b>Gemini API key</b><span>${s.geminiKey?'Key saved. Paste a new one to replace it.':'Paste your free Google Gemini key to enable the tutor.'}</span></div>
       <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
-    <div class="setrow"><div><b>Model</b><span>Default gemini-2.0-flash. Only change this if a newer free model name works better for you.</span></div>
-      <input class="numin" style="width:170px" type="text" value="${esc(s.geminiModel||'gemini-2.0-flash')}" onchange="setGemModel(this.value)"></div>
+    <div class="setrow"><div><b>Model</b><span>Default gemini-flash-latest (auto-updates to the current free model). Only change if you know the model name you want.</span></div>
+      <input class="numin" style="width:170px" type="text" value="${esc(s.geminiModel||'gemini-flash-latest')}" onchange="setGemModel(this.value)"></div>
+    <div class="setrow"><div><b>Tutor voice</b><span>Which voice reads the tutor's replies. "Enhanced"/"Premium" voices sound far better than the default — on iPhone download one in Settings → Accessibility → Spoken Content → Voices.</span></div>
+      <select class="numin" style="width:190px" onchange="setTtsVoice(this.value)">
+        <option value="">Auto (best available)</option>
+        ${enVoices().map(v=>`<option value="${esc(v.name)}" ${s.ttsVoice===v.name?'selected':''}>${esc(v.name)}</option>`).join('')}
+      </select></div>
+    <div class="setrow"><div><b>Test the voice</b><span>Hear how the selected tutor voice sounds.</span></div>
+      <button class="btn" onclick="testVoice()">🔊 Test voice</button></div>
+    <div class="setrow"><div><b>Recognition accent</b><span>Match your accent so your spoken answers transcribe more accurately (helps grading).</span></div>
+      <select class="numin" style="width:190px" onchange="setSttLang(this.value)">
+        ${[['en-US','English (US)'],['en-GB','English (UK)'],['en-NG','English (Nigeria)'],['en-IN','English (India)'],['en-ZA','English (South Africa)']].map(([v,l])=>`<option value="${v}" ${(s.sttLang||'en-US')===v?'selected':''}>${l}</option>`).join('')}
+      </select></div>
 
     <h2>Backup &amp; restore</h2>
     <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Turn on automatic backup so your progress is saved to a file continuously — then you can restore it if you clear the app or switch phones.</p>
@@ -2515,25 +2579,34 @@ let VOICE={on:false, rec:null, topic:null, phase:''};
 const SRClass = window.SpeechRecognition||window.webkitSpeechRecognition;
 function sttSupported(){ return !!SRClass; }
 function setGemKey(v){ DATA.settings.geminiKey=(v||'').trim(); persist(); render(); }
-function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-2.0-flash'; persist(); render(); }
+function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-flash-latest'; persist(); render(); }
+function setTtsVoice(v){ DATA.settings.ttsVoice=v||''; persist(); render(); }
+function setSttLang(v){ DATA.settings.sttLang=v||'en-US'; persist(); render(); }
+function testVoice(){ speak('Hello, I am your MedBank tutor. Let us begin. Name the four stages of inflammation in lobar pneumonia.'); }
 function speakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&cb(); return; }
-  const u=new SpeechSynthesisUtterance(stripMd(text)); u.rate=1; u.pitch=1;
+  const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
   u.onend=()=>cb&&cb(); u.onerror=()=>cb&&cb();
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }catch(e){ cb&&cb(); } }
 function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
-async function aiSend(topicId, text){
+async function aiSend(topicId, text, alts){
   const key=(DATA.settings.geminiKey||'').trim();
   if(!key){ go('settings'); return; }
   if(AIBUSY) return;
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
-  AICHAT[topicId].push({role:'user',text});
+  // if the answer came from voice with several possible hearings, send them all so the tutor grades by meaning
+  let send;
+  if(alts && alts.length>1){
+    const uniq=[...new Set(alts.map(a=>a.trim()).filter(Boolean))].slice(0,4);
+    send=`${text}\n\n[This answer was voice-transcribed and may be misheard. Possible transcriptions: ${uniq.map(a=>'"'+a+'"').join(' or ')}. Grade by the medically intended meaning, be charitable with spelling/homophones, and if it seems garbled or you are unsure, ask me to repeat instead of marking it wrong.]`;
+  }
+  AICHAT[topicId].push({role:'user',text,send});
   AIBUSY=true; render(); aiScroll();
   try{
     const cards=(t.recall||[]).map((c,i)=>`${i+1}. Q: ${c.q}\n   A: ${stripMd(c.a)}`).join('\n');
-    const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth. How to behave: ask ONE question at a time; after the student answers, start your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then immediately ask the next question. Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. If the student asks you to explain rather than quiz, explain simply from the answer key. Never invent facts outside the answer key. ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
-    const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:m.text}]}));
+    const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth. How to behave: ask ONE question at a time; after the student answers, start your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then immediately ask the next question. IMPORTANT: the student answers by voice, so their words may be MIS-TRANSCRIBED (homophones, wrong words, missing terms). Always grade by the intended clinical meaning, give the benefit of the doubt on spelling and near-miss words, and if an answer looks garbled or you genuinely can't tell what they meant, ask them to repeat it rather than marking it incorrect. Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. If the student asks you to explain rather than quiz, explain simply from the answer key. Never invent facts outside the answer key. ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
+    const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:(m.role==='user'&&m.send)||m.text}]}));
     const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
       generationConfig:{temperature:0.6, maxOutputTokens:500} };
     // try the configured model, then current free fallbacks — so a retired model can't break the tutor
@@ -2563,12 +2636,13 @@ async function aiSend(topicId, text){
     AIBUSY=false; VOICE.on=false; render(); aiScroll();
   }
 }
+function recAlts(e){ try{ return Array.from(e.results[0]).map(r=>r.transcript); }catch(_){ return [e.results[0][0].transcript]; } }
 function aiListen(topicId){
   if(!VOICE.on || !SRClass) return;
   try{
-    const rec=new SRClass(); VOICE.rec=rec; VOICE.phase='listen'; rec.lang='en-US';
-    rec.interimResults=false; rec.maxAlternatives=1;
-    rec.onresult=(e)=>{ const tx=e.results[0][0].transcript; VOICE.rec=null; aiSend(topicId, tx); };
+    const rec=new SRClass(); VOICE.rec=rec; VOICE.phase='listen';
+    rec.lang=DATA.settings.sttLang||'en-US'; rec.interimResults=false; rec.maxAlternatives=3;
+    rec.onresult=(e)=>{ const alts=recAlts(e); VOICE.rec=null; aiSend(topicId, alts[0], alts); };
     rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
     rec.onend=()=>{ if(VOICE.phase==='listen'){ VOICE.rec=null; VOICE.phase=''; render(); } };
     rec.start(); render();
@@ -2583,9 +2657,9 @@ function startVoiceQuiz(topicId){
 function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} render(); }
 function aiMicOnce(topicId){
   if(!SRClass){ alert('Voice input needs Chrome (Android or desktop).'); return; }
-  try{ const rec=new SRClass(); rec.lang='en-US'; rec.interimResults=false;
+  try{ const rec=new SRClass(); rec.lang=DATA.settings.sttLang||'en-US'; rec.interimResults=false; rec.maxAlternatives=3;
     VOICE.phase='listen'; VOICE.rec=rec; render();
-    rec.onresult=(e)=>{ VOICE.rec=null; VOICE.phase=''; aiSend(topicId, e.results[0][0].transcript); };
+    rec.onresult=(e)=>{ const alts=recAlts(e); VOICE.rec=null; VOICE.phase=''; aiSend(topicId, alts[0], alts); };
     rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
     rec.onend=()=>{ if(!AIBUSY){ VOICE.rec=null; VOICE.phase=''; render(); } };
     rec.start();
@@ -2594,33 +2668,56 @@ function aiMicOnce(topicId){
 function aiSendFromInput(topicId){ const el=document.getElementById('aiin'); if(!el)return;
   const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
 function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
+function aiRedo(topicId){ const a=AICHAT[topicId]||[];
+  if(a.length && a[a.length-1].role==='model') a.pop();
+  if(a.length && a[a.length-1].role==='user') a.pop();
+  render(); if(VOICE.on && sttSupported()) aiListen(topicId); }
+function aiStatus(){
+  if(AIBUSY) return {k:'think', big:'💭 Thinking…', chip:'thinking', icon:'💭'};
+  if(VOICE.on && VOICE.phase==='speak') return {k:'speak', big:'🔊 Tutor is speaking', chip:'speaking', icon:'🔊'};
+  if(VOICE.on && VOICE.phase==='listen') return {k:'listen', big:'🎧 Your turn — speak now', chip:'listening', icon:'🎤'};
+  if(VOICE.on) return {k:'idle', big:'🎙 Voice mode on', chip:'voice on', icon:'🎙'};
+  return {k:'idle', big:'', chip:'ready', icon:'🎙'};
+}
 function pageAI(topicId){
   const t=topById(topicId); if(!t||!t.ready) return pageHome();
   const key=(DATA.settings.geminiKey||'').trim();
-  const head=crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}])
-    +`<h1>🎙 AI tutor</h1><p class="sub">${esc(t.name)} · a tutor that quizzes and grades you on this topic's ${t.recall.length} cards. ${sttSupported()?'Speak or type.':'Type your answers; replies are read aloud.'}</p>`;
-  if(!key) return head+`<div class="aikey"><b>Add your free Gemini key to start.</b>
+  const crumbsHtml=crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}]);
+  if(!key) return crumbsHtml+`<h1>🎙 AI tutor</h1>
+     <div class="aikey"><b>Add your free Gemini key to start.</b>
       <p class="sub">Get one free at aistudio.google.com/apikey, then paste it in Settings → AI tutor. It stays only on this device.</p>
       <button class="btn primary" onclick="go('settings')">Open Settings</button></div>`;
   const msgs=AICHAT[topicId]||[];
+  const st=aiStatus();
   const bubbles = msgs.length
-    ? msgs.map(m=>`<div class="aimsg ${m.role}"><div class="aibub">${esc(m.text)}</div></div>`).join('')
-    : `<div class="aihint">Tap <b>🎤 Voice quiz</b> to be examined aloud, or type below. Try: <i>"Quiz me"</i>, <i>"Explain the key points"</i>, or <i>"Give me a clinical scenario"</i>.</div>`;
-  const busy = AIBUSY?`<div class="aimsg model"><div class="aibub typing">● ● ●</div></div>`:'';
-  const listening = VOICE.on
-    ? `<div class="ailisten">${VOICE.phase==='listen'?'🎧 Listening… speak your answer':VOICE.phase==='speak'?'🔊 Tutor speaking…':'…'} <button class="btn" onclick="stopVoice()">Stop voice</button></div>`
-    : '';
-  return head + `<div class="aiwrap">
-    <div class="aitools">
-      ${VOICE.on?'':`<button class="btn primary" onclick="startVoiceQuiz('${t.id}')">🎤 Voice quiz</button>`}
-      <button class="btn" onclick="clearAI('${t.id}')">Clear chat</button>
+    ? msgs.map(m=> m.role==='user'
+        ? `<div class="ai2msg user"><div class="ai2bub">${esc(m.text)}</div></div>`
+        : `<div class="ai2msg bot"><div class="ai2av">🩺</div><div class="ai2bub">${esc(m.text)}</div></div>`).join('')
+    : `<div class="ai2hint">Tap <b>Start voice quiz</b> to be examined aloud, or type below.<br>Try: <i>"Quiz me"</i> · <i>"Explain the key points"</i> · <i>"Give me a clinical scenario"</i>.</div>`;
+  const busy = AIBUSY?`<div class="ai2msg bot"><div class="ai2av">🩺</div><div class="ai2bub"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div>`:'';
+  const stage = VOICE.on ? `<div class="vstage ${st.k}">
+      <div class="orb"><span class="oring"></span><span class="oring"></span><span class="oring"></span><div class="ocore">${st.icon}</div></div>
+      <div class="vbig">${st.big}</div>
+      <div class="veq"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="vbtns">
+        <button class="btn" onclick="aiRedo('${t.id}')" ${(msgs.length&&!AIBUSY)?'':'disabled'}>↺ Redo answer</button>
+        <button class="btn danger" onclick="stopVoice()">■ Stop</button>
+      </div></div>` : '';
+  return crumbsHtml + `<div class="ai2">
+    <div class="ai2head">
+      <div class="ai2orb ${st.k}"></div>
+      <div class="ai2meta"><b>MedBank Tutor</b><span>${esc(t.name)} · ${st.chip}</span></div>
     </div>
-    <div class="aichat" id="aichat">${bubbles}${busy}</div>
-    ${listening}
-    <div class="airow">
-      <button class="micbtn" onclick="aiMicOnce('${t.id}')" title="Speak once">🎤</button>
-      <input id="aiin" class="aiin" placeholder="Type to the tutor…" onkeydown="if(event.key==='Enter')aiSendFromInput('${t.id}')">
-      <button class="btn primary" onclick="aiSendFromInput('${t.id}')">Send</button>
+    ${stage}
+    <div class="ai2chat" id="aichat">${bubbles}${busy}</div>
+    <div class="ai2bar">
+      <button class="micbtn ${VOICE.phase==='listen'?'live':''}" onclick="aiMicOnce('${t.id}')" title="Speak your answer">🎤</button>
+      <input id="aiin" class="aiin" placeholder="Type your answer…" onkeydown="if(event.key==='Enter')aiSendFromInput('${t.id}')">
+      <button class="sendbtn" onclick="aiSendFromInput('${t.id}')" title="Send">➤</button>
+    </div>
+    <div class="ai2tools">
+      ${VOICE.on?'':`<button class="btn primary" onclick="startVoiceQuiz('${t.id}')">🎤 Start voice quiz</button>`}
+      <button class="btn" onclick="clearAI('${t.id}')">Clear chat</button>
     </div></div>`;
 }
 
