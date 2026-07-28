@@ -689,7 +689,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28f';   // bump this each release
+const APP_VERSION='2026.07.28g';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -2223,6 +2223,32 @@ async function initAutoBackup(){
   try{ const h=await idbGet('bakHandle'); if(h){ _bakHandle=h; _bakPaused=!(await _perm(h,false));
     if(!_bakPaused) writeBackup(false); render(); } }catch(e){}
 }
+async function shareBackup(){
+  try{
+    const file=new File([JSON.stringify(DATA)],'medbank-backup-'+dstr()+'.json',{type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[file]})) await navigator.share({files:[file],title:'MedBank backup'});
+    else exportData();
+  }catch(e){ if(e&&e.name!=='AbortError') exportData(); }
+}
+async function copyBackup(){
+  const txt=JSON.stringify(DATA);
+  try{ await navigator.clipboard.writeText(txt);
+    alert('Backup copied. Now open MedBank in the OTHER browser → Settings → "Restore from text" → paste → Restore.');
+  }catch(e){
+    try{ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove(); alert('Backup copied. Paste it into "Restore from text" in the other browser.'); }
+    catch(e2){ alert('Copy failed — use Export or Share instead.'); }
+  }
+}
+function restoreFromText(){
+  const el=document.getElementById('restoretext'); if(!el) return;
+  const txt=(el.value||'').trim(); if(!txt){ alert('Paste your backup text into the box first.'); return; }
+  try{ const d=JSON.parse(txt);
+    if(!d||typeof d!=='object'||(!('cards'in d)&&!('log'in d)&&!('streak'in d))) throw new Error('That is not MedBank backup text.');
+    if(!confirm('Restore this backup? It REPLACES all current progress on THIS device.')) return;
+    localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
+  }catch(e){ alert('Restore failed: '+e.message); }
+}
 function backupRel(){ const t=DATA.settings.lastBackup; if(!t) return 'not yet';
   const s=Math.floor((Date.now()-t)/1000);
   if(s<60) return 'just now'; if(s<3600) return Math.floor(s/60)+' min ago';
@@ -2339,6 +2365,17 @@ function pageSettings(){
       <button class="btn primary" onclick="exportData()">⬇ Export</button></div>
     <div class="setrow"><div><b>Restore from a backup</b><span>Pick a previously exported file. This replaces all current progress on this device.</span></div>
       <label class="btn" style="cursor:pointer">⬆ Import<input type="file" accept="application/json,.json" style="display:none" onchange="importData(this)"></label></div>
+
+    <h2>Move to another browser or phone</h2>
+    <p class="sub" style="margin-bottom:12px">On iPhone each browser keeps its own separate storage, so copy your data across. The clipboard method is the most reliable on iPhone — the clipboard is shared between apps.</p>
+    <div class="setrow"><div><b>1 · Copy backup (on the OLD app)</b><span>Copies all your progress to the clipboard. Then open MedBank in the new browser and paste below.</span></div>
+      <button class="btn primary" onclick="copyBackup()">⧉ Copy backup</button></div>
+    <div class="setrow"><div><b>Share / Save to Files</b><span>Alternative: send the backup to Files, AirDrop, Notes or another device via the share sheet.</span></div>
+      <button class="btn" onclick="shareBackup()">⤴ Share backup</button></div>
+    <div class="setrow" style="display:block"><b>2 · Restore from text (on the NEW app)</b>
+      <span style="display:block;margin:6px 0 9px">Paste the copied backup here, then Restore. This replaces all progress on this device.</span>
+      <textarea id="restoretext" class="notebox" style="min-height:70px" placeholder="Paste your copied backup here…"></textarea>
+      <button class="btn primary" onclick="restoreFromText()">Restore from text</button></div>
 
     <h2>Data</h2>
     <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. Cannot be undone.</span></div>
