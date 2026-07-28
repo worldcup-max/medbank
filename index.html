@@ -414,6 +414,13 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .notewrap[open] summary{color:var(--text)}
 .notebox{width:100%;min-height:64px;background:var(--bg);color:var(--text);border:1px solid var(--line);
   border-radius:8px;padding:9px;font:inherit;font-size:14px;resize:vertical;margin:0 0 11px}
+.notebar{margin:2px 0 8px}
+.btn.tiny{padding:4px 11px;font-size:12px}
+.noteov{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:200;display:flex;align-items:center;justify-content:center;padding:14px}
+.noteov-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;width:100%;max-width:660px;max-height:90vh;display:flex;flex-direction:column;padding:16px}
+.noteov-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.noteov-top b{font-size:15px}
+.noteov-ta{flex:1;min-height:62vh;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:15px;font:inherit;font-size:16px;line-height:1.55;resize:none}
 /* leech / mistakes rows */
 .leechrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
   border-radius:10px;padding:10px 13px;margin-bottom:9px}
@@ -682,7 +689,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28e';   // bump this each release
+const APP_VERSION='2026.07.28f';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -702,7 +709,8 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.0-flash'}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-flash-latest'}, d.settings||{});
+  if(/^gemini-(2\.0|1\.5)-flash/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-flash-latest';  // migrate retired models
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
@@ -834,8 +842,20 @@ function ttsBtn(){ return (ttsOn()&&DATA.settings.tts)?`<button class="iconbtn" 
 function noteBlock(it){ const note=getNote(it.id);
   return `<details class="notewrap" onclick="event.stopPropagation()">
      <summary>✎ ${note?'My note / mnemonic — tap to read':'Add a note / mnemonic'}</summary>
+     <div class="notebar"><button class="btn tiny" onclick="event.stopPropagation();openNoteFull('${it.id}')">⤢ Expand full screen</button></div>
      <textarea class="notebox" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${it.id}',this.value)">${esc(note)}</textarea>
    </details>`; }
+function openNoteFull(id){
+  closeNoteFull();
+  const ov=document.createElement('div'); ov.className='noteov'; ov.id='noteov';
+  ov.innerHTML=`<div class="noteov-card" onclick="event.stopPropagation()">
+     <div class="noteov-top"><b>✎ My note / mnemonic</b><button class="btn" onclick="closeNoteFull()">✕ Close</button></div>
+     <textarea class="noteov-ta" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${id}',this.value)">${esc(getNote(id))}</textarea>
+   </div>`;
+  ov.addEventListener('click',()=>closeNoteFull());
+  document.body.appendChild(ov);
+}
+function closeNoteFull(){ const o=document.getElementById('noteov'); if(o) o.remove(); }
 
 /* ---- leeches: cards failed repeatedly ---- */
 const LEECH_LAPSES=4;
@@ -2474,17 +2494,29 @@ async function aiSend(topicId, text){
   AICHAT[topicId].push({role:'user',text});
   AIBUSY=true; render(); aiScroll();
   try{
-    const model=(DATA.settings.geminiModel||'gemini-2.0-flash').trim();
     const cards=(t.recall||[]).map((c,i)=>`${i+1}. Q: ${c.q}\n   A: ${stripMd(c.a)}`).join('\n');
     const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth. How to behave: ask ONE question at a time; after the student answers, start your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then immediately ask the next question. Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. If the student asks you to explain rather than quiz, explain simply from the answer key. Never invent facts outside the answer key. ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
     const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:m.text}]}));
     const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
       generationConfig:{temperature:0.6, maxOutputTokens:500} };
-    const url=`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
-    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    const j=await r.json();
-    if(!r.ok) throw new Error((j.error&&j.error.message)||('HTTP '+r.status));
-    const reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text || '(no reply — try again)';
+    // try the configured model, then current free fallbacks — so a retired model can't break the tutor
+    const configured=(DATA.settings.geminiModel||'gemini-flash-latest').trim();
+    const cands=[...new Set([configured,'gemini-flash-latest','gemini-2.5-flash','gemini-flash-lite-latest','gemini-2.5-flash-lite'])];
+    let reply=null, used=null, lastErr='';
+    for(const model of cands){
+      let r,j;
+      try{
+        r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,
+          {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+        j=await r.json().catch(()=>({}));
+      }catch(net){ throw new Error('Network error — check your data connection.'); }
+      if(r.ok){ reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text||'(no reply — try again)'; used=model; break; }
+      lastErr=(j.error&&j.error.message)||('HTTP '+r.status);
+      const deadModel = r.status===404 || /not found|not supported|limit:\s*0|is not available|does not exist|deprecated/i.test(lastErr);
+      if(!deadModel) break;   // a real error (daily limit reached, bad key) — stop and report it
+    }
+    if(reply==null) throw new Error(lastErr||'No free model is available right now.');
+    if(used && used!==configured){ DATA.settings.geminiModel=used; persist(); }   // remember the one that worked
     AICHAT[topicId].push({role:'model',text:reply});
     AIBUSY=false; render(); aiScroll();
     if(VOICE.on && VOICE.topic===topicId){ VOICE.phase='speak'; render();
