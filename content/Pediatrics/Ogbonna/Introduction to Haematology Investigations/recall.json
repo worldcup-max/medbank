@@ -1,0 +1,237 @@
+{
+ "deck": "recall",
+ "topic": "Introduction to Haematology / Investigations",
+ "cards": [
+  {
+   "q": "What is haematology?",
+   "a": "**The branch of medicine concerned with the study, diagnosis, treatment and prevention of blood-related diseases.**\n\n## Understanding it\n- It covers everything about blood — from diagnosis to prevention.\n- Blood is treated as one of the body's largest organs.\n\n>> Haematology = the medicine of blood disease.",
+   "opts": [
+    "The study of the immune system's lymph nodes only",
+    "The study of the heart and circulation only",
+    "The study of bone diseases",
+    "The study, diagnosis, treatment and prevention of blood-related diseases"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What two main components make up blood, and in what proportions?",
+   "a": "**Plasma (~60% of total blood volume) and cells (~40%).**\n\n## Understanding it\n- Roughly 60:40 plasma to cells in general.\n- This ratio is not fixed — it changes with age.\n\n>> Blood ≈ 60% plasma + 40% cells.",
+   "opts": [
+    "Equal 50:50 at all ages",
+    "Cells ~60% and plasma ~40%",
+    "Plasma ~60% and cells ~40%",
+    "Plasma ~90% and cells ~10%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How does the plasma proportion of blood differ in a preterm baby?",
+   "a": "**Plasma can be up to 70% in a preterm baby.**\n\n## Understanding it\n- The plasma-to-cell ratio shifts with age.\n- Preterm infants have relatively more plasma.\n\n>> Preterm baby: plasma up to 70%.",
+   "opts": [
+    "Plasma is up to 70%",
+    "Plasma is exactly 60% as in adults",
+    "Plasma falls to 30%",
+    "Preterm babies have no plasma"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the three cell lines of blood, and their order of abundance?",
+   "a": "**Erythrocytes (RBCs), leucocytes (WBCs) and platelets — with RBCs most abundant, then platelets, then WBCs.**\n\n## Understanding it\n- RBCs greatly outnumber the others; WBCs are fewest.\n- Numbers are kept in balance by a feedback mechanism.\n\n>> RBC > platelets > WBC; regulated by feedback.",
+   "opts": [
+    "Platelets most, then WBCs, then RBCs",
+    "They are present in equal numbers",
+    "RBCs (most), then platelets, then WBCs (fewest)",
+    "WBCs most, then RBCs, then platelets"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Where does haematopoiesis occur in the yolk sac, and until when?",
+   "a": "**In the yolk sac during the 2nd–3rd week of gestation, diminishing by the 10th week.**\n\n## Understanding it\n- The yolk sac is the earliest blood-forming site.\n- It fades as the liver takes over.\n\n>> Yolk sac: wk 2–3, gone by wk 10.",
+   "opts": [
+    "In the yolk sac from birth onwards",
+    "In the yolk sac only after birth",
+    "The yolk sac never makes blood",
+    "Yolk sac in the 2nd–3rd week, diminishing by week 10"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "During which weeks does the liver perform haematopoiesis?",
+   "a": "**From the 6th week up to the 30th week of gestation.**\n\n## Understanding it\n- The liver is the main fetal blood-forming organ mid-gestation.\n- It hands over to the bone marrow later.\n\n>> Liver: weeks 6–30.",
+   "opts": [
+    "Only after birth",
+    "Weeks 1–2 only",
+    "The liver never makes blood",
+    "6th week up to the 30th week"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "When does the bone marrow take over haematopoiesis?",
+   "a": "**From the 20th week of gestation, continuing till (and after) birth.**\n\n## Understanding it\n- Marrow becomes the definitive lifelong site.\n- It overlaps with the liver before birth.\n\n>> Bone marrow: from wk 20, for life.",
+   "opts": [
+    "From the 20th week, continuing to birth and beyond",
+    "Never — the liver does it for life",
+    "Only in the first trimester",
+    "Only in old age"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is extramedullary haematopoiesis?",
+   "a": "**Blood formation by the liver and spleen in times of stress and increased demand for more cells.**\n\n## Understanding it\n- When the marrow cannot keep up, the liver and spleen are recruited.\n- It is a sign of high demand (e.g. chronic haemolysis).\n\n>> Liver/spleen make blood under stress = extramedullary haematopoiesis.",
+   "opts": [
+    "Blood formation only in the bone marrow",
+    "Blood formation by the liver and spleen under stress/high demand",
+    "Blood formation in the kidney",
+    "Destruction of blood cells by the spleen"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the functions of red blood cells?",
+   "a": "**Oxygen transport, and acting as a buffer (they are rich in carbonic anhydrase).**\n\n## Understanding it\n- RBCs carry oxygen and help buffer the blood via carbonic anhydrase.\n- Both functions depend on haemoglobin and enzymes inside the cell.\n\n>> RBC = oxygen transport + buffering.",
+   "opts": [
+    "Producing antibodies",
+    "Killing bacteria directly",
+    "Oxygen transport and buffering (carbonic anhydrase)",
+    "Clotting the blood"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What does 'BEN' stand for, and what do granulocytes do?",
+   "a": "**Basophils, Eosinophils, Neutrophils — a subgroup of WBCs that kill microorganisms and form the first line of defence.**\n\n## Understanding it\n- BEN is a memory aid for the granulocytes.\n- They are the front-line killers of microbes.\n\n>> BEN = Basophils, Eosinophils, Neutrophils; first-line microbe killers.",
+   "opts": [
+    "Bone, Enzyme, Nucleus",
+    "Basophils, Erythrocytes, Neutrophils — carry oxygen",
+    "B cells, Erythrocytes, Neutrophils",
+    "Basophils, Eosinophils, Neutrophils — kill microbes (first line of defence)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the functions of lymphocytes, and the roles of B and T cells?",
+   "a": "**They produce antibodies and mediate cell-mediated immunity: B cells make antibodies; T cells provide cellular immunity.**\n\n## Understanding it\n- Lymphocytes are the specific/adaptive arm of immunity.\n- B = antibodies, T = cellular immunity.\n\n>> Lymphocytes: B cells → antibodies, T cells → CMI.",
+   "opts": [
+    "Transport oxygen",
+    "Produce antibodies and CMI; B cells antibodies, T cells cellular immunity",
+    "Form clots",
+    "Kill microbes as the first line of defence"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the function of platelets?",
+   "a": "**Haemostasis — blood clotting.**\n\n## Understanding it\n- Platelets plug injured vessels and start clot formation.\n- Low platelets → bleeding; high → clotting risk.\n\n>> Platelets = haemostasis (clotting).",
+   "opts": [
+    "Oxygen transport",
+    "Haemostasis (blood clotting)",
+    "Buffering the blood pH",
+    "Antibody production"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How are diseases of blood production sub-classified?",
+   "a": "**Into decreased production (anaemias, leucopenias, thrombocytopenias) and increased production (polycythaemias, leucocytosis, thrombocytosis).**\n\n## Understanding it\n- Production problems go two ways — too few or too many cells.\n- Each cell line can be under- or over-produced.\n\n>> Production diseases = decreased vs increased.",
+   "opts": [
+    "Decreased (anaemia/leucopenia/thrombocytopenia) vs increased (polycythaemia/leucocytosis/thrombocytosis)",
+    "Only enzyme defects",
+    "Only decreased production exists",
+    "Only clotting disorders"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Give examples of abnormal-haemoglobin disorders.",
+   "a": "**Sickle cell anaemia and thalassaemia.**\n\n## Understanding it\n- These are structural/quantitative haemoglobin disorders.\n- They form one of the four haematology sub-classes.\n\n>> Abnormal Hb = sickle cell + thalassaemia.",
+   "opts": [
+    "Haemophilia and DIC",
+    "G6PD deficiency and leukaemia",
+    "Polycythaemia and thrombocytosis",
+    "Sickle cell anaemia and thalassaemia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which coagulation problem is given as an example in the sub-classification?",
+   "a": "**DIC (disseminated intravascular coagulation) — with tropical splenomegaly syndrome / hyper-immune splenomegaly also mentioned.**\n\n## Understanding it\n- DIC is the flagship coagulation disorder in this list.\n- Tropical splenomegaly syndrome (TSS) involves the spleen.\n\n>> Coagulation example = DIC (also TSS).",
+   "opts": [
+    "Iron deficiency anaemia",
+    "Sickle cell anaemia",
+    "G6PD deficiency",
+    "DIC (and tropical splenomegaly syndrome)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which enzyme defect is given as an example, and in which sub-class?",
+   "a": "**G6PD deficiency, under 'enzyme defects'.**\n\n## Understanding it\n- G6PD deficiency is the classic red-cell enzyme defect.\n- It sits in the enzyme-defect sub-class.\n\n>> Enzyme defect example = G6PD deficiency.",
+   "opts": [
+    "DIC",
+    "G6PD deficiency",
+    "Haemophilia A",
+    "Thalassaemia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does an FBC (full blood count) include?",
+   "a": "**Reticulocyte count, haemoglobin, total and differential WBC, RBC count and platelet count.**\n\n## Understanding it\n- The FBC surveys all three cell lines plus reticulocytes.\n- It is the core screening blood test.\n\n>> FBC = retic, Hb, WBC (total+diff), RBC, platelets.",
+   "opts": [
+    "Only haemoglobin",
+    "Liver and kidney function tests",
+    "Only the platelet count",
+    "Reticulocyte count, Hb, WBC total/differential, RBC count, platelets"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What does a peripheral blood film show?",
+   "a": "**Blast cells and red-cell morphology.**\n\n## Understanding it\n- The film reveals cell shape and abnormal cells like blasts.\n- It complements the numerical FBC.\n\n>> Blood film = morphology + blast cells.",
+   "opts": [
+    "Only the total white count",
+    "The genotype",
+    "Blast cells and RBC morphology",
+    "Bone marrow histology"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the difference between bone marrow aspiration and biopsy?",
+   "a": "**Aspiration gives cytology (individual cells); biopsy gives histology (tissue architecture).**\n\n## Understanding it\n- Aspirate = cells; biopsy = tissue structure.\n- They are complementary marrow investigations.\n\n>> Aspirate = cytology; biopsy = histology.",
+   "opts": [
+    "Both are blood films",
+    "Aspiration = histology; biopsy = cytology",
+    "Both give only genotype",
+    "Aspiration = cytology; biopsy = histology"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "List the investigations used in paediatric haematology.",
+   "a": "**Hb or PCV; FBC; peripheral blood film; genotype; bone marrow aspiration (cytology); and bone marrow biopsy (histology).**\n\n## Understanding it\n- A small, logical toolkit from simple (Hb/PCV) to invasive (marrow).\n- Each answers a different question about the blood.\n\n>> Hb/PCV, FBC, film, genotype, marrow aspirate & biopsy.",
+   "opts": [
+    "Hb/PCV, FBC, blood film, genotype, bone marrow aspirate and biopsy",
+    "Only a chest X-ray",
+    "Only an abdominal ultrasound",
+    "Only a urine dipstick"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is blood described as one of the largest organs in the body?",
+   "a": "**Because it is a large, distributed tissue (plasma plus cells) that circulates throughout the body performing many functions.**\n\n## Understanding it\n- Though liquid, blood is a true organ by mass and function.\n- It carries oxygen, defends, clots and buffers.\n\n>> Blood is a large distributed organ of plasma + cells.",
+   "opts": [
+    "Because it is stored only in the heart",
+    "Because it is solid like the liver",
+    "Because it does not move",
+    "It is a large distributed tissue of plasma and cells with many functions"
+   ],
+   "ans": 3
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "deck": "primer",
+ "topic": "Introduction to Haematology / Investigations",
+ "cards": [
+  {
+   "q": "Introduction: what is haematology and why is blood an organ?",
+   "lecturer": "Haematology is the branch of medicine concerned with the study, diagnosis, treatment and prevention of blood-related diseases. Blood is one of the largest organs in the body. It contains plasma — about 60% of total blood volume — and cells — about 40%. This percentage changes with age: in a preterm baby, plasma can be up to 70%.",
+   "explain": "## Read this first\n\n>> **Haematology = the medicine of blood** (study, diagnosis, treatment, prevention).\n\n>> **Blood is one of the largest organs**, made of **plasma (~60%) + cells (~40%).**\n\n>> The ratio **changes with age** — a preterm baby is up to **70% plasma.**",
+   "tie": "Treating blood as a large, age-varying organ frames why paediatric normal values differ from adults and why the cell lines and disease categories all matter in children."
+  },
+  {
+   "q": "Overview of blood: the cell lines and how they are made.",
+   "lecturer": "There are three cell lines — erythrocytes (RBCs), leucocytes (WBCs) and platelets. RBCs are the most abundant, followed by platelets, and lastly WBCs, and their numbers are regulated by a feedback mechanism. Haematopoiesis (blood formation) occurs at different anatomic sites during life: the yolk sac in the 2nd–3rd week of gestation, diminishing by the 10th week; the liver from the 6th up to the 30th week; and the bone marrow from the 20th week, continuing till birth and for life. Extramedullary haematopoiesis is when the liver and spleen are called upon to make blood in times of stress and increased demand for more cells.",
+   "explain": "## Read this first\n\n>> **Three cell lines:** RBCs (most) → platelets → WBCs (fewest), balanced by **feedback.**\n\n>> **Where blood is made (it moves):** **yolk sac (wk 2–3) → liver (wk 6–30) → bone marrow (wk 20 → for life).**\n\n>> **Extramedullary haematopoiesis:** liver + spleen restart blood-making under **stress/high demand.**",
+   "tie": "The shifting sites of haematopoiesis explain why chronic high-demand states (like haemolysis) cause hepatosplenomegaly — the body reopens the fetal blood factories."
+  },
+  {
+   "q": "Functions of blood: what each cell does.",
+   "lecturer": "Each component has a job. RBCs transport oxygen and act as a buffer (they are rich in carbonic anhydrase). Granulocytes — Basophils, Eosinophils, Neutrophils (BEN), a subgroup of WBCs — kill microorganisms and are the first line of defence. Lymphocytes produce antibodies and mediate cell-mediated immunity: B cells make antibodies, T cells provide cellular immunity. Platelets provide haemostasis (blood clotting).",
+   "explain": "## Read this first\n\n>> **RBC** — oxygen transport + buffering (carbonic anhydrase).\n\n>> **Granulocytes (BEN — Basophils, Eosinophils, Neutrophils)** — kill microbes, **first line of defence.**\n\n>> **Lymphocytes** — B cells → antibodies, T cells → cell-mediated immunity.\n\n>> **Platelets** — haemostasis (clotting).",
+   "tie": "Knowing which cell does what is the key to reading an FBC and to understanding disease: anaemia (RBC), infection/leukaemia (WBC), bleeding (platelets)."
+  },
+  {
+   "q": "Sub-classification of paediatric haematology.",
+   "lecturer": "Blood diseases are grouped into four categories. First, diseases affecting blood production — either decreased production (anaemias, leucopenias, thrombocytopenias) or increased production (polycythaemias, leucocytosis, thrombocytosis). Second, abnormal haemoglobins — sickle cell anaemia and thalassaemia. Third, coagulation problems — such as DIC (and tropical splenomegaly syndrome / hyper-immune splenomegaly, involving the spleen). Fourth, enzyme defects — such as G6PD deficiency.",
+   "explain": "## Read this first\n\n>> **1. Production:** decreased (anaemia, leucopenia, thrombocytopenia) or increased (polycythaemia, leucocytosis, thrombocytosis).\n\n>> **2. Abnormal haemoglobins:** sickle cell, thalassaemia.\n\n>> **3. Coagulation problems:** e.g. DIC.\n\n>> **4. Enzyme defects:** e.g. G6PD deficiency.",
+   "tie": "This four-bucket map is the framework for the whole haematology block — every later topic (anaemias, haemoglobinopathies, DIC, G6PD) slots into one of these categories."
+  },
+  {
+   "q": "Investigations in paediatric haematology.",
+   "lecturer": "The core investigations are: Hb or PCV; the FBC (full blood count) — reticulocyte count, haemoglobin, total and differential white cell count, RBC count and platelet count; the peripheral blood film — showing blast cells and red-cell morphology; genotype; bone marrow aspiration — for cytology (individual cells); and bone marrow biopsy — for histology (tissue architecture).",
+   "explain": "## Read this first\n\n>> **Hb / PCV** — the quick measure of anaemia.\n\n>> **FBC** — retic count, Hb, WBC (total + differential), RBC count, platelets.\n\n>> **Peripheral blood film** — blast cells + RBC morphology.\n\n>> **Genotype**; **bone marrow aspirate** (cytology) and **biopsy** (histology).",
+   "tie": "This small, logical toolkit — from simple Hb/PCV to invasive marrow sampling — is used across every haematology topic, each test answering a different question about the blood."
+  }
+ ]
+}

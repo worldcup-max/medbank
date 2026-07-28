@@ -1,0 +1,54 @@
+{
+ "deck": "primer",
+ "topic": "Measles",
+ "cards": [
+  {
+   "q": "Epidemiology & local context: the agent, spread and Nigerian burden.",
+   "lecturer": "Measles is caused by the measles virus — a Morbillivirus of the Paramyxoviridae family, an RNA virus with a single serotype. It spreads by airborne droplets and is extremely contagious: about 90% of non-immune contacts get infected. It remains endemic in Nigeria despite the vaccine, with 2022–2023 outbreaks in Kano, Sokoto, Borno and Zamfara driven by low coverage and insecurity. High-risk groups are children under 5, the malnourished, HIV-positive and vitamin-A-deficient, and the case fatality is 3–6% in Nigeria versus < 0.1% in the US. Seasonality is the dry season (November–April) in the Sahel, including Northern Nigeria. Measles is one of the six childhood killer diseases in Nigeria's NPI and routine-immunisation schedule.",
+   "explain": "## Read this first\n\n>> **Agent:** measles virus — RNA, one serotype (so one vaccine works, immunity is lifelong).\n\n>> **Spread:** **airborne**, ~90% of non-immune contacts infected.\n\n>> **Nigeria:** endemic; **CFR 3–6%** vs <0.1% in the US; dry-season outbreaks in the North.\n\n>> One of the **6 childhood killers.**",
+   "tie": "This sets the stakes: an airborne, extremely contagious virus with a high Nigerian death rate — which is why isolation, vitamin A and coverage dominate the rest of the topic."
+  },
+  {
+   "q": "Pathogenesis & clinical course: the three stages and the infectious period.",
+   "lecturer": "Pathogenesis runs: respiratory mucosa → lymphatics → viraemia → epithelial infection → rash plus immunosuppression for 4–6 weeks. The clinical stages are: incubation (10–14 days, average 12); the prodrome/catarrhal phase (2–4 days) of high fever plus the '3 Cs' — Cough, Coryza, Conjunctivitis — during which pathognomonic Koplik spots (white/blue spots on the buccal mucosa opposite the molars) appear on day 2–3; and the exanthem (day 3–4), a maculopapular, confluent rash that starts on the face and descends to neck, trunk and limbs over 5–6 days, with fever spiking as the rash appears. The patient is infectious from 4 days before to 4 days after the rash.",
+   "explain": "## Read this first\n\n>> **Pathogenesis:** mucosa → lymphatics → viraemia → epithelium (rash) + weeks of immunosuppression.\n\n>> **Stages:** incubation (10–14d) → **prodrome (fever + 3 Cs + Koplik spots, day 2–3)** → **descending rash** (face → limbs).\n\n>> **Infectious:** 4 days before to 4 days after the rash.",
+   "tie": "The ordered course, with Koplik spots appearing before the rash and the wide infectious window, is what lets you diagnose measles early and act on infectivity."
+  },
+  {
+   "q": "Clinical features: the classic picture and Koplik spots.",
+   "lecturer": "The classic clinical picture is fever plus the 3 Cs (Cough, Coryza, Conjunctivitis) plus Koplik spots plus a descending maculopapular rash. Koplik spots — white/blue spots on the buccal mucosa opposite the molars — are pathognomonic and precede the rash by 1–2 days, so they are the single most useful early sign. The rash itself is maculopapular and confluent and spreads from the face down to the trunk and limbs.",
+   "explain": "## Read this first\n\n>> **Classic tetrad:** fever + **3 Cs** + **Koplik spots** + **descending rash.**\n\n>> **Koplik spots** = white/blue buccal spots opposite the molars — **pathognomonic**, appearing **before** the rash.\n\n>> **Rash:** maculopapular, confluent, **descends face → trunk → limbs.**",
+   "tie": "Being able to describe Koplik spots and the descending rash is the core clinical skill — it clinches the diagnosis at the bedside without waiting for labs."
+  },
+  {
+   "q": "Complications — the real killers — and immune amnesia.",
+   "lecturer": "Complications, not the rash, are what kill in measles, and they are commoner in Nigeria. Common complications: otitis media (7–9%), pneumonia (1–6%, the #1 cause of death), diarrhoea and worsening malnutrition. Rare but fatal: encephalitis (1/1000, ~15% mortality), SSPE — subacute sclerosing panencephalitis (1/10,000, fatal 6–8 years later), keratitis leading to blindness (especially with vitamin A deficiency), and reactivation of secondary TB. The Nigeria-specific combination of measles + malnutrition + vitamin A deficiency gives a high case fatality, and measles destroys the gut and immune memory — 'immune amnesia' — raising all-cause mortality for 2–3 years afterwards.",
+   "explain": "## Read this first\n\n>> **Common:** otitis media, **pneumonia (#1 killer)**, diarrhoea, worsening malnutrition.\n\n>> **Rare but fatal:** encephalitis, **SSPE (fatal 6–8 yrs later)**, keratitis → blindness, TB reactivation.\n\n>> **Immune amnesia:** measles erases immune memory → ↑ all-cause mortality for **2–3 years.**",
+   "tie": "Because 'measles kills through complications, not the rash', this is the section that justifies vitamin A, isolation and vaccination — pneumonia and immune amnesia are the reasons measles is deadly."
+  },
+  {
+   "q": "Diagnosis: clinical, laboratory (WHO standard) and differentials.",
+   "lecturer": "Diagnosis is mainly clinical: fever + 3 Cs + Koplik spots + descending rash is classic, though it is atypical in the vaccinated or partially immune. Laboratory confirmation follows the WHO standard: serology for measles IgM in serum is the gold standard (collect within 4–28 days of the rash); PCR detects measles RNA from a throat/nasopharyngeal swab or urine and is best in the first 3 days; viral culture is not routine. The differential diagnosis includes rubella, roseola, dengue, drug reaction and Kawasaki disease — and the key discriminator is Koplik spots plus the 3 Cs, which point to measles.",
+   "explain": "## Read this first\n\n>> **Clinical:** fever + 3 Cs + Koplik spots + descending rash.\n\n>> **Lab (WHO):** **measles IgM** serology (gold standard, days 4–28); **PCR** (swab/urine, best first 3 days).\n\n>> **DDx:** rubella, roseola, dengue, drug reaction, Kawasaki — separated by **Koplik + 3 Cs.**",
+   "tie": "Knowing the gold-standard IgM test and its timing window, plus the differentials, lets you confirm measles correctly and not mistake it for the many other fever-and-rash illnesses."
+  },
+  {
+   "q": "Management: supportive care and vitamin A.",
+   "lecturer": "There is no specific antiviral, so management is supportive. Isolate the child with airborne precautions and admit if severe or complicated. Provide hydration and nutrition — ORS, continue breastfeeding. Treat complications — antibiotics for pneumonia or otitis, antipyretics. Give vitamin A per WHO/Nigeria policy: 200,000 IU orally in 2 doses 24 hours apart for all children ≥ 8 months (100,000 IU if 6–11 months), which reduces mortality by about 50% in deficient areas like Nigeria. Offer post-exposure prophylaxis: vaccine within 72 hours, or immunoglobulin 0.25 ml/kg within 6 days, for high-risk contacts.",
+   "explain": "## Read this first\n\n>> **No antiviral** → supportive: **isolate + hydrate/feed + treat complications.**\n\n>> **Vitamin A** (the key drug): **200,000 IU ×2, 24 h apart** for ≥8 months (100,000 IU if 6–11 months) — **halves mortality.**\n\n>> **PEP for contacts:** vaccine **≤72 h**, or immunoglobulin **≤6 days.**",
+   "tie": "Since there is no cure, this supportive-plus-vitamin-A bundle is the entire treatment — and vitamin A is the one intervention that measurably lowers death, which is why it is always given."
+  },
+  {
+   "q": "Prevention: vaccines and Nigeria's strategy.",
+   "lecturer": "Prevention is vaccination with the live attenuated measles vaccine, given at 9 months and 15 months in Nigeria's routine schedule (as the MR vaccine). Efficacy is 85% at 9 months, 95% at 12 months and 97% with two doses; herd immunity needs 95% coverage to stop transmission. Nigeria's approach combines routine immunisation (9m + 15m MR, free at PHCs), supplementary immunisation activities (SIAs) — mass campaigns every 2–4 years for children 9–59 months (last national SIA in 2022) — and outbreak response with case-based vaccination within a 72-hour radius. The WHO target is measles elimination by 2030; Nigeria remains in the control phase.",
+   "explain": "## Read this first\n\n>> **Vaccine:** live attenuated, at **9 + 15 months** (MR).\n\n>> **Efficacy:** 85% at 9m, 95% at 12m, **97% with two doses**; herd immunity needs **95% coverage.**\n\n>> **Strategy:** routine + **SIAs (mass campaigns)** + outbreak response (ring vaccination ≤72 h).\n\n>> **Goal:** WHO elimination by **2030**; Nigeria = control phase.",
+   "tie": "These numbers explain why coverage is the whole battle: a very high 95% threshold, a two-dose schedule and mass campaigns to reach children missed by routine services."
+  },
+  {
+   "q": "Key takeaways for exams and clinic.",
+   "lecturer": "The high-yield points: the classic triad is fever + 3 Cs + Koplik spots = measles until proven otherwise; the deadly Nigerian combination is measles + malnutrition + vitamin A deficiency, so always give vitamin A; the complication to fear is pneumonia, the #1 cause of measles death; on public health, 1 case = an outbreak — notify the LGA and isolate immediately because it is airborne, not just droplet; 'immune amnesia' means measles wipes immune memory for 2–3 years, raising all-cause mortality afterwards; and the OSCE tip is to ask for vaccination history and vitamin A supplementation and to check the buccal mucosa for Koplik spots. The bottom line: measles kills through complications, not the rash.",
+   "explain": "## Read this first\n\n>> **Triad:** fever + 3 Cs + Koplik spots = measles.\n\n>> **Always give vitamin A** (measles + malnutrition + deficiency = deadly).\n\n>> **Fear pneumonia** (#1 killer); **1 case = outbreak** (airborne — notify + isolate).\n\n>> **OSCE:** ask vaccine + vitamin A history; inspect buccal mucosa for Koplik spots.\n\n>> **Bottom line:** measles kills through **complications, not the rash.**",
+   "tie": "This is the exam-and-clinic distillation — the points most likely to be asked and the actions most likely to save a child, gathered in one place."
+  }
+ ]
+}

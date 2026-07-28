@@ -1,0 +1,60 @@
+{
+ "deck": "primer",
+ "topic": "G6PD Deficiency in Children",
+ "cards": [
+  {
+   "q": "Introduction & inheritance: what G6PD deficiency is and who gets it.",
+   "lecturer": "G6PD (glucose-6-phosphate dehydrogenase) is an enzyme inside red blood cells whose job is to protect them from damage. If G6PD is missing or low, RBCs become weak against stress and break — haemolysis. It is therefore the most common RBC enzyme defect and causes haemolytic anaemia. It is inherited as X-linked recessive, so males (XY) are more affected and females (XX) are usually carriers. It is common in Africans, Asians and Mediterranean populations — because of malaria protection.",
+   "explain": "## Read this first\n\n>> **G6PD** = an enzyme inside RBCs that **protects them from oxidative damage.**\n\n>> Missing/low → RBCs break under stress = **haemolysis**; it is the **commonest RBC enzyme defect.**\n\n>> **Inheritance:** X-linked recessive — **males affected, females usually carriers.**\n\n>> Common in **Africa/Asia/Mediterranean** — because of **malaria protection.**",
+   "tie": "These three facts — an oxidative-defence enzyme, an X-linked pattern (think 'boys'), and a malaria link — frame the whole topic and explain its prevalence in Nigeria."
+  },
+  {
+   "q": "What G6PD does: the NADPH–glutathione protective chain.",
+   "lecturer": "G6PD's main job is to help produce NADPH. NADPH keeps glutathione in its reduced form, and reduced glutathione protects the RBC from oxidative stress (reactive oxygen species, ROS). So the chain is: G6PD → NADPH → reduced glutathione → protects the RBC. If G6PD is deficient, NADPH falls, reduced glutathione falls, and oxidative damage rises — so haemoglobin gets damaged, the RBC membrane gets damaged, and the RBC breaks (haemolysis).",
+   "explain": "## Read this first\n\n>> **The protective chain:** **G6PD → NADPH → reduced glutathione → protects the RBC** from ROS.\n\n>> **When deficient:** ↓NADPH → ↓reduced glutathione → **↑oxidative damage** → haemoglobin + membrane damaged → **haemolysis.**",
+   "tie": "Understanding this chain explains everything downstream — Heinz bodies, bite cells, why oxidant triggers cause crises, and why the enzyme matters so much."
+  },
+  {
+   "q": "Why older red cells are worse affected.",
+   "lecturer": "Older RBCs already have less enzyme activity — they have used it up. Because mature RBCs have lost their nucleus on maturing, they cannot synthesise new proteins, so every mature RBC is left with a limited number of G6PD molecules in a deficient patient, and as the cell gets older that supply is used up. So older RBCs cannot handle stress at all, and are destroyed first in acute haemolysis.",
+   "explain": "## Read this first\n\n>> Mature RBCs have **no nucleus** → **cannot make new G6PD.**\n\n>> Their enzyme supply is **limited and runs down with age.**\n\n>> So the **oldest red cells** can't handle stress and are **destroyed first** in a crisis.",
+   "tie": "This explains the pattern of an acute self-limiting crisis — the vulnerable old cells are cleared, and the newly made cells (with more enzyme) survive."
+  },
+  {
+   "q": "What actually destroys the RBC: oxidative stress, Heinz bodies and bite cells.",
+   "lecturer": "The destroyer is oxidative stress (very important), from sources including drugs (e.g. antimalarials), infections and chemicals (like fava beans). Inside the RBC: oxidants accumulate; haemoglobin gets damaged and forms Heinz bodies; the RBC becomes abnormal; and the spleen removes it by biting off the Heinz-body part (forming 'bite cells', which is why bite cells are seen on the blood smear) — or the cell bursts. The result is haemolysis and anaemia.",
+   "explain": "## Read this first\n\n>> **Destroyer:** oxidative stress (ROS) from **drugs, infections, fava beans.**\n\n>> **Inside the cell:** oxidants accumulate → damaged Hb forms **Heinz bodies** → the spleen **bites them off → 'bite cells'** on the smear (or the cell bursts).\n\n>> **Result:** haemolysis + anaemia.",
+   "tie": "Heinz bodies and bite cells are the classic smear findings — recognising them links the biochemistry to what you actually see down the microscope."
+  },
+  {
+   "q": "Variants of G6PD and the special condition of favism.",
+   "lecturer": "There are several variants (simple understanding): G6PD B+ is the normal variant in most populations; G6PD A+ is common in African-Americans and has reduced but partially functional activity; severe variants have markedly reduced G6PD activity and are more dangerous. Favism is a special condition where eating fava beans triggers massive oxidative stress: fava beans contain vicine and convicine, which are hydrolysed in the gut to divicine, a potent oxidant — the result is sudden severe haemolysis.",
+   "explain": "## Read this first\n\n>> **Variants:** **B+** = normal; **A+** = reduced but partially functional (African-Americans); **severe variants** = markedly reduced activity.\n\n>> **Favism:** fava beans → **vicine/convicine → divicine (a potent oxidant)** → **sudden severe haemolysis.**",
+   "tie": "The variants explain why severity differs between people, and favism is a classic, examinable trigger with a neat biochemical mechanism (divicine)."
+  },
+  {
+   "q": "Clinical features and the triggers (risk factors).",
+   "lecturer": "Most individuals are asymptomatic. Symptoms arise 48–96 hours (2–4 days) after ingestion of the offending drug — because the reactive oxygen species must accumulate to a high enough concentration to cause the crisis — and severity depends on the level of enzyme defect. Symptoms are pallor (anaemia), jaundice (bilirubin from RBC breakdown), fatigue and sometimes dark urine; the key idea is that the patient is normal between episodes. The main triggers are: infections (most common) — the body's phagocytes (neutrophils, macrophages) produce a lot of ROS to fight infection, which in a deficient child causes acute haemolysis; oxidant drugs — e.g. antimalarials (primaquine), sulfa drugs; and fava beans.",
+   "explain": "## Read this first\n\n>> **Between episodes: NORMAL.** A crisis appears **48–96 h (2–4 days) after the trigger** (ROS must build up).\n\n>> **Symptoms:** pallor, jaundice, fatigue, sometimes dark urine.\n\n>> **Triggers:** **infection (most common)**, oxidant drugs (antimalarials/primaquine, sulfa), fava beans.",
+   "tie": "Knowing the delayed, self-limiting crisis and its triggers is what lets you both prevent episodes (avoid triggers) and recognise one when a deficient child is exposed."
+  },
+  {
+   "q": "Balanced polymorphism and malaria protection (high-yield).",
+   "lecturer": "Balanced polymorphism is the maintenance of two or more alleles in a population because the heterozygote has a survival advantage. In mild G6PD deficiency, RBCs are fragile — but the malaria parasite cannot survive well, because any little oxidative stress on the RBC (caused by the plasmodium itself) makes the fragile G6PD-deficient RBC haemolyse. So infected RBCs are destroyed early and the parasite cannot survive, giving partial protection against malaria. This explains why the disease is common in malaria areas: the malaria parasite lives inside RBCs, and the fragile deficient cells destroy the parasite along with themselves.",
+   "explain": "## Read this first\n\n>> **Balanced polymorphism:** two alleles persist because the **heterozygote has a survival advantage.**\n\n>> Here, fragile deficient RBCs **haemolyse when parasitised** — killing the parasite too → **partial malaria protection.**\n\n>> This is why G6PD deficiency is **common in malaria-endemic areas.**",
+   "tie": "This ties the whole topic back to why G6PD deficiency is so common in Nigeria — the same fragility that harms is what has kept the gene alive."
+  },
+  {
+   "q": "Investigations: confirming the diagnosis and the timing pitfall.",
+   "lecturer": "Diagnosis is confirmed by evidence of reduced G6PD activity in RBCs — enzyme activity of 10% or less of normal confirms it — measured by spectrophotometry or newer techniques (RDTs). The important point is that the test is best done when the patient is stable, not during a crisis. This is because during haemolysis the old (deficient) RBCs are destroyed while the new reticulocytes have normal enzyme, which can give a falsely normal result. So the test is best performed when the reticulocyte count is normal.",
+   "explain": "## Read this first\n\n>> **Confirm with reduced RBC G6PD activity** (**≤10% of normal**), by spectrophotometry or RDT.\n\n>> **Timing pitfall:** test **when stable, not during a crisis** — in a crisis the deficient old cells are gone and young **reticulocytes have normal enzyme** → **falsely normal.**\n\n>> Best done when the **reticulocyte count is normal.**",
+   "tie": "The timing pitfall is a classic exam point — a 'normal' result during a crisis does not exclude the diagnosis, so you must retest after recovery."
+  },
+  {
+   "q": "Treatment and management.",
+   "lecturer": "The condition is self-limiting — once the trigger is removed, haemolysis stops. Blood transfusion may be required in severe cases. Management therefore is: (1) avoid triggers, (2) treat infection, and (3) in severe cases, blood transfusion.",
+   "explain": "## Read this first\n\n>> **Self-limiting:** remove the trigger → haemolysis stops.\n\n>> **Management:** **(1) avoid triggers · (2) treat infection · (3) transfuse if severe.**",
+   "tie": "The management is refreshingly simple — because the crisis is self-limiting, prevention (avoiding triggers) and supportive care are the whole plan, with transfusion held for severe episodes."
+  }
+ ]
+}

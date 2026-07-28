@@ -1,0 +1,60 @@
+{
+ "deck": "primer",
+ "topic": "Malaria",
+ "cards": [
+  {
+   "q": "Epidemiology & local context: how big is malaria in Nigeria and who gets it?",
+   "lecturer": "Malaria is a parasitic infection transmitted by the female Anopheles mosquito. Nigeria carries a huge share of the world's burden — about 27% of global cases and 31% of global deaths. Plasmodium falciparum causes ~95% of cases and nearly all severe disease. Transmission is perennial (all-year) in the South and seasonal in the North. The susceptible (at-risk) groups are children under 5, pregnant women and non-immune adults. The opening principle is that history is targeted at the patient in front of you.",
+   "explain": "## Read this first\n\n>> **Parasite:** P. falciparum (95%, and almost all severe disease). **Vector:** female Anopheles mosquito.\n\n>> **Nigeria:** ~**27% of global cases, ~31% of global deaths.**\n\n>> **Transmission:** perennial in the South, seasonal in the North.\n\n>> **At-risk:** under-5s, pregnant women, non-immune adults.",
+   "tie": "These numbers and risk groups are the backdrop for everything that follows — why severe malaria is common in Nigerian children and why the lecture focuses on recognising it fast."
+  },
+  {
+   "q": "Life cycle: trace the parasite from mosquito to human and back.",
+   "lecturer": "The life cycle has three stages. Stage 1 — transmission to human: the mosquito bites and injects sporozoites, which travel to the liver. Stage 2 — the sporozoite infects a liver cell (hepatocyte). Stage 3 — the liver cell ruptures, releasing merozoites that infect red blood cells; inside the RBC the parasite undergoes the sexual cycle, producing forms taken up when another mosquito bites, completing transmission back to the mosquito. The pre-erythrocytic (liver) stage lasts 6–14 days for P. falciparum and is asymptomatic. The erythrocytic (blood) stage is where fever and haemolysis — the clinical signs — appear.",
+   "explain": "## Read this first\n\n>> **Route:** bite → **sporozoite → liver (hepatocyte) → merozoite → red blood cell** → back to the mosquito.\n\n>> **Liver stage:** 6–14 days, **no symptoms.**\n\n>> **Blood stage:** where **fever + haemolysis** begin — the clinical signs.",
+   "tie": "Knowing that symptoms come only from the blood stage explains the incubation period and why a child can be infected yet well for days before falling ill."
+  },
+  {
+   "q": "Cyto-adherence & pathogenesis: why does P. falciparum cause severe malaria?",
+   "lecturer": "Cyto-adherence is a special quality of P. falciparum that makes infected red cells stick to blood-vessel walls (sequestration) — one of the key causes of complications. In severe malaria the chain is: microvascular sequestration → hypoxia → lactic acidosis → cytokine storm → inflammatory response syndrome. In parallel, haemolysis causes anaemia and splenic dysfunction, with haemoglobinuria and thrombocytopenia, and sequestration in the brain produces cerebral malaria. Organ involvement includes mild liver-enzyme elevation, jaundice and hepatic dysfunction (renal/hepatic); a normal chest or ARDS (respiratory); and pulmonary oedema with severe anaemia (CNS/pulmonary).",
+   "explain": "## Read this first\n\n>> **Cyto-adherence** → infected RBCs stick to vessels (**sequestration**) → complications. This is unique to falciparum.\n\n>> **Severe-disease chain:** sequestration → hypoxia → lactic acidosis → cytokine storm.\n\n>> **Haemolysis** → anaemia, haemoglobinuria, thrombocytopenia; **brain sequestration** → cerebral malaria.",
+   "tie": "Sequestration is the single idea that explains why falciparum — and not the milder species — causes cerebral malaria, organ failure and death."
+  },
+  {
+   "q": "Clinical features: how do you tell uncomplicated from severe malaria?",
+   "lecturer": "The clinical picture is compared system by system. Fever: uncomplicated is intermittent with rigor and chills; severe is high-grade and continuous. CNS: uncomplicated causes headache and malaise; severe causes impaired consciousness or unconsciousness and seizures. Haematological: uncomplicated has mild anaemia and thrombocytopenia; severe has severe anaemia (Hb < 5) and DIC. Metabolic: uncomplicated has mild hypoglycaemia; severe has hypoglycaemia with lactic acidosis. The take-home is that fever plus unconsciousness means cerebral malaria until proven otherwise.",
+   "explain": "## Read this first\n\n>> **Fever:** intermittent (uncomplicated) vs continuous high-grade (severe).\n\n>> **CNS:** headache/malaise vs **impaired consciousness / seizures.**\n\n>> **Blood:** mild anaemia vs **Hb < 5 + DIC.**\n\n>> **Metabolic:** mild low sugar vs **hypoglycaemia + lactic acidosis.**\n\n>> **Trigger:** fever + unconscious = cerebral malaria until proven otherwise.",
+   "tie": "This uncomplicated-vs-severe split is the decision that drives management — oral ACT for uncomplicated, IV artesunate plus complication control for severe."
+  },
+  {
+   "q": "Diagnosis: which test, when, and what are the traps?",
+   "lecturer": "Diagnosis rests on clinical suspicion plus tests. The RDT (rapid diagnostic test) detects the HRP antigen — it is fast and good for P. falciparum, but the antigen stays positive for 2–4 weeks after recovery, so a positive RDT may reflect a recent, already-treated episode. Microscopy is the gold standard: a thick film gives parasite density (reported per µL, e.g. 100 up to 100,000/µL) and a thin film identifies the species. Other investigations are FBC, renal function, blood glucose and LFTs, with an arterial blood gas in severe disease. By level of care, RDT is used at the primary health-care level and microscopy at secondary/tertiary level.",
+   "explain": "## Read this first\n\n>> **RDT** — detects the **HRP antigen**; fast, but **stays positive 2–4 weeks** after cure (can mislead).\n\n>> **Microscopy (gold standard):** **thick film = density**, **thin film = species.**\n\n>> **Also:** FBC, glucose, renal/liver function; **blood gas if severe.**\n\n>> **Level of care:** RDT at PHC, microscopy at 2°/3° level.",
+   "tie": "Understanding the RDT's antigen-lag and microscopy's two films lets you interpret confusing results — like RDT-positive/film-negative — without withholding treatment from a sick child."
+  },
+  {
+   "q": "Management of uncomplicated malaria: the standard plan.",
+   "lecturer": "Uncomplicated malaria is treated with ACT (artemisinin-based combination therapy). Add antipyresis with a diclofenac or paracetamol suppository, and tepid sponging with luke-warm water to relieve fever (normal child temperature is 37.2–37.4°C). Give supportive treatment — hydration or infusion, and blood transfusion if needed — and keep artesunate available in case the child deteriorates. Fever clearance is expected over about 3 days; if fever has not cleared, look for another cause such as tonsillitis.",
+   "explain": "## Read this first\n\n>> **Drug:** **ACT** (artemisinin-based combination therapy).\n\n>> **Fever:** paracetamol/diclofenac suppository + **luke-warm tepid sponging** (normal temp 37.2–37.4°C).\n\n>> **Support:** hydrate/infuse; transfuse if needed; have artesunate ready.\n\n>> **Follow-up:** fever should clear in **~3 days** — if not, seek another cause (e.g. tonsillitis).",
+   "tie": "This is the everyday malaria plan; the key exam point is that persisting fever after adequate ACT means you must look for a second diagnosis, not just repeat the drug."
+  },
+  {
+   "q": "Management of severe malaria & complications: the emergency plan.",
+   "lecturer": "Severe malaria is a medical emergency. IV artesunate is first-line — continue it until the child regains consciousness; quinine is second-line, and you should calculate the plasma parasite density. Manage the complications: keep the airway patent; give an anticonvulsant for convulsions; avoid steroids; for severe anaemia transfuse blood (especially if the child is in distress) with a threshold of Hb < 5 g/dl; for AKI watch fluid balance; and for hypoglycaemia check blood glucose 4-hourly and correct with 10% dextrose. A useful rule of thumb is Hb ≈ ⅓ × PCV, and sickle-cell patients need a stable Hb kept where they are comfortable.",
+   "explain": "## Read this first\n\n>> **First-line:** **IV artesunate** until conscious; **second-line quinine.**\n\n>> **Complication checklist:** airway patent · **anticonvulsant** for fits · **avoid steroids** · **transfuse if Hb < 5** · watch fluids (AKI) · **glucose 4-hourly + 10% dextrose.**\n\n>> **Rule of thumb:** **Hb ≈ ⅓ × PCV.**",
+   "tie": "This bundle is the life-saving core of the topic — the right drug (artesunate) plus a systematic complication checklist is exactly what an examiner and a sick child both need."
+  },
+  {
+   "q": "Malaria in pregnancy and prevention & challenges.",
+   "lecturer": "In pregnancy, malaria is treated by trimester: the first trimester with quinine + clindamycin, and later trimesters with ACT. Prevention combines vector control (insecticide; avoiding bushy environments) and chemoprophylaxis (Fansidar in pregnancy; mefloquine, doxycycline). The challenges to control are drug resistance in P. falciparum — including partial resistance to ACT — RDT false negatives, poor access to care, and poor antimicrobial stewardship (abuse of antimicrobial drugs).",
+   "explain": "## Read this first\n\n>> **Pregnancy:** **1st trimester = quinine + clindamycin; later = ACT.**\n\n>> **Prevention:** vector control (insecticide, clear the bush) + **chemoprophylaxis** (Fansidar in pregnancy; mefloquine, doxycycline).\n\n>> **Challenges:** **ACT partial resistance**, RDT false negatives, access, poor stewardship.",
+   "tie": "These are the public-health and special-population points — they explain the pregnancy-specific drugs and why malaria control remains hard in Nigeria despite effective treatment."
+  },
+  {
+   "q": "Mortality, take-home points & clinical cases.",
+   "lecturer": "Even when treated, mortality in severe malaria can be high — fast treatment is essential. The take-home is that severe malaria with fever plus unconsciousness should make you think cerebral malaria. Two teaching cases: (1) a 14-year-old with 4-day fever, headache and rigor, Hb 6.2, positive RDT and density > 100,000/µL is severe malaria — IV artesunate is preferred over quinine because it gives faster parasite clearance, lower mortality and a better safety profile (quinine risks arrhythmias, hypotension, hypoglycaemia). (2) A 4-year-old with fever and seizure, RDT positive but film negative, is an emergency — severe malaria until proven otherwise; check for another cause and repeat microscopy in 12–24 hours.",
+   "explain": "## Read this first\n\n>> **Speed matters:** mortality stays high even when treated.\n\n>> **Take-home:** fever + unconscious → **cerebral malaria** until proven otherwise.\n\n>> **Case 1:** high-density severe malaria → **artesunate > quinine** (faster, safer).\n\n>> **Case 2:** RDT+ / film− with seizure → treat as severe, **repeat film in 12–24h.**",
+   "tie": "The cases show how the principles play out in real decisions — recognising severe disease instantly and not being falsely reassured by a negative film."
+  }
+ ]
+}

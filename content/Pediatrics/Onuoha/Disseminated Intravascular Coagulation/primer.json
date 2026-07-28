@@ -1,0 +1,36 @@
+{
+ "deck": "primer",
+ "topic": "Disseminated Intravascular Coagulation",
+ "cards": [
+  {
+   "q": "Introduction & aetiology: what DIC is and what triggers it.",
+   "lecturer": "DIC is a fatal condition that results in abnormal clotting of blood in all parts of the body and is life-threatening if left untreated. It is not a disease in itself — it is a final common pathway that occurs when the body's clotting system goes out of control: the body presses the 'clotting button' everywhere at once, then runs out of clotting materials, then starts bleeding uncontrollably. DIC always starts from something big that shocks the body: severe infection (sepsis — bacteria release toxins causing massive inflammation), trauma/injury (tissue damage releases clotting activators), malignancy (cancer cells activate clotting pathways), envenomation (some venoms activate clotting), and medical complications (transfusions, surgeries, obstetric complications).",
+   "explain": "## Read this first\n\n>> **DIC =** abnormal clotting throughout the body; **not a disease itself** but a **final common pathway.**\n\n>> **The idea:** clot everywhere → run out of materials → bleed everywhere.\n\n>> **Triggers:** **sepsis (classic)**, trauma, malignancy, envenomation, medical/obstetric complications.",
+   "tie": "Understanding DIC as always secondary to a trigger is what makes treatment logical — you can never fix it without finding and stopping the underlying cause."
+  },
+  {
+   "q": "Normal clotting vs what goes wrong in DIC.",
+   "lecturer": "Normally, clotting is controlled and limited: an injury occurs, clotting is localised to the injury site, platelets and clotting factors form a clot, bleeding stops, and the system shuts off. In DIC this control is lost. A trigger releases pro-coagulant substances that activate the entire clotting cascade throughout the body, so the process becomes generalised instead of local.",
+   "explain": "## Read this first\n\n>> **Normal clotting:** localised to the injury, forms a clot, stops bleeding, **switches off** — controlled and limited.\n\n>> **DIC:** the trigger activates the **whole cascade body-wide** — clotting becomes **generalised and uncontrolled.**",
+   "tie": "Contrasting normal local haemostasis with the body-wide activation of DIC is the setup for the two-phase pathophysiology that follows."
+  },
+  {
+   "q": "Pathophysiology: the two phases and consumption coagulopathy.",
+   "lecturer": "There are two phases. Phase 1 — excessive clotting: the trigger releases pro-coagulant substances, the entire clotting cascade is activated throughout the body, and tiny clots form everywhere, especially in small vessels, causing vaso-occlusion (blocked vessels), tissue ischaemia and damage to organs — especially the kidneys, brain and lungs. The critical point is consumption: while forming all these clots, platelets and clotting factors are used up — 'consumption coagulopathy'. Phase 2 — bleeding: now the body has no platelets and no clotting factors, so even small injuries cause massive bleeding from orifices. The simple flow: trigger → mass clotting → consumption of platelets/factors → no clotting ability → severe bleeding. Both clotting and bleeding happen because inside the vessels there is clotting while outside/at wounds there is bleeding — the clotting resources were used up internally.",
+   "explain": "## Read this first\n\n>> **Phase 1 — clotting:** cascade fires body-wide → micro-clots block small vessels → **ischaemia** (kidneys, brain, lungs).\n\n>> **Consumption coagulopathy:** the clots **use up platelets + factors.**\n\n>> **Phase 2 — bleeding:** with supplies gone, even small injuries → **massive bleeding.**\n\n>> **Why both:** inside vessels clot, outside bleeds — supplies spent internally.",
+   "tie": "The two-phase model is the single most important idea in DIC — it resolves the paradox of simultaneous clotting and bleeding and explains every lab finding and treatment step."
+  },
+  {
+   "q": "Clinical features & investigations.",
+   "lecturer": "Clinically DIC presents with (1) bleeding from orifices — gums, IV sites, wounds and body orifices; (2) clotting effects — organ damage due to blocked vessels; and (3) systemic effects — hypotension (from blood loss), shock (from bleeding and poor organ perfusion) and coma (from brain involvement). Investigations show: platelets low (used up in clotting); clotting factors low, giving prolonged PT and aPTT; D-dimer raised (indicating clot breakdown); and FBC that may show anaemia (due to bleeding).",
+   "explain": "## Read this first\n\n>> **Clinically:** bleeding from orifices (gums, IV sites, wounds) + organ damage + **hypotension, shock, coma.**\n\n>> **Investigations:** **platelets ↓ · PT and aPTT ↑ · D-dimer ↑ · FBC** may show anaemia.\n\n>> Each result maps onto the two phases — consumption (low platelets/factors) and breakdown (high D-dimer).",
+   "tie": "Linking each lab result to the pathophysiology lets you recognise DIC quickly — a bleeding, shocked child with low platelets and high D-dimer is DIC until proven otherwise."
+  },
+  {
+   "q": "Complications, treatment and prognosis.",
+   "lecturer": "Complications come from both phases: from clotting — acute kidney injury, organ failure, cardiorespiratory failure; from bleeding — severe anaemia, shock, coma and death; combined, they give multi-organ failure. Treatment runs in two directions. First, replace what is lost — platelets, fresh frozen plasma (clotting factors) and blood transfusion. Second, and most important, stop the cause — treat sepsis with antibiotics, remove dead tissue, treat the malignancy, and consider plasmapheresis (which removes harmful substances by removing the plasma content of the patient's blood). If you don't stop the cause, DIC continues. Prognosis is generally poor because DIC progresses rapidly, clotting factors and platelets are hard to replace quickly, and the underlying disease (e.g. septic shock) is severe; DIC is a common pathway to death from septic shock and other underlying causes.",
+   "explain": "## Read this first\n\n>> **Complications:** clotting side → AKI, organ/cardiorespiratory failure; bleeding side → severe anaemia, shock, coma, death; combined → **multi-organ failure.**\n\n>> **Treat in two directions:** **(1) replace** (platelets, FFP, blood); **(2) stop the cause** (antibiotics/debride/treat malignancy ± plasmapheresis) — the priority.\n\n>> **Prognosis: poor** — rapid course, hard-to-replace supplies, severe underlying disease.",
+   "tie": "This two-direction plan, with 'stop the cause' as the priority, is the practical takeaway — and it explains why DIC remains a leading pathway to death from septic shock despite treatment."
+  }
+ ]
+}

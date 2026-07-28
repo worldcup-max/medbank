@@ -1,0 +1,435 @@
+{
+ "deck": "recall",
+ "topic": "Malaria",
+ "cards": [
+  {
+   "q": "What share of the global malaria burden does Nigeria carry?",
+   "a": "**Nigeria accounts for about 27% of global cases and 31% of global deaths.**\n\n## Understanding it\n- Nigeria is the single highest-burden country in the world for malaria.\n- This is why local epidemiology dominates the lecture.\n\n>> ~27% of cases, ~31% of deaths — the highest national burden.",
+   "opts": [
+    "~1% of cases and ~10% of deaths",
+    "~27% of cases and ~31% of deaths",
+    "~50% of cases and ~50% of deaths",
+    "~5% of cases and ~5% of deaths"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Which Plasmodium species causes 95% of malaria cases?",
+   "a": "**Plasmodium falciparum — responsible for ~95% of cases and nearly all severe disease.**\n\n## Understanding it\n- Falciparum is the species that cyto-adheres and causes severe/cerebral malaria.\n- The other species rarely cause life-threatening disease.\n\n>> P. falciparum = 95% of cases and almost all severe malaria.",
+   "opts": [
+    "Plasmodium ovale",
+    "Plasmodium malariae",
+    "Plasmodium vivax",
+    "Plasmodium falciparum"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the vector of malaria?",
+   "a": "**The female Anopheles mosquito.**\n\n## Understanding it\n- Only the female takes blood meals (needed for her eggs) and so transmits the parasite.\n- Vector control targets this mosquito.\n\n>> Female Anopheles mosquito.",
+   "opts": [
+    "The male Anopheles mosquito",
+    "The female Anopheles mosquito",
+    "The female Aedes mosquito",
+    "The Culex mosquito"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the transmission pattern of malaria in Nigeria?",
+   "a": "**Perennial (all-year) in the South and seasonal in the North.**\n\n## Understanding it\n- The humid South sustains mosquitoes year-round; the drier North has seasonal peaks.\n- This shapes when outbreaks occur regionally.\n\n>> Perennial in the South, seasonal in the North.",
+   "opts": [
+    "Seasonal in the South, perennial in the North",
+    "Perennial in the South, seasonal in the North",
+    "Only during the dry season",
+    "Perennial everywhere"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Who are the susceptible (at-risk) groups for malaria?",
+   "a": "**Children under 5 years, pregnant women, and non-immune adults.**\n\n## Understanding it\n- These groups lack protective acquired immunity, so they get severe disease.\n- History and prevention are targeted at them.\n\n>> Under-5s, pregnant women, non-immune adults.",
+   "opts": [
+    "Children <5, pregnant women, non-immune adults",
+    "Only elderly men",
+    "Immune adults who grew up in endemic areas",
+    "Only people with sickle cell disease"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What are the three stages of the malaria life cycle as taught?",
+   "a": "**Transmission to human (mosquito injects sporozoites → liver); liver infection of hepatocytes; and blood stage where merozoites infect RBCs and complete the sexual cycle back to the mosquito.**\n\n## Understanding it\n- Stage 1: bite injects sporozoites to the liver. Stage 2: hepatocyte infection. Stage 3: RBC infection + transmission back.\n- The cycle closes when a mosquito bites and picks up the blood forms.\n\n>> Bite→liver→blood, then back to the mosquito.",
+   "opts": [
+    "Gut→lung→liver",
+    "Injection of sporozoites→liver→blood-stage in RBCs",
+    "Only a blood stage, no liver stage",
+    "RBC first, then liver, then brain"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does the mosquito inject when it bites a human?",
+   "a": "**Sporozoites, which travel to the liver.**\n\n## Understanding it\n- Sporozoites are the infective form injected in saliva.\n- They home to hepatocytes to begin the liver stage.\n\n>> Sporozoites → liver.",
+   "opts": [
+    "Gametocytes",
+    "Merozoites",
+    "Sporozoites",
+    "Trophozoites"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "How long does the pre-erythrocytic (liver) stage last for P. falciparum, and is it symptomatic?",
+   "a": "**It lasts 6–14 days and is asymptomatic.**\n\n## Understanding it\n- The liver stage is clinically silent — no fever yet.\n- Symptoms only begin once the blood stage starts.\n\n>> Liver stage: 6–14 days, no symptoms.",
+   "opts": [
+    "Several months, always symptomatic",
+    "6–14 days, and asymptomatic",
+    "1–2 days, with high fever",
+    "24 hours, with rash"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the clinical signs of the erythrocytic (blood) stage?",
+   "a": "**Fever and haemolysis.**\n\n## Understanding it\n- When infected red cells rupture, fever and red-cell breakdown appear.\n- This is the stage that produces symptoms.\n\n>> Blood stage = fever + haemolysis.",
+   "opts": [
+    "A skin rash only",
+    "Fever and haemolysis",
+    "A painless liver mass only",
+    "No symptoms at all"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is cyto-adherence and why does it matter?",
+   "a": "**A quality of P. falciparum that makes infected red cells stick to blood-vessel walls (sequestration) — a key cause of complications.**\n\n## Understanding it\n- Sequestered cells block microvessels, causing organ damage including cerebral malaria.\n- It is why falciparum, not the others, causes severe disease.\n\n>> Cyto-adherence → sequestration → complications.",
+   "opts": [
+    "The parasite leaves the blood for the gut",
+    "It makes the parasite easier to kill",
+    "Red cells become larger and rounder",
+    "Infected RBCs stick to vessel walls, causing sequestration"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Outline the pathogenesis chain of severe malaria from sequestration.",
+   "a": "**Microvascular sequestration → hypoxia → lactic acidosis → cytokine storm → inflammatory response syndrome.**\n\n## Understanding it\n- Blocked microvessels starve tissues of oxygen, driving acidosis and a cytokine storm.\n- This systemic inflammation is what makes severe malaria lethal.\n\n>> Sequestration→hypoxia→lactic acidosis→cytokine storm.",
+   "opts": [
+    "Liver failure→jaundice only",
+    "Sequestration→hypoxia→lactic acidosis→cytokine storm",
+    "Haemolysis→polycythaemia→clotting",
+    "Sequestration→more oxygen→recovery"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What haematological consequences follow haemolysis in malaria?",
+   "a": "**Anaemia and splenic dysfunction, with haemoglobinuria and thrombocytopenia.**\n\n## Understanding it\n- Destroyed red cells cause anaemia; free haemoglobin appears in urine; platelets fall.\n- The spleen, overworked, becomes dysfunctional.\n\n>> Haemolysis → anaemia, haemoglobinuria, thrombocytopenia.",
+   "opts": [
+    "A raised haematocrit",
+    "Iron overload only",
+    "Polycythaemia and thrombocytosis",
+    "Anaemia, haemoglobinuria and thrombocytopenia"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Compare fever in uncomplicated vs severe malaria.",
+   "a": "**Uncomplicated: intermittent, with rigor and chills. Severe: high-grade and continuous.**\n\n## Understanding it\n- The pattern shifts from intermittent to continuous as disease worsens.\n- Continuous high fever is a warning sign.\n\n>> Uncomplicated = intermittent; severe = continuous high-grade.",
+   "opts": [
+    "Uncomplicated continuous; severe intermittent",
+    "Fever is absent in severe malaria",
+    "Both are always low-grade",
+    "Uncomplicated intermittent; severe continuous high-grade"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Compare the CNS features of uncomplicated vs severe malaria.",
+   "a": "**Uncomplicated: headache and malaise. Severe: impaired consciousness/unconsciousness and seizures.**\n\n## Understanding it\n- Altered consciousness or seizures signal cerebral involvement — severe disease.\n- Headache alone is uncomplicated.\n\n>> Severe = impaired consciousness/seizure (cerebral malaria).",
+   "opts": [
+    "Uncomplicated causes seizures",
+    "Uncomplicated headache/malaise; severe impaired consciousness/seizure",
+    "Severe causes only mild headache",
+    "Both cause coma"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Compare the haematological features of uncomplicated vs severe malaria.",
+   "a": "**Uncomplicated: mild anaemia and thrombocytopenia. Severe: severe anaemia (Hb < 5) and DIC.**\n\n## Understanding it\n- Severe malaria drives Hb below 5 and can trigger DIC.\n- Mild anaemia alone is uncomplicated.\n\n>> Severe = Hb < 5 + DIC.",
+   "opts": [
+    "Both cause polycythaemia",
+    "No blood changes occur",
+    "Severe causes only mild anaemia",
+    "Uncomplicated mild anaemia; severe anaemia (Hb<5) + DIC"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Compare the metabolic features of uncomplicated vs severe malaria.",
+   "a": "**Uncomplicated: mild hypoglycaemia. Severe: hypoglycaemia with lactic acidosis.**\n\n## Understanding it\n- Severe malaria adds lactic acidosis to the low blood sugar.\n- Both feature hypoglycaemia, but severe is worse.\n\n>> Severe = hypoglycaemia + lactic acidosis.",
+   "opts": [
+    "Severe causes hyperglycaemia",
+    "No metabolic change occurs",
+    "Both cause metabolic alkalosis",
+    "Uncomplicated mild hypoglycaemia; severe hypoglycaemia + lactic acidosis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What antigen does a malaria RDT detect, and what is its key caveat?",
+   "a": "**The HRP antigen — fast and good for P. falciparum, but it stays positive for 2–4 weeks after recovery.**\n\n## Understanding it\n- A positive RDT confirms infection but may reflect a recent, already-treated episode.\n- So a positive RDT with a negative film can be a past infection.\n\n>> RDT = HRP antigen; stays positive 2–4 weeks post-recovery.",
+   "opts": [
+    "Glucose; unrelated to timing",
+    "The DNA of the parasite; clears immediately",
+    "The HRP antigen; positive for 2–4 weeks after recovery",
+    "Antibodies; positive for years"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the gold-standard test for malaria, and what does each film show?",
+   "a": "**Microscopy — the thick film gives parasite density; the thin film identifies the species.**\n\n## Understanding it\n- Thick film = how many parasites (density); thin film = which species.\n- Microscopy remains the reference standard.\n\n>> Microscopy: thick = density, thin = species.",
+   "opts": [
+    "Blood culture",
+    "Serology — antibody titres",
+    "Microscopy — thick film density, thin film species",
+    "RDT — it replaces microscopy"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "At what levels of care are RDT and microscopy used?",
+   "a": "**RDT at the primary health-care level; microscopy at secondary/tertiary level.**\n\n## Understanding it\n- RDTs are simple and used at PHCs; microscopy needs a lab, at higher levels.\n- This matches resources to setting.\n\n>> RDT at PHC; microscopy at 2°/3° level.",
+   "opts": [
+    "RDT at PHC; microscopy at secondary/tertiary level",
+    "Microscopy at PHC; RDT at tertiary",
+    "Both only at tertiary level",
+    "Neither is used in Nigeria"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the first-line treatment of uncomplicated malaria?",
+   "a": "**ACT — artemisinin-based combination therapy.**\n\n## Understanding it\n- ACT is the standard oral treatment for uncomplicated disease.\n- Combination therapy limits resistance.\n\n>> Uncomplicated → ACT.",
+   "opts": [
+    "IV quinine",
+    "IV artesunate",
+    "ACT (artemisinin-based combination therapy)",
+    "Chloroquine monotherapy"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Over how long should fever clear in uncomplicated malaria, and what if it does not?",
+   "a": "**About 3 days; if fever has not cleared, look for another cause (e.g. tonsillitis).**\n\n## Understanding it\n- Persisting fever after adequate ACT suggests a co-existing infection.\n- Do not assume treatment failure without checking.\n\n>> ~3 days; if not, seek another cause.",
+   "opts": [
+    "~3 days; if not, look for another cause",
+    "Within 1 hour; otherwise give steroids",
+    "Fever never clears in malaria",
+    "2 weeks; otherwise repeat ACT twice"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the normal body temperature range of children quoted in the lecture?",
+   "a": "**37.2–37.4°C.**\n\n## Understanding it\n- This is the reference for judging fever in children.\n- Above this is treated with antipyretics and sponging.\n\n>> Normal child temp: 37.2–37.4°C.",
+   "opts": [
+    "37.2–37.4°C",
+    "39–40°C",
+    "35.0–35.5°C",
+    "36.0–36.2°C"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the first-line treatment of severe malaria?",
+   "a": "**IV artesunate — continued until the child regains consciousness.**\n\n## Understanding it\n- IV artesunate clears parasites fast and lowers mortality.\n- Continue it until the child is conscious, then step down.\n\n>> Severe → IV artesunate until conscious.",
+   "opts": [
+    "Oral ACT alone",
+    "Oral chloroquine",
+    "IV quinine as first choice",
+    "IV artesunate"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the second-line treatment of severe malaria?",
+   "a": "**Quinine.**\n\n## Understanding it\n- Quinine is the fallback if artesunate is unavailable.\n- It carries more risk (arrhythmia, hypoglycaemia).\n\n>> Second-line severe malaria = quinine.",
+   "opts": [
+    "Paracetamol",
+    "Chloroquine",
+    "Doxycycline",
+    "Quinine"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is severe anaemia managed in severe malaria, and at what threshold do you transfuse?",
+   "a": "**Transfuse blood — especially if the child is in distress — with a threshold of Hb < 5 g/dl.**\n\n## Understanding it\n- A child in respiratory distress with low Hb needs blood urgently.\n- Hb < 5 g/dl is the transfusion trigger.\n\n>> Transfuse if Hb < 5 g/dl (or distress).",
+   "opts": [
+    "Give oral iron only",
+    "Transfuse blood; threshold Hb < 5 g/dl",
+    "Never transfuse in malaria",
+    "Only transfuse if Hb < 2 g/dl"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is hypoglycaemia managed in severe malaria?",
+   "a": "**Check blood glucose 4-hourly and correct with 10% dextrose.**\n\n## Understanding it\n- Severe malaria (and quinine) cause hypoglycaemia; monitor and correct.\n- 10% dextrose is the corrective fluid.\n\n>> Check glucose 4-hourly; correct with 10% dextrose.",
+   "opts": [
+    "Check glucose once daily",
+    "Give insulin",
+    "Correct with normal saline only",
+    "Check glucose 4-hourly; correct with 10% dextrose"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which drug class should be avoided in severe malaria, and how are convulsions managed?",
+   "a": "**Avoid steroids; treat convulsions with an anticonvulsant.**\n\n## Understanding it\n- Steroids worsen outcomes in cerebral malaria.\n- Seizures are controlled with anticonvulsants and airway care.\n\n>> No steroids; give anticonvulsants for fits.",
+   "opts": [
+    "Avoid all drugs",
+    "Give steroids and an anticonvulsant",
+    "Avoid steroids; give an anticonvulsant for convulsions",
+    "Give steroids; ignore convulsions"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the rule-of-thumb relationship between Hb and PCV?",
+   "a": "**Hb is approximately one-third of PCV.**\n\n## Understanding it\n- A quick bedside estimate: Hb ≈ PCV ÷ 3.\n- Useful when only PCV is available.\n\n>> Hb ≈ ⅓ × PCV.",
+   "opts": [
+    "Hb = PCV",
+    "Hb ≈ ⅓ × PCV",
+    "Hb ≈ 3 × PCV",
+    "Hb ≈ ½ × PCV"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is malaria treated in the first trimester of pregnancy?",
+   "a": "**Quinine plus clindamycin.**\n\n## Understanding it\n- Artemisinins are generally avoided in the first trimester.\n- Quinine + clindamycin is used instead.\n\n>> 1st trimester = quinine + clindamycin.",
+   "opts": [
+    "Quinine + clindamycin",
+    "IV artesunate only",
+    "No treatment until delivery",
+    "ACT"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is malaria treated in the second and third trimesters of pregnancy?",
+   "a": "**ACT.**\n\n## Understanding it\n- After the first trimester, ACT is used as in non-pregnant patients.\n- Prompt treatment protects mother and fetus.\n\n>> Later trimesters = ACT.",
+   "opts": [
+    "No treatment",
+    "Doxycycline",
+    "Quinine + clindamycin",
+    "ACT"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What chemoprophylaxis is used in pregnancy, and what are other options mentioned?",
+   "a": "**Fansidar in pregnancy; mefloquine and doxycycline are other options.**\n\n## Understanding it\n- Intermittent preventive treatment in pregnancy uses Fansidar (SP).\n- Mefloquine and doxycycline are alternatives in other settings.\n\n>> Pregnancy: Fansidar; others: mefloquine, doxycycline.",
+   "opts": [
+    "Chloroquine only",
+    "Fansidar in pregnancy; mefloquine/doxycycline otherwise",
+    "No prophylaxis is used",
+    "IV artesunate as prophylaxis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the main challenges to malaria control listed?",
+   "a": "**Drug resistance (including partial ACT resistance), RDT false negatives, poor access to care, and poor antimicrobial stewardship.**\n\n## Understanding it\n- Resistance and false-negative RDTs undermine treatment.\n- Access and drug misuse compound the problem.\n\n>> Resistance, RDT false negatives, access, stewardship.",
+   "opts": [
+    "Resistance, RDT false negatives, access, poor stewardship",
+    "Vaccine over-use",
+    "There are no remaining challenges",
+    "Only mosquito extinction"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why is speed emphasised in severe malaria?",
+   "a": "**Because mortality can be high even when treated — fast treatment saves lives.**\n\n## Understanding it\n- Delays let organ failure progress despite therapy.\n- Early recognition and IV artesunate are decisive.\n\n>> Even treated, mortality is high — treat fast.",
+   "opts": [
+    "Because the drugs are cheap",
+    "Mortality is high even when treated, so treat fast",
+    "Because it is never fatal",
+    "Because it always self-resolves"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the take-home rule for a febrile, unconscious child in an endemic area?",
+   "a": "**Fever + unconsciousness → think cerebral malaria.**\n\n## Understanding it\n- Altered consciousness with fever in an endemic area is cerebral malaria until proven otherwise.\n- This demands immediate IV artesunate and airway care.\n\n>> Fever + unconscious = cerebral malaria until proven otherwise.",
+   "opts": [
+    "Think cerebral malaria",
+    "Think meningitis only, ignore malaria",
+    "Think simple febrile convulsion, reassure",
+    "Wait and observe overnight"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A 14-year-old has 4 days of fever, headache and rigor; Hb 6.2 g/dl; RDT positive; parasite density >100,000/µL. What is this and why is IV artesunate preferred over quinine?",
+   "a": "**Severe (high-density) malaria; IV artesunate gives faster parasite clearance, lower mortality and a better safety profile — quinine risks arrhythmias, hypotension and hypoglycaemia.**\n\n## Understanding it\n- Very high density plus low Hb marks severe disease.\n- Artesunate is safer and clears parasites faster than quinine.\n\n>> Severe malaria → IV artesunate (safer, faster than quinine).",
+   "opts": [
+    "Not malaria; the RDT is wrong",
+    "Uncomplicated malaria; give oral ACT at home",
+    "Severe malaria; artesunate is faster/safer than quinine",
+    "Severe malaria; quinine is clearly superior"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "CLINICAL — A 4-year-old has fever and a seizure; RDT positive but blood film negative. What is your approach?",
+   "a": "**Treat as an emergency — severe malaria until proven otherwise; the RDT shows infection, so check for another cause (FBC, LFT) and repeat microscopy in 12–24 hours.**\n\n## Understanding it\n- A negative film does not exclude malaria, especially with sequestration.\n- Do not withhold treatment while re-testing.\n\n>> Emergency: severe malaria until proven otherwise; repeat film 12–24h.",
+   "opts": [
+    "Wait 48 hours before any action",
+    "Discharge home on paracetamol",
+    "Rule out malaria because the film is negative",
+    "Treat as severe malaria; repeat microscopy in 12–24h"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why does severe malaria cause hypoglycaemia, and why is it dangerous in a child?",
+   "a": "**Parasite glucose consumption, impaired gluconeogenesis and (with quinine) hyperinsulinaemia lower blood sugar; in a child this can cause seizures, coma and brain injury and mimics/worsens cerebral malaria.**\n\n## Understanding it\n- The parasite and the host both drain glucose; quinine adds insulin release.\n- Low sugar in a child rapidly harms the brain, so monitor 4-hourly.\n\n>> Consumption + impaired output (± quinine) → hypoglycaemia harms the child's brain.",
+   "opts": [
+    "It causes hyperglycaemia, which is harmless",
+    "Hypoglycaemia only affects adults",
+    "Glucose consumption/impaired output (± quinine); harms the brain",
+    "It never occurs in malaria"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why can a positive RDT be misleading shortly after a treated infection?",
+   "a": "**Because the HRP antigen persists for 2–4 weeks after recovery, so the test can stay positive without active disease.**\n\n## Understanding it\n- Antigen lag means a recently treated child may still test positive.\n- Correlate with the film and clinical picture.\n\n>> HRP antigen lingers 2–4 weeks → false 'positive'.",
+   "opts": [
+    "The RDT detects live parasites only",
+    "The HRP antigen persists 2–4 weeks after cure",
+    "The antigen clears within an hour",
+    "RDTs are always negative after treatment"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What supportive antipyretic measures are used in uncomplicated malaria?",
+   "a": "**Diclofenac or paracetamol suppository, plus tepid sponging with luke-warm water.**\n\n## Understanding it\n- Antipyretics plus sponging bring the temperature down.\n- Water must be luke-warm, not cold.\n\n>> Antipyretic suppository + luke-warm tepid sponging.",
+   "opts": [
+    "Steroids",
+    "Ice-cold baths",
+    "Diclofenac/paracetamol suppository + tepid sponging",
+    "No fever control is needed"
+   ],
+   "ans": 2
+  }
+ ]
+}

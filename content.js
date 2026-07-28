@@ -7809,14 +7809,614 @@ window.MEDBANK = {
        "day": "",
        "date": "15/05/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Introduction to Paediatric Haematology / Investigations\n\n*Prof I.F. Ogbonna — Paediatrics, topic 20*\n\n## Outline\n\nIntroduction · Overview of blood · Functions of blood · Sub-classification of paediatric haematology · Investigations\n\n## Introduction\n\n**Haematology** is the branch of medicine concerned with the **study, diagnosis, treatment and prevention of blood-related diseases.**\n\n- **Blood is one of the largest organs in the body.**\n- It contains **plasma (~60% of total blood volume)** and **cells (~40%)**. This percentage **changes with age** — in a **preterm baby, plasma can be up to 70%.**\n\n## Overview of blood\n\nKnow the different **cell lines** of blood and how they are formed — **erythrocytes (RBCs), leucocytes (WBCs) and platelets.** By number, **RBCs are most abundant, followed by platelets, and lastly WBCs**, regulated by a **feedback mechanism.**\n\n**Haematopoiesis** (blood formation) occurs at different anatomic sites during life:\n\n- **Yolk sac** — 2nd–3rd week of gestation, diminishing by the 10th week.\n- **Liver** — 6th week up to the 30th week.\n- **Bone marrow** — from the 20th week and continuing till (and after) birth.\n\n> **Extramedullary haematopoiesis** — a situation where the **liver and spleen** are called upon to make blood in times of **stress and increased demand** for more cells.\n\n## Functions of blood\n\n- **RBCs** — oxygen transport; also act as a **buffer** (high carbonic anhydrase).\n- **Granulocytes (BEN — Basophils, Eosinophils, Neutrophils)** — a subgroup of WBCs that **kill microorganisms**; they are the **first line of defence.**\n- **Lymphocytes** — **produce antibodies** and mediate **cell-mediated immunity (CMI). B cells → antibodies; T cells → cellular immunity.**\n- **Platelets** — **haemostasis** (blood clotting).\n\n## Sub-classification of paediatric haematology\n\n1. **Diseases affecting blood production:**\n   - **Decreased production** — e.g. anaemias, leucopenias, thrombocytopenias.\n   - **Increased production** — e.g. polycythaemias, leucocytosis, thrombocytosis.\n2. **Abnormal haemoglobins** — sickle cell anaemia, thalassaemia.\n3. **Coagulation problems** — e.g. DIC (and tropical splenomegaly syndrome / hyper-immune splenomegaly — the spleen in TSS).\n4. **Enzyme defects** — e.g. G6PD deficiency.\n\n## Investigations\n\n- **Hb or PCV.**\n- **FBC** — reticulocyte count, Hb, total and differential WBC, RBC count, platelet count.\n- **Peripheral blood film** — blast cells, RBC morphology.\n- **Genotype.**\n- **Bone marrow aspiration** — cytology.\n- **Bone marrow biopsy** — histology.\n\n## References\n\nLecture material of Prof I.F. Ogbonna (500-level Paediatrics, Abia State University); Nelson Textbook of Paediatrics.\n",
+       "simplified": "# Introduction to Paediatric Haematology — the simple version\n\n## The big picture\n\n> **Haematology = the medicine of blood** — studying, diagnosing, treating and preventing blood diseases. Blood is one of the **largest organs** in the body.\n\nBlood is **plasma (~60%) + cells (~40%)** — and the mix **shifts with age** (a preterm baby is up to **70% plasma**).\n\n---\n\n## The three cell lines\n\n> **RBCs** (most abundant) → carry oxygen · **Platelets** (next) → clotting · **WBCs** (fewest) → defence.\n\nA **feedback mechanism** keeps the numbers balanced.\n\n---\n\n## Where blood is made (haematopoiesis) — it moves with age\n\n> **Yolk sac** (wk 2–3) → **Liver** (wk 6–30) → **Bone marrow** (from wk 20, and for life).\n\n> When the body is stressed and needs more cells, the **liver and spleen** restart blood-making — **extramedullary haematopoiesis.**\n\n---\n\n## What each cell does\n\n> **RBC** — oxygen + buffer. **Granulocytes (BEN)** — kill microbes, first line of defence. **Lymphocytes** — B cells make antibodies, T cells do cell-mediated immunity. **Platelets** — clotting.\n\n---\n\n## How haematology diseases are grouped\n\n> **1. Production** — too little (anaemia, leucopenia, thrombocytopenia) or too much (polycythaemia, leucocytosis, thrombocytosis).\n> **2. Abnormal haemoglobin** — sickle cell, thalassaemia.\n> **3. Coagulation** — e.g. DIC.\n> **4. Enzyme defects** — e.g. G6PD deficiency.\n\n---\n\n## How we investigate blood\n\n> **Hb/PCV · FBC** (retic, WBC diff, platelets) **· blood film** (morphology, blasts) **· genotype · bone marrow aspirate** (cytology) **& biopsy** (histology).\n\n---\n\n## Putting it together\n\nPaediatric haematology is the study of the **blood organ** — a plasma-plus-cells tissue whose composition changes with age and whose **three cell lines** (RBC, platelet, WBC) each have a job. Blood is made in **shifting sites** (yolk sac → liver → marrow), and can restart in the **liver and spleen** under stress. Diseases fall into four buckets — **production, abnormal haemoglobin, coagulation, and enzyme defects** — and are worked up with a small, logical toolkit: **Hb/PCV, FBC, blood film, genotype, and bone marrow aspirate/biopsy.**\n",
+       "pdf": "content/Pediatrics/Ogbonna/Introduction%20to%20Haematology%20Investigations/note.pdf",
+       "primer": [
+        {
+         "q": "Introduction: what is haematology and why is blood an organ?",
+         "lecturer": "Haematology is the branch of medicine concerned with the study, diagnosis, treatment and prevention of blood-related diseases. Blood is one of the largest organs in the body. It contains plasma — about 60% of total blood volume — and cells — about 40%. This percentage changes with age: in a preterm baby, plasma can be up to 70%.",
+         "explain": "## Read this first\n\n>> **Haematology = the medicine of blood** (study, diagnosis, treatment, prevention).\n\n>> **Blood is one of the largest organs**, made of **plasma (~60%) + cells (~40%).**\n\n>> The ratio **changes with age** — a preterm baby is up to **70% plasma.**",
+         "tie": "Treating blood as a large, age-varying organ frames why paediatric normal values differ from adults and why the cell lines and disease categories all matter in children."
+        },
+        {
+         "q": "Overview of blood: the cell lines and how they are made.",
+         "lecturer": "There are three cell lines — erythrocytes (RBCs), leucocytes (WBCs) and platelets. RBCs are the most abundant, followed by platelets, and lastly WBCs, and their numbers are regulated by a feedback mechanism. Haematopoiesis (blood formation) occurs at different anatomic sites during life: the yolk sac in the 2nd–3rd week of gestation, diminishing by the 10th week; the liver from the 6th up to the 30th week; and the bone marrow from the 20th week, continuing till birth and for life. Extramedullary haematopoiesis is when the liver and spleen are called upon to make blood in times of stress and increased demand for more cells.",
+         "explain": "## Read this first\n\n>> **Three cell lines:** RBCs (most) → platelets → WBCs (fewest), balanced by **feedback.**\n\n>> **Where blood is made (it moves):** **yolk sac (wk 2–3) → liver (wk 6–30) → bone marrow (wk 20 → for life).**\n\n>> **Extramedullary haematopoiesis:** liver + spleen restart blood-making under **stress/high demand.**",
+         "tie": "The shifting sites of haematopoiesis explain why chronic high-demand states (like haemolysis) cause hepatosplenomegaly — the body reopens the fetal blood factories."
+        },
+        {
+         "q": "Functions of blood: what each cell does.",
+         "lecturer": "Each component has a job. RBCs transport oxygen and act as a buffer (they are rich in carbonic anhydrase). Granulocytes — Basophils, Eosinophils, Neutrophils (BEN), a subgroup of WBCs — kill microorganisms and are the first line of defence. Lymphocytes produce antibodies and mediate cell-mediated immunity: B cells make antibodies, T cells provide cellular immunity. Platelets provide haemostasis (blood clotting).",
+         "explain": "## Read this first\n\n>> **RBC** — oxygen transport + buffering (carbonic anhydrase).\n\n>> **Granulocytes (BEN — Basophils, Eosinophils, Neutrophils)** — kill microbes, **first line of defence.**\n\n>> **Lymphocytes** — B cells → antibodies, T cells → cell-mediated immunity.\n\n>> **Platelets** — haemostasis (clotting).",
+         "tie": "Knowing which cell does what is the key to reading an FBC and to understanding disease: anaemia (RBC), infection/leukaemia (WBC), bleeding (platelets)."
+        },
+        {
+         "q": "Sub-classification of paediatric haematology.",
+         "lecturer": "Blood diseases are grouped into four categories. First, diseases affecting blood production — either decreased production (anaemias, leucopenias, thrombocytopenias) or increased production (polycythaemias, leucocytosis, thrombocytosis). Second, abnormal haemoglobins — sickle cell anaemia and thalassaemia. Third, coagulation problems — such as DIC (and tropical splenomegaly syndrome / hyper-immune splenomegaly, involving the spleen). Fourth, enzyme defects — such as G6PD deficiency.",
+         "explain": "## Read this first\n\n>> **1. Production:** decreased (anaemia, leucopenia, thrombocytopenia) or increased (polycythaemia, leucocytosis, thrombocytosis).\n\n>> **2. Abnormal haemoglobins:** sickle cell, thalassaemia.\n\n>> **3. Coagulation problems:** e.g. DIC.\n\n>> **4. Enzyme defects:** e.g. G6PD deficiency.",
+         "tie": "This four-bucket map is the framework for the whole haematology block — every later topic (anaemias, haemoglobinopathies, DIC, G6PD) slots into one of these categories."
+        },
+        {
+         "q": "Investigations in paediatric haematology.",
+         "lecturer": "The core investigations are: Hb or PCV; the FBC (full blood count) — reticulocyte count, haemoglobin, total and differential white cell count, RBC count and platelet count; the peripheral blood film — showing blast cells and red-cell morphology; genotype; bone marrow aspiration — for cytology (individual cells); and bone marrow biopsy — for histology (tissue architecture).",
+         "explain": "## Read this first\n\n>> **Hb / PCV** — the quick measure of anaemia.\n\n>> **FBC** — retic count, Hb, WBC (total + differential), RBC count, platelets.\n\n>> **Peripheral blood film** — blast cells + RBC morphology.\n\n>> **Genotype**; **bone marrow aspirate** (cytology) and **biopsy** (histology).",
+         "tie": "This small, logical toolkit — from simple Hb/PCV to invasive marrow sampling — is used across every haematology topic, each test answering a different question about the blood."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is haematology?",
+         "a": "**The branch of medicine concerned with the study, diagnosis, treatment and prevention of blood-related diseases.**\n\n## Understanding it\n- It covers everything about blood — from diagnosis to prevention.\n- Blood is treated as one of the body's largest organs.\n\n>> Haematology = the medicine of blood disease.",
+         "opts": [
+          "The study of the immune system's lymph nodes only",
+          "The study of the heart and circulation only",
+          "The study of bone diseases",
+          "The study, diagnosis, treatment and prevention of blood-related diseases"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What two main components make up blood, and in what proportions?",
+         "a": "**Plasma (~60% of total blood volume) and cells (~40%).**\n\n## Understanding it\n- Roughly 60:40 plasma to cells in general.\n- This ratio is not fixed — it changes with age.\n\n>> Blood ≈ 60% plasma + 40% cells.",
+         "opts": [
+          "Equal 50:50 at all ages",
+          "Cells ~60% and plasma ~40%",
+          "Plasma ~60% and cells ~40%",
+          "Plasma ~90% and cells ~10%"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "How does the plasma proportion of blood differ in a preterm baby?",
+         "a": "**Plasma can be up to 70% in a preterm baby.**\n\n## Understanding it\n- The plasma-to-cell ratio shifts with age.\n- Preterm infants have relatively more plasma.\n\n>> Preterm baby: plasma up to 70%.",
+         "opts": [
+          "Plasma is up to 70%",
+          "Plasma is exactly 60% as in adults",
+          "Plasma falls to 30%",
+          "Preterm babies have no plasma"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the three cell lines of blood, and their order of abundance?",
+         "a": "**Erythrocytes (RBCs), leucocytes (WBCs) and platelets — with RBCs most abundant, then platelets, then WBCs.**\n\n## Understanding it\n- RBCs greatly outnumber the others; WBCs are fewest.\n- Numbers are kept in balance by a feedback mechanism.\n\n>> RBC > platelets > WBC; regulated by feedback.",
+         "opts": [
+          "Platelets most, then WBCs, then RBCs",
+          "They are present in equal numbers",
+          "RBCs (most), then platelets, then WBCs (fewest)",
+          "WBCs most, then RBCs, then platelets"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Where does haematopoiesis occur in the yolk sac, and until when?",
+         "a": "**In the yolk sac during the 2nd–3rd week of gestation, diminishing by the 10th week.**\n\n## Understanding it\n- The yolk sac is the earliest blood-forming site.\n- It fades as the liver takes over.\n\n>> Yolk sac: wk 2–3, gone by wk 10.",
+         "opts": [
+          "In the yolk sac from birth onwards",
+          "In the yolk sac only after birth",
+          "The yolk sac never makes blood",
+          "Yolk sac in the 2nd–3rd week, diminishing by week 10"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "During which weeks does the liver perform haematopoiesis?",
+         "a": "**From the 6th week up to the 30th week of gestation.**\n\n## Understanding it\n- The liver is the main fetal blood-forming organ mid-gestation.\n- It hands over to the bone marrow later.\n\n>> Liver: weeks 6–30.",
+         "opts": [
+          "Only after birth",
+          "Weeks 1–2 only",
+          "The liver never makes blood",
+          "6th week up to the 30th week"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "When does the bone marrow take over haematopoiesis?",
+         "a": "**From the 20th week of gestation, continuing till (and after) birth.**\n\n## Understanding it\n- Marrow becomes the definitive lifelong site.\n- It overlaps with the liver before birth.\n\n>> Bone marrow: from wk 20, for life.",
+         "opts": [
+          "From the 20th week, continuing to birth and beyond",
+          "Never — the liver does it for life",
+          "Only in the first trimester",
+          "Only in old age"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is extramedullary haematopoiesis?",
+         "a": "**Blood formation by the liver and spleen in times of stress and increased demand for more cells.**\n\n## Understanding it\n- When the marrow cannot keep up, the liver and spleen are recruited.\n- It is a sign of high demand (e.g. chronic haemolysis).\n\n>> Liver/spleen make blood under stress = extramedullary haematopoiesis.",
+         "opts": [
+          "Blood formation only in the bone marrow",
+          "Blood formation by the liver and spleen under stress/high demand",
+          "Blood formation in the kidney",
+          "Destruction of blood cells by the spleen"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the functions of red blood cells?",
+         "a": "**Oxygen transport, and acting as a buffer (they are rich in carbonic anhydrase).**\n\n## Understanding it\n- RBCs carry oxygen and help buffer the blood via carbonic anhydrase.\n- Both functions depend on haemoglobin and enzymes inside the cell.\n\n>> RBC = oxygen transport + buffering.",
+         "opts": [
+          "Producing antibodies",
+          "Killing bacteria directly",
+          "Oxygen transport and buffering (carbonic anhydrase)",
+          "Clotting the blood"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What does 'BEN' stand for, and what do granulocytes do?",
+         "a": "**Basophils, Eosinophils, Neutrophils — a subgroup of WBCs that kill microorganisms and form the first line of defence.**\n\n## Understanding it\n- BEN is a memory aid for the granulocytes.\n- They are the front-line killers of microbes.\n\n>> BEN = Basophils, Eosinophils, Neutrophils; first-line microbe killers.",
+         "opts": [
+          "Bone, Enzyme, Nucleus",
+          "Basophils, Erythrocytes, Neutrophils — carry oxygen",
+          "B cells, Erythrocytes, Neutrophils",
+          "Basophils, Eosinophils, Neutrophils — kill microbes (first line of defence)"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the functions of lymphocytes, and the roles of B and T cells?",
+         "a": "**They produce antibodies and mediate cell-mediated immunity: B cells make antibodies; T cells provide cellular immunity.**\n\n## Understanding it\n- Lymphocytes are the specific/adaptive arm of immunity.\n- B = antibodies, T = cellular immunity.\n\n>> Lymphocytes: B cells → antibodies, T cells → CMI.",
+         "opts": [
+          "Transport oxygen",
+          "Produce antibodies and CMI; B cells antibodies, T cells cellular immunity",
+          "Form clots",
+          "Kill microbes as the first line of defence"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the function of platelets?",
+         "a": "**Haemostasis — blood clotting.**\n\n## Understanding it\n- Platelets plug injured vessels and start clot formation.\n- Low platelets → bleeding; high → clotting risk.\n\n>> Platelets = haemostasis (clotting).",
+         "opts": [
+          "Oxygen transport",
+          "Haemostasis (blood clotting)",
+          "Buffering the blood pH",
+          "Antibody production"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How are diseases of blood production sub-classified?",
+         "a": "**Into decreased production (anaemias, leucopenias, thrombocytopenias) and increased production (polycythaemias, leucocytosis, thrombocytosis).**\n\n## Understanding it\n- Production problems go two ways — too few or too many cells.\n- Each cell line can be under- or over-produced.\n\n>> Production diseases = decreased vs increased.",
+         "opts": [
+          "Decreased (anaemia/leucopenia/thrombocytopenia) vs increased (polycythaemia/leucocytosis/thrombocytosis)",
+          "Only enzyme defects",
+          "Only decreased production exists",
+          "Only clotting disorders"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Give examples of abnormal-haemoglobin disorders.",
+         "a": "**Sickle cell anaemia and thalassaemia.**\n\n## Understanding it\n- These are structural/quantitative haemoglobin disorders.\n- They form one of the four haematology sub-classes.\n\n>> Abnormal Hb = sickle cell + thalassaemia.",
+         "opts": [
+          "Haemophilia and DIC",
+          "G6PD deficiency and leukaemia",
+          "Polycythaemia and thrombocytosis",
+          "Sickle cell anaemia and thalassaemia"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Which coagulation problem is given as an example in the sub-classification?",
+         "a": "**DIC (disseminated intravascular coagulation) — with tropical splenomegaly syndrome / hyper-immune splenomegaly also mentioned.**\n\n## Understanding it\n- DIC is the flagship coagulation disorder in this list.\n- Tropical splenomegaly syndrome (TSS) involves the spleen.\n\n>> Coagulation example = DIC (also TSS).",
+         "opts": [
+          "Iron deficiency anaemia",
+          "Sickle cell anaemia",
+          "G6PD deficiency",
+          "DIC (and tropical splenomegaly syndrome)"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Which enzyme defect is given as an example, and in which sub-class?",
+         "a": "**G6PD deficiency, under 'enzyme defects'.**\n\n## Understanding it\n- G6PD deficiency is the classic red-cell enzyme defect.\n- It sits in the enzyme-defect sub-class.\n\n>> Enzyme defect example = G6PD deficiency.",
+         "opts": [
+          "DIC",
+          "G6PD deficiency",
+          "Haemophilia A",
+          "Thalassaemia"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What does an FBC (full blood count) include?",
+         "a": "**Reticulocyte count, haemoglobin, total and differential WBC, RBC count and platelet count.**\n\n## Understanding it\n- The FBC surveys all three cell lines plus reticulocytes.\n- It is the core screening blood test.\n\n>> FBC = retic, Hb, WBC (total+diff), RBC, platelets.",
+         "opts": [
+          "Only haemoglobin",
+          "Liver and kidney function tests",
+          "Only the platelet count",
+          "Reticulocyte count, Hb, WBC total/differential, RBC count, platelets"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What does a peripheral blood film show?",
+         "a": "**Blast cells and red-cell morphology.**\n\n## Understanding it\n- The film reveals cell shape and abnormal cells like blasts.\n- It complements the numerical FBC.\n\n>> Blood film = morphology + blast cells.",
+         "opts": [
+          "Only the total white count",
+          "The genotype",
+          "Blast cells and RBC morphology",
+          "Bone marrow histology"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the difference between bone marrow aspiration and biopsy?",
+         "a": "**Aspiration gives cytology (individual cells); biopsy gives histology (tissue architecture).**\n\n## Understanding it\n- Aspirate = cells; biopsy = tissue structure.\n- They are complementary marrow investigations.\n\n>> Aspirate = cytology; biopsy = histology.",
+         "opts": [
+          "Both are blood films",
+          "Aspiration = histology; biopsy = cytology",
+          "Both give only genotype",
+          "Aspiration = cytology; biopsy = histology"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "List the investigations used in paediatric haematology.",
+         "a": "**Hb or PCV; FBC; peripheral blood film; genotype; bone marrow aspiration (cytology); and bone marrow biopsy (histology).**\n\n## Understanding it\n- A small, logical toolkit from simple (Hb/PCV) to invasive (marrow).\n- Each answers a different question about the blood.\n\n>> Hb/PCV, FBC, film, genotype, marrow aspirate & biopsy.",
+         "opts": [
+          "Hb/PCV, FBC, blood film, genotype, bone marrow aspirate and biopsy",
+          "Only a chest X-ray",
+          "Only an abdominal ultrasound",
+          "Only a urine dipstick"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Why is blood described as one of the largest organs in the body?",
+         "a": "**Because it is a large, distributed tissue (plasma plus cells) that circulates throughout the body performing many functions.**\n\n## Understanding it\n- Though liquid, blood is a true organ by mass and function.\n- It carries oxygen, defends, clots and buffers.\n\n>> Blood is a large distributed organ of plasma + cells.",
+         "opts": [
+          "Because it is stored only in the heart",
+          "Because it is solid like the liver",
+          "Because it does not move",
+          "It is a large distributed tissue of plasma and cells with many functions"
+         ],
+         "ans": 3
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
+      },
+      {
+       "id": "pediatrics-20-5",
+       "sn": 20.5,
+       "name": "G6PD Deficiency in Children",
+       "lecturer": "Ogbonna",
+       "day": "",
+       "date": "",
+       "time": "",
+       "note": "# G6PD Deficiency in Children\n\n*Prof I.F. Ogbonna — Paediatrics (Haematology)*\n\n## Outline\n\nIntroduction & inheritance · What G6PD does · Why older RBCs are hit first · What destroys the RBC · Variants · Favism · Clinical features · Risk factors (triggers) · Balanced polymorphism & malaria · Investigations · Treatment & management\n\n## Introduction\n\n**G6PD (glucose-6-phosphate dehydrogenase)** is an **enzyme inside red blood cells** whose job is to **protect RBCs from damage.** If G6PD is missing or low, **RBCs become weak against stress and break (haemolysis).** It is therefore the **most common RBC enzyme defect** and causes a **haemolytic anaemia.**\n\n**Inheritance:** **X-linked recessive** — so **males (XY) are more affected**, while **females (XX) are usually carriers.** It is common in **Africans, Asians and Mediterranean populations** — because of **malaria protection** (see below).\n\n## What exactly does G6PD do?\n\nG6PD's main job is to **help produce NADPH.** NADPH keeps **glutathione in its reduced form**, which **protects RBCs from oxidative stress (reactive oxygen species, ROS).**\n\n> **The chain:** G6PD → NADPH → reduced glutathione → protects the RBC.\n\nIf G6PD is deficient: **↓ NADPH → ↓ reduced glutathione → ↑ oxidative damage.** The result is that **haemoglobin is damaged, the RBC membrane is damaged, and the RBC breaks — haemolysis.**\n\n## Why are older RBCs worse affected?\n\nOlder RBCs already have **less enzyme activity** — they've used it up, and because mature RBCs have **lost their nucleus**, they **cannot synthesise new protein (new G6PD).** So each mature red cell is left with a **limited, dwindling amount of G6PD**, and as it ages the enzyme is used up. Older RBCs therefore **cannot handle stress at all** and are **destroyed first** in acute haemolysis.\n\n## What actually destroys the RBC?\n\n**Oxidative stress** (very important). Sources: **drugs (e.g. antimalarials), infections, and chemicals (like fava beans).**\n\nInside the RBC: (1) oxidants accumulate → (2) **haemoglobin is damaged, forming Heinz bodies** → (3) the RBC becomes abnormal → (4) the **spleen removes it by biting off the Heinz-body part (forming \"bite cells\", seen on the blood smear) or the cell bursts.** The result is **haemolysis and anaemia.**\n\n## Variants of G6PD (simple understanding)\n\n- **G6PD B+** — the normal variant in most populations.\n- **G6PD A+** — common in African-Americans; there is **reduced activity but the enzyme is partially functional.**\n- **Severe variants** — markedly reduced G6PD activity, more dangerous.\n\n## Special condition: favism\n\nEating **fava beans** triggers **massive oxidative stress.** Fava beans contain **vicine and convicine**, which are **hydrolysed in the gut to divicine**, a **potent oxidant.** The result is **sudden severe haemolysis.**\n\n## Clinical features\n\nMost individuals are **asymptomatic.** Symptoms arise **48–96 hours (2–4 days) after ingestion of the offending drug** — because the reactive oxygen species must **accumulate to a high enough concentration** to trigger the crisis. **Severity depends on the level of enzyme defect.**\n\n**Symptoms:** pallor (anaemia), jaundice (bilirubin from RBC breakdown), fatigue, and sometimes dark urine.\n\n> **Key idea:** the patient is **NORMAL between episodes.**\n\n## Risk factors (triggers)\n\n1. **Infections (most common)** — the body's phagocytes (neutrophils, macrophages) produce a lot of ROS to fight infection. In a normal child, RBC glutathione neutralises this; in a G6PD-deficient child, it causes **acute haemolysis.**\n2. **Oxidant drugs** — e.g. antimalarials (primaquine), sulfa drugs.\n3. **Fava beans.**\n\n## Balanced polymorphism & malaria (high-yield)\n\n**Balanced polymorphism** is the maintenance of two or more alleles in a population because the **heterozygote has a survival advantage.** In mild G6PD deficiency, RBCs are fragile — but the **malaria parasite cannot survive well**, because any little oxidative stress (from the plasmodium itself) makes the fragile G6PD-deficient RBC **haemolyse**, destroying the infected cell early. This gives **partial protection against malaria**, explaining why G6PD deficiency is common in malaria-endemic areas.\n\n## Investigations\n\nDiagnosis is confirmed by **evidence of reduced G6PD activity in RBCs** (enzyme activity **≤ 10%** of normal confirms it), measured by **spectrophotometry** or newer techniques (RDTs).\n\n> **Important:** the test is **best done when the patient is stable, not during a crisis.** During haemolysis the old (deficient) cells are destroyed and new reticulocytes have **normal enzyme**, which can give a **falsely normal result.** Best performed when the **reticulocyte count is normal.**\n\n## Treatment & management\n\nThe condition is **self-limiting** — once the trigger is removed, haemolysis stops. **Blood transfusion** may be required in severe cases.\n\n**Management:** (1) **avoid triggers**, (2) **treat infection**, and (3) in **severe cases, blood transfusion.**\n\n## References\n\nLecture material of Prof I.F. Ogbonna (500-level Paediatrics, Abia State University); Nelson Textbook of Paediatrics.\n",
+       "simplified": "# G6PD Deficiency — the simple version\n\n## The one-line story\n\n> **G6PD is the red cell's bodyguard against oxidative stress.** Without it, when an **oxidant** hits (infection, drug, or fava beans), the red cells **break — haemolysis** — but the patient is **completely normal in between.**\n\nIt's the **commonest RBC enzyme defect**, **X-linked** (so **boys** get it, girls are carriers), and common in **Africa/Asia/Mediterranean** because it gives **malaria protection.**\n\n---\n\n## The protective chain (and how it fails)\n\n> **G6PD → NADPH → reduced glutathione → protects the RBC from ROS.**\n\nBreak the first link and the whole chain fails:\n\n> **↓G6PD → ↓NADPH → ↓reduced glutathione → oxidative damage → haemoglobin + membrane damaged → RBC bursts.**\n\n---\n\n## Why OLD red cells die first\n\n> A mature RBC has **no nucleus**, so it **can't make new G6PD.** Its enzyme slowly runs out with age — so the **oldest cells, with the least enzyme, haemolyse first.**\n\n---\n\n## What the spleen sees\n\n> Oxidised haemoglobin clumps into **Heinz bodies** → the spleen **bites them off → \"bite cells\"** on the smear, or the whole cell bursts.\n\n---\n\n## The three triggers\n\n> **1. Infection (commonest)** — phagocytes flood the blood with ROS.\n> **2. Oxidant drugs** — antimalarials (primaquine), sulfa drugs.\n> **3. Fava beans** — vicine/convicine → **divicine** (a potent oxidant) = **favism.**\n\nSymptoms come **2–4 days (48–96 h) after the trigger** — the oxidants have to build up first — as **pallor, jaundice, fatigue, dark urine.**\n\n---\n\n## The malaria twist (high-yield)\n\n> **Balanced polymorphism:** the fragile deficient RBC **haemolyses when the parasite stresses it**, killing the parasite too → **partial malaria protection.** That's why the gene survives in malaria zones.\n\n---\n\n## Testing — timing is everything\n\n> Confirm by **low G6PD activity (≤10%)** in RBCs — **but test when stable, not during a crisis.**\n\nDuring haemolysis the deficient old cells are gone and fresh **reticulocytes have normal enzyme** → a **falsely normal** result. Wait until the reticulocyte count is normal.\n\n---\n\n## Treatment\n\n> **Self-limiting** — remove the trigger and it stops. **Avoid triggers · treat infection · transfuse if severe.**\n\n---\n\n## Putting it together\n\nG6PD deficiency is the **commonest red-cell enzyme defect**, inherited **X-linked recessive** (boys affected), that removes the red cell's defence against **oxidative stress.** When a trigger — **infection (commonest), an oxidant drug, or fava beans** — floods the cell with ROS, glutathione can't be kept reduced, haemoglobin and membrane are damaged, and the **oldest cells haemolyse first** (Heinz bodies → bite cells). The child is **normal between episodes**, with an acute crisis of **pallor, jaundice and dark urine 2–4 days after the trigger.** The same fragility gives **malaria protection** (balanced polymorphism). Diagnose with **RBC G6PD activity ≤10%**, but **test when stable** to avoid a falsely normal result during a crisis. Management is simple: **remove the trigger, treat infection, and transfuse if severe** — it is self-limiting.\n",
+       "pdf": "content/Pediatrics/Ogbonna/G6PD%20Deficiency%20in%20Children/note.pdf",
+       "primer": [
+        {
+         "q": "Introduction & inheritance: what G6PD deficiency is and who gets it.",
+         "lecturer": "G6PD (glucose-6-phosphate dehydrogenase) is an enzyme inside red blood cells whose job is to protect them from damage. If G6PD is missing or low, RBCs become weak against stress and break — haemolysis. It is therefore the most common RBC enzyme defect and causes haemolytic anaemia. It is inherited as X-linked recessive, so males (XY) are more affected and females (XX) are usually carriers. It is common in Africans, Asians and Mediterranean populations — because of malaria protection.",
+         "explain": "## Read this first\n\n>> **G6PD** = an enzyme inside RBCs that **protects them from oxidative damage.**\n\n>> Missing/low → RBCs break under stress = **haemolysis**; it is the **commonest RBC enzyme defect.**\n\n>> **Inheritance:** X-linked recessive — **males affected, females usually carriers.**\n\n>> Common in **Africa/Asia/Mediterranean** — because of **malaria protection.**",
+         "tie": "These three facts — an oxidative-defence enzyme, an X-linked pattern (think 'boys'), and a malaria link — frame the whole topic and explain its prevalence in Nigeria."
+        },
+        {
+         "q": "What G6PD does: the NADPH–glutathione protective chain.",
+         "lecturer": "G6PD's main job is to help produce NADPH. NADPH keeps glutathione in its reduced form, and reduced glutathione protects the RBC from oxidative stress (reactive oxygen species, ROS). So the chain is: G6PD → NADPH → reduced glutathione → protects the RBC. If G6PD is deficient, NADPH falls, reduced glutathione falls, and oxidative damage rises — so haemoglobin gets damaged, the RBC membrane gets damaged, and the RBC breaks (haemolysis).",
+         "explain": "## Read this first\n\n>> **The protective chain:** **G6PD → NADPH → reduced glutathione → protects the RBC** from ROS.\n\n>> **When deficient:** ↓NADPH → ↓reduced glutathione → **↑oxidative damage** → haemoglobin + membrane damaged → **haemolysis.**",
+         "tie": "Understanding this chain explains everything downstream — Heinz bodies, bite cells, why oxidant triggers cause crises, and why the enzyme matters so much."
+        },
+        {
+         "q": "Why older red cells are worse affected.",
+         "lecturer": "Older RBCs already have less enzyme activity — they have used it up. Because mature RBCs have lost their nucleus on maturing, they cannot synthesise new proteins, so every mature RBC is left with a limited number of G6PD molecules in a deficient patient, and as the cell gets older that supply is used up. So older RBCs cannot handle stress at all, and are destroyed first in acute haemolysis.",
+         "explain": "## Read this first\n\n>> Mature RBCs have **no nucleus** → **cannot make new G6PD.**\n\n>> Their enzyme supply is **limited and runs down with age.**\n\n>> So the **oldest red cells** can't handle stress and are **destroyed first** in a crisis.",
+         "tie": "This explains the pattern of an acute self-limiting crisis — the vulnerable old cells are cleared, and the newly made cells (with more enzyme) survive."
+        },
+        {
+         "q": "What actually destroys the RBC: oxidative stress, Heinz bodies and bite cells.",
+         "lecturer": "The destroyer is oxidative stress (very important), from sources including drugs (e.g. antimalarials), infections and chemicals (like fava beans). Inside the RBC: oxidants accumulate; haemoglobin gets damaged and forms Heinz bodies; the RBC becomes abnormal; and the spleen removes it by biting off the Heinz-body part (forming 'bite cells', which is why bite cells are seen on the blood smear) — or the cell bursts. The result is haemolysis and anaemia.",
+         "explain": "## Read this first\n\n>> **Destroyer:** oxidative stress (ROS) from **drugs, infections, fava beans.**\n\n>> **Inside the cell:** oxidants accumulate → damaged Hb forms **Heinz bodies** → the spleen **bites them off → 'bite cells'** on the smear (or the cell bursts).\n\n>> **Result:** haemolysis + anaemia.",
+         "tie": "Heinz bodies and bite cells are the classic smear findings — recognising them links the biochemistry to what you actually see down the microscope."
+        },
+        {
+         "q": "Variants of G6PD and the special condition of favism.",
+         "lecturer": "There are several variants (simple understanding): G6PD B+ is the normal variant in most populations; G6PD A+ is common in African-Americans and has reduced but partially functional activity; severe variants have markedly reduced G6PD activity and are more dangerous. Favism is a special condition where eating fava beans triggers massive oxidative stress: fava beans contain vicine and convicine, which are hydrolysed in the gut to divicine, a potent oxidant — the result is sudden severe haemolysis.",
+         "explain": "## Read this first\n\n>> **Variants:** **B+** = normal; **A+** = reduced but partially functional (African-Americans); **severe variants** = markedly reduced activity.\n\n>> **Favism:** fava beans → **vicine/convicine → divicine (a potent oxidant)** → **sudden severe haemolysis.**",
+         "tie": "The variants explain why severity differs between people, and favism is a classic, examinable trigger with a neat biochemical mechanism (divicine)."
+        },
+        {
+         "q": "Clinical features and the triggers (risk factors).",
+         "lecturer": "Most individuals are asymptomatic. Symptoms arise 48–96 hours (2–4 days) after ingestion of the offending drug — because the reactive oxygen species must accumulate to a high enough concentration to cause the crisis — and severity depends on the level of enzyme defect. Symptoms are pallor (anaemia), jaundice (bilirubin from RBC breakdown), fatigue and sometimes dark urine; the key idea is that the patient is normal between episodes. The main triggers are: infections (most common) — the body's phagocytes (neutrophils, macrophages) produce a lot of ROS to fight infection, which in a deficient child causes acute haemolysis; oxidant drugs — e.g. antimalarials (primaquine), sulfa drugs; and fava beans.",
+         "explain": "## Read this first\n\n>> **Between episodes: NORMAL.** A crisis appears **48–96 h (2–4 days) after the trigger** (ROS must build up).\n\n>> **Symptoms:** pallor, jaundice, fatigue, sometimes dark urine.\n\n>> **Triggers:** **infection (most common)**, oxidant drugs (antimalarials/primaquine, sulfa), fava beans.",
+         "tie": "Knowing the delayed, self-limiting crisis and its triggers is what lets you both prevent episodes (avoid triggers) and recognise one when a deficient child is exposed."
+        },
+        {
+         "q": "Balanced polymorphism and malaria protection (high-yield).",
+         "lecturer": "Balanced polymorphism is the maintenance of two or more alleles in a population because the heterozygote has a survival advantage. In mild G6PD deficiency, RBCs are fragile — but the malaria parasite cannot survive well, because any little oxidative stress on the RBC (caused by the plasmodium itself) makes the fragile G6PD-deficient RBC haemolyse. So infected RBCs are destroyed early and the parasite cannot survive, giving partial protection against malaria. This explains why the disease is common in malaria areas: the malaria parasite lives inside RBCs, and the fragile deficient cells destroy the parasite along with themselves.",
+         "explain": "## Read this first\n\n>> **Balanced polymorphism:** two alleles persist because the **heterozygote has a survival advantage.**\n\n>> Here, fragile deficient RBCs **haemolyse when parasitised** — killing the parasite too → **partial malaria protection.**\n\n>> This is why G6PD deficiency is **common in malaria-endemic areas.**",
+         "tie": "This ties the whole topic back to why G6PD deficiency is so common in Nigeria — the same fragility that harms is what has kept the gene alive."
+        },
+        {
+         "q": "Investigations: confirming the diagnosis and the timing pitfall.",
+         "lecturer": "Diagnosis is confirmed by evidence of reduced G6PD activity in RBCs — enzyme activity of 10% or less of normal confirms it — measured by spectrophotometry or newer techniques (RDTs). The important point is that the test is best done when the patient is stable, not during a crisis. This is because during haemolysis the old (deficient) RBCs are destroyed while the new reticulocytes have normal enzyme, which can give a falsely normal result. So the test is best performed when the reticulocyte count is normal.",
+         "explain": "## Read this first\n\n>> **Confirm with reduced RBC G6PD activity** (**≤10% of normal**), by spectrophotometry or RDT.\n\n>> **Timing pitfall:** test **when stable, not during a crisis** — in a crisis the deficient old cells are gone and young **reticulocytes have normal enzyme** → **falsely normal.**\n\n>> Best done when the **reticulocyte count is normal.**",
+         "tie": "The timing pitfall is a classic exam point — a 'normal' result during a crisis does not exclude the diagnosis, so you must retest after recovery."
+        },
+        {
+         "q": "Treatment and management.",
+         "lecturer": "The condition is self-limiting — once the trigger is removed, haemolysis stops. Blood transfusion may be required in severe cases. Management therefore is: (1) avoid triggers, (2) treat infection, and (3) in severe cases, blood transfusion.",
+         "explain": "## Read this first\n\n>> **Self-limiting:** remove the trigger → haemolysis stops.\n\n>> **Management:** **(1) avoid triggers · (2) treat infection · (3) transfuse if severe.**",
+         "tie": "The management is refreshingly simple — because the crisis is self-limiting, prevention (avoiding triggers) and supportive care are the whole plan, with transfusion held for severe episodes."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is G6PD and what is its job in the red blood cell?",
+         "a": "**An enzyme inside red blood cells whose job is to protect them from oxidative damage.**\n\n## Understanding it\n- G6PD is the red cell's defence against oxidative stress.\n- Without it, red cells break under stress.\n\n>> G6PD = the RBC's protector against oxidative damage.",
+         "opts": [
+          "An enzyme that carries oxygen instead of haemoglobin",
+          "An antibody against red cells",
+          "An enzyme inside RBCs that protects them from oxidative damage",
+          "A clotting factor made in the liver"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why is G6PD deficiency called the most common RBC enzyme defect?",
+         "a": "**Because it is the commonest inherited enzyme defect of red cells and a leading cause of haemolytic anaemia worldwide.**\n\n## Understanding it\n- It is widespread, especially in malaria-endemic regions.\n- Loss of the enzyme causes haemolysis under oxidative stress.\n\n>> G6PD deficiency = commonest RBC enzyme defect → haemolytic anaemia.",
+         "opts": [
+          "Because it is the rarest enzyme defect",
+          "It is the commonest inherited red-cell enzyme defect causing haemolytic anaemia",
+          "Because it affects white cells",
+          "Because it is a clotting disorder"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is G6PD deficiency inherited, and who is more affected?",
+         "a": "**X-linked recessive — males (XY) are more affected, and females (XX) are usually carriers.**\n\n## Understanding it\n- Because it is on the X chromosome, boys with one affected X are affected.\n- Girls usually need two affected copies, so are usually carriers.\n\n>> X-linked recessive → boys affected, girls usually carriers.",
+         "opts": [
+          "X-linked recessive; males more affected, females usually carriers",
+          "Y-linked; only females affected",
+          "Autosomal dominant; equally affecting both sexes",
+          "Autosomal recessive; females more affected"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "In which populations is G6PD deficiency common, and why?",
+         "a": "**Africans, Asians and Mediterranean populations — because of malaria protection.**\n\n## Understanding it\n- The gene persists where malaria is endemic.\n- The deficiency gives partial resistance to malaria.\n\n>> Common in Africa/Asia/Mediterranean — malaria protection.",
+         "opts": [
+          "Africans, Asians, Mediterranean populations — due to malaria protection",
+          "It is equally rare everywhere",
+          "Only Northern Europeans, due to cold climate",
+          "Only people with sickle cell disease"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the protective biochemical chain that G6PD drives?",
+         "a": "**G6PD → NADPH → reduced glutathione → protects the RBC from oxidative stress (ROS).**\n\n## Understanding it\n- G6PD makes NADPH, which keeps glutathione reduced, which mops up ROS.\n- Each step depends on the one before it.\n\n>> G6PD→NADPH→reduced glutathione→protects RBC.",
+         "opts": [
+          "G6PD → oxygen → haemoglobin → protects the RBC",
+          "G6PD → iron → haem → carries oxygen",
+          "G6PD → NADPH → reduced glutathione → protects the RBC",
+          "G6PD → antibodies → immunity"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What happens biochemically when G6PD is deficient?",
+         "a": "**↓ NADPH → ↓ reduced glutathione → ↑ oxidative damage, so haemoglobin and the RBC membrane are damaged and the cell breaks (haemolysis).**\n\n## Understanding it\n- The whole protective chain fails from the first step.\n- Damaged Hb and membrane lead to haemolysis.\n\n>> ↓G6PD→↓NADPH→↓glutathione→oxidative damage→haemolysis.",
+         "opts": [
+          "↑NADPH → stronger red cells",
+          "No effect on the red cell",
+          "The cell makes more haemoglobin",
+          "↓NADPH → ↓reduced glutathione → oxidative damage → haemolysis"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Why are older red blood cells worse affected in G6PD deficiency?",
+         "a": "**Because mature RBCs have lost their nucleus and cannot make new G6PD, so their limited enzyme is used up with age — leaving the oldest cells unable to handle stress, so they are destroyed first.**\n\n## Understanding it\n- No nucleus → no new enzyme synthesis → enzyme runs out with age.\n- The oldest, most depleted cells haemolyse first.\n\n>> Old RBCs can't make new G6PD → enzyme runs out → destroyed first.",
+         "opts": [
+          "Younger cells are always destroyed first",
+          "Age has no effect on which cells haemolyse",
+          "Older cells have too much enzyme",
+          "Mature RBCs can't synthesise new G6PD, so old cells run out and die first"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the main destroyer of the red cell in G6PD deficiency?",
+         "a": "**Oxidative stress (reactive oxygen species) from drugs, infections and chemicals like fava beans.**\n\n## Understanding it\n- ROS overwhelm the unprotected cell.\n- Sources include drugs, infection and fava beans.\n\n>> Oxidative stress (ROS) destroys the RBC.",
+         "opts": [
+          "Antibodies coating the cells",
+          "Physical trauma to the vessels",
+          "Oxidative stress (ROS) from drugs, infections and chemicals",
+          "Iron overload"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What are Heinz bodies and bite cells in G6PD deficiency?",
+         "a": "**Oxidised, damaged haemoglobin forms Heinz bodies; the spleen bites off the Heinz-body part, forming 'bite cells' seen on the blood smear (or the cell bursts).**\n\n## Understanding it\n- Heinz bodies are precipitated damaged haemoglobin.\n- The spleen's removal of them creates bite cells.\n\n>> Heinz bodies (damaged Hb) → spleen bites them off → bite cells.",
+         "opts": [
+          "Heinz bodies are normal cell organelles",
+          "Heinz bodies are damaged Hb; the spleen bites them off, making bite cells",
+          "They are clotting products",
+          "Bite cells are white blood cells"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Describe the sequence inside the RBC that leads to haemolysis.",
+         "a": "**Oxidants accumulate → haemoglobin is damaged, forming Heinz bodies → the RBC becomes abnormal → the spleen removes it (bite cells) or it bursts → haemolysis and anaemia.**\n\n## Understanding it\n- A stepwise oxidative injury ending in splenic removal or lysis.\n- The end result is haemolysis and anaemia.\n\n>> Oxidants→Heinz bodies→abnormal RBC→spleen/burst→haemolysis.",
+         "opts": [
+          "The cell makes more haemoglobin and survives",
+          "The cell simply enlarges and recovers",
+          "Oxidants accumulate → Heinz bodies → abnormal RBC → removed/bursts → haemolysis",
+          "No change occurs inside the cell"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the normal G6PD variant, and what is the G6PD A+ variant?",
+         "a": "**G6PD B+ is the normal variant in most populations; G6PD A+ is common in African-Americans and has reduced but partially functional activity.**\n\n## Understanding it\n- B+ is normal; A+ is a mildly reduced but functional variant.\n- Severe variants have markedly reduced activity.\n\n>> B+ = normal; A+ = reduced but partially functional (African-Americans).",
+         "opts": [
+          "B+ is the severe variant; A+ is normal",
+          "A+ is found only in Europeans",
+          "B+ normal; A+ reduced but partially functional (common in African-Americans)",
+          "Both are completely non-functional"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is favism and what is its mechanism?",
+         "a": "**Haemolysis triggered by eating fava beans, which contain vicine and convicine that are hydrolysed in the gut to divicine — a potent oxidant — causing sudden severe haemolysis.**\n\n## Understanding it\n- Fava beans deliver a strong oxidant (divicine).\n- This causes an abrupt haemolytic crisis in deficient people.\n\n>> Favism: fava beans → divicine (potent oxidant) → sudden severe haemolysis.",
+         "opts": [
+          "An allergy to fava bean protein",
+          "Fava beans → vicine/convicine → divicine (a potent oxidant) → sudden haemolysis",
+          "A bacterial infection from fava beans",
+          "A clotting reaction to fava beans"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Why do most people with G6PD deficiency stay asymptomatic between episodes?",
+         "a": "**Because haemolysis only occurs when an oxidative trigger is present; between triggers the remaining red cells function normally, so the patient is normal.**\n\n## Understanding it\n- The defect is only exposed under oxidative stress.\n- Remove the trigger and the person is well.\n\n>> Normal between episodes — crises need an oxidative trigger.",
+         "opts": [
+          "Because the enzyme repairs itself daily",
+          "Haemolysis needs an oxidative trigger; between triggers the patient is normal",
+          "Because the deficiency disappears with age",
+          "Because they are given continuous transfusions"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "When do symptoms appear after ingestion of an offending drug, and why?",
+         "a": "**48–96 hours (2–4 days) after ingestion — because the reactive oxygen species must accumulate to a high enough concentration to trigger the crisis.**\n\n## Understanding it\n- There is a lag while oxidants build up.\n- Severity depends on the degree of enzyme defect.\n\n>> Symptoms 2–4 days later — ROS must accumulate first.",
+         "opts": [
+          "Only after several weeks",
+          "Never — the drug is harmless",
+          "Immediately, within minutes",
+          "48–96 hours (2–4 days) later, as ROS accumulate to a critical level"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the symptoms of a G6PD haemolytic crisis?",
+         "a": "**Pallor (anaemia), jaundice (from bilirubin of RBC breakdown), fatigue, and sometimes dark urine.**\n\n## Understanding it\n- Haemolysis causes anaemia and releases bilirubin.\n- Dark urine reflects haemoglobin/bilirubin breakdown products.\n\n>> Pallor, jaundice, fatigue, dark urine.",
+         "opts": [
+          "Joint swelling and rash",
+          "Pallor, jaundice, fatigue and sometimes dark urine",
+          "Constipation and weight gain",
+          "Chest pain and cough"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the three main triggers of haemolysis in G6PD deficiency, and which is most common?",
+         "a": "**Infections (most common), oxidant drugs (e.g. antimalarials like primaquine, sulfa drugs), and fava beans.**\n\n## Understanding it\n- Infection is the leading trigger.\n- Drugs and fava beans are the other classic triggers.\n\n>> Infection (commonest), oxidant drugs, fava beans.",
+         "opts": [
+          "Vaccines, milk, sunlight",
+          "Infections (most common), oxidant drugs, fava beans",
+          "Cold weather, exercise, dehydration",
+          "There are no triggers"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Why do infections trigger haemolysis in G6PD deficiency?",
+         "a": "**Because phagocytes (neutrophils, macrophages) produce a lot of reactive oxygen species to fight the infection; in a normal child RBC glutathione neutralises this, but in a G6PD-deficient child it causes acute haemolysis.**\n\n## Understanding it\n- Infection-fighting cells release ROS that overwhelm the deficient RBC.\n- Normal cells detoxify it; deficient cells cannot.\n\n>> Infection → phagocyte ROS → overwhelms deficient RBC → haemolysis.",
+         "opts": [
+          "Infections have no effect on G6PD",
+          "Phagocytes produce ROS that the deficient RBC cannot neutralise → haemolysis",
+          "The infection eats the red cells directly",
+          "Fever melts the red cells"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is balanced polymorphism, as applied to G6PD?",
+         "a": "**The maintenance of two or more alleles in a population because the heterozygote has a survival advantage — here, protection against malaria.**\n\n## Understanding it\n- The disadvantage (fragile RBCs) is offset by malaria protection.\n- So the gene persists in malaria-endemic areas.\n\n>> Balanced polymorphism: heterozygote advantage (malaria protection) keeps the gene.",
+         "opts": [
+          "Two alleles persist because the heterozygote has a survival advantage (malaria)",
+          "Random loss of alleles over time",
+          "A gene that only harms carriers",
+          "A mutation that disappears each generation"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How does G6PD deficiency protect against malaria?",
+         "a": "**The fragile G6PD-deficient RBC haemolyses when the malaria parasite causes oxidative stress, destroying the infected cell early so the parasite cannot survive well — giving partial protection.**\n\n## Understanding it\n- The parasite's own oxidative stress bursts the fragile cell, killing the parasite too.\n- Infected cells are cleared before the parasite matures.\n\n>> Fragile RBC haemolyses when parasitised → parasite dies → partial protection.",
+         "opts": [
+          "It prevents the mosquito from biting",
+          "The enzyme kills the parasite directly",
+          "Parasitised fragile RBCs haemolyse early, killing the parasite → partial protection",
+          "It makes red cells resistant to rupture"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why must a G6PD test be done when the patient is stable rather than during a crisis?",
+         "a": "**Because during haemolysis the old (deficient) cells are destroyed and the new reticulocytes have normal enzyme, giving a falsely normal result.**\n\n## Understanding it\n- Fresh reticulocytes are enzyme-rich and mask the deficiency.\n- Test when the reticulocyte count is normal.\n\n>> Test when stable — a crisis gives a falsely normal result.",
+         "opts": [
+          "There is no difference in timing",
+          "During haemolysis, young reticulocytes have normal enzyme → falsely normal result",
+          "The enzyme is destroyed by the test in a crisis",
+          "The test is dangerous during a crisis"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is the diagnosis of G6PD deficiency confirmed?",
+         "a": "**By evidence of reduced G6PD activity in RBCs — enzyme activity ≤ 10% of normal confirms it — measured by spectrophotometry or newer techniques (RDTs), best when the reticulocyte count is normal.**\n\n## Understanding it\n- Direct enzyme assay is the confirmatory test.\n- ≤10% activity confirms the diagnosis.\n\n>> Confirm with RBC G6PD activity ≤10% (when stable).",
+         "opts": [
+          "A positive malaria RDT",
+          "Reduced RBC G6PD activity (≤10% of normal) by spectrophotometry/RDT",
+          "A prolonged clotting time",
+          "A raised white cell count"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the treatment and management of G6PD deficiency?",
+         "a": "**It is self-limiting — once the trigger is removed haemolysis stops; management is to avoid triggers, treat infection, and transfuse blood in severe cases.**\n\n## Understanding it\n- Removing the trigger halts the haemolysis.\n- Supportive care and transfusion cover severe episodes.\n\n>> Self-limiting: avoid triggers, treat infection, transfuse if severe.",
+         "opts": [
+          "Avoid triggers, treat infection, transfuse in severe cases (self-limiting)",
+          "Splenectomy in every case",
+          "Lifelong enzyme replacement therapy",
+          "Continuous antimalarial prophylaxis"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "CLINICAL — A boy develops pallor, jaundice and dark urine 2 days after starting an antimalarial. What is the likely diagnosis and immediate step?",
+         "a": "**An acute haemolytic crisis from G6PD deficiency; stop the offending drug (remove the trigger) and give supportive care, transfusing if severe.**\n\n## Understanding it\n- Oxidant drug + delayed haemolysis in a boy points to G6PD deficiency.\n- Removing the trigger is the key first step.\n\n>> G6PD haemolytic crisis → stop the drug, support, transfuse if severe.",
+         "opts": [
+          "Hepatitis; give antivirals",
+          "Iron deficiency; give oral iron",
+          "Malaria relapse; give more antimalarial",
+          "G6PD deficiency crisis; stop the drug and support (transfuse if severe)"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "CLINICAL — A child's G6PD test is 'normal' during an acute haemolytic episode, but deficiency is strongly suspected. What should you do?",
+         "a": "**Repeat the test when the child is stable and the reticulocyte count is normal, because young reticulocytes during a crisis can give a falsely normal result.**\n\n## Understanding it\n- A crisis-time result can be falsely normal.\n- Retest after recovery for an accurate assay.\n\n>> Retest when stable — the crisis result can be falsely normal.",
+         "opts": [
+          "Give a blood transfusion to change the result",
+          "Accept the normal result and exclude G6PD deficiency",
+          "Diagnose a different enzyme defect immediately",
+          "Repeat the test when stable (normal reticulocyte count) — crisis gives false normal"
+         ],
+         "ans": 3
+        }
+       ],
+       "imgBase": null,
+       "imgCount": 0,
+       "ready": true
       },
       {
        "id": "pediatrics-21",
@@ -15493,14 +16093,499 @@ window.MEDBANK = {
        "day": "",
        "date": "25/05/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Malaria\n\n*Prof Onyire — Paediatrics, topic 32 · Malaria in Nigeria, 500-Level*\n\n## Outline\n\nEpidemiology & local context · Life cycle of the parasite · Pathogenesis of severe malaria · Clinical features (uncomplicated vs severe) · Diagnosis · Management of uncomplicated malaria · Management of severe malaria & complications · Malaria in pregnancy · Prevention & challenges · Mortality & take-home points · Clinical cases\n\n> **Opening principle:** the history is targeted at the patient in front of you — ask what matters for *this* child.\n\n## Epidemiology & local context\n\nNigeria carries an enormous share of the global burden: **~27% of global cases and ~31% of global deaths.** **Plasmodium falciparum** causes **95%** of cases and is responsible for nearly all severe disease. The vector is the **female Anopheles mosquito.** Transmission is **perennial in the South and seasonal in the North.** The susceptible (at-risk) groups are **children under 5 years, pregnant women, and non-immune adults.**\n\n## Life cycle of the parasite\n\nThree linked stages carry the parasite from mosquito to human and back:\n\n1. **Transmission to human** — the mosquito bites and injects **sporozoites**, which travel to the liver.\n2. **Liver (pre-erythrocytic) stage** — the sporozoite infects a **hepatocyte** and multiplies.\n3. **Blood (erythrocytic) stage** — the liver cell ruptures, releasing **merozoites** that infect red blood cells; inside the RBC the parasite undergoes the sexual cycle, producing forms that are taken up when another mosquito bites — completing transmission back to the mosquito.\n\n**Pre-erythrocytic stage:** lasts **6–14 days** for P. falciparum, and there are **no symptoms** at this stage. **Erythrocytic stage:** this is where **fever and haemolysis** appear — the clinical signs.\n\n> **Cyto-adherence** is a special quality of P. falciparum: infected red cells **stick to blood-vessel walls (sequestration).** This is one of the key causes of complications.\n\n## Pathogenesis of severe malaria\n\nSevere disease follows a chain of events: **microvascular sequestration → hypoxia → lactic acidosis → cytokine storm → inflammatory response syndrome.** In parallel, **haemolysis** causes **anaemia and splenic dysfunction**, with **haemoglobinuria** and **thrombocytopenia.** Sequestration in the brain produces **cerebral malaria.**\n\n**Organ involvement:** renal/hepatic — mild elevation of liver enzymes, jaundice, hepatic dysfunction. Respiratory — may be normal, or progress to **ARDS.** CNS/pulmonary — **pulmonary oedema** and **severe anaemia.**\n\n## Clinical features — uncomplicated vs severe\n\n| System | Uncomplicated | Severe |\n|---|---|---|\n| **Fever** | Intermittent; rigor; chills | High grade; continuous |\n| **CNS** | Headache; malaise | Impaired consciousness / unconsciousness; seizure |\n| **Haematological** | Mild anaemia; thrombocytopenia | Severe anaemia (Hb < 5); DIC |\n| **Metabolic** | Mild hypoglycaemia | Hypoglycaemia; lactic acidosis |\n\n## Diagnosis\n\n1. **Clinical suspicion** — based on presentation.\n2. **Rapid diagnostic test (RDT)** — detects the **HRP antigen.** Fast and good for P. falciparum. **Caveat: the antigen stays positive for 2–4 weeks after recovery**, so a positive RDT does not always mean current active disease.\n3. **Microscopy — the gold standard.** A **thick film** gives parasite density; a **thin film** identifies the species.\n4. **Parasite density** — reported per µL (e.g. 100/µL up to 100,000/µL).\n5. **Other investigations** — FBC, renal function, blood glucose, LFTs; **arterial blood gas** in severe disease.\n6. **Level of care** — RDT at the primary health-care level; microscopy at secondary/tertiary level.\n\n## Management — uncomplicated malaria\n\n- **ACT (artemisinin-based combination therapy)** is the treatment.\n- **Antipyresis:** diclofenac or paracetamol suppository.\n- **Tepid sponging** with luke-warm water to relieve fever.\n- **Supportive treatment:** hydrate/infusion; blood transfusion if needed. (Artesunate should be available if the child deteriorates.)\n- **Fever clearance** is expected over about **3 days.** If fever has not cleared, **look for another cause** (e.g. tonsillitis).\n\n> **Reference:** normal temperature of children is **37.2–37.4°C.**\n\n## Management — severe malaria & complications\n\n**Treatment:**\n\n- **IV artesunate is first-line** — continue until the child regains consciousness.\n- **Second line: quinine.**\n- **Calculate the plasma parasite density.**\n\n**Management of complications:**\n\n- **Airway** — keep it patent.\n- **Convulsions** — give an anticonvulsant.\n- **Avoid steroids.**\n- **Severe anaemia** — transfuse blood, especially if the child is in distress; **transfuse if Hb < 5 g/dl.**\n- **AKI** — watch fluid balance.\n- **Hypoglycaemia** — check blood glucose **4-hourly** and correct with **10% dextrose.**\n\n> **Rule of thumb:** **Hb ≈ ⅓ × PCV.** Sickle-cell patients need a stable Hb kept where they are comfortable.\n\n## Malaria in pregnancy\n\n- **1st trimester:** **quinine + clindamycin.**\n- **Other trimesters:** **ACT.**\n\n## Prevention & challenges\n\n**Prevention strategies:** vector control (insecticide; avoid bushy environments) and **chemoprophylaxis** (Fansidar in pregnancy; mefloquine, doxycycline).\n\n**Challenges:** **drug resistance** in P. falciparum, including **partial resistance to ACT**; **RDT false negatives**; **access to care**; and poor **antimicrobial stewardship** (abuse of antimicrobial drugs).\n\n## Mortality & take-home points\n\nEven when treated, mortality in severe malaria can be high — **fast treatment is essential.**\n\n> **Take-home:** severe malaria with **fever + unconsciousness → think cerebral malaria.**\n\n## Clinical cases\n\n**Case 1 (severe malaria).** A 14-year-old male with 4-day fever, headache and rigor; Hb 6.2 g; RDT positive; parasite density > 100,000/µL. *Why is IV artesunate better than quinine?* — Quinine risks arrhythmias; artesunate gives **faster parasite clearance**, **lower mortality**, and a **better safety profile** (quinine can cause hypotension and hypoglycaemia).\n\n**Case 2 (emergency).** A 4-year-old with fever and seizure; RDT positive but blood film negative. This is an **emergency — severe malaria until proven otherwise.** The RDT shows they have been infected; check for another cause (FBC, LFT, etc.) and **repeat microscopy in 12–24 hours.**\n\n**Assignment:** why does severe malaria cause hypoglycaemia, and why is it dangerous in a child?\n\n## References\n\nLecture material of Prof Onyire (500-level Paediatrics, Abia State University); WHO malaria treatment guidelines; Nelson Textbook of Paediatrics.\n",
+       "simplified": "# Malaria — the simple version\n\n## The one-line story\n\n> A female **Anopheles** mosquito injects **P. falciparum**, which hides in the **liver**, then bursts into the **blood** and destroys **red cells** — causing **fever + anaemia**, and, when red cells **stick inside vessels**, **severe/cerebral malaria**.\n\nNigeria owns a huge slice of this: **~27% of the world's cases, ~31% of the deaths.** The people who die are the **non-immune** — **under-5s, pregnant women, non-immune adults.**\n\n---\n\n## Life cycle in one breath\n\n> **Mosquito → sporozoite → liver → merozoite → red blood cell → back to mosquito.**\n\nThe **liver stage (6–14 days) is silent.** Symptoms only start in the **blood stage**, when red cells rupture — that's the **fever and haemolysis.**\n\n> The killer trick of falciparum is **cyto-adherence**: infected red cells **glue themselves to vessel walls (sequestration)** — and that is what causes the complications.\n\n---\n\n## Why severe malaria is deadly\n\n> **Sequestration → blocked microvessels → hypoxia → lactic acidosis → cytokine storm.** In the brain that's **cerebral malaria**; plus **severe anaemia, hypoglycaemia, DIC.**\n\n---\n\n## Uncomplicated vs severe — the split that matters\n\n> **Uncomplicated:** intermittent fever, headache, mild anaemia, mild low sugar.\n> **Severe:** continuous high fever, **unconscious/seizing**, **Hb < 5**, DIC, **hypoglycaemia + lactic acidosis.**\n\nThe exam trigger: **fever + unconscious = cerebral malaria until proven otherwise.**\n\n---\n\n## Diagnosis — pick the right test\n\n> **RDT** (detects HRP antigen) is fast — but **stays positive 2–4 weeks after cure**, so it can mislead.\n> **Microscopy is the gold standard:** **thick film = how many** (density), **thin film = which species.**\n\nAlso check **glucose, FBC, renal function, LFTs**, and a **blood gas** if severe.\n\n---\n\n## Treatment — two ladders\n\n> **Uncomplicated:** **ACT** + bring the fever down (paracetamol/diclofenac, tepid sponging). Fever should clear in **~3 days** — if not, look for another cause.\n> **Severe:** **IV artesunate first-line** (until conscious), quinine second. Then fix each complication.\n\n**Severe-malaria checklist:** airway patent · anticonvulsant for fits · **no steroids** · **transfuse if Hb < 5** · watch fluids for AKI · **check glucose 4-hourly, correct with 10% dextrose.**\n\n> **Rule of thumb:** **Hb ≈ ⅓ × PCV.**\n\n---\n\n## Two special situations\n\n> **Pregnancy:** **1st trimester = quinine + clindamycin**; **later trimesters = ACT.**\n> **Prevention:** nets/insecticide + clear the bush; **chemoprophylaxis** (Fansidar in pregnancy, mefloquine, doxycycline). The big threats to control are **ACT partial resistance, RDT false negatives, and poor access.**\n\n---\n\n## Putting it together\n\nMalaria is a **falciparum** infection spread by the **Anopheles** mosquito that runs **liver → blood**, destroying red cells. Most cases are **uncomplicated** (fever, mild anaemia) and clear with **ACT**. The danger is **severe malaria** — driven by **sequestration** — presenting as a child who is **unconscious, seizing, profoundly anaemic or hypoglycaemic**; that child needs **IV artesunate now**, plus airway care, anticonvulsants, transfusion if Hb < 5, and 4-hourly glucose. Because mortality stays high **even when treated**, the whole game is **speed**: recognise severe features fast and treat before the organs fail.\n",
+       "pdf": "content/Pediatrics/Onyire/Malaria/note.pdf",
+       "primer": [
+        {
+         "q": "Epidemiology & local context: how big is malaria in Nigeria and who gets it?",
+         "lecturer": "Malaria is a parasitic infection transmitted by the female Anopheles mosquito. Nigeria carries a huge share of the world's burden — about 27% of global cases and 31% of global deaths. Plasmodium falciparum causes ~95% of cases and nearly all severe disease. Transmission is perennial (all-year) in the South and seasonal in the North. The susceptible (at-risk) groups are children under 5, pregnant women and non-immune adults. The opening principle is that history is targeted at the patient in front of you.",
+         "explain": "## Read this first\n\n>> **Parasite:** P. falciparum (95%, and almost all severe disease). **Vector:** female Anopheles mosquito.\n\n>> **Nigeria:** ~**27% of global cases, ~31% of global deaths.**\n\n>> **Transmission:** perennial in the South, seasonal in the North.\n\n>> **At-risk:** under-5s, pregnant women, non-immune adults.",
+         "tie": "These numbers and risk groups are the backdrop for everything that follows — why severe malaria is common in Nigerian children and why the lecture focuses on recognising it fast."
+        },
+        {
+         "q": "Life cycle: trace the parasite from mosquito to human and back.",
+         "lecturer": "The life cycle has three stages. Stage 1 — transmission to human: the mosquito bites and injects sporozoites, which travel to the liver. Stage 2 — the sporozoite infects a liver cell (hepatocyte). Stage 3 — the liver cell ruptures, releasing merozoites that infect red blood cells; inside the RBC the parasite undergoes the sexual cycle, producing forms taken up when another mosquito bites, completing transmission back to the mosquito. The pre-erythrocytic (liver) stage lasts 6–14 days for P. falciparum and is asymptomatic. The erythrocytic (blood) stage is where fever and haemolysis — the clinical signs — appear.",
+         "explain": "## Read this first\n\n>> **Route:** bite → **sporozoite → liver (hepatocyte) → merozoite → red blood cell** → back to the mosquito.\n\n>> **Liver stage:** 6–14 days, **no symptoms.**\n\n>> **Blood stage:** where **fever + haemolysis** begin — the clinical signs.",
+         "tie": "Knowing that symptoms come only from the blood stage explains the incubation period and why a child can be infected yet well for days before falling ill."
+        },
+        {
+         "q": "Cyto-adherence & pathogenesis: why does P. falciparum cause severe malaria?",
+         "lecturer": "Cyto-adherence is a special quality of P. falciparum that makes infected red cells stick to blood-vessel walls (sequestration) — one of the key causes of complications. In severe malaria the chain is: microvascular sequestration → hypoxia → lactic acidosis → cytokine storm → inflammatory response syndrome. In parallel, haemolysis causes anaemia and splenic dysfunction, with haemoglobinuria and thrombocytopenia, and sequestration in the brain produces cerebral malaria. Organ involvement includes mild liver-enzyme elevation, jaundice and hepatic dysfunction (renal/hepatic); a normal chest or ARDS (respiratory); and pulmonary oedema with severe anaemia (CNS/pulmonary).",
+         "explain": "## Read this first\n\n>> **Cyto-adherence** → infected RBCs stick to vessels (**sequestration**) → complications. This is unique to falciparum.\n\n>> **Severe-disease chain:** sequestration → hypoxia → lactic acidosis → cytokine storm.\n\n>> **Haemolysis** → anaemia, haemoglobinuria, thrombocytopenia; **brain sequestration** → cerebral malaria.",
+         "tie": "Sequestration is the single idea that explains why falciparum — and not the milder species — causes cerebral malaria, organ failure and death."
+        },
+        {
+         "q": "Clinical features: how do you tell uncomplicated from severe malaria?",
+         "lecturer": "The clinical picture is compared system by system. Fever: uncomplicated is intermittent with rigor and chills; severe is high-grade and continuous. CNS: uncomplicated causes headache and malaise; severe causes impaired consciousness or unconsciousness and seizures. Haematological: uncomplicated has mild anaemia and thrombocytopenia; severe has severe anaemia (Hb < 5) and DIC. Metabolic: uncomplicated has mild hypoglycaemia; severe has hypoglycaemia with lactic acidosis. The take-home is that fever plus unconsciousness means cerebral malaria until proven otherwise.",
+         "explain": "## Read this first\n\n>> **Fever:** intermittent (uncomplicated) vs continuous high-grade (severe).\n\n>> **CNS:** headache/malaise vs **impaired consciousness / seizures.**\n\n>> **Blood:** mild anaemia vs **Hb < 5 + DIC.**\n\n>> **Metabolic:** mild low sugar vs **hypoglycaemia + lactic acidosis.**\n\n>> **Trigger:** fever + unconscious = cerebral malaria until proven otherwise.",
+         "tie": "This uncomplicated-vs-severe split is the decision that drives management — oral ACT for uncomplicated, IV artesunate plus complication control for severe."
+        },
+        {
+         "q": "Diagnosis: which test, when, and what are the traps?",
+         "lecturer": "Diagnosis rests on clinical suspicion plus tests. The RDT (rapid diagnostic test) detects the HRP antigen — it is fast and good for P. falciparum, but the antigen stays positive for 2–4 weeks after recovery, so a positive RDT may reflect a recent, already-treated episode. Microscopy is the gold standard: a thick film gives parasite density (reported per µL, e.g. 100 up to 100,000/µL) and a thin film identifies the species. Other investigations are FBC, renal function, blood glucose and LFTs, with an arterial blood gas in severe disease. By level of care, RDT is used at the primary health-care level and microscopy at secondary/tertiary level.",
+         "explain": "## Read this first\n\n>> **RDT** — detects the **HRP antigen**; fast, but **stays positive 2–4 weeks** after cure (can mislead).\n\n>> **Microscopy (gold standard):** **thick film = density**, **thin film = species.**\n\n>> **Also:** FBC, glucose, renal/liver function; **blood gas if severe.**\n\n>> **Level of care:** RDT at PHC, microscopy at 2°/3° level.",
+         "tie": "Understanding the RDT's antigen-lag and microscopy's two films lets you interpret confusing results — like RDT-positive/film-negative — without withholding treatment from a sick child."
+        },
+        {
+         "q": "Management of uncomplicated malaria: the standard plan.",
+         "lecturer": "Uncomplicated malaria is treated with ACT (artemisinin-based combination therapy). Add antipyresis with a diclofenac or paracetamol suppository, and tepid sponging with luke-warm water to relieve fever (normal child temperature is 37.2–37.4°C). Give supportive treatment — hydration or infusion, and blood transfusion if needed — and keep artesunate available in case the child deteriorates. Fever clearance is expected over about 3 days; if fever has not cleared, look for another cause such as tonsillitis.",
+         "explain": "## Read this first\n\n>> **Drug:** **ACT** (artemisinin-based combination therapy).\n\n>> **Fever:** paracetamol/diclofenac suppository + **luke-warm tepid sponging** (normal temp 37.2–37.4°C).\n\n>> **Support:** hydrate/infuse; transfuse if needed; have artesunate ready.\n\n>> **Follow-up:** fever should clear in **~3 days** — if not, seek another cause (e.g. tonsillitis).",
+         "tie": "This is the everyday malaria plan; the key exam point is that persisting fever after adequate ACT means you must look for a second diagnosis, not just repeat the drug."
+        },
+        {
+         "q": "Management of severe malaria & complications: the emergency plan.",
+         "lecturer": "Severe malaria is a medical emergency. IV artesunate is first-line — continue it until the child regains consciousness; quinine is second-line, and you should calculate the plasma parasite density. Manage the complications: keep the airway patent; give an anticonvulsant for convulsions; avoid steroids; for severe anaemia transfuse blood (especially if the child is in distress) with a threshold of Hb < 5 g/dl; for AKI watch fluid balance; and for hypoglycaemia check blood glucose 4-hourly and correct with 10% dextrose. A useful rule of thumb is Hb ≈ ⅓ × PCV, and sickle-cell patients need a stable Hb kept where they are comfortable.",
+         "explain": "## Read this first\n\n>> **First-line:** **IV artesunate** until conscious; **second-line quinine.**\n\n>> **Complication checklist:** airway patent · **anticonvulsant** for fits · **avoid steroids** · **transfuse if Hb < 5** · watch fluids (AKI) · **glucose 4-hourly + 10% dextrose.**\n\n>> **Rule of thumb:** **Hb ≈ ⅓ × PCV.**",
+         "tie": "This bundle is the life-saving core of the topic — the right drug (artesunate) plus a systematic complication checklist is exactly what an examiner and a sick child both need."
+        },
+        {
+         "q": "Malaria in pregnancy and prevention & challenges.",
+         "lecturer": "In pregnancy, malaria is treated by trimester: the first trimester with quinine + clindamycin, and later trimesters with ACT. Prevention combines vector control (insecticide; avoiding bushy environments) and chemoprophylaxis (Fansidar in pregnancy; mefloquine, doxycycline). The challenges to control are drug resistance in P. falciparum — including partial resistance to ACT — RDT false negatives, poor access to care, and poor antimicrobial stewardship (abuse of antimicrobial drugs).",
+         "explain": "## Read this first\n\n>> **Pregnancy:** **1st trimester = quinine + clindamycin; later = ACT.**\n\n>> **Prevention:** vector control (insecticide, clear the bush) + **chemoprophylaxis** (Fansidar in pregnancy; mefloquine, doxycycline).\n\n>> **Challenges:** **ACT partial resistance**, RDT false negatives, access, poor stewardship.",
+         "tie": "These are the public-health and special-population points — they explain the pregnancy-specific drugs and why malaria control remains hard in Nigeria despite effective treatment."
+        },
+        {
+         "q": "Mortality, take-home points & clinical cases.",
+         "lecturer": "Even when treated, mortality in severe malaria can be high — fast treatment is essential. The take-home is that severe malaria with fever plus unconsciousness should make you think cerebral malaria. Two teaching cases: (1) a 14-year-old with 4-day fever, headache and rigor, Hb 6.2, positive RDT and density > 100,000/µL is severe malaria — IV artesunate is preferred over quinine because it gives faster parasite clearance, lower mortality and a better safety profile (quinine risks arrhythmias, hypotension, hypoglycaemia). (2) A 4-year-old with fever and seizure, RDT positive but film negative, is an emergency — severe malaria until proven otherwise; check for another cause and repeat microscopy in 12–24 hours.",
+         "explain": "## Read this first\n\n>> **Speed matters:** mortality stays high even when treated.\n\n>> **Take-home:** fever + unconscious → **cerebral malaria** until proven otherwise.\n\n>> **Case 1:** high-density severe malaria → **artesunate > quinine** (faster, safer).\n\n>> **Case 2:** RDT+ / film− with seizure → treat as severe, **repeat film in 12–24h.**",
+         "tie": "The cases show how the principles play out in real decisions — recognising severe disease instantly and not being falsely reassured by a negative film."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What share of the global malaria burden does Nigeria carry?",
+         "a": "**Nigeria accounts for about 27% of global cases and 31% of global deaths.**\n\n## Understanding it\n- Nigeria is the single highest-burden country in the world for malaria.\n- This is why local epidemiology dominates the lecture.\n\n>> ~27% of cases, ~31% of deaths — the highest national burden.",
+         "opts": [
+          "~1% of cases and ~10% of deaths",
+          "~27% of cases and ~31% of deaths",
+          "~50% of cases and ~50% of deaths",
+          "~5% of cases and ~5% of deaths"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Which Plasmodium species causes 95% of malaria cases?",
+         "a": "**Plasmodium falciparum — responsible for ~95% of cases and nearly all severe disease.**\n\n## Understanding it\n- Falciparum is the species that cyto-adheres and causes severe/cerebral malaria.\n- The other species rarely cause life-threatening disease.\n\n>> P. falciparum = 95% of cases and almost all severe malaria.",
+         "opts": [
+          "Plasmodium ovale",
+          "Plasmodium malariae",
+          "Plasmodium vivax",
+          "Plasmodium falciparum"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the vector of malaria?",
+         "a": "**The female Anopheles mosquito.**\n\n## Understanding it\n- Only the female takes blood meals (needed for her eggs) and so transmits the parasite.\n- Vector control targets this mosquito.\n\n>> Female Anopheles mosquito.",
+         "opts": [
+          "The male Anopheles mosquito",
+          "The female Anopheles mosquito",
+          "The female Aedes mosquito",
+          "The Culex mosquito"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the transmission pattern of malaria in Nigeria?",
+         "a": "**Perennial (all-year) in the South and seasonal in the North.**\n\n## Understanding it\n- The humid South sustains mosquitoes year-round; the drier North has seasonal peaks.\n- This shapes when outbreaks occur regionally.\n\n>> Perennial in the South, seasonal in the North.",
+         "opts": [
+          "Seasonal in the South, perennial in the North",
+          "Perennial in the South, seasonal in the North",
+          "Only during the dry season",
+          "Perennial everywhere"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Who are the susceptible (at-risk) groups for malaria?",
+         "a": "**Children under 5 years, pregnant women, and non-immune adults.**\n\n## Understanding it\n- These groups lack protective acquired immunity, so they get severe disease.\n- History and prevention are targeted at them.\n\n>> Under-5s, pregnant women, non-immune adults.",
+         "opts": [
+          "Children <5, pregnant women, non-immune adults",
+          "Only elderly men",
+          "Immune adults who grew up in endemic areas",
+          "Only people with sickle cell disease"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What are the three stages of the malaria life cycle as taught?",
+         "a": "**Transmission to human (mosquito injects sporozoites → liver); liver infection of hepatocytes; and blood stage where merozoites infect RBCs and complete the sexual cycle back to the mosquito.**\n\n## Understanding it\n- Stage 1: bite injects sporozoites to the liver. Stage 2: hepatocyte infection. Stage 3: RBC infection + transmission back.\n- The cycle closes when a mosquito bites and picks up the blood forms.\n\n>> Bite→liver→blood, then back to the mosquito.",
+         "opts": [
+          "Gut→lung→liver",
+          "Injection of sporozoites→liver→blood-stage in RBCs",
+          "Only a blood stage, no liver stage",
+          "RBC first, then liver, then brain"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What does the mosquito inject when it bites a human?",
+         "a": "**Sporozoites, which travel to the liver.**\n\n## Understanding it\n- Sporozoites are the infective form injected in saliva.\n- They home to hepatocytes to begin the liver stage.\n\n>> Sporozoites → liver.",
+         "opts": [
+          "Gametocytes",
+          "Merozoites",
+          "Sporozoites",
+          "Trophozoites"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "How long does the pre-erythrocytic (liver) stage last for P. falciparum, and is it symptomatic?",
+         "a": "**It lasts 6–14 days and is asymptomatic.**\n\n## Understanding it\n- The liver stage is clinically silent — no fever yet.\n- Symptoms only begin once the blood stage starts.\n\n>> Liver stage: 6–14 days, no symptoms.",
+         "opts": [
+          "Several months, always symptomatic",
+          "6–14 days, and asymptomatic",
+          "1–2 days, with high fever",
+          "24 hours, with rash"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the clinical signs of the erythrocytic (blood) stage?",
+         "a": "**Fever and haemolysis.**\n\n## Understanding it\n- When infected red cells rupture, fever and red-cell breakdown appear.\n- This is the stage that produces symptoms.\n\n>> Blood stage = fever + haemolysis.",
+         "opts": [
+          "A skin rash only",
+          "Fever and haemolysis",
+          "A painless liver mass only",
+          "No symptoms at all"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is cyto-adherence and why does it matter?",
+         "a": "**A quality of P. falciparum that makes infected red cells stick to blood-vessel walls (sequestration) — a key cause of complications.**\n\n## Understanding it\n- Sequestered cells block microvessels, causing organ damage including cerebral malaria.\n- It is why falciparum, not the others, causes severe disease.\n\n>> Cyto-adherence → sequestration → complications.",
+         "opts": [
+          "The parasite leaves the blood for the gut",
+          "It makes the parasite easier to kill",
+          "Red cells become larger and rounder",
+          "Infected RBCs stick to vessel walls, causing sequestration"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Outline the pathogenesis chain of severe malaria from sequestration.",
+         "a": "**Microvascular sequestration → hypoxia → lactic acidosis → cytokine storm → inflammatory response syndrome.**\n\n## Understanding it\n- Blocked microvessels starve tissues of oxygen, driving acidosis and a cytokine storm.\n- This systemic inflammation is what makes severe malaria lethal.\n\n>> Sequestration→hypoxia→lactic acidosis→cytokine storm.",
+         "opts": [
+          "Liver failure→jaundice only",
+          "Sequestration→hypoxia→lactic acidosis→cytokine storm",
+          "Haemolysis→polycythaemia→clotting",
+          "Sequestration→more oxygen→recovery"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What haematological consequences follow haemolysis in malaria?",
+         "a": "**Anaemia and splenic dysfunction, with haemoglobinuria and thrombocytopenia.**\n\n## Understanding it\n- Destroyed red cells cause anaemia; free haemoglobin appears in urine; platelets fall.\n- The spleen, overworked, becomes dysfunctional.\n\n>> Haemolysis → anaemia, haemoglobinuria, thrombocytopenia.",
+         "opts": [
+          "A raised haematocrit",
+          "Iron overload only",
+          "Polycythaemia and thrombocytosis",
+          "Anaemia, haemoglobinuria and thrombocytopenia"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Compare fever in uncomplicated vs severe malaria.",
+         "a": "**Uncomplicated: intermittent, with rigor and chills. Severe: high-grade and continuous.**\n\n## Understanding it\n- The pattern shifts from intermittent to continuous as disease worsens.\n- Continuous high fever is a warning sign.\n\n>> Uncomplicated = intermittent; severe = continuous high-grade.",
+         "opts": [
+          "Uncomplicated continuous; severe intermittent",
+          "Fever is absent in severe malaria",
+          "Both are always low-grade",
+          "Uncomplicated intermittent; severe continuous high-grade"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Compare the CNS features of uncomplicated vs severe malaria.",
+         "a": "**Uncomplicated: headache and malaise. Severe: impaired consciousness/unconsciousness and seizures.**\n\n## Understanding it\n- Altered consciousness or seizures signal cerebral involvement — severe disease.\n- Headache alone is uncomplicated.\n\n>> Severe = impaired consciousness/seizure (cerebral malaria).",
+         "opts": [
+          "Uncomplicated causes seizures",
+          "Uncomplicated headache/malaise; severe impaired consciousness/seizure",
+          "Severe causes only mild headache",
+          "Both cause coma"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Compare the haematological features of uncomplicated vs severe malaria.",
+         "a": "**Uncomplicated: mild anaemia and thrombocytopenia. Severe: severe anaemia (Hb < 5) and DIC.**\n\n## Understanding it\n- Severe malaria drives Hb below 5 and can trigger DIC.\n- Mild anaemia alone is uncomplicated.\n\n>> Severe = Hb < 5 + DIC.",
+         "opts": [
+          "Both cause polycythaemia",
+          "No blood changes occur",
+          "Severe causes only mild anaemia",
+          "Uncomplicated mild anaemia; severe anaemia (Hb<5) + DIC"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Compare the metabolic features of uncomplicated vs severe malaria.",
+         "a": "**Uncomplicated: mild hypoglycaemia. Severe: hypoglycaemia with lactic acidosis.**\n\n## Understanding it\n- Severe malaria adds lactic acidosis to the low blood sugar.\n- Both feature hypoglycaemia, but severe is worse.\n\n>> Severe = hypoglycaemia + lactic acidosis.",
+         "opts": [
+          "Severe causes hyperglycaemia",
+          "No metabolic change occurs",
+          "Both cause metabolic alkalosis",
+          "Uncomplicated mild hypoglycaemia; severe hypoglycaemia + lactic acidosis"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What antigen does a malaria RDT detect, and what is its key caveat?",
+         "a": "**The HRP antigen — fast and good for P. falciparum, but it stays positive for 2–4 weeks after recovery.**\n\n## Understanding it\n- A positive RDT confirms infection but may reflect a recent, already-treated episode.\n- So a positive RDT with a negative film can be a past infection.\n\n>> RDT = HRP antigen; stays positive 2–4 weeks post-recovery.",
+         "opts": [
+          "Glucose; unrelated to timing",
+          "The DNA of the parasite; clears immediately",
+          "The HRP antigen; positive for 2–4 weeks after recovery",
+          "Antibodies; positive for years"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the gold-standard test for malaria, and what does each film show?",
+         "a": "**Microscopy — the thick film gives parasite density; the thin film identifies the species.**\n\n## Understanding it\n- Thick film = how many parasites (density); thin film = which species.\n- Microscopy remains the reference standard.\n\n>> Microscopy: thick = density, thin = species.",
+         "opts": [
+          "Blood culture",
+          "Serology — antibody titres",
+          "Microscopy — thick film density, thin film species",
+          "RDT — it replaces microscopy"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "At what levels of care are RDT and microscopy used?",
+         "a": "**RDT at the primary health-care level; microscopy at secondary/tertiary level.**\n\n## Understanding it\n- RDTs are simple and used at PHCs; microscopy needs a lab, at higher levels.\n- This matches resources to setting.\n\n>> RDT at PHC; microscopy at 2°/3° level.",
+         "opts": [
+          "RDT at PHC; microscopy at secondary/tertiary level",
+          "Microscopy at PHC; RDT at tertiary",
+          "Both only at tertiary level",
+          "Neither is used in Nigeria"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the first-line treatment of uncomplicated malaria?",
+         "a": "**ACT — artemisinin-based combination therapy.**\n\n## Understanding it\n- ACT is the standard oral treatment for uncomplicated disease.\n- Combination therapy limits resistance.\n\n>> Uncomplicated → ACT.",
+         "opts": [
+          "IV quinine",
+          "IV artesunate",
+          "ACT (artemisinin-based combination therapy)",
+          "Chloroquine monotherapy"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Over how long should fever clear in uncomplicated malaria, and what if it does not?",
+         "a": "**About 3 days; if fever has not cleared, look for another cause (e.g. tonsillitis).**\n\n## Understanding it\n- Persisting fever after adequate ACT suggests a co-existing infection.\n- Do not assume treatment failure without checking.\n\n>> ~3 days; if not, seek another cause.",
+         "opts": [
+          "~3 days; if not, look for another cause",
+          "Within 1 hour; otherwise give steroids",
+          "Fever never clears in malaria",
+          "2 weeks; otherwise repeat ACT twice"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the normal body temperature range of children quoted in the lecture?",
+         "a": "**37.2–37.4°C.**\n\n## Understanding it\n- This is the reference for judging fever in children.\n- Above this is treated with antipyretics and sponging.\n\n>> Normal child temp: 37.2–37.4°C.",
+         "opts": [
+          "37.2–37.4°C",
+          "39–40°C",
+          "35.0–35.5°C",
+          "36.0–36.2°C"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the first-line treatment of severe malaria?",
+         "a": "**IV artesunate — continued until the child regains consciousness.**\n\n## Understanding it\n- IV artesunate clears parasites fast and lowers mortality.\n- Continue it until the child is conscious, then step down.\n\n>> Severe → IV artesunate until conscious.",
+         "opts": [
+          "Oral ACT alone",
+          "Oral chloroquine",
+          "IV quinine as first choice",
+          "IV artesunate"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the second-line treatment of severe malaria?",
+         "a": "**Quinine.**\n\n## Understanding it\n- Quinine is the fallback if artesunate is unavailable.\n- It carries more risk (arrhythmia, hypoglycaemia).\n\n>> Second-line severe malaria = quinine.",
+         "opts": [
+          "Paracetamol",
+          "Chloroquine",
+          "Doxycycline",
+          "Quinine"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "How is severe anaemia managed in severe malaria, and at what threshold do you transfuse?",
+         "a": "**Transfuse blood — especially if the child is in distress — with a threshold of Hb < 5 g/dl.**\n\n## Understanding it\n- A child in respiratory distress with low Hb needs blood urgently.\n- Hb < 5 g/dl is the transfusion trigger.\n\n>> Transfuse if Hb < 5 g/dl (or distress).",
+         "opts": [
+          "Give oral iron only",
+          "Transfuse blood; threshold Hb < 5 g/dl",
+          "Never transfuse in malaria",
+          "Only transfuse if Hb < 2 g/dl"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is hypoglycaemia managed in severe malaria?",
+         "a": "**Check blood glucose 4-hourly and correct with 10% dextrose.**\n\n## Understanding it\n- Severe malaria (and quinine) cause hypoglycaemia; monitor and correct.\n- 10% dextrose is the corrective fluid.\n\n>> Check glucose 4-hourly; correct with 10% dextrose.",
+         "opts": [
+          "Check glucose once daily",
+          "Give insulin",
+          "Correct with normal saline only",
+          "Check glucose 4-hourly; correct with 10% dextrose"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Which drug class should be avoided in severe malaria, and how are convulsions managed?",
+         "a": "**Avoid steroids; treat convulsions with an anticonvulsant.**\n\n## Understanding it\n- Steroids worsen outcomes in cerebral malaria.\n- Seizures are controlled with anticonvulsants and airway care.\n\n>> No steroids; give anticonvulsants for fits.",
+         "opts": [
+          "Avoid all drugs",
+          "Give steroids and an anticonvulsant",
+          "Avoid steroids; give an anticonvulsant for convulsions",
+          "Give steroids; ignore convulsions"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the rule-of-thumb relationship between Hb and PCV?",
+         "a": "**Hb is approximately one-third of PCV.**\n\n## Understanding it\n- A quick bedside estimate: Hb ≈ PCV ÷ 3.\n- Useful when only PCV is available.\n\n>> Hb ≈ ⅓ × PCV.",
+         "opts": [
+          "Hb = PCV",
+          "Hb ≈ ⅓ × PCV",
+          "Hb ≈ 3 × PCV",
+          "Hb ≈ ½ × PCV"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is malaria treated in the first trimester of pregnancy?",
+         "a": "**Quinine plus clindamycin.**\n\n## Understanding it\n- Artemisinins are generally avoided in the first trimester.\n- Quinine + clindamycin is used instead.\n\n>> 1st trimester = quinine + clindamycin.",
+         "opts": [
+          "Quinine + clindamycin",
+          "IV artesunate only",
+          "No treatment until delivery",
+          "ACT"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How is malaria treated in the second and third trimesters of pregnancy?",
+         "a": "**ACT.**\n\n## Understanding it\n- After the first trimester, ACT is used as in non-pregnant patients.\n- Prompt treatment protects mother and fetus.\n\n>> Later trimesters = ACT.",
+         "opts": [
+          "No treatment",
+          "Doxycycline",
+          "Quinine + clindamycin",
+          "ACT"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What chemoprophylaxis is used in pregnancy, and what are other options mentioned?",
+         "a": "**Fansidar in pregnancy; mefloquine and doxycycline are other options.**\n\n## Understanding it\n- Intermittent preventive treatment in pregnancy uses Fansidar (SP).\n- Mefloquine and doxycycline are alternatives in other settings.\n\n>> Pregnancy: Fansidar; others: mefloquine, doxycycline.",
+         "opts": [
+          "Chloroquine only",
+          "Fansidar in pregnancy; mefloquine/doxycycline otherwise",
+          "No prophylaxis is used",
+          "IV artesunate as prophylaxis"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the main challenges to malaria control listed?",
+         "a": "**Drug resistance (including partial ACT resistance), RDT false negatives, poor access to care, and poor antimicrobial stewardship.**\n\n## Understanding it\n- Resistance and false-negative RDTs undermine treatment.\n- Access and drug misuse compound the problem.\n\n>> Resistance, RDT false negatives, access, stewardship.",
+         "opts": [
+          "Resistance, RDT false negatives, access, poor stewardship",
+          "Vaccine over-use",
+          "There are no remaining challenges",
+          "Only mosquito extinction"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Why is speed emphasised in severe malaria?",
+         "a": "**Because mortality can be high even when treated — fast treatment saves lives.**\n\n## Understanding it\n- Delays let organ failure progress despite therapy.\n- Early recognition and IV artesunate are decisive.\n\n>> Even treated, mortality is high — treat fast.",
+         "opts": [
+          "Because the drugs are cheap",
+          "Mortality is high even when treated, so treat fast",
+          "Because it is never fatal",
+          "Because it always self-resolves"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the take-home rule for a febrile, unconscious child in an endemic area?",
+         "a": "**Fever + unconsciousness → think cerebral malaria.**\n\n## Understanding it\n- Altered consciousness with fever in an endemic area is cerebral malaria until proven otherwise.\n- This demands immediate IV artesunate and airway care.\n\n>> Fever + unconscious = cerebral malaria until proven otherwise.",
+         "opts": [
+          "Think cerebral malaria",
+          "Think meningitis only, ignore malaria",
+          "Think simple febrile convulsion, reassure",
+          "Wait and observe overnight"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "CLINICAL — A 14-year-old has 4 days of fever, headache and rigor; Hb 6.2 g/dl; RDT positive; parasite density >100,000/µL. What is this and why is IV artesunate preferred over quinine?",
+         "a": "**Severe (high-density) malaria; IV artesunate gives faster parasite clearance, lower mortality and a better safety profile — quinine risks arrhythmias, hypotension and hypoglycaemia.**\n\n## Understanding it\n- Very high density plus low Hb marks severe disease.\n- Artesunate is safer and clears parasites faster than quinine.\n\n>> Severe malaria → IV artesunate (safer, faster than quinine).",
+         "opts": [
+          "Not malaria; the RDT is wrong",
+          "Uncomplicated malaria; give oral ACT at home",
+          "Severe malaria; artesunate is faster/safer than quinine",
+          "Severe malaria; quinine is clearly superior"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "CLINICAL — A 4-year-old has fever and a seizure; RDT positive but blood film negative. What is your approach?",
+         "a": "**Treat as an emergency — severe malaria until proven otherwise; the RDT shows infection, so check for another cause (FBC, LFT) and repeat microscopy in 12–24 hours.**\n\n## Understanding it\n- A negative film does not exclude malaria, especially with sequestration.\n- Do not withhold treatment while re-testing.\n\n>> Emergency: severe malaria until proven otherwise; repeat film 12–24h.",
+         "opts": [
+          "Wait 48 hours before any action",
+          "Discharge home on paracetamol",
+          "Rule out malaria because the film is negative",
+          "Treat as severe malaria; repeat microscopy in 12–24h"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "CLINICAL — Why does severe malaria cause hypoglycaemia, and why is it dangerous in a child?",
+         "a": "**Parasite glucose consumption, impaired gluconeogenesis and (with quinine) hyperinsulinaemia lower blood sugar; in a child this can cause seizures, coma and brain injury and mimics/worsens cerebral malaria.**\n\n## Understanding it\n- The parasite and the host both drain glucose; quinine adds insulin release.\n- Low sugar in a child rapidly harms the brain, so monitor 4-hourly.\n\n>> Consumption + impaired output (± quinine) → hypoglycaemia harms the child's brain.",
+         "opts": [
+          "It causes hyperglycaemia, which is harmless",
+          "Hypoglycaemia only affects adults",
+          "Glucose consumption/impaired output (± quinine); harms the brain",
+          "It never occurs in malaria"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why can a positive RDT be misleading shortly after a treated infection?",
+         "a": "**Because the HRP antigen persists for 2–4 weeks after recovery, so the test can stay positive without active disease.**\n\n## Understanding it\n- Antigen lag means a recently treated child may still test positive.\n- Correlate with the film and clinical picture.\n\n>> HRP antigen lingers 2–4 weeks → false 'positive'.",
+         "opts": [
+          "The RDT detects live parasites only",
+          "The HRP antigen persists 2–4 weeks after cure",
+          "The antigen clears within an hour",
+          "RDTs are always negative after treatment"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What supportive antipyretic measures are used in uncomplicated malaria?",
+         "a": "**Diclofenac or paracetamol suppository, plus tepid sponging with luke-warm water.**\n\n## Understanding it\n- Antipyretics plus sponging bring the temperature down.\n- Water must be luke-warm, not cold.\n\n>> Antipyretic suppository + luke-warm tepid sponging.",
+         "opts": [
+          "Steroids",
+          "Ice-cold baths",
+          "Diclofenac/paracetamol suppository + tepid sponging",
+          "No fever control is needed"
+         ],
+         "ans": 2
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
       },
       {
        "id": "pediatrics-33",
@@ -17525,14 +18610,438 @@ window.MEDBANK = {
        "day": "",
        "date": "27/05/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Measles (Rubeola)\n\n*Prof Onyire Nnamdi Benson — Paediatrics, topic 37 · Clinical Features · Complications · Control*\n\n## Outline\n\nEpidemiology & local context · Pathogenesis & clinical course · Clinical features · Complications · Diagnosis · Management · Prevention · Key takeaways\n\n## Epidemiology & local context\n\nThe agent is the **measles virus** — a **Morbillivirus** of the **Paramyxoviridae** family; an **RNA virus with one serotype.** Transmission is by **airborne droplets** and it is **extremely contagious** — about **90% of non-immune contacts** become infected. Measles remains **endemic in Nigeria** despite the vaccine, with **2022–2023 outbreaks in Kano, Sokoto, Borno and Zamfara** driven by low coverage and insecurity. **High-risk groups** are children under 5, the malnourished, HIV-positive and vitamin-A-deficient; the **case fatality is 3–6% in Nigeria versus < 0.1% in the US.** Seasonality is the **dry season (Nov–April)** in the Sahel, including Northern Nigeria.\n\n> **Nigeria fact:** measles is one of the **6 childhood killer diseases** in Nigeria's NPI + routine-immunisation schedule.\n\n## Pathogenesis & clinical course\n\n**Pathogenesis:** respiratory mucosa → lymphatics → **viraemia** → epithelial infection → **rash + immunosuppression for 4–6 weeks.**\n\n**Clinical stages:**\n\n- **Incubation** — 10–14 days (average 12).\n- **Prodrome / catarrhal** — 2–4 days of **high fever + the \"3 Cs\": Cough, Coryza, Conjunctivitis.** **Koplik spots** (pathognomonic) appear on **day 2–3**: white/blue spots on the buccal mucosa opposite the molars.\n- **Exanthem** — day 3–4. The **maculopapular rash starts on the face → neck → trunk → limbs**, is confluent, and lasts 5–6 days; **fever spikes with the rash.**\n\n> **Infectious period:** the patient is infectious from **4 days before to 4 days after** rash onset.\n\n## Clinical features\n\nThe classic picture is **fever + the 3 Cs + Koplik spots + a descending maculopapular rash.** Koplik spots — white/blue spots on the buccal mucosa opposite the molars — are **pathognomonic** and precede the rash.\n\n## Complications — the real killers\n\n**Common:** otitis media (7–9%), **pneumonia (1–6%) — the #1 cause of death**, diarrhoea, and worsening malnutrition.\n\n**Rare but fatal:** **encephalitis** (1/1000 → 15% mortality), **SSPE** (subacute sclerosing panencephalitis, 1/10,000 → fatal 6–8 years later), **keratitis → blindness** (especially with vitamin A deficiency), and reactivation of secondary **TB.**\n\n> **Nigeria-specific:** measles + malnutrition + vitamin A deficiency = high case fatality. Measles destroys the gut and immune memory → **\"immune amnesia\"**, raising all-cause mortality for 2–3 years afterwards.\n\n## How do we diagnose?\n\n**Clinical diagnosis:** fever + 3 Cs + Koplik spots + descending rash = classic (but atypical in the vaccinated / partially immune).\n\n**Lab confirmation — WHO standard:**\n\n- **Serology — measles IgM** in serum. The gold standard; collect within **4–28 days** of rash.\n- **PCR** — measles RNA from throat/nasopharyngeal swab or urine; best in the **first 3 days.**\n- **Viral culture** — not routine.\n\n**Differential diagnosis:** rubella, roseola, dengue, drug reaction, Kawasaki disease. The key discriminator is **Koplik spots + the 3 Cs.**\n\n## Management — no antiviral, so we support\n\nThere is **no specific antiviral**, so care is supportive:\n\n- **Isolate** — airborne precautions; admit if severe/complicated.\n- **Hydration + nutrition** — ORS, continue breastfeeding.\n- **Treat complications** — antibiotics for pneumonia/otitis, antipyretics.\n- **Vitamin A** (WHO/Nigeria policy) — **200,000 IU orally × 2 doses 24 hours apart** for all children ≥ 8 months (100,000 IU if 6–11 months). This **reduces mortality by ~50%** in deficient areas like Nigeria.\n- **Post-exposure prophylaxis** — vaccine within **72 hours**, or immunoglobulin 0.25 ml/kg within **6 days** for high-risk contacts.\n\n## Prevention — vaccines & Nigeria's strategy\n\nPrevention = **vaccination** with the **live attenuated measles vaccine**, given at **9 months and 15 months** in Nigeria's routine schedule (as the MR vaccine). **Efficacy:** 85% at 9 months, 95% at 12 months; two doses give **97% protection.** **Herd immunity** requires **95% coverage** to stop transmission.\n\n**Nigeria's approach:** routine immunisation (9m + 15m MR, free at PHCs); **supplementary immunisation activities (SIAs)** every 2–4 years for children 9–59 months (last national SIA 2022); and outbreak response with case-based vaccination within a 72-hour radius.\n\n> **WHO target:** measles elimination by 2030; Nigeria is still in the **\"control phase.\"**\n\n## Key takeaways for final-year exams / clinic\n\n- **Classic triad:** fever + 3 Cs + Koplik spots = measles until proven otherwise.\n- **Deadly Nigerian combo:** measles + malnutrition + vitamin A deficiency → **always give vitamin A.**\n- **Complication to fear:** **pneumonia** — the #1 cause of measles death.\n- **Public health:** 1 case = an outbreak; notify the LGA and isolate immediately — it is **airborne**, not just droplet.\n- **\"Immune amnesia\":** measles wipes immune memory for 2–3 years, raising all-cause mortality afterwards.\n- **OSCE tip:** ask for vaccination history + vitamin A supplementation; check the buccal mucosa for Koplik spots.\n\n> **Bottom line:** \"Measles kills through complications, not the rash.\"\n\n## References\n\nLecture material of Prof Onyire Nnamdi Benson (500-level Paediatrics, Abia State University); WHO measles guidelines; Nelson Textbook of Paediatrics.\n",
+       "simplified": "# Measles — the simple version\n\n## The one-line story\n\n> A hugely contagious **airborne RNA virus** gives **fever + the 3 Cs** (Cough, Coryza, Conjunctivitis), then **Koplik spots**, then a **rash that descends from the face** — and it **kills through complications, not the rash.**\n\nIt's still endemic in Nigeria (case fatality **3–6%** vs < 0.1% in the US), and it's one of the **6 childhood killers** in the immunisation schedule.\n\n---\n\n## The clinical story, in order\n\n> **Incubation (10–14 d, silent) → Prodrome (2–4 d: high fever + 3 Cs + Koplik spots) → Rash (face → neck → trunk → limbs).**\n\nTwo things to lock in:\n\n> **Koplik spots** = white/blue spots on the inner cheek opposite the molars — **pathognomonic**, and they come **before** the rash.\n> **Infectious from 4 days before to 4 days after the rash** — that's why one case is an outbreak.\n\n---\n\n## Why it's dangerous — complications\n\n> **Common:** otitis media, **pneumonia (the #1 killer)**, diarrhoea, worse malnutrition.\n> **Rare but fatal:** encephalitis (15% mortality), **SSPE** (fatal years later), keratitis → **blindness**, TB reactivation.\n\nThe Nigerian tragedy: **measles + malnutrition + vitamin A deficiency** → high death rate. Measles also causes **\"immune amnesia\"** — it erases immune memory for 2–3 years.\n\n---\n\n## Diagnosis\n\n> Mostly **clinical**: fever + 3 Cs + Koplik spots + descending rash.\n> Confirm with **measles IgM serology** (gold standard, days 4–28) or **PCR** (best in the first 3 days).\n\nDon't confuse it with rubella/roseola/dengue/Kawasaki — the giveaway is **Koplik spots + the 3 Cs.**\n\n---\n\n## Treatment — there's no antiviral, so you support\n\n> **Isolate + hydrate + feed + treat complications + give Vitamin A.**\n\n**Vitamin A is the key drug:** **200,000 IU × 2 doses, 24 h apart** for ≥ 8 months (100,000 IU if 6–11 months). It **halves mortality** where deficiency is common. For contacts: **vaccine within 72 h** (or immunoglobulin within 6 days).\n\n---\n\n## Prevention\n\n> **Live vaccine at 9 and 15 months** (MR). Two doses = **97%** protection; you need **95% coverage** for herd immunity.\n\nNigeria uses routine immunisation + periodic mass campaigns (SIAs) + outbreak response.\n\n---\n\n## Putting it together\n\nMeasles is an **airborne, extremely contagious** viral illness that runs a fixed course — **fever + 3 Cs → Koplik spots → descending rash** — and is **infectious from 4 days before to 4 days after the rash.** It has **no antiviral**, so management is **supportive plus vitamin A**, which halves mortality in deficient children. The real danger is the **complications**, led by **pneumonia**, and made worse in Nigeria by malnutrition and vitamin A deficiency. Because it is so transmissible, **one case is a public-health event** — notify, isolate, and vaccinate contacts — and the long game is **95% two-dose coverage** to reach herd immunity.\n",
+       "pdf": "content/Pediatrics/Onyire/Measles/note.pdf",
+       "primer": [
+        {
+         "q": "Epidemiology & local context: the agent, spread and Nigerian burden.",
+         "lecturer": "Measles is caused by the measles virus — a Morbillivirus of the Paramyxoviridae family, an RNA virus with a single serotype. It spreads by airborne droplets and is extremely contagious: about 90% of non-immune contacts get infected. It remains endemic in Nigeria despite the vaccine, with 2022–2023 outbreaks in Kano, Sokoto, Borno and Zamfara driven by low coverage and insecurity. High-risk groups are children under 5, the malnourished, HIV-positive and vitamin-A-deficient, and the case fatality is 3–6% in Nigeria versus < 0.1% in the US. Seasonality is the dry season (November–April) in the Sahel, including Northern Nigeria. Measles is one of the six childhood killer diseases in Nigeria's NPI and routine-immunisation schedule.",
+         "explain": "## Read this first\n\n>> **Agent:** measles virus — RNA, one serotype (so one vaccine works, immunity is lifelong).\n\n>> **Spread:** **airborne**, ~90% of non-immune contacts infected.\n\n>> **Nigeria:** endemic; **CFR 3–6%** vs <0.1% in the US; dry-season outbreaks in the North.\n\n>> One of the **6 childhood killers.**",
+         "tie": "This sets the stakes: an airborne, extremely contagious virus with a high Nigerian death rate — which is why isolation, vitamin A and coverage dominate the rest of the topic."
+        },
+        {
+         "q": "Pathogenesis & clinical course: the three stages and the infectious period.",
+         "lecturer": "Pathogenesis runs: respiratory mucosa → lymphatics → viraemia → epithelial infection → rash plus immunosuppression for 4–6 weeks. The clinical stages are: incubation (10–14 days, average 12); the prodrome/catarrhal phase (2–4 days) of high fever plus the '3 Cs' — Cough, Coryza, Conjunctivitis — during which pathognomonic Koplik spots (white/blue spots on the buccal mucosa opposite the molars) appear on day 2–3; and the exanthem (day 3–4), a maculopapular, confluent rash that starts on the face and descends to neck, trunk and limbs over 5–6 days, with fever spiking as the rash appears. The patient is infectious from 4 days before to 4 days after the rash.",
+         "explain": "## Read this first\n\n>> **Pathogenesis:** mucosa → lymphatics → viraemia → epithelium (rash) + weeks of immunosuppression.\n\n>> **Stages:** incubation (10–14d) → **prodrome (fever + 3 Cs + Koplik spots, day 2–3)** → **descending rash** (face → limbs).\n\n>> **Infectious:** 4 days before to 4 days after the rash.",
+         "tie": "The ordered course, with Koplik spots appearing before the rash and the wide infectious window, is what lets you diagnose measles early and act on infectivity."
+        },
+        {
+         "q": "Clinical features: the classic picture and Koplik spots.",
+         "lecturer": "The classic clinical picture is fever plus the 3 Cs (Cough, Coryza, Conjunctivitis) plus Koplik spots plus a descending maculopapular rash. Koplik spots — white/blue spots on the buccal mucosa opposite the molars — are pathognomonic and precede the rash by 1–2 days, so they are the single most useful early sign. The rash itself is maculopapular and confluent and spreads from the face down to the trunk and limbs.",
+         "explain": "## Read this first\n\n>> **Classic tetrad:** fever + **3 Cs** + **Koplik spots** + **descending rash.**\n\n>> **Koplik spots** = white/blue buccal spots opposite the molars — **pathognomonic**, appearing **before** the rash.\n\n>> **Rash:** maculopapular, confluent, **descends face → trunk → limbs.**",
+         "tie": "Being able to describe Koplik spots and the descending rash is the core clinical skill — it clinches the diagnosis at the bedside without waiting for labs."
+        },
+        {
+         "q": "Complications — the real killers — and immune amnesia.",
+         "lecturer": "Complications, not the rash, are what kill in measles, and they are commoner in Nigeria. Common complications: otitis media (7–9%), pneumonia (1–6%, the #1 cause of death), diarrhoea and worsening malnutrition. Rare but fatal: encephalitis (1/1000, ~15% mortality), SSPE — subacute sclerosing panencephalitis (1/10,000, fatal 6–8 years later), keratitis leading to blindness (especially with vitamin A deficiency), and reactivation of secondary TB. The Nigeria-specific combination of measles + malnutrition + vitamin A deficiency gives a high case fatality, and measles destroys the gut and immune memory — 'immune amnesia' — raising all-cause mortality for 2–3 years afterwards.",
+         "explain": "## Read this first\n\n>> **Common:** otitis media, **pneumonia (#1 killer)**, diarrhoea, worsening malnutrition.\n\n>> **Rare but fatal:** encephalitis, **SSPE (fatal 6–8 yrs later)**, keratitis → blindness, TB reactivation.\n\n>> **Immune amnesia:** measles erases immune memory → ↑ all-cause mortality for **2–3 years.**",
+         "tie": "Because 'measles kills through complications, not the rash', this is the section that justifies vitamin A, isolation and vaccination — pneumonia and immune amnesia are the reasons measles is deadly."
+        },
+        {
+         "q": "Diagnosis: clinical, laboratory (WHO standard) and differentials.",
+         "lecturer": "Diagnosis is mainly clinical: fever + 3 Cs + Koplik spots + descending rash is classic, though it is atypical in the vaccinated or partially immune. Laboratory confirmation follows the WHO standard: serology for measles IgM in serum is the gold standard (collect within 4–28 days of the rash); PCR detects measles RNA from a throat/nasopharyngeal swab or urine and is best in the first 3 days; viral culture is not routine. The differential diagnosis includes rubella, roseola, dengue, drug reaction and Kawasaki disease — and the key discriminator is Koplik spots plus the 3 Cs, which point to measles.",
+         "explain": "## Read this first\n\n>> **Clinical:** fever + 3 Cs + Koplik spots + descending rash.\n\n>> **Lab (WHO):** **measles IgM** serology (gold standard, days 4–28); **PCR** (swab/urine, best first 3 days).\n\n>> **DDx:** rubella, roseola, dengue, drug reaction, Kawasaki — separated by **Koplik + 3 Cs.**",
+         "tie": "Knowing the gold-standard IgM test and its timing window, plus the differentials, lets you confirm measles correctly and not mistake it for the many other fever-and-rash illnesses."
+        },
+        {
+         "q": "Management: supportive care and vitamin A.",
+         "lecturer": "There is no specific antiviral, so management is supportive. Isolate the child with airborne precautions and admit if severe or complicated. Provide hydration and nutrition — ORS, continue breastfeeding. Treat complications — antibiotics for pneumonia or otitis, antipyretics. Give vitamin A per WHO/Nigeria policy: 200,000 IU orally in 2 doses 24 hours apart for all children ≥ 8 months (100,000 IU if 6–11 months), which reduces mortality by about 50% in deficient areas like Nigeria. Offer post-exposure prophylaxis: vaccine within 72 hours, or immunoglobulin 0.25 ml/kg within 6 days, for high-risk contacts.",
+         "explain": "## Read this first\n\n>> **No antiviral** → supportive: **isolate + hydrate/feed + treat complications.**\n\n>> **Vitamin A** (the key drug): **200,000 IU ×2, 24 h apart** for ≥8 months (100,000 IU if 6–11 months) — **halves mortality.**\n\n>> **PEP for contacts:** vaccine **≤72 h**, or immunoglobulin **≤6 days.**",
+         "tie": "Since there is no cure, this supportive-plus-vitamin-A bundle is the entire treatment — and vitamin A is the one intervention that measurably lowers death, which is why it is always given."
+        },
+        {
+         "q": "Prevention: vaccines and Nigeria's strategy.",
+         "lecturer": "Prevention is vaccination with the live attenuated measles vaccine, given at 9 months and 15 months in Nigeria's routine schedule (as the MR vaccine). Efficacy is 85% at 9 months, 95% at 12 months and 97% with two doses; herd immunity needs 95% coverage to stop transmission. Nigeria's approach combines routine immunisation (9m + 15m MR, free at PHCs), supplementary immunisation activities (SIAs) — mass campaigns every 2–4 years for children 9–59 months (last national SIA in 2022) — and outbreak response with case-based vaccination within a 72-hour radius. The WHO target is measles elimination by 2030; Nigeria remains in the control phase.",
+         "explain": "## Read this first\n\n>> **Vaccine:** live attenuated, at **9 + 15 months** (MR).\n\n>> **Efficacy:** 85% at 9m, 95% at 12m, **97% with two doses**; herd immunity needs **95% coverage.**\n\n>> **Strategy:** routine + **SIAs (mass campaigns)** + outbreak response (ring vaccination ≤72 h).\n\n>> **Goal:** WHO elimination by **2030**; Nigeria = control phase.",
+         "tie": "These numbers explain why coverage is the whole battle: a very high 95% threshold, a two-dose schedule and mass campaigns to reach children missed by routine services."
+        },
+        {
+         "q": "Key takeaways for exams and clinic.",
+         "lecturer": "The high-yield points: the classic triad is fever + 3 Cs + Koplik spots = measles until proven otherwise; the deadly Nigerian combination is measles + malnutrition + vitamin A deficiency, so always give vitamin A; the complication to fear is pneumonia, the #1 cause of measles death; on public health, 1 case = an outbreak — notify the LGA and isolate immediately because it is airborne, not just droplet; 'immune amnesia' means measles wipes immune memory for 2–3 years, raising all-cause mortality afterwards; and the OSCE tip is to ask for vaccination history and vitamin A supplementation and to check the buccal mucosa for Koplik spots. The bottom line: measles kills through complications, not the rash.",
+         "explain": "## Read this first\n\n>> **Triad:** fever + 3 Cs + Koplik spots = measles.\n\n>> **Always give vitamin A** (measles + malnutrition + deficiency = deadly).\n\n>> **Fear pneumonia** (#1 killer); **1 case = outbreak** (airborne — notify + isolate).\n\n>> **OSCE:** ask vaccine + vitamin A history; inspect buccal mucosa for Koplik spots.\n\n>> **Bottom line:** measles kills through **complications, not the rash.**",
+         "tie": "This is the exam-and-clinic distillation — the points most likely to be asked and the actions most likely to save a child, gathered in one place."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is the causative agent of measles?",
+         "a": "**The measles virus — a Morbillivirus of the Paramyxoviridae family; an RNA virus with a single serotype.**\n\n## Understanding it\n- It is an RNA virus with only one serotype, so one vaccine works and immunity is lifelong.\n- Family Paramyxoviridae, genus Morbillivirus.\n\n>> Measles virus — RNA, Paramyxoviridae, 1 serotype.",
+         "opts": [
+          "Measles virus (Morbillivirus, Paramyxoviridae; RNA, 1 serotype)",
+          "A parasite spread by mosquitoes",
+          "A bacterium of the Streptococcus family",
+          "A DNA herpesvirus with many serotypes"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "How is measles transmitted and how contagious is it?",
+         "a": "**By airborne droplets; it is extremely contagious, infecting about 90% of non-immune contacts.**\n\n## Understanding it\n- Airborne (not merely droplet) spread makes it one of the most transmissible infections.\n- ~90% of susceptible contacts get infected.\n\n>> Airborne; ~90% of non-immune contacts infected.",
+         "opts": [
+          "Faeco-oral; ~5% of contacts",
+          "Airborne droplets; ~90% of non-immune contacts",
+          "Sexual contact only",
+          "Mosquito bite; ~50% of contacts"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the case fatality of measles in Nigeria versus the US?",
+         "a": "**3–6% in Nigeria versus < 0.1% in the US.**\n\n## Understanding it\n- Malnutrition, vitamin A deficiency and low coverage raise the Nigerian death rate.\n- The gap reflects complications, not a different virus.\n\n>> CFR 3–6% (Nigeria) vs <0.1% (US).",
+         "opts": [
+          "10–20% in Nigeria vs 5% in the US",
+          "Equal in both settings",
+          "<0.1% in both",
+          "3–6% in Nigeria vs <0.1% in the US"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "Which high-risk groups have the worst measles outcomes?",
+         "a": "**Children under 5, the malnourished, HIV-positive and vitamin-A-deficient.**\n\n## Understanding it\n- Weakened immunity and poor nutrition drive severe disease and death.\n- These groups are prioritised for vaccine and vitamin A.\n\n>> Under-5, malnourished, HIV+, vitamin-A-deficient.",
+         "opts": [
+          "Only healthy teenagers",
+          "Under-5, malnourished, HIV+, vitamin-A-deficient",
+          "Only elderly adults",
+          "Only vaccinated children"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Outline the pathogenesis of measles.",
+         "a": "**Respiratory mucosa → lymphatics → viraemia → epithelial infection → rash plus immunosuppression lasting 4–6 weeks.**\n\n## Understanding it\n- The virus enters the airway, spreads via lymphatics and blood, then infects epithelium producing the rash.\n- It also suppresses immunity for weeks.\n\n>> Mucosa→lymphatics→viraemia→epithelium (rash) + immunosuppression.",
+         "opts": [
+          "Gut→liver→blood→jaundice",
+          "Skin inoculation→local rash only",
+          "Mucosa→lymphatics→viraemia→epithelial infection + immunosuppression",
+          "Nerve→brain directly, no viraemia"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What are the three clinical stages of measles and their timing?",
+         "a": "**Incubation (10–14 days, average 12); prodrome/catarrhal (2–4 days); exanthem (rash) from day 3–4.**\n\n## Understanding it\n- A silent incubation, then the catarrhal 3-C phase, then the descending rash.\n- Fever spikes again as the rash appears.\n\n>> Incubation→prodrome (3 Cs)→exanthem (rash).",
+         "opts": [
+          "Rash first, then fever, then incubation",
+          "Only a single 24-hour illness",
+          "Incubation of several months",
+          "Incubation 10–14d → prodrome 2–4d → exanthem"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the '3 Cs' of the measles prodrome?",
+         "a": "**Cough, Coryza and Conjunctivitis (with high fever).**\n\n## Understanding it\n- The catarrhal prodrome is dominated by cough, runny nose and red eyes.\n- These precede the rash by 2–4 days.\n\n>> Cough, Coryza, Conjunctivitis.",
+         "opts": [
+          "Cough, Cyanosis, Convulsion",
+          "Chills, Coryza, Constipation",
+          "Cough, Coryza, Conjunctivitis",
+          "Cough, Cramps, Confusion"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What are Koplik spots and when do they appear?",
+         "a": "**White/blue spots on the buccal mucosa opposite the molars, appearing on day 2–3 — pathognomonic for measles and preceding the rash.**\n\n## Understanding it\n- They are the one sign that confirms measles clinically.\n- They come before the rash, during the prodrome.\n\n>> Koplik spots = pathognomonic buccal spots, before the rash.",
+         "opts": [
+          "White/blue buccal spots opposite the molars, day 2–3 (pathognomonic)",
+          "Red spots on the soft palate only (Forchheimer)",
+          "Spots that appear a week after the rash",
+          "A rash on the palms and soles"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Describe the measles rash and its spread.",
+         "a": "**A maculopapular, confluent rash that starts on the face and descends to neck → trunk → limbs, lasting 5–6 days, with fever spiking as it appears.**\n\n## Understanding it\n- The descending pattern from the face is characteristic.\n- Fever rises again with the rash rather than settling.\n\n>> Maculopapular rash descends face→trunk→limbs; fever spikes.",
+         "opts": [
+          "Petechial rash that spares the face",
+          "Vesicular rash starting on the trunk",
+          "Rash on palms/soles first",
+          "Maculopapular, confluent, descends face→neck→trunk→limbs"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the infectious period of measles?",
+         "a": "**From 4 days before to 4 days after the onset of the rash.**\n\n## Understanding it\n- The patient spreads virus before the rash even appears.\n- This wide window is why isolation must be prompt.\n\n>> Infectious 4 days before to 4 days after the rash.",
+         "opts": [
+          "Only after the rash fades",
+          "Only while the rash is visible",
+          "4 days before to 4 days after rash onset",
+          "Only during incubation"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the single most common cause of death in measles?",
+         "a": "**Pneumonia (occurring in 1–6%).**\n\n## Understanding it\n- Secondary/viral pneumonia is the leading killer.\n- Always assess the chest and treat pneumonia promptly.\n\n>> Pneumonia — the #1 cause of measles death.",
+         "opts": [
+          "Encephalitis",
+          "Pneumonia",
+          "Otitis media",
+          "SSPE"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the common complications of measles?",
+         "a": "**Otitis media (7–9%), pneumonia (1–6%), diarrhoea and worsening malnutrition.**\n\n## Understanding it\n- These are the frequent complications, with pneumonia the dangerous one.\n- Diarrhoea and malnutrition compound each other.\n\n>> Otitis media, pneumonia, diarrhoea, malnutrition.",
+         "opts": [
+          "Appendicitis and pancreatitis",
+          "Otitis media, pneumonia, diarrhoea, worsening malnutrition",
+          "Only a mild sore throat",
+          "Deep vein thrombosis"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the rare but fatal complications of measles?",
+         "a": "**Encephalitis (1/1000, ~15% mortality), SSPE (1/10,000, fatal 6–8 years later), keratitis → blindness, and TB reactivation.**\n\n## Understanding it\n- Acute encephalitis and the delayed SSPE are the feared neurological complications.\n- Keratitis causes blindness, worse with vitamin A deficiency.\n\n>> Encephalitis, SSPE, keratitis→blindness, TB reactivation.",
+         "opts": [
+          "Only mild otitis media",
+          "Encephalitis, SSPE, keratitis/blindness, TB reactivation",
+          "Appendicitis",
+          "Kidney stones"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is SSPE and its time course?",
+         "a": "**Subacute sclerosing panencephalitis — a rare (1/10,000) fatal degenerative brain complication occurring 6–8 years after measles.**\n\n## Understanding it\n- A late, progressive, fatal neurological disease from persistent virus.\n- It shows why preventing measles matters years down the line.\n\n>> SSPE = fatal brain disease 6–8 years after measles.",
+         "opts": [
+          "Fatal brain disease 6–8 years after infection (1/10,000)",
+          "A self-limiting headache",
+          "A rash appearing 6 days after infection",
+          "An acute pneumonia during the illness"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is 'immune amnesia' in measles?",
+         "a": "**Measles destroys immune memory (and the gut), erasing protection against other pathogens and raising all-cause mortality for 2–3 years afterwards.**\n\n## Understanding it\n- The virus wipes memory T and B lymphocytes.\n- Children remain vulnerable to other infections long after recovery.\n\n>> Immune amnesia = erased immune memory → ↑ mortality for 2–3 years.",
+         "opts": [
+          "Lifelong boosted immunity to all germs",
+          "Loss of immune memory raising all-cause mortality for 2–3 years",
+          "Temporary amnesia of recent events",
+          "A harmless, brief immune boost"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "How is measles diagnosed clinically?",
+         "a": "**Fever + the 3 Cs + Koplik spots + a descending rash = classic measles (atypical in the vaccinated/partially immune).**\n\n## Understanding it\n- The full syndrome is usually diagnostic without labs.\n- Vaccinated children may present atypically.\n\n>> Fever + 3 Cs + Koplik spots + descending rash.",
+         "opts": [
+          "A positive malaria RDT",
+          "Fever + 3 Cs + Koplik spots + descending rash",
+          "Jaundice plus dark urine",
+          "Any fever with a rash on the palms"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is the gold-standard laboratory test for measles and its timing?",
+         "a": "**Measles IgM serology in serum — collected within 4–28 days of the rash.**\n\n## Understanding it\n- IgM confirms recent infection and is the WHO reference test.\n- Timing matters: collect within the 4–28 day window.\n\n>> Measles IgM serology (days 4–28) — gold standard.",
+         "opts": [
+          "Blood culture within 24 hours",
+          "Measles IgM serology, collected within 4–28 days of rash",
+          "Stool microscopy",
+          "Malaria microscopy"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "When is PCR most useful in measles, and what samples are used?",
+         "a": "**PCR detects measles RNA from throat/nasopharyngeal swab or urine and is best in the first 3 days.**\n\n## Understanding it\n- Early in illness PCR has the highest yield.\n- Swab or urine samples are used.\n\n>> PCR (swab/urine) — best in the first 3 days.",
+         "opts": [
+          "Serology of stool",
+          "PCR of throat/nasopharyngeal swab or urine, best first 3 days",
+          "Skin biopsy culture",
+          "PCR of CSF only, best after 4 weeks"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the main differential diagnoses of measles, and the key discriminator?",
+         "a": "**Rubella, roseola, dengue, drug reaction and Kawasaki disease — distinguished by Koplik spots + the 3 Cs, which point to measles.**\n\n## Understanding it\n- Many illnesses cause fever and rash; Koplik spots + 3 Cs are specific for measles.\n- Use these to separate measles from look-alikes.\n\n>> DDx: rubella/roseola/dengue/drug/Kawasaki; Koplik + 3 Cs = measles.",
+         "opts": [
+          "There are no differentials",
+          "Only chickenpox; discriminated by vesicles",
+          "Malaria; discriminated by fever alone",
+          "Rubella, roseola, dengue, drug reaction, Kawasaki; discriminated by Koplik+3Cs"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is the overall approach to measles management?",
+         "a": "**There is no specific antiviral, so care is supportive: isolate, hydrate and feed, treat complications, give vitamin A, and offer post-exposure prophylaxis to contacts.**\n\n## Understanding it\n- Supportive care plus vitamin A is the backbone.\n- Isolation protects others; contacts get PEP.\n\n>> No antiviral → supportive care + vitamin A + PEP.",
+         "opts": [
+          "Antibiotics cure the virus itself",
+          "A specific antiviral cures it",
+          "Supportive care (isolate, hydrate/feed, treat complications) + vitamin A",
+          "No treatment or isolation is needed"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the WHO/Nigeria vitamin A regimen for a child ≥ 8 months with measles?",
+         "a": "**200,000 IU orally, 2 doses given 24 hours apart.**\n\n## Understanding it\n- Two high doses a day apart is the standard for ≥ 8 months.\n- 6–11 months get 100,000 IU.\n\n>> Vitamin A: 200,000 IU × 2, 24 h apart (≥8 months).",
+         "opts": [
+          "400,000 IU as a single dose",
+          "200,000 IU stat and repeat in 24 hours",
+          "Vitamin A is not indicated if well-nourished",
+          "50,000 IU once"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "By how much does vitamin A reduce measles mortality in deficient areas?",
+         "a": "**By about 50%.**\n\n## Understanding it\n- In vitamin-A-deficient populations like Nigeria, it roughly halves deaths.\n- This is why it is given routinely in measles.\n\n>> Vitamin A ≈ halves measles mortality where deficiency is common.",
+         "opts": [
+          "About 50%",
+          "About 5%",
+          "It has no effect on mortality",
+          "About 100% (eliminates all deaths)"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What post-exposure prophylaxis is offered after measles contact?",
+         "a": "**Vaccine within 72 hours, or immunoglobulin 0.25 ml/kg within 6 days for high-risk contacts.**\n\n## Understanding it\n- Rapid vaccination can abort or attenuate disease if given within 72 hours.\n- Immunoglobulin covers those who cannot be vaccinated, up to 6 days.\n\n>> PEP: vaccine ≤72 h, or immunoglobulin ≤6 days.",
+         "opts": [
+          "It is never effective post-exposure",
+          "Within 7 days by vaccine",
+          "Vaccine within 72 hours (or immunoglobulin within 6 days)",
+          "Within 24 hours only"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "When is the measles vaccine given in Nigeria's routine schedule?",
+         "a": "**At 9 months and 15 months (as the MR vaccine).**\n\n## Understanding it\n- Two doses in the routine schedule build durable immunity.\n- Given free at PHCs.\n\n>> 9 months + 15 months (MR vaccine).",
+         "opts": [
+          "Birth and 6 weeks",
+          "12 years only",
+          "9 months and 15 months",
+          "A single dose at 5 years"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the efficacy of the measles vaccine by age and dose?",
+         "a": "**85% at 9 months, 95% at 12 months, and 97% with two doses.**\n\n## Understanding it\n- Efficacy rises with age at vaccination; the second dose closes the gap.\n- Two doses reach 97% protection.\n\n>> 85% at 9m, 95% at 12m, 97% with 2 doses.",
+         "opts": [
+          "Always 100% after one dose",
+          "10% at any age",
+          "85% at 9 months, 95% at 12 months, 97% with two doses",
+          "50% even after two doses"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What vaccine coverage is needed for herd immunity against measles?",
+         "a": "**95% coverage.**\n\n## Understanding it\n- Because measles is so contagious, the herd-immunity threshold is very high.\n- Below 95%, outbreaks occur.\n\n>> 95% coverage for herd immunity.",
+         "opts": [
+          "70%",
+          "25%",
+          "95%",
+          "50%"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the type of measles vaccine used?",
+         "a": "**A live attenuated vaccine.**\n\n## Understanding it\n- Live attenuated virus generates strong, lasting immunity.\n- It is combined as MR in Nigeria.\n\n>> Live attenuated measles vaccine.",
+         "opts": [
+          "Inactivated (killed) vaccine",
+          "A toxoid vaccine",
+          "Live attenuated vaccine",
+          "A purely mRNA vaccine"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why is measles a public-health emergency where 1 case = an outbreak?",
+         "a": "**Because it is airborne and extremely contagious, so a single case implies wide exposure — notify the LGA and isolate immediately.**\n\n## Understanding it\n- One confirmed case means many are already exposed.\n- Rapid notification and ring vaccination contain spread.\n\n>> 1 case = outbreak: airborne, notify LGA, isolate now.",
+         "opts": [
+          "It only spreads by direct touch",
+          "It is not a reportable disease",
+          "It is rarely transmissible, so cases are isolated",
+          "It is airborne/very contagious, so one case means an outbreak"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "According to the lecturer, why does measles cause immunosuppression?",
+         "a": "**Through destruction of memory T and B lymphocytes.**\n\n## Understanding it\n- Loss of these memory cells is 'immune amnesia'.\n- It is not the same mechanism as HIV's CD4 killing.\n\n>> Destruction of memory T and B lymphocytes.",
+         "opts": [
+          "Bone marrow suppression",
+          "Destruction of memory T and B lymphocytes",
+          "Inhibition of antibody production only",
+          "Direct killing of CD4+ T cells like HIV"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "CLINICAL — A 3-year-old unvaccinated child has fever, cough, runny nose and rash, with white spots inside the cheek. Diagnosis, immediate management and public-health action?",
+         "a": "**Diagnosis: measles (Koplik spots + 3 Cs + rash). Management: isolate (airborne), give vitamin A, treat complications, hydrate and feed. Public health: notify the LGA and vaccinate contacts within 72 hours.**\n\n## Understanding it\n- The white buccal spots are Koplik spots — pathognomonic.\n- Give vitamin A and isolate; contacts need vaccine within 72 h.\n\n>> Measles → isolate + vitamin A + treat complications; notify LGA, vaccinate contacts ≤72 h.",
+         "opts": [
+          "Drug reaction; stop all drugs, no notification",
+          "Malaria; give ACT, no isolation",
+          "Chickenpox; give aciclovir and send home",
+          "Measles; isolate + vitamin A + treat complications; notify LGA and vaccinate contacts"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "CLINICAL — Why is measles more severe in Nigeria than in developed countries?",
+         "a": "**Because of the deadly combination of malnutrition, vitamin A deficiency and low vaccine coverage, which raise the case fatality to 3–6%.**\n\n## Understanding it\n- The virus is the same; the host and coverage differ.\n- Malnutrition and vitamin A deficiency amplify complications.\n\n>> Malnutrition + vitamin A deficiency + low coverage → high CFR.",
+         "opts": [
+          "Better nutrition in Nigeria",
+          "Higher vaccine coverage in Nigeria",
+          "A more virulent Nigerian strain",
+          "Malnutrition, vitamin A deficiency and low coverage raise mortality"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "OSCE — Which two history points and one examination step are emphasised for suspected measles?",
+         "a": "**Ask for vaccination history and vitamin A supplementation, and examine the buccal mucosa for Koplik spots.**\n\n## Understanding it\n- Vaccination and vitamin A history guide risk and treatment.\n- Koplik spots on the buccal mucosa clinch the diagnosis.\n\n>> Ask vaccine + vitamin A history; check buccal mucosa for Koplik spots.",
+         "opts": [
+          "Vaccination history + vitamin A history; inspect buccal mucosa for Koplik spots",
+          "Ask about travel only; auscultate the heart",
+          "Ask about diet only; palpate the abdomen",
+          "No history needed; order a CT head"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the WHO elimination target for measles and Nigeria's current status?",
+         "a": "**Elimination by 2030; Nigeria is still in the 'control phase'.**\n\n## Understanding it\n- The global goal is elimination by 2030.\n- Nigeria has not yet reached elimination, remaining in control phase.\n\n>> WHO target 2030; Nigeria = control phase.",
+         "opts": [
+          "Elimination by 2030; Nigeria still in control phase",
+          "Already eliminated in Nigeria",
+          "Elimination by 2010, achieved",
+          "No target exists"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is the bottom-line message about how measles kills?",
+         "a": "**Measles kills through its complications, not the rash itself.**\n\n## Understanding it\n- The rash is benign; pneumonia and encephalitis are the killers.\n- Management focuses on preventing and treating complications.\n\n>> Measles kills through complications, not the rash.",
+         "opts": [
+          "Through dehydration from the rash alone",
+          "It does not cause death",
+          "Through the rash causing skin failure",
+          "Through complications (e.g. pneumonia), not the rash"
+         ],
+         "ans": 3
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
       },
       {
        "id": "pediatrics-38",
@@ -24999,14 +26508,321 @@ window.MEDBANK = {
        "day": "",
        "date": "29/07/26",
        "time": "8-10am",
-       "note": null,
-       "simplified": null,
-       "pdf": null,
-       "primer": [],
-       "recall": [],
+       "note": "# Disseminated Intravascular Coagulation (DIC)\n\n*Dr Onuoha — Paediatrics, topic 129*\n\n## Outline\n\nIntroduction · Aetiology (triggers) · Normal clotting vs what goes wrong · Pathophysiology (two phases) · Clinical features · Investigations · Complications · Treatment · Prognosis\n\n## Introduction\n\nDIC is a **fatal condition that results in abnormal clotting of blood in all parts of the body.** It is **life-threatening if left untreated.**\n\n## Aetiology\n\n**DIC is not a disease in itself** — it is a **final common pathway** that occurs when the body's clotting system goes out of control. Think of it as: the body **presses the \"clotting button\" everywhere at once**, then **runs out of clotting materials**, and then **starts bleeding uncontrollably.**\n\nDIC always starts from **something big that shocks the body** or conditions that abnormally activate clotting:\n\n1. **Severe infection (sepsis)** — bacteria release toxins → massive inflammation.\n2. **Trauma / injury** — tissue damage releases clotting activators.\n3. **Malignancy** — cancer cells can activate clotting pathways.\n4. **Envenomation** — some venoms directly activate clotting.\n5. **Medical complications** — transfusions, surgeries, obstetric complications.\n\n## Normal clotting vs what goes wrong\n\n**Normally** clotting is **controlled and limited:** injury occurs → clotting is **localised to the injury site** → platelets and clotting factors form a clot → bleeding stops → the system shuts off.\n\n**In DIC** this control is lost and the process becomes **generalised.**\n\n## Pathophysiology — two phases\n\n**Phase 1 — excessive clotting.** A trigger (e.g. sepsis) releases **pro-coagulant substances** → the **entire clotting cascade is activated throughout the body** → **tiny clots form everywhere, especially in small vessels.** This causes **vaso-occlusion** (blocked vessels), **tissue ischaemia**, and damage to organs — especially the **kidneys, brain and lungs.**\n\n**Critical point — consumption.** While forming all these clots, **platelets and clotting factors are used up.** This is called **consumption coagulopathy.**\n\n**Phase 2 — bleeding.** Now the body has **no platelets and no clotting factors**, so **even small injuries cause massive bleeding** — the patient bleeds from orifices.\n\n> **Simple flow:** trigger → mass clotting → consumption of platelets/factors → no clotting ability → severe bleeding.\n\n**Why both clotting AND bleeding happen (the key confusion point):** **inside the vessels there is clotting; outside/at wounds there is bleeding** — because all the clotting resources have already been used up internally.\n\n## Clinical features\n\n1. **Bleeding from orifices** — from gums, IV sites, wounds and body orifices.\n2. **Clotting effects** — organ damage due to blocked vessels.\n3. **Systemic effects** — **hypotension** (from blood loss), **shock** (from bleeding and poor organ perfusion), and **coma** (from brain involvement).\n\n## Investigations\n\n- **Platelets ↓** — used up in clotting.\n- **Clotting factors ↓** — prolonged **PT and aPTT.**\n- **D-dimer ↑** — indicates clot breakdown.\n- **FBC** — may show **anaemia** (from bleeding).\n\n## Complications\n\n- **From clotting:** acute kidney injury, organ failure, cardiorespiratory failure.\n- **From bleeding:** severe anaemia, shock, coma and death.\n- **Combined:** multi-organ failure.\n\n## Treatment\n\nTreat DIC in **two directions:**\n\n1. **Replace what is lost** — platelets, fresh frozen plasma (clotting factors), and blood transfusion.\n2. **Stop the cause (most important)** — treat sepsis with antibiotics, remove dead tissue, treat the malignancy, and consider **plasmapheresis** (removes harmful substances by removing the plasma content of the patient's blood). **If you don't stop the cause, DIC continues.**\n\n## Prognosis\n\nPrognosis is **generally poor.** Mortality is high because of the **rapid progression** of DIC, the **difficulty of replacing clotting factors and platelets quickly** (availability challenges), and the **severity of the underlying disease** (e.g. septic shock). DIC is a **common pathway to death** from septic shock and other underlying causes.\n\n## References\n\nLecture material of Dr Onuoha (500-level Paediatrics, Abia State University); Nelson Textbook of Paediatrics.\n",
+       "simplified": "# DIC — the simple version\n\n## The one-line story\n\n> DIC = the body **presses the \"clotting button\" everywhere at once**, **uses up all its platelets and clotting factors**, and then **bleeds uncontrollably.** It's a **final common pathway**, not a disease of its own.\n\n---\n\n## It always has a trigger\n\n> **Sepsis · Trauma · Malignancy · Envenomation · Medical/obstetric complications.**\n\nSepsis is the classic one: bacterial toxins → massive inflammation → the clotting cascade fires everywhere.\n\n---\n\n## Normal clotting vs DIC\n\n> **Normal:** clot only **at the injury**, then switch off — controlled and local.\n> **DIC:** clotting fires **all over the body** — uncontrolled and generalised.\n\n---\n\n## The two phases — the heart of the topic\n\n> **Phase 1 — Clotting everywhere:** tiny clots block small vessels → **organ ischaemia** (kidneys, brain, lungs). Making all those clots **uses up platelets + factors = \"consumption coagulopathy.\"**\n> **Phase 2 — Bleeding everywhere:** with no platelets or factors left, even tiny injuries → **massive bleeding from orifices.**\n\n> **The flow to memorise:** trigger → mass clotting → consumption → no clotting ability → severe bleeding.\n\n**Why both at once?** *Inside vessels = clotting; outside/wounds = bleeding* — because the clotting supplies are already spent internally.\n\n---\n\n## What you see and what the tests show\n\n> **Clinically:** bleeding from gums/IV sites/orifices · organ damage from blocked vessels · **hypotension, shock, coma.**\n> **Tests:** **platelets ↓ · PT & aPTT ↑ · D-dimer ↑ · FBC** may show anaemia.\n\n---\n\n## Treatment — two directions\n\n> **1. Replace** what's lost — **platelets, FFP, blood.**\n> **2. Stop the cause** (most important) — **antibiotics for sepsis**, remove dead tissue, treat malignancy, consider **plasmapheresis.**\n\n> If you don't stop the cause, DIC keeps going.\n\n---\n\n## Putting it together\n\nDIC is a **final common pathway** triggered by a big insult — most often **sepsis** — that switches clotting on **throughout the body.** In **phase 1** the widespread micro-clots block vessels and damage organs while **consuming** platelets and clotting factors; in **phase 2** the depleted body **bleeds everywhere.** That is why the patient clots and bleeds at the same time. Diagnosis rests on **low platelets, prolonged PT/aPTT and raised D-dimer.** Treatment runs in **two directions — replace (platelets/FFP/blood) and, above all, stop the cause** — but prognosis stays **poor** because DIC moves fast and the underlying disease is usually severe.\n",
+       "pdf": "content/Pediatrics/Onuoha/Disseminated%20Intravascular%20Coagulation/note.pdf",
+       "primer": [
+        {
+         "q": "Introduction & aetiology: what DIC is and what triggers it.",
+         "lecturer": "DIC is a fatal condition that results in abnormal clotting of blood in all parts of the body and is life-threatening if left untreated. It is not a disease in itself — it is a final common pathway that occurs when the body's clotting system goes out of control: the body presses the 'clotting button' everywhere at once, then runs out of clotting materials, then starts bleeding uncontrollably. DIC always starts from something big that shocks the body: severe infection (sepsis — bacteria release toxins causing massive inflammation), trauma/injury (tissue damage releases clotting activators), malignancy (cancer cells activate clotting pathways), envenomation (some venoms activate clotting), and medical complications (transfusions, surgeries, obstetric complications).",
+         "explain": "## Read this first\n\n>> **DIC =** abnormal clotting throughout the body; **not a disease itself** but a **final common pathway.**\n\n>> **The idea:** clot everywhere → run out of materials → bleed everywhere.\n\n>> **Triggers:** **sepsis (classic)**, trauma, malignancy, envenomation, medical/obstetric complications.",
+         "tie": "Understanding DIC as always secondary to a trigger is what makes treatment logical — you can never fix it without finding and stopping the underlying cause."
+        },
+        {
+         "q": "Normal clotting vs what goes wrong in DIC.",
+         "lecturer": "Normally, clotting is controlled and limited: an injury occurs, clotting is localised to the injury site, platelets and clotting factors form a clot, bleeding stops, and the system shuts off. In DIC this control is lost. A trigger releases pro-coagulant substances that activate the entire clotting cascade throughout the body, so the process becomes generalised instead of local.",
+         "explain": "## Read this first\n\n>> **Normal clotting:** localised to the injury, forms a clot, stops bleeding, **switches off** — controlled and limited.\n\n>> **DIC:** the trigger activates the **whole cascade body-wide** — clotting becomes **generalised and uncontrolled.**",
+         "tie": "Contrasting normal local haemostasis with the body-wide activation of DIC is the setup for the two-phase pathophysiology that follows."
+        },
+        {
+         "q": "Pathophysiology: the two phases and consumption coagulopathy.",
+         "lecturer": "There are two phases. Phase 1 — excessive clotting: the trigger releases pro-coagulant substances, the entire clotting cascade is activated throughout the body, and tiny clots form everywhere, especially in small vessels, causing vaso-occlusion (blocked vessels), tissue ischaemia and damage to organs — especially the kidneys, brain and lungs. The critical point is consumption: while forming all these clots, platelets and clotting factors are used up — 'consumption coagulopathy'. Phase 2 — bleeding: now the body has no platelets and no clotting factors, so even small injuries cause massive bleeding from orifices. The simple flow: trigger → mass clotting → consumption of platelets/factors → no clotting ability → severe bleeding. Both clotting and bleeding happen because inside the vessels there is clotting while outside/at wounds there is bleeding — the clotting resources were used up internally.",
+         "explain": "## Read this first\n\n>> **Phase 1 — clotting:** cascade fires body-wide → micro-clots block small vessels → **ischaemia** (kidneys, brain, lungs).\n\n>> **Consumption coagulopathy:** the clots **use up platelets + factors.**\n\n>> **Phase 2 — bleeding:** with supplies gone, even small injuries → **massive bleeding.**\n\n>> **Why both:** inside vessels clot, outside bleeds — supplies spent internally.",
+         "tie": "The two-phase model is the single most important idea in DIC — it resolves the paradox of simultaneous clotting and bleeding and explains every lab finding and treatment step."
+        },
+        {
+         "q": "Clinical features & investigations.",
+         "lecturer": "Clinically DIC presents with (1) bleeding from orifices — gums, IV sites, wounds and body orifices; (2) clotting effects — organ damage due to blocked vessels; and (3) systemic effects — hypotension (from blood loss), shock (from bleeding and poor organ perfusion) and coma (from brain involvement). Investigations show: platelets low (used up in clotting); clotting factors low, giving prolonged PT and aPTT; D-dimer raised (indicating clot breakdown); and FBC that may show anaemia (due to bleeding).",
+         "explain": "## Read this first\n\n>> **Clinically:** bleeding from orifices (gums, IV sites, wounds) + organ damage + **hypotension, shock, coma.**\n\n>> **Investigations:** **platelets ↓ · PT and aPTT ↑ · D-dimer ↑ · FBC** may show anaemia.\n\n>> Each result maps onto the two phases — consumption (low platelets/factors) and breakdown (high D-dimer).",
+         "tie": "Linking each lab result to the pathophysiology lets you recognise DIC quickly — a bleeding, shocked child with low platelets and high D-dimer is DIC until proven otherwise."
+        },
+        {
+         "q": "Complications, treatment and prognosis.",
+         "lecturer": "Complications come from both phases: from clotting — acute kidney injury, organ failure, cardiorespiratory failure; from bleeding — severe anaemia, shock, coma and death; combined, they give multi-organ failure. Treatment runs in two directions. First, replace what is lost — platelets, fresh frozen plasma (clotting factors) and blood transfusion. Second, and most important, stop the cause — treat sepsis with antibiotics, remove dead tissue, treat the malignancy, and consider plasmapheresis (which removes harmful substances by removing the plasma content of the patient's blood). If you don't stop the cause, DIC continues. Prognosis is generally poor because DIC progresses rapidly, clotting factors and platelets are hard to replace quickly, and the underlying disease (e.g. septic shock) is severe; DIC is a common pathway to death from septic shock and other underlying causes.",
+         "explain": "## Read this first\n\n>> **Complications:** clotting side → AKI, organ/cardiorespiratory failure; bleeding side → severe anaemia, shock, coma, death; combined → **multi-organ failure.**\n\n>> **Treat in two directions:** **(1) replace** (platelets, FFP, blood); **(2) stop the cause** (antibiotics/debride/treat malignancy ± plasmapheresis) — the priority.\n\n>> **Prognosis: poor** — rapid course, hard-to-replace supplies, severe underlying disease.",
+         "tie": "This two-direction plan, with 'stop the cause' as the priority, is the practical takeaway — and it explains why DIC remains a leading pathway to death from septic shock despite treatment."
+        }
+       ],
+       "recall": [
+        {
+         "q": "What is DIC?",
+         "a": "**A fatal condition that results in abnormal clotting of blood in all parts of the body; life-threatening if left untreated.**\n\n## Understanding it\n- Widespread, uncontrolled clotting throughout the body defines DIC.\n- Without treatment it is fatal.\n\n>> DIC = abnormal clotting throughout the body; fatal if untreated.",
+         "opts": [
+          "A localised clot in one leg vein",
+          "A bleeding disorder with no clotting",
+          "Abnormal clotting of blood in all parts of the body",
+          "Inflammation of the blood vessels only"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Is DIC a disease in itself?",
+         "a": "**No — it is not a disease itself; it is a final common pathway when the body's clotting system goes out of control.**\n\n## Understanding it\n- DIC is always secondary to another big insult.\n- It represents the clotting system spiralling out of control.\n\n>> DIC is a final common pathway, not a primary disease.",
+         "opts": [
+          "Yes, it is a type of cancer",
+          "Yes, it is a primary inherited disease",
+          "No; it is a final common pathway secondary to another cause",
+          "No; it is a mild self-limiting condition"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Give the intuitive 'clotting button' analogy for DIC.",
+         "a": "**The body presses the 'clotting button' everywhere at once, then runs out of clotting materials, and then starts bleeding uncontrollably.**\n\n## Understanding it\n- Mass clotting first, then depletion, then bleeding.\n- This captures the two-phase nature of DIC.\n\n>> Clot everywhere → run out → bleed everywhere.",
+         "opts": [
+          "Clot only at one site as normal",
+          "Clot everywhere at once → run out of materials → bleed uncontrollably",
+          "Bleed first, then clot, then recover",
+          "Nothing happens to clotting"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "List the main triggers (aetiology) of DIC.",
+         "a": "**Severe infection (sepsis), trauma/injury, malignancy, envenomation, and medical complications (transfusions, surgeries, obstetric complications).**\n\n## Understanding it\n- DIC always follows a big insult that abnormally activates clotting.\n- Sepsis is the classic trigger.\n\n>> Triggers: sepsis, trauma, malignancy, envenomation, medical/obstetric complications.",
+         "opts": [
+          "Only vitamin deficiency",
+          "Sepsis, trauma, malignancy, envenomation, medical/obstetric complications",
+          "Only mild viral colds",
+          "Only dehydration"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Why does sepsis trigger DIC?",
+         "a": "**Bacteria release toxins that cause massive inflammation, which abnormally activates the clotting cascade.**\n\n## Understanding it\n- Endotoxin-driven inflammation switches on clotting body-wide.\n- Sepsis is the commonest cause of DIC.\n\n>> Sepsis: toxins → massive inflammation → clotting activated.",
+         "opts": [
+          "Sepsis thins the blood directly",
+          "Sepsis has no link to clotting",
+          "Bacteria physically block vessels",
+          "Bacterial toxins cause massive inflammation that activates clotting"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "How is normal clotting controlled, compared with DIC?",
+         "a": "**Normally clotting is localised to the injury site, forms a clot, stops the bleeding, then shuts off; in DIC this control is lost and clotting becomes generalised throughout the body.**\n\n## Understanding it\n- Normal haemostasis is local and self-limiting.\n- DIC makes it body-wide and uncontrolled.\n\n>> Normal = local & self-limiting; DIC = generalised & uncontrolled.",
+         "opts": [
+          "Both are identical",
+          "Normal clotting never switches off",
+          "Normal clotting is local and self-limiting; DIC is generalised/uncontrolled",
+          "Normal clotting is body-wide; DIC is local"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What happens in Phase 1 of DIC?",
+         "a": "**A trigger releases pro-coagulant substances, the entire clotting cascade is activated throughout the body, and tiny clots form everywhere (especially in small vessels), causing vaso-occlusion and tissue ischaemia.**\n\n## Understanding it\n- Phase 1 is excessive, widespread micro-clotting.\n- These clots block small vessels and starve organs.\n\n>> Phase 1 = mass micro-clotting → vaso-occlusion + ischaemia.",
+         "opts": [
+          "Massive bleeding from the start",
+          "No clotting at all",
+          "Widespread micro-clotting causing vaso-occlusion and tissue ischaemia",
+          "Only local clotting at one wound"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Which organs are especially affected by the micro-clots in DIC?",
+         "a": "**The kidneys, brain and lungs.**\n\n## Understanding it\n- High-flow, small-vessel organs suffer most from micro-thrombi.\n- This drives AKI, coma and respiratory failure.\n\n>> Kidneys, brain, lungs bear the brunt.",
+         "opts": [
+          "Kidneys, brain and lungs",
+          "Only the big toe",
+          "Only the stomach",
+          "Only the skin"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What is 'consumption coagulopathy' in DIC?",
+         "a": "**While forming widespread clots, platelets and clotting factors are used up — this consumption leaves the body unable to clot.**\n\n## Understanding it\n- Making countless clots depletes the clotting supplies.\n- This depletion sets up the bleeding phase.\n\n>> Consumption coagulopathy = platelets/factors used up by mass clotting.",
+         "opts": [
+          "Overproduction of clotting factors",
+          "A congenital lack of clotting factors",
+          "Platelets and clotting factors are used up by widespread clotting",
+          "Destruction of red cells by antibodies"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What happens in Phase 2 of DIC?",
+         "a": "**With no platelets or clotting factors left, even small injuries cause massive bleeding — the patient bleeds from orifices.**\n\n## Understanding it\n- Depletion from phase 1 leaves the body unable to stop bleeding.\n- Bleeding is now the dominant problem.\n\n>> Phase 2 = depleted clotting → massive bleeding.",
+         "opts": [
+          "Complete recovery",
+          "More clotting with no bleeding",
+          "Massive bleeding because platelets/factors are depleted",
+          "Only mild bruising"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What is the simple flow of DIC to memorise?",
+         "a": "**Trigger → mass clotting → consumption of platelets/factors → no clotting ability → severe bleeding.**\n\n## Understanding it\n- This chain links the trigger to the final bleeding.\n- It captures both phases in one line.\n\n>> Trigger→mass clotting→consumption→no clotting→bleeding.",
+         "opts": [
+          "Trigger → mass clotting → consumption → no clotting ability → bleeding",
+          "Trigger → bleeding → clotting → recovery",
+          "Bleeding → clotting → trigger",
+          "Clotting → recovery, no bleeding"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "Why do clotting AND bleeding happen at the same time in DIC?",
+         "a": "**Inside the vessels there is clotting; outside/at wounds there is bleeding — because all the clotting resources have already been used up internally.**\n\n## Understanding it\n- Internal clotting consumes the supplies needed to stop external bleeding.\n- This paradox is the key confusion point in DIC.\n\n>> Inside vessels clot; outside bleeds — supplies spent internally.",
+         "opts": [
+          "Two separate diseases occur together",
+          "The blood is both too thick and too thin by chance",
+          "Internal clotting uses up supplies, so wounds bleed",
+          "There is actually no clotting"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "What are the clinical features of DIC?",
+         "a": "**Bleeding from orifices (gums, IV sites, wounds), clotting effects (organ damage from blocked vessels), and systemic effects (hypotension, shock, coma).**\n\n## Understanding it\n- The picture combines bleeding, organ damage and shock.\n- Coma reflects brain involvement.\n\n>> Bleeding + organ damage + hypotension/shock/coma.",
+         "opts": [
+          "Only joint pain",
+          "Only a skin rash",
+          "Only a mild nosebleed",
+          "Bleeding from orifices, organ damage, hypotension/shock/coma"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What causes shock in DIC?",
+         "a": "**Bleeding (blood loss) and poor organ perfusion from blocked vessels.**\n\n## Understanding it\n- Both the bleeding and the micro-clots reduce effective circulation.\n- Together they cause hypotension and shock.\n\n>> Shock from blood loss + poor perfusion.",
+         "opts": [
+          "Excess fluid overload",
+          "An allergic reaction only",
+          "Too many platelets",
+          "Bleeding and poor organ perfusion"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What are the key investigation findings in DIC?",
+         "a": "**Platelets ↓ (used up), clotting factors ↓ (prolonged PT and aPTT), D-dimer ↑ (clot breakdown), and FBC may show anaemia (from bleeding).**\n\n## Understanding it\n- Low platelets + prolonged PT/aPTT + high D-dimer is the classic pattern.\n- Anaemia reflects blood loss.\n\n>> ↓platelets, ↑PT/aPTT, ↑D-dimer, ± anaemia.",
+         "opts": [
+          "High platelets and low D-dimer",
+          "Low platelets, prolonged PT/aPTT, raised D-dimer, ± anaemia",
+          "Normal PT/aPTT with high platelets",
+          "Only a raised white cell count"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What does a raised D-dimer indicate in DIC?",
+         "a": "**Clot breakdown (fibrinolysis) — reflecting the widespread clotting and its breakdown.**\n\n## Understanding it\n- D-dimer is a fibrin degradation product.\n- It rises because clots are forming and breaking down everywhere.\n\n>> ↑D-dimer = clot breakdown.",
+         "opts": [
+          "Low platelet production",
+          "Clot breakdown (fibrin degradation)",
+          "Iron deficiency",
+          "Clot formation is blocked"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What complications arise from the clotting side of DIC?",
+         "a": "**Acute kidney injury, organ failure and cardiorespiratory failure.**\n\n## Understanding it\n- Micro-thrombi damage organs, especially kidneys.\n- This can progress to multi-organ failure.\n\n>> Clotting side: AKI, organ failure, cardiorespiratory failure.",
+         "opts": [
+          "Acute kidney injury, organ failure, cardiorespiratory failure",
+          "A single bruise",
+          "Only mild dehydration",
+          "Improved kidney function"
+         ],
+         "ans": 0
+        },
+        {
+         "q": "What complications arise from the bleeding side of DIC?",
+         "a": "**Severe anaemia, shock, and coma leading to death.**\n\n## Understanding it\n- Uncontrolled bleeding causes anaemia and shock.\n- Combined with clotting, it becomes multi-organ failure.\n\n>> Bleeding side: severe anaemia, shock, coma, death.",
+         "opts": [
+          "Complete spontaneous recovery",
+          "Severe anaemia, shock, coma and death",
+          "Mild fatigue only",
+          "Polycythaemia"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What are the two directions of DIC treatment?",
+         "a": "**Replace what is lost (platelets, fresh frozen plasma, blood) and stop the cause (most important).**\n\n## Understanding it\n- You must both refill supplies and remove the trigger.\n- Stopping the cause is the priority.\n\n>> Replace lost supplies + stop the cause.",
+         "opts": [
+          "Only give aspirin",
+          "Only give more clotting drugs",
+          "Do nothing and observe",
+          "Replace lost components and stop the underlying cause"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "What is used to replace what is lost in DIC?",
+         "a": "**Platelets, fresh frozen plasma (clotting factors) and blood transfusion.**\n\n## Understanding it\n- FFP restores clotting factors; platelets and blood address the deficits.\n- This supports the patient while the cause is treated.\n\n>> Replace with platelets, FFP, blood.",
+         "opts": [
+          "Only intravenous saline",
+          "Only vitamin C",
+          "Platelets, fresh frozen plasma and blood transfusion",
+          "Only oral iron tablets"
+         ],
+         "ans": 2
+        },
+        {
+         "q": "Why is 'stopping the cause' the most important part of DIC treatment?",
+         "a": "**Because if you don't stop the cause (e.g. treat sepsis, remove dead tissue, treat malignancy), DIC continues no matter how much you replace.**\n\n## Understanding it\n- Replacement alone is futile while the trigger keeps firing clotting.\n- Treat sepsis with antibiotics, debride dead tissue, treat cancer.\n\n>> Stop the cause or DIC continues despite replacement.",
+         "opts": [
+          "Because the cause is never treatable",
+          "Because DIC continues unless the underlying trigger is removed",
+          "Because DIC resolves on its own anyway",
+          "Because replacement is harmful"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "What is plasmapheresis used for in DIC?",
+         "a": "**To remove harmful substances from the blood by removing the plasma content of the patient's blood.**\n\n## Understanding it\n- It clears circulating pro-coagulant/harmful substances.\n- It is an adjunct while the cause is treated.\n\n>> Plasmapheresis removes harmful plasma substances.",
+         "opts": [
+          "It filters urine like dialysis for the kidney",
+          "It removes harmful substances by removing the plasma content of the blood",
+          "It transfuses red cells",
+          "It adds extra clotting factors only"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "Why is the prognosis of DIC generally poor?",
+         "a": "**Because DIC progresses rapidly, clotting factors and platelets are hard to replace quickly, and the underlying disease (e.g. septic shock) is usually severe.**\n\n## Understanding it\n- Speed of progression plus supply shortages plus a severe cause all worsen outcomes.\n- DIC is a common pathway to death from septic shock.\n\n>> Poor prognosis: rapid course, hard-to-replace supplies, severe cause.",
+         "opts": [
+          "The cause is always mild",
+          "Rapid progression, hard-to-replace supplies, severe underlying disease",
+          "It always resolves quickly",
+          "Supplies are always immediately available"
+         ],
+         "ans": 1
+        },
+        {
+         "q": "CLINICAL — A septic child develops oozing from IV sites and gums with low platelets, prolonged PT/aPTT and raised D-dimer. What is happening and what is the priority?",
+         "a": "**This is DIC secondary to sepsis; the priority is to treat the cause (antibiotics for sepsis) while replacing platelets/FFP/blood.**\n\n## Understanding it\n- The bleeding + consumption picture with a septic source is classic DIC.\n- Antibiotics for the sepsis are the key step alongside replacement.\n\n>> Septic DIC → treat sepsis (antibiotics) + replace platelets/FFP/blood.",
+         "opts": [
+          "Simple thrombocytopenia; just give aspirin",
+          "Haemophilia; give factor VIII only",
+          "Iron deficiency; give oral iron",
+          "DIC from sepsis; treat the cause (antibiotics) and replace components"
+         ],
+         "ans": 3
+        },
+        {
+         "q": "CLINICAL — In DIC, why can transfused platelets and plasma seem to make little difference if given alone?",
+         "a": "**Because the ongoing trigger keeps consuming them; without stopping the cause, replacement is quickly used up.**\n\n## Understanding it\n- Replacement is a holding measure, not a cure.\n- The trigger must be removed for replacement to hold.\n\n>> Replacement is consumed unless the cause is stopped.",
+         "opts": [
+          "Because plasma worsens clotting permanently",
+          "Because the blood cannot be transfused at all",
+          "The ongoing trigger keeps consuming them until the cause is treated",
+          "Because platelets are harmful in DIC"
+         ],
+         "ans": 2
+        }
+       ],
        "imgBase": null,
        "imgCount": 0,
-       "ready": false
+       "ready": true
       },
       {
        "id": "pediatrics-130",
@@ -27408,9 +29224,9 @@ window.MEDBANK = {
     }
    ],
    "hasSyllabus": true,
-   "topicCount": 175,
-   "readyCount": 25,
-   "cardCount": 2347,
+   "topicCount": 176,
+   "readyCount": 30,
+   "cardCount": 2526,
    "lecturerCount": 18
   },
   {
@@ -33957,9 +35773,17 @@ window.MEDBANK = {
      "id": "pediatrics-20",
      "sn": 20,
      "name": "Introduction to Haematology/Investigations",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 5,
+     "recall": 21
+    },
+    {
+     "id": "pediatrics-20-5",
+     "sn": 20.5,
+     "name": "G6PD Deficiency in Children",
+     "ready": true,
+     "primer": 9,
+     "recall": 24
     },
     {
      "id": "pediatrics-39",
@@ -34098,7 +35922,7 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 0
+   "readyCount": 2
   },
   {
    "id": "pediatrics-okoronkwo",
@@ -34321,9 +36145,9 @@ window.MEDBANK = {
      "id": "pediatrics-129",
      "sn": 129,
      "name": "Disseminated Intravascular Coagulation",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 5,
+     "recall": 25
     },
     {
      "id": "pediatrics-171",
@@ -34334,7 +36158,7 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 2
+   "readyCount": 3
   },
   {
    "id": "pediatrics-onyearugha",
@@ -34477,17 +36301,17 @@ window.MEDBANK = {
      "id": "pediatrics-32",
      "sn": 32,
      "name": "Malaria",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 9,
+     "recall": 39
     },
     {
      "id": "pediatrics-37",
      "sn": 37,
      "name": "Measles",
-     "ready": false,
-     "primer": 0,
-     "recall": 0
+     "ready": true,
+     "primer": 8,
+     "recall": 34
     },
     {
      "id": "pediatrics-40",
@@ -34562,14 +36386,14 @@ window.MEDBANK = {
      "recall": 0
     }
    ],
-   "readyCount": 0
+   "readyCount": 2
   }
  ],
  "stats": {
-  "topics": 286,
-  "ready": 29,
-  "primerCards": 387,
-  "recallCards": 2206,
+  "topics": 287,
+  "ready": 34,
+  "primerCards": 423,
+  "recallCards": 2349,
   "lecturers": 36
  }
 };

@@ -1,0 +1,281 @@
+{
+ "deck": "recall",
+ "topic": "Disseminated Intravascular Coagulation",
+ "cards": [
+  {
+   "q": "What is DIC?",
+   "a": "**A fatal condition that results in abnormal clotting of blood in all parts of the body; life-threatening if left untreated.**\n\n## Understanding it\n- Widespread, uncontrolled clotting throughout the body defines DIC.\n- Without treatment it is fatal.\n\n>> DIC = abnormal clotting throughout the body; fatal if untreated.",
+   "opts": [
+    "A localised clot in one leg vein",
+    "A bleeding disorder with no clotting",
+    "Abnormal clotting of blood in all parts of the body",
+    "Inflammation of the blood vessels only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Is DIC a disease in itself?",
+   "a": "**No — it is not a disease itself; it is a final common pathway when the body's clotting system goes out of control.**\n\n## Understanding it\n- DIC is always secondary to another big insult.\n- It represents the clotting system spiralling out of control.\n\n>> DIC is a final common pathway, not a primary disease.",
+   "opts": [
+    "Yes, it is a type of cancer",
+    "Yes, it is a primary inherited disease",
+    "No; it is a final common pathway secondary to another cause",
+    "No; it is a mild self-limiting condition"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Give the intuitive 'clotting button' analogy for DIC.",
+   "a": "**The body presses the 'clotting button' everywhere at once, then runs out of clotting materials, and then starts bleeding uncontrollably.**\n\n## Understanding it\n- Mass clotting first, then depletion, then bleeding.\n- This captures the two-phase nature of DIC.\n\n>> Clot everywhere → run out → bleed everywhere.",
+   "opts": [
+    "Clot only at one site as normal",
+    "Clot everywhere at once → run out of materials → bleed uncontrollably",
+    "Bleed first, then clot, then recover",
+    "Nothing happens to clotting"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "List the main triggers (aetiology) of DIC.",
+   "a": "**Severe infection (sepsis), trauma/injury, malignancy, envenomation, and medical complications (transfusions, surgeries, obstetric complications).**\n\n## Understanding it\n- DIC always follows a big insult that abnormally activates clotting.\n- Sepsis is the classic trigger.\n\n>> Triggers: sepsis, trauma, malignancy, envenomation, medical/obstetric complications.",
+   "opts": [
+    "Only vitamin deficiency",
+    "Sepsis, trauma, malignancy, envenomation, medical/obstetric complications",
+    "Only mild viral colds",
+    "Only dehydration"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why does sepsis trigger DIC?",
+   "a": "**Bacteria release toxins that cause massive inflammation, which abnormally activates the clotting cascade.**\n\n## Understanding it\n- Endotoxin-driven inflammation switches on clotting body-wide.\n- Sepsis is the commonest cause of DIC.\n\n>> Sepsis: toxins → massive inflammation → clotting activated.",
+   "opts": [
+    "Sepsis thins the blood directly",
+    "Sepsis has no link to clotting",
+    "Bacteria physically block vessels",
+    "Bacterial toxins cause massive inflammation that activates clotting"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "How is normal clotting controlled, compared with DIC?",
+   "a": "**Normally clotting is localised to the injury site, forms a clot, stops the bleeding, then shuts off; in DIC this control is lost and clotting becomes generalised throughout the body.**\n\n## Understanding it\n- Normal haemostasis is local and self-limiting.\n- DIC makes it body-wide and uncontrolled.\n\n>> Normal = local & self-limiting; DIC = generalised & uncontrolled.",
+   "opts": [
+    "Both are identical",
+    "Normal clotting never switches off",
+    "Normal clotting is local and self-limiting; DIC is generalised/uncontrolled",
+    "Normal clotting is body-wide; DIC is local"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What happens in Phase 1 of DIC?",
+   "a": "**A trigger releases pro-coagulant substances, the entire clotting cascade is activated throughout the body, and tiny clots form everywhere (especially in small vessels), causing vaso-occlusion and tissue ischaemia.**\n\n## Understanding it\n- Phase 1 is excessive, widespread micro-clotting.\n- These clots block small vessels and starve organs.\n\n>> Phase 1 = mass micro-clotting → vaso-occlusion + ischaemia.",
+   "opts": [
+    "Massive bleeding from the start",
+    "No clotting at all",
+    "Widespread micro-clotting causing vaso-occlusion and tissue ischaemia",
+    "Only local clotting at one wound"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Which organs are especially affected by the micro-clots in DIC?",
+   "a": "**The kidneys, brain and lungs.**\n\n## Understanding it\n- High-flow, small-vessel organs suffer most from micro-thrombi.\n- This drives AKI, coma and respiratory failure.\n\n>> Kidneys, brain, lungs bear the brunt.",
+   "opts": [
+    "Kidneys, brain and lungs",
+    "Only the big toe",
+    "Only the stomach",
+    "Only the skin"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is 'consumption coagulopathy' in DIC?",
+   "a": "**While forming widespread clots, platelets and clotting factors are used up — this consumption leaves the body unable to clot.**\n\n## Understanding it\n- Making countless clots depletes the clotting supplies.\n- This depletion sets up the bleeding phase.\n\n>> Consumption coagulopathy = platelets/factors used up by mass clotting.",
+   "opts": [
+    "Overproduction of clotting factors",
+    "A congenital lack of clotting factors",
+    "Platelets and clotting factors are used up by widespread clotting",
+    "Destruction of red cells by antibodies"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What happens in Phase 2 of DIC?",
+   "a": "**With no platelets or clotting factors left, even small injuries cause massive bleeding — the patient bleeds from orifices.**\n\n## Understanding it\n- Depletion from phase 1 leaves the body unable to stop bleeding.\n- Bleeding is now the dominant problem.\n\n>> Phase 2 = depleted clotting → massive bleeding.",
+   "opts": [
+    "Complete recovery",
+    "More clotting with no bleeding",
+    "Massive bleeding because platelets/factors are depleted",
+    "Only mild bruising"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the simple flow of DIC to memorise?",
+   "a": "**Trigger → mass clotting → consumption of platelets/factors → no clotting ability → severe bleeding.**\n\n## Understanding it\n- This chain links the trigger to the final bleeding.\n- It captures both phases in one line.\n\n>> Trigger→mass clotting→consumption→no clotting→bleeding.",
+   "opts": [
+    "Trigger → mass clotting → consumption → no clotting ability → bleeding",
+    "Trigger → bleeding → clotting → recovery",
+    "Bleeding → clotting → trigger",
+    "Clotting → recovery, no bleeding"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Why do clotting AND bleeding happen at the same time in DIC?",
+   "a": "**Inside the vessels there is clotting; outside/at wounds there is bleeding — because all the clotting resources have already been used up internally.**\n\n## Understanding it\n- Internal clotting consumes the supplies needed to stop external bleeding.\n- This paradox is the key confusion point in DIC.\n\n>> Inside vessels clot; outside bleeds — supplies spent internally.",
+   "opts": [
+    "Two separate diseases occur together",
+    "The blood is both too thick and too thin by chance",
+    "Internal clotting uses up supplies, so wounds bleed",
+    "There is actually no clotting"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the clinical features of DIC?",
+   "a": "**Bleeding from orifices (gums, IV sites, wounds), clotting effects (organ damage from blocked vessels), and systemic effects (hypotension, shock, coma).**\n\n## Understanding it\n- The picture combines bleeding, organ damage and shock.\n- Coma reflects brain involvement.\n\n>> Bleeding + organ damage + hypotension/shock/coma.",
+   "opts": [
+    "Only joint pain",
+    "Only a skin rash",
+    "Only a mild nosebleed",
+    "Bleeding from orifices, organ damage, hypotension/shock/coma"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What causes shock in DIC?",
+   "a": "**Bleeding (blood loss) and poor organ perfusion from blocked vessels.**\n\n## Understanding it\n- Both the bleeding and the micro-clots reduce effective circulation.\n- Together they cause hypotension and shock.\n\n>> Shock from blood loss + poor perfusion.",
+   "opts": [
+    "Excess fluid overload",
+    "An allergic reaction only",
+    "Too many platelets",
+    "Bleeding and poor organ perfusion"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the key investigation findings in DIC?",
+   "a": "**Platelets ↓ (used up), clotting factors ↓ (prolonged PT and aPTT), D-dimer ↑ (clot breakdown), and FBC may show anaemia (from bleeding).**\n\n## Understanding it\n- Low platelets + prolonged PT/aPTT + high D-dimer is the classic pattern.\n- Anaemia reflects blood loss.\n\n>> ↓platelets, ↑PT/aPTT, ↑D-dimer, ± anaemia.",
+   "opts": [
+    "High platelets and low D-dimer",
+    "Low platelets, prolonged PT/aPTT, raised D-dimer, ± anaemia",
+    "Normal PT/aPTT with high platelets",
+    "Only a raised white cell count"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What does a raised D-dimer indicate in DIC?",
+   "a": "**Clot breakdown (fibrinolysis) — reflecting the widespread clotting and its breakdown.**\n\n## Understanding it\n- D-dimer is a fibrin degradation product.\n- It rises because clots are forming and breaking down everywhere.\n\n>> ↑D-dimer = clot breakdown.",
+   "opts": [
+    "Low platelet production",
+    "Clot breakdown (fibrin degradation)",
+    "Iron deficiency",
+    "Clot formation is blocked"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What complications arise from the clotting side of DIC?",
+   "a": "**Acute kidney injury, organ failure and cardiorespiratory failure.**\n\n## Understanding it\n- Micro-thrombi damage organs, especially kidneys.\n- This can progress to multi-organ failure.\n\n>> Clotting side: AKI, organ failure, cardiorespiratory failure.",
+   "opts": [
+    "Acute kidney injury, organ failure, cardiorespiratory failure",
+    "A single bruise",
+    "Only mild dehydration",
+    "Improved kidney function"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What complications arise from the bleeding side of DIC?",
+   "a": "**Severe anaemia, shock, and coma leading to death.**\n\n## Understanding it\n- Uncontrolled bleeding causes anaemia and shock.\n- Combined with clotting, it becomes multi-organ failure.\n\n>> Bleeding side: severe anaemia, shock, coma, death.",
+   "opts": [
+    "Complete spontaneous recovery",
+    "Severe anaemia, shock, coma and death",
+    "Mild fatigue only",
+    "Polycythaemia"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the two directions of DIC treatment?",
+   "a": "**Replace what is lost (platelets, fresh frozen plasma, blood) and stop the cause (most important).**\n\n## Understanding it\n- You must both refill supplies and remove the trigger.\n- Stopping the cause is the priority.\n\n>> Replace lost supplies + stop the cause.",
+   "opts": [
+    "Only give aspirin",
+    "Only give more clotting drugs",
+    "Do nothing and observe",
+    "Replace lost components and stop the underlying cause"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is used to replace what is lost in DIC?",
+   "a": "**Platelets, fresh frozen plasma (clotting factors) and blood transfusion.**\n\n## Understanding it\n- FFP restores clotting factors; platelets and blood address the deficits.\n- This supports the patient while the cause is treated.\n\n>> Replace with platelets, FFP, blood.",
+   "opts": [
+    "Only intravenous saline",
+    "Only vitamin C",
+    "Platelets, fresh frozen plasma and blood transfusion",
+    "Only oral iron tablets"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is 'stopping the cause' the most important part of DIC treatment?",
+   "a": "**Because if you don't stop the cause (e.g. treat sepsis, remove dead tissue, treat malignancy), DIC continues no matter how much you replace.**\n\n## Understanding it\n- Replacement alone is futile while the trigger keeps firing clotting.\n- Treat sepsis with antibiotics, debride dead tissue, treat cancer.\n\n>> Stop the cause or DIC continues despite replacement.",
+   "opts": [
+    "Because the cause is never treatable",
+    "Because DIC continues unless the underlying trigger is removed",
+    "Because DIC resolves on its own anyway",
+    "Because replacement is harmful"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is plasmapheresis used for in DIC?",
+   "a": "**To remove harmful substances from the blood by removing the plasma content of the patient's blood.**\n\n## Understanding it\n- It clears circulating pro-coagulant/harmful substances.\n- It is an adjunct while the cause is treated.\n\n>> Plasmapheresis removes harmful plasma substances.",
+   "opts": [
+    "It filters urine like dialysis for the kidney",
+    "It removes harmful substances by removing the plasma content of the blood",
+    "It transfuses red cells",
+    "It adds extra clotting factors only"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why is the prognosis of DIC generally poor?",
+   "a": "**Because DIC progresses rapidly, clotting factors and platelets are hard to replace quickly, and the underlying disease (e.g. septic shock) is usually severe.**\n\n## Understanding it\n- Speed of progression plus supply shortages plus a severe cause all worsen outcomes.\n- DIC is a common pathway to death from septic shock.\n\n>> Poor prognosis: rapid course, hard-to-replace supplies, severe cause.",
+   "opts": [
+    "The cause is always mild",
+    "Rapid progression, hard-to-replace supplies, severe underlying disease",
+    "It always resolves quickly",
+    "Supplies are always immediately available"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A septic child develops oozing from IV sites and gums with low platelets, prolonged PT/aPTT and raised D-dimer. What is happening and what is the priority?",
+   "a": "**This is DIC secondary to sepsis; the priority is to treat the cause (antibiotics for sepsis) while replacing platelets/FFP/blood.**\n\n## Understanding it\n- The bleeding + consumption picture with a septic source is classic DIC.\n- Antibiotics for the sepsis are the key step alongside replacement.\n\n>> Septic DIC → treat sepsis (antibiotics) + replace platelets/FFP/blood.",
+   "opts": [
+    "Simple thrombocytopenia; just give aspirin",
+    "Haemophilia; give factor VIII only",
+    "Iron deficiency; give oral iron",
+    "DIC from sepsis; treat the cause (antibiotics) and replace components"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — In DIC, why can transfused platelets and plasma seem to make little difference if given alone?",
+   "a": "**Because the ongoing trigger keeps consuming them; without stopping the cause, replacement is quickly used up.**\n\n## Understanding it\n- Replacement is a holding measure, not a cure.\n- The trigger must be removed for replacement to hold.\n\n>> Replacement is consumed unless the cause is stopped.",
+   "opts": [
+    "Because plasma worsens clotting permanently",
+    "Because the blood cannot be transfused at all",
+    "The ongoing trigger keeps consuming them until the cause is treated",
+    "Because platelets are harmful in DIC"
+   ],
+   "ans": 2
+  }
+ ]
+}

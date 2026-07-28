@@ -1,0 +1,270 @@
+{
+ "deck": "recall",
+ "topic": "G6PD Deficiency in Children",
+ "cards": [
+  {
+   "q": "What is G6PD and what is its job in the red blood cell?",
+   "a": "**An enzyme inside red blood cells whose job is to protect them from oxidative damage.**\n\n## Understanding it\n- G6PD is the red cell's defence against oxidative stress.\n- Without it, red cells break under stress.\n\n>> G6PD = the RBC's protector against oxidative damage.",
+   "opts": [
+    "An enzyme that carries oxygen instead of haemoglobin",
+    "An antibody against red cells",
+    "An enzyme inside RBCs that protects them from oxidative damage",
+    "A clotting factor made in the liver"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is G6PD deficiency called the most common RBC enzyme defect?",
+   "a": "**Because it is the commonest inherited enzyme defect of red cells and a leading cause of haemolytic anaemia worldwide.**\n\n## Understanding it\n- It is widespread, especially in malaria-endemic regions.\n- Loss of the enzyme causes haemolysis under oxidative stress.\n\n>> G6PD deficiency = commonest RBC enzyme defect → haemolytic anaemia.",
+   "opts": [
+    "Because it is the rarest enzyme defect",
+    "It is the commonest inherited red-cell enzyme defect causing haemolytic anaemia",
+    "Because it affects white cells",
+    "Because it is a clotting disorder"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is G6PD deficiency inherited, and who is more affected?",
+   "a": "**X-linked recessive — males (XY) are more affected, and females (XX) are usually carriers.**\n\n## Understanding it\n- Because it is on the X chromosome, boys with one affected X are affected.\n- Girls usually need two affected copies, so are usually carriers.\n\n>> X-linked recessive → boys affected, girls usually carriers.",
+   "opts": [
+    "X-linked recessive; males more affected, females usually carriers",
+    "Y-linked; only females affected",
+    "Autosomal dominant; equally affecting both sexes",
+    "Autosomal recessive; females more affected"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "In which populations is G6PD deficiency common, and why?",
+   "a": "**Africans, Asians and Mediterranean populations — because of malaria protection.**\n\n## Understanding it\n- The gene persists where malaria is endemic.\n- The deficiency gives partial resistance to malaria.\n\n>> Common in Africa/Asia/Mediterranean — malaria protection.",
+   "opts": [
+    "Africans, Asians, Mediterranean populations — due to malaria protection",
+    "It is equally rare everywhere",
+    "Only Northern Europeans, due to cold climate",
+    "Only people with sickle cell disease"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the protective biochemical chain that G6PD drives?",
+   "a": "**G6PD → NADPH → reduced glutathione → protects the RBC from oxidative stress (ROS).**\n\n## Understanding it\n- G6PD makes NADPH, which keeps glutathione reduced, which mops up ROS.\n- Each step depends on the one before it.\n\n>> G6PD→NADPH→reduced glutathione→protects RBC.",
+   "opts": [
+    "G6PD → oxygen → haemoglobin → protects the RBC",
+    "G6PD → iron → haem → carries oxygen",
+    "G6PD → NADPH → reduced glutathione → protects the RBC",
+    "G6PD → antibodies → immunity"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What happens biochemically when G6PD is deficient?",
+   "a": "**↓ NADPH → ↓ reduced glutathione → ↑ oxidative damage, so haemoglobin and the RBC membrane are damaged and the cell breaks (haemolysis).**\n\n## Understanding it\n- The whole protective chain fails from the first step.\n- Damaged Hb and membrane lead to haemolysis.\n\n>> ↓G6PD→↓NADPH→↓glutathione→oxidative damage→haemolysis.",
+   "opts": [
+    "↑NADPH → stronger red cells",
+    "No effect on the red cell",
+    "The cell makes more haemoglobin",
+    "↓NADPH → ↓reduced glutathione → oxidative damage → haemolysis"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Why are older red blood cells worse affected in G6PD deficiency?",
+   "a": "**Because mature RBCs have lost their nucleus and cannot make new G6PD, so their limited enzyme is used up with age — leaving the oldest cells unable to handle stress, so they are destroyed first.**\n\n## Understanding it\n- No nucleus → no new enzyme synthesis → enzyme runs out with age.\n- The oldest, most depleted cells haemolyse first.\n\n>> Old RBCs can't make new G6PD → enzyme runs out → destroyed first.",
+   "opts": [
+    "Younger cells are always destroyed first",
+    "Age has no effect on which cells haemolyse",
+    "Older cells have too much enzyme",
+    "Mature RBCs can't synthesise new G6PD, so old cells run out and die first"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the main destroyer of the red cell in G6PD deficiency?",
+   "a": "**Oxidative stress (reactive oxygen species) from drugs, infections and chemicals like fava beans.**\n\n## Understanding it\n- ROS overwhelm the unprotected cell.\n- Sources include drugs, infection and fava beans.\n\n>> Oxidative stress (ROS) destroys the RBC.",
+   "opts": [
+    "Antibodies coating the cells",
+    "Physical trauma to the vessels",
+    "Oxidative stress (ROS) from drugs, infections and chemicals",
+    "Iron overload"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are Heinz bodies and bite cells in G6PD deficiency?",
+   "a": "**Oxidised, damaged haemoglobin forms Heinz bodies; the spleen bites off the Heinz-body part, forming 'bite cells' seen on the blood smear (or the cell bursts).**\n\n## Understanding it\n- Heinz bodies are precipitated damaged haemoglobin.\n- The spleen's removal of them creates bite cells.\n\n>> Heinz bodies (damaged Hb) → spleen bites them off → bite cells.",
+   "opts": [
+    "Heinz bodies are normal cell organelles",
+    "Heinz bodies are damaged Hb; the spleen bites them off, making bite cells",
+    "They are clotting products",
+    "Bite cells are white blood cells"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Describe the sequence inside the RBC that leads to haemolysis.",
+   "a": "**Oxidants accumulate → haemoglobin is damaged, forming Heinz bodies → the RBC becomes abnormal → the spleen removes it (bite cells) or it bursts → haemolysis and anaemia.**\n\n## Understanding it\n- A stepwise oxidative injury ending in splenic removal or lysis.\n- The end result is haemolysis and anaemia.\n\n>> Oxidants→Heinz bodies→abnormal RBC→spleen/burst→haemolysis.",
+   "opts": [
+    "The cell makes more haemoglobin and survives",
+    "The cell simply enlarges and recovers",
+    "Oxidants accumulate → Heinz bodies → abnormal RBC → removed/bursts → haemolysis",
+    "No change occurs inside the cell"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the normal G6PD variant, and what is the G6PD A+ variant?",
+   "a": "**G6PD B+ is the normal variant in most populations; G6PD A+ is common in African-Americans and has reduced but partially functional activity.**\n\n## Understanding it\n- B+ is normal; A+ is a mildly reduced but functional variant.\n- Severe variants have markedly reduced activity.\n\n>> B+ = normal; A+ = reduced but partially functional (African-Americans).",
+   "opts": [
+    "B+ is the severe variant; A+ is normal",
+    "A+ is found only in Europeans",
+    "B+ normal; A+ reduced but partially functional (common in African-Americans)",
+    "Both are completely non-functional"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is favism and what is its mechanism?",
+   "a": "**Haemolysis triggered by eating fava beans, which contain vicine and convicine that are hydrolysed in the gut to divicine — a potent oxidant — causing sudden severe haemolysis.**\n\n## Understanding it\n- Fava beans deliver a strong oxidant (divicine).\n- This causes an abrupt haemolytic crisis in deficient people.\n\n>> Favism: fava beans → divicine (potent oxidant) → sudden severe haemolysis.",
+   "opts": [
+    "An allergy to fava bean protein",
+    "Fava beans → vicine/convicine → divicine (a potent oxidant) → sudden haemolysis",
+    "A bacterial infection from fava beans",
+    "A clotting reaction to fava beans"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why do most people with G6PD deficiency stay asymptomatic between episodes?",
+   "a": "**Because haemolysis only occurs when an oxidative trigger is present; between triggers the remaining red cells function normally, so the patient is normal.**\n\n## Understanding it\n- The defect is only exposed under oxidative stress.\n- Remove the trigger and the person is well.\n\n>> Normal between episodes — crises need an oxidative trigger.",
+   "opts": [
+    "Because the enzyme repairs itself daily",
+    "Haemolysis needs an oxidative trigger; between triggers the patient is normal",
+    "Because the deficiency disappears with age",
+    "Because they are given continuous transfusions"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When do symptoms appear after ingestion of an offending drug, and why?",
+   "a": "**48–96 hours (2–4 days) after ingestion — because the reactive oxygen species must accumulate to a high enough concentration to trigger the crisis.**\n\n## Understanding it\n- There is a lag while oxidants build up.\n- Severity depends on the degree of enzyme defect.\n\n>> Symptoms 2–4 days later — ROS must accumulate first.",
+   "opts": [
+    "Only after several weeks",
+    "Never — the drug is harmless",
+    "Immediately, within minutes",
+    "48–96 hours (2–4 days) later, as ROS accumulate to a critical level"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the symptoms of a G6PD haemolytic crisis?",
+   "a": "**Pallor (anaemia), jaundice (from bilirubin of RBC breakdown), fatigue, and sometimes dark urine.**\n\n## Understanding it\n- Haemolysis causes anaemia and releases bilirubin.\n- Dark urine reflects haemoglobin/bilirubin breakdown products.\n\n>> Pallor, jaundice, fatigue, dark urine.",
+   "opts": [
+    "Joint swelling and rash",
+    "Pallor, jaundice, fatigue and sometimes dark urine",
+    "Constipation and weight gain",
+    "Chest pain and cough"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the three main triggers of haemolysis in G6PD deficiency, and which is most common?",
+   "a": "**Infections (most common), oxidant drugs (e.g. antimalarials like primaquine, sulfa drugs), and fava beans.**\n\n## Understanding it\n- Infection is the leading trigger.\n- Drugs and fava beans are the other classic triggers.\n\n>> Infection (commonest), oxidant drugs, fava beans.",
+   "opts": [
+    "Vaccines, milk, sunlight",
+    "Infections (most common), oxidant drugs, fava beans",
+    "Cold weather, exercise, dehydration",
+    "There are no triggers"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Why do infections trigger haemolysis in G6PD deficiency?",
+   "a": "**Because phagocytes (neutrophils, macrophages) produce a lot of reactive oxygen species to fight the infection; in a normal child RBC glutathione neutralises this, but in a G6PD-deficient child it causes acute haemolysis.**\n\n## Understanding it\n- Infection-fighting cells release ROS that overwhelm the deficient RBC.\n- Normal cells detoxify it; deficient cells cannot.\n\n>> Infection → phagocyte ROS → overwhelms deficient RBC → haemolysis.",
+   "opts": [
+    "Infections have no effect on G6PD",
+    "Phagocytes produce ROS that the deficient RBC cannot neutralise → haemolysis",
+    "The infection eats the red cells directly",
+    "Fever melts the red cells"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is balanced polymorphism, as applied to G6PD?",
+   "a": "**The maintenance of two or more alleles in a population because the heterozygote has a survival advantage — here, protection against malaria.**\n\n## Understanding it\n- The disadvantage (fragile RBCs) is offset by malaria protection.\n- So the gene persists in malaria-endemic areas.\n\n>> Balanced polymorphism: heterozygote advantage (malaria protection) keeps the gene.",
+   "opts": [
+    "Two alleles persist because the heterozygote has a survival advantage (malaria)",
+    "Random loss of alleles over time",
+    "A gene that only harms carriers",
+    "A mutation that disappears each generation"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How does G6PD deficiency protect against malaria?",
+   "a": "**The fragile G6PD-deficient RBC haemolyses when the malaria parasite causes oxidative stress, destroying the infected cell early so the parasite cannot survive well — giving partial protection.**\n\n## Understanding it\n- The parasite's own oxidative stress bursts the fragile cell, killing the parasite too.\n- Infected cells are cleared before the parasite matures.\n\n>> Fragile RBC haemolyses when parasitised → parasite dies → partial protection.",
+   "opts": [
+    "It prevents the mosquito from biting",
+    "The enzyme kills the parasite directly",
+    "Parasitised fragile RBCs haemolyse early, killing the parasite → partial protection",
+    "It makes red cells resistant to rupture"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why must a G6PD test be done when the patient is stable rather than during a crisis?",
+   "a": "**Because during haemolysis the old (deficient) cells are destroyed and the new reticulocytes have normal enzyme, giving a falsely normal result.**\n\n## Understanding it\n- Fresh reticulocytes are enzyme-rich and mask the deficiency.\n- Test when the reticulocyte count is normal.\n\n>> Test when stable — a crisis gives a falsely normal result.",
+   "opts": [
+    "There is no difference in timing",
+    "During haemolysis, young reticulocytes have normal enzyme → falsely normal result",
+    "The enzyme is destroyed by the test in a crisis",
+    "The test is dangerous during a crisis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is the diagnosis of G6PD deficiency confirmed?",
+   "a": "**By evidence of reduced G6PD activity in RBCs — enzyme activity ≤ 10% of normal confirms it — measured by spectrophotometry or newer techniques (RDTs), best when the reticulocyte count is normal.**\n\n## Understanding it\n- Direct enzyme assay is the confirmatory test.\n- ≤10% activity confirms the diagnosis.\n\n>> Confirm with RBC G6PD activity ≤10% (when stable).",
+   "opts": [
+    "A positive malaria RDT",
+    "Reduced RBC G6PD activity (≤10% of normal) by spectrophotometry/RDT",
+    "A prolonged clotting time",
+    "A raised white cell count"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the treatment and management of G6PD deficiency?",
+   "a": "**It is self-limiting — once the trigger is removed haemolysis stops; management is to avoid triggers, treat infection, and transfuse blood in severe cases.**\n\n## Understanding it\n- Removing the trigger halts the haemolysis.\n- Supportive care and transfusion cover severe episodes.\n\n>> Self-limiting: avoid triggers, treat infection, transfuse if severe.",
+   "opts": [
+    "Avoid triggers, treat infection, transfuse in severe cases (self-limiting)",
+    "Splenectomy in every case",
+    "Lifelong enzyme replacement therapy",
+    "Continuous antimalarial prophylaxis"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "CLINICAL — A boy develops pallor, jaundice and dark urine 2 days after starting an antimalarial. What is the likely diagnosis and immediate step?",
+   "a": "**An acute haemolytic crisis from G6PD deficiency; stop the offending drug (remove the trigger) and give supportive care, transfusing if severe.**\n\n## Understanding it\n- Oxidant drug + delayed haemolysis in a boy points to G6PD deficiency.\n- Removing the trigger is the key first step.\n\n>> G6PD haemolytic crisis → stop the drug, support, transfuse if severe.",
+   "opts": [
+    "Hepatitis; give antivirals",
+    "Iron deficiency; give oral iron",
+    "Malaria relapse; give more antimalarial",
+    "G6PD deficiency crisis; stop the drug and support (transfuse if severe)"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — A child's G6PD test is 'normal' during an acute haemolytic episode, but deficiency is strongly suspected. What should you do?",
+   "a": "**Repeat the test when the child is stable and the reticulocyte count is normal, because young reticulocytes during a crisis can give a falsely normal result.**\n\n## Understanding it\n- A crisis-time result can be falsely normal.\n- Retest after recovery for an accurate assay.\n\n>> Retest when stable — the crisis result can be falsely normal.",
+   "opts": [
+    "Give a blood transfusion to change the result",
+    "Accept the normal result and exclude G6PD deficiency",
+    "Diagnose a different enzyme defect immediately",
+    "Repeat the test when stable (normal reticulocyte count) — crisis gives false normal"
+   ],
+   "ans": 3
+  }
+ ]
+}

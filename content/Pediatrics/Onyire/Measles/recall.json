@@ -1,0 +1,380 @@
+{
+ "deck": "recall",
+ "topic": "Measles",
+ "cards": [
+  {
+   "q": "What is the causative agent of measles?",
+   "a": "**The measles virus — a Morbillivirus of the Paramyxoviridae family; an RNA virus with a single serotype.**\n\n## Understanding it\n- It is an RNA virus with only one serotype, so one vaccine works and immunity is lifelong.\n- Family Paramyxoviridae, genus Morbillivirus.\n\n>> Measles virus — RNA, Paramyxoviridae, 1 serotype.",
+   "opts": [
+    "Measles virus (Morbillivirus, Paramyxoviridae; RNA, 1 serotype)",
+    "A parasite spread by mosquitoes",
+    "A bacterium of the Streptococcus family",
+    "A DNA herpesvirus with many serotypes"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "How is measles transmitted and how contagious is it?",
+   "a": "**By airborne droplets; it is extremely contagious, infecting about 90% of non-immune contacts.**\n\n## Understanding it\n- Airborne (not merely droplet) spread makes it one of the most transmissible infections.\n- ~90% of susceptible contacts get infected.\n\n>> Airborne; ~90% of non-immune contacts infected.",
+   "opts": [
+    "Faeco-oral; ~5% of contacts",
+    "Airborne droplets; ~90% of non-immune contacts",
+    "Sexual contact only",
+    "Mosquito bite; ~50% of contacts"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the case fatality of measles in Nigeria versus the US?",
+   "a": "**3–6% in Nigeria versus < 0.1% in the US.**\n\n## Understanding it\n- Malnutrition, vitamin A deficiency and low coverage raise the Nigerian death rate.\n- The gap reflects complications, not a different virus.\n\n>> CFR 3–6% (Nigeria) vs <0.1% (US).",
+   "opts": [
+    "10–20% in Nigeria vs 5% in the US",
+    "Equal in both settings",
+    "<0.1% in both",
+    "3–6% in Nigeria vs <0.1% in the US"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "Which high-risk groups have the worst measles outcomes?",
+   "a": "**Children under 5, the malnourished, HIV-positive and vitamin-A-deficient.**\n\n## Understanding it\n- Weakened immunity and poor nutrition drive severe disease and death.\n- These groups are prioritised for vaccine and vitamin A.\n\n>> Under-5, malnourished, HIV+, vitamin-A-deficient.",
+   "opts": [
+    "Only healthy teenagers",
+    "Under-5, malnourished, HIV+, vitamin-A-deficient",
+    "Only elderly adults",
+    "Only vaccinated children"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "Outline the pathogenesis of measles.",
+   "a": "**Respiratory mucosa → lymphatics → viraemia → epithelial infection → rash plus immunosuppression lasting 4–6 weeks.**\n\n## Understanding it\n- The virus enters the airway, spreads via lymphatics and blood, then infects epithelium producing the rash.\n- It also suppresses immunity for weeks.\n\n>> Mucosa→lymphatics→viraemia→epithelium (rash) + immunosuppression.",
+   "opts": [
+    "Gut→liver→blood→jaundice",
+    "Skin inoculation→local rash only",
+    "Mucosa→lymphatics→viraemia→epithelial infection + immunosuppression",
+    "Nerve→brain directly, no viraemia"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are the three clinical stages of measles and their timing?",
+   "a": "**Incubation (10–14 days, average 12); prodrome/catarrhal (2–4 days); exanthem (rash) from day 3–4.**\n\n## Understanding it\n- A silent incubation, then the catarrhal 3-C phase, then the descending rash.\n- Fever spikes again as the rash appears.\n\n>> Incubation→prodrome (3 Cs)→exanthem (rash).",
+   "opts": [
+    "Rash first, then fever, then incubation",
+    "Only a single 24-hour illness",
+    "Incubation of several months",
+    "Incubation 10–14d → prodrome 2–4d → exanthem"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What are the '3 Cs' of the measles prodrome?",
+   "a": "**Cough, Coryza and Conjunctivitis (with high fever).**\n\n## Understanding it\n- The catarrhal prodrome is dominated by cough, runny nose and red eyes.\n- These precede the rash by 2–4 days.\n\n>> Cough, Coryza, Conjunctivitis.",
+   "opts": [
+    "Cough, Cyanosis, Convulsion",
+    "Chills, Coryza, Constipation",
+    "Cough, Coryza, Conjunctivitis",
+    "Cough, Cramps, Confusion"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What are Koplik spots and when do they appear?",
+   "a": "**White/blue spots on the buccal mucosa opposite the molars, appearing on day 2–3 — pathognomonic for measles and preceding the rash.**\n\n## Understanding it\n- They are the one sign that confirms measles clinically.\n- They come before the rash, during the prodrome.\n\n>> Koplik spots = pathognomonic buccal spots, before the rash.",
+   "opts": [
+    "White/blue buccal spots opposite the molars, day 2–3 (pathognomonic)",
+    "Red spots on the soft palate only (Forchheimer)",
+    "Spots that appear a week after the rash",
+    "A rash on the palms and soles"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "Describe the measles rash and its spread.",
+   "a": "**A maculopapular, confluent rash that starts on the face and descends to neck → trunk → limbs, lasting 5–6 days, with fever spiking as it appears.**\n\n## Understanding it\n- The descending pattern from the face is characteristic.\n- Fever rises again with the rash rather than settling.\n\n>> Maculopapular rash descends face→trunk→limbs; fever spikes.",
+   "opts": [
+    "Petechial rash that spares the face",
+    "Vesicular rash starting on the trunk",
+    "Rash on palms/soles first",
+    "Maculopapular, confluent, descends face→neck→trunk→limbs"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the infectious period of measles?",
+   "a": "**From 4 days before to 4 days after the onset of the rash.**\n\n## Understanding it\n- The patient spreads virus before the rash even appears.\n- This wide window is why isolation must be prompt.\n\n>> Infectious 4 days before to 4 days after the rash.",
+   "opts": [
+    "Only after the rash fades",
+    "Only while the rash is visible",
+    "4 days before to 4 days after rash onset",
+    "Only during incubation"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the single most common cause of death in measles?",
+   "a": "**Pneumonia (occurring in 1–6%).**\n\n## Understanding it\n- Secondary/viral pneumonia is the leading killer.\n- Always assess the chest and treat pneumonia promptly.\n\n>> Pneumonia — the #1 cause of measles death.",
+   "opts": [
+    "Encephalitis",
+    "Pneumonia",
+    "Otitis media",
+    "SSPE"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the common complications of measles?",
+   "a": "**Otitis media (7–9%), pneumonia (1–6%), diarrhoea and worsening malnutrition.**\n\n## Understanding it\n- These are the frequent complications, with pneumonia the dangerous one.\n- Diarrhoea and malnutrition compound each other.\n\n>> Otitis media, pneumonia, diarrhoea, malnutrition.",
+   "opts": [
+    "Appendicitis and pancreatitis",
+    "Otitis media, pneumonia, diarrhoea, worsening malnutrition",
+    "Only a mild sore throat",
+    "Deep vein thrombosis"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the rare but fatal complications of measles?",
+   "a": "**Encephalitis (1/1000, ~15% mortality), SSPE (1/10,000, fatal 6–8 years later), keratitis → blindness, and TB reactivation.**\n\n## Understanding it\n- Acute encephalitis and the delayed SSPE are the feared neurological complications.\n- Keratitis causes blindness, worse with vitamin A deficiency.\n\n>> Encephalitis, SSPE, keratitis→blindness, TB reactivation.",
+   "opts": [
+    "Only mild otitis media",
+    "Encephalitis, SSPE, keratitis/blindness, TB reactivation",
+    "Appendicitis",
+    "Kidney stones"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is SSPE and its time course?",
+   "a": "**Subacute sclerosing panencephalitis — a rare (1/10,000) fatal degenerative brain complication occurring 6–8 years after measles.**\n\n## Understanding it\n- A late, progressive, fatal neurological disease from persistent virus.\n- It shows why preventing measles matters years down the line.\n\n>> SSPE = fatal brain disease 6–8 years after measles.",
+   "opts": [
+    "Fatal brain disease 6–8 years after infection (1/10,000)",
+    "A self-limiting headache",
+    "A rash appearing 6 days after infection",
+    "An acute pneumonia during the illness"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is 'immune amnesia' in measles?",
+   "a": "**Measles destroys immune memory (and the gut), erasing protection against other pathogens and raising all-cause mortality for 2–3 years afterwards.**\n\n## Understanding it\n- The virus wipes memory T and B lymphocytes.\n- Children remain vulnerable to other infections long after recovery.\n\n>> Immune amnesia = erased immune memory → ↑ mortality for 2–3 years.",
+   "opts": [
+    "Lifelong boosted immunity to all germs",
+    "Loss of immune memory raising all-cause mortality for 2–3 years",
+    "Temporary amnesia of recent events",
+    "A harmless, brief immune boost"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "How is measles diagnosed clinically?",
+   "a": "**Fever + the 3 Cs + Koplik spots + a descending rash = classic measles (atypical in the vaccinated/partially immune).**\n\n## Understanding it\n- The full syndrome is usually diagnostic without labs.\n- Vaccinated children may present atypically.\n\n>> Fever + 3 Cs + Koplik spots + descending rash.",
+   "opts": [
+    "A positive malaria RDT",
+    "Fever + 3 Cs + Koplik spots + descending rash",
+    "Jaundice plus dark urine",
+    "Any fever with a rash on the palms"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What is the gold-standard laboratory test for measles and its timing?",
+   "a": "**Measles IgM serology in serum — collected within 4–28 days of the rash.**\n\n## Understanding it\n- IgM confirms recent infection and is the WHO reference test.\n- Timing matters: collect within the 4–28 day window.\n\n>> Measles IgM serology (days 4–28) — gold standard.",
+   "opts": [
+    "Blood culture within 24 hours",
+    "Measles IgM serology, collected within 4–28 days of rash",
+    "Stool microscopy",
+    "Malaria microscopy"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "When is PCR most useful in measles, and what samples are used?",
+   "a": "**PCR detects measles RNA from throat/nasopharyngeal swab or urine and is best in the first 3 days.**\n\n## Understanding it\n- Early in illness PCR has the highest yield.\n- Swab or urine samples are used.\n\n>> PCR (swab/urine) — best in the first 3 days.",
+   "opts": [
+    "Serology of stool",
+    "PCR of throat/nasopharyngeal swab or urine, best first 3 days",
+    "Skin biopsy culture",
+    "PCR of CSF only, best after 4 weeks"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "What are the main differential diagnoses of measles, and the key discriminator?",
+   "a": "**Rubella, roseola, dengue, drug reaction and Kawasaki disease — distinguished by Koplik spots + the 3 Cs, which point to measles.**\n\n## Understanding it\n- Many illnesses cause fever and rash; Koplik spots + 3 Cs are specific for measles.\n- Use these to separate measles from look-alikes.\n\n>> DDx: rubella/roseola/dengue/drug/Kawasaki; Koplik + 3 Cs = measles.",
+   "opts": [
+    "There are no differentials",
+    "Only chickenpox; discriminated by vesicles",
+    "Malaria; discriminated by fever alone",
+    "Rubella, roseola, dengue, drug reaction, Kawasaki; discriminated by Koplik+3Cs"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "What is the overall approach to measles management?",
+   "a": "**There is no specific antiviral, so care is supportive: isolate, hydrate and feed, treat complications, give vitamin A, and offer post-exposure prophylaxis to contacts.**\n\n## Understanding it\n- Supportive care plus vitamin A is the backbone.\n- Isolation protects others; contacts get PEP.\n\n>> No antiviral → supportive care + vitamin A + PEP.",
+   "opts": [
+    "Antibiotics cure the virus itself",
+    "A specific antiviral cures it",
+    "Supportive care (isolate, hydrate/feed, treat complications) + vitamin A",
+    "No treatment or isolation is needed"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the WHO/Nigeria vitamin A regimen for a child ≥ 8 months with measles?",
+   "a": "**200,000 IU orally, 2 doses given 24 hours apart.**\n\n## Understanding it\n- Two high doses a day apart is the standard for ≥ 8 months.\n- 6–11 months get 100,000 IU.\n\n>> Vitamin A: 200,000 IU × 2, 24 h apart (≥8 months).",
+   "opts": [
+    "400,000 IU as a single dose",
+    "200,000 IU stat and repeat in 24 hours",
+    "Vitamin A is not indicated if well-nourished",
+    "50,000 IU once"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "By how much does vitamin A reduce measles mortality in deficient areas?",
+   "a": "**By about 50%.**\n\n## Understanding it\n- In vitamin-A-deficient populations like Nigeria, it roughly halves deaths.\n- This is why it is given routinely in measles.\n\n>> Vitamin A ≈ halves measles mortality where deficiency is common.",
+   "opts": [
+    "About 50%",
+    "About 5%",
+    "It has no effect on mortality",
+    "About 100% (eliminates all deaths)"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What post-exposure prophylaxis is offered after measles contact?",
+   "a": "**Vaccine within 72 hours, or immunoglobulin 0.25 ml/kg within 6 days for high-risk contacts.**\n\n## Understanding it\n- Rapid vaccination can abort or attenuate disease if given within 72 hours.\n- Immunoglobulin covers those who cannot be vaccinated, up to 6 days.\n\n>> PEP: vaccine ≤72 h, or immunoglobulin ≤6 days.",
+   "opts": [
+    "It is never effective post-exposure",
+    "Within 7 days by vaccine",
+    "Vaccine within 72 hours (or immunoglobulin within 6 days)",
+    "Within 24 hours only"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "When is the measles vaccine given in Nigeria's routine schedule?",
+   "a": "**At 9 months and 15 months (as the MR vaccine).**\n\n## Understanding it\n- Two doses in the routine schedule build durable immunity.\n- Given free at PHCs.\n\n>> 9 months + 15 months (MR vaccine).",
+   "opts": [
+    "Birth and 6 weeks",
+    "12 years only",
+    "9 months and 15 months",
+    "A single dose at 5 years"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the efficacy of the measles vaccine by age and dose?",
+   "a": "**85% at 9 months, 95% at 12 months, and 97% with two doses.**\n\n## Understanding it\n- Efficacy rises with age at vaccination; the second dose closes the gap.\n- Two doses reach 97% protection.\n\n>> 85% at 9m, 95% at 12m, 97% with 2 doses.",
+   "opts": [
+    "Always 100% after one dose",
+    "10% at any age",
+    "85% at 9 months, 95% at 12 months, 97% with two doses",
+    "50% even after two doses"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What vaccine coverage is needed for herd immunity against measles?",
+   "a": "**95% coverage.**\n\n## Understanding it\n- Because measles is so contagious, the herd-immunity threshold is very high.\n- Below 95%, outbreaks occur.\n\n>> 95% coverage for herd immunity.",
+   "opts": [
+    "70%",
+    "25%",
+    "95%",
+    "50%"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "What is the type of measles vaccine used?",
+   "a": "**A live attenuated vaccine.**\n\n## Understanding it\n- Live attenuated virus generates strong, lasting immunity.\n- It is combined as MR in Nigeria.\n\n>> Live attenuated measles vaccine.",
+   "opts": [
+    "Inactivated (killed) vaccine",
+    "A toxoid vaccine",
+    "Live attenuated vaccine",
+    "A purely mRNA vaccine"
+   ],
+   "ans": 2
+  },
+  {
+   "q": "Why is measles a public-health emergency where 1 case = an outbreak?",
+   "a": "**Because it is airborne and extremely contagious, so a single case implies wide exposure — notify the LGA and isolate immediately.**\n\n## Understanding it\n- One confirmed case means many are already exposed.\n- Rapid notification and ring vaccination contain spread.\n\n>> 1 case = outbreak: airborne, notify LGA, isolate now.",
+   "opts": [
+    "It only spreads by direct touch",
+    "It is not a reportable disease",
+    "It is rarely transmissible, so cases are isolated",
+    "It is airborne/very contagious, so one case means an outbreak"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "According to the lecturer, why does measles cause immunosuppression?",
+   "a": "**Through destruction of memory T and B lymphocytes.**\n\n## Understanding it\n- Loss of these memory cells is 'immune amnesia'.\n- It is not the same mechanism as HIV's CD4 killing.\n\n>> Destruction of memory T and B lymphocytes.",
+   "opts": [
+    "Bone marrow suppression",
+    "Destruction of memory T and B lymphocytes",
+    "Inhibition of antibody production only",
+    "Direct killing of CD4+ T cells like HIV"
+   ],
+   "ans": 1
+  },
+  {
+   "q": "CLINICAL — A 3-year-old unvaccinated child has fever, cough, runny nose and rash, with white spots inside the cheek. Diagnosis, immediate management and public-health action?",
+   "a": "**Diagnosis: measles (Koplik spots + 3 Cs + rash). Management: isolate (airborne), give vitamin A, treat complications, hydrate and feed. Public health: notify the LGA and vaccinate contacts within 72 hours.**\n\n## Understanding it\n- The white buccal spots are Koplik spots — pathognomonic.\n- Give vitamin A and isolate; contacts need vaccine within 72 h.\n\n>> Measles → isolate + vitamin A + treat complications; notify LGA, vaccinate contacts ≤72 h.",
+   "opts": [
+    "Drug reaction; stop all drugs, no notification",
+    "Malaria; give ACT, no isolation",
+    "Chickenpox; give aciclovir and send home",
+    "Measles; isolate + vitamin A + treat complications; notify LGA and vaccinate contacts"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "CLINICAL — Why is measles more severe in Nigeria than in developed countries?",
+   "a": "**Because of the deadly combination of malnutrition, vitamin A deficiency and low vaccine coverage, which raise the case fatality to 3–6%.**\n\n## Understanding it\n- The virus is the same; the host and coverage differ.\n- Malnutrition and vitamin A deficiency amplify complications.\n\n>> Malnutrition + vitamin A deficiency + low coverage → high CFR.",
+   "opts": [
+    "Better nutrition in Nigeria",
+    "Higher vaccine coverage in Nigeria",
+    "A more virulent Nigerian strain",
+    "Malnutrition, vitamin A deficiency and low coverage raise mortality"
+   ],
+   "ans": 3
+  },
+  {
+   "q": "OSCE — Which two history points and one examination step are emphasised for suspected measles?",
+   "a": "**Ask for vaccination history and vitamin A supplementation, and examine the buccal mucosa for Koplik spots.**\n\n## Understanding it\n- Vaccination and vitamin A history guide risk and treatment.\n- Koplik spots on the buccal mucosa clinch the diagnosis.\n\n>> Ask vaccine + vitamin A history; check buccal mucosa for Koplik spots.",
+   "opts": [
+    "Vaccination history + vitamin A history; inspect buccal mucosa for Koplik spots",
+    "Ask about travel only; auscultate the heart",
+    "Ask about diet only; palpate the abdomen",
+    "No history needed; order a CT head"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the WHO elimination target for measles and Nigeria's current status?",
+   "a": "**Elimination by 2030; Nigeria is still in the 'control phase'.**\n\n## Understanding it\n- The global goal is elimination by 2030.\n- Nigeria has not yet reached elimination, remaining in control phase.\n\n>> WHO target 2030; Nigeria = control phase.",
+   "opts": [
+    "Elimination by 2030; Nigeria still in control phase",
+    "Already eliminated in Nigeria",
+    "Elimination by 2010, achieved",
+    "No target exists"
+   ],
+   "ans": 0
+  },
+  {
+   "q": "What is the bottom-line message about how measles kills?",
+   "a": "**Measles kills through its complications, not the rash itself.**\n\n## Understanding it\n- The rash is benign; pneumonia and encephalitis are the killers.\n- Management focuses on preventing and treating complications.\n\n>> Measles kills through complications, not the rash.",
+   "opts": [
+    "Through dehydration from the rash alone",
+    "It does not cause death",
+    "Through the rash causing skin failure",
+    "Through complications (e.g. pneumonia), not the rash"
+   ],
+   "ans": 3
+  }
+ ]
+}
