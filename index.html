@@ -400,6 +400,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .modebtn b{font-size:13.5px}
 .modebtn .msub{font-size:11px;color:var(--dim)}
 @media(max-width:560px){.modes{grid-template-columns:repeat(2,1fr)}}
+.clinbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:14px}
+.clinbar .clinlbl{font-size:13.5px;color:var(--dim);font-weight:600}
+.clinbar .btn{margin-left:auto}
 
 /* ---- settings ---- */
 .setrow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);
@@ -616,7 +620,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.25c';   // bump this each release
+const APP_VERSION='2026.07.28a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -717,6 +721,19 @@ function rateSRS(id,ok){
   s.seen=today; DATA.cards[id]=s;
 }
 const startedTopics = () => allTopics.filter(t=>t.ready && status(t.id)!=='notstarted');
+
+/* ---- clinical scenario cards (CLINICAL / OSPE / OSCE / CASE / SCENARIO) ---- */
+function isClin(c){ return /^\s*(CLINICAL|OSPE|OSCE|SCENARIO|CASE)\b/i.test((c&&c.q)||''); }
+function clinItems(){                       // every clinical/OSPE recall card across built topics
+  const out=[], seen={};                    // dedupe cards shared by twin syllabus entries
+  allTopics.forEach(t=>{ if(!t.ready) return;
+    (t.recall||[]).forEach(c=>{ if(!isClin(c)) return;
+      const k=hstr(c.q); if(seen[k]) return; seen[k]=1;
+      out.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); });
+  return out;
+}
+function clinCount(){ return clinItems().length; }
+function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
 
 /* ---- exam dates ---- */
 function examDays(subId){ const d=DATA.exams[subId]; if(!d) return null; return dayNum(new Date(d+'T00:00'))-dayNum(); }
@@ -1244,13 +1261,22 @@ function pageCards(subId){
 /* ---------- study / sessions ---------- */
 let S=null;
 
-function startDeck(topicId,deck){
+function startDeck(topicId,deck,clinOnly){
   const t=topById(topicId); if(!t) return;
-  const cards = deck==='primer'? t.primer : t.recall;
+  let cards = deck==='primer'? t.primer : t.recall;
+  if(clinOnly) cards = cards.filter(isClin);
   const items = cards.map(c=>({t,c,id:cid(t.id,deck,c),deck}));
   const key='deck:'+topicId+deck;
-  let i=0; if(S&&S.key===key) i=S.i; else i=Math.min(DATA.pos['pos:'+topicId+deck]||0, Math.max(0,items.length-1));
-  S={mode:'deck',key,items,order:items.map((_,k)=>k),i,show:false,t,deck,session:{done:0,correct:0}};
+  let i=0;
+  if(!clinOnly){                                   // resume position only on the full deck
+    if(S&&S.key===key&&!S.clinOnly) i=S.i;
+    else i=Math.min(DATA.pos['pos:'+topicId+deck]||0, Math.max(0,items.length-1));
+  }
+  S={mode:'deck',key,items,order:items.map((_,k)=>k),i,show:false,opts:false,pick:null,t,deck,clinOnly:!!clinOnly,session:{done:0,correct:0}};
+}
+function toggleClinFilter(){
+  if(!S||S.mode!=='deck') return;
+  startDeck(S.t.id,S.deck,!S.clinOnly); render(); window.scrollTo(0,0);
 }
 function startToday(){
   const q=buildQueue();
@@ -1266,6 +1292,9 @@ function startSession(mode){
   else if(mode==='cram'){ items=collectRecall(()=>true);
     for(let i=items.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[items[i],items[j]]=[items[j],items[i]];}
     items=items.slice(0,40); label='Exam cram'; }
+  else if(mode==='clinical'){ items=clinItems();
+    for(let i=items.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[items[i],items[j]]=[items[j],items[i]];}
+    label='Clinical scenarios'; }
   else { startToday(); return; }                 // 'due'
   S={mode:'daily',key:'sess:'+mode,label,items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length}};
@@ -1410,10 +1439,15 @@ function startHard(){
 function pageStudy(topicId,deck){
   const t=topById(topicId); if(!t) return pageHome();
   IMGBASE = t.imgBase || '';
-  if(!S || S.mode!=='deck' || S.key!=='deck:'+topicId+deck) startDeck(topicId,deck);
-  if(!S.items.length) return `<div class="empty">This deck is empty.</div>`;
-  return crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}])
-       + cardView(false);
+  if(!S || S.mode!=='deck' || S.t.id!==topicId || S.deck!==deck) startDeck(topicId,deck);
+  const nClin = deck==='recall' ? clinInDeck(t) : 0;
+  const filterBar = nClin ? `<div class="clinbar">
+      <span class="clinlbl">🩺 ${nClin} clinical scenario${nClin===1?'':'s'} in this deck</span>
+      <button class="btn ${S.clinOnly?'primary':''}" onclick="toggleClinFilter()">${S.clinOnly?'✓ Clinical only — show all':'Clinical only'}</button>
+    </div>` : '';
+  const head = crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}]);
+  if(!S.items.length) return head+filterBar+`<div class="empty">${S.clinOnly?'No clinical cards here.':'This deck is empty.'}</div>`;
+  return head + filterBar + cardView(false);
 }
 
 /* daily review runner with live completion meter */
@@ -1482,7 +1516,7 @@ function sessionSummary(backLabel,backRoute){
 /* mode buttons for quick sessions */
 function modesBar(){
   const q=buildQueue(), due=q.due.length+q.neu.length, weak=weakCount();
-  const started=startedTopics().length;
+  const started=startedTopics().length, clin=clinCount();
   const b=(m,ic,label,sub,dis)=>`<button class="modebtn${dis?' dis':''}" ${dis?'disabled':''}
       onclick="runSession('${m}')"><span class="mic">${ic}</span><b>${label}</b><span class="msub">${sub}</span></button>`;
   return `<div class="modes">
@@ -1490,6 +1524,7 @@ function modesBar(){
     ${b('due','◎','Clear due', due?`${due} card${due===1?'':'s'}`:'nothing due', due===0)}
     ${b('weak','⚑','Weak spots', weak?`${weak} card${weak===1?'':'s'}`:'none yet', weak===0)}
     ${b('cram','🎲','Exam cram', started?'random mix':'start a topic', started===0)}
+    ${b('clinical','🩺','Clinical only', clin?`${clin} scenario${clin===1?'':'s'}`:'none yet', clin===0)}
   </div>`;
 }
 /* 🧠 Active Recall Hub — one screen that builds and runs your whole session */
