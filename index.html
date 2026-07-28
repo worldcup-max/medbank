@@ -728,7 +728,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28i';   // bump this each release
+const APP_VERSION='2026.07.28j';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -748,8 +748,8 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash', ttsVoice:'', sttLang:'en-US', aiVoice:true}, d.settings||{});
-  if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash';  // move off low-quota / retired models to the generous free one
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true}, d.settings||{});
+  if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
@@ -876,14 +876,16 @@ function pickVoice(){
   if(!VOICES.length) loadVoices();
   const want=(DATA.settings.ttsVoice||'').trim();
   if(want){ const v=VOICES.find(v=>v.name===want); if(v) return v; }
-  const en=enVoices();
-  // prefer premium / neural / named voices over the basic default
-  const pref=[/siri/i,/\bava\b/i,/samantha/i,/\ballison\b/i,/\bnicky\b/i,/\baaron\b/i,/natasha/i,/\bzoe\b/i,
-    /enhanced/i,/premium/i,/neural/i,/google us english/i,/google uk english female/i,/microsoft (aria|jenny|guy|libby|sonia)/i];
+  // Siri voices are NOT usable by web speech on iOS — they play silent, so exclude them
+  const en=enVoices().filter(v=>!/siri/i.test(v.name));
+  const pref=[/samantha/i,/\bkaren\b/i,/\bmoira\b/i,/\bdaniel\b/i,/\baaron\b/i,/\bnicky\b/i,
+    /google us english/i,/microsoft (aria|jenny|guy|sonia|libby)/i,/enhanced/i,/premium/i];
   for(const rx of pref){ const v=en.find(v=>rx.test(v.name)); if(v) return v; }
-  return en.find(v=>/en[-_]US/i.test(v.lang)) || en[0] || VOICES[0] || null;
+  return null;   // fall back to the browser default voice — reliably audible
 }
-function tuneUtter(u){ const v=pickVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.04; u.volume=1; return u; }
+function tuneUtter(u){ const v=pickVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.0; u.volume=1; return u; }
+/* iOS blocks speech unless it was first unlocked inside a tap — call this from any button */
+function warmTTS(){ try{ if('speechSynthesis'in window){ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); } }catch(e){} }
 function speak(text){ try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
   speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
 function speakSeq(parts){ try{ if(!ttsOn())return; speechSynthesis.cancel();
@@ -2398,8 +2400,8 @@ function pageSettings(){
     <p class="sub" style="margin-bottom:12px">Powers the per-topic voice tutor (🎙 AI tutor on each topic). Get a free key at <b>aistudio.google.com/apikey</b> — it's stored only on this device.</p>
     <div class="setrow"><div><b>Gemini API key</b><span>${s.geminiKey?'Key saved. Paste a new one to replace it.':'Paste your free Google Gemini key to enable the tutor.'}</span></div>
       <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
-    <div class="setrow"><div><b>Model</b><span>Default gemini-flash-latest (auto-updates to the current free model). Only change if you know the model name you want.</span></div>
-      <input class="numin" style="width:170px" type="text" value="${esc(s.geminiModel||'gemini-flash-latest')}" onchange="setGemModel(this.value)"></div>
+    <div class="setrow"><div><b>Model</b><span>Default gemini-2.5-flash-lite — the most generous free model (~1000/day). Only change if you know the model name you want.</span></div>
+      <input class="numin" style="width:190px" type="text" value="${esc(s.geminiModel||'gemini-2.5-flash-lite')}" onchange="setGemModel(this.value)"></div>
     <div class="setrow"><div><b>Tutor voice</b><span>Which voice reads the tutor's replies. "Enhanced"/"Premium" voices sound far better than the default — on iPhone download one in Settings → Accessibility → Spoken Content → Voices.</span></div>
       <select class="numin" style="width:190px" onchange="setTtsVoice(this.value)">
         <option value="">Auto (best available)</option>
@@ -2613,10 +2615,10 @@ async function aiSend(topicId, text, alts){
     const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
       generationConfig:{temperature:0.6, maxOutputTokens:500} };
     // try the configured model, then current free fallbacks — so a retired model can't break the tutor
-    // generous free models first, then the configured one; each model has its OWN quota bucket
-    const configured=(DATA.settings.geminiModel||'gemini-2.5-flash').trim();
-    const cands=[...new Set([configured,'gemini-2.5-flash','gemini-2.5-flash-lite','gemini-flash-latest','gemini-2.0-flash'])];
-    let reply=null, used=null, lastErr='';
+    // most-generous free models first (flash-lite ~1000/day, flash ~250/day), then the configured one; each model has its OWN quota bucket
+    const configured=(DATA.settings.geminiModel||'gemini-2.5-flash-lite').trim();
+    const cands=[...new Set(['gemini-2.5-flash-lite',configured,'gemini-2.5-flash','gemini-flash-latest'])];
+    let reply=null, used=null, lastErr='', zeroQuota=false;
     for(const model of cands){
       let r,j;
       try{
@@ -2626,11 +2628,18 @@ async function aiSend(topicId, text, alts){
       }catch(net){ throw new Error('Network error — check your data connection.'); }
       if(r.ok){ reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text||'(no reply — try again)'; used=model; break; }
       lastErr=(j.error&&j.error.message)||('HTTP '+r.status);
-      // try the next model if this one is missing (404) or rate/quota limited (429) — another model may still have quota; stop only on bad key/request (400/401/403)
+      if(/limit:\s*0/.test(lastErr)) zeroQuota=true;
+      // try the next model if this one is missing (404) or rate/quota limited (429); stop only on a bad key/request (400/401/403)
       const tryNext = r.status===404 || r.status===429 || /not found|not supported|is not available|does not exist|deprecated|quota|exceeded|rate limit/i.test(lastErr);
       if(!tryNext) break;
     }
-    if(reply==null) throw new Error(lastErr||'No free model is available right now — try again in a minute.');
+    if(reply==null){
+      let msg;
+      if(zeroQuota) msg='Your Gemini key has no free quota (limit 0). This almost always means billing is enabled on its Google project, which removes the free tier — create a fresh key at aistudio.google.com/apikey on a project WITHOUT billing. (Or ask me to switch the app to Groq, which is also free.)';
+      else if(/quota|exceeded|429|rate/i.test(lastErr)) msg='Free-tier limit reached — wait about a minute and try again (Google allows only a few requests per minute; the daily cap is ~1000). If it persists all day, you have used today’s free requests.';
+      else msg=lastErr;
+      throw new Error(msg);
+    }
     if(used && used!==configured){ DATA.settings.geminiModel=used; persist(); }   // remember the one that worked
     AICHAT[topicId].push({role:'model',text:reply});
     AIBUSY=false; render(); aiScroll();
@@ -2657,6 +2666,7 @@ function aiListen(topicId){
   }catch(e){ VOICE.phase=''; }
 }
 function startVoiceQuiz(topicId){
+  warmTTS();
   VOICE.on=true; VOICE.topic=topicId; VOICE.phase='';
   if(!sttSupported()) alert('Voice input needs Chrome (Android or desktop). You can still type — the tutor will read its replies aloud.');
   if(!(AICHAT[topicId]&&AICHAT[topicId].length)) aiSend(topicId, 'Start quizzing me now. Ask your first question.');
@@ -2664,6 +2674,7 @@ function startVoiceQuiz(topicId){
 }
 function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} render(); }
 function aiMicOnce(topicId){
+  warmTTS();
   if(!SRClass){ alert('Voice input needs Chrome (Android or desktop).'); return; }
   try{ const rec=new SRClass(); rec.lang=DATA.settings.sttLang||'en-US'; rec.interimResults=false; rec.maxAlternatives=3;
     VOICE.phase='listen'; VOICE.rec=rec; render();
@@ -2673,12 +2684,12 @@ function aiMicOnce(topicId){
     rec.start();
   }catch(e){ VOICE.phase=''; }
 }
-function aiSendFromInput(topicId){ const el=document.getElementById('aiin'); if(!el)return;
+function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('aiin'); if(!el)return;
   const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
 function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
 function aiAudioOn(){ return DATA.settings.aiVoice!==false; }
 function toggleAiVoice(){ DATA.settings.aiVoice=!aiAudioOn(); persist();
-  if(!DATA.settings.aiVoice){ try{speechSynthesis.cancel();}catch(e){} } render(); }
+  if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} } render(); }
 function aiRedo(topicId){ const a=AICHAT[topicId]||[];
   if(a.length && a[a.length-1].role==='model') a.pop();
   if(a.length && a[a.length-1].role==='user') a.pop();
