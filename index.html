@@ -404,6 +404,49 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:14px}
 .clinbar .clinlbl{font-size:13.5px;color:var(--dim);font-weight:600}
 .clinbar .btn{margin-left:auto}
+/* icon button (TTS) */
+.iconbtn{background:none;border:0;cursor:pointer;font-size:17px;line-height:1;padding:2px 6px;opacity:.75}
+.iconbtn:hover{opacity:1}
+/* notes */
+.notewrap{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0 0;padding:0 12px}
+.notewrap summary{cursor:pointer;padding:9px 0;font-size:13px;color:var(--dim);list-style:none}
+.notewrap summary::-webkit-details-marker{display:none}
+.notewrap[open] summary{color:var(--text)}
+.notebox{width:100%;min-height:64px;background:var(--bg);color:var(--text);border:1px solid var(--line);
+  border-radius:8px;padding:9px;font:inherit;font-size:14px;resize:vertical;margin:0 0 11px}
+/* leech / mistakes rows */
+.leechrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:10px 13px;margin-bottom:9px}
+.lcount{flex:none;min-width:42px;text-align:center;font-weight:700;color:#ff6b6b;background:#ff6b6b18;border-radius:7px;padding:5px 4px;font-size:13px}
+.lcount.miss{color:var(--com);background:#ffb45418;font-size:11px;min-width:58px}
+.lmid{flex:1;min-width:0}.lmid b{display:block;font-size:14px;line-height:1.35}
+.lmid span{font-size:12px;color:var(--dim)}
+.leechrow .btn{flex:none}
+/* cram sheet */
+.cramsheet{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cramrow{padding:12px 15px;border-bottom:1px solid var(--line)}
+.cramrow:last-child{border-bottom:0}
+.cramrow .cq{font-weight:600;font-size:14.5px;display:flex;gap:9px;align-items:baseline}
+.cramrow .cn{flex:none;color:var(--dim);font-size:12px;min-width:20px}
+.cramrow .ca{margin:5px 0 0 29px;color:var(--recall);font-size:14px;font-weight:600}
+.cramrow .ct{margin:4px 0 0 29px;color:var(--dim);font-size:13px}
+@media print{ .nav,.topbar,.btnrow{display:none!important} .cramsheet{border:0} body{background:#fff;color:#000} .cramrow .ca{color:#0a7} }
+/* exam */
+.examhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.extime{font-variant-numeric:tabular-nums;font-weight:700;color:var(--com)}
+.examhead .counter{margin-left:auto;font-size:12.5px;color:var(--dim)}
+.mcqopt.sel{border-color:var(--com);background:#ffb45418}
+.subscores{margin-top:16px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.subscore{display:flex;align-items:center;gap:10px;font-size:13px}
+.subscore span{flex:none;min-width:44px;font-weight:600}
+.subscore .dbar{flex:1}.subscore b{flex:none;min-width:42px;text-align:right}
+.exmisslist{margin-top:8px}
+.exmiss{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:11px}
+.exmiss .q{font-weight:600;margin-bottom:8px}
+.exopt{font-size:13.5px;padding:5px 9px;border-radius:7px;margin-bottom:5px}
+.exopt.bad{background:#ff6b6b18;color:#ff9db1}
+.exopt.good{background:#3ecf8e18;color:var(--recall)}
+.exexpl{margin-top:8px;font-size:13.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:9px}
 
 /* ---- settings ---- */
 .setrow{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);
@@ -620,7 +663,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28a';   // bump this each release
+const APP_VERSION='2026.07.28b';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -638,7 +681,9 @@ let DATA = (()=>{
   d.dayTopics= d.dayTopics|| {};  // 'YYYY-MM-DD' -> { topicId: 1 }  (topics touched that day)
   d.read     = d.read     || {};  // topicId -> 'YYYY-MM-DD' simplified note read
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22}, d.settings||{});
+  d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
+  d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false}, d.settings||{});
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
@@ -734,6 +779,69 @@ function clinItems(){                       // every clinical/OSPE recall card a
 }
 function clinCount(){ return clinItems().length; }
 function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
+
+/* ---- shared id → card resolver (powers leeches, mistakes, notes) ---- */
+let _cardIx=null;
+function cardIndex(){ if(_cardIx) return _cardIx; _cardIx={};
+  allTopics.forEach(t=>{ if(!t.ready) return;
+    (t.primer||[]).forEach(c=>{ _cardIx[cid(t.id,'primer',c)]={t,c,deck:'primer'}; });
+    (t.recall||[]).forEach(c=>{ _cardIx[cid(t.id,'recall',c)]={t,c,deck:'recall'}; }); });
+  return _cardIx; }
+function itemById(id){ const e=cardIndex()[id]; return e?{t:e.t,c:e.c,id,deck:e.deck}:null; }
+
+/* ---- personal notes / mnemonics ---- */
+function getNote(id){ return (DATA.notes&&DATA.notes[id])||''; }
+function setNote(id,txt){ txt=(txt||'').trim();
+  if(txt) DATA.notes[id]=txt; else delete DATA.notes[id]; persist(); }
+function toggleNoteBox(){ if(!S) return; S.noteOpen=!S.noteOpen; render(); }
+function saveNoteFromBox(id,el){ setNote(id,el.value); }
+
+/* ---- read-aloud (TTS) ---- */
+function ttsOn(){ return 'speechSynthesis' in window; }
+function stripMd(s){ return (s||'').replace(/\*\*/g,'').replace(/^##\s*/gm,'').replace(/^>>\s*/gm,'')
+  .replace(/[#>*_`]/g,'').replace(/\s+/g,' ').trim(); }
+function speak(text){ try{ if(!ttsOn())return; const u=new SpeechSynthesisUtterance(stripMd(text));
+  u.rate=0.98; u.pitch=1; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
+function speakSeq(parts){ try{ if(!ttsOn())return; speechSynthesis.cancel();
+  parts.forEach((p,i)=>{ const u=new SpeechSynthesisUtterance(stripMd(p)); u.rate=0.98;
+    if(i<parts.length-1) u.text=stripMd(p)+' …'; speechSynthesis.speak(u); }); }catch(e){} }
+function stopSpeak(){ try{ if(ttsOn()) speechSynthesis.cancel(); }catch(e){} }
+function speakCurrent(){ if(!S)return; const it=S.items[S.order[S.i]]; if(!it)return; const c=it.c;
+  const ansShown = S.show || (S.pick!=null);
+  const ans = it.deck==='primer' ? (c.explain||c.lecturer||'') : (c.a||'');
+  speakSeq(ansShown && ans ? [c.q, ans] : [c.q]); }
+function ttsBtn(){ return (ttsOn()&&DATA.settings.tts)?`<button class="iconbtn" title="Read aloud" onclick="event.stopPropagation();speakCurrent()">🔊</button>`:''; }
+function noteBlock(it){ const note=getNote(it.id);
+  return `<details class="notewrap" ${note?'open':''} onclick="event.stopPropagation()">
+     <summary>✎ ${note?'My note / mnemonic':'Add a note / mnemonic'}</summary>
+     <textarea class="notebox" placeholder="Your mnemonic, correction or memory hook…" oninput="setNote('${it.id}',this.value)">${esc(note)}</textarea>
+   </details>`; }
+
+/* ---- leeches: cards failed repeatedly ---- */
+const LEECH_LAPSES=4;
+function leechItems(){ const out=[];
+  for(const id in DATA.cards){ const st=DATA.cards[id];
+    if(st && (st.lapses||0)>=LEECH_LAPSES){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }
+  out.sort((a,b)=>b.lapses-a.lapses); return out; }
+function leechCount(){ return leechItems().length; }
+
+/* ---- mistakes: cards missed today / this week ---- */
+function logMiss(id){ DATA.missLog[id]=dstr(); }
+function missItems(days){ const cut=dayNum()-(days-1), out=[];
+  for(const id in (DATA.missLog||{})){
+    const dn=dayNum(new Date(DATA.missLog[id]+'T00:00'));
+    if(dn>=cut){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }
+  out.sort((a,b)=> a.missOn<b.missOn?1:-1); return out; }
+function missCountToday(){ return missItems(1).length; }
+function missCountWeek(){ return missItems(7).length; }
+
+/* ---- cram sheet: bold answer + >> takeaway from each recall card ---- */
+function cramLine(c){
+  const a=c.a||'';
+  const bold=(a.match(/\*\*(.+?)\*\*/s)||[])[1]||'';
+  const take=(a.match(/>>\s*(.+?)(?:\n|$)/)||[])[1]||'';
+  return {ans:bold.replace(/\n+/g,' ').trim(), take:take.trim()};
+}
 
 /* ---- exam dates ---- */
 function examDays(subId){ const d=DATA.exams[subId]; if(!d) return null; return dayNum(new Date(d+'T00:00'))-dayNum(); }
@@ -958,8 +1066,11 @@ function renderNav(){
   const st = curStreak();
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += it('today','🧠','Active Recall',dueCount()||'',r==='today'||r==='review');
+  h += it('exam','📝','Mock exam','',r==='exam');
   h += it('jumpback','↩','Jump back in','',r==='jumpback');
   h += it('hard','★','Hard cards',starCount()||'',r==='hard');
+  h += it('mistakes','✗','Mistakes',missCountWeek()||'',r==='mistakes');
+  const _lc=leechCount(); h += it('leeches','🩸','Leeches',_lc||'',r==='leeches');
   h += it('search','⌕','Search','',r==='search');
   h += it('builder','✎','Note Builder','',r==='builder');
   h += it('cards','◈','Anki Cards',cards||'',r.startsWith('cards')||r.startsWith('study'));
@@ -1203,7 +1314,10 @@ function pageTopic(id){
         <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B · after reading</span>
         <h3>Recall Cards</h3><p>${t.recall.length} cards — strict Q/A, drives your daily review.${rp?` <b style="color:var(--recall)">· resume at ${rp+1}</b>`:''}</p>
         <div class="pbar" style="margin-top:10px"><div style="width:${mast}%;background:var(--recall)"></div></div>
-        <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards answered right at least once</p></div></div>`;
+        <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards answered right at least once</p></div></div>
+      <div class="btnrow" style="margin-top:14px">
+        <button class="btn" onclick="go('cram/${t.id}')">📄 Cram sheet</button>
+        ${clinInDeck(t)?`<button class="btn" onclick="go('study/${t.id}/recall')">🩺 ${clinInDeck(t)} clinical scenario${clinInDeck(t)===1?'':'s'}</button>`:''}</div>`;
   }
   const cur=status(t.id);
   const stbtn=(v,l)=>`<button class="sseg ${cur===v?'on':''}" onclick="setStatus('${t.id}','${v}');render()">${l}</button>`;
@@ -1434,6 +1548,51 @@ function startHard(){
   S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length}};
 }
+function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
+/* drill just the leeches (cards failed ≥4×) — a normal rated session */
+function startLeeches(){
+  const items=shuf(leechItems());
+  S={mode:'daily',key:'leeches',label:'Leeches',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length}};
+}
+/* review the cards you missed recently — rated session */
+function startMistakes(days){
+  const items=shuf(missItems(days));
+  S={mode:'daily',key:'mistakes',label:'Recent mistakes',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length}};
+}
+function runMistakes(days){ startMistakes(days); go('review'); }
+
+/* ===== MOCK EXAM — timed, no instant feedback, scored ===== */
+function examPool(scope){                        // MCQ-capable recall cards for a scope
+  let items=[];
+  if(scope==='clinical') items=clinItems();
+  else if(scope==='all'){ allTopics.forEach(t=>{ if(!t.ready) return;
+      (t.recall||[]).forEach(c=>{ if(c.opts&&c.opts.length) items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
+  else { const s=subjById(scope); if(s) s.modules.flatMap(m=>m.topics).forEach(t=>{ if(!t.ready) return;
+      (t.recall||[]).forEach(c=>{ if(c.opts&&c.opts.length) items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
+  // dedupe by question (twin syllabus decks)
+  const seen={}, out=[]; items.forEach(it=>{ const k=hstr(it.c.q); if(seen[k])return; seen[k]=1; out.push(it); });
+  return out;
+}
+function startExam(scope,count){
+  const pool=shuf(examPool(scope)); const items=pool.slice(0,Math.min(count,pool.length));
+  S={mode:'exam',key:'exam',items,order:items.map((_,k)=>k),i:0,scope,
+     answers:new Array(items.length).fill(null), started:Date.now(), finished:0,
+     session:{total:items.length}};
+  go('exam');
+}
+function examPick(i){ if(!S||S.mode!=='exam'||S.finished) return; S.answers[S.order[S.i]]=i; render(); }
+function examNav(d){ if(!S||S.mode!=='exam')return; const n=S.i+d; if(n<0||n>=S.items.length)return; S.i=n; render(); window.scrollTo(0,0); }
+function examSubmit(){ if(!S||S.mode!=='exam')return; S.finished=Date.now(); render(); window.scrollTo(0,0); }
+function examMissedItems(){ const out=[]; S.items.forEach((it,k)=>{ if(S.answers[k]!==it.c.ans) out.push(it); }); return out; }
+function examSendHard(){ if(!S)return; examMissedItems().forEach(it=>{ DATA.starred[it.id]=1; logMiss(it.id); });
+  persist(); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
+  alert(examMissedItems().length+' missed card(s) added to your hard cards.'); }
+function examDrillMissed(){ if(!S)return; const items=shuf(examMissedItems().slice());
+  if(!items.length){ alert('Nothing missed — perfect score!'); return; }
+  S={mode:'daily',key:'exammiss',label:'Missed in exam',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length}}; go('review'); }
 
 /* deck study (a single topic's Primer or Recall) */
 function pageStudy(topicId,deck){
@@ -1569,6 +1728,15 @@ function pageToday(){
     <h2>Or pick a mode</h2>
     ${modesBar()}
 
+    <h2>Review tools</h2>
+    ${(()=>{ const mw=missCountWeek(), lc=leechCount();
+      return `<div class="modes">
+        <button class="modebtn" onclick="go('exam')"><span class="mic">📝</span><b>Mock exam</b><span class="msub">timed &amp; scored</span></button>
+        <button class="modebtn${mw?'':' dis'}" ${mw?'':'disabled'} onclick="go('mistakes')"><span class="mic">✗</span><b>Mistakes</b><span class="msub">${mw?mw+' this week':'none yet'}</span></button>
+        <button class="modebtn${lc?'':' dis'}" ${lc?'':'disabled'} onclick="go('leeches')"><span class="mic">🩸</span><b>Leeches</b><span class="msub">${lc?lc+' cards':'none yet'}</span></button>
+        <button class="modebtn" onclick="go('hard')"><span class="mic">★</span><b>Hard cards</b><span class="msub">${starCount()||'star as you go'}</span></button>
+      </div>`; })()}
+
     ${nextNew?`<h2>Learn something new</h2>
       <div class="plan">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
         `Read the simplified note, then run its Primer once.${(()=>{const e=examDays(nextNew.subject.id);return (e!=null&&e>=0)?` · ${nextNew.subject.short} exam in ${e}d`:'';})()}`,
@@ -1631,7 +1799,7 @@ function mcqView(session){
     <div class="studytop">
       <span class="pill" style="background:${col}22;color:${col};margin:0">${session?esc(t.name):'Recall · Deck B'}</span>
       <span class="name">${session?'◎ Recall (MCQ)':esc(t.name)}</span>
-      <span class="counter">${S.i+1} / ${n}</span></div>
+      ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
     <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
     <div class="flash" onclick="cardTap()">
       <button class="starbtn ${star?'on':''}" title="Add to hard cards" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
@@ -1639,6 +1807,7 @@ function mcqView(session){
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${body}</div>
+    ${noteBlock(it)}
     ${controls}</div>`;
 }
 
@@ -1686,7 +1855,7 @@ function cardView(session){
     <div class="studytop">
       <span class="pill" style="background:${col}22;color:${col};margin:0">${session?esc(t.name):(isP?'Primer · Deck A':'Recall · Deck B')}</span>
       <span class="name">${session?('◎ '+(isP?'Primer':'Recall')):esc(t.name)}</span>
-      <span class="counter">${S.i+1} / ${n}</span></div>
+      ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
     <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
     <div class="flash" onclick="reveal()">
       <button class="starbtn ${star?'on':''}" title="Star as a hard card" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
@@ -1694,6 +1863,7 @@ function cardView(session){
       <div class="q">${esc(c.q)}</div>
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
+    ${noteBlock(it)}
     ${controls}</div>`;
 }
 
@@ -1719,8 +1889,8 @@ function pickOpt(i){
   else rateSRS(it.id,ok);
   logRate(ok); touchTopic(it.t.id);
   S.session.done++; if(ok) S.session.correct++;
-  if(!ok && !it.conf){                                   // failed → auto-add to hard cards
-    DATA.starred[it.id]=1;
+  if(!ok && !it.conf){                                   // failed → auto-add to hard cards + mistakes log
+    DATA.starred[it.id]=1; logMiss(it.id);
     try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
   }
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
@@ -1787,7 +1957,7 @@ function rateCard(ok){
   else rateSRS(it.id,ok);
   logRate(ok); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
-  if(!ok && !it.conf){ DATA.starred[it.id]=1; try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card
+  if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
   persist();
   if(!it.conf) flashReview(it.id, ok);
@@ -1805,6 +1975,14 @@ function rateCard(ok){
 }
 document.addEventListener('keydown',e=>{
   const h=location.hash;
+  if(/^#\/exam/.test(h) && S && S.mode==='exam' && !S.finished && S.items.length){   // exam keys
+    if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    const c=S.items[S.order[S.i]].c;
+    if(/^[1-9]$/.test(e.key)){ const idx=+e.key-1; if(idx<c.opts.length) examPick(idx); return; }
+    if(e.key==='ArrowRight'){ examNav(1); return; }
+    if(e.key==='ArrowLeft'){ examNav(-1); return; }
+    return;
+  }
   if(!/^#\/(study|review|hard)/.test(h)) return;
   if(!S) return;
   const it=S.items[S.order[S.i]], canRate=it && it.deck!=='primer';
@@ -1944,6 +2122,20 @@ function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exa
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
 function setRemindMins(v){ DATA.settings.remindMins=Math.max(15,Math.min(720,parseInt(v)||120)); persist(); setupReminder&&setupReminder(); render(); }
 function setStrict(on){ DATA.settings.strict=!!on; persist(); render(); }
+function setTts(on){ DATA.settings.tts=!!on; persist(); render(); }
+function exportData(){ try{
+    const blob=new Blob([JSON.stringify(DATA)],{type:'application/json'});
+    const url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='medbank-backup-'+dstr()+'.json'; document.body.appendChild(a); a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },500);
+  }catch(e){ alert('Export failed: '+e.message); } }
+function importData(input){ const f=input.files&&input.files[0]; if(!f) return; const rd=new FileReader();
+  rd.onload=()=>{ try{ const d=JSON.parse(rd.result);
+      if(!d||typeof d!=='object'||(!('cards'in d)&&!('log'in d)&&!('streak'in d))) throw new Error('Not a MedBank backup file');
+      if(!confirm('Restore this backup? It REPLACES all current progress on this device.')) return;
+      localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
+    }catch(e){ alert('Import failed: '+e.message); } };
+  rd.readAsText(f); }
 async function setUseIdle(on){ DATA.settings.useIdle=!!on; persist(); if(on) await startIdle(true); render(); }
 function setQuiet(which,v){ v=Math.max(0,Math.min(23,parseInt(v)||0)); if(which==='start')DATA.settings.quietStart=v; else DATA.settings.quietEnd=v; persist(); render(); }
 function testNudge(){
@@ -1983,6 +2175,10 @@ function pageSettings(){
     <h2>Review order</h2>
     <div class="setrow"><div><b>Mix subjects together</b><span>On = interleaved (better for exams). Off = one subject at a time (nearest exam first).</span></div>
       <button class="toggle ${s.interleave?'on':''}" onclick="setInterleave(${s.interleave?'false':'true'})"><i></i></button></div>
+
+    <h2>Study aids</h2>
+    <div class="setrow"><div><b>Read cards aloud (🔊)</b><span>${ttsOn()?'Show a speaker button on every card to hear the question and answer read out — good for hands-free revision.':'Not supported in this browser.'}</span></div>
+      <button class="toggle ${s.tts?'on':''}" ${ttsOn()?'':'disabled'} onclick="setTts(${s.tts?'false':'true'})"><i></i></button></div>
 
     <h2>Exam dates</h2>
     <p class="sub" style="margin-bottom:12px">Set an exam date and the dashboard shows a countdown; the plan pushes the nearest exam’s topics first.</p>
@@ -2025,9 +2221,142 @@ function pageSettings(){
     <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
       <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>
 
+    <h2>Backup &amp; restore</h2>
+    <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Export a backup file regularly — then you can restore it here if you clear the app or switch phones.</p>
+    <div class="setrow"><div><b>Export a backup</b><span>Downloads all your progress (streak, SRS schedule, notes, statuses) as a file.</span></div>
+      <button class="btn primary" onclick="exportData()">⬇ Export</button></div>
+    <div class="setrow"><div><b>Restore from a backup</b><span>Pick a previously exported file. This replaces all current progress on this device.</span></div>
+      <label class="btn" style="cursor:pointer">⬆ Import<input type="file" accept="application/json,.json" style="display:none" onchange="importData(this)"></label></div>
+
     <h2>Data</h2>
     <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. Cannot be undone.</span></div>
       <button class="btn miss" onclick="if(confirm('Reset ALL your progress on this device?')){localStorage.removeItem('${SKEY}');location.reload();}">Reset</button></div>`;
+}
+
+/* ---------- Leeches ---------- */
+function pageLeeches(){
+  const items=leechItems();
+  const head=`<h1>🩸 Leeches</h1><p class="sub">Cards you've missed ${LEECH_LAPSES} times or more — the ones quietly costing you marks. Drill or rewrite them.</p>`;
+  if(!items.length) return head+`<div class="alldone"><div class="big">✓</div><b>No leeches — well done.</b>
+      <p>When a card gets missed ${LEECH_LAPSES}+ times it shows up here so you can attack it directly.</p>
+      <div class="btnrow" style="justify-content:center"><button class="btn primary" onclick="go('today')">Back to Active Recall</button></div></div>`;
+  const rows=items.slice(0,60).map(it=>`<div class="leechrow">
+      <span class="lcount">${it.lapses}×</span>
+      <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
+      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
+  return head+`<div class="btnrow" style="margin:4px 0 16px"><button class="btn primary" onclick="startLeeches();go('review')">▶ Drill all ${items.length} leech${items.length===1?'':'es'}</button></div>${rows}`;
+}
+/* ---------- Recent mistakes ---------- */
+function pageMistakes(){
+  const today=missItems(1), week=missItems(7);
+  const head=`<h1>✗ Recent mistakes</h1><p class="sub">Every card you miss lands here automatically. Clear them while they're fresh.</p>`;
+  if(!week.length) return head+`<div class="alldone"><div class="big">✓</div><b>No recent misses.</b>
+      <p>Cards you get wrong during any session collect here for a day or a week so you can mop them up.</p>
+      <div class="btnrow" style="justify-content:center"><button class="btn primary" onclick="go('today')">Back to Active Recall</button></div></div>`;
+  const rows=week.slice(0,60).map(it=>`<div class="leechrow">
+      <span class="lcount miss">${dayLabel(it.missOn)}</span>
+      <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
+      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
+  return head+`<div class="modes" style="grid-template-columns:1fr 1fr">
+      <button class="modebtn${today.length?'':' dis'}" ${today.length?'':'disabled'} onclick="runMistakes(1)"><span class="mic">📅</span><b>Today's misses</b><span class="msub">${today.length} card${today.length===1?'':'s'}</span></button>
+      <button class="modebtn${week.length?'':' dis'}" ${week.length?'':'disabled'} onclick="runMistakes(7)"><span class="mic">🗓️</span><b>This week</b><span class="msub">${week.length} card${week.length===1?'':'s'}</span></button>
+    </div>${rows}`;
+}
+/* ---------- Cram sheet (topic) ---------- */
+function pageCram(topicId){
+  const t=topById(topicId); if(!t||!t.ready) return pageHome();
+  const cards=(t.recall||[]);
+  const rows=cards.map((c,i)=>{ const {ans,take}=cramLine(c);
+    return `<div class="cramrow">
+      <div class="cq"><span class="cn">${i+1}</span>${esc(c.q)}</div>
+      ${ans?`<div class="ca">${esc(ans)}</div>`:''}
+      ${take?`<div class="ct">▸ ${esc(take)}</div>`:''}</div>`; }).join('');
+  return crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}])
+    +`<h1>📄 Cram sheet</h1><p class="sub">${esc(t.name)} · ${cards.length} points — the bold answer and takeaway from every recall card, on one page.</p>
+      <div class="btnrow" style="margin-bottom:14px"><button class="btn" onclick="window.print()">🖨 Print / save PDF</button>
+        <button class="btn primary" onclick="go('study/${t.id}/recall')">Drill this deck →</button></div>
+      <div class="cramsheet">${rows}</div>`;
+}
+/* ---------- Mock exam ---------- */
+let _examTimer=null;
+function examScopeName(sc){ if(sc==='all')return 'All topics'; if(sc==='clinical')return 'Clinical scenarios'; const s=subjById(sc); return s?s.name:sc; }
+function pageExam(){
+  if(!S || S.mode!=='exam'){                       // ---- setup screen ----
+    const clin=clinCount();
+    const scopes=[['all','📚','All topics',''],['clinical','🩺','Clinical only',clin+' scenarios']]
+      .concat(DB.subjects.filter(s=>s.readyCount).map(s=>[s.id,'●',s.short,s.cardCount+' cards']));
+    S=null;
+    return `<h1>📝 Mock exam</h1><p class="sub">Timed, no feedback until you submit — like the real paper. Pick a scope and length.</p>
+      <h2>Scope</h2>
+      <div class="modes" id="examScopes">${scopes.map((x,k)=>`<button class="modebtn examscope${k===0?' on':''}" data-sc="${x[0]}" onclick="selExamScope(this)">
+          <span class="mic">${x[1]}</span><b>${esc(x[2])}</b><span class="msub">${esc(x[3]||'')}</span></button>`).join('')}</div>
+      <h2>Questions</h2>
+      <div class="modes" id="examCounts">${[10,20,40,60].map((n,k)=>`<button class="modebtn examcount${k===1?' on':''}" data-n="${n}" onclick="selExamCount(this)"><span class="mic">${n}</span><b>question${n===1?'':'s'}</b><span class="msub">~${Math.round(n*0.75)} min</span></button>`).join('')}</div>
+      <div class="btnrow" style="margin-top:18px"><button class="btn primary" onclick="launchExam()">▶ Start exam</button></div>`;
+  }
+  if(!S.items.length) return `<h1>Mock exam</h1><div class="empty">No MCQ cards in that scope yet.</div>
+     <div class="btnrow"><button class="btn primary" onclick="go('exam')">Back</button></div>`;
+  if(S.finished) return examResult();
+  // ---- running ----
+  const it=S.items[S.order[S.i]], c=it.c, n=S.items.length, picked=S.answers[S.order[S.i]];
+  IMGBASE=it.t.imgBase||'';
+  const answered=S.answers.filter(a=>a!=null).length;
+  const secs=Math.floor((Date.now()-S.started)/1000), mm=String(Math.floor(secs/60)).padStart(2,'0'), ss=String(secs%60).padStart(2,'0');
+  const opts=c.opts.map((o,i)=>`<button class="mcqopt${picked===i?' sel':''}" onclick="examPick(${i})">
+      <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span></button>`).join('');
+  const last=S.i>=n-1;
+  return `<div class="examhead"><span class="pill" style="background:#ffb45422;color:var(--com);margin:0">📝 Exam</span>
+      <span class="extime">⏱ ${mm}:${ss}</span><span class="counter">${S.i+1}/${n} · ${answered} answered</span></div>
+    <div class="bar"><div style="width:${((S.i+1)/n*100).toFixed(1)}%;background:var(--com)"></div></div>
+    <div class="studywrap"><div class="flash" style="cursor:default">
+        <div class="qlabel">Question ${S.i+1} · ${esc(it.t.subject.short)}</div>
+        <div class="q">${esc(c.q)}</div>
+        ${c.img?`<div>${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
+        <div class="mcqopts">${opts}</div></div>
+      <div class="btnrow" style="margin-top:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" onclick="examNav(-1)" ${S.i===0?'disabled':''}>← Prev</button>
+        <button class="btn" onclick="examNav(1)" ${last?'disabled':''}>Next →</button>
+        <button class="btn ${answered===n?'primary':''}" onclick="examSubmit()">Submit${answered<n?` (${n-answered} blank)`:''}</button>
+      </div>
+      <div class="kbd">Pick A–D · you can go back and change answers · Submit when done</div></div>`;
+}
+function selExamScope(el){ document.querySelectorAll('.examscope').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
+function selExamCount(el){ document.querySelectorAll('.examcount').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
+function launchExam(){ const sc=(document.querySelector('.examscope.on')||{}).dataset?.sc||'all';
+  const n=+(((document.querySelector('.examcount.on')||{}).dataset||{}).n||20); startExam(sc,n); }
+function newExam(){ S=null; go('exam'); }
+function examResult(){
+  const n=S.items.length, dur=Math.round((S.finished-S.started)/1000);
+  let correct=0; const bySub={};
+  S.items.forEach((it,k)=>{ const ok=S.answers[k]===it.c.ans; if(ok)correct++;
+    const s=it.t.subject.short; (bySub[s]=bySub[s]||{n:0,c:0}); bySub[s].n++; if(ok)bySub[s].c++; });
+  const pct=Math.round(correct/n*100), mm=Math.floor(dur/60), ss=dur%60;
+  const grade=pct>=70?['Pass','#3ecf8e']:pct>=50?['Borderline','#ffb454']:['Needs work','#ff6b6b'];
+  const subRows=Object.keys(bySub).map(k=>{ const b=bySub[k], p=Math.round(b.c/b.n*100);
+    return `<div class="subscore"><span>${esc(k)}</span><div class="dbar"><div style="width:${p}%;background:${p>=70?'#3ecf8e':p>=50?'#ffb454':'#ff6b6b'}"></div></div><b>${b.c}/${b.n}</b></div>`; }).join('');
+  const missed=[]; S.items.forEach((it,k)=>{ if(S.answers[k]!==it.c.ans) missed.push({it,k}); });
+  const missRows=missed.map(({it,k})=>{ const c=it.c, your=S.answers[k];
+    return `<div class="exmiss"><div class="q">${esc(c.q)}</div>
+       <div class="exopt bad">Your answer: ${your==null?'—':String.fromCharCode(65+your)+'. '+esc(c.opts[your])}</div>
+       <div class="exopt good">Correct: ${String.fromCharCode(65+c.ans)}. ${esc(c.opts[c.ans])}</div>
+       <div class="exexpl">${para(c.a)}</div></div>`; }).join('');
+  return `<div class="donecard ${pct>=70?'clear':''}">
+      <div class="donetick" style="color:${grade[1]}">${pct}%</div>
+      <h1 style="margin:6px 0 2px">${grade[0]}</h1>
+      <p class="sub" style="margin-bottom:16px">${correct} / ${n} correct · ${mm}m ${ss}s · ${esc(examScopeName(S.scope))}</p>
+      <div class="sgrid">
+        <div class="sm"><b>${n}</b><span>questions</span></div>
+        <div class="sm"><b style="color:var(--recall)">${correct}</b><span>correct</span></div>
+        <div class="sm"><b style="color:var(--com)">${n-correct}</b><span>missed</span></div>
+        <div class="sm"><b>${pct}%</b><span>score</span></div>
+      </div>
+      ${subRows?`<div class="subscores">${subRows}</div>`:''}
+      <div class="btnrow" style="justify-content:center;margin-top:16px;flex-wrap:wrap">
+        ${missed.length?`<button class="btn primary" onclick="examDrillMissed()">Drill ${missed.length} missed</button>
+        <button class="btn" onclick="examSendHard()">★ Send missed to hard</button>`:''}
+        <button class="btn" onclick="newExam()">New exam</button>
+      </div></div>
+    ${missed.length?`<h2>Review — what you missed</h2><div class="exmisslist">${missRows}</div>`:''}`;
 }
 
 function render(){
@@ -2039,6 +2368,10 @@ function render(){
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
     case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
     case 'hard':      html=pageHard(); break;
+    case 'leeches':   html=pageLeeches(); break;
+    case 'mistakes':  html=pageMistakes(); break;
+    case 'exam':      html=pageExam(); break;
+    case 'cram':      html=pageCram(p[1]); break;
     case 'week':      html=pageWeek(); break;
     case 'jumpback':  html=pageJumpback(); break;
     case 'search':    html=pageSearch(); break;
@@ -2054,6 +2387,13 @@ function render(){
   }
   $('#main').innerHTML=html; renderNav();
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
+  if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
+  if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
+    _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
+      if(!el||!S||S.finished){ clearInterval(_examTimer); _examTimer=null; return; }
+      const s=Math.floor((Date.now()-S.started)/1000);
+      el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); },1000);
+  }
 }
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
 
