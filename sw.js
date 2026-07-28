@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v23';
+const CACHE = 'medbank-v25';
 const ASSETS = ['./', './index.html', './content.js', './icon.svg', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
@@ -14,6 +14,8 @@ self.addEventListener('activate', e => {
 /* network-first for content so updates show, cache fallback offline */
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  // never touch cross-origin requests (e.g. Puter voice API/script) — let them go straight to the network
+  try { if (new URL(e.request.url).origin !== self.location.origin) return; } catch (_) { return; }
   e.respondWith(
     fetch(e.request).then(res => {
       const copy = res.clone();

@@ -732,7 +732,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28l';   // bump this each release
+const APP_VERSION='2026.07.28n';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -889,7 +889,7 @@ function pickVoice(){
 }
 function tuneUtter(u){ const v=pickVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.0; u.volume=1; return u; }
 /* iOS blocks speech unless it was first unlocked inside a tap — call this from any button */
-function warmTTS(){ try{ if('speechSynthesis'in window){ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); } }catch(e){} }
+function warmTTS(){ try{ if('speechSynthesis'in window){ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); } }catch(e){} try{ if(typeof unlockAudio==='function') unlockAudio(); }catch(e){} }
 /* ---- realistic online voices via Puter (Amazon Polly neural) — free, no API key ---- */
 const CLOUD_VOICES=[
   {id:'Joanna',lang:'en-US',label:'Joanna · US female'},
@@ -906,16 +906,25 @@ function loadPuter(cb){ if(window.puter){ cb&&cb(); return; }
   const t0=Date.now(), iv=setInterval(()=>{ if(window.puter){ clearInterval(iv); cb&&cb(); } else if(Date.now()-t0>9000){ clearInterval(iv); cb&&cb(); } },150);
 }
 function cloudVoiceOn(){ return !!(DATA.settings.useCloudVoice && window.puter && window.puter.ai && window.puter.ai.txt2speech); }
-let _cloudAudio=null;
-function stopCloud(){ try{ if(_cloudAudio){ _cloudAudio.onended=null; _cloudAudio.pause(); _cloudAudio=null; } }catch(e){} }
+/* one reusable audio element, unlocked inside a tap so iOS lets us play later */
+const SILENT_WAV='data:audio/wav;base64,UklGRuwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YcgAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+let _ttsAudio=null, _ttsUnlocked=false;
+function ttsEl(){ if(!_ttsAudio){ _ttsAudio=new Audio(); _ttsAudio.preload='auto'; } return _ttsAudio; }
+function unlockAudio(){ try{ const a=ttsEl(); if(_ttsUnlocked) return; a.src=SILENT_WAV; const p=a.play();
+  if(p&&p.then) p.then(()=>{ _ttsUnlocked=true; }).catch(()=>{}); }catch(e){} }
+function stopCloud(){ try{ const a=ttsEl(); a.onended=null; a.pause(); }catch(e){} }
+function playCloudSrc(src, cb){
+  const a=ttsEl();
+  a.onended=()=>cb&&cb(); a.onerror=()=>cb&&cb();
+  try{ a.src=src; const p=a.play(); if(p&&p.catch) p.catch(()=>cb&&cb()); }catch(e){ cb&&cb(); }
+}
 function cloudSpeak(text, cb){
   const ent=CLOUD_VOICES.find(v=>v.id===(DATA.settings.cloudVoice||'Joanna'))||CLOUD_VOICES[0];
   try{ stopCloud();
     window.puter.ai.txt2speech(stripMd(text).slice(0,2800), {voice:ent.id, engine:'neural', language:ent.lang})
-      .then(audio=>{ _cloudAudio=audio;
-        audio.onended=()=>{ _cloudAudio=null; cb&&cb(); };
-        audio.onerror=()=>{ _cloudAudio=null; deviceSpeakThen(text,cb); };
-        const p=audio.play(); if(p&&p.catch) p.catch(()=>{ _cloudAudio=null; deviceSpeakThen(text,cb); }); })
+      .then(audio=>{ const src=audio&&audio.src;
+        if(src) playCloudSrc(src, cb);
+        else { audio.onended=()=>cb&&cb(); const p=audio.play(); if(p&&p.catch) p.catch(()=>deviceSpeakThen(text,cb)); } })
       .catch(()=>deviceSpeakThen(text,cb));
   }catch(e){ deviceSpeakThen(text,cb); }
 }
@@ -2631,10 +2640,16 @@ function setGemKey(v){ DATA.settings.geminiKey=(v||'').trim(); persist(); render
 function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-flash-latest'; persist(); render(); }
 function setTtsVoice(v){ DATA.settings.ttsVoice=v||''; persist(); render(); }
 function setSttLang(v){ DATA.settings.sttLang=v||'en-US'; persist(); render(); }
-function setCloudVoiceOn(on){ DATA.settings.useCloudVoice=!!on; persist(); if(on) loadPuter(()=>render()); else { stopCloud(); render(); } }
-function setCloudVoice(id){ DATA.settings.cloudVoice=id; persist(); render(); }
+function setCloudVoiceOn(on){ DATA.settings.useCloudVoice=!!on; persist(); render();   // update UI immediately
+  if(on){ unlockAudio(); loadPuter(()=>render()); } else stopCloud(); }
+function setCloudVoice(id){ DATA.settings.cloudVoice=id; persist(); render(); testCloudVoice(id); }
 function testCloudVoice(id){ const ent=CLOUD_VOICES.find(v=>v.id===id)||CLOUD_VOICES[0];
-  loadPuter(()=>{ try{ window.puter.ai.txt2speech('Hello, I am your MedBank tutor. Let us begin the quiz.',{voice:ent.id,engine:'neural',language:ent.lang}).then(a=>a.play()).catch(()=>{}); }catch(e){} }); }
+  unlockAudio();                                   // must run inside this tap for iOS
+  loadPuter(()=>{
+    if(!(window.puter&&window.puter.ai&&window.puter.ai.txt2speech)){ alert('Could not reach the voice service — check your internet connection, then try again.'); return; }
+    try{ window.puter.ai.txt2speech('Hello, I am your MedBank tutor. Let us begin the quiz.',{voice:ent.id,engine:'neural',language:ent.lang})
+      .then(audio=>{ const src=audio&&audio.src; if(src) playCloudSrc(src,null); else { const p=audio.play&&audio.play(); if(p&&p.catch)p.catch(()=>{}); } })
+      .catch(err=>alert('Voice test failed: '+((err&&err.message)||err)+'\\nIf it asks you to sign in to Puter, do that once (it is free).')); }catch(e){ alert('Voice error: '+e.message); } }); }
 function testVoice(){ speak('Hello, I am your MedBank tutor. Let us begin. Name the four stages of inflammation in lobar pneumonia.'); }
 function topVoices(){                       // up to 5 of the most natural English voices on this device
   const en=enVoices().filter(v=>!/siri/i.test(v.name));
@@ -2676,13 +2691,19 @@ async function aiSend(topicId, text, alts){
     const cards=(t.recall||[]).map((c,i)=>`${i+1}. Q: ${c.q}\n   A: ${stripMd(c.a)}`).join('\n');
     const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth.
 
-DEFAULT MODE is quizzing: ask ONE question at a time, chosen in RANDOM order from across the whole answer key (do NOT follow the listed numbering — jump around). After the student answers, begin your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then ask the next question.
+ORDER: go through the questions IN ORDER, one at a time, following the answer-key numbering from the top. Do NOT jump around or randomise UNLESS the student explicitly asks you to "shuffle"/"randomise" — only then switch to random order.
 
-CRUCIAL — tell INSTRUCTIONS apart from ANSWERS. If the student's message is a request about how the session should run — for example: "shuffle", "randomize", "start over", "skip", "next", "repeat that", "slow down", "explain instead", "give me a clinical scenario", "make it harder/easier", "focus on X", "stop", "let's begin" — then DO NOT grade it and never say Correct/Incorrect. Just briefly acknowledge and DO what they asked (e.g. shuffle and immediately ask a fresh random question). Only grade a message when it is genuinely an attempt to answer the current question.
+WHEN THE STUDENT ANSWERS:
+- If CORRECT: say "Correct" plus at most one short confirming sentence, then immediately ask the NEXT question in order. Do NOT give a long explanation when they got it right — unless they ask you to explain.
+- If WRONG (or partly): say "Incorrect" (or "Partly correct"), tell them the correct answer clearly, THEN give a deep, gradual, step-by-step explanation (see EXPLAIN STYLE) before moving on to the next question.
+
+EXPLAIN STYLE (used automatically after a wrong answer, and whenever the student says "explain", "explain that", "go deeper", "break it down", "why", etc.): give a proper deep dive — a gradual, step-by-step teaching explanation that breaks the concept down bit by bit, defining each term, explaining the mechanism and the reasoning of WHY it is so, building from the basics up so the student truly understands. Take your time and be thorough here (this is the one place you should be longer); still speak in plain conversational sentences, no markdown or bullet symbols. After finishing the explanation, ask if they're ready for the next question or move on.
+
+TELL INSTRUCTIONS APART FROM ANSWERS: if the student's message is a request about how the session runs — e.g. "shuffle", "start over", "skip", "next", "repeat that", "slow down", "explain", "give me a clinical scenario", "harder/easier", "focus on X", "stop", "let's begin" — do NOT grade it and never say Correct/Incorrect; just briefly acknowledge and do it. Only grade a message when it is genuinely an attempt to answer the current question.
 
 The student answers by VOICE, so words may be mis-transcribed (homophones, wrong or missing words). Grade by the intended clinical meaning, give the benefit of the doubt, and if a message looks garbled ask them to repeat rather than marking it wrong.
 
-Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. Never invent facts outside the answer key.
+Keep normal quizzing replies short and easy to say aloud (2-3 sentences); only the deep-dive explanations should be longer. Plain conversational text, no markdown, no bullet lists, no headings. Never invent facts outside the answer key.
 
 ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
     const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:(m.role==='user'&&m.send)||m.text}]}));
