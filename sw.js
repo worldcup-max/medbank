@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v19';
+const CACHE = 'medbank-v20';
 const ASSETS = ['./', './index.html', './content.js', './icon.svg', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
