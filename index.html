@@ -732,7 +732,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28k';   // bump this each release
+const APP_VERSION='2026.07.28l';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -752,7 +752,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
@@ -890,12 +890,42 @@ function pickVoice(){
 function tuneUtter(u){ const v=pickVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.0; u.volume=1; return u; }
 /* iOS blocks speech unless it was first unlocked inside a tap — call this from any button */
 function warmTTS(){ try{ if('speechSynthesis'in window){ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); } }catch(e){} }
-function speak(text){ try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
+/* ---- realistic online voices via Puter (Amazon Polly neural) — free, no API key ---- */
+const CLOUD_VOICES=[
+  {id:'Joanna',lang:'en-US',label:'Joanna · US female'},
+  {id:'Matthew',lang:'en-US',label:'Matthew · US male'},
+  {id:'Danielle',lang:'en-US',label:'Danielle · US female'},
+  {id:'Gregory',lang:'en-US',label:'Gregory · US male'},
+  {id:'Ruth',lang:'en-US',label:'Ruth · US female'},
+  {id:'Stephen',lang:'en-US',label:'Stephen · US male'},
+  {id:'Amy',lang:'en-GB',label:'Amy · UK female'},
+  {id:'Arthur',lang:'en-GB',label:'Arthur · UK male'},
+];
+function loadPuter(cb){ if(window.puter){ cb&&cb(); return; }
+  if(!document.getElementById('puterjs')){ const s=document.createElement('script'); s.id='puterjs'; s.src='https://js.puter.com/v2/'; document.head.appendChild(s); }
+  const t0=Date.now(), iv=setInterval(()=>{ if(window.puter){ clearInterval(iv); cb&&cb(); } else if(Date.now()-t0>9000){ clearInterval(iv); cb&&cb(); } },150);
+}
+function cloudVoiceOn(){ return !!(DATA.settings.useCloudVoice && window.puter && window.puter.ai && window.puter.ai.txt2speech); }
+let _cloudAudio=null;
+function stopCloud(){ try{ if(_cloudAudio){ _cloudAudio.onended=null; _cloudAudio.pause(); _cloudAudio=null; } }catch(e){} }
+function cloudSpeak(text, cb){
+  const ent=CLOUD_VOICES.find(v=>v.id===(DATA.settings.cloudVoice||'Joanna'))||CLOUD_VOICES[0];
+  try{ stopCloud();
+    window.puter.ai.txt2speech(stripMd(text).slice(0,2800), {voice:ent.id, engine:'neural', language:ent.lang})
+      .then(audio=>{ _cloudAudio=audio;
+        audio.onended=()=>{ _cloudAudio=null; cb&&cb(); };
+        audio.onerror=()=>{ _cloudAudio=null; deviceSpeakThen(text,cb); };
+        const p=audio.play(); if(p&&p.catch) p.catch(()=>{ _cloudAudio=null; deviceSpeakThen(text,cb); }); })
+      .catch(()=>deviceSpeakThen(text,cb));
+  }catch(e){ deviceSpeakThen(text,cb); }
+}
+function speak(text){ if(cloudVoiceOn()){ cloudSpeak(text,null); return; }
+  try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
   speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
 function speakSeq(parts){ try{ if(!ttsOn())return; speechSynthesis.cancel();
   parts.forEach((p,i)=>{ const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(p)+(i<parts.length-1?' …':'')));
     speechSynthesis.speak(u); }); }catch(e){} }
-function stopSpeak(){ try{ if(ttsOn()) speechSynthesis.cancel(); }catch(e){} }
+function stopSpeak(){ try{ if(ttsOn()) speechSynthesis.cancel(); }catch(e){} stopCloud(); }
 function speakCurrent(){ if(!S)return; const it=S.items[S.order[S.i]]; if(!it)return; const c=it.c;
   const ansShown = S.show || (S.pick!=null);
   const ans = it.deck==='primer' ? (c.explain||c.lecturer||'') : (c.a||'');
@@ -2406,8 +2436,16 @@ function pageSettings(){
       <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
     <div class="setrow"><div><b>Model</b><span>Default gemini-2.5-flash-lite — the most generous free model (~1000/day). Only change if you know the model name you want.</span></div>
       <input class="numin" style="width:190px" type="text" value="${esc(s.geminiModel||'gemini-2.5-flash-lite')}" onchange="setGemModel(this.value)"></div>
-    <div class="setrow" style="display:block"><b>Tutor voice</b>
-      <span style="display:block;margin:6px 0 11px">Tap a voice to choose it, ▶ to hear it. <b>For much more realistic voices on iPhone:</b> Settings → Accessibility → Spoken Content → Voices → English → pick a voice and download the <b>Enhanced/Premium</b> version — it then appears here and sounds far more natural.</span>
+    <div class="setrow"><div><b>✨ Realistic online voice</b><span>Use a natural neural voice (Amazon Polly, via Puter — free, no key, no sign-up) instead of the phone's built-in voice. Needs internet; falls back to the device voice offline. Best quality by far.</span></div>
+      <button class="toggle ${s.useCloudVoice?'on':''}" onclick="setCloudVoiceOn(${s.useCloudVoice?'false':'true'})"><i></i></button></div>
+    ${s.useCloudVoice?`<div class="setrow" style="display:block"><b>Choose a realistic voice</b>
+      <span style="display:block;margin:6px 0 11px">Tap to select, ▶ to hear. These are cloud neural voices — they sound close to a real person.</span>
+      <div class="vchips">
+        ${CLOUD_VOICES.map(v=>`<div class="vchip ${s.cloudVoice===v.id?'on':''}" onclick="setCloudVoice('${v.id}')"><span>${esc(v.label)}</span><span class="vplay" onclick="event.stopPropagation();testCloudVoice('${v.id}')">▶</span></div>`).join('')}
+      </div></div>`:''}
+
+    <div class="setrow" style="display:block"><b>Device voice (offline)</b>
+      <span style="display:block;margin:6px 0 11px">Used when the realistic voice is off or you're offline. Tap a voice to choose it, ▶ to hear it. <b>On iPhone</b>, download an <b>Enhanced/Premium</b> voice in Settings → Accessibility → Spoken Content → Voices → English for the best built-in quality.</span>
       <div class="vchips">
         <div class="vchip ${!s.ttsVoice?'on':''}" onclick="setTtsVoice('')">Auto (best)</div>
         ${topVoices().map(v=>{ const nm=esc(v.name), js=v.name.replace(/'/g,"\\'");
@@ -2593,6 +2631,10 @@ function setGemKey(v){ DATA.settings.geminiKey=(v||'').trim(); persist(); render
 function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-flash-latest'; persist(); render(); }
 function setTtsVoice(v){ DATA.settings.ttsVoice=v||''; persist(); render(); }
 function setSttLang(v){ DATA.settings.sttLang=v||'en-US'; persist(); render(); }
+function setCloudVoiceOn(on){ DATA.settings.useCloudVoice=!!on; persist(); if(on) loadPuter(()=>render()); else { stopCloud(); render(); } }
+function setCloudVoice(id){ DATA.settings.cloudVoice=id; persist(); render(); }
+function testCloudVoice(id){ const ent=CLOUD_VOICES.find(v=>v.id===id)||CLOUD_VOICES[0];
+  loadPuter(()=>{ try{ window.puter.ai.txt2speech('Hello, I am your MedBank tutor. Let us begin the quiz.',{voice:ent.id,engine:'neural',language:ent.lang}).then(a=>a.play()).catch(()=>{}); }catch(e){} }); }
 function testVoice(){ speak('Hello, I am your MedBank tutor. Let us begin. Name the four stages of inflammation in lobar pneumonia.'); }
 function topVoices(){                       // up to 5 of the most natural English voices on this device
   const en=enVoices().filter(v=>!/siri/i.test(v.name));
@@ -2609,11 +2651,12 @@ function topVoices(){                       // up to 5 of the most natural Engli
 function testVoiceNamed(name){ try{ if(!ttsOn())return; const v=VOICES.find(x=>x.name===name);
   const u=new SpeechSynthesisUtterance('Hello, I am your MedBank tutor. What are the three C’s of measles?');
   if(v) u.voice=v; u.rate=1; u.pitch=1; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
-function speakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&cb(); return; }
+function deviceSpeakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&cb(); return; }
   const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
   u.onend=()=>cb&&cb(); u.onerror=()=>cb&&cb();
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }catch(e){ cb&&cb(); } }
+function speakThen(text, cb){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); }
 function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
 async function aiSend(topicId, text, alts){
   const key=(DATA.settings.geminiKey||'').trim();
@@ -2631,7 +2674,17 @@ async function aiSend(topicId, text, alts){
   AIBUSY=true; render(); aiScroll();
   try{
     const cards=(t.recall||[]).map((c,i)=>`${i+1}. Q: ${c.q}\n   A: ${stripMd(c.a)}`).join('\n');
-    const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth. How to behave: ask ONE question at a time; after the student answers, start your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then immediately ask the next question. IMPORTANT: the student answers by voice, so their words may be MIS-TRANSCRIBED (homophones, wrong words, missing terms). Always grade by the intended clinical meaning, give the benefit of the doubt on spelling and near-miss words, and if an answer looks garbled or you genuinely can't tell what they meant, ask them to repeat it rather than marking it incorrect. Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. If the student asks you to explain rather than quiz, explain simply from the answer key. Never invent facts outside the answer key. ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
+    const sys=`You are a warm but rigorous medical tutor examining a Nigerian 500-level medical student on the topic "${t.name}". Use ONLY the answer key below as your source of truth.
+
+DEFAULT MODE is quizzing: ask ONE question at a time, chosen in RANDOM order from across the whole answer key (do NOT follow the listed numbering — jump around). After the student answers, begin your reply with "Correct", "Partly correct" or "Incorrect", give the right answer in one short sentence, then ask the next question.
+
+CRUCIAL — tell INSTRUCTIONS apart from ANSWERS. If the student's message is a request about how the session should run — for example: "shuffle", "randomize", "start over", "skip", "next", "repeat that", "slow down", "explain instead", "give me a clinical scenario", "make it harder/easier", "focus on X", "stop", "let's begin" — then DO NOT grade it and never say Correct/Incorrect. Just briefly acknowledge and DO what they asked (e.g. shuffle and immediately ask a fresh random question). Only grade a message when it is genuinely an attempt to answer the current question.
+
+The student answers by VOICE, so words may be mis-transcribed (homophones, wrong or missing words). Grade by the intended clinical meaning, give the benefit of the doubt, and if a message looks garbled ask them to repeat rather than marking it wrong.
+
+Keep every reply short and easy to say aloud (about 2-3 sentences), plain conversational text, no markdown, no bullet lists, no headings. Never invent facts outside the answer key.
+
+ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
     const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:(m.role==='user'&&m.send)||m.text}]}));
     const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
       generationConfig:{temperature:0.6, maxOutputTokens:500} };
@@ -2693,7 +2746,7 @@ function startVoiceQuiz(topicId){
   if(!(AICHAT[topicId]&&AICHAT[topicId].length)) aiSend(topicId, 'Start quizzing me now. Ask your first question.');
   else { render(); if(sttSupported()) aiListen(topicId); }
 }
-function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} render(); }
+function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} stopCloud(); render(); }
 function aiMicOnce(topicId){
   warmTTS();
   if(!SRClass){ alert('Voice input needs Chrome (Android or desktop).'); return; }
@@ -2710,7 +2763,7 @@ function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('
 function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
 function aiAudioOn(){ return DATA.settings.aiVoice!==false; }
 function toggleAiVoice(){ DATA.settings.aiVoice=!aiAudioOn(); persist();
-  if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} } render(); }
+  if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} stopCloud(); } render(); }
 function aiRedo(topicId){ const a=AICHAT[topicId]||[];
   if(a.length && a[a.length-1].role==='model') a.pop();
   if(a.length && a[a.length-1].role==='user') a.pop();
@@ -2896,6 +2949,7 @@ if('serviceWorker' in navigator){
 window.__mb={get S(){return S;},set S(v){S=v;},get DATA(){return DATA;}};
 render();
 try{ if(typeof initAutoBackup==='function') initAutoBackup(); }catch(e){}
+try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(); }catch(e){}
 </script>
 </body>
 </html>
