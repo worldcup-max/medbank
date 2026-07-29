@@ -485,6 +485,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .settabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
 .settab{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:20px;padding:8px 15px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
 .settab.on{background:var(--accent,#4f8cff);border-color:var(--accent,#4f8cff);color:#fff}
+.cbar{margin-bottom:9px}
+.cbar:last-child{margin-bottom:0}
+.cbtop{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
+.cbtop b{font-variant-numeric:tabular-nums}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
 .explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
@@ -775,9 +779,9 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28r';   // bump this each release
+const APP_VERSION='2026.07.28s';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
-const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
+const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 
 let DATA = (()=>{
   let d={};
@@ -870,6 +874,7 @@ function logRate(ok){
   const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
   L.cards++; if(ok) L.correct++; DATA.log[d]=L; bumpStreak(d);
 }
+function logCourse(subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct:0}; L.sub=L.sub||{}; L.sub[subId]=(L.sub[subId]||0)+1; DATA.log[d]=L; }
 
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
@@ -1331,16 +1336,18 @@ function pageHome(){
       <div class="fire"><span class="n">${st}</span><span class="l">🔥 day streak</span>
         <span class="frz ${frz}">${frz==='ready'?'❄ freeze ready':'❄ freeze used'}</span></div>
       <div class="dgoal">
-        <div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div>
-        <div class="dbar"><div style="width:${pct}%"></div><i class="floormark" style="left:${Math.min(100,DATA.daily.floor/goal*100)}%"></i></div>
-        ${tl.cards>=goal?'<div class="goalhit">🎉 Daily goal complete — nice work.</div>'
-          :tl.cards>=DATA.daily.floor?'<div class="goalhit" style="color:var(--com)">✓ Minimum day done — streak safe.</div>':''}
+        ${(()=>{ const cg=DATA.daily.courseGoal||30, sub=(tl.sub)||{};
+          const bars=DB.subjects.filter(sb=>sb.readyCount>0).map(sb=>{ const dn=sub[sb.id]||0, p=Math.min(100,Math.round(dn/cg*100));
+            return `<div class="cbar"><div class="cbtop"><span><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.short)} today</span><b>${dn} / ${cg}</b></div>
+              <div class="dbar"><div style="width:${p}%;background:${COLOR[sb.id]}"></div></div></div>`; }).join('');
+          return bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`;
+        })()}
       </div>
     </div>
     <div class="dmetrics">
-      <div class="dm"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
-      <div class="dm"><b>${started}</b><span>In progress</span></div>
-      <div class="dm"><b style="color:var(--ped)">${complete}</b><span>Completed</span></div>
+      <div class="dm" style="cursor:pointer" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now ›</span></div>
+      <div class="dm" style="cursor:pointer" onclick="go('inprogress')"><b>${started}</b><span>In progress ›</span></div>
+      <div class="dm" style="cursor:pointer" onclick="go('completed')"><b style="color:var(--ped)">${complete}</b><span>Completed ›</span></div>
       <div class="dm"><b>${st>DATA.streak.best?st:(DATA.streak.best||0)}</b><span>Best streak</span></div>
     </div>
     <div class="lvlbar">
@@ -2072,7 +2079,7 @@ function pickOpt(i){
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
-  logRate(ok); touchTopic(it.t.id);
+  logRate(ok); logCourse(it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok) S.session.correct++;
   if(!ok && !it.conf){                                   // failed → auto-add to hard cards + mistakes log
     DATA.starred[it.id]=1; logMiss(it.id);
@@ -2140,7 +2147,7 @@ function rateCard(ok){
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
-  logRate(ok); touchTopic(it.t.id);
+  logRate(ok); logCourse(it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
@@ -2700,7 +2707,7 @@ let AICHAT={};                 // topicId -> [{role:'user'|'model', text}]
 let AIBUSY=false;
 let VOICE={on:false, rec:null, topic:null, phase:''};
 const SRClass = window.SpeechRecognition||window.webkitSpeechRecognition;
-function sttSupported(){ return !!SRClass; }
+function sttSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder); }
 function setGemKey(v){ DATA.settings.geminiKey=(v||'').trim(); persist(); render(); }
 function setGemModel(v){ DATA.settings.geminiModel=(v||'').trim()||'gemini-flash-latest'; persist(); render(); }
 function setTtsVoice(v){ DATA.settings.ttsVoice=v||''; persist(); render(); }
@@ -2825,36 +2832,79 @@ ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
     AIBUSY=false; VOICE.on=false; render(); aiScroll();
   }
 }
-function recAlts(e){ try{ return Array.from(e.results[0]).map(r=>r.transcript); }catch(_){ return [e.results[0][0].transcript]; } }
-function aiListen(topicId){
-  if(!VOICE.on || !SRClass) return;
+/* ===== voice input: record the answer, then transcribe with Puter (reliable on iPhone) ===== */
+function recorderSupported(){ return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder); }
+function stopVoiceMedia(){
+  try{ if(VOICE.maxT){clearTimeout(VOICE.maxT);VOICE.maxT=null;} }catch(e){}
+  try{ if(VOICE.raf){cancelAnimationFrame(VOICE.raf);VOICE.raf=null;} }catch(e){}
+  try{ if(VOICE.stream) VOICE.stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+  try{ if(VOICE.ac) VOICE.ac.close(); }catch(e){}
+  VOICE.stream=null; VOICE.ac=null;
+}
+async function aiListen(topicId){                 // start recording the student's spoken answer
+  if(!recorderSupported()){ VOICE.phase=''; render(); return; }   // no recorder → type instead
   try{
-    const rec=new SRClass(); VOICE.rec=rec; VOICE.phase='listen';
-    rec.lang=DATA.settings.sttLang||'en-US'; rec.interimResults=false; rec.maxAlternatives=3;
-    rec.onresult=(e)=>{ const alts=recAlts(e); VOICE.rec=null; aiSend(topicId, alts[0], alts); };
-    rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
-    rec.onend=()=>{ if(VOICE.phase==='listen'){ VOICE.rec=null; VOICE.phase=''; render(); } };
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    VOICE.stream=stream; VOICE.chunks=[];
+    let mime=''; try{ if(MediaRecorder.isTypeSupported('audio/webm')) mime='audio/webm'; else if(MediaRecorder.isTypeSupported('audio/mp4')) mime='audio/mp4'; }catch(e){}
+    const rec=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+    VOICE.rec=rec; VOICE.phase='listen';
+    rec.ondataavailable=e=>{ if(e.data&&e.data.size) VOICE.chunks.push(e.data); };
+    rec.onstop=()=>finishRecording(topicId);
     rec.start(); render();
-  }catch(e){ VOICE.phase=''; }
+    silenceWatch();                                // auto-stop ~1.6s after you stop speaking
+    VOICE.maxT=setTimeout(()=>micDone(), 30000);   // hard cap 30s
+  }catch(e){ VOICE.phase=''; render(); }
+}
+function silenceWatch(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC||!VOICE.stream) return;
+    const ac=new AC(); VOICE.ac=ac; const src=ac.createMediaStreamSource(VOICE.stream);
+    const an=ac.createAnalyser(); an.fftSize=512; src.connect(an);
+    const buf=new Uint8Array(an.fftSize); let sawSpeech=false, quietAt=Date.now();
+    const tick=()=>{ if(!VOICE.rec||VOICE.rec.state!=='recording') return;
+      an.getByteTimeDomainData(buf); let peak=0; for(let i=0;i<buf.length;i++){ const d=Math.abs(buf[i]-128); if(d>peak)peak=d; }
+      const now=Date.now();
+      if(peak>9){ sawSpeech=true; quietAt=now; }
+      else if(sawSpeech && now-quietAt>1600){ micDone(); return; }     // finished speaking
+      else if(!sawSpeech && now-quietAt>9000){ micDone(); return; }    // said nothing for 9s
+      VOICE.raf=requestAnimationFrame(tick);
+    };
+    VOICE.raf=requestAnimationFrame(tick);
+  }catch(e){}
+}
+function micDone(){                                // you tapped Done, or auto-stop fired
+  if(VOICE.maxT){clearTimeout(VOICE.maxT);VOICE.maxT=null;}
+  if(VOICE.raf){cancelAnimationFrame(VOICE.raf);VOICE.raf=null;}
+  try{ if(VOICE.rec && VOICE.rec.state==='recording'){ VOICE.phase='think'; render(); VOICE.rec.stop(); } }catch(e){}
+}
+async function finishRecording(topicId){
+  const chunks=VOICE.chunks||[]; VOICE.rec=null; VOICE.chunks=[]; stopVoiceMedia();
+  if(!chunks.length){ VOICE.phase=''; render(); return; }
+  const blob=new Blob(chunks,{type:chunks[0].type||'audio/webm'});
+  await new Promise(res=>loadPuter(res));
+  if(!(window.puter&&window.puter.ai&&window.puter.ai.speech2txt)){ VOICE.phase=''; render(); alert('Speech service unavailable — check your internet, or type your answer.'); return; }
+  try{
+    const r=await window.puter.ai.speech2txt(blob,{model:'gpt-4o-mini-transcribe'});
+    const txt=((r&&r.text)||(typeof r==='string'?r:'')||'').trim();
+    if(txt) aiSend(topicId, txt); else { VOICE.phase=''; render(); }
+  }catch(e){ VOICE.phase=''; render(); }
 }
 function startVoiceQuiz(topicId){
   warmTTS();
   VOICE.on=true; VOICE.topic=topicId; VOICE.phase='';
-  if(!sttSupported()) alert('Voice input needs Chrome (Android or desktop). You can still type — the tutor will read its replies aloud.');
+  if(!recorderSupported()) alert('Your browser blocks microphone recording — you can still type, and the tutor will read replies aloud.');
   if(!(AICHAT[topicId]&&AICHAT[topicId].length)) aiSend(topicId, 'Start quizzing me now. Ask your first question.');
-  else { render(); if(sttSupported()) aiListen(topicId); }
+  else { render(); aiListen(topicId); }
 }
-function stopVoice(){ VOICE.on=false; VOICE.phase=''; try{VOICE.rec&&VOICE.rec.abort();}catch(e){} VOICE.rec=null; try{speechSynthesis.cancel();}catch(e){} stopCloud(); render(); }
-function aiMicOnce(topicId){
+function stopVoice(){ VOICE.on=false; VOICE.phase='';
+  try{ if(VOICE.rec&&VOICE.rec.state==='recording'){ VOICE.rec.onstop=null; VOICE.rec.stop(); } }catch(e){}
+  VOICE.rec=null; VOICE.chunks=[]; stopVoiceMedia(); try{speechSynthesis.cancel();}catch(e){} stopCloud(); render(); }
+function aiMicOnce(topicId){                        // push-to-talk outside the loop: tap to record, tap to stop
   warmTTS();
-  if(!SRClass){ alert('Voice input needs Chrome (Android or desktop).'); return; }
-  try{ const rec=new SRClass(); rec.lang=DATA.settings.sttLang||'en-US'; rec.interimResults=false; rec.maxAlternatives=3;
-    VOICE.phase='listen'; VOICE.rec=rec; render();
-    rec.onresult=(e)=>{ const alts=recAlts(e); VOICE.rec=null; VOICE.phase=''; aiSend(topicId, alts[0], alts); };
-    rec.onerror=()=>{ VOICE.rec=null; VOICE.phase=''; render(); };
-    rec.onend=()=>{ if(!AIBUSY){ VOICE.rec=null; VOICE.phase=''; render(); } };
-    rec.start();
-  }catch(e){ VOICE.phase=''; }
+  if(VOICE.rec && VOICE.rec.state==='recording'){ micDone(); return; }
+  if(!recorderSupported()){ alert('Your browser blocks microphone recording here — type your answer instead.'); return; }
+  VOICE.topic=topicId; aiListen(topicId);
 }
 function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('aiin'); if(!el)return;
   const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
@@ -2868,8 +2918,9 @@ function aiRedo(topicId){ const a=AICHAT[topicId]||[];
   render(); if(VOICE.on && sttSupported()) aiListen(topicId); }
 function aiStatus(){
   if(AIBUSY) return {k:'think', big:'💭 Thinking…', chip:'thinking', icon:'💭'};
+  if(VOICE.on && VOICE.phase==='think') return {k:'think', big:'✍️ Writing down your answer…', chip:'transcribing', icon:'✍️'};
   if(VOICE.on && VOICE.phase==='speak') return {k:'speak', big:'🔊 Tutor is speaking', chip:'speaking', icon:'🔊'};
-  if(VOICE.on && VOICE.phase==='listen') return {k:'listen', big:'🎧 Your turn — speak now', chip:'listening', icon:'🎤'};
+  if(VOICE.on && VOICE.phase==='listen') return {k:'listen', big:'🎧 Your turn — speak, then tap Done', chip:'listening', icon:'🎤'};
   if(VOICE.on) return {k:'idle', big:'🎙 Voice mode on', chip:'voice on', icon:'🎙'};
   return {k:'idle', big:'', chip:'ready', icon:'🎙'};
 }
@@ -2894,7 +2945,8 @@ function pageAI(topicId){
       <div class="vbig">${st.big}</div>
       <div class="veq"><i></i><i></i><i></i><i></i><i></i></div>
       <div class="vbtns">
-        <button class="btn" onclick="aiRedo('${t.id}')" ${(msgs.length&&!AIBUSY)?'':'disabled'}>↺ Redo answer</button>
+        ${st.k==='listen'?`<button class="btn primary" onclick="micDone()">✓ Done</button>`:''}
+        <button class="btn" onclick="aiRedo('${t.id}')" ${(msgs.length&&!AIBUSY)?'':'disabled'}>↺ Redo</button>
         <button class="btn danger" onclick="stopVoice()">■ Stop</button>
       </div></div>` : '';
   return crumbsHtml + `<div class="ai2">
@@ -3035,10 +3087,36 @@ async function geminiExplain(prompt){
 function setExplainModel(v){ DATA.settings.explainModel=v||'claude-sonnet-5'; persist(); render(); }
 function setTutorEngine(v){ DATA.settings.tutorEngine=v||'claude-sonnet-5'; persist(); if(v&&v.indexOf('claude')===0) loadPuter(); render(); }
 
+/* ---------- clickable home stats: in progress / completed / due now ---------- */
+function pageStatusList(kind){
+  if(kind==='duenow'){
+    const q=buildQueue(), due=q.due.concat(q.neu), by={};
+    due.forEach(x=>{ (by[x.t.id]=by[x.t.id]||{t:x.t,n:0}).n++; });
+    const rows=Object.values(by).sort((a,b)=>b.n-a.n);
+    const list=rows.length? rows.map(r=>`<div class="leechrow"><span class="lcount">${r.n}</span>
+        <div class="lmid"><b>${esc(r.t.name)}</b><span>${esc(r.t.subject.short)}</span></div>
+        <button class="btn" onclick="go('study/${r.t.id}/recall')">Open</button></div>`).join('')
+      : `<div class="alldone"><div class="big">✓</div><b>Nothing due right now.</b><p>You're caught up — learn a new topic or come back later.</p></div>`;
+    return `<h1>◎ Due now</h1><p class="sub">${rows.length?rows.reduce((s,r)=>s+r.n,0)+' cards due across '+rows.length+' topic'+(rows.length===1?'':'s'):'All caught up.'}</p>
+      ${rows.length?`<div class="btnrow" style="margin:2px 0 14px"><button class="btn primary" onclick="startRecallSession();go('review')">▶ Start Active Recall</button></div>`:''}${list}`;
+  }
+  const st = kind==='completed'?'complete':'inprogress';
+  const title = kind==='completed'?'✅ Completed':'📖 In progress';
+  const rows=DB.subjects.map(sb=>{ const ts=allTopics.filter(t=>t.ready && t.subject.id===sb.id && status(t.id)===st);
+    if(!ts.length) return '';
+    return `<h2><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.name)} <span style="font-size:13px;color:var(--dim);font-weight:400">${ts.length}</span></h2>`+
+      ts.map(t=>`<div class="leechrow"><div class="lmid"><b>${t.sn?t.sn+'. ':''}${esc(t.name)}</b><span>${esc(t.lecturer)}</span></div>
+        <button class="btn" onclick="go('topic/${t.id}')">Open</button></div>`).join('');
+  }).join('');
+  return `<h1>${title}</h1>`+(rows.trim()?rows:`<div class="alldone"><div class="big">${kind==='completed'?'🎓':'📖'}</div><b>Nothing here yet.</b>
+    <p>${kind==='completed'?'Mark a topic Complete on its page once you have mastered it.':'Open any topic and start studying — it will show here while in progress.'}</p></div>`);
+}
+
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   let html;
   switch(p[0]){
+    case 'duenow': case 'inprogress': case 'completed': html=pageStatusList(p[0]); break;
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
