@@ -489,6 +489,9 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .cbar:last-child{margin-bottom:0}
 .cbtop{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
 .cbtop b{font-variant-numeric:tabular-nums}
+.pchip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;background:var(--panel2,var(--line));color:var(--dim)}
+.pchip.act{background:#3ecf8e22;color:var(--recall)}
+.pchip.done{background:#8895aa22;color:var(--dim)}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
 .explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
@@ -779,9 +782,9 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28s';   // bump this each release
+const APP_VERSION='2026.07.28t';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
-const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
+const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:20};
 
 let DATA = (()=>{
   let d={};
@@ -799,6 +802,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
+  d.plan     = d.plan     || [];  // ordered topic ids — source of daily NEW cards (top 5/course active)
   d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'claude-sonnet-5', tutorEngine:'claude-sonnet-5'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
@@ -874,7 +878,10 @@ function logRate(ok){
   const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
   L.cards++; if(ok) L.correct++; DATA.log[d]=L; bumpStreak(d);
 }
-function logCourse(subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct:0}; L.sub=L.sub||{}; L.sub[subId]=(L.sub[subId]||0)+1; DATA.log[d]=L; }
+function logDaily(isNew, subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
+  if(isNew){ L.new=L.new||{}; L.new[subId]=(L.new[subId]||0)+1; }   // new cards → per-course bar
+  else { L.rev=(L.rev||0)+1; }                                      // reviews → active-recall bar
+  DATA.log[d]=L; }
 
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
@@ -1051,15 +1058,34 @@ function orderItems(arr){
 }
 
 /* build today's cross-topic Recall queue from started topics only */
+/* new cards for today come ONLY from the weekly plan: top 5 topics per course, each in order, interleaved,
+   capped at the per-course daily new-card goal (default 20). Once answered a card is no longer "new". */
+function planNew(){
+  const goal=DATA.daily.courseGoal||20, out=[], doneToday=(todayLog().new)||{};
+  DB.subjects.forEach(sb=>{
+    const cap=Math.max(0, goal-(doneToday[sb.id]||0)); if(!cap) return;
+    const qs=[];
+    (DATA.plan||[]).forEach(id=>{ if(qs.length>=5) return; const t=topById(id);
+      if(!t||!t.ready||t.subject.id!==sb.id) return;
+      const unseen=(t.recall||[]).filter(c=>!DATA.cards[cid(t.id,'recall',c)]);
+      if(unseen.length) qs.push({t,cards:unseen}); });
+    let added=0, guard=0;
+    while(added<cap && guard++<2000){ let any=false;
+      for(const q of qs){ if(added>=cap) break; if(q.cards.length){ const c=q.cards.shift();
+        out.push({t:q.t,c,id:cid(q.t.id,'recall',c),deck:'recall',isNew:true}); added++; any=true; } }
+      if(!any) break; }
+  });
+  return out;
+}
+function planCount(){ return (DATA.plan||[]).filter(id=>{const t=topById(id);return t&&t.ready;}).length; }
 function buildQueue(){
-  const today=dayNum(), due=[], neu=[];
+  const today=dayNum(), due=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
-    const id=cid(t.id,'recall',c), st=DATA.cards[id], item={t,c,id};
-    if(st){ if(st.due<=today) due.push(item); } else neu.push(item);
+    const id=cid(t.id,'recall',c), st=DATA.cards[id];
+    if(st && st.due<=today) due.push({t,c,id});
   }));
-  const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
-  const neuCap = sh(neu).slice(0,DATA.daily.newPerDay);
-  return { due:orderItems(due), neu:orderItems(neuCap), newTotal:neu.length };
+  const neu=planNew();
+  return { due:orderItems(due), neu, newTotal:neu.length };
 }
 /* collect recall cards matching a predicate, across started topics */
 function collectRecall(pred){
@@ -1118,16 +1144,15 @@ const BUCKETS=[
 ];
 /* build a categorised, time-budgeted Active Recall session */
 function buildRecallSession(){
-  const today=dayNum(), due=[], neu=[];
+  const today=dayNum(), due=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const id=cid(t.id,'recall',c), s=DATA.cards[id];
     if(s){ if(s.due<=today){ due.push({t,c,id,deck:'recall',box:s.box,starred:!!DATA.starred[id]}); } }
-    else neu.push({t,c,id,deck:'recall',isNew:true});
   }));
   const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
   const hard=sh(due.filter(x=>x.starred||x.box<0));
   const reviews=sh(due.filter(x=>!(x.starred||x.box<0))).sort((a,b)=>a.box-b.box); // youngest interval first
-  const news=sh(neu).slice(0,DATA.daily.newPerDay);
+  const news=planNew();
   const ordered=hard.concat(reviews,news);
   // time budget (minutes; 0 = unlimited)
   const budget=DATA.daily.budget||0;
@@ -1255,6 +1280,7 @@ function renderNav(){
   const st = curStreak();
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += it('today','🧠','Active Recall',dueCount()||'',r==='today'||r==='review');
+  h += it('plan','🗓','This week',planCount()||'',r==='plan');
   h += it('exam','📝','Mock exam','',r==='exam');
   h += it('jumpback','↩','Jump back in','',r==='jumpback');
   h += it('hard','★','Hard cards',starCount()||'',r==='hard');
@@ -1336,11 +1362,14 @@ function pageHome(){
       <div class="fire"><span class="n">${st}</span><span class="l">🔥 day streak</span>
         <span class="frz ${frz}">${frz==='ready'?'❄ freeze ready':'❄ freeze used'}</span></div>
       <div class="dgoal">
-        ${(()=>{ const cg=DATA.daily.courseGoal||30, sub=(tl.sub)||{};
-          const bars=DB.subjects.filter(sb=>sb.readyCount>0).map(sb=>{ const dn=sub[sb.id]||0, p=Math.min(100,Math.round(dn/cg*100));
-            return `<div class="cbar"><div class="cbtop"><span><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.short)} today</span><b>${dn} / ${cg}</b></div>
+        ${(()=>{ const cg=DATA.daily.courseGoal||20, nw=(tl.new)||{};
+          const bars=DB.subjects.filter(sb=>sb.readyCount>0).map(sb=>{ const dn=nw[sb.id]||0, p=Math.min(100,Math.round(dn/cg*100));
+            return `<div class="cbar"><div class="cbtop"><span><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.short)} new cards</span><b>${dn} / ${cg}</b></div>
               <div class="dbar"><div style="width:${p}%;background:${COLOR[sb.id]}"></div></div></div>`; }).join('');
-          return bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`;
+          const revDone=tl.rev||0, revDue=buildQueue().due.length, revTot=revDone+revDue, rp=revTot?Math.round(revDone/revTot*100):0;
+          const ar=`<div class="cbar"><div class="cbtop"><span>🧠 Active recall (reviews)</span><b>${revDone} / ${revTot}</b></div>
+              <div class="dbar"><div style="width:${rp}%;background:var(--recall)"></div></div></div>`;
+          return (bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`)+ar;
         })()}
       </div>
     </div>
@@ -1586,14 +1615,14 @@ function toggleClinFilter(){
 }
 function startToday(){
   const q=buildQueue();
-  const items=q.due.concat(q.neu).map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall'}));
+  const items=q.due.concat(q.neu).map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall',isNew:x.isNew}));
   S={mode:'daily',key:'daily',label:'',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length,dueN:q.due.length,newN:q.neu.length}};
 }
 /* preset study modes */
 function startSession(mode){
   let items=[], label='';
-  if(mode==='quick'){ const q=buildQueue(); items=q.due.concat(q.neu).map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall'})).slice(0,10); label='Quick 10'; }
+  if(mode==='quick'){ const q=buildQueue(); items=q.due.concat(q.neu).map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall',isNew:x.isNew})).slice(0,10); label='Quick 10'; }
   else if(mode==='weak'){ items=orderItems(collectRecall(st=>st&&st.box<0)); label='Weak spots'; }
   else if(mode==='cram'){ items=collectRecall(()=>true);
     for(let i=items.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[items[i],items[j]]=[items[j],items[i]];}
@@ -1917,6 +1946,8 @@ function pageToday(){
         <div class="big">✓</div><b>${started?'Nothing to review right now.':'Nothing started yet.'}</b>
         <p>${started?'You’re fully caught up. Learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div></div>`}
 
+    <div class="btnrow" style="margin-top:14px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button></div>
+
     <h2>Or pick a mode</h2>
     ${modesBar()}
 
@@ -2079,7 +2110,7 @@ function pickOpt(i){
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
-  logRate(ok); logCourse(it.t.subject.id); touchTopic(it.t.id);
+  logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok) S.session.correct++;
   if(!ok && !it.conf){                                   // failed → auto-add to hard cards + mistakes log
     DATA.starred[it.id]=1; logMiss(it.id);
@@ -2147,7 +2178,7 @@ function rateCard(ok){
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
-  logRate(ok); logCourse(it.t.subject.id); touchTopic(it.t.id);
+  logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
@@ -2971,9 +3002,11 @@ function pageAI(topicId){
 /* ===== "Let AI explain" — highlight note text → step-by-step Claude explanation ===== */
 let _selText='', _explBtn=null;
 function currentTopicName(){ const p=(location.hash.slice(2)||'').split('/');
-  if((p[0]==='topic'||p[0]==='cram') && p[1]){ const t=topById(p[1]); return t?t.name:''; } return ''; }
+  if((p[0]==='topic'||p[0]==='cram'||p[0]==='study') && p[1]){ const t=topById(p[1]); if(t) return t.name; }
+  try{ if(S && S.items && S.items[S.order[S.i]]) return S.items[S.order[S.i]].t.name; }catch(e){}
+  return ''; }
 function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentElement);
-  while(el){ if(el.classList&&(el.classList.contains('md')||el.classList.contains('cramsheet'))) return true; el=el.parentElement; } return false; }
+  while(el){ if(el.classList&&(el.classList.contains('md')||el.classList.contains('cramsheet')||el.classList.contains('ansblock'))) return true; el=el.parentElement; } return false; }
 function onSelChange(){ try{
   const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
   if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
@@ -3087,6 +3120,31 @@ async function geminiExplain(prompt){
 function setExplainModel(v){ DATA.settings.explainModel=v||'claude-sonnet-5'; persist(); render(); }
 function setTutorEngine(v){ DATA.settings.tutorEngine=v||'claude-sonnet-5'; persist(); if(v&&v.indexOf('claude')===0) loadPuter(); render(); }
 
+/* ---------- weekly topic plan (source of daily NEW cards) ---------- */
+function unseenCount(t){ return (t.recall||[]).filter(c=>!DATA.cards[cid(t.id,'recall',c)]).length; }
+function planAdd(id){ DATA.plan=DATA.plan||[]; if(!DATA.plan.includes(id)) DATA.plan.unshift(id); persist(); render(); }
+function planRemove(id){ DATA.plan=(DATA.plan||[]).filter(x=>x!==id); persist(); render(); }
+function planTop(id){ DATA.plan=[id].concat((DATA.plan||[]).filter(x=>x!==id)); persist(); render(); }
+function pagePlan(){
+  const head=`<h1>🗓 This week's topics</h1><p class="sub">Choose where your daily <b>new cards</b> come from. Only the <b>top 5 per course</b> are active at a time (newest at the top); the rest wait. Each topic's cards come in order, interleaved with the others, ${DATA.daily.courseGoal||20} new per course a day. Finished topics drop off; unfinished ones stay for next week — add new topics anytime and they go to the top.</p>`;
+  let out='';
+  DB.subjects.filter(sb=>sb.readyCount>0).forEach(sb=>{
+    const planTopics=(DATA.plan||[]).map(topById).filter(t=>t&&t.ready&&t.subject.id===sb.id);
+    let activeShown=0;
+    const rows=planTopics.map(t=>{ const un=unseenCount(t), active=(un>0 && activeShown<5); if(active) activeShown++;
+      const chip=un===0?'<span class="pchip done">✓ finished</span>':active?'<span class="pchip act">● active</span>':'<span class="pchip">waiting</span>';
+      return `<div class="leechrow"><div class="lmid"><b>${t.sn?t.sn+'. ':''}${esc(t.name)}</b><span>${chip} · ${un} new left</span></div>
+        <div class="btnrow">${(active||un===0)?'':`<button class="btn tiny" onclick="planTop('${t.id}')">↑ Top</button>`}<button class="btn tiny" onclick="planRemove('${t.id}')">✕</button></div></div>`;
+    }).join('');
+    const avail=allTopics.filter(t=>t.ready&&t.subject.id===sb.id&&!(DATA.plan||[]).includes(t.id));
+    const add=avail.length?`<details class="notewrap"><summary>＋ Add a ${esc(sb.short)} topic</summary>
+       <div class="vchips" style="padding:8px 0">${avail.map(t=>`<div class="vchip" onclick="planAdd('${t.id}')">${t.sn?t.sn+'. ':''}${esc(t.name)}</div>`).join('')}</div></details>`
+       :`<p class="sub">All built ${esc(sb.short)} topics are already in your plan.</p>`;
+    out+=`<h2><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.name)} <span style="font-size:13px;color:var(--dim);font-weight:400">${planTopics.length} selected</span></h2>${rows||'<p class="sub">No topics selected yet — add some below.</p>'}${add}`;
+  });
+  return head+out;
+}
+
 /* ---------- clickable home stats: in progress / completed / due now ---------- */
 function pageStatusList(kind){
   if(kind==='duenow'){
@@ -3117,6 +3175,7 @@ function render(){
   let html;
   switch(p[0]){
     case 'duenow': case 'inprogress': case 'completed': html=pageStatusList(p[0]); break;
+    case 'plan':      html=pagePlan(); break;
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
