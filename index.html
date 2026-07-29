@@ -474,9 +474,17 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .vchip.on{border-color:var(--accent,#4f8cff);background:rgba(79,140,255,.14);font-weight:600}
 .vplay{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent,#4f8cff);color:#fff;font-size:10px}
 /* Let AI explain */
-.explbtn{position:fixed;z-index:250;display:none;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);
-  border:0;border-radius:26px;padding:13px 22px;font-size:14.5px;font-weight:700;cursor:pointer;color:#fff;
-  background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 8px 26px rgba(99,140,255,.6)}
+.explbtn{position:fixed;z-index:250;display:none;border:0;border-radius:22px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 8px 24px rgba(99,140,255,.6);white-space:nowrap}
+.explchoose{padding:11px 16px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:9px;flex:none}
+.explmodes{display:flex;gap:8px}
+.explmodes .btn{flex:1;justify-content:center}
+.explask{display:flex;gap:8px}
+.explask input{flex:1;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:inherit;font-size:14px;min-width:0}
+.explhint{color:var(--dim);text-align:center;padding:22px 10px;font-size:13.5px;line-height:1.6}
+.settabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+.settab{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:20px;padding:8px 15px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.settab.on{background:var(--accent,#4f8cff);border-color:var(--accent,#4f8cff);color:#fff}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
 .explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
@@ -767,7 +775,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28q';   // bump this each release
+const APP_VERSION='2026.07.28r';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -787,7 +795,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'claude-sonnet-5'}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'claude-sonnet-5', tutorEngine:'claude-sonnet-5'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
@@ -2412,11 +2420,17 @@ async function enableReminders(){
   render();
 }
 function disableReminders(){ DATA.settings.remindOn=false; persist(); render(); }
+let settingsTab='study';
+function setSettingsTab(t){ settingsTab=t; render(); window.scrollTo(0,0); }
 function pageSettings(){
   const d=DATA.daily, s=DATA.settings;
   const perm=('Notification' in window)?Notification.permission:'unsupported';
-  return `<h1>Settings</h1><p class="sub">Everything is saved on this device.</p>
+  const TABS=[['study','⚙️ Study'],['ai','✨ AI & Voice'],['reminders','🔔 Reminders'],['data','💾 Data'],['app','📱 App']];
+  const tab=settingsTab;
+  const bar=`<div class="settabs">${TABS.map(([id,l])=>`<button class="settab ${tab===id?'on':''}" onclick="setSettingsTab('${id}')">${l}</button>`).join('')}</div>`;
+  const S={};
 
+  S.study=`
     <h2>Daily targets</h2>
     <div class="setrow"><div><b>Daily goal</b><span>Cards you aim to review each day.</span></div>
       <input class="numin" type="number" min="5" max="300" value="${d.goal}" onchange="setGoal(this.value)"></div>
@@ -2438,8 +2452,9 @@ function pageSettings(){
     ${DB.subjects.map(sb=>{ const dd=examDays(sb.id);
       return `<div class="setrow"><div><b><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.name)}</b>
         <span>${dd!=null?(dd>=0?dd+' days away':'past'):'no date set'}</span></div>
-        <input class="datein" type="date" value="${DATA.exams[sb.id]||''}" onchange="setExam('${sb.id}',this.value)"></div>`;}).join('')}
+        <input class="datein" type="date" value="${DATA.exams[sb.id]||''}" onchange="setExam('${sb.id}',this.value)"></div>`;}).join('')}`;
 
+  S.reminders=`
     <h2>Reminders</h2>
     <div class="setrow"><div><b>Study reminders</b><span>${
       perm==='unsupported'?'Not supported in this browser.':
@@ -2463,8 +2478,9 @@ function pageSettings(){
     <div class="setrow" style="display:block"><b>To get sound &amp; make it reliable</b>
       <span style="display:block;margin-top:6px">• <b>Install to your home screen</b> (below) — reminders barely work in a plain browser tab.<br>
       • <b>Android:</b> long-press a MedBank notification → set its sound to a loud/alarm tone, and allow it through Do Not Disturb. Background nudges are best-effort (the system controls exact timing).<br>
-      • <b>iPhone:</b> Apple blocks background timers for web apps, so 2-hourly nudges only fire while MedBank is open or when you reopen it. Turn on Notifications for MedBank in iOS Settings.</span></div>`:''}
+      • <b>iPhone:</b> Apple blocks background timers for web apps, so 2-hourly nudges only fire while MedBank is open or when you reopen it. Turn on Notifications for MedBank in iOS Settings.</span></div>`:''}`;
 
+  S.app=`
     <h2>Install as an app</h2>
     <div class="setrow"><div><b>Add MedBank to your home screen</b><span id="installhint">One-tap, full-screen, works offline. ${
       'On iPhone: Share → “Add to Home Screen”. On Android: menu → “Install app”.'}</span></div>
@@ -2472,10 +2488,17 @@ function pageSettings(){
 
     <h2>App</h2>
     <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
-      <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>
+      <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>`;
 
-    <h2>AI tutor</h2>
-    <p class="sub" style="margin-bottom:12px">Powers the per-topic voice tutor (🎙 AI tutor on each topic). Get a free key at <b>aistudio.google.com/apikey</b> — it's stored only on this device.</p>
+  S.ai=`
+    <h2>Tutor AI</h2>
+    <div class="setrow"><div><b>Which AI runs the voice tutor</b><span>Claude (via Puter) is free, needs no key, and is best at telling your commands apart from your answers. "Gemini" uses your own key below.</span></div>
+      <select class="numin" style="width:220px" onchange="setTutorEngine(this.value)">
+        ${[['claude-sonnet-5','Claude Sonnet 5 (recommended)'],['claude-opus-5','Claude Opus 5 (deepest)'],['claude-fable-5','Claude Fable 5 (max reasoning)'],['claude-haiku-4-5','Claude Haiku (fastest)'],['gemini','Google Gemini (your key)']].map(([v,l])=>`<option value="${v}" ${(s.tutorEngine||'claude-sonnet-5')===v?'selected':''}>${l}</option>`).join('')}
+      </select></div>
+
+    <h2>Gemini key <span style="font-size:12px;color:var(--dim);font-weight:400">(only needed if using Gemini)</span></h2>
+    <p class="sub" style="margin-bottom:12px">Get a free key at <b>aistudio.google.com/apikey</b> — stored only on this device.</p>
     <div class="setrow"><div><b>Gemini API key</b><span>${s.geminiKey?'Key saved. Paste a new one to replace it.':'Paste your free Google Gemini key to enable the tutor.'}</span></div>
       <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
     <div class="setrow"><div><b>Model</b><span>Default gemini-2.5-flash-lite — the most generous free model (~1000/day). Only change if you know the model name you want.</span></div>
@@ -2504,8 +2527,9 @@ function pageSettings(){
     <div class="setrow"><div><b>"Let AI explain" model</b><span>When reading a note, highlight text and tap ✨ Let AI explain for a step-by-step breakdown. Powered by Claude via Puter — free, no key. Sonnet 5 is fast &amp; excellent; Opus 5 / Fable 5 go deepest.</span></div>
       <select class="numin" style="width:210px" onchange="setExplainModel(this.value)">
         ${[['claude-sonnet-5','Claude Sonnet 5 (recommended)'],['claude-opus-5','Claude Opus 5 (deepest)'],['claude-fable-5','Claude Fable 5 (max reasoning)'],['claude-haiku-4-5','Claude Haiku (fastest)']].map(([v,l])=>`<option value="${v}" ${(s.explainModel||'claude-sonnet-5')===v?'selected':''}>${l}</option>`).join('')}
-      </select></div>
+      </select></div>`;
 
+  S.data=`
     <h2>Backup &amp; restore</h2>
     <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Turn on automatic backup so your progress is saved to a file continuously — then you can restore it if you clear the app or switch phones.</p>
     ${(()=>{
@@ -2541,6 +2565,8 @@ function pageSettings(){
     <h2>Data</h2>
     <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. Cannot be undone.</span></div>
       <button class="btn miss" onclick="if(confirm('Reset ALL your progress on this device?')){localStorage.removeItem('${SKEY}');location.reload();}">Reset</button></div>`;
+
+  return `<h1>Settings</h1><p class="sub">Everything is saved on this device.</p>${bar}${S[tab]||S.study}`;
 }
 
 /* ---------- Leeches ---------- */
@@ -2712,9 +2738,44 @@ function deviceSpeakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&
 }catch(e){ cb&&cb(); } }
 function speakThen(text, cb){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); }
 function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
+async function claudeTutor(sys, history, model){
+  await new Promise(res=>loadPuter(res));
+  if(!(window.puter&&window.puter.ai&&window.puter.ai.chat)) throw new Error('Claude voice service unavailable — check your internet (and sign in to Puter once if asked).');
+  const msgs=[{role:'system',content:sys}].concat(history.slice(-24).map(m=>({role:m.role==='user'?'user':'assistant', content:(m.role==='user'&&m.send)||m.text})));
+  const r=await window.puter.ai.chat(msgs,{model});
+  const txt=(r&&r.message&&r.message.content&&r.message.content[0]&&r.message.content[0].text)||(typeof r==='string'?r:'');
+  if(!txt.trim()) throw new Error('No reply from Claude — try again.');
+  return txt.trim();
+}
+async function geminiTutor(sys, history, key){
+  const hist=history.slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:(m.role==='user'&&m.send)||m.text}]}));
+  const body={ system_instruction:{parts:[{text:sys}]}, contents:hist, generationConfig:{temperature:0.6, maxOutputTokens:500} };
+  const configured=(DATA.settings.geminiModel||'gemini-2.5-flash-lite').trim();
+  const cands=[...new Set(['gemini-2.5-flash-lite',configured,'gemini-flash-latest','gemini-flash-lite-latest'])];
+  let reply=null, used=null, lastErr='', zeroQuota=false;
+  for(const model of cands){
+    let r,j;
+    try{ r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,
+        {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); j=await r.json().catch(()=>({})); }
+    catch(net){ throw new Error('Network error — check your data connection.'); }
+    if(r.ok){ reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text||'(no reply — try again)'; used=model; break; }
+    lastErr=(j.error&&j.error.message)||('HTTP '+r.status);
+    if(/limit:\s*0/.test(lastErr)) zeroQuota=true;
+    const tryNext=r.status===404||r.status===429||/not found|not supported|is not available|no longer available|available to new users|use a newer model|does not exist|deprecated|quota|exceeded|rate limit/i.test(lastErr);
+    if(!tryNext) break;
+  }
+  if(reply==null){ let msg;
+    if(zeroQuota) msg='Your Gemini key has no free quota (limit 0) — usually because billing is enabled on its Google project. Make a fresh key at aistudio.google.com/apikey on a project WITHOUT billing, or switch the Tutor AI to Claude in Settings.';
+    else if(/quota|exceeded|429|rate/i.test(lastErr)) msg='Gemini free-tier limit reached — wait a minute, or switch the Tutor AI to Claude in Settings (free, no quota).';
+    else msg=lastErr; throw new Error(msg); }
+  if(used && used!==configured){ DATA.settings.geminiModel=used; persist(); }
+  return reply;
+}
 async function aiSend(topicId, text, alts){
+  const engine=DATA.settings.tutorEngine||'claude-sonnet-5';
+  const useClaude=engine.indexOf('claude')===0;
   const key=(DATA.settings.geminiKey||'').trim();
-  if(!key){ go('settings'); return; }
+  if(!useClaude && !key){ go('settings'); return; }
   if(AIBUSY) return;
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
@@ -2745,36 +2806,13 @@ The student answers by VOICE, so words may be mis-transcribed (homophones, wrong
 Keep normal quizzing replies short and easy to say aloud (2-3 sentences); only the deep-dive explanations should be longer. Plain conversational text, no markdown, no bullet lists, no headings. Never invent facts outside the answer key.
 
 ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
-    const hist=AICHAT[topicId].slice(-24).map(m=>({role:m.role==='user'?'user':'model', parts:[{text:(m.role==='user'&&m.send)||m.text}]}));
-    const body={ system_instruction:{parts:[{text:sys}]}, contents:hist,
-      generationConfig:{temperature:0.6, maxOutputTokens:500} };
-    // try the configured model, then current free fallbacks — so a retired model can't break the tutor
-    // flash-lite is the generous free model available to new keys; flash-latest is the newest as backup. (gemini-2.5-flash is blocked for new users.)
-    const configured=(DATA.settings.geminiModel||'gemini-2.5-flash-lite').trim();
-    const cands=[...new Set(['gemini-2.5-flash-lite',configured,'gemini-flash-latest','gemini-flash-lite-latest'])];
-    let reply=null, used=null, lastErr='', zeroQuota=false;
-    for(const model of cands){
-      let r,j;
-      try{
-        r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,
-          {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-        j=await r.json().catch(()=>({}));
-      }catch(net){ throw new Error('Network error — check your data connection.'); }
-      if(r.ok){ reply=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text||'(no reply — try again)'; used=model; break; }
-      lastErr=(j.error&&j.error.message)||('HTTP '+r.status);
-      if(/limit:\s*0/.test(lastErr)) zeroQuota=true;
-      // try the next model if this one is missing (404) or rate/quota limited (429); stop only on a bad key/request (400/401/403)
-      const tryNext = r.status===404 || r.status===429 || /not found|not supported|is not available|no longer available|available to new users|use a newer model|does not exist|deprecated|quota|exceeded|rate limit/i.test(lastErr);
-      if(!tryNext) break;
+    let reply=null;
+    if(useClaude){
+      try{ reply=await claudeTutor(sys, AICHAT[topicId], engine); }
+      catch(e){ if(key) reply=await geminiTutor(sys, AICHAT[topicId], key); else throw e; }
+    } else {
+      reply=await geminiTutor(sys, AICHAT[topicId], key);
     }
-    if(reply==null){
-      let msg;
-      if(zeroQuota) msg='Your Gemini key has no free quota (limit 0). This almost always means billing is enabled on its Google project, which removes the free tier — create a fresh key at aistudio.google.com/apikey on a project WITHOUT billing. (Or ask me to switch the app to Groq, which is also free.)';
-      else if(/quota|exceeded|429|rate/i.test(lastErr)) msg='Free-tier limit reached — wait about a minute and try again (Google allows only a few requests per minute; the daily cap is ~1000). If it persists all day, you have used today’s free requests.';
-      else msg=lastErr;
-      throw new Error(msg);
-    }
-    if(used && used!==configured){ DATA.settings.geminiModel=used; persist(); }   // remember the one that worked
     AICHAT[topicId].push({role:'model',text:reply});
     AIBUSY=false; render(); aiScroll();
     const audio=aiAudioOn();
@@ -2887,15 +2925,20 @@ function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentEleme
 function onSelChange(){ try{
   const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
   if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
-    _selText=txt; showExplainBtn();
+    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r);
   } else hideExplainBtn();
 }catch(e){} }
-function showExplainBtn(){
+function showExplainBtn(r){
   if(!_explBtn){ _explBtn=document.createElement('button'); _explBtn.className='explbtn'; _explBtn.innerHTML='✨ Let AI explain';
     _explBtn.addEventListener('mousedown',e=>e.preventDefault());
     _explBtn.addEventListener('click',()=>{ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); });
     document.body.appendChild(_explBtn); }
-  _explBtn.style.display='block';   // fixed floating pill at the bottom — never collides with the iOS selection menu
+  const bh=40, bw=155;
+  let top=r.bottom+8;                                   // sit just below the highlight
+  if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);   // no room below → above
+  let left=r.left + r.width/2 - bw/2;                    // centre under the selection
+  left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
+  _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='block';
 }
 function hideExplainBtn(){ if(_explBtn) _explBtn.style.display='none'; }
 document.addEventListener('selectionchange', onSelChange);
@@ -2906,9 +2949,16 @@ function openExplainPanel(snippet){
   const ov=document.createElement('div'); ov.id='explov'; ov.className='explov';
   ov.innerHTML=`<div class="explpanel" onclick="event.stopPropagation()">
     <button class="explclose" onclick="closeExplainPanel()" title="Close" aria-label="Close">✕</button>
-    <div class="explhead"><b>✨ AI explanation</b></div>
+    <div class="explhead"><b>✨ Ask AI about this</b></div>
     <div class="explquote">“${esc(snippet)}”</div>
-    <div class="explbody md" id="explbody"><div class="explload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span> breaking it down…</div></div>
+    <div class="explchoose">
+      <div class="explmodes">
+        <button class="btn" onclick="runExplain('brief')">⚡ Brief</button>
+        <button class="btn primary" onclick="runExplain('deep')">📚 Deep dive</button>
+      </div>
+      <div class="explask"><input id="explask" placeholder="Or ask anything… (synonym, opposite, define, why…)" onkeydown="if(event.key==='Enter')runExplain('ask')"><button class="btn" onclick="runExplain('ask')">Ask</button></div>
+    </div>
+    <div class="explbody md" id="explbody"><div class="explhint">Tap <b>Brief</b> or <b>Deep dive</b>, or type your own question above.</div></div>
   </div>`;
   ov.addEventListener('click',()=>closeExplainPanel());
   document.body.appendChild(ov);
@@ -2940,9 +2990,20 @@ Teach the meaning and content of this passage, in the context of "${topicName}",
 
 Writing style: be patient and conversational, use plain English, avoid unnecessary jargon, never rush, build one concept at a time, and assume I know nothing at first — like a great professor teaching one student. The goal is deep understanding, not memorising for an exam. Make the explanation as long and detailed as necessary. Format with markdown: headings, bold, bullet points, pipe tables, and fenced code blocks for any ASCII diagrams or flowcharts.`;
 }
-async function aiExplain(snippet, topicName){
-  openExplainPanel(snippet);
-  const prompt=explainPrompt(snippet, topicName);
+let _explSnippet='', _explTopic='';
+function aiExplain(snippet, topicName){ _explSnippet=snippet; _explTopic=topicName||currentTopicName(); openExplainPanel(snippet); }
+function briefPrompt(s,t){ return `In the context of a lecture on "${t}", give a BRIEF, simple explanation of this passage — just a short, clear paragraph or two, defining any hard term in a few plain words. Keep it concise. Passage:\n"""${s}"""\nPlain markdown allowed.`; }
+function askPrompt(s,t,q){ return `Here is a passage from a lecture note on "${t}":\n"""${s}"""\n\nThe student asks: "${q}"\n\nAnswer their question about this passage directly and clearly. If they ask for a synonym, an opposite, a definition, or a translation, give it straight away with a short note. Keep the answer only as long as the question needs. Plain markdown allowed.`; }
+function runExplain(mode){
+  const s=_explSnippet, t=_explTopic||currentTopicName();
+  let prompt;
+  if(mode==='ask'){ const el=document.getElementById('explask'); const q=(el&&el.value||'').trim(); if(!q){ el&&el.focus(); return; } prompt=askPrompt(s,t,q); }
+  else if(mode==='brief') prompt=briefPrompt(s,t);
+  else prompt=explainPrompt(s,t);
+  setExplBody('<div class="explload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span> thinking…</div>');
+  aiRun(prompt);
+}
+function aiRun(prompt){
   loadPuter(async ()=>{
     if(window.puter && window.puter.ai && window.puter.ai.chat){
       try{
@@ -2951,13 +3012,11 @@ async function aiExplain(snippet, topicName){
         let acc=''; setExplBody('');
         for await (const part of resp){ const t=(part&&part.text)||''; if(t){ acc+=t; setExplBodyMd(acc); } }
         if(acc.trim()) return;
-        // no stream output — try non-streaming once
         const r2=await window.puter.ai.chat(prompt, {model});
         const txt=(r2&&r2.message&&r2.message.content&&r2.message.content[0]&&r2.message.content[0].text)||(typeof r2==='string'?r2:'');
         if(txt.trim()){ setExplBodyMd(txt); return; }
       }catch(e){ /* fall through to Gemini */ }
     }
-    // fallback: the user's Gemini key, if set
     if((DATA.settings.geminiKey||'').trim()) return geminiExplain(prompt);
     setExplBody('<p>Could not reach the AI service. Check your internet — and if Puter asks you to sign in (free), do that once, then try again.</p>');
   });
@@ -2974,6 +3033,7 @@ async function geminiExplain(prompt){
   }catch(e){ setExplBody('<p>Explanation failed: '+esc(e.message||String(e))+'</p>'); }
 }
 function setExplainModel(v){ DATA.settings.explainModel=v||'claude-sonnet-5'; persist(); render(); }
+function setTutorEngine(v){ DATA.settings.tutorEngine=v||'claude-sonnet-5'; persist(); if(v&&v.indexOf('claude')===0) loadPuter(); render(); }
 
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
