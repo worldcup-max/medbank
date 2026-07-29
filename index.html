@@ -473,6 +473,20 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .vchip{display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:8px 13px;font-size:13px;cursor:pointer}
 .vchip.on{border-color:var(--accent,#4f8cff);background:rgba(79,140,255,.14);font-weight:600}
 .vplay{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent,#4f8cff);color:#fff;font-size:10px}
+/* Let AI explain */
+.explbtn{position:fixed;z-index:250;display:none;border:0;border-radius:20px;padding:9px 15px;font-size:13.5px;font-weight:700;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 6px 18px rgba(99,140,255,.5)}
+.explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
+.explpanel{background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
+  box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
+@keyframes explslide{from{transform:translateX(30px);opacity:.6}to{transform:none;opacity:1}}
+.explhead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);flex:none}
+.explhead b{font-size:15px}
+.explquote{margin:14px 16px 6px;padding:10px 13px;border-left:3px solid var(--accent,#4f8cff);background:var(--panel);border-radius:0 8px 8px 0;font-size:13.5px;color:var(--dim);font-style:italic;max-height:22vh;overflow:auto}
+.explbody{flex:1;overflow-y:auto;padding:8px 16px 30px;font-size:14.5px;line-height:1.6}
+.explbody h1,.explbody h2,.explbody h3{font-size:15.5px;margin:16px 0 6px}
+.explload{color:var(--dim);display:flex;align-items:center;gap:6px;padding:18px 0}
+@media(max-width:560px){ .explpanel{width:100vw} }
 .ai2chat{background:linear-gradient(180deg,rgba(79,140,255,.05),rgba(0,0,0,0));border:1px solid var(--line);border-radius:16px;padding:14px;min-height:230px;max-height:48vh;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
 .ai2hint{color:var(--dim);font-size:13.5px;text-align:center;margin:auto;padding:18px;line-height:1.65}
 .ai2msg{display:flex;align-items:flex-end;gap:8px}
@@ -732,7 +746,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28n';   // bump this each release
+const APP_VERSION='2026.07.28o';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -752,7 +766,7 @@ let DATA = (()=>{
   d.exams    = d.exams    || {};  // subjectId -> 'YYYY-MM-DD'
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna'}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'claude-sonnet-5'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
@@ -2466,6 +2480,10 @@ function pageSettings(){
       <select class="numin" style="width:190px" onchange="setSttLang(this.value)">
         ${[['en-US','English (US)'],['en-GB','English (UK)'],['en-NG','English (Nigeria)'],['en-IN','English (India)'],['en-ZA','English (South Africa)']].map(([v,l])=>`<option value="${v}" ${(s.sttLang||'en-US')===v?'selected':''}>${l}</option>`).join('')}
       </select></div>
+    <div class="setrow"><div><b>"Let AI explain" model</b><span>When reading a note, highlight text and tap ✨ Let AI explain for a step-by-step breakdown. Powered by Claude via Puter — free, no key. Sonnet 5 is fast &amp; excellent; Opus 5 / Fable 5 go deepest.</span></div>
+      <select class="numin" style="width:210px" onchange="setExplainModel(this.value)">
+        ${[['claude-sonnet-5','Claude Sonnet 5 (recommended)'],['claude-opus-5','Claude Opus 5 (deepest)'],['claude-fable-5','Claude Fable 5 (max reasoning)'],['claude-haiku-4-5','Claude Haiku (fastest)']].map(([v,l])=>`<option value="${v}" ${(s.explainModel||'claude-sonnet-5')===v?'selected':''}>${l}</option>`).join('')}
+      </select></div>
 
     <h2>Backup &amp; restore</h2>
     <p class="sub" style="margin-bottom:12px">Everything lives only on this device. Turn on automatic backup so your progress is saved to a file continuously — then you can restore it if you clear the app or switch phones.</p>
@@ -2838,6 +2856,82 @@ function pageAI(topicId){
       <button class="btn" onclick="clearAI('${t.id}')">Clear chat</button>
     </div></div>`;
 }
+
+/* ===== "Let AI explain" — highlight note text → step-by-step Claude explanation ===== */
+let _selText='', _explBtn=null;
+function currentTopicName(){ const p=(location.hash.slice(2)||'').split('/');
+  if((p[0]==='topic'||p[0]==='cram') && p[1]){ const t=topById(p[1]); return t?t.name:''; } return ''; }
+function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentElement);
+  while(el){ if(el.classList&&(el.classList.contains('md')||el.classList.contains('cramsheet'))) return true; el=el.parentElement; } return false; }
+function onSelChange(){ try{
+  const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
+  if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
+    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r);
+  } else hideExplainBtn();
+}catch(e){} }
+function showExplainBtn(r){
+  if(!_explBtn){ _explBtn=document.createElement('button'); _explBtn.className='explbtn'; _explBtn.innerHTML='✨ Let AI explain';
+    _explBtn.addEventListener('mousedown',e=>e.preventDefault());
+    _explBtn.addEventListener('click',()=>{ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); });
+    document.body.appendChild(_explBtn); }
+  const top=Math.max(8, r.top-46), left=Math.min(window.innerWidth-170, Math.max(8, r.left));
+  _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='block';
+}
+function hideExplainBtn(){ if(_explBtn) _explBtn.style.display='none'; }
+document.addEventListener('selectionchange', onSelChange);
+document.addEventListener('scroll', ()=>hideExplainBtn(), true);
+
+function openExplainPanel(snippet){
+  closeExplainPanel();
+  const ov=document.createElement('div'); ov.id='explov'; ov.className='explov';
+  ov.innerHTML=`<div class="explpanel" onclick="event.stopPropagation()">
+    <div class="explhead"><b>✨ AI explanation</b><button class="btn" onclick="closeExplainPanel()">✕ Close</button></div>
+    <div class="explquote">“${esc(snippet)}”</div>
+    <div class="explbody md" id="explbody"><div class="explload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span> breaking it down…</div></div>
+  </div>`;
+  ov.addEventListener('click',()=>closeExplainPanel());
+  document.body.appendChild(ov);
+}
+function closeExplainPanel(){ const o=document.getElementById('explov'); if(o) o.remove(); }
+function setExplBody(html){ const b=document.getElementById('explbody'); if(b) b.innerHTML=html; }
+function setExplBodyMd(t){ const b=document.getElementById('explbody'); if(b){ const atBottom=b.scrollHeight-b.scrollTop-b.clientHeight<60; b.innerHTML=md(t); if(atBottom) b.scrollTop=b.scrollHeight; } }
+function explainPrompt(snippet, topicName){
+  return `You are a patient medical tutor. A 500-level medical student in Nigeria is reading a lecture note on "${topicName}" and highlighted this passage:\n\n"""${snippet}"""\n\nExplain it as if the student is meeting these ideas for the very first time. Work through it gradually and step by step: (1) first define every difficult or technical word in plain, simple language; (2) then take each sentence or idea one at a time and explain what it means and WHY it is so — the underlying mechanism and reasoning — building up from the basics; (3) finally, tie the passage back to the wider topic of "${topicName}": why it matters and how it fits into the big picture. Be thorough but clear. You may use simple markdown (short headings, bold, and bullet points) to keep it organised and easy to read.`;
+}
+async function aiExplain(snippet, topicName){
+  openExplainPanel(snippet);
+  const prompt=explainPrompt(snippet, topicName);
+  loadPuter(async ()=>{
+    if(window.puter && window.puter.ai && window.puter.ai.chat){
+      try{
+        const model=DATA.settings.explainModel||'claude-sonnet-5';
+        const resp=await window.puter.ai.chat(prompt, {model, stream:true});
+        let acc=''; setExplBody('');
+        for await (const part of resp){ const t=(part&&part.text)||''; if(t){ acc+=t; setExplBodyMd(acc); } }
+        if(acc.trim()) return;
+        // no stream output — try non-streaming once
+        const r2=await window.puter.ai.chat(prompt, {model});
+        const txt=(r2&&r2.message&&r2.message.content&&r2.message.content[0]&&r2.message.content[0].text)||(typeof r2==='string'?r2:'');
+        if(txt.trim()){ setExplBodyMd(txt); return; }
+      }catch(e){ /* fall through to Gemini */ }
+    }
+    // fallback: the user's Gemini key, if set
+    if((DATA.settings.geminiKey||'').trim()) return geminiExplain(prompt);
+    setExplBody('<p>Could not reach the AI service. Check your internet — and if Puter asks you to sign in (free), do that once, then try again.</p>');
+  });
+}
+async function geminiExplain(prompt){
+  try{
+    const key=(DATA.settings.geminiKey||'').trim(), model=DATA.settings.geminiModel||'gemini-2.5-flash-lite';
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`,
+      {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}]})});
+    const j=await r.json();
+    if(!r.ok) throw new Error((j.error&&j.error.message)||('HTTP '+r.status));
+    const txt=(((j.candidates||[])[0]||{}).content||{}).parts?.[0]?.text||'(no explanation returned)';
+    setExplBodyMd(txt);
+  }catch(e){ setExplBody('<p>Explanation failed: '+esc(e.message||String(e))+'</p>'); }
+}
+function setExplainModel(v){ DATA.settings.explainModel=v||'claude-sonnet-5'; persist(); render(); }
 
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
