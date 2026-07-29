@@ -492,6 +492,8 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pchip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;background:var(--panel2,var(--line));color:var(--dim)}
 .pchip.act{background:#3ecf8e22;color:var(--recall)}
 .pchip.done{background:#8895aa22;color:var(--dim)}
+.strkstat{margin-top:9px;font-size:12.5px;font-weight:600;color:var(--com);text-align:center}
+.strkstat.ok{color:var(--recall)}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
 .explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
@@ -782,9 +784,10 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28t';   // bump this each release
+const APP_VERSION='2026.07.28u';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
-const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:20};
+const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
+const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
 
 let DATA = (()=>{
   let d={};
@@ -808,6 +811,7 @@ let DATA = (()=>{
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
+  if(d.daily.courseGoal==20) d.daily.courseGoal=30;   // updated daily new-card goal to 30/course
   return d;
 })();
 function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}
@@ -876,12 +880,19 @@ function freezeState(){                                  // for display
 function todayLog(){ return DATA.log[dstr()]||{cards:0,correct:0}; }
 function logRate(ok){
   const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
-  L.cards++; if(ok) L.correct++; DATA.log[d]=L; bumpStreak(d);
+  L.cards++; if(ok) L.correct++; DATA.log[d]=L;
 }
 function logDaily(isNew, subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
   if(isNew){ L.new=L.new||{}; L.new[subId]=(L.new[subId]||0)+1; }   // new cards → per-course bar
   else { L.rev=(L.rev||0)+1; }                                      // reviews → active-recall bar
-  DATA.log[d]=L; }
+  DATA.log[d]=L; maybeBumpStreak(); }
+function newDoneToday(){ const nw=todayLog().new||{}; return Object.values(nw).reduce((a,b)=>a+b,0); }
+function reviewTotals(){ const revDone=todayLog().rev||0, revDue=buildQueue().due.length; return {done:revDone, total:revDone+revDue}; }
+function streakMet(){                                   // the day's threshold to keep the streak
+  const rt=reviewTotals(); const revOk = rt.total===0 ? true : (rt.done/rt.total)>=STREAK_REV;
+  return newDoneToday()>=STREAK_NEW && revOk;
+}
+function maybeBumpStreak(){ if(streakMet()) bumpStreak(dstr()); }   // bumpStreak is idempotent per day
 
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
@@ -1366,10 +1377,14 @@ function pageHome(){
           const bars=DB.subjects.filter(sb=>sb.readyCount>0).map(sb=>{ const dn=nw[sb.id]||0, p=Math.min(100,Math.round(dn/cg*100));
             return `<div class="cbar"><div class="cbtop"><span><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.short)} new cards</span><b>${dn} / ${cg}</b></div>
               <div class="dbar"><div style="width:${p}%;background:${COLOR[sb.id]}"></div></div></div>`; }).join('');
-          const revDone=tl.rev||0, revDue=buildQueue().due.length, revTot=revDone+revDue, rp=revTot?Math.round(revDone/revTot*100):0;
+          const revDone=tl.rev||0, revDue=buildQueue().due.length, revTot=revDone+revDue, rp=revTot?Math.round(revDone/revTot*100):100;
           const ar=`<div class="cbar"><div class="cbtop"><span>🧠 Active recall (reviews)</span><b>${revDone} / ${revTot}</b></div>
-              <div class="dbar"><div style="width:${rp}%;background:var(--recall)"></div></div></div>`;
-          return (bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`)+ar;
+              <div class="dbar"><div style="width:${Math.min(100,rp)}%;background:var(--recall)"></div></div></div>`;
+          const nd=newDoneToday(), met=streakMet();
+          const status=met
+            ? `<div class="strkstat ok">✅ Day’s target met — streak safe</div>`
+            : `<div class="strkstat">🔥 Keep streak: new ${nd>=STREAK_NEW?'✓':nd+'/'+STREAK_NEW} · reviews ${rp>=65?'✓':rp+'% (need 65%)'}</div>`;
+          return (bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`)+ar+status;
         })()}
       </div>
     </div>
@@ -2106,7 +2121,7 @@ function pickOpt(i){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it||S.pick!=null||!isMcqCard(it)) return;
   const c=it.c, ok=(i===c.ans);
   S.pick=i; S.show=true;
-  const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor;
+  const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
@@ -2121,7 +2136,7 @@ function pickOpt(i){
   const afterCards=todayLog().cards, afterLvl=levelInfo().i, afterStreak=curStreak();
   if(afterLvl>beforeLvl)                          celebrate('level','Level up · '+LEVELS[afterLvl].n);
   else if(beforeCards<goal && afterCards>=goal)   celebrate('goal','🎉 Daily goal complete!');
-  else if(beforeCards<floor && afterCards>=floor) celebrate('floor','✓ Minimum day done');
+  else if(!beforeMet && streakMet())              celebrate('floor','✓ Day’s target met — streak safe!');
   else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
   render(); window.scrollTo(0,0);
 }
@@ -2174,7 +2189,7 @@ function celebrate(kind,text){
 }
 function rateCard(ok){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
-  const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor;
+  const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
@@ -2188,7 +2203,7 @@ function rateCard(ok){
   const afterCards=todayLog().cards, afterLvl=levelInfo().i, afterStreak=curStreak();
   if(afterLvl>beforeLvl)                         celebrate('level','Level up · '+LEVELS[afterLvl].n);
   else if(beforeCards<goal && afterCards>=goal)  celebrate('goal','🎉 Daily goal complete!');
-  else if(beforeCards<floor && afterCards>=floor)celebrate('floor','✓ Minimum day done');
+  else if(!beforeMet && streakMet())             celebrate('floor','✓ Day’s target met — streak safe!');
   else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
   if(S.i>=S.items.length-1){
     if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
