@@ -474,13 +474,16 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .vchip.on{border-color:var(--accent,#4f8cff);background:rgba(79,140,255,.14);font-weight:600}
 .vplay{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent,#4f8cff);color:#fff;font-size:10px}
 /* Let AI explain */
-.explbtn{position:fixed;z-index:250;display:none;border:0;border-radius:20px;padding:9px 15px;font-size:13.5px;font-weight:700;cursor:pointer;color:#fff;
-  background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 6px 18px rgba(99,140,255,.5)}
+.explbtn{position:fixed;z-index:250;display:none;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);
+  border:0;border-radius:26px;padding:13px 22px;font-size:14.5px;font-weight:700;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,#4f8cff,#a35bff);box-shadow:0 8px 26px rgba(99,140,255,.6)}
 .explov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:240;display:flex;justify-content:flex-end}
-.explpanel{background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
+.explpanel{position:relative;background:var(--bg);border-left:1px solid var(--line);width:min(480px,92vw);height:100%;display:flex;flex-direction:column;
   box-shadow:-8px 0 30px rgba(0,0,0,.4);animation:explslide .25s ease}
 @keyframes explslide{from{transform:translateX(30px);opacity:.6}to{transform:none;opacity:1}}
-.explhead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);flex:none}
+.explclose{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;z-index:6;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:16px;cursor:pointer;box-shadow:0 3px 14px rgba(0,0,0,.45)}
+.explhead{display:flex;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 15px) 60px 14px 16px;border-bottom:1px solid var(--line);flex:none}
 .explhead b{font-size:15px}
 .explquote{margin:14px 16px 6px;padding:10px 13px;border-left:3px solid var(--accent,#4f8cff);background:var(--panel);border-radius:0 8px 8px 0;font-size:13.5px;color:var(--dim);font-style:italic;max-height:22vh;overflow:auto}
 .explbody{flex:1;overflow-y:auto;padding:8px 16px 30px;font-size:14.5px;line-height:1.6}
@@ -764,7 +767,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.07.28p';   // bump this each release
+const APP_VERSION='2026.07.28q';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0};
 
@@ -2884,16 +2887,15 @@ function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentEleme
 function onSelChange(){ try{
   const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
   if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
-    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r);
+    _selText=txt; showExplainBtn();
   } else hideExplainBtn();
 }catch(e){} }
-function showExplainBtn(r){
+function showExplainBtn(){
   if(!_explBtn){ _explBtn=document.createElement('button'); _explBtn.className='explbtn'; _explBtn.innerHTML='✨ Let AI explain';
     _explBtn.addEventListener('mousedown',e=>e.preventDefault());
     _explBtn.addEventListener('click',()=>{ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); });
     document.body.appendChild(_explBtn); }
-  const top=Math.max(8, r.top-46), left=Math.min(window.innerWidth-170, Math.max(8, r.left));
-  _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='block';
+  _explBtn.style.display='block';   // fixed floating pill at the bottom — never collides with the iOS selection menu
 }
 function hideExplainBtn(){ if(_explBtn) _explBtn.style.display='none'; }
 document.addEventListener('selectionchange', onSelChange);
@@ -2903,7 +2905,8 @@ function openExplainPanel(snippet){
   closeExplainPanel();
   const ov=document.createElement('div'); ov.id='explov'; ov.className='explov';
   ov.innerHTML=`<div class="explpanel" onclick="event.stopPropagation()">
-    <div class="explhead"><b>✨ AI explanation</b><button class="btn" onclick="closeExplainPanel()">✕ Close</button></div>
+    <button class="explclose" onclick="closeExplainPanel()" title="Close" aria-label="Close">✕</button>
+    <div class="explhead"><b>✨ AI explanation</b></div>
     <div class="explquote">“${esc(snippet)}”</div>
     <div class="explbody md" id="explbody"><div class="explload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span> breaking it down…</div></div>
   </div>`;
