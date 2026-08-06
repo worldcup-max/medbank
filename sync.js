@@ -166,6 +166,7 @@
       }
       ready = true;
       window.addEventListener("online", function(){ if(meta().dirty) pushNow(); });
+      try{ if(window.MB_loadProfileContent) MB_loadProfileContent(); }catch(e){}   // load this profile's imported topics
       log("ready on profile", profileId);
     }catch(e){ log("init error", e && e.message); }        // never break the app
   }
