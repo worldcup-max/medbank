@@ -6,8 +6,8 @@
  * ===================================================================== */
 window.MEDBANK_CONFIG = {
   // From Supabase → Project Settings → API
-  SUPABASE_URL: "https://YOUR-PROJECT.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR-SUPABASE-ANON-KEY",
+  SUPABASE_URL: "https://tytbrhuzikqkscxdnkmr.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_SExbh1aVqsvFbZwk4P361A_thit5lFF",
 
   // From Paystack → Settings → API Keys (use the PUBLIC key: pk_...)
   PAYSTACK_PUBLIC_KEY: "pk_test_XXXXXXXXXXXXXXXXXXXX",
