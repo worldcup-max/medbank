@@ -1,165 +1,296 @@
 /* =====================================================================
- * MedBank — in-app login & sync UI (Phase 4/5)
- * Adds a "Sign in / Sync" screen INSIDE the app so a student can log in on
- * their phone and have their progress sync. The app still works fully
- * logged-out; this is opt-in and never blocks studying.
+ * MedBank — guided sign-up / sign-in walkthrough (Phase 4/5, v2)
+ * A friendly first-run flow: welcome → pick level → pick courses (filtered
+ * by the chosen level, with an "add course" escape hatch for other schools)
+ * → create account. Value-first: the student sets up their study space
+ * before being asked to sign up. Returning students get a clean sign-in.
  *
- * Requires: @supabase/supabase-js loaded, config.js, sync.js (MB_SYNC).
- * Exposes: window.MB_openAuth(). Also injects a small status chip.
+ * The app still works fully logged-out; this never blocks studying.
+ * Requires: @supabase/supabase-js, config.js, sync.js (MB_SYNC).
+ * Exposes: window.MB_openAuth(), window.MB_openWelcome().
  * ===================================================================== */
 (function () {
   var CFG = (typeof window !== "undefined" && window.MEDBANK_CONFIG) || {};
+
+  /* ---- palette (matches the violet light theme) ---- */
+  var C = { violet:"#7c3aed", violetD:"#6d28d9", teal:"#0d9488", coral:"#f97362",
+            ink:"#1c1830", dim:"#5c5570", line:"#e6e3f0", tint:"#f2eafe", tintB:"#e2d5fb" };
+
+  /* ---- default course catalog per level (Nigerian MBBS; editable server-side) ---- */
+  var DEFAULT_COURSES = {
+    "100":["Use of English","General Studies","Biology","Chemistry","Physics","Mathematics"],
+    "200":["Gross Anatomy","Histology","Embryology","Physiology","Biochemistry","Medical Sociology"],
+    "300":["Gross Anatomy","Neuroanatomy","Physiology","Biochemistry","Introduction to Pathology"],
+    "400":["General Pathology","Pharmacology","Medical Microbiology","Haematology","Chemical Pathology","Community Medicine"],
+    "500":["Medicine","Surgery","Obstetrics & Gynaecology","Paediatrics","Community Medicine","Psychiatry"],
+    "600":["Medicine","Surgery","Obstetrics & Gynaecology","Paediatrics","Ophthalmology","ENT","Anaesthesia","Radiology","Community Medicine"]
+  };
+  var SERVER_TPL = {};
+  function catalogFor(level){
+    var s = SERVER_TPL[String(level)];
+    if (s && s.length) return s.slice();
+    return (DEFAULT_COURSES[String(level)] || []).slice();
+  }
+
   function el(t, css, html){ var e=document.createElement(t); if(css)e.style.cssText=css; if(html!=null)e.innerHTML=html; return e; }
   function configured(){ return CFG.SUPABASE_URL && CFG.SUPABASE_URL.indexOf("YOUR-PROJECT")<0; }
-
   function client(){
     if(window.__mbSB) return window.__mbSB;
     if(window.supabase && configured()) window.__mbSB = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
     return window.__mbSB || null;
   }
 
+  /* ---- overlay + card shell ---- */
   var overlay=null;
   function close(){ if(overlay&&overlay.parentNode) overlay.parentNode.removeChild(overlay); overlay=null; }
-  function sheet(title, sub){
+  function card(opts){
+    opts=opts||{};
     close();
-    overlay=el("div","position:fixed;inset:0;background:rgba(10,16,30,.6);display:flex;align-items:center;justify-content:center;z-index:100000;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
-    var s=el("div","background:#fff;width:92%;max-width:380px;border-radius:18px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.35)");
-    s.appendChild(el("div","font-weight:800;font-size:20px;color:#0f1729;margin-bottom:4px",title));
-    if(sub) s.appendChild(el("div","color:#5b6b86;font-size:14px;margin-bottom:14px",sub));
-    overlay.appendChild(s); overlay.onclick=function(e){ if(e.target===overlay) close(); };
+    overlay=el("div","position:fixed;inset:0;background:rgba(28,20,45,.55);display:flex;align-items:center;justify-content:center;z-index:100000;padding:16px;font-family:-apple-system,Segoe UI,Roboto,sans-serif;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)");
+    var s=el("div","background:#fff;width:100%;max-width:440px;max-height:92vh;overflow-y:auto;border-radius:20px;padding:26px 24px;box-shadow:0 30px 80px rgba(28,20,45,.4)");
+    if(opts.step){
+      var dots=el("div","display:flex;gap:6px;margin-bottom:16px");
+      for(var i=1;i<=4;i++){ dots.appendChild(el("div","height:5px;flex:1;border-radius:3px;background:"+(i<=opts.step?C.violet:C.line))); }
+      s.appendChild(dots);
+    }
+    if(opts.title) s.appendChild(el("div","font-weight:800;font-size:22px;letter-spacing:-.3px;color:"+C.ink+";margin-bottom:5px",opts.title));
+    if(opts.sub) s.appendChild(el("div","color:"+C.dim+";font-size:14.5px;line-height:1.5;margin-bottom:16px",opts.sub));
+    overlay.appendChild(s); overlay.onclick=function(e){ if(e.target===overlay && opts.dismiss!==false) close(); };
     document.body.appendChild(overlay);
     return s;
   }
   function input(s,label,type,ph){
-    s.appendChild(el("div","font-size:12.5px;font-weight:700;color:#5b6b86;margin:12px 0 5px",label));
-    var i=el("input","width:100%;padding:12px 13px;border:1px solid #e7ebf3;border-radius:11px;font-size:16px;box-sizing:border-box");
-    i.type=type||"text"; if(ph)i.placeholder=ph; s.appendChild(i); return i;
+    s.appendChild(el("div","font-size:12.5px;font-weight:700;color:"+C.dim+";margin:13px 0 5px",label));
+    var i=el("input","width:100%;padding:12px 13px;border:1px solid "+C.line+";border-radius:11px;font-size:16px;box-sizing:border-box;outline:none");
+    i.type=type||"text"; if(ph)i.placeholder=ph;
+    i.onfocus=function(){ i.style.borderColor=C.violet; }; i.onblur=function(){ i.style.borderColor=C.line; };
+    s.appendChild(i); return i;
   }
   function btn(s,label,primary){
-    var b=el("button","width:100%;margin-top:14px;border:0;border-radius:12px;padding:13px;font-weight:800;font-size:15px;cursor:pointer;"+
-      (primary?"background:#4f46e5;color:#fff":"background:#f2f3f9;color:#0f1729"),label);
+    var b=el("button","width:100%;margin-top:14px;border:0;border-radius:12px;padding:14px;font-weight:800;font-size:15px;cursor:pointer;transition:.15s;"+
+      (primary?("background:"+C.violet+";color:#fff"):("background:"+C.tint+";color:"+C.violetD)),label);
+    if(primary){ b.onmouseenter=function(){b.style.background=C.violetD;}; b.onmouseleave=function(){b.style.background=C.violet;}; }
     s.appendChild(b); return b;
   }
-  function err(s){ var e=el("div","background:#fdecea;color:#c0392b;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:12px;display:none"); s.appendChild(e); return e; }
+  function link(s,label){ var d=el("div","text-align:center;color:"+C.dim+";font-size:13.5px;margin-top:13px;cursor:pointer",label); s.appendChild(d); return d; }
+  function err(s){ var e=el("div","background:#fdece7;color:#b3391f;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:12px;display:none"); s.appendChild(e); return e; }
+  function fail(e,m){ e.textContent=m; e.style.display="block"; }
 
-  /* device fingerprint (matches website) */
   function fp(){ var x=[navigator.userAgent,navigator.language,screen.width+"x"+screen.height,Intl.DateTimeFormat().resolvedOptions().timeZone,navigator.hardwareConcurrency||0].join("|");
     var h=0; for(var i=0;i<x.length;i++) h=((h<<5)-h+x.charCodeAt(i))|0; return "fp_"+(h>>>0).toString(36); }
 
-  var MODE="signin";
+  var CHOSEN={ level:null, courses:[], name:"" };
+
+  /* ---- entry points ---- */
   async function open(){
-    if(!configured()){ toast("Sync isn't configured yet."); return; }
+    if(!configured()){ toast("Sync isn't set up yet."); return; }
     var sb=client(); if(!sb) return;
     var ses=await sb.auth.getSession();
-    if(ses.data.session){ return showAccount(sb); }
-    renderAuth(sb);
+    if(ses.data.session) return showAccount(sb);
+    renderWelcome(sb);
+  }
+  async function openWelcome(){
+    if(!configured()) return;
+    var sb=client(); if(!sb) return;
+    var ses=await sb.auth.getSession();
+    if(ses.data.session) return;              // already in — don't interrupt
+    loadServerTemplates(sb);
+    renderWelcome(sb);
+  }
+  async function loadServerTemplates(sb){
+    try{ var d=await sb.from("app_config").select("value").eq("key","course_templates").maybeSingle();
+      if(d.data && d.data.value) SERVER_TPL=d.data.value; }catch(_){}
   }
 
-  function renderAuth(sb){
-    var isUp=MODE==="signup";
-    var s=sheet(isUp?"Create your account":"Sign in", isUp?"Sync your progress across devices.":"Welcome back — sync your progress.");
-    var name = isUp ? input(s,"Full name","text","e.g. Frank Wiz") : null;
-    var email=input(s,"Email","email","you@example.com");
-    var pass=input(s,"Password","password","Your password");
-    var e=err(s);
-    var go=btn(s,isUp?"Create account":"Sign in",true);
-    var swap=el("div","text-align:center;color:#5b6b86;font-size:13px;margin-top:12px;cursor:pointer",
-      isUp?"Already have an account? Sign in":"New here? Create an account");
-    swap.onclick=function(){ MODE=isUp?"signin":"signup"; renderAuth(sb); };
-    s.appendChild(swap);
-    var cancel=el("div","text-align:center;color:#9aa6bd;font-size:13px;margin-top:10px;cursor:pointer","Not now"); cancel.onclick=close; s.appendChild(cancel);
-    function fail(m){ e.textContent=m; e.style.display="block"; }
-    go.onclick=async function(){
-      e.style.display="none";
-      var em=(email.value||"").trim(), pw=pass.value;
-      if(!em||!pw){ fail("Enter your email and password."); return; }
-      go.disabled=true; go.textContent="Please wait…";
-      try{
-        if(isUp){
-          var r=await sb.auth.signUp({ email:em, password:pw, options:{ data:{ full_name:(name.value||"").trim() } } });
-          if(r.error) throw r.error;
-          if(r.data.user){ try{ await sb.from("signup_signals").insert({ account_id:r.data.user.id, fingerprint:fp() }); }catch(_){} }
-          if(!r.data.session){ sheet("Check your email","We sent a confirmation link to "+em+". Tap it, then come back and sign in."); return; }
-        } else {
-          var r2=await sb.auth.signInWithPassword({ email:em, password:pw });
-          if(r2.error) throw r2.error;
-        }
-        await afterAuth(sb);
-      }catch(ex){ fail(ex.message||"Something went wrong."); go.disabled=false; go.textContent=isUp?"Create account":"Sign in"; }
-    };
+  /* ---- step 0: welcome ---- */
+  function renderWelcome(sb){
+    var s=card({ title:"Welcome to MedBank", sub:"Let's set up your study space. Takes about a minute — no card needed." });
+    var feats=el("div","margin:2px 0 6px");
+    [["📥","Turn your lectures into decks"],["🧠","Spaced repetition that sticks"],["✨","Let AI explain anything"]].forEach(function(f){
+      var r=el("div","display:flex;align-items:center;gap:11px;padding:9px 2px;font-size:14.5px;color:"+C.ink);
+      r.innerHTML='<span style="font-size:18px">'+f[0]+'</span><span>'+f[1]+'</span>'; feats.appendChild(r);
+    });
+    s.appendChild(feats);
+    btn(s,"Get started",true).onclick=function(){ renderLevel(sb); };
+    link(s,"I already have an account · Sign in").onclick=function(){ renderSignin(sb); };
+    link(s,"Skip for now").onclick=close;
   }
 
-  async function afterAuth(sb){
-    // does this account already have a level profile?
-    var { data:profs } = await sb.from("level_profiles").select("id").limit(1);
-    if(profs && profs.length){ await startSync(sb); return; }
-    renderOnboard(sb);
-  }
-
-  var CHOSEN={ level:null, courses:[] };
-  async function renderOnboard(sb){
-    var s=sheet("Set up your level","Levels below stay hidden; higher ones unlock as you go.");
-    var grid=el("div","display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:6px");
+  /* ---- step 1: level ---- */
+  function renderLevel(sb){
+    var s=card({ step:1, title:"What level are you?", sub:"This sets your courses. Levels below stay view-only; higher ones unlock as you finish each year." });
+    var grid=el("div","display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:4px");
     [100,200,300,400,500,600].forEach(function(lv){
-      var d=el("div","padding:14px 4px;border:1.5px solid #e7ebf3;border-radius:11px;text-align:center;font-weight:800;cursor:pointer;color:#0f1729",lv+"");
-      d.onclick=function(){ CHOSEN.level=lv; [].forEach.call(grid.children,function(c){c.style.borderColor="#e7ebf3";c.style.background="#fff";}); d.style.borderColor="#4f46e5"; d.style.background="#eef0fe"; loadCourses(sb,s); };
+      var on=CHOSEN.level===lv;
+      var d=el("div","padding:16px 4px;border:1.5px solid "+(on?C.violet:C.line)+";border-radius:12px;text-align:center;font-weight:800;font-size:17px;cursor:pointer;color:"+C.ink+";background:"+(on?C.tint:"#fff")+";transition:.12s",lv+"");
+      d.onclick=function(){ CHOSEN.level=lv; [].forEach.call(grid.children,function(c){c.style.borderColor=C.line;c.style.background="#fff";}); d.style.borderColor=C.violet; d.style.background=C.tint; nextBtn.style.opacity="1"; nextBtn.disabled=false; };
       grid.appendChild(d);
     });
     s.appendChild(grid);
-    s._coursesBox=el("div",""); s.appendChild(s._coursesBox);
     var e=err(s);
-    var go=btn(s,"Start",true);
-    go.onclick=async function(){
-      if(!CHOSEN.level){ e.textContent="Pick your level."; e.style.display="block"; return; }
-      var chosen=CHOSEN.courses.filter(function(c){return c.on});
-      if(!chosen.length){ e.textContent="Pick at least one course."; e.style.display="block"; return; }
-      go.disabled=true; go.textContent="Setting up…";
-      try{
-        var u=(await sb.auth.getUser()).data.user;
-        var lp=await sb.from("level_profiles").insert({ account_id:u.id, level:CHOSEN.level }).select("id").single();
-        if(lp.error) throw lp.error;
-        await sb.from("accounts").update({ active_level_profile_id:lp.data.id, start_level:CHOSEN.level }).eq("id",u.id);
-        var rows=chosen.map(function(c,i){ return { level_profile_id:lp.data.id, account_id:u.id, name:c.name, position:i }; });
-        var cr=await sb.from("courses").insert(rows); if(cr.error) throw cr.error;
-        await startSync(sb);
-      }catch(ex){ e.textContent=ex.message||"Could not save."; e.style.display="block"; go.disabled=false; go.textContent="Start"; }
-    };
-  }
-  async function loadCourses(sb,s){
-    var tpl={}; try{ var d=await sb.from("app_config").select("value").eq("key","course_templates").maybeSingle(); if(d.data) tpl=d.data.value; }catch(_){}
-    CHOSEN.courses=(tpl[String(CHOSEN.level)]||[]).map(function(n){return {name:n,on:true}});
-    var box=s._coursesBox; box.innerHTML="";
-    box.appendChild(el("div","font-size:12.5px;font-weight:700;color:#5b6b86;margin:14px 0 6px","Your courses"));
-    CHOSEN.courses.forEach(function(c){
-      var row=el("label","display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid #e7ebf3;border-radius:11px;margin-top:7px;cursor:pointer;"+(c.on?"background:#eef0fe;border-color:#4f46e5":""));
-      row.innerHTML='<input type="checkbox" '+(c.on?"checked":"")+' style="width:auto"> <span style="font-weight:600;color:#0f1729">'+c.name+'</span>';
-      row.querySelector("input").onchange=function(ev){ c.on=ev.target.checked; row.style.background=c.on?"#eef0fe":"#fff"; row.style.borderColor=c.on?"#4f46e5":"#e7ebf3"; };
-      box.appendChild(row);
-    });
+    var nextBtn=btn(s,"Continue",true);
+    if(!CHOSEN.level){ nextBtn.style.opacity=".5"; }
+    nextBtn.onclick=function(){ if(!CHOSEN.level){ fail(e,"Pick your level to continue."); return; } renderCourses(sb); };
+    link(s,"Back").onclick=function(){ renderWelcome(sb); };
   }
 
-  async function startSync(sb){
+  /* ---- step 2: courses (filtered by level) + add course ---- */
+  function renderCourses(sb){
+    var s=card({ step:2, title:CHOSEN.level+" level courses", sub:"Pick the ones you're taking. Not from this school? Add your own at the bottom." });
+    // seed from catalog for this level (only first time or when level changed)
+    if(!CHOSEN.courses.length || CHOSEN._forLevel!==CHOSEN.level){
+      CHOSEN.courses=catalogFor(CHOSEN.level).map(function(n){return {name:n,on:true};});
+      CHOSEN._forLevel=CHOSEN.level;
+    }
+    var listBox=el("div","margin-top:4px");
+    s.appendChild(listBox);
+    function drawList(){
+      listBox.innerHTML="";
+      CHOSEN.courses.forEach(function(c,idx){
+        var row=el("label","display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid "+(c.on?C.violet:C.line)+";border-radius:12px;margin-top:8px;cursor:pointer;background:"+(c.on?C.tint:"#fff"));
+        row.innerHTML='<input type="checkbox" '+(c.on?"checked":"")+' style="width:18px;height:18px;accent-color:'+C.violet+'"> '+
+          '<span style="flex:1;font-weight:600;color:'+C.ink+'">'+esc(c.name)+'</span>'+
+          (c.custom?'<span data-x="1" style="color:'+C.dim+';font-size:18px;padding:0 4px;cursor:pointer">×</span>':'');
+        row.querySelector("input").onchange=function(ev){ c.on=ev.target.checked; row.style.background=c.on?C.tint:"#fff"; row.style.borderColor=c.on?C.violet:C.line; };
+        var x=row.querySelector('[data-x]'); if(x) x.onclick=function(ev){ ev.preventDefault(); CHOSEN.courses.splice(idx,1); drawList(); };
+        listBox.appendChild(row);
+      });
+    }
+    drawList();
+    // add-course
+    var addWrap=el("div","display:flex;gap:8px;margin-top:12px");
+    var ai=el("input","flex:1;min-width:0;padding:11px 12px;border:1px dashed "+C.tintB+";border-radius:11px;font-size:15px;box-sizing:border-box;outline:none"); ai.placeholder="Add a course (e.g. Dermatology)";
+    ai.onfocus=function(){ai.style.borderColor=C.violet;}; ai.onblur=function(){ai.style.borderColor=C.tintB;};
+    var ab=el("button","flex:none;border:0;border-radius:11px;padding:0 16px;font-weight:800;font-size:20px;cursor:pointer;background:"+C.tint+";color:"+C.violetD,"+");
+    function addCourse(){ var v=(ai.value||"").trim(); if(!v) return;
+      if(!CHOSEN.courses.some(function(c){return c.name.toLowerCase()===v.toLowerCase();})) CHOSEN.courses.push({name:v,on:true,custom:true});
+      ai.value=""; drawList(); ai.focus(); }
+    ab.onclick=addCourse; ai.onkeydown=function(ev){ if(ev.key==="Enter"){ ev.preventDefault(); addCourse(); } };
+    addWrap.appendChild(ai); addWrap.appendChild(ab); s.appendChild(addWrap);
+    var e=err(s);
+    btn(s,"Continue",true).onclick=function(){
+      if(!CHOSEN.courses.filter(function(c){return c.on;}).length){ fail(e,"Pick at least one course."); return; }
+      renderAccount(sb);
+    };
+    link(s,"Back").onclick=function(){ renderLevel(sb); };
+  }
+
+  /* ---- step 3: create account (value already delivered) ---- */
+  function renderAccount(sb){
+    var s=card({ step:3, title:"Create your account", sub:"Save your progress and sync across your phone and laptop." });
+    var name=input(s,"Full name","text","e.g. Frank Wiz"); name.value=CHOSEN.name||"";
+    var email=input(s,"Email","email","you@example.com");
+    var pass=input(s,"Password","password","Create a password");
+    var e=err(s);
+    var go=btn(s,"Create account & start",true);
+    go.onclick=async function(){
+      e.style.display="none";
+      var nm=(name.value||"").trim(), em=(email.value||"").trim(), pw=pass.value;
+      CHOSEN.name=nm;
+      if(!em||!pw){ fail(e,"Enter your email and a password."); return; }
+      if(pw.length<6){ fail(e,"Use at least 6 characters for your password."); return; }
+      go.disabled=true; go.textContent="Creating…";
+      try{
+        var r=await sb.auth.signUp({ email:em, password:pw, options:{ data:{ full_name:nm } } });
+        if(r.error) throw r.error;
+        if(r.data.user){ try{ await sb.from("signup_signals").insert({ account_id:r.data.user.id, fingerprint:fp() }); }catch(_){} }
+        stashPending();
+        if(!r.data.session){ renderCheckEmail(sb, em); return; }
+        await saveOnboarding(sb, CHOSEN);
+      }catch(ex){ fail(e, friendly(ex)); go.disabled=false; go.textContent="Create account & start"; }
+    };
+    link(s,"Already have an account? Sign in").onclick=function(){ renderSignin(sb); };
+    link(s,"Back").onclick=function(){ renderCourses(sb); };
+  }
+  function renderCheckEmail(sb, em){
+    var s=card({ title:"Check your email ✉", sub:"We sent a confirmation link to "+esc(em)+". Tap it, then come back and sign in — your level and courses are saved." });
+    btn(s,"I've confirmed — sign in",true).onclick=function(){ renderSignin(sb); };
+    link(s,"Close").onclick=close;
+  }
+
+  /* ---- sign-in (returning) ---- */
+  function renderSignin(sb){
+    var s=card({ title:"Welcome back", sub:"Sign in to pick up where you left off." });
+    var email=input(s,"Email","email","you@example.com");
+    var pass=input(s,"Password","password","Your password");
+    var e=err(s);
+    var go=btn(s,"Sign in",true);
+    go.onclick=async function(){
+      e.style.display="none";
+      var em=(email.value||"").trim(), pw=pass.value;
+      if(!em||!pw){ fail(e,"Enter your email and password."); return; }
+      go.disabled=true; go.textContent="Signing in…";
+      try{ var r=await sb.auth.signInWithPassword({ email:em, password:pw }); if(r.error) throw r.error; await afterAuth(sb); }
+      catch(ex){ fail(e, friendly(ex)); go.disabled=false; go.textContent="Sign in"; }
+    };
+    link(s,"New here? Create an account").onclick=function(){ renderWelcome(sb); };
+    link(s,"Close").onclick=close;
+  }
+
+  /* ---- after auth: route to sync / pending onboarding / setup ---- */
+  async function afterAuth(sb){
+    var { data:profs } = await sb.from("level_profiles").select("id").limit(1);
+    if(profs && profs.length){ return startSync(sb); }
+    var pend=readPending();
+    if(pend && pend.level){ CHOSEN=pend; return saveOnboarding(sb, pend); }
+    renderLevel(sb);   // signed in but no profile yet → set up
+  }
+
+  async function saveOnboarding(sb, chosen){
+    var s=card({ title:"Setting up your space…", sub:"One moment.", dismiss:false });
+    try{
+      var u=(await sb.auth.getUser()).data.user;
+      var lp=await sb.from("level_profiles").insert({ account_id:u.id, level:chosen.level }).select("id").single();
+      if(lp.error) throw lp.error;
+      await sb.from("accounts").update({ active_level_profile_id:lp.data.id, start_level:chosen.level }).eq("id",u.id);
+      var picked=chosen.courses.filter(function(c){return c.on;});
+      var rows=picked.map(function(c,i){ return { level_profile_id:lp.data.id, account_id:u.id, name:c.name, position:i }; });
+      var cr=await sb.from("courses").insert(rows); if(cr.error) throw cr.error;
+      clearPending();
+      await startSync(sb, true);
+    }catch(ex){
+      s.innerHTML=""; s.appendChild(el("div","font-weight:800;font-size:19px;color:"+C.ink,"Couldn't finish setup"));
+      s.appendChild(el("div","color:"+C.dim+";font-size:14px;margin:6px 0 4px",friendly(ex)));
+      btn(s,"Try again",true).onclick=function(){ saveOnboarding(sb, chosen); };
+    }
+  }
+
+  async function startSync(sb, fresh){
     try{ if(window.MB_SYNC) await MB_SYNC.init(sb); }catch(_){}
     updateChip();
-    var s=sheet("You're synced ✓","Your progress now saves to your account and syncs across devices.");
-    btn(s,"Done",true).onclick=close;
+    var s=card({ title:"You're all set ✓", sub: fresh ? "Your "+CHOSEN.level+" level space is ready and syncing across your devices." : "Signed in — your progress is syncing." });
+    btn(s,"Start studying",true).onclick=function(){ close(); try{ if(location.hash.indexOf("welcome")<0 && !location.hash) location.hash="#/today"; }catch(_){} };
   }
 
   async function showAccount(sb){
-    var s=sheet("Account","You're signed in and syncing.");
+    var s=card({ title:"Your account", sub:"You're signed in and syncing." });
     var st=(window.MB_SYNC&&MB_SYNC.status)?MB_SYNC.status():{};
-    s.appendChild(el("div","background:#e6f6f3;color:#0b6b60;border-radius:11px;padding:11px 13px;font-size:13.5px",
+    s.appendChild(el("div","background:#e6f6f3;color:#0b6b60;border-radius:11px;padding:11px 13px;font-size:13.5px;font-weight:600",
       "✓ Sync on"+(st.level?(" · "+st.level+" level"):"")+(st.entitled? "":" · trial ended")));
-    var sw=btn(s,"Switch level"); sw.onclick=function(){ close(); if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); };
+    btn(s,"Switch level").onclick=function(){ close(); if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); };
     var out=btn(s,"Log out"); out.onclick=async function(){ try{ await sb.auth.signOut(); }catch(_){} updateChip(); close(); };
-    var cx=el("div","text-align:center;color:#9aa6bd;font-size:13px;margin-top:10px;cursor:pointer","Close"); cx.onclick=close; s.appendChild(cx);
+    link(s,"Close").onclick=close;
   }
 
-  /* small status chip so students can find sign-in */
+  /* ---- pending onboarding across email confirmation ---- */
+  function stashPending(){ try{ localStorage.setItem("mb_pending_onboard", JSON.stringify({level:CHOSEN.level,courses:CHOSEN.courses,name:CHOSEN.name})); }catch(_){} }
+  function readPending(){ try{ var v=localStorage.getItem("mb_pending_onboard"); return v?JSON.parse(v):null; }catch(_){ return null; } }
+  function clearPending(){ try{ localStorage.removeItem("mb_pending_onboard"); }catch(_){} }
+
+  function friendly(ex){
+    var m=(ex&&ex.message)||"Something went wrong.";
+    if(/already registered|already exists/i.test(m)) return "That email already has an account. Try signing in.";
+    if(/invalid login|invalid credentials/i.test(m)) return "Email or password isn't right. Try again.";
+    if(/confirm/i.test(m)) return "Please confirm your email first — check your inbox.";
+    return m;
+  }
+  function esc(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  /* ---- status chip ---- */
   var chip=null;
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:12px;bottom:14px;z-index:9998;border:0;border-radius:22px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 20px rgba(31,41,90,.18);background:#4f46e5;color:#fff","☁ Sign in");
+    chip=el("button","position:fixed;right:12px;bottom:14px;z-index:9998;border:0;border-radius:22px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 20px rgba(124,58,237,.28);background:"+C.violet+";color:#fff","☁ Sign in");
     chip.onclick=open; document.body.appendChild(chip);
     updateChip();
   }
@@ -167,14 +298,21 @@
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
     try{ var ses=await sb.auth.getSession();
-      if(ses.data.session){ chip.textContent="✓ Synced"; chip.style.background="#0d9488"; }
-      else { chip.textContent="☁ Sign in"; chip.style.background="#4f46e5"; }
+      if(ses.data.session){ chip.textContent="✓ Synced"; chip.style.background=C.teal; }
+      else { chip.textContent="☁ Sign in"; chip.style.background=C.violet; }
     }catch(_){}
   }
   function toast(m){ try{ alert(m); }catch(_){} }
 
   window.MB_openAuth=open;
+  window.MB_openWelcome=openWelcome;
   if(typeof document!=="undefined"){
-    if(configured()) document.addEventListener("DOMContentLoaded", function(){ setTimeout(ensureChip, 800); });
+    if(configured()) document.addEventListener("DOMContentLoaded", function(){
+      setTimeout(ensureChip, 800);
+      try{
+        var wantsWelcome = /(\?|&)welcome=1\b/.test(location.search) || /welcome/.test(location.hash);
+        if(wantsWelcome){ var sb=client(); if(sb) loadServerTemplates(sb); setTimeout(openWelcome, 700); }
+      }catch(_){}
+    });
   }
 })();
