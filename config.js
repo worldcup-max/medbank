@@ -23,7 +23,7 @@ window.MEDBANK_CONFIG = {
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
   IMPORT_API: "",
   // Your website URL — paywall nudges link here for subscribing.
-  WEBSITE_URL: "https://YOUR-WEBSITE-URL",
+  WEBSITE_URL: "https://medbank.com.ng",
 
   // Where the installable app lives (fill in when the apps are published)
   DOWNLOAD: {
