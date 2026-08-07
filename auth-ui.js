@@ -203,8 +203,11 @@
     link(s,"Back").onclick=function(){ renderCourses(sb); };
   }
   function renderCheckEmail(sb, em){
-    var s=card({ title:"Check your email ✉", sub:"We sent a confirmation link to "+esc(em)+". Tap it, then come back and sign in — your level and courses are saved." });
-    btn(s,"I've confirmed — sign in",true).onclick=function(){ renderSignin(sb); };
+    var s=card({ title:"You're almost in", sub:"We just sent a verification link to "+esc(em)+". Open it to activate your account — your level and courses are saved and waiting." });
+    s.appendChild(el("div","font-size:12.5px;color:"+C.dim+";margin-top:2px","Can't find it? Check your spam or promotions folder."));
+    btn(s,"I've verified — take me in",true).onclick=function(){ renderSignin(sb); };
+    var rs=link(s,"Resend the link");
+    rs.onclick=async function(){ rs.textContent="Sending…"; try{ await sb.auth.resend({ type:"signup", email:em }); rs.textContent="Sent again — check your inbox ✓"; }catch(_){ rs.textContent="Couldn't resend — try again shortly"; } };
     link(s,"Close").onclick=close;
   }
 
@@ -279,9 +282,9 @@
 
   function friendly(ex){
     var m=(ex&&ex.message)||"Something went wrong.";
-    if(/already registered|already exists/i.test(m)) return "That email already has an account. Try signing in.";
-    if(/invalid login|invalid credentials/i.test(m)) return "Email or password isn't right. Try again.";
-    if(/confirm/i.test(m)) return "Please confirm your email first — check your inbox.";
+    if(/already registered|already exists/i.test(m)) return "Looks like you already have an account — try signing in instead.";
+    if(/invalid login|invalid credentials/i.test(m)) return "That email or password doesn't match. Give it another go.";
+    if(/confirm/i.test(m)) return "Just verify your email to finish — we've sent you a link. Check your inbox (and spam).";
     return m;
   }
   function esc(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }

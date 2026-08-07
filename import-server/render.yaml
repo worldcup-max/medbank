@@ -1,0 +1,23 @@
+# Render Blueprint — one-click deploy for the MedBank import server.
+# In Render: New → Blueprint → point at the repo containing this folder.
+# Then set the 4 secret env vars (marked sync:false) in the dashboard.
+services:
+  - type: web
+    name: medbank-import-server
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false            # https://tytbrhuzikqkscxdnkmr.supabase.co
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false            # Supabase → Settings → API Keys → secret (service_role). KEEP SECRET.
+      - key: ANTHROPIC_API_KEY
+        sync: false            # console.anthropic.com. KEEP SECRET.
+      - key: PAYSTACK_SECRET_KEY
+        sync: false            # Paystack → Settings → API Keys (sk_...). KEEP SECRET. (optional until you charge)
+      - key: ALLOWED_ORIGINS
+        sync: false            # comma-separated, e.g. https://worldcup-max.github.io,https://your-website

@@ -1,0 +1,162 @@
+/* =====================================================================
+ * MedBank — Import server (Phase 5)
+ * The secure, server-side engine behind the app's "Import lectures" tab and
+ * the Paystack payment webhook. Runs on a small host (Render/Railway/Fly) with
+ * your Anthropic key + Supabase service role. NEVER ships in the app.
+ *
+ * Endpoints:
+ *   POST /import          — auth + gate + generate + validate + save topic
+ *   POST /paystack/webhook— verify payment, flip subscription to active
+ *   GET  /health
+ *
+ * Env (set on the host):
+ *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ANTHROPIC_API_KEY, PAYSTACK_SECRET_KEY
+ *
+ * Setup:  npm i express @supabase/supabase-js @anthropic-ai/sdk pdf-parse
+ * Run:    node server.mjs
+ * ===================================================================== */
+import express from "express";
+import crypto from "node:crypto";
+import { createClient } from "@supabase/supabase-js";
+import Anthropic from "@anthropic-ai/sdk";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+
+const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
+const anthropic = new Anthropic();
+const app = express();
+// CORS: the app + website call this from a different origin. Set ALLOWED_ORIGINS
+// (comma-separated) on the host to restrict; defaults to "*" for easy first setup.
+const ALLOWED = (process.env.ALLOWED_ORIGINS || "*").split(",").map(s=>s.trim());
+app.use((req, res, next) => {
+  const o = req.headers.origin;
+  if (ALLOWED[0] === "*") res.setHeader("Access-Control-Allow-Origin", "*");
+  else if (o && ALLOWED.includes(o)) res.setHeader("Access-Control-Allow-Origin", o);
+  res.setHeader("Access-Control-Allow-Headers", "authorization, content-type");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  if (req.method === "OPTIONS") return res.status(204).end();
+  next();
+});
+app.use("/paystack/webhook", express.raw({ type:"*/*" }));   // raw body for signature check
+app.use(express.json({ limit:"25mb" }));
+
+/* same stable card id as the app: cid(topicId,deck,c) = topicId|deckInitial|hstr(q) */
+function hstr(s){ let h=5381; s=s||""; for(let i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))|0; return (h>>>0).toString(36); }
+
+/* validate a topic object (in memory) reusing the same rules as the CLI validator */
+function validateObj(obj){
+  const errors=[];
+  if(!obj.note_md || obj.note_md.trim().length<200) errors.push("note_md too short");
+  if(!obj.simplified_md || obj.simplified_md.trim().length<200) errors.push("simplified_md too short");
+  const chk=(deck,arr)=>{ if(!Array.isArray(arr)||!arr.length){ errors.push(deck+": no cards"); return; }
+    arr.forEach((c,i)=>{ if(!c.q) errors.push(`${deck}[${i}] no q`);
+      if(deck==="recall"){ if(!Array.isArray(c.opts)||c.opts.length!==4) errors.push(`${deck}[${i}] opts must be 4-item list`);
+        if(!Number.isInteger(c.ans)||c.ans<0||c.ans>3) errors.push(`${deck}[${i}] bad ans`); if(!c.a) errors.push(`${deck}[${i}] no a`); }
+      else { ["lecturer","explain","tie"].forEach(k=>{ if(!c[k]) errors.push(`${deck}[${i}] no ${k}`); }); } }); };
+  chk("primer",(obj.primer||{}).cards); chk("recall",(obj.recall||{}).cards);
+  return errors;
+}
+
+async function getUser(req){
+  const tok=(req.headers.authorization||"").replace(/^Bearer\s+/i,"");
+  if(!tok) return null;
+  const { data } = await admin.auth.getUser(tok);
+  return data && data.user ? data.user : null;
+}
+
+async function extractContent(body){
+  const parts=[], images=[];
+  if(body.text) parts.push({ type:"text", text:"RAW LECTURE:\n\n"+body.text });
+  if(body.pdf_base64){ const pdf=require("pdf-parse"); const d=await pdf(Buffer.from(body.pdf_base64,"base64")); parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+d.text }); }
+  (body.images||[]).forEach(img=>{ images.push({ type:"image", source:{ type:"base64", media_type:img.media_type||"image/jpeg", data:img.data } }); });
+  return { parts, images };
+}
+
+app.get("/health", (_req,res)=>res.json({ ok:true }));
+
+app.post("/import", async (req,res)=>{
+  try{
+    const user = await getUser(req);
+    if(!user) return res.status(401).json({ error:"not signed in" });
+    const account_id = user.id;
+
+    // --- gate: current level active + entitled, and import quota not exceeded ---
+    const feat = await admin.rpc("can_use_features", { p_account:account_id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    const quota = await admin.rpc("check_ai_quota", { p_account:account_id, p_feature:"import" });
+    if(quota.error || !quota.data) return res.status(429).json({ error:"limit", reason:"You've reached your import limit. Subscribe for more." });
+
+    const { topicName, subject, lecturer, course_id } = req.body;
+    if(!topicName || !course_id) return res.status(400).json({ error:"topicName and course_id required" });
+
+    // --- record the import as processing ---
+    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.images?"images":"text") }).select("id").single();
+    const importId = imp.data && imp.data.id;
+
+    // --- load the ACTIVE prompt (live-editable in the DB) ---
+    const pt = await admin.from("prompt_templates").select("template,model,max_tokens,temperature").eq("key","import_generation").eq("is_active",true).maybeSingle();
+    if(!pt.data){ await admin.from("imports").update({ status:"failed", error:"no active prompt" }).eq("id",importId); return res.status(500).json({ error:"no active prompt" }); }
+    // trial users get the cheaper model
+    const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
+    const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+    const trialModel = (cfg.data && cfg.data.value) || pt.data.model;   // jsonb string → JS string
+    const model = (paid.data && paid.data.status==="active") ? pt.data.model : trialModel;
+
+    const prompt = pt.data.template
+      .replace(/\{\{topicName\}\}/g, topicName).replace(/\{\{lecturer\}\}/g, lecturer||"").replace(/\{\{subject\}\}/g, subject||"");
+    const { parts, images } = await extractContent(req.body);
+
+    const resp = await anthropic.messages.create({
+      model, max_tokens: pt.data.max_tokens || 16000, temperature: Number(pt.data.temperature) || 0.3,
+      messages:[{ role:"user", content:[{ type:"text", text:prompt }, ...images, ...parts] }]
+    });
+    let raw = resp.content.map(b=>b.type==="text"?b.text:"").join("");
+    const s=raw.indexOf("{"), e=raw.lastIndexOf("}");
+    let obj; try{ obj=JSON.parse(raw.slice(s,e+1)); }catch(err){ await admin.from("imports").update({ status:"failed", error:"bad json" }).eq("id",importId); return res.status(502).json({ error:"model returned invalid JSON" }); }
+    const errs = validateObj(obj);
+    if(errs.length){ await admin.from("imports").update({ status:"failed", error:errs.join("; ") }).eq("id",importId); return res.status(502).json({ error:"validation failed", details:errs }); }
+
+    // --- save the topic + cards ---
+    const topic = await admin.from("topics").insert({
+      course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
+      source_kind: req.body.pdf_base64?"pdf":(req.body.images?"images":"text"),
+      note_md: obj.note_md, simplified_md: obj.simplified_md
+    }).select("id").single();
+    if(topic.error) throw topic.error;
+    const topicId = topic.data.id;
+
+    const cards=[];
+    (obj.primer.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"primer", idx:i, card_key:topicId+"|p|"+hstr(c.q), q:c.q, payload:{ lecturer:c.lecturer, explain:c.explain, tie:c.tie } }));
+    (obj.recall.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"recall", idx:i, card_key:topicId+"|r|"+hstr(c.q), q:c.q, payload:{ a:c.a, opts:c.opts, ans:c.ans } }));
+    const cw = await admin.from("cards").insert(cards);
+    if(cw.error) throw cw.error;
+
+    // --- meter usage ---
+    const usage = resp.usage || {};
+    await admin.from("imports").update({ status:"done", topic_id:topicId, model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
+    await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
+
+    res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
+app.post("/paystack/webhook", async (req,res)=>{
+  try{
+    const sig = req.headers["x-paystack-signature"];
+    const hash = crypto.createHmac("sha512", process.env.PAYSTACK_SECRET_KEY).update(req.body).digest("hex");
+    if(hash !== sig) return res.status(401).end();
+    const event = JSON.parse(req.body.toString("utf8"));
+    if(event.event === "charge.success" || event.event === "subscription.create"){
+      const email = event.data && (event.data.customer && event.data.customer.email);
+      if(email){
+        const acc = await admin.from("accounts").select("id").eq("email", email).maybeSingle();
+        if(acc.data) await admin.from("subscriptions").update({ status:"active", plan:"monthly" }).eq("account_id", acc.data.id);
+      }
+    }
+    res.status(200).end();
+  }catch(e){ console.error(e); res.status(200).end(); }   // always 200 so Paystack stops retrying
+});
+
+const PORT = process.env.PORT || 8787;
+app.listen(PORT, ()=>console.log("MedBank import server on :"+PORT));
