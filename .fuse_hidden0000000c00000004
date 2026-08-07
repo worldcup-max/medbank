@@ -13,8 +13,8 @@
   var CFG = (typeof window !== "undefined" && window.MEDBANK_CONFIG) || {};
 
   /* ---- palette (matches the violet light theme) ---- */
-  var C = { violet:"#5b21b6", violetD:"#4c1d95", teal:"#0d9488", coral:"#f97362",
-            ink:"#1c1830", dim:"#5c5570", line:"#e6e3f0", tint:"#ece3fb", tintB:"#ddd0f5" };
+  var C = { violet:"#7c3aed", violetD:"#6d28d9", teal:"#0d9488", coral:"#f97362",
+            ink:"#1c1830", dim:"#5c5570", line:"#e6e3f0", tint:"#f2eafe", tintB:"#e2d5fb" };
 
   /* ---- default course catalog per level (Nigerian MBBS; editable server-side) ---- */
   var DEFAULT_COURSES = {
@@ -290,7 +290,7 @@
   var chip=null;
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:12px;bottom:14px;z-index:9998;border:0;border-radius:22px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 20px rgba(91,33,182,.28);background:"+C.violet+";color:#fff","☁ Sign in");
+    chip=el("button","position:fixed;right:12px;bottom:14px;z-index:9998;border:0;border-radius:22px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 20px rgba(124,58,237,.28);background:"+C.violet+";color:#fff","☁ Sign in");
     chip.onclick=open; document.body.appendChild(chip);
     updateChip();
   }

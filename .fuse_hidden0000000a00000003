@@ -4,15 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>MedBank — turn any lecture into active recall that sticks</title>
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="./icon.svg">
 <script>/* installed-app users skip the marketing page and go straight into MedBank */
 try{ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){ location.replace('./app.html'); } }catch(e){}</script>
 <meta name="description" content="Import a PDF or a photo of your notes and MedBank builds your lecturer note, a simplified version, two flashcard decks and a cram sheet — then schedules your revision so you remember it for the exam."/>
 <style>
   :root{
     --ink:#0f1729; --dim:#5b6b86; --line:#e7ebf3; --bg:#ffffff;
-    --indigo:#5b21b6; --indigo-d:#4c1d95; --teal:#0d9488; --coral:#f97362;
+    --indigo:#7c3aed; --indigo-d:#6d28d9; --teal:#0d9488; --coral:#f97362;
     --soft:#eef0fe; --soft2:#e6f6f3; --radius:16px; --maxw:1100px;
     --shadow:0 12px 44px rgba(31,41,90,.12); --shadow-sm:0 4px 18px rgba(31,41,90,.08);
   }
@@ -46,7 +44,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   .blob.c{width:320px;height:320px;background:#ffd9d3;bottom:-140px;left:42%;animation-delay:-9s}
   @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(26px,-22px) scale(1.06)}66%{transform:translate(-18px,14px) scale(.97)}}
   .hero .wrap{position:relative;z-index:1}
-  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--indigo-d);font-size:13px;font-weight:700;padding:7px 15px;border-radius:30px;border:1px solid #ddd0f5}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--indigo-d);font-size:13px;font-weight:700;padding:7px 15px;border-radius:30px;border:1px solid #e2d5fb}
   .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   h1{font-size:clamp(34px,6.2vw,62px);line-height:1.04;letter-spacing:-1.6px;margin:22px auto 16px;max-width:15ch;font-weight:800}
@@ -108,7 +106,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
   .bucket h4{margin:7px 0 4px;font-size:16.5px}
   .bucket p{margin:0;color:var(--dim);font-size:13.5px}
   .bucket.teal{border-left-color:var(--teal)} .bucket.coral{border-left-color:var(--coral)}
-  .bucket.amber{border-left-color:#f59e0b} .bucket.sky{border-left-color:#0ea5e9} .bucket.violet{border-left-color:#5b21b6}
+  .bucket.amber{border-left-color:#f59e0b} .bucket.sky{border-left-color:#0ea5e9} .bucket.violet{border-left-color:#7c3aed}
   /* steps */
   .steps3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;counter-reset:s}
   .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;box-shadow:var(--shadow-sm)}
@@ -131,7 +129,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
 <body>
 <header>
   <div class="bar">
-    <div class="logo"><img src="./icon.svg" alt="MedBank" width="30" height="30" style="border-radius:8px;vertical-align:-8px;margin-right:9px">Med<span>Bank</span></div>
+    <div class="logo">Med<span>Bank</span></div>
     <div class="navlinks">
       <a class="nl" href="#features">Features</a>
       <a class="nl" href="#how">How it works</a>
@@ -194,7 +192,7 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
         <div class="fcard reveal"><div class="icon" style="background:var(--indigo)">📥</div><h3>Import lectures</h3><p>Drop in a PDF or a photo of handwritten notes. Get a full lecturer note, a simplified version, primer &amp; recall decks, and a cram sheet — in seconds.</p></div>
         <div class="fcard reveal"><div class="icon" style="background:var(--teal)">↻</div><h3>Spaced repetition</h3><p>The engine shows each card exactly when you're about to forget it — the proven way to lock things into long-term memory.</p></div>
         <div class="fcard reveal"><div class="icon" style="background:var(--coral)">✨</div><h3>Let AI explain</h3><p>Highlight anything you don't understand and get it taught from first principles — right there, no switching apps.</p><span class="tag">Read &amp; research in one place</span></div>
-        <div class="fcard reveal"><div class="icon" style="background:#5b21b6">🎧</div><h3>Voice tutor</h3><p>Ask questions out loud and get realistic spoken answers — revise hands-free on the go.</p></div>
+        <div class="fcard reveal"><div class="icon" style="background:#7c3aed">🎧</div><h3>Voice tutor</h3><p>Ask questions out loud and get realistic spoken answers — revise hands-free on the go.</p></div>
         <div class="fcard reveal"><div class="icon" style="background:#0ea5e9">📚</div><h3>All your levels</h3><p>From 100 to 600 level — switch between sessions and keep every note, deck and streak you've ever built.</p></div>
         <div class="fcard reveal"><div class="icon" style="background:#ef4444">🔔</div><h3>Hard-card reminders</h3><p>The cards you keep missing resurface as gentle notifications through the day — that's how they finally stick.</p></div>
       </div>

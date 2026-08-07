@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#5b21b6">
+<meta name="theme-color" content="#7c3aed">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -15,8 +15,8 @@
 :root{
   --bg:#f6f5fb; --panel:#ffffff; --panel2:#f1eefb; --line:#e6e3f0;
   --text:#1c1830; --dim:#5c5570; --dimmer:#8b84a0;
-  --accent:#5b21b6; --ped:#0d9488; --og:#5b21b6; --com:#c2790a;
-  --primer:#5b21b6; --recall:#0d9488;
+  --accent:#7c3aed; --ped:#0d9488; --og:#7c3aed; --com:#c2790a;
+  --primer:#7c3aed; --recall:#0d9488;
   --radius:12px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -655,13 +655,13 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .pline{flex:1;height:2px;background:var(--line);min-width:14px;margin-top:-16px}
 </style>
 <style id="mb-polish">
-  #sidebar{background:#efe9fb;border-right-color:#e3ddf1}
+  #sidebar{background:#f4f1fd;border-right-color:#e8e4f4}
   .navitem{transition:background .16s,color .16s,transform .12s}
-  .navitem:hover{transform:translateX(2px);background:#e9e0fa;color:var(--text)}
-  .navitem.active{background:#5b21b6;color:#fff;box-shadow:0 6px 16px rgba(91,33,182,.28)}
+  .navitem:hover{transform:translateX(2px);background:#efeafc;color:var(--text)}
+  .navitem.active{background:#7c3aed;color:#fff;box-shadow:0 6px 16px rgba(124,58,237,.28)}
   .navlabel{color:#9a92ad}
-  .brand .dot{background:#5b21b6;animation:mbpulse 2s ease-in-out infinite}
-  @keyframes mbpulse{0%,100%{box-shadow:0 0 8px rgba(91,33,182,.45)}50%{box-shadow:0 0 18px rgba(91,33,182,.7)}}
+  .brand .dot{background:#7c3aed;animation:mbpulse 2s ease-in-out infinite}
+  @keyframes mbpulse{0%,100%{box-shadow:0 0 8px rgba(124,58,237,.45)}50%{box-shadow:0 0 18px rgba(124,58,237,.7)}}
   button{transition:transform .12s,box-shadow .2s,background .15s,border-color .15s}
   button:hover{transform:translateY(-1px)}
   .card{transition:transform .16s,border-color .16s,box-shadow .2s}
@@ -669,16 +669,16 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   .stat{transition:transform .16s,border-color .16s}
   .btn.primary,.btn.got,.btn.green{color:#fff}
   .md h2,.md strong,.seg .body .stepq{color:var(--text)}
-  .seg .body .takeaway{background:#f4efff;border-left-color:#5b21b6;color:var(--text)}
+  .seg .body .takeaway{background:#f4efff;border-left-color:#7c3aed;color:var(--text)}
   .seg.tie .body .takeaway{background:#fbeecd;border-left-color:var(--com);color:var(--text)}
   .seg.lecturer .body{color:var(--dim)}
-  .confbanner{background:#ece3fb;border-color:#e0d0fb;color:#5b21b6}
+  .confbanner{background:#f2eafe;border-color:#e0d0fb;color:#5b21b6}
   .st.done,.jb-st.done,.st.ready{background:#e2f5ef;color:#0f6e56}
   .st.learn,.jb-st.learn{background:#fbeecd;color:#854f0b}
   .fire{background:linear-gradient(160deg,#fdece7,#fbeede);border-color:#f7cbc0}
   .fire .n,.sflame{color:#e2542f}
   .btn.miss{background:#fdece7;border-color:#f4c0b1;color:#b3391f}
-  .mcqopt:hover:not(:disabled){background:#f5f1fe;border-color:#5b21b6}
+  .mcqopt:hover:not(:disabled){background:#f5f1fe;border-color:#7c3aed}
   .mcqopt.wrong{background:#fdece7;border-color:#f0997b}
   .mcqopt.wrong .mcqtag{background:#f0997b;color:#4a1b0c}
   .mcqopt.wrong .mcqmark,.mcqresult.no,.nextrev.no b,.revtoast .rt.no,.exopt.bad{color:#b3391f}
@@ -687,23 +687,23 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   .examchip.soon b{color:#993c1d}
   .frz{background:#e9f0fd;color:#2b62c9}
   .frz.used{background:#f0eef7;color:var(--dimmer)}
-  .hc.l0{background:#ece8f6}.hc.l1{background:#d7c8f5}.hc.l2{background:#b493ec}.hc.l3{background:#9366e4}.hc.l4{background:#5b21b6}
-  .explbtn{background:linear-gradient(135deg,#5b21b6,#f97362);box-shadow:0 8px 22px rgba(91,33,182,.4)}
-  .micbtn{background:linear-gradient(135deg,#5b21b6,#9b6bf5)}
-  .sendbtn{background:#5b21b6}
-  .vchip.on{border-color:#5b21b6;background:#ece3fb}
+  .hc.l0{background:#ece8f6}.hc.l1{background:#d7c8f5}.hc.l2{background:#b493ec}.hc.l3{background:#9366e4}.hc.l4{background:#7c3aed}
+  .explbtn{background:linear-gradient(135deg,#7c3aed,#f97362);box-shadow:0 8px 22px rgba(124,58,237,.4)}
+  .micbtn{background:linear-gradient(135deg,#7c3aed,#9b6bf5)}
+  .sendbtn{background:#7c3aed}
+  .vchip.on{border-color:#7c3aed;background:#f2eafe}
   .revtoast,.updbanner{box-shadow:0 8px 26px rgba(28,24,48,.14)}
   .navgrp{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;color:var(--dim);cursor:pointer;font-size:14.5px;font-weight:500;margin-bottom:2px;transition:background .14s,color .14s}
-  .navgrp:hover{background:#e9e0fa;color:var(--text)}
+  .navgrp:hover{background:#efeafc;color:var(--text)}
   .navgrp .ic{width:20px;text-align:center;font-size:15px;flex:0 0 20px}
   .navgrp .chev{margin-left:auto;font-size:12px;color:var(--dimmer)}
   .navsub{display:flex;align-items:center;gap:10px;padding:8px 12px 8px 30px;border-radius:9px;color:var(--dim);cursor:pointer;font-size:13.5px;font-weight:500;margin-bottom:1px;transition:background .14s,color .14s}
-  .navsub:hover{background:#e9e0fa;color:var(--text)}
-  .navsub.active{background:#5b21b6;color:#fff}
+  .navsub:hover{background:#efeafc;color:var(--text)}
+  .navsub.active{background:#7c3aed;color:#fff}
   .navsub .ic{width:18px;text-align:center;font-size:13px;flex:0 0 18px}
   .navsub .badge{margin-left:auto;font-size:11px;color:var(--dimmer);font-weight:600}
   .navsub.active .badge{color:rgba(255,255,255,.85)}
-  .navdiv{height:1px;background:#e0d8ef;margin:9px 10px}
+  .navdiv{height:1px;background:#e6e0f2;margin:9px 10px}
   @media(prefers-reduced-motion:reduce){.brand .dot{animation:none}}
 </style>
 </head>
@@ -714,7 +714,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 
 <div id="shell">
   <nav id="sidebar">
-    <div class="brand"><img src="icon.svg" alt="" width="26" height="26" style="border-radius:7px"> MedBank</div>
+    <div class="brand"><span class="dot"></span> MedBank</div>
     <div id="nav"></div>
   </nav>
   <main id="main"></main>
@@ -838,7 +838,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.06h';   // bump this each release
+const APP_VERSION='2026.08.06f';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
