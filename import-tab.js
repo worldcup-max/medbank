@@ -47,7 +47,7 @@
 
     var msg=el("div","margin-top:12px;font-size:13.5px;color:#c0392b;display:none"); s.appendChild(msg);
 
-    var go=el("button","width:100%;margin-top:16px;border:0;background:#4f46e5;color:#fff;border-radius:12px;padding:14px;font-weight:800;cursor:pointer;font-size:15px","Build my study set");
+    var go=el("button","width:100%;margin-top:16px;border:0;background:#5b21b6;color:#fff;border-radius:12px;padding:14px;font-weight:800;cursor:pointer;font-size:15px","Build my study set");
     go.onclick=async function(){
       msg.style.display="none";
       var course_id=sel.value, topicName=(name.value||"").trim();

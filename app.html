@@ -704,6 +704,9 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   .navsub .badge{margin-left:auto;font-size:11px;color:var(--dimmer);font-weight:600}
   .navsub.active .badge{color:rgba(255,255,255,.85)}
   .navdiv{height:1px;background:#e0d8ef;margin:9px 10px}
+  .navimport{background:#f2eafe;color:#4c1d95;font-weight:600}
+  .navimport:hover{background:#e9def9;color:#3b1580;transform:translateX(2px)}
+  .navimport .ic{color:#f97362;font-weight:800}
   @media(prefers-reduced-motion:reduce){.brand .dot{animation:none}}
 </style>
 </head>
@@ -838,7 +841,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.06j';   // bump this each release
+const APP_VERSION='2026.08.06k';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1354,6 +1357,7 @@ function renderNav(){
   const inLib = r==='search'||r.startsWith('cards')||r.startsWith('study')||r==='builder'||r.startsWith('lecturer');
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
+  h += `<div class="navitem navimport" onclick="try{MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Import lectures</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
   h += it('exam','📝','Mock exam','',r==='exam');
