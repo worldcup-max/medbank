@@ -13,6 +13,37 @@
 (function () {
   function haveAppCtx(){ try { return typeof DB !== "undefined" && typeof allTopics !== "undefined"; } catch(e){ return false; } }
 
+  /* Rebuild per-subject counts + the lecturers list from loaded topics, so
+     subject cards show "X topics / Y built / Z cards" and the Lecturers view works. */
+  function recomputeStats(){
+    try{
+      DB.lecturers = DB.lecturers || [];
+      DB.lecturers.length = 0;
+      var lmap = {}, totP = 0, totR = 0;
+      (DB.subjects || []).forEach(function(s){
+        var tps = []; (s.modules || []).forEach(function(m){ (m.topics || []).forEach(function(t){ tps.push(t); }); });
+        var built = 0, cardc = 0, realLec = {};
+        tps.forEach(function(t){
+          var np = (t.primer || []).length, nr = (t.recall || []).length;
+          if(t.ready) built++;
+          cardc += np + nr; totP += np; totR += nr;
+          var ln = (t.lecturer || "").trim() || "To be confirmed";
+          if(ln !== "To be confirmed") realLec[ln] = 1;
+          var lid = "lec_" + s.id + "_" + ln.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+          if(!lmap[lid]){ lmap[lid] = { id:lid, name:ln, subjectId:s.id, subject:s.name, topics:[], readyCount:0 }; DB.lecturers.push(lmap[lid]); }
+          lmap[lid].topics.push(t);
+          if(t.ready) lmap[lid].readyCount++;
+        });
+        s.topicCount = tps.length; s.readyCount = built; s.cardCount = cardc;
+        s.lecturerCount = Object.keys(realLec).length; if(!s.short) s.short = s.name;
+      });
+      DB.stats = DB.stats || {};
+      DB.stats.primerCards = totP; DB.stats.recallCards = totR;
+      DB.stats.lecturers = DB.lecturers.filter(function(l){ return l.name !== "To be confirmed"; }).length;
+      DB.stats.topics = (DB.subjects || []).reduce(function(a,s){ return a + (s.topicCount || 0); }, 0);
+    }catch(e){}
+  }
+
   async function loadProfileContent(){
     try{
       var sb = window.__mbSB; if(!sb) return;
@@ -61,7 +92,8 @@
         });
       });
 
-      if(added){ try{ if(typeof render === "function") render(); }catch(e){} }
+      recomputeStats();
+      try{ if(typeof render === "function") render(); }catch(e){}
       return added;
     }catch(e){ /* never break the app */ }
   }
