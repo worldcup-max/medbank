@@ -193,6 +193,10 @@
       try{
         var r=await sb.auth.signUp({ email:em, password:pw, options:{ data:{ full_name:nm } } });
         if(r.error) throw r.error;
+        if(r.data.user && Array.isArray(r.data.user.identities) && r.data.user.identities.length===0){
+          renderSignin(sb, { email:em, note:"You already have an account with this email. Just sign in below." });
+          return;
+        }
         if(r.data.user){ try{ await sb.from("signup_signals").insert({ account_id:r.data.user.id, fingerprint:fp() }); }catch(_){} }
         stashPending();
         if(!r.data.session){ renderCheckEmail(sb, em); return; }
@@ -212,9 +216,12 @@
   }
 
   /* ---- sign-in (returning) ---- */
-  function renderSignin(sb){
+  function renderSignin(sb, opts){
+    opts=opts||{};
     var s=card({ title:"Welcome back", sub:"Sign in to pick up where you left off." });
+    if(opts.note){ s.appendChild(el("div","background:#f2eafe;color:#4c1d95;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:2px",opts.note)); }
     var email=input(s,"Email","email","you@example.com");
+    if(opts.email){ email.value=opts.email; }
     var pass=input(s,"Password","password","Your password");
     var e=err(s);
     var go=btn(s,"Sign in",true);
