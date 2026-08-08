@@ -27,8 +27,8 @@
       if(!courses.length) return;
       var courseIds = courses.map(function(c){ return c.id; });
 
-      var topics = (await sb.from("topics").select("id,course_id,title,lecturer,note_md,simplified_md")
-                      .in("course_id", courseIds).eq("status","ready")).data || [];
+      var topics = (await sb.from("topics").select("id,course_id,title,lecturer,note_md,simplified_md,status")
+                      .in("course_id", courseIds)).data || [];
       var topicIds = topics.map(function(t){ return t.id; });
 
       var cards = topicIds.length
@@ -51,7 +51,7 @@
           if(allTopics.some(function(x){ return x.id === t.id; })) return;   // already loaded
           var g = byTopic[t.id] || { primer:[], recall:[] };
           var topic = {
-            id: t.id, name: t.title, lecturer: t.lecturer || "", ready: true,
+            id: t.id, name: t.title, lecturer: t.lecturer || "", ready: (t.status === "ready"),
             note: t.note_md || "", simplified: t.simplified_md || "",
             primer: g.primer, recall: g.recall
           };
