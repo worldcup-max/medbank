@@ -21,7 +21,7 @@ window.MEDBANK_CONFIG = {
   VIDEO_URL: "",
 
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
-  IMPORT_API: "",
+  IMPORT_API: "https://medbank-import.onrender.com",
   // Your website URL — paywall nudges link here for subscribing.
   WEBSITE_URL: "https://medbank.com.ng",
 
