@@ -101,12 +101,17 @@
         }
       }
 
-      setStat("Re-applying your progress…");
+      setStat("Re-applying your progress to your account…");
       var restored = remap(backup, topicMap, subjMap);
-      localStorage.setItem(SKEY, JSON.stringify(restored));
-      setStat("Done ✓ — notes and progress restored. Reloading…");
+      // write progress straight to the account so ALL your devices get it
+      var ms = await sb.from("profile_state").select("rev").eq("level_profile_id", lp).maybeSingle();
+      var rev = ((ms.data && ms.data.rev) || 0) + 1;
+      var up = await sb.from("profile_state").upsert({ level_profile_id: lp, state: restored, rev: rev, device_updated_at: new Date().toISOString() }, { onConflict:"level_profile_id" });
+      if(up.error){ setStat("Progress save failed: "+up.error.message); return fin(false); }
+      try{ localStorage.setItem(SKEY, JSON.stringify(restored)); }catch(_){}
+      setStat("Done ✓  Rebuilt "+totT+" topics, "+totC+" cards, and restored your progress. Reloading…");
       fin(true);
-      setTimeout(function(){ try{ location.href = location.origin + "/app.html"; }catch(e){ location.reload(); } }, 1200);
+      setTimeout(function(){ try{ location.href = location.origin + "/app.html"; }catch(e){ location.reload(); } }, 1500);
     }catch(e){ setStat("Error: "+(e.message||e)); fin(false); }
   }
 
