@@ -261,8 +261,15 @@
   async function startSync(sb, fresh){
     try{ if(window.MB_SYNC) await MB_SYNC.init(sb); }catch(_){}
     updateChip();
-    var s=card({ title:"You're all set ✓", sub: fresh ? "Your "+CHOSEN.level+" level space is ready and syncing across your devices." : "Signed in — your progress is syncing." });
-    btn(s,"Start studying",true).onclick=function(){ close(); try{ if(location.hash.indexOf("welcome")<0 && !location.hash) location.hash="#/today"; }catch(_){} };
+    if(fresh){
+      close();
+      try{ location.hash="#/home"; }catch(_){}
+      // first lecture is required — open the importer with no skip
+      setTimeout(function(){ try{ if(window.MB_openImport) MB_openImport({ mandatory:true }); }catch(_){} }, 80);
+    } else {
+      var s2=card({ title:"You're all set ✓", sub:"Signed in — your progress is syncing." });
+      btn(s2,"Continue",true).onclick=function(){ close(); };
+    }
   }
 
   async function showAccount(sb){
