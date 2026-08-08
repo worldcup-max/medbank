@@ -233,8 +233,31 @@
       try{ var r=await sb.auth.signInWithPassword({ email:em, password:pw }); if(r.error) throw r.error; await afterAuth(sb); }
       catch(ex){ fail(e, friendly(ex)); go.disabled=false; go.textContent="Sign in"; }
     };
+    link(s,"Forgot password?").onclick=async function(){
+      var em2=(email.value||"").trim();
+      if(!em2){ fail(e,"Enter your email above first, then tap Forgot password."); return; }
+      try{ await sb.auth.resetPasswordForEmail(em2, { redirectTo:(location.origin||"")+"/app.html" }); }catch(_){}
+      var s2=card({ title:"Check your email", sub:"If an account exists for "+esc(em2)+", we've sent a link to reset your password. Open it to choose a new one." });
+      s2.appendChild(el("div","font-size:12.5px;color:"+C.dim+";margin-top:2px","Can't find it? Check your spam or promotions folder."));
+      btn(s2,"Back to sign in",true).onclick=function(){ renderSignin(sb,{ email:em2 }); };
+    };
     link(s,"New here? Create an account").onclick=function(){ renderWelcome(sb); };
     link(s,"Close").onclick=close;
+  }
+
+  /* ---- password reset landing (opened from the emailed link) ---- */
+  function renderResetPassword(sb){
+    var s=card({ title:"Set a new password", sub:"Choose a new password for your MedBank account.", dismiss:false });
+    var p1=input(s,"New password","password","At least 6 characters");
+    var e=err(s);
+    var go=btn(s,"Update password & sign in",true);
+    go.onclick=async function(){
+      e.style.display="none";
+      var pw=p1.value; if(!pw||pw.length<6){ fail(e,"Use at least 6 characters for your password."); return; }
+      go.disabled=true; go.textContent="Updating…";
+      try{ var r=await sb.auth.updateUser({ password:pw }); if(r.error) throw r.error; close(); await afterAuth(sb); }
+      catch(ex){ fail(e, friendly(ex)); go.disabled=false; go.textContent="Update password & sign in"; }
+    };
   }
 
   /* ---- after auth: route to sync / pending onboarding / setup ---- */
@@ -326,6 +349,7 @@
   if(typeof document!=="undefined"){
     if(configured()) document.addEventListener("DOMContentLoaded", function(){
       setTimeout(ensureChip, 800);
+      try{ var sbr=client(); if(sbr && sbr.auth && sbr.auth.onAuthStateChange){ sbr.auth.onAuthStateChange(function(ev){ if(ev==="PASSWORD_RECOVERY"){ try{ renderResetPassword(sbr); }catch(_){} } }); } }catch(_){}
       try{
         var wantsWelcome = /(\?|&)welcome=1\b/.test(location.search) || /welcome/.test(location.hash);
         if(wantsWelcome){ var sb=client(); if(sb) loadServerTemplates(sb); setTimeout(openWelcome, 700); }
