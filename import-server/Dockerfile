@@ -1,6 +1,6 @@
 # Alternative to render.yaml — deploy the import server anywhere that runs containers
 # (Fly.io, Railway, Cloud Run, etc.). Set the env vars from render.yaml on the host.
-FROM node:20-slim
+FROM node:22-slim
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev
