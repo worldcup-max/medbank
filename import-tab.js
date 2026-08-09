@@ -35,6 +35,7 @@
     if(window.MB_PAYWALL && !MB_PAYWALL.guard("Adding a lecture")) return;
     if(typeof document === "undefined") return;
     var cs = await courses();
+    var isAdmin=false; try{ var _me=await window.__mbSB.from("accounts").select("is_admin").maybeSingle(); isAdmin=!!(_me.data&&_me.data.is_admin); }catch(e){}
 
     var o = el("div","position:fixed;inset:0;background:rgba(28,20,45,.55);display:flex;align-items:flex-end;justify-content:center;z-index:100001;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
     var s = el("div","background:#fff;width:100%;max-width:460px;max-height:94vh;overflow-y:auto;border-radius:18px 18px 0 0;padding:20px 18px 26px;box-shadow:0 -12px 44px rgba(28,20,45,.28)");
@@ -78,6 +79,14 @@
     s.appendChild(el("div",lbl,"Lecture file (PDF) or photos"));
     var file=el("input","width:100%;font-size:14px;margin-top:2px"); file.type="file"; file.accept=".pdf,image/*"; file.multiple=true; s.appendChild(file);
 
+    var modelSel=null;
+    if(isAdmin){
+      s.appendChild(el("div",lbl,"Model (admin A/B)"));
+      modelSel=el("select",inCss);
+      [["","Default (trial / paid setting)"],["claude-sonnet-5","Claude Sonnet 5"],["claude-haiku-4-5-20251001","Claude Haiku 4.5"],["gpt-5-mini","OpenAI GPT-5 mini"],["deepseek-chat","DeepSeek"],["gemini-2.5-flash","Gemini 2.5 Flash"],["gemini-2.5-flash-lite","Gemini 2.5 Flash-Lite"]].forEach(function(o){ var op=document.createElement("option"); op.value=o[0]; op.textContent=o[1]; modelSel.appendChild(op); });
+      s.appendChild(modelSel);
+    }
+
     var msg=el("div","margin-top:12px;font-size:13.5px;color:#b3391f;display:none;background:#fdece7;border-radius:9px;padding:9px 11px"); s.appendChild(msg);
     function show(m){ msg.textContent=m; msg.style.display="block"; }
 
@@ -94,6 +103,7 @@
       go.disabled=true; go.textContent="Building… this can take ~30–60s";
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
+        if(modelSel && modelSel.value) body.model=modelSel.value;
         var files=[].slice.call(file.files);
         var pdf=files.find(function(f){ return /\.pdf$/i.test(f.name); });
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }

@@ -72,6 +72,61 @@ async function extractContent(body){
   return { parts, images };
 }
 
+/* ---- multi-provider generation: routes by model name ----
+ * claude -> Anthropic | gpt / o -> OpenAI | deepseek -> DeepSeek | gemini -> Gemini
+ * Keys (set on the host as needed): ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, GEMINI_API_KEY
+ * Returns { text, usage:{input_tokens, output_tokens} }. */
+async function generate({ model, prompt, parts, images, max_tokens, temperature }){
+  const m = (model||"").toLowerCase();
+  const textParts = (parts||[]).map(p=>p.text);
+  const imgs = (images||[]).map(im=>({ media_type: im.source.media_type, data: im.source.data }));
+
+  if(m.startsWith("claude")){
+    const resp = await anthropic.messages.create({
+      model, max_tokens, temperature,
+      messages:[{ role:"user", content:[{ type:"text", text:prompt }, ...(images||[]), ...(parts||[]) ] }]
+    });
+    return { text: resp.content.map(b=>b.type==="text"?b.text:"").join(""),
+             usage:{ input_tokens:(resp.usage||{}).input_tokens, output_tokens:(resp.usage||{}).output_tokens } };
+  }
+
+  if(m.startsWith("gemini")){
+    const key = process.env.GEMINI_API_KEY; if(!key) throw new Error("GEMINI_API_KEY not set");
+    const gparts = [{ text: prompt }]
+      .concat(imgs.map(i=>({ inline_data:{ mime_type:i.media_type, data:i.data } })))
+      .concat(textParts.map(t=>({ text:t })));
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+key, {
+      method:"POST", headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ contents:[{ role:"user", parts:gparts }], generationConfig:{ maxOutputTokens:max_tokens, temperature } })
+    });
+    const j = await r.json();
+    if(!r.ok) throw new Error("Gemini: "+((j.error&&j.error.message)||r.status));
+    const cand=((j.candidates||[])[0]||{}).content||{};
+    const text=(cand.parts||[]).map(p=>p.text||"").join("");
+    const um=j.usageMetadata||{};
+    return { text, usage:{ input_tokens:um.promptTokenCount, output_tokens:um.candidatesTokenCount } };
+  }
+
+  // OpenAI-compatible: OpenAI + DeepSeek
+  const isDeep = m.startsWith("deepseek");
+  const base = isDeep ? "https://api.deepseek.com/v1" : "https://api.openai.com/v1";
+  const key = isDeep ? process.env.DEEPSEEK_API_KEY : process.env.OPENAI_API_KEY;
+  if(!key) throw new Error((isDeep?"DEEPSEEK_API_KEY":"OPENAI_API_KEY")+" not set");
+  const content = [{ type:"text", text:prompt }];
+  if(!isDeep) imgs.forEach(i=> content.push({ type:"image_url", image_url:{ url:"data:"+i.media_type+";base64,"+i.data } }));
+  textParts.forEach(t=> content.push({ type:"text", text:t }));
+  const body = { model, messages:[{ role:"user", content }] };
+  if(isDeep){ body.max_tokens = max_tokens; body.temperature = temperature; }
+  else { body.max_completion_tokens = max_tokens; }   // OpenAI newer models: leave temperature default
+  const r = await fetch(base+"/chat/completions", { method:"POST",
+    headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body) });
+  const j = await r.json();
+  if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
+  const text=(((j.choices||[])[0]||{}).message||{}).content||"";
+  const u=j.usage||{};
+  return { text, usage:{ input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens } };
+}
+
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
 app.post("/import", async (req,res)=>{
@@ -100,17 +155,16 @@ app.post("/import", async (req,res)=>{
     const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
     const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
     const trialModel = (cfg.data && cfg.data.value) || pt.data.model;   // jsonb string → JS string
-    const model = (paid.data && paid.data.status==="active") ? pt.data.model : trialModel;
+    let model = (paid.data && paid.data.status==="active") ? pt.data.model : trialModel;
+    // admins may override the model per import (for A/B testing)
+    if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
 
     const prompt = pt.data.template
       .replace(/\{\{topicName\}\}/g, topicName).replace(/\{\{lecturer\}\}/g, lecturer||"").replace(/\{\{subject\}\}/g, subject||"");
     const { parts, images } = await extractContent(req.body);
 
-    const resp = await anthropic.messages.create({
-      model, max_tokens: pt.data.max_tokens || 16000, temperature: Number(pt.data.temperature) || 0.3,
-      messages:[{ role:"user", content:[{ type:"text", text:prompt }, ...images, ...parts] }]
-    });
-    let raw = resp.content.map(b=>b.type==="text"?b.text:"").join("");
+    const gen = await generate({ model, prompt, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: Number(pt.data.temperature) || 0.3 });
+    let raw = gen.text;
     const s=raw.indexOf("{"), e=raw.lastIndexOf("}");
     let obj; try{ obj=JSON.parse(raw.slice(s,e+1)); }catch(err){ await admin.from("imports").update({ status:"failed", error:"bad json" }).eq("id",importId); return res.status(502).json({ error:"model returned invalid JSON" }); }
     const errs = validateObj(obj);
@@ -132,7 +186,7 @@ app.post("/import", async (req,res)=>{
     if(cw.error) throw cw.error;
 
     // --- meter usage ---
-    const usage = resp.usage || {};
+    const usage = gen.usage || {};
     await admin.from("imports").update({ status:"done", topic_id:topicId, model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
