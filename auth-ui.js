@@ -374,7 +374,8 @@
   }
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9999;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
+    chip=el("button","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9999;width:40px;height:40px;border-radius:50%;transition:right .24s ease;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
+    chip.id="mbAvatar";
     chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
     document.body.appendChild(chip);
     updateChip();

@@ -48,13 +48,15 @@
     var st=document.createElement("style");
     st.textContent=
       "#mbDockTab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9996;background:linear-gradient(135deg,#6d28d9,#5b21b6);color:#fff;"+
-        "border:0;border-radius:12px 0 0 12px;padding:14px 8px;font:800 12px/1 -apple-system,Segoe UI,Roboto,sans-serif;cursor:pointer;"+
-        "writing-mode:vertical-rl;text-orientation:mixed;box-shadow:0 6px 20px rgba(91,33,182,.4);letter-spacing:.5px;display:none}"+
+        "border:0;border-radius:14px 0 0 14px;padding:26px 13px;font:800 15px/1 -apple-system,Segoe UI,Roboto,sans-serif;cursor:pointer;"+
+        "writing-mode:vertical-rl;text-orientation:mixed;box-shadow:0 6px 22px rgba(91,33,182,.45);letter-spacing:1px;display:none}"+
       "#mbDockScrim{position:fixed;inset:0;z-index:100000;background:rgba(28,20,45,.4);opacity:0;transition:opacity .2s;pointer-events:none}"+
       "#mbDockScrim.on{opacity:1;pointer-events:auto}"+
       "#mbDock{position:fixed;top:0;right:0;bottom:0;z-index:100001;width:min(420px,92vw);background:#fff;box-shadow:-14px 0 44px rgba(28,20,45,.25);"+
         "transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:"+INK+"}"+
       "#mbDock.on{transform:translateX(0)}"+
+      /* desktop: pinned side panel that pushes content instead of overlaying */
+      "@media(min-width:1024px){#mbDock{width:360px}#shell{transition:padding-right .24s ease}body.mb-dock-open #shell{padding-right:360px}body.mb-dock-open #mbDockScrim{display:none}body.mb-dock-open #mbAvatar{right:374px!important}}"+
       "#mbDock .dhead{display:flex;align-items:center;gap:6px;padding:calc(env(safe-area-inset-top,0px) + 12px) 12px 10px;border-bottom:1px solid "+LINE+"}"+
       "#mbDock .dtab{flex:1;text-align:center;padding:9px 6px;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer;color:"+DIM+"}"+
       "#mbDock .dtab.on{background:"+TINT+";color:"+V+"}"+
@@ -70,15 +72,30 @@
       "#mbDock .md{font-size:14.5px;line-height:1.6}#mbDock .md h1,#mbDock .md h2,#mbDock .md h3{font-size:16px;margin:.6em 0 .3em}";
     document.head.appendChild(st);
 
-    tab=document.createElement("button"); tab.id="mbDockTab"; tab.textContent="✨ Ask";
+    tab=document.createElement("button"); tab.id="mbDockTab"; tab.textContent="✨ Ask AI";
     tab.onclick=function(){ open(); };
     scrim=document.createElement("div"); scrim.id="mbDockScrim"; scrim.onclick=close;
     drawer=document.createElement("div"); drawer.id="mbDock";
     document.body.appendChild(tab); document.body.appendChild(scrim); document.body.appendChild(drawer);
   }
 
-  function open(tabName){ active=tabName||active||"ask"; render(); scrim.classList.add("on"); drawer.classList.add("on"); }
-  function close(){ scrim.classList.remove("on"); drawer.classList.remove("on"); }
+  var isOpen=false;
+  function isDesktop(){ return !!(window.matchMedia && window.matchMedia("(min-width:1024px)").matches); }
+  function onStudy(){ var d=DOCK(); return !!(d && d.onStudyScreen && d.onStudyScreen()); }
+  function persist(){ try{ localStorage.setItem("mb_dock_open", isOpen?"1":"0"); }catch(_){} }
+  function apply(){
+    if(isOpen && onStudy()){
+      drawer.classList.add("on");
+      if(isDesktop()){ document.body.classList.add("mb-dock-open"); scrim.classList.remove("on"); }  // pinned, pushes content
+      else { document.body.classList.remove("mb-dock-open"); scrim.classList.add("on"); }             // mobile overlay
+      if(tab) tab.style.display="none";
+    } else {
+      drawer.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("mb-dock-open");
+      if(tab) tab.style.display = onStudy() ? "block" : "none";
+    }
+  }
+  function open(tabName){ active=tabName||active||"ask"; isOpen=true; render(); apply(); persist(); }
+  function close(){ isOpen=false; apply(); persist(); }
 
   function setTab(t){ hl=""; hlT=null; active=t; render(); }   // manual tab switch clears any pending highlight
 
@@ -162,17 +179,17 @@
     }
   }
 
-  function syncTab(){
-    var d=DOCK();
-    var show = d && d.onStudyScreen && d.onStudyScreen();
-    if(tab) tab.style.display = show ? "block" : "none";
-    if(!show){ close(); }
-  }
+  function syncTab(){ apply(); }
 
   function boot(){
     if(!window.MB_DOCK) return;   // provider not present
-    inject(); syncTab();
-    window.addEventListener("hashchange", function(){ syncTab(); if(drawer && drawer.classList.contains("on")) render(); });
+    inject();
+    var saved=null; try{ saved=localStorage.getItem("mb_dock_open"); }catch(_){}
+    isOpen = saved==="1" ? true : saved==="0" ? false : isDesktop();   // default: pinned open on desktop, closed on mobile
+    if(isOpen && onStudy()) render();
+    apply();
+    window.addEventListener("hashchange", function(){ if(isOpen && onStudy()) render(); apply(); });
+    window.addEventListener("resize", function(){ apply(); });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
