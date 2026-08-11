@@ -735,6 +735,26 @@ window.MB_STREAK = function(){ try{ return curStreak(); }catch(e){ return 0; } }
 /* study time lives inside DATA so it syncs with the account via profile_state (same path as cards) */
 window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) return; var k=dstr(); DATA.study[k]=(DATA.study[k]||0)+sec; persist(); }catch(e){} };
 window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ return {}; } };
+/* provider for the docked Ask / Source / Note panel (study-dock.js) */
+window.MB_DOCK = {
+  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0]; return ['topic','study','review','cram','today','hard','leeches','mistakes','nudge','hardnudge'].indexOf(r)>=0; },
+  ctx: function(){
+    var t=null, card=null, cardId=null;
+    try{ if(typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } } }catch(e){}
+    if(!t){ var p=(location.hash.slice(2)||'').split('/'); if(p[1] && (p[0]==='topic'||p[0]==='study'||p[0]==='cram')){ try{ t=topById(p[1]); }catch(e){} } }
+    if(!t) return null;
+    return { topicId:t.id, topicName:t.name||'', subject:(t.subject&&t.subject.name)||'', pdf:t.pdf||'',
+             noteHtml: t.note?md(t.note):'', simplifiedHtml: t.simplified?md(t.simplified):'',
+             cardId:cardId||'', cardQ:card?(card.q||''):'', personalNote: cardId?getNote(cardId):'' };
+  },
+  ask: function(userMsg, history, ctx){
+    var sys='You are MedBank’s concise study tutor for a medical student. Topic: "'+((ctx&&ctx.topicName)||'this lecture')+'".'+((ctx&&ctx.cardQ)?(' The card on screen asks: "'+ctx.cardQ+'".'):'')+' Answer briefly and clearly, exam-focused, no fluff.';
+    var model=DATA.settings.explainModel||DATA.settings.tutorEngine||'claude-sonnet-5';
+    return claudeTutor(sys, (history||[]).concat([{role:'user',text:userMsg}]), model);
+  },
+  saveNote: function(cardId, txt){ if(cardId){ try{ setNote(cardId, txt); }catch(e){} } },
+  md: function(x){ try{ return md(x); }catch(e){ return (x||''); } }
+};
 
 /* ---------- images ---------- */
 let IMGBASE = '';                       // set per topic before rendering
@@ -847,7 +867,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.07d';   // bump this each release
+const APP_VERSION='2026.08.07e';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -3446,6 +3466,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="import-tab.js"></script>
 <script src="lecture-record.js"></script>
 <script src="study-timer.js"></script>
+<script src="study-dock.js"></script>
 <script src="content-loader.js"></script>
 <script src="auth-ui.js"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC) MB_SYNC.init(); }catch(e){} });</script>

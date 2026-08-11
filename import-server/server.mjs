@@ -88,6 +88,15 @@ async function extractContent(body){
   if(body.text) parts.push({ type:"text", text:"RAW LECTURE:\n\n"+body.text });
   if(body.pdf_base64){ const pdf=require("pdf-parse"); const d=await pdf(Buffer.from(body.pdf_base64,"base64")); parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+d.text }); }
   if(body.audio_base64){ const tx=await transcribeAudio(body.audio_base64, body.audio_mime); if(tx) parts.push({ type:"text", text:"RAW LECTURE (RECORDED IN CLASS, AUTO-TRANSCRIBED):\n\n"+tx }); }
+  if(body.youtube_url){
+    const { YoutubeTranscript } = require("youtube-transcript");
+    let items;
+    try{ items = await YoutubeTranscript.fetchTranscript(body.youtube_url); }
+    catch(e){ throw new Error("Couldn't read this video's captions. Make sure it's a public video that has captions/subtitles, or paste the text or upload the slides instead."); }
+    const txt = (items||[]).map(x=>x.text).join(" ").replace(/\s+/g," ").trim();
+    if(!txt) throw new Error("This video has no readable captions. Try one with subtitles, or paste the text instead.");
+    parts.push({ type:"text", text:"RAW LECTURE (YOUTUBE TRANSCRIPT):\n\n"+txt });
+  }
   (body.images||[]).forEach(img=>{ images.push({ type:"image", source:{ type:"base64", media_type:img.media_type||"image/jpeg", data:img.data } }); });
   return { parts, images };
 }
@@ -165,7 +174,7 @@ app.post("/import", async (req,res)=>{
     if(!topicName || !course_id) return res.status(400).json({ error:"topicName and course_id required" });
 
     // --- record the import as processing ---
-    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.images?"images":"text")) }).select("id").single();
+    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))) }).select("id").single();
     const importId = imp.data && imp.data.id;
 
     // --- load the ACTIVE prompt (live-editable in the DB) ---
@@ -193,7 +202,7 @@ app.post("/import", async (req,res)=>{
     // --- save the topic + cards ---
     const topic = await admin.from("topics").insert({
       course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
-      source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.images?"images":"text")),
+      source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))),
       note_md: obj.note_md, simplified_md: obj.simplified_md
     }).select("id").single();
     if(topic.error) throw topic.error;

@@ -77,6 +77,7 @@
 
     /* Source: recorded audio (record-first) OR file upload + record button */
     var recAudio = opts.audioBlob || null, recMime = opts.audioMime || "", recDur = opts.durationSec || 0;
+    var srcMode = "file", yt = null, pasteTa = null;   // set by the source selector below
     var file=el("input","width:100%;font-size:14px;margin-top:2px"); file.type="file"; file.accept=".pdf,image/*"; file.multiple=true;
     function two(n){ return String(n).padStart(2,"0"); }
     if(recAudio){
@@ -90,11 +91,29 @@
       s.appendChild(file);
       s.appendChild(el("div","font-size:12px;color:"+DIM+";margin-top:6px","MedBank will build one study set from the recording and anything you add here."));
     } else {
-      s.appendChild(el("div",lbl,"Lecture file (PDF) or photos"));
-      s.appendChild(file);
-      var recBtn=el("button","width:100%;margin-top:9px;border:1px solid "+V+";background:#fff;color:"+V+";border-radius:11px;padding:11px;font-weight:800;cursor:pointer;font-size:14px","🎙  Record the lecture instead");
-      recBtn.onclick=function(){ if(o.parentNode) document.body.removeChild(o); if(window.MB_openRecorder) MB_openRecorder(); };
-      s.appendChild(recBtn);
+      /* one universal source selector: File / YouTube / Paste / Record */
+      s.appendChild(el("div",lbl,"Lecture source"));
+      var segWrap=el("div","display:flex;gap:6px;flex-wrap:wrap");
+      var yt=el("input",inCss+";margin-top:10px;display:none"); yt.placeholder="Paste a YouTube link (video with captions)";
+      var pasteTa=el("textarea",inCss+";margin-top:10px;min-height:130px;resize:vertical;font-family:inherit;display:none"); pasteTa.placeholder="Paste the lecture text, transcript or your notes here…";
+      var fileHint=el("div","font-size:12px;color:"+DIM+";margin-top:6px","PDF of the slides, or clear photos of your notes.");
+      function paintSeg(){
+        file.style.display   = srcMode==="file"?"block":"none";
+        fileHint.style.display = srcMode==="file"?"block":"none";
+        yt.style.display     = srcMode==="youtube"?"block":"none";
+        pasteTa.style.display= srcMode==="paste"?"block":"none";
+        Array.prototype.forEach.call(segWrap.children,function(b){ var on=b.dataset.m===srcMode; b.style.background=on?V:"#fff"; b.style.color=on?"#fff":INK; b.style.borderColor=on?V:LINE; });
+      }
+      function seg(id,label){
+        var b=el("button","flex:1;min-width:70px;border:1px solid "+LINE+";background:#fff;color:"+INK+";border-radius:10px;padding:9px 6px;font-weight:700;font-size:13px;cursor:pointer",label);
+        b.dataset.m=id;
+        b.onclick=function(){ if(id==="record"){ if(o.parentNode) document.body.removeChild(o); if(window.MB_openRecorder) MB_openRecorder(); return; } srcMode=id; paintSeg(); };
+        return b;
+      }
+      [seg("file","📄 File"),seg("youtube","▶ YouTube"),seg("paste","✍ Paste"),seg("record","🎙 Record")].forEach(function(b){ segWrap.appendChild(b); });
+      s.appendChild(segWrap);
+      s.appendChild(file); s.appendChild(fileHint); s.appendChild(yt); s.appendChild(pasteTa);
+      paintSeg();
     }
 
     var modelSel=null;
@@ -116,13 +135,22 @@
       if(!course_id){ show("Pick a course."); return; }
       if(!lecturer){ show("Choose or add the lecturer's name."); return; }
       if(!topicName){ show("Enter the topic / lecture title."); return; }
-      if(!recAudio && (!file.files || !file.files.length)){ show("Choose a PDF or some photos."); return; }
+      var ytVal = yt ? (yt.value||"").trim() : "", pasteVal = pasteTa ? (pasteTa.value||"").trim() : "";
+      if(!recAudio){
+        if(srcMode==="file" && (!file.files || !file.files.length)){ show("Choose a PDF or some photos."); return; }
+        if(srcMode==="youtube" && !/(?:youtube\.com|youtu\.be)\//i.test(ytVal)){ show("Paste a valid YouTube link."); return; }
+        if(srcMode==="paste" && pasteVal.length<40){ show("Paste a bit more of the lecture text to build from."); return; }
+      }
       if(!CFG.IMPORT_API){ show("Import isn't configured yet. Try again shortly."); return; }
-      go.disabled=true; go.textContent = recAudio ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
+      var slow = recAudio || srcMode==="youtube";
+      go.disabled=true; go.textContent = slow ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
         if(modelSel && modelSel.value) body.model=modelSel.value;
         if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
+        if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }
+        if(!recAudio && srcMode==="paste"){ body.text = pasteVal; }
+        // files: used in file mode, and as an optional add-on to a recording
         var files=[].slice.call(file.files||[]);
         var pdf=files.find(function(f){ return /\.pdf$/i.test(f.name); });
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }
