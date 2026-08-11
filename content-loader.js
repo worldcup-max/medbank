@@ -50,7 +50,8 @@
       var ses = await sb.auth.getSession(); if(!ses.data.session) return;
       if(!haveAppCtx()) return;                     // must run inside the app
 
-      var acc = await sb.from("accounts").select("active_level_profile_id").maybeSingle();
+      var acc = await sb.from("accounts").select("active_level_profile_id,is_admin").maybeSingle();
+      try{ window.IS_ADMIN = !!(acc.data && acc.data.is_admin); }catch(e){}
       var pid = acc.data && acc.data.active_level_profile_id;
       if(!pid) return;
 

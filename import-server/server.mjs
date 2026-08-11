@@ -332,6 +332,46 @@ app.post("/build-extra", async (req,res)=>{
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* ---- Admin: edit build prompts per kind × level (only is_admin accounts) ---- */
+async function requireAdmin(req){
+  const user = await getUser(req); if(!user) return null;
+  const a = await admin.from("accounts").select("is_admin").eq("id",user.id).maybeSingle();
+  return (a.data && a.data.is_admin) ? user : null;
+}
+app.get("/admin/prompt", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const kind = req.query.kind || "core";
+    const level = (req.query.level==null || req.query.level==="") ? null : Number(req.query.level);
+    let q = admin.from("prompt_templates").select("template,model,max_tokens,temperature").eq("key","import_generation").eq("kind",kind).eq("is_active",true);
+    q = level!=null ? q.eq("level",level) : q.is("level",null);
+    const r = await q.maybeSingle();
+    res.json({ ok:true, row: r.data || null, defaultPrompt: (kind!=="core" ? (DEFAULT_PROMPTS[kind]||"") : "") });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/prompt", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { kind, template } = req.body;
+    if(!kind || !template) return res.status(400).json({ error:"kind and template required" });
+    const lv = (req.body.level==null || req.body.level==="") ? null : Number(req.body.level);
+    // inherit model/tokens/temp from the core default so we never violate a NOT NULL column
+    const base = await admin.from("prompt_templates").select("model,max_tokens,temperature").eq("key","import_generation").eq("kind","core").is("level",null).eq("is_active",true).maybeSingle();
+    const bd = base.data || {};
+    const row = { key:"import_generation", kind, level:lv, template, is_active:true,
+      model: req.body.model || bd.model || "claude-sonnet-5",
+      max_tokens: Number(req.body.max_tokens) || bd.max_tokens || 16000,
+      temperature: (req.body.temperature!=null && req.body.temperature!=="") ? Number(req.body.temperature) : (bd.temperature!=null ? bd.temperature : 0.3) };
+    let q = admin.from("prompt_templates").select("id").eq("key","import_generation").eq("kind",kind).eq("is_active",true);
+    q = lv!=null ? q.eq("level",lv) : q.is("level",null);
+    const ex = await q.maybeSingle();
+    const r = ex.data ? await admin.from("prompt_templates").update(row).eq("id",ex.data.id)
+                      : await admin.from("prompt_templates").insert(row);
+    if(r.error) return res.status(500).json({ error:r.error.message });
+    res.json({ ok:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
 app.post("/paystack/webhook", async (req,res)=>{
   try{

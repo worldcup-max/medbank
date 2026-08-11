@@ -868,7 +868,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.07m';   // bump this each release
+const APP_VERSION='2026.08.07n';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1424,6 +1424,7 @@ function renderNav(){
   }
   h += '<div class="navdiv"></div>';
   h += it('settings','⚙','Settings','',r==='settings');
+  if(window.IS_ADMIN) h += it('admin','🛠','Prompt editor','',r==='admin');
   $('#nav').innerHTML = h;
 }
 function go(route){location.hash='#/'+route;document.body.classList.remove('navopen');}
@@ -1787,6 +1788,67 @@ async function wtGrade(i){
     const txt=await claudeTutor('You are a fair, concise medical examiner marking a short answer.', [{role:'user',text:prompt}], DATA.settings.explainModel||DATA.settings.tutorEngine||'claude-sonnet-5');
     res.innerHTML='<div class="md" style="background:var(--panel2,#f1eefb);border-radius:10px;padding:11px 13px">'+md(txt)+'</div>';
   }catch(e){ res.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI to mark this — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
+}
+
+/* ===== Admin: per-build × per-level prompt editor (is_admin only) ===== */
+function pageAdmin(){
+  if(!window.IS_ADMIN) return pageHome();
+  setTimeout(admFetch,40);
+  const kinds=[['core','Core (note + cards)'],['cram','Cram sheet'],['fill_blank','Fill-in-the-blank'],['written','Written test']];
+  const levels=[['','Default (all levels)'],['100','Level 100'],['200','Level 200'],['300','Level 300'],['400','Level 400'],['500','Level 500'],['600','Level 600']];
+  return crumbs([{label:'Home',route:'home'},{label:'Admin · Prompts'}])+
+    `<h1>🛠 Prompt editor</h1>
+     <p class="sub">Edit the AI build prompt for each build, per level. A level-specific prompt wins; “Default” is the safety net used when a level has none.</p>
+     <div class="btnrow" style="gap:10px;flex-wrap:wrap">
+       <select id="admKind" class="sbox" style="width:auto" onchange="admFetch()">${kinds.map(k=>`<option value="${k[0]}">${k[1]}</option>`).join('')}</select>
+       <select id="admLevel" class="sbox" style="width:auto" onchange="admFetch()">${levels.map(l=>`<option value="${l[0]}">${l[1]}</option>`).join('')}</select>
+     </div>
+     <div id="admStatus" style="margin:10px 0;color:var(--dim);font-size:13px">Loading…</div>
+     <textarea id="admPrompt" class="notebox" style="min-height:340px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px" placeholder="Prompt template… use {{topicName}}, {{lecturer}}, {{subject}} for the core; {{note}} for cram/fill/written."></textarea>
+     <div class="btnrow" style="margin-top:10px;gap:10px;flex-wrap:wrap">
+       <input id="admModel" class="sbox" style="width:auto" placeholder="model (blank = inherit)">
+       <input id="admMax" class="sbox" style="width:130px" placeholder="max_tokens">
+       <input id="admTemp" class="sbox" style="width:120px" placeholder="temperature">
+     </div>
+     <div class="btnrow" style="margin-top:12px;gap:10px">
+       <button class="btn primary" onclick="admSave()">Save prompt</button>
+       <button class="btn" onclick="admLoadDefault()">Load built-in default</button>
+     </div>
+     <div id="admMsg" style="margin-top:10px;font-size:13.5px"></div>`;
+}
+async function admApi(path,opts){
+  const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Import server not configured.');
+  let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
+  opts=opts||{}; opts.headers=Object.assign({'Authorization':'Bearer '+token},opts.headers||{});
+  const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+path,opts); return {ok:r.ok, data:await r.json()};
+}
+let ADM_DEFAULT='';
+async function admFetch(){
+  const kEl=$('#admKind'); if(!kEl) return;
+  const kind=kEl.value, level=$('#admLevel').value, st=$('#admStatus');
+  if(st) st.textContent='Loading…';
+  try{
+    const r=await admApi('/admin/prompt?kind='+encodeURIComponent(kind)+(level?'&level='+encodeURIComponent(level):''));
+    if(!r.ok) throw new Error((r.data&&r.data.error)||'load failed');
+    const row=r.data.row; ADM_DEFAULT=r.data.defaultPrompt||'';
+    $('#admPrompt').value = row?(row.template||''):'';
+    $('#admModel').value = (row&&row.model)||''; $('#admMax').value=(row&&row.max_tokens)||''; $('#admTemp').value=(row&&row.temperature!=null)?row.temperature:'';
+    if(st) st.textContent = row ? '✎ Editing the saved prompt for this build + level.'
+      : (level ? 'No prompt set for this level — imports here fall back to Default. Save to create one.'
+               : 'No Default saved — the built-in default is used. Save to create one.');
+  }catch(e){ if(st) st.textContent='Could not load: '+(e.message||e); }
+}
+function admLoadDefault(){ if(ADM_DEFAULT){ $('#admPrompt').value=ADM_DEFAULT; } else { alert('No built-in default for this build. (Core uses your existing DB prompt.)'); } }
+async function admSave(){
+  const msg=$('#admMsg'); if(msg) msg.textContent='Saving…';
+  const body={ kind:$('#admKind').value, level:$('#admLevel').value||null, template:$('#admPrompt').value,
+    model:$('#admModel').value||null, max_tokens:$('#admMax').value||null, temperature:$('#admTemp').value||null };
+  if(!body.template.trim()){ if(msg) msg.innerHTML='<span style="color:#ff9db1">Prompt can’t be empty.</span>'; return; }
+  try{
+    const r=await admApi('/admin/prompt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r.ok) throw new Error((r.data&&r.data.error)||'save failed');
+    if(msg) msg.innerHTML='<span style="color:var(--recall);font-weight:700">✓ Saved. New imports at this level use it right away.</span>';
+  }catch(e){ if(msg) msg.innerHTML='<span style="color:#ff9db1">Could not save: '+esc(e.message||e)+'</span>'; }
 }
 
 function pageCards(subId){
@@ -3457,6 +3519,7 @@ function render(){
     case 'jumpback':  html=pageJumpback(); break;
     case 'search':    html=pageSearch(); break;
     case 'settings':  html=pageSettings(); break;
+    case 'admin':     html=pageAdmin(); break;
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
     case 'lecturers': html=pageLecturers(); break;
