@@ -301,6 +301,37 @@ app.post("/import", async (req,res)=>{
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* Build one optional extra (fill_blank / written) on demand for an existing topic,
+ * then cache it on the topic. Used the first time a student opens the mode on a
+ * lecture that wasn't built with it. */
+app.post("/build-extra", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const account_id = user.id;
+    const { topic_id, kind } = req.body;
+    if(!topic_id || (kind!=="fill_blank" && kind!=="written")) return res.status(400).json({ error:"bad request" });
+    const feat = await admin.rpc("can_use_features", { p_account:account_id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
+    const have = (t.data.extras && t.data.extras[kind]) || null;
+    if(have && have.length) return res.json({ ok:true, items:have });   // already built → return cached
+    const level = Number(req.body.level) || null;
+    // resolve model (trial vs paid), same as import
+    const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
+    const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+    const coreRow = await loadImportPrompt(level);
+    const paidModel = (coreRow && coreRow.model) || "claude-sonnet-5";
+    const model = (paid.data && paid.data.status==="active") ? paidModel : ((cfg.data && cfg.data.value) || paidModel);
+    const items = await buildExtra(kind, level, t.data.note_md, model);
+    if(!items) return res.status(502).json({ error:"couldn't build this — try again" });
+    const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
+    await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
+    res.json({ ok:true, items });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
 app.post("/paystack/webhook", async (req,res)=>{
   try{
