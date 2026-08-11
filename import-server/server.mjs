@@ -38,7 +38,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/paystack/webhook", express.raw({ type:"*/*" }));   // raw body for signature check
-app.use(express.json({ limit:"25mb" }));
+app.use(express.json({ limit:"48mb" }));   // roomy enough for a ~25MB audio file as base64
 
 /* same stable card id as the app: cid(topicId,deck,c) = topicId|deckInitial|hstr(q) */
 function hstr(s){ let h=5381; s=s||""; for(let i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))|0; return (h>>>0).toString(36); }
@@ -64,10 +64,30 @@ async function getUser(req){
   return data && data.user ? data.user : null;
 }
 
+/* transcribe a recorded lecture with OpenAI (gpt-4o-transcribe / whisper-1).
+ * Node 22 gives us global fetch/FormData/Blob. Audio file must be <= 25MB. */
+async function transcribeAudio(b64, mime){
+  const key = process.env.OPENAI_API_KEY;
+  if(!key) throw new Error("OPENAI_API_KEY not set — needed to transcribe recorded lectures");
+  const buf = Buffer.from(b64, "base64");
+  if(buf.length > 25*1024*1024) throw new Error("Recording too long to transcribe (over ~45 min). Split it and try again.");
+  const m = (mime||"").toLowerCase();
+  const ext = m.includes("mp4")||m.includes("m4a") ? "mp4" : m.includes("mpeg")||m.includes("mp3") ? "mp3" : m.includes("wav") ? "wav" : m.includes("ogg") ? "ogg" : "webm";
+  const fd = new FormData();
+  fd.append("file", new Blob([buf], { type: mime || "audio/webm" }), "lecture."+ext);
+  fd.append("model", process.env.TRANSCRIBE_MODEL || "gpt-4o-transcribe");
+  const r = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+    method:"POST", headers:{ Authorization:"Bearer "+key }, body: fd });
+  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("transcription failed ("+r.status+"): "+t.slice(0,200)); }
+  const j = await r.json();
+  return (j.text||"").trim();
+}
+
 async function extractContent(body){
   const parts=[], images=[];
   if(body.text) parts.push({ type:"text", text:"RAW LECTURE:\n\n"+body.text });
   if(body.pdf_base64){ const pdf=require("pdf-parse"); const d=await pdf(Buffer.from(body.pdf_base64,"base64")); parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+d.text }); }
+  if(body.audio_base64){ const tx=await transcribeAudio(body.audio_base64, body.audio_mime); if(tx) parts.push({ type:"text", text:"RAW LECTURE (RECORDED IN CLASS, AUTO-TRANSCRIBED):\n\n"+tx }); }
   (body.images||[]).forEach(img=>{ images.push({ type:"image", source:{ type:"base64", media_type:img.media_type||"image/jpeg", data:img.data } }); });
   return { parts, images };
 }
@@ -145,7 +165,7 @@ app.post("/import", async (req,res)=>{
     if(!topicName || !course_id) return res.status(400).json({ error:"topicName and course_id required" });
 
     // --- record the import as processing ---
-    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.images?"images":"text") }).select("id").single();
+    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.images?"images":"text")) }).select("id").single();
     const importId = imp.data && imp.data.id;
 
     // --- load the ACTIVE prompt (live-editable in the DB) ---
@@ -173,7 +193,7 @@ app.post("/import", async (req,res)=>{
     // --- save the topic + cards ---
     const topic = await admin.from("topics").insert({
       course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
-      source_kind: req.body.pdf_base64?"pdf":(req.body.images?"images":"text"),
+      source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.images?"images":"text")),
       note_md: obj.note_md, simplified_md: obj.simplified_md
     }).select("id").single();
     if(topic.error) throw topic.error;

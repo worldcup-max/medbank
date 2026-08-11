@@ -75,9 +75,27 @@
     s.appendChild(el("div",lbl,"Topic / lecture title"));
     var name=el("input",inCss); name.placeholder="e.g. Bronchiolitis"; s.appendChild(name);
 
-    /* File */
-    s.appendChild(el("div",lbl,"Lecture file (PDF) or photos"));
-    var file=el("input","width:100%;font-size:14px;margin-top:2px"); file.type="file"; file.accept=".pdf,image/*"; file.multiple=true; s.appendChild(file);
+    /* Source: recorded audio (record-first) OR file upload + record button */
+    var recAudio = opts.audioBlob || null, recMime = opts.audioMime || "", recDur = opts.durationSec || 0;
+    var file=el("input","width:100%;font-size:14px;margin-top:2px"); file.type="file"; file.accept=".pdf,image/*"; file.multiple=true;
+    function two(n){ return String(n).padStart(2,"0"); }
+    if(recAudio){
+      s.appendChild(el("div",lbl,"Recorded lecture"));
+      var mm=Math.floor(recDur/60), ss=recDur%60;
+      s.appendChild(el("div","display:flex;align-items:center;gap:10px;padding:12px;border:1px solid "+LINE+";border-radius:11px;background:#f6f3fe;color:"+INK+";font-size:14px",
+        "<span style='width:34px;height:34px;border-radius:50%;background:"+V+";color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px'>🎙</span>"+
+        "<div><div style='font-weight:700'>Lecture recording</div><div style='font-size:12.5px;color:"+DIM+"'>"+two(mm)+":"+two(ss)+" · ready to transcribe</div></div>"));
+      /* optionally combine the recording with the lecturer's slides / note photos */
+      s.appendChild(el("div",lbl,"Add the lecturer's PDF or note photos on this topic (optional)"));
+      s.appendChild(file);
+      s.appendChild(el("div","font-size:12px;color:"+DIM+";margin-top:6px","MedBank will build one study set from the recording and anything you add here."));
+    } else {
+      s.appendChild(el("div",lbl,"Lecture file (PDF) or photos"));
+      s.appendChild(file);
+      var recBtn=el("button","width:100%;margin-top:9px;border:1px solid "+V+";background:#fff;color:"+V+";border-radius:11px;padding:11px;font-weight:800;cursor:pointer;font-size:14px","🎙  Record the lecture instead");
+      recBtn.onclick=function(){ if(o.parentNode) document.body.removeChild(o); if(window.MB_openRecorder) MB_openRecorder(); };
+      s.appendChild(recBtn);
+    }
 
     var modelSel=null;
     if(isAdmin){
@@ -98,13 +116,14 @@
       if(!course_id){ show("Pick a course."); return; }
       if(!lecturer){ show("Choose or add the lecturer's name."); return; }
       if(!topicName){ show("Enter the topic / lecture title."); return; }
-      if(!file.files || !file.files.length){ show("Choose a PDF or some photos."); return; }
+      if(!recAudio && (!file.files || !file.files.length)){ show("Choose a PDF or some photos."); return; }
       if(!CFG.IMPORT_API){ show("Import isn't configured yet. Try again shortly."); return; }
-      go.disabled=true; go.textContent="Building… this can take ~30–60s";
+      go.disabled=true; go.textContent = recAudio ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
         if(modelSel && modelSel.value) body.model=modelSel.value;
-        var files=[].slice.call(file.files);
+        if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
+        var files=[].slice.call(file.files||[]);
         var pdf=files.find(function(f){ return /\.pdf$/i.test(f.name); });
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }
         var imgs=files.filter(function(f){ return /^image\//.test(f.type); });

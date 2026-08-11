@@ -354,6 +354,7 @@
     if(signedIn){
       rows=[
         ["＋","Add a lecture",function(){ if(window.MB_openImport) MB_openImport(); }],
+        ["🎙","Record a lecture",function(){ if(window.MB_openRecorder) MB_openRecorder(); }],
         ["⚙","Settings",function(){ if(window.go) go("settings"); }],
         ["🎚","Switch level",function(){ if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); }],
         ["👤","Account & sync",function(){ open(); }],
