@@ -42,11 +42,11 @@
       "background:radial-gradient(120% 90% at 50% 12%,#1a0f36 0%,#0b0713 55%,#050308 100%);font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;text-align:center;padding:24px";
     o.innerHTML =
       // brand lock-up pill
-      "<div style='display:flex;align-items:center;gap:9px;background:#fff;color:#1c1830;padding:9px 16px 9px 12px;border-radius:999px;box-shadow:0 10px 34px rgba(124,79,224,.45);font-weight:800;font-size:17px'>"+
-        "<img src='icon.svg' width='26' height='26' style='border-radius:7px' alt=''>MedBank</div>"+
-      // animated waveform
-      "<div id='mbRecWave' style='display:flex;align-items:flex-end;gap:5px;height:64px;margin:40px 0 26px'>"+
-        Array.apply(null,{length:9}).map(function(_,i){ return "<span style='width:6px;border-radius:4px;background:linear-gradient(180deg,#a78bfa,"+CORAL+");animation:mbRecBar 1s ease-in-out "+(i*0.09)+"s infinite'></span>"; }).join("")+
+      "<div style='display:flex;align-items:center;gap:11px;background:#fff;color:#1c1830;padding:12px 24px 12px 14px;border-radius:999px;box-shadow:0 0 42px rgba(167,139,250,.6),0 12px 34px rgba(124,79,224,.4);font-weight:800;font-size:23px'>"+
+        "<img src='icon.svg' width='36' height='36' style='border-radius:10px' alt=''>MedBank</div>"+
+      // animated waveform — tall equalizer bars
+      "<div id='mbRecWave' style='display:flex;align-items:flex-end;gap:6px;height:104px;margin:46px 0 30px'>"+
+        Array.apply(null,{length:16}).map(function(_,i){ return "<span style='width:8px;border-radius:5px;background:linear-gradient(180deg,#a78bfa,"+CORAL+");animation:mbRecBar "+(0.8+(i%4)*0.18)+"s ease-in-out "+(i*0.07)+"s infinite'></span>"; }).join("")+
       "</div>"+
       "<div id='mbRecStatus' style='font-size:15px;font-weight:600;letter-spacing:.3px;color:#d8ccff'>Recording the lecture…</div>"+
       "<div id='mbRecTime' style='font-size:52px;font-weight:800;letter-spacing:1px;margin:8px 0 4px;font-variant-numeric:tabular-nums'>00:00</div>"+
@@ -61,7 +61,7 @@
       "<button id='mbRecCancel' style='margin-top:22px;background:transparent;border:0;color:#6f6690;font-size:13px;cursor:pointer;text-decoration:underline'>Cancel</button>";
     if(!document.getElementById("mbRecKF")){
       var s=document.createElement("style"); s.id="mbRecKF";
-      s.textContent="@keyframes mbRecBar{0%,100%{height:14px}50%{height:60px}}";
+      s.textContent="@keyframes mbRecBar{0%,100%{height:18px}50%{height:100px}}";
       document.head.appendChild(s);
     }
     return o;
