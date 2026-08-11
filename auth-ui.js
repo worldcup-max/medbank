@@ -326,20 +326,65 @@
   }
   function esc(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 
-  /* ---- status chip ---- */
-  var chip=null;
+  /* ---- profile avatar + dropdown menu ---- */
+  var chip=null, menu=null;
+  function initialOf(name,email){ var s=((name||email||"?")+"").trim(); return s?s[0].toUpperCase():"?"; }
+  function closeMenu(){ if(menu&&menu.parentNode) menu.parentNode.removeChild(menu); menu=null; try{ document.removeEventListener("click", outsideMenu, true); }catch(_){} }
+  function outsideMenu(e){ if(menu && !menu.contains(e.target) && e.target!==chip) closeMenu(); }
+  function mItem(icon,label){
+    var it=el("div","display:flex;align-items:center;gap:11px;padding:12px 16px;cursor:pointer;font-size:14.5px;color:"+C.ink,"<span style='width:20px;text-align:center;font-size:15px'>"+icon+"</span><span>"+esc(label)+"</span>");
+    it.onmouseenter=function(){ it.style.background=C.tint; };
+    it.onmouseleave=function(){ it.style.background="#fff"; };
+    return it;
+  }
+  async function toggleMenu(){
+    if(menu){ closeMenu(); return; }
+    var sb=client(); var signedIn=false, name="", email="", st={};
+    if(sb){ try{ var ses=await sb.auth.getSession(); if(ses.data.session){ signedIn=true; var u=ses.data.session.user; email=u.email||""; name=(u.user_metadata&&u.user_metadata.full_name)||""; st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{}; } }catch(_){} }
+    menu=el("div","position:fixed;right:14px;top:60px;z-index:100000;background:#fff;border:1px solid "+C.line+";border-radius:14px;box-shadow:0 16px 46px rgba(28,20,45,.24);min-width:242px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
+    if(signedIn){
+      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6",
+        "<div style='font-weight:800;color:"+C.ink+"'>"+esc(name||"Your account")+"</div>"+
+        "<div style='font-size:12.5px;color:"+C.dim+";word-break:break-all'>"+esc(email)+"</div>"+
+        "<div style='font-size:12px;color:"+C.teal+";margin-top:4px;font-weight:600'>✓ Synced"+(st.level?(" · "+esc(st.level)+" level"):"")+"</div>"));
+    } else {
+      menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6;font-weight:700;color:"+C.ink,"Not signed in"));
+    }
+    var rows;
+    if(signedIn){
+      rows=[
+        ["＋","Add a lecture",function(){ if(window.MB_openImport) MB_openImport(); }],
+        ["⚙","Settings",function(){ if(window.go) go("settings"); }],
+        ["🎚","Switch level",function(){ if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); }],
+        ["👤","Account & sync",function(){ open(); }],
+        ["✉","Send feedback",function(){ try{ location.href="mailto:frankthewiz1@gmail.com?subject=MedBank%20feedback"; }catch(_){} }],
+        ["⎋","Log out",async function(){ try{ await client().auth.signOut(); }catch(_){} updateChip(); }]
+      ];
+    } else {
+      rows=[
+        ["☁","Sign in",function(){ renderSignin(client()); }],
+        ["✨","Create account",function(){ open(); }],
+        ["⚙","Settings",function(){ if(window.go) go("settings"); }]
+      ];
+    }
+    rows.forEach(function(r){ var it=mItem(r[0],r[1]); it.onclick=function(){ closeMenu(); r[2](); }; menu.appendChild(it); });
+    document.body.appendChild(menu);
+    setTimeout(function(){ document.addEventListener("click", outsideMenu, true); },0);
+  }
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:12px;bottom:14px;z-index:9998;border:0;border-radius:22px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 20px rgba(91,33,182,.28);background:"+C.violet+";color:#fff","☁ Sign in");
-    chip.onclick=open; document.body.appendChild(chip);
+    chip=el("button","position:fixed;right:14px;top:12px;z-index:9999;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
+    chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
+    document.body.appendChild(chip);
     updateChip();
   }
   async function updateChip(){
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
     try{ var ses=await sb.auth.getSession();
-      if(ses.data.session){ chip.textContent="✓ Synced"; chip.style.background=C.teal; }
-      else { chip.textContent="☁ Sign in"; chip.style.background=C.violet; }
+      if(ses.data.session){ var u=ses.data.session.user; chip.textContent=initialOf((u.user_metadata&&u.user_metadata.full_name),u.email); }
+      else { chip.textContent="☁"; }
+      chip.style.background=C.violet;
     }catch(_){}
   }
   function toast(m){ try{ alert(m); }catch(_){} }

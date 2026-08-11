@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v55';
+const CACHE = 'medbank-v56';
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js', './content-loader.js', './auth-ui.js', './import-tab.js'];
 
