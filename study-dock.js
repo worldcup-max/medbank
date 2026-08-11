@@ -56,7 +56,7 @@
         "transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:"+INK+"}"+
       "#mbDock.on{transform:translateX(0)}"+
       /* desktop: pinned side panel that pushes content instead of overlaying */
-      "@media(min-width:1024px){#mbDock{width:360px}#shell{transition:padding-right .24s ease}body.mb-dock-open #shell{padding-right:360px}body.mb-dock-open #mbDockScrim{display:none}body.mb-dock-open #mbAvatar{right:374px!important}}"+
+      "@media(min-width:900px){#mbDock{width:360px}#shell{transition:padding-right .24s ease}body.mb-dock-open #shell{padding-right:360px}body.mb-dock-open #mbDockScrim{display:none}body.mb-dock-open #mbAvatar{right:374px!important}}"+
       "#mbDock .dhead{display:flex;align-items:center;gap:6px;padding:calc(env(safe-area-inset-top,0px) + 12px) 12px 10px;border-bottom:1px solid "+LINE+"}"+
       "#mbDock .dtab{flex:1;text-align:center;padding:9px 6px;border-radius:10px;font-weight:800;font-size:13.5px;cursor:pointer;color:"+DIM+"}"+
       "#mbDock .dtab.on{background:"+TINT+";color:"+V+"}"+
@@ -80,7 +80,7 @@
   }
 
   var isOpen=false;
-  function isDesktop(){ return !!(window.matchMedia && window.matchMedia("(min-width:1024px)").matches); }
+  function isDesktop(){ return !!(window.matchMedia && window.matchMedia("(min-width:900px)").matches); }
   function onStudy(){ var d=DOCK(); return !!(d && d.onStudyScreen && d.onStudyScreen()); }
   function persist(){ try{ localStorage.setItem("mb_dock_open", isOpen?"1":"0"); }catch(_){} }
   function apply(){

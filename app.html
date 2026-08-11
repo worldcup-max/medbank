@@ -868,7 +868,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.07h';   // bump this each release
+const APP_VERSION='2026.08.07k';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -989,6 +989,20 @@ function rateSRS(id,ok){
   s.seen=today; DATA.cards[id]=s;
 }
 const startedTopics = () => allTopics.filter(t=>t.ready && status(t.id)!=='notstarted');
+
+/* ---- four-state mastery, derived from the recall SRS box (no new data) ---- */
+function cardState4(id){ const s=DATA.cards[id]; if(!s||s.seen==null) return 'unf'; if((s.box||0)<=1) return 'lrn'; if((s.box||0)<=4) return 'fam'; return 'mas'; }
+function stateCounts(ids){ const c={unf:0,lrn:0,fam:0,mas:0}; (ids||[]).forEach(id=>{ c[cardState4(id)]++; }); return c; }
+function masteryChips(ids){
+  if(!ids||!ids.length) return '';
+  const c=stateCounts(ids), chip=(n,l,bg,fg,dot)=>`<span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:8px;background:${bg};color:${fg}"><span style="width:7px;height:7px;border-radius:50%;background:${dot}"></span>${n} ${l}</span>`;
+  return `<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px">${chip(c.unf,'Unfamiliar','#eceaf1','#6b6480','#b3aac6')}${chip(c.lrn,'Learning','#fdf0dd','#b3791a','#e0a53a')}${chip(c.fam,'Familiar','#e6effb','#2f6bd1','#4f8cff')}${chip(c.mas,'Mastered','#dcf3ee','#0d9488','#0d9488')}</div>`;
+}
+function sessionRecallIds(){
+  if(!S) return [];
+  if(S.mode==='deck' && S.t && S.deck==='recall') return (S.t.recall||[]).map(c=>cid(S.t.id,'recall',c));
+  return (S.items||[]).filter(it=>it.deck==='recall').map(it=>it.id);
+}
 
 /* ---- clinical scenario cards (CLINICAL / OSPE / OSCE / CASE / SCENARIO) ---- */
 function isClin(c){ return /^\s*(CLINICAL|OSPE|OSCE|SCENARIO|CASE)\b/i.test((c&&c.q)||''); }
@@ -1678,6 +1692,7 @@ function pageTopic(id){
      <p class="sub">${[esc(t.lecturer),esc(t.subject.name),esc([t.day,t.date,t.time].filter(Boolean).join(' '))].filter(Boolean).join(' · ')}</p>
      ${statusBar}
      ${pipeline}
+     ${t.ready?masteryChips((t.recall||[]).map(c=>cid(t.id,'recall',c))):''}
      ${t.ready?`<div class="tabs">${T('note','Built note')}${T('simplified','Simplified note')}${T('cards','Anki cards')}</div>`:''}
      ${body}`;
 }
@@ -1711,22 +1726,27 @@ function pageCards(subId){
 /* ---------- study / sessions ---------- */
 let S=null;
 
-function startDeck(topicId,deck,clinOnly){
+function startDeck(topicId,deck,clinOnly,weakOnly){
   const t=topById(topicId); if(!t) return;
   let cards = deck==='primer'? t.primer : t.recall;
   if(clinOnly) cards = cards.filter(isClin);
+  if(weakOnly) cards = cards.filter(c=>{ const st=cardState4(cid(t.id,deck,c)); return st==='unf'||st==='lrn'; });   // not-yet-mastered
   const items = cards.map(c=>({t,c,id:cid(t.id,deck,c),deck}));
   const key='deck:'+topicId+deck;
   let i=0;
-  if(!clinOnly){                                   // resume position only on the full deck
-    if(S&&S.key===key&&!S.clinOnly) i=S.i;
+  if(!clinOnly && !weakOnly){                       // resume position only on the full deck
+    if(S&&S.key===key&&!S.clinOnly&&!S.weakOnly) i=S.i;
     else i=Math.min(DATA.pos['pos:'+topicId+deck]||0, Math.max(0,items.length-1));
   }
-  S={mode:'deck',key,items,order:items.map((_,k)=>k),i,show:false,opts:false,pick:null,t,deck,clinOnly:!!clinOnly,session:{done:0,correct:0}};
+  S={mode:'deck',key,items,order:items.map((_,k)=>k),i,show:false,opts:false,pick:null,t,deck,clinOnly:!!clinOnly,weakOnly:!!weakOnly,session:{done:0,correct:0}};
 }
 function toggleClinFilter(){
   if(!S||S.mode!=='deck') return;
-  startDeck(S.t.id,S.deck,!S.clinOnly); render(); window.scrollTo(0,0);
+  startDeck(S.t.id,S.deck,!S.clinOnly,S.weakOnly); render(); window.scrollTo(0,0);
+}
+function toggleWeakFilter(){
+  if(!S||S.mode!=='deck') return;
+  startDeck(S.t.id,S.deck,S.clinOnly,!S.weakOnly); render(); window.scrollTo(0,0);
 }
 function startToday(){
   const q=buildQueue();
@@ -1957,12 +1977,13 @@ function pageStudy(topicId,deck){
   IMGBASE = t.imgBase || '';
   if(!S || S.mode!=='deck' || S.t.id!==topicId || S.deck!==deck) startDeck(topicId,deck);
   const nClin = deck==='recall' ? clinInDeck(t) : 0;
-  const filterBar = nClin ? `<div class="clinbar">
-      <span class="clinlbl">🩺 ${nClin} clinical scenario${nClin===1?'':'s'} in this deck</span>
-      <button class="btn ${S.clinOnly?'primary':''}" onclick="toggleClinFilter()">${S.clinOnly?'✓ Clinical only — show all':'Clinical only'}</button>
+  const filterBar = deck==='recall' ? `<div class="clinbar">
+      <button class="btn ${S.weakOnly?'primary':''}" onclick="toggleWeakFilter()">${S.weakOnly?'✓ Weak only — show all':'⚡ Weak only'}</button>
+      ${nClin?`<button class="btn ${S.clinOnly?'primary':''}" onclick="toggleClinFilter()">${S.clinOnly?'✓ Clinical only — show all':'🩺 Clinical only'}</button>`:''}
+      <span class="clinlbl" style="margin-left:auto">${S.items.length} card${S.items.length===1?'':'s'}</span>
     </div>` : '';
   const head = crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}]);
-  if(!S.items.length) return head+filterBar+`<div class="empty">${S.clinOnly?'No clinical cards here.':'This deck is empty.'}</div>`;
+  if(!S.items.length) return head+filterBar+`<div class="empty">${S.weakOnly?"No weak cards here — you've mastered them all. 🎉":S.clinOnly?'No clinical cards here.':'This deck is empty.'}</div>`;
   return head + filterBar + cardView(false);
 }
 
@@ -2160,6 +2181,7 @@ function mcqView(session){
       <span class="name">${session?'◎ Recall (MCQ)':esc(t.name)}</span>
       ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
     <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
+    ${masteryChips(sessionRecallIds())}
     <div class="flash" onclick="cardTap()">
       <button class="starbtn ${star?'on':''}" title="Add to hard cards" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>
@@ -2217,6 +2239,7 @@ function cardView(session){
       <span class="name">${session?('◎ '+(isP?'Primer':'Recall')):esc(t.name)}</span>
       ${ttsBtn()}<span class="counter">${S.i+1} / ${n}</span></div>
     <div class="bar"><div style="width:${pctBar}%;background:${col}"></div></div>
+    ${masteryChips(sessionRecallIds())}
     <div class="flash" onclick="reveal()">
       <button class="starbtn ${star?'on':''}" title="Star as a hard card" onclick="event.stopPropagation();toggleStar('${it.id}')">${star?'★':'☆'}</button>
       <div class="qlabel">${c.img?'Look at this — then answer':'Question'}${session?' · '+esc(t.subject.short):''}</div>

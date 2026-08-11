@@ -174,6 +174,24 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature 
   return { text, usage:{ input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens } };
 }
 
+/* Pick the CORE build prompt for this student's level: a level-specific active row,
+ * else the default (level = null). Backward-compatible — if the kind/level columns
+ * haven't been added yet, it falls back to the single active import_generation row,
+ * so imports keep working before the migration is run. */
+async function loadImportPrompt(level){
+  const sel = "template,model,max_tokens,temperature";
+  const q = () => admin.from("prompt_templates").select(sel).eq("key","import_generation").eq("is_active",true);
+  const legacy = async () => (await q().maybeSingle()).data || null;
+  if(level!=null){
+    const rl = await q().eq("kind","core").eq("level",level).maybeSingle();
+    if(rl.error) return legacy();                 // columns not migrated yet
+    if(rl.data) return rl.data;                   // level-specific wins
+  }
+  const rd = await q().eq("kind","core").is("level",null).maybeSingle();
+  if(rd.error) return legacy();
+  return rd.data || legacy();
+}
+
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
 app.post("/import", async (req,res)=>{
@@ -195,8 +213,9 @@ app.post("/import", async (req,res)=>{
     const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))) }).select("id").single();
     const importId = imp.data && imp.data.id;
 
-    // --- load the ACTIVE prompt (live-editable in the DB) ---
-    const pt = await admin.from("prompt_templates").select("template,model,max_tokens,temperature").eq("key","import_generation").eq("is_active",true).maybeSingle();
+    // --- load the CORE build prompt for this student's level (falls back to the default) ---
+    const level = Number(req.body.level) || null;
+    const pt = { data: await loadImportPrompt(level) };
     if(!pt.data){ await admin.from("imports").update({ status:"failed", error:"no active prompt" }).eq("id",importId); return res.status(500).json({ error:"no active prompt" }); }
     // trial users get the cheaper model
     const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();

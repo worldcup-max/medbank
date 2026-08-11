@@ -146,6 +146,7 @@
       go.disabled=true; go.textContent = slow ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
+        try{ var _lv=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel()); if(_lv!=null&&_lv!=="") body.level=_lv; }catch(e){}   // per-level prompt selection
         if(modelSel && modelSel.value) body.model=modelSel.value;
         if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
         if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }
