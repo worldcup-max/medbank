@@ -94,7 +94,7 @@
       "@keyframes mbtHover{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}"+
       "@keyframes mbtFire{0%,100%{box-shadow:0 6px 20px rgba(249,115,22,.5),0 0 0 rgba(239,68,68,0)}50%{box-shadow:0 10px 30px rgba(249,115,22,.85),0 0 24px rgba(239,68,68,.55)}}"+
       "@keyframes mbtFlick{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}"+
-      "#mbTimer{position:fixed;top:12px;left:50%;transform:translate(-50%,0);z-index:9997;display:flex;align-items:center;gap:8px;"+
+      "#mbTimer{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translate(-50%,0);z-index:9997;display:flex;align-items:center;gap:8px;"+
         "padding:8px 15px 8px 12px;border:0;border-radius:999px;cursor:pointer;font:800 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;"+
         "color:#fff;background:linear-gradient(135deg,#6d28d9,#5b21b6);box-shadow:0 6px 20px rgba(91,33,182,.4);"+
         "animation:mbtHover 3.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}"+
@@ -103,7 +103,7 @@
       "#mbTimer.on .mbtDot{background:#ffd7a1;box-shadow:0 0 8px #fb923c;animation:mbtFlick 1.1s ease-in-out infinite}"+
       "#mbTimer .mbtLbl{font-weight:600;opacity:.85;font-size:12.5px}"+
       "#mbtPop,#mbtStats{font:500 13.5px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1830}"+
-      "#mbtPop{position:fixed;top:56px;left:50%;transform:translateX(-50%);z-index:9998;background:#fff;border:1px solid #e6e3f0;border-radius:14px;box-shadow:0 16px 44px rgba(28,20,45,.22);padding:14px 16px;min-width:250px;max-width:92vw}"+
+      "#mbtPop{position:fixed;top:calc(env(safe-area-inset-top,0px) + 52px);left:50%;transform:translateX(-50%);z-index:9998;background:#fff;border:1px solid #e6e3f0;border-radius:14px;box-shadow:0 16px 44px rgba(28,20,45,.22);padding:14px 16px;min-width:250px;max-width:92vw}"+
       "#mbtStats{position:fixed;inset:0;z-index:100003;background:#f6f5fb;overflow-y:auto;-webkit-overflow-scrolling:touch}"+
       ".mbtBtn{border:0;border-radius:999px;background:"+V+";color:#fff;font-weight:800;font-size:13px;padding:9px 16px;cursor:pointer}";
     document.head.appendChild(st);
@@ -191,7 +191,7 @@
       function stat(big,small){ return "<div style='flex:1;background:#fff;border:1px solid #e6e3f0;border-radius:14px;padding:13px 14px'><div style='font-size:22px;font-weight:800;color:#1c1830'>"+big+"</div><div style='font-size:11.5px;color:#5c5570;margin-top:2px'>"+small+"</div></div>"; }
 
       wrap.innerHTML=
-        "<div style='max-width:640px;margin:0 auto;padding:18px 16px 40px'>"+
+        "<div style='max-width:640px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 40px'>"+
           "<div style='display:flex;align-items:center;justify-content:space-between'>"+
             "<div style='font-size:20px;font-weight:800'>⏱ Study stats</div>"+
             "<button id='mbtClose' style='border:0;background:#ece3fb;color:"+V+";border-radius:999px;width:34px;height:34px;font-size:16px;font-weight:800;cursor:pointer'>✕</button></div>"+

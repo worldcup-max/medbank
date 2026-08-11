@@ -341,7 +341,7 @@
     if(menu){ closeMenu(); return; }
     var sb=client(); var signedIn=false, name="", email="", st={};
     if(sb){ try{ var ses=await sb.auth.getSession(); if(ses.data.session){ signedIn=true; var u=ses.data.session.user; email=u.email||""; name=(u.user_metadata&&u.user_metadata.full_name)||""; st=(window.MB_SYNC&&MB_SYNC.status)?(MB_SYNC.status()||{}):{}; } }catch(_){} }
-    menu=el("div","position:fixed;right:14px;top:60px;z-index:100000;background:#fff;border:1px solid "+C.line+";border-radius:14px;box-shadow:0 16px 46px rgba(28,20,45,.24);min-width:242px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
+    menu=el("div","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 56px);z-index:100000;background:#fff;border:1px solid "+C.line+";border-radius:14px;box-shadow:0 16px 46px rgba(28,20,45,.24);min-width:242px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
     if(signedIn){
       menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6",
         "<div style='font-weight:800;color:"+C.ink+"'>"+esc(name||"Your account")+"</div>"+
@@ -374,7 +374,7 @@
   }
   function ensureChip(){
     if(chip||typeof document==="undefined") return;
-    chip=el("button","position:fixed;right:14px;top:12px;z-index:9999;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
+    chip=el("button","position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9999;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;font-weight:800;font-size:16px;color:#fff;background:"+C.violet+";box-shadow:0 4px 14px rgba(91,33,182,.35);display:flex;align-items:center;justify-content:center","☁");
     chip.onclick=function(e){ e.stopPropagation(); toggleMenu(); };
     document.body.appendChild(chip);
     updateChip();
