@@ -76,6 +76,7 @@
     out.cards  = mergeCards(localD.cards, remoteD.cards);
     out.starred= mergeMap(localD.starred, remoteD.starred, "b");   // union; keep any star
     out.log    = mergeLog(localD.log, remoteD.log);
+    out.study  = (function(a,b){ a=a||{}; b=b||{}; var o={},k; for(k in a) o[k]=a[k]||0; for(k in b) o[k]=Math.max(o[k]||0, b[k]||0); return o; })(localD.study, remoteD.study); // seconds/day: keep the larger
     out.streak = mergeStreak(localD.streak, remoteD.streak);
     // progress maps: union, prefer local (device just used)
     ["topics","done","read","notes","missLog","dayTopics","exams","pos","flags"].forEach(function(k){

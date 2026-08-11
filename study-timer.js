@@ -30,13 +30,23 @@
   function today(){ return keyOf(new Date()); }
   function daysBack(n){ var out=[], d=new Date(); for(var i=0;i<n;i++){ out.push(keyOf(d)); d.setDate(d.getDate()-1); } return out; } // [today, ...back]
 
-  /* ---------- storage ---------- */
-  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(_){ return {}; } }
-  function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(_){} }
-  var store = load();
-  function secsOn(k){ return store[k]||0; }
-  function todaySecs(){ return store[today()]||0; }
-  function addSec(){ var k=today(); store[k]=(store[k]||0)+1; }
+  /* ---------- storage: single source of truth is DATA.study (account-synced) ----------
+   * The timer counts into `pending` and flushes to MB_STUDY_ADD, which writes DATA.study
+   * and triggers the account sync. Reads come straight from the account map, so the number
+   * always reflects the signed-in account and follows it across devices / reinstalls. */
+  function acct(){ try{ return (window.MB_STUDY_GET && window.MB_STUDY_GET()) || null; }catch(_){ return null; } }
+  var mem = {};        // in-memory fallback only if the app helpers aren't ready yet
+  var pending = 0;     // seconds counted this session but not yet written to the account
+  function base(k){ var m=acct()||mem; return m[k]||0; }
+  function secsOn(k){ return base(k) + (k===today()?pending:0); }
+  function todaySecs(){ return secsOn(today()); }
+  function addSec(){ pending++; }
+  function flush(){
+    if(pending<=0) return;
+    var n=pending; pending=0;
+    if(window.MB_STUDY_ADD) window.MB_STUDY_ADD(n);   // -> DATA.study + account sync
+    else mem[today()]=(mem[today()]||0)+n;            // defensive: never lose seconds
+  }
 
   function cardsByDay(){ try{ return (window.MB_CARDS_BY_DAY && window.MB_CARDS_BY_DAY()) || {}; }catch(_){ return {}; } }
   function cardsOn(k){ var l=cardsByDay()[k]; return (l&&l.cards)||0; }
@@ -224,12 +234,13 @@
   function tick(){
     counting=shouldCount();
     if(counting && !wasCounting) chime();
+    if(!counting && wasCounting) flush();   // stopped studying -> save to the account promptly
     wasCounting=counting;
     if(counting) addSec();
     paint();
   }
   var saveN=0;
-  function loop(){ tick(); if((++saveN%10)===0) save(store); }
+  function loop(){ tick(); if((++saveN%10)===0) flush(); }   // flush to the account ~every 10s
 
   /* ---------- activity + visibility ---------- */
   function bump(){ lastActivity=Date.now(); }
@@ -237,11 +248,12 @@
     window.addEventListener(ev, bump, { passive:true, capture:true });
   });
   var mmT=0; window.addEventListener("mousemove", function(){ var n=Date.now(); if(n-mmT>4000){ mmT=n; bump(); } }, { passive:true });
-  document.addEventListener("visibilitychange", function(){ visible=!document.hidden; if(!visible) save(store); else bump(); tick(); });
-  window.addEventListener("blur", function(){ visible=false; tick(); });
+  document.addEventListener("visibilitychange", function(){ visible=!document.hidden; if(!visible) flush(); else bump(); tick(); });
+  window.addEventListener("blur", function(){ visible=false; flush(); tick(); });
   window.addEventListener("focus", function(){ visible=!document.hidden; bump(); tick(); });
   window.addEventListener("hashchange", function(){ bump(); tick(); });
-  window.addEventListener("beforeunload", function(){ save(store); });
+  window.addEventListener("beforeunload", function(){ flush(); });
+  window.addEventListener("pagehide", function(){ flush(); });
 
   /* ---------- boot ---------- */
   function boot(){
@@ -251,5 +263,5 @@
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
-  window.MB_STUDY_TIME = { today:todaySecs, all:load, open:function(){ openStats(); } };
+  window.MB_STUDY_TIME = { today:todaySecs, all:function(){ return acct()||mem; }, flush:flush, open:function(){ openStats(); } };
 })();
