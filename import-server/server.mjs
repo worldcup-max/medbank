@@ -192,6 +192,33 @@ async function loadImportPrompt(level){
   return rd.data || legacy();
 }
 
+/* generalised prompt loader for any build kind (core / cram / fill_blank / written) */
+async function loadPromptFor(kind, level){
+  const sel = "template,model,max_tokens,temperature";
+  const q = () => admin.from("prompt_templates").select(sel).eq("key","import_generation").eq("is_active",true);
+  if(level!=null){ const rl = await q().eq("kind",kind).eq("level",level).maybeSingle(); if(rl.error) return null; if(rl.data) return rl.data; }
+  const rd = await q().eq("kind",kind).is("level",null).maybeSingle();
+  if(rd.error) return null;
+  return rd.data || null;
+}
+
+/* built-in default prompts for the optional extras (each overridable via a DB row per kind/level) */
+const DEFAULT_PROMPTS = {
+  fill_blank: "You are creating fill-in-the-blank study items for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"text\":\"a sentence from the material with exactly ONE key term replaced by ___ (three underscores)\",\"answer\":\"the removed term\",\"hint\":\"a short nudge that does NOT contain the answer\"}]}. Make 8-15 items covering the most important, testable facts. Each blank must be a single specific term or short phrase, and the sentence must stay faithful to the note.\n\nLECTURE NOTE:\n{{note}}",
+  written: "You are setting short-answer / written-test questions for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"prompt\":\"an exam-style short-answer question (define / describe / explain / compare)\",\"model_answer\":\"a concise ideal answer\",\"points\":[\"key marking point 1\",\"key marking point 2\",\"key marking point 3\"]}]}. Make 5-8 questions matching how medical exams test this topic; the points array is the marking rubric.\n\nLECTURE NOTE:\n{{note}}"
+};
+
+/* generate one optional extra (fill_blank / written) from the built note; returns items[] or null */
+async function buildExtra(kind, level, note, model){
+  const row = await loadPromptFor(kind, level);
+  const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
+  if(!tmpl) return null;
+  const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||6000, temperature:Number(row&&row.temperature)||0.3 });
+  const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
+  try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.items)&&o.items.length)?o.items:null; }catch(_){ return null; }
+}
+
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
 app.post("/import", async (req,res)=>{
@@ -254,6 +281,16 @@ app.post("/import", async (req,res)=>{
     (obj.recall.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"recall", idx:i, card_key:topicId+"|r|"+hstr(c.q), q:c.q, payload:{ a:c.a, opts:c.opts, ans:c.ans, src:c.src||null, src_t:matchTime(c.src, transcript) } }));
     const cw = await admin.from("cards").insert(cards);
     if(cw.error) throw cw.error;
+
+    // --- optional extras the student ticked in the "what to build" box (fill_blank / written) ---
+    const wantBuilds = Array.isArray(req.body.builds) ? req.body.builds.filter(b=>b==="fill_blank"||b==="written") : [];
+    if(wantBuilds.length){
+      const extras={};
+      for(const kind of wantBuilds){
+        try{ const items = await buildExtra(kind, level, obj.note_md, model); if(items && items.length) extras[kind]=items; }catch(_){}
+      }
+      if(Object.keys(extras).length){ await admin.from("topics").update({ extras }).eq("id",topicId); }   // needs a jsonb "extras" column; ignored if absent
+    }
 
     // --- meter usage ---
     const usage = gen.usage || {};

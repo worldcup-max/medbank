@@ -69,6 +69,12 @@
         var trRes = await sb.from("topics").select("id,transcript").in("id", topicIds);
         if(trRes && !trRes.error){ (trRes.data||[]).forEach(function(x){ if(x.transcript) trById[x.id]=x.transcript; }); }
       }
+      // optional built extras (fill_blank / written) — guarded, independent of the transcript column
+      var exById = {};
+      if(topicIds.length){
+        var exRes = await sb.from("topics").select("id,extras").in("id", topicIds);
+        if(exRes && !exRes.error){ (exRes.data||[]).forEach(function(x){ if(x.extras) exById[x.id]=x.extras; }); }
+      }
 
       var cards = topicIds.length
         ? ((await sb.from("cards").select("topic_id,deck,idx,q,payload").in("topic_id", topicIds).order("idx")).data || [])
@@ -93,6 +99,7 @@
             id: t.id, name: t.title, lecturer: t.lecturer || "", ready: (t.status === "ready"),
             note: t.note_md || "", simplified: t.simplified_md || "",
             transcript: trById[t.id] || null,
+            extras: exById[t.id] || null,
             primer: g.primer, recall: g.recall
           };
           mod.topics.push(topic);

@@ -116,6 +116,27 @@
       paintSeg();
     }
 
+    /* what-to-build selector (core locked, extras optional) */
+    s.appendChild(el("div",lbl,"What should MedBank build?"));
+    var grid=el("div","display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px");
+    var builds={ fill_blank:false, written:false };
+    function bcard(icon,label,key){
+      var locked=!key;
+      var c=el("div","display:flex;align-items:center;gap:9px;padding:11px;border-radius:11px;cursor:"+(locked?"default":"pointer"));
+      function paint(){
+        var on = locked || builds[key];
+        c.style.border="1.5px solid "+(on?V:LINE); c.style.background=on?"#faf8ff":"#fff";
+        c.innerHTML="<span style='width:28px;height:28px;border-radius:8px;flex:none;background:"+(on?V:"#efeaf3")+";color:"+(on?"#fff":DIM)+";display:flex;align-items:center;justify-content:center;font-size:14px'>"+icon+"</span>"+
+          "<span style='font-weight:700;font-size:13.5px;color:"+INK+"'>"+label+"</span>"+
+          (locked?"<span style='margin-left:auto;font-size:11px'>🔒</span>":"<span style='margin-left:auto;width:19px;height:19px;border-radius:6px;border:2px solid "+(on?V:"#cfc7de")+";background:"+(on?V:"#fff")+";color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800'>"+(on?"✓":"")+"</span>");
+      }
+      if(!locked) c.onclick=function(){ builds[key]=!builds[key]; paint(); };
+      paint(); return c;
+    }
+    [bcard("📖","Notes"),bcard("🃏","Flashcards"),bcard("✓","Quiz"),bcard("📄","Cram sheet"),bcard("✍","Fill-blank","fill_blank"),bcard("📝","Written test","written")].forEach(function(c){ grid.appendChild(c); });
+    s.appendChild(grid);
+    s.appendChild(el("div","font-size:11.5px;color:"+DIM+";margin-top:7px","🔒 Always built. Tick extras to build now — or add them later from the topic."));
+
     var modelSel=null;
     if(isAdmin){
       s.appendChild(el("div",lbl,"Model (admin A/B)"));
@@ -147,6 +168,7 @@
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
         try{ var _lv=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel()); if(_lv!=null&&_lv!=="") body.level=_lv; }catch(e){}   // per-level prompt selection
+        var _b=[]; if(builds.fill_blank)_b.push("fill_blank"); if(builds.written)_b.push("written"); if(_b.length) body.builds=_b;   // optional extras ticked in the box
         if(modelSel && modelSel.value) body.model=modelSel.value;
         if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
         if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }
