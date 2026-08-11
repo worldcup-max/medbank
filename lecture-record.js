@@ -38,30 +38,35 @@
   function ui(){
     var o=document.createElement("div");
     o.id="mbRec";
-    o.style.cssText="position:fixed;inset:0;z-index:100002;display:flex;flex-direction:column;align-items:center;justify-content:center;"+
-      "background:radial-gradient(120% 90% at 50% 12%,#1a0f36 0%,#0b0713 55%,#050308 100%);font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;text-align:center;padding:24px";
+    o.style.cssText="position:fixed;inset:0;z-index:100002;display:flex;flex-direction:column;align-items:center;justify-content:space-between;"+
+      "background:radial-gradient(120% 80% at 50% 12%,#1a0f36 0%,#0b0713 55%,#050308 100%);font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;text-align:center;"+
+      "padding:calc(env(safe-area-inset-top,0px) + 8vh) 7vw calc(env(safe-area-inset-bottom,0px) + 6vh)";
     o.innerHTML =
-      // brand lock-up pill
-      "<div style='display:flex;align-items:center;gap:11px;background:#fff;color:#1c1830;padding:12px 24px 12px 14px;border-radius:999px;box-shadow:0 0 42px rgba(167,139,250,.6),0 12px 34px rgba(124,79,224,.4);font-weight:800;font-size:23px'>"+
-        "<img src='icon.svg' width='36' height='36' style='border-radius:10px' alt=''>MedBank</div>"+
-      // animated waveform — tall equalizer bars
-      "<div id='mbRecWave' style='display:flex;align-items:flex-end;gap:6px;height:104px;margin:46px 0 30px'>"+
-        Array.apply(null,{length:16}).map(function(_,i){ return "<span style='width:8px;border-radius:5px;background:linear-gradient(180deg,#a78bfa,"+CORAL+");animation:mbRecBar "+(0.8+(i%4)*0.18)+"s ease-in-out "+(i*0.07)+"s infinite'></span>"; }).join("")+
+      // TOP — brand lock-up pill
+      "<div style='display:flex;align-items:center;gap:12px;background:#fff;color:#1c1830;padding:13px 26px 13px 15px;border-radius:999px;box-shadow:0 0 46px rgba(167,139,250,.6),0 12px 34px rgba(124,79,224,.4);font-weight:800;font-size:25px'>"+
+        "<img src='icon.svg' width='40' height='40' style='border-radius:11px' alt=''>MedBank</div>"+
+      // MIDDLE — waveform fills, then status + big timer
+      "<div style='width:100%;display:flex;flex-direction:column;align-items:center'>"+
+        "<div id='mbRecWave' style='display:flex;align-items:flex-end;justify-content:center;gap:7px;height:26vh;min-height:130px;width:100%;margin-bottom:30px'>"+
+          Array.apply(null,{length:18}).map(function(_,i){ return "<span style='width:9px;border-radius:6px;background:linear-gradient(180deg,#a78bfa,"+CORAL+");animation:mbRecBar "+(0.8+(i%4)*0.18)+"s ease-in-out "+(i*0.06)+"s infinite'></span>"; }).join("")+
+        "</div>"+
+        "<div id='mbRecStatus' style='font-size:17px;font-weight:600;letter-spacing:.3px;color:#d8ccff'>Recording the lecture…</div>"+
+        "<div id='mbRecTime' style='font-size:64px;font-weight:800;letter-spacing:1px;margin:6px 0 6px;font-variant-numeric:tabular-nums'>00:00</div>"+
+        "<div id='mbRecHint' style='font-size:13px;color:#9a8fc0;max-width:280px;line-height:1.5'>Keep MedBank open with your screen on.</div>"+
       "</div>"+
-      "<div id='mbRecStatus' style='font-size:15px;font-weight:600;letter-spacing:.3px;color:#d8ccff'>Recording the lecture…</div>"+
-      "<div id='mbRecTime' style='font-size:52px;font-weight:800;letter-spacing:1px;margin:8px 0 4px;font-variant-numeric:tabular-nums'>00:00</div>"+
-      "<div id='mbRecHint' style='font-size:12.5px;color:#9a8fc0;max-width:280px;line-height:1.5'>Keep MedBank open with your screen on. Tap the button when the lecture ends.</div>"+
-      // controls: pause/resume + stop
-      "<div style='display:flex;align-items:center;gap:30px;margin-top:30px'>"+
-        "<button id='mbRecPause' style='width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center'>⏸</button>"+
-        "<button id='mbRecStop' style='width:74px;height:74px;border-radius:50%;border:5px solid rgba(255,255,255,.16);background:#ef4444;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(239,68,68,.5)'>"+
-          "<span style='width:26px;height:26px;border-radius:6px;background:#fff;display:block'></span></button>"+
-      "</div>"+
-      "<div id='mbRecStopLbl' style='margin-top:14px;font-size:13px;color:#c9bff0;font-weight:600'>Pause&nbsp; ·&nbsp; Stop &amp; build my cards</div>"+
-      "<button id='mbRecCancel' style='margin-top:22px;background:transparent;border:0;color:#6f6690;font-size:13px;cursor:pointer;text-decoration:underline'>Cancel</button>";
+      // BOTTOM — controls + cancel
+      "<div style='display:flex;flex-direction:column;align-items:center'>"+
+        "<div style='display:flex;align-items:center;gap:34px'>"+
+          "<button id='mbRecPause' style='width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center'>⏸</button>"+
+          "<button id='mbRecStop' style='width:88px;height:88px;border-radius:50%;border:6px solid rgba(255,255,255,.16);background:#ef4444;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(239,68,68,.55)'>"+
+            "<span style='width:32px;height:32px;border-radius:7px;background:#fff;display:block'></span></button>"+
+        "</div>"+
+        "<div id='mbRecStopLbl' style='margin-top:16px;font-size:14px;color:#c9bff0;font-weight:600'>Pause&nbsp; ·&nbsp; Stop &amp; build my cards</div>"+
+        "<button id='mbRecCancel' style='margin-top:18px;background:transparent;border:0;color:#6f6690;font-size:13px;cursor:pointer;text-decoration:underline'>Cancel</button>"+
+      "</div>";
     if(!document.getElementById("mbRecKF")){
       var s=document.createElement("style"); s.id="mbRecKF";
-      s.textContent="@keyframes mbRecBar{0%,100%{height:18px}50%{height:100px}}";
+      s.textContent="@keyframes mbRecBar{0%,100%{height:16%}50%{height:100%}}";
       document.head.appendChild(s);
     }
     return o;
