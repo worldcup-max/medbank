@@ -14,9 +14,34 @@
   var tab=null, drawer=null, scrim=null, injected=false;
   var active="ask";                 // ask | source | note
   var hist={};                      // topicId -> [{role,text}]
+  var hl="";                        // phrase to highlight in the Source note (set by a card's "Show in note")
+  var hlT=null;                      // transcript moment (seconds) to jump to for recorded/YouTube lectures
 
   function DOCK(){ return window.MB_DOCK || null; }
+  function fmtTime(s){ s=Math.floor(s||0); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
   function esc(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  /* scroll to + flash the passage a card came from, inside the rendered note */
+  function highlightIn(container, phrase){
+    if(!container || !phrase) return;
+    var needle=(""+phrase).toLowerCase().replace(/\s+/g," ").trim(); if(needle.length<4) return;
+    var tries=[needle, needle.split(" ").slice(0,6).join(" "), needle.split(" ").slice(0,4).join(" ")];
+    for(var k=0;k<tries.length;k++){
+      var frag=tries[k]; if(frag.length<4) continue;
+      var walker=document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null), node;
+      while((node=walker.nextNode())){
+        var tx=(node.nodeValue||"").toLowerCase().replace(/\s+/g," ");
+        if(tx.indexOf(frag)>=0){
+          var el=node.parentElement; if(!el) return;
+          var prev=el.style.background;
+          el.style.transition="background .5s"; el.style.background="#fff3bf"; el.style.borderRadius="5px";
+          try{ el.scrollIntoView({block:"center",behavior:"smooth"}); }catch(_){ el.scrollIntoView(); }
+          setTimeout(function(){ el.style.background=prev||"transparent"; }, 2400);
+          return;
+        }
+      }
+    }
+  }
 
   function inject(){
     if(injected) return; injected=true;
@@ -55,7 +80,7 @@
   function open(tabName){ active=tabName||active||"ask"; render(); scrim.classList.add("on"); drawer.classList.add("on"); }
   function close(){ scrim.classList.remove("on"); drawer.classList.remove("on"); }
 
-  function setTab(t){ active=t; render(); }
+  function setTab(t){ hl=""; hlT=null; active=t; render(); }   // manual tab switch clears any pending highlight
 
   function render(){
     var d=DOCK(); var ctx=(d&&d.ctx&&d.ctx())||null;
@@ -78,6 +103,11 @@
       if(ctx.pdf) src+="<a href='"+esc(ctx.pdf)+"' target='_blank' style='display:inline-block;margin-bottom:12px;background:"+TINT+";color:"+V+";text-decoration:none;font-weight:800;padding:10px 14px;border-radius:11px'>⬇ Open the original PDF</a>";
       if(ctx.noteHtml) src+="<div style='font-weight:800;margin:6px 0'>Built note</div><div class='md'>"+ctx.noteHtml+"</div>";
       if(ctx.simplifiedHtml) src+="<div style='font-weight:800;margin:16px 0 6px'>Simplified</div><div class='md'>"+ctx.simplifiedHtml+"</div>";
+      if(ctx.transcript && ctx.transcript.length){
+        src+="<div style='font-weight:800;margin:16px 0 6px'>🎙 Lecture transcript</div><div id='mbDockTr'>"+
+          ctx.transcript.map(function(seg){ return "<div class='trline' data-t='"+seg.t+"' style='display:flex;gap:8px;padding:7px 8px;border-radius:8px;font-size:13px;line-height:1.45'><span style='color:"+V+";font-weight:800;min-width:46px'>"+fmtTime(seg.t)+"</span><span>"+esc(seg.text)+"</span></div>"; }).join("")+
+        "</div>";
+      }
       if(!src) src="<div style='color:"+DIM+";text-align:center;margin-top:20px'>No source material attached to this topic yet.</div>";
       body="<div class='dbody'>"+src+"</div>";
     } else { // note
@@ -118,6 +148,18 @@
       var save=drawer.querySelector("#mbDockNoteSave"), noteTa=drawer.querySelector("#mbDockNote");
       if(save) save.onclick=function(){ d.saveNote(ctx.cardId, noteTa.value||""); save.textContent="Saved ✓"; setTimeout(function(){ save.textContent="Save note"; },1200); };
     }
+    if(active==="source" && hl){ var sbody=drawer.querySelector(".dbody"); if(sbody) setTimeout(function(){ highlightIn(sbody, hl); }, 60); }
+    if(active==="source" && hlT!=null){
+      var tr=drawer.querySelector("#mbDockTr");
+      if(tr) setTimeout(function(){
+        var lines=tr.querySelectorAll(".trline"), pick=null;
+        for(var i=0;i<lines.length;i++){ if((+lines[i].getAttribute("data-t")) <= hlT+1) pick=lines[i]; else break; }
+        if(!pick && lines.length) pick=lines[0];
+        if(pick){ pick.style.transition="background .5s"; pick.style.background="#efe7fd";
+          try{ pick.scrollIntoView({block:"center",behavior:"smooth"}); }catch(_){ pick.scrollIntoView(); }
+          setTimeout(function(){ pick.style.background="transparent"; }, 2600); }
+      }, 90);
+    }
   }
 
   function syncTab(){
@@ -135,4 +177,12 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
   window.MB_DOCK_OPEN = open;
+  // called by a card's "📄 Show in the note" chip: open Source and flash the passage the card came from
+  window.MB_DOCK_SOURCE = function(phrase){
+    var d=DOCK(); var c=(d&&d.ctx&&d.ctx())||null;
+    hl = phrase || (c&&c.cardSrc) || "";
+    hlT = (c&&c.cardT!=null) ? c.cardT : null;
+    if(!injected) inject();
+    open("source");
+  };
 })();

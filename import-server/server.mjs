@@ -43,6 +43,20 @@ app.use(express.json({ limit:"48mb" }));   // roomy enough for a ~25MB audio fil
 /* same stable card id as the app: cid(topicId,deck,c) = topicId|deckInitial|hstr(q) */
 function hstr(s){ let h=5381; s=s||""; for(let i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))|0; return (h>>>0).toString(36); }
 
+/* best-effort map a card's note-quote to the transcript moment it was spoken (seconds) */
+function matchTime(src, transcript){
+  if(!src || !Array.isArray(transcript) || !transcript.length) return null;
+  const words = (""+src).toLowerCase().match(/[a-z]{4,}/g) || [];
+  if(words.length < 2) return null;
+  let best=null, score=0;
+  for(const seg of transcript){
+    const st=(seg.text||"").toLowerCase(); let sc=0;
+    for(const w of words){ if(st.indexOf(w)>=0) sc++; }
+    if(sc>score){ score=sc; best=seg; }
+  }
+  return (best && score>=2) ? best.t : null;
+}
+
 /* validate a topic object (in memory) reusing the same rules as the CLI validator */
 function validateObj(obj){
   const errors=[];
@@ -75,19 +89,22 @@ async function transcribeAudio(b64, mime){
   const ext = m.includes("mp4")||m.includes("m4a") ? "mp4" : m.includes("mpeg")||m.includes("mp3") ? "mp3" : m.includes("wav") ? "wav" : m.includes("ogg") ? "ogg" : "webm";
   const fd = new FormData();
   fd.append("file", new Blob([buf], { type: mime || "audio/webm" }), "lecture."+ext);
-  fd.append("model", process.env.TRANSCRIBE_MODEL || "gpt-4o-transcribe");
+  fd.append("model", "whisper-1");                    // whisper-1 returns per-segment timestamps (same price)
+  fd.append("response_format", "verbose_json");
+  fd.append("timestamp_granularities[]", "segment");
   const r = await fetch("https://api.openai.com/v1/audio/transcriptions", {
     method:"POST", headers:{ Authorization:"Bearer "+key }, body: fd });
   if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("transcription failed ("+r.status+"): "+t.slice(0,200)); }
   const j = await r.json();
-  return (j.text||"").trim();
+  const segments = (j.segments||[]).map(s=>({ t:Math.max(0,Math.round(s.start||0)), text:(s.text||"").trim() })).filter(s=>s.text);
+  return { text:(j.text||"").trim(), segments };
 }
 
 async function extractContent(body){
-  const parts=[], images=[];
+  const parts=[], images=[]; let transcript=null;
   if(body.text) parts.push({ type:"text", text:"RAW LECTURE:\n\n"+body.text });
   if(body.pdf_base64){ const pdf=require("pdf-parse"); const d=await pdf(Buffer.from(body.pdf_base64,"base64")); parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+d.text }); }
-  if(body.audio_base64){ const tx=await transcribeAudio(body.audio_base64, body.audio_mime); if(tx) parts.push({ type:"text", text:"RAW LECTURE (RECORDED IN CLASS, AUTO-TRANSCRIBED):\n\n"+tx }); }
+  if(body.audio_base64){ const tr=await transcribeAudio(body.audio_base64, body.audio_mime); if(tr.text) parts.push({ type:"text", text:"RAW LECTURE (RECORDED IN CLASS, AUTO-TRANSCRIBED):\n\n"+tr.text }); if(tr.segments && tr.segments.length) transcript=tr.segments; }
   if(body.youtube_url){
     const { YoutubeTranscript } = require("youtube-transcript");
     let items;
@@ -96,9 +113,10 @@ async function extractContent(body){
     const txt = (items||[]).map(x=>x.text).join(" ").replace(/\s+/g," ").trim();
     if(!txt) throw new Error("This video has no readable captions. Try one with subtitles, or paste the text instead.");
     parts.push({ type:"text", text:"RAW LECTURE (YOUTUBE TRANSCRIPT):\n\n"+txt });
+    transcript = (items||[]).map(x=>({ t:Math.max(0,Math.round((x.offset||0)/1000)), text:(x.text||"").trim() })).filter(x=>x.text);
   }
   (body.images||[]).forEach(img=>{ images.push({ type:"image", source:{ type:"base64", media_type:img.media_type||"image/jpeg", data:img.data } }); });
-  return { parts, images };
+  return { parts, images, transcript };
 }
 
 /* ---- multi-provider generation: routes by model name ----
@@ -189,8 +207,9 @@ app.post("/import", async (req,res)=>{
     if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
 
     const prompt = pt.data.template
-      .replace(/\{\{topicName\}\}/g, topicName).replace(/\{\{lecturer\}\}/g, lecturer||"").replace(/\{\{subject\}\}/g, subject||"");
-    const { parts, images } = await extractContent(req.body);
+      .replace(/\{\{topicName\}\}/g, topicName).replace(/\{\{lecturer\}\}/g, lecturer||"").replace(/\{\{subject\}\}/g, subject||"")
+      + "\n\nADDITIONAL REQUIREMENT — source anchors: For EVERY primer card and EVERY recall card, also include a field \"src\": a SHORT verbatim quote (6 to 12 words) copied EXACTLY (same words and casing) from note_md that this card is based on, so the app can jump the reader to the exact spot in the built note. Prefer a distinctive sentence fragment over a heading. If you truly cannot find a matching phrase, use the nearest heading text from note_md. Keep \"src\" inside each card object alongside its other fields.";
+    const { parts, images, transcript } = await extractContent(req.body);
 
     const gen = await generate({ model, prompt, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: Number(pt.data.temperature) || 0.3 });
     let raw = gen.text;
@@ -200,17 +219,20 @@ app.post("/import", async (req,res)=>{
     if(errs.length){ await admin.from("imports").update({ status:"failed", error:errs.join("; ") }).eq("id",importId); return res.status(502).json({ error:"validation failed", details:errs }); }
 
     // --- save the topic + cards ---
-    const topic = await admin.from("topics").insert({
+    const topicRow = {
       course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
       source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))),
       note_md: obj.note_md, simplified_md: obj.simplified_md
-    }).select("id").single();
+    };
+    if(transcript && transcript.length) topicRow.transcript = transcript;   // needs a jsonb "transcript" column
+    let topic = await admin.from("topics").insert(topicRow).select("id").single();
+    if(topic.error && /transcript/i.test(topic.error.message||"")){ delete topicRow.transcript; topic = await admin.from("topics").insert(topicRow).select("id").single(); } // column not added yet → save without it
     if(topic.error) throw topic.error;
     const topicId = topic.data.id;
 
     const cards=[];
-    (obj.primer.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"primer", idx:i, card_key:topicId+"|p|"+hstr(c.q), q:c.q, payload:{ lecturer:c.lecturer, explain:c.explain, tie:c.tie } }));
-    (obj.recall.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"recall", idx:i, card_key:topicId+"|r|"+hstr(c.q), q:c.q, payload:{ a:c.a, opts:c.opts, ans:c.ans } }));
+    (obj.primer.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"primer", idx:i, card_key:topicId+"|p|"+hstr(c.q), q:c.q, payload:{ lecturer:c.lecturer, explain:c.explain, tie:c.tie, src:c.src||null, src_t:matchTime(c.src, transcript) } }));
+    (obj.recall.cards||[]).forEach((c,i)=>cards.push({ topic_id:topicId, account_id, deck:"recall", idx:i, card_key:topicId+"|r|"+hstr(c.q), q:c.q, payload:{ a:c.a, opts:c.opts, ans:c.ans, src:c.src||null, src_t:matchTime(c.src, transcript) } }));
     const cw = await admin.from("cards").insert(cards);
     if(cw.error) throw cw.error;
 

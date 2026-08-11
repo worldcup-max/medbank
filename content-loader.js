@@ -62,6 +62,14 @@
                       .in("course_id", courseIds)).data || [];
       var topicIds = topics.map(function(t){ return t.id; });
 
+      // timestamped lecture transcripts (recordings / YouTube) — guarded: if the column
+      // isn't there yet, we simply skip it and the app runs exactly as before.
+      var trById = {};
+      if(topicIds.length){
+        var trRes = await sb.from("topics").select("id,transcript").in("id", topicIds);
+        if(trRes && !trRes.error){ (trRes.data||[]).forEach(function(x){ if(x.transcript) trById[x.id]=x.transcript; }); }
+      }
+
       var cards = topicIds.length
         ? ((await sb.from("cards").select("topic_id,deck,idx,q,payload").in("topic_id", topicIds).order("idx")).data || [])
         : [];
@@ -84,6 +92,7 @@
           var topic = {
             id: t.id, name: t.title, lecturer: t.lecturer || "", ready: (t.status === "ready"),
             note: t.note_md || "", simplified: t.simplified_md || "",
+            transcript: trById[t.id] || null,
             primer: g.primer, recall: g.recall
           };
           mod.topics.push(topic);

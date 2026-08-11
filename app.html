@@ -745,7 +745,8 @@ window.MB_DOCK = {
     if(!t) return null;
     return { topicId:t.id, topicName:t.name||'', subject:(t.subject&&t.subject.name)||'', pdf:t.pdf||'',
              noteHtml: t.note?md(t.note):'', simplifiedHtml: t.simplified?md(t.simplified):'',
-             cardId:cardId||'', cardQ:card?(card.q||''):'', personalNote: cardId?getNote(cardId):'' };
+             transcript: t.transcript||null,
+             cardId:cardId||'', cardQ:card?(card.q||''):'', cardSrc:card?(card.src||''):'', cardT:(card&&card.src_t!=null)?card.src_t:null, personalNote: cardId?getNote(cardId):'' };
   },
   ask: function(userMsg, history, ctx){
     var sys='You are MedBank’s concise study tutor for a medical student. Topic: "'+((ctx&&ctx.topicName)||'this lecture')+'".'+((ctx&&ctx.cardQ)?(' The card on screen asks: "'+ctx.cardQ+'".'):'')+' Answer briefly and clearly, exam-focused, no fluff.';
@@ -867,7 +868,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.07e';   // bump this each release
+const APP_VERSION='2026.08.07g';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2166,6 +2167,7 @@ function mcqView(session){
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${body}</div>
     ${picked?noteBlock(it):''}
+    ${(c.src&&picked)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
     ${controls}</div>`;
 }
 
@@ -2222,6 +2224,7 @@ function cardView(session){
       ${c.img?`<div onclick="event.stopPropagation()">${imgBlock(c.img,c.imgCaption||'')}</div>`:''}
       ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
     ${S.show?noteBlock(it):''}
+    ${(c.src&&S.show)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
     ${controls}</div>`;
 }
 
