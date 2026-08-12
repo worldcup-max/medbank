@@ -249,6 +249,18 @@ async function elevenTTS(text, voiceId){
   if(!r.ok){ const tx=await r.text().catch(()=> ""); throw new Error("voice generation failed ("+r.status+"): "+tx.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
+async function openaiTTS(text, voice){
+  const key = process.env.OPENAI_API_KEY; if(!key) throw new Error("OPENAI_API_KEY not set on the server");
+  const r = await fetch("https://api.openai.com/v1/audio/speech", {
+    method:"POST", headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json" },
+    body: JSON.stringify({ model: process.env.OPENAI_TTS_MODEL || "tts-1", voice: voice||"nova", input: text, response_format:"mp3" }) });
+  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("OpenAI voice failed ("+r.status+"): "+t.slice(0,160)); }
+  return Buffer.from(await r.arrayBuffer());
+}
+/* one clip via the chosen provider (default OpenAI — cheaper; ElevenLabs = premium) */
+async function ttsClip(provider, text, voiceId){
+  return provider==="eleven" ? elevenTTS(text, voiceId) : openaiTTS(text, voiceId);
+}
 async function uploadPodcastAudio(path, buf){
   const up = await admin.storage.from("podcasts").upload(path, buf, { contentType:"audio/mpeg", upsert:true });
   if(up.error) throw new Error("audio storage failed: "+up.error.message+" (create a public bucket named 'podcasts')");
@@ -417,12 +429,13 @@ app.post("/podcast-audio", async (req,res)=>{
     const extras = t.data.extras || {};
     const script = extras.podcast && extras.podcast.script;
     if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
-    const combo = voiceA+"_"+voiceB;
+    const provider = req.body.provider==="eleven" ? "eleven" : "openai";   // default OpenAI (cheaper)
+    const combo = provider+"_"+voiceA+"_"+voiceB;
     if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
     const urls=[];
     for(let i=0;i<script.length;i++){
       const vid = script[i].speaker==="A" ? voiceA : voiceB;
-      const buf = await elevenTTS(script[i].text, vid);
+      const buf = await ttsClip(provider, script[i].text, vid);
       urls.push(await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf));
     }
     extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]:urls });
@@ -445,6 +458,18 @@ app.post("/solve", async (req,res)=>{
     const gen = await generate({ model, prompt:SOLVE_PROMPT, parts, images, max_tokens:2000, temperature:0.2 });
     res.json({ ok:true, answer:(gen.text||"").trim() });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* Read-aloud / voice tutor speech via OpenAI (returns mp3) */
+app.post("/tts", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const feat = await admin.rpc("can_use_features", { p_account:user.id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked" });
+    const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
+    const buf = await openaiTTS(text, req.body.voice || "nova");
+    res.setHeader("Content-Type","audio/mpeg"); res.send(buf);
+  }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
 });
 
 /* ---- Admin: edit build prompts per kind × level (only is_admin accounts) ---- */
