@@ -23,8 +23,6 @@
 <header>
   <div class="bar">
     <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
     <nav class="nav">
       <a class="nl" href="../index.html#how">How it works</a>
       <div class="hasmenu" tabindex="0">

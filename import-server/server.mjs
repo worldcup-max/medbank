@@ -21,7 +21,7 @@ import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
-import { kokoroPrep, sayPrep, KOKORO_DEFAULT } from "./med-voice.mjs";
+import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -317,6 +317,62 @@ async function uploadPodcastAudio(path, buf){
 
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
+/* ===================================================================
+ * Passive lexicon growth: harvest unusual medical terms from each imported
+ * lecture, learn their pronunciation once (LLM), store in Supabase and merge
+ * live — so the more lectures students build, the better the voice gets.
+ * Opt-in: set LEXICON_MODEL (a cheap model, e.g. deepseek-chat) to enable.
+ * Needs a Supabase table:
+ *   create table pronunciations (term text primary key, ipa text, say text,
+ *     source text default 'lecture', created_at timestamptz default now());
+ * =================================================================== */
+const _MEDSUF=/(itis|osis|aemia|emia|ectomy|otomy|ostomy|opathy|pathy|plasia|trophy|megaly|uria|rrhoea|rrhea|algia|penia|cytosis|noma|oma|plegia|sclerosis|stenosis|lysis|pnoea|pnea|iasis|ptosis|malacia|ectasis|cele)$/;
+const _MEDROOT=/(cardio|neuro|gastro|hepat|nephr|pulmon|osteo|arthro|dermat|haemat|hemat|myelo|encephal|thromb|angio|bronch|laryng|pharyng|rhino|ophthalm|glomerul|prostat|lymph|leuk|erythro|myco|bacter|strept|staphyl|penicill|cillin|mycin|azole|statin|prazole|parin|sartan)/;
+function harvestCandidates(text){
+  const seen=new Set(), out=[];
+  (String(text||"").toLowerCase().match(/[a-z][a-z-]{5,}/g)||[]).forEach(w=>{
+    if(seen.has(w)) return; seen.add(w);
+    if((_MEDSUF.test(w)||_MEDROOT.test(w)) && !knownTerm(w)) out.push(w);
+  });
+  return out;
+}
+async function loadLearnedPronunciations(){
+  try{
+    const r = await admin.from("pronunciations").select("term,ipa,say");
+    if(r.data && r.data.length){
+      const ipa={}, say={};
+      r.data.forEach(x=>{ if(x.term&&x.ipa) ipa[x.term]=x.ipa; if(x.term&&x.say) say[x.term]=x.say; });
+      const total = mergeTerms(ipa, say);
+      console.log("[lexicon] loaded", r.data.length, "learned terms · total", total);
+    }
+  }catch(e){ /* table not created yet — fine */ }
+}
+async function harvestFromNote(note){
+  const model = process.env.LEXICON_MODEL; if(!model) return;         // opt-in
+  const terms = harvestCandidates(note).slice(0, 8);
+  if(!terms.length) return;
+  try{
+    const prompt = "For each medical term below, give American-English IPA (NO surrounding slashes, use stress marks ˈ primary and ˌ secondary) and a plain phonetic respelling (hyphens between syllables, stressed syllable in CAPS). If unsure of a term, omit it. Return ONLY JSON: {\"items\":[{\"term\":\"\",\"ipa\":\"\",\"say\":\"\"}]}.\nTerms: " + terms.join(", ");
+    const gen = await generate({ model, prompt, parts:[], images:[], max_tokens:900, temperature:0 });
+    const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
+    const obj = JSON.parse(t.slice(s,e+1));
+    const rows=[], ipa={}, say={};
+    (obj.items||[]).forEach(it=>{
+      const term=(it.term||"").toLowerCase().trim();
+      if(!term || !it.ipa) return;
+      ipa[term]=it.ipa; if(it.say) say[term]=it.say;
+      rows.push({ term, ipa:it.ipa, say:it.say||null, source:"lecture" });
+    });
+    if(rows.length){
+      await admin.from("pronunciations").upsert(rows, { onConflict:"term" });
+      mergeTerms(ipa, say);
+      console.log("[lexicon] learned", rows.length, "new terms from a lecture");
+    }
+  }catch(e){ /* never let harvesting affect the import */ }
+}
+loadLearnedPronunciations();
+setInterval(loadLearnedPronunciations, 30*60*1000);   // refresh every 30 min
+
 app.post("/import", async (req,res)=>{
   try{
     const user = await getUser(req);
@@ -393,6 +449,7 @@ app.post("/import", async (req,res)=>{
     await admin.from("imports").update({ status:"done", topic_id:topicId, model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
+    harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
     res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });

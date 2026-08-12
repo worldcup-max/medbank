@@ -3884,8 +3884,70 @@ function render(){
       const s=Math.floor((Date.now()-S.started)/1000);
       el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); },1000);
   }
+  try{ if((p[0]||'home')==='home') maybeOnboard(); }catch(e){}
 }
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
+
+/* ---------- first-run onboarding ---------- */
+let _onbShown=false;
+function maybeOnboard(){
+  if(_onbShown || !DATA || !DATA.flags || DATA.flags.onboarded) return;
+  const fromWelcome=/[?&]welcome/.test(location.search);
+  const hasTopics=(typeof allTopics!=='undefined') && allTopics.some(t=>t.ready);
+  const brandNew=!hasTopics && !Object.keys(DATA.log||{}).length && !((DATA.streak||{}).best);
+  if(fromWelcome || brandNew){ _onbShown=true; showOnboard(); }
+  else if(hasTopics){ DATA.flags.onboarded=1; try{persist();}catch(e){} }   // existing user: mark done silently
+}
+function showOnboard(){
+  if(!document.getElementById('onbdCss')){
+    const st=document.createElement('style'); st.id='onbdCss';
+    st.textContent=`
+    .onbd{position:fixed;inset:0;z-index:9999;background:rgba(15,10,30,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;animation:onf .25s}
+    @keyframes onf{from{opacity:0}to{opacity:1}}
+    .onbd-card{background:#fff;border-radius:22px;max-width:440px;width:100%;padding:26px 24px 20px;box-shadow:0 30px 80px rgba(0,0,0,.45);text-align:center}
+    .onbd-ic{font-size:44px;line-height:1}
+    .onbd h2{margin:10px 0 6px;font-size:23px;color:var(--ink,#1c1830)}
+    .onbd p{color:var(--dim,#5c5570);font-size:15px;line-height:1.5;margin:0 auto;max-width:360px}
+    .onbd-rows{text-align:left;margin:18px 0 4px;display:flex;flex-direction:column;gap:13px}
+    .onbd-row{display:flex;gap:12px;align-items:flex-start}
+    .onbd-row .e{font-size:22px;width:30px;text-align:center;flex:none}
+    .onbd-row b{display:block;font-size:15px;color:var(--ink,#1c1830)}
+    .onbd-row span{font-size:13px;color:var(--dim,#5c5570);line-height:1.4}
+    .onbd-free{margin-top:14px;background:#eef7f4;border:1px solid #cfe9e1;color:#0d7a68;font-weight:800;font-size:13px;padding:9px;border-radius:10px}
+    .onbd-dots{display:flex;gap:6px;justify-content:center;margin:18px 0 2px}
+    .onbd-dots i{width:7px;height:7px;border-radius:50%;background:#d8d1ea;transition:.2s}
+    .onbd-dots i.on{background:var(--violet,#6d28d9);width:20px;border-radius:4px}
+    .onbd-btns{display:flex;gap:10px;justify-content:center;margin-top:16px}
+    .onbd .b{border:none;border-radius:11px;padding:12px 20px;font-weight:800;font-size:15px;cursor:pointer}
+    .onbd .b.primary{background:var(--violet,#6d28d9);color:#fff;flex:1}
+    .onbd .b.ghost{background:#efeaf7;color:var(--violet-d,#5b21b6)}
+    .onbd .skip{margin-top:11px;background:none;border:none;color:var(--dim,#5c5570);font-size:13px;cursor:pointer}`;
+    document.head.appendChild(st);
+  }
+  let step=0;
+  const steps=[
+    {ic:'👋',h:'Welcome to MedBank',html:'<p>Turn any lecture into clean notes, flashcards, a two-host podcast and active recall that actually sticks — built for medical exams.</p>'},
+    {ic:'✨',h:'Three simple steps',html:'<div class="onbd-rows"><div class="onbd-row"><span class="e">📥</span><div><b>Add a lecture</b><span>A PDF, photos, a YouTube link, or record it live.</span></div></div><div class="onbd-row"><span class="e">🛠️</span><div><b>MedBank builds it</b><span>Notes, flashcards, quizzes, a cram sheet and a podcast.</span></div></div><div class="onbd-row"><span class="e">🧠</span><div><b>Review with active recall</b><span>Cards come back right before you&rsquo;d forget.</span></div></div></div><div class="onbd-free">✓ Your first lecture is free</div>'},
+    {ic:'🚀',h:'Build your first lecture',html:'<p>Add one lecture now and watch your whole study set appear in a couple of minutes.</p>'}
+  ];
+  const ov=document.createElement('div'); ov.className='onbd'; document.body.appendChild(ov);
+  function done(build){ if(DATA&&DATA.flags){ DATA.flags.onboarded=1; try{persist();}catch(e){} } ov.remove(); if(build){ try{ document.body.classList.remove('navopen'); MB_openImport&&MB_openImport(); }catch(e){} } }
+  function draw(){
+    const s=steps[step], last=step===steps.length-1;
+    const dots=steps.map((_,i)=>'<i class="'+(i===step?'on':'')+'"></i>').join('');
+    ov.innerHTML='<div class="onbd-card"><div class="onbd-ic">'+s.ic+'</div><h2>'+s.h+'</h2>'+s.html
+      +'<div class="onbd-dots">'+dots+'</div><div class="onbd-btns">'
+      +(step>0?'<button class="b ghost" id="onbBack">Back</button>':'')
+      +(last?'<button class="b primary" id="onbBuild">＋ Add your first lecture</button>':'<button class="b primary" id="onbNext">Next</button>')
+      +'</div><button class="skip" id="onbSkip">'+(last?'I&rsquo;ll explore first':'Skip')+'</button></div>';
+    const n=document.getElementById('onbNext'); if(n)n.onclick=()=>{step++;draw();};
+    const b=document.getElementById('onbBack'); if(b)b.onclick=()=>{step--;draw();};
+    const bd=document.getElementById('onbBuild'); if(bd)bd.onclick=()=>done(true);
+    document.getElementById('onbSkip').onclick=()=>done(false);
+  }
+  draw();
+}
+window.MB_ONBOARD=showOnboard;
 
 /* ---------- PWA: update, install, service worker, reminders ---------- */
 /* force the newest version: clear caches, update the worker, reload */

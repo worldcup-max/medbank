@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MedBank — 60-second preview (voiceover)</title>
+<style>
+  :root{--violet:#6d28d9;--violet-d:#5b21b6;--ink:#1c1830;--dim:#5c5570;--line:#e7e3f2;--teal:#0d9488;--coral:#f97362;}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0f0a1e;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
+  .reel{width:min(960px,96vw);aspect-ratio:16/9;position:relative;overflow:hidden;border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.5);background:#fff}
+  .canvas{position:absolute;top:0;left:0;width:960px;height:540px;transform-origin:top left;overflow:hidden}
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .5s ease;padding:54px 64px 92px}
+  .scene.on{opacity:1}
+  .bg1{background:radial-gradient(120% 120% at 50% 0%,#f6f4fb,#efeaf7)}
+  .bgV{background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff}
+  .bgT{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff}
+  .eyebrow{font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--violet-d);margin-bottom:12px}
+  .bgV .eyebrow,.bgT .eyebrow{color:rgba(255,255,255,.85)}
+  .big{font-size:46px;font-weight:900;line-height:1.1;color:var(--ink);text-align:center;letter-spacing:-1px;max-width:760px}
+  .bgV .big,.bgT .big{color:#fff}
+  .grad{background:linear-gradient(90deg,#7c3aed,#0d9488);-webkit-background-clip:text;background-clip:text;color:transparent}
+  /* progress + captions */
+  .prog{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,#7c3aed,#0d9488);width:0}
+  .cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;font-size:19px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);padding:0 40px;opacity:0;transition:opacity .4s}
+  .cap.on{opacity:1}
+  .cap.dark{color:var(--ink);text-shadow:none}
+  /* generic mock pieces */
+  .tiles{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:640px}
+  .tile{background:#fff;border:1.6px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;width:140px;box-shadow:0 10px 24px rgba(45,27,90,.08);opacity:0;transform:translateY(14px);animation:pop .5s forwards}
+  .tile .i{font-size:28px}.tile b{font-size:14px;color:var(--ink)}.tile span{font-size:11px;color:var(--dim)}
+  @keyframes pop{to{opacity:1;transform:none}}
+  .pills{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;max-width:680px;margin-top:8px}
+  .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:11px 18px;font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(45,27,90,.08);opacity:0;transform:scale(.8);animation:pin .45s forwards}
+  @keyframes pin{to{opacity:1;transform:none}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px rgba(45,27,90,.16);padding:22px 24px;width:560px}
+  .qh{font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--teal)}
+  .qq{font-size:20px;font-weight:800;color:var(--ink);margin:8px 0 14px;line-height:1.35}
+  .opt{border:1.8px solid var(--line);border-radius:12px;padding:12px 15px;margin-top:9px;font-size:15px;display:flex;gap:11px;align-items:center;color:var(--ink)}
+  .opt .t{width:26px;height:26px;border-radius:8px;background:#efeaf3;color:var(--dim);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .opt.ok{border-color:var(--teal);background:#dcf3ee}.opt.ok .t{background:var(--teal);color:#fff}
+  .revbadge{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:#eef7f4;border:1px solid #cfe9e1;color:#0d7a68;font-weight:800;font-size:14px;padding:9px 14px;border-radius:10px}
+  .wave{display:flex;align-items:center;gap:5px;height:70px;margin:8px 0}
+  .wave i{width:7px;border-radius:4px;background:linear-gradient(180deg,#fff,rgba(255,255,255,.6));height:30%;animation:wv .9s ease-in-out infinite}
+  @keyframes wv{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+  .hostrow{display:flex;gap:12px;justify-content:center;margin-top:6px}
+  .host{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:999px;padding:7px 15px 7px 7px;font-weight:800;font-size:15px}
+  .host .av{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--violet-d);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  .chat{width:560px;display:flex;flex-direction:column;gap:10px}
+  .msg{max-width:78%;font-size:16px;line-height:1.45;padding:12px 15px;border-radius:14px}
+  .msg.u{align-self:flex-end;background:var(--violet);color:#fff;border-bottom-right-radius:4px}
+  .msg.a{align-self:flex-start;background:#f4f2fa;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .cite{margin-top:8px;font-size:12px;font-weight:800;color:var(--violet-d);background:#ece7f8;display:inline-block;padding:3px 9px;border-radius:6px}
+  .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .chip{border-radius:999px;padding:11px 18px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .logo{display:flex;align-items:center;gap:12px;font-size:44px;font-weight:900;color:#fff}
+  .logo .m{width:60px;height:60px;border-radius:16px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:32px}
+  .url{margin-top:14px;font-size:22px;font-weight:800;color:#fff;letter-spacing:.5px}
+  .tagline{margin-top:8px;font-size:16px;color:rgba(255,255,255,.9)}
+  /* start / controls */
+  .overlay{position:absolute;inset:0;background:rgba(15,10,30,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:10;cursor:pointer;backdrop-filter:blur(2px)}
+  .playbtn{width:84px;height:84px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--violet-d);box-shadow:0 14px 40px rgba(0,0,0,.4)}
+  .overlay .lbl{color:#fff;font-weight:700;font-size:16px}
+  .bar{display:flex;gap:10px;align-items:center}
+  .ctl{background:#211640;color:#fff;border:1px solid #3a2a63;border-radius:10px;padding:9px 15px;font-weight:700;font-size:13px;cursor:pointer}
+  .note{color:#9b8fc0;font-size:12.5px;text-align:center;max-width:640px}
+  .stacks{position:relative;width:220px;height:150px}
+  .stacks .s{position:absolute;width:150px;height:96px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 20px rgba(45,27,90,.12);left:35px;top:26px}
+  .stacks .s:nth-child(1){transform:rotate(-8deg) translateY(-6px)}
+  .stacks .s:nth-child(2){transform:rotate(4deg)}
+  .stacks .s:nth-child(3){transform:rotate(-2deg) translateY(8px);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:12px;font-weight:700}
+</style>
+</head>
+<body>
+  <div class="reel" id="reel">
+    <div class="canvas" id="canvas">
+
+      <!-- 1 hook -->
+      <div class="scene bg1" data-i="0">
+        <div class="stacks"><div class="s"></div><div class="s"></div><div class="s">lecture_14.pdf</div></div>
+        <div class="big" style="margin-top:22px">Lecture after lecture.<br><span class="grad">Nowhere near exam-ready.</span></div>
+      </div>
+
+      <!-- 2 import -->
+      <div class="scene bg1" data-i="1">
+        <div class="eyebrow">Step one</div>
+        <div class="big" style="font-size:34px;margin-bottom:20px">Add one lecture — any format</div>
+        <div class="tiles">
+          <div class="tile" style="animation-delay:.05s"><div class="i">📄</div><b>PDF / slides</b><span>handout</span></div>
+          <div class="tile" style="animation-delay:.2s"><div class="i">📷</div><b>Photos</b><span>handwritten too</span></div>
+          <div class="tile" style="animation-delay:.35s"><div class="i">▶️</div><b>YouTube</b><span>we transcribe</span></div>
+          <div class="tile" style="animation-delay:.5s"><div class="i">🎙️</div><b>Record live</b><span>in class</span></div>
+        </div>
+      </div>
+
+      <!-- 3 build -->
+      <div class="scene bg1" data-i="2">
+        <div class="eyebrow">In minutes</div>
+        <div class="big" style="font-size:34px;margin-bottom:8px">One upload → a whole study set</div>
+        <div class="pills">
+          <span class="pill" style="animation-delay:.05s">📖 Notes</span>
+          <span class="pill" style="animation-delay:.18s">🃏 Flashcards</span>
+          <span class="pill" style="animation-delay:.31s">🔁 Active recall</span>
+          <span class="pill" style="animation-delay:.44s">📝 Quiz &amp; written</span>
+          <span class="pill" style="animation-delay:.57s">📄 Cram sheet</span>
+          <span class="pill" style="animation-delay:.7s">🎧 Podcast</span>
+        </div>
+      </div>
+
+      <!-- 4 recall -->
+      <div class="scene bg1" data-i="3">
+        <div class="card">
+          <div class="qh">RECALL · PAEDIATRICS</div>
+          <div class="qq">3-week-old, non-bilious projectile vomiting, palpable olive mass. Diagnosis?</div>
+          <div class="opt">​<span class="t">A</span><span>Duodenal atresia</span></div>
+          <div class="opt ok"><span class="t">B</span><span>Hypertrophic pyloric stenosis</span></div>
+          <div class="revbadge">↻ You'll see this again <b>tomorrow</b></div>
+        </div>
+      </div>
+
+      <!-- 5 podcast -->
+      <div class="scene bgV" data-i="4">
+        <div class="eyebrow">On the go</div>
+        <div class="big" style="font-size:34px">Your lecture, as a podcast</div>
+        <div class="wave" id="rv-wave"></div>
+        <div class="hostrow"><div class="host"><span class="av">A</span> Ada</div><div class="host"><span class="av">T</span> Tomi</div></div>
+      </div>
+
+      <!-- 6 tutor -->
+      <div class="scene bg1" data-i="5">
+        <div class="eyebrow" style="text-align:center">Stuck at 2am?</div>
+        <div class="chat">
+          <div class="msg u">Why is the vomiting non-bilious?</div>
+          <div class="msg a">The block is at the pylorus — above where bile enters. So feed comes back up, but bile never reaches it.<div class="cite">📖 Pyloric stenosis · your note</div></div>
+        </div>
+      </div>
+
+      <!-- 7 results -->
+      <div class="scene bgT" data-i="6">
+        <div class="big" style="font-size:36px;margin-bottom:20px">Watch it stick.</div>
+        <div class="chips">
+          <span class="chip" style="background:rgba(255,255,255,.16);color:#fff">🧠 Unfamiliar → <b>Mastered</b></span>
+          <span class="chip" style="background:rgba(255,255,255,.16);color:#fff">🔥 21-day streak</span>
+          <span class="chip" style="background:rgba(255,255,255,.16);color:#fff">✅ Walk in ready</span>
+        </div>
+      </div>
+
+      <!-- 8 cta -->
+      <div class="scene bgV" data-i="7">
+        <div class="logo"><span class="m">📚</span> Med<span style="color:#c4b5fd">Bank</span></div>
+        <div class="url">medbank.com.ng</div>
+        <div class="tagline">Turn any lecture into active recall that sticks.</div>
+      </div>
+
+      <div class="cap" id="rv-cap"></div>
+      <div class="prog" id="rv-prog"></div>
+    </div>
+
+    <div class="overlay" id="rv-ov"><div class="playbtn">▶</div><div class="lbl">Play the 60-second preview (with sound)</div></div>
+  </div>
+
+  <div class="bar">
+    <button class="ctl" id="rv-replay">↺ Replay</button>
+    <button class="ctl" id="rv-mute">🔊 Sound on</button>
+  </div>
+  <div class="note">Narrated version. Tap play to start with voiceover. To capture a real video, screen-record the frame while it plays. (Final voiceover can be rendered in MedBank's own voices before launch.)</div>
+
+<script>
+(function(){
+  var NARRATE = true;
+  var canvas=document.getElementById('canvas'), reel=document.getElementById('reel');
+  function fit(){ canvas.style.transform='scale('+(reel.clientWidth/960)+')'; }
+  window.addEventListener('resize',fit); fit();
+  // waveform bars
+  var wv=document.getElementById('rv-wave'); for(var i=0;i<26;i++){var b=document.createElement('i');b.style.animationDelay=(-(i%9)*0.1)+'s';wv.appendChild(b);}
+  var scenes=[].slice.call(document.querySelectorAll('.scene'));
+  var cap=document.getElementById('rv-cap'), prog=document.getElementById('rv-prog');
+  var S=[
+    {t:7, cap:"Med school hits you with lecture after lecture.", dark:true},
+    {t:9, cap:"Add one — a PDF, photos, a YouTube link, or record it live.", dark:true},
+    {t:9, cap:"MedBank builds your whole study set in minutes.", dark:true},
+    {t:9, cap:"Active-recall cards come back right before you'd forget.", dark:true},
+    {t:8, cap:"Turn any lecture into a two-host podcast for the commute."},
+    {t:8, cap:"Stuck? Ask a tutor that already knows your lecture.", dark:true},
+    {t:6, cap:"Watch mastery climb. Keep your streak. Walk in ready."},
+    {t:4, cap:"MedBank — turn any lecture into active recall that sticks."}
+  ];
+  var TOTAL=S.reduce(function(a,s){return a+s.t;},0);
+  var muted=false, timers=[], t0=0, playing=false;
+  function speak(txt){ if(!NARRATE||muted) return; try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(txt); u.rate=1.02; u.pitch=1; var vs=speechSynthesis.getVoices(); var en=vs.filter(function(v){return /en(-|_)?(US|GB)?/i.test(v.lang);}); if(en[0])u.voice=en[0]; speechSynthesis.speak(u);}catch(e){} }
+  function clearT(){ timers.forEach(clearTimeout); timers=[]; try{speechSynthesis.cancel();}catch(e){} }
+  function show(i){
+    scenes.forEach(function(s){ s.classList.toggle('on', +s.dataset.i===i); });
+    // restart pop/pin animations for the active scene
+    var el=scenes[i]; el.querySelectorAll('.tile,.pill').forEach(function(n){ n.style.animation='none'; n.offsetHeight; n.style.animation=''; });
+    cap.textContent=S[i].cap; cap.classList.toggle('dark', !!S[i].dark); cap.classList.add('on');
+    speak(S[i].cap);
+  }
+  function run(){
+    playing=true; clearT(); var acc=0;
+    prog.style.transition='none'; prog.style.width='0%'; prog.offsetHeight; prog.style.transition='width '+TOTAL+'s linear'; prog.style.width='100%';
+    S.forEach(function(s,i){
+      timers.push(setTimeout(function(){ show(i); }, acc*1000));
+      acc+=s.t;
+    });
+    timers.push(setTimeout(function(){ playing=false; }, TOTAL*1000));
+  }
+  document.getElementById('rv-ov').addEventListener('click',function(){ this.style.display='none'; try{speechSynthesis.getVoices();}catch(e){} run(); });
+  document.getElementById('rv-replay').addEventListener('click',function(){ document.getElementById('rv-ov').style.display='none'; run(); });
+  document.getElementById('rv-mute').addEventListener('click',function(){ muted=!muted; this.textContent=muted?'🔇 Sound off':'🔊 Sound on'; if(muted){try{speechSynthesis.cancel();}catch(e){}} });
+})();
+</script>
+</body>
+</html>

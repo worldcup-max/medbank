@@ -21,8 +21,6 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
 <header>
   <div class="bar">
     <a class="logo" href="index.html"><img src="icon.svg" alt="MedBank"> Med<span>Bank</span></a>
-    <input type="checkbox" class="navtog" id="navtog" aria-hidden="true">
-    <label class="hamb" for="navtog" aria-label="Open menu">☰</label>
     <nav class="nav">
       <a class="nl" href="#how">How it works</a>
       <div class="hasmenu" tabindex="0">
@@ -80,13 +78,6 @@ try{ if(window.matchMedia('(display-mode: standalone)').matches || window.naviga
     </div>
   </div>
 </div>
-
-<!-- 60-SECOND PREVIEW -->
-<section class="reelband"><div class="wrap center">
-  <div class="kicker">See it in 60 seconds</div>
-  <h2 class="h2">From one lecture to exam-ready</h2>
-  <div class="reelwrap"><iframe class="reelframe" src="promo/reel-silent.html" title="MedBank 60-second preview" loading="lazy" scrolling="no"></iframe></div>
-</div></section>
 
 <!-- TRUST -->
 <div class="trust"><div class="wrap"><div class="row">

@@ -31,7 +31,21 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdro
 .nav{display:flex;gap:26px;align-items:center}
 .nav a.nl,.nav .nl{color:var(--ink);font-weight:600;font-size:14.5px;cursor:pointer}
 .nav a.nl:hover,.nav .nl:hover{color:var(--violet-d)}
-@media(max-width:860px){.nav a.nl,.nav .hasmenu{display:none}}
+.reelband{padding-top:8px}
+.reelwrap{max-width:900px;margin:26px auto 0}
+.reelframe{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;box-shadow:0 24px 60px rgba(45,27,90,.2);background:#0f0a1e;display:block}
+.navtog,.hamb{display:none}
+@media(max-width:860px){
+  .hamb{display:inline-flex;align-items:center;justify-content:center;font-size:21px;color:var(--violet-d);cursor:pointer;padding:5px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;line-height:1}
+  .bar{flex-wrap:wrap}
+  .nav{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:2px;margin-top:10px}
+  .navtog:checked ~ .nav{display:flex}
+  .nav a.nl,.nav .hasmenu{display:block}
+  .nav .nl{padding:12px 4px;border-bottom:1px solid var(--line)}
+  .hasmenu>.nl::after{content:""}
+  .menu{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;border:none;padding:2px 0 8px;min-width:0}
+  .nav>.btn{margin-top:10px;justify-content:center}
+}
 /* features mega-menu (CSS hover, no JS) */
 .hasmenu{position:relative}
 .hasmenu>.nl::after{content:"▾";font-size:11px;margin-left:5px;opacity:.7}
