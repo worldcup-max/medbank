@@ -77,6 +77,8 @@ h2{font-size:20px;margin:34px 0 12px}
 .modhead{font-size:12px;letter-spacing:.9px;text-transform:uppercase;color:var(--dimmer);
   font-weight:700;margin:30px 0 11px}
 .rows{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+.rows.gridv{border:0;background:transparent;overflow:visible;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.rows.gridv .row{border:1px solid var(--line);border-radius:12px;background:var(--panel)}
 .row{display:flex;align-items:center;gap:13px;padding:12px 15px;border-bottom:1px solid var(--line);
   cursor:pointer;transition:background .12s}
 .row:last-child{border-bottom:0}
@@ -868,7 +870,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.08a';   // bump this each release
+const APP_VERSION='2026.08.08c';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -897,6 +899,7 @@ let DATA = (()=>{
   d.flags    = d.flags    || {};  // misc unlock flags
   d.cardEdits= d.cardEdits|| {};  // cardId -> {q,a,explain,...} student corrections (override the AI card)
   d.cardFlags= d.cardFlags|| {};  // cardId -> 1  (reported wrong → hidden from study)
+  d.folders  = d.folders  || [];  // [{id,name,topics:[topicId]}] student collections
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   if(d.daily.courseGoal==20) d.daily.courseGoal=30;   // updated daily new-card goal to 30/course
   return d;
@@ -1476,12 +1479,13 @@ function renderNav(){
     `<div class="navgrp" onclick="toggleNav('${key}')">
        <span class="ic">${ic}</span><span>${label}</span><span class="chev">${NAVUI[key]?'▾':'▸'}</span></div>`;
   const inRecall = r==='today'||r==='review'||r==='hard'||r==='mistakes'||r==='leeches';
-  const inLib = r==='search'||r.startsWith('cards')||r.startsWith('study')||r==='builder'||r.startsWith('lecturer');
+  const inLib = r==='search'||r.startsWith('cards')||r.startsWith('study')||r==='builder'||r.startsWith('lecturer')||r.startsWith('folder');
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openRecorder&&MB_openRecorder()}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
+  h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
   h += it('exam','📝','Mock exam','',r==='exam');
   h += it('week','📊','Progress','',r==='week');
@@ -1491,6 +1495,7 @@ function renderNav(){
     h += sub('cards','◈','Cards',cards||'',r.startsWith('cards')||r.startsWith('study'));
     h += sub('builder','✎','Note builder','',r==='builder');
     h += sub('lecturers','☰','Lecturers',DB.stats.lecturers||'',r.startsWith('lecturer'));
+    h += sub('folders','📁','Folders',(DATA.folders||[]).length||'',r.startsWith('folder'));
     h += sub('search','⌕','Search','',r==='search');
   }
   h += grp('subj','🗂','Subjects');
@@ -1671,6 +1676,86 @@ Primer Cards and Recall Cards, then rebuild the site.</pre>
   <p class="sub" style="margin-top:20px">Every point on the slides is covered by at least one card in each deck — nothing is skipped.</p>`;
 }
 
+/* ---- #11 library view (grid / list) ---- */
+let LIBVIEW='list'; try{ if(localStorage.getItem('mb_libview')==='grid') LIBVIEW='grid'; }catch(e){}
+function toggleLibView(){ LIBVIEW = LIBVIEW==='grid'?'list':'grid'; try{ localStorage.setItem('mb_libview',LIBVIEW); }catch(e){} render(); }
+function libToggleBtn(){ return `<button class="btn" style="font-size:12.5px" onclick="toggleLibView()">${LIBVIEW==='grid'?'☰ List view':'⊞ Grid view'}</button>`; }
+const rowsCls = () => 'rows'+(LIBVIEW==='grid'?' gridv':'');
+
+/* ---- #12 folders / collections ---- */
+function createFolderWith(topicId){
+  const nm=prompt('New folder name (e.g. "Exam block 1", "Weak areas")'); if(!nm||!nm.trim()) return;
+  const f={ id:'f'+Date.now().toString(36), name:nm.trim(), topics:topicId?[topicId]:[] };
+  DATA.folders.push(f); persist();
+  if(topicId){ alert('Created “'+f.name+'” and added this topic.'); } render();
+}
+function renameFolder(id){ const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return; const n=prompt('Rename folder', f.name); if(n==null) return; f.name=(n.trim()||f.name); persist(); render(); }
+function deleteFolder(id){ if(!confirm('Delete this folder? Your topics stay — only the folder is removed.')) return; DATA.folders=(DATA.folders||[]).filter(x=>x.id!==id); persist(); location.hash='#/folders'; }
+function addToFolderPrompt(topicId){
+  const fs=DATA.folders||[];
+  if(!fs.length){ createFolderWith(topicId); return; }
+  let msg='Add this topic to which folder?\n\n0. + New folder\n'; fs.forEach((f,i)=>{ msg+=(i+1)+'. '+f.name+(f.topics.indexOf(topicId)>=0?'  ✓ already in':'')+'\n'; });
+  const pick=prompt(msg); if(pick==null) return;
+  const n=parseInt(pick,10);
+  if(n===0){ createFolderWith(topicId); return; }
+  const f=fs[n-1]; if(!f){ return; }
+  if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); alert('Added to “'+f.name+'”.'); } else { alert('Already in “'+f.name+'”.'); }
+}
+function pageFolders(){
+  const fs=DATA.folders||[];
+  let h=`<h1>📁 Folders</h1><p class="sub">Group topics across courses — e.g. “Exam block 1” or “Weak areas”.</p>
+    <div class="btnrow" style="margin-bottom:16px"><button class="btn primary" onclick="createFolderWith('')">+ New folder</button></div>`;
+  if(!fs.length) return h+`<div class="empty">No folders yet.<br>Create your first to organise your topics, then open any topic and tap “Add to folder”.</div>`;
+  return h+`<div class="grid">`+fs.map(f=>`<div class="card" onclick="go('folder/${f.id}')"><h3>${esc(f.name)}</h3><p>${f.topics.length} topic${f.topics.length===1?'':'s'}</p></div>`).join('')+`</div>`;
+}
+function pageFolder(id){
+  const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return pageFolders();
+  const topics=(f.topics||[]).map(tid=>topById(tid)).filter(Boolean);
+  return crumbs([{label:'Folders',route:'folders'},{label:f.name}])+
+    `<h1>${esc(f.name)}</h1><p class="sub">${topics.length} topic${topics.length===1?'':'s'}</p>
+     <div class="btnrow" style="margin-bottom:14px;gap:8px;flex-wrap:wrap">${libToggleBtn()}<button class="btn" onclick="renameFolder('${f.id}')">✎ Rename</button><button class="btn" onclick="deleteFolder('${f.id}')">🗑 Delete folder</button></div>`+
+     (topics.length?`<div class="${rowsCls()}">${topics.map(t=>topicRow(t,true)).join('')}</div>`:`<div class="empty">Empty — open any topic and tap “Add to folder”.</div>`);
+}
+
+/* ---- #15 Solve: snap a question → worked explanation ---- */
+function pageSolve(){
+  return `<h1>🧮 Solve</h1>
+    <p class="sub">Snap or upload a question — an MCQ, a past question, or a diagram — and get the answer explained step by step.</p>
+    <div class="card" style="cursor:default">
+      <label style="font-size:12.5px;font-weight:700;color:var(--dim)">Photo of the question</label>
+      <input id="solveImg" type="file" accept="image/*" capture="environment" style="width:100%;font-size:14px;margin-top:6px" onchange="solvePreview()">
+      <div id="solvePrev" style="margin-top:10px"></div>
+      <textarea id="solveText" class="notebox" rows="2" placeholder="Optional — type the question, or add context…" style="margin-top:12px"></textarea>
+      <div class="btnrow" style="margin-top:12px"><button class="btn primary" id="solveBtn" onclick="solveNow()">Solve it</button></div>
+      <div id="solveMsg" style="margin-top:8px;font-size:13px;color:var(--dim)"></div>
+    </div>
+    <div id="solveOut" style="margin-top:16px"></div>`;
+}
+function solvePreview(){
+  const fEl=document.getElementById('solveImg'), f=fEl&&fEl.files[0], p=document.getElementById('solvePrev');
+  if(!f){ p.innerHTML=''; return; }
+  p.innerHTML='<img src="'+URL.createObjectURL(f)+'" style="max-width:100%;max-height:260px;border-radius:10px;border:1px solid var(--line)">';
+}
+function fileToB64solve(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(',')[1]); r.onerror=rej; r.readAsDataURL(file); }); }
+async function solveNow(){
+  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;
+  const fEl=document.getElementById('solveImg'), f=fEl&&fEl.files[0];
+  const text=(document.getElementById('solveText').value||'').trim();
+  const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
+  if(!f && !text){ msg.textContent='Add a photo or type the question first.'; return; }
+  btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
+  try{
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
+    let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
+    const body={ text }; if(f){ body.image_base64=await fileToB64solve(f); body.media_type=f.type||'image/jpeg'; }
+    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/solve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(body)});
+    const o=await r.json();
+    if(!r.ok||!o.answer) throw new Error(o.reason||o.error||'Could not solve this — try a clearer photo.');
+    out.innerHTML='<div class="card" style="cursor:default"><div class="md">'+md(o.answer)+'</div></div>';
+  }catch(e){ msg.innerHTML='<span style="color:#ff9db1">'+esc(e.message||'Something went wrong')+'</span>'; }
+  finally{ btn.disabled=false; btn.textContent='Solve it'; }
+}
+
 function pageSubject(id){
   const s=subjById(id); if(!s) return pageHome();
   if(!s.topicCount)
@@ -1679,9 +1764,10 @@ function pageSubject(id){
        <div class="empty">No lecture schedule loaded for this subject yet.<br>Send Claude a photo of the schedule and every topic will be listed here.</div>`;
   return crumbs([{label:'Home',route:'home'},{label:s.name}])+
     `<h1>${esc(s.name)}</h1>
-     <p class="sub">${s.topicCount} topics · ${s.readyCount} built · ${s.lecturerCount} lecturers · ${s.cardCount} cards</p>`+
+     <p class="sub">${s.topicCount} topics · ${s.readyCount} built · ${s.lecturerCount} lecturers · ${s.cardCount} cards</p>
+     <div class="btnrow" style="margin:2px 0 14px">${libToggleBtn()}</div>`+
     s.modules.map(m=>`<div class="modhead">${esc(m.name)}</div>
-       <div class="rows">${m.topics.map(t=>topicRow(t,true)).join('')}</div>`).join('');
+       <div class="${rowsCls()}">${m.topics.map(t=>topicRow(t,true)).join('')}</div>`).join('');
 }
 
 function pageLecturers(){
@@ -1708,7 +1794,8 @@ function pageLecturer(id){
     `<h1>${esc(l.name)}</h1><p class="sub">${esc(l.subject)} · ${l.topics.length} topics · ${l.readyCount} built</p>
      ${p.built?`<div class="pbar" style="max-width:420px;margin-bottom:6px"><div style="width:${p.pct}%;background:${col}"></div></div>
        <p class="sub" style="margin-bottom:20px">${p.pct}% through their built topics · ${p.done} complete · ${p.learning} learning</p>`:''}
-     <div class="rows">${l.topics.map(t=>topicRow(t,false)).join('')}</div>`;
+     <div class="btnrow" style="margin:2px 0 14px">${libToggleBtn()}</div>
+     <div class="${rowsCls()}">${l.topics.map(t=>topicRow(t,false)).join('')}</div>`;
 }
 
 let topicTab='note', topicTabFor=null;
@@ -1779,7 +1866,7 @@ function pageTopic(id){
      ${pipeline}
      ${t.ready?masteryChips((t.recall||[]).map(c=>cid(t.id,'recall',c))):''}
      ${t.ready?modeSwitcher(t):''}
-     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button></div>`:''}
+     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="addToFolderPrompt('${t.id}')">📁 Add to folder</button><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button></div>`:''}
      ${body}`;
 }
 
@@ -3609,6 +3696,9 @@ function render(){
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
     case 'lecturers': html=pageLecturers(); break;
+    case 'folders':   html=pageFolders(); break;
+    case 'folder':    html=pageFolder(p[1]); break;
+    case 'solve':     html=pageSolve(); break;
     case 'lecturer':  html=pageLecturer(p[1]); break;
     case 'topic':     html=pageTopic(p[1]); break;
     case 'cards':     html=pageCards(p[1]); break;

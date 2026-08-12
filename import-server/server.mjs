@@ -208,6 +208,9 @@ const DEFAULT_PROMPTS = {
   written: "You are setting short-answer / written-test questions for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"prompt\":\"an exam-style short-answer question (define / describe / explain / compare)\",\"model_answer\":\"a concise ideal answer\",\"points\":[\"key marking point 1\",\"key marking point 2\",\"key marking point 3\"]}]}. Make 5-8 questions matching how medical exams test this topic; the points array is the marking rubric.\n\nLECTURE NOTE:\n{{note}}"
 };
 
+/* "Solve" — a photo/text question (MCQ, past question, diagram) → worked explanation */
+const SOLVE_PROMPT = "You are a sharp medical tutor helping a student with a question they've shared as a photo and/or text. It may be a multiple-choice question, a past exam question, or a diagram to interpret. First, state the answer clearly (for an MCQ, name the correct option). Then explain the reasoning step by step in plain, exam-relevant language a medical student understands, and for an MCQ briefly say why the other options are wrong. If the image is unclear or cut off, say what you can and ask for a clearer photo. Be accurate and concise — never invent facts you can't see.";
+
 /* generate one optional extra (fill_blank / written) from the built note; returns items[] or null */
 async function buildExtra(kind, level, note, model){
   const row = await loadPromptFor(kind, level);
@@ -329,6 +332,22 @@ app.post("/build-extra", async (req,res)=>{
     const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
     res.json({ ok:true, items });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* Solve: image and/or text question → step-by-step worked explanation */
+app.post("/solve", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const feat = await admin.rpc("can_use_features", { p_account:user.id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    const { image_base64, media_type, text } = req.body;
+    if(!image_base64 && !(text && text.trim())) return res.status(400).json({ error:"send a photo or type the question" });
+    const images = image_base64 ? [{ type:"image", source:{ type:"base64", media_type:media_type||"image/jpeg", data:image_base64 } }] : [];
+    const parts = (text && text.trim()) ? [{ type:"text", text:"QUESTION (typed by the student):\n"+text.trim() }] : [];
+    const model = process.env.SOLVE_MODEL || "claude-sonnet-5";   // vision-capable
+    const gen = await generate({ model, prompt:SOLVE_PROMPT, parts, images, max_tokens:2000, temperature:0.2 });
+    res.json({ ok:true, answer:(gen.text||"").trim() });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
