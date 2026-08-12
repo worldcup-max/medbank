@@ -4,278 +4,179 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>MedBank — turn any lecture into active recall that sticks</title>
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank turns your lectures — PDFs, photos, YouTube, or a live recording — into notes, flashcards, quizzes, a cram sheet and even a podcast, then schedules your revision with active recall so you actually remember it for the exam."/>
+<meta property="og:title" content="MedBank — study medicine that actually sticks"/>
+<meta property="og:description" content="Import a lecture, get a full study set, and revise with active recall built for medical exams."/>
+<meta property="og:image" content="icon.svg"/>
+<link rel="stylesheet" href="site.css">
 <script>/* installed-app users skip the marketing page and go straight into MedBank */
-try{ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){ location.replace('./app.html'); } }catch(e){}</script>
-<meta name="description" content="Import a PDF or a photo of your notes and MedBank builds your lecturer note, a simplified version, two flashcard decks and a cram sheet — then schedules your revision so you remember it for the exam."/>
-<style>
-  :root{
-    --ink:#0f1729; --dim:#5b6b86; --line:#e7ebf3; --bg:#ffffff;
-    --indigo:#5b21b6; --indigo-d:#4c1d95; --teal:#0d9488; --coral:#f97362;
-    --soft:#eef0fe; --soft2:#e6f6f3; --radius:16px; --maxw:1100px;
-    --shadow:0 12px 44px rgba(31,41,90,.12); --shadow-sm:0 4px 18px rgba(31,41,90,.08);
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:var(--indigo);text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  /* header */
-  header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .bar{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between}
-  .logo{font-weight:800;font-size:22px;letter-spacing:-.5px}
-  .logo span{color:var(--indigo)}
-  .navlinks{display:flex;gap:22px;align-items:center}
-  .navlinks a.nl{color:var(--ink);font-weight:600;font-size:14.5px}
-  .navlinks a.nl:hover{color:var(--indigo)}
-  .btn{appearance:none;border:0;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:800;cursor:pointer;
-       background:var(--indigo);color:#fff;transition:transform .12s,box-shadow .2s,background .15s;box-shadow:var(--shadow-sm);display:inline-flex;align-items:center;gap:8px}
-  .btn:hover{background:var(--indigo-d);transform:translateY(-2px);box-shadow:var(--shadow)}
-  .btn:active{transform:translateY(0)}
-  .btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
-  .btn.sec:hover{background:#f7f8fc}
-  .btn.big{padding:16px 30px;font-size:17px}
-  .btn.block{display:flex;width:100%;justify-content:center}
-  @media(max-width:720px){.navlinks a.nl{display:none}}
-  /* hero */
-  .hero{position:relative;padding:64px 0 30px;text-align:center;overflow:hidden}
-  .blob{position:absolute;border-radius:50%;filter:blur(72px);opacity:.55;z-index:0;animation:float 15s ease-in-out infinite}
-  .blob.a{width:380px;height:380px;background:#c7ccff;top:-100px;left:-90px}
-  .blob.b{width:340px;height:340px;background:#bfeee7;top:10px;right:-100px;animation-delay:-5s}
-  .blob.c{width:320px;height:320px;background:#ffd9d3;bottom:-140px;left:42%;animation-delay:-9s}
-  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(26px,-22px) scale(1.06)}66%{transform:translate(-18px,14px) scale(.97)}}
-  .hero .wrap{position:relative;z-index:1}
-  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--indigo-d);font-size:13px;font-weight:700;padding:7px 15px;border-radius:30px;border:1px solid #ddd0f5}
-  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-  h1{font-size:clamp(34px,6.2vw,62px);line-height:1.04;letter-spacing:-1.6px;margin:22px auto 16px;max-width:15ch;font-weight:800}
-  .grad{background:linear-gradient(100deg,var(--indigo),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{font-size:clamp(16px,2.4vw,20px);color:var(--dim);max-width:58ch;margin:0 auto 26px}
-  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .trustline{margin-top:18px;color:var(--dim);font-size:13.5px}
-  /* phone mock */
-  .heroart{margin:46px auto 0;max-width:340px;position:relative}
-  .phone{background:#0f1729;border-radius:36px;padding:11px;box-shadow:var(--shadow);position:relative}
-  .screen{background:#0b1020;border-radius:26px;overflow:hidden;padding:16px 14px;min-height:400px;text-align:left;color:#eef1f8}
-  .minibar{height:5px;width:38px;background:#2a3350;border-radius:4px;margin:2px auto 16px}
-  .mtitle{font-weight:800;font-size:16px}
-  .msub{color:#93a0b5;font-size:12px;margin:2px 0 12px}
-  .mrow{display:flex;justify-content:space-between;align-items:center;background:#151b2e;border:1px solid #29324a;border-radius:12px;padding:12px 13px;margin-top:9px;font-size:13px;font-weight:600}
-  .mrow .b{background:rgba(99,102,241,.18);color:#a5b4fc;border-radius:20px;padding:2px 9px;font-size:11px}
-  .mbar{height:7px;background:#29324a;border-radius:5px;margin-top:10px;overflow:hidden}
-  .mbar i{display:block;height:100%;width:60%;background:linear-gradient(90deg,var(--indigo),var(--teal))}
-  .float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
-        padding:10px 13px;font-size:12.5px;font-weight:700;display:flex;gap:8px;align-items:center;animation:float 9s ease-in-out infinite}
-  .float-card .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#fff;font-size:14px}
-  .fc1{top:44px;left:-30px;animation-delay:-2s}
-  .fc2{bottom:70px;right:-26px;animation-delay:-6s}
-  /* logos / social proof strip */
-  .proof{padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fafbff}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;text-align:center}
-  .stat .n{font-size:30px;font-weight:800;letter-spacing:-1px;background:linear-gradient(100deg,var(--indigo),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .stat .l{color:var(--dim);font-size:13.5px;margin-top:2px}
-  /* sections */
-  section.blk{padding:60px 0}
-  .eyebrow{color:var(--teal);font-weight:800;letter-spacing:.4px;text-transform:uppercase;font-size:13px;text-align:center}
-  h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.9px;text-align:center;margin:8px auto 10px;max-width:20ch;font-weight:800}
-  .sectlede{text-align:center;color:var(--dim);max-width:54ch;margin:0 auto 36px;font-size:16.5px}
-  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-  .fcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
-  .fcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-  .fcard .icon{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;color:#fff;margin-bottom:14px}
-  .fcard h3{margin:0 0 6px;font-size:19px;letter-spacing:-.3px}
-  .fcard p{margin:0;color:var(--dim);font-size:14.5px}
-  .fcard .tag{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:800;color:var(--coral);background:#fff0ee;padding:3px 9px;border-radius:20px}
-  /* spotlight */
-  .spot{background:linear-gradient(135deg,#111a33,#1f2a52);color:#fff;border-radius:26px;padding:44px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
-  .spot h2{text-align:left;color:#fff;margin:0 0 12px}
-  .spot p{color:#c3cae2;font-size:16px}
-  .spot .eyebrow{text-align:left;color:#7ee0d4}
-  .demoNote{background:#0c1430;border:1px solid #2b3766;border-radius:16px;padding:18px;font-size:14px;color:#e6e9f5}
-  .hl{background:#fde68a;color:#111;border-radius:4px;padding:1px 4px}
-  .explainbtn{margin-top:10px;background:#fff;color:var(--indigo);border:0;border-radius:10px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:var(--shadow);display:inline-flex;gap:7px;align-items:center}
-  .explainpop{margin-top:12px;background:#fff;color:#111a33;border-radius:12px;padding:13px 15px;font-size:13.5px;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:.4s;display:none}
-  .explainpop.in{opacity:1;transform:none;display:block}
-  .explainpop b{color:var(--indigo)}
-  @media(max-width:800px){.spot{grid-template-columns:1fr;padding:30px}}
-  /* buckets */
-  .buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-  .bucket{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow-sm);border-left:4px solid var(--indigo);transition:transform .2s,box-shadow .2s}
-  .bucket:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .bucket .bk{font-size:11.5px;font-weight:800;color:var(--dim);text-transform:uppercase;letter-spacing:.4px}
-  .bucket .cnt{float:right;background:var(--soft);color:var(--indigo-d);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:800}
-  .bucket h4{margin:7px 0 4px;font-size:16.5px}
-  .bucket p{margin:0;color:var(--dim);font-size:13.5px}
-  .bucket.teal{border-left-color:var(--teal)} .bucket.coral{border-left-color:var(--coral)}
-  .bucket.amber{border-left-color:#f59e0b} .bucket.sky{border-left-color:#0ea5e9} .bucket.violet{border-left-color:#5b21b6}
-  /* steps */
-  .steps3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;counter-reset:s}
-  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;box-shadow:var(--shadow-sm)}
-  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:22px;width:34px;height:34px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:var(--shadow-sm)}
-  .step h3{margin:12px 0 6px;font-size:17px}
-  .step p{margin:0;color:var(--dim);font-size:14px}
-  /* final CTA */
-  .cta-band{background:linear-gradient(135deg,var(--indigo),var(--teal));border-radius:26px;padding:52px 30px;text-align:center;color:#fff}
-  .cta-band h2{color:#fff}
-  .cta-band .btn{background:#fff;color:var(--indigo)}
-  .cta-band .btn:hover{background:#f2f3ff}
-  /* footer */
-  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--dim);font-size:13.5px;text-align:center}
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.blob,.float-card,.pill .dot{animation:none}}
-</style>
+try{ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){ location.replace('app.html'); } }catch(e){}</script>
 </head>
 <body>
+
 <header>
   <div class="bar">
-    <div class="logo"><img src="./icon.svg" alt="MedBank" width="30" height="30" style="border-radius:8px;vertical-align:-8px;margin-right:9px">Med<span>Bank</span></div>
-    <div class="navlinks">
-      <a class="nl" href="#features">Features</a>
+    <a class="logo" href="index.html"><img src="icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
       <a class="nl" href="#how">How it works</a>
-      <a class="nl" href="#ai">AI</a>
-      <a class="btn sm" href="./app.html?welcome=1">Open the app →</a>
-    </div>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="flashcards/index.html"><span class="mi">🃏</span> Flashcards &amp; recall</a>
+          <a href="ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="#faq">FAQ</a>
+      <a class="btn" href="app.html?welcome=1">Open the app</a>
+    </nav>
   </div>
 </header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="blob a"></div><div class="blob b"></div><div class="blob c"></div>
-    <div class="wrap">
-      <span class="pill reveal"><span class="dot"></span> Built by a medical student, for medical students</span>
-      <h1 class="reveal">Turn any lecture into <span class="grad">active recall</span> that actually sticks.</h1>
-      <p class="lede reveal">Import a PDF or snap a photo of your handwritten notes. MedBank builds your lecturer note, a simplified version, two flashcard decks and a cram sheet — then schedules your revision so you remember it for the exam.</p>
-      <div class="cta reveal">
-        <a class="btn big" href="./app.html?welcome=1">Open the app →</a>
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Built for medical &amp; health students</span>
+      <h1 class="h1">Turn any lecture into <span class="grad">active recall</span> that actually sticks.</h1>
+      <p class="lead">Add a lecture — a PDF, photos of your notes, a YouTube link, or record it live — and MedBank builds your notes, flashcards, quizzes, a cram sheet and even a two-host podcast. Then it schedules your revision so you remember it on exam day.</p>
+      <div class="cta-row">
+        <a class="btn big" href="app.html?welcome=1">Start free — build your first lecture</a>
         <a class="btn sec big" href="#how">See how it works</a>
       </div>
-      <div class="trustline reveal">Free to start · Works on iPhone &amp; Android · Your progress syncs everywhere</div>
-
-      <div class="heroart reveal">
-        <div class="float-card fc1"><span class="ic" style="background:var(--teal)">↻</span> Due today: 24</div>
-        <div class="float-card fc2"><span class="ic" style="background:var(--coral)">🔥</span> 12-day streak</div>
-        <div class="phone">
-          <div class="screen">
-            <div class="minibar"></div>
-            <div class="mtitle">Active Recall</div>
-            <div class="msub">Pediatrics · O&amp;G · Community Medicine</div>
-            <div class="mrow">New cards <span class="b">18 / 30</span></div>
-            <div class="mrow">Reviews due <span class="b">24</span></div>
-            <div class="mrow">Import lectures <span class="b">＋ PDF</span></div>
-            <div class="mrow">Let AI explain <span class="b">✨</span></div>
-            <div class="mbar"><i></i></div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made by a medical student, for medical students.</div>
+    </div>
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="sc-top">
+          <div class="t">Bronchiolitis</div><div class="s">Dr. Ojike · Paediatrics</div>
+          <div class="modes"><span class="on">✓ Quiz</span><span>🃏 Cards</span><span>🎧 Podcast</span><span>📖 Notes</span></div>
+        </div>
+        <div class="sc-body">
+          <div class="qcard">
+            <div class="lab">RECALL · DECK B</div>
+            <div class="q">Which cell type predominates in bronchiolitis?</div>
+            <div class="opt good">✓ Lymphocytes</div><div class="opt">Neutrophils</div>
+          </div>
+          <div class="chips">
+            <span class="chip" style="background:#eceaf1;color:#6b6480">12 Unfamiliar</span>
+            <span class="chip" style="background:#dcf3ee;color:#0d9488">6 Mastered</span>
+            <span class="chip" style="background:#fdf0dd;color:#b3791a">🔥 5-day streak</span>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- SOCIAL PROOF -->
-  <section class="proof">
-    <div class="wrap"><div class="stats">
-      <div class="stat reveal"><div class="n">3 sec</div><div class="l">to turn a lecture into a deck</div></div>
-      <div class="stat reveal"><div class="n">10k+</div><div class="l">cards you can build</div></div>
-      <div class="stat reveal"><div class="n">100→600</div><div class="l">every level, kept forever</div></div>
-      <div class="stat reveal"><div class="n">1 app</div><div class="l">notes, decks, AI &amp; scheduling</div></div>
-    </div></div>
-  </section>
+<!-- TRUST -->
+<div class="trust"><div class="wrap"><div class="row">
+  <span>📥 <b>PDF · Photos · YouTube · Live recording</b></span>
+  <span>🧠 <b>Active recall + spaced repetition</b></span>
+  <span>🎧 <b>Lecture podcasts</b></span>
+  <span>📱 <b>Any device, add to home screen</b></span>
+</div></div></div>
 
-  <!-- FEATURES -->
-  <section class="blk" id="features">
-    <div class="wrap">
-      <div class="eyebrow reveal">Everything in one app</div>
-      <h2 class="reveal">Study smarter, not longer</h2>
-      <p class="sectlede reveal">The features that do the heavy lifting for you.</p>
-      <div class="features">
-        <div class="fcard reveal"><div class="icon" style="background:var(--indigo)">📥</div><h3>Import lectures</h3><p>Drop in a PDF or a photo of handwritten notes. Get a full lecturer note, a simplified version, primer &amp; recall decks, and a cram sheet — in seconds.</p></div>
-        <div class="fcard reveal"><div class="icon" style="background:var(--teal)">↻</div><h3>Spaced repetition</h3><p>The engine shows each card exactly when you're about to forget it — the proven way to lock things into long-term memory.</p></div>
-        <div class="fcard reveal"><div class="icon" style="background:var(--coral)">✨</div><h3>Let AI explain</h3><p>Highlight anything you don't understand and get it taught from first principles — right there, no switching apps.</p><span class="tag">Read &amp; research in one place</span></div>
-        <div class="fcard reveal"><div class="icon" style="background:#5b21b6">🎧</div><h3>Voice tutor</h3><p>Ask questions out loud and get realistic spoken answers — revise hands-free on the go.</p></div>
-        <div class="fcard reveal"><div class="icon" style="background:#0ea5e9">📚</div><h3>All your levels</h3><p>From 100 to 600 level — switch between sessions and keep every note, deck and streak you've ever built.</p></div>
-        <div class="fcard reveal"><div class="icon" style="background:#ef4444">🔔</div><h3>Hard-card reminders</h3><p>The cards you keep missing resurface as gentle notifications through the day — that's how they finally stick.</p></div>
-      </div>
+<!-- HOW IT WORKS -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">From lecture to exam-ready in four steps</h2>
+  <p class="sub">No more hours making your own flashcards. Add the lecture once and MedBank does the building — you do the studying.</p>
+  <div class="steps" style="text-align:left">
+    <div class="step"><div class="n">1</div><h3>Add your lecture</h3><p>Upload a PDF or photos, paste a YouTube link, or hit record in class. One lecture at a time.</p></div>
+    <div class="step"><div class="n">2</div><h3>MedBank builds it</h3><p>A clean note, a simplified version, flashcards, quizzes, a cram sheet — and a two-host podcast if you want it.</p></div>
+    <div class="step"><div class="n">3</div><h3>Study with active recall</h3><p>Answer, don't re-read. Spaced repetition brings each card back exactly when you're about to forget it.</p></div>
+    <div class="step"><div class="n">4</div><h3>Walk in ready</h3><p>Track your mastery, drill your weak cards, sit a mock exam, and see your revision actually stick.</p></div>
+  </div>
+</div></section>
+
+<!-- FEATURES -->
+<section id="features" style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Everything in one place</div>
+  <h2 class="h2">A whole study toolkit around every lecture</h2>
+  <p class="sub">The methods proven to beat cramming — active recall, spaced repetition, and testing — done for you. Tap any feature to see it in detail.</p>
+  <div class="feats" style="text-align:left">
+    <a class="feat" href="lecture-import/index.html"><div class="ic">📥</div><h3>Import anything</h3><p>PDFs, photos of handwritten notes, YouTube lectures, or a live class recording — all become a study set.</p></a>
+    <a class="feat" href="flashcards/index.html"><div class="ic">🧠</div><h3>Flashcards &amp; active recall</h3><p>Two decks and spaced repetition that schedules each review for the moment before you'd forget.</p></a>
+    <a class="feat" href="ai-tutor/index.html"><div class="ic">💬</div><h3>AI tutor beside your notes</h3><p>Stuck on a card? Ask right there — it already knows the lecture and links you to the exact spot in your note.</p></a>
+    <a class="feat" href="podcast/index.html"><div class="ic">🎧</div><h3>Lecture podcasts</h3><p>Turn a lecture into a two-host audio episode for the ward or the bus — and raise your hand to ask.</p></a>
+    <a class="feat" href="written-tests/index.html"><div class="ic">📝</div><h3>Quizzes &amp; written tests</h3><p>Practise the way exams test you — MCQs, cloze questions, and AI-marked short answers.</p></a>
+    <a class="feat" href="solve/index.html"><div class="ic">🧮</div><h3>Snap &amp; solve</h3><p>Photograph a past question or diagram and get the answer explained step by step.</p></a>
+  </div>
+</div></section>
+
+<!-- COMPARISON -->
+<section><div class="wrap center">
+  <div class="kicker">Why it works</div>
+  <h2 class="h2">MedBank vs re-reading your slides</h2>
+  <p class="sub">Highlighting and re-reading feel productive but fade fast. MedBank is built on what the evidence says actually works.</p>
+  <div class="cmp"><table>
+    <thead><tr><th></th><th>MedBank</th><th>Re-reading &amp; highlighting</th></tr></thead>
+    <tbody>
+      <tr><td>Active recall &amp; spaced repetition</td><td class="y">Built in</td><td class="n">Passive</td></tr>
+      <tr><td>Study materials made for you</td><td class="y">In seconds</td><td class="n">Hours by hand</td></tr>
+      <tr><td>Knows your weak cards</td><td class="y">Drills them</td><td class="n">No feedback</td></tr>
+      <tr><td>Learn on the go</td><td class="y">Listen as a podcast</td><td class="n">Tied to a desk</td></tr>
+      <tr><td>What happens by exam day</td><td class="y">You remember it</td><td class="n">You forget most</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- TESTIMONIALS (placeholder quotes — replace with real ones as you collect them) -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Loved by students</div>
+  <h2 class="h2">Built with real med-school revision in mind</h2>
+  <div class="tgrid" style="text-align:left">
+    <div class="tcard"><div class="stars">★★★★★</div><p>"I upload the lecture and my flashcards are just… there. I spend my time actually revising instead of making cards."</p><div class="who"><div class="av">A</div><div><div class="nm">Adaeze</div><div class="rl">400-level, College of Medicine</div></div></div></div>
+    <div class="tcard"><div class="stars">★★★★★</div><p>"The podcast is unreal for the commute. I listen on the way to postings and it's like revising without opening a book."</p><div class="who"><div class="av">T</div><div><div class="nm">Tunde</div><div class="rl">Medical student, Lagos</div></div></div></div>
+    <div class="tcard"><div class="stars">★★★★★</div><p>"Seeing cards go from Unfamiliar to Mastered before an exam is weirdly motivating. My recall is way better."</p><div class="who"><div class="av">Z</div><div><div class="nm">Zainab</div><div class="rl">300-level, Nursing</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap center">
+  <div class="kicker">FAQ</div>
+  <h2 class="h2">Questions, answered</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>Is it really free to start?</summary><div class="a">Yes. You can build one full lecture and use everything on it — notes, flashcards, quizzes, the podcast, the AI tutor and active recall — free, forever. You only pay when you want to import more lectures.</div></details>
+    <details class="qa"><summary>How accurate are the AI-generated cards?</summary><div class="a">They're built strictly from your lecture, and they're good — but AI isn't perfect, and medicine demands accuracy. So every card is editable: fix it, regenerate it, or flag it in one tap.</div></details>
+    <details class="qa"><summary>Can I use my own lectures?</summary><div class="a">That's the whole point. Upload your slides or notes, paste a YouTube link, or record the class live — MedBank builds your study set from your material, not generic content.</div></details>
+    <details class="qa"><summary>Does it work on my phone / offline?</summary><div class="a">MedBank runs in your browser and installs to your home screen like an app. Your notes and cards work offline; building new content and the AI features need a connection.</div></details>
+    <details class="qa"><summary>Will it actually help for my exams?</summary><div class="a">It's built on active recall and spaced repetition — the two techniques with the strongest evidence for long-term memory — plus mock exams and written practice that mirror how you're really tested.</div></details>
+    <details class="qa"><summary>Is my data private?</summary><div class="a">Your imported lectures, notes and progress are tied to your own account and synced privately to it. Your content is yours.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Your next exam starts with one lecture.</h2>
+  <p>Build your first study set free and feel the difference active recall makes.</p>
+  <a class="btn big" href="app.html?welcome=1">Start free — build your first lecture</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
     </div>
-  </section>
-
-  <!-- AI SPOTLIGHT -->
-  <section class="blk" id="ai">
-    <div class="wrap">
-      <div class="spot reveal">
-        <div>
-          <div class="eyebrow">The feature students love most</div>
-          <h2>"Let AI explain" — never leave your notes to Google something.</h2>
-          <p>Stuck on a term or a whole paragraph? Highlight it and MedBank teaches it to you from scratch — a quick brief, a deep dive, or ask your own question. You stay in your notes, keep your focus, and learn it on the spot instead of losing 20 minutes in browser tabs.</p>
-          <a class="btn big" style="margin-top:8px" href="./app.html?welcome=1">Try it in the app</a>
-        </div>
-        <div class="demoNote">
-          <div style="font-weight:700;margin-bottom:6px">Bronchiolitis — note</div>
-          …a small amount of swelling causes big obstruction because
-          <span class="hl">airway resistance rises four-fold when the radius halves</span>.
-          <div><button class="explainbtn" onclick="document.getElementById('ep').classList.add('in')">✨ Let AI explain</button></div>
-          <div class="explainpop" id="ep"><b>✨ Explain:</b> Airflow through a tube depends on its radius to the 4th power (Poiseuille's law). Halve the radius and resistance jumps 16×… <i>tap in the app for the full teach-up.</i></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEW BUCKETS -->
-  <section class="blk" id="schedule">
-    <div class="wrap">
-      <div class="eyebrow reveal">Your revision, planned for you</div>
-      <h2 class="reveal">Every card returns at the perfect moment</h2>
-      <p class="sectlede reveal">Open the app and your day is already sorted into clear buckets — so you always know what to study, and nothing slips through the cracks.</p>
-      <div class="buckets">
-        <div class="bucket reveal"><span class="cnt">30</span><div class="bk">New cards</div><h4>Fresh material</h4><p>Fed in at a steady pace from your plan — enough to progress, never enough to overwhelm.</p></div>
-        <div class="bucket teal reveal"><span class="cnt">18</span><div class="bk">24-hour review</div><h4>The first repeat</h4><p>Yesterday's cards come back for the crucial first recall, right before they fade.</p></div>
-        <div class="bucket sky reveal"><span class="cnt">12</span><div class="bk">3-day review</div><h4>The second pass</h4><p>Cards resurface three days on — the sweet spot that turns short-term into long-term memory.</p></div>
-        <div class="bucket violet reveal"><span class="cnt">9</span><div class="bk">Weekend review</div><h4>Spaced across the week</h4><p>A lighter, well-timed set so nothing you've learned quietly slips away.</p></div>
-        <div class="bucket amber reveal"><span class="cnt">14</span><div class="bk">Weekly review</div><h4>Kept locked in</h4><p>Older, well-known cards reappear at longer intervals so they stay exam-ready for good.</p></div>
-        <div class="bucket coral reveal"><span class="cnt">5</span><div class="bk">Hard cards</div><h4>The stubborn ones</h4><p>Cards you keep missing come back more often — and nudge you through the day until they stick.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="blk" id="how">
-    <div class="wrap">
-      <div class="eyebrow reveal">How it works</div>
-      <h2 class="reveal">From lecture to locked-in, in three steps</h2>
-      <p class="sectlede reveal"></p>
-      <div class="steps3">
-        <div class="step reveal"><h3>Import</h3><p>Upload a lecture PDF or photograph your handwritten notes.</p></div>
-        <div class="step reveal"><h3>Study</h3><p>MedBank builds your notes and decks; you review the cards it serves each day.</p></div>
-        <div class="step reveal"><h3>Remember</h3><p>Spaced repetition schedules each card so it's there right when you'd forget it.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="blk">
-    <div class="wrap">
-      <div class="cta-band reveal">
-        <div class="eyebrow" style="color:#d7fbf4">Ready when you are</div>
-        <h2>Your next exam starts with better recall.</h2>
-        <p style="max-width:46ch;margin:0 auto 22px;font-size:17px;opacity:.95">Open MedBank, import your first lecture, and feel the difference in a week.</p>
-        <a class="btn big" href="./app.html?welcome=1">Open the app →</a>
-        <div style="margin-top:14px;font-size:13.5px;opacity:.9">On iPhone: open in Safari → Share → <b>Add to Home Screen</b> to install it like a real app.</div>
-      </div>
-    </div>
-  </section>
-
-  <footer><div class="wrap">MedBank · active recall for medical students · <a href="./app.html?welcome=1">Open the app</a></div></footer>
-</main>
+    <div class="fcol"><b>Features</b><a href="lecture-import/index.html">Lecture import</a><a href="flashcards/index.html">Flashcards &amp; recall</a><a href="ai-tutor/index.html">AI tutor</a><a href="podcast/index.html">Lecture podcast</a><a href="written-tests/index.html">Written tests</a><a href="solve/index.html">Snap &amp; solve</a></div>
+    <div class="fcol"><b>Product</b><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
 
 <script>
-  (function(){
-    var els=document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
-    var io=new IntersectionObserver(function(en){en.forEach(function(x){ if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);} });},{threshold:.14});
-    els.forEach(function(e){io.observe(e)});
-  })();
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
 </script>
 </body>
 </html>

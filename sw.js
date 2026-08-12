@@ -1,7 +1,7 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v80';
+const CACHE = 'medbank-v83';
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
-  './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
+  './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
   './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js'];
 
 self.addEventListener('install', e => {
