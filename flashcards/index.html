@@ -9,6 +9,23 @@
 <meta name="theme-color" content="#5b21b6">
 <meta name="description" content="MedBank's AI flashcard maker turns your lectures — PDFs, photos, YouTube, or a live recording — into editable question-and-answer flashcards with active recall and spaced repetition. Make your first deck free."/>
 <link rel="stylesheet" href="../site.css">
+<style>
+  /* animated study-flow demo */
+  #fcCard.flip{animation:fcflip .5s ease}
+  @keyframes fcflip{0%{transform:perspective(800px) rotateY(0)}45%{transform:perspective(800px) rotateY(88deg)}55%{transform:perspective(800px) rotateY(-88deg)}100%{transform:perspective(800px) rotateY(0)}}
+  #fcRate .r{transition:transform .2s,box-shadow .2s}
+  #fcRate .r.sel.got{transform:scale(1.06);box-shadow:0 8px 20px rgba(13,148,136,.45)}
+  #fcRate .r.sel.miss{transform:scale(1.06);box-shadow:0 8px 20px rgba(224,73,43,.38)}
+  /* spaced-repetition ladder */
+  .ladder{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;max-width:920px;margin:44px auto 0}
+  .lnode{display:flex;flex-direction:column;align-items:center;flex:1;min-width:120px;position:relative;padding:0 4px}
+  .lnode .dot{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--violet-d));color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 6px 16px rgba(91,33,182,.3)}
+  .lnode .int{font-weight:800;margin-top:12px;font-size:14px}
+  .lnode .stg{color:var(--dim);font-size:12.5px}
+  .lnode::before{content:"";position:absolute;top:23px;left:-50%;width:100%;height:3px;background:linear-gradient(90deg,#e0d7f5,#cbe9e2);z-index:1}
+  .lnode:first-child::before{display:none}
+  @media(max-width:560px){.lnode::before{display:none}.ladder{gap:16px}.lnode{min-width:44%}}
+</style>
 </head>
 <body>
 
@@ -62,24 +79,53 @@
   </div>
 </div>
 
-<!-- DEMO -->
+<!-- DEMO: animated app flow -->
 <section><div class="wrap center">
-  <div class="kicker">See it work</div>
-  <h2 class="h2">Answer, don't re-read</h2>
-  <p class="sub">Flip the card, rate how you did, and MedBank sorts it into Unfamiliar → Learning → Familiar → Mastered — so you always know what still needs work.</p>
-  <div class="demo" style="margin-top:36px">
-    <div class="mrow">
-      <span class="mchip" style="background:#eceaf1;color:#6b6480"><i style="background:#b3aac6"></i>12 Unfamiliar</span>
-      <span class="mchip" style="background:#fdf0dd;color:#b3791a"><i style="background:#e0a53a"></i>8 Learning</span>
-      <span class="mchip" style="background:#e6effb;color:#2f6bd1"><i style="background:#4f8cff"></i>5 Familiar</span>
-      <span class="mchip" style="background:#dcf3ee;color:#0d9488"><i style="background:#0d9488"></i>6 Mastered</span>
-    </div>
-    <div class="flipwrap"><div class="flipper">
-      <div class="face"><div class="l" style="color:var(--teal)">RECALL · TAP TO FLIP</div><div class="tx">What is the primary buffer system of the blood?</div></div>
-      <div class="face back"><div class="l" style="color:var(--violet-d)">ANSWER</div><div class="tx">The bicarbonate (HCO₃⁻ / CO₂) buffer system.</div></div>
+  <div class="kicker">See it in action</div>
+  <h2 class="h2">Read, reveal, rate — and watch mastery climb</h2>
+  <p class="sub">This is exactly how a card behaves in MedBank: read the question, reveal the answer, rate yourself, and it moves from Unfamiliar toward Mastered — live.</p>
+  <div style="display:flex;justify-content:center;margin-top:36px">
+    <div class="phone" style="width:314px"><div class="screen">
+      <div class="sc-top">
+        <div class="t">Cardiovascular physiology</div><div class="s">Active recall · <span id="fcCount">1 / 12</span></div>
+        <div class="modes"><span class="on">◎ Recall · Deck B</span></div>
+      </div>
+      <div class="sc-body">
+        <div class="mrow" style="justify-content:center;margin-bottom:11px;gap:5px">
+          <span class="mchip" style="background:#eceaf1;color:#6b6480"><i style="background:#b3aac6"></i><span id="fcUnf">14</span>&nbsp;Unf</span>
+          <span class="mchip" style="background:#fdf0dd;color:#b3791a"><i style="background:#e0a53a"></i><span id="fcLrn">6</span>&nbsp;Lrn</span>
+          <span class="mchip" style="background:#e6effb;color:#2f6bd1"><i style="background:#4f8cff"></i><span id="fcFam">4</span>&nbsp;Fam</span>
+          <span class="mchip" style="background:#dcf3ee;color:#0d9488"><i style="background:#0d9488"></i><span id="fcMas">2</span>&nbsp;Mas</span>
+        </div>
+        <div style="height:6px;background:#efeaf8;border-radius:4px;overflow:hidden;margin-bottom:13px"><div id="fcBar" style="height:100%;width:8%;background:var(--violet);transition:width .5s"></div></div>
+        <div id="fcCard" class="qcard" style="min-height:120px;display:flex;flex-direction:column;justify-content:center;text-align:left">
+          <div class="lab" id="fcLab" style="color:var(--teal)">RECALL · TAP TO REVEAL</div>
+          <div class="q" id="fcQ" style="font-size:14px">…</div>
+          <div id="fcA" style="display:none;margin-top:9px;font-size:13px;color:var(--violet-d);font-weight:600">…</div>
+        </div>
+        <div id="fcRate" class="rate" style="display:none;margin-top:11px;justify-content:center">
+          <span class="r miss" id="fcMiss">✗ Missed</span><span class="r got" id="fcGot">✓ Got it</span>
+        </div>
+      </div>
     </div></div>
-    <div class="rate"><span class="r miss">✗ Missed</span><span class="r got">✓ Got it</span></div>
   </div>
+  <p style="color:var(--dim);font-size:13px;margin-top:16px">A live preview of the study flow — no sign-in needed.</p>
+</div></section>
+
+<!-- SPACED REPETITION LADDER -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Spaced repetition</div>
+  <h2 class="h2">Every card returns right before you'd forget it</h2>
+  <p class="sub">Get a card right and it climbs the ladder — the gap before you see it again gets longer each time. Miss one and it drops back to the start, so your weak cards come around fast while the solid ones stop wasting your time.</p>
+  <div class="ladder">
+    <div class="lnode"><div class="dot">▶</div><div class="int">Learn today</div><div class="stg">First pass</div></div>
+    <div class="lnode"><div class="dot">1d</div><div class="int">After 1 day</div><div class="stg">24-hour review</div></div>
+    <div class="lnode"><div class="dot">3d</div><div class="int">After 3 days</div><div class="stg">3-day review</div></div>
+    <div class="lnode"><div class="dot">1w</div><div class="int">After 1 week</div><div class="stg">Weekly review</div></div>
+    <div class="lnode"><div class="dot">2w</div><div class="int">After 2 weeks</div><div class="stg">Bi-weekly</div></div>
+    <div class="lnode"><div class="dot">∞</div><div class="int">Long-term</div><div class="stg">Locked in</div></div>
+  </div>
+  <p style="color:var(--dim);font-size:13.5px;margin-top:26px">Miss a card at any stage and it drops back to the start of the ladder — so it comes around again quickly until it sticks.</p>
 </div></section>
 
 <!-- BENEFITS -->
@@ -162,6 +208,46 @@
   </div>
   <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
 </div></footer>
+<script>
+(function(){
+  var cards=[
+    {q:'Which ion drives the plateau phase of the ventricular action potential?',a:'Calcium (Ca²⁺) influx through L-type channels.',good:true},
+    {q:'How does increased preload affect stroke volume?',a:'It raises stroke volume — the Frank–Starling mechanism.',good:true},
+    {q:'Where are the arterial baroreceptors located?',a:'The carotid sinus and the aortic arch.',good:false},
+    {q:'What mainly determines coronary blood flow?',a:'Aortic diastolic pressure and myocardial O₂ demand.',good:true}
+  ];
+  var i=0, done=0, total=12, c={unf:14,lrn:6,fam:4,mas:2};
+  var $=function(id){return document.getElementById(id);};
+  if(!$('fcQ')) return;
+  function counts(){ $('fcUnf').textContent=c.unf;$('fcLrn').textContent=c.lrn;$('fcFam').textContent=c.fam;$('fcMas').textContent=c.mas; }
+  function showQ(){
+    var k=cards[i%cards.length];
+    $('fcLab').textContent='RECALL · TAP TO REVEAL'; $('fcLab').style.color='var(--teal)';
+    $('fcQ').textContent=k.q; $('fcA').style.display='none'; $('fcRate').style.display='none';
+    $('fcMiss').classList.remove('sel'); $('fcGot').classList.remove('sel');
+    $('fcCount').textContent=((done%total)+1)+' / '+total;
+    setTimeout(reveal,1900);
+  }
+  function reveal(){
+    var k=cards[i%cards.length];
+    $('fcCard').classList.add('flip');
+    setTimeout(function(){
+      $('fcLab').textContent='ANSWER'; $('fcLab').style.color='var(--violet-d)';
+      $('fcA').textContent=k.a; $('fcA').style.display='block'; $('fcRate').style.display='flex';
+    },230);
+    setTimeout(function(){ $('fcCard').classList.remove('flip'); rate(); },1900);
+  }
+  function rate(){
+    var k=cards[i%cards.length];
+    if(k.good){ $('fcGot').classList.add('sel'); if(c.lrn>0){c.lrn--;c.fam++;} else if(c.fam>0){c.fam--;c.mas++;} else {if(c.unf>0)c.unf--;c.mas++;} }
+    else { $('fcMiss').classList.add('sel'); if(c.fam>0){c.fam--;c.unf++;} else if(c.lrn>0){c.lrn--;c.unf++;} }
+    counts();
+    done++; $('fcBar').style.width=Math.min(100,((done%total)/total)*100+8)+'%';
+    setTimeout(function(){ i++; showQ(); },1200);
+  }
+  counts(); showQ();
+})();
+</script>
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
   document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });

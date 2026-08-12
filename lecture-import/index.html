@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Turn Any Lecture into a Study Set — Lecture Import | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="Import any lecture into MedBank — a PDF, photos of your notes, a YouTube link, or a live class recording — and get a full study set: notes, flashcards, quizzes, a cram sheet and a podcast, from one upload."/>
+<link rel="stylesheet" href="../site.css">
+<style>
+  .build{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .src{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:700;box-shadow:var(--shadow-sm)}
+  .arrow{color:var(--violet-d);font-weight:800;font-size:14px}
+  .outs{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;max-width:600px}
+  .out{background:linear-gradient(135deg,#f4f0fd,#eafaf6);border:1px solid #e6ddfa;border-radius:999px;padding:9px 15px;font-weight:700;font-size:13.5px;color:var(--ink);opacity:0;animation:pop .5s ease forwards}
+  @keyframes pop{from{opacity:0;transform:scale(.82) translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards &amp; recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Lecture import</span>
+      <h1 class="h1">Turn any lecture into a <span class="grad">whole study set</span>.</h1>
+      <p class="lead">Add a lecture however you have it — a PDF or slides, photos of your handwritten notes, a YouTube link, or record the class live. From that one upload MedBank builds your note, a simplified version, two flashcard decks, quizzes, a cram sheet, and even a podcast.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Import your first lecture</a>
+        <a class="btn sec big" href="#how">See how it works</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry">
+        <h4>Import from…</h4>
+        <div class="tiles">
+          <a class="tile" href="../app.html?welcome=1"><div class="ic">📄</div><b>PDF or slides</b><span>lecture handout</span></a>
+          <a class="tile" href="../app.html?welcome=1"><div class="ic">📷</div><b>Photos of notes</b><span>handwritten too</span></a>
+          <a class="tile" href="../app.html?welcome=1"><div class="ic">▶️</div><b>A YouTube link</b><span>we transcribe it</span></a>
+          <a class="tile" href="../app.html?welcome=1"><div class="ic">🎙️</div><b>Record live</b><span>right in class</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO: one upload → everything -->
+<section><div class="wrap center">
+  <div class="kicker">One upload, a whole kit</div>
+  <h2 class="h2">Add it once — get everything</h2>
+  <p class="sub">Stop building notes, cards and quizzes in separate apps. One lecture becomes your entire study set for that topic.</p>
+  <div class="build" style="margin-top:36px">
+    <div class="src">📄 Bronchiolitis — lecture.pdf</div>
+    <div class="arrow">↓ &nbsp;MedBank builds&nbsp; ↓</div>
+    <div class="outs">
+      <span class="out" style="animation-delay:.05s">📖 Built note</span>
+      <span class="out" style="animation-delay:.15s">📝 Simplified note</span>
+      <span class="out" style="animation-delay:.25s">🃏 Flashcards</span>
+      <span class="out" style="animation-delay:.35s">✓ Quiz</span>
+      <span class="out" style="animation-delay:.45s">✍ Fill-in-the-blank</span>
+      <span class="out" style="animation-delay:.55s">🧪 Written test</span>
+      <span class="out" style="animation-delay:.65s">📄 Cram sheet</span>
+      <span class="out" style="animation-delay:.75s">🎧 Podcast</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Import your way</div>
+  <h2 class="h2">However your lecture reaches you</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>📄 Files &amp; photos</h3><p>PDFs, slide decks and clear photos of handwritten notes — MedBank reads them and pulls out what matters, so nothing gets missed.</p></div>
+    <div class="bcol"><h3>▶️ YouTube &amp; text</h3><p>Paste a lecture video link and MedBank transcribes it, or paste a block of text — either becomes a full study set the same way.</p></div>
+    <div class="bcol"><h3>🎙️ Record in class</h3><p>Hit record on the branded recorder, capture the lecture live, then turn the transcript into your study set afterwards — pause and resume any time.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">Lecture to study set in three steps</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Add the lecture</h3><p>Choose a course and lecturer, then upload a PDF or photos, paste a YouTube link, or record it live.</p></div>
+    <div class="step"><div class="n">2</div><h3>Pick what to build</h3><p>Notes and cards are always built; tick extra modes like the podcast or written test, or add them later in one tap.</p></div>
+    <div class="step"><div class="n">3</div><h3>Study it</h3><p>Your whole set lands under that topic — read the note, drill the cards, listen to the podcast, and track your mastery.</p></div>
+  </div>
+</div></section>
+
+<!-- COMPARISON -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">By hand vs MedBank</div>
+  <h2 class="h2">One import beats a whole evening of prep</h2>
+  <div class="cmp"><table>
+    <thead><tr><th>Doing it yourself</th><th>With MedBank import</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Retyping slides into a flashcard app</td><td class="y">A full deck built from the upload</td></tr>
+      <tr><td class="n">Re-watching a lecture to take notes</td><td class="y">YouTube &amp; recordings transcribed for you</td></tr>
+      <tr><td class="n">Separate tools for notes, cards, quizzes</td><td class="y">All of it from a single import</td></tr>
+      <tr><td class="n">Nothing to revise from if you missed class</td><td class="y">Upload the slides or recording afterward</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- USE CASES -->
+<section><div class="wrap center">
+  <div class="kicker">What students import</div>
+  <h2 class="h2">Built for how med lectures actually arrive</h2>
+  <div class="feats" style="text-align:left">
+    <div class="feat"><div class="ic">📚</div><h3>Slide-heavy courses</h3><p>Drop a whole handout in and get a note plus decks, instead of scrolling 80 slides the night before.</p></div>
+    <div class="feat"><div class="ic">🎥</div><h3>Recorded &amp; online lectures</h3><p>Paste a YouTube link or upload the recording and study from what was actually said.</p></div>
+    <div class="feat"><div class="ic">✍️</div><h3>Your own handwritten notes</h3><p>Snap a few photos of your notebook and turn them into a searchable note and a deck of cards.</p></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Import FAQ</div>
+  <h2 class="h2">Questions about importing lectures</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What can I import?</summary><div class="a">A PDF or slide deck, photos of handwritten or printed notes, a pasted block of text, a YouTube link, or a lecture you record live inside the app. MedBank turns any of them into a full study set.</div></details>
+    <details class="qa"><summary>How does the YouTube import work?</summary><div class="a">Paste the video link and MedBank reads the video's captions, then builds your note and cards from what was said. It works on public videos that have captions or subtitles.</div></details>
+    <details class="qa"><summary>Can I record a lecture in class?</summary><div class="a">Yes. The recorder captures the lecture live — you can pause and resume — and afterwards it's transcribed and turned into your study set. Keep the app open with your screen on while recording.</div></details>
+    <details class="qa"><summary>What exactly gets built from one import?</summary><div class="a">Always: a built note, a simplified note, a primer deck and a recall deck. Optionally: a cram sheet, fill-in-the-blank, written test and a podcast — build them at import or add them later in a tap.</div></details>
+    <details class="qa"><summary>Do I have to build everything at once?</summary><div class="a">No. Notes and cards are always made; the extras are optional, so you only build what you'll use. You can generate any extra mode later from the topic in one tap, and it's saved after that.</div></details>
+    <details class="qa"><summary>Is importing free?</summary><div class="a">Your first lecture — and everything built from it — is free. Importing more lectures is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Your whole study set is one upload away.</h2>
+  <p>Import a lecture and get notes, cards, quizzes and a podcast in minutes — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Import your first lecture</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards &amp; recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../written-tests/index.html">Written tests</a><a href="../solve/index.html">Snap &amp; solve</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>
