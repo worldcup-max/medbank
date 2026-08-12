@@ -197,9 +197,22 @@ footer a:hover{color:var(--violet-d)}
 .win-side .si{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--dim);padding:9px 10px;border-radius:9px;margin-bottom:2px;transition:background .2s,color .2s}
 .win-side .si.on{background:var(--violet);color:#fff;font-weight:700}
 .win-main{flex:1;padding:24px;position:relative;overflow:hidden}
-@media(max-width:620px){.win-side{display:none}.win-main{padding:18px}}
-.kursor{position:absolute;z-index:20;left:40px;top:44px;pointer-events:none;transition:left 1s cubic-bezier(.45,0,.25,1),top 1s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.win-main.tmr{padding-top:52px}
+@media(max-width:620px){.win-side{display:none}.win-main{padding:18px}.win-main.tmr{padding-top:50px}}
+.kursor{position:absolute;z-index:20;left:40px;top:44px;pointer-events:none;transition:left 1.15s cubic-bezier(.45,0,.25,1),top 1.15s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .kursor.click{animation:kclick .3s ease}
+/* floating study-timer pill inside the demo window */
+.wtimer{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:24;display:flex;align-items:center;gap:8px;background:#efe9fb;color:var(--dim);border:1px solid var(--line);font-weight:800;font-size:12.5px;padding:7px 15px;border-radius:999px;box-shadow:0 6px 16px rgba(45,27,90,.12);transition:.35s;white-space:nowrap}
+.wtimer .wd{width:8px;height:8px;border-radius:50%;background:#c3b8dd;transition:.35s}
+.wtimer.run{background:linear-gradient(90deg,#5b21b6,#7c3aed);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(124,58,237,.42),0 0 0 4px rgba(124,58,237,.12)}
+.wtimer.run .wd{background:#ffd08a;box-shadow:0 0 9px #ffb347}
+.wtimer .wp{font-weight:700;opacity:.7;font-size:11px}
+/* app-faithful result + next-review lines for the recall session */
+.mcqres{font-weight:800;font-size:13px;margin-top:15px;padding:9px 12px;border-radius:9px}
+.mcqres.ok{background:#dcf3ee;color:#0d7a68}
+.mcqres.no{background:#fdeef0;color:#c02f18}
+.nextrev{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:12.5px;font-weight:700;color:var(--dim)}
+.nextrev b{color:var(--violet-d)}
 @keyframes kclick{0%,100%{transform:scale(1)}45%{transform:scale(.72)}}
 /* MCQ inside the window */
 .dmcq .qhead{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.6px}

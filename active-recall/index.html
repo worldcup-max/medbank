@@ -69,6 +69,78 @@
   </div>
 </div>
 
+<!-- LIVE PREVIEW -->
+<style>
+#arWin .ah1{font-size:22px;font-weight:800;color:var(--ink);margin:0}
+#arWin .ah1.sm{font-size:19px;display:flex;align-items:center;gap:8px}
+#arWin .asub{color:var(--dim);font-size:13px;margin:4px 0 14px}
+#arWin .acard{border:1px solid var(--line);border-radius:13px;padding:15px;margin-top:12px;background:#fff}
+#arWin .hgrid2{display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:center}
+#arWin .streakbox{background:#fdeee4;border-radius:12px;padding:12px;text-align:center}
+#arWin .sk-n{font-size:30px;font-weight:800;color:#e0632b;line-height:1}
+#arWin .sk-l{font-size:11px;color:#c05a2a;font-weight:700;margin-top:3px}
+#arWin .sk-f{font-size:10px;color:#12a594;margin-top:5px;font-weight:700}
+#arWin .arow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--ink);margin:2px 0}
+#arWin .arow span{color:var(--dim)}
+#arWin .abar{height:7px;background:#ece7f5;border-radius:5px;overflow:hidden;margin:4px 0 10px}
+#arWin .abar.big{height:9px;margin:10px 0}
+#arWin .abar>i{display:block;height:100%;background:linear-gradient(90deg,#3ecf8e,#14b8a6);border-radius:5px}
+#arWin .keepline{background:#fdf6e8;color:#a8791f;font-weight:700;font-size:11.5px;text-align:center;padding:7px;border-radius:8px;margin:6px 0 12px}
+#arWin .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+#arWin .stat{border:1px solid var(--line);border-radius:10px;padding:9px;text-align:center}
+#arWin .stat b{font-size:17px;display:block;color:var(--ink)}
+#arWin .stat span{font-size:10.5px;color:var(--dim)}
+#arWin .xp{margin-top:4px}#arWin .xp b{color:var(--violet-d)}
+#arWin .chips{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 13px}
+#arWin .chip{border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:11px;color:var(--dim)}
+#arWin .chip b{color:var(--ink)}
+#arWin .abtn{width:100%;border:none;background:var(--violet);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:11px}
+#arWin .tabs{display:flex;gap:18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+#arWin .tab{font-size:13px;color:var(--dim);padding-bottom:9px;font-weight:600}
+#arWin .tab.on{color:var(--violet-d);font-weight:800;box-shadow:inset 0 -2px 0 var(--violet)}
+#arWin .ok100{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-left:4px solid #14b8a6;border-radius:12px;padding:14px;margin-bottom:12px}
+#arWin .ok-n{font-size:30px;font-weight:800;color:var(--ink);line-height:1}#arWin .ok-n span{font-size:15px}
+#arWin .ok-l{font-size:11.5px;color:#0d7a68;font-weight:700;margin-top:4px}
+#arWin .okstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex:1;text-align:center}
+#arWin .okstats b{font-size:16px;display:block}#arWin .okstats span{font-size:10.5px;color:var(--dim)}
+#arWin .srow{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-top:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink)}
+#arWin .srow b{color:var(--violet-d)}
+#arWin .mini{font-size:11px;color:var(--dim);margin-top:2px}
+#arWin .weekrow{font-size:13px;font-weight:700;color:var(--ink)}
+#arWin .trow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:9px 2px;border-top:1px solid var(--line);color:var(--ink);font-weight:600}
+#arWin .trow em{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;font-style:normal}
+#arWin .due{background:#dcf3ee;color:#0d7a68}#arWin .due3{background:#e7edfb;color:#3b5bdb}
+#arWin .dueW{background:#fdf0dd;color:#b3791a}#arWin .dueWk{background:#efe9fb;color:#6d28d9}
+#arWin .doneb{text-align:center;padding:46px 12px}
+#arWin .doneb .dbig{font-size:42px}
+#arWin .doneb h5{font-size:16px;margin:10px 0 4px;color:var(--ink)}
+#arWin .doneb p{font-size:12.5px;color:var(--dim);margin:0}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">From your home screen to answered cards</h2>
+  <p class="sub">MedBank opens on your dashboard, you tap into Active Recall, and it serves today's due cards across every subject — new cards and reviews that have come around again. Watch the study timer too: it only runs once you're actually on a card.</p>
+  <div class="win" id="arWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si on" id="arS_home">⌂ Home</div>
+        <div class="si">＋ Add lecture</div>
+        <div class="si">🎙 Record lecture</div>
+        <div class="si" id="arS_recall">🧠 Active recall</div>
+        <div class="si">🧮 Solve</div>
+        <div class="si">🗓 This week</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main tmr">
+        <div class="wtimer" id="arTimer"><span class="wd"></span>Today <span id="arTime">53:32</span></div>
+        <div id="arScene"></div>
+        <div class="kursor" id="arCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
 <!-- LADDER -->
 <section id="ladder"><div class="wrap center">
   <div class="kicker">The recall schedule</div>
@@ -153,6 +225,120 @@
   </div>
   <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
 </div></footer>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('arScene')) return;
+  var scene=$('arScene');
+
+  // ---- study timer: only ticks while on a card (session) ----
+  var tsec=53*60+32, running=false;
+  function fmtT(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(ss).padStart(2,'0');}
+  setInterval(function(){ if(!running)return; tsec++; var e=$('arTime'); if(e)e.textContent=fmtT(tsec); },1000);
+  function timerRun(on){ running=on; $('arTimer').classList.toggle('run', on); }
+
+  function side(w){ $('arS_home').classList.toggle('on', w==='home'); $('arS_recall').classList.toggle('on', w==='recall'); }
+  function resetCursor(){ var c=$('arCursor'); c.style.left='40px'; c.style.top='44px'; }
+  function moveTo(el, cb){
+    if(!el){ cb&&cb(); return; }
+    var main=$('arCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var cur=$('arCursor'); cur.style.left=(er.left-mr.left+Math.min(er.width-26,44))+'px'; cur.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },320); },1500);
+  }
+  function scrollTween(el,to,dur,cb){ var from=el.scrollTop,start=null;
+    function step(ts){ if(!start)start=ts; var p=Math.min(1,(ts-start)/dur); el.scrollTop=from+(to-from)*(0.5-0.5*Math.cos(p*Math.PI)); if(p<1)requestAnimationFrame(step); else cb&&cb(); }
+    requestAnimationFrame(step);
+  }
+  function freeScene(){ scene.style.maxHeight=''; scene.style.overflow=''; scene.scrollTop=0; }
+
+  // ---- scene markup ----
+  function homeHTML(){ return ''
+    + '<div class="ah1">MedBank</div>'
+    + '<div class="asub">Active recall, built from your lecturers’ slides.</div>'
+    + '<div class="acard">'
+    +   '<div class="hgrid2"><div class="streakbox"><div class="sk-n">20</div><div class="sk-l">🔥 day streak</div><div class="sk-f">❄ freeze ready</div></div>'
+    +   '<div><div class="arow"><span>● Pediatrics new cards</span><b>3 / 30</b></div><div class="abar"><i style="width:10%"></i></div>'
+    +   '<div class="arow"><span>● Obstetrics &amp; Gynaecology new cards</span><b>0 / 30</b></div><div class="abar"><i style="width:2%"></i></div>'
+    +   '<div class="arow"><span>🧠 Active recall (reviews)</span><b>23 / 23</b></div><div class="abar"><i style="width:100%"></i></div></div></div>'
+    +   '<div class="keepline">🔥 Keep streak: new 3/20 · reviews ✓</div>'
+    +   '<div class="stats"><div class="stat"><b>0</b><span>Due now</span></div><div class="stat"><b>12</b><span>In progress</span></div><div class="stat"><b>0</b><span>Completed</span></div><div class="stat"><b>20</b><span>Best streak</span></div></div>'
+    +   '<div class="arow xp"><b>House officer</b><span>1099 XP to Registrar</span></div><div class="abar"><i style="width:22%"></i></div>'
+    +   '<div class="chips"><span class="chip">Pediatrics exam · <b>103d</b></span><span class="chip">Obstetrics &amp; Gynaecology exam · <b>103d</b></span><span class="chip">Community Medicine exam · <b>103d</b></span></div>'
+    +   '<button class="abtn" id="arOpen">🧠 Open Active Recall →</button>'
+    + '</div>'; }
+
+  function hubHTML(){ return ''
+    + '<div class="tabs"><span class="tab on">Active recall</span><span class="tab">Hard cards</span><span class="tab">Mistakes</span><span class="tab">Leeches</span></div>'
+    + '<div class="ah1 sm">🧠 Active Recall</div>'
+    + '<div class="asub">Open it and go — MedBank decides what to review.</div>'
+    + '<div class="ok100"><div><div class="ok-n">100<span>%</span></div><div class="ok-l">🟢 On schedule</div></div>'
+    +   '<div class="okstats"><div><b>0</b><span>due now</span></div><div><b>0</b><span>overdue</span></div><div><b>0</b><span>topics waiting</span></div><div><b>5</b><span>hard cards</span></div></div></div>'
+    + '<div class="acard"><div class="arow"><b style="font-size:14px">Today’s session</b><span class="mini">🕒 ~16 min · 47 cards</span></div>'
+    +   '<div class="srow"><span>🆕 New cards</span><b>42 ▶</b></div>'
+    +   '<div class="srow"><span>🧠 Confidence check</span><b>5 ▶</b></div>'
+    +   '<div class="abar big"><i style="width:65%"></i></div><div class="mini">26 / 40 cards today · floor met ✓</div>'
+    +   '<button class="abtn" id="arStart" style="margin-top:12px">▶ Start today’s session</button></div>'
+    + '<div class="acard weekrow">🗓 This week’s topics · 9</div>'
+    + '<div class="acard"><div class="trow" style="border-top:none"><span>Bronchiolitis · Paediatrics</span><em class="due">due today</em></div>'
+    +   '<div class="trow"><span>Pre-eclampsia · O&amp;G</span><em class="due3">in 3 days</em></div>'
+    +   '<div class="trow"><span>Neonatal jaundice · Paediatrics</span><em class="dueW">weekend</em></div>'
+    +   '<div class="trow"><span>Partograph · O&amp;G</span><em class="dueWk">weekly</em></div>'
+    +   '<div class="trow"><span>Rheumatic fever · Paediatrics</span><em class="dueWk">weekly</em></div></div>'; }
+
+  function doneHTML(){ return '<div class="doneb"><div class="dbig">🎉</div><h5>Session complete</h5><p>26 / 40 cards today · floor met ✓ · 20-day streak safe</p></div>'; }
+
+  // ---- session cards ----
+  var SC=[
+    {head:'NEW CARD · PAEDIATRICS',
+     q:'A term neonate develops jaundice at 30 hours of life. Bilirubin is rising quickly and the direct fraction is normal. Best first step?',
+     opts:['Reassure — this is physiological','Plot on the age-specific chart and start phototherapy','Immediate exchange transfusion','Stop breastfeeding permanently'], ans:1,
+     answer:'Fast-rising jaundice this early is not physiological — plot bilirubin on the hour-specific chart and start phototherapy.',
+     bullets:['Jaundice under 24h is always pathological','Use the hour-specific nomogram before you decide'],
+     callout:'Physiological jaundice appears <b>after 24 hours</b> and climbs slowly — early, rapid jaundice needs investigation.',
+     sched:'tomorrow'},
+    {head:'3-DAY REVIEW · OBSTETRICS',
+     q:'A woman at 34 weeks has BP 158/104, proteinuria and a headache. Besides antihypertensives, which drug most reduces her seizure risk?',
+     opts:['Diazepam','Magnesium sulfate','Phenytoin','Labetalol alone'], ans:1,
+     answer:'Magnesium sulfate is the drug of choice to prevent and treat eclamptic seizures in severe pre-eclampsia.',
+     bullets:['MgSO₄ beats diazepam and phenytoin for seizure prevention','Monitor reflexes, respiratory rate and urine output for toxicity'],
+     callout:'The definitive treatment of pre-eclampsia is <b>delivery</b> — MgSO₄ and BP control buy time to do it safely.',
+     sched:'in a week'}
+  ];
+  function explHTML(k){ var b=k.bullets.map(function(x){return '<li>'+x+'</li>';}).join('');
+    return '<div class="axtag">ANSWER — EXPLAINED</div><div class="axans">'+k.answer+'</div><div class="axh">Understanding it</div><ul class="axul">'+b+'</ul><div class="axcall">'+k.callout+'</div>'; }
+  function cardHTML(k){ var o=k.opts.map(function(x,i){return '<div class="dopt" id="aopt'+i+'"><span class="tag">'+String.fromCharCode(65+i)+'</span><span>'+x+'</span></div>';}).join('');
+    return '<div class="dmcq"><div class="qhead">'+k.head+'</div><div class="qtext">'+k.q+'</div><div id="aopts">'+o+'</div><div id="ares"></div></div>'; }
+  function runCard(i, done){
+    freeScene(); var k=SC[i]; scene.innerHTML=cardHTML(k); resetCursor();
+    setTimeout(function(){
+      moveTo($('aopt'+k.ans), function(){
+        $('aopt'+k.ans).classList.add('correct');
+        $('ares').innerHTML='<div class="mcqres ok">✓ Correct</div><div class="nextrev ok">↻ You’ll see this again <b>'+k.sched+'</b></div><div class="dexpl show" style="margin-top:14px">'+explHTML(k)+'</div>';
+        setTimeout(done, 5400);
+      });
+    }, 1700);
+  }
+
+  // ---- sequence ----
+  function play(){
+    side('home'); timerRun(false); freeScene(); scene.innerHTML=homeHTML(); resetCursor();
+    setTimeout(function(){ moveTo($('arOpen'), function(){
+      side('recall'); scene.innerHTML=hubHTML(); resetCursor();
+      scene.style.maxHeight='300px'; scene.style.overflow='hidden'; scene.scrollTop=0;
+      setTimeout(function(){ scrollTween(scene,170,1500,function(){ setTimeout(function(){ scrollTween(scene,0,1200,function(){
+        setTimeout(function(){ moveTo($('arStart'), function(){
+          freeScene(); timerRun(true);
+          runCard(0, function(){ runCard(1, function(){
+            timerRun(false); freeScene(); scene.innerHTML=doneHTML(); resetCursor();
+            setTimeout(play, 3200);
+          }); });
+        }); }, 700);
+      }); }, 1300); }); }, 1500);
+    }); }, 2400);
+  }
+  setTimeout(play, 800);
+})();
+</script>
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
   document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });

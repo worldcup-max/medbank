@@ -79,7 +79,8 @@
         <div class="si">📖 Notes</div>
         <div class="si">📊 Progress</div>
       </div>
-      <div class="win-main">
+      <div class="win-main tmr">
+        <div class="wtimer run" id="fcTimer"><span class="wd"></span>Today <span id="fcTime">32:08</span></div>
         <div class="dmcq">
           <div class="qhead" id="dHead">RECALL · PAEDIATRICS</div>
           <div class="qtext" id="dQ">…</div>
@@ -208,6 +209,10 @@
   ];
   var qi=0, $=function(id){return document.getElementById(id);};
   if(!$('dQ')) return;
+  // study timer — this is the card screen, so it counts the whole time
+  var tsec=32*60+8;
+  function fmtT(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(ss).padStart(2,'0');}
+  setInterval(function(){ tsec++; var e=$('fcTime'); if(e) e.textContent=fmtT(tsec); },1000);
   function explHTML(k){
     var b=k.bullets.map(function(x){return '<li>'+x+'</li>';}).join('');
     return '<div class="axtag">ANSWER — EXPLAINED</div>'
@@ -227,17 +232,17 @@
   function moveTo(el, cb){
     var main=$('dCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
     var cur=$('dCursor'); cur.style.left=(er.left-mr.left+28)+'px'; cur.style.top=(er.top-mr.top+er.height/2-8)+'px';
-    setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },300); },1050);
+    setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },320); },1500);
   }
   function reveal(k){
     var ex=$('dExpl'); ex.innerHTML=explHTML(k); ex.classList.add('show');
     var sc=$('dSched');
     sc.innerHTML='<span>🗓</span> Scheduled — you\'ll see this card <b>'+k.sched+'</b>';
-    setTimeout(function(){ sc.classList.add('show'); }, 550);
+    setTimeout(function(){ sc.classList.add('show'); }, 650);
     setTimeout(function(){
       var cur=$('dCursor'); cur.style.left='40px'; cur.style.top='44px';
-      qi=(qi+1)%Q.length; setTimeout(run, 900);
-    }, 4300);
+      qi=(qi+1)%Q.length; setTimeout(run, 1200);
+    }, 5600);
   }
   function run(){
     build(); var k=Q[qi];
@@ -245,16 +250,16 @@
       if(k.wrongPick!=null){
         moveTo($('dopt'+k.wrongPick), function(){
           $('dopt'+k.wrongPick).classList.add('wrong');
-          setTimeout(function(){ $('dopt'+k.ans).classList.add('correct'); reveal(k); }, 750);
+          setTimeout(function(){ $('dopt'+k.ans).classList.add('correct'); reveal(k); }, 950);
         });
       } else {
         moveTo($('dopt'+k.ans), function(){
           $('dopt'+k.ans).classList.add('correct'); reveal(k);
         });
       }
-    }, 1400);
+    }, 1900);
   }
-  setTimeout(run, 700);
+  setTimeout(run, 900);
 })();
 </script>
 <script>
