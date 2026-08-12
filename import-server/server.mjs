@@ -77,6 +77,9 @@ async function getUser(req){
   const { data } = await admin.auth.getUser(tok);
   return data && data.user ? data.user : null;
 }
+async function isPremium(account_id){ try{ const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle(); return !!(s.data && s.data.status==="active"); }catch(e){ return false; } }
+async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id); return c.count||0; }catch(e){ return 0; } }
+const FREE_BUILD_LIMIT = 1;   // free accounts can build 1 lecture; everything inside it stays free
 
 /* transcribe a recorded lecture with OpenAI (gpt-4o-transcribe / whisper-1).
  * Node 22 gives us global fetch/FormData/Blob. Audio file must be <= 25MB. */
@@ -275,11 +278,11 @@ app.post("/import", async (req,res)=>{
     if(!user) return res.status(401).json({ error:"not signed in" });
     const account_id = user.id;
 
-    // --- gate: current level active + entitled, and import quota not exceeded ---
-    const feat = await admin.rpc("can_use_features", { p_account:account_id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
-    const quota = await admin.rpc("check_ai_quota", { p_account:account_id, p_feature:"import" });
-    if(quota.error || !quota.data) return res.status(429).json({ error:"limit", reason:"You've reached your import limit. Subscribe for more." });
+    // --- freemium gate: premium = unlimited imports; free = 1 built lecture ---
+    if(!await isPremium(account_id)){
+      if(await builtCount(account_id) >= FREE_BUILD_LIMIT)
+        return res.status(402).json({ error:"upgrade", reason:"Your free account includes 1 lecture. Subscribe to import more — everything you've already built stays free to study, and the AI tutor and podcast keep working on it." });
+    }
 
     const { topicName, subject, lecturer, course_id } = req.body;
     if(!topicName || !course_id) return res.status(400).json({ error:"topicName and course_id required" });
@@ -358,8 +361,7 @@ app.post("/build-extra", async (req,res)=>{
     const account_id = user.id;
     const { topic_id, kind } = req.body;
     if(!topic_id || (kind!=="fill_blank" && kind!=="written")) return res.status(400).json({ error:"bad request" });
-    const feat = await admin.rpc("can_use_features", { p_account:account_id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    // open to any signed-in student — runs on their own built lecture
     const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
@@ -384,8 +386,7 @@ app.post("/build-extra", async (req,res)=>{
 app.post("/podcast", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    const feat = await admin.rpc("can_use_features", { p_account:user.id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    // open to any signed-in student — runs on their own built lecture
     const { topic_id } = req.body; if(!topic_id) return res.status(400).json({ error:"topic_id required" });
     const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
@@ -419,8 +420,7 @@ app.get("/podcast-voices", async (req,res)=>{
 app.post("/podcast-audio", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    const feat = await admin.rpc("can_use_features", { p_account:user.id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    // open to any signed-in student — runs on their own built lecture
     const { topic_id, voiceA, voiceB } = req.body;
     if(!topic_id || !voiceA || !voiceB) return res.status(400).json({ error:"topic_id, voiceA and voiceB required" });
     const t = await admin.from("topics").select("id,account_id,extras").eq("id",topic_id).maybeSingle();
@@ -448,8 +448,7 @@ app.post("/podcast-audio", async (req,res)=>{
 app.post("/solve", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    const feat = await admin.rpc("can_use_features", { p_account:user.id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    if(!await isPremium(user.id)) return res.status(402).json({ error:"upgrade", reason:"Solve is a premium feature — subscribe to snap and solve any question." });
     const { image_base64, media_type, text } = req.body;
     if(!image_base64 && !(text && text.trim())) return res.status(400).json({ error:"send a photo or type the question" });
     const images = image_base64 ? [{ type:"image", source:{ type:"base64", media_type:media_type||"image/jpeg", data:image_base64 } }] : [];
@@ -464,8 +463,7 @@ app.post("/solve", async (req,res)=>{
 app.post("/tts", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    const feat = await admin.rpc("can_use_features", { p_account:user.id });
-    if(feat.error || !feat.data) return res.status(403).json({ error:"locked" });
+    // open to any signed-in student — read-aloud on their own content
     const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
     const buf = await openaiTTS(text, req.body.voice || "nova");
     res.setHeader("Content-Type","audio/mpeg"); res.send(buf);

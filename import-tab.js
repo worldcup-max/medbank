@@ -32,7 +32,7 @@
 
   async function openImport(opts){
     opts = opts || {};
-    if(window.MB_PAYWALL && !MB_PAYWALL.guard("Adding a lecture")) return;
+    /* no pre-block: the first free lecture is allowed; the server returns 402 (upgrade) when the free build is used up */
     if(typeof document === "undefined") return;
     var cs = await courses();
     var isAdmin=false; try{ var _me=await window.__mbSB.from("accounts").select("is_admin").maybeSingle(); isAdmin=!!(_me.data&&_me.data.is_admin); }catch(e){}
@@ -185,7 +185,9 @@
         var resp=await fetch(CFG.IMPORT_API.replace(/\/$/,"")+"/import",{
           method:"POST", headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token }, body:JSON.stringify(body) });
         var out=await resp.json();
-        if(!resp.ok){ show(out.reason||out.error||"That didn't work. Try again."); go.disabled=false; go.textContent="Build my study set"; return; }
+        if(!resp.ok){
+          if(out.error==="upgrade" && window.MB_PAYWALL){ if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "Subscribe"); return; }
+          show(out.reason||out.error||"That didn't work. Try again."); go.disabled=false; go.textContent="Build my study set"; return; }
         if(o.parentNode) document.body.removeChild(o);
         try{ if(typeof window.onImported==="function") window.onImported(out.topic_id); }catch(e){}
         try{ location.hash="#/subject/course_"+course_id; }catch(e){}

@@ -870,7 +870,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.08f';   // bump this each release
+const APP_VERSION='2026.08.08g';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1756,7 +1756,6 @@ function solvePreview(){
 }
 function fileToB64solve(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(',')[1]); r.onerror=rej; r.readAsDataURL(file); }); }
 async function solveNow(){
-  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;
   const fEl=document.getElementById('solveImg'), f=fEl&&fEl.files[0];
   const text=(document.getElementById('solveText').value||'').trim();
   const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
@@ -1768,6 +1767,7 @@ async function solveNow(){
     const body={ text }; if(f){ body.image_base64=await fileToB64solve(f); body.media_type=f.type||'image/jpeg'; }
     const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/solve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(body)});
     const o=await r.json();
+    if(!r.ok && o.error==='upgrade'){ if(window.MB_PAYWALL) MB_PAYWALL.nudge('Solve is premium', o.reason||'Subscribe to snap and solve any question.', 'Subscribe'); btn.disabled=false; btn.textContent='Solve it'; return; }
     if(!r.ok||!o.answer) throw new Error(o.reason||o.error||'Could not solve this — try a clearer photo.');
     out.innerHTML='<div class="card" style="cursor:default"><div class="md">'+md(o.answer)+'</div></div>';
   }catch(e){ msg.innerHTML='<span style="color:#ff9db1">'+esc(e.message||'Something went wrong')+'</span>'; }
