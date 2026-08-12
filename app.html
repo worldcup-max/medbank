@@ -868,7 +868,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.07n';   // bump this each release
+const APP_VERSION='2026.08.08a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -895,6 +895,8 @@ let DATA = (()=>{
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
+  d.cardEdits= d.cardEdits|| {};  // cardId -> {q,a,explain,...} student corrections (override the AI card)
+  d.cardFlags= d.cardFlags|| {};  // cardId -> 1  (reported wrong → hidden from study)
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   if(d.daily.courseGoal==20) d.daily.courseGoal=30;   // updated daily new-card goal to 30/course
   return d;
@@ -1002,6 +1004,84 @@ function sessionRecallIds(){
   if(!S) return [];
   if(S.mode==='deck' && S.t && S.deck==='recall') return (S.t.recall||[]).map(c=>cid(S.t.id,'recall',c));
   return (S.items||[]).filter(it=>it.deck==='recall').map(it=>it.id);
+}
+
+/* ---- card corrections: edit / report-wrong / regenerate (trust + safety) ---- */
+function effCard(id,c){ return DATA.cardEdits[id] ? Object.assign({}, c, DATA.cardEdits[id]) : c; }
+function isFlagged(id){ return !!DATA.cardFlags[id]; }
+let EDITING=null;   // cid currently being edited inline
+function startEditCard(id){ EDITING=id; render(); }
+function cancelEditCard(){ EDITING=null; render(); }
+function saveEditCard(id,deck){
+  const q=(document.getElementById('ec_q')||{}).value, a=(document.getElementById('ec_a')||{}).value;
+  const patch={}; if(q!=null) patch.q=q.trim();
+  if(a!=null){ if(deck==='primer') patch.explain=a.trim(); else patch.a=a.trim(); }
+  DATA.cardEdits[id]=Object.assign({}, DATA.cardEdits[id]||{}, patch);
+  EDITING=null; persist(); render();
+}
+function flagCard(id){
+  if(!confirm('Report this card as wrong and hide it from your studying? You can also just edit it instead.')) return;
+  DATA.cardFlags[id]=1; persist();
+  try{ if(S && typeof sessionNext==='function' && S.items){ S.items=S.items.filter(it=>it.id!==id); if(S.order) S.order=S.items.map((_,k)=>k); if(S.i>=S.items.length) S.i=Math.max(0,S.items.length-1); } }catch(e){}
+  render();
+}
+function unflagCard(id){ delete DATA.cardFlags[id]; persist(); render(); }
+async function regenCard(id,deck,btn){
+  const it = (S && S.items) ? S.items.find(x=>x.id===id) : null;
+  const t = it ? it.t : null; const c = it ? effCard(id,it.c) : null;
+  if(!t||!c){ return; }
+  if(btn){ btn.disabled=true; btn.textContent='Regenerating…'; }
+  const ref = (t.note||t.simplified||'').slice(0,6000);
+  const prompt='A medical flashcard from this lecture may be inaccurate. Using ONLY the lecture note as the source of truth, rewrite a corrected version.\n\nLECTURE NOTE:\n'+ref+'\n\nCURRENT CARD:\nQ: '+(c.q||'')+'\nA: '+(deck==='primer'?(c.explain||''):(c.a||''))+'\n\nReturn ONLY JSON: {"q":"corrected question","a":"corrected concise answer"}. Keep it faithful to the note.';
+  try{
+    const txt=await claudeTutor('You are a careful medical educator correcting a flashcard strictly from the provided note.', [{role:'user',text:prompt}], DATA.settings.explainModel||'claude-sonnet-5');
+    const s=txt.indexOf('{'), e=txt.lastIndexOf('}'); const o=JSON.parse(txt.slice(s,e+1));
+    const patch={}; if(o.q) patch.q=o.q; if(o.a){ if(deck==='primer') patch.explain=o.a; else patch.a=o.a; }
+    DATA.cardEdits[id]=Object.assign({}, DATA.cardEdits[id]||{}, patch); persist(); render();
+  }catch(err){ if(btn){ btn.disabled=false; btn.textContent='↻ Regenerate'; } alert('Could not regenerate — check your internet and try again.'); }
+}
+function cardActionsRow(id,deck){
+  return `<div class="btnrow" style="margin-top:12px;gap:8px;flex-wrap:wrap;justify-content:center">
+    <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();startEditCard('${id}')">✎ Edit</button>
+    <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();regenCard('${id}','${deck}',this)">↻ Regenerate</button>
+    <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();flagCard('${id}')">⚑ Report wrong</button>
+  </div>`;
+}
+function cardEditor(id,deck,c){
+  const ans = deck==='primer' ? (c.explain||'') : (c.a||'');
+  return `<div class="card" style="cursor:default" onclick="event.stopPropagation()">
+    <div style="font-weight:800;margin-bottom:8px">✎ Edit this card</div>
+    <label style="font-size:12px;color:var(--dim)">Question</label>
+    <textarea id="ec_q" class="notebox" rows="3">${esc(c.q||'')}</textarea>
+    <label style="font-size:12px;color:var(--dim);margin-top:8px;display:block">${deck==='primer'?'Explanation':'Answer'}</label>
+    <textarea id="ec_a" class="notebox" rows="4">${esc(ans)}</textarea>
+    <div class="btnrow" style="margin-top:10px;gap:8px">
+      <button class="btn primary" onclick="event.stopPropagation();saveEditCard('${id}','${deck}')">Save</button>
+      <button class="btn" onclick="event.stopPropagation();cancelEditCard()">Cancel</button>
+    </div></div>`;
+}
+
+/* ---- reset progress on a single topic / export a topic to PDF ---- */
+function resetTopicProgress(id){
+  const t=topById(id); if(!t) return;
+  if(!confirm('Reset your progress on "'+t.name+'"? This clears your card history, resume position and read/done marks for this topic only. Your notes and cards stay.')) return;
+  (t.primer||[]).forEach(c=>{ delete DATA.cards[cid(t.id,'primer',c)]; });
+  (t.recall||[]).forEach(c=>{ const k=cid(t.id,'recall',c); delete DATA.cards[k]; delete DATA.starred[k]; delete DATA.missLog[k]; });
+  delete DATA.pos['pos:'+t.id+'primer']; delete DATA.pos['pos:'+t.id+'recall'];
+  delete DATA.done[t.id]; delete DATA.read[t.id]; delete DATA.topics[t.id];
+  persist(); render();
+}
+function exportTopicPDF(id){
+  const t=topById(id); if(!t) return;
+  const w=window.open('','_blank'); if(!w){ alert('Allow pop-ups for this site to export, then try again.'); return; }
+  IMGBASE = t.imgBase || '';
+  const html='<!doctype html><html><head><meta charset="utf-8"><base href="'+location.origin+'/"><title>'+esc(t.name)+'</title>'
+    +'<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:26px auto;padding:0 18px;color:#111;line-height:1.6}h1{font-size:23px;margin:0 0 4px}.meta{color:#666;margin:0 0 22px}h2,h3{margin-top:1.3em}img{max-width:100%}.simp{margin-top:34px;padding-top:20px;border-top:2px solid #ddd}</style></head><body>'
+    +'<h1>'+esc(t.name)+'</h1><p class="meta">'+esc([t.lecturer,t.subject.name].filter(Boolean).join(' · '))+'</p>'
+    +'<div>'+md(t.note||t.simplified||'')+'</div>'
+    +(t.note&&t.simplified?'<div class="simp"><h2>Simplified note</h2>'+md(t.simplified)+'</div>':'')
+    +'<scr'+'ipt>window.onload=function(){setTimeout(function(){window.print();},350);};</scr'+'ipt></body></html>';
+  w.document.write(html); w.document.close();
 }
 
 /* ---- clinical scenario cards (CLINICAL / OSPE / OSCE / CASE / SCENARIO) ---- */
@@ -1699,6 +1779,7 @@ function pageTopic(id){
      ${pipeline}
      ${t.ready?masteryChips((t.recall||[]).map(c=>cid(t.id,'recall',c))):''}
      ${t.ready?modeSwitcher(t):''}
+     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button></div>`:''}
      ${body}`;
 }
 
@@ -1885,6 +1966,7 @@ function startDeck(topicId,deck,clinOnly,weakOnly){
   let cards = deck==='primer'? t.primer : t.recall;
   if(clinOnly) cards = cards.filter(isClin);
   if(weakOnly) cards = cards.filter(c=>{ const st=cardState4(cid(t.id,deck,c)); return st==='unf'||st==='lrn'; });   // not-yet-mastered
+  cards = cards.filter(c=>!isFlagged(cid(t.id,deck,c)));   // hide cards the student reported wrong
   const items = cards.map(c=>({t,c,id:cid(t.id,deck,c),deck}));
   const key='deck:'+topicId+deck;
   let i=0;
@@ -2286,7 +2368,8 @@ function planItem(state,icon,title,desc,action){
 
 /* MCQ renderer for Recall (Deck B) cards that carry options */
 function mcqView(session){
-  const it=S.items[S.order[S.i]], c=it.c, t=it.t;
+  const it=S.items[S.order[S.i]], c=effCard(it.id,it.c), t=it.t;
+  if(EDITING===it.id) return '<div class="studywrap">'+cardEditor(it.id,'recall',c)+'</div>';
   const col='var(--recall)';
   const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
   const picked = S.pick!=null, correct = picked && S.pick===c.ans;
@@ -2344,6 +2427,7 @@ function mcqView(session){
       ${body}</div>
     ${picked?noteBlock(it):''}
     ${(c.src&&picked)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
+    ${cardActionsRow(it.id,it.deck)}
     ${controls}</div>`;
 }
 
@@ -2351,7 +2435,8 @@ function mcqView(session){
 function cardView(session){
   const it0=S.items[S.order[S.i]];
   if(it0 && it0.deck!=='primer' && it0.c.opts && it0.c.opts.length) return mcqView(session);
-  const it=S.items[S.order[S.i]], c=it.c, t=it.t, deck=it.deck, isP=deck==='primer';
+  const it=S.items[S.order[S.i]], c=effCard(it.id,it.c), t=it.t, deck=it.deck, isP=deck==='primer';
+  if(EDITING===it.id) return '<div class="studywrap">'+cardEditor(it.id,deck,c)+'</div>';
   const col=isP?'var(--primer)':'var(--recall)';
   const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
   let ans='';
@@ -2402,6 +2487,7 @@ function cardView(session){
       ${ans || '<div class="taphint">Tap to reveal</div>'}</div>
     ${S.show?noteBlock(it):''}
     ${(c.src&&S.show)?`<div style="text-align:center;margin-top:10px"><button onclick="event.stopPropagation();try{MB_DOCK_SOURCE()}catch(e){}" style="border:1px solid var(--line);background:var(--panel2);color:var(--accent);border-radius:999px;padding:6px 13px;font-weight:700;font-size:12.5px;cursor:pointer">${c.src_t!=null?('🎙 '+Math.floor(c.src_t/60)+':'+String(c.src_t%60).padStart(2,'0')+' · in the lecture'):'📄 Show in the note'}</button></div>`:''}
+    ${cardActionsRow(it.id,it.deck)}
     ${controls}</div>`;
 }
 
