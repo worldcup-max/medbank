@@ -245,7 +245,7 @@ async function elevenTTS(text, voiceId){
   const key = process.env.ELEVENLABS_API_KEY; if(!key) throw new Error("ELEVENLABS_API_KEY not set on the server");
   const r = await fetch("https://api.elevenlabs.io/v1/text-to-speech/"+encodeURIComponent(voiceId), {
     method:"POST", headers:{ "xi-api-key":key, "Content-Type":"application/json", "Accept":"audio/mpeg" },
-    body: JSON.stringify({ text, model_id: process.env.ELEVEN_MODEL || "eleven_turbo_v2_5", voice_settings:{ stability:0.45, similarity_boost:0.75 } }) });
+    body: JSON.stringify({ text, model_id: process.env.ELEVEN_MODEL || "eleven_flash_v2_5", voice_settings:{ stability:0.45, similarity_boost:0.75 } }) });
   if(!r.ok){ const tx=await r.text().catch(()=> ""); throw new Error("voice generation failed ("+r.status+"): "+tx.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
