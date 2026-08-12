@@ -68,7 +68,7 @@
 <section id="see"><div class="wrap center">
   <div class="kicker">Live preview</div>
   <h2 class="h2">This is exactly how it plays out</h2>
-  <p class="sub">Read the question, pick an option, and get the answer with a quick why — the same flow you'll use in the app. No sign-in needed to watch.</p>
+  <p class="sub">Watch it work: MedBank answers a card, gives the answer explained, and schedules each one for its next review — get it wrong and it comes back tomorrow. The same flow you'll use in the app, no sign-in needed.</p>
   <div class="win" id="fcWin">
     <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
     <div class="win-body">
@@ -85,6 +85,7 @@
           <div class="qtext" id="dQ">…</div>
           <div id="dOpts"></div>
           <div class="dexpl" id="dExpl"></div>
+          <div class="sched" id="dSched"></div>
         </div>
         <div class="kursor" id="dCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
       </div>
@@ -179,38 +180,79 @@
     {head:'RECALL · PAEDIATRICS',
      q:'A 3-week-old boy has non-bilious projectile vomiting after every feed and a palpable olive-shaped mass in the epigastrium. Most likely diagnosis?',
      opts:['Duodenal atresia','Hypertrophic pyloric stenosis','Gastro-oesophageal reflux','Malrotation with volvulus'], ans:1,
-     expl:'<b>Hypertrophic pyloric stenosis.</b> Non-bilious projectile vomiting with a palpable "olive" at 3–6 weeks is classic. Duodenal atresia and malrotation cause <b>bilious</b> vomiting; reflux is neither projectile nor associated with a mass.'},
+     answer:'This is hypertrophic pyloric stenosis — non-bilious projectile vomiting with a palpable "olive" at 3–6 weeks of age.',
+     bullets:['Vomiting is non-bilious — the block is above the bile duct','A firm "olive" mass is felt in the epigastrium'],
+     callout:'<b>Bilious</b> vomiting points instead to malrotation or duodenal atresia — treat that as a surgical emergency until proven otherwise.',
+     sched:'in 3 days'},
     {head:'RECALL · PAEDIATRICS',
      q:'A 2-year-old presents with a barking cough, inspiratory stridor and a low-grade fever, worse at night. The most likely cause is:',
-     opts:['Acute epiglottitis','Bacterial tracheitis','Laryngotracheobronchitis (croup)','Foreign-body aspiration'], ans:2,
-     expl:'<b>Croup (laryngotracheobronchitis).</b> Barking cough + inspiratory stridor + low-grade fever points to parainfluenza croup. Epiglottitis gives high fever, drooling and a toxic child; a foreign body is sudden and afebrile.'}
+     opts:['Acute epiglottitis','Bacterial tracheitis','Laryngotracheobronchitis (croup)','Foreign-body aspiration'], ans:2, wrongPick:0,
+     answer:'This is croup (laryngotracheobronchitis) — a barking cough with inspiratory stridor, worse at night.',
+     bullets:['Barking, seal-like cough with a hoarse voice','Low-grade fever and a child who is not toxic'],
+     callout:'<b>Epiglottitis</b> is the dangerous mimic: high fever, drooling and a toxic-looking child — and you don\'t examine the throat.',
+     sched:'tomorrow'},
+    {head:'RECALL · PAEDIATRICS',
+     q:'A 3-year-old has 6 days of fever, cracked red lips, bilateral non-purulent conjunctivitis, a rash and a swollen red hand. Which complication must you act to prevent?',
+     opts:['Rheumatic heart disease','Coronary artery aneurysm','Post-strep glomerulonephritis','Hepatic failure'], ans:1,
+     answer:'This is Kawasaki disease — its feared complication is a coronary artery aneurysm.',
+     bullets:['Fever ≥5 days plus the mucocutaneous signs clinch it','Give IVIG + aspirin to protect the coronary arteries'],
+     callout:'Left untreated, up to <b>1 in 4</b> children develop coronary aneurysms — which is exactly why prompt IVIG matters.',
+     sched:'tomorrow'},
+    {head:'RECALL · PAEDIATRICS',
+     q:'An exclusively breastfed term infant weighed 3 kg at birth. By roughly what age would you expect the weight to reach about 9 kg?',
+     opts:['5 months','9 months','12 months','18 months'], ans:2,
+     answer:'An exclusively breastfed term baby doubles birth weight at around 5 months and triples it between 9 and 12 months.',
+     bullets:['Double birth weight by ~5 months','Triple birth weight by ~1 year'],
+     callout:'So a 3 kg newborn is roughly <b>6 kg at 5 months</b> and <b>9 kg at 1 year</b> — if a baby is far off these, investigate growth.',
+     sched:'in 1 week'}
   ];
   var qi=0, $=function(id){return document.getElementById(id);};
   if(!$('dQ')) return;
+  function explHTML(k){
+    var b=k.bullets.map(function(x){return '<li>'+x+'</li>';}).join('');
+    return '<div class="axtag">ANSWER — EXPLAINED</div>'
+         + '<div class="axans">'+k.answer+'</div>'
+         + '<div class="axh">Understanding it</div>'
+         + '<ul class="axul">'+b+'</ul>'
+         + '<div class="axcall">'+k.callout+'</div>';
+  }
   function build(){
     var k=Q[qi]; $('dHead').textContent=k.head; $('dQ').textContent=k.q;
     var box=$('dOpts'); box.innerHTML='';
     k.opts.forEach(function(o,idx){ var el=document.createElement('div'); el.className='dopt'; el.id='dopt'+idx;
       el.innerHTML='<span class="tag">'+String.fromCharCode(65+idx)+'</span><span>'+o+'</span>'; box.appendChild(el); });
     var ex=$('dExpl'); ex.classList.remove('show'); ex.innerHTML='';
+    var sc=$('dSched'); sc.classList.remove('show'); sc.innerHTML='';
   }
   function moveTo(el, cb){
     var main=$('dCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
     var cur=$('dCursor'); cur.style.left=(er.left-mr.left+28)+'px'; cur.style.top=(er.top-mr.top+er.height/2-8)+'px';
     setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },300); },1050);
   }
+  function reveal(k){
+    var ex=$('dExpl'); ex.innerHTML=explHTML(k); ex.classList.add('show');
+    var sc=$('dSched');
+    sc.innerHTML='<span>🗓</span> Scheduled — you\'ll see this card <b>'+k.sched+'</b>';
+    setTimeout(function(){ sc.classList.add('show'); }, 550);
+    setTimeout(function(){
+      var cur=$('dCursor'); cur.style.left='40px'; cur.style.top='44px';
+      qi=(qi+1)%Q.length; setTimeout(run, 900);
+    }, 4300);
+  }
   function run(){
     build(); var k=Q[qi];
     setTimeout(function(){
-      moveTo($('dopt'+k.ans), function(){
-        $('dopt'+k.ans).classList.add('correct');
-        var ex=$('dExpl'); ex.innerHTML=k.expl; ex.classList.add('show');
-        setTimeout(function(){
-          var cur=$('dCursor'); cur.style.left='40px'; cur.style.top='44px';
-          qi=(qi+1)%Q.length; setTimeout(run, 900);
-        }, 3400);
-      });
-    }, 1500);
+      if(k.wrongPick!=null){
+        moveTo($('dopt'+k.wrongPick), function(){
+          $('dopt'+k.wrongPick).classList.add('wrong');
+          setTimeout(function(){ $('dopt'+k.ans).classList.add('correct'); reveal(k); }, 750);
+        });
+      } else {
+        moveTo($('dopt'+k.ans), function(){
+          $('dopt'+k.ans).classList.add('correct'); reveal(k);
+        });
+      }
+    }, 1400);
   }
   setTimeout(run, 700);
 })();
