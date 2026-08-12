@@ -870,7 +870,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.08c';   // bump this each release
+const APP_VERSION='2026.08.08d';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1824,6 +1824,8 @@ function pageTopic(id){
     body = renderFillBlank(t);
   } else if(topicTab==='written'){
     body = renderWritten(t);
+  } else if(topicTab==='podcast'){
+    body = renderPodcast(t);
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
@@ -1881,6 +1883,7 @@ function modeSwitcher(t){
     ${sw('📄 Cram',"go('cram/"+t.id+"')",false)}
     ${sw('✍ Fill-blank',"topicTab='fill';render()",topicTab==='fill')}
     ${sw('🧪 Written',"topicTab='written';render()",topicTab==='written')}
+    ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
   </div>`;
 }
 function genPrompt(topicId,kind,label){
@@ -1956,6 +1959,147 @@ async function wtGrade(i){
     const txt=await claudeTutor('You are a fair, concise medical examiner marking a short answer.', [{role:'user',text:prompt}], DATA.settings.explainModel||DATA.settings.tutorEngine||'claude-sonnet-5');
     res.innerHTML='<div class="md" style="background:var(--panel2,#f1eefb);border-radius:10px;padding:11px 13px">'+md(txt)+'</div>';
   }catch(e){ res.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI to mark this — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
+}
+
+/* ===== #4/#5 AI Podcast — two-host episode + character voices + Raise Hand ===== */
+const POD_FALLBACK=[
+ {voice_id:'21m00Tcm4TlvDq8ikWAM',name:'Rachel',gender:'female'},
+ {voice_id:'EXAVITQu4vr4xnSDxMaL',name:'Sarah',gender:'female'},
+ {voice_id:'AZnzlk1XvdvUeBnXmlld',name:'Domi',gender:'female'},
+ {voice_id:'MF3mGyEYCl7XYWbV9V6O',name:'Elli',gender:'female'},
+ {voice_id:'pNInz6obpgDQGcFmaJgB',name:'Adam',gender:'male'},
+ {voice_id:'ErXwobaYiN019PkySvjV',name:'Antoni',gender:'male'},
+ {voice_id:'TxGEqnHWrfWFTfGW9XjX',name:'Josh',gender:'male'},
+ {voice_id:'VR6AewLTigWG4xSOukaG',name:'Arnold',gender:'male'}
+];
+let POD={topicId:null};
+async function podApi(path,opts){
+  const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
+  let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
+  opts=opts||{}; opts.headers=Object.assign({'Authorization':'Bearer '+token},opts.headers||{});
+  const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+path,opts); return {ok:r.ok,data:await r.json()};
+}
+function podLevel(){ return (window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null; }
+function podName(id){ const v=(POD.voices||[]).find(x=>x.voice_id===id); return v?v.name:'Host'; }
+function podAudioEl(){
+  let a=document.getElementById('podAudio');
+  if(!a){ a=document.createElement('audio'); a.id='podAudio'; a.preload='auto'; document.body.appendChild(a);
+    a.addEventListener('ended',function(){ podNext(); });
+    a.addEventListener('timeupdate',podTick);
+  }
+  return a;
+}
+function podStopAudio(){ const a=document.getElementById('podAudio'); if(a){ try{a.pause();}catch(e){} a.removeAttribute('src'); } }
+function renderPodcast(t){
+  if(POD.topicId!==t.id) setTimeout(function(){ podEnter(t.id,t.name); },30); else setTimeout(podPaint,30);
+  return `<div id="podRoot" style="min-height:120px"><div class="empty">Loading the podcast…</div></div>`;
+}
+function podEnter(id,name){
+  podAudioEl();
+  if(POD.topicId!==id){ podStopAudio(); POD={ topicId:id, topicName:name||'', lines:null, urls:null, voices:POD.voices||null, voiceA:POD.voiceA||null, voiceB:POD.voiceB||null, i:0, playing:false, speed:1, phase:'load', raise:false }; podLoadScript(id); return; }
+  podPaint();
+}
+async function podLoadScript(id){
+  POD.phase='load'; podPaint();
+  try{
+    const r=await podApi('/podcast',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:id,level:podLevel()})});
+    if(!r.ok||!r.data.lines) throw new Error((r.data&&(r.data.reason||r.data.error))||'Could not write the script.');
+    POD.lines=r.data.lines;
+    if(!POD.voices) await podLoadVoices();
+    let saved=null; try{ saved=localStorage.getItem('pod_combo_'+id); }catch(e){}
+    if(saved){ const p=saved.split('|'); POD.voiceA=p[0]; POD.voiceB=p[1]; podGenAudio(); return; }
+    podDefaults(); POD.phase='voices'; podPaint();
+  }catch(e){ POD.phase='error'; POD.err=e.message; podPaint(); }
+}
+async function podLoadVoices(){
+  try{ const r=await podApi('/podcast-voices'); POD.voices=(r.ok&&r.data.voices&&r.data.voices.length)?r.data.voices:POD_FALLBACK.slice(); }
+  catch(e){ POD.voices=POD_FALLBACK.slice(); }
+}
+function podDefaults(){
+  const fem=(POD.voices||[]).filter(v=>/female|woman/i.test((v.gender||'')+' '+(v.name||'')));
+  const list=fem.length>=2?fem:(POD.voices||POD_FALLBACK);
+  if(!POD.voiceA) POD.voiceA=(list[0]||{}).voice_id;
+  if(!POD.voiceB) POD.voiceB=(list[1]||list[0]||{}).voice_id;
+}
+async function podGenAudio(){
+  POD.phase='gen'; podPaint();
+  try{
+    const r=await podApi('/podcast-audio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:POD.topicId,voiceA:POD.voiceA,voiceB:POD.voiceB,level:podLevel()})});
+    if(!r.ok||!r.data.urls) throw new Error((r.data&&(r.data.reason||r.data.error))||'Could not generate the audio.');
+    POD.urls=r.data.urls; POD.lines=r.data.lines||POD.lines;
+    try{ localStorage.setItem('pod_combo_'+POD.topicId, POD.voiceA+'|'+POD.voiceB); }catch(e){}
+    let pos=0; try{ pos=parseInt(localStorage.getItem('pod_pos_'+POD.topicId)||'0',10)||0; }catch(e){}
+    POD.i=Math.min(pos,POD.urls.length-1); POD.phase='ready'; podSetupMedia(); podLoadLine(POD.i,false); podPaint();
+  }catch(e){ POD.phase='voices'; POD.err=e.message; podPaint(); alert(e.message||'Could not generate the audio.'); }
+}
+function podLoadLine(i,autoplay){
+  const a=podAudioEl(); POD.i=Math.max(0,Math.min(i,(POD.urls||[]).length-1));
+  a.src=POD.urls[POD.i]; a.playbackRate=POD.speed;
+  if(autoplay){ a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }
+  try{ localStorage.setItem('pod_pos_'+POD.topicId, String(POD.i)); }catch(e){}
+  podPaint();
+}
+function podToggle(){ const a=podAudioEl(); if(!POD.urls) return; if(a.paused){ if(!a.getAttribute('src')) podLoadLine(POD.i,true); else a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); } else { a.pause(); POD.playing=false; podPaint(); } }
+function podNext(){ if(!POD.urls) return; if(POD.i<POD.urls.length-1) podLoadLine(POD.i+1,true); else { POD.playing=false; podPaint(); } }
+function podPrev(){ if(!POD.urls) return; podLoadLine(Math.max(0,POD.i-1),true); }
+function podJump(i){ podLoadLine(i,true); }
+function podSpeed(){ const arr=[1,1.25,1.5,0.75]; POD.speed=arr[(arr.indexOf(POD.speed)+1)%arr.length]||1; podAudioEl().playbackRate=POD.speed; podPaint(); }
+function podTick(){ const a=document.getElementById('podAudio'); if(!a||!POD.urls) return; const frac=(POD.i+((a.currentTime/(a.duration||1))||0))/POD.lines.length; const p=document.getElementById('podProg'); if(p) p.style.width=Math.min(100,frac*100)+'%'; }
+function podRaise(){ podAudioEl().pause(); POD.playing=false; POD.raise=true; podPaint(); }
+function podResume(){ POD.raise=false; podPaint(); }
+async function podAsk(){
+  const qEl=document.getElementById('podQ'), out=document.getElementById('podAns'); const q=(qEl&&qEl.value||'').trim(); if(!q){ return; }
+  out.innerHTML='<span style="color:var(--dim)">Thinking…</span>';
+  const t=topById(POD.topicId), line=(POD.lines[POD.i]||{}).text||'';
+  const prompt='A student is listening to a study podcast on "'+(t?t.name:'')+'" and raised their hand here: "'+line+'". Their question: '+q+'\n\nAnswer clearly and briefly, exam-relevant.';
+  try{ const txt=await claudeTutor('You are a friendly medical study tutor answering a quick question during a podcast.', [{role:'user',text:prompt}], DATA.settings.explainModel||'claude-sonnet-5'); out.innerHTML='<div class="md">'+md(txt)+'</div>'; }
+  catch(e){ out.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
+}
+function podSetupMedia(){
+  if(!('mediaSession' in navigator)) return;
+  try{
+    const t=topById(POD.topicId);
+    navigator.mediaSession.metadata=new MediaMetadata({ title:((t&&t.name)||'Lecture')+' — Podcast', artist:'MedBank', album:(t&&t.subject&&t.subject.name)||'' });
+    navigator.mediaSession.setActionHandler('play',podToggle);
+    navigator.mediaSession.setActionHandler('pause',podToggle);
+    navigator.mediaSession.setActionHandler('nexttrack',podNext);
+    navigator.mediaSession.setActionHandler('previoustrack',podPrev);
+  }catch(e){}
+}
+function podPaint(){
+  const root=document.getElementById('podRoot'); if(!root) return;
+  if(POD.phase==='load'){ root.innerHTML='<div class="empty">✍️ Writing the podcast script from your note…</div>'; return; }
+  if(POD.phase==='error'){ root.innerHTML='<div class="empty">'+esc(POD.err||'Something went wrong')+'<br><br><button class="btn primary" onclick="podLoadScript(POD.topicId)">Try again</button></div>'; return; }
+  if(POD.phase==='gen'){ root.innerHTML='<div class="empty">🎙️ Recording the voices with ElevenLabs… ~30–60s<br><span style="color:var(--dim);font-size:13px">Made once, then it\'s saved for instant replay.</span></div>'; return; }
+  if(POD.phase==='voices'){
+    const opts=(POD.voices||[]).map(function(v){ return '<option value="'+v.voice_id+'">'+esc(v.name)+(v.gender?' · '+esc(v.gender):'')+'</option>'; }).join('');
+    root.innerHTML='<div class="card" style="cursor:default"><div style="font-weight:800;margin-bottom:10px">🎧 Choose your hosts</div>'
+      +'<label style="font-size:12.5px;color:var(--dim)">Host A</label><select id="podVA" class="sbox">'+opts+'</select>'
+      +'<label style="font-size:12.5px;color:var(--dim);margin-top:8px;display:block">Host B</label><select id="podVB" class="sbox">'+opts+'</select>'
+      +'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="POD.voiceA=document.getElementById(\'podVA\').value;POD.voiceB=document.getElementById(\'podVB\').value;podGenAudio()">▶ Generate &amp; play</button></div>'
+      +'<div style="font-size:11.5px;color:var(--dim);margin-top:8px">Two female hosts are picked by default. Generation uses your ElevenLabs voices — done once and saved.</div></div>'
+      +'<div style="margin-top:14px;font-weight:700">Script preview</div>'
+      +'<div class="card" style="cursor:default;margin-top:6px">'+POD.lines.map(function(l){ return '<div style="margin:6px 0"><b style="color:'+(l.speaker==='A'?'var(--primer)':'var(--recall)')+'">'+(l.speaker==='A'?'A':'B')+'</b> '+esc(l.text)+'</div>'; }).join('')+'</div>';
+    setTimeout(function(){ const a=document.getElementById('podVA'),b=document.getElementById('podVB'); if(a&&POD.voiceA)a.value=POD.voiceA; if(b&&POD.voiceB)b.value=POD.voiceB; },0);
+    return;
+  }
+  if(POD.raise){
+    root.innerHTML='<div class="card" style="cursor:default"><div style="font-weight:800;margin-bottom:8px">✋ Ask the hosts</div>'
+      +'<textarea id="podQ" class="notebox" rows="3" placeholder="Your question about this bit…"></textarea>'
+      +'<div class="btnrow" style="margin-top:10px;gap:8px"><button class="btn primary" onclick="podAsk()">Ask</button><button class="btn" onclick="podResume()">↩ Back to the podcast</button></div>'
+      +'<div id="podAns" style="margin-top:12px;font-size:14px"></div></div>';
+    return;
+  }
+  const nA=podName(POD.voiceA), nB=podName(POD.voiceB), t=topById(POD.topicId);
+  root.innerHTML='<div class="card" style="cursor:default">'
+    +'<div style="display:flex;align-items:center;gap:10px"><div style="font-size:26px">🎧</div><div><div style="font-weight:800">'+esc((t&&t.name)||'Podcast')+'</div><div style="font-size:12px;color:var(--dim)">Hosts: '+esc(nA)+' &amp; '+esc(nB)+' · '+POD.lines.length+' lines</div></div></div>'
+    +'<div style="height:8px;background:var(--panel2,#eee);border-radius:5px;overflow:hidden;margin:14px 0 6px"><div id="podProg" style="height:100%;width:0;background:var(--accent)"></div></div>'
+    +'<div id="podTime" style="font-size:12px;color:var(--dim)">Line '+(POD.i+1)+' / '+POD.lines.length+'</div>'
+    +'<div class="btnrow" style="justify-content:center;gap:16px;margin:14px 0"><button class="btn" onclick="podPrev()">⏮</button><button class="btn primary" style="min-width:100px" onclick="podToggle()">'+(POD.playing?'⏸ Pause':'▶ Play')+'</button><button class="btn" onclick="podNext()">⏭</button></div>'
+    +'<div class="btnrow" style="justify-content:center;gap:10px"><button class="btn" onclick="podSpeed()">⚡ '+POD.speed+'×</button><button class="btn" onclick="podRaise()">✋ Raise hand</button></div></div>'
+    +'<div style="margin-top:14px;font-weight:700">Transcript</div>'
+    +'<div class="card" style="cursor:default;margin-top:6px">'+POD.lines.map(function(l,idx){ return '<div onclick="podJump('+idx+')" id="podL'+idx+'" style="margin:2px -6px;padding:7px 8px;border-radius:8px;cursor:pointer;background:'+(idx===POD.i?'var(--panel2,#eee)':'transparent')+'"><b style="color:'+(l.speaker==='A'?'var(--primer)':'var(--recall)')+'">'+esc(l.speaker==='A'?nA:nB)+'</b> '+esc(l.text)+'</div>'; }).join('')+'</div>';
+  const cur=document.getElementById('podL'+POD.i); if(cur) cur.scrollIntoView({block:'center',behavior:'smooth'});
 }
 
 /* ===== Admin: per-build × per-level prompt editor (is_admin only) ===== */

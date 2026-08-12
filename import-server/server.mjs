@@ -222,6 +222,39 @@ async function buildExtra(kind, level, note, model){
   try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.items)&&o.items.length)?o.items:null; }catch(_){ return null; }
 }
 
+/* resolve the model for a student (paid vs trial), reused by extras / podcast */
+async function resolveModel(account_id, level){
+  const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
+  const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+  const coreRow = await loadImportPrompt(level);
+  const paidModel = (coreRow && coreRow.model) || "claude-sonnet-5";
+  return (paid.data && paid.data.status==="active") ? paidModel : ((cfg.data && cfg.data.value) || paidModel);
+}
+
+/* ---- Podcast: two-host study episode from a lecture note (script + ElevenLabs voices) ---- */
+const PODCAST_PROMPT = "You are writing a lively but accurate two-host study podcast for medical students, based ONLY on the lecture note below. Two hosts, HOST A and HOST B, have a natural back-and-forth that genuinely teaches the material — clear, engaging, occasionally light, but always faithful and exam-relevant. Return ONLY valid JSON: {\"lines\":[{\"speaker\":\"A\"|\"B\",\"text\":\"one spoken line\"}]}. Use 16-28 lines, mostly alternating A/B, each 1-3 sentences, written to be SPOKEN (contractions, natural rhythm — not bookish). Open with a short hook, teach the key points in a logical order, and close with a quick recap. Never invent facts beyond the note.\n\nLECTURE NOTE:\n{{note}}";
+async function podcastScript(level, note, model){
+  const row = await loadPromptFor("podcast", level);
+  const tmpl = (row && row.template) || PODCAST_PROMPT;
+  const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||4000, temperature:Number(row&&row.temperature)||0.6 });
+  const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
+  try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.lines)) ? o.lines.filter(l=>l&&l.text&&(l.speaker==="A"||l.speaker==="B")) : null; }catch(_){ return null; }
+}
+async function elevenTTS(text, voiceId){
+  const key = process.env.ELEVENLABS_API_KEY; if(!key) throw new Error("ELEVENLABS_API_KEY not set on the server");
+  const r = await fetch("https://api.elevenlabs.io/v1/text-to-speech/"+encodeURIComponent(voiceId), {
+    method:"POST", headers:{ "xi-api-key":key, "Content-Type":"application/json", "Accept":"audio/mpeg" },
+    body: JSON.stringify({ text, model_id: process.env.ELEVEN_MODEL || "eleven_turbo_v2_5", voice_settings:{ stability:0.45, similarity_boost:0.75 } }) });
+  if(!r.ok){ const tx=await r.text().catch(()=> ""); throw new Error("voice generation failed ("+r.status+"): "+tx.slice(0,160)); }
+  return Buffer.from(await r.arrayBuffer());
+}
+async function uploadPodcastAudio(path, buf){
+  const up = await admin.storage.from("podcasts").upload(path, buf, { contentType:"audio/mpeg", upsert:true });
+  if(up.error) throw new Error("audio storage failed: "+up.error.message+" (create a public bucket named 'podcasts')");
+  return admin.storage.from("podcasts").getPublicUrl(path).data.publicUrl;
+}
+
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
 app.post("/import", async (req,res)=>{
@@ -332,6 +365,69 @@ app.post("/build-extra", async (req,res)=>{
     const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
     res.json({ ok:true, items });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* Podcast — script (cached on the topic) */
+app.post("/podcast", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const feat = await admin.rpc("can_use_features", { p_account:user.id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    const { topic_id } = req.body; if(!topic_id) return res.status(400).json({ error:"topic_id required" });
+    const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id !== user.id) return res.status(403).json({ error:"not your topic" });
+    const extras = t.data.extras || {};
+    if(extras.podcast && extras.podcast.script && extras.podcast.script.length) return res.json({ ok:true, lines:extras.podcast.script });
+    const level = Number(req.body.level) || null;
+    const model = await resolveModel(user.id, level);
+    const lines = await podcastScript(level, t.data.note_md, model);
+    if(!lines || !lines.length) return res.status(502).json({ error:"couldn't write the script — try again" });
+    extras.podcast = Object.assign({}, extras.podcast||{}, { script:lines });
+    await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
+    res.json({ ok:true, lines });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* Podcast — the ElevenLabs voices available on the account (for the character picker) */
+app.get("/podcast-voices", async (req,res)=>{
+  try{
+    if(!await getUser(req)) return res.status(401).json({ error:"not signed in" });
+    const key = process.env.ELEVENLABS_API_KEY; if(!key) return res.json({ ok:true, voices:[] });
+    const r = await fetch("https://api.elevenlabs.io/v1/voices", { headers:{ "xi-api-key":key } });
+    if(!r.ok) return res.json({ ok:true, voices:[] });
+    const j = await r.json();
+    const voices = (j.voices||[]).map(v=>({ voice_id:v.voice_id, name:v.name, gender:(v.labels&&(v.labels.gender||v.labels.Gender))||"", accent:(v.labels&&v.labels.accent)||"", desc:(v.labels&&(v.labels.description||v.labels.descriptive))||"" }));
+    res.json({ ok:true, voices });
+  }catch(e){ res.json({ ok:true, voices:[] }); }
+});
+
+/* Podcast — generate (once, cached per voice pair) and store the audio clips */
+app.post("/podcast-audio", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const feat = await admin.rpc("can_use_features", { p_account:user.id });
+    if(feat.error || !feat.data) return res.status(403).json({ error:"locked", reason:"This level is view-only or your subscription has ended." });
+    const { topic_id, voiceA, voiceB } = req.body;
+    if(!topic_id || !voiceA || !voiceB) return res.status(400).json({ error:"topic_id, voiceA and voiceB required" });
+    const t = await admin.from("topics").select("id,account_id,extras").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id !== user.id) return res.status(403).json({ error:"not your topic" });
+    const extras = t.data.extras || {};
+    const script = extras.podcast && extras.podcast.script;
+    if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
+    const combo = voiceA+"_"+voiceB;
+    if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
+    const urls=[];
+    for(let i=0;i<script.length;i++){
+      const vid = script[i].speaker==="A" ? voiceA : voiceB;
+      const buf = await elevenTTS(script[i].text, vid);
+      urls.push(await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf));
+    }
+    extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]:urls });
+    await admin.from("topics").update({ extras }).eq("id",topic_id);
+    res.json({ ok:true, urls, lines:script });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
