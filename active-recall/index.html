@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Active Recall &amp; Spaced Repetition for Med School | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank's active-recall engine schedules your reviews with spaced repetition — cards come back after 1 day, 3 days, a week and two weeks — so you remember lectures long-term instead of cramming."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Active recall &amp; spaced repetition</span>
+      <h1 class="h1">Stop cramming. <span class="grad">Remember it for good.</span></h1>
+      <p class="lead">MedBank decides what you review and when. Answer a card and it climbs a schedule — back in a day, then three, then a week, then two — so it lands in your memory right before you'd forget. Miss one and it drops to the front of the queue. Open the app and just go.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Start your recall streak</a>
+        <a class="btn sec big" href="#ladder">See the schedule</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry">
+        <h4>🧠 Today's session</h4>
+        <div style="display:flex;align-items:center;gap:12px;background:#f4f0fd;border-radius:12px;padding:14px;margin-top:4px">
+          <div style="font-size:30px;font-weight:800;color:var(--teal)">86<span style="font-size:15px">%</span></div>
+          <div style="font-size:12.5px;color:var(--dim)"><b style="color:var(--ink)">🟢 On schedule</b><br>MedBank picked today's cards for you.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;text-align:center">
+          <div style="border:1px solid var(--line);border-radius:10px;padding:10px"><b style="font-size:18px">17</b><div style="font-size:11.5px;color:var(--dim)">due now</div></div>
+          <div style="border:1px solid var(--line);border-radius:10px;padding:10px"><b style="font-size:18px;color:#e0492b">11</b><div style="font-size:11.5px;color:var(--dim)">overdue</div></div>
+          <div style="border:1px solid var(--line);border-radius:10px;padding:10px"><b style="font-size:18px">7</b><div style="font-size:11.5px;color:var(--dim)">hard cards</div></div>
+          <div style="border:1px solid var(--line);border-radius:10px;padding:10px"><b style="font-size:18px;color:#b3791a">🔥 5</b><div style="font-size:11.5px;color:var(--dim)">day streak</div></div>
+        </div>
+        <a class="btn block" href="../app.html?welcome=1" style="margin-top:12px;justify-content:center">▶ Start today's session</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LADDER -->
+<section id="ladder"><div class="wrap center">
+  <div class="kicker">The recall schedule</div>
+  <h2 class="h2">Every card returns right before you'd forget it</h2>
+  <p class="sub">This is spaced repetition. Get a card right and it climbs the ladder — each correct answer stretches the gap before you see it again. That's what moves a fact from "I read it once" to "I'll never forget it."</p>
+  <div class="ladder">
+    <div class="lnode"><div class="dot">▶</div><div class="int">Learn today</div><div class="stg">First pass</div></div>
+    <div class="lnode"><div class="dot">1d</div><div class="int">After 1 day</div><div class="stg">24-hour review</div></div>
+    <div class="lnode"><div class="dot">3d</div><div class="int">After 3 days</div><div class="stg">3-day review</div></div>
+    <div class="lnode"><div class="dot">1w</div><div class="int">After 1 week</div><div class="stg">Weekly review</div></div>
+    <div class="lnode"><div class="dot">2w</div><div class="int">After 2 weeks</div><div class="stg">Bi-weekly</div></div>
+    <div class="lnode"><div class="dot">∞</div><div class="int">Long-term</div><div class="stg">Locked in</div></div>
+  </div>
+  <p style="color:var(--dim);font-size:13.5px;margin-top:28px">Miss a card at any stage and it drops back to the start of the ladder — so weak cards come around fast, and the ones you've nailed stop wasting your time.</p>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why it beats re-reading</div>
+  <h2 class="h2">The engine that makes it stick</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>🗓 MedBank picks your cards</h3><p>Open Active Recall and it's already decided what's due, what's overdue and what you keep failing. No planning — just start.</p></div>
+    <div class="bcol"><h3>📊 Watch mastery climb</h3><p>Every card moves through Unfamiliar → Learning → Familiar → Mastered, so you can see exactly what's still shaky before the exam.</p></div>
+    <div class="bcol"><h3>⚡ Weak cards, hard cards, mistakes</h3><p>Drill just the cards you keep missing, your hardest ones, or the exact mistakes from this week — in one tap.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">Open it and go — three steps</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Answer today's cards</h3><p>MedBank serves the cards that are due across all your lectures — you just answer and rate yourself.</p></div>
+    <div class="step"><div class="n">2</div><h3>It reschedules each one</h3><p>Right answers push a card further up the ladder; a miss brings it straight back. You never manage a calendar.</p></div>
+    <div class="step"><div class="n">3</div><h3>Keep your streak</h3><p>A little every day beats a panic week before finals. Your streak and mastery keep you honest.</p></div>
+  </div>
+</div></section>
+
+<!-- COMPARISON -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Cramming vs spaced review</div>
+  <h2 class="h2">Why the night-before rarely works</h2>
+  <div class="cmp"><table>
+    <thead><tr><th>Cramming</th><th>MedBank active recall</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Everything at once, the night before</td><td class="y">A little each day, spaced out</td></tr>
+      <tr><td class="n">Re-reading passively</td><td class="y">Answering from memory</td></tr>
+      <tr><td class="n">No idea what you actually know</td><td class="y">Mastery states show your gaps</td></tr>
+      <tr><td class="n">Forgotten within a week</td><td class="y">Held for the exam and beyond</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap center">
+  <div class="kicker">Active recall FAQ</div>
+  <h2 class="h2">Questions about recall &amp; scheduling</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What is active recall?</summary><div class="a">Instead of re-reading notes, you try to answer a question from memory. The effort of retrieving the answer is what builds strong, lasting memory — and it's how MedBank's recall decks work.</div></details>
+    <details class="qa"><summary>How does the scheduling work?</summary><div class="a">Each card climbs a ladder as you get it right — back after 1 day, then 3 days, then a week, then two weeks, then long-term. A miss drops it to the start, so you see struggling cards sooner and solid ones less often.</div></details>
+    <details class="qa"><summary>Do I have to decide what to study?</summary><div class="a">No. Open Active Recall and MedBank has already gathered the cards that are due, overdue or giving you trouble across all your lectures.</div></details>
+    <details class="qa"><summary>Can I focus on just my weak cards?</summary><div class="a">Yes — filter a session to only the cards you keep missing, your hard/starred cards, or this week's mistakes.</div></details>
+    <details class="qa"><summary>Do I need to study every day?</summary><div class="a">Little and often works best, and a streak helps keep the habit — but the schedule adapts to when you actually review, so you won't lose your progress if you skip a day.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Study a little each day. Walk in ready.</h2>
+  <p>Let MedBank decide what to review and when — you just show up and answer.</p>
+  <a class="btn big" href="../app.html?welcome=1">Start your recall streak</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>

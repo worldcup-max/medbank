@@ -7,25 +7,8 @@
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../icon.svg">
 <meta name="theme-color" content="#5b21b6">
-<meta name="description" content="MedBank's AI flashcard maker turns your lectures — PDFs, photos, YouTube, or a live recording — into editable question-and-answer flashcards with active recall and spaced repetition. Make your first deck free."/>
+<meta name="description" content="MedBank's AI flashcard maker turns your lectures — PDFs, photos, YouTube, or a live recording — into editable question-and-answer flashcards you answer, rate and master. Make your first deck free."/>
 <link rel="stylesheet" href="../site.css">
-<style>
-  /* animated study-flow demo */
-  #fcCard.flip{animation:fcflip .5s ease}
-  @keyframes fcflip{0%{transform:perspective(800px) rotateY(0)}45%{transform:perspective(800px) rotateY(88deg)}55%{transform:perspective(800px) rotateY(-88deg)}100%{transform:perspective(800px) rotateY(0)}}
-  #fcRate .r{transition:transform .2s,box-shadow .2s}
-  #fcRate .r.sel.got{transform:scale(1.06);box-shadow:0 8px 20px rgba(13,148,136,.45)}
-  #fcRate .r.sel.miss{transform:scale(1.06);box-shadow:0 8px 20px rgba(224,73,43,.38)}
-  /* spaced-repetition ladder */
-  .ladder{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;max-width:920px;margin:44px auto 0}
-  .lnode{display:flex;flex-direction:column;align-items:center;flex:1;min-width:120px;position:relative;padding:0 4px}
-  .lnode .dot{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--violet-d));color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 6px 16px rgba(91,33,182,.3)}
-  .lnode .int{font-weight:800;margin-top:12px;font-size:14px}
-  .lnode .stg{color:var(--dim);font-size:12.5px}
-  .lnode::before{content:"";position:absolute;top:23px;left:-50%;width:100%;height:3px;background:linear-gradient(90deg,#e0d7f5,#cbe9e2);z-index:1}
-  .lnode:first-child::before{display:none}
-  @media(max-width:560px){.lnode::before{display:none}.ladder{gap:16px}.lnode{min-width:44%}}
-</style>
 </head>
 <body>
 
@@ -38,10 +21,12 @@
         <span class="nl">Features</span>
         <div class="menu">
           <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
-          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards &amp; recall</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
           <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
           <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
           <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
           <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
           <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
         </div>
@@ -58,10 +43,10 @@
     <div>
       <span class="eyebrow">AI flashcard maker</span>
       <h1 class="h1">Turn any lecture into <span class="grad">flashcards</span> that stick.</h1>
-      <p class="lead">MedBank reads your slides, PDFs, photos, videos and recordings, then writes a full deck of question-and-answer flashcards you can start reviewing in minutes — no typing cards one by one. Every card is editable, and spaced repetition brings each one back right before you'd forget it.</p>
+      <p class="lead">MedBank reads your slides, PDFs, photos, videos and recordings, then writes a full deck of exam-style flashcards you can start reviewing in minutes — no typing cards one by one. Every card is editable, and your <a href="../active-recall/index.html">active-recall schedule</a> brings each one back right before you'd forget it.</p>
       <div class="cta-row">
         <a class="btn big" href="../app.html?welcome=1">Make flashcards free</a>
-        <a class="btn sec big" href="#how">See how it works</a>
+        <a class="btn sec big" href="#see">See it in action</a>
       </div>
       <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
     </div>
@@ -79,53 +64,32 @@
   </div>
 </div>
 
-<!-- DEMO: animated app flow -->
-<section><div class="wrap center">
-  <div class="kicker">See it in action</div>
-  <h2 class="h2">Read, reveal, rate — and watch mastery climb</h2>
-  <p class="sub">This is exactly how a card behaves in MedBank: read the question, reveal the answer, rate yourself, and it moves from Unfamiliar toward Mastered — live.</p>
-  <div style="display:flex;justify-content:center;margin-top:36px">
-    <div class="phone" style="width:314px"><div class="screen">
-      <div class="sc-top">
-        <div class="t">Cardiovascular physiology</div><div class="s">Active recall · <span id="fcCount">1 / 12</span></div>
-        <div class="modes"><span class="on">◎ Recall · Deck B</span></div>
+<!-- LIVE DESKTOP DEMO -->
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">This is exactly how it plays out</h2>
+  <p class="sub">Read the question, pick an option, and get the answer with a quick why — the same flow you'll use in the app. No sign-in needed to watch.</p>
+  <div class="win" id="fcWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">🧠 Active recall</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">📖 Notes</div>
+        <div class="si">📊 Progress</div>
       </div>
-      <div class="sc-body">
-        <div class="mrow" style="justify-content:center;margin-bottom:11px;gap:5px">
-          <span class="mchip" style="background:#eceaf1;color:#6b6480"><i style="background:#b3aac6"></i><span id="fcUnf">14</span>&nbsp;Unf</span>
-          <span class="mchip" style="background:#fdf0dd;color:#b3791a"><i style="background:#e0a53a"></i><span id="fcLrn">6</span>&nbsp;Lrn</span>
-          <span class="mchip" style="background:#e6effb;color:#2f6bd1"><i style="background:#4f8cff"></i><span id="fcFam">4</span>&nbsp;Fam</span>
-          <span class="mchip" style="background:#dcf3ee;color:#0d9488"><i style="background:#0d9488"></i><span id="fcMas">2</span>&nbsp;Mas</span>
+      <div class="win-main">
+        <div class="dmcq">
+          <div class="qhead" id="dHead">RECALL · PAEDIATRICS</div>
+          <div class="qtext" id="dQ">…</div>
+          <div id="dOpts"></div>
+          <div class="dexpl" id="dExpl"></div>
         </div>
-        <div style="height:6px;background:#efeaf8;border-radius:4px;overflow:hidden;margin-bottom:13px"><div id="fcBar" style="height:100%;width:8%;background:var(--violet);transition:width .5s"></div></div>
-        <div id="fcCard" class="qcard" style="min-height:120px;display:flex;flex-direction:column;justify-content:center;text-align:left">
-          <div class="lab" id="fcLab" style="color:var(--teal)">RECALL · TAP TO REVEAL</div>
-          <div class="q" id="fcQ" style="font-size:14px">…</div>
-          <div id="fcA" style="display:none;margin-top:9px;font-size:13px;color:var(--violet-d);font-weight:600">…</div>
-        </div>
-        <div id="fcRate" class="rate" style="display:none;margin-top:11px;justify-content:center">
-          <span class="r miss" id="fcMiss">✗ Missed</span><span class="r got" id="fcGot">✓ Got it</span>
-        </div>
+        <div class="kursor" id="dCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
       </div>
-    </div></div>
+    </div>
   </div>
-  <p style="color:var(--dim);font-size:13px;margin-top:16px">A live preview of the study flow — no sign-in needed.</p>
-</div></section>
-
-<!-- SPACED REPETITION LADDER -->
-<section style="background:var(--soft)"><div class="wrap center">
-  <div class="kicker">Spaced repetition</div>
-  <h2 class="h2">Every card returns right before you'd forget it</h2>
-  <p class="sub">Get a card right and it climbs the ladder — the gap before you see it again gets longer each time. Miss one and it drops back to the start, so your weak cards come around fast while the solid ones stop wasting your time.</p>
-  <div class="ladder">
-    <div class="lnode"><div class="dot">▶</div><div class="int">Learn today</div><div class="stg">First pass</div></div>
-    <div class="lnode"><div class="dot">1d</div><div class="int">After 1 day</div><div class="stg">24-hour review</div></div>
-    <div class="lnode"><div class="dot">3d</div><div class="int">After 3 days</div><div class="stg">3-day review</div></div>
-    <div class="lnode"><div class="dot">1w</div><div class="int">After 1 week</div><div class="stg">Weekly review</div></div>
-    <div class="lnode"><div class="dot">2w</div><div class="int">After 2 weeks</div><div class="stg">Bi-weekly</div></div>
-    <div class="lnode"><div class="dot">∞</div><div class="int">Long-term</div><div class="stg">Locked in</div></div>
-  </div>
-  <p style="color:var(--dim);font-size:13.5px;margin-top:26px">Miss a card at any stage and it drops back to the start of the ladder — so it comes around again quickly until it sticks.</p>
 </div></section>
 
 <!-- BENEFITS -->
@@ -134,7 +98,7 @@
   <h2 class="h2">A starting deck you stay in control of</h2>
   <div class="bcols">
     <div class="bcol"><h3>✎ Every card is editable</h3><p>The AI hands you a solid deck — you stay in charge. Reword a question, fix an answer, regenerate a card from the note, or hide one you already know.</p></div>
-    <div class="bcol"><h3>📊 Mastery tracking built in</h3><p>Filter a deck to just your weak cards and drill them. Watch each one climb from Unfamiliar to Mastered before the exam.</p></div>
+    <div class="bcol"><h3>🎯 Drill your weak cards</h3><p>Filter a deck to just the cards you keep missing and hammer those — instead of re-reading the whole thing before the exam.</p></div>
     <div class="bcol"><h3>🎒 One lecture, a whole kit</h3><p>The same upload also builds <a href="../written-tests/index.html">quizzes &amp; written tests</a>, a <a href="../podcast/index.html">podcast</a>, notes and an <a href="../ai-tutor/index.html">AI tutor</a>. Flashcards are just where most students start.</p></div>
   </div>
 </div></section>
@@ -146,7 +110,7 @@
   <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
     <div class="step"><div class="n">1</div><h3>Add your lecture</h3><p>Drop in slides, a PDF, photos of your notes, a YouTube link, or record the class live.</p></div>
     <div class="step"><div class="n">2</div><h3>Get your deck</h3><p>MedBank writes clean question-and-answer cards from the material in a couple of minutes. Edit anything you like.</p></div>
-    <div class="step"><div class="n">3</div><h3>Study &amp; track</h3><p>Answer the cards, rate yourself, and let spaced repetition schedule each review for when it matters.</p></div>
+    <div class="step"><div class="n">3</div><h3>Answer &amp; master</h3><p>Answer the cards, get the explanation, and your <a href="../active-recall/index.html">active-recall schedule</a> handles the rest.</p></div>
   </div>
 </div></section>
 
@@ -182,9 +146,9 @@
   <h2 class="h2">Questions about the flashcard maker</h2>
   <div class="faq" style="text-align:left">
     <details class="qa"><summary>What can I make flashcards from?</summary><div class="a">PDFs, slides, Word docs, photos of handwritten notes, a pasted block of text, a YouTube link, or a lecture you record live in the app. MedBank pulls out the key terms and concepts and turns them into cards.</div></details>
+    <details class="qa"><summary>Are the cards multiple choice?</summary><div class="a">Your recall deck is exam-style multiple choice with a short explanation after each answer, and there's a primer deck that teaches the concept first. You also get fill-in-the-blank and written questions from the same lecture.</div></details>
     <details class="qa"><summary>Can I edit the cards after they're made?</summary><div class="a">Every card is fully editable — reword the question, fix the answer, regenerate it from your note, or flag one as wrong to hide it. The AI deck is a starting point, not a locked set.</div></details>
-    <details class="qa"><summary>Do the cards use spaced repetition?</summary><div class="a">Yes. Each card is tracked as Unfamiliar, Learning, Familiar or Mastered, and MedBank schedules reviews so cards come back right before you'd forget them. You can also filter a deck to just your weak cards.</div></details>
-    <details class="qa"><summary>Does it work for any subject?</summary><div class="a">The cards come from whatever you upload, so it works for any course you have material for — though MedBank is tuned for medical and health-science content and exams.</div></details>
+    <details class="qa"><summary>How do the reviews get scheduled?</summary><div class="a">Each card is tracked from Unfamiliar to Mastered, and MedBank's <a href="../active-recall/index.html">active-recall schedule</a> brings cards back at spaced intervals so you review them right before you'd forget.</div></details>
     <details class="qa"><summary>Is it free?</summary><div class="a">You can build your first lecture's deck — and use everything on it — for free. Importing more lectures is a premium upgrade.</div></details>
     <details class="qa"><summary>Can I study my cards on my phone?</summary><div class="a">Yes. MedBank installs to your home screen like an app, and your decks and progress sync to your account across devices.</div></details>
   </div>
@@ -203,49 +167,52 @@
       <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
       <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
     </div>
-    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards &amp; recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../written-tests/index.html">Written tests</a><a href="../solve/index.html">Snap &amp; solve</a></div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
     <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
   </div>
   <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
 </div></footer>
+
 <script>
 (function(){
-  var cards=[
-    {q:'Which ion drives the plateau phase of the ventricular action potential?',a:'Calcium (Ca²⁺) influx through L-type channels.',good:true},
-    {q:'How does increased preload affect stroke volume?',a:'It raises stroke volume — the Frank–Starling mechanism.',good:true},
-    {q:'Where are the arterial baroreceptors located?',a:'The carotid sinus and the aortic arch.',good:false},
-    {q:'What mainly determines coronary blood flow?',a:'Aortic diastolic pressure and myocardial O₂ demand.',good:true}
+  var Q=[
+    {head:'RECALL · PAEDIATRICS',
+     q:'A 3-week-old boy has non-bilious projectile vomiting after every feed and a palpable olive-shaped mass in the epigastrium. Most likely diagnosis?',
+     opts:['Duodenal atresia','Hypertrophic pyloric stenosis','Gastro-oesophageal reflux','Malrotation with volvulus'], ans:1,
+     expl:'<b>Hypertrophic pyloric stenosis.</b> Non-bilious projectile vomiting with a palpable "olive" at 3–6 weeks is classic. Duodenal atresia and malrotation cause <b>bilious</b> vomiting; reflux is neither projectile nor associated with a mass.'},
+    {head:'RECALL · PAEDIATRICS',
+     q:'A 2-year-old presents with a barking cough, inspiratory stridor and a low-grade fever, worse at night. The most likely cause is:',
+     opts:['Acute epiglottitis','Bacterial tracheitis','Laryngotracheobronchitis (croup)','Foreign-body aspiration'], ans:2,
+     expl:'<b>Croup (laryngotracheobronchitis).</b> Barking cough + inspiratory stridor + low-grade fever points to parainfluenza croup. Epiglottitis gives high fever, drooling and a toxic child; a foreign body is sudden and afebrile.'}
   ];
-  var i=0, done=0, total=12, c={unf:14,lrn:6,fam:4,mas:2};
-  var $=function(id){return document.getElementById(id);};
-  if(!$('fcQ')) return;
-  function counts(){ $('fcUnf').textContent=c.unf;$('fcLrn').textContent=c.lrn;$('fcFam').textContent=c.fam;$('fcMas').textContent=c.mas; }
-  function showQ(){
-    var k=cards[i%cards.length];
-    $('fcLab').textContent='RECALL · TAP TO REVEAL'; $('fcLab').style.color='var(--teal)';
-    $('fcQ').textContent=k.q; $('fcA').style.display='none'; $('fcRate').style.display='none';
-    $('fcMiss').classList.remove('sel'); $('fcGot').classList.remove('sel');
-    $('fcCount').textContent=((done%total)+1)+' / '+total;
-    setTimeout(reveal,1900);
+  var qi=0, $=function(id){return document.getElementById(id);};
+  if(!$('dQ')) return;
+  function build(){
+    var k=Q[qi]; $('dHead').textContent=k.head; $('dQ').textContent=k.q;
+    var box=$('dOpts'); box.innerHTML='';
+    k.opts.forEach(function(o,idx){ var el=document.createElement('div'); el.className='dopt'; el.id='dopt'+idx;
+      el.innerHTML='<span class="tag">'+String.fromCharCode(65+idx)+'</span><span>'+o+'</span>'; box.appendChild(el); });
+    var ex=$('dExpl'); ex.classList.remove('show'); ex.innerHTML='';
   }
-  function reveal(){
-    var k=cards[i%cards.length];
-    $('fcCard').classList.add('flip');
+  function moveTo(el, cb){
+    var main=$('dCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var cur=$('dCursor'); cur.style.left=(er.left-mr.left+28)+'px'; cur.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },300); },1050);
+  }
+  function run(){
+    build(); var k=Q[qi];
     setTimeout(function(){
-      $('fcLab').textContent='ANSWER'; $('fcLab').style.color='var(--violet-d)';
-      $('fcA').textContent=k.a; $('fcA').style.display='block'; $('fcRate').style.display='flex';
-    },230);
-    setTimeout(function(){ $('fcCard').classList.remove('flip'); rate(); },1900);
+      moveTo($('dopt'+k.ans), function(){
+        $('dopt'+k.ans).classList.add('correct');
+        var ex=$('dExpl'); ex.innerHTML=k.expl; ex.classList.add('show');
+        setTimeout(function(){
+          var cur=$('dCursor'); cur.style.left='40px'; cur.style.top='44px';
+          qi=(qi+1)%Q.length; setTimeout(run, 900);
+        }, 3400);
+      });
+    }, 1500);
   }
-  function rate(){
-    var k=cards[i%cards.length];
-    if(k.good){ $('fcGot').classList.add('sel'); if(c.lrn>0){c.lrn--;c.fam++;} else if(c.fam>0){c.fam--;c.mas++;} else {if(c.unf>0)c.unf--;c.mas++;} }
-    else { $('fcMiss').classList.add('sel'); if(c.fam>0){c.fam--;c.unf++;} else if(c.lrn>0){c.lrn--;c.unf++;} }
-    counts();
-    done++; $('fcBar').style.width=Math.min(100,((done%total)/total)*100+8)+'%';
-    setTimeout(function(){ i++; showQ(); },1200);
-  }
-  counts(); showQ();
+  setTimeout(run, 700);
 })();
 </script>
 <script>
