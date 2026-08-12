@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Tutor for Medical Students | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank's AI tutor sits right beside your lecture. Stuck on a card at 11pm? Ask in plain words and get a clear answer drawn from your own note — with a link to the exact spot it came from."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">AI tutor</span>
+      <h1 class="h1">A tutor who has read <span class="grad">your exact lecture</span> — awake at 2am.</h1>
+      <p class="lead">It's late, you're stuck on one card, and there's no one to ask. MedBank's tutor already knows the lecture you imported — ask in plain words and get a clear, on-topic answer, with a link straight to the spot in your note it came from. No generic internet answers, no waiting for a reply.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Ask your first question free</a>
+        <a class="btn sec big" href="#see">Watch it answer</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry">
+        <h4>💬 Ask it anything about your lecture</h4>
+        <div style="background:#f4f0fd;border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink);margin-top:4px"><b>You:</b> Why is the vomiting non-bilious?</div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink);margin-top:8px"><b>Tutor:</b> The block is at the pylorus — above where bile enters. So feed comes back up, but bile never reaches it.<div style="margin-top:8px;font-size:11px;color:var(--violet-d);font-weight:700">📖 Pyloric stenosis · your note</div></div>
+        <a class="btn block" href="../app.html?welcome=1" style="margin-top:12px;justify-content:center">Try the tutor →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<style>
+#tuWin .tutwrap{display:grid;grid-template-columns:1fr 1.05fr;gap:0;min-height:322px}
+#tuWin .tnote{padding:4px 16px 4px 2px;border-right:1px solid var(--line)}
+#tuWin .tnk{font-size:10.5px;font-weight:800;color:var(--teal);letter-spacing:.6px}
+#tuWin .tnt{font-size:15px;font-weight:800;margin:7px 0 9px;color:var(--ink)}
+#tuWin .tnp{font-size:12.5px;line-height:1.6;color:var(--dim)}
+#tuWin .tnp mark{background:#efe7fb;color:var(--violet-d);padding:0 3px;border-radius:4px;font-weight:700}
+#tuWin .tchat{display:flex;flex-direction:column;padding-left:16px}
+#tuWin .tchead{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--violet-d);margin-bottom:8px}
+#tuWin .tchead .sp{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#7c3aed,#5b21b6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px}
+#tuWin .tcstream{flex:1;overflow:hidden}
+#tuWin .msg{max-width:90%;font-size:12.5px;line-height:1.5;padding:9px 12px;border-radius:12px;margin:7px 0;opacity:0;transform:translateY(6px);animation:tin .3s forwards}
+@keyframes tin{to{opacity:1;transform:none}}
+#tuWin .msg.user{background:var(--violet);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+#tuWin .msg.ai{background:#f4f2fa;color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:4px}
+#tuWin .cite{margin-top:8px;font-size:10.5px;font-weight:800;color:var(--violet-d);background:#ece7f8;display:inline-block;padding:3px 8px;border-radius:6px}
+#tuWin .typing span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#b3a6d6;margin:0 2px;animation:tbounce 1s infinite}
+#tuWin .typing span:nth-child(2){animation-delay:.15s}#tuWin .typing span:nth-child(3){animation-delay:.3s}
+@keyframes tbounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+#tuWin .tinput{display:flex;align-items:center;gap:8px;border:1.6px solid var(--line);border-radius:11px;padding:9px 11px;margin-top:8px}
+#tuWin .tinput .ph{flex:1;font-size:12.5px;color:var(--dim);min-height:17px}
+#tuWin .tinput .ph b{color:var(--ink);font-weight:500}
+#tuWin .tsend{background:var(--violet);color:#fff;border-radius:8px;font-size:11px;font-weight:800;padding:6px 11px;white-space:nowrap}
+@media(max-width:620px){#tuWin .tutwrap{grid-template-columns:1fr}#tuWin .tnote{display:none}#tuWin .tchat{padding-left:0}}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">Ask in plain words, get a real answer</h2>
+  <p class="sub">The tutor reads the same note you're studying, so its answers stay on your lecture — and every reply points back to where it came from, so you can trust it and go deeper.</p>
+  <div class="win" id="tuWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">📖 Notes</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">🧠 Active recall</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main tmr">
+        <div class="wtimer run" id="tuTimer"><span class="wd"></span>Today <span id="tuTime">41:15</span></div>
+        <div class="tutwrap">
+          <div class="tnote">
+            <div class="tnk">NOTE · PAEDIATRICS</div>
+            <div class="tnt">Hypertrophic pyloric stenosis</div>
+            <div class="tnp">Presents at <mark>3–6 weeks</mark> with <mark>non-bilious projectile vomiting</mark> after feeds. The infant is hungry again immediately. A firm <mark>olive-shaped mass</mark> is palpable in the epigastrium. Ultrasound confirms a thickened pylorus. Correct fluids and electrolytes first, then pyloromyotomy.</div>
+          </div>
+          <div class="tchat">
+            <div class="tchead"><span class="sp">✦</span> Ask AI · knows this lecture</div>
+            <div class="tcstream" id="tChat"></div>
+            <div class="tinput"><div class="ph" id="tInput"></div><span class="tsend" id="tSend">Ask ▸</span></div>
+          </div>
+        </div>
+        <div class="kursor" id="tuCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why it's different</div>
+  <h2 class="h2">Not a generic chatbot — your lecture's tutor</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>📖 Grounded in your note</h3><p>It answers from the lecture you imported, not the whole internet — so the explanation matches what your lecturer actually taught and what your exam will ask.</p></div>
+    <div class="bcol"><h3>🔗 Shows its source</h3><p>Every answer links back to the exact spot in your note, so you can check it, trust it, and read around it instead of taking it on faith.</p></div>
+    <div class="bcol"><h3>🌙 There at 2am</h3><p>No waiting on a group chat or a lecturer's email. Ask the moment you're stuck and keep your revision moving.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">From "I'm stuck" to "got it" in seconds</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Open any note or card</h3><p>While you study, the tutor is one tap away — it already has the lecture loaded.</p></div>
+    <div class="step"><div class="n">2</div><h3>Ask in your own words</h3><p>"Why is this?", "Explain it simply", "What's the difference between…" — however it makes sense to you.</p></div>
+    <div class="step"><div class="n">3</div><h3>Get a clear, sourced answer</h3><p>A plain-English explanation with a link to the exact line in your note, so you can go deeper if you want.</p></div>
+  </div>
+</div></section>
+
+<!-- COMPARISON -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Tutor vs a generic AI</div>
+  <h2 class="h2">Why "just ask ChatGPT" falls short</h2>
+  <div class="cmp"><table>
+    <thead><tr><th>A generic chatbot</th><th>MedBank tutor</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Answers from the whole internet</td><td class="y">Answers from your actual lecture</td></tr>
+      <tr><td class="n">You paste in context every time</td><td class="y">Already knows the note you're on</td></tr>
+      <tr><td class="n">No way to check the source</td><td class="y">Links to the exact spot it used</td></tr>
+      <tr><td class="n">Can drift off your syllabus</td><td class="y">Stays on what your exam tests</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap center">
+  <div class="kicker">AI tutor FAQ</div>
+  <h2 class="h2">Questions about the tutor</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What does it base its answers on?</summary><div class="a">Primarily the lecture you imported — its note, cards and simplified version. That's why the answers stay on your material and link back to the exact spot they came from.</div></details>
+    <details class="qa"><summary>Can I ask follow-up questions?</summary><div class="a">Yes — it's a conversation. Ask it to go simpler, give an example, compare two conditions, or explain why an answer is what it is.</div></details>
+    <details class="qa"><summary>Is it always right?</summary><div class="a">It's a strong study aid, but AI isn't infallible and medicine demands accuracy — that's exactly why every answer shows its source in your note, so you can verify it.</div></details>
+    <details class="qa"><summary>Where can I use it?</summary><div class="a">Right beside your notes and cards while you study, and it can also answer a quick question mid-podcast when you raise your hand.</div></details>
+    <details class="qa"><summary>Is it free?</summary><div class="a">You can use the tutor on the lecture you build for free. Importing more lectures is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Never be stuck on a card alone again.</h2>
+  <p>Build a lecture and ask your tutor anything — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Ask your first question free</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('tChat')) return;
+  var chat=$('tChat'), inp=$('tInput');
+  var tsec=41*60+15;
+  function fmtT(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(ss).padStart(2,'0');}
+  setInterval(function(){ tsec++; var e=$('tuTime'); if(e)e.textContent=fmtT(tsec); },1000);
+  function resetCursor(){ var c=$('tuCursor'); c.style.left='40px'; c.style.top='250px'; }
+  function moveTo(el, cb){ var main=$('tuCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var cur=$('tuCursor'); cur.style.left=(er.left-mr.left+er.width/2)+'px'; cur.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ cur.classList.add('click'); setTimeout(function(){ cur.classList.remove('click'); cb&&cb(); },320); },1350); }
+  var Q=[
+    {u:'Why is the vomiting non-bilious?',
+     a:'Because the blockage sits at the <b>pylorus</b> — above where bile enters the duodenum. Stomach milk comes straight back up, but bile never reaches it. That\'s the giveaway versus a lower obstruction.',
+     cite:'Pyloric stenosis · your note'},
+    {u:'How do I tell it apart from reflux?',
+     a:'Reflux is <b>effortless posseting</b> and the baby thrives. Pyloric stenosis is <b>forceful, projectile</b>, the baby is hungry again right after, and you can feel the olive-shaped mass.',
+     cite:'Pyloric stenosis · your note'}
+  ];
+  function typewriter(text, cb){ inp.innerHTML=''; var i=0; (function tick(){ if(i<=text.length){ inp.innerHTML='<b>'+text.slice(0,i)+'</b><span style="opacity:.5">▍</span>'; i++; setTimeout(tick, 34); } else { inp.innerHTML='<b>'+text+'</b>'; cb&&cb(); } })(); }
+  function bubble(cls, html){ var d=document.createElement('div'); d.className='msg '+cls; d.innerHTML=html; chat.appendChild(d); return d; }
+  function ask(i, done){
+    var k=Q[i];
+    typewriter(k.u, function(){
+      moveTo($('tSend'), function(){
+        inp.innerHTML='';
+        bubble('user', k.u);
+        var t=bubble('ai typing','<span></span><span></span><span></span>');
+        setTimeout(function(){ t.remove(); bubble('ai', k.a+'<div class="cite">📖 '+k.cite+'</div>'); setTimeout(done, 3400); }, 1500);
+      });
+    });
+  }
+  function loop(){ chat.innerHTML=''; inp.innerHTML=''; resetCursor();
+    setTimeout(function(){ ask(0, function(){ ask(1, function(){ setTimeout(loop, 3000); }); }); }, 1100); }
+  setTimeout(loop, 800);
+})();
+</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>

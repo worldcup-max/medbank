@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Snap &amp; Solve Past Questions | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="Stuck on a past question or a diagram? Snap a photo with MedBank and get the answer worked out step by step — the reasoning, not just the letter — so you actually learn how to get there."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Snap &amp; solve</span>
+      <h1 class="h1">Snap a past question. <span class="grad">Get the reasoning.</span></h1>
+      <p class="lead">A tricky past question, a stubborn MCQ, a diagram you can't decode — take a photo and MedBank works it out step by step. Not just the answer letter, but <em>how</em> to get there, so the next one like it doesn't catch you out.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Solve a question free</a>
+        <a class="btn sec big" href="#see">Watch it solve one</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry" style="text-align:center">
+        <div style="font-size:40px">📸➜🧮</div>
+        <div style="font-weight:800;color:var(--ink);margin-top:8px">Photo in, worked answer out</div>
+        <div style="font-size:12.5px;color:var(--dim);margin-top:4px">MCQs · past questions · diagrams</div>
+        <a class="btn block" href="../app.html?welcome=1" style="margin-top:14px;justify-content:center">Snap a question →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<style>
+#svWin .snap{position:relative;max-width:430px;margin:2px auto 0;background:#fffdf7;border:1px solid #e7e2d4;border-radius:10px;padding:17px 18px 15px;box-shadow:0 14px 30px rgba(45,27,90,.16);transform:rotate(-1.1deg)}
+#svWin .snap .ptag{position:absolute;top:-10px;right:14px;background:#1c1830;color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:6px;transform:rotate(2deg)}
+#svWin .snap .pq{font-size:13.5px;line-height:1.55;color:#2a2536;font-weight:700}
+#svWin .snap .po{font-size:12.5px;color:#4a4460;margin-top:5px;padding-left:2px}
+#svWin .solvebtn{display:block;margin:16px auto 0;border:none;background:var(--violet);color:#fff;font-weight:800;font-size:14px;padding:11px 24px;border-radius:11px}
+#svWin .solving{text-align:center;margin-top:16px;font-size:13px;font-weight:800;color:var(--violet-d)}
+#svWin .solving .dt{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--violet);margin:0 2px;animation:svb 1s infinite}
+#svWin .solving .dt:nth-child(2){animation-delay:.15s}#svWin .solving .dt:nth-child(3){animation-delay:.3s}
+@keyframes svb{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+#svWin .stp{display:flex;gap:10px;font-size:12.5px;line-height:1.5;color:var(--ink);background:#f7f5fc;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:9px;opacity:0;transform:translateY(6px);animation:svin .35s forwards}
+#svWin .stp .sn{width:20px;height:20px;border-radius:6px;background:var(--violet);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+#svWin .stp b{color:var(--violet-d)}
+#svWin .ansfin{margin-top:10px;background:#dcf3ee;border-left:3px solid #0d9488;border-radius:0 10px 10px 0;padding:11px 13px;font-size:13.5px;font-weight:800;color:#0d7a68;opacity:0;animation:svin .4s forwards}
+@keyframes svin{to{opacity:1;transform:none}}
+#svWin .slabel{font-size:10.5px;font-weight:800;color:var(--teal);letter-spacing:.6px;margin:16px 0 2px}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">From a photo to a worked answer</h2>
+  <p class="sub">Snap the question and MedBank reads it, then walks through the reasoning one step at a time before landing on the answer — so you learn the pattern, not just the letter.</p>
+  <div class="win" id="svWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">🧮 Solve</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">🧠 Active recall</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main">
+        <div class="snap"><span class="ptag">PAST Q · PAEDS</span>
+          <div class="pq">A 6-month-old has 3 days of diarrhoea. He is lethargic, has sunken eyes, and the skin pinch goes back <b>slowly</b>. What is the single best initial management?</div>
+          <div class="po">A. Oral rehydration solution at home<br>B. IV fluids for severe dehydration<br>C. Oral antibiotics<br>D. An antimotility agent</div>
+        </div>
+        <div id="svOut"></div>
+        <div class="kursor" id="svCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why it helps</div>
+  <h2 class="h2">Understand the question, don't just check it</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>🧠 The reasoning, step by step</h3><p>It shows the clues, the rule, and why the other options are wrong — so you can solve the next one on your own.</p></div>
+    <div class="bcol"><h3>📸 Anything you can photograph</h3><p>An MCQ from a past paper, a written question, or a labelled diagram — snap it and get a clear worked explanation.</p></div>
+    <div class="bcol"><h3>⏱️ Unblock in seconds</h3><p>No flipping through textbooks for one stubborn question. Get moving again and keep your study session flowing.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">Three taps to a worked answer</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Snap or upload</h3><p>Take a photo of the question or diagram, or add a bit of typed context if you like.</p></div>
+    <div class="step"><div class="n">2</div><h3>MedBank reads it</h3><p>It works out what's being asked — the clinical clues, the numbers, the diagram labels.</p></div>
+    <div class="step"><div class="n">3</div><h3>See it worked out</h3><p>A step-by-step explanation ending in the answer, so you understand the how, not just the what.</p></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Snap &amp; solve FAQ</div>
+  <h2 class="h2">Questions about Snap &amp; solve</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What can I snap?</summary><div class="a">An MCQ, a written past question, or a diagram. You can also type the question in or add context to help.</div></details>
+    <details class="qa"><summary>Do I just get the answer?</summary><div class="a">No — you get the reasoning worked out step by step, including why the wrong options are wrong, so you learn how to approach similar questions.</div></details>
+    <details class="qa"><summary>Is it always correct?</summary><div class="a">It's a strong study aid, but AI can make mistakes and medicine needs accuracy — treat it as a worked example to learn from and verify anything important.</div></details>
+    <details class="qa"><summary>Does it work on my phone?</summary><div class="a">Yes — snapping a photo is easiest on your phone, and MedBank installs to your home screen like an app.</div></details>
+    <details class="qa"><summary>Is it free?</summary><div class="a">Snap &amp; solve is available to signed-in students. Importing more lectures for your full study set is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Never lose an evening to one question again.</h2>
+  <p>Snap it, understand it, and move on — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Solve a question free</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('svOut')) return;
+  var out=$('svOut');
+  function resetCursor(){ var c=$('svCursor'); c.style.left='40px'; c.style.top='60px'; }
+  function moveTo(el, cb){ if(!el){cb&&cb();return;} var main=$('svCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var c=$('svCursor'); c.style.left=(er.left-mr.left+er.width/2)+'px'; c.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ c.classList.add('click'); setTimeout(function(){ c.classList.remove('click'); cb&&cb(); },320); },1350); }
+  var STEPS=[
+    '<b>Spot the clues.</b> Lethargy, sunken eyes and a slow skin pinch are the three signs of <b>severe</b> dehydration.',
+    '<b>Apply the rule.</b> Severe dehydration needs rapid <b>IV</b> rehydration, not oral — the child is too unwell to drink safely.',
+    '<b>Rule out the rest.</b> ORS is for some/no dehydration; antibiotics only for specific causes; antimotility agents are unsafe in young children.'
+  ];
+  function solve(){
+    out.innerHTML='<div class="solving" id="svSolving">🔍 Reading the question <span class="dt"></span><span class="dt"></span><span class="dt"></span></div>';
+    setTimeout(function(){ $('svSolving').innerHTML='✍️ Working it out <span class="dt"></span><span class="dt"></span><span class="dt"></span>'; }, 1400);
+    setTimeout(function(){
+      out.innerHTML='<div class="slabel">WORKED SOLUTION</div>';
+      var i=0;
+      (function add(){
+        if(i<STEPS.length){ var d=document.createElement('div'); d.className='stp'; d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+STEPS[i]+'</span>'; out.appendChild(d); i++; setTimeout(add, 1400); }
+        else { var a=document.createElement('div'); a.className='ansfin'; a.innerHTML='✓ Answer: B — IV fluids for severe dehydration'; out.appendChild(a); setTimeout(loop, 5200); }
+      })();
+    }, 2800);
+  }
+  function loop(){ out.innerHTML='<button class="solvebtn" id="svBtn">🧮 Solve this</button>'; resetCursor();
+    setTimeout(function(){ moveTo($('svBtn'), solve); }, 1200); }
+  setTimeout(loop, 900);
+})();
+</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Turn Lectures into a Podcast | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank turns any lecture into a two-host podcast you can listen to on the ward, the bus or the treadmill — and raise your hand mid-episode to ask a question and get an instant answer."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Lecture podcast</span>
+      <h1 class="h1">Turn a lecture into a <span class="grad">podcast</span> you'll actually finish.</h1>
+      <p class="lead">Dead time on the commute, in the gym, walking between postings — that's revision you're leaving on the table. MedBank turns any lecture into a natural two-host episode you can just listen to. Lost the thread? Raise your hand and ask — a tutor answers, then the hosts pick right back up.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Make an episode free</a>
+        <a class="btn sec big" href="#see">Hear how it flows</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry" style="text-align:center">
+        <div style="width:74px;height:74px;border-radius:20px;margin:2px auto 12px;background:linear-gradient(135deg,#7c3aed,#0d9488);display:flex;align-items:center;justify-content:center;font-size:34px">🎧</div>
+        <div style="font-weight:800;color:var(--ink)">Bronchiolitis — Episode</div>
+        <div style="font-size:12.5px;color:var(--dim);margin-top:2px">Paediatrics · with Ada &amp; Tomi · 18 min</div>
+        <div style="display:flex;justify-content:center;gap:3px;height:30px;align-items:center;margin:14px 0">
+          <span style="width:4px;height:60%;background:#7c3aed;border-radius:3px"></span><span style="width:4px;height:90%;background:#8b5cf6;border-radius:3px"></span><span style="width:4px;height:40%;background:#14b8a6;border-radius:3px"></span><span style="width:4px;height:100%;background:#0d9488;border-radius:3px"></span><span style="width:4px;height:55%;background:#7c3aed;border-radius:3px"></span><span style="width:4px;height:80%;background:#8b5cf6;border-radius:3px"></span><span style="width:4px;height:35%;background:#14b8a6;border-radius:3px"></span>
+        </div>
+        <a class="btn block" href="../app.html?welcome=1" style="justify-content:center">▶ Generate an episode →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<style>
+#pdWin .pod{max-width:560px;margin:0 auto}
+#pdWin .phead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+#pdWin .pcov{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#0d9488);display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+#pdWin .pt{font-size:15px;font-weight:800;color:var(--ink)}
+#pdWin .ps{font-size:12px;color:var(--dim);margin-top:2px}
+#pdWin .phosts{display:flex;gap:10px;margin-bottom:12px}
+#pdWin .host{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 11px 5px 5px;transition:.25s}
+#pdWin .host.on{color:var(--violet-d);border-color:#cdbdf0;background:#f4f0fd}
+#pdWin .host .av{width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+#pdWin .av.a{background:#7c3aed}#pdWin .av.b{background:#0d9488}
+#pdWin .pwave{display:flex;align-items:center;gap:3px;height:38px;margin:2px 0 10px}
+#pdWin .pwave i{flex:1;background:linear-gradient(180deg,#8b5cf6,#0d9488);border-radius:3px;height:30%;transform-origin:center}
+#pdWin .pwave.play i{animation:pw .9s ease-in-out infinite}
+@keyframes pw{0%,100%{transform:scaleY(.28)}50%{transform:scaleY(1)}}
+#pdWin .pbar{height:6px;background:#ece7f5;border-radius:4px;overflow:hidden}
+#pdWin .pfill{height:100%;width:6%;background:linear-gradient(90deg,#7c3aed,#0d9488);border-radius:4px;transition:width 1s linear}
+#pdWin .ptime{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin:5px 0 12px}
+#pdWin .pl{display:flex;gap:8px;margin:8px 0;opacity:0;transform:translateY(6px);animation:tin .3s forwards}
+#pdWin .pl .av{width:24px;height:24px;border-radius:50%;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+#pdWin .pl .tx{font-size:12.5px;line-height:1.5;background:#f4f2fa;border:1px solid var(--line);border-radius:12px;border-top-left-radius:4px;padding:8px 11px;color:var(--ink)}
+#pdWin .pl.b .tx{background:#eefaf6}
+#pdWin .pl.q .tx{background:var(--violet);color:#fff}#pdWin .pl.q{flex-direction:row-reverse}#pdWin .pl.q .tx{border-radius:12px;border-top-right-radius:4px}
+#pdWin .pl.t .tx{background:#fff;border:1px solid #cdbdf0}
+#pdWin .cite{margin-top:7px;font-size:10.5px;font-weight:800;color:var(--violet-d);background:#ece7f8;display:inline-block;padding:3px 8px;border-radius:6px}
+@keyframes tin{to{opacity:1;transform:none}}
+#pdWin .praise{display:block;width:100%;margin-top:12px;border:1.6px dashed #cdbdf0;background:#faf8ff;color:var(--violet-d);font-weight:800;font-size:13px;padding:11px;border-radius:11px}
+#pdWin .paskrow{display:flex;align-items:center;gap:8px;border:1.6px solid var(--violet);border-radius:11px;padding:9px 11px;margin-top:12px}
+#pdWin .paskrow .ph{flex:1;font-size:12.5px;color:var(--ink);min-height:17px}
+#pdWin .paskrow .snd{background:var(--violet);color:#fff;border-radius:8px;font-size:11px;font-weight:800;padding:6px 11px}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">Two hosts, your lecture — and you can jump in</h2>
+  <p class="sub">The episode plays like a real conversation between two hosts. When something doesn't click, raise your hand: a tutor answers your question on the spot, then the hosts carry on where they left off.</p>
+  <div class="win" id="pdWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">🎧 Podcast</div>
+        <div class="si">📖 Notes</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main">
+        <div class="pod">
+          <div class="phead"><div class="pcov">🎧</div><div><div class="pt">Bronchiolitis — Episode</div><div class="ps">Paediatrics · with Ada &amp; Tomi</div></div></div>
+          <div class="phosts"><div class="host" id="hA"><span class="av a">A</span> Ada</div><div class="host" id="hB"><span class="av b">T</span> Tomi</div></div>
+          <div class="pwave play" id="pWave"></div>
+          <div class="pbar"><div class="pfill" id="pFill"></div></div>
+          <div class="ptime"><span id="pCur">0:12</span><span>18:40</span></div>
+          <div id="pTrans"></div>
+          <div id="pCtrl"></div>
+        </div>
+        <div class="kursor" id="pdCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why students love it</div>
+  <h2 class="h2">Revision that fits into dead time</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>🚌 Study with your eyes closed</h3><p>On the bus, in the gym, walking the ward — turn hours you'd never open a book into real revision on your own lectures.</p></div>
+    <div class="bcol"><h3>🎙️ A conversation, not a robot</h3><p>Two hosts talk it through — question and answer, back and forth — which is far easier to follow and remember than a wall of text.</p></div>
+    <div class="bcol"><h3>✋ Raise your hand anytime</h3><p>Confused mid-episode? Ask, get an answer drawn from the lecture, and drop straight back into the flow.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">Lecture to episode in three steps</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Pick a lecture</h3><p>Any note you've built — MedBank writes a two-host script from it that actually covers the content.</p></div>
+    <div class="step"><div class="n">2</div><h3>Generate the audio</h3><p>Two natural voices record the episode. Choose the default voices, or switch on premium voices if you want.</p></div>
+    <div class="step"><div class="n">3</div><h3>Listen anywhere</h3><p>Play it on the go, and raise your hand whenever you want something explained.</p></div>
+  </div>
+</div></section>
+
+<!-- USE CASES -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">When to reach for it</div>
+  <h2 class="h2">Perfect for the in-between moments</h2>
+  <div class="feats" style="text-align:left">
+    <div class="feat"><div class="ic">🚗</div><h3>The commute</h3><p>Turn the ride to postings into a full revision session on the topic you're covering this week.</p></div>
+    <div class="feat"><div class="ic">🏃</div><h3>The gym &amp; chores</h3><p>Keep your hands busy and your ears learning — passive review that still sticks when you follow it up with cards.</p></div>
+    <div class="feat"><div class="ic">😴</div><h3>Screen-fatigue days</h3><p>Some evenings you can't face another slide. Close your eyes and listen instead of skipping revision entirely.</p></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap center">
+  <div class="kicker">Podcast FAQ</div>
+  <h2 class="h2">Questions about lecture podcasts</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What does the episode cover?</summary><div class="a">The two hosts work through the actual lecture you built — the key concepts, the "why", and the exam-relevant points — as a natural back-and-forth conversation.</div></details>
+    <details class="qa"><summary>What are the voices like?</summary><div class="a">Two natural-sounding hosts by default. If you want an even richer sound, you can switch on premium voices in the host picker.</div></details>
+    <details class="qa"><summary>What is "raise your hand"?</summary><div class="a">A button that pauses the episode so you can ask a question. A tutor answers using your lecture, then you drop back into the conversation.</div></details>
+    <details class="qa"><summary>Can I download or play it offline?</summary><div class="a">Episodes are saved to your account so you can come back to them, and MedBank installs to your home screen like an app for easy access on the go.</div></details>
+    <details class="qa"><summary>Is it free?</summary><div class="a">You can generate an episode from the lecture you build for free. Importing more lectures is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Your commute is a revision session waiting to happen.</h2>
+  <p>Turn a lecture into an episode and press play — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Make an episode free</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('pTrans')) return;
+  var wave=$('pWave'), trans=$('pTrans'), ctrl=$('pCtrl');
+  // build waveform bars
+  var bars=''; for(var b=0;b<34;b++){ bars+='<i style="animation-delay:'+(-(b%9)*0.1)+'s"></i>'; }
+  wave.innerHTML=bars;
+  var cur=12, playing=true;
+  function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+  setInterval(function(){ if(!playing)return; cur++; $('pCur').textContent=fmt(cur); $('pFill').style.width=Math.min(96,(cur/1120*100)).toFixed(1)+'%'; },1000);
+  function setPlay(on){ playing=on; wave.classList.toggle('play', on); }
+  function speak(who){ $('hA').classList.toggle('on', who==='a'); $('hB').classList.toggle('on', who==='b'); }
+  function resetCursor(){ var c=$('pdCursor'); c.style.left='40px'; c.style.top='250px'; }
+  function moveTo(el, cb){ if(!el){cb&&cb();return;} var main=$('pdCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var c=$('pdCursor'); c.style.left=(er.left-mr.left+er.width/2)+'px'; c.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ c.classList.add('click'); setTimeout(function(){ c.classList.remove('click'); cb&&cb(); },320); },1300); }
+  function line(cls, av, avcls, html){ var d=document.createElement('div'); d.className='pl '+cls; d.innerHTML='<span class="av '+avcls+'">'+av+'</span><div class="tx">'+html+'</div>'; trans.appendChild(d); return d; }
+  var SCRIPT=[
+    {who:'a',av:'A',cls:'a',t:'So — bronchiolitis. Paint me the classic patient.'},
+    {who:'b',av:'T',cls:'b',t:'An infant under two: a few days of a runny nose, then wheeze, a nasty cough and trouble feeding. Most of the time it\'s RSV.'},
+    {who:'a',av:'A',cls:'a',t:'And this is where people reach for antibiotics…'}
+  ];
+  function raiseBtn(cb){ ctrl.innerHTML='<button class="praise" id="pRaise">✋ Raise your hand to ask</button>'; cb&&cb(); }
+  function typewriter(el, text, cb){ var i=0; (function tick(){ if(i<=text.length){ el.innerHTML=text.slice(0,i)+'<span style="opacity:.5">▍</span>'; i++; setTimeout(tick,32);} else { el.innerHTML=text; cb&&cb(); } })(); }
+  function playScript(idx, done){
+    if(idx>=SCRIPT.length){ done&&done(); return; }
+    var s=SCRIPT[idx]; speak(s.who); line(s.cls, s.av, s.cls, s.t);
+    setTimeout(function(){ playScript(idx+1, done); }, 2600);
+  }
+  function loop(){
+    trans.innerHTML=''; ctrl.innerHTML=''; setPlay(true); resetCursor();
+    setTimeout(function(){
+      playScript(0, function(){
+        raiseBtn();
+        setTimeout(function(){
+          moveTo($('pRaise'), function(){
+            setPlay(false); speak('');
+            ctrl.innerHTML='<div class="paskrow"><div class="ph" id="pAsk"></div><span class="snd" id="pSnd">Ask ▸</span></div>';
+            typewriter($('pAsk'), 'Do we give antibiotics?', function(){
+              setTimeout(function(){ moveTo($('pSnd'), function(){
+                ctrl.innerHTML='';
+                line('q','You','q','Do we give antibiotics?');
+                var t=line('t','✦','t','<span style="opacity:.5">…</span>');
+                setTimeout(function(){ t.querySelector('.tx').innerHTML='Usually no — it\'s viral, so care is <b>supportive</b>: oxygen if the sats drop and help with feeding. Antibiotics only if you suspect a bacterial infection on top.<div class="cite">📖 Bronchiolitis · your note</div>';
+                  setTimeout(function(){
+                    setPlay(true); speak('b'); line('b','T','b','Exactly — supportive care is the whole game. Resume the episode and we\'ll cover red flags for admission.');
+                    setTimeout(loop, 3200);
+                  }, 3200);
+                }, 1600);
+              }); }, 500);
+            });
+          });
+        }, 700);
+      });
+    }, 900);
+  }
+  setTimeout(loop, 800);
+})();
+</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quizzes &amp; Written Tests for Med School | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank builds MCQs, fill-in-the-blank and written short-answer questions from your lecture — and marks your written answers with instant feedback, so you practise the way real exams test you."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Quizzes &amp; written tests</span>
+      <h1 class="h1">Practise the way the <span class="grad">exam actually tests you</span>.</h1>
+      <p class="lead">Recognising the right MCQ option is easy. Writing the answer from a blank page is what real papers demand — and where marks quietly disappear. MedBank builds fill-in-the-blank and written short-answer questions from your lecture, then marks what you write and tells you exactly what was missing.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Test yourself free</a>
+        <a class="btn sec big" href="#see">See it mark an answer</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry">
+        <h4>📝 It marks what you write</h4>
+        <div style="font-size:13px;color:var(--dim);margin:4px 0 8px">Q: Why not examine the throat in epiglottitis?</div>
+        <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12.5px;color:var(--ink)">"It can trigger complete airway obstruction."</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:10px"><div style="font-size:22px;font-weight:800;color:var(--violet-d)">8/10</div><div style="flex:1;height:7px;background:#ece7f5;border-radius:5px;overflow:hidden"><div style="width:80%;height:100%;background:linear-gradient(90deg,#3ecf8e,#14b8a6)"></div></div></div>
+        <a class="btn block" href="../app.html?welcome=1" style="margin-top:12px;justify-content:center">Try a written test →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<style>
+#wtWin .wtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:6px;margin-bottom:9px}
+#wtWin .wtag.fib{background:#e7edfb;color:#3b5bdb}#wtWin .wtag.sa{background:#efe7fb;color:var(--violet-d)}
+#wtWin .wsent{font-size:16px;line-height:1.75;color:var(--ink);font-weight:600}
+#wtWin .wblank{border:none;border-bottom:2px solid var(--violet);min-width:118px;font-size:15px;font-weight:800;color:var(--violet-d);text-align:center;padding:0 4px}
+#wtWin .wblank.ok{border-color:#0d9488;color:#0d7a68}
+#wtWin .wbtn{border:none;background:var(--violet);color:#fff;font-weight:800;font-size:13px;padding:9px 16px;border-radius:10px;margin-top:16px}
+#wtWin .wres{margin-top:14px;font-weight:800;font-size:13.5px}
+#wtWin .wres.ok{color:#0d7a68}
+#wtWin .wqt{font-size:15px;line-height:1.5;color:var(--ink);font-weight:700;margin-bottom:11px}
+#wtWin .wta{border:1.6px solid var(--line);border-radius:11px;padding:12px;font-size:13.5px;line-height:1.55;color:var(--ink);min-height:58px;background:#fff}
+#wtWin .wta .cur{opacity:.5}
+#wtWin .wmark{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:14px;background:#f8f6fc;opacity:0;transform:translateY(6px);transition:.4s}
+#wtWin .wmark.show{opacity:1;transform:none}
+#wtWin .wscore{display:flex;align-items:center;gap:12px}
+#wtWin .wscore .num{font-size:26px;font-weight:800;color:var(--violet-d);white-space:nowrap}
+#wtWin .wbar{flex:1;height:8px;background:#ece7f5;border-radius:5px;overflow:hidden}
+#wtWin .wbar>i{display:block;height:100%;background:linear-gradient(90deg,#3ecf8e,#14b8a6);width:0;transition:width .9s}
+#wtWin .wfb{font-size:12.5px;line-height:1.55;color:var(--ink);margin-top:11px}
+#wtWin .wfb .row{display:flex;gap:7px;margin:4px 0}
+#wtWin .wfb b{color:var(--violet-d)}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">Write the answer — then get it marked</h2>
+  <p class="sub">Fill-in-the-blank checks the recall; written questions make you produce the answer, and MedBank marks it against the lecture — giving you a score and the exact point you left out.</p>
+  <div class="win" id="wtWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">📝 Written tests</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">🧠 Active recall</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main tmr">
+        <div class="wtimer run" id="wtTimer"><span class="wd"></span>Today <span id="wtTime">28:44</span></div>
+        <div id="wtScene"></div>
+        <div class="kursor" id="wtCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why it matters</div>
+  <h2 class="h2">Recognising an answer isn't knowing it</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>✍️ Produce, don't just pick</h3><p>Written and fill-in questions force you to recall from a blank page — the harder practice that actually mirrors your exam.</p></div>
+    <div class="bcol"><h3>🎯 Marked against your lecture</h3><p>Your answer is scored on what your note actually says, with the specific point you missed spelled out — not a vague "good effort".</p></div>
+    <div class="bcol"><h3>🧩 Every format from one upload</h3><p>MCQs, fill-in-the-blank and written short answers all come from the same lecture, so you can test a topic from every angle.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">From lecture to marked practice</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Build a lecture</h3><p>MedBank writes MCQs, fill-in-the-blank and written questions from the material automatically.</p></div>
+    <div class="step"><div class="n">2</div><h3>Write your answer</h3><p>Type it out like you would in the exam — no options to lean on.</p></div>
+    <div class="step"><div class="n">3</div><h3>Get scored &amp; corrected</h3><p>A mark plus clear feedback on what was strong and what you left out, so the next attempt is better.</p></div>
+  </div>
+</div></section>
+
+<!-- COMPARISON -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Written practice vs MCQ-only</div>
+  <h2 class="h2">Where the marks really go</h2>
+  <div class="cmp"><table>
+    <thead><tr><th>MCQ-only revision</th><th>MedBank written tests</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Recognise the right option</td><td class="y">Produce the answer from scratch</td></tr>
+      <tr><td class="n">Guessing can hide gaps</td><td class="y">A blank page exposes them</td></tr>
+      <tr><td class="n">No feedback on phrasing</td><td class="y">Told exactly what to add</td></tr>
+      <tr><td class="n">Doesn't match written papers</td><td class="y">Practises the real exam format</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap center">
+  <div class="kicker">Written tests FAQ</div>
+  <h2 class="h2">Questions about quizzes &amp; written tests</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>What question types do I get?</summary><div class="a">Exam-style MCQs, fill-in-the-blank, and written short-answer questions — all generated from the lecture you built.</div></details>
+    <details class="qa"><summary>How are my written answers marked?</summary><div class="a">MedBank compares what you wrote against the lecture's key points, gives you a score, and tells you what was strong and what you missed.</div></details>
+    <details class="qa"><summary>Is the marking exact?</summary><div class="a">It's a helpful guide to steer your revision, not an official examiner — use the feedback to spot gaps, and check anything important against your note.</div></details>
+    <details class="qa"><summary>Can I retry a question?</summary><div class="a">Yes — rewrite your answer and mark it again, or drill the questions you keep getting wrong.</div></details>
+    <details class="qa"><summary>Is it free?</summary><div class="a">You can take written tests on the lecture you build for free. Importing more lectures is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Find your gaps before the examiner does.</h2>
+  <p>Build a lecture and write your first answer — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Test yourself free</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('wtScene')) return;
+  var scene=$('wtScene');
+  var tsec=28*60+44;
+  function fmtT(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(ss).padStart(2,'0');}
+  setInterval(function(){ tsec++; var e=$('wtTime'); if(e)e.textContent=fmtT(tsec); },1000);
+  function resetCursor(){ var c=$('wtCursor'); c.style.left='40px'; c.style.top='60px'; }
+  function moveTo(el, cb){ if(!el){cb&&cb();return;} var main=$('wtCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var c=$('wtCursor'); c.style.left=(er.left-mr.left+Math.min(er.width/2,90))+'px'; c.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ c.classList.add('click'); setTimeout(function(){ c.classList.remove('click'); cb&&cb(); },320); },1350); }
+  function typewriter(el, text, cb){ var i=0; (function tick(){ if(i<=text.length){ el.innerHTML=text.slice(0,i)+'<span class="cur">▍</span>'; i++; setTimeout(tick,32);} else { el.innerHTML=text; cb&&cb(); } })(); }
+
+  function fibScene(){
+    scene.innerHTML='<div class="wtag fib">FILL IN THE BLANK · PAEDIATRICS</div>'
+      + '<div class="wsent">Croup is most commonly caused by the <span class="wblank" id="wBlank"></span> virus.</div>'
+      + '<button class="wbtn" id="wCheck">Check</button><div class="wres" id="wRes"></div>';
+    resetCursor();
+    setTimeout(function(){ moveTo($('wBlank'), function(){
+      typewriter($('wBlank'),'parainfluenza', function(){
+        setTimeout(function(){ moveTo($('wCheck'), function(){
+          $('wBlank').classList.add('ok'); $('wBlank').innerHTML='parainfluenza';
+          $('wRes').className='wres ok'; $('wRes').innerHTML='✓ Correct — parainfluenza';
+          setTimeout(saScene, 3200);
+        }); }, 500);
+      });
+    }); }, 900);
+  }
+
+  function saScene(){
+    scene.innerHTML='<div class="wtag sa">WRITTEN · PAEDIATRICS</div>'
+      + '<div class="wqt">In one line, why should you <b>not</b> examine the throat of a child with suspected epiglottitis?</div>'
+      + '<div class="wta" id="wArea"><span class="cur">▍</span></div>'
+      + '<button class="wbtn" id="wMark">Mark my answer</button>'
+      + '<div class="wmark" id="wMarkBox"><div class="wscore"><span class="num">8 / 10</span><div class="wbar"><i id="wFill"></i></div></div>'
+      + '<div class="wfb"><div class="row">✅ <span><b>Strong:</b> you named the airway risk — throat exam can trigger complete obstruction.</span></div>'
+      + '<div class="row">➕ <span><b>To get full marks:</b> add that you keep the child calm and call anaesthetics/ENT early for a controlled airway.</span></div></div></div>';
+    resetCursor();
+    setTimeout(function(){ moveTo($('wArea'), function(){
+      typewriter($('wArea'),'It can trigger complete airway obstruction and laryngospasm in an already critical airway.', function(){
+        setTimeout(function(){ moveTo($('wMark'), function(){
+          var box=$('wMarkBox'); box.classList.add('show'); setTimeout(function(){ $('wFill').style.width='80%'; },120);
+          setTimeout(fibScene, 5200);
+        }); }, 500);
+      });
+    }); }, 900);
+  }
+
+  setTimeout(fibScene, 800);
+})();
+</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Timed Mock Exams for Med School | MedBank</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="theme-color" content="#5b21b6">
+<meta name="description" content="MedBank builds timed mock exams from your own lectures — no feedback until you submit, just like the real paper — then scores you and shows exactly which topics to fix before exam day."/>
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../index.html"><img src="../icon.svg" alt="MedBank"> Med<span>Bank</span></a>
+    <nav class="nav">
+      <a class="nl" href="../index.html#how">How it works</a>
+      <div class="hasmenu" tabindex="0">
+        <span class="nl">Features</span>
+        <div class="menu">
+          <a href="../lecture-import/index.html"><span class="mi">📥</span> Lecture import</a>
+          <a href="../flashcards/index.html"><span class="mi">🃏</span> Flashcards</a>
+          <a href="../active-recall/index.html"><span class="mi">🔁</span> Active recall</a>
+          <a href="../ai-tutor/index.html"><span class="mi">💬</span> AI tutor</a>
+          <a href="../podcast/index.html"><span class="mi">🎧</span> Lecture podcast</a>
+          <a href="../written-tests/index.html"><span class="mi">📝</span> Written tests</a>
+          <a href="../study-timer/index.html"><span class="mi">⏱️</span> Study timer</a>
+          <a href="../solve/index.html"><span class="mi">🧮</span> Snap &amp; solve</a>
+          <a href="../mock-exam/index.html"><span class="mi">📚</span> Mock exam</a>
+        </div>
+      </div>
+      <a class="nl" href="../index.html#faq">FAQ</a>
+      <a class="btn" href="../app.html?welcome=1">Open the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="eyebrow">Mock exam</span>
+      <h1 class="h1">Sit the paper <span class="grad">before the paper sits you.</span></h1>
+      <p class="lead">The first time under exam conditions shouldn't be the real thing. MedBank builds a timed mock from your own lectures — no instant feedback, a ticking clock, just like the real paper — then scores you and shows exactly which topics are still costing you marks.</p>
+      <div class="cta-row">
+        <a class="btn big" href="../app.html?welcome=1">Sit a mock free</a>
+        <a class="btn sec big" href="#see">Watch a run-through</a>
+      </div>
+      <div class="social"><span class="dots"><i></i><i></i><i></i><i></i></span> Made for medical &amp; health students.</div>
+    </div>
+    <div>
+      <div class="ftry" style="text-align:center">
+        <div style="font-size:34px">⏱️</div>
+        <div style="font-weight:800;color:var(--ink);margin-top:6px">Timed. Scored. Honest.</div>
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:12px">
+          <span style="background:#f4f0fd;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:700;color:var(--violet-d)">20 questions</span>
+          <span style="background:#f4f0fd;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:700;color:var(--violet-d)">~15 min</span>
+        </div>
+        <a class="btn block" href="../app.html?welcome=1" style="margin-top:14px;justify-content:center">Start a mock →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<style>
+#meWin .exhead{font-size:20px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
+#meWin .exsub{font-size:12.5px;color:var(--dim);margin:3px 0 12px}
+#meWin .exlabel{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;margin:12px 0 7px}
+#meWin .exrow{display:flex;gap:8px;flex-wrap:wrap}
+#meWin .exsc{border:1.6px solid var(--line);border-radius:11px;padding:10px 13px;font-size:12.5px;font-weight:700;color:var(--ink);display:flex;flex-direction:column;gap:2px;min-width:96px;transition:.2s}
+#meWin .exsc span{font-size:10.5px;color:var(--dim);font-weight:600}
+#meWin .exsc.on{border-color:var(--violet);background:#f4f0fd;color:var(--violet-d)}
+#meWin .exn{border:1.6px solid var(--line);border-radius:11px;padding:10px 0;width:58px;text-align:center;font-size:15px;font-weight:800;color:var(--ink);transition:.2s}
+#meWin .exn.on{border-color:var(--violet);background:#f4f0fd;color:var(--violet-d)}
+#meWin .exstart{margin-top:16px;border:none;background:var(--violet);color:#fff;font-weight:800;font-size:14px;padding:12px 22px;border-radius:11px}
+#meWin .extop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+#meWin .extime{background:#1c1830;color:#fff;font-weight:800;font-size:14px;padding:6px 13px;border-radius:9px;font-variant-numeric:tabular-nums}
+#meWin .extime.low{background:#c02f18;animation:expulse 1s infinite}
+@keyframes expulse{50%{opacity:.6}}
+#meWin .exprog{font-size:12px;color:var(--dim);font-weight:700}#meWin .exprog b{color:var(--ink)}
+#meWin .exbarw{height:6px;background:#ece7f5;border-radius:4px;overflow:hidden;margin-bottom:14px}
+#meWin .exbar{height:100%;background:linear-gradient(90deg,#7c3aed,#0d9488);border-radius:4px;transition:width .5s}
+#meWin .exq{font-size:15px;font-weight:700;line-height:1.45;color:var(--ink);margin-bottom:12px}
+#meWin .exopt{border:1.6px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:9px;font-size:13.5px;display:flex;align-items:center;gap:11px;color:var(--ink);transition:.18s}
+#meWin .exopt .tag{width:23px;height:23px;border-radius:7px;background:#efeaf3;color:var(--dim);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+#meWin .exopt.sel{border-color:var(--violet);background:#f4f0fd}#meWin .exopt.sel .tag{background:var(--violet);color:#fff}
+#meWin .exsubmit{margin-top:14px;width:100%;border:none;background:#0d9488;color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:11px}
+#meWin .exres{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:8px}
+#meWin .exring{width:118px;height:118px;border-radius:50%;background:conic-gradient(#3ecf8e 0 0,#ece7f5 0 100%);display:flex;align-items:center;justify-content:center;transition:background 1s ease;flex:none}
+#meWin .exring .inner{width:90px;height:90px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#meWin .exring b{font-size:22px;color:var(--ink)}#meWin .exring span{font-size:12px;color:var(--dim);font-weight:700}
+#meWin .exresR{flex:1;min-width:220px}
+#meWin .exrt{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:9px}
+#meWin .brow{display:flex;align-items:center;gap:9px;font-size:12px;margin:6px 0;color:var(--dim)}
+#meWin .brow span{width:78px;flex:none;color:var(--ink);font-weight:600}
+#meWin .brow .bt{flex:1;height:7px;background:#ece7f5;border-radius:5px;overflow:hidden}
+#meWin .brow .bt>i{display:block;height:100%;background:linear-gradient(90deg,#3ecf8e,#14b8a6);width:0;transition:width .9s}
+#meWin .brow b{width:34px;text-align:right;color:var(--ink)}
+#meWin .exmiss{margin-top:12px;border:none;background:var(--violet);color:#fff;font-weight:800;font-size:12.5px;padding:9px 14px;border-radius:9px}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">Set it up, sit it, get scored</h2>
+  <p class="sub">Pick a scope and length, then it runs like the real paper — a ticking clock and no feedback until you submit. At the end you get your score and a topic-by-topic breakdown of where the marks went.</p>
+  <div class="win" id="meWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si">⌂ Home</div>
+        <div class="si on">📝 Mock exam</div>
+        <div class="si">🃏 Cards</div>
+        <div class="si">🧠 Active recall</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main">
+        <div id="meScene"></div>
+        <div class="kursor" id="meCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Why it works</div>
+  <h2 class="h2">The rehearsal that removes the fear</h2>
+  <div class="bcols">
+    <div class="bcol"><h3>⏱️ Real exam conditions</h3><p>A clock and no instant feedback teach you pacing and nerve — so the real hall feels familiar, not terrifying.</p></div>
+    <div class="bcol"><h3>📊 A score you can trust</h3><p>Marked at the end like a real paper, with a topic breakdown that shows exactly where you're losing marks.</p></div>
+    <div class="bcol"><h3>🔁 Turn misses into revision</h3><p>Your wrong answers flow straight into your mistakes and hard cards, so the mock actually fixes what it exposed.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section id="how"><div class="wrap center">
+  <div class="kicker">How it works</div>
+  <h2 class="h2">A full mock in three steps</h2>
+  <div class="steps" style="text-align:left;grid-template-columns:repeat(3,1fr)">
+    <div class="step"><div class="n">1</div><h3>Choose scope &amp; length</h3><p>One subject or everything you've built, and 10 to 60 questions — however hard you want to push.</p></div>
+    <div class="step"><div class="n">2</div><h3>Sit it under the clock</h3><p>No feedback until you submit, just like the real paper. Pace yourself and commit to answers.</p></div>
+    <div class="step"><div class="n">3</div><h3>Review your score</h3><p>See your mark, your weakest topics, and send the misses straight to your revision.</p></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="background:var(--soft)"><div class="wrap center">
+  <div class="kicker">Mock exam FAQ</div>
+  <h2 class="h2">Questions about mock exams</h2>
+  <div class="faq" style="text-align:left">
+    <details class="qa"><summary>Where do the questions come from?</summary><div class="a">From the lectures you've built — MedBank pulls exam-style MCQs from your own material, so the mock tests what you're actually studying.</div></details>
+    <details class="qa"><summary>Can I choose the length?</summary><div class="a">Yes — pick a scope (one subject or everything) and 10, 20, 40 or 60 questions, with an estimated time for each.</div></details>
+    <details class="qa"><summary>Do I get feedback during the exam?</summary><div class="a">No — that's deliberate. Like the real paper, you only see results after you submit, so you practise committing to answers under time.</div></details>
+    <details class="qa"><summary>What happens to my mistakes?</summary><div class="a">They're collected into your mistakes and hard cards so you can drill exactly what you got wrong afterwards.</div></details>
+    <details class="qa"><summary>Is it free?</summary><div class="a">You can sit a mock built from your free lecture. Importing more lectures for a bigger question bank is a premium upgrade.</div></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section><div class="wrap"><div class="final">
+  <h2>Walk into the real exam having already passed one.</h2>
+  <p>Sit a timed mock from your own lectures — free.</p>
+  <a class="btn big" href="../app.html?welcome=1">Sit a mock free</a>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol" style="max-width:280px">
+      <div class="logo" style="margin-bottom:10px"><img src="../icon.svg" alt=""> Med<span>Bank</span></div>
+      <div style="color:var(--dim)">Turn any lecture into active recall that sticks. Made for medical &amp; health students.</div>
+    </div>
+    <div class="fcol"><b>Features</b><a href="../lecture-import/index.html">Lecture import</a><a href="../flashcards/index.html">Flashcards</a><a href="../active-recall/index.html">Active recall</a><a href="../ai-tutor/index.html">AI tutor</a><a href="../podcast/index.html">Lecture podcast</a><a href="../study-timer/index.html">Study timer</a></div>
+    <div class="fcol"><b>Product</b><a href="../index.html#how">How it works</a><a href="../index.html#faq">FAQ</a><a href="../app.html?welcome=1">Open the app</a><a href="mailto:frankthewiz1@gmail.com">Contact</a></div>
+  </div>
+  <div style="margin-top:28px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:13px">© <span id="yr"></span> MedBank. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('meScene')) return;
+  var scene=$('meScene'), csec=14*60+32, ticking=false;
+  function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+  setInterval(function(){ if(!ticking)return; csec--; var e=$('exTime'); if(e){ e.textContent=fmt(csec); if(csec<120)e.classList.add('low'); } },1000);
+  function resetCursor(){ var c=$('meCursor'); c.style.left='40px'; c.style.top='60px'; }
+  function moveTo(el, cb){ if(!el){cb&&cb();return;} var main=$('meCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var c=$('meCursor'); c.style.left=(er.left-mr.left+Math.min(er.width/2,80))+'px'; c.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ c.classList.add('click'); setTimeout(function(){ c.classList.remove('click'); cb&&cb(); },320); },1200); }
+
+  var QS=[
+    {n:8, q:'A neonate has bilious vomiting within hours of birth. The most urgent diagnosis to exclude is:', opts:['Physiological reflux','Malrotation with volvulus','Overfeeding','Hypertrophic pyloric stenosis'], pick:1},
+    {n:9, q:'First-line drug to control postpartum haemorrhage caused by uterine atony:', opts:['Oxytocin','Tranexamic acid alone','Ergometrine in a hypertensive woman','Misoprostol only'], pick:0}
+  ];
+
+  function setup(){
+    ticking=false;
+    scene.innerHTML='<div class="exhead">📝 Mock exam</div><div class="exsub">Timed, no feedback until you submit — like the real paper.</div>'
+      + '<div class="exlabel">SCOPE</div><div class="exrow">'
+      + '<div class="exsc on" id="scAll">🌐 All subjects<span>Everything built</span></div>'
+      + '<div class="exsc" id="scPaeds">🧒 Paediatrics<span>128 cards</span></div>'
+      + '<div class="exsc">🤰 Obstetrics<span>96 cards</span></div></div>'
+      + '<div class="exlabel">QUESTIONS</div><div class="exrow">'
+      + '<div class="exn on" id="n10">10</div><div class="exn" id="n20">20</div><div class="exn">40</div><div class="exn">60</div></div>'
+      + '<button class="exstart" id="exStart">▶ Start exam</button>';
+    resetCursor();
+    setTimeout(function(){ moveTo($('scPaeds'), function(){
+      $('scAll').classList.remove('on'); $('scPaeds').classList.add('on');
+      setTimeout(function(){ moveTo($('n20'), function(){
+        $('n10').classList.remove('on'); $('n20').classList.add('on');
+        setTimeout(function(){ moveTo($('exStart'), function(){ running(0); }); }, 500);
+      }); }, 600);
+    }); }, 1100);
+  }
+
+  function running(qi){
+    var k=QS[qi]; ticking=true;
+    var opts=k.opts.map(function(o,i){return '<div class="exopt" id="eo'+i+'"><span class="tag">'+String.fromCharCode(65+i)+'</span><span>'+o+'</span></div>';}).join('');
+    scene.innerHTML='<div class="extop"><span class="extime" id="exTime">'+fmt(csec)+'</span><span class="exprog">Question <b>'+k.n+'</b> / 20</span></div>'
+      + '<div class="exbarw"><div class="exbar" id="exBar" style="width:'+(k.n/20*100)+'%"></div></div>'
+      + '<div class="exq">'+k.q+'</div><div>'+opts+'</div><div id="exSub"></div>';
+    resetCursor();
+    setTimeout(function(){ moveTo($('eo'+k.pick), function(){
+      $('eo'+k.pick).classList.add('sel');
+      setTimeout(function(){
+        if(qi<QS.length-1){ running(qi+1); }
+        else { $('exSub').innerHTML='<button class="exsubmit" id="exSubmit">Submit exam ▸</button>';
+          setTimeout(function(){ moveTo($('exSubmit'), results); }, 700); }
+      }, 1100);
+    }); }, 900);
+  }
+
+  function results(){
+    ticking=false;
+    scene.innerHTML='<div class="exhead">✓ Submitted</div><div class="exsub">Here\'s how you did.</div>'
+      + '<div class="exres"><div class="exring" id="exRing"><div class="inner"><b>16/20</b><span>80%</span></div></div>'
+      + '<div class="exresR"><div class="exrt">Nice — that\'s a comfortable pass.</div>'
+      + '<div class="brow"><span>Paediatrics</span><div class="bt"><i id="b1"></i></div><b>85%</b></div>'
+      + '<div class="brow"><span>Obstetrics</span><div class="bt"><i id="b2"></i></div><b>72%</b></div>'
+      + '<div class="brow"><span>Neonatology</span><div class="bt"><i id="b3"></i></div><b>67%</b></div>'
+      + '<button class="exmiss">Review your 4 mistakes →</button></div></div>';
+    resetCursor();
+    setTimeout(function(){ $('exRing').style.background='conic-gradient(#3ecf8e 0 80%, #ece7f5 80% 100%)'; },200);
+    setTimeout(function(){ $('b1').style.width='85%'; $('b2').style.width='72%'; $('b3').style.width='67%'; },400);
+    setTimeout(setup, 5600);
+  }
+
+  setTimeout(setup, 800);
+})();
+</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.querySelectorAll('.qa').forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('.qa').forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+</script>
+</body>
+</html>
