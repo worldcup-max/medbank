@@ -20,6 +20,8 @@ import crypto from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
+import { createHash } from "node:crypto";
+import { kokoroPrep, sayPrep, KOKORO_DEFAULT } from "./med-voice.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -84,18 +86,23 @@ const FREE_BUILD_LIMIT = 1;   // free accounts can build 1 lecture; everything i
 /* transcribe a recorded lecture with OpenAI (gpt-4o-transcribe / whisper-1).
  * Node 22 gives us global fetch/FormData/Blob. Audio file must be <= 25MB. */
 async function transcribeAudio(b64, mime){
-  const key = process.env.OPENAI_API_KEY;
-  if(!key) throw new Error("OPENAI_API_KEY not set — needed to transcribe recorded lectures");
+  // Prefer Groq Whisper large-v3 when a key is set — same Whisper model as OpenAI,
+  // ~18x cheaper. Falls back to OpenAI Whisper automatically if no Groq key.
+  const useGroq = !!process.env.GROQ_API_KEY && (process.env.STT_PROVIDER || "groq") !== "openai";
+  const key = useGroq ? process.env.GROQ_API_KEY : process.env.OPENAI_API_KEY;
+  if(!key) throw new Error((useGroq?"GROQ_API_KEY":"OPENAI_API_KEY")+" not set — needed to transcribe recorded lectures");
   const buf = Buffer.from(b64, "base64");
   if(buf.length > 25*1024*1024) throw new Error("Recording too long to transcribe (over ~45 min). Split it and try again.");
   const m = (mime||"").toLowerCase();
   const ext = m.includes("mp4")||m.includes("m4a") ? "mp4" : m.includes("mpeg")||m.includes("mp3") ? "mp3" : m.includes("wav") ? "wav" : m.includes("ogg") ? "ogg" : "webm";
   const fd = new FormData();
   fd.append("file", new Blob([buf], { type: mime || "audio/webm" }), "lecture."+ext);
-  fd.append("model", "whisper-1");                    // whisper-1 returns per-segment timestamps (same price)
-  fd.append("response_format", "verbose_json");
+  fd.append("model", useGroq ? (process.env.GROQ_STT_MODEL || "whisper-large-v3") : "whisper-1");
+  fd.append("response_format", "verbose_json");        // both return per-segment timestamps
   fd.append("timestamp_granularities[]", "segment");
-  const r = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+  const url = useGroq ? "https://api.groq.com/openai/v1/audio/transcriptions"
+                      : "https://api.openai.com/v1/audio/transcriptions";
+  const r = await fetch(url, {
     method:"POST", headers:{ Authorization:"Bearer "+key }, body: fd });
   if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("transcription failed ("+r.status+"): "+t.slice(0,200)); }
   const j = await r.json();
@@ -234,8 +241,8 @@ async function resolveModel(account_id, level){
   return (paid.data && paid.data.status==="active") ? paidModel : ((cfg.data && cfg.data.value) || paidModel);
 }
 
-/* ---- Podcast: two-host study episode from a lecture note (script + ElevenLabs voices) ---- */
-const PODCAST_PROMPT = "You are writing a lively but accurate two-host study podcast for medical students, based ONLY on the lecture note below. Two hosts, HOST A and HOST B, have a natural back-and-forth that genuinely teaches the material — clear, engaging, occasionally light, but always faithful and exam-relevant. Return ONLY valid JSON: {\"lines\":[{\"speaker\":\"A\"|\"B\",\"text\":\"one spoken line\"}]}. Use 16-28 lines, mostly alternating A/B, each 1-3 sentences, written to be SPOKEN (contractions, natural rhythm — not bookish). Open with a short hook, teach the key points in a logical order, and close with a quick recap. Never invent facts beyond the note.\n\nLECTURE NOTE:\n{{note}}";
+/* ---- Podcast: two-host study episode from a lecture note (script + Fish/Kokoro voices) ---- */
+const PODCAST_PROMPT = "You are writing a lively but accurate two-host study podcast for medical students, based ONLY on the lecture note below. Two hosts, HOST A and HOST B, have a natural back-and-forth that genuinely teaches the material — clear, engaging, occasionally light, but always faithful and exam-relevant. Return ONLY valid JSON: {\"lines\":[{\"speaker\":\"A\"|\"B\",\"text\":\"one spoken line\"}]}. Keep it tight — a focused 10-12 minute episode, so use 12-18 lines, mostly alternating A/B, each 1-3 sentences, written to be SPOKEN (contractions, natural rhythm — not bookish). Open with a short hook, teach the key points in a logical order, and close with a quick recap. Never invent facts beyond the note.\n\nLECTURE NOTE:\n{{note}}";
 async function podcastScript(level, note, model){
   const row = await loadPromptFor("podcast", level);
   const tmpl = (row && row.template) || PODCAST_PROMPT;
@@ -243,14 +250,6 @@ async function podcastScript(level, note, model){
   const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||4000, temperature:Number(row&&row.temperature)||0.6 });
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
   try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.lines)) ? o.lines.filter(l=>l&&l.text&&(l.speaker==="A"||l.speaker==="B")) : null; }catch(_){ return null; }
-}
-async function elevenTTS(text, voiceId){
-  const key = process.env.ELEVENLABS_API_KEY; if(!key) throw new Error("ELEVENLABS_API_KEY not set on the server");
-  const r = await fetch("https://api.elevenlabs.io/v1/text-to-speech/"+encodeURIComponent(voiceId), {
-    method:"POST", headers:{ "xi-api-key":key, "Content-Type":"application/json", "Accept":"audio/mpeg" },
-    body: JSON.stringify({ text, model_id: process.env.ELEVEN_MODEL || "eleven_flash_v2_5", voice_settings:{ stability:0.45, similarity_boost:0.75 } }) });
-  if(!r.ok){ const tx=await r.text().catch(()=> ""); throw new Error("voice generation failed ("+r.status+"): "+tx.slice(0,160)); }
-  return Buffer.from(await r.arrayBuffer());
 }
 async function openaiTTS(text, voice){
   const key = process.env.OPENAI_API_KEY; if(!key) throw new Error("OPENAI_API_KEY not set on the server");
@@ -260,9 +259,55 @@ async function openaiTTS(text, voice){
   if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("OpenAI voice failed ("+r.status+"): "+t.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
-/* one clip via the chosen provider (default OpenAI — cheaper; ElevenLabs = premium) */
+/* Fish Audio (hosted) — natural voices, same price tier as OpenAI, more voices.
+ * Used for the AI tutor and most premium podcasts. Voice = reference_id. */
+async function fishTTS(text, voiceId){
+  const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
+  const r = await fetch("https://api.fish.audio/v1/tts", {
+    method:"POST",
+    headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
+    body: JSON.stringify({ text, reference_id: voiceId || process.env.FISH_VOICE_A, format:"mp3" }) });
+  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
+  return Buffer.from(await r.arrayBuffer());
+}
+/* Kokoro (open model) via a hosted endpoint you point KOKORO_TTS_URL at (Deepinfra,
+ * Replicate, or your own). Near-zero cost. Medical terms fixed via kokoroPrep(). */
+async function kokoroTTS(text, voiceId){
+  const url = process.env.KOKORO_TTS_URL;
+  if(!url) throw new Error("KOKORO_TTS_URL not set on the server");
+  const key = process.env.KOKORO_API_KEY;
+  const r = await fetch(url, {
+    method:"POST",
+    headers: Object.assign({ "Content-Type":"application/json" }, key ? { "Authorization":"Bearer "+key } : {}),
+    body: JSON.stringify({ text, voice: voiceId || KOKORO_DEFAULT.read, format:"mp3" }) });
+  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("Kokoro voice failed ("+r.status+"): "+t.slice(0,160)); }
+  return Buffer.from(await r.arrayBuffer());
+}
+/* is a provider actually configured on this host yet? */
+function providerReady(p){
+  if(p==="fish")   return !!process.env.FISH_API_KEY;
+  if(p==="kokoro") return !!process.env.KOKORO_TTS_URL;
+  return !!process.env.OPENAI_API_KEY;
+}
+/* bounded in-memory cache so identical clips (re-reading the same card, replaying a
+ * line) never re-hit the paid API. Podcasts are also cached per-topic in storage. */
+const _ttsCache = new Map(); const _TTS_MAX = 400;
+function _ttsKey(p, voiceId, text){ return createHash("md5").update(p+"|"+(voiceId||"")+"|"+text).digest("hex"); }
+/* one clip via the chosen provider; if that provider isn't set up yet, fall back to
+ * OpenAI so audio keeps working until you add the new keys. */
 async function ttsClip(provider, text, voiceId){
-  return provider==="eleven" ? elevenTTS(text, voiceId) : openaiTTS(text, voiceId);
+  const p = providerReady(provider) ? provider : "openai";
+  // STRICT: every clip passes through medical pronunciation prep before it is spoken.
+  const spoken = (p==="kokoro") ? kokoroPrep(text) : sayPrep(text);
+  const key = _ttsKey(p, voiceId, spoken);
+  if(_ttsCache.has(key)) return _ttsCache.get(key);
+  let buf;
+  if(p==="fish")        buf = await fishTTS(spoken, voiceId);
+  else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
+  else                  buf = await openaiTTS(spoken, voiceId);
+  _ttsCache.set(key, buf);
+  if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
+  return buf;
 }
 async function uploadPodcastAudio(path, buf){
   const up = await admin.storage.from("podcasts").upload(path, buf, { contentType:"audio/mpeg", upsert:true });
@@ -407,16 +452,14 @@ app.post("/podcast", async (req,res)=>{
 app.get("/podcast-voices", async (req,res)=>{
   try{
     if(!await getUser(req)) return res.status(401).json({ error:"not signed in" });
-    const key = process.env.ELEVENLABS_API_KEY; if(!key) return res.json({ ok:true, voices:[] });
-    const r = await fetch("https://api.elevenlabs.io/v1/voices", { headers:{ "xi-api-key":key } });
-    if(!r.ok) return res.json({ ok:true, voices:[] });
-    const j = await r.json();
-    const voices = (j.voices||[]).map(v=>({ voice_id:v.voice_id, name:v.name, gender:(v.labels&&(v.labels.gender||v.labels.Gender))||"", accent:(v.labels&&v.labels.accent)||"", desc:(v.labels&&(v.labels.description||v.labels.descriptive))||"" }));
-    res.json({ ok:true, voices });
+    // engine is chosen automatically server-side now (Kokoro / Fish); no voice list to fetch
+    res.json({ ok:true, voices:[] });
   }catch(e){ res.json({ ok:true, voices:[] }); }
 });
 
-/* Podcast — generate (once, cached per voice pair) and store the audio clips */
+/* in-memory rotation so premium podcasts run 2x Fish : 1x Kokoro (resets on restart) */
+const _podRot = new Map();
+/* Podcast — generate (once, cached) and store the audio clips */
 app.post("/podcast-audio", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
@@ -429,12 +472,18 @@ app.post("/podcast-audio", async (req,res)=>{
     const extras = t.data.extras || {};
     const script = extras.podcast && extras.podcast.script;
     if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
-    const provider = req.body.provider==="eleven" ? "eleven" : "openai";   // default OpenAI (cheaper)
-    const combo = provider+"_"+voiceA+"_"+voiceB;
+    // engine is automatic: basic = Kokoro; premium = 2x Fish : 1x Kokoro. Cached once per topic.
+    const prem = await isPremium(user.id);
+    let provider, vA = voiceA, vB = voiceB;
+    const combo = "auto";
     if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
+    if(!prem){ provider = "kokoro"; }
+    else { const n = _podRot.get(user.id)||0; provider = (n % 3 === 2) ? "kokoro" : "fish"; _podRot.set(user.id, n+1); }
+    if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
+    else { vA = process.env.FISH_VOICE_A || voiceA; vB = process.env.FISH_VOICE_B || voiceB; }
     const urls=[];
     for(let i=0;i<script.length;i++){
-      const vid = script[i].speaker==="A" ? voiceA : voiceB;
+      const vid = script[i].speaker==="A" ? vA : vB;
       const buf = await ttsClip(provider, script[i].text, vid);
       urls.push(await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf));
     }
@@ -459,13 +508,18 @@ app.post("/solve", async (req,res)=>{
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
-/* Read-aloud / voice tutor speech via OpenAI (returns mp3) */
+/* Read-aloud / voice tutor speech (returns mp3).
+ * use:"tutor" → Fish Audio · anything else (read-aloud & app audio) → Kokoro.
+ * ttsClip falls back to OpenAI automatically if the chosen provider isn't set up yet. */
 app.post("/tts", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     // open to any signed-in student — read-aloud on their own content
     const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
-    const buf = await openaiTTS(text, req.body.voice || "nova");
+    const isTutor = req.body.use === "tutor";
+    const provider = isTutor ? "fish" : "kokoro";
+    const voice = req.body.voice || (isTutor ? process.env.FISH_VOICE_TUTOR : KOKORO_DEFAULT.read);
+    const buf = await ttsClip(provider, text, voice);
     res.setHeader("Content-Type","audio/mpeg"); res.send(buf);
   }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
 });

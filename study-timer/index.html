@@ -69,6 +69,53 @@
   </div>
 </div>
 
+<!-- LIVE PREVIEW -->
+<style>
+#stWin .stcap{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;font-weight:700;padding:8px 12px;border-radius:999px;margin:0 auto 4px;width:max-content;transition:.35s}
+#stWin .stcap.run{background:#fdece0;color:#c2410c}
+#stWin .stcap.pause{background:#eef0f4;color:#64748b}
+#stWin .stcap .dt{width:8px;height:8px;border-radius:50%}
+#stWin .stcap.run .dt{background:#f97316;box-shadow:0 0 8px #fb923c}
+#stWin .stcap.pause .dt{background:#94a3b8}
+#stWin .stcard{margin-top:14px}
+#stWin .sthd{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.6px}
+#stWin .stq{font-size:16px;font-weight:700;line-height:1.4;margin:8px 0 14px;color:var(--ink)}
+#stWin .stopt{border:1.6px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:9px;font-size:13.5px;display:flex;gap:11px;color:var(--ink)}
+#stWin .stopt .tag{width:23px;height:23px;border-radius:7px;background:#efeaf3;color:var(--dim);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+#stWin .stopt.correct{border-color:#0d9488;background:#dcf3ee}#stWin .stopt.correct .tag{background:#0d9488;color:#fff}
+#stWin .sthome{margin-top:14px}
+#stWin .sthh{font-size:19px;font-weight:800;color:var(--ink)}
+#stWin .sths{font-size:12.5px;color:var(--dim);margin:3px 0 14px}
+#stWin .stcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+#stWin .stt{border:1px solid var(--line);border-radius:11px;padding:12px;text-align:center}
+#stWin .stt b{font-size:18px;display:block;color:var(--ink)}#stWin .stt span{font-size:10.5px;color:var(--dim)}
+#stWin .stbig{margin-top:11px;border:1px solid var(--line);border-radius:11px;padding:13px;display:flex;align-items:center;gap:12px}
+#stWin .stbig .em{font-size:24px}
+</style>
+<section id="see"><div class="wrap center">
+  <div class="kicker">Live preview</div>
+  <h2 class="h2">Watch it count — and stop</h2>
+  <p class="sub">The timer runs while you're on a card, glowing to show it's live. Leave for the home screen and it pauses instantly; sit idle and it pauses too. Come back to a card and it picks up right where it left off.</p>
+  <div class="win" id="stWin">
+    <div class="win-bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#febc2e"></span><span class="d" style="background:#28c840"></span><span class="url">medbank.com.ng/app</span></div>
+    <div class="win-body">
+      <div class="win-side">
+        <div class="si" id="stS_home">⌂ Home</div>
+        <div class="si on" id="stS_cards">🃏 Cards</div>
+        <div class="si">🧠 Active recall</div>
+        <div class="si">📖 Notes</div>
+        <div class="si">📊 Progress</div>
+      </div>
+      <div class="win-main tmr">
+        <div class="wtimer run" id="stTimer"><span class="wd"></span>Today <span id="stTime">47:06</span></div>
+        <div class="stcap run" id="stCap"><span class="dt"></span><span id="stCapT">Counting — you're on a card</span></div>
+        <div id="stScene"></div>
+        <div class="kursor" id="stCursor"><svg width="23" height="23" viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
 <!-- RULES -->
 <section id="rules"><div class="wrap center">
   <div class="kicker">How it counts</div>
@@ -148,6 +195,45 @@
     else if(phase===1 && tick>=3){ phase=2; tick=0; $('tState').innerHTML='⏸ Paused — 2 min with no activity'; }
     else if(phase===2 && tick>=3){ phase=0; tick=0; $('tPill').classList.add('on'); $('tLbl').textContent='Studying'; $('tState').innerHTML='● Counting — you\'re on a card'; }
   },1000);
+})();
+</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  if(!$('stScene')) return;
+  var scene=$('stScene'), tsec=47*60+6, running=true;
+  function fmtT(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(ss).padStart(2,'0');}
+  setInterval(function(){ if(!running)return; tsec++; var e=$('stTime'); if(e)e.textContent=fmtT(tsec); },1000);
+  function setRun(on){ running=on; $('stTimer').classList.toggle('run', on); }
+  function cap(mode, text){ var c=$('stCap'); c.className='stcap '+mode; $('stCapT').textContent=text; }
+  function side(w){ $('stS_home').classList.toggle('on', w==='home'); $('stS_cards').classList.toggle('on', w==='cards'); }
+  function resetCursor(){ var c=$('stCursor'); c.style.left='240px'; c.style.top='150px'; }
+  function moveTo(el, cb){ if(!el){cb&&cb();return;} var main=$('stCursor').parentNode, mr=main.getBoundingClientRect(), er=el.getBoundingClientRect();
+    var c=$('stCursor'); c.style.left=(er.left-mr.left+er.width/2)+'px'; c.style.top=(er.top-mr.top+er.height/2-8)+'px';
+    setTimeout(function(){ c.classList.add('click'); setTimeout(function(){ c.classList.remove('click'); cb&&cb(); },320); },1300); }
+
+  function cardScene(){ scene.innerHTML='<div class="stcard"><div class="sthd">RECALL · PAEDIATRICS</div>'
+    + '<div class="stq">A wheezy 4-year-old improves markedly after a salbutamol trial. This best supports a diagnosis of:</div>'
+    + '<div class="stopt correct"><span class="tag">A</span><span>Asthma / viral-induced wheeze</span></div>'
+    + '<div class="stopt"><span class="tag">B</span><span>Inhaled foreign body</span></div>'
+    + '<div class="stopt"><span class="tag">C</span><span>Bronchiolitis</span></div></div>'; }
+
+  function homeScene(){ scene.innerHTML='<div class="sthome"><div class="sthh">MedBank</div><div class="sths">Active recall, built from your lecturers’ slides.</div>'
+    + '<div class="stcards"><div class="stt"><b>0</b><span>Due now</span></div><div class="stt"><b>12</b><span>In progress</span></div><div class="stt"><b>🔥 20</b><span>Day streak</span></div></div>'
+    + '<div class="stbig"><span class="em">📊</span><div style="font-size:12.5px;color:var(--dim)"><b style="color:var(--ink)">This is the home screen</b><br>Not a study screen — so the timer holds.</div></div></div>'; }
+
+  function play(){
+    side('cards'); setRun(true); cap('run',"Counting — you're on a card"); cardScene(); resetCursor();
+    setTimeout(function(){ moveTo($('stS_home'), function(){
+      side('home'); setRun(false); cap('pause','Paused — you left the study screen'); homeScene();
+      setTimeout(function(){ cap('pause','Still paused — no activity for 2 min'); }, 2600);
+      setTimeout(function(){ moveTo($('stS_cards'), function(){
+        side('cards'); setRun(true); cap('run','Counting — resumed where it left off'); cardScene();
+        setTimeout(play, 3600);
+      }); }, 4600);
+    }); }, 3600);
+  }
+  setTimeout(play, 900);
 })();
 </script>
 <script>

@@ -1179,20 +1179,20 @@ function cloudSpeak(text, cb){
 }
 /* OpenAI voice (via the import server) for the tutor + card read-aloud, device fallback */
 let _voiceUrl=null;
-async function serverSpeak(text, cb){
+async function serverSpeak(text, cb, use){
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
     const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return false;
-    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:DATA.settings.ttsVoiceAI||'nova'})});
+    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:DATA.settings.ttsVoiceAI||'nova',use:(use||'read')})});
     if(!r.ok) return false;
     const blob=await r.blob();
     if(_voiceUrl){ try{URL.revokeObjectURL(_voiceUrl);}catch(e){} }
     _voiceUrl=URL.createObjectURL(blob); playCloudSrc(_voiceUrl, cb); return true;
   }catch(e){ return false; }
 }
-function voiceSpeak(text, cb){
+function voiceSpeak(text, cb, use){
   unlockAudio();
-  serverSpeak(text, cb).then(function(ok){ if(!ok){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); } });
+  serverSpeak(text, cb, use).then(function(ok){ if(!ok){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); } });
 }
 function speak(text){ if(cloudVoiceOn()){ cloudSpeak(text,null); return; }
   try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
@@ -2039,9 +2039,9 @@ function podDefaults(){
   POD.voiceA=(list[0]||{}).voice_id; POD.voiceB=(list[1]||list[0]||{}).voice_id;
 }
 async function podSetProvider(p,keep){
-  POD.provider = p==='eleven' ? 'eleven' : 'openai';
-  if(POD.provider==='eleven'){ if(!POD.elevenVoices){ POD.phase='load'; podPaint(); await podLoadVoices(); } POD.voices=POD.elevenVoices||POD_FALLBACK.slice(); }
-  else { POD.voices=POD_OPENAI.slice(); }
+  // engine (Kokoro / Fish) is now chosen automatically server-side; these are just host labels
+  POD.provider = 'auto';
+  POD.voices = POD_OPENAI.slice();
   if(!keep) podDefaults();
   POD.phase='voices'; podPaint();
 }
@@ -2094,15 +2094,14 @@ function podPaint(){
   const root=document.getElementById('podRoot'); if(!root) return;
   if(POD.phase==='load'){ root.innerHTML='<div class="empty">✍️ Writing the podcast script from your note…</div>'; return; }
   if(POD.phase==='error'){ root.innerHTML='<div class="empty">'+esc(POD.err||'Something went wrong')+'<br><br><button class="btn primary" onclick="podLoadScript(POD.topicId)">Try again</button></div>'; return; }
-  if(POD.phase==='gen'){ root.innerHTML='<div class="empty">🎙️ Recording the voices with ElevenLabs… ~30–60s<br><span style="color:var(--dim);font-size:13px">Made once, then it\'s saved for instant replay.</span></div>'; return; }
+  if(POD.phase==='gen'){ root.innerHTML='<div class="empty">🎙️ Recording the voices… ~30–60s<br><span style="color:var(--dim);font-size:13px">Made once, then it\'s saved for instant replay.</span></div>'; return; }
   if(POD.phase==='voices'){
     const opts=(POD.voices||[]).map(function(v){ return '<option value="'+v.voice_id+'">'+esc(v.name)+(v.gender?' · '+esc(v.gender):'')+'</option>'; }).join('');
     root.innerHTML='<div class="card" style="cursor:default"><div style="font-weight:800;margin-bottom:10px">🎧 Choose your hosts</div>'
-      +'<div class="btnrow" style="gap:8px;margin-bottom:12px"><button class="btn '+(POD.provider!=='eleven'?'primary':'')+'" onclick="podSetProvider(\'openai\')">OpenAI · cheaper</button><button class="btn '+(POD.provider==='eleven'?'primary':'')+'" onclick="podSetProvider(\'eleven\')">ElevenLabs · premium</button></div>'
       +'<label style="font-size:12.5px;color:var(--dim)">Host A</label><select id="podVA" class="sbox">'+opts+'</select>'
       +'<label style="font-size:12.5px;color:var(--dim);margin-top:8px;display:block">Host B</label><select id="podVB" class="sbox">'+opts+'</select>'
       +'<div class="btnrow" style="margin-top:14px"><button class="btn primary" onclick="POD.voiceA=document.getElementById(\'podVA\').value;POD.voiceB=document.getElementById(\'podVB\').value;podGenAudio()">▶ Generate &amp; play</button></div>'
-      +'<div style="font-size:11.5px;color:var(--dim);margin-top:8px">Two female hosts by default. OpenAI voices are the cheaper option; ElevenLabs gives premium/custom voices. Generated once and saved.</div></div>'
+      +'<div style="font-size:11.5px;color:var(--dim);margin-top:8px">Two natural hosts, generated once and saved for instant replay.</div></div>'
       +'<div style="margin-top:14px;font-weight:700">Script preview</div>'
       +'<div class="card" style="cursor:default;margin-top:6px">'+POD.lines.map(function(l){ return '<div style="margin:6px 0"><b style="color:'+(l.speaker==='A'?'var(--primer)':'var(--recall)')+'">'+(l.speaker==='A'?'A':'B')+'</b> '+esc(l.text)+'</div>'; }).join('')+'</div>';
     setTimeout(function(){ const a=document.getElementById('podVA'),b=document.getElementById('podVB'); if(a&&POD.voiceA)a.value=POD.voiceA; if(b&&POD.voiceB)b.value=POD.voiceB; },0);
@@ -3437,7 +3436,7 @@ function deviceSpeakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&
   u.onend=()=>cb&&cb(); u.onerror=()=>cb&&cb();
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }catch(e){ cb&&cb(); } }
-function speakThen(text, cb){ voiceSpeak(text, cb); }
+function speakThen(text, cb){ voiceSpeak(text, cb, 'tutor'); }
 function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
 async function claudeTutor(sys, history, model){
   await new Promise(res=>loadPuter(res));
