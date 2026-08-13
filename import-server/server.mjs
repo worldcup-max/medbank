@@ -275,11 +275,12 @@ async function fishTTS(text, voiceId){
 async function kokoroTTS(text, voiceId){
   const url = process.env.KOKORO_TTS_URL;
   if(!url) throw new Error("KOKORO_TTS_URL not set on the server");
-  const key = process.env.KOKORO_API_KEY;
-  const r = await fetch(url, {
+  const key = process.env.KOKORO_API_KEY;   // optional — Kokoro-FastAPI needs none by default
+  const r = await fetch(url, {              // KOKORO_TTS_URL = the FULL endpoint, e.g. https://HOST/v1/audio/speech
     method:"POST",
     headers: Object.assign({ "Content-Type":"application/json" }, key ? { "Authorization":"Bearer "+key } : {}),
-    body: JSON.stringify({ text, voice: voiceId || KOKORO_DEFAULT.read, format:"mp3" }) });
+    // OpenAI-compatible body → works with Kokoro-FastAPI, Deepinfra, and OpenAI
+    body: JSON.stringify({ model: process.env.KOKORO_MODEL || "kokoro", input: text, voice: voiceId || KOKORO_DEFAULT.read, response_format: "mp3" }) });
   if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("Kokoro voice failed ("+r.status+"): "+t.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
