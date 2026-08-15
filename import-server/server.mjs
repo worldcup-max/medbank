@@ -133,7 +133,13 @@ async function extractContent(body){
  * claude -> Anthropic | gpt / o -> OpenAI | deepseek -> DeepSeek | gemini -> Gemini
  * Keys (set on the host as needed): ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY, GEMINI_API_KEY
  * Returns { text, usage:{input_tokens, output_tokens} }. */
+const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash";  // cheap + fast → basic tier
+const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
+const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature }){
+  // Claude is retired for this app: route any Claude / empty text model to DeepSeek.
+  // (Vision models like gpt-4o / gemini are left alone so Solve keeps working.)
+  if(!model || /^claude/i.test(model)) model = TEXT_MODEL;
   const m = (model||"").toLowerCase();
   const textParts = (parts||[]).map(p=>p.text);
   const imgs = (images||[]).map(im=>({ media_type: im.source.media_type, data: im.source.data }));
@@ -234,11 +240,9 @@ async function buildExtra(kind, level, note, model){
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
 async function resolveModel(account_id, level){
-  const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
-  const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
-  const coreRow = await loadImportPrompt(level);
-  const paidModel = (coreRow && coreRow.model) || "claude-sonnet-5";
-  return (paid.data && paid.data.status==="active") ? paidModel : ((cfg.data && cfg.data.value) || paidModel);
+  // in-app generation (podcast script, extras, tutor, etc.) ALWAYS uses Flash.
+  // Tiering (Flash basic / Pro premium) applies ONLY to the lecture import build.
+  return BASIC_MODEL;
 }
 
 /* ---- Podcast: two-host study episode from a lecture note (script + Fish/Kokoro voices) ---- */
@@ -397,11 +401,9 @@ app.post("/import", async (req,res)=>{
     const level = Number(req.body.level) || null;
     const pt = { data: await loadImportPrompt(level) };
     if(!pt.data){ await admin.from("imports").update({ status:"failed", error:"no active prompt" }).eq("id",importId); return res.status(500).json({ error:"no active prompt" }); }
-    // trial users get the cheaper model
-    const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
+    // IMPORT BUILD ONLY — the one place tiering applies: basic → Flash, premium → Pro
     const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
-    const trialModel = (cfg.data && cfg.data.value) || pt.data.model;   // jsonb string → JS string
-    let model = (paid.data && paid.data.status==="active") ? pt.data.model : trialModel;
+    let model = (paid.data && paid.data.status==="active") ? PREMIUM_MODEL : BASIC_MODEL;
     // admins may override the model per import (for A/B testing)
     if(req.body.model){ const adm = await admin.from("accounts").select("is_admin").eq("id",account_id).maybeSingle(); if(adm.data && adm.data.is_admin) model = req.body.model; }
 
@@ -471,12 +473,8 @@ app.post("/build-extra", async (req,res)=>{
     const have = (t.data.extras && t.data.extras[kind]) || null;
     if(have && have.length) return res.json({ ok:true, items:have });   // already built → return cached
     const level = Number(req.body.level) || null;
-    // resolve model (trial vs paid), same as import
-    const cfg = await admin.from("app_config").select("value").eq("key","trial_model").maybeSingle();
-    const paid = await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
-    const coreRow = await loadImportPrompt(level);
-    const paidModel = (coreRow && coreRow.model) || "claude-sonnet-5";
-    const model = (paid.data && paid.data.status==="active") ? paidModel : ((cfg.data && cfg.data.value) || paidModel);
+    // in-app extras always use Flash — tiering is import-only
+    const model = BASIC_MODEL;
     const items = await buildExtra(kind, level, t.data.note_md, model);
     if(!items) return res.status(502).json({ error:"couldn't build this — try again" });
     const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
@@ -560,7 +558,7 @@ app.post("/solve", async (req,res)=>{
     if(!image_base64 && !(text && text.trim())) return res.status(400).json({ error:"send a photo or type the question" });
     const images = image_base64 ? [{ type:"image", source:{ type:"base64", media_type:media_type||"image/jpeg", data:image_base64 } }] : [];
     const parts = (text && text.trim()) ? [{ type:"text", text:"QUESTION (typed by the student):\n"+text.trim() }] : [];
-    const model = process.env.SOLVE_MODEL || "claude-sonnet-5";   // vision-capable
+    const model = process.env.SOLVE_MODEL || "gpt-4o-mini";   // vision-capable, cheap, non-Claude (DeepSeek chat can't see images)
     const gen = await generate({ model, prompt:SOLVE_PROMPT, parts, images, max_tokens:2000, temperature:0.2 });
     res.json({ ok:true, answer:(gen.text||"").trim() });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
@@ -609,7 +607,7 @@ app.post("/admin/prompt", async (req,res)=>{
     const base = await admin.from("prompt_templates").select("model,max_tokens,temperature").eq("key","import_generation").eq("kind","core").is("level",null).eq("is_active",true).maybeSingle();
     const bd = base.data || {};
     const row = { key:"import_generation", kind, level:lv, template, is_active:true,
-      model: req.body.model || bd.model || "claude-sonnet-5",
+      model: req.body.model || bd.model || TEXT_MODEL,
       max_tokens: Number(req.body.max_tokens) || bd.max_tokens || 16000,
       temperature: (req.body.temperature!=null && req.body.temperature!=="") ? Number(req.body.temperature) : (bd.temperature!=null ? bd.temperature : 0.3) };
     let q = admin.from("prompt_templates").select("id").eq("key","import_generation").eq("kind",kind).eq("is_active",true);

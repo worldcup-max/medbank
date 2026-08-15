@@ -752,7 +752,7 @@ window.MB_DOCK = {
   },
   ask: function(userMsg, history, ctx){
     var sys='You are MedBank’s concise study tutor for a medical student. Topic: "'+((ctx&&ctx.topicName)||'this lecture')+'".'+((ctx&&ctx.cardQ)?(' The card on screen asks: "'+ctx.cardQ+'".'):'')+' Answer briefly and clearly, exam-focused, no fluff.';
-    var model=DATA.settings.explainModel||DATA.settings.tutorEngine||'claude-sonnet-5';
+    var model=DATA.settings.explainModel||DATA.settings.tutorEngine||'deepseek-v4-flash';
     return claudeTutor(sys, (history||[]).concat([{role:'user',text:userMsg}]), model);
   },
   saveNote: function(cardId, txt){ if(cardId){ try{ setNote(cardId, txt); }catch(e){} } },
@@ -893,7 +893,7 @@ let DATA = (()=>{
   d.notes    = d.notes    || {};  // cardId -> personal note / mnemonic
   d.missLog  = d.missLog  || {};  // cardId -> 'YYYY-MM-DD' last missed
   d.plan     = d.plan     || [];  // ordered topic ids — source of daily NEW cards (top 5/course active)
-  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'claude-sonnet-5', tutorEngine:'claude-sonnet-5'}, d.settings||{});
+  d.settings = Object.assign({interleave:true, remindAt:'', remindOn:false, remindEvery:2, remindMins:0, strict:false, useIdle:false, lastNudge:0, quietStart:7, quietEnd:22, tts:false, autoBackup:false, lastBackup:0, geminiKey:'', geminiModel:'gemini-2.5-flash-lite', ttsVoice:'', sttLang:'en-US', aiVoice:true, useCloudVoice:false, cloudVoice:'Joanna', explainModel:'deepseek-v4-flash', tutorEngine:'deepseek-v4-flash'}, d.settings||{});
   if(/^gemini-(2\.0|1\.5|3)|flash-latest|3\.6-flash|^gemini-2\.5-flash$/.test(d.settings.geminiModel||'')) d.settings.geminiModel='gemini-2.5-flash-lite';  // move to the most generous free model (~1000/day)
   if(!d.settings.remindMins) d.settings.remindMins = (d.settings.remindEvery||2)*60;  // minutes is the source of truth
   d.flags    = d.flags    || {};  // misc unlock flags
@@ -1037,7 +1037,7 @@ async function regenCard(id,deck,btn){
   const ref = (t.note||t.simplified||'').slice(0,6000);
   const prompt='A medical flashcard from this lecture may be inaccurate. Using ONLY the lecture note as the source of truth, rewrite a corrected version.\n\nLECTURE NOTE:\n'+ref+'\n\nCURRENT CARD:\nQ: '+(c.q||'')+'\nA: '+(deck==='primer'?(c.explain||''):(c.a||''))+'\n\nReturn ONLY JSON: {"q":"corrected question","a":"corrected concise answer"}. Keep it faithful to the note.';
   try{
-    const txt=await claudeTutor('You are a careful medical educator correcting a flashcard strictly from the provided note.', [{role:'user',text:prompt}], DATA.settings.explainModel||'claude-sonnet-5');
+    const txt=await claudeTutor('You are a careful medical educator correcting a flashcard strictly from the provided note.', [{role:'user',text:prompt}], DATA.settings.explainModel||'deepseek-v4-flash');
     const s=txt.indexOf('{'), e=txt.lastIndexOf('}'); const o=JSON.parse(txt.slice(s,e+1));
     const patch={}; if(o.q) patch.q=o.q; if(o.a){ if(deck==='primer') patch.explain=o.a; else patch.a=o.a; }
     DATA.cardEdits[id]=Object.assign({}, DATA.cardEdits[id]||{}, patch); persist(); render();
@@ -1680,7 +1680,7 @@ function pageBuilder(){
   <p class="sub">How to turn a lecture into a full topic entry.</p>
   <div class="card" style="cursor:default;margin-bottom:26px">
   ${[['Send the material','Open Cowork on your laptop and send photos of your handwritten notes, the lecture slides, or a PDF — and say which topic on the schedule it is.'],
-     ['Claude builds the topic','A structured built note, a simplified note, a PDF of the note, a Primer deck (every slide point explained) and a Recall deck (strict Q/A).'],
+     ['MedBank builds the topic','A structured built note, a simplified note, a PDF of the note, a Primer deck (every slide point explained) and a Recall deck (strict Q/A).'],
      ['It is filed automatically','Saved under the right subject, lecturer and topic, and the topic flips from "Not built" to "Ready".'],
      ['Push it to your phone','Commit and push in GitHub Desktop. About a minute later your phone has it.']]
    .map((s,i)=>`<div class="step"><div class="stepnum">${i+1}</div><div class="txt"><b>${s[0]}</b><span>${s[1]}</span></div></div>`).join('')}
@@ -1779,7 +1779,7 @@ function pageSubject(id){
   if(!s.topicCount)
     return crumbs([{label:'Home',route:'home'},{label:s.name}])+
       `<h1>${esc(s.name)}</h1>
-       <div class="empty">No lecture schedule loaded for this subject yet.<br>Send Claude a photo of the schedule and every topic will be listed here.</div>`;
+       <div class="empty">No lecture schedule loaded for this subject yet.<br>Send MedBank a photo of the schedule and every topic will be listed here.</div>`;
   return crumbs([{label:'Home',route:'home'},{label:s.name}])+
     `<h1>${esc(s.name)}</h1>
      <p class="sub">${s.topicCount} topics · ${s.readyCount} built · ${s.lecturerCount} lecturers · ${s.cardCount} cards</p>
@@ -1827,7 +1827,7 @@ function pageTopic(id){
   if(!t.ready){
     body = `<div class="empty" style="text-align:left">
       <b style="color:var(--text)">Not built yet.</b><br><br>
-      Send Claude the slides or your handwritten notes for this lecture and say:<br>
+      Send MedBank the slides or your handwritten notes for this lecture and say:<br>
       <pre class="copy" style="margin-top:14px;text-align:left">Build MedBank topic ${t.sn??''} (${esc(t.subject.short)}) - ${esc(t.name)}</pre>
       The built note, simplified note, PDF, Primer Cards and Recall Cards will appear right here.</div>`;
   } else if(topicTab==='note'){
@@ -1974,7 +1974,7 @@ async function wtGrade(i){
   res.innerHTML='<span style="color:var(--dim)">Marking…</span>';
   const prompt='Question: '+it.prompt+'\nIdeal answer: '+(it.model_answer||'')+'\nKey marking points: '+((it.points||[]).join('; '))+'\n\nStudent answer: '+ans+'\n\nGive brief feedback (2–4 sentences): what is correct, what is missing, then a score like "3/4 key points". Be encouraging but honest.';
   try{
-    const txt=await claudeTutor('You are a fair, concise medical examiner marking a short answer.', [{role:'user',text:prompt}], DATA.settings.explainModel||DATA.settings.tutorEngine||'claude-sonnet-5');
+    const txt=await claudeTutor('You are a fair, concise medical examiner marking a short answer.', [{role:'user',text:prompt}], DATA.settings.explainModel||DATA.settings.tutorEngine||'deepseek-v4-flash');
     res.innerHTML='<div class="md" style="background:var(--panel2,#f1eefb);border-radius:10px;padding:11px 13px">'+md(txt)+'</div>';
   }catch(e){ res.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI to mark this — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
 }
@@ -2076,7 +2076,7 @@ async function podAsk(){
   out.innerHTML='<span style="color:var(--dim)">Thinking…</span>';
   const t=topById(POD.topicId), line=(POD.lines[POD.i]||{}).text||'';
   const prompt='A student is listening to a study podcast on "'+(t?t.name:'')+'" and raised their hand here: "'+line+'". Their question: '+q+'\n\nAnswer clearly and briefly, exam-relevant.';
-  try{ const txt=await claudeTutor('You are a friendly medical study tutor answering a quick question during a podcast.', [{role:'user',text:prompt}], DATA.settings.explainModel||'claude-sonnet-5'); out.innerHTML='<div class="md">'+md(txt)+'</div>'; }
+  try{ const txt=await claudeTutor('You are a friendly medical study tutor answering a quick question during a podcast.', [{role:'user',text:prompt}], DATA.settings.explainModel||'deepseek-v4-flash'); out.innerHTML='<div class="md">'+md(txt)+'</div>'; }
   catch(e){ out.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
 }
 function podSetupMedia(){
@@ -3186,17 +3186,11 @@ function pageSettings(){
 
   S.ai=`
     <h2>Tutor AI</h2>
-    <div class="setrow"><div><b>Which AI runs the voice tutor</b><span>Claude (via Puter) is free, needs no key, and is best at telling your commands apart from your answers. "Gemini" uses your own key below.</span></div>
+    <div class="setrow"><div><b>Which AI runs the voice tutor</b><span>DeepSeek (via Puter) — free, no key needed. Flash is fast; Pro reasons deeper.</span></div>
       <select class="numin" style="width:220px" onchange="setTutorEngine(this.value)">
-        ${[['claude-sonnet-5','Claude Sonnet 5 (recommended)'],['claude-opus-5','Claude Opus 5 (deepest)'],['claude-fable-5','Claude Fable 5 (max reasoning)'],['claude-haiku-4-5','Claude Haiku (fastest)'],['gemini','Google Gemini (your key)']].map(([v,l])=>`<option value="${v}" ${(s.tutorEngine||'claude-sonnet-5')===v?'selected':''}>${l}</option>`).join('')}
+        ${[['deepseek-v4-flash','DeepSeek Flash (recommended)'],['deepseek-v4-pro','DeepSeek Pro (deepest)']].map(([v,l])=>`<option value="${v}" ${(s.tutorEngine||'deepseek-v4-flash')===v?'selected':''}>${l}</option>`).join('')}
       </select></div>
 
-    <h2>Gemini key <span style="font-size:12px;color:var(--dim);font-weight:400">(only needed if using Gemini)</span></h2>
-    <p class="sub" style="margin-bottom:12px">Get a free key at <b>aistudio.google.com/apikey</b> — stored only on this device.</p>
-    <div class="setrow"><div><b>Gemini API key</b><span>${s.geminiKey?'Key saved. Paste a new one to replace it.':'Paste your free Google Gemini key to enable the tutor.'}</span></div>
-      <input class="numin" style="width:150px" type="password" value="${esc(s.geminiKey||'')}" placeholder="paste key" onchange="setGemKey(this.value)"></div>
-    <div class="setrow"><div><b>Model</b><span>Default gemini-2.5-flash-lite — the most generous free model (~1000/day). Only change if you know the model name you want.</span></div>
-      <input class="numin" style="width:190px" type="text" value="${esc(s.geminiModel||'gemini-2.5-flash-lite')}" onchange="setGemModel(this.value)"></div>
     <div class="setrow"><div><b>✨ Realistic online voice</b><span>Use a natural neural voice (Amazon Polly, via Puter — free, no key, no sign-up) instead of the phone's built-in voice. Needs internet; falls back to the device voice offline. Best quality by far.</span></div>
       <button class="toggle ${s.useCloudVoice?'on':''}" onclick="setCloudVoiceOn(${s.useCloudVoice?'false':'true'})"><i></i></button></div>
     ${s.useCloudVoice?`<div class="setrow" style="display:block"><b>Choose a realistic voice</b>
@@ -3218,9 +3212,9 @@ function pageSettings(){
       <select class="numin" style="width:190px" onchange="setSttLang(this.value)">
         ${[['en-US','English (US)'],['en-GB','English (UK)'],['en-NG','English (Nigeria)'],['en-IN','English (India)'],['en-ZA','English (South Africa)']].map(([v,l])=>`<option value="${v}" ${(s.sttLang||'en-US')===v?'selected':''}>${l}</option>`).join('')}
       </select></div>
-    <div class="setrow"><div><b>"Let AI explain" model</b><span>When reading a note, highlight text and tap ✨ Let AI explain for a step-by-step breakdown. Powered by Claude via Puter — free, no key. Sonnet 5 is fast &amp; excellent; Opus 5 / Fable 5 go deepest.</span></div>
+    <div class="setrow"><div><b>"Let AI explain" model</b><span>When reading a note, highlight text and tap ✨ Let AI explain for a step-by-step breakdown. Powered by DeepSeek via Puter — free, no key.</span></div>
       <select class="numin" style="width:210px" onchange="setExplainModel(this.value)">
-        ${[['claude-sonnet-5','Claude Sonnet 5 (recommended)'],['claude-opus-5','Claude Opus 5 (deepest)'],['claude-fable-5','Claude Fable 5 (max reasoning)'],['claude-haiku-4-5','Claude Haiku (fastest)']].map(([v,l])=>`<option value="${v}" ${(s.explainModel||'claude-sonnet-5')===v?'selected':''}>${l}</option>`).join('')}
+        ${[['deepseek-v4-flash','DeepSeek Flash (recommended)'],['deepseek-v4-pro','DeepSeek Pro (deepest)']].map(([v,l])=>`<option value="${v}" ${(s.explainModel||'deepseek-v4-flash')===v?'selected':''}>${l}</option>`).join('')}
       </select></div>`;
 
   S.data=`
@@ -3440,11 +3434,11 @@ function speakThen(text, cb){ voiceSpeak(text, cb, 'tutor'); }
 function aiScroll(){ setTimeout(()=>{ const el=document.getElementById('aichat'); if(el) el.scrollTop=el.scrollHeight; },40); }
 async function claudeTutor(sys, history, model){
   await new Promise(res=>loadPuter(res));
-  if(!(window.puter&&window.puter.ai&&window.puter.ai.chat)) throw new Error('Claude voice service unavailable — check your internet (and sign in to Puter once if asked).');
+  if(!(window.puter&&window.puter.ai&&window.puter.ai.chat)) throw new Error('AI service unavailable — check your internet (and sign in to Puter once if asked).');
   const msgs=[{role:'system',content:sys}].concat(history.slice(-24).map(m=>({role:m.role==='user'?'user':'assistant', content:(m.role==='user'&&m.send)||m.text})));
   const r=await window.puter.ai.chat(msgs,{model});
   const txt=(r&&r.message&&r.message.content&&r.message.content[0]&&r.message.content[0].text)||(typeof r==='string'?r:'');
-  if(!txt.trim()) throw new Error('No reply from Claude — try again.');
+  if(!txt.trim()) throw new Error('No reply from the AI — try again.');
   return txt.trim();
 }
 async function geminiTutor(sys, history, key){
@@ -3465,17 +3459,14 @@ async function geminiTutor(sys, history, key){
     if(!tryNext) break;
   }
   if(reply==null){ let msg;
-    if(zeroQuota) msg='Your Gemini key has no free quota (limit 0) — usually because billing is enabled on its Google project. Make a fresh key at aistudio.google.com/apikey on a project WITHOUT billing, or switch the Tutor AI to Claude in Settings.';
-    else if(/quota|exceeded|429|rate/i.test(lastErr)) msg='Gemini free-tier limit reached — wait a minute, or switch the Tutor AI to Claude in Settings (free, no quota).';
+    if(zeroQuota) msg='Your Gemini key has no free quota (limit 0) — usually because billing is enabled on its Google project. Make a fresh key at aistudio.google.com/apikey on a project WITHOUT billing, or switch the Tutor AI to Gemini in Settings.';
+    else if(/quota|exceeded|429|rate/i.test(lastErr)) msg='Gemini free-tier limit reached — wait a minute, or switch the Tutor AI to Gemini in Settings (free, no quota).';
     else msg=lastErr; throw new Error(msg); }
   if(used && used!==configured){ DATA.settings.geminiModel=used; persist(); }
   return reply;
 }
 async function aiSend(topicId, text, alts){
-  const engine=DATA.settings.tutorEngine||'claude-sonnet-5';
-  const useClaude=engine.indexOf('claude')===0;
-  const key=(DATA.settings.geminiKey||'').trim();
-  if(!useClaude && !key){ go('settings'); return; }
+  const engine=(DATA.settings.tutorEngine&&DATA.settings.tutorEngine.indexOf('deepseek')===0)?DATA.settings.tutorEngine:'deepseek-v4-flash';
   if(AIBUSY) return;
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
@@ -3506,13 +3497,7 @@ The student answers by VOICE, so words may be mis-transcribed (homophones, wrong
 Keep normal quizzing replies short and easy to say aloud (2-3 sentences); only the deep-dive explanations should be longer. Plain conversational text, no markdown, no bullet lists, no headings. Never invent facts outside the answer key.
 
 ANSWER KEY (${(t.recall||[]).length} cards for "${t.name}"):\n${cards}`;
-    let reply=null;
-    if(useClaude){
-      try{ reply=await claudeTutor(sys, AICHAT[topicId], engine); }
-      catch(e){ if(key) reply=await geminiTutor(sys, AICHAT[topicId], key); else throw e; }
-    } else {
-      reply=await geminiTutor(sys, AICHAT[topicId], key);
-    }
+    let reply=await claudeTutor(sys, AICHAT[topicId], engine);
     AICHAT[topicId].push({role:'model',text:reply});
     AIBUSY=false; render(); aiScroll();
     const audio=aiAudioOn();
@@ -3619,12 +3604,7 @@ function aiStatus(){
 }
 function pageAI(topicId){
   const t=topById(topicId); if(!t||!t.ready) return pageHome();
-  const key=(DATA.settings.geminiKey||'').trim();
   const crumbsHtml=crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}]);
-  if(!key) return crumbsHtml+`<h1>🎙 AI tutor</h1>
-     <div class="aikey"><b>Add your free Gemini key to start.</b>
-      <p class="sub">Get one free at aistudio.google.com/apikey, then paste it in Settings → AI tutor. It stays only on this device.</p>
-      <button class="btn primary" onclick="go('settings')">Open Settings</button></div>`;
   const msgs=AICHAT[topicId]||[];
   const st=aiStatus();
   const bubbles = msgs.length
@@ -3661,7 +3641,7 @@ function pageAI(topicId){
     </div></div>`;
 }
 
-/* ===== "Let AI explain" — highlight note text → step-by-step Claude explanation ===== */
+/* ===== "Let AI explain" — highlight note text → step-by-step DeepSeek explanation ===== */
 let _selText='', _explBtn=null;
 function currentTopicName(){ const p=(location.hash.slice(2)||'').split('/');
   if((p[0]==='topic'||p[0]==='cram'||p[0]==='study') && p[1]){ const t=topById(p[1]); if(t) return t.name; }
@@ -3754,7 +3734,7 @@ function aiRun(prompt){
   loadPuter(async ()=>{
     if(window.puter && window.puter.ai && window.puter.ai.chat){
       try{
-        const model=DATA.settings.explainModel||'claude-sonnet-5';
+        const model=DATA.settings.explainModel||'deepseek-v4-flash';
         const resp=await window.puter.ai.chat(prompt, {model, stream:true});
         let acc=''; setExplBody('');
         for await (const part of resp){ const t=(part&&part.text)||''; if(t){ acc+=t; setExplBodyMd(acc); } }
@@ -3762,9 +3742,8 @@ function aiRun(prompt){
         const r2=await window.puter.ai.chat(prompt, {model});
         const txt=(r2&&r2.message&&r2.message.content&&r2.message.content[0]&&r2.message.content[0].text)||(typeof r2==='string'?r2:'');
         if(txt.trim()){ setExplBodyMd(txt); return; }
-      }catch(e){ /* fall through to Gemini */ }
+      }catch(e){ /* fall through to error */ }
     }
-    if((DATA.settings.geminiKey||'').trim()) return geminiExplain(prompt);
     setExplBody('<p>Could not reach the AI service. Check your internet — and if Puter asks you to sign in (free), do that once, then try again.</p>');
   });
 }
@@ -3779,8 +3758,8 @@ async function geminiExplain(prompt){
     setExplBodyMd(txt);
   }catch(e){ setExplBody('<p>Explanation failed: '+esc(e.message||String(e))+'</p>'); }
 }
-function setExplainModel(v){ DATA.settings.explainModel=v||'claude-sonnet-5'; persist(); render(); }
-function setTutorEngine(v){ DATA.settings.tutorEngine=v||'claude-sonnet-5'; persist(); if(v&&v.indexOf('claude')===0) loadPuter(); render(); }
+function setExplainModel(v){ DATA.settings.explainModel=v||'deepseek-v4-flash'; persist(); render(); }
+function setTutorEngine(v){ DATA.settings.tutorEngine=v||'deepseek-v4-flash'; persist(); loadPuter(); render(); }
 
 /* ---------- weekly topic plan (source of daily NEW cards) ---------- */
 function unseenCount(t){ return (t.recall||[]).filter(c=>!DATA.cards[cid(t.id,'recall',c)]).length; }
