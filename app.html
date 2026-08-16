@@ -1844,6 +1844,8 @@ function pageTopic(id){
     body = renderWritten(t);
   } else if(topicTab==='podcast'){
     body = renderPodcast(t);
+  } else if(topicTab==='videos'){
+    body = renderVizList(t);
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
@@ -1902,8 +1904,22 @@ function modeSwitcher(t){
     ${sw('✍ Fill-blank',"topicTab='fill';render()",topicTab==='fill')}
     ${sw('🧪 Written',"topicTab='written';render()",topicTab==='written')}
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
+    ${sw('🎬 Videos'+(((DATA.viz&&DATA.viz[t.id])||[]).length?' ('+DATA.viz[t.id].length+')':''),"topicTab='videos';render()",topicTab==='videos')}
   </div>`;
 }
+function renderVizList(t){
+  var list=(DATA.viz&&DATA.viz[t.id])||[];
+  if(!list.length) return '<div class="empty" style="text-align:left"><b style="color:var(--text)">No videos yet.</b><br><br>Open <b>Notes</b> or <b>Simplified</b>, highlight a sentence and tap <b>🎬 Visualize this</b>. Your explainer videos collect here for one-tap replay.</div>';
+  var rows=list.map(function(v,i){ var snip=v.text.length>150?v.text.slice(0,150)+'…':v.text;
+    return '<div class="card" style="cursor:default;display:flex;align-items:center;gap:12px;justify-content:space-between">'
+      +'<div style="flex:1"><div style="font-size:13.5px;color:var(--text);line-height:1.45">'+esc(snip)+'</div><div style="font-size:11px;color:var(--dim);margin-top:3px">🎬 saved explainer</div></div>'
+      +'<div style="display:flex;gap:6px;flex:none"><button class="btn primary" style="font-size:12.5px" onclick="playViz(\''+t.id+'\','+i+')">▶ Play</button>'
+      +'<button class="btn" style="font-size:12.5px" onclick="delViz(\''+t.id+'\','+i+')" title="Remove">🗑</button></div></div>';
+  }).join('');
+  return '<div style="margin-bottom:10px;color:var(--dim);font-size:13px">Your visualized explainers for this topic — tap to replay (instant, cached).</div>'+rows;
+}
+function playViz(tid,i){ try{ var v=((DATA.viz&&DATA.viz[tid])||[])[i]; if(v){ var t=topById(tid); window.aiVisualize(v.text,(t&&t.name)||'',tid); } }catch(e){} }
+function delViz(tid,i){ try{ if(DATA.viz&&DATA.viz[tid]){ DATA.viz[tid].splice(i,1); if(!DATA.viz[tid].length) delete DATA.viz[tid]; persist(); render(); } }catch(e){} }
 function genPrompt(topicId,kind,label){
   return `<div class="empty" style="text-align:center">
     <b style="color:var(--text)">${label} isn't built for this lecture yet.</b>
@@ -3665,7 +3681,7 @@ function showExplainBtn(r, canViz){
   if(canViz) html+='<button class="explbtn vizbtn2" data-a="viz">🎬 Visualize this</button>';
   _explBtn.innerHTML=html;
   _explBtn.querySelector('[data-a=explain]').onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); };
-  var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName()); };
+  var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName(), (window.currentTopicId?currentTopicId():'')); };
   const bw=168, bh=canViz?90:42;
   let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
   let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
@@ -3860,6 +3876,7 @@ function render(){
   $('#main').innerHTML=html; renderNav();
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
+  if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
@@ -4067,6 +4084,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
 .vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 .vzflow{stroke-dasharray:9 6;animation:vzmarch 1s linear infinite}@keyframes vzmarch{to{stroke-dashoffset:-30}}
+/* saved-per-note Watch marker */
+.vizmark{background:#efe7fb;border-radius:4px;padding:0 2px;box-shadow:inset 0 -2px 0 #c4b5fd}
+.vizwatch{display:inline-flex;align-items:center;gap:2px;font-size:10px;font-weight:800;color:#fff;background:linear-gradient(135deg,#7c3aed,#0d9488);border-radius:6px;padding:1px 6px;margin:0 3px;cursor:pointer;vertical-align:1px;user-select:none;white-space:nowrap}
 </style>
 <script>
 /* ===== Visualize Text — in-app engine (renders blueprints from /visualize, narrates via Kokoro) ===== */
@@ -4167,15 +4187,43 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&j.error)||'Could not build a visualization.');
     return j.blueprint;
   }
-  window.aiVisualize=async function(text, topicName){
+  window.aiVisualize=async function(text, topicName, topicId){
     openModal();
     try{
       var bp=await fetchBlueprint(text, topicName);
       if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
       BP=bp; T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;});
+      recordViz(topicId||(window.currentTopicId?currentTopicId():''), text);   // save this video against the note
       mountPlayer(); setTimeout(play,400);
     }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }
   };
+
+  /* ---- saved-per-note "Watch" markers ---- */
+  window.currentTopicId=function(){ var p=(location.hash.slice(2)||'').split('/'); return (p[0]==='topic'&&p[1])?p[1]:''; };
+  function recordViz(topicId,text){ if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
+    if(t && !a.some(function(x){return x.text===t;})){ a.push({text:t,ts:Date.now()}); if(window.persist)persist(); } }catch(e){} }
+  window.markWatchedNote=function(){ try{
+    var host=document.querySelector('#main .notebody'); if(!host)return;
+    var tid=window.currentTopicId(); var list=(window.DATA&&DATA.viz&&DATA.viz[tid])||[]; if(!list.length)return;
+    var name=(window.currentTopicName?currentTopicName():'');
+    list.forEach(function(item){ wrapPhrase(host,item.text,tid,name); });
+  }catch(e){} };
+  function wrapPhrase(host,phrase,tid,name){ if(!phrase||phrase.length<4)return;
+    var walker=document.createTreeWalker(host,NodeFilter.SHOW_TEXT,null),node;
+    while(node=walker.nextNode()){
+      var pe=node.parentElement; if(pe&&pe.closest&&pe.closest('.vizmark'))continue;
+      var idx=node.nodeValue.indexOf(phrase); if(idx<0)continue;
+      var before=node.nodeValue.slice(0,idx), match=node.nodeValue.slice(idx,idx+phrase.length), after=node.nodeValue.slice(idx+phrase.length);
+      var span=document.createElement('span'); span.className='vizmark'; span.textContent=match;
+      var chip=document.createElement('span'); chip.className='vizwatch'; chip.textContent='▶ watch'; chip.title='Replay this visualization';
+      chip.onclick=function(e){ e.stopPropagation(); window.aiVisualize(phrase,name,tid); };
+      var frag=document.createDocumentFragment();
+      if(before)frag.appendChild(document.createTextNode(before));
+      frag.appendChild(span); frag.appendChild(chip);
+      if(after)frag.appendChild(document.createTextNode(after));
+      node.parentNode.replaceChild(frag,node); return;   // mark first occurrence only
+    }
+  }
 })();
 </script>
 </body>

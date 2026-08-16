@@ -1,0 +1,48 @@
+{
+  "_note": "Single source of truth for the Visualize engine. The renderer draws by asset id; the prompt lists what exists; the QC critic enforces validity. Grow it by adding a template zone and/or an asset entry (and a matching draw fn in the engine). 'scale' documents the spatial scale so scale-variant assets (e.g. cell_closeup vs cell_micro) can't be used in the wrong context.",
+  "templates": {
+    "membrane_cell": {
+      "scale": "cellular",
+      "use": "signalling / transport across ONE cell membrane (lumen | cell | blood)",
+      "zones": {
+        "lumen":  { "scale": 1 },
+        "apical": { "scale": 1 },
+        "intra":  { "scale": 1 },
+        "baso":   { "scale": 1 },
+        "blood":  { "scale": 1 }
+      }
+    },
+    "neuro_pathway": {
+      "scale": "tissue",
+      "use": "a neuron/synapse journey: periphery -> axon -> CNS -> presynapse -> cleft -> postsynapse -> effector",
+      "zones": {
+        "peri":  { "scale": 0.9 },
+        "axon":  { "scale": 1 },
+        "cns":   { "scale": 1 },
+        "pre":   { "scale": 1.1 },
+        "cleft": { "scale": 1 },
+        "post":  { "scale": 1 },
+        "eff":   { "scale": 1 }
+      }
+    }
+  },
+  "assets": {
+    "hormone_bubble": { "category": "signal",    "scale": "molecular", "valid_templates": ["membrane_cell","neuro_pathway"] },
+    "toxin":          { "category": "signal",    "scale": "molecular", "valid_templates": ["neuro_pathway","membrane_cell"] },
+    "receptor":       { "category": "membrane",  "scale": "molecular", "valid_templates": ["membrane_cell","neuro_pathway"], "valid_zones": ["apical","baso","pre","post","cns"] },
+    "gprotein":       { "category": "signal",    "scale": "molecular", "valid_templates": ["membrane_cell"] },
+    "enzyme":         { "category": "protein",   "scale": "molecular", "valid_templates": ["membrane_cell","neuro_pathway"] },
+    "messenger":      { "category": "signal",    "scale": "molecular", "valid_templates": ["membrane_cell"] },
+    "kinase":         { "category": "protein",   "scale": "molecular", "valid_templates": ["membrane_cell"] },
+    "vesicle":        { "category": "organelle", "scale": "subcellular","valid_templates": ["membrane_cell","neuro_pathway"] },
+    "channel":        { "category": "membrane",  "scale": "molecular", "valid_templates": ["membrane_cell","neuro_pathway"], "valid_zones": ["apical","baso","pre","post"] },
+    "water":          { "category": "molecule",  "scale": "molecular", "valid_templates": ["membrane_cell"] },
+    "neuron_soma":    { "category": "cell",      "scale": "cellular",  "valid_templates": ["neuro_pathway"], "valid_zones": ["cns","post","pre"] },
+    "snare":          { "category": "protein",   "scale": "molecular", "valid_templates": ["neuro_pathway","membrane_cell"] },
+    "muscle":         { "category": "tissue",    "scale": "tissue",    "valid_templates": ["neuro_pathway"], "valid_zones": ["eff"] },
+    "lightning":      { "category": "marker",    "scale": "any",       "valid_templates": ["neuro_pathway","membrane_cell"] },
+    "node":           { "category": "cell",      "scale": "cellular",  "valid_templates": ["neuro_pathway","membrane_cell"] },
+    "blockx":         { "category": "marker",    "scale": "any",       "valid_templates": ["neuro_pathway","membrane_cell"] },
+    "label":          { "category": "marker",    "scale": "any",       "valid_templates": ["membrane_cell","neuro_pathway"] }
+  }
+}
