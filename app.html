@@ -4218,6 +4218,51 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   function introOf(id){ for(var s=0;s<BP.narration_steps.length;s++){ if((BP.narration_steps[s].reveal||[]).indexOf(id)>=0)return s; } return 0; }
   function cutFrom(id){ for(var s=0;s<BP.narration_steps.length;s++){ if((BP.narration_steps[s].cut||[]).indexOf(id)>=0)return s; } return -1; }
   function anchor(ref,step){ if(elMap[ref])return posAt(elMap[ref],step); var z=T2.zones[ref]; return z?{x:z.x,y:z.y}:{x:0,y:0}; }
+  /* ===== Whiteboard TREE mode (fallback for definitions / structures / lists) ===== */
+  var TREE=null;
+  var TCOL=['#7c3aed','#0d9488','#2563eb','#e0632b','#9333ea','#0d7a68','#b45309'];
+  function layoutTree(){
+    var nodes=BP.nodes||[],byId={}; nodes.forEach(function(n){byId[n.id]=n;});
+    var root=BP.root||(nodes[0]&&nodes[0].id);
+    var kids={}; nodes.forEach(function(n){ if(n.parent!=null){(kids[n.parent]=kids[n.parent]||[]).push(n.id);} });
+    var depth={}; (function dd(id,d){ if(depth[id]!=null)return; depth[id]=d; (kids[id]||[]).forEach(function(c){dd(c,d+1);}); })(root,0);
+    var box={}; nodes.forEach(function(n){ var lab=n.label||n.id; box[n.id]={w:Math.max(128,Math.min(200,lab.length*8.4+28)),h:(n.note?54:40)}; });
+    var rowH=70,colW=224,mx=26,my=40,leaf=0,pos={};
+    (function place(id){ var ch=kids[id]||[],d=depth[id]||0,x=mx+d*colW,y;
+      if(!ch.length){ y=my+leaf*rowH; leaf++; } else { var ys=ch.map(place); y=(ys[0]+ys[ys.length-1])/2; }
+      pos[id]={x:x,y:y}; return y; })(root);
+    var maxD=0; for(var k in depth) maxD=Math.max(maxD,depth[k]);
+    var W=mx*2+(maxD+1)*colW-(colW-200), H=Math.max(rowH*Math.max(leaf,1)+my*0.5,220);
+    // colour: root purple; each first-level branch gets its own hue, inherited by its subtree
+    var col={}; col[root]=TCOL[0]; var bi=0;
+    (kids[root]||[]).forEach(function(cid){ var c=TCOL[1+(bi++%(TCOL.length-1))]; (function paint(id){ col[id]=c; (kids[id]||[]).forEach(paint); })(cid); });
+    TREE={byId:byId,kids:kids,root:root,pos:pos,box:box,col:col,vb:[W,H]};
+  }
+  function tNode(n,active){ var p=TREE.pos[n.id],b=TREE.box[n.id],c=TREE.col[n.id]||'#7c3aed';
+    var x=p.x,y=p.y-b.h/2,cx=x+b.w/2, cls=active?'vzglow vzpop':'vzpop';
+    var s='<g class="'+cls+'">';
+    s+='<rect x="'+x+'" y="'+y+'" width="'+b.w+'" height="'+b.h+'" rx="10" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3:2)+'"/>';
+    s+='<rect x="'+x+'" y="'+y+'" width="5" height="'+b.h+'" rx="2.5" fill="'+c+'"/>';
+    s+=T(cx,y+(n.note?20:24),n.label||n.id,{size:12.5,w:800,fill:c});
+    if(n.note) s+=T(cx,y+38,n.note,{size:10.5,w:600,fill:'#6b6580'});
+    return s+'</g>';
+  }
+  function tConnector(n){ var pp=TREE.pos[n.parent],pb=TREE.box[n.parent],cp=TREE.pos[n.id];
+    var x1=pp.x+pb.w,y1=pp.y,x2=cp.x,y2=cp.y,mxp=(x1+x2)/2;
+    return '<path d="M'+x1+','+y1+' C'+mxp+','+y1+' '+mxp+','+y2+' '+x2+','+y2+'" stroke="#cbb8ee" stroke-width="2.4" fill="none"/>';
+  }
+  function treeSVG(step){
+    var vb=TREE.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+    s.push('<rect x="0" y="0" width="'+vb[0]+'" height="'+vb[1]+'" fill="#fbfcff"/>');
+    for(var gx=40;gx<vb[0];gx+=40) s.push('<line x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+vb[1]+'" stroke="#eef1f8" stroke-width="1"/>');
+    for(var gy=40;gy<vb[1];gy+=40) s.push('<line x1="0" y1="'+gy+'" x2="'+vb[0]+'" y2="'+gy+'" stroke="#eef1f8" stroke-width="1"/>');
+    var shown={}; for(var st=0;st<=step;st++)(BP.narration_steps[st].reveal||[]).forEach(function(id){shown[id]=1;});
+    if(!Object.keys(shown).length) shown[TREE.root]=1;
+    var act={}; (BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    (BP.nodes||[]).forEach(function(n){ if(n.parent!=null && shown[n.id] && shown[n.parent]) s.push(tConnector(n)); });
+    (BP.nodes||[]).forEach(function(n){ if(shown[n.id]) s.push(tNode(n,!!act[n.id])); });
+    s.push('</svg>'); return s.join('');
+  }
   function sceneSVG(step){
     var vb=T2.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
     s.push(T2.backdrop());
@@ -4258,13 +4303,16 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     $('vizScrub').oninput=function(){ jump(+this.value); };
     render(0);
   }
-  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; w.innerHTML=sceneSVG(i); move();
+  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; w.innerHTML=(BP.layout==='tree')?treeSVG(i):sceneSVG(i); move();
     var s=BP.narration_steps[i]; var term=s.term||'';
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
     $('vizScrub').value=i;
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c,k){c.classList.toggle('on',k<i);});
   }
-  function move(){ var s=BP.narration_steps[i],ref=s.point,p=ref?anchor(ref,i):null,c=$('vizCur'); if(!p||!c)return; c.style.left=(p.x/T2.vb[0]*100)+'%'; c.style.top=(p.y/T2.vb[1]*100)+'%'; }
+  function move(){ var s=BP.narration_steps[i],ref=s.point,c=$('vizCur'); if(!ref||!c)return; var p,vb;
+    if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return; var b=TREE.box[ref]; p={x:pos.x+b.w/2,y:pos.y}; vb=TREE.vb; }
+    else { p=anchor(ref,i); vb=T2.vb; }
+    if(!p)return; c.style.left=(p.x/vb[0]*100)+'%'; c.style.top=(p.y/vb[1]*100)+'%'; }
   function say(text,cb){ try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read'); return; } }catch(e){} if(window.speechSynthesis){var u=new SpeechSynthesisUtterance(text);u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u);} else setTimeout(cb,2600); }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause'; playStep(); }
@@ -4282,7 +4330,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     try{
       var bp=await fetchBlueprint(text, topicName);
       if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
-      BP=bp; T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;});
+      BP=bp;
+      if(bp.layout==='tree'){ layoutTree(); }
+      else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
       recordViz(topicId||(window.currentTopicId?currentTopicId():''), text);   // save this video against the note
       mountPlayer(); setTimeout(play,400);
     }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }

@@ -70,9 +70,18 @@ function assetMapText(){
 
 /* built fresh each call so overlay-approved templates/assets appear immediately */
 function visSystem(){ return (
-`You are the DIRECTOR of a step-by-step medical explainer diagram. You do NOT draw — you output a
-JSON blueprint that a fixed renderer draws. Obey every rule:
+`You are the DIRECTOR of a step-by-step medical explainer. You do NOT draw — you output a JSON
+blueprint that a fixed renderer draws. FIRST choose the MODE that fits the highlighted text:
 
+• MODE "mechanism" — the text describes a PROCESS / cause-and-effect chain (A causes B causes C).
+  Use the animated cell/synapse templates below.
+• MODE "tree" — the text is a DEFINITION, CLASSIFICATION, LIST, STRUCTURE, or set of facts with no
+  causal flow (e.g. "the two toxins are…", "a 150-kd protein made of a heavy and light chain",
+  "types / features / components of X"). Build a WHITEBOARD TREE: a root concept that branches into
+  sub-points, revealed one at a time like a teacher building a mind-map. This is the FALLBACK so
+  every highlight produces something useful — if it isn't a clear cascade, use tree mode.
+
+═══════ MODE "mechanism" ═══════
 TEMPLATES (pick exactly ONE whose scale fits the concept):
 ${Object.entries(VOCAB.templates).map(([k,v])=>"• "+k+" ["+v.scale+"] — "+v.use+" — zones: "+v.zones.join(", ")).join("\n")}
 
@@ -89,7 +98,16 @@ RULES (all mandatory):
 7. Stay faithful to the source text and standard physiology; invent nothing.
 
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"template":"","elements":[{"id":"","type":"","zone":"","lane":0,"label":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"arrows":[{"from":"","to":"","color":"#7c3aed"}],"point":""}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"template":"","elements":[{"id":"","type":"","zone":"","lane":0,"label":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"arrows":[{"from":"","to":"","color":"#7c3aed"}],"point":""}]}
+
+═══════ MODE "tree" (whiteboard) ═══════
+Rules:
+1. "root" is the id of the central concept. Every other node has a "parent" (an existing id) — forming a tree, 2–4 levels deep.
+2. 6–14 nodes total. Each node: short "id", short "label" (≤ 5 words), optional "note" (≤ 8 words of detail).
+3. narration_steps reveal the tree progressively — usually root first, then each branch. EVERY node must be revealed by some step. "point" each step at the node it explains.
+4. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY. The last step recaps. Stay faithful to the source; invent nothing.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"tree","root":"n0","nodes":[{"id":"n0","label":"","note":""},{"id":"n1","parent":"n0","label":"","note":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -106,6 +124,28 @@ export const EXEMPLARS = [
         {short:"PKA",term:"PKA",narration_text:"cAMP activates protein kinase A.",reveal:["pka"],active:["pka"],arrows:[{from:"camp",to:"pka",color:"#7c3aed"}],point:"pka"},
         {short:"Insert",term:"aquaporin-2",narration_text:"PKA drives aquaporin-2 vesicles to fuse with the apical membrane.",reveal:["ves","aqp"],active:["aqp"],arrows:[{from:"pka",to:"ves",color:"#14b8a6"},{from:"ves",to:"aqp",color:"#14b8a6"}],point:"aqp"},
         {short:"Water",term:"water reabsorption",narration_text:"Water flows from the lumen into the cell, then to blood via AQP3/4. Recap: ADH → cAMP → PKA → AQP2 → water reabsorbed.",reveal:["w","aqp3"],active:["w"],arrows:[{from:"w",to:"aqp",color:"#2563eb"},{from:"aqp",to:"aqp3",color:"#2563eb"}],point:"aqp3"}
+      ]} },
+  { text: "The two toxins: Tetanolysin — a haemolysin with no recognized pathologic activity. Tetanospasmin — responsible for tetanus; a 150-kd protein of a 100-kd heavy chain and a 50-kd light chain joined by a disulphide bond.",
+    blueprint: {meta:{title:"Clostridium tetani toxins",subject:"Microbiology",concept_id:"tetani_toxins_structure"},layout:"tree",root:"tox",
+      nodes:[
+        {id:"tox",label:"C. tetani toxins",note:"two produced"},
+        {id:"tl",parent:"tox",label:"Tetanolysin",note:"a haemolysin"},
+        {id:"tl1",parent:"tl",label:"No pathologic role",note:"not clinically important"},
+        {id:"ts",parent:"tox",label:"Tetanospasmin",note:"causes the disease"},
+        {id:"ts1",parent:"ts",label:"Extremely potent",note:"lethal dose ~2.5 ng/kg"},
+        {id:"ts2",parent:"ts",label:"150-kd protein",note:"one disulphide bond"},
+        {id:"hc",parent:"ts2",label:"Heavy chain 100-kd",note:"binds motor neuron"},
+        {id:"lc",parent:"ts2",label:"Light chain 50-kd",note:"the toxic part"}
+      ],
+      narration_steps:[
+        {short:"Two toxins",term:"toxins",narration_text:"Clostridium tetani makes two toxins. Let's break them down.",reveal:["tox"],active:["tox"],point:"tox"},
+        {short:"Tetanolysin",term:"tetanolysin",narration_text:"Tetanolysin is a haemolysin.",reveal:["tl"],active:["tl"],point:"tl"},
+        {short:"Harmless",term:"no role",narration_text:"It has no recognized pathologic activity — not the one that matters clinically.",reveal:["tl1"],active:["tl1"],point:"tl1"},
+        {short:"Tetanospasmin",term:"tetanospasmin",narration_text:"Tetanospasmin is the toxin responsible for tetanus.",reveal:["ts"],active:["ts"],point:"ts"},
+        {short:"Potency",term:"potency",narration_text:"It is one of the most potent toxins known — a lethal dose is about 2.5 nanograms per kilogram.",reveal:["ts1"],active:["ts1"],point:"ts1"},
+        {short:"Structure",term:"150-kd",narration_text:"It is a 150-kilodalton protein held together by a single disulphide bond.",reveal:["ts2"],active:["ts2"],point:"ts2"},
+        {short:"Heavy chain",term:"heavy chain",narration_text:"The 100-kd heavy chain binds the presynaptic motor neuron.",reveal:["hc"],active:["hc"],point:"hc"},
+        {short:"Light chain",term:"light chain",narration_text:"The 50-kd light chain is the toxic part. Recap: two toxins — harmless tetanolysin, and potent two-chain tetanospasmin.",reveal:["lc"],active:["lc"],point:"lc"}
       ]} }
 ];
 
@@ -117,8 +157,42 @@ export function buildVisualPrompt(text, subject){
 
 export function textKey(text){ return createHash("md5").update((text||"").toLowerCase().replace(/\s+/g," ").trim()).digest("hex"); }
 
-/* QC critic — deterministic, manifest-enforced */
+/* Whiteboard TREE validity: valid hierarchy, no cycles, every node reachable + revealed. */
+export function treeCheck(bp){
+  const issues = [];
+  if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
+  if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
+  const nodes = Array.isArray(bp.nodes)?bp.nodes:[];
+  if(nodes.length<3) issues.push("too few nodes ("+nodes.length+", need ≥3)");
+  if(nodes.length>16) issues.push("too many nodes ("+nodes.length+")");
+  const byId={}; nodes.forEach(n=>{ if(!n.id) issues.push("node missing id"); else byId[n.id]=n; });
+  const root = bp.root || (nodes[0]&&nodes[0].id);
+  if(!byId[root]) issues.push("root node not found: "+root);
+  // parents valid, no cycles, all reachable from root
+  nodes.forEach(n=>{ if(n.id!==root){ if(!n.parent) issues.push("node '"+n.id+"' has no parent"); else if(!byId[n.parent]) issues.push("node '"+n.id+"' parent not found: "+n.parent); } });
+  const seen={}; let cyc=false;
+  nodes.forEach(n=>{ let c=n, hops=0; const path={}; while(c && c.parent && hops++<50){ if(path[c.id]){cyc=true;break;} path[c.id]=1; c=byId[c.parent]; } });
+  if(cyc) issues.push("the tree has a cycle (a node is its own ancestor)");
+  // reachability from root
+  const reach={}; (function walk(id){ if(reach[id])return; reach[id]=1; nodes.filter(x=>x.parent===id).forEach(x=>walk(x.id)); })(root);
+  nodes.forEach(n=>{ if(!reach[n.id]) issues.push("node '"+n.id+"' is not connected to the root"); });
+  // steps reveal every node
+  const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+")");
+  if(steps.length>16) issues.push("too many steps ("+steps.length+")");
+  const revealed={}; steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
+    if(s.point && !byId[s.point]) issues.push("step "+(i+1)+" point bad ref "+s.point);
+  });
+  nodes.forEach(n=>{ if(!revealed[n.id]) issues.push("node '"+(n.label||n.id)+"' is never revealed (missing step)"); });
+  return { pass: issues.length===0, issues };
+}
+
+/* QC critic — deterministic, manifest-enforced. Delegates to treeCheck for whiteboard mode. */
 export function qcCheck(bp){
+  if(bp && bp.layout==="tree") return treeCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -165,6 +239,12 @@ export function qcCheck(bp){
  * this is the causal chain as the student experiences it. Markers/labels excluded. */
 const ANNOTATION = new Set(["label","blockx","lightning"]);
 export function chainOf(bp){
+  if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
+    const nodes = bp.nodes||[], byId={}; nodes.forEach(n=>byId[n.id]=n);
+    const root = bp.root || (nodes[0]&&nodes[0].id), out=[];
+    (function walk(id){ const n=byId[id]; if(!n)return; out.push(n.label||n.id); nodes.filter(x=>x.parent===id).forEach(x=>walk(x.id)); })(root);
+    return out.length?out:nodes.map(n=>n.label||n.id);
+  }
   const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
   const steps = (bp && bp.narration_steps) || [];
   const firstReveal = {};
@@ -179,6 +259,7 @@ export function chainOf(bp){
  * every element is revealed and wired in. Catches skipped links (disconnected sub-chains),
  * orphan elements (revealed but never connected), and elements that never appear. Deterministic. */
 export function graphCheck(bp){
+  if(bp && bp.layout==="tree") return { pass:true, issues:[], components:1 };   // tree connectivity handled by treeCheck
   const issues = [];
   const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
   const steps = (bp && bp.narration_steps) || [];

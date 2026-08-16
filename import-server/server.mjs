@@ -137,7 +137,7 @@ async function extractContent(body){
 const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash";  // cheap + fast → basic tier
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
-async function generate({ model, prompt, parts, images, max_tokens, temperature }){
+async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
   // Claude is retired for this app: route any Claude / empty text model to DeepSeek.
   // (Vision models like gpt-4o / gemini are left alone so Solve keeps working.)
   if(!model || /^claude/i.test(model)) model = TEXT_MODEL;
@@ -161,7 +161,7 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature 
       .concat(textParts.map(t=>({ text:t })));
     const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+key, {
       method:"POST", headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ contents:[{ role:"user", parts:gparts }], generationConfig:{ maxOutputTokens:max_tokens, temperature } })
+      body: JSON.stringify({ contents:[{ role:"user", parts:gparts }], generationConfig:{ maxOutputTokens:max_tokens, temperature, ...(json?{responseMimeType:"application/json"}:{}) } })
     });
     const j = await r.json();
     if(!r.ok) throw new Error("Gemini: "+((j.error&&j.error.message)||r.status));
@@ -182,6 +182,9 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature 
   const body = { model, messages:[{ role:"user", content }] };
   if(isDeep){ body.max_tokens = max_tokens; body.temperature = temperature; }
   else { body.max_completion_tokens = max_tokens; }   // OpenAI newer models: leave temperature default
+  // JSON mode: forces a clean JSON object and suppresses chain-of-thought preamble that otherwise
+  // eats the whole token budget before any JSON is emitted (the cause of "parse failed" on reasoning models)
+  if(json) body.response_format = { type:"json_object" };
   const r = await fetch(base+"/chat/completions", { method:"POST",
     headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body) });
   const j = await r.json();
@@ -596,7 +599,7 @@ SOURCE TEXT: "${text.slice(0,1000)}"
 An explainer animation shows this ordered causal chain: ${chain.join(" -> ")}.
 List ONLY essential mechanistic steps that are present in the source (or are standard, non-optional physiology for this process) but are MISSING or SKIPPED from the chain. Do not add nice-to-have detail, examples, or anything not needed to understand the mechanism. If nothing essential is missing, return an empty list.
 Return ONLY JSON: {"missing":["short name of skipped step", ...]}`;
-  const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:600, temperature:0.1 });
+  const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:600, temperature:0.1, json:true });
   const o = parseBlueprint(gen.text) || {};
   const missing = Array.isArray(o.missing) ? o.missing.filter(x=>typeof x==="string" && x.trim()).slice(0,6) : [];
   return { missing };
@@ -615,10 +618,10 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint){ const b=c.data.blueprint; b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
+      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(b.layout!=="tree"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
     // generate blueprint (Flash — in-app, always cheap tier)
     const prompt = buildVisualPrompt(text, subject);
-    let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2 });
+    let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
     let bp = parseBlueprint(gen.text);
     // combined validity: structural (QC) + causal-completeness (graph). Both feed the corrective retry.
     const evalBp = (b)=>{ const q=qcCheck(b), g=b?graphCheck(b):{pass:false,issues:[]}; return { pass:q.pass&&g.pass, issues:[...(q.issues||[]),...(g.issues||[])], qc:q, g }; };
@@ -632,7 +635,7 @@ app.post("/visualize", async (req,res)=>{
     if(!ev.pass){                                   // one corrective retry with the combined issues (skipped steps included)
       const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- "
                 + ev.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,4000);
-      const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:8000, temperature:0.2 });
+      const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
       const bp2 = parseBlueprint(gen2.text);
       if(!bp2) console.warn("[visualize] retry parse failed. raw head:", (gen2.text||"").slice(0,300));
       const ev2 = evalBp(bp2);
@@ -645,16 +648,18 @@ app.post("/visualize", async (req,res)=>{
     if(completeness.missing && completeness.missing.length){
       const add = prompt + "\n\nYour previous blueprint SKIPPED these essential steps from the source: "
                 + completeness.missing.join("; ") + ".\nRegenerate the FULL blueprint including them, keeping everything else. Return ONLY JSON.\n\nPREVIOUS:\n"+JSON.stringify(bp).slice(0,4000);
-      try{ const gen3 = await generate({ model: BASIC_MODEL, prompt:add, parts:[], images:[], max_tokens:8000, temperature:0.2 });
+      try{ const gen3 = await generate({ model: BASIC_MODEL, prompt:add, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
         const bp3 = parseBlueprint(gen3.text), ev3 = evalBp(bp3);
         if(bp3 && ev3.pass) { bp = bp3; ev = ev3; completeness.fixed = true; }
       }catch(e){ console.warn("[visualize] completeness regen skipped:", e.message); }
     }
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
-    bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
-    bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
-    bp._chain = chainOf(bp);                 // the causal chain, in order (transparency / debugging)
+    if(bp.layout!=="tree"){                   // scene-mode only: tree mode needs no zones/assets
+      bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
+      bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
+    }
+    bp._chain = chainOf(bp);                 // the causal chain / tree traversal, in order (transparency / debugging)
     res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -729,7 +734,7 @@ app.get("/admin/viz/selftest", async (req,res)=>{
     const sentence = (req.query.text||"ADH increases water reabsorption by inserting aquaporin-2 channels in the collecting duct.").toString().slice(0,400);
     const out = { model: BASIC_MODEL, deepseek_key: !!process.env.DEEPSEEK_API_KEY, stage:"start" };
     let gen;
-    try{ gen = await generate({ model:BASIC_MODEL, prompt:buildVisualPrompt(sentence,"self-test"), parts:[], images:[], max_tokens:8000, temperature:0.2 }); }
+    try{ gen = await generate({ model:BASIC_MODEL, prompt:buildVisualPrompt(sentence,"self-test"), parts:[], images:[], max_tokens:8000, temperature:0.2, json:true }); }
     catch(e){ out.stage="api_error"; out.error=e.message; return res.json({ ok:false, ...out }); }
     out.api_ok = true; out.text_len = (gen.text||"").length; out.raw_head = (gen.text||"").slice(0,220);
     if(!out.text_len){ out.stage="empty_response"; return res.json({ ok:false, ...out }); }
@@ -760,7 +765,7 @@ app.post("/admin/viz/grow", async (req,res)=>{
     for(const [type,count] of wanted){
       const ex = sample[type]||{};
       const prompt = ASSET_DRAFT_SYS + `\n\nASSET NAME: ${type}\nSeen in subject: ${ex.subject||"medicine"}\nExample context: ${(ex.source_text||"").slice(0,200)}`;
-      const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:900, temperature:0.3 });
+      const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:900, temperature:0.3, json:true });
       const spec = parseBlueprint(gen.text); if(!spec || !spec.svg) continue;
       spec.id = type;   // key by the requested name so future requests resolve
       const row = { id:type, status:"pending", demand:count, spec, drafted_at:new Date().toISOString() };
