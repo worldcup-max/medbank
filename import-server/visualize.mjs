@@ -102,9 +102,9 @@ export const EXEMPLARS = [
         {short:"ADH",term:"ADH",narration_text:"ADH reaches the collecting-duct cell in the blood.",reveal:["adh"],active:["adh"],point:"adh"},
         {short:"V2",term:"V2 receptor",narration_text:"It binds the V2 receptor on the basolateral membrane.",reveal:["v2"],active:["v2"],arrows:[{from:"adh",to:"v2",color:"#e0632b"}],point:"v2"},
         {short:"Gs",term:"Gs protein",narration_text:"The receptor activates the Gs protein.",reveal:["gs"],active:["gs"],arrows:[{from:"v2",to:"gs",color:"#9333ea"}],point:"gs"},
-        {short:"cAMP",term:"cAMP",narration_text:"Gs turns on adenylyl cyclase, raising cAMP.",reveal:["ac","camp"],active:["camp"],arrows:[{from:"gs",to:"camp",color:"#9333ea"}],point:"camp"},
+        {short:"cAMP",term:"cAMP",narration_text:"Gs turns on adenylyl cyclase, raising cAMP.",reveal:["ac","camp"],active:["camp"],arrows:[{from:"gs",to:"ac",color:"#9333ea"},{from:"ac",to:"camp",color:"#9333ea"}],point:"camp"},
         {short:"PKA",term:"PKA",narration_text:"cAMP activates protein kinase A.",reveal:["pka"],active:["pka"],arrows:[{from:"camp",to:"pka",color:"#7c3aed"}],point:"pka"},
-        {short:"Insert",term:"aquaporin-2",narration_text:"PKA inserts aquaporin-2 channels into the apical membrane.",reveal:["ves","aqp"],active:["aqp"],arrows:[{from:"pka",to:"aqp",color:"#14b8a6"}],point:"aqp"},
+        {short:"Insert",term:"aquaporin-2",narration_text:"PKA drives aquaporin-2 vesicles to fuse with the apical membrane.",reveal:["ves","aqp"],active:["aqp"],arrows:[{from:"pka",to:"ves",color:"#14b8a6"},{from:"ves",to:"aqp",color:"#14b8a6"}],point:"aqp"},
         {short:"Water",term:"water reabsorption",narration_text:"Water flows from the lumen into the cell, then to blood via AQP3/4. Recap: ADH → cAMP → PKA → AQP2 → water reabsorbed.",reveal:["w","aqp3"],active:["w"],arrows:[{from:"w",to:"aqp",color:"#2563eb"},{from:"aqp",to:"aqp3",color:"#2563eb"}],point:"aqp3"}
       ]} }
 ];
@@ -161,6 +161,54 @@ export function qcCheck(bp){
 
 /* Robust JSON extraction — small models wrap the object in ```json fences, a <think> block,
  * or trailing prose, and sometimes truncate the tail. Try hard before giving up. */
+/* Elements ordered by when they first appear (reveal step), then declaration order —
+ * this is the causal chain as the student experiences it. Markers/labels excluded. */
+const ANNOTATION = new Set(["label","blockx","lightning"]);
+export function chainOf(bp){
+  const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
+  const steps = (bp && bp.narration_steps) || [];
+  const firstReveal = {};
+  steps.forEach((s,i)=> (s.reveal||[]).forEach(id=>{ if(firstReveal[id]==null) firstReveal[id]=i; }));
+  return els
+    .map((e,idx)=>({ e, order:(firstReveal[e.id]!=null?firstReveal[e.id]:999), idx }))
+    .sort((a,b)=> a.order-b.order || a.idx-b.idx)
+    .map(x => x.e.label || x.e.id);
+}
+
+/* "Nothing-missed" STRUCTURAL check: a complete cascade is ONE connected directed chain where
+ * every element is revealed and wired in. Catches skipped links (disconnected sub-chains),
+ * orphan elements (revealed but never connected), and elements that never appear. Deterministic. */
+export function graphCheck(bp){
+  const issues = [];
+  const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
+  const steps = (bp && bp.narration_steps) || [];
+  if(els.length < 2) return { pass:true, issues, components:1 };
+  const ids = new Set(els.map(e=>e.id));
+
+  // every chain element must be revealed at some step, or it never renders
+  const revealed = new Set();
+  steps.forEach(s => (s.reveal||[]).forEach(id => revealed.add(id)));
+  for(const e of els) if(!revealed.has(e.id)) issues.push("element '"+(e.label||e.id)+"' is never revealed — it won't appear (missing step)");
+
+  // build the undirected connectivity graph from arrows (+ moves) between chain elements
+  const adj = {}; els.forEach(e => adj[e.id]=new Set());
+  const linked = new Set();
+  const addEdge = (a,b)=>{ if(ids.has(a)&&ids.has(b)&&a!==b){ adj[a].add(b); adj[b].add(a); linked.add(a); linked.add(b); } };
+  steps.forEach(s=>{ (s.arrows||[]).forEach(a=>addEdge(a.from,a.to));
+                     (s.move||[]).forEach(m=>{ if(m.to_id) addEdge(m.id,m.to_id); }); });
+
+  // orphans: chain elements with no connection to anything (a link was skipped)
+  for(const e of els) if(!linked.has(e.id)) issues.push("element '"+(e.label||e.id)+"' is never connected by an arrow (a causal link is missing)");
+
+  // connected components over the linked nodes — more than one means the chain has a GAP
+  const seen = new Set(); let components = 0;
+  for(const id of linked){ if(seen.has(id)) continue; components++;
+    const stack=[id]; while(stack.length){ const n=stack.pop(); if(seen.has(n))continue; seen.add(n); adj[n].forEach(m=>{ if(!seen.has(m)) stack.push(m); }); } }
+  if(components > 1) issues.push("the cascade is split into "+components+" disconnected parts — a step is missing that links them into one chain");
+
+  return { pass: issues.length===0, issues, components: components||1 };
+}
+
 export function parseBlueprint(raw){
   let t = raw || "";
   if(!t) return null;

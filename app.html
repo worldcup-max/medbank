@@ -2254,6 +2254,9 @@ async function vizAdmSelftest(btn){ var box=$('#vizAdmDiag'); if(btn)btn.disable
     if(d.api_ok!=null) rows.push('AI responded: <b>'+(d.api_ok?'yes':'no')+'</b>'+(d.text_len!=null?(' ('+d.text_len+' chars)'):''));
     if(d.parse_ok!=null) rows.push('Parsed JSON: <b>'+(d.parse_ok?'yes':'no')+'</b>'+(d.parse_ok?(' · '+d.elements+' elements, '+d.steps+' steps, template '+esc(d.template||'?')):''));
     if(d.qc_pass!=null) rows.push('QC: <b>'+(d.qc_pass?'clean':'warnings')+'</b>'+((d.qc_issues&&d.qc_issues.length)?(' — '+esc(d.qc_issues.slice(0,4).join('; '))):''));
+    if(d.graph_pass!=null) rows.push('Chain complete: <b>'+(d.graph_pass?'yes':'gaps')+'</b>'+((d.graph_issues&&d.graph_issues.length)?(' — '+esc(d.graph_issues.slice(0,3).join('; '))):''));
+    if(d.chain&&d.chain.length) rows.push('Chain: <span style="color:var(--dim)">'+esc(d.chain.join(' → '))+'</span>');
+    if(d.completeness) rows.push('Nothing missed: <b>'+((d.completeness.missing&&d.completeness.missing.length)?('no — missing '+esc(d.completeness.missing.join(', '))):'yes')+'</b>');
     if(d.error) rows.push('<span style="color:#ff9db1">Error: '+esc(d.error)+'</span>');
     if(d.raw_head && !d.parse_ok) rows.push('<div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:11px;color:var(--dim);white-space:pre-wrap;word-break:break-word">'+esc(d.raw_head)+'…</div>');
     if(box)box.innerHTML='<div class="card" style="border-left:4px solid '+color+'"><b style="color:'+color+'">'+esc(stageLabels[d.stage]||d.stage||'result')+'</b><div style="margin-top:6px;line-height:1.7">'+rows.join('<br>')+'</div></div>';

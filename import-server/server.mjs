@@ -22,7 +22,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
-import { buildVisualPrompt, qcCheck, parseBlueprint, textKey, renderHints, registerAssets, assetDefs } from "./visualize.mjs";
+import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs } from "./visualize.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -583,6 +583,25 @@ app.post("/tts", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
 });
 
+/* "Nothing-missed" SEMANTIC critic: given the source text and the ordered chain the blueprint
+ * shows, ask the model which ESSENTIAL mechanistic steps are skipped. Deterministic graph checks
+ * catch broken wiring; this catches missing physiology. Guarded + best-effort — never blocks. */
+async function completenessCheck(text, bp){
+  if(process.env.VIZ_COMPLETENESS === "0") return { missing:[] };
+  const chain = chainOf(bp);
+  if(chain.length < 2) return { missing:[] };
+  const prompt =
+`You are a strict medical accuracy checker. Do NOT rewrite anything — only judge completeness.
+SOURCE TEXT: "${text.slice(0,1000)}"
+An explainer animation shows this ordered causal chain: ${chain.join(" -> ")}.
+List ONLY essential mechanistic steps that are present in the source (or are standard, non-optional physiology for this process) but are MISSING or SKIPPED from the chain. Do not add nice-to-have detail, examples, or anything not needed to understand the mechanism. If nothing essential is missing, return an empty list.
+Return ONLY JSON: {"missing":["short name of skipped step", ...]}`;
+  const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:600, temperature:0.1 });
+  const o = parseBlueprint(gen.text) || {};
+  const missing = Array.isArray(o.missing) ? o.missing.filter(x=>typeof x==="string" && x.trim()).slice(0,6) : [];
+  return { missing };
+}
+
 /* Visualize Text — highlighted sentence → step-by-step diagram blueprint (DeepSeek Flash).
  * Cached per highlighted text in the "visualizations" table (generate once, reuse for everyone).
  * Narration audio is produced on the client via /tts (Kokoro) per step. */
@@ -600,27 +619,43 @@ app.post("/visualize", async (req,res)=>{
     // generate blueprint (Flash — in-app, always cheap tier)
     const prompt = buildVisualPrompt(text, subject);
     let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2 });
-    let bp = parseBlueprint(gen.text), qc = qcCheck(bp);
+    let bp = parseBlueprint(gen.text);
+    // combined validity: structural (QC) + causal-completeness (graph). Both feed the corrective retry.
+    const evalBp = (b)=>{ const q=qcCheck(b), g=b?graphCheck(b):{pass:false,issues:[]}; return { pass:q.pass&&g.pass, issues:[...(q.issues||[]),...(g.issues||[])], qc:q, g }; };
+    let ev = evalBp(bp);
     if(!bp) console.warn("[visualize] parse failed. raw head:", (gen.text||"").slice(0,300), "| len:", (gen.text||"").length);
     // capture genuine demand: assets the model reached for that don't exist yet (before the retry forces it back)
     try{
-      const wanted = (qc.issues||[]).map(s=>{ const m=/asset type not in manifest: (\S+)/.exec(s)||/asset '([^']+)' not allowed/.exec(s); return m&&m[1]; }).filter(Boolean);
+      const wanted = (ev.issues||[]).map(s=>{ const m=/asset type not in manifest: (\S+)/.exec(s)||/asset '([^']+)' not allowed/.exec(s); return m&&m[1]; }).filter(Boolean);
       for(const t of new Set(wanted)) await admin.from("viz_expansion_log").insert({ requested_type:t, subject, source_text:text.slice(0,300) });
     }catch(_){}
-    if(!qc.pass){                                   // one corrective retry with the QC issues
+    if(!ev.pass){                                   // one corrective retry with the combined issues (skipped steps included)
       const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- "
-                + qc.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,4000);
+                + ev.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,4000);
       const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:8000, temperature:0.2 });
-      const bp2 = parseBlueprint(gen2.text), qc2 = qcCheck(bp2);
+      const bp2 = parseBlueprint(gen2.text);
       if(!bp2) console.warn("[visualize] retry parse failed. raw head:", (gen2.text||"").slice(0,300));
-      if(bp2 && (qc2.pass || !bp)){ bp = bp2; qc = qc2; }
+      const ev2 = evalBp(bp2);
+      if(bp2 && (ev2.pass || !bp)){ bp = bp2; ev = ev2; }
     }
     if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try selecting one clear sentence, or try again in a moment" });
+    // deeper "nothing-missed" pass: LLM critic vs the source text (guarded; never blocks delivery)
+    let completeness = { missing:[] };
+    try{ completeness = await completenessCheck(text, bp); }catch(e){ console.warn("[visualize] completeness skipped:", e.message); }
+    if(completeness.missing && completeness.missing.length){
+      const add = prompt + "\n\nYour previous blueprint SKIPPED these essential steps from the source: "
+                + completeness.missing.join("; ") + ".\nRegenerate the FULL blueprint including them, keeping everything else. Return ONLY JSON.\n\nPREVIOUS:\n"+JSON.stringify(bp).slice(0,4000);
+      try{ const gen3 = await generate({ model: BASIC_MODEL, prompt:add, parts:[], images:[], max_tokens:8000, temperature:0.2 });
+        const bp3 = parseBlueprint(gen3.text), ev3 = evalBp(bp3);
+        if(bp3 && ev3.pass) { bp = bp3; ev = ev3; completeness.fixed = true; }
+      }catch(e){ console.warn("[visualize] completeness regen skipped:", e.message); }
+    }
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
     bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
     bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
-    res.json({ ok:true, cached:false, blueprint:bp, qc_issues:qc.issues });
+    bp._chain = chainOf(bp);                 // the causal chain, in order (transparency / debugging)
+    res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
@@ -701,9 +736,11 @@ app.get("/admin/viz/selftest", async (req,res)=>{
     const bp = parseBlueprint(gen.text);
     if(!bp){ out.stage="parse_failed"; return res.json({ ok:false, ...out }); }
     out.parse_ok = true; out.template = bp.template; out.elements = (bp.elements||[]).length; out.steps = (bp.narration_steps||[]).length;
-    const qc = qcCheck(bp);
+    const qc = qcCheck(bp), g = graphCheck(bp);
     out.qc_pass = qc.pass; out.qc_issues = qc.issues;
-    out.stage = qc.pass ? "ok" : "qc_warnings";   // QC warnings don't block delivery (a blueprint that parses is still shown)
+    out.graph_pass = g.pass; out.graph_issues = g.issues; out.chain = chainOf(bp);
+    try{ out.completeness = await completenessCheck(sentence, bp); }catch(e){ out.completeness = { missing:[], error:e.message }; }
+    out.stage = (qc.pass && g.pass) ? "ok" : "warnings";   // warnings don't block delivery (a blueprint that parses is still shown)
     res.json({ ok:true, ...out });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
