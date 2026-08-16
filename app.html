@@ -4408,12 +4408,14 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   async function fetchBlueprint(text,subject){
     var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) throw new Error('Visualize needs an internet connection.');
     var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('Please sign in.');
-    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/visualize',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:(text||'').slice(0,1200),subject:subject||''})});
-    var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&j.error)||'Could not build a visualization.');
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/visualize',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:(text||'').slice(0,2000),subject:subject||''})});
+    var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&(j.message||j.error))||'Could not build a visualization.');
     return j.blueprint;
   }
   window.aiVisualize=async function(text, topicName, topicId){
     openModal();
+    var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
+    if(words>110){ $('vizBody').innerHTML='<div class="vizload">📝 That\'s a lot of text — <b>highlight one idea at a time</b> for the sharpest explainer.<br><br><span style="font-size:12.5px;color:#5c5570;font-weight:600">Close this and select a single sentence or mechanism.</span></div>'; return; }
     try{
       var bp=await fetchBlueprint(text, topicName);
       if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }

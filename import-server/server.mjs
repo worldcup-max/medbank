@@ -613,12 +613,23 @@ app.post("/visualize", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const text = (req.body.text||"").toString().trim();
     if(!text) return res.status(400).json({ error:"highlight some text first" });
-    if(text.length>1200) return res.status(400).json({ error:"select a shorter passage (one or two sentences)" });
+    if(text.length>2000) return res.status(400).json({ error:"that passage is very long — highlight one or two sentences (a single mechanism)" });
     const subject = (req.body.subject||"").toString().slice(0,80);
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
       if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(b.layout!=="tree"&&b.layout!=="flow"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
+    // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
+    const premium = await isPremium(user.id).catch(()=>false);
+    const limit = premium ? 10 : 3;
+    try{
+      const since = new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(!cnt.error && (cnt.count||0) >= limit){
+        return res.status(429).json({ error:"daily_limit", limit, premium,
+          message:"You've used today's "+limit+" visualizations"+(premium?"":" on the free plan")+". They reset tomorrow"+(premium?".":" — or go premium for 10 a day.") });
+      }
+    }catch(_){}   // table not created yet → fail open (don't block students)
     // generate blueprint (Flash — in-app, always cheap tier)
     const prompt = buildVisualPrompt(text, subject);
     let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
@@ -655,6 +666,7 @@ app.post("/visualize", async (req,res)=>{
     }
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
+    try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}   // count this NEW build against the daily limit
     if(bp.layout!=="tree"&&bp.layout!=="flow"){                   // scene-mode only: tree mode needs no zones/assets
       bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
       bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used

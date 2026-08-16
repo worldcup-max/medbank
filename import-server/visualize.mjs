@@ -188,10 +188,23 @@ export const EXEMPLARS = [
       ]} }
 ];
 
+/* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
+ * (a cheap local heuristic), instead of all three. The rules still describe every mode, so the
+ * model can still choose any — this just trims ~2/3 of the few-shot tokens. */
+function pickExemplar(text){
+  const t = (text||"").toLowerCase();
+  if(/\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t)) return EXEMPLARS[1]; // tree (definitions/lists win even if a stray causal word appears)
+  if(/membrane|receptor|channel|synap|neuron|axon|reabsorb|secret|lumen|tubule|vesicle|presynap|postsynap|collecting duct/.test(t)) return EXEMPLARS[0]; // mechanism (anatomical scene)
+  return EXEMPLARS[2];   // flow — the default for cascades
+}
+/* Cost optimisation (b): the big CONSTANT block (rules + schemas + the example) goes FIRST and the
+ * variable SOURCE goes LAST, so DeepSeek/OpenAI automatic prompt-caching bills the repeated prefix
+ * at a fraction of the price on subsequent builds. */
 export function buildVisualPrompt(text, subject){
-  const shots = EXEMPLARS.map(e => "SOURCE: "+e.text+"\nBLUEPRINT: "+JSON.stringify(e.blueprint)).join("\n\n");
-  return visSystem() + "\n\nEXAMPLE:\n" + shots +
-    "\n\nNow do the same for this text (subject: "+(subject||"medicine")+"). Output ONLY the JSON blueprint.\nSOURCE: " + (text||"");
+  const e = pickExemplar(text);
+  const shot = "SOURCE: "+e.text+"\nBLUEPRINT: "+JSON.stringify(e.blueprint);
+  return visSystem() + "\n\nEXAMPLE:\n" + shot +
+    "\n\nNow do the same for the SOURCE below (subject: "+(subject||"medicine")+"). Output ONLY the JSON blueprint.\nSOURCE: " + (text||"");
 }
 
 export function textKey(text){ return createHash("md5").update((text||"").toLowerCase().replace(/\s+/g," ").trim()).digest("hex"); }
