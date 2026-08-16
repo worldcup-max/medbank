@@ -618,7 +618,7 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(b.layout!=="tree"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
+      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(b.layout!=="tree"&&b.layout!=="flow"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
     // generate blueprint (Flash — in-app, always cheap tier)
     const prompt = buildVisualPrompt(text, subject);
     let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
@@ -655,7 +655,7 @@ app.post("/visualize", async (req,res)=>{
     }
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
-    if(bp.layout!=="tree"){                   // scene-mode only: tree mode needs no zones/assets
+    if(bp.layout!=="tree"&&bp.layout!=="flow"){                   // scene-mode only: tree mode needs no zones/assets
       bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
       bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
     }

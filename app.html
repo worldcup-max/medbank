@@ -4153,15 +4153,23 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizrail{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:10px}
 .vizrail .rc{font-size:10px;font-weight:800;color:#5c5570;background:#f1eef8;border:1px solid #e7e3f2;border-radius:999px;padding:3px 8px}
 .vizrail .rc.on{background:#6d28d9;color:#fff;border-color:transparent}.vizrail .rs{color:#c9bfe0;font-weight:800;font-size:10px}
-.vizstage{position:relative;border:1px solid #e7e3f2;border-radius:12px;overflow:hidden;background:#fffdf6}
+.vizstage{position:relative;border:1px solid #e7e3f2;border-radius:12px;overflow:auto;background:#fffdf6;max-height:56vh;scroll-behavior:smooth}
+.vizcanvas{position:relative}
 .vizstage svg{display:block;width:100%;height:auto}
 .vizcur{position:absolute;width:24px;height:24px;z-index:6;pointer-events:none;transition:left .9s cubic-bezier(.45,0,.25,1),top .9s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
-.vizcap{min-height:48px;background:#141026;color:#fff;font-size:14px;line-height:1.45;padding:11px 14px;font-weight:600}
+.vizcap{min-height:48px;background:#141026;color:#fff;font-size:14px;line-height:1.45;padding:11px 14px;font-weight:600;border-radius:0 0 10px 10px;margin-top:2px}
 .vizcap .lab{color:#c9b8f5;font-weight:800;font-size:10.5px;letter-spacing:.5px;display:block;margin-bottom:2px}.vizcap b{color:#a5f3e4}
 .vizctrl{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
 .vizctrl button{border:1px solid #e7e3f2;background:#fff;border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
 .vizctrl button.pl{background:#6d28d9;color:#fff;border-color:transparent;min-width:92px}
 .vizctrl input[type=range]{flex:1;min-width:120px;accent-color:#6d28d9}
+.vizsrc{background:#f7f5fc;border:1px solid #e7e3f2;border-radius:10px;padding:9px 12px;font-size:12.5px;color:#4b4560;line-height:1.5;margin-bottom:10px}
+.vizleg{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:11px;color:#5c5570}
+.vizleg span{display:inline-flex;align-items:center}.vizleg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px}
+.vizctrl select{border:1px solid #e7e3f2;border-radius:9px;padding:7px 8px;font-weight:700;font-size:12.5px;background:#fff}
+.vizvoi{font-size:12px;color:#5c5570;display:inline-flex;align-items:center;gap:5px}
+.vizjson{margin-top:10px;font-size:12px;color:#5c5570}.vizjson summary{cursor:pointer;font-weight:700}
+.vizjson pre{max-height:220px;overflow:auto;background:#faf9fd;border:1px solid #e7e3f2;border-radius:8px;padding:10px;font-size:11px;white-space:pre-wrap;word-break:break-word}
 .vizload{padding:40px;text-align:center;color:#5c5570;font-weight:700}
 .vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
 .vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
@@ -4206,7 +4214,18 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       backdrop:function(){var s='<line x1="150" y1="150" x2="660" y2="150" stroke="#9aa2ad" stroke-width="12" stroke-linecap="round"/>';for(var mx=210;mx<=610;mx+=90)s+='<ellipse cx="'+mx+'" cy="150" rx="30" ry="12" fill="#f0e6cf" stroke="#d9c7a0" stroke-width="1.5"/>';s+=T(400,120,'motor axon',{size:11,fill:'#6b7280',w:700})+'<rect x="660" y="82" width="250" height="140" rx="20" fill="#eef2ff" stroke="#c7d2fe" stroke-width="2"/>'+T(785,104,'SPINAL CORD',{size:12,fill:'#3730a3',w:800})+'<rect x="60" y="255" width="840" height="300" rx="14" fill="#fff" stroke="#e7e3f2"/>'+T(92,278,'INHIBITORY SYNAPSE (zoom)',{size:11,fill:'#5b21b6',w:800,anchor:'start'})+'<ellipse cx="300" cy="405" rx="150" ry="112" fill="#f7f5fc" stroke="#7c3aed" stroke-width="2.5"/><line x1="452" y1="315" x2="452" y2="495" stroke="#7c3aed" stroke-width="5"/><rect x="560" y="300" width="150" height="205" rx="14" fill="#eef2ff" stroke="#6b7280" stroke-width="2"/>'+T(635,292,'motor / autonomic neuron',{size:10,fill:'#3730a3',w:700});return s;},
       zones:{peri:{x:120,y:150,gap:34},axon:{x:410,y:150,gap:0},cns:{x:790,y:158,gap:46},pre:{x:405,y:360,gap:50},cleft:{x:505,y:405,gap:0},post:{x:635,y:405,gap:0},eff:{x:800,y:360,gap:120}}}
   };
-  var BP=null,T2=null,i=0,playing=false,elMap={},curVB=[0,0,960,560],vizRate=1;
+  var BP=null,T2=null,i=0,playing=false,elMap={},curVB=[0,0,960,560],vizRate=1,SRC='',vizVoiceName='';
+  var TYPEINFO={hormone_bubble:['#e0632b','hormone / signal'],toxin:['#e0632b','toxin'],receptor:['#0d9488','receptor'],gprotein:['#9333ea','G-protein'],enzyme:['#6d28d9','enzyme'],messenger:['#7c3aed','messenger'],kinase:['#9333ea','kinase'],vesicle:['#14b8a6','vesicle'],channel:['#14b8a6','channel'],water:['#2563eb','water'],neuron_soma:['#6d28d9','neuron'],snare:['#9333ea','SNARE'],muscle:['#b45309','muscle'],lightning:['#f59e0b','effect / result'],node:['#dc2626','marker']};
+  function vizBanner(){ if(!SRC)return ''; var html=esc(SRC);
+    (BP.narration_steps||[]).map(function(s){return s.term;}).filter(Boolean).forEach(function(t){
+      try{ var re=new RegExp('('+esc(t).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i'); html=html.replace(re,'<b style="color:#6d28d9">$1</b>'); }catch(e){} });
+    return '<div class="vizsrc">Highlighted: “'+html+'”</div>'; }
+  function vizLegend(){ var items=[];
+    if(BP.layout==='flow'){ var lab={trigger:'trigger',process:'process',product:'product',danger:'damage / harmful',outcome:'result'},seen={};
+      (BP.nodes||[]).forEach(function(n){ var k=n.kind||'process'; if(!seen[k]){seen[k]=1; items.push([FKIND[k]||FKIND.process, lab[k]||k]);} }); }
+    else if(!BP.layout){ var seen2={}; (BP.elements||[]).forEach(function(e){ var info=TYPEINFO[e.type]; if(info&&!seen2[e.type]){seen2[e.type]=1; items.push(info);} }); }
+    if(!items.length) return '';
+    return '<div class="vizleg">'+items.map(function(it){return '<span><i style="background:'+it[0]+'"></i>'+esc(it[1])+'</span>';}).join('')+'</div>'; }
   /* data-driven assets: overlay-approved types arrive as SVG specs in BP._defs (tokens @X @Y @LABEL @COLOR).
      This is how a newly approved asset draws with no app update. */
   function defFn(type){ var spec=BP&&BP._defs&&BP._defs[type]; if(!spec||!spec.svg)return null;
@@ -4243,8 +4262,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     var s='<g class="'+cls+'">';
     s+='<rect x="'+x+'" y="'+y+'" width="'+b.w+'" height="'+b.h+'" rx="10" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3:2)+'"/>';
     s+='<rect x="'+x+'" y="'+y+'" width="5" height="'+b.h+'" rx="2.5" fill="'+c+'"/>';
-    s+=T(cx,y+(n.note?20:24),n.label||n.id,{size:12.5,w:800,fill:c});
-    if(n.note) s+=T(cx,y+38,n.note,{size:10.5,w:600,fill:'#6b6580'});
+    s+=T(cx,y+(n.note?20:24),n.label||n.id,{size:fitFont(n.label||n.id,b.w-18,12.5,9.5),w:800,fill:c});
+    if(n.note) s+=T(cx,y+38,n.note,{size:fitFont(n.note,b.w-14,10.5,8),w:600,fill:'#6b6580'});
     return s+'</g>';
   }
   function tConnector(n){ var pp=TREE.pos[n.parent],pb=TREE.box[n.parent],cp=TREE.pos[n.id];
@@ -4263,6 +4282,39 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     (BP.nodes||[]).forEach(function(n){ if(shown[n.id]) s.push(tNode(n,!!act[n.id])); });
     s.push('</svg>'); return s.join('');
   }
+  /* ===== FLOW mode (process diagram — the go-to for cascades without a spatial home) ===== */
+  var FLOW=null;
+  var FKIND={trigger:'#7c3aed',process:'#2563eb',product:'#0d9488',danger:'#dc2626',outcome:'#b45309'};
+  function layoutFlow(){
+    var nodes=BP.nodes||[],n=nodes.length;
+    var cols=(n<=4)?n:Math.min(4,Math.max(2,Math.ceil(Math.sqrt(n*1.3))));
+    var w=170,h=62,gx=56,gy=58,mx=34,my=38,pos={};
+    nodes.forEach(function(nd,k){ var row=Math.floor(k/cols),inrow=k%cols,col=(row%2===0)?inrow:(cols-1-inrow);
+      pos[nd.id]={x:mx+col*(w+gx),y:my+row*(h+gy),w:w,h:h,k:k,row:row}; });
+    var rows=Math.ceil(n/cols),W=mx*2+cols*w+(cols-1)*gx,H=my*2+rows*h+(rows-1)*gy;
+    FLOW={nodes:nodes,pos:pos,cols:cols,vb:[W,H]};
+  }
+  function fArrow(a,b){ var pa=FLOW.pos[a.id],pb=FLOW.pos[b.id],x1,y1,x2,y2;
+    if(pa.row===pb.row){ if(pb.x>pa.x){x1=pa.x+pa.w;y1=pa.y+pa.h/2;x2=pb.x;y2=pb.y+pb.h/2;} else {x1=pa.x;y1=pa.y+pa.h/2;x2=pb.x+pb.w;y2=pb.y+pb.h/2;} }
+    else { x1=pa.x+pa.w/2;y1=pa.y+pa.h;x2=pb.x+pb.w/2;y2=pb.y; }
+    return arrow(x1,y1,x2,y2,'#c084fc','vzflow'); }
+  function fitFont(text,maxW,base,min){ var len=(text||'').length||1; return Math.max(min||9,Math.min(base,(maxW)/(len*0.58))); }
+  function fNode(nd,active){ var p=FLOW.pos[nd.id],c=FKIND[nd.kind]||FKIND.process,x=p.x,y=p.y,cx=x+p.w/2+8;
+    var s='<g class="'+(active?'vzglow vzpop':'vzpop')+'">';
+    s+='<rect x="'+x+'" y="'+y+'" width="'+p.w+'" height="'+p.h+'" rx="12" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3.2:2.2)+'"/>';
+    s+='<circle cx="'+(x+17)+'" cy="'+(y+17)+'" r="11.5" fill="'+c+'"/>'+T(x+17,y+21,String(p.k+1),{fill:'#fff',w:800,size:11});
+    s+=T(cx,y+(nd.note?27:35),nd.label||nd.id,{size:fitFont(nd.label||nd.id,p.w-30,13,10),w:800,fill:c});
+    if(nd.note)s+=T(cx,y+45,nd.note,{size:fitFont(nd.note,p.w-24,10.5,8.5),w:600,fill:'#6b6580'});
+    return s+'</g>'; }
+  function flowSVG(step){
+    var vb=FLOW.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+    s.push('<rect x="0" y="0" width="'+vb[0]+'" height="'+vb[1]+'" fill="#fbfcff"/>');
+    var shown={}; for(var st=0;st<=step;st++)(BP.narration_steps[st].reveal||[]).forEach(function(id){shown[id]=1;});
+    if(!Object.keys(shown).length && FLOW.nodes[0]) shown[FLOW.nodes[0].id]=1;
+    var act={}; (BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    for(var k=0;k<FLOW.nodes.length-1;k++){ var a=FLOW.nodes[k],b=FLOW.nodes[k+1]; if(shown[a.id]&&shown[b.id]) s.push(fArrow(a,b)); }
+    FLOW.nodes.forEach(function(nd){ if(shown[nd.id]) s.push(fNode(nd,!!act[nd.id])); });
+    s.push('</svg>'); return s.join(''); }
   /* auto-fit the canvas so a long cascade never runs off-screen: viewBox grows to hold every element */
   function fitVB(){ var b=T2.vb,maxX=b[0],maxY=b[1],minX=0,minY=0;
     (BP.elements||[]).forEach(function(el){ var p=coordOf(el);
@@ -4295,15 +4347,21 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   }
   function closeModal(){ playing=false; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }
   function mountPlayer(){
-    $('vizBody').innerHTML=''
-      +'<div class="vizrail" id="vizRail"></div>'
-      +'<div class="vizstage"><div id="vizSvg"></div><div class="vizcur" id="vizCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div><div class="vizcap" id="vizCap"></div></div>'
-      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button>'
-      +'<select id="vizSpeed" title="Narration speed" style="border:1px solid #e7e3f2;border-radius:9px;padding:6px 8px;font-weight:700;font-size:12.5px">'
-      +'<option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>'
-      +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>';
     var st=BP.narration_steps;
-    $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc">'+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
+    var clean={}; Object.keys(BP).forEach(function(k){ if(k[0]!=='_')clean[k]=BP[k]; });
+    $('vizBody').innerHTML=''
+      +vizBanner()
+      +'<div class="vizrail" id="vizRail"></div>'
+      +'<div class="vizstage" id="vizStage"><div class="vizcanvas" id="vizCanvas"><div id="vizSvg"></div><div class="vizcur" id="vizCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div></div></div>'
+      +'<div class="vizcap" id="vizCap"></div>'
+      +vizLegend()
+      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button>'
+      +'<select id="vizSpeed" title="Narration speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>'
+      +'<label class="vizvoi">Voice <select id="vizVoice"><option value="">Narrator (app)</option></select></label>'
+      +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>'
+      +'<details class="vizjson"><summary>View the JSON blueprint</summary><pre>'+esc(JSON.stringify(clean,null,2))+'</pre></details>';
+    $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc" data-k="'+k+'">'+(k+1)+'. '+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c){ c.style.cursor='pointer'; c.onclick=function(){ jump(+c.getAttribute('data-k')); }; });
     $('vizScrub').max=st.length-1;
     $('vizPlay').onclick=function(){ playing?stop():play(); };
     $('vizPrev').onclick=function(){ jump(Math.max(0,i-1)); };
@@ -4311,21 +4369,38 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     $('vizRestart').onclick=function(){ jump(0); };
     $('vizSpeed').onchange=function(){ vizRate=parseFloat(this.value)||1; };
     $('vizScrub').oninput=function(){ jump(+this.value); };
+    fillVoices(); $('vizVoice').onchange=function(){ vizVoiceName=this.value; };
     render(0);
   }
   function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return;
-    curVB=(BP.layout==='tree')?[0,0,TREE.vb[0],TREE.vb[1]]:fitVB();
-    w.innerHTML=(BP.layout==='tree')?treeSVG(i):sceneSVG(i); move();
+    curVB=(BP.layout==='tree')?[0,0,TREE.vb[0],TREE.vb[1]]:(BP.layout==='flow')?[0,0,FLOW.vb[0],FLOW.vb[1]]:fitVB();
+    w.innerHTML=(BP.layout==='tree')?treeSVG(i):(BP.layout==='flow')?flowSVG(i):sceneSVG(i); move();
     var s=BP.narration_steps[i]; var term=s.term||'';
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
     $('vizScrub').value=i;
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c,k){c.classList.toggle('on',k<i);});
   }
-  function move(){ var s=BP.narration_steps[i],ref=s.point,c=$('vizCur'); if(!ref||!c)return; var p;
-    if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return; var b=TREE.box[ref]; p={x:pos.x+b.w/2,y:pos.y}; }
-    else { p=anchor(ref,i); }
-    if(!p)return; c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; }
-  function say(text,cb){ try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read',vizRate); return; } }catch(e){} if(window.speechSynthesis){var u=new SpeechSynthesisUtterance(text);u.rate=vizRate;u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u);} else setTimeout(cb,2600/(vizRate||1)); }
+  function pointPos(ref){ if(!ref)return null;
+    if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return null; var b=TREE.box[ref]; return {x:pos.x+b.w/2,y:pos.y}; }
+    if(BP.layout==='flow'){ var fp=FLOW.pos[ref]; if(!fp)return null; return {x:fp.x+fp.w/2,y:fp.y+fp.h/2}; }
+    return anchor(ref,i); }
+  function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
+    c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; follow(p); }
+  /* camera-follow: scroll the fixed-height stage so the active step is centred (screen never jumps) */
+  function follow(p){ var stg=$('vizStage'),cv=$('vizCanvas'); if(!stg||!cv||!p)return;
+    var yFrac=(p.y-curVB[1])/curVB[3], target=yFrac*cv.offsetHeight - stg.clientHeight/2;
+    try{ stg.scrollTo({top:Math.max(0,target),behavior:'smooth'}); }catch(e){ stg.scrollTop=Math.max(0,target); } }
+  function fillVoices(){ var sel=$('vizVoice'); if(!sel||!window.speechSynthesis)return;
+    function load(){ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);});
+      sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');
+      if(vizVoiceName)sel.value=vizVoiceName; }
+    load(); speechSynthesis.onvoiceschanged=load; }
+  function say(text,cb){
+    if(vizVoiceName && window.speechSynthesis){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate;
+      var vv=speechSynthesis.getVoices().find(function(v){return v.name===vizVoiceName;}); if(vv)u.voice=vv;
+      u.onend=cb; speechSynthesis.cancel(); speechSynthesis.speak(u); return; }
+    try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read',vizRate); return; } }catch(e){}
+    if(window.speechSynthesis){var u2=new SpeechSynthesisUtterance(text);u2.rate=vizRate;u2.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u2);} else setTimeout(cb,2600/(vizRate||1)); }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause'; playStep(); }
   function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; try{if(window.stopSpeak)stopSpeak();}catch(e){} }
@@ -4342,8 +4417,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     try{
       var bp=await fetchBlueprint(text, topicName);
       if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
-      BP=bp;
+      BP=bp; SRC=text||'';
       if(bp.layout==='tree'){ layoutTree(); }
+      else if(bp.layout==='flow'){ layoutFlow(); }
       else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
       recordViz(topicId||(window.currentTopicId?currentTopicId():''), text);   // save this video against the note
       mountPlayer(); setTimeout(play,400);

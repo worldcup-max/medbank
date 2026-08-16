@@ -73,13 +73,22 @@ function visSystem(){ return (
 `You are the DIRECTOR of a step-by-step medical explainer. You do NOT draw — you output a JSON
 blueprint that a fixed renderer draws. FIRST choose the MODE that fits the highlighted text:
 
-• MODE "mechanism" — the text describes a PROCESS / cause-and-effect chain (A causes B causes C).
-  Use the animated cell/synapse templates below.
-• MODE "tree" — the text is a DEFINITION, CLASSIFICATION, LIST, STRUCTURE, or set of facts with no
-  causal flow (e.g. "the two toxins are…", "a 150-kd protein made of a heavy and light chain",
-  "types / features / components of X"). Build a WHITEBOARD TREE: a root concept that branches into
-  sub-points, revealed one at a time like a teacher building a mind-map. This is the FALLBACK so
-  every highlight produces something useful — if it isn't a clear cascade, use tree mode.
+• MODE "mechanism" — a cause-and-effect PROCESS that happens in a REAL ANATOMICAL PLACE the templates
+  below can draw: transport across a cell membrane (kidney tubule, gut, etc.) or a neuron/synapse
+  journey. Use ONLY when the scene genuinely fits one of those templates — it gives the richest,
+  most spatial animation. Do NOT force unrelated content into it.
+• MODE "flow" — a cause-and-effect chain / pathway that has NO specific anatomical home: biochemical
+  cascades, enzyme pathways, "if X then Y then Z" logic, consequences that unfold in sequence
+  (e.g. "G6PD → NADPH → reduced glutathione → protects RBC; if deficient → oxidative damage →
+  haemolysis"). Build a PROCESS FLOW: ordered stations connected by arrows, revealed one at a time,
+  laid out as a clean flowing diagram. Use this for MOST mechanisms that aren't clearly a membrane
+  or synapse scene — it looks purpose-built, never a plain vertical list.
+• MODE "tree" — a DEFINITION, CLASSIFICATION, LIST, STRUCTURE, or set of facts with no causal flow
+  (e.g. "the two toxins are…", "a 150-kd protein of a heavy and light chain", "types/features of X").
+  Build a WHITEBOARD TREE: a root concept branching into sub-points, revealed like a mind-map.
+
+Choose the mode that makes the BEST explainer. Prefer mechanism when the anatomy fits, flow for other
+cascades, tree for non-causal facts. Every highlight must produce a rich, engaging result.
 
 ═══════ MODE "mechanism" ═══════
 TEMPLATES (pick exactly ONE whose scale fits the concept):
@@ -107,7 +116,16 @@ Rules:
 3. narration_steps reveal the tree progressively — usually root first, then each branch. EVERY node must be revealed by some step. "point" each step at the node it explains.
 4. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY. The last step recaps. Stay faithful to the source; invent nothing.
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"tree","root":"n0","nodes":[{"id":"n0","label":"","note":""},{"id":"n1","parent":"n0","label":"","note":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"tree","root":"n0","nodes":[{"id":"n0","label":"","note":""},{"id":"n1","parent":"n0","label":"","note":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}
+
+═══════ MODE "flow" (process diagram) ═══════
+Rules:
+1. "nodes" is the ORDERED sequence of stations in the pathway (cause → effect → effect …). 4–10 nodes.
+2. Each node: short "id", short "label" (≤ 4 words, the step's key term), optional "note" (≤ 7 words), and optional "kind": one of trigger|process|product|danger|outcome (colours the station). Mark bad/pathological steps "danger" and the end result "outcome".
+3. narration_steps reveal the stations IN ORDER (one per step is best). EVERY node revealed by some step; "point" each step at its node. The last step recaps the whole chain.
+4. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY. Faithful to the source; invent nothing.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"flow","nodes":[{"id":"n0","label":"","note":"","kind":"trigger"},{"id":"n1","label":"","note":"","kind":"process"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -146,6 +164,27 @@ export const EXEMPLARS = [
         {short:"Structure",term:"150-kd",narration_text:"It is a 150-kilodalton protein held together by a single disulphide bond.",reveal:["ts2"],active:["ts2"],point:"ts2"},
         {short:"Heavy chain",term:"heavy chain",narration_text:"The 100-kd heavy chain binds the presynaptic motor neuron.",reveal:["hc"],active:["hc"],point:"hc"},
         {short:"Light chain",term:"light chain",narration_text:"The 50-kd light chain is the toxic part. Recap: two toxins — harmless tetanolysin, and potent two-chain tetanospasmin.",reveal:["lc"],active:["lc"],point:"lc"}
+      ]} },
+  { text: "G6PD's main job is to help produce NADPH. NADPH keeps glutathione in its reduced form, which protects RBCs from oxidative stress. If G6PD is deficient: less NADPH → less reduced glutathione → oxidative damage → haemoglobin and membrane damaged → the RBC breaks (haemolysis).",
+    blueprint: {meta:{title:"G6PD → NADPH → glutathione → RBC protection",subject:"Haematology",concept_id:"g6pd_nadph_glutathione"},layout:"flow",
+      nodes:[
+        {id:"g6pd",label:"G6PD",note:"the enzyme",kind:"trigger"},
+        {id:"nadph",label:"NADPH",note:"reducing power",kind:"product"},
+        {id:"gsh",label:"Reduced glutathione",note:"the antioxidant",kind:"product"},
+        {id:"protect",label:"RBC protected",note:"neutralises ROS",kind:"outcome"},
+        {id:"def",label:"G6PD deficient",note:"↓ NADPH",kind:"danger"},
+        {id:"oxi",label:"Oxidative damage",note:"ROS build up",kind:"danger"},
+        {id:"dmg",label:"Hb + membrane damaged",note:"Heinz bodies",kind:"danger"},
+        {id:"lyse",label:"Haemolysis",note:"RBC bursts",kind:"outcome"}
+      ],
+      narration_steps:[
+        {short:"G6PD",term:"G6PD",narration_text:"G6PD's main job is to help produce NADPH.",reveal:["g6pd","nadph"],active:["nadph"],point:"nadph"},
+        {short:"Glutathione",term:"glutathione",narration_text:"NADPH keeps glutathione in its reduced, active form.",reveal:["gsh"],active:["gsh"],point:"gsh"},
+        {short:"Protection",term:"protection",narration_text:"Reduced glutathione mops up reactive oxygen species, protecting the red cell.",reveal:["protect"],active:["protect"],point:"protect"},
+        {short:"Deficiency",term:"deficiency",narration_text:"If G6PD is deficient, NADPH falls, so there is less reduced glutathione.",reveal:["def"],active:["def"],point:"def"},
+        {short:"Oxidative",term:"oxidative stress",narration_text:"Reactive oxygen species now build up unchecked.",reveal:["oxi"],active:["oxi"],point:"oxi"},
+        {short:"Damage",term:"damage",narration_text:"They damage haemoglobin (forming Heinz bodies) and the cell membrane.",reveal:["dmg"],active:["dmg"],point:"dmg"},
+        {short:"Haemolysis",term:"haemolysis",narration_text:"The weakened red cell breaks apart. Recap: G6PD → NADPH → reduced glutathione protects the RBC; without it, oxidative damage causes haemolysis.",reveal:["lyse"],active:["lyse"],point:"lyse"}
       ]} }
 ];
 
@@ -190,8 +229,30 @@ export function treeCheck(bp){
   return { pass: issues.length===0, issues };
 }
 
-/* QC critic — deterministic, manifest-enforced. Delegates to treeCheck for whiteboard mode. */
+/* Process FLOW validity: an ordered station sequence, all revealed. */
+export function flowCheck(bp){
+  const issues = [];
+  if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
+  if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
+  const nodes = Array.isArray(bp.nodes)?bp.nodes:[];
+  if(nodes.length<3) issues.push("too few nodes ("+nodes.length+", need ≥3)");
+  if(nodes.length>12) issues.push("too many nodes ("+nodes.length+")");
+  const byId={}; nodes.forEach(n=>{ if(!n.id) issues.push("node missing id"); else if(byId[n.id]) issues.push("duplicate node id: "+n.id); else byId[n.id]=n; });
+  const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+")");
+  const revealed={}; steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
+    if(s.point && !byId[s.point]) issues.push("step "+(i+1)+" point bad ref "+s.point);
+  });
+  nodes.forEach(n=>{ if(!revealed[n.id]) issues.push("node '"+(n.label||n.id)+"' is never revealed (missing step)"); });
+  return { pass: issues.length===0, issues };
+}
+
+/* QC critic — deterministic, manifest-enforced. Delegates to tree/flow checks for those modes. */
 export function qcCheck(bp){
+  if(bp && bp.layout==="flow") return flowCheck(bp);
   if(bp && bp.layout==="tree") return treeCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
@@ -239,6 +300,7 @@ export function qcCheck(bp){
  * this is the causal chain as the student experiences it. Markers/labels excluded. */
 const ANNOTATION = new Set(["label","blockx","lightning"]);
 export function chainOf(bp){
+  if(bp && bp.layout==="flow") return (bp.nodes||[]).map(n=>n.label||n.id);   // flow = the node sequence
   if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
     const nodes = bp.nodes||[], byId={}; nodes.forEach(n=>byId[n.id]=n);
     const root = bp.root || (nodes[0]&&nodes[0].id), out=[];
@@ -259,7 +321,7 @@ export function chainOf(bp){
  * every element is revealed and wired in. Catches skipped links (disconnected sub-chains),
  * orphan elements (revealed but never connected), and elements that never appear. Deterministic. */
 export function graphCheck(bp){
-  if(bp && bp.layout==="tree") return { pass:true, issues:[], components:1 };   // tree connectivity handled by treeCheck
+  if(bp && (bp.layout==="tree"||bp.layout==="flow")) return { pass:true, issues:[], components:1 };   // handled by tree/flow checks
   const issues = [];
   const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
   const steps = (bp && bp.narration_steps) || [];
