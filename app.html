@@ -4206,7 +4206,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       backdrop:function(){var s='<line x1="150" y1="150" x2="660" y2="150" stroke="#9aa2ad" stroke-width="12" stroke-linecap="round"/>';for(var mx=210;mx<=610;mx+=90)s+='<ellipse cx="'+mx+'" cy="150" rx="30" ry="12" fill="#f0e6cf" stroke="#d9c7a0" stroke-width="1.5"/>';s+=T(400,120,'motor axon',{size:11,fill:'#6b7280',w:700})+'<rect x="660" y="82" width="250" height="140" rx="20" fill="#eef2ff" stroke="#c7d2fe" stroke-width="2"/>'+T(785,104,'SPINAL CORD',{size:12,fill:'#3730a3',w:800})+'<rect x="60" y="255" width="840" height="300" rx="14" fill="#fff" stroke="#e7e3f2"/>'+T(92,278,'INHIBITORY SYNAPSE (zoom)',{size:11,fill:'#5b21b6',w:800,anchor:'start'})+'<ellipse cx="300" cy="405" rx="150" ry="112" fill="#f7f5fc" stroke="#7c3aed" stroke-width="2.5"/><line x1="452" y1="315" x2="452" y2="495" stroke="#7c3aed" stroke-width="5"/><rect x="560" y="300" width="150" height="205" rx="14" fill="#eef2ff" stroke="#6b7280" stroke-width="2"/>'+T(635,292,'motor / autonomic neuron',{size:10,fill:'#3730a3',w:700});return s;},
       zones:{peri:{x:120,y:150,gap:34},axon:{x:410,y:150,gap:0},cns:{x:790,y:158,gap:46},pre:{x:405,y:360,gap:50},cleft:{x:505,y:405,gap:0},post:{x:635,y:405,gap:0},eff:{x:800,y:360,gap:120}}}
   };
-  var BP=null,T2=null,i=0,playing=false,elMap={};
+  var BP=null,T2=null,i=0,playing=false,elMap={},curVB=[0,0,960,560],vizRate=1;
   /* data-driven assets: overlay-approved types arrive as SVG specs in BP._defs (tokens @X @Y @LABEL @COLOR).
      This is how a newly approved asset draws with no app update. */
   function defFn(type){ var spec=BP&&BP._defs&&BP._defs[type]; if(!spec||!spec.svg)return null;
@@ -4263,8 +4263,13 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     (BP.nodes||[]).forEach(function(n){ if(shown[n.id]) s.push(tNode(n,!!act[n.id])); });
     s.push('</svg>'); return s.join('');
   }
+  /* auto-fit the canvas so a long cascade never runs off-screen: viewBox grows to hold every element */
+  function fitVB(){ var b=T2.vb,maxX=b[0],maxY=b[1],minX=0,minY=0;
+    (BP.elements||[]).forEach(function(el){ var p=coordOf(el);
+      if(p.x+74>maxX)maxX=p.x+74; if(p.y+74>maxY)maxY=p.y+74; if(p.x-46<minX)minX=p.x-46; if(p.y-30<minY)minY=p.y-30; });
+    return [minX,minY,maxX-minX,maxY-minY]; }
   function sceneSVG(step){
-    var vb=T2.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+    var vb=curVB,s=['<svg viewBox="'+vb[0]+' '+vb[1]+' '+vb[2]+' '+vb[3]+'" xmlns="http://www.w3.org/2000/svg">'];
     s.push(T2.backdrop());
     for(var st=0;st<=step;st++){var ars=BP.narration_steps[st].arrows||[];for(var a=0;a<ars.length;a++){var f=anchor(ars[a].from,step),t=anchor(ars[a].to,step);s.push(arrow(f.x,f.y,t.x,t.y,ars[a].color||'#7c3aed',st===step?'vzflow':'vzdim'));}}
     var act=BP.narration_steps[step].active||[];
@@ -4293,27 +4298,34 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     $('vizBody').innerHTML=''
       +'<div class="vizrail" id="vizRail"></div>'
       +'<div class="vizstage"><div id="vizSvg"></div><div class="vizcur" id="vizCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div><div class="vizcap" id="vizCap"></div></div>'
-      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>';
+      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button>'
+      +'<select id="vizSpeed" title="Narration speed" style="border:1px solid #e7e3f2;border-radius:9px;padding:6px 8px;font-weight:700;font-size:12.5px">'
+      +'<option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>'
+      +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>';
     var st=BP.narration_steps;
     $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc">'+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
     $('vizScrub').max=st.length-1;
     $('vizPlay').onclick=function(){ playing?stop():play(); };
     $('vizPrev').onclick=function(){ jump(Math.max(0,i-1)); };
     $('vizNext').onclick=function(){ jump(Math.min(st.length-1,i+1)); };
+    $('vizRestart').onclick=function(){ jump(0); };
+    $('vizSpeed').onchange=function(){ vizRate=parseFloat(this.value)||1; };
     $('vizScrub').oninput=function(){ jump(+this.value); };
     render(0);
   }
-  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; w.innerHTML=(BP.layout==='tree')?treeSVG(i):sceneSVG(i); move();
+  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return;
+    curVB=(BP.layout==='tree')?[0,0,TREE.vb[0],TREE.vb[1]]:fitVB();
+    w.innerHTML=(BP.layout==='tree')?treeSVG(i):sceneSVG(i); move();
     var s=BP.narration_steps[i]; var term=s.term||'';
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
     $('vizScrub').value=i;
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c,k){c.classList.toggle('on',k<i);});
   }
-  function move(){ var s=BP.narration_steps[i],ref=s.point,c=$('vizCur'); if(!ref||!c)return; var p,vb;
-    if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return; var b=TREE.box[ref]; p={x:pos.x+b.w/2,y:pos.y}; vb=TREE.vb; }
-    else { p=anchor(ref,i); vb=T2.vb; }
-    if(!p)return; c.style.left=(p.x/vb[0]*100)+'%'; c.style.top=(p.y/vb[1]*100)+'%'; }
-  function say(text,cb){ try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read'); return; } }catch(e){} if(window.speechSynthesis){var u=new SpeechSynthesisUtterance(text);u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u);} else setTimeout(cb,2600); }
+  function move(){ var s=BP.narration_steps[i],ref=s.point,c=$('vizCur'); if(!ref||!c)return; var p;
+    if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return; var b=TREE.box[ref]; p={x:pos.x+b.w/2,y:pos.y}; }
+    else { p=anchor(ref,i); }
+    if(!p)return; c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; }
+  function say(text,cb){ try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read',vizRate); return; } }catch(e){} if(window.speechSynthesis){var u=new SpeechSynthesisUtterance(text);u.rate=vizRate;u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u);} else setTimeout(cb,2600/(vizRate||1)); }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause'; playStep(); }
   function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; try{if(window.stopSpeak)stopSpeak();}catch(e){} }
@@ -4349,19 +4361,28 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     list.forEach(function(item){ wrapPhrase(host,item.text,tid,name); });
   }catch(e){} };
   function wrapPhrase(host,phrase,tid,name){ if(!phrase||phrase.length<4)return;
+    // the full highlight often spans several DOM nodes (bold words split it), so match a
+    // shortening prefix — sentence, first words, first chars — until one fits inside a single text node
+    var s=phrase.trim(), cands=[], dot=s.search(/[.:;]\s/);
+    if(dot>12) cands.push(s.slice(0,dot));
+    cands.push(s.split(/\s+/).slice(0,8).join(' '));
+    cands.push(s.slice(0,46).trim());
+    cands.push(s.split(/\s+/).slice(0,5).join(' '));
+    cands=cands.filter(function(c){return c&&c.length>=6;});
     var walker=document.createTreeWalker(host,NodeFilter.SHOW_TEXT,null),node;
     while(node=walker.nextNode()){
       var pe=node.parentElement; if(pe&&pe.closest&&pe.closest('.vizmark'))continue;
-      var idx=node.nodeValue.indexOf(phrase); if(idx<0)continue;
-      var before=node.nodeValue.slice(0,idx), match=node.nodeValue.slice(idx,idx+phrase.length), after=node.nodeValue.slice(idx+phrase.length);
-      var span=document.createElement('span'); span.className='vizmark'; span.textContent=match;
-      var chip=document.createElement('span'); chip.className='vizwatch'; chip.textContent='▶ watch'; chip.title='Replay this visualization';
-      chip.onclick=function(e){ e.stopPropagation(); window.aiVisualize(phrase,name,tid); };
-      var frag=document.createDocumentFragment();
-      if(before)frag.appendChild(document.createTextNode(before));
-      frag.appendChild(span); frag.appendChild(chip);
-      if(after)frag.appendChild(document.createTextNode(after));
-      node.parentNode.replaceChild(frag,node); return;   // mark first occurrence only
+      for(var ci=0;ci<cands.length;ci++){ var cand=cands[ci], idx=node.nodeValue.indexOf(cand); if(idx<0)continue;
+        var before=node.nodeValue.slice(0,idx), match=node.nodeValue.slice(idx,idx+cand.length), after=node.nodeValue.slice(idx+cand.length);
+        var span=document.createElement('span'); span.className='vizmark'; span.textContent=match;
+        var chip=document.createElement('span'); chip.className='vizwatch'; chip.textContent='▶ watch'; chip.title='Replay this visualization';
+        chip.onclick=(function(ph){return function(e){ e.stopPropagation(); window.aiVisualize(ph,name,tid); };})(phrase);
+        var frag=document.createDocumentFragment();
+        if(before)frag.appendChild(document.createTextNode(before));
+        frag.appendChild(span); frag.appendChild(chip);
+        if(after)frag.appendChild(document.createTextNode(after));
+        node.parentNode.replaceChild(frag,node); return;   // mark first occurrence only
+      }
     }
   }
 })();
