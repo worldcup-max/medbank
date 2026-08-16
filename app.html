@@ -1832,12 +1832,12 @@ function pageTopic(id){
       The built note, simplified note, PDF, Primer Cards and Recall Cards will appear right here.</div>`;
   } else if(topicTab==='note'){
     body = (t.pdf?`<div class="btnrow" style="margin-bottom:18px"><a class="btn" href="${t.pdf}" target="_blank">⬇ Open PDF</a></div>`:'')
-         + `<div class="md">${md(t.note)}</div>`;
+         + `<div class="md notebody">${md(t.note)}</div>`;
   } else if(topicTab==='simplified'){
     const rd=isRead(t.id);
     body = `<div class="btnrow" style="margin-bottom:16px">
         <button class="btn ${rd?'green':''}" onclick="markRead('${t.id}')">${rd?'✓ Read'+(DATA.read[t.id]?' · '+DATA.read[t.id]:''):'Mark as read'}</button></div>
-      <div class="md">${md(t.simplified)}</div>`;
+      <div class="md notebody">${md(t.simplified)}</div>`;
   } else if(topicTab==='fill'){
     body = renderFillBlank(t);
   } else if(topicTab==='written'){
@@ -3649,23 +3649,27 @@ function currentTopicName(){ const p=(location.hash.slice(2)||'').split('/');
   return ''; }
 function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentElement);
   while(el){ if(el.classList&&(el.classList.contains('md')||el.classList.contains('cramsheet')||el.classList.contains('ansblock'))) return true; el=el.parentElement; } return false; }
+function inNoteBody(node){ let el=node&&(node.nodeType===1?node:node.parentElement);
+  while(el){ if(el.classList&&el.classList.contains('notebody')) return true; el=el.parentElement; } return false; }
 function onSelChange(){ try{
   const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
   if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
-    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r);
+    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r, inNoteBody(sel.anchorNode));
   } else hideExplainBtn();
 }catch(e){} }
-function showExplainBtn(r){
-  if(!_explBtn){ _explBtn=document.createElement('button'); _explBtn.className='explbtn'; _explBtn.innerHTML='✨ Let AI explain';
+function showExplainBtn(r, canViz){
+  if(!_explBtn){ _explBtn=document.createElement('div'); _explBtn.className='selpop';
     _explBtn.addEventListener('mousedown',e=>e.preventDefault());
-    _explBtn.addEventListener('click',()=>{ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); });
     document.body.appendChild(_explBtn); }
-  const bh=40, bw=155;
-  let top=r.bottom+8;                                   // sit just below the highlight
-  if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);   // no room below → above
-  let left=r.left + r.width/2 - bw/2;                    // centre under the selection
-  left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
-  _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='block';
+  var html='<button class="explbtn" data-a="explain">✨ Let AI explain</button>';
+  if(canViz) html+='<button class="explbtn vizbtn2" data-a="viz">🎬 Visualize this</button>';
+  _explBtn.innerHTML=html;
+  _explBtn.querySelector('[data-a=explain]').onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); };
+  var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName()); };
+  const bw=168, bh=canViz?90:42;
+  let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
+  let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
+  _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='flex';
 }
 function hideExplainBtn(){ if(_explBtn) _explBtn.style.display='none'; }
 document.addEventListener('selectionchange', onSelChange);
@@ -4036,5 +4040,143 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="content-loader.js"></script>
 <script src="auth-ui.js"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC) MB_SYNC.init(); }catch(e){} });</script>
+<style>
+/* selection popover (two stacked buttons) */
+.selpop{position:fixed;z-index:9000;display:none;flex-direction:column;gap:6px}
+.selpop .explbtn{position:static;display:block;box-shadow:0 8px 22px rgba(91,33,182,.4)}
+.selpop .vizbtn2{background:linear-gradient(135deg,#7c3aed,#0d9488)!important}
+/* Visualize modal */
+.vizov{position:fixed;inset:0;z-index:9500;background:rgba(20,12,38,.55);display:flex;align-items:center;justify-content:center;padding:14px}
+.vizpanel{background:#fff;border-radius:16px;max-width:900px;width:100%;max-height:94vh;overflow:auto;box-shadow:0 30px 80px rgba(20,12,38,.5)}
+.vizhd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line,#e7e3f2)}
+.vizhd b{font-size:15px}.vizhd .x{border:0;background:#f1eef8;border-radius:9px;width:32px;height:32px;font-size:16px;cursor:pointer}
+.vizbody{padding:14px 16px}
+.vizrail{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:10px}
+.vizrail .rc{font-size:10px;font-weight:800;color:#5c5570;background:#f1eef8;border:1px solid #e7e3f2;border-radius:999px;padding:3px 8px}
+.vizrail .rc.on{background:#6d28d9;color:#fff;border-color:transparent}.vizrail .rs{color:#c9bfe0;font-weight:800;font-size:10px}
+.vizstage{position:relative;border:1px solid #e7e3f2;border-radius:12px;overflow:hidden;background:#fffdf6}
+.vizstage svg{display:block;width:100%;height:auto}
+.vizcur{position:absolute;width:24px;height:24px;z-index:6;pointer-events:none;transition:left .9s cubic-bezier(.45,0,.25,1),top .9s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.vizcap{min-height:48px;background:#141026;color:#fff;font-size:14px;line-height:1.45;padding:11px 14px;font-weight:600}
+.vizcap .lab{color:#c9b8f5;font-weight:800;font-size:10.5px;letter-spacing:.5px;display:block;margin-bottom:2px}.vizcap b{color:#a5f3e4}
+.vizctrl{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.vizctrl button{border:1px solid #e7e3f2;background:#fff;border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
+.vizctrl button.pl{background:#6d28d9;color:#fff;border-color:transparent;min-width:92px}
+.vizctrl input[type=range]{flex:1;min-width:120px;accent-color:#6d28d9}
+.vizload{padding:40px;text-align:center;color:#5c5570;font-weight:700}
+.vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
+.vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.vzflow{stroke-dasharray:9 6;animation:vzmarch 1s linear infinite}@keyframes vzmarch{to{stroke-dashoffset:-30}}
+</style>
+<script>
+/* ===== Visualize Text — in-app engine (renders blueprints from /visualize, narrates via Kokoro) ===== */
+(function(){
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function T(x,y,s,o){o=o||{};return '<text x="'+x+'" y="'+y+'" font-size="'+(o.size||12)+'" font-weight="'+(o.w||600)+'" fill="'+(o.fill||'#2a2536')+'" text-anchor="'+(o.anchor||'middle')+'" font-family="Arial">'+esc(s)+'</text>';}
+  var C={hormone:'#e0632b',receptor:'#0d9488',gprotein:'#9333ea',enzyme:'#6d28d9',messenger:'#7c3aed',kinase:'#9333ea',channel:'#14b8a6',water:'#2563eb',toxin:'#e0632b',neuron:'#6b7280',vesicle:'#14b8a6',snare:'#9333ea',danger:'#dc2626',effect:'#f59e0b'};
+  function cL(x,y,r,l,f){return '<g><circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+f+'" stroke="#fff" stroke-width="2"/>'+T(x,y+4,l,{fill:'#fff',w:800,size:Math.min(12,r-3)})+'</g>';}
+  var A={
+    hormone_bubble:function(x,y,o){return cL(x,y,o.r||19,o.label||'',C.hormone);},
+    toxin:function(x,y,o){return cL(x,y,o.r||16,o.label||'',C.toxin);},
+    receptor:function(x,y,o){return '<rect x="'+(x-14)+'" y="'+(y-24)+'" width="28" height="48" rx="6" fill="'+C.receptor+'" stroke="#0b5f52" stroke-width="2"/>'+T(x,y+42,o.label||'',{size:10,fill:'#0d7a68',w:800});},
+    gprotein:function(x,y,o){return cL(x,y,14,o.label||'Gs',C.gprotein);},
+    enzyme:function(x,y,o){return cL(x,y,o.r||15,o.label||'',C.enzyme);},
+    messenger:function(x,y,o){return cL(x,y,o.r||16,o.label||'',C.messenger);},
+    kinase:function(x,y,o){return cL(x,y,19,o.label||'PKA',C.kinase);},
+    vesicle:function(x,y,o){return '<circle cx="'+x+'" cy="'+y+'" r="'+(o.r||16)+'" fill="#eafaf6" stroke="'+C.vesicle+'" stroke-width="2.5"/>'+T(x,y+3,o.label||'',{size:9,fill:'#0d7a68',w:800});},
+    channel:function(x,y,o){return '<rect x="'+(x-9)+'" y="'+(y-24)+'" width="18" height="48" rx="5" fill="'+C.channel+'" stroke="#0d5f52" stroke-width="2"/><rect x="'+(x-3)+'" y="'+(y-24)+'" width="6" height="48" fill="#c7f2ea"/>'+(o.label?T(x,y-32,o.label,{size:10,fill:'#0d7a68',w:800}):'');},
+    water:function(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="7" fill="'+C.water+'" stroke="#1e3a8a" stroke-width="1.3"/>';},
+    neuron_soma:function(x,y,o){return '<circle cx="'+x+'" cy="'+y+'" r="'+(o.r||24)+'" fill="#c4b5fd" stroke="#6d28d9" stroke-width="2"/>'+T(x,y+3,o.label||'',{size:9,fill:'#4c1d95',w:800});},
+    snare:function(x,y,o){ if(o.state==='cut')return '<path d="M'+(x-16)+','+y+' L'+(x-4)+','+y+'" stroke="'+C.danger+'" stroke-width="3"/><path d="M'+(x+4)+','+y+' L'+(x+16)+','+y+'" stroke="'+C.danger+'" stroke-width="3"/>';
+      return '<path d="M'+(x-16)+','+y+' L'+(x-8)+','+(y-7)+' L'+x+','+(y+7)+' L'+(x+8)+','+(y-7)+' L'+(x+16)+','+y+'" stroke="'+C.snare+'" stroke-width="3" fill="none"/>';},
+    muscle:function(x,y,o){var s='<rect x="'+(x-60)+'" y="'+(y-30)+'" width="120" height="60" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="2"/>';for(var i=-54;i<60;i+=12)s+='<line x1="'+(x+i)+'" y1="'+(y-28)+'" x2="'+(x+i)+'" y2="'+(y+28)+'" stroke="#d97706" stroke-width="2"/>';return s+T(x,y+48,o.label||'',{size:10,fill:'#b45309',w:800});},
+    lightning:function(x,y){return '<polygon points="'+x+','+y+' '+(x+14)+','+y+' '+(x+4)+','+(y+16)+' '+(x+18)+','+(y+16)+' '+(x-2)+','+(y+40)+' '+(x+6)+','+(y+20)+' '+(x-6)+','+(y+20)+'" fill="'+C.effect+'" stroke="#b45309" stroke-width="1"/>';},
+    node:function(x,y,o){return cL(x,y,o.r||22,o.label||'',o.color||C.danger);},
+    blockx:function(x,y){return '<line x1="'+(x-24)+'" y1="'+(y-24)+'" x2="'+(x+24)+'" y2="'+(y+24)+'" stroke="'+C.danger+'" stroke-width="5"/><line x1="'+(x+24)+'" y1="'+(y-24)+'" x2="'+(x-24)+'" y2="'+(y+24)+'" stroke="'+C.danger+'" stroke-width="5"/>';},
+    label:function(x,y,o){return T(x,y,o.label||'',{size:o.size||12,fill:o.fill||'#5c5570',w:700});}
+  };
+  function arrow(x1,y1,x2,y2,color,cls){var id='vm'+Math.abs(Math.round(x1*3+y1*7+x2*11+y2))+Math.round(Math.random()*9999);return '<defs><marker id="'+id+'" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="'+color+'"/></marker></defs><path class="'+(cls||'')+'" d="M'+x1+','+y1+' L'+x2+','+y2+'" stroke="'+color+'" stroke-width="3.2" fill="none" marker-end="url(#'+id+')"/>';}
+  var TPL={
+    membrane_cell:{vb:[960,560],
+      backdrop:function(){return '<rect x="250" y="70" width="440" height="430" rx="16" fill="#faf7ff" stroke="#d9cff2" stroke-width="2"/><line x1="250" y1="70" x2="250" y2="500" stroke="#7c3aed" stroke-width="5"/><line x1="690" y1="70" x2="690" y2="500" stroke="#0d9488" stroke-width="5"/>'+T(150,52,'LUMEN',{w:800,fill:'#5c5570'})+T(470,52,'CELL',{w:800,fill:'#5b21b6'})+T(820,52,'BLOOD',{w:800,fill:'#0d7a68'});},
+      zones:{lumen:{x:150,y:180,gap:120},apical:{x:250,y:180,gap:120},intra:{x:470,y:210,gap:78},baso:{x:690,y:250,gap:110},blood:{x:830,y:150,gap:70}}},
+    neuro_pathway:{vb:[960,600],
+      backdrop:function(){var s='<line x1="150" y1="150" x2="660" y2="150" stroke="#9aa2ad" stroke-width="12" stroke-linecap="round"/>';for(var mx=210;mx<=610;mx+=90)s+='<ellipse cx="'+mx+'" cy="150" rx="30" ry="12" fill="#f0e6cf" stroke="#d9c7a0" stroke-width="1.5"/>';s+=T(400,120,'motor axon',{size:11,fill:'#6b7280',w:700})+'<rect x="660" y="82" width="250" height="140" rx="20" fill="#eef2ff" stroke="#c7d2fe" stroke-width="2"/>'+T(785,104,'SPINAL CORD',{size:12,fill:'#3730a3',w:800})+'<rect x="60" y="255" width="840" height="300" rx="14" fill="#fff" stroke="#e7e3f2"/>'+T(92,278,'INHIBITORY SYNAPSE (zoom)',{size:11,fill:'#5b21b6',w:800,anchor:'start'})+'<ellipse cx="300" cy="405" rx="150" ry="112" fill="#f7f5fc" stroke="#7c3aed" stroke-width="2.5"/><line x1="452" y1="315" x2="452" y2="495" stroke="#7c3aed" stroke-width="5"/><rect x="560" y="300" width="150" height="205" rx="14" fill="#eef2ff" stroke="#6b7280" stroke-width="2"/>'+T(635,292,'motor / autonomic neuron',{size:10,fill:'#3730a3',w:700});return s;},
+      zones:{peri:{x:120,y:150,gap:34},axon:{x:410,y:150,gap:0},cns:{x:790,y:158,gap:46},pre:{x:405,y:360,gap:50},cleft:{x:505,y:405,gap:0},post:{x:635,y:405,gap:0},eff:{x:800,y:360,gap:120}}}
+  };
+  var BP=null,T2=null,i=0,playing=false,elMap={};
+  function coordOf(el){ if(el.at)return {x:el.at.x,y:el.at.y}; var z=T2.zones[el.zone]||{x:100,y:100,gap:60}; return {x:z.x,y:z.y+(el.lane||0)*(z.gap||60)}; }
+  function posAt(el,step){ var p=coordOf(el); for(var s=0;s<=step;s++){var mv=(BP.narration_steps[s].move||[]);for(var k=0;k<mv.length;k++){if(mv[k].id===el.id){ if(mv[k].to_zone){var z=T2.zones[mv[k].to_zone];if(z)p={x:z.x,y:z.y+((mv[k].lane||0)*(z.gap||60))};} else if(mv[k].to)p={x:mv[k].to.x,y:mv[k].to.y}; }}} return p; }
+  function introOf(id){ for(var s=0;s<BP.narration_steps.length;s++){ if((BP.narration_steps[s].reveal||[]).indexOf(id)>=0)return s; } return 0; }
+  function cutFrom(id){ for(var s=0;s<BP.narration_steps.length;s++){ if((BP.narration_steps[s].cut||[]).indexOf(id)>=0)return s; } return -1; }
+  function anchor(ref,step){ if(elMap[ref])return posAt(elMap[ref],step); var z=T2.zones[ref]; return z?{x:z.x,y:z.y}:{x:0,y:0}; }
+  function sceneSVG(step){
+    var vb=T2.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+    s.push(T2.backdrop());
+    for(var st=0;st<=step;st++){var ars=BP.narration_steps[st].arrows||[];for(var a=0;a<ars.length;a++){var f=anchor(ars[a].from,step),t=anchor(ars[a].to,step);s.push(arrow(f.x,f.y,t.x,t.y,ars[a].color||'#7c3aed',st===step?'vzflow':'vzdim'));}}
+    var act=BP.narration_steps[step].active||[];
+    for(var e=0;e<BP.elements.length;e++){var el=BP.elements[e],intro=introOf(el.id),ever=false;
+      for(var s2=0;s2<BP.narration_steps.length;s2++){if((BP.narration_steps[s2].reveal||[]).indexOf(el.id)>=0){ever=true;break;}}
+      if(ever&&step<intro)continue;
+      var p=posAt(el,step),cut=cutFrom(el.id),state=(cut>=0&&step>=cut)?'cut':null;
+      var isA=act.indexOf(el.id)>=0,cls=isA?'vzglow vzpop':(step===intro?'vzpop':'vzdim');
+      var d=A[el.type]||A.label;
+      s.push('<g class="'+cls+'">'+d(p.x,p.y,{label:el.label,color:el.color,r:el.r,state:state})+'</g>');
+    }
+    s.push('</svg>');return s.join('');
+  }
+  function $(id){return document.getElementById(id);}
+  function openModal(){ closeModal();
+    var ov=document.createElement('div'); ov.className='vizov'; ov.id='vizov';
+    ov.innerHTML='<div class="vizpanel" onclick="event.stopPropagation()"><div class="vizhd"><b>🎬 Visualize</b><button class="x" id="vizX">✕</button></div><div class="vizbody" id="vizBody"><div class="vizload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span><br>Building your explainer… (first time only)</div></div></div>';
+    ov.addEventListener('click',closeModal);
+    document.body.appendChild(ov);
+    $('vizX').onclick=closeModal;
+  }
+  function closeModal(){ playing=false; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }
+  function mountPlayer(){
+    $('vizBody').innerHTML=''
+      +'<div class="vizrail" id="vizRail"></div>'
+      +'<div class="vizstage"><div id="vizSvg"></div><div class="vizcur" id="vizCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div><div class="vizcap" id="vizCap"></div></div>'
+      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>';
+    var st=BP.narration_steps;
+    $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc">'+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
+    $('vizScrub').max=st.length-1;
+    $('vizPlay').onclick=function(){ playing?stop():play(); };
+    $('vizPrev').onclick=function(){ jump(Math.max(0,i-1)); };
+    $('vizNext').onclick=function(){ jump(Math.min(st.length-1,i+1)); };
+    $('vizScrub').oninput=function(){ jump(+this.value); };
+    render(0);
+  }
+  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; w.innerHTML=sceneSVG(i); move();
+    var s=BP.narration_steps[i]; var term=s.term||'';
+    $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
+    $('vizScrub').value=i;
+    Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c,k){c.classList.toggle('on',k<i);});
+  }
+  function move(){ var s=BP.narration_steps[i],ref=s.point,p=ref?anchor(ref,i):null,c=$('vizCur'); if(!p||!c)return; c.style.left=(p.x/T2.vb[0]*100)+'%'; c.style.top=(p.y/T2.vb[1]*100)+'%'; }
+  function say(text,cb){ try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read'); return; } }catch(e){} if(window.speechSynthesis){var u=new SpeechSynthesisUtterance(text);u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u);} else setTimeout(cb,2600); }
+  function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
+  function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause'; playStep(); }
+  function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; try{if(window.stopSpeak)stopSpeak();}catch(e){} }
+  function jump(x){ stop(); render(x); }
+  async function fetchBlueprint(text,subject){
+    var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) throw new Error('Visualize needs an internet connection.');
+    var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('Please sign in.');
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/visualize',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:(text||'').slice(0,1200),subject:subject||''})});
+    var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&j.error)||'Could not build a visualization.');
+    return j.blueprint;
+  }
+  window.aiVisualize=async function(text, topicName){
+    openModal();
+    try{
+      var bp=await fetchBlueprint(text, topicName);
+      if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
+      BP=bp; T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;});
+      mountPlayer(); setTimeout(play,400);
+    }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }
+  };
+})();
+</script>
 </body>
 </html>

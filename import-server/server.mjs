@@ -22,6 +22,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
+import { buildVisualPrompt, qcCheck, parseBlueprint, textKey } from "./visualize.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -578,6 +579,38 @@ app.post("/tts", async (req,res)=>{
     const buf = await ttsClip(provider, text, voice);
     res.setHeader("Content-Type","audio/mpeg"); res.send(buf);
   }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
+});
+
+/* Visualize Text — highlighted sentence → step-by-step diagram blueprint (DeepSeek Flash).
+ * Cached per highlighted text in the "visualizations" table (generate once, reuse for everyone).
+ * Narration audio is produced on the client via /tts (Kokoro) per step. */
+app.post("/visualize", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const text = (req.body.text||"").toString().trim();
+    if(!text) return res.status(400).json({ error:"highlight some text first" });
+    if(text.length>1200) return res.status(400).json({ error:"select a shorter passage (one or two sentences)" });
+    const subject = (req.body.subject||"").toString().slice(0,80);
+    const key = textKey(text);
+    // cache read (best-effort — skips silently if the table isn't created yet)
+    try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
+      if(c.data && c.data.blueprint) return res.json({ ok:true, cached:true, blueprint:c.data.blueprint }); }catch(_){}
+    // generate blueprint (Flash — in-app, always cheap tier)
+    const prompt = buildVisualPrompt(text, subject);
+    let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:4000, temperature:0.2 });
+    let bp = parseBlueprint(gen.text), qc = qcCheck(bp);
+    if(!qc.pass){                                   // one corrective retry with the QC issues
+      const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- "
+                + qc.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,4000);
+      const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:4000, temperature:0.2 });
+      const bp2 = parseBlueprint(gen2.text), qc2 = qcCheck(bp2);
+      if(bp2 && (qc2.pass || !bp)){ bp = bp2; qc = qc2; }
+    }
+    if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try a clearer single sentence" });
+    // cache write (best-effort)
+    try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
+    res.json({ ok:true, cached:false, blueprint:bp, qc_issues:qc.issues });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
 /* ---- Admin: edit build prompts per kind × level (only is_admin accounts) ---- */
