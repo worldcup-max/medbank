@@ -82,6 +82,16 @@ async function getUser(req){
 }
 async function isPremium(account_id){ try{ const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle(); return !!(s.data && s.data.status==="active"); }catch(e){ return false; } }
 async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id); return c.count||0; }catch(e){ return 0; } }
+/* today's Visualize allowance for a user — basic 3/day, premium 10/day (only new builds count) */
+async function vizQuota(userId){
+  const premium = await isPremium(userId).catch(()=>false);
+  const limit = premium ? 10 : 3;
+  let used = 0;
+  try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+    const c=await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",userId).gte("created_at",since.toISOString());
+    used=(c && !c.error)?(c.count||0):0; }catch(_){}
+  return { limit, remaining:Math.max(0,limit-used), premium };
+}
 const FREE_BUILD_LIMIT = 1;   // free accounts can build 1 lecture; everything inside it stays free
 
 /* transcribe a recorded lecture with OpenAI (gpt-4o-transcribe / whisper-1).
@@ -618,15 +628,17 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(b.layout!=="tree"&&b.layout!=="flow"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
+      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id) }); } }catch(_){}
     // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
     const premium = await isPremium(user.id).catch(()=>false);
     const limit = premium ? 10 : 3;
+    let used = 0;
     try{
       const since = new Date(); since.setUTCHours(0,0,0,0);
       const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
-      if(!cnt.error && (cnt.count||0) >= limit){
-        return res.status(429).json({ error:"daily_limit", limit, premium,
+      used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
+      if(used >= limit){
+        return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
           message:"You've used today's "+limit+" visualizations"+(premium?"":" on the free plan")+". They reset tomorrow"+(premium?".":" — or go premium for 10 a day.") });
       }
     }catch(_){}   // table not created yet → fail open (don't block students)
@@ -667,12 +679,12 @@ app.post("/visualize", async (req,res)=>{
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
     try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}   // count this NEW build against the daily limit
-    if(bp.layout!=="tree"&&bp.layout!=="flow"){                   // scene-mode only: tree mode needs no zones/assets
+    if(!bp.layout||bp.layout==="scene"){                   // scene-mode only: tree mode needs no zones/assets
       bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
       bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
     }
     bp._chain = chainOf(bp);                 // the causal chain / tree traversal, in order (transparency / debugging)
-    res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness });
+    res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 

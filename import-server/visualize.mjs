@@ -70,25 +70,65 @@ function assetMapText(){
 
 /* built fresh each call so overlay-approved templates/assets appear immediately */
 function visSystem(){ return (
-`You are the DIRECTOR of a step-by-step medical explainer. You do NOT draw — you output a JSON
-blueprint that a fixed renderer draws. FIRST choose the MODE that fits the highlighted text:
+`You are the DIRECTOR of a step-by-step medical/science explainer. You do NOT draw — you output a
+JSON blueprint that a fixed renderer draws.
 
-• MODE "mechanism" — a cause-and-effect PROCESS that happens in a REAL ANATOMICAL PLACE the templates
-  below can draw: transport across a cell membrane (kidney tubule, gut, etc.) or a neuron/synapse
-  journey. Use ONLY when the scene genuinely fits one of those templates — it gives the richest,
-  most spatial animation. Do NOT force unrelated content into it.
-• MODE "flow" — a cause-and-effect chain / pathway that has NO specific anatomical home: biochemical
-  cascades, enzyme pathways, "if X then Y then Z" logic, consequences that unfold in sequence
-  (e.g. "G6PD → NADPH → reduced glutathione → protects RBC; if deficient → oxidative damage →
-  haemolysis"). Build a PROCESS FLOW: ordered stations connected by arrows, revealed one at a time,
-  laid out as a clean flowing diagram. Use this for MOST mechanisms that aren't clearly a membrane
-  or synapse scene — it looks purpose-built, never a plain vertical list.
-• MODE "tree" — a DEFINITION, CLASSIFICATION, LIST, STRUCTURE, or set of facts with no causal flow
-  (e.g. "the two toxins are…", "a 150-kd protein of a heavy and light chain", "types/features of X").
-  Build a WHITEBOARD TREE: a root concept branching into sub-points, revealed like a mind-map.
+TOP RULE — ALWAYS PREFER A DIAGRAM. A real labelled diagram or animated schematic teaches far better
+than a bullet mind-map. For almost every topic (aim for 80%+) you can and SHOULD build a diagrammatic
+video. Work HARD to find the diagrammatic form first — a scene, a schematic, a plotted graph/curve, or
+a process flow. Only fall back to the whiteboard "tree" as a LAST RESORT, when the content is a pure
+definition/classification/list with genuinely no spatial layout, no sequence, and no quantities to plot.
 
-Choose the mode that makes the BEST explainer. Prefer mechanism when the anatomy fits, flow for other
-cascades, tree for non-causal facts. Every highlight must produce a rich, engaging result.
+Pick the FIRST mode below that can represent the concept:
+• MODE "mechanism" — a cause-and-effect PROCESS in a REAL ANATOMICAL PLACE the templates draw
+  (cell membrane: kidney tubule/gut; or a neuron/synapse). Richest, most spatial — use when it fits.
+• MODE "cell" — an ELECTROCHEMICAL CELL (galvanic/voltaic/electrolytic): anode, cathode, salt bridge,
+  electron flow ("galvanic cell", "which electrode is anode/cathode", "Daniell cell"). Real schematic.
+• MODE "graph" — anything best shown as a PLOTTED CURVE on axes: reaction energy profile (activation
+  energy, ΔH, catalyst), titration curve (pH vs volume), radioactive decay / half-life, Maxwell–
+  Boltzmann distribution, phase diagram, cooling/heating curves, rate-vs-time, dose-response. If the
+  idea involves how one quantity changes with another, or a characteristic curve, USE THIS.
+• MODE "orbital" — ELECTRON CONFIGURATION / orbital filling: Aufbau order, Hund's rule, Pauli, ion
+  formation. Renders arrows-in-boxes per subshell.
+• MODE "geometry" — MOLECULAR SHAPE (VSEPR): a central atom with bonds and lone pairs (linear, bent,
+  trigonal planar/pyramidal, tetrahedral, octahedral). Shows why lone pairs bend the shape.
+• MODE "ice" — CHEMICAL EQUILIBRIUM set up as an ICE table (Initial / Change / Equilibrium) for a
+  reaction; use for equilibrium concentration problems, Kc/Kp setups.
+• MODE "flow" — a cause-and-effect chain / pathway with no anatomical home: biochemical cascades,
+  enzyme pathways, "if X then Y then Z", stepwise procedures (redox balancing, limiting reagent,
+  buffer action). Ordered stations connected by arrows. This is the default workhorse for processes.
+• MODE "tree" — LAST RESORT only. A pure DEFINITION/CLASSIFICATION/LIST with no diagrammatic form
+  (e.g. "the two toxins are…", "types of X" that truly have no spatial/quantitative structure).
+
+Decision: try mechanism → cell → graph → flow first; choose "tree" ONLY if none of the diagrammatic
+modes can honestly represent the content. Every highlight must produce a rich, engaging result.
+
+════════ NARRATION — THIS IS THE WHOLE POINT. Make the student UNDERSTAND, not just see. ════════
+The diagram is the stage; the narration is the teacher. Write every narration_text to build real
+understanding, never to merely label what appears:
+• Answer "WHY". After any statement, say why it is so or what it means — use "because…", "which
+  means…", "so…". Never drop a term without unpacking it in plain words the moment it appears.
+• Break it down. Assume the student meets this for the FIRST time. Go from intuition to the formal
+  idea; define jargon inline; no leaps.
+• Tell ONE connected story — each step refers back to the last ("now that we have …, …").
+• Bust the classic misconception for that topic when there is one.
+• SPEAK IT ALOUD: write narration EXACTLY as a voice must read it — the text-to-speech CANNOT read
+  symbols or formulae. Spell everything out in words. Keep symbols in the diagram LABELS (for the eye)
+  but WORDS in narration_text (for the ear). Say it like this:
+    ∫ = "the integral of" · dy/dx = "dee y by dee x" · d/dx = "the derivative of" · Σ = "the sum of" ·
+    √x = "the square root of x" · x² = "x squared" · xⁿ = "x to the power n" · π = "pi" · θ = "theta" ·
+    ≈ = "approximately" · ≥ = "greater than or equal to" · ≠ = "is not equal to" · ∞ = "infinity" ·
+    Δ = "delta" · ± = "plus or minus" · f(x) = "f of x" · |x| = "the absolute value of x" ·
+    lim = "the limit" · ⇒ = "which implies" · ∴ = "therefore".
+• One idea per step, at most two spoken sentences, warm and clear. The last step recaps the insight.
+• Teach like the best tutor in the world:
+   – Speak TO the student ("notice how…", "here's the trick…", "you might expect X, but…").
+   – Use a quick concrete example or number when it makes the idea land ("half of −2 is −1, squared is 1…").
+   – Reach for a plain everyday analogy when a concept is abstract, then drop it once the point is made.
+   – Make the PAYOFF explicit — end a hard step with the takeaway ("so that's why…", "the whole point is…").
+   – Pre-empt the mistake students actually make here, and say what to do instead.
+Depth and clarity matter more than brevity within the two-sentence limit — every step should leave the
+student thinking "oh, I get it now," not "okay, next."
 
 ═══════ MODE "mechanism" ═══════
 TEMPLATES (pick exactly ONE whose scale fits the concept):
@@ -125,7 +165,37 @@ Rules:
 3. narration_steps reveal the stations IN ORDER (one per step is best). EVERY node revealed by some step; "point" each step at its node. The last step recaps the whole chain.
 4. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY. Faithful to the source; invent nothing.
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"flow","nodes":[{"id":"n0","label":"","note":"","kind":"trigger"},{"id":"n1","label":"","note":"","kind":"process"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"flow","nodes":[{"id":"n0","label":"","note":"","kind":"trigger"},{"id":"n1","label":"","note":"","kind":"process"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}
+
+═══════ MODE "cell" (electrochemical cell) ═══════
+Rules:
+1. Describe the two half-cells: "anode" and "cathode", each with a short "label" (e.g. "Zinc anode (−)"), a "half" reaction string (e.g. "Zn → Zn²⁺ + 2e⁻"), and a "sol" (solution label). Give a "bridge" label.
+2. narration_steps drive a FIXED schematic; each step's "reveal"/"active"/"point" use ONLY these part names: "anode", "cathode", "wire", "bridge", "ions". Reveal all four core parts (anode, cathode, wire, bridge) across the steps; "ions" is optional.
+3. 4–8 steps. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY (AN-OX/RED-CAT, OIL-RIG, electron direction, why the salt bridge). Last step recaps. Faithful to the source; invent nothing.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"cell","anode":{"label":"","half":"","sol":""},"cathode":{"label":"","half":"","sol":""},"bridge":"","narration_steps":[{"short":"","term":"","narration_text":"","reveal":["anode"],"active":["anode"],"point":"anode"}]}
+
+═══════ MODE "graph" (plotted curve) ═══════
+Rules:
+1. Define "x" and "y" axes: each {min, max, label}. Choose ranges that frame the curve nicely.
+2. "curves": 1–2 lines, each {id, color, points:[[x,y],…]} (6–9 points in DATA units; the renderer smooths them). Optional 2nd curve for a comparison (e.g. "with catalyst").
+3. "markers": key labelled points {id, at:[x,y], label, color, drop?:true to drop a dashed line to the x-axis}. e.g. reactants, transition state, products; or half-equivalence, equivalence.
+4. "regions" (optional): {id, type:"band", x0,x1, label, color} shaded vertical band (buffer region), or {id, type:"bracket", at:x, y0, y1, label, color} a vertical measure (Ea, ΔH).
+5. narration_steps reveal the curve first, then markers/regions in teaching order; "reveal"/"active"/"point" reference curve ids, marker ids, or region ids. "point" should name a MARKER. 4–8 steps, last recaps.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"graph","x":{"min":0,"max":100,"label":""},"y":{"min":0,"max":100,"label":""},"curves":[{"id":"c","color":"#7c3aed","points":[[0,0]]}],"markers":[{"id":"m","at":[0,0],"label":"","color":"#2563eb"}],"regions":[],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["c"],"active":["c"],"point":"m"}]}
+
+═══════ MODE "orbital" (electron-configuration boxes) ═══════
+"subshells" in FILL ORDER, each {id, label (e.g. "2p⁴"), boxes (1 for s, 3 for p, 5 for d, 7 for f), electrons (0..2×boxes)}. The renderer draws Hund/Pauli arrows automatically. Steps reveal subshells in order; "point" a subshell id.
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"orbital","subshells":[{"id":"1s","label":"1s²","boxes":1,"electrons":2}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["1s"],"active":["1s"],"point":"1s"}]}
+
+═══════ MODE "geometry" (VSEPR molecular shape) ═══════
+"center" (atom symbol), "shape" (one of: linear, trigonal_planar, bent, tetrahedral, trigonal_pyramidal, octahedral), "bonds":[{"to":"H"}…], optional "shape_label" and "angle". Steps reveal parts "bonds","lp","info" in that order.
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"geometry","center":"O","shape":"bent","shape_label":"BENT","angle":"104.5°","bonds":[{"to":"H"},{"to":"H"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["bonds"],"active":["bonds"],"point":"bonds"}]}
+
+═══════ MODE "ice" (equilibrium ICE table) ═══════
+"reaction" string, "species" list, "rows":{"I":[…],"C":[…],"E":[…]} each with one entry per species. Steps reveal "rxn","I","C","E" in order; "point" one of those.
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"ice","reaction":"","species":["",""],"rows":{"I":["",""],"C":["",""],"E":["",""]},"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["rxn"],"active":["rxn"],"point":"rxn"}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -185,6 +255,119 @@ export const EXEMPLARS = [
         {short:"Oxidative",term:"oxidative stress",narration_text:"Reactive oxygen species now build up unchecked.",reveal:["oxi"],active:["oxi"],point:"oxi"},
         {short:"Damage",term:"damage",narration_text:"They damage haemoglobin (forming Heinz bodies) and the cell membrane.",reveal:["dmg"],active:["dmg"],point:"dmg"},
         {short:"Haemolysis",term:"haemolysis",narration_text:"The weakened red cell breaks apart. Recap: G6PD → NADPH → reduced glutathione protects the RBC; without it, oxidative damage causes haemolysis.",reveal:["lyse"],active:["lyse"],point:"lyse"}
+      ]} },
+  /* ---- Chemistry gold exemplars (so chemistry highlights get an in-domain example) ---- */
+  { text: "In a galvanic cell, which electrode is the anode and cathode, and which way do the electrons flow? Oxidation at the anode, reduction at the cathode, salt bridge balances charge.",
+    blueprint: {meta:{title:"Galvanic cell — electron flow, anode & cathode",subject:"General Chemistry",concept_id:"galvanic_cell_electron_flow"},layout:"flow",
+      nodes:[
+        {id:"cell",label:"Galvanic cell",note:"spontaneous redox → electricity",kind:"trigger"},
+        {id:"anode",label:"Anode (−)",note:"AN-OX: oxidation here",kind:"process"},
+        {id:"lose",label:"Atoms lose e−",note:"OIL: oxidation is loss",kind:"process"},
+        {id:"wire",label:"e− flow in wire",note:"anode → cathode",kind:"product"},
+        {id:"cathode",label:"Cathode (+)",note:"RED-CAT: reduction here",kind:"process"},
+        {id:"gain",label:"Ions gain e−",note:"RIG: reduction is gain",kind:"product"},
+        {id:"salt",label:"Salt bridge",note:"keeps each side neutral",kind:"process"},
+        {id:"current",label:"Steady current",note:"until equilibrium",kind:"outcome"}
+      ],
+      narration_steps:[
+        {short:"Cell",term:"galvanic cell",narration_text:"A galvanic cell turns a spontaneous redox reaction into electrical current.",reveal:["cell"],active:["cell"],point:"cell"},
+        {short:"Anode",term:"anode",narration_text:"Oxidation always happens at the anode — in a galvanic cell it is the negative electrode (AN-OX).",reveal:["anode"],active:["anode"],point:"anode"},
+        {short:"Lose e−",term:"oxidation",narration_text:"There the atoms lose electrons — oxidation is loss (OIL).",reveal:["lose"],active:["lose"],point:"lose"},
+        {short:"Wire",term:"electron flow",narration_text:"Those electrons flow out through the external wire, from anode to cathode.",reveal:["wire"],active:["wire"],point:"wire"},
+        {short:"Cathode",term:"cathode",narration_text:"They reach the cathode, the positive electrode, where reduction happens (RED-CAT).",reveal:["cathode"],active:["cathode"],point:"cathode"},
+        {short:"Gain e−",term:"reduction",narration_text:"Ions there gain the electrons — reduction is gain (RIG).",reveal:["gain"],active:["gain"],point:"gain"},
+        {short:"Salt bridge",term:"salt bridge",narration_text:"The salt bridge lets ions move to keep each side neutral, so flow continues.",reveal:["salt"],active:["salt"],point:"salt"},
+        {short:"Current",term:"current",narration_text:"The result is a steady current until equilibrium. Recap: anode oxidises (−) → electrons through the wire → cathode reduces (+), salt bridge balances charge.",reveal:["current"],active:["current"],point:"current"}
+      ]} },
+  { text: "How do I know if a reaction is spontaneous using Gibbs free energy? ΔG = ΔH − TΔS and the signs of ΔH and ΔS decide.",
+    blueprint: {meta:{title:"Is it spontaneous? ΔG = ΔH − TΔS",subject:"General Chemistry",concept_id:"gibbs_spontaneity_four_cases"},layout:"tree",root:"g",
+      nodes:[
+        {id:"g",label:"ΔG = ΔH − TΔS",note:"sign of ΔG decides"},
+        {id:"c1",parent:"g",label:"ΔH − , ΔS +",note:"exothermic + more disorder"},
+        {id:"c1a",parent:"c1",label:"Spontaneous at all T",note:"ΔG always negative"},
+        {id:"c2",parent:"g",label:"ΔH + , ΔS −",note:"endothermic + more order"},
+        {id:"c2a",parent:"c2",label:"Never spontaneous",note:"ΔG always positive"},
+        {id:"c3",parent:"g",label:"ΔH − , ΔS −",note:"exothermic but ordering"},
+        {id:"c3a",parent:"c3",label:"Spontaneous at LOW T",note:"small TΔS term"},
+        {id:"c4",parent:"g",label:"ΔH + , ΔS +",note:"endothermic but disordering"},
+        {id:"c4a",parent:"c4",label:"Spontaneous at HIGH T",note:"TΔS overtakes ΔH"},
+        {id:"warn",parent:"g",label:"Spontaneous ≠ fast",note:"that's kinetics, not ΔG"}
+      ],
+      narration_steps:[
+        {short:"ΔG rule",term:"Gibbs free energy",narration_text:"A reaction is spontaneous when ΔG is negative, and ΔG = ΔH − TΔS — so the two signs decide everything.",reveal:["g"],active:["g"],point:"g"},
+        {short:"Both favour",term:"all temperatures",narration_text:"ΔH negative and ΔS positive: both help, ΔG negative at every temperature — always spontaneous.",reveal:["c1","c1a"],active:["c1a"],point:"c1a"},
+        {short:"Both oppose",term:"never",narration_text:"ΔH positive and ΔS negative: both oppose, ΔG positive at every temperature — never spontaneous.",reveal:["c2","c2a"],active:["c2a"],point:"c2a"},
+        {short:"Low T",term:"low temperature",narration_text:"Both negative: enthalpy favours, entropy opposes — spontaneous only at low temperature where TΔS is small.",reveal:["c3","c3a"],active:["c3a"],point:"c3a"},
+        {short:"High T",term:"high temperature",narration_text:"Both positive: entropy favours, enthalpy opposes — spontaneous only at high temperature where TΔS overtakes ΔH.",reveal:["c4","c4a"],active:["c4a"],point:"c4a"},
+        {short:"Not fast",term:"spontaneous",narration_text:"Trap: spontaneous means it can happen, not that it is fast — speed is kinetics. Recap: −/+ always; +/− never; −/− low-T; +/+ high-T.",reveal:["warn"],active:["warn"],point:"warn"}
+      ]} },
+  { text: "In a Daniell (galvanic) cell with a zinc electrode in zinc sulphate and a copper electrode in copper sulphate joined by a salt bridge, which is the anode and cathode and which way do electrons flow?",
+    blueprint: {meta:{title:"Daniell cell — Zn/Cu galvanic cell",subject:"General Chemistry",concept_id:"daniell_galvanic_cell"},layout:"cell",
+      anode:{label:"Zinc anode (−)",half:"Zn → Zn²⁺ + 2e⁻",sol:"ZnSO₄ solution"},
+      cathode:{label:"Copper cathode (+)",half:"Cu²⁺ + 2e⁻ → Cu",sol:"CuSO₄ solution"},
+      bridge:"Salt bridge (KNO₃)",
+      narration_steps:[
+        {short:"Setup",term:"Daniell cell",narration_text:"A Daniell cell pairs a zinc half-cell with a copper half-cell to make electricity from a spontaneous redox reaction.",reveal:["anode","cathode"],active:[],point:"anode"},
+        {short:"Anode",term:"anode",narration_text:"Zinc is more reactive, so it is oxidised — it is the anode, the negative electrode. Zinc atoms become Zn²⁺ ions, releasing electrons (AN-OX, OIL).",reveal:["anode"],active:["anode"],point:"anode"},
+        {short:"Cathode",term:"cathode",narration_text:"Copper ions are reduced onto the copper electrode — that is the cathode, the positive electrode (RED-CAT, RIG).",reveal:["cathode"],active:["cathode"],point:"cathode"},
+        {short:"Electrons",term:"electron flow",narration_text:"Electrons released at the zinc anode travel through the external wire to the copper cathode — anode to cathode, always.",reveal:["wire"],active:["wire"],point:"wire"},
+        {short:"Salt bridge",term:"salt bridge",narration_text:"The salt bridge lets ions move to keep both solutions electrically neutral, or the flow would stop.",reveal:["bridge"],active:["bridge"],point:"bridge"},
+        {short:"Ions",term:"ion movement",narration_text:"Anions drift toward the anode and cations toward the cathode. Recap: zinc anode oxidises and is negative, electrons flow through the wire to the positive copper cathode, and the salt bridge balances the charge.",reveal:["ions"],active:["ions"],point:"ions"}
+      ]} },
+  /* ---- Graph/curve exemplars (energy profile + titration) — the model reuses this for decay, Maxwell–Boltzmann, phase, etc. ---- */
+  { text: "Draw the reaction energy profile: reactants, the activation energy barrier and transition state, the products and ΔH, and how a catalyst lowers the activation energy.",
+    blueprint: {meta:{title:"Reaction energy profile — activation energy & ΔH",subject:"General Chemistry",concept_id:"reaction_energy_profile"},layout:"graph",
+      x:{min:0,max:100,label:"Reaction progress →"}, y:{min:0,max:100,label:"Energy"},
+      curves:[{id:"path",color:"#7c3aed",points:[[4,42],[20,55],[42,86],[64,55],[96,26]]},{id:"cat",color:"#0d9488",label:"with catalyst",points:[[4,42],[22,52],[42,68],[64,45],[96,26]]}],
+      markers:[{id:"react",at:[4,42],label:"Reactants",color:"#2563eb"},{id:"ts",at:[42,86],label:"Transition state",color:"#dc2626"},{id:"prod",at:[96,26],label:"Products",color:"#0d9488"}],
+      regions:[{id:"ea",type:"bracket",at:42,y0:42,y1:86,label:"Ea",color:"#dc2626"},{id:"dh",type:"bracket",at:80,y0:42,y1:26,label:"ΔH (−)",color:"#b45309"}],
+      narration_steps:[
+        {short:"Curve",term:"energy profile",narration_text:"An energy profile plots energy against reaction progress.",reveal:["path"],active:["path"],point:"react"},
+        {short:"Reactants",term:"reactants",narration_text:"We start with the reactants at their energy level.",reveal:["react"],active:["react"],point:"react"},
+        {short:"Barrier",term:"activation energy",narration_text:"Energy climbs to a peak — the transition state. The height of that barrier is the activation energy, Ea.",reveal:["ts","ea"],active:["ts"],point:"ts"},
+        {short:"Products",term:"ΔH",narration_text:"It falls to the products. Products lower than reactants means ΔH is negative — the reaction is exothermic.",reveal:["prod","dh"],active:["prod"],point:"prod"},
+        {short:"Catalyst",term:"catalyst",narration_text:"A catalyst gives a new path with a lower barrier — smaller Ea — so the reaction goes faster. It does NOT change ΔH.",reveal:["cat"],active:["cat"],point:"ts"},
+        {short:"Recap",term:"recap",narration_text:"Recap: Ea is the barrier height, ΔH is products minus reactants, and a catalyst lowers Ea without changing ΔH.",reveal:[],active:["path"],point:"ts"}
+      ]} },
+  { text: "Sketch the titration curve for a weak acid with a strong base: the starting pH, the buffer region and half-equivalence where pH = pKa, and the equivalence point above pH 7.",
+    blueprint: {meta:{title:"Titration curve — weak acid + strong base",subject:"General Chemistry",concept_id:"titration_curve_weak_strong"},layout:"graph",
+      x:{min:0,max:50,label:"Volume of NaOH added (mL) →"}, y:{min:0,max:14,label:"pH"},
+      curves:[{id:"curve",color:"#7c3aed",points:[[0,2.9],[5,4.0],[12.5,4.7],[20,5.6],[24,6.6],[25,8.7],[26,10.6],[35,11.8],[50,12.4]]}],
+      markers:[{id:"start",at:[0,2.9],label:"Weak acid (low pH)",color:"#2563eb"},{id:"half",at:[12.5,4.7],label:"Half-eq: pH = pKa",color:"#0d9488",drop:true},{id:"equiv",at:[25,8.7],label:"Equivalence (pH > 7)",color:"#dc2626",drop:true}],
+      regions:[{id:"buffer",type:"band",x0:5,x1:20,label:"buffer region",color:"#0d9488"}],
+      narration_steps:[
+        {short:"Curve",term:"titration curve",narration_text:"This plots the pH as we add strong base to a weak acid.",reveal:["curve"],active:["curve"],point:"start"},
+        {short:"Start",term:"weak acid",narration_text:"We begin at a low pH — a weak acid, only partly ionised.",reveal:["start"],active:["start"],point:"start"},
+        {short:"Buffer",term:"half-equivalence",narration_text:"The curve is flat here — the buffer region. At the half-equivalence point the pH equals the pKa of the acid.",reveal:["buffer","half"],active:["half"],point:"half"},
+        {short:"Equivalence",term:"equivalence point",narration_text:"Then a steep jump: the equivalence point. For a weak acid with a strong base the pH there is above 7, because the salt is basic.",reveal:["equiv"],active:["equiv"],point:"equiv"},
+        {short:"Recap",term:"recap",narration_text:"Recap: flat buffer region with pH = pKa at half-equivalence, then a sharp rise through an equivalence point above pH 7.",reveal:[],active:["curve"],point:"equiv"}
+      ]} },
+  /* ---- orbital-box, geometry, ICE exemplars ---- */
+  { text: "Write the electron configuration of oxygen (Z = 8) and show how the 2p electrons fill using Hund's rule and the Pauli principle.",
+    blueprint: {meta:{title:"Oxygen (Z=8): 1s² 2s² 2p⁴",subject:"General Chemistry",concept_id:"oxygen_electron_config"},layout:"orbital",
+      subshells:[{id:"1s",label:"1s²",boxes:1,electrons:2},{id:"2s",label:"2s²",boxes:1,electrons:2},{id:"2p",label:"2p⁴",boxes:3,electrons:4}],
+      narration_steps:[
+        {short:"1s",term:"1s",narration_text:"Electrons fill lowest energy first. The 1s orbital takes two, paired with opposite spins — that's the Pauli principle.",reveal:["1s"],active:["1s"],point:"1s"},
+        {short:"2s",term:"2s",narration_text:"Next the 2s orbital fills with two paired electrons.",reveal:["2s"],active:["2s"],point:"2s"},
+        {short:"2p",term:"Hund's rule",narration_text:"The three 2p orbitals get one electron each first, all with the same spin, before any pairs up. That's Hund's rule — so the fourth 2p electron pairs in the first box.",reveal:["2p"],active:["2p"],point:"2p"},
+        {short:"Recap",term:"recap",narration_text:"Recap: fill lowest first, one electron per orbital before pairing (Hund), and paired spins are opposite (Pauli).",reveal:[],active:["2p"],point:"2p"}
+      ]} },
+  { text: "Why is water (H₂O) bent and not linear? Explain using VSEPR and the lone pairs on oxygen.",
+    blueprint: {meta:{title:"Water (H₂O) — bent, not linear",subject:"General Chemistry",concept_id:"water_vsepr_bent"},layout:"geometry",center:"O",shape:"bent",shape_label:"Molecular shape: BENT",angle:"104.5°",
+      bonds:[{to:"H"},{to:"H"}],
+      narration_steps:[
+        {short:"Bonds",term:"bonding pairs",narration_text:"Oxygen forms two bonds, one to each hydrogen.",reveal:["bonds"],active:["bonds"],point:"bonds"},
+        {short:"Lone pairs",term:"lone pairs",narration_text:"But oxygen also has two lone pairs. Four electron groups means a tetrahedral electron geometry.",reveal:["lp"],active:["lp"],point:"lp"},
+        {short:"Shape",term:"bent",narration_text:"Lone pairs repel more strongly and push the bonds together, so the molecule is bent at about 104.5 degrees — not linear.",reveal:["info"],active:["info"],point:"info"}
+      ]} },
+  { text: "Set up the ICE table for the equilibrium N₂ + 3H₂ ⇌ 2NH₃ starting from 0.10 M N₂ and 0.30 M H₂.",
+    blueprint: {meta:{title:"ICE table — ammonia synthesis",subject:"General Chemistry",concept_id:"ice_ammonia_equilibrium"},layout:"ice",reaction:"N₂ + 3H₂ ⇌ 2NH₃",species:["N₂","H₂","NH₃"],
+      rows:{I:["0.10","0.30","0"],C:["−x","−3x","+2x"],E:["0.10−x","0.30−3x","2x"]},
+      narration_steps:[
+        {short:"Reaction",term:"equilibrium",narration_text:"An ICE table tracks how concentrations change as a reaction reaches equilibrium.",reveal:["rxn"],active:["rxn"],point:"rxn"},
+        {short:"Initial",term:"initial",narration_text:"The Initial row is what we start with: 0.10 molar nitrogen, 0.30 molar hydrogen, and no ammonia.",reveal:["I"],active:["I"],point:"I"},
+        {short:"Change",term:"change",narration_text:"The Change row uses the stoichiometry: nitrogen falls by x, hydrogen by 3x, and ammonia rises by 2x.",reveal:["C"],active:["C"],point:"C"},
+        {short:"Equilibrium",term:"equilibrium row",narration_text:"The Equilibrium row is Initial plus Change — the expressions you put into the Kc expression to solve for x.",reveal:["E"],active:["E"],point:"E"}
       ]} }
 ];
 
@@ -193,9 +376,27 @@ export const EXEMPLARS = [
  * model can still choose any — this just trims ~2/3 of the few-shot tokens. */
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
-  if(/\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t)) return EXEMPLARS[1]; // tree (definitions/lists win even if a stray causal word appears)
-  if(/membrane|receptor|channel|synap|neuron|axon|reabsorb|secret|lumen|tubule|vesicle|presynap|postsynap|collecting duct/.test(t)) return EXEMPLARS[0]; // mechanism (anatomical scene)
-  return EXEMPLARS[2];   // flow — the default for cascades
+  const isTree = /\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t);
+  // chemistry cues → use an in-domain chemistry exemplar (chemistry rarely fits the biology scenes)
+  const chem = /\b(mole|reagent|reactant|stoichiometr|oxidation|reduction|redox|anode|cathode|electrode|electron|electroly|galvanic|electrochemical|voltaic|daniell|salt bridge|half-cell|\bion\b|ionis|acid|\bbase\b|\bph\b|buffer|titrat|equilibrium|entropy|enthalpy|gibbs|spontaneous|exotherm|endotherm|\bbond|covalent|ionic|orbital|electroneg|valence|molar|molecul|intermolecular|dipole|hydrogen bond|london|van der|solub|catalyst|\bgas law\b|periodic|isotope|atom|compound|reaction|delta ?[ghs]|energy profile|activation energy|reaction coordinate|maxwell|boltzmann|half-life|half life|radioactive|decay|phase diagram|triple point|distribution|electron config|aufbau|hund|pauli|subshell|vsepr|molecular shape|molecular geometry|lone pair|tetrahedral|trigonal|\bbent\b|pyramidal|octahedral|bond angle|ice table|le ?chatelier|reaction quotient|\bkc\b|\bkp\b)\b/.test(t)
+    || /Δ[ghs]/i.test(text||"");
+  if(chem){
+    // electrochemical cell → the purpose-built cell schematic
+    if(/galvanic|electrochemical|voltaic|daniell|salt bridge|half-cell|electrode|(\banode\b[\s\S]*\bcathode\b)/.test(t)) return EXEMPLARS[5]; // chem cell schematic
+    if(/electron config|orbital|aufbau|hund|pauli|subshell/.test(t)) return EXEMPLARS[8];  // orbital boxes
+    if(/vsepr|molecular shape|molecular geometry|lone pair|tetrahedral|trigonal|\bbent\b|pyramidal|octahedral|bond angle/.test(t)) return EXEMPLARS[9]; // VSEPR geometry
+    if(/ice table|le ?chatelier|reaction quotient|\bkc\b|\bkp\b|equilibrium (concentration|expression|constant|problem)/.test(t)) return EXEMPLARS[10]; // ICE table
+    // plotted curves → the graph engine (energy profile / titration / decay / Boltzmann / phase …)
+    if(/energy profile|reaction coordinate|activation energy|\bcatalyst\b|maxwell|boltzmann|distribution curve/.test(t)) return EXEMPLARS[6]; // energy-profile graph
+    if(/titration|\bph curve\b|half-life|half life|radioactive decay|decay curve|phase diagram|triple point|cooling curve|heating curve|solubility curve|rate.{0,6}time/.test(t)) return EXEMPLARS[7]; // titration-style graph
+    // thermodynamics decision matrix → the Gibbs "cases" tree (a genuine matrix, not a curve)
+    if(/enthalp|entrop|gibbs|spontaneous|delta ?[ghs]|Δ[ghs]|criteri|four cases|sign of/.test(t)) return EXEMPLARS[4]; // chem tree
+    if(isTree) return EXEMPLARS[4];   // other chem classification → tree (last resort)
+    return EXEMPLARS[3];   // chem flow (cascades, redox, kinetics, buffers, stoichiometry…)
+  }
+  if(isTree) return EXEMPLARS[1]; // biology tree
+  if(/membrane|receptor|channel|synap|neuron|axon|reabsorb|secret|lumen|tubule|vesicle|presynap|postsynap|collecting duct/.test(t)) return EXEMPLARS[0]; // biology mechanism
+  return EXEMPLARS[2];   // biology flow — the default for cascades
 }
 /* Cost optimisation (b): the big CONSTANT block (rules + schemas + the example) goes FIRST and the
  * variable SOURCE goes LAST, so DeepSeek/OpenAI automatic prompt-caching bills the repeated prefix
@@ -263,10 +464,107 @@ export function flowCheck(bp){
   return { pass: issues.length===0, issues };
 }
 
-/* QC critic — deterministic, manifest-enforced. Delegates to tree/flow checks for those modes. */
+/* Electrochemical-CELL validity: a fixed schematic driven by named parts. */
+const CELL_PARTS = new Set(["anode","cathode","wire","bridge","ions"]);
+export function cellCheck(bp){
+  const issues = [];
+  if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
+  if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
+  if(!bp.anode || !bp.anode.label) issues.push("missing anode.label");
+  if(!bp.cathode || !bp.cathode.label) issues.push("missing cathode.label");
+  const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+")");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  const revealed = {};
+  steps.forEach((s,i)=>{
+    if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!CELL_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part "+r); revealed[r]=1; });
+    if(s.point && !CELL_PARTS.has(s.point)) issues.push("step "+(i+1)+" point not a cell part: "+s.point);
+  });
+  ["anode","cathode","wire","bridge"].forEach(p=>{ if(!revealed[p]) issues.push("core part '"+p+"' is never revealed"); });
+  return { pass: issues.length===0, issues };
+}
+
+/* Plotted-GRAPH validity: axes, ≥1 curve with points, steps reference real ids. */
+export function graphPlotCheck(bp){
+  const issues = [];
+  if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
+  if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
+  if(!bp.x || bp.x.min==null || bp.x.max==null || !bp.x.label) issues.push("x axis needs min, max, label");
+  if(!bp.y || bp.y.min==null || bp.y.max==null || !bp.y.label) issues.push("y axis needs min, max, label");
+  const curves = Array.isArray(bp.curves)?bp.curves:[];
+  if(!curves.length) issues.push("no curves");
+  const ids = {};
+  curves.forEach((c,i)=>{ if(!c.id){issues.push("curve "+i+" missing id");return;} ids[c.id]=1;
+    if(!Array.isArray(c.points)||c.points.length<2) issues.push("curve '"+c.id+"' needs ≥2 points"); });
+  (bp.markers||[]).forEach((m,i)=>{ if(!m.id){issues.push("marker "+i+" missing id");return;} ids[m.id]=1;
+    if(!Array.isArray(m.at)||m.at.length!==2) issues.push("marker '"+m.id+"' needs at:[x,y]"); });
+  (bp.regions||[]).forEach((r,i)=>{ if(!r.id){issues.push("region "+i+" missing id");return;} ids[r.id]=1; });
+  const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+")");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  steps.forEach((s,i)=>{
+    if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
+    if(s.point && !ids[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
+  });
+  return { pass: issues.length===0, issues };
+}
+
+/* ORBITAL-box (electron configuration) validity. */
+export function orbitalCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object")return{pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title)issues.push("missing meta.title");
+  const subs=Array.isArray(bp.subshells)?bp.subshells:[]; if(subs.length<1)issues.push("no subshells");
+  const ids={}; subs.forEach((s,i)=>{ if(!s.id){issues.push("subshell "+i+" missing id");return;} ids[s.id]=1;
+    if(!(s.boxes>=1))issues.push("subshell '"+s.id+"' needs boxes ≥1");
+    if(s.electrons==null||s.electrons<0||s.electrons>2*s.boxes)issues.push("subshell '"+s.id+"' electrons must be 0.."+(2*s.boxes)); });
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
+  steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
+    (s.reveal||[]).forEach(r=>{if(!ids[r])issues.push("step "+(i+1)+" reveals unknown subshell "+r);});
+    if(s.point&&!ids[s.point])issues.push("step "+(i+1)+" point unknown "+s.point); });
+  return {pass:issues.length===0,issues};
+}
+/* VSEPR GEOMETRY validity. */
+const GEO_SHAPES=new Set(["linear","trigonal_planar","bent","tetrahedral","trigonal_pyramidal","octahedral"]);
+const GEO_PARTS=new Set(["bonds","lp","info"]);
+export function geometryCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object")return{pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title)issues.push("missing meta.title");
+  if(!bp.center)issues.push("missing center atom");
+  if(!GEO_SHAPES.has(bp.shape))issues.push("shape must be one of: "+[...GEO_SHAPES].join(", "));
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
+  steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
+    (s.reveal||[]).forEach(r=>{if(!GEO_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
+    if(s.point&&!GEO_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
+  return {pass:issues.length===0,issues};
+}
+/* ICE table validity. */
+const ICE_PARTS=new Set(["rxn","I","C","E"]);
+export function iceCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object")return{pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title)issues.push("missing meta.title");
+  if(!bp.reaction)issues.push("missing reaction");
+  const sp=Array.isArray(bp.species)?bp.species:[]; if(sp.length<2)issues.push("need ≥2 species");
+  const rows=bp.rows||{}; ["I","C","E"].forEach(r=>{ if(!Array.isArray(rows[r])||rows[r].length!==sp.length)issues.push("row "+r+" must have "+sp.length+" cells"); });
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
+  steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
+    (s.reveal||[]).forEach(r=>{if(!ICE_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
+    if(s.point&&!ICE_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
+  return {pass:issues.length===0,issues};
+}
+
+/* QC critic — deterministic, manifest-enforced. Delegates to each layout's own check. */
 export function qcCheck(bp){
   if(bp && bp.layout==="flow") return flowCheck(bp);
   if(bp && bp.layout==="tree") return treeCheck(bp);
+  if(bp && bp.layout==="cell") return cellCheck(bp);
+  if(bp && bp.layout==="graph") return graphPlotCheck(bp);
+  if(bp && bp.layout==="orbital") return orbitalCheck(bp);
+  if(bp && bp.layout==="geometry") return geometryCheck(bp);
+  if(bp && bp.layout==="ice") return iceCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -313,6 +611,11 @@ export function qcCheck(bp){
  * this is the causal chain as the student experiences it. Markers/labels excluded. */
 const ANNOTATION = new Set(["label","blockx","lightning"]);
 export function chainOf(bp){
+  if(bp && bp.layout==="orbital") return (bp.subshells||[]).map(s=>s.label||s.id);
+  if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
+  if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
+  if(bp && bp.layout==="graph") return (bp.markers||[]).map(m=>m.label||m.id);
+  if(bp && bp.layout==="cell") return [(bp.anode&&bp.anode.label)||"anode","e⁻ → wire","(cathode)"+((bp.cathode&&bp.cathode.label)||""),bp.bridge||"salt bridge"];
   if(bp && bp.layout==="flow") return (bp.nodes||[]).map(n=>n.label||n.id);   // flow = the node sequence
   if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
     const nodes = bp.nodes||[], byId={}; nodes.forEach(n=>byId[n.id]=n);
@@ -334,7 +637,7 @@ export function chainOf(bp){
  * every element is revealed and wired in. Catches skipped links (disconnected sub-chains),
  * orphan elements (revealed but never connected), and elements that never appear. Deterministic. */
 export function graphCheck(bp){
-  if(bp && (bp.layout==="tree"||bp.layout==="flow")) return { pass:true, issues:[], components:1 };   // handled by tree/flow checks
+  if(bp && bp.layout && bp.layout!=="scene") return { pass:true, issues:[], components:1 };   // non-scene layouts handled by their own checks
   const issues = [];
   const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
   const steps = (bp && bp.narration_steps) || [];

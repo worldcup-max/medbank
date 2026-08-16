@@ -3959,6 +3959,7 @@ function render(){
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
+  if(p[0]==='topic' && window.mountVizTeaser) setTimeout(window.mountVizTeaser,60);
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
@@ -4149,6 +4150,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizpanel{background:#fff;border-radius:16px;max-width:900px;width:100%;max-height:94vh;overflow:auto;box-shadow:0 30px 80px rgba(20,12,38,.5)}
 .vizhd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line,#e7e3f2)}
 .vizhd b{font-size:15px}.vizhd .x{border:0;background:#f1eef8;border-radius:9px;width:32px;height:32px;font-size:16px;cursor:pointer}
+.vizhd .vizq{margin-left:auto;margin-right:10px;font-size:11px;font-weight:800;color:#6d28d9;background:#f1eef8;border-radius:999px;padding:3px 9px}
+.vizhd .vizq.low{color:#b45309;background:#fdf1e3}.vizhd .vizq:empty{display:none}
 .vizbody{padding:14px 16px}
 .vizrail{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:10px}
 .vizrail .rc{font-size:10px;font-weight:800;color:#5c5570;background:#f1eef8;border:1px solid #e7e3f2;border-radius:999px;padding:3px 8px}
@@ -4171,6 +4174,11 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizjson{margin-top:10px;font-size:12px;color:#5c5570}.vizjson summary{cursor:pointer;font-weight:700}
 .vizjson pre{max-height:220px;overflow:auto;background:#faf9fd;border:1px solid #e7e3f2;border-radius:8px;padding:10px;font-size:11px;white-space:pre-wrap;word-break:break-word}
 .vizload{padding:40px;text-align:center;color:#5c5570;font-weight:700}
+.vizteaser{border:1px solid #e7e3f2;border-radius:12px;background:linear-gradient(#faf9fd,#fff);padding:10px 12px;margin:0 0 16px}
+.vizteaser .vtlab{font-size:11px;font-weight:800;color:#6d28d9;letter-spacing:.3px;margin-bottom:6px}
+.vizteaser .vtstage{border:1px solid #eee7fb;border-radius:9px;background:#fffdf6;overflow:hidden;max-height:240px}
+.vizteaser .vtstage svg{display:block;width:100%;height:auto}
+.vizteaser .vtcta{font-size:12px;color:#5c5570;margin-top:8px;line-height:1.45}
 .vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
 .vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 .vzflow{stroke-dasharray:9 6;animation:vzmarch 1s linear infinite}@keyframes vzmarch{to{stroke-dashoffset:-30}}
@@ -4315,6 +4323,116 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     for(var k=0;k<FLOW.nodes.length-1;k++){ var a=FLOW.nodes[k],b=FLOW.nodes[k+1]; if(shown[a.id]&&shown[b.id]) s.push(fArrow(a,b)); }
     FLOW.nodes.forEach(function(nd){ if(shown[nd.id]) s.push(fNode(nd,!!act[nd.id])); });
     s.push('</svg>'); return s.join(''); }
+  /* ===== ORBITAL-box mode (electron configuration) ===== */
+  var ORB=null;
+  function layoutOrbital(){ var subs=BP.subshells||[],BW=30,gap=3,sgap=34,x0=60,rowY=[150,300],perRow=6,col=0,row=0,x=x0,pt={};
+    subs.forEach(function(sh){ if(col>=perRow){col=0;row++;x=x0;} var y=rowY[row]||rowY[0],w=sh.boxes*(BW+gap)-gap; pt[sh.id]={x:x+w/2,y:y+15}; x+=w+sgap; col++; });
+    ORB={pt:pt,vb:[960,440]}; }
+  function orbitalSVG(step){ var subs=BP.subshells||[],BW=30,gap=3,sgap=34,x0=60,rowY=[150,300],perRow=6;
+    var shown={};for(var s=0;s<=step;s++)(BP.narration_steps[s].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var S=['<svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="440" fill="#fbfcff"/>'];
+    S.push(T(480,52,BP.meta.title||'',{size:16,w:800,fill:'#3a3550'}));
+    S.push(T(60,116,'↑ energy / fill order →',{size:11,fill:'#8a8398',w:700,anchor:'start'}));
+    var col=0,row=0,x=x0;
+    subs.forEach(function(sh){ if(col>=perRow){col=0;row++;x=x0;} var y=rowY[row]||rowY[0],w=sh.boxes*(BW+gap)-gap;
+      var gl=act[sh.id]?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.9))"':'',vis=shown[sh.id]?1:0.12;
+      var g='<g style="opacity:'+vis+'"'+gl+'>';
+      for(var b=0;b<sh.boxes;b++){ var bx=x+b*(BW+gap);
+        g+='<rect x="'+bx+'" y="'+y+'" width="'+BW+'" height="'+BW+'" rx="3" fill="#fff" stroke="#6d28d9" stroke-width="2"/>';
+        var up=(b<Math.min(sh.electrons,sh.boxes)),dn=(sh.electrons>sh.boxes&&b<(sh.electrons-sh.boxes));
+        if(up)g+='<path d="M'+(bx+11)+','+(y+23)+' L'+(bx+11)+','+(y+7)+' M'+(bx+11)+','+(y+7)+' L'+(bx+7)+','+(y+13)+' M'+(bx+11)+','+(y+7)+' L'+(bx+15)+','+(y+13)+'" stroke="#2563eb" stroke-width="2" fill="none"/>';
+        if(dn)g+='<path d="M'+(bx+19)+','+(y+7)+' L'+(bx+19)+','+(y+23)+' M'+(bx+19)+','+(y+23)+' L'+(bx+15)+','+(y+17)+' M'+(bx+19)+','+(y+23)+' L'+(bx+23)+','+(y+17)+'" stroke="#dc2626" stroke-width="2" fill="none"/>';
+      }
+      g+=T(x+w/2,y+BW+20,sh.label||sh.id,{size:13,w:800,fill:'#5b21b6'})+'</g>'; S.push(g); x+=w+sgap; col++;
+    });
+    S.push('</svg>');return S.join(''); }
+  /* ===== GEOMETRY (VSEPR) mode ===== */
+  var GEO_SHAPES={linear:{bonds:[0,180],lps:[]},trigonal_planar:{bonds:[90,210,330],lps:[]},bent:{bonds:[235,305],lps:[55,125]},tetrahedral:{bonds:[60,120,240,300],lps:[]},trigonal_pyramidal:{bonds:[210,270,330],lps:[90]},octahedral:{bonds:[0,60,120,180,240,300],lps:[]}};
+  var GEOPT={bonds:{x:480,y:330},lp:{x:480,y:175},info:{x:480,y:470}};
+  function geometrySVG(step){ var cx=480,cy=250,R=140,sh=GEO_SHAPES[BP.shape]||GEO_SHAPES.tetrahedral;
+    var shown={};for(var s=0;s<=step;s++)(BP.narration_steps[s].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var rad=function(d){return d*Math.PI/180;},P=function(a,r){return [cx+r*Math.cos(rad(a)),cy-r*Math.sin(rad(a))];};
+    var S=['<svg viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="500" fill="#fbfcff"/>'];
+    S.push(T(480,44,BP.meta.title||'',{size:16,w:800,fill:'#3a3550'}));
+    if(shown.bonds)sh.bonds.forEach(function(a,i){ var p=P(a,R),gl=act.bonds?' style="filter:drop-shadow(0 0 5px rgba(124,58,237,.8))"':'';
+      S.push('<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#3a3550" stroke-width="4"'+gl+'/>');
+      S.push('<circle cx="'+p[0]+'" cy="'+p[1]+'" r="24" fill="#dbe7ff" stroke="#2563eb" stroke-width="2.5"/>'+T(p[0],p[1]+5,(BP.bonds&&BP.bonds[i]&&BP.bonds[i].to)||'X',{size:15,w:800,fill:'#2563eb'})); });
+    if(shown.lp)sh.lps.forEach(function(a){ var p=P(a,64),gl=act.lp?' style="filter:drop-shadow(0 0 5px rgba(220,38,38,.8))"':'';
+      S.push('<g'+gl+'><ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="24" ry="15" fill="#ffe0e0" stroke="#dc2626" stroke-width="2" transform="rotate('+(-a)+' '+p[0]+' '+p[1]+')"/><circle cx="'+(p[0]-6)+'" cy="'+p[1]+'" r="3" fill="#dc2626"/><circle cx="'+(p[0]+6)+'" cy="'+p[1]+'" r="3" fill="#dc2626"/></g>'); });
+    S.push('<circle cx="'+cx+'" cy="'+cy+'" r="30" fill="#ede7fb" stroke="#6d28d9" stroke-width="3"/>'+T(cx,cy+6,BP.center||'A',{size:18,w:800,fill:'#5b21b6'}));
+    if(shown.info)S.push(T(480,470,(BP.shape_label||BP.shape||'')+(BP.angle?('  ·  bond angle ≈ '+BP.angle):''),{size:14,w:800,fill:'#0d7a68'}));
+    S.push('</svg>');return S.join(''); }
+  /* ===== ICE table mode ===== */
+  var ICEPT={rxn:{x:440,y:90},I:{x:440,y:202},C:{x:440,y:266},E:{x:440,y:330}};
+  function iceSVG(step){ var sp=BP.species||[],rows=BP.rows||{},order=['I','C','E'],rlab={I:'Initial',C:'Change',E:'Equilibrium'};
+    var shown={};for(var s=0;s<=step;s++)(BP.narration_steps[s].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var x0=140,y0=130,cw=200,ch=64,lw=140;
+    var S=['<svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="440" fill="#fbfcff"/>'];
+    S.push(T(480,44,BP.meta.title||'',{size:16,w:800,fill:'#3a3550'}));
+    if(shown.rxn)S.push('<rect x="'+(x0-lw)+'" y="70" width="'+(lw+sp.length*cw)+'" height="40" rx="8" fill="#ede7fb" stroke="#6d28d9" stroke-width="2"'+(act.rxn?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.8))"':'')+'/>'+T(x0-lw+(lw+sp.length*cw)/2,96,BP.reaction||'',{size:15,w:800,fill:'#5b21b6'}));
+    sp.forEach(function(s2,i){ S.push('<rect x="'+(x0+i*cw)+'" y="'+y0+'" width="'+cw+'" height="40" fill="#f1eef8" stroke="#d9cff2"/>'+T(x0+i*cw+cw/2,y0+26,s2,{size:14,w:800,fill:'#3a3550'})); });
+    S.push('<rect x="'+(x0-lw)+'" y="'+y0+'" width="'+lw+'" height="40" fill="#fbfcff" stroke="#d9cff2"/>');
+    order.forEach(function(rk,r){ var y=y0+40+r*ch,vis=shown[rk]?1:0.12,gl=act[rk]?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.8))"':'';
+      S.push('<g style="opacity:'+vis+'"'+gl+'><rect x="'+(x0-lw)+'" y="'+y+'" width="'+lw+'" height="'+ch+'" fill="#faf7ff" stroke="#d9cff2"/>'+T(x0-lw+lw/2,y+ch/2+5,rlab[rk],{size:13,w:800,fill:'#6d28d9'}));
+      (rows[rk]||[]).forEach(function(v,i){ S.push('<rect x="'+(x0+i*cw)+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="#fff" stroke="#e7e3f2"/>'+T(x0+i*cw+cw/2,y+ch/2+6,v,{size:15,w:700,fill:'#2a2536'})); });
+      S.push('</g>'); });
+    S.push('</svg>');return S.join(''); }
+  /* ===== GRAPH mode (plotted curve: energy profile, titration, decay, Boltzmann, phase…) ===== */
+  var GRAPH=null;
+  function layoutGraph(){ var X=BP.x||{min:0,max:100},Y=BP.y||{min:0,max:100},x0=78,x1=920,y0=44,y1=470;
+    GRAPH={X:X,Y:Y,x0:x0,x1:x1,y0:y0,y1:y1,vb:[960,540],pt:{}};
+    var mx=function(v){return x0+(v-X.min)/(X.max-X.min)*(x1-x0);},my=function(v){return y1-(v-Y.min)/(Y.max-Y.min)*(y1-y0);};
+    (BP.markers||[]).forEach(function(m){GRAPH.pt[m.id]={x:mx(m.at[0]),y:my(m.at[1])};}); }
+  function gSmooth(pts){ if(pts.length<3)return 'M'+pts.map(function(p){return p.join(',');}).join(' L');
+    var d='M'+pts[0][0]+','+pts[0][1];
+    for(var i=0;i<pts.length-1;i++){var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+      d+=' C'+(p1[0]+(p2[0]-p0[0])/6)+','+(p1[1]+(p2[1]-p0[1])/6)+' '+(p2[0]-(p3[0]-p1[0])/6)+','+(p2[1]-(p3[1]-p1[1])/6)+' '+p2[0]+','+p2[1];}
+    return d; }
+  function graphSVG(step){ var X=GRAPH.X,Y=GRAPH.Y,x0=GRAPH.x0,x1=GRAPH.x1,y0=GRAPH.y0,y1=GRAPH.y1;
+    var mx=function(v){return x0+(v-X.min)/(X.max-X.min)*(x1-x0);},my=function(v){return y1-(v-Y.min)/(Y.max-Y.min)*(y1-y0);};
+    var shown={};for(var s=0;s<=step;s++)(BP.narration_steps[s].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var gl=function(k){return act[k]?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.9))"':'';};
+    var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+    for(var g=1;g<5;g++){var gyy=y0+(y1-y0)*g/5;S.push('<line x1="'+x0+'" y1="'+gyy+'" x2="'+x1+'" y2="'+gyy+'" stroke="#eef1f8"/>');}
+    (BP.regions||[]).forEach(function(r){ if(!shown[r.id])return;
+      if(r.type==='band'){ S.push('<rect x="'+mx(r.x0)+'" y="'+y0+'" width="'+(mx(r.x1)-mx(r.x0))+'" height="'+(y1-y0)+'" fill="'+(r.color||'#7c3aed')+'" opacity="0.10"'+gl(r.id)+'/>'+T((mx(r.x0)+mx(r.x1))/2,y0+16,r.label||'',{size:11,fill:r.color||'#7c3aed',w:800})); }
+      else if(r.type==='bracket'){ var XX=mx(r.at),A=my(r.y0),B=my(r.y1); S.push('<g'+gl(r.id)+'><path d="M'+XX+','+A+' L'+XX+','+B+'" stroke="'+(r.color||'#dc2626')+'" stroke-width="2.5" marker-start="url(#gar)" marker-end="url(#gar)"/>'+T(XX+8,(A+B)/2,r.label||'',{size:12,fill:r.color||'#dc2626',w:800,anchor:'start'})+'</g>'); } });
+    S.push('<line x1="'+x0+'" y1="'+y1+'" x2="'+(x1+8)+'" y2="'+y1+'" stroke="#3a3550" stroke-width="2.5" marker-end="url(#gax)"/>');
+    S.push('<line x1="'+x0+'" y1="'+y1+'" x2="'+x0+'" y2="'+(y0-8)+'" stroke="#3a3550" stroke-width="2.5" marker-end="url(#gax)"/>');
+    S.push(T((x0+x1)/2,522,X.label||'',{size:13,w:800,fill:'#3a3550'}));
+    S.push('<text x="20" y="'+((y0+y1)/2)+'" font-size="13" font-weight="800" fill="#3a3550" text-anchor="middle" font-family="Arial" transform="rotate(-90 20 '+((y0+y1)/2)+')">'+esc(Y.label||'')+'</text>');
+    (BP.curves||[]).forEach(function(c){ if(!shown[c.id])return; var pts=(c.points||[]).map(function(p){return [mx(p[0]),my(p[1])];});
+      S.push('<path d="'+gSmooth(pts)+'" fill="none" stroke="'+(c.color||'#7c3aed')+'" stroke-width="'+(act[c.id]?4:3)+'" stroke-linecap="round"'+gl(c.id)+'/>');
+      if(c.label){var lp=pts[Math.floor(pts.length*0.62)];S.push(T(lp[0],lp[1]-10,c.label,{size:11,fill:c.color||'#7c3aed',w:800}));} });
+    (BP.markers||[]).forEach(function(m){ if(!shown[m.id])return; var XX=mx(m.at[0]),YY=my(m.at[1]);
+      S.push('<g'+gl(m.id)+'><circle cx="'+XX+'" cy="'+YY+'" r="'+(act[m.id]?7:5)+'" fill="'+(m.color||'#6d28d9')+'" stroke="#fff" stroke-width="2"/>'+(m.drop?'<line x1="'+XX+'" y1="'+YY+'" x2="'+XX+'" y2="'+y1+'" stroke="'+(m.color||'#6d28d9')+'" stroke-width="1.4" stroke-dasharray="4 4"/>':'')+T(XX,YY-12,m.label||'',{size:11,fill:m.color||'#4b2c91',w:800})+'</g>'); });
+    S.push('<defs><marker id="gax" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3a3550"/></marker><marker id="gar" markerWidth="8" markerHeight="8" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>');
+    S.push('</svg>');return S.join(''); }
+  /* ===== CELL mode (electrochemical-cell schematic — galvanic/electrolytic) ===== */
+  var CELLPT={anode:{x:250,y:270},cathode:{x:710,y:270},wire:{x:480,y:80},bridge:{x:480,y:190},ions:{x:480,y:360}};
+  function cellSVG(step){
+    var A=BP.anode||{},C=BP.cathode||{};
+    var shown={};for(var s2=0;s2<=step;s2++)(BP.narration_steps[s2].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var on=function(k){return shown[k]?1:0.12;},gl=function(k){return act[k]?' class="vzglow"':'';};
+    var S=['<svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="560" fill="#fbfcff"/>'];
+    var beaker=function(x,fill,stroke,label){return '<path d="M'+x+',170 L'+x+',430 Q'+x+',450 '+(x+20)+',450 L'+(x+180)+',450 Q'+(x+200)+',450 '+(x+200)+',430 L'+(x+200)+',170" fill="none" stroke="#9aa2ad" stroke-width="3"/>'+
+      '<path d="M'+(x+3)+',250 L'+(x+3)+',428 Q'+(x+3)+',447 '+(x+22)+',447 L'+(x+178)+',447 Q'+(x+197)+',447 '+(x+197)+',428 L'+(x+197)+',250 Z" fill="'+fill+'" opacity="0.5"/>'+T(x+100,242,label,{size:11,fill:stroke,w:700});};
+    S.push(beaker(150,'#dbe7ff','#2563eb',(A.sol||'anode solution')));
+    S.push(beaker(610,'#ffe0c2','#b45309',(C.sol||'cathode solution')));
+    S.push('<g style="opacity:'+on('bridge')+'"'+gl('bridge')+'><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#c9a94e" stroke-width="16" stroke-linecap="round"/><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#f0e2b0" stroke-width="9"/>'+T(480,175,(BP.bridge||'salt bridge'),{size:11,fill:'#8a6d1e',w:800})+'</g>');
+    S.push('<g style="opacity:'+on('wire')+'"'+gl('wire')+'><path d="M250,168 L250,80 L710,80 L710,168" fill="none" stroke="#3a3550" stroke-width="4"/><circle cx="480" cy="80" r="22" fill="#fff" stroke="#3a3550" stroke-width="3"/>'+T(480,85,'V',{size:16,fill:'#3a3550',w:800})+
+      '<path d="M306,80 L334,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M416,80 L444,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M586,80 L614,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/>'+T(390,66,'e⁻ flow →',{size:12,fill:'#b45309',w:800})+'</g>');
+    S.push('<g style="opacity:'+on('anode')+'"'+gl('anode')+'><rect x="238" y="130" width="24" height="270" rx="3" fill="#9aa6b3" stroke="#5b6470" stroke-width="2"/>'+T(250,120,(A.label||'Anode (−)'),{size:12,fill:'#5b21b6',w:800})+T(250,478,(A.half||''),{size:12,fill:'#2563eb',w:800})+'</g>');
+    S.push('<g style="opacity:'+on('cathode')+'"'+gl('cathode')+'><rect x="698" y="130" width="24" height="270" rx="3" fill="#d98a4a" stroke="#8a4f22" stroke-width="2"/>'+T(710,120,(C.label||'Cathode (+)'),{size:12,fill:'#8a4f22',w:800})+T(710,478,(C.half||''),{size:12,fill:'#b45309',w:800})+'</g>');
+    S.push('<g style="opacity:'+on('ions')+'"'+gl('ions')+'><path d="M420,360 L360,360" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ib)"/>'+T(390,350,'anions',{size:10,fill:'#2563eb',w:700})+'<path d="M540,360 L600,360" stroke="#b45309" stroke-width="2.5" marker-end="url(#io)"/>'+T(570,350,'cations',{size:10,fill:'#b45309',w:700})+'</g>');
+    S.push('<defs><marker id="eh" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b"/></marker><marker id="ib" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker><marker id="io" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker></defs>');
+    S.push('</svg>');return S.join('');
+  }
   /* auto-fit the canvas so a long cascade never runs off-screen: viewBox grows to hold every element */
   function fitVB(){ var b=T2.vb,maxX=b[0],maxY=b[1],minX=0,minY=0;
     (BP.elements||[]).forEach(function(el){ var p=coordOf(el);
@@ -4340,7 +4458,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   function $(id){return document.getElementById(id);}
   function openModal(){ closeModal();
     var ov=document.createElement('div'); ov.className='vizov'; ov.id='vizov';
-    ov.innerHTML='<div class="vizpanel" onclick="event.stopPropagation()"><div class="vizhd"><b>🎬 Visualize</b><button class="x" id="vizX">✕</button></div><div class="vizbody" id="vizBody"><div class="vizload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span><br>Building your explainer… (first time only)</div></div></div>';
+    ov.innerHTML='<div class="vizpanel" onclick="event.stopPropagation()"><div class="vizhd"><b>🎬 Visualize</b><span class="vizq" id="vizQuota"></span><button class="x" id="vizX">✕</button></div><div class="vizbody" id="vizBody"><div class="vizload"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span><br>Building your explainer… (first time only)</div></div></div>';
     ov.addEventListener('click',closeModal);
     document.body.appendChild(ov);
     $('vizX').onclick=closeModal;
@@ -4373,8 +4491,10 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     render(0);
   }
   function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return;
-    curVB=(BP.layout==='tree')?[0,0,TREE.vb[0],TREE.vb[1]]:(BP.layout==='flow')?[0,0,FLOW.vb[0],FLOW.vb[1]]:fitVB();
-    w.innerHTML=(BP.layout==='tree')?treeSVG(i):(BP.layout==='flow')?flowSVG(i):sceneSVG(i); move();
+    var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440]};
+    var vbm=VBMAP[BP.layout]; curVB=vbm?[0,0,vbm[0],vbm[1]]:fitVB();
+    var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG};
+    w.innerHTML=SV[BP.layout]?SV[BP.layout](i):sceneSVG(i); move();
     var s=BP.narration_steps[i]; var term=s.term||'';
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
     $('vizScrub').value=i;
@@ -4383,6 +4503,11 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   function pointPos(ref){ if(!ref)return null;
     if(BP.layout==='tree'){ var pos=TREE.pos[ref]; if(!pos)return null; var b=TREE.box[ref]; return {x:pos.x+b.w/2,y:pos.y}; }
     if(BP.layout==='flow'){ var fp=FLOW.pos[ref]; if(!fp)return null; return {x:fp.x+fp.w/2,y:fp.y+fp.h/2}; }
+    if(BP.layout==='cell'){ return CELLPT[ref]||null; }
+    if(BP.layout==='graph'){ return (GRAPH&&GRAPH.pt[ref])||null; }
+    if(BP.layout==='orbital'){ return (ORB&&ORB.pt[ref])||null; }
+    if(BP.layout==='geometry'){ return GEOPT[ref]||null; }
+    if(BP.layout==='ice'){ return ICEPT[ref]||null; }
     return anchor(ref,i); }
   function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
     c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; follow(p); }
@@ -4395,33 +4520,47 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');
       if(vizVoiceName)sel.value=vizVoiceName; }
     load(); speechSynthesis.onvoiceschanged=load; }
+  var vizWatch=null,vizKeep=null;
   function say(text,cb){
+    if(vizWatch){clearTimeout(vizWatch);vizWatch=null;}
+    var done=false; function fin(){ if(done)return; done=true; if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} try{cb&&cb();}catch(e){} }
+    // watchdog: if the voice never signals "ended" (Chrome drops onend / cuts off), advance anyway
+    vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/(vizRate||1))+2600);
     if(vizVoiceName && window.speechSynthesis){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate;
       var vv=speechSynthesis.getVoices().find(function(v){return v.name===vizVoiceName;}); if(vv)u.voice=vv;
-      u.onend=cb; speechSynthesis.cancel(); speechSynthesis.speak(u); return; }
-    try{ if(window.voiceSpeak){ window.voiceSpeak(text,cb,'read',vizRate); return; } }catch(e){}
-    if(window.speechSynthesis){var u2=new SpeechSynthesisUtterance(text);u2.rate=vizRate;u2.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u2);} else setTimeout(cb,2600/(vizRate||1)); }
+      u.onend=fin; u.onerror=fin; try{speechSynthesis.cancel();}catch(e){} try{speechSynthesis.speak(u);}catch(e){fin();} return; }
+    try{ if(window.voiceSpeak){ window.voiceSpeak(text,fin,'read',vizRate); return; } }catch(e){}
+    if(window.speechSynthesis){var u2=new SpeechSynthesisUtterance(text);u2.rate=vizRate;u2.onend=fin;u2.onerror=fin;try{speechSynthesis.cancel();}catch(e){}try{speechSynthesis.speak(u2);}catch(e){fin();}} else fin(); }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
-  function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause'; playStep(); }
-  function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; try{if(window.stopSpeak)stopSpeak();}catch(e){} }
+  function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause';
+    // keep-alive: Chrome silently stops speechSynthesis after ~15s — pause+resume resets that timer
+    if(vizKeep)clearInterval(vizKeep); vizKeep=setInterval(function(){ try{ if(window.speechSynthesis&&speechSynthesis.speaking){ speechSynthesis.pause(); speechSynthesis.resume(); } }catch(e){} },9000);
+    playStep(); }
+  function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; if(vizKeep){clearInterval(vizKeep);vizKeep=null;} if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} try{if(window.stopSpeak)stopSpeak();}catch(e){} }
   function jump(x){ stop(); render(x); }
   async function fetchBlueprint(text,subject){
     var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) throw new Error('Visualize needs an internet connection.');
     var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('Please sign in.');
     var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/visualize',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:(text||'').slice(0,2000),subject:subject||''})});
     var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&(j.message||j.error))||'Could not build a visualization.');
-    return j.blueprint;
+    return j;
   }
+  function setQuota(q){ var el=$('vizQuota'); if(!el)return; if(!q||q.remaining==null){ el.textContent=''; return; }
+    el.textContent=q.remaining+' left today'; el.className='vizq'+(q.remaining<=1?' low':''); el.title=(q.premium?'Premium':'Free plan')+': '+q.limit+'/day'; }
   window.aiVisualize=async function(text, topicName, topicId){
     openModal();
     var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
     if(words>110){ $('vizBody').innerHTML='<div class="vizload">📝 That\'s a lot of text — <b>highlight one idea at a time</b> for the sharpest explainer.<br><br><span style="font-size:12.5px;color:#5c5570;font-weight:600">Close this and select a single sentence or mechanism.</span></div>'; return; }
     try{
-      var bp=await fetchBlueprint(text, topicName);
+      var resp=await fetchBlueprint(text, topicName); var bp=resp.blueprint; setQuota(resp.viz_quota);
       if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
       BP=bp; SRC=text||'';
       if(bp.layout==='tree'){ layoutTree(); }
       else if(bp.layout==='flow'){ layoutFlow(); }
+      else if(bp.layout==='cell'){ /* fixed schematic — no layout needed */ }
+      else if(bp.layout==='graph'){ layoutGraph(); }
+      else if(bp.layout==='orbital'){ layoutOrbital(); }
+      else if(bp.layout==='geometry'||bp.layout==='ice'){ /* fixed layout */ }
       else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
       recordViz(topicId||(window.currentTopicId?currentTopicId():''), text);   // save this video against the note
       mountPlayer(); setTimeout(play,400);
@@ -4430,6 +4569,47 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 
   /* ---- saved-per-note "Watch" markers ---- */
   window.currentTopicId=function(){ var p=(location.hash.slice(2)||'').split('/'); return (p[0]==='topic'&&p[1])?p[1]:''; };
+  window.currentTopicSubject=function(){ try{ var id=window.currentTopicId(); var t=(window.topById?topById(id):null); return (t&&t.subject&&t.subject.name)||''; }catch(e){ return ''; } };
+
+  /* ===== In-note "Visualize" teaser — a ~7s silent demo of the feature, matched to the subject.
+     VIZ_DEMOS is the record/library of demo blueprints; scheduled subject builds add their own. ===== */
+  var VIZ_DEMOS = {
+    "default":{layout:"flow",meta:{title:""},nodes:[
+      {id:"a",label:"Tissue injured",note:"the trigger",kind:"trigger"},
+      {id:"b",label:"Histamine released",note:"from mast cells",kind:"process"},
+      {id:"c",label:"Vessels widen & leak",note:"more blood flow",kind:"product"},
+      {id:"d",label:"Redness, heat, swelling",note:"the inflammation signs",kind:"outcome"}],
+      narration_steps:[{reveal:["a"],active:["a"],point:"a"},{reveal:["b"],active:["b"],point:"b"},{reveal:["c"],active:["c"],point:"c"},{reveal:["d"],active:["d"],point:"d"}]},
+    "chem":{layout:"flow",meta:{title:""},nodes:[
+      {id:"an",label:"Anode (−)",note:"oxidation: loses e−",kind:"trigger"},
+      {id:"wi",label:"e− through wire",note:"anode → cathode",kind:"process"},
+      {id:"ca",label:"Cathode (+)",note:"reduction: gains e−",kind:"product"},
+      {id:"cu",label:"Current flows",note:"electricity!",kind:"outcome"}],
+      narration_steps:[{reveal:["an"],active:["an"],point:"an"},{reveal:["wi"],active:["wi"],point:"wi"},{reveal:["ca"],active:["ca"],point:"ca"},{reveal:["cu"],active:["cu"],point:"cu"}]},
+    "math":{layout:"graph",meta:{title:""},x:{min:0,max:3.5,label:"x"},y:{min:0,max:10,label:"y = x²"},
+      curves:[{id:"c",color:"#7c3aed",points:[[0,0],[1,1],[2,4],[3,9]]},{id:"t",color:"#0d9488",points:[[1,0],[3,8]]}],
+      markers:[{id:"P",at:[2,4],label:"P",color:"#dc2626"}],
+      narration_steps:[{reveal:["c","P"],active:["P"],point:"P"},{reveal:["c","P"],active:["P"],point:"P"},{reveal:["c","P","t"],active:["t"],point:"P"}]}
+  };
+  window.VIZ_DEMOS = VIZ_DEMOS;   // scheduled subject builds append their demo here
+  var _tzT=null,_tzK=0,_tzBP=null;
+  function teaserDraw(el,k){ if(!el||document.getElementById('vizov'))return;   // pause while the real player is open
+    _tzBP._render=undefined; BP=_tzBP;
+    if(BP.layout==="graph")layoutGraph(); else if(BP.layout==="tree")layoutTree(); else layoutFlow();
+    var fn=(BP.layout==="graph")?graphSVG:(BP.layout==="tree")?treeSVG:flowSVG; try{ el.innerHTML=fn(k); }catch(e){} }
+  window.mountVizTeaser=function(){ try{
+    var host=document.querySelector('#main .notebody'); if(!host||host.querySelector('.vizteaser'))return;
+    var subj=(window.currentTopicSubject?currentTopicSubject():'')||'';
+    var key=/organic/i.test(subj)?"chem":/chem/i.test(subj)?"chem":/math/i.test(subj)?"math":/physics|physical/i.test(subj)?"default":/biolog/i.test(subj)?"default":"default";
+    _tzBP=VIZ_DEMOS[key]||VIZ_DEMOS.default; _tzK=0;
+    var card=document.createElement("div"); card.className="vizteaser";
+    card.innerHTML='<div class="vtlab">✨ How “Visualize” works</div><div class="vtstage"><div id="vtStage"></div></div><div class="vtcta">Highlight any sentence below and tap <b>🎬 Visualize this</b> to turn it into a short, narrated explainer — step by step, like this.</div>';
+    host.insertBefore(card,host.firstChild);
+    teaserDraw(document.getElementById("vtStage"),0);
+    if(_tzT)clearInterval(_tzT);
+    _tzT=setInterval(function(){ var e=document.getElementById("vtStage"); if(!e){clearInterval(_tzT);_tzT=null;return;}
+      var n=(_tzBP.narration_steps||[]).length; _tzK++; if(_tzK>n+1)_tzK=0; teaserDraw(e,Math.min(_tzK,n-1)); },1700);
+  }catch(e){} };
   function recordViz(topicId,text){ if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
     if(t && !a.some(function(x){return x.text===t;})){ a.push({text:t,ts:Date.now()}); if(window.persist)persist(); } }catch(e){} }
   window.markWatchedNote=function(){ try{
