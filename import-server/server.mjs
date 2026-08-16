@@ -22,7 +22,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
-import { buildVisualPrompt, qcCheck, parseBlueprint, textKey } from "./visualize.mjs";
+import { buildVisualPrompt, qcCheck, parseBlueprint, textKey, renderHints, registerAssets, assetDefs } from "./visualize.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -186,7 +186,9 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature 
     headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body) });
   const j = await r.json();
   if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
-  const text=(((j.choices||[])[0]||{}).message||{}).content||"";
+  const msg=(((j.choices||[])[0]||{}).message)||{};
+  // reasoning models sometimes leave `content` empty and put the answer in `reasoning_content`
+  const text=(msg.content && msg.content.trim()) ? msg.content : (msg.reasoning_content||"");
   const u=j.usage||{};
   return { text, usage:{ input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens } };
 }
@@ -594,21 +596,30 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint) return res.json({ ok:true, cached:true, blueprint:c.data.blueprint }); }catch(_){}
+      if(c.data && c.data.blueprint){ const b=c.data.blueprint; b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); return res.json({ ok:true, cached:true, blueprint:b }); } }catch(_){}
     // generate blueprint (Flash — in-app, always cheap tier)
     const prompt = buildVisualPrompt(text, subject);
-    let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:4000, temperature:0.2 });
+    let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2 });
     let bp = parseBlueprint(gen.text), qc = qcCheck(bp);
+    if(!bp) console.warn("[visualize] parse failed. raw head:", (gen.text||"").slice(0,300), "| len:", (gen.text||"").length);
+    // capture genuine demand: assets the model reached for that don't exist yet (before the retry forces it back)
+    try{
+      const wanted = (qc.issues||[]).map(s=>{ const m=/asset type not in manifest: (\S+)/.exec(s)||/asset '([^']+)' not allowed/.exec(s); return m&&m[1]; }).filter(Boolean);
+      for(const t of new Set(wanted)) await admin.from("viz_expansion_log").insert({ requested_type:t, subject, source_text:text.slice(0,300) });
+    }catch(_){}
     if(!qc.pass){                                   // one corrective retry with the QC issues
       const fix = prompt + "\n\nYour previous JSON had these problems — fix ALL of them and return ONLY corrected JSON:\n- "
                 + qc.issues.join("\n- ") + "\n\nPREVIOUS:\n" + (gen.text||"").slice(0,4000);
-      const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:4000, temperature:0.2 });
+      const gen2 = await generate({ model: BASIC_MODEL, prompt:fix, parts:[], images:[], max_tokens:8000, temperature:0.2 });
       const bp2 = parseBlueprint(gen2.text), qc2 = qcCheck(bp2);
+      if(!bp2) console.warn("[visualize] retry parse failed. raw head:", (gen2.text||"").slice(0,300));
       if(bp2 && (qc2.pass || !bp)){ bp = bp2; qc = qc2; }
     }
-    if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try a clearer single sentence" });
+    if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try selecting one clear sentence, or try again in a moment" });
     // cache write (best-effort)
     try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
+    bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
+    bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
     res.json({ ok:true, cached:false, blueprint:bp, qc_issues:qc.issues });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -653,6 +664,108 @@ app.post("/admin/prompt", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* ================= Visualize asset library — automated growth ==================
+ * Loop: the engine's asset library is finite; when the model asks for an asset that
+ * doesn't exist we log the demand (see /visualize). An admin runs "grow" → the LLM
+ * drafts a manifest entry + a data-driven SVG for each frequently-wanted asset →
+ * these land as PENDING proposals. One-tap approve registers the asset live (prompt +
+ * QC + engine) with no code deploy, because approved assets are data-driven. */
+const ASSET_DRAFT_SYS =
+`You extend a medical-diagram asset library. Given an asset name that a diagram generator wanted but
+that doesn't exist yet, output ONE JSON object describing how to draw and place it. The drawing is a
+tiny SVG fragment centered on tokens @X and @Y (numbers the renderer substitutes), may use @LABEL for
+a short caption and @COLOR for its main colour. Keep it ~40px, self-contained, no <svg> wrapper, no
+scripts, no external refs. Choose sensible placement rules.
+Return ONLY: {"id":"snake_case","category":"","scale":"molecular|subcellular|cellular|tissue","valid_templates":["membrane_cell"|"neuro_pathway"...],"valid_zones":[optional],"svg":"<...>@X..@Y..@LABEL..@COLOR..</...>"}`;
+
+async function loadApprovedOverlay(){
+  try{
+    const r = await admin.from("viz_asset_proposals").select("spec").eq("status","approved");
+    if(r.data && r.data.length){ const n = registerAssets(r.data.map(x=>x.spec)); console.log("[visualize] overlay: "+n+" approved asset(s) registered"); }
+  }catch(_){ /* table not created yet — fine */ }
+}
+
+/* One-shot pipeline probe: runs a known sentence through generate → parse → QC and reports
+ * exactly which stage fails (API / parse / QC), the model used, and the raw output head.
+ * Lets an admin diagnose "couldn't build a visualization" without reading server logs. */
+app.get("/admin/viz/selftest", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const sentence = (req.query.text||"ADH increases water reabsorption by inserting aquaporin-2 channels in the collecting duct.").toString().slice(0,400);
+    const out = { model: BASIC_MODEL, deepseek_key: !!process.env.DEEPSEEK_API_KEY, stage:"start" };
+    let gen;
+    try{ gen = await generate({ model:BASIC_MODEL, prompt:buildVisualPrompt(sentence,"self-test"), parts:[], images:[], max_tokens:8000, temperature:0.2 }); }
+    catch(e){ out.stage="api_error"; out.error=e.message; return res.json({ ok:false, ...out }); }
+    out.api_ok = true; out.text_len = (gen.text||"").length; out.raw_head = (gen.text||"").slice(0,220);
+    if(!out.text_len){ out.stage="empty_response"; return res.json({ ok:false, ...out }); }
+    const bp = parseBlueprint(gen.text);
+    if(!bp){ out.stage="parse_failed"; return res.json({ ok:false, ...out }); }
+    out.parse_ok = true; out.template = bp.template; out.elements = (bp.elements||[]).length; out.steps = (bp.narration_steps||[]).length;
+    const qc = qcCheck(bp);
+    out.qc_pass = qc.pass; out.qc_issues = qc.issues;
+    out.stage = qc.pass ? "ok" : "qc_warnings";   // QC warnings don't block delivery (a blueprint that parses is still shown)
+    res.json({ ok:true, ...out });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.post("/admin/viz/grow", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    // aggregate demand: most-wanted unknown asset types not already proposed
+    const log = await admin.from("viz_expansion_log").select("requested_type,subject,source_text").limit(500);
+    if(log.error) return res.status(500).json({ error:"expansion log unavailable — run the SQL migration first" });
+    const counts = {}, sample = {};
+    for(const r of (log.data||[])){ counts[r.requested_type]=(counts[r.requested_type]||0)+1; sample[r.requested_type]=sample[r.requested_type]||r; }
+    const existing = await admin.from("viz_asset_proposals").select("id");
+    const already = new Set((existing.data||[]).map(x=>x.id));
+    const wanted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).filter(([t])=>!already.has(t)).slice(0, Number(req.body.max)||5);
+    const drafted = [];
+    for(const [type,count] of wanted){
+      const ex = sample[type]||{};
+      const prompt = ASSET_DRAFT_SYS + `\n\nASSET NAME: ${type}\nSeen in subject: ${ex.subject||"medicine"}\nExample context: ${(ex.source_text||"").slice(0,200)}`;
+      const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:900, temperature:0.3 });
+      const spec = parseBlueprint(gen.text); if(!spec || !spec.svg) continue;
+      spec.id = type;   // key by the requested name so future requests resolve
+      const row = { id:type, status:"pending", demand:count, spec, drafted_at:new Date().toISOString() };
+      const up = await admin.from("viz_asset_proposals").upsert(row);
+      if(!up.error) drafted.push({ id:type, demand:count });
+    }
+    res.json({ ok:true, drafted, considered:wanted.length });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.get("/admin/viz/proposals", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const status = req.query.status || "pending";
+    const r = await admin.from("viz_asset_proposals").select("id,status,demand,spec,drafted_at").eq("status",status).order("demand",{ascending:false});
+    if(r.error) return res.status(500).json({ error:"proposals table unavailable — run the SQL migration first" });
+    res.json({ ok:true, proposals:r.data||[] });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.post("/admin/viz/approve", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { id, spec } = req.body; if(!id) return res.status(400).json({ error:"id required" });
+    const patch = { status:"approved" }; if(spec) patch.spec = spec;   // allow an edited spec on approve
+    const r = await admin.from("viz_asset_proposals").update(patch).eq("id",id).select("spec").maybeSingle();
+    if(r.error) return res.status(500).json({ error:r.error.message });
+    if(r.data && r.data.spec) registerAssets([r.data.spec]);   // live immediately — no deploy
+    res.json({ ok:true, live:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.post("/admin/viz/reject", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { id } = req.body; if(!id) return res.status(400).json({ error:"id required" });
+    const r = await admin.from("viz_asset_proposals").update({ status:"rejected" }).eq("id",id);
+    if(r.error) return res.status(500).json({ error:r.error.message });
+    res.json({ ok:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
 app.post("/paystack/webhook", async (req,res)=>{
   try{
@@ -672,4 +785,4 @@ app.post("/paystack/webhook", async (req,res)=>{
 });
 
 const PORT = process.env.PORT || 8787;
-app.listen(PORT, ()=>console.log("MedBank import server on :"+PORT));
+app.listen(PORT, ()=>{ console.log("MedBank import server on :"+PORT); loadApprovedOverlay(); });

@@ -16,13 +16,48 @@ catch(e){ console.warn("[visualize] viz-assets.json not loaded —", e.message);
 
 const TPL = MANIFEST.templates || {};
 const ASSET = MANIFEST.assets || {};
+export { MANIFEST };
+
+/* Render-relevant slice of the manifest for ONE template — the only thing the client
+ * engine needs so scale flows from this single source (no hardcoded scale in the engine). */
+export function renderHints(template){
+  const t = TPL[template]; if(!t) return null;
+  const zscale = {};
+  for(const [z,cfg] of Object.entries(t.zones||{})) zscale[z] = (cfg && cfg.scale) || 1;
+  return { scale: t.scale, zscale };
+}
 
 export const VOCAB = {
-  templates: Object.fromEntries(Object.entries(TPL).map(([k,v])=>[k,{ zones:Object.keys(v.zones||{}), scale:v.scale, use:v.use }])),
-  assets: Object.keys(ASSET),
+  get templates(){ return Object.fromEntries(Object.entries(TPL).map(([k,v])=>[k,{ zones:Object.keys(v.zones||{}), scale:v.scale, use:v.use }])); },
+  get assets(){ return Object.keys(ASSET); },
   assetMeta: ASSET,
   actions: ["reveal","active","arrows","move","cut","point"]
 };
+
+/* --- Overlay: admin-approved assets (from the DB) merge in here at runtime, so a newly
+ * approved asset is instantly usable by the prompt + QC + engine with NO code deploy.
+ * A data-driven asset carries an `svg` spec (tokens @X @Y @LABEL @COLOR) the engine renders. */
+export function registerAssets(list){
+  let n = 0;
+  for(const a of (list||[])){
+    if(!a || !a.id) continue;
+    ASSET[a.id] = {
+      category: a.category||"custom", scale: a.scale||"molecular",
+      valid_templates: a.valid_templates||["membrane_cell","neuro_pathway"],
+      ...(a.valid_zones ? { valid_zones:a.valid_zones } : {}),
+      ...(a.svg ? { svg:a.svg } : {}),
+      source: "overlay"
+    };
+    n++;
+  }
+  return n;
+}
+/* SVG specs for the data-driven assets among `types` — server sends these to the engine as bp._defs */
+export function assetDefs(types){
+  const out = {};
+  for(const t of new Set(types||[])){ const m = ASSET[t]; if(m && m.svg) out[t] = { svg:m.svg }; }
+  return out;
+}
 
 /* compact "asset : allowed templates[/zones]" map so the model never crosses scales */
 function assetMapText(){
@@ -33,7 +68,8 @@ function assetMapText(){
   }).join("\n");
 }
 
-export const VIS_SYSTEM =
+/* built fresh each call so overlay-approved templates/assets appear immediately */
+function visSystem(){ return (
 `You are the DIRECTOR of a step-by-step medical explainer diagram. You do NOT draw — you output a
 JSON blueprint that a fixed renderer draws. Obey every rule:
 
@@ -53,7 +89,9 @@ RULES (all mandatory):
 7. Stay faithful to the source text and standard physiology; invent nothing.
 
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"template":"","elements":[{"id":"","type":"","zone":"","lane":0,"label":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"arrows":[{"from":"","to":"","color":"#7c3aed"}],"point":""}]}`;
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"template":"","elements":[{"id":"","type":"","zone":"","lane":0,"label":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"arrows":[{"from":"","to":"","color":"#7c3aed"}],"point":""}]}`
+); }
+export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
 /* gold exemplar (few-shot) */
 export const EXEMPLARS = [
@@ -73,7 +111,7 @@ export const EXEMPLARS = [
 
 export function buildVisualPrompt(text, subject){
   const shots = EXEMPLARS.map(e => "SOURCE: "+e.text+"\nBLUEPRINT: "+JSON.stringify(e.blueprint)).join("\n\n");
-  return VIS_SYSTEM + "\n\nEXAMPLE:\n" + shots +
+  return visSystem() + "\n\nEXAMPLE:\n" + shots +
     "\n\nNow do the same for this text (subject: "+(subject||"medicine")+"). Output ONLY the JSON blueprint.\nSOURCE: " + (text||"");
 }
 
@@ -121,8 +159,43 @@ export function qcCheck(bp){
   return { pass: issues.length===0, issues };
 }
 
+/* Robust JSON extraction — small models wrap the object in ```json fences, a <think> block,
+ * or trailing prose, and sometimes truncate the tail. Try hard before giving up. */
 export function parseBlueprint(raw){
-  const t = raw||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
-  if(s<0||e<0) return null;
-  try{ return JSON.parse(t.slice(s,e+1)); }catch(_){ return null; }
+  let t = raw || "";
+  if(!t) return null;
+  // drop reasoning / think blocks and markdown code fences
+  t = t.replace(/<think>[\s\S]*?<\/think>/gi, "").replace(/<\/?think>/gi, "");
+  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if(fence) t = fence[1];
+  const s = t.indexOf("{");
+  if(s < 0) return null;
+  // 1) fast path: first "{" … last "}"
+  const e = t.lastIndexOf("}");
+  if(e > s){ const one = tryParse(t.slice(s, e+1)); if(one) return one; }
+  // 2) brace-balanced scan from the first "{" (ignores braces inside strings)
+  const bal = balanced(t, s); if(bal){ const two = tryParse(bal); if(two) return two; }
+  // 3) last resort: repair a truncated object (unclosed brackets/quote + trailing comma)
+  const rep = tryParse(repair(t.slice(s))); if(rep) return rep;
+  return null;
+}
+function tryParse(x){ try{ return JSON.parse(x); }catch(_){ return null; } }
+function balanced(t, start){
+  let depth=0, inStr=false, esc=false;
+  for(let i=start;i<t.length;i++){ const c=t[i];
+    if(inStr){ if(esc) esc=false; else if(c==="\\") esc=true; else if(c==='"') inStr=false; continue; }
+    if(c==='"') inStr=true; else if(c==="{") depth++; else if(c==="}"){ depth--; if(depth===0) return t.slice(start,i+1); }
+  }
+  return null;   // never closed → truncated
+}
+function repair(x){
+  let str=x, inStr=false, esc=false; const stack=[];
+  for(const c of str){ if(inStr){ if(esc)esc=false; else if(c==="\\")esc=true; else if(c==='"')inStr=false; continue; }
+    if(c==='"')inStr=true;
+    else if(c==="{")stack.push("}"); else if(c==="[")stack.push("]");
+    else if(c==="}"||c==="]")stack.pop(); }
+  if(inStr) str+='"';
+  str=str.replace(/,\s*$/,"");                        // dangling comma at the cut point
+  while(stack.length) str+=stack.pop();               // close in nesting order (stack)
+  return str.replace(/,\s*([}\]])/g, "$1");           // then any remaining trailing commas
 }

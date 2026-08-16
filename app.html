@@ -1528,6 +1528,7 @@ function renderNav(){
   h += '<div class="navdiv"></div>';
   h += it('settings','⚙','Settings','',r==='settings');
   if(window.IS_ADMIN) h += it('admin','🛠','Prompt editor','',r==='admin');
+  if(window.IS_ADMIN) h += it('vizadmin','🎨','Visualize assets','',r==='vizadmin');
   $('#nav').innerHTML = h;
 }
 function go(route){location.hash='#/'+route;document.body.classList.remove('navopen');}
@@ -2201,6 +2202,83 @@ async function admSave(){
     if(!r.ok) throw new Error((r.data&&r.data.error)||'save failed');
     if(msg) msg.innerHTML='<span style="color:var(--recall);font-weight:700">✓ Saved. New imports at this level use it right away.</span>';
   }catch(e){ if(msg) msg.innerHTML='<span style="color:#ff9db1">Could not save: '+esc(e.message||e)+'</span>'; }
+}
+
+/* ===== Admin: Visualize asset library — automated growth (is_admin only) ===== */
+function pageVizAdmin(){
+  if(!window.IS_ADMIN) return pageHome();
+  setTimeout(vizAdmFetch,40);
+  return crumbs([{label:'Home',route:'home'},{label:'Admin · Visualize assets'}])+
+    `<h1>🎨 Visualize assets</h1>
+     <p class="sub">When the diagram generator wants an asset the library doesn’t have, it’s logged. <b>Grow</b> asks the AI to draft the missing assets; <b>Approve</b> makes one live instantly — no app update.</p>
+     <div class="btnrow" style="gap:10px;flex-wrap:wrap;margin-bottom:12px">
+       <button class="btn primary" onclick="vizAdmGrow(this)">✨ Draft missing assets</button>
+       <button class="btn" onclick="vizAdmSelftest(this)">🩺 Run self-test</button>
+       <button class="btn" onclick="vizAdmFetch()">↻ Refresh</button>
+     </div>
+     <div id="vizAdmDiag" style="margin:6px 0 12px;font-size:13px"></div>
+     <div id="vizAdmMsg" style="margin:8px 0;font-size:13.5px;color:var(--dim)"></div>
+     <div id="vizAdmList">Loading…</div>`;
+}
+function vizPreviewSVG(spec){
+  try{ var svg=String(spec.svg||'').split('@X').join(70).split('@Y').join(45).split('@LABEL').join(esc(spec.id||'')).split('@COLOR').join('#6d28d9');
+    return '<svg viewBox="0 0 140 90" style="width:140px;height:90px;background:#fffdf6;border:1px solid #e7e3f2;border-radius:8px">'+svg+'</svg>'; }
+  catch(e){ return '<span style="color:#ff9db1">bad spec</span>'; }
+}
+async function vizAdmFetch(){
+  var host=$('#vizAdmList'); if(!host) return; host.textContent='Loading…';
+  try{
+    var r=await admApi('/admin/viz/proposals?status=pending');
+    if(!r.ok) throw new Error((r.data&&r.data.error)||'load failed');
+    var ps=(r.data&&r.data.proposals)||[];
+    if(!ps.length){ host.innerHTML='<p class="sub">No pending proposals. Click “Draft missing assets” to generate from logged demand.</p>'; return; }
+    host.innerHTML=ps.map(function(p){ var s=p.spec||{};
+      return '<div class="card" style="display:flex;gap:14px;align-items:center;margin-bottom:10px">'
+        +vizPreviewSVG(s)
+        +'<div style="flex:1;min-width:0"><h3 style="margin:0 0 4px">'+esc(p.id)+' <span class="pill" style="background:#7c3aed22;color:#7c3aed">wanted ×'+(p.demand||1)+'</span></h3>'
+        +'<p style="margin:0;font-size:12.5px;color:var(--dim)">'+esc(s.category||'')+' · '+esc(s.scale||'')+' · templates: '+esc((s.valid_templates||[]).join(', '))+(s.valid_zones?(' · zones: '+esc(s.valid_zones.join(', '))):'')+'</p></div>'
+        +'<div class="btnrow" style="gap:6px"><button class="btn primary" onclick="vizAdmApprove(\''+esc(p.id)+'\',this)">✓ Approve</button><button class="btn" onclick="vizAdmReject(\''+esc(p.id)+'\',this)">Reject</button></div>'
+        +'</div>';
+    }).join('');
+  }catch(e){ host.innerHTML='<span style="color:#ff9db1">Could not load: '+esc(e.message||e)+'</span>'; }
+}
+async function vizAdmSelftest(btn){ var box=$('#vizAdmDiag'); if(btn)btn.disabled=true;
+  if(box)box.innerHTML='<span style="color:var(--dim)">Running one sentence through the pipeline…</span>';
+  try{ var r=await admApi('/admin/viz/selftest');
+    var d=r.data||{};
+    var stageLabels={api_error:'AI request failed',empty_response:'AI returned nothing',parse_failed:'AI reply wasn’t valid JSON',qc_warnings:'Built with QC warnings',ok:'All good'};
+    var good=d.ok, color=good?'var(--recall)':'#ff9db1';
+    var rows=[];
+    rows.push('Model: <b>'+esc(d.model||'?')+'</b>');
+    rows.push('DeepSeek key set: <b>'+(d.deepseek_key?'yes':'NO — set DEEPSEEK_API_KEY')+'</b>');
+    if(d.api_ok!=null) rows.push('AI responded: <b>'+(d.api_ok?'yes':'no')+'</b>'+(d.text_len!=null?(' ('+d.text_len+' chars)'):''));
+    if(d.parse_ok!=null) rows.push('Parsed JSON: <b>'+(d.parse_ok?'yes':'no')+'</b>'+(d.parse_ok?(' · '+d.elements+' elements, '+d.steps+' steps, template '+esc(d.template||'?')):''));
+    if(d.qc_pass!=null) rows.push('QC: <b>'+(d.qc_pass?'clean':'warnings')+'</b>'+((d.qc_issues&&d.qc_issues.length)?(' — '+esc(d.qc_issues.slice(0,4).join('; '))):''));
+    if(d.error) rows.push('<span style="color:#ff9db1">Error: '+esc(d.error)+'</span>');
+    if(d.raw_head && !d.parse_ok) rows.push('<div style="margin-top:6px;font-family:ui-monospace,monospace;font-size:11px;color:var(--dim);white-space:pre-wrap;word-break:break-word">'+esc(d.raw_head)+'…</div>');
+    if(box)box.innerHTML='<div class="card" style="border-left:4px solid '+color+'"><b style="color:'+color+'">'+esc(stageLabels[d.stage]||d.stage||'result')+'</b><div style="margin-top:6px;line-height:1.7">'+rows.join('<br>')+'</div></div>';
+  }catch(e){ if(box)box.innerHTML='<span style="color:#ff9db1">Self-test failed: '+esc(e.message||e)+'</span>'; }
+  finally{ if(btn)btn.disabled=false; }
+}
+async function vizAdmGrow(btn){ var msg=$('#vizAdmMsg'); if(btn)btn.disabled=true; if(msg)msg.textContent='Drafting… (asks the AI to design each missing asset)';
+  try{ var r=await admApi('/admin/viz/grow',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({max:6})});
+    if(!r.ok) throw new Error((r.data&&r.data.error)||'grow failed');
+    var n=(r.data&&r.data.drafted&&r.data.drafted.length)||0;
+    if(msg)msg.innerHTML=n?('<span style="color:var(--recall);font-weight:700">✓ Drafted '+n+' asset(s).</span>'):'No new demand to draft right now.';
+    vizAdmFetch();
+  }catch(e){ if(msg)msg.innerHTML='<span style="color:#ff9db1">'+esc(e.message||e)+'</span>'; }
+  finally{ if(btn)btn.disabled=false; }
+}
+async function vizAdmApprove(id,btn){ if(btn)btn.disabled=true;
+  try{ var r=await admApi('/admin/viz/approve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})});
+    if(!r.ok) throw new Error((r.data&&r.data.error)||'approve failed');
+    var msg=$('#vizAdmMsg'); if(msg)msg.innerHTML='<span style="color:var(--recall);font-weight:700">✓ “'+esc(id)+'” is live — the generator can use it now.</span>';
+    vizAdmFetch();
+  }catch(e){ var m=$('#vizAdmMsg'); if(m)m.innerHTML='<span style="color:#ff9db1">'+esc(e.message||e)+'</span>'; if(btn)btn.disabled=false; }
+}
+async function vizAdmReject(id,btn){ if(btn)btn.disabled=true;
+  try{ await admApi('/admin/viz/reject',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})}); vizAdmFetch(); }
+  catch(e){ if(btn)btn.disabled=false; }
 }
 
 function pageCards(subId){
@@ -3860,6 +3938,7 @@ function render(){
     case 'search':    html=pageSearch(); break;
     case 'settings':  html=pageSettings(); break;
     case 'admin':     html=pageAdmin(); break;
+    case 'vizadmin':  html=pageVizAdmin(); break;
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
     case 'lecturers': html=pageLecturers(); break;
@@ -4125,6 +4204,12 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       zones:{peri:{x:120,y:150,gap:34},axon:{x:410,y:150,gap:0},cns:{x:790,y:158,gap:46},pre:{x:405,y:360,gap:50},cleft:{x:505,y:405,gap:0},post:{x:635,y:405,gap:0},eff:{x:800,y:360,gap:120}}}
   };
   var BP=null,T2=null,i=0,playing=false,elMap={};
+  /* data-driven assets: overlay-approved types arrive as SVG specs in BP._defs (tokens @X @Y @LABEL @COLOR).
+     This is how a newly approved asset draws with no app update. */
+  function defFn(type){ var spec=BP&&BP._defs&&BP._defs[type]; if(!spec||!spec.svg)return null;
+    return function(x,y,o){ o=o||{}; return String(spec.svg)
+      .split('@X').join(x).split('@Y').join(y)
+      .split('@LABEL').join(esc(o.label||'')).split('@COLOR').join(o.color||'#6d28d9'); }; }
   function coordOf(el){ if(el.at)return {x:el.at.x,y:el.at.y}; var z=T2.zones[el.zone]||{x:100,y:100,gap:60}; return {x:z.x,y:z.y+(el.lane||0)*(z.gap||60)}; }
   function posAt(el,step){ var p=coordOf(el); for(var s=0;s<=step;s++){var mv=(BP.narration_steps[s].move||[]);for(var k=0;k<mv.length;k++){if(mv[k].id===el.id){ if(mv[k].to_zone){var z=T2.zones[mv[k].to_zone];if(z)p={x:z.x,y:z.y+((mv[k].lane||0)*(z.gap||60))};} else if(mv[k].to)p={x:mv[k].to.x,y:mv[k].to.y}; }}} return p; }
   function introOf(id){ for(var s=0;s<BP.narration_steps.length;s++){ if((BP.narration_steps[s].reveal||[]).indexOf(id)>=0)return s; } return 0; }
@@ -4140,8 +4225,10 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       if(ever&&step<intro)continue;
       var p=posAt(el,step),cut=cutFrom(el.id),state=(cut>=0&&step>=cut)?'cut':null;
       var isA=act.indexOf(el.id)>=0,cls=isA?'vzglow vzpop':(step===intro?'vzpop':'vzdim');
-      var d=A[el.type]||A.label;
-      s.push('<g class="'+cls+'">'+d(p.x,p.y,{label:el.label,color:el.color,r:el.r,state:state})+'</g>');
+      var d=A[el.type]||defFn(el.type)||A.label;   // hardcoded draw fn → data-driven overlay spec → label
+      var sc=(BP._render&&BP._render.zscale&&BP._render.zscale[el.zone])||1;   // scale from the shared manifest (single source)
+      var tf=(sc!==1)?' transform="translate('+p.x+','+p.y+') scale('+sc+') translate('+(-p.x)+','+(-p.y)+')"':'';
+      s.push('<g class="'+cls+'"'+tf+'>'+d(p.x,p.y,{label:el.label,color:el.color,r:el.r,state:state})+'</g>');
     }
     s.push('</svg>');return s.join('');
   }

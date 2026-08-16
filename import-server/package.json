@@ -6,7 +6,8 @@
   "description": "MedBank secure import + AI + Paystack webhook server",
   "main": "server.mjs",
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "check:viz": "node check-viz-sync.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
