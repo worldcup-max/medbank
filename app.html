@@ -3960,6 +3960,7 @@ function render(){
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
   if(p[0]==='topic' && window.mountVizTeaser) setTimeout(window.mountVizTeaser,60);
+  if(p[0]==='topic' && window.showVizOnboarding) setTimeout(window.showVizOnboarding,500);
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
@@ -4179,6 +4180,25 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizteaser .vtstage{border:1px solid #eee7fb;border-radius:9px;background:#fffdf6;overflow:hidden;max-height:240px}
 .vizteaser .vtstage svg{display:block;width:100%;height:auto}
 .vizteaser .vtcta{font-size:12px;color:#5c5570;margin-top:8px;line-height:1.45}
+/* one-time onboarding */
+.obov{position:fixed;inset:0;z-index:9600;background:rgba(20,12,38,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.obcard{position:relative;width:100%;max-width:520px;background:#fff;border-radius:18px;overflow:hidden}
+.obcard::before{content:'';position:absolute;inset:-3px;border-radius:21px;background:conic-gradient(from 0deg,#7c3aed,#0d9488,#2563eb,#e0632b,#7c3aed);filter:blur(8px);opacity:0;z-index:-1;animation:obspin 3.6s linear infinite}
+.obcard.live::before{opacity:.9}.obcard.live{animation:obbreathe 1.8s ease-in-out infinite}
+@keyframes obspin{to{transform:rotate(360deg)}}
+@keyframes obbreathe{0%,100%{box-shadow:0 0 0 2px rgba(124,58,237,.28),0 18px 50px rgba(20,12,38,.5)}50%{box-shadow:0 0 0 5px rgba(13,148,136,.38),0 22px 60px rgba(20,12,38,.55)}}
+.obhd{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #ece7f7}.obhd b{font-size:15px}
+.obhd .obq{margin-left:auto;font-size:10.5px;font-weight:800;color:#6d28d9;background:#f1eef8;border-radius:999px;padding:3px 9px}
+.obhd .obx{margin-left:8px;border:1px solid #ece7f7;background:#fff;border-radius:8px;padding:5px 10px;font-weight:800;font-size:11px;color:#8a8398;cursor:pointer}
+.obsrc{margin:12px 14px 0;background:#f7f5fc;border:1px solid #ece7f7;border-radius:9px;padding:8px 11px;font-size:12px;color:#4b4560;line-height:1.45}
+.obstage{margin:10px 14px 0;border:1px solid #ece7f7;border-radius:10px;background:#fffdf6;overflow:hidden}.obstage svg{display:block;width:100%;height:auto}
+.obcap{margin:2px 14px 0;min-height:52px;background:#141026;color:#fff;font-size:13px;line-height:1.4;padding:10px 12px;font-weight:600;border-radius:0 0 9px 9px;display:flex;gap:10px;align-items:flex-start}
+.obcap .obtxt{flex:1}.obcap .oblab{color:#c9b8f5;font-weight:800;font-size:9.5px;letter-spacing:.4px;display:block;margin-bottom:3px}.obcap b{color:#a5f3e4}
+.obeq{display:inline-flex;gap:2.5px;align-items:flex-end;height:20px;flex:none}
+.obeq i{width:3px;background:#a5f3e4;border-radius:2px;height:5px;animation:obeq .9s ease-in-out infinite}
+.obeq i:nth-child(2){animation-delay:.15s}.obeq i:nth-child(3){animation-delay:.3s}.obeq i:nth-child(4){animation-delay:.45s}.obeq i:nth-child(5){animation-delay:.6s}
+@keyframes obeq{0%,100%{height:4px}50%{height:20px}}
+.obgot{display:block;width:calc(100% - 28px);margin:12px 14px 14px;border:0;border-radius:11px;padding:11px;font-weight:800;font-size:13.5px;color:#fff;background:linear-gradient(135deg,#7c3aed,#0d9488);cursor:pointer}
 .vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
 .vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 .vzflow{stroke-dasharray:9 6;animation:vzmarch 1s linear infinite}@keyframes vzmarch{to{stroke-dashoffset:-30}}
@@ -4593,13 +4613,17 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   };
   window.VIZ_DEMOS = VIZ_DEMOS;   // scheduled subject builds append their demo here
   var _tzT=null,_tzK=0,_tzBP=null;
-  function teaserDraw(el,k){ if(!el||document.getElementById('vizov'))return;   // pause while the real player is open
+  function teaserDraw(el,k){ if(!el||document.getElementById('vizov')||document.getElementById('obov'))return;   // pause while the real player / onboarding is open
     _tzBP._render=undefined; BP=_tzBP;
     if(BP.layout==="graph")layoutGraph(); else if(BP.layout==="tree")layoutTree(); else layoutFlow();
     var fn=(BP.layout==="graph")?graphSVG:(BP.layout==="tree")?treeSVG:flowSVG; try{ el.innerHTML=fn(k); }catch(e){} }
+  window.hasUsedViz=function(){ try{ return !!(window.DATA&&DATA.viz&&Object.keys(DATA.viz).some(function(k){return (DATA.viz[k]||[]).length>0;})); }catch(e){ return false; } };
   window.mountVizTeaser=function(){ try{
     var host=document.querySelector('#main .notebody'); if(!host||host.querySelector('.vizteaser'))return;
+    if(window.hasUsedViz()) return;                       // student already used Visualize → stop teasing
     var subj=(window.currentTopicSubject?currentTopicSubject():'')||'';
+    var skey=(subj||'general').toLowerCase();
+    try{ window.DATA=window.DATA||{}; DATA.teaserSeen=DATA.teaserSeen||{}; if(DATA.teaserSeen[skey])return; DATA.teaserSeen[skey]=1; if(window.persist)persist(); }catch(e){}   // once per subject
     var key=/organic/i.test(subj)?"chem":/chem/i.test(subj)?"chem":/math/i.test(subj)?"math":/physics|physical/i.test(subj)?"default":/biolog/i.test(subj)?"default":"default";
     _tzBP=VIZ_DEMOS[key]||VIZ_DEMOS.default; _tzK=0;
     var card=document.createElement("div"); card.className="vizteaser";
@@ -4609,6 +4633,32 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     if(_tzT)clearInterval(_tzT);
     _tzT=setInterval(function(){ var e=document.getElementById("vtStage"); if(!e){clearInterval(_tzT);_tzT=null;return;}
       var n=(_tzBP.narration_steps||[]).length; _tzK++; if(_tzK>n+1)_tzK=0; teaserDraw(e,Math.min(_tzK,n-1)); },1700);
+  }catch(e){} };
+
+  /* ===== One-time onboarding: the first time a student opens a note, show the scripted
+     "highlight → Visualize → diagram" moment once (skippable), then never again. ===== */
+  window.showVizOnboarding=function(){ try{
+    if(!window.localStorage) return; if(localStorage.getItem('mb_onboard_viz')==='1') return;
+    if(document.getElementById('obov')) return;
+    if(window.hasUsedViz&&window.hasUsedViz()){ localStorage.setItem('mb_onboard_viz','1'); return; }   // already knows the feature
+    localStorage.setItem('mb_onboard_viz','1');
+    var obBP={layout:"cell",anode:{label:"Zinc anode (−)",half:"Zn → Zn²⁺ + 2e⁻",sol:"ZnSO₄"},cathode:{label:"Copper cathode (+)",half:"Cu²⁺ + 2e⁻ → Cu",sol:"CuSO₄"},bridge:"salt bridge (KNO₃)",
+      narration_steps:[{reveal:["anode","cathode"],active:[],point:"anode"},{reveal:["anode"],active:["anode"],point:"anode"},{reveal:["cathode"],active:["cathode"],point:"cathode"},{reveal:["wire"],active:["wire"],point:"wire"},{reveal:["bridge"],active:["bridge"],point:"bridge"},{reveal:["ions"],active:["ions"],point:"ions"}]};
+    var caps=["Meet <b>Visualize</b> — turn any sentence in your notes into a short, narrated explainer.","Zinc is oxidised at the <b>anode</b> — the negative electrode.","Copper ions are reduced at the <b>cathode</b> — positive.","Electrons flow through the wire, <b>anode → cathode</b>.","The <b>salt bridge</b> keeps both sides neutral.","A steady <b>current</b> flows. Now you try — highlight any sentence!"];
+    var ov=document.createElement("div"); ov.className="obov"; ov.id="obov";
+    ov.innerHTML='<div class="obcard live"><div class="obhd"><b>🎬 Visualize</b><span class="obq">a 10-second tour</span><button class="obx" id="obSkip">Skip</button></div>'
+      +'<div class="obsrc">Highlighted: “…oxidation at the <b>anode</b>, reduction at the <b>cathode</b>, and a <b>salt bridge</b> keeps both sides neutral.”</div>'
+      +'<div class="obstage"><div id="obSvg"></div></div>'
+      +'<div class="obcap"><div class="obtxt" id="obCap"></div><div class="obeq"><i></i><i></i><i></i><i></i><i></i></div></div>'
+      +'<button class="obgot" id="obGot">Got it — let me try ✨</button></div>';
+    document.body.appendChild(ov);
+    var k=0; function draw(){ BP=obBP; var el=document.getElementById("obSvg"); if(el)try{el.innerHTML=cellSVG(k);}catch(e){}
+      var c=document.getElementById("obCap"); if(c)c.innerHTML='<span class="oblab">STEP '+(k+1)+' / 6</span>'+caps[k]; }
+    draw();
+    var t=setInterval(function(){ if(!document.getElementById("obov")){clearInterval(t);return;} k++; if(k>=6){clearInterval(t);return;} draw(); },1900);
+    function close(){ clearInterval(t); var o=document.getElementById("obov"); if(o)o.remove(); }
+    document.getElementById("obGot").onclick=close; document.getElementById("obSkip").onclick=close;
+    ov.addEventListener("click",function(e){ if(e.target===ov)close(); });
   }catch(e){} };
   function recordViz(topicId,text){ if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
     if(t && !a.some(function(x){return x.text===t;})){ a.push({text:t,ts:Date.now()}); if(window.persist)persist(); } }catch(e){} }
