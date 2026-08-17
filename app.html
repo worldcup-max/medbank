@@ -287,6 +287,9 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
   display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
 .mcqtext{flex:1}
 .mcqmark{margin-left:auto;font-weight:800;font-size:17px}
+.mcqopt.removed{opacity:.38;text-decoration:line-through;border-style:dashed;cursor:default}
+.hintbtn{display:block;width:100%;margin-top:6px;background:#f6ecda;border:1px solid #e6cf9a;color:#8a5a12;border-radius:11px;padding:10px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
+.hintbtn:hover{background:#f0e2c4}
 .mcqopt.correct{border-color:var(--recall);background:#3ecf8e1c}
 .mcqopt.correct .mcqtag{background:var(--recall);color:#04231a}
 .mcqopt.correct .mcqmark{color:var(--recall)}
@@ -693,6 +696,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .arh-big{font-size:26px;font-weight:800;letter-spacing:-.3px}
 .arh-sub{font-size:12.5px;color:var(--dimmer);margin:2px 0 15px}
 .arh-start{justify-content:center;width:100%;font-size:15px;padding:12px}
+.arh-sizelab{font-size:12px;color:var(--dimmer);margin-bottom:8px}
+.arh-starts{display:flex;gap:8px}
+.arh-size{flex:0 0 auto;justify-content:center;font-size:14px;padding:12px 16px;font-weight:800}
+.arh-all{flex:1}
 .arcols{display:grid;grid-template-columns:2fr 1fr;gap:12px;min-width:0}
 .armix{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;min-width:0}
 .armix-lab{font-size:12px;color:var(--dimmer);margin:0 0 9px}
@@ -710,6 +717,20 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .ardetails>summary:before{content:'▸ ';color:var(--dimmer)}
 .ardetails[open]>summary:before{content:'▾ '}
 @media(max-width:720px){.arcols{grid-template-columns:1fr}.artiles{flex-direction:row}.artile{flex:1}}
+.fcast,.weakcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:14px}
+.fcast-lab,.weak-lab{font-size:12px;color:var(--dimmer);margin-bottom:10px}
+.fcast-bars{display:flex;align-items:flex-end;gap:8px;height:82px}
+.fcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px}
+.fcol .fv{font-size:11px;font-weight:700;color:var(--dim);height:14px}
+.fcol .fbar{width:70%;max-width:34px;border-radius:5px 5px 0 0;min-height:3px}
+.fcol .fl{font-size:10.5px;color:var(--dimmer)}
+.fcast-note{font-size:11.5px;color:#b45309;margin-top:9px;font-weight:600}
+.weakrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.weakrow:first-of-type{border-top:0}
+.weakrow .wnm{flex:1;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.weakrow .wacc{font-size:12.5px;font-weight:800;color:var(--com)}
+.weakrow .wacc.bad{color:#c0492d}
+.weakrow .wdrill{flex:0 0 auto;font-size:12px;padding:6px 14px}
 .arcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:26px}
 .artop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px}
 .artop b{font-size:16px}
@@ -976,7 +997,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15i';   // bump this each release
+const APP_VERSION='2026.08.15q';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1424,6 +1445,23 @@ function collectRecall(pred){
   return out;
 }
 function weakCount(){ return collectRecall(st=>st&&st.box<0).length; }
+/* ---- workload forecast: reviews falling due over the next N days (index 0 folds in overdue) ---- */
+function reviewForecast(days){ const today=dayNum(), out=new Array(days).fill(0);
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(!s)return;
+    const d=s.due-today; if(d<0)out[0]++; else if(d<days)out[d]++; })); return out; }
+/* ---- shakiest topics: lowest accuracy among started topics (needs a few seen cards) ---- */
+function weakTopics(){ const out=[];
+  startedTopics().forEach(t=>{ let seen=0,shaky=0; (t.recall||[]).forEach(c=>{ const id=cid(t.id,'recall',c), s=DATA.cards[id]; if(!s)return;
+    seen++; if(DATA.starred[id]||s.box<0||(s.lapses||0)>0)shaky++; });
+    if(seen>=3 && shaky>0) out.push({t, acc:Math.max(0,Math.round((seen-shaky)/seen*100)), shaky, seen}); });
+  out.sort((a,b)=>a.acc-b.acc); return out.slice(0,3); }
+/* ---- drill one topic's recall deck, shakiest cards first ---- */
+function drillTopic(tid){ const t=topById(tid); if(!t)return;
+  const items=(t.recall||[]).map(c=>({t,c,id:cid(t.id,'recall',c),deck:'recall'}));
+  const shk=x=>{ const s=DATA.cards[x.id]; return (DATA.starred[x.id]?2:0)+((s&&s.box<0)?2:0)+((s&&s.lapses)||0); };
+  items.sort((a,b)=>shk(b)-shk(a)); if(!items.length)return;
+  S={mode:'daily',key:'drill:'+tid,label:t.name,items,order:items.map((_,k)=>k),i:0,show:false,session:{done:0,correct:0,total:items.length}};
+  go('review'); }
 
 /* ---- reading log ---- */
 function isRead(id){ return !!DATA.read[id]; }
@@ -1480,6 +1518,11 @@ function buildRecallSession(){
   const hard=sh(due.filter(x=>x.starred||x.box<0));
   const reviews=sh(due.filter(x=>!(x.starred||x.box<0))).sort((a,b)=>a.box-b.box); // youngest interval first
   const news=planNew();
+  // exam-aware: if an exam is within ~3 weeks, float that subject's cards to the front of each tier (stable sort keeps order otherwise)
+  const _ew=(x)=>{ const d=examDays(x.t&&x.t.subject&&x.t.subject.id); return (d==null||d<0)?9999:d; };
+  if(DB.subjects.some(s=>{const d=examDays(s.id);return d!=null&&d>=0&&d<=21;})){
+    hard.sort((a,b)=>_ew(a)-_ew(b)); reviews.sort((a,b)=>_ew(a)-_ew(b)); news.sort((a,b)=>_ew(a)-_ew(b));
+  }
   const ordered=hard.concat(reviews,news);
   // time budget (minutes; 0 = unlimited)
   const budget=DATA.daily.budget||0;
@@ -2604,9 +2647,10 @@ function startBucket(k){
      session:{done:0,correct:0,total:items.length}};
   go('review');
 }
-function startRecallSession(){
+function startRecallSession(limit){
   const b=buildRecallSession();
-  const items=b.capped.concat(b.conf);
+  let items=b.capped.concat(b.conf);                    // priority order: hard → reviews → new → confidence
+  if(limit&&limit>0&&items.length>limit) items=items.slice(0,limit);   // size-limited session keeps the most important cards
   S={mode:'daily',key:'recall',label:'Active Recall',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length,over:b.over,confN:b.conf.length,plan:b.counts}};
 }
@@ -2909,7 +2953,12 @@ function pageToday(){
         <span class="arh-health ${hcls}">${h.pct}% ${esc(h.status.label.toLowerCase())}</span></div>
       <div class="arh-big">${total} card${total===1?'':'s'} due</div>
       <div class="arh-sub">~${estMin(total)} min${hard?` · ${hard} hard`:''}${reviews?` · ${reviews} reviews`:''}${neu?` · ${neu} new`:''}</div>
-      <button class="btn primary arh-start" onclick="startRecallSession();go('review')">▶ Start session</button>
+      ${(()=>{ const sizes=[10,20].filter(n=>n<total);
+        if(!sizes.length) return `<button class="btn primary arh-start" onclick="startRecallSession(0);go('review')">▶ Start session</button>`;
+        return `<div class="arh-sizelab">Pick a size — start small if you want</div>
+          <div class="arh-starts">${sizes.map(n=>`<button class="btn arh-size" onclick="startRecallSession(${n});go('review')">▶ ${n}</button>`).join('')}
+            <button class="btn primary arh-size arh-all" onclick="startRecallSession(0);go('review')">▶ All · ${total}</button></div>`;
+      })()}
     </div>
     <div class="arcols">
       <div class="armix">
@@ -2931,6 +2980,18 @@ function pageToday(){
     </div>`
     : `<div class="arhero done"><div class="big">✓</div><b>${started?'All caught up':'Nothing started yet'}</b>
         <p class="sub" style="margin:6px 0 0">${started?'No cards due right now — learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div>`}
+
+    ${(()=>{ const f=reviewForecast(7); if(f.reduce((a,b)=>a+b,0)===0) return '';
+      const max=Math.max(1,Math.max.apply(null,f)), goal=DATA.daily.goal||40;
+      const bars=f.map((v,i)=>{ const dt=new Date(); dt.setDate(dt.getDate()+i);
+        const lab=i===0?'Today':dt.toLocaleDateString(undefined,{weekday:'short'}); const h=Math.round(v/max*54);
+        return `<div class="fcol"><span class="fv">${v||''}</span><div class="fbar" style="height:${Math.max(3,h)}px;background:${v>goal?'#c0492d':'var(--recall)'}"></div><span class="fl">${lab}</span></div>`; }).join('');
+      let note=''; const pk=f.indexOf(Math.max.apply(null,f)); if(f[pk]>goal){ const pd=new Date(); pd.setDate(pd.getDate()+pk); note=`<div class="fcast-note">Heavy day ${pk===0?'today':pd.toLocaleDateString(undefined,{weekday:'long'})} — get ahead earlier.</div>`; }
+      return `<div class="fcast"><div class="fcast-lab">Reviews due — next 7 days</div><div class="fcast-bars">${bars}</div>${note}</div>`;
+    })()}
+    ${(()=>{ const w=weakTopics(); if(!w.length) return '';
+      return `<div class="weakcard"><div class="weak-lab">Your shakiest topics</div>${w.map(x=>`<div class="weakrow"><span class="wnm">${esc(x.t.name)}</span><span class="wacc ${x.acc<50?'bad':''}">${x.acc}%</span><button class="btn wdrill" onclick="drillTopic('${x.t.id}')">Drill</button></div>`).join('')}</div>`;
+    })()}
 
     <div class="btnrow" style="margin-top:14px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button>
       <button class="btn" onclick="go('exam')">📝 Mock exam</button></div>
@@ -2965,23 +3026,32 @@ function mcqView(session){
   const col='var(--recall)';
   const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
   const picked = S.pick!=null, correct = picked && S.pick===c.ans;
+  const isHard = !!(DATA.starred[it.id] || (DATA.cards[it.id]&&DATA.cards[it.id].box<0));
   let body;
   if(!S.opts){
     body = `<div class="taphint">Think of your answer first — then reveal the options.</div>`;
   }else{
     const optsHtml = c.opts.map((o,i)=>{
       let cls='mcqopt';
+      const removed = (!picked && S.hint && S.hintHide && S.hintHide.indexOf(i)>=0);
       if(picked){ if(i===c.ans) cls+=' correct'; else if(i===S.pick) cls+=' wrong'; else cls+=' dim'; }
+      else if(removed) cls+=' removed';
       const mark = picked ? (i===c.ans?'<span class="mcqmark">✓</span>':(i===S.pick?'<span class="mcqmark">✗</span>':'')) : '';
-      return `<button class="${cls}" ${picked?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})">
+      return `<button class="${cls}" ${(picked||removed)?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})">
           <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span>${mark}</button>`;
     }).join('');
     body = `<div class="mcqopts">${optsHtml}</div>`;
+    if(!picked && isHard && !S.hint && c.opts.length>2){
+      body += `<button class="hintbtn" onclick="event.stopPropagation();mcqHint()">💡 Hint · remove two wrong options</button>`;
+    }
     if(picked){
       const revTxt=reviewIntervalText(it.id);
-      body += `<div class="mcqresult ${correct?'ok':'no'}">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
+      body += `<div class="mcqresult ${correct?'ok':'no'}" id="mcqAnswerTop">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
             + `<div class="nextrev ${correct?'ok':'no'}">↻ You'll see this again <b>${revTxt}</b>${correct?'':' · it\'s now a hard card (also in your reminders)'}</div>`
-            + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`;
+            + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`
+            + `<div class="vizmiss">${(window.DATA&&DATA.cardViz&&DATA.cardViz[it.id])
+                 ? `<button class="vizsavedbtn" onclick="event.stopPropagation();vizWatchSaved()">▶ Watch your explainer <span class="vsaved">saved for this card</span></button>`
+                 : `<button class="vizmissbtn" onclick="event.stopPropagation();vizFromCard()">🎬 Visualize how to get this answer</button>`}<div id="vizInlineHost" class="vizinlinehost"></div></div>`;
     }
   }
   const deck=S.mode==='deck';
@@ -3095,8 +3165,15 @@ function showOpts(){
   markActive(); const it=S.items[S.order[S.i]]; if(it) touchTopic(it.t.id);
   render();
 }
+function mcqHint(){                             // 50-50: knock out two wrong options on a hard card
+  if(!S) return; const it=S.items[S.order[S.i]]; if(!it||!isMcqCard(it)||S.pick!=null) return;
+  const c=it.c, wrong=[]; for(let k=0;k<c.opts.length;k++) if(k!==c.ans) wrong.push(k);
+  for(let k=wrong.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[wrong[k],wrong[j]]=[wrong[j],wrong[k]];}
+  S.hintHide=wrong.slice(0,2); S.hint=true; render();
+}
 function pickOpt(i){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it||S.pick!=null||!isMcqCard(it)) return;
+  if(S.hint && S.hintHide && S.hintHide.indexOf(i)>=0) return;   // removed by the hint — not selectable
   const c=it.c, ok=(i===c.ans);
   S.pick=i; S.show=true;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
@@ -3116,15 +3193,30 @@ function pickOpt(i){
   else if(beforeCards<goal && afterCards>=goal)   celebrate('goal','🎉 Daily goal complete!');
   else if(!beforeMet && streakMet())              celebrate('floor','✓ Day’s target met — streak safe!');
   else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
-  render(); window.scrollTo(0,0);
+  render();
+  if(window.innerWidth<=720){ setTimeout(function(){ var el=document.getElementById('mcqAnswerTop'); if(el)el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }   // phone: drop straight to the explanation
+  else window.scrollTo(0,0);
+}
+function vizFromCard(){                        // build an inline explainer for the current card — how to reason to the answer
+  if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
+  const c=effCard(it.id,it.c), t=it.t;
+  const correct=(c.opts&&c.opts[c.ans]!=null)?c.opts[c.ans]:'';
+  const text=(c.q||'')+(correct?(' The correct answer is: '+correct+'.'):'')+(c.a?(' '+c.a):'');
+  const btn=document.querySelector('.vizmissbtn'); if(btn)btn.style.display='none';
+  if(window.aiVisualizeInline) window.aiVisualizeInline(text,(t&&t.name)||'',(t&&t.id)||'','vizInlineHost', it.id);
+}
+function vizWatchSaved(){                       // replay the explainer already saved to this card
+  if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
+  const btn=document.querySelector('.vizsavedbtn'); if(btn)btn.style.display='none';
+  if(window.aiVisualizeInlineSaved) window.aiVisualizeInlineSaved(it.id,(it.t&&it.t.id)||'','vizInlineHost');
 }
 function mcqNext(){
-  if(!S) return;
+  if(!S) return; if(window.vizInlineStop)vizInlineStop();
   if(S.i>=S.items.length-1){
     if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
-    S.show=false;S.opts=false;S.pick=null; render(); return;   // deck: stay on last card
+    S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); return;   // deck: stay on last card
   }
-  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
+  S.i++; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0);
 }
 
 function reveal(){
@@ -3134,13 +3226,13 @@ function reveal(){
   if(!S.show){ markActive(); if(it) touchTopic(it.t.id); }
   S.show=!S.show; render();
 }
-function step(d){ if(!S)return; const n=S.i+d; if(n<0||n>=S.items.length)return;
-  S.i=n; S.show=false; S.opts=false; S.pick=null;
+function step(d){ if(!S)return; if(window.vizInlineStop)vizInlineStop(); const n=S.i+d; if(n<0||n>=S.items.length)return;
+  S.i=n; S.show=false; S.opts=false; S.pick=null; S.hint=false; S.hintHide=null;
   if(S.mode==='deck'){ DATA.pos['pos:'+S.t.id+S.deck]=S.i; persist(); }
   render(); window.scrollTo(0,0);
 }
-function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;render(); }
-function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.order=S.items.map((_,k)=>k);
+function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;render(); }
+function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;S.order=S.items.map((_,k)=>k);
   if(S.mode==='deck'){DATA.pos['pos:'+S.t.id+S.deck]=0;persist();} render(); }
 /* classify a session item for the remaining-mix bar */
 function classifyItem(it){
@@ -3158,14 +3250,15 @@ function sessionMix(){                         // counts of what's still AHEAD (
   return {hard:h,rev:r,new:n};
 }
 function endSession(){                        // leave a session gracefully → results if any progress, else back to the hub
+  if(window.vizInlineStop)vizInlineStop();
   if(!S){ go('today'); return; }
   if(S.session && S.session.done>0){ S.i=S.items.length; render(); window.scrollTo(0,0); }
   else go('today');
 }
 function sessionNext(){                       // advance a non-rated (primer) card inside a session
   if(!S) return; S.session.done++;
-  if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0); return; }
-  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
+  if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0); return; }
+  S.i++; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0);
 }
 function flashReview(id,ok){
   const txt=reviewIntervalText(id);
@@ -3186,7 +3279,7 @@ function celebrate(kind,text){
   setTimeout(()=>host.remove(),1900);
 }
 function rateCard(ok){
-  if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
+  if(!S) return; if(window.vizInlineStop)vizInlineStop(); const it=S.items[S.order[S.i]]; if(!it) return;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
@@ -3205,10 +3298,41 @@ function rateCard(ok){
   else if(afterStreak>beforeStreak && afterStreak%7===0) celebrate('streak','🔥 '+afterStreak+'-day streak!');
   if(S.i>=S.items.length-1){
     if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
-    S.show=false;S.opts=false;S.pick=null; render(); return;            // deck: stay on last card
+    S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); return;            // deck: stay on last card
   }
-  S.i++; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0);
+  S.i++; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0);
 }
+/* ---- phone swipe gestures in a review session: ← next · → prev · ↑ star ---- */
+function swipeAct(dir){
+  if(!/^#\/(study|review|hard)/.test(location.hash)||!S) return;
+  const it=S.items[S.order[S.i]]; if(!it) return;
+  if(dir==='up'){ if(window.navigator&&navigator.vibrate)try{navigator.vibrate(15);}catch(e){} toggleStar(it.id); return; }
+  if(dir==='right'){ if(S.i>0) step(-1); return; }                       // previous
+  if(dir==='left'){                                                       // next / skip
+    if(isMcqCard(it)){ mcqNext(); }
+    else if(!S.show){ reveal(); }                                         // flip: first swipe reveals
+    else if(S.i<S.items.length-1){ step(1); }
+    return;
+  }
+}
+(function(){
+  var sx=0,sy=0,st=0,live=false;
+  document.addEventListener('touchstart',function(e){
+    live=false; if(window.innerWidth>720) return;
+    if(!/^#\/(study|review|hard)/.test(location.hash)) return;
+    if(e.touches.length!==1) return;
+    var t=e.target;
+    if(t&&t.closest&&t.closest('.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns')) return;   // don't hijack controls/answers
+    live=true; sx=e.touches[0].clientX; sy=e.touches[0].clientY; st=Date.now();
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!live) return; live=false;
+    var t=e.changedTouches[0]; var dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Date.now()-st>700) return;
+    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.5){ swipeAct(dx<0?'left':'right'); }
+    else if(dy<-70 && Math.abs(dy)>Math.abs(dx)*1.5){ swipeAct('up'); }
+  },{passive:true});
+})();
 document.addEventListener('keydown',e=>{
   const h=location.hash;
   if(/^#\/exam/.test(h) && S && S.mode==='exam' && !S.finished && S.items.length){   // exam keys
@@ -4413,6 +4537,28 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizhd .vizq{margin-left:auto;margin-right:10px;font-size:11px;font-weight:800;color:#6d28d9;background:#f1eef8;border-radius:999px;padding:3px 9px}
 .vizhd .vizq.low{color:#b45309;background:#fdf1e3}.vizhd .vizq:empty{display:none}
 .vizbody{padding:14px 16px}
+/* inline "Visualize how to get this answer" under a review card */
+.vizmiss{margin-top:14px}
+.vizmissbtn{width:100%;border:1px dashed #c9b8f7;background:#faf7ff;color:#6d28d9;border-radius:12px;padding:12px;font-weight:800;font-size:14px;cursor:pointer}
+.vizmissbtn:hover{background:#f3ecff}
+.vizsavedbtn{width:100%;border:none;background:#6d28d9;color:#fff;border-radius:12px;padding:12px;font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.vizsavedbtn:hover{background:#5b21b6}
+.vizsavedbtn .vsaved{font-size:11px;font-weight:700;background:rgba(255,255,255,.22);padding:2px 9px;border-radius:20px}
+.vizinlinehost{margin-top:10px}
+.vizgen{display:flex;align-items:center;gap:12px;border:1px solid #eee7fb;background:#faf9fd;border-radius:12px;padding:14px}
+.vizgen.err{color:#b4453b;font-size:13px;font-weight:600}
+.vizgenspin{display:flex;gap:5px;flex:0 0 auto}
+.vizgenspin i{width:8px;height:8px;border-radius:50%;background:#7c3aed;display:inline-block;animation:vizpulse 1s infinite ease-in-out}
+.vizgenspin i:nth-child(2){animation-delay:.15s}.vizgenspin i:nth-child(3){animation-delay:.3s}
+@keyframes vizpulse{0%,80%,100%{transform:scale(.5);opacity:.4}40%{transform:scale(1);opacity:1}}
+.vizgentxt{display:flex;flex-direction:column}.vizgentxt b{font-size:14px;color:#3a1d7a}.vizgentxt span{font-size:12px;color:#6b6580}
+.vizready{background:#e7f7f0;border:1px solid #b7e6d5;color:#0d7a68;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:800;margin-bottom:8px}
+.vizinlinebody{padding:0!important}
+.vizposter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(20,16,38,.30);cursor:pointer;z-index:4}
+.vizposter .vpbtn{width:58px;height:58px;border-radius:50%;background:#6d28d9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;box-shadow:0 8px 22px rgba(109,40,217,.5)}
+.vizposter .vplab{color:#fff;font-weight:800;font-size:13px;text-shadow:0 1px 5px rgba(0,0,0,.5)}
+.vizreadypill{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:9400;background:#6d28d9;color:#fff;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:999px;box-shadow:0 10px 26px rgba(109,40,217,.4);cursor:pointer;animation:vizpillup .3s ease}
+@keyframes vizpillup{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 .vizrail{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:10px}
 .vizrail .rc{font-size:10px;font-weight:800;color:#5c5570;background:#f1eef8;border:1px solid #e7e3f2;border-radius:999px;padding:3px 8px}
 .vizrail .rc.on{background:#6d28d9;color:#fff;border-color:transparent}.vizrail .rs{color:#c9bfe0;font-weight:800;font-size:10px}
@@ -4715,6 +4861,113 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       (rows[rk]||[]).forEach(function(v,i){ S.push('<rect x="'+(x0+i*cw)+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="#fff" stroke="#e7e3f2"/>'+T(x0+i*cw+cw/2,y+ch/2+6,v,{size:15,w:700,fill:'#2a2536'})); });
       S.push('</g>'); });
     S.push('</svg>');return S.join(''); }
+  /* ===== VENN mode (set logic, union/intersection/complement, conditional probability) =====
+     Region ids are a GRAMMAR over the set ids: "A" · "A_only" · "A_and_B" · "A_and_B_and_C" ·
+     "A_or_B" · "not_A" · "outside" · "A_given_B". Cell regions (only/and/outside) accumulate
+     as they are revealed; OVERLAY regions (set/or/not/given) show only on the step that reveals
+     or activates them, and mute the cell fills so the overlay reads cleanly. */
+  var VENN=null;
+  var VENN_OVERLAY={set:1,or:1,not:1,given:1};
+  function vennGeom(n){ return n>=3
+    ? {r:126, c:[{x:412,y:262},{x:548,y:262},{x:480,y:378}], uni:[56,88,848,428]}
+    : {r:148, c:[{x:400,y:310},{x:560,y:310}], uni:[56,104,848,392]}; }
+  function vennParse(id,ids){ var m;
+    if(id==='outside') return {kind:'outside'};
+    if((m=/^not_(.+)$/.exec(id))) return {kind:'not',a:m[1]};
+    if((m=/^(.+)_given_(.+)$/.exec(id))) return {kind:'given',a:m[1],b:m[2]};
+    if((m=/^(.+)_only$/.exec(id))) return {kind:'only',a:m[1]};
+    if(id.indexOf('_or_')>0) return {kind:'or',list:id.split('_or_')};
+    if(id.indexOf('_and_')>0) return {kind:'and',list:id.split('_and_')};
+    if(ids.indexOf(id)>=0) return {kind:'set',a:id};
+    return null; }
+  function vennOut(sets,g,j,f){ var C=g.c,n=C.length,gx=0,gy=0;   // unit vector pointing away from the cluster
+    C.forEach(function(c){gx+=c.x;gy+=c.y;}); gx/=n; gy/=n;
+    var dx=C[j].x-gx,dy=C[j].y-gy,L=Math.sqrt(dx*dx+dy*dy)||1;
+    return {x:C[j].x+dx/L*g.r*f, y:C[j].y+dy/L*g.r*f}; }
+  /* a circle in the upper band gets its label ABOVE it (clear of every region); a lower circle
+     (the third set) gets it low INSIDE, under that set's "only" count. */
+  function vennSetLabelPos(sets,g,j){ var C=g.c,my=0; C.forEach(function(c){my+=c.y;}); my/=C.length;
+    if(C[j].y<=my+1) return {x:C[j].x+(C[j].x<480?-58:58), y:g.uni[1]+30};
+    var p=vennOut(sets,g,j,0.70); return {x:p.x,y:p.y+5}; }
+  function vennCentroid(id,sets,g){ var ids=sets.map(function(s){return s.id;}),p=vennParse(id,ids);
+    var C=g.c,U=g.uni; if(!p)return {x:480,y:300};
+    var idx=function(k){return ids.indexOf(k);};
+    var mid=function(list){var xs=0,ys=0,k=0;list.forEach(function(t){var j=idx(t);if(j<0)return;xs+=C[j].x;ys+=C[j].y;k++;});return k?{x:xs/k,y:ys/k}:{x:480,y:300};};
+    if(p.kind==='outside'||p.kind==='not') return {x:U[0]+80,y:U[1]+U[3]-30};
+    if(p.kind==='only'){ var j=idx(p.a); return j<0?{x:480,y:300}:vennOut(sets,g,j,0.40); }
+    if(p.kind==='given'){ var m2=mid([p.a,p.b]); return {x:m2.x,y:m2.y+g.r*0.32}; }
+    if(p.kind==='or'){ var m3=mid(p.list),top=1e9; p.list.forEach(function(t){var j2=idx(t); if(j2>=0)top=Math.min(top,C[j2].y);});
+      return {x:m3.x,y:(top<1e9?top:300)-g.r*0.55}; }
+    if(p.kind==='and') return mid(p.list);
+    if(p.kind==='set'){ var k2=idx(p.a); return k2<0?{x:480,y:300}:{x:C[k2].x,y:C[k2].y}; }
+    return {x:480,y:300}; }
+  function layoutVenn(){ var sets=(BP.sets||[]).slice(0,3),g=vennGeom(sets.length);
+    VENN={sets:sets,g:g,vb:[960,540],pt:{},uses:{},kind:{}};
+    var ids=sets.map(function(s){return s.id;});
+    sets.forEach(function(s,i){ VENN.pt[s.id]=vennSetLabelPos(sets,g,i); });
+    (BP.regions||[]).forEach(function(r){ VENN.pt[r.id]=vennCentroid(r.id,sets,g);
+      var p=vennParse(r.id,ids),u=[]; if(!p)return; VENN.kind[r.id]=p.kind;
+      if(p.kind==='set'||p.kind==='only'||p.kind==='not')u=[p.a]; else if(p.kind==='given')u=[p.a,p.b];
+      else if(p.kind==='or'||p.kind==='and')u=p.list; else if(p.kind==='outside')u=ids.slice();
+      VENN.uses[r.id]=u; }); }
+  /* one shaded region → svg (nested clip-paths = intersection, a mask = exclusion,
+     group opacity so a union shades evenly instead of double-darkening the overlap) */
+  function vennShape(id,color,op,glow,uid){
+    var sets=VENN.sets,g=VENN.g,ids=sets.map(function(s){return s.id;}),p=vennParse(id,ids);
+    if(!p)return ''; var C=g.c,U=g.uni,idx=function(k){return ids.indexOf(k);};
+    var CIR=function(j,fill){return '<circle cx="'+C[j].x+'" cy="'+C[j].y+'" r="'+g.r+'" fill="'+fill+'"/>';};
+    var RECT=function(fill){return '<rect x="'+U[0]+'" y="'+U[1]+'" width="'+U[2]+'" height="'+U[3]+'" rx="12" fill="'+fill+'"/>';};
+    if(p.kind==='or'){ var gs='<g opacity="'+op+'"'+glow+'>';
+      p.list.forEach(function(t){var j=idx(t); if(j>=0)gs+=CIR(j,color);}); return gs+'</g>'; }
+    if(p.kind==='given'){ var ja=idx(p.a),jb=idx(p.b); if(ja<0||jb<0)return '';
+      var mk=uid+'gm',cp=uid+'gc';
+      return '<defs><mask id="'+mk+'"><rect x="0" y="0" width="960" height="540" fill="#fff"/>'+CIR(jb,'#000')+'</mask>'
+        +'<clipPath id="'+cp+'"><circle cx="'+C[jb].x+'" cy="'+C[jb].y+'" r="'+g.r+'"/></clipPath></defs>'
+        +'<g mask="url(#'+mk+')" opacity="0.62">'+RECT('#e9e6f2')+'</g>'
+        +'<g opacity="'+op+'"'+glow+'><g clip-path="url(#'+cp+')">'+CIR(ja,color)+'</g></g>'; }
+    var IN=[],OUT=[];
+    if(p.kind==='set'){ IN=[idx(p.a)]; }
+    else if(p.kind==='only'){ IN=[idx(p.a)]; ids.forEach(function(t,j){ if(t!==p.a)OUT.push(j); }); }
+    else if(p.kind==='and'){ p.list.forEach(function(t){var j=idx(t); if(j>=0)IN.push(j);}); }
+    else if(p.kind==='not'){ OUT=[idx(p.a)]; }
+    else if(p.kind==='outside'){ ids.forEach(function(t,j){OUT.push(j);}); }
+    if(IN.indexOf(-1)>=0||OUT.indexOf(-1)>=0)return '';
+    var defs='',s=IN.length?CIR(IN[0],color):RECT(color);
+    for(var k=1;k<IN.length;k++){ var cid=uid+'c'+k;
+      defs+='<clipPath id="'+cid+'"><circle cx="'+C[IN[k]].x+'" cy="'+C[IN[k]].y+'" r="'+g.r+'"/></clipPath>';
+      s='<g clip-path="url(#'+cid+')">'+s+'</g>'; }
+    if(OUT.length){ var mk2=uid+'m';
+      defs+='<mask id="'+mk2+'"><rect x="0" y="0" width="960" height="540" fill="#fff"/>'
+        +OUT.map(function(j){return CIR(j,'#000');}).join('')+'</mask>';
+      s='<g mask="url(#'+mk2+')">'+s+'</g>'; }
+    return (defs?'<defs>'+defs+'</defs>':'')+'<g opacity="'+op+'"'+glow+'>'+s+'</g>'; }
+  function vennSVG(step){ var sets=VENN.sets,g=VENN.g,C=g.c,U=g.uni,regs=BP.regions||[];
+    var shown={};for(var s2=0;s2<=step;s2++)(BP.narration_steps[s2].reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+    var now={};(BP.narration_steps[step].reveal||[]).concat(BP.narration_steps[step].active||[]).forEach(function(id){now[id]=1;});
+    var vis=function(r){ return VENN_OVERLAY[VENN.kind[r.id]] ? !!now[r.id] : !!shown[r.id]; };
+    var overlay=false; regs.forEach(function(r){ if(VENN_OVERLAY[VENN.kind[r.id]]&&now[r.id])overlay=true; });
+    var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+    S.push(T(480,40,BP.meta.title||'',{size:16,w:800,fill:'#3a3550'}));
+    S.push('<rect x="'+U[0]+'" y="'+U[1]+'" width="'+U[2]+'" height="'+U[3]+'" rx="12" fill="#ffffff" stroke="#cdc5e4" stroke-width="2"/>');
+    S.push(T(U[0]+12,U[1]+22,BP.universe||'S — every possible outcome',{size:12,w:800,fill:'#8b84a3',anchor:'start'}));
+    regs.forEach(function(r,k){ if(!vis(r))return; var ov=!!VENN_OVERLAY[VENN.kind[r.id]];
+      if(!ov&&overlay)return;                                   // mute cell fills under an overlay
+      var glow=act[r.id]?' style="filter:drop-shadow(0 0 7px rgba(124,58,237,.85))"':'';
+      S.push(vennShape(r.id,r.color||'#7c3aed',act[r.id]?0.40:0.22,glow,'v'+k+'_')); });
+    var live={}; sets.forEach(function(s3){ if(shown[s3.id])live[s3.id]=1; });
+    regs.forEach(function(r){ if(!shown[r.id])return; (VENN.uses[r.id]||[]).forEach(function(t){live[t]=1;}); });
+    sets.forEach(function(s3,i){ if(!live[s3.id])return;
+      var glow=act[s3.id]?' style="filter:drop-shadow(0 0 7px rgba(124,58,237,.85))"':'';
+      S.push('<circle cx="'+C[i].x+'" cy="'+C[i].y+'" r="'+g.r+'" fill="none" stroke="'+(s3.color||'#6d28d9')+'" stroke-width="'+(act[s3.id]?4:2.8)+'"'+glow+'/>');
+      var lp=VENN.pt[s3.id];
+      S.push(T(lp.x,lp.y,s3.label||s3.id,{size:13.5,w:800,fill:s3.color||'#5b21b6'}));
+      if(s3.p)S.push(T(lp.x,lp.y+16,s3.p,{size:11,w:700,fill:'#8b84a3'})); });
+    regs.forEach(function(r){ if(!vis(r)||!r.label)return; var c=VENN.pt[r.id];
+      S.push(T(c.x,c.y+4,r.label,{size:15,w:800,fill:r.color||'#4b2c91'}));
+      if(r.note)S.push(T(c.x,c.y+20,r.note,{size:10.5,w:700,fill:'#6b6480'})); });
+    if(BP.formula)S.push(T(480,U[1]+U[3]+30,BP.formula,{size:13.5,w:800,fill:'#0d7a68'}));
+    S.push('</svg>');return S.join(''); }
   /* ===== GRAPH mode (plotted curve: energy profile, titration, decay, Boltzmann, phase…) ===== */
   var GRAPH=null;
   function layoutGraph(){ var X=BP.x||{min:0,max:100},Y=BP.y||{min:0,max:100},x0=78,x1=920,y0=44,y1=470;
@@ -4834,9 +5087,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     render(0);
   }
   function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; try{closeTip();closeQuiz();}catch(e){}
-    var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440]};
+    var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440],venn:[960,540]};
     var vbm=VBMAP[BP.layout]; curVB=vbm?[0,0,vbm[0],vbm[1]]:fitVB();
-    var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG};
+    var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG,venn:vennSVG};
     w.innerHTML=SV[BP.layout]?SV[BP.layout](i):sceneSVG(i); move();
     var s=BP.narration_steps[i];
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span><span class="capw">'+buildKaraoke(s.narration_text||'')+'</span>';
@@ -4853,6 +5106,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     if(BP.layout==='orbital'){ return (ORB&&ORB.pt[ref])||null; }
     if(BP.layout==='geometry'){ return GEOPT[ref]||null; }
     if(BP.layout==='ice'){ return ICEPT[ref]||null; }
+    if(BP.layout==='venn'){ return (VENN&&VENN.pt[ref])||null; }
     return anchor(ref,i); }
   function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
     c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; follow(p); }
@@ -4899,6 +5153,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     if(BP.layout==='flow'||BP.layout==='tree'){ var n=(BP.nodes||[]).filter(function(x){return x.id===id;})[0]; if(n)return {t:n.label||id,b:n.note||'',d:n.def||''}; }
     if(BP.layout==='cell'){ if(id==='anode'&&BP.anode)return {t:BP.anode.label||'Anode',b:(BP.anode.half||'')+' — oxidation (loses electrons)',d:'AN-OX: oxidation happens at the anode, the negative electrode.'}; if(id==='cathode'&&BP.cathode)return {t:BP.cathode.label||'Cathode',b:(BP.cathode.half||'')+' — reduction (gains electrons)',d:'RED-CAT: reduction happens at the cathode, the positive electrode.'}; if(id==='wire')return {t:'External wire',b:'electrons flow from anode to cathode',d:'Only electrons move in the wire — ions never travel through it.'}; if(id==='bridge')return {t:BP.bridge||'Salt bridge',b:'lets ions move so both sides stay neutral',d:'Without it, charge builds up and the current stops almost instantly.'}; if(id==='ions')return {t:'Ion movement',b:'anions drift to the anode, cations to the cathode',d:''}; }
     if(BP.layout==='graph'){ var m=(BP.markers||[]).filter(function(x){return x.id===id;})[0]; if(m)return {t:m.label||id,b:m.note||'',d:m.def||''}; }
+    if(BP.layout==='venn'){ var vs=(BP.sets||[]).filter(function(x){return x.id===id;})[0]; if(vs)return {t:vs.label||id,b:vs.p||'',d:vs.def||''};
+      var vr=(BP.regions||[]).filter(function(x){return x.id===id;})[0]; if(vr)return {t:(vr.label||id),b:vr.note||'',d:vr.def||''}; }
     if(!BP.layout){ var e=elMap&&elMap[id]; if(e)return {t:e.label||id,b:e.note||'',d:e.def||''}; }
   }catch(e){} return null; }
   function closeTip(){ if(_tip){try{_tip.remove();}catch(e){} _tip=null;} }
@@ -4975,6 +5231,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return;
     if(i<BP.narration_steps.length-1){ if(shouldQuiz()){ askNext(function(){ if(!playing)return; i++; playStep(); }); } else { i++; playStep(); } } else { stop(); showResults(); } }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause';
+    var _pp=document.querySelector('.vizposter'); if(_pp)_pp.remove();
     // keep-alive: Chrome silently stops speechSynthesis after ~15s — pause+resume resets that timer
     if(vizKeep)clearInterval(vizKeep); vizKeep=setInterval(function(){ try{ if(window.speechSynthesis&&speechSynthesis.speaking){ speechSynthesis.pause(); speechSynthesis.resume(); } }catch(e){} },9000);
     playStep(); }
@@ -5002,6 +5259,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       else if(bp.layout==='cell'){ /* fixed schematic — no layout needed */ }
       else if(bp.layout==='graph'){ layoutGraph(); }
       else if(bp.layout==='orbital'){ layoutOrbital(); }
+      else if(bp.layout==='venn'){ layoutVenn(); }
       else if(bp.layout==='geometry'||bp.layout==='ice'){ /* fixed layout */ }
       else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
       VIZ_TID=topicId||(window.currentTopicId?currentTopicId():''); vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
@@ -5009,6 +5267,66 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       mountPlayer(); setTimeout(play,400);
     }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }
   };
+  function applyLayout(bp){
+    if(bp.layout==='tree'){ layoutTree(); }
+    else if(bp.layout==='flow'){ layoutFlow(); }
+    else if(bp.layout==='cell'){ }
+    else if(bp.layout==='graph'){ layoutGraph(); }
+    else if(bp.layout==='orbital'){ layoutOrbital(); }
+    else if(bp.layout==='venn'){ layoutVenn(); }
+    else if(bp.layout==='geometry'||bp.layout==='ice'){ }
+    else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
+  }
+  /* INLINE explainer: builds in the background under the card's explanation, never auto-plays,
+     never interrupts reading. When ready it surfaces a "watch" pill and a play-when-you-want player. */
+  function mountInline(bp,text,topicId,hostId,poster){                           // render the paused inline player into hostId
+    var host=document.getElementById(hostId); if(!host) return null;
+    BP=bp; SRC=text||''; applyLayout(bp);
+    VIZ_TID=topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
+    host.innerHTML='<div class="vizready">✓ Your explainer is ready — press ▶ to see how to reach the answer.</div>'
+      +'<div class="vizbody vizinlinebody" id="vizBody"></div>';
+    mountPlayer();                                                              // paused at step 0
+    if(poster){ var stg=document.getElementById('vizStage'); if(stg){         // video-style poster with a big play button
+      var pv=document.createElement('div'); pv.className='vizposter';
+      pv.innerHTML='<div class="vpbtn">▶</div><div class="vplab">Watch how to reach the answer</div>';
+      stg.appendChild(pv); pv.onclick=function(){ try{ if(!playing)play(); }catch(e){} }; } }
+    return host;
+  }
+  window.aiVisualizeInline=async function(text, topicName, topicId, hostId, cardId){
+    var host=document.getElementById(hostId); if(!host) return;
+    host.innerHTML='<div class="vizgen"><div class="vizgenspin"><i></i><i></i><i></i></div>'
+      +'<div class="vizgentxt"><b>Building your explainer…</b><span>Keep reading — I\'ll let you know the moment it\'s ready.</span></div></div>';
+    try{
+      var resp=await fetchBlueprint(text, topicName); var bp=resp&&resp.blueprint;
+      if(!document.getElementById(hostId)) return;                              // student already moved on
+      if(!bp||!bp.narration_steps||!bp.narration_steps.length){ var he=document.getElementById(hostId); if(he)he.innerHTML='<div class="vizgen err">Couldn\'t build this one — try the next card.</div>'; return; }
+      recordViz(topicId||'', text);
+      if(cardId){ try{ window.DATA=window.DATA||{}; DATA.cardViz=DATA.cardViz||{}; DATA.cardViz[cardId]={bp:bp,text:text,ts:Date.now()}; if(window.persist)persist(); }catch(e){} }   // saved to THIS card
+      var host2=mountInline(bp,text,topicId,hostId,true);
+      try{ setQuota(resp.viz_quota); }catch(e){}
+      if(host2)showReadyPill(host2);
+    }catch(e){ var h=document.getElementById(hostId); if(h) h.innerHTML='<div class="vizgen err">'+esc((e&&e.message)||'Something went wrong')+'</div>'; }
+  };
+  window.aiVisualizeInlineSaved=function(cardId, topicId, hostId){               // replay the card's saved explainer — instant, no rebuild
+    var rec=(window.DATA&&DATA.cardViz)?DATA.cardViz[cardId]:null; if(!rec||!rec.bp) return;
+    var host=mountInline(rec.bp, rec.text||'', topicId, hostId);
+    if(host){ setTimeout(function(){ try{ if(!playing)play(); }catch(e){} },300); }   // explicit "watch" → start playing
+  };
+  function showReadyPill(host){
+    var old=document.getElementById('vizReadyPill'); if(old)old.remove();
+    function inView(){ try{ var r=host.getBoundingClientRect(); return r.top<(window.innerHeight-90)&&r.bottom>60; }catch(e){ return true; } }
+    if(inView()) return;                                                         // already on screen — no pill needed
+    var pill=document.createElement('div'); pill.id='vizReadyPill'; pill.className='vizreadypill';
+    pill.innerHTML='🎬 Your explainer is ready ↓';
+    pill.onclick=function(){ try{host.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){} pill.remove(); setTimeout(function(){ try{ if(!playing)play(); }catch(e){} },700); };
+    document.body.appendChild(pill);
+    var iv=setInterval(function(){ if(!document.getElementById('vizReadyPill')){clearInterval(iv);return;} if(inView()){ pill.remove(); clearInterval(iv); } },700);
+    setTimeout(function(){ if(pill&&pill.parentNode)pill.remove(); clearInterval(iv); },15000);
+  }
+  /* stop any inline playback + pill when the student leaves the card (called by the nav functions) */
+  window.vizInlineStop=function(){ try{ if(document.getElementById('vizov')) return; }catch(e){}   // don't touch the modal player
+    try{ stop(); }catch(e){} try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+    var p=document.getElementById('vizReadyPill'); if(p)p.remove(); };
 
   /* ---- saved-per-note "Watch" markers ---- */
   window.currentTopicId=function(){ var p=(location.hash.slice(2)||'').split('/'); return (p[0]==='topic'&&p[1])?p[1]:''; };

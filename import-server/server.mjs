@@ -22,7 +22,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
-import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs } from "./visualize.mjs";
+import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -628,7 +628,7 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id) }); } }catch(_){}
+      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout))){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id) }); } }catch(_){}
     // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
     const premium = await isPremium(user.id).catch(()=>false);
     const limit = premium ? 10 : 3;
@@ -665,6 +665,11 @@ app.post("/visualize", async (req,res)=>{
       if(bp2 && (ev2.pass || !bp)){ bp = bp2; ev = ev2; }
     }
     if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try selecting one clear sentence, or try again in a moment" });
+    // response guard: never ship a layout the engine can't draw (it would fall through to the scene renderer)
+    if(bp.layout && !LAYOUTS.has(bp.layout)){
+      console.warn("[visualize] unknown layout rejected:", bp.layout);
+      return res.status(502).json({ error:"couldn't build a visualization — try again in a moment" });
+    }
     // deeper "nothing-missed" pass: LLM critic vs the source text (guarded; never blocks delivery)
     let completeness = { missing:[] };
     try{ completeness = await completenessCheck(text, bp); }catch(e){ console.warn("[visualize] completeness skipped:", e.message); }

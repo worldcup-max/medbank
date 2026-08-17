@@ -115,7 +115,22 @@
       "#mbtPop,#mbtStats{font:500 13.5px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1830}"+
       "#mbtPop{position:fixed;top:calc(env(safe-area-inset-top,0px) + 52px);left:50%;transform:translateX(-50%);z-index:9998;background:#fff;border:1px solid #e6e3f0;border-radius:14px;box-shadow:0 16px 44px rgba(28,20,45,.22);padding:14px 16px;min-width:250px;max-width:92vw}"+
       "#mbtStats{position:fixed;inset:0;z-index:100003;background:#f6f5fb;overflow-y:auto;-webkit-overflow-scrolling:touch}"+
-      ".mbtBtn{border:0;border-radius:999px;background:"+V+";color:#fff;font-weight:800;font-size:13px;padding:9px 16px;cursor:pointer}";
+      ".mbtBtn{border:0;border-radius:999px;background:"+V+";color:#fff;font-weight:800;font-size:13px;padding:9px 16px;cursor:pointer}"+
+      "@keyframes mbgIn{0%{opacity:0;transform:translate(-50%,4px) scale(.15)}60%{opacity:1;transform:translate(-50%,-2px) scale(1.06)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}"+
+      "@keyframes mbgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}"+
+      "@keyframes mbgTap{0%,100%{transform:rotate(0)}35%{transform:rotate(-16deg)}70%{transform:rotate(3deg)}}"+
+      "@keyframes mbgPing{0%{opacity:.75;transform:scale(.5)}100%{opacity:0;transform:scale(1.7)}}"+
+      "@keyframes mbgSpark{0%,100%{opacity:.35;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}"+
+      "#mbGenie{position:fixed;z-index:100002;transform-origin:top center;animation:mbgIn .5s ease forwards}"+
+      "#mbGenie .mbgWrap{position:relative;animation:mbgBob 2.6s ease-in-out infinite}"+
+      "#mbGenie .mbgTapArm{animation:mbgTap 1.1s ease-in-out infinite}"+
+      "#mbGenie .mbgPing{animation:mbgPing 1.1s ease-out infinite}"+
+      "#mbGenie .mbgSpark{animation:mbgSpark 1.3s ease-in-out infinite}"+
+      "#mbGenie .mbgBubble{position:absolute;left:104px;top:14px;background:#fff;border:1px solid #e6e3f0;border-radius:12px;box-shadow:0 12px 30px rgba(28,20,45,.2);padding:9px 24px 9px 12px;font:600 12.5px/1.35 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1830;width:min(182px,76vw)}"+
+      "#mbGenie .mbgBubble:after{content:'';position:absolute;left:-7px;top:16px;border:7px solid transparent;border-right-color:#fff}"+
+      "#mbGenie .mbgBubble.below{left:50%;right:auto;top:150px;transform:translateX(-50%);width:min(230px,82vw)}"+
+      "#mbGenie .mbgBubble.below:after{left:50%;top:-7px;right:auto;transform:translateX(-50%);border:7px solid transparent;border-bottom-color:#fff;border-right-color:transparent}"+
+      "#mbGenie .mbgClose{position:absolute;right:7px;top:4px;color:#b9b2c8;font-size:11px;cursor:pointer;font-weight:700}";
     document.head.appendChild(st);
 
     pill=document.createElement("button"); pill.id="mbTimer";
@@ -237,13 +252,79 @@
     if(!counting && wasCounting) flush();   // stopped studying -> save to the account promptly
     wasCounting=counting;
     if(counting) addSec();
+    // idle genie: warn while reading (before the 2-min stop); skip during a video so its voice doesn't clash
+    var inactive=Date.now()-lastActivity;
+    if(visible && inactive>WARN_MS && isStudying() && !document.querySelector("#vizov, .vizinlinebody")) showGenie();
+    else if(genieUp) hideGenie();
     paint();
   }
   var saveN=0;
   function loop(){ tick(); if((++saveN%10)===0) flush(); }   // flush to the account ~every 10s
 
+  /* ---------- idle genie: pops out of the timer's dot and (in one of our AI voices)
+     nudges you to move BEFORE the 2-min idle stops the clock. Great for big screens
+     where you can read a whole page without scrolling. ---------- */
+  var genieUp=false, WARN_MS=90000;   // warn at 1.5 min — ~30s before the 2-min stop
+  var GENIE_LINES=[
+    "Still with me? Give the page a little nudge so your timer keeps ticking.",
+    "Psst — scroll or tap something so I don't stop the clock on you.",
+    "Tick tock! Move something and your study time keeps counting."
+  ];
+  var GENIE_SVG='<svg width="128" height="150" viewBox="0 0 128 150">'
+    +'<defs><linearGradient id="mbgSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs>'
+    +'<path d="M64 2 C60 12 72 16 64 28" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" opacity="0.85"/>'
+    +'<path d="M80 84 Q90 92 86 104" stroke="url(#mbgSkin)" stroke-width="6" fill="none" stroke-linecap="round"/>'
+    +'<path d="M46 78 Q64 70 82 78 L78 110 Q64 120 50 110 Z" fill="url(#mbgSkin)"/>'
+    +'<path d="M48 96 Q64 104 80 96" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    +'<rect x="83" y="100" width="6" height="8" rx="2.5" fill="#f59e0b"/>'
+    +'<circle cx="64" cy="56" r="16" fill="url(#mbgSkin)"/>'
+    +'<circle cx="48" cy="60" r="3" fill="url(#mbgSkin)"/><circle cx="80" cy="60" r="3" fill="url(#mbgSkin)"/>'
+    +'<circle cx="48" cy="64" r="2.6" fill="none" stroke="#f59e0b" stroke-width="1.4"/><circle cx="80" cy="64" r="2.6" fill="none" stroke="#f59e0b" stroke-width="1.4"/>'
+    +'<path d="M47 48 Q64 30 81 48 Q64 40 47 48 Z" fill="#7c3aed"/>'
+    +'<path d="M47 48 Q64 40 81 48" stroke="#5b21b6" stroke-width="2" fill="none"/>'
+    +'<circle cx="64" cy="38" r="3.4" fill="#fcd34d"/>'
+    +'<g class="mbgSpark" style="transform-origin:64px 38px"><path d="M64 32 L65.6 36.4 L70 38 L65.6 39.6 L64 44 L62.4 39.6 L58 38 L62.4 36.4 Z" fill="#fde68a"/></g>'
+    +'<path d="M53 53 Q56 50 59 53" stroke="#241f36" stroke-width="1.5" fill="none" stroke-linecap="round"/>'
+    +'<path d="M69 53 Q72 50 75 53" stroke="#241f36" stroke-width="1.5" fill="none" stroke-linecap="round"/>'
+    +'<circle cx="56" cy="57" r="2.4" fill="#241f36"/><circle cx="72" cy="57" r="2.4" fill="#241f36"/>'
+    +'<circle cx="57" cy="56" r="0.9" fill="#fff"/><circle cx="73" cy="56" r="0.9" fill="#fff"/>'
+    +'<path d="M59 63 Q64 67 69 63" stroke="#241f36" stroke-width="1.7" fill="none" stroke-linecap="round"/>'
+    +'<circle cx="50" cy="61" r="3.2" fill="#ff9d7a" opacity="0.45"/><circle cx="78" cy="61" r="3.2" fill="#ff9d7a" opacity="0.45"/>'
+    +'<g class="mbgTapArm" style="transform-origin:52px 84px">'
+      +'<path d="M52 84 Q36 78 31 58" stroke="url(#mbgSkin)" stroke-width="6" fill="none" stroke-linecap="round"/>'
+      +'<line x1="31" y1="56" x2="29" y2="50" stroke="#b45309" stroke-width="1.6" stroke-linecap="round"/>'
+      +'<circle cx="28" cy="46" r="9" fill="#fcd34d" stroke="#f59e0b" stroke-width="2"/>'
+      +'<circle cx="28" cy="46" r="6" fill="#ecfeff"/>'
+      +'<line x1="28" y1="46" x2="28" y2="42" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>'
+      +'<line x1="28" y1="46" x2="31" y2="47.5" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>'
+      +'<circle class="mbgPing" cx="28" cy="46" r="11" fill="none" stroke="#f59e0b" stroke-width="2" style="transform-origin:28px 46px"/>'
+    +'</g></svg>';
+  function speakGenie(msg){ if(muted) return;
+    try{ if(window.voiceSpeak){ window.voiceSpeak(msg,null,"read"); return; } }catch(_){}
+    try{ if(window.speechSynthesis){ var u=new SpeechSynthesisUtterance(msg); u.rate=1; speechSynthesis.cancel(); speechSynthesis.speak(u); } }catch(_){}
+  }
+  function showGenie(){ if(genieUp||!dot) return;
+    try{
+      var r=dot.getBoundingClientRect();
+      var g=document.createElement("div"); g.id="mbGenie";
+      g.style.left=(r.left+r.width/2)+"px"; g.style.top=(r.top+r.height/2-4)+"px";
+      var msg=GENIE_LINES[Math.floor(Math.random()*GENIE_LINES.length)];
+      g.innerHTML='<div class="mbgWrap">'+GENIE_SVG+'<div class="mbgBubble"><span class="mbgClose">✕</span>'+msg+'</div></div>';
+      document.body.appendChild(g); genieUp=true;
+      if(window.innerWidth<=560){ var bub=g.querySelector(".mbgBubble"); if(bub)bub.classList.add("below"); }   // phone: drop the bubble under the genie so it fits
+      var gx=parseFloat(g.style.left)||0, halfW=68;                                                            // keep the whole genie on-screen
+      if(gx<halfW+6) g.style.left=(halfW+6)+"px"; else if(gx>window.innerWidth-halfW-6) g.style.left=(window.innerWidth-halfW-6)+"px";
+      g.addEventListener("click", function(){ bump(); });   // tapping the genie counts as activity + dismisses
+      speakGenie(msg);
+    }catch(_){}
+  }
+  function hideGenie(){ if(!genieUp) return; genieUp=false;
+    try{ if(window.stopSpeak)stopSpeak(); }catch(_){}
+    var g=document.getElementById("mbGenie"); if(g){ g.style.transition="opacity .25s"; g.style.opacity="0"; setTimeout(function(){ if(g&&g.parentNode)g.remove(); },260); }
+  }
+
   /* ---------- activity + visibility ---------- */
-  function bump(){ lastActivity=Date.now(); }
+  function bump(){ lastActivity=Date.now(); if(genieUp) hideGenie(); }
   ["scroll","touchstart","touchmove","pointerdown","keydown","click","wheel"].forEach(function(ev){
     window.addEventListener(ev, bump, { passive:true, capture:true });
   });

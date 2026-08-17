@@ -94,14 +94,20 @@ Pick the FIRST mode below that can represent the concept:
   trigonal planar/pyramidal, tetrahedral, octahedral). Shows why lone pairs bend the shape.
 • MODE "ice" — CHEMICAL EQUILIBRIUM set up as an ICE table (Initial / Change / Equilibrium) for a
   reaction; use for equilibrium concentration problems, Kc/Kp setups.
+• MODE "venn" — SETS and PROBABILITY LOGIC on overlapping circles: union ("A or B"), intersection
+  ("A and B"), complement ("not A", "neither"), mutually exclusive vs overlapping events, and
+  CONDITIONAL probability P(A|B). Use whenever the idea is which outcomes belong to which event, or
+  the add-vs-multiply / "or vs and" confusion. Two or three circles.
 • MODE "flow" — a cause-and-effect chain / pathway with no anatomical home: biochemical cascades,
   enzyme pathways, "if X then Y then Z", stepwise procedures (redox balancing, limiting reagent,
   buffer action). Ordered stations connected by arrows. This is the default workhorse for processes.
 • MODE "tree" — LAST RESORT only. A pure DEFINITION/CLASSIFICATION/LIST with no diagrammatic form
   (e.g. "the two toxins are…", "types of X" that truly have no spatial/quantitative structure).
 
-Decision: try mechanism → cell → graph → flow first; choose "tree" ONLY if none of the diagrammatic
-modes can honestly represent the content. Every highlight must produce a rich, engaging result.
+Decision: try mechanism → cell → venn → graph → flow first; choose "tree" ONLY if none of the
+diagrammatic modes can honestly represent the content — the one exception is a PROBABILITY TREE,
+where "tree" IS the right diagram (see the tree mode notes). Every highlight must produce a rich,
+engaging result.
 
 ════════ NARRATION — THIS IS THE WHOLE POINT. Make the student UNDERSTAND, not just see. ════════
 The diagram is the stage; the narration is the teacher. Write every narration_text to build real
@@ -161,6 +167,13 @@ Rules:
 2. 6–14 nodes total. Each node: short "id", short "label" (≤ 5 words), optional "note" (≤ 8 words of detail).
 3. narration_steps reveal the tree progressively — usually root first, then each branch. EVERY node must be revealed by some step. "point" each step at the node it explains.
 4. narration_text is spoken, one idea, ≤ 2 sentences, teaches the WHY. The last step recaps. Stay faithful to the source; invent nothing.
+5. PROBABILITY TREE (the one time "tree" is the BEST diagram, not a fallback): make the root the
+   starting situation ("Bag: 3 red, 2 blue"), each child one OUTCOME of the first trial, and each
+   grandchild one outcome of the second. Put the branch probability in the node "label" (e.g.
+   "Red  3/5") and what it means in "note". Teach the two rules explicitly: MULTIPLY along a path
+   (both things happening in sequence) and ADD across paths (either path would do). If the draws are
+   WITHOUT replacement, say why the second-layer fractions change (one item is gone, so the
+   denominator drops) — that is the classic misconception.
 Return ONLY valid minified JSON:
 {"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"tree","root":"n0","nodes":[{"id":"n0","label":"","note":""},{"id":"n1","parent":"n0","label":"","note":""}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":[],"active":[],"point":""}]}
 
@@ -188,6 +201,17 @@ Rules:
 3. "markers": key labelled points {id, at:[x,y], label, color, drop?:true to drop a dashed line to the x-axis}. e.g. reactants, transition state, products; or half-equivalence, equivalence.
 4. "regions" (optional): {id, type:"band", x0,x1, label, color} shaded vertical band (buffer region), or {id, type:"bracket", at:x, y0, y1, label, color} a vertical measure (Ea, ΔH).
 5. narration_steps reveal the curve first, then markers/regions in teaching order; "reveal"/"active"/"point" reference curve ids, marker ids, or region ids. "point" should name a MARKER. 4–8 steps, last recaps.
+6. CALCULUS on this same graph engine — two flagship builds, no extra machinery needed:
+   • THE DERIVATIVE AS A SLOPE. Plot the curve, mark the fixed point P, then add SECANT LINES as
+     extra 2-point "curves" ({"id":"sec1","points":[[x1,y1],[x2,y2]]}) with the second point sliding
+     closer to P each step, and finally the TANGENT. Put the slope in each line's "label"
+     ("secant slope = 4"). The story: an average rate over a gap becomes an instantaneous rate the
+     moment the gap closes.
+   • THE INTEGRAL AS AN AREA. Plot the curve, mark the region with a "band" region over the limits,
+     then add "bracket" regions as the HEIGHTS of a few rectangles (each bracket is one rectangle:
+     height times width), then plot the running-area curve (the antiderivative) as a second curve —
+     its steepness at any x equals the height of the original curve. That IS the Fundamental
+     Theorem: differentiation and integration undo each other.
 Return ONLY valid minified JSON:
 {"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"graph","x":{"min":0,"max":100,"label":""},"y":{"min":0,"max":100,"label":""},"curves":[{"id":"c","color":"#7c3aed","points":[[0,0]]}],"markers":[{"id":"m","at":[0,0],"label":"","color":"#2563eb"}],"regions":[],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["c"],"active":["c"],"point":"m"}]}
 
@@ -201,7 +225,36 @@ Return ONLY valid minified JSON:
 
 ═══════ MODE "ice" (equilibrium ICE table) ═══════
 "reaction" string, "species" list, "rows":{"I":[…],"C":[…],"E":[…]} each with one entry per species. Steps reveal "rxn","I","C","E" in order; "point" one of those.
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"ice","reaction":"","species":["",""],"rows":{"I":["",""],"C":["",""],"E":["",""]},"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["rxn"],"active":["rxn"],"point":"rxn"}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"ice","reaction":"","species":["",""],"rows":{"I":["",""],"C":["",""],"E":["",""]},"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["rxn"],"active":["rxn"],"point":"rxn"}]}
+
+═══════ MODE "venn" (sets · union / intersection / complement / conditional probability) ═══════
+Rules:
+1. "sets": 2 or 3 circles, each {id (ONE short word, letters/digits only — "A","B","C"), label (what
+   the event is, e.g. "A — plays football"), optional "p" (a small line under the label, e.g.
+   "P(A) = 0.45"), optional "color"}. Optional "universe": what the outer box contains
+   ("S — 100 students"). Optional "formula": one line shown under the box.
+2. "regions": the pieces you want to shade and label. Every region id is built from the set ids by
+   this GRAMMAR — use no other form:
+     "A"                 the whole of circle A
+     "A_only"            in A but in nothing else
+     "A_and_B"           the overlap (also "A_and_B_and_C")
+     "A_or_B"            the union — everything in at least one
+     "not_A"             everything outside A
+     "outside"           in none of the circles ("neither")
+     "A_given_B"         CONDITIONAL — the renderer greys out everything outside B and shades the
+                         part of A inside it, so the student SEES that B has become the new universe
+   Each region: {id, label (the number/probability that goes there), optional "note" (≤4 words),
+   optional "color"}.
+3. The "cell" regions (A_only, A_and_B, outside) stay on screen once revealed and hold the numbers.
+   The "overlay" regions (A, A_or_B, not_A, A_given_B) appear only on their own step — use them to
+   sweep one idea at a time.
+4. 4–8 narration_steps. "reveal"/"active"/"point" use ONLY set ids and region ids. Reveal the sets
+   first, then the overlap, then the pieces, then the overlays.
+5. TEACH THE MISCONCEPTION: "or" ADDS but you must subtract the overlap once because it was counted
+   twice; "and" is where the circles overlap, and you only MULTIPLY the two probabilities when the
+   events are independent. Say those in spoken words. Last step recaps.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"venn","universe":"","formula":"","sets":[{"id":"A","label":"","p":"","color":"#2563eb"},{"id":"B","label":"","p":"","color":"#dc2626"}],"regions":[{"id":"A_and_B","label":"","note":"","color":"#7c3aed"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["A","B"],"active":["A"],"point":"A"}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -374,7 +427,125 @@ export const EXEMPLARS = [
         {short:"Initial",term:"initial",narration_text:"The Initial row is what we start with: 0.10 molar nitrogen, 0.30 molar hydrogen, and no ammonia.",reveal:["I"],active:["I"],point:"I"},
         {short:"Change",term:"change",narration_text:"The Change row uses the stoichiometry: nitrogen falls by x, hydrogen by 3x, and ammonia rises by 2x.",reveal:["C"],active:["C"],point:"C"},
         {short:"Equilibrium",term:"equilibrium row",narration_text:"The Equilibrium row is Initial plus Change — the expressions you put into the Kc expression to solve for x.",reveal:["E"],active:["E"],point:"E"}
-      ]} }
+      ]} },
+  /* ---- [11] MATHS · venn — "or" vs "and" vs "given", the add-vs-multiply misconception ---- */
+  { text: "In a group of 100 students, 45 play football and 30 play tennis; 10 play both. Find P(A or B), P(A and B) and P(A given B).",
+    blueprint: {meta:{title:"P(A or B), P(A and B) and P(A given B)",subject:"Probability",concept_id:"venn_or_and_given"},layout:"venn",
+      universe:"S — all 100 students",
+      formula:"P(A or B) = P(A) + P(B) − P(A and B)   ·   P(A|B) = P(A and B) ÷ P(B)",
+      sets:[{id:"A",label:"A — plays football",p:"P(A) = 0.45",color:"#2563eb"},
+            {id:"B",label:"B — plays tennis",p:"P(B) = 0.30",color:"#dc2626"}],
+      regions:[{id:"A_and_B",label:"0.10",note:"both sports",color:"#7c3aed"},
+               {id:"A_only",label:"0.35",note:"football only",color:"#2563eb"},
+               {id:"B_only",label:"0.20",note:"tennis only",color:"#dc2626"},
+               {id:"A_or_B",label:"0.65",note:"at least one",color:"#0d7a68"},
+               {id:"A_given_B",label:"0.10 ÷ 0.30 = 0.33",note:"inside tennis only",color:"#7c3aed"},
+               {id:"outside",label:"0.35",note:"neither sport",color:"#8b84a3"}],
+      narration_steps:[
+        {short:"Two events",term:"event",narration_text:"The box is every student, and each circle is one event — an event is just a set of outcomes we care about. Forty-five in a hundred play football, so the probability of A is nought point four five.",reveal:["A","B"],active:["A"],point:"A",
+         def:"An event is a collection of outcomes; its probability is the share of the box it covers.",
+         quiz:{q:"What does the box around the circles represent?",options:["Every possible outcome — all 100 students","Only the students who play a sport","The students who play both"],answer:0,why:"The box is the sample space: every outcome, including students in no circle at all."}},
+        {short:"And",term:"intersection",narration_text:"Where the circles overlap sit the ten who play both, so the probability of A and B is nought point one. Notice we did not multiply the two probabilities — multiplying only works when the events are independent.",reveal:["A_and_B"],active:["A_and_B"],point:"A_and_B",
+         def:"A and B is the intersection — the outcomes that belong to BOTH events at once."},
+        {short:"Only",term:"exclusive parts",narration_text:"Now peel the overlap out of each circle: thirty-five play football but not tennis, and twenty play tennis but not football. Every student in the box now sits in exactly one piece, which is what makes the pieces safe to add.",reveal:["A_only","B_only"],active:["A_only","B_only"],point:"A_only"},
+        {short:"Or",term:"union",narration_text:"A or B means at least one of them, so it is all three shaded pieces: nought point three five plus nought point one plus nought point two, which is nought point six five.",reveal:["A_or_B"],active:["A_or_B"],point:"A_or_B",
+         def:"In maths 'or' is inclusive — it includes the people who do both."},
+        {short:"Why subtract",term:"addition rule",narration_text:"That is why the addition rule subtracts the overlap: nought point four five plus nought point three is nought point seven five, but the ten who play both were counted in each circle, so we take that nought point one off once to get nought point six five.",reveal:["A_or_B"],active:["A_or_B"],point:"A_or_B",
+         quiz:{q:"Why do we subtract P(A and B) in the addition rule?",options:["The overlap was counted twice, once in each circle","Because the events are independent","To make the answer smaller than one"],answer:0,why:"Adding the two circles counts everyone in the overlap twice, so one copy has to come back off."}},
+        {short:"Given",term:"conditional probability",narration_text:"A given B changes the question: we are told the student plays tennis, so that circle becomes the whole world and everything outside switches off. Of those thirty, ten also play football — ten over thirty, about nought point three three.",reveal:["A_given_B"],active:["A_given_B"],point:"A_given_B",
+         def:"Conditioning shrinks the sample space — you divide by the probability of what you were told.",
+         quiz:{q:"P(A given B) is bigger than P(A) here. What does that tell you?",options:["Knowing they play tennis makes football more likely, so the events are not independent","The events are mutually exclusive","A mistake was made — it can never be bigger"],answer:0,why:"If knowing B changes the probability of A, the two events are dependent."}},
+        {short:"Recap",term:"recap",narration_text:"So: overlap is and, everything shaded is or with the overlap subtracted once, and given means shrink the world down to what you were told and divide by it.",reveal:["outside"],active:["outside"],point:"outside"}],
+      recap:["'And' is the overlap; 'or' is everything shaded, minus the overlap counted once.",
+             "Only multiply probabilities when the events are independent.",
+             "'Given' shrinks the sample space — divide by the probability of the condition."]} },
+  /* ---- [12] MATHS · probability tree — multiply along, add across, without replacement ---- */
+  { text: "A bag holds 3 red and 2 blue counters. Two are drawn without replacement. Find the probability that both are red, and that the two counters are different colours.",
+    blueprint: {meta:{title:"Probability tree — two draws without replacement",subject:"Probability",concept_id:"prob_tree_without_replacement"},layout:"tree",root:"bag",
+      nodes:[
+        {id:"bag",label:"Bag: 3 red, 2 blue",note:"5 counters to start"},
+        {id:"r1",parent:"bag",label:"1st Red  3/5",note:"3 of the 5 are red"},
+        {id:"b1",parent:"bag",label:"1st Blue  2/5",note:"2 of the 5 are blue"},
+        {id:"rr",parent:"r1",label:"2nd Red  2/4",note:"one red already gone"},
+        {id:"rb",parent:"r1",label:"2nd Blue  2/4",note:"both blues still in"},
+        {id:"br",parent:"b1",label:"2nd Red  3/4",note:"all 3 reds still in"},
+        {id:"bb",parent:"b1",label:"2nd Blue  1/4",note:"one blue already gone"},
+        {id:"pRR",parent:"rr",label:"Red then Red = 3/10",note:"3/5 × 2/4"},
+        {id:"pRB",parent:"rb",label:"Red then Blue = 3/10",note:"3/5 × 2/4"},
+        {id:"pBR",parent:"br",label:"Blue then Red = 3/10",note:"2/5 × 3/4"},
+        {id:"pDIFF",parent:"pRB",label:"Different colours = 3/5",note:"3/10 + 3/10"}],
+      narration_steps:[
+        {short:"The set-up",term:"sample space",narration_text:"Start with the whole situation: five counters, three red and two blue. A tree lets us follow every possible story one draw at a time.",reveal:["bag"],active:["bag"],point:"bag"},
+        {short:"First draw",term:"first branch",narration_text:"The first draw has two outcomes. Three of the five counters are red, so that branch carries three fifths, and two of the five are blue, so that one carries two fifths — and notice they add to one, because something must happen.",reveal:["r1","b1"],active:["r1","b1"],point:"r1"},
+        {short:"The bag changed",term:"without replacement",narration_text:"Here is the step almost everyone misses. We did not put the counter back, so only four counters remain — and which ones remain depends on what we just drew.",reveal:["rr","rb"],active:["rr","rb"],point:"rr",
+         quiz:{q:"After drawing a red first, why is the second-draw denominator 4 and not 5?",options:["One counter has been removed and not replaced","Because red and blue are equally likely","Because there were 4 reds to begin with"],answer:0,why:"Without replacement the bag genuinely shrinks, so every second-layer fraction is out of four."}},
+        {short:"Other branch",term:"conditional branch",narration_text:"Down the blue branch all three reds are still in the bag, so a red now has probability three quarters — the same event, a different probability, because the past changed the bag.",reveal:["br","bb"],active:["br","bb"],point:"br"},
+        {short:"Multiply along",term:"multiplication rule",narration_text:"To get both things happening you multiply along the path: three fifths times two quarters is six twentieths, which is three tenths for red then red.",reveal:["pRR"],active:["pRR"],point:"pRR",
+         def:"Multiplying along a path answers 'this AND then that'.",
+         quiz:{q:"Why do we multiply along a path rather than add?",options:["Because both events must happen in sequence","Because the branches are alternatives","Because the fractions have different denominators"],answer:0,why:"Multiplying is the 'and' rule: the second probability is a fraction of what is left after the first."}},
+        {short:"Add across",term:"addition rule",narration_text:"Different colours can happen two separate ways — red then blue, or blue then red — so we work each path out and then add across, because either path would satisfy us.",reveal:["pRB","pBR"],active:["pRB","pBR"],point:"pRB"},
+        {short:"The answer",term:"combining",narration_text:"Three tenths plus three tenths is six tenths, or three fifths, for two different colours.",reveal:["pDIFF"],active:["pDIFF"],point:"pDIFF"},
+        {short:"Recap",term:"recap",narration_text:"Recap: multiply along a path for 'and', add across paths for 'or', and without replacement the denominator drops by one on the second draw.",reveal:[],active:["pDIFF"],point:"bag"}],
+      recap:["Multiply along a path (and); add across paths (or).",
+             "Without replacement, the second-layer fractions are out of one fewer.",
+             "Every set of branches from one node adds to 1."]} },
+  /* ---- [13] MATHS · graph — the derivative as the slope of the tangent ---- */
+  { text: "Explain the derivative as the slope of the tangent: the secant between two points on a curve becomes the tangent as the second point slides in.",
+    blueprint: {meta:{title:"The derivative — a secant becoming a tangent",subject:"Calculus",concept_id:"derivative_secant_to_tangent"},layout:"graph",
+      x:{min:0,max:3.2,label:"x"},y:{min:0,max:10,label:"y = x²"},
+      curves:[
+        {id:"c",color:"#7c3aed",points:[[0,0],[0.4,0.16],[0.8,0.64],[1.2,1.44],[1.6,2.56],[2,4],[2.4,5.76],[2.8,7.84],[3.1,9.61]]},
+        {id:"sec1",color:"#94a3b8",label:"secant slope = 4",points:[[1,1],[2,5],[3,9]]},
+        {id:"sec2",color:"#2563eb",label:"secant slope = 3",points:[[1,1],[1.5,2.5],[2,4]]},
+        {id:"tan",color:"#dc2626",label:"tangent slope = 2 — the derivative",points:[[0.5,0],[2.75,4.5],[3,5]]}],
+      markers:[{id:"P",at:[1,1],label:"P (1, 1)",color:"#4b2c91",drop:true},
+               {id:"Q1",at:[3,9],label:"Q at x = 3",color:"#94a3b8",drop:true},
+               {id:"Q2",at:[2,4],label:"Q slides to x = 2",color:"#2563eb",drop:true}],
+      narration_steps:[
+        {short:"A curve bends",term:"gradient",narration_text:"On a straight line the steepness never changes, but this curve gets steeper as you move right — so asking 'what is its slope' only makes sense at one chosen point. Let us fix on P, where x is one.",reveal:["c","P"],active:["P"],point:"P",
+         def:"Slope means rise divided by run — how much y changes for each unit of x."},
+        {short:"Average rate",term:"secant",narration_text:"Join P to a second point Q at x equals three. That straight line through two points on a curve is called a secant, and its slope is nine minus one over three minus one, which is four.",reveal:["sec1","Q1"],active:["sec1","Q1"],point:"Q1",
+         def:"A secant slope is an AVERAGE rate of change across a gap, not the rate at a single point."},
+        {short:"Close the gap",term:"limit",narration_text:"But four describes the whole stretch, not P itself. Slide Q in to x equals two and the secant slope falls to three — closer to how steep the curve really is at P.",reveal:["sec2","Q2"],active:["sec2","Q2"],point:"Q2",
+         quiz:{q:"Why isn't the first secant slope the gradient at P?",options:["It averages the steepness over a whole gap, and the curve changes steepness across it","Because the line is straight","Because Q is higher than P"],answer:0,why:"A secant only gives an average; the curve is flatter near P and steeper near Q."}},
+        {short:"The tangent",term:"tangent",narration_text:"Keep sliding Q towards P and the secant settles onto one line that just grazes the curve — the tangent, with slope two. That limiting value is the derivative at P.",reveal:["tan"],active:["tan","P"],point:"P",
+         def:"The derivative at a point is the limit the secant slopes approach as the gap shrinks to nothing."},
+        {short:"Not a fraction",term:"dee y by dee x",narration_text:"We write this dee y by dee x, and the classic trap is reading it as a fraction of two numbers. It is one symbol meaning the instantaneous rate — how fast y is changing at that exact instant.",reveal:["tan"],active:["P"],point:"P",
+         quiz:{q:"What does dy/dx actually mean?",options:["The instantaneous rate of change — the slope of the tangent","dy divided by dx, two separate numbers","The average change between two points"],answer:0,why:"It is a single symbol for the limit of the secant slopes, not an ordinary fraction."}},
+        {short:"Recap",term:"recap",narration_text:"Recap: an average rate over a gap becomes an instantaneous rate the moment the gap closes — and for y equals x squared, the derivative is two x, which is exactly two at x equals one.",reveal:["tan"],active:["P"],point:"P"}],
+      recap:["A secant gives an average rate; the tangent gives the instantaneous rate.",
+             "The derivative is the LIMIT of secant slopes as the two points merge.",
+             "dy/dx is one symbol for that limit, not a fraction to be split."]} },
+  /* ---- [14] MATHS · graph — the definite integral as area, and the Fundamental Theorem ---- */
+  { text: "Explain the definite integral as the area under a curve, using rectangles, and how the Fundamental Theorem links area to the antiderivative.",
+    blueprint: {meta:{title:"The definite integral — area under the curve",subject:"Calculus",concept_id:"integral_area_under_curve"},layout:"graph",
+      x:{min:0,max:2.3,label:"x"},y:{min:0,max:5,label:"value"},
+      curves:[
+        {id:"f",color:"#7c3aed",label:"f(x) = x²",points:[[0,0],[0.367,0.135],[0.733,0.537],[1.1,1.21],[1.467,2.152],[1.833,3.36],[2.2,4.84]]},
+        {id:"F",color:"#0d7a68",points:[[0,0],[0.367,0.016],[0.733,0.131],[1.1,0.444],[1.467,1.052],[1.833,2.053],[2.2,3.549]]}],
+      markers:[{id:"U",at:[2,4],label:"upper limit x = 2",color:"#4b2c91",drop:true},
+               {id:"Ar",at:[2,2.67],label:"area = 8 ÷ 3 ≈ 2.67",color:"#0d7a68"},
+               {id:"Fm",at:[1.833,2.053],label:"F(x) = x³ ÷ 3 — area so far",color:"#0d7a68"}],
+      regions:[{id:"band",type:"band",x0:0,x1:2,label:"the region we are measuring",color:"#7c3aed"},
+               {id:"r1",type:"bracket",at:0.25,y0:0,y1:0.0625,label:"h = 0.06",color:"#dc2626"},
+               {id:"r2",type:"bracket",at:0.75,y0:0,y1:0.5625,label:"h = 0.56",color:"#dc2626"},
+               {id:"r3",type:"bracket",at:1.25,y0:0,y1:1.5625,label:"h = 1.56",color:"#dc2626"},
+               {id:"r4",type:"bracket",at:1.75,y0:0,y1:3.0625,label:"h = 3.06",color:"#dc2626"}],
+      narration_steps:[
+        {short:"The region",term:"definite integral",narration_text:"Here is the curve f of x equals x squared. The integral from nought to two of x squared is not a mysterious symbol — it is simply the area trapped between this curve and the x-axis, between those two limits.",reveal:["f","band","U"],active:["band"],point:"U",
+         def:"A definite integral is an accumulated total — for a curve above the axis, that total is an area."},
+        {short:"Chop it up",term:"Riemann rectangles",narration_text:"The region has a curved top, so we cannot use one rectangle. Instead chop it into thin vertical strips and treat each one as a rectangle: its area is its height on the curve times its width.",reveal:["r1","r2","r3","r4"],active:["r1","r2","r3","r4"],point:"U",
+         def:"Each red bar is one strip's height, read straight off the curve."},
+        {short:"Thinner and thinner",term:"limit",narration_text:"Four rectangles undershoot, because each flat top misses the rise across the strip. Make the strips thinner and the gaps shrink, and in the limit of infinitely thin strips the total becomes the exact area — that is what the integral sign means.",reveal:["r1","r2","r3","r4"],active:["band"],point:"U",
+         quiz:{q:"Why do we let the rectangle width shrink towards zero?",options:["Each flat top misses part of the curve, and thinner strips miss less","To make the arithmetic easier","Because rectangles have no area otherwise"],answer:0,why:"The error lives in the sliver between the flat top and the curve; thinner strips squeeze it away."}},
+        {short:"Area so far",term:"accumulation",narration_text:"Now plot a second curve: the area collected so far as you sweep from left to right. At x equals two it has reached eight thirds, about two point six seven — the exact answer.",reveal:["F","Fm","Ar"],active:["F","Fm","Ar"],point:"Ar"},
+        {short:"The link",term:"Fundamental Theorem",narration_text:"Look at how the green area curve behaves. Where the purple curve is low the area grows slowly, and where the purple curve is high the area shoots up — so the slope of the area curve at any point equals the height of the original curve.",reveal:["F"],active:["F"],point:"Ar",
+         def:"Differentiating the area-so-far function gives you back the original function.",
+         quiz:{q:"What is the Fundamental Theorem of Calculus really saying?",options:["Differentiation and integration undo each other","Area is always positive","Every curve has an antiderivative you can write down"],answer:0,why:"The derivative of the area-so-far function is the original function, so the two operations are inverses."}},
+        {short:"Recap",term:"recap",narration_text:"Recap: the definite integral is the exact area you get from infinitely thin rectangles, and you find it by evaluating the antiderivative at the two limits and subtracting — because differentiation and integration undo each other.",reveal:["F"],active:["Ar"],point:"Ar"}],
+      recap:["A definite integral is an accumulated area, built from infinitely thin rectangles.",
+             "The area-so-far function's SLOPE is the original curve — the Fundamental Theorem.",
+             "So you evaluate the antiderivative at both limits and subtract."]} }
 ];
 
 /* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
@@ -382,7 +553,24 @@ export const EXEMPLARS = [
  * model can still choose any — this just trims ~2/3 of the few-shot tokens. */
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
-  const isTree = /\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t);
+  /* ---- MATHS routing first: maths cues are distinctive, and the chemistry regex below would
+     otherwise swallow words like "reaction", "atom" or "distribution" out of a maths passage. ---- */
+  // sets / probability logic → the Venn diagram
+  if(/venn|\bunion\b|intersection of|\bcomplement\b|mutually exclusive|\bsubset\b|set notation|(\bp\s*\(\s*a\s*(or|and|\|)\s*b\s*\))|probability of a (or|and|given)|conditional probability|\bgiven that\b|\bp\s*\(\s*a\s*\|\s*b\s*\)|neither .{0,20}\bnor\b|at least one of/.test(t))
+    return EXEMPLARS[11];
+  // branching chance experiments → the probability tree
+  if(/probability tree|tree diagram|with(out)? replacement|two draws|draws? (two|a second)|branch(es)? .{0,20}probabilit|independent events|multiply along|\bdice\b|\bcoin\b|\bspinner\b|counters? (are|is) drawn|balls? (are|is) drawn/.test(t))
+    return EXEMPLARS[12];
+  // the derivative as a slope
+  if(/derivative|differentiat|tangent|\bsecant\b|gradient of (the )?(curve|tangent)|dy\/dx|dee y by dee x|instantaneous rate|rate of change|stationary point|f ?['′]\(x\)|chain rule|product rule|quotient rule|second derivative|concav/.test(t))
+    return EXEMPLARS[13];
+  // the integral as an area
+  if(/integral|integrat|antiderivative|area under (the )?curve|riemann|fundamental theorem|\+ ?c\b.{0,20}constant of integration|by parts|substitution rule/.test(t))
+    return EXEMPLARS[14];
+  // any other plottable maths idea → the derivative graph exemplar (best in-domain graph shot)
+  if(/\blimit\b|approaches|asymptot|\bcontinuit\b|continuous function|domain and range|\bsin\b|\bcos\b|\btan\b|sine|cosine|unit circle|radian|logarithm|\bln\b|exponential (growth|decay|function)|quadratic|parabola|\bvertex\b|simultaneous equations|geometric series|arithmetic sequence|converge|\bsigma notation\b|sum to infinity/.test(t))
+    return EXEMPLARS[13];
+  const isTree =/\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t);
   // chemistry cues → use an in-domain chemistry exemplar (chemistry rarely fits the biology scenes)
   const chem = /\b(mole|reagent|reactant|stoichiometr|oxidation|reduction|redox|anode|cathode|electrode|electron|electroly|galvanic|electrochemical|voltaic|daniell|salt bridge|half-cell|\bion\b|ionis|acid|\bbase\b|\bph\b|buffer|titrat|equilibrium|entropy|enthalpy|gibbs|spontaneous|exotherm|endotherm|\bbond|covalent|ionic|orbital|electroneg|valence|molar|molecul|intermolecular|dipole|hydrogen bond|london|van der|solub|catalyst|\bgas law\b|periodic|isotope|atom|compound|reaction|delta ?[ghs]|energy profile|activation energy|reaction coordinate|maxwell|boltzmann|half-life|half life|radioactive|decay|phase diagram|triple point|distribution|electron config|aufbau|hund|pauli|subshell|vsepr|molecular shape|molecular geometry|lone pair|tetrahedral|trigonal|\bbent\b|pyramidal|octahedral|bond angle|ice table|le ?chatelier|reaction quotient|\bkc\b|\bkp\b)\b/.test(t)
     || /Δ[ghs]/i.test(text||"");
@@ -562,8 +750,61 @@ export function iceCheck(bp){
   return {pass:issues.length===0,issues};
 }
 
+/* VENN validity — set ids must be simple words, and every region id must parse against the
+ * region GRAMMAR over those ids (the renderer can only draw ids it can parse). */
+export function vennParseId(id, ids){
+  let m;
+  if(id==="outside") return { kind:"outside", uses:ids.slice() };
+  if((m=/^not_(.+)$/.exec(id))) return ids.indexOf(m[1])>=0 ? { kind:"not", uses:[m[1]] } : null;
+  if((m=/^(.+)_given_(.+)$/.exec(id))) return (ids.indexOf(m[1])>=0 && ids.indexOf(m[2])>=0 && m[1]!==m[2]) ? { kind:"given", uses:[m[1],m[2]] } : null;
+  if((m=/^(.+)_only$/.exec(id))) return ids.indexOf(m[1])>=0 ? { kind:"only", uses:[m[1]] } : null;
+  if(id.indexOf("_or_")>0){ const p=id.split("_or_"); return p.every(t=>ids.indexOf(t)>=0) ? { kind:"or", uses:p } : null; }
+  if(id.indexOf("_and_")>0){ const p=id.split("_and_"); return p.every(t=>ids.indexOf(t)>=0) ? { kind:"and", uses:p } : null; }
+  if(ids.indexOf(id)>=0) return { kind:"set", uses:[id] };
+  return null;
+}
+export function vennCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  const sets=Array.isArray(bp.sets)?bp.sets:[];
+  if(sets.length<2||sets.length>3) issues.push("venn needs 2 or 3 sets (got "+sets.length+")");
+  const ids=[]; const seen={};
+  sets.forEach((s,i)=>{
+    if(!s.id){ issues.push("set "+i+" missing id"); return; }
+    if(!/^[A-Za-z0-9]+$/.test(s.id)) issues.push("set id '"+s.id+"' must be letters/digits only (no spaces, no underscores)");
+    if(seen[s.id]) issues.push("duplicate set id '"+s.id+"'"); seen[s.id]=1; ids.push(s.id);
+    if(!s.label) issues.push("set '"+s.id+"' needs a label saying what the event is");
+  });
+  const ok={}; ids.forEach(x=>ok[x]=1);
+  const regs=Array.isArray(bp.regions)?bp.regions:[];
+  if(!regs.length) issues.push("no regions — shade and label at least the overlap");
+  regs.forEach((r,i)=>{
+    if(!r.id){ issues.push("region "+i+" missing id"); return; }
+    if(ok[r.id] && ids.indexOf(r.id)<0){ issues.push("duplicate region id '"+r.id+"'"); return; }
+    if(!vennParseId(r.id, ids)) issues.push("region id '"+r.id+"' does not follow the grammar (use A, A_only, A_and_B, A_or_B, not_A, outside, A_given_B over the set ids "+ids.join(",")+")");
+    else ok[r.id]=1;
+  });
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
+    (s.active||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
+    if(s.point && !ok[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
+  });
+  return { pass: issues.length===0, issues };
+}
+
+/* Every layout the engine in app.html can actually draw. A blueprint naming anything else would
+ * fall through to the scene renderer and blow up, so it is rejected here and at the response guard. */
+export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn"]);
+
 /* QC critic — deterministic, manifest-enforced. Delegates to each layout's own check. */
 export function qcCheck(bp){
+  if(bp && bp.layout && !LAYOUTS.has(bp.layout))
+    return { pass:false, issues:["layout '"+bp.layout+"' does not exist — use one of: "+[...LAYOUTS].join(", ")] };
   if(bp && bp.layout==="flow") return flowCheck(bp);
   if(bp && bp.layout==="tree") return treeCheck(bp);
   if(bp && bp.layout==="cell") return cellCheck(bp);
@@ -571,6 +812,7 @@ export function qcCheck(bp){
   if(bp && bp.layout==="orbital") return orbitalCheck(bp);
   if(bp && bp.layout==="geometry") return geometryCheck(bp);
   if(bp && bp.layout==="ice") return iceCheck(bp);
+  if(bp && bp.layout==="venn") return vennCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -621,6 +863,8 @@ export function chainOf(bp){
   if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
   if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
   if(bp && bp.layout==="graph") return (bp.markers||[]).map(m=>m.label||m.id);
+  if(bp && bp.layout==="venn") return (bp.sets||[]).map(s=>s.label||s.id)
+    .concat((bp.regions||[]).map(r=>(r.id||"")+(r.label?" = "+r.label:"")));
   if(bp && bp.layout==="cell") return [(bp.anode&&bp.anode.label)||"anode","e⁻ → wire","(cathode)"+((bp.cathode&&bp.cathode.label)||""),bp.bridge||"salt bridge"];
   if(bp && bp.layout==="flow") return (bp.nodes||[]).map(n=>n.label||n.id);   // flow = the node sequence
   if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
