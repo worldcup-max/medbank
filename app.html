@@ -732,7 +732,14 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .meter{max-width:760px;margin:0 auto 14px}
 .mbar{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;margin-bottom:7px}
 .mbar>div{height:100%;background:linear-gradient(90deg,var(--recall),#6be3ad);transition:width .3s}
-.mrow{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim)}
+.mrow{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--dim)}
+.mbar2{height:10px;background:var(--panel2);border-radius:99px;overflow:hidden;display:flex;margin-bottom:7px}
+.mbar2>div{height:100%}
+.mbar2 .mdone{background:#d4cee0}
+.mmix{font-weight:800;font-variant-numeric:tabular-nums}
+.mlegend{max-width:760px;margin:-2px auto 12px;font-size:11.5px;color:var(--dimmer)}
+.mend{margin-left:auto;border:1px solid var(--line);background:var(--panel2);color:var(--dim);border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:700;cursor:pointer}
+.mend:hover{background:var(--panel)}
 .mrow b{color:var(--text)}
 .confbanner{max-width:760px;margin:0 auto 12px;background:#c77dff18;border:1px solid #c77dff44;color:#d8b3ff;
   border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;text-align:center}
@@ -969,7 +976,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15g';   // bump this each release
+const APP_VERSION='2026.08.15i';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1448,18 +1455,18 @@ function estMin(n){ return Math.max(1, Math.round(n*SEC_PER_CARD/60)); }
 /* a due card's review-age bucket, from its SRS box */
 function reviewBucket(box,starred){
   if(starred || box<0) return 'hard';
-  if(box<=0) return 'd1';       // 24-hour (just learned / relapsed-then-passed)
-  if(box===1) return 'd3';      // 3-study-day
-  if(box===2) return 'wk';      // weekend
-  return 'lt';                  // maturing / long-term
+  if(box<=0) return 'd1';            // 24-hour (just learned / relapsed-then-passed) — LADDER 1 day
+  if(box===1) return 'd3';           // 3-day — LADDER 3 days
+  if(box>=2 && box<=4) return 'wk';  // weekly — LADDER 7 days
+  return 'fn';                       // 2-week — LADDER 14 days
 }
 const BUCKETS=[
   {k:'hard', ic:'🔴', label:'Hard cards'},
   {k:'new',  ic:'🆕', label:'New cards'},
   {k:'d1',   ic:'🟡', label:'24-hour reviews'},
   {k:'d3',   ic:'🔵', label:'3-day reviews'},
-  {k:'wk',   ic:'🟢', label:'Weekend reviews'},
-  {k:'lt',   ic:'🟣', label:'Maturing reviews'},
+  {k:'wk',   ic:'🟢', label:'Weekly reviews'},
+  {k:'fn',   ic:'🟣', label:'2-week reviews'},
   {k:'conf', ic:'🎲', label:'Confidence check'},
 ];
 /* build a categorised, time-budgeted Active Recall session */
@@ -1487,7 +1494,7 @@ function buildRecallSession(){
   }));
   const conf=sh(mastered).slice(0,5);
   // per-bucket counts (from the capped set)
-  const counts={hard:0,new:0,d1:0,d3:0,wk:0,lt:0,conf:conf.length};
+  const counts={hard:0,new:0,d1:0,d3:0,wk:0,fn:0,conf:conf.length};
   capped.forEach(x=>{ if(x.isNew) counts.new++; else counts[reviewBucket(x.box,x.starred)]++; });
   return {hard,reviews,news,capped,over,conf,counts,
     totalCards:capped.length+conf.length};
@@ -2799,11 +2806,22 @@ function pageReview(){
   if(S.i>=S.items.length) return sessionSummary('Back to Active Recall','today');
   const it=S.items[S.order[S.i]];
   IMGBASE = it.t.imgBase || '';
-  const total=S.items.length, done=S.i, pct=Math.round(done/total*100), left=total-done;
+  const total=S.items.length, done=S.i, left=total-done, mix=sessionMix();
+  const w=n=>total?(n/total*100):0;
+  const seg=(c,n)=>n>0?`<div style="width:${w(n)}%;background:${c}"></div>`:'';
+  const mixTxt=[mix.hard?`<span style="color:#c0492d">★ ${mix.hard}</span>`:'',
+                mix.rev?`<span style="color:var(--recall)">↻ ${mix.rev}</span>`:'',
+                mix.new?`<span style="color:var(--primer)">＋ ${mix.new}</span>`:''].filter(Boolean).join(' · ');
   return `<div class="meter">
-      <div class="mbar"><div style="width:${pct}%"></div></div>
-      <div class="mrow"><span><b>${done}</b> / ${total} done</span><span>~${estMin(left)} min left</span></div>
+      <div class="mbar2">
+        ${done>0?`<div class="mdone" style="width:${w(done)}%"></div>`:''}
+        ${seg('#c0492d',mix.hard)}${seg('var(--recall)',mix.rev)}${seg('var(--primer)',mix.new)}
+      </div>
+      <div class="mrow"><span><b>${done}</b> / ${total} · ~${estMin(left)} min left</span>
+        <span class="mmix">${mixTxt}</span>
+        <button class="mend" onclick="endSession()" title="End this session and see your results">✕ End</button></div>
     </div>
+    <div class="mlegend">${left} card${left===1?'':'s'} left${mix.hard?' · '+mix.hard+' hard':''}${mix.rev?' · '+mix.rev+' reviews':''}${mix.new?' · '+mix.new+' new':''}</div>
     ${it.conf?'<div class="confbanner">🎲 Confidence check — a mastered card, just making sure it stuck</div>':''}`
     + cardView(true);
 }
@@ -2882,7 +2900,7 @@ function pageToday(){
   const goalPct=Math.min(100,Math.round(tl.cards/goal*100));
   const hitFloor=tl.cards>=floor && tl.cards<goal;
   const hard=b.counts['hard']||0, neu=b.counts['new']||0;
-  const reviews=(b.counts['d1']||0)+(b.counts['d3']||0)+(b.counts['wk']||0)+(b.counts['lt']||0)+(b.counts['conf']||0);
+  const reviews=(b.counts['d1']||0)+(b.counts['d3']||0)+(b.counts['wk']||0)+(b.counts['fn']||0);
   const hcls=h.pct>=85?'ok':(h.pct>=60?'warn':'bad');
   return `<div class="arwrap">
     ${total>0 ? `
@@ -2904,7 +2922,7 @@ function pageToday(){
         <div class="arbar"><div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
           <span>${tl.cards} / ${goal} cards today${tl.cards>=goal?' 🎉':hitFloor?' · floor met ✓':''}</span></div>
         ${b.over>0?`<div class="arover">+${b.over} more due — held for tomorrow to fit your ${budget}-min budget.</div>`:''}
-        <details class="ardetails"><summary>Break it down by type</summary><div class="arrows" style="margin-top:8px">${rows}</div></details>
+        <details class="ardetails"><summary>Review stages — new · 24h · 3-day · weekly · 2-week</summary><div class="arrows" style="margin-top:8px">${rows}</div></details>
       </div>
       <div class="artiles">
         <div class="artile" onclick="go('duenow')"><b style="color:${h.overdue?'#b45309':'var(--recall)'}">${h.overdue}</b><span>overdue</span></div>
@@ -3069,7 +3087,7 @@ function cardView(session){
 function isMcqCard(it){ return it && it.deck!=='primer' && it.c && it.c.opts && it.c.opts.length; }
 function cardTap(){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it) return;
-  if(isMcqCard(it)){ if(!S.opts) showOpts(); return; }   // options come first; don't leak the answer
+  if(isMcqCard(it)){ if(!S.opts) showOpts(); else if(S.pick!=null) mcqNext(); return; }   // options first; after answering, tap anywhere to continue
   reveal();
 }
 function showOpts(){
@@ -3124,6 +3142,26 @@ function step(d){ if(!S)return; const n=S.i+d; if(n<0||n>=S.items.length)return;
 function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;render(); }
 function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.order=S.items.map((_,k)=>k);
   if(S.mode==='deck'){DATA.pos['pos:'+S.t.id+S.deck]=0;persist();} render(); }
+/* classify a session item for the remaining-mix bar */
+function classifyItem(it){
+  if(!it) return 'rev';
+  if(it.isNew) return 'new';
+  if(it.conf) return 'rev';
+  const s=DATA.cards[it.id];
+  if(!s) return 'new';
+  if(DATA.starred[it.id] || s.box<0) return 'hard';
+  return 'rev';
+}
+function sessionMix(){                         // counts of what's still AHEAD (from current card to the end)
+  let h=0,r=0,n=0;
+  if(S&&S.items){ for(let k=S.i;k<S.items.length;k++){ const cl=classifyItem(S.items[S.order[k]]); if(cl==='hard')h++; else if(cl==='new')n++; else r++; } }
+  return {hard:h,rev:r,new:n};
+}
+function endSession(){                        // leave a session gracefully → results if any progress, else back to the hub
+  if(!S){ go('today'); return; }
+  if(S.session && S.session.done>0){ S.i=S.items.length; render(); window.scrollTo(0,0); }
+  else go('today');
+}
 function sessionNext(){                       // advance a non-rated (primer) card inside a session
   if(!S) return; S.session.done++;
   if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null; render(); window.scrollTo(0,0); return; }
