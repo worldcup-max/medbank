@@ -724,6 +724,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .ardetails>summary:before{content:'▸ ';color:var(--dimmer)}
 .ardetails[open]>summary:before{content:'▾ '}
 @media(max-width:720px){.arcols{grid-template-columns:1fr}.artiles{flex-direction:row}.artile{flex:1}}
+.artabs{display:flex;gap:4px;background:var(--panel2);border-radius:12px;padding:4px;margin:14px 0}
+.artab{flex:1;border:none;background:transparent;border-radius:9px;padding:9px 6px;font-weight:800;font-size:13.5px;color:var(--dim);cursor:pointer;font-family:inherit}
+.artab.on{background:var(--accent);color:#fff}
+.arempty{border:1px dashed var(--line);border-radius:12px;padding:22px 16px;text-align:center;color:var(--dim);font-size:13.5px;background:var(--panel)}
 .fcast,.weakcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:14px}
 .fcast-lab,.weak-lab{font-size:12px;color:var(--dimmer);margin-bottom:10px}
 .fcast-bars{display:flex;align-items:flex-end;gap:8px;height:82px}
@@ -873,7 +877,7 @@ window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) ret
 window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ return {}; } };
 /* provider for the docked Ask / Source / Note panel (study-dock.js) */
 window.MB_DOCK = {
-  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0]; return ['topic','study','review','cram','today','hard','leeches','mistakes','nudge','hardnudge'].indexOf(r)>=0; },
+  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0]; return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
   ctx: function(){
     var t=null, card=null, cardId=null;
     try{ if(typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } } }catch(e){}
@@ -1004,7 +1008,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15u';   // bump this each release
+const APP_VERSION='2026.08.15w';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2953,13 +2957,14 @@ function modesBar(){
     ${b('clinical','🩺','Clinical only', clin?`${clin} scenario${clin===1?'':'s'}`:'none yet', clin===0)}
   </div>`;
 }
-/* 🧠 Active Recall Hub — one screen that builds and runs your whole session */
+/* 🧠 Active Recall Hub — tabbed: Today · Progress · Practice */
+var AR_TAB='today';
+function setArTab(t){ AR_TAB=t; render(); }
 function pageToday(){
   const h=reviewHealth(), b=buildRecallSession(), tl=todayLog();
   const nextNew=nextNewTopic(), started=startedTopics().length;
   const goal=DATA.daily.goal, floor=DATA.daily.floor, budget=DATA.daily.budget||0;
   const total=b.totalCards;
-  // categorised breakdown (only non-empty)
   const rows=BUCKETS.filter(x=>b.counts[x.k]>0).map(x=>
     `<div class="arrow" onclick="startBucket('${x.k}')" title="Open just these"><span class="aic">${x.ic}</span><span class="alabel">${x.label}</span>
        <span class="acount">${b.counts[x.k]}</span><span class="ago">▶</span></div>`).join('');
@@ -2968,21 +2973,26 @@ function pageToday(){
   const hard=b.counts['hard']||0, neu=b.counts['new']||0;
   const reviews=(b.counts['d1']||0)+(b.counts['d3']||0)+(b.counts['wk']||0)+(b.counts['fn']||0);
   const hcls=h.pct>=85?'ok':(h.pct>=60?'warn':'bad');
-  return `<div class="arwrap">
-    ${total>0 ? `
-    <div class="arhero">
-      <div class="arh-top"><span class="arh-lab">Active recall</span>
-        <span class="arh-health ${hcls}">${h.pct}% ${esc(h.status.label.toLowerCase())}</span></div>
-      <div class="arh-big">${total} card${total===1?'':'s'} due</div>
-      <div class="arh-sub">~${estMin(total)} min${hard?` · ${hard} hard`:''}${reviews?` · ${reviews} reviews`:''}${neu?` · ${neu} new`:''}</div>
-      ${(()=>{ const sizes=[10,20].filter(n=>n<total);
-        if(!sizes.length) return `<button class="btn primary arh-start" onclick="startRecallSession(0);go('review')">▶ Start session</button>`;
-        return `<div class="arh-sizelab">Pick a size — start small if you want</div>
-          <div class="arh-starts">${sizes.map(n=>`<button class="btn arh-size" onclick="startRecallSession(${n});go('review')">▶ ${n}</button>`).join('')}
-            <button class="btn primary arh-size arh-all" onclick="startRecallSession(0);go('review')">▶ All · ${total}</button></div>`;
-      })()}
-    </div>
-    <div class="arcols">
+
+  const hero = total>0
+    ? `<div class="arhero">
+        <div class="arh-top"><span class="arh-lab">Active recall</span>
+          <span class="arh-health ${hcls}">${h.pct}% ${esc(h.status.label.toLowerCase())}</span></div>
+        <div class="arh-big">${total} card${total===1?'':'s'} due</div>
+        <div class="arh-sub">~${estMin(total)} min${hard?` · ${hard} hard`:''}${reviews?` · ${reviews} reviews`:''}${neu?` · ${neu} new`:''}</div>
+        ${(()=>{ const sizes=[10,20].filter(n=>n<total);
+          if(!sizes.length) return `<button class="btn primary arh-start" onclick="startRecallSession(0);go('review')">▶ Start session</button>`;
+          return `<div class="arh-sizelab">Pick a size — start small if you want</div>
+            <div class="arh-starts">${sizes.map(n=>`<button class="btn arh-size" onclick="startRecallSession(${n});go('review')">▶ ${n}</button>`).join('')}
+              <button class="btn primary arh-size arh-all" onclick="startRecallSession(0);go('review')">▶ All · ${total}</button></div>`;
+        })()}
+      </div>`
+    : `<div class="arhero done"><div class="big">✓</div><b>${started?'All caught up':'Nothing started yet'}</b>
+        <p class="sub" style="margin:6px 0 0">${started?'No cards due right now — try Practice, or learn a new topic.':'Open any built topic and study it to start your pipeline.'}</p></div>`;
+
+  /* ---- TODAY ---- */
+  const todayPanel = `
+    ${total>0 ? `<div class="arcols">
       <div class="armix">
         <div class="armix-lab">Today's mix</div>
         <div class="archips">
@@ -2999,39 +3009,46 @@ function pageToday(){
         <div class="artile" onclick="go('duenow')"><b style="color:${h.overdue?'#b45309':'var(--recall)'}">${h.overdue}</b><span>overdue</span></div>
         <div class="artile"><b>${h.topicsWaiting}</b><span>topics waiting</span></div>
       </div>
-    </div>`
-    : `<div class="arhero done"><div class="big">✓</div><b>${started?'All caught up':'Nothing started yet'}</b>
-        <p class="sub" style="margin:6px 0 0">${started?'No cards due right now — learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div>`}
-
-    ${(()=>{ const f=reviewForecast(7); if(f.reduce((a,b)=>a+b,0)===0) return '';
-      const max=Math.max(1,Math.max.apply(null,f)), goal=DATA.daily.goal||40;
-      const bars=f.map((v,i)=>{ const dt=new Date(); dt.setDate(dt.getDate()+i);
-        const lab=i===0?'Today':dt.toLocaleDateString(undefined,{weekday:'short'}); const h=Math.round(v/max*54);
-        return `<div class="fcol"><span class="fv">${v||''}</span><div class="fbar" style="height:${Math.max(3,h)}px;background:${v>goal?'#c0492d':'var(--recall)'}"></div><span class="fl">${lab}</span></div>`; }).join('');
-      let note=''; const pk=f.indexOf(Math.max.apply(null,f)); if(f[pk]>goal){ const pd=new Date(); pd.setDate(pd.getDate()+pk); note=`<div class="fcast-note">Heavy day ${pk===0?'today':pd.toLocaleDateString(undefined,{weekday:'long'})} — get ahead earlier.</div>`; }
-      return `<div class="fcast"><div class="fcast-lab">Reviews due — next 7 days</div><div class="fcast-bars">${bars}</div>${note}</div>`;
-    })()}
-    ${(()=>{ const w=weakTopics(); if(!w.length) return '';
-      return `<div class="weakcard"><div class="weak-lab">Your shakiest topics</div>${w.map(x=>`<div class="weakrow"><span class="wnm">${esc(x.t.name)}</span><span class="wacc ${x.acc<50?'bad':''}">${x.acc}%</span><button class="btn wdrill" onclick="drillTopic('${x.t.id}')">Drill</button></div>`).join('')}</div>`;
-    })()}
-
-    <div class="btnrow" style="margin-top:14px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button>
-      <button class="btn" onclick="go('exam')">📝 Mock exam</button></div>
-
-    <div class="armore-lab">More ways to practise</div>
-    ${modesBar()}
-    ${(()=>{ const mw=missCountWeek(), lc=leechCount();
-      return `<div class="modes" style="margin-top:10px">
-        <button class="modebtn${mw?'':' dis'}" ${mw?'':'disabled'} onclick="go('mistakes')"><span class="mic">✗</span><b>Mistakes</b><span class="msub">${mw?mw+' this week':'none yet'}</span></button>
-        <button class="modebtn${lc?'':' dis'}" ${lc?'':'disabled'} onclick="go('leeches')"><span class="mic">🩸</span><b>Leeches</b><span class="msub">${lc?lc+' cards':'none yet'}</span></button>
-        <button class="modebtn" onclick="go('hard')"><span class="mic">★</span><b>Hard cards</b><span class="msub">${starCount()||'star as you go'}</span></button>
-      </div>`; })()}
-
-    ${nextNew?`<details class="ardetails" style="margin-top:18px"><summary>Learn something new</summary>
+    </div>` : `<div class="arempty">You're caught up — nothing due right now. Learn something new below, or head to Practice.</div>`}
+    <div class="btnrow" style="margin-top:12px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button></div>
+    ${nextNew?`<details class="ardetails" style="margin-top:14px"><summary>Learn something new</summary>
       <div class="plan" style="margin-top:10px">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
         `Read the simplified note, then run its Primer once.${(()=>{const e=examDays(nextNew.subject.id);return (e!=null&&e>=0)?` · ${nextNew.subject.short} exam in ${e}d`:'';})()}`,
         `<button class="btn" onclick="go('topic/${nextNew.id}')">Open topic</button>
-         <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`)}</div></details>`:''}
+         <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`)}</div></details>`:''}`;
+
+  /* ---- PROGRESS ---- */
+  const fcast=(()=>{ const f=reviewForecast(7); if(f.reduce((a,b)=>a+b,0)===0) return '';
+      const max=Math.max(1,Math.max.apply(null,f)), g=DATA.daily.goal||40;
+      const bars=f.map((v,i)=>{ const dt=new Date(); dt.setDate(dt.getDate()+i);
+        const lab=i===0?'Today':dt.toLocaleDateString(undefined,{weekday:'short'}); const hh=Math.round(v/max*54);
+        return `<div class="fcol"><span class="fv">${v||''}</span><div class="fbar" style="height:${Math.max(3,hh)}px;background:${v>g?'#c0492d':'var(--recall)'}"></div><span class="fl">${lab}</span></div>`; }).join('');
+      let note=''; const pk=f.indexOf(Math.max.apply(null,f)); if(f[pk]>g){ const pd=new Date(); pd.setDate(pd.getDate()+pk); note=`<div class="fcast-note">Heavy day ${pk===0?'today':pd.toLocaleDateString(undefined,{weekday:'long'})} — get ahead earlier.</div>`; }
+      return `<div class="fcast"><div class="fcast-lab">Reviews due — next 7 days</div><div class="fcast-bars">${bars}</div>${note}</div>`; })();
+  const wk=weakTopics();
+  const weakHTML=wk.length?`<div class="weakcard"><div class="weak-lab">Your shakiest topics</div>${wk.map(x=>`<div class="weakrow"><span class="wnm">${esc(x.t.name)}</span><span class="wacc ${x.acc<50?'bad':''}">${x.acc}%</span><button class="btn wdrill" onclick="drillTopic('${x.t.id}')">Drill</button></div>`).join('')}</div>`:'';
+  const progressPanel = (fcast||weakHTML) ? (fcast+weakHTML)
+    : `<div class="arempty">Study a few cards and your 7-day forecast and shakiest topics will appear here.</div>`;
+
+  /* ---- PRACTICE ---- */
+  const practicePanel = `${modesBar()}
+    ${(()=>{ const mw=missCountWeek(), lc=leechCount();
+      return `<div class="modes" style="margin-top:10px">
+        <button class="modebtn" onclick="go('exam')"><span class="mic">📝</span><b>Mock exam</b><span class="msub">timed &amp; scored</span></button>
+        <button class="modebtn${mw?'':' dis'}" ${mw?'':'disabled'} onclick="go('mistakes')"><span class="mic">✗</span><b>Mistakes</b><span class="msub">${mw?mw+' this week':'none yet'}</span></button>
+        <button class="modebtn${lc?'':' dis'}" ${lc?'':'disabled'} onclick="go('leeches')"><span class="mic">🩸</span><b>Leeches</b><span class="msub">${lc?lc+' cards':'none yet'}</span></button>
+        <button class="modebtn" onclick="go('hard')"><span class="mic">★</span><b>Hard cards</b><span class="msub">${starCount()||'star as you go'}</span></button>
+      </div>`; })()}`;
+
+  const panel = AR_TAB==='progress'?progressPanel : AR_TAB==='practice'?practicePanel : todayPanel;
+  return `<div class="arwrap">
+    ${hero}
+    <div class="artabs">
+      <button class="artab ${AR_TAB==='today'?'on':''}" onclick="setArTab('today')">Today</button>
+      <button class="artab ${AR_TAB==='progress'?'on':''}" onclick="setArTab('progress')">Progress</button>
+      <button class="artab ${AR_TAB==='practice'?'on':''}" onclick="setArTab('practice')">Practice</button>
+    </div>
+    ${panel}
   </div>`;
 }
 function planItem(state,icon,title,desc,action){
