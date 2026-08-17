@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16k';   // bump this each release
+const APP_VERSION='2026.08.16l';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -5643,7 +5643,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     document.getElementById("obGot").onclick=close; document.getElementById("obSkip").onclick=close;
     ov.addEventListener("click",function(e){ if(e.target===ov)close(); });
   }catch(e){} };
-  function recordViz(topicId,text){ if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
+  function recordViz(topicId,text){
+    if(!topicId){ try{ topicId=(location.hash.match(/#\/topic\/([^\/?#]+)/)||[])[1]||''; }catch(e){} }   // recover the topic id from the URL if it wasn't passed — never silently drop the video
+    if(!topicId||!window.DATA)return; try{ DATA.viz=DATA.viz||{}; var a=DATA.viz[topicId]=DATA.viz[topicId]||[]; var t=(text||'').trim();
     if(t && !a.some(function(x){return x.text===t;})){ a.push({text:t,ts:Date.now()}); if(window.persist)persist(); }
     if(window.markWatchedNote) setTimeout(window.markWatchedNote,60);   // show the highlight/▶watch chip right away, without re-opening the note
   }catch(e){} }
