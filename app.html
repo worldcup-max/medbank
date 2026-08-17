@@ -422,6 +422,27 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .shelfnm{font-size:13px;font-weight:700;line-height:1.3;margin:9px 0 8px;min-height:34px}
 .minibar{height:5px;border-radius:4px;background:var(--panel2);overflow:hidden}.minibar div{height:100%;border-radius:4px}
 .shelfempty{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--dim);font-size:13px}
+/* jump-back-in cards */
+.jblead{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.jblead .jbinfo{flex:1;min-width:0}
+.jbtop{display:flex;align-items:center;gap:7px;margin-bottom:7px;flex-wrap:wrap;font-size:12px;color:var(--dim)}
+.deckchip{font-size:11px;font-weight:800;padding:2px 9px;border-radius:20px}
+.jbtime{font-size:11.5px;color:var(--dimmer)}
+.duechip{font-size:11px;font-weight:800;padding:2px 9px;border-radius:20px;background:#FAECE7;color:#993C1D;margin-left:auto}
+.jbname{font-size:16px;font-weight:800;margin-bottom:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jbprog{display:flex;align-items:center;gap:10px}
+.jbprog .pbarn{flex:1;height:7px;border-radius:5px;background:var(--panel2);overflow:hidden}.jbprog .pbarn div{height:100%}
+.jbprog span{font-size:12px;color:var(--dim);white-space:nowrap}
+.jbresume{flex:0 0 auto;white-space:nowrap}
+.jbmorelab{font-size:12px;color:var(--dimmer);margin:2px 2px 8px}
+.jbmore{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.jbcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;min-width:0;transition:border-color .15s}
+.jbcard:hover{border-color:var(--accent)}
+.jbcname{font-size:13px;font-weight:700;line-height:1.3;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jbcard .row2{display:flex;align-items:center;gap:8px}
+.jbcard .pbarn{flex:1;height:5px;border-radius:4px;background:var(--panel2);overflow:hidden}.jbcard .pbarn div{height:100%;border-radius:4px}
+.jbcard .pct{font-size:11px;color:var(--dim)}
+@media(max-width:720px){.jbmore{display:flex;overflow-x:auto;max-width:100%;padding-bottom:4px}.jbcard{flex:0 0 152px}.jblead{flex-direction:column;align-items:stretch}.jbresume{width:100%;justify-content:center}}
 .mtiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .mtile{background:var(--panel2);border-radius:12px;padding:12px 14px;cursor:pointer}
 .mtile b{display:block;font-size:22px;font-weight:800;line-height:1.1}
@@ -918,7 +939,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15d';   // bump this each release
+const APP_VERSION='2026.08.15e';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1634,6 +1655,31 @@ function heatmap(){
 function greeting(){ var h=new Date().getHours(); return h<12?'Good morning':(h<18?'Good afternoon':'Good evening'); }
 function topicPct(t){ var tot=(t.recall||[]).length; if(!tot) return 0; return Math.round((tot-unseenCount(t))/tot*100); }
 function homeColor(id){ return COLOR[id]||'var(--accent)'; }
+/* ---- "Jump back in" helpers ---- */
+function topicLastDay(id){ var best=0; try{ Object.keys(DATA.dayTopics||{}).forEach(function(d){ if(DATA.dayTopics[d]&&DATA.dayTopics[d][id]){ var n=dayNum(new Date(d+'T00:00')); if(n>best)best=n; } }); }catch(e){} return best; }
+function relDay(n){ if(!n)return ''; var diff=dayNum()-n; return diff<=0?'today':(diff===1?'yesterday':diff+'d ago'); }
+function topicResume(t){ var hasR=DATA.pos['pos:'+t.id+'recall']!=null, hasP=DATA.pos['pos:'+t.id+'primer']!=null;
+  var deck=hasR?'recall':(hasP?'primer':'recall');
+  var idx=DATA.pos['pos:'+t.id+deck]||0, arr=deck==='recall'?(t.recall||[]):(t.primer||[]), total=arr.length;
+  return {deck:deck, at:Math.min(idx+1,total||1), total:total, pct:total?Math.round(Math.min(idx+1,total)/total*100):0}; }
+function jbChip(deck){ return deck==='recall'
+  ? '<span class="deckchip" style="background:#E1F5EE;color:#0F6E56">Recall</span>'
+  : '<span class="deckchip" style="background:#EEEDFE;color:#3C3489">Primer</span>'; }
+function jbLead(t,due){ var r=topicResume(t), c=r.deck==='recall'?'var(--recall)':'var(--primer)', dn=relDay(topicLastDay(t.id));
+  return `<div class="jblead">
+    <div class="jbinfo">
+      <div class="jbtop">${jbChip(r.deck)} deck${dn?`<span class="jbtime">· ${dn}</span>`:''}${due?`<span class="duechip">⏰ ${due} due</span>`:''}</div>
+      <div class="jbname">${esc(t.name)}</div>
+      <div class="jbprog"><div class="pbarn"><div style="width:${r.pct}%;background:${c}"></div></div><span>${r.at} / ${r.total} · ${r.pct}%</span></div>
+    </div>
+    <button class="btn primary jbresume" onclick="go('study/${t.id}/${r.deck}')">▶ Resume</button>
+  </div>`; }
+function jbCard(t,due){ var r=topicResume(t), c=r.deck==='recall'?'var(--recall)':'var(--primer)', dn=relDay(topicLastDay(t.id));
+  return `<div class="jbcard" onclick="go('study/${t.id}/${r.deck}')">
+    <div class="jbtop">${jbChip(r.deck)}${due?`<span class="duechip">${due} due</span>`:(dn?`<span class="jbtime" style="margin-left:auto">${dn}</span>`:'')}</div>
+    <div class="jbcname">${esc(t.name)}</div>
+    <div class="row2"><div class="pbarn"><div style="width:${r.pct}%;background:${c}"></div></div><span class="pct">${r.pct}%</span></div>
+  </div>`; }
 
 function pageHome(){
   const tl=todayLog(), goal=DATA.daily.goal||20, st=curStreak(), due=dueCount();
@@ -1642,10 +1688,12 @@ function pageHome(){
   const resume=Object.keys(DATA.pos)[0]; let resumeBtn='';
   if(resume){ const pt=topById(resume.split('|')[0]); if(pt){ const dk=resume.split('|')[1]==='p'?'primer':'recall';
     resumeBtn=`<button class="btn hcont" onclick="go('study/${pt.id}/${dk}')">↩ Continue ${esc(pt.name).slice(0,20)}…</button>`; } }
-  const nd=newDoneToday(), revDone=tl.rev||0, revDue=buildQueue().due.length, met=streakMet();
+  const q=buildQueue(), dueBy={}; q.due.forEach(x=>{ dueBy[x.t.id]=(dueBy[x.t.id]||0)+1; });
+  const nd=newDoneToday(), revDone=tl.rev||0, revDue=q.due.length, met=streakMet();
   const nw=Math.min(100,Math.round(nd/goal*100)), rw=Math.min(100-nw,Math.round(revDone/goal*100));
   const exams=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
-  const shelf=startedTopics().filter(t=>status(t.id)==='inprogress').slice(0,8);
+  const inprog=startedTopics().filter(t=>status(t.id)==='inprogress').map(t=>({t,d:topicLastDay(t.id)})).sort((a,b)=>b.d-a.d).map(x=>x.t);
+  const jbLeadT=inprog[0], jbMore=inprog.slice(1,5);
   return `<div class="home2">
     <div class="hero">
       <div class="herorow"><span class="herohi">${greeting()}, Frank</span>
@@ -1667,12 +1715,8 @@ function pageHome(){
             <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
         </div>
         <div class="shelfhd">Jump back in</div>
-        ${shelf.length?`<div class="shelf">${shelf.map(t=>{const c=homeColor(t.subject.id);const p=topicPct(t);
-          return `<div class="shelfcard" onclick="go('topic/${t.id}')">
-            <span class="pill" style="background:${c}22;color:${c}">${esc(t.subject.short)}</span>
-            <div class="shelfnm">${esc(t.name)}</div>
-            <div class="minibar"><div style="width:${p}%;background:${c}"></div></div></div>`;}).join('')}
-          </div>`:`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
+        ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
+        ${jbMore.length?`<div class="jbmorelab">More in progress</div><div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:''}
       </div>
       <div class="hright">
         <div class="mtiles">
