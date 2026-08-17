@@ -1036,7 +1036,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16c';   // bump this each release
+const APP_VERSION='2026.08.16d';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2342,6 +2342,16 @@ async function podApi(path,opts){
   opts=opts||{}; opts.headers=Object.assign({'Authorization':'Bearer '+token},opts.headers||{});
   const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+path,opts); return {ok:r.ok,data:await r.json()};
 }
+function cleanPodErr(msg){   // turn a raw server/HTML error into one friendly line
+  msg=String(msg||'');
+  if(/<!?doctype|<html|<head|<body|<title/i.test(msg) || msg.length>160){
+    var m=msg.match(/\b(50\d|429|408|503)\b/);
+    if(m){ if(m[1]==='429') return 'You\'ve hit today\'s limit — please try again later.';
+      return 'The voice service is busy right now ('+m[1]+'). Please try again in a moment.'; }
+    return 'Couldn\'t generate the podcast right now. Please try again in a moment.';
+  }
+  return msg;
+}
 function podLevel(){ return (window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null; }
 function podName(id){ const v=(POD.voices||[]).find(x=>x.voice_id===id); return v?v.name:'Host'; }
 function podAudioEl(){
@@ -2371,7 +2381,7 @@ async function podLoadScript(id){
     let saved=null; try{ saved=localStorage.getItem('pod_combo_'+id); }catch(e){}
     if(saved){ const p=saved.split('|'); if(p.length===3){ await podSetProvider(p[0],true); POD.voiceA=p[1]; POD.voiceB=p[2]; podGenAudio(); return; } }
     await podSetProvider('openai');
-  }catch(e){ POD.phase='error'; POD.err=e.message; podPaint(); }
+  }catch(e){ POD.phase='error'; POD.err=cleanPodErr(e.message); podPaint(); }
 }
 async function podLoadVoices(){
   try{ const r=await podApi('/podcast-voices'); POD.elevenVoices=(r.ok&&r.data.voices&&r.data.voices.length)?r.data.voices:POD_FALLBACK.slice(); }
@@ -2389,7 +2399,7 @@ async function podSetProvider(p,keep){
   if(!keep) podDefaults();
   POD.phase='voices'; podPaint();
 }
-async function podGenAudio(){
+async function podGenAudio(retry){
   POD.phase='gen'; podPaint();
   try{
     const r=await podApi('/podcast-audio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:POD.topicId,provider:POD.provider||'openai',voiceA:POD.voiceA,voiceB:POD.voiceB,level:podLevel()})});
@@ -2398,7 +2408,11 @@ async function podGenAudio(){
     try{ localStorage.setItem('pod_combo_'+POD.topicId, (POD.provider||'openai')+'|'+POD.voiceA+'|'+POD.voiceB); }catch(e){}
     let pos=0; try{ pos=parseInt(localStorage.getItem('pod_pos_'+POD.topicId)||'0',10)||0; }catch(e){}
     POD.i=Math.min(pos,POD.urls.length-1); POD.phase='ready'; podSetupMedia(); podLoadLine(POD.i,false); podPaint();
-  }catch(e){ POD.phase='voices'; POD.err=e.message; podPaint(); alert(e.message||'Could not generate the audio.'); }
+  }catch(e){
+    var msg=cleanPodErr(e.message);
+    if(!retry && /\b(50\d|408|503)\b/.test(msg)){ return podGenAudio(true); }   // one silent retry on a transient voice error
+    POD.phase='voices'; POD.err=msg; podPaint(); alert(msg);
+  }
 }
 function podLoadLine(i,autoplay){
   const a=podAudioEl(); POD.i=Math.max(0,Math.min(i,(POD.urls||[]).length-1));

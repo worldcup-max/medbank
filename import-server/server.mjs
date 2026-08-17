@@ -323,9 +323,15 @@ async function ttsClip(provider, text, voiceId){
   const key = _ttsKey(p, voiceId, spoken);
   if(_ttsCache.has(key)) return _ttsCache.get(key);
   let buf;
-  if(p==="fish")        buf = await fishTTS(spoken, voiceId);
-  else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
-  else                  buf = await openaiTTS(spoken, voiceId);
+  try{
+    if(p==="fish")        buf = await fishTTS(spoken, voiceId);
+    else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
+    else                  buf = await openaiTTS(spoken, voiceId);
+  }catch(err){
+    // the chosen host had a transient failure (e.g. Kokoro 502) — fall back to OpenAI so the podcast still generates
+    if(p!=="openai" && process.env.OPENAI_API_KEY){ console.warn("[tts] "+p+" failed, falling back to OpenAI:", (err&&err.message||"").slice(0,120)); buf = await openaiTTS(sayPrep(text), voiceId); }
+    else throw err;
+  }
   _ttsCache.set(key, buf);
   if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
   return buf;
