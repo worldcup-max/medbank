@@ -680,6 +680,36 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .hmetrics span{font-size:11.5px;color:var(--dim)}
 @media(max-width:560px){.health{flex-wrap:wrap}.hmetrics{margin-left:0;gap:16px}}
 
+/* ===== redesigned Active Recall hub ===== */
+.arwrap{animation:homefade .28s ease}
+.arhero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px}
+.arhero.done{text-align:center;padding:32px 20px}
+.arhero.done .big{font-size:36px;color:var(--recall);line-height:1}
+.arhero.done b{display:block;font-size:17px;margin-top:8px}
+.arh-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.arh-lab{font-size:13px;color:var(--dim)}
+.arh-health{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:auto}
+.arh-health.ok{background:#E1F5EE;color:#0F6E56}.arh-health.warn{background:#f6ecda;color:#8a5a12}.arh-health.bad{background:#FAECE7;color:#993C1D}
+.arh-big{font-size:26px;font-weight:800;letter-spacing:-.3px}
+.arh-sub{font-size:12.5px;color:var(--dimmer);margin:2px 0 15px}
+.arh-start{justify-content:center;width:100%;font-size:15px;padding:12px}
+.arcols{display:grid;grid-template-columns:2fr 1fr;gap:12px;min-width:0}
+.armix{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;min-width:0}
+.armix-lab{font-size:12px;color:var(--dimmer);margin:0 0 9px}
+.archips{display:flex;gap:8px;flex-wrap:wrap}
+.archip{font-size:12px;font-weight:700;padding:5px 11px;border-radius:20px;cursor:pointer}
+.archip.hard{background:#FAECE7;color:#993C1D}.archip.rev{background:#E1F5EE;color:#0F6E56}.archip.new{background:#EEEDFE;color:#3C3489}
+.arbar{margin-top:13px}.arbar .dbar{margin-bottom:6px}.arbar span{font-size:11.5px;color:var(--dim)}
+.artiles{display:flex;flex-direction:column;gap:10px;min-width:0}
+.artile{background:var(--panel2);border-radius:12px;padding:13px 15px;cursor:pointer}
+.artile b{display:block;font-size:22px;font-weight:800;line-height:1.1}
+.artile span{font-size:12px;color:var(--dim)}
+.armore-lab{font-size:12px;color:var(--dimmer);font-weight:600;margin:20px 2px 10px}
+.ardetails>summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--dim);list-style:none;padding:6px 0}
+.ardetails>summary::-webkit-details-marker{display:none}
+.ardetails>summary:before{content:'▸ ';color:var(--dimmer)}
+.ardetails[open]>summary:before{content:'▾ '}
+@media(max-width:720px){.arcols{grid-template-columns:1fr}.artiles{flex-direction:row}.artile{flex:1}}
 .arcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:26px}
 .artop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px}
 .artop b{font-size:16px}
@@ -939,7 +969,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15e';   // bump this each release
+const APP_VERSION='2026.08.15g';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2851,52 +2881,57 @@ function pageToday(){
        <span class="acount">${b.counts[x.k]}</span><span class="ago">▶</span></div>`).join('');
   const goalPct=Math.min(100,Math.round(tl.cards/goal*100));
   const hitFloor=tl.cards>=floor && tl.cards<goal;
-  return `<h1>🧠 Active Recall</h1>
-    <p class="sub">Open it and go — MedBank decides what to review.</p>
-
-    <div class="health ${h.status.k}">
-      <div class="hleft"><div class="hbig">${h.pct}<span>%</span></div>
-        <div class="hstat">${h.status.ic} ${h.status.label}</div></div>
-      <div class="hmetrics">
-        <div><b>${h.dueNow}</b><span>due now</span></div>
-        <div><b style="${h.overdue?'color:#ff8a4d':''}">${h.overdue}</b><span>overdue</span></div>
-        <div><b>${h.topicsWaiting}</b><span>topics waiting</span></div>
-        <div><b>${h.hard}</b><span>hard cards</span></div>
-      </div>
-    </div>
-
+  const hard=b.counts['hard']||0, neu=b.counts['new']||0;
+  const reviews=(b.counts['d1']||0)+(b.counts['d3']||0)+(b.counts['wk']||0)+(b.counts['lt']||0)+(b.counts['conf']||0);
+  const hcls=h.pct>=85?'ok':(h.pct>=60?'warn':'bad');
+  return `<div class="arwrap">
     ${total>0 ? `
-    <div class="arcard">
-      <div class="artop"><b>Today’s session</b><span class="artime">⏱ ~${estMin(total)} min · ${total} card${total===1?'':'s'}</span></div>
-      <div class="arrows">${rows}</div>
-      ${b.over>0?`<div class="arover">+${b.over} more due — held for tomorrow to fit your ${budget}-min budget.</div>`:''}
-      <div class="arprog"><div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
-        <span>${tl.cards} / ${goal} cards today${tl.cards>=goal?' 🎉':hitFloor?' · floor met ✓':''}</span></div>
-      <button class="btn primary arstart" onclick="startRecallSession();go('review')">▶ Start today’s session</button>
+    <div class="arhero">
+      <div class="arh-top"><span class="arh-lab">Active recall</span>
+        <span class="arh-health ${hcls}">${h.pct}% ${esc(h.status.label.toLowerCase())}</span></div>
+      <div class="arh-big">${total} card${total===1?'':'s'} due</div>
+      <div class="arh-sub">~${estMin(total)} min${hard?` · ${hard} hard`:''}${reviews?` · ${reviews} reviews`:''}${neu?` · ${neu} new`:''}</div>
+      <button class="btn primary arh-start" onclick="startRecallSession();go('review')">▶ Start session</button>
+    </div>
+    <div class="arcols">
+      <div class="armix">
+        <div class="armix-lab">Today's mix</div>
+        <div class="archips">
+          ${hard?`<span class="archip hard" onclick="startBucket('hard')">★ Hard · ${hard}</span>`:''}
+          ${reviews?`<span class="archip rev">↻ Reviews · ${reviews}</span>`:''}
+          ${neu?`<span class="archip new" onclick="startBucket('new')">＋ New · ${neu}</span>`:''}
+        </div>
+        <div class="arbar"><div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
+          <span>${tl.cards} / ${goal} cards today${tl.cards>=goal?' 🎉':hitFloor?' · floor met ✓':''}</span></div>
+        ${b.over>0?`<div class="arover">+${b.over} more due — held for tomorrow to fit your ${budget}-min budget.</div>`:''}
+        <details class="ardetails"><summary>Break it down by type</summary><div class="arrows" style="margin-top:8px">${rows}</div></details>
+      </div>
+      <div class="artiles">
+        <div class="artile" onclick="go('duenow')"><b style="color:${h.overdue?'#b45309':'var(--recall)'}">${h.overdue}</b><span>overdue</span></div>
+        <div class="artile"><b>${h.topicsWaiting}</b><span>topics waiting</span></div>
+      </div>
     </div>`
-    : `<div class="arcard"><div class="alldone" style="margin:0;border:0;padding:10px">
-        <div class="big">✓</div><b>${started?'Nothing to review right now.':'Nothing started yet.'}</b>
-        <p>${started?'You’re fully caught up. Learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div></div>`}
+    : `<div class="arhero done"><div class="big">✓</div><b>${started?'All caught up':'Nothing started yet'}</b>
+        <p class="sub" style="margin:6px 0 0">${started?'No cards due right now — learn a new topic below.':'Open any built topic and study it to start your pipeline.'}</p></div>`}
 
-    <div class="btnrow" style="margin-top:14px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button></div>
+    <div class="btnrow" style="margin-top:14px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button>
+      <button class="btn" onclick="go('exam')">📝 Mock exam</button></div>
 
-    <h2>Or pick a mode</h2>
+    <div class="armore-lab">More ways to practise</div>
     ${modesBar()}
-
-    <h2>Review tools</h2>
     ${(()=>{ const mw=missCountWeek(), lc=leechCount();
-      return `<div class="modes">
-        <button class="modebtn" onclick="go('exam')"><span class="mic">📝</span><b>Mock exam</b><span class="msub">timed &amp; scored</span></button>
+      return `<div class="modes" style="margin-top:10px">
         <button class="modebtn${mw?'':' dis'}" ${mw?'':'disabled'} onclick="go('mistakes')"><span class="mic">✗</span><b>Mistakes</b><span class="msub">${mw?mw+' this week':'none yet'}</span></button>
         <button class="modebtn${lc?'':' dis'}" ${lc?'':'disabled'} onclick="go('leeches')"><span class="mic">🩸</span><b>Leeches</b><span class="msub">${lc?lc+' cards':'none yet'}</span></button>
         <button class="modebtn" onclick="go('hard')"><span class="mic">★</span><b>Hard cards</b><span class="msub">${starCount()||'star as you go'}</span></button>
       </div>`; })()}
 
-    ${nextNew?`<h2>Learn something new</h2>
-      <div class="plan">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
+    ${nextNew?`<details class="ardetails" style="margin-top:18px"><summary>Learn something new</summary>
+      <div class="plan" style="margin-top:10px">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
         `Read the simplified note, then run its Primer once.${(()=>{const e=examDays(nextNew.subject.id);return (e!=null&&e>=0)?` · ${nextNew.subject.short} exam in ${e}d`:'';})()}`,
         `<button class="btn" onclick="go('topic/${nextNew.id}')">Open topic</button>
-         <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`)}</div>`:''}`;
+         <button class="btn primary" onclick="go('study/${nextNew.id}/primer')">Start Primer →</button>`)}</div></details>`:''}
+  </div>`;
 }
 function planItem(state,icon,title,desc,action){
   return `<div class="planitem ${state}">
@@ -4146,8 +4181,7 @@ function render(){
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
-  if(p[0]==='topic' && window.mountVizTeaser) setTimeout(window.mountVizTeaser,60);
-  if(p[0]==='topic' && window.showVizOnboarding) setTimeout(window.showVizOnboarding,500);
+  if(window.scheduleVizTeaser) scheduleVizTeaser(p[0]==='topic'?p[1]:null);   // teaser waits ~1 min of reading, then plays once
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
@@ -4397,6 +4431,29 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizteaser .vtstage{border:1px solid #eee7fb;border-radius:9px;background:#fffdf6;overflow:hidden;max-height:240px}
 .vizteaser .vtstage svg{display:block;width:100%;height:auto}
 .vizteaser .vtcta{font-size:12px;color:#5c5570;margin-top:8px;line-height:1.45}
+/* delayed scripted "Visualize" teaser popup */
+.vtov{position:fixed;inset:0;z-index:9500;background:rgba(20,12,38,.34);display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:721px){.vtov{align-items:center;padding:20px}}
+.vtcard{background:#fff;border:1px solid #e7e3f2;border-radius:16px 16px 0 0;width:100%;max-width:460px;padding:14px 16px 16px;box-shadow:0 -8px 30px rgba(20,12,38,.25);animation:vtup .3s ease}
+@media(min-width:721px){.vtcard{border-radius:16px}}
+@keyframes vtup{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
+.vtcard .vthd{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.vtcard .vthd b{font-size:15px;color:#3a1d7a}.vtcard .vthd span{font-size:12px;color:#8b84a0}
+.vtcard .vtx{margin-left:auto;border:none;background:#f3f0fa;width:26px;height:26px;border-radius:8px;cursor:pointer;color:#6b6580;font-size:13px}
+.vtphase{position:relative;min-height:118px}
+.vtnote{background:#faf9fd;border:1px solid #eee7fb;border-radius:10px;padding:14px;font-size:14px;line-height:1.55;color:#2a2536}
+.vttext{background:linear-gradient(#c9b8f7,#c9b8f7) no-repeat;background-size:0% 100%;border-radius:3px;transition:background-size 1.25s ease;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:1px 0}
+.vttext.sel{background-size:100% 100%}
+.vtbtn{position:absolute;left:50%;top:80px;transform:translate(-50%,6px) scale(.9);opacity:0;transition:opacity .3s,transform .3s;background:#6d28d9;color:#fff;border:none;border-radius:10px;padding:9px 15px;font-size:13.5px;font-weight:700;box-shadow:0 6px 16px rgba(109,40,217,.35);pointer-events:none;white-space:nowrap}
+.vtbtn.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.vtbtn.clicked{animation:vtclick .4s ease}
+@keyframes vtclick{0%{transform:translate(-50%,0) scale(1)}40%{transform:translate(-50%,0) scale(.88)}100%{transform:translate(-50%,0) scale(1)}}
+.vtcursor{position:absolute;left:8%;top:26px;width:22px;height:22px;transition:left .9s cubic-bezier(.4,.1,.2,1),top .9s cubic-bezier(.4,.1,.2,1);pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));z-index:3}
+.vtcursor svg{width:100%;height:100%}
+.vtphase2 .vtstage{border:1px solid #eee7fb;border-radius:10px;background:#fffdf6;overflow:hidden;max-height:250px}
+.vtphase2 .vtstage svg{display:block;width:100%;height:auto}
+.vtcap{font-size:12.5px;color:#5c5570;margin-top:9px;min-height:18px;font-weight:600}
+.vtgot{margin-top:14px;width:100%;border:none;background:#f3f0fa;color:#4a3d78;border-radius:10px;padding:11px;font-weight:800;font-size:13.5px;cursor:pointer}
 /* one-time onboarding */
 .obov{position:fixed;inset:0;z-index:9600;background:rgba(20,12,38,.55);display:flex;align-items:center;justify-content:center;padding:16px}
 .obcard{position:relative;width:100%;max-width:520px;background:#fff;border-radius:18px;overflow:hidden}
@@ -4946,21 +5003,70 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     if(BP.layout==="graph")layoutGraph(); else if(BP.layout==="tree")layoutTree(); else layoutFlow();
     var fn=(BP.layout==="graph")?graphSVG:(BP.layout==="tree")?treeSVG:flowSVG; try{ el.innerHTML=fn(k); }catch(e){} }
   window.hasUsedViz=function(){ try{ return !!(window.DATA&&DATA.viz&&Object.keys(DATA.viz).some(function(k){return (DATA.viz[k]||[]).length>0;})); }catch(e){ return false; } };
+  /* a sample sentence per subject family — what the cursor "highlights" in the demo */
+  var VT_SENT={
+    "default":"Injured tissue releases histamine, so nearby vessels widen and leak — causing redness, heat and swelling.",
+    "chem":"A galvanic cell turns a spontaneous redox reaction into a flow of electric current.",
+    "math":"The gradient of the curve y = x² at any point is exactly twice the x-value." };
+  function vtKey(subj){ return /organic|chem/i.test(subj)?"chem":/math|calcul/i.test(subj)?"math":"default"; }
+  function vtCap(BP,k){ try{ var s=BP.narration_steps[k]||{}; var id=(s.active&&s.active[0])||(s.reveal&&s.reveal[0]);
+    var n=(BP.nodes||[]).filter(function(x){return x.id===id;})[0]; if(n)return n.label+(n.note?' — '+n.note:''); }catch(e){} return (BP.meta&&BP.meta.title)||''; }
+  var _vtTos=[];
+  function vtT(ms,fn){ _vtTos.push(setTimeout(fn,ms)); }
+  function closeVt(){ _vtTos.forEach(clearTimeout); _vtTos=[]; if(_tzT){clearInterval(_tzT);_tzT=null;} var o=document.getElementById('vtov'); if(o)o.remove(); }
+
+  /* Scheduler: only after ~1 minute of actually reading the note do we bring in the demo. */
+  var _vtTimer=null;
+  window.scheduleVizTeaser=function(topicId){
+    if(_vtTimer){clearTimeout(_vtTimer);_vtTimer=null;}
+    try{ closeVt(); }catch(e){}
+    if(!topicId) return;                                   // left the note view
+    if(window.hasUsedViz && hasUsedViz()) return;          // already knows the feature
+    var subj=(window.currentTopicSubject?currentTopicSubject():'')||'', skey=(subj||'general').toLowerCase();
+    try{ if(DATA&&DATA.teaserSeen&&DATA.teaserSeen[skey])return; }catch(e){}   // once per subject
+    _vtTimer=setTimeout(function(){ _vtTimer=null;
+      try{ if(!window.currentTopicId||currentTopicId()!==topicId)return; }catch(e){ return; }   // still on this note?
+      if(document.hidden) return;                          // reading (tab visible)
+      if(document.getElementById('vizov')||document.getElementById('vtov')||document.getElementById('obov')) return;
+      window.mountVizTeaser();
+    }, 60000);   // 1 minute
+  };
+
+  /* The scripted demo: cursor sweeps a sentence → the Visualize button appears → cursor clicks it
+     → the subject-matched explainer plays. Shown as a light popup, once per subject. */
   window.mountVizTeaser=function(){ try{
-    var host=document.querySelector('#main .notebody'); if(!host||host.querySelector('.vizteaser'))return;
-    if(window.hasUsedViz()) return;                       // student already used Visualize → stop teasing
-    var subj=(window.currentTopicSubject?currentTopicSubject():'')||'';
-    var skey=(subj||'general').toLowerCase();
-    try{ window.DATA=window.DATA||{}; DATA.teaserSeen=DATA.teaserSeen||{}; if(DATA.teaserSeen[skey])return; DATA.teaserSeen[skey]=1; if(window.persist)persist(); }catch(e){}   // once per subject
-    var key=/organic/i.test(subj)?"chem":/chem/i.test(subj)?"chem":/math/i.test(subj)?"math":/physics|physical/i.test(subj)?"default":/biolog/i.test(subj)?"default":"default";
-    _tzBP=VIZ_DEMOS[key]||VIZ_DEMOS.default; _tzK=0;
-    var card=document.createElement("div"); card.className="vizteaser";
-    card.innerHTML='<div class="vtlab">✨ How “Visualize” works</div><div class="vtstage"><div id="vtStage"></div></div><div class="vtcta">Highlight any sentence below and tap <b>🎬 Visualize this</b> to turn it into a short, narrated explainer — step by step, like this.</div>';
-    host.insertBefore(card,host.firstChild);
-    teaserDraw(document.getElementById("vtStage"),0);
-    if(_tzT)clearInterval(_tzT);
-    _tzT=setInterval(function(){ var e=document.getElementById("vtStage"); if(!e){clearInterval(_tzT);_tzT=null;return;}
-      var n=(_tzBP.narration_steps||[]).length; _tzK++; if(_tzK>n+1)_tzK=0; teaserDraw(e,Math.min(_tzK,n-1)); },1700);
+    if(window.hasUsedViz && hasUsedViz()) return;
+    var subj=(window.currentTopicSubject?currentTopicSubject():'')||'', skey=(subj||'general').toLowerCase();
+    try{ window.DATA=window.DATA||{}; DATA.teaserSeen=DATA.teaserSeen||{}; if(DATA.teaserSeen[skey])return; DATA.teaserSeen[skey]=1; if(window.persist)persist(); }catch(e){}
+    var key=vtKey(subj); _tzBP=VIZ_DEMOS[key]||VIZ_DEMOS.default; _tzK=0;
+    var sent=VT_SENT[key]||VT_SENT.default;
+    var ov=document.createElement('div'); ov.className='vtov'; ov.id='vtov';
+    ov.innerHTML='<div class="vtcard">'
+      +'<div class="vthd"><b>🎬 Visualize</b><span>turn any line into a quick explainer</span><button class="vtx" id="vtX">✕</button></div>'
+      +'<div class="vtphase" id="vtP1"><div class="vtnote"><span class="vttext" id="vtText">'+sent+'</span></div>'
+        +'<button class="vtbtn" id="vtBtn">🎬 Visualize this</button>'
+        +'<div class="vtcursor" id="vtCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div></div>'
+      +'<div class="vtphase2" id="vtP2" style="display:none"><div class="vtstage"><div id="vtStage"></div></div><div class="vtcap" id="vtCap"></div></div>'
+      +'<button class="vtgot" id="vtGot">Got it — I\'ll try it ✨</button></div>';
+    document.body.appendChild(ov);
+    document.getElementById('vtX').onclick=closeVt;
+    document.getElementById('vtGot').onclick=closeVt;
+    ov.addEventListener('click',function(e){ if(e.target===ov)closeVt(); });
+
+    var $id=function(id){return document.getElementById(id);};
+    _vtTos=[];
+    vtT(250,function(){ var t=$id('vtText'); if(t)t.classList.add('sel'); var c=$id('vtCur'); if(c){c.style.left='84%';c.style.top='30px';} });   // sweep the highlight, cursor trails the selection
+    vtT(1550,function(){ var b=$id('vtBtn'); if(b)b.classList.add('show'); });                                        // the button appears
+    vtT(1800,function(){ var c=$id('vtCur'); if(c){c.style.left='50%';c.style.top='86px';} });                        // cursor moves to it
+    vtT(2450,function(){ var b=$id('vtBtn'); if(b)b.classList.add('clicked'); });                                     // click
+    vtT(2800,function(){                                                                                              // → the explainer plays
+      var p1=$id('vtP1'),p2=$id('vtP2'); if(p1)p1.style.display='none'; if(p2)p2.style.display='block';
+      teaserDraw($id('vtStage'),0); var cap=$id('vtCap'); if(cap)cap.textContent=vtCap(_tzBP,0);
+      var n=(_tzBP.narration_steps||[]).length;
+      if(_tzT)clearInterval(_tzT);
+      _tzT=setInterval(function(){ var e=$id('vtStage'); if(!e){clearInterval(_tzT);_tzT=null;return;}
+        _tzK++; if(_tzK>=n){clearInterval(_tzT);_tzT=null; return;} teaserDraw(e,_tzK); var cp=$id('vtCap'); if(cp)cp.textContent=vtCap(_tzBP,_tzK); },1600);
+    });
   }catch(e){} };
 
   /* ===== One-time onboarding: the first time a student opens a note, show the scripted
