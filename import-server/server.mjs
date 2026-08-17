@@ -357,6 +357,15 @@ async function uploadPodcastAudio(path, buf){
 
 app.get("/health", (_req,res)=>res.json({ ok:true }));
 
+/* who am I + plan — lets the app show the current plan (reads the real isPremium check) */
+app.get("/me", async (req,res)=>{
+  try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const premium = await isPremium(user.id).catch(()=>false);
+    const isTest = PREMIUM_TEST.length>0 && PREMIUM_TEST.indexOf((user.email||"").toLowerCase())>=0;
+    res.json({ ok:true, email:user.email||"", premium, test:(premium && isTest) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ===================================================================
  * Passive lexicon growth: harvest unusual medical terms from each imported
  * lecture, learn their pronunciation once (LLM), store in Supabase and merge

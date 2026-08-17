@@ -745,6 +745,9 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .artab{flex:1;border:none;background:transparent;border-radius:9px;padding:9px 6px;font-weight:800;font-size:13.5px;color:var(--dim);cursor:pointer;font-family:inherit}
 .artab.on{background:var(--accent);color:#fff}
 .arempty{border:1px dashed var(--line);border-radius:12px;padding:22px 16px;text-align:center;color:var(--dim);font-size:13.5px;background:var(--panel)}
+.planbadge{font-size:12.5px;font-weight:800;padding:5px 13px;border-radius:999px;background:var(--panel2);color:var(--dim);white-space:nowrap}
+.planbadge.prem{background:#eeedfe;color:#5b21b6}
+.planbadge.free{background:#f1eef7;color:#5c5570}
 /* review pipeline (Today) */
 .pipe{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px}
 .pipe-hd{font-size:12px;color:var(--dimmer);font-weight:600;margin-bottom:4px}
@@ -1036,7 +1039,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16e';   // bump this each release
+const APP_VERSION='2026.08.16g';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -3724,6 +3727,18 @@ async function enableReminders(){
 function disableReminders(){ DATA.settings.remindOn=false; persist(); render(); }
 let settingsTab='study';
 function setSettingsTab(t){ settingsTab=t; render(); window.scrollTo(0,0); }
+async function loadPlanBadge(){
+  var el=document.getElementById('planBadge'); if(!el) return;
+  try{
+    var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB){ el.textContent='—'; return; }
+    var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token; if(!tok){ el.textContent='—'; return; }
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/me',{headers:{'Authorization':'Bearer '+tok}});
+    var j=await r.json().catch(function(){return{};}); el=document.getElementById('planBadge'); if(!el)return;
+    if(r.ok && j.premium){ el.className='planbadge prem'; el.textContent=j.test?'★ Premium · test':'★ Premium'; }
+    else if(r.ok){ el.className='planbadge free'; el.textContent='Basic'; }
+    else { el.textContent='—'; }
+  }catch(e){ if(el)el.textContent='—'; }
+}
 function pageSettings(){
   const d=DATA.daily, s=DATA.settings;
   const perm=('Notification' in window)?Notification.permission:'unsupported';
@@ -3789,6 +3804,8 @@ function pageSettings(){
       <button class="btn primary" id="installbtn" onclick="doInstall()" style="display:none">Install</button></div>
 
     <h2>App</h2>
+    <div class="setrow"><div><b>Plan</b><span>Premium unlocks Solve, 10 explainers a day, and the premium podcast voices.</span></div>
+      <span id="planBadge" class="planbadge">…</span></div>
     <div class="setrow"><div><b>Version &amp; updates</b><span>Version ${APP_VERSION}. After I push a new version, tap here to load it — this clears the offline cache and reloads the latest.</span></div>
       <button class="btn primary" id="updbtn" onclick="forceUpdate()">↻ Check for updates</button></div>`;
 
@@ -4468,6 +4485,7 @@ function render(){
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
+  if(p[0]==='settings' && window.loadPlanBadge) setTimeout(loadPlanBadge,40);
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
@@ -5384,7 +5402,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     return j;
   }
   function setQuota(q){ var el=$('vizQuota'); if(!el)return; if(!q||q.remaining==null){ el.textContent=''; return; }
-    el.textContent=q.remaining+' left today'; el.className='vizq'+(q.remaining<=1?' low':''); el.title=(q.premium?'Premium':'Free plan')+': '+q.limit+'/day'; }
+    el.textContent=q.remaining+' left today'; el.className='vizq'+(q.remaining<=1?' low':''); el.title=(q.premium?'Premium':'Basic')+': '+q.limit+'/day'; }
   window.aiVisualize=async function(text, topicName, topicId){
     openModal();
     var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
