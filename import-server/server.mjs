@@ -292,16 +292,24 @@ async function fishTTS(text, voiceId){
 }
 /* Kokoro (open model) via a hosted endpoint you point KOKORO_TTS_URL at (Deepinfra,
  * Replicate, or your own). Near-zero cost. Medical terms fixed via kokoroPrep(). */
-async function kokoroTTS(text, voiceId){
+async function kokoroTTS(text, voiceId, _retry){
   const url = process.env.KOKORO_TTS_URL;
   if(!url) throw new Error("KOKORO_TTS_URL not set on the server");
   const key = process.env.KOKORO_API_KEY;   // optional — Kokoro-FastAPI needs none by default
-  const r = await fetch(url, {              // KOKORO_TTS_URL = the FULL endpoint, e.g. https://HOST/v1/audio/speech
-    method:"POST",
-    headers: Object.assign({ "Content-Type":"application/json" }, key ? { "Authorization":"Bearer "+key } : {}),
-    // OpenAI-compatible body → works with Kokoro-FastAPI, Deepinfra, and OpenAI
-    body: JSON.stringify({ model: process.env.KOKORO_MODEL || "kokoro", input: text, voice: voiceId || KOKORO_DEFAULT.read, response_format: "mp3" }) });
-  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("Kokoro voice failed ("+r.status+"): "+t.slice(0,160)); }
+  const ctrl = new AbortController(); const to = setTimeout(()=>ctrl.abort(), 30000);   // don't hang forever on a slow/dead host
+  let r;
+  try{
+    r = await fetch(url, {                  // KOKORO_TTS_URL = the FULL endpoint, e.g. https://HOST/v1/audio/speech
+      method:"POST", signal: ctrl.signal,
+      headers: Object.assign({ "Content-Type":"application/json" }, key ? { "Authorization":"Bearer "+key } : {}),
+      // OpenAI-compatible body → works with Kokoro-FastAPI, Deepinfra, and OpenAI
+      body: JSON.stringify({ model: process.env.KOKORO_MODEL || "kokoro", input: text, voice: voiceId || KOKORO_DEFAULT.read, response_format: "mp3" }) });
+  }catch(e){ clearTimeout(to); if(!_retry) return kokoroTTS(text, voiceId, true); throw new Error("Kokoro voice timed out — the voice host isn't responding"); }
+  clearTimeout(to);
+  if(!r.ok){
+    if((r.status>=500 || r.status===429) && !_retry){ await new Promise(s=>setTimeout(s,600)); return kokoroTTS(text, voiceId, true); }   // one quick retry on a transient host error
+    const t=await r.text().catch(()=> ""); throw new Error("Kokoro voice failed ("+r.status+"): "+t.slice(0,160));
+  }
   return Buffer.from(await r.arrayBuffer());
 }
 /* is a provider actually configured on this host yet? */
@@ -323,15 +331,9 @@ async function ttsClip(provider, text, voiceId){
   const key = _ttsKey(p, voiceId, spoken);
   if(_ttsCache.has(key)) return _ttsCache.get(key);
   let buf;
-  try{
-    if(p==="fish")        buf = await fishTTS(spoken, voiceId);
-    else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
-    else                  buf = await openaiTTS(spoken, voiceId);
-  }catch(err){
-    // the chosen host had a transient failure (e.g. Kokoro 502) — fall back to OpenAI so the podcast still generates
-    if(p!=="openai" && process.env.OPENAI_API_KEY){ console.warn("[tts] "+p+" failed, falling back to OpenAI:", (err&&err.message||"").slice(0,120)); buf = await openaiTTS(sayPrep(text), voiceId); }
-    else throw err;
-  }
+  if(p==="fish")        buf = await fishTTS(spoken, voiceId);
+  else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
+  else                  buf = await openaiTTS(spoken, voiceId);
   _ttsCache.set(key, buf);
   if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
   return buf;
@@ -559,12 +561,17 @@ app.post("/podcast-audio", async (req,res)=>{
     else { const n = _podRot.get(user.id)||0; provider = (n % 3 === 2) ? "kokoro" : "fish"; _podRot.set(user.id, n+1); }
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
     else { vA = process.env.FISH_VOICE_A || voiceA; vB = process.env.FISH_VOICE_B || voiceB; }
-    const urls=[];
-    for(let i=0;i<script.length;i++){
-      const vid = script[i].speaker==="A" ? vA : vB;
-      const buf = await ttsClip(provider, script[i].text, vid);
-      urls.push(await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf));
+    const urls = new Array(script.length);
+    let _idx = 0; const CONC = 4;   // generate up to 4 clips at once — was sequential (minutes); now ~30-45s
+    async function _worker(){
+      while(_idx < script.length){
+        const i = _idx++;
+        const vid = script[i].speaker==="A" ? vA : vB;
+        const buf = await ttsClip(provider, script[i].text, vid);
+        urls[i] = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
+      }
     }
+    await Promise.all(Array.from({length:Math.min(CONC, script.length)}, _worker));
     extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]:urls });
     await admin.from("topics").update({ extras }).eq("id",topic_id);
     res.json({ ok:true, urls, lines:script });
