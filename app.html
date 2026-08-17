@@ -739,6 +739,17 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .artab{flex:1;border:none;background:transparent;border-radius:9px;padding:9px 6px;font-weight:800;font-size:13.5px;color:var(--dim);cursor:pointer;font-family:inherit}
 .artab.on{background:var(--accent);color:#fff}
 .arempty{border:1px dashed var(--line);border-radius:12px;padding:22px 16px;text-align:center;color:var(--dim);font-size:13.5px;background:var(--panel)}
+/* review pipeline (Today) */
+.pipe{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:14px}
+.pipe-hd{font-size:12px;color:var(--dimmer);font-weight:600;margin-bottom:4px}
+.pipe-list{position:relative}
+.pipe-list:before{content:'';position:absolute;left:6px;top:24px;bottom:24px;width:2px;background:var(--line)}
+.pipe-row{display:flex;align-items:center;gap:12px;padding:11px 0}
+.pipe-dot{flex:0 0 14px;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 3px var(--panel);position:relative;z-index:1}
+.pipe-lab{flex:1;font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pipe-n{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.pipe-drill{flex:0 0 auto;border:none;color:#fff;border-radius:20px;font-weight:800;font-size:12px;padding:6px 15px;cursor:pointer;font-family:inherit}
+.pipe-drill:hover{filter:brightness(.93)}
 .fcast,.weakcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:14px}
 .fcast-lab,.weak-lab{font-size:12px;color:var(--dimmer);margin-bottom:10px}
 .fcast-bars{display:flex;align-items:flex-end;gap:8px;height:82px}
@@ -1019,7 +1030,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15y';   // bump this each release
+const APP_VERSION='2026.08.16a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1197,7 +1208,6 @@ function cardActionsRow(id,deck){
   return `<div class="btnrow" style="margin-top:12px;gap:8px;flex-wrap:wrap;justify-content:center">
     <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();startEditCard('${id}')">✎ Edit</button>
     <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();regenCard('${id}','${deck}',this)">↻ Regenerate</button>
-    <button class="btn" style="font-size:12.5px;padding:7px 11px" onclick="event.stopPropagation();flagCard('${id}')">⚑ Report wrong</button>
   </div>`;
 }
 function cardEditor(id,deck,c){
@@ -2980,6 +2990,20 @@ function pageToday(){
   const hard=b.counts['hard']||0, neu=b.counts['new']||0;
   const reviews=(b.counts['d1']||0)+(b.counts['d3']||0)+(b.counts['wk']||0)+(b.counts['fn']||0);
   const hcls=h.pct>=85?'ok':(h.pct>=60?'warn':'bad');
+  // review pipeline (Today) — New → 24h → 3-day → Weekly → 2-week; hard cards + confidence check excluded (reachable elsewhere)
+  const STAGECOL={'new':'#64748b','d1':'#f59e0b','d3':'#2563eb','wk':'#16a34a','fn':'#7c3aed'};
+  const STAGES=[['new','New cards'],['d1','24-hour reviews'],['d3','3-day reviews'],['wk','Weekly reviews'],['fn','2-week reviews']];
+  const pipeRows=STAGES.filter(([k])=>b.counts[k]>0);
+  const pipeHTML=pipeRows.length?`<div class="pipe">
+      <div class="pipe-hd">Today by review stage</div>
+      <div class="pipe-list">
+        ${pipeRows.map(([k,lab])=>`<div class="pipe-row">
+          <span class="pipe-dot" style="background:${STAGECOL[k]}"></span>
+          <span class="pipe-lab">${lab}</span>
+          <span class="pipe-n">${b.counts[k]}</span>
+          <button class="pipe-drill" style="background:${STAGECOL[k]}" onclick="startBucket('${k}')">Drill →</button>
+        </div>`).join('')}
+      </div></div>`:'';
 
   const hero = total>0
     ? `<div class="arhero">
@@ -3010,13 +3034,13 @@ function pageToday(){
         <div class="arbar"><div class="dbar"><div style="width:${goalPct}%"></div><i class="floormark" style="left:${Math.min(100,floor/goal*100)}%"></i></div>
           <span>${tl.cards} / ${goal} cards today${tl.cards>=goal?' 🎉':hitFloor?' · floor met ✓':''}</span></div>
         ${b.over>0?`<div class="arover">+${b.over} more due — held for tomorrow to fit your ${budget}-min budget.</div>`:''}
-        <details class="ardetails"><summary>Review stages — new · 24h · 3-day · weekly · 2-week</summary><div class="arrows" style="margin-top:8px">${rows}</div></details>
       </div>
       <div class="artiles">
         <div class="artile" onclick="go('duenow')"><b style="color:${h.overdue?'#b45309':'var(--recall)'}">${h.overdue}</b><span>overdue</span></div>
         <div class="artile"><b>${h.topicsWaiting}</b><span>topics waiting</span></div>
       </div>
-    </div>` : `<div class="arempty">You're caught up — nothing due right now. Learn something new below, or head to Practice.</div>`}
+    </div>
+    ${pipeHTML}` : `<div class="arempty">You're caught up — nothing due right now. Learn something new below, or head to Practice.</div>`}
     <div class="btnrow" style="margin-top:12px"><button class="btn" onclick="go('plan')">🗓 This week's topics${planCount()?' · '+planCount():''}</button></div>
     ${nextNew?`<details class="ardetails" style="margin-top:14px"><summary>Learn something new</summary>
       <div class="plan" style="margin-top:10px">${planItem('','✎',`Next topic: ${esc(nextNew.name)}`,
@@ -3379,9 +3403,10 @@ function hideSwipeHint(){ var d=document.getElementById('mbSwipeHint'); if(d){ d
 function swipeAct(dir){
   if(!/^#\/(study|review|hard)/.test(location.hash)||!S) return;
   const it=S.items[S.order[S.i]]; if(!it) return;
-  markSwipeUsed();                                                        // any swipe = feature learned
-  if(dir==='up'){ if(window.navigator&&navigator.vibrate)try{navigator.vibrate(15);}catch(e){} toggleStar(it.id); return; }
-  if(dir==='right'){ if(S.i>0){ _mbViaSwipe=true; step(-1); } return; }   // previous
+  if(dir==='up') return;                                                  // up does nothing — starring by accident was too easy
+  markSwipeUsed();                                                        // a left/right swipe = feature learned
+  if(dir==='right'){ if(S.i>0){ _mbViaSwipe=true; step(-1); } return;
+  }   // previous
   if(dir==='left'){                                                       // next / skip
     _mbViaSwipe=true;
     if(isMcqCard(it)){ mcqNext(); }
