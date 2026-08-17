@@ -292,23 +292,29 @@ async function podcastScript(level, note, model){
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
   try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.lines)) ? o.lines.filter(l=>l&&l.text&&(l.speaker==="A"||l.speaker==="B")) : null; }catch(_){ return null; }
 }
-async function openaiTTS(text, voice){
+async function openaiTTS(text, voice, _retry){
   const key = process.env.OPENAI_API_KEY; if(!key) throw new Error("OPENAI_API_KEY not set on the server");
-  const r = await fetch("https://api.openai.com/v1/audio/speech", {
-    method:"POST", headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json" },
+  const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),30000); let r;
+  try{ r = await fetch("https://api.openai.com/v1/audio/speech", {
+    method:"POST", signal:ctrl.signal, headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json" },
     body: JSON.stringify({ model: process.env.OPENAI_TTS_MODEL || "tts-1", voice: voice||"nova", input: text, response_format:"mp3" }) });
-  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("OpenAI voice failed ("+r.status+"): "+t.slice(0,160)); }
+  }catch(e){ clearTimeout(to); if(!_retry) return openaiTTS(text,voice,true); throw new Error("OpenAI voice timed out"); }
+  clearTimeout(to);
+  if(!r.ok){ if((r.status>=500||r.status===429)&&!_retry){ await new Promise(s=>setTimeout(s,900)); return openaiTTS(text,voice,true); } const t=await r.text().catch(()=> ""); throw new Error("OpenAI voice failed ("+r.status+"): "+t.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
 /* Fish Audio (hosted) — natural voices, same price tier as OpenAI, more voices.
  * Used for the AI tutor and most premium podcasts. Voice = reference_id. */
-async function fishTTS(text, voiceId){
+async function fishTTS(text, voiceId, _retry){
   const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
-  const r = await fetch("https://api.fish.audio/v1/tts", {
-    method:"POST",
+  const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),30000); let r;
+  try{ r = await fetch("https://api.fish.audio/v1/tts", {
+    method:"POST", signal:ctrl.signal,
     headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
     body: JSON.stringify({ text, reference_id: voiceId || process.env.FISH_VOICE_A, format:"mp3" }) });
-  if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
+  }catch(e){ clearTimeout(to); if(!_retry) return fishTTS(text,voiceId,true); throw new Error("Fish voice timed out"); }
+  clearTimeout(to);
+  if(!r.ok){ if((r.status>=500||r.status===429)&&!_retry){ await new Promise(s=>setTimeout(s,900)); return fishTTS(text,voiceId,true); } const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
 /* Kokoro (open model) via a hosted endpoint you point KOKORO_TTS_URL at (Deepinfra,
@@ -345,8 +351,7 @@ const _ttsCache = new Map(); const _TTS_MAX = 400;
 function _ttsKey(p, voiceId, text){ return createHash("md5").update(p+"|"+(voiceId||"")+"|"+text).digest("hex"); }
 /* one clip via the chosen provider; if that provider isn't set up yet, fall back to
  * OpenAI so audio keeps working until you add the new keys. */
-async function ttsClip(provider, text, voiceId){
-  const p = providerReady(provider) ? provider : "openai";
+async function _ttsRaw(p, text, voiceId){
   // STRICT: every clip passes through medical pronunciation prep before it is spoken.
   const spoken = (p==="kokoro") ? kokoroPrep(text) : sayPrep(text);
   const key = _ttsKey(p, voiceId, spoken);
@@ -358,6 +363,18 @@ async function ttsClip(provider, text, voiceId){
   _ttsCache.set(key, buf);
   if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
   return buf;
+}
+async function ttsClip(provider, text, voiceId, kokoroVoice){
+  const p = providerReady(provider) ? provider : "openai";
+  try{ return await _ttsRaw(p, text, voiceId); }
+  catch(err){
+    // a PREMIUM engine (Fish/OpenAI) failed or got rate-limited → degrade to Kokoro so the episode still finishes
+    if(p!=="kokoro" && process.env.KOKORO_TTS_URL){
+      console.warn("[tts] "+p+" failed, Kokoro fallback:", (err&&err.message||"").slice(0,100));
+      return await _ttsRaw("kokoro", text, kokoroVoice || KOKORO_DEFAULT.read);
+    }
+    throw err;   // basic (kokoro) has no premium fallback by design
+  }
 }
 async function uploadPodcastAudio(path, buf){
   const up = await admin.storage.from("podcasts").upload(path, buf, { contentType:"audio/mpeg", upsert:true });
@@ -591,13 +608,15 @@ app.post("/podcast-audio", async (req,res)=>{
     else { const n = _podRot.get(user.id)||0; provider = (n % 3 === 2) ? "kokoro" : "fish"; _podRot.set(user.id, n+1); }
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
     else { vA = process.env.FISH_VOICE_A || voiceA; vB = process.env.FISH_VOICE_B || voiceB; }
+    const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
     const urls = new Array(script.length);
-    let _idx = 0; const CONC = 4;   // generate up to 4 clips at once — was sequential (minutes); now ~30-45s
+    let _idx = 0; const CONC = 2;   // 2 at a time — parallel enough to be fast, gentle on provider rate limits (429s)
     async function _worker(){
       while(_idx < script.length){
         const i = _idx++;
         const vid = script[i].speaker==="A" ? vA : vB;
-        const buf = await ttsClip(provider, script[i].text, vid);
+        const kvid = script[i].speaker==="A" ? kA : kB;   // Kokoro voice to use if the premium engine falls back
+        const buf = await ttsClip(provider, script[i].text, vid, kvid);
         urls[i] = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
       }
     }
