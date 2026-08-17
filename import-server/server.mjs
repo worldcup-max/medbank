@@ -788,6 +788,20 @@ Return ONLY JSON: {"text":"the simpler explanation"}`;
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* ---- "Let AI explain" — highlighted note text → step-by-step explanation.
+ * Routed through DeepSeek V4 Flash (BASIC_MODEL) on the server; no Puter, no browser sign-in. ---- */
+app.post("/explain", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const prompt = (req.body.prompt||"").toString().slice(0,8000);
+    if(!prompt) return res.status(400).json({ error:"nothing to explain" });
+    const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:900, temperature:0.4 });
+    const out = (gen.text||"").toString().trim();
+    if(!out) return res.status(502).json({ error:"try again" });
+    res.json({ ok:true, text:out });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Admin: edit build prompts per kind × level (only is_admin accounts) ---- */
 async function requireAdmin(req){
   const user = await getUser(req); if(!user) return null;
