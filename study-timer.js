@@ -254,7 +254,7 @@
     if(counting) addSec();
     // idle genie: warn while reading (before the 2-min stop); skip during a video so its voice doesn't clash
     var inactive=Date.now()-lastActivity;
-    if(visible && inactive>WARN_MS && isStudying() && !document.querySelector("#vizov, .vizinlinebody")) showGenie();
+    if(visible && inactive>WARN_MS && isStudying() && !document.querySelector("#vizov, .vizinlinebody")) armGenie();
     else if(genieUp) hideGenie();
     paint();
   }
@@ -299,26 +299,39 @@
       +'<line x1="28" y1="46" x2="31" y2="47.5" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>'
       +'<circle class="mbgPing" cx="28" cy="46" r="11" fill="none" stroke="#f59e0b" stroke-width="2" style="transform-origin:28px 46px"/>'
     +'</g></svg>';
-  function speakGenie(msg){ if(muted) return;
-    try{ if(window.voiceSpeak){ window.voiceSpeak(msg,null,"read"); return; } }catch(_){}
-    try{ if(window.speechSynthesis){ var u=new SpeechSynthesisUtterance(msg); u.rate=1; speechSynthesis.cancel(); speechSynthesis.speak(u); } }catch(_){}
+  var geniePending=false, _geniePlay=null;
+  function speakGenieFallback(msg){ if(muted) return;   // last resort only (offline / no AI ready) — the server voice pipeline, never device
+    try{ if(window.voiceSpeak){ window.voiceSpeak(msg,null,"read"); } }catch(_){}
   }
-  function showGenie(){ if(genieUp||!dot) return;
+  function stillIdle(){ return visible && !genieUp && isStudying() && (Date.now()-lastActivity)>WARN_MS && !document.querySelector("#vizov, .vizinlinebody"); }
+  /* prepare the AI voice FIRST, then reveal the genie + start the voice at the same instant (no lag) */
+  function armGenie(){ if(genieUp||geniePending) return; geniePending=true;
+    var msg=GENIE_LINES[Math.floor(Math.random()*GENIE_LINES.length)];
+    if(muted || !window.mbPrepareVoice){ geniePending=false; if(stillIdle())showGenie(msg,null); return; }
+    var to=setTimeout(function(){ if(geniePending){ geniePending=false; if(stillIdle())showGenie(msg,null); } }, 4500);   // don't wait forever for TTS
+    window.mbPrepareVoice(msg).then(function(playObj){
+      if(!geniePending){ if(playObj&&playObj.cancel)playObj.cancel(); return; }   // superseded / cancelled
+      clearTimeout(to); geniePending=false;
+      if(stillIdle()) showGenie(msg, playObj); else if(playObj&&playObj.cancel) playObj.cancel();
+    }).catch(function(){ clearTimeout(to); geniePending=false; if(stillIdle())showGenie(msg,null); });
+  }
+  function showGenie(msg, playObj){ if(genieUp||!dot){ if(playObj&&playObj.cancel)playObj.cancel(); return; }
     try{
       var r=dot.getBoundingClientRect();
       var g=document.createElement("div"); g.id="mbGenie";
       g.style.left=(r.left+r.width/2)+"px"; g.style.top=(r.top+r.height/2-4)+"px";
-      var msg=GENIE_LINES[Math.floor(Math.random()*GENIE_LINES.length)];
       g.innerHTML='<div class="mbgWrap">'+GENIE_SVG+'<div class="mbgBubble"><span class="mbgClose">✕</span>'+msg+'</div></div>';
       document.body.appendChild(g); genieUp=true;
       if(window.innerWidth<=560){ var bub=g.querySelector(".mbgBubble"); if(bub)bub.classList.add("below"); }   // phone: drop the bubble under the genie so it fits
       var gx=parseFloat(g.style.left)||0, halfW=68;                                                            // keep the whole genie on-screen
       if(gx<halfW+6) g.style.left=(halfW+6)+"px"; else if(gx>window.innerWidth-halfW-6) g.style.left=(window.innerWidth-halfW-6)+"px";
       g.addEventListener("click", function(){ bump(); });   // tapping the genie counts as activity + dismisses
-      speakGenie(msg);
-    }catch(_){}
+      _geniePlay=playObj||null;
+      if(!muted){ if(playObj&&playObj.play) playObj.play(); else speakGenieFallback(msg); }   // voice starts exactly as the genie appears
+    }catch(_){ if(playObj&&playObj.cancel)playObj.cancel(); }
   }
   function hideGenie(){ if(!genieUp) return; genieUp=false;
+    if(_geniePlay&&_geniePlay.cancel){ try{_geniePlay.cancel();}catch(_){} } _geniePlay=null;
     try{ if(window.stopSpeak)stopSpeak(); }catch(_){}
     var g=document.getElementById("mbGenie"); if(g){ g.style.transition="opacity .25s"; g.style.opacity="0"; setTimeout(function(){ if(g&&g.parentNode)g.remove(); },260); }
   }

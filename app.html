@@ -288,6 +288,13 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .mcqtext{flex:1}
 .mcqmark{margin-left:auto;font-weight:800;font-size:17px}
 .mcqopt.removed{opacity:.38;text-decoration:line-through;border-style:dashed;cursor:default}
+/* swipe-to-next onboarding hint */
+#mbSwipeHint{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:9600;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;transition:opacity .25s;opacity:1}
+#mbSwipeHint .shcard{position:relative;width:96px;height:64px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 30px rgba(28,20,45,.22);animation:shcard 1.8s ease-in-out infinite}
+#mbSwipeHint .shhand{position:absolute;right:-6px;top:34px;width:26px;height:26px;border-radius:50%;background:#6d28d9;box-shadow:0 4px 12px rgba(109,40,217,.5);animation:shhand 1.8s ease-in-out infinite}
+#mbSwipeHint .shtxt{background:#141026;color:#fff;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:999px;box-shadow:0 8px 20px rgba(20,12,38,.3)}
+@keyframes shcard{0%,100%{transform:translateX(14px) rotate(2deg)}45%{transform:translateX(-18px) rotate(-3deg)}}
+@keyframes shhand{0%,100%{transform:translateX(14px)}45%{transform:translateX(-30px)}}
 .hintbtn{display:block;width:100%;margin-top:6px;background:#f6ecda;border:1px solid #e6cf9a;color:#8a5a12;border-radius:11px;padding:10px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
 .hintbtn:hover{background:#f0e2c4}
 .mcqopt.correct{border-color:var(--recall);background:#3ecf8e1c}
@@ -997,7 +1004,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15q';   // bump this each release
+const APP_VERSION='2026.08.15u';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1008,6 +1015,7 @@ let DATA = (()=>{
   d.cards    = d.cards    || {};  // cardId -> {box,due,seen,lapses}
   d.topics   = d.topics   || {};  // topicId -> 'inprogress' | 'complete'
   d.pos      = d.pos      || {};  // deckKey -> last card index
+  d.cardAns  = d.cardAns  || {};  // cardId -> chosen option index (topic-quiz answers persist until Reset)
   d.log      = d.log      || {};  // 'YYYY-MM-DD' -> {cards,correct}
   d.study    = d.study    || {};  // 'YYYY-MM-DD' -> seconds studied (synced with the account)
   d.streak   = d.streak   || {current:0,best:0,last:'',lastN:null,frozen:[]};
@@ -1321,6 +1329,20 @@ function voiceSpeak(text, cb, use){
   unlockAudio();
   serverSpeak(text, cb, use).then(function(ok){ if(!ok){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); } });
 }
+/* Pre-fetch an AI-voice clip WITHOUT playing it. Resolves to {play, cancel} once the audio is ready,
+   so a caller (e.g. the study genie) can reveal itself and start the voice at the same instant. */
+window.mbPrepareVoice = async function(text){
+  try{
+    unlockAudio();
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return null;
+    const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return null;
+    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,600),voice:(DATA.settings&&DATA.settings.ttsVoiceAI)||'nova',use:'read'})});
+    if(!r.ok) return null;
+    const url=URL.createObjectURL(await r.blob());
+    return { play:function(){ playCloudSrc(url,null); },                       // plays on the already-unlocked audio element (instant — blob is cached)
+             cancel:function(){ try{stopCloud();}catch(e){} try{URL.revokeObjectURL(url);}catch(e){} } };
+  }catch(e){ return null; }
+};
 function speak(text){ if(cloudVoiceOn()){ cloudSpeak(text,null); return; }
   try{ if(!ttsOn())return; const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
   speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
@@ -3025,18 +3047,23 @@ function mcqView(session){
   if(EDITING===it.id) return '<div class="studywrap">'+cardEditor(it.id,'recall',c)+'</div>';
   const col='var(--recall)';
   const n=S.items.length, pctBar=((S.i+1)/n*100).toFixed(1), star=isStar(it.id);
-  const picked = S.pick!=null, correct = picked && S.pick===c.ans;
+  const _sa=(S.answered&&S.answered[it.id]!=null)?S.answered[it.id]:null;                       // answered earlier this session
+  const _pa=(S.mode==='deck'&&DATA.cardAns&&DATA.cardAns[it.id]!=null)?DATA.cardAns[it.id]:null; // topic quiz: answered on a previous day
+  const storedPick = _sa!=null?_sa:_pa;
+  const picked = S.pick!=null || storedPick!=null;
+  const pickIdx = S.pick!=null?S.pick:storedPick;
+  const correct = picked && pickIdx===c.ans;
   const isHard = !!(DATA.starred[it.id] || (DATA.cards[it.id]&&DATA.cards[it.id].box<0));
   let body;
-  if(!S.opts){
+  if(!S.opts && !picked){
     body = `<div class="taphint">Think of your answer first — then reveal the options.</div>`;
   }else{
     const optsHtml = c.opts.map((o,i)=>{
       let cls='mcqopt';
       const removed = (!picked && S.hint && S.hintHide && S.hintHide.indexOf(i)>=0);
-      if(picked){ if(i===c.ans) cls+=' correct'; else if(i===S.pick) cls+=' wrong'; else cls+=' dim'; }
+      if(picked){ if(i===c.ans) cls+=' correct'; else if(i===pickIdx) cls+=' wrong'; else cls+=' dim'; }
       else if(removed) cls+=' removed';
-      const mark = picked ? (i===c.ans?'<span class="mcqmark">✓</span>':(i===S.pick?'<span class="mcqmark">✗</span>':'')) : '';
+      const mark = picked ? (i===c.ans?'<span class="mcqmark">✓</span>':(i===pickIdx?'<span class="mcqmark">✗</span>':'')) : '';
       return `<button class="${cls}" ${(picked||removed)?'disabled':''} onclick="event.stopPropagation();pickOpt(${i})">
           <span class="mcqtag">${String.fromCharCode(65+i)}</span><span class="mcqtext">${esc(o)}</span>${mark}</button>`;
     }).join('');
@@ -3049,7 +3076,7 @@ function mcqView(session){
       body += `<div class="mcqresult ${correct?'ok':'no'}" id="mcqAnswerTop">${correct?'✓ Correct':'✗ Not quite — added to your hard cards ★'}</div>`
             + `<div class="nextrev ${correct?'ok':'no'}">↻ You'll see this again <b>${revTxt}</b>${correct?'':' · it\'s now a hard card (also in your reminders)'}</div>`
             + `<div class="ansblock"><div class="seg"><div class="seglabel" style="background:#3ecf8e22;color:var(--recall)">Answer — explained</div><div class="body">${para(c.a)}</div></div></div>`
-            + `<div class="vizmiss">${(window.DATA&&DATA.cardViz&&DATA.cardViz[it.id])
+            + `<div class="vizmiss" onclick="event.stopPropagation()">${(window.DATA&&DATA.cardViz&&DATA.cardViz[it.id])
                  ? `<button class="vizsavedbtn" onclick="event.stopPropagation();vizWatchSaved()">▶ Watch your explainer <span class="vsaved">saved for this card</span></button>`
                  : `<button class="vizmissbtn" onclick="event.stopPropagation();vizFromCard()">🎬 Visualize how to get this answer</button>`}<div id="vizInlineHost" class="vizinlinehost"></div></div>`;
     }
@@ -3062,7 +3089,7 @@ function mcqView(session){
       ${deck?`<button class="btn" onclick="event.stopPropagation();restartDeck()">↺ Restart</button>`:''}
     </div>`;
   let controls;
-  if(!S.opts){
+  if(!S.opts && !picked){
     controls = `<div class="navbtns"><button class="btn primary" onclick="event.stopPropagation();showOpts()">Show options</button></div>${navRow}
       <div class="kbd">Space/O options · you can Skip, Prev or Shuffle without answering · ←/→ move · S shuffle</div>`;
   }else if(!picked){
@@ -3174,7 +3201,11 @@ function mcqHint(){                             // 50-50: knock out two wrong op
 function pickOpt(i){
   if(!S) return; const it=S.items[S.order[S.i]]; if(!it||S.pick!=null||!isMcqCard(it)) return;
   if(S.hint && S.hintHide && S.hintHide.indexOf(i)>=0) return;   // removed by the hint — not selectable
+  S.answered=S.answered||{};
+  const alreadyAns = S.answered[it.id]!=null || (S.mode==='deck'&&DATA.cardAns&&DATA.cardAns[it.id]!=null);
+  if(alreadyAns){ S.pick=null; render(); return; }              // answered before → just show it, never re-rate
   const c=it.c, ok=(i===c.ans);
+  S.answered[it.id]=i; if(S.mode==='deck'){ DATA.cardAns=DATA.cardAns||{}; DATA.cardAns[it.id]=i; }   // remember the choice
   S.pick=i; S.show=true;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
@@ -3212,6 +3243,7 @@ function vizWatchSaved(){                       // replay the explainer already 
 }
 function mcqNext(){
   if(!S) return; if(window.vizInlineStop)vizInlineStop();
+  if(_mbViaSwipe){ _mbViaSwipe=false; } else bumpNext();
   if(S.i>=S.items.length-1){
     if(S.mode!=='deck'){ S.i=S.items.length; render(); window.scrollTo(0,0); return; }
     S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); return;   // deck: stay on last card
@@ -3226,14 +3258,16 @@ function reveal(){
   if(!S.show){ markActive(); if(it) touchTopic(it.t.id); }
   S.show=!S.show; render();
 }
-function step(d){ if(!S)return; if(window.vizInlineStop)vizInlineStop(); const n=S.i+d; if(n<0||n>=S.items.length)return;
+function step(d){ if(!S)return; _mbViaSwipe=false; if(window.vizInlineStop)vizInlineStop(); const n=S.i+d; if(n<0||n>=S.items.length)return;
   S.i=n; S.show=false; S.opts=false; S.pick=null; S.hint=false; S.hintHide=null;
   if(S.mode==='deck'){ DATA.pos['pos:'+S.t.id+S.deck]=S.i; persist(); }
   render(); window.scrollTo(0,0);
 }
 function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;render(); }
 function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;S.order=S.items.map((_,k)=>k);
-  if(S.mode==='deck'){DATA.pos['pos:'+S.t.id+S.deck]=0;persist();} render(); }
+  S.answered={};                                                             // Reset wipes your answers → questions show as unanswered again
+  if(S.mode==='deck'){ DATA.cardAns=DATA.cardAns||{}; S.items.forEach(function(x){ delete DATA.cardAns[x.id]; }); DATA.pos['pos:'+S.t.id+S.deck]=0; persist(); }
+  render(); }
 /* classify a session item for the remaining-mix bar */
 function classifyItem(it){
   if(!it) return 'rev';
@@ -3256,7 +3290,8 @@ function endSession(){                        // leave a session gracefully → 
   else go('today');
 }
 function sessionNext(){                       // advance a non-rated (primer) card inside a session
-  if(!S) return; S.session.done++;
+  if(!S) return; if(_mbViaSwipe){ _mbViaSwipe=false; } else bumpNext();
+  S.session.done++;
   if(S.i>=S.items.length-1){ S.i=S.items.length; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0); return; }
   S.i++; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0);
 }
@@ -3303,12 +3338,28 @@ function rateCard(ok){
   S.i++; S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null; render(); window.scrollTo(0,0);
 }
 /* ---- phone swipe gestures in a review session: ← next · → prev · ↑ star ---- */
+/* ---- swipe-to-next onboarding hint (phone, until the swipe is learned) ---- */
+var PREV_BASE='';
+var SWIPE_USED=(function(){ try{ return parseInt(localStorage.getItem('mb_swipe_used')||'0',10)||0; }catch(e){ return 0; } })();
+var SWIPE_NEXTS=0, _mbViaSwipe=false;
+function swipeHintEligible(){ return window.innerWidth<=720 && SWIPE_USED<2 && /^#\/(study|review|hard)/.test(location.hash) && S && S.items && S.items.length; }
+function markSwipeUsed(){ SWIPE_USED++; try{ localStorage.setItem('mb_swipe_used',String(SWIPE_USED)); }catch(e){} hideSwipeHint(); }
+function bumpNext(){ if(!swipeHintEligible()) return; SWIPE_NEXTS++; if(SWIPE_NEXTS%3===0) showSwipeHint(); }   // still tapping Next after 3 → remind them they can swipe
+function showSwipeHint(){ if(!swipeHintEligible()||document.getElementById('mbSwipeHint')) return;
+  var d=document.createElement('div'); d.id='mbSwipeHint';
+  d.innerHTML='<div class="shcard"><div class="shhand"></div></div><div class="shtxt">Swipe left for the next card</div>';
+  document.body.appendChild(d);
+  clearTimeout(window._shT); window._shT=setTimeout(hideSwipeHint,3800);
+}
+function hideSwipeHint(){ var d=document.getElementById('mbSwipeHint'); if(d){ d.style.opacity='0'; setTimeout(function(){ if(d&&d.parentNode)d.remove(); },260); } }
 function swipeAct(dir){
   if(!/^#\/(study|review|hard)/.test(location.hash)||!S) return;
   const it=S.items[S.order[S.i]]; if(!it) return;
+  markSwipeUsed();                                                        // any swipe = feature learned
   if(dir==='up'){ if(window.navigator&&navigator.vibrate)try{navigator.vibrate(15);}catch(e){} toggleStar(it.id); return; }
-  if(dir==='right'){ if(S.i>0) step(-1); return; }                       // previous
+  if(dir==='right'){ if(S.i>0){ _mbViaSwipe=true; step(-1); } return; }   // previous
   if(dir==='left'){                                                       // next / skip
+    _mbViaSwipe=true;
     if(isMcqCard(it)){ mcqNext(); }
     else if(!S.show){ reveal(); }                                         // flip: first swipe reveals
     else if(S.i<S.items.length-1){ step(1); }
@@ -3322,7 +3373,7 @@ function swipeAct(dir){
     if(!/^#\/(study|review|hard)/.test(location.hash)) return;
     if(e.touches.length!==1) return;
     var t=e.target;
-    if(t&&t.closest&&t.closest('.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns')) return;   // don't hijack controls/answers
+    if(t&&t.closest&&t.closest('.vizmiss,.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns')) return;   // don't hijack controls/answers/video
     live=true; sx=e.touches[0].clientX; sy=e.touches[0].clientY; st=Date.now();
   },{passive:true});
   document.addEventListener('touchend',function(e){
@@ -4344,6 +4395,8 @@ function render(){
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
   if(window.scheduleVizTeaser) scheduleVizTeaser(p[0]==='topic'?p[1]:null);   // teaser waits ~1 min of reading, then plays once
+  if(/^(study|review|hard)$/.test(p[0]) && !/^(study|review|hard)$/.test(PREV_BASE)) setTimeout(showSwipeHint,700);   // teach swipe-to-next on entering a card session
+  PREV_BASE=p[0];
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){
     _examTimer=setInterval(()=>{ const el=document.querySelector('.extime');
@@ -4554,6 +4607,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizgentxt{display:flex;flex-direction:column}.vizgentxt b{font-size:14px;color:#3a1d7a}.vizgentxt span{font-size:12px;color:#6b6580}
 .vizready{background:#e7f7f0;border:1px solid #b7e6d5;color:#0d7a68;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:800;margin-bottom:8px}
 .vizinlinebody{padding:0!important}
+.viznotice{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:100003;background:#141026;color:#fff;font-size:13px;font-weight:700;padding:11px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(20,12,38,.35);max-width:88vw;text-align:center;transition:opacity .3s}
 .vizposter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(20,16,38,.30);cursor:pointer;z-index:4}
 .vizposter .vpbtn{width:58px;height:58px;border-radius:50%;background:#6d28d9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;box-shadow:0 8px 22px rgba(109,40,217,.5)}
 .vizposter .vplab{color:#fff;font-weight:800;font-size:13px;text-shadow:0 1px 5px rgba(0,0,0,.5)}
@@ -5067,8 +5121,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button><button id="vizQuizBtn" title="Predict-the-next-step quiz">🧠 Quiz</button>'
       +'<select id="vizSpeed" title="Narration speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>'
       +'<label class="vizvoi">Voice <select id="vizVoice"><option value="">Narrator (app)</option></select></label>'
-      +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>'
-      +'<details class="vizjson"><summary>View the JSON blueprint</summary><pre>'+esc(JSON.stringify(clean,null,2))+'</pre></details>';
+      +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>';
     $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc" data-k="'+k+'">'+(k+1)+'. '+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c){ c.style.cursor='pointer'; c.onclick=function(){ jump(+c.getAttribute('data-k')); }; });
     $('vizScrub').max=st.length-1;
@@ -5181,6 +5234,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       speakOnce(BP.narration_steps[i].narration_text||''); }; }); }
   /* explain-simpler: ask the server to re-say this step in plainer words (falls back gracefully) */
   var _simpleCache={};
+  function vizNotice(msg){ try{ var n=document.createElement('div'); n.className='viznotice'; n.textContent=msg; document.body.appendChild(n);
+    setTimeout(function(){ n.style.opacity='0'; setTimeout(function(){ if(n.parentNode)n.remove(); },300); },2800); }catch(e){} }
   async function simplerStep(){ var s=BP.narration_steps[i]; if(!s)return; var key=i;
     if(_simpleCache[key]){ applySimpler(_simpleCache[key]); return; }
     var btn=$('vizSimpler'); if(btn){btn.disabled=true;btn.textContent='…';}
@@ -5188,7 +5243,14 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     try{ var CFG=window.MEDBANK_CONFIG||{};
       if(CFG.IMPORT_API&&window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token;
         if(tok){ var rr=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/simplify',{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify({text:s.narration_text||'',context:(BP.meta&&BP.meta.title)||''})});
-          var jj=await rr.json().catch(function(){return{};}); if(rr.ok&&jj.text)simple=jj.text; } }
+          var jj=await rr.json().catch(function(){return{};});
+          if(rr.status===429 && jj && jj.error==='daily_limit'){                          // Simpler counts against the daily limit
+            if(btn){btn.disabled=false;btn.textContent='🔄 Simpler';}
+            if(!jj.premium && window.MB_PAYWALL){ MB_PAYWALL.nudge("You're out of explainers today", jj.message||"Upgrade to Premium for 10 a day.", "Upgrade"); }
+            else { vizNotice(jj.message||"You've used all of today's explainers. They reset tomorrow."); }
+            return;
+          }
+          if(rr.ok&&jj.text)simple=jj.text; } }
     }catch(e){}
     if(!simple){ var m=(s.narration_text||'').match(/^[^.!?]*[.!?]/); simple=(m?m[0]:(s.narration_text||'')).trim(); simple='In simple terms: '+simple.charAt(0).toLowerCase()+simple.slice(1); }  // fallback: keep the first, core sentence
     _simpleCache[key]=simple; if(btn){btn.disabled=false;btn.textContent='🔄 Simpler';} applySimpler(simple); }
@@ -5286,6 +5348,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     host.innerHTML='<div class="vizready">✓ Your explainer is ready — press ▶ to see how to reach the answer.</div>'
       +'<div class="vizbody vizinlinebody" id="vizBody"></div>';
     mountPlayer();                                                              // paused at step 0
+    var _b=host.querySelector('.vizsrc'); if(_b)_b.remove();                    // inline: drop the "Highlighted:" source banner (student doesn't need it)
     if(poster){ var stg=document.getElementById('vizStage'); if(stg){         // video-style poster with a big play button
       var pv=document.createElement('div'); pv.className='vizposter';
       pv.innerHTML='<div class="vpbtn">▶</div><div class="vplab">Watch how to reach the answer</div>';

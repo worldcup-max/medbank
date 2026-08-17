@@ -639,7 +639,8 @@ app.post("/visualize", async (req,res)=>{
       used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
       if(used >= limit){
         return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
-          message:"You've used today's "+limit+" visualizations"+(premium?"":" on the free plan")+". They reset tomorrow"+(premium?".":" — or go premium for 10 a day.") });
+          message: premium ? "You've used all 10 of today's explainers. They reset tomorrow."
+                           : "You've used all 3 of today's explainers. Upgrade to Premium for 10 a day." });
       }
     }catch(_){}   // table not created yet → fail open (don't block students)
     // generate blueprint (Flash — in-app, always cheap tier)
@@ -701,6 +702,17 @@ app.post("/simplify", async (req,res)=>{
     const text = (req.body.text||"").toString().trim().slice(0,600);
     if(!text) return res.status(400).json({ error:"nothing to simplify" });
     const context = (req.body.context||"").toString().slice(0,120);
+    // "Simpler" is a regeneration → it counts against the same daily Visualize limit
+    const premium = await isPremium(user.id).catch(()=>false);
+    const limit = premium ? 10 : 3;
+    let used = 0;
+    try{ const since=new Date(); since.setUTCHours(0,0,0,0);
+      const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
+      if(used >= limit) return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
+        message: premium ? "You've used all 10 of today's explainers. They reset tomorrow."
+                         : "You've used all 3 of today's explainers. Upgrade to Premium for 10 a day." });
+    }catch(_){}
     const prompt =
 `Re-explain this one sentence from a study animation in the SIMPLEST possible words, as if to a struggling first-year student. Keep it accurate. One or two short sentences. Use an everyday analogy ONLY if it truly helps. No jargon unless you immediately define it. Do not add new facts.
 ${context?`TOPIC: ${context}\n`:""}SENTENCE: "${text}"
@@ -709,7 +721,8 @@ Return ONLY JSON: {"text":"the simpler explanation"}`;
     const o = parseBlueprint(gen.text) || {};
     const out = (o.text||"").toString().trim();
     if(!out) return res.status(502).json({ error:"try again" });
-    res.json({ ok:true, text:out.slice(0,400) });
+    try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}   // count this regeneration against the daily limit
+    res.json({ ok:true, text:out.slice(0,400), viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
