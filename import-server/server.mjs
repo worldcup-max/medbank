@@ -80,7 +80,18 @@ async function getUser(req){
   const { data } = await admin.auth.getUser(tok);
   return data && data.user ? data.user : null;
 }
-async function isPremium(account_id){ try{ const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle(); return !!(s.data && s.data.status==="active"); }catch(e){ return false; } }
+/* test override: emails in PREMIUM_TEST_EMAILS (comma-separated) count as premium — for building/QA only */
+const PREMIUM_TEST = (process.env.PREMIUM_TEST_EMAILS||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean);
+async function isPremium(account_id){ try{
+  const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+  if(s.data && s.data.status==="active") return true;
+  if(PREMIUM_TEST.length){                                   // only runs when a test list is set (empty in production)
+    const a=await admin.from("accounts").select("email").eq("id",account_id).maybeSingle();
+    const em=(a.data && a.data.email || "").toLowerCase();
+    if(em && PREMIUM_TEST.indexOf(em)>=0) return true;
+  }
+  return false;
+}catch(e){ return false; } }
 async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id); return c.count||0; }catch(e){ return 0; } }
 /* today's Visualize allowance for a user — basic 3/day, premium 10/day (only new builds count) */
 async function vizQuota(userId){
