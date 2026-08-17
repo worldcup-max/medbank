@@ -262,7 +262,17 @@ async function buildExtra(kind, level, note, model){
   const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
   const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||6000, temperature:Number(row&&row.temperature)||0.3 });
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
-  try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.items)&&o.items.length)?o.items:null; }catch(_){ return null; }
+  try{
+    const o=JSON.parse(t.slice(s,e+1));
+    let items = (o && Array.isArray(o.items)) ? o.items : null;
+    if(!items || !items.length) return null;
+    if(kind==="fill_blank"){        // must have a real blank + an answer, or it renders as an empty "…" item
+      items = items.filter(it => it && typeof it.text==="string" && /_{2,}/.test(it.text) && String(it.answer||"").trim());
+    } else if(kind==="written"){
+      items = items.filter(it => it && String(it.prompt||"").trim());
+    }
+    return items.length ? items : null;
+  }catch(_){ return null; }
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
@@ -515,7 +525,7 @@ app.post("/build-extra", async (req,res)=>{
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
     const have = (t.data.extras && t.data.extras[kind]) || null;
-    if(have && have.length) return res.json({ ok:true, items:have });   // already built → return cached
+    if(have && have.length && !req.body.force) return res.json({ ok:true, items:have });   // already built → return cached (unless a rebuild was requested)
     const level = Number(req.body.level) || null;
     // in-app extras always use Flash — tiering is import-only
     const model = BASIC_MODEL;

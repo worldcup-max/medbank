@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16i';   // bump this each release
+const APP_VERSION='2026.08.16j';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2262,12 +2262,12 @@ function genPrompt(topicId,kind,label){
     <p style="color:var(--dim);margin:8px 0 16px">Build it once from your note — takes a few seconds, then it's saved to your account.</p>
     <button class="btn primary" onclick="genExtra('${topicId}','${kind}',this)">✨ Build ${label}</button></div>`;
 }
-async function buildExtraNow(topicId,kind){
+async function buildExtraNow(topicId,kind,force){
   const t=topById(topicId); if(!t) return null;
   const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
   let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
-  const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/build-extra',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:topicId,kind,level})});
+  const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/build-extra',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:topicId,kind,level,force:!!force})});
   const out=await r.json();
   if(!r.ok||!out.items) throw new Error(out.reason||out.error||'Could not build this.');
   t.extras=t.extras||{}; t.extras[kind]=out.items;   // cache locally → instant next time (server also saved it)
@@ -2278,13 +2278,21 @@ async function genExtra(topicId,kind,btn){
   try{ await buildExtraNow(topicId,kind); render(); }
   catch(e){ if(btn){ btn.disabled=false; btn.textContent='Try again'; } mbToast('Build failed: '+(e.message||'check your internet and try again.')); }
 }
+async function rebuildExtra(topicId,kind,btn){
+  if(btn){ btn.disabled=true; btn.textContent='Rebuilding… ~5s'; }
+  try{ const t=topById(topicId); if(t&&t.extras) delete t.extras[kind]; await buildExtraNow(topicId,kind,true); render(); }
+  catch(e){ if(btn){ btn.disabled=false; btn.textContent='↻ Rebuild'; } mbToast('Rebuild failed: '+(e.message||'try again')); }
+}
 
 let FIBITEMS=[];
 function renderFillBlank(t){
-  const items=(t.extras&&t.extras.fill_blank)||null;
-  if(!items||!items.length) return genPrompt(t.id,'fill_blank','Fill-in-the-blank');
+  const raw=(t.extras&&t.extras.fill_blank)||null;
+  if(!raw||!raw.length) return genPrompt(t.id,'fill_blank','Fill-in-the-blank');
+  const items=raw.filter(it=>it&&/_{2,}/.test(it.text||'')&&String(it.answer||'').trim());   // drop malformed items (no blank)
+  const rebuild=`<div class="btnrow" style="justify-content:flex-end;margin-bottom:10px"><button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','fill_blank',this)">↻ Rebuild</button></div>`;
+  if(!items.length) return rebuild+`<div class="empty" style="text-align:left"><b style="color:var(--text)">This set came out malformed.</b><p style="color:var(--dim);margin:8px 0 0">Tap <b>↻ Rebuild</b> above to regenerate the fill-in-the-blanks.</p></div>`;
   FIBITEMS=items;
-  return items.map((it,i)=>{
+  return rebuild + items.map((it,i)=>{
     const q=esc(it.text||'').replace(/_{2,}/,`<input id="fib_${i}" placeholder="answer" onkeydown="if(event.key==='Enter')fibCheck(${i})" style="border:none;border-bottom:2px solid var(--recall);background:transparent;color:var(--text);font-size:15px;min-width:90px;padding:0 4px;outline:none">`);
     return `<div class="card" style="cursor:default;margin-bottom:12px">
       <div style="font-size:15px;line-height:1.6">${q}</div>
@@ -2311,7 +2319,8 @@ function renderWritten(t){
   const items=(t.extras&&t.extras.written)||null;
   if(!items||!items.length) return genPrompt(t.id,'written','Written test');
   WRITTENITEMS=items;
-  return `<p class="sub" style="margin-bottom:14px">Write your answer, then get instant AI feedback marked against the key points. Needs internet.</p>`+
+  return `<div class="btnrow" style="justify-content:flex-end;margin-bottom:6px"><button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','written',this)">↻ Rebuild</button></div>`+
+    `<p class="sub" style="margin-bottom:14px">Write your answer, then get instant AI feedback marked against the key points. Needs internet.</p>`+
     items.map((it,i)=>`<div class="card" style="cursor:default;margin-bottom:14px">
       <div style="font-weight:700;font-size:15px;margin-bottom:10px">${i+1}. ${esc(it.prompt||'')}</div>
       <textarea id="wt_${i}" rows="4" class="notebox" placeholder="Write your answer…"></textarea>
