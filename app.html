@@ -420,10 +420,10 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .home2.bento>*{margin:0;min-width:0}
 .home2.bento .hero{padding-bottom:16px}
 @media(min-width:900px){
-  .home2.bento{display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start;
-    grid-template-areas:"hero tiles" "jump prog" "goal prog" "more more";}
-  .home2.bento .mtiles{grid-template-columns:1fr 1fr;align-content:start}
-  .home2.bento .jbmore{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .home2.bento{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:start;
+    grid-template-areas:"hero hero" "tiles tiles" "lead lead" "mip prog" "goal goal" "more more";}
+  .home2.bento .mtiles{grid-template-columns:repeat(4,1fr)}
+  .home2.bento .jbmore{grid-template-columns:1fr 1fr}
 }
 .hcols{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-top:14px;align-items:start;min-width:0}
 .hleft,.hright{min-width:0}
@@ -463,6 +463,12 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .jbcard .row2{display:flex;align-items:center;gap:8px}
 .jbcard .pbarn{flex:1;height:5px;border-radius:4px;background:var(--panel2);overflow:hidden}.jbcard .pbarn div{height:100%;border-radius:4px}
 .jbcard .pct{font-size:11px;color:var(--dim)}
+.jbacts{display:flex;gap:6px;margin-top:10px}
+.jba{position:relative;flex:1;border:1px solid var(--line);background:var(--panel2);border-radius:9px;padding:7px 0;font-size:15px;line-height:1;cursor:pointer;transition:.12s}
+.jba:hover{background:var(--accent);border-color:transparent;transform:translateY(-1px)}
+.jba:after{content:attr(data-t);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:#141026;color:#fff;font-size:11px;font-weight:700;letter-spacing:.2px;padding:4px 9px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:6}
+.jba:before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#141026;opacity:0;transition:opacity .15s;pointer-events:none}
+.jba:hover:after,.jba:hover:before{opacity:1}
 @media(max-width:720px){.jbmore{display:flex;overflow-x:auto;max-width:100%;padding-bottom:4px}.jbcard{flex:0 0 152px}.jblead{flex-direction:column;align-items:stretch}.jbresume{width:100%;justify-content:center}}
 .mtiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .mtile{background:var(--panel2);border-radius:12px;padding:12px 14px;cursor:pointer}
@@ -1030,7 +1036,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16b';   // bump this each release
+const APP_VERSION='2026.08.16c';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1801,11 +1807,19 @@ function jbLead(t,due){ var r=topicResume(t), c=r.deck==='recall'?'var(--recall)
     </div>
     <button class="btn primary jbresume" onclick="go('study/${t.id}/${r.deck}')">▶ Resume</button>
   </div>`; }
+function jbActs(t){ return `<div class="jbacts" onclick="event.stopPropagation()">
+    <button class="jba" data-t="Note" onclick="topicTab='note';go('topic/${t.id}')">📖</button>
+    <button class="jba" data-t="Flashcards" onclick="go('study/${t.id}/primer')">🃏</button>
+    <button class="jba" data-t="Quiz" onclick="go('study/${t.id}/recall')">✓</button>
+    <button class="jba" data-t="Podcast" onclick="topicTab='podcast';go('topic/${t.id}')">🎧</button>
+    <button class="jba" data-t="Cram sheet" onclick="go('cram/${t.id}')">📄</button>
+  </div>`; }
 function jbCard(t,due){ var r=topicResume(t), c=r.deck==='recall'?'var(--recall)':'var(--primer)', dn=relDay(topicLastDay(t.id));
   return `<div class="jbcard" onclick="go('study/${t.id}/${r.deck}')">
     <div class="jbtop">${jbChip(r.deck)}${due?`<span class="duechip">${due} due</span>`:(dn?`<span class="jbtime" style="margin-left:auto">${dn}</span>`:'')}</div>
     <div class="jbcname">${esc(t.name)}</div>
     <div class="row2"><div class="pbarn"><div style="width:${r.pct}%;background:${c}"></div></div><span class="pct">${r.pct}%</span></div>
+    ${jbActs(t)}
   </div>`; }
 
 function pageHome(){
@@ -1833,28 +1847,31 @@ function pageHome(){
       </div>
       ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
     </div>
-    <div class="goalcard" style="grid-area:goal">
-      <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
-      <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
-      <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
-        <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
-    </div>
-    <div class="b-jump" style="grid-area:jump">
-      <div class="shelfhd">Jump back in</div>
-      ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
-      ${jbMore.length?`<div class="jbmorelab">More in progress</div><div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:''}
-    </div>
     <div class="mtiles" style="grid-area:tiles">
       <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
       <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
       <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
       <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
     </div>
+    <div class="b-lead" style="grid-area:lead">
+      <div class="shelfhd">Jump back in</div>
+      ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
+    </div>
+    <div class="b-mip" style="grid-area:mip">
+      <div class="jbmorelab">More in progress</div>
+      ${jbMore.length?`<div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:`<div class="shelfempty">Nothing else in progress yet.</div>`}
+    </div>
     <div class="progcard" style="grid-area:prog">
       <div class="progtt">Your progress</div>
       ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
         return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
           <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
+    </div>
+    <div class="goalcard" style="grid-area:goal">
+      <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
+      <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
+      <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
+        <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
     </div>
     <details class="homemore" style="grid-area:more">
       <summary>More · this week &amp; subjects</summary>
