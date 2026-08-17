@@ -391,6 +391,52 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .examchip b{color:var(--text)}
 .examchip.soon{background:#ff6a3d18;border-color:#ff8a4d55;color:#ffb08a}
 .examchip.soon b{color:#ff8a4d}
+/* ===== new responsive home ===== */
+.home2{animation:homefade .28s ease}
+@keyframes homefade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.home2 .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px}
+.home2 .herorow{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.home2 .herohi{font-size:15px;color:var(--dim)}
+.home2 .herostreak{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:14px;color:var(--com);background:#f6ecda;padding:4px 11px;border-radius:20px}
+.home2 .herolab{font-size:12.5px;color:var(--dimmer)}
+.home2 .herobig{font-size:27px;font-weight:800;letter-spacing:-.3px;margin:2px 0 15px}
+.home2 .herobtns{display:flex;gap:9px;flex-wrap:wrap}
+.home2 .hstart{flex:1 1 240px;justify-content:center}
+.home2 .hcont{flex:0 1 auto}
+.hcols{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-top:14px;align-items:start}
+.goalcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:14px}
+.goaltop{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:9px}
+.goaltop b{color:var(--text)}
+.segbar{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden;display:flex}
+.segbar div{height:100%}
+.goalleg{display:flex;gap:14px;align-items:center;margin-top:9px;font-size:12px;color:var(--dim);flex-wrap:wrap}
+.goalleg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle}
+.goalleg .gstat{margin-left:auto;font-weight:700;color:var(--com)}
+.goalleg .gstat.ok{color:var(--recall)}
+.shelfhd,.progtt{font-size:15px;font-weight:700;margin:0 2px 10px}
+.shelf{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.shelfcard{flex:0 0 158px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;transition:border-color .15s}
+.shelfcard:hover{border-color:var(--accent)}
+.shelfnm{font-size:13px;font-weight:700;line-height:1.3;margin:9px 0 8px;min-height:34px}
+.minibar{height:5px;border-radius:4px;background:var(--panel2);overflow:hidden}.minibar div{height:100%;border-radius:4px}
+.shelfempty{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--dim);font-size:13px}
+.mtiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mtile{background:var(--panel2);border-radius:12px;padding:12px 14px;cursor:pointer}
+.mtile b{display:block;font-size:22px;font-weight:800;line-height:1.1}
+.mtile span{font-size:12px;color:var(--dim)}
+.progcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+.prow{display:flex;align-items:center;gap:10px;padding:7px 0;cursor:pointer}
+.prow .pnm{flex:0 0 84px;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow .pbarn{flex:1;height:6px;border-radius:4px;background:var(--panel2);overflow:hidden}.prow .pbarn div{height:100%;border-radius:4px}
+.prow b{font-size:12.5px;color:var(--dim);flex:0 0 34px;text-align:right}
+.homemore{margin-top:24px;border-top:1px solid var(--line);padding-top:6px}
+.homemore>summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--dim);padding:12px 2px;list-style:none}
+.homemore>summary::-webkit-details-marker{display:none}
+.homemore>summary:before{content:'▸ ';color:var(--dimmer)}
+.homemore[open]>summary:before{content:'▾ '}
+.homeswitch{margin-top:22px;text-align:center}
+.homeswitch .btn{font-size:12.5px;color:var(--dim)}
+@media(max-width:720px){.hcols{grid-template-columns:1fr}.home2 .herobig{font-size:24px}}
 
 /* ---- session modes bar ---- */
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
@@ -870,7 +916,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.08g';   // bump this each release
+const APP_VERSION='2026.08.15c';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -925,7 +971,7 @@ function setStatus(id,s){
   else delete DATA.done[id];
   persist();
 }
-function touchTopic(id){ logDayTopic(id); if(status(id)==='notstarted'){ DATA.topics[id]='inprogress'; persist(); } }
+function touchTopic(id){ logDayTopic(id); try{mergeVizCards();}catch(e){} if(status(id)==='notstarted'){ DATA.topics[id]='inprogress'; persist(); } }
 function logDayTopic(id){ const d=dstr(); (DATA.dayTopics[d]=DATA.dayTopics[d]||{})[id]=1; }
 /* format the interval (in days) until a card's next review, in plain words */
 function intervalPhrase(days){
@@ -1299,6 +1345,15 @@ function buildQueue(){
   const neu=planNew();
   return { due:orderItems(due), neu, newTotal:neu.length };
 }
+/* ---- Visualize quiz misses become real recall cards (fed into the SRS deck) ---- */
+function mergeVizCards(){ try{ if(!DATA.vizCards)return; Object.keys(DATA.vizCards).forEach(function(tid){ var t=topById(tid); if(!t)return; t.recall=t.recall||[];
+  (DATA.vizCards[tid]||[]).forEach(function(card){ if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }); }); }catch(e){} }
+function addVizCard(topicId,card){ try{ if(!topicId||!card||!card.q)return;
+  DATA.vizCards=DATA.vizCards||{}; var arr=DATA.vizCards[topicId]=DATA.vizCards[topicId]||[];
+  if(arr.some(function(x){return x.q===card.q;}))return; arr.push(card);
+  var t=topById(topicId); if(t){ t.recall=t.recall||[]; if(!t.recall.some(function(c){return c.q===card.q;})) t.recall.push(card); }
+  var id=cid(topicId,'recall',card); if(!DATA.cards[id]) DATA.cards[id]={due:dayNum(),ivl:0,ease:2.5,reps:0,isNew:true};   // due today
+  persist(); }catch(e){} }
 /* collect recall cards matching a predicate, across started topics */
 function collectRecall(pred){
   const out=[];
@@ -1574,7 +1629,93 @@ function heatmap(){
   }
   return `<div class="heat">${cols.join('')}</div>`;
 }
+function greeting(){ var h=new Date().getHours(); return h<12?'Good morning':(h<18?'Good afternoon':'Good evening'); }
+function topicPct(t){ var tot=(t.recall||[]).length; if(!tot) return 0; return Math.round((tot-unseenCount(t))/tot*100); }
+function homeColor(id){ return COLOR[id]||'var(--accent)'; }
+
 function pageHome(){
+  const tl=todayLog(), goal=DATA.daily.goal||20, st=curStreak(), due=dueCount();
+  const started=startedTopics().length, complete=allTopics.filter(t=>status(t.id)==='complete').length;
+  const best=st>(DATA.streak.best||0)?st:(DATA.streak.best||0);
+  const resume=Object.keys(DATA.pos)[0]; let resumeBtn='';
+  if(resume){ const pt=topById(resume.split('|')[0]); if(pt){ const dk=resume.split('|')[1]==='p'?'primer':'recall';
+    resumeBtn=`<button class="btn hcont" onclick="go('study/${pt.id}/${dk}')">↩ Continue ${esc(pt.name).slice(0,20)}…</button>`; } }
+  const nd=newDoneToday(), revDone=tl.rev||0, revDue=buildQueue().due.length, met=streakMet();
+  const nw=Math.min(100,Math.round(nd/goal*100)), rw=Math.min(100-nw,Math.round(revDone/goal*100));
+  const exams=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
+  const shelf=startedTopics().filter(t=>status(t.id)==='inprogress').slice(0,8);
+  return `<div class="home2">
+    <div class="hero">
+      <div class="herorow"><span class="herohi">${greeting()}, Frank</span>
+        <span class="herostreak"><span>🔥</span> ${st}</span></div>
+      <div class="herolab">Today's focus</div>
+      <div class="herobig">${due?due+' card'+(due===1?'':'s')+' due':'All caught up 🎉'}</div>
+      <div class="herobtns">
+        <button class="btn primary hstart" onclick="go('today')">🧠 ${due?'Start active recall':'Open active recall'} →</button>
+        ${resumeBtn}
+      </div>
+    </div>
+    ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
+    <div class="hcols">
+      <div class="hleft">
+        <div class="goalcard">
+          <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
+          <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
+          <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
+            <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
+        </div>
+        <div class="shelfhd">Jump back in</div>
+        ${shelf.length?`<div class="shelf">${shelf.map(t=>{const c=homeColor(t.subject.id);const p=topicPct(t);
+          return `<div class="shelfcard" onclick="go('topic/${t.id}')">
+            <span class="pill" style="background:${c}22;color:${c}">${esc(t.subject.short)}</span>
+            <div class="shelfnm">${esc(t.name)}</div>
+            <div class="minibar"><div style="width:${p}%;background:${c}"></div></div></div>`;}).join('')}
+          </div>`:`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
+      </div>
+      <div class="hright">
+        <div class="mtiles">
+          <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
+          <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
+          <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
+          <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
+        </div>
+        <div class="progcard">
+          <div class="progtt">Your progress</div>
+          ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
+            return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
+              <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
+        </div>
+      </div>
+    </div>
+    <details class="homemore">
+      <summary>More · this week &amp; subjects</summary>
+      ${homeMore()}
+    </details>
+  </div>`;
+}
+
+/* the demoted long-tail, reused inside the "More" disclosure */
+function homeMore(){
+  return `<h2>This week</h2>
+  ${(()=>{ const wp=weekProgress(); return `<div class="wkcard">
+      <div class="wkmetrics">
+        <div class="wm"><b style="color:var(--ped)">${wp.complete}</b><span>completed</span></div>
+        <div class="wm"><b style="color:var(--com)">${wp.inprog}</b><span>in progress</span></div>
+        <div class="wm"><b>${wp.notStarted}</b><span>not started</span></div>
+        <div class="wm"><b>${wp.touched}</b><span>topics touched</span></div>
+      </div>
+      <button class="btn primary" style="width:100%;justify-content:center;margin-top:4px" onclick="go('jumpback')">↩ Jump back into a topic</button>
+    </div>`; })()}
+  <h2>Subjects</h2>
+  <div class="grid">${DB.subjects.map(sb=>`
+    <div class="card" onclick="go('subject/${sb.id}')">
+      <span class="pill" style="background:${homeColor(sb.id)}22;color:${homeColor(sb.id)}">${esc(sb.short)}</span>
+      <h3>${esc(sb.name)}</h3>
+      <p>${sb.topicCount} topic${sb.topicCount===1?'':'s'} · ${sb.readyCount} built · ${sb.cardCount} cards</p>
+    </div>`).join('')}</div>`;
+}
+
+function pageHomeClassic(){
   const s=DB.stats, tl=todayLog(), goal=DATA.daily.goal, st=curStreak(), due=dueCount();
   const as=achStats(), earned=ACH.filter(a=>a.test(as)).length;
   const started=startedTopics().length, complete=allTopics.filter(t=>status(t.id)==='complete').length;
@@ -4163,6 +4304,36 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizcur{position:absolute;width:24px;height:24px;z-index:6;pointer-events:none;transition:left .9s cubic-bezier(.45,0,.25,1),top .9s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .vizcap{min-height:48px;background:#141026;color:#fff;font-size:14px;line-height:1.45;padding:11px 14px;font-weight:600;border-radius:0 0 10px 10px;margin-top:2px}
 .vizcap .lab{color:#c9b8f5;font-weight:800;font-size:10.5px;letter-spacing:.5px;display:block;margin-bottom:2px}.vizcap b{color:#a5f3e4}
+.vizcap .cw{opacity:.42;transition:opacity .12s,color .12s}
+.vizcap .cw.said{opacity:.96;color:#fff}
+.vizcap .cw.now{opacity:1;color:#a5f3e4;font-weight:800}
+.viztip{position:absolute;z-index:8;max-width:200px;background:#141026;color:#fff;border-radius:10px;padding:9px 22px 9px 11px;font-size:12px;line-height:1.4;box-shadow:0 10px 26px rgba(20,12,38,.45)}
+.viztip b{display:block;color:#a5f3e4;font-size:12.5px;margin-bottom:3px}.viztip span{display:block;color:#e7dffb}
+.viztip i{position:absolute;top:5px;right:8px;font-style:normal;color:#c9bfe0;cursor:pointer;font-size:12px}
+.vizquiz{margin-top:8px;background:#f7f5fc;border:1px solid #e7e3f2;border-radius:12px;padding:11px}
+.vizquiz .qq{font-weight:800;font-size:13px;color:#3a1d7a;margin-bottom:8px}
+.vizquiz .qo{display:block;width:100%;text-align:left;border:1px solid #e7e3f2;background:#fff;border-radius:9px;padding:9px 12px;font-weight:700;font-size:13px;color:#3a3550;margin-bottom:6px;cursor:pointer}
+.vizquiz .qo.ok{background:#dff5ef;border-color:#0d9488;color:#0d7a68}
+.vizquiz .qo.no{background:#fdecec;border-color:#dc2626;color:#dc2626}
+.vizquiz .qhint{font-size:12px;font-weight:700;color:#6b6580;margin-top:2px;min-height:16px}
+.vizctrl #vizQuizBtn.qon{background:#6d28d9;color:#fff;border-color:transparent}
+.viztip em{display:block;color:#c9f5ea;font-style:normal;font-size:11.5px;margin-top:4px;opacity:.92}
+.viztip .tipbar{display:flex;gap:6px;margin-top:8px}
+.viztip .tb{background:#2a2247;color:#e7dffb;border:1px solid #4a3d78;border-radius:7px;font-size:11px;font-weight:700;padding:4px 8px;cursor:pointer}
+.viztip .tb:hover{background:#3a2f5e}
+.vizcapbar{display:flex;align-items:center;gap:7px;margin:6px 2px 0}
+.vizcapbar button{background:#f3f0fa;border:1px solid #e7e3f2;border-radius:8px;font-size:11.5px;font-weight:700;color:#4a3d78;padding:4px 9px;cursor:pointer}
+.vizcapbar button:hover{background:#ece7f8}.vizcapbar button:disabled{opacity:.5;cursor:default}
+.vizstreak{margin-left:auto;font-size:12px;font-weight:800;color:#b45309}
+.vizquiz .qhint .qsave{display:inline-block;margin-top:3px;color:#0d7a68;font-weight:800}
+.vizresults{margin-top:9px;background:linear-gradient(135deg,#f3efff,#eafaf5);border:1px solid #ddd4f2;border-radius:13px;padding:13px 14px}
+.vizresults .rhd{font-size:14.5px;font-weight:800;color:#3a1d7a;margin-bottom:8px}
+.vizresults .rtk{font-size:12.5px;color:#4a4560}.vizresults .rtk span{font-weight:800;color:#5b21b6}
+.vizresults .rtk ul{margin:4px 0 0;padding-left:18px}.vizresults .rtk li{margin:2px 0;font-weight:600}
+.vizresults .rsave{margin-top:9px;font-size:12px;font-weight:800;color:#0d7a68}
+.vizresults .rbtns{display:flex;gap:8px;margin-top:11px}
+.vizresults .rb{border:1px solid #d8cff0;background:#fff;border-radius:9px;padding:7px 13px;font-weight:800;font-size:12.5px;color:#4a3d78;cursor:pointer}
+.vizresults .rb.pri{background:#6d28d9;color:#fff;border-color:transparent}
 .vizctrl{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
 .vizctrl button{border:1px solid #e7e3f2;background:#fff;border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
 .vizctrl button.pl{background:#6d28d9;color:#fff;border-color:transparent;min-width:92px}
@@ -4287,7 +4458,7 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   }
   function tNode(n,active){ var p=TREE.pos[n.id],b=TREE.box[n.id],c=TREE.col[n.id]||'#7c3aed';
     var x=p.x,y=p.y-b.h/2,cx=x+b.w/2, cls=active?'vzglow vzpop':'vzpop';
-    var s='<g class="'+cls+'">';
+    var s='<g data-el="'+n.id+'" style="cursor:pointer" class="'+cls+'">';
     s+='<rect x="'+x+'" y="'+y+'" width="'+b.w+'" height="'+b.h+'" rx="10" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3:2)+'"/>';
     s+='<rect x="'+x+'" y="'+y+'" width="5" height="'+b.h+'" rx="2.5" fill="'+c+'"/>';
     s+=T(cx,y+(n.note?20:24),n.label||n.id,{size:fitFont(n.label||n.id,b.w-18,12.5,9.5),w:800,fill:c});
@@ -4322,13 +4493,16 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     var rows=Math.ceil(n/cols),W=mx*2+cols*w+(cols-1)*gx,H=my*2+rows*h+(rows-1)*gy;
     FLOW={nodes:nodes,pos:pos,cols:cols,vb:[W,H]};
   }
+  /* a small token that travels along a path — "things actually move" */
+  function flowToken(pathD,color,dur,begin){ return '<circle r="4.5" fill="'+(color||'#7c3aed')+'" opacity="0.9"><animateMotion dur="'+(dur||1.3)+'s" begin="'+(begin||0)+'s" repeatCount="indefinite" path="'+pathD+'"/></circle>'; }
   function fArrow(a,b){ var pa=FLOW.pos[a.id],pb=FLOW.pos[b.id],x1,y1,x2,y2;
     if(pa.row===pb.row){ if(pb.x>pa.x){x1=pa.x+pa.w;y1=pa.y+pa.h/2;x2=pb.x;y2=pb.y+pb.h/2;} else {x1=pa.x;y1=pa.y+pa.h/2;x2=pb.x+pb.w;y2=pb.y+pb.h/2;} }
     else { x1=pa.x+pa.w/2;y1=pa.y+pa.h;x2=pb.x+pb.w/2;y2=pb.y; }
-    return arrow(x1,y1,x2,y2,'#c084fc','vzflow'); }
+    var d='M'+x1+','+y1+' L'+x2+','+y2;
+    return arrow(x1,y1,x2,y2,'#c084fc','vzflow')+flowToken(d,'#7c3aed',1.3,0); }
   function fitFont(text,maxW,base,min){ var len=(text||'').length||1; return Math.max(min||9,Math.min(base,(maxW)/(len*0.58))); }
   function fNode(nd,active){ var p=FLOW.pos[nd.id],c=FKIND[nd.kind]||FKIND.process,x=p.x,y=p.y,cx=x+p.w/2+8;
-    var s='<g class="'+(active?'vzglow vzpop':'vzpop')+'">';
+    var s='<g data-el="'+nd.id+'" style="cursor:pointer" class="'+(active?'vzglow vzpop':'vzpop')+'">';
     s+='<rect x="'+x+'" y="'+y+'" width="'+p.w+'" height="'+p.h+'" rx="12" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3.2:2.2)+'"/>';
     s+='<circle cx="'+(x+17)+'" cy="'+(y+17)+'" r="11.5" fill="'+c+'"/>'+T(x+17,y+21,String(p.k+1),{fill:'#fff',w:800,size:11});
     s+=T(cx,y+(nd.note?27:35),nd.label||nd.id,{size:fitFont(nd.label||nd.id,p.w-30,13,10),w:800,fill:c});
@@ -4444,12 +4618,14 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       '<path d="M'+(x+3)+',250 L'+(x+3)+',428 Q'+(x+3)+',447 '+(x+22)+',447 L'+(x+178)+',447 Q'+(x+197)+',447 '+(x+197)+',428 L'+(x+197)+',250 Z" fill="'+fill+'" opacity="0.5"/>'+T(x+100,242,label,{size:11,fill:stroke,w:700});};
     S.push(beaker(150,'#dbe7ff','#2563eb',(A.sol||'anode solution')));
     S.push(beaker(610,'#ffe0c2','#b45309',(C.sol||'cathode solution')));
-    S.push('<g style="opacity:'+on('bridge')+'"'+gl('bridge')+'><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#c9a94e" stroke-width="16" stroke-linecap="round"/><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#f0e2b0" stroke-width="9"/>'+T(480,175,(BP.bridge||'salt bridge'),{size:11,fill:'#8a6d1e',w:800})+'</g>');
-    S.push('<g style="opacity:'+on('wire')+'"'+gl('wire')+'><path d="M250,168 L250,80 L710,80 L710,168" fill="none" stroke="#3a3550" stroke-width="4"/><circle cx="480" cy="80" r="22" fill="#fff" stroke="#3a3550" stroke-width="3"/>'+T(480,85,'V',{size:16,fill:'#3a3550',w:800})+
-      '<path d="M306,80 L334,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M416,80 L444,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M586,80 L614,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/>'+T(390,66,'e⁻ flow →',{size:12,fill:'#b45309',w:800})+'</g>');
-    S.push('<g style="opacity:'+on('anode')+'"'+gl('anode')+'><rect x="238" y="130" width="24" height="270" rx="3" fill="#9aa6b3" stroke="#5b6470" stroke-width="2"/>'+T(250,120,(A.label||'Anode (−)'),{size:12,fill:'#5b21b6',w:800})+T(250,478,(A.half||''),{size:12,fill:'#2563eb',w:800})+'</g>');
-    S.push('<g style="opacity:'+on('cathode')+'"'+gl('cathode')+'><rect x="698" y="130" width="24" height="270" rx="3" fill="#d98a4a" stroke="#8a4f22" stroke-width="2"/>'+T(710,120,(C.label||'Cathode (+)'),{size:12,fill:'#8a4f22',w:800})+T(710,478,(C.half||''),{size:12,fill:'#b45309',w:800})+'</g>');
-    S.push('<g style="opacity:'+on('ions')+'"'+gl('ions')+'><path d="M420,360 L360,360" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ib)"/>'+T(390,350,'anions',{size:10,fill:'#2563eb',w:700})+'<path d="M540,360 L600,360" stroke="#b45309" stroke-width="2.5" marker-end="url(#io)"/>'+T(570,350,'cations',{size:10,fill:'#b45309',w:700})+'</g>');
+    S.push('<g data-el="bridge" style="cursor:pointer;opacity:'+on('bridge')+'"'+gl('bridge')+'><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#c9a94e" stroke-width="16" stroke-linecap="round"/><path d="M330,300 L330,205 Q330,185 350,185 L610,185 Q630,185 630,205 L630,300" fill="none" stroke="#f0e2b0" stroke-width="9"/>'+T(480,175,(BP.bridge||'salt bridge'),{size:11,fill:'#8a6d1e',w:800})+'</g>');
+    S.push('<g data-el="wire" style="cursor:pointer;opacity:'+on('wire')+'"'+gl('wire')+'><path d="M250,168 L250,80 L710,80 L710,168" fill="none" stroke="#3a3550" stroke-width="4"/><circle cx="480" cy="80" r="22" fill="#fff" stroke="#3a3550" stroke-width="3"/>'+T(480,85,'V',{size:16,fill:'#3a3550',w:800})+
+      '<path d="M306,80 L334,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M416,80 L444,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/><path d="M586,80 L614,80" stroke="#f59e0b" stroke-width="3" marker-end="url(#eh)" class="vzflow"/>'+
+      flowToken('M250,168 L250,80 L710,80 L710,168','#f59e0b',2.6,0)+flowToken('M250,168 L250,80 L710,80 L710,168','#f59e0b',2.6,0.9)+flowToken('M250,168 L250,80 L710,80 L710,168','#f59e0b',2.6,1.8)+
+      T(390,66,'e⁻ flow →',{size:12,fill:'#b45309',w:800})+'</g>');
+    S.push('<g data-el="anode" style="cursor:pointer;opacity:'+on('anode')+'"'+gl('anode')+'><rect x="238" y="130" width="24" height="270" rx="3" fill="#9aa6b3" stroke="#5b6470" stroke-width="2"/>'+T(250,120,(A.label||'Anode (−)'),{size:12,fill:'#5b21b6',w:800})+T(250,478,(A.half||''),{size:12,fill:'#2563eb',w:800})+'</g>');
+    S.push('<g data-el="cathode" style="cursor:pointer;opacity:'+on('cathode')+'"'+gl('cathode')+'><rect x="698" y="130" width="24" height="270" rx="3" fill="#d98a4a" stroke="#8a4f22" stroke-width="2"/>'+T(710,120,(C.label||'Cathode (+)'),{size:12,fill:'#8a4f22',w:800})+T(710,478,(C.half||''),{size:12,fill:'#b45309',w:800})+'</g>');
+    S.push('<g data-el="ions" style="cursor:pointer;opacity:'+on('ions')+'"'+gl('ions')+'><path d="M420,360 L360,360" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ib)"/>'+flowToken('M430,360 L360,360','#2563eb',1.8,0)+T(390,350,'anions',{size:10,fill:'#2563eb',w:700})+'<path d="M540,360 L600,360" stroke="#b45309" stroke-width="2.5" marker-end="url(#io)"/>'+flowToken('M530,360 L600,360','#b45309',1.8,0.5)+T(570,350,'cations',{size:10,fill:'#b45309',w:700})+'</g>');
     S.push('<defs><marker id="eh" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b"/></marker><marker id="ib" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker><marker id="io" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker></defs>');
     S.push('</svg>');return S.join('');
   }
@@ -4492,8 +4668,9 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       +'<div class="vizrail" id="vizRail"></div>'
       +'<div class="vizstage" id="vizStage"><div class="vizcanvas" id="vizCanvas"><div id="vizSvg"></div><div class="vizcur" id="vizCur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div></div></div>'
       +'<div class="vizcap" id="vizCap"></div>'
+      +'<div class="vizcapbar" id="vizCapBar"><button id="vizReplay" title="Hear this step again">🔊 Replay</button><button id="vizSimpler" title="Explain this step more simply">🔄 Simpler</button><span class="vizstreak" id="vizStreak"></span></div>'
       +vizLegend()
-      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button>'
+      +'<div class="vizctrl"><button class="pl" id="vizPlay">▶ Play</button><button id="vizPrev">← Prev</button><button id="vizNext">Next →</button><button id="vizRestart" title="Restart">↺</button><button id="vizQuizBtn" title="Predict-the-next-step quiz">🧠 Quiz</button>'
       +'<select id="vizSpeed" title="Narration speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>'
       +'<label class="vizvoi">Voice <select id="vizVoice"><option value="">Narrator (app)</option></select></label>'
       +'<input type="range" id="vizScrub" min="0" max="1" value="0" step="1"></div>'
@@ -4505,18 +4682,25 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     $('vizPrev').onclick=function(){ jump(Math.max(0,i-1)); };
     $('vizNext').onclick=function(){ jump(Math.min(st.length-1,i+1)); };
     $('vizRestart').onclick=function(){ jump(0); };
+    $('vizQuizBtn').onclick=function(){ vizQuiz=!vizQuiz; this.classList.toggle('qon',vizQuiz); if(vizQuiz){vizScore={c:0,n:0,streak:0,best:0};_missed=[];updateStreak();} };
+    $('vizReplay').onclick=function(){ var s=BP.narration_steps[i]; if(s){ stop(); render(i); say(s.narration_text||''); } };
+    $('vizSimpler').onclick=function(){ simplerStep(); };
+    $('vizSvg').addEventListener('click',onElClick);
+    $('vizStage').addEventListener('click',function(e){ if(!(e.target.getAttribute&&e.target.getAttribute('data-el')))closeTip(); });
     $('vizSpeed').onchange=function(){ vizRate=parseFloat(this.value)||1; };
     $('vizScrub').oninput=function(){ jump(+this.value); };
     fillVoices(); $('vizVoice').onchange=function(){ vizVoiceName=this.value; };
     render(0);
   }
-  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return;
+  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; try{closeTip();closeQuiz();}catch(e){}
     var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440]};
     var vbm=VBMAP[BP.layout]; curVB=vbm?[0,0,vbm[0],vbm[1]]:fitVB();
     var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG};
     w.innerHTML=SV[BP.layout]?SV[BP.layout](i):sceneSVG(i); move();
-    var s=BP.narration_steps[i]; var term=s.term||'';
-    $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span>'+esc(s.narration_text||'').replace(esc(term),'<b>'+esc(term)+'</b>');
+    var s=BP.narration_steps[i];
+    $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span><span class="capw">'+buildKaraoke(s.narration_text||'')+'</span>';
+    karaokeReset(); setKaraoke(playing?-1:_kSpans.length);   // dim while playing (say() lights words up); full text when paused
+    wireCaptionTaps();
     $('vizScrub').value=i;
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c,k){c.classList.toggle('on',k<i);});
   }
@@ -4540,18 +4724,115 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');
       if(vizVoiceName)sel.value=vizVoiceName; }
     load(); speechSynthesis.onvoiceschanged=load; }
-  var vizWatch=null,vizKeep=null;
+  var vizWatch=null,vizKeep=null,_kSpans=[],_kTimer=null;
+  /* ---- karaoke captions: the spoken word lights up as it's said ---- */
+  function buildKaraoke(text){ var parts=(text||'').split(/(\s+)/),html='',ci=0,wi=0; _kSpans=[];
+    parts.forEach(function(p){ if(p==='')return; if(/^\s+$/.test(p)){ html+=p; ci+=p.length; }
+      else { html+='<span class="cw" id="cw'+wi+'">'+esc(p)+'</span>'; _kSpans.push({wi:wi,start:ci}); ci+=p.length; wi++; } });
+    return html; }
+  function setKaraoke(idx){ for(var j=0;j<_kSpans.length;j++){ var el=document.getElementById('cw'+_kSpans[j].wi); if(!el)continue; el.className='cw'+(j<idx?' said':(j===idx?' now':'')); } }
+  function karaokeToChar(ci){ var idx=0; for(var j=0;j<_kSpans.length;j++){ if(_kSpans[j].start<=ci) idx=j; else break; } setKaraoke(idx); }
+  function karaokeReset(){ if(_kTimer){clearInterval(_kTimer);_kTimer=null;} }
+  function startKaraokeTimed(text){ karaokeReset(); var n=_kSpans.length; if(!n)return; var total=Math.max(1400,(text||'').length*68/(vizRate||1)),per=Math.max(120,total/n),j=0;
+    _kTimer=setInterval(function(){ setKaraoke(j); j++; if(j>=n){clearInterval(_kTimer);_kTimer=null;} },per); }
   function say(text,cb){
     if(vizWatch){clearTimeout(vizWatch);vizWatch=null;}
-    var done=false; function fin(){ if(done)return; done=true; if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} try{cb&&cb();}catch(e){} }
-    // watchdog: if the voice never signals "ended" (Chrome drops onend / cuts off), advance anyway
-    vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/(vizRate||1))+2600);
-    if(vizVoiceName && window.speechSynthesis){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate;
-      var vv=speechSynthesis.getVoices().find(function(v){return v.name===vizVoiceName;}); if(vv)u.voice=vv;
-      u.onend=fin; u.onerror=fin; try{speechSynthesis.cancel();}catch(e){} try{speechSynthesis.speak(u);}catch(e){fin();} return; }
-    try{ if(window.voiceSpeak){ window.voiceSpeak(text,fin,'read',vizRate); return; } }catch(e){}
-    if(window.speechSynthesis){var u2=new SpeechSynthesisUtterance(text);u2.rate=vizRate;u2.onend=fin;u2.onerror=fin;try{speechSynthesis.cancel();}catch(e){}try{speechSynthesis.speak(u2);}catch(e){fin();}} else fin(); }
-  function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return; if(i<BP.narration_steps.length-1){i++;playStep();}else stop(); }); }
+    var done=false; function fin(){ if(done)return; done=true; if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} karaokeReset(); setKaraoke(_kSpans.length); try{cb&&cb();}catch(e){} }
+    vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/(vizRate||1))+2600);   // watchdog: never stall
+    var ss=window.speechSynthesis;
+    function speakSS(vn){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate; if(vn){var vv=ss.getVoices().find(function(v){return v.name===vn;}); if(vv)u.voice=vv;}
+      var gotB=false; u.onboundary=function(e){ if(!gotB){gotB=true; if(_kTimer){clearInterval(_kTimer);_kTimer=null;}} karaokeToChar(e.charIndex||0); };  // real word-sync when available
+      u.onend=fin; u.onerror=fin; try{ss.cancel();}catch(e){} startKaraokeTimed(text); try{ss.speak(u);}catch(e){fin();} }
+    if(vizVoiceName && ss){ speakSS(vizVoiceName); return; }
+    try{ if(window.voiceSpeak){ startKaraokeTimed(text); window.voiceSpeak(text,fin,'read',vizRate); return; } }catch(e){}
+    if(ss){ speakSS(''); } else { startKaraokeTimed(text); } }
+  /* ===== Interactive study layer: smart quiz · scoring · tap-to-learn · recap ===== */
+  var vizQuiz=false,_tip=null,VIZ_TID='';
+  var vizScore={c:0,n:0,streak:0,best:0},_missed=[];
+  function updateStreak(){ var el=$('vizStreak'); if(!el)return; if(!vizQuiz||vizScore.n===0){el.textContent='';return;}
+    el.textContent='🔥 '+vizScore.streak+'  ·  '+vizScore.c+'/'+vizScore.n; }
+  function speakOnce(text){ if(!text)return; stop(); try{say(text);}catch(e){} }
+  /* find the step where an element first appears (for "jump to where this happens") */
+  function stepOf(id){ var st=BP.narration_steps; for(var k=0;k<st.length;k++){ var r=(st[k].reveal||[]).concat(st[k].active||[]); if(r.indexOf(id)>=0)return k; } return -1; }
+  function elInfo(id){ try{
+    if(BP.layout==='flow'||BP.layout==='tree'){ var n=(BP.nodes||[]).filter(function(x){return x.id===id;})[0]; if(n)return {t:n.label||id,b:n.note||'',d:n.def||''}; }
+    if(BP.layout==='cell'){ if(id==='anode'&&BP.anode)return {t:BP.anode.label||'Anode',b:(BP.anode.half||'')+' — oxidation (loses electrons)',d:'AN-OX: oxidation happens at the anode, the negative electrode.'}; if(id==='cathode'&&BP.cathode)return {t:BP.cathode.label||'Cathode',b:(BP.cathode.half||'')+' — reduction (gains electrons)',d:'RED-CAT: reduction happens at the cathode, the positive electrode.'}; if(id==='wire')return {t:'External wire',b:'electrons flow from anode to cathode',d:'Only electrons move in the wire — ions never travel through it.'}; if(id==='bridge')return {t:BP.bridge||'Salt bridge',b:'lets ions move so both sides stay neutral',d:'Without it, charge builds up and the current stops almost instantly.'}; if(id==='ions')return {t:'Ion movement',b:'anions drift to the anode, cations to the cathode',d:''}; }
+    if(BP.layout==='graph'){ var m=(BP.markers||[]).filter(function(x){return x.id===id;})[0]; if(m)return {t:m.label||id,b:m.note||'',d:m.def||''}; }
+    if(!BP.layout){ var e=elMap&&elMap[id]; if(e)return {t:e.label||id,b:e.note||'',d:e.def||''}; }
+  }catch(e){} return null; }
+  function closeTip(){ if(_tip){try{_tip.remove();}catch(e){} _tip=null;} }
+  function showTip(clientX,clientY,info,id){ closeTip(); var stg=$('vizStage'); if(!stg)return; var r=stg.getBoundingClientRect();
+    var sp=(id!=null)?stepOf(id):-1;
+    var d=document.createElement('div'); d.className='viztip';
+    d.innerHTML='<i>✕</i><b>'+esc(info.t)+'</b>'+(info.b?'<span>'+esc(info.b)+'</span>':'')+(info.d?'<em>'+esc(info.d)+'</em>':'')
+      +'<div class="tipbar"><button class="tb" data-a="say">🔊 Read aloud</button>'+(sp>=0?'<button class="tb" data-a="jump">↪ See this step</button>':'')+'</div>';
+    stg.appendChild(d); _tip=d;
+    var x=Math.min(Math.max(8,clientX-r.left+stg.scrollLeft-12),Math.max(8,stg.clientWidth-220)),y=Math.max(6,clientY-r.top+stg.scrollTop-6);
+    d.style.left=x+'px'; d.style.top=y+'px';
+    d.querySelector('i').onclick=function(e){e.stopPropagation();closeTip();};
+    Array.prototype.forEach.call(d.querySelectorAll('.tb'),function(b){ b.onclick=function(e){ e.stopPropagation();
+      if(b.getAttribute('data-a')==='say'){ speakOnce(info.t+'. '+(info.d||info.b||'')); }
+      else { closeTip(); jump(sp); setTimeout(function(){ speakOnce(BP.narration_steps[sp].narration_text||''); },260); } }; }); }
+  function onElClick(e){ var t=e.target; while(t&&t.getAttribute&&!t.getAttribute('data-el')&&t.parentNode) t=t.parentNode;
+    if(!t||!t.getAttribute){closeTip();return;} var id=t.getAttribute('data-el'); if(!id){closeTip();return;} var info=elInfo(id); if(!info){closeTip();return;} showTip(e.clientX,e.clientY,info,id); e.stopPropagation(); }
+  /* tap a word in the caption → hear the step + jump to the node it names */
+  function wireCaptionTaps(){ var cap=$('vizCap'); if(!cap)return;
+    Array.prototype.forEach.call(cap.querySelectorAll('.cw'),function(w){ w.style.cursor='pointer'; w.onclick=function(e){ e.stopPropagation();
+      var word=(w.textContent||'').toLowerCase().replace(/[^a-z0-9]/g,''); if(!word)return;
+      var hit=null; (BP.nodes||[]).forEach(function(n){ if(hit)return; var lab=(n.label||'').toLowerCase(); if(lab && (lab.indexOf(word)>=0||word.length>3&&lab.replace(/[^a-z0-9]/g,'').indexOf(word)>=0)) hit=n.id; });
+      if(hit){ var info=elInfo(hit); if(info){ var rc=w.getBoundingClientRect(); showTip(rc.left,rc.top,info,hit); return; } }
+      speakOnce(BP.narration_steps[i].narration_text||''); }; }); }
+  /* explain-simpler: ask the server to re-say this step in plainer words (falls back gracefully) */
+  var _simpleCache={};
+  async function simplerStep(){ var s=BP.narration_steps[i]; if(!s)return; var key=i;
+    if(_simpleCache[key]){ applySimpler(_simpleCache[key]); return; }
+    var btn=$('vizSimpler'); if(btn){btn.disabled=true;btn.textContent='…';}
+    var simple=null;
+    try{ var CFG=window.MEDBANK_CONFIG||{};
+      if(CFG.IMPORT_API&&window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token;
+        if(tok){ var rr=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/simplify',{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify({text:s.narration_text||'',context:(BP.meta&&BP.meta.title)||''})});
+          var jj=await rr.json().catch(function(){return{};}); if(rr.ok&&jj.text)simple=jj.text; } }
+    }catch(e){}
+    if(!simple){ var m=(s.narration_text||'').match(/^[^.!?]*[.!?]/); simple=(m?m[0]:(s.narration_text||'')).trim(); simple='In simple terms: '+simple.charAt(0).toLowerCase()+simple.slice(1); }  // fallback: keep the first, core sentence
+    _simpleCache[key]=simple; if(btn){btn.disabled=false;btn.textContent='🔄 Simpler';} applySimpler(simple); }
+  function applySimpler(text){ var cap=$('vizCap'); if(!cap)return;
+    cap.innerHTML='<span class="lab">SIMPLER · STEP '+(i+1)+'</span><span class="capw">'+buildKaraoke(text)+'</span>';
+    karaokeReset(); setKaraoke(_kSpans.length); wireCaptionTaps(); speakOnce(text); }
+  function closeQuiz(){ var q=$('vizQuiz'); if(q)q.remove(); }
+  function shouldQuiz(){ if(!vizQuiz)return false; if(i>=BP.narration_steps.length-1)return false; if(vizScore.streak>=3)return Math.random()<0.5; return true; }  // adaptive: ease off on a hot streak
+  function askNext(done){ var st=BP.narration_steps,ni=i+1; if(ni>=st.length){done();return;}
+    var qz=st[i].quiz;   // AI-authored "why" question about the step just shown
+    if(qz&&qz.options&&qz.options.length>=2){ var corr=(qz.answer!=null&&qz.options[qz.answer]!=null)?qz.options[qz.answer]:qz.options[0];
+      showQuiz(qz.q||'Why does this happen?',qz.options.slice(),corr,qz.why||'',done); return; }
+    var correct=(st[ni].short||st[ni].term||'Next step');
+    var pool=st.map(function(s){return s.short||s.term;}).filter(function(x){return x&&x!==correct;});
+    var ds=[]; for(var tr=0;tr<25&&ds.length<2&&pool.length;tr++){ var c=pool[Math.floor(Math.random()*pool.length)]; if(ds.indexOf(c)<0&&c!==correct)ds.push(c); }
+    var opts=ds.concat([correct]); for(var a=opts.length-1;a>0;a--){var j=Math.floor(Math.random()*(a+1));var tmp=opts[a];opts[a]=opts[j];opts[j]=tmp;}
+    showQuiz('🧠 What comes next?',opts,correct,(st[ni].narration_text||''),done); }
+  function showQuiz(qText,opts,correct,why,done){ closeQuiz(); var box=document.createElement('div'); box.className='vizquiz'; box.id='vizQuiz';
+    box.innerHTML='<div class="qq">'+esc(qText)+'</div>'+opts.map(function(o){return '<button class="qo" type="button">'+esc(o)+'</button>';}).join('')+'<div class="qhint" id="qHint"></div>';
+    var cap=$('vizCap'); cap.parentNode.insertBefore(box,cap.nextSibling);
+    Array.prototype.forEach.call(box.querySelectorAll('.qo'),function(b){ b.onclick=function(){ var pick=b.textContent,ok=(pick===correct);
+      vizScore.n++; if(ok){ vizScore.c++; vizScore.streak++; vizScore.best=Math.max(vizScore.best,vizScore.streak); }
+      else { vizScore.streak=0;
+        var card={q:qText.replace(/^🧠\s*/,''),opts:opts.slice(),ans:opts.indexOf(correct),a:(why||('The answer is “'+correct+'”.'))};
+        if(VIZ_TID)addVizCard(VIZ_TID,card); _missed.push(correct); }
+      updateStreak();
+      Array.prototype.forEach.call(box.querySelectorAll('.qo'),function(x){ if(x.textContent===correct)x.classList.add('ok'); else if(x===b)x.classList.add('no'); x.disabled=true; });
+      var hint=$('qHint'); if(hint)hint.innerHTML=ok?'✓ Correct — nice!':('Not quite. '+esc((why||'').slice(0,120)||'The highlighted one is right.')+'<br><span class="qsave">➕ Saved to your review deck</span>');
+      setTimeout(function(){ closeQuiz(); done(); }, ok?900:2100); }; }); }
+  function showResults(){ closeQuiz(); if(!vizQuiz||vizScore.n===0)return;
+    var takeaways=(BP.recap&&BP.recap.length)?BP.recap.slice(0,3):BP.narration_steps.map(function(s){return s.term||s.short;}).filter(Boolean).slice(0,3);
+    var box=document.createElement('div'); box.className='vizresults'; box.id='vizResults';
+    box.innerHTML='<div class="rhd">🎓 You predicted <b>'+vizScore.c+'/'+vizScore.n+'</b> correct'+(vizScore.best>=3?' · 🔥 best streak '+vizScore.best:'')+'</div>'
+      +'<div class="rtk"><span>Remember:</span><ul>'+takeaways.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>'
+      +(_missed.length?'<div class="rsave">📚 '+_missed.length+' card'+(_missed.length>1?'s':'')+' added to your review deck — due today.</div>':'')
+      +'<div class="rbtns"><button class="rb pri" id="rAgain">↺ Test me again</button><button class="rb" id="rClose">Done</button></div>';
+    var cap=$('vizCap'); cap.parentNode.insertBefore(box,cap.nextSibling);
+    $('rAgain').onclick=function(){ box.remove(); vizScore={c:0,n:0,streak:0,best:0}; _missed=[]; updateStreak(); vizQuiz=true; var qb=$('vizQuizBtn'); if(qb)qb.classList.add('qon'); jump(0); setTimeout(play,300); };
+    $('rClose').onclick=function(){ box.remove(); }; }
+  function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return;
+    if(i<BP.narration_steps.length-1){ if(shouldQuiz()){ askNext(function(){ if(!playing)return; i++; playStep(); }); } else { i++; playStep(); } } else { stop(); showResults(); } }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause';
     // keep-alive: Chrome silently stops speechSynthesis after ~15s — pause+resume resets that timer
     if(vizKeep)clearInterval(vizKeep); vizKeep=setInterval(function(){ try{ if(window.speechSynthesis&&speechSynthesis.speaking){ speechSynthesis.pause(); speechSynthesis.resume(); } }catch(e){} },9000);
@@ -4582,7 +4863,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
       else if(bp.layout==='orbital'){ layoutOrbital(); }
       else if(bp.layout==='geometry'||bp.layout==='ice'){ /* fixed layout */ }
       else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
-      recordViz(topicId||(window.currentTopicId?currentTopicId():''), text);   // save this video against the note
+      VIZ_TID=topicId||(window.currentTopicId?currentTopicId():''); vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
+      recordViz(VIZ_TID, text);   // save this video against the note
       mountPlayer(); setTimeout(play,400);
     }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }
   };

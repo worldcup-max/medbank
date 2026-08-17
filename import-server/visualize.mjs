@@ -130,6 +130,12 @@ understanding, never to merely label what appears:
 Depth and clarity matter more than brevity within the two-sentence limit — every step should leave the
 student thinking "oh, I get it now," not "okay, next."
 
+OPTIONAL ENRICHMENT (add these when they raise understanding — they power an interactive study mode; any layout):
+ • Per node/element, an optional "def": one plain-language sentence on WHY this part matters or what it really is (deeper than the short "note"). e.g. "def":"AN-OX — oxidation always happens here, and in a galvanic cell this electrode is negative."
+ • Per narration_step, an optional "quiz" testing UNDERSTANDING of that step: {"q":"why…?","options":["…","…","…"],"answer":0,"why":"one-sentence explanation"}. Make the WRONG options the real misconceptions students hold (e.g. "the salt bridge carries the electrons"), not obviously-silly choices. 3 options. "answer" is the index of the correct one.
+ • A top-level "recap": array of 2–3 short "things to remember" takeaways for the whole concept.
+These are optional; when unsure, omit them rather than pad. They must never replace narration_text.
+
 ═══════ MODE "mechanism" ═══════
 TEMPLATES (pick exactly ONE whose scale fits the concept):
 ${Object.entries(VOCAB.templates).map(([k,v])=>"• "+k+" ["+v.scale+"] — "+v.use+" — zones: "+v.zones.join(", ")).join("\n")}

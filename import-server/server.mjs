@@ -688,6 +688,26 @@ app.post("/visualize", async (req,res)=>{
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* Explain-simpler — re-say one narration step in plainer words (interactive study mode).
+ * Tiny, cheap call; best-effort. Never caches — it's on-demand per tap. */
+app.post("/simplify", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const text = (req.body.text||"").toString().trim().slice(0,600);
+    if(!text) return res.status(400).json({ error:"nothing to simplify" });
+    const context = (req.body.context||"").toString().slice(0,120);
+    const prompt =
+`Re-explain this one sentence from a study animation in the SIMPLEST possible words, as if to a struggling first-year student. Keep it accurate. One or two short sentences. Use an everyday analogy ONLY if it truly helps. No jargon unless you immediately define it. Do not add new facts.
+${context?`TOPIC: ${context}\n`:""}SENTENCE: "${text}"
+Return ONLY JSON: {"text":"the simpler explanation"}`;
+    const gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:400, temperature:0.3, json:true });
+    const o = parseBlueprint(gen.text) || {};
+    const out = (o.text||"").toString().trim();
+    if(!out) return res.status(502).json({ error:"try again" });
+    res.json({ ok:true, text:out.slice(0,400) });
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Admin: edit build prompts per kind × level (only is_admin accounts) ---- */
 async function requireAdmin(req){
   const user = await getUser(req); if(!user) return null;
