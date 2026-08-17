@@ -29,6 +29,7 @@ a{color:var(--accent);text-decoration:none}
 #sidebar{width:248px;flex:0 0 248px;background:var(--panel);border-right:1px solid var(--line);
   padding:18px 12px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:50}
 #main{margin-left:248px;flex:1;min-width:0;padding:28px 32px 80px;max-width:1000px}
+#main.wide{max-width:1320px}
 .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px;font-weight:700;font-size:19px}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
 .navlabel{font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:var(--dimmer);padding:16px 12px 7px;font-weight:600}
@@ -414,6 +415,16 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .home2 .hstart{flex:1 1 240px;justify-content:center}
 .home2 .hcont{flex:0 1 auto}
 .home2{max-width:100%;overflow-x:clip}
+/* ===== bento home: single column on phone, filled grid on desktop ===== */
+.home2.bento{display:flex;flex-direction:column;gap:14px}
+.home2.bento>*{margin:0;min-width:0}
+.home2.bento .hero{padding-bottom:16px}
+@media(min-width:900px){
+  .home2.bento{display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start;
+    grid-template-areas:"hero tiles" "jump jump" "goal prog" "more more";}
+  .home2.bento .mtiles{grid-template-columns:1fr 1fr;align-content:start}
+  .home2.bento .jbmore{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+}
 .hcols{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-top:14px;align-items:start;min-width:0}
 .hleft,.hright{min-width:0}
 .goalcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:14px}
@@ -857,7 +868,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 
 <div id="shell">
   <nav id="sidebar">
-    <div class="brand"><img src="icon.svg" alt="" width="26" height="26" style="border-radius:7px"> MedBank</div>
+    <div class="brand" onclick="go('home')" style="cursor:pointer" title="Home"><img src="icon.svg" alt="" width="26" height="26" style="border-radius:7px"> MedBank</div>
     <div id="nav"></div>
   </nav>
   <main id="main"></main>
@@ -1008,7 +1019,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.15w';   // bump this each release
+const APP_VERSION='2026.08.15y';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1800,8 +1811,8 @@ function pageHome(){
   const exams=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
   const inprog=startedTopics().filter(t=>status(t.id)==='inprogress').map(t=>({t,d:topicLastDay(t.id)})).sort((a,b)=>b.d-a.d).map(x=>x.t);
   const jbLeadT=inprog[0], jbMore=inprog.slice(1,5);
-  return `<div class="home2">
-    <div class="hero">
+  return `<div class="home2 bento">
+    <div class="hero" style="grid-area:hero">
       <div class="herorow"><span class="herohi">${greeting()}, Frank</span>
         <span class="herostreak"><span>🔥</span> ${st}</span></div>
       <div class="herolab">Today's focus</div>
@@ -1810,36 +1821,32 @@ function pageHome(){
         <button class="btn primary hstart" onclick="go('today')">🧠 ${due?'Start active recall':'Open active recall'} →</button>
         ${resumeBtn}
       </div>
+      ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
     </div>
-    ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
-    <div class="hcols">
-      <div class="hleft">
-        <div class="goalcard">
-          <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
-          <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
-          <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
-            <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
-        </div>
-        <div class="shelfhd">Jump back in</div>
-        ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
-        ${jbMore.length?`<div class="jbmorelab">More in progress</div><div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:''}
-      </div>
-      <div class="hright">
-        <div class="mtiles">
-          <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
-          <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
-          <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
-          <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
-        </div>
-        <div class="progcard">
-          <div class="progtt">Your progress</div>
-          ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
-            return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
-              <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
-        </div>
-      </div>
+    <div class="goalcard" style="grid-area:goal">
+      <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
+      <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
+      <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
+        <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
     </div>
-    <details class="homemore">
+    <div class="b-jump" style="grid-area:jump">
+      <div class="shelfhd">Jump back in</div>
+      ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
+      ${jbMore.length?`<div class="jbmorelab">More in progress</div><div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:''}
+    </div>
+    <div class="mtiles" style="grid-area:tiles">
+      <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
+      <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
+      <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
+      <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
+    </div>
+    <div class="progcard" style="grid-area:prog">
+      <div class="progtt">Your progress</div>
+      ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
+        return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
+          <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
+    </div>
+    <details class="homemore" style="grid-area:more">
       <summary>More · this week &amp; subjects</summary>
       ${homeMore()}
     </details>
@@ -4408,6 +4415,7 @@ function render(){
   }
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
+  $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
