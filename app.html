@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16p';   // bump this each release
+const APP_VERSION='2026.08.16q';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -5463,12 +5463,30 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
     playStep(); }
   function stop(){ playing=false; var b=$('vizPlay'); if(b)b.textContent='▶ Play'; if(vizKeep){clearInterval(vizKeep);vizKeep=null;} if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} try{if(window.stopSpeak)stopSpeak();}catch(e){} }
   function jump(x){ stop(); render(x); }
+  function _vizSleep(ms){ return new Promise(function(res){ setTimeout(res,ms); }); }
   async function fetchBlueprint(text,subject){
     var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) throw new Error('Visualize needs an internet connection.');
     var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token; if(!token) throw new Error('Please sign in.');
-    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/visualize',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:(text||'').slice(0,2000),subject:subject||''})});
-    var j=await r.json().catch(function(){return {};}); if(!r.ok||!j.blueprint) throw new Error((j&&(j.message||j.error))||'Could not build a visualization.');
-    return j;
+    var url=CFG.IMPORT_API.replace(/\/$/,'')+'/visualize';
+    var body=JSON.stringify({text:(text||'').slice(0,2000),subject:subject||''});
+    var lastErr=null;
+    // Render free tier spins down when idle; the first hit can "Failed to fetch" or return 502/503/504
+    // while it wakes (~30–50s). Retry with backoff so the server transparently warms up.
+    for(var attempt=0; attempt<5; attempt++){
+      try{
+        var r=await fetch(url,{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:body});
+        if(r.status===429){ var j4=await r.json().catch(function(){return {};}); var e=new Error((j4&&(j4.message||j4.error))||'You’ve used all of today’s explainers.'); e.status=429; e.info=j4; throw e; }
+        if(r.status===502||r.status===503||r.status===504){ lastErr=new Error('Waking the Visualize server…'); await _vizSleep(1500*(attempt+1)); continue; }
+        var j=await r.json().catch(function(){return {};});
+        if(!r.ok||!j.blueprint) throw new Error((j&&(j.message||j.error))||'Could not build a visualization.');
+        return j;
+      }catch(err){
+        if(err&&err.status===429) throw err;                 // daily-limit — don't retry
+        lastErr=err;
+        if(attempt<4){ await _vizSleep(1500*(attempt+1)); continue; }   // network "Failed to fetch" while server wakes → retry
+      }
+    }
+    throw lastErr||new Error('Could not reach Visualize — check your connection and try again.');
   }
   function setQuota(q){ var el=$('vizQuota'); if(!el)return; if(!q||q.remaining==null){ el.textContent=''; return; }
     el.textContent=q.remaining+' left today'; el.className='vizq'+(q.remaining<=1?' low':''); el.title=(q.premium?'Premium':'Basic')+': '+q.limit+'/day'; }
