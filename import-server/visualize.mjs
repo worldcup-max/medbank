@@ -98,13 +98,37 @@ Pick the FIRST mode below that can represent the concept:
   ("A and B"), complement ("not A", "neither"), mutually exclusive vs overlapping events, and
   CONDITIONAL probability P(A|B). Use whenever the idea is which outcomes belong to which event, or
   the add-vs-multiply / "or vs and" confusion. Two or three circles.
+• MODE "unitcircle" — TRIGONOMETRY's master diagram: a radius drawn at angle θ on a circle of
+  radius 1, with the sine as the HEIGHT of the point and the cosine as the distance ACROSS. Use for
+  "where sine/cosine come from", radians vs degrees, quadrant signs (ASTC), and the Pythagorean
+  identity. Prefer this over a graph whenever the idea is what sine and cosine ARE.
+• MODE "solve" — a WORKED ALGEBRAIC SOLUTION, one line per move, each line carrying the REASON for
+  that move: solving equations, completing the square, quadratics, factorising, rearranging formulae,
+  simultaneous equations by elimination, absolute-value equations, and INEQUALITIES (add the optional
+  "numberline" to shade the solution set with an open or filled dot). Use whenever the source asks to
+  SOLVE, SIMPLIFY or FACTORISE something.
+• MODE "vectors" — arrows on a coordinate grid: vector addition tip-to-tail, the resultant, and
+  components dropping to the axes. Use for what a vector IS, why sliding one changes nothing, and
+  why components simply add.
+• MODE "matrix" — a 2×2 MATRIX AS A TRANSFORMATION of the plane: the unit square and its basis
+  arrows i and j, where each COLUMN sends them, and the determinant as the AREA SCALE FACTOR. Use for
+  "what does a matrix do", determinants, singular/invertible, and why order matters.
 • MODE "flow" — a cause-and-effect chain / pathway with no anatomical home: biochemical cascades,
   enzyme pathways, "if X then Y then Z", stepwise procedures (redox balancing, limiting reagent,
   buffer action). Ordered stations connected by arrows. This is the default workhorse for processes.
 • MODE "tree" — LAST RESORT only. A pure DEFINITION/CLASSIFICATION/LIST with no diagrammatic form
   (e.g. "the two toxins are…", "types of X" that truly have no spatial/quantitative structure).
 
-Decision: try mechanism → cell → venn → graph → flow first; choose "tree" ONLY if none of the
+MATHS ROUTING (use it — never force maths into a medical or chemistry mode): functions, limits,
+continuity, the derivative-as-tangent, integrals-as-area, curve sketching, sequences and series, and
+systems of equations → "graph". Trig, radians, quadrant signs, the Pythagorean identity →
+"unitcircle". Solving / factorising / quadratics / rearranging / inequalities → "solve". Vectors →
+"vectors". Matrices, determinants, linear transformations → "matrix". Sets and probability logic →
+"venn"; branching chance experiments (with/without replacement) → "tree" as a PROBABILITY TREE.
+Multi-step PROCEDURES with no single worked example (chain rule, integration by parts, Gaussian
+elimination, induction) → "flow".
+
+Decision: try mechanism → cell → unitcircle/solve/vectors/matrix → venn → graph → flow first; choose "tree" ONLY if none of the
 diagrammatic modes can honestly represent the content — the one exception is a PROBABILITY TREE,
 where "tree" IS the right diagram (see the tree mode notes). Every highlight must produce a rich,
 engaging result.
@@ -254,7 +278,63 @@ Rules:
    twice; "and" is where the circles overlap, and you only MULTIPLY the two probabilities when the
    events are independent. Say those in spoken words. Last step recaps.
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"venn","universe":"","formula":"","sets":[{"id":"A","label":"","p":"","color":"#2563eb"},{"id":"B","label":"","p":"","color":"#dc2626"}],"regions":[{"id":"A_and_B","label":"","note":"","color":"#7c3aed"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["A","B"],"active":["A"],"point":"A"}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"venn","universe":"","formula":"","sets":[{"id":"A","label":"","p":"","color":"#2563eb"},{"id":"B","label":"","p":"","color":"#dc2626"}],"regions":[{"id":"A_and_B","label":"","note":"","color":"#7c3aed"}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["A","B"],"active":["A"],"point":"A"}]}
+
+═══════ MODE "unitcircle" (trigonometry — sine is the height, cosine is the across) ═══════
+Rules:
+1. "angle": the angle θ in DEGREES, strictly between 0 and 360 (e.g. 52). The renderer draws the
+   circle, the axes, the radius at θ, the point P, the angle arc, and the labels.
+2. narration_steps drive a FIXED diagram. "reveal"/"active"/"point" use ONLY these part names:
+   "circle", "radius", "sin", "cos", "quadrants", "identity". Reveal at least "radius", "sin" and
+   "cos". 3–8 steps, last recaps.
+3. TEACH THE MISCONCEPTION: sine is not a triangle-only idea — it is simply how HIGH the point is on
+   the circle, which is why it never exceeds one and why it goes negative below the axis. The
+   identity is Pythagoras with a hypotenuse of one, not a rule to memorise. Spoken words only:
+   "sine of theta", "cosine squared plus sine squared equals one".
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"unitcircle","angle":52,"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["circle"],"active":["circle"],"point":"circle"}]}
+
+═══════ MODE "solve" (a worked solution, line by line, with the reason for every move) ═══════
+Rules:
+1. "problem": the question exactly as it would be set (it sits in the banner).
+2. "lines": 3–9 steps of working, IN ORDER, each {id (l1,l2,…), math (the algebra for that line —
+   symbols are fine HERE, this is a label), why (a SHORT reason for the move, e.g. "divide every
+   term by 2", "÷ by −3 → flip the sign")}. Every line MUST have a "why" — the reason is the lesson.
+3. OPTIONAL "numberline" for inequalities / absolute-value solution sets:
+   {min, max, op ("<", ">", "≤" or "≥"), value (the boundary), closed (true for ≤/≥ — a filled dot;
+   false for </> — an open dot)}. Reveal it with the id "nl" on the final step.
+4. narration_steps: "reveal"/"active"/"point" use the LINE ids (and "nl" if a numberline exists).
+   Reveal one line per step in order. 3–10 steps, last recaps.
+5. Narration is SPOKEN: "two x squared minus four x minus three equals zero", never the symbols.
+   Say WHY each move is legal (both sides stay balanced) and bust the topic's misconception — above
+   all, that multiplying or dividing an inequality by a NEGATIVE flips the sign, because it reverses
+   which number is bigger.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"solve","problem":"","lines":[{"id":"l1","math":"","why":""}],"numberline":{"min":-6,"max":2,"op":"≤","value":-2,"closed":true},"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["l1"],"active":["l1"],"point":"l1"}]}
+
+═══════ MODE "vectors" (arrows on a grid — tip-to-tail addition) ═══════
+Rules:
+1. "a" and "b": two-number arrays [across, up]. Keep components small (within ±6 across, ±4 up) and
+   make sure the resultant a + b also fits.
+2. narration_steps use ONLY these part names: "a", "b", "comp" (dashed component lines under a),
+   "shift" (b slid to the tip of a), "res" (the resultant). Reveal at least "a", "shift" and "res".
+   3–8 steps, last recaps.
+3. TEACH: a vector is size AND direction, so sliding it changes nothing — which is exactly why the
+   components simply add. Say the numbers in words.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"vectors","a":[3,1],"b":[1,2],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["a"],"active":["a"],"point":"a"}]}
+
+═══════ MODE "matrix" (a 2×2 matrix as a transformation of the plane) ═══════
+Rules:
+1. "M": [[a,b],[c,d]] — keep every entry within ±4 so the transformed square stays on screen.
+2. narration_steps use ONLY these part names: "orig" (the unit square with i and j), "ti" (where i
+   lands = column 1), "tj" (where j lands = column 2), "det" (the parallelogram + its area), "M"
+   (the matrix caption). Reveal at least "orig", "ti" and "tj". 3–8 steps, last recaps.
+3. TEACH: the COLUMNS are the new homes of the basis vectors, and the determinant is the AREA SCALE
+   FACTOR (zero means space is flattened, so there is no inverse; negative means space was flipped).
+   Say "determinant", "two by two", "i and j" in spoken words.
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"matrix","M":[[2,1],[0,1.5]],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["orig"],"active":["orig"],"point":"orig"}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -545,7 +625,97 @@ export const EXEMPLARS = [
         {short:"Recap",term:"recap",narration_text:"Recap: the definite integral is the exact area you get from infinitely thin rectangles, and you find it by evaluating the antiderivative at the two limits and subtracting — because differentiation and integration undo each other.",reveal:["F"],active:["Ar"],point:"Ar"}],
       recap:["A definite integral is an accumulated area, built from infinitely thin rectangles.",
              "The area-so-far function's SLOPE is the original curve — the Fundamental Theorem.",
-             "So you evaluate the antiderivative at both limits and subtract."]} }
+             "So you evaluate the antiderivative at both limits and subtract."]} },
+  /* ── MATHS 15: unit circle — where sine and cosine come from ── */
+  { text: "On the unit circle, sine is the y-coordinate and cosine is the x-coordinate of the point at angle θ.",
+    blueprint: {meta:{title:"The unit circle — where sine and cosine come from",subject:"Trigonometry",concept_id:"unit_circle_sin_cos"},layout:"unitcircle",angle:52,
+      narration_steps:[
+        {short:"Circle",term:"unit circle",narration_text:"This circle has a radius of exactly one, which is why we call it the unit circle. Any point on it is pinned down by a single angle, theta, measured round from the positive x-axis.",reveal:["circle"],active:["circle"],point:"circle",
+         def:"The unit circle is a circle of radius one centred on the origin — the home diagram of all trigonometry."},
+        {short:"Radius",term:"the point P",narration_text:"Draw the radius out at the angle theta, and it meets the circle at a point we will call P. Everything else on this diagram is just a fact about where P sits.",reveal:["radius"],active:["radius"],point:"radius"},
+        {short:"Sine",term:"sine",narration_text:"Drop straight down from P to the x-axis. That height, the y-coordinate of P, IS the sine of theta — so sine is simply how high the point is, not something that only lives inside a right-angled triangle.",reveal:["sin"],active:["sin"],point:"sin",
+         def:"Sine of theta = the height (y-coordinate) of the point on the unit circle at angle theta.",
+         quiz:{q:"Why is the sine of an angle never bigger than one?",options:["The point sits on a circle of radius one, so its height can never exceed one","Because angles are measured in degrees","Because sine is always positive"],answer:0,why:"The height of a point on a circle of radius one is at most one, so sine is trapped between minus one and one."}},
+        {short:"Cosine",term:"cosine",narration_text:"The distance across along the x-axis, the x-coordinate of P, is the cosine of theta. So cosine is how far across the point is, and sine is how far up — that is the whole definition.",reveal:["cos"],active:["cos"],point:"cos"},
+        {short:"Signs",term:"quadrants",narration_text:"Now you can read the signs straight off the picture instead of memorising a rule: in the second quadrant the point is left of centre but still above the axis, so cosine is negative while sine stays positive.",reveal:["quadrants"],active:["quadrants"],point:"quadrants",
+         def:"The sign of sine and cosine is just the sign of the point's height and its across-distance."},
+        {short:"Identity",term:"the identity",narration_text:"Because the radius is one, Pythagoras on this little triangle gives cosine squared plus sine squared equals one. The famous identity is not magic — it is the circle's radius written in algebra.",reveal:["identity"],active:["identity"],point:"identity",
+         quiz:{q:"Where does cos²θ + sin²θ = 1 come from?",options:["Pythagoras on the triangle whose hypotenuse is the radius of length one","A definition you have to memorise","The fact that sine and cosine are waves"],answer:0,why:"Across-squared plus up-squared equals radius-squared, and the radius is one."}}],
+      recap:["Sine is the HEIGHT of the point; cosine is how far ACROSS it is.",
+             "The signs in each quadrant are just the signs of those two coordinates.",
+             "cos²θ + sin²θ = 1 is Pythagoras with a hypotenuse of one."]} },
+  /* ── MATHS 16: solve — completing the square, line by line with the reason for every move ── */
+  { text: "Solve 2x² − 4x − 3 = 0 by completing the square.",
+    blueprint: {meta:{title:"Completing the square",subject:"Algebra",concept_id:"completing_the_square"},layout:"solve",problem:"Solve  2x² − 4x − 3 = 0  by completing the square",
+      lines:[{id:"l1",math:"2x² − 4x − 3 = 0",why:"the equation to solve"},
+             {id:"l2",math:"x² − 2x − 3/2 = 0",why:"divide every term by 2"},
+             {id:"l3",math:"x² − 2x = 3/2",why:"move the constant right"},
+             {id:"l4",math:"x² − 2x + 1 = 3/2 + 1",why:"add (half of −2)² = 1 to both sides"},
+             {id:"l5",math:"(x − 1)² = 5/2",why:"the left is a perfect square"},
+             {id:"l6",math:"x − 1 = ± √(5/2)",why:"square-root both sides — keep ±"},
+             {id:"l7",math:"x = 1 ± √(5/2) ≈ 2.58 or −0.58",why:"add 1 — two solutions"}],
+      narration_steps:[
+        {short:"Start",term:"complete the square",narration_text:"We want to solve two x squared minus four x minus three equals zero. It does not factorise nicely, so we reshape it into something that does — that is what completing the square means.",reveal:["l1"],active:["l1"],point:"l1"},
+        {short:"Divide",term:"coefficient of one",narration_text:"First divide every term by two, so that x squared has a coefficient of one. The trick only works in that form, because a perfect square always starts with a plain x squared.",reveal:["l2"],active:["l2"],point:"l2"},
+        {short:"Move",term:"isolate",narration_text:"Now move the constant to the right-hand side, leaving x squared minus two x on its own. We are clearing space for the piece we are about to add.",reveal:["l3"],active:["l3"],point:"l3"},
+        {short:"Half & square",term:"the key move",narration_text:"Here is the key move: take half of the x-coefficient — half of minus two is minus one — then square it to get one, and add that one to BOTH sides. Half-then-square is exactly the number that completes a perfect square.",reveal:["l4"],active:["l4"],point:"l4",
+         def:"Half-then-square: for x² + bx, the number that completes the square is always b over two, all squared.",
+         quiz:{q:"Why must the 1 be added to BOTH sides?",options:["Adding to only one side would change the equation","Because 1 is a perfect square","To make the right-hand side positive"],answer:0,why:"An equation is a balance: whatever you do to one side you must do to the other, or the solutions change."}},
+        {short:"Factor",term:"perfect square",narration_text:"Now the left-hand side folds up into x minus one, all squared — and notice that the minus one is exactly the half we took a moment ago. That is the payoff for the whole manoeuvre.",reveal:["l5"],active:["l5"],point:"l5"},
+        {short:"Root",term:"plus or minus",narration_text:"Square-root both sides. Because a positive and a negative number both square to the same result, we must write plus or minus — forgetting it is how students lose a whole solution.",reveal:["l6"],active:["l6"],point:"l6",
+         quiz:{q:"Why does the ± appear when you take the square root?",options:["Two numbers square to the same value, one positive and one negative","Because the equation was quadratic to begin with","Because the right-hand side is a fraction"],answer:0,why:"Both plus and minus root five over two square to five over two, so both are genuine solutions."}},
+        {short:"Solve",term:"two solutions",narration_text:"Finally add one to both sides. So x is one plus or minus the square root of five over two, which is about two point five eight or minus nought point five eight — two solutions, exactly, and no formula was memorised.",reveal:["l7"],active:["l7"],point:"l7"}],
+      recap:["Divide through first so x² has a coefficient of one.",
+             "Half the x-coefficient, square it, and add it to BOTH sides.",
+             "Square-rooting always gives ±, which is why a quadratic has two solutions."]} },
+  /* ── MATHS 17: solve + number line — the inequality flip ── */
+  { text: "Solve the inequality −3x + 1 ≥ 7 and show the solution set.",
+    blueprint: {meta:{title:"Solving an inequality — and the flip",subject:"Algebra",concept_id:"inequality_negative_flip"},layout:"solve",problem:"Solve  −3x + 1 ≥ 7",
+      lines:[{id:"l1",math:"−3x + 1 ≥ 7",why:"the inequality"},
+             {id:"l2",math:"−3x ≥ 6",why:"subtract 1 from both sides"},
+             {id:"l3",math:"x ≤ −2",why:"÷ by −3 → flip the sign"}],
+      numberline:{min:-6,max:2,op:"≤",value:-2,closed:true},
+      narration_steps:[
+        {short:"Start",term:"inequality",narration_text:"Solve negative three x plus one is greater than or equal to seven. An inequality is solved just like an equation — you isolate x — but there is one twist waiting at the end.",reveal:["l1"],active:["l1"],point:"l1"},
+        {short:"Subtract",term:"a safe move",narration_text:"Subtract one from both sides. Adding or subtracting is completely safe, because shifting both sides along the number line does not change which one is bigger, so we get negative three x greater than or equal to six.",reveal:["l2"],active:["l2"],point:"l2"},
+        {short:"The flip",term:"flip the sign",narration_text:"Now divide by negative three, and here is the trap: multiplying or dividing by a negative number swaps which side is bigger, so the sign must FLIP. Greater-than-or-equal becomes less-than-or-equal, and x is less than or equal to minus two.",reveal:["l3"],active:["l3"],point:"l3",
+         def:"Multiplying by a negative reflects both numbers through zero, which reverses their order.",
+         quiz:{q:"Why does the inequality sign flip when you divide by a negative?",options:["Multiplying by a negative reverses the order of the two numbers","Because the answer is negative","Because you divided rather than subtracted"],answer:0,why:"Two is less than five, but minus two is GREATER than minus five — the order reverses."}},
+        {short:"Answer",term:"the solution set",narration_text:"On the number line the answer is everything from minus two leftwards, and the dot is filled in because minus two itself satisfies the inequality. Check it: three times minus two is minus six, plus one is minus five... so always test one value to be sure the flip went the right way.",reveal:["nl"],active:["l3"],point:"nl"}],
+      recap:["Adding and subtracting never change an inequality sign.",
+             "Multiplying or dividing by a NEGATIVE flips the sign.",
+             "A filled dot means the endpoint is included; an open dot means it is not."]} },
+  /* ── MATHS 18: vectors — tip to tail ── */
+  { text: "How do you add two vectors, and why can you just add their components?",
+    blueprint: {meta:{title:"Adding vectors — tip to tail",subject:"Vectors",concept_id:"vector_addition_tip_to_tail"},layout:"vectors",a:[3,1],b:[1,2],
+      narration_steps:[
+        {short:"Vector a",term:"vector",narration_text:"A vector carries both a size and a direction, which is why we draw it as an arrow rather than write it as a single number. Here is vector a: three across and one up.",reveal:["a"],active:["a"],point:"a",
+         def:"A vector has magnitude AND direction; a scalar has only size."},
+        {short:"Components",term:"components",narration_text:"Those two numbers are its components — how far it travels across and how far it travels up. Break any arrow into an across-part and an up-part and it becomes arithmetic.",reveal:["a","comp"],active:["comp"],point:"comp"},
+        {short:"Vector b",term:"the second vector",narration_text:"Here is vector b: one across and two up. To add them we do not simply join the two arrows where they happen to sit — we use tip to tail.",reveal:["a","b"],active:["b"],point:"b"},
+        {short:"Tip to tail",term:"slide it over",narration_text:"Pick up vector b and slide it across, keeping its length and direction exactly, until its tail sits on the tip of a. Sliding a vector never changes it, because only size and direction define it — not where it is drawn.",reveal:["a","shift"],active:["shift"],point:"shift",
+         quiz:{q:"Why are we allowed to slide vector b across the page?",options:["A vector is defined only by size and direction, not by its position","Because the grid squares are equal","Because b is shorter than a"],answer:0,why:"Moving an arrow without turning or stretching it leaves both its magnitude and its direction untouched."}},
+        {short:"Resultant",term:"the resultant",narration_text:"The sum, a plus b, is the single arrow from the start of a to the new tip of b — four across and three up. That is exactly why you can just add the components: three plus one across, and one plus two up.",reveal:["a","shift","res"],active:["res"],point:"res",
+         def:"The resultant is the one arrow that does the job of both."}],
+      recap:["A vector is size plus direction — sliding it changes nothing.",
+             "Add tip to tail; the resultant runs from the first tail to the last tip.",
+             "Which is why components simply add: across with across, up with up."]} },
+  /* ── MATHS 19: matrix — a matrix is a transformation, the determinant is an area scale factor ── */
+  { text: "What does a matrix actually do to space, and what does its determinant mean?",
+    blueprint: {meta:{title:"A matrix is a transformation of space",subject:"Matrices",concept_id:"matrix_transformation_determinant"},layout:"matrix",M:[[2,1],[0,1.5]],
+      narration_steps:[
+        {short:"The basis",term:"basis vectors",narration_text:"Start with the unit square and its two basis arrows: i pointing one step right, and j pointing one step up. Every point in the plane is built from those two, so a matrix's whole job is to say where they go.",reveal:["orig"],active:["orig"],point:"orig",
+         def:"The basis vectors i and j are the two unit steps from which every other vector is assembled."},
+        {short:"Where i goes",term:"first column",narration_text:"The first column of the matrix tells i where to land — here at two across and zero up. That is the single most useful fact about matrices: the columns are simply the new homes of the basis vectors.",reveal:["orig","ti"],active:["ti"],point:"ti",
+         quiz:{q:"What do the COLUMNS of a 2×2 matrix tell you?",options:["Where the basis vectors i and j end up after the transformation","The solutions of a system of equations","The rows read sideways"],answer:0,why:"Column one is the image of i and column two is the image of j — everything else follows."}},
+        {short:"Where j goes",term:"second column",narration_text:"The second column sends j to one across and one and a half up. Every other point of the plane is dragged along with them, which is why the grid lines stay straight and evenly spaced.",reveal:["orig","ti","tj"],active:["tj"],point:"tj"},
+        {short:"Determinant",term:"the determinant",narration_text:"The unit square had an area of one, and it has been stretched into this parallelogram. Its new area is exactly the determinant — here, three — so the determinant is simply how much the transformation scales area.",reveal:["ti","tj","det"],active:["det"],point:"det",
+         def:"The determinant is the area scale factor; a negative one means space has also been flipped over.",
+         quiz:{q:"What does a determinant of zero tell you?",options:["The transformation squashes the square flat, so it cannot be undone","The matrix is the identity","The transformation is a pure rotation"],answer:0,why:"Zero area means the plane has collapsed onto a line, and no inverse can un-squash it."}},
+        {short:"Recap",term:"recap",narration_text:"Recap: read the columns as the new homes of i and j, and read the determinant as the area scale factor — and because doing two transformations in a different order lands the arrows somewhere else, matrix multiplication is not commutative.",reveal:["ti","tj","det"],active:["det"],point:"det"}],
+      recap:["The columns of a matrix are where i and j land.",
+             "The determinant is the area scale factor of the transformation.",
+             "Determinant zero means the space is flattened — no inverse exists."]} }
 ];
 
 /* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
@@ -553,8 +723,13 @@ export const EXEMPLARS = [
  * model can still choose any — this just trims ~2/3 of the few-shot tokens. */
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
-  /* ---- MATHS routing first: maths cues are distinctive, and the chemistry regex below would
-     otherwise swallow words like "reaction", "atom" or "distribution" out of a maths passage. ---- */
+  /* ---- MATHS GATE. Maths highlights must NEVER fall through to a medical/chemistry exemplar:
+     the chemistry regex below would otherwise swallow "reaction", "atom", "distribution", "base"
+     or "product" out of a perfectly ordinary maths passage. If any maths cue fires we route to a
+     maths mode here and return before the chemistry/biology heuristics ever run. ---- */
+  const MATHS = /derivative|differentiat|integral|integrat|antiderivative|\blimit\b|\btangent\b|\bsecant\b|calculus|\bsine\b|\bcosine\b|\btangent ratio\b|\bsin\b|\bcos\b|\btan\b|radian|unit circle|trigonometr|\bvector\b|\bvectors\b|scalar|magnitude and direction|dot product|cross product|\bmatrix\b|matrices|determinant|\beigen|linear transformation|inequalit|absolute value|number line|\bsolve\b|solving|factoris|factoriz|\bfactor\b|quadratic|parabola|complete the square|completing the square|simultaneous equation|probabilit|permutation|combination|\bsequence\b|\bseries\b|arithmetic progression|geometric progression|sigma notation|logarithm|\blog\b|\bln\b|exponential (growth|decay|function)|\bfunction\b .{0,24}\bgraph\b|domain and range|asymptot|\bpi\b|theta|\baxis\b .{0,20}\bcurve\b/;
+  const isMaths = MATHS.test(t) || /∫|∑|√|θ|π|dy\/dx|d\/dx|f'\(x\)|f′\(x\)|≤|≥/.test(text||"");
+  /* ---- MATHS routing first (cue → the right renderer) ---- */
   // sets / probability logic → the Venn diagram
   if(/venn|\bunion\b|intersection of|\bcomplement\b|mutually exclusive|\bsubset\b|set notation|(\bp\s*\(\s*a\s*(or|and|\|)\s*b\s*\))|probability of a (or|and|given)|conditional probability|\bgiven that\b|\bp\s*\(\s*a\s*\|\s*b\s*\)|neither .{0,20}\bnor\b|at least one of/.test(t))
     return EXEMPLARS[11];
@@ -567,9 +742,27 @@ function pickExemplar(text){
   // the integral as an area
   if(/integral|integrat|antiderivative|area under (the )?curve|riemann|fundamental theorem|\+ ?c\b.{0,20}constant of integration|by parts|substitution rule/.test(t))
     return EXEMPLARS[14];
+  // trigonometry / the unit circle → the unit-circle renderer
+  if(/unit circle|radian|trigonometr|\bsine\b|\bcosine\b|\bsin\b|\bcos\b|\btan\b|\bsoh ?cah ?toa\b|pythagorean identity|\bastc\b|quadrant|amplitude|\bperiod(ic)?\b|phase shift|trig (identit|equation|graph)/.test(t))
+    return EXEMPLARS[15];
+  // inequalities & absolute value → the worked solution WITH a number line
+  if(/inequalit|\bnumber line\b|absolute value|\|x\||greater than or equal|less than or equal|solution set|\binterval notation\b|flip the (sign|inequality)/.test(t))
+    return EXEMPLARS[17];
+  // solving / factorising / rearranging → the line-by-line worked solution
+  if(/complet(e|ing) the square|quadratic formula|\bquadratic\b|factoris|factoriz|\bfactor\b|\bsolve\b|solving|rearrang|make .{0,12}the subject|simultaneous equation|elimination method|substitution method|extraneous solution|\broots? of\b|discriminant/.test(t))
+    return EXEMPLARS[16];
+  // vectors → the tip-to-tail plane
+  if(/\bvectors?\b|scalar|magnitude and direction|tip to tail|resultant|dot product|cross product|\bcomponents?\b .{0,20}\bvector\b|position vector|unit vector/.test(t))
+    return EXEMPLARS[18];
+  // matrices & transformations → the transformation grid
+  if(/\bmatri(x|ces)\b|determinant|\beigen(value|vector)/.test(t) || /\bidentity matrix\b|inverse matrix|linear transformation|transformation of (the )?(plane|space)|singular matrix|not commutative/.test(t))
+    return EXEMPLARS[19];
   // any other plottable maths idea → the derivative graph exemplar (best in-domain graph shot)
-  if(/\blimit\b|approaches|asymptot|\bcontinuit\b|continuous function|domain and range|\bsin\b|\bcos\b|\btan\b|sine|cosine|unit circle|radian|logarithm|\bln\b|exponential (growth|decay|function)|quadratic|parabola|\bvertex\b|simultaneous equations|geometric series|arithmetic sequence|converge|\bsigma notation\b|sum to infinity/.test(t))
+  if(/\blimit\b|approaches|asymptot|\bcontinuit\b|continuous function|domain and range|logarithm|\bln\b|exponential (growth|decay|function)|parabola|\bvertex\b|geometric series|arithmetic sequence|\bsequence\b|\bseries\b|converge|\bsigma notation\b|sum to infinity|curve sketch|stationary point|maximum and minimum/.test(t))
     return EXEMPLARS[13];
+  /* Maths cue fired but nothing above matched: still keep it in-domain — the graph engine is the
+     workhorse of maths — rather than dropping through to a chemistry or biology exemplar. */
+  if(isMaths) return EXEMPLARS[13];
   const isTree =/\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t);
   // chemistry cues → use an in-domain chemistry exemplar (chemistry rarely fits the biology scenes)
   const chem = /\b(mole|reagent|reactant|stoichiometr|oxidation|reduction|redox|anode|cathode|electrode|electron|electroly|galvanic|electrochemical|voltaic|daniell|salt bridge|half-cell|\bion\b|ionis|acid|\bbase\b|\bph\b|buffer|titrat|equilibrium|entropy|enthalpy|gibbs|spontaneous|exotherm|endotherm|\bbond|covalent|ionic|orbital|electroneg|valence|molar|molecul|intermolecular|dipole|hydrogen bond|london|van der|solub|catalyst|\bgas law\b|periodic|isotope|atom|compound|reaction|delta ?[ghs]|energy profile|activation energy|reaction coordinate|maxwell|boltzmann|half-life|half life|radioactive|decay|phase diagram|triple point|distribution|electron config|aufbau|hund|pauli|subshell|vsepr|molecular shape|molecular geometry|lone pair|tetrahedral|trigonal|\bbent\b|pyramidal|octahedral|bond angle|ice table|le ?chatelier|reaction quotient|\bkc\b|\bkp\b)\b/.test(t)
@@ -797,9 +990,127 @@ export function vennCheck(bp){
   return { pass: issues.length===0, issues };
 }
 
+
+/* ═══ MATHS layout validators — one per new renderer. Each renderer draws ONLY the part names it
+ * knows, so a blueprint naming anything else would silently render a blank stage. ═══ */
+const UC_PARTS = new Set(["circle","radius","sin","cos","identity","quadrants"]);
+export function unitCircleCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  const a=bp.angle; if(a!=null && (typeof a!=="number"||!isFinite(a))) issues.push("angle must be a number of degrees");
+  if(typeof a==="number" && (a<=0||a>=360)) issues.push("angle must be strictly between 0 and 360 degrees");
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  const seen=new Set();
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>320) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...UC_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    if(s.point && !UC_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
+  });
+  ["radius","sin","cos"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — the unit-circle story needs the radius, the sine height and the cosine across"); });
+  return {pass:issues.length===0,issues};
+}
+
+/* SOLVE — a worked algebraic solution: every line needs the MOVE and the REASON for it. */
+export function solveCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  if(!bp.problem) issues.push("missing 'problem' — the question being solved goes in the banner");
+  const lines=Array.isArray(bp.lines)?bp.lines:[];
+  if(lines.length<3) issues.push("need ≥3 solution lines (got "+lines.length+")");
+  if(lines.length>9) issues.push("too many solution lines ("+lines.length+") — keep it to the real moves");
+  const ok={}; lines.forEach((ln,i)=>{
+    if(!ln.id){ issues.push("line "+(i+1)+" missing id"); return; }
+    if(ok[ln.id]) issues.push("duplicate line id '"+ln.id+"'");
+    ok[ln.id]=1;
+    if(!ln.math) issues.push("line '"+ln.id+"' missing 'math' (the algebra for that line)");
+    if(!ln.why) issues.push("line '"+ln.id+"' missing 'why' — every line must state the reason for the move");
+  });
+  const nl=bp.numberline;
+  if(nl){
+    ok.nl=1;
+    if(typeof nl.min!=="number"||typeof nl.max!=="number"||!(nl.max>nl.min)) issues.push("numberline needs numeric min < max");
+    if(typeof nl.value!=="number") issues.push("numberline needs a numeric 'value' (the boundary)");
+    if(typeof nl.value==="number" && typeof nl.min==="number" && typeof nl.max==="number" && (nl.value<nl.min||nl.value>nl.max)) issues.push("numberline value must lie between min and max");
+    if(["<",">","≤","≥"].indexOf(nl.op)<0) issues.push("numberline op must be one of < > ≤ ≥");
+    if(nl.closed!=null && typeof nl.closed!=="boolean") issues.push("numberline 'closed' must be true/false (filled vs open dot)");
+    if((nl.op==="≤"||nl.op==="≥") && nl.closed===false) issues.push("op '"+nl.op+"' includes the endpoint, so 'closed' must be true (filled dot)");
+    if((nl.op==="<"||nl.op===">") && nl.closed===true) issues.push("op '"+nl.op+"' excludes the endpoint, so 'closed' must be false (open dot)");
+  }
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  const revealed=new Set();
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text && s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a line id"+(nl?", or 'nl' for the number line":"")+")"); else revealed.add(r); });
+    (s.active||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    if(s.point && !ok[s.point]) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'");
+  });
+  lines.forEach(ln=>{ if(ln.id && !revealed.has(ln.id)) issues.push("line '"+ln.id+"' is never revealed — it will not appear"); });
+  if(nl && !revealed.has("nl")) issues.push("a numberline is defined but never revealed — reveal 'nl' on the final step");
+  return {pass:issues.length===0,issues};
+}
+
+/* VECTORS — a fixed tip-to-tail plane; only these five part names exist. */
+const VEC_PARTS = new Set(["a","b","comp","shift","res"]);
+function vec2(v){ return Array.isArray(v)&&v.length===2&&v.every(n=>typeof n==="number"&&isFinite(n)); }
+export function vectorsCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  if(!vec2(bp.a)) issues.push("'a' must be a two-number array [across, up]");
+  if(!vec2(bp.b)) issues.push("'b' must be a two-number array [across, up]");
+  [["a",bp.a],["b",bp.b]].forEach(([k,v])=>{ if(vec2(v)&&(Math.abs(v[0])>6||Math.abs(v[1])>4)) issues.push("vector "+k+" is off the drawable grid — keep components within ±6 across and ±4 up"); });
+  if(vec2(bp.a)&&vec2(bp.b)){ const r=[bp.a[0]+bp.b[0],bp.a[1]+bp.b[1]];
+    if(Math.abs(r[0])>7||Math.abs(r[1])>4) issues.push("the resultant a + b runs off the grid — shrink the components"); }
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
+  if(steps.length>8) issues.push("too many steps ("+steps.length+")");
+  const seen=new Set();
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    (s.reveal||[]).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...VEC_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    if(s.point && !VEC_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
+  });
+  ["a","shift","res"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — tip-to-tail needs the first vector, the slid copy and the resultant"); });
+  return {pass:issues.length===0,issues};
+}
+
+/* MATRIX — a 2×2 transformation of the unit square; five fixed part names. */
+const MAT_PARTS = new Set(["orig","ti","tj","det","M"]);
+export function matrixCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  const M=bp.M;
+  if(!Array.isArray(M)||M.length!==2||!M.every(r=>vec2(r))) issues.push("'M' must be a 2×2 array of numbers [[a,b],[c,d]]");
+  else {
+    const flat=[M[0][0],M[0][1],M[1][0],M[1][1]];
+    if(flat.some(n=>Math.abs(n)>4)) issues.push("keep every entry of M within ±4 so the transformed square stays on screen");
+    const det=M[0][0]*M[1][1]-M[0][1]*M[1][0];
+    if(Math.abs(det)>12) issues.push("|det| = "+det+" is too large to draw — choose a gentler matrix");
+  }
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
+  if(steps.length>8) issues.push("too many steps ("+steps.length+")");
+  const seen=new Set();
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    (s.reveal||[]).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...MAT_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    if(s.point && !MAT_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
+  });
+  ["orig","ti","tj"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — show the unit square and where BOTH basis vectors land"); });
+  return {pass:issues.length===0,issues};
+}
+
 /* Every layout the engine in app.html can actually draw. A blueprint naming anything else would
  * fall through to the scene renderer and blow up, so it is rejected here and at the response guard. */
-export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn"]);
+export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn","unitcircle","solve","vectors","matrix"]);
 
 /* QC critic — deterministic, manifest-enforced. Delegates to each layout's own check. */
 export function qcCheck(bp){
@@ -813,6 +1124,10 @@ export function qcCheck(bp){
   if(bp && bp.layout==="geometry") return geometryCheck(bp);
   if(bp && bp.layout==="ice") return iceCheck(bp);
   if(bp && bp.layout==="venn") return vennCheck(bp);
+  if(bp && bp.layout==="unitcircle") return unitCircleCheck(bp);
+  if(bp && bp.layout==="solve") return solveCheck(bp);
+  if(bp && bp.layout==="vectors") return vectorsCheck(bp);
+  if(bp && bp.layout==="matrix") return matrixCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -863,6 +1178,13 @@ export function chainOf(bp){
   if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
   if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
   if(bp && bp.layout==="graph") return (bp.markers||[]).map(m=>m.label||m.id);
+  if(bp && bp.layout==="unitcircle") return ["unit circle (r = 1)","angle θ = "+(bp.angle==null?50:bp.angle)+"°","cos θ = x","sin θ = y","cos²θ + sin²θ = 1"];
+  if(bp && bp.layout==="solve") return (bp.lines||[]).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
+    .concat(bp.numberline?["solution set: x "+(bp.numberline.op||"≥")+" "+bp.numberline.value]:[]);
+  if(bp && bp.layout==="vectors"){ const a=bp.a||[0,0],b=bp.b||[0,0];
+    return ["a = ("+a[0]+", "+a[1]+")","b = ("+b[0]+", "+b[1]+")","b slid tip-to-tail","a + b = ("+(a[0]+b[0])+", "+(a[1]+b[1])+")"]; }
+  if(bp && bp.layout==="matrix"){ const M=bp.M||[[1,0],[0,1]];
+    return ["unit square with i and j","i → ("+M[0][0]+", "+M[1][0]+")","j → ("+M[0][1]+", "+M[1][1]+")","det = "+(M[0][0]*M[1][1]-M[0][1]*M[1][0])+" (area scale factor)"]; }
   if(bp && bp.layout==="venn") return (bp.sets||[]).map(s=>s.label||s.id)
     .concat((bp.regions||[]).map(r=>(r.id||"")+(r.label?" = "+r.label:"")));
   if(bp && bp.layout==="cell") return [(bp.anode&&bp.anode.label)||"anode","e⁻ → wire","(cathode)"+((bp.cathode&&bp.cathode.label)||""),bp.bridge||"salt bridge"];

@@ -305,13 +305,18 @@ async function openaiTTS(text, voice, _retry){
 }
 /* Fish Audio (hosted) — natural voices, same price tier as OpenAI, more voices.
  * Used for the AI tutor and most premium podcasts. Voice = reference_id. */
+const _OAI_VOICE_NAMES = new Set(["alloy","echo","fable","onyx","nova","shimmer","ash","ballad","coral","sage","verse"]);
 async function fishTTS(text, voiceId, _retry){
   const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
+  // The podcast picker offers OpenAI-style names (Nova/Shimmer/…). Those are NOT valid Fish
+  // reference IDs, so ignore them and use the configured Fish voice (or Fish's default).
+  if(voiceId && _OAI_VOICE_NAMES.has(String(voiceId).toLowerCase())) voiceId = null;
+  const reference_id = voiceId || process.env.FISH_VOICE_A || undefined;
   const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),30000); let r;
   try{ r = await fetch("https://api.fish.audio/v1/tts", {
     method:"POST", signal:ctrl.signal,
     headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
-    body: JSON.stringify({ text, reference_id: voiceId || process.env.FISH_VOICE_A, format:"mp3" }) });
+    body: JSON.stringify(Object.assign({ text, format:"mp3" }, reference_id ? { reference_id } : {})) });
   }catch(e){ clearTimeout(to); if(!_retry) return fishTTS(text,voiceId,true); throw new Error("Fish voice timed out"); }
   clearTimeout(to);
   if(!r.ok){ if((r.status>=500||r.status===429)&&!_retry){ await new Promise(s=>setTimeout(s,900)); return fishTTS(text,voiceId,true); } const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
@@ -339,11 +344,12 @@ async function kokoroTTS(text, voiceId, _retry){
   }
   return Buffer.from(await r.arrayBuffer());
 }
-/* is a provider actually configured on this host yet? */
+/* is a provider actually configured on this host yet?
+ * OpenAI TTS is intentionally NOT used on this account (voices are Fish + Kokoro). */
 function providerReady(p){
   if(p==="fish")   return !!process.env.FISH_API_KEY;
   if(p==="kokoro") return !!process.env.KOKORO_TTS_URL;
-  return !!process.env.OPENAI_API_KEY;
+  return false;
 }
 /* bounded in-memory cache so identical clips (re-reading the same card, replaying a
  * line) never re-hit the paid API. Podcasts are also cached per-topic in storage. */
@@ -359,22 +365,25 @@ async function _ttsRaw(p, text, voiceId){
   let buf;
   if(p==="fish")        buf = await fishTTS(spoken, voiceId);
   else if(p==="kokoro") buf = await kokoroTTS(spoken, voiceId);
-  else                  buf = await openaiTTS(spoken, voiceId);
+  else throw new Error("Unsupported TTS provider '"+p+"' (OpenAI TTS is disabled on this account)");
   _ttsCache.set(key, buf);
   if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
   return buf;
 }
 async function ttsClip(provider, text, voiceId, kokoroVoice){
-  const p = providerReady(provider) ? provider : "openai";
-  try{ return await _ttsRaw(p, text, voiceId); }
-  catch(err){
-    // a PREMIUM engine (Fish/OpenAI) failed or got rate-limited → degrade to Kokoro so the episode still finishes
-    if(p!=="kokoro" && process.env.KOKORO_TTS_URL){
-      console.warn("[tts] "+p+" failed, Kokoro fallback:", (err&&err.message||"").slice(0,100));
-      return await _ttsRaw("kokoro", text, kokoroVoice || KOKORO_DEFAULT.read);
-    }
-    throw err;   // basic (kokoro) has no premium fallback by design
+  // Try the requested provider first, then fall back to the OTHER configured
+  // non-OpenAI provider so a clip still finishes. OpenAI TTS is never used here.
+  const chain = [];
+  if(provider && providerReady(provider)) chain.push([provider, voiceId]);
+  if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || process.env.FISH_VOICE_A]);
+  if(providerReady("kokoro") && provider!=="kokoro") chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
+  if(!chain.length) throw new Error("No TTS provider configured — set FISH_API_KEY (premium) and/or KOKORO_TTS_URL (basic)");
+  let lastErr;
+  for(const [p, v] of chain){
+    try{ return await _ttsRaw(p, text, v); }
+    catch(err){ lastErr = err; console.warn("[tts] "+p+" failed:", (err&&err.message||"").slice(0,120)); }
   }
+  throw lastErr || new Error("All TTS providers failed");
 }
 async function uploadPodcastAudio(path, buf){
   const up = await admin.storage.from("podcasts").upload(path, buf, { contentType:"audio/mpeg", upsert:true });
@@ -614,8 +623,9 @@ app.post("/podcast-audio", async (req,res)=>{
     let provider, vA = voiceA, vB = voiceB;
     const combo = "auto";
     if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
-    if(!prem){ provider = "kokoro"; }
-    else { const n = _podRot.get(user.id)||0; provider = (n % 3 === 2) ? "kokoro" : "fish"; _podRot.set(user.id, n+1); }
+    // premium → Fish (the paid, natural voice); basic → Kokoro (free). ttsClip falls
+    // back to the other configured provider automatically if one is down. No OpenAI.
+    provider = prem ? "fish" : "kokoro";
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
     else { vA = process.env.FISH_VOICE_A || voiceA; vB = process.env.FISH_VOICE_B || voiceB; }
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
