@@ -429,7 +429,11 @@ app.get("/health", (_req,res)=>res.json({ ok:true,
   kokoro:{ ok:KOKORO_HEALTH.ok, configured:!!process.env.KOKORO_TTS_URL, lastError:KOKORO_HEALTH.lastError,
            lastFailAt:KOKORO_HEALTH.lastFailAt, lastOkAt:KOKORO_HEALTH.lastOkAt, fallbacks:KOKORO_HEALTH.fallbacks },
   fish:{ configured:!!FISH_KEY, keyLen:FISH_KEY.length, source:FISH_KEY_SOURCE,
-         voiceA:!!FISH_VOICE_HOST_A, voiceB:!!FISH_VOICE_HOST_B } }));
+         voiceA:!!FISH_VOICE_HOST_A, voiceB:!!FISH_VOICE_HOST_B },
+  // debug: the actual FISH-related env var NAMES the process sees (names + length only, never values).
+  // If FISH_API_KEY's name has a hidden character, nameLen will be > 12 or the name will look off.
+  fishEnvKeys: Object.keys(process.env).filter(k=>/fish/i.test(k))
+    .map(k=>({ name:k, nameLen:k.length, hasVal:!!(process.env[k]||"").trim() })) }));
 
 /* who am I + plan — lets the app show the current plan (reads the real isPremium check) */
 app.get("/me", async (req,res)=>{
