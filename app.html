@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16n';   // bump this each release
+const APP_VERSION='2026.08.16o';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -4747,6 +4747,28 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 .vizgenspin i:nth-child(2){animation-delay:.15s}.vizgenspin i:nth-child(3){animation-delay:.3s}
 @keyframes vizpulse{0%,80%,100%{transform:scale(.5);opacity:.4}40%{transform:scale(1);opacity:1}}
 .vizgentxt{display:flex;flex-direction:column}.vizgentxt b{font-size:14px;color:#3a1d7a}.vizgentxt span{font-size:12px;color:#6b6580}
+/* floating non-blocking "building your explainer" pill — reader keeps scrolling while it generates */
+.vizfloat{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9600;
+  display:flex;align-items:center;gap:10px;padding:9px 16px 9px 10px;border-radius:999px;
+  background:rgba(24,18,45,.92);backdrop-filter:blur(8px);color:#fff;box-shadow:0 10px 30px rgba(45,20,90,.38);
+  font-size:13.5px;font-weight:700;max-width:min(92vw,420px);cursor:default;animation:vfIn .28s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes vfIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+.vizfloat .vf-core{position:relative;flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 3px 10px rgba(124,58,237,.5)}
+.vizfloat.gen .vf-core{animation:vfBounce 1.05s infinite cubic-bezier(.5,.05,.5,.95)}
+@keyframes vfBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.vizfloat .vf-badge{position:absolute;top:-5px;right:-5px;width:16px;height:16px;border-radius:50%;
+  background:#fbbf24;color:#3a1d05;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.vizfloat.gen .vf-badge{animation:vfSpin 1.4s linear infinite}
+@keyframes vfSpin{to{transform:rotate(360deg)}}
+.vizfloat .vf-lab{line-height:1.2}
+.vizfloat.ready{cursor:pointer;background:rgba(13,90,72,.95)}
+.vizfloat.ready .vf-core{background:linear-gradient(135deg,#10b981,#0d7a68);animation:vfPop .4s ease}
+.vizfloat.ready .vf-badge{background:#d1fae5;color:#065f46}
+@keyframes vfPop{0%{transform:scale(.7)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.vizfloat.err{background:rgba(120,30,30,.94)}
 .vizready{background:#e7f7f0;border:1px solid #b7e6d5;color:#0d7a68;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:800;margin-bottom:8px}
 .vizinlinebody{padding:0!important}
 .viznotice{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:100003;background:#141026;color:#fff;font-size:13px;font-weight:700;padding:11px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(20,12,38,.35);max-width:88vw;text-align:center;transition:opacity .3s}
@@ -5450,26 +5472,48 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
   }
   function setQuota(q){ var el=$('vizQuota'); if(!el)return; if(!q||q.remaining==null){ el.textContent=''; return; }
     el.textContent=q.remaining+' left today'; el.className='vizq'+(q.remaining<=1?' low':''); el.title=(q.premium?'Premium':'Basic')+': '+q.limit+'/day'; }
-  window.aiVisualize=async function(text, topicName, topicId){
+  /* ---- non-blocking note-path Visualize: generate in the BACKGROUND behind a floating pill,
+     so the reader keeps scrolling; the video also keeps building if they leave the page. ---- */
+  var _vizFloatReady=null;
+  function removeVizFloat(){ var e=document.getElementById('vizFloat'); if(e)e.remove(); }
+  function showVizFloat(state){
+    removeVizFloat();
+    var f=document.createElement('div'); f.id='vizFloat'; f.className='vizfloat '+(state==='ready'?'ready':'gen');
+    if(state==='ready'){
+      f.innerHTML='<span class="vf-core"><span class="vf-badge">▶</span>🎬</span><span class="vf-lab">Explainer ready — tap to watch</span>';
+      f.onclick=playVizFloat;
+    } else {
+      f.innerHTML='<span class="vf-core"><span class="vf-badge">✦</span>🎬</span><span class="vf-lab">Building your explainer… keep reading</span>';
+    }
+    document.body.appendChild(f);
+  }
+  function vizFloatError(msg){
+    var f=document.getElementById('vizFloat');
+    if(!f){ if(window.mbToast)mbToast(msg); return; }
+    f.className='vizfloat err'; f.onclick=null;
+    f.innerHTML='<span class="vf-core">⚠️</span><span class="vf-lab">'+esc(msg)+'</span>';
+    setTimeout(removeVizFloat,3800);
+  }
+  function playVizFloat(){
+    var d=_vizFloatReady; if(!d)return; removeVizFloat();
     openModal();
+    BP=d.bp; SRC=d.text||''; applyLayout(d.bp);
+    VIZ_TID=d.topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
+    mountPlayer(); setTimeout(play,400);
+  }
+  window.aiVisualize=async function(text, topicName, topicId){
     var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
-    if(words>110){ $('vizBody').innerHTML='<div class="vizload">📝 That\'s a lot of text — <b>highlight one idea at a time</b> for the sharpest explainer.<br><br><span style="font-size:12.5px;color:#5c5570;font-weight:600">Close this and select a single sentence or mechanism.</span></div>'; return; }
+    if(words>110){ if(window.mbToast)mbToast('That\'s a lot of text — highlight one idea at a time for the sharpest explainer.'); return; }
+    var tid=topicId||(window.currentTopicId?currentTopicId():'');
+    showVizFloat('gen');                                    // floating bouncing pill — non-blocking
     try{
-      var resp=await fetchBlueprint(text, topicName); var bp=resp.blueprint; setQuota(resp.viz_quota);
-      if(!bp.narration_steps||!bp.narration_steps.length){ $('vizBody').innerHTML='<div class="vizload">Could not build this one — try a clearer single sentence.</div>'; return; }
-      BP=bp; SRC=text||'';
-      if(bp.layout==='tree'){ layoutTree(); }
-      else if(bp.layout==='flow'){ layoutFlow(); }
-      else if(bp.layout==='cell'){ /* fixed schematic — no layout needed */ }
-      else if(bp.layout==='graph'){ layoutGraph(); }
-      else if(bp.layout==='orbital'){ layoutOrbital(); }
-      else if(bp.layout==='venn'){ layoutVenn(); }
-      else if(bp.layout==='geometry'||bp.layout==='ice'){ /* fixed layout */ }
-      else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
-      VIZ_TID=topicId||(window.currentTopicId?currentTopicId():''); vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
-      recordViz(VIZ_TID, text);   // save this video against the note
-      mountPlayer(); setTimeout(play,400);
-    }catch(e){ var b=$('vizBody'); if(b) b.innerHTML='<div class="vizload">'+esc(e.message||'Something went wrong')+'</div>'; }
+      var resp=await fetchBlueprint(text, topicName); var bp=resp.blueprint;
+      if(!bp.narration_steps||!bp.narration_steps.length){ vizFloatError('Could not build this one — try a clearer single sentence.'); return; }
+      try{ setQuota(resp.viz_quota); }catch(e){}
+      recordViz(tid, text);                                  // save this video against the note (+ immediate flush)
+      _vizFloatReady={ bp:bp, text:text||'', topicName:topicName, topicId:tid };
+      showVizFloat('ready');                                 // pill flips to "tap to watch"
+    }catch(e){ vizFloatError((e&&e.message)||'Something went wrong'); }
   };
   function applyLayout(bp){
     if(bp.layout==='tree'){ layoutTree(); }
