@@ -315,7 +315,8 @@ const _OAI_VOICE_NAMES = new Set(["alloy","echo","fable","onyx","nova","shimmer"
    already has set: the explicit FISH_VOICE_A/B, else the existing tutor reference IDs. */
 const FISH_VOICE_HOST_A = process.env.FISH_VOICE_A || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || process.env.FISH_VOICE_LAURA_TUTOR || undefined;
 const FISH_VOICE_HOST_B = process.env.FISH_VOICE_B || process.env.FISH_VOICE_LAURA_TUTOR || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || undefined;
-async function fishTTS(text, voiceId, _retry){
+async function fishTTS(text, voiceId, attempt){
+  attempt = attempt || 0;
   const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
   // The podcast picker offers OpenAI-style names (Nova/Shimmer/…). Those are NOT valid Fish
   // reference IDs, so ignore them and use the configured Fish voice (or Fish's default).
@@ -326,9 +327,11 @@ async function fishTTS(text, voiceId, _retry){
     method:"POST", signal:ctrl.signal,
     headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
     body: JSON.stringify(Object.assign({ text, format:"mp3" }, reference_id ? { reference_id } : {})) });
-  }catch(e){ clearTimeout(to); if(!_retry) return fishTTS(text,voiceId,true); throw new Error("Fish voice timed out"); }
+  }catch(e){ clearTimeout(to); if(attempt<3){ await new Promise(s=>setTimeout(s,700*(attempt+1))); return fishTTS(text,voiceId,attempt+1); } throw new Error("Fish voice timed out"); }
   clearTimeout(to);
-  if(!r.ok){ if((r.status>=500||r.status===429)&&!_retry){ await new Promise(s=>setTimeout(s,900)); return fishTTS(text,voiceId,true); } const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
+  // retry up to 3x on rate-limit (429) or transient 5xx, with escalating backoff — this is what
+  // keeps a burst of parallel podcast clips from failing when Fish briefly rate-limits us.
+  if(!r.ok){ if((r.status>=500||r.status===429)&&attempt<3){ await new Promise(s=>setTimeout(s,1000*(attempt+1))); return fishTTS(text,voiceId,attempt+1); } const t=await r.text().catch(()=> ""); throw new Error("Fish voice failed ("+r.status+"): "+t.slice(0,160)); }
   return Buffer.from(await r.arrayBuffer());
 }
 /* Kokoro (open model) via a hosted endpoint you point KOKORO_TTS_URL at (Deepinfra,
@@ -382,13 +385,16 @@ async function _ttsRaw(p, text, voiceId){
 /* Live Kokoro health — so the app can warn you (admin) when basic tier is silently
  * burning paid Fish credits because the self-hosted Kokoro box is down. */
 const KOKORO_HEALTH = { ok:true, lastOkAt:0, lastFailAt:0, lastError:null, fallbacks:0 };
+function kokoroRecentlyDown(){ return KOKORO_HEALTH.ok===false && (Date.now()-KOKORO_HEALTH.lastFailAt) < 90000; }
 async function ttsClip(provider, text, voiceId, kokoroVoice){
   // Try the requested provider first, then fall back to the OTHER configured
   // non-OpenAI provider so a clip still finishes. OpenAI TTS is never used here.
   const chain = [];
   if(provider && providerReady(provider)) chain.push([provider, voiceId]);
   if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || FISH_VOICE_HOST_A]);
-  if(providerReady("kokoro") && provider!=="kokoro") chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
+  // Only fall back to Kokoro if it isn't currently crash-looping — otherwise a premium (Fish)
+  // clip that hiccups would die on a dead Kokoro 502 instead of just retrying Fish.
+  if(providerReady("kokoro") && provider!=="kokoro" && !kokoroRecentlyDown()) chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
   if(!chain.length) throw new Error("No TTS provider configured — set FISH_API_KEY (premium) and/or KOKORO_TTS_URL (basic)");
   let lastErr;
   for(const [p, v] of chain){
@@ -687,8 +693,9 @@ app.post("/podcast-audio", async (req,res)=>{
     // TIME BUDGET: stop well under Render's request limit, persist progress, and let the client
     // re-request to continue. Guarantees each request finishes even a 16-line episode never times out.
     const DEADLINE = Date.now() + 40000;
-    // Kokoro is memory-bound (serialize); Fish is a remote API (parallelize to finish within the window).
-    let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 4;
+    // Kokoro is memory-bound (serialize); Fish is a remote API but rate-limits at high concurrency,
+    // so keep it at 2 — combined with the resumable design that's plenty to finish within the window.
+    let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 2;
     async function _worker(){
       while(_idx < script.length){
         const i = _idx++;
@@ -696,7 +703,13 @@ app.post("/podcast-audio", async (req,res)=>{
         if(Date.now() > DEADLINE) return;             // out of time this request; client will continue
         const vid = script[i].speaker==="A" ? vA : vB;
         const kvid = script[i].speaker==="A" ? kA : kB;   // Kokoro voice to use if the premium engine falls back
-        const buf = await ttsClip(provider, script[i].text, vid, kvid);
+        // per-clip retry so one transient failure doesn't leave a gap (unfilled clips resume next pass anyway)
+        let buf=null;
+        for(let a=0; a<2 && !buf; a++){
+          try{ buf = await ttsClip(provider, script[i].text, vid, kvid); }
+          catch(err){ if(a>=1) { console.warn("[podcast] clip "+i+" failed, will resume next pass:", (err&&err.message||"").slice(0,100)); break; } await new Promise(s=>setTimeout(s,600)); }
+        }
+        if(!buf){ continue; }   // leave urls[i] null → picked up on the next resume pass
         urls[i] = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
       }
     }
