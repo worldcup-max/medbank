@@ -672,21 +672,28 @@ app.post("/podcast-audio", async (req,res)=>{
     console.log("[podcast-audio] user=%s premium=%s → provider=%s", user.email, prem, prem ? "fish" : "kokoro");
     let provider, vA = voiceA, vB = voiceB;
     const combo = "auto";
-    if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
+    if(extras.podcast.audio && extras.podcast.audio[combo] && extras.podcast.audio[combo].every(Boolean))
+      return res.json({ ok:true, done:true, urls:extras.podcast.audio[combo], lines:script });
     // premium → Fish (the paid, natural voice); basic → Kokoro (free). ttsClip falls
     // back to the other configured provider automatically if one is down. No OpenAI.
     provider = prem ? "fish" : "kokoro";
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
     else { vA = FISH_VOICE_HOST_A || voiceA; vB = FISH_VOICE_HOST_B || voiceB; }   // two distinct Fish voices for the hosts
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
-    const urls = new Array(script.length);
+    // RESUMABLE: carry over any clips already generated in a previous (timed-out) request.
+    const prev = (extras.podcast.audio && extras.podcast.audio[combo]) || [];
+    const urls = new Array(script.length); for(let i=0;i<script.length;i++) urls[i] = prev[i] || null;
     const _preFallbacks = KOKORO_HEALTH.fallbacks;   // detect if Kokoro failed during THIS episode
-    // Kokoro runs a local model on a memory-bound host — serialize (1 at a time) to avoid the
-    // OOM spike from concurrent generation. Fish is a remote API, so it can run 2 in parallel.
-    let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 2;
+    // TIME BUDGET: stop well under Render's request limit, persist progress, and let the client
+    // re-request to continue. Guarantees each request finishes even a 16-line episode never times out.
+    const DEADLINE = Date.now() + 40000;
+    // Kokoro is memory-bound (serialize); Fish is a remote API (parallelize to finish within the window).
+    let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 4;
     async function _worker(){
       while(_idx < script.length){
         const i = _idx++;
+        if(urls[i]) continue;                         // already generated in a previous request — skip
+        if(Date.now() > DEADLINE) return;             // out of time this request; client will continue
         const vid = script[i].speaker==="A" ? vA : vB;
         const kvid = script[i].speaker==="A" ? kA : kB;   // Kokoro voice to use if the premium engine falls back
         const buf = await ttsClip(provider, script[i].text, vid, kvid);
@@ -694,11 +701,14 @@ app.post("/podcast-audio", async (req,res)=>{
       }
     }
     await Promise.all(Array.from({length:Math.min(CONC, script.length)}, _worker));
+    // persist whatever we have (partial or complete) so the next request resumes / caching works
     extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]:urls });
     await admin.from("topics").update({ extras }).eq("id",topic_id);
+    const done = urls.every(Boolean);
+    const remaining = urls.filter(u=>!u).length;
     // if this was a basic (Kokoro) episode but Kokoro failed and we used paid Fish, tell the client
     const degraded = (provider === "kokoro") && (KOKORO_HEALTH.fallbacks > _preFallbacks);
-    res.json({ ok:true, urls, lines:script, engine: degraded ? "fish(kokoro-down)" : provider, degraded });
+    res.json({ ok:true, done, remaining, urls, lines:script, engine: degraded ? "fish(kokoro-down)" : provider, degraded });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
