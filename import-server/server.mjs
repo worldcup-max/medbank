@@ -374,6 +374,9 @@ async function _ttsRaw(p, text, voiceId){
   if(_ttsCache.size > _TTS_MAX){ _ttsCache.delete(_ttsCache.keys().next().value); }
   return buf;
 }
+/* Live Kokoro health — so the app can warn you (admin) when basic tier is silently
+ * burning paid Fish credits because the self-hosted Kokoro box is down. */
+const KOKORO_HEALTH = { ok:true, lastOkAt:0, lastFailAt:0, lastError:null, fallbacks:0 };
 async function ttsClip(provider, text, voiceId, kokoroVoice){
   // Try the requested provider first, then fall back to the OTHER configured
   // non-OpenAI provider so a clip still finishes. OpenAI TTS is never used here.
@@ -384,8 +387,20 @@ async function ttsClip(provider, text, voiceId, kokoroVoice){
   if(!chain.length) throw new Error("No TTS provider configured — set FISH_API_KEY (premium) and/or KOKORO_TTS_URL (basic)");
   let lastErr;
   for(const [p, v] of chain){
-    try{ return await _ttsRaw(p, text, v); }
-    catch(err){ lastErr = err; console.warn("[tts] "+p+" failed:", (err&&err.message||"").slice(0,120)); }
+    try{
+      const buf = await _ttsRaw(p, text, v);
+      if(p==="kokoro"){ KOKORO_HEALTH.ok = true; KOKORO_HEALTH.lastOkAt = Date.now(); }
+      return buf;
+    }
+    catch(err){
+      lastErr = err;
+      console.warn("[tts] "+p+" failed:", (err&&err.message||"").slice(0,120));
+      if(p==="kokoro"){
+        KOKORO_HEALTH.ok = false; KOKORO_HEALTH.lastFailAt = Date.now();
+        KOKORO_HEALTH.lastError = (err&&err.message||"").slice(0,200); KOKORO_HEALTH.fallbacks++;
+        console.error("[tts] ⚠️ KOKORO DOWN — basic tier is falling back to PAID Fish credits. err:", KOKORO_HEALTH.lastError);
+      }
+    }
   }
   throw lastErr || new Error("All TTS providers failed");
 }
@@ -395,7 +410,10 @@ async function uploadPodcastAudio(path, buf){
   return admin.storage.from("podcasts").getPublicUrl(path).data.publicUrl;
 }
 
-app.get("/health", (_req,res)=>res.json({ ok:true }));
+app.get("/health", (_req,res)=>res.json({ ok:true,
+  kokoro:{ ok:KOKORO_HEALTH.ok, configured:!!process.env.KOKORO_TTS_URL, lastError:KOKORO_HEALTH.lastError,
+           lastFailAt:KOKORO_HEALTH.lastFailAt, lastOkAt:KOKORO_HEALTH.lastOkAt, fallbacks:KOKORO_HEALTH.fallbacks },
+  fish:{ configured:!!process.env.FISH_API_KEY } }));
 
 /* who am I + plan — lets the app show the current plan (reads the real isPremium check) */
 app.get("/me", async (req,res)=>{
@@ -656,7 +674,10 @@ app.post("/podcast-audio", async (req,res)=>{
     else { vA = FISH_VOICE_HOST_A || voiceA; vB = FISH_VOICE_HOST_B || voiceB; }   // two distinct Fish voices for the hosts
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
     const urls = new Array(script.length);
-    let _idx = 0; const CONC = 2;   // 2 at a time — parallel enough to be fast, gentle on provider rate limits (429s)
+    const _preFallbacks = KOKORO_HEALTH.fallbacks;   // detect if Kokoro failed during THIS episode
+    // Kokoro runs a local model on a memory-bound host — serialize (1 at a time) to avoid the
+    // OOM spike from concurrent generation. Fish is a remote API, so it can run 2 in parallel.
+    let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 2;
     async function _worker(){
       while(_idx < script.length){
         const i = _idx++;
@@ -669,7 +690,9 @@ app.post("/podcast-audio", async (req,res)=>{
     await Promise.all(Array.from({length:Math.min(CONC, script.length)}, _worker));
     extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]:urls });
     await admin.from("topics").update({ extras }).eq("id",topic_id);
-    res.json({ ok:true, urls, lines:script });
+    // if this was a basic (Kokoro) episode but Kokoro failed and we used paid Fish, tell the client
+    const degraded = (provider === "kokoro") && (KOKORO_HEALTH.fallbacks > _preFallbacks);
+    res.json({ ok:true, urls, lines:script, engine: degraded ? "fish(kokoro-down)" : provider, degraded });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
