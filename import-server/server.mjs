@@ -82,20 +82,25 @@ async function getUser(req){
 }
 /* test override: emails in PREMIUM_TEST_EMAILS (comma-separated) count as premium — for building/QA only */
 const PREMIUM_TEST = (process.env.PREMIUM_TEST_EMAILS||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean);
-async function isPremium(account_id){ try{
+async function isPremium(account_id, emailHint){ try{
   const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
   if(s.data && s.data.status==="active") return true;
   if(PREMIUM_TEST.length){                                   // only runs when a test list is set (empty in production)
-    const a=await admin.from("accounts").select("email").eq("id",account_id).maybeSingle();
-    const em=(a.data && a.data.email || "").toLowerCase();
+    // Prefer the caller's auth-token email (always present); only hit the accounts table
+    // if no hint was passed. This fixes premium test-accounts whose accounts.email row is blank.
+    let em=(emailHint||"").toLowerCase().trim();
+    if(!em || PREMIUM_TEST.indexOf(em)<0){
+      const a=await admin.from("accounts").select("email").eq("id",account_id).maybeSingle();
+      em=(a.data && a.data.email || "").toLowerCase().trim();
+    }
     if(em && PREMIUM_TEST.indexOf(em)>=0) return true;
   }
   return false;
 }catch(e){ return false; } }
 async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id); return c.count||0; }catch(e){ return 0; } }
 /* today's Visualize allowance for a user — basic 3/day, premium 10/day (only new builds count) */
-async function vizQuota(userId){
-  const premium = await isPremium(userId).catch(()=>false);
+async function vizQuota(userId, emailHint){
+  const premium = await isPremium(userId, emailHint).catch(()=>false);
   const limit = premium ? 10 : 3;
   let used = 0;
   try{ const since=new Date(); since.setUTCHours(0,0,0,0);
@@ -418,7 +423,7 @@ app.get("/health", (_req,res)=>res.json({ ok:true,
 /* who am I + plan — lets the app show the current plan (reads the real isPremium check) */
 app.get("/me", async (req,res)=>{
   try{ const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    const premium = await isPremium(user.id).catch(()=>false);
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
     const isTest = PREMIUM_TEST.length>0 && PREMIUM_TEST.indexOf((user.email||"").toLowerCase())>=0;
     res.json({ ok:true, email:user.email||"", premium, test:(premium && isTest) });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
@@ -509,7 +514,7 @@ app.post("/import", async (req,res)=>{
     const account_id = user.id;
 
     // --- freemium gate: premium = unlimited imports; free = 1 built lecture ---
-    if(!await isPremium(account_id)){
+    if(!await isPremium(account_id, user.email)){
       if(await builtCount(account_id) >= FREE_BUILD_LIMIT)
         return res.status(402).json({ error:"upgrade", reason:"Your free account includes 1 lecture. Subscribe to import more — everything you've already built stays free to study, and the AI tutor and podcast keep working on it." });
     }
@@ -663,7 +668,8 @@ app.post("/podcast-audio", async (req,res)=>{
     }
     if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
     // engine is automatic: basic = Kokoro; premium = 2x Fish : 1x Kokoro. Cached once per topic.
-    const prem = await isPremium(user.id);
+    const prem = await isPremium(user.id, user.email);
+    console.log("[podcast-audio] user=%s premium=%s → provider=%s", user.email, prem, prem ? "fish" : "kokoro");
     let provider, vA = voiceA, vB = voiceB;
     const combo = "auto";
     if(extras.podcast.audio && extras.podcast.audio[combo]) return res.json({ ok:true, urls:extras.podcast.audio[combo], lines:script });
@@ -700,7 +706,7 @@ app.post("/podcast-audio", async (req,res)=>{
 app.post("/solve", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
-    if(!await isPremium(user.id)) return res.status(402).json({ error:"upgrade", reason:"Solve is a premium feature — subscribe to snap and solve any question." });
+    if(!await isPremium(user.id, user.email)) return res.status(402).json({ error:"upgrade", reason:"Solve is a premium feature — subscribe to snap and solve any question." });
     const { image_base64, media_type, text } = req.body;
     if(!image_base64 && !(text && text.trim())) return res.status(400).json({ error:"send a photo or type the question" });
     const images = image_base64 ? [{ type:"image", source:{ type:"base64", media_type:media_type||"image/jpeg", data:image_base64 } }] : [];
@@ -759,9 +765,9 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout))){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id) }); } }catch(_){}
+      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout))){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
     // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
-    const premium = await isPremium(user.id).catch(()=>false);
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
     const limit = premium ? 10 : 3;
     let used = 0;
     try{
@@ -834,7 +840,7 @@ app.post("/simplify", async (req,res)=>{
     if(!text) return res.status(400).json({ error:"nothing to simplify" });
     const context = (req.body.context||"").toString().slice(0,120);
     // "Simpler" is a regeneration → it counts against the same daily Visualize limit
-    const premium = await isPremium(user.id).catch(()=>false);
+    const premium = await isPremium(user.id, user.email).catch(()=>false);
     const limit = premium ? 10 : 3;
     let used = 0;
     try{ const since=new Date(); since.setUTCHours(0,0,0,0);
