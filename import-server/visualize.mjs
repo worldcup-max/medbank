@@ -728,7 +728,8 @@ function pickExemplar(text){
      or "product" out of a perfectly ordinary maths passage. If any maths cue fires we route to a
      maths mode here and return before the chemistry/biology heuristics ever run. ---- */
   const MATHS = /derivative|differentiat|integral|integrat|antiderivative|\blimit\b|\btangent\b|\bsecant\b|calculus|\bsine\b|\bcosine\b|\btangent ratio\b|\bsin\b|\bcos\b|\btan\b|radian|unit circle|trigonometr|\bvector\b|\bvectors\b|scalar|magnitude and direction|dot product|cross product|\bmatrix\b|matrices|determinant|\beigen|linear transformation|inequalit|absolute value|number line|\bsolve\b|solving|factoris|factoriz|\bfactor\b|quadratic|parabola|complete the square|completing the square|simultaneous equation|probabilit|permutation|combination|\bsequence\b|\bseries\b|arithmetic progression|geometric progression|sigma notation|logarithm|\blog\b|\bln\b|exponential (growth|decay|function)|\bfunction\b .{0,24}\bgraph\b|domain and range|asymptot|\bpi\b|theta|\baxis\b .{0,20}\bcurve\b/;
-  const isMaths = MATHS.test(t) || /∫|∑|√|θ|π|dy\/dx|d\/dx|f'\(x\)|f′\(x\)|≤|≥/.test(text||"");
+  const ABSBAR = /\|\s*[a-z0-9][^|]{0,14}\|/i;   // |x|, |x − 3|, |2x + 1| — absolute-value bars
+  const isMaths = MATHS.test(t) || ABSBAR.test(text||"") || /∫|∑|√|θ|π|dy\/dx|d\/dx|f'\(x\)|f′\(x\)|≤|≥/.test(text||"");
   /* ---- MATHS routing first (cue → the right renderer) ---- */
   // sets / probability logic → the Venn diagram
   if(/venn|\bunion\b|intersection of|\bcomplement\b|mutually exclusive|\bsubset\b|set notation|(\bp\s*\(\s*a\s*(or|and|\|)\s*b\s*\))|probability of a (or|and|given)|conditional probability|\bgiven that\b|\bp\s*\(\s*a\s*\|\s*b\s*\)|neither .{0,20}\bnor\b|at least one of/.test(t))
@@ -746,17 +747,18 @@ function pickExemplar(text){
   if(/unit circle|radian|trigonometr|\bsine\b|\bcosine\b|\bsin\b|\bcos\b|\btan\b|\bsoh ?cah ?toa\b|pythagorean identity|\bastc\b|quadrant|amplitude|\bperiod(ic)?\b|phase shift|trig (identit|equation|graph)/.test(t))
     return EXEMPLARS[15];
   // inequalities & absolute value → the worked solution WITH a number line
-  if(/inequalit|\bnumber line\b|absolute value|\|x\||greater than or equal|less than or equal|solution set|\binterval notation\b|flip the (sign|inequality)/.test(t))
+  if(/inequalit|\bnumber line\b|absolute value|modulus|greater than or equal|less than or equal|solution set|\binterval notation\b|flip the (sign|inequality)|two cases/.test(t) || ABSBAR.test(text||""))
     return EXEMPLARS[17];
-  // solving / factorising / rearranging → the line-by-line worked solution
-  if(/complet(e|ing) the square|quadratic formula|\bquadratic\b|factoris|factoriz|\bfactor\b|\bsolve\b|solving|rearrang|make .{0,12}the subject|simultaneous equation|elimination method|substitution method|extraneous solution|\broots? of\b|discriminant/.test(t))
-    return EXEMPLARS[16];
   // vectors → the tip-to-tail plane
-  if(/\bvectors?\b|scalar|magnitude and direction|tip to tail|resultant|dot product|cross product|\bcomponents?\b .{0,20}\bvector\b|position vector|unit vector/.test(t))
+  if(/\bvectors?\b|scalar|magnitude and direction|tip to tail|resultant|dot product|cross product|position vector|unit vector/.test(t))
     return EXEMPLARS[18];
-  // matrices & transformations → the transformation grid
-  if(/\bmatri(x|ces)\b|determinant|\beigen(value|vector)/.test(t) || /\bidentity matrix\b|inverse matrix|linear transformation|transformation of (the )?(plane|space)|singular matrix|not commutative/.test(t))
+  // matrices & transformations → the transformation grid (checked BEFORE "solve", because a
+  // determinant is an "area scale FACTOR" and would otherwise be caught by the factorising cue)
+  if(/\bmatri(x|ces)\b|determinant|\beigen(value|vector)|\bidentity matrix\b|inverse matrix|linear transformation|transformation of (the )?(plane|space)|singular matrix|basis vector/.test(t))
     return EXEMPLARS[19];
+  // solving / factorising / rearranging → the line-by-line worked solution
+  if(/complet(e|ing) the square|quadratic formula|\bquadratic\b|factoris|factoriz|factor(ed|ing)? (out|completely|the)|common factor|\bsolve\b|solving|rearrang|make .{0,12}the subject|simultaneous equation|elimination method|substitution method|extraneous solution|\broots? of\b|discriminant/.test(t))
+    return EXEMPLARS[16];
   // any other plottable maths idea → the derivative graph exemplar (best in-domain graph shot)
   if(/\blimit\b|approaches|asymptot|\bcontinuit\b|continuous function|domain and range|logarithm|\bln\b|exponential (growth|decay|function)|parabola|\bvertex\b|geometric series|arithmetic sequence|\bsequence\b|\bseries\b|converge|\bsigma notation\b|sum to infinity|curve sketch|stationary point|maximum and minimum/.test(t))
     return EXEMPLARS[13];

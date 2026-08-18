@@ -306,12 +306,16 @@ async function openaiTTS(text, voice, _retry){
 /* Fish Audio (hosted) — natural voices, same price tier as OpenAI, more voices.
  * Used for the AI tutor and most premium podcasts. Voice = reference_id. */
 const _OAI_VOICE_NAMES = new Set(["alloy","echo","fable","onyx","nova","shimmer","ash","ballad","coral","sage","verse"]);
+/* Two distinct Fish voices for podcast Host A / Host B. Resolves from whatever the host
+   already has set: the explicit FISH_VOICE_A/B, else the existing tutor reference IDs. */
+const FISH_VOICE_HOST_A = process.env.FISH_VOICE_A || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || process.env.FISH_VOICE_LAURA_TUTOR || undefined;
+const FISH_VOICE_HOST_B = process.env.FISH_VOICE_B || process.env.FISH_VOICE_LAURA_TUTOR || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || undefined;
 async function fishTTS(text, voiceId, _retry){
   const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
   // The podcast picker offers OpenAI-style names (Nova/Shimmer/…). Those are NOT valid Fish
   // reference IDs, so ignore them and use the configured Fish voice (or Fish's default).
   if(voiceId && _OAI_VOICE_NAMES.has(String(voiceId).toLowerCase())) voiceId = null;
-  const reference_id = voiceId || process.env.FISH_VOICE_A || undefined;
+  const reference_id = voiceId || FISH_VOICE_HOST_A || undefined;
   const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),30000); let r;
   try{ r = await fetch("https://api.fish.audio/v1/tts", {
     method:"POST", signal:ctrl.signal,
@@ -375,7 +379,7 @@ async function ttsClip(provider, text, voiceId, kokoroVoice){
   // non-OpenAI provider so a clip still finishes. OpenAI TTS is never used here.
   const chain = [];
   if(provider && providerReady(provider)) chain.push([provider, voiceId]);
-  if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || process.env.FISH_VOICE_A]);
+  if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || FISH_VOICE_HOST_A]);
   if(providerReady("kokoro") && provider!=="kokoro") chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
   if(!chain.length) throw new Error("No TTS provider configured — set FISH_API_KEY (premium) and/or KOKORO_TTS_URL (basic)");
   let lastErr;
@@ -455,6 +459,28 @@ async function harvestFromNote(note){
     }
   }catch(e){ /* never let harvesting affect the import */ }
 }
+/* ── MATHS pronunciation safety-net ───────────────────────────────────────────────────────────
+ * The MAIN guarantee is the prompt rule: narration_text is written in SPOKEN WORDS, symbols stay
+ * in the diagram labels. This map is a belt-and-braces catch for the handful of abbreviations a
+ * model still slips into narration. Word-boundary matching only (see buildRx in med-voice.mjs),
+ * so ONLY tokens that are safe as whole words appear here — never bare punctuation, and nothing
+ * that could fire inside an ordinary English word.
+ * Note the matcher is case-insensitive and these are already-correct English words in most other
+ * contexts, so each entry is chosen to be harmless if it fires ("tan" → "tangent" is the only
+ * mildly lossy one, and in a maths explainer that is the reading we want). */
+const MATH_SAY = {
+  "sin":"sine", "cos":"cosine", "tan":"tangent",
+  "cosec":"cosecant", "sec":"secant", "cot":"cotangent",
+  "arcsin":"arc sine", "arccos":"arc cosine", "arctan":"arc tangent",
+  "dx":"dee x", "dy":"dee y", "dt":"dee t", "dr":"dee r",
+  "ln":"natural log", "log":"log", "sqrt":"square root", "cbrt":"cube root",
+  "lim":"limit", "det":"determinant", "vs":"versus",
+  "iff":"if and only if", "wrt":"with respect to",
+  "nCr":"n choose r", "nPr":"n permute r", "lcm":"lowest common multiple", "hcf":"highest common factor"
+};
+mergeTerms({}, MATH_SAY);   // say-map only — no IPA, so Kokoro's medical phonemes are untouched
+console.log("[lexicon] maths say-map merged ·", Object.keys(MATH_SAY).length, "tokens");
+
 loadLearnedPronunciations();
 setInterval(loadLearnedPronunciations, 30*60*1000);   // refresh every 30 min
 
@@ -627,7 +653,7 @@ app.post("/podcast-audio", async (req,res)=>{
     // back to the other configured provider automatically if one is down. No OpenAI.
     provider = prem ? "fish" : "kokoro";
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
-    else { vA = process.env.FISH_VOICE_A || voiceA; vB = process.env.FISH_VOICE_B || voiceB; }
+    else { vA = FISH_VOICE_HOST_A || voiceA; vB = FISH_VOICE_HOST_B || voiceB; }   // two distinct Fish voices for the hosts
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
     const urls = new Array(script.length);
     let _idx = 0; const CONC = 2;   // 2 at a time — parallel enough to be fast, gentle on provider rate limits (429s)
@@ -672,7 +698,7 @@ app.post("/tts", async (req,res)=>{
     const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
     const isTutor = req.body.use === "tutor";
     const provider = isTutor ? "fish" : "kokoro";
-    const voice = req.body.voice || (isTutor ? process.env.FISH_VOICE_TUTOR : KOKORO_DEFAULT.read);
+    const voice = req.body.voice || (isTutor ? (process.env.FISH_VOICE_TUTOR || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read);
     const buf = await ttsClip(provider, text, voice);
     res.setHeader("Content-Type","audio/mpeg"); res.send(buf);
   }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
