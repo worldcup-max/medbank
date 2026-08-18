@@ -315,9 +315,13 @@ const _OAI_VOICE_NAMES = new Set(["alloy","echo","fable","onyx","nova","shimmer"
    already has set: the explicit FISH_VOICE_A/B, else the existing tutor reference IDs. */
 const FISH_VOICE_HOST_A = process.env.FISH_VOICE_A || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || process.env.FISH_VOICE_LAURA_TUTOR || undefined;
 const FISH_VOICE_HOST_B = process.env.FISH_VOICE_B || process.env.FISH_VOICE_LAURA_TUTOR || process.env.FISH_VOICE_ETHAN_TUTOR || process.env.FISH_VOICE_TUTOR || undefined;
+/* Fish API key — accept the common naming variants so it works whatever you called it on Render. */
+const FISH_KEY_NAMES = ["FISH_API_KEY","FISH_AUDIO_API_KEY","FISHAUDIO_API_KEY","FISH_AUDIO_KEY","FISH_KEY","FISHAUDIO_KEY"];
+const FISH_KEY_SOURCE = FISH_KEY_NAMES.find(n => (process.env[n]||"").trim()) || null;
+const FISH_KEY = FISH_KEY_SOURCE ? (process.env[FISH_KEY_SOURCE]||"").trim() : "";
 async function fishTTS(text, voiceId, attempt){
   attempt = attempt || 0;
-  const key = process.env.FISH_API_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
+  const key = FISH_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
   // The podcast picker offers OpenAI-style names (Nova/Shimmer/…). Those are NOT valid Fish
   // reference IDs, so ignore them and use the configured Fish voice (or Fish's default).
   if(voiceId && _OAI_VOICE_NAMES.has(String(voiceId).toLowerCase())) voiceId = null;
@@ -359,7 +363,7 @@ async function kokoroTTS(text, voiceId, _retry){
 /* is a provider actually configured on this host yet?
  * OpenAI TTS is intentionally NOT used on this account (voices are Fish + Kokoro). */
 function providerReady(p){
-  if(p==="fish")   return !!process.env.FISH_API_KEY;
+  if(p==="fish")   return !!FISH_KEY;
   if(p==="kokoro") return !!process.env.KOKORO_TTS_URL;
   return false;
 }
@@ -424,7 +428,8 @@ async function uploadPodcastAudio(path, buf){
 app.get("/health", (_req,res)=>res.json({ ok:true,
   kokoro:{ ok:KOKORO_HEALTH.ok, configured:!!process.env.KOKORO_TTS_URL, lastError:KOKORO_HEALTH.lastError,
            lastFailAt:KOKORO_HEALTH.lastFailAt, lastOkAt:KOKORO_HEALTH.lastOkAt, fallbacks:KOKORO_HEALTH.fallbacks },
-  fish:{ configured:!!process.env.FISH_API_KEY } }));
+  fish:{ configured:!!FISH_KEY, keyLen:FISH_KEY.length, source:FISH_KEY_SOURCE,
+         voiceA:!!FISH_VOICE_HOST_A, voiceB:!!FISH_VOICE_HOST_B } }));
 
 /* who am I + plan — lets the app show the current plan (reads the real isPremium check) */
 app.get("/me", async (req,res)=>{
