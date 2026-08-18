@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16s';   // bump this each release
+const APP_VERSION='2026.08.16t';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2434,7 +2434,7 @@ async function podSetProvider(p,keep){
 async function podGenAudio(retry){
   POD.phase='gen'; podPaint();
   try{
-    const r=await podApi('/podcast-audio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:POD.topicId,provider:POD.provider||'openai',voiceA:POD.voiceA,voiceB:POD.voiceB,level:podLevel()})});
+    const r=await podApi('/podcast-audio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:POD.topicId,provider:POD.provider||'openai',voiceA:POD.voiceA,voiceB:POD.voiceB,level:podLevel(),lines:POD.lines})});
     if(!r.ok||!r.data.urls) throw new Error((r.data&&(r.data.reason||r.data.error))||'Could not generate the audio.');
     POD.urls=r.data.urls; POD.lines=r.data.lines||POD.lines;
     try{ localStorage.setItem('pod_combo_'+POD.topicId, (POD.provider||'openai')+'|'+POD.voiceA+'|'+POD.voiceB); }catch(e){}

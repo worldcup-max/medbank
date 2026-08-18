@@ -597,7 +597,17 @@ app.post("/podcast-audio", async (req,res)=>{
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== user.id) return res.status(403).json({ error:"not your topic" });
     const extras = t.data.extras || {};
-    const script = extras.podcast && extras.podcast.script;
+    let script = extras.podcast && extras.podcast.script;
+    // Fallback: if the server copy is missing (e.g. the /podcast save didn't persist),
+    // accept the script the client already has on screen — then re-persist it here so
+    // audio caching + replay work. This makes "generate the script first" unreachable
+    // whenever a script is genuinely present.
+    if((!script || !script.length) && Array.isArray(req.body.lines) && req.body.lines.length){
+      const clean = req.body.lines
+        .filter(l => l && typeof l.text === "string" && l.text.trim())
+        .map(l => ({ speaker: (l.speaker === "B" ? "B" : "A"), text: String(l.text).slice(0, 1400) }));
+      if(clean.length){ script = clean; extras.podcast = Object.assign({}, extras.podcast || {}, { script }); }
+    }
     if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
     // engine is automatic: basic = Kokoro; premium = 2x Fish : 1x Kokoro. Cached once per topic.
     const prem = await isPremium(user.id);
