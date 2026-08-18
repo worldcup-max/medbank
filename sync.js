@@ -71,6 +71,28 @@
     return out;
   }
   // full state merge (used only in a genuine two-sided conflict)
+  /* Union local-only explainer videos onto a cloud state we're about to adopt.
+     DATA.viz = { topicId: [{text,ts}] }  ·  DATA.cardViz = { cardId: {bp,text,ts} }
+     Returns a shallow copy of `base` with local videos merged in; sets __vizAdded if any were new. */
+  function mergeVizStores(base, localD){
+    var out = Object.assign({}, base); var added = false;
+    // viz: per-topic arrays, dedupe by text
+    var bv = out.viz || {}, lv = (localD && localD.viz) || {}, mv = {};
+    Object.keys(bv).forEach(function(k){ mv[k] = (bv[k]||[]).slice(); });
+    Object.keys(lv).forEach(function(k){
+      var arr = mv[k] = mv[k] || [];
+      (lv[k]||[]).forEach(function(item){
+        if(item && item.text && !arr.some(function(x){return x.text===item.text;})){ arr.push(item); added = true; }
+      });
+    });
+    out.viz = mv;
+    // cardViz: keyed by cardId, keep whichever exists (local wins if cloud lacks it)
+    var bc = out.cardViz || {}, lc = (localD && localD.cardViz) || {}, mc = Object.assign({}, bc);
+    Object.keys(lc).forEach(function(k){ if(!mc[k]){ mc[k] = lc[k]; added = true; } });
+    out.cardViz = mc;
+    out.__vizAdded = added;
+    return out;
+  }
   function mergeState(localD, remoteD){
     var out = Object.assign({}, remoteD, localD);      // start from local for scalars/settings
     out.cards  = mergeCards(localD.cards, remoteD.cards);
@@ -85,6 +107,9 @@
     // plan: prefer whichever is non-empty & local if both
     out.plan = (localD.plan && localD.plan.length) ? localD.plan : (remoteD.plan||[]);
     out.settings = Object.assign({}, remoteD.settings||{}, localD.settings||{}); // local device wins for keys
+    // explainer videos: true union of both sides (never let one device's copy drop the other's)
+    var uz = mergeVizStores({ viz: remoteD.viz, cardViz: remoteD.cardViz }, localD);
+    out.viz = uz.viz; out.cardViz = uz.cardViz;
     return out;
   }
 
@@ -158,8 +183,16 @@
         setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:true, profileId:profileId });
         await pushNow();
       } else if(!m.dirty || (m.profileId && m.profileId !== profileId)){
-        applyState(remote.state);                          // adopt cloud (local not ahead)
-        setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:false, profileId:profileId });
+        // adopt cloud (local not ahead) — but NEVER blind-drop local-only explainer videos.
+        // A video generated while sync wasn't ready lives only in local DATA.viz / DATA.cardViz;
+        // union it onto the cloud copy so a reload can't erase it.
+        var adopt = mergeVizStores(remote.state || {}, DATA);
+        applyState(adopt);
+        var stillDirty = adopt.__vizAdded;                 // we brought local-only videos across → must push them up
+        delete adopt.__vizAdded;
+        setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:!!stillDirty, profileId:profileId });
+        if(stillDirty){ try{ await pushNow(); }catch(_){}
+        }
       } else {
         applyState(mergeState(DATA, remote.state||{}));    // true conflict → merge
         setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:true, profileId:profileId });
