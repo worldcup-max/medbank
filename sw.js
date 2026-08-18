@@ -1,11 +1,17 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v163';
+const CACHE = 'medbank-v164';
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
-  './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js'];
+  './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js',
+  './restore.js', './mb-personal-restore.js', './404.html'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  // Resilient precache: cache each asset individually so ONE missing/failed file
+  // can never fail the whole install (which would leave users stuck on the old build).
+  e.waitUntil(
+    caches.open(CACHE).then(c => Promise.all(ASSETS.map(u => c.add(u).catch(() => {}))))
+      .then(() => self.skipWaiting())
+  );
 });
 self.addEventListener('activate', e => {
   e.waitUntil(
@@ -13,17 +19,29 @@ self.addEventListener('activate', e => {
       .then(() => self.clients.claim())
   );
 });
-/* network-first for content so updates show, cache fallback offline */
+/* Stale-while-revalidate: serve the app shell INSTANTLY from cache, then refresh the
+   cache in the background for next time. The whole shell stays one consistent cache
+   generation, so versions never mix. New builds still arrive reliably: bumping CACHE
+   makes the browser install a fresh SW (which re-fetches every asset), and the page's
+   existing controllerchange handler auto-reloads once onto the new version. */
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  // never touch cross-origin requests (e.g. Puter voice API/script) — let them go straight to the network
-  try { if (new URL(e.request.url).origin !== self.location.origin) return; } catch (_) { return; }
+  let url; try { url = new URL(e.request.url); } catch (_) { return; }
+  // never touch cross-origin requests (Supabase, Render API, Puter, CDNs) — straight to network
+  if (url.origin !== self.location.origin) return;
   e.respondWith(
-    fetch(e.request).then(res => {
-      const copy = res.clone();
-      caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
-      return res;
-    }).catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))
+    caches.match(e.request).then(cached => {
+      const fetching = fetch(e.request).then(res => {
+        // only cache good, same-origin (basic) responses — never opaque/error responses
+        if (res && res.status === 200 && res.type === 'basic') {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+        }
+        return res;
+      }).catch(() => null);
+      // cache first (fast); if nothing cached, wait on the network; final fallback = app shell
+      return cached || fetching.then(r => r || caches.match('./app.html')).then(r => r || caches.match('./index.html'));
+    })
   );
 });
 
