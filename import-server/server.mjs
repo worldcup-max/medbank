@@ -319,6 +319,27 @@ const FISH_VOICE_HOST_B = process.env.FISH_VOICE_B || process.env.FISH_VOICE_LAU
 const FISH_KEY_NAMES = ["FISH_API_KEY","FISH_AUDIO_API_KEY","FISHAUDIO_API_KEY","FISH_AUDIO_KEY","FISH_KEY","FISHAUDIO_KEY"];
 const FISH_KEY_SOURCE = FISH_KEY_NAMES.find(n => (process.env[n]||"").trim()) || null;
 const FISH_KEY = FISH_KEY_SOURCE ? (process.env[FISH_KEY_SOURCE]||"").trim() : "";
+/* Fish speaks a touch fast at 1.0 — generate at a calmer default so normal-speed playback feels right.
+   Tune without a code change via FISH_SPEED (0.5–2.0). */
+const FISH_SPEED = Math.min(2, Math.max(0.5, parseFloat(process.env.FISH_SPEED || "0.9") || 0.9));
+
+/* Selectable podcast host voices — friendly name + avatar tag mapped to your Fish reference IDs.
+   Only voices whose env var is actually set are offered to the client. */
+const FISH_VOICE_CATALOG = [
+  { key:"ethan",   name:"Ethan",     gender:"male",   avatar:"ethan",   env:"FISH_VOICE_ETHAN_TUTOR" },
+  { key:"laura",   name:"Laura",     gender:"female", avatar:"laura",   env:"FISH_VOICE_LAURA_TUTOR" },
+  { key:"dexter",  name:"Dexter",    gender:"male",   avatar:"dexter",  env:"FISH_VOICE_DEXTER_TUTOR" },
+  { key:"griffin", name:"Griffin",   gender:"male",   avatar:"griffin", env:"FISH_VOICE_GRIFFIN_TUTOR" },
+  { key:"hannah",  name:"Hannah",    gender:"female", avatar:"hannah",  env:"FISH_VOICE_HANNAH_TUTOR" },
+  { key:"mj",      name:"MJ",        gender:"female", avatar:"mj",      env:"FISH_VOICE_MJ_TUTOR" },
+  { key:"doctor",  name:"Dr. Mensah",gender:"male",   avatar:"doctor",  env:"FISH_VOICE_MYDOCTOR_TUTOR" },
+  { key:"maxx",    name:"Maxx",      gender:"male",   avatar:"maxx",    env:"FISH_VOICE_WNBADEXTER_TUTOR" },
+];
+const FISH_VOICES = FISH_VOICE_CATALOG
+  .map(v => ({ key:v.key, name:v.name, gender:v.gender, avatar:v.avatar, ref:(process.env[v.env]||"").trim() }))
+  .filter(v => v.ref);
+const FISH_VOICE_BY_KEY = Object.fromEntries(FISH_VOICES.map(v => [v.key, v]));
+function fishRefForKey(key, fallback){ const v = FISH_VOICE_BY_KEY[(key||"").toLowerCase()]; return (v && v.ref) || fallback; }
 async function fishTTS(text, voiceId, attempt){
   attempt = attempt || 0;
   const key = FISH_KEY; if(!key) throw new Error("FISH_API_KEY not set on the server");
@@ -330,7 +351,7 @@ async function fishTTS(text, voiceId, attempt){
   try{ r = await fetch("https://api.fish.audio/v1/tts", {
     method:"POST", signal:ctrl.signal,
     headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
-    body: JSON.stringify(Object.assign({ text, format:"mp3" }, reference_id ? { reference_id } : {})) });
+    body: JSON.stringify(Object.assign({ text, format:"mp3", prosody:{ speed: FISH_SPEED } }, reference_id ? { reference_id } : {})) });
   }catch(e){ clearTimeout(to); if(attempt<3){ await new Promise(s=>setTimeout(s,700*(attempt+1))); return fishTTS(text,voiceId,attempt+1); } throw new Error("Fish voice timed out"); }
   clearTimeout(to);
   // retry up to 3x on rate-limit (429) or transient 5xx, with escalating backoff — this is what
@@ -652,8 +673,8 @@ app.post("/podcast", async (req,res)=>{
 app.get("/podcast-voices", async (req,res)=>{
   try{
     if(!await getUser(req)) return res.status(401).json({ error:"not signed in" });
-    // engine is chosen automatically server-side now (Kokoro / Fish); no voice list to fetch
-    res.json({ ok:true, voices:[] });
+    // the real, configured Fish host voices — names + avatar tags only (reference IDs stay server-side)
+    res.json({ ok:true, voices: FISH_VOICES.map(v => ({ key:v.key, name:v.name, gender:v.gender, avatar:v.avatar })) });
   }catch(e){ res.json({ ok:true, voices:[] }); }
 });
 
@@ -685,15 +706,20 @@ app.post("/podcast-audio", async (req,res)=>{
     // engine is automatic: basic = Kokoro; premium = 2x Fish : 1x Kokoro. Cached once per topic.
     const prem = await isPremium(user.id, user.email);
     console.log("[podcast-audio] user=%s premium=%s → provider=%s", user.email, prem, prem ? "fish" : "kokoro");
-    let provider, vA = voiceA, vB = voiceB;
-    const combo = "auto";
-    if(extras.podcast.audio && extras.podcast.audio[combo] && extras.podcast.audio[combo].every(Boolean))
-      return res.json({ ok:true, done:true, urls:extras.podcast.audio[combo], lines:script });
     // premium → Fish (the paid, natural voice); basic → Kokoro (free). ttsClip falls
     // back to the other configured provider automatically if one is down. No OpenAI.
-    provider = prem ? "fish" : "kokoro";
+    let provider = prem ? "fish" : "kokoro";
+    let vA, vB;
+    const aKey = (voiceA||"").toString().toLowerCase(), bKey = (voiceB||"").toString().toLowerCase();
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
-    else { vA = FISH_VOICE_HOST_A || voiceA; vB = FISH_VOICE_HOST_B || voiceB; }   // two distinct Fish voices for the hosts
+    else {   // map the chosen host voice KEYS (ethan/laura/…) to Fish reference IDs
+      vA = fishRefForKey(aKey, FISH_VOICE_HOST_A || (FISH_VOICES[0] && FISH_VOICES[0].ref));
+      vB = fishRefForKey(bKey, FISH_VOICE_HOST_B || (FISH_VOICES[1] && FISH_VOICES[1].ref) || vA);
+    }
+    // cache per chosen voice-pair so different host combos are saved separately (and re-picking is instant)
+    const combo = provider==="fish" ? ("fish_"+(FISH_VOICE_BY_KEY[aKey]?aKey:"a")+"_"+(FISH_VOICE_BY_KEY[bKey]?bKey:"b")) : "kokoro";
+    if(extras.podcast.audio && extras.podcast.audio[combo] && extras.podcast.audio[combo].every(Boolean))
+      return res.json({ ok:true, done:true, urls:extras.podcast.audio[combo], lines:script });
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
     // RESUMABLE: carry over any clips already generated in a previous (timed-out) request.
     const prev = (extras.podcast.audio && extras.podcast.audio[combo]) || [];
