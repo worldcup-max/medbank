@@ -288,38 +288,42 @@ async function resolveModel(account_id, level){
 }
 
 /* ---- Podcast: two-host study episode from a lecture note (script + Fish/Kokoro voices) ---- */
-const PODCAST_PROMPT = `You are writing a two-host study podcast for medical students, based ONLY on the lecture note below. It should teach as well as a great tutor and feel like a real conversation — accurate, engaging, and exam-relevant.
+const PODCAST_PROMPT = `You are an expert medical educator and podcast scriptwriter. Write a two-host audio podcast script that TEACHES the topic below to medical / health-science students preparing for exams and clinical rotations, based ONLY on the supplied note. It must be accurate, engaging, well-paced, and built for spoken audio.
 
-HOSTS — keep these personas consistent throughout:
-- HOST A is the clinician-teacher: warm, explains the WHY behind each fact and the clinical "so what".
-- HOST B is the sharp final-year student: curious, asks the question a learner would ask, flags exam traps, and summarizes.
+HOSTS — peers, never a lecturer/student dynamic. Do NOT use any names in the spoken text (the student picks the voices later, so a hardcoded name would clash):
+- HOST A — warm and curious: asks the "wait, why?" questions a learner would ask.
+- HOST B — precise: explains the mechanism and the clinical relevance.
 
-LEVEL: pitch the depth for {{level}}. Lower levels — explain fundamentals and mechanisms plainly. Higher levels — move faster through basics and go deeper into management, edge cases, and exam nuance.
-
-VOICE: write to be SPOKEN — contractions, natural rhythm, short reactions ("right", "exactly", "wait —"), never bookish. ONE idea per line so it's easy to absorb; break dense facts into two short exchanges instead of cramming.
-
-STRUCTURE:
-1. Cold-open hook (2-3 lines): why this topic matters on the wards and in the exam — the stakes — before any detail.
-2. Teach each section in a logical order. For EVERY key figure or fact, add a sentence of "why it happens" or "why it matters clinically" — never just state a number and move on.
-3. Real back-and-forth: B asks clarifying or exam-angle questions ("why does BP fall if cardiac output is up?") and A answers; they build on each other, not trade monologues.
-4. After each section, one quick clinical vignette or exam-trap callout ("so a creatinine of 0.8 in pregnancy is actually a red flag").
-5. Clear verbal transitions between sections ("that's the cardiovascular changes — let's move to the renal system").
-6. Memory hooks: give a mnemonic or a "peg" for any hard list, and one "if you remember one thing…" line near the end.
-7. Close with 3-4 quick active-recall prompts phrased as self-tests ("what's the normal haemoglobin in pregnancy? … 10.5 to 11"), not a flat summary.
-
-CHAPTERS: organize the episode into 3-6 named sections. Tag EVERY line with a short Title Case "section" label (e.g. "Overview", "Cardiovascular", "Renal", "Clinical pearls", "Recap"). Consecutive lines in the same section share the label; the first line of a new section starts a new chapter.
-
-SOURCE ANCHOR: for EVERY line, also include "src" — a SHORT verbatim quote (6-12 words) copied EXACTLY (same words and casing) from the note that this line is based on, so the app can scroll the note to that spot as the line plays. Prefer a distinctive sentence fragment. If a line is pure banter/transition with no matching text, use the nearest heading from the note.
+LEVEL: pitch the depth for {{level}}. Lower levels — explain fundamentals and mechanisms plainly. Higher levels — move faster through basics, deeper into management, edge cases, and exam nuance.
 
 {{length}}
 
-Never invent facts beyond the note. Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote"}]}.
+PACING (critical): never pack more than 2 distinct concepts into one line — split dense material across multiple short exchanges so a listener absorbs each idea. Keep lines fairly even in length (~10-20 seconds spoken). Write to be SPOKEN: contractions, natural rhythm, short reactions ("right", "exactly", "wait —"), never bookish, no filler.
+
+STRUCTURE (follow this order):
+1. HOOK (2-3 lines): open by framing why the topic matters — its clinical stakes (how common, how it's tested, what goes wrong if missed) — BEFORE any detail. Make them want to keep listening. Never cold-open into facts.
+2. SIGNPOSTED BODY: group content into clear sections (by system, cause, or stage). Begin each section with a short spoken transition that names it ("that's the cardiovascular side — now the renal changes"). For EVERY key fact or number, add one sentence of WHY — the mechanism or the clinical consequence. Never leave a bare statistic unexplained. After each major section, add one quick clinical application or exam-trap callout ("a creatinine of 0.8 in pregnancy is a red flag").
+3. RECAP as ACTIVE RECALL (final 2-3 lines): pose quick self-test questions and answer them ("what's a normal haemoglobin in pregnancy? Around 10.5 to 11"), not a passive summary.
+
+DIALOGUE: genuine back-and-forth, not alternating monologues — A asks, B answers, they build on each other. Real conversation, not two lectures side by side.
+
+CHAPTERS: tag EVERY line with a short Title Case "section" label (e.g. "Overview", "Cardiovascular", "Renal", "Clinical pearls", "Recap"). Consecutive lines share the label; the first line of a new section starts a chapter.
+
+SOURCE ANCHOR: for EVERY line include "src" — a SHORT verbatim quote (6-12 words) copied EXACTLY (same words and casing) from the note the line is based on, so the app can scroll the note to that spot as the line plays. Prefer a distinctive fragment. For a pure transition/banter line, use the nearest heading from the note.
+
+ACCURACY & SAFETY: base everything strictly on the note — do not invent figures, drugs, or guidelines. Keep numbers, ranges, and units EXACTLY as in the note. Prioritise high-yield, exam-relevant facts.
+
+NEVER emit an empty or placeholder line — every line must contain real spoken text (empty segments break audio generation). No stage directions, sound effects, or bracketed notes inside the spoken text.
+
+SELF-CHECK silently before returning: every line has real text; the length target is met (if short, ADD depth and "why", not new bare facts); every number has a "why it matters"; there is a hook, signposted sections with spoken transitions, and an active-recall recap; it reads as a two-way conversation.
+
+Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote"}]}.
 
 LECTURE NOTE:
 {{note}}`;
 const PODCAST_LEN = {
-  deep:  'LENGTH: make it a substantial ~7-9 minute episode — roughly 26-34 lines, mostly alternating A/B, each 1-3 sentences. Favour depth and clarity over cramming: teach fewer points well rather than listing many.',
-  quick: 'LENGTH: make it a tight ~3 minute review — roughly 12-16 lines. Hit only the highest-yield points and the exam essentials. Keep the hook and the active-recall close, but trim to the single most important vignette. Every line must earn its place.'
+  deep:  'LENGTH & PACING (critical): target a spoken runtime of 7-9 minutes (~1,100-1,400 words) — 26-34 lines, mostly alternating A/B, each 1-3 sentences (~15-35 words). Do NOT compress the topic into a rapid fact-list; depth and pacing matter more than covering everything fast. If it runs short, add explanation and "why", not more bare facts.',
+  quick: 'LENGTH & PACING: a tight ~3-minute review — 12-16 lines, each 1-2 sentences. Hit only the highest-yield points and exam essentials; keep the hook and the active-recall recap, but trim to the single most important exam-trap. Every line must earn its place.'
 };
 async function podcastScript(level, note, model, mode){
   const row = await loadPromptFor("podcast", level);
