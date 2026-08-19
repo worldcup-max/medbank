@@ -1,5 +1,5 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v170';   // v169: computer-studies 'logic' gate schematic + 'table' grid renderers
+const CACHE = 'medbank-v172';   // v169: computer-studies 'logic' gate schematic + 'table' grid renderers
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
   './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js',
