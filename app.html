@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16ze';   // bump this each release
+const APP_VERSION='2026.08.16zf';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2669,7 +2669,7 @@ async function podAsk(){
   // the answering host is the OTHER host from whoever just spoke, so it feels like a third turn
   const spkA=(POD.lines[POD.i]||{}).speaker!=='B'; const ansSpeaker=spkA?'B':'A';
   const ansName=ansSpeaker==='A'?podName(POD.voiceA):podName(POD.voiceB);
-  const prompt='You are '+ansName+', a co-host on a medical study podcast about "'+(t?t.name:'')+'". A listener just jumped in at this moment: "'+line+'". Their question: "'+q+'". Answer them directly and warmly, out loud, in 2-4 short spoken sentences — exam-relevant, no lists.';
+  const prompt='You are one of the two hosts of a medical study podcast about "'+(t?t.name:'')+'". A listener just jumped in at this moment: "'+line+'". Their question: "'+q+'". Answer them directly and warmly, out loud, in 2-4 short spoken sentences — exam-relevant, no lists. Do NOT use anyone\'s name. End by naturally handing back to the episode (e.g. "anyway — let\'s get back to it").';
   let ans='';
   try{ ans=await claudeTutor('You are a warm, sharp medical study podcast host answering a listener live on air.', [{role:'user',text:prompt}], DATA.settings.explainModel||'deepseek-v4-flash'); }
   catch(e){ if(out) out.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI — check your internet.</span>'; return; }
@@ -2679,9 +2679,23 @@ async function podAsk(){
   arr.push({who:'you',text:q}); arr.push({who:'host',speaker:ansSpeaker,text:ans});
   POD.raise=false; podPaint();
   setTimeout(function(){ var el=document.getElementById('podINS'+POD.i+'_'+(arr.length-1)); if(el) el.scrollIntoView({block:'center',behavior:'smooth'}); },60);
-  // speak the answer aloud in a host voice (a third voice), then resume the episode
-  try{ if(window.voiceSpeak){ voiceSpeak(ans, function(){ try{ var a=podAudioEl(); a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }catch(e){} }, 'tutor'); }
-    else { var a=podAudioEl(); a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); } }catch(e){}
+  // speak the answer aloud in the ANSWERING HOST'S OWN voice (no third voice), then resume the episode
+  var hk=(ansSpeaker==='A')?POD.voiceA:POD.voiceB;
+  var resume=function(){ try{ var a=podAudioEl(); a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }catch(e){} };
+  podSpeakHost(ans, hk, resume);
+}
+async function podSpeakHost(text, voiceKey, cb){
+  try{
+    var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB){ cb&&cb(); return; }
+    var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token; if(!tok){ cb&&cb(); return; }
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify({text:String(text).slice(0,1500),use:'tutor',voiceKey:voiceKey})});
+    if(!r.ok){ cb&&cb(); return; }
+    var blob=new Blob([await r.arrayBuffer()],{type:'audio/mpeg'}); var url=URL.createObjectURL(blob);
+    var au=document.getElementById('podAnsAudio'); if(!au){ au=document.createElement('audio'); au.id='podAnsAudio'; document.body.appendChild(au); }
+    au.onended=function(){ try{URL.revokeObjectURL(url);}catch(e){} cb&&cb(); };
+    au.onerror=function(){ cb&&cb(); };
+    au.src=url; au.playbackRate=POD.speed||1; au.volume=(POD.volume==null?1:POD.volume); au.play().catch(function(){ cb&&cb(); });
+  }catch(e){ cb&&cb(); }
 }
 function podSetupMedia(){
   if(!('mediaSession' in navigator)) return;

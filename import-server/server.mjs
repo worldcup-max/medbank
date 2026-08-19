@@ -455,15 +455,18 @@ async function _ttsRaw(p, text, voiceId){
  * burning paid Fish credits because the self-hosted Kokoro box is down. */
 const KOKORO_HEALTH = { ok:true, lastOkAt:0, lastFailAt:0, lastError:null, fallbacks:0 };
 function kokoroRecentlyDown(){ return KOKORO_HEALTH.ok===false && (Date.now()-KOKORO_HEALTH.lastFailAt) < 90000; }
-async function ttsClip(provider, text, voiceId, kokoroVoice){
-  // Try the requested provider first, then fall back to the OTHER configured
-  // non-OpenAI provider so a clip still finishes. OpenAI TTS is never used here.
+async function ttsClip(provider, text, voiceId, kokoroVoice, strict){
+  // Try the requested provider first, then fall back to the OTHER configured non-OpenAI
+  // provider so a clip still finishes. STRICT mode (podcasts) disables the cross-provider
+  // fallback so an episode can NEVER mix voices — every clip stays on the same provider.
   const chain = [];
   if(provider && providerReady(provider)) chain.push([provider, voiceId]);
-  if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || FISH_VOICE_HOST_A]);
-  // Only fall back to Kokoro if it isn't currently crash-looping — otherwise a premium (Fish)
-  // clip that hiccups would die on a dead Kokoro 502 instead of just retrying Fish.
-  if(providerReady("kokoro") && provider!=="kokoro" && !kokoroRecentlyDown()) chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
+  if(!strict){
+    if(providerReady("fish")   && provider!=="fish")   chain.push(["fish",   voiceId || FISH_VOICE_HOST_A]);
+    // Only fall back to Kokoro if it isn't currently crash-looping — otherwise a premium (Fish)
+    // clip that hiccups would die on a dead Kokoro 502 instead of just retrying Fish.
+    if(providerReady("kokoro") && provider!=="kokoro" && !kokoroRecentlyDown()) chain.push(["kokoro", kokoroVoice || KOKORO_DEFAULT.read]);
+  }
   if(!chain.length) throw new Error("No TTS provider configured — set FISH_API_KEY (premium) and/or KOKORO_TTS_URL (basic)");
   let lastErr;
   for(const [p, v] of chain){
@@ -762,6 +765,10 @@ app.post("/podcast-audio", async (req,res)=>{
     // premium → Fish (the paid, natural voice); basic → Kokoro (free). ttsClip falls
     // back to the other configured provider automatically if one is down. No OpenAI.
     let provider = prem ? "fish" : "kokoro";
+    // Decide ONE provider for the WHOLE episode so every clip uses the same two voices — never
+    // mid-episode voice switching. If the tier's provider isn't usable, switch the whole episode.
+    if(provider==="fish" && !providerReady("fish") && providerReady("kokoro")) provider="kokoro";
+    else if(provider==="kokoro" && (!providerReady("kokoro") || kokoroRecentlyDown()) && providerReady("fish")) provider="fish";
     let vA, vB;
     const aKey = (voiceA||"").toString().toLowerCase(), bKey = (voiceB||"").toString().toLowerCase();
     if(provider==="kokoro"){ vA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A; vB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B; }
@@ -778,7 +785,7 @@ app.post("/podcast-audio", async (req,res)=>{
       const _kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, _kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
       const rvid = script[ri].speaker==="A" ? vA : vB;
       const rkvid = script[ri].speaker==="A" ? _kA : _kB;
-      const rbuf = await ttsClip(provider, script[ri].text, rvid, rkvid);
+      const rbuf = await ttsClip(provider, script[ri].text, rvid, rkvid, true);   // strict: keep the same voice
       if(!rbuf || rbuf.length < 1200) return res.status(502).json({ error:"empty audio — try again" });
       const rurl0 = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+ri+".mp3", rbuf);
       const rurl = rurl0 + (rurl0.indexOf('?')>=0?'&':'?') + "v=" + Date.now();   // cache-bust so the player refetches
@@ -811,7 +818,7 @@ app.post("/podcast-audio", async (req,res)=>{
         let buf=null;
         for(let a=0; a<2 && !buf; a++){
           try{
-            const b = await ttsClip(provider, script[i].text, vid, kvid);
+            const b = await ttsClip(provider, script[i].text, vid, kvid, true);   // strict: whole episode = one provider, two voices
             if(!b || b.length < 1200) throw new Error("empty audio ("+(b?b.length:0)+" bytes)");   // reject 0-byte / broken clips
             buf = b;
           }
@@ -858,9 +865,12 @@ app.post("/tts", async (req,res)=>{
     // open to any signed-in student — read-aloud on their own content
     const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
     const isTutor = req.body.use === "tutor";
-    const provider = isTutor ? "fish" : "kokoro";
-    const voice = req.body.voice || (isTutor ? (process.env.FISH_VOICE_TUTOR || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read);
-    const buf = await ttsClip(provider, text, voice);
+    let provider = isTutor ? "fish" : "kokoro";
+    let voice = req.body.voice || (isTutor ? (process.env.FISH_VOICE_TUTOR || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read);
+    // "Ask the hosts": answer in one of the podcast's OWN two host voices (voiceKey = ethan/laura/…)
+    const vk = (req.body.voiceKey||"").toString().toLowerCase();
+    if(vk && FISH_VOICE_BY_KEY[vk]){ provider = "fish"; voice = fishRefForKey(vk, voice); }
+    const buf = await ttsClip(provider, text, voice, null, true);   // strict — the exact voice, no fallback swap
     res.setHeader("Content-Type","audio/mpeg"); res.send(buf);
   }catch(e){ res.status(500).json({ error:e.message||"tts error" }); }
 });
