@@ -104,6 +104,11 @@ Pick the FIRST mode below that can represent the concept:
   any "compare these on these criteria" content. Columns can be tinted "in" (the givens) or "out"
   (the results), so a student sees which side of the table is cause and which is effect. Prefer this
   over "tree" for anything that is really a comparison.
+• MODE "punnett" — a GENETIC CROSS on a Punnett square: the two parent genotypes split into
+  gametes, the gametes become the row and column headers, the cells fill in one at a time, the
+  offspring are grouped by phenotype and the ratio is computed on screen. Use for monohybrid and
+  dihybrid crosses, test crosses, incomplete dominance and codominance, carrier probability, and
+  any "what proportion of the offspring will…" question. This is the flagship genetics mode.
 • MODE "graph" — anything best shown as a PLOTTED CURVE on axes: reaction energy profile (activation
   energy, ΔH, catalyst), titration curve (pH vs volume), radioactive decay / half-life, Maxwell–
   Boltzmann distribution, phase diagram, cooling/heating curves, rate-vs-time, dose-response. If the
@@ -169,7 +174,28 @@ floating-point encoding, subnet masks and Big-O arithmetic → "solve", one line
 growth curves against input size → "graph". Genuine taxonomies (types of software, network
 topologies, data types) → "tree", last resort as always.
 
-Decision: try mechanism → cell → logic → fbd/circuit → unitcircle/solve/vectors/matrix → venn → table → graph → flow first; choose "tree" ONLY if none of the
+BIOLOGY ROUTING (biology's default is a SPATIAL SCENE, the inverse of chemistry — reach for
+"mechanism" first, not "flow"): membrane transport, diffusion, osmosis, tonicity, the sodium–
+potassium pump, facilitated diffusion, signalling and anything happening ACROSS a membrane or
+INSIDE a cell → "mechanism" (template membrane_cell — the lumen/cell/blood compartments ARE the two
+sides of the membrane). Genetic crosses, Punnett squares, monohybrid and dihybrid ratios, test
+crosses, carriers, incomplete dominance and codominance → "punnett". Enzyme kinetics (rate versus
+substrate, the temperature and pH optima, competitive versus non-competitive inhibition), population
+growth (exponential versus logistic, carrying capacity), oxygen-dissociation curves, the action
+potential and predator–prey cycles → "graph". Taxonomy, the rank hierarchy, the three domains and
+phylogenetic trees → "tree" (the ONE topic where the whiteboard tree is genuinely the right diagram).
+Cellular respiration, photosynthesis, DNA replication, transcription and translation, mitosis and
+meiosis, homeostatic feedback loops, the dehydration/hydrolysis cycle and every other ordered
+pathway → "flow" (kind "trigger" for what starts it, "process" for a step, "product" for what forms,
+"danger" for the classic misconception or pathological case, "outcome" for the result).
+SAY BIOLOGY ALOUD PROPERLY: never letter-name an abbreviation in narration — say "deoxyribonucleic
+acid", "messenger RNA" (as "messenger R-N-A" only after it has been said in full once), "adenosine
+triphosphate" not "A-T-P", "nicotinamide adenine dinucleotide" not "N-A-D-H", "endoplasmic
+reticulum" not "E-R". Say "three to one", never "three colon one"; "five prime" and "three prime";
+"two n" or "diploid"; "big A little a". For the central dogma NEVER say "turns into" or "becomes" —
+say "is used to build", because the DNA is a master copy that is not consumed.
+
+Decision: try mechanism → cell → punnett → logic → fbd/circuit → unitcircle/solve/vectors/matrix → venn → table → graph → flow first; choose "tree" ONLY if none of the
 diagrammatic modes can honestly represent the content — the one exception is a PROBABILITY TREE,
 where "tree" IS the right diagram (see the tree mode notes). Every highlight must produce a rich,
 engaging result.
@@ -488,7 +514,35 @@ Rules:
    exactly 2ⁿ rows and why stopping early is a guess rather than a proof. For a comparison, say what
    the single deciding difference is before listing the details.
 Return ONLY valid minified JSON:
-{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"table","caption":"","mono":false,"columns":[{"id":"c1","label":"","group":"in"},{"id":"c2","label":"","group":"out"}],"rows":[{"id":"r0","cells":["",""],"note":""}],"note":"","narration_steps":[{"short":"","term":"","narration_text":"","reveal":["head"],"active":["head"],"point":"head"}]}`
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"table","caption":"","mono":false,"columns":[{"id":"c1","label":"","group":"in"},{"id":"c2","label":"","group":"out"}],"rows":[{"id":"r0","cells":["",""],"note":""}],"note":"","narration_steps":[{"short":"","term":"","narration_text":"","reveal":["head"],"active":["head"],"point":"head"}]}
+
+═══════ MODE "punnett" (a GENETIC CROSS — gametes, grid, tally, ratio) ═══════
+Rules:
+1. "parents": {"p1":{"genotype":"Aa","label":"Mother — Aa (carrier)"},"p2":{…}}. The genotype is the
+   real allele string; the label says WHO and, if it helps, what they look like.
+2. "gametes": {"top":[…],"side":[…]} — the gametes each parent can make, and therefore the COLUMN
+   headers (top, from p1) and ROW headers (side, from p2). Monohybrid: 2 and 2. Dihybrid: 4 and 4.
+   These must be the actual gametes of the genotypes you gave — that is the whole point of the row:
+   the headers are EARNED from meiosis, not handed over.
+3. "cells": exactly top.length × side.length entries in ROW-MAJOR order (row 0 left→right, then row
+   1 …). Each {id (c00, c01, c10 …), geno (the combined genotype, dominant allele first), pheno (the
+   KEY of the trait it shows — must match a "traits" key)}.
+4. "traits": 2–4 entries, each {key, label (what that phenotype looks like, e.g. "Tall"), color}.
+   Colour-group by phenotype so the ratio is something the student SEES before it is counted.
+5. "ratio": the finished ratio in words-and-figures, e.g. "3 : 1  tall to short". OPTIONAL "note":
+   one short line under the grid.
+6. narration_steps: "reveal"/"active"/"point" use the CELL ids plus these fixed parts: "p1", "p2",
+   "gtop" (the column headers), "gside" (the row headers), "tally" (the phenotype counts) and
+   "ratio". Reveal "p1" and "p2" first, then the gametes, then the cells (one, or one row, per
+   beat), then "tally", then "ratio". 5–10 steps, last recaps.
+7. TEACH THE MISCONCEPTIONS, out loud: a ratio is a PROBABILITY, not a promise — three to one does
+   not mean that in a family of four exactly one child is affected; each child independently has a
+   one-in-four chance. "Dominant" does not mean common, strong or better — it only means it is the
+   version you see when it is present. And say where the letters come from: each parent gives ONE
+   allele per gene because meiosis halves the number, which is why the headers are single letters
+   and the cells are pairs. Spoken words only: "big A little a", "three to one", "heterozygous".
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"punnett","parents":{"p1":{"genotype":"Aa","label":""},"p2":{"genotype":"Aa","label":""}},"gametes":{"top":["A","a"],"side":["A","a"]},"traits":[{"key":"dom","label":"","color":"#7c3aed"},{"key":"rec","label":"","color":"#e0632b"}],"cells":[{"id":"c00","geno":"AA","pheno":"dom"},{"id":"c01","geno":"Aa","pheno":"dom"},{"id":"c10","geno":"Aa","pheno":"dom"},{"id":"c11","geno":"aa","pheno":"rec"}],"ratio":"3 : 1","note":"","narration_steps":[{"short":"","term":"","narration_text":"","reveal":["p1","p2"],"active":["p1"],"point":"p1"}]}`
 ); }
 export const VIS_SYSTEM = visSystem();   // static snapshot (kept for compatibility)
 
@@ -1023,14 +1077,359 @@ export const EXEMPLARS = [
         {short:"Recap",term:"recap",narration_text:"Recap. Ovals to start and stop, a parallelogram for input, a rectangle for a step, and a diamond for a decision with two labelled exits. Trace one path at a time, and always ask yourself what happens at the boundary.",reveal:["n0","n7"],active:["n7"],point:"n7"}],
       recap:["The shape carries the meaning — oval, parallelogram, rectangle, diamond.",
              "Every decision diamond has exactly two LABELLED exits.",
-             "Check the boundary case: zero is the one everybody forgets."]} }
+             "Check the boundary case: zero is the one everybody forgets."]} },
+
+  /* ══════════ BIOLOGY (100-level). Nine gold shots, one per routed mode. Biology's default is the
+     SPATIAL SCENE — the inverse of chemistry — so the membrane shot comes first and is the one the
+     detection gate reaches for whenever the content happens inside or across a cell. ══════════ */
+
+  /* ── BIOLOGY 25: MECHANISM. Osmosis on the membrane_cell scene. Water crosses in BOTH directions
+     and the "danger" beat freezes the frame at equilibrium with the molecules still moving — the
+     documented misconception is that molecules stop, and that water "wants" to dilute the salt. ── */
+  { text: "Explain osmosis and tonicity: why water moves across a membrane towards the more concentrated solution, and what happens to a red blood cell in a hypertonic, hypotonic and isotonic solution.",
+    blueprint: {meta:{title:"Osmosis — water crosses both ways, but not equally",subject:"Biology",concept_id:"osmosis_tonicity_membrane"},template:"membrane_cell",
+      elements:[{id:"wl1",type:"water",zone:"lumen",lane:0,label:"H2O"},{id:"wl2",type:"water",zone:"lumen",lane:1,label:"H2O"},{id:"wl3",type:"water",zone:"lumen",lane:2,label:"H2O"},
+                {id:"aqp",type:"channel",zone:"apical",lane:0,label:"aquaporin"},
+                {id:"wc",type:"water",zone:"intra",lane:0,label:"H2O"},
+                {id:"s1",type:"node",zone:"blood",lane:0,label:"solute",color:"#e0632b",r:23},{id:"s2",type:"node",zone:"blood",lane:1,label:"solute",color:"#e0632b",r:23},
+                {id:"back",type:"water",zone:"baso",lane:1,label:"H2O"},
+                {id:"eq",type:"label",zone:"intra",lane:2,label:"equilibrium: still moving, net zero"},
+                {id:"wrong",type:"blockx",zone:"intra",lane:3,label:"“water wants to dilute it”"}],
+      narration_steps:[
+        {short:"Two sides",term:"concentration gradient",narration_text:"Two compartments, one membrane. On the left, mostly water. Notice there is nothing pulling anything — every molecule here is just jiggling about at random.",reveal:["wl1","wl2","wl3"],active:["wl1"],point:"wl1",
+         def:"A concentration gradient is simply a difference in how crowded a substance is between two places."},
+        {short:"The solute",term:"solute",narration_text:"On the right we add solute — particles too big to slip through. They take up room, so on this side there is less water per unit of space, even though nothing has been removed.",reveal:["s1","s2"],active:["s1"],point:"s1"},
+        {short:"The doorway",term:"aquaporin",narration_text:"Water crosses through aquaporins, protein doorways in the membrane. No energy is spent here, which is why this is passive transport rather than a pump.",reveal:["aqp"],active:["aqp"],arrows:[{from:"wl1",to:"aqp",color:"#2563eb"}],point:"aqp"},
+        {short:"Both ways",term:"osmosis",narration_text:"Here is the part everyone misses. Water crosses in both directions at once. It is just that the dilute side has more water molecules queueing, so more of them happen to make the trip.",reveal:["wc","back"],active:["wc"],arrows:[{from:"aqp",to:"wc",color:"#2563eb"},{from:"back",to:"aqp",color:"#93c5fd"}],point:"wc"},
+        {short:"The trap",term:"teleology",narration_text:"So water does not want to rescue the salty side. Nothing wants anything. Say it as traffic: both lanes are open, one lane simply has more cars in it.",reveal:["wrong"],active:["wrong"],arrows:[{from:"wc",to:"wrong",color:"#dc2626"}],point:"wrong"},
+        {short:"Equilibrium",term:"dynamic equilibrium",narration_text:"When the two sides match, the molecules keep crossing — the traffic is now equal in both directions. Equilibrium means net zero movement, not stillness.",reveal:["eq"],active:["eq"],arrows:[{from:"wc",to:"eq",color:"#7c3aed"}],point:"eq"},
+        {short:"The payoff",term:"tonicity",narration_text:"Now predict a red cell. Hypertonic solution: more solute outside, so water leaves and the cell shrinks. Hypotonic: water enters and it swells. Isotonic: no net change.",reveal:["s1","s2"],active:["s2"],arrows:[{from:"s2",to:"aqp",color:"#e0632b"}],point:"s2",
+         quiz:{q:"A cell is placed in a hypertonic solution. What happens?",options:["It shrinks — water leaves towards the solute","It swells — water is pulled in","Nothing, because water cannot cross"],answer:0,why:"Hypertonic describes the SOLUTION as having more solute, so water leaves the cell and it shrinks."}},
+        {short:"Recap",term:"osmosis",narration_text:"Recap. Water moves down its own gradient, which means towards the solute. Both directions always happen. And the words hypertonic and hypotonic describe the solution, never the cell.",reveal:["eq"],active:["aqp"],arrows:[{from:"wl1",to:"aqp",color:"#2563eb"}],point:"aqp"}],
+      recap:["Water moves down its OWN gradient — which is towards the solute.",
+             "Both directions happen at once; only the net flow is one-way.",
+             "Hypertonic and hypotonic describe the SOLUTION, not the cell."]} },
+
+  /* ── BIOLOGY 26: FLOW. Cellular respiration, taught as four stages in three LOCATIONS, because
+     location is what the exam asks and what students blur. The proton gradient is the payoff. ── */
+  { text: "Cellular respiration: glycolysis in the cytosol, the link reaction and Krebs cycle in the mitochondrial matrix, and the electron transport chain and chemiosmosis on the inner membrane, producing ATP.",
+    blueprint: {meta:{title:"Cellular respiration — four stages, three locations",subject:"Biology",concept_id:"cellular_respiration_stages"},layout:"flow",
+      nodes:[{id:"glu",label:"Glucose",note:"in the cytosol",kind:"trigger"},
+             {id:"gly",label:"Glycolysis",note:"cytosol · 2 pyruvate",kind:"process"},
+             {id:"link",label:"Link reaction",note:"matrix · loses CO₂",kind:"process"},
+             {id:"krebs",label:"Krebs cycle",note:"matrix · loads carriers",kind:"process"},
+             {id:"carr",label:"NADH & FADH₂",note:"the electron taxis",kind:"product"},
+             {id:"etc",label:"Electron transport",note:"inner membrane",kind:"process"},
+             {id:"grad",label:"H⁺ gradient",note:"water behind a dam",kind:"product"},
+             {id:"burn",label:"“Oxygen is burned”",note:"the classic error",kind:"danger"},
+             {id:"atp",label:"ATP synthase → ATP",note:"the water wheel",kind:"outcome"}],
+      narration_steps:[
+        {short:"Where it starts",term:"glycolysis",narration_text:"Glucose never enters the mitochondrion whole. It is split in the cytosol, outside the mitochondrion entirely, in a stage called glycolysis — and that location is worth a mark on its own.",reveal:["glu","gly"],active:["gly"],point:"gly",
+         def:"Glycolysis splits one six-carbon glucose into two three-carbon pyruvate molecules, in the cytosol, with no oxygen needed."},
+        {short:"Into the matrix",term:"link reaction",narration_text:"Pyruvate is then carried into the matrix, the fluid centre of the mitochondrion. There the link reaction trims a carbon off as carbon dioxide — that is the gas you breathe out.",reveal:["link"],active:["link"],point:"link"},
+        {short:"The cycle",term:"Krebs cycle",narration_text:"The Krebs cycle finishes stripping the carbons. But do not track the carbon here — track the electrons, because those are what the cell is actually harvesting.",reveal:["krebs"],active:["krebs"],point:"krebs"},
+        {short:"The couriers",term:"electron carriers",narration_text:"Reduced nicotinamide adenine dinucleotide and reduced flavin adenine dinucleotide are not products to memorise. They are couriers, and they are carrying electrons to the next stage.",reveal:["carr"],active:["carr"],point:"carr"},
+        {short:"The pumps",term:"electron transport chain",narration_text:"They unload on the inner membrane. As electrons drop from carrier to carrier, the energy released is used to pump protons out into the intermembrane space.",reveal:["etc"],active:["etc"],point:"etc"},
+        {short:"The dam",term:"proton gradient",narration_text:"Protons pile up on one side. That crowding is the real battery of the cell — think of water held behind a dam, storing energy purely by being on the high side.",reveal:["grad"],active:["grad"],point:"grad",
+         quiz:{q:"What is oxygen's actual job in respiration?",options:["It accepts the electrons at the end of the chain","It is burned to release energy","It carries the electrons to the membrane"],answer:0,why:"Oxygen is the FINAL ELECTRON ACCEPTOR — it takes the spent electrons and, with protons, forms water."}},
+        {short:"The trap",term:"final electron acceptor",narration_text:"Which is where oxygen comes in — and it is not burned. It sits at the end of the chain and accepts the tired electrons, joining protons to make water. Without it, the whole queue backs up.",reveal:["burn"],active:["burn"],point:"burn"},
+        {short:"The turbine",term:"chemiosmosis",narration_text:"The protons rush back through adenosine triphosphate synthase, spinning it like a water wheel. That spin is what makes the adenosine triphosphate. This is chemiosmosis.",reveal:["atp"],active:["atp"],point:"atp"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Glycolysis in the cytosol, link and Krebs in the matrix, transport chain on the inner membrane. Carriers move electrons, electrons build a proton gradient, and the gradient makes the energy.",reveal:["glu","atp"],active:["atp"],point:"atp"}],
+      recap:["Location is the exam question: cytosol → matrix → inner membrane.",
+             "The carriers move ELECTRONS; the proton gradient is the actual battery.",
+             "Oxygen is the final electron acceptor — it is never 'burned'."]} },
+
+  /* ── BIOLOGY 27: FLOW. Photosynthesis as a supply LOOP between two reaction sets, ending with the
+     side-by-side beat that kills the "plants only respire at night" misconception. ── */
+  { text: "Photosynthesis: the light-dependent reactions in the thylakoid membrane split water and make ATP and NADPH, which the light-independent Calvin cycle in the stroma uses to fix carbon dioxide into glucose.",
+    blueprint: {meta:{title:"Photosynthesis — two reaction sets, one supply loop",subject:"Biology",concept_id:"photosynthesis_light_and_calvin"},layout:"flow",
+      nodes:[{id:"light",label:"Light hits chlorophyll",note:"thylakoid membrane",kind:"trigger"},
+             {id:"split",label:"Water is split",note:"where the O₂ comes from",kind:"process"},
+             {id:"o2",label:"Oxygen released",note:"from H₂O, not CO₂",kind:"product"},
+             {id:"carr",label:"ATP + reduced NADP",note:"handed to the stroma",kind:"product"},
+             {id:"calvin",label:"Calvin cycle",note:"stroma · no light needed",kind:"process"},
+             {id:"fix",label:"CO₂ fixed",note:"carbon joins the cycle",kind:"process"},
+             {id:"glu",label:"Glucose built",note:"energy stored, not released",kind:"outcome"},
+             {id:"night",label:"“Plants only respire at night”",note:"the classic error",kind:"danger"},
+             {id:"back",label:"Spent carriers return",note:"the loop closes",kind:"outcome"}],
+      narration_steps:[
+        {short:"The trigger",term:"light-dependent reactions",narration_text:"Light lands on chlorophyll in the thylakoid membrane. Only this half of photosynthesis needs light, which is why it is called the light-dependent stage.",reveal:["light"],active:["light"],point:"light"},
+        {short:"Splitting water",term:"photolysis",narration_text:"That energy is used to rip water apart. Notice what was split: water. Not carbon dioxide.",reveal:["split"],active:["split"],point:"split"},
+        {short:"Where O₂ comes from",term:"oxygen",narration_text:"So the oxygen a plant gives off came from the water it drank, not from the carbon dioxide it absorbed. Isotope experiments settled this, and it is a favourite exam trap.",reveal:["o2"],active:["o2"],point:"o2",
+         quiz:{q:"The oxygen released by photosynthesis comes from…",options:["water","carbon dioxide","glucose"],answer:0,why:"Light splits WATER (photolysis). The carbon dioxide's oxygen ends up in glucose and in more water."}},
+        {short:"The handover",term:"ATP and reduced NADP",narration_text:"The light stage also loads two carriers — adenosine triphosphate and reduced nicotinamide adenine dinucleotide phosphate — and passes them across into the stroma.",reveal:["carr"],active:["carr"],point:"carr"},
+        {short:"The other half",term:"Calvin cycle",narration_text:"In the stroma sits the Calvin cycle. It is called light-independent because it needs no light itself, but it stops in the dark anyway — it starves without the carriers.",reveal:["calvin"],active:["calvin"],point:"calvin"},
+        {short:"Fixing carbon",term:"carbon fixation",narration_text:"Carbon dioxide is grabbed from the air and bolted onto a five-carbon acceptor. This is fixation: turning a gas into part of a solid molecule.",reveal:["fix"],active:["fix"],point:"fix"},
+        {short:"Building glucose",term:"anabolic",narration_text:"Using the carriers' energy, the cycle builds glucose. Photosynthesis stores energy in a molecule — it does not release it. That is respiration's job, and it is the reverse.",reveal:["glu"],active:["glu"],point:"glu"},
+        {short:"The trap",term:"plants respire too",narration_text:"Which brings us to the most stubborn error in biology. A plant respires every second of its life, day and night. In daylight it simply photosynthesises faster than it respires.",reveal:["night"],active:["night"],point:"night"},
+        {short:"The loop",term:"the supply loop",narration_text:"The emptied carriers travel back to the thylakoid to be reloaded. Drawn properly this is a loop, not two lists — and that loop is the reason either half alone would stall.",reveal:["back"],active:["back"],point:"back"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Light splits water in the thylakoid and loads the carriers; the stroma spends them fixing carbon dioxide into glucose; the empty carriers go back for more.",reveal:["light","back"],active:["back"],point:"back"}],
+      recap:["The oxygen released comes from WATER, not from carbon dioxide.",
+             "Photosynthesis stores energy; respiration releases it — plants do both.",
+             "The two stages are a supply loop: carriers out, empty carriers back."]} },
+
+  /* ── BIOLOGY 28: FLOW. DNA replication. The lagging strand is not an accident, it is a CONSEQUENCE
+     of one-directional synthesis — that framing is the whole lesson. ── */
+  { text: "DNA replication is semi-conservative: helicase unwinds the double helix, primase lays down primers, DNA polymerase builds the leading strand continuously and the lagging strand in Okazaki fragments, and ligase seals the nicks.",
+    blueprint: {meta:{title:"DNA replication — why one strand is built backwards in pieces",subject:"Biology",concept_id:"dna_replication_leading_lagging"},layout:"flow",
+      nodes:[{id:"helix",label:"Double helix",note:"two antiparallel strands",kind:"trigger"},
+             {id:"heli",label:"Helicase unzips",note:"breaks the base pairs",kind:"process"},
+             {id:"prim",label:"Primase lays a primer",note:"polymerase needs a start",kind:"process"},
+             {id:"rule",label:"Builds 5′ → 3′ only",note:"the one-way rule",kind:"danger"},
+             {id:"lead",label:"Leading strand",note:"one smooth run",kind:"process"},
+             {id:"lag",label:"Lagging strand",note:"restarts every time",kind:"process"},
+             {id:"okaz",label:"Okazaki fragments",note:"short pieces",kind:"product"},
+             {id:"lig",label:"Ligase seals the nicks",note:"one continuous strand",kind:"process"},
+             {id:"semi",label:"Semi-conservative",note:"one old, one new strand",kind:"outcome"}],
+      narration_steps:[
+        {short:"The setup",term:"antiparallel",narration_text:"Start with the helix. The two strands run in opposite directions — one reads five prime to three prime, the other the other way. Hold onto that; it causes everything that follows.",reveal:["helix"],active:["helix"],point:"helix",
+         def:"Antiparallel means the two strands of DNA run in opposite chemical directions, like two lanes of traffic."},
+        {short:"Unzipping",term:"helicase",narration_text:"Helicase runs along and unzips the pairs, opening a Y-shaped replication fork. It breaks only the weak hydrogen bonds between bases, never the backbone.",reveal:["heli"],active:["heli"],point:"heli"},
+        {short:"A foothold",term:"primer",narration_text:"Polymerase cannot start from nothing — it can only extend. So primase lays down a short primer for it to build from, like giving a climber the first handhold.",reveal:["prim"],active:["prim"],point:"prim"},
+        {short:"The one-way rule",term:"5′ to 3′",narration_text:"Here is the rule that explains the whole topic. Polymerase can only add bases in one direction, five prime to three prime. It physically cannot work the other way.",reveal:["rule"],active:["rule"],point:"rule",
+         quiz:{q:"Why does the lagging strand come in pieces?",options:["Polymerase can only build one way, so it must keep restarting","Because that strand is damaged","Because ligase cuts it up"],answer:0,why:"The fork opens in the direction that strand cannot be built, so polymerase jumps back and restarts each time."}},
+        {short:"The easy one",term:"leading strand",narration_text:"On one template that direction happens to point towards the opening fork. Polymerase just glides along in one continuous run. That is the leading strand.",reveal:["lead"],active:["lead"],point:"lead"},
+        {short:"The awkward one",term:"lagging strand",narration_text:"On the other template the fork opens the wrong way. So polymerase builds a short stretch, jumps back to the fork, and starts again. Watch that jump — it is the explanation.",reveal:["lag"],active:["lag"],point:"lag"},
+        {short:"The pieces",term:"Okazaki fragments",narration_text:"Those short stretches are Okazaki fragments. And note this: nothing is ever built backwards. The enzyme always works the same way; the fork is what keeps moving away.",reveal:["okaz"],active:["okaz"],point:"okaz"},
+        {short:"Stitching",term:"ligase",narration_text:"Ligase then seals the gaps between fragments, so the finished strand is every bit as continuous as the leading one. You could not tell them apart afterwards.",reveal:["lig"],active:["lig"],point:"lig"},
+        {short:"The payoff",term:"semi-conservative",narration_text:"Each new double helix keeps one original strand and one new one. Semi means half — half of the old molecule is conserved in each copy. That is what the word is telling you.",reveal:["semi"],active:["semi"],point:"semi"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Unzip, prime, build. One strand runs smoothly, the other restarts because polymerase only works one way, and ligase joins the pieces. Every copy keeps one old strand.",reveal:["helix","semi"],active:["semi"],point:"semi"}],
+      recap:["Polymerase builds 5′ → 3′ ONLY — everything odd follows from that.",
+             "The lagging strand is a consequence, not an accident or a fault.",
+             "Semi-conservative: each new helix keeps one original strand."]} },
+
+  /* ── BIOLOGY 29: FLOW. The central dogma. The documented error is reading the arrow as "turns
+     into"; the fix is stating out loud that the DNA is not consumed and never leaves. ── */
+  { text: "Transcription and translation: DNA in the nucleus is transcribed into messenger RNA, which travels to a ribosome where transfer RNA brings amino acids matching each codon, building a polypeptide until a stop codon is reached.",
+    blueprint: {meta:{title:"The central dogma — a copy, not a conversion",subject:"Biology",concept_id:"transcription_translation_central_dogma"},layout:"flow",
+      nodes:[{id:"dna",label:"DNA in the nucleus",note:"the master copy",kind:"trigger"},
+             {id:"trans",label:"Transcription",note:"mRNA built alongside",kind:"process"},
+             {id:"intact",label:"DNA left intact",note:"nothing was used up",kind:"danger"},
+             {id:"splice",label:"Introns spliced out",note:"message gets shorter",kind:"process"},
+             {id:"exit",label:"mRNA leaves the nucleus",note:"DNA stays behind",kind:"process"},
+             {id:"ribo",label:"Ribosome reads codons",note:"three bases at a time",kind:"process"},
+             {id:"trna",label:"tRNA brings an amino acid",note:"anticodon pairs with codon",kind:"product"},
+             {id:"chain",label:"Polypeptide grows",note:"amino acids joined in order",kind:"product"},
+             {id:"stop",label:"Stop codon releases it",note:"no amino acid at all",kind:"outcome"}],
+      narration_steps:[
+        {short:"The master copy",term:"the gene",narration_text:"Start in the nucleus, where the deoxyribonucleic acid lives. Think of it as the master document in a locked room — it holds the instructions, and it never leaves.",reveal:["dna"],active:["dna"],point:"dna"},
+        {short:"Copying",term:"transcription",narration_text:"Transcription builds a messenger RNA strand alongside one exposed side of the gene, base by base. It is being copied, and copying takes nothing away from the original.",reveal:["trans"],active:["trans"],point:"trans",
+         def:"Transcription copies one gene's sequence into a strand of messenger RNA. The DNA is a template, not an ingredient."},
+        {short:"The big trap",term:"not a conversion",narration_text:"So watch the deoxyribonucleic acid: it is still there, unchanged. More than a third of students say the DNA is converted into RNA. It is not. Say built from, never turns into.",reveal:["intact"],active:["intact"],point:"intact",
+         quiz:{q:"What does the arrow in DNA → RNA actually mean?",options:["RNA is built USING DNA as a template","DNA is converted into RNA","The RNA was already there and is released"],answer:0,why:"It is a copy, not a conversion. The DNA is a template and survives completely unchanged."}},
+        {short:"Editing",term:"splicing",narration_text:"Before it leaves, the non-coding stretches called introns are cut out and the coding exons are joined. That is why the finished message is shorter than the gene it came from.",reveal:["splice"],active:["splice"],point:"splice"},
+        {short:"Why a copy",term:"messenger RNA",narration_text:"Now the reason for all this. The DNA is too precious and too large to leave, so a short disposable copy carries the message out to the cytosol instead.",reveal:["exit"],active:["exit"],point:"exit"},
+        {short:"Reading",term:"codon",narration_text:"At the ribosome the message is read three bases at a time. Each triplet is a codon, and a codon is simply a three-letter word meaning one amino acid.",reveal:["ribo"],active:["ribo"],point:"ribo"},
+        {short:"Delivery",term:"transfer RNA",narration_text:"Transfer RNA arrives carrying an amino acid, and its anticodon pairs with the codon. Note that it fetches an amino acid that was already floating about — translation does not make them.",reveal:["trna"],active:["trna"],point:"trna"},
+        {short:"Building",term:"polypeptide",narration_text:"Each delivery adds one link to a growing chain. The order of the codons sets the order of the amino acids, and that order is what decides the protein's shape.",reveal:["chain"],active:["chain"],point:"chain"},
+        {short:"The end",term:"stop codon",narration_text:"Then a stop codon arrives. No transfer RNA matches it and no amino acid is added — it is a full stop, not a final word. The finished chain is released.",reveal:["stop"],active:["stop"],point:"stop"},
+        {short:"Recap",term:"recap",narration_text:"Recap. The gene is photocopied, never spent. The copy is edited, carried out, and read three letters at a time while transfer RNA delivers the matching amino acids in order.",reveal:["dna","stop"],active:["stop"],point:"stop"}],
+      recap:["The arrow means 'is used to build', never 'turns into'.",
+             "A codon is three bases naming one amino acid; a stop codon adds none.",
+             "Amino acids already exist — transfer RNA fetches them, it does not make them."]} },
+
+  /* ── BIOLOGY 30: GRAPH. Enzyme kinetics — the rate-versus-substrate curve, saturation, and the two
+     inhibitors, which are only distinguishable ON the curve. ── */
+  { text: "Enzyme kinetics: sketch the rate of reaction against substrate concentration, showing Vmax, Km, saturation of the active sites, and how competitive and non-competitive inhibitors change the curve.",
+    blueprint: {meta:{title:"Enzyme kinetics — why the rate stops rising",subject:"Biology",concept_id:"enzyme_kinetics_vmax_km"},layout:"graph",
+      x:{min:0,max:10,label:"substrate concentration"},y:{min:0,max:110,label:"rate of reaction"},
+      curves:[{id:"normal",color:"#0d9488",label:"no inhibitor",points:[[0,0],[1,33],[2,55],[3,68],[4,77],[6,87],[8,93],[10,96]]},
+              {id:"comp",color:"#2563eb",dash:true,points:[[0,0],[1,15],[2,28],[3,39],[4,48],[6,63],[8,74],[10,82]]},
+              {id:"noncomp",color:"#dc2626",dash:true,points:[[0,0],[1,19],[2,32],[3,40],[4,45],[6,51],[8,54],[10,56]]}],
+      markers:[{id:"lin",at:[1,33],label:"sites still free",color:"#0d9488"},
+               {id:"vmax",at:[9,95],label:"Vmax — every site busy",color:"#7c3aed"},
+               {id:"km",at:[1.6,48],label:"Km — half of Vmax",color:"#b45309",drop:true},
+               {id:"kmc",at:[6,63],label:"competitive: Km rises, Vmax unchanged",color:"#2563eb"},
+               {id:"vlow",at:[8,54],label:"non-competitive: Vmax falls",color:"#dc2626"}],
+      narration_steps:[
+        {short:"Two axes",term:"rate",narration_text:"Substrate concentration runs across, reaction rate goes up. Before anything else, decide what you expect: add more substrate, get more product. Let us see how far that holds.",reveal:["normal","lin"],active:["lin"],point:"lin"},
+        {short:"The steep part",term:"collisions",narration_text:"At low concentration the line climbs almost straight. Most active sites are sitting empty, so nearly every extra substrate molecule finds one and gets converted.",reveal:["lin"],active:["lin"],point:"lin"},
+        {short:"Levelling off",term:"saturation",narration_text:"Then it bends. The enzymes are now saturated — every active site is already occupied, so extra substrate simply queues. Enzyme number, not substrate, is the limit here.",reveal:["vmax"],active:["vmax"],point:"vmax",
+         def:"Saturation means every active site is occupied, so adding more substrate cannot make the reaction faster."},
+        {short:"Vmax",term:"Vmax",narration_text:"That ceiling is V max, the maximum rate. And notice the enzymes are not used up on the way there — one enzyme turns over thousands of molecules, which is exactly why so few are needed.",reveal:["vmax"],active:["vmax"],point:"vmax"},
+        {short:"Km",term:"Km",narration_text:"Halfway up sits K m, the substrate concentration giving half the maximum rate. A low K m means the enzyme grabs substrate eagerly; a high one means it needs plenty about.",reveal:["km"],active:["km"],point:"km"},
+        {short:"Competitive",term:"competitive inhibition",narration_text:"A competitive inhibitor sits in the active site itself. Flood the cell with enough substrate and it wins the race back — so the ceiling is unchanged, it just takes more substrate to reach it.",reveal:["comp","kmc"],active:["kmc"],point:"kmc",
+         quiz:{q:"How do you tell the two inhibitors apart on this graph?",options:["Competitive raises Km but keeps Vmax; non-competitive lowers Vmax","Both lower Vmax equally","Competitive lowers Vmax and Km"],answer:0,why:"A competitive inhibitor can be out-competed by more substrate, so the ceiling is unchanged — only Km shifts right."}},
+        {short:"Non-competitive",term:"non-competitive inhibition",narration_text:"A non-competitive inhibitor binds somewhere else and bends the active site out of shape. No amount of substrate fixes that, so the ceiling itself drops.",reveal:["noncomp","vlow"],active:["vlow"],point:"vlow"},
+        {short:"Recap",term:"recap",narration_text:"Recap. The curve flattens because sites saturate, not because the enzyme is used up. Competitive inhibitors move K m across; non-competitive ones pull V max down.",reveal:["normal","comp","noncomp"],active:["vmax"],point:"vmax"}],
+      recap:["The curve plateaus because active sites saturate — enzymes are not consumed.",
+             "Km is the substrate concentration at half of Vmax: low Km = high affinity.",
+             "Competitive shifts Km right; non-competitive drags Vmax down."]} },
+
+  /* ── BIOLOGY 31: GRAPH. Population growth — exponential versus logistic. The J and the S on the
+     same axes is what makes carrying capacity mean something. ── */
+  { text: "Population growth: compare exponential (J-shaped) growth with logistic (S-shaped) growth, explaining the lag phase, the exponential phase, carrying capacity K and what environmental resistance does.",
+    blueprint: {meta:{title:"Population growth — the J curve and the S curve",subject:"Biology",concept_id:"population_growth_logistic"},layout:"graph",
+      x:{min:0,max:12,label:"time (generations)"},y:{min:0,max:1100,label:"population size"},
+      curves:[{id:"expo",color:"#dc2626",dash:true,points:[[0,10],[2,26],[4,72],[6,200],[8,540],[9.5,900],[10.6,1080]]},
+              {id:"log",color:"#0d9488",points:[[0,10],[2,26],[4,72],[6,190],[8,400],[9,560],[10,690],[11,760],[12,790]]},
+              {id:"kline",color:"#7c3aed",dash:true,points:[[0,800],[12,800]]}],
+      markers:[{id:"lag",at:[1.4,20],label:"lag — few breeders yet",color:"#8a8398"},
+               {id:"exp",at:[8,540],label:"J curve — nothing limits it",color:"#dc2626"},
+               {id:"slow",at:[10,690],label:"S curve — resistance bites",color:"#0d9488"},
+               {id:"K",at:[10.8,800],label:"K — births ≈ deaths",color:"#7c3aed"}],
+      narration_steps:[
+        {short:"The axes",term:"population size",narration_text:"Time runs across, number of individuals goes up. We will put two stories on the same axes: what growth would do unchecked, and what it actually does.",reveal:["log","lag"],active:["lag"],point:"lag"},
+        {short:"Slow start",term:"lag phase",narration_text:"It begins almost flat. Not because conditions are poor, but because there are so few individuals that even fast breeding adds very little. Ten doubling to twenty is still only ten more.",reveal:["lag"],active:["lag"],point:"lag"},
+        {short:"Take-off",term:"exponential growth",narration_text:"Then it turns upwards steeply. Each generation multiplies rather than adds, so the same rate produces far bigger jumps. This is the J shape, and it is what growth does with no limits.",reveal:["expo","exp"],active:["exp"],point:"exp",
+         def:"Exponential growth multiplies the population by a constant factor each generation, so the curve steepens without end."},
+        {short:"Reality",term:"environmental resistance",narration_text:"But the red curve is a fantasy — it needs endless food and space. In reality food runs short, waste builds up, disease spreads and predators arrive. Together that is environmental resistance.",reveal:["slow"],active:["slow"],point:"slow"},
+        {short:"The ceiling",term:"carrying capacity",narration_text:"So the real curve bends over and settles at K, the carrying capacity: the largest population the habitat can sustain. Here births roughly equal deaths — busy, but no longer growing.",reveal:["kline","K"],active:["K"],point:"K",
+         quiz:{q:"What is happening to the population at carrying capacity?",options:["Births and deaths are roughly equal","Nothing is being born any more","The population has stopped moving entirely"],answer:0,why:"K is a dynamic balance: individuals are still born and still die, but the two rates cancel out."}},
+        {short:"Not stillness",term:"dynamic balance",narration_text:"Careful though — flat does not mean frozen. Individuals are still born and still dying at K; the two simply cancel. And K is not fixed, because a wetter year can raise it.",reveal:["K"],active:["K"],point:"K"},
+        {short:"Recap",term:"recap",narration_text:"Recap. The J curve is growth with nothing in the way; the S curve is growth meeting a real world. The gap between the two lines is environmental resistance, drawn to scale.",reveal:["expo","log","kline"],active:["kline"],point:"K"}],
+      recap:["J-shaped = exponential, unlimited; S-shaped = logistic, real.",
+             "The gap between the two curves IS environmental resistance.",
+             "At K births ≈ deaths — a busy balance, not a frozen population."]} },
+
+  /* ── BIOLOGY 32: TREE. Taxonomy. The one biology topic where the whiteboard tree is genuinely the
+     right diagram, not a fallback — and the place to kill the read-across-the-tips error. ── */
+  { text: "Taxonomy and classification: the rank hierarchy from domain down to species, the three domains including why archaea are not bacteria, binomial nomenclature, and how to read relatedness on a phylogenetic tree.",
+    blueprint: {meta:{title:"Classification — ranks, domains, and reading a tree",subject:"Biology",concept_id:"taxonomy_ranks_domains"},layout:"tree",root:"life",
+      nodes:[{id:"life",label:"All life",note:"one shared ancestry"},
+             {id:"ranks",label:"The eight ranks",parent:"life",note:"domain → species"},
+             {id:"mnem",label:"Nested, not listed",parent:"ranks",note:"each rank sits inside the last"},
+             {id:"binom",label:"Binomial name",parent:"ranks",note:"genus + species, italic"},
+             {id:"doms",label:"Three domains",parent:"life",note:"the top rank"},
+             {id:"bact",label:"Bacteria",parent:"doms",note:"prokaryote, no nucleus"},
+             {id:"arch",label:"Archaea",parent:"doms",note:"prokaryote, different chemistry"},
+             {id:"euk",label:"Eukarya",parent:"doms",note:"has a nucleus"},
+             {id:"kin",label:"Four eukaryote kingdoms",parent:"euk",note:"protists, fungi, plants, animals"},
+             {id:"read",label:"Reading a phylogeny",parent:"life",note:"relatedness lives at the nodes"},
+             {id:"tips",label:"Never read the tips",parent:"read",note:"tip order is arbitrary"},
+             {id:"mrca",label:"Trace to the branch point",parent:"read",note:"the common ancestor"}],
+      narration_steps:[
+        {short:"One tree",term:"classification",narration_text:"Classification is not a filing system someone invented for tidiness. It is a claim about ancestry — the groups are meant to reflect who is descended from whom.",reveal:["life"],active:["life"],point:"life"},
+        {short:"Eight ranks",term:"taxonomic ranks",narration_text:"There are eight ranks: domain, kingdom, phylum, class, order, family, genus, species. Any silly sentence will hold the order for you as long as the first letters match.",reveal:["ranks"],active:["ranks"],point:"ranks"},
+        {short:"Nested boxes",term:"nested hierarchy",narration_text:"They are nested, not stacked side by side. Every family sits wholly inside one order, which sits wholly inside one class. Think boxes within boxes, never a ranking of importance.",reveal:["mnem"],active:["mnem"],point:"mnem"},
+        {short:"The name",term:"binomial nomenclature",narration_text:"The last two ranks make the name: genus first with a capital, species second in lower case, both in italics. Homo sapiens is genus plus species, not a first name and a surname.",reveal:["binom"],active:["binom"],point:"binom"},
+        {short:"Top rank",term:"domain",narration_text:"At the very top sit three domains. This is the broadest split we make, and it is based on deep molecular differences rather than on anything you could see.",reveal:["doms"],active:["doms"],point:"doms"},
+        {short:"Bacteria",term:"Bacteria",narration_text:"Bacteria are prokaryotes: no nucleus, and no membrane-bound organelles at all. Students remember the missing nucleus and forget the rest of that sentence.",reveal:["bact"],active:["bact"],point:"bact"},
+        {short:"Archaea",term:"Archaea",narration_text:"Archaea look like bacteria under a microscope but their membranes and their genetic machinery are quite different. Some of it is closer to ours than to a bacterium's.",reveal:["arch"],active:["arch"],point:"arch",
+         quiz:{q:"Why are archaea placed in their own domain?",options:["Their membrane and genetic machinery differ fundamentally from bacteria","They are much larger","They have a nucleus"],answer:0,why:"They look bacterial but are biochemically distinct — in some respects closer to eukaryotes than to bacteria."}},
+        {short:"Eukarya",term:"Eukarya",narration_text:"Eukarya is everything with a nucleus, which includes you. And within it sit the familiar kingdoms — protists, fungi, plants and animals.",reveal:["euk","kin"],active:["euk"],point:"euk"},
+        {short:"Reading a tree",term:"phylogenetic tree",narration_text:"Now the skill this all exists for: reading a phylogeny. The information is not in the tips. It is in the branch points.",reveal:["read"],active:["read"],point:"read"},
+        {short:"The error",term:"tip reading",narration_text:"Two species drawn next to each other need not be close relatives. Branches swivel freely at every node, so the left-to-right order of the tips carries no meaning at all.",reveal:["tips"],active:["tips"],point:"tips"},
+        {short:"The fix",term:"common ancestor",narration_text:"Instead, trace back from both species until the lines meet. The more recently they meet, the more closely related they are. That meeting point is the only evidence you need.",reveal:["mrca"],active:["mrca"],point:"mrca"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Eight nested ranks, three domains, and a two-part italic name. And when you read a tree, ignore the tips and trace back to where the branches meet.",reveal:["life","mrca"],active:["mrca"],point:"mrca"}],
+      recap:["The ranks are NESTED boxes, not a ladder of importance.",
+             "Archaea are prokaryotes but biochemically distinct from bacteria.",
+             "Relatedness is read from the most recent common ancestor, never from tip order."]} },
+
+  /* ── BIOLOGY 33: PUNNETT. The flagship genetics build. The gametes are shown being EARNED from the
+     parents before they become headers, and the ratio is stated as a probability, not a promise. ── */
+  { text: "Two parents who are both carriers of cystic fibrosis (both Aa) have a child. Use a Punnett square to work out the genotype and phenotype ratios of their offspring and the chance that a child is affected.",
+    blueprint: {meta:{title:"A monohybrid cross — two carriers, Aa × Aa",subject:"Biology",concept_id:"monohybrid_cross_carrier_3to1"},layout:"punnett",
+      parents:{p1:{genotype:"Aa",label:"Mother — Aa (carrier, unaffected)"},p2:{genotype:"Aa",label:"Father — Aa (carrier, unaffected)"}},
+      gametes:{top:["A","a"],side:["A","a"]},
+      traits:[{key:"un",label:"Unaffected",color:"#0d9488"},{key:"aff",label:"Affected",color:"#dc2626"}],
+      cells:[{id:"c00",geno:"AA",pheno:"un",note:"homozygous"},
+             {id:"c01",geno:"Aa",pheno:"un",note:"carrier"},
+             {id:"c10",geno:"Aa",pheno:"un",note:"carrier"},
+             {id:"c11",geno:"aa",pheno:"aff",note:"affected"}],
+      ratio:"3 : 1  unaffected to affected   ·   genotypes 1 : 2 : 1",
+      note:"Each pregnancy is an independent one-in-four chance — the square is a probability, not a plan.",
+      narration_steps:[
+        {short:"The parents",term:"heterozygous",narration_text:"Both parents are big A little a. They carry one working copy and one faulty copy, and because the working copy is dominant, neither of them shows the condition at all.",reveal:["p1","p2"],active:["p1"],point:"p1",
+         def:"Heterozygous means the two alleles for a gene are different — here one dominant and one recessive."},
+        {short:"Not stronger",term:"dominant",narration_text:"And be careful with dominant. It does not mean stronger, better, or more common in the population. It only means that when it is present, it is the version you see.",reveal:["p2"],active:["p2"],point:"p2",
+         quiz:{q:"What does 'dominant' actually mean?",options:["It is the version expressed when present","It is the more common allele","It is the healthier allele"],answer:0,why:"Dominant describes expression only. Plenty of dominant alleles are rare, and some cause disease."}},
+        {short:"Gametes",term:"gamete",narration_text:"Now, where do the letters in the grid come from? Meiosis. Each parent halves their pairs, so every egg and every sperm carries just one allele — either big A or little a.",reveal:["gtop"],active:["gtop"],point:"gtop"},
+        {short:"The headers",term:"the grid",narration_text:"Those gametes become the headers: father's along the top, mother's down the side. So a header is a single letter and a cell is a pair, because a cell is one gamete meeting another.",reveal:["gside"],active:["gside"],point:"gside"},
+        {short:"Filling in",term:"genotype",narration_text:"Fill each cell by taking its column letter and its row letter. Top left, big A meets big A, giving two big A's — homozygous dominant, and definitely unaffected.",reveal:["c00"],active:["c00"],point:"c00"},
+        {short:"The carriers",term:"carrier",narration_text:"The two diagonal cells each get one of each letter. These children are carriers, just like their parents: they have the faulty allele but the dominant copy masks it entirely.",reveal:["c01","c10"],active:["c01"],point:"c01"},
+        {short:"The affected one",term:"homozygous recessive",narration_text:"And bottom right, little a meets little a. With no working copy at all, this is the only combination that shows the condition. That is why two healthy parents can have an affected child.",reveal:["c11"],active:["c11"],point:"c11"},
+        {short:"Counting",term:"phenotype ratio",narration_text:"Count the colours rather than the letters. Three unaffected to one affected — the classic three to one. The genotypes underneath go one to two to one, which is a different ratio entirely.",reveal:["tally"],active:["tally"],point:"tally"},
+        {short:"The trap",term:"probability",narration_text:"Now the mistake almost everyone makes. Three to one does not promise that one child in four is affected. Each pregnancy is a fresh one-in-four chance, exactly like tossing a coin.",reveal:["ratio"],active:["ratio"],point:"ratio",
+         quiz:{q:"Three children are unaffected. What is the chance the fourth is affected?",options:["One in four — the same as every time","Certain, because the ratio must balance","Zero, the affected slot is used up"],answer:0,why:"Each fertilisation is independent. The square gives a probability per child, not a quota for the family."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. The headers come from meiosis, one allele each. Cells are pairs. Three in four unaffected, one in four affected — and that one in four applies afresh to every single child.",reveal:["ratio"],active:["ratio"],point:"ratio"}],
+      recap:["The headers are gametes — one allele each, because meiosis halves the pairs.",
+             "Dominant means 'the version you see', not stronger, better or commoner.",
+             "3 : 1 is a probability per child, not a quota for the family."]} }
 ];
 
 /* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
  * (a cheap local heuristic), instead of all three. The rules still describe every mode, so the
  * model can still choose any — this just trims ~2/3 of the few-shot tokens. */
+/* ---- BIOLOGY GATE (index map). Biology is the only subject whose vocabulary is systematically
+   stolen by the other gates: "reaction", "atom", "molecul", "\bbond", "acid", "\bbase\b", "energy",
+   "electron" and "catalyst" all live in the chemistry regex; "exponential growth", "\bfunction\b"
+   and "probabilit" fire the maths gate; "\bcell\b" fires the electrochemical-cell branch. So the
+   biology cues are tested FIRST, and they are deliberately high-precision — every term below is one
+   that essentially never appears in a maths, physics, computing or pure-chemistry passage. Once the
+   gate fires we ALWAYS return a biology exemplar, so a biology highlight can never be handed a
+   free-body diagram or a titration curve as its few-shot. ---- */
+const BIO_EXEMPLAR = { scene:25, respiration:26, photosynthesis:27, replication:28, dogma:29,
+                       kinetics:30, population:31, taxonomy:32, punnett:33 };
+const BIO = new RegExp([
+  // cells, organelles & transport
+  "organelle","endoplasmic reticulum","\\bgolgi\\b","lysosome","ribosom","mitochondri","chloroplast","thylakoid",
+  "\\bstroma\\b","cytosol","cytoplasm","vacuole","\\bplasma membrane\\b","cell membrane","cell wall","phospholipid",
+  "prokaryot","eukaryot","endosymbio","osmosis","osmolarit","tonicit","hypertonic","hypotonic","isotonic",
+  "facilitated diffusion","active transport","sodium.?potassium pump","semi.?permeable","selectively permeable",
+  // enzymes & metabolism
+  "\\benzyme","\\bsubstrate\\b","active site","induced fit","lock.?and.?key","denatur","\\bcofactor\\b","\\bvmax\\b",
+  "michaelis","glycolysis","pyruvate","krebs","citric acid cycle","link reaction","electron transport chain",
+  "chemiosmosis","\\batp synthase\\b","aerobic respiration","anaerobic respiration","cellular respiration",
+  "photosynth","calvin cycle","light.?(dependent|independent) reaction","carbon fixation","\\bautotroph","\\bheterotroph",
+  // genetics & the central dogma
+  "\\bdna\\b","\\brna\\b","\\bmrna\\b","\\btrna\\b","deoxyribonucleic","ribonucleic","nucleotide","\\badenine\\b",
+  "\\bthymine\\b","\\bguanine\\b","\\bcytosine\\b","\\buracil\\b","base pair","double helix","antiparallel",
+  "helicase","primase","ligase","dna polymerase","okazaki","semi.?conservative","replication fork","leading strand",
+  "lagging strand","transcription","translation","\\bcodon\\b","anticodon","\\bintron","\\bexon","splicing",
+  "polypeptide","amino acid","\\bgene\\b","\\ballele","genotype","phenotype","homozyg","heterozyg","punnett",
+  "monohybrid","dihybrid","test cross","incomplete dominance","codominan","\\bcarrier\\b","mendel",
+  "chromosome","chromatid","chromatin","centromere","\\bhaploid","\\bdiploid","\\bgamete","\\bzygote","\\bmeiosis\\b",
+  "\\bmitosis\\b","interphase","crossing over","independent assortment","cytokinesis",
+  // organisms, evolution, ecology, physiology
+  "natural selection","\\bevolution","lamarck","darwin","adaptation","\\bspeciation","\\bfitness\\b",
+  "phylogen","cladogram","\\bclade\\b","taxonom","binomial nomenclature","\\barchaea","\\bkingdom\\b",
+  "\\bphylum\\b","\\bspecies\\b","common ancestor","food (web|chain)","trophic","ecosystem","\\bbiomass\\b",
+  "carrying capacity","population growth","predator.?prey","decomposer","homeostasis","negative feedback",
+  "positive feedback","\\bset point\\b","macromolecule","polysaccharide","monosaccharide","dehydration synthesis",
+  "hydrolysis","tertiary structure","quaternary structure","protein folding",
+  // whole-organism words that only a biology passage uses
+  "\\bplants?\\b","\\bstomata\\b","transpiration","\\bxylem\\b","\\bphloem\\b","\\bchlorophyll\\b",
+  "red blood cell","\\btissue\\b","\\borganism"
+].join("|"));
+
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
+  /* ---- BIOLOGY GATE — first refusal, before maths/physics/computing/chemistry (see note above). */
+  if(BIO.test(t)){
+    const B = i => EXEMPLARS[i];
+    // genetic crosses → the Punnett grid (the flagship genetics renderer)
+    if(/punnett|monohybrid|dihybrid|test cross|\bcross(ed|es|ing)? (a|two|between|with)\b|genotype|phenotyp|\ballele|homozyg|heterozyg|incomplete dominance|codominan|\bcarrier\b|mendel|\bdominant\b .{0,30}\brecessive\b|\brecessive\b|\bf1\b|\bf2\b|offspring ratio|3 ?: ?1|9 ?: ?3 ?: ?3 ?: ?1/.test(t))
+      return B(BIO_EXEMPLAR.punnett);
+    // membrane transport & anything happening across/inside one cell → the mechanism scene
+    /* NB the word boundaries are load-bearing: "chemiosmosis" contains "osmosis" and "taxonomic"
+       contains "axon", so an unanchored cue here would steal respiration and taxonomy questions. */
+    if(/\bosmosis\b|osmolarit|tonicit|hypertonic|hypotonic|isotonic|diffusion|active transport|facilitated|sodium.?potassium pump|\bpermeab|cell membrane|plasma membrane|phospholipid|aquaporin|\bsolute\b|water potential|turgor|plasmolysis|\bmembrane\b|receptor|\bchannels?\b|\bsynap|\bneurons?\b|\baxons?\b|reabsorb|\bsecret(e|ion|ory)|\blumen\b|\btubule|\bvesicle|collecting duct/.test(t))
+      return B(BIO_EXEMPLAR.scene);
+    // plotted curves → the graph engine (kinetics first, because "rate" also appears in growth text)
+    if(/\benzyme|\bsubstrate\b|active site|induced fit|lock.?and.?key|denatur|\bvmax\b|\bkm\b|michaelis|inhibitor|competitive inhibition|optimum (temperature|ph)|turnover/.test(t))
+      return B(BIO_EXEMPLAR.kinetics);
+    if(/population growth|carrying capacity|logistic|exponential growth|\bj.?(shaped|curve)\b|\bs.?(shaped|curve)\b|lag phase|environmental resistance|predator.?prey|birth rate|death rate|oxygen.?dissociation|action potential|dose.?response|growth curve/.test(t))
+      return B(BIO_EXEMPLAR.population);
+    // classification → the whiteboard tree (the one biology topic where a tree IS the diagram)
+    if(/taxonom|classification|phylogen|cladogram|\bclade\b|binomial nomenclature|\bdomains?\b .{0,30}(bacteria|archaea|eukary)|\barchaea|rank hierarchy|kingdom|\bphylum\b|common ancestor|three domains|dichotomous key|(types?|four (families|groups|classes)|families) of (macromolecule|biomolecule|tissue|organism)|four (families|classes) of|macromolecule|biomolecule/.test(t))
+      return B(BIO_EXEMPLAR.taxonomy);
+    // the four flow pathways, each with its own gold shot
+    if(/replication|helicase|primase|ligase|okazaki|semi.?conservative|leading strand|lagging strand|replication fork|\bs phase\b|proofread/.test(t))
+      return B(BIO_EXEMPLAR.replication);
+    if(/transcription|translation|central dogma|\bcodon\b|anticodon|\bmrna\b|\btrna\b|messenger rna|transfer rna|\bintron|\bexon|splicing|polypeptide|stop codon|start codon|ribosom/.test(t))
+      return B(BIO_EXEMPLAR.dogma);
+    if(/photosynth|calvin cycle|chloroplast|thylakoid|\bstroma\b|light.?(dependent|independent)|carbon fixation|\bchlorophyll\b|\brubisco\b|\bstomata\b|\bplants?\b/.test(t))
+      return B(BIO_EXEMPLAR.photosynthesis);
+    if(/respiration|glycolysis|pyruvate|krebs|citric acid cycle|link reaction|electron transport chain|chemiosmosis|atp synthase|mitochondri|\bnadh\b|\bfadh|aerobic|anaerobic|\blactate\b|fermentation/.test(t))
+      return B(BIO_EXEMPLAR.respiration);
+    /* A biology cue fired but no specific topic matched. Stay in-domain: a cascade is the biology
+       workhorse, and the generic biology flow shot is a better teacher than anything outside the
+       subject. THIS is the line that guarantees biology never borrows a foreign exemplar. */
+    if(/\btwo (toxins|types|forms|kinds)\b|\btypes? of\b|classification|consists? of|composed of|\bfeatures of\b|components of|categor|defined as|\brefers? to\b/.test(t))
+      return B(BIO_EXEMPLAR.taxonomy);
+    return EXEMPLARS[2];
+  }
   /* ---- MATHS GATE. Maths highlights must NEVER fall through to a medical/chemistry exemplar:
      the chemistry regex below would otherwise swallow "reaction", "atom", "distribution", "base"
      or "product" out of a perfectly ordinary maths passage. If any maths cue fires we route to a
@@ -1717,9 +2116,56 @@ export function tableCheck(bp){
   return {pass:issues.length===0,issues};
 }
 
+/* PUNNETT square: the grid must be self-consistent — the cells must exactly tile the gametes, every
+ * phenotype must name a declared trait, and every cell must actually be revealed by some step. */
+const PUN_PARTS = new Set(["p1","p2","gtop","gside","tally","ratio"]);
+export function punnettCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  const P=bp.parents||{};
+  ["p1","p2"].forEach(k=>{ if(!P[k]||!P[k].genotype) issues.push("parents."+k+" needs a genotype (e.g. \"Aa\")"); });
+  const G=bp.gametes||{}, top=Array.isArray(G.top)?G.top:[], side=Array.isArray(G.side)?G.side:[];
+  if(![2,4].includes(top.length)) issues.push("gametes.top must have 2 (monohybrid) or 4 (dihybrid) entries, got "+top.length);
+  if(![2,4].includes(side.length)) issues.push("gametes.side must have 2 (monohybrid) or 4 (dihybrid) entries, got "+side.length);
+  top.forEach((g,i)=>{ if(typeof g!=="string"||!g.trim()) issues.push("gametes.top["+i+"] must be a non-empty allele string"); });
+  side.forEach((g,i)=>{ if(typeof g!=="string"||!g.trim()) issues.push("gametes.side["+i+"] must be a non-empty allele string"); });
+  const traits=Array.isArray(bp.traits)?bp.traits:[], tkey={};
+  if(traits.length<2) issues.push("need ≥2 traits — the phenotype grouping is what makes the ratio visible");
+  if(traits.length>4) issues.push("too many traits ("+traits.length+") — 4 is the most a cross can show");
+  traits.forEach((t,i)=>{ if(!t.key) issues.push("trait "+(i+1)+" missing key");
+    else { if(tkey[t.key]) issues.push("duplicate trait key '"+t.key+"'"); tkey[t.key]=1; }
+    if(!t.label) issues.push("trait "+(i+1)+" needs a label saying what that phenotype looks like"); });
+  const cells=Array.isArray(bp.cells)?bp.cells:[], want=top.length*side.length, id={};
+  if(top.length&&side.length&&cells.length!==want)
+    issues.push("cells must tile the grid exactly — expected "+want+" ("+side.length+" rows × "+top.length+" columns), got "+cells.length);
+  cells.forEach((c,i)=>{
+    const cid=c.id||("c"+i);
+    if(!c.id) issues.push("cell "+(i+1)+" missing id");
+    if(PUN_PARTS.has(cid)) issues.push("cell id '"+cid+"' collides with a reserved part name");
+    if(id[cid]) issues.push("duplicate cell id '"+cid+"'"); id[cid]=1;
+    if(!c.geno) issues.push("cell '"+cid+"' missing geno (the combined genotype)");
+    if(!c.pheno) issues.push("cell '"+cid+"' missing pheno");
+    else if(!tkey[c.pheno]) issues.push("cell '"+cid+"' phenotype '"+c.pheno+"' is not one of the declared traits"); });
+  if(!bp.ratio) issues.push("missing 'ratio' — the whole point of the square is the ratio it produces");
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<4) issues.push("too few steps ("+steps.length+", need ≥4)");
+  if(steps.length>12) issues.push("too many steps ("+steps.length+")");
+  const known=r=>!!id[r]||PUN_PARTS.has(r), seen=new Set();
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text&&s.narration_text.length>420) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a cell id, 'p1', 'p2', 'gtop', 'gside', 'tally' or 'ratio')"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'"); });
+  ["gtop","gside","ratio"].forEach(p=>{ if(!seen.has(p)) issues.push("'"+p+"' is never revealed — "+
+    (p==="ratio"?"the cross has to end with the ratio":"the headers must be earned from the gametes before any cell means anything")); });
+  cells.forEach((c,i)=>{ const cid=c.id||("c"+i); if(!seen.has(cid)) issues.push("cell '"+cid+"' is never revealed — it will stay blank"); });
+  return {pass:issues.length===0,issues};
+}
+
 /* Every layout the engine in app.html can actually draw. A blueprint naming anything else would
  * fall through to the scene renderer and blow up, so it is rejected here and at the response guard. */
-export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn","unitcircle","solve","vectors","matrix","fbd","circuit","logic","table"]);
+export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn","unitcircle","solve","vectors","matrix","fbd","circuit","logic","table","punnett"]);
 
 /* QC critic — deterministic, manifest-enforced. Delegates to each layout's own check. */
 export function qcCheck(bp){
@@ -1741,6 +2187,7 @@ export function qcCheck(bp){
   if(bp && bp.layout==="circuit") return circuitCheck(bp);
   if(bp && bp.layout==="logic") return logicCheck(bp);
   if(bp && bp.layout==="table") return tableCheck(bp);
+  if(bp && bp.layout==="punnett") return punnettCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -1791,6 +2238,12 @@ export function chainOf(bp){
   if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
   if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
   if(bp && bp.layout==="graph") return (bp.markers||[]).map(m=>m.label||m.id);
+  if(bp && bp.layout==="punnett"){ const P=bp.parents||{}, G=bp.gametes||{};
+    return [ ((P.p1&&P.p1.genotype)||"?")+" × "+((P.p2&&P.p2.genotype)||"?"),
+             "gametes: "+((G.top||[]).join(", "))+"  /  "+((G.side||[]).join(", ")) ]
+      .concat((bp.cells||[]).map(c=>c.geno||c.id))
+      .concat((bp.traits||[]).map(t=>t.label||t.key))
+      .concat([bp.ratio||""]).filter(Boolean); }
   if(bp && bp.layout==="unitcircle") return ["unit circle (r = 1)","angle θ = "+(bp.angle==null?50:bp.angle)+"°","cos θ = x","sin θ = y","cos²θ + sin²θ = 1"];
   if(bp && bp.layout==="solve") return (bp.lines||[]).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
     .concat(bp.numberline?["solution set: x "+(bp.numberline.op||"≥")+" "+bp.numberline.value]:[]);

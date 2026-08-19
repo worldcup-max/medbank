@@ -288,14 +288,54 @@ async function resolveModel(account_id, level){
 }
 
 /* ---- Podcast: two-host study episode from a lecture note (script + Fish/Kokoro voices) ---- */
-const PODCAST_PROMPT = "You are writing a lively but accurate two-host study podcast for medical students, based ONLY on the lecture note below. Two hosts, HOST A and HOST B, have a natural back-and-forth that genuinely teaches the material — clear, engaging, occasionally light, but always faithful and exam-relevant. Return ONLY valid JSON: {\"lines\":[{\"speaker\":\"A\"|\"B\",\"text\":\"one spoken line\"}]}. Keep it tight — a focused 10-12 minute episode, so use 12-18 lines, mostly alternating A/B, each 1-3 sentences, written to be SPOKEN (contractions, natural rhythm — not bookish). Open with a short hook, teach the key points in a logical order, and close with a quick recap. Never invent facts beyond the note.\n\nLECTURE NOTE:\n{{note}}";
-async function podcastScript(level, note, model){
+const PODCAST_PROMPT = `You are writing a two-host study podcast for medical students, based ONLY on the lecture note below. It should teach as well as a great tutor and feel like a real conversation — accurate, engaging, and exam-relevant.
+
+HOSTS — keep these personas consistent throughout:
+- HOST A is the clinician-teacher: warm, explains the WHY behind each fact and the clinical "so what".
+- HOST B is the sharp final-year student: curious, asks the question a learner would ask, flags exam traps, and summarizes.
+
+LEVEL: pitch the depth for {{level}}. Lower levels — explain fundamentals and mechanisms plainly. Higher levels — move faster through basics and go deeper into management, edge cases, and exam nuance.
+
+VOICE: write to be SPOKEN — contractions, natural rhythm, short reactions ("right", "exactly", "wait —"), never bookish. ONE idea per line so it's easy to absorb; break dense facts into two short exchanges instead of cramming.
+
+STRUCTURE:
+1. Cold-open hook (2-3 lines): why this topic matters on the wards and in the exam — the stakes — before any detail.
+2. Teach each section in a logical order. For EVERY key figure or fact, add a sentence of "why it happens" or "why it matters clinically" — never just state a number and move on.
+3. Real back-and-forth: B asks clarifying or exam-angle questions ("why does BP fall if cardiac output is up?") and A answers; they build on each other, not trade monologues.
+4. After each section, one quick clinical vignette or exam-trap callout ("so a creatinine of 0.8 in pregnancy is actually a red flag").
+5. Clear verbal transitions between sections ("that's the cardiovascular changes — let's move to the renal system").
+6. Memory hooks: give a mnemonic or a "peg" for any hard list, and one "if you remember one thing…" line near the end.
+7. Close with 3-4 quick active-recall prompts phrased as self-tests ("what's the normal haemoglobin in pregnancy? … 10.5 to 11"), not a flat summary.
+
+CHAPTERS: organize the episode into 3-6 named sections. Tag EVERY line with a short Title Case "section" label (e.g. "Overview", "Cardiovascular", "Renal", "Clinical pearls", "Recap"). Consecutive lines in the same section share the label; the first line of a new section starts a new chapter.
+
+SOURCE ANCHOR: for EVERY line, also include "src" — a SHORT verbatim quote (6-12 words) copied EXACTLY (same words and casing) from the note that this line is based on, so the app can scroll the note to that spot as the line plays. Prefer a distinctive sentence fragment. If a line is pure banter/transition with no matching text, use the nearest heading from the note.
+
+{{length}}
+
+Never invent facts beyond the note. Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote"}]}.
+
+LECTURE NOTE:
+{{note}}`;
+const PODCAST_LEN = {
+  deep:  'LENGTH: make it a substantial ~7-9 minute episode — roughly 26-34 lines, mostly alternating A/B, each 1-3 sentences. Favour depth and clarity over cramming: teach fewer points well rather than listing many.',
+  quick: 'LENGTH: make it a tight ~3 minute review — roughly 12-16 lines. Hit only the highest-yield points and the exam essentials. Keep the hook and the active-recall close, but trim to the single most important vignette. Every line must earn its place.'
+};
+async function podcastScript(level, note, model, mode){
   const row = await loadPromptFor("podcast", level);
   const tmpl = (row && row.template) || PODCAST_PROMPT;
-  const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
-  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||4000, temperature:Number(row&&row.temperature)||0.6 });
+  const levelLabel = level ? ("a Year/Level "+level+" medical student") : "medical students";
+  const lenText = PODCAST_LEN[mode==="quick" ? "quick" : "deep"];
+  const prompt = tmpl.replace(/\{\{note\}\}/g, note || "").replace(/\{\{level\}\}/g, levelLabel).replace(/\{\{length\}\}/g, lenText);
+  const maxTok = (row&&row.max_tokens) || (mode==="quick" ? 3000 : 6000);
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:Number(row&&row.temperature)||0.6 });
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
-  try{ const o=JSON.parse(t.slice(s,e+1)); return (o&&Array.isArray(o.lines)) ? o.lines.filter(l=>l&&l.text&&(l.speaker==="A"||l.speaker==="B")) : null; }catch(_){ return null; }
+  try{ const o=JSON.parse(t.slice(s,e+1));
+    return (o&&Array.isArray(o.lines))
+      ? o.lines.filter(l=>l&&l.text&&(l.speaker==="A"||l.speaker==="B"))
+               .map(l=>({ speaker:l.speaker, text:String(l.text), section:(l.section||"").toString().slice(0,40), src:(l.src||"").toString().slice(0,160) }))
+      : null;
+  }catch(_){ return null; }
 }
 async function openaiTTS(text, voice, _retry){
   const key = process.env.OPENAI_API_KEY; if(!key) throw new Error("OPENAI_API_KEY not set on the server");
@@ -654,18 +694,24 @@ app.post("/podcast", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     // open to any signed-in student — runs on their own built lecture
     const { topic_id } = req.body; if(!topic_id) return res.status(400).json({ error:"topic_id required" });
+    const mode = req.body.mode === "quick" ? "quick" : "deep";
     const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== user.id) return res.status(403).json({ error:"not your topic" });
     const extras = t.data.extras || {};
-    if(extras.podcast && extras.podcast.script && extras.podcast.script.length) return res.json({ ok:true, lines:extras.podcast.script });
+    extras.podcast = extras.podcast || {};
+    const scripts = extras.podcast.scripts || {};
+    // migrate a legacy single script into the "deep" slot so old topics keep working
+    if(!Object.keys(scripts).length && extras.podcast.script && extras.podcast.script.length) scripts.deep = extras.podcast.script;
+    if(scripts[mode] && scripts[mode].length) return res.json({ ok:true, lines:scripts[mode], mode });
     const level = Number(req.body.level) || null;
     const model = await resolveModel(user.id, level);
-    const lines = await podcastScript(level, t.data.note_md, model);
+    const lines = await podcastScript(level, t.data.note_md, model, mode);
     if(!lines || !lines.length) return res.status(502).json({ error:"couldn't write the script — try again" });
-    extras.podcast = Object.assign({}, extras.podcast||{}, { script:lines });
+    scripts[mode] = lines;
+    extras.podcast = Object.assign({}, extras.podcast, { scripts, script:lines });   // keep .script as the latest (back-compat)
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
-    res.json({ ok:true, lines });
+    res.json({ ok:true, lines, mode });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
@@ -690,8 +736,11 @@ app.post("/podcast-audio", async (req,res)=>{
     const t = await admin.from("topics").select("id,account_id,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== user.id) return res.status(403).json({ error:"not your topic" });
+    const mode = req.body.mode === "quick" ? "quick" : "deep";
     const extras = t.data.extras || {};
-    let script = extras.podcast && extras.podcast.script;
+    extras.podcast = extras.podcast || {};
+    const scripts = extras.podcast.scripts || {};
+    let script = (scripts[mode] && scripts[mode].length) ? scripts[mode] : (extras.podcast.script);
     // Fallback: if the server copy is missing (e.g. the /podcast save didn't persist),
     // accept the script the client already has on screen — then re-persist it here so
     // audio caching + replay work. This makes "generate the script first" unreachable
@@ -699,8 +748,8 @@ app.post("/podcast-audio", async (req,res)=>{
     if((!script || !script.length) && Array.isArray(req.body.lines) && req.body.lines.length){
       const clean = req.body.lines
         .filter(l => l && typeof l.text === "string" && l.text.trim())
-        .map(l => ({ speaker: (l.speaker === "B" ? "B" : "A"), text: String(l.text).slice(0, 1400) }));
-      if(clean.length){ script = clean; extras.podcast = Object.assign({}, extras.podcast || {}, { script }); }
+        .map(l => ({ speaker: (l.speaker === "B" ? "B" : "A"), text: String(l.text).slice(0, 1400), section: (l.section||"").toString().slice(0,40), src: (l.src||"").toString().slice(0,160) }));
+      if(clean.length){ script = clean; scripts[mode] = clean; extras.podcast = Object.assign({}, extras.podcast, { scripts, script:clean }); }
     }
     if(!script || !script.length) return res.status(400).json({ error:"generate the script first" });
     // engine is automatic: basic = Kokoro; premium = 2x Fish : 1x Kokoro. Cached once per topic.
@@ -716,8 +765,24 @@ app.post("/podcast-audio", async (req,res)=>{
       vA = fishRefForKey(aKey, FISH_VOICE_HOST_A || (FISH_VOICES[0] && FISH_VOICES[0].ref));
       vB = fishRefForKey(bKey, FISH_VOICE_HOST_B || (FISH_VOICES[1] && FISH_VOICES[1].ref) || vA);
     }
-    // cache per chosen voice-pair so different host combos are saved separately (and re-picking is instant)
-    const combo = provider==="fish" ? ("fish_"+(FISH_VOICE_BY_KEY[aKey]?aKey:"a")+"_"+(FISH_VOICE_BY_KEY[bKey]?bKey:"b")) : "kokoro";
+    // cache per mode + chosen voice-pair so quick/deep and different host combos save separately
+    const combo = (provider==="fish" ? ("fish_"+mode+"_"+(FISH_VOICE_BY_KEY[aKey]?aKey:"a")+"_"+(FISH_VOICE_BY_KEY[bKey]?bKey:"b")) : ("kokoro_"+mode));
+    // ---- per-line regenerate: redo just ONE clip and replace it in the cache ----
+    if(req.body.regen != null){
+      const ri = parseInt(req.body.regen, 10);
+      if(!(ri >= 0 && ri < script.length)) return res.status(400).json({ error:"bad line index" });
+      const _kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, _kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
+      const rvid = script[ri].speaker==="A" ? vA : vB;
+      const rkvid = script[ri].speaker==="A" ? _kA : _kB;
+      const rbuf = await ttsClip(provider, script[ri].text, rvid, rkvid);
+      if(!rbuf || rbuf.length < 1200) return res.status(502).json({ error:"empty audio — try again" });
+      const rurl0 = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+ri+".mp3", rbuf);
+      const rurl = rurl0 + (rurl0.indexOf('?')>=0?'&':'?') + "v=" + Date.now();   // cache-bust so the player refetches
+      const rarr = (extras.podcast.audio && extras.podcast.audio[combo]) ? extras.podcast.audio[combo].slice() : new Array(script.length).fill(null);
+      rarr[ri] = rurl; extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]: rarr });
+      await admin.from("topics").update({ extras }).eq("id", topic_id);
+      return res.json({ ok:true, index:ri, url:rurl });
+    }
     if(extras.podcast.audio && extras.podcast.audio[combo] && extras.podcast.audio[combo].every(Boolean))
       return res.json({ ok:true, done:true, urls:extras.podcast.audio[combo], lines:script });
     const kA = process.env.KOKORO_VOICE_A || KOKORO_DEFAULT.A, kB = process.env.KOKORO_VOICE_B || KOKORO_DEFAULT.B;
@@ -741,11 +806,16 @@ app.post("/podcast-audio", async (req,res)=>{
         // per-clip retry so one transient failure doesn't leave a gap (unfilled clips resume next pass anyway)
         let buf=null;
         for(let a=0; a<2 && !buf; a++){
-          try{ buf = await ttsClip(provider, script[i].text, vid, kvid); }
+          try{
+            const b = await ttsClip(provider, script[i].text, vid, kvid);
+            if(!b || b.length < 1200) throw new Error("empty audio ("+(b?b.length:0)+" bytes)");   // reject 0-byte / broken clips
+            buf = b;
+          }
           catch(err){ if(a>=1) { console.warn("[podcast] clip "+i+" failed, will resume next pass:", (err&&err.message||"").slice(0,100)); break; } await new Promise(s=>setTimeout(s,600)); }
         }
         if(!buf){ continue; }   // leave urls[i] null → picked up on the next resume pass
-        urls[i] = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
+        const url = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
+        if(url) urls[i] = url;   // only record the URL once the upload actually succeeded
       }
     }
     await Promise.all(Array.from({length:Math.min(CONC, script.length)}, _worker));

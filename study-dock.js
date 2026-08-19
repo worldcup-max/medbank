@@ -202,4 +202,14 @@
     if(!injected) inject();
     open("source");
   };
+  // Podcast follow-along: scroll the Source note to the passage the current line came from,
+  // WITHOUT yanking the user off the Ask/Note tab if they've switched. Opens the note on the
+  // first call (desktop only, so it never covers the player on a phone mid-play).
+  window.MB_DOCK_FOLLOW = function(phrase, t){
+    if(!phrase) return;
+    hl = phrase; hlT = (t!=null) ? t : null;
+    if(!injected) inject();
+    if(!isOpen){ if(isDesktop()) open("source"); return; }
+    if(active==="source"){ var sbody=drawer && drawer.querySelector(".dbody"); if(sbody) highlightIn(sbody, hl); else render(); }
+  };
 })();
