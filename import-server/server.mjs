@@ -162,7 +162,7 @@ async function extractContent(body){
  * Returns { text, usage:{input_tokens, output_tokens} }. */
 const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash";  // cheap + fast → basic tier
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
-const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 120000;            // text-model calls must never hang forever (fail fast → the UI can show a real error)
+const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 180000;            // text-model calls must never hang forever, but allow big JSON gens (fail fast → the UI can show a real error)
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
   // Claude is retired for this app: route any Claude / empty text model to DeepSeek.
@@ -271,21 +271,40 @@ const DEFAULT_PROMPTS = {
 /* "Solve" — a photo/text question (MCQ, past question, diagram) → worked explanation */
 const SOLVE_PROMPT = "You are a sharp medical tutor helping a student with a question they've shared as a photo and/or text. It may be a multiple-choice question, a past exam question, or a diagram to interpret. First, state the answer clearly (for an MCQ, name the correct option). Then explain the reasoning step by step in plain, exam-relevant language a medical student understands, and for an MCQ briefly say why the other options are wrong. If the image is unclear or cut off, say what you can and ask for a clearer photo. Be accurate and concise — never invent facts you can't see.";
 
+/* Recover complete question objects from a truncated/dirty JSON array (reasoning models sometimes
+ * narrate first or get cut off mid-array). Walks the text, JSON.parsing each balanced {...} object. */
+function salvageItems(text){
+  const out=[]; let arr=text.indexOf('"items"'); arr = text.indexOf('[', arr<0?0:arr); if(arr<0) return out;
+  let depth=0, start=-1, inStr=false, esc=false;
+  for(let k=arr+1;k<text.length;k++){ const ch=text[k];
+    if(inStr){ if(esc) esc=false; else if(ch==='\\') esc=true; else if(ch==='"') inStr=false; continue; }
+    if(ch==='"'){ inStr=true; continue; }
+    if(ch==='{'){ if(depth===0) start=k; depth++; }
+    else if(ch==='}'){ if(depth>0){ depth--; if(depth===0 && start>=0){ try{ out.push(JSON.parse(text.slice(start,k+1))); }catch(_){}; start=-1; } } }
+    else if(ch===']' && depth===0){ break; }
+  }
+  return out;
+}
 /* generate one optional extra (fill_blank / written) from the built note; returns items[] or null */
 async function buildExtra(kind, level, note, model){
   const row = await loadPromptFor(kind, level);
   const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
   if(!tmpl) return null;
   const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
+  // qbank is the verbose one (per-option rationales + the full V1 schema). A reasoning model burns
+  // budget "thinking" first, so 6000 truncated the JSON mid-array → 0 items. Give it real headroom.
+  const maxTok = (row && row.max_tokens) || (kind==="qbank" ? 16000 : 8000);
   // json:true forces a clean JSON object and suppresses the chain-of-thought preamble that
   // otherwise breaks JSON.parse on flash/reasoning models (imports already use this — extras were missing it).
-  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||6000, temperature:Number(row&&row.temperature)||0.3, json:true });
-  const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:Number(row&&row.temperature)||0.3, json:true });
+  const t=gen.text||"";
+  let raw=null;
+  { const s=t.indexOf("{"), e=t.lastIndexOf("}");
+    try{ const o=JSON.parse(t.slice(s,e+1)); if(o && Array.isArray(o.items)) raw=o.items; }catch(_){} }
+  if(!raw || !raw.length){ const sal=salvageItems(t); if(sal.length){ console.warn("[build-extra] "+kind+" salvaged "+sal.length+" items from truncated/dirty JSON"); raw=sal; } }
+  if(!raw || !raw.length){ console.warn("[build-extra] "+kind+" no parseable items · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,180))); return null; }
   try{
-    const o=JSON.parse(t.slice(s,e+1));
-    let raw = (o && Array.isArray(o.items)) ? o.items : null;
     let items = raw;
-    if(!items || !items.length){ console.warn("[build-extra] "+kind+" parsed but 0 raw items · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,160))); return null; }
     if(kind==="written"){
       items = items.filter(it => it && String(it.prompt||"").trim());
     } else if(kind==="qbank"){      // need a stem, >=4 options, valid answer index, one rationale per option
@@ -324,7 +343,7 @@ async function buildExtra(kind, level, note, model){
     }
     if(!items.length){ console.warn("[build-extra] "+kind+" all "+raw.length+" raw items failed validation (schema mismatch)"); return null; }
     return items;
-  }catch(err){ console.warn("[build-extra] "+kind+" JSON parse failed: "+(err&&err.message)+" · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,180))); return null; }
+  }catch(err){ console.warn("[build-extra] "+kind+" validation error: "+(err&&err.message)); return null; }
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
