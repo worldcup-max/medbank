@@ -1,5 +1,6 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v185';   // v184: Physics — 6 new exemplars (motion / SHM / heating-curve graphs, the reused vectors plane, the energy ledger, a collision worked on "solve"), the physics detection gate + full topic routing, the Physics teaser demo on the fbd renderer, and dashed comparison curves on the graph renderer
+const CACHE = 'medbank-v188';   // v188: Q-bank differentiation — vignette-enforcing prompt (never name the dx, 2-step reasoning, discriminating clue, homogeneous options, decision lead-in), difficulty mix, richer schema (lead_in/teaching/system/difficulty/src); client shows lead-in + difficulty chip + educational objective + "Show in note" jump
+// v184: Physics — 6 new exemplars (motion / SHM / heating-curve graphs, the reused vectors plane, the energy ledger, a collision worked on "solve"), the physics detection gate + full topic routing, the Physics teaser demo on the fbd renderer, and dashed comparison curves on the graph renderer
 // v183: Organic Chemistry — the curly-arrow mechanism renderer (typed arrows, step rail, named intermediate frames, charge ledger), 14 Organic exemplars, the organic detection gate + routing, and the Organic teaser demo
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',

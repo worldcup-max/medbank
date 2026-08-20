@@ -119,7 +119,7 @@
     /* what-to-build selector (core locked, extras optional) */
     s.appendChild(el("div",lbl,"What should MedBank build?"));
     var grid=el("div","display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px");
-    var builds={ fill_blank:false, written:false };
+    var builds={ qbank:false, written:false };
     function bcard(icon,label,key){
       var locked=!key;
       var c=el("div","display:flex;align-items:center;gap:9px;padding:11px;border-radius:11px;cursor:"+(locked?"default":"pointer"));
@@ -133,7 +133,7 @@
       if(!locked) c.onclick=function(){ builds[key]=!builds[key]; paint(); };
       paint(); return c;
     }
-    [bcard("📖","Notes"),bcard("🃏","Flashcards"),bcard("✓","Quiz"),bcard("📄","Cram sheet"),bcard("✍","Fill-blank","fill_blank"),bcard("📝","Written test","written")].forEach(function(c){ grid.appendChild(c); });
+    [bcard("📖","Notes"),bcard("🃏","Flashcards"),bcard("✓","Quiz"),bcard("📄","Cram sheet"),bcard("🧠","Q-bank","qbank"),bcard("📝","Written test","written")].forEach(function(c){ grid.appendChild(c); });
     s.appendChild(grid);
     s.appendChild(el("div","font-size:11.5px;color:"+DIM+";margin-top:7px","🔒 Always built. Tick extras to build now — or add them later from the topic."));
 
@@ -168,7 +168,7 @@
       try{
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
         try{ var _lv=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel()); if(_lv!=null&&_lv!=="") body.level=_lv; }catch(e){}   // per-level prompt selection
-        var _b=[]; if(builds.fill_blank)_b.push("fill_blank"); if(builds.written)_b.push("written"); if(_b.length) body.builds=_b;   // optional extras ticked in the box
+        var _b=[]; if(builds.qbank)_b.push("qbank"); if(builds.written)_b.push("written"); if(_b.length) body.builds=_b;   // optional extras ticked in the box
         if(modelSel && modelSel.value) body.model=modelSel.value;
         if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
         if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }

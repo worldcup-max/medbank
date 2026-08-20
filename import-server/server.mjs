@@ -252,8 +252,8 @@ async function loadPromptFor(kind, level){
 
 /* built-in default prompts for the optional extras (each overridable via a DB row per kind/level) */
 const DEFAULT_PROMPTS = {
-  fill_blank: "You are creating fill-in-the-blank study items for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"text\":\"a sentence from the material with exactly ONE key term replaced by ___ (three underscores)\",\"answer\":\"the removed term\",\"hint\":\"a short nudge that does NOT contain the answer\"}]}. Make 8-15 items covering the most important, testable facts. Each blank must be a single specific term or short phrase, and the sentence must stay faithful to the note.\n\nLECTURE NOTE:\n{{note}}",
-  written: "You are setting short-answer / written-test questions for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"prompt\":\"an exam-style short-answer question (define / describe / explain / compare)\",\"model_answer\":\"a concise ideal answer\",\"points\":[\"key marking point 1\",\"key marking point 2\",\"key marking point 3\"]}]}. Make 5-8 questions matching how medical exams test this topic; the points array is the marking rubric.\n\nLECTURE NOTE:\n{{note}}"
+  written: "You are setting short-answer / written-test questions for a medical student from the lecture note below. Return ONLY valid JSON of the form {\"items\":[{\"prompt\":\"an exam-style short-answer question (define / describe / explain / compare)\",\"model_answer\":\"a concise ideal answer\",\"points\":[\"key marking point 1\",\"key marking point 2\",\"key marking point 3\"]}]}. Make 5-8 questions matching how medical exams test this topic; the points array is the marking rubric.\n\nLECTURE NOTE:\n{{note}}",
+  qbank: "You are a medical board question writer creating a single-best-answer question bank from the lecture note below (USMLE / MRCP / medical-school finals style), for a student preparing for exams and clinical rotations. Return ONLY valid JSON: {\"items\":[{\"stem\":\"the clinical vignette\",\"lead_in\":\"the clinical decision being asked\",\"options\":[\"...\"],\"answer\":0,\"rationales\":[\"why each option is right or wrong\"],\"teaching\":\"one-line high-yield educational objective\",\"tag\":\"1-3 word sub-topic\",\"system\":\"system/discipline e.g. Obstetrics\",\"difficulty\":\"easy|medium|hard\",\"src\":\"a 6-12 word verbatim quote copied EXACTLY from the note this tests\"}]}.\n\nWRITE REAL VIGNETTES, not a fact in a costume:\n- NEVER name the diagnosis in the stem — the student must INFER it from the presentation (age, timing, vitals, labs, a distinguishing finding). If the disease name appears in the stem, the question has FAILED; rewrite it.\n- TWO-STEP reasoning minimum: the student must identify the condition AND THEN apply management / mechanism / next step. (Recall = one hop; a Q-bank item = two.)\n- Every clue in the stem must EARN its place — include at least one detail that DISCRIMINATES the correct answer from the best distractor, and ideally one plausible red herring. Do NOT pad with irrelevant text: difficulty comes from reasoning and distractor quality, NEVER from stem length.\n- The lead-in is a CLINICAL DECISION (most likely diagnosis / best next step / most appropriate treatment / mechanism of the presenting sign) — never 'which of the following is true'.\n\nOPTIONS & RATIONALES:\n- 4 or 5 options, ALL the same category (all 'next investigation', or all 'most likely organism', etc.) — never mix categories. options and rationales arrays MUST be the same length.\n- Exactly ONE best answer; 'answer' is its 0-based index. Distractors must be plausible common student errors, not silly.\n- Write a rationale for EVERY option: for the correct one, why it's best; for each wrong one, why it's wrong AND what scenario WOULD have made it correct. This per-option teaching is the whole point.\n\nDIFFICULTY MIX across the set: a couple of straightforward application items, the bulk at genuine two-step reasoning, and one or two hard ones (look-alike conditions where you must pick the discriminator, or best-answer-among-defensible-options). Tag each with its difficulty.\n\nBase everything strictly on the note; never invent drugs, numbers, or guidelines; keep values EXACTLY as in the note. Make 8-12 questions on the highest-yield, most testable points. No 'all of the above' / 'none of the above'.\n\nLECTURE NOTE:\n{{note}}"
 };
 
 /* "Solve" — a photo/text question (MCQ, past question, diagram) → worked explanation */
@@ -271,10 +271,23 @@ async function buildExtra(kind, level, note, model){
     const o=JSON.parse(t.slice(s,e+1));
     let items = (o && Array.isArray(o.items)) ? o.items : null;
     if(!items || !items.length) return null;
-    if(kind==="fill_blank"){        // must have a real blank + an answer, or it renders as an empty "…" item
-      items = items.filter(it => it && typeof it.text==="string" && /_{2,}/.test(it.text) && String(it.answer||"").trim());
-    } else if(kind==="written"){
+    if(kind==="written"){
       items = items.filter(it => it && String(it.prompt||"").trim());
+    } else if(kind==="qbank"){      // need a stem, >=4 options, valid answer index, one rationale per option
+      const DIFF = new Set(["easy","medium","hard"]);
+      items = items.filter(it => it && String(it.stem||"").trim()
+        && Array.isArray(it.options) && it.options.length>=4 && it.options.every(o=>String(o||"").trim())
+        && Number.isInteger(it.answer) && it.answer>=0 && it.answer<it.options.length)
+        .map(it => ({ stem:String(it.stem).trim(),
+          lead_in: String(it.lead_in||"").trim().slice(0,160),
+          options: it.options.map(o=>String(o).trim()),
+          answer: it.answer,
+          rationales: (Array.isArray(it.rationales) ? it.rationales : []).slice(0,it.options.length).map(r=>String(r||"").trim()),
+          teaching: String(it.teaching||"").trim().slice(0,240),
+          tag: String(it.tag||"").trim().slice(0,32),
+          system: String(it.system||"").trim().slice(0,40),
+          difficulty: DIFF.has(String(it.difficulty||"").toLowerCase()) ? String(it.difficulty).toLowerCase() : "medium",
+          src: String(it.src||"").trim().slice(0,160) }));
     }
     return items.length ? items : null;
   }catch(_){ return null; }
@@ -669,7 +682,7 @@ app.post("/import", async (req,res)=>{
     if(cw.error) throw cw.error;
 
     // --- optional extras the student ticked in the "what to build" box (fill_blank / written) ---
-    const wantBuilds = Array.isArray(req.body.builds) ? req.body.builds.filter(b=>b==="fill_blank"||b==="written") : [];
+    const wantBuilds = Array.isArray(req.body.builds) ? req.body.builds.filter(b=>b==="qbank"||b==="written") : [];
     if(wantBuilds.length){
       const extras={};
       for(const kind of wantBuilds){
@@ -696,7 +709,7 @@ app.post("/build-extra", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     const account_id = user.id;
     const { topic_id, kind } = req.body;
-    if(!topic_id || (kind!=="fill_blank" && kind!=="written")) return res.status(400).json({ error:"bad request" });
+    if(!topic_id || (kind!=="written" && kind!=="qbank")) return res.status(400).json({ error:"bad request" });
     // open to any signed-in student — runs on their own built lecture
     const t = await admin.from("topics").select("id,account_id,note_md,extras").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });

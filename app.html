@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.20c';   // bump this each release
+const APP_VERSION='2026.08.20f';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2189,8 +2189,8 @@ function pageTopic(id){
     body = `<div class="btnrow" style="margin-bottom:16px">
         <button class="btn ${rd?'green':''}" onclick="markRead('${t.id}')">${rd?'✓ Read'+(DATA.read[t.id]?' · '+DATA.read[t.id]:''):'Mark as read'}</button></div>
       <div class="md notebody">${md(t.simplified)}</div>`;
-  } else if(topicTab==='fill'){
-    body = renderFillBlank(t);
+  } else if(topicTab==='qbank'){
+    body = renderQbank(t);
   } else if(topicTab==='written'){
     body = renderWritten(t);
   } else if(topicTab==='podcast'){
@@ -2252,7 +2252,7 @@ function modeSwitcher(t){
     ${sw('🃏 Flashcards',"go('study/"+t.id+"/primer')",false)}
     ${sw('✓ Quiz',"go('study/"+t.id+"/recall')",false)}
     ${sw('📄 Cram',"go('cram/"+t.id+"')",false)}
-    ${sw('✍ Fill-blank',"topicTab='fill';render()",topicTab==='fill')}
+    ${sw('🧠 Q-bank',"topicTab='qbank';render()",topicTab==='qbank')}
     ${sw('🧪 Written',"topicTab='written';render()",topicTab==='written')}
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
@@ -2316,36 +2316,6 @@ async function rebuildExtra(topicId,kind,btn){
   catch(e){ if(btn){ btn.disabled=false; btn.textContent='↻ Rebuild'; } mbToast('Rebuild failed: '+(e.message||'try again')); }
 }
 
-let FIBITEMS=[];
-function renderFillBlank(t){
-  const raw=(t.extras&&t.extras.fill_blank)||null;
-  if(!raw||!raw.length) return genPrompt(t.id,'fill_blank','Fill-in-the-blank');
-  const items=raw.filter(it=>it&&/_{2,}/.test(it.text||'')&&String(it.answer||'').trim());   // drop malformed items (no blank)
-  const rebuild=`<div class="btnrow" style="justify-content:flex-end;margin-bottom:10px"><button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','fill_blank',this)">↻ Rebuild</button></div>`;
-  if(!items.length) return rebuild+`<div class="empty" style="text-align:left"><b style="color:var(--text)">This set came out malformed.</b><p style="color:var(--dim);margin:8px 0 0">Tap <b>↻ Rebuild</b> above to regenerate the fill-in-the-blanks.</p></div>`;
-  FIBITEMS=items;
-  return rebuild + items.map((it,i)=>{
-    const q=esc(it.text||'').replace(/_{2,}/,`<input id="fib_${i}" placeholder="answer" onkeydown="if(event.key==='Enter')fibCheck(${i})" style="border:none;border-bottom:2px solid var(--recall);background:transparent;color:var(--text);font-size:15px;min-width:90px;padding:0 4px;outline:none">`);
-    return `<div class="card" style="cursor:default;margin-bottom:12px">
-      <div style="font-size:15px;line-height:1.6">${q}</div>
-      <div class="btnrow" style="margin-top:12px">
-        <button class="btn primary" onclick="fibCheck(${i})">Check</button>
-        ${it.hint?`<button class="btn" onclick="fibHint(${i})">Need a hint?</button>`:''}</div>
-      <div id="fibr_${i}" style="margin-top:10px;font-size:14px"></div></div>`;
-  }).join('');
-}
-function fibNorm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim(); }
-function fibCheck(i){
-  const it=FIBITEMS[i]; if(!it) return;
-  const el=document.getElementById('fib_'+i), res=document.getElementById('fibr_'+i);
-  const val=el?el.value:''; const ok=fibNorm(val)===fibNorm(it.answer);
-  if(el){ el.style.borderColor= ok?'var(--recall)':'#ff6b81'; }
-  res.innerHTML = ok
-    ? `<span style="color:var(--recall);font-weight:700">✓ Correct</span>`
-    : `<span style="color:#ff9db1;font-weight:700">✗ Not quite</span> — the answer is <b>${esc(it.answer)}</b>`;
-}
-function fibHint(i){ const it=FIBITEMS[i]; if(!it) return; document.getElementById('fibr_'+i).innerHTML=`<span style="color:var(--dim)">💡 ${esc(it.hint||'No hint for this one.')}</span>`; }
-
 let WRITTENITEMS=[];
 function renderWritten(t){
   const items=(t.extras&&t.extras.written)||null;
@@ -2370,6 +2340,86 @@ async function wtGrade(i){
     const txt=await claudeTutor('You are a fair, concise medical examiner marking a short answer.', [{role:'user',text:prompt}], DATA.settings.explainModel||DATA.settings.tutorEngine||'deepseek-v4-flash');
     res.innerHTML='<div class="md" style="background:var(--panel2,#f1eefb);border-radius:10px;padding:11px 13px">'+md(txt)+'</div>';
   }catch(e){ res.innerHTML='<span style="color:#ff9db1">Couldn\'t reach the AI to mark this — check your internet'+((''+e).indexOf('sign in')>=0?' (approve the one-time Puter sign-in)':'')+'.</span>'; }
+}
+
+/* ===== Question bank — exam-style MCQs with a rationale per option (Tutor + Test modes) ===== */
+let QB=null;
+function qbData(id){ DATA.qbank=DATA.qbank||{}; return DATA.qbank[id]=DATA.qbank[id]||{seen:0,correct:0,byTag:{}}; }
+function qbShuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=a[i];a[i]=a[j];a[j]=x;} return a; }
+function qbWeakest(acc){ var w=null; Object.keys(acc.byTag||{}).forEach(function(k){ var b=acc.byTag[k]; if(b.seen>=2){ var p=b.correct/b.seen; if(!w||p<w.p) w={k:k,p:p}; } }); return (w&&w.p<0.8)?(' · weakest: <b style="color:#c2410c">'+esc(w.k)+'</b>'):''; }
+function qbLetter(j){ return String.fromCharCode(65+j); }
+function renderQbank(t){
+  const items=(t.extras&&t.extras.qbank)||null;
+  if(!items||!items.length) return genPrompt(t.id,'qbank','Question bank');
+  const acc=qbData(t.id);
+  const head=`<div class="btnrow" style="justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div style="font-size:13px;color:var(--dim)">${acc.seen?('Your accuracy: <b style="color:var(--text)">'+Math.round(acc.correct/acc.seen*100)+'%</b> · '+acc.seen+' answered'+qbWeakest(acc)):items.length+' questions ready'}</div>
+    <button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`;
+  if(!QB||QB.topicId!==t.id){                       // start screen — choose a mode
+    return head+`<div class="card" style="cursor:default;text-align:center">
+      <div style="font-weight:800;font-size:16px;margin-bottom:2px">🧠 Question bank</div>
+      <div style="font-size:13px;color:var(--dim);margin-bottom:16px">${items.length} single-best-answer questions from your note — each with a full explanation.</div>
+      <div class="qbmodes">
+        <button class="qbmode" onclick="qbStart('${t.id}','tutor')"><div class="qbm-ic">📖</div><div class="qbm-t">Tutor mode</div><div class="qbm-d">See the answer and why after every question</div></button>
+        <button class="qbmode feat" onclick="qbStart('${t.id}','timed')"><div class="qbm-badge">Exam-like</div><div class="qbm-ic">⏱</div><div class="qbm-t">Test mode</div><div class="qbm-d">Answer them all, then review — like the real paper</div></button>
+      </div></div>`+(acc.seen?`<div class="btnrow" style="margin-top:12px;justify-content:center"><button class="btn" onclick="qbReset('${t.id}')">Reset my stats</button></div>`:'');
+  }
+  if(QB.done) return head+qbDoneHtml();
+  return head+qbQuestionHtml();
+}
+function qbStart(id,mode){ var t=topById(id); var items=(t&&t.extras&&t.extras.qbank)||[]; if(!items.length)return;
+  QB={topicId:id,mode:mode,items:qbShuffle(items),i:0,picked:null,answered:false,correct:0,results:[],done:false,startTs:Date.now()};
+  if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
+}
+function qbExit(){ QB=null; render(); }
+function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic?'))return; DATA.qbank=DATA.qbank||{}; DATA.qbank[id]={seen:0,correct:0,byTag:{}}; persist(); render(); }
+function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){ var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
+function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++; QB.results.push({i:QB.i,picked:j,ok:ok});
+  var acc=qbData(QB.topicId); acc.seen++; if(ok)acc.correct++; var tg=(q.tag||'General'); acc.byTag[tg]=acc.byTag[tg]||{seen:0,correct:0}; acc.byTag[tg].seen++; if(ok)acc.byTag[tg].correct++;
+  try{ persist(); }catch(e){}
+}
+function qbPick(j){ if(QB.answered) return; QB.picked=j;
+  if(QB.mode==='timed'){ qbRecord(j); setTimeout(qbNext,180); render(); return; }   // test mode: lock in, advance
+  QB.answered=true; qbRecord(j); render();                                            // tutor mode: reveal rationale
+}
+function qbNext(){ if(QB.i<QB.items.length-1){ QB.i++; QB.picked=null; QB.answered=false; render(); } else { QB.done=true; render(); } }
+function qbQuestionHtml(){
+  var q=QB.items[QB.i]; if(!q) return '';
+  var opts=q.options.map(function(o,j){ var cls='qbopt';
+    if(QB.answered){ if(j===q.answer)cls+=' right'; else if(j===QB.picked)cls+=' wrong'; }
+    else if(QB.picked===j)cls+=' sel';
+    return '<button class="'+cls+'" '+(QB.answered?'disabled':'onclick="qbPick('+j+')"')+'><span class="qbol">'+qbLetter(j)+'</span><span>'+esc(o)+'</span></button>';
+  }).join('');
+  var rationale='';
+  if(QB.answered && QB.mode==='tutor'){
+    rationale='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
+      return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'+qbTeachHtml(q,QB.i);
+  }
+  var nextBtn = QB.answered ? '<div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn primary" style="min-width:120px" onclick="qbNext()">'+(QB.i<QB.items.length-1?'Next →':'See results')+'</button></div>' : '';
+  var lead = q.lead_in ? '<div style="font-weight:700;margin:8px 0 14px">'+esc(q.lead_in)+'</div>' : '';
+  return '<div class="card" style="cursor:default">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+QB.items.length+(q.tag?' · '+esc(q.tag):'')+qbDiffChip(q)+'</span>'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'</div>'
+    +'<div style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'">'+esc(q.stem)+'</div>'+lead
+    +'<div class="qbopts">'+opts+'</div>'+rationale+nextBtn+'</div>';
+}
+function qbDiffChip(q){ if(!q.difficulty) return ''; var c=q.difficulty==='hard'?'#e2574b':q.difficulty==='easy'?'#0d9488':'#c98a00'; return ' · <span style="color:'+c+';font-weight:700;text-transform:capitalize">'+esc(q.difficulty)+'</span>'; }
+function qbTeachHtml(q,idx){ if(!q.teaching && !q.src) return '';
+  return '<div class="qbteach">'+(q.teaching?'<span>🎯 <b>Objective:</b> '+esc(q.teaching)+'</span>':'<span></span>')
+    +(q.src?'<button class="qbnote" onclick="qbShowNote('+idx+')">📄 Show in note</button>':'')+'</div>'; }
+function qbShowNote(idx){ var q=QB&&QB.items&&QB.items[idx]; if(q&&q.src&&window.MB_DOCK_SOURCE){ MB_DOCK_SOURCE(q.src); } else if(window.MB_DOCK_OPEN){ MB_DOCK_OPEN('source'); } }
+function qbDoneHtml(){
+  var n=QB.items.length,c=QB.correct,pct=Math.round(c/n*100);
+  var msg=pct>=80?'Excellent':pct>=60?'Solid — keep going':'Worth another pass';
+  var review=QB.items.map(function(q,idx){ var r=QB.results.filter(function(x){return x.i===idx;})[0]||{}, picked=r.picked;
+    return '<div class="card" style="cursor:default;margin-top:8px"><div style="font-size:13.5px;font-weight:700;margin-bottom:'+(q.lead_in?'2px':'8px')+'">'+(idx+1)+'. '+esc(q.stem)+'</div>'+(q.lead_in?'<div style="font-size:13px;font-weight:700;color:var(--dim);margin-bottom:8px">'+esc(q.lead_in)+'</div>':'')
+      +q.options.map(function(o,j){ var right=(j===q.answer),mine=(j===picked); var r2=(q.rationales&&q.rationales[j])||'';
+        return '<div class="qbrev '+(right?'r':(mine?'w':''))+'"><div><b>'+qbLetter(j)+'</b> '+esc(o)+(right?' ✓':(mine?' ✗ your answer':''))+'</div>'+(r2?'<div class="qbrev-rat">'+esc(r2)+'</div>':'')+'</div>'; }).join('')
+      +qbTeachHtml(q,idx)
+      +'</div>'; }).join('');
+  return '<div class="card" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall,#0d9488)':'#e2574b')+'">'+pct+'%</div>'
+    +'<div style="font-weight:700">'+c+' / '+n+' correct — '+msg+'</div>'
+    +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px"><button class="btn primary" onclick="qbStart(\''+QB.topicId+'\',\''+QB.mode+'\')">↻ Retry</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
+    +'<div style="margin-top:16px;font-weight:700">Review &amp; explanations</div>'+review;
 }
 
 /* ===== #4/#5 AI Podcast — two-host episode + character voices + Raise Hand ===== */
@@ -2828,7 +2878,7 @@ function podPaint(){
 function pageAdmin(){
   if(!window.IS_ADMIN) return pageHome();
   setTimeout(admFetch,40);
-  const kinds=[['core','Core (note + cards)'],['cram','Cram sheet'],['fill_blank','Fill-in-the-blank'],['written','Written test']];
+  const kinds=[['core','Core (note + cards)'],['cram','Cram sheet'],['qbank','Question bank'],['written','Written test']];
   const levels=[['','Default (all levels)'],['100','Level 100'],['200','Level 200'],['300','Level 300'],['400','Level 400'],['500','Level 500'],['600','Level 600']];
   return crumbs([{label:'Home',route:'home'},{label:'Admin · Prompts'}])+
     `<h1>🛠 Prompt editor</h1>
@@ -5138,6 +5188,37 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .pm-t{font-weight:800;font-size:15px;margin-top:8px;color:var(--text)}
 .pm-d{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.35}
 .pm-badge{position:absolute;top:10px;right:10px;font-size:9.5px;font-weight:800;letter-spacing:.03em;color:#fff;background:var(--primer,#7c3aed);border-radius:999px;padding:2px 8px}
+/* question bank */
+.qbmodes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.qbmodes{grid-template-columns:1fr}}
+.qbmode{position:relative;text-align:left;background:var(--card,#fff);border:1.5px solid var(--line,#e7e3f0);border-radius:14px;padding:14px 14px 16px;cursor:pointer;transition:transform .12s,border-color .12s,box-shadow .12s}
+.qbmode:hover{transform:translateY(-2px);border-color:var(--primer,#7c3aed);box-shadow:0 8px 22px rgba(91,33,182,.14)}
+.qbmode.feat{border-color:var(--primer,#7c3aed)}
+.qbm-ic{font-size:24px;line-height:1}
+.qbm-t{font-weight:800;font-size:15px;margin-top:8px;color:var(--text)}
+.qbm-d{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.35}
+.qbm-badge{position:absolute;top:10px;right:10px;font-size:9.5px;font-weight:800;color:#fff;background:var(--primer,#7c3aed);border-radius:999px;padding:2px 8px}
+.qbopts{display:flex;flex-direction:column;gap:9px}
+.qbopt{display:flex;align-items:flex-start;gap:10px;text-align:left;width:100%;background:var(--card,#fff);border:1.5px solid var(--line,#e7e3f0);border-radius:12px;padding:11px 13px;font-size:14px;line-height:1.4;color:var(--text);cursor:pointer;transition:border-color .12s,background .12s}
+.qbopt:hover:not([disabled]){border-color:var(--primer,#7c3aed)}
+.qbopt[disabled]{cursor:default}
+.qbopt.sel{border-color:var(--primer,#7c3aed);background:rgba(124,58,237,.06)}
+.qbopt.right{border-color:#1d9e75;background:rgba(29,158,117,.10)}
+.qbopt.wrong{border-color:#e2574b;background:rgba(226,87,75,.10)}
+.qbol{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--panel2,#f1eff8);color:var(--text);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.qbopt.right .qbol{background:#1d9e75;color:#fff}
+.qbopt.wrong .qbol{background:#e2574b;color:#fff}
+.qbrat{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.qbrat-row{font-size:12.5px;line-height:1.45;border-radius:9px;padding:8px 11px;background:var(--panel2,#f4f2fb)}
+.qbrat-row.r{background:rgba(29,158,117,.10)}.qbrat-row.r b{color:#0d7a68}
+.qbrat-row.w b{color:var(--dim)}
+.qbrev{font-size:13px;line-height:1.45;border-radius:9px;padding:8px 11px;margin:5px 0;background:var(--panel2,#f4f2fb)}
+.qbrev.r{background:rgba(29,158,117,.10)}.qbrev.w{background:rgba(226,87,75,.10)}
+.qbrev-rat{font-size:12px;color:var(--dim);margin-top:4px}
+.qbteach{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-top:10px;padding:9px 12px;border-radius:10px;background:rgba(124,92,255,.08);border:1px solid rgba(124,92,255,.18);font-size:12.5px;line-height:1.45}
+.qbteach b{color:var(--brand,#5b3df5)}
+.qbnote{flex:0 0 auto;font-size:12px;font-weight:700;border:1px solid var(--line,#e3e0ef);background:var(--card,#fff);color:var(--brand,#5b3df5);border-radius:8px;padding:5px 10px;cursor:pointer}
+.qbnote:hover{background:var(--panel2,#f4f2fb)}
 /* podcast chapters */
 .podchaps{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .podchap{font-size:12px;font-weight:700;color:var(--text);background:var(--panel2,#f1eff8);border:1px solid var(--line,#e7e3f0);border-radius:999px;padding:5px 12px;cursor:pointer;transition:background .12s,color .12s}
