@@ -93,6 +93,39 @@
     out.__vizAdded = added;
     return out;
   }
+
+  /* Union the Q-bank attempt log so an adopt/merge can NEVER wipe a device's history.
+     Attempts are the single source of truth; per-topic caches & analytics derive from them.
+     DATA.qbank = { <topicId>:{seen,correct,byTag}, _attempts:[{u,...}], _qmeta:{qh:{...}}, _sessions:[{sid,...}] }
+     Returns a shallow copy of `base` with qbank unioned in; sets __qbAdded if local carried new records. */
+  function mergeQbankStore(base, localD){
+    var out = Object.assign({}, base); var added = false;
+    var bq = out.qbank || {}, lq = (localD && localD.qbank) || {};
+    var m = {};
+    // carry per-topic legacy caches: prefer base, fill from local (display-only; recomputed live anyway)
+    Object.keys(bq).forEach(function(k){ if(k.charAt(0)!=='_') m[k]=bq[k]; });
+    Object.keys(lq).forEach(function(k){ if(k.charAt(0)!=='_' && !m[k]) m[k]=lq[k]; });
+    // _attempts: union by unique id
+    var seen={}, att=[];
+    (bq._attempts||[]).concat(lq._attempts||[]).forEach(function(x){ if(x&&x.u&&!seen[x.u]){ seen[x.u]=1; att.push(x); } });
+    if(att.length > (bq._attempts||[]).length) added = true;
+    att.sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
+    if(att.length>4000) att = att.slice(att.length-4000);
+    m._attempts = att;
+    // _qmeta: union by question hash (fill any the base is missing)
+    var qm = Object.assign({}, bq._qmeta||{}), lqm = lq._qmeta||{};
+    Object.keys(lqm).forEach(function(k){ if(!qm[k]){ qm[k]=lqm[k]; added=true; } });
+    m._qmeta = qm;
+    // _sessions: union by session id
+    var sseen={}, ss=[];
+    (bq._sessions||[]).concat(lq._sessions||[]).forEach(function(x){ if(x&&x.sid&&!sseen[x.sid]){ sseen[x.sid]=1; ss.push(x); } });
+    if(ss.length > (bq._sessions||[]).length) added = true;
+    ss.sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
+    if(ss.length>200) ss = ss.slice(ss.length-200);
+    m._sessions = ss;
+    out.qbank = m; out.__qbAdded = added;
+    return out;
+  }
   function mergeState(localD, remoteD){
     var out = Object.assign({}, remoteD, localD);      // start from local for scalars/settings
     out.cards  = mergeCards(localD.cards, remoteD.cards);
@@ -110,6 +143,9 @@
     // explainer videos: true union of both sides (never let one device's copy drop the other's)
     var uz = mergeVizStores({ viz: remoteD.viz, cardViz: remoteD.cardViz }, localD);
     out.viz = uz.viz; out.cardViz = uz.cardViz;
+    // Q-bank attempt log: true union of both sides (never drop a device's history)
+    var qz = mergeQbankStore({ qbank: remoteD.qbank }, localD);
+    out.qbank = qz.qbank;
     return out;
   }
 
@@ -187,9 +223,10 @@
         // A video generated while sync wasn't ready lives only in local DATA.viz / DATA.cardViz;
         // union it onto the cloud copy so a reload can't erase it.
         var adopt = mergeVizStores(remote.state || {}, DATA);
+        adopt = mergeQbankStore(adopt, DATA);              // also protect local-only Q-bank attempts
         applyState(adopt);
-        var stillDirty = adopt.__vizAdded;                 // we brought local-only videos across → must push them up
-        delete adopt.__vizAdded;
+        var stillDirty = adopt.__vizAdded || adopt.__qbAdded;  // brought local-only records across → must push them up
+        delete adopt.__vizAdded; delete adopt.__qbAdded;
         setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:!!stillDirty, profileId:profileId });
         if(stillDirty){ try{ await pushNow(); }catch(_){}
         }

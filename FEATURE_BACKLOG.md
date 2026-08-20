@@ -8,7 +8,7 @@ _Living list of proposed features and improvements. Status: ✅ shipped · 🟡 
 
 | # | Feature | What it is | Where it lives | Status |
 |---|---------|-----------|----------------|--------|
-| 1 | **Question bank (MCQ)** | Exam-style vignettes, 4–5 options, best answer + rationale for *every* option; Tutor & Timed modes; accuracy analytics per system | New study mode (grows out of recall cards) | ⬜ |
+| 1 | **Question bank (MCQ)** | Exam-style vignettes, 4–5 options, best answer + rationale for *every* option; Tutor & Timed modes; weakness-mapping analytics | New study mode (grows out of recall cards) | ✅ (v189 — see below) |
 | 2 | **Image occlusion cards** | Hide labels on a diagram, reveal on recall (Anki-style); AI first pass + student edits | New card *type* inside Active Recall; creation tool on images | ⬜ (on hold — needs lecture-image storage first) |
 | 3 | **OSCE / clinical case practice** | AI plays patient or examiner; history-taking, station checklists, branching cases | New mode / extends AI tutor | ⬜ |
 | 4 | **Teach-back (Feynman) mode** | Student explains a concept aloud; AI scores it, flags gaps, feeds weak concepts back into review | Toggle inside the AI voice tutor (+ optional "Explain it" card in Active Recall) | ⬜ |
@@ -50,6 +50,11 @@ _From the MedBank-vs-Studley teardown. Several already shipped this session._
 Script persistence · OpenAI TTS removed · premium→Fish routing · resumable/chunked generation (no timeouts) · Fish reliability (retries, no dead-Kokoro fallback) · Fish voice wiring (hidden-char key fix) · calmer speed (FISH_SPEED 0.9) + finer playback steps · real-voice avatar picker · realistic host portraits · player avatars + now-speaking + lock-screen artwork · empty/broken-clip fix · chapters · Quick review / Deep dive modes · richer script prompt (depth, hook, back-and-forth, vignettes, transitions, memory pegs, active-recall close, host personas, level-adaptive) · Kokoro-down admin alert · Kokoro CONC=1 memory fix.
 
 ---
+
+## 4. Question bank — shipped (v188–v189)
+- **Differentiation from Quiz (v188):** vignette-enforcing prompt (never name the diagnosis, ≥2-step reasoning, discriminating clue + red herring, homogeneous options, clinical-decision lead-in), difficulty mix, richer schema (`lead_in`, `teaching`/educational objective, `system`, `difficulty`, `src`). Rationale for *every* option (was already live). Client shows lead-in, difficulty chip, 🎯 objective, and a "📄 Show in note" jump.
+- **Weakness engine (v189):** every answer logged as one attempt (single source of truth) with per-question timing. Performance dashboard: first-pass vs after-review (only first-pass predicts the exam), by system / topic / difficulty, Tutor vs Test, pacing (avg time + fast-wrong flag), session-trend sparkline, and auto study recommendations. **My Mistakes** pool re-serves questions you last got wrong until you get them right; scope toggle This-topic / All-topics. Attempt log unions across devices in sync (can't be wiped).
+- **Roadmap (Q-bank phase 2):** peer percentile / decile benchmark (needs backend aggregation of anonymised attempts — schema is already peer-ready); adaptive session generation weighted to weak systems; answer-changing stats; flag-for-review pool separate from wrong-answers.
 
 ## Priorities (my recommendation)
 - **Biggest brand-movers:** Question bank (#1) → Shared class library (#7) → Teach-back (#4).
