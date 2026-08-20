@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.16zf';   // bump this each release
+const APP_VERSION='2026.08.20a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1353,15 +1353,30 @@ function cloudSpeak(text, cb){
 }
 /* OpenAI voice (via the import server) for the tutor + card read-aloud, device fallback */
 let _voiceUrl=null;
+/* client-side voice cache so a clip that's been pre-fetched plays INSTANTLY (no 20s wait) */
+var _ttsBlobCache={};
+function _ttsKey(text,voice,use){ return (use||'read')+'|'+(voice||'')+'|'+stripMd(text).slice(0,3000); }
+window._ttsHas=function(text,use){ try{ return !!_ttsBlobCache[_ttsKey(text, DATA.settings.ttsVoiceAI||'nova', use)]; }catch(e){ return false; } };
+/* fetch + cache a clip WITHOUT playing it — used to pre-generate narration ahead of play */
+window.warmSpeak=async function(text, use){
+  try{
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB||!(text||'').trim()) return;
+    const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
+    if(_ttsBlobCache[key]) return;
+    const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return;
+    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:voice,use:(use||'read')})});
+    if(!r.ok) return; _ttsBlobCache[key]=URL.createObjectURL(await r.blob());
+  }catch(e){}
+};
 async function serverSpeak(text, cb, use){
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB) return false;
+    const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
+    if(_ttsBlobCache[key]){ playCloudSrc(_ttsBlobCache[key], cb); return true; }   // already generated → instant
     const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return false;
-    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:DATA.settings.ttsVoiceAI||'nova',use:(use||'read')})});
+    const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:voice,use:(use||'read')})});
     if(!r.ok) return false;
-    const blob=await r.blob();
-    if(_voiceUrl){ try{URL.revokeObjectURL(_voiceUrl);}catch(e){} }
-    _voiceUrl=URL.createObjectURL(blob); playCloudSrc(_voiceUrl, cb); return true;
+    _ttsBlobCache[key]=URL.createObjectURL(await r.blob()); playCloudSrc(_ttsBlobCache[key], cb); return true;   // cache so replays are instant
   }catch(e){ return false; }
 }
 function voiceSpeak(text, cb, use){
@@ -2576,7 +2591,10 @@ async function podRegenLine(idx){
     } else { mbToast((r.data&&(r.data.reason||r.data.error))||'Couldn\'t re-record — try again.'); }
   }catch(e){ mbToast('Couldn\'t re-record — try again.'); }
 }
-function podToggle(){ const a=podAudioEl(); if(!POD.urls) return; if(a.paused){ if(!a.getAttribute('src')) podLoadLine(POD.i,true); else a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); } else { a.pause(); POD.playing=false; podPaint(); } }
+function podToggle(){ const a=podAudioEl(); if(!POD.urls) return; if(a.paused){ podOpenNote(); if(!a.getAttribute('src')) podLoadLine(POD.i,true); else a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); } else { a.pause(); POD.playing=false; podPaint(); } }
+function podOpenNote(){ try{ var ln=POD.lines&&POD.lines[POD.i]; var src=ln&&ln.src; var desk=window.matchMedia&&window.matchMedia('(min-width:900px)').matches;
+  if(window.MB_DOCK_FOLLOW && src) MB_DOCK_FOLLOW(src);          // FOLLOW auto-opens only on desktop
+  else if(desk && window.MB_DOCK_OPEN) MB_DOCK_OPEN('source'); }catch(e){} }   // open the built note beside the podcast (desktop)
 function podNext(){ if(!POD.urls) return; if(POD.i<POD.urls.length-1) podLoadLine(POD.i+1,true); else { POD.playing=false; podPaint(); } }
 function podPrev(){ if(!POD.urls) return; podLoadLine(Math.max(0,POD.i-1),true); }
 function podJump(i){ podLoadLine(i,true); }
@@ -2685,6 +2703,7 @@ async function podAsk(){
   podSpeakHost(ans, hk, resume);
 }
 async function podSpeakHost(text, voiceKey, cb){
+  try{ var pa=document.getElementById('podAudio'); if(pa){ pa.pause(); } POD.playing=false; }catch(e){}   // never let the episode + answer play at once
   try{
     var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB){ cb&&cb(); return; }
     var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token; if(!tok){ cb&&cb(); return; }
@@ -2751,12 +2770,8 @@ function podPaint(){
   const curKey=curSpkA?POD.voiceA:POD.voiceB, curName=curSpkA?nA:nB;
   const totLbl = POD.totalDur ? podFmt(POD.totalDur) : '';
   root.innerHTML=''
-    // sticky mini-player — always reachable while the transcript scrolls
-    +'<div class="podmini"><button class="podmini-pp" onclick="podToggle()" aria-label="Play or pause">'+(POD.playing?'⏸':'▶')+'</button>'
-      +'<span class="pod-mini" style="width:30px;height:30px;flex:0 0 auto">'+podAvatarSVG(curKey)+'</span>'
-      +'<div class="podmini-info"><div class="podmini-name">'+esc(curName)+'</div><div class="podmini-track"><div class="podmini-fill" id="podMiniProg"></div></div></div>'
-      +'<button class="podmini-sp" onclick="podSpeed()">'+POD.speed+'×</button></div>'
-    +'<div class="card" style="cursor:default">'
+    // the whole player stays pinned at the top while the transcript scrolls under it
+    +'<div class="card podplayer" style="cursor:default">'
     +'<div style="display:flex;align-items:center;gap:10px"><div style="font-size:26px">🎧</div><div><div style="font-weight:800">'+esc((t&&t.name)||'Podcast')+'</div>'
       +'<div style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--dim);margin-top:2px">Hosts: '+podMiniAv(POD.voiceA,20)+' '+esc(nA)+' &amp; '+podMiniAv(POD.voiceB,20)+' '+esc(nB)+(totLbl?' · '+totLbl:'')+'</div></div></div>'
     +'<div class="pod-now"><span class="pod-now-av'+(POD.playing?' live':'')+'">'+podMiniAv(curKey,46)+'</span><div><div style="font-weight:800">'+esc(curName)+'</div><div style="font-size:12px;color:var(--dim)">'+(POD.playing?'speaking…':'up next')+'</div></div></div>'
@@ -5121,6 +5136,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .podmini-track{height:5px;border-radius:4px;background:var(--panel2,#eee);overflow:hidden;margin-top:4px}
 .podmini-fill{height:100%;width:0;background:var(--accent,#7c3aed)}
 .podmini-sp{flex:0 0 auto;border:0;background:var(--panel2,#f1eff8);color:var(--text);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer}
+/* whole podcast player pinned while the transcript scrolls under it */
+.podplayer{position:sticky;top:8px;z-index:6;background:var(--card,#fff);box-shadow:0 6px 20px rgba(20,16,38,.10)}
 /* volume + speed row */
 .podctlrow{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:12px 0 6px}
 .podctl{display:flex;align-items:center;gap:8px}
@@ -5308,6 +5325,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     else if(BP.layout==='table'){ var seenG={}; (BP.columns||[]).forEach(function(c){ var k=c.group||''; if(k&&!seenG[k]){seenG[k]=1;
       items.push([k==='in'?'#5b21b6':(k==='out'?'#0d7a68':'#b91c1c'), k==='in'?'given':(k==='out'?'result':'the common trap')]); } }); }
     else if(BP.layout==='punnett'){ var pt=punTraits(); Object.keys(pt).forEach(function(k){ items.push([pt[k].color, pt[k].label]); }); }
+    else if(BP.layout==='curly'){ var seenK={}; (BP.frames||[]).forEach(function(f){ var k=f.kind||'step'; var ci=CURLY_KIND[k]; if(ci&&!seenK[k]){seenK[k]=1; items.push([ci.c, ci.t]);} });
+      items.push([(BP.mode==='radical')?'#fbbf24':'#c4b5fd', (BP.mode==='radical')?'fishhook arrow — ONE electron':'curly arrow — a PAIR of electrons']); }
     else if(!BP.layout){ var seen2={}; (BP.elements||[]).forEach(function(e){ var info=TYPEINFO[e.type]; if(info&&!seen2[e.type]){seen2[e.type]=1; items.push(info);} }); }
     if(!items.length) return '';
     return '<div class="vizleg">'+items.map(function(it){return '<span><i style="background:'+it[0]+'"></i>'+esc(it[1])+'</span>';}).join('')+'</div>'; }
@@ -5460,6 +5479,122 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       (rows[rk]||[]).forEach(function(v,i){ S.push('<rect x="'+(x0+i*cw)+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="#fff" stroke="#e7e3f2"/>'+T(x0+i*cw+cw/2,y+ch/2+6,v,{size:15,w:700,fill:'#2a2536'})); });
       S.push('</g>'); });
     S.push('</svg>');return S.join(''); }
+  /* ===== CURLY-ARROW MECHANISM mode — the Organic-chemistry flagship =====
+     A curved arrow means "this PAIR OF ELECTRONS moved from here to there" — not "this atom slid
+     across". Students import the everyday meaning of a curved arrow and never recover, so this
+     renderer is built around three non-negotiable beats: the TAIL glows and is named, the ARROW
+     draws tail→head, then the CONSEQUENCE redraws as its own frame. Frames hold the species; every
+     arrow is TYPED (tail: lone-pair | sigma | pi | anion) so an arrow can never start on an atom
+     label when a bond was meant. The step rail, the intermediate name badge and the charge ledger
+     are drawn by the engine, not by the author. */
+  var CURLYPT={};
+  var CURLY_MODE={stepwise:{c:'#a78bfa',t:'STEPWISE — an intermediate forms'},
+                  concerted:{c:'#5eead4',t:'CONCERTED — one step, no intermediate'},
+                  resonance:{c:'#60a5fa',t:'RESONANCE — one molecule, not a reaction'},
+                  radical:{c:'#fbbf24',t:'RADICAL — single electrons, fishhook arrows'}};
+  var CURLY_KIND={step:{c:'#a78bfa',t:'step'},ts:{c:'#5eead4',t:'transition state'},
+                  intermediate:{c:'#fbbf24',t:'intermediate'},product:{c:'#34d399',t:'product'},
+                  danger:{c:'#f87171',t:'the classic mistake'}};
+  var CURLY_TAIL={'lone-pair':'a lone pair','sigma':'a σ bond','pi':'a π bond','anion':'a negative charge'};
+  function curlyFrames(){ return (BP.frames||[]); }
+  function curlyOwner(id){ if(!id)return null; var F=curlyFrames();
+    for(var k=0;k<F.length;k++){ if(F[k].id===id)return F[k];
+      if((F[k].arrows||[]).some(function(a){return a.id===id;}))return F[k];
+      if((F[k].species||[]).some(function(s){return s.id===id;}))return F[k]; } return null; }
+  function curlyArrow(id){ var F=curlyFrames();
+    for(var k=0;k<F.length;k++){ var a=(F[k].arrows||[]).filter(function(x){return x.id===id;})[0]; if(a)return a; } return null; }
+  function curlyCard(cx,cy,sp,glow,col){
+    var w=196,h=84,x=cx-w/2,y=cy-h/2,s='<g'+(glow?' class="vzglow"':'')+'>';
+    s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="14" fill="#241f3d" stroke="'+col+'" stroke-width="'+(glow?3:1.8)+'"/>';
+    var lp=Math.max(0,Math.min(4,sp.lp||0));            // lone pairs sit ON the species, drawn as real dot pairs
+    for(var p=0;p<lp;p++){ var px=x+34+p*40, py=y+13;
+      s+='<circle cx="'+px+'" cy="'+py+'" r="3.1" fill="#f8fafc"/><circle cx="'+(px+9)+'" cy="'+py+'" r="3.1" fill="#f8fafc"/>'; }
+    s+=T(cx,cy+(lp?12:8),sp.label||sp.id,{size:21,w:800,fill:'#f5f3ff',mono:true});
+    if(sp.charge)s+='<circle cx="'+(x+w-16)+'" cy="'+(y+16)+'" r="13" fill="'+(/-|−/.test(sp.charge)?'#1e3a8a':'#7f1d1d')+'" stroke="#f8fafc" stroke-width="1.6"/>'+T(x+w-16,y+21,sp.charge,{size:13,w:800,fill:'#fff'});
+    s+='</g>';
+    if(sp.note)s+=T(cx,cy+h/2+18,sp.note,{size:11,w:700,fill:'#a79fc4'});
+    return s; }
+  function curlySVG(stepIdx){
+    var F=curlyFrames(),st=(BP.narration_steps||[])[stepIdx]||{};
+    var shown={};for(var s=0;s<=stepIdx;s++)((BP.narration_steps[s]||{}).reveal||[]).forEach(function(id){shown[id]=1;});
+    var act={};(st.active||[]).forEach(function(id){act[id]=1;});
+    var cur=curlyOwner(st.point)||curlyOwner((st.active||[])[0])||curlyOwner((st.reveal||[])[0]);
+    if(!cur){ for(var k=F.length-1;k>=0;k--){ if(shown[F[k].id]){cur=F[k];break;} } }
+    if(!cur)cur=F[0]||{id:'f0',title:'',species:[],arrows:[]};
+    var mode=CURLY_MODE[BP.mode]||CURLY_MODE.stepwise,kind=CURLY_KIND[cur.kind]||CURLY_KIND.step;
+    CURLYPT={};
+    var S=['<svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="560" fill="#fbfcff"/>'];
+    S.push(T(480,30,(BP.meta&&BP.meta.title)||'',{size:16,w:800,fill:'#3a3550'}));
+    if(BP.reaction)S.push(T(480,52,BP.reaction,{size:13,w:700,fill:'#6b6480',mono:true}));
+    /* ---- the board ---- */
+    var res=(BP.mode==='resonance');
+    S.push('<rect x="40" y="66" width="880" height="306" rx="16" fill="#171429" stroke="'+mode.c+'" stroke-width="'+(res?3:2)+'"'+(res?' stroke-dasharray="11 8"':'')+'/>');
+    var mw=mode.t.length*6.3+22;
+    S.push('<rect x="56" y="80" width="'+mw+'" height="22" rx="11" fill="'+mode.c+'" opacity=".2"/>'+T(56+mw/2,95,mode.t,{size:11,w:800,fill:mode.c}));
+    var kw=kind.t.length*6.6+22;
+    S.push('<rect x="'+(904-kw)+'" y="80" width="'+kw+'" height="22" rx="11" fill="'+kind.c+'" opacity=".22"/>'+T(904-kw/2,95,kind.t,{size:11,w:800,fill:kind.c}));
+    if(cur.title)S.push(T(480,124,cur.title,{size:15,w:800,fill:'#ede9fe'}));
+    /* ---- species, grouped by slot so two can share a column ---- */
+    var SLOTX={left:214,center:480,right:746},bys={left:[],center:[],right:[]};
+    (cur.species||[]).forEach(function(sp,ix){ var sl=SLOTX[sp.slot]?sp.slot:['left','center','right'][ix%3]; bys[sl].push(sp); });
+    var pos={};
+    ['left','center','right'].forEach(function(sl){ var list=bys[sl],n=list.length;
+      var ys=n<=1?[228]:(n===2?[190,282]:[160,228,296]);
+      list.forEach(function(sp,j){ var cx=SLOTX[sl],cy=ys[j]!==undefined?ys[j]:228;
+        pos[sp.id]={x:cx,y:cy}; CURLYPT[sp.id]={x:cx,y:cy};
+        S.push(curlyCard(cx,cy,sp,!!act[sp.id],act[sp.id]?mode.c:'#4c4372')); }); });
+    /* ---- typed curved arrows: tail anchor first, then the curve, then the head ---- */
+    (cur.arrows||[]).forEach(function(a,ai){
+      if(!shown[a.id])return;
+      var A=pos[a.from],B=pos[a.to]; if(!A||!B)return;
+      var live=!!act[a.id],col=(BP.mode==='radical'||a.kind==='fishhook')?'#fbbf24':(res?'#60a5fa':'#c4b5fd');
+      var sx,sy,tx,ty,mx,my;
+      if(a.from===a.to){ sx=A.x-52;sy=A.y-46;tx=A.x+52;ty=A.y-46;mx=A.x;my=A.y-132; }      // intramolecular: loop over the top
+      else { sx=A.x+(B.x>A.x?86:-86);sy=A.y-30;tx=B.x+(B.x>A.x?-86:86);ty=B.y-30;
+             mx=(sx+tx)/2;my=Math.min(sy,ty)-(72+22*(ai%2)); }
+      var uid='cu'+stepIdx+'_'+ai;
+      S.push('<defs><marker id="'+uid+'" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">'+
+        (a.kind==='fishhook'
+          ? '<path d="M0,0 L9,4" stroke="'+col+'" stroke-width="2.1" fill="none"/>'      // ONE electron — half an arrowhead
+          : '<path d="M0,0 L9,4 L0,8 Z" fill="'+col+'"/>')+'</marker></defs>');
+      S.push('<path d="M'+sx+','+sy+' Q'+mx+','+my+' '+tx+','+ty+'" stroke="'+col+'" stroke-width="'+(live?4.2:3)+'" fill="none" opacity="'+(live?1:.55)+'" marker-end="url(#'+uid+')"'+(live?' class="vzglow"':'')+'/>');
+      // the TAIL — what the electrons are actually sitting on. It gets its own ring and its own name.
+      S.push('<circle cx="'+sx+'" cy="'+sy+'" r="'+(live?11:8)+'" fill="none" stroke="'+col+'" stroke-width="2.2" stroke-dasharray="4 3"'+(live?' class="vzglow"':'')+'/>');
+      if(live)S.push(T(sx,sy-16,'from '+(CURLY_TAIL[a.tail]||a.tail||'a lone pair'),{size:11,w:800,fill:col}));
+      var lx=(sx+2*mx+tx)/4,ly=(sy+2*my+ty)/4;
+      CURLYPT[a.id]={x:lx,y:ly};
+      if(live&&a.label){ var lw=a.label.length*6.1+20;
+        S.push('<rect x="'+(lx-lw/2)+'" y="'+(ly-30)+'" width="'+lw+'" height="21" rx="10" fill="#0b0918" stroke="'+col+'" stroke-width="1.2"/>'+T(lx,ly-15,a.label,{size:11,w:700,fill:'#e9e5ff'})); }
+    });
+    /* ---- the intermediate gets a NAME and a reason to exist (students never notice it otherwise) ---- */
+    if(cur.badge||cur.why){ var bt=(cur.badge||'')+(cur.why?'  ·  '+cur.why:''),bw=Math.min(760,bt.length*6.4+28);
+      S.push('<rect x="'+(480-bw/2)+'" y="332" width="'+bw+'" height="26" rx="13" fill="'+kind.c+'" opacity=".16"/>'+T(480,350,bt,{size:12,w:800,fill:kind.c})); }
+    else if(res)S.push(T(480,350,'same molecule, different drawing — electrons only, atoms never move',{size:12,w:800,fill:'#60a5fa'}));
+    /* ---- charge ledger: charge is conserved, and you can check it yourself ---- */
+    S.push(T(52,404,'charge ledger',{size:11,w:800,fill:'#8a8398',anchor:'start'}));
+    CURLYPT.ledger={x:480,y:404};
+    var lstep=Math.min(150,(880-16)/Math.max(1,F.length));
+    F.forEach(function(f,ix){ var x=52+ix*lstep,on=shown[f.id],hot=(f.id===cur.id);
+      S.push('<rect x="'+x+'" y="414" width="'+(lstep-10)+'" height="24" rx="8" fill="'+(hot?'#ede7fb':'#f4f2fa')+'" stroke="'+(hot?'#7c3aed':'#ded9ee')+'" stroke-width="'+(hot?2:1)+'" opacity="'+(on?1:.3)+'"/>');
+      S.push(T(x+(lstep-10)/2,431,'charge '+(f.charge!==undefined&&f.charge!==''?f.charge:'0'),{size:11,w:800,fill:hot?'#5b21b6':'#8a8398'})); });
+    /* ---- the step rail. In CONCERTED mode the missing intermediate is drawn as an ABSENCE. ---- */
+    var rail=[];
+    F.forEach(function(f,ix){ rail.push({id:f.id,t:f.title||('step '+(ix+1)),k:f.kind||'step',on:!!shown[f.id],hot:f.id===cur.id});
+      if(BP.mode==='concerted'&&ix===0)rail.push({id:'',t:'no intermediate',k:'gap',on:true,hot:false}); });
+    S.push(T(52,470,'step rail',{size:11,w:800,fill:'#8a8398',anchor:'start'}));
+    CURLYPT.rail={x:480,y:504};
+    var n=rail.length,gap=14,cw=Math.max(96,(880-(n-1)*gap)/n);
+    rail.forEach(function(r,ix){ var x=40+ix*(cw+gap),ck=(CURLY_KIND[r.k]||{c:'#a78bfa'}).c;
+      if(r.k==='gap'){ S.push('<rect x="'+x+'" y="482" width="'+cw+'" height="44" rx="10" fill="none" stroke="#c9c3d8" stroke-width="2" stroke-dasharray="7 6"/>'+T(x+cw/2,509,r.t,{size:11,w:800,fill:'#a49dbb'})); }
+      else { S.push('<rect x="'+x+'" y="482" width="'+cw+'" height="44" rx="10" fill="'+(r.hot?'#ede7fb':'#fff')+'" stroke="'+(r.hot?ck:'#ded9ee')+'" stroke-width="'+(r.hot?2.6:1.4)+'" opacity="'+(r.on?1:.35)+'"/>');
+        var words=String(r.t).split(' '),l1=r.t,l2='';
+        if(r.t.length>Math.floor(cw/6.2)){ l1='';for(var wi=0;wi<words.length;wi++){ if((l1+' '+words[wi]).trim().length<=Math.floor(cw/6.2))l1=(l1+' '+words[wi]).trim(); else l2=(l2+' '+words[wi]).trim(); } }
+        S.push(T(x+cw/2,l2?500:509,l1,{size:11,w:800,fill:r.hot?'#5b21b6':'#6b6480'}));
+        if(l2)S.push(T(x+cw/2,514,l2,{size:11,w:800,fill:r.hot?'#5b21b6':'#6b6480'}));
+        if(r.on&&r.id)CURLYPT[r.id]={x:x+cw/2,y:504}; }
+      if(ix<n-1)S.push(T(x+cw+gap/2,510,'→',{size:14,w:800,fill:'#c9c3d8'})); });
+    if(BP.note)S.push(T(480,548,BP.note,{size:11,w:700,fill:'#8a8398'}));
+    S.push('</svg>');return S.join(''); }
   /* ===== VENN mode (set logic, union/intersection/complement, conditional probability) =====
      Region ids are a GRAMMAR over the set ids: "A" · "A_only" · "A_and_B" · "A_and_B_and_C" ·
      "A_or_B" · "not_A" · "outside" · "A_given_B". Cell regions (only/and/outside) accumulate
@@ -5593,7 +5728,10 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     S.push(T((x0+x1)/2,522,X.label||'',{size:13,w:800,fill:'#3a3550'}));
     S.push('<text x="20" y="'+((y0+y1)/2)+'" font-size="13" font-weight="800" fill="#3a3550" text-anchor="middle" font-family="Arial" transform="rotate(-90 20 '+((y0+y1)/2)+')">'+esc(Y.label||'')+'</text>');
     (BP.curves||[]).forEach(function(c){ if(!shown[c.id])return; var pts=(c.points||[]).map(function(p){return [mx(p[0]),my(p[1])];});
-      S.push('<path d="'+gSmooth(pts)+'" fill="none" stroke="'+(c.color||'#7c3aed')+'" stroke-width="'+(act[c.id]?4:3)+'" stroke-linecap="round"'+gl(c.id)+'/>');
+      /* "dash":true marks a comparison curve — the inhibited rate, the unchecked J-curve, the
+         velocity and acceleration traces stacked against a displacement. Without it three curves
+         on one set of axes are three identical strokes in three colours. */
+      S.push('<path d="'+gSmooth(pts)+'" fill="none" stroke="'+(c.color||'#7c3aed')+'" stroke-width="'+(act[c.id]?4:3)+'" stroke-linecap="round"'+(c.dash?' stroke-dasharray="9 7"':'')+gl(c.id)+'/>');
       if(c.label){var lp=pts[Math.floor(pts.length*0.62)];S.push(T(lp[0],lp[1]-10,c.label,{size:11,fill:c.color||'#7c3aed',w:800}));} });
     (BP.markers||[]).forEach(function(m){ if(!shown[m.id])return; var XX=mx(m.at[0]),YY=my(m.at[1]);
       S.push('<g'+gl(m.id)+'><circle cx="'+XX+'" cy="'+YY+'" r="'+(act[m.id]?7:5)+'" fill="'+(m.color||'#6d28d9')+'" stroke="#fff" stroke-width="2"/>'+(m.drop?'<line x1="'+XX+'" y1="'+YY+'" x2="'+XX+'" y2="'+y1+'" stroke="'+(m.color||'#6d28d9')+'" stroke-width="1.4" stroke-dasharray="4 4"/>':'')+T(XX,YY-12,m.label||'',{size:11,fill:m.color||'#4b2c91',w:800})+'</g>'); });
@@ -6237,9 +6375,9 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     render(0);
   }
   function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; try{closeTip();closeQuiz();}catch(e){}
-    var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440],venn:[960,540],unitcircle:[960,540],solve:[960,540],vectors:[960,540],matrix:[960,540],fbd:[960,540],circuit:[960,540],logic:[960,540],table:[960,540],punnett:[960,560]};
+    var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440],venn:[960,540],unitcircle:[960,540],solve:[960,540],vectors:[960,540],matrix:[960,540],fbd:[960,540],circuit:[960,540],logic:[960,540],table:[960,540],punnett:[960,560],curly:[960,560]};
     var vbm=VBMAP[BP.layout]; curVB=vbm?[0,0,vbm[0],vbm[1]]:fitVB();
-    var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,fbd:fbdSVG,circuit:circuitSVG,logic:logicSVG,table:tableSVG,punnett:punnettSVG};
+    var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,fbd:fbdSVG,circuit:circuitSVG,logic:logicSVG,table:tableSVG,punnett:punnettSVG,curly:curlySVG};
     w.innerHTML=SV[BP.layout]?SV[BP.layout](i):sceneSVG(i); move();
     var s=BP.narration_steps[i];
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span><span class="capw">'+buildKaraoke(s.narration_text||'')+'</span>';
@@ -6257,6 +6395,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     if(BP.layout==='geometry'){ return GEOPT[ref]||null; }
     if(BP.layout==='ice'){ return ICEPT[ref]||null; }
     if(BP.layout==='venn'){ return (VENN&&VENN.pt[ref])||null; }
+    if(BP.layout==='curly'){ return CURLYPT[ref]||null; }   // the curly renderer publishes its own anchors as it draws
     if(BP.layout==='unitcircle'||BP.layout==='solve'||BP.layout==='vectors'||BP.layout==='matrix'||BP.layout==='fbd'||BP.layout==='circuit'||BP.layout==='logic'||BP.layout==='table'||BP.layout==='punnett'){ return (MPT&&MPT[ref])||null; }
     return anchor(ref,i); }
   function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
@@ -6478,12 +6617,21 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     f.innerHTML='<span class="vf-core">⚠️</span><span class="vf-lab">'+esc(msg)+'</span>';
     setTimeout(removeVizFloat,3800);
   }
+  function vizWarmVoices(){ try{ if(!BP||!BP.narration_steps||!window.warmSpeak) return;
+    var q=BP.narration_steps.map(function(s){return (s.narration_text||'').trim();}).filter(Boolean); var i=0;
+    (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx2,nx2); })();
+  }catch(e){} }
+  function vizPlayWhenReady(){ // wait until step-0's voice is pre-generated, then auto-play (poster shows meanwhile)
+    var t=((BP.narration_steps&&BP.narration_steps[0]&&BP.narration_steps[0].narration_text)||'').trim();
+    if(!t || !window._ttsHas){ setTimeout(play,400); return; }
+    var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,'read')||n++>110){ play(); } else setTimeout(poll,300); })();
+  }
   function playVizFloat(){
     var d=_vizFloatReady; if(!d)return; removeVizFloat();
     openModal();
     BP=d.bp; SRC=d.text||''; applyLayout(d.bp);
     VIZ_TID=d.topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
-    mountPlayer(); setTimeout(play,400);
+    mountPlayer(); vizWarmVoices(); vizPlayWhenReady();
   }
   window.aiVisualize=async function(text, topicName, topicId){
     var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
@@ -6496,6 +6644,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       try{ setQuota(resp.viz_quota); }catch(e){}
       recordViz(tid, text);                                  // save this video against the note (+ immediate flush)
       _vizFloatReady={ bp:bp, text:text||'', topicName:topicName, topicId:tid };
+      try{ if(window.warmSpeak){ (bp.narration_steps||[]).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t) window.warmSpeak(t,'read'); }); } }catch(e){}   // pre-generate the voices while the "ready" pill shows, so play is instant
       showVizFloat('ready');                                 // pill flips to "tap to watch"
     }catch(e){ vizFloatError((e&&e.message)||'Something went wrong'); }
   };
@@ -6507,6 +6656,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     else if(bp.layout==='orbital'){ layoutOrbital(); }
     else if(bp.layout==='venn'){ layoutVenn(); }
     else if(bp.layout==='geometry'||bp.layout==='ice'){ }
+    else if(bp.layout==='curly'){ CURLYPT={}; }
     else if(bp.layout==='unitcircle'||bp.layout==='solve'||bp.layout==='vectors'||bp.layout==='matrix'||bp.layout==='fbd'||bp.layout==='circuit'||bp.layout==='logic'||bp.layout==='table'||bp.layout==='punnett'){ MPT={}; }   // fixed-layout maths, physics, computing + genetics modes: the renderer computes its own anchors
     else { T2=TPL[bp.template]||TPL.membrane_cell; elMap={}; (bp.elements||[]).forEach(function(el){elMap[el.id]=el;}); }
   }
@@ -6516,6 +6666,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     var host=document.getElementById(hostId); if(!host) return null;
     BP=bp; SRC=text||''; applyLayout(bp);
     VIZ_TID=topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
+    try{ vizWarmVoices(); }catch(e){}                                            // pre-generate voices so ▶ plays instantly
     host.innerHTML='<div class="vizready">✓ Your explainer is ready — press ▶ to see how to reach the answer.</div>'
       +'<div class="vizbody vizinlinebody" id="vizBody"></div>';
     mountPlayer();                                                              // paused at step 0
@@ -6613,22 +6764,65 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
                        {reveal:["c00","c01","c10"],active:["c01"],point:"c01"},
                        {reveal:["c11"],active:["c11"],point:"c11"},
                        {reveal:["tally","ratio"],active:["ratio"],point:"ratio"}]},
+    /* ORGANIC CHEMISTRY — the flagship curly-arrow teaser. Silent, ~8s, five beats: hydroxide and
+       the substrate → the lone-pair arrow → the C–Br sigma-bond arrow (fired in the SAME beat,
+       because S-N-two is concerted) → the single transition state → inversion. Chosen because the
+       whole difficulty of Orgo is "where did that pair of electrons go", and nothing else in the
+       library can show an arrow being CAUSED by a bond rather than decorating one. */
+    "org":{layout:"curly",mode:"concerted",meta:{title:""},reaction:"HO\u207B + CH\u2083\u2014Br \u2192 CH\u2083\u2014OH + Br\u207B",
+      frames:[
+        {id:"f1",title:"hydroxide attacks the back",kind:"step",charge:"\u22121",
+         species:[{id:"nu",slot:"left",label:"HO\u207B",lp:3,charge:"\u2212",note:"the nucleophile"},
+                  {id:"sub",slot:"right",label:"H\u2083C\u2014Br",note:"the substrate"}],
+         arrows:[{id:"a1",from:"nu",to:"sub",tail:"lone-pair",head:"atom",kind:"pair",label:"lone pair \u2192 the carbon"},
+                 {id:"a2",from:"sub",to:"sub",tail:"sigma",head:"atom",kind:"pair",label:"C\u2013Br bond \u2192 the bromine"}]},
+        {id:"f2",title:"one transition state",kind:"ts",charge:"\u22121",badge:"transition state",why:"both bonds half made, half broken",
+         species:[{id:"ts",slot:"center",label:"HO\u22EFC\u22EFBr",charge:"\u2212",note:"never isolated \u2014 there is no intermediate"}],arrows:[]},
+        {id:"f3",title:"inversion \u2014 product",kind:"product",charge:"\u22121",badge:"inversion of configuration",why:"the carbon turns inside out, like an umbrella in the wind",
+         species:[{id:"pr",slot:"left",label:"CH\u2083\u2014OH",note:"the product"},
+                  {id:"lg",slot:"right",label:"Br\u207B",lp:4,charge:"\u2212",note:"the leaving group"}],arrows:[]}],
+      narration_steps:[{reveal:["f1"],active:["nu"],point:"nu"},
+                       {reveal:["a1"],active:["a1"],point:"a1"},
+                       {reveal:["a2"],active:["a2"],point:"a2"},
+                       {reveal:["f2"],active:["ts"],point:"ts"},
+                       {reveal:["f3"],active:["pr"],point:"pr"}]},
     /* a second maths teaser using the ported unit-circle renderer */
     "trig":{layout:"unitcircle",meta:{title:""},angle:52,
       narration_steps:[{reveal:["circle"],active:["circle"],point:"circle"},
                        {reveal:["radius"],active:["radius"],point:"radius"},
                        {reveal:["cos"],active:["cos"],point:"cos"},
                        {reveal:["sin"],active:["sin"],point:"sin"},
-                       {reveal:["identity"],active:["identity"],point:"identity"}]}
+                       {reveal:["identity"],active:["identity"],point:"identity"}]},
+    /* COMPUTER STUDIES — the half-adder on the logic-gate schematic. Silent, ~7s, five beats: two
+       input pins → XOR fires when the bits differ → the AND raises the carry → both inputs high, the
+       case everyone gets wrong → the bonded truth table. Chosen over a flowchart because the gate
+       schematic is the one renderer nothing else in the app can fake, and because the signal
+       changing COLOUR as it propagates reads instantly with no narration at all. */
+    "cs":{layout:"logic",meta:{title:""},
+      inputs:[{id:"a",label:"A",value:0},{id:"b",label:"B",value:0}],
+      gates:[{id:"gx",type:"XOR",in:["a","b"],label:"A ⊕ B"},{id:"gn",type:"AND",in:["a","b"],label:"A · B"}],
+      outputs:[{id:"s",from:"gx",label:"SUM"},{id:"c",from:"gn",label:"CARRY"}],
+      expression:"SUM = A ⊕ B , CARRY = A · B",
+      truth_table:{inputs:["A","B"],outputs:["SUM","CARRY"],rows:[[0,0,0,0],[0,1,1,0],[1,0,1,0],[1,1,0,1]],caption:"all four combinations"},
+      note:"Two bits in, two bits out: the sum bit and the carry bit.",
+      narration_steps:[{reveal:["a","b"],active:["a"],point:"a",inputs:[0,0]},
+                       {reveal:["gx","s","table"],active:["gx"],point:"gx",inputs:[0,1],row:1},
+                       {reveal:["gn","c"],active:["gn"],point:"gn",inputs:[0,1],row:1},
+                       {reveal:["a","b","gx","gn","s","c"],active:["c"],point:"c",inputs:[1,1],row:3},
+                       {reveal:["table","expr"],active:["table"],point:"table",inputs:[1,1],row:3}]}
   };
   VIZ_DEMOS["Mathematics"]=VIZ_DEMOS["math"];   // explicit per-subject key (subject names come through verbatim)
+  VIZ_DEMOS["Computer Studies"]=VIZ_DEMOS["cs"];    // 100-level Computer Studies
+  VIZ_DEMOS["Computer Science"]=VIZ_DEMOS["cs"];
   VIZ_DEMOS["Biology"]=VIZ_DEMOS["bio"];        // 100-level Biology
+  VIZ_DEMOS["Organic Chemistry"]=VIZ_DEMOS["org"];   // 100-level Organic Chemistry
+  VIZ_DEMOS["Organic chemistry"]=VIZ_DEMOS["org"];
   window.VIZ_DEMOS = VIZ_DEMOS;   // scheduled subject builds append their demo here
   var _tzT=null,_tzK=0,_tzBP=null;
   function teaserDraw(el,k){ if(!el||document.getElementById('vizov')||document.getElementById('obov'))return;   // pause while the real player / onboarding is open
     _tzBP._render=undefined; BP=_tzBP;
     try{ applyLayout(BP); }catch(e){}
-    var TSV={graph:graphSVG,tree:treeSVG,flow:flowSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,punnett:punnettSVG};
+    var TSV={graph:graphSVG,tree:treeSVG,flow:flowSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,punnett:punnettSVG,curly:curlySVG,logic:logicSVG,table:tableSVG};
     var fn=TSV[BP.layout]||flowSVG; try{ el.innerHTML=fn(k); }catch(e){} }
   window.hasUsedViz=function(){ try{
     if(window.DATA&&DATA.viz&&Object.keys(DATA.viz).some(function(k){return (DATA.viz[k]||[]).length>0;})) return true;
@@ -6640,17 +6834,32 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     "default":"Injured tissue releases histamine, so nearby vessels widen and leak — causing redness, heat and swelling.",
     "chem":"A galvanic cell turns a spontaneous redox reaction into a flow of electric current.",
     "math":"The gradient of the curve y = x² at any point is exactly twice the x-value.",
-    "bio":"Two unaffected carriers can still have an affected child — one chance in four, every time." };
+    "bio":"Two unaffected carriers can still have an affected child — one chance in four, every time.",
+    "org":"Hydroxide attacks the carbon from the back, and the bromide leaves in the same step — so the carbon inverts.",
+    "cs":"In binary there is no digit 2, so 1 + 1 gives a sum bit of 0 and carries a 1 into the next column." };
   /* Biology is tested BEFORE chemistry: "biochemistry" and "molecular biology" contain "chem", and a
-     biology note should never be handed the galvanic-cell teaser. */
+     biology note should never be handed the galvanic-cell teaser. Computing is tested BEFORE maths,
+     because "Computer Science" and "Computing Mathematics" both contain a maths cue. */
   function vtKey(subj){ return /biolog|genetic|zoolog|botan|ecolog|physiolog|microbiolog/i.test(subj)?"bio"
-    :/organic|chem/i.test(subj)?"chem"
+    :/organic|orgo/i.test(subj)?"org"
+    :/chem/i.test(subj)?"chem"
+    :/comput|informatic|\bict\b|programming|software eng/i.test(subj)?"cs"
     :/math|calcul|algebra|trig|statist|geometry|further maths/i.test(subj)?"math":"default"; }
   var VT_PUNCAP={p1:'Both parents are carriers — Aa',p2:'Both parents are carriers — Aa',
     gtop:'Each parent gives ONE allele',gside:'Each parent gives ONE allele',
     tally:'Count the colours, not the letters',ratio:'3 : 1 — a chance, not a promise'};
+  /* the Computer Studies teaser rides on the logic schematic, whose parts are pins/gates, not nodes */
+  var VT_LOGCAP={a:'Two input pins — blue is 0, red is 1',b:'Two input pins — blue is 0, red is 1',
+    gx:'XOR fires when the bits DIFFER → the sum bit',gn:'AND fires only when BOTH are 1 → the carry',
+    s:'SUM = A ⊕ B',c:'1 + 1 = sum 0, carry 1 — no digit 2 in binary',
+    table:'2 inputs → exactly 4 rows. Stopping early is a guess',expr:'Circuit, table and expression are one object'};
   function vtCap(BP,k){ try{ var s=BP.narration_steps[k]||{}; var id=(s.active&&s.active[0])||(s.reveal&&s.reveal[0]);
+    if(BP.layout==='logic'&&VT_LOGCAP[id])return VT_LOGCAP[id];
     var n=(BP.nodes||[]).filter(function(x){return x.id===id;})[0]; if(n)return n.label+(n.note?' — '+n.note:'');
+    if(BP.layout==='curly'){ var fr=(BP.frames||[]).filter(function(f){return f.id===id||(f.species||[]).some(function(x){return x.id===id;})||(f.arrows||[]).some(function(x){return x.id===id;});})[0];
+      var ar=null; (BP.frames||[]).forEach(function(f){ (f.arrows||[]).forEach(function(x){ if(x.id===id)ar=x; }); });
+      if(ar)return 'the arrow starts on '+(CURLY_TAIL[ar.tail]||'a lone pair')+' — electrons, not atoms';
+      if(fr)return fr.title+(fr.why?' — '+fr.why:''); }
     if(BP.layout==='punnett'){ if(VT_PUNCAP[id])return VT_PUNCAP[id];
       var c=(BP.cells||[]).filter(function(x){return x.id===id;})[0]; if(c)return c.geno+(c.note?' — '+c.note:''); } }catch(e){} return (BP.meta&&BP.meta.title)||''; }
   var _vtTos=[];

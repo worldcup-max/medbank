@@ -82,6 +82,10 @@ definition/classification/list with genuinely no spatial layout, no sequence, an
 Pick the FIRST mode below that can represent the concept:
 • MODE "mechanism" — a cause-and-effect PROCESS in a REAL ANATOMICAL PLACE the templates draw
   (cell membrane: kidney tubule/gut; or a neuron/synapse). Richest, most spatial — use when it fits.
+• MODE "curly" — a CURLY-ARROW REACTION MECHANISM: skeletal species on a dark board, TYPED curved
+  arrows showing WHERE A PAIR OF ELECTRONS WENT, a step rail, named intermediate frames and a charge
+  ledger. This is the flagship ORGANIC mode — use it for every reaction mechanism (substitution,
+  elimination, addition, aromatic substitution, carbonyl chemistry, radicals) and for RESONANCE.
 • MODE "cell" — an ELECTROCHEMICAL CELL (galvanic/voltaic/electrolytic): anode, cathode, salt bridge,
   electron flow ("galvanic cell", "which electrode is anode/cathode", "Daniell cell"). Real schematic.
 • MODE "fbd" — a FREE-BODY DIAGRAM: the forces acting on ONE body (block on a slope, mass on a
@@ -171,8 +175,12 @@ fetch–decode–execute cycle, the software development lifecycle, the compilat
 packet's journey → "flow" (use kind "trigger" for Start, "process" for a step, "danger" for the
 decision that students get wrong, "outcome" for Stop). Base conversion, two's complement,
 floating-point encoding, subnet masks and Big-O arithmetic → "solve", one line per move. Big-O
-growth curves against input size → "graph". Genuine taxonomies (types of software, network
-topologies, data types) → "tree", last resort as always.
+growth curves against input size → "graph". DATA STRUCTURES — arrays, strings, stacks, queues,
+linked lists, trees, binary search trees, graphs, hash tables, plus the searching/sorting/Big-O
+family that lives on them → "tree", organised by the shape of the ACCESS (linear vs non-linear) and
+closed with a "choose by the operation, not by the name" branch; this is NOT the last-resort use of
+tree. Genuine taxonomies (types of software, network topologies, storage categories, data types,
+DBMS models) → "tree" as well.
 
 BIOLOGY ROUTING (biology's default is a SPATIAL SCENE, the inverse of chemistry — reach for
 "mechanism" first, not "flow"): membrane transport, diffusion, osmosis, tonicity, the sodium–
@@ -194,6 +202,30 @@ triphosphate" not "A-T-P", "nicotinamide adenine dinucleotide" not "N-A-D-H", "e
 reticulum" not "E-R". Say "three to one", never "three colon one"; "five prime" and "three prime";
 "two n" or "diploid"; "big A little a". For the central dogma NEVER say "turns into" or "becomes" —
 say "is used to build", because the DNA is a master copy that is not consumed.
+
+ORGANIC-CHEMISTRY ROUTING (Organic is not Gen Chem: Gen Chem is quantitative and lives in "flow",
+Organic is MECHANISTIC and SPATIAL and lives in "curly" — the answer is a drawing, and the reasoning
+is where a pair of electrons went). ANY reaction mechanism — proton transfer, S-N-one, S-N-two,
+E-one, E-two, electrophilic addition to alkenes, electrophilic aromatic substitution, nucleophilic
+addition to carbonyls, radical halogenation, hydride delivery — → "curly". Resonance and electron
+pushing → "curly" with "mode":"resonance". Functional groups, the naming-priority order, reagent
+classes, isomerism taxonomy, activating/deactivating substituents, and above all the
+substitution-versus-elimination decision → "tree" (and for the decision tree EVERY leaf must carry
+the mechanistic REASON, never a bare label — a bare flowchart is documented to make this topic
+worse, not better). I-U-P-A-C naming and R/S assignment by Cahn–Ingold–Prelog → "solve", one
+station per rule, because an early wrong choice silently invalidates everything downstream.
+Hybridization, three-dimensional shape, cis/trans, conformers and chirality in space → "geometry".
+Causal chains — why this carbocation is more stable, why this proton is acidic, the oxidation
+ladder, Zaitsev versus Hofmann — → "flow".
+SAY ORGANIC ALOUD PROPERLY: "NEW-klee-oh-file" (nucleophile), "ee-LEK-troh-file" (electrophile),
+"car-boh-KAT-eye-on" (carbocation, four syllables — never "kay-shun"), "KY-ral" (chiral, hard K),
+"ruh-SEE-mik" (racemic), "mar-KOV-nih-koff", "ZAIT-seff", "grin-YARD" (Grignard — never
+"grig-nard"), "uh-REE-nee-um" (arenium). Say the mechanism name IN FULL on first use every video —
+"S-N-two, said as letters, meaning substitution nucleophilic bimolecular" — because a student who
+has only ever read it silently does not know the two means molecularity. Say "concerted" or
+"stepwise" out loud at the start of every mechanism: that one word predicts the stereochemistry,
+the kinetics and whether an intermediate exists. And when narrating an arrow, ALWAYS say the TAIL
+before the HEAD — "this lone pair, moving to that carbon" — never "the carbon gets attacked".
 
 Decision: try mechanism → cell → punnett → logic → fbd/circuit → unitcircle/solve/vectors/matrix → venn → table → graph → flow first; choose "tree" ONLY if none of the
 diagrammatic modes can honestly represent the content — the one exception is a PROBABILITY TREE,
@@ -515,6 +547,55 @@ Rules:
    the single deciding difference is before listing the details.
 Return ONLY valid minified JSON:
 {"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"table","caption":"","mono":false,"columns":[{"id":"c1","label":"","group":"in"},{"id":"c2","label":"","group":"out"}],"rows":[{"id":"r0","cells":["",""],"note":""}],"note":"","narration_steps":[{"short":"","term":"","narration_text":"","reveal":["head"],"active":["head"],"point":"head"}]}
+
+═══════ MODE "curly" (CURLY-ARROW MECHANISM — the Organic flagship) ═══════
+A curved arrow does NOT mean "this atom moves here". It means "this PAIR OF ELECTRONS moves from
+here to there". Students import the everyday meaning and read arrows as atoms sliding around, so
+this mode makes the TAIL the star of the show.
+Rules:
+1. "mode": one of "stepwise" (an intermediate really forms), "concerted" (one step, ONE transition
+   state, no intermediate — S-N-two, E-two), "resonance" (NOT a reaction — one delocalised molecule
+   drawn two ways) or "radical" (single-electron, fishhook arrows). Say this word out loud in the
+   first narration step; it predicts the kinetics, the stereochemistry and whether an intermediate
+   exists. Optional "reaction": the overall equation as one line (it sits under the title).
+2. "frames": 2–6 frames IN ORDER — the step rail. Each {id (f1,f2…), title (a VERB, e.g.
+   "nucleophile attacks", "leaving group departs", "proton transfer" — never "step 2"),
+   kind: step|ts|intermediate|product|danger, charge (the TOTAL charge on that frame as a string:
+   "0", "−1", "+1" — the charge ledger prints it and CHARGE MUST BE CONSERVED across every frame),
+   optional badge (the NAME of the species being held: "carbocation", "tetrahedral intermediate",
+   "arenium ion", "bromonium ion", "carbanion", "radical", "transition state") and optional why
+   (one line on why it is stable or unstable). Give every intermediate its own frame with a badge —
+   students routinely fail to notice intermediates exist, and naming one makes it an object rather
+   than transit noise.
+3. Each frame carries "species": 1–3, each {id, slot: "left"|"center"|"right", label (the structure
+   as text — "H₃C—Br", "HO⁻", "(CH₃)₃C⁺", the skeletal formula), optional lp (0–4 lone PAIRS, drawn
+   as real dot pairs), optional charge ("−", "+", "δ+"), optional note (≤6 words: "the nucleophile",
+   "the leaving group")}.
+4. Each frame carries "arrows": 0–3, each {id (a1,a2…), from (a species id IN THIS FRAME), to (a
+   species id in this frame — use the SAME id for an arrow that moves electrons WITHIN one molecule),
+   tail: "lone-pair"|"sigma"|"pi"|"anion"|"radical" (a single unpaired
+   electron — radical mode only) — WHERE THE ELECTRONS SIT, head: "atom"|"empty-orbital"|
+   "bond", kind: "pair" (two electrons, full head) or "fishhook" (ONE electron, half head — radicals
+   only), label (≤7 words naming tail then head: "lone pair → the carbon")}.
+   HARD RULES the renderer enforces: a tail is ALWAYS electron-rich and a head is always electron-
+   poor, so an arrow may never START on a species carrying a positive charge or on an empty orbital.
+   In "radical" mode every arrow is a fishhook; in every other mode every arrow is a pair.
+5. CONCERTED vs STEPWISE is the whole lesson. In "concerted" mode put ALL of a frame's arrows in the
+   SAME narration step, and say "at the same time" out loud; the rail then draws the missing
+   intermediate as a visible EMPTY slot, which is exactly the contrast with the stepwise case.
+   In "stepwise" mode give the intermediate its own frame and dwell on it.
+6. narration_steps: 4–10. "reveal"/"active"/"point" use FRAME ids, SPECIES ids and ARROW ids, plus
+   the fixed parts "rail" and "ledger". Reveal a frame before its arrows. Animate TAIL FIRST: one
+   step names what the electrons are sitting on ("these two electrons — the π bond, not the atom"),
+   the next step fires the arrow, the next shows the consequence as the new frame. The last step
+   recaps.
+7. TEACH THE MISCONCEPTIONS, out loud: the arrow CAUSES the bond change, it does not decorate it;
+   electrons move, atoms never do; for resonance the molecule does not flip between the drawings —
+   it is one delocalised reality, the weighted average; for electrophilic addition dwell on the fact
+   that the tail sits on the π BOND (the first time an arrow starts on a bond rather than an atom,
+   and the documented point where students lose trust in the formalism).
+Return ONLY valid minified JSON:
+{"meta":{"title":"","subject":"","concept_id":"snake_case_id"},"layout":"curly","mode":"stepwise","reaction":"","note":"","frames":[{"id":"f1","title":"","kind":"step","charge":"0","badge":"","why":"","species":[{"id":"nu","slot":"left","label":"","lp":2,"charge":"","note":""}],"arrows":[{"id":"a1","from":"nu","to":"sub","tail":"lone-pair","head":"atom","kind":"pair","label":""}]}],"narration_steps":[{"short":"","term":"","narration_text":"","reveal":["f1"],"active":["nu"],"point":"nu"}]}
 
 ═══════ MODE "punnett" (a GENETIC CROSS — gametes, grid, tally, ratio) ═══════
 Rules:
@@ -1345,7 +1426,278 @@ export const EXEMPLARS = [
         {short:"Recap",term:"recap",narration_text:"Recap. The headers come from meiosis, one allele each. Cells are pairs. Three in four unaffected, one in four affected — and that one in four applies afresh to every single child.",reveal:["ratio"],active:["ratio"],point:"ratio"}],
       recap:["The headers are gametes — one allele each, because meiosis halves the pairs.",
              "Dominant means 'the version you see', not stronger, better or commoner.",
-             "3 : 1 is a probability per child, not a quota for the family."]} }
+             "3 : 1 is a probability per child, not a quota for the family."]} },
+
+  /* ══════════ COMPUTER STUDIES (100-level), part two. The two modes the subject needs that the
+     first pass did not cover: every base-conversion / encoding question is a STEP PROBLEM and
+     belongs on "solve", and every data-structures question is a FAMILY and belongs on "tree" until
+     the dedicated ds canvas exists. Both shots are built around the documented failure, not around
+     the procedure: reading remainders in the wrong direction, and choosing a structure by its name
+     instead of by the operation it has to be fast at. ══════════ */
+
+  /* ── COMPUTER STUDIES 34: solve — denary → binary by repeated division, then the nibble jump to
+     hex. The corpus is unambiguous that the near-universal error is reading the remainder column
+     downwards, so the read-upwards move gets a LINE of its own rather than a footnote, and the hex
+     step is done straight from the bits so the "detour through decimal" habit never forms. ── */
+  { text: "Convert the denary number 45 into binary using repeated division by 2, then write it in hexadecimal.",
+    blueprint: {meta:{title:"45 in binary — and why the remainders are read upwards",subject:"Computer Studies",concept_id:"denary_to_binary_hex"},layout:"solve",
+      problem:"Convert  45₁₀  to binary, then to hexadecimal",
+      lines:[{id:"l1",math:"45 ÷ 2 = 22  r 1",why:"divide by the BASE; the remainder is the first bit out"},
+             {id:"l2",math:"22 ÷ 2 = 11  r 0",why:"keep dividing the quotient, never the remainder"},
+             {id:"l3",math:"11 ÷ 2 =  5  r 1",why:"same move again — this is the whole method"},
+             {id:"l4",math:" 5 ÷ 2 =  2  r 1",why:"still not zero, so carry on"},
+             {id:"l5",math:" 2 ÷ 2 =  1  r 0",why:"an even number always gives remainder 0"},
+             {id:"l6",math:" 1 ÷ 2 =  0  r 1",why:"stop only when the quotient reaches 0"},
+             {id:"l7",math:"read the remainders UPWARDS  →  101101₂",why:"the LAST remainder is the MOST significant bit"},
+             {id:"l8",math:"check:  32 + 8 + 4 + 1 = 45  ✓",why:"place values 32 16 8 4 2 1 — always check"},
+             {id:"l9",math:"0010 1101  →  2 | D  =  2D₁₆",why:"pad to 8 bits, split into nibbles, one hex digit each"}],
+      narration_steps:[
+        {short:"The method",term:"repeated division",narration_text:"We want forty-five written in binary. The method is repeated division by the base — and the base is two, because binary has exactly two digits. Divide, write down the remainder, then divide the QUOTIENT again. Notice we never touch the remainders once they are written; they are just being collected.",reveal:["l1"],active:["l1"],point:"l1",
+         def:"To convert to any base, divide repeatedly by that base and collect the remainders."},
+        {short:"Keep going",term:"the quotient",narration_text:"Twenty-two divided by two is eleven remainder nought. Eleven divided by two is five remainder one. Each line takes the quotient from the line above — that is the only number travelling down the page. An even number always leaves nought, an odd number always leaves one, so the remainder column is really just asking odd or even.",reveal:["l2","l3"],active:["l3"],point:"l3",
+         quiz:{q:"What tells you the remainder when you divide by 2?",options:["Whether the number is odd or even","The size of the number","The previous remainder"],answer:0,why:"Dividing by two leaves 1 for every odd number and 0 for every even one — that is all the remainder column records."}},
+        {short:"Down to zero",term:"the stopping rule",narration_text:"Five gives two remainder one, two gives one remainder nought, and one divided by two gives zero remainder one. Stop when the QUOTIENT hits zero, not when it hits one. Stopping a line early is how a bit goes missing, and the number quietly comes out half the size it should be.",reveal:["l4","l5","l6"],active:["l6"],point:"l6",
+         def:"The division stops when the quotient is 0 — the final remainder is still part of the answer."},
+        {short:"Read upwards",term:"the direction",narration_text:"Now the move that this whole video exists for. Read the remainder column from the BOTTOM to the TOP: one, nought, one, one, nought, one. Upwards, because the last division produced the biggest place value. Read it downwards and you get one-zero-one-one-zero-one, which is a different number entirely — and it is the single most common mistake in this topic.",reveal:["l7"],active:["l7"],point:"l7",
+         quiz:{q:"Which remainder is the most significant bit?",options:["The last one, from the final division","The first one","Whichever is a 1"],answer:0,why:"Each division peels off the next power of two, so the final remainder carries the largest place value and sits leftmost."}},
+        {short:"Check it",term:"place value",narration_text:"Never hand in a conversion without checking it. Write the place values above the bits — thirty-two, sixteen, eight, four, two, one — and add up the columns holding a one. Thirty-two plus eight plus four plus one is forty-five. The check takes five seconds and catches a reversed answer immediately.",reveal:["l8"],active:["l8"],point:"l8",
+         def:"Any base is Σ digit × baseᵖᵒˢⁱᵗⁱᵒⁿ — decimal is not special, it just has ten digits."},
+        {short:"Straight to hex",term:"nibble grouping",narration_text:"For hexadecimal, do NOT go back through decimal. Pad the bits to eight, then chop them into two groups of four — a group of four is called a nibble. Nought-nought-one-nought is two, and one-one-nought-one is thirteen, which is written D. So forty-five is two-D in hex. One nibble, one hex digit, every time — that is why hex exists.",reveal:["l9"],active:["l9"],point:"l9",
+         quiz:{q:"Why does one hex digit map to exactly four bits?",options:["Because 16 = 2⁴, so a nibble has exactly 16 possible values","Because hex uses the letters A to F","Because bytes are 8 bits"],answer:0,why:"Sixteen is two to the fourth, so four bits count from 0 to 15 — exactly the range of one hex digit."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Divide by the base, collect the remainders, and keep going until the quotient is zero. Then read that column UPWARDS. Check with place values, and jump between binary and hex four bits at a time rather than detouring through decimal.",reveal:["l7","l9"],active:["l7"],point:"l7"}],
+      recap:["Divide by the base; the remainders ARE the digits.",
+             "Read the remainder column upwards — the last one is the most significant bit.",
+             "Hex ↔ binary is a 4-bit nibble swap; never route it through decimal."]} },
+
+  /* ── COMPUTER STUDIES 35: tree — the data-structure family. Deliberately organised by the shape of
+     the ACCESS (linear vs branching) and closed with a "choose by the operation" branch, because the
+     documented failure is that students memorise definitions and then pick a structure by its name.
+     This is the stand-in for the ds canvas until that renderer exists. ── */
+  { text: "Data structures: arrays, linked lists, stacks and queues are linear; trees and graphs are non-linear. Compare how each stores data and what each is fast at.",
+    blueprint: {meta:{title:"Data structures — linear, non-linear, and how to choose",subject:"Computer Studies",concept_id:"data_structures_family"},layout:"tree",root:"ds",
+      nodes:[{id:"ds",label:"Data structures",note:"a shape imposed on memory"},
+             {id:"lin",label:"Linear",parent:"ds",note:"one element after another"},
+             {id:"arr",label:"Array",parent:"lin",note:"contiguous · index from 0"},
+             {id:"ll",label:"Linked list",parent:"lin",note:"scattered · node + next"},
+             {id:"stk",label:"Stack — LIFO",parent:"lin",note:"push / pop at one end"},
+             {id:"que",label:"Queue — FIFO",parent:"lin",note:"enqueue rear, dequeue front"},
+             {id:"non",label:"Non-linear",parent:"ds",note:"an element has many neighbours"},
+             {id:"tre",label:"Tree",parent:"non",note:"root, parent, child, leaf"},
+             {id:"bst",label:"Binary search tree",parent:"tre",note:"left < node < right"},
+             {id:"gra",label:"Graph",parent:"non",note:"vertices and edges, maybe cycles"},
+             {id:"pick",label:"Choose by the OPERATION",parent:"ds",note:"never by the name"},
+             {id:"idx",label:"Jump to item i?",parent:"pick",note:"→ array, O(1)"},
+             {id:"ins",label:"Insert in the middle?",parent:"pick",note:"→ linked list, O(1)"}],
+      narration_steps:[
+        {short:"What they are",term:"data structure",narration_text:"A data structure is not a kind of data. It is a SHAPE you impose on memory so that certain operations become cheap — and, unavoidably, others become expensive.",reveal:["ds"],active:["ds"],point:"ds"},
+        {short:"The first split",term:"linear",narration_text:"The first split is about shape. In a linear structure every element has one before it and one after it — a single file queue of values, and nothing else.",reveal:["lin"],active:["lin"],point:"lin"},
+        {short:"Array",term:"array",narration_text:"An array sits in one contiguous block, so the computer can jump straight to item i by arithmetic on the address. Index from zero, and the last index is length minus one — the off-by-one trap.",reveal:["arr"],active:["arr"],point:"arr",
+         quiz:{q:"An array has 10 elements. What is the last valid index?",options:["9","10","11"],answer:0,why:"Indexing starts at 0, so ten elements occupy 0 to 9. Reaching for index 10 runs off the end."}},
+        {short:"Linked list",term:"linked list",narration_text:"A linked list is the opposite deal. The nodes are scattered anywhere in memory and each one carries a reference to the next, so inserting is cheap but you must walk from the head to reach anything.",reveal:["ll"],active:["ll"],point:"ll",
+         def:"A node is data plus a reference to the next node; 'head' is a reference, not a node."},
+        {short:"Stack",term:"LIFO",narration_text:"A stack restricts you to one end: push on, pop off. Last in, first out. It is a plate stack, an undo history, and the call stack that remembers where a function must return to.",reveal:["stk"],active:["stk"],point:"stk"},
+        {short:"Queue",term:"FIFO",narration_text:"A queue opens both ends: join at the rear, leave from the front. First in, first out. Print jobs and buffers. Stack and queue are taught together, so anchor each one to a real object, not to the word.",reveal:["que"],active:["que"],point:"que",
+         quiz:{q:"Push 1, 2, 3 then remove one item. Which comes out?",options:["3 from a stack, 1 from a queue","1 from both","3 from both"],answer:0,why:"LIFO returns the most recent arrival; FIFO returns the oldest. Same input, opposite output."}},
+        {short:"Branching",term:"non-linear",narration_text:"Now the other family. In a non-linear structure an element can have several neighbours, so there is no single next — which is exactly why these need recursion to walk.",reveal:["non"],active:["non"],point:"non"},
+        {short:"Tree",term:"tree",narration_text:"A tree has one root, and every other node has exactly one parent. Nodes with no children are leaves, and any node plus everything under it is a subtree.",reveal:["tre"],active:["tre"],point:"tre"},
+        {short:"BST",term:"binary search tree",narration_text:"Add one rule — everything left is smaller, everything right is bigger — and searching halves the problem at each step. But that log n speed is a promise only while the tree stays balanced.",reveal:["bst"],active:["bst"],point:"bst",
+         quiz:{q:"What happens if you insert already-sorted values into a BST?",options:["It degenerates into a list and search becomes O(n)","It balances itself","Insertion is refused"],answer:0,why:"Every value goes right, producing one long spine — a linked list wearing a tree costume."}},
+        {short:"Graph",term:"graph",narration_text:"Drop the one-parent rule and you have a graph: vertices joined by edges, possibly in cycles. Roads, friendships and networks are graphs, and a tree is simply a graph with no cycles.",reveal:["gra"],active:["gra"],point:"gra"},
+        {short:"How to choose",term:"the real question",narration_text:"Here is the part exams actually test. Do not choose a structure by its name. Ask which operation your program does most often, then pick the structure that is cheap at exactly that.",reveal:["pick"],active:["pick"],point:"pick"},
+        {short:"The trade-off",term:"trade-off",narration_text:"Jumping to item i instantly? That is an array. Inserting in the middle constantly? That is a linked list. Neither is better — they are opposite bargains, and choosing means naming the operation first.",reveal:["idx","ins"],active:["ins"],point:"ins"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Linear means one neighbour each way; non-linear means many. Stack is last-in-first-out, queue is first-in-first-out. And you choose by the operation you repeat, never by the definition you memorised.",reveal:["ds","pick"],active:["pick"],point:"pick"}],
+      recap:["Linear = one next; non-linear = many neighbours.",
+             "Stack is LIFO, queue is FIFO — anchor each to a real object.",
+             "Choose a structure by the operation you repeat most, not by its name."]} }
+,
+
+  /* ══════════ PHYSICS 36–41 · the gold shots for everything that is NOT a free-body diagram or a
+     circuit (those are 20 and 21, built in Bit 2). The corpus is blunt about the shape of this
+     subject: "the diagram IS the reasoning", and roughly half the syllabus is some quantity plotted
+     against time or position. So three of these six are the graph engine, aimed at the three
+     documented graph killers — slope-vs-height, area-blindness and graph-as-picture — and each
+     carries its danger frame as a labelled marker rather than as an aside. The remaining three
+     cover the vector plane (reused from Maths, per the corpus: do not rebuild it), the energy
+     ledger as a flow, and a collision worked line by line on "solve". ══════════ */
+
+  /* ── PHYSICS 36: graph — the velocity–time graph. Chosen as the flagship physics graph because
+     TUG-K says the same three errors account for most of the loss: reading the HEIGHT when asked
+     for the SLOPE, never seeing the AREA at all, and reading the plot as a picture of the road.
+     All three are addressed on one curve, in that order, with the numbers printed on screen. ── */
+  { text: "A car starts from rest, speeds up steadily to 20 m/s in 8 s, holds that speed for 6 s, then brakes to rest in 4 s. Sketch the velocity–time graph and explain what its slope and the area beneath it tell you.",
+    blueprint: {meta:{title:"A velocity–time graph — slope is acceleration, area is distance",subject:"Physics",concept_id:"vt_graph_slope_and_area"},layout:"graph",
+      x:{min:0,max:19,label:"time (seconds)"}, y:{min:0,max:25,label:"velocity (metres per second)"},
+      curves:[{id:"v",color:"#7c3aed",label:"v–t",points:[[0,0],[2,5],[4,10],[6,15],[8,20],[10,20],[12,20],[14,20],[16,10],[18,0]]}],
+      markers:[{id:"rise",at:[4,10],label:"climbing: slope = +2.5 m/s²",color:"#dc2626"},
+               {id:"flat",at:[9,20],label:"FLAT ≠ stopped — steady 20 m/s",color:"#2563eb"},
+               {id:"fall",at:[16,10],label:"slope = −5 m/s²",color:"#b45309"},
+               {id:"stop",at:[18,0],label:"at rest",color:"#0d9488",drop:true}],
+      regions:[{id:"slope",type:"bracket",at:8,y0:0,y1:20,label:"rise 20 m/s / run 8 s",color:"#dc2626"},
+               {id:"area",type:"band",x0:0,x1:18,label:"area = distance travelled = 280 m",color:"#0d9488"}],
+      narration_steps:[
+        {short:"Read the axes",term:"velocity–time",narration_text:"Before a single number, read the axes out loud: time across the bottom, velocity up the side. So every height on this curve is a speed, and nothing on this picture is a distance yet.",reveal:["v"],active:["v"],point:"rise",
+         def:"On a velocity–time graph the height is the velocity at that instant — not where the object is."},
+        {short:"The climb",term:"acceleration",narration_text:"For the first eight seconds the line climbs. Climbing means the velocity is growing, so the car is speeding up — and how steeply it climbs is how quickly it gains speed.",reveal:["rise"],active:["rise"],point:"rise"},
+        {short:"Slope, not height",term:"slope",narration_text:"Here is the number-one mistake in this topic. Asked for the acceleration at four seconds, most students read the height and write ten. But acceleration is the SLOPE: twenty metres per second gained over eight seconds — two point five.",reveal:["slope"],active:["slope"],point:"rise",
+         quiz:{q:"At t = 4 s the curve is at a height of 10. What is the acceleration there?",options:["2.5 m/s² — the slope, not the height","10 m/s² — read straight off the graph","0, because the car has not stopped"],answer:0,why:"Height is velocity; slope is acceleration. They are different questions asked of the same point."}},
+        {short:"The flat part",term:"constant velocity",narration_text:"Then the line goes flat. Flat does not mean stopped — the car is still doing twenty metres per second. Flat means the velocity is not CHANGING, so the acceleration here is zero even though the car is moving quickly.",reveal:["flat"],active:["flat"],point:"flat",
+         def:"A horizontal line on a velocity–time graph means constant velocity: zero acceleration, not zero speed."},
+        {short:"Not a picture",term:"graph-as-picture",narration_text:"And watch this trap. That flat top is not a hilltop and the climb is not a hill — the road is perfectly level the whole time. A graph is a plot of a quantity, never a photograph of the journey.",reveal:["flat"],active:["flat"],point:"flat"},
+        {short:"Braking",term:"negative acceleration",narration_text:"Now the line falls: the slope is negative five metres per second squared. Say negative acceleration, not deceleration — the minus sign tells you the change is backwards, while the car itself is still travelling forwards the entire time.",reveal:["fall"],active:["fall"],point:"fall"},
+        {short:"Zero at last",term:"at rest",narration_text:"Only where the curve touches the time axis is the car actually at rest. Notice how late that is compared with where students usually point — the braking took four full seconds.",reveal:["stop"],active:["stop"],point:"stop"},
+        {short:"The area",term:"area under the curve",narration_text:"Finally, the piece everybody forgets. Velocity times time is a distance, so the AREA under the graph is how far the car went: eighty, plus one hundred and twenty, plus forty — two hundred and eighty metres.",reveal:["area"],active:["area"],point:"flat",
+         def:"Area under a velocity–time graph = displacement, because height (m/s) × width (s) leaves metres.",
+         quiz:{q:"What does the area under a velocity–time graph give you?",options:["The distance travelled","The acceleration","The average speed"],answer:0,why:"Multiplying a velocity by a time gives a distance — that is exactly what an area on these axes is."},
+        },
+        {short:"Recap",term:"recap",narration_text:"Recap, and these are three different questions about the same curve. Height is the velocity, slope is the acceleration, area is the distance. Ask which one the question wants before you touch the graph.",reveal:["v","area"],active:["area"],point:"flat"}],
+      recap:["Height = velocity · slope = acceleration · area = distance. Three questions, one curve.",
+             "A flat line means steady speed, not a stopped object.",
+             "The graph is a plot of a quantity, never a picture of the road."]} },
+
+  /* ── PHYSICS 37: graph — simple harmonic motion as three linked curves. Every documented SHM
+     misconception is a RELATIVE-PHASE error (students put maximum velocity at the extremes), so the
+     three quantities go on one set of axes against one clock and the markers sit exactly where the
+     confusion lives. Normalised to a fraction of each maximum so all three fit honestly. ── */
+  { text: "A mass on a spring oscillates in simple harmonic motion. Sketch displacement, velocity and acceleration against time, and explain why the acceleration is largest exactly where the velocity is zero.",
+    blueprint: {meta:{title:"Simple harmonic motion — where each quantity peaks",subject:"Physics",concept_id:"shm_phase_x_v_a"},layout:"graph",
+      x:{min:0,max:4,label:"time (seconds) — one full cycle takes 2 s"},
+      y:{min:-1.45,max:1.45,label:"each quantity as a fraction of its own maximum"},
+      curves:[{id:"x",color:"#7c3aed",label:"displacement x",points:[[0,1],[0.25,0.71],[0.5,0],[0.75,-0.71],[1,-1],[1.25,-0.71],[1.5,0],[1.75,0.71],[2,1],[2.25,0.71],[2.5,0],[2.75,-0.71],[3,-1],[3.25,-0.71],[3.5,0],[3.75,0.71],[4,1]]},
+              {id:"v",color:"#0d9488",label:"velocity v",dash:true,points:[[0,0],[0.25,-0.71],[0.5,-1],[0.75,-0.71],[1,0],[1.25,0.71],[1.5,1],[1.75,0.71],[2,0],[2.25,-0.71],[2.5,-1],[2.75,-0.71],[3,0],[3.25,0.71],[3.5,1],[3.75,0.71],[4,0]]},
+              {id:"a",color:"#dc2626",dash:true,points:[[0,-1],[0.25,-0.71],[0.5,0],[0.75,0.71],[1,1],[1.25,0.71],[1.5,0],[1.75,-0.71],[2,-1],[2.25,-0.71],[2.5,0],[2.75,0.71],[3,1],[3.25,0.71],[3.5,0],[3.75,-0.71],[4,-1]]}],
+      markers:[{id:"ext",at:[2,1],label:"extreme: x max, v = 0, a max",color:"#7c3aed"},
+               {id:"eq",at:[0.5,-1],label:"centre: v max, a = 0",color:"#0d9488"},
+               {id:"back",at:[1,1],label:"a points BACK to the centre",color:"#dc2626"},
+               {id:"mir",at:[3,1],label:"mirror of x — F = −kx",color:"#dc2626"}],
+      narration_steps:[
+        {short:"One clock",term:"simple harmonic motion",narration_text:"Three quantities, one clock. Displacement in purple, velocity in green, acceleration in red — all plotted against the same time axis so you can read one against another.",reveal:["x"],active:["x"],point:"ext",
+         def:"Simple harmonic motion is any motion where the restoring force is proportional to the displacement and points back towards the centre."},
+        {short:"The extremes",term:"the turning point",narration_text:"Start at the extreme, where the spring is stretched furthest. The mass has to turn around here, and a thing that is turning around is, for one instant, not moving at all.",reveal:["ext"],active:["ext"],point:"ext"},
+        {short:"Zero velocity",term:"instantaneously at rest",narration_text:"So watch the green curve: velocity crosses zero exactly where the purple displacement is at its peak. Think of a ball thrown straight up — at the very top it is stationary, and nobody would say gravity switched off up there.",reveal:["v"],active:["v"],point:"ext"},
+        {short:"The centre",term:"equilibrium",narration_text:"Slide forward to the centre. The spring is at its natural length, so it is pulling with nothing at all — and yet this is exactly where the mass is moving fastest. Zero force, maximum speed.",reveal:["eq"],active:["eq"],point:"eq",
+         quiz:{q:"Where is the mass moving fastest?",options:["At the centre, where the force is zero","At the extremes, where the force is biggest","Everywhere — the speed is constant"],answer:0,why:"Force builds speed on the way in, so the speed peaks exactly where the force has run out — at the centre."}},
+        {short:"Always inward",term:"the restoring force",narration_text:"Now the red curve. Acceleration is largest at the extremes and always points back towards the centre — that is the whole meaning of the minus sign in F equals minus k x. Say the minus out loud; it IS the concept.",reveal:["a","back"],active:["back"],point:"back"},
+        {short:"Mirror images",term:"180 degrees out of phase",narration_text:"Lay red over purple and they are mirror images: whenever displacement is up, acceleration is down by the same fraction. That is what one hundred and eighty degrees out of phase means, and it follows directly from the minus sign.",reveal:["mir"],active:["mir"],point:"mir"},
+        {short:"The surprise",term:"period",narration_text:"One last thing, and it is genuinely counterintuitive. Pull the mass twice as far and the curve gets taller but not wider — the period stays two seconds. A bigger swing simply comes with a bigger force to cover it.",reveal:["ext"],active:["ext"],point:"ext",
+         def:"For small oscillations the period is independent of amplitude — it depends on the mass and the spring constant only."},
+        {short:"Recap",term:"recap",narration_text:"Recap. Displacement and acceleration are mirror images; velocity peaks a quarter-cycle away from both. So at the ends: no speed, biggest pull. In the middle: top speed, no pull.",reveal:["x","v","a"],active:["a"],point:"eq"}],
+      recap:["At the extremes v = 0 but a is maximum; at the centre a = 0 but v is maximum.",
+             "Acceleration is the mirror image of displacement — that is the minus in F = −kx.",
+             "Period does not depend on amplitude."]} },
+
+  /* ── PHYSICS 38: graph — the heating curve. The corpus calls this the highest-value single physics
+     graph after the kinematics stack, because the latent-heat plateau contradicts the intuition
+     "add energy, temperature rises" and is unteachable without the picture. Both plateaus are drawn
+     as shaded bands and the boiling one is deliberately far longer than the melting one. ── */
+  { text: "Ice at −20 °C is heated steadily until it becomes steam at 120 °C. Sketch the heating curve of temperature against energy supplied and explain the two flat sections.",
+    blueprint: {meta:{title:"The heating curve — why the temperature stops rising",subject:"Physics",concept_id:"heating_curve_latent_heat"},layout:"graph",
+      x:{min:0,max:800,label:"energy supplied (kilojoules)"}, y:{min:-40,max:140,label:"temperature (degrees Celsius)"},
+      curves:[{id:"h",color:"#7c3aed",label:"heating curve",points:[[0,-20],[20,-10],[40,0],[90,0],[140,0],[190,50],[240,100],[430,100],[620,100],[700,113],[770,125]]}],
+      markers:[{id:"warm",at:[35,-6],label:"ice warming — Q = mcΔT",color:"#2563eb"},
+               {id:"melt",at:[90,0],label:"MELTING — energy in, no rise",color:"#dc2626"},
+               {id:"liq",at:[190,50],label:"liquid water warming",color:"#2563eb"},
+               {id:"boil",at:[430,100],label:"BOILING — a far longer plateau",color:"#dc2626"},
+               {id:"steam",at:[700,116],label:"steam warming — steep again",color:"#2563eb"}],
+      regions:[{id:"pf",type:"band",x0:40,x1:140,label:"latent heat of fusion",color:"#dc2626"},
+               {id:"pv",type:"band",x0:240,x1:620,label:"latent heat of vaporisation — much bigger",color:"#b45309"}],
+      narration_steps:[
+        {short:"Read the axes",term:"heating curve",narration_text:"Energy supplied runs across, temperature goes up. The heater is steady, so moving right also means time passing — and that makes the flat parts genuinely strange.",reveal:["h"],active:["h"],point:"warm",
+         def:"A heating curve plots the temperature of a substance against the energy put into it."},
+        {short:"Warming the ice",term:"specific heat capacity",narration_text:"At first the ice simply warms up. Energy goes into making the particles vibrate faster, and faster vibration is precisely what a higher temperature means.",reveal:["warm"],active:["warm"],point:"warm"},
+        {short:"The first plateau",term:"melting",narration_text:"Then at zero degrees the line goes flat, and it stays flat for a while. The heater has not been turned off — energy is pouring in — yet the thermometer refuses to move.",reveal:["melt","pf"],active:["melt"],point:"melt"},
+        {short:"Where it goes",term:"latent heat",narration_text:"So where does that energy go? Into breaking the bonds holding the ice lattice together, not into speeding the particles up. Think of paying off a debt before you can start saving — the money is real, but your balance sits still.",reveal:["pf"],active:["pf"],point:"melt",
+         def:"Latent heat is the energy needed to change state at constant temperature — it changes potential energy, not kinetic energy.",
+         quiz:{q:"During melting, where is the supplied energy going?",options:["Into breaking the bonds between particles","Into raising the average speed of the particles","Nowhere — it is lost to the surroundings"],answer:0,why:"Temperature measures average kinetic energy. During a phase change the energy goes into potential energy instead, so the temperature holds."}},
+        {short:"Liquid water",term:"back to warming",narration_text:"Once every last bond is broken the temperature climbs again. Notice this slope is gentler than the ice's — water needs a lot of energy per degree, which is why the sea warms so slowly.",reveal:["liq"],active:["liq"],point:"liq"},
+        {short:"The long plateau",term:"boiling",narration_text:"At one hundred degrees it flattens again, and look how much longer this plateau is. Escaping the liquid entirely takes far more energy than merely loosening the solid — that is why a steam burn is so much worse than boiling water.",reveal:["boil","pv"],active:["boil"],point:"boil"},
+        {short:"Steam",term:"the last climb",narration_text:"Finally the steam itself warms, and steeply, because a gas needs little energy per degree. Each straight section's steepness is telling you the specific heat capacity of that state.",reveal:["steam"],active:["steam"],point:"steam"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Sloped sections are Q equals m c times the change in temperature — energy becoming motion. Flat sections are Q equals m L — energy becoming freedom. The heater never stops; only the thermometer does.",reveal:["h","pf","pv"],active:["pv"],point:"boil"}],
+      recap:["Sloped = warming (Q = mcΔT); flat = changing state (Q = mL).",
+             "During a phase change energy still flows in — it breaks bonds instead of raising temperature.",
+             "The boiling plateau is far longer than the melting one."]} },
+
+  /* ── PHYSICS 39: vectors — the maths tip-to-tail plane, reused exactly as the corpus instructs
+     ("reuse, don't rebuild"). Numbers chosen so the resultant is the 3-4-5 triangle, because the
+     documented failure is scalar habit: students add four and three and get seven. Physics adds
+     nothing to the renderer — it only insists the narration says the units and the direction. ── */
+  { text: "A boat's engine drives it east at 4 m/s while the river current carries it north at 3 m/s. Find the boat's resultant velocity, and explain why 4 and 3 do not make 7.",
+    blueprint: {meta:{title:"Adding two velocities — why 4 and 3 make 5",subject:"Physics",concept_id:"vector_addition_resultant_boat"},layout:"vectors",
+      a:[4,0], b:[0,3],
+      narration_steps:[
+        {short:"The first vector",term:"vector",narration_text:"The engine drives the boat east at four metres per second. Draw it as an arrow: its length is the speed and the way it points is the direction. Both halves matter — that is what makes it a vector rather than just a number.",reveal:["a"],active:["a"],point:"a",
+         def:"A vector has a size AND a direction; a scalar, like mass or temperature, has only a size."},
+        {short:"The second",term:"the current",narration_text:"Meanwhile the river carries the whole boat north at three metres per second, whatever the engine is doing. The water does not care which way the boat is pointed.",reveal:["b"],active:["b"],point:"b"},
+        {short:"Read them off",term:"components",narration_text:"Because they are at right angles, each one is already a component: four across, three up. Notice you can read those straight off the picture instead of hunting for a sine or a cosine.",reveal:["comp"],active:["comp"],point:"comp"},
+        {short:"Slide it",term:"tip to tail",narration_text:"Now slide the current arrow so its tail sits on the tip of the engine arrow. Sliding an arrow changes nothing at all, because a vector is only a size and a direction — it has no home.",reveal:["shift"],active:["shift"],point:"shift",
+         quiz:{q:"Why are you allowed to slide the second arrow across the page?",options:["A vector is defined only by size and direction, not by position","Because the two are at right angles","Because the boat physically moves there first"],answer:0,why:"Position is not part of a vector, so moving one without turning or resizing it leaves it the same vector."}},
+        {short:"The resultant",term:"resultant",narration_text:"Join the very start to the very end and that single arrow is the resultant — the one velocity that would do the job of both. It is five metres per second, by Pythagoras, at about thirty-seven degrees north of east.",reveal:["res"],active:["res"],point:"res",
+         def:"The resultant is the single vector that has the same effect as all the others combined."},
+        {short:"The trap",term:"scalar habit",narration_text:"So four plus three does not make seven here. Seven would only be right if both pushes pointed the same way — and if they pointed in opposite directions you would get one. Direction is doing the arithmetic with you.",reveal:["res"],active:["res"],point:"res"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Draw each vector to scale, slide the second to the tip of the first, and join start to finish. Always quote a resultant with its direction — five metres per second on its own is only half an answer.",reveal:["a","shift","res"],active:["res"],point:"res"}],
+      recap:["Sliding a vector changes nothing — only length and direction define it.",
+             "Perpendicular vectors combine by Pythagoras, never by simple addition.",
+             "Always state the direction with the magnitude."]} },
+
+  /* ── PHYSICS 40: flow — the energy ledger. Energy problems are a PROCEDURE, and the corpus is
+     explicit that students treat energy as a substance that "gets used up". So the chain is built
+     as bookkeeping (choose two states → list what is in each account → equate → find the gap), with
+     the missing joules given their own danger station instead of being quietly written off. ── */
+  { text: "A 2 kg trolley is released from rest at the top of a ramp 1.5 m high and reaches the bottom at 4 m/s. Account for all the energy and explain where the missing joules went.",
+    blueprint: {meta:{title:"Energy accounting — nothing is used up",subject:"Physics",concept_id:"energy_conservation_ramp_friction"},layout:"flow",
+      nodes:[{id:"pick",label:"Pick TWO states",note:"top, at rest → bottom",kind:"trigger"},
+             {id:"zero",label:"Choose where PE = 0",note:"the floor — it's a choice",kind:"process"},
+             {id:"pe",label:"PE at the top = 29.4 J",note:"mgh = 2 × 9.8 × 1.5",kind:"process"},
+             {id:"ke",label:"KE at the bottom = 16 J",note:"½mv² = ½ × 2 × 4²",kind:"product"},
+             {id:"gap",label:"13.4 J unaccounted for",note:"“the energy was used up”",kind:"danger"},
+             {id:"fric",label:"Friction did −13.4 J of work",note:"opposing the motion",kind:"process"},
+             {id:"heat",label:"13.4 J → thermal energy",note:"ramp and wheels warm up",kind:"product"},
+             {id:"law",label:"Total energy: 29.4 J in, 29.4 J out",note:"mechanical energy alone is not conserved",kind:"outcome"}],
+      narration_steps:[
+        {short:"Two states",term:"the states",narration_text:"Energy questions are bookkeeping, so start like an accountant: pick two moments and only two. Here, the instant of release at the top, and the instant it reaches the bottom.",reveal:["pick"],active:["pick"],point:"pick",
+         def:"An energy calculation compares two chosen instants — it never tracks what happens in between."},
+        {short:"Set the zero",term:"the zero of PE",narration_text:"Next, decide where potential energy counts as zero. The floor is convenient, but it is genuinely a choice — only the CHANGE in height ever appears in an answer.",reveal:["zero"],active:["zero"],point:"zero"},
+        {short:"Top of the ramp",term:"gravitational PE",narration_text:"At the top the trolley is still, so its only energy is positional: m g h, which is two times nine point eight times one point five — twenty-nine point four joules. That is the entire opening balance.",reveal:["pe"],active:["pe"],point:"pe"},
+        {short:"Bottom of the ramp",term:"kinetic energy",narration_text:"At the bottom the height is gone and the speed is four metres per second, so we have one half m v squared: sixteen joules. And notice the v is squared — double the speed and you quadruple the energy.",reveal:["ke"],active:["ke"],point:"ke"},
+        {short:"The gap",term:"the missing joules",narration_text:"Twenty-nine point four went in, sixteen came out. Thirteen point four joules are missing — and the tempting answer, that the energy was used up moving the trolley, is exactly wrong.",reveal:["gap"],active:["gap"],point:"gap",
+         quiz:{q:"What does 'energy was used up' actually mean?",options:["Nothing — energy only moves between accounts, it is never spent","It was converted into force","It was destroyed by friction"],answer:0,why:"Energy is conserved absolutely. 'Used up' always means 'moved somewhere you were not counting' — usually thermal energy."}},
+        {short:"The culprit",term:"non-conservative force",narration_text:"Friction acted backwards along the ramp the whole way down, so it did negative work: thirteen point four joules of it. Negative work simply means the force was taking energy out rather than putting it in.",reveal:["fric"],active:["fric"],point:"fric",
+         def:"Work is negative when the force opposes the displacement — the force removes energy from the moving object."},
+        {short:"Where it went",term:"thermal energy",narration_text:"Those joules are still here, as warmth in the ramp, in the axles and in the air. Run a hand along a slide after someone comes down it — that heat is the missing line in the ledger.",reveal:["heat"],active:["heat"],point:"heat"},
+        {short:"The payoff",term:"conservation of energy",narration_text:"So the books balance: sixteen joules of motion plus thirteen point four of thermal energy is twenty-nine point four. Total energy is always conserved; MECHANICAL energy is conserved only when friction is absent.",reveal:["law"],active:["law"],point:"law"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Two states, a chosen zero, list every account at each end, then find the gap and name where it went. If your energies do not balance you have not lost energy — you have missed a column.",reveal:["pick","law"],active:["law"],point:"law"}],
+      recap:["Energy is never used up — 'missing' energy has always moved to an account you forgot.",
+             "Mechanical energy is conserved only when no friction acts; total energy always is.",
+             "Pick two states and a zero for PE before writing anything down."]} },
+
+  /* ── PHYSICS 41: solve — an inelastic collision, line by line. Momentum questions fail on two
+     documented points: dropping the direction the moment the algebra starts, and believing that
+     "conserved" is all-or-nothing. So direction is carried in the "why" of every line, and the
+     kinetic-energy audit is done explicitly at the end rather than asserted. ── */
+  { text: "A 1200 kg car travelling east at 15 m/s runs into the back of an 800 kg stationary van and the two lock together. Find their common velocity and how much kinetic energy is lost.",
+    blueprint: {meta:{title:"An inelastic collision — momentum kept, kinetic energy not",subject:"Physics",concept_id:"inelastic_collision_momentum_ke"},layout:"solve",
+      problem:"1200 kg at 15 m/s east strikes a stationary 800 kg van; they lock together. Find v, and the kinetic energy lost.",
+      lines:[{id:"l1",math:"p_before = (1200)(15) + (800)(0) = 18 000 kg·m/s east",why:"include EVERY object, and write the direction down"},
+             {id:"l2",math:"p_after = (1200 + 800) v = 2000 v",why:"they lock together, so one combined mass"},
+             {id:"l3",math:"2000 v = 18 000",why:"no external horizontal force → momentum is conserved"},
+             {id:"l4",math:"v = 9 m/s east",why:"divide by the total mass; the direction is unchanged"},
+             {id:"l5",math:"KE_before = ½(1200)(15²) = 135 000 J",why:"now audit the energy separately"},
+             {id:"l6",math:"KE_after = ½(2000)(9²) = 81 000 J",why:"one mass, one speed, after the collision"},
+             {id:"l7",math:"ΔKE = 81 000 − 135 000 = −54 000 J",why:"54 kJ became heat, sound and crumpled metal"}],
+      narration_steps:[
+        {short:"Before",term:"momentum",narration_text:"Momentum is mass times velocity, so start by adding up every object before the crash: twelve hundred kilograms at fifteen metres per second, plus a van doing nothing at all. Eighteen thousand kilogram-metres per second, east.",reveal:["l1"],active:["l1"],point:"l1",
+         def:"Momentum is a vector: the direction is part of the quantity, not a label added afterwards."},
+        {short:"After",term:"perfectly inelastic",narration_text:"They lock together, so afterwards there is one object of two thousand kilograms moving at some unknown v. Sticking together is what makes this collision perfectly inelastic.",reveal:["l2"],active:["l2"],point:"l2"},
+        {short:"Why equal",term:"conservation of momentum",narration_text:"Now the physics. During the crash the two push on each other with equal and opposite forces, so whatever one gains the other loses. With no outside push along the road, the total momentum cannot change.",reveal:["l3"],active:["l3"],point:"l3",
+         def:"Momentum is conserved whenever the external forces on the chosen system add to zero."},
+        {short:"Solve",term:"the common velocity",narration_text:"Divide eighteen thousand by two thousand and you get nine metres per second — and it is still heading east. A velocity written without its direction is only half an answer.",reveal:["l4"],active:["l4"],point:"l4"},
+        {short:"Now the energy",term:"kinetic energy",narration_text:"Momentum is settled, so audit the energy as a completely separate question. Before the crash: one half times twelve hundred times fifteen squared — one hundred and thirty-five thousand joules.",reveal:["l5"],active:["l5"],point:"l5"},
+        {short:"After the crash",term:"the audit",narration_text:"Afterwards: one half times two thousand times nine squared — eighty-one thousand joules. The mass went up but the speed went down, and because speed is squared, the speed wins.",reveal:["l6"],active:["l6"],point:"l6"},
+        {short:"The loss",term:"inelastic",narration_text:"Fifty-four thousand joules have gone. Not destroyed — spent on bending metal, on heating the wreck, on the noise you heard. That is precisely what inelastic means.",reveal:["l7"],active:["l7"],point:"l7",
+         quiz:{q:"Which quantity is conserved in EVERY collision?",options:["Momentum — kinetic energy only in an elastic one","Both, always","Kinetic energy — momentum only if they stick"],answer:0,why:"Momentum is conserved whenever no external force acts. Kinetic energy survives only in an elastic collision."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Momentum before equals momentum after, direction included, in every collision. Kinetic energy survives only if the collision is elastic — and when it does not survive, name where it went.",reveal:["l4","l7"],active:["l7"],point:"l7"}],
+      recap:["Momentum is conserved in every collision; kinetic energy only in elastic ones.",
+             "Carry the direction through every line — momentum is a vector.",
+             "'Lost' kinetic energy becomes heat, sound and deformation."]} }
 ];
 
 /* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
@@ -1361,6 +1713,90 @@ export const EXEMPLARS = [
    free-body diagram or a titration curve as its few-shot. ---- */
 const BIO_EXEMPLAR = { scene:25, respiration:26, photosynthesis:27, replication:28, dogma:29,
                        kinetics:30, population:31, taxonomy:32, punnett:33 };
+
+/* ---- PHYSICS GATE (index map). Physics has the same problem biology has, from the other side:
+   "resultant", "magnitude", "amplitude", "period", "vector", "solve" and "rate of change" all fire
+   the maths regex; "energy", "reaction", "charge", "decay", "distribution" and "electron" all fire
+   the chemistry regex; "circuit" fires the computing gate; and "\\bcarrier" in the biology list
+   would hand a passage about CHARGE CARRIERS a Punnett square. So physics gets its own named gate
+   and, once it fires, ALWAYS returns a physics exemplar — a physics highlight can never be given a
+   titration curve or a genetics grid as its few-shot. The two purpose-built physics renderers (fbd,
+   circuit) are 20 and 21 from Bit 2; the rest are the graph engine, the reused vectors plane, the
+   flow ledger and the worked solution. ---- */
+const PHY_EXEMPLAR = { fbd:20, circuit:21, motion:36, shm:37, thermal:38, vectors:39, energy:40, momentum:41 };
+
+/* The unmistakable-physics cues. These are checked BEFORE the biology gate because each one is a
+   term biology/computing/chemistry would otherwise steal outright (see the note above). Keep this
+   list short and 100% physics — anything ambiguous belongs in PHYS below, not here. */
+const PHYS_HARD = /free.?body|\bfbd\b|\bnet force\b|newton'?s (first|second|third) law|\bthird law\b|charge carriers?|\bfree fall\b|apparent weightless|projectile|simple harmonic|\bshm\b|kirchhoff|ohm'?s law|right.?hand rule|centripetal|centrifugal|coefficient of (static|kinetic) friction|terminal velocity|inclined plane|latent heat|specific heat capacity|heating curve|\bv ?= ?f ?λ\b|\bf ?= ?ma\b|\bv ?= ?ir\b/i;
+
+/* The broader physics vocabulary, checked after biology and computing have had their say. */
+const PHYS = new RegExp([
+  // kinematics & motion graphs
+  "kinematic","\\bvelocity\\b","\\bacceleration\\b","\\baccelerat","\\bdisplacement\\b","\\bdeceleration\\b",
+  "\\bspeed\\b","distance.?time","velocity.?time","\\bsuvat\\b","metres per second","\\bm/s\\b",
+  "trajector","\\blaunch(ed)? (at|with)\\b","\\bat rest\\b","\\bmotion\\b",
+  // forces & mechanics
+  "\\bforces?\\b","\\bnewtons?\\b","\\btension\\b","\\bnormal force\\b","\\bfriction","\\bincline","\\bweight\\b",
+  "\\bmass\\b .{0,20}(kg|kilogram|accelerat|force)","equilibrium of forces","\\btorque\\b","\\bmoment of\\b","\\blever\\b",
+  "circular motion","banked (curve|turn)","\\borbit","satellite","gravitational (field|force|potential)","inverse square",
+  // energy, work, momentum
+  "kinetic energy","potential energy","work.?energy","work done","joules?\\b","\\bwatts?\\b","conservation of energy",
+  "mechanical energy","\\bmomentum\\b","\\bimpulse\\b","elastic collision","inelastic","\\bcollision","\\brecoil\\b",
+  // oscillations & waves
+  "oscillat","\\bpendulum","spring constant","hooke","restoring force","\\bamplitude\\b .{0,30}(wave|oscillat|sound|period)",
+  "\\bwavelength\\b","\\bwavefront","standing wave","\\bantinode","\\bharmonic\\b","\\bresonan","doppler",
+  "longitudinal","transverse wave","superposition","compressions? and rarefactions?","\\bpitch\\b .{0,20}frequenc","decibel",
+  // electricity & magnetism
+  "\\bcircuits?\\b","\\bresistors?\\b","\\bresistance\\b","potential difference","\\bvoltage\\b","\\bemf\\b",
+  "\\bammeter","\\bvoltmeter","in series","in parallel","internal resistance","\\bcapacitor",
+  "electric field","equipotential","\\bpoint charge","\\btest charge","field lines","magnetic (field|force|flux)",
+  "\\btesla\\b","\\bsolenoid","electromagnetic induction","\\bfaraday'?s law\\b","\\blenz",
+  // optics
+  "ray diagram","principal ray","\\bfocal length\\b","converging lens","diverging lens","concave mirror","convex",
+  "\\brefract","total internal reflection","\\bsnell","real image","virtual image",
+  // thermal
+  "thermal equilibrium","\\bconduction\\b","\\bconvection\\b","\\bradiation\\b .{0,24}(heat|thermal|transfer)",
+  "internal energy","\\bkelvin\\b","phase change .{0,20}(temperature|energy|heat)"
+].join("|"), "i");
+
+/* Physics routing. Order matters and is argued, not arbitrary:
+   1. FORCES first, because a forces question is very often also a motion question ("a block slides
+      down a slope and accelerates") and the free-body diagram is the one view that teaches it.
+   2. CIRCUITS next — "current" and "voltage" are unambiguous once computing has already declined.
+   3. VECTORS before the graph, because a 2-D momentum or relative-velocity question mentions both
+      "momentum" and "velocity" and the arrow plane is what the student cannot picture.
+   4. WAVES / SHM / thermal / any quantity-vs-anything → the graph engine, the workhorse.
+   5. Energy and collision PROCEDURES → the ledger (flow) or the worked solution (solve).
+   Anything else that fired a physics cue still returns a physics exemplar — the motion graph,
+   because "some quantity against time" is the single most likely shape of an unmatched physics
+   highlight. It never falls through to chemistry or biology. */
+function phyPick(t){
+  const P = i => EXEMPLARS[i];
+  // 1. forces on a body → the free-body diagram (the flagship)
+  if(/free.?body|\bfbd\b|\bnet force\b|forces? (on|acting on)|newton'?s (first|second|third) law|\bf ?= ?ma\b|third law|action.{0,3}reaction|\bnormal force\b|\bfriction(al)?\b|coefficient of (static|kinetic) friction|\btension\b|\bincline|inclined plane|\bslope\b .{0,20}(block|mass)|equilibrium of forces|centripetal|centrifugal|circular motion|banked (curve|turn)|apparent weight|weightless|free fall|\bweight\b .{0,16}\bmass\b|impetus|\borbit(s|ing|al motion)?\b|satellite|gravitational field/.test(t))
+    return P(PHY_EXEMPLAR.fbd);
+  // 2. DC circuits → the circuit schematic
+  if(/\bcircuits?\b|\bresistors?\b|\bresistance\b|\bohm'?s law\b|\bcurrent\b .{0,30}(volt|resist|circuit|batter|amp)|\bvoltage\b|potential difference|\bemf\b|\bbatter(y|ies)\b|\bammeter\b|\bvoltmeter\b|kirchhoff|in series|in parallel|\bbulbs?\b|\blamps?\b .{0,20}(bright|circuit)|\bv ?= ?ir\b|internal resistance|\bcapacitor/.test(t))
+    return P(PHY_EXEMPLAR.circuit);
+  // 3. vector addition, components, resultants, relative velocity, 2-D momentum → the arrow plane
+  if(/\bvectors?\b|\bscalars?\b|magnitude and direction|tip.?to.?tail|\bresultant\b|\bcomponents?\b .{0,24}(vector|velocity|force|axis|axes)|resolve .{0,20}(into|components)|relative velocity|\bbearing\b|dot product|cross product|unit vector|two.?dimensional (collision|momentum)|momentum .{0,20}(vector|two dimension|2.?d)/.test(t))
+    return P(PHY_EXEMPLAR.vectors);
+  // 4a. thermal — the heating curve is the one graph this topic cannot be taught without
+  if(/latent heat|specific heat capacity|heating curve|cooling curve|\bmelting\b|\bboiling\b|phase change|\bplateau\b|thermal equilibrium|internal energy|heat (vs|versus|and) temperature|\bq ?= ?mc|\bq ?= ?ml\b|\bkelvin\b|thermal expansion|conduction|convection/.test(t))
+    return P(PHY_EXEMPLAR.thermal);
+  // 4b. oscillations and waves — every misconception here is a relative-PHASE error
+  if(/simple harmonic|\bshm\b|oscillat|\bpendulum|spring constant|hooke|restoring force|\bf ?= ?−? ?kx\b|\bamplitude\b|\bwavelength\b|\bwavefront|standing wave|\bantinode|\bnodes?\b .{0,20}wave|\bharmonic\b|resonan|doppler|longitudinal|transverse|superposition|\bv ?= ?f ?λ\b|frequency .{0,24}(wave|sound|pitch|hertz)|\bperiod\b .{0,24}(oscillat|pendulum|wave|amplitude)/.test(t))
+    return P(PHY_EXEMPLAR.shm);
+  // 5a. a collision or an impulse calculation → the worked solution, one move per line
+  if(/\bmomentum\b|\bimpulse\b|\bcollision|\belastic\b|inelastic|\brecoil\b|\bp ?= ?mv\b|conservation of momentum|stick together|lock together|\bexplo(de|sion)\b/.test(t))
+    return P(PHY_EXEMPLAR.momentum);
+  // 5b. an energy accounting problem → the ledger
+  if(/kinetic energy|potential energy|work.?energy|work done|\bjoules?\b|conservation of energy|mechanical energy|\bpower\b .{0,20}(watt|energy|work)|\bwatts?\b|efficiency|\bmgh\b|½ ?m ?v|energy (transfer|conversion|account|stored|lost)/.test(t))
+    return P(PHY_EXEMPLAR.energy);
+  // 6. anything else plottable — kinematics, projectiles, inverse-square, decay, force–time …
+  return P(PHY_EXEMPLAR.motion);
+}
 const BIO = new RegExp([
   // cells, organelles & transport
   "organelle","endoplasmic reticulum","\\bgolgi\\b","lysosome","ribosom","mitochondri","chloroplast","thylakoid",
@@ -1393,8 +1829,100 @@ const BIO = new RegExp([
   "red blood cell","\\btissue\\b","\\borganism"
 ].join("|"));
 
+/* ---- COMPUTER-STUDIES GATE (index map + detection). Computing is the subject with the largest
+   number of stolen words in the whole system: a "logic circuit" contains "circuit" (physics), a
+   "truth table" contains "table", "binary tree" and "traversal" sit next to biology's phylogenetic
+   trees, "program translation" collides head-on with the central dogma, a flowchart is just a list
+   of steps (biology cascade), and "solve"/"factor"/"log n" all fire the maths gate. So computing
+   gets its own detection regex and its own router, and once either fires we ALWAYS return a
+   computing exemplar — the subject can never be handed a titration curve or a Punnett square.
+   Two entry points, deliberately:
+     CS_STRONG — unambiguous computing terms, tested BEFORE biology, because these are the ones
+                 biology would otherwise steal ("translation", "tissue", "stacks of thylakoids").
+     CS        — the full subject gate, tested after biology and ahead of physics/maths routing. ---- */
+const CS_EXEMPLAR = { logic:22, table:23, flow:24, solve:34, tree:35 };
+/* Every term here is one that essentially never appears in a biology, chemistry, physics or pure
+   maths passage. Bare "bit", "buffer", "sequence", "selection", "string", "node", "network",
+   "memory", "register" and "tree" are deliberately ABSENT — each of them belongs to another
+   subject far more often than to this one. */
+const CS_STRONG = new RegExp([
+  // translation toolchain — must beat the biology gate, which owns the word "translation"
+  "\\bcompilers?\\b","\\binterpreters?\\b","\\bassembler\\b","machine code","source code","object code",
+  "program translation","\\btranslator (program|software)\\b","\\bsyntax error\\b","high.?level language",
+  "low.?level language","\\bide\\b .{0,20}(debug|editor|compil)",
+  // number systems & representation
+  "\\bdenary\\b","\\bhexadecimal\\b","\\boctal\\b","two'?s complement","one'?s complement","sign.?and.?magnitude",
+  "\\bnibble\\b","\\bbitwise\\b","bit pattern","most significant bit","\\bmsb\\b","\\blsb\\b","\\bascii\\b",
+  "\\bunicode\\b","utf.?8","floating.?point","\\bmantissa\\b","(8|16|32|64).?bit\\b","\\bbytes?\\b",
+  "kilobyte","megabyte","gigabyte","\\bkib\\b","\\bmib\\b",
+  // logic & Boolean
+  "logic gates?","logic circuit","\\bboolean\\b","truth tables?","de ?morgan","\\bnand\\b","\\bxnor\\b","\\bxor\\b",
+  "karnaugh","\\bk.?map\\b","half.?adder","full.?adder","combinational logic","sum of products","\\bminterm",
+  // algorithms & complexity
+  "\\bpseudo.?code\\b","\\bflow ?chart\\b","dry.?run","trace table","\\bbig.?o\\b","o\\(n( log n)?\\)",
+  "bubble sort","selection sort","insertion sort","merge sort","quick ?sort","linear search","binary search",
+  // data structures
+  "\\blinked lists?\\b","binary (search )?tree","\\bbst\\b","tree traversal","in.?order traversal",
+  "pre.?order traversal","post.?order traversal","adjacency (list|matrix)","hash (table|map|function)",
+  "\\bfifo\\b","\\blifo\\b","enqueue","dequeue","\\bcall stack\\b","\\bnull (pointer|reference)\\b",
+  "zero.?based","off.?by.?one","\\bdata structures?\\b","\\bleaf nodes?\\b","\\broot nodes?\\b","\\bsubtree\\b",
+  // architecture, OS, networking, databases
+  "\\bcpu\\b","\\balu\\b","\\bcontrol unit\\b","von neumann","stored.?program","fetch.?decode.?execute",
+  "\\bram\\b","\\brom\\b","\\bcache\\b","memory hierarchy","virtual memory","\\boperating systems?\\b",
+  "\\bdeadlock\\b","\\bthrashing\\b","\\bfile systems?\\b","\\bip address\\b","\\btcp\\b","\\budp\\b",
+  "\\bosi\\b","\\bdns\\b","\\brouters?\\b","network topolog","client.?server","local area network","\\blan\\b",
+  "\\bwan\\b","\\bdatabases?\\b","\\bsql\\b","\\bdbms\\b","primary key","foreign key","entity.?relationship",
+  "\\b[123]nf\\b","normal form"
+].join("|"));
+/* The wider gate: CS_STRONG plus the softer cues that are safe once biology has already declined. */
+const CS = new RegExp([CS_STRONG.source,
+  "\\balgorithms?\\b","\\bbinary\\b","\\bbits?\\b","\\barrays?\\b","\\bstacks? and queues?\\b","\\bqueues?\\b",
+  "\\bpointers?\\b","\\brecursi(on|ve)\\b","\\biteration\\b","\\bwhile loop\\b","\\bfor loop\\b",
+  "control structures?","\\bsoftware\\b","\\bhardware\\b","\\bprogramming\\b","\\bcomputer\\b",
+  "\\bpackets?\\b","\\bprotocols? (stack|layer)\\b","\\bstorage device","\\binput device","\\boutput device",
+  "software development life ?cycle","\\bsdlc\\b","\\bdebugg?ing\\b","\\bvariables? and constants?\\b"
+].join("|"));
+
+/* One router for the whole subject: cue → the renderer that actually teaches that cue. */
+function csPick(t){
+  const C = i => EXEMPLARS[i];
+  // 1. logic gates & Boolean algebra → the gate schematic (the flagship computing renderer).
+  //    A truth-table-only or De Morgan question has no gates to draw, so it goes to the grid.
+  if(/\blogic gates?\b|\blogic circuit\b|\bboolean\b|\btruth table\b|de ?morgan|\band gate\b|\bor gate\b|\bnot gate\b|\bnand\b|\bnor gate\b|\bxor\b|\bxnor\b|\bexclusive.?or\b|\binverter\b|universal gate|half.?adder|full.?adder|\bripple carry\b|\bkarnaugh\b|\bk.?map\b|logic (expression|diagram|simplif)|gate (symbol|diagram)|combinational logic|\bsum of products\b|\bminterm/.test(t))
+    return /\btruth table\b|de ?morgan|\bk.?map\b|karnaugh|equivalen/.test(t) && !/\bgates?\b|circuit|adder|schematic/.test(t)
+      ? C(CS_EXEMPLAR.table) : C(CS_EXEMPLAR.logic);
+  // 2. comparison matrices → the grid (checked before the flow cues, because "compiler vs
+  //    interpreter" and "the OSI model vs TCP/IP" both also carry process vocabulary)
+  if(/\bram\b .{0,12}\brom\b|compiler .{0,12}interpreter|interpreter .{0,12}compiler|\btcp\b .{0,12}\budp\b|osi .{0,16}tcp|stack .{0,12}queue|array .{0,16}linked list|\bcompare\b .{0,40}(algorithm|memory|network|language|storage|structure)|difference(s)? between .{0,40}(ram|rom|compiler|interpreter|tcp|udp|stack|queue|lan|wan|analogue|digital|array|list)|\bk.?map\b|\bkarnaugh\b|character set|size units|adjacency matrix/.test(t))
+    return C(CS_EXEMPLAR.table);
+  // 3. base conversion, encoding and every other STEP problem → the worked solution, one line per
+  //    beat. This is the biggest single band of 100-level computing marks.
+  if(/\bconvert(ed|ing|s)?\b|\bdenary\b|\bhexadecimal\b|\bhex\b|\boctal\b|\bbinary (number|digit|form|arithmetic|addition|representation|equivalent)\b|\bbase ?(2|8|16)\b|place value|repeated division|remainders?|\bnibble\b|two'?s complement|one'?s complement|sign.?and.?magnitude|\boverflow\b|floating.?point|\bmantissa\b|\bexponent\b|\bascii\b|\bunicode\b|utf.?8|(8|16|32|64).?bit\b|\bbytes?\b|kilobyte|megabyte|gigabyte|\bkib\b|\bmib\b|subnet mask|\bip address\b|normalis(e|ed|ation)|\b[123]nf\b|normal form|work out .{0,20}\b(value|total|address)\b/.test(t))
+    return C(CS_EXEMPLAR.solve);
+  // 4. data structures (and the searching/sorting/complexity family that lives on them) → the tree.
+  //    This is the stand-in until the dedicated ds canvas ships.
+  if(/\bdata structures?\b|\barrays?\b|\blinked lists?\b|\bstacks?\b|\bqueues?\b|\blifo\b|\bfifo\b|enqueue|dequeue|\bpointers?\b|binary (search )?tree|\bbst\b|\bsubtree\b|traversal|in.?order|pre.?order|post.?order|adjacency (list|matrix)|hash (table|map|function)|\bleaf nodes?\b|\broot nodes?\b|zero.?based|off.?by.?one|\bbig.?o\b|o\(n( log n)?\)|linear search|binary search|bubble sort|selection sort|insertion sort|merge sort|quick ?sort|sorting algorithm|\brecursi(on|ve)\b|call stack|\bgraphs?\b .{0,24}(vertic|edges|directed)/.test(t))
+    return C(CS_EXEMPLAR.tree);
+  // 5. algorithms, processes and pipelines → the flow renderer used as a FLOWCHART
+  if(/\bflow ?chart\b|\bflow diagram\b|dry.?run|trace table|\bpseudo.?code\b|\balgorithm\b|\bdecision (box|symbol|diamond)\b|\bterminator\b|fetch.?decode.?execute|instruction cycle|software development life ?cycle|\bsdlc\b|compil(ation|ing) (pipeline|process)|\bpacket'?s journey\b|\bpackets?\b|\bprotocol\b|client.?server|\bosi\b|\bboot(ing|s)? (up|process|sequence)\b|\bwhile loop\b|\bfor loop\b|\biteration\b|control structures?|\bdebugg?ing\b|life ?cycle|\bprocess (scheduling|management)\b|handshak/.test(t))
+    return C(CS_EXEMPLAR.flow);
+  // 6. genuine taxonomies — types of software, storage, topology, data types, DBMS models → tree
+  if(/\btypes? of\b|\bkinds? of\b|categor|\bclassification\b|\bhierarch|consists? of|composed of|components? of|\bfamilies of\b|\bmodels? of\b/.test(t))
+    return C(CS_EXEMPLAR.tree);
+  /* A computing cue fired but nothing specific matched. Stay in-domain: a process flow is the
+     workhorse of the subject, and the flowchart shot is a better teacher than anything outside it.
+     THIS is the line that guarantees computing never borrows a foreign exemplar. */
+  return C(CS_EXEMPLAR.flow);
+}
+
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
+  /* ---- COMPUTER-STUDIES STRONG GATE — ahead of biology, which owns "translation" and "tissue". */
+  if(CS_STRONG.test(t)) return csPick(t);
+  /* ---- PHYSICS STRONG GATE — ahead of biology, which owns "\bcarrier" (charge carriers) and
+     "\bchannels?\b", and ahead of chemistry, which owns "decay", "electron" and "energy". Only the
+     unmistakable terms are here; the broader physics vocabulary waits its turn below. */
+  if(PHYS_HARD.test(t)) return phyPick(t);
   /* ---- BIOLOGY GATE — first refusal, before maths/physics/computing/chemistry (see note above). */
   if(BIO.test(t)){
     const B = i => EXEMPLARS[i];
@@ -1437,29 +1965,16 @@ function pickExemplar(text){
   const MATHS = /derivative|differentiat|integral|integrat|antiderivative|\blimit\b|\btangent\b|\bsecant\b|calculus|\bsine\b|\bcosine\b|\btangent ratio\b|\bsin\b|\bcos\b|\btan\b|radian|unit circle|trigonometr|\bvector\b|\bvectors\b|scalar|magnitude and direction|dot product|cross product|\bmatrix\b|matrices|determinant|\beigen|linear transformation|inequalit|absolute value|number line|\bsolve\b|solving|factoris|factoriz|\bfactor\b|quadratic|parabola|complete the square|completing the square|simultaneous equation|probabilit|permutation|combination|\bsequence\b|\bseries\b|arithmetic progression|geometric progression|sigma notation|logarithm|\blog\b|\bln\b|exponential (growth|decay|function)|\bfunction\b .{0,24}\bgraph\b|domain and range|asymptot|\bpi\b|theta|\baxis\b .{0,20}\bcurve\b/;
   const ABSBAR = /\|\s*[a-z0-9][^|]{0,14}\|/i;   // |x|, |x − 3|, |2x + 1| — absolute-value bars
   const isMaths = MATHS.test(t) || ABSBAR.test(text||"") || /∫|∑|√|θ|π|dy\/dx|d\/dx|f'\(x\)|f′\(x\)|≤|≥/.test(text||"");
-  /* ---- COMPUTER-STUDIES GATE, ahead of everything. A "logic circuit" contains the word "circuit"
-     and would otherwise be handed the DC-circuit exemplar; "truth table" contains "table"; a
-     flowchart is a list of steps and would fall through to a biology cascade; and "solve"/"factor"
-     in an algorithm question fires the maths gate. Computing gets first refusal on its own cues. ---- */
-  // logic gates & Boolean algebra → the gate schematic (the flagship computing renderer)
-  if(/\blogic gates?\b|\blogic circuit\b|\bboolean\b|\btruth table\b|de ?morgan|\band gate\b|\bor gate\b|\bnot gate\b|\bnand\b|\bnor gate\b|\bxor\b|\bxnor\b|\bexclusive.?or\b|\binverter\b|universal gate|half.?adder|full.?adder|\bripple carry\b|\bkarnaugh\b|\bk.?map\b|logic (expression|diagram|simplif)|gate (symbol|diagram)|combinational logic|\bsum of products\b|\bminterm/.test(t))
-    return /\btruth table\b|de ?morgan|\bk.?map\b|karnaugh|equivalen/.test(t) && !/\bgates?\b|circuit|adder|schematic/.test(t)
-      ? EXEMPLARS[23] : EXEMPLARS[22];
-  // flowcharts & dry-running → the flow renderer, used as a flowchart
-  if(/\bflow ?chart\b|\bflow diagram\b|dry.?run|trace table|\bpseudo.?code\b|\balgorithm\b .{0,40}(step|draw|diagram|chart|design)|\bdecision (box|symbol|diamond)\b|\bterminator\b|fetch.?decode.?execute|software development life ?cycle|\bsdlc\b|compilation (pipeline|process)|\bpacket'?s journey\b/.test(t))
-    return EXEMPLARS[24];
-  // comparison matrices → the grid
-  if(/\bram\b .{0,12}\brom\b|compiler .{0,12}interpreter|\btcp\b .{0,12}\budp\b|osi .{0,16}tcp|stack .{0,12}queue|\bcompare\b .{0,40}(algorithm|memory|network|language|storage)|difference(s)? between .{0,40}(ram|rom|compiler|interpreter|tcp|udp|stack|queue|lan|wan|analogue|digital)/.test(t))
-    return EXEMPLARS[23];
+  /* ---- COMPUTER-STUDIES GATE (the wide one), ahead of physics and the maths routing. See the
+     block comment above csPick for why computing needs its own gate rather than a cue list. ---- */
+  if(CS.test(t)) return csPick(t);
   /* ---- PHYSICS GATE, ahead of maths. "Resultant", "magnitude", "amplitude", "period" and even
-     "vector" all fire the maths regex, so a forces or circuits question would otherwise be handed a
-     maths exemplar. The two purpose-built physics renderers get first refusal on their own cues. ---- */
-  // forces on a body → the free-body diagram (the flagship)
-  if(/free.?body|\bfbd\b|\bnet force\b|forces? (on|acting on)|newton'?s (first|second|third) law|\bf ?= ?ma\b|third law|action.{0,3}reaction|\bnormal force\b|\bfriction(al)?\b|coefficient of (static|kinetic) friction|\btension\b .{0,24}(rope|string|cable)|\bincline\b|inclined plane|\bslope\b .{0,20}(block|mass)|\bequilibrium of forces\b|centripetal|centrifugal|circular motion|banked (curve|turn)|apparent weight|weightless|free fall|\bweight\b .{0,16}\bmass\b|impetus/.test(t))
-    return EXEMPLARS[20];
-  // DC circuits → the circuit schematic
-  if(/\bcircuit\b|\bresistors?\b|\bresistance\b|\bohm'?s law\b|\bcurrent\b .{0,30}(volt|resist|circuit|batter|amp)|\bvoltage\b|potential difference|\bemf\b|\bbatter(y|ies)\b|\bammeter\b|\bvoltmeter\b|kirchhoff|in series|in parallel|\bbulbs?\b|\blamps?\b .{0,20}(bright|circuit)|\bv ?= ?ir\b|internal resistance/.test(t))
-    return EXEMPLARS[21];
+     "vector" all fire the maths regex, so a forces, waves or circuits question would otherwise be
+     handed a maths exemplar. Once a physics cue fires we hand off to phyPick and ALWAYS return a
+     physics exemplar — motion and any quantity-vs-time to the graph, forces to the free-body
+     diagram, circuits to the schematic, waves and simple harmonic motion to the graph, vectors to
+     the arrow plane, and energy/momentum problems to the ledger or the worked solution. ---- */
+  if(PHYS.test(t)) return phyPick(t);
   /* ---- MATHS routing (cue → the right renderer) ---- */
   // sets / probability logic → the Venn diagram
   if(/venn|\bunion\b|intersection of|\bcomplement\b|mutually exclusive|\bsubset\b|set notation|(\bp\s*\(\s*a\s*(or|and|\|)\s*b\s*\))|probability of a (or|and|given)|conditional probability|\bgiven that\b|\bp\s*\(\s*a\s*\|\s*b\s*\)|neither .{0,20}\bnor\b|at least one of/.test(t))
@@ -2165,7 +2680,116 @@ export function punnettCheck(bp){
 
 /* Every layout the engine in app.html can actually draw. A blueprint naming anything else would
  * fall through to the scene renderer and blow up, so it is rejected here and at the response guard. */
-export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn","unitcircle","solve","vectors","matrix","fbd","circuit","logic","table","punnett"]);
+/* ---- CURLY-ARROW MECHANISM check. The anti-pattern guards from the Organic corpus are VALIDATION,
+   not style: tails are always electron-rich and heads electron-poor, so an arrow may never start on
+   a cation or an empty orbital; a tail must be TYPED, so an arrow can never quietly start on an atom
+   label when a bond was meant; radicals use fishhooks and nothing else does; and the charge ledger
+   must balance, because a mechanism that does not conserve charge is the "arrows can go anywhere"
+   habit made visible. ---- */
+const CURLY_PARTS = new Set(["rail","ledger"]);
+const CURLY_MODES = new Set(["stepwise","concerted","resonance","radical"]);
+const CURLY_FKINDS = new Set(["step","ts","intermediate","product","danger"]);
+const CURLY_SLOTS = new Set(["left","center","right"]);
+const CURLY_TAILS = new Set(["lone-pair","sigma","pi","anion","radical"]);
+const CURLY_HEADS = new Set(["atom","empty-orbital","bond"]);
+function chargeNum(c){ const s=String(c==null?"":c).replace(/−/g,"-").replace(/\s/g,"");
+  if(s===""||s==="0") return 0;
+  const m=/^([+-]?)(\d*)$/.exec(s); if(m) return (m[1]==="-"?-1:1)*(m[2]===""?1:parseInt(m[2],10));
+  const n=/^(\d*)([+-])$/.exec(s); if(n) return (n[2]==="-"?-1:1)*(n[1]===""?1:parseInt(n[1],10));
+  return null; }
+export function curlyCheck(bp){
+  const issues=[]; if(!bp||typeof bp!=="object") return {pass:false,issues:["not an object"]};
+  if(!bp.meta||!bp.meta.title) issues.push("missing meta.title");
+  const mode=bp.mode||"stepwise";
+  if(!CURLY_MODES.has(mode)) issues.push("mode must be one of: "+[...CURLY_MODES].join(", ")+" — say it out loud in step 1, it predicts the kinetics and whether an intermediate exists");
+  const frames=Array.isArray(bp.frames)?bp.frames:[];
+  if(frames.length<2) issues.push("need at least 2 frames — a mechanism is a sequence, and the consequence must be its own frame so the arrow is seen to CAUSE the bond change");
+  if(frames.length>6) issues.push("too many frames ("+frames.length+") — the step rail holds 6");
+  const id={}, owner={}, charges=[];
+  frames.forEach((f,i)=>{
+    const who="frame "+(f.id||("#"+(i+1)));
+    if(!f.id){ issues.push("frame "+(i+1)+" missing id"); return; }
+    if(CURLY_PARTS.has(f.id)) issues.push("frame id '"+f.id+"' collides with a fixed part name — rename it");
+    if(id[f.id]) issues.push("duplicate id '"+f.id+"'"); id[f.id]="frame";
+    if(!f.title) issues.push(who+" needs a VERB title (\"nucleophile attacks\"), never \"step "+(i+1)+"\"");
+    if(f.kind&&!CURLY_FKINDS.has(f.kind)) issues.push(who+" kind must be one of: "+[...CURLY_FKINDS].join(", "));
+    if(f.kind==="intermediate"&&!f.badge) issues.push(who+" is an intermediate with no badge — name it (\"carbocation\", \"tetrahedral intermediate\", \"arenium ion\"), because students do not notice intermediates exist unless they are named");
+    const cn=chargeNum(f.charge); charges.push(cn);
+    if(cn===null) issues.push(who+" charge \""+f.charge+"\" is not readable — use \"0\", \"−1\", \"+1\"");
+    const sp=Array.isArray(f.species)?f.species:[];
+    if(!sp.length) issues.push(who+" has no species — there is nothing on the board to draw an arrow on");
+    if(sp.length>3) issues.push(who+" has "+sp.length+" species — the board holds 3");
+    const local={};
+    sp.forEach((s,j)=>{ const w2=who+" species "+(s.id||("#"+(j+1)));
+      if(!s.id){ issues.push(w2+" missing id"); return; }
+      if(CURLY_PARTS.has(s.id)) issues.push("species id '"+s.id+"' collides with a fixed part name — rename it");
+      if(id[s.id]&&id[s.id]!=="species") issues.push("id '"+s.id+"' is used twice for different things");
+      id[s.id]="species"; owner[s.id]=f.id; local[s.id]=s;
+      if(!s.label) issues.push(w2+" needs a label — the structure as text (\"H₃C—Br\", \"HO⁻\")");
+      if(s.slot&&!CURLY_SLOTS.has(s.slot)) issues.push(w2+" slot must be left, center or right");
+      if(s.lp!=null&&(typeof s.lp!=="number"||s.lp<0||s.lp>4)) issues.push(w2+" lp must be 0–4 lone PAIRS"); });
+    const ar=Array.isArray(f.arrows)?f.arrows:[];
+    if(ar.length>3) issues.push(who+" has "+ar.length+" arrows — at most 3 per frame, or no one can follow them");
+    ar.forEach((a,j)=>{ const w2=who+" arrow "+(a.id||("#"+(j+1)));
+      if(!a.id){ issues.push(w2+" missing id"); return; }
+      if(CURLY_PARTS.has(a.id)) issues.push("arrow id '"+a.id+"' collides with a fixed part name — rename it");
+      if(id[a.id]&&id[a.id]!=="arrow") issues.push("id '"+a.id+"' is used twice for different things");
+      id[a.id]="arrow"; owner[a.id]=f.id;
+      if(!local[a.from]) issues.push(w2+" starts on '"+a.from+"', which is not a species in this frame");
+      if(!local[a.to]) issues.push(w2+" ends on '"+a.to+"', which is not a species in this frame");
+      if(!CURLY_TAILS.has(a.tail)) issues.push(w2+" needs a TYPED tail — one of: "+[...CURLY_TAILS].join(", ")+". An untyped tail is how an arrow quietly ends up starting on an atom label when a bond was meant");
+      if(!CURLY_HEADS.has(a.head)) issues.push(w2+" head must be one of: "+[...CURLY_HEADS].join(", "));
+      const k=a.kind||"pair";
+      if(k!=="pair"&&k!=="fishhook") issues.push(w2+" kind must be \"pair\" or \"fishhook\"");
+      if(mode==="radical"&&k!=="fishhook") issues.push(w2+" is in radical mode, so it must be a \"fishhook\" — a radical moves ONE electron, and using a double-barbed arrow out of habit is the exact mistake this mode exists to stop");
+      if(mode!=="radical"&&k==="fishhook") issues.push(w2+" is a fishhook but the mode is \""+mode+"\" — single-electron arrows belong to radical mechanisms only");
+      const from=local[a.from], to=local[a.to];
+      // tails are electron-RICH and heads electron-POOR; the typed tail is what stops an arrow
+      // quietly starting on a plus sign or on an empty orbital
+      if(a.tail==="anion"&&from&&!/-|−/.test(String(from.charge||"")))
+        issues.push(w2+" claims a negative-charge tail, but '"+a.from+"' carries no negative charge. A tail must be electron-rich — use \"lone-pair\", \"sigma\" or \"pi\", or put the charge on the species");
+      if(a.head==="empty-orbital"&&to&&!/\+/.test(String(to.charge||"")))
+        issues.push(w2+" points into an empty orbital, but '"+a.to+"' is not drawn as electron-poor. An empty p orbital belongs to a cation — give it a \"+\" or a \"δ+\"");
+      if(a.kind==="fishhook"&&a.tail!=="radical"&&a.tail!=="sigma"&&a.tail!=="pi")
+        issues.push(w2+" is a fishhook, so its tail must be a single unpaired electron (\"radical\") or one electron of a bond (\"sigma\"/\"pi\")");
+      if(a.tail==="pi"&&from&&!/=|≡|π/.test(String(from.label||""))&&!/aromat|benz|ring|arene/i.test(String(from.note||"")))
+        issues.push(w2+" claims a π-bond tail, but '"+a.from+"' has no double bond, triple bond or ring in its label — draw the π bond you are starting from");
+      if(!a.label) issues.push(w2+" needs a label naming the TAIL then the head (\"lone pair → the carbon\") — no unlabelled arrows, ever"); });
+  });
+  // charge is conserved — that is what lets a student check their own arrows
+  const known=charges.filter(c=>c!=null);
+  if(known.length>1&&known.some(c=>c!==known[0]))
+    issues.push("the charge ledger does not balance ("+known.join(" → ")+"). Total charge is conserved across every step of a mechanism; if it changes, an arrow is wrong or a counter-ion is missing");
+  // concerted mechanisms have no intermediate, by definition
+  if(mode==="concerted"&&frames.some(f=>f.kind==="intermediate"))
+    issues.push("mode is \"concerted\" but a frame is kind \"intermediate\" — concerted means ONE step and ONE transition state, with no intermediate at all. Use kind \"ts\", or switch the mode to \"stepwise\"");
+  if(mode==="stepwise"&&frames.length>2&&!frames.some(f=>f.kind==="intermediate"))
+    issues.push("mode is \"stepwise\" but no frame is kind \"intermediate\" — the whole point of stepwise is that a real species forms in the middle; give it its own frame and a badge");
+  const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
+  if(steps.length<4) issues.push("too few steps ("+steps.length+", need ≥4) — the tail, the arrow and the consequence are three separate beats");
+  if(steps.length>10) issues.push("too many steps ("+steps.length+")");
+  const ok=r=>!!id[r]||CURLY_PARTS.has(r), seen=new Set(); let arrowSeen=false;
+  steps.forEach((s,i)=>{
+    if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
+    if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
+    (s.reveal||[]).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a frame, species or arrow id, or "+[...CURLY_PARTS].join(", ")+")"); else { seen.add(r); if(id[r]==="arrow")arrowSeen=true; } });
+    (s.active||[]).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" activates unknown id '"+r+"'"); });
+    if(s.point&&!ok(s.point)) issues.push("step "+(i+1)+" points at unknown id '"+s.point+"'"); });
+  frames.forEach(f=>{ if(f.id&&!seen.has(f.id)) issues.push("frame '"+f.id+"' is never revealed by any step"); });
+  frames.forEach(f=>(Array.isArray(f.arrows)?f.arrows:[]).forEach(a=>{
+    if(a.id&&!seen.has(a.id)) issues.push("arrow '"+a.id+"' is never revealed — an arrow that never fires teaches nothing"); }));
+  if(!arrowSeen) issues.push("no arrow is ever revealed — a curly-arrow mechanism with no arrows is just a list of structures");
+  // a frame's arrows must not be revealed before the frame they live on
+  const at={}; steps.forEach((s,i)=>(s.reveal||[]).forEach(r=>{ if(at[r]==null)at[r]=i; }));
+  frames.forEach(f=>(Array.isArray(f.arrows)?f.arrows:[]).forEach(a=>{
+    if(at[a.id]!=null&&at[f.id]!=null&&at[a.id]<at[f.id]) issues.push("arrow '"+a.id+"' is revealed before its frame '"+f.id+"'"); }));
+  // concerted: every arrow on a frame fires in ONE beat, because that IS the claim being made
+  if(mode==="concerted") frames.forEach(f=>{ const ar=Array.isArray(f.arrows)?f.arrows:[];
+    if(ar.length>1){ const ts=ar.map(a=>at[a.id]).filter(x=>x!=null);
+      if(ts.length>1&&ts.some(x=>x!==ts[0])) issues.push("mode is \"concerted\", so the arrows on frame '"+f.id+"' must ALL be revealed in the SAME step — showing them one at a time says stepwise, which is the opposite of what you are teaching"); } });
+  return { pass: issues.length===0, issues };
+}
+export const LAYOUTS = new Set(["scene","tree","flow","cell","graph","orbital","geometry","ice","venn","unitcircle","solve","vectors","matrix","fbd","circuit","logic","table","punnett","curly"]);
 
 /* QC critic — deterministic, manifest-enforced. Delegates to each layout's own check. */
 export function qcCheck(bp){
@@ -2188,6 +2812,7 @@ export function qcCheck(bp){
   if(bp && bp.layout==="logic") return logicCheck(bp);
   if(bp && bp.layout==="table") return tableCheck(bp);
   if(bp && bp.layout==="punnett") return punnettCheck(bp);
+  if(bp && bp.layout==="curly") return curlyCheck(bp);
   const issues = [];
   if(!bp || typeof bp!=="object") return { pass:false, issues:["not an object"] };
   if(!bp.meta || !bp.meta.title) issues.push("missing meta.title");
@@ -2244,6 +2869,10 @@ export function chainOf(bp){
       .concat((bp.cells||[]).map(c=>c.geno||c.id))
       .concat((bp.traits||[]).map(t=>t.label||t.key))
       .concat([bp.ratio||""]).filter(Boolean); }
+  if(bp && bp.layout==="curly") return [(bp.mode||"stepwise")+" mechanism", bp.reaction||""]
+    .concat((bp.frames||[]).map(f=>(f.title||f.id)+(f.badge?"  ["+f.badge+"]":"")+"  · charge "+(f.charge||"0")))
+    .concat((bp.frames||[]).flatMap(f=>(f.arrows||[]).map(a=>"arrow: "+(a.label||a.id)+"  (tail = "+(a.tail||"?")+")")))
+    .filter(Boolean);
   if(bp && bp.layout==="unitcircle") return ["unit circle (r = 1)","angle θ = "+(bp.angle==null?50:bp.angle)+"°","cos θ = x","sin θ = y","cos²θ + sin²θ = 1"];
   if(bp && bp.layout==="solve") return (bp.lines||[]).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
     .concat(bp.numberline?["solution set: x "+(bp.numberline.op||"≥")+" "+bp.numberline.value]:[]);

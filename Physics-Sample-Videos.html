@@ -1,0 +1,545 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MedBank · Visualize — Physics samples</title>
+<style>
+  :root{--line:#e7e3f2}*{box-sizing:border-box}
+  body{margin:0;background:#eae9f7;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:18px;color:#241d3a}
+  .panel{max-width:900px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(30,20,60,.25);overflow:hidden}
+  .hd{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .hd b{font-size:15px}.hd .q{margin-left:auto;font-size:11px;font-weight:800;color:#0d7a68;background:#e6f7f4;border-radius:999px;padding:3px 9px}
+  .tabs{display:flex;gap:6px;padding:12px 16px 0;flex-wrap:wrap}
+  .tabs button{border:1px solid var(--line);background:#faf9fd;border-radius:10px;padding:8px 10px;font-weight:800;font-size:12px;cursor:pointer;color:#4b4560}
+  .tabs button.on{background:#4b2c91;color:#fff;border-color:transparent}
+  .body{padding:14px 16px}
+  .src{background:#f7f5fc;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12.5px;color:#4b4560;line-height:1.5;margin-bottom:10px}
+  .rail{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:10px}
+  .rail .rc{font-size:10px;font-weight:800;color:#5c5570;background:#f1eef8;border:1px solid var(--line);border-radius:999px;padding:3px 8px;cursor:pointer}
+  .rail .rc.on{background:#4b2c91;color:#fff;border-color:transparent}.rail .rs{color:#c9bfe0;font-weight:800;font-size:10px}
+  .leg{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 8px;font-size:10.5px;color:#5c5570;font-weight:700}
+  .leg span{display:inline-flex;align-items:center;gap:4px}.leg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .stage{position:relative;border:1px solid var(--line);border-radius:12px;overflow:auto;background:#fffdf6;max-height:58vh}
+  .stage svg{display:block;width:100%;height:auto}
+  .cur{position:absolute;width:24px;height:24px;z-index:6;pointer-events:none;transition:left .9s cubic-bezier(.45,0,.25,1),top .9s cubic-bezier(.45,0,.25,1);filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+  .cap{min-height:56px;background:#141026;color:#fff;font-size:14px;line-height:1.45;padding:11px 14px;font-weight:600;border-radius:0 0 10px 10px;margin-top:2px}
+  .cap .lab{color:#a5f3e4;font-weight:800;font-size:10.5px;letter-spacing:.5px;display:block;margin-bottom:2px}.cap b{color:#c9b8f5}
+  .ctrl{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .ctrl button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer}
+  .ctrl button.pl{background:#4b2c91;color:#fff;border-color:transparent;min-width:92px}
+  .ctrl select{border:1px solid var(--line);border-radius:9px;padding:7px 8px;font-weight:700;font-size:12.5px;background:#fff}
+  .note{max-width:900px;margin:12px auto 0;color:#5b5470;font-size:12.5px;text-align:center;line-height:1.55}
+  .vzglow{filter:drop-shadow(0 0 6px rgba(124,58,237,.95))}
+  .vzdim{opacity:.4}.vzpop{animation:vzpop .45s cubic-bezier(.3,1.4,.5,1)}@keyframes vzpop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+  .vzflow{stroke-dasharray:9 6;animation:vzmarch 1s linear infinite}@keyframes vzmarch{to{stroke-dashoffset:-30}}
+</style></head>
+<body>
+<div class="panel">
+  <div class="hd"><b>🎬 Visualize</b><span class="q">Physics demo — 100 level</span></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="body">
+    <div class="src" id="src"></div>
+    <div class="rail" id="rail"></div>
+    <div class="leg" id="leg"></div>
+    <div class="stage" id="stage"><div id="cvs" style="position:relative"><div id="svg"></div>
+      <div class="cur" id="cur"><svg viewBox="0 0 24 24"><path d="M5 2 L5 20 L10 15 L13 21.5 L15.6 20.4 L12.6 14 L19 14 Z" fill="#1c1830" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/></svg></div>
+    </div></div>
+    <div class="cap" id="cap"></div>
+    <div class="ctrl">
+      <button class="pl" id="play">▶ Play</button><button id="prev">← Prev</button><button id="next">Next →</button><button id="restart">↺</button>
+      <select id="speed"><option value="0.8">0.8×</option><option value="0.95" selected>0.95×</option><option value="1.1">1.1×</option></select>
+      <label style="font-size:12px;color:#5c5570">Voice <select id="voice"><option value="">Default</option></select></label>
+    </div>
+  </div>
+</div>
+<div class="note">The MedBank Visualize engine on real 100-level Physics — the same renderers the app ships. The two purpose-built physics views: the <b>free-body diagram</b> (the body lifts out of the scene, every arrow names its agent, the axes rotate and the weight splits) and the <b>DC-circuit schematic</b> (conserved charge tokens plus the <b>voltage ladder</b>, so the charge comes back but the energy does not). Alongside them the <b>graph engine</b> on motion, oscillation and the heating curve, the reused <b>vectors plane</b>, an energy <b>ledger</b> and a collision <b>worked line by line</b>. Press ▶ Play (volume up).</div>
+<script>
+
+var VIDEOS={"motion":{"meta":{"title":"A velocity–time graph — slope is acceleration, area is distance","subject":"Physics","concept_id":"vt_graph_slope_and_area"},"layout":"graph","x":{"min":0,"max":19,"label":"time (seconds)"},"y":{"min":0,"max":25,"label":"velocity (metres per second)"},"curves":[{"id":"v","color":"#7c3aed","label":"v–t","points":[[0,0],[2,5],[4,10],[6,15],[8,20],[10,20],[12,20],[14,20],[16,10],[18,0]]}],"markers":[{"id":"rise","at":[4,10],"label":"climbing: slope = +2.5 m/s²","color":"#dc2626"},{"id":"flat","at":[9,20],"label":"FLAT ≠ stopped — steady 20 m/s","color":"#2563eb"},{"id":"fall","at":[16,10],"label":"slope = −5 m/s²","color":"#b45309"},{"id":"stop","at":[18,0],"label":"at rest","color":"#0d9488","drop":true}],"regions":[{"id":"slope","type":"bracket","at":8,"y0":0,"y1":20,"label":"rise 20 m/s / run 8 s","color":"#dc2626"},{"id":"area","type":"band","x0":0,"x1":18,"label":"area = distance travelled = 280 m","color":"#0d9488"}],"narration_steps":[{"short":"Read the axes","term":"velocity–time","narration_text":"Before a single number, read the axes out loud: time across the bottom, velocity up the side. So every height on this curve is a speed, and nothing on this picture is a distance yet.","reveal":["v"],"active":["v"],"point":"rise","def":"On a velocity–time graph the height is the velocity at that instant — not where the object is."},{"short":"The climb","term":"acceleration","narration_text":"For the first eight seconds the line climbs. Climbing means the velocity is growing, so the car is speeding up — and how steeply it climbs is how quickly it gains speed.","reveal":["rise"],"active":["rise"],"point":"rise"},{"short":"Slope, not height","term":"slope","narration_text":"Here is the number-one mistake in this topic. Asked for the acceleration at four seconds, most students read the height and write ten. But acceleration is the SLOPE: twenty metres per second gained over eight seconds — two point five.","reveal":["slope"],"active":["slope"],"point":"rise","quiz":{"q":"At t = 4 s the curve is at a height of 10. What is the acceleration there?","options":["2.5 m/s² — the slope, not the height","10 m/s² — read straight off the graph","0, because the car has not stopped"],"answer":0,"why":"Height is velocity; slope is acceleration. They are different questions asked of the same point."}},{"short":"The flat part","term":"constant velocity","narration_text":"Then the line goes flat. Flat does not mean stopped — the car is still doing twenty metres per second. Flat means the velocity is not CHANGING, so the acceleration here is zero even though the car is moving quickly.","reveal":["flat"],"active":["flat"],"point":"flat","def":"A horizontal line on a velocity–time graph means constant velocity: zero acceleration, not zero speed."},{"short":"Not a picture","term":"graph-as-picture","narration_text":"And watch this trap. That flat top is not a hilltop and the climb is not a hill — the road is perfectly level the whole time. A graph is a plot of a quantity, never a photograph of the journey.","reveal":["flat"],"active":["flat"],"point":"flat"},{"short":"Braking","term":"negative acceleration","narration_text":"Now the line falls: the slope is negative five metres per second squared. Say negative acceleration, not deceleration — the minus sign tells you the change is backwards, while the car itself is still travelling forwards the entire time.","reveal":["fall"],"active":["fall"],"point":"fall"},{"short":"Zero at last","term":"at rest","narration_text":"Only where the curve touches the time axis is the car actually at rest. Notice how late that is compared with where students usually point — the braking took four full seconds.","reveal":["stop"],"active":["stop"],"point":"stop"},{"short":"The area","term":"area under the curve","narration_text":"Finally, the piece everybody forgets. Velocity times time is a distance, so the AREA under the graph is how far the car went: eighty, plus one hundred and twenty, plus forty — two hundred and eighty metres.","reveal":["area"],"active":["area"],"point":"flat","def":"Area under a velocity–time graph = displacement, because height (m/s) × width (s) leaves metres.","quiz":{"q":"What does the area under a velocity–time graph give you?","options":["The distance travelled","The acceleration","The average speed"],"answer":0,"why":"Multiplying a velocity by a time gives a distance — that is exactly what an area on these axes is."}},{"short":"Recap","term":"recap","narration_text":"Recap, and these are three different questions about the same curve. Height is the velocity, slope is the acceleration, area is the distance. Ask which one the question wants before you touch the graph.","reveal":["v","area"],"active":["area"],"point":"flat"}],"recap":["Height = velocity · slope = acceleration · area = distance. Three questions, one curve.","A flat line means steady speed, not a stopped object.","The graph is a plot of a quantity, never a picture of the road."],"src":"A car starts from rest, speeds up steadily to 20 m/s in 8 s, holds that speed for 6 s, then brakes to rest in 4 s. Sketch the velocity–time graph and explain what its slope and the area beneath it tell you."},"fbd":{"meta":{"title":"Forces on a block on a 28° incline","subject":"Physics","concept_id":"fbd_block_on_incline"},"layout":"fbd","incline":28,"body":{"label":"4 kg block","mass":"m = 4 kg"},"scene_note":"released from rest — it slides down the slope","forces":[{"id":"w","label":"Weight  mg = 39 N","agent":"by the Earth","dir":270,"mag":1,"kind":"weight"},{"id":"n","label":"Normal  N = 35 N","agent":"by the surface","dir":62,"mag":0.85,"kind":"normal"},{"id":"f","label":"Friction  f = 7 N","agent":"by the surface","dir":152,"mag":0.35,"kind":"friction"}],"components":[{"dir":242,"mag":0.85,"label":"mg cos θ = 35 N"},{"dir":332,"mag":0.5,"label":"mg sin θ = 18 N"}],"net":{"dir":332,"mag":0.32,"label":"F_net = 11 N down the slope"},"accel":{"dir":332,"label":"a = 2.8 m/s² down the slope"},"danger":{"dir":332,"label":"there is no “force of motion”"},"friction_gauge":{"fs":7,"fsmax":12,"label":"f = 7 N"},"narration_steps":[{"short":"Isolate","term":"the system","narration_text":"Before any equation, lift the block out of the picture. Everything else — the slope, the ground, the room — goes away, and we ask one question: what is touching this block, and what is pulling on it from a distance?","reveal":["body"],"active":["body"],"point":"body","def":"A free-body diagram shows one chosen object and only the forces acting ON it.","quiz":{"q":"Why do we remove the slope from the diagram?","options":["Because we only draw forces ON the block, and the slope is a different object","Because the slope has no mass","Because the block is heavier than the slope"],"answer":0,"why":"Anything the slope experiences belongs on the slope's diagram, not the block's."}},{"short":"Weight","term":"weight","narration_text":"The Earth pulls the block straight down with thirty-nine newtons. Notice the direction: straight down, not into the slope. Gravity has never heard of the slope.","reveal":["w"],"active":["w"],"point":"w","def":"Weight is the pull of the Earth on the mass — always vertically downward, whatever the surface is doing."},{"short":"Normal","term":"the normal force","narration_text":"The surface pushes back, perpendicular to itself — that is what “normal” means here. And this is the trap: it is thirty-five newtons, not thirty-nine, because it only has to balance the part of the weight pressing into the slope.","reveal":["n"],"active":["n"],"point":"n","quiz":{"q":"On a slope, is the normal force equal to the weight?","options":["No — it only balances the part of the weight perpendicular to the surface","Yes, they are always an action–reaction pair","Yes, both equal mg"],"answer":0,"why":"N equals mg only on the flat. Tilt the surface and N falls to mg cos θ."}},{"short":"Friction","term":"friction","narration_text":"The surface also grips, along its own face, seven newtons up the slope — opposing the sliding, not the block. Name the agent out loud each time: the surface pushes, the Earth pulls.","reveal":["f"],"active":["f"],"point":"f","def":"Friction acts along the contact surface and opposes relative sliding, not motion in general."},{"short":"Resolve","term":"resolving","narration_text":"Now turn the axes to lie along the slope, and watch the weight split into two: thirty-five newtons pressing into the surface, and eighteen newtons dragging down the slope. Nothing new has been added — the same one arrow, measured two ways.","reveal":["axes","comp"],"active":["comp"],"point":"comp","def":"Resolving replaces one arrow with two perpendicular ones that add back to it exactly."},{"short":"Net force","term":"the net force","narration_text":"Along the slope, eighteen newtons down and seven newtons up leaves eleven newtons down the slope. That is the NET force — never call it just “the force”, because no single arrow on this diagram is eleven newtons.","reveal":["net"],"active":["net"],"point":"net","quiz":{"q":"Which arrow on the diagram is the net force?","options":["None of them — it is what is left after the arrows are added","The weight","The biggest one"],"answer":0,"why":"The net force is the sum of every arrow, so it usually matches none of them."}},{"short":"Acceleration","term":"F = ma","narration_text":"Eleven newtons on four kilograms gives two point eight metres per second squared, down the slope. It is drawn over here, dashed and in a different colour, because acceleration is a RESULT of the forces — never one of them, and never added to them.","reveal":["accel"],"active":["accel"],"point":"accel","def":"F_net = ma: the arrows cause the acceleration; the acceleration is not itself an arrow on the body."},{"short":"The trap","term":"impetus","narration_text":"You might think a moving block needs a forward push to keep it going. Watch — that arrow has no agent. Nothing is touching the block in that direction, so it does not exist. And notice the friction sits below its cap, because static friction is only ever as big as it needs to be.","reveal":["danger","gauge"],"active":["danger"],"point":"danger","quiz":{"q":"What kills the phantom “force of motion” arrow?","options":["No object exerts it — you cannot name the agent","It is too small to matter","It cancels the normal force"],"answer":0,"why":"Every real force is a push or pull BY something. If you cannot name that something, there is no arrow."}},{"short":"Recap","term":"recap","narration_text":"Recap: isolate the body, draw one arrow per agent, turn the axes to the slope, split the weight, add them up, and let the net force give the acceleration — which is never an arrow on the body.","reveal":["net","accel"],"active":["net"],"point":"net"}],"recap":["Every arrow names the object exerting it — no agent, no force.","On a slope the normal force is mg cos θ, NOT the weight.","Acceleration is the result of the net force, never a force itself."],"src":"A 4 kg block is released on a rough slope inclined at 28°. Draw the free-body diagram and find its acceleration."},"vectors":{"meta":{"title":"Adding two velocities — why 4 and 3 make 5","subject":"Physics","concept_id":"vector_addition_resultant_boat"},"layout":"vectors","a":[4,0],"b":[0,3],"narration_steps":[{"short":"The first vector","term":"vector","narration_text":"The engine drives the boat east at four metres per second. Draw it as an arrow: its length is the speed and the way it points is the direction. Both halves matter — that is what makes it a vector rather than just a number.","reveal":["a"],"active":["a"],"point":"a","def":"A vector has a size AND a direction; a scalar, like mass or temperature, has only a size."},{"short":"The second","term":"the current","narration_text":"Meanwhile the river carries the whole boat north at three metres per second, whatever the engine is doing. The water does not care which way the boat is pointed.","reveal":["b"],"active":["b"],"point":"b"},{"short":"Read them off","term":"components","narration_text":"Because they are at right angles, each one is already a component: four across, three up. Notice you can read those straight off the picture instead of hunting for a sine or a cosine.","reveal":["comp"],"active":["comp"],"point":"comp"},{"short":"Slide it","term":"tip to tail","narration_text":"Now slide the current arrow so its tail sits on the tip of the engine arrow. Sliding an arrow changes nothing at all, because a vector is only a size and a direction — it has no home.","reveal":["shift"],"active":["shift"],"point":"shift","quiz":{"q":"Why are you allowed to slide the second arrow across the page?","options":["A vector is defined only by size and direction, not by position","Because the two are at right angles","Because the boat physically moves there first"],"answer":0,"why":"Position is not part of a vector, so moving one without turning or resizing it leaves it the same vector."}},{"short":"The resultant","term":"resultant","narration_text":"Join the very start to the very end and that single arrow is the resultant — the one velocity that would do the job of both. It is five metres per second, by Pythagoras, at about thirty-seven degrees north of east.","reveal":["res"],"active":["res"],"point":"res","def":"The resultant is the single vector that has the same effect as all the others combined."},{"short":"The trap","term":"scalar habit","narration_text":"So four plus three does not make seven here. Seven would only be right if both pushes pointed the same way — and if they pointed in opposite directions you would get one. Direction is doing the arithmetic with you.","reveal":["res"],"active":["res"],"point":"res"},{"short":"Recap","term":"recap","narration_text":"Recap. Draw each vector to scale, slide the second to the tip of the first, and join start to finish. Always quote a resultant with its direction — five metres per second on its own is only half an answer.","reveal":["a","shift","res"],"active":["res"],"point":"res"}],"recap":["Sliding a vector changes nothing — only length and direction define it.","Perpendicular vectors combine by Pythagoras, never by simple addition.","Always state the direction with the magnitude."],"src":"A boat's engine drives it east at 4 m/s while the river current carries it north at 3 m/s. Find the boat's resultant velocity, and explain why 4 and 3 do not make 7."},"energy":{"meta":{"title":"Energy accounting — nothing is used up","subject":"Physics","concept_id":"energy_conservation_ramp_friction"},"layout":"flow","nodes":[{"id":"pick","label":"Pick TWO states","note":"top, at rest → bottom","kind":"trigger"},{"id":"zero","label":"Choose where PE = 0","note":"the floor — it's a choice","kind":"process"},{"id":"pe","label":"PE at the top = 29.4 J","note":"mgh = 2 × 9.8 × 1.5","kind":"process"},{"id":"ke","label":"KE at the bottom = 16 J","note":"½mv² = ½ × 2 × 4²","kind":"product"},{"id":"gap","label":"13.4 J unaccounted for","note":"“the energy was used up”","kind":"danger"},{"id":"fric","label":"Friction did −13.4 J of work","note":"opposing the motion","kind":"process"},{"id":"heat","label":"13.4 J → thermal energy","note":"ramp and wheels warm up","kind":"product"},{"id":"law","label":"Total energy: 29.4 J in, 29.4 J out","note":"mechanical energy alone is not conserved","kind":"outcome"}],"narration_steps":[{"short":"Two states","term":"the states","narration_text":"Energy questions are bookkeeping, so start like an accountant: pick two moments and only two. Here, the instant of release at the top, and the instant it reaches the bottom.","reveal":["pick"],"active":["pick"],"point":"pick","def":"An energy calculation compares two chosen instants — it never tracks what happens in between."},{"short":"Set the zero","term":"the zero of PE","narration_text":"Next, decide where potential energy counts as zero. The floor is convenient, but it is genuinely a choice — only the CHANGE in height ever appears in an answer.","reveal":["zero"],"active":["zero"],"point":"zero"},{"short":"Top of the ramp","term":"gravitational PE","narration_text":"At the top the trolley is still, so its only energy is positional: m g h, which is two times nine point eight times one point five — twenty-nine point four joules. That is the entire opening balance.","reveal":["pe"],"active":["pe"],"point":"pe"},{"short":"Bottom of the ramp","term":"kinetic energy","narration_text":"At the bottom the height is gone and the speed is four metres per second, so we have one half m v squared: sixteen joules. And notice the v is squared — double the speed and you quadruple the energy.","reveal":["ke"],"active":["ke"],"point":"ke"},{"short":"The gap","term":"the missing joules","narration_text":"Twenty-nine point four went in, sixteen came out. Thirteen point four joules are missing — and the tempting answer, that the energy was used up moving the trolley, is exactly wrong.","reveal":["gap"],"active":["gap"],"point":"gap","quiz":{"q":"What does 'energy was used up' actually mean?","options":["Nothing — energy only moves between accounts, it is never spent","It was converted into force","It was destroyed by friction"],"answer":0,"why":"Energy is conserved absolutely. 'Used up' always means 'moved somewhere you were not counting' — usually thermal energy."}},{"short":"The culprit","term":"non-conservative force","narration_text":"Friction acted backwards along the ramp the whole way down, so it did negative work: thirteen point four joules of it. Negative work simply means the force was taking energy out rather than putting it in.","reveal":["fric"],"active":["fric"],"point":"fric","def":"Work is negative when the force opposes the displacement — the force removes energy from the moving object."},{"short":"Where it went","term":"thermal energy","narration_text":"Those joules are still here, as warmth in the ramp, in the axles and in the air. Run a hand along a slide after someone comes down it — that heat is the missing line in the ledger.","reveal":["heat"],"active":["heat"],"point":"heat"},{"short":"The payoff","term":"conservation of energy","narration_text":"So the books balance: sixteen joules of motion plus thirteen point four of thermal energy is twenty-nine point four. Total energy is always conserved; MECHANICAL energy is conserved only when friction is absent.","reveal":["law"],"active":["law"],"point":"law"},{"short":"Recap","term":"recap","narration_text":"Recap. Two states, a chosen zero, list every account at each end, then find the gap and name where it went. If your energies do not balance you have not lost energy — you have missed a column.","reveal":["pick","law"],"active":["law"],"point":"law"}],"recap":["Energy is never used up — 'missing' energy has always moved to an account you forgot.","Mechanical energy is conserved only when no friction acts; total energy always is.","Pick two states and a zero for PE before writing anything down."],"src":"A 2 kg trolley is released from rest at the top of a ramp 1.5 m high and reaches the bottom at 4 m/s. Account for all the energy and explain where the missing joules went."},"momentum":{"meta":{"title":"An inelastic collision — momentum kept, kinetic energy not","subject":"Physics","concept_id":"inelastic_collision_momentum_ke"},"layout":"solve","problem":"1200 kg at 15 m/s east strikes a stationary 800 kg van; they lock together. Find v, and the kinetic energy lost.","lines":[{"id":"l1","math":"p_before = (1200)(15) + (800)(0) = 18 000 kg·m/s east","why":"include EVERY object, and write the direction down"},{"id":"l2","math":"p_after = (1200 + 800) v = 2000 v","why":"they lock together, so one combined mass"},{"id":"l3","math":"2000 v = 18 000","why":"no external horizontal force → momentum is conserved"},{"id":"l4","math":"v = 9 m/s east","why":"divide by the total mass; the direction is unchanged"},{"id":"l5","math":"KE_before = ½(1200)(15²) = 135 000 J","why":"now audit the energy separately"},{"id":"l6","math":"KE_after = ½(2000)(9²) = 81 000 J","why":"one mass, one speed, after the collision"},{"id":"l7","math":"ΔKE = 81 000 − 135 000 = −54 000 J","why":"54 kJ became heat, sound and crumpled metal"}],"narration_steps":[{"short":"Before","term":"momentum","narration_text":"Momentum is mass times velocity, so start by adding up every object before the crash: twelve hundred kilograms at fifteen metres per second, plus a van doing nothing at all. Eighteen thousand kilogram-metres per second, east.","reveal":["l1"],"active":["l1"],"point":"l1","def":"Momentum is a vector: the direction is part of the quantity, not a label added afterwards."},{"short":"After","term":"perfectly inelastic","narration_text":"They lock together, so afterwards there is one object of two thousand kilograms moving at some unknown v. Sticking together is what makes this collision perfectly inelastic.","reveal":["l2"],"active":["l2"],"point":"l2"},{"short":"Why equal","term":"conservation of momentum","narration_text":"Now the physics. During the crash the two push on each other with equal and opposite forces, so whatever one gains the other loses. With no outside push along the road, the total momentum cannot change.","reveal":["l3"],"active":["l3"],"point":"l3","def":"Momentum is conserved whenever the external forces on the chosen system add to zero."},{"short":"Solve","term":"the common velocity","narration_text":"Divide eighteen thousand by two thousand and you get nine metres per second — and it is still heading east. A velocity written without its direction is only half an answer.","reveal":["l4"],"active":["l4"],"point":"l4"},{"short":"Now the energy","term":"kinetic energy","narration_text":"Momentum is settled, so audit the energy as a completely separate question. Before the crash: one half times twelve hundred times fifteen squared — one hundred and thirty-five thousand joules.","reveal":["l5"],"active":["l5"],"point":"l5"},{"short":"After the crash","term":"the audit","narration_text":"Afterwards: one half times two thousand times nine squared — eighty-one thousand joules. The mass went up but the speed went down, and because speed is squared, the speed wins.","reveal":["l6"],"active":["l6"],"point":"l6"},{"short":"The loss","term":"inelastic","narration_text":"Fifty-four thousand joules have gone. Not destroyed — spent on bending metal, on heating the wreck, on the noise you heard. That is precisely what inelastic means.","reveal":["l7"],"active":["l7"],"point":"l7","quiz":{"q":"Which quantity is conserved in EVERY collision?","options":["Momentum — kinetic energy only in an elastic one","Both, always","Kinetic energy — momentum only if they stick"],"answer":0,"why":"Momentum is conserved whenever no external force acts. Kinetic energy survives only in an elastic collision."}},{"short":"Recap","term":"recap","narration_text":"Recap. Momentum before equals momentum after, direction included, in every collision. Kinetic energy survives only if the collision is elastic — and when it does not survive, name where it went.","reveal":["l4","l7"],"active":["l7"],"point":"l7"}],"recap":["Momentum is conserved in every collision; kinetic energy only in elastic ones.","Carry the direction through every line — momentum is a vector.","'Lost' kinetic energy becomes heat, sound and deformation."],"src":"A 1200 kg car travelling east at 15 m/s runs into the back of an 800 kg stationary van and the two lock together. Find their common velocity and how much kinetic energy is lost."},"circuit":{"meta":{"title":"A series circuit — the current is the same everywhere","subject":"Physics","concept_id":"series_current_conserved"},"layout":"circuit","battery":{"label":"6 V battery"},"current":{"direction":"cw","label":"I = 0.5 A — identical at every point in the loop"},"components":[{"id":"r1","type":"resistor","side":"top","label":"R₁ = 8 Ω"},{"id":"b1","type":"bulb","side":"right","label":"lamp, 4 Ω","brightness":0.9},{"id":"a1","type":"ammeter","side":"bottom","label":"A reads 0.5 A"},{"id":"sw","type":"switch","side":"bottom","label":"switch (closed)","open":false},{"id":"v1","type":"voltmeter","across":"r1","label":"V reads 4 V"}],"ladder":[{"v":6,"label":"+6 V battery"},{"v":-4,"label":"−4 V  R₁"},{"v":-2,"label":"−2 V  lamp"}],"note":"the charge comes back with the same charge, but less energy","narration_steps":[{"short":"The loop","term":"a complete circuit","narration_text":"A circuit has to be a closed loop, because charge has nowhere else to go. The battery does not make charge — the charge is already in the wire; the battery pushes it round.","reveal":["loop","battery"],"active":["battery"],"point":"battery","def":"The battery supplies energy per unit charge — that is what its voltage, in volts, means."},{"short":"Components","term":"in series","narration_text":"Everything sits on one single path: an eight ohm resistor, a lamp, a switch and an ammeter. One path means there is nowhere for the charge to divide.","reveal":["r1","b1","sw","a1"],"active":["r1"],"point":"r1","def":"In series there is exactly one route round the loop, so every component carries the same current."},{"short":"Same everywhere","term":"conservation of charge","narration_text":"Watch the charges move. Count them past the resistor, past the lamp, past the ammeter — nought point five amps at every point. The same number arrives back at the battery as left it.","reveal":["current"],"active":["current"],"point":"current","quiz":{"q":"Is the current smaller after the lamp than before it?","options":["No — it is identical, because charge cannot pile up or vanish","Yes, the lamp uses some of it up","Yes, half of it is converted to light"],"answer":0,"why":"Charge is conserved. What the lamp takes is energy, not charge."}},{"short":"Energy, not charge","term":"potential difference","narration_text":"So what does the lamp actually take? Look at the ladder: the battery lifts each charge six volts, the resistor drops it four, the lamp drops it two — and it lands back where it started. The charge returns; the ENERGY is delivered.","reveal":["v1","ladder"],"active":["ladder"],"point":"ladder","def":"Potential difference is the energy given up per unit charge as it passes through a component.","quiz":{"q":"Why must the rises and drops on the ladder add to zero?","options":["The charge ends up back at the same point, so it must be back at the same potential","Because the resistances are equal","Because the current is constant"],"answer":0,"why":"That is Kirchhoff's loop rule — it is just energy conservation drawn as height."}},{"short":"Meters","term":"meter placement","narration_text":"Notice where the meters sit. The ammeter is IN the loop, because it counts the charge going past it. The voltmeter is ACROSS the resistor, because it compares two heights on the ladder — reading four volts.","reveal":["a1","v1"],"active":["v1"],"point":"v1","quiz":{"q":"Where does a voltmeter go?","options":["Across a component, in parallel with it","In the loop, in series","It does not matter"],"answer":0,"why":"Voltage is a difference between two points, so the meter must touch both."}},{"short":"Recap","term":"recap","narration_text":"Recap: one loop means one current, the same at every point; the battery raises the potential and each component lowers it; and going right round, the rises equal the drops.","reveal":["current","ladder"],"active":["current"],"point":"current"}],"recap":["In a series loop the current is identical at every point.","The charge comes back — what is delivered is energy.","Round any loop, the voltage rises equal the voltage drops."],"src":"In a simple series circuit with a 6 V battery, an 8 Ω resistor and a lamp, is the current smaller after the resistor than before it?"},"shm":{"meta":{"title":"Simple harmonic motion — where each quantity peaks","subject":"Physics","concept_id":"shm_phase_x_v_a"},"layout":"graph","x":{"min":0,"max":4,"label":"time (seconds) — one full cycle takes 2 s"},"y":{"min":-1.45,"max":1.45,"label":"each quantity as a fraction of its own maximum"},"curves":[{"id":"x","color":"#7c3aed","label":"displacement x","points":[[0,1],[0.25,0.71],[0.5,0],[0.75,-0.71],[1,-1],[1.25,-0.71],[1.5,0],[1.75,0.71],[2,1],[2.25,0.71],[2.5,0],[2.75,-0.71],[3,-1],[3.25,-0.71],[3.5,0],[3.75,0.71],[4,1]]},{"id":"v","color":"#0d9488","label":"velocity v","dash":true,"points":[[0,0],[0.25,-0.71],[0.5,-1],[0.75,-0.71],[1,0],[1.25,0.71],[1.5,1],[1.75,0.71],[2,0],[2.25,-0.71],[2.5,-1],[2.75,-0.71],[3,0],[3.25,0.71],[3.5,1],[3.75,0.71],[4,0]]},{"id":"a","color":"#dc2626","dash":true,"points":[[0,-1],[0.25,-0.71],[0.5,0],[0.75,0.71],[1,1],[1.25,0.71],[1.5,0],[1.75,-0.71],[2,-1],[2.25,-0.71],[2.5,0],[2.75,0.71],[3,1],[3.25,0.71],[3.5,0],[3.75,-0.71],[4,-1]]}],"markers":[{"id":"ext","at":[2,1],"label":"extreme: x max, v = 0, a max","color":"#7c3aed"},{"id":"eq","at":[0.5,-1],"label":"centre: v max, a = 0","color":"#0d9488"},{"id":"back","at":[1,1],"label":"a points BACK to the centre","color":"#dc2626"},{"id":"mir","at":[3,1],"label":"mirror of x — F = −kx","color":"#dc2626"}],"narration_steps":[{"short":"One clock","term":"simple harmonic motion","narration_text":"Three quantities, one clock. Displacement in purple, velocity in green, acceleration in red — all plotted against the same time axis so you can read one against another.","reveal":["x"],"active":["x"],"point":"ext","def":"Simple harmonic motion is any motion where the restoring force is proportional to the displacement and points back towards the centre."},{"short":"The extremes","term":"the turning point","narration_text":"Start at the extreme, where the spring is stretched furthest. The mass has to turn around here, and a thing that is turning around is, for one instant, not moving at all.","reveal":["ext"],"active":["ext"],"point":"ext"},{"short":"Zero velocity","term":"instantaneously at rest","narration_text":"So watch the green curve: velocity crosses zero exactly where the purple displacement is at its peak. Think of a ball thrown straight up — at the very top it is stationary, and nobody would say gravity switched off up there.","reveal":["v"],"active":["v"],"point":"ext"},{"short":"The centre","term":"equilibrium","narration_text":"Slide forward to the centre. The spring is at its natural length, so it is pulling with nothing at all — and yet this is exactly where the mass is moving fastest. Zero force, maximum speed.","reveal":["eq"],"active":["eq"],"point":"eq","quiz":{"q":"Where is the mass moving fastest?","options":["At the centre, where the force is zero","At the extremes, where the force is biggest","Everywhere — the speed is constant"],"answer":0,"why":"Force builds speed on the way in, so the speed peaks exactly where the force has run out — at the centre."}},{"short":"Always inward","term":"the restoring force","narration_text":"Now the red curve. Acceleration is largest at the extremes and always points back towards the centre — that is the whole meaning of the minus sign in F equals minus k x. Say the minus out loud; it IS the concept.","reveal":["a","back"],"active":["back"],"point":"back"},{"short":"Mirror images","term":"180 degrees out of phase","narration_text":"Lay red over purple and they are mirror images: whenever displacement is up, acceleration is down by the same fraction. That is what one hundred and eighty degrees out of phase means, and it follows directly from the minus sign.","reveal":["mir"],"active":["mir"],"point":"mir"},{"short":"The surprise","term":"period","narration_text":"One last thing, and it is genuinely counterintuitive. Pull the mass twice as far and the curve gets taller but not wider — the period stays two seconds. A bigger swing simply comes with a bigger force to cover it.","reveal":["ext"],"active":["ext"],"point":"ext","def":"For small oscillations the period is independent of amplitude — it depends on the mass and the spring constant only."},{"short":"Recap","term":"recap","narration_text":"Recap. Displacement and acceleration are mirror images; velocity peaks a quarter-cycle away from both. So at the ends: no speed, biggest pull. In the middle: top speed, no pull.","reveal":["x","v","a"],"active":["a"],"point":"eq"}],"recap":["At the extremes v = 0 but a is maximum; at the centre a = 0 but v is maximum.","Acceleration is the mirror image of displacement — that is the minus in F = −kx.","Period does not depend on amplitude."],"src":"A mass on a spring oscillates in simple harmonic motion. Sketch displacement, velocity and acceleration against time, and explain why the acceleration is largest exactly where the velocity is zero."},"thermal":{"meta":{"title":"The heating curve — why the temperature stops rising","subject":"Physics","concept_id":"heating_curve_latent_heat"},"layout":"graph","x":{"min":0,"max":800,"label":"energy supplied (kilojoules)"},"y":{"min":-40,"max":140,"label":"temperature (degrees Celsius)"},"curves":[{"id":"h","color":"#7c3aed","label":"heating curve","points":[[0,-20],[20,-10],[40,0],[90,0],[140,0],[190,50],[240,100],[430,100],[620,100],[700,113],[770,125]]}],"markers":[{"id":"warm","at":[35,-6],"label":"ice warming — Q = mcΔT","color":"#2563eb"},{"id":"melt","at":[90,0],"label":"MELTING — energy in, no rise","color":"#dc2626"},{"id":"liq","at":[190,50],"label":"liquid water warming","color":"#2563eb"},{"id":"boil","at":[430,100],"label":"BOILING — a far longer plateau","color":"#dc2626"},{"id":"steam","at":[700,116],"label":"steam warming — steep again","color":"#2563eb"}],"regions":[{"id":"pf","type":"band","x0":40,"x1":140,"label":"latent heat of fusion","color":"#dc2626"},{"id":"pv","type":"band","x0":240,"x1":620,"label":"latent heat of vaporisation — much bigger","color":"#b45309"}],"narration_steps":[{"short":"Read the axes","term":"heating curve","narration_text":"Energy supplied runs across, temperature goes up. The heater is steady, so moving right also means time passing — and that makes the flat parts genuinely strange.","reveal":["h"],"active":["h"],"point":"warm","def":"A heating curve plots the temperature of a substance against the energy put into it."},{"short":"Warming the ice","term":"specific heat capacity","narration_text":"At first the ice simply warms up. Energy goes into making the particles vibrate faster, and faster vibration is precisely what a higher temperature means.","reveal":["warm"],"active":["warm"],"point":"warm"},{"short":"The first plateau","term":"melting","narration_text":"Then at zero degrees the line goes flat, and it stays flat for a while. The heater has not been turned off — energy is pouring in — yet the thermometer refuses to move.","reveal":["melt","pf"],"active":["melt"],"point":"melt"},{"short":"Where it goes","term":"latent heat","narration_text":"So where does that energy go? Into breaking the bonds holding the ice lattice together, not into speeding the particles up. Think of paying off a debt before you can start saving — the money is real, but your balance sits still.","reveal":["pf"],"active":["pf"],"point":"melt","def":"Latent heat is the energy needed to change state at constant temperature — it changes potential energy, not kinetic energy.","quiz":{"q":"During melting, where is the supplied energy going?","options":["Into breaking the bonds between particles","Into raising the average speed of the particles","Nowhere — it is lost to the surroundings"],"answer":0,"why":"Temperature measures average kinetic energy. During a phase change the energy goes into potential energy instead, so the temperature holds."}},{"short":"Liquid water","term":"back to warming","narration_text":"Once every last bond is broken the temperature climbs again. Notice this slope is gentler than the ice's — water needs a lot of energy per degree, which is why the sea warms so slowly.","reveal":["liq"],"active":["liq"],"point":"liq"},{"short":"The long plateau","term":"boiling","narration_text":"At one hundred degrees it flattens again, and look how much longer this plateau is. Escaping the liquid entirely takes far more energy than merely loosening the solid — that is why a steam burn is so much worse than boiling water.","reveal":["boil","pv"],"active":["boil"],"point":"boil"},{"short":"Steam","term":"the last climb","narration_text":"Finally the steam itself warms, and steeply, because a gas needs little energy per degree. Each straight section's steepness is telling you the specific heat capacity of that state.","reveal":["steam"],"active":["steam"],"point":"steam"},{"short":"Recap","term":"recap","narration_text":"Recap. Sloped sections are Q equals m c times the change in temperature — energy becoming motion. Flat sections are Q equals m L — energy becoming freedom. The heater never stops; only the thermometer does.","reveal":["h","pf","pv"],"active":["pv"],"point":"boil"}],"recap":["Sloped = warming (Q = mcΔT); flat = changing state (Q = mL).","During a phase change energy still flows in — it breaks bonds instead of raising temperature.","The boiling plateau is far longer than the melting one."],"src":"Ice at −20 °C is heated steadily until it becomes steam at 120 °C. Sketch the heating curve of temperature against energy supplied and explain the two flat sections."}};
+
+/* ═══════════ MedBank Visualize — the engine, ported verbatim from app.html ═══════════
+   Renderers in this file: fbd (physics flagship) · circuit · graph · vectors · solve · flow · tree.
+   The blueprints above are the SAME gold exemplars the director is few-shot with, so what plays
+   here is exactly what the app ships. ═══════════════════════════════════════════════════════ */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function $(id){return document.getElementById(id);}
+function T(x,y,s,o){o=o||{};return '<text x="'+x+'" y="'+y+'" font-size="'+(o.size||12)+'" font-weight="'+(o.w||600)+'" fill="'+(o.fill||'#2a2536')+'" text-anchor="'+(o.anchor||'middle')+'" font-family="'+(o.mono?'ui-monospace,Menlo,Consolas,monospace':'Arial')+'"'+(o.rot?' transform="rotate('+o.rot+' '+x+' '+y+')"':'')+'>'+esc(s)+'</text>';}
+function arrow(x1,y1,x2,y2,c,cls){var id='m'+Math.abs(Math.round(x1*3+y1*7+x2*11+y2))+Math.round(Math.random()*9999);return '<defs><marker id="'+id+'" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="'+c+'"/></marker></defs><path class="'+(cls||'')+'" d="M'+x1+','+y1+' L'+x2+','+y2+'" stroke="'+c+'" stroke-width="3.2" fill="none" marker-end="url(#'+id+')"/>';}
+var BP,TREE,FLOW,GRAPH,MPT={},i=0,playing=false,rate=0.95,voiceName='';
+
+/* ── TREE + FLOW — lifted verbatim from app.html ── */
+var TREE=null;
+var TCOL=['#7c3aed','#0d9488','#2563eb','#e0632b','#9333ea','#0d7a68','#b45309'];
+function layoutTree(){
+  var nodes=BP.nodes||[],byId={}; nodes.forEach(function(n){byId[n.id]=n;});
+  var root=BP.root||(nodes[0]&&nodes[0].id);
+  var kids={}; nodes.forEach(function(n){ if(n.parent!=null){(kids[n.parent]=kids[n.parent]||[]).push(n.id);} });
+  var depth={}; (function dd(id,d){ if(depth[id]!=null)return; depth[id]=d; (kids[id]||[]).forEach(function(c){dd(c,d+1);}); })(root,0);
+  var box={}; nodes.forEach(function(n){ var lab=n.label||n.id; box[n.id]={w:Math.max(128,Math.min(200,lab.length*8.4+28)),h:(n.note?54:40)}; });
+  var rowH=70,colW=224,mx=26,my=40,leaf=0,pos={};
+  (function place(id){ var ch=kids[id]||[],d=depth[id]||0,x=mx+d*colW,y;
+    if(!ch.length){ y=my+leaf*rowH; leaf++; } else { var ys=ch.map(place); y=(ys[0]+ys[ys.length-1])/2; }
+    pos[id]={x:x,y:y}; return y; })(root);
+  var maxD=0; for(var k in depth) maxD=Math.max(maxD,depth[k]);
+  var W=mx*2+(maxD+1)*colW-(colW-200), H=Math.max(rowH*Math.max(leaf,1)+my*0.5,220);
+  // colour: root purple; each first-level branch gets its own hue, inherited by its subtree
+  var col={}; col[root]=TCOL[0]; var bi=0;
+  (kids[root]||[]).forEach(function(cid){ var c=TCOL[1+(bi++%(TCOL.length-1))]; (function paint(id){ col[id]=c; (kids[id]||[]).forEach(paint); })(cid); });
+  TREE={byId:byId,kids:kids,root:root,pos:pos,box:box,col:col,vb:[W,H]};
+}
+function tNode(n,active){ var p=TREE.pos[n.id],b=TREE.box[n.id],c=TREE.col[n.id]||'#7c3aed';
+  var x=p.x,y=p.y-b.h/2,cx=x+b.w/2, cls=active?'vzglow vzpop':'vzpop';
+  var s='<g data-el="'+n.id+'" style="cursor:pointer" class="'+cls+'">';
+  s+='<rect x="'+x+'" y="'+y+'" width="'+b.w+'" height="'+b.h+'" rx="10" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3:2)+'"/>';
+  s+='<rect x="'+x+'" y="'+y+'" width="5" height="'+b.h+'" rx="2.5" fill="'+c+'"/>';
+  s+=T(cx,y+(n.note?20:24),n.label||n.id,{size:fitFont(n.label||n.id,b.w-18,12.5,9.5),w:800,fill:c});
+  if(n.note) s+=T(cx,y+38,n.note,{size:fitFont(n.note,b.w-14,10.5,8),w:600,fill:'#6b6580'});
+  return s+'</g>';
+}
+function tConnector(n){ var pp=TREE.pos[n.parent],pb=TREE.box[n.parent],cp=TREE.pos[n.id];
+  var x1=pp.x+pb.w,y1=pp.y,x2=cp.x,y2=cp.y,mxp=(x1+x2)/2;
+  return '<path d="M'+x1+','+y1+' C'+mxp+','+y1+' '+mxp+','+y2+' '+x2+','+y2+'" stroke="#cbb8ee" stroke-width="2.4" fill="none"/>';
+}
+function treeSVG(step){
+  var vb=TREE.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+  s.push('<rect x="0" y="0" width="'+vb[0]+'" height="'+vb[1]+'" fill="#fbfcff"/>');
+  for(var gx=40;gx<vb[0];gx+=40) s.push('<line x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+vb[1]+'" stroke="#eef1f8" stroke-width="1"/>');
+  for(var gy=40;gy<vb[1];gy+=40) s.push('<line x1="0" y1="'+gy+'" x2="'+vb[0]+'" y2="'+gy+'" stroke="#eef1f8" stroke-width="1"/>');
+  var shown={}; for(var st=0;st<=step;st++)(BP.narration_steps[st].reveal||[]).forEach(function(id){shown[id]=1;});
+  if(!Object.keys(shown).length) shown[TREE.root]=1;
+  var act={}; (BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+  (BP.nodes||[]).forEach(function(n){ if(n.parent!=null && shown[n.id] && shown[n.parent]) s.push(tConnector(n)); });
+  (BP.nodes||[]).forEach(function(n){ if(shown[n.id]) s.push(tNode(n,!!act[n.id])); });
+  s.push('</svg>'); return s.join('');
+}
+/* ===== FLOW mode (process diagram — the go-to for cascades without a spatial home) ===== */
+var FLOW=null;
+var FKIND={trigger:'#7c3aed',process:'#2563eb',product:'#0d9488',danger:'#dc2626',outcome:'#b45309'};
+function layoutFlow(){
+  var nodes=BP.nodes||[],n=nodes.length;
+  var cols=(n<=4)?n:Math.min(4,Math.max(2,Math.ceil(Math.sqrt(n*1.3))));
+  var w=170,h=62,gx=56,gy=58,mx=34,my=38,pos={};
+  nodes.forEach(function(nd,k){ var row=Math.floor(k/cols),inrow=k%cols,col=(row%2===0)?inrow:(cols-1-inrow);
+    pos[nd.id]={x:mx+col*(w+gx),y:my+row*(h+gy),w:w,h:h,k:k,row:row}; });
+  var rows=Math.ceil(n/cols),W=mx*2+cols*w+(cols-1)*gx,H=my*2+rows*h+(rows-1)*gy;
+  FLOW={nodes:nodes,pos:pos,cols:cols,vb:[W,H]};
+}
+/* a small token that travels along a path — "things actually move" */
+function flowToken(pathD,color,dur,begin){ return '<circle r="4.5" fill="'+(color||'#7c3aed')+'" opacity="0.9"><animateMotion dur="'+(dur||1.3)+'s" begin="'+(begin||0)+'s" repeatCount="indefinite" path="'+pathD+'"/></circle>'; }
+function fArrow(a,b){ var pa=FLOW.pos[a.id],pb=FLOW.pos[b.id],x1,y1,x2,y2;
+  if(pa.row===pb.row){ if(pb.x>pa.x){x1=pa.x+pa.w;y1=pa.y+pa.h/2;x2=pb.x;y2=pb.y+pb.h/2;} else {x1=pa.x;y1=pa.y+pa.h/2;x2=pb.x+pb.w;y2=pb.y+pb.h/2;} }
+  else { x1=pa.x+pa.w/2;y1=pa.y+pa.h;x2=pb.x+pb.w/2;y2=pb.y; }
+  var d='M'+x1+','+y1+' L'+x2+','+y2;
+  return arrow(x1,y1,x2,y2,'#c084fc','vzflow')+flowToken(d,'#7c3aed',1.3,0); }
+function fitFont(text,maxW,base,min){ var len=(text||'').length||1; return Math.max(min||9,Math.min(base,(maxW)/(len*0.58))); }
+function fNode(nd,active){ var p=FLOW.pos[nd.id],c=FKIND[nd.kind]||FKIND.process,x=p.x,y=p.y,cx=x+p.w/2+8;
+  var s='<g data-el="'+nd.id+'" style="cursor:pointer" class="'+(active?'vzglow vzpop':'vzpop')+'">';
+  s+='<rect x="'+x+'" y="'+y+'" width="'+p.w+'" height="'+p.h+'" rx="12" fill="#ffffff" stroke="'+c+'" stroke-width="'+(active?3.2:2.2)+'"/>';
+  s+='<circle cx="'+(x+17)+'" cy="'+(y+17)+'" r="11.5" fill="'+c+'"/>'+T(x+17,y+21,String(p.k+1),{fill:'#fff',w:800,size:11});
+  s+=T(cx,y+(nd.note?27:35),nd.label||nd.id,{size:fitFont(nd.label||nd.id,p.w-30,13,10),w:800,fill:c});
+  if(nd.note)s+=T(cx,y+45,nd.note,{size:fitFont(nd.note,p.w-24,10.5,8.5),w:600,fill:'#6b6580'});
+  return s+'</g>'; }
+function flowSVG(step){
+  var vb=FLOW.vb,s=['<svg viewBox="0 0 '+vb[0]+' '+vb[1]+'" xmlns="http://www.w3.org/2000/svg">'];
+  s.push('<rect x="0" y="0" width="'+vb[0]+'" height="'+vb[1]+'" fill="#fbfcff"/>');
+  var shown={}; for(var st=0;st<=step;st++)(BP.narration_steps[st].reveal||[]).forEach(function(id){shown[id]=1;});
+  if(!Object.keys(shown).length && FLOW.nodes[0]) shown[FLOW.nodes[0].id]=1;
+  var act={}; (BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+  for(var k=0;k<FLOW.nodes.length-1;k++){ var a=FLOW.nodes[k],b=FLOW.nodes[k+1]; if(shown[a.id]&&shown[b.id]) s.push(fArrow(a,b)); }
+  FLOW.nodes.forEach(function(nd){ if(shown[nd.id]) s.push(fNode(nd,!!act[nd.id])); });
+  s.push('</svg>'); return s.join(''); }
+/* ===== ORBITAL-box mode (electron configuration) ===== */
+
+/* ── GRAPH · SOLVE · VECTORS · FBD · CIRCUIT — lifted verbatim from app.html ── */
+var GRAPH=null;
+function layoutGraph(){ var X=BP.x||{min:0,max:100},Y=BP.y||{min:0,max:100},x0=78,x1=920,y0=44,y1=470;
+  GRAPH={X:X,Y:Y,x0:x0,x1:x1,y0:y0,y1:y1,vb:[960,540],pt:{}};
+  var mx=function(v){return x0+(v-X.min)/(X.max-X.min)*(x1-x0);},my=function(v){return y1-(v-Y.min)/(Y.max-Y.min)*(y1-y0);};
+  (BP.markers||[]).forEach(function(m){GRAPH.pt[m.id]={x:mx(m.at[0]),y:my(m.at[1])};}); }
+function gSmooth(pts){ if(pts.length<3)return 'M'+pts.map(function(p){return p.join(',');}).join(' L');
+  var d='M'+pts[0][0]+','+pts[0][1];
+  for(var i=0;i<pts.length-1;i++){var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    d+=' C'+(p1[0]+(p2[0]-p0[0])/6)+','+(p1[1]+(p2[1]-p0[1])/6)+' '+(p2[0]-(p3[0]-p1[0])/6)+','+(p2[1]-(p3[1]-p1[1])/6)+' '+p2[0]+','+p2[1];}
+  return d; }
+function graphSVG(step){ var X=GRAPH.X,Y=GRAPH.Y,x0=GRAPH.x0,x1=GRAPH.x1,y0=GRAPH.y0,y1=GRAPH.y1;
+  var mx=function(v){return x0+(v-X.min)/(X.max-X.min)*(x1-x0);},my=function(v){return y1-(v-Y.min)/(Y.max-Y.min)*(y1-y0);};
+  var shown={};for(var s=0;s<=step;s++)(BP.narration_steps[s].reveal||[]).forEach(function(id){shown[id]=1;});
+  var act={};(BP.narration_steps[step].active||[]).forEach(function(id){act[id]=1;});
+  var gl=function(k){return act[k]?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.9))"':'';};
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+  for(var g=1;g<5;g++){var gyy=y0+(y1-y0)*g/5;S.push('<line x1="'+x0+'" y1="'+gyy+'" x2="'+x1+'" y2="'+gyy+'" stroke="#eef1f8"/>');}
+  (BP.regions||[]).forEach(function(r){ if(!shown[r.id])return;
+    if(r.type==='band'){ S.push('<rect x="'+mx(r.x0)+'" y="'+y0+'" width="'+(mx(r.x1)-mx(r.x0))+'" height="'+(y1-y0)+'" fill="'+(r.color||'#7c3aed')+'" opacity="0.10"'+gl(r.id)+'/>'+T((mx(r.x0)+mx(r.x1))/2,y0+16,r.label||'',{size:11,fill:r.color||'#7c3aed',w:800})); }
+    else if(r.type==='bracket'){ var XX=mx(r.at),A=my(r.y0),B=my(r.y1); S.push('<g'+gl(r.id)+'><path d="M'+XX+','+A+' L'+XX+','+B+'" stroke="'+(r.color||'#dc2626')+'" stroke-width="2.5" marker-start="url(#gar)" marker-end="url(#gar)"/>'+T(XX+8,(A+B)/2,r.label||'',{size:12,fill:r.color||'#dc2626',w:800,anchor:'start'})+'</g>'); } });
+  S.push('<line x1="'+x0+'" y1="'+y1+'" x2="'+(x1+8)+'" y2="'+y1+'" stroke="#3a3550" stroke-width="2.5" marker-end="url(#gax)"/>');
+  S.push('<line x1="'+x0+'" y1="'+y1+'" x2="'+x0+'" y2="'+(y0-8)+'" stroke="#3a3550" stroke-width="2.5" marker-end="url(#gax)"/>');
+  S.push(T((x0+x1)/2,522,X.label||'',{size:13,w:800,fill:'#3a3550'}));
+  S.push('<text x="20" y="'+((y0+y1)/2)+'" font-size="13" font-weight="800" fill="#3a3550" text-anchor="middle" font-family="Arial" transform="rotate(-90 20 '+((y0+y1)/2)+')">'+esc(Y.label||'')+'</text>');
+  (BP.curves||[]).forEach(function(c){ if(!shown[c.id])return; var pts=(c.points||[]).map(function(p){return [mx(p[0]),my(p[1])];});
+    /* "dash":true marks a comparison curve — the inhibited rate, the unchecked J-curve, the
+       velocity and acceleration traces stacked against a displacement. Without it three curves
+       on one set of axes are three identical strokes in three colours. */
+    S.push('<path d="'+gSmooth(pts)+'" fill="none" stroke="'+(c.color||'#7c3aed')+'" stroke-width="'+(act[c.id]?4:3)+'" stroke-linecap="round"'+(c.dash?' stroke-dasharray="9 7"':'')+gl(c.id)+'/>');
+    if(c.label){var lp=pts[Math.floor(pts.length*0.62)];S.push(T(lp[0],lp[1]-10,c.label,{size:11,fill:c.color||'#7c3aed',w:800}));} });
+  (BP.markers||[]).forEach(function(m){ if(!shown[m.id])return; var XX=mx(m.at[0]),YY=my(m.at[1]);
+    S.push('<g'+gl(m.id)+'><circle cx="'+XX+'" cy="'+YY+'" r="'+(act[m.id]?7:5)+'" fill="'+(m.color||'#6d28d9')+'" stroke="#fff" stroke-width="2"/>'+(m.drop?'<line x1="'+XX+'" y1="'+YY+'" x2="'+XX+'" y2="'+y1+'" stroke="'+(m.color||'#6d28d9')+'" stroke-width="1.4" stroke-dasharray="4 4"/>':'')+T(XX,YY-12,m.label||'',{size:11,fill:m.color||'#4b2c91',w:800})+'</g>'); });
+  S.push('<defs><marker id="gax" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3a3550"/></marker><marker id="gar" markerWidth="8" markerHeight="8" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker></defs>');
+  S.push('</svg>');return S.join(''); }
+/* ===== MATHS modes (ported from the Maths sample-video renderers) =====
+   unitcircle · solve (algebra lines + optional number line) · vectors · matrix.
+   All four are FIXED-layout: no pre-layout pass is needed, they compute their own
+   cursor anchors into MPT each time they draw. ===== */
+var MPT={};
+function mArrow(x1,y1,x2,y2,c,w){ var id='mar'+Math.round(x1*3+y1*7+x2*11+y2*13);
+  return '<defs><marker id="'+id+'" markerWidth="10" markerHeight="10" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 Z" fill="'+c+'"/></marker></defs>'
+    +'<path d="M'+x1+','+y1+' L'+x2+','+y2+'" stroke="'+c+'" stroke-width="'+(w||4)+'" fill="none" marker-end="url(#'+id+')"/>'; }
+function mGrid(oX,oY,u,W,H){ var s='';
+  for(var gx=oX%u;gx<W;gx+=u) s+='<line x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+H+'" stroke="#eef1f8"/>';
+  for(var gy=oY%u;gy<H;gy+=u) s+='<line x1="0" y1="'+gy+'" x2="'+W+'" y2="'+gy+'" stroke="#eef1f8"/>';
+  return s+'<line x1="0" y1="'+oY+'" x2="'+W+'" y2="'+oY+'" stroke="#c9c3d6" stroke-width="1.6"/><line x1="'+oX+'" y1="0" x2="'+oX+'" y2="'+H+'" stroke="#c9c3d6" stroke-width="1.6"/>'; }
+function mShown(step){ var shown={}; for(var s=0;s<=step;s++)((BP.narration_steps[s]||{}).reveal||[]).forEach(function(id){shown[id]=1;}); return shown; }
+function mAct(step){ var act={}; ((BP.narration_steps[step]||{}).active||[]).forEach(function(id){act[id]=1;}); return act; }
+function mTitle(){ return (BP.meta&&BP.meta.title)||''; }
+
+/* ---- UNIT CIRCLE: sine is the height, cosine is the across, and the identity is Pythagoras ---- */
+function unitCircleSVG(step){
+  var cx=340,cy=270,R=185,ang=(BP.angle==null?50:BP.angle),rad=ang*Math.PI/180;
+  var Px=cx+R*Math.cos(rad),Py=cy-R*Math.sin(rad);
+  MPT={circle:{x:cx,y:cy-R},radius:{x:(cx+Px)/2,y:(cy+Py)/2},sin:{x:Px,y:(cy+Py)/2},cos:{x:(cx+Px)/2,y:cy},identity:{x:720,y:285},quadrants:{x:cx,y:cy}};
+  var shown=mShown(step),act=mAct(step);
+  var gl=function(k){return act[k]?' style="filter:drop-shadow(0 0 6px rgba(124,58,237,.9))"':'';};
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+  S.push(T(480,40,mTitle(),{size:16,w:800,fill:'#3a3550'}));
+  S.push('<line x1="'+(cx-R-30)+'" y1="'+cy+'" x2="'+(cx+R+30)+'" y2="'+cy+'" stroke="#c9c3d6" stroke-width="1.5"/><line x1="'+cx+'" y1="'+(cy-R-30)+'" x2="'+cx+'" y2="'+(cy+R+30)+'" stroke="#c9c3d6" stroke-width="1.5"/>');
+  if(shown.quadrants){ var qq=[['I','+','+'],['II','−','+'],['III','−','−'],['IV','+','−']],qp=[[cx+R*0.62,cy-R*0.62],[cx-R*0.62,cy-R*0.62],[cx-R*0.62,cy+R*0.62],[cx+R*0.62,cy+R*0.62]];
+    S.push('<g'+gl('quadrants')+'>'+qq.map(function(q,k){return T(qp[k][0],qp[k][1]-6,q[0],{size:13,w:800,fill:'#8b84a3'})+T(qp[k][0],qp[k][1]+12,'cos '+q[1]+' · sin '+q[2],{size:10,w:700,fill:'#8b84a3'});}).join('')+'</g>'); }
+  S.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#7c3aed" stroke-width="2.5"'+gl('circle')+'/>'+T(cx+R+18,cy+18,'1',{size:12,fill:'#9aa2ad'}));
+  if(shown.cos) S.push('<g'+gl('cos')+'><line x1="'+cx+'" y1="'+cy+'" x2="'+Px+'" y2="'+cy+'" stroke="#2563eb" stroke-width="5"/></g>'+T((cx+Px)/2,cy+22,'cos θ = x',{size:13,w:800,fill:'#2563eb'}));
+  if(shown.sin) S.push('<g'+gl('sin')+'><line x1="'+Px+'" y1="'+cy+'" x2="'+Px+'" y2="'+Py+'" stroke="#0d9488" stroke-width="5"/></g>'+T(Px+58,(cy+Py)/2,'sin θ = y',{size:13,w:800,fill:'#0d9488'}));
+  if(shown.radius){
+    S.push('<line x1="'+cx+'" y1="'+cy+'" x2="'+Px+'" y2="'+Py+'" stroke="#4b2c91" stroke-width="3"'+gl('radius')+'/>');
+    S.push('<path d="M'+(cx+38)+','+cy+' A 38 38 0 0 0 '+(cx+38*Math.cos(rad))+','+(cy-38*Math.sin(rad))+'" fill="none" stroke="#dc2626" stroke-width="2.5"/>'+T(cx+56,cy-16,'θ',{size:14,w:800,fill:'#dc2626'}));
+    S.push('<circle cx="'+Px+'" cy="'+Py+'" r="7" fill="#6d28d9" stroke="#fff" stroke-width="2"/>'+T(Px+8,Py-12,'P (cos θ, sin θ)',{size:12,w:800,fill:'#4b2c91',anchor:'start'}));
+  }
+  if(shown.identity) S.push('<g'+gl('identity')+'>'+T(720,250,'On the unit circle:',{size:14,w:800,fill:'#3a3550'})+T(720,285,'x = cos θ ,  y = sin θ',{size:15,w:800,fill:'#5b21b6'})+T(720,320,'so cos²θ + sin²θ = 1',{size:14,w:800,fill:'#0d7a68'})+'</g>');
+  S.push('</svg>'); return S.join(''); }
+
+/* ---- SOLVE: an exam question worked line-by-line, each line carrying its REASON.
+     Optional number line for inequality solution sets (open vs closed dot, shaded ray). ---- */
+function solveSVG(step){
+  var lines=BP.lines||[],x0=70,wx=560,y0=120,rh=52;
+  MPT={}; lines.forEach(function(ln,k){ MPT[ln.id]={x:240,y:y0+k*rh-8}; }); MPT.nl={x:480,y:470};
+  var shown=mShown(step),act=mAct(step);
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+  S.push('<rect x="40" y="42" width="880" height="46" rx="9" fill="#ede7fb" stroke="#6d28d9" stroke-width="2"/>'+T(480,71,BP.problem||mTitle(),{size:15,w:800,fill:'#5b21b6'}));
+  lines.forEach(function(ln,k){ if(!shown[ln.id])return; var y=y0+k*rh,on=act[ln.id];
+    if(on) S.push('<rect x="40" y="'+(y-30)+'" width="880" height="44" rx="8" fill="#f3effc" stroke="#c9bfe0"/>');
+    S.push(T(x0,y,ln.math||'',{size:20,w:700,fill:on?'#3a1d7a':'#2a2536',anchor:'start',mono:true}));
+    if(ln.why) S.push(T(wx,y-2,'— '+ln.why,{size:12.5,w:600,fill:on?'#6d28d9':'#8a8398',anchor:'start'})); });
+  if(BP.numberline&&shown.nl){ var nl=BP.numberline,ax0=140,ax1=820,ny=470,mn=nl.min,mxx=nl.max,mp=function(v){return ax0+(v-mn)/(mxx-mn)*(ax1-ax0);};
+    S.push('<line x1="'+(ax0-20)+'" y1="'+ny+'" x2="'+(ax1+20)+'" y2="'+ny+'" stroke="#3a3550" stroke-width="2.5"/>');
+    for(var v=mn;v<=mxx;v++) S.push('<line x1="'+mp(v)+'" y1="'+(ny-6)+'" x2="'+mp(v)+'" y2="'+(ny+6)+'" stroke="#3a3550" stroke-width="1.5"/>'+T(mp(v),ny+24,String(v),{size:12,fill:'#5c5570'}));
+    var sv=mp(nl.value),dir=(nl.op==='≤'||nl.op==='<')?-1:1,end=dir<0?ax0-16:ax1+16;
+    S.push('<line x1="'+sv+'" y1="'+ny+'" x2="'+end+'" y2="'+ny+'" stroke="#0d9488" stroke-width="6" opacity="0.55"/><circle cx="'+sv+'" cy="'+ny+'" r="8" fill="'+(nl.closed?'#0d9488':'#fff')+'" stroke="#0d9488" stroke-width="3"/>'+T(sv,ny-18,'x '+(nl.op||'≥')+' '+nl.value,{size:14,w:800,fill:'#0d7a68'})); }
+  S.push('</svg>'); return S.join(''); }
+
+/* ---- VECTORS: tip-to-tail addition on a grid; the resultant is why components just add ---- */
+function vectorsSVG(step){
+  var oX=150,oY=430,u=74,gp=function(x,y){return [oX+x*u,oY-y*u];};
+  var a=BP.a||[3,1],b=BP.b||[1,2],ra=[a[0]+b[0],a[1]+b[1]];
+  var A=gp(a[0],a[1]),B=gp(b[0],b[1]),AB=gp(ra[0],ra[1]),O=gp(0,0);
+  MPT={a:{x:(O[0]+A[0])/2,y:(O[1]+A[1])/2},b:{x:(O[0]+B[0])/2,y:(O[1]+B[1])/2},shift:{x:(A[0]+AB[0])/2,y:(A[1]+AB[1])/2},res:{x:(O[0]+AB[0])/2,y:(O[1]+AB[1])/2},comp:{x:A[0],y:oY}};
+  var shown=mShown(step);
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>',mGrid(oX,oY,u,960,540),T(480,34,mTitle(),{size:16,w:800,fill:'#3a3550'})];
+  if(shown.a) S.push(mArrow(O[0],O[1],A[0],A[1],'#7c3aed',5)+T((O[0]+A[0])/2-14,(O[1]+A[1])/2-8,'a = ('+a[0]+', '+a[1]+')',{size:12,w:800,fill:'#5b21b6',anchor:'end'}));
+  if(shown.b) S.push(mArrow(O[0],O[1],B[0],B[1],'#2563eb',5)+T((O[0]+B[0])/2-6,(O[1]+B[1])/2-8,'b = ('+b[0]+', '+b[1]+')',{size:12,w:800,fill:'#2563eb',anchor:'end'}));
+  if(shown.comp) S.push('<line x1="'+A[0]+'" y1="'+A[1]+'" x2="'+A[0]+'" y2="'+oY+'" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="5 4"/><line x1="'+A[0]+'" y1="'+A[1]+'" x2="'+oX+'" y2="'+A[1]+'" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="5 4"/>'+T((oX+A[0])/2,oY+20,'across '+a[0],{size:11,w:700,fill:'#5b21b6'})+T(oX-14,(oY+A[1])/2,'up '+a[1],{size:11,w:700,fill:'#5b21b6',anchor:'end'}));
+  if(shown.shift) S.push(mArrow(A[0],A[1],AB[0],AB[1],'#2563eb',4)+T((A[0]+AB[0])/2+8,(A[1]+AB[1])/2,'b moved to tip of a',{size:11,w:700,fill:'#2563eb',anchor:'start'}));
+  if(shown.res) S.push(mArrow(O[0],O[1],AB[0],AB[1],'#0d9488',5.5)+T((O[0]+AB[0])/2+6,(O[1]+AB[1])/2+22,'a + b = ('+ra[0]+', '+ra[1]+')',{size:13,w:800,fill:'#0d7a68',anchor:'start'}));
+  S.push('<circle cx="'+O[0]+'" cy="'+O[1]+'" r="4" fill="#3a3550"/>'+T(O[0]-10,O[1]+18,'O',{size:12,fill:'#5c5570'}));
+  S.push('</svg>'); return S.join(''); }
+
+/* ---- MATRIX: a matrix is what happens to i and j; the determinant is the area scale factor ---- */
+function matrixSVG(step){
+  var oX=210,oY=430,u=92,M=BP.M||[[2,1],[0,1.5]];
+  var gp=function(x,y){return [oX+x*u,oY-y*u];},tp=function(x,y){return gp(M[0][0]*x+M[0][1]*y,M[1][0]*x+M[1][1]*y);};
+  var det=Math.round((M[0][0]*M[1][1]-M[0][1]*M[1][0])*1000)/1000;
+  var i2=tp(1,0),j2=tp(0,1),o2=gp(0,0),c2=tp(1,1);
+  MPT={orig:{x:gp(0.5,0.5)[0],y:gp(0.5,0.5)[1]},ti:{x:(o2[0]+i2[0])/2,y:(o2[1]+i2[1])/2},tj:{x:(o2[0]+j2[0])/2,y:(o2[1]+j2[1])/2},det:{x:(o2[0]+i2[0]+c2[0]+j2[0])/4,y:(o2[1]+i2[1]+c2[1]+j2[1])/4},M:{x:700,y:133}};
+  var shown=mShown(step);
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>',mGrid(oX,oY,u,960,540),T(480,34,mTitle(),{size:16,w:800,fill:'#3a3550'})];
+  S.push(T(690,120,'M = [ '+M[0][0]+'  '+M[0][1]+' ]',{size:15,w:800,fill:'#5b21b6'})+T(707,146,'[ '+M[1][0]+'  '+M[1][1]+' ]',{size:15,w:800,fill:'#5b21b6'}));
+  if(shown.orig){ var p=[gp(0,0),gp(1,0),gp(1,1),gp(0,1)];
+    S.push('<polygon points="'+p.map(function(q){return q.join(',');}).join(' ')+'" fill="#7c3aed" opacity="0.10" stroke="#b39ddb" stroke-width="1.5"/>');
+    S.push(mArrow(gp(0,0)[0],gp(0,0)[1],gp(1,0)[0],gp(1,0)[1],'#dc2626',4)+T(gp(1,0)[0],gp(1,0)[1]+20,'i',{size:13,w:800,fill:'#dc2626'}));
+    S.push(mArrow(gp(0,0)[0],gp(0,0)[1],gp(0,1)[0],gp(0,1)[1],'#0d9488',4)+T(gp(0,1)[0]-16,gp(0,1)[1],'j',{size:13,w:800,fill:'#0d9488'})); }
+  if(shown.ti) S.push(mArrow(o2[0],o2[1],i2[0],i2[1],'#dc2626',5)+T(i2[0]+6,i2[1]+18,'i → ('+M[0][0]+', '+M[1][0]+')',{size:12,w:800,fill:'#dc2626',anchor:'start'}));
+  if(shown.tj) S.push(mArrow(o2[0],o2[1],j2[0],j2[1],'#0d9488',5)+T(j2[0]-8,j2[1]-8,'j → ('+M[0][1]+', '+M[1][1]+')',{size:12,w:800,fill:'#0d7a68',anchor:'end'}));
+  if(shown.det){ var q=[o2,i2,c2,j2];
+    S.push('<polygon points="'+q.map(function(z){return z.join(',');}).join(' ')+'" fill="#0d9488" opacity="0.18" stroke="#0d9488" stroke-width="2"/>');
+    S.push(T((o2[0]+i2[0]+c2[0]+j2[0])/4,(o2[1]+i2[1]+c2[1]+j2[1])/4,'area = |det| = '+Math.abs(det),{size:14,w:800,fill:'#0d7a68'})); }
+  S.push('</svg>'); return S.join(''); }
+/* ═══ PHYSICS renderers — the free-body diagram and the DC circuit schematic. Both are FIXED
+ * scenes with named parts (like `cell`), so the blueprint never places anything by hand: the
+ * renderer alone decides where an arrow or a component sits, and refuses anything it can't draw. ═══ */
+/* physics arrows need a HEAD OF FIXED SIZE — marker units default to stroke-width, which makes a
+ * thick net-force arrow sprout a 90px spearhead. userSpaceOnUse keeps every head the same size. */
+var _pk=0;
+function pArrow(x1,y1,x2,y2,c,w,o){ o=o||{}; var id='pa'+(++_pk), hw=o.head||15, open=o.open?
+    '<path d="M1,1 L'+(hw-2)+','+(hw/2)+' L1,'+(hw-1)+'" fill="none" stroke="'+c+'" stroke-width="2.4"/>':
+    '<path d="M0,0 L'+hw+','+(hw/2)+' L0,'+hw+' Z" fill="'+(o.hollow?'#ffffff':c)+'"'+(o.hollow?' stroke="'+c+'" stroke-width="2"':'')+'/>';
+  return '<defs><marker id="'+id+'" markerUnits="userSpaceOnUse" markerWidth="'+hw+'" markerHeight="'+hw+'" refX="'+(hw-1)+'" refY="'+(hw/2)+'" orient="auto">'+open+'</marker></defs>'+
+    '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+c+'" stroke-width="'+(w||4)+'" stroke-linecap="round"'+(o.dash?' stroke-dasharray="'+o.dash+'"':'')+' marker-end="url(#'+id+')"/>'; }
+
+
+/* ═════════ FBD — the situation on the left, the isolated body on the right ═════════ */
+var FBD_KIND={weight:'#dc2626',normal:'#2563eb',friction:'#b45309',tension:'#7c3aed',applied:'#0d9488',other:'#5c5570'};
+function fbdSVG(step){
+  var th=(typeof BP.incline==='number'?BP.incline:0), rad=th*Math.PI/180;
+  var bx=640, by=246, shown=mShown(step), act=mAct(step), forces=BP.forces||[];
+  var P=function(d,L){ var a=d*Math.PI/180; return [bx+Math.cos(a)*L, by-Math.sin(a)*L]; };
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+  S.push(T(480,28,mTitle(),{size:16,w:800,fill:'#3a3550'}));
+  S.push('<line x1="440" y1="46" x2="440" y2="516" stroke="#e2ddef" stroke-width="2" stroke-dasharray="6 6"/>');
+  S.push(T(228,62,'THE SITUATION',{size:11,w:800,fill:'#8a8398'})+T(700,62,'THE BODY, ISOLATED',{size:11,w:800,fill:'#8a8398'}));
+
+  /* left panel: the physical scene. The slope descends to the RIGHT, so down-slope is dir 360−θ. */
+  var gx0=60,gx1=400,gy=440, apex=gy-(gx1-gx0)*Math.tan(rad);
+  if(th>0.5){
+    S.push('<path d="M'+gx0+','+apex+' L'+gx1+','+gy+' L'+gx0+','+gy+' Z" fill="#efecf9" stroke="#c3b9dd" stroke-width="2"/>');
+    S.push('<path d="M'+(gx1-72)+','+gy+' A 72 72 0 0 0 '+(gx1-72*Math.cos(rad))+','+(gy-72*Math.sin(rad))+'" fill="none" stroke="#6d28d9" stroke-width="1.6"/>');
+    S.push(T(gx1-92,gy-13,th+'°',{size:13,w:800,fill:'#5b21b6'}));
+  } else {
+    S.push('<line x1="'+gx0+'" y1="'+gy+'" x2="'+gx1+'" y2="'+gy+'" stroke="#6b6480" stroke-width="4"/>');
+    for(var h=gx0;h<gx1;h+=18) S.push('<line x1="'+h+'" y1="'+gy+'" x2="'+(h+11)+'" y2="'+(gy+13)+'" stroke="#c3b9dd" stroke-width="2"/>');
+  }
+  var sx=gx0+(gx1-gx0)*0.44, sy=(th>0.5? apex+(sx-gx0)*Math.tan(rad) : gy);
+  S.push('<g transform="translate('+sx+','+sy+') rotate('+th+')"><rect x="-36" y="-46" width="72" height="46" rx="5" fill="#f3b64a" stroke="#8a5a12" stroke-width="2.5"/>'+
+    T(0,-18,(BP.body&&BP.body.label)||'body',{size:12,w:800,fill:'#5c3c08'})+'</g>');
+  if(BP.body&&BP.body.mass) S.push(T(sx-64,sy-62,BP.body.mass,{size:12.5,w:700,fill:'#5c5570'}));
+  if(BP.scene_note) S.push(T(228,472,BP.scene_note,{size:12,w:600,fill:'#8a8398'}));
+  if(shown.body) S.push('<path d="M'+(sx+46)+','+(sy-52)+' Q 540,120 '+(bx-52)+','+(by-30)+'" fill="none" stroke="#a99cc9" stroke-width="2" stroke-dasharray="7 6"/>'+
+    T(520,104,'isolate the body',{size:11.5,w:800,fill:'#8a8398'}));
+
+  /* right panel: rotated axes, then the body, then one arrow at a time */
+  MPT={scene:{x:sx,y:sy-54},body:{x:bx,y:by},axes:{x:bx+112,y:by+66},net:{x:bx,y:by},accel:{x:826,y:448},danger:{x:bx,y:by-118},gauge:{x:225,y:512},comp:{x:bx,y:by}};
+  if(shown.axes){
+    var dx=Math.cos(-rad)*136, dy=-Math.sin(-rad)*136;        // x′ points DOWN the slope
+    S.push('<line x1="'+(bx-dx)+'" y1="'+(by-dy)+'" x2="'+(bx+dx)+'" y2="'+(by+dy)+'" stroke="#c3b9dd" stroke-width="1.6" stroke-dasharray="6 5"/>');
+    S.push('<line x1="'+(bx+dy)+'" y1="'+(by-dx)+'" x2="'+(bx-dy)+'" y2="'+(by+dx)+'" stroke="#c3b9dd" stroke-width="1.6" stroke-dasharray="6 5"/>');
+    S.push(T(bx-dx+4,by-dy-14,"x′ along the slope",{size:11,w:700,fill:'#8a8398',anchor:'middle'}));
+  }
+  if(BP.components&&shown.comp) (BP.components||[]).forEach(function(c){
+    var gh=' opacity="'+(act.danger?0.15:(shown.net?0.3:1))+'"';
+    var e=P(c.dir||0,44+(c.mag==null?0.6:c.mag)*58);
+    S.push('<g'+gh+'>'+pArrow(bx,by,e[0],e[1],'#dc2626',2.8,{dash:'8 5',head:12}));
+    var l=P(c.dir||0,44+(c.mag==null?0.6:c.mag)*58+26);
+    S.push(T(l[0],l[1]+4,c.label||'',{size:12,w:700,fill:'#dc2626',anchor:Math.cos((c.dir||0)*Math.PI/180)>0.3?'start':(Math.cos((c.dir||0)*Math.PI/180)<-0.3?'end':'middle')})+'</g>'); });
+  S.push('<g transform="translate('+bx+','+by+') rotate('+th+')"><rect x="-30" y="-21" width="60" height="42" rx="5" fill="#fff7e6" stroke="#8a5a12" stroke-width="2.5"/></g>');
+  S.push('<circle cx="'+bx+'" cy="'+by+'" r="5" fill="#2a2536"/>');
+  forces.forEach(function(f){
+    var L=54+(f.mag==null?0.7:f.mag)*74, e=P(f.dir||0,L), l=P(f.dir||0,L+26);
+    MPT[f.id]={x:e[0],y:e[1]}; if(!shown[f.id])return;
+    var c=FBD_KIND[f.kind]||FBD_KIND.other, hot=act[f.id], cs=Math.cos((f.dir||0)*Math.PI/180), dim=act.danger?0.2:1;
+    var an=cs>0.3?'start':(cs<-0.3?'end':'middle'), up=Math.sin((f.dir||0)*Math.PI/180)>0;
+    S.push('<g'+(hot?' class="vzglow"':'')+' opacity="'+(hot?1:0.9)*dim+'">'+pArrow(bx,by,e[0],e[1],c,hot?6:4.5));
+    S.push(T(l[0],l[1]+(up?-2:14),f.label||f.id,{size:13,w:800,fill:c,anchor:an}));
+    S.push(T(l[0],l[1]+(up?14:30),f.agent||'',{size:11,w:600,fill:'#6b6480',anchor:an})+'</g>');
+  });
+  if(BP.net&&shown.net){ var ndim=act.danger?0.18:1, nL=54+(BP.net.mag==null?0.8:BP.net.mag)*74, n=P(BP.net.dir||0,nL), nl=P(BP.net.dir||0,nL+34);
+    MPT.net={x:n[0],y:n[1]};
+    S.push('<g opacity="'+ndim+'">'+pArrow(bx,by,n[0],n[1],'#111827',9,{hollow:true,head:19}));
+    S.push('<line x1="'+bx+'" y1="'+by+'" x2="'+n[0]+'" y2="'+n[1]+'" stroke="#ffffff" stroke-width="3.2"/>');
+    S.push(T(nl[0],nl[1]+16,BP.net.label||'F_net',{size:13,w:800,fill:'#111827'})+'</g>'); }
+  /* acceleration lives OUTSIDE the force cluster, in its own corner, in its own colour and style */
+  if(BP.accel&&shown.accel){ var aa=(BP.accel.dir||0)*Math.PI/180, ox=822,oy=442;
+    var ae=[ox+Math.cos(aa)*74, oy-Math.sin(aa)*74];
+    S.push('<rect x="716" y="404" width="220" height="92" rx="9" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.6"/>');
+    S.push(pArrow(ox,oy,ae[0],ae[1],'#0d9488',4,{dash:'9 6',open:true,head:15}));
+    S.push(T(826,422,'acceleration — NOT a force',{size:11,w:800,fill:'#0d7a68'}));
+    S.push(T(826,488,BP.accel.label||'a',{size:13,w:800,fill:'#0d7a68'})); }
+  if(BP.danger&&shown.danger){ var d=P(BP.danger.dir||0,132), m=[(bx+d[0])/2,(by+d[1])/2];
+    MPT.danger={x:d[0],y:d[1]};
+    S.push(pArrow(bx,by,d[0],d[1],'#dc2626',4.5,{head:15}));
+    S.push('<line x1="'+(m[0]-22)+'" y1="'+(m[1]-22)+'" x2="'+(m[0]+22)+'" y2="'+(m[1]+22)+'" stroke="#dc2626" stroke-width="5.5"/>'+
+           '<line x1="'+(m[0]+22)+'" y1="'+(m[1]-22)+'" x2="'+(m[0]-22)+'" y2="'+(m[1]+22)+'" stroke="#dc2626" stroke-width="5.5"/>');
+    var dp=(BP.danger.dir||0)*Math.PI/180-Math.PI/2;          // caption sits off to the side of the struck-through arrow, never on it
+  S.push(T(m[0]+Math.cos(dp)*58,m[1]-Math.sin(dp)*58+4,BP.danger.label||'this force does not exist',{size:12,w:800,fill:'#dc2626'})); }
+  if(BP.friction_gauge&&shown.gauge){ var g=BP.friction_gauge,gx=120,gyy=512,gw=280;
+    var cap=Math.max(0.04,Math.min(1,(+g.fs||0)/(+g.fsmax||1)));
+    S.push('<rect x="'+gx+'" y="'+(gyy-13)+'" width="'+gw+'" height="26" rx="5" fill="#f7f4fd" stroke="#c9bfe0"/>');
+    S.push('<rect x="'+gx+'" y="'+(gyy-13)+'" width="'+(gw*cap)+'" height="26" rx="5" fill="#b45309" opacity="0.8"/>');
+    S.push('<line x1="'+(gx+gw)+'" y1="'+(gyy-24)+'" x2="'+(gx+gw)+'" y2="'+(gyy+24)+'" stroke="#dc2626" stroke-width="3"/>');
+    S.push(T(gx+gw-4,gyy-30,'f_s,max = μ_s N',{size:11,w:800,fill:'#dc2626',anchor:'end'}));
+    S.push(T(gx-8,gyy+5,g.label||'friction now',{size:12,w:700,fill:'#8a5a12',anchor:'end'})); }
+  S.push('</svg>'); return S.join('');
+}
+
+/* ═════════ CIRCUIT — a rectangular loop, conserved tokens, a voltage ladder ═════════ */
+var CIR_L=250,CIR_R=838,CIR_T=150,CIR_B=430;
+function cirSlot(side,k,n){ var f=(k+1)/(n+1);
+  if(side==='top')    return {x:CIR_L+(CIR_R-CIR_L)*f, y:CIR_T, horiz:true,  out:-1};
+  if(side==='bottom') return {x:CIR_R-(CIR_R-CIR_L)*f, y:CIR_B, horiz:true,  out: 1};
+  if(side==='right')  return {x:CIR_R, y:CIR_T+(CIR_B-CIR_T)*f, horiz:false, out: 1};
+  return {x:CIR_L, y:CIR_B-(CIR_B-CIR_T)*f, horiz:false, out:-1};
+}
+function circuitSVG(step){
+  var comps=BP.components||[], shown=mShown(step), act=mAct(step);
+  var cw=(BP.current&&BP.current.direction)==='ccw'?-1:1, byC=(CIR_T+CIR_B)/2;
+  var S=['<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">','<rect width="960" height="540" fill="#fbfcff"/>'];
+  S.push(T(480,30,mTitle(),{size:16,w:800,fill:'#3a3550'}));
+  var loopCW ='M'+CIR_L+','+CIR_T+' L'+CIR_R+','+CIR_T+' L'+CIR_R+','+CIR_B+' L'+CIR_L+','+CIR_B+' Z';
+  var loopCCW='M'+CIR_L+','+CIR_T+' L'+CIR_L+','+CIR_B+' L'+CIR_R+','+CIR_B+' L'+CIR_R+','+CIR_T+' Z';
+  S.push('<path d="'+loopCW+'" fill="none" stroke="'+(shown.loop?'#3a3550':'#dfd9ec')+'" stroke-width="4" stroke-linejoin="round"/>');
+
+  MPT={loop:{x:(CIR_L+CIR_R)/2,y:CIR_T},battery:{x:CIR_L,y:byC},current:{x:(CIR_L+CIR_R)/2,y:CIR_T},ladder:{x:118,y:300}};
+  var B=BP.battery||{};
+  S.push('<g opacity="'+(shown.battery?1:0.14)+'"'+(act.battery?' class="vzglow"':'')+'>'+
+    '<rect x="'+(CIR_L-8)+'" y="'+(byC-26)+'" width="16" height="34" fill="#fbfcff"/>'+
+    '<line x1="'+(CIR_L-27)+'" y1="'+(byC-22)+'" x2="'+(CIR_L+27)+'" y2="'+(byC-22)+'" stroke="#111827" stroke-width="5"/>'+
+    '<line x1="'+(CIR_L-13)+'" y1="'+(byC+4)+'" x2="'+(CIR_L+13)+'" y2="'+(byC+4)+'" stroke="#111827" stroke-width="5"/>'+
+    T(CIR_L+40,byC-16,'+',{size:19,w:800,fill:'#dc2626'})+T(CIR_L+40,byC+16,'−',{size:19,w:800,fill:'#2563eb'})+
+    T(CIR_L+18,byC+44,(B.label||'battery'),{size:12.5,w:800,fill:'#3a3550',anchor:'start'})+'</g>');
+
+  var slotted=comps.filter(function(c){return c.type!=='voltmeter'||!c.across;}), pos={};
+  var bySide={}; slotted.forEach(function(c){ (bySide[c.side||'top']=bySide[c.side||'top']||[]).push(c); });
+  Object.keys(bySide).forEach(function(sd){ bySide[sd].forEach(function(c,k){ pos[c.id]=cirSlot(sd,k,bySide[sd].length); }); });
+
+  function drawComp(c,p,inline){
+    var op=shown[c.id]?1:0.14, g='<g opacity="'+op+'"'+(act[c.id]?' class="vzglow"':'')+'>';
+    var tf='translate('+p.x+','+p.y+') rotate('+(p.horiz?0:90)+')';
+    if(inline) g+='<rect x="'+(p.x-(p.horiz?38:12))+'" y="'+(p.y-(p.horiz?12:38))+'" width="'+(p.horiz?76:24)+'" height="'+(p.horiz?24:76)+'" fill="#fbfcff"/>';
+    if(c.type==='resistor') g+='<g transform="'+tf+'"><rect x="-34" y="-13" width="68" height="26" rx="3" fill="#fff" stroke="#111827" stroke-width="3.5"/></g>';
+    else if(c.type==='bulb'){ var lit=c.brightness==null?1:+c.brightness;
+      g+='<circle cx="'+p.x+'" cy="'+p.y+'" r="21" fill="#fbbf24" opacity="'+(0.15+0.8*lit)+'" stroke="#111827" stroke-width="3.5"/>'+
+         '<line x1="'+(p.x-14)+'" y1="'+(p.y-14)+'" x2="'+(p.x+14)+'" y2="'+(p.y+14)+'" stroke="#111827" stroke-width="2.4"/>'+
+         '<line x1="'+(p.x+14)+'" y1="'+(p.y-14)+'" x2="'+(p.x-14)+'" y2="'+(p.y+14)+'" stroke="#111827" stroke-width="2.4"/>'; }
+    else if(c.type==='switch'){ var open=c.open===true;
+      g+='<g transform="'+tf+'"><circle cx="-26" cy="0" r="5" fill="#111827"/><circle cx="26" cy="0" r="5" fill="#111827"/>'+
+         '<line x1="-26" y1="0" x2="'+(open?20:26)+'" y2="'+(open?-26:-7)+'" stroke="#111827" stroke-width="4" stroke-linecap="round"/></g>'; }
+    else if(c.type==='ammeter'||c.type==='voltmeter')
+      g+='<circle cx="'+p.x+'" cy="'+p.y+'" r="20" fill="#fff" stroke="#111827" stroke-width="3.5"/>'+T(p.x,p.y+6,c.type==='ammeter'?'A':'V',{size:16,w:800,fill:'#111827'});
+    else if(c.type==='capacitor') g+='<g transform="'+tf+'"><line x1="-6" y1="-19" x2="-6" y2="19" stroke="#111827" stroke-width="4.5"/><line x1="6" y1="-19" x2="6" y2="19" stroke="#111827" stroke-width="4.5"/></g>';
+    else g+='<circle cx="'+p.x+'" cy="'+p.y+'" r="7" fill="#111827"/>';
+    var lx=p.horiz?p.x:p.x+p.out*44, ly=inline?(p.horiz?p.y+(p.out>0?46:-32):p.y-32):p.y+40;
+    g+=T(lx,ly,c.label||c.id,{size:12.5,w:800,fill:'#3a3550',anchor:p.horiz?'middle':(p.out>0?'start':'end')});
+    return g+'</g>';
+  }
+  slotted.forEach(function(c){ var p=pos[c.id]; MPT[c.id]={x:p.x,y:p.y+(p.horiz?p.out*26:0)}; S.push(drawComp(c,p,true)); });
+  /* voltmeters sit ACROSS a component, on a branch outside the loop — never in the loop */
+  comps.filter(function(c){return c.type==='voltmeter'&&c.across;}).forEach(function(c){
+    var t=pos[c.across]; if(!t)return; var d=-76*t.out;   // the meter branch hangs INSIDE the loop, where there is room
+    var p=t.horiz?{x:t.x,y:t.y+d,horiz:true,out:t.out}:{x:t.x+d,y:t.y,horiz:true,out:t.out};
+    MPT[c.id]={x:p.x,y:p.y};
+    var a=t.horiz?[t.x-52,t.y]:[t.x,t.y-52], b=t.horiz?[t.x+52,t.y]:[t.x,t.y+52];
+    S.push('<g opacity="'+(shown[c.id]?1:0.14)+'"><path d="M'+a[0]+','+a[1]+' L'+(t.horiz?a[0]:p.x)+','+(t.horiz?p.y:a[1])+' L'+(t.horiz?b[0]:p.x)+','+(t.horiz?p.y:b[1])+' L'+b[0]+','+b[1]+'" fill="none" stroke="#6b6480" stroke-width="2.5" stroke-dasharray="6 4"/></g>');
+    S.push(drawComp(c,p,false));
+  });
+
+  if(shown.current){ var path=cw>0?loopCW:loopCCW, ic=(BP.current&&BP.current.color)||'#f59e0b', mid=(CIR_L+CIR_R)/2;
+    for(var t2=0;t2<6;t2++) S.push(flowToken(path,ic,4.6,t2*0.76));
+    var A1=[CIR_L+40,CIR_L+104],A2=[CIR_T+40,CIR_T+104],A3=[CIR_R-40,CIR_R-104];
+    if(cw>0){ S.push(pArrow(A1[0],CIR_T,A1[1],CIR_T,ic,3.5,{head:13})); S.push(pArrow(CIR_R,A2[0],CIR_R,A2[1],ic,3.5,{head:13})); S.push(pArrow(A3[0],CIR_B,A3[1],CIR_B,ic,3.5,{head:13})); }
+    else { S.push(pArrow(A1[1],CIR_T,A1[0],CIR_T,ic,3.5,{head:13})); S.push(pArrow(CIR_R,A2[1],CIR_R,A2[0],ic,3.5,{head:13})); S.push(pArrow(A3[1],CIR_B,A3[0],CIR_B,ic,3.5,{head:13})); }
+    S.push(T(CIR_L+16,CIR_B-22,(BP.current&&BP.current.label)||'conventional current',{size:12.5,w:800,fill:'#b45309',anchor:'start'})); }
+
+  if(BP.ladder&&shown.ladder){ var L=BP.ladder||[],lx0=40,lw=136,ly0=452,unit=+(BP.ladder_unit||36);
+    S.push(T(lx0+lw/2,96,'VOLTAGE LADDER',{size:11,w:800,fill:'#8a8398'})+T(lx0+lw/2,114,'potential drawn as height',{size:10.5,w:600,fill:'#a49db5'}));
+    S.push('<line x1="'+(lx0-10)+'" y1="'+ly0+'" x2="'+(lx0+lw+34)+'" y2="'+ly0+'" stroke="#c3b9dd" stroke-width="2" stroke-dasharray="4 4"/>'+T(lx0+lw/2,ly0+20,'0 V — the battery’s − terminal',{size:9.5,w:700,fill:'#8a8398'}));
+    var lvl=0, seg=lw/Math.max(1,L.length);
+    L.forEach(function(e,k){ var x1=lx0+k*seg,x2=x1+seg,y1=ly0-lvl*unit; lvl+=(+e.v||0); var y2=ly0-lvl*unit;
+      S.push('<line x1="'+x1+'" y1="'+y1+'" x2="'+x1+'" y2="'+y2+'" stroke="'+((+e.v||0)>0?'#0d9488':'#dc2626')+'" stroke-width="3.5"/>');
+      S.push('<line x1="'+x1+'" y1="'+y2+'" x2="'+x2+'" y2="'+y2+'" stroke="#6d28d9" stroke-width="3.5"/>');
+      S.push(T(x1+seg/2,y2-9,e.label||(((+e.v||0)>0?'+':'')+e.v+' V'),{size:10,w:700,fill:(+e.v||0)>0?'#0d7a68':'#dc2626'})); });
+    S.push('<circle cx="'+lx0+'" cy="'+ly0+'" r="5" fill="#6d28d9"/><circle cx="'+(lx0+lw)+'" cy="'+(ly0-lvl*unit)+'" r="5" fill="#6d28d9"/>');
+    S.push(T(lx0+lw/2,ly0+40,'back to the same height',{size:10.5,w:700,fill:'#6d28d9'})); }
+  if(BP.note) S.push(T(544,510,BP.note,{size:12,w:600,fill:'#8a8398'}));
+  S.push('</svg>'); return S.join('');
+}
+
+/* ===== CELL mode (electrochemical-cell schematic — galvanic/electrolytic) ===== */
+/* ═══ COMPUTER-STUDIES renderers — the logic-gate schematic and the generalised grid. Like the
+ * physics pair these are FIXED scenes: the blueprint names gates and wires them to each other,
+ * and the renderer alone decides where anything sits. ═══ */
+
+/* ═════════ LOGIC — gate schematic, live signal colour, bonded truth table ═════════
+ * A gate's COLUMN is derived from its depth below the inputs, never authored, so a blueprint
+ * cannot place a gate somewhere unroutable. Wire colour IS the signal value: red is 1, blue is 0,
+ * grey is "not on screen yet" — which is what turns an algebra exercise into something to watch. */
+
+/* ───────── driver ───────── */
+var SV={graph:graphSVG,flow:flowSVG,tree:treeSVG,vectors:vectorsSVG,solve:solveSVG,fbd:fbdSVG,circuit:circuitSVG};
+var FIXED={vectors:1,solve:1,fbd:1,circuit:1};
+function applyLayout(){
+  if(BP.layout==='flow') layoutFlow();
+  else if(BP.layout==='tree') layoutTree();
+  else if(BP.layout==='graph') layoutGraph();
+  else MPT={};
+}
+function anchorPt(ref,step){
+  if(FIXED[BP.layout]) return (MPT&&MPT[ref])||null;
+  if(BP.layout==='flow'){ var fp=FLOW.pos[ref]; return fp?{x:fp.x+fp.w/2,y:fp.y+fp.h/2}:null; }
+  if(BP.layout==='tree'){ var tp=TREE.pos[ref]; if(!tp)return null; var b=TREE.box[ref]; return {x:tp.x+b.w/2,y:tp.y}; }
+  if(BP.layout==='graph'){ return (GRAPH&&GRAPH.pt[ref])||null; }
+  return null;
+}
+function vbOf(){ if(BP.layout==='flow')return FLOW.vb; if(BP.layout==='tree')return TREE.vb; return [960,540]; }
+/* the legend is the reading key for the view on screen — physics needs the force-colour key most */
+function legend(){ var items=[];
+  if(BP.layout==='flow'){ var lab={trigger:'the setup',process:'a step',product:'what forms',danger:'the classic mistake',outcome:'the result'},seen={};
+    (BP.nodes||[]).forEach(function(n){ var k=n.kind||'process'; if(!seen[k]){seen[k]=1; items.push([FKIND[k]||FKIND.process, lab[k]||k]);} }); }
+  else if(BP.layout==='fbd'){ var seenK={};
+    (BP.forces||[]).forEach(function(f){ var k=f.kind||'other'; if(!seenK[k]){seenK[k]=1; items.push([FBD_KIND[k]||FBD_KIND.other, k+' force']);} });
+    if(BP.components)items.push(['#7c3aed','resolved components']);
+    if(BP.net)items.push(['#141026','the NET force']);
+    if(BP.accel)items.push(['#0d9488','acceleration — NOT a force']);
+    if(BP.danger)items.push(['#dc2626','the arrow that does not exist']); }
+  else if(BP.layout==='circuit'){ items.push(['#7c3aed','charge tokens — conserved'],['#2563eb','component'],['#b45309','the voltage ladder']); }
+  else if(BP.layout==='graph'){ (BP.curves||[]).forEach(function(c){ items.push([c.color||'#7c3aed', c.label||c.id]); }); }
+  else if(BP.layout==='vectors'){ items.push(['#7c3aed','the first vector'],['#2563eb','the second, slid to the tip'],['#0d9488','the resultant']); }
+  else if(BP.layout==='solve'){ items.push(['#4b2c91','a line of working'],['#0d7a68','the reason for the move']); }
+  $('leg').innerHTML=items.map(function(it){return '<span><i style="background:'+it[0]+'"></i>'+esc(it[1])+'</span>';}).join('');
+}
+function moveCursor(step){
+  var s=BP.narration_steps[step]||{}, ref=s.point||(s.active&&s.active[0])||(s.reveal&&s.reveal[0]);
+  var p=null; try{ p=anchorPt(ref,step); }catch(e){}
+  var cur=$('cur'); if(!p){ cur.style.opacity=0; return; }
+  var vb=vbOf(), st=$('cvs'), w=st.clientWidth||900, k=w/vb[0];
+  cur.style.opacity=1; cur.style.left=(p.x*k-4)+'px'; cur.style.top=(p.y*k-2)+'px';
+}
+function rail(){var st=BP.narration_steps;$('rail').innerHTML=st.map(function(s,k){return '<span class="rc" data-k="'+k+'">'+(k+1)+'. '+esc(s.short||('step '+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('#rail .rc'),function(b){b.onclick=function(){jump(+b.getAttribute('data-k'));};});}
+function render(idx){i=idx;
+  $('svg').innerHTML=(SV[BP.layout]||flowSVG)(i);
+  var s=BP.narration_steps[i]||{};
+  $('cap').innerHTML='<span class="lab">'+esc((s.term||s.short||'').toUpperCase())+'</span>'+esc(s.narration_text||'');
+  Array.prototype.forEach.call(document.querySelectorAll('#rail .rc'),function(b){b.classList.toggle('on',+b.getAttribute('data-k')===i);});
+  moveCursor(i);}
+var watch=null,keep=null;
+function say(text,cb){if(watch){clearTimeout(watch);watch=null;}var done=false;function fin(){if(done)return;done=true;if(watch){clearTimeout(watch);watch=null;}try{cb&&cb();}catch(e){}}
+  if(!window.speechSynthesis){watch=setTimeout(fin,Math.max(2600,(text||'').length*52));return;}
+  try{speechSynthesis.cancel();}catch(e){}
+  var u=new SpeechSynthesisUtterance(text||'');u.rate=rate;u.pitch=1.02;
+  if(voiceName){var v=speechSynthesis.getVoices().filter(function(x){return x.name===voiceName;})[0];if(v)u.voice=v;}
+  u.onend=fin;u.onerror=fin;
+  watch=setTimeout(fin,Math.max(4200,(text||'').length*82));
+  try{speechSynthesis.speak(u);}catch(e){fin();}}
+function step(){render(i);say((BP.narration_steps[i]||{}).narration_text,function(){if(!playing)return;if(i<BP.narration_steps.length-1){i++;step();}else stop();});}
+function play(){playing=true;$('play').textContent='❚❚ Pause';if(keep)clearInterval(keep);keep=setInterval(function(){try{if(window.speechSynthesis&&speechSynthesis.speaking){speechSynthesis.pause();speechSynthesis.resume();}}catch(e){}},9000);step();}
+function stop(){playing=false;$('play').textContent='▶ Play';if(keep){clearInterval(keep);keep=null;}if(watch){clearTimeout(watch);watch=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
+function jump(x){stop();render(x);}
+function load(key){stop();BP=JSON.parse(JSON.stringify(VIDEOS[key]));i=0;applyLayout();
+  $('src').innerHTML='Highlighted: “'+esc(BP.src||'')+'”';legend();rail();render(0);
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.toggle('on',b.getAttribute('data-k')===key);});}
+function fillVoices(){var sel=$('voice');if(!window.speechSynthesis)return;var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);});sel.innerHTML='<option value="">Default</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');if(voiceName)sel.value=voiceName;}
+var TL=[["motion","📈 Motion graphs — slope vs area"],["fbd","🧱 Free-body diagram — block on a slope"],["vectors","➡️ Adding velocities — why 4 + 3 = 5"],["energy","⚖️ Energy accounting — nothing is used up"],["momentum","💥 An inelastic collision, line by line"],["circuit","🔌 A series circuit — current is not used up"],["shm","〰️ Simple harmonic motion — the phases"],["thermal","🌡️ The heating curve — the latent plateau"]];
+$('tabs').innerHTML=TL.map(function(t){return '<button data-k="'+t[0]+'">'+t[1]+'</button>';}).join('');
+Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(b){b.onclick=function(){load(b.getAttribute('data-k'));};});
+$('play').onclick=function(){playing?stop():play();};
+$('prev').onclick=function(){if(i>0)jump(i-1);};
+$('next').onclick=function(){if(i<BP.narration_steps.length-1)jump(i+1);};
+$('restart').onclick=function(){jump(0);};
+$('speed').onchange=function(){rate=+this.value;};
+$('voice').onchange=function(){voiceName=this.value;};
+window.addEventListener('resize',function(){try{moveCursor(i);}catch(e){}});
+if(window.speechSynthesis){fillVoices();speechSynthesis.onvoiceschanged=fillVoices;}
+load('motion');
+</script>
+</body></html>
