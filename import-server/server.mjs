@@ -163,6 +163,8 @@ async function extractContent(body){
 const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash";  // cheap + fast → basic tier
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
 const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 300000;            // text-model calls must never hang forever, but allow big reasoning+JSON gens (fail fast → the UI can show a real error)
+const EXTRAS_MODEL = process.env.MEDBANK_EXTRAS_MODEL || BASIC_MODEL;           // model for in-app extras (qbank/written). Set to a non-reasoning model (e.g. deepseek-chat) for much faster builds.
+const QBANK_BATCHES = Number(process.env.QBANK_BATCHES) || 5;                   // qbank is generated in N parallel focused calls → wall-clock ≈ one small call, not the whole set
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
   // Claude is retired for this app: route any Claude / empty text model to DeepSeek.
@@ -290,73 +292,89 @@ async function buildExtra(kind, level, note, model){
   const row = await loadPromptFor(kind, level);
   const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
   if(!tmpl) return null;
-  const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
-  // qbank is the verbose one (per-option rationales + the full V1 schema). A reasoning model burns
-  // budget "thinking" first, so 6000 truncated the JSON mid-array → 0 items. Give it real headroom.
-  const maxTok = (row && row.max_tokens) || (kind==="qbank" ? 32000 : 8000);   // reasoning models spend ~6k just thinking before emitting JSON; 13-15 questions need real headroom
-  // json:true forces a clean JSON object and suppresses the chain-of-thought preamble that
-  // otherwise breaks JSON.parse on flash/reasoning models (imports already use this — extras were missing it).
-  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:Number(row&&row.temperature)||0.3, json:true });
-  const t=gen.text||"";
-  let raw=null;
-  { const s=t.indexOf("{"), e=t.lastIndexOf("}");
-    try{ const o=JSON.parse(t.slice(s,e+1)); if(o && Array.isArray(o.items)) raw=o.items; }catch(_){} }
-  if(!raw || !raw.length){ const sal=salvageItems(t); if(sal.length){ console.warn("[build-extra] "+kind+" salvaged "+sal.length+" items from truncated/dirty JSON"); raw=sal; } }
-  if(!raw || !raw.length){ console.warn("[build-extra] "+kind+" no parseable items · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,180))); return null; }
-  try{
-    let items = raw;
-    if(kind==="written"){
-      items = items.filter(it => it && String(it.prompt||"").trim());
-    } else if(kind==="qbank"){      // need a stem, >=4 options, valid answer index, one rationale per option
-      // Two independent taxonomies (V1). cognitive_level = how hard the thinking is; skill = which clinical task.
-      const COG   = new Set(["interpretation","clinical_reasoning","complex_reasoning","exam_trap"]);
-      const SKILL = new Set(["diagnosis","investigation","management","complications","differential","next_step"]);
-      const TRAP  = new Set(["anchoring","premature_closure","next_step_confusion","timing_error","contraindication","overthinking","common_diagnosis_bias"]);
-      const COG2DIFF = { interpretation:"easy", clinical_reasoning:"medium", complex_reasoning:"hard", exam_trap:"hard" }; // legacy back-compat
-      const DIFF2COG = { easy:"interpretation", medium:"clinical_reasoning", hard:"complex_reasoning" };
-      const norm = s => String(s||"").toLowerCase().trim().replace(/[\s-]+/g,"_");
-      items = items.filter(it => it && String(it.stem||"").trim()
-        && Array.isArray(it.options) && it.options.length>=4 && it.options.every(o=>String(o||"").trim())
-        && Number.isInteger(it.answer) && it.answer>=0 && it.answer<it.options.length)
-        .map(it => {
-          let cog = norm(it.cognitive_level); if(!COG.has(cog)) cog = DIFF2COG[norm(it.difficulty)] || "clinical_reasoning";
-          let skill = norm(it.skill); if(!SKILL.has(skill)) skill = "";
-          const objective = String(it.objective||it.teaching||"").trim().slice(0,240);
-          const subtopic  = String(it.subtopic||it.tag||"").trim().slice(0,40);
-          let trapType = norm(it.trap_type); if(!TRAP.has(trapType)) trapType = "";
-          const trapExpl = String(it.trap_explanation||it.trap||"").trim().slice(0,240);
-          return { stem:String(it.stem).trim(),
-            lead_in: String(it.lead_in||"").trim().slice(0,160),
-            options: it.options.map(o=>String(o).trim()),
-            answer: it.answer,
-            // strip any leading verdict label ("Correct:", "Incorrect -", …) — the app marks the answer itself,
-            // and the model sometimes wrongly prefixes a distractor's rationale with "Correct" (the Q3 keying bug).
-            rationales: (Array.isArray(it.rationales) ? it.rationales : []).slice(0,it.options.length).map(r=>String(r||"").trim().replace(/^(correct|incorrect|wrong|right|true|false)\s*[:\-–—]\s*/i,"").trim()),
-            objective, teaching: objective,                 // teaching kept for back-compat with the live client
-            trap_type: trapType, trap_explanation: trapExpl,
-            trap: trapExpl,                                 // legacy single field kept for back-compat
-            subtopic, tag: subtopic,                        // tag kept for back-compat (analytics + grid)
-            system: String(it.system||"").trim().slice(0,40),
-            cognitive_level: cog,
-            difficulty: COG2DIFF[cog],                      // legacy axis kept until the client fully migrates
-            skill,
-            src: String(it.src||"").trim().slice(0,160) };
-        });
-      // de-duplicate: drop any question whose stem is a near-copy of an earlier one, OR shares a subtopic
-      // with an earlier item and overlaps it heavily (e.g. same diagnosis asked twice). No repeats.
-      const wordSet = s => new Set(String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3));
-      const jac = (a,b)=>{ let inter=0; a.forEach(w=>{ if(b.has(w)) inter++; }); const uni=a.size+b.size-inter; return uni?inter/uni:0; };
-      const kept=[], keptSets=[], keptSubs=[]; const before=items.length;
-      items.forEach(it=>{ const ws=wordSet(it.stem); const st=(it.subtopic||"").toLowerCase().trim();
-        const dup = keptSets.some(p=> jac(ws,p)>0.75) || (st && keptSubs.indexOf(st)>=0);   // same subtopic = same concept ⇒ one only
-        if(!dup){ kept.push(it); keptSets.push(ws); keptSubs.push(st); }
-      });
-      if(kept.length<before) console.log("[build-extra] qbank de-duped "+(before-kept.length)+" repeat(s) → "+kept.length+" distinct");
-      items = kept;
-    }
-    if(!items.length){ console.warn("[build-extra] "+kind+" all "+raw.length+" raw items failed validation (schema mismatch)"); return null; }
-    return items;
-  }catch(err){ console.warn("[build-extra] "+kind+" validation error: "+(err&&err.message)); return null; }
+  const mdl = (row && row.model) || model;
+  if(kind==="qbank") return buildQbankBatched(tmpl, note, mdl, row && row.max_tokens);
+  // written (and any other single-shot kind): one call
+  const raw = await genRawItems(tmpl.replace(/\{\{note\}\}/g, note || ""), mdl, (row&&row.max_tokens)||8000, Number(row&&row.temperature)||0.3);
+  const items = (raw||[]).filter(it => it && String(it.prompt||"").trim());
+  return items.length ? items : null;
+}
+/* one generate() call → parsed raw items[] (full parse, else salvage a truncated/dirty response) */
+async function genRawItems(prompt, model, maxTok, temperature){
+  const gen = await generate({ model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:(temperature==null?0.3:temperature), json:true });
+  const t=gen.text||""; let raw=null;
+  { const s=t.indexOf("{"), e=t.lastIndexOf("}"); try{ const o=JSON.parse(t.slice(s,e+1)); if(o && Array.isArray(o.items)) raw=o.items; }catch(_){} }
+  if(!raw || !raw.length){ const sal=salvageItems(t); if(sal.length){ console.warn("[genRawItems] salvaged "+sal.length+" from truncated/dirty JSON"); raw=sal; } }
+  return raw || [];
+}
+/* validate + clean + de-duplicate qbank items (shared by both the single and batched paths) */
+function validateQbankItems(rawArr){
+  const COG   = new Set(["interpretation","clinical_reasoning","complex_reasoning","exam_trap"]);
+  const SKILL = new Set(["diagnosis","investigation","management","complications","differential","next_step"]);
+  const TRAP  = new Set(["anchoring","premature_closure","next_step_confusion","timing_error","contraindication","overthinking","common_diagnosis_bias"]);
+  const COG2DIFF = { interpretation:"easy", clinical_reasoning:"medium", complex_reasoning:"hard", exam_trap:"hard" };
+  const DIFF2COG = { easy:"interpretation", medium:"clinical_reasoning", hard:"complex_reasoning" };
+  const norm = s => String(s||"").toLowerCase().trim().replace(/[\s-]+/g,"_");
+  let items = (rawArr||[]).filter(it => it && String(it.stem||"").trim()
+      && Array.isArray(it.options) && it.options.length>=4 && it.options.every(o=>String(o||"").trim())
+      && Number.isInteger(it.answer) && it.answer>=0 && it.answer<it.options.length)
+    .map(it => {
+      let cog = norm(it.cognitive_level); if(!COG.has(cog)) cog = DIFF2COG[norm(it.difficulty)] || "clinical_reasoning";
+      let skill = norm(it.skill); if(!SKILL.has(skill)) skill = "";
+      const objective = String(it.objective||it.teaching||"").trim().slice(0,240);
+      const subtopic  = String(it.subtopic||it.tag||"").trim().slice(0,40);
+      let trapType = norm(it.trap_type); if(!TRAP.has(trapType)) trapType = "";
+      const trapExpl = String(it.trap_explanation||it.trap||"").trim().slice(0,240);
+      return { stem:String(it.stem).trim(),
+        lead_in: String(it.lead_in||"").trim().slice(0,160),
+        options: it.options.map(o=>String(o).trim()),
+        answer: it.answer,
+        // strip any leading verdict label — the app marks the answer itself, and the model sometimes
+        // wrongly prefixes a distractor's rationale with "Correct" (the Q3 keying bug).
+        rationales: (Array.isArray(it.rationales) ? it.rationales : []).slice(0,it.options.length).map(r=>String(r||"").trim().replace(/^(correct|incorrect|wrong|right|true|false)\s*[:\-–—]\s*/i,"").trim()),
+        objective, teaching: objective,
+        trap_type: trapType, trap_explanation: trapExpl, trap: trapExpl,
+        subtopic, tag: subtopic,
+        system: String(it.system||"").trim().slice(0,40),
+        cognitive_level: cog,
+        difficulty: COG2DIFF[cog],
+        skill,
+        src: String(it.src||"").trim().slice(0,160) };
+    });
+  // de-duplicate across everything (incl. across parallel batches): near-copy stem OR same subtopic = one only
+  const wordSet = s => new Set(String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3));
+  const jac = (a,b)=>{ let inter=0; a.forEach(w=>{ if(b.has(w)) inter++; }); const uni=a.size+b.size-inter; return uni?inter/uni:0; };
+  const kept=[], keptSets=[], keptSubs=[]; const before=items.length;
+  items.forEach(it=>{ const ws=wordSet(it.stem); const st=(it.subtopic||"").toLowerCase().trim();
+    const dup = keptSets.some(p=> jac(ws,p)>0.75) || (st && keptSubs.indexOf(st)>=0);
+    if(!dup){ kept.push(it); keptSets.push(ws); keptSubs.push(st); }
+  });
+  if(kept.length<before) console.log("[build-extra] qbank de-duped "+(before-kept.length)+" repeat(s) → "+kept.length+" distinct");
+  return kept;
+}
+/* qbank: fire several small FOCUSED calls in PARALLEL, then merge + validate + dedup.
+   Cuts wall-clock ~3-4x vs one big 13-15q call, AND gives a cleaner cognitive-level spread.
+   Each batch owns a slice of the taxonomy, so overlap is low and the dedup mops up the rest. */
+async function buildQbankBatched(tmpl, note, model, rowMax){
+  const base = tmpl.replace(/\{\{note\}\}/g, note || "");
+  const per = rowMax || 12000;   // each small batch fits comfortably (few questions + reasoning)
+  const FOCI = [
+    "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use only cognitive_level 'interpretation' (give raw labs/ECG/imaging/vitals to interpret); skills from diagnosis / investigation.",
+    "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use cognitive_level 'clinical_reasoning'; skills from diagnosis / differential.",
+    "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use cognitive_level 'clinical_reasoning'; skills from management / investigation / complications.",
+    "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use cognitive_level 'complex_reasoning' (evolving multi-step vignettes); skills from management / next_step.",
+    "produce EXACTLY 3 questions on DIFFERENT subtopics. Include at least 2 'exam_trap' (set trap_type + trap_explanation) and 1 'complex_reasoning'."
+  ];
+  const foci = FOCI.slice(0, Math.max(2, Math.min(QBANK_BATCHES, FOCI.length)));
+  const t0=Date.now();
+  const settled = await Promise.all(foci.map(f =>
+    genRawItems(base + "\n\nFOR THIS BATCH: " + f, model, per, 0.3).catch(e => { console.warn("[build-extra] qbank batch failed: "+((e&&e.message)||e)); return []; })
+  ));
+  const raw = [].concat(...settled);
+  console.log("[build-extra] qbank "+foci.length+" parallel batches → "+raw.length+" raw items in "+(Date.now()-t0)+"ms");
+  if(!raw.length) return null;
+  const items = validateQbankItems(raw);
+  return items.length ? items : null;
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
@@ -783,8 +801,8 @@ app.post("/build-extra", async (req,res)=>{
     const have = (t.data.extras && t.data.extras[kind]) || null;
     if(have && have.length && !req.body.force) return res.json({ ok:true, items:have });   // already built → return cached (unless a rebuild was requested)
     const level = Number(req.body.level) || null;
-    // in-app extras always use Flash — tiering is import-only
-    const model = BASIC_MODEL;
+    // in-app extras use EXTRAS_MODEL (defaults to Flash; can be pointed at a faster non-reasoning model)
+    const model = EXTRAS_MODEL;
     const _t0 = Date.now();
     console.log("[build-extra] start topic="+topic_id+" kind="+kind+" model="+model+" force="+(!!req.body.force));
     const items = await buildExtra(kind, level, t.data.note_md, model);
