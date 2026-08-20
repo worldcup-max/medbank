@@ -298,9 +298,13 @@ LEVEL: pitch the depth for {{level}}. Lower levels — explain fundamentals and 
 
 {{length}}
 
-PACING & RHYTHM: never pack more than 2 concepts into one line. VARY the length like a real chat — mix very short reactions and questions (3-8 words: "wait, why?", "exactly", "ooh, that's the trap") with longer explanations. Do NOT make every line the same length: even, balanced turns are exactly what makes a podcast sound like two monologues stitched together — avoid that.
-
-FLOW — THIS IS WHAT MAKES IT SOUND HUMAN (most important rule): every turn must CONNECT to the one before it. Open most lines by reacting to or building on what the other host just said — a quick acknowledgement or pivot ("Right —", "Exactly, and here's the thing —", "Ooh, good point —", "Wait, back up —", "Yeah, so..."). Let one host finish or gently interrupt the other's thought, and let a sentence carry across the hand-off (one host sets it up, the other lands it). Sprinkle natural spoken fillers ("so", "I mean", "you know") sparingly. It must sound like two friends talking — NOT two people reading alternate paragraphs. Write to be SPOKEN: contractions, natural rhythm, never bookish.
+SOUND LIKE A CONVERSATION (the most important rule):
+- VARY LINE LENGTH SHARPLY. Some lines are ONE word or a 3-word reaction ("right", "wait — okay", "oh, interesting"); some are 2-3 sentences. NEVER make consecutive lines a similar length — uneven rhythm is what makes it human.
+- REACTIONS ARE THEIR OWN LINES. Before a host answers or continues, the other often reacts first ("right", "exactly", "hang on", "okay so —", "yeah", "and that's the scary part"). Give these their own short line.
+- INTERRUPT AND COMPLETE EACH OTHER. A host may cut in ("wait — before that…"), finish the other's thought, or answer a half-asked question. Not every line is a complete standalone sentence; a line may trail off with "…" for the other to pick up.
+- BUILD ON THE LAST LINE. Every line must clearly RESPOND to the one before it — open with a connector when natural ("so", "and", "okay but", "right, which means…"). A line must never sound like it started from a cold, blank slate.
+- LIGHT, SPARING DISFLUENCY. Occasional natural openers ("so", "okay", "here's the thing", "honestly") — but keep it clean; this is exam content. No rambling, no fake laughter, no small talk.
+- Never pack more than 2 concepts into one line — split dense material across several short exchanges. Write to be SPOKEN: contractions, natural rhythm, never bookish.
 
 STRUCTURE (follow this order):
 1. HOOK (2-3 lines): open by framing why the topic matters — its clinical stakes (how common, how it's tested, what goes wrong if missed) — BEFORE any detail. Make them want to keep listening. Never cold-open into facts.
@@ -309,21 +313,21 @@ STRUCTURE (follow this order):
 
 CHAPTERS: tag EVERY line with a short Title Case "section" label (e.g. "Overview", "Cardiovascular", "Renal", "Clinical pearls", "Recap"). Consecutive lines share the label; the first line of a new section starts a chapter.
 
-SOURCE ANCHOR: for EVERY line include "src" — a SHORT verbatim quote (6-12 words) copied EXACTLY (same words and casing) from the note the line is based on, so the app can scroll the note to that spot as the line plays. Prefer a distinctive fragment. For a pure transition/banter line, use the nearest heading from the note.
+SOURCE ANCHOR: include "src" — a SHORT verbatim quote (6-12 words) copied EXACTLY (same words and casing) from the note — for every line that TEACHES a fact, so the app can scroll the note to that spot as the line plays. For a pure reaction/banter line with no factual content, set "src" to "" (empty) — do NOT invent a quote for a reaction.
 
 ACCURACY & SAFETY: base everything strictly on the note — do not invent figures, drugs, or guidelines. Keep numbers, ranges, and units EXACTLY as in the note. Prioritise high-yield, exam-relevant facts.
 
-NEVER emit an empty or placeholder line — every line must contain real spoken text (empty segments break audio generation). No stage directions, sound effects, or bracketed notes inside the spoken text.
+NEVER emit an empty or placeholder "text" — every line must contain real spoken words (empty segments break audio generation). No stage directions, sound effects, or bracketed notes inside the spoken text. The only allowed non-word is a trailing "…" handing a thought to the other host.
 
-SELF-CHECK silently before returning: every line has real text; the length target is met (if short, ADD depth and "why", not new bare facts); every number has a "why it matters"; there is a hook, signposted sections with spoken transitions, and an active-recall recap; line lengths VARY (not all similar); and MOST turns open by reacting to / building on the previous line so it reads as one flowing conversation, not alternating monologues. If any turn could stand alone as its own paragraph, rewrite it to connect.
+SELF-CHECK silently before returning: line lengths are clearly UNEVEN (several 1-6 word reaction lines); lines respond to each other (connectors, hand-offs) rather than standing alone; every number has a "why it matters"; there is a hook, signposted sections with spoken transitions, and an active-recall recap; it reads as ONE conversation, not two monologues. If any line could stand alone as its own paragraph, rewrite it to connect.
 
-Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote"}]}.
+Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote or empty"}]}.
 
 LECTURE NOTE:
 {{note}}`;
 const PODCAST_LEN = {
-  deep:  'LENGTH & PACING (critical): target a spoken runtime of 7-9 minutes (~1,100-1,400 words) — 26-34 lines, mostly alternating A/B, each 1-3 sentences (~15-35 words). Do NOT compress the topic into a rapid fact-list; depth and pacing matter more than covering everything fast. If it runs short, add explanation and "why", not more bare facts.',
-  quick: 'LENGTH & PACING: a tight ~3-minute review — 12-16 lines, each 1-2 sentences. Hit only the highest-yield points and exam essentials; keep the hook and the active-recall recap, but trim to the single most important exam-trap. Every line must earn its place.'
+  deep:  'LENGTH & PACING (critical): target a spoken runtime of 7-9 minutes. Aim for roughly 12-16 substantive TEACHING exchanges, PLUS plenty of short reaction/hand-off lines between them — so the final script is often 35-50 lines of very UNEVEN length (many are 1-6 words). Do NOT pad with bare facts; depth, "why", and natural back-and-forth matter more than covering everything fast. If it runs short, add explanation, reactions, and follow-up questions — not more standalone statements.',
+  quick: 'LENGTH & PACING: a tight ~3-minute review — roughly 7-9 teaching exchanges plus short reactions between them (often 16-24 lines of uneven length). Hit only the highest-yield points and exam essentials; keep the hook and the active-recall recap, but trim to the single most important exam-trap. Still make it feel like a real conversation, not a fact list.'
 };
 async function podcastScript(level, note, model, mode){
   const row = await loadPromptFor("podcast", level);
@@ -331,8 +335,8 @@ async function podcastScript(level, note, model, mode){
   const levelLabel = level ? ("a Year/Level "+level+" medical student") : "medical students";
   const lenText = PODCAST_LEN[mode==="quick" ? "quick" : "deep"];
   const prompt = tmpl.replace(/\{\{note\}\}/g, note || "").replace(/\{\{level\}\}/g, levelLabel).replace(/\{\{length\}\}/g, lenText);
-  const maxTok = (row&&row.max_tokens) || (mode==="quick" ? 3000 : 6000);
-  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:Number(row&&row.temperature)||0.6 });
+  const maxTok = (row&&row.max_tokens) || (mode==="quick" ? 3500 : 7000);   // more lines now (uneven, reaction-heavy)
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:maxTok, temperature:Number(row&&row.temperature)||0.7 });   // looser speech
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
   try{ const o=JSON.parse(t.slice(s,e+1));
     return (o&&Array.isArray(o.lines))
@@ -817,10 +821,21 @@ app.post("/podcast-audio", async (req,res)=>{
       const prevSegs = (extras.podcast.seg && extras.podcast.seg[seamKey]) || [];
       // contiguous section groups
       const groups=[]; { let cur=null; for(let i=0;i<script.length;i++){ const sec=((script[i].section||"").trim())||"_"; if(!cur||cur.section!==sec){ cur={section:sec, from:i, to:i}; groups.push(cur); } else cur.to=i; } }
+      // Split any section that's too long into safe sub-chunks so ONE multi-speaker call never exceeds
+      // Fish's per-generation character limit (the #1 cause of a chapter failing). Each sub-chunk is
+      // still seamless internally; only very long chapters ever split.
+      const SEAM_CAP = 1600;
+      const chunks=[];
+      for(const g of groups){ let s=g.from, len=0;
+        for(let i=g.from;i<=g.to;i++){ const L=String(script[i].text||"").length+16;
+          if(len>0 && len+L>SEAM_CAP){ chunks.push({from:s, to:i-1, section:g.section}); s=i; len=0; }
+          len+=L; }
+        chunks.push({from:s, to:g.to, section:g.section});
+      }
       const have = {}; prevSegs.forEach(s=>{ have[s.from+"_"+s.to]=s; });
       const DL = Date.now()+40000;
       const segs = [];
-      for(const g of groups){
+      for(const g of chunks){
         if(Date.now()>DL) break;
         const gkey=g.from+"_"+g.to;
         if(have[gkey]){ segs.push(have[gkey]); continue; }              // resume: already done
