@@ -341,6 +341,21 @@ async function podcastScript(level, note, model, mode){
       : null;
   }catch(_){ return null; }
 }
+/* Fish MULTI-SPEAKER: one seamless audio file for a whole section of dialogue.
+   text uses <|speaker:0|> / <|speaker:1|> tags; reference_id is [voiceA, voiceB]. S2 family only. */
+async function fishMultiTTS(text, refs, attempt){
+  attempt = attempt || 0;
+  const key = FISH_KEY; if(!key) throw new Error("FISH_API_KEY not set");
+  const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),60000); let r;   // a whole section is longer than one line
+  try{ r = await fetch("https://api.fish.audio/v1/tts", {
+    method:"POST", signal:ctrl.signal,
+    headers:{ "Authorization":"Bearer "+key, "Content-Type":"application/json", "model": process.env.FISH_MODEL || "s2.1-pro" },
+    body: JSON.stringify({ text, reference_id: refs, format:"mp3", prosody:{ speed: FISH_SPEED }, condition_on_previous_chunks:true }) });
+  }catch(e){ clearTimeout(to); if(attempt<2){ await new Promise(s=>setTimeout(s,900*(attempt+1))); return fishMultiTTS(text,refs,attempt+1); } throw new Error("Fish multi-speaker timed out"); }
+  clearTimeout(to);
+  if(!r.ok){ if((r.status>=500||r.status===429)&&attempt<2){ await new Promise(s=>setTimeout(s,1000*(attempt+1))); return fishMultiTTS(text,refs,attempt+1); } const t=await r.text().catch(()=> ""); throw new Error("Fish multi-speaker failed ("+r.status+"): "+t.slice(0,160)); }
+  return Buffer.from(await r.arrayBuffer());
+}
 async function openaiTTS(text, voice, _retry){
   const key = process.env.OPENAI_API_KEY; if(!key) throw new Error("OPENAI_API_KEY not set on the server");
   const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),30000); let r;
@@ -793,6 +808,40 @@ app.post("/podcast-audio", async (req,res)=>{
       rarr[ri] = rurl; extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]: rarr });
       await admin.from("topics").update({ extras }).eq("id", topic_id);
       return res.json({ ok:true, index:ri, url:rurl });
+    }
+    // ===== SEAMLESS (multi-speaker) path — one continuous Fish file per section (chapter). =====
+    // Only for Fish (premium). Each section that succeeds is one natural, gapless clip; a section
+    // that fails drops back to per-line clips, so the episode ALWAYS completes (never breaks).
+    if(req.body.seamless === true && provider === "fish"){
+      const seamKey = "seam_"+combo;
+      const prevSegs = (extras.podcast.seg && extras.podcast.seg[seamKey]) || [];
+      // contiguous section groups
+      const groups=[]; { let cur=null; for(let i=0;i<script.length;i++){ const sec=((script[i].section||"").trim())||"_"; if(!cur||cur.section!==sec){ cur={section:sec, from:i, to:i}; groups.push(cur); } else cur.to=i; } }
+      const have = {}; prevSegs.forEach(s=>{ have[s.from+"_"+s.to]=s; });
+      const DL = Date.now()+40000;
+      const segs = [];
+      for(const g of groups){
+        if(Date.now()>DL) break;
+        const gkey=g.from+"_"+g.to;
+        if(have[gkey]){ segs.push(have[gkey]); continue; }              // resume: already done
+        let done=false;
+        try{
+          let tagged=""; for(let i=g.from;i<=g.to;i++){ const idx=script[i].speaker==="A"?0:1; tagged+="<|speaker:"+idx+"|>"+String(script[i].text).trim()+" "; }
+          const buf = await fishMultiTTS(tagged.trim(), [vA, vB]);
+          if(buf && buf.length>=1200){ const u=await uploadPodcastAudio("t/"+topic_id+"/"+seamKey+"/g"+gkey+".mp3", buf); segs.push({url:u, from:g.from, to:g.to, multi:true, section:g.section}); done=true; }
+        }catch(e){ console.warn("[podcast] seamless section "+gkey+" failed → per-line fallback:", (e&&e.message||"").slice(0,90)); }
+        if(!done){                                                       // fallback: per-line clips for this section
+          for(let i=g.from;i<=g.to;i++){
+            try{ const vid=script[i].speaker==="A"?vA:vB; const b=await ttsClip("fish", script[i].text, vid, null, true);
+              if(b&&b.length>=1200){ const u=await uploadPodcastAudio("t/"+topic_id+"/"+seamKey+"/L"+i+".mp3", b); segs.push({url:u, from:i, to:i, multi:false, section:g.section}); } }catch(e){}
+          }
+        }
+      }
+      extras.podcast.seg = Object.assign({}, extras.podcast.seg||{}, { [seamKey]: segs });
+      await admin.from("topics").update({ extras }).eq("id", topic_id);
+      const covered = {}; segs.forEach(s=>{ for(let i=s.from;i<=s.to;i++) covered[i]=1; });
+      const allDone = script.every((_,i)=>covered[i]);
+      return res.json({ ok:true, done:allDone, segments:segs, lines:script, mode, engine:"fish" });
     }
     if(extras.podcast.audio && extras.podcast.audio[combo] && extras.podcast.audio[combo].every(Boolean))
       return res.json({ ok:true, done:true, urls:extras.podcast.audio[combo], lines:script });

@@ -1,5 +1,6 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v182';   // v182: Physics exemplars (motion/SHM/thermal graphs, vectors, energy flow, collision solve) + physics detection gate & routing + Physics teaser demo + graph dash support
+const CACHE = 'medbank-v185';   // v184: Physics — 6 new exemplars (motion / SHM / heating-curve graphs, the reused vectors plane, the energy ledger, a collision worked on "solve"), the physics detection gate + full topic routing, the Physics teaser demo on the fbd renderer, and dashed comparison curves on the graph renderer
+// v183: Organic Chemistry — the curly-arrow mechanism renderer (typed arrows, step rail, named intermediate frames, charge ledger), 14 Organic exemplars, the organic detection gate + routing, and the Organic teaser demo
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
   './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js',
