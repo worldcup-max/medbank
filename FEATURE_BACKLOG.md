@@ -56,6 +56,20 @@ Script persistence · OpenAI TTS removed · premium→Fish routing · resumable/
 - **Weakness engine (v189):** every answer logged as one attempt (single source of truth) with per-question timing. Performance dashboard: first-pass vs after-review (only first-pass predicts the exam), by system / topic / difficulty, Tutor vs Test, pacing (avg time + fast-wrong flag), session-trend sparkline, and auto study recommendations. **My Mistakes** pool re-serves questions you last got wrong until you get them right; scope toggle This-topic / All-topics. Attempt log unions across devices in sync (can't be wiped).
 - **Roadmap (Q-bank phase 2):** peer percentile / decile benchmark (needs backend aggregation of anonymised attempts — schema is already peer-ready); adaptive session generation weighted to weak systems; answer-changing stats; flag-for-review pool separate from wrong-answers.
 
+## 5. Q-bank system roadmap (Topic + Mega + beyond)
+Two layers now, growing toward a clinical-reasoning engine. Difficulty = the four **cognitive levels** (Interpretation → Clinical reasoning → Complex reasoning → Exam trap); **skill** (Diagnosis / Investigation / Management / Complications / Differential / Next best step) is a separate axis. Data model designed-for the later phases (reserved integrated_topics[]/case_id/branch_id).
+
+**V1 — shipped (v192–v193)**
+- Topic Q-bank: Tutor/Test, 4 cognitive levels, skill filter ("what to practice"), count, type hidden until after answering then revealed (level·skill·subtopic + exam-trap callout), objective + Show-in-note, weak-question retry, dashboard with By-cognitive-level + Reasoning-profile, mastery grid columns = cognitive levels.
+- Mega Q-bank (sidebar): course + topic pool, **Focused / Mixed / Blind** exposure (topic never shown before answering, revealed after — point 5), **balanced round-robin** so a big topic can't dominate (point 8), Blind draws whole courses (point 6). **Quick Exam is the primary CTA** (point 11); **"Drill my weaknesses"** panel from existing analytics (point 13); Mega Test **results break down by course / cognitive level / skill** (point 9). Tutor/Test, level + skill + count. Reuses the attempt log so weakness analytics + mistakes pool work across topics.
+- Schema: **trap_type** (anchoring / premature_closure / next_step_confusion / timing_error / contraindication / overthinking / common_diagnosis_bias) + **trap_explanation**, populated beyond exam-trap (point 16) — enables "you keep falling for next-step confusion" analytics later.
+- Generator prompt encodes each cognitive level's construction rules + the exam-trap taxonomy (diagnosis-vs-next-step, stabilisation-vs-definitive, most-likely-vs-most-dangerous, treatment-vs-contraindication, conditional-not-automatic).
+
+**V1.5 — next** ⬜ adaptive difficulty · weakness targeting / Smart Drill · confidence rating (wrong+confident = misconception) · recommendation engine ("here's what to practice") · historical performance over time.
+**V2** ⬜ Integrated cases (one vignette needs multiple topics/courses) — new multi-note generation path.
+**V3** ⬜ 🌳 Branching clinical cases — decision → consequence → outcome; "your first wrong decision was at step 2". Its own engine (case state / transitions / scoring).
+**V4** ⬜ 🧠 Adaptive Exam Simulator — "prepare me for my exam": auto-builds a personalised timed paper (weak areas + previously-missed + mixed reasoning + traps), then reports risk areas.
+
 ## Priorities (my recommendation)
 - **Biggest brand-movers:** Question bank (#1) → Shared class library (#7) → Teach-back (#4).
 - **Highest-impact podcast polish:** time scrubber (2.1) → sticky mini-player (2.9) → download MP3 (2.6) → inline Q&A bubble (2.11).
