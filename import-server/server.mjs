@@ -298,14 +298,14 @@ LEVEL: pitch the depth for {{level}}. Lower levels — explain fundamentals and 
 
 {{length}}
 
-PACING (critical): never pack more than 2 distinct concepts into one line — split dense material across multiple short exchanges so a listener absorbs each idea. Keep lines fairly even in length (~10-20 seconds spoken). Write to be SPOKEN: contractions, natural rhythm, short reactions ("right", "exactly", "wait —"), never bookish, no filler.
+PACING & RHYTHM: never pack more than 2 concepts into one line. VARY the length like a real chat — mix very short reactions and questions (3-8 words: "wait, why?", "exactly", "ooh, that's the trap") with longer explanations. Do NOT make every line the same length: even, balanced turns are exactly what makes a podcast sound like two monologues stitched together — avoid that.
+
+FLOW — THIS IS WHAT MAKES IT SOUND HUMAN (most important rule): every turn must CONNECT to the one before it. Open most lines by reacting to or building on what the other host just said — a quick acknowledgement or pivot ("Right —", "Exactly, and here's the thing —", "Ooh, good point —", "Wait, back up —", "Yeah, so..."). Let one host finish or gently interrupt the other's thought, and let a sentence carry across the hand-off (one host sets it up, the other lands it). Sprinkle natural spoken fillers ("so", "I mean", "you know") sparingly. It must sound like two friends talking — NOT two people reading alternate paragraphs. Write to be SPOKEN: contractions, natural rhythm, never bookish.
 
 STRUCTURE (follow this order):
 1. HOOK (2-3 lines): open by framing why the topic matters — its clinical stakes (how common, how it's tested, what goes wrong if missed) — BEFORE any detail. Make them want to keep listening. Never cold-open into facts.
 2. SIGNPOSTED BODY: group content into clear sections (by system, cause, or stage). Begin each section with a short spoken transition that names it ("that's the cardiovascular side — now the renal changes"). For EVERY key fact or number, add one sentence of WHY — the mechanism or the clinical consequence. Never leave a bare statistic unexplained. After each major section, add one quick clinical application or exam-trap callout ("a creatinine of 0.8 in pregnancy is a red flag").
 3. RECAP as ACTIVE RECALL (final 2-3 lines): pose quick self-test questions and answer them ("what's a normal haemoglobin in pregnancy? Around 10.5 to 11"), not a passive summary.
-
-DIALOGUE: genuine back-and-forth, not alternating monologues — A asks, B answers, they build on each other. Real conversation, not two lectures side by side.
 
 CHAPTERS: tag EVERY line with a short Title Case "section" label (e.g. "Overview", "Cardiovascular", "Renal", "Clinical pearls", "Recap"). Consecutive lines share the label; the first line of a new section starts a chapter.
 
@@ -315,7 +315,7 @@ ACCURACY & SAFETY: base everything strictly on the note — do not invent figure
 
 NEVER emit an empty or placeholder line — every line must contain real spoken text (empty segments break audio generation). No stage directions, sound effects, or bracketed notes inside the spoken text.
 
-SELF-CHECK silently before returning: every line has real text; the length target is met (if short, ADD depth and "why", not new bare facts); every number has a "why it matters"; there is a hook, signposted sections with spoken transitions, and an active-recall recap; it reads as a two-way conversation.
+SELF-CHECK silently before returning: every line has real text; the length target is met (if short, ADD depth and "why", not new bare facts); every number has a "why it matters"; there is a hook, signposted sections with spoken transitions, and an active-recall recap; line lengths VARY (not all similar); and MOST turns open by reacting to / building on the previous line so it reads as one flowing conversation, not alternating monologues. If any turn could stand alone as its own paragraph, rewrite it to connect.
 
 Return ONLY valid JSON: {"lines":[{"speaker":"A"|"B","text":"one spoken line","section":"Section label","src":"verbatim note quote"}]}.
 

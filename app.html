@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.20a';   // bump this each release
+const APP_VERSION='2026.08.20b';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2574,6 +2574,8 @@ function podLoadLine(i,autoplay){
   a.src=POD.urls[POD.i]; a.playbackRate=POD.speed; a.volume=(POD.volume==null?1:POD.volume);
   if(autoplay){ a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }
   try{ localStorage.setItem('pod_pos_'+POD.topicId, String(POD.i)); }catch(e){}
+  // preload the next clips so the hand-off between turns has NO dead-air gap (the "stitched monologue" feel)
+  try{ POD._pre=POD._pre||{}; for(var k=1;k<=2;k++){ var ni=POD.i+k, nu=POD.urls&&POD.urls[ni]; if(nu&&!POD._pre[ni]){ var pa=new Audio(); pa.preload='auto'; pa.src=nu; POD._pre[ni]=pa; } } }catch(e){}
   podUpdateMediaArt();                                    // swap lock-screen art to the current speaker
   try{ var ln=POD.lines&&POD.lines[POD.i]; if(ln&&ln.src&&window.MB_DOCK_FOLLOW) MB_DOCK_FOLLOW(ln.src); }catch(e){}   // scroll the note to this line's source
   podPaint();
@@ -5495,7 +5497,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   var CURLY_KIND={step:{c:'#a78bfa',t:'step'},ts:{c:'#5eead4',t:'transition state'},
                   intermediate:{c:'#fbbf24',t:'intermediate'},product:{c:'#34d399',t:'product'},
                   danger:{c:'#f87171',t:'the classic mistake'}};
-  var CURLY_TAIL={'lone-pair':'a lone pair','sigma':'a σ bond','pi':'a π bond','anion':'a negative charge'};
+  var CURLY_TAIL={'lone-pair':'a lone pair','sigma':'a σ bond','pi':'a π bond','anion':'a negative charge','radical':'a single unpaired electron'};
   function curlyFrames(){ return (BP.frames||[]); }
   function curlyOwner(id){ if(!id)return null; var F=curlyFrames();
     for(var k=0;k<F.length;k++){ if(F[k].id===id)return F[k];
@@ -5510,7 +5512,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     for(var p=0;p<lp;p++){ var px=x+34+p*40, py=y+13;
       s+='<circle cx="'+px+'" cy="'+py+'" r="3.1" fill="#f8fafc"/><circle cx="'+(px+9)+'" cy="'+py+'" r="3.1" fill="#f8fafc"/>'; }
     s+=T(cx,cy+(lp?12:8),sp.label||sp.id,{size:21,w:800,fill:'#f5f3ff',mono:true});
-    if(sp.charge)s+='<circle cx="'+(x+w-16)+'" cy="'+(y+16)+'" r="13" fill="'+(/-|−/.test(sp.charge)?'#1e3a8a':'#7f1d1d')+'" stroke="#f8fafc" stroke-width="1.6"/>'+T(x+w-16,y+21,sp.charge,{size:13,w:800,fill:'#fff'});
+    if(sp.charge)s+='<circle cx="'+(x+w-16)+'" cy="'+(y+h-16)+'" r="13" fill="'+(/-|−/.test(sp.charge)?'#1e3a8a':'#7f1d1d')+'" stroke="#f8fafc" stroke-width="1.6"/>'+T(x+w-16,y+h-11,sp.charge,{size:13,w:800,fill:'#fff'});
     s+='</g>';
     if(sp.note)s+=T(cx,cy+h/2+18,sp.note,{size:11,w:700,fill:'#a79fc4'});
     return s; }
@@ -5533,13 +5535,13 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     S.push('<rect x="56" y="80" width="'+mw+'" height="22" rx="11" fill="'+mode.c+'" opacity=".2"/>'+T(56+mw/2,95,mode.t,{size:11,w:800,fill:mode.c}));
     var kw=kind.t.length*6.6+22;
     S.push('<rect x="'+(904-kw)+'" y="80" width="'+kw+'" height="22" rx="11" fill="'+kind.c+'" opacity=".22"/>'+T(904-kw/2,95,kind.t,{size:11,w:800,fill:kind.c}));
-    if(cur.title)S.push(T(480,124,cur.title,{size:15,w:800,fill:'#ede9fe'}));
+    if(cur.title)S.push(T(480,120,cur.title,{size:15,w:800,fill:'#ede9fe'}));
     /* ---- species, grouped by slot so two can share a column ---- */
     var SLOTX={left:214,center:480,right:746},bys={left:[],center:[],right:[]};
     (cur.species||[]).forEach(function(sp,ix){ var sl=SLOTX[sp.slot]?sp.slot:['left','center','right'][ix%3]; bys[sl].push(sp); });
     var pos={};
     ['left','center','right'].forEach(function(sl){ var list=bys[sl],n=list.length;
-      var ys=n<=1?[228]:(n===2?[190,282]:[160,228,296]);
+      var ys=n<=1?[238]:(n===2?[196,292]:[166,238,310]);
       list.forEach(function(sp,j){ var cx=SLOTX[sl],cy=ys[j]!==undefined?ys[j]:228;
         pos[sp.id]={x:cx,y:cy}; CURLYPT[sp.id]={x:cx,y:cy};
         S.push(curlyCard(cx,cy,sp,!!act[sp.id],act[sp.id]?mode.c:'#4c4372')); }); });
@@ -5549,22 +5551,27 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       var A=pos[a.from],B=pos[a.to]; if(!A||!B)return;
       var live=!!act[a.id],col=(BP.mode==='radical'||a.kind==='fishhook')?'#fbbf24':(res?'#60a5fa':'#c4b5fd');
       var sx,sy,tx,ty,mx,my;
-      if(a.from===a.to){ sx=A.x-52;sy=A.y-46;tx=A.x+52;ty=A.y-46;mx=A.x;my=A.y-132; }      // intramolecular: loop over the top
-      else { sx=A.x+(B.x>A.x?86:-86);sy=A.y-30;tx=B.x+(B.x>A.x?-86:86);ty=B.y-30;
-             mx=(sx+tx)/2;my=Math.min(sy,ty)-(72+22*(ai%2)); }
+      var self=(a.from===a.to),sgn=(ai%2===0)?1:-1;
+      if(self){ sx=A.x-46*sgn;sy=A.y-54;tx=A.x+46*sgn;ty=A.y-54;mx=A.x;my=A.y-118; }        // intramolecular: loop over the top of the card, alternating direction
+      else { var dir=(B.x>A.x)?1:-1, far=Math.abs(B.x-A.x)>300;
+             // a short hop leaves from the side of the card; a long one leaves from the TOP, so the
+             // arc clears any species parked in the middle slot instead of ploughing through it
+             if(far){ sx=A.x+dir*46;sy=A.y-54;tx=B.x-dir*46;ty=B.y-54;mx=(sx+tx)/2;my=Math.min(sy,ty)-78; }
+             else { sx=A.x+dir*112;sy=A.y-14;tx=B.x-dir*112;ty=B.y-14;mx=(sx+tx)/2;my=Math.min(sy,ty)-(58+18*(ai%2)); } }
+      var lx=self?(A.x+sgn*146):((sx+2*mx+tx)/4), ly=self?(A.y-104):((sy+2*my+ty)/4);
       var uid='cu'+stepIdx+'_'+ai;
-      S.push('<defs><marker id="'+uid+'" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">'+
+      S.push('<defs><marker id="'+uid+'" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="12" refY="6" orient="auto">'+
         (a.kind==='fishhook'
-          ? '<path d="M0,0 L9,4" stroke="'+col+'" stroke-width="2.1" fill="none"/>'      // ONE electron — half an arrowhead
-          : '<path d="M0,0 L9,4 L0,8 Z" fill="'+col+'"/>')+'</marker></defs>');
+          ? '<path d="M0,0 L12,6" stroke="'+col+'" stroke-width="2.4" fill="none"/>'     // ONE electron — half an arrowhead
+          : '<path d="M0,0 L12,6 L0,12 Z" fill="'+col+'"/>')+'</marker></defs>');
       S.push('<path d="M'+sx+','+sy+' Q'+mx+','+my+' '+tx+','+ty+'" stroke="'+col+'" stroke-width="'+(live?4.2:3)+'" fill="none" opacity="'+(live?1:.55)+'" marker-end="url(#'+uid+')"'+(live?' class="vzglow"':'')+'/>');
       // the TAIL — what the electrons are actually sitting on. It gets its own ring and its own name.
       S.push('<circle cx="'+sx+'" cy="'+sy+'" r="'+(live?11:8)+'" fill="none" stroke="'+col+'" stroke-width="2.2" stroke-dasharray="4 3"'+(live?' class="vzglow"':'')+'/>');
-      if(live)S.push(T(sx,sy-16,'from '+(CURLY_TAIL[a.tail]||a.tail||'a lone pair'),{size:11,w:800,fill:col}));
-      var lx=(sx+2*mx+tx)/4,ly=(sy+2*my+ty)/4;
+      if(live){ var td=self?((sx<A.x)?-1:1):((tx>sx)?1:-1);
+        S.push(T(sx+td*6,sy-19,'from '+(CURLY_TAIL[a.tail]||a.tail||'a lone pair'),{size:11,w:800,fill:col,anchor:td>0?'start':(td<0?'end':'middle')})); }
       CURLYPT[a.id]={x:lx,y:ly};
       if(live&&a.label){ var lw=a.label.length*6.1+20;
-        S.push('<rect x="'+(lx-lw/2)+'" y="'+(ly-30)+'" width="'+lw+'" height="21" rx="10" fill="#0b0918" stroke="'+col+'" stroke-width="1.2"/>'+T(lx,ly-15,a.label,{size:11,w:700,fill:'#e9e5ff'})); }
+        S.push('<rect x="'+(lx-lw/2)+'" y="'+(ly-11)+'" width="'+lw+'" height="22" rx="11" fill="#0b0918" stroke="'+col+'" stroke-width="1.2"/>'+T(lx,ly+4,a.label,{size:11,w:700,fill:'#e9e5ff'})); }
     });
     /* ---- the intermediate gets a NAME and a reason to exist (students never notice it otherwise) ---- */
     if(cur.badge||cur.why){ var bt=(cur.badge||'')+(cur.why?'  ·  '+cur.why:''),bw=Math.min(760,bt.length*6.4+28);
@@ -5588,7 +5595,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       if(r.k==='gap'){ S.push('<rect x="'+x+'" y="482" width="'+cw+'" height="44" rx="10" fill="none" stroke="#c9c3d8" stroke-width="2" stroke-dasharray="7 6"/>'+T(x+cw/2,509,r.t,{size:11,w:800,fill:'#a49dbb'})); }
       else { S.push('<rect x="'+x+'" y="482" width="'+cw+'" height="44" rx="10" fill="'+(r.hot?'#ede7fb':'#fff')+'" stroke="'+(r.hot?ck:'#ded9ee')+'" stroke-width="'+(r.hot?2.6:1.4)+'" opacity="'+(r.on?1:.35)+'"/>');
         var words=String(r.t).split(' '),l1=r.t,l2='';
-        if(r.t.length>Math.floor(cw/6.2)){ l1='';for(var wi=0;wi<words.length;wi++){ if((l1+' '+words[wi]).trim().length<=Math.floor(cw/6.2))l1=(l1+' '+words[wi]).trim(); else l2=(l2+' '+words[wi]).trim(); } }
+        if(r.t.length>Math.floor(cw/6.2)){ l1='';var cap=Math.floor(cw/6.2);
+          for(var wi=0;wi<words.length;wi++){ if(!l2&&(l1+' '+words[wi]).trim().length<=cap)l1=(l1+' '+words[wi]).trim(); else l2=(l2+' '+words[wi]).trim(); } }
         S.push(T(x+cw/2,l2?500:509,l1,{size:11,w:800,fill:r.hot?'#5b21b6':'#6b6480'}));
         if(l2)S.push(T(x+cw/2,514,l2,{size:11,w:800,fill:r.hot?'#5b21b6':'#6b6480'}));
         if(r.on&&r.id)CURLYPT[r.id]={x:x+cw/2,y:504}; }
@@ -6786,6 +6794,23 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
                        {reveal:["a2"],active:["a2"],point:"a2"},
                        {reveal:["f2"],active:["ts"],point:"ts"},
                        {reveal:["f3"],active:["pr"],point:"pr"}]},
+    /* PHYSICS — the flagship teaser on the new free-body renderer. Silent, ~7s, five beats:
+       the block lifts out of the slope → the Earth pulls it down → the surface pushes back (and it
+       is NOT mg) → the arrows add to a net force → the acceleration appears in its own colour,
+       outside the cluster. Chosen over a motion graph because the isolate-the-body beat is the one
+       thing no textbook can animate, and because half of first-year physics lands on this view. */
+    "phys":{layout:"fbd",meta:{title:""},incline:28,
+      body:{label:"4 kg block",mass:"m = 4 kg"},scene_note:"released from rest",
+      forces:[{id:"w",label:"Weight  mg = 39 N",agent:"by the Earth",dir:270,mag:1,kind:"weight"},
+              {id:"n",label:"Normal  N = 35 N",agent:"by the surface",dir:62,mag:0.85,kind:"normal"},
+              {id:"f",label:"Friction  f = 7 N",agent:"by the surface",dir:152,mag:0.35,kind:"friction"}],
+      net:{dir:332,mag:0.32,label:"F_net = 11 N down the slope"},
+      accel:{dir:332,label:"a = 2.8 m/s² — a RESULT, not a force"},
+      narration_steps:[{reveal:["body"],active:["body"],point:"body"},
+                       {reveal:["w"],active:["w"],point:"w"},
+                       {reveal:["n","f"],active:["n"],point:"n"},
+                       {reveal:["net"],active:["net"],point:"net"},
+                       {reveal:["accel"],active:["accel"],point:"accel"}]},
     /* a second maths teaser using the ported unit-circle renderer */
     "trig":{layout:"unitcircle",meta:{title:""},angle:52,
       narration_steps:[{reveal:["circle"],active:["circle"],point:"circle"},
@@ -6815,6 +6840,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   VIZ_DEMOS["Computer Studies"]=VIZ_DEMOS["cs"];    // 100-level Computer Studies
   VIZ_DEMOS["Computer Science"]=VIZ_DEMOS["cs"];
   VIZ_DEMOS["Biology"]=VIZ_DEMOS["bio"];        // 100-level Biology
+  VIZ_DEMOS["Physics"]=VIZ_DEMOS["phys"];       // 100-level Physics
   VIZ_DEMOS["Organic Chemistry"]=VIZ_DEMOS["org"];   // 100-level Organic Chemistry
   VIZ_DEMOS["Organic chemistry"]=VIZ_DEMOS["org"];
   window.VIZ_DEMOS = VIZ_DEMOS;   // scheduled subject builds append their demo here
@@ -6822,7 +6848,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   function teaserDraw(el,k){ if(!el||document.getElementById('vizov')||document.getElementById('obov'))return;   // pause while the real player / onboarding is open
     _tzBP._render=undefined; BP=_tzBP;
     try{ applyLayout(BP); }catch(e){}
-    var TSV={graph:graphSVG,tree:treeSVG,flow:flowSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,punnett:punnettSVG,curly:curlySVG,logic:logicSVG,table:tableSVG};
+    var TSV={graph:graphSVG,tree:treeSVG,flow:flowSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,punnett:punnettSVG,curly:curlySVG,logic:logicSVG,table:tableSVG,fbd:fbdSVG,circuit:circuitSVG};
     var fn=TSV[BP.layout]||flowSVG; try{ el.innerHTML=fn(k); }catch(e){} }
   window.hasUsedViz=function(){ try{
     if(window.DATA&&DATA.viz&&Object.keys(DATA.viz).some(function(k){return (DATA.viz[k]||[]).length>0;})) return true;
@@ -6836,15 +6862,22 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     "math":"The gradient of the curve y = x² at any point is exactly twice the x-value.",
     "bio":"Two unaffected carriers can still have an affected child — one chance in four, every time.",
     "org":"Hydroxide attacks the carbon from the back, and the bromide leaves in the same step — so the carbon inverts.",
-    "cs":"In binary there is no digit 2, so 1 + 1 gives a sum bit of 0 and carries a 1 into the next column." };
+    "cs":"In binary there is no digit 2, so 1 + 1 gives a sum bit of 0 and carries a 1 into the next column.",
+    "phys":"A 4 kg block is released on a rough slope at 28° — draw the forces on it and find its acceleration." };
   /* Biology is tested BEFORE chemistry: "biochemistry" and "molecular biology" contain "chem", and a
      biology note should never be handed the galvanic-cell teaser. Computing is tested BEFORE maths,
      because "Computer Science" and "Computing Mathematics" both contain a maths cue. */
   function vtKey(subj){ return /biolog|genetic|zoolog|botan|ecolog|physiolog|microbiolog/i.test(subj)?"bio"
+    :/physics|mechanic|electromagnet|thermodynam|astronom|kinematic/i.test(subj)?"phys"
     :/organic|orgo/i.test(subj)?"org"
     :/chem/i.test(subj)?"chem"
     :/comput|informatic|\bict\b|programming|software eng/i.test(subj)?"cs"
     :/math|calcul|algebra|trig|statist|geometry|further maths/i.test(subj)?"math":"default"; }
+  var VT_FBDCAP={body:'Lift the block out of the scene — what is touching it?',
+    axes:'Turn the axes to lie along the slope',net:'The NET force — no single arrow is this big',
+    accel:'Acceleration is the RESULT of the forces, never one of them',
+    danger:'No agent, no arrow — there is no “force of motion”',gauge:'Static friction sits below its cap',
+    comp:'One arrow, measured two ways'};
   var VT_PUNCAP={p1:'Both parents are carriers — Aa',p2:'Both parents are carriers — Aa',
     gtop:'Each parent gives ONE allele',gside:'Each parent gives ONE allele',
     tally:'Count the colours, not the letters',ratio:'3 : 1 — a chance, not a promise'};
@@ -6860,6 +6893,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       var ar=null; (BP.frames||[]).forEach(function(f){ (f.arrows||[]).forEach(function(x){ if(x.id===id)ar=x; }); });
       if(ar)return 'the arrow starts on '+(CURLY_TAIL[ar.tail]||'a lone pair')+' — electrons, not atoms';
       if(fr)return fr.title+(fr.why?' — '+fr.why:''); }
+    if(BP.layout==='fbd'){ if(VT_FBDCAP[id])return VT_FBDCAP[id];
+      var fo=(BP.forces||[]).filter(function(x){return x.id===id;})[0]; if(fo)return fo.label+(fo.agent?' — '+fo.agent:''); }
     if(BP.layout==='punnett'){ if(VT_PUNCAP[id])return VT_PUNCAP[id];
       var c=(BP.cells||[]).filter(function(x){return x.id===id;})[0]; if(c)return c.geno+(c.note?' — '+c.note:''); } }catch(e){} return (BP.meta&&BP.meta.title)||''; }
   var _vtTos=[];

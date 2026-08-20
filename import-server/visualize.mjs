@@ -1527,7 +1527,7 @@ export const EXEMPLARS = [
   { text: "A car starts from rest, speeds up steadily to 20 m/s in 8 s, holds that speed for 6 s, then brakes to rest in 4 s. Sketch the velocity–time graph and explain what its slope and the area beneath it tell you.",
     blueprint: {meta:{title:"A velocity–time graph — slope is acceleration, area is distance",subject:"Physics",concept_id:"vt_graph_slope_and_area"},layout:"graph",
       x:{min:0,max:19,label:"time (seconds)"}, y:{min:0,max:25,label:"velocity (metres per second)"},
-      curves:[{id:"v",color:"#7c3aed",label:"v–t",points:[[0,0],[2,5],[4,10],[6,15],[8,20],[10,20],[12,20],[14,20],[16,10],[18,0]]}],
+      curves:[{id:"v",color:"#7c3aed",label:"v–t",points:[[0,0],[2,5],[4,10],[6,15],[7,17.5],[8,20],[9,20],[11,20],[13,20],[14,20],[15,15],[16,10],[17,5],[18,0]]}],
       markers:[{id:"rise",at:[4,10],label:"climbing: slope = +2.5 m/s²",color:"#dc2626"},
                {id:"flat",at:[9,20],label:"FLAT ≠ stopped — steady 20 m/s",color:"#2563eb"},
                {id:"fall",at:[16,10],label:"slope = −5 m/s²",color:"#b45309"},
@@ -1592,9 +1592,9 @@ export const EXEMPLARS = [
   { text: "Ice at −20 °C is heated steadily until it becomes steam at 120 °C. Sketch the heating curve of temperature against energy supplied and explain the two flat sections.",
     blueprint: {meta:{title:"The heating curve — why the temperature stops rising",subject:"Physics",concept_id:"heating_curve_latent_heat"},layout:"graph",
       x:{min:0,max:800,label:"energy supplied (kilojoules)"}, y:{min:-40,max:140,label:"temperature (degrees Celsius)"},
-      curves:[{id:"h",color:"#7c3aed",label:"heating curve",points:[[0,-20],[20,-10],[40,0],[90,0],[140,0],[190,50],[240,100],[430,100],[620,100],[700,113],[770,125]]}],
-      markers:[{id:"warm",at:[35,-6],label:"ice warming — Q = mcΔT",color:"#2563eb"},
-               {id:"melt",at:[90,0],label:"MELTING — energy in, no rise",color:"#dc2626"},
+      curves:[{id:"h",color:"#7c3aed",label:"heating curve",points:[[0,-20],[20,-10],[40,0],[60,0],[90,0],[115,0],[140,0],[165,25],[190,50],[215,75],[240,100],[300,100],[430,100],[550,100],[620,100],[660,108],[700,116],[770,125]]}],
+      markers:[{id:"warm",at:[20,-10],label:"Q = mcΔT",color:"#2563eb"},
+               {id:"melt",at:[140,0],label:"MELTING — no rise",color:"#dc2626"},
                {id:"liq",at:[190,50],label:"liquid water warming",color:"#2563eb"},
                {id:"boil",at:[430,100],label:"BOILING — a far longer plateau",color:"#dc2626"},
                {id:"steam",at:[700,116],label:"steam warming — steep again",color:"#2563eb"}],
@@ -1697,7 +1697,534 @@ export const EXEMPLARS = [
         {short:"Recap",term:"recap",narration_text:"Recap. Momentum before equals momentum after, direction included, in every collision. Kinetic energy survives only if the collision is elastic — and when it does not survive, name where it went.",reveal:["l4","l7"],active:["l7"],point:"l7"}],
       recap:["Momentum is conserved in every collision; kinetic energy only in elastic ones.",
              "Carry the direction through every line — momentum is a vector.",
-             "'Lost' kinetic energy becomes heat, sound and deformation."]} }
+             "'Lost' kinetic energy becomes heat, sound and deformation."]} },
+
+  /* ══════════ ORGANIC CHEMISTRY (100-level) 42–55 · the gold shots. The corpus finding that drives
+     this whole block: General Chemistry is quantitative, so "flow" carried it; Organic is
+     MECHANISTIC and SPATIAL, so the answer is a drawing and the reasoning is where a pair of
+     electrons went. Eight of these fourteen are "curly", which is exactly the ratio the corpus
+     predicts (topics 7–17 are all the one renderer). Every arrow below is TYPED and LABELLED,
+     every intermediate has a name badge, and every frame declares its charge — because the three
+     things students get wrong are (1) thinking the arrow moves an atom, (2) not noticing the
+     intermediate exists, and (3) drawing arrows that do not conserve charge. ══════════ */
+
+  /* ── ORGANIC 42: curly — the PROTON TRANSFER. The arrows-first literature is explicit that the
+     formalism should be built on a trivial proton transfer before any real reaction: one lone pair,
+     one sigma bond, two arrows, done. Routing the first arrow lesson here rather than to
+     substitution is a deliberate corpus recommendation. Concerted, so both arrows fire in ONE beat
+     and the rail draws the missing intermediate as a visible absence. ── */
+  { text: "Explain why ethanoic acid loses its O–H proton to hydroxide, and why the resulting carboxylate is so much more stable than an alkoxide.",
+    blueprint: {meta:{title:"Proton transfer — your first two curly arrows",subject:"Organic Chemistry",concept_id:"proton_transfer_carboxylic_acid"},layout:"curly",mode:"concerted",
+      reaction:"CH₃COOH + HO⁻ → CH₃COO⁻ + H₂O",
+      note:"tail before head, every single time — say what the electrons are sitting on before you say where they go",
+      frames:[
+        {id:"f1",title:"the base takes the proton",kind:"step",charge:"−1",
+         species:[{id:"b",slot:"left",label:"HO⁻",lp:3,charge:"−",note:"the base"},
+                  {id:"a",slot:"right",label:"CH₃—C(=O)—O—H",note:"the acid"}],
+         arrows:[{id:"a1",from:"b",to:"a",tail:"lone-pair",head:"atom",kind:"pair",label:"lone pair → the acidic hydrogen"},
+                 {id:"a2",from:"a",to:"a",tail:"sigma",head:"atom",kind:"pair",label:"the O–H bond → its own oxygen"}]},
+        {id:"f2",title:"conjugate base and conjugate acid",kind:"product",charge:"−1",
+         badge:"carboxylate",why:"the minus is shared over TWO oxygens, so it is a comfortable place for a charge to sit",
+         species:[{id:"p",slot:"left",label:"CH₃—COO⁻",lp:3,charge:"−",note:"the conjugate base"},
+                  {id:"w",slot:"right",label:"H—OH",lp:2,note:"the conjugate acid"}],arrows:[]}],
+      narration_steps:[
+        {short:"Concerted",term:"concerted",narration_text:"Say the word first: this is concerted, meaning it all happens in one step with no intermediate. Two things are on the board — hydroxide, which is electron-rich, and ethanoic acid, whose oxygen–hydrogen bond is the weak point.",reveal:["f1"],active:["b"],point:"b",
+         def:"Concerted means bond-making and bond-breaking happen together, in a single step."},
+        {short:"Name the tail",term:"the tail",narration_text:"Before anything moves, look at where the electrons are sitting. It is this lone pair on the oxygen of hydroxide — a pair of electrons, not the oxygen atom itself. That distinction is the whole formalism.",reveal:["ledger"],active:["b"],point:"b",
+         def:"A curly arrow always starts on electrons: a lone pair, a sigma bond, a pi bond or a negative charge."},
+        {short:"Both arrows",term:"curly arrow",narration_text:"Now both arrows fire at the same time. The lone pair moves to the hydrogen, and the oxygen–hydrogen bonding pair moves onto its own oxygen. Notice the second arrow: the hydrogen leaves without its electrons, which is exactly what a proton is.",reveal:["a1","a2"],active:["a1","a2"],point:"a1",
+         quiz:{q:"What does the tail of a curly arrow sit on?",options:["A pair of electrons — a lone pair or a bond","The atom that is about to move","Wherever there is space on the page"],answer:0,why:"An arrow tracks electrons. If you think it tracks atoms you will draw skeletons that never existed."}},
+        {short:"The consequence",term:"conjugate base",narration_text:"And here is the consequence, drawn as its own frame, because the arrow caused this — it did not decorate it. The acid has become the carboxylate and hydroxide has become water.",reveal:["f2"],active:["p"],point:"p"},
+        {short:"Why it happened",term:"resonance",narration_text:"Why did this proton go rather than one from an alcohol? Because the minus that is left behind is spread over two oxygens by resonance, and a shared charge is a stable charge. Stability of the conjugate base is what acidity actually measures.",reveal:["rail"],active:["p"],point:"p",
+         quiz:{q:"Why is ethanoic acid far more acidic than ethanol?",options:["Its conjugate base spreads the charge over two oxygens","It has more hydrogens","Oxygen is more electronegative in acids"],answer:0,why:"Acidity is a statement about the conjugate base. Delocalise the charge and you stabilise it."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Two arrows, both starting on electrons, both labelled, fired in one beat because the reaction is concerted — and the reason it happens at all is written on the product, not on the acid.",reveal:["f2"],active:["p"],point:"p"}],
+      recap:["An arrow's tail is always electrons — a lone pair, a sigma bond or a pi bond.",
+             "Concerted means one step and no intermediate; say the word out loud.",
+             "Acidity is decided by how stable the conjugate base is."]} },
+
+  /* ── ORGANIC 43: curly — S-N-TWO. Concerted mode, so both arrows appear in the same beat and the
+     step rail renders the missing intermediate as an EMPTY dashed slot: the "no intermediate" fact
+     is taught as an ABSENCE you can see, directly contrastable with the S-N-one rail below. ── */
+  { text: "Explain the SN2 mechanism: why hydroxide attacks bromomethane from the back, why there is no intermediate, and why the carbon inverts.",
+    blueprint: {meta:{title:"S-N-two — one step, backside attack, inversion",subject:"Organic Chemistry",concept_id:"sn2_backside_inversion"},layout:"curly",mode:"concerted",
+      reaction:"HO⁻ + CH₃—Br → CH₃—OH + Br⁻",
+      note:"look at the rail: the intermediate slot is empty, and that emptiness is the point",
+      frames:[
+        {id:"f1",title:"hydroxide attacks the back",kind:"step",charge:"−1",
+         species:[{id:"nu",slot:"left",label:"HO⁻",lp:3,charge:"−",note:"strong nucleophile"},
+                  {id:"sub",slot:"right",label:"H₃C—Br",note:"a methyl substrate — no bulk"}],
+         arrows:[{id:"a1",from:"nu",to:"sub",tail:"lone-pair",head:"atom",kind:"pair",label:"lone pair → the carbon"},
+                 {id:"a2",from:"sub",to:"sub",tail:"sigma",head:"atom",kind:"pair",label:"the C–Br bond → the bromine"}]},
+        {id:"f2",title:"one transition state",kind:"ts",charge:"−1",
+         badge:"transition state",why:"both bonds half made and half broken — never isolated, never drawn as a species",
+         species:[{id:"ts",slot:"center",label:"[HO⋯CH₃⋯Br]",charge:"−",note:"the peak, not a pit"}],arrows:[]},
+        {id:"f3",title:"inversion — the product",kind:"product",charge:"−1",
+         badge:"inversion of configuration",why:"the carbon turns inside out, exactly like an umbrella in the wind",
+         species:[{id:"pr",slot:"left",label:"CH₃—OH",note:"the product"},
+                  {id:"lg",slot:"right",label:"Br⁻",lp:4,charge:"−",note:"the leaving group"}],arrows:[]}],
+      narration_steps:[
+        {short:"Say it in full",term:"S-N-two",narration_text:"S-N-two, said as letters, means substitution nucleophilic bimolecular — and the two is not a step count, it means the rate depends on two things: the substrate and the nucleophile.",reveal:["f1"],active:["sub"],point:"sub",
+         def:"Bimolecular: doubling either reactant doubles the rate."},
+        {short:"The tail",term:"the nucleophile",narration_text:"Start where the electrons are. Hydroxide has three lone pairs and a full negative charge, and one of those pairs is about to go looking for a positive carbon.",reveal:["ledger"],active:["nu"],point:"nu"},
+        {short:"Both at once",term:"concerted",narration_text:"Now both arrows, in the same beat, because this is concerted. The lone pair comes in at the carbon while the carbon–bromine bonding pair leaves onto the bromine. Nothing waits for anything.",reveal:["a1","a2"],active:["a1","a2"],point:"a1",
+         quiz:{q:"Why must the two arrows fire together?",options:["Carbon can never hold five bonds, so one must leave as the other arrives","To make the drawing tidier","Because bromine is heavier than oxygen"],answer:0,why:"A carbon with five bonds does not exist, which is precisely why the new bond forms as the old one breaks."}},
+        {short:"From the back",term:"backside attack",narration_text:"And it comes in from directly opposite the bromine, one hundred and eighty degrees away, because that is the only side where the empty anti-bonding orbital is available. It also explains the rate order: methyl beats primary beats secondary, and tertiary is simply blocked.",reveal:["f2"],active:["ts"],point:"ts"},
+        {short:"No pit",term:"transition state",narration_text:"This is a transition state, not an intermediate. It sits at the top of the energy hill and is never isolated — look at the rail and you will see the intermediate slot drawn empty. That absence is the whole difference from S-N-one.",reveal:["rail"],active:["ts"],point:"rail",
+         def:"An intermediate sits in an energy valley and can in principle be trapped; a transition state cannot."},
+        {short:"Inversion",term:"Walden inversion",narration_text:"Because the attack came from the back, the other three groups flip through, like an umbrella in the wind. That gives a single stereochemical outcome — inversion, every time — not a mixture.",reveal:["f3"],active:["pr"],point:"pr",
+         quiz:{q:"What stereochemistry does SN2 give at a stereocentre?",options:["Clean inversion — one product","A racemic mixture","Retention of configuration"],answer:0,why:"One pathway, one geometry, one product. Mixtures come from flat carbocations, which SN2 never makes."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. One step, one transition state, no intermediate, backside attack and inversion — and every one of those follows from the single fact that the two arrows fired together.",reveal:["f3"],active:["pr"],point:"pr"}],
+      recap:["SN2 is concerted: one step, one transition state, no intermediate.",
+             "Backside attack at 180° gives clean inversion, not a mixture.",
+             "Sterics set the rate: methyl > 1° > 2° >> 3° (blocked)."]} },
+
+  /* ── ORGANIC 44: curly — S-N-ONE. Stepwise mode, so the carbocation gets a FULL held frame with a
+     name badge and a stability line. The corpus calls SN1-vs-SN2 the highest-value comparison in the
+     course, so this blueprint is deliberately the mirror image of 43 on every axis. ── */
+  { text: "Explain the SN1 mechanism of 2-bromo-2-methylpropane with water: why the leaving group goes first, why the carbocation is planar, and why the product is racemic.",
+    blueprint: {meta:{title:"S-N-one — the leaving group goes first",subject:"Organic Chemistry",concept_id:"sn1_carbocation_racemic"},layout:"curly",mode:"stepwise",
+      reaction:"(CH₃)₃C—Br + H₂O → (CH₃)₃C—OH + HBr",
+      note:"the rail has a filled intermediate slot — compare it with the empty one in the S-N-two video",
+      frames:[
+        {id:"f1",title:"the leaving group departs",kind:"step",charge:"0",
+         species:[{id:"sub",slot:"center",label:"(CH₃)₃C—Br",note:"tertiary — three alkyl groups"}],
+         arrows:[{id:"a1",from:"sub",to:"sub",tail:"sigma",head:"atom",kind:"pair",label:"the C–Br bond → the bromine"}]},
+        {id:"f2",title:"the carbocation is held",kind:"intermediate",charge:"0",
+         badge:"tertiary carbocation",why:"flat, sp² and electron-poor — three alkyl groups feed it electron density, so it is the stable kind",
+         species:[{id:"cat",slot:"left",label:"(CH₃)₃C⁺",charge:"+",note:"planar, empty p orbital"},
+                  {id:"br",slot:"right",label:"Br⁻",lp:4,charge:"−",note:"the leaving group"}],arrows:[]},
+        {id:"f3",title:"water attacks — from either face",kind:"step",charge:"0",
+         species:[{id:"cat2",slot:"left",label:"(CH₃)₃C⁺",charge:"+",note:"attackable from above OR below"},
+                  {id:"w",slot:"right",label:"H₂O",lp:2,note:"a weak nucleophile is enough"},
+                  {id:"br2",slot:"center",label:"Br⁻",lp:4,charge:"−",note:"just watching"}],
+         arrows:[{id:"a2",from:"w",to:"cat2",tail:"lone-pair",head:"empty-orbital",kind:"pair",label:"lone pair → the empty p orbital"}]},
+        {id:"f4",title:"a racemic product",kind:"product",charge:"0",
+         badge:"racemic mixture",why:"a flat cation is attacked equally from both faces, so both enantiomers form in equal amounts",
+         species:[{id:"pr",slot:"left",label:"(CH₃)₃C—OH",note:"after losing a proton"},
+                  {id:"hbr",slot:"right",label:"H—Br",note:"the proton goes to bromide"}],arrows:[]}],
+      narration_steps:[
+        {short:"Say it in full",term:"S-N-one",narration_text:"S-N-one: substitution nucleophilic unimolecular. Unimolecular means only ONE thing appears in the rate law — the substrate. Adding more nucleophile does not speed it up at all, which already tells you the nucleophile is not in the slow step.",reveal:["f1"],active:["sub"],point:"sub"},
+        {short:"Stepwise",term:"stepwise",narration_text:"And this one is stepwise, not concerted. The tail here is the carbon–bromine sigma bond itself, and it leaves all on its own, before any nucleophile shows up.",reveal:["a1"],active:["a1"],point:"a1",
+         def:"Stepwise: a real, if short-lived, species forms in the middle."},
+        {short:"The carbocation",term:"carbocation",narration_text:"This is a carbocation — say it car-boh-CAT-eye-on. It is flat, it is sp²-hybridised, and it has a completely empty p orbital sticking out above and below. It is also the slow step, so everything about the rate is decided right here.",reveal:["f2"],active:["cat"],point:"cat",
+         def:"Only six electrons around that carbon — it is desperate for a pair.",
+         quiz:{q:"Why does a tertiary carbocation form so much more readily than a primary one?",options:["Three alkyl groups donate electron density into the empty orbital","It is heavier, so it forms faster","Primary carbons have no p orbital"],answer:0,why:"Hyperconjugation and induction from the neighbouring alkyl groups spread the positive charge out."}},
+        {short:"Either face",term:"planar",narration_text:"Now water arrives, and here is the payoff of that flatness: the lone pair can come into the empty p orbital from above or from below, and nothing prefers one side.",reveal:["f3","a2"],active:["a2"],point:"a2"},
+        {short:"Racemic",term:"racemic mixture",narration_text:"So if the carbon was a stereocentre you get both enantiomers, in roughly equal amounts — a racemic mixture, said ruh-SEE-mik. Compare that with S-N-two, which gives clean inversion, and you can see why the two mechanisms are told apart by their products.",reveal:["f4"],active:["pr"],point:"pr",
+         quiz:{q:"SN1 and SN2 differ in almost every way. Which pair is right?",options:["SN1: stepwise, 3° favoured, racemic. SN2: concerted, 1° favoured, inversion","Both are concerted; only the solvent differs","SN1 needs a strong nucleophile, SN2 a weak one"],answer:0,why:"They are mirror images on substrate, kinetics, intermediate and stereochemistry — learn them as a contrast, never separately."}},
+        {short:"The trap",term:"rearrangement",narration_text:"One warning before you go. Because a real cation exists here, it can rearrange — a hydride or a methyl can shift to make a more stable cation — which is why the product sometimes is not where the leaving group was.",reveal:["rail"],active:["pr"],point:"rail"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Leaving group first, flat carbocation held in the middle, then attack from either face — so the rail has a filled intermediate slot and the product is racemic.",reveal:["f4"],active:["pr"],point:"pr"}],
+      recap:["SN1 is stepwise: the leaving group goes first and a carbocation forms.",
+             "The carbocation is planar, so attack from both faces gives a racemic mixture.",
+             "A real cation can rearrange — the product is not always where the leaving group was."]} },
+
+  /* ── ORGANIC 45: curly — ELECTROPHILIC ADDITION. The corpus calls this THE critical juncture for
+     the whole formalism, because it is the first mechanism where an arrow's tail sits on a PI BOND
+     rather than an atom or a lone pair. So beat one dwells on the pi bond by itself, and Markovnikov
+     is derived on screen from carbocation stability rather than asserted as a rule. ── */
+  { text: "Explain the addition of HBr to propene, including Markovnikov's rule and why the bromine ends up on the middle carbon.",
+    blueprint: {meta:{title:"Adding H—Br to propene — Markovnikov, derived not memorised",subject:"Organic Chemistry",concept_id:"electrophilic_addition_markovnikov"},layout:"curly",mode:"stepwise",
+      reaction:"CH₃—CH=CH₂ + H—Br → CH₃—CHBr—CH₃",
+      note:"this is the first mechanism where an arrow starts on a BOND rather than an atom — slow down here",
+      frames:[
+        {id:"f1",title:"the π bond attacks the proton",kind:"step",charge:"0",
+         species:[{id:"alk",slot:"left",label:"CH₃—CH=CH₂",note:"the alkene is the NUCLEOPHILE"},
+                  {id:"hbr",slot:"right",label:"H—Br",lp:3,note:"the electrophile"}],
+         arrows:[{id:"a1",from:"alk",to:"hbr",tail:"pi",head:"atom",kind:"pair",label:"the π bond → the hydrogen"},
+                 {id:"a2",from:"hbr",to:"hbr",tail:"sigma",head:"atom",kind:"pair",label:"the H–Br bond → the bromine"}]},
+        {id:"f2",title:"the carbocation you actually get",kind:"intermediate",charge:"0",
+         badge:"secondary carbocation",why:"the proton added to the END carbon, so the plus lands on the middle one — the more substituted, more stable option",
+         species:[{id:"cat",slot:"left",label:"CH₃—CH⁺—CH₃",charge:"+",note:"2° — two alkyl neighbours"},
+                  {id:"br",slot:"right",label:"Br⁻",lp:4,charge:"−",note:"waiting"}],arrows:[]},
+        {id:"f3",title:"the one you do NOT get",kind:"danger",charge:"0",
+         badge:"primary carbocation",why:"only one alkyl neighbour, so it is far higher in energy — this is the path not taken",
+         species:[{id:"bad",slot:"center",label:"⁺CH₂—CH₂—CH₃",charge:"+",note:"1° — much less stable"}],arrows:[]},
+        {id:"f4",title:"bromide closes in",kind:"step",charge:"0",
+         species:[{id:"cat2",slot:"left",label:"CH₃—CH⁺—CH₃",charge:"+",note:"flat, empty p orbital"},
+                  {id:"br2",slot:"right",label:"Br⁻",lp:4,charge:"−",note:"the nucleophile now"}],
+         arrows:[{id:"a3",from:"br2",to:"cat2",tail:"lone-pair",head:"empty-orbital",kind:"pair",label:"lone pair → the empty p orbital"}]},
+        {id:"f5",title:"2-bromopropane",kind:"product",charge:"0",
+         badge:"Markovnikov product",why:"the bromine sits on the more substituted carbon — a consequence of cation stability, not a rule to memorise",
+         species:[{id:"pr",slot:"center",label:"CH₃—CHBr—CH₃",note:"the major product"}],arrows:[]}],
+      narration_steps:[
+        {short:"Flip your model",term:"the alkene",narration_text:"Everything you learned in substitution now flips. There the substrate was the target; here the alkene is the attacker. A double bond is a fat, exposed cloud of electrons, and that makes it the nucleophile.",reveal:["f1"],active:["alk"],point:"alk"},
+        {short:"Look at the tail",term:"the π bond",narration_text:"Look very carefully at where this arrow starts. Not on a carbon, not on a lone pair — on the pi bond itself, those two electrons sitting above and below the plane. This is the first time an arrow starts on a bond, and it is the moment most students quietly stop trusting arrows.",reveal:["ledger"],active:["alk"],point:"alk",
+         def:"A pi bond is made by p orbitals overlapping sideways; its two electrons are the loosest ones in the molecule.",
+         quiz:{q:"Where does the first arrow's tail sit?",options:["On the two electrons of the π bond","On the carbon atom at the end of the chain","On the hydrogen of H–Br"],answer:0,why:"Tail on the bond, not the atom. Getting this one wrong is what makes every later mechanism feel arbitrary."}},
+        {short:"Two arrows",term:"electrophile",narration_text:"So the pi electrons reach out and grab the hydrogen, and at the same time the hydrogen–bromine bonding pair falls back onto the bromine. The hydrogen arrives without its electrons — as a proton.",reveal:["a1","a2"],active:["a1","a2"],point:"a1"},
+        {short:"Which carbon?",term:"carbocation",narration_text:"Now the question that decides the whole product. The proton could land on either carbon of the double bond, and whichever one takes it, the OTHER carbon is left holding the positive charge.",reveal:["f2"],active:["cat"],point:"cat"},
+        {short:"The road not taken",term:"stability",narration_text:"Here is the alternative, drawn so you can see it lose. Put the proton on the middle carbon and you get a primary cation with only one alkyl neighbour — much higher in energy, so that route is far slower.",reveal:["f3"],active:["bad"],point:"bad",
+         quiz:{q:"Markovnikov's rule works because…",options:["The proton adds so as to give the more stable carbocation","Hydrogen prefers carbons that already have hydrogens","Bromine is too big for the end carbon"],answer:0,why:"'The rich get richer' is a mnemonic for a consequence. The cause is carbocation stability."}},
+        {short:"Bromide's turn",term:"nucleophilic attack",narration_text:"With the stable cation in hand, bromide — which has been waiting with four lone pairs and a full negative charge — donates a pair straight into that empty p orbital.",reveal:["f4","a3"],active:["a3"],point:"a3"},
+        {short:"The payoff",term:"Markovnikov",narration_text:"And that is why the bromine ends up on the middle carbon. Markovnikov, said mar-KOV-nih-koff, is not a rule you obey — it is what falls out once you ask which carbocation is more stable.",reveal:["f5"],active:["pr"],point:"pr"},
+        {short:"Recap",term:"recap",narration_text:"Recap. The pi bond attacks, the more stable carbocation wins, and the nucleophile lands there — so the position of the bromine was decided two frames before it ever arrived.",reveal:["rail"],active:["pr"],point:"pr"}],
+      recap:["In addition the alkene is the nucleophile — the π bond attacks.",
+             "The arrow's tail is on the π BOND, not on a carbon atom.",
+             "Markovnikov is a consequence of carbocation stability, not a rule to memorise."]} },
+
+  /* ── ORGANIC 46: curly — ELECTROPHILIC AROMATIC SUBSTITUTION. Ranked the single hardest organic
+     topic in at least one teacher-and-student survey. The arenium ion gets the held frame, because
+     the "why substitute rather than add" logic is usually stated in one line and skipped. Charge is
+     kept at zero on every frame by keeping the bisulfate counter-ion on the board — which is also
+     how the student learns that the ledger is a self-check. ── */
+  { text: "Explain the nitration of benzene: why benzene substitutes rather than adds, what the arenium ion is, and why aromaticity is restored at the end.",
+    blueprint: {meta:{title:"Nitration of benzene — lose aromaticity, then get it back",subject:"Organic Chemistry",concept_id:"eas_nitration_arenium"},layout:"curly",mode:"stepwise",
+      reaction:"C₆H₆ + ⁺NO₂ → C₆H₅NO₂ + H⁺",
+      note:"watch the charge ledger stay at zero — if yours drifts, an arrow is wrong",
+      frames:[
+        {id:"f1",title:"the ring attacks the electrophile",kind:"step",charge:"0",
+         species:[{id:"ring",slot:"left",label:"C₆H₆",note:"benzene — a delocalised π ring"},
+                  {id:"e",slot:"center",label:"⁺NO₂",charge:"+",note:"the REAL electrophile"},
+                  {id:"hs",slot:"right",label:"HSO₄⁻",lp:3,charge:"−",note:"the base, waiting"}],
+         arrows:[{id:"a1",from:"ring",to:"e",tail:"pi",head:"atom",kind:"pair",label:"one π bond → the nitrogen"}]},
+        {id:"f2",title:"the arenium ion is held",kind:"intermediate",charge:"0",
+         badge:"arenium ion (σ-complex)",why:"aromaticity is temporarily LOST, and the plus is spread over three ring carbons",
+         species:[{id:"ar",slot:"left",label:"[C₆H₆NO₂]⁺",charge:"+",note:"one carbon is now sp³"},
+                  {id:"hs2",slot:"right",label:"HSO₄⁻",lp:3,charge:"−",note:"about to act"}],arrows:[]},
+        {id:"f3",title:"the base removes the proton",kind:"step",charge:"0",
+         species:[{id:"ar2",slot:"left",label:"[C₆H₆NO₂]⁺",charge:"+",note:"the sp³ carbon still holds an H"},
+                  {id:"hs3",slot:"right",label:"HSO₄⁻",lp:3,charge:"−",note:"the base"}],
+         arrows:[{id:"a2",from:"hs3",to:"ar2",tail:"lone-pair",head:"atom",kind:"pair",label:"lone pair → that hydrogen"},
+                 {id:"a3",from:"ar2",to:"ar2",tail:"sigma",head:"bond",kind:"pair",label:"the C–H bond → back into the ring"}]},
+        {id:"f4",title:"aromaticity restored",kind:"product",charge:"0",
+         badge:"nitrobenzene",why:"six delocalised electrons are back — the whole reaction existed to get here",
+         species:[{id:"pr",slot:"left",label:"C₆H₅NO₂",note:"substituted, not added to"},
+                  {id:"acid",slot:"right",label:"H₂SO₄",note:"the catalyst is regenerated"}],arrows:[]}],
+      narration_steps:[
+        {short:"The real question",term:"aromaticity",narration_text:"Start with the question nobody answers properly. Why does benzene SUBSTITUTE when every other double bond ADDS? Because adding would permanently destroy the delocalised ring, and substituting hands it back.",reveal:["f1"],active:["ring"],point:"ring",
+         def:"Aromaticity is a big stabilisation — roughly 150 kilojoules per mole that benzene will not give up."},
+        {short:"Make the attacker",term:"the electrophile",narration_text:"Second thing students skip: the reagent you write down is not the thing that reacts. Nitric acid plus sulfuric acid generates the nitronium ion, plus-N-O-two, and only that is electrophilic enough for a lazy aromatic ring.",reveal:["ledger"],active:["e"],point:"e",
+         quiz:{q:"Why is the nitronium ion needed rather than nitric acid itself?",options:["Benzene is a weak nucleophile, so it needs a genuinely strong electrophile","Nitric acid is too dilute","Because sulfuric acid smells worse"],answer:0,why:"A delocalised ring is stabilised and reluctant; only a full cation will tempt it."}},
+        {short:"The ring attacks",term:"π bond",narration_text:"Now the arrow. Its tail is one of the ring's pi bonds — the ring is the nucleophile here — and it reaches out to the nitrogen. Notice what that costs: the moment those electrons localise, the delocalisation is broken.",reveal:["a1"],active:["a1"],point:"a1"},
+        {short:"Hold it",term:"arenium ion",narration_text:"This is the arenium ion, said uh-REE-nee-um, also called the sigma complex. One ring carbon has gone tetrahedral, the aromaticity is gone, and the positive charge is spread over three of the remaining carbons.",reveal:["f2"],active:["ar"],point:"ar",
+         def:"It is a resonance-stabilised carbocation — unstable for a ring, but far better than a lone cation.",
+         quiz:{q:"What is temporarily true of the arenium ion?",options:["It is not aromatic — the delocalised ring is broken","It has seven carbons","It carries a negative charge"],answer:0,why:"That temporary loss is exactly why the next step happens: the molecule is trying to get its aromaticity back."}},
+        {short:"Take the proton",term:"deprotonation",narration_text:"So a base — the bisulfate that has been sitting there the whole time — takes the hydrogen off that sp³ carbon, and the carbon–hydrogen bonding pair drops back into the ring.",reveal:["f3","a2","a3"],active:["a2","a3"],point:"a2"},
+        {short:"Why not add?",term:"substitution",narration_text:"And there it is. Restoring six delocalised electrons is worth far more than the new bond an addition would have given, so the ring throws away a hydrogen instead. Substitution is not a preference — it is arithmetic.",reveal:["f4"],active:["pr"],point:"pr"},
+        {short:"Directing",term:"directing effects",narration_text:"One last thing to carry forward. Whether the next group lands ortho, meta or para is decided by whether the substituent already there can stabilise that positive charge — so the directing rules are just this arenium ion, drawn three times.",reveal:["rail"],active:["pr"],point:"rail"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Make a real electrophile, let the ring attack it, hold the arenium ion and name it, then lose a proton to get the aromaticity back. Two steps, one intermediate, one reason.",reveal:["f4"],active:["pr"],point:"pr"}],
+      recap:["Benzene substitutes rather than adds because addition would destroy aromaticity.",
+             "The arenium ion (σ-complex) is the key intermediate — name it and hold it.",
+             "Directing effects are just the arenium ion redrawn for each attack position."]} },
+
+  /* ── ORGANIC 47: curly — NUCLEOPHILIC ADDITION TO A CARBONYL, with the BRANCH. The corpus calls
+     the branch point the most economical teaching move in Orgo 1: one tetrahedral intermediate,
+     and whether it protonates or collapses is decided purely by whether a leaving group is present.
+     Rendering that branch once buys you aldehydes, ketones, esters, acid chlorides and amides. ── */
+  { text: "Explain the reduction of ethanal by sodium borohydride, the tetrahedral intermediate, and why an ester behaves differently from an aldehyde.",
+    blueprint: {meta:{title:"Attacking a carbonyl — one intermediate, two fates",subject:"Organic Chemistry",concept_id:"carbonyl_tetrahedral_branch"},layout:"curly",mode:"stepwise",
+      reaction:"CH₃CH=O + H⁻ → CH₃CH(O⁻)H → CH₃CH(OH)H",
+      note:"the carbonyl carbon goes flat sp² → tetrahedral sp³ — that shape change IS the reaction",
+      frames:[
+        {id:"f1",title:"hydride attacks the carbonyl carbon",kind:"step",charge:"−1",
+         species:[{id:"nu",slot:"left",label:"H—BH₃⁻",charge:"−",note:"from sodium borohydride"},
+                  {id:"c",slot:"right",label:"CH₃—CH=O",lp:2,note:"the carbon is δ+"}],
+         arrows:[{id:"a1",from:"nu",to:"c",tail:"sigma",head:"atom",kind:"pair",label:"a B–H bond → the carbonyl carbon"},
+                 {id:"a2",from:"c",to:"c",tail:"pi",head:"atom",kind:"pair",label:"the C=O π bond → the oxygen"}]},
+        {id:"f2",title:"the tetrahedral intermediate",kind:"intermediate",charge:"−1",
+         badge:"tetrahedral intermediate",why:"the carbon has gone from flat sp² to tetrahedral sp³, and the charge now sits on oxygen, which can take it",
+         species:[{id:"ti",slot:"center",label:"CH₃—CH(H)—O⁻",lp:3,charge:"−",note:"an alkoxide"}],arrows:[]},
+        {id:"f3",title:"no leaving group → protonate",kind:"step",charge:"−1",
+         species:[{id:"ti2",slot:"left",label:"CH₃—CH(H)—O⁻",lp:3,charge:"−",note:"nothing to expel"},
+                  {id:"w",slot:"right",label:"H—OH",lp:2,note:"the work-up"}],
+         arrows:[{id:"a3",from:"ti2",to:"w",tail:"lone-pair",head:"atom",kind:"pair",label:"an oxygen lone pair → the proton"},
+                 {id:"a4",from:"w",to:"w",tail:"sigma",head:"atom",kind:"pair",label:"the O–H bond → its own oxygen"}]},
+        {id:"f4",title:"leaving group present → it collapses",kind:"danger",charge:"−1",
+         badge:"addition–elimination",why:"an ester has an OEt to expel, so the C=O re-forms and you get SUBSTITUTION, not addition",
+         species:[{id:"ti3",slot:"center",label:"CH₃—C(H)(O⁻)—OEt",lp:3,charge:"−",note:"same intermediate, one extra group"}],
+         arrows:[{id:"a5",from:"ti3",to:"ti3",tail:"lone-pair",head:"bond",kind:"pair",label:"an oxygen lone pair → re-form the C=O"}]},
+        {id:"f5",title:"the alcohol",kind:"product",charge:"−1",
+         badge:"addition product",why:"with an aldehyde or ketone there is nothing to expel, so the intermediate simply keeps the proton",
+         species:[{id:"pr",slot:"left",label:"CH₃—CH(OH)—H",note:"ethanol"},
+                  {id:"oh",slot:"right",label:"HO⁻",lp:3,charge:"−",note:"left over"}],arrows:[]}],
+      narration_steps:[
+        {short:"Opposite polarity",term:"the carbonyl",narration_text:"Last video the pi bond attacked. Here the pi system is attacked — because oxygen pulls the electrons over and leaves the carbon delta-positive. Say it out loud: the carbonyl carbon is an electrophile.",reveal:["f1"],active:["c"],point:"c",
+         def:"δ+ means a partial positive charge — not a full plus, but enough to make the carbon a target."},
+        {short:"The hydride",term:"hydride",narration_text:"Sodium borohydride does not hand over a bare hydrogen ion; it delivers one from a boron–hydrogen bond. So the tail of our first arrow is that sigma bond, and the head is the carbon.",reveal:["ledger"],active:["nu"],point:"nu"},
+        {short:"Two arrows",term:"nucleophilic addition",narration_text:"The hydride arrives at the carbon, and because carbon cannot have five bonds, the carbon–oxygen pi pair has to go somewhere. It goes up onto the oxygen, which is delighted to hold a negative charge.",reveal:["a1","a2"],active:["a1","a2"],point:"a1",
+         quiz:{q:"Why must the C=O π bond break as the nucleophile arrives?",options:["Otherwise carbon would have five bonds","Because oxygen is electronegative","To conserve the total charge"],answer:0,why:"Same reason as SN2: carbon's octet is full at four bonds, so something must give way."}},
+        {short:"Flat to tetrahedral",term:"tetrahedral intermediate",narration_text:"And this is the species with the name nobody learns: the tetrahedral intermediate. The carbon started flat, with three groups at a hundred and twenty degrees, and it has just become a proper tetrahedron.",reveal:["f2"],active:["ti"],point:"ti",
+         def:"sp² → sp³. If you can picture that flip, you can picture every carbonyl reaction there is."},
+        {short:"The branch",term:"the branch point",narration_text:"Now everything turns on ONE question: is there a leaving group on that carbon? With an aldehyde or a ketone, there is not — so the intermediate just grabs a proton on work-up and you have an alcohol.",reveal:["f3","a3","a4"],active:["a3"],point:"a3"},
+        {short:"The other branch",term:"addition–elimination",narration_text:"But hand the same carbon an O-ethyl, as an ester does, and the oxygen's lone pair pushes back down, re-forms the double bond and kicks that group out. Same start, same intermediate, completely different chapter.",reveal:["f4","a5"],active:["a5"],point:"a5",
+         quiz:{q:"What decides addition versus substitution at a carbonyl?",options:["Whether the tetrahedral intermediate has a leaving group to expel","The temperature","Whether the nucleophile is charged"],answer:0,why:"One mechanism, one branch point. Aldehydes and ketones add; acid derivatives substitute."}},
+        {short:"The product",term:"addition",narration_text:"For our aldehyde the answer was no leaving group, so we finish with the alcohol. Notice sodium borohydride never touched the ester — it is a mild reducing agent, and that selectivity is exam gold.",reveal:["f5"],active:["pr"],point:"pr"},
+        {short:"Recap",term:"recap",narration_text:"Recap. The carbon is delta-positive, the nucleophile lands, the carbon goes flat to tetrahedral, and then one question — leaving group or not — decides whether you are doing addition or substitution.",reveal:["rail"],active:["pr"],point:"pr"}],
+      recap:["The carbonyl carbon is δ+ — here the π system is attacked, not the attacker.",
+             "The tetrahedral intermediate is the key species: sp² becomes sp³.",
+             "Leaving group present → it collapses (substitution); absent → it protonates (addition)."]} },
+
+  /* ── ORGANIC 48: curly in RADICAL mode. The corpus complaint is that the notation changes and
+     nobody flags it loudly enough, so the renderer changes colour AND arrowhead: every arrow here is
+     a fishhook, and the check rejects a double-barbed arrow outright. Propagation is laid out as the
+     two steps that regenerate the carrier, which is what makes it a chain. ── */
+  { text: "Explain the free-radical bromination of ethane: initiation, propagation and termination, and why the arrows are different from every other mechanism.",
+    blueprint: {meta:{title:"Radical bromination — fishhooks, and a chain that turns over",subject:"Organic Chemistry",concept_id:"radical_halogenation_chain"},layout:"curly",mode:"radical",
+      reaction:"CH₃CH₃ + Br₂ --hv--> CH₃CH₂Br + HBr",
+      note:"one initiation event can drive thousands of propagation turns — that is what 'chain' means",
+      frames:[
+        {id:"f1",title:"initiation — the bond splits evenly",kind:"step",charge:"0",
+         species:[{id:"br2",slot:"center",label:"Br—Br",lp:4,note:"light or heat does this"}],
+         arrows:[{id:"a1",from:"br2",to:"br2",tail:"sigma",head:"atom",kind:"fishhook",label:"one electron goes this way"},
+                 {id:"a2",from:"br2",to:"br2",tail:"sigma",head:"atom",kind:"fishhook",label:"the other goes that way"}]},
+        {id:"f2",title:"propagation one — steal a hydrogen",kind:"step",charge:"0",
+         species:[{id:"r",slot:"left",label:"Br•",note:"the chain carrier"},
+                  {id:"m",slot:"right",label:"CH₃—CH₃",note:"the alkane"}],
+         arrows:[{id:"a3",from:"r",to:"m",tail:"radical",head:"bond",kind:"fishhook",label:"the unpaired electron → the C–H bond"},
+                 {id:"a4",from:"m",to:"m",tail:"sigma",head:"atom",kind:"fishhook",label:"one C–H electron → the carbon"}]},
+        {id:"f3",title:"the carbon radical",kind:"intermediate",charge:"0",
+         badge:"alkyl radical",why:"stability runs 3° > 2° > 1°, exactly like a carbocation — which is why bromination is selective",
+         species:[{id:"cr",slot:"left",label:"•CH₂—CH₃",note:"the new carrier"},
+                  {id:"hb",slot:"right",label:"H—Br",note:"made in this step"}],arrows:[]},
+        {id:"f4",title:"propagation two — the chain turns over",kind:"step",charge:"0",
+         species:[{id:"cr2",slot:"left",label:"•CH₂—CH₃",note:"attacks the halogen"},
+                  {id:"bb",slot:"right",label:"Br—Br",lp:4,note:"fresh bromine"}],
+         arrows:[{id:"a5",from:"cr2",to:"bb",tail:"radical",head:"bond",kind:"fishhook",label:"the unpaired electron → the Br–Br bond"},
+                 {id:"a6",from:"bb",to:"bb",tail:"sigma",head:"atom",kind:"fishhook",label:"one Br–Br electron → the far bromine"}]},
+        {id:"f5",title:"termination — two carriers meet",kind:"product",charge:"0",
+         badge:"termination",why:"radicals are rare, so two of them meeting is rare — which is exactly why the chain runs so long before it stops",
+         species:[{id:"p",slot:"left",label:"CH₃—CH₂—Br",note:"the product"},
+                  {id:"r2",slot:"right",label:"Br•",note:"regenerated — go round again"}],arrows:[]}],
+      narration_steps:[
+        {short:"The rules changed",term:"homolysis",narration_text:"Stop and notice something before any chemistry happens. These arrows have half a head. That is a fishhook, and it means ONE electron moved, not a pair. Using your usual arrow here is the single most common radical mistake.",reveal:["f1"],active:["br2"],point:"br2",
+         def:"Homolysis, said hoh-MOL-iss-iss: the bond splits evenly, one electron to each fragment."},
+        {short:"Initiation",term:"initiation",narration_text:"Light or heat splits the bromine molecule right down the middle. Two fishhooks, one bond, two bromine radicals — each with a single unpaired electron and a strong desire to pair it up.",reveal:["a1","a2"],active:["a1","a2"],point:"a1",
+         quiz:{q:"What does a fishhook arrow move?",options:["One electron","Two electrons","A whole atom"],answer:0,why:"Half an arrowhead, half an electron pair. The notation is telling you the bookkeeping has changed."}},
+        {short:"Propagation one",term:"propagation",narration_text:"The bromine radical wants a partner, so it takes a hydrogen atom — the hydrogen and one of its bonding electrons — off the ethane. That leaves the other electron behind, on the carbon.",reveal:["f2","a3","a4"],active:["a3","a4"],point:"a3"},
+        {short:"A new carrier",term:"alkyl radical",narration_text:"So now the radical has moved: it is on carbon. Radical stability follows the same ladder as carbocations, tertiary above secondary above primary, which is why bromination picks its hydrogen carefully while chlorination barely picks at all.",reveal:["f3"],active:["cr"],point:"cr",
+         def:"Selective means it strongly prefers one position; bromine is fussy, chlorine is not."},
+        {short:"Propagation two",term:"the chain",narration_text:"The carbon radical now attacks a fresh bromine molecule, takes one bromine for itself — and hands the OTHER bromine back as a radical. That is the crucial part: the carrier is regenerated.",reveal:["f4","a5","a6"],active:["a5","a6"],point:"a5",
+         quiz:{q:"Why are these two steps called PROPAGATION?",options:["Each one consumes a radical and produces another, so the chain continues","They happen first","They cannot be reversed"],answer:0,why:"Carrier in, carrier out. One initiation can therefore drive thousands of turns of the loop."}},
+        {short:"Termination",term:"termination",narration_text:"The loop only stops when two radicals happen to find each other and pair up. Radicals are scarce, so that is rare — which is exactly why one photon can produce an enormous amount of product.",reveal:["f5"],active:["p"],point:"p"},
+        {short:"The bonus",term:"anti-Markovnikov",narration_text:"And a payoff for the last video: adding hydrogen bromide to an alkene with peroxides gives the ANTI-Markovnikov product — not because Markovnikov has exceptions, but because with radicals you are running this mechanism instead.",reveal:["rail"],active:["p"],point:"rail"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Fishhook arrows move one electron. Initiation makes the carrier, two propagation steps regenerate it in a loop, and termination is the rare accident that ends the chain.",reveal:["f5"],active:["p"],point:"p"}],
+      recap:["Fishhook = one electron. Never use a double-barbed arrow in a radical mechanism.",
+             "Propagation regenerates the carrier — that is what makes it a chain.",
+             "Anti-Markovnikov HBr addition is a radical mechanism, not an exception to a rule."]} },
+
+  /* ── ORGANIC 49: curly in RESONANCE mode. The corpus is emphatic that this is the single best
+     demonstration the renderer earns its keep: resonance and mechanism share a notation, and only a
+     view that DISTINGUISHES them can teach the difference. The frame border goes dashed and blue,
+     the arrows change colour, and a persistent caption says "electrons only, atoms never move". ── */
+  { text: "Explain resonance in the ethanoate ion: why the two structures are not in equilibrium, and what the real ion looks like.",
+    blueprint: {meta:{title:"Resonance — one molecule, two drawings, no flipping",subject:"Organic Chemistry",concept_id:"resonance_carboxylate_delocalised"},layout:"curly",mode:"resonance",
+      reaction:"CH₃COO⁻  ↔  CH₃COO⁻   (the same ion, drawn twice)",
+      note:"the double-headed arrow is NOT the equilibrium arrow — nothing is going back and forth",
+      frames:[
+        {id:"f1",title:"one legal drawing",kind:"step",charge:"−1",
+         species:[{id:"a",slot:"center",label:"CH₃—C(=O)—O⁻",lp:3,charge:"−",note:"minus on the right-hand oxygen"}],
+         arrows:[{id:"a1",from:"a",to:"a",tail:"anion",head:"bond",kind:"pair",label:"the negative charge → the C–O bond"},
+                 {id:"a2",from:"a",to:"a",tail:"pi",head:"atom",kind:"pair",label:"the C=O π bond → the other oxygen"}]},
+        {id:"f2",title:"the other legal drawing",kind:"step",charge:"−1",
+         species:[{id:"b",slot:"center",label:"CH₃—C(—O⁻)=O",lp:3,charge:"−",note:"minus on the left-hand oxygen"}],arrows:[]},
+        {id:"f3",title:"what is actually there",kind:"product",charge:"−1",
+         badge:"the delocalised average",why:"two identical C–O bonds, each one-and-a-half, each oxygen holding half a minus — and X-ray measurements agree",
+         species:[{id:"c",slot:"center",label:"CH₃—C(⋯O⋯O)",charge:"½−",note:"one structure, dashed bonds"}],arrows:[]}],
+      narration_steps:[
+        {short:"Not a reaction",term:"resonance",narration_text:"Everything about this looks like the last five videos — same curly arrows, same tails — but it is not a reaction. Nothing is turning into anything. This is one molecule that a single drawing cannot capture.",reveal:["f1"],active:["a"],point:"a",
+         def:"Resonance is a limitation of our notation, not a behaviour of the molecule."},
+        {short:"The arrows",term:"delocalisation",narration_text:"Here the negative charge pushes down to make a new bond, and the existing pi bond gets pushed up onto the other oxygen. Two arrows, both starting on electrons, and — this is the rule — not one atom has moved.",reveal:["a1","a2"],active:["a1","a2"],point:"a1",
+         quiz:{q:"What is allowed to move between resonance structures?",options:["Only electrons — never atoms","Electrons and hydrogen atoms","Anything, as long as the formula is unchanged"],answer:0,why:"If you moved an atom you drew a different compound. Redrawing skeletons is the classic error here."}},
+        {short:"The second drawing",term:"contributor",narration_text:"And this is the result: the minus has swapped oxygens and so has the double bond. Both drawings are equally good, because the two oxygens are identical — so both contribute equally.",reveal:["f2"],active:["b"],point:"b"},
+        {short:"The misconception",term:"not equilibrium",narration_text:"Now kill the big one. The molecule does not flip between these two pictures. There is no moment when it is one and a moment when it is the other. The double-headed arrow is a note to the reader, not an equilibrium.",reveal:["ledger"],active:["b"],point:"b",
+         quiz:{q:"How often does the carboxylate switch between its two resonance structures?",options:["Never — it is always the single delocalised average","Millions of times a second","Once per collision"],answer:0,why:"A mule is not a horse on Mondays and a donkey on Tuesdays. It is one thing, all the time."}},
+        {short:"The real ion",term:"the average",narration_text:"What is actually there is this: one structure with two identical carbon–oxygen bonds, each one and a half bonds long, and half a negative charge on each oxygen. Measure them and they come out the same length.",reveal:["f3"],active:["c"],point:"c",
+         def:"The real molecule is the weighted average of the contributors, and it is lower in energy than any of them."},
+        {short:"Recap",term:"recap",narration_text:"Recap. Same arrows, different job — bookkeeping inside one species, not a change from one species to another. Electrons move, atoms never do, and the truth is the average.",reveal:["rail"],active:["c"],point:"c"}],
+      recap:["Resonance structures are drawings, not states — the molecule never flips.",
+             "Only electrons move between contributors; atoms never do.",
+             "The real species is the delocalised average, and it is more stable than any one drawing."]} },
+
+  /* ── ORGANIC 50: tree — FUNCTIONAL GROUPS. The corpus calls this the highest-value single tree in
+     the course, and pairs recognition with the NAMING-PRIORITY order, because that ordering genuinely
+     IS a hierarchy and it is where groups collide with nomenclature. Branch by heteroatom, because
+     that is how you spot one embedded in a bigger skeleton. ── */
+  { text: "List the main functional groups, how to tell the confusable pairs apart, and which group wins when several are present in one molecule.",
+    blueprint: {meta:{title:"Functional groups — spot them, then rank them",subject:"Organic Chemistry",concept_id:"functional_groups_and_priority"},layout:"tree",root:"fg",
+      nodes:[{id:"fg",label:"Functional groups",note:"the reactive part of any molecule"},
+             {id:"o",parent:"fg",label:"Oxygen-containing",note:"the biggest family"},
+             {id:"n",parent:"fg",label:"Nitrogen-containing",note:"amine, amide, nitrile"},
+             {id:"x",parent:"fg",label:"Halogen",note:"C—F, Cl, Br, I"},
+             {id:"u",parent:"fg",label:"C—C unsaturation",note:"alkene, alkyne, arene"},
+             {id:"oh",parent:"o",label:"Alcohol  R—OH",note:"suffix -ol"},
+             {id:"co",parent:"o",label:"Carbonyl  C=O",note:"aldehyde vs ketone"},
+             {id:"ac",parent:"o",label:"Acid & derivatives",note:"acid, ester, amide"},
+             {id:"et",parent:"o",label:"Ether  R—O—R",note:"no H on the oxygen"},
+             {id:"al",parent:"co",label:"Aldehyde — CHO",note:"C=O at the END of a chain"},
+             {id:"ke",parent:"co",label:"Ketone — CO—",note:"C=O in the MIDDLE"},
+             {id:"pri",parent:"fg",label:"Naming priority",note:"acid > ester > amide > aldehyde > ketone > alcohol > amine"}],
+      narration_steps:[
+        {short:"Two skills",term:"functional group",narration_text:"A functional group is the reactive handle on an otherwise dull carbon skeleton. There are two separate skills here — spotting one inside a bigger molecule, and ranking it against the others — and exams test both.",reveal:["fg"],active:["fg"],point:"fg"},
+        {short:"Sort by atom",term:"heteroatom",narration_text:"Do not learn them as fifteen flashcards. Sort them by the atom that is not carbon or hydrogen, because that is what your eye can actually find in a drawing: oxygen, nitrogen, a halogen, or just a double bond.",reveal:["o","n","x","u"],active:["o"],point:"o",
+         def:"A heteroatom is any atom in the skeleton that is not carbon."},
+        {short:"Oxygen family",term:"oxygen groups",narration_text:"Oxygen gives you the most. An oxygen with a hydrogen on it is an alcohol; an oxygen double-bonded to carbon is a carbonyl; an oxygen with a carbon on each side and no hydrogen is an ether.",reveal:["oh","co","et"],active:["co"],point:"co"},
+        {short:"The classic pair",term:"aldehyde vs ketone",narration_text:"Here is the pair that costs the most marks. An aldehyde has its carbon–oxygen double bond at the END of the chain, so it still carries a hydrogen. A ketone has it in the MIDDLE, with carbons on both sides. Position, not appearance.",reveal:["al","ke"],active:["al"],point:"al",
+         quiz:{q:"You see C=O with a hydrogen attached to that carbon. What is it?",options:["An aldehyde","A ketone","An ester"],answer:0,why:"The hydrogen on the carbonyl carbon is the tell — it also explains why aldehydes oxidise and ketones do not."}},
+        {short:"Acid family",term:"acid derivatives",narration_text:"Then the carboxylic acid and everything derived from it — swap the acid's O-H for an O-R and you have an ester, swap it for an N and you have an amide. One parent, several children.",reveal:["ac"],active:["ac"],point:"ac"},
+        {short:"Nitrogen and the rest",term:"amine",narration_text:"Nitrogen alone on a carbon is an amine, said uh-MEEN; nitrogen next to a carbonyl is an amide, AM-ide. Say those two slowly and separately, because they look alike written down and behave nothing alike.",reveal:["n","x","u"],active:["n"],point:"n"},
+        {short:"Who wins",term:"priority",narration_text:"Finally, when a molecule has several, one becomes the suffix and the rest become prefixes. The order runs carboxylic acid, ester, amide, aldehyde, ketone, alcohol, amine, then the plain carbon–carbon groups.",reveal:["pri"],active:["pri"],point:"pri",
+         quiz:{q:"A molecule contains both an alcohol and a ketone. Which becomes the suffix?",options:["The ketone — it outranks the alcohol","The alcohol — oxygen with hydrogen wins","Whichever comes first in the chain"],answer:0,why:"Priority is fixed, not positional: the higher group takes the suffix and the lower becomes 'hydroxy-'."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Find the heteroatom to spot the group, use position to split the confusable pairs, and remember that priority is a fixed ladder that decides the name.",reveal:["fg","pri"],active:["pri"],point:"pri"}],
+      recap:["Spot groups by the heteroatom, not by memorising isolated cards.",
+             "Aldehyde vs ketone is decided by POSITION on the chain.",
+             "Naming priority is a fixed ladder: acid > ester > amide > aldehyde > ketone > alcohol > amine."]} },
+
+  /* ── ORGANIC 51: tree — THE SUBSTITUTION/ELIMINATION DECISION. Documented as the single hardest
+     topic in Orgo 1, and documented to get WORSE when students reach for a flowchart, because a
+     flowchart hides the reasons and collapses on the 2° cases. So this is a tree with the
+     mechanistic REASON welded onto every leaf — that requirement is the whole design. ── */
+  { text: "How do you decide between SN1, SN2, E1 and E2 for a given substrate, nucleophile, solvent and temperature?",
+    blueprint: {meta:{title:"SN1, SN2, E1 or E2 — with the reason on every leaf",subject:"Organic Chemistry",concept_id:"substitution_elimination_decision"},layout:"tree",root:"sub",
+      nodes:[{id:"sub",label:"Start: the substrate",note:"1°, 2° or 3° carbon?"},
+             {id:"p1",parent:"sub",label:"Methyl / primary",note:"no cation possible"},
+             {id:"p2",parent:"sub",label:"Secondary",note:"the genuinely hard case"},
+             {id:"p3",parent:"sub",label:"Tertiary",note:"backside is blocked"},
+             {id:"p1a",parent:"p1",label:"SN2",note:"strong nucleophile: open back, no cation"},
+             {id:"p1b",parent:"p1",label:"E2",note:"bulky base: too fat to attack, takes an H instead"},
+             {id:"p2a",parent:"p2",label:"SN2",note:"strong nucleophile + aprotic: attack still possible"},
+             {id:"p2b",parent:"p2",label:"E2",note:"strong BASE: the β-H is easier to reach"},
+             {id:"p2c",parent:"p2",label:"SN1 / E1 mix",note:"weak nucleophile + protic + heat: 2° cation survives"},
+             {id:"p3a",parent:"p3",label:"SN1 / E1",note:"weak nucleophile: 3° cation forms easily"},
+             {id:"p3b",parent:"p3",label:"E2",note:"strong base: no room to substitute, so eliminate"},
+             {id:"heat",parent:"sub",label:"Heat always helps elimination",note:"elimination makes more particles"}],
+      narration_steps:[
+        {short:"Why not a flowchart",term:"the decision",narration_text:"You will be offered a flowchart for this. Resist it. A flowchart hides the reasons, and the reasons are the only thing that survives contact with an unfamiliar molecule. We will build a tree where every leaf carries its WHY.",reveal:["sub"],active:["sub"],point:"sub"},
+        {short:"Substrate first",term:"substrate",narration_text:"Always start at the carbon carrying the leaving group. Count the carbons attached to it: one is primary, two is secondary, three is tertiary. That single count eliminates half the possibilities immediately.",reveal:["p1","p2","p3"],active:["p2"],point:"p2"},
+        {short:"Primary",term:"primary",narration_text:"Primary carbons never go by a cation route, because a primary carbocation is far too unstable to form. So with a strong nucleophile you get S-N-two; with a bulky base like tert-butoxide, which is too fat to reach the carbon, you get E-two instead.",reveal:["p1a","p1b"],active:["p1a"],point:"p1a",
+         def:"Bulky base: it cannot get to the carbon, so it takes the exposed hydrogen instead."},
+        {short:"Tertiary",term:"tertiary",narration_text:"Tertiary is the mirror image. The back of the carbon is completely blocked, so S-N-two is off the table forever. With a weak nucleophile you get S-N-one and E-one from the same cation; with a strong base you get E-two.",reveal:["p3a","p3b"],active:["p3a"],point:"p3a",
+         quiz:{q:"Why can a tertiary substrate never react by SN2?",options:["Three alkyl groups physically block backside attack","Tertiary carbons have no leaving group","The nucleophile is repelled by charge"],answer:0,why:"SN2 needs a clear line 180° from the leaving group, and on a tertiary carbon there is not one."}},
+        {short:"The hard case",term:"secondary",narration_text:"Now the one that actually costs marks. A secondary carbon can genuinely do all four, so the substrate tells you nothing — the reagent decides.",reveal:["p2a","p2b","p2c"],active:["p2b"],point:"p2b"},
+        {short:"Read the reagent",term:"nucleophile vs base",narration_text:"So ask what the reagent really is. Strongly nucleophilic and not very basic, in an aprotic solvent — S-N-two. Strongly basic — E-two, because a hydrogen on the outside is easier to reach than a crowded carbon. Weak and protic — the cation route.",reveal:["p2c"],active:["p2c"],point:"p2c",
+         quiz:{q:"A secondary halide with sodium ethoxide, hot. What dominates?",options:["E2 — ethoxide is a strong base and heat favours elimination","SN1 — it is secondary","SN2 only"],answer:0,why:"Strong base plus heat is the elimination signature; the substrate merely permits it."}},
+        {short:"Temperature",term:"heat",narration_text:"And one dial that works everywhere: heat pushes towards elimination, because elimination turns one molecule into two and entropy likes that. If a question mentions warming, it is telling you something.",reveal:["heat"],active:["heat"],point:"heat"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Substrate narrows it, the reagent decides it, solvent and heat tilt it — and if you cannot say the reason out loud, you have memorised a chart rather than learned the chemistry.",reveal:["sub","p2"],active:["p2"],point:"p2"}],
+      recap:["Substrate first (1°/2°/3°), then the reagent — and 2° is where the reagent decides.",
+             "Bulky base means elimination; strong nucleophile in aprotic solvent means SN2.",
+             "Every branch must come with its reason, or you have memorised a chart, not the chemistry."]} },
+
+  /* ── ORGANIC 52: solve — IUPAC NOMENCLATURE as a step-view. Naming is a chain of tie-break rules
+     where an early wrong choice silently invalidates everything downstream and the student gets no
+     feedback on WHICH step failed. One station per rule, with the reason printed on every line, is
+     exactly the cure — and it reuses the repo's existing solve/ idiom rather than inventing a mode. ── */
+  { text: "Name this molecule by IUPAC rules: a seven-carbon chain drawn bent, with a methyl on one carbon and an ethyl on another, plus an OH group.",
+    blueprint: {meta:{title:"Naming a molecule — one rule per line",subject:"Organic Chemistry",concept_id:"iupac_nomenclature_steps"},layout:"solve",
+      problem:"Name:  CH₃—CH(CH₃)—CH₂—CH(OH)—CH₂—CH₂—CH₃",
+      lines:[{id:"l1",math:"find the LONGEST chain → 7 carbons",why:"count every path, not the one drawn horizontally"},
+             {id:"l2",math:"it contains the OH → parent = heptanol",why:"the chain MUST include the principal group"},
+             {id:"l3",math:"number from the end nearest OH → C4",why:"lowest locant goes to the principal group first"},
+             {id:"l4",math:"other direction would give C4 too → tie",why:"when the principal group ties, move to the next rule"},
+             {id:"l5",math:"substituents: 2-methyl … vs … 6-methyl",why:"lowest SET of locants breaks the tie"},
+             {id:"l6",math:"choose 2-methyl → numbering fixed",why:"{2,4} beats {4,6} at the first point of difference"},
+             {id:"l7",math:"alphabetise: ethyl before methyl",why:"alphabetical order, ignoring di-/tri- prefixes"},
+             {id:"l8",math:"NAME:  2-methylheptan-4-ol",why:"substituents, then parent, then suffix with its locant"}],
+      narration_steps:[
+        {short:"Why this is hard",term:"nomenclature",narration_text:"Naming feels unfair because one wrong choice at the start quietly ruins everything after it, and nothing tells you which step failed. So we will do one rule per line, and check each one before moving on.",reveal:["l1"],active:["l1"],point:"l1"},
+        {short:"Longest chain",term:"parent chain",narration_text:"First find the longest continuous chain of carbons. Trace every path, including the ones that turn corners — the longest chain is very often not the one drawn straight across the page. Here it is seven.",reveal:["l1"],active:["l1"],point:"l1",
+         def:"Longest means most carbons in an unbroken path, whatever shape it is drawn in.",
+         quiz:{q:"What is the classic error at this very first step?",options:["Taking the chain that is drawn horizontally","Counting the hydrogens too","Starting from the wrong end"],answer:0,why:"Horizontal-chain bias. Turn the corner and you often find one or two extra carbons."}},
+        {short:"It must include the group",term:"principal group",narration_text:"Second, the parent chain has to contain the principal functional group. Our O-H must be on the chain, so the chain is a heptanol, not a heptane with something dangling off it.",reveal:["l2"],active:["l2"],point:"l2"},
+        {short:"Number towards it",term:"locant",narration_text:"Now number the chain. The rule order is strict: give the lowest possible number to the principal group first, before you look at any substituent at all.",reveal:["l3"],active:["l3"],point:"l3",
+         def:"A locant is just the number that says which carbon something sits on."},
+        {short:"A tie",term:"tie-break",narration_text:"Here the O-H lands on carbon four counting from either end, so we have a genuine tie. That is not a problem — it is a signal to move down to the next rule in the list.",reveal:["l4"],active:["l4"],point:"l4"},
+        {short:"Lowest set",term:"lowest set of locants",narration_text:"The tie-break is the lowest SET of locants for the substituents. One direction gives two and four; the other gives four and six. Compare them at the first point of difference — two beats four — so the first direction wins.",reveal:["l5","l6"],active:["l6"],point:"l6",
+         quiz:{q:"Compare the sets {2,4} and {4,6}. Which is 'lower'?",options:["{2,4} — compare term by term until they differ","{4,6} — its total is not much bigger","They are equal because both have two entries"],answer:0,why:"First point of difference, exactly like alphabetical order on words."}},
+        {short:"Alphabetise",term:"alphabetical order",narration_text:"Write the substituents alphabetically — ethyl before methyl. Ignore the multiplying prefixes di and tri when you alphabetise, but do not ignore iso or neo, because those are part of the name.",reveal:["l7"],active:["l7"],point:"l7"},
+        {short:"The name",term:"the answer",narration_text:"Substituents with their numbers, then the parent chain, then the suffix with its own number. Two-methyl-heptan-four-ol. Every one of those numbers was earned by a rule, in order.",reveal:["l8"],active:["l8"],point:"l8"},
+        {short:"Recap",term:"recap",narration_text:"Recap. Longest chain containing the group, number to give the group the lowest locant, break ties with the lowest set, alphabetise, then write it out. Do them in that order and the tie-breaks stop feeling arbitrary.",reveal:["l8"],active:["l8"],point:"l8"}],
+      recap:["The longest chain is often not the one drawn horizontally.",
+             "Number for the principal group FIRST, then break ties on the lowest set of locants.",
+             "Alphabetise ignoring di-/tri-, but not iso-/neo-."]} },
+
+  /* ── ORGANIC 53: solve — R/S ASSIGNMENT. A spatial task performed on a flat drawing, with a
+     viewing-direction condition most students never internalise. Every line restates where group
+     four is pointing, and the reversal rule gets its own line — plus a line demolishing the
+     R-equals-clockwise-rotation myth, which is a documented and very sticky misconception. ── */
+  { text: "Assign R or S to a stereocentre using the Cahn–Ingold–Prelog rules, including what to do when the lowest priority group points towards you.",
+    blueprint: {meta:{title:"R or S — rank, look, trace, and know when to flip",subject:"Organic Chemistry",concept_id:"cip_rs_assignment"},layout:"solve",
+      problem:"Assign R/S:  a carbon bearing  —Br, —OH, —CH₃, —H  (with H on a wedge, towards you)",
+      lines:[{id:"l1",math:"is it a stereocentre? 4 different groups ✓",why:"if any two are the same, stop — there is nothing to assign"},
+             {id:"l2",math:"rank by ATOMIC NUMBER at the first atom",why:"Br(35) > O(8) > C(6) > H(1) — not by size or by 'looks bigger'"},
+             {id:"l3",math:"1 = Br,  2 = OH,  3 = CH₃,  4 = H",why:"ties only: explore outward to the first point of difference"},
+             {id:"l4",math:"where is group 4 pointing?  ON A WEDGE = towards you",why:"the whole method assumes #4 points AWAY"},
+             {id:"l5",math:"trace 1 → 2 → 3 as drawn:  clockwise",why:"read the arc through the three remaining groups"},
+             {id:"l6",math:"#4 is towards you → REVERSE the answer",why:"you are reading the steering wheel from behind"},
+             {id:"l7",math:"clockwise as drawn  →  actually S",why:"R is clockwise ONLY when #4 points away"},
+             {id:"l8",math:"note: S says nothing about (+) or (−)",why:"optical rotation is measured, never predicted from R/S"}],
+      narration_steps:[
+        {short:"First check",term:"stereocentre",narration_text:"Before any of this, check there is something to assign. A stereocentre is a carbon with four DIFFERENT groups. If two are the same, there is no R and no S, and a surprising number of marks are lost right here.",reveal:["l1"],active:["l1"],point:"l1"},
+        {short:"Rank by number",term:"CIP priority",narration_text:"Rank the four groups by atomic number at the atom directly attached — Cahn, Ingold and Prelog, said KAHN, ING-gold, PRAY-log. Bromine thirty-five, oxygen eight, carbon six, hydrogen one. Not by how big the group looks.",reveal:["l2","l3"],active:["l2"],point:"l2",
+         def:"If two are tied at the first atom, walk outward together until they first differ.",
+         quiz:{q:"Between —CH₂CH₃ and —OH, which has higher priority?",options:["—OH, because oxygen (8) beats carbon (6)","—CH₂CH₃, because it is bigger","They tie"],answer:0,why:"Priority is atomic number at the first point of difference, never bulk."}},
+        {short:"The condition",term:"the viewing rule",narration_text:"Now the step everyone skips. The whole method only works if the LOWEST priority group is pointing away from you, into the page. So before you trace anything, find group four and ask where it is.",reveal:["l4"],active:["l4"],point:"l4",
+         def:"A wedge points towards you; a dashed bond points away."},
+        {short:"Trace it",term:"the arc",narration_text:"Ours is on a wedge, which means it is pointing straight at you — the wrong way round. Trace the arc from one to two to three anyway, and here it comes out clockwise.",reveal:["l5"],active:["l5"],point:"l5"},
+        {short:"Flip it",term:"the reversal",narration_text:"Because you are looking from the wrong side, everything you just read is backwards — like reading a steering wheel from behind the dashboard. So reverse the answer: clockwise as drawn actually means S.",reveal:["l6","l7"],active:["l7"],point:"l7",
+         quiz:{q:"You trace 1→2→3 clockwise, but group 4 is on a wedge. The answer is…",options:["S — reverse it, because #4 points towards you","R — clockwise always means R","Undefined"],answer:0,why:"R means clockwise WITH #4 pointing away. Change the viewing direction and you must flip the label."}},
+        {short:"Fischer warning",term:"Fischer projection",narration_text:"A related trap: in a Fischer projection the horizontal bonds point towards you and the vertical ones away. So a group four on a horizontal line means you invert, for exactly the same reason.",reveal:["l7"],active:["l7"],point:"l7"},
+        {short:"The big myth",term:"optical rotation",narration_text:"And the misconception that survives everything else: R does not mean the compound rotates light clockwise. Plus and minus are measured in a laboratory. There is no way to predict them from the letter.",reveal:["l8"],active:["l8"],point:"l8",
+         quiz:{q:"Does an (R) compound rotate plane-polarised light clockwise?",options:["Not necessarily — R/S and (+)/(−) are unrelated","Yes, always","Only if it is a sugar"],answer:0,why:"R/S is a naming convention from a drawing; (+)/(−) is an experimental measurement. No link."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Four different groups, rank by atomic number, check where group four is pointing, trace one-two-three, and flip if you are looking from the wrong side — then remember the letter tells you nothing about rotation.",reveal:["l8"],active:["l8"],point:"l8"}],
+      recap:["Rank by atomic number at the first point of difference — never by size.",
+             "The method assumes #4 points AWAY; if it points towards you, reverse your answer.",
+             "R/S says nothing about which way the compound rotates light."]} },
+
+  /* ── ORGANIC 54: geometry — HYBRIDISATION AND THE SHAPE THAT FOLLOWS. The corpus wants the link
+     students never make: sigma bonds rotate, pi bonds do not, and THAT is the root cause of cis/trans
+     isomerism. The VSEPR renderer already draws a trigonal-planar centre with its angle, so this
+     reuses it rather than waiting for the 3-D scene in the template-gap list. ── */
+  { text: "Explain why an sp2 carbon is flat with 120° angles, and why you cannot rotate about a carbon–carbon double bond.",
+    blueprint: {meta:{title:"sp² carbon — flat, 120°, and locked",subject:"Organic Chemistry",concept_id:"sp2_planar_no_rotation"},layout:"geometry",
+      center:"C",shape:"trigonal_planar",shape_label:"TRIGONAL PLANAR (sp²)",angle:"120°",
+      bonds:[{to:"C"},{to:"H"},{to:"H"}],
+      narration_steps:[
+        {short:"Count, don't guess",term:"hybridisation",narration_text:"Hybridisation sounds like a separate ritual, but it is just counting. Add up the sigma bonds and the lone pairs on your atom. Four means sp³, three means sp², two means sp. That is the entire rule.",reveal:["bonds"],active:["bonds"],point:"bonds",
+         def:"Only sigma bonds count. A double bond contributes ONE sigma, plus a pi that does not count."},
+        {short:"Three groups",term:"sp²",narration_text:"This carbon has three sigma bonds and no lone pairs, so it is sp²-hybridised — say it s-p-two. Three regions of electron density push each other as far apart as they can get on a flat surface.",reveal:["bonds"],active:["bonds"],point:"bonds"},
+        {short:"The shape",term:"trigonal planar",narration_text:"And as far apart as possible for three things in a plane is a hundred and twenty degrees each. So an sp² carbon is trigonal planar, and — the part that matters — it is FLAT.",reveal:["info"],active:["info"],point:"info",
+         quiz:{q:"Why is an sp² carbon planar?",options:["Three electron regions spread furthest apart at 120° in one plane","Because it has a double bond","Because carbon is small"],answer:0,why:"Shape comes from counting regions and pushing them apart — the geometry is a consequence, not a fact to memorise."}},
+        {short:"The leftover",term:"the p orbital",narration_text:"Three orbitals were used up making sigma bonds, which leaves one unhybridised p orbital sticking up above and down below the plane. That leftover is where all the interesting chemistry lives.",reveal:["lp"],active:["lp"],point:"lp",
+         def:"That p orbital is empty in a carbocation, half-full in a radical, and full of the pi bond in an alkene."},
+        {short:"Sideways overlap",term:"π bond",narration_text:"Bring two sp² carbons together and those leftover p orbitals overlap sideways, above and below the axis. That is a pi bond — and a sideways overlap is exactly what a rotation would tear apart.",reveal:["lp","info"],active:["lp"],point:"lp"},
+        {short:"The payoff",term:"restricted rotation",narration_text:"So try to rotate about a double bond and you simply cannot: the pi bond blocks it. A single bond spins freely all day; a double bond is locked. That one difference is the entire origin of cis and trans isomerism.",reveal:["info"],active:["info"],point:"info",
+         quiz:{q:"Why does cis/trans isomerism exist for alkenes but not alkanes?",options:["Rotation about a C=C is blocked by the π bond","Alkenes are heavier","Alkanes have no substituents"],answer:0,why:"No rotation means the two arrangements cannot interconvert, so they are genuinely different compounds."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Count sigma bonds and lone pairs to get the hybridisation, let the count give you the shape, and remember the leftover p orbital — because whether it is empty, half-full or holding a pi bond decides everything that happens next.",reveal:["bonds","info"],active:["info"],point:"info"}],
+      recap:["Hybridisation = count σ bonds + lone pairs. Three regions → sp², 120°, flat.",
+             "The leftover p orbital is where carbocations, radicals and π bonds live.",
+             "π overlap is sideways, so a C=C cannot rotate — that is why cis/trans exists."]} },
+
+  /* ── ORGANIC 55: flow — THE OXIDATION LADDER. The corpus asks for one diagram that turns reagent
+     selectivity into a DISTANCE rather than a list of facts to memorise: rungs from alkane up to
+     carbon dioxide, with each reagent shown as how far up it takes you. "Which reagent do I use" is
+     the actual exam question, and this is the only view that answers it structurally. ── */
+  { text: "Explain oxidation and reduction in organic chemistry: the oxidation ladder, and why PCC stops at the aldehyde while chromic acid does not.",
+    blueprint: {meta:{title:"The oxidation ladder — how far does each reagent take you?",subject:"Organic Chemistry",concept_id:"oxidation_ladder_reagents"},layout:"flow",
+      nodes:[{id:"n0",label:"Count bonds, not electrons",note:"more C—O = oxidised",kind:"trigger"},
+             {id:"n1",label:"Alkane  R—CH₃",note:"the bottom rung",kind:"process"},
+             {id:"n2",label:"Alcohol  R—CH₂OH",note:"one C—O bond",kind:"process"},
+             {id:"n3",label:"Aldehyde  R—CHO",note:"two C—O bonds",kind:"product"},
+             {id:"n4",label:"Carboxylic acid  R—COOH",note:"three C—O bonds",kind:"product"},
+             {id:"n5",label:"PCC stops here",note:"mild — one rung only",kind:"outcome"},
+             {id:"n6",label:"Chromic acid / KMnO₄",note:"strong — straight past the aldehyde",kind:"danger"},
+             {id:"n7",label:"3° alcohol → no reaction",note:"no C—H left to lose",kind:"danger"},
+             {id:"n8",label:"Choose by the distance",note:"the reagent IS the rung count",kind:"outcome"}],
+      narration_steps:[
+        {short:"A new definition",term:"oxidation",narration_text:"Forget oxidation numbers for a moment — they technically work but nobody can apply them at speed to a skeletal drawing. In organic chemistry, oxidation means gaining carbon–oxygen bonds and losing carbon–hydrogen ones. Reduction is the reverse.",reveal:["n0"],active:["n0"],point:"n0",
+         def:"Count bonds to oxygen. More is oxidised; fewer is reduced. That is the working definition."},
+        {short:"Bottom rung",term:"the ladder",narration_text:"Now build the ladder. At the bottom sits the alkane, with no bonds to oxygen at all. Every rung above it adds one more.",reveal:["n1"],active:["n1"],point:"n1"},
+        {short:"Up one",term:"alcohol",narration_text:"Put one oxygen on and you have an alcohol — one carbon–oxygen bond. That is one rung up, and it is where most oxidation questions begin.",reveal:["n2"],active:["n2"],point:"n2"},
+        {short:"Up two",term:"aldehyde",narration_text:"Take two hydrogens off the alcohol and you get an aldehyde, with a carbon–oxygen double bond — that counts as two. Notice the carbon still has one hydrogen left, and that is why it can go further.",reveal:["n3"],active:["n3"],point:"n3"},
+        {short:"Up three",term:"carboxylic acid",narration_text:"Lose that last hydrogen and gain another oxygen and you are at the carboxylic acid — three carbon–oxygen bonds. Above that there is only carbon dioxide, which is combustion, not synthesis.",reveal:["n4"],active:["n4"],point:"n4"},
+        {short:"The mild one",term:"PCC",narration_text:"Here is the whole point of the ladder. P-C-C, said as letters, is a mild oxidant: it climbs exactly one rung and stops. Primary alcohol to aldehyde, and it will not go further even if you wait.",reveal:["n5"],active:["n5"],point:"n5",
+         quiz:{q:"You need an aldehyde from a primary alcohol. Which reagent?",options:["PCC — it climbs one rung and stops","Chromic acid — it is stronger","KMnO₄ — it is cheaper"],answer:0,why:"The strong oxidants sail past the aldehyde to the acid. Selectivity here is a distance, not a preference."}},
+        {short:"The strong one",term:"chromic acid",narration_text:"Chromic acid and potassium permanganate are strong. Start at a primary alcohol and they go all the way to the acid, straight past the aldehyde without stopping. Same starting material, two rungs of difference, decided entirely by the reagent.",reveal:["n6"],active:["n6"],point:"n6"},
+        {short:"The dead end",term:"tertiary alcohol",narration_text:"And one that catches people out: a tertiary alcohol simply does not oxidise. There is no hydrogen left on that carbon to remove, so there is no rung above it. A secondary alcohol, by contrast, gives a ketone and stops there for the same reason.",reveal:["n7"],active:["n7"],point:"n7",
+         quiz:{q:"Why does a tertiary alcohol resist oxidation?",options:["Its carbon has no C–H bond left to lose","It is too crowded for the reagent","Tertiary alcohols are not really alcohols"],answer:0,why:"Oxidation here means swapping C–H for C–O. No C–H, no reaction — and the same logic stops a ketone."}},
+        {short:"Recap",term:"recap",narration_text:"Recap. Count carbon–oxygen bonds to place any molecule on the ladder, then ask how many rungs your reagent climbs. Reagent selectivity stops being a list to memorise and becomes a distance you can read off.",reveal:["n8"],active:["n8"],point:"n8"}],
+      recap:["Organic oxidation = more C—O bonds, fewer C—H bonds. Count bonds, not electrons.",
+             "The ladder: alkane → alcohol → aldehyde → carboxylic acid → CO₂.",
+             "PCC climbs one rung; chromic acid and KMnO₄ go all the way. 3° alcohols cannot climb at all."]} }
+
 ];
 
 /* Cost optimisation (a): send only the ONE worked example whose mode best fits the text
@@ -1915,8 +2442,98 @@ function csPick(t){
   return C(CS_EXEMPLAR.flow);
 }
 
+/* ---- ORGANIC-CHEMISTRY GATE (index map). Organic is the one subject that has to be pulled out
+   AHEAD of both biology and general chemistry, and for opposite reasons in each case. Against
+   BIOLOGY: "amide", "amine", "hydrolysis", "amino acid" and "tertiary structure" all live in the
+   biology regex, so a carbonyl passage would be handed a membrane scene. Against CHEMISTRY: an
+   organic passage is stuffed with "reaction", "bond", "acid", "base", "electron" and "molecul", so
+   it would fall straight into the Gen-Chem flow exemplar and produce a video that TALKS ABOUT a
+   mechanism without ever SHOWING one — the exact failure mode the corpus warns about.
+   The cues are split in two. ORG_HARD is unambiguous organic vocabulary (nobody writes
+   "carbocation" or "Markovnikov" in a biology note) and is tested FIRST, before biology. ORG_SOFT
+   is vocabulary organic shares with other subjects ("ester", "amine", "isomer", "aromatic") and is
+   tested AFTER the biology gate, so a protein-structure passage keeps its biology exemplar. ---- */
+const ORG_EXEMPLAR = { acid:42, sn2:43, sn1:44, addition:45, eas:46, carbonyl:47, radical:48,
+                       resonance:49, groups:50, decision:51, naming:52, rs:53, shape:54, ladder:55 };
+const ORG_HARD = new RegExp([
+  // the formalism itself
+  "nucleophil","electrophil","carbocation","carbanion","curly arrow","curved arrow",
+  "electron.?push","arrow.?push","fishhook","fish.?hook","skeletal (structure|formula)","line.?angle",
+  // the named mechanisms and the people
+  "\\bs ?n ?1\\b","\\bs ?n ?2\\b","\\be ?1\\b","\\be ?2\\b","markovnikov","zaitsev","saytzeff","hofmann",
+  "anti.?periplanar","arenium","friedel","bromonium","mercurinium","grignard","lindlar","wittig",
+  "sandmeyer","walden","cahn","ingold","prelog","fischer projection","newman projection",
+  // organic-only species and ideas
+  "alkene","alkyne","alkyl halide","haloalkane","leaving group","hydroboration","halohydrin",
+  "enantiomer","diastereomer","racemi","\\bchiral","achiral","stereocentre","stereocenter",
+  "stereoisomer","hyperconjugation","tautomer","oxidation ladder","tetrahedral intermediate",
+  "organic chemistry","\\borgo\\b","\\bpcc\\b","\\bnabh4\\b","\\blialh4\\b","sodium borohydride",
+  "lithium aluminium hydride","tert.?butoxide","\\bt.?buok\\b","\\blda\\b"
+].join("|"));
+const ORG_SOFT = new RegExp([
+  "functional group","aldehyde","\\bketone","carboxylic acid","\\bester\\b","\\bamide\\b","\\bamine\\b",
+  "\\bnitrile\\b","anhydride","acetal","hemiacetal","\\bphenol\\b","\\bether\\b","carbonyl",
+  "iupac","nomenclature","parent chain","\\blocant","substituent","\\bisomer","conformer",
+  "chair (conformation|flip|form)","cis.?trans","\\be/z\\b","hybridi[sz]ation","\\bsp ?[23]\\b",
+  "resonance structure","resonance form","delocalis","delocaliz","benzene","aromatic (ring|compound|hydrocarbon|substitution)",
+  "toluene","cyclohexane","\\balkane\\b","substitution reaction","elimination reaction","addition reaction",
+  "reaction mechanism","proton transfer","free.?radical","homolysis","heterolysis","propagation step"
+].join("|"));
+/* Route an organic highlight to the right renderer. Mechanisms dominate — eight of the fourteen
+   shots are "curly" — because in Organic the answer IS a drawing and the reasoning is where a pair
+   of electrons went. Everything else is the corpus's own routing table, verbatim. */
+function pickOrganic(t){
+  const B = i => EXEMPLARS[i];
+  /* ── FIRST refusal: the four-way competition. If a passage names TWO OR MORE of the pathways, the
+     question is not "how does S-N-one work" but "which of these happens" — which is the hardest
+     topic in the course and the one the corpus insists must be a reason-annotated TREE rather than
+     a flowchart. Tested before the individual mechanisms, or "SN1" in the question stem would grab
+     it first and answer a question nobody asked. ── */
+  const named = ["\\bs ?n ?1\\b","\\bs ?n ?2\\b","\\be ?1\\b","\\be ?2\\b"]
+    .filter(re => new RegExp(re).test(t)).length;
+  if(named>=2 || /substitution (versus|vs\.?|or) elimination|elimination (versus|vs\.?|or) substitution|which mechanism|competing (pathway|reaction)|decide between|bulky base|zaitsev|hofmann|anti.?periplanar/.test(t))
+    return B(ORG_EXEMPLAR.decision);
+  // ── the flagship: any reaction mechanism → curly, picking the closest-matching mechanism ──
+  if(/radical|fishhook|fish.?hook|homolysis|initiation|propagation|termination|chain reaction|peroxide|anti.?markovnikov|\bhv\b|photochemical/.test(t))
+    return B(ORG_EXEMPLAR.radical);
+  if(/resonance (structure|form|hybrid|contributor)|delocalis|delocaliz|electron.?push|arrow.?push|contributing structure|major contributor/.test(t))
+    return B(ORG_EXEMPLAR.resonance);
+  if(/\bs ?n ?1\b|carbocation|racemi|rearrangement|hydride shift|methyl shift|unimolecular|first.?order .{0,20}(substitut|solvolys)|solvolysis|protic solvent/.test(t))
+    return B(ORG_EXEMPLAR.sn1);
+  if(/\bs ?n ?2\b|backside|back.?side attack|inversion of configuration|walden|bimolecular|aprotic|concerted .{0,20}substitut/.test(t))
+    return B(ORG_EXEMPLAR.sn2);
+  if(/markovnikov|electrophilic addition|addition to (an )?alkene|hydrohalogenation|hydration of (an )?alkene|halogenation of (an )?alkene|bromonium|halohydrin|hydroboration|\bpi bond\b .{0,30}attack/.test(t))
+    return B(ORG_EXEMPLAR.addition);
+  if(/electrophilic aromatic|\beas\b|arenium|nitration|sulfonation|friedel|directing (effect|group)|ortho.{0,12}para|meta.?direct|activating group|deactivating group/.test(t))
+    return B(ORG_EXEMPLAR.eas);
+  if(/carbonyl|tetrahedral intermediate|nucleophilic addition|grignard|hydride (delivery|reduction)|nabh4|sodium borohydride|lialh4|imine|acetal|hemiacetal|cyanohydrin|addition.?elimination|acyl substitution|ester hydrolysis|saponification/.test(t))
+    return B(ORG_EXEMPLAR.carbonyl);
+  if(/proton transfer|acid.?base|\bpka\b|conjugate (acid|base)|deprotonat|acidic (proton|hydrogen)|\bbronsted|brønsted/.test(t))
+    return B(ORG_EXEMPLAR.acid);
+  // ── genuine hierarchies → tree (the decision tree first: it is a tree, NOT a flowchart) ──
+  if(/\be ?1\b|\be ?2\b|substitution (versus|vs\.?|or) elimination|elimination (versus|vs\.?|or) substitution|which mechanism|competing pathway|bulky base|zaitsev|hofmann|anti.?periplanar|beta.?hydrogen|β.?hydrogen/.test(t))
+    return B(ORG_EXEMPLAR.decision);
+  if(/functional group|naming priority|senior group|classify .{0,30}(group|reagent|compound)|types? of (isomer|functional group|reagent)|isomerism taxonomy|activating .{0,20}deactivating/.test(t))
+    return B(ORG_EXEMPLAR.groups);
+  // ── rule-governed procedures with one right answer per step → solve ──
+  if(/\br\/s\b|\b[rs] configuration\b|cahn|ingold|prelog|\bcip\b|assign .{0,20}(r or s|configuration)|priority .{0,20}(rule|order)|fischer projection|lowest priority/.test(t))
+    return B(ORG_EXEMPLAR.rs);
+  if(/iupac|nomenclature|\bname (this|the) (molecule|compound|structure)\b|naming .{0,20}(rule|compound|molecule)|parent chain|\blocant|numbering .{0,16}chain|alphabetis|alphabetiz/.test(t))
+    return B(ORG_EXEMPLAR.naming);
+  // ── shape and space → geometry ──
+  if(/hybridi[sz]ation|\bsp ?[23]\b|\bsigma bond\b|\bpi bond\b|restricted rotation|no rotation|cis.?trans|\be\/z\b|geometric isomer|conformer|conformation|chair (flip|form|conformation)|newman|axial|equatorial|\bchiral|stereocentre|stereocenter|enantiomer|diastereomer|\bmeso\b|optical activity|plane.?polaris|bond angle|trigonal|tetrahedral(?! intermediate)/.test(t))
+    return B(ORG_EXEMPLAR.shape);
+  // ── causal chains and reagent selectivity → flow ──
+  if(/oxidation ladder|\bpcc\b|chromic acid|kmno4|permanganate|reagent selectiv|which reagent|oxidis|oxidiz|reduc(e|tion|ing)|jones reagent|why .{0,30}(more stable|stronger acid|faster)|stability (order|ladder|series)|\binduction\b|inductive effect/.test(t))
+    return B(ORG_EXEMPLAR.ladder);
+  if(/\bisomer/.test(t)) return B(ORG_EXEMPLAR.shape);
+  // ── default: Organic's workhorse is the mechanism, not the mind-map ──
+  return B(ORG_EXEMPLAR.sn2);
+}
 function pickExemplar(text){
   const t = (text||"").toLowerCase();
+  /* ---- ORGANIC GATE, part one: the unambiguous cues, ahead of even biology (see note above). */
+  if(ORG_HARD.test(t)) return pickOrganic(t);
   /* ---- COMPUTER-STUDIES STRONG GATE — ahead of biology, which owns "translation" and "tissue". */
   if(CS_STRONG.test(t)) return csPick(t);
   /* ---- PHYSICS STRONG GATE — ahead of biology, which owns "\bcarrier" (charge carriers) and
@@ -1958,6 +2575,10 @@ function pickExemplar(text){
       return B(BIO_EXEMPLAR.taxonomy);
     return EXEMPLARS[2];
   }
+  /* ---- ORGANIC GATE, part two: the cues Organic SHARES with other subjects. Tested after biology
+     (so "amide bond" in a protein passage keeps its biology exemplar) but before chemistry (so
+     "ester" and "aromatic" are not swallowed by the Gen-Chem flow). ---- */
+  if(ORG_SOFT.test(t)) return pickOrganic(t);
   /* ---- MATHS GATE. Maths highlights must NEVER fall through to a medical/chemistry exemplar:
      the chemistry regex below would otherwise swallow "reaction", "atom", "distribution", "base"
      or "product" out of a perfectly ordinary maths passage. If any maths cue fires we route to a
