@@ -277,12 +277,15 @@ async function buildExtra(kind, level, note, model){
   const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
   if(!tmpl) return null;
   const prompt = tmpl.replace(/\{\{note\}\}/g, note || "");
-  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||6000, temperature:Number(row&&row.temperature)||0.3 });
+  // json:true forces a clean JSON object and suppresses the chain-of-thought preamble that
+  // otherwise breaks JSON.parse on flash/reasoning models (imports already use this — extras were missing it).
+  const gen = await generate({ model:(row&&row.model)||model, prompt, parts:[], images:[], max_tokens:(row&&row.max_tokens)||6000, temperature:Number(row&&row.temperature)||0.3, json:true });
   const t=gen.text||"", s=t.indexOf("{"), e=t.lastIndexOf("}");
   try{
     const o=JSON.parse(t.slice(s,e+1));
-    let items = (o && Array.isArray(o.items)) ? o.items : null;
-    if(!items || !items.length) return null;
+    let raw = (o && Array.isArray(o.items)) ? o.items : null;
+    let items = raw;
+    if(!items || !items.length){ console.warn("[build-extra] "+kind+" parsed but 0 raw items · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,160))); return null; }
     if(kind==="written"){
       items = items.filter(it => it && String(it.prompt||"").trim());
     } else if(kind==="qbank"){      // need a stem, >=4 options, valid answer index, one rationale per option
@@ -319,8 +322,9 @@ async function buildExtra(kind, level, note, model){
             src: String(it.src||"").trim().slice(0,160) };
         });
     }
-    return items.length ? items : null;
-  }catch(_){ return null; }
+    if(!items.length){ console.warn("[build-extra] "+kind+" all "+raw.length+" raw items failed validation (schema mismatch)"); return null; }
+    return items;
+  }catch(err){ console.warn("[build-extra] "+kind+" JSON parse failed: "+(err&&err.message)+" · textLen="+t.length+" preview="+JSON.stringify(t.slice(0,180))); return null; }
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
