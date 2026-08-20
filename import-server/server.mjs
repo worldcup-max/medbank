@@ -162,6 +162,7 @@ async function extractContent(body){
  * Returns { text, usage:{input_tokens, output_tokens} }. */
 const BASIC_MODEL   = process.env.MEDBANK_BASIC_MODEL   || "deepseek-v4-flash";  // cheap + fast → basic tier
 const PREMIUM_MODEL = process.env.MEDBANK_PREMIUM_MODEL || "deepseek-v4-pro";    // higher accuracy → premium tier
+const GEN_TIMEOUT_MS = Number(process.env.GEN_TIMEOUT_MS) || 120000;            // text-model calls must never hang forever (fail fast → the UI can show a real error)
 const TEXT_MODEL    = process.env.MEDBANK_TEXT_MODEL    || BASIC_MODEL;          // fallback when tier is unknown; retires Claude
 async function generate({ model, prompt, parts, images, max_tokens, temperature, json }){
   // Claude is retired for this app: route any Claude / empty text model to DeepSeek.
@@ -185,11 +186,17 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
     const gparts = [{ text: prompt }]
       .concat(imgs.map(i=>({ inline_data:{ mime_type:i.media_type, data:i.data } })))
       .concat(textParts.map(t=>({ text:t })));
-    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+key, {
-      method:"POST", headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ contents:[{ role:"user", parts:gparts }], generationConfig:{ maxOutputTokens:max_tokens, temperature, ...(json?{responseMimeType:"application/json"}:{}) } })
-    });
-    const j = await r.json();
+    const gctrl = new AbortController(); const gto = setTimeout(()=>gctrl.abort(), GEN_TIMEOUT_MS);
+    let r;
+    try{
+      r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+key, {
+        method:"POST", headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ contents:[{ role:"user", parts:gparts }], generationConfig:{ maxOutputTokens:max_tokens, temperature, ...(json?{responseMimeType:"application/json"}:{}) } }),
+        signal: gctrl.signal
+      });
+    }catch(e){ clearTimeout(gto); throw new Error("Gemini request "+(e&&e.name==="AbortError"?("timed out after "+Math.round(GEN_TIMEOUT_MS/1000)+"s"):("failed: "+(e&&e.message||e)))); }
+    clearTimeout(gto);
+    const j = await r.json().catch(()=>({}));
     if(!r.ok) throw new Error("Gemini: "+((j.error&&j.error.message)||r.status));
     const cand=((j.candidates||[])[0]||{}).content||{};
     const text=(cand.parts||[]).map(p=>p.text||"").join("");
@@ -211,9 +218,14 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
   // JSON mode: forces a clean JSON object and suppresses chain-of-thought preamble that otherwise
   // eats the whole token budget before any JSON is emitted (the cause of "parse failed" on reasoning models)
   if(json) body.response_format = { type:"json_object" };
-  const r = await fetch(base+"/chat/completions", { method:"POST",
-    headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body) });
-  const j = await r.json();
+  const ctrl = new AbortController(); const to = setTimeout(()=>ctrl.abort(), GEN_TIMEOUT_MS);   // never hang forever on a stalled model call
+  let r;
+  try{
+    r = await fetch(base+"/chat/completions", { method:"POST",
+      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body), signal: ctrl.signal });
+  }catch(e){ clearTimeout(to); throw new Error((isDeep?"DeepSeek":"OpenAI")+" request "+(e&&e.name==="AbortError"?("timed out after "+Math.round(GEN_TIMEOUT_MS/1000)+"s"):("failed: "+(e&&e.message||e)))); }
+  clearTimeout(to);
+  const j = await r.json().catch(()=>({}));
   if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
   const msg=(((j.choices||[])[0]||{}).message)||{};
   // reasoning models sometimes leave `content` empty and put the answer in `reasoning_content`
@@ -737,7 +749,10 @@ app.post("/build-extra", async (req,res)=>{
     const level = Number(req.body.level) || null;
     // in-app extras always use Flash — tiering is import-only
     const model = BASIC_MODEL;
+    const _t0 = Date.now();
+    console.log("[build-extra] start topic="+topic_id+" kind="+kind+" model="+model+" force="+(!!req.body.force));
     const items = await buildExtra(kind, level, t.data.note_md, model);
+    console.log("[build-extra] done topic="+topic_id+" kind="+kind+" items="+((items&&items.length)||0)+" in "+(Date.now()-_t0)+"ms");
     if(!items) return res.status(502).json({ error:"couldn't build this — try again" });
     const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent

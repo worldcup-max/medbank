@@ -65,7 +65,14 @@ Two layers now, growing toward a clinical-reasoning engine. Difficulty = the fou
 - Schema: **trap_type** (anchoring / premature_closure / next_step_confusion / timing_error / contraindication / overthinking / common_diagnosis_bias) + **trap_explanation**, populated beyond exam-trap (point 16) — enables "you keep falling for next-step confusion" analytics later.
 - Generator prompt encodes each cognitive level's construction rules + the exam-trap taxonomy (diagnosis-vs-next-step, stabilisation-vs-definitive, most-likely-vs-most-dangerous, treatment-vs-contraindication, conditional-not-automatic).
 
-**V1.5 — next** ⬜ adaptive difficulty · weakness targeting / Smart Drill · confidence rating (wrong+confident = misconception) · recommendation engine ("here's what to practice") · historical performance over time.
+**⏸ VALIDATION GATE (do this before V1.5)** — deploy v194, build 2–3 cross-course topics with decent pools, and run `QA_CHECKLIST.md`. The open risk is question-generation quality: prove the four cognitive levels generate *differently* (not cosmetically) before adding adaptive logic. If they don't differ, fix the prompt — not by adding features.
+
+**V1.5 — reordered (after the gate passes)**
+- **V1.5A** Question-quality + analytics validation (QA_CHECKLIST). FIRST.
+- **V1.5B** Weakness engine — "you're weak at management" → auto-build a session from existing questions (extends `mgDrillWeak`).
+- **V1.5C** Confidence rating (Guess/Unsure/Confident/Very confident) → wrong+unsure = knowledge gap vs wrong+confident = misconception. Also: trap_type analytics ("you keep falling for next-step confusion").
+- **V1.5D** Adaptive difficulty — only once there's enough reliable performance data.
+- North star: Mega shifts from "what do you want to practice?" → "🎯 you should practice this" (auto-built Recommended Drill from the weakness profile).
 **V2** ⬜ Integrated cases (one vignette needs multiple topics/courses) — new multi-note generation path.
 **V3** ⬜ 🌳 Branching clinical cases — decision → consequence → outcome; "your first wrong decision was at step 2". Its own engine (case state / transitions / scoring).
 **V4** ⬜ 🧠 Adaptive Exam Simulator — "prepare me for my exam": auto-builds a personalised timed paper (weak areas + previously-missed + mixed reasoning + traps), then reports risk areas.
