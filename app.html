@@ -487,6 +487,54 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .homeswitch{margin-top:22px;text-align:center}
 .homeswitch .btn{font-size:12.5px;color:var(--dim)}
 @media(max-width:720px){.hcols{grid-template-columns:1fr}.home2 .herobig{font-size:24px}}
+/* ---- habit-first home (v2) ---- */
+.h2wrap{display:flex;flex-direction:column;gap:12px;max-width:560px;margin:0 auto;animation:homefade .28s ease}
+.h2hero{background:linear-gradient(135deg,#3f1f95,#6d28d9);border-radius:20px;padding:20px 22px;color:#fff;cursor:pointer;box-shadow:0 10px 26px rgba(91,33,182,.26)}
+.h2herohead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.h2hi{font-size:15px;font-weight:600;color:#e9e2ff}
+.h2sub{font-size:13px;color:#cdbdf7;margin-top:2px}
+.h2ringwrap{position:relative;width:58px;height:58px;flex:none}
+.h2ringtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff}
+.h2big{font-size:27px;font-weight:900;letter-spacing:-.3px;margin:12px 0 3px;line-height:1.05}
+.h2meta{font-size:13.5px;color:#d9ccff}
+.h2start{margin-top:15px;width:100%;background:#fff;color:#5b21b6;border:0;border-radius:22px;padding:13px;font-size:15.5px;font-weight:900;cursor:pointer}
+.h2start:active{transform:scale(.99)}
+.h2streak{display:flex;align-items:center;gap:9px;background:#fff6e6;border:1px solid #f3d79a;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#8a5a12;cursor:pointer}
+.h2streak.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
+.h2streak b{font-weight:900}
+.h2fl{font-size:16px}
+.h2weak{display:flex;align-items:center;gap:9px;background:#fff0ec;border:1px solid #f6c3b4;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#a83f28;cursor:pointer}
+.h2wtx{flex:1;min-width:0}
+.h2weak b{font-weight:900}
+.h2fix{font-weight:900;white-space:nowrap}
+.h2tg{font-size:15px}
+.h2btns{display:flex;gap:10px}
+.h2sec{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:13.5px;font-weight:800;color:var(--accent);cursor:pointer}
+.h2sec:active{transform:scale(.99)}
+.h2foot{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--dim);padding:2px 4px}
+.h2rem{font-weight:800;color:var(--accent);cursor:pointer}
+.h2more{margin-top:4px}
+.h2more>summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--dim);padding:8px 2px;list-style:none}
+.h2more>summary::-webkit-details-marker{display:none}
+/* ---- session-complete celebration ---- */
+.celeb{max-width:460px;margin:8px auto;background:linear-gradient(135deg,#3f1f95,#6d28d9);border-radius:22px;padding:26px 24px;color:#fff;text-align:center;box-shadow:0 14px 34px rgba(91,33,182,.30);animation:celebpop .4s cubic-bezier(.2,.8,.3,1.2)}
+@keyframes celebpop{0%{transform:scale(.92);opacity:0}100%{transform:scale(1);opacity:1}}
+.celeb-top{font-size:40px;line-height:1}
+.celeb-h{font-size:26px;font-weight:900;margin:8px 0 4px;color:#fff}
+.celeb-sub{font-size:14px;color:#d9ccff;margin:0 0 16px}
+.celeb-ring{position:relative;width:120px;height:120px;margin:4px auto 6px}
+.celeb-ring>span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900}
+.celeb-ringcap{font-size:12.5px;color:#cbb8f7;margin-bottom:16px;letter-spacing:.3px}
+.celeb-stats{display:flex;background:rgba(255,255,255,.12);border-radius:16px;padding:14px 8px;margin-bottom:14px}
+.celeb-stats>div{flex:1;text-align:center;min-width:0}
+.celeb-stats b{display:block;font-size:24px;font-weight:900}
+.celeb-stats span{font-size:11px;color:#d9ccff}
+.celeb-mile{background:rgba(255,209,102,.16);border:1px solid rgba(255,209,102,.42);color:#ffe08a;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;margin-bottom:12px}
+.celeb-streak{background:rgba(255,255,255,.14);border-radius:12px;padding:11px;font-size:14px;font-weight:800;margin-bottom:14px}
+.celeb-next{width:100%;background:#fff;color:#5b21b6;border:0;border-radius:22px;padding:14px;font-size:15px;font-weight:900;cursor:pointer}
+.celeb-next:active{transform:scale(.99)}
+.celeb-more{width:100%;background:transparent;color:#e9e2ff;border:0;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:2px}
+.celeb-note{font-size:12px;color:#cbb8f7;margin:-6px 0 12px}
 
 /* ---- session modes bar ---- */
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
@@ -1040,9 +1088,9 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21a';   // bump this each release
+const APP_VERSION='2026.08.21d';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
-const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
+const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
 
 let DATA = (()=>{
@@ -1073,6 +1121,7 @@ let DATA = (()=>{
   d.folders  = d.folders  || [];  // [{id,name,topics:[topicId]}] student collections
   d.daily    = Object.assign({}, DEFAULTS, d.daily||{});
   if(d.daily.courseGoal==20) d.daily.courseGoal=30;   // updated daily new-card goal to 30/course
+  if(!d.flags.budget15){ if(d.daily.budget===0) d.daily.budget=15; d.flags.budget15=1; }   // Session Engine: adopt a 15-min default budget once (still user-changeable)
   return d;
 })();
 function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}
@@ -1163,10 +1212,32 @@ function maybeBumpStreak(){ if(streakMet()) bumpStreak(dstr()); }   // bumpStrea
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
   const today=dayNum(), s=DATA.cards[id]||{box:-1};
+  const wasMastered=(s.box==null?-1:s.box)>=3;
   if(ok){ s.box=Math.min((s.box<0?-1:s.box)+1, LADDER.length-1); s.due=today+LADDER[s.box];
           if(DATA.starred[id]) delete DATA.starred[id]; }   // passed → graduate out of hard cards
   else  { s.box=-1; s.due=today+1; s.lapses=(s.lapses||0)+1; }
   s.seen=today; DATA.cards[id]=s;
+  try{ if(!wasMastered && s.box>=3 && window.S && S.session) S.session.mastered=(S.session.mastered||0)+1; }catch(e){}   // newly mastered this session (powers the celebration)
+}
+/* ===== Session Engine — per-card answer-time tracking + estimates (all in ms) =====
+   The session is built from a TIME BUDGET; card time is a MEASURED rolling median (seeds until data). */
+const TIME_SEED={ new:45000, relearning:30000, review:17000, written:75000 };
+function cardTimeState(id,isWritten){ const s=DATA.cards[id];
+  if(isWritten) return 'written';
+  if(!s || s.seen==null) return 'new';
+  if((s.box==null?-1:s.box)<0) return 'relearning';
+  return 'review'; }
+function typeMedian(type){ const a=((DATA.medianSamples||{})[type]||[]);
+  if(a.length>=5){ const b=a.slice().sort((x,y)=>x-y); return b[b.length>>1]; }
+  return TIME_SEED[type]||20000; }
+function estCardMs(id,isWritten){ const s=DATA.cards[id];
+  if(s && s.ms) return s.ms;
+  return typeMedian(cardTimeState(id,isWritten)); }
+function recordAnswerMs(id,type,ms){ ms=Math.max(1500,Math.min(120000,ms|0));
+  DATA.medianSamples=DATA.medianSamples||{}; const a=DATA.medianSamples[type]=DATA.medianSamples[type]||[];
+  a.push(ms); if(a.length>40) a.shift();
+  const s=DATA.cards[id]; if(s) s.ms = s.ms ? Math.round(s.ms*0.7+ms*0.3) : ms;
+  try{ const L=DATA.log[dstr()]=DATA.log[dstr()]||{cards:0,correct:0}; L.ms=(L.ms||0)+ms; }catch(e){}   // minutes studied today → the honest ring
 }
 const startedTopics = () => allTopics.filter(t=>t.ready && status(t.id)!=='notstarted');
 
@@ -1600,11 +1671,14 @@ function buildRecallSession(){
     hard.sort((a,b)=>_ew(a)-_ew(b)); reviews.sort((a,b)=>_ew(a)-_ew(b)); news.sort((a,b)=>_ew(a)-_ew(b));
   }
   const ordered=hard.concat(reviews,news);
-  // time budget (minutes; 0 = unlimited)
-  const budget=DATA.daily.budget||0;
-  let capped=ordered, over=0;
-  if(budget>0){ const max=Math.max(1,Math.floor(budget*60/SEC_PER_CARD));
-    if(ordered.length>max){ capped=ordered.slice(0,max); over=ordered.length-max; } }
+  // TIME BUDGET (minutes) — fill greedily by MEASURED per-card time (rolling median); card count is the OUTPUT
+  const budget=DATA.daily.budget||15;
+  let capped=ordered, over=0, estMs=0;
+  if(budget>0){ const budgetMs=budget*60000; let cut=ordered.length;
+    for(let k=0;k<ordered.length;k++){ const t=estCardMs(ordered[k].id,false);
+      if(estMs+t<=budgetMs || k===0){ estMs+=t; } else { cut=k; break; } }   // never overfill (always ≥1 card)
+    capped=ordered.slice(0,cut); over=ordered.length-cut;
+  } else { estMs=ordered.reduce((a,x)=>a+estCardMs(x.id,false),0); }
   // confidence check: up to 5 mastered (box>=3), not currently due, not already in session
   const inSess=new Set(capped.map(x=>x.id)), mastered=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
@@ -1615,7 +1689,7 @@ function buildRecallSession(){
   // per-bucket counts (from the capped set)
   const counts={hard:0,new:0,d1:0,d3:0,wk:0,fn:0,conf:conf.length};
   capped.forEach(x=>{ if(x.isNew) counts.new++; else counts[reviewBucket(x.box,x.starred)]++; });
-  return {hard,reviews,news,capped,over,conf,counts,
+  return {hard,reviews,news,capped,over,conf,counts,estMs,budget,
     totalCards:capped.length+conf.length};
 }
 /* review health: how caught-up the whole system is.
@@ -1846,59 +1920,69 @@ function jbCard(t,due){ var r=topicResume(t), c=r.deck==='recall'?'var(--recall)
     ${jbActs(t)}
   </div>`; }
 
+function goalRing(pct,size,sw,col){ const r=(size-sw)/2,c=2*Math.PI*r,off=c*(1-Math.min(100,Math.max(0,pct))/100),k=size/2;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg)"><circle cx="${k}" cy="${k}" r="${r.toFixed(1)}" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="${sw}"/><circle cx="${k}" cy="${k}" r="${r.toFixed(1)}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/></svg>`; }
+
 function pageHome(){
-  const tl=todayLog(), goal=DATA.daily.goal||20, st=curStreak(), due=dueCount();
-  const started=startedTopics().length, complete=allTopics.filter(t=>status(t.id)==='complete').length;
-  const best=st>(DATA.streak.best||0)?st:(DATA.streak.best||0);
-  const resume=Object.keys(DATA.pos)[0]; let resumeBtn='';
-  if(resume){ const pt=topById(resume.split('|')[0]); if(pt){ const dk=resume.split('|')[1]==='p'?'primer':'recall';
-    resumeBtn=`<button class="btn hcont" onclick="go('study/${pt.id}/${dk}')">↩ Continue ${esc(pt.name).slice(0,20)}…</button>`; } }
+  const tl=todayLog(), st=curStreak(), due=dueCount();
   const q=buildQueue(), dueBy={}; q.due.forEach(x=>{ dueBy[x.t.id]=(dueBy[x.t.id]||0)+1; });
-  const nd=newDoneToday(), revDone=tl.rev||0, revDue=q.due.length, met=streakMet();
-  const nw=Math.min(100,Math.round(nd/goal*100)), rw=Math.min(100-nw,Math.round(revDone/goal*100));
+  const met=streakMet(), ws=weekStats();
+  // the session is built from a TIME BUDGET (Session Engine): budget → cards out, timed by rolling median
+  const budget=DATA.daily.budget||15;
+  const sess=buildRecallSession(), sessItems=sess.capped, sessN=sessItems.length;
+  const sTop={}; sessItems.forEach(x=>{ if(x&&x.t) sTop[x.t.id]=1; }); const sTopics=Object.keys(sTop).length||1;
+  const sMin=Math.max(1,Math.min(budget,Math.round((sess.estMs||0)/60000)));
+  const allCaught=(sessN===0);
+  const minToday=Math.round((tl.ms||0)/60000);
+  const ringPct=Math.min(100,Math.round(minToday/budget*100));
+  // demoted content
+  const started=startedTopics().length, complete=completeCount(), best=st>(DATA.streak.best||0)?st:(DATA.streak.best||0);
   const exams=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
   const inprog=startedTopics().filter(t=>status(t.id)==='inprogress').map(t=>({t,d:topicLastDay(t.id)})).sort((a,b)=>b.d-a.d).map(x=>x.t);
   const jbLeadT=inprog[0], jbMore=inprog.slice(1,5);
-  return `<div class="home2 bento">
-    <div class="hero" style="grid-area:hero">
-      <div class="herorow"><span class="herohi">${greeting()}, Frank</span>
-        <span class="herostreak"><span>🔥</span> ${st}</span></div>
-      <div class="herolab">Today's focus</div>
-      <div class="herobig">${due?due+' card'+(due===1?'':'s')+' due':'All caught up 🎉'}</div>
-      <div class="herobtns">
-        <button class="btn primary hstart" onclick="go('today')">🧠 ${due?'Start active recall':'Open active recall'} →</button>
-        ${resumeBtn}
+  return `<div class="h2wrap">
+    <div class="h2hero" onclick="go('today')">
+      <div class="h2herohead">
+        <div><div class="h2hi">${greeting()}, Frank ☀️</div>
+          <div class="h2sub">${allCaught?'You’re all caught up 🎉':'Your session is ready'}</div></div>
+        <div class="h2ringwrap">${goalRing(ringPct,58,7,'#a6f05a')}<span class="h2ringtxt">${ringPct}%</span></div>
       </div>
-      ${exams.length?`<div class="examrow">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
+      <div class="h2big">${allCaught?'Nothing due':sMin+'-minute session'}</div>
+      <div class="h2meta">${allCaught?'Review anything, or learn a new topic':sessN+' card'+(sessN===1?'':'s')+' · '+sTopics+' topic'+(sTopics===1?'':'s')+' · ~'+sMin+' min'}</div>
+      <button class="h2start" onclick="event.stopPropagation();${allCaught?"go('today')":"startRecallSession(0);go('review')"}">▶ ${allCaught?'Open active recall':'Start today’s session'}</button>
     </div>
-    <div class="mtiles" style="grid-area:tiles">
-      <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
-      <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
-      <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
-      <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
+    <div class="h2streak ${met?'ok':''}" onclick="go('today')">
+      <span class="h2fl">🔥</span><span><b>${st}-day streak</b> ${met?'— safe today, nice work.':'— study today to keep it alive!'}</span>
     </div>
-    <div class="b-lead" style="grid-area:lead">
-      <div class="shelfhd">Jump back in</div>
+    ${(ws.weak&&ws.weakN>0)?`<div class="h2weak" onclick="go('today')">
+      <span class="h2tg">🎯</span><span class="h2wtx">Weakest area: <b>${esc(ws.weak)}</b> — ${ws.weakN} card${ws.weakN===1?'':'s'} in relearning</span><span class="h2fix">Fix these →</span>
+    </div>`:''}
+    <div class="h2btns">
+      <button class="h2sec" onclick="go('today')">Review weak cards</button>
+      <button class="h2sec" onclick="go('today')">Custom session</button>
+    </div>
+    <div class="h2foot">
+      <span>Daily goal · ${minToday} / ${budget} min</span>
+      <span class="h2rem" onclick="go('settings')">🔔 Enable 7am reminder</span>
+    </div>
+    ${exams.length?`<div class="examrow" style="margin-top:2px">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
+    <details class="homemore h2more">
+      <summary>Progress, tiles &amp; jump back in ▾</summary>
+      <div class="mtiles" style="margin-top:12px">
+        <div class="mtile" onclick="go('duenow')"><b style="color:var(--recall)">${due}</b><span>Due now</span></div>
+        <div class="mtile" onclick="go('inprogress')"><b>${started}</b><span>In progress</span></div>
+        <div class="mtile" onclick="go('completed')"><b style="color:var(--primer)">${complete}</b><span>Completed</span></div>
+        <div class="mtile"><b style="color:var(--com)">${best}</b><span>Best streak</span></div>
+      </div>
+      <div class="shelfhd" style="margin-top:14px">Jump back in</div>
       ${jbLeadT?jbLead(jbLeadT,dueBy[jbLeadT.id]||0):`<div class="shelfempty">Open any topic to start — it'll show up here.</div>`}
-    </div>
-    <div class="b-mip" style="grid-area:mip">
-      <div class="jbmorelab">More in progress</div>
-      ${jbMore.length?`<div class="jbmore">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:`<div class="shelfempty">Nothing else in progress yet.</div>`}
-    </div>
-    <div class="progcard" style="grid-area:prog">
-      <div class="progtt">Your progress</div>
-      ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
-        return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
-          <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
-    </div>
-    <div class="goalcard" style="grid-area:goal">
-      <div class="goaltop"><span>Daily goal</span><b>${tl.cards} / ${goal}</b></div>
-      <div class="segbar"><div style="width:${nw}%;background:var(--primer)"></div><div style="width:${rw}%;background:var(--recall)"></div></div>
-      <div class="goalleg"><span><i style="background:var(--primer)"></i> New ${nd}</span><span><i style="background:var(--recall)"></i> Reviews ${revDone}</span>
-        <span class="gstat ${met?'ok':''}">${met?'✅ Streak safe':'🔥 '+revDue+' to keep streak'}</span></div>
-    </div>
-    <details class="homemore" style="grid-area:more">
-      <summary>More · this week &amp; subjects</summary>
+      ${jbMore.length?`<div class="jbmore" style="grid-template-columns:1fr 1fr;margin-top:10px">${jbMore.map(t=>jbCard(t,dueBy[t.id]||0)).join('')}</div>`:''}
+      <div class="progcard" style="margin-top:14px">
+        <div class="progtt">Your progress</div>
+        ${DB.subjects.map(sb=>{const p=subjProgress(sb);const c=homeColor(sb.id);
+          return `<div class="prow" onclick="go('subject/${sb.id}')"><span class="pnm">${esc(sb.short)}</span>
+            <div class="pbarn"><div style="width:${p.pct}%;background:${c}"></div></div><b>${p.pct}%</b></div>`;}).join('')}
+      </div>
       ${homeMore()}
     </details>
   </div>`;
@@ -3503,6 +3587,44 @@ function nudgeBody(items){
   const more=items.length-3;
   return lines.join('\n\n') + (more>0?`\n\n+ ${more} more · tap to drill`:`\n\nTap to drill`);
 }
+/* Habit-loop reminder copy: benefit-driven, specific, never guilt. Picks the right kind by context.
+   Returns {title, body, url, kind}. kind 'save' = the single streak-rescue; 'pull' = the daily nudge. */
+function habitNudge(){
+  const hr=new Date().getHours();
+  const st=curStreak(), met=streakMet(), due=dueCount(), frz=freezeState();
+  const budget=DATA.daily.budget||15, sess=buildRecallSession(), sessN=sess.capped.length;
+  const sTop={}; sess.capped.forEach(x=>{ if(x&&x.t) sTop[x.t.id]=1; }); const sTopics=Object.keys(sTop).length||1;
+  const sMin=Math.max(1,Math.min(budget,Math.round((sess.estMs||0)/60000)));
+  const lN=(DATA.streak&&DATA.streak.lastN!=null)?DATA.streak.lastN:(DATA.streak&&DATA.streak.last?dayNum(new Date(DATA.streak.last+'T00:00')):-1);
+  const gap=lN<0?99:(dayNum()-lN);
+  const exs=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
+  const ex=exs[0], url='./app.html#/today';
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  // B — streak at risk: evening, streak alive, not yet met today. Always offer the off-ramp when a freeze is ready.
+  if(st>=1 && !met && hr>=18){
+    return frz==='ready'
+      ? {title:`Your ${st}-day streak ends at midnight`, body:`2 minutes keeps it alive — or tap to use a streak freeze. No pressure.`, url, kind:'save'}
+      : {title:`Your ${st}-day streak ends at midnight`, body:`Just 2 minutes keeps it alive. You've come too far to stop.`, url, kind:'save'};
+  }
+  // C — re-engagement: away 2+ days
+  if(gap>=2){
+    return (ex && ex.d<=120)
+      ? {title:`${esc(ex.sb.name)} exam in ${ex.d} days`, body:`A little today beats cramming later. Start small — ~${sMin} min.`, url, kind:'pull'}
+      : {title:`Your cards missed you`, body:`${due} are due. Pick up right where you left off — ~${sMin} min.`, url, kind:'pull'};
+  }
+  // D — positive reinforcement: morning, occasional, after a good day yesterday
+  const yc=(DATA.log[dstr(new Date(Date.now()-864e5))]||{}).cards||0;
+  if(hr<12 && yc>=5 && Math.random()<0.34){
+    return {title:`You reviewed ${yc} cards yesterday`, body:`Keep the momentum — today's ${sMin}-minute session is ready.`, url, kind:'pull'};
+  }
+  // A — the morning pull (default), rotate variants
+  const A=[
+    {title:`Your ${sMin}-minute session is ready`, body:`${sessN} card${sessN===1?'':'s'} · ${sTopics} topic${sTopics===1?'':'s'}. Start your day one step ahead.`},
+    {title:`${sTopics} topic${sTopics===1?'':'s'} ${sTopics===1?'is':'are'} fading from memory`, body:`Catch ${sTopics===1?'it':'them'} now before they slip. ~${sMin} min.`},
+    {title:`Coffee + ${sMin} min = today's session done`, body:`Tap to start while it's fresh.`},
+  ];
+  const a=pick(A); return {title:a.title, body:a.body, url, kind:'pull'};
+}
 /* short in-app beep alarm (only works while the app is open) */
 function playAlarm(){
   try{
@@ -3565,13 +3687,18 @@ function nudgeTick(force){
     const every=Math.max(5,(s.remindMins||120))*60e3;
     const now=Date.now();
     if(!force && now-(s.lastNudge||0) < every) return;
-    if(todayLog().cards>0 && (now-(s.lastNudge||0)) < every) { /* studied recently is fine */ }
     const items=nudgeItems(10);
     if(!items.length) return;                     // nothing to review — no nag
+    const today=dstr(), n=habitNudge();
+    // guardrail: at most one daily pull + one streak-save per day (never guilt-nag)
+    if(!force){
+      if(n.kind==='save'){ if(s.savedDay===today) return; }
+      else { if(s.nudgedDay===today) return; }
+    }
+    if(n.kind==='save') s.savedDay=today; else s.nudgedDay=today;
     s.lastNudge=now; persist();
-    const body=nudgeBody(items), url='./app.html#/nudge';
-    swPing('notify',{body,url,strict:s.strict});
-    swPing('payload',{body,url});
+    swPing('notify',{title:n.title,body:n.body,url:n.url,strict:s.strict});
+    swPing('payload',{title:n.title,body:n.body,url:n.url});
     if(document.visibilityState==='visible' && now-_lastTickShown>5000){
       _lastTickShown=now; playAlarm();
       if(s.strict) strictOverlay(items.length);
@@ -3647,7 +3774,7 @@ function pageStudy(topicId,deck){
 
 /* daily review runner with live completion meter */
 function pageReview(){
-  if(!S || S.mode!=='daily') startToday();
+  if(!S || S.mode!=='daily') startRecallSession(0);   // cold /review → play the time-budgeted session
   if(!S.items.length) return caughtUp();
   if(S.i>=S.items.length) return sessionSummary('Back to Active Recall','today');
   const it=S.items[S.order[S.i]];
@@ -3696,27 +3823,35 @@ function caughtUp(){
         <button class="btn primary" onclick="go('today')">See today’s plan</button>
         <button class="btn" onclick="go('cards')">Browse topics</button></div></div>`;
 }
+const CELEB_PRAISE=["You showed up. That’s how mastery is built.","Small session, real progress — nice work.","Consistency beats cramming, and you just proved it.","Another brick in the wall. Keep stacking.","Future-you on exam day says thanks."];
 function sessionSummary(backLabel,backRoute){
-  const s=S.session, acc=s.done?Math.round(s.correct/s.done*100):0;
-  if(s.done>=20 && s.correct===s.done && !DATA.flags.perfect){ DATA.flags.perfect=1; persist(); }
-  const remain=dueCount(), cleared=(remain===0);
-  return `<div class="donecard ${cleared?'clear':''}">
-      <div class="donetick">${cleared?'✅':'✓'}</div>
-      <h1 style="margin:6px 0 4px">${cleared?'Today’s Active Recall complete':'Session complete'}</h1>
-      <p class="sub" style="margin-bottom:20px">${cleared?'Next review: tomorrow. Nothing left due today.':`${remain} card${remain===1?'':'s'} still due — do another round when you can.`}</p>
-      <div class="sgrid">
-        <div class="sm"><b>${s.done}</b><span>cards</span></div>
-        <div class="sm"><b style="color:var(--recall)">${s.correct}</b><span>got it</span></div>
-        <div class="sm"><b style="color:var(--com)">${Math.max(0,s.done-s.correct)}</b><span>missed</span></div>
-        <div class="sm"><b>${acc}%</b><span>accuracy</span></div>
+  const s=S.session, done=s.done||0, correct=s.correct||0, mastered=s.mastered||0;
+  const acc=done?Math.round(correct/done*100):0;
+  if(done>=20 && correct===done && !DATA.flags.perfect){ DATA.flags.perfect=1; persist(); }
+  const remain=dueCount(), cleared=(remain===0), st=curStreak();
+  const budget=DATA.daily.budget||15, minToday=Math.round((todayLog().ms||0)/60000), ringPct=Math.min(100,Math.round(minToday/budget*100)), ringClosed=ringPct>=100;
+  const sub=CELEB_PRAISE[done%CELEB_PRAISE.length];
+  let mile='';
+  if(st>0 && st%7===0)      mile=`🔥 ${st}-day streak — you’re building something real.`;
+  else if(mastered>0)       mile=`🏆 ${mastered} card${mastered===1?'':'s'} mastered — ${mastered===1?'one':'that many'} less thing${mastered===1?'':'s'} to fear on exam day.`;
+  else if(acc>=100 && done>=10) mile=`🎯 ${done} for ${done} — flawless round.`;
+  return `<div class="celeb">
+      <div class="celeb-top">🎉</div>
+      <h1 class="celeb-h">${cleared?'Active Recall complete!':'Session complete!'}</h1>
+      <p class="celeb-sub">${sub}</p>
+      <div class="celeb-ring">${goalRing(ringPct,120,10,'#a6f05a')}<span>${ringPct}%</span></div>
+      <div class="celeb-ringcap">${ringClosed?'Daily ring closed':'Daily goal · '+minToday+' / '+budget+' min'}</div>
+      <div class="celeb-stats">
+        <div><b>${done}</b><span>cards reviewed</span></div>
+        <div><b>${mastered}</b><span>mastered</span></div>
+        <div><b>${acc}%</b><span>accuracy</span></div>
       </div>
-      ${s.confN?`<p class="sub" style="text-align:center;margin-top:14px">🎲 ${s.confN} confidence card${s.confN===1?'':'s'} checked — any you missed quietly re-entered the pipeline.</p>`:''}
-      ${s.over?`<p class="sub" style="text-align:center">${s.over} extra due card${s.over===1?'':'s'} were held for tomorrow to fit your time budget.</p>`:''}
-      <div class="sflame">🔥 ${curStreak()}-day streak</div>
-      <div class="btnrow" style="justify-content:center;margin-top:16px">
-        <button class="btn primary" onclick="go('${backRoute||'home'}')">${backLabel||'Back to dashboard'}</button>
-        ${remain?`<button class="btn" onclick="startRecallSession();go('review')">Keep going · ${remain} due</button>`:''}
-      </div></div>`;
+      ${s.over?`<div class="celeb-note">${s.over} extra due card${s.over===1?'':'s'} held for tomorrow to fit your time budget.</div>`:''}
+      ${mile?`<div class="celeb-mile">${mile}</div>`:''}
+      <div class="celeb-streak">🔥 Streak extended → ${st} day${st===1?'':'s'}</div>
+      <button class="celeb-next" onclick="go('${backRoute||'home'}')">See what’s next tomorrow →</button>
+      ${remain?`<button class="celeb-more" onclick="startRecallSession();go('review')">Keep going · ${remain} more card${remain===1?'':'s'}</button>`:''}
+    </div>`;
 }
 
 /* mode buttons for quick sessions */
@@ -3929,6 +4064,7 @@ function mcqView(session){
 
 /* shared card renderer — deck mode and session (daily/hard) mode */
 function cardView(session){
+  try{ if(S._shownI!==S.i){ S._shownAt=Date.now(); S._shownI=S.i; } }catch(e){}   // stamp when a fresh card appears (powers answer-time medians)
   const it0=S.items[S.order[S.i]];
   if(it0 && it0.deck!=='primer' && it0.c.opts && it0.c.opts.length) return mcqView(session);
   const it=S.items[S.order[S.i]], c=effCard(it.id,it.c), t=it.t, deck=it.deck, isP=deck==='primer';
@@ -4016,8 +4152,10 @@ function pickOpt(i){
   S.pick=i; S.show=true;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
+  const _pt=cardTimeState(it.id,false), _ms=S._shownAt?Date.now()-S._shownAt:0;
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
+  if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);           // measure real answer time → rolling median
   logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok) S.session.correct++;
   if(!ok && !it.conf){                                   // failed → auto-add to hard cards + mistakes log
@@ -4124,8 +4262,10 @@ function rateCard(ok){
   if(!S) return; if(window.vizInlineStop)vizInlineStop(); const it=S.items[S.order[S.i]]; if(!it) return;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
+  const _pt=cardTimeState(it.id,false), _ms=S._shownAt?Date.now()-S._shownAt:0;
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
+  if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);
   logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
@@ -4439,8 +4579,9 @@ function testNudge(){
   const items=nudgeItems(10);
   if(!items.length){ alert('No hard or due cards to show yet — study a topic first, then star a few cards.'); return; }
   DATA.settings.lastNudge=Date.now(); persist();
-  swPing('notify',{body:nudgeBody(items),url:'./app.html#/nudge',strict:DATA.settings.strict});
-  swPing('payload',{body:nudgeBody(items),url:'./app.html#/nudge'});
+  const n=habitNudge();
+  swPing('notify',{title:n.title,body:n.body,url:n.url,strict:DATA.settings.strict});
+  swPing('payload',{title:n.title,body:n.body,url:n.url});
   playAlarm();
 }
 async function enableReminders(){
@@ -4482,8 +4623,9 @@ function pageSettings(){
       <input class="numin" type="number" min="5" max="300" value="${d.goal}" onchange="setGoal(this.value)"></div>
     <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — hitting it keeps your streak.</span></div>
       <input class="numin" type="number" min="1" max="${d.goal}" value="${d.floor}" onchange="setFloor(this.value)"></div>
-    <div class="setrow"><div><b>Session time budget</b><span>Cap each Active Recall session (minutes). Extra due cards wait for tomorrow. 0 = no limit.</span></div>
-      <input class="numin" type="number" min="0" max="120" value="${d.budget||0}" onchange="setBudget(this.value)"></div>
+    <div class="setrow"><div><b>Daily session length</b><span>Your session fills to this time budget and stops — card count follows your real pace (0 = no limit). Extra due cards roll to tomorrow.</span>
+      <div style="display:flex;gap:6px;margin-top:8px">${[5,15,30,45].map(m=>`<button class="btn tiny${(d.budget||15)===m?' primary':''}" onclick="setBudget(${m})">${m} min</button>`).join('')}</div></div>
+      <input class="numin" type="number" min="0" max="120" value="${d.budget||15}" onchange="setBudget(this.value)"></div>
 
     <h2>Review order</h2>
     <div class="setrow"><div><b>Mix subjects together</b><span>On = interleaved (better for exams). Off = one subject at a time (nearest exam first).</span></div>
@@ -4504,8 +4646,8 @@ function pageSettings(){
     <h2>Reminders</h2>
     <div class="setrow"><div><b>Study reminders</b><span>${
       perm==='unsupported'?'Not supported in this browser.':
-      s.remindOn&&perm==='granted'?'On. Each nudge carries a mix of your hard + due cards (question and answer) so you can review straight from the notification; tap it to drill them.':
-      'Get notifications that carry a mix of your hard + due cards — question and answer — so you can review from the drop-down. Tap to drill.'}</span></div>
+      s.remindOn&&perm==='granted'?'On. One friendly nudge a day when your session is ready — plus a single streak-save if your streak is ever at risk. No card spoilers, no guilt-trips.':
+      'Get one benefit-driven nudge a day when your session is ready (and a single streak-save when it’s genuinely at risk). Always an off-ramp, never a guilt-trip.'}</span></div>
       ${s.remindOn?`<button class="btn" onclick="disableReminders()">Turn off</button>`
                   :`<button class="btn primary" onclick="enableReminders()">Turn on</button>`}</div>
     ${s.remindOn?`
@@ -5381,8 +5523,8 @@ async function setupReminder(){
       const st=await navigator.permissions.query({name:'periodic-background-sync'}).catch(()=>({state:'denied'}));
       if(st.state==='granted'){ try{ await reg.periodicSync.register('medbank-nudge',{minInterval:every}); }catch(e){} }
     }
-    // pre-stage current cards so a background notification can carry them
-    const items=nudgeItems(10); if(items.length) swPing('payload',{body:nudgeBody(items),url:'./app.html#/nudge'});
+    // pre-stage the habit-loop copy so a background notification can fire it
+    const items=nudgeItems(10); if(items.length){ const n=habitNudge(); swPing('payload',{title:n.title,body:n.body,url:n.url}); }
   }catch(e){}
 }
 if('serviceWorker' in navigator){

@@ -1,5 +1,8 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v195';   // v195: Visualize dead-air fix — first line's voice is fully pre-generated before the "tap to watch" pill appears, audio element unlocked inside the tap gesture, safety poll capped at ~4s; podcast voice-picker routing restored
+const CACHE = 'medbank-v198';   // v198: Session Engine — session built from a TIME BUDGET (default 15 min), filled greedily by MEASURED per-card time (rolling median per card + per-type medians, seeds until data); home session hero + rings are now time-honest (minutes studied / budget); daily length setting 5/15/30/45
+// v197: Habit-loop — session-complete celebration screen + benefit-driven notification copy (morning pull / streak-at-risk+freeze off-ramp / re-engagement / positive), one pull/day + single streak-save guardrail, real notification titles
+// v196: Habit-first home — session hero (15-min session), daily-goal ring up top, prominent+protected streak, weakest-area coach card, one dominant button; tiles/jump-back/progress demoted under "More"
+// v195: Visualize dead-air fix — first line's voice is fully pre-generated before the "tap to watch" pill appears, audio element unlocked inside the tap gesture, safety poll capped at ~4s; podcast voice-picker routing restored
 // v194: Mega corrections per spec — Focused/Mixed/Blind (no topic shown before answering, any mode); balanced round-robin so a big topic can't dominate; Blind draws whole courses; Quick Exam is the primary CTA; "Drill my weaknesses" panel; Mega Test results break down by course/level/skill; schema trap_type + trap_explanation (populated beyond exam-trap)
 // v193: Mega Q-bank — cross-topic exam practice in the sidebar; course/topic pool selection; Targeted / Semi-blind / Blind exposure; Tutor/Test; level + skill + count; one-click Quick Exam (20 · blind · timed); reuses the attempt log so weakness analytics + mistakes pool work across topics; generator prompt now encodes each cognitive level's behaviour + the exam-trap taxonomy
 // v192: Q-bank V1
@@ -74,8 +77,9 @@ async function maybeRemind() {
     // prefer a page-staged payload that carries the actual cards
     const body = await readFlag('payloadBody');
     const url  = (await readFlag('payloadUrl')) || './app.html#/nudge';
+    const title = (await readFlag('payloadTitle')) || 'MedBank';
     const strict = (await readFlag('strict')) === '1';
-    if (body) { await self.registration.showNotification('MedBank', notifyOpts(body, url, strict)); return; }
+    if (body) { await self.registration.showNotification(title, notifyOpts(body, url, strict)); return; }
     // fallback if nothing staged
     const hc = parseInt((await readFlag('hardCount')) || '0', 10);
     const n = Math.min(5, hc);
@@ -90,8 +94,8 @@ self.addEventListener('message', e => {
   if (d.type === 'skipWaiting') self.skipWaiting();
   if (d.type === 'studied')   writeFlag('lastStudied', d.date);
   if (d.type === 'hardcount') writeFlag('hardCount', String(d.n || 0));
-  if (d.type === 'payload')   { writeFlag('payloadBody', d.body || ''); writeFlag('payloadUrl', d.url || './app.html#/nudge'); }
-  if (d.type === 'notify')    { writeFlag('strict', d.strict ? '1' : '0'); self.registration.showNotification('MedBank', notifyOpts(d.body, d.url, d.strict)); }
+  if (d.type === 'payload')   { writeFlag('payloadBody', d.body || ''); writeFlag('payloadUrl', d.url || './app.html#/nudge'); writeFlag('payloadTitle', d.title || 'MedBank'); }
+  if (d.type === 'notify')    { writeFlag('strict', d.strict ? '1' : '0'); self.registration.showNotification(d.title || 'MedBank', notifyOpts(d.body, d.url, d.strict)); }
 });
 /* tiny IndexedDB-free flag store using Cache API */
 async function writeFlag(k, v) { const c = await caches.open(CACHE); await c.put('flag:' + k, new Response(v)); }
