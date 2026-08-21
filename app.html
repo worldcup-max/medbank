@@ -1040,7 +1040,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.20l';   // bump this each release
+const APP_VERSION='2026.08.21a';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:0,courseGoal:30};
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2873,14 +2873,18 @@ function podEnter(id,name){
   if(POD.topicId!==id){ podStopAudio();
     POD={ topicId:id, topicName:name||'', mode:null, lines:null, urls:null, voices:POD.voices||null, voiceA:POD.voiceA||null, voiceB:POD.voiceB||null, i:0, playing:false, speed:1, volume:(POD.volume==null?1:POD.volume), inserts:{}, phase:'mode', raise:false };
     var saved=null,savedMode=null; try{ saved=localStorage.getItem('pod_combo_'+id); savedMode=localStorage.getItem('pod_mode_'+id); }catch(e){}
-    if(saved && savedMode){ POD.mode=savedMode; podLoadScript(id, savedMode); return; }   // instant replay of what they already made
+    if(saved && savedMode){ POD.mode=savedMode; podLoadScript(id, savedMode, true); return; }   // instant replay of what they already made
     podPaint(); return;                                                                     // otherwise: pick a format first
   }
   podPaint();
 }
-function podChooseMode(m){ POD.mode=(m==='quick'?'quick':'deep'); try{ localStorage.setItem('pod_mode_'+POD.topicId, POD.mode); }catch(e){} podLoadScript(POD.topicId, POD.mode); }
+function podChooseMode(m){ POD.mode=(m==='quick'?'quick':'deep'); try{ localStorage.setItem('pod_mode_'+POD.topicId, POD.mode); }catch(e){} podLoadScript(POD.topicId, POD.mode, false); }
 function podRemake(){ try{ podStopAudio(); }catch(e){} POD.playing=false; POD.phase='mode'; podPaint(); }   // back to the format chooser
-async function podLoadScript(id, mode){
+/* jump straight to the voice picker, keeping the current hosts pre-selected */
+function podChangeVoices(){ try{ podStopAudio(); }catch(e){} POD.playing=false;
+  (async function(){ if(!POD.lines){ await podLoadScript(POD.topicId, POD.mode||'deep', false); return; }
+    if(!POD.voices || !POD.voices.length) await podLoadHostVoices(); await podSetProvider('auto', true); })(); }
+async function podLoadScript(id, mode, autoPlay){
   POD.mode = (mode==='quick'?'quick':'deep');
   POD.phase='load'; podPaint();
   try{
@@ -2889,8 +2893,11 @@ async function podLoadScript(id, mode){
     POD.lines=r.data.lines;
     await podLoadHostVoices();                              // real Fish host voices (for names + picker)
     let saved=null; try{ saved=localStorage.getItem('pod_combo_'+id); }catch(e){}
-    if(saved){ const p=saved.split('|'); if(p.length===3){ POD.provider='auto'; POD.voiceA=p[1]; POD.voiceB=p[2]; podGenAudio(); return; } }
-    await podSetProvider('auto');
+    if(saved){ const p=saved.split('|'); if(p.length===3){ POD.provider='auto'; POD.voiceA=p[1]; POD.voiceB=p[2];
+      if(autoPlay){ podGenAudio(); return; }                 // re-entry → instant replay with saved hosts
+      await podSetProvider('auto', true); return;            // Remake / change → show picker with saved hosts pre-selected
+    } }
+    await podSetProvider('auto');                            // first time → picker with defaults
   }catch(e){ POD.phase='error'; POD.err=cleanPodErr(e.message); podPaint(); }
 }
 async function podLoadVoices(){
@@ -3185,7 +3192,7 @@ function podPaint(){
       +'<span class="podctl"><span style="font-size:13px;color:var(--dim)">Speed</span><select class="podspd" onchange="podSetSpeed(this.value)" aria-label="Speed">'
         +[0.75,0.9,1,1.1,1.25,1.5,1.75,2].map(function(v){ return '<option value="'+v+'"'+((Math.abs((POD.speed||1)-v)<0.001)?' selected':'')+'>'+v+'×</option>'; }).join('')
       +'</select></span></div>'
-    +'<div class="btnrow" style="justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn" onclick="podRaise()">✋ Raise hand</button><button class="btn" onclick="podDownload()">⬇ Download</button><button class="btn" onclick="podRemake()" title="Make the other length / re-pick hosts">↻ Remake</button></div></div>';
+    +'<div class="btnrow" style="justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn" onclick="podRaise()">✋ Raise hand</button><button class="btn" onclick="podChangeVoices()" title="Pick different host voices">🎙 Voices</button><button class="btn" onclick="podDownload()">⬇ Download</button><button class="btn" onclick="podRemake()" title="Make the other length / re-pick hosts">↻ Remake</button></div></div>';
   // chapters — jump chips (only when the script actually has sections)
   var chaps=podChapters(); var curSec=((POD.lines[POD.i]||{}).section||'').trim();
   if(chaps.length>1){ root.innerHTML+='<div style="margin-top:14px;font-weight:700">Chapters</div><div class="podchaps">'
@@ -7127,13 +7134,15 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     var q=BP.narration_steps.map(function(s){return (s.narration_text||'').trim();}).filter(Boolean); var i=0;
     (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx2,nx2); })();
   }catch(e){} }
-  function vizPlayWhenReady(){ // wait until step-0's voice is pre-generated, then auto-play (poster shows meanwhile)
+  function vizPlayWhenReady(){ // step-0's voice is pre-generated before the pill flips to "ready", so this is normally instant
     var t=((BP.narration_steps&&BP.narration_steps[0]&&BP.narration_steps[0].narration_text)||'').trim();
-    if(!t || !window._ttsHas){ setTimeout(play,400); return; }
-    var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,'read')||n++>110){ play(); } else setTimeout(poll,300); })();
+    if(!t || !window._ttsHas){ play(); return; }
+    if(window._ttsHas(t,'read')){ play(); return; }                       // already cached → no dead air, go now
+    var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,'read')||n++>16){ play(); } else setTimeout(poll,250); })();  // safety net: never wait more than ~4s of silence
   }
   function playVizFloat(){
     var d=_vizFloatReady; if(!d)return; removeVizFloat();
+    try{ unlockAudio(); }catch(e){}                                       // unlock the audio element INSIDE the tap gesture so the first clip plays instantly (mobile blocks play() outside a gesture)
     openModal();
     BP=d.bp; SRC=d.text||''; applyLayout(d.bp);
     VIZ_TID=d.topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
@@ -7150,8 +7159,16 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       try{ setQuota(resp.viz_quota); }catch(e){}
       recordViz(tid, text);                                  // save this video against the note (+ immediate flush)
       _vizFloatReady={ bp:bp, text:text||'', topicName:topicName, topicId:tid };
-      try{ if(window.warmSpeak){ (bp.narration_steps||[]).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t) window.warmSpeak(t,'read'); }); } }catch(e){}   // pre-generate the voices while the "ready" pill shows, so play is instant
-      showVizFloat('ready');                                 // pill flips to "tap to watch"
+      // Pre-generate the FIRST line and WAIT for it before offering "tap to watch" — that guarantees the first
+      // word plays the instant the user taps (no silent poll). The rest keep warming in the background.
+      try{
+        if(window.warmSpeak){
+          var _st=bp.narration_steps||[]; var _t0=((_st[0]&&_st[0].narration_text)||'').trim();
+          if(_t0) await window.warmSpeak(_t0,'read');
+          _st.slice(1).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t) window.warmSpeak(t,'read'); });
+        }
+      }catch(e){}
+      showVizFloat('ready');                                 // pill flips to "tap to watch" — first line is already cached
     }catch(e){ vizFloatError((e&&e.message)||'Something went wrong'); }
   };
   function applyLayout(bp){
