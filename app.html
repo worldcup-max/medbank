@@ -1119,7 +1119,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21l';   // bump this each release
+const APP_VERSION='2026.08.21m';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2583,6 +2583,17 @@ function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qba
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 function qbExit(){ QB=null; render(); }
+/* grade over what was actually ANSWERED — for a normally-finished session that's every item;
+   for an early exit it's just the answered subset, so the score is never diluted by skipped questions. */
+function qbScore(){ var answered=(QB.results||[]).length; var n=(QB.endedEarly?answered:QB.items.length); var c=QB.correct||0; return {answered:answered, n:n, c:c, pct:n?Math.round(c/n*100):0}; }
+/* leave a Mega/Smart/Adaptive session early and grade what's been answered (Test AND Tutor) */
+function qbEndEarly(){ if(!QB || QB.done) return;
+  var answered=(QB.results||[]).length;
+  if(!answered){ if(confirm('Leave this session? You haven’t answered anything yet, so there’s nothing to grade.')) qbExit(); return; }
+  var planned=(QB.adaptive?QB.adaptTarget:QB.items.length), remaining=Math.max(0, planned-answered);
+  if(!confirm('End now and grade the '+answered+' question'+(answered>1?'s':'')+' you’ve answered'+(remaining>0?(' (skipping the remaining '+remaining+')'):'')+'?')) return;
+  QB.endedEarly=true; qbFinalize(); QB.done=true; render();
+}
 function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); persist(); render(); }
 function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){ var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
 function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++;
@@ -2650,7 +2661,7 @@ function qbQuestionHtml(){
   var why=(QB.smart||QB.adaptive)?'<details class="qbwhy"><summary>ⓘ Why this drill?</summary><div>'+esc(QB.smartWhy||'Chosen from your recent performance.')+((QB.smartReasons&&QB.smartReasons.length)?'<ul>'+QB.smartReasons.slice(0,3).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>':'')+'</div></details>':'';
   var count=(QB.adaptive?QB.adaptTarget:QB.items.length);
   return '<div class="card" style="cursor:default">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span>'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'</div>'+expo+why
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span><span style="display:flex;align-items:center;gap:12px">'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'<button class="qbendbtn" onclick="qbEndEarly()" title="End now and grade what you\'ve answered so far">End &amp; grade</button></span></div>'+expo+why
     +'<div style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'">'+esc(q.stem)+'</div>'+lead
     +'<div class="qbopts">'+opts+'</div>'+rationale+conf+nextBtn+'</div>';
 }
@@ -2674,10 +2685,12 @@ function qbShowNote(idx){ var q=QB&&QB.items&&QB.items[idx]; if(q&&q.src&&window
 function qbTrapLabel(k){ var m={anchoring:'Anchoring',premature_closure:'Premature closure',next_step_confusion:'Next-step confusion',timing_error:'Timing error',contraindication:'Missed contraindication',overthinking:'Overthinking',common_diagnosis_bias:'Common-diagnosis bias'}; return m[k]||'Trap'; }
 function qbSessBars(map){ return Object.keys(map).map(function(k){ var b=map[k],p=Math.round(b.c/b.s*100),col=qbBandColor(p); return '<div class="qbbar"><div style="grid-column:1"><div class="qbbar-l"><span class="qbbar-k">'+esc(k)+'</span><span class="qbbar-n">'+b.c+'/'+b.s+'</span></div><div class="qbbar-t"><div class="qbbar-f" style="width:'+Math.max(p,3)+'%;background:'+col+'"></div></div></div><div class="qbbar-p" style="color:'+col+'">'+p+'%</div></div>'; }).join(''); }
 function qbDoneHtml(){
-  var n=QB.items.length,c=QB.correct,pct=Math.round(c/n*100);
+  var sc=qbScore(), n=sc.n, c=sc.c, pct=sc.pct;
   var msg=pct>=80?'Excellent':pct>=60?'Solid — keep going':'Worth another pass';
   var totS=Math.round((QB.results||[]).reduce(function(a,r){return a+(r.ms||0);},0)/1000);
+  var endedNote=QB.endedEarly?'<div style="font-size:12.5px;color:var(--dim);margin-top:4px">Ended early — graded on the '+sc.answered+' question'+(sc.answered>1?'s':'')+' you answered.</div>':'';
   var review=QB.items.map(function(q,idx){ var r=QB.results.filter(function(x){return x.i===idx;})[0]||{}, picked=r.picked; var ts=r.ms?Math.round(r.ms/1000):0;
+    if(QB.endedEarly && !QB.results.some(function(x){return x.i===idx;})) return '';   // hide questions never reached
     return '<div class="card" style="cursor:default;margin-top:8px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:'+(q.lead_in?'2px':'8px')+'"><div style="font-size:13.5px;font-weight:700">'+(idx+1)+'. '+esc(q.stem)+'</div><span style="font-size:11px;color:var(--dim);white-space:nowrap">'+(r.ok?'✓':'✗')+(ts?' · '+ts+'s':'')+'</span></div>'+(q.lead_in?'<div style="font-size:13px;font-weight:700;color:var(--dim);margin-bottom:8px">'+esc(q.lead_in)+'</div>':'')
       +q.options.map(function(o,j){ var right=(j===q.answer),mine=(j===picked); var r2=(q.rationales&&q.rationales[j])||'';
         return '<div class="qbrev '+(right?'r':(mine?'w':''))+'"><div><b>'+qbLetter(j)+'</b> '+esc(o)+(right?' ✓':(mine?' ✗ your answer':''))+'</div>'+(r2?'<div class="qbrev-rat">'+esc(r2)+'</div>':'')+'</div>'; }).join('')
@@ -2703,7 +2716,7 @@ function qbDoneHtml(){
       +'<div class="mgb-h">By clinical skill</div>'+qbSessBars(byS)+'</div>';
   }
   return '<div class="card" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall,#0d9488)':'#e2574b')+'">'+pct+'%</div>'
-    +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'
+    +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
     +megaBreak
     +(QB.adaptive?adaptRecapHtml():'')
@@ -6360,6 +6373,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .pilotnote{border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:600;margin:10px 0;background:var(--panel2);border:1px solid var(--line)}
 .pilotnote.good{background:#eafaf3;border-color:#0d948855;color:#0a6b52}
 .pilotnote.warn{background:#fdf4e7;border-color:#e08a3c66;color:#9a5a12}
+.qbendbtn{font-size:11.5px;font-weight:700;color:var(--dim);background:var(--panel2,#f4f2fb);border:1px solid var(--line,#e3e0ef);border-radius:99px;padding:4px 11px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:color .12s,border-color .12s}
+.qbendbtn:hover{color:#e2574b;border-color:#e2574b}
 .btn.sm{font-size:12px;padding:5px 12px;min-width:0}
 /* V1.5 — calibration + mastery */
 .sdcal-msg{font-size:13px;line-height:1.5;margin-bottom:10px}
