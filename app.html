@@ -1119,7 +1119,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21m';   // bump this each release
+const APP_VERSION='2026.08.21q';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2992,6 +2992,8 @@ function smartBandOf(st,type,key){ return type==='skill'?st.bySkill[key] : type=
 var _smartAgreed={};   // transient UI memory for the "is this actually your weak spot?" tap
 var _recoShown={};     // snapshot of each recommendation AS SHOWN, so a 👍/👎 still means something if the engine later changes
 function smartLog(ev){ try{ var s=qbStore(); if(!s) return; if(!s._events) s._events=[]; ev.ts=Date.now(); s._events.push(ev); if(s._events.length>1000) s._events=s._events.slice(-1000); persist(); }catch(e){} }
+/* Telemetry needs no separate transport: _events live in DATA and already sync to profile_state
+   for every logged-in student (see sync.js). The admin dashboard reads those synced blobs. */
 function _recoSnap(type,key){ return _recoShown[type+':'+key] || {}; }
 /* accept = the student took the recommendation. We log the recommendation AS SHOWN (id, dimension, diagnosis,
    accuracy, confidence, reason) — not just the tap — so the record stays interpretable months later. */
@@ -6194,7 +6196,36 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 /* safety: never let the "Loading your notes…" state stick if content can't load */
 setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ render(); }catch(e){} } },9000);
 /* admin: check whether the free Kokoro voice is up (so basic tier isn't silently spending Fish credits) */
-setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }catch(e){} },6000);</script>
+setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }catch(e){} },6000);
+/* ============================================================
+   LOGIN-REQUIRED GATE — reuses the existing auth flow (auth-ui.js / MB_openWelcome).
+   Reversible: only active when config.js has REQUIRE_LOGIN:true AND Supabase is configured.
+   Additive: overlays a full-screen gate until a session exists; never touches the study engine/router.
+   ============================================================ */
+(function mbLoginGate(){
+  var CFG=window.MEDBANK_CONFIG||{};
+  function configured(){ return CFG.SUPABASE_URL && String(CFG.SUPABASE_URL).indexOf('YOUR-PROJECT')<0; }
+  if(!CFG.REQUIRE_LOGIN || !configured()) return;   // flag off or not wired → app behaves exactly as before
+  function sb(){ try{ if(window.__mbSB) return window.__mbSB;
+    if(window.supabase && window.supabase.createClient){ window.__mbSB=window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY); return window.__mbSB; } }catch(e){} return null; }
+  var ID='mbLoginGate';
+  function show(){ if(document.getElementById(ID)) return;
+    var d=document.createElement('div'); d.id=ID;
+    d.style.cssText='position:fixed;inset:0;z-index:99990;background:linear-gradient(150deg,#4c1d95,#5b21b6 55%,#0d9488);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;font-family:-apple-system,Segoe UI,Roboto,sans-serif';
+    d.innerHTML='<div style="font-size:30px;font-weight:900;letter-spacing:-.4px;margin-bottom:8px">🧠 MedBank</div>'
+      +'<div style="font-size:16px;max-width:340px;line-height:1.5;opacity:.95;margin-bottom:22px">Sign in to start studying — your progress saves to your account and syncs across your devices.</div>'
+      +'<button id="mbGateBtn" style="background:#fff;color:#5b21b6;border:0;border-radius:22px;padding:14px 30px;font-size:16px;font-weight:900;cursor:pointer">Sign in / Create account</button>';
+    document.body.appendChild(d);
+    document.getElementById('mbGateBtn').onclick=function(){ try{ (window.MB_openWelcome||window.MB_openAuth||function(){})(); }catch(e){} };
+    try{ (window.MB_openWelcome||window.MB_openAuth||function(){})(); }catch(e){}   // open the flow immediately
+  }
+  function hide(){ var g=document.getElementById(ID); if(g&&g.parentNode) g.parentNode.removeChild(g); }
+  function check(){ var c=sb(); if(!c){ return setTimeout(check,300); }
+    c.auth.getSession().then(function(r){ if(r&&r.data&&r.data.session) hide(); else show(); }).catch(function(){ show(); });
+    try{ c.auth.onAuthStateChange(function(_e,session){ if(session) hide(); else show(); }); }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',check); else check();
+})();</script>
 <style>
 /* selection popover (two stacked buttons) */
 .selpop{position:fixed;z-index:9000;display:none;flex-direction:column;gap:6px}

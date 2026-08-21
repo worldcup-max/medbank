@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank — Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{--line:#e3e0ef;--dim:#5c5570;--dimmer:#8b84a0;--panel:#faf9ff;--accent:#5b21b6}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1c1830;margin:0;background:#fff;line-height:1.5}
+  .wrap{max-width:1040px;margin:0 auto;padding:24px 20px 60px}
+  h1{font-size:22px;margin:0 0 3px}
+  .sub{color:var(--dim);font-size:13.5px;margin:0 0 18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+  label{display:block;font-size:12px;font-weight:700;color:var(--dimmer);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.4px}
+  input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:13.5px;font-family:inherit}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:200px}
+  button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  button.ghost{background:#fff;color:var(--accent);border:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .stat b{display:block;font-size:24px;font-weight:900;line-height:1.05}.stat span{font-size:12px;color:var(--dimmer);font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0}
+  th{text-align:left;color:var(--dimmer);font-size:12px;font-weight:700;padding:7px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr.stud{cursor:pointer}tr.stud:hover{background:#f4f2fb}
+  .detail{background:#f7f5ff;font-size:12.5px}
+  h3{margin:20px 0 6px;font-size:16px}
+  .err{color:#e2574b;font-weight:700;margin-top:8px}
+  .pill{display:inline-block;font-size:11px;font-weight:800;padding:1px 7px;border-radius:20px;background:#ece3fb;color:#5b21b6}
+  .banner{border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:600;margin:10px 0}
+  .banner.info{background:var(--panel);border:1px solid var(--line);color:var(--dim)}
+  .banner.good{background:#eafaf3;border:1px solid #0d948855;color:#0a6b52}
+  .banner.warn{background:#fdf4e7;border:1px solid #e08a3c66;color:#9a5a12}
+  .note{font-size:12px;color:var(--dimmer);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧠 MedBank — Admin</h1>
+  <p class="sub">Signs in as your admin account and reads student names + the data they already sync. The database only returns rows to your admin email — nobody else.</p>
+
+  <div class="card" id="loginCard">
+    <div class="row">
+      <div><label>Supabase URL</label><input id="url" placeholder="https://xxxx.supabase.co"/></div>
+      <div><label>anon public key</label><input id="anon" placeholder="public anon key (safe)"/></div>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <div><label>Admin email</label><input id="email" placeholder="you@example.com"/></div>
+      <div><label>Password</label><input id="pw" type="password" placeholder="your password"/></div>
+      <div style="flex:0 0 auto;display:flex;align-items:flex-end;gap:8px">
+        <button onclick="signIn()">Sign in &amp; load</button>
+        <button class="ghost" onclick="signOut()">Sign out</button>
+      </div>
+    </div>
+    <div class="note">URL + anon key are public and remembered in this browser. Your password is never stored. This page holds no secret keys.</div>
+    <div id="err" class="err"></div>
+  </div>
+
+  <div id="out"></div>
+</div>
+
+<script>
+var URLK='mb_admin_url', ANONK='mb_admin_anon', EMAILK='mb_admin_email';
+document.getElementById('url').value  = localStorage.getItem(URLK)||'';
+document.getElementById('anon').value = localStorage.getItem(ANONK)||'';
+document.getElementById('email').value= localStorage.getItem(EMAILK)||'';
+var sb=null;
+function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+function err(m){ document.getElementById('err').textContent=m||''; }
+
+function client(){
+  var url=document.getElementById('url').value.trim().replace(/\/$/,'');
+  var anon=document.getElementById('anon').value.trim();
+  if(!url||!anon){ err('Enter the Supabase URL and anon key.'); return null; }
+  localStorage.setItem(URLK,url); localStorage.setItem(ANONK,anon);
+  if(!window.supabase){ err('supabase-js failed to load (need internet).'); return null; }
+  return window.supabase.createClient(url, anon);
+}
+async function signIn(){
+  err(''); sb=client(); if(!sb) return;
+  var email=document.getElementById('email').value.trim(), pw=document.getElementById('pw').value;
+  localStorage.setItem(EMAILK,email);
+  document.getElementById('out').innerHTML='<p class="sub">Signing in…</p>';
+  var r=await sb.auth.signInWithPassword({ email:email, password:pw });
+  if(r.error){ err(r.error.message); document.getElementById('out').innerHTML=''; return; }
+  load();
+}
+async function signOut(){ if(sb){ try{ await sb.auth.signOut(); }catch(e){} } document.getElementById('out').innerHTML=''; err('Signed out.'); }
+
+async function load(){
+  document.getElementById('out').innerHTML='<p class="sub">Loading students…</p>';
+  // names/emails (admin-only view) + the synced data blobs
+  var studentsR = await sb.from('admin_students').select('*');
+  if(studentsR.error){ err('admin_students: '+studentsR.error.message+'  — did you run admin-access.sql and set your email?'); document.getElementById('out').innerHTML=''; return; }
+  var stateR = await sb.from('profile_state').select('account_id,level_profile_id,state,updated_at');
+  if(stateR.error){ err('profile_state: '+stateR.error.message); document.getElementById('out').innerHTML=''; return; }
+  render(studentsR.data||[], stateR.data||[]);
+}
+
+// ---- pull the pilot metrics out of one synced DATA blob ----
+function metricsFromState(state){
+  var qb=(state&&state.qbank)||{}, ev=qb._events||[], att=(qb._attempts||[]).slice(), meta=qb._qmeta||{};
+  var started=ev.filter(function(e){return e.t==='smart_drill_started';}).length;
+  var completed=ev.filter(function(e){return e.t==='smart_drill_completed';}).length;
+  var agrees=ev.filter(function(e){return e.t==='reco_agree';});
+  var agreeYes=agrees.filter(function(e){return e.agree===true||e.response==='yes';}).length;
+  var accepts=ev.filter(function(e){return e.t==='reco_accept';}).length;
+  // concept recovery from attempts
+  function ck(qh){ var m=meta[qh]||{}; return (m.skill||'')+'|'+(m.tag||m.subtopic||'')+'|'+(m.objective||m.teaching||''); }
+  var firstWrong={}, wrong={}, recovered=0;
+  att.sort(function(a,b){return (a.ts||0)-(b.ts||0);}).forEach(function(a){ if(!meta[a.qh])return; var c=ck(a.qh);
+    if(!a.ok){ if(!(c in firstWrong)) firstWrong[c]=a.ts; wrong[c]=1; } else if(c in firstWrong){ recovered++; delete firstWrong[c]; } });
+  var seen=att.length, correct=att.filter(function(a){return a.ok;}).length;
+  return { started:started, completed:completed, agrees:agrees, agreeYes:agreeYes, accepts:accepts,
+           recovered:recovered, wrongConcepts:Object.keys(wrong).length,
+           attempts:seen, accuracy: seen?Math.round(correct/seen*100):null,
+           streak: (state&&state.streak&&state.streak.current)||0 };
+}
+function pct(y,n){ var t=y+n; return t?Math.round(y/t*100):0; }
+
+function render(students, states){
+  var byId={}; states.forEach(function(s){ (byId[s.account_id]=byId[s.account_id]||[]).push(s); });
+  // choose the most recently-updated profile blob per student
+  var rows=students.map(function(st){
+    var blobs=(byId[st.account_id]||[]).sort(function(a,b){return new Date(b.updated_at)-new Date(a.updated_at);});
+    var m = blobs.length? metricsFromState(blobs[0].state) : metricsFromState({});
+    return { st:st, m:m, updated: blobs.length?blobs[0].updated_at:null };
+  });
+
+  // cohort totals
+  var C={started:0,completed:0,agreeYes:0,agreeTot:0,accepts:0,recovered:0,wrong:0,byDg:{},byDim:{},rej:[],series:[],active:0};
+  rows.forEach(function(r){ var m=r.m; C.started+=m.started; C.completed+=m.completed; C.accepts+=m.accepts;
+    C.agreeYes+=m.agreeYes; C.agreeTot+=m.agrees.length; C.recovered+=m.recovered; C.wrong+=m.wrongConcepts;
+    if(m.started>0) C.active++;   // "active" = has actually run at least one Smart Drill
+    m.agrees.forEach(function(e){ var yes=(e.agree===true||e.response==='yes');
+      var d=e.diagnosis||'—', dim=e.dimension_type||'—';
+      (C.byDg[d]=C.byDg[d]||{yes:0,no:0})[yes?'yes':'no']++;
+      (C.byDim[dim]=C.byDim[dim]||{yes:0,no:0})[yes?'yes':'no']++;
+      C.series.push({ts:new Date(e.ts||0).getTime(), yes:yes});
+      if(!yes) C.rej.push({who:r.st.full_name||r.st.email, dg:d, dim:dim, area:e.dimension, acc:e.accuracy}); });
+  });
+  var agreePct=C.agreeTot?Math.round(C.agreeYes/C.agreeTot*100):0;
+  var compRate=C.started?Math.round(C.completed/C.started*100):0;
+  var dgL={gap:'Knowledge gap',misconception:'Misconception',fragile:'Fragile',solid:'Solid','—':'—'};
+
+  var banner = C.agreeTot<30
+    ? '<div class="banner info">Collecting — hold interpretation until ≥30 recommendation responses across the cohort (currently '+C.agreeTot+'). Patterns, not anecdotes.</div>'
+    : (agreePct>=70? '<div class="banner good">🟢 '+agreePct+'% agreement across '+C.agreeTot+' responses.</div>'
+                   : '<div class="banner warn">🟠 '+agreePct+'% agreement — check disagreements for a pattern before touching the engine.</div>');
+
+  // ---- PILOT READINESS: coverage + volume + stability → a plain verdict ----
+  var activePct = students.length? Math.round(C.active/students.length*100):0;
+  var ser=C.series.slice().sort(function(a,b){return a.ts-b.ts;});
+  function ag(arr){ var y=arr.filter(function(x){return x.yes;}).length; return arr.length?Math.round(y/arr.length*100):0; }
+  var stability='too early', stabColor='var(--dimmer)', delta=null;
+  if(ser.length>=20){ var half=Math.floor(ser.length/2); delta=Math.abs(ag(ser.slice(half))-ag(ser.slice(0,half)));
+    if(delta<=8){ stability='stabilized'; stabColor='#0a6b52'; } else { stability='still moving · '+delta+'pp'; stabColor='#9a5a12'; } }
+  var ready   = (C.active>=20 || activePct>=70) && C.agreeTot>=100 && stability==='stabilized';
+  var getting = C.agreeTot>=40 && C.active>=8;
+  var verdict = ready   ? {t:'🟢 Ready to review', c:'good', d:'Coverage, volume and stability are all there — bring this to the engine chat.'}
+              : getting ? {t:'🟡 Getting there', c:'warn', d:'Signal is forming — keep collecting until agreement stops moving.'}
+                        : {t:'⚪ Still collecting', c:'info', d:'Too early to conclude. Let more students sign in and use Smart Drill.'};
+  var readiness =
+    '<h3>Pilot readiness</h3>'+
+    '<div class="banner '+verdict.c+'"><b>'+verdict.t+'</b> — '+verdict.d+'</div>'+
+    '<div class="grid">'+
+      '<div class="stat"><b>'+C.active+'/'+students.length+'</b><span>Active students ('+activePct+'%)</span></div>'+
+      '<div class="stat"><b>'+C.agreeTot+'</b><span>Feedback responses (aim ≥100)</span></div>'+
+      '<div class="stat"><b style="color:'+stabColor+'">'+(ser.length<20?'—':stability)+'</b><span>Agreement '+(ser.length<20?'(need ≥20 responses)':'first half vs second')+'</span></div>'+
+      '<div class="stat"><b>'+C.completed+'/'+C.started+'</b><span>Drills completed/started</span></div>'+
+    '</div>';
+
+  function dgRows(m){ var ks=Object.keys(m); if(!ks.length) return '<tr><td colspan="3" style="color:var(--dimmer)">No responses yet.</td></tr>';
+    return ks.map(function(k){ var b=m[k]; return '<tr><td>'+esc(dgL[k]||k)+'</td><td style="text-align:right">'+pct(b.yes,b.no)+'%</td><td style="text-align:right;color:var(--dimmer)">'+(b.yes+b.no)+'</td></tr>'; }).join(''); }
+
+  var studRows=rows.sort(function(a,b){return new Date(b.updated||0)-new Date(a.updated||0);}).map(function(r,idx){
+    var s=r.st, m=r.m; var ap=m.agrees.length?Math.round(m.agreeYes/m.agrees.length*100)+'%':'—';
+    return '<tr class="stud" onclick="tog('+idx+')"><td><b>'+esc(s.full_name||'(no name)')+'</b><br><span style="color:var(--dimmer);font-size:12px">'+esc(s.email||'')+'</span></td>'
+      +'<td>'+esc(s.start_level||'')+'</td><td style="text-align:right">'+(m.accuracy==null?'—':m.accuracy+'%')+'</td>'
+      +'<td style="text-align:right">'+m.attempts+'</td><td style="text-align:right">'+m.started+'/'+m.completed+'</td>'
+      +'<td style="text-align:right">'+ap+'</td><td style="text-align:right">'+m.streak+'🔥</td>'
+      +'<td style="text-align:right;color:var(--dimmer);font-size:12px">'+(r.updated?new Date(r.updated).toLocaleDateString():'—')+'</td></tr>'
+      +'<tr id="d'+idx+'" style="display:none"><td colspan="8" class="detail">'
+        +'Smart Drills started/completed: <b>'+m.started+'/'+m.completed+'</b> · recommendations accepted: <b>'+m.accepts+'</b> · agreement: <b>'+ap+'</b>'
+        +' · concept recovery: <b>'+m.recovered+'/'+m.wrongConcepts+'</b> · attempts: <b>'+m.attempts+'</b> · overall accuracy: <b>'+(m.accuracy==null?'—':m.accuracy+'%')+'</b>'
+      +'</td></tr>';
+  }).join('');
+
+  var rej = C.rej.slice(-40).reverse();
+  var rejRows = rej.length? rej.map(function(x){ return '<tr><td>'+esc(x.who)+'</td><td>'+esc(dgL[x.dg]||x.dg)+'</td><td>'+esc(x.dim)+'</td><td>'+esc(x.area)+'</td><td style="text-align:right">'+esc(x.acc!=null?x.acc+'%':'')+'</td></tr>'; }).join('')
+    : '<tr><td colspan="5" style="color:var(--dimmer)">No disagreements recorded yet.</td></tr>';
+
+  document.getElementById('out').innerHTML =
+    banner +
+    '<div class="grid">'+
+      '<div class="stat"><b>'+students.length+'</b><span>Students</span></div>'+
+      '<div class="stat"><b>'+C.started+'</b><span>Smart Drills started</span></div>'+
+      '<div class="stat"><b>'+compRate+'%</b><span>Completion ('+C.completed+'/'+C.started+')</span></div>'+
+      '<div class="stat"><b>'+agreePct+'%</b><span>Agreement ('+C.agreeYes+'/'+C.agreeTot+')</span></div>'+
+    '</div>'+
+    readiness +
+    '<h3>Students</h3><p class="note">Click a row for detail. Data is each student\'s latest synced profile.</p>'+
+    '<table><tr><th>Name / email</th><th>Level</th><th style="text-align:right">Acc</th><th style="text-align:right">Attempts</th><th style="text-align:right">Drills s/c</th><th style="text-align:right">Agree</th><th style="text-align:right">Streak</th><th style="text-align:right">Last sync</th></tr>'+(studRows||'<tr><td colspan="8" style="color:var(--dimmer)">No students yet.</td></tr>')+'</table>'+
+    '<h3>Agreement by diagnosis</h3><table><tr><th>Diagnosis</th><th style="text-align:right">Agreement</th><th style="text-align:right">n</th></tr>'+dgRows(C.byDg)+'</table>'+
+    '<h3>Agreement by dimension</h3><table><tr><th>Dimension</th><th style="text-align:right">Agreement</th><th style="text-align:right">n</th></tr>'+dgRows(C.byDim)+'</table>'+
+    '<h3>🔴 Disagreements — who rejected what</h3><table><tr><th>Student</th><th>Diagnosis</th><th>Dimension</th><th>Area</th><th style="text-align:right">Shown acc</th></tr>'+rejRows+'</table>'+
+    '<p class="note">Concept recovery cohort-wide: '+C.recovered+' recovered of '+C.wrong+' missed concepts.</p>';
+}
+function tog(i){ var r=document.getElementById('d'+i); if(r) r.style.display = (r.style.display==='none'?'':'none'); }
+</script>
+</body>
+</html>

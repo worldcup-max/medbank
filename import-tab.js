@@ -13,6 +13,17 @@
   var V = "#5b21b6", INK = "#1c1830", DIM = "#5c5570", LINE = "#e6e3f0";
   function el(t,css,html){ var e=document.createElement(t); if(css)e.style.cssText=css; if(html!=null)e.innerHTML=html; return e; }
   function fileToB64(file){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){ res(String(r.result).split(",")[1]); }; r.onerror=rej; r.readAsDataURL(file); }); }
+  /* Only a PDF or an image can actually be sent to the import server. Anything else
+   * (.pptx, .docx, .txt ...) used to pass the "did you pick a file?" check and then get
+   * dropped from the request body, so the model was asked to build from nothing and the
+   * student saw "model returned invalid JSON". Detect by MIME type as well as by name,
+   * because some phone pickers hand over a file with no extension. */
+  function isPdfFile(f){ return /\.pdf$/i.test(f.name||"") || f.type==="application/pdf"; }
+  function isImgFile(f){ return /^image\//.test(f.type||"") || /\.(png|jpe?g|webp|heic|heif|gif|bmp)$/i.test(f.name||""); }
+  function usableFiles(list){ return [].slice.call(list||[]).filter(function(f){ return isPdfFile(f)||isImgFile(f); }); }
+  var IMG_MIME={png:"image/png",jpg:"image/jpeg",jpeg:"image/jpeg",webp:"image/webp",heic:"image/heic",heif:"image/heif",gif:"image/gif",bmp:"image/bmp"};
+  function imgMime(f){ if(/^image\//.test(f.type||"")) return f.type;
+    var m=/\.([a-z0-9]+)$/i.exec(f.name||""); return (m && IMG_MIME[m[1].toLowerCase()]) || "image/jpeg"; }
 
   function profileId(){ return (window.MB_SYNC && MB_SYNC.currentProfileId && MB_SYNC.currentProfileId()) || null; }
 
@@ -22,8 +33,27 @@
     var r = await window.__mbSB.from("courses").select("id,name").eq("level_profile_id", pid).order("position");
     return r.data || [];
   }
+  /* Create a course on the fly. Until now courses could ONLY be made during signup
+   * (saveOnboarding in auth-ui.js), so a student with no course - or one taking a new
+   * course later - could never build a lecture and had nowhere to add one. */
+  async function createCourse(nm){
+    if(!window.__mbSB) throw new Error("Not connected — sign in and try again.");
+    var pid = profileId();
+    if(!pid) throw new Error("Your profile isn't ready yet — sign out and back in, then try again.");
+    var u = (await window.__mbSB.auth.getUser()).data.user;
+    if(!u) throw new Error("You're signed out — sign in and try again.");
+    var have = await window.__mbSB.from("courses").select("id,name,position").eq("level_profile_id", pid);
+    var rows = have.data || [];
+    var dup = rows.find(function(c){ return (c.name||"").trim().toLowerCase() === nm.toLowerCase(); });
+    if(dup) return dup.id;                       // already there → reuse it, never duplicate
+    var pos = rows.reduce(function(m,c){ return Math.max(m, (c.position==null?-1:c.position)); }, -1) + 1;
+    var r = await window.__mbSB.from("courses").insert({ level_profile_id:pid, account_id:u.id, name:nm, position:pos }).select("id").single();
+    if(r.error) throw r.error;
+    return r.data.id;
+  }
+
   async function lecturersFor(course_id){
-    if(!window.__mbSB || !course_id) return [];
+    if(!window.__mbSB || !course_id || course_id==="__new__") return [];
     var r = await window.__mbSB.from("topics").select("lecturer").eq("course_id", course_id);
     var seen = {}, out = [];
     (r.data || []).forEach(function(t){ var n=(t.lecturer||"").trim(); if(n && !seen[n.toLowerCase()]){ seen[n.toLowerCase()]=1; out.push(n); } });
@@ -49,8 +79,11 @@
     s.appendChild(el("div",lbl,"Course"));
     var sel=el("select",inCss);
     cs.forEach(function(c){ var op=document.createElement("option"); op.value=c.id; op.textContent=c.name; sel.appendChild(op); });
-    if(!cs.length){ var op=document.createElement("option"); op.value=""; op.textContent="(no courses — add one in Settings first)"; sel.appendChild(op); }
-    s.appendChild(sel);
+    var addC=document.createElement("option"); addC.value="__new__"; addC.textContent = cs.length ? "\uff0b Add a new course" : "\uff0b Add your first course"; sel.appendChild(addC);
+    var courseNew=el("input",inCss+";margin-top:8px;display:none"); courseNew.placeholder="New course name (e.g. Dermatology)";
+    if(!cs.length){ sel.value="__new__"; }
+    s.appendChild(sel); s.appendChild(courseNew);
+    function syncCourseNew(){ courseNew.style.display = (sel.value==="__new__") ? "block" : "none"; if(sel.value==="__new__") courseNew.focus(); }
 
     /* Lecturer (list per course + add new) */
     s.appendChild(el("div",lbl,"Lecturer"));
@@ -68,7 +101,8 @@
       syncLecNew();
     }
     lecSel.onchange=syncLecNew;
-    sel.onchange=loadLecturers;
+    sel.onchange=function(){ syncCourseNew(); loadLecturers(); };
+    syncCourseNew();
     await loadLecturers();
 
     /* Topic name */
@@ -96,7 +130,7 @@
       var segWrap=el("div","display:flex;gap:6px;flex-wrap:wrap");
       var yt=el("input",inCss+";margin-top:10px;display:none"); yt.placeholder="Paste a YouTube link (video with captions)";
       var pasteTa=el("textarea",inCss+";margin-top:10px;min-height:130px;resize:vertical;font-family:inherit;display:none"); pasteTa.placeholder="Paste the lecture text, transcript or your notes here…";
-      var fileHint=el("div","font-size:12px;color:"+DIM+";margin-top:6px","PDF of the slides, or clear photos of your notes.");
+      var fileHint=el("div","font-size:12px;color:"+DIM+";margin-top:6px","PDF of the slides, or clear photos of your notes. PowerPoint or Word? Save it as a PDF first.");
       function paintSeg(){
         file.style.display   = srcMode==="file"?"block":"none";
         fileHint.style.display = srcMode==="file"?"block":"none";
@@ -152,13 +186,16 @@
     go.onclick=async function(){
       msg.style.display="none";
       var course_id=sel.value, topicName=(name.value||"").trim();
+      var newCourse = (sel.value==="__new__") ? (courseNew.value||"").trim() : "";
       var lecturer = lecSel.value==="__new__" ? (lecNew.value||"").trim() : lecSel.value;
       if(!course_id){ show("Pick a course."); return; }
+      if(sel.value==="__new__" && !newCourse){ show("Type the new course's name."); return; }
       if(!lecturer){ show("Choose or add the lecturer's name."); return; }
       if(!topicName){ show("Enter the topic / lecture title."); return; }
       var ytVal = yt ? (yt.value||"").trim() : "", pasteVal = pasteTa ? (pasteTa.value||"").trim() : "";
       if(!recAudio){
         if(srcMode==="file" && (!file.files || !file.files.length)){ show("Choose a PDF or some photos."); return; }
+        if(srcMode==="file" && !usableFiles(file.files).length){ show("MedBank can't read \u201c"+((file.files[0]||{}).name||"that file")+"\u201d yet. Save it as a PDF first (PowerPoint / Word: File \u2192 Save as \u2192 PDF), or attach clear photos of the slides."); return; }
         if(srcMode==="youtube" && !/(?:youtube\.com|youtu\.be)\//i.test(ytVal)){ show("Paste a valid YouTube link."); return; }
         if(srcMode==="paste" && pasteVal.length<40){ show("Paste a bit more of the lecture text to build from."); return; }
       }
@@ -166,7 +203,13 @@
       var slow = recAudio || srcMode==="youtube";
       go.disabled=true; go.textContent = slow ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
       try{
-        var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:(sel.options[sel.selectedIndex]||{}).textContent };
+        var subjectName = newCourse || (sel.options[sel.selectedIndex]||{}).textContent;
+        if(sel.value==="__new__"){
+          go.textContent="Adding the course\u2026";
+          course_id = await createCourse(newCourse);
+          go.textContent = slow ? "Transcribing & building\u2026 ~1\u20132 min" : "Building\u2026 this can take ~30\u201360s";
+        }
+        var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:subjectName };
         try{ var _lv=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel()); if(_lv!=null&&_lv!=="") body.level=_lv; }catch(e){}   // per-level prompt selection
         var _b=[]; if(builds.qbank)_b.push("qbank"); if(builds.written)_b.push("written"); if(_b.length) body.builds=_b;   // optional extras ticked in the box
         if(modelSel && modelSel.value) body.model=modelSel.value;
@@ -174,11 +217,17 @@
         if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }
         if(!recAudio && srcMode==="paste"){ body.text = pasteVal; }
         // files: used in file mode, and as an optional add-on to a recording
-        var files=[].slice.call(file.files||[]);
-        var pdf=files.find(function(f){ return /\.pdf$/i.test(f.name); });
+        var files=usableFiles(file.files);
+        var pdf=files.find(isPdfFile);
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }
-        var imgs=files.filter(function(f){ return /^image\//.test(f.type); });
-        if(imgs.length){ body.images=[]; for(var i=0;i<imgs.length;i++) body.images.push({ media_type:imgs[i].type, data:await fileToB64(imgs[i]) }); }
+        var imgs=files.filter(isImgFile);
+        if(imgs.length){ body.images=[]; for(var i=0;i<imgs.length;i++) body.images.push({ media_type:imgMime(imgs[i]), data:await fileToB64(imgs[i]) }); }
+
+        /* Never send an import with nothing to build from - that is what produced the
+         * confusing "model returned invalid JSON" instead of a useful message. */
+        if(!body.pdf_base64 && !(body.images&&body.images.length) && !body.text && !body.youtube_url && !body.audio_base64){
+          show("Nothing to build from \u2014 attach a PDF or photos, paste the lecture text, or record the lecture.");
+          go.disabled=false; go.textContent="Build my study set"; return; }
 
         var token=null;
         if(window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); token=ses.data.session && ses.data.session.access_token; }

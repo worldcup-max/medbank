@@ -1,0 +1,2 @@
+-- ⚠️ DEPRECATED — do not run. Superseded by admin-access.sql.
+-- MedBank already has accounts + sync; this anonymous-telemetry table is not used.

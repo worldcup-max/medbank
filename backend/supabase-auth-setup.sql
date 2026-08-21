@@ -1,0 +1,3 @@
+-- ⚠️ DEPRECATED — do not run. This created NEW tables that duplicate your existing
+-- deployed schema (accounts, level_profiles, profile_state). Use admin-access.sql instead,
+-- which adds admin READ access to the tables you already have.
