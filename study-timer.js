@@ -106,10 +106,10 @@
       "@keyframes mbtFlick{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}"+
       "#mbTimer{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translate(-50%,0);z-index:9997;display:flex;align-items:center;gap:8px;"+
         "padding:8px 15px 8px 12px;border:0;border-radius:999px;cursor:pointer;font:800 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;"+
-        "color:#fff;background:linear-gradient(135deg,#6d28d9,#5b21b6);box-shadow:0 6px 20px rgba(91,33,182,.4);"+
+        "color:#fff;background:linear-gradient(135deg,#0f766e,#0d9488);box-shadow:0 6px 20px rgba(13,148,136,.42);"+
         "animation:mbtHover 3.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}"+
       "#mbTimer.on{animation:mbtHover 3.4s ease-in-out infinite, mbtFire 1.7s ease-in-out infinite}"+
-      "#mbTimer .mbtDot{width:9px;height:9px;border-radius:50%;background:#c9bff0}"+
+      "#mbTimer .mbtDot{width:9px;height:9px;border-radius:50%;background:#9fe1cb}"+
       "#mbTimer.on .mbtDot{background:#ffd7a1;box-shadow:0 0 8px #fb923c;animation:mbtFlick 1.1s ease-in-out infinite}"+
       "#mbTimer .mbtLbl{font-weight:600;opacity:.85;font-size:12.5px}"+
       "#mbtPop,#mbtStats{font:500 13.5px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1830}"+
