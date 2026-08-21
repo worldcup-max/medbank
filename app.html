@@ -1119,7 +1119,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21f';   // bump this each release
+const APP_VERSION='2026.08.21l';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -2589,7 +2589,7 @@ function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct+
   var ms = QB.qStart ? (Date.now()-QB.qStart) : 0;
   QB.results.push({i:QB.i,picked:j,ok:ok,ms:ms});
   var tid = q._topicId || QB.topicId;
-  var s=qbStore(); var qh = q._qh || (q._qh = qbHash(q.stem+'|'+(q.options||[]).join('|')));
+  var s=qbStore(); var qh = q._qh || (q._qh = qbHash(q.stem+'|'+(q.options||[]).join('|'))); QB._lastQh=qh;
   // snapshot the question so it can be re-served & analysed even after the topic is rebuilt
   s._qmeta[qh] = { topicId:tid, stem:q.stem, lead_in:q.lead_in||'', options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), trap:(q.trap_explanation||q.trap||''), trap_type:(q.trap_type||''), trap_explanation:(q.trap_explanation||q.trap||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), system:(q.system||''), cognitive_level:qbCogOf(q), difficulty:(q.difficulty||''), skill:(q.skill||''), src:(q.src||'') };
   s._attempts.push({ u:qbUid(), qh:qh, topicId:tid, chosen:j, answer:q.answer, ok:ok, ms:ms, mode:QB.mode, ts:Date.now() });
@@ -2600,15 +2600,29 @@ function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct+
 }
 function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore();
   var totMs=(QB.results||[]).reduce(function(a,r){return a+(r.ms||0);},0);
-  s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:QB.items.length, correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes });
+  var stype=(QB.kind||(QB.smart?'smart_drill':QB.mega?'mega':'topic'));
+  s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:QB.items.length, correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
+    session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'' });
   if(s._sessions.length>200) s._sessions=s._sessions.slice(s._sessions.length-200);
+  // smart-drill completion event (paired with smart_drill_started) — planned vs completed, minimal metadata
+  if(QB.smart){ smartLog({t:'smart_drill_completed', sid:QB.sid, session_type:stype,
+    dimension:(QB.smartFocus&&QB.smartFocus[0]?QB.smartFocus[0].type:''), reason:QB.smartWhy||'', mode:QB.mode,
+    planned:QB.items.length, completed:(QB.results||[]).length, correct:QB.correct}); }
   try{ persist(); }catch(e){}
 }
 function qbPick(j){ if(QB.answered) return; QB.picked=j;
   if(QB.mode==='timed'){ qbRecord(j); setTimeout(qbNext,180); render(); return; }   // test mode: lock in, advance
   QB.answered=true; qbRecord(j); render();                                            // tutor mode: reveal rationale
 }
-function qbNext(){ if(QB.i<QB.items.length-1){ QB.i++; QB.picked=null; QB.answered=false; QB.qStart=Date.now(); render(); } else { qbFinalize(); QB.done=true; render(); } }
+function qbNext(){ QB._confDone=false;
+  if(QB.adaptive){
+    var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
+    if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }
+    if(QB.i < QB.items.length-1){ QB.i++; QB.picked=null; QB.answered=false; QB.qStart=Date.now(); render(); }
+    else { qbFinalize(); QB.done=true; render(); }
+    return;
+  }
+  if(QB.i<QB.items.length-1){ QB.i++; QB.picked=null; QB.answered=false; QB.qStart=Date.now(); render(); } else { qbFinalize(); QB.done=true; render(); } }
 function qbQuestionHtml(){
   var q=QB.items[QB.i]; if(!q) return '';
   var opts=q.options.map(function(o,j){ var cls='qbopt';
@@ -2620,16 +2634,25 @@ function qbQuestionHtml(){
   if(QB.answered && QB.mode==='tutor'){
     rationale='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'+qbTeachHtml(q,QB.i);
+    if(QB.picked!==q.answer){ var qhc=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))); rationale+='<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+qhc+'\')">🔄 Retest this concept</button><span>a different question, same idea — proves you learned it</span></div>'; }
   }
-  var nextBtn = QB.answered ? '<div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn primary" style="min-width:120px" onclick="qbNext()">'+(QB.i<QB.items.length-1?'Next →':'See results')+'</button></div>' : '';
+  // V1.5 — non-interruptive confidence capture (tutor reveal), asked once per question
+  // Confidence capture: tutor / Smart Drill only (never in timed exams), non-blocking, and clearly optional —
+  // you can advance without answering it, so it never becomes a forced answer→confidence→next treadmill.
+  var conf=(QB.answered && QB.mode==='tutor' && !QB._confDone) ? '<div class="qbconf"><span>How sure were you? <em style="opacity:.5;font-style:normal;font-weight:600">· optional</em></span><div class="qbconf-b">'+QB_CONF.map(function(c){return '<button onclick="qbSetConf('+c[0]+')" title="'+c[2]+'">'+c[1]+'</button>';}).join('')+'</div></div>' : '';
+  var nextBtn = QB.answered ? '<div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn primary" style="min-width:120px" onclick="qbNext()">'+((QB.adaptive?(QB.items.length<QB.adaptTarget):(QB.i<QB.items.length-1))?'Next →':'See results')+'</button></div>' : '';
   var lead = q.lead_in ? '<div style="font-weight:700;margin:8px 0 14px">'+esc(q.lead_in)+'</div>' : '';
   var expo='';
-  // point 5: never show topic/skill/level metadata BEFORE answering, in any Mega mode. Blind just gets a flavour tag.
+  // point 5: never show topic/skill/level metadata BEFORE answering, in any Mega mode. Blind/Adaptive just get a flavour tag.
   if(QB.mega && !QB.answered && QB.exposure==='blind') expo='<div class="qbexpo">🙈 Blind — recognise it cold</div>';
+  else if(QB.adaptive && !QB.answered) expo='<div class="qbexpo">🎚 Adaptive — difficulty auto-tunes to you</div>';
+  // V1.5 — explainable Smart Drill: "Why this?" available without cluttering the stem
+  var why=(QB.smart||QB.adaptive)?'<details class="qbwhy"><summary>ⓘ Why this drill?</summary><div>'+esc(QB.smartWhy||'Chosen from your recent performance.')+((QB.smartReasons&&QB.smartReasons.length)?'<ul>'+QB.smartReasons.slice(0,3).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>':'')+'</div></details>':'';
+  var count=(QB.adaptive?QB.adaptTarget:QB.items.length);
   return '<div class="card" style="cursor:default">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+QB.items.length+(QB.mega?' · Mega':'')+'</span>'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'</div>'+expo
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--dim)">Question '+(QB.i+1)+' / '+count+(QB.smart?' · Smart Drill':(QB.mega?' · Mega':''))+'</span>'+(QB.mode==='timed'?'<span id="qbTimer" style="font-size:12px;color:var(--dim)"></span>':'')+'</div>'+expo+why
     +'<div style="font-size:15px;line-height:1.55;margin-bottom:'+(lead?'0':'14px')+'">'+esc(q.stem)+'</div>'+lead
-    +'<div class="qbopts">'+opts+'</div>'+rationale+nextBtn+'</div>';
+    +'<div class="qbopts">'+opts+'</div>'+rationale+conf+nextBtn+'</div>';
 }
 function qbDiffChip(q){ if(!q.difficulty) return ''; var c=q.difficulty==='hard'?'#e2574b':q.difficulty==='easy'?'#0d9488':'#c98a00'; return ' · <span style="color:'+c+';font-weight:700;text-transform:capitalize">'+esc(q.difficulty)+'</span>'; }
 function qbTeachHtml(q,idx){
@@ -2659,6 +2682,7 @@ function qbDoneHtml(){
       +q.options.map(function(o,j){ var right=(j===q.answer),mine=(j===picked); var r2=(q.rationales&&q.rationales[j])||'';
         return '<div class="qbrev '+(right?'r':(mine?'w':''))+'"><div><b>'+qbLetter(j)+'</b> '+esc(o)+(right?' ✓':(mine?' ✗ your answer':''))+'</div>'+(r2?'<div class="qbrev-rat">'+esc(r2)+'</div>':'')+'</div>'; }).join('')
       +qbTeachHtml(q,idx)
+      +(!r.ok?('<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+(q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))))+'\')">🔄 Retest this concept</button><span>a different question, same idea</span></div>'):'')
       +'</div>'; }).join('');
   var scope=(QB.topicId==='*'?'*':QB.topicId);
   var retry = QB.mega ? '<button class="btn primary" onclick="mgStart(false)">↻ New Mega set</button>'
@@ -2682,6 +2706,8 @@ function qbDoneHtml(){
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
     +megaBreak
+    +(QB.adaptive?adaptRecapHtml():'')
+    +((QB.mega||QB.smart)?smartNextCard(QB.topicId||'*'):'')
     +'<div style="margin-top:16px;font-weight:700">Review &amp; explanations</div>'+review;
 }
 
@@ -2714,6 +2740,9 @@ function qbBandColor(p){ return p>=80?'#0d9488':p>=65?'#3b82f6':p>=50?'#c98a00':
 function qbBar(label,b,note){ var p=qbPct(b),c=qbBandColor(p),avg=b.seen?Math.round(b.ms/b.seen/1000):0;
   return '<div class="qbbar"><div class="qbbar-l"><span class="qbbar-k">'+esc(label)+'</span><span class="qbbar-n">'+b.correct+'/'+b.seen+(note?' · '+note:(avg?' · '+avg+'s':''))+'</span></div><div class="qbbar-t"><div class="qbbar-f" style="width:'+Math.max(p,2)+'%;background:'+c+'"></div></div><div class="qbbar-p" style="color:'+c+'">'+p+'%</div></div>'; }
 function qbBarsFrom(map){ var ks=Object.keys(map); if(!ks.length) return '<div class="qbnodata">Not enough data yet.</div>'; ks.sort(function(a,b){ return (map[a].correct/map[a].seen)-(map[b].correct/map[b].seen); }); return ks.map(function(k){ return qbBar(k,map[k]); }).join(''); }
+/* V1.5 — a performance bar with a one-tap "Drill this" button (actionable weakness panel) */
+function qbBarDrill(label,b,type,key,scope){ return '<div class="qbbarwrap">'+qbBar(label,b)+'<button class="btn sm qbbar-drill" onclick="smartDrillDim(\''+type+'\',\''+encodeURIComponent(key)+'\',\''+(scope||'*')+'\')">Drill</button></div>'; }
+function qbBarsFromDrill(map,type,scope){ var ks=Object.keys(map); if(!ks.length) return '<div class="qbnodata">Not enough data yet.</div>'; ks.sort(function(a,b){ return (map[a].correct/map[a].seen)-(map[b].correct/map[b].seen); }); return ks.map(function(k){ return qbBarDrill(k,map[k],type,k,scope); }).join(''); }
 function qbKpi(val,label,sub,color){ return '<div class="qbkpi"><div class="qbkpi-v" style="color:'+(color||'var(--text)')+'">'+val+'</div><div class="qbkpi-l">'+label+'</div><div class="qbkpi-s">'+sub+'</div></div>'; }
 function qbSpark(sessions){ var ss=sessions.filter(function(s){return s.n;}).slice(-14); if(ss.length<2) return '<div class="qbnodata">Complete a couple of sessions to see your trend.</div>';
   var W=280,H=54,pad=4, vals=ss.map(function(s){return s.correct/s.n;});
@@ -2787,12 +2816,14 @@ function qbDashHtml(t){
     +qbKpi(avg+'s','Avg time / question','pace check','var(--text)')+'</div>';
   var recCard=qbSection('🎯 What to do next','',qbRecs(agg));
   var sysCard=qbSection('Performance by system','weakest first',qbBarsFrom(agg.bySys));
-  var tagCard=qbSection('Performance by topic','weakest first',qbBarsFrom(agg.byTag));
+  var tagCard=qbSection('Performance by topic','weakest first · tap Drill',qbBarsFromDrill(agg.byTag,'tag',scope));
   var gridCard=qbSection('Mastery grid','topic × cognitive level — spot exactly where it breaks',qbGridHtml(agg.grid));
-  var cogRows=QB_COGS.filter(function(c){return agg.byCog[c[0]];}).map(function(c){return qbBar(c[1],agg.byCog[c[0]]);}).join('');
-  var diffCard=qbSection('By cognitive level','simple interpretation → complex decisions → traps',cogRows||'<div class="qbnodata">Not enough data yet.</div>');
-  var skillRows=QB_SKILLS.filter(function(sk){return agg.bySkill[sk[0]];}).sort(function(a,b){return (agg.bySkill[a[0]].correct/agg.bySkill[a[0]].seen)-(agg.bySkill[b[0]].correct/agg.bySkill[b[0]].seen);}).map(function(sk){return qbBar(sk[1],agg.bySkill[sk[0]]);}).join('');
-  var skillCard=skillRows?qbSection('Reasoning profile','accuracy by clinical task — is it knowledge or decision-making?',skillRows):'';
+  var cogRows=QB_COGS.filter(function(c){return agg.byCog[c[0]];}).map(function(c){return qbBarDrill(c[1],agg.byCog[c[0]],'cog',c[0],scope);}).join('');
+  var diffCard=qbSection('By cognitive level','tap Drill to practise a level',cogRows||'<div class="qbnodata">Not enough data yet.</div>');
+  var skillRows=QB_SKILLS.filter(function(sk){return agg.bySkill[sk[0]];}).sort(function(a,b){return (agg.bySkill[a[0]].correct/agg.bySkill[a[0]].seen)-(agg.bySkill[b[0]].correct/agg.bySkill[b[0]].seen);}).map(function(sk){return qbBarDrill(sk[1],agg.bySkill[sk[0]],'skill',sk[0],scope);}).join('');
+  var skillCard=skillRows?qbSection('Reasoning profile','accuracy by clinical task — tap Drill to target one',skillRows):'';
+  var msCard=smartMasteryCard(scope);
+  var calCard=smartCalCard(scope);
   var fpvr=qbBar('First-pass (honest)',agg.firstPass)+qbBar('Including review',agg.cumulative);
   var fpCard=qbSection('First-pass vs after review','only the first number predicts your exam',fpvr);
   var modeRows=['tutor','timed'].filter(function(m){return agg.byMode[m]&&agg.byMode[m].seen;}).map(function(m){return qbBar(m==='timed'?'Test mode (exam-like)':'Tutor mode',agg.byMode[m]);}).join('');
@@ -2802,7 +2833,7 @@ function qbDashHtml(t){
   var mkHead=mk.length?('<div class="btnrow" style="margin-bottom:10px"><button class="btn primary" onclick="qbStartMistakes(\''+scope+'\')">🎯 Practise my '+mk.length+' mistake'+(mk.length>1?'s':'')+'</button></div>'):'<div class="qbnodata" style="margin-bottom:6px">No outstanding mistakes'+(all?'':' here')+' — nice.</div>';
   var mkList=mk.slice(0,8).map(function(m){ var mt=m.meta; return '<div class="qbmk"><div class="qbmk-q">'+esc(mt.stem.slice(0,130))+(mt.stem.length>130?'…':'')+'</div><div class="qbmk-a"><span class="miss">You: '+esc(qbLetter(m.chosen)+'. '+(mt.options[m.chosen]||''))+'</span><span class="corr">Answer: '+esc(qbLetter(mt.answer)+'. '+(mt.options[mt.answer]||''))+'</span></div></div>'; }).join('');
   var mkCard=qbSection('My mistakes'+(mk.length?' ('+mk.length+')':''),'questions you last got wrong — retry until they stick',mkHead+mkList);
-  return back+kpis+recCard+sysCard+tagCard+gridCard+diffCard+skillCard+fpCard+modeCard+trendCard+mkCard;
+  return back+kpis+recCard+sysCard+tagCard+gridCard+diffCard+skillCard+msCard+calCard+fpCard+modeCard+trendCard+mkCard;
 }
 function qbStartMistakes(scope){ var agg=qbAgg(scope); var pool=agg.mistakes;
   if(!pool.length){ alert('No mistakes to practise — nice work!'); return; }
@@ -2844,9 +2875,10 @@ function mgToggleChoose(){ _mgCfg.chooseTopics=!_mgCfg.chooseTopics; render(); }
 function mgTogTopic(id){ _mgCfg.topics[id]=!_mgCfg.topics[id]; render(); }
 function mgStart(quick){ var cfg=_mgCfg;
   if(quick){ cfg.subj={}; cfg.topics={}; cfg.chooseTopics=false; cfg.exposure='blind'; cfg.mode='timed'; cfg.level='all'; cfg.skill='all'; cfg.count=20; }
+  if(!quick && cfg.exposure==='adaptive'){ adaptStart(); return; }
   var items=mgAssemble(cfg.count);
   if(!items.length){ alert('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
-  QB={ topicId:'*', mode:cfg.mode, items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure };
+  QB={ topicId:'*', mode:cfg.mode, items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':'custom') };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 /* point 13 — Drill my weaknesses: build a tutor set from the existing pool, weighted to weak skills/levels (pure analytics + filter, no generation) */
@@ -2866,6 +2898,413 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ alert('Ans
 function mgChipRow(label, opts, cur, kind){ return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
     return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" onclick="mgSet(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
   }).join('')+'</div></div>'; }
+/* ============================================================
+   Q-BANK V1.5 — SMART ENGINE  (intelligence over the EXISTING pool)
+   Personalises from attempt history: recency half-life + confidence +
+   evidence threshold; skill / cognitive / topic / course mastery;
+   Smart Drill; adaptive difficulty. No new question generation —
+   pure selection + weighting + recency + confidence + mistake history.
+   ============================================================ */
+/* ---- Engine parameters (all tunable in one place — nothing below hard-codes these) ---- */
+var SMART = {
+  HALFLIFE_DAYS:30,            // recency half-life; a starting heuristic, auto-shortens as an exam nears (see smartHalfLife)
+  MIN_EV:3,                    // min attempts before we'll name a mastery state at all
+  EV_MED:6, EV_HIGH:15,        // sample-size tiers → how much numeric precision we're willing to show
+  RECENT:40, MIN_TOTAL:8, NEGLECT_DAYS:21, SLOW_MS:45000,
+  MIX:{ weak:0.50, miss:0.20, neglect:0.15, maintain:0.15 },      // Smart Drill routing weights — heuristics, tune from usage data
+  ADAPT:{ acc:1, conf:1, streak:0.5, timePenalty:0.25 }           // adaptive signals: accuracy+confidence+consistency primary, time secondary
+};
+SMART.HALFLIFE = SMART.HALFLIFE_DAYS*864e5;   // back-compat constant (default horizon)
+/* Horizon-aware recency: a student 10 days from an exam should weight recent performance far more heavily
+   than one studying casually 8 months out. If an exam date is set, the half-life scales with days-to-exam
+   (clamped 7–60d); otherwise it falls back to the configured default. This is the knob, not buried logic. */
+function smartExamDate(){ try{ var d=(typeof _mgCfg!=='undefined'&&_mgCfg&&_mgCfg.examDate)||(typeof DB!=='undefined'&&DB&&DB.examDate)||null; return d?new Date(d).getTime():0; }catch(e){ return 0; } }
+function smartHalfLife(){ var ex=smartExamDate(); if(!ex) return SMART.HALFLIFE_DAYS*864e5;
+  var days=(ex-Date.now())/864e5;
+  return Math.max(7, Math.min(60, days*0.6))*864e5; }   // ~10-day exam → ~7-day half-life; long horizon → up to 60d
+var _COG_LADDER=['interpretation','clinical_reasoning','complex_reasoning'];  // easy→hard (exam_trap sits outside the ladder)
+var QB_CONF=[['0','😬','Guess'],['1','🤔','Unsure'],['2','🙂','Confident'],['3','😎','Very confident']];
+function smartCourseMap(){ var m={}; if(typeof DB!=='undefined'&&DB.subjects){ DB.subjects.forEach(function(s){ (s.modules||[]).forEach(function(mo){ (mo.topics||[]).forEach(function(t){ m[t.id]=s.name; }); }); }); } return m; }
+function smartBand(){ return {wSeen:0,wCorr:0,seen:0,corr:0,ms:0,lastTs:0,hiSeen:0,hiCorr:0,loSeen:0,loCorr:0,miscon:0}; }
+/* single weighted pass over the attempt log — recency-decayed accuracy + confidence buckets, per dimension */
+function smartStats(scope){ scope=scope||'*';
+  var s=qbStore(), A=(s._attempts||[]), meta=s._qmeta||{}, now=Date.now(), cmap=smartCourseMap();
+  var att=A.filter(function(a){return scope==='*'||a.topicId===scope;}).slice().sort(function(a,b){return (a.ts||0)-(b.ts||0);});
+  var overall=smartBand(), bySkill={}, byCog={}, byTag={}, byCourse={}, byTopic={}, seenQh={}, seenTs={};
+  function B(map,k){ return map[k]||(map[k]=smartBand()); }
+  var hl=smartHalfLife();
+  att.forEach(function(a){ var mt=meta[a.qh]||{}, w=Math.pow(0.5,(now-(a.ts||now))/hl);
+    var sk=mt.skill||'', cg=qbCogOf(mt), tg=mt.tag||'General', cr=cmap[a.topicId]||'—', tp=a.topicId||'—';
+    var hi=(a.conf===3||a.conf===2), lo=(a.conf===0||a.conf===1);
+    function add(b){ b.wSeen+=w; if(a.ok)b.wCorr+=w; b.seen++; if(a.ok)b.corr++; b.ms+=a.ms||0; if((a.ts||0)>b.lastTs)b.lastTs=a.ts||0;
+      if(hi){ b.hiSeen++; if(a.ok)b.hiCorr++; if(!a.ok)b.miscon++; } if(lo){ b.loSeen++; if(a.ok)b.loCorr++; } }
+    add(overall); if(sk)add(B(bySkill,sk)); add(B(byCog,cg)); add(B(byTag,tg)); add(B(byCourse,cr)); add(B(byTopic,tp));
+    seenQh[a.qh]=1; seenTs[a.qh]=a.ts||0;
+  });
+  var recent=att.slice(-SMART.RECENT), lastByQ={};
+  recent.forEach(function(a){ lastByQ[a.qh]=a; });
+  var recentMiss=[]; Object.keys(lastByQ).forEach(function(qh){ var a=lastByQ[qh]; if(!a.ok && meta[qh]) recentMiss.push({qh:qh, ts:a.ts, meta:meta[qh]}); });
+  recentMiss.sort(function(a,b){return b.ts-a.ts;});
+  return {att:att, overall:overall, bySkill:bySkill, byCog:byCog, byTag:byTag, byCourse:byCourse, byTopic:byTopic, seenQh:seenQh, seenTs:seenTs, recentMiss:recentMiss};
+}
+function smartAcc(b){ return (b&&b.wSeen)? b.wCorr/b.wSeen : (b&&b.seen? b.corr/b.seen : 0); }
+function smartState(b){ if(!b||b.seen<SMART.MIN_EV) return {state:'unknown',score:smartAcc(b),ev:false}; var a=smartAcc(b);
+  var st=a>=0.82?'strong':a>=0.68?'developing':a>=0.55?'weak':'critical'; return {state:st,score:a,ev:true}; }
+function smartStateMeta(st){ var m={strong:['🟢','Strong','#0d9488'],developing:['🟡','Developing','#c98a00'],weak:['🟠','Weak','#e08a3c'],critical:['🔴','Critical','#e2574b'],unknown:['⚪','Learning','#9a9aa6']}; return m[st]||m.unknown; }
+/* ---- Two-axis diagnosis — the same accuracy means different things depending on the CONFIDENCE behind it.
+   Weakness ≠ misconception. These map to genuinely different interventions:
+     • gap           low accuracy, not confident        → needs teaching before drilling
+     • misconception wrong while CONFIDENT              → confront the belief, not just the topic
+     • fragile       usually right but UNSURE           → reinforce for confidence, don't re-teach
+   Returns null until the evidence gate is met, so we never over-diagnose on noise. ---- */
+function smartDiagnose(b){
+  if(!b || b.seen<SMART.MIN_EV) return null;
+  var acc=smartAcc(b);
+  var misRate=b.hiSeen? (b.miscon/b.hiSeen) : 0;                 // of confident answers, share that were wrong
+  var confShare=(b.hiSeen+b.loSeen)? (b.hiSeen/(b.hiSeen+b.loSeen)) : 0;
+  if(acc<0.75 && b.miscon>=2 && misRate>=0.34)
+    return {type:'misconception', label:'Misconception', icon:'🚨', color:'#e2574b', verb:'Confront', tip:'You were confident on answers you got wrong — target the mistaken belief, not just the topic.'};
+  if(acc>=0.75 && b.loSeen>=3 && confShare<0.5)
+    return {type:'fragile', label:'Fragile', icon:'🟡', color:'#c98a00', verb:'Reinforce', tip:'You get these right but aren’t sure — reps here turn knowledge into confidence.'};
+  if(acc<0.68)
+    return {type:'gap', label:'Knowledge gap', icon:'🟠', color:'#e08a3c', verb:'Learn', tip:'Accuracy is low without the confident-wrong signature — this needs teaching before drilling.'};
+  return {type:'solid', label:'Solid', icon:'🟢', color:'#0d9488', verb:'', tip:''};
+}
+function smartBandOf(st,type,key){ return type==='skill'?st.bySkill[key] : type==='cog'?st.byCog[key] : type==='tag'?st.byTag[key] : type==='topic'?st.byTopic[key] : null; }
+/* ============================================================
+   VALIDATION TELEMETRY (v203 hooks) — behaviour-NEUTRAL.
+   Records the funnel Frank wants to measure with real students. Nothing here
+   changes which questions are served; it only appends events for later analysis.
+   ============================================================ */
+var _smartAgreed={};   // transient UI memory for the "is this actually your weak spot?" tap
+var _recoShown={};     // snapshot of each recommendation AS SHOWN, so a 👍/👎 still means something if the engine later changes
+function smartLog(ev){ try{ var s=qbStore(); if(!s) return; if(!s._events) s._events=[]; ev.ts=Date.now(); s._events.push(ev); if(s._events.length>1000) s._events=s._events.slice(-1000); persist(); }catch(e){} }
+function _recoSnap(type,key){ return _recoShown[type+':'+key] || {}; }
+/* accept = the student took the recommendation. We log the recommendation AS SHOWN (id, dimension, diagnosis,
+   accuracy, confidence, reason) — not just the tap — so the record stays interpretable months later. */
+function smartReco(type,key,scope,dg){ var k=decodeURIComponent(key), s=_recoSnap(type,k);
+  smartLog({t:'reco_accept', rec_id:s.rec_id||(type+':'+k), dimension:k, dimension_type:type, diagnosis:s.diagnosis||dg||'', accuracy:s.accuracy, confidence:s.confidence, reason:s.reason, scope:scope});
+  smartDrillDim(type,key,scope); }
+/* agree = the qualitative signal: does the student think this is genuinely their weakness?
+   Records the FULL recommendation shown plus the binary response — a 👎 preserves what MedBank thought AND what was rejected. */
+function smartAgree(type,key,val,dg){ var k=decodeURIComponent(key), s=_recoSnap(type,k);
+  smartLog({t:'reco_agree', rec_id:s.rec_id||(type+':'+k), dimension:k, dimension_type:type, diagnosis:s.diagnosis||dg||'', accuracy:s.accuracy, confidence:s.confidence, reason:s.reason, response:(val?'yes':'no'), agree:!!val});
+  _smartAgreed[type+':'+k]=val?1:-1; render(); }
+/* funnel readout — computes the pilot metrics (Frank's 4 questions) from the logged data */
+function smartValidation(){ var s=qbStore(), ev=s._events||[], ses=s._sessions||[], att=(s._attempts||[]).slice(), meta=s._qmeta||{};
+  var starts=ev.filter(function(e){return e.t==='smart_drill_started';}).length;
+  var completes=ev.filter(function(e){return e.t==='smart_drill_completed';}).length;
+  var accepts=ev.filter(function(e){return e.t==='reco_accept';});
+  var agrees=ev.filter(function(e){return e.t==='reco_agree';}), agreeYes=agrees.filter(function(e){return e.agree;}).length;
+  var smartSes=ses.filter(function(e){return e.smart || /smart|drill|concept|adaptive/.test(e.session_type||e.kind||'');});
+  // Q4 — does the diagnosis TYPE matter? agreement sliced by diagnosis, and by recommendation dimension type.
+  function tally(keyFn){ var m={}; agrees.forEach(function(e){ var k=keyFn(e)||'—'; var b=m[k]||(m[k]={yes:0,no:0}); if(e.agree)b.yes++; else b.no++; }); return m; }
+  var byDg=tally(function(e){return e.diagnosis;}), byDim=tally(function(e){return e.dimension_type;});
+  // disagreements preserved — what MedBank thought vs what the student rejected (potentially the richest dataset)
+  var rejected=agrees.filter(function(e){return !e.agree;}).map(function(e){return {dim:e.dimension_type,key:e.dimension,dg:e.diagnosis,acc:e.accuracy,ts:e.ts};}).slice(-25).reverse();
+  // Q3a — retest recovery: a concept (skill|tag|objective) first answered WRONG, later answered CORRECT
+  function ck(qh){ var m=meta[qh]||{}; return (m.skill||'')+'|'+(m.tag||m.subtopic||'')+'|'+(m.objective||m.teaching||''); }
+  var firstWrong={}, wrongConcepts={}, recovered=0;
+  att.sort(function(a,b){return (a.ts||0)-(b.ts||0);}).forEach(function(a){ if(!meta[a.qh])return; var c=ck(a.qh);
+    if(!a.ok){ if(!(c in firstWrong)) firstWrong[c]=a.ts; wrongConcepts[c]=1; }
+    else if(c in firstWrong){ recovered++; delete firstWrong[c]; } });
+  // Q3b — targeted improvement: for each accepted recommendation, accuracy on that dimension AFTER minus BEFORE the accept
+  var deltas=[];
+  accepts.forEach(function(e){ var dim=e.dimension_type, key=e.dimension, ts=e.ts;
+    function accSel(before){ var n=0,c=0; att.forEach(function(a){ var m=meta[a.qh]; if(!m)return;
+      var match=(dim==='skill'&&(m.skill||'')===key)||(dim==='tag'&&((m.tag||m.subtopic||'General')===key))||(dim==='cog'&&(qbCogOf(m)===key));
+      if(!match)return; if(before?((a.ts||0)<ts):((a.ts||0)>ts)){ n++; if(a.ok)c++; } });
+      return n?{n:n,acc:c/n}:null; }
+    var b=accSel(true), af=accSel(false); if(b&&af&&af.n>=2){ deltas.push(af.acc-b.acc); } });
+  var improvement = deltas.length? deltas.reduce(function(x,y){return x+y;},0)/deltas.length : null;
+  return { smartStarts:starts, smartCompletions:completes, recoAccepts:accepts.length, recoAgree:{yes:agreeYes,total:agrees.length},
+           smartSessions:smartSes.length, conceptRecovery:{recovered:recovered, of:Object.keys(wrongConcepts).length},
+           byDg:byDg, byDim:byDim, rejected:rejected, improvement:improvement, observations:agrees.length }; }
+/* ---- Dev-only pilot readout (route #/intel — NOT in student nav; student experience is unchanged) ---- */
+function pilotPct(b){ var n=(b.yes+b.no); return n? Math.round(b.yes/n*100):0; }
+function pagePilot(){ var v=smartValidation();
+  var agreePct=v.recoAgree.total? Math.round(v.recoAgree.yes/v.recoAgree.total*100):0;
+  var recPct=v.conceptRecovery.of? Math.round(v.conceptRecovery.recovered/v.conceptRecovery.of*100):0;
+  var dgLabel={gap:'Knowledge gap',misconception:'Misconception',fragile:'Fragile knowledge',solid:'Solid','—':'—'};
+  function tableRows(m){ var ks=Object.keys(m); if(!ks.length) return '<tr><td colspan="3" style="color:var(--dimmer)">No 👍/👎 responses yet.</td></tr>';
+    return ks.map(function(k){ var b=m[k]; return '<tr><td>'+esc(dgLabel[k]||qbSkillLabel(k)||k)+'</td><td style="text-align:right">'+pilotPct(b)+'%</td><td style="text-align:right;color:var(--dimmer)">'+(b.yes+b.no)+'</td></tr>'; }).join(''); }
+  var rej=v.rejected.length? v.rejected.map(function(r){ return '<tr><td>'+esc(dgLabel[r.dg]||r.dg||'—')+'</td><td>'+esc(r.dim)+'</td><td>'+esc(r.key)+'</td></tr>'; }).join('') : '<tr><td colspan="3" style="color:var(--dimmer)">No disagreements recorded yet.</td></tr>';
+  var ENOUGH=30;   // don't interpret from a handful of observations
+  var signal = (v.observations<ENOUGH)
+    ? '<div class="pilotnote">Collecting data — interpretation unlocks at '+ENOUGH+' recommendation responses (currently '+v.observations+'). Treat the pilot as measurement, not optimisation.</div>'
+    : (agreePct>=70
+        ? '<div class="pilotnote good">🟢 Early signal: recommendations appear useful ('+agreePct+'% agreement across '+v.observations+' responses).</div>'
+        : '<div class="pilotnote warn">🟠 Early signal: agreement is '+agreePct+'% — inspect the disagreements below for systematic routing errors before changing the engine.</div>');
+  return '<div class="wrap"><h1>🧠 Q-bank Intelligence — Pilot</h1>'
+    +'<p class="sub">Internal validation readout (this device). Not shown to students. Export and aggregate across the cohort before drawing conclusions.</p>'
+    +signal
+    +'<div class="pilotgrid">'
+      +'<div class="pilotstat"><b>'+v.smartStarts+'</b><span>Smart Drills started</span></div>'
+      +'<div class="pilotstat"><b>'+v.smartCompletions+'</b><span>Completed ('+(v.smartStarts?Math.round(v.smartCompletions/v.smartStarts*100):0)+'% completion rate)</span></div>'
+      +'<div class="pilotstat"><b>'+v.recoAccepts+'</b><span>Recommendations accepted</span></div>'
+      +'<div class="pilotstat"><b>'+agreePct+'%</b><span>Agreement ('+v.recoAgree.yes+'/'+v.recoAgree.total+')</span></div>'
+    +'</div>'
+    +'<h3 style="margin:22px 0 6px">Q1 · Does the diagnosis type matter? (agreement by diagnosis)</h3>'
+    +'<table class="pilottbl"><tr><th>Diagnosis</th><th style="text-align:right">Agreement</th><th style="text-align:right">n</th></tr>'+tableRows(v.byDg)+'</table>'
+    +'<h3 style="margin:22px 0 6px">Agreement by recommendation dimension</h3>'
+    +'<table class="pilottbl"><tr><th>Dimension</th><th style="text-align:right">Agreement</th><th style="text-align:right">n</th></tr>'+tableRows(v.byDim)+'</table>'
+    +'<h3 style="margin:22px 0 6px">Q3 · Does it lead to improvement?</h3>'
+    +'<table class="pilottbl"><tr><td>Concept retest recovery (wrong→later correct)</td><td style="text-align:right">'+recPct+'% ('+v.conceptRecovery.recovered+'/'+v.conceptRecovery.of+')</td></tr>'
+      +'<tr><td>Targeted weakness improvement (after−before accepted drill)</td><td style="text-align:right">'+(v.improvement==null?'—':((v.improvement>=0?'+':'')+Math.round(v.improvement*100)+'%'))+'</td></tr></table>'
+    +'<h3 style="margin:22px 0 6px">🔴 Disagreements — what MedBank thought vs what was rejected</h3>'
+    +'<p class="sub" style="margin-top:0">The most valuable dataset: where the engine and the student disagree.</p>'
+    +'<table class="pilottbl"><tr><th>Diagnosis</th><th>Dimension</th><th>Area rejected</th></tr>'+rej+'</table>'
+    +'<div class="btnrow" style="margin-top:18px"><button class="btn" onclick="pilotExport()">⬇ Copy pilot data (JSON)</button></div>'
+    +'</div>'; }
+function pilotExport(){ try{ var s=qbStore(); var blob={ exportedAt:new Date().toISOString(), metrics:smartValidation(), events:s._events||[], sessions:s._sessions||[] };
+  var txt=JSON.stringify(blob); if(navigator&&navigator.clipboard){ navigator.clipboard.writeText(txt); alert('Pilot data copied to clipboard ('+((s._events||[]).length)+' events). Paste into your aggregation sheet.'); }
+  else { alert(txt.slice(0,4000)); } }catch(e){ alert('Export failed: '+e); } }
+/* full candidate pool with a stable per-question hash (so we can honour seen/unseen + repetition policy) */
+function smartPool(){ var out=[]; mgPools().forEach(function(p){ p.topics.forEach(function(t){ (t.extras.qbank||[]).forEach(function(q){ var qq=Object.assign({},q,{_topicId:t.id,_topicName:t.name,_subject:((t.subject&&t.subject.name)||p.s.name),_subjId:p.s.id}); qq._qh=qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))); out.push(qq); }); }); }); return out; }
+function poolByQh(pool,qh){ for(var i=0;i<pool.length;i++){ if(pool[i]._qh===qh) return pool[i]; } return null; }
+function metaToItem(mt){ if(!mt) return null; return { stem:mt.stem, lead_in:mt.lead_in, options:mt.options, answer:mt.answer, rationales:mt.rationales, objective:mt.objective, teaching:mt.teaching, trap:mt.trap, trap_type:mt.trap_type, trap_explanation:mt.trap_explanation, tag:mt.tag, subtopic:mt.subtopic, system:mt.system, cognitive_level:mt.cognitive_level, difficulty:mt.difficulty, skill:mt.skill, src:mt.src, _topicId:mt.topicId, _topicName:'', _qh:qbHash((mt.stem||'')+'|'+((mt.options||[]).join('|'))) }; }
+/* rank weak dimensions on one axis: evidence-gated (noise resistance) + below (personal avg−margin) or absolute floor; misconceptions float up */
+function smartWeak(map, overallAcc, labelFn, type){ var out=[];
+  Object.keys(map).forEach(function(k){ var b=map[k]; if(b.seen<SMART.MIN_EV) return; var a=smartAcc(b);
+    var floor=Math.min(overallAcc-0.05, 0.75); if(a<=floor){ out.push({type:type,key:k,acc:a,seen:b.seen,miscon:b.miscon||0,label:labelFn(k)}); } });
+  out.sort(function(x,y){ var mx=x.miscon>0?1:0,my=y.miscon>0?1:0; if(mx!==my) return my-mx; return x.acc-y.acc; });
+  return out; }
+/* THE PLAN — priority: repeated weaknesses → recent mistakes → cognitive → skill → topic → neglected, without abandoning strengths */
+function smartDrillPlan(scope, count, previewOnly){ scope=scope||'*'; count=count||20;
+  var st=smartStats(scope); if(st.overall.seen < SMART.MIN_TOTAL) return {ok:false};
+  var oAcc=smartAcc(st.overall);
+  var wSkill=smartWeak(st.bySkill,oAcc,qbSkillLabel,'skill');
+  var wCog=smartWeak(st.byCog,oAcc,qbCogLabel,'cog');
+  var wTag=smartWeak(st.byTag,oAcc,function(k){return k;},'tag');
+  var focus=[].concat(wSkill,wCog).sort(function(x,y){var mx=x.miscon>0?1:0,my=y.miscon>0?1:0; if(mx!==my)return my-mx; return x.acc-y.acc;}).slice(0,2);
+  var reasons=[];
+  focus.forEach(function(f){ var dg=smartDiagnose(smartBandOf(st,f.type,f.key));
+    var base='Your '+f.label.toLowerCase()+' accuracy is '+Math.round(f.acc*100)+'%'+((f.type==='skill'||f.type==='cog')?(' vs '+Math.round(oAcc*100)+'% overall'):'')+'.';
+    var lens=(dg&&dg.type==='misconception')?' Confident-but-wrong pattern — this looks like a misconception, so we’ll confront the belief directly.'
+            :(dg&&dg.type==='gap')?' Low accuracy without over-confidence — treating this as a knowledge gap to build up.'
+            :(f.miscon>0?' You were confident on some you got wrong — a likely misconception.':'');
+    reasons.push(base+lens); });
+  if(st.recentMiss.length) reasons.push('You have '+st.recentMiss.length+' recently-missed question'+(st.recentMiss.length>1?'s':'')+' to clean up.');
+  if(!focus.length && !st.recentMiss.length) reasons.push('No clear weakness yet — this set keeps every area fresh while MedBank keeps learning your performance.');
+  else if(!focus.length) reasons.push('No single weak area stands out — this set revisits what you recently missed and keeps the rest fresh.');
+  var focusChips=focus.map(function(f){ return {label:f.label, acc:Math.round(f.acc*100), type:f.type}; });
+  if(previewOnly) return {ok:true, reasons:reasons, focus:focusChips, recentMiss:st.recentMiss.length, oAcc:oAcc, count:count};
+  var pool=smartPool();
+  var wkS={},wkC={},wkT={}; wSkill.forEach(function(w){wkS[w.key]=1;}); wCog.forEach(function(w){wkC[w.key]=1;}); wTag.forEach(function(w){wkT[w.key]=1;});
+  function isWeakQ(q){ return wkS[q.skill||''] || wkC[qbCogOf(q)] || wkT[q.tag||q.subtopic||'General']; }
+  var poolTopics={}; pool.forEach(function(q){poolTopics[q._topicId]=1;});
+  var neglect={}; Object.keys(poolTopics).forEach(function(tp){ var b=st.byTopic[tp]; if(!b || (Date.now()-b.lastTs) > SMART.NEGLECT_DAYS*864e5) neglect[tp]=1; });
+  var seen=st.seenQh, seenTs=st.seenTs||{}, used={}, COOLDOWN=2*864e5;
+  function take(cands, quota, preferUnseen){ var res=[]; if(quota<=0) return res;
+    var a=cands.filter(function(q){return q && !used[q._qh];});
+    if(preferUnseen){ var uns=a.filter(function(q){return !seen[q._qh];}),
+      // reuse is allowed only past a cooldown (never repeat a question you saw in the last 2 days), oldest-seen first
+      sn=a.filter(function(q){return seen[q._qh] && (Date.now()-(seenTs[q._qh]||0))>COOLDOWN;});
+      sn.sort(function(x,y){return (seenTs[x._qh]||0)-(seenTs[y._qh]||0);});
+      a=qbShuffle(uns).concat(sn); }
+    else a=qbShuffle(a);
+    for(var i=0;i<a.length && res.length<quota;i++){ if(!used[a[i]._qh]){ used[a[i]._qh]=1; res.push(a[i]); } }
+    return res; }
+  var mix=SMART.MIX; var qWeak=Math.round(count*mix.weak), qMiss=Math.round(count*mix.miss), qNeg=Math.round(count*mix.neglect), qMaint=count-qWeak-qMiss-qNeg;
+  var missCands=st.recentMiss.map(function(m){ return poolByQh(pool,m.qh) || metaToItem(m.meta); }).filter(Boolean);
+  var out=[];
+  out=out.concat(take(missCands, qMiss, false));                                            // recent mistakes (deliberate revisit)
+  out=out.concat(take(pool.filter(isWeakQ), qWeak, true));                                   // weaknesses, unseen preferred
+  out=out.concat(take(pool.filter(function(q){return neglect[q._topicId];}), qNeg, true));   // neglected topics
+  out=out.concat(take(pool.filter(function(q){return !isWeakQ(q);}), qMaint, true));         // maintenance / strengths
+  if(out.length<count) out=out.concat(take(pool, count-out.length, true));                   // top up
+  out=qbShuffle(out);
+  var topicSet={}; out.forEach(function(q){topicSet[q._topicId]=1;});
+  var expo=(Object.keys(topicSet).length<=1)?'focused':'blind';
+  return {ok:true, items:out, reasons:reasons, focus:focusChips, exposure:expo, mode:'tutor', count:out.length, why:(reasons[0]||'Recommended from your recent performance.')};
+}
+function startSmartDrill(scope){ var plan=smartDrillPlan(scope||'*', 20);
+  if(!plan.ok || !plan.items.length){ alert('Not enough data yet — keep practising and MedBank will personalise your drills as it learns your performance.'); return; }
+  QB={ topicId:(scope||'*'), mode:plan.mode, items:plan.items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:plan.exposure, kind:'smart_drill', smartWhy:plan.why, smartReasons:plan.reasons, smartFocus:plan.focus };
+  smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'smart_drill', dimension:(plan.focus&&plan.focus[0]?plan.focus[0].type:''), reason:plan.why||'', mode:QB.mode, planned:plan.items.length});
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
+}
+/* Smart Drill card for the Mega landing — shows the recommendation + why, or a friendly "learning" state */
+function smartDrillCard(scope){ scope=scope||'*';
+  var p=smartDrillPlan(scope,20,true);
+  if(!p.ok){ return '<div class="card sdcard muted" style="cursor:default"><div class="sd-h">🎯 Smart Drill</div><div class="sd-sub">Not enough data yet — keep practising and MedBank will learn your weak spots and build a personalised drill for you.</div></div>'; }
+  var chips=(p.focus||[]).map(function(f){ var c=f.acc?qbBandColor(f.acc):'#8b5cf6'; return '<span class="sd-chip" style="color:'+c+';border-color:'+c+'">'+esc(f.label)+(f.acc?(' '+f.acc+'%'):'')+'</span>'; }).join('');
+  var why=(p.reasons&&p.reasons.length)?'<div class="sd-why">'+esc(p.reasons[0])+'</div>':'';
+  return '<div class="card sdcard" style="cursor:default"><div class="sd-h">🎯 Smart Drill <span class="sd-tag">recommended</span></div>'
+    +'<div class="sd-line">'+p.count+' questions · '+((p.focus&&p.focus.length)?'focus on your weak areas':'a balanced mix that keeps every area fresh')+'</div>'
+    +(chips?'<div class="sd-chips">'+chips+'</div>':'')+why
+    +'<button class="btn primary" style="margin-top:12px" onclick="startSmartDrill(\''+scope+'\')">Start Smart Drill ▶</button></div>';
+}
+/* one-tap "Drill this" from a weakness → 10 focused questions on that single dimension (unseen preferred, tutor) */
+function smartDrillDim(type,key,scope){ scope=scope||'*'; var pool=smartPool(), st=smartStats(scope), seen=st.seenQh;
+  key=decodeURIComponent(key);
+  var cands=pool.filter(function(q){ if(type==='skill') return (q.skill||'')===key; if(type==='cog') return qbCogOf(q)===key; if(type==='tag') return (q.tag||q.subtopic||'General')===key; if(type==='topic') return q._topicId===key; return false; });
+  if(scope && scope!=='*' && type!=='topic') cands=cands.filter(function(q){ return q._topicId===scope; });   // topic-scoped dashboard → keep the drill in that topic
+  if(!cands.length){ alert('No questions available for that area yet.'); return; }
+  var uns=cands.filter(function(q){return !seen[q._qh];}), sn=cands.filter(function(q){return seen[q._qh];});
+  var items=qbShuffle(uns).concat(qbShuffle(sn)).slice(0,10);
+  var lbl=(type==='skill')?qbSkillLabel(key):(type==='cog')?qbCogLabel(key):(type==='topic')?((topById(key)||{}).name||'Topic'):key;
+  QB={ topicId:scope, mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'drill_dim', smartWhy:'Focused drill on '+lbl+' — one of your weaker areas.', smartReasons:['You chose to drill '+lbl+'.'], smartFocus:[{label:lbl,acc:0,type:type}] };
+  smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'drill_dim', dimension:type, reason:QB.smartWhy||'', mode:QB.mode, planned:items.length});
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
+}
+/* ---- Concept retest — a DIFFERENT existing question on the same topic+skill+objective (spec point 18) ---- */
+function conceptRetest(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh];
+  if(!mt){ alert('Concept details not found.'); return; }
+  var pool=smartPool(), seen=smartStats('*').seenQh;
+  var sameTag=(mt.tag||mt.subtopic||'General'), sameSkill=(mt.skill||''), obj=(mt.objective||mt.teaching||'');
+  var cands=pool.filter(function(q){ if(q._qh===qh) return false; if((q.tag||q.subtopic||'General')!==sameTag) return false; if(sameSkill && (q.skill||'')!==sameSkill) return false; return true; });
+  var byObj=cands.filter(function(q){ return obj && (q.objective||q.teaching||'')===obj; });
+  var use=byObj.length?byObj:cands;
+  if(!use.length){ alert('No other question tests that exact concept yet — the original is in your mistakes to review.'); return; }
+  var uns=use.filter(function(q){return !seen[q._qh];}), sn=use.filter(function(q){return seen[q._qh];});
+  var items=qbShuffle(uns).concat(qbShuffle(sn)).slice(0,5);
+  var lbl=(sameSkill?qbSkillLabel(sameSkill)+' · ':'')+sameTag;
+  QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'concept_retest', smartWhy:'Concept retest: a different question on '+lbl+' — the concept you just missed.', smartReasons:['Same concept, new question — proves you learned it rather than memorised the answer.'], smartFocus:[{label:lbl,acc:0,type:'concept'}] };
+  smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'concept_retest', dimension:'concept', reason:QB.smartWhy||'', mode:QB.mode, planned:items.length});
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render(); }
+/* ---- Confidence capture (non-interruptive; tutor reveal) ---- */
+function qbSetConf(v){ if(!QB) return; v=parseInt(v,10); var r=QB.results[QB.results.length-1]; if(r) r.conf=v;
+  var s=qbStore(), A=s._attempts||[]; for(var i=A.length-1;i>=0;i--){ if(A[i].qh===QB._lastQh){ A[i].conf=v; break; } }
+  QB._confDone=true; try{persist();}catch(e){} render(); }
+/* ---- Confidence calibration analytics ---- */
+function smartCalibration(scope){ var st=smartStats(scope||'*'); var o=st.overall;
+  var rated=o.hiSeen+o.loSeen; if(rated<6) return null;
+  var hiPct=o.hiSeen?Math.round(o.hiCorr/o.hiSeen*100):0, loPct=o.loSeen?Math.round(o.loCorr/o.loSeen*100):0;
+  var confShare=Math.round(o.hiSeen/rated*100), overall=Math.round((o.hiCorr+o.loCorr)/rated*100);
+  var msg;
+  if(o.hiSeen>=4 && hiPct<70) msg={t:'⚠️ You may be overconfident',d:'You answered '+confShare+'% of questions confidently, but were correct on only '+hiPct+'% of those. Slow down where you feel sure.'};
+  else if(o.loSeen>=4 && loPct>=80) msg={t:'💪 Stronger than you think',d:'You were unsure on many questions but still got '+loPct+'% of them right — trust your reasoning a little more.'};
+  else msg={t:'🎯 Well calibrated',d:'Your confidence broadly matches your accuracy ('+hiPct+'% right when confident, '+loPct+'% when unsure).'};
+  return {hiPct:hiPct, loPct:loPct, confShare:confShare, overall:overall, msg:msg, miscon:o.miscon};
+}
+
+/* ---- "What should I work on?" — ranked, actionable weakness list (spec points 19/20) ---- */
+function smartNextCard(scope){ scope=scope||'*'; var st=smartStats(scope); if(st.overall.seen<SMART.MIN_EV) return '';
+  var oAcc=smartAcc(st.overall), rows=[];
+  smartWeak(st.bySkill,oAcc,qbSkillLabel,'skill').forEach(function(w){rows.push(w);});
+  smartWeak(st.byCog,oAcc,qbCogLabel,'cog').forEach(function(w){rows.push(w);});
+  smartWeak(st.byTag,oAcc,function(k){return k;},'tag').forEach(function(w){rows.push(w);});
+  rows.sort(function(x,y){var mx=x.miscon>0?1:0,my=y.miscon>0?1:0; if(mx!==my)return my-mx; return x.acc-y.acc;});
+  rows=rows.slice(0,5); if(!rows.length) return '';
+  var list=rows.map(function(w){ var pct=Math.round(w.acc*100), c=qbBandColor(pct);
+    var dg=smartDiagnose(smartBandOf(st,w.type,w.key));
+    var badge=(dg&&(dg.type==='misconception'||dg.type==='gap'))?'<span class="sdnext-mis" style="color:'+dg.color+'" title="'+esc(dg.tip)+'">'+dg.icon+' '+dg.label+'</span>':(w.miscon>0?'<span class="sdnext-mis">🚨 misconception</span>':'');
+    var verb=(dg&&dg.verb)?dg.verb:'Drill';
+    var ak=w.type+':'+w.key, ag=_smartAgreed[ak], dgt=(dg&&dg.type)||'';
+    // snapshot the recommendation AS SHOWN so the logged 👍/👎 stays interpretable even if the engine changes later
+    var _bb=smartBandOf(st,w.type,w.key), _conf=(_bb&&(_bb.hiSeen+_bb.loSeen))?((_bb.loSeen/(_bb.hiSeen+_bb.loSeen)>=0.5)?'low':'high'):'unrated';
+    _recoShown[ak]={rec_id:ak, dimension:w.key, dimension_type:w.type, diagnosis:dgt, accuracy:pct, confidence:_conf, reason:(dg&&dg.tip)?dg.tip:('Your '+w.label.toLowerCase()+' accuracy is '+pct+'%.')};
+    var agree=(ag?('<span class="sdnext-ag" style="opacity:.6">'+(ag>0?'👍 noted':'👎 noted')+'</span>')
+      :('<span class="sdnext-ag" title="Is this actually your weak spot?"><button class="lk" onclick="smartAgree(\''+w.type+'\',\''+encodeURIComponent(w.key)+'\',1,\''+dgt+'\')">👍</button><button class="lk" onclick="smartAgree(\''+w.type+'\',\''+encodeURIComponent(w.key)+'\',0,\''+dgt+'\')">👎</button></span>'));
+    return '<div class="sdnext-row"><div class="sdnext-l"><span class="sdnext-dot" style="background:'+c+'"></span><span class="sdnext-t">'+esc(w.label)+'</span>'+badge+'</div><div class="sdnext-r">'+agree+'<span style="color:'+c+';font-weight:800">'+pct+'%</span><button class="btn sm" onclick="smartReco(\''+w.type+'\',\''+encodeURIComponent(w.key)+'\',\''+scope+'\',\''+dgt+'\')">'+verb+'</button></div></div>'; }).join('');
+  // Fragile knowledge (usually right, but unsure) — a DIFFERENT need: reinforce, don't re-teach. Kept separate from weaknesses.
+  var fragile=[]; ['skill','tag'].forEach(function(tp){ var map=tp==='skill'?st.bySkill:st.byTag;
+    Object.keys(map).forEach(function(k){ var dg=smartDiagnose(map[k]); if(dg&&dg.type==='fragile') fragile.push({type:tp,key:k,label:(tp==='skill'?qbSkillLabel(k):k),dg:dg,band:map[k]}); }); });
+  fragile.sort(function(a,b){return (b.band.loSeen||0)-(a.band.loSeen||0);}); fragile=fragile.slice(0,2);
+  var fragHtml=fragile.length? '<div class="sdnext-sub" style="margin-top:12px">🟡 Fragile — you get these right but aren’t sure. Reinforce for confidence:</div>'
+    +fragile.map(function(f){ _recoShown[f.type+':'+f.key]={rec_id:f.type+':'+f.key, dimension:f.key, dimension_type:f.type, diagnosis:'fragile', accuracy:Math.round(smartAcc(f.band)*100), confidence:'low', reason:f.dg.tip}; return '<div class="sdnext-row"><div class="sdnext-l"><span class="sdnext-dot" style="background:'+f.dg.color+'"></span><span class="sdnext-t">'+esc(f.label)+'</span></div><div class="sdnext-r"><button class="btn sm" onclick="smartReco(\''+f.type+'\',\''+encodeURIComponent(f.key)+'\',\''+scope+'\',\'fragile\')">Reinforce</button></div></div>'; }).join('') : '';
+  var top=rows[0], topDg=(smartDiagnose(smartBandOf(st,top.type,top.key))||{}).type||'';
+  var rec='<button class="btn primary" style="margin-top:6px" onclick="smartReco(\''+top.type+'\',\''+encodeURIComponent(top.key)+'\',\''+scope+'\',\''+topDg+'\')">🎯 Drill '+esc(top.label)+' now (10 Q)</button>';
+  return '<div class="card sdnext" style="cursor:default"><div class="qbsec-h">🧭 What should I work on?</div><div class="sdnext-sub">Ranked from your history — tap the action for a focused 10-question set.</div>'+list+fragHtml+rec+'</div>';
+}
+/* ---- Confidence calibration card ---- */
+function smartCalCard(scope){ var c=smartCalibration(scope); if(!c) return '';
+  return qbSection('🧠 Confidence calibration','does your confidence match your accuracy?',
+    '<div class="sdcal-msg"><b>'+c.msg.t+'</b><div>'+esc(c.msg.d)+'</div></div>'
+    +'<div class="sdcal-grid"><div><div class="sdcal-v">'+c.hiPct+'%</div><div class="sdcal-k">right when confident</div></div>'
+    +'<div><div class="sdcal-v">'+c.loPct+'%</div><div class="sdcal-k">right when unsure</div></div>'
+    +'<div><div class="sdcal-v">'+c.confShare+'%</div><div class="sdcal-k">answered confidently</div></div>'
+    +(c.miscon?'<div><div class="sdcal-v" style="color:#e2574b">'+c.miscon+'</div><div class="sdcal-k">🚨 likely misconceptions</div></div>':'')
+    +'</div>'); }
+/* ---- Mastery states (recency-weighted) — by skill, topic AND course (spec points 7, 11, 12) ---- */
+function smartStateRows(entries){
+  var rows=entries.map(function(e){ return {label:e.label, band:e.band, ss:smartState(e.band)}; }).filter(function(r){return r.ss.ev;});
+  rows.sort(function(a,b){return a.ss.score-b.ss.score;});
+  return rows.map(function(r){ var m=smartStateMeta(r.ss.state); var n=(r.band&&r.band.seen)||0;
+    // Don't show a hard percentage until the sample supports it — a "73%" off 4 questions is fake precision.
+    var right = (n>=SMART.EV_MED) ? (m[1]+' · '+Math.round(r.ss.score*100)+'%')
+                                  : (m[1]+' <span style="opacity:.55;font-weight:600">· building ('+n+')</span>');
+    return '<div class="sdms-row"><span>'+m[0]+' '+esc(r.label)+'</span><span style="color:'+m[2]+';font-weight:800">'+right+'</span></div>'; }).join(''); }
+function smartMasteryCard(scope){ var st=smartStats(scope);
+  var skillRows=smartStateRows(QB_SKILLS.map(function(sk){return {label:qbSkillLabel(sk[0]),band:st.bySkill[sk[0]]};}));
+  var cogRows=smartStateRows(QB_COGS.map(function(c){return {label:c[1],band:st.byCog[c[0]]};}));
+  var topicRows=smartStateRows(Object.keys(st.byTopic).map(function(tp){return {label:((topById(tp)||{}).name)||tp, band:st.byTopic[tp]};}));
+  var courseRows=smartStateRows(Object.keys(st.byCourse).map(function(cr){return {label:cr, band:st.byCourse[cr]};}));
+  var body='';
+  if(skillRows) body+='<div class="mgb-h">By clinical skill</div>'+skillRows;
+  if(cogRows) body+='<div class="mgb-h">By cognitive level</div>'+cogRows;
+  if(topicRows) body+='<div class="mgb-h">By topic</div>'+topicRows;
+  if(courseRows && Object.keys(st.byCourse).filter(function(k){return k!=='—';}).length>1) body+='<div class="mgb-h">By course</div>'+courseRows;
+  if(!body) return '';
+  return qbSection('🩺 Mastery states','recency-weighted · 🟢 strong · 🟡 developing · 🟠 weak · 🔴 critical',body); }
+
+/* ============================================================
+   ADAPTIVE DIFFICULTY — moves along the existing cognitive ladder by
+   accuracy + confidence + time + streak (skill-aware). No generation.
+   ============================================================ */
+function adaptStart(){ var cfg=_mgCfg;
+  var chosen=Object.keys(cfg.subj).filter(function(k){return cfg.subj[k];});
+  var pool=smartPool().filter(function(q){ var okC=!chosen.length||chosen.indexOf(q._subjId)>=0; return okC && (cfg.skill==='all'||(q.skill||'')===cfg.skill); });
+  if(pool.length<3){ alert('Adaptive needs a few more questions in this selection — widen the courses or skill.'); return; }
+  var target=Math.min(cfg.count||20, pool.length);
+  // seed each skill's starting level from the student's own history where we have enough evidence
+  var st=smartStats('*'), perSkillLvl={};
+  QB_SKILLS.forEach(function(sk){ var ss=smartState(st.bySkill[sk[0]]); if(ss.ev){ perSkillLvl[sk[0]] = ss.score>=0.8?2 : ss.score>=0.6?1 : 0; } });
+  QB={ topicId:'*', mode:cfg.mode, items:[], i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'adaptive', adaptive:{lvl:1, perSkillLvl:perSkillLvl, hist:[], perSkill:{}, served:{}}, adaptPool:pool, adaptSeen:{}, adaptTarget:target, kind:'adaptive', smart:true, smartWhy:'Adaptive: each skill’s difficulty rises as you succeed and eases when you struggle.' };
+  smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'adaptive', dimension:'adaptive', reason:QB.smartWhy||'', mode:QB.mode, planned:target});
+  var first=adaptPick(); if(!first){ alert('No questions available.'); return; } QB.items.push(first); QB.adaptSeen[first._qh]=1;
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
+}
+/* pick the next question: rotate to the least-served skill that still has unseen items, at THAT skill's own level */
+function adaptPick(){ var A=QB.adaptive, pool=QB.adaptPool, seen=QB.adaptSeen;
+  function avail(pred){ return pool.filter(function(q){ return !seen[q._qh] && pred(q); }); }
+  var skillsAvail={}; pool.forEach(function(q){ if(!seen[q._qh]){ var sk=q.skill||'_'; skillsAvail[sk]=(skillsAvail[sk]||0)+1; } });
+  var skKeys=Object.keys(skillsAvail); if(!skKeys.length) return null;
+  skKeys.sort(function(a,b){ return (A.served[a]||0)-(A.served[b]||0); });   // least-served skill first (balanced rotation)
+  var targetSk=skKeys[0];
+  var lvl=Math.max(0,Math.min(_COG_LADDER.length-1,(A.perSkillLvl[targetSk]!=null?A.perSkillLvl[targetSk]:A.lvl)));
+  var wantTrap=(QB.items.length>0 && QB.items.length%5===4);   // sprinkle an exam-trap roughly every 5th
+  var c=[];
+  if(wantTrap){ c=avail(function(q){return (q.skill||'_')===targetSk && qbCogOf(q)==='exam_trap';}); if(!c.length) c=avail(function(q){return qbCogOf(q)==='exam_trap';}); }
+  if(!c.length) c=avail(function(q){return (q.skill||'_')===targetSk && qbCogOf(q)===_COG_LADDER[lvl];});
+  if(!c.length){ for(var d=1;d<_COG_LADDER.length && !c.length;d++){ var lo=lvl-d, hi=lvl+d;
+      if(lo>=0) c=avail((function(L){return function(q){return (q.skill||'_')===targetSk && qbCogOf(q)===_COG_LADDER[L];};})(lo));
+      if(!c.length && hi<_COG_LADDER.length) c=avail((function(L){return function(q){return (q.skill||'_')===targetSk && qbCogOf(q)===_COG_LADDER[L];};})(hi)); } }
+  if(!c.length) c=avail(function(q){return (q.skill||'_')===targetSk;});   // this skill, any level
+  if(!c.length) c=avail(function(){return true;});                          // any unseen
+  if(!c.length) return null;
+  return qbShuffle(c)[0];
+}
+function adaptAdjust(r){ var A=QB.adaptive; A.hist.push(!!r.ok);
+  var q=QB.items[QB.i], sk=(q&&q.skill)||'_', W=SMART.ADAPT;
+  var score=0;
+  // PRIMARY — accuracy
+  score += r.ok ? W.acc : -W.acc;
+  // PRIMARY — confidence: confidently right earns promotion; confidently wrong is a misconception signal → ease
+  if(r.ok && r.conf===3) score += W.conf;
+  if(!r.ok && r.conf===3) score -= W.conf;
+  // Guessing guard: "correct + fast" is NOT mastery. A self-declared guess cancels half the accuracy push,
+  // so a lucky/uncertain right answer can't ratchet difficulty up on its own.
+  if(r.ok && r.conf===0) score -= W.acc*0.5;
+  // PRIMARY — consistency: sustained result over the last 3 answers (a steadier signal than a single question)
+  var l3=A.hist.slice(-3); if(l3.length===3){ if(l3[0]&&l3[1]&&l3[2]) score+=W.streak; if(!l3[0]&&!l3[1]&&!l3[2]) score-=W.streak; }
+  // SECONDARY — time: a gentle dampener only. Right-but-slow means "not yet comfortable"; it never demotes on its own.
+  if(r.ok && r.ms>SMART.SLOW_MS) score -= W.timePenalty;
+  var cur=Math.max(0,Math.min(_COG_LADDER.length-1,(A.perSkillLvl[sk]!=null?A.perSkillLvl[sk]:A.lvl)));
+  if(score>=1.5) cur=Math.min(_COG_LADDER.length-1, cur+1);
+  else if(score<=-1) cur=Math.max(0, cur-1);
+  A.perSkillLvl[sk]=cur; A.lvl=cur;            // per-skill level; global tracks latest as fallback
+  A.served[sk]=(A.served[sk]||0)+1;
+  var m=A.perSkill[sk]||(A.perSkill[sk]={s:0,c:0}); m.s++; if(r.ok)m.c++;
+}
+/* adaptive recap on the results screen — where each skill's difficulty settled */
+function adaptRecapHtml(){ var A=QB&&QB.adaptive; if(!A) return ''; var ks=Object.keys(A.perSkill); if(!ks.length) return '';
+  var rows=ks.map(function(sk){ var lv=A.perSkillLvl[sk]; if(lv==null)lv=1; var m=A.perSkill[sk]||{s:0,c:0};
+    var lbl=(sk==='_'?'General':qbSkillLabel(sk)), lvName=qbCogLabel(_COG_LADDER[Math.max(0,Math.min(_COG_LADDER.length-1,lv))]), col=qbCogColor(_COG_LADDER[Math.max(0,Math.min(_COG_LADDER.length-1,lv))]);
+    return '<div class="sdms-row"><span>'+esc(lbl)+'</span><span style="font-weight:800;color:'+col+'">'+esc(lvName)+' · '+m.c+'/'+m.s+'</span></div>'; }).join('');
+  return '<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🎚 Where Adaptive tuned you</div><div class="sdnext-sub">The difficulty level each skill settled at as you answered.</div>'+rows+'</div>'; }
+
 function pageMega(){
   if(_qbDash.open) return '<div class="wrap">'+qbDashHtml(null)+'</div>';
   if(QB && (QB.mega||QB.mistakes)) return '<div class="wrap">'+(QB.done?qbDoneHtml():qbQuestionHtml())+'</div>';
@@ -2891,9 +3330,9 @@ function pageMega(){
   }
   var chooseBtn='<div class="qbcfg"><div class="qbcfg-l">📚 Topics</div><div class="qbcfg-c"><button class="qbchipbtn'+(!cfg.chooseTopics?' on':'')+'" onclick="if(_mgCfg.chooseTopics){mgToggleChoose()}">All topics</button><button class="qbchipbtn'+(cfg.chooseTopics?' on':'')+'" onclick="if(!_mgCfg.chooseTopics){mgToggleChoose()}">Choose…</button></div></div>'+topicPick;
   // exposure — Focused (as selected) / Mixed (balanced switch) / Blind (whole course, hidden till after)
-  var expoOpts=[{v:'focused',t:'🎯 Focused'},{v:'mixed',t:'🔀 Mixed'},{v:'blind',t:'🙈 Blind'}];
+  var expoOpts=[{v:'focused',t:'🎯 Focused'},{v:'mixed',t:'🔀 Mixed'},{v:'blind',t:'🙈 Blind'},{v:'adaptive',t:'🎚 Adaptive'}];
   var expoRow=mgChipRow('👁 Exposure', expoOpts, cfg.exposure, 'exposure');
-  var expoTxt=cfg.exposure==='focused'?'Draws from your selected topics. (Topic still hidden until you answer.)':cfg.exposure==='mixed'?'Balanced switch across your selected topics — no topic dominates.':'Random across the whole course(s), topic hidden until you answer. <b>Best for exam prep.</b>';
+  var expoTxt=cfg.exposure==='focused'?'Draws from your selected topics. (Topic still hidden until you answer.)':cfg.exposure==='mixed'?'Balanced switch across your selected topics — no topic dominates.':cfg.exposure==='adaptive'?'Difficulty auto-tunes from your answers, confidence and pace — rises when you succeed, eases when you struggle. <b>Level chip is set automatically.</b>':'Random across the whole course(s), topic hidden until you answer. <b>Best for exam prep.</b>';
   var expoNote='<div class="qbnodata" style="margin:-4px 0 6px 102px">'+expoTxt+'</div>';
   var modeRow=mgChipRow('🎓 Mode',[{v:'tutor',t:'Tutor'},{v:'timed',t:'Test'}], cfg.mode,'mode');
   var lvlRow=mgChipRow('📈 Level',[{v:'all',t:'All'}].concat(QB_COGS.map(function(c){return {v:c[0],t:c[1]};})), cfg.level,'level');
@@ -2901,23 +3340,13 @@ function pageMega(){
   var cntRow=mgChipRow('#️⃣ How many',[{v:'10',t:'10'},{v:'20',t:'20'},{v:'30',t:'30'},{v:'50',t:'50'}], ''+(cfg.count||20),'count');
   var n=mgBuildItems().length, nStart=Math.min(cfg.count||20, n);
   // point 11 — Quick Exam is the PRIMARY CTA; Customize below
+  // three distinct entry points — Quick Exam = test me · Smart Drill = improve me · Customize = choose (spec point 23)
   var quick='<div class="card mgquick" style="cursor:default"><div><div class="mgq-t">⚡ Quick Exam</div><div class="mgq-s">20 questions · Mixed · Blind · Timed — one click</div></div><button class="btn primary" onclick="mgStart(true)">Start ▶</button></div>';
-  // point 13 — Weakness Focus (pure analytics + filter)
-  var weak=''; var agg=qbAgg('*');
-  if(agg.cumulative.seen>=5){
-    var weakItems=[];
-    QB_SKILLS.forEach(function(s){ var b=agg.bySkill[s[0]]; if(b&&b.seen>=3) weakItems.push({t:qbSkillLabel(s[0]),p:b.correct/b.seen}); });
-    QB_COGS.forEach(function(c){ var b=agg.byCog[c[0]]; if(b&&b.seen>=3) weakItems.push({t:c[1],p:b.correct/b.seen}); });
-    weakItems.sort(function(a,b){return a.p-b.p;}); weakItems=weakItems.slice(0,3);
-    if(weakItems.length && weakItems[0].p<0.75){
-      var chips=weakItems.map(function(w){ var c=qbBandColor(Math.round(w.p*100)); return '<span class="mgw-chip" style="color:'+c+';border-color:'+c+'">'+esc(w.t)+' '+Math.round(w.p*100)+'%</span>'; }).join('');
-      weak='<div class="card mgweak" style="cursor:default"><div class="mgw-h">🔥 Your weak areas</div><div class="mgw-chips">'+chips+'</div><button class="btn" style="margin-top:10px" onclick="mgDrillWeak()">🎯 Drill my weaknesses</button></div>';
-    }
-  }
+  var smart=smartDrillCard('*');
   var startBtn='<div class="btnrow" style="margin-top:16px"><button class="btn primary" style="min-width:200px" '+(n?'onclick="mgStart(false)"':'disabled style="opacity:.45"')+'>🚀 Start '+(n?nStart+' questions':'— none match')+'</button></div>';
   var poolInfo='<div class="qbnodata" style="margin-top:6px">'+n+' question'+(n===1?'':'s')+' in your current selection.</div>';
   var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+modeRow+lvlRow+skillRow+cntRow+startBtn+poolInfo+'</div>';
-  return '<div class="wrap">'+head+quick+weak+custom+'</div>';
+  return '<div class="wrap">'+head+quick+smart+custom+'</div>';
 }
 
 /* ===== #4/#5 AI Podcast — two-host episode + character voices + Raise Hand ===== */
@@ -5519,6 +5948,7 @@ function render(){
     case 'search':    html=pageSearch(); break;
     case 'settings':  html=pageSettings(); break;
     case 'admin':     html=pageAdmin(); break;
+    case 'intel':     html=pagePilot(); break;   // dev-only pilot readout (not in student nav)
     case 'vizadmin':  html=pageVizAdmin(); break;
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
@@ -5884,6 +6314,67 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .mgw-chips{display:flex;flex-wrap:wrap;gap:6px}
 .mgw-chip{font-size:11.5px;font-weight:700;border:1px solid var(--line,#e3e0ef);border-radius:20px;padding:3px 10px}
 .mgcustom{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin:16px 0 8px}
+/* V1.5 — Smart Drill card */
+.sdcard{border:1px solid #cdbff5;background:linear-gradient(180deg,#f6f2ff,var(--card,#fff))}
+.sdcard.muted{border-color:var(--line,#e3e0ef);background:var(--panel2,#f4f2fb)}
+.sd-h{font-weight:900;font-size:16px;display:flex;align-items:center;gap:8px}
+.sd-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:#6d28d9;background:#ece5ff;border-radius:20px;padding:2px 8px}
+.sd-sub{font-size:13px;color:var(--dim);margin-top:6px}
+.sd-line{font-size:13px;color:var(--text);margin-top:6px;font-weight:600}
+.sd-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sd-chip{font-size:11.5px;font-weight:800;border:1px solid var(--line,#e3e0ef);border-radius:20px;padding:3px 10px}
+.sd-why{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.5}
+/* V1.5 — confidence capture */
+.qbconf{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line,#e3e0ef)}
+.qbconf>span{font-size:12.5px;color:var(--dim);font-weight:700}
+.qbconf-b{display:flex;gap:6px}
+.qbconf-b button{font-size:18px;line-height:1;background:var(--panel2,#f4f2fb);border:1px solid var(--line,#e3e0ef);border-radius:10px;padding:6px 9px;cursor:pointer;transition:transform .08s}
+.qbconf-b button:hover{transform:translateY(-2px);border-color:#8b5cf6}
+/* V1.5 — why this? */
+.qbwhy{margin-bottom:10px}
+.qbwhy>summary{font-size:12px;color:var(--brand,#5b3df5);cursor:pointer;font-weight:700;list-style:none}
+.qbwhy>summary::-webkit-details-marker{display:none}
+.qbwhy>div{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.5;background:var(--panel2,#f4f2fb);border-radius:10px;padding:9px 11px}
+.qbwhy ul{margin:6px 0 0;padding-left:18px}
+/* V1.5 — what should I work on */
+.sdnext{border:1px solid #cdbff5}
+.sdnext-sub{font-size:12px;color:var(--dim);margin:2px 0 10px}
+.sdnext-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line,#eee)}
+.sdnext-row:first-of-type{border-top:0}
+.sdnext-l{display:flex;align-items:center;gap:8px;min-width:0}
+.sdnext-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.sdnext-t{font-weight:700;font-size:13.5px}
+.sdnext-mis{font-size:10px;font-weight:800;color:#e2574b;background:#fdecea;border-radius:20px;padding:1px 7px}
+.sdnext-r{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.sdnext-ag{display:inline-flex;gap:2px;align-items:center;font-size:11px;color:var(--dimmer)}
+.sdnext-ag .lk{background:none;border:0;cursor:pointer;font-size:14px;line-height:1;padding:1px 3px;border-radius:6px;opacity:.55;transition:opacity .1s,transform .08s}
+.sdnext-ag .lk:hover{opacity:1;transform:translateY(-1px)}
+.pilotgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+@media(max-width:640px){.pilotgrid{grid-template-columns:repeat(2,1fr)}}
+.pilotstat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.pilotstat b{display:block;font-size:26px;font-weight:900;line-height:1.05}
+.pilotstat span{font-size:12px;color:var(--dimmer);font-weight:600}
+.pilottbl{width:100%;border-collapse:collapse;margin:4px 0 8px;font-size:14px}
+.pilottbl th{text-align:left;color:var(--dimmer);font-size:12px;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--line)}
+.pilottbl td{padding:7px 8px;border-bottom:1px solid var(--line)}
+.pilotnote{border-radius:12px;padding:11px 14px;font-size:13.5px;font-weight:600;margin:10px 0;background:var(--panel2);border:1px solid var(--line)}
+.pilotnote.good{background:#eafaf3;border-color:#0d948855;color:#0a6b52}
+.pilotnote.warn{background:#fdf4e7;border-color:#e08a3c66;color:#9a5a12}
+.btn.sm{font-size:12px;padding:5px 12px;min-width:0}
+/* V1.5 — calibration + mastery */
+.sdcal-msg{font-size:13px;line-height:1.5;margin-bottom:10px}
+.sdcal-msg>div{color:var(--dim);font-size:12.5px;margin-top:3px}
+.sdcal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:560px){.sdcal-grid{grid-template-columns:repeat(2,1fr)}}
+.sdcal-v{font-size:20px;font-weight:900}
+.sdcal-k{font-size:11px;color:var(--dim);line-height:1.3}
+.sdms-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line,#eee);font-size:13.5px}
+.sdms-row:first-of-type{border-top:0}
+.qbbarwrap{display:flex;align-items:center;gap:10px}
+.qbbarwrap .qbbar{flex:1;min-width:0}
+.qbbar-drill{flex:0 0 auto;align-self:center}
+.qbretest{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line,#e3e0ef)}
+.qbretest>span{font-size:11.5px;color:var(--dim)}
 .mgb-h{font-weight:700;font-size:12.5px;margin:10px 0 4px}
 .mgb-h:first-of-type{margin-top:4px}
 /* Q-bank performance dashboard */
