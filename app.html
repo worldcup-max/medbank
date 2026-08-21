@@ -503,6 +503,7 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .h2streak.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
 .h2streak b{font-weight:900}
 .h2fl{font-size:16px}
+.h2frz{margin-left:auto;font-weight:900;font-size:12.5px;color:#3a6df0;background:#e8f0ff;border-radius:20px;padding:3px 10px;white-space:nowrap}
 .h2weak{display:flex;align-items:center;gap:9px;background:#fff0ec;border:1px solid #f6c3b4;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#a83f28;cursor:pointer}
 .h2wtx{flex:1;min-width:0}
 .h2weak b{font-weight:900}
@@ -535,6 +536,19 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .celeb-next:active{transform:scale(.99)}
 .celeb-more{width:100%;background:transparent;color:#e9e2ff;border:0;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:2px}
 .celeb-note{font-size:12px;color:#cbb8f7;margin:-6px 0 12px}
+/* ---- custom session picker ---- */
+.csov{position:fixed;inset:0;z-index:100020;background:rgba(28,20,45,.5);display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:640px){.csov{align-items:center;padding:20px}}
+.cscard{background:var(--panel);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px 22px;animation:csup .22s ease}
+@media(min-width:640px){.cscard{border-radius:18px}}
+@keyframes csup{0%{transform:translateY(16px);opacity:.6}100%{transform:translateY(0);opacity:1}}
+.cshd{display:flex;align-items:center;justify-content:space-between;font-size:17px;margin-bottom:6px}
+.csx{background:var(--panel2);border:0;border-radius:50%;width:30px;height:30px;font-size:14px;color:var(--dim);cursor:pointer}
+.cslab{font-size:12px;font-weight:800;color:var(--dimmer);letter-spacing:.4px;margin:14px 0 8px;text-transform:uppercase}
+.csrow{display:flex;flex-wrap:wrap;gap:8px}
+.csrow .btn{font-size:13px;padding:8px 14px}
+.cs-on{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+.csgo{width:100%;justify-content:center;margin-top:18px}
 
 /* ---- session modes bar ---- */
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
@@ -1088,7 +1102,7 @@ const lecById  = id => DB.lecturers.find(l=>l.id===id);
    so nothing is lost between sessions. Works from file:// too.
    ================================================================== */
 const SKEY='medbank_v1';
-const APP_VERSION='2026.08.21d';   // bump this each release
+const APP_VERSION='2026.08.21e';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
 const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
@@ -1103,6 +1117,9 @@ let DATA = (()=>{
   d.log      = d.log      || {};  // 'YYYY-MM-DD' -> {cards,correct}
   d.study    = d.study    || {};  // 'YYYY-MM-DD' -> seconds studied (synced with the account)
   d.streak   = d.streak   || {current:0,best:0,last:'',lastN:null,frozen:[]};
+  d.streak.frozen = d.streak.frozen||[];
+  if(d.streak.freezes==null) d.streak.freezes = Math.min(2, Math.floor((d.streak.current||0)/7));   // earned freezes in the bank (cap 2)
+  if(d.streak.lastEarn==null) d.streak.lastEarn = Math.floor((d.streak.current||0)/7)*7;             // last streak-milestone we granted a freeze for
   d.streak.frozen = d.streak.frozen || [];
   d.starred  = d.starred  || {};  // cardId -> 1  (hard cards)
   d.done     = d.done     || {};  // topicId -> 'YYYY-MM-DD' completed
@@ -1169,15 +1186,23 @@ function markActive(){
   bumpStreak(d);
   try{ if(typeof swPing==='function') swPing('studied',{date:d}); }catch(e){}
 }
-function freezeAvail(tN){ const fz=DATA.streak.frozen||[]; return !fz.some(n=>tN-n<7); }
+function freezeAvail(){ return (DATA.streak.freezes||0)>0; }        // earned freezes in the bank
+function freezeCount(){ return DATA.streak.freezes||0; }
+function grantFreeze(s){                                             // +1 freeze every 7 consecutive study days, capped at 2
+  if(s.current>0 && s.current%7===0 && s.lastEarn!==s.current){ s.freezes=Math.min(2,(s.freezes||0)+1); s.lastEarn=s.current; }
+}
 function bumpStreak(d){
   const s=DATA.streak, tN=dayNum(new Date(d+'T00:00'));
   const lN = (s.lastN!=null) ? s.lastN : (s.last?dayNum(new Date(s.last+'T00:00')):null);
   if(lN===tN){ s.last=d; s.lastN=tN; return; }
   const gap = (lN==null) ? Infinity : tN-lN;
-  if(gap===1)                          s.current=(s.current||0)+1;
-  else if(gap===2 && freezeAvail(tN)){ (s.frozen=s.frozen||[]).push(tN-1); s.current=(s.current||0)+1; }
-  else                                 s.current=1;
+  if(gap===1)                              s.current=(s.current||0)+1;
+  else if(gap>=2 && (s.current||0)>0 && (s.freezes||0)>=(gap-1)){     // freezes can bridge the missed day(s)
+    for(let k=1;k<gap;k++) s.frozen.push(tN-k);
+    s.freezes-=(gap-1); s.freezeUsedOn=d; s.current=(s.current||0)+1;
+  }
+  else { s.current=1; s.lastEarn=0; }                                 // streak broke → reset (keep any banked freezes)
+  grantFreeze(s);
   s.last=d; s.lastN=tN; s.best=Math.max(s.best||0,s.current); persist();
 }
 function curStreak(){
@@ -1185,13 +1210,22 @@ function curStreak(){
   const lN=(s.lastN!=null)?s.lastN:(s.last?dayNum(new Date(s.last+'T00:00')):-1);
   const gap=tN-lN;
   if(gap<=1) return s.current||0;
-  if(gap===2 && freezeAvail(tN)) return s.current||0;   // one grace day still coverable
+  if(gap>=2 && (s.freezes||0)>=(gap-1)) return s.current||0;   // banked freezes can still bridge the gap
   return 0;
 }
-function freezeState(){                                  // for display
-  const tN=dayNum();
-  return freezeAvail(tN) ? 'ready' : 'used';
+/* run on app open: auto-use a freeze at "midnight" (i.e. next open) to bridge a missed day, no user action needed */
+function streakMaintain(){
+  const s=DATA.streak, tN=dayNum();
+  const lN=(s.lastN!=null)?s.lastN:(s.last?dayNum(new Date(s.last+'T00:00')):null);
+  if(lN==null) return;
+  const gap=tN-lN, missed=gap-1;
+  if(missed>=1 && (s.current||0)>0 && (s.freezes||0)>=missed){
+    for(let k=1;k<gap;k++) s.frozen.push(lN+k);
+    s.freezes-=missed; s.freezeUsedOn=dstr(); s.lastN=tN-1;   // bridged up to yesterday; today they continue normally
+    persist();
+  }
 }
+function freezeState(){ return freezeAvail() ? 'ready' : 'used'; }   // for display
 function todayLog(){ return DATA.log[dstr()]||{cards:0,correct:0}; }
 function logRate(ok){
   const d=dstr(), L=DATA.log[d]||{cards:0,correct:0};
@@ -1238,6 +1272,25 @@ function recordAnswerMs(id,type,ms){ ms=Math.max(1500,Math.min(120000,ms|0));
   a.push(ms); if(a.length>40) a.shift();
   const s=DATA.cards[id]; if(s) s.ms = s.ms ? Math.round(s.ms*0.7+ms*0.3) : ms;
   try{ const L=DATA.log[dstr()]=DATA.log[dstr()]||{cards:0,correct:0}; L.ms=(L.ms||0)+ms; }catch(e){}   // minutes studied today → the honest ring
+}
+/* ===== Adaptive new-card cap — new cards are a privilege earned by keeping reviews under control ===== */
+function avgReviewSec(){ return Math.max(6, Math.round(typeMedian('review')/1000)); }        // measured seconds per review (floor 6s)
+function dueReviewCount(){ const today=dayNum(); let n=0;
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s && s.box>=0 && s.due<=today) n++; })); return n; }
+function reviewLoadRatio(){ const budget=DATA.daily.budget||15; const capacity=Math.max(1,(budget*60)/avgReviewSec()); return dueReviewCount()/capacity; }
+function examSoon(days){ return DB.subjects.some(sb=>{ const d=examDays(sb.id); return d!=null && d>=0 && d<=(days||14); }); }
+function effectiveNewCap(){ const d=DATA.daily; const manual=(d.newPerDay!=null)?d.newPerDay:20; const adaptive=(d.newCap!=null)?d.newCap:12; return Math.max(0,Math.min(manual, adaptive)); }
+/* run once per day: drift the adaptive cap by the review-load ratio (small steps, floor/ceiling 0–20) */
+function adaptNewCap(){
+  try{ const d=DATA.daily, today=dstr();
+    if(d.newCapDay===today) return;
+    let cap=(d.newCap==null)?12:d.newCap;
+    const r=reviewLoadRatio();
+    if(r<0.5) cap+=2; else if(r<=0.9){} else if(r<=1.2) cap-=3; else cap=0;   // cruising → more; underwater → none
+    cap=Math.max(0,Math.min(20,cap));
+    if(examSoon(14)) cap=Math.min(cap,5);                                     // exam near → bias toward reviews
+    d.newCap=cap; d.newCapDay=today; persist();
+  }catch(e){}
 }
 const startedTopics = () => allTopics.filter(t=>t.ready && status(t.id)!=='notstarted');
 
@@ -1561,7 +1614,8 @@ function planNew(){
         out.push({t:q.t,c,id:cid(q.t.id,'recall',c),deck:'recall',isNew:true}); added++; any=true; } }
       if(!any) break; }
   });
-  return out;
+  const remain=Math.max(0, effectiveNewCap()-newDoneToday());   // adaptive daily new-card cap (upper bound), minus what's already done today
+  return out.slice(0, remain);
 }
 function planCount(){ return (DATA.plan||[]).filter(id=>{const t=topById(id);return t&&t.ready;}).length; }
 function buildQueue(){
@@ -1927,6 +1981,7 @@ function pageHome(){
   const tl=todayLog(), st=curStreak(), due=dueCount();
   const q=buildQueue(), dueBy={}; q.due.forEach(x=>{ dueBy[x.t.id]=(dueBy[x.t.id]||0)+1; });
   const met=streakMet(), ws=weekStats();
+  const lecArg=(ws.weak||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");   // safe for the onclick string
   // the session is built from a TIME BUDGET (Session Engine): budget → cards out, timed by rolling median
   const budget=DATA.daily.budget||15;
   const sess=buildRecallSession(), sessItems=sess.capped, sessN=sessItems.length;
@@ -1953,13 +2008,14 @@ function pageHome(){
     </div>
     <div class="h2streak ${met?'ok':''}" onclick="go('today')">
       <span class="h2fl">🔥</span><span><b>${st}-day streak</b> ${met?'— safe today, nice work.':'— study today to keep it alive!'}</span>
+      ${freezeCount()>0?`<span class="h2frz" title="${freezeCount()} streak freeze${freezeCount()===1?'':'s'} — auto-used if you miss a day">🛡 ${freezeCount()}</span>`:''}
     </div>
-    ${(ws.weak&&ws.weakN>0)?`<div class="h2weak" onclick="go('today')">
+    ${(ws.weak&&ws.weakN>0)?`<div class="h2weak" onclick="reviewWeak('${lecArg}')">
       <span class="h2tg">🎯</span><span class="h2wtx">Weakest area: <b>${esc(ws.weak)}</b> — ${ws.weakN} card${ws.weakN===1?'':'s'} in relearning</span><span class="h2fix">Fix these →</span>
     </div>`:''}
     <div class="h2btns">
-      <button class="h2sec" onclick="go('today')">Review weak cards</button>
-      <button class="h2sec" onclick="go('today')">Custom session</button>
+      <button class="h2sec" onclick="reviewWeak()">Review weak cards</button>
+      <button class="h2sec" onclick="customSessionOpen()">Custom session</button>
     </div>
     <div class="h2foot">
       <span>Daily goal · ${minToday} / ${budget} min</span>
@@ -3540,6 +3596,71 @@ function startRecallSession(limit){
   S={mode:'daily',key:'recall',label:'Active Recall',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length,over:b.over,confN:b.conf.length,plan:b.counts}};
 }
+/* ===== one engine, many filters — greedy time-budget over any card pool ===== */
+function greedyBudget(ordered, budgetMin){
+  const budget=budgetMin||DATA.daily.budget||15;
+  let capped=ordered, over=0, estMs=0;
+  if(budget>0){ const budgetMs=budget*60000; let cut=ordered.length;
+    for(let k=0;k<ordered.length;k++){ const t=estCardMs(ordered[k].id,false);
+      if(estMs+t<=budgetMs || k===0){ estMs+=t; } else { cut=k; break; } }
+    capped=ordered.slice(0,cut); over=ordered.length-cut;
+  } else { estMs=ordered.reduce((a,x)=>a+estCardMs(x.id,false),0); }
+  return {capped, over, estMs, budget};
+}
+/* build a time-budgeted session from a card predicate; returns the item count (0 = empty filter) */
+function startFilteredSession(pred, label, key, budgetMin){
+  const pool=collectRecall(pred);
+  pool.sort((a,b)=>{ const sa=DATA.cards[a.id]||{}, sb=DATA.cards[b.id]||{};
+    return ((sb.lapses||0)-(sa.lapses||0)) || ((sa.due||0)-(sb.due||0)); });   // most-failed, then most-overdue
+  const g=greedyBudget(pool, budgetMin);
+  const items=g.capped.map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall'}));
+  if(!items.length) return 0;
+  S={mode:'daily',key:key||'filtered',label:label||'',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length,over:g.over}};
+  return items.length;
+}
+const WEAK_PRED=(scope)=>((st,t)=>!!st && (st.box<0 || (st.lapses||0)>=2) && (!scope||t.lecturer===scope));
+/* Home CTA: "Review weak cards" / "Fix these" — same engine, weak filter (± a lecturer scope). Never dead-ends. */
+function reviewWeak(lecturer){
+  const n=startFilteredSession(WEAK_PRED(lecturer||null), lecturer?('Weak · '+lecturer):'Weak cards', 'weak');
+  if(n>0){ go('review'); return; }
+  mbToast(lecturer?('No weak cards for '+lecturer+' — nicely done.'):'No weak cards right now — nicely done.');
+  if(buildRecallSession().capped.length){ startRecallSession(0); go('review'); } else go('home');   // offer the normal session
+}
+/* Home CTA: "Custom session" — a tiny scope + length picker feeding the same engine */
+var CS={sub:'',min:15};
+function customSessionOpen(){
+  CS={sub:'',min:(DATA.daily.budget||15)};
+  const subs=DB.subjects.map(sb=>`<button class="btn cs-sub" data-s="${sb.id}" onclick="csPick('sub',this)">${esc(sb.short)}</button>`).join('');
+  const lens=[5,15,30,45].map(m=>`<button class="btn cs-len${m===CS.min?' cs-on':''}" data-m="${m}" onclick="csPick('len',this)">${m} min</button>`).join('');
+  const ov=document.createElement('div'); ov.className='csov'; ov.id='csov'; ov.onclick=csClose;
+  ov.innerHTML=`<div class="cscard" onclick="event.stopPropagation()">
+    <div class="cshd"><b>Custom session</b><button class="csx" onclick="csClose()" aria-label="Close">✕</button></div>
+    <div class="cslab">Scope</div>
+    <div class="csrow"><button class="btn cs-sub cs-on" data-s="" onclick="csPick('sub',this)">All subjects</button>${subs}</div>
+    <div class="cslab">Length</div>
+    <div class="csrow">${lens}</div>
+    <button class="btn primary csgo" onclick="csStart()">▶ Start session</button>
+  </div>`;
+  document.body.appendChild(ov);
+}
+function csPick(kind,el){
+  if(kind==='sub'){ CS.sub=el.getAttribute('data-s')||''; document.querySelectorAll('#csov .cs-sub').forEach(b=>b.classList.remove('cs-on')); }
+  else { CS.min=parseInt(el.getAttribute('data-m'))||15; document.querySelectorAll('#csov .cs-len').forEach(b=>b.classList.remove('cs-on')); }
+  el.classList.add('cs-on');
+}
+function csClose(){ const o=document.getElementById('csov'); if(o)o.remove(); }
+function csStart(){
+  const sub=CS.sub, min=CS.min; csClose();
+  let pool=collectRecall((st,t)=>!!st && st.due<=dayNum() && (!sub||t.subject.id===sub));   // due cards in scope
+  if(!pool.length) pool=collectRecall((st,t)=>!!st && (!sub||t.subject.id===sub));           // else any studied card in scope
+  const g=greedyBudget(orderItems(pool), min);
+  const items=g.capped.map(x=>({t:x.t,c:x.c,id:x.id,deck:'recall'}));
+  if(!items.length){ mbToast('Nothing to study in that scope yet.'); return; }
+  S={mode:'daily',key:'custom',label:'Custom',items,order:items.map((_,k)=>k),i:0,show:false,
+     session:{done:0,correct:0,total:items.length,over:g.over}};
+  go('review');
+}
 function nextNewTopic(){
   const rank=subjectExamRank();
   const cands=allTopics.filter(t=>t.ready && status(t.id)==='notstarted');
@@ -3600,6 +3721,10 @@ function habitNudge(){
   const exs=DB.subjects.map(sb=>({sb,d:examDays(sb.id)})).filter(x=>x.d!=null&&x.d>=0).sort((a,b)=>a.d-b.d);
   const ex=exs[0], url='./app.html#/today';
   const pick=a=>a[Math.floor(Math.random()*a.length)];
+  // Comeback — a freeze just bridged a missed day (morning-after "welcome back")
+  if(DATA.streak && DATA.streak.freezeUsedOn===dstr()){
+    return {title:`Streak freeze used — your ${st} days are safe`, body:`Welcome back. Keep it rolling — today's ${sMin}-minute session is ready.`, url, kind:'pull'};
+  }
   // B — streak at risk: evening, streak alive, not yet met today. Always offer the off-ramp when a freeze is ready.
   if(st>=1 && !met && hr>=18){
     return frz==='ready'
@@ -3832,7 +3957,7 @@ function sessionSummary(backLabel,backRoute){
   const budget=DATA.daily.budget||15, minToday=Math.round((todayLog().ms||0)/60000), ringPct=Math.min(100,Math.round(minToday/budget*100)), ringClosed=ringPct>=100;
   const sub=CELEB_PRAISE[done%CELEB_PRAISE.length];
   let mile='';
-  if(st>0 && st%7===0)      mile=`🔥 ${st}-day streak — you’re building something real.`;
+  if(st>0 && st%7===0)      mile=`🔥 ${st}-day streak — you just earned a streak freeze 🛡`;
   else if(mastered>0)       mile=`🏆 ${mastered} card${mastered===1?'':'s'} mastered — ${mastered===1?'one':'that many'} less thing${mastered===1?'':'s'} to fear on exam day.`;
   else if(acc>=100 && done>=10) mile=`🎯 ${done} for ${done} — flawless round.`;
   return `<div class="celeb">
@@ -5571,7 +5696,13 @@ if('serviceWorker' in navigator){
 
 /* debug hook (harmless): lets tooling inspect the live study state */
 window.__mb={get S(){return S;},set S(v){S=v;},get DATA(){return DATA;}};
+try{ streakMaintain(); }catch(e){}   // Session Engine: auto-use a freeze to bridge a missed day, on open
+try{ adaptNewCap(); }catch(e){}      // Session Engine: adjust the daily new-card cap by review load, once/day
 render();
+try{ if(DATA.streak && DATA.streak.freezeUsedOn===dstr() && DATA.streak.freezeAck!==dstr()){
+  DATA.streak.freezeAck=dstr(); persist();
+  setTimeout(function(){ try{ mbToast('🛡 Streak freeze used — your '+curStreak()+' days are safe. Welcome back!'); }catch(e){} }, 900);
+} }catch(e){}
 try{ if(typeof initAutoBackup==='function') initAutoBackup(); }catch(e){}
 try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(); }catch(e){}
 </script>
