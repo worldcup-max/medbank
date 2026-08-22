@@ -4335,6 +4335,7 @@ function examPool(scope){                        // MCQ-capable recall cards for
 }
 function startExam(scope,count){
   const pool=shuf(examPool(scope)); const items=pool.slice(0,Math.min(count,pool.length));
+  if(!items.length){ alert('No exam questions yet — open a topic → 🧠 Q-bank to build one first, then come back.'); return; }   // BUG: was a silent no-op on an empty account
   S={mode:'exam',key:'exam',items,order:items.map((_,k)=>k),i:0,scope,
      answers:new Array(items.length).fill(null), started:Date.now(), finished:0,
      session:{total:items.length}};

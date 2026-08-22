@@ -28,7 +28,7 @@
   var SERVER_TPL = {};
   function catalogFor(level){
     var s = SERVER_TPL[String(level)];
-    if (s && s.length) return s.slice();
+    if (Array.isArray(s) && s.length) return s.slice();
     return (DEFAULT_COURSES[String(level)] || []).slice();
   }
 
@@ -84,9 +84,10 @@
   /* ---- entry points ---- */
   async function open(){
     if(!configured()){ toast("Sync isn't set up yet."); return; }
-    var sb=client(); if(!sb) return;
+    var sb=client(); if(!sb){ toast("Couldn't reach the sync service. Check your connection and try again."); return; }
     var ses=await sb.auth.getSession();
     if(ses.data.session) return showAccount(sb);
+    loadServerTemplates(sb);
     renderWelcome(sb);
   }
   async function openWelcome(){
@@ -123,7 +124,7 @@
     [100,200,300,400,500,600].forEach(function(lv){
       var on=CHOSEN.level===lv;
       var d=el("div","padding:16px 4px;border:1.5px solid "+(on?C.violet:C.line)+";border-radius:12px;text-align:center;font-weight:800;font-size:17px;cursor:pointer;color:"+C.ink+";background:"+(on?C.tint:"#fff")+";transition:.12s",lv+"");
-      d.onclick=function(){ CHOSEN.level=lv; [].forEach.call(grid.children,function(c){c.style.borderColor=C.line;c.style.background="#fff";}); d.style.borderColor=C.violet; d.style.background=C.tint; nextBtn.style.opacity="1"; nextBtn.disabled=false; };
+      d.onclick=function(){ CHOSEN.level=lv; [].forEach.call(grid.children,function(c){c.style.borderColor=C.line;c.style.background="#fff";}); d.style.borderColor=C.violet; d.style.background=C.tint; nextBtn.style.opacity="1"; nextBtn.disabled=false; try{ e.style.display="none"; }catch(_){} };
       grid.appendChild(d);
     });
     s.appendChild(grid);
@@ -151,7 +152,7 @@
         row.innerHTML='<input type="checkbox" '+(c.on?"checked":"")+' style="width:18px;height:18px;accent-color:'+C.violet+'"> '+
           '<span style="flex:1;font-weight:600;color:'+C.ink+'">'+esc(c.name)+'</span>'+
           (c.custom?'<span data-x="1" style="color:'+C.dim+';font-size:18px;padding:0 4px;cursor:pointer">×</span>':'');
-        row.querySelector("input").onchange=function(ev){ c.on=ev.target.checked; row.style.background=c.on?C.tint:"#fff"; row.style.borderColor=c.on?C.violet:C.line; };
+        row.querySelector("input").onchange=function(ev){ c.on=ev.target.checked; row.style.background=c.on?C.tint:"#fff"; row.style.borderColor=c.on?C.violet:C.line; if(c.on){ try{ e.style.display="none"; }catch(_){} } };
         var x=row.querySelector('[data-x]'); if(x) x.onclick=function(ev){ ev.preventDefault(); CHOSEN.courses.splice(idx,1); drawList(); };
         listBox.appendChild(row);
       });
@@ -265,7 +266,7 @@
     var { data:profs } = await sb.from("level_profiles").select("id").limit(1);
     if(profs && profs.length){ return startSync(sb); }
     var pend=readPending();
-    if(pend && pend.level){ CHOSEN=pend; return saveOnboarding(sb, pend); }
+    if(pend && pend.level && Array.isArray(pend.courses) && pend.courses.some(function(c){return c && c.on;})){ CHOSEN=pend; return saveOnboarding(sb, pend); }
     renderLevel(sb);   // signed in but no profile yet → set up
   }
 
@@ -273,6 +274,7 @@
     var s=card({ title:"Setting up your space…", sub:"One moment.", dismiss:false });
     try{
       var u=(await sb.auth.getUser()).data.user;
+      if(!u || !u.id) throw new Error("Your session expired. Please sign in again to finish setting up.");
       var lp=await sb.from("level_profiles").insert({ account_id:u.id, level:chosen.level }).select("id").single();
       if(lp.error) throw lp.error;
       await sb.from("accounts").update({ active_level_profile_id:lp.data.id, start_level:chosen.level }).eq("id",u.id);
