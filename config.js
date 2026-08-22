@@ -43,5 +43,5 @@ window.MEDBANK_CONFIG = {
   // Independent switches so the two V1.6 surfaces can be trialled separately.
   //   GAP_LOOP             = at-miss Knowledge-Gap → Learn → Practice → Retest loop (SPEC-GAP-LEARN-LOOP.md)
   //   POST_SESSION_FIX_QUEUE = post-session "3 things to fix" prioritisation layer that routes to interventions
-  FEATURES: { GAP_LOOP: false, POST_SESSION_FIX_QUEUE: false }
+  FEATURES: { GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true }
 };
