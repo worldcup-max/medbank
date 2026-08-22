@@ -10,7 +10,7 @@ window.MEDBANK_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_SExbh1aVqsvFbZwk4P361A_thit5lFF",
 
   // Require sign-in before the app can be used (identified pilot). Set false to revert to study-first.
-  REQUIRE_LOGIN: true,
+  REQUIRE_LOGIN: false,
 
   // From Paystack → Settings → API Keys (use the PUBLIC key: pk_...)
   PAYSTACK_PUBLIC_KEY: "pk_test_XXXXXXXXXXXXXXXXXXXX",

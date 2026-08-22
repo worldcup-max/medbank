@@ -158,6 +158,12 @@
     try{ if(typeof render==="function") render(); }catch(e){}
   }
 
+  /* Does a synced state carry any real study progress? Used to refuse adopting an
+     empty cloud copy over real local data (the cause of "logged in and my data vanished"). */
+  function isEmptyState(s){ if(!s || typeof s!=="object") return true;
+    function n(o){ return (o && typeof o==="object") ? Object.keys(o).length : 0; }
+    return !n(s.cards) && !n(s.log) && !n(s.topics); }
+
   /* ---------- network ops ---------- */
   async function pull(){
     var r = await sb.from("profile_state").select("state,rev,updated_at").eq("level_profile_id", profileId).maybeSingle();
@@ -219,16 +225,24 @@
         setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:true, profileId:profileId });
         await pushNow();
       } else if(!m.dirty || (m.profileId && m.profileId !== profileId)){
-        // adopt cloud (local not ahead) — but NEVER blind-drop local-only explainer videos.
-        // A video generated while sync wasn't ready lives only in local DATA.viz / DATA.cardViz;
-        // union it onto the cloud copy so a reload can't erase it.
-        var adopt = mergeVizStores(remote.state || {}, DATA);
-        adopt = mergeQbankStore(adopt, DATA);              // also protect local-only Q-bank attempts
-        applyState(adopt);
-        var stillDirty = adopt.__vizAdded || adopt.__qbAdded;  // brought local-only records across → must push them up
-        delete adopt.__vizAdded; delete adopt.__qbAdded;
-        setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:!!stillDirty, profileId:profileId });
-        if(stillDirty){ try{ await pushNow(); }catch(_){}
+        var switching = !!(m.profileId && m.profileId !== profileId);   // genuine level-profile change
+        if(!switching && isEmptyState(remote.state) && !isEmptyState(DATA)){
+          // SAFETY: same profile, but the cloud is empty while this device has real progress.
+          // NEVER adopt an empty cloud over real local data — merge (keeps local) and push it up.
+          applyState(mergeState(DATA, remote.state||{}));
+          setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:true, profileId:profileId });
+          await pushNow();
+        } else {
+          // adopt cloud (it has content, or we're switching levels) — but NEVER blind-drop
+          // local-only explainer videos / Q-bank attempts; union them onto the cloud copy.
+          var adopt = mergeVizStores(remote.state || {}, DATA);
+          adopt = mergeQbankStore(adopt, DATA);
+          applyState(adopt);
+          var stillDirty = adopt.__vizAdded || adopt.__qbAdded;  // brought local-only records across → must push them up
+          delete adopt.__vizAdded; delete adopt.__qbAdded;
+          setMeta({ rev:remote.rev, pushedAt:Date.now(), dirty:!!stillDirty, profileId:profileId });
+          if(stillDirty){ try{ await pushNow(); }catch(_){}
+          }
         }
       } else {
         applyState(mergeState(DATA, remote.state||{}));    // true conflict → merge
