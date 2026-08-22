@@ -74,10 +74,11 @@ check("includes the misconception (Management)", q.some(x=>x.dg.type==="misconce
 check("includes the gap (Investigation)", q.some(x=>x.dg.type==="gap"));
 check("every item has a launch qh", q.every(x=>typeof x.qh==="string"));
 
-/* routing per diagnosis */
-check("gap → gap loop",           F.fixQAction({type:"gap"}).kind==="gap");
-check("misconception → drill",    F.fixQAction({type:"misconception"}).kind==="drill");
-check("fragile → drill",          F.fixQAction({type:"fragile"}).kind==="drill");
+/* routing per diagnosis (gap depends on whether loop material exists) */
+check("gap + material → gap loop",   F.fixQAction({type:"gap"}, true).kind==="gap");
+check("gap + NO material → drill",   F.fixQAction({type:"gap"}, false).kind==="drill");
+check("misconception → drill",       F.fixQAction({type:"misconception"}).kind==="drill");
+check("fragile → drill",             F.fixQAction({type:"fragile"}).kind==="drill");
 
 /* Scenario B — ranking is NOT just lowest accuracy:
    a high-evidence misconception at ~30% should outrank a thin gap at ~20%. */

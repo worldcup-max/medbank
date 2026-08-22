@@ -145,6 +145,14 @@ addAttempts([{ skill:"differential", tag:"DDx", n:5, ok:true, conf:1 }]); addPoo
 let qf = A.fixQueue("*"); A.setFIXQ(qf); A.fixQGo(0);
 check("fragile routes to a Smart Drill", !!LASTDRILL && A.getGAPLOOP()===null, LASTDRILL?("drill on "+LASTDRILL.key):"no drill");
 
+/* ============ SILENT-FAILURE GUARD: gap with NO loop material → must fall back to a drill ============ */
+reset();
+addAttempts([{ skill:"investigation", tag:"Ix", n:6, ok:false, conf:1 }]);   // gap, but NO sibling pool question added
+let qn = A.fixQueue("*"); A.setFIXQ(qn);
+check("gap with no material is offered as a drill, not the loop", qn.length && qn[0].canLoop===false);
+A.fixQGo(0);
+check("no-material gap click falls back to a drill (no silent fail)", !!LASTDRILL && A.getGAPLOOP()===null, LASTDRILL?("drill on "+LASTDRILL.key):"NOTHING HAPPENED");
+
 /* ============ FLAG INDEPENDENCE ============ */
 // queue ON, gap flag OFF → gap item must STILL launch the loop (fromQueue bypasses the at-miss flag)
 reset();

@@ -2881,12 +2881,17 @@ function fixQueue(scope){
   cands.sort(function(a,b){ return b.score-a.score; });
   var picked=[], usedCluster={};
   for(var i=0;i<cands.length && picked.length<3;i++){ var c=cands[i]; if(usedCluster[c.cluster]) continue; usedCluster[c.cluster]=1;
-    c.qh=fixQConceptQh(st,c.type,c.key); picked.push(c); }
+    c.qh=fixQConceptQh(st,c.type,c.key);
+    // only a gap concept that actually has a distinct sibling question can run the Learn→Practice→Retest loop;
+    // otherwise the item must route to a drill instead (never offer an action that silently can't launch).
+    c.canLoop = (c.dg.type==='gap') && !!c.qh && (typeof gapConceptPool==='function') && gapConceptPool(c.qh).length>0;
+    picked.push(c); }
   return picked;
 }
 /* the intervention each diagnosis routes to (misconception is interim → focused drill until intervention #3) */
-function fixQAction(dg){
-  if(dg.type==='gap')           return { verb:'Learn → Practice → Retest', kind:'gap' };
+function fixQAction(dg, canLoop){
+  if(dg.type==='gap')           return canLoop ? { verb:'Learn → Practice → Retest', kind:'gap' }
+                                               : { verb:'Practise this',            kind:'drill' };   // no material for a distinct loop → drill the concept
   if(dg.type==='misconception') return { verb:'Practise & confront',       kind:'drill' };
   return { verb:'Smart Drill', kind:'drill' };   // fragile → retrieval / reinforcement
 }
@@ -2895,7 +2900,7 @@ function fixQueueHtml(scope){
   var q=fixQueue(scope); _FIXQ=q; if(!q.length) return '';
   if(QB && !QB._fixqLogged){ QB._fixqLogged=1; smartLog({t:'fix_queue_shown', count:q.length,
     items:q.map(function(x){ return {dg:x.dg.type, score:x.score, sev:x.sev, conf:x.conf, recur:x.recur, seen:x.seen, acc:x.acc}; })}); }
-  var rows=q.map(function(it,i){ var a=fixQAction(it.dg);
+  var rows=q.map(function(it,i){ var a=fixQAction(it.dg, it.canLoop);
     return '<div class="fixq-item"><div class="fixq-n">'+(i+1)+'</div><div class="fixq-body">'
       +'<div class="fixq-t">'+esc(it.label)+' <span class="fixq-dg" style="color:'+it.dg.color+'">'+it.dg.icon+' '+esc(it.dg.label)+'</span></div>'
       +'<div class="fixq-why">'+esc(it.dg.tip)+'</div>'
@@ -2903,12 +2908,13 @@ function fixQueueHtml(scope){
   return '<div class="card fixq" style="cursor:default;margin-top:14px"><div class="fixq-h">🧭 '+q.length+' thing'+(q.length>1?'s':'')+' to fix from this session</div>'
     +'<div class="fixq-sub">Ranked by how much they matter — not just your lowest scores.</div>'+rows+'</div>';
 }
-function fixQGo(i){ var it=_FIXQ[i]; if(!it) return; var a=fixQAction(it.dg);
+function fixQGo(i){ var it=_FIXQ[i]; if(!it) return; var a=fixQAction(it.dg, it.canLoop);
   smartLog({t:'fix_queue_item_selected', concept:it.label, diagnosis:it.dg.type, rank:(i+1), score:it.score, sev:it.sev, conf:it.conf, recur:it.recur});
   smartLog({t:'intervention_started', source:'queue', concept:it.label, diagnosis:it.dg.type, action:a.kind});
   qbExit();   // leave the results screen, then launch the intervention
-  if(a.kind==='gap' && it.qh){ gapStart(it.qh, true); }
-  else { smartDrillDim(it.type, encodeURIComponent(it.key), '*'); }
+  var launched=false;
+  if(a.kind==='gap' && it.qh){ launched = gapStart(it.qh, true); }   // returns false if it couldn't build the loop
+  if(!launched){ smartDrillDim(it.type, encodeURIComponent(it.key), '*'); }   // guaranteed fallback — never a dead click
 }
 /* ===== Q-bank performance analytics — weakness mapping (all derived from the attempts log) ===== */
 function qbBand(){ return {seen:0,correct:0,ms:0}; }
@@ -3398,8 +3404,8 @@ function gapOfferHtml(qh){ return '<div class="gapoffer"><div class="gapoffer-h"
   +'<div class="gapoffer-b"><button class="btn primary sm" onclick="gapStart(\''+qh+'\')">Learn this</button>'
   +'<button class="btn sm ghost" onclick="gapDismiss()">Keep going</button></div></div>'; }
 function gapDismiss(){ /* opt-in: student simply stays in the drill */ }
-function gapStart(qh, fromQueue){ if(!gapOn() && !fromQueue) return; var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return;
-  var pool=gapConceptPool(qh); if(!pool.length) return;
+function gapStart(qh, fromQueue){ if(!gapOn() && !fromQueue) return false; var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return false;
+  var pool=gapConceptPool(qh); if(!pool.length) return false;   // caller must fall back — never silently no-op
   var seen=smartStats('*').seenQh;
   var ordered=qbShuffle(pool.filter(function(q){return !seen[q._qh];})).concat(qbShuffle(pool.filter(function(q){return seen[q._qh];})));
   var practiceQ=ordered[0]||null, retestQ=ordered[1]||ordered[0]||null;   // degrade gracefully if only one exists
@@ -3410,7 +3416,7 @@ function gapStart(qh, fromQueue){ if(!gapOn() && !fromQueue) return; var s=qbSto
   smartLog({t:'intervention_shown', itype:'gap', concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss')});
   smartLog({t:'intervention_step', itype:'gap', step:GAPLOOP.step, concept:concept});
   if(GAPLOOP.step==='practice'){ GAPLOOP.pStart=Date.now(); }
-  gapRender(); }
+  gapRender(); return true; }
 function gapClose(){ var o=document.getElementById('gapOverlay'); if(o&&o.parentNode) o.parentNode.removeChild(o); }
 function gapExit(){ if(GAPLOOP && GAPLOOP.step!=='result') smartLog({t:'intervention_abandoned', itype:'gap', step:GAPLOOP.step, concept:GAPLOOP.concept}); GAPLOOP=null; gapClose(); }
 function gapShowNote(){ try{ if(GAPLOOP&&GAPLOOP.mt&&GAPLOOP.mt.src&&window.MB_DOCK_SOURCE){ MB_DOCK_SOURCE(GAPLOOP.mt.src); } else if(window.MB_DOCK_OPEN){ MB_DOCK_OPEN('source'); } }catch(e){} }

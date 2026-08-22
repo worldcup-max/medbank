@@ -3910,3 +3910,365 @@ button), matching the STU-04 / LIB-06 / PRG-06 pattern this repo has now applied
 cache bump, and it repairs the only artifact the student takes out of the app. Ship CRAM-01 + SCA-01 + SCA-02 together
 (all three are edits to the same `cards.map` at `:5761-5766`). CRAM-03 is blocked on one 30-second device check.
 CRAM-04/05/06 are one-liners that can ride along. Nothing in this flow touches the frozen engine.
+
+## Flow 19+ item 21 — `mistakes` route: pool + drill-missed (`missItems` `:1605-1612`, `pageMistakes` `:5743`, `startMistakes`/`runMistakes` `:4607-4612`, `qbStartMistakes` `:3037`) — 2026-08-22
+**LOG-ONLY — no code changed.** Part A: all four harnesses exited 0 — `qa/engine-scenarios.mjs` (6/6),
+`qa/gap-loop.mjs` (7/7), `qa/fix-queue.mjs` (11/11), `qa/flow-e2e.mjs` (18/18). Nothing logged for Part A.
+Round-2 flow 20 (SIDE-01..10) already covered the *pool semantics* (`isFlagged`, never-cleared-on-correct,
+`lapses` never decaying). This pass took what it did not: the **route** — `pageMistakes`'s rows and buttons, the
+`startMistakes` → `pageReview` runner, the summary screen it lands on, and the separate Q-bank `qbStartMistakes`
+path named in the item title as "drill-missed".
+
+### MIS-01 — MEDIUM/HIGH — a mistakes drill is chrome-identical to the daily session, and its summary reports the *daily* pool
+`startMistakes` (`:4607`) builds `S={mode:'daily',key:'mistakes',label:'Recent mistakes',…}` and `runMistakes` (`:4612`)
+sends it to `#/review`. `pageReview` (`:4690`) renders the **daily** chrome unconditionally: the new/review/hard mix bar,
+"~N min left", and no mode pill. **`S.label` is never read anywhere in the app** — `grep -n "S\.label" app.html` returns
+nothing; the only `.label` reads are `x.label` inside `startBucket`'s arrows (`:4794`). Compare `pageHard` (`:4716`),
+which does print a `★ Hard cards` pill. So a student who taps "This week · 23 cards" lands on a screen that says
+nothing about mistakes and is pixel-identical to today's review.
+It gets worse at the end. `sessionSummary` (`:4743`) is called as `sessionSummary('Back to Active Recall','today')` and
+computes `const remain=dueCount(), cleared=(remain===0)`. `dueCount()` is the **global daily due count** — a different
+pool from the one just drilled. Consequences, all on the mistakes route:
+- finishing a mistakes drill with an empty daily queue prints the headline **"Active Recall complete!"** to a student
+  who never opened active recall;
+- the "Keep going · N more cards" button (`:4767`) calls `startRecallSession()` and **silently switches them into the
+  daily session** under the same `#/review` URL — the third instance of "a button on screen A starts session B";
+- `remain` inherits SL-02's missing `isFlagged` guard, so N can count cards the app promised to hide;
+- the primary CTA goes to `#/today`, **not back to `#/mistakes`**, so the student never sees whether the mistakes pool
+  shrank. It did not (SIDE-03), which is precisely why not showing them is convenient-looking and wrong.
+**Why it matters:** the page's whole promise is a closable loop — "Clear them while they're fresh" (`:5745`). The runner
+never tells you you're in the loop and the summary never tells you the loop closed. Together with SIDE-03 (nothing is
+ever removed from `missLog` on a correct answer) the route is a loop that neither completes nor reports.
+**PROPOSED:** (a) render `S.label` in `pageReview` as a pill when `S.key!=='daily'` — one span, and it fixes `leeches`,
+`custom`, `weak` and `drill:<id>` at the same time; (b) in `sessionSummary`, take the "cleared / remain" numbers from
+`S.key`'s own pool rather than `dueCount()` — for a keyed side-session, `remain` should be that pool's residual and the
+back-route should be `S.key`; (c) at minimum, gate the "Active Recall complete!" headline on `S.key==='daily'`.
+
+### MIS-02 — MEDIUM — reloading during a mistakes drill silently replaces it with a *different* session at the same URL
+`pageReview`'s rebuild guard is `if(!S || S.mode!=='daily') startRecallSession(0)` (`:4691`) — it checks `S.mode`, never
+`S.key`, and `startMistakes` deliberately sets `mode:'daily'`. `S` is in-memory only. So on any reload, tab restore or
+cold open of `#/review` mid-drill, `S` is null, the guard fires, and the student gets **today's daily session** —
+same URL, same chrome, entirely different cards — with no notice and no resume. Every other side-session route
+self-heals because it owns a hash (`#/hard` → `startHard`, `#/leeches` → `pageLeeches`, `#/nudge` → `startNudgeSession`);
+`mistakes` is the one that hands its session to a route it does not own.
+This is the same identity-vs-completion confusion as SIDE-05 and NTF-02, but inverted: there the guard was too strict
+and blocked a needed rebuild; here it is too loose and permits a wrong one.
+**PROPOSED:** give the drill its own route (`#/mistakes/drill/<days>`) with a `S.key!=='mistakes'` rebuild guard, so a
+reload rebuilds the *mistakes* session. Cheap interim: persist `{key,days}` to `DATA.flags._lastSide` on start and have
+`pageReview` rebuild from it. Note this also removes the MIS-01(b) ambiguity, since the route then knows its own pool.
+
+### MIS-03 — MEDIUM — the mistakes list shows the *uncorrected* text of every card the student has fixed
+`pageMistakes` builds each row from `esc(it.c.q)` (`:5751`) — the raw content-tree card. It is one of the few
+card-rendering surfaces that never calls `effCard(it.id, it.c)`; the five that do are `:1358`, `:1572`, `:4902`,
+`:4984`, `:5096`. `pageLeeches` (`:5736`) has the identical hole.
+**Why it matters:** the student most likely to have used ✎ Edit / "fix this card" is exactly the student staring at a
+list of cards they got wrong. They correct a card, then the Mistakes page keeps showing them the old wording — and
+tapping through to the drill shows the corrected one (the runner *does* call `effCard`), so the app contradicts itself
+one tap apart. Same family as CRAM-01 and LIB-02; this is the third instance and the cheapest.
+**PROPOSED:** `const c=effCard(it.id,it.c)` at the top of both row maps, then `esc(c.q)`. Two lines, no state change.
+
+### MIS-04 — MEDIUM — `DATA.missLog` is append-only forever: nothing prunes it and sync resurrects every delete
+Three separate mechanisms, and they compound:
+1. `logMiss(id)` (`:1605`) writes `DATA.missLog[id]=dstr()`. The **only** delete site in the whole app is the topic
+   reset (`:1395`). Correct answers never clear it (SIDE-03).
+2. `missItems(days)` (`:1606`) *filters* by date but never *removes* — an entry from March is skipped on every read
+   and kept on disk forever.
+3. `sync.js:149` union-merges `missLog` with `mergeMap(..., "a")`. Union means removal cannot propagate, so even the
+   topic-reset delete is undone by the next pull — **SET-01 class, and the same shape as SIDE-02's `starred`**.
+**Why it matters:** `missLog` is serialised into every `persist()` and every sync payload, and it grows with one entry
+per card ever missed, for the life of the account, with no ceiling and no user-facing way to clear it. That feeds
+directly into TIM-01/SET-10's quota risk — and `persist()` swallows `QuotaExceededError` in a bare catch, so the
+failure mode is silent data loss elsewhere. There is also a read cost: `missItems` walks the entire map and calls
+`itemById` per surviving key, and `pageMistakes` calls it **twice** per render (`:5744`), while `missCountWeek()`
+(`:4877`) walks it again on every Today render.
+**PROPOSED:** (a) prune on write — in `logMiss`, drop any entry older than ~30 days (a cheap sweep, bounded by the
+longest window any caller uses, 7); (b) treat `missLog` the way SIDE-02's fix treats `starred` — record deletions as
+tombstones (`missLog[id]=0` or a `_delMiss` set) so union-merge can carry a removal, since a plain `delete` provably
+cannot. (a) is safe on its own and shrinks the blob immediately; (b) must land with SIDE-02/SIDE-03 or those fixes
+will appear to work locally and silently revert on the next sync.
+
+### MIS-05 — MEDIUM — every "Open" button on this page opens the deck at the *saved place*, not the card you tapped
+Each row's action is `go('study/${it.t.id}/recall')` (`:5752`) → `startDeck`, which restores `DATA.pos['pos:'+id+'recall']`
+and ignores which card was clicked. A student looking at "you missed *this* question on Tuesday" taps Open and lands on
+card 41 of 60 — the cards they most recently *passed*. `it.id` and the card's index are both in hand and both discarded.
+This is SL-01 / SCA-10's shape on a third screen, and here it is the *only* per-card action the page offers.
+It also carries STU-09: `startDeck` overwrites `S`, so tapping Open mid-session destroys a live daily/hard/nudge
+session with no confirmation.
+**PROPOSED:** route to a card-addressed form (`study/<t.id>/<deck>/<index>`) and have `startDeck` honour a supplied
+index instead of `DATA.pos` — one change that closes SL-01, SCA-10 and MIS-05 together. Guard the session-destruction
+with the same confirm STU-09 proposes. Note `it.deck` is already on the item, so the hard-coded `/recall` should
+become `/${it.deck}` while touching this line (not currently reachable — `canRate=!isP` at `:4998` and the MCQ path's
+`deck!=='primer'` test at `:4983` mean primer cards cannot enter `missLog` today — but it is a latent trap for anyone
+who later makes primer ratable).
+
+### MIS-06 — LOW/MEDIUM — the mistakes drill is unbudgeted, uncapped and counts as ordinary daily review
+`startMistakes` (`:4607`) does `shuf(missItems(days))` and takes **all** of it — no `greedyBudget`, no `orderItems`, no
+size picker, unlike `startRecallSession` (`:4823-4826`, which offers explicit sizes) and `customSessionStart` (`:4413`,
+which calls `greedyBudget(orderItems(pool), min)`). A student with 90 misses this week taps one button and gets a
+90-card session whose only exit is ✕ End. Same gap SIDE-07 found in leeches/mistakes; restated here because the button
+copy — "This week · 90 cards" — is the *only* warning, and the meter then reads "~35 min left" against a stated
+15-minute budget.
+Because `mode:'daily'`, the drill also feeds `logRate`/`logDaily`/`touchTopic`/streak as ordinary review and re-runs
+`rateSRS` on every card, re-scheduling cards off their SRS interval (SIDE-03's off-schedule re-rating, now with a
+session size that makes it likely).
+**PROPOSED:** run the pool through `greedyBudget(orderItems(pool), DATA.daily.budget||15)` like the custom session, and
+offer the same size chips `startRecallSession` already has. Do not change `rateSRS` — that is engine-adjacent.
+
+### MIS-07 — LOW — the mistakes list silently truncates at 60 rows
+`week.slice(0,60)` (`:5750`) with no "showing 60 of 90", no count line and no paging. The button above it says 90.
+`pageLeeches` (`:5736`) has the same `slice(0,60)`; `qbStartMistakes`'s dashboard list has `mk.slice(0,8)` (`:3033`)
+under a heading that *does* print the true count, which is the pattern to copy.
+**PROPOSED:** append a muted "Showing 60 of ${week.length}" row when truncated. One line, both pages.
+
+### MIS-08 — LOW — `missItems`' comparator never returns 0, so same-day rows reorder between visits
+`out.sort((a,b)=> a.missOn<b.missOn?1:-1)` (`:1610`). For two entries with the same `missOn` — i.e. every pair of
+cards missed on the same day, which is most of the list — `cmp(a,b)` and `cmp(b,a)` **both** return `-1`. That
+violates the comparator contract, and V8 is free to produce a different arrangement per call. So "Today's misses"
+renders in an arbitrary order that changes on each visit to the page, with no stable secondary key.
+`leechItems` (`:1601`) does this correctly (`b.lapses-a.lapses`, returns 0 on ties), so the fix is a one-character class
+of change and the correct pattern is already in the file two lines up.
+**PROPOSED:** `out.sort((a,b)=> a.missOn===b.missOn ? (a.id<b.id?-1:1) : (a.missOn<b.missOn?1:-1))` — stable, still
+newest-first.
+
+### MIS-09 — LOW — `missItems` has no `isFlagged` filter (SIDE-01 restated; the count is now 20 pools)
+`missItems` (`:1606-1609`) walks `DATA.missLog` raw. A card the student reported as wrong and asked to hide is
+auto-written into `missLog` by both rating sites (`:5079`, `:5191`) and then shown on this page, counted in
+`missCountToday`/`missCountWeek`, used to enable/disable both mode buttons (`:4877`), and served inside the drill.
+Logged in full as SIDE-01; restated because this route is where the student *sees* it, and because the one-line guard
+(`if(isFlagged(id)) continue;`) belongs in the same edit as MIS-03 and MIS-08 — all three are inside 6 lines of code.
+
+### MIS-NOTES — checked and clean, plus the Q-bank half of the item
+1. **`qbStartMistakes` (`:3037`) — the "drill-missed" path — is sound and is the model the card side should copy.**
+   `qbAgg` (`:2932`) derives mistakes from `lastByQ`, i.e. the student's **most recent** attempt per question hash, so
+   getting a question right in the retry session removes it from the pool automatically. That is exactly the closable
+   loop `missLog` fails to be (SIDE-03/MIS-04). The dashboard heading also prints the true count next to a truncated
+   list, which is MIS-07's fix. Worth citing when SIDE-03 is scheduled.
+2. **Count/pool consistency is correct on this route** — unlike SL-01, both buttons and both labels come from the same
+   `missItems(days)` call the drill uses (`missCountToday`/`missCountWeek` `:1611-1612` vs `runMistakes` `:4612`). The
+   only mismatch is the flagged-card one (MIS-09), which is upstream of both.
+3. **`itemById` (`:1433`) returns a fresh object per call**, so `it.missOn=…` (`:1609`) does not mutate the shared
+   `cardIndex()` entry. Same for `leechItems`' `it.lapses`. No aliasing bug here.
+4. **`yesterdayStr` exists** (`:1172`, `dstr(new Date(Date.now()-864e5))`) — checked because `dayLabel` (`:5303`) calls
+   it inside the row map and `render()` still has no try/catch (STU-02), so a missing symbol would blank the whole
+   page. It is defined. Narrow nit only: fixed-86,400,000ms arithmetic can mislabel "Yesterday" within ~1h of midnight
+   on the two DST transition days. Not worth a fix.
+5. **Family (b) `NaN`** — `dayNum(new Date(missLog[id]+'T00:00'))` yields `NaN` for a corrupt value, `NaN>=cut` is
+   false, and the entry silently vanishes rather than crashing. Safe by accident, already noted in the SIDE block.
+   Family (c) and (d) cannot reach this route — it reads no answer key and makes no network call.
+6. **Escaping is clean** — `esc()` on `c.q`, `t.name`, `t.subject.short`; `dayLabel` output is app-generated. No
+   ENT-08-style sink. `pageMistakes` calls no `MB_PAYWALL.guard()`, consistent with ENT-03's zero call sites.
+7. **The empty state is good** — `!week.length` returns a real ✓ panel with a working CTA (`:5746-5748`), unlike
+   STU-04's buttonless dead end. No change needed.
+
+**Ordering for Frank:** **MIS-03 + MIS-08 + MIS-09 are one edit** (six lines, `missItems` and the row map) and are the
+cheapest thing in this flow. **MIS-01 is the highest-value** — rendering `S.label` and keying the summary off `S.key`
+fixes the mistakes, leeches, custom, weak and drill-topic sessions in one change, and it is the only finding here a
+student would describe as "the app told me something untrue". **MIS-04(b) must ship with SIDE-02/SIDE-03** or those
+fixes will silently revert on sync. Nothing in this flow touches the frozen engine; `rateSRS` is named only as the
+thing *not* to change.
+
+---
+
+## Flow 24 — Study timer + Study dock (`study-timer.js`, `study-dock.js`, the `MB_STUDY_*` / `MB_DOCK` bridge at `app.html:984-1009`)
+Reviewed 2026-08-22, **log-only, nothing changed**. Part A regression harnesses all exit 0 this run
+(`engine-scenarios`, `gap-loop`, `fix-queue`, `flow-e2e`), so nothing was logged for Part A.
+
+### DCK-01 — HIGH — "Save note" writes your note onto the PREVIOUS card (the dock never re-renders when the card changes)
+`study-dock.js:103` captures `ctx` **once per render**, and `:166` closes over it:
+`save.onclick=function(){ d.saveNote(ctx.cardId, noteTa.value||""); … }`.
+The dock only re-renders on **`hashchange`** (`:191`), on a manual tab click (`:140`), or via
+`open()`/`MB_DOCK_SOURCE`/`MB_DOCK_FOLLOW`. But advancing a card **does not change the hash** — `step()`
+(`app.html:5114`, `:5161`, `:5205`), `rateSRS`, `shuffle` (`:5129`) and `restartDeck` (`:5130`) all just call the app's
+own `render()`, which rewrites `#main` and leaves `location.hash` alone. `study-dock.js` exports only
+`MB_DOCK_OPEN`, `MB_DOCK_SOURCE` and `MB_DOCK_FOLLOW` — there is **no refresh entry point at all**, and `app.html` never
+calls one (only refs are `:2788`, `:3416`, `:3871`, `:3891-3892`, `:3918`, `:4974`, `:5035`, all *open* calls).
+
+Consequence, on the app's core loop: open the dock on ✍ Note at card 1 → press Next a few times → the textarea still
+shows **card 1's note**, and the student types their note for card 5 into it. Hitting Save calls
+`setNote(<card 1 id>, "<card 5's note>")`, which **destroys card 1's note and never stores card 5's**. Two losses per
+save, silent, on a field the UI explicitly promises is "synced with your account" (`:132`).
+The ✨ Ask tab is stale in the same way — `MB_DOCK.ask` (`app.html:1003`) injects `ctx.cardQ` as *"The card on screen
+asks: …"*, so the tutor is told about a card the student passed several rates ago; and 📄 Source keeps the old card's
+`hl` phrase.
+**PROPOSED:** export `window.MB_DOCK_REFRESH = function(){ if(isOpen && onStudy()) render(); apply(); }` from
+`study-dock.js` and call it at the end of `app.html`'s `render()` (one line, next to `renderNav()`), guarded by
+`try{}catch{}`. Cheap hardening on top: in `save.onclick`, re-read `d.ctx()` at click time and abort with a toast if
+`cardId` no longer matches the one rendered, so a stale panel can never write.
+
+### DCK-02 — HIGH — "📄 Show in the note" is a silent no-op in the Mega Q-bank and in the V1.6 gap loop
+`MB_DOCK.onStudyScreen` (`app.html:991`) whitelists
+`['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge']`.
+**`mega` is not on that list**, and `exam`, `solve`, `folder`, `search` aren't either.
+The Mega Q-bank is a *state* overlay, not a route: `pageMega` (`app.html:3597`) renders `qbQuestionHtml()` while the
+hash stays `#/mega`, and `qbStart`/`qbExit` (`:2671`, `:2679`) only call `render()`.
+So in a Mega session, `qbShowNote(idx)` (`:2788`) → `MB_DOCK_SOURCE(q.src)` → `open("source")` → `apply()` (`:86-96`)
+evaluates `isOpen && onStudy()` as **false**, immediately strips `.on` from the drawer *and* sets
+`tab.style.display="none"`. The button does nothing, shows nothing, and logs nothing. `gapShowNote()`
+(`:3416`) is the same call, so **the V1.6 gap loop's Open-note step is dead whenever the loop is launched from a Mega
+session or the post-session fix queue on `#/mega`** — which is the primary launch path in `flow-e2e`.
+The reverse also holds: even on a `topic` route where the whitelist passes, `MB_DOCK.ctx` (`app.html:994`) reads only
+`S.items[S.order[S.i]]` — the *flashcard* session. It never looks at `QB` or `GAPLOOP`. So a student who opens the dock
+during a Q-bank or gap loop gets the Ask/Note tabs bound to whatever flashcard session is still alive from earlier
+(STU-09/SIDE-06 family: `S` outlives the route), i.e. DCK-01's wrong-card write with an even bigger gap.
+**PROPOSED:** two parts, both in `app.html` only. (1) add `'mega','exam','solve'` to the `onStudyScreen` array — or
+better, make it `return !!(QB || GAPLOOP || S) || whitelist.indexOf(r)>=0`, since the dock's real precondition is
+"content is on screen", not "the route is named X". (2) make `ctx()` prefer the innermost live session:
+`GAPLOOP` → `QB.items[QB.i]` → `S`, falling back to the route topic as it does now. Read-only against the engine —
+`GAPLOOP`/`QB` are inspected, never mutated.
+
+### TIM-01 — MEDIUM — two devices on the same day silently discard one side's study time
+`sync.js:146` merges `study` as a **per-day `Math.max`**:
+`for(k in b) o[k]=Math.max(o[k]||0, b[k]||0)  // seconds/day: keep the larger`.
+40 minutes on the laptop plus 40 on the phone on the same date resolves to **40**, not 80. That is the SET-01 shape —
+real work undone by sync — on the one number the timer's own header comment (`study-timer.js:33-36`) promises "always
+reflects the signed-in account and follows it across devices". It also feeds `studyStreak()` (`:176`), the "This week"
+and "Daily avg" tiles (`:224`, `:227`) and the ▲/▼ vs-last-week verdict (`:191-196`), so the trend line understates for
+any multi-device student and can flip an "up" week to "about the same".
+`Math.max` was almost certainly chosen to make the merge idempotent under repeated pushes of the *same* device's
+counter — summing raw totals would double-count on every re-merge. That constraint is real; the fix is to make the
+counter per-device rather than to change the operator.
+**PROPOSED:** key seconds by device as well as day — `DATA.study[k] = { <deviceId>: secs }` — merge with `Math.max`
+per device (still idempotent) and sum across devices on read. `MB_STUDY_GET` (`app.html:988`) can flatten to the old
+`{day: total}` shape so `study-timer.js` needs no change. Migration: treat a numeric `DATA.study[k]` as
+`{legacy: n}`. Until then, the honest one-liner is to change the stats subtitle from a cross-device promise to
+"time on this device".
+
+### TIM-02 — MEDIUM — every bar in the stats chart is labelled with the wrong weekday west of UTC
+`keyOf` (`study-timer.js:29`) builds a **local** date string from `getFullYear/getMonth/getDate`. Three places then
+parse it back with `new Date(k)` — `:152` (popover row label), `:205` (`week` bar label), `:206` (`month` day number) —
+and a bare `"YYYY-MM-DD"` is spec'd as **UTC midnight**, not local. `toLocaleDateString` then renders it in local time,
+so for any negative UTC offset the label lands on the **previous day**: a student in UTC−5 sees today's fire-coloured
+bar labelled "Fr" on a Saturday, and the month view's `getDate()` numbers are all one low. Positive offsets are
+unaffected, which is why this has survived.
+**PROPOSED:** parse as local — `new Date(k + "T00:00")` (or `new Date(+y, +m-1, +d)`) at all three sites. Three-character
+change, no data touched. `app.html`'s `dstr` (`:1171`) has the identical local-build convention, so any future reader of
+`DATA.log`/`DATA.study` keys needs the same treatment; `dayLabel` (`:5303`) already does it correctly and is the pattern
+to copy.
+
+### TIM-03 — MEDIUM — the timer serialises the entire `DATA` object to localStorage every ~10 seconds while you study
+`loop()` (`study-timer.js:262`) flushes on every 10th tick, and `flush()` (`:44-49`) calls `MB_STUDY_ADD`, which is
+`app.html:987` → `persist()` → `localStorage.setItem(SKEY, JSON.stringify(DATA))` **+** `scheduleBackup()` **+**
+`MB_SYNC.markDirty()` (`app.html:1161-1163`).
+`DATA` carries every card's SRS state, `notes`, `cardEdits`, `viz`/`cardViz` blueprints and a `qbank._attempts` log
+capped at **4000** entries plus `_qmeta`, `_sessions` and `_events` (`sync.js:112-135`) — routinely multi-megabyte.
+A full synchronous `JSON.stringify` + `setItem` of that, on the main thread, six times a minute, for the whole duration
+of a study session, to add **one integer**. It also marks the state dirty continuously, so the sync pusher never sees a
+quiet moment. On a mid-range phone this is the most likely cause of mid-session jank on the card screen, and it is
+pure write amplification.
+**PROPOSED:** keep the seconds in `DATA.study` in memory but debounce the *write* — have `MB_STUDY_ADD` accumulate and
+call `persist()` at most once every 60 s, plus unconditionally on `visibilitychange`/`pagehide`/`beforeunload`
+(`study-timer.js:345-350` already fires `flush()` at all three). Alternatively raise the flush interval in `loop()` from
+10 to 60 ticks — one character, most of the benefit.
+
+### TIM-04 — MEDIUM — the idle genie stops your podcast when you dismiss it
+`hideGenie()` (`:333-337`) calls **`window.stopSpeak()`** unconditionally, and `stopSpeak` (`app.html:1571`) is global:
+`speechSynthesis.cancel()` + `stopCloud()`. `hideGenie` is reached from `bump()` (`:340`), which is bound capture-phase
+to `scroll`/`touchstart`/`pointerdown`/`keydown`/`click`/`wheel` (`:341-343`) — i.e. **the student's next tap anywhere**.
+The genie's own suppression check only excludes the visualiser (`:257`, `:306`: `#vizov, .vizinlinebody`) — the podcast
+player is neither. Listening to the podcast on a topic page is exactly the case that trips the 90 s idle warning
+(`WARN_MS`, `:267`): `route()==="topic"` with `.md` present is `isStudying()` (`:70`), and a listener isn't scrolling.
+So the sequence is: podcast plays → 90 s of no input → genie pops up and **talks over the podcast** → student taps to
+dismiss it → `stopSpeak()` kills the podcast audio too.
+**PROPOSED:** (a) add the podcast to the suppression selector alongside `#vizov` — one selector, matching the existing
+"skip during a video so its voice doesn't clash" intent at `:255-257`; and (b) in `hideGenie`, only call `stopSpeak()`
+when the genie actually used the fallback path (`_geniePlay===null`), since the `mbPrepareVoice` path already has its
+own `playObj.cancel()` on the line above.
+
+### TIM-05 — LOW — `flush()` zeroes `pending` before the write, and the "never lose seconds" fallback can't fire
+`flush()` (`:44-49`) does `var n=pending; pending=0;` and *then* `if(window.MB_STUDY_ADD) MB_STUDY_ADD(n); else mem[…]`.
+`MB_STUDY_ADD` (`app.html:987`) is wrapped in `try{…}catch(e){}` with an empty handler, so it always returns normally
+whether or not it stored anything — a `QuotaExceededError` inside `persist()` is separately swallowed
+(`app.html:1161`). The `else` branch commented "defensive: never lose seconds" is therefore unreachable in practice:
+the helper exists, so the fallback never runs, and a failed write is indistinguishable from a successful one. The
+seconds are gone. Same shape on the account side — `flush()` on `pagehide` (`:350`) marks dirty but cannot await a push.
+**PROPOSED:** have `MB_STUDY_ADD` **return true/false** (false in the `catch`), and in `flush()` restore
+`pending += n` when it returns false. Four lines, and it makes the existing `mem` fallback meaningful.
+
+### TIM-06 — LOW — a failed genie reveal re-requests TTS every second
+`tick()` (`:257`) calls `armGenie()` on **every 1 s tick** while `visible && inactive>WARN_MS && isStudying()`.
+`armGenie` (`:308`) guards on `genieUp||geniePending`, and clears `geniePending` on every exit path — but `showGenie`
+(`:318-332`) is wrapped in `try{…}catch(_)` and can return **without setting `genieUp`** (the `!dot` early return, or a
+throw inside the DOM build). When that happens both flags are false at the next tick, the condition is still true, and
+`window.mbPrepareVoice(msg)` (`app.html:1553`) is invoked again — every ~1 s until the student moves, each one a
+server voice request. Low confidence that the throw path is reachable today (`dot` is set in `inject()`), so this is a
+latent hardening item, not an observed failure.
+**PROPOSED:** set a `genieCooldown = Date.now()+60000` at the top of `armGenie` and return early while it's live, so the
+worst case is one attempt per minute regardless of what `showGenie` does.
+
+### DCK-03 — LOW — `esc()` doesn't escape `'`, and every attribute in the dock is single-quoted
+`study-dock.js:22` escapes `& < > "` only. `:120` writes `href='"+esc(ctx.pdf)+"'` and `:125` writes
+`data-t='"+seg.t+"'` (unescaped) — both single-quoted. A `'` anywhere in `t.pdf` closes the attribute and lets the rest
+of the string inject markup into the drawer. `ctx.pdf` comes from the content tree / import pipeline rather than from
+the student, so this is low exploitability, but it is the same class ENT-08 was logged for, and `app.html`'s own `esc`
+(`:981`) has the identical gap.
+**PROPOSED:** add `"'":"&#39;"` to both maps and extend the character class to `/[&<>"']/g`. Two files, one line each.
+
+### DCK-04 — LOW — the dock's Ask tab has no busy guard, so Send can fire concurrent tutor calls
+`doSend` (`study-dock.js:146-160`) disables the button (`:153`), but any subsequent `render()` — a tab click, a
+`hashchange`, or the resolution of an *earlier* request — rebuilds the drawer from `head+body+foot` and returns a fresh,
+**enabled** `#mbDockSend`. There is no equivalent of `pageAI`'s `AIBUSY` flag (`app.html:5934`, SCA-04). Two in-flight
+`claudeTutor` calls then push into `hist[ctx.topicId]` in completion order, which can interleave the answers.
+`hist` (`:17`) is also unbounded and purely in-memory — a reload silently empties a conversation the panel gives no
+indication is ephemeral.
+**PROPOSED:** hoist a module-level `DOCKBUSY` flag, return early from `doSend` while set, and render the Send button
+disabled whenever it is true.
+
+### F24-NOTES — checked, and the small stuff
+1. **`syncTab()` (`study-dock.js:182`) has zero call sites** — dead since the `apply()` refactor. LIB-01/ENT-03/SIDE-08
+   pattern, harmless here. Delete it with DCK-01's edit.
+2. **`var KEY = "mb_study_time"` (`study-timer.js:25`) is never read** — leftover from the pre-account localStorage
+   store. The comment block at `:33-36` correctly says `DATA.study` is now the source of truth; the constant is just
+   litter, but it's a false lead for the next reader.
+3. **Family (b) `NaN` does not reach this flow.** `MB_STUDY_ADD` (`app.html:987`) does `sec=Math.round(sec)||0` and
+   bails on `<=0`, `pending` only ever increments by 1 (`:43`), and `base()`/`cardsOn()` both `||0`. `fmt` (`:55`)
+   floors and clamps. Clean.
+4. **Family (c) and (d) cannot reach this flow** — no answer key is read, and the only network call is via
+   `d.ask` → `claudeTutor`, which was covered in flow 23 (SCA-05).
+5. **Family (a) `isFlagged` does not apply** — the timer reads dates, not card pools. But `MB_CARDS_BY_DAY`
+   (`app.html:984`) returns `DATA.log`, whose `cards` counts *were* incremented for cards later reported wrong, so the
+   "· N cards" figures under each bar (`:157`, `:208`) inherit whatever `logRate` counted. Not actionable here.
+6. **`avg` divides by 7 unconditionally** (`:198`) — a student three days into using the app sees a "Daily avg" diluted
+   by four days that predate their account. Cosmetic; `"Daily avg"` → `"Avg / day this week"` would be honest enough.
+7. **Two different streaks are shown in two places** — `studyStreak()` (`:176`, any study *time*) and `curStreak()`
+   (exposed as `MB_STREAK`, `app.html:985`, cards reviewed). They can legitimately disagree by days and nothing labels
+   the difference. Worth one word in the stats copy.
+8. **Midnight rollover is ~10 s of misattribution**, not a bug worth fixing: `pending` is credited to `today()` on read
+   (`:41`) but written under `dstr()` at flush time (`app.html:987`), so a session crossing midnight moves up to one
+   flush interval into the new day.
+9. **Layering is fine.** `#mbDock` is z-index 100001 and `#mbDockScrim` 100000 (`study-dock.js:53-57`) vs `.gapov`
+   100000 (`app.html:6808`) and `#mbtStats` 100003 (`study-timer.js:117`). The dock correctly sits above the gap
+   overlay and the stats sheet above both. No trap — but note this only matters once DCK-02 lets the dock open there
+   at all.
+10. **`highlightIn` (`:25-44`) is sound** — it walks text nodes, restores `prev||"transparent"` after 2.4 s, and bails
+    on needles under 4 chars. The three-tier fallback (full → 6 words → 4 words) is a good pattern. No leak: it styles
+    existing nodes rather than wrapping new ones.
+
+**Ordering for Frank:** **DCK-02 is the one to fix first** — it is a V1.6 surface (`gapShowNote`), the harnesses can't
+see it because they test decision logic rather than the DOM, and it is a two-line change in `app.html` with no risk to
+the frozen engine. **DCK-01 is the highest-severity** and is the only finding in this flow that destroys student data;
+its fix is one exported function plus one call site. **TIM-03 is the cheapest real win** (one number, 10 → 60).
+**TIM-01 needs a decision from you, not a patch** — either the per-device keying or honest copy. Nothing in this flow
+touches `smartDiagnose`/`smartDrillPlan`/`smartStats`/`rateSRS`; DCK-02's proposed `ctx()` change *reads* `QB` and
+`GAPLOOP` and must not write to them.
+
+---
+
+# 🧪 V1.6 live validation + import test — 2026-08-22 (flags LIVE, test account frankthejay)
+
+## ✅ Deployed V1.6 is smart on real data
+Ran the LIVE deployed `fixQueue('*')` against frankthejay's real 40-attempt history (Bronchiolitis). It returned a correctly-prioritised queue:
+1. Management — misconception (40% acc) → "Practise & confront" — **ranked #1**
+2. Investigation — gap (25% acc) → "Learn → Practice → Retest"
+3. Complications — misconception
+The intelligence check passes: Management ranks **above** Investigation despite HIGHER accuracy (40% vs 25%), because its confidence/severity score is higher (0.575 vs 0.547). Diagnosis-specific routing correct; sev/conf/recur components captured in telemetry. Flags confirmed live (`gapOn()`/`fixQueueOn()` both true).
+
+## 🔴 IMPORT-01 — Importing a lecture WITH Q-bank fails (502) even on a PREMIUM account — HIGH (needs investigation)
+**Observed:** POST `/import` with `builds:['qbank']` (rich ~500-word lecture, single topic) returned **502 after 402s**: *"The AI returned an unreadable response. Please try building again."* No topic row was created. `/me` confirms frankthejay is `premium:true` (uses PREMIUM_MODEL deepseek-v4-pro), so this is NOT a model-tier issue. A base import (no qbank) was fired to isolate but the browser tab reloaded mid-request, so base-vs-qbank isolation is unconfirmed — but the topics table still shows only the old Bronchiolitis, i.e. neither attempt landed.
+**Why it matters:** if importing a lecture (the app's core action) fails on a premium account, it likely fails for pilot students too — a blocker for building any study material. Combined with ENT-01 (entitlement), this is the single biggest live risk to the pilot.
+**Likely causes (to confirm):** (a) the Q-bank build step uses `EXTRAS_MODEL` = deepseek-v4-flash (server.mjs:184/914) which may emit unreadable JSON — see QB-09 (`max_tokens:12000` possibly rejected/clamped) and QB-08; (b) the combined import+qbank exceeds the onrender proxy timeout (SRV-06) — 402s is far past a typical 100-120s proxy cap.
+**Next step:** isolate with a clean run — base `/import` (no builds) alone, then `/build-extra` for qbank separately, each timed; check the Render server logs for the actual model error; verify the EXTRAS_MODEL `max_tokens` against the provider cap.
+
+## 🟠 GAP-QUEUE-01 — fix-queue offered a gap loop that silently did nothing — MEDIUM — ✅ FIXED (not deployed)
+**Observed (live):** for the Investigation gap concept, `fixQueue` offered "Learn → Practice → Retest", but calling `gapStart` returned early (Bronchiolitis has no second Investigation question with the *same* skill+tag+objective to build a distinct practice+retest). Because `fixQGo` calls `qbExit()` first, clicking the item would close the results screen and open **nothing** — a silent dead click (exactly the failure mode we were guarding against).
+**Fix:** made the queue availability-aware — `fixQueue` computes `canLoop = (gap && a distinct sibling exists)`; `fixQAction` routes a no-material gap to "Practise this" (a focused drill) instead of the loop; and `fixQGo` now treats `gapStart` as returning a boolean and **always falls back to `smartDrillDim`** if the loop can't build. No queue item can ever be a dead click now.
+**Verified:** `qa/flow-e2e.mjs` extended with a "gap with no material → falls back to a drill (no silent fail)" scenario; all four harnesses pass.
