@@ -1322,7 +1322,9 @@ function masteryChips(ids){
 }
 function sessionRecallIds(){
   if(!S) return [];
-  if(S.mode==='deck' && S.t && S.deck==='recall') return (S.t.recall||[]).map(c=>cid(S.t.id,'recall',c));
+  // 12th pool missing the isFlagged filter (REV-04 family): a reported-wrong card is never served
+  // again, so counting it here left an "Unfamiliar" chip on the study screen that can never clear.
+  if(S.mode==='deck' && S.t && S.deck==='recall') return (S.t.recall||[]).map(c=>cid(S.t.id,'recall',c)).filter(id=>!isFlagged(id));
   return (S.items||[]).filter(it=>it.deck==='recall').map(it=>it.id);
 }
 
@@ -2357,16 +2359,21 @@ async function solveNow(){
 
 function pageSubject(id){
   const s=subjById(id); if(!s) return pageHome();
+  /* Empty state used to tell the student to "send MedBank a photo of the schedule" — the
+   * developer's own workflow, with no action they can take in the app (LIB-08 family).
+   * The real route into a course is ＋ Add lecture, so offer that. */
   if(!s.topicCount)
     return crumbs([{label:'Home',route:'home'},{label:s.name}])+
       `<h1>${esc(s.name)}</h1>
-       <div class="empty">No lecture schedule loaded for this subject yet.<br>Send MedBank a photo of the schedule and every topic will be listed here.</div>`;
+       <div class="empty">No lectures in this course yet.<br>Add one and its note, cards, q-bank and podcast appear right here.
+         <div class="btnrow" style="justify-content:center;margin-top:14px">
+           <button class="btn primary" onclick="try{MB_openImport&&MB_openImport()}catch(e){}">＋ Add a lecture</button></div></div>`;
   return crumbs([{label:'Home',route:'home'},{label:s.name}])+
     `<h1>${esc(s.name)}</h1>
      <p class="sub">${s.topicCount} topics · ${s.readyCount} built · ${s.lecturerCount} lecturers · ${s.cardCount} cards</p>
      <div class="btnrow" style="margin:2px 0 14px">${libToggleBtn()}</div>`+
-    s.modules.map(m=>`<div class="modhead">${esc(m.name)}</div>
-       <div class="${rowsCls()}">${m.topics.map(t=>topicRow(t,true)).join('')}</div>`).join('');
+    (s.modules||[]).map(m=>`<div class="modhead">${esc(m.name)}</div>
+       <div class="${rowsCls()}">${(m.topics||[]).map(t=>topicRow(t,true)).join('')}</div>`).join('');
 }
 
 function pageLecturers(){
@@ -2739,7 +2746,10 @@ function qbQuestionHtml(){
   if(QB.answered && QB.mode==='tutor'){
     rationale='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'+qbTeachHtml(q,QB.i);
-    if(QB.picked!==q.answer){ var qhc=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))); rationale+='<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+qhc+'\')">🔄 Retest this concept</button><span>a different question, same idea — proves you learned it</span></div>'; }
+    if(QB.picked!==q.answer){ var qhc=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
+      var _gapDg=(typeof gapEligible==='function')?gapEligible(q,QB.picked):null;   // V1.6 (flag-gated): gap miss → offer the Learn loop instead of the plain retest
+      if(_gapDg){ rationale+=gapOfferHtml(qhc); }
+      else { rationale+='<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+qhc+'\')">🔄 Retest this concept</button><span>a different question, same idea — proves you learned it</span></div>'; } }
   }
   // V1.5 — non-interruptive confidence capture (tutor reveal), asked once per question
   // Confidence capture: tutor / Smart Drill only (never in timed exams), non-blocking, and clearly optional —
@@ -2813,12 +2823,93 @@ function qbDoneHtml(){
   return '<div class="card" style="cursor:default;text-align:center"><div style="font-size:32px;font-weight:900;color:'+(pct>=60?'var(--recall,#0d9488)':'#e2574b')+'">'+pct+'%</div>'
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
+    +(typeof fixQueueHtml==='function'?fixQueueHtml(scope):'')   // V1.6 (flag-gated) — post-session "3 things to fix" prioritisation layer
     +megaBreak
     +(QB.adaptive?adaptRecapHtml():'')
     +((QB.mega||QB.smart)?smartNextCard(QB.topicId||'*'):'')
     +'<div style="margin-top:16px;font-weight:700">Review &amp; explanations</div>'+review;
 }
-
+/* =====================================================================
+ * V1.6 — Post-session "3 things to fix" prioritisation layer
+ * (SPEC-GAP-LEARN-LOOP.md §3b; flag CFG.FEATURES.POST_SESSION_FIX_QUEUE, default OFF).
+ * NOT a diagnostic engine — it CONSUMES the frozen engine's output (smartStats +
+ * smartDiagnose) and ranks the top-3 highest-value fixes by
+ *   score = severity·0.5 + diagnostic-confidence·0.3 + recurrence·0.2
+ * (deliberately NOT just the three lowest scores), then routes each weakness to the
+ * intervention its diagnosis calls for: gap → Learn/Practice/Retest loop;
+ * misconception → focused drill (interim until intervention #3); fragile → reinforcement drill.
+ * ===================================================================== */
+function fixQueueOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.POST_SESSION_FIX_QUEUE); }catch(e){ return false; } }
+var _FIXQ=[];
+/* representative question hash for a weak concept — prefer a recent miss on it, else any attempt on it */
+function fixQConceptQh(st, type, key){
+  var A=st.att||[], meta=(qbStore()._qmeta||{});
+  function keyOf(m){ return (type==='skill')?(m.skill||''):(m.tag||m.subtopic||'General'); }
+  for(var i=A.length-1;i>=0;i--){ var a=A[i], m=meta[a.qh]||{}; if(keyOf(m)===key && !a.ok) return a.qh; }
+  for(var j=A.length-1;j>=0;j--){ var a2=A[j], m2=meta[a2.qh]||{}; if(keyOf(m2)===key) return a2.qh; }
+  return '';
+}
+/* rank the top-3 actionable weaknesses across skill + tag bands (each diagnosed by the frozen engine) */
+function fixQueue(scope){
+  scope=scope||'*';
+  var st=smartStats(scope), oAcc=smartAcc(st.overall);
+  if(st.overall.seen < SMART.MIN_EV) return [];
+  var cands=[];
+  function consider(map, type, labelFn){
+    Object.keys(map).forEach(function(k){ if(!k) return; var b=map[k]; if(b.seen<SMART.MIN_EV) return;
+      var dg=smartDiagnose(b); if(!dg || dg.type==='solid') return;               // only actionable diagnoses
+      var acc=smartAcc(b);
+      var confidence=Math.min(1, b.seen/SMART.EV_HIGH);                            // more evidence → more confident diagnosis
+      var severity=Math.min(1, Math.max(0, oAcc-acc) + (1-acc)*0.5 + (dg.type==='misconception'?0.2:0));
+      var rec=0; (st.recentMiss||[]).forEach(function(m){ var mm=m.meta||{}; var kk=(type==='skill')?(mm.skill||''):(mm.tag||mm.subtopic||'General'); if(kk===k) rec++; });
+      var recurrence=Math.min(1, rec/3);
+      // keep each ranking COMPONENT (internal only, never shown to students) so the weights can
+      // later be tuned from real behaviour — i.e. answer "was this ranked high for severity,
+      // confidence, or recurrence?" against which items actually led to useful interventions.
+      cands.push({ type:type, key:k, label:labelFn(k), dg:dg, acc:Math.round(acc*100), seen:b.seen,
+                   sev:+severity.toFixed(3), conf:+confidence.toFixed(3), recur:+recurrence.toFixed(3),
+                   score:+(severity*0.5 + confidence*0.3 + recurrence*0.2).toFixed(3) });
+    });
+  }
+  consider(st.bySkill,'skill',qbSkillLabel);
+  consider(st.byTag,'tag',function(x){return x;});
+  // Cluster each candidate to its underlying SKILL so a skill-band and its own tag-band
+  // (the same cluster of questions) never appear as two separate "things to fix".
+  var meta=qbStore()._qmeta||{};
+  function domSkillOfTag(tag){ var cnt={}, best='', bn=0; (st.att||[]).forEach(function(a){ var m=meta[a.qh]||{}; if((m.tag||m.subtopic||'General')===tag){ var sk=m.skill||''; if(sk){ cnt[sk]=(cnt[sk]||0)+1; if(cnt[sk]>bn){ bn=cnt[sk]; best=sk; } } } }); return best; }
+  cands.forEach(function(c){ if(c.type==='skill'){ c.cluster='sk:'+c.key; } else { var ds=domSkillOfTag(c.key); c.cluster= ds?('sk:'+ds):('tg:'+c.key); } });
+  cands.sort(function(a,b){ return b.score-a.score; });
+  var picked=[], usedCluster={};
+  for(var i=0;i<cands.length && picked.length<3;i++){ var c=cands[i]; if(usedCluster[c.cluster]) continue; usedCluster[c.cluster]=1;
+    c.qh=fixQConceptQh(st,c.type,c.key); picked.push(c); }
+  return picked;
+}
+/* the intervention each diagnosis routes to (misconception is interim → focused drill until intervention #3) */
+function fixQAction(dg){
+  if(dg.type==='gap')           return { verb:'Learn → Practice → Retest', kind:'gap' };
+  if(dg.type==='misconception') return { verb:'Practise & confront',       kind:'drill' };
+  return { verb:'Smart Drill', kind:'drill' };   // fragile → retrieval / reinforcement
+}
+function fixQueueHtml(scope){
+  if(!fixQueueOn()) return '';
+  var q=fixQueue(scope); _FIXQ=q; if(!q.length) return '';
+  if(QB && !QB._fixqLogged){ QB._fixqLogged=1; smartLog({t:'fix_queue_shown', count:q.length,
+    items:q.map(function(x){ return {dg:x.dg.type, score:x.score, sev:x.sev, conf:x.conf, recur:x.recur, seen:x.seen, acc:x.acc}; })}); }
+  var rows=q.map(function(it,i){ var a=fixQAction(it.dg);
+    return '<div class="fixq-item"><div class="fixq-n">'+(i+1)+'</div><div class="fixq-body">'
+      +'<div class="fixq-t">'+esc(it.label)+' <span class="fixq-dg" style="color:'+it.dg.color+'">'+it.dg.icon+' '+esc(it.dg.label)+'</span></div>'
+      +'<div class="fixq-why">'+esc(it.dg.tip)+'</div>'
+      +'<button class="btn sm primary" onclick="fixQGo('+i+')">'+esc(a.verb)+'</button></div></div>'; }).join('');
+  return '<div class="card fixq" style="cursor:default;margin-top:14px"><div class="fixq-h">🧭 '+q.length+' thing'+(q.length>1?'s':'')+' to fix from this session</div>'
+    +'<div class="fixq-sub">Ranked by how much they matter — not just your lowest scores.</div>'+rows+'</div>';
+}
+function fixQGo(i){ var it=_FIXQ[i]; if(!it) return; var a=fixQAction(it.dg);
+  smartLog({t:'fix_queue_item_selected', concept:it.label, diagnosis:it.dg.type, rank:(i+1), score:it.score, sev:it.sev, conf:it.conf, recur:it.recur});
+  smartLog({t:'intervention_started', source:'queue', concept:it.label, diagnosis:it.dg.type, action:a.kind});
+  qbExit();   // leave the results screen, then launch the intervention
+  if(a.kind==='gap' && it.qh){ gapStart(it.qh, true); }
+  else { smartDrillDim(it.type, encodeURIComponent(it.key), '*'); }
+}
 /* ===== Q-bank performance analytics — weakness mapping (all derived from the attempts log) ===== */
 function qbBand(){ return {seen:0,correct:0,ms:0}; }
 function qbAgg(scope){
@@ -3280,6 +3371,85 @@ function conceptRetest(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh];
   QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'concept_retest', smartWhy:'Concept retest: a different question on '+lbl+' — the concept you just missed.', smartReasons:['Same concept, new question — proves you learned it rather than memorised the answer.'], smartFocus:[{label:lbl,acc:0,type:'concept'}] };
   smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'concept_retest', dimension:'concept', reason:QB.smartWhy||'', mode:QB.mode, planned:items.length});
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render(); }
+/* =====================================================================
+ * V1.6 — Knowledge Gap → Learn → Practice → Retest loop (SPEC-GAP-LEARN-LOOP.md)
+ * Feature-flagged via CFG.FEATURES.GAP_LOOP (default OFF → fully dormant for the
+ * live pilot). Reads the FROZEN smartDiagnose; never changes the engine. Practice
+ * and retest answers are logged as ordinary attempts so the engine counts them.
+ * Rendered as a self-contained overlay to stay isolated from qbNext/qbPick.
+ * ===================================================================== */
+function gapOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.GAP_LOOP); }catch(e){ return false; } }
+var GAPLOOP=null;
+/* diagnose the concept (skill band) behind a question — evidence-gated, frozen engine */
+function gapDiag(q){ if(!q) return null; var sk=(q.skill||''); if(!sk) return null;
+  var st=smartStats('*'); var b=st.bySkill[sk]; if(!b) return null; return smartDiagnose(b); }
+/* OTHER questions on the same concept (skill+tag), for practice + retest (reuses conceptRetest filter) */
+function gapConceptPool(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return [];
+  var sameTag=(mt.tag||mt.subtopic||'General'), sameSkill=(mt.skill||'');
+  return smartPool().filter(function(q){ if(q._qh===qh) return false; if((q.tag||q.subtopic||'General')!==sameTag) return false; if(sameSkill&&(q.skill||'')!==sameSkill) return false; return true; }); }
+/* eligible to OFFER at a miss: flag on, a real gap diagnosis, not already in a loop, and something to teach with */
+function gapEligible(q, picked){ if(!gapOn()||!q) return null; if(GAPLOOP) return null;
+  if(picked===q.answer) return null; var dg=gapDiag(q); if(!dg||dg.type!=='gap') return null;
+  var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))); if(!gapConceptPool(qh).length) return null; return dg; }
+/* deterministic ~50/50 A/B bucket per student+concept (matched = full loop, generic = skip LEARN) */
+function gapBucket(concept){ var uid=''; try{ uid=localStorage.getItem('mb_current_uid')||''; }catch(e){}
+  var n=parseInt(qbHash(uid+'|'+concept),36)||0; return (n%2===0)?'matched':'generic'; }
+function gapOfferHtml(qh){ return '<div class="gapoffer"><div class="gapoffer-h">❌ Not quite — this looks like a knowledge gap.</div>'
+  +'<div class="gapoffer-b"><button class="btn primary sm" onclick="gapStart(\''+qh+'\')">Learn this</button>'
+  +'<button class="btn sm ghost" onclick="gapDismiss()">Keep going</button></div></div>'; }
+function gapDismiss(){ /* opt-in: student simply stays in the drill */ }
+function gapStart(qh, fromQueue){ if(!gapOn() && !fromQueue) return; var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return;
+  var pool=gapConceptPool(qh); if(!pool.length) return;
+  var seen=smartStats('*').seenQh;
+  var ordered=qbShuffle(pool.filter(function(q){return !seen[q._qh];})).concat(qbShuffle(pool.filter(function(q){return seen[q._qh];})));
+  var practiceQ=ordered[0]||null, retestQ=ordered[1]||ordered[0]||null;   // degrade gracefully if only one exists
+  var concept=(mt.skill||'')+'|'+(mt.tag||mt.subtopic||'')+'|'+(mt.objective||mt.teaching||'');
+  var ab=gapBucket(concept);
+  GAPLOOP={ fromQh:qh, mt:mt, concept:concept, ab:ab, step:(ab==='generic'?'practice':'learn'),
+            practiceQ:practiceQ, retestQ:retestQ, picked:null, answered:false, pStart:0, retestOk:null };
+  smartLog({t:'intervention_shown', itype:'gap', concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss')});
+  smartLog({t:'intervention_step', itype:'gap', step:GAPLOOP.step, concept:concept});
+  if(GAPLOOP.step==='practice'){ GAPLOOP.pStart=Date.now(); }
+  gapRender(); }
+function gapClose(){ var o=document.getElementById('gapOverlay'); if(o&&o.parentNode) o.parentNode.removeChild(o); }
+function gapExit(){ if(GAPLOOP && GAPLOOP.step!=='result') smartLog({t:'intervention_abandoned', itype:'gap', step:GAPLOOP.step, concept:GAPLOOP.concept}); GAPLOOP=null; gapClose(); }
+function gapShowNote(){ try{ if(GAPLOOP&&GAPLOOP.mt&&GAPLOOP.mt.src&&window.MB_DOCK_SOURCE){ MB_DOCK_SOURCE(GAPLOOP.mt.src); } else if(window.MB_DOCK_OPEN){ MB_DOCK_OPEN('source'); } }catch(e){} }
+function gapToPractice(){ if(!GAPLOOP) return; GAPLOOP.step='practice'; GAPLOOP.answered=false; GAPLOOP.picked=null; GAPLOOP.pStart=Date.now();
+  smartLog({t:'intervention_step', itype:'gap', step:'practice', concept:GAPLOOP.concept}); gapRender(); }
+function gapPick(j){ var g=GAPLOOP; if(!g||g.answered) return; var q=(g.step==='practice')?g.practiceQ:g.retestQ; if(!q) return;
+  g.picked=j; g.answered=true; var ok=(j===q.answer); var ms=g.pStart?(Date.now()-g.pStart):0;
+  gapLogAttempt(q, j, ok, ms, 'gap_'+g.step); if(g.step==='retest') g.retestOk=ok; gapRender(); }
+function gapAdvance(){ var g=GAPLOOP; if(!g) return;
+  if(g.step==='practice'){ g.step='retest'; g.answered=false; g.picked=null; g.pStart=Date.now(); smartLog({t:'intervention_step', itype:'gap', step:'retest', concept:g.concept}); gapRender(); return; }
+  g.step='result'; smartLog({t:'intervention_completed', itype:'gap', concept:g.concept, ab:g.ab, retest_ok:!!g.retestOk}); gapRender(); }
+/* practice/retest answers are ordinary attempts so the frozen engine's stats include them */
+function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
+  s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
+  s._attempts.push({ u:qbUid(), qh:qh, topicId:q._topicId||'*', chosen:chosen, answer:q.answer, ok:ok, ms:ms, mode:mode, ts:Date.now() });
+  if(s._attempts.length>4000) s._attempts=s._attempts.slice(s._attempts.length-4000); persist(); }catch(e){} }
+function gapRender(){ if(!GAPLOOP){ gapClose(); return; }
+  var o=document.getElementById('gapOverlay'); if(!o){ o=document.createElement('div'); o.id='gapOverlay'; o.className='gapov'; o.onclick=function(e){ if(e.target===o) gapExit(); }; document.body.appendChild(o); }
+  o.innerHTML='<div class="gapcard">'+gapBodyHtml()+'</div>'; }
+function gapBodyHtml(){ var g=GAPLOOP; if(!g) return '';
+  var lbl=(g.mt.skill?qbSkillLabel(g.mt.skill)+' · ':'')+(g.mt.tag||g.mt.subtopic||'');
+  if(g.step==='learn'){ var obj=g.mt.objective||g.mt.teaching||'';
+    return '<div class="gaph">📖 Learn · '+esc(lbl)+'</div>'+(obj?'<div class="gapobj">🎯 '+esc(obj)+'</div>':'')
+      +'<div class="gapmsg">Read this idea through, then try a fresh question on it — cold.</div>'
+      +(g.mt.src?'<div class="gaprow"><button class="btn sm" onclick="gapShowNote()">📄 Open the note</button></div>':'')
+      +'<div class="gaprow"><button class="btn primary" onclick="gapToPractice()">I’ve read this → practise</button><button class="btn sm ghost" onclick="gapExit()">Exit</button></div>'; }
+  if(g.step==='practice'||g.step==='retest'){ var q=(g.step==='practice')?g.practiceQ:g.retestQ; if(!q) return gapResultHtml();
+    var head=(g.step==='practice')?'✍️ Practice — same idea, guided':'🎯 Retest — cold, no hints';
+    var opts=q.options.map(function(o,j){ var cls='qbopt'; if(g.answered){ if(j===q.answer)cls+=' right'; else if(j===g.picked)cls+=' wrong'; } else if(g.picked===j)cls+=' sel';
+      return '<button class="'+cls+'" '+(g.answered?'disabled':'onclick="gapPick('+j+')"')+'><span class="qbol">'+qbLetter(j)+'</span><span>'+esc(o)+'</span></button>'; }).join('');
+    var rat=''; if(g.answered && g.step==='practice'){ rat='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
+      return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'; }
+    var cont=g.answered?'<div class="gaprow"><button class="btn primary" onclick="gapAdvance()">'+(g.step==='practice'?'Continue → retest':'See result')+'</button></div>':'<div class="gaprow"><button class="btn sm ghost" onclick="gapExit()">Exit</button></div>';
+    return '<div class="gaph">'+head+'</div><div class="gapstem">'+esc(q.stem)+'</div><div class="qbopts">'+opts+'</div>'+rat+cont; }
+  return gapResultHtml(); }
+function gapResultHtml(){ var g=GAPLOOP, ok=g.retestOk;
+  return '<div class="gaph">'+(ok?'✅ Gap closing':'🟠 We’ll revisit this')+'</div>'
+    +'<div class="gapmsg">'+(ok?'You got the retest right cold — nice.':'Still shaky — we’ll bring this concept back for you.')+'</div>'
+    +'<div class="gaprow"><button class="btn primary" onclick="gapExit()">Done</button></div>'; }
 /* ---- Confidence capture (non-interruptive; tutor reveal) ---- */
 function qbSetConf(v){ if(!QB) return; v=parseInt(v,10); var r=QB.results[QB.results.length-1]; if(r) r.conf=v;
   var s=qbStore(), A=s._attempts||[]; for(var i=A.length-1;i>=0;i--){ if(A[i].qh===QB._lastQh){ A[i].conf=v; break; } }
@@ -4485,6 +4655,11 @@ function examDrillMissed(){ if(!S)return; const items=shuf(examMissedItems().sli
 /* deck study (a single topic's Primer or Recall) */
 function pageStudy(topicId,deck){
   const t=topById(topicId); if(!t) return pageHome();
+  /* `#/study/<id>` with no deck segment (a typed/shared/bookmarked link) passed deck=undefined
+   * into startDeck, where cid() does `deck[0]` and throws. render() has no try/catch, so #main
+   * was never written and the app sat frozen on the previous screen — the REV-03 / TOP-04
+   * symptom. Anything that isn't the primer deck is the recall deck. */
+  deck = (deck==='primer') ? 'primer' : 'recall';
   IMGBASE = t.imgBase || '';
   if(!S || S.mode!=='deck' || S.t.id!==topicId || S.deck!==deck) startDeck(topicId,deck);
   const nClin = deck==='recall' ? clinInDeck(t) : 0;
@@ -4494,7 +4669,20 @@ function pageStudy(topicId,deck){
       <span class="clinlbl" style="margin-left:auto">${S.items.length} card${S.items.length===1?'':'s'}</span>
     </div>` : '';
   const head = crumbs([{label:'Anki Cards',route:'cards'},{label:t.subject.name,route:'cards/'+t.subject.id},{label:t.name,route:'topic/'+t.id}]);
-  if(!S.items.length) return head+filterBar+`<div class="empty">${S.weakOnly?"No weak cards here — you've mastered them all. 🎉":S.clinOnly?'No clinical cards here.':'This deck is empty.'}</div>`;
+  if(!S.items.length){
+    /* "This deck is empty." was also shown when the deck is full but every card has been
+     * reported wrong (startDeck drops isFlagged cards) — and there is no un-flag UI (LIB-01),
+     * so the student was told the lecture has no cards. Say which it is, and never dead-end
+     * an empty screen with no way out. */
+    const nDeck = deckN(deck==='primer'?t.primer:t.recall);
+    const msg = S.weakOnly ? "No weak cards here — you've mastered them all. 🎉"
+      : S.clinOnly ? 'No clinical cards in this deck.'
+      : nDeck ? `All ${nDeck} card${nDeck===1?'':'s'} in this deck are reported as wrong, so none are being shown.`
+      : 'This deck is empty.';
+    return head+filterBar+`<div class="empty">${msg}</div>
+      <div class="btnrow" style="justify-content:center;margin-top:14px">
+        <button class="btn primary" onclick="go('topic/${t.id}')">← Back to this lecture</button></div>`;
+  }
   return head + filterBar + cardView(false);
 }
 
@@ -4892,7 +5080,7 @@ function pickOpt(i){
     DATA.starred[it.id]=1; logMiss(it.id);
     try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
   }
-  if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
+  if(S.mode==='deck' && !S.clinOnly && !S.weakOnly) DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);   // saved place belongs to the FULL deck — a filtered pass writes an index into 4 cards, not 60
   persist();
   const afterCards=todayLog().cards, afterLvl=levelInfo().i, afterStreak=curStreak();
   if(afterLvl>beforeLvl)                          celebrate('level','Level up · '+LEVELS[afterLvl].n);
@@ -4935,13 +5123,15 @@ function reveal(){
 }
 function step(d){ if(!S)return; _mbViaSwipe=false; if(window.vizInlineStop)vizInlineStop(); const n=S.i+d; if(n<0||n>=S.items.length)return;
   S.i=n; S.show=false; S.opts=false; S.pick=null; S.hint=false; S.hintHide=null;
-  if(S.mode==='deck'){ DATA.pos['pos:'+S.t.id+S.deck]=S.i; persist(); }
+  if(S.mode==='deck' && !S.clinOnly && !S.weakOnly){ DATA.pos['pos:'+S.t.id+S.deck]=S.i; persist(); }   // see rateCard: filtered indices must not overwrite the full deck's place
   render(); window.scrollTo(0,0);
 }
 function shuffle(){ if(!S)return; for(let i=S.order.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];} S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;render(); }
 function restartDeck(){ if(!S)return; S.i=0;S.show=false;S.opts=false;S.pick=null;S.hint=false;S.hintHide=null;S.order=S.items.map((_,k)=>k);
   S.answered={};                                                             // Reset wipes your answers → questions show as unanswered again
-  if(S.mode==='deck'){ DATA.cardAns=DATA.cardAns||{}; S.items.forEach(function(x){ delete DATA.cardAns[x.id]; }); DATA.pos['pos:'+S.t.id+S.deck]=0; persist(); }
+  if(S.mode==='deck'){ DATA.cardAns=DATA.cardAns||{}; S.items.forEach(function(x){ delete DATA.cardAns[x.id]; });
+    if(!S.clinOnly && !S.weakOnly) DATA.pos['pos:'+S.t.id+S.deck]=0;   // restarting a 4-card weak pass must not rewind the 60-card deck
+    persist(); }
   render(); }
 /* classify a session item for the remaining-mix bar */
 function classifyItem(it){
@@ -4999,7 +5189,7 @@ function rateCard(ok){
   logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
-  if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
+  if(S.mode==='deck' && !S.clinOnly && !S.weakOnly) DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);   // saved place belongs to the FULL deck — a filtered pass writes an index into 4 cards, not 60
   persist();
   if(!it.conf) flashReview(it.id, ok);
   // micro-celebrations
@@ -6611,6 +6801,28 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .qbbar-drill{flex:0 0 auto;align-self:center}
 .qbretest{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line,#e3e0ef)}
 .qbretest>span{font-size:11.5px;color:var(--dim)}
+/* V1.6 gap-loop */
+.gapoffer{margin-top:12px;padding:11px 13px;border-radius:11px;background:rgba(224,138,60,.10);border:1px solid rgba(224,138,60,.28)}
+.gapoffer-h{font-weight:700;font-size:13px;color:var(--ink,#1c1830);margin-bottom:8px}
+.gapoffer-b{display:flex;gap:8px;flex-wrap:wrap}
+.gapov{position:fixed;inset:0;background:rgba(28,20,45,.55);display:flex;align-items:center;justify-content:center;z-index:100000;padding:16px;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.gapcard{background:var(--panel,#fff);width:100%;max-width:460px;max-height:92vh;overflow-y:auto;border-radius:18px;padding:22px 20px;box-shadow:0 30px 80px rgba(28,20,45,.4)}
+.gapcard .gaph{font-weight:800;font-size:18px;letter-spacing:-.2px;margin-bottom:8px}
+.gapcard .gapobj{font-size:13.5px;line-height:1.5;padding:10px 12px;border-radius:10px;background:rgba(124,92,255,.08);border:1px solid rgba(124,92,255,.18);margin-bottom:10px}
+.gapcard .gapmsg{font-size:13.5px;color:var(--dim);line-height:1.5;margin-bottom:12px}
+.gapcard .gapstem{font-size:15px;line-height:1.55;margin:6px 0 12px}
+.gapcard .gaprow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.btn.ghost{background:transparent;color:var(--dim)}
+/* V1.6 post-session "3 things to fix" */
+.fixq .fixq-h{font-weight:800;font-size:15px;margin-bottom:2px}
+.fixq .fixq-sub{font-size:12px;color:var(--dim);margin-bottom:10px}
+.fixq-item{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line,#e3e0ef)}
+.fixq-item:first-of-type{border-top:0}
+.fixq-n{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(124,92,255,.12);color:var(--accent,#7c5cff);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.fixq-body{flex:1;min-width:0}
+.fixq-t{font-weight:700;font-size:13.5px;margin-bottom:3px}
+.fixq-dg{font-weight:700;font-size:11.5px;white-space:nowrap}
+.fixq-why{font-size:12.5px;color:var(--dim);line-height:1.45;margin-bottom:8px}
 .mgb-h{font-weight:700;font-size:12.5px;margin:10px 0 4px}
 .mgb-h:first-of-type{margin-top:4px}
 /* Q-bank performance dashboard */

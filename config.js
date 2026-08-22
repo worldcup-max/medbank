@@ -37,5 +37,11 @@ window.MEDBANK_CONFIG = {
 
   // Fallback prices in Naira if app_config can't be read (kept in sync with seed.sql)
   PRICES_NGN: { monthly: 2000, semester: 8000, annual: 15000 },
-  TRIAL_DAYS: 14
+  TRIAL_DAYS: 14,
+
+  // Feature flags — default OFF so new work is dormant for the live pilot until validated.
+  // Independent switches so the two V1.6 surfaces can be trialled separately.
+  //   GAP_LOOP             = at-miss Knowledge-Gap → Learn → Practice → Retest loop (SPEC-GAP-LEARN-LOOP.md)
+  //   POST_SESSION_FIX_QUEUE = post-session "3 things to fix" prioritisation layer that routes to interventions
+  FEATURES: { GAP_LOOP: false, POST_SESSION_FIX_QUEUE: false }
 };

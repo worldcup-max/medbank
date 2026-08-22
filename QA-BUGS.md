@@ -2661,3 +2661,1252 @@ from carrying a topic name or a lecturer name, which is precisely how HOME-03 ha
   same `used` and all pass. Small in practice (one student, one device), but the cap is advisory not enforced.
 - **Nothing ever downgrades an account.** No code path writes `status` to anything but `"active"`; there is no
   `cancelled`/`past_due` handling and no expiry check on the server side. A subscription is permanent once set.
+
+---
+
+# Flow 19 — Study screen + Subject page (`pageStudy` `app.html:4486`, `pageSubject` `:2358`) — code review, 2026-08-22
+
+The most-trafficked route in the app (19 `go('study/…')` call sites, 6 for `subject/`). Reviewed together with
+everything `pageStudy` reaches: `startDeck` (`:4108`), `toggleWeakFilter`/`toggleClinFilter` (`:4123`),
+`cardView` (`:4792`), `mcqView` (`:4713`), `rateCard`/`mcqRate`/`step`/`shuffle`/`restartDeck`,
+`sessionRecallIds` (`:1323`), and `topicRow`/`recomputeStats` on the subject side.
+
+## 🟠 STU-01 — A filtered pass ("⚡ Weak only" / "🩺 Clinical only") overwrites the FULL deck's saved place — MEDIUM → ✅ FIXED
+**What's wrong.** Student is 41 cards into a 60-card Recall deck. They tap **⚡ Weak only**, drill the 4 weak
+cards, and leave. The topic page now says **"Continue · 1 / 60 · 2%"** and reopening the deck drops them back
+at card 1. Their real place is gone, with nothing on screen to explain it.
+**Root cause.** `startDeck` (`app.html:4117`) is careful to only *read* `DATA.pos` on the unfiltered deck —
+`if(!clinOnly && !weakOnly)`. Every *write* is missing the same guard, and they all key on
+`'pos:'+S.t.id+S.deck`, which does not distinguish a filtered session from the full one:
+`mcqRate` (`:4895`), `rateCard` (`:5002`), `step` (`:4938`) and `restartDeck` (`:4944`, writes `0`).
+So the index of a card inside a 4-item filtered list is stored as the position inside the 60-item deck.
+Readers of that number: `topicResume` (`:2003`), the topic page's Continue row (`:2439`), Jump back in.
+**Fix (applied).** All four writes now carry `&& !S.clinOnly && !S.weakOnly`. `restartDeck` still clears
+`DATA.cardAns` for the cards it actually restarted; only the `pos` reset is now full-deck-only.
+
+## 🟠 STU-02 — `#/study/<id>` with no deck segment froze the whole app — MEDIUM → ✅ FIXED
+**What's wrong.** A typed, shared or bookmarked `#/study/<topicId>` link (no `/primer` or `/recall`) left the
+app stuck on whatever screen was already showing, and reloading reproduced it — the hash persists, so the
+route is un-escapable without editing the URL.
+**Root cause.** `render()` (`:6167`) calls `pageStudy(p[1], p[2])`; with `p[2]` undefined, `startDeck` picks
+the recall deck but then calls `cid(t.id, undefined, c)` (`:1176`), which evaluates `deck[0]` on `undefined`
+and throws. `render()` has **no try/catch**, so `$('#main').innerHTML=html` and `renderNav()` never run —
+the exact failure mode already logged as REV-03 and TOP-04.
+**Fix (applied).** `pageStudy` now normalises: `deck = (deck==='primer') ? 'primer' : 'recall'`. This also
+makes the `S.deck!==deck` session-reuse test stable for the same link written two different ways.
+
+## 🟠 STU-03 — 12th pool missing the `isFlagged` filter: the mastery chips count cards that can never be studied — LOW/MEDIUM → ✅ FIXED
+**What's wrong.** The Unfamiliar / Learning / Familiar / Mastered chips above every study card counted
+reported-wrong cards, so a student who hid 3 broken cards saw a permanent "3 Unfamiliar" that no amount of
+studying could clear — and there is no un-flag UI to undo it (LIB-01).
+**Root cause.** `sessionRecallIds()` (`:1325`) deck branch maps the raw `S.t.recall` array. Every serving pool
+was hardened by REV-04; this *reporting* pool was missed. (The session branch on the next line is safe — its
+`S.items` were already filtered by `startDeck`.)
+**Fix (applied).** `.filter(id=>!isFlagged(id))` on the deck branch.
+
+## 🟢 STU-04 — The empty study screen was a dead end, and blamed the wrong thing — LOW → ✅ FIXED
+**What's wrong.** `if(!S.items.length)` rendered `"This deck is empty."` with no button of any kind — no way
+back except the browser or the breadcrumb. Worse, `startDeck` drops flagged cards (`:4113`), so a deck of 40
+cards where the student has reported all 40 wrong also reported itself as *empty*: the app told them the
+lecture has no cards.
+**Fix (applied).** The message now distinguishes "empty deck" from "all N cards are reported as wrong, so none
+are being shown", and every empty state gets a **← Back to this lecture** button.
+
+## 🟢 STU-05 — The Subject page's empty state shipped the developer's workflow to students — LOW → ✅ FIXED
+**What's wrong.** A course with no lectures rendered: *"No lecture schedule loaded for this subject yet. Send
+MedBank a photo of the schedule and every topic will be listed here."* There is nobody to send a photo to and
+no button on the page. Same defect as LIB-08 (`pageBuilder`) and the LIB-06 blank-page family.
+**Fix (applied).** Replaced with "No lectures in this course yet" plus a **＋ Add a lecture** button wired to
+`MB_openImport()`, matching the pattern already used at `:6087`.
+
+## 🟢 STU-06 — `pageSubject` mapped `s.modules` and `m.topics` unguarded — LOW → ✅ FIXED
+`s.modules.map(...)` / `m.topics.map(...)` (`:2368-2369`) had no `||[]`, while the same structures are read
+defensively everywhere else (`:2956`, `:3042`, `content-loader.js:27`). A course object created without a
+module array (or a module created without topics) would throw inside `render()` — and per STU-02 that means a
+frozen screen, not an error. In practice `applyContent` always creates `modules[0]`, so this was latent.
+**Fix (applied).** `(s.modules||[])` / `(m.topics||[])`.
+
+## 🟠 STU-07 — A topic deck can never be *finished* — MEDIUM — proposed, needs review
+Every other runner ends somewhere: `pageReview` → `sessionSummary` (`:4505`), `pageHard` → `sessionSummary`
+(`:4534`), Mega and the mock exam have results screens. The deck runner has no end state at all. On the last
+card, `rateCard` and `mcqNext` deliberately stop (`:5011-5013`, `:4922-4924`, *"deck: stay on last card"*),
+`mcqView` renders **Next → disabled** (`:4769`, `(!session&&last)`), and `pageStudy` returns the same card
+forever. The student gets no "deck complete", no accuracy, no streak feedback and no next-step CTA — the one
+place in the app where finishing 60 cards is rewarded with a greyed-out button.
+**Proposed.** Give `pageStudy` a completion branch (a `sessionSummary`-style card once every item has been
+rated, with "Back to lecture" / "Study the other deck" / "↺ Restart"). Not applied: it changes the deck
+runner's end state and interacts with resume, `DATA.pos` and `DATA.cardAns`.
+
+## 🟠 STU-08 — `⇄ Shuffle` makes the saved place meaningless — MEDIUM — proposed, needs review
+`shuffle()` (`:4941`) permutes `S.order` and resets `S.i=0`, but the `DATA.pos` writes store `S.i+1` — an index
+into the *shuffled* order. `startDeck` restores that number into a freshly built, identity-ordered `S.order`
+(`:4119`), so the resume point lands on an unrelated card and the topic page's "Continue · 12 / 60 · 20%" is
+fiction. STU-01's guard does not help here: a shuffled full-deck pass is still `!clinOnly && !weakOnly`.
+**Proposed.** Either stop writing `pos` once `S.shuffled` is set, or store the card *id* instead of the index
+and resolve it back to an index on resume (the id form also survives a deck rebuild, which the index does not).
+Not applied — it changes the shape of a persisted, synced field.
+
+## 🟠 STU-09 — Opening any `study/…` link silently destroys a live session — MEDIUM — proposed, needs review
+`pageStudy:4489` runs `startDeck` whenever `S.mode!=='deck'`, with no confirm and no notice. A student halfway
+through today's review who taps a topic from Jump back in, Search, the Weakest tile or a status list loses the
+session's meter, mix and summary. Same defect as MX-06 (opening the exam tab ran `S=null`) and TOP-10
+(`qbStart`), but on the highest-traffic route in the app — 19 call sites. Ratings themselves are persisted per
+card, so the loss is the session, not the progress. Not applied: prompting on navigation is a UX decision, and
+the honest fix is to keep the daily session in a separate slot from the deck session rather than sharing `S`.
+
+## 🟢 FLOW 19 NOTES — smaller observations, not fixed
+- **`nClin` counts flagged cards** (`pageStudy:4490` → `clinInDeck` `:1422` reads `t.recall` raw), so the
+  "🩺 Clinical only" button can be offered on a deck whose clinical cards are all hidden — tapping it lands on
+  "No clinical cards in this deck." Same family as STU-03, but on a control rather than a counter.
+- **The card count in the filter bar is filtered, the clinical count next to it is not** — `${S.items.length}`
+  vs `nClin`, so "4 cards" can sit beside a button promising 9 scenarios.
+- **Revealing a non-MCQ recall card in deck mode removes the navigation.** `cardView` (`:4812`) swaps the
+  Prev / Reveal / Next + Shuffle / Restart row for the ✗/✓ rate buttons, so mid-card the only way forward is
+  to rate it (the ←/→ keys still work, but nothing on screen says so).
+- **Breadcrumb mismatch.** `pageStudy` builds `Anki Cards › Subject › Topic` (`:4496`) while `pageSubject`
+  builds `Home › Subject` (`:2364`). A student who arrived from Home and taps the crumb lands in a section of
+  the app they were never in.
+- **`DATA.cardAns` makes a topic deck one-shot.** `mcqView:4719` restores a previous day's pick, so re-opening
+  a Recall deck shows every question pre-answered with the answer revealed; the only way to re-test is
+  ↺ Restart, which is not labelled as "clear my answers". Deliberate (`restartDeck:4943` comments say so), but
+  it means "study this deck again" is not the obvious path.
+- **`s.topicCount` / `readyCount` / `cardCount` exist only if `recomputeStats()` ran** (`content-loader.js:40`),
+  which happens only inside `applyContent`. Harmless today because `content.js` ships `subjects: []`, so every
+  subject on screen came through `applyContent` — but `pageSubject`'s first line of logic (`if(!s.topicCount)`)
+  would hide a fully-populated course if a subject ever arrives by another path.
+- **`allTopics` holds copies, not references** (`:1110`, `Object.assign({subject,module},t)`), so `topById()`
+  and `pageSubject`'s `m.topics[]` are two different objects per topic. `applyContent` writes both (`:78-79`),
+  but a *local* runtime mutation via `topById` (e.g. a freshly built q-bank) is invisible to the subject page's
+  row until the next content refresh. No user-visible symptom found in this flow — `topicRow` only reads
+  `name`/`lecturer`/`ready`/`primer`/`recall` — but it is a trap for anything that starts rendering `extras`.
+
+---
+
+# Flow 20 — Recall side-sessions (`pageHard`/`startHardQuick`, `pageLeeches`, `pageMistakes`, `startNudgeSession`)
+Reviewed 2026-08-22. LOG-ONLY — no code changed in this run. Four pools read: `starItems` (`:1853`),
+`leechItems` (`:1598`), `missItems` (`:1606`), `nudgeItems` (`:4272`); plus their runners and the
+`hard`/`leeches`/`mistakes`/`nudge`/`hardnudge` router cases (`:6169-6173`).
+
+## 🔴 SIDE-01 — All four side-session pools are missing the `isFlagged` filter — HIGH — logged, not fixed
+**What's wrong:** family (a) again, in four more pools, none of which filters reported-wrong cards:
+- `starItems()` `app.html:1853-1861` — no filter (feeds `startHard`, `startHardQuick`, `nudgeItems`)
+- `leechItems()` `app.html:1598-1601` — walks `DATA.cards` raw, no filter
+- `missItems()` `app.html:1606-1612` — walks `DATA.missLog` raw, no filter
+- `nudgeItems()` due loop `app.html:4276-4277` — filters `DATA.starred` but not `isFlagged`
+
+That takes the count to **16 pools** since REV-04 (11), PRG-04 (11th), STU-03 (12th).
+It is worse here than in the earlier cases because of the auto-star on failure: a missed card is written
+into **both** `DATA.starred` and `DATA.missLog` at `app.html:4917` and `:5028`. So the normal life of a bad
+card is: student misses it → it lands in Hard + Mistakes → student taps "Report this card as wrong and hide
+it from my studying" → `cardFlags` hides it from the twelve *studying* pools, and it keeps being served by
+Hard cards, Leeches, Recent mistakes **and the push notification**.
+
+**Why it matters to a student:** the hide button is the app's promise that a bad card will stop appearing.
+Here it appears on the three surfaces the student visits *specifically* to clean up bad cards, plus a phone
+notification that quotes the card's question and answer on the lock screen (`nudgeBody`, `:4295`). It reads
+as the report button being broken — and per LIB-01 there is no un-flag UI to undo the report either.
+
+**Proposed fix:** add `if(isFlagged(id)) continue;` / `&& !isFlagged(id)` at each of the four sites.
+For `leechItems`/`missItems` the guard goes right before `itemById(id)` so the count and the rows agree.
+Also worth considering: don't auto-star/auto-log a card that is already flagged (`:4917`, `:5028`).
+
+## 🔴 SIDE-02 — Un-starring a hard card never syncs — the Hard-cards pool can only grow — HIGH — logged, not fixed
+**What's wrong:** `DATA.starred` is merged as a pure **union**, `sync.js:144`
+(`out.starred = mergeMap(localD.starred, remoteD.starred, "b")`, and `mergeMap` `sync.js:~200` copies both
+key sets). A union has no way to express a deletion, and the two places that remove a star both delete the key:
+`rateSRS` on a pass — `if(DATA.starred[id]) delete DATA.starred[id]` (`app.html:1270`, the documented
+"passed → graduate out of hard cards" rule) — and `toggleStar` (`app.html:1850`).
+
+So on any account that has synced from two contexts (two devices, or one device plus a stale cloud row), every
+star ever set is resurrected on the next `mergeState`.
+
+**Why it matters to a student:** the Hard-cards list is supposed to *drain* as you master things — that is the
+entire reward loop. Instead it ratchets upward: the card you just aced reappears, the card you deliberately
+un-starred reappears, `starCount()` (which drives the ★ nav subtitle at `:4716` and the service worker's
+`hardcount` badge, `:4919`) only ever climbs, and `nudgeItems` weights notifications toward that stale pool
+1-hard-to-2-due. The feature quietly becomes a list of everything you ever got wrong.
+
+**Proposed fix direction:** stars need to be a last-write-wins map rather than a set — e.g. store
+`DATA.starred[id] = {v:0|1, ts}` and merge by `ts`, or keep the current shape and add a `DATA.starredOff`
+tombstone map (id → ts) that `mergeState` subtracts after the union. Either is a state-shape change on the
+sync path, so it needs a migration and Frank's call — not a drive-by fix.
+
+## 🟠 SIDE-03 — `missLog` is never cleared when you get the card right — MEDIUM/HIGH — logged, not fixed
+**What's wrong:** `logMiss(id)` (`app.html:1605`) is write-only. The single delete in the codebase is the
+per-topic reset at `app.html:1395`. Nothing in the rating path removes an entry when the same card is
+subsequently answered correctly (`:4917`, `:5028` only ever add).
+
+**Why it matters to a student:** "Recent mistakes — every card you miss lands here automatically. **Clear them
+while they're fresh**" (`pageMistakes`, `:5581`) describes a mop-up loop that cannot complete. Drill all 12 of
+today's misses, get 12/12, come back: the button still says "Today's misses · 12 cards" and re-serves the
+identical 12. The only thing that ever shrinks the list is the calendar rolling past the 1-day / 7-day window.
+Two knock-on effects: (i) those re-drills run through the full `rateSRS` path, so the same cards can be
+re-rated repeatedly the same day and inflate the daily goal/streak counters (REV-05 family, and here the app
+actively invites it); (ii) the SRS schedule is bypassed — a card correctly boxed to +7 days is dragged back
+today, resetting nothing but wasting the review.
+
+**Proposed fix:** on a correct rating, `delete DATA.missLog[it.id]` alongside the existing star cleanup at
+both rating sites. Note the sync side: `missLog` is union-merged (`sync.js:149`), so — exactly as in SIDE-02 —
+the deletion will not propagate across devices without a tombstone. Fixing this properly and fixing SIDE-02
+are the same piece of work.
+
+## 🟠 SIDE-04 — `lapses` never decays, so a leech is a leech forever — MEDIUM — logged, not fixed
+**What's wrong:** `rateSRS` increments `s.lapses` on every miss (`app.html:1269`) and **never** decrements or
+resets it on a pass. `leechItems()` selects on `(st.lapses||0) >= LEECH_LAPSES` (4) with no recency window and
+no "but it's mastered now" escape (`:1598-1601`).
+
+**Why it matters to a student:** a card missed 4 times in first-year week 3 and mastered ever since is still
+listed under "🩸 Leeches — the ones quietly costing you marks", still counted in the Practice-tab button
+(`leechCount()`, `:4715`), and still included in "▶ Drill all N leeches". There is no way to clear it: no
+dismiss control on the row, no threshold setting, and passing the card does nothing. Over a year the page
+becomes a permanent monument that costs the student time on cards they already own — the opposite of the
+targeting the page promises. Combined with SIDE-01 it also lists cards the student has explicitly hidden.
+
+**Proposed fix direction:** either decay on success (`if(ok && s.lapses) s.lapses--`, matching how Anki's
+leech tag is cleared), or leave `lapses` as the lifetime counter and add a second condition to `leechItems` —
+e.g. only list a card whose current `box < 2`, so mastered cards fall off but the history is preserved. The
+second is safer mid-pilot: it changes one predicate and touches no stored state.
+
+## 🟠 SIDE-05 — Finishing a Hard-cards or Nudge session leaves the route stuck on a stale results screen — MEDIUM — logged, not fixed
+**What's wrong:** `sessionSummary` (`app.html:4578`) renders the celebration but never clears `S`, and the
+routers guard on identity rather than completion:
+- `pageHard` `app.html:4553` — `if(!S || S.mode!=='hard') startHard();` then `if(S.i>=S.items.length) return sessionSummary('Back to dashboard','home')`
+- `case 'nudge'` `app.html:6170` — `if(!S || S.key!=='nudge') startNudgeSession();`
+- `case 'hardnudge'` `app.html:6169` — same, keyed on `S.key!=='hardquick'`
+
+After the student finishes a hard session and taps "See what's next tomorrow →" (`go('home')`), `S` is still
+`{mode:'hard', i===items.length}`. Tapping "★ Hard cards" again re-enters `pageHard`, the rebuild guard passes,
+and they get **the same finished summary** — zero cards, no session. It only unsticks if they happen to start
+some other session first (which changes `S.mode`), or reload.
+
+**Why it matters to a student:** the most natural thing after a good hard-card round is a second one. Instead
+the button appears to have stopped working, showing yesterday's confetti and stats. The `#/nudge` case is
+worse because it is reached from a **push notification**: the second notification of the day drops the student
+onto the previous session's celebration screen instead of any cards, which makes the whole reminder feature
+look broken from the outside.
+
+**Proposed fix:** make the rebuild guard include completion — e.g. `if(!S || S.mode!=='hard' || S.i>=S.items.length) startHard();` (and the `key` equivalents for nudge/hardnudge). Alternatively have the
+summary's back button null `S`, but that risks the MX-06/TOP-10 class of accidental session destruction, so
+the guard is the narrower change.
+
+## 🟠 SIDE-06 — `#/nudge` silently destroys a live study session — MEDIUM — logged, not fixed
+**What's wrong:** `case 'nudge'` (`app.html:6170`) overwrites `S` whenever `S.key!=='nudge'`, with no check for
+an in-progress session. Entry points: the service worker notification (`sw.js:85, 92, 101, 110, 120`, all of
+which route to `./app.html#/nudge`) and the study-timer strict overlay's "Start review now" button
+(`app.html:4369`).
+
+**Why it matters to a student:** this is the MX-06 / TOP-10 / STU-09 family, but with the worst trigger of the
+set — the strict overlay is raised by a **timer alarm** (`:4425-4429`), not by the student navigating anywhere.
+Mid-way through a 40-card deck, the break alarm fires, the student taps the one primary button on the overlay,
+and their session — position, `session.done`, `session.correct`, the time-budget `over` count — is gone with no
+warning and no way back. The overlay's copy ("Start review now") does not suggest anything is being discarded.
+
+**Proposed fix:** same shape as the STU-09 fix direction — before overwriting, check for
+`S && S.session && S.session.done > 0 && S.i < S.items.length` and either resume it or show a two-button
+choice ("Resume your session" / "Start the quick review"). Should be solved once, centrally, for all five
+session-clobbering routes rather than patched per route.
+
+## 🟠 SIDE-07 — Leech and mistake drills are the only sessions with no time budget and no cap — MEDIUM — logged, not fixed
+**What's wrong:** `startLeeches` (`:4438`) and `startMistakes` (`:4444`) do `shuf(pool)` and hand the **entire**
+pool to the runner. Every comparable builder in the app budgets: `startRecallSession` and `csStart` (`:4247`)
+both run `greedyBudget(orderItems(pool), min)` and report the held-back remainder as `session.over`, which
+`sessionSummary` then surfaces ("N extra due cards held for tomorrow to fit your time budget", `:4600`).
+
+**Why it matters to a student:** "▶ Drill all 74 leeches" (`:5578`) is presented as a mop-up and is really a
+~35–40 minute unbroken block by the app's own 17s/card review estimate — with no progress expectation set, no
+`over` note, and no interleaving (`orderItems` is skipped, so exam-proximity ordering doesn't apply either).
+`missItems(7)` can be similarly large after a heavy week. The likely outcome is an abandoned session, and
+because `endSession` only shows results when `done>0` (`:4990`) an early bail is at least graceful — but the
+student's 15-minute daily budget has been quietly ignored.
+
+**Proposed fix:** route both through `greedyBudget(orderItems(items), DATA.daily.budget||15)` and set
+`session.over = g.over`, exactly as `csStart` does; change the button label to the capped count.
+
+## 🟡 SIDE-08 — The `hardnudge` route and `startHardQuick` are dead code — LOW/MEDIUM — CONFIRMED ORPHANED, logged
+**What's wrong:** verified across the whole repo. `hardnudge` appears exactly twice: the router case
+(`app.html:6169`) and the `onStudyScreen` route list (`app.html:991`). Nothing anywhere navigates to it.
+`startHardQuick` (`app.html:4264`, commented "a short 3-5 card hard-card review, launched from the
+notification") has that router case as its only call site. And the notification never sends there —
+`sw.js:101` picks `hc > 0 ? './app.html#/nudge' : './app.html#/today'`, i.e. the hard-card branch also goes
+to `#/nudge`.
+
+**Why it matters to a student:** the designed behaviour is missing rather than broken — a "you have 12 hard
+cards" notification opens the generic mixed quick-review instead of the short hard-card drill it advertises.
+Also note `startHardQuick` slices to 5 while its own comment says 3–5, and unlike `startNudgeSession` it sets
+no `label`, so `pageReview` would render it unlabelled if it ever were reachable.
+
+**Proposed fix (Frank's call, two options):** (a) intended behaviour — change `sw.js:101`'s hard branch to
+`'./app.html#/hardnudge'` and keep the route; or (b) delete `startHardQuick`, the router case and the `991`
+list entry. Do **not** do (a) blind: `sw.js` is also carrying the unfixed half of SET-03 (the worker checks
+neither `remindOn` nor quiet hours), and flow 26 is scheduled to review that file — better to change `sw.js`
+once. Deleting is a code change, so logged only either way.
+
+## 🟡 SIDE-09 — "Open" on a leech / mistake row opens the whole deck, not the card — LOW — logged, not fixed
+`pageLeeches:5576` and `pageMistakes:5589` both render `<button ... onclick="go('study/${it.t.id}/recall')">Open</button>`.
+That lands on the topic's full recall deck at its saved `DATA.pos` position — so tapping "Open" next to the
+card you have missed 7 times shows you card 1 of 60, with no indication of where the leech is. It is also the
+STU-09 path, so it destroys any live session on the way. The row already holds `it.id`; a deep link that seeks
+to that card (or an inline flip on the row itself) is what the layout implies.
+
+## 🟡 SIDE-10 — `missItems` date handling: silent drops, and a card can never age out — LOW — logged, not fixed
+Two small things in `missItems` (`app.html:1606-1612`):
+- `dayNum(new Date(DATA.missLog[id]+'T00:00'))` — any value that is not a `YYYY-MM-DD` string yields `NaN`,
+  `NaN>=cut` is false, and the entry vanishes from every mistakes count with no error. Given `missLog` crosses
+  the sync boundary (`sync.js:149`) and is user-restorable via Settings' paste-a-backup path, a shape guard is
+  cheap insurance.
+- A miss *inside* the mistakes drill re-stamps `missLog[id]` to today (`:5028`), so a genuinely hard card is
+  pinned in "Today's misses" indefinitely — combined with SIDE-03 (correct answers never clear it) the list has
+  no reliable exit at all.
+
+## 🟡 SIDE-NOTES — smaller observations, not fixed
+- **Families (b), (c), (d) did not reach this flow.** None of the four pools reads `box`: `leechItems` uses
+  `(st.lapses||0)`, `nudgeItems` uses `s.due`, `starItems`/`missItems` read no state fields. There is no
+  answer-key parsing and no `fetch` on any of these paths. The one adjacent `box` read is `classifyItem`
+  (`:4975`) — `DATA.starred[it.id] || s.box<0`; a Visualize-quiz state with no `box` gives `undefined<0` =
+  false, so the card is mislabelled 'rev' in the session mix rather than crashing. Cosmetic, but it is the
+  REV-01/TOP-01 shape surviving in a third reader.
+- **`starItems` includes `primer` cards** (`:1855`, `['primer','recall'].forEach`). Primer cards are not rated,
+  so a hard session made only of primer cards advances via `sessionNext` (`:4996`) and scores nothing. Worse,
+  `nudgeBody` (`:4297`) prints `it.deck==='primer' ? (it.c.lecturer||'') : it.c.a` as the answer — so a push
+  notification's "↳" line can read a lecturer's name, or be blank when the topic kept the default lecturer.
+- **Perf:** the Practice tab (`:4714-4716`) calls `missCountWeek()`, `leechCount()` and `starCount()` inline,
+  and `pageMistakes` calls `missItems` twice (`:5581`). Each `leechItems`/`missItems` call rebuilds
+  `cardIndex()` via `itemById`. That is three-to-four more full index passes per render, on top of the ~8
+  noted in HOME.
+- **Row lists are silently truncated at 60** (`:5575`, `:5588`) with no "showing 60 of N" line, while the drill
+  button above them promises the full count.
+- **`LEECH_LAPSES=4` is a hard-coded constant** (`:1597`) with no setting, and the copy repeats it in two
+  places — fine, but worth knowing it is the only knob if the leech list turns out to be too noisy in the pilot.
+- **`startLeeches`/`startMistakes` label their sessions 'Leeches' / 'Recent mistakes'** but set `mode:'daily'`,
+  which means `pageReview`'s cold-start guard (`:4531`, `if(!S || S.mode!=='daily') startRecallSession(0)`)
+  correctly leaves them alone. Checked — no defect, but it is why these two routes escape the SIDE-05 bug that
+  `#/hard` and `#/nudge` have.
+
+---
+
+# 🧪 Live post-deploy smoke test — 2026-08-22 (Claude, test account frankthejay)
+
+Verified the live build after Frank committed + deployed the ~120 auto-fixes + my 2 fixes.
+
+## ✅ Deploy is healthy (verified against the SERVED files, not just local)
+- Fetched live `sync.js` + `auth-ui.js` from production: my `_events` merge-union fix and my out-of-band account-isolation guard are **live**, alongside the task's AUTH hardening (AUTH-01 pull-error throw, AUTH-04 real "syncing" status, AUTH-07 uid-filtered queries, AUTH-11 shared client, AUTH-12 purge `mb_pending_onboard` on switch). HOME-01 real-name greeting is live.
+- Committed app.html diff touches only UI/session/flow functions — **no frozen engine function changed** (verified: startSmartDrill/smartDrillPlan/smartPool/qbShuffle/take/poolByQh are byte-identical to the pre-deploy commit). Freeze/engine integrity intact.
+- Live Mega Q-bank page renders correctly: Quick Exam + Smart Drill card showing **real diagnosis** ("Exam trap 25%", "Management 40%", misconception "why" text) + customize panel. Smart Drill flow code unchanged from the version already proven end-to-end (start→answer→complete→4 telemetry events→cloud sync).
+
+## 🔴→note AUTH-ISO-01b — my first SIGNED_OUT fix was itself slightly wrong (caught + re-fixed)
+The initially-deployed `SIGNED_OUT` handler did `localStorage.removeItem("mb_current_uid")` — but that uid is the whole signal the init() guard uses to detect an account switch on the next login. Clearing it on logout would let the next student on a shared device merge/adopt the previous student's local data (the AUTH-03 risk). Re-fixed: keep `mb_current_uid` through logout (reload only). Frank committed + redeployed. ✅
+
+## 🟠 SET-01 — CONFIRMED LIVE — "Reset progress" does not stick — MEDIUM/HIGH
+Frank reset the topic's progress + Q-bank stats, yet the account still shows 40 attempts / 7 events / 5 sessions afterward.
+**Two causes:** (1) `qbReset` (app.html) filters `_attempts` and `_sessions` by topicId but **never clears `_events`** at all; (2) even the cleared `_attempts` come back because `mergeQbankStore` is a pure UNION — on the next sync the cloud's copy is re-adopted and re-unioned onto local, undoing the reset. Same class as BUG-02, but here the union *defeats* an explicit user action.
+**Fix direction (needs Frank; not applied):** a reset must be authoritative — either (a) push the emptied state with a rev bump and have merge respect a per-record tombstone/reset-timestamp so unions don't resurrect deleted history, or (b) on reset, clear `_events` too and mark the profile so the next pull adopts-clean instead of union-merging. This is a real design tension (multi-device "never lose history" vs. "let me wipe this") and needs a product decision.
+
+## ℹ️ Automation note (not an app bug)
+Chrome-extension driving grew unstable across this long session (renderer wedged after a few ops per tab; screenshots intermittently hit a `clip.scale` serialization error). Confirmed environmental: the Smart Drill code path is byte-identical to the version that ran clean earlier, and students aren't reporting freezes. A fresh browser/session drives fine.
+
+---
+
+# Flow 21 — Notification → session landing (`sw.js` reminder path, `strictOverlay`, `startNudgeSession`)
+Reviewed 2026-08-22. **LOG-ONLY — no code changed in this run.** Read end-to-end: `sw.js:74-125`
+(`periodicsync` → `maybeRemind` → `notifyOpts` → `notificationclick`, plus the `message` channel and
+`writeFlag`/`readFlag`), `nudgeTick`/`habitNudge`/`nudgeBody`/`strictOverlay` (`app.html:4271-4430`),
+`startNudgeSession` (`:4288`), the `nudge`/`hardnudge` router cases (`:6169-6170`), `swPing`/`setupReminder`
+(`:6330-6358`) and the boot order (`render()` at `:6390` vs `content-loader.js` at `:6410`).
+
+## 🔴 NTF-01 — The service worker's flag store can never write a single value — HIGH
+**What's wrong:** `writeFlag` (`sw.js:114`) does `c.put('flag:' + k, new Response(v))`. The string
+`'flag:hardCount'` is not a relative path — it parses as an **absolute URL with the scheme `flag:`**, and the
+Cache API spec rejects `Cache.put()` for any request whose URL scheme is not `http`/`https`, with a TypeError.
+Every call site (`sw.js:108,109,110,111`) invokes `writeFlag` **un-awaited and un-`catch`ed**, so the rejection
+is an unhandled promise rejection nobody sees. `readFlag` (`:115`) then matches against a cache that has never
+contained anything and returns `null` forever.
+**Why it matters to a student:** the entire staged-payload mechanism is dead. `maybeRemind` (`:88-103`) always
+falls through to its fallback branch, so:
+- the habit-loop copy the app spends real work computing (`habitNudge`, `app.html:4306`) never reaches a
+  background notification — every push is the generic *"Time for a quick review — keep your streak alive."*
+- `hardCount` is always `0`, so the fallback never says *"Review 3 hard cards"* and never routes to `#/nudge`
+- `strict` is always falsy, so `requireInteraction` is off — the student paid for strict mode and the
+  background notification quietly ignores it
+- `lastStudied` is written and read by nothing at all (dead either way)
+**Confirm in one line** (DevTools → Application → Service Workers → console):
+`caches.open('medbank-v213').then(c=>c.put('flag:x',new Response('1'))).then(()=>console.log('OK'),e=>console.log('FAIL',e))`
+**Proposed fix (do NOT apply here — batch it into the flow-26 `sw.js` pass):** give the keys a real same-origin
+http(s) URL — e.g. `'./__mbflag/' + k`, which resolves against the SW scope — and add `.catch(()=>{})` to every
+write. If that path is used, the `fetch` handler (`:53`) must skip `/__mbflag/` so a stray navigation can't
+serve a flag as a document. Cleaner alternative: move the store to IndexedDB (~15 lines), which also fixes
+NTF-06 for free. **One `sw.js` edit + one `CACHE` bump for NTF-01, NTF-03, NTF-06, NTF-07 and SIDE-08 together
+— do not touch `sw.js` five times.**
+
+## 🔴 NTF-02 — Landing on `#/nudge` from a cold start always builds an EMPTY session, and never rebuilds — HIGH
+**What's wrong:** a boot-order race that the nudge route has no guard against.
+1. `content.js` is a **104-byte empty shim** (`{subjects:[],lecturers:[],stats:{…}}`) — every real topic
+   arrives through `content-loader.js`.
+2. The inline script's boot `render()` runs at `app.html:6390`, inside the `<script>` block that ends at
+   `:6400`. `content-loader.js` is not loaded until `:6410`. So at the first render **`allTopics` is empty for
+   every student, always.**
+3. Router `:6170`: `case 'nudge': if(!S||S.key!=='nudge') startNudgeSession();` — `S` is null, so
+   `startNudgeSession` (`:4288`) runs `nudgeItems(10)`, whose two sources (`starItems()` `:1853` and
+   `startedTopics()` `:4276`) both walk the still-empty `allTopics` → **`items: []`**.
+4. `content-loader.js` hydrates from cache and calls `render()` (`content-loader.js:160`, and again at `:149`
+   after the network fetch) — but the guard is now false (`S` exists, `S.key==='nudge'`), so **the session is
+   never rebuilt**. `pageReview`'s own cold-start guard (`app.html:4528`) also declines, because
+   `startNudgeSession` sets `mode:'daily'`.
+5. `pageReview:4529` → `!S.items.length` → **`caughtUp()`**.
+**Why it matters to a student:** they tap a notification that exists solely because cards are due, and the app
+opens on **"All caught up. No Recall cards are due right now."** (On the very first paint it is even worse —
+`startedTopics()` is 0 too, so it reads *"Nothing started yet. Open any built topic and study it."* to a
+student with 200 built cards.) It is unrecoverable without navigating away and back, and it discredits every
+future notification. `hardnudge` (`:6169`) has the identical defect, currently masked only because SIDE-08
+established that route is orphaned.
+**Proposed fix (not applied):** make the two nudge cases content-aware rather than identity-only, e.g.
+`if(!S || S.key!=='nudge' || (!S.items.length && !window.__MB_CONTENT_READY)) startNudgeSession();`.
+The cleaner version is to extend the pre-content loader guard at `:6159-6162` to cover id-less study routes
+(`nudge`, `hardnudge`, and arguably `today`/`hard`/`mistakes`/`leeches`) so they paint `pageLoadingTopic()`
+until content is ready — **but note `__MB_CONTENT_READY` is only ever set in `loadProfileContent`'s `finally`
+(`content-loader.js:152`), which is never reached for a logged-out or local-only student**, so a naive
+loader-gate would spin forever for them. Whichever route is taken, that flag needs an honest
+"content-will-never-arrive" terminal state first.
+
+## 🟠 NTF-03 — The background notification path has none of the three guardrails the foreground path has — HIGH/MEDIUM
+**What's wrong:** `maybeRemind()` (`sw.js:88`) checks **nothing**. All three gates live in `nudgeTick`
+(`app.html:4398`), which only runs while the page is open:
+- `if(!s.remindOn) return;` (`:4401`) — no equivalent in the worker
+- the active-hours window (`:4407-4409`, the SET-05 wrap-past-midnight fix) — no equivalent in the worker
+- the one-pull-and-one-streak-save-per-day guardrail (`:4417-4421`) — no equivalent in the worker
+`periodicsync` fires at the browser's discretion at `minInterval` (default 120 min from `remindMins`,
+`:6335`) around the clock, and `notifyOpts` sets `renotify:true`, so each one re-buzzes.
+**Why it matters to a student:** the v197 promise of *"one pull/day, never guilt-nag"* and the Settings copy
+*"No nudges outside this window (so it won't wake you)"* (`:5466`) are both true only while the app is open —
+i.e. exactly when the notification is least needed. In the background they are unenforced. `disableReminders`
+(`:5392`) now unregisters `periodicSync`, but that is wrapped in `try/catch` and depends on
+`navigator.serviceWorker.ready`; if it doesn't land, the student has turned reminders off and the worker keeps
+firing with no off switch. This is the still-open half of **SET-03**, plus the newly-found missing daily cap.
+**Proposed fix (not applied, belongs in the flow-26 `sw.js` pass):** once NTF-01 makes the flag store work,
+mirror `remindOn`, `quietStart`, `quietEnd` and `nudgedDay` into it on every `persist()` and gate
+`maybeRemind` on all four — and treat *unreadable settings* as **do not notify**, not as "notify anyway".
+
+## 🟠 NTF-04 — `nudgeBody()` has ZERO call sites — the card-carrying notification was never wired up — MEDIUM
+**What's wrong:** `nudgeBody(items)` (`app.html:4294-4303`) builds the whole "🔴 question ↳ answer …
++ 7 more · tap to drill" body, complete with its own clipper. Grepped the repo: **the only occurrence of the
+identifier is its own `function` line.** Both senders — `nudgeTick` (`:4423-4424`) and `testNudge`
+(`:5370-5371`) — pass `habitNudge()`'s generic marketing copy instead. LIB-01 / ENT-03 pattern: a complete
+feature reachable from nowhere.
+**Why it matters to a student:** Settings makes two contradictory promises about this and ships neither
+cleanly. The reminders row says *"No card spoilers, no guilt-trips"* (`:5459`); the **Test it now** row two
+screens down says *"Fire a sample nudge so you can set the sound and **see the card in your notification
+shade**"* (`:5474`). Shipped behaviour matches the first and makes the second a lie. A student who taps "Test
+it now" specifically to check the card-preview feature sees no card and reasonably concludes notifications are
+broken.
+**Proposed fix (not applied — this is a product decision, not a bug fix):** pick one. If no-spoilers is the
+intent, delete `nudgeBody` and correct the "Test it now" copy. If card-carrying is the intent, wire
+`nudgeBody(items)` into the `payload` ping only (never the foreground `notify`), and gate it behind a setting —
+a lock-screen answer key is a genuine privacy call, not a default. **See also the SIDE-notes finding that
+`nudgeBody:4298` prints a lecturer's name as the "answer" for a primer card** — that needs fixing before this
+function is ever called.
+
+## 🟠 NTF-05 — The strict overlay's "Start review now" silently destroys a live session — MEDIUM
+**What's wrong:** `strictOverlay` (`:4363`) is only ever shown from `nudgeTick` under
+`document.visibilityState==='visible'` (`:4425-4427`) — **by definition while the student is using the app**,
+and very often mid-session on `#/review`. Its primary button (`:4369`) is
+`document.getElementById('strictov').remove();go('nudge')` → hashchange → router `:6170` → `S.key!=='nudge'`
+→ `startNudgeSession()` overwrites `S` wholesale. No confirm, no restore.
+**Why it matters to a student:** a modal the app throws over them *while they are already studying* wipes the
+session they are 14 cards into — `session.done`, `session.correct` and their place, gone. MX-06 / TOP-10 /
+STU-09 / SIDE-06 family, but this is the only instance where the app itself initiates the interruption.
+**Second defect in the same two lines:** if the student is already on `#/nudge` when the overlay fires,
+`go('nudge')` assigns an identical `location.hash` → no `hashchange` → no `render()` → the overlay disappears
+and **nothing happens**. That is the MX-01 "`go()` is not a render" defect, third instance.
+**Proposed fix (not applied):** (a) don't show the overlay at all when already studying —
+`window.MB_DOCK.onStudyScreen()` (`:991`) already enumerates exactly these routes and already includes
+`'nudge'`, so the guard is a one-liner; and (b) make the button `startNudgeSession(); go('nudge'); render();`
+so it also works from the nudge route itself.
+
+## 🟡 NTF-06 — Every deploy wipes the notification state, because the flags live inside the versioned cache — MEDIUM
+**What's wrong:** `activate` (`sw.js:42-47`) deletes **every** cache whose key !== the new `CACHE`, and
+`writeFlag`/`readFlag` (`:114-115`) store into that same `CACHE`. Bumping the `CACHE` string is how every
+MedBank build ships (27 version lines in this file's header), so each deploy drops `payloadBody`, `payloadUrl`,
+`payloadTitle`, `hardCount`, `strict` and `lastStudied`.
+**Why it matters to a student:** independent of NTF-01. Even after the scheme bug is fixed, the staged payload
+survives only until the next deploy — and the first background nudge after every release reverts to the
+generic fallback with `hardCount=0` and strict mode off, which is precisely the window (post-update) where a
+re-engagement nudge matters most.
+**Proposed fix (not applied):** keep flags in a **version-independent** cache (e.g. `medbank-flags`) and
+exclude it from the `activate` sweep, or move the store to IndexedDB, which `activate` never touches. The
+IndexedDB route fixes NTF-01 and NTF-06 in the same change. **Do NOT touch the `CACHE` string as part of this
+finding** — per the flow-26 rule, one bump, one pass.
+
+## 🟡 NTF-07 — `notificationclick` navigates an arbitrary window, and can be a no-op — LOW/MEDIUM
+**What's wrong:** `sw.js:121-124` iterates `clients.matchAll({type:'window'})` and focuses/navigates the
+**first** client that has `focus`, with no URL check. Two problems: (1) with two MedBank tabs open, the tap can
+navigate the wrong one — and if that tab holds a live mock exam, MX-06 showed that is destructive; (2) if the
+focused client is already at the exact target URL, `navigate()` to an identical URL fires no `hashchange`, so
+a second tap on the same notification leaves the student on the previous session's stale completion screen —
+the SIDE-05 shape, reached from the lock screen.
+**Proposed fix (not applied):** prefer a client whose URL contains `app.html`; and after focusing, also
+`postMessage({type:'route', url})` so the page can apply the route itself (`location.hash=…; render();`)
+instead of relying on `navigate()` alone.
+
+## 🟡 NTF-08 — `swPing` silently no-ops until the worker controls the page — LOW
+**What's wrong:** `swPing` (`app.html:6330`) requires `navigator.serviceWorker.controller`, which is `null` on
+the very first load after an install until the page reloads. Every `payload` / `hardcount` / `notify` ping in
+that window is dropped with no retry — including `setupReminder`'s pre-staging (`:6341`) and the ping
+`enableReminders` triggers immediately after the permission grant (`:5389`).
+**Why it matters to a student:** the student most likely to turn reminders on is the one who just installed —
+and for them nothing is staged until they reopen the app.
+**Proposed fix (not applied):** fall back to
+`navigator.serviceWorker.ready.then(r=>r.active && r.active.postMessage(msg))` when `controller` is null.
+
+## 🟡 NTF-09 — The strict overlay's card count is the capped 10 — LOW
+**What's wrong:** `nudgeTick` builds `items=nudgeItems(10)` (`:4413`) and passes `items.length` into
+`strictOverlay` (`:4427`). A student with 90 cards due gets a blocking modal that says **"10 cards waiting"**.
+HOME-04 / REV-11 family (a capped pool printed as if it were the true count).
+**Proposed fix (not applied):** use `dueCount()` + `starCount()` for the sentence and keep the capped list for
+the session it launches.
+
+## Notes / smaller things (Flow 21)
+- **Family (a):** `nudgeItems`' due loop filters `DATA.starred` but not `isFlagged` (`:4276-4277`), and
+  `starItems()` (`:1853`) is unfiltered — both already logged as **SIDE-01**. Restating because *this* is the
+  pool a **notification** opens: the app can push a card the student explicitly asked it to hide straight to
+  the lock screen. That raises SIDE-01's priority.
+- **Families (b), (c), (d) did not reach this flow.** `nudgeItems` compares `s.due<=today`, so a `NaN` due from
+  the REV-01/TOP-01 shape is simply excluded rather than crashing — safe by accident, not by design.
+- **`habitNudge()` hard-codes `url='./app.html#/today'`** (`:4315`) and never varies it across any of its five
+  branches. Combined with NTF-01 and NTF-04, `#/nudge` today is reachable only from the `sw.js:101` fallback
+  (needs `hardCount>0`, which NTF-01 makes impossible) and from the strict overlay. **So NTF-02 is rarer in
+  practice right now than it looks — but it becomes the default landing the moment NTF-01 is fixed and
+  `hardCount` starts staging. Fix NTF-02 before or in the same change as NTF-01, not after.**
+- **Perf:** `nudgeTick` runs every 60s on every screen (`setInterval`, `:6357`) plus on every
+  `visibilitychange` (`:6360`) and on every Idle-Detector `active` transition (`:4390`). Each non-bailing tick
+  calls `nudgeItems(10)` (two full passes over `allTopics`) and `habitNudge()`, which itself calls
+  `buildRecallSession()`, `dueCount()` and `freezeState()` — the **entire session builder, once a minute,
+  purely to compute a minute count for notification copy**. The early bails (`remindOn`, permission,
+  active-hours, interval) do cover the common case, but the interval check is *after* the hours check and
+  *before* `nudgeItems`, so it is fine — worth confirming on a low-end phone during the pilot.
+- **`actions:[review, later]`** (`sw.js:84`): `'review'` isn't special-cased and correctly falls through to the
+  URL. `'later'` returns without opening (`:119`) — but `s.nudgedDay` was already set *before* the notification
+  fired (`app.html:4421`), so "Later" is functionally "no more nudges today", not "remind me later". Probably
+  intended given the no-guilt design; flagging for Frank to confirm, because the button label promises the
+  opposite.
+- **iOS:** `vibrate` and `actions` are ignored by iOS PWAs entirely, so the two action buttons don't exist
+  there. Settings' iPhone note (`:5479`) correctly warns about background timing but doesn't mention this.
+- `notifyOpts`' defaults (`sw.js:85`, `:92`, `:110`, `:120`) are the only four places `#/nudge` is the fallback
+  target; every app-side sender says `#/today`.
+
+---
+
+# Flow 22 — Status lists + Jump back in (`pageStatusList` `app.html:6119`, `pageJumpback` `:5143`)
+Code review, 2026-08-22. **LOG-ONLY — no code was edited in this run.** 10 findings (SL-01..SL-10) + 8 notes.
+Brief for this item was "check the counts these lists print against the pools they actually open" — that is
+exactly where the damage is: **every count on these two screens is computed from a different pool than the
+thing its button opens.**
+
+## 🔴 SL-01 — "Due now" and "Jump back in" promise N due cards and open the whole deck at a stale position — HIGH
+**Where:** `app.html:6125` (`Open` on a Due-now row) and `app.html:5153` (`Continue →` on a Jump-back-in row).
+Both do `go('study/<topicId>/recall')` → `render()` `:6188` → `pageStudy` → `startDeck(topicId,'recall')`
+(`app.html:4880` region).
+
+`startDeck` builds `cards = t.recall` — **the entire recall deck** — and never looks at `due`, `box` or
+`isNew`. It then restores `i = DATA.pos['pos:'+topicId+'recall']` (`:4888`). So the row that reads
+
+> `12` · Pharmacology of diuretics · **Open**
+
+opens a 60-card deck positioned at card 41, and the next cards the student sees are whatever happens to sit at
+index 41-60 — which by definition are the ones they most recently *passed*, not the 12 that came due. There is
+no filter, no jump-to-due, and nothing on the study screen tells them the 12 aren't what they're looking at.
+
+**Why it matters to a student:** this is the one screen in the app whose entire job is "here is what you owe
+today, tap to clear it", and tapping it does not clear it. The 12 stay due, the number on the tile doesn't
+move, and the student concludes the SRS is broken. It also compounds STU-09 (opening any `study/…` link
+silently destroys a live session) and STU-01/STU-08 (the deck's saved position is already unreliable), so a
+Due-now tap can additionally rewind their real place in that deck.
+
+**Proposed fix (NOT applied):** don't route these buttons through `startDeck` at all. `startFilteredSession`
+(`:4210`) already does the right thing — call it with a predicate scoped to the topic
+(`(st,t)=>t.id===tid && st && st.due<=dayNum() && st.box>=0`), label `t.name`, key `'due:'+tid`, then
+`go('review')`. That delivers exactly the N cards the row counted, in the runner that grades and reschedules
+them. Fallback option if that is too big for the pilot: relabel the buttons to "Open topic" and point them at
+`topic/<id>`, so at least the copy stops lying.
+
+## 🔴 SL-02 — The number that opens "Due now" is counted from a pool "Due now" filters out — HIGH — family (a), 17th pool
+**Where:** `reviewHealth()` `app.html:1795-1806` vs `buildQueue()` `app.html:1662-1670`.
+
+The live entry point to this page is pageToday's tile at `:4684`:
+`<div class="artile" onclick="go('duenow')"><b>${h.overdue}</b><span>overdue</span></div>`.
+`h.overdue` comes from `reviewHealth()`, whose loop (`:1797-1800`) is
+`if(s&&s.due<=today){ dueNow++; …; if(s.due<today) overdue++; }` — **no `isFlagged` guard**.
+`buildQueue()`, which the destination page uses, does have one (`:1666`: `&& !isFlagged(id)`).
+
+So a student who used "Report this card as wrong and hide it from your studying" on their overdue cards sees
+a tile reading **"4 overdue"**, taps it, and lands on **"✓ Nothing due right now. You're caught up."** The
+number is unclearable — the cards behind it can never be served, rated or rescheduled (REV-04 hardened the
+eight study pools precisely so they wouldn't be), so `overdue` stays 4 forever.
+
+**Same defect, wider blast radius:** `dueCount()` (`:1820-1824`) is also missing `isFlagged`, and it is the
+number on **the nav badge** (`:1914`), **Home** (`:2040`), **`habitNudge()`** (`:4308`) and pageToday's
+"cleared" check (`:4582` `const remain=dueCount(), cleared=(remain===0)`). A student with flagged overdue
+cards therefore carries a permanent red badge, can never see the "all clear" state, and — via `habitNudge` —
+**gets notified every day about cards the app has promised never to show them.** That takes family (a) to 18
+known pools; `reviewForecast()` (`:1692`) and `weakTopics()` (`:1696`) are missing it too but are display-only.
+
+**Proposed fix (NOT applied):** add `&& !isFlagged(cid(t.id,'recall',c))` to the loops in `reviewHealth`
+(`:1799`), `dueCount` (`:1823`), `dueReviewCount` (`:1297`) and `reviewForecast` (`:1693`) so every count
+matches the pool that is actually servable. `dueReviewCount` is the more urgent of the two extras — it feeds
+`reviewLoadRatio()` → `effectiveNewCap()`, so phantom flagged reviews can **zero out the daily new-card cap**
+(PRG-03) for a backlog that does not exist.
+
+## 🟠 SL-03 — The headline count and the Start button on the same screen describe two different sessions — MEDIUM
+**Where:** `app.html:6121-6128`.
+The header prints `rows.reduce((s,r)=>s+r.n,0)` over `q.due.concat(q.neu)` — the **uncapped** `buildQueue()`
+output. The button one line below calls `startRecallSession()` with no argument (`:6128`), and
+`startRecallSession` (`:4184`) builds from `buildRecallSession()`, which is **greedy-budget capped** to
+`DATA.daily.budget` (default 15 min, `greedyBudget` `:4192`) and then **appends a confidence bucket** the
+header never counted (`items=b.capped.concat(b.conf)`).
+
+So "74 cards due across 9 topics · ▶ Start Active Recall" starts a ~22-card session containing cards that
+aren't in the 74. pageToday handles this honestly — it prints `b.over` as "+N more due — held for tomorrow to
+fit your 15-min budget" (`:4680`) — and Due now simply doesn't. HOME-10 family.
+
+**Proposed fix (NOT applied):** build once (`const b=buildRecallSession()`), print `b.capped.length+b.conf.length`
+as the session size with `b.over` shown as the held-back line, exactly as pageToday does; or pass an explicit
+`0`/uncapped intent if this page is meant to be the "give me everything" route.
+
+## 🟠 SL-04 — "Due now" counts never-seen cards as due — MEDIUM
+**Where:** `app.html:6121` `const q=buildQueue(), due=q.due.concat(q.neu)`.
+`q.neu` is `planNew()` (`:1643`) — cards with **no `DATA.cards` entry at all**. They have never been seen and
+have no due date; they're this week's plan allocation. The page then prints
+`"N cards due across M topics"` (`:6127`) over the combined list, and the per-topic `<span class="lcount">`
+numbers include them.
+
+**Why it matters to a student:** "due" is the word the whole SRS contract rests on — it means *you will forget
+this if you don't review it today*. Inflating it with new material makes the backlog look permanently
+unbeatable (this is the classic Anki-overwhelm failure), and it double-counts against pageToday, which keeps
+them separate (`＋ New · N` vs `↻ Reviews · N`, `:4674-4676`).
+
+**Proposed fix (NOT applied):** print two figures — `${q.due.length} due · ${q.neu.length} new` — and either
+split the rows or add a `+N new` suffix to the per-topic count.
+
+## 🟠 SL-05 — `#/inprogress` and `#/completed` are orphaned routes — MEDIUM — LIB-01 / ENT-03 / SIDE-08 pattern
+**Where:** the only `go('inprogress')` / `go('completed')` call sites in the repo are `app.html:2173` and
+`:2174`, both inside **`pageHomeClassic`** — confirmed dead in HOME-11.
+The shipping Home and pageToday have no equivalent tiles (`:4683-4685` offers only `duenow` and a
+non-clickable "topics waiting"). So **two full screens plus their empty states are unreachable in the running
+app** except by typing the hash.
+
+**Why it matters to a student:** the app asks them to mark topics Complete — there's a three-way segmented
+control for it on the topic page (`:2467`) and a `✅ Completed` list built and styled to receive them — and
+then gives them no way to ever see that list. Every completion they record disappears into `DATA.topics` with
+no payoff screen. Half the reason to mark anything complete is gone.
+
+**Proposed fix (NOT applied):** decide one way. Either add the two tiles to the live Home/Today metric row
+(one line each, the page already works), or delete the branch and the `stbtn` "Complete" affordance together
+so nothing promises a list that doesn't exist. Do not leave it half-wired through the pilot.
+
+## 🟠 SL-06 — The "In progress" tile counts completed topics into the in-progress list — MEDIUM — latent
+**Where:** `app.html:2141` `const started=startedTopics().length` → rendered on the `go('inprogress')` tile at
+`:2173`, against `pageStatusList`'s filter at `:6132` `status(t.id)===st` where `st==='inprogress'`.
+`startedTopics()` (`:1313`) is `status(t.id)!=='notstarted'` — i.e. **in-progress *plus* complete**. Tile says
+12, list shows 9.
+
+Second, smaller mismatch on the same pair of screens: `completeCount()` (`:1865`) is
+`allTopics.filter(t=>status(t.id)==='complete')` with **no `t.ready` filter**, while the Completed list
+requires `t.ready` (`:6132`). A topic marked complete that later loses `ready` (a rebuild, or the level
+switcher's stale ids — LIB-05) is counted and not listed.
+
+This is dead code today (SL-05), which is why it's MEDIUM and not HIGH — **but it ships the instant SL-05 is
+wired up**, so fix them in the same change.
+
+**Proposed fix (NOT applied):** `startedTopics().filter(t=>status(t.id)==='inprogress').length` for the tile;
+add `t.ready &&` to `completeCount`.
+
+## 🟠 SL-07 — Jump back in silently drops a day's topics when two devices study on the same day — MEDIUM — LIB-09 family
+**Where:** `sync.js:150` lists `dayTopics` among the maps merged with `mergeMap`, and `mergeMap`
+(`sync.js:66-72`) is a **single-level key union**:
+```js
+for(k in lo) out[k]=lo[k];
+for(k in hi) out[k]=hi[k];   // whole value replaced, not merged
+```
+Every other key in that list (`topics`, `done`, `read`, `notes`, `missLog`, `pos`, `cardFlags`…) is flat, so a
+key union is correct for them. **`dayTopics` is the only nested one** — its shape is
+`{'YYYY-MM-DD': {topicId:1, …}}` (`app.html:1143`, written by `logDayTopic` `:1187`). For any date present on
+both sides, one device's entire day-object overwrites the other's.
+
+**Why it matters to a student:** phone on the bus (3 topics), laptop that evening (2 topics) → after the sync
+their "Today" block on Jump back in lists 2 of the 5, and `weekProgress()`'s "topics touched" (`:5132`)
+undercounts to match. Not data-loss in the SRS sense — the cards and their boxes merge fine — but the one
+screen whose entire purpose is *"pick up where you left off"* forgets where they left off, on exactly the
+multi-device workflow it exists to serve. It also silently deflates the "This week so far" card, and via
+`topicLastDay()` (`:2003`) it reorders Home's resume list.
+
+**Proposed fix (NOT applied):** special-case `dayTopics` out of the `mergeMap` loop with a two-level union:
+```js
+out.dayTopics = (function(a,b){ a=a||{}; b=b||{}; var o={};
+  Object.keys(a).concat(Object.keys(b)).forEach(function(d){ o[d]=Object.assign({}, b[d]||{}, a[d]||{}); });
+  return o; })(localD.dayTopics, remoteD.dayTopics);
+```
+Same shape as the existing `study` handler two lines above (`sync.js:148`), which already got bespoke
+treatment for the same reason. **Also worth confirming with Frank:** `dayTopics` is never pruned, so it grows
+one object per study-day forever inside the blob `copyBackup` puts on the clipboard (SET-10).
+
+## 🟡 SL-08 — "This week so far" buckets this week's topics by their *current* status — LOW
+**Where:** `weekProgress()` `app.html:5130-5136`, rendered on the Jump-back-in card `:5163-5169`.
+`touched` is built from this week's `dayTopics`, but each id is then bucketed by `status(id)` — the topic's
+status **right now**, with no reference to the week. A topic finished in March and revised on Tuesday prints
+under *this week's* "completed". Conversely `else inprog++` has no `notstarted` branch, so a topic the student
+manually reset with the segmented control (`:2467`) is counted as "in progress" this week.
+`wp.notStarted` is computed over every ready topic on every render and **`pageJumpback` never uses it** — the
+only consumer is the dead `homeMore` (`:2124`).
+PRG-05 already relabelled the other half of this card (rolling-7 vs calendar-week). This is the same card's
+other axis.
+
+**Proposed fix (NOT applied):** count completions from `DATA.done[id]` compared against the week window (the
+way `weekStats()` already does at `:1836` region: `Object.entries(DATA.done).filter(([id,d])=>d>=since)`),
+and either add a `notstarted` bucket or relabel the middle metric "still open". Drop the unused `notStarted`
+computation from the `pageJumpback` path.
+
+## 🟡 SL-09 — Due now's empty state is a dead end, on a screen you only reach by tapping a non-zero number — LOW
+**Where:** `app.html:6126`:
+`<div class="alldone"><div class="big">✓</div><b>Nothing due right now.</b><p>You're caught up — learn a new topic or come back later.</p></div>`
+No button. It tells the student to "learn a new topic" and gives them nothing to tap; the plan picker
+(`go('plan')`), the topic list and `MB_openImport()` are all one line away. STU-04 / LIB-06 / PRG-06 / SET-07
+family — the fifth empty state in the app that describes an action instead of offering it.
+**Compounded by SL-02:** the only live route here is a tile showing a non-zero overdue count, so the student
+who sees this screen most often is precisely the one whose flagged cards make the tile lie.
+
+**Proposed fix (NOT applied):** add the `🗓 This week's topics` / `＋ Add a lecture` button row that
+`pagePlan`'s empty state already uses verbatim (`:6115`).
+
+## 🟡 SL-10 — Both screens render an uncapped, unsorted wall of rows with no way back — LOW
+**Where:** `pageStatusList` `:6123` (Due now, `rows` uncapped) and `:6131-6137` (in-progress/completed, every
+subject, every topic), `pageJumpback` `:5145` (14 days × every topic touched).
+None of the three gets `recallTabs()` (`render()` `:6197` adds those only for `today`/`hard`/`mistakes`/`leeches`)
+and none renders a back control, so on a phone a student 30 topics into the pilot scrolls a long list and then
+has to use the browser back gesture. Jump back in is the worst case: 14 day-blocks with no collapse.
+**Proposed fix (NOT applied):** cap Due now at ~15 rows with a "show all", collapse Jump-back-in days older
+than 3 into `<details>`, and add the standard back affordance. Purely cosmetic — safe to defer past the pilot.
+
+## 🟡 SL-NOTES — smaller observations, not fixed
+- **Family (b) — `box`-less card state.** Safe here by accident, not by design: `buildQueue` (`:1666`),
+  `reviewHealth` (`:1799`) and `dueCount` (`:1823`) all test `s.due<=today`, and a REV-01/TOP-01 `NaN` due
+  fails that comparison, so the card is silently *excluded* rather than crashing. Same accident as flow 20/21.
+  It does mean a NaN-due card is invisible on every one of these counters — consistent with REV-01's note that
+  live accounts still need a repair pass.
+- **Families (c) and (d) did not reach this flow** — neither page parses a model answer key nor calls `fetch`.
+- **`esc()` (`:981`) is `(s||'')`-guarded**, so the `esc(t.lecturer)` on the in-progress/completed rows
+  (`:6134`) and `esc(t.subject.short)` on Due-now rows (`:6124`) degrade to a blank sub-line rather than the
+  literal `undefined` that HOME-02 hit. The guard held; the row just loses its only context. No action.
+- **`pageJumpback`'s nested click targets are correctly wired** — the row's `onclick="go('topic/…')"` and the
+  inner `Continue →` button's `event.stopPropagation()` (`:5153`) do the right thing. Worth keeping in mind if
+  SL-01's fix rewrites that button.
+- **`planNew()` does not mutate `DATA`** — the `q.cards.shift()` at `:1655` drains a locally-built `unseen`
+  array, so `pageStatusList` calling `buildQueue()` purely to print a number is side-effect-free. Confirmed,
+  because a render-time mutation here would have been severe.
+- **Perf:** `pageStatusList('duenow')` runs a full `buildQueue()` (two passes over every started topic's recall
+  deck plus `planNew`'s plan walk) on every render, and `pageJumpback` runs `weekProgress()` which walks
+  `allTopics` again for the `notStarted` figure it then throws away (SL-08). Small next to Home's ~8 passes
+  (HOME notes), but the wasted `notStarted` pass is free to delete.
+- **`go('duenow')` from pageToday is a real hash change** (`#/today` → `#/duenow`), so the MX-01 /
+  NTF-05 "`go()` is not a render" trap does **not** apply to any button on these screens. Checked all six.
+- **`dayLabel()` (`:5138`)** relies on `dstr()`/`yesterdayStr()` (`:1171-1172`), both local-timezone and
+  consistent with `logDayTopic`'s writer. No off-by-one. It does mean a student who crosses a timezone mid-week
+  can see two "Today"-adjacent blocks; not worth changing.
+- **Ordering note for Frank:** SL-02 is the cheapest high-value fix in this flow (four one-line `isFlagged`
+  guards) and it also closes the PRG-03 new-card-cap hole. SL-01 is the one students will actually report.
+  SL-05/SL-06 should be decided together, and SL-07 belongs in whatever `sync.js` pass follows AUTH-02/LIB-09.
+
+---
+
+# Flow 19+ · item 19 — `study` card session: swipe gestures, rating path, study-timer + dock bridge
+*Reviewed 2026-08-22 · LOG-ONLY, nothing edited.*
+Round-2 flow 19 already covered `pageStudy`/`pageSubject`/`startDeck` (STU-01..09) and Round-2 flow 15/9
+covered `rateSRS`/`logDaily`. This pass deliberately reads the three sub-areas those left untouched:
+the **phone swipe layer** (`app.html:5126-5177`), the **rating/advance state machine**
+(`rateCard :5100`, `mcqNext :5026`, `step :5043`, `sessionNext :5089`) and the
+**`MB_STUDY_ADD` / `MB_DOCK` bridge** (`app.html:987-1000`, `study-timer.js`, `study-dock.js`).
+Part A (`node qa/engine-scenarios.mjs`) passed — all 6 scenarios, engine unchanged.
+
+## 🔴 TIM-01 — the study timer's "never lose seconds" fallback cannot fire; a storage-full account silently studies for zero minutes — MEDIUM (data loss)
+**What's wrong:** `study-timer.js:44-49`
+```
+function flush(){
+  if(pending<=0) return;
+  var n=pending; pending=0;                        // <-- zeroed BEFORE the write
+  if(window.MB_STUDY_ADD) window.MB_STUDY_ADD(n);
+  else mem[today()]=(mem[today()]||0)+n;           // "defensive: never lose seconds"
+}
+```
+The defensive branch runs only when `MB_STUDY_ADD` is **absent**. It never runs when the function is
+present and **fails** — and it fails silently by construction: `app.html:987` wraps the whole body in
+`try{…}catch(e){}`, and the `persist()` it calls (`app.html:1161`) wraps `localStorage.setItem` in its
+own bare `catch(e){}`. So on a `QuotaExceededError` the seconds are already gone from `pending`,
+never reach `DATA.study`, and nothing anywhere reports it.
+
+**Why it matters to a student:** quota exhaustion is not hypothetical on this app — SET-10 records
+multi-MB `DATA` blobs (`cardViz` blueprints + thousands of qbank attempts) and iOS Safari caps
+localStorage around 5 MB. The failure mode is a student who studies for an hour and is shown
+"0m today", a flat weekly time chart, and (because `persist()` is the same call that feeds
+`MB_SYNC.markDirty()`) **no synced progress at all** — while every UI surface says everything is fine.
+The timer is the one number a student uses to decide whether they've done enough today.
+
+**Proposed fix direction:** make the write path honest end-to-end.
+1. `persist()` returns `true`/`false` (`setItem` succeeded), and on its first failure per session calls
+   `mbToast('Your device is out of storage — progress isn't being saved. Open Settings → Back up now.')`.
+   The toast helper already exists at `:1163` and is non-blocking.
+2. `MB_STUDY_ADD` returns that boolean instead of swallowing it.
+3. `flush()` becomes `var n=pending; pending=0; if(!(window.MB_STUDY_ADD && window.MB_STUDY_ADD(n))) pending+=n;`
+   so unwritten seconds stay banked for the next 10s tick instead of being destroyed.
+Step 1 is the valuable half and is app-wide, not timer-specific — every `persist()` caller inherits it.
+**Do not fix during the pilot without a live check first:** confirm on one pilot device whether
+`localStorage` is actually near the cap (`JSON.stringify(DATA).length` in the console). If it is,
+this is already happening and is HIGH, not MEDIUM.
+
+## 🟡 SWP-01 — swipe navigation and its onboarding hint are switched off on `#/nudge`, the one session that is always opened on a phone — MEDIUM
+**What's wrong:** every gate in the swipe layer is the same three-route regex —
+`swipeHintEligible()` (`:5131`), `swipeAct()` (`:5142`), the `touchstart`/`touchend` listeners
+(`:5160`, `:5167`) and the enter-session hint trigger (`:6287`) all test
+`/^#\/(study|review|hard)/`. The notification session renders the **identical** card UI
+(`router :6252`: `case 'nudge': … html=pageReview()`) but sits at `#/nudge`, which matches none of them.
+`hardnudge` survives only by accident, as a prefix match on `hard`.
+
+**Why it matters to a student:** `#/nudge` is reached by tapping a lock-screen notification, i.e. it is
+100% phone traffic and disproportionately a first-session-of-the-day experience. Those students get a
+card stack that ignores every swipe, and never see the "Swipe left for the next card" coach mark, so the
+gesture is never learned — which then makes it feel broken on the routes where it *does* work.
+Compare `MB_DOCK.onStudyScreen` (`:991`), which correctly lists all nine session routes; the swipe layer
+is the one consumer that hard-codes a shorter list.
+
+**Proposed fix direction:** one shared predicate instead of five copies of the regex —
+`function onCardRoute(){ return /^#\/(study|review|hard|hardnudge|nudge)/.test(location.hash); }` — and
+call it from all five sites. Cheap and self-contained. Reuse `MB_DOCK.onStudyScreen`'s route list as the
+source of truth minus `topic`/`cram` (those are reading screens, not card stacks).
+
+## 🟡 SWP-02 — swiping to the end of a session never reaches the results screen; the last swipe is a silent no-op — MEDIUM
+**What's wrong:** `swipeAct('left')` (`:5148-5154`) ends in `else if(S.i<S.items.length-1){ step(1); }`,
+and `step()` itself hard-returns on `n>=S.items.length` (`:5043`). Both tap paths do the opposite: at the
+last card `rateCard` (`:5122`) and `mcqNext` (`:5029`) set `S.i=S.items.length` for non-deck sessions,
+which is exactly what makes `pageReview` draw the end-of-session summary; `sessionNext` (`:5090`) does the
+same for primer cards. So the final left-swipe of a daily / mistakes / leech / nudge session does
+**nothing at all** — no advance, no summary, no toast, no error.
+
+**Why it matters to a student:** the app spends an onboarding coach mark teaching "Swipe left for the next
+card", so swiping is the taught behaviour — and a student who swipes their way through a session is
+dropped at a dead card with no completion, no accuracy figure and no CTA, and has to work out for
+themselves that the session is over. This is STU-07's dead-end shape, but STU-07 was scoped to `mode==='deck'`
+(which genuinely has no end state); SWP-02 is the sessions that *do* have one and can't be reached by gesture.
+
+**Proposed fix direction:** in `swipeAct`'s left branch, mirror the tap path rather than calling `step(1)`
+directly — on the last card, if `S.mode!=='deck'` set `S.i=S.items.length; render();`. Better still, route
+the swipe through the same `sessionNext()`/`mcqNext()` the buttons use so there is one advance
+implementation instead of two that disagree at the boundary.
+
+## 🟡 SWP-03 — `_mbViaSwipe` leaks `true` when a left-swipe falls through all its branches — LOW
+**What's wrong:** `swipeAct` sets `_mbViaSwipe=true` (`:5149`) *before* deciding what the swipe does. If
+none of the three branches fires — precisely the SWP-02 case (last card, already revealed, non-MCQ) — the
+flag is never consumed and stays `true`. The next **tap** of Next then hits
+`if(_mbViaSwipe){ _mbViaSwipe=false; } else bumpNext();` (`mcqNext :5028`, `sessionNext :5089`,
+`rateCard`'s callers) and is misread as a swipe.
+
+**Why it matters to a student:** consequence is confined to the coach mark — `bumpNext()` is skipped, so
+the "you can swipe" reminder is delayed by one tap. Trivial on its own; logged because it is evidence that
+the swipe/tap paths share mutable global state with no single owner, which is the same seam SWP-02 sits on.
+
+**Proposed fix direction:** set the flag inside each branch that actually acts, or clear it at the top of
+`swipeAct` on the fall-through path. Fixing SWP-02 removes the fall-through and this with it.
+
+## 🟡 SWP-04 — two gestures that do nothing permanently retire the swipe coach mark — LOW
+**What's wrong:** `markSwipeUsed()` is called at `:5145`, *above* the direction handling, and increments a
+counter persisted to `localStorage.mb_swipe_used` with the hint gated on `SWIPE_USED<2` (`:5131`). So a
+right-swipe on card 1 (`S.i>0` false → no-op, `:5146`) and a left-swipe that falls through (SWP-02) both
+count as "feature learned".
+
+**Why it matters to a student:** a student who swipes the wrong way twice on their first card — the most
+likely moment to swipe experimentally — burns both impressions of the only instruction the app gives, and
+never learns the gesture. The hint is also never re-armed by anything.
+
+**Proposed fix direction:** move `markSwipeUsed()` into the branches that produce a visible result. Optionally
+require the two uses to be on different days so an experimental first session doesn't consume both.
+
+## 🟡 DOCK-01 — the docked Ask/Source panel only refreshes on `hashchange`, so it shows the previous card's lecture for the rest of the session — MEDIUM
+**What's wrong:** `study-dock.js:191` is the panel's only refresh trigger:
+`window.addEventListener("hashchange", function(){ if(isOpen && onStudy()) render(); apply(); });`
+Advancing a card inside a session does **not** change the hash — `rateCard`/`mcqNext`/`step`/`sessionNext`
+all just mutate `S.i` and call the app's own `render()`. Meanwhile `MB_DOCK.ctx()` (`app.html:992-1000`)
+is fully card-scoped: it reads `S.items[S.order[S.i]]` and returns that card's `topicName`, `noteHtml`,
+`simplifiedHtml`, `transcript`, `cardSrc` and `personalNote`. Nothing in `app.html` calls back into the
+dock on card change (grepped: no `MB_DOCK_REFRESH` / `dockRefresh` exists), and the Ask tab keys its
+transcript off `hist[ctx.topicId]` (`study-dock.js:113`).
+
+**Why it matters to a student:** the daily session is deliberately interleaved across lectures (`planNew`,
+`buildQueue`), so the topic behind the dock changes every few cards. A student who opens the dock on
+desktop and leaves it open — which is the whole point of a dock — reads **the wrong lecture's note**
+beside the card in front of them, and the Ask history shown belongs to whichever topic was on screen when
+the dock last re-rendered. There is no visible staleness cue: the header just says the old topic's name.
+`MB_DOCK_SOURCE` (the "📄 Show in the note" chip, `app.html:4893`/`:4954`) happens to force a `render()`,
+so the chip path is correct — which makes the passive path's wrongness harder to notice, not easier.
+
+**Proposed fix direction:** publish a card-change signal the dock can subscribe to rather than adding
+another cross-file call — e.g. `document.dispatchEvent(new CustomEvent('mb:card'))` at the end of the app's
+`render()` when `S && S.items`, and in `study-dock.js` add
+`document.addEventListener('mb:card', function(){ if(isOpen && onStudy()) render(); })`.
+Guard the re-render so it does not blow away a half-typed question in `#mbDockAsk` (preserve the textarea
+value across `render()`), otherwise this fix trades a stale note for lost input.
+
+## 🟡 STUDY19-NOTES — checked and clean, or noted without a finding
+- **Recurring family (a) — missing `isFlagged`:** no new pool in this flow. The swipe layer and the dock
+  both read `S.items`, which is built by pools already audited (STU-03, SIDE-01, SL-02). Nothing new to add
+  to the 18-pool count.
+- **Family (b) — `box`-less card state → `NaN`:** `rateCard` calls `rateSRS`, hardened in REV-01, and
+  `classifyItem` (`:5057`) reads `s.box<0` on a `NaN` box, which is `false` — so a Visualize-quiz card is
+  silently classified `rev` rather than `hard` in the remaining-mix bar. Wrong, but cosmetic and it does not
+  crash; folding it into REV-01's outstanding repair pass is better than a separate fix.
+- **Family (c) — non-integer answer key:** `isMcqCard` gates the MCQ path and was hardened in MX-05/QB-01;
+  the swipe path calls `mcqNext()` only after `isMcqCard(it)`, so nothing new reaches an unvalidated `ans`.
+- **Family (d) — `r.json()` on HTML 413/502:** no network call in this flow. Clean.
+- **Re-rate guard (REV-05) restated, now via gesture:** the ✓/✗ path still has no `S.answered` guard, and
+  the swipe layer adds a second way in — a fast left-swipe during the render is not debounced the way
+  MG-02's `_lock` debounces Mega. Not a new bug, but it widens REV-05's surface; whoever fixes REV-05
+  should put the lock in `rateCard`, not in the button handler.
+- **`markSwipeUsed()` writes `localStorage` on every single swipe** (`:5132`) even once `SWIPE_USED` is past
+  the threshold and the value can no longer change any behaviour. Harmless, but it is a synchronous write
+  on the touch path of the app's highest-traffic screen and is free to drop (`if(SWIPE_USED<3)`).
+- **`swipeAct('up')` is dead by design** (`:5144`, "starring by accident was too easy") yet the `touchend`
+  handler still spends a comparison detecting it (`:5171`) and the comment block above still advertises
+  "↑ star" (`:5126`). Delete the branch or the comment — a future reader will implement the comment.
+- **`touchstart`'s control blacklist** (`:5165`) covers `.vizmiss,.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns`
+  but **not** the inline `<button>` chips rendered at `:4893`/`:4954` ("📄 Show in the note" / "🎙 mm:ss in the
+  lecture"), which carry no class from that list. A slightly draggy tap on that chip is eaten as a swipe.
+  Low frequency, one-word fix (add `button` to the selector), but it is on the card-source affordance the
+  dock work above is meant to make more useful.
+- **`MB_STUDY_ADD` itself is sound on types:** `sec=Math.round(sec)||0` rejects `NaN`, `d.study` defaults to
+  `{}` (`:1135`), and `sync.js:146` merges per-day seconds with `Math.max`, which always returns a Number —
+  so no string-concatenation corruption path exists here. Checked specifically for the non-integer family.
+- **Timer flush cadence is fine** — `flush()` is wired to the 10s loop, `visibilitychange`, `blur`,
+  `beforeunload` and `pagehide` (`study-timer.js:252,262,345,346,349,350`). The problem is TIM-01's silent
+  failure, not the trigger coverage.
+- **Ordering note for Frank:** SWP-01 is the cheapest of these (one predicate, five call sites) and it is
+  the one that pairs with the flow-26 `sw.js` batch — there is no point fixing NTF-02's empty `#/nudge`
+  session and shipping a session the student can't swipe. TIM-01's step 1 (`persist()` telling the truth
+  about quota) is the highest-value line in this flow and belongs with SET-01/SET-02, since a storage-full
+  device is also a device whose backup is failing.
+
+---
+
+## Flow 23 — Search + Cram sheet + AI tutor (`pageSearch` `:5359`, `searchRun` `:5365`, `pageCram` `:5754`, `pageAI` `:6069`) — 2026-08-22
+**LOG-ONLY — no code changed.** Part A (`node qa/engine-scenarios.mjs`) exited 0, all 6 scenarios PASS; nothing logged for it.
+Note: the line numbers in the flow-19+ block of QA-PROGRESS.md are stale by ~185 lines (`pageSearch` is at `:5359`, not `:5174`;
+`pageCram` `:5754` not `:5569`; `pageAI` `:6069` not `:5884`). All references below are to the file as of this run.
+
+### SCA-01 — HIGH — the cram sheet prints questions with no answers, and one whole topic is 100% blank
+`pageCram` (`app.html:5756-5761`) builds every row from `cramLine(c)` (`:1615`), which pulls the answer **only** from a
+`**bold**` span and the takeaway **only** from a `>> ` line. If a card's `a` is plain prose both come back `''`, and the
+template drops the `.ca` and `.ct` divs entirely — the row renders as a bare numbered question. No fallback to `c.a`, no
+marker, no count, no warning.
+Measured against the real content directory: **113 of 2203 recall cards (5.1%) have neither marker — and all 113 are the
+same topic, `content/OG/.../Embryology of the Cardiovascular System/recall.json`, whose cram sheet is therefore 113
+numbered questions and ZERO answers.** (Sample card: `q:"When does the cardiovascular system develop?"`,
+`a:"From 18 days to 12 weeks — it is the earliest functional system in the body."` — a perfectly good answer, invisible
+because it has no asterisks.)
+Why it matters: the page header says "113 points — **the bold answer and takeaway from every recall card**, on one page",
+the ▸ Print / save PDF button is right there, and this is by design a night-before artifact that leaves the app. A student
+prints it, gets a blank quiz, and has no way to know the answers exist in the deck. The failure scales with authoring
+inconsistency and is completely silent.
+PROPOSED: in `cramLine`, when `bold` is empty fall back to the first sentence/short clause of `stripMd(c.a)` (`:1444`)
+rather than returning `''`; and surface a count in `pageCram`'s sub-line ("N cards have no highlighted answer"). `cramLine`
+is NOT part of the frozen engine (not in the SMART set), so this is safe to fix during the pilot. A content-side pass to add
+`**` to that one topic also works but the renderer should not silently depend on an authoring convention.
+
+### SCA-02 — MEDIUM — the cram sheet has no `isFlagged` filter, so reported-wrong cards get printed (family (a), 19th pool)
+`pageCram:5756` — `const cards=(t.recall||[]);` — no guard, unlike `sessionRecallIds` (`:1327`), `buildQueue` (`:1666`) and
+the 16 other pools already logged. A card the student explicitly reported as wrong — and which the app then hides from
+study, review, hard, leeches, mistakes and the nudge — is printed on the cram sheet, numbered and styled identically to
+trusted cards, with its wrong answer in the answer colour. Worse than the session pools because the output is a PDF that
+leaves the app and gets memorised, with no flag UI on it at all.
+PROPOSED: `.filter(c=>!isFlagged(cid(t.id,'recall',c)))` (matches the `cid` signature at `:1176`), and print "N hidden"
+in the sub-line so the point count still reconciles with the deck.
+
+### SCA-03 — MEDIUM — cram sheet ignores the primer deck and has no empty state
+`pageCram:5756` reads `t.recall` only. A topic that is `ready` on primer cards renders `<div class="cramsheet"></div>` —
+an empty bordered box under "📄 Cram sheet · 0 points — the bold answer and takeaway from every recall card". Same shape as
+STU-04's empty study screen: a dead end that reads like the content is broken. Note also that `t.ready` does not imply
+`recall.length`, so this is reachable, and the "Drill this deck →" button beside it starts an empty deck.
+PROPOSED: `if(!cards.length)` → an explicit empty state with a real action (＋ Add cards / open the note), and consider
+appending the primer deck as a second section rather than silently omitting half the topic.
+
+### SCA-04 — MEDIUM — typing while the tutor is replying silently destroys the message
+`aiSendFromInput` (`:6051`) clears the box — `el.value=''` — and *then* calls `aiSend`, whose first real statement is
+`if(AIBUSY) return;` (`:5934`). Tap ➤ (or hit Enter) while the previous reply is in flight and the typed answer is gone:
+no error, no re-fill, no queue, no disabled state on the button to warn you. Compounded by the fact that `aiSend` calls
+`render()` twice (`:5944` busy, `:5966` reply), and `pageAI` rebuilds `#aiin` from scratch each time with no value
+restoration — so anything typed *during* the reply is also wiped the moment it lands, along with focus and caret.
+Why it matters: the tutor's own copy invites a fast back-and-forth ("Type your answer…"), replies take seconds, and this
+is the exact rhythm in which a student types their next answer early. The app teaches the habit and then eats the input.
+PROPOSED: test `AIBUSY` in `aiSendFromInput` *before* clearing (and disable/spin the send button while busy); and preserve
+`#aiin`'s value across renders the way `render()` already preserves the search box (`:6359` — same problem, solved).
+
+### SCA-05 — MEDIUM — the error bubble is replayed to the model as its own previous turn
+`aiSend`'s catch (`:5973`) pushes `{role:'model', text:'⚠️ '+e.message+'  (check your key/model in Settings, or your data
+connection)'}` straight into `AICHAT`. `claudeTutor` (`:5902`) maps **every** history entry into the request, so the next
+question sends `⚠️ AI service unavailable — check your internet…` as an `assistant` turn. The tutor is told it previously
+apologised for a network error; on a flaky connection several stack up inside the 24-turn window and it starts responding
+to the errors instead of resuming the answer key. Same defect in `geminiTutor`'s history map (`:5909`).
+Secondary: the copy is wrong for the default engine. `tutorEngine` defaults to `deepseek-v4-flash` via Puter (`:5933`),
+which has no key and no model field in Settings — "check your key/model in Settings" only applies to the Gemini path and
+sends the student hunting for a setting that isn't there.
+PROPOSED: tag the bubble `{role:'model', err:true}` and filter `err` entries out of both history maps; branch the copy on
+the active engine.
+
+### SCA-06 — MEDIUM — the voice quiz dies silently on any mic or transcription failure and cannot be restarted
+Four exits leave `VOICE.on===true` with nothing pending: `aiListen`'s catch (`:6015`, permission denied / no mic /
+`getUserMedia` throw), `finishRecording` with zero chunks (`:6023`), a blank transcript (`:6030`), and the
+`speech2txt` catch (`:6031`). All four do exactly `VOICE.phase=''; render(); return;`. `aiStatus` (`:6061`) then falls
+through to `{k:'idle', big:'🎙 Voice mode on'}` — the orb sits there, nothing listens, nothing speaks, no message appears,
+and no timer re-arms. The `✓ Done` button is hidden (it only renders when `st.k==='listen'`), so the only control left is
+`■ Stop`, which reads like it would end a session that is working.
+Why it matters: the most likely trigger is the most ordinary one — a quiet or mumbled answer producing an empty
+transcript. The student thinks the tutor is thinking, waits, and eventually leaves. A voice quiz that stops responding
+without saying so is indistinguishable from the app being broken.
+PROPOSED: on all four paths either re-arm (`aiListen(topicId)` once, with a bounded retry count) or drop to a visible
+recoverable state — "Didn't catch that — tap 🎤 to try again" — and never leave `VOICE.on` true with no pending operation.
+A single `voiceFail(msg)` helper covers all four.
+
+### SCA-07 — MEDIUM — `↺ Redo` deletes your question and does nothing on the text path
+`aiRedo` (`:6057`) pops the last model reply, pops the last user message, calls `render()`, and only re-listens
+`if(VOICE.on && sttSupported())` (`:6060`). A student on the text path — no `MediaRecorder`, or simply typing — taps Redo
+and watches the exchange vanish with no replacement: the question is destroyed rather than retried, and re-asking means
+typing it again from memory. The button is also enabled whenever `msgs.length && !AIBUSY`, including when the last entry
+is a *user* message left behind by a failed send, in which case it pops the user turn and nothing else.
+PROPOSED: capture the popped user text and re-`aiSend` it when not in voice mode; disable the button unless the last
+entry is a model reply.
+
+### SCA-08 — LOW/MEDIUM — `Clear chat` is an unconfirmed one-tap wipe, and the transcript is never persisted anyway
+`clearAI` (`:6053`) does `AICHAT[topicId]=[]` with no confirm and no undo, sitting in the same `.ai2tools` row (`:6103`)
+directly beside "🎤 Start voice quiz" — a mis-tap on a phone destroys the session. Separately, `AICHAT` is a plain
+in-memory object (`:5851`): never written to `DATA`, never persisted, never synced. So the same loss happens on every
+reload, every navigation away and back, and every iOS tab eviction — a 40-minute oral-exam session is gone with no trace
+and no way to review what the tutor taught.
+PROPOSED: `confirm()` on Clear. Persisting the transcript is the bigger win but is NOT free — it lands on the sync path,
+so size-cap it (last N turns per topic) and read SET-10/TIM-01 on the storage budget before adding multi-KB transcripts to
+`DATA`.
+
+### SCA-09 — MEDIUM — searching "und", "ned" or "def" returns every topic that has no lecturer
+`searchRun:5368` builds the haystack as `((t.name+' '+t.lecturer)||'').toLowerCase()`. Two problems in one line: `t.lecturer`
+is routinely undefined (`:1875` carries an explicit comment guarding against exactly this stringification on the Home
+tile), and the `||''` fallback is dead code because string concatenation always yields a truthy string. So the searchable
+text for such a topic is literally `"Cardiac cycle undefined"`, and **any query that is a ≥2-char substring of "undefined"
+— "un", "nd", "de", "ef", "fi", "in", "ne", "ed", "ine", "ned", "defi" — matches every lecturer-less topic in the
+library**, capped at 25 and printed *above* the real card hits under a confident "Topics · 25" heading.
+PROPOSED: `[t.name, t.lecturer].filter(Boolean).join(' ').toLowerCase()`. One line, no behaviour change for topics that
+do have a lecturer.
+
+### SCA-10 — MEDIUM — a search hit cannot take you to the card it found
+Every card result routes to `go('study/${x.t.id}/${x.dk}')` (`:5382`) — i.e. `startDeck`, which restores `DATA.pos` and
+ignores the matched card completely. Search a term, tap the single card that mentions it, and you land on card 41 of 60
+with no path to the card you searched for; the match index is computed, rendered, and thrown away. This is SL-01's shape
+on the one screen whose entire purpose is "take me to this specific thing".
+It is also STU-09's destroy-a-live-session path with a realistic trigger: Search is in the library nav (`:1909`), so it is
+reachable *mid-session*, and one tap on a result replaces the running daily/hard session with a deck.
+PROPOSED: carry the index — `study/<id>/<deck>/<i>` — and have `startDeck` honour an explicit index in preference to
+`DATA.pos` **without writing it back** (STU-01's rule). Minimum viable version: don't clobber the saved position when the
+route came from search.
+
+### Notes (not filed as bugs)
+- **Search never matches answers.** `searchRun:5372` tests `c.q` only. The placeholder says "card questions" so it is
+  honest, but a student searching a term that appears only in an answer body gets "No matches" for content that exists.
+  Card search is also correctly gated on `t.ready` (`:5370`), so un-built topics stay invisible — right call.
+- **The topic cap is undisclosed.** Card hits say "Showing first 40 of N" (`:5386`) but topics are silently `.slice(0,25)`
+  (`:5368`) with the heading printing the *capped* count as if it were the total.
+- **`render()`'s search branch is the pattern SCA-04 should copy** — `:6359` re-runs `searchRun()`, refocuses and restores
+  the caret to the end. Correct, and it is the only text input in the app that survives a re-render.
+  Small side effect: `b.focus()` runs on *every* render while on `#/search`, so a background sync-triggered render pops the
+  mobile keyboard back open under the user.
+- **`pageCram` and `pageAI` both `return pageHome()` on a not-ready topic** (`:5755`, `:6070`) while the hash still reads
+  `#/cram/<id>` — Home content under a cram URL, and Back appears not to work (REV-03/TOP-04 family, non-fatal variant).
+  On a cold start this is also NTF-02's shape: the boot `render()` at `:6390` runs before `content-loader.js` at `:6410`,
+  so `topById` is empty and a deep link into a cram sheet or the tutor lands on Home once and never rebuilds.
+- **Neither page calls `guard()`** — restates ENT-03. The AI tutor is the most expensive surface in the app (unbounded
+  Puter chat + speech2txt + TTS per student) and is completely ungated.
+- **Escaping is clean here.** Every interpolation in all three pages goes through `esc()` (`:981`) — `c.q`, the cram answer
+  and takeaway, `m.text`, `t.name`. No `innerHTML` sink of the ENT-08 kind in this flow.
+- **Family (b) NaN box:** none of the three reads `s.box` — cram renders content only, search matches `c.q`, the tutor
+  reads `t.recall`. Clean.
+- **Family (c) non-integer answer key:** no `ans` / MCQ path in this flow. Clean.
+- **Family (d) `r.json()` on an HTML 413/502:** `claudeTutor` goes through `window.puter.ai.chat` (no raw parse), and
+  `geminiTutor:5917` does `await r.json().catch(()=>({}))` — **correctly guarded, and it is the only call site in the repo
+  that is.** That is the exact pattern IMP-03 / TOP-05 / SOLVE-03 should be fixed to; point their fix at this line.
+- **Ordering for Frank:** SCA-09 is a one-line fix and the cheapest thing in this flow. SCA-01 is the highest-value one —
+  it is the only finding here that produces a wrong artifact the student takes *out* of the app, it has a named
+  reproduction (open `#/cram/` on Embryology of the Cardiovascular System), and `cramLine` is outside the freeze.
+  SCA-02 should ship with SCA-01 since both are edits to the same six lines.
+
+---
+
+# Flow 20 (19+ block) — `cram` route — 2026-08-22 — **log-only, nothing changed**
+
+Scope: `pageCram` (`app.html:5759-5773`), `cramLine` (`:1615-1620`), the print stylesheet (`:617`), the three entry
+points (`jbActs :2026`, topic body `:2460`, `modeSwitcher :2500`), the router case (`:6340`) and the separate
+**"Exam cram" session mode** `startSession('cram')` (`:4312-4314`). Round-2 flow 23 already covered the *content*
+side of this page (SCA-01/02/03); this pass took the parts it did not — the **print path**, the **edit path** and the
+**mode of the same name**. SCA-01/02/03 are re-confirmed at the bottom, not re-litigated.
+
+## 🟠 CRAM-01 — The cram sheet ignores every correction the student has made to their cards — MEDIUM — logged
+`app.html:5762` — `pageCram` maps over the raw content objects: `cards.map((c,i)=>{ const {ans,take}=cramLine(c); …
+esc(c.q) … })`. It never calls `effCard(id, c)` (`:1332`), the accessor that overlays `DATA.cardEdits`.
+Every other card-rendering surface in the app does: `cardActionsRow`-adjacent render (`:1358`), `speakCurrent`
+(`:1572`), `rateCard` (`:4902`), `mcqNext` (`:4984`), `step` (`:5096`). `pageCram` is the only reader that does not.
+
+Why it matters: a student who spots a wrong AI answer, taps ✎ and fixes it, then hits **🖨 Print / save PDF** carries
+the **uncorrected** answer into the exam hall — on the one artifact that leaves the app and is used without the app
+next to it. It is also silently inconsistent: the same card reads one way when drilled and another way when printed.
+This is the LIB-02 family (`cardEdits` is a store with more writers than readers).
+
+PROPOSED (one line, safe, outside the freeze):
+```
+const rows=cards.map((c0,i)=>{ const c=effCard(cid(t.id,'recall',c0), c0); const {ans,take}=cramLine(c); …
+```
+`cid(t.id,'recall',c0)` must be computed from the **original** object, since `cid` hashes the card content.
+Ship with SCA-01/SCA-02 — same six lines.
+
+## 🟠 CRAM-02 — The print stylesheet hides nothing it is trying to hide; the PDF comes out with the sidebar, a 248px indent and the AI dock printed over it — MEDIUM/HIGH — logged
+`app.html:617`:
+```
+@media print{ .nav,.topbar,.btnrow{display:none!important} .cramsheet{border:0} … }
+```
+**`.nav` and `.topbar` match zero elements in the document.** Verified: `grep -c 'class="nav"' app.html` → 0,
+`grep -c 'class="topbar"' app.html` → 0, and `.topbar` appears nowhere in the CSS either. The sidebar is
+`<nav id="sidebar">` (`:970`) — a *class* selector `.nav` does not match a `<nav>` **element**. So the only rule that
+fires is `.btnrow{display:none}`, which correctly hides the Print button itself. Everything else prints:
+
+- **`#sidebar`** (`:29`) — `position:fixed; width:248px; top:0; bottom:0; z-index:50`, opaque `--panel`. Fixed
+  elements paint on page 1 of a print job, so the full student nav is stamped over the top-left of the first page.
+- **`#main{margin-left:248px}`** (`:31`) is never reset — on A4 portrait (~794 CSS px) that eats ~31% of the page
+  width for every page, and `max-width:1000px` does not save it; long cram questions wrap into a narrow gutter column.
+- **`#mbDock`** (`study-dock.js:55`) — `position:fixed; top:0; right:0; bottom:0; width:min(420px,92vw);
+  background:#fff; z-index:100001`. `MB_DOCK.onStudyScreen` (`app.html:991`) **includes `'cram'`**, and the dock
+  defaults to `isOpen = isDesktop()` when the student has no saved preference (`study-dock.js:188`) — so on the
+  desktop-first "print my cram sheet" path the *default* state is a 420px opaque white panel covering the right
+  half of page 1.
+- **`#mbDockTab`** (`study-dock.js:50`, fixed, z-9996), **`#mbTimer`** (`study-timer.js:107`, fixed, z-9997),
+  **`#hamburger`** (`app.html:44`, fixed, shown ≤820px) — all print too.
+
+Why it matters: "🖨 Print / save PDF" is the cram sheet's whole reason to exist and its primary CTA. The colour half
+of the print rule was clearly thought about (`body{background:#fff}`, `.ca{color:#0a7}`) — the layout half has
+never worked. This is cheap to verify without a device: `document.querySelectorAll('.nav,.topbar').length` → `0`.
+
+PROPOSED (one line, replaces `:617`, no JS, no cache bump):
+```
+@media print{ #sidebar,#hamburger,#scrim,#mbDock,#mbDockScrim,#mbDockTab,#mbTimer,#mbtPop,.btnrow,.crumb{display:none!important}
+  #main{margin-left:0!important;max-width:none!important;padding:0!important}
+  .cramsheet{border:0} body{background:#fff;color:#000} .cramrow{page-break-inside:avoid} .cramrow .ca{color:#0a7} }
+```
+(`page-break-inside:avoid` also stops a question splitting from its answer across a page boundary — currently nothing
+prevents that.) Note the `#mbDock*`/`#mbTimer` ids live in `study-dock.js`/`study-timer.js`, but the *rule* belongs
+in `app.html`'s print block, so this stays a single-file edit and does not touch those modules.
+
+## 🟠 CRAM-03 — `window.print()` is likely a dead button in the installed app — MEDIUM — logged, **needs one live check**
+`app.html:5769` — `<button class="btn" onclick="window.print()">🖨 Print / save PDF</button>`, called bare with no
+feature test, no fallback and no failure feedback. `manifest.webmanifest` sets `"display": "standalone"`, and MedBank
+is installed-to-homescreen by design (`sw.js`, the install prompt). On iOS, a standalone-mode PWA has no browser
+chrome and no share/print affordance, and `window.print()` in that context does nothing observable — no dialog, no
+error, no `catch` to fire. Android/Chrome standalone does show the print dialog, and iOS **Safari** (not installed)
+does work, so this is device- and install-state-specific.
+
+Why it matters: the audience is Nigerian medical students on phones, and the printed cram sheet is the one deliverable
+they'd want off-device before an exam. If it silently no-ops on installed iOS, the feature is invisible-broken for a
+whole platform and would never be reported as a bug — it just looks like the button "doesn't do anything".
+
+CHECK (Frank, 30 seconds, no code change): open the installed app on an iPhone → any topic → 📄 Cram → tap
+🖨 Print / save PDF. If nothing happens, this is confirmed.
+PROPOSED if confirmed: detect standalone (`window.matchMedia('(display-mode: standalone)').matches ||
+navigator.standalone`) and swap the button for a "Copy as text" / share-sheet path, or at minimum toast
+"Open MedBank in Safari to print this sheet" instead of a silent no-op. Do **not** wire this to `exportTopicPDF`
+until flow 13's iOS runtime item is settled — that path has the same platform question open.
+
+## 🟡 CRAM-04 — The takeaway line is never markdown-stripped, so 188 cards print literal `**` on the sheet — LOW — logged
+`app.html:1615-1620`:
+```
+const bold=(a.match(/\*\*(.+?)\*\*/s)||[])[1]||'';
+const take=(a.match(/>>\s*(.+?)(?:\n|$)/)||[])[1]||'';
+return {ans:bold.replace(/\n+/g,' ').trim(), take:take.trim()};
+```
+`ans` is markdown-free by construction (it *is* the capture group inside the `**…**`). `take` is raw text and is
+passed straight to `esc(take)` at `:5765`, so any emphasis inside a `>>` line prints as asterisks.
+
+Measured against the shipped content tree (66 `recall.json`, 2203 cards, 2090 with a takeaway):
+**188 takeaways (9.0%) contain `**`, `__` or backticks.** Samples: `**Metastases double FASTER than the primary.**`,
+`**Alkylating = "glue the DNA strands so the cell can't copy them."**`, `The word **"ideal"** matters: …`.
+These print with the asterisks visible on a sheet the student hands in front of.
+
+Second, smaller half: the `(.+?)(?:\n|$)` capture stops at the first newline, so a **multi-line** `>>` block keeps
+only line 1. One card in the tree hits this — the cytotoxic-toxicity mnemonic in *Chemotherapy / Hormone Therapy in
+Gynaecology* prints `**Cisplatin → Kidney**` and silently drops Adriamycin→Heart, Bleomycin→Lung,
+Methotrexate→Liver, Vincristine→Nerves. Rare today, but the note-generation prompt is free to emit more.
+
+PROPOSED: strip inline markers from `take` (and join consecutive `>>` lines) —
+```
+const takeRaw=(a.match(/>>\s*([\s\S]+?)(?:\n\s*\n|$)/)||[])[1]||'';
+const take=takeRaw.split(/\n\s*>>\s*/).join(' · ').replace(/\*\*|__|`/g,'').replace(/\s+/g,' ').trim();
+```
+`md()`'s `inline()` helper (`:1034`) does the same job but is closured inside `md` and returns HTML, which the cram
+row does not want (it `esc()`s). Keep the local strip.
+
+## 🟡 CRAM-05 — "Exam cram" is the one study mode that ignores exam dates and overrides the student's Mix-subjects setting — LOW — logged
+`app.html:4312-4314` — the mode literally named *Exam cram*:
+```
+else if(mode==='cram'){ items=collectRecall(()=>true);
+  for(let i=items.length-1;i>0;i--){…shuffle…}
+  items=items.slice(0,40); label='Exam cram'; }
+```
+The `weak` branch one line above uses `orderItems(...)` (`:1631`), which — when *Mix subjects together* is **off** —
+sorts by `subjectExamRank()`, i.e. nearest exam first. `cram` bypasses `orderItems` entirely and force-shuffles, so
+a student who has explicitly set "Off = one subject at a time (nearest exam first)" (Settings, `:5604`) gets an
+interleaved random mix anyway, and the 40-card cap then slices that shuffle — meaning **the subject they actually
+have an exam in next may contribute a handful of cards or none**, purely by chance.
+
+Not a crash and not data loss, but the mode's name is a promise about exam proximity that the implementation
+contradicts, and `DATA.exams` is already populated and already ranked by `subjectExamRank()`.
+PROPOSED: `items=orderItems(collectRecall(()=>true)).slice(0,40)` — one line, reuses the existing helper, and keeps
+the shuffle for students who have interleave **on** (which is the default) because `orderItems` shuffles in that
+branch anyway. Frozen-engine check: `orderItems`/`subjectExamRank` are not in the SMART set — safe.
+
+## 🟡 CRAM-06 — A not-built topic renders Home under the `#/cram/<id>` URL — LOW — logged
+`app.html:5760` — `const t=topById(topicId); if(!t||!t.ready) return pageHome();`. The hash stays `#/cram/<id>` while
+the Home page is drawn, so the nav highlight, the back button and any reload all disagree with what is on screen, and
+`pageHome()` (~8 full passes over the card set, per HOME-NOTES) is paid for a route the student did not ask for.
+The router's `NEEDS_TOPIC` loader (`:6322`) covers the *content-not-loaded-yet* case correctly; this is the
+*loaded-but-not-ready* case, which falls through it.
+
+All three in-app entry points are inside `t.ready` branches, so today this is only reachable by URL, a stale
+bookmark, or a topic that was ready and then reloaded un-built — hence LOW.
+PROPOSED: return a real empty state (`crumbs` + "This lecture hasn't been built yet" + a ＋ Add a lecture / back
+button), matching the STU-04 / LIB-06 / PRG-06 pattern this repo has now applied five times.
+
+## 🔵 CRAM-NOTES — checked and clean, plus re-confirmations
+1. **SCA-01 re-confirmed with a fresh count.** Re-ran `cramLine` over the shipped tree: 2203 recall cards,
+   **113 (5.1%) produce a completely blank cram row**, and all 113 are still the single topic
+   *Embryology of the Cardiovascular System*. Its cram sheet is 113 numbered questions and zero answers under a
+   header promising "the bold answer and takeaway from every recall card". Unchanged, still the highest-value fix here.
+2. **The "only the first `**bold**` is used" behaviour is CORRECT, not a bug.** 1644 of 2203 cards (74.6%) contain
+   more than one bold span, but the content format is `**lead answer**\n\n## Understanding it\n- …**emphasis**…`, so
+   the first span *is* the answer and the rest are mid-body emphasis that the sheet rightly drops. Checked so nobody
+   "fixes" this later into concatenating them.
+3. **`ans` has zero residual markdown** — 0 of 2090 extracted answers contain `*`, `_`, `` ` ``, a link or a heading.
+   Only `take` has the problem (CRAM-04).
+4. **Escaping is clean** — `esc()` on `c.q`, `ans`, `take`, `t.name`; no ENT-08-style `innerHTML` sink on this route.
+5. **LIB-03 family clean** — `(t.recall||[])` is guarded at `:5761`; no `.length` crash on a half-built topic.
+6. **Families (b) `NaN` box, (c) non-integer answer key and (d) `r.json()` on HTML did not reach this flow** — the
+   cram sheet reads no card state and makes no network call at all.
+7. **Family (a) `isFlagged` — restated, not re-counted.** SCA-02 already logged the cram sheet as the 19th pool with
+   no flag guard; `pageCram:5761` still reads `t.recall` directly. It remains the worst instance because a
+   reported-wrong card is *printed in the answer colour on a PDF that leaves the app*. Fix with CRAM-01 — same map.
+8. **SCA-03 restated** — no primer deck, and `cards.length===0` yields "0 points", an empty box and a live
+   "Drill this deck →" into a dead deck. Fold the empty state into CRAM-06's fix.
+9. **ENT-03 restated with the export angle.** `pageCram` calls no `MB_PAYWALL.guard()`, and `guard()` still has zero
+   call sites anywhere. The cram sheet is therefore the app's highest-leverage ungated surface for getting content
+   *out*: every answer in a lecture, on one page, one tap from a PDF, available to a basic-tier account and to an
+   archived (nominally view-only) level. Worth naming explicitly when ENT-03 is scheduled.
+10. **`document.title` is never set for print**, so a saved PDF is named after the page URL rather than the topic.
+    Cosmetic, but it is one line next to CRAM-02's fix and it is the file the student then has to find again.
+
+**Ordering for Frank:** **CRAM-02 is the cheapest high-value item in this flow** — one CSS line, no JS, no service-worker
+cache bump, and it repairs the only artifact the student takes out of the app. Ship CRAM-01 + SCA-01 + SCA-02 together
+(all three are edits to the same `cards.map` at `:5761-5766`). CRAM-03 is blocked on one 30-second device check.
+CRAM-04/05/06 are one-liners that can ride along. Nothing in this flow touches the frozen engine.

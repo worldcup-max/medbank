@@ -102,3 +102,58 @@ Primary: **retest-correct rate** and **subsequent-accuracy lift** for `matched` 
 - No new question generation — reuse the pool.
 - No change to `smartDiagnose`/routing/adaptive.
 - No forced/blocking flows — always opt-in.
+
+---
+
+## BUILD STATUS — 2026-08-22 (increment 1, feature-flagged)
+**Implemented (behind `CFG.FEATURES.GAP_LOOP`, default OFF — dormant for the live pilot):**
+- At-miss detection: on a wrong tutor answer whose concept the FROZEN `smartDiagnose` reads as `gap` (evidence-gated), the plain "Retest this concept" button is replaced by the opt-in offer `❌ Not quite — knowledge gap [Learn this] [Keep going]` (`gapEligible`/`gapOfferHtml` in app.html).
+- The loop (§4) as a self-contained overlay isolated from `qbNext`/`qbPick`: LEARN (objective + Open-the-note) → PRACTICE (guided, with rationale) → RETEST (cold, different question) → RESULT (gap-closing / still-shaky). Practice + retest are logged as ordinary attempts (`mode:'gap_practice'|'gap_retest'`) so the engine counts them (§5).
+- A/B bucketing (§7): `gapBucket` = stable hash(uid+concept) → `matched` (full loop) vs `generic` (skips LEARN).
+- Telemetry (§6): `intervention_shown` / `intervention_step` / `intervention_completed` / `intervention_abandoned`, each with the concept key + A/B arm, via `smartLog` (syncs through profile_state like the pilot events).
+- Verified: app.html + config.js parse clean; frozen-engine regression harness (`qa/engine-scenarios.mjs`) still passes; gap-loop decision logic tested headlessly (`qa/gap-loop.mjs`, 7/7 — incl. flag-off-dormant, gap-only, miss-only, empty-pool guard, deterministic 50/50 bucket).
+
+**Not yet built (increment 2):**
+- §3b the post-session "🧭 Your 3 things to fix" queue with a `[Learn →]` entry into the same loop (only the at-miss entry point exists so far).
+- Live UI runtime verification (blocked until committed + deployed; the loop can only be exercised on a build that actually ships the code).
+- Dashboard "intervention lift by type" panel (post-pilot, per spec §7).
+
+**To trial it:** flip `FEATURES.GAP_LOOP` to `true` in config.js, commit + deploy, then take a Smart Drill and miss a low-confidence question on a concept with ≥3 evidence.
+
+---
+
+## BUILD STATUS — 2026-08-22 (increment 2: post-session "3 things to fix" queue)
+**Architecture (as directed):** the queue is a PRIORITISATION LAYER that *consumes* the frozen engine's output — it never diagnoses. Separate flag `CFG.FEATURES.POST_SESSION_FIX_QUEUE` (default OFF), independent of `GAP_LOOP`, so the two surfaces can be trialled separately.
+
+Session ends → `fixQueue()` reads `smartStats` + `smartDiagnose` across skill & tag bands → ranks the top-3 by
+`score = severity·0.5 + diagnostic-confidence·0.3 + recurrence·0.2` (deliberately NOT the three lowest scores) → dedups so a skill-band and its own tag-band never list the same weakness twice (clustered by underlying skill) → routes each to the intervention its diagnosis calls for:
+- **gap** → "Learn → Practice → Retest" (the V1.6 gap loop; works from the queue even if the at-miss `GAP_LOOP` flag is off)
+- **misconception** → "Practise & confront" (focused Smart Drill — interim until dedicated intervention #3)
+- **fragile** → "Smart Drill" (retrieval / reinforcement)
+
+Each item shows the concept label, the diagnosis chip, and a one-sentence *why* (the engine's own `dg.tip`) — session-level framing ("this is one of the highest-value things to fix"), not "you got Q7 wrong".
+
+**Telemetry (additive):** `fix_queue_shown` (once per session), `fix_queue_item_selected`, `intervention_started {source:'queue'}`; completion/abandonment flow through the existing `intervention_*` / `smart_drill_*` events; subsequent performance is joinable via the concept key on the attempt log.
+
+**Verified:** app.html + config.js parse clean; engine regression harness still passes (engine untouched); new headless test `qa/fix-queue.mjs` (all pass) proves value-ranking (a 33%-accuracy misconception outranks a 0%-accuracy gap), solid-area exclusion, 3-item cap, skill/tag de-dup, diagnosis→action routing, and the MIN_EV gate. The watchdog task now runs all three harnesses (`engine-scenarios`, `gap-loop`, `fix-queue`) every 20 min.
+
+**Remaining:** live UI runtime verification (blocked until committed + deployed with a flag flipped on); dedicated misconception intervention (#3) to replace the interim drill routing; dashboard "intervention lift by type" panel (post-pilot).
+
+**To trial:** set `FEATURES.POST_SESSION_FIX_QUEUE = true` (and optionally `GAP_LOOP = true` for the gap route's full loop), commit + deploy, finish a Smart Drill with ≥3 evidence on a couple of weak concepts.
+
+---
+
+## VALIDATION STATUS — 2026-08-22 (Increment 2)
+**Ranking formula (kept visible for later tuning):** `score = severity·0.5 + confidence·0.3 + recurrence·0.2`.
+Each item now also carries its individual components (`sev`, `conf`, `recur`) into the telemetry (`fix_queue_shown`, `fix_queue_item_selected`) — internal only, never shown to students — so the weights can be tuned from real behaviour ("was this ranked high for severity, confidence, or recurrence?") once usage data exists.
+
+**Headless end-to-end validation — all green (`qa/flow-e2e.mjs`, drives the REAL extracted functions):**
+- Session ends → `fixQueue` → select item → the correct intervention opens.
+- Gap route: Learn → Practice → Retest → Result; **retest is a DIFFERENT question on the SAME objective**; `intervention_shown{source:'queue'}` → `intervention_step`(learn/practice/retest) → `intervention_completed{retest_ok}`; practice & retest recorded as ordinary attempts (`gap_practice`/`gap_retest`).
+- Misconception → focused drill; Fragile → Smart Drill (not the gap loop).
+- Flag independence proven: `POST_SESSION_FIX_QUEUE=true` + `GAP_LOOP=false` → the queue's gap item STILL launches the loop (no silent fail); `gapOn()` correctly reflects the at-miss flag being off.
+- Engine untouched (frozen-engine harness still passes).
+
+Four regression harnesses now guard this every 20 min via the watchdog task: `engine-scenarios`, `gap-loop`, `fix-queue`, `flow-e2e`.
+
+**Only remaining for Increment 2 = "done":** live DOM/runtime confirmation on a DEPLOYED build with the flags on (the code is dormant/uncommitted, so there is nothing to drive on the live site yet). Everything the runtime *logic* must do is validated above; what's left is the visual render + a live telemetry round-trip, to be driven the moment it ships with `POST_SESSION_FIX_QUEUE=true` (and `GAP_LOOP=true` for the gap route's full loop).
