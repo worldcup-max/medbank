@@ -259,11 +259,14 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
     }
   }
   if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
-  const msg=(((j.choices||[])[0]||{}).message)||{};
+  const choice=((j.choices||[])[0])||{}; const msg=choice.message||{};
   // reasoning models sometimes leave `content` empty and put the answer in `reasoning_content`
-  const text=(msg.content && msg.content.trim()) ? msg.content : (msg.reasoning_content||"");
+  const usedContent = !!(msg.content && msg.content.trim());
+  const text = usedContent ? msg.content : (msg.reasoning_content||"");
   const u=j.usage||{};
-  return { text, usage:{ input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens } };
+  return { text, usage:{ input_tokens:u.prompt_tokens, output_tokens:u.completion_tokens },
+           finish_reason: choice.finish_reason||"", model_used: model, json_mode: !!body.response_format,
+           from_reasoning: !usedContent && !!(msg.reasoning_content) };
 }
 
 /* Pick the CORE build prompt for this student's level: a level-specific active row,
@@ -860,7 +863,7 @@ app.post("/import", async (req,res)=>{
     // generate → parse → validate, with ONE automatic retry (BUG-03). LLM output is stochastic, so a
     // single flaky response shouldn't hard-fail the whole build. On the retry we tell the model exactly
     // what was wrong; on final failure we return the SPECIFIC reason, not a bare "validation failed".
-    let obj=null, winGen=null, lastErrs=[], lastErr="";
+    let obj=null, winGen=null, lastErrs=[], lastErr="", lastDiag=null;
     for(let attempt=1; attempt<=2; attempt++){
       const fixNote = attempt>1
         ? "\n\nIMPORTANT — your previous output was rejected for: "+lastErrs.join("; ")+". Return STRICT valid JSON that fixes ALL of these. Requirements: note_md and simplified_md must each be at least 200 characters; include a primer deck and a recall deck; EVERY recall card must have exactly 4 items in \"opts\", an integer \"ans\" between 0 and 3, and an answer note \"a\"; every primer card must have q, lecturer, explain and tie."
@@ -871,7 +874,12 @@ app.post("/import", async (req,res)=>{
       // 400s of it across two attempts). extractJsonObject is the belt-and-braces net for anything
       // that still slips a fence or a stray sentence around the JSON.
       const gen = await generate({ model, prompt: prompt + fixNote, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: attempt>1 ? 0.35 : (Number(pt.data.temperature) || 0.3), json:true });
-      const cand = extractJsonObject(gen.text || "");
+      const rawTxt = gen.text || "";
+      lastDiag = { model: gen.model_used, finish_reason: gen.finish_reason, json_mode: gen.json_mode,
+                   from_reasoning: gen.from_reasoning, out_tokens: (gen.usage||{}).output_tokens,
+                   raw_len: rawTxt.length, head: rawTxt.slice(0,180), tail: rawTxt.slice(-120) };
+      console.warn("[import] attempt "+attempt+" diag:", JSON.stringify(lastDiag));
+      const cand = extractJsonObject(rawTxt);
       if(!cand){ lastErr="bad json"; lastErrs=["the AI returned an unreadable (non-JSON) response"]; continue; }
       const errs = validateObj(cand);
       if(!errs.length){ obj=cand; winGen=gen; break; }
@@ -882,7 +890,7 @@ app.post("/import", async (req,res)=>{
       const friendly = lastErr==="bad json"
         ? "The AI returned an unreadable response. Please try building again."
         : "Couldn't build a complete study set from this input ("+(lastErrs[0]||"missing content")+"). Try adding a little more detail to the lecture, then rebuild.";
-      return res.status(502).json({ error:friendly, details:lastErrs });
+      return res.status(502).json({ error:friendly, details:lastErrs, diag:lastDiag });
     }
 
     // --- save the topic + cards ---

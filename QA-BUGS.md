@@ -4289,3 +4289,299 @@ The intelligence check passes: Management ranks **above** Investigation despite 
 **Verified:** `node --check import-server/server.mjs` OK; new `qa/extract-json.mjs` (10/10) proves the extractor survives reasoning prose, `<think>` blocks, code fences, prose before/after, braces inside strings, nested objects, inline-example-then-real, and truncated/garbage → null. Added to the watchdog's harness set. **Not yet deployed** — needs commit + push (Render auto-redeploys the import-server from `main`).
 
 **Config recommendation (not code — for Frank):** `MEDBANK_PREMIUM_MODEL` (and `MEDBANK_EXTRAS_MODEL`) point at reasoning models (`deepseek-v4-pro`/`-flash`) — these are slow and unnecessary for a structured-JSON build. Consider a non-reasoning model (e.g. `deepseek-chat`) for the import + extras builds: much faster, and the JSON is cleaner. Also confirm those exact model IDs are valid on the DeepSeek endpoint. The code now works either way, but a non-reasoning model removes the 6-minute build time.
+
+---
+
+# 📦 Flow 25 — Content pipeline (`content-loader.js`, `content.js`, `hydrateFromCache`/`applyContent`) — 2026-08-22
+
+**Part A this run: all green.** `engine-scenarios` ✅ · `gap-loop` ✅ · `fix-queue` ✅ · `flow-e2e` ✅ · `extract-json` ✅ · `node --check import-server/server.mjs` ✅ · all 3 inline `<script>` blocks in `app.html` parse ✅. No regression logged.
+
+**Scope read:** `content-loader.js` (161 lines) only, plus the two call sites that own the cache's lifetime (`sync.js:232`, `sync.js:326 switchProfile`, `auth-ui.js:322/376` logout) — the cache is this flow's state and its lifetime is the bug.
+
+Headline: **the content cache has no owner.** It is written by this file, keyed by level-profile, painted synchronously on every boot before auth resolves — and only ONE of the four events that should invalidate it actually does. Everything else in the flow fails *silently and into the cache*, so a single failed read is persisted and shown as truth on the next launch.
+
+## 🔴 CNT-01 — Switching level shows BOTH levels' lectures, permanently — HIGH (AUTH-02's content half, now confirmed)
+**Where:** `content-loader.js:95-104` + `:160`; invalidation missing at `sync.js:318-331` (`switchProfile`).
+`switchProfile` flushes state, flips `active_level_profile_id`, sets `{rev:0…}` and reloads — but it never touches `medbank_content_pid` or `medbank_content_<oldPid>`. On the reload, `content-loader.js:160` runs `hydrateFromCache()` synchronously at script-parse time, reads the **old** pid, and paints the old level's courses/topics into `DB.subjects` + `allTopics`. `MB_loadProfileContent` then adds the new profile's content **on top** — and `applyContent` is upsert-only, so nothing is ever removed. The student ends up with the union of both levels in the library, subject list, search, lecturers and every study pool, for the whole session.
+**Why it matters:** this is the content half of AUTH-02 and it is worse than the state half, because studying any of those visible old-level cards writes SRS rows into the NEW profile's `DATA`, which sync then pushes to the new profile's cloud row — so the bleed becomes permanent and bidirectional after one round trip. It also silently inflates every count on Home/Progress the day a student moves up a level.
+**Proposed fix:** in `switchProfile` (and `goToNextLevel`), purge the content cache with the same sweep the uid-guard already uses — `Object.keys(localStorage).forEach(k => /^medbank_content_/.test(k) && removeItem(k))` — *before* `location.reload()`. Belt-and-braces in this file: stamp the cached blob with its pid and have `hydrateFromCache` skip it unless the pid still matches the account's active profile (needs the pid available synchronously — simplest is to have `sync.js` write `mb_active_pid` on switch and compare).
+
+## 🔴 CNT-02 — Logging out leaves the previous student's lectures on screen — HIGH
+**Where:** `auth-ui.js:322` and `:376` (`signOut()`), `content-loader.js:160`.
+Logout calls `sb.auth.signOut()`; the `SIGNED_OUT` handler (`auth-ui.js:436`) reloads and deliberately keeps `mb_current_uid` (correct, that's AUTH-03's guard). But **nothing clears `medbank_content_*` on logout.** After the reload, `hydrateFromCache()` runs before any session check — `loadProfileContent` bails at `:138` with no session, but the cache has already been painted — so a signed-out browser shows the previous student's full library: lecture titles, lecturer names, notes, transcripts and every card. On a shared or library machine, the next person to open the app sees them without logging in.
+**Why it matters:** cross-account content exposure with no login required, on the pilot's most likely device-sharing scenario. `medbank_v1` is purged on the next *different* login (`sync.js:231`), but the content cache is only purged on that same branch — i.e. never for a logged-out browser, and never at all if the next person just browses without signing in.
+**Proposed fix:** purge `medbank_content_*` + `medbank_content_pid` in the `SIGNED_OUT` branch before `location.reload()`; and gate `hydrateFromCache` at `:160` on a synchronously-readable "someone is signed in" marker (`mb_current_uid` is already there, but it survives logout by design — use a separate `mb_session_live` flag written by `sync.js`, or move the hydrate call behind the session check and accept the slower paint).
+
+## 🔴 CNT-03 — One failed `cards` read empties EVERY deck — and caches the empty version — HIGH
+**Where:** `content-loader.js:123-125` (`.data || []`), `:69` (`primer:g.primer, recall:g.recall`), `:78-79` (`Object.assign`), `:148` (`saveCache`).
+If the `cards` select errors — RLS hiccup, network blip, a 414 from `.in("topic_id", …)` with a few hundred ids — `.data || []` turns the error into an empty array. `byTopic` is then `{}`, so every topic gets `g = { primer:[], recall:[] }` and `Object.assign(em, fields)` **overwrites the loaded decks with empty arrays**. Note that the two lines directly above (`:73-77`) go to real trouble to protect `transcript` and `extras` from exactly this — `primer`/`recall`, the actual study content, got no such guard. Then `:148` writes the card-less payload to the cache, so the next boot paints an empty library too.
+**Why it matters:** this is TOP-02's failure mode applied to *all cards on the account at once*, and it persists. The student sees their lectures listed as "ready" with zero cards, every topic's plan slot and `topicPct` goes wrong, and there is no error anywhere.
+**Proposed fix:** (1) check `.error` on the cards query and **abort the whole apply+cache** on failure rather than proceeding with `[]`; (2) mirror the transcript/extras guard for the decks — `if(!g.primer.length && em && em.primer && em.primer.length) fields.primer = em.primer;` (same for `recall`); (3) never `saveCache` a payload whose card count is zero while the previous cache had cards.
+
+## 🔴 CNT-04 — A failed load overwrites the good cache with an empty one → blank library on next launch — HIGH
+**Where:** `content-loader.js:110-111`, `:146-148`, `:100`.
+`fetchRaw` swallows every query result through `.data || []`. If the `courses` read fails, `:111` returns `{courses:[],topics:[],byTopic:{},trById:{},exById:{}}` — indistinguishable from "this student has imported nothing" — and `:148` `saveCache`s it unconditionally, **destroying the good cache**. `hydrateFromCache`'s guard at `:100` is `if(!d || !d.courses) return false`, and `[]` is truthy in JS, so the empty blob sails through, `applyContent` returns 0, and the function reports `true` (hydrated). Next launch: an empty library, painted confidently, with no error and no retry — `loadProfileContent` is called exactly once from `sync.js:301`.
+**Why it matters:** one transient network failure converts into a persistent "all my lectures are gone" for the student, which is indistinguishable from data loss and is precisely the panic case a pilot cannot afford. Same shape as AUTH-01 (a failed read that isn't checked, written over good state) — sync fails closed now; this file still fails open.
+**Proposed fix:** have `fetchRaw` throw on `.error` instead of coercing to `[]`; wrap the caller so a throw skips **both** `applyContent` and `saveCache`, leaving the previous cache intact; change the `:100` guard to `!Array.isArray(d.courses) || !d.courses.length`; and add one retry (or re-run on `online`) so a blip self-heals without a reload.
+
+## 🔴 CNT-05 — Cards silently truncate at the PostgREST row cap on any large account — HIGH (needs one live check)
+**Where:** `content-loader.js:114`, `:120`, `:124`.
+Neither the `topics` nor the `cards` select sets `.range()` / `.limit()`, so both are subject to Supabase's default max-rows cap (commonly 1000). A pilot student with ~25-30 imported lectures is already past that on cards alone. Worse, the order is a **global** `.order("idx")` across all topics, so the surviving 1000 rows are the low-`idx` cards of every topic — the loss is spread thin across the whole library rather than dropping a few topics wholesale, which makes it look like "some cards just aren't there" instead of an obvious failure. It is then cached and treated as complete.
+**Why it matters:** invisible, account-wide content loss that scales with how much the student has actually used the product — the heaviest users lose the most, and nothing reports it. Also feeds the empty/short-deck crash family (REV-03/LIB-03/TOP-04).
+**Proposed fix:** page the cards query explicitly (`.range(from, from+999)` in a loop until a short page returns), or chunk by `topic_id` batches of ~50 and merge; assert `rows.length < pageSize` before treating a page as final. Same for `topics`. Chunking the `.in()` list also removes the URL-length/414 risk that feeds CNT-03.
+**Live check for Frank:** on frankthejay's account, compare `select count(*) from cards` for the active profile against the number of cards the app shows loaded.
+
+## 🟠 CNT-06 — Unfiltered `maybeSingle()` on `accounts` — the FIXED-01/AUTH-07 shape, still present here — MEDIUM→HIGH
+**Where:** `content-loader.js:141` — `sb.from("accounts").select("active_level_profile_id,is_admin").maybeSingle()`.
+`sync.js:243-247` explicitly fixed this exact call by adding `.eq("id", uid)`, with a comment noting that an unfiltered `maybeSingle()` errors the moment a policy widens the result to more than one row — "the FIXED-01 regression that aborted sync on fresh devices (phone empty)". **`content-loader.js` still has the unfiltered version**, and it also never checks `acc.error`: on error `acc.data` is null → `pid` is null → `:144` returns → no content at all, no message, and `window.IS_ADMIN` is silently forced false.
+**Why it matters:** the same policy change that once produced "phone empty" would now produce "empty library" instead, through a different file, and the fix that was applied to sync was never propagated here.
+**Proposed fix:** filter by the session's uid exactly as `sync.js` does (`sb.auth.getSession()` is already awaited at `:138`, so `ses.data.session.user.id` is in hand), and check `acc.error` explicitly — log it rather than treating it as "no profile".
+
+## 🟠 CNT-07 — `applyContent` is upsert-only: deleted lectures never disappear; moved topics duplicate — MEDIUM
+**Where:** `content-loader.js:53-85` (`:62` filter, `:71-79` upsert).
+No reconciliation pass: a topic or course deleted server-side stays in `DB.subjects`/`allTopics` for the rest of the session (and forever in the cache until it's rewritten). Two extra consequences the LIB-NOTES entry didn't cover: (a) `em` is looked up only inside *this* course's `modules[0]`, so a topic whose `course_id` changed is **pushed into the new course while the old course keeps its copy** — the same topic id in two subjects; (b) `Object.assign(ea, fields)` never updates `subject` or `module`, so the `allTopics` entry keeps pointing at the original subject object — every `_subject` label downstream (Mega pools `app.html:3060/3101`, mistakes, search) reports the old course.
+**Proposed fix:** make the apply authoritative for the ids it fetched — after upserting, drop any loaded topic whose id is absent from `topics` **and** whose course was in the fetched `courses` set (so a partial/failed fetch can't delete anything — guard on CNT-04's error check first). Include `subject`/`module` in the assigned fields, and remove a topic from its previous module when `course_id` changes.
+
+## 🟠 CNT-08 — Renaming a course never shows up — MEDIUM (LOW impact, trivial fix)
+**Where:** `content-loader.js:59-60`. The subject is found by `id` and, if found, its `name` is never refreshed — only the create branch uses `co.name`. A renamed course keeps the old name on this device until the cache is purged. `:41`'s `if(!s.short) s.short = s.name` compounds it: `short` sticks to the original name forever.
+**Proposed fix:** `else { subj.name = co.name; subj.short = co.name; }` on the found branch.
+
+## 🟠 CNT-09 — `__MB_CONTENT_READY` is set true even when nothing loaded → topic links dead-end — MEDIUM
+**Where:** `content-loader.js:152` (`finally`), consumed at `app.html:6329`.
+The flag is set in a `finally`, so it goes true on *every* exit path — no session, no pid, thrown error, empty result. `app.html:6329` uses `!window.__MB_CONTENT_READY` as the "content is still loading, don't 404 this topic yet" gate. So after any silent failure the gate opens immediately and a perfectly valid topic deep link (a notification tap, a shared `#/topic/<id>`) renders "not found" instead of waiting — permanently, since nothing retries. The 9s watchdog at `:6583` exists for the opposite case and is unaffected.
+**Proposed fix:** set the flag only on the success path (and on the genuine "no session"/"no profile" cases); on error, leave it to the 9s watchdog so the app still recovers but the gate isn't opened by a failure.
+
+## 🟡 CNT-10 — The "older schema" fallback swallows every error class — LOW
+**Where:** `content-loader.js:114-121`. `if(full && !full.error)` … `else` re-issues the base select — but the `else` fires for **any** error (RLS, network, timeout), not just a missing-column error. The retry then fails the same way, `.data || []` yields `[]`, and the run proceeds to CNT-03/CNT-04 with zero topics. It also means a transient error silently costs the account its transcripts and extras for that pass.
+**Proposed fix:** only take the fallback when the error actually indicates an unknown column (PostgREST `42703` / message matching `column .* does not exist`); otherwise propagate.
+
+## 🟡 CNT-11 — Smaller items (LOW, grouped)
+- **Unknown `deck` value is silently binned into `recall`** — `:130` `(byTopic[t][c.deck] || byTopic[t].recall).push(card)`. Any deck string that isn't literally `primer`/`recall` becomes a recall card with no warning; combined with `cid(topicId, deck, c)` at `app.html:1176` using `deck[0]`, its SRS id won't match the row the server wrote. Prefer an explicit `c.deck === 'primer' ? … : c.deck === 'recall' ? … : (skip + log)`.
+- **`saveCache` writes the pid before the payload** — `:88` sets `medbank_content_pid` and `:89`/`:91` may both throw on quota, leaving the pid pointing at a stale (or absent) blob. Write the payload first, set the pid only after a successful write.
+- **Old-profile cache blobs are never deleted** — `cacheKey(pid)` accumulates one multi-MB blob per level-profile the device has ever seen (5-6 possible), which is itself what drives the `:90` quota path. Sweep other `medbank_content_*` keys after a successful save.
+- **No version/expiry stamp on the cache** — `hydrateFromCache` blindly applies a blob written by any previous app version. Add `{v:1}` and drop on mismatch.
+- **`applyContent`'s return value is a count of topics *processed*, not changed** (`:80` increments unconditionally), surfaced as `added` at `:147`. Cosmetic, but misleading in logs.
+- **`onImported` races itself** — `:156` fires an un-awaited `loadProfileContent()` per import; two imports finishing together produce two in-flight fetches and the later `saveCache` wins, which may be the *earlier* (pre-import) snapshot. Serialise with a single in-flight promise.
+
+## ✅ Checked and clean
+- **`content.js`** is a one-line shim and is correct; `app.html:979`'s `const DB = window.MEDBANK || {…}` degrades safely if it fails to load.
+- **`recomputeStats`** (`:21-48`) is arithmetically sound; the "To be confirmed" exclusion from `DB.stats.lecturers` matches LIB-06's fix. Minor: two lecturer names differing only in punctuation ("Dr. Smith" / "Dr Smith") collapse to one `lid`, and the whole function is inside a `try{}catch(e){}` that would leave `DB.lecturers` half-rebuilt if it ever threw.
+- **The four recurring families:** (a) `isFlagged` — n/a, this file builds pools rather than serving them; (b) missing `box` → NaN — n/a, no SRS state written here; (c) non-integer answer key — n/a, payloads pass through untouched; (d) `r.json()` on HTML 413/502 — n/a, all reads go through the Supabase client.
+
+## 🔎 To verify (not a finding)
+The file header claims card ids line up because the server stores `card_key = topicId|deck|hash(q)` "which equals the app's `cid(topicId, deck, card)`" — but `app.html:1176` is `topicId+'|'+deck[0]+'|'+hstr(c.q)`, i.e. **`deck[0]`, a single letter**. Either the server also truncates to one char or the header comment is stale. Worth one grep against the import server (flow 3/4 territory, not read this run); if they genuinely differ, imported cards would carry SRS state under ids the server never wrote — which would show up as progress that never survives a device change.
+
+---
+
+# 🛠 Flow 26 — Service worker (`sw.js`, 125 lines): cache strategy, `maybeRemind`, `periodicsync`, `notificationclick`, `readFlag`/`writeFlag`) — 2026-08-22 — **log-only, nothing changed**
+
+Part A harnesses all green this run (engine-scenarios, gap-loop, fix-queue, flow-e2e, extract-json all exit 0; `node --check import-server/server.mjs` clean; all 3 inline `app.html` scripts parse). `CACHE` string untouched, as instructed.
+
+11 findings. The headline is **SW-01**: the flag store is keyed on a URL with a made-up `flag:` scheme, which the Cache API spec requires `put()` to reject — so nothing has ever been written to it, and the entire staged-notification payload path (`habitNudge` copy, strict mode, hard-card count) has been silently dead for the whole life of the file. SET-03 previously described `maybeRemind` as "replaying the last staged payload"; if SW-01 is right, it has never replayed anything — it always fires the generic fallback line.
+
+## 🔴 HIGH
+
+### SW-01 — the flag store can never write: `flag:` is parsed as a URL *scheme*, and `Cache.put` rejects non-http(s) schemes
+`sw.js:114` — `async function writeFlag(k, v) { const c = await caches.open(CACHE); await c.put('flag:' + k, new Response(v)); }`
+
+`Cache.put(request, response)` with a string request constructs `new Request('flag:payloadBody')`. `flag:payloadBody` is a **valid absolute URL** (ASCII-alpha scheme `flag`, opaque path `payloadBody`), so the base URL is never applied. The Service Worker spec's `put()` steps then say: *"If innerRequest's url's scheme is not one of 'http' and 'https', return a promise rejected with a TypeError."* Chrome's message is `Failed to execute 'put' on 'Cache': Request scheme 'flag' is unsupported`.
+
+Consequences, all of which match the "background notifications are generic/wrong" class of complaint:
+- **Every `writeFlag` rejects.** `lastStudied`, `hardCount`, `payloadBody`, `payloadUrl`, `payloadTitle`, `strict` are never stored.
+- **Every `readFlag` returns `null`** — `Cache.match` has no scheme restriction, it simply finds nothing (`sw.js:115` → `r ? r.text() : null`).
+- **`maybeRemind` (`:88-103`) therefore always takes the fallback branch**: `body` is null → `hc = parseInt(null || '0', 10) = 0` → the student always gets the flat *"Time for a quick review — keep your streak alive."* at `./app.html#/today`, never the `habitNudge()` copy that `app.html:5540` / `:6510` carefully stages (streak-at-risk, comeback, freeze off-ramp).
+- **`strict` is always `'0'`** in the background path, so `requireInteraction` never applies to a periodicsync nudge even when the student enabled strict mode.
+- **Unhandled promise rejections on every ping.** The `message` handler (`:108-111`) calls `writeFlag` without a `.catch()`. `swPing('hardcount', …)` fires on *every* card rating (`app.html:1851`, `:4654`, `:5087`, `:5197`), so a normal study session throws a stream of unhandled rejections inside the SW.
+
+**Why it matters:** the whole habit-loop notification investment (v197, `habitNudge`, strict overlay) is inert in the background; only the foreground `swPing('notify', …)` path at `app.html:4592`/`:5539` works, because that one calls `showNotification` directly with the body already in the message (`sw.js:111`) rather than going through a flag.
+
+**PROPOSED fix** (do not apply while frozen): key flags on a real same-origin URL and catch failures —
+```
+const FLAG_BASE = new URL('__mbflag/', self.location).href;
+async function writeFlag(k, v) {
+  try { const c = await caches.open(FLAGS); await c.put(FLAG_BASE + encodeURIComponent(k), new Response(String(v == null ? '' : v))); } catch (_) {}
+}
+async function readFlag(k) {
+  try { const c = await caches.open(FLAGS); const r = await c.match(FLAG_BASE + encodeURIComponent(k)); return r ? r.text() : null; } catch (_) { return null; }
+}
+```
+Note the fetch handler must then skip `/__mbflag/` URLs (they'd otherwise be served to a real navigation). Cleaner still: move the six flags to IndexedDB, which is what the "IndexedDB-free" comment at `:113` was avoiding for brevity.
+
+**Verify in one line** (live console on the app, no code change): `caches.open('medbank-v213').then(c=>c.put('flag:test',new Response('x'))).then(()=>console.log('OK')).catch(e=>console.log('REJECTED:',e.message))`. If it logs `REJECTED`, SW-01 is confirmed as written.
+
+### SW-02 — even once SW-01 is fixed, every release wipes the flags: they live in the *versioned* cache
+`sw.js:114-115` open `CACHE` (`medbank-v213`); `sw.js:44` deletes every cache whose key `!== CACHE` on activate. Since `CACHE` is bumped on essentially every release (v183 → v213 in the header alone), the new cache starts empty and the old one — holding `lastStudied`, `hardCount` and the staged payload — is deleted outright.
+
+**Why it matters:** the first background nudge after any app update is always the generic fallback, and `lastStudied` (whatever eventually reads it, see SW-06) resets to "never studied" on every deploy. Combined with the pilot shipping updates frequently, that is close to *always*.
+
+**PROPOSED fix:** put flags in a separate, unversioned cache (`const FLAGS = 'medbank-flags';`) and exclude it from the activate sweep: `keys.filter(k => k !== CACHE && k !== FLAGS)`.
+
+## 🟠 MEDIUM
+
+### SW-03 — the offline fallback serves `app.html` for **non-navigation** requests → family (d), "Unexpected token '<'"
+`sw.js:69` — `return cached || fetching.then(r => r || caches.match('./app.html')).then(r => r || caches.match('./index.html'));`
+
+There is no `e.request.mode === 'navigate'` guard. Any same-origin GET that is (a) not in the cache and (b) fails on the network gets the **HTML app shell** as its response body. Every one of app.html's 11 same-origin `<script src>` tags is exposed (`config.js` `:6570`, `sync.js` `:6572`, `level-switcher.js`, `paywall.js`, `import-tab.js`, `lecture-record.js`, `study-timer.js`, `study-dock.js`, `content-loader.js`, `auth-ui.js` `:6580`, `content.js` `:977`), plus `site.css` and `manifest.webmanifest`.
+
+**Why it matters:** the browser parses HTML as JavaScript → `SyntaxError: Unexpected token '<'` in the console and the module's globals are never defined. The app still *renders* (the shell loaded), so the student sees a MedBank that looks fine but where, say, `sync.js` silently never loaded — no login, no cloud save, no warning. This is exactly recurring family (d), one level lower in the stack than IMP-03/TOP-05/SOLVE-03.
+
+**PROPOSED fix:**
+```
+const isNav = e.request.mode === 'navigate' || (e.request.destination === 'document');
+return cached || fetching.then(r => r || (isNav ? caches.match('./app.html').then(x => x || caches.match('./index.html')) : Response.error()));
+```
+
+### SW-04 — "resilient precache" + eager purge can permanently degrade offline after one flaky asset
+`sw.js:38` caches each asset with `.catch(() => {})` so a single failed `c.add` cannot fail install — then `:39` `skipWaiting()` and `:44` **deletes the previous, fully-populated cache**. A partial new cache therefore replaces a complete old one, with no backfill.
+
+**Why it matters:** one dropped request during install (spotty campus wifi, a 502 from Pages mid-deploy) permanently removes that file from the offline shell until the *next* CACHE bump. If the file that failed is `app.html` itself, the student has no offline app at all; if it's `sync.js`, they get SW-03's silent half-load. The mitigating comment at `:35-36` correctly identifies the *install* risk but not the *purge* risk.
+
+**PROPOSED fix:** on activate, backfill before deleting —
+```
+self.addEventListener('activate', e => e.waitUntil((async () => {
+  const c = await caches.open(CACHE);
+  const keys = await caches.keys();
+  const olds = keys.filter(k => k !== CACHE && k !== FLAGS);
+  for (const u of ASSETS) {
+    if (await c.match(u)) continue;
+    for (const k of olds) { const hit = await (await caches.open(k)).match(u); if (hit) { await c.put(u, hit.clone()); break; } }
+  }
+  await Promise.all(olds.map(k => caches.delete(k)));
+  await self.clients.claim();
+})()));
+```
+
+### SW-05 — no `waitUntil` on the `message` handler or on the background revalidation → writes and notifications can be cut off
+`sw.js:105-112` — the handler fires `writeFlag(…)` and, for `notify`, `self.registration.showNotification(…)` without wrapping either in `e.waitUntil(...)`. A service worker with nothing keeping it alive can be terminated the instant the handler returns; the spec only guarantees the pending work if it's held by `waitUntil`. Same problem at `sw.js:60-67`: `fetching` is fired for the stale-while-revalidate refresh, but when `cached` is truthy the response resolves immediately and nothing holds the worker open for the `caches.open(...).put(...)` at `:64`.
+
+**Why it matters:** (a) a foreground nudge (`swPing('notify', …)`, `app.html:4592`/`:5539`) can silently fail to appear — intermittently, which is the worst kind; (b) the "revalidate" half of stale-while-revalidate is best-effort, so the cache can stay stale far longer than the header comment at `:48-52` claims, which weakens the "new builds still arrive reliably" argument.
+
+**PROPOSED fix:** `e.waitUntil(Promise.all([...]))` around the message-handler work; `e.waitUntil(fetching)` in the fetch handler (guarded — `e.waitUntil` after `respondWith` is legal in the same dispatch).
+
+### SW-06 — `lastStudied` is written and **never read** — `maybeRemind` has no "already studied today" suppression
+`sw.js:108` writes it; `grep -rn "lastStudied"` across the whole repo returns exactly that one line. `maybeRemind` (`:88-103`) never consults it.
+
+**Why it matters:** the name of the function is `maybeRemind`, but there is no "maybe" — a student who did their full session at 08:00 still gets *"Time for a quick review — keep your streak alive"* at 18:00. Nagging a student who already complied is the fastest way to get notifications turned off in a pilot. This is a **distinct** gap from SET-03 (which covered `remindOn` and quiet hours); all three checks are missing, and the flag for this one is already being written by the page (`app.html:1204`).
+
+**PROPOSED fix:** at the top of `maybeRemind`, `const last = await readFlag('lastStudied'); const today = new Date().toISOString().slice(0,10); if (last === today) return;` — matching `dstr()`'s format in `app.html`. (Requires SW-01 to be fixed first, or the read is always `null` and the guard never fires.)
+
+### SW-07 — `disableReminders`' payload clear is ineffective; the fallback branch still fires
+`app.html:5570` stages `swPing('payload',{title:'',body:'',url:''})` to "clear" the nudge. In `sw.js:110` that stores an empty `payloadBody`; `maybeRemind:95` then sees a falsy `body` and **falls through to the generic fallback at `:97-101`, which notifies unconditionally**. Blanking the payload downgrades the notification, it does not stop it.
+
+The unregister at `app.html:5569` only drops the **`medbank-nudge`** tag, but `sw.js:76` also answers **`medbank-daily`**. Nothing in the repo registers `medbank-daily` today, so this is latent rather than live — but any older install that ever registered it (or a future one) keeps nudging a student who has turned reminders off, because the unregister call doesn't name that tag.
+
+**Why it matters:** "I turned notifications off and it kept notifying me" is a pilot-killer, and the app's own comment at `app.html:5566-5568` shows this was the intended fix — it just doesn't reach the fallback path.
+
+**PROPOSED fix:** stage an explicit off switch and check it first in `maybeRemind` (`const off = await readFlag('remindOff'); if (off === '1') return;`), set from `disableReminders`/`enableReminders`; and unregister both tags in `app.html:5569`.
+
+### SW-08 — unconditional `skipWaiting()` + the page's auto-reload force-reloads students out of an in-progress exam
+`sw.js:39` calls `self.skipWaiting()` as soon as install resolves. `app.html:6516` reloads the page on `controllerchange`. So a deploy that lands while a student is mid-session activates immediately and **reloads them**. `QB` — the entire Q-bank / Mega / Smart-Drill session object — is `let QB = null` at `app.html:2603`, held **in memory only** with no persisted resume path (grep for `DATA.qb`/`qbResume` returns nothing). A reload therefore discards every answer of an in-flight session, and the session is never finalised or logged, so the pilot funnel loses it too.
+
+The same line makes `showUpdateBanner()` (`app.html:6520`) effectively dead: the banner is shown on `statechange → 'installed'`, but activation is already racing it, and the manual `reg.waiting.postMessage({type:'skipWaiting'})` path at `app.html:6458` almost never finds a `waiting` worker.
+
+**Why it matters:** data loss (a 20-question Quick Exam) triggered by an event the student didn't cause, during a live pilot where deploys are frequent.
+
+**PROPOSED fix:** drop `self.skipWaiting()` from install and let the existing banner + `{type:'skipWaiting'}` message (`sw.js:107`) drive the upgrade at a moment the student chooses. If that's too big a change mid-pilot, the minimum is to gate the `controllerchange` reload on there being no live session: `if (window.QB && !QB.done) { showUpdateBanner(); return; }`.
+
+## 🟡 LOW
+
+### SW-09 — `notificationclick` focuses the first client it finds and swallows a failed `navigate()`
+`sw.js:121-124` — `clients.matchAll({type:'window', includeUncontrolled:true})` returns clients in an unspecified order, and the loop takes the **first** one with `focus`, regardless of whether it's the app. `c.navigate(url)` is wrapped in `try{}catch(_){}` (a *synchronous* catch — it won't even catch the rejected promise `navigate()` actually returns) and the result isn't awaited, then `return c.focus()` runs either way. `navigate()` rejects for uncontrolled clients, which `includeUncontrolled:true` deliberately includes.
+
+**Why it matters:** the student taps "▶ Review now" and gets a focused tab that is on the marketing page (`index.html`, also in `ASSETS`) or a stale pre-SW tab, still on whatever route it was on, with no fallback to `openWindow`. The nudge appears to do nothing.
+
+**PROPOSED fix:** prefer a client whose URL contains `app.html`; await the navigate and fall back:
+```
+const app = cs.find(c => c.url.includes('app.html')) || cs[0];
+if (app) { try { const n = await app.navigate(url); return (n || app).focus(); } catch (_) { return self.clients.openWindow(url); } }
+return self.clients.openWindow(url);
+```
+
+### SW-10 — `notifyOpts` hard-codes `tag: 'medbank-nudge'` for every notification
+`sw.js:81`. With `renotify: true` this is probably deliberate (one live nudge, replaced not stacked), but it means a foreground "streak at risk" notify and a background periodicsync nudge silently overwrite each other, and the `#/today` vs `#/nudge` URL of whichever fired *last* wins. Worth a one-line comment confirming intent rather than a change.
+
+### SW-11 — `ASSETS` still precaches two dead stubs
+`sw.js:32` includes `./restore.js` (54 bytes) and `./mb-personal-restore.js` (101 bytes). QA-PROGRESS item 33 flags these as spent one-line stubs referenced only by this cache list — confirming the circularity: the only thing keeping them in the repo is that `sw.js` caches them. Safe to drop from `ASSETS` and delete, but that requires a CACHE bump, so **defer to post-pilot**.
+
+## 🧊 Engine / frozen — no action
+None. `sw.js` does not touch the Smart-Drill engine.
+
+## ✅ Checked and clean
+- **The fetch handler's cross-origin bail** (`:57`) is correct and important — Supabase, the Render import API, Puter and the CDNs all go straight to network, so no auth-bearing or model response is ever cached.
+- **The response filter** at `:62` (`status === 200 && type === 'basic'`) correctly refuses opaque and error responses; `res.clone()` is taken before the body is consumed.
+- **The `URL` parse guard** at `:55` (`try/catch` → `return`) is right: a malformed URL falls through to the network rather than throwing inside the handler.
+- **`periodicsync`** (`:75-77`) correctly wraps `maybeRemind()` in `event.waitUntil`, and `maybeRemind` has a whole-body `try/catch` so a flag failure can't leave the sync event rejected.
+- **NaN safety (family b):** `parseInt((await readFlag('hardCount')) || '0', 10)` can produce `NaN` if a non-numeric ever lands in the flag, but `n = Math.min(5, hc)` is only *used* inside the `hc > 0` branch (`:99`), and `NaN > 0` is false — so it degrades to the generic copy rather than rendering "Review NaN hard cards". Contained; no fix needed.
+- **`new Response(undefined)`** (from `swPing('studied')` with a missing date) stores an empty body rather than throwing. Harmless.
+- **The four recurring families:** (a) `isFlagged` — n/a, no card pools here; (b) `box` → NaN — n/a, no SRS state; (c) non-integer answer key — n/a; (d) `r.json()` on HTML — **present, as SW-03**, and this file is the *source* of that HTML rather than a victim of it.
+
+## 🔎 To verify (not a finding)
+SW-01 is a spec-level reading, not an observed failure — nothing in the repo would surface the rejection, since the only caller path swallows it by omission. One line in the live console (given above) settles it. If it comes back `OK`, then SW-01 downgrades to "unhandled rejections only" and SW-02/SW-06/SW-07 become the live explanation for generic nudges instead.
+
+---
+
+# Flow 19+ · item 22 — `hard` / `hardnudge` (hard-card quick session) — code review, 2026-08-22
+**Scope:** `starItems` (`app.html:1853`), `toggleStar`/`starCount` (`:1850-1852`), `startHard` (`:4600`), `startHardQuick` (`:4433`), `pageHard` (`:4722`), the router cases (`:6338`, `:6340`), `recallTabs` (`:6314`), and the star lifecycle in `rateSRS` (`:1265`) / `rateCard` (`:5198`) / `pickOpt` (`:4917`).
+**LOG-ONLY — nothing was edited.** Round-2 flow 20 (SIDE-01/02/04/05/08) covered the *pool*; this pass took the *route* — the runner, its rebuild guard, its controls and the star lifecycle.
+**Part A this run: all five harnesses exit 0** (engine-scenarios, gap-loop, fix-queue, flow-e2e, extract-json), `node --check import-server/server.mjs` OK, all 3 inline `app.html` script blocks parse. No regression.
+
+## 🔴 HIGH
+
+### HRD-01 — opening `#/hard` on a cold start builds an EMPTY hard session and never rebuilds — "No hard cards yet." is permanent for that page load
+`app.html:6559` runs the boot `render()`; `<script src="content-loader.js">` is at `:6579`. So on any cold entry to `#/hard` (PWA launch on that hash, deep link, refresh mid-session, notification → `#/today` → tab), `pageHard()` (`:4723`) runs while `allTopics` (`:1109`) is still `[]`. `startHard()` → `starItems()` walks nothing → `S={mode:'hard',items:[],…}`, and `:4724` returns the empty state.
+
+Content then loads and `content-loader.js:149`/`:160` call `render()` — but `pageHard`'s rebuild guard is `if(!S || S.mode!=='hard') startHard()`, and `S.mode` *is* `'hard'`, so the empty session survives every subsequent render. `render()`'s `NEEDS_TOPIC` loader guard (`:6329`) covers only `{topic,study,cram,cards,ai}` — `hard` is not on it, so there is no loading state either.
+
+**Why it matters:** the student is told, in a card-shaped empty state, "No hard cards yet. While studying, tap the ☆ on any tricky card" — while holding 74 starred cards. Only a hash change to a route that overwrites `S` recovers it. This is **NTF-02 exactly** (`#/nudge`, same boot ordering, same identity-only guard), now confirmed on a second route, and `#/hardnudge` (`:6338`, guard `S.key!=='hardquick'`) has the identical defect.
+**PROPOSED:** rebuild when the session is empty *and* content has since arrived — `if(!S || S.mode!=='hard' || (!S.items.length && window.__MB_CONTENT_READY)) startHard();`. The general fix is one shared `needsRebuild(key)` helper for `hard`/`hardnudge`/`nudge`/`leeches`/`mistakes` — do it **with NTF-02 in one edit**, they are the same two lines.
+
+### HRD-02 — a card the student manually starred is silently deleted from Hard cards by the first correct answer *anywhere in the app*
+`rateSRS:1270`: `if(ok){ … if(DATA.starred[id]) delete DATA.starred[id]; }` — comment says "passed → graduate out of hard cards". But the un-star is unconditional on `ok`: a card at `box:-1` answered right once goes to `box:0` (due **tomorrow**) and leaves the pool. The app's own definition of mastered is `box>=3` (`:1272` `wasMastered`, and REV-08's three definitions), so "graduated" here means *one lucky guess*.
+
+Worse, `DATA.starred` has **no provenance**. `rateCard:5198` and `pickOpt:4917` auto-write `DATA.starred[it.id]=1` on every miss, and the ☆ button (`:4961`, `:5040`) writes the same key. So the store mixes "the system noticed you failed this" with "I explicitly bookmarked this for the weekend" — and the auto-graduation rule, written for the first, destroys the second. A student who stars a tricky card in a topic deck, then meets it in an unrelated daily session and answers it right, loses the bookmark with no toast, no undo and no trace (`toggleStar` is the only re-add and requires finding the card again).
+**Why it matters:** the empty state sells starring as a durable filing action ("save it here… great for the weekend"). It is not durable, and there is no Hidden/Starred history to recover from — LIB-01's shape on a second store.
+**PROPOSED:** split the two. Either (a) store `DATA.starred[id]=1` for auto-fails and `=2` for manual stars and only auto-graduate `1`s, or (b) graduate on `s.box>=3` (the app's real mastery bar) instead of on any `ok`. (a) is closer to intent and is a 3-line change; both are localized to `rateSRS` and `toggleStar`, and neither touches the engine.
+
+## 🟠 MEDIUM
+
+### HRD-03 — a 5-card notification session hijacks the full Hard-cards tab
+`startHardQuick` (`:4433`) and `startHard` (`:4600`) both set `mode:'hard'` and differ only by `key` (`'hardquick'` vs `'hard'`). `pageHard`'s guard tests **mode, never key**, so once a `hardquick` session exists, tapping "★ Hard cards" in the nav (`:4885`) or the Active-recall tab strip (`:6315`) renders those same 5 shuffled cards under the "★ Hard cards" pill with the counter reading "0 done · 5 left" — the other 69 are unreachable until `S` is replaced elsewhere. This is MIS-02 inverted (there, a reload *replaced* the session; here it *refuses to*).
+Latent today only because **SIDE-08 confirmed `#/hardnudge` is orphaned** — `sw.js:101` sends `#/nudge` regardless of `hardCount`. It goes live the moment SIDE-08/NTF-01 are fixed. **Fix HRD-01's guard and this closes with it** (key-aware rebuild).
+
+### HRD-04 — the hard-card runner is the only rated session with no End control and no meter
+`pageHard:4727` returns a `todaybar` (pill + "N done · M left") plus `cardView(true)`. `pageReview`'s `sessionMeter` (`:4700-4720`) has the mix bar, "~N min left", and the **`✕ End`** button that calls `endSession()` (`:5165`) → jump to the summary. Hard cards has none of it. "Drill all 74 hard cards" is therefore all-or-nothing: leaving the route strands the session (and per HRD-05 strands it on a screen you can't get past), so the only exits are finishing all 74 or losing the count.
+Also unbudgeted — `starItems()` is uncapped and never passes through the time-budget engine, so the session ignores `DATA.daily.budget` entirely (SIDE-07 restated for this route).
+**PROPOSED:** render `sessionMeter()` in `pageHard` instead of the bespoke `todaybar` — `endSession()` already handles the `done>0` vs `done===0` split correctly and the mix bar already special-cases `hard`.
+
+### HRD-05 — finishing a Hard-cards session leaves `#/hard` stuck on the celebration screen, and the summary reports the daily pool
+Two defects at `:4728` (`return sessionSummary('Back to dashboard','home')`):
+
+1. **Stuck route (SIDE-05 restated, confirmed).** `S.i>=S.items.length` persists, and the rebuild guard (HRD-01) is mode-identity, so every later visit to `#/hard` re-renders the same confetti. Neither `pageMistakes` (`:5743`) nor `pageLeeches` (`:5736`) touches `S`, so tab-hopping doesn't clear it either.
+2. **Wrong pool in the summary (MIS-01 family).** `sessionSummary` computes `remain=dueCount()` — the **global daily** due count — so clearing your hard cards can headline **"Active Recall complete!"** to someone who never opened active recall, and its "Keep going · N more cards" button runs `startRecallSession();go('review')`, silently switching them into the *daily* session. `remain` also inherits SL-02's missing `isFlagged`.
+3. **`backLabel` is dead.** `sessionSummary(backLabel, backRoute)` (`:4747`) never reads its first parameter; the button text is hard-coded "See what's next tomorrow →". Both call sites pass one ('Back to Active Recall' `:4699`, 'Back to dashboard' `:4728`) and both are discarded. LIB-01/ENT-03/NTF-04 dead-code pattern, now 5 instances.
+**PROPOSED:** key the summary off `S.key` (fixes hard/leeches/mistakes/bucket/weak at once — same fix MIS-01 proposes), render `backLabel`, and clear `S` on the summary's CTA.
+
+### HRD-06 — the "Hard cards" count and the Hard cards pool are computed from different things
+`starCount()` (`:1852`) is `Object.keys(DATA.starred).length` — a raw key count. `starItems()` (`:1853`) resolves against `allTopics`, skips `!t.ready`, and only emits ids it can actually find. So the badge counts stars for cards that no longer resolve: a deleted/re-imported lecture (CNT-07 upsert-only `applyContent`), a not-yet-built topic, and — guaranteed — **every star from the other level after a level switch**, since `starred` is union-merged (`sync.js:144`) and CNT-01 confirms the content cache is never purged on switch. `starCount()` drives the nav sub-label (`:4885`) and the `swPing('hardcount')` payload the lock screen reads (`sw.js:97`).
+**Result:** "★ Hard cards · 12" opens on "No hard cards yet." — SL-01/SL-02/LIB-05 count-vs-pool shape, on the tile *and* the notification.
+**PROPOSED:** `function starCount(){ return starItems().length; }`, or cache it per render if the walk is too hot (`starItems` is already called by `nudgeItems`, `classifyItem` and `pageHard` on the same pass).
+
+## 🟡 LOW / NOTES
+
+- **HRD-07 — `starItems` is still the pool feeding four surfaces with no `isFlagged` guard.** SIDE-01 logged it; re-confirmed unfixed at `:1853` (`grep isFlagged` shows guards at 1327/1650/1666/1685/1759/1784/4289/4336/4340/4632/6260 — `starItems` is not among them). Hard cards, `nudgeItems` (`:4443`), `classifyItem`'s mix bar (`:5149`) and the lock-screen `hardCount` all still serve/count reported-wrong cards. **Family (a), still 20 pools.** Worse here than elsewhere because `rateCard:5198` *writes* a star on every miss — so reporting a card wrong and then meeting it once more in a pool that lacks the guard re-stars it permanently.
+- **HRD-08 — `sessionRecallIds` (`:1329`) falls through to `S.items` for session modes**, so the mastery chips inside a Hard session inherit `starItems`' missing filter. STU-03's fix only hardened the `S.mode==='deck'` branch. Fold into HRD-07.
+- **HRD-09 — `startHardQuick`'s comment says "a short 3-5 card review"; the code is `slice(0,5)`, always 5** (or fewer only if the pool is smaller). Cosmetic, but `sw.js:99` independently computes `Math.min(5, hc)` for the notification copy, so the two agree by luck rather than by a shared constant.
+- **HRD-10 — starred *primer* cards are un-ratable dead weight in the hard session.** `starItems` walks `['primer','recall']`, but `cardView`'s `canRate = !isP` (`:5008`) means a primer card gets Reveal/Next only — `sessionNext` (`:5171`) counts it in `S.session.done` (so the summary's "cards reviewed" and accuracy denominator are inflated) and it can **never** leave the pool, since the only auto-un-star is `rateSRS` and nothing rates it. Manual ☆ is the sole exit.
+- **HRD-11 — the swipe layer and the swipe coach mark disagree about `hardnudge`.** `swipeAct`/`swipeHintEligible` use the unanchored `/^#\/(study|review|hard)/` (`:5215`, `:5219`), which matches `#/hardnudge`; `render()`'s teach-on-entry line (`:6371`) uses the anchored `/^(study|review|hard)$/` on `p[0]`, which does not. So swipes work there but are never taught. Fold into SWP-01's shared predicate.
+- **HRD-12 — `toggleStar` (`:1851`) calls a bare `render()`**, so starring from inside a hard session re-renders the current card correctly, but the item stays in `S.items` after an un-star — the student can un-star a card and keep being shown it for the rest of the pass with a hollow ☆. Cosmetic; the session is a snapshot by design elsewhere too.
+
+## ✅ Checked and clean
+- **`startHard`/`startHardQuick` session shape is correct** — `order` is a fresh identity map, `session.total` matches `items.length`, and `startHardQuick`'s Fisher-Yates shuffles a **copy** (`starItems()` returns a new array each call), so the underlying store is never reordered.
+- **`pageHard`'s empty state has a real CTA** (`go('today')`) — unlike STU-04, and unlike SL-05's orphaned status lists.
+- **Escaping is clean.** `it.id` is interpolated into `onclick="toggleStar('…')"` at `:4961`/`:5040`, but `cid()` composes ids from topic id + deck + index — no free text reaches the attribute. No ENT-08-style `innerHTML` sink on this route.
+- **Family (b) — `box` → `NaN`:** safe here. `classifyItem` (`:5145`) guards with `if(!s) return 'new'` before reading `s.box`, and `rateSRS`'s `cur` normalisation (`:1267`, the REV-01 fix) holds. A `NaN` box classifies as `'rev'` rather than crashing — cosmetic mis-binning only, already noted under flow-19 item 19.
+- **Families (c) and (d) cannot reach this flow** — no answer-key parsing beyond `pickOpt`'s shared path, and no network call.
+- **`recallTabs` (`:6314`) is consistent** — `#/hard` is a first-class tab with the correct active state, and `:6366` prepends it on all four recall routes.
+
+## 🔎 To verify (not a finding)
+HRD-01 is reproducible without a device: load the app on `#/hard` from a cold cache and check `S.items.length===0 && allTopics.length>0` in the console after content settles. If it reproduces, it also confirms NTF-02 by the same mechanism.
