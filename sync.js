@@ -195,6 +195,24 @@
       window.__mbSB = sb;                    // shared client for import-tab / paywall
       var s = await sb.auth.getSession();
       if(!s.data.session){ log("not logged in; local-only"); return; }   // app still works offline/local
+
+      // BUG-01 fix — account isolation: if a DIFFERENT account is now signed in than the one whose
+      // data is cached locally, purge the previous account's local data before doing anything, so
+      // account B can never see or overwrite account A's cards/notes/progress. First-ever login
+      // (no stored uid) is NOT purged — that's the "studied logged-out, then signed up" merge case.
+      try{
+        var newUid = s.data.session.user && s.data.session.user.id;
+        var prevUid = localStorage.getItem("mb_current_uid");
+        if(newUid && prevUid && prevUid !== newUid){
+          log("account switch", prevUid, "→", newUid, "— purging previous local data");
+          ["medbank_v1","medbank_sync_meta","medbank_presync_backup"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+          Object.keys(localStorage).forEach(function(k){ if(/^medbank_content_/.test(k) || k==="medbank_content_pid") { try{ localStorage.removeItem(k); }catch(e){} } });
+          localStorage.setItem("mb_current_uid", newUid);
+          if(typeof location !== "undefined"){ location.reload(); return; }   // reload into a clean state for the new account
+        }
+        if(newUid) localStorage.setItem("mb_current_uid", newUid);
+      }catch(e){ log("uid-guard error", e && e.message); }
+
       var acc = await sb.from("accounts").select("id,active_level_profile_id,start_level").maybeSingle();
       if(!acc.data){ log("no account row"); return; }
       account = acc.data; profileId = account.active_level_profile_id; startLevel = acc.data.start_level;

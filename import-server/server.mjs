@@ -763,12 +763,28 @@ app.post("/import", async (req,res)=>{
       + "\n\nADDITIONAL REQUIREMENT — option length parity (recall cards): never let the correct answer stand out by its wording. Keep all 4 options the same length, detail and grammatical register. If the correct option needs to be long or qualified, make every distractor equally long and qualified — a student must NOT be able to guess the answer because it is the longest, most specific, most hedged, or the only one with a caveat. Distractors must be plausible, and phrased in the same style as the correct option.";
     const { parts, images, transcript } = await extractContent(req.body);
 
-    const gen = await generate({ model, prompt, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: Number(pt.data.temperature) || 0.3 });
-    let raw = gen.text;
-    const s=raw.indexOf("{"), e=raw.lastIndexOf("}");
-    let obj; try{ obj=JSON.parse(raw.slice(s,e+1)); }catch(err){ await admin.from("imports").update({ status:"failed", error:"bad json" }).eq("id",importId); return res.status(502).json({ error:"model returned invalid JSON" }); }
-    const errs = validateObj(obj);
-    if(errs.length){ await admin.from("imports").update({ status:"failed", error:errs.join("; ") }).eq("id",importId); return res.status(502).json({ error:"validation failed", details:errs }); }
+    // generate → parse → validate, with ONE automatic retry (BUG-03). LLM output is stochastic, so a
+    // single flaky response shouldn't hard-fail the whole build. On the retry we tell the model exactly
+    // what was wrong; on final failure we return the SPECIFIC reason, not a bare "validation failed".
+    let obj=null, winGen=null, lastErrs=[], lastErr="";
+    for(let attempt=1; attempt<=2; attempt++){
+      const fixNote = attempt>1
+        ? "\n\nIMPORTANT — your previous output was rejected for: "+lastErrs.join("; ")+". Return STRICT valid JSON that fixes ALL of these. Requirements: note_md and simplified_md must each be at least 200 characters; include a primer deck and a recall deck; EVERY recall card must have exactly 4 items in \"opts\", an integer \"ans\" between 0 and 3, and an answer note \"a\"; every primer card must have q, lecturer, explain and tie."
+        : "";
+      const gen = await generate({ model, prompt: prompt + fixNote, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: attempt>1 ? 0.35 : (Number(pt.data.temperature) || 0.3) });
+      const raw = gen.text || "", s=raw.indexOf("{"), e=raw.lastIndexOf("}");
+      let cand=null; try{ cand=JSON.parse(raw.slice(s,e+1)); }catch(err){ lastErr="bad json"; lastErrs=["the AI returned an unreadable (non-JSON) response"]; continue; }
+      const errs = validateObj(cand);
+      if(!errs.length){ obj=cand; winGen=gen; break; }
+      lastErr=errs.join("; "); lastErrs=errs;
+    }
+    if(!obj){
+      await admin.from("imports").update({ status:"failed", error:lastErr||"validation failed" }).eq("id",importId);
+      const friendly = lastErr==="bad json"
+        ? "The AI returned an unreadable response. Please try building again."
+        : "Couldn't build a complete study set from this input ("+(lastErrs[0]||"missing content")+"). Try adding a little more detail to the lecture, then rebuild.";
+      return res.status(502).json({ error:friendly, details:lastErrs });
+    }
 
     // --- save the topic + cards ---
     const topicRow = {
@@ -799,7 +815,7 @@ app.post("/import", async (req,res)=>{
     }
 
     // --- meter usage ---
-    const usage = gen.usage || {};
+    const usage = (winGen && winGen.usage) || {};
     await admin.from("imports").update({ status:"done", topic_id:topicId, model, input_tokens:usage.input_tokens||null, output_tokens:usage.output_tokens||null }).eq("id",importId);
     await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"import", p_tokens:(usage.output_tokens||0) });
 
