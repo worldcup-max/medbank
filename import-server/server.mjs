@@ -84,6 +84,9 @@ async function getUser(req){
 const PREMIUM_TEST = (process.env.PREMIUM_TEST_EMAILS||"").toLowerCase().split(",").map(s=>s.trim()).filter(Boolean);
 async function isPremium(account_id, emailHint){ try{
   const s=await admin.from("subscriptions").select("status").eq("account_id",account_id).maybeSingle();
+  // ENT-04: maybeSingle() RETURNS an error, it doesn't throw — so a DB blip silently downgraded a
+  // paying subscriber to Basic ("Solve is a premium feature — subscribe") with nothing in the logs.
+  if(s.error) console.error("[isPremium] subscriptions read FAILED for %s — treating as NOT premium: %s", account_id, s.error.message||s.error);
   if(s.data && s.data.status==="active") return true;
   if(PREMIUM_TEST.length){                                   // only runs when a test list is set (empty in production)
     // Prefer the caller's auth-token email (always present); only hit the accounts table
@@ -97,7 +100,9 @@ async function isPremium(account_id, emailHint){ try{
   }
   return false;
 }catch(e){ return false; } }
-async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id); return c.count||0; }catch(e){ return 0; } }
+async function builtCount(account_id){ try{ const c=await admin.from("topics").select("id",{ count:"exact", head:true }).eq("account_id",account_id);
+  if(c && c.error) console.error("[builtCount] topics count FAILED for %s — free-build limit NOT enforced this call: %s", account_id, c.error.message||c.error);
+  return c.count||0; }catch(e){ console.error("[builtCount] threw — free-build limit NOT enforced this call:", e.message); return 0; } }
 /* today's Visualize allowance for a user — basic 3/day, premium 10/day (only new builds count) */
 async function vizQuota(userId, emailHint){
   const premium = await isPremium(userId, emailHint).catch(()=>false);
@@ -105,6 +110,9 @@ async function vizQuota(userId, emailHint){
   let used = 0;
   try{ const since=new Date(); since.setUTCHours(0,0,0,0);
     const c=await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",userId).gte("created_at",since.toISOString());
+    // ENT-04: fail-open is right for "table not created yet" and wrong for a transient error — and the
+    // two look identical here. Log it, otherwise an outage quietly makes every explainer free.
+    if(c && c.error) console.error("[vizQuota] viz_events count FAILED for %s — reporting 0 used (cap NOT enforced): %s", userId, c.error.message||c.error);
     used=(c && !c.error)?(c.count||0):0; }catch(_){}
   return { limit, remaining:Math.max(0,limit-used), premium };
 }
@@ -140,7 +148,17 @@ async function transcribeAudio(b64, mime){
 async function extractContent(body){
   const parts=[], images=[]; let transcript=null;
   if(body.text) parts.push({ type:"text", text:"RAW LECTURE:\n\n"+body.text });
-  if(body.pdf_base64){ const pdf=require("pdf-parse"); const d=await pdf(Buffer.from(body.pdf_base64,"base64")); parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+d.text }); }
+  if(body.pdf_base64){
+    const pdf=require("pdf-parse");
+    let d=null;
+    try{ d = await pdf(Buffer.from(body.pdf_base64,"base64")); }
+    catch(e){ throw new Error("Couldn't read that PDF — it may be damaged or password-protected. Re-save it and try again, or attach clear photos of the slides instead."); }
+    const ptxt = ((d && d.text) || "").trim();
+    // A scanned / image-only PDF extracts to nothing. Pushing the bare "RAW LECTURE (PDF):" header
+    // then sends the model a prompt with no lecture in it; the empty-content guard in /import
+    // catches that and tells the student what to do instead.
+    if(ptxt) parts.push({ type:"text", text:"RAW LECTURE (PDF):\n\n"+ptxt });
+  }
   if(body.audio_base64){ const tr=await transcribeAudio(body.audio_base64, body.audio_mime); if(tr.text) parts.push({ type:"text", text:"RAW LECTURE (RECORDED IN CLASS, AUTO-TRANSCRIBED):\n\n"+tr.text }); if(tr.segments && tr.segments.length) transcript=tr.segments; }
   if(body.youtube_url){
     const { YoutubeTranscript } = require("youtube-transcript");
@@ -293,9 +311,11 @@ async function buildExtra(kind, level, note, model){
   const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
   if(!tmpl) return null;
   const mdl = (row && row.model) || model;
-  if(kind==="qbank") return buildQbankBatched(tmpl, note, mdl, row && row.max_tokens);
+  if(kind==="qbank") return buildQbankBatched(tmpl, note, mdl, row && row.max_tokens, row && row.temperature);
   // written (and any other single-shot kind): one call
-  const raw = await genRawItems(tmpl.replace(/\{\{note\}\}/g, note || ""), mdl, (row&&row.max_tokens)||8000, Number(row&&row.temperature)||0.3);
+  // `Number(x)||0.3` turned a deliberately configured temperature of 0 back into 0.3 — check for null instead
+  const rowTemp = (row && row.temperature != null && !isNaN(Number(row.temperature))) ? Number(row.temperature) : 0.3;
+  const raw = await genRawItems(tmpl.replace(/\{\{note\}\}/g, note || ""), mdl, (row&&row.max_tokens)||8000, rowTemp);
   const items = (raw||[]).filter(it => it && String(it.prompt||"").trim());
   return items.length ? items : null;
 }
@@ -329,7 +349,25 @@ function validateQbankItems(rawArr){
   const COG2DIFF = { interpretation:"easy", clinical_reasoning:"medium", complex_reasoning:"hard", exam_trap:"hard" };
   const DIFF2COG = { easy:"interpretation", medium:"clinical_reasoning", hard:"complex_reasoning" };
   const norm = s => String(s||"").toLowerCase().trim().replace(/[\s-]+/g,"_");
-  let items = (rawArr||[]).filter(it => it && String(it.stem||"").trim()
+  /* Models don't always honour "0-based index": they return 2, "2", "B", "B)" or the option text.
+     Every one of those used to fail `Number.isInteger` and the whole item was dropped SILENTLY —
+     with only 3 questions per batch, one such habit can empty the entire q-bank. Coerce first;
+     anything still unrecognisable becomes NaN and is dropped by the filter below, as before. */
+  const coerceAnswer = (a, opts) => {
+    if(typeof a === "number") return Number.isInteger(a) ? a : NaN;
+    const s = String(a==null?"":a).trim();
+    if(!s) return NaN;
+    if(/^\d+$/.test(s)) return parseInt(s,10);
+    const hit = (opts||[]).findIndex(o => String(o||"").trim().toLowerCase() === s.toLowerCase());
+    if(hit>=0) return hit;                                             // answer given as the option text
+    if(s.length<=3 && /^[a-j][).:]?$/i.test(s)) return s.toUpperCase().charCodeAt(0)-65;   // "B" / "B)" / "B."
+    return NaN;
+  };
+  let items = (rawArr||[])
+    .map(it => (it && typeof it==="object" && !Array.isArray(it))
+        ? Object.assign({}, it, { answer: coerceAnswer(it.answer, it.options) })
+        : it)
+    .filter(it => it && String(it.stem||"").trim()
       && Array.isArray(it.options) && it.options.length>=4 && it.options.every(o=>String(o||"").trim())
       && Number.isInteger(it.answer) && it.answer>=0 && it.answer<it.options.length)
     .map(it => {
@@ -377,9 +415,11 @@ function validateQbankItems(rawArr){
 /* qbank: fire several small FOCUSED calls in PARALLEL, then merge + validate + dedup.
    Cuts wall-clock ~3-4x vs one big 13-15q call, AND gives a cleaner cognitive-level spread.
    Each batch owns a slice of the taxonomy, so overlap is low and the dedup mops up the rest. */
-async function buildQbankBatched(tmpl, note, model, rowMax){
+async function buildQbankBatched(tmpl, note, model, rowMax, rowTemp){
   const base = tmpl.replace(/\{\{note\}\}/g, note || "");
   const per = rowMax || 12000;   // each small batch fits comfortably (few questions + reasoning)
+  // honour the prompt row's temperature here too (the single-shot path always did; this one ignored it)
+  const temp = (rowTemp != null && !isNaN(Number(rowTemp))) ? Number(rowTemp) : 0.3;
   const FOCI = [
     "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use only cognitive_level 'interpretation' (give raw labs/ECG/imaging/vitals to interpret); skills from diagnosis / investigation.",
     "produce EXACTLY 3 questions, each on a DIFFERENT subtopic. Use cognitive_level 'clinical_reasoning'; skills from diagnosis / differential.",
@@ -389,11 +429,14 @@ async function buildQbankBatched(tmpl, note, model, rowMax){
   ];
   const foci = FOCI.slice(0, Math.max(2, Math.min(QBANK_BATCHES, FOCI.length)));
   const t0=Date.now();
-  const settled = await Promise.all(foci.map(f =>
-    genRawItems(base + "\n\nFOR THIS BATCH: " + f, model, per, 0.3).catch(e => { console.warn("[build-extra] qbank batch failed: "+((e&&e.message)||e)); return []; })
+  let failed = 0;   // a batch that dies just returns [] — without a count, a half-built q-bank looks identical to a full one in the log
+  const settled = await Promise.all(foci.map((f,i) =>
+    genRawItems(base + "\n\nFOR THIS BATCH: " + f, model, per, temp).catch(e => { failed++; console.warn("[build-extra] qbank batch "+(i+1)+"/"+foci.length+" failed: "+((e&&e.message)||e)); return []; })
   ));
   const raw = [].concat(...settled);
-  console.log("[build-extra] qbank "+foci.length+" parallel batches → "+raw.length+" raw items in "+(Date.now()-t0)+"ms");
+  const empty = settled.filter(s=>!s.length).length;
+  console.log("[build-extra] qbank "+foci.length+" parallel batches → "+raw.length+" raw items in "+(Date.now()-t0)+"ms"
+    + (empty ? " ("+failed+" errored, "+empty+" of "+foci.length+" returned nothing)" : ""));
   if(!raw.length) return null;
   const items = validateQbankItems(raw);
   return items.length ? items : null;
@@ -729,6 +772,7 @@ loadLearnedPronunciations();
 setInterval(loadLearnedPronunciations, 30*60*1000);   // refresh every 30 min
 
 app.post("/import", async (req,res)=>{
+  let importId = null;   // hoisted so the catch below can mark a crashed build as failed
   try{
     const user = await getUser(req);
     if(!user) return res.status(401).json({ error:"not signed in" });
@@ -743,9 +787,16 @@ app.post("/import", async (req,res)=>{
     const { topicName, subject, lecturer, course_id } = req.body;
     if(!topicName || !course_id) return res.status(400).json({ error:"topicName and course_id required" });
 
+    // an empty images:[] is truthy — only call it an image import when there actually are images
+    const sourceKind = req.body.pdf_base64 ? "pdf"
+                     : req.body.audio_base64 ? "audio"
+                     : req.body.youtube_url ? "youtube"
+                     : (req.body.images && req.body.images.length) ? "images" : "text";
+
     // --- record the import as processing ---
-    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))) }).select("id").single();
-    const importId = imp.data && imp.data.id;
+    const imp = await admin.from("imports").insert({ account_id, status:"processing", source_kind: sourceKind }).select("id").single();
+    if(imp.error) console.warn("[import] couldn't record the import row: "+(imp.error.message||imp.error));   // was silent: every later .eq("id",undefined) update then no-op'd
+    importId = (imp.data && imp.data.id) || null;
 
     // --- load the CORE build prompt for this student's level (falls back to the default) ---
     const level = Number(req.body.level) || null;
@@ -762,6 +813,14 @@ app.post("/import", async (req,res)=>{
       + "\n\nADDITIONAL REQUIREMENT — source anchors: For EVERY primer card and EVERY recall card, also include a field \"src\": a SHORT verbatim quote (6 to 12 words) copied EXACTLY (same words and casing) from note_md that this card is based on, so the app can jump the reader to the exact spot in the built note. Prefer a distinctive sentence fragment over a heading. If you truly cannot find a matching phrase, use the nearest heading text from note_md. Keep \"src\" inside each card object alongside its other fields."
       + "\n\nADDITIONAL REQUIREMENT — option length parity (recall cards): never let the correct answer stand out by its wording. Keep all 4 options the same length, detail and grammatical register. If the correct option needs to be long or qualified, make every distractor equally long and qualified — a student must NOT be able to guess the answer because it is the longest, most specific, most hedged, or the only one with a caveat. Distractors must be plausible, and phrased in the same style as the correct option.";
     const { parts, images, transcript } = await extractContent(req.body);
+
+    // Nothing readable came out of the source (image-only/scanned PDF, a recording that transcribed
+    // to silence, captions with no text). Without this the build ran on a prompt containing no
+    // lecture at all — two full model calls, then the useless "unreadable response" message.
+    if(!parts.length && !images.length){
+      if(importId) await admin.from("imports").update({ status:"failed", error:"no readable content" }).eq("id",importId);
+      return res.status(400).json({ error:"We couldn't read any lecture content from what you sent. If that PDF is a scan or image-only slides, attach clear photos of the slides instead, or paste the lecture text." });
+    }
 
     // generate → parse → validate, with ONE automatic retry (BUG-03). LLM output is stochastic, so a
     // single flaky response shouldn't hard-fail the whole build. On the retry we tell the model exactly
@@ -789,7 +848,7 @@ app.post("/import", async (req,res)=>{
     // --- save the topic + cards ---
     const topicRow = {
       course_id, account_id, title:topicName, lecturer:lecturer||null, status:"ready",
-      source_kind: req.body.pdf_base64?"pdf":(req.body.audio_base64?"audio":(req.body.youtube_url?"youtube":(req.body.images?"images":"text"))),
+      source_kind: sourceKind,
       note_md: obj.note_md, simplified_md: obj.simplified_md
     };
     if(transcript && transcript.length) topicRow.transcript = transcript;   // needs a jsonb "transcript" column
@@ -809,7 +868,8 @@ app.post("/import", async (req,res)=>{
     if(wantBuilds.length){
       const extras={};
       for(const kind of wantBuilds){
-        try{ const items = await buildExtra(kind, level, obj.note_md, model); if(items && items.length) extras[kind]=items; }catch(_){}
+        try{ const items = await buildExtra(kind, level, obj.note_md, model); if(items && items.length) extras[kind]=items; else console.warn("[import] extra '"+kind+"' produced no items (topic "+topicId+")"); }
+        catch(e){ console.warn("[import] extra '"+kind+"' failed (topic "+topicId+"): "+((e&&e.message)||e)); }   // was swallowed silently
       }
       if(Object.keys(extras).length){ await admin.from("topics").update({ extras }).eq("id",topicId); }   // needs a jsonb "extras" column; ignored if absent
     }
@@ -821,7 +881,14 @@ app.post("/import", async (req,res)=>{
 
     harvestFromNote(obj.note_md);   // fire-and-forget: learn new medical pronunciations from this lecture
     res.json({ ok:true, topic_id:topicId, primer:obj.primer.cards.length, recall:obj.recall.cards.length });
-  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+  }catch(e){
+    console.error(e);
+    // without this the row sat at status:"processing" forever whenever the build threw
+    // (transcription error, card insert rejected, model call died) — it only ever reached
+    // "failed" on the validation path.
+    if(importId){ try{ await admin.from("imports").update({ status:"failed", error:String((e&&e.message)||e).slice(0,400) }).eq("id",importId); }catch(_){} }
+    res.status(500).json({ error:(e&&e.message)||"server error" });
+  }
 });
 
 /* Build one optional extra (fill_blank / written) on demand for an existing topic,
@@ -839,6 +906,9 @@ app.post("/build-extra", async (req,res)=>{
     if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
     const have = (t.data.extras && t.data.extras[kind]) || null;
     if(have && have.length && !req.body.force) return res.json({ ok:true, items:have });   // already built → return cached (unless a rebuild was requested)
+    // a topic with no note (e.g. a build that saved the row but never produced note_md) would otherwise be
+    // sent to the model as an EMPTY lecture — 5 paid calls that either fail or invent questions from nothing
+    if(!String(t.data.note_md||"").trim()) return res.status(422).json({ error:"no_note", reason:"This lecture has no note to build questions from — rebuild the lecture first." });
     const level = Number(req.body.level) || null;
     // in-app extras use EXTRAS_MODEL (defaults to Flash; can be pointed at a faster non-reasoning model)
     const model = EXTRAS_MODEL;
@@ -869,13 +939,18 @@ app.post("/podcast", async (req,res)=>{
     // migrate a legacy single script into the "deep" slot so old topics keep working
     if(!Object.keys(scripts).length && extras.podcast.script && extras.podcast.script.length) scripts.deep = extras.podcast.script;
     if(scripts[mode] && scripts[mode].length) return res.json({ ok:true, lines:scripts[mode], mode });
+    // a topic with no note would otherwise be sent to the model as an EMPTY lecture — a paid call that
+    // either fails ("try again" forever) or invents a podcast from nothing. Same guard as /build-extra.
+    if(!String(t.data.note_md||"").trim()) return res.status(422).json({ error:"no_note", reason:"This lecture has no note to build a podcast from — rebuild the lecture first." });
     const level = Number(req.body.level) || null;
     const model = await resolveModel(user.id, level);
     const lines = await podcastScript(level, t.data.note_md, model, mode);
     if(!lines || !lines.length) return res.status(502).json({ error:"couldn't write the script — try again" });
     scripts[mode] = lines;
     extras.podcast = Object.assign({}, extras.podcast, { scripts, script:lines });   // keep .script as the latest (back-compat)
-    await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
+    const _up = await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
+    // a silent failure here means the script is never cached: every open re-bills a full model call
+    if(_up && _up.error) console.warn("[podcast] script not cached for topic "+topic_id+":", (_up.error.message||"").slice(0,140));
     res.json({ ok:true, lines, mode });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -933,6 +1008,10 @@ app.post("/podcast-audio", async (req,res)=>{
     else {   // map the chosen host voice KEYS (ethan/laura/…) to Fish reference IDs
       vA = fishRefForKey(aKey, FISH_VOICE_HOST_A || (FISH_VOICES[0] && FISH_VOICES[0].ref));
       vB = fishRefForKey(bKey, FISH_VOICE_HOST_B || (FISH_VOICES[1] && FISH_VOICES[1].ref) || vA);
+      // Both hosts resolving to the same (or no) reference id means a "two-host" episode in ONE voice.
+      // Happens when FISH_API_KEY is set but no FISH_VOICE_* ids are — the client then offers OpenAI-style
+      // names (nova/shimmer/…) that match nothing here. Loud in the log so it's diagnosable from /health.
+      if(!vA || !vB || vA===vB) console.warn("[podcast-audio] ⚠️ Fish host voices not distinct (A=%s B=%s, asked %s/%s) — both hosts will sound identical. Set FISH_VOICE_A / FISH_VOICE_B.", vA||"(default)", vB||"(default)", aKey||"-", bKey||"-");
     }
     // cache per mode + chosen voice-pair so quick/deep and different host combos save separately
     const combo = (provider==="fish" ? ("fish_"+mode+"_"+(FISH_VOICE_BY_KEY[aKey]?aKey:"a")+"_"+(FISH_VOICE_BY_KEY[bKey]?bKey:"b")) : ("kokoro_"+mode));
@@ -948,6 +1027,10 @@ app.post("/podcast-audio", async (req,res)=>{
       const rurl0 = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+ri+".mp3", rbuf);
       const rurl = rurl0 + (rurl0.indexOf('?')>=0?'&':'?') + "v=" + Date.now();   // cache-bust so the player refetches
       const rarr = (extras.podcast.audio && extras.podcast.audio[combo]) ? extras.podcast.audio[combo].slice() : new Array(script.length).fill(null);
+      // normalise to the current script length — a shorter cached array would otherwise leave HOLES,
+      // and Array.prototype.every() SKIPS holes, so the "all clips done" check below would wrongly pass.
+      for(let k=0;k<script.length;k++){ if(rarr[k]===undefined) rarr[k]=null; }
+      rarr.length = script.length;
       rarr[ri] = rurl; extras.podcast.audio = Object.assign({}, extras.podcast.audio||{}, { [combo]: rarr });
       await admin.from("topics").update({ extras }).eq("id", topic_id);
       return res.json({ ok:true, index:ri, url:rurl });
@@ -986,6 +1069,10 @@ app.post("/podcast-audio", async (req,res)=>{
         }catch(e){ console.warn("[podcast] seamless section "+gkey+" failed → per-line fallback:", (e&&e.message||"").slice(0,90)); }
         if(!done){                                                       // fallback: per-line clips for this section
           for(let i=g.from;i<=g.to;i++){
+            // RESUME: a per-line clip generated on an earlier pass is keyed i_i. Without this the whole
+            // section was re-spoken (and re-BILLED) on every pass, and a line that failed this time round
+            // dropped out of segs entirely — so coverage could go BACKWARDS and never reach done.
+            if(have[i+"_"+i]){ segs.push(have[i+"_"+i]); continue; }
             try{ const vid=script[i].speaker==="A"?vA:vB; const b=await ttsClip("fish", script[i].text, vid, null, true);
               if(b&&b.length>=1200){ const u=await uploadPodcastAudio("t/"+topic_id+"/"+seamKey+"/L"+i+".mp3", b); segs.push({url:u, from:i, to:i, multi:false, section:g.section}); } }catch(e){}
           }
@@ -993,6 +1080,9 @@ app.post("/podcast-audio", async (req,res)=>{
       }
       extras.podcast.seg = Object.assign({}, extras.podcast.seg||{}, { [seamKey]: segs });
       await admin.from("topics").update({ extras }).eq("id", topic_id);
+      // NOTHING generated at all (every chapter AND every per-line fallback failed) — returning ok:true with
+      // an empty segment list left the student on a silent 0/N spinner for 14 client passes. Say what happened.
+      if(!segs.length) return res.status(502).json({ error:"voice generation failed — the voice service didn't return any audio. Try again in a moment." });
       const covered = {}; segs.forEach(s=>{ for(let i=s.from;i<=s.to;i++) covered[i]=1; });
       const allDone = script.every((_,i)=>covered[i]);
       return res.json({ ok:true, done:allDone, segments:segs, lines:script, mode, engine:"fish" });
@@ -1010,6 +1100,7 @@ app.post("/podcast-audio", async (req,res)=>{
     // Kokoro is memory-bound (serialize); Fish is a remote API but rate-limits at high concurrency,
     // so keep it at 2 — combined with the resumable design that's plenty to finish within the window.
     let _idx = 0; const CONC = (provider === "kokoro") ? 1 : 2;
+    let _made = 0, _failed = 0, _lastErr = null;   // did THIS pass actually accomplish anything?
     async function _worker(){
       while(_idx < script.length){
         const i = _idx++;
@@ -1025,11 +1116,16 @@ app.post("/podcast-audio", async (req,res)=>{
             if(!b || b.length < 1200) throw new Error("empty audio ("+(b?b.length:0)+" bytes)");   // reject 0-byte / broken clips
             buf = b;
           }
-          catch(err){ if(a>=1) { console.warn("[podcast] clip "+i+" failed, will resume next pass:", (err&&err.message||"").slice(0,100)); break; } await new Promise(s=>setTimeout(s,600)); }
+          catch(err){ _lastErr = (err&&err.message)||_lastErr; if(a>=1) { console.warn("[podcast] clip "+i+" failed, will resume next pass:", (err&&err.message||"").slice(0,100)); break; } await new Promise(s=>setTimeout(s,600)); }
         }
-        if(!buf){ continue; }   // leave urls[i] null → picked up on the next resume pass
-        const url = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
-        if(url) urls[i] = url;   // only record the URL once the upload actually succeeded
+        if(!buf){ _failed++; continue; }   // leave urls[i] null → picked up on the next resume pass
+        // a throw here (e.g. the 'podcasts' bucket is missing) used to reject Promise.all and 500 the whole
+        // request — discarding every paid clip this pass had already generated, on every pass.
+        try{
+          const url = await uploadPodcastAudio("t/"+topic_id+"/"+combo+"/"+i+".mp3", buf);
+          if(url){ urls[i] = url; _made++; }   // only record the URL once the upload actually succeeded
+          else { _failed++; }
+        }catch(err){ _failed++; _lastErr = (err&&err.message)||_lastErr; console.warn("[podcast] upload of clip "+i+" failed:", (err&&err.message||"").slice(0,120)); }
       }
     }
     await Promise.all(Array.from({length:Math.min(CONC, script.length)}, _worker));
@@ -1038,6 +1134,10 @@ app.post("/podcast-audio", async (req,res)=>{
     await admin.from("topics").update({ extras }).eq("id",topic_id);
     const done = urls.every(Boolean);
     const remaining = urls.filter(u=>!u).length;
+    // This pass tried clips and EVERY one failed. Returning ok:true/done:false made the client keep
+    // re-requesting until it gave up with "taking longer than expected" — hiding the real cause.
+    if(_made === 0 && _failed > 0 && !done)
+      return res.status(502).json({ error:"voice generation failed — "+String(_lastErr||"the voice service isn't responding").slice(0,140), engine:provider });
     // if this was a basic (Kokoro) episode but Kokoro failed and we used paid Fish, tell the client
     const degraded = (provider === "kokoro") && (KOKORO_HEALTH.fallbacks > _preFallbacks);
     res.json({ ok:true, done, remaining, urls, lines:script, engine: degraded ? "fish(kokoro-down)" : provider, degraded });
@@ -1049,14 +1149,29 @@ app.post("/solve", async (req,res)=>{
   try{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     if(!await isPremium(user.id, user.email)) return res.status(402).json({ error:"upgrade", reason:"Solve is a premium feature — subscribe to snap and solve any question." });
-    const { image_base64, media_type, text } = req.body;
-    if(!image_base64 && !(text && text.trim())) return res.status(400).json({ error:"send a photo or type the question" });
+    const { image_base64, media_type, text } = req.body || {};
+    const q = (text||"").toString().trim().slice(0,6000);     // a pasted chapter is not a question — cap it
+    if(!image_base64 && !q) return res.status(400).json({ error:"send a photo or type the question" });
     const images = image_base64 ? [{ type:"image", source:{ type:"base64", media_type:media_type||"image/jpeg", data:image_base64 } }] : [];
-    const parts = (text && text.trim()) ? [{ type:"text", text:"QUESTION (typed by the student):\n"+text.trim() }] : [];
+    const parts = q ? [{ type:"text", text:"QUESTION (typed by the student):\n"+q }] : [];
     const model = process.env.SOLVE_MODEL || "gpt-4o-mini";   // vision-capable, cheap, non-Claude (DeepSeek chat can't see images)
+    /* generate() only forwards images to OpenAI and Gemini. A deepseek model — or ANY claude* model,
+     * which generate() reroutes to DeepSeek — silently drops the photo and answers the prompt blind,
+     * i.e. invents an answer to a question it never saw. Refuse rather than guess. */
+    if(images.length && (/^deepseek/i.test(model) || /^claude/i.test(model)))
+      return res.status(500).json({ error:"Solve can't read photos with the model this server is set to. Type the question out instead." });
     const gen = await generate({ model, prompt:SOLVE_PROMPT, parts, images, max_tokens:2000, temperature:0.2 });
-    res.json({ ok:true, answer:(gen.text||"").trim() });
-  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+    const answer = (gen.text||"").trim();
+    /* an empty reply used to ship as ok:true + answer:"" — the client then blamed the student's photo
+     * ("try a clearer photo") for what is a model/config failure, so the retry could never work. */
+    if(!answer) return res.status(502).json({ error:"The tutor didn't return an answer this time. Try again in a moment." });
+    res.json({ ok:true, answer });
+  }catch(e){
+    console.error(e);
+    const m = String((e && e.message) || "server error");
+    /* never hand a paying student a raw env-var name as the answer to their question */
+    res.status(500).json({ error: /API_KEY not set/i.test(m) ? "Solve isn't set up on this server yet." : m });
+  }
 });
 
 /* Read-aloud / voice tutor speech (returns mp3).
@@ -1097,6 +1212,15 @@ Return ONLY JSON: {"missing":["short name of skipped step", ...]}`;
   return { missing };
 }
 
+/* A blueprint with no narrated steps cannot be played at all (the client refuses it), so it must
+ * never be shipped AND never be cached — a cached stepless row is served instantly forever and the
+ * student can never get a working explainer for that sentence again. */
+function narratedSteps(b){
+  return Array.isArray(b && b.narration_steps)
+    ? b.narration_steps.filter(s => s && typeof s.narration_text === "string" && s.narration_text.trim()).length
+    : 0;
+}
+
 /* Visualize Text — highlighted sentence → step-by-step diagram blueprint (DeepSeek Flash).
  * Cached per highlighted text in the "visualizations" table (generate once, reuse for everyone).
  * Narration audio is produced on the client via /tts (Kokoro) per step. */
@@ -1110,7 +1234,7 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout))){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
+      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout)) && narratedSteps(c.data.blueprint)>=2){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
     // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
     const premium = await isPremium(user.id, user.email).catch(()=>false);
     const limit = premium ? 10 : 3;
@@ -1118,6 +1242,7 @@ app.post("/visualize", async (req,res)=>{
     try{
       const since = new Date(); since.setUTCHours(0,0,0,0);
       const cnt = await admin.from("viz_events").select("id",{ count:"exact", head:true }).eq("account_id",user.id).gte("created_at",since.toISOString());
+      if(cnt && cnt.error) console.error("[visualize] viz_events count FAILED for %s — daily cap NOT enforced this call: %s", user.id, cnt.error.message||cnt.error);
       used = (cnt && !cnt.error) ? (cnt.count||0) : 0;
       if(used >= limit){
         return res.status(429).json({ error:"daily_limit", limit, premium, viz_quota:{ limit, remaining:0, premium },
@@ -1148,6 +1273,11 @@ app.post("/visualize", async (req,res)=>{
       if(bp2 && (ev2.pass || !bp)){ bp = bp2; ev = ev2; }
     }
     if(!bp) return res.status(502).json({ error:"couldn't build a visualization — try selecting one clear sentence, or try again in a moment" });
+    // a blueprint the player can't narrate is a dead blueprint — fail here rather than ship it and cache it forever
+    if(narratedSteps(bp) < 2){
+      console.warn("[visualize] rejected blueprint with", narratedSteps(bp), "narrated step(s)");
+      return res.status(502).json({ error:"couldn't build a visualization — try selecting one clear sentence, or try again in a moment" });
+    }
     // response guard: never ship a layout the engine can't draw (it would fall through to the scene renderer)
     if(bp.layout && !LAYOUTS.has(bp.layout)){
       console.warn("[visualize] unknown layout rejected:", bp.layout);
@@ -1375,9 +1505,23 @@ app.post("/paystack/webhook", async (req,res)=>{
     const event = JSON.parse(req.body.toString("utf8"));
     if(event.event === "charge.success" || event.event === "subscription.create"){
       const email = event.data && (event.data.customer && event.data.customer.email);
+      if(!email) console.error("[paystack] %s with NO customer email — payment cannot be matched to an account:", event.event, JSON.stringify(event.data||{}).slice(0,400));
       if(email){
-        const acc = await admin.from("accounts").select("id").eq("email", email).maybeSingle();
-        if(acc.data) await admin.from("subscriptions").update({ status:"active", plan:"monthly" }).eq("account_id", acc.data.id);
+        // ENT-01: the lookup was case/whitespace-sensitive while isPremium lowercases everywhere,
+        // and a miss was silent — the student paid and stayed Basic with nothing in the logs.
+        const norm = String(email).trim().toLowerCase();
+        let acc = await admin.from("accounts").select("id").eq("email", email).maybeSingle();
+        if(!acc.data && norm !== email) acc = await admin.from("accounts").select("id").eq("email", norm).maybeSingle();
+        if(!acc.data){
+          console.error("[paystack] PAID BUT UNMATCHED — no accounts row for %s (event %s). Grant this subscription by hand.", norm, event.event);
+        } else {
+          // .update() matching zero rows is a silent success — if the account has no subscriptions
+          // row yet, the payment vanished. .select() lets us see the row count and shout about it.
+          const up = await admin.from("subscriptions").update({ status:"active", plan:"monthly" }).eq("account_id", acc.data.id).select("account_id");
+          if(up.error) console.error("[paystack] PAID BUT NOT ACTIVATED — subscriptions update failed for account %s (%s): %s", acc.data.id, norm, up.error.message||up.error);
+          else if(!up.data || !up.data.length) console.error("[paystack] PAID BUT NOT ACTIVATED — no subscriptions row exists for account %s (%s); the update matched 0 rows. Insert one by hand.", acc.data.id, norm);
+          else console.log("[paystack] subscription active for account %s (%s)", acc.data.id, norm);
+        }
       }
     }
     res.status(200).end();

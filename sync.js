@@ -123,6 +123,18 @@
     ss.sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
     if(ss.length>200) ss = ss.slice(ss.length-200);
     m._sessions = ss;
+    // _events: union the pilot telemetry (smart_drill_started/completed, reco_accept, reco_agree).
+    // Events are append-only and carry no unique id, so dedupe by a stable content signature.
+    // Without this union, every merge/adopt (i.e. most reloads & cross-device syncs) would drop
+    // _events locally and the next push would overwrite the cloud copy — silently losing telemetry.
+    var eseen={}, evs=[];
+    (bq._events||[]).concat(lq._events||[]).forEach(function(x){ if(!x) return;
+      var key; try{ key=JSON.stringify(x); }catch(e){ key=(x.t||'')+'|'+(x.ts||0)+'|'+(x.sid||'')+'|'+(x.dimension||'')+'|'+(x.response||''); }
+      if(!eseen[key]){ eseen[key]=1; evs.push(x); } });
+    if(evs.length > (bq._events||[]).length) added = true;
+    evs.sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
+    if(evs.length>1000) evs = evs.slice(evs.length-1000);
+    m._events = evs;
     out.qbank = m; out.__qbAdded = added;
     return out;
   }
@@ -167,6 +179,12 @@
   /* ---------- network ops ---------- */
   async function pull(){
     var r = await sb.from("profile_state").select("state,rev,updated_at").eq("level_profile_id", profileId).maybeSingle();
+    // AUTH-01: a FAILED read must never be mistaken for "no cloud state yet". `maybeSingle`
+    // returns {data:null,error:null} for a genuine 0 rows, but {error:...} for an RLS/network/
+    // multi-row failure — and init's `if(!remote) pushNow()` would then overwrite the account's
+    // real cloud state with this device's (possibly empty) DATA. Throw instead: init's catch
+    // leaves sync inert (ready=false, meta untouched) and the next load retries cleanly.
+    if(r.error) throw new Error("profile_state read failed: " + (r.error.message || "unknown"));
     return r.data || null;
   }
   async function pushNow(){
@@ -190,7 +208,10 @@
   async function init(client){
     try{
       if(!CFG.SUPABASE_URL || CFG.SUPABASE_URL.indexOf("YOUR-PROJECT")>=0) { log("not configured; local-only"); return; }
-      sb = client || (window.supabase && window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY));
+      // AUTH-11: reuse the shared client if auth-ui already made one — creating a second
+      // GoTrueClient on the same storage key is what raises Supabase's "Multiple GoTrueClient
+      // instances detected" warning (MINOR-02) and can race token refreshes.
+      sb = client || window.__mbSB || (window.supabase && window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY));
       if(!sb) return;
       window.__mbSB = sb;                    // shared client for import-tab / paywall
       var s = await sb.auth.getSession();
@@ -205,7 +226,9 @@
         var prevUid = localStorage.getItem("mb_current_uid");
         if(newUid && prevUid && prevUid !== newUid){
           log("account switch", prevUid, "→", newUid, "— purging previous local data");
-          ["medbank_v1","medbank_sync_meta","medbank_presync_backup"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+          // AUTH-12: mb_pending_onboard must go too — otherwise account B, arriving on this
+          // device with no level_profile, gets onboarded into account A's stashed level + courses.
+          ["medbank_v1","medbank_sync_meta","medbank_presync_backup","mb_pending_onboard"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
           Object.keys(localStorage).forEach(function(k){ if(/^medbank_content_/.test(k) || k==="medbank_content_pid") { try{ localStorage.removeItem(k); }catch(e){} } });
           localStorage.setItem("mb_current_uid", newUid);
           if(typeof location !== "undefined"){ location.reload(); return; }   // reload into a clean state for the new account
@@ -213,8 +236,14 @@
         if(newUid) localStorage.setItem("mb_current_uid", newUid);
       }catch(e){ log("uid-guard error", e && e.message); }
 
-      var acc = await sb.from("accounts").select("id,active_level_profile_id,start_level").maybeSingle();
-      if(!acc.data){ log("no account row"); return; }
+      // AUTH-07: filter explicitly by the signed-in uid. An unfiltered `maybeSingle()` errors the
+      // moment a policy widens the result to >1 row — exactly the FIXED-01 regression that aborted
+      // sync on fresh devices ("phone empty"). import-server already filters every equivalent read.
+      var uid = (s.data.session.user && s.data.session.user.id) || null;
+      var accQ = sb.from("accounts").select("id,active_level_profile_id,start_level");
+      if(uid) accQ = accQ.eq("id", uid);
+      var acc = await accQ.maybeSingle();
+      if(!acc.data){ log(acc.error ? ("accounts read failed: "+acc.error.message) : "no account row"); return; }
       account = acc.data; profileId = account.active_level_profile_id; startLevel = acc.data.start_level;
       if(!profileId){ log("no active profile yet"); return; }
 
@@ -222,7 +251,7 @@
       try{
         var lp = await sb.from("level_profiles").select("level,archived").eq("id", profileId).maybeSingle();
         if(lp.data){ curLevel = lp.data.level; curArchived = !!lp.data.archived; }
-        var sub = await sb.from("subscriptions").select("status,trial_ends_at").maybeSingle();
+        var sub = await sb.from("subscriptions").select("status,trial_ends_at").eq("account_id", account.id).maybeSingle();   // AUTH-07
         if(sub.data){ entitled = sub.data.status==="active" ||
           (sub.data.status==="trialing" && sub.data.trial_ends_at && new Date(sub.data.trial_ends_at) > new Date()); }
       }catch(e){ log("entitlement load error", e && e.message); }
@@ -275,26 +304,37 @@
   }
 
   /* ---------- level switching ---------- */
+  // AUTH-06: switching levels is a user-initiated action — a failed write must say so, not
+  // reload into an unchanged app (or, worse, leave the meta pointing at a profile the server
+  // never made active). Uses alert() to match auth-ui's own `toast`.
+  function notify(m){ try{ if(typeof alert==="function") alert(m); }catch(e){} log("notify:", m); }
+
   async function listProfiles(){
     if(!sb) return [];
-    var r = await sb.from("level_profiles").select("id,level,archived").order("level");
+    var q = sb.from("level_profiles").select("id,level,archived");
+    if(account && account.id) q = q.eq("account_id", account.id);        // AUTH-07
+    var r = await q.order("level");
     return r.data || [];
   }
   async function switchProfile(newId){
     if(!sb || !account || newId===profileId) return;
     try{
       if(meta().dirty) await pushNow();                    // flush current profile first
-      await sb.from("accounts").update({ active_level_profile_id:newId }).eq("id", account.id);
+      var up = await sb.from("accounts").update({ active_level_profile_id:newId }).eq("id", account.id);
+      if(up && up.error){                                  // AUTH-06 — don't reload into a lie
+        notify("Couldn't switch levels just now. Check your connection and try again.");
+        log("switch update error", up.error.message); return;
+      }
       setMeta({ rev:0, pushedAt:0, dirty:false, profileId:newId });
       // reload rebuilds the app cleanly for the new profile (content + state)
       if(typeof location !== "undefined") location.reload();
-    }catch(e){ log("switch error", e && e.message); }
+    }catch(e){ log("switch error", e && e.message); notify("Couldn't switch levels just now. Check your connection and try again."); }
   }
 
   async function createProfile(level){
     if(!sb || !account) return null;
     try{
-      var ex = await sb.from("level_profiles").select("id").eq("level", level).maybeSingle();
+      var ex = await sb.from("level_profiles").select("id").eq("account_id", account.id).eq("level", level).maybeSingle();   // AUTH-07
       if(ex.data && ex.data.id) return ex.data.id;        // one profile per level
       var r = await sb.from("level_profiles").insert({ account_id:account.id, level:level }).select("id").single();
       return r.error ? null : r.data.id;
@@ -310,19 +350,32 @@
     if(next > 600){ log("already at top level"); return; }
     try{
       if(meta().dirty) await pushNow();
-      await sb.from("level_profiles").update({ archived:true }).eq("id", profileId);
+      // AUTH-06: create + activate the NEW level BEFORE archiving the old one. The old order
+      // archived first, so a failed createProfile left the student on an archived (view-only)
+      // level with every feature paywalled, no new level, and no message at all.
       var id = await createProfile(next);
-      if(!id) return;
-      await sb.from("accounts").update({ active_level_profile_id:id }).eq("id", account.id);
+      if(!id){ notify("Couldn't unlock "+next+" level just now. Check your connection and try again."); return; }
+      var up = await sb.from("accounts").update({ active_level_profile_id:id }).eq("id", account.id);
+      if(up && up.error){
+        notify("Couldn't move up to "+next+" level just now. Check your connection and try again.");
+        log("goToNextLevel update error", up.error.message); return;
+      }
+      // old level becomes view-only. If this one fails the student is still safely on the new
+      // level (the old one just keeps its features), so it must not block the move.
+      try{ await sb.from("level_profiles").update({ archived:true }).eq("id", profileId); }catch(_){}
       setMeta({ rev:0, pushedAt:0, dirty:false, profileId:id });
       if(typeof location !== "undefined") location.reload();
-    }catch(e){ log("goToNextLevel error", e && e.message); }
+    }catch(e){ log("goToNextLevel error", e && e.message); notify("Couldn't move up a level just now. Check your connection and try again."); }
   }
 
   // Feature gate for the app: import / AI / new scheduling only when the CURRENT
   // level is active (not archived) AND the account is entitled (trial or paid).
   function canUseFeatures(){ return !!entitled && !curArchived; }
-  function status(){ return { level:curLevel, startLevel:startLevel, archived:curArchived, entitled:entitled, canUseFeatures:canUseFeatures() }; }
+  // AUTH-04: `syncing` tells the UI whether this device is ACTUALLY pushing. Every early return
+  // in init() leaves ready=false, which makes schedulePush a permanent no-op — while the account
+  // sheet and avatar menu still said "✓ Synced". Callers must not treat a session as sync.
+  function status(){ return { level:curLevel, startLevel:startLevel, archived:curArchived, entitled:entitled,
+                              canUseFeatures:canUseFeatures(), syncing:!!ready, profileId:profileId }; }
 
   window.MB_SYNC = {
     init: init,

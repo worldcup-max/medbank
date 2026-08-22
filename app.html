@@ -1263,8 +1263,9 @@ function maybeBumpStreak(){ if(streakMet()) bumpStreak(dstr()); }   // bumpStrea
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
   const today=dayNum(), s=DATA.cards[id]||{box:-1};
-  const wasMastered=(s.box==null?-1:s.box)>=3;
-  if(ok){ s.box=Math.min((s.box<0?-1:s.box)+1, LADDER.length-1); s.due=today+LADDER[s.box];
+  const cur=(s.box==null||typeof s.box!=='number'||isNaN(s.box))?-1:s.box;   // a state written without a box (Visualize-quiz card, :addVizCard) starts at -1 — never let it become NaN
+  const wasMastered=cur>=3;
+  if(ok){ s.box=Math.min((cur<0?-1:cur)+1, LADDER.length-1); s.due=today+LADDER[s.box];
           if(DATA.starred[id]) delete DATA.starred[id]; }   // passed → graduate out of hard cards
   else  { s.box=-1; s.due=today+1; s.lapses=(s.lapses||0)+1; }
   s.seen=today; DATA.cards[id]=s;
@@ -1333,8 +1334,13 @@ function startEditCard(id){ EDITING=id; render(); }
 function cancelEditCard(){ EDITING=null; render(); }
 function saveEditCard(id,deck){
   const q=(document.getElementById('ec_q')||{}).value, a=(document.getElementById('ec_a')||{}).value;
-  const patch={}; if(q!=null) patch.q=q.trim();
-  if(a!=null){ if(deck==='primer') patch.explain=a.trim(); else patch.a=a.trim(); }
+  const patch={};
+  /* An empty box used to be SAVED as a blank override, and nothing in the app can ever delete a
+   * cardEdits entry — so clearing the question permanently blanked the card with no way back.
+   * Ignore empty fields instead of writing them. */
+  if(q!=null && q.trim()) patch.q=q.trim();
+  if(a!=null && a.trim()){ if(deck==='primer') patch.explain=a.trim(); else patch.a=a.trim(); }
+  if(!Object.keys(patch).length){ EDITING=null; render(); try{ mbToast('Nothing saved — a card needs a question and an answer.'); }catch(e){} return; }
   DATA.cardEdits[id]=Object.assign({}, DATA.cardEdits[id]||{}, patch);
   EDITING=null; persist(); render();
 }
@@ -1438,7 +1444,14 @@ function stripMd(s){ return (s||'').replace(/\*\*/g,'').replace(/^##\s*/gm,'').r
 /* ---- voice selection: pick a good voice, not the flat default ---- */
 let VOICES=[];
 function loadVoices(){ try{ VOICES=(speechSynthesis.getVoices()||[]); }catch(e){ VOICES=[]; } }
-if('speechSynthesis' in window){ loadVoices(); try{ speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
+/* SET-11: on Chrome/Android getVoices() is EMPTY on first paint and only fills when
+   `voiceschanged` fires. Settings → AI & Voice therefore rendered one "Auto (best)" chip plus
+   "Only your default voice is installed — download an Enhanced voice", which is simply false.
+   Repaint that tab (and only that tab, so a half-typed backup paste on the Data tab survives). */
+if('speechSynthesis' in window){ loadVoices();
+  try{ speechSynthesis.onvoiceschanged=function(){ loadVoices();
+    try{ if(typeof render==='function' && settingsTab==='ai' && /settings/.test(location.hash||'')) render(); }catch(e){}
+  }; }catch(e){} }
 function enVoices(){ if(!VOICES.length) loadVoices(); return VOICES.filter(v=>/^en(-|_|$)/i.test(v.lang)); }
 function pickVoice(){
   if(!VOICES.length) loadVoices();
@@ -1499,15 +1512,24 @@ var _ttsBlobCache={};
 function _ttsKey(text,voice,use){ return (use||'read')+'|'+(voice||'')+'|'+stripMd(text).slice(0,3000); }
 window._ttsHas=function(text,use){ try{ return !!_ttsBlobCache[_ttsKey(text, DATA.settings.ttsVoiceAI||'nova', use)]; }catch(e){ return false; } };
 /* fetch + cache a clip WITHOUT playing it — used to pre-generate narration ahead of play */
-window.warmSpeak=async function(text, use){
+var _ttsPending={};   // key -> in-flight promise, so the same line is never generated (and paid for) twice
+async function _warmSpeakOnce(text, use, key, voice){
   try{
-    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB||!(text||'').trim()) return;
-    const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
-    if(_ttsBlobCache[key]) return;
+    const CFG=window.MEDBANK_CONFIG||{};
     const ses=await window.__mbSB.auth.getSession(); const token=ses.data.session&&ses.data.session.access_token; if(!token) return;
     const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({text:stripMd(text).slice(0,3000),voice:voice,use:(use||'read')})});
     if(!r.ok) return; _ttsBlobCache[key]=URL.createObjectURL(await r.blob());
   }catch(e){}
+}
+window.warmSpeak=function(text, use){
+  try{
+    const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB||!(text||'').trim()) return Promise.resolve();
+    const voice=DATA.settings.ttsVoiceAI||'nova', key=_ttsKey(text,voice,use);
+    if(_ttsBlobCache[key]) return Promise.resolve();
+    if(_ttsPending[key]) return _ttsPending[key];                     // already being generated → wait on that one
+    const p=_warmSpeakOnce(text,use,key,voice).then(function(){ delete _ttsPending[key]; },function(){ delete _ttsPending[key]; });
+    _ttsPending[key]=p; return p;
+  }catch(e){ return Promise.resolve(); }
 };
 async function serverSpeak(text, cb, use){
   try{
@@ -1623,7 +1645,7 @@ function planNew(){
     const qs=[];
     (DATA.plan||[]).forEach(id=>{ if(qs.length>=5) return; const t=topById(id);
       if(!t||!t.ready||t.subject.id!==sb.id) return;
-      const unseen=(t.recall||[]).filter(c=>!DATA.cards[cid(t.id,'recall',c)]);
+      const unseen=(t.recall||[]).filter(c=>{ const id=cid(t.id,'recall',c); return !DATA.cards[id] && !isFlagged(id); });   // cards reported wrong are hidden from study
       if(unseen.length) qs.push({t,cards:unseen}); });
     let added=0, guard=0;
     while(added<cap && guard++<2000){ let any=false;
@@ -1639,7 +1661,7 @@ function buildQueue(){
   const today=dayNum(), due=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const id=cid(t.id,'recall',c), st=DATA.cards[id];
-    if(st && st.due<=today) due.push({t,c,id});
+    if(st && st.due<=today && !isFlagged(id)) due.push({t,c,id});   // cards reported wrong are hidden from study
   }));
   const neu=planNew();
   return { due:orderItems(due), neu, newTotal:neu.length };
@@ -1658,6 +1680,7 @@ function collectRecall(pred){
   const out=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const id=cid(t.id,'recall',c), st=DATA.cards[id];
+    if(isFlagged(id)) return;                        // cards reported wrong are hidden from study
     if(pred(st,t,c)) out.push({t,c,id,deck:'recall'});
   }));
   return out;
@@ -1711,6 +1734,7 @@ function estMin(n){ return Math.max(1, Math.round(n*SEC_PER_CARD/60)); }
 /* a due card's review-age bucket, from its SRS box */
 function reviewBucket(box,starred){
   if(starred || box<0) return 'hard';
+  if(box==null) return 'd1';         // card state written without a box (e.g. a Visualize-quiz card) — treat as just-learned, NOT as a 2-week review
   if(box<=0) return 'd1';            // 24-hour (just learned / relapsed-then-passed) — LADDER 1 day
   if(box===1) return 'd3';           // 3-day — LADDER 3 days
   if(box>=2 && box<=4) return 'wk';  // weekly — LADDER 7 days
@@ -1730,6 +1754,7 @@ function buildRecallSession(){
   const today=dayNum(), due=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const id=cid(t.id,'recall',c), s=DATA.cards[id];
+    if(isFlagged(id)) return;                        // cards reported wrong are hidden from study
     if(s){ if(s.due<=today){ due.push({t,c,id,deck:'recall',box:s.box,starred:!!DATA.starred[id]}); } }
   }));
   const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
@@ -1754,7 +1779,7 @@ function buildRecallSession(){
   const inSess=new Set(capped.map(x=>x.id)), mastered=[];
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const id=cid(t.id,'recall',c), s=DATA.cards[id];
-    if(s&&s.box>=3&&s.due>today&&!inSess.has(id)) mastered.push({t,c,id,deck:'recall',conf:true});
+    if(s&&s.box>=3&&s.due>today&&!inSess.has(id)&&!isFlagged(id)) mastered.push({t,c,id,deck:'recall',conf:true});
   }));
   const conf=sh(mastered).slice(0,5);
   // per-bucket counts (from the capped set)
@@ -1782,10 +1807,13 @@ function reviewHealth(){
 const STAGE_NAMES=['Learning','24-hour','3-day','Weekend','Weekly','Long-term'];
 function topicStage(t){
   const rc=t.recall||[]; if(!rc.length) return -1;
-  const seen=rc.map(c=>DATA.cards[cid(t.id,'recall',c)]).filter(Boolean);
+  // only STUDIED cards count: a Visualize-quiz card (:addVizCard) has a state row with no `box`,
+  // and Math.max(0,undefined) is NaN — one of those used to make the whole pipeline render blank.
+  const seen=rc.map(c=>DATA.cards[cid(t.id,'recall',c)]).filter(s=>s&&typeof s.box==='number'&&!isNaN(s.box));
   if(!seen.length) return -1;
   const avg=seen.reduce((a,s)=>a+Math.max(0,s.box),0)/seen.length;
-  return Math.min(5, Math.round(avg));
+  const st=Math.round(avg);
+  return isNaN(st)?-1:Math.min(5, st);
 }
 function dueCount(){
   const today=dayNum(); let n=0;
@@ -1795,7 +1823,7 @@ function dueCount(){
   return n;
 }
 /* subject / topic progress helpers */
-function topicMastery(t){       // fraction of recall cards answered right at least once
+function topicMastery(t){       // fraction of recall cards whose LAST answer was right (a lapse sets box -1, so this can go down)
   const rc=t.recall||[]; if(!rc.length) return 0;
   let m=0; rc.forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s&&s.box>=0) m++; });
   return m/rc.length;
@@ -1842,7 +1870,7 @@ function weekStats(){
   // weakest lecturer = most currently-lapsed recall cards (box -1) among started topics
   const lap={};
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)];
-    if(s&&s.box<0) lap[t.lecturer]=(lap[t.lecturer]||0)+1; }));
+    if(s&&s.box<0&&t.lecturer) lap[t.lecturer]=(lap[t.lecturer]||0)+1; }));   // no lecturer → skip, else the key stringifies to "undefined" and the Home tile shows it
   let weak=null,wn=0; Object.entries(lap).forEach(([n,c])=>{ if(c>wn){wn=c;weak=n;} });
   return {days,cards,correct,active,completed,
     acc:cards?Math.round(correct/cards*100):0, perDay:Math.round(cards/7),
@@ -1923,13 +1951,18 @@ function statusChip(t){
   if(s==='inprogress') return `<span class="st learn">◐ Learning</span>`;
   return `<span class="st new">○ New</span>`;
 }
+/* deck size for a row label. A topic built without one of the decks threw on `.length` here and
+ * white-screened every list page (subject / lecturer / folder / search) — the same missing-deck
+ * defect already fixed in startDeck and pageTopic. The old `t.primer.length||t.primer` also fell
+ * through on an EMPTY deck and printed the array itself (a blank), so "· Primer" had no number. */
+const deckN = d => Array.isArray(d) ? d.length : (typeof d==='number' ? d : 0);
 const topicRow = (t,showLec) => `
   <div class="row ${t.ready?'':'todo'}" onclick="go('topic/${t.id}')">
     <span class="sn">${t.sn??'–'}</span>
     <span class="mid">
       <span class="tt">${esc(t.name)}</span>
       <div class="meta">${[showLec?esc(t.lecturer):'',esc([t.day,t.date,t.time].filter(Boolean).join(' '))].filter(Boolean).join(' · ')}${
-        t.ready?` · ${t.primer.length||t.primer} Primer · ${t.recall.length||t.recall} Recall`:''}${
+        t.ready?` · ${deckN(t.primer)} Primer · ${deckN(t.recall)} Recall`:''}${
         t.imgCount?` · ${t.imgCount} images`:''}</div>
     </span>
     ${statusChip(t)}
@@ -1955,6 +1988,13 @@ function heatmap(){
   return `<div class="heat">${cols.join('')}</div>`;
 }
 function greeting(){ var h=new Date().getHours(); return h<12?'Good morning':(h<18?'Good afternoon':'Good evening'); }
+/* the signed-in student's first name for the home greeting — NEVER hard-code a name here (auth-ui.js publishes window.MB_USER + caches mb_user_name) */
+function studentName(){ try{
+  var n=(window.MB_USER&&MB_USER.name)||'';
+  if(!n){ try{ n=localStorage.getItem('mb_user_name')||''; }catch(_){} }
+  n=String(n||'').trim().split(/\s+/)[0]||'';
+  return n.length>18?'':n;                       // absurd/pasted values → fall back to a nameless greeting
+}catch(e){ return ''; } }
 function topicPct(t){ var tot=(t.recall||[]).length; if(!tot) return 0; return Math.round((tot-unseenCount(t))/tot*100); }
 function homeColor(id){ return COLOR[id]||'var(--accent)'; }
 /* ---- "Jump back in" helpers ---- */
@@ -1998,7 +2038,8 @@ function pageHome(){
   const tl=todayLog(), st=curStreak(), due=dueCount();
   const q=buildQueue(), dueBy={}; q.due.forEach(x=>{ dueBy[x.t.id]=(dueBy[x.t.id]||0)+1; });
   const met=streakMet(), ws=weekStats();
-  const lecArg=(ws.weak||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");   // safe for the onclick string
+  const lecArg=(ws.weak||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")     // safe for the onclick JS string…
+                            .replace(/&/g,'&amp;').replace(/"/g,'&quot;'); // …and for the double-quoted HTML attribute it lives in
   // the session is built from a TIME BUDGET (Session Engine): budget → cards out, timed by rolling median
   const budget=DATA.daily.budget||15;
   const sess=buildRecallSession(), sessItems=sess.capped, sessN=sessItems.length;
@@ -2015,7 +2056,7 @@ function pageHome(){
   return `<div class="h2wrap">
     <div class="h2hero" onclick="go('today')">
       <div class="h2herohead">
-        <div><div class="h2hi">${greeting()}, Frank ☀️</div>
+        <div><div class="h2hi">${greeting()}${(()=>{const n=studentName();return n?', '+esc(n):'';})()} ☀️</div>
           <div class="h2sub">${allCaught?'You’re all caught up 🎉':'Your session is ready'}</div></div>
         <div class="h2ringwrap">${goalRing(ringPct,58,7,'#a6f05a')}<span class="h2ringtxt">${ringPct}%</span></div>
       </div>
@@ -2054,7 +2095,7 @@ function pageHome(){
     </div>
     <div class="h2foot">
       <span>Daily goal · ${minToday} / ${budget} min</span>
-      <span class="h2rem" onclick="go('settings')">🔔 Enable 7am reminder</span>
+      <span class="h2rem" onclick="go('settings')">🔔 ${DATA.settings.remindOn?'Reminders on':'Turn on study reminders'}</span>
     </div>
     ${exams.length?`<div class="examrow" style="margin-top:2px">${exams.map(x=>`<span class="examchip ${x.d<=7?'soon':''}" onclick="go('settings')">${esc(x.sb.short)} exam · <b>${x.d}d</b></span>`).join('')}</div>`:''}
     <div class="h2continue">
@@ -2231,11 +2272,14 @@ function deleteFolder(id){ if(!confirm('Delete this folder? Your topics stay —
 function addToFolderPrompt(topicId){
   const fs=DATA.folders||[];
   if(!fs.length){ createFolderWith(topicId); return; }
-  let msg='Add this topic to which folder?\n\n0. + New folder\n'; fs.forEach((f,i)=>{ msg+=(i+1)+'. '+f.name+(f.topics.indexOf(topicId)>=0?'  ✓ already in':'')+'\n'; });
+  let msg='Add this topic to which folder?\n\nType the NUMBER, then OK.\n\n0. + New folder\n'; fs.forEach((f,i)=>{ msg+=(i+1)+'. '+f.name+(((f.topics||[]).indexOf(topicId)>=0)?'  ✓ already in':'')+'\n'; });
   const pick=prompt(msg); if(pick==null) return;
   const n=parseInt(pick,10);
   if(n===0){ createFolderWith(topicId); return; }
-  const f=fs[n-1]; if(!f){ return; }
+  const f=fs[n-1];
+  // typing a folder NAME (or anything out of range) used to do nothing at all, with no feedback
+  if(!f){ alert('Type the number next to the folder (1–'+fs.length+'), or 0 for a new folder.'); return; }
+  f.topics=f.topics||[];
   if(f.topics.indexOf(topicId)<0){ f.topics.push(topicId); persist(); alert('Added to “'+f.name+'”.'); } else { alert('Already in “'+f.name+'”.'); }
 }
 function pageFolders(){
@@ -2243,7 +2287,12 @@ function pageFolders(){
   let h=`<h1>📁 Folders</h1><p class="sub">Group topics across courses — e.g. “Exam block 1” or “Weak areas”.</p>
     <div class="btnrow" style="margin-bottom:16px"><button class="btn primary" onclick="createFolderWith('')">+ New folder</button></div>`;
   if(!fs.length) return h+`<div class="empty">No folders yet.<br>Create your first to organise your topics, then open any topic and tap “Add to folder”.</div>`;
-  return h+`<div class="grid">`+fs.map(f=>`<div class="card" onclick="go('folder/${f.id}')"><h3>${esc(f.name)}</h3><p>${f.topics.length} topic${f.topics.length===1?'':'s'}</p></div>`).join('')+`</div>`;
+  /* count only topics that still RESOLVE. The raw f.topics length counted ids for lectures that
+   * were deleted (or that belong to another level profile after a switch), so a folder advertised
+   * "5 topics" and opened showing 3. A folder object with no `topics` array also threw here —
+   * pageFolder already guards with (f.topics||[]). */
+  return h+`<div class="grid">`+fs.map(f=>{ const n=(f.topics||[]).map(tid=>topById(tid)).filter(Boolean).length;
+    return `<div class="card" onclick="go('folder/${f.id}')"><h3>${esc(f.name)}</h3><p>${n} topic${n===1?'':'s'}</p></div>`;}).join('')+`</div>`;
 }
 function pageFolder(id){
   const f=(DATA.folders||[]).find(x=>x.id===id); if(!f) return pageFolders();
@@ -2260,7 +2309,7 @@ function pageSolve(){
     <p class="sub">Snap or upload a question — an MCQ, a past question, or a diagram — and get the answer explained step by step.</p>
     <div class="card" style="cursor:default">
       <label style="font-size:12.5px;font-weight:700;color:var(--dim)">Photo of the question</label>
-      <input id="solveImg" type="file" accept="image/*" capture="environment" style="width:100%;font-size:14px;margin-top:6px" onchange="solvePreview()">
+      <input id="solveImg" type="file" accept="image/*" style="width:100%;font-size:14px;margin-top:6px" onchange="solvePreview()">
       <div id="solvePrev" style="margin-top:10px"></div>
       <textarea id="solveText" class="notebox" rows="2" placeholder="Optional — type the question, or add context…" style="margin-top:12px"></textarea>
       <div class="btnrow" style="margin-top:12px"><button class="btn primary" id="solveBtn" onclick="solveNow()">Solve it</button></div>
@@ -2282,11 +2331,24 @@ async function solveNow(){
   btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
-    let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
+    let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=(ses&&ses.data&&ses.data.session)?ses.data.session.access_token:null; }
+    /* Without this we sent the literal header "Bearer null" and the server's raw "not signed in"
+     * was shown to the student as if it were the verdict on their question. */
+    if(!token) throw new Error("You're signed out — sign in and try again.");
     const body={ text }; if(f){ body.image_base64=await fileToB64solve(f); body.media_type=f.type||'image/jpeg'; }
     const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/solve',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(body)});
-    const o=await r.json();
-    if(!r.ok && o.error==='upgrade'){ if(window.MB_PAYWALL) MB_PAYWALL.nudge('Solve is premium', o.reason||'Subscribe to snap and solve any question.', 'Subscribe'); btn.disabled=false; btn.textContent='Solve it'; return; }
+    /* A proxy 413/502/504 answers with HTML, not JSON: r.json() then threw and the student saw
+     * "Unexpected token '<'". Read the status instead. */
+    let o=null; try{ o=await r.json(); }catch(_){ o=null; }
+    if(!o) throw new Error(r.status===413 ? 'That photo is too large — retake it at a lower resolution.'
+                                          : 'The Solve server didn\'t respond properly ('+r.status+'). Try again in a moment.');
+    if(!r.ok && (o.error==='upgrade' || r.status===402)){
+      const why=o.reason||'Subscribe to snap and solve any question.';
+      /* paywall.js may not have loaded — without this else the button just re-enabled and nothing
+       * at all appeared, so "Solve it" looked like a dead button. */
+      if(window.MB_PAYWALL) MB_PAYWALL.nudge('Solve is premium', why, 'Subscribe');
+      else msg.innerHTML='<span style="color:#ff9db1">'+esc(why)+'</span>';
+      return; }
     if(!r.ok||!o.answer) throw new Error(o.reason||o.error||'Could not solve this — try a clearer photo.');
     out.innerHTML='<div class="card" style="cursor:default"><div class="md">'+md(o.answer)+'</div></div>';
   }catch(e){ msg.innerHTML='<span style="color:#ff9db1">'+esc(e.message||'Something went wrong')+'</span>'; }
@@ -2309,9 +2371,11 @@ function pageSubject(id){
 
 function pageLecturers(){
   let h=`<h1>Lecturers</h1><p class="sub">Every lecturer and the topics assigned to them.</p>`;
+  let shown=0;
   DB.subjects.forEach(s=>{
     const ls=DB.lecturers.filter(l=>l.subjectId===s.id && l.name!=='To be confirmed');
     if(!ls.length) return;
+    shown+=ls.length;
     h+=`<h2><span style="color:${COLOR[s.id]}">●</span> ${esc(s.name)}</h2>
         <div class="grid">${ls.map(l=>{ const p=lecProgress(l);
           return `<div class="card" onclick="go('lecturer/${l.id}')">
@@ -2321,6 +2385,9 @@ function pageLecturers(){
               <p style="margin-top:6px;font-size:12.5px">${p.pct}% · ${p.done} complete · ${p.learning} learning</p>`:''}
           </div>`;}).join('')}</div>`;
   });
+  /* an import with no lecturer name is filed under "To be confirmed", which this page filters out —
+   * so a student with only such lectures got a bare heading and a completely blank page. */
+  if(!shown) h+=`<div class="empty">No lecturers yet.<br>A lecture picks up its lecturer from the name you type when you add it — open <b>＋ Add lecture</b> and fill in the lecturer field, and they'll be listed here.</div>`;
   return h;
 }
 
@@ -2354,7 +2421,10 @@ function pageTopic(id){
          + `<div class="md notebody">${md(t.note)}</div>`;
   } else if(topicTab==='simplified'){
     const rd=isRead(t.id);
-    body = `<div class="btnrow" style="margin-bottom:16px">
+    // no simplified note → don't offer "Mark as read" (it feeds the pipeline's Read step) on an empty page
+    body = !t.simplified
+    ? `<div class="empty" style="text-align:left"><b style="color:var(--text)">No simplified note for this lecture.</b><br><br>Read the full note under <b>📖 Notes</b> — the simplified version is written at import time, so this one doesn't have one.</div>`
+    : `<div class="btnrow" style="margin-bottom:16px">
         <button class="btn ${rd?'green':''}" onclick="markRead('${t.id}')">${rd?'✓ Read'+(DATA.read[t.id]?' · '+DATA.read[t.id]:''):'Mark as read'}</button></div>
       <div class="md notebody">${md(t.simplified)}</div>`;
   } else if(topicTab==='qbank'){
@@ -2368,15 +2438,16 @@ function pageTopic(id){
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
+    const nPrimer=(t.primer||[]).length, nRecall=(t.recall||[]).length;   // a built topic missing one deck used to throw here → white screen
     body = `<div class="grid">
       <div class="card" onclick="go('study/${t.id}/primer')">
         <span class="pill" style="background:#4f8cff22;color:var(--primer)">Deck A · before reading</span>
-        <h3>Primer Cards</h3><p>${t.primer.length} cards — lecturer's answer, then the concept explained and tied to the topic.${pp?` <b style="color:var(--primer)">· resume at ${pp+1}</b>`:''}</p></div>
+        <h3>Primer Cards</h3><p>${nPrimer} cards — lecturer's answer, then the concept explained and tied to the topic.${pp?` <b style="color:var(--primer)">· resume at ${pp+1}</b>`:''}</p></div>
       <div class="card" onclick="go('study/${t.id}/recall')">
         <span class="pill" style="background:#3ecf8e22;color:var(--recall)">Deck B · after reading</span>
-        <h3>Recall Cards</h3><p>${t.recall.length} cards — strict Q/A, drives your daily review.${rp?` <b style="color:var(--recall)">· resume at ${rp+1}</b>`:''}</p>
+        <h3>Recall Cards</h3><p>${nRecall} cards — strict Q/A, drives your daily review.${rp?` <b style="color:var(--recall)">· resume at ${rp+1}</b>`:''}</p>
         <div class="pbar" style="margin-top:10px"><div style="width:${mast}%;background:var(--recall)"></div></div>
-        <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards answered right at least once</p></div></div>
+        <p style="margin-top:6px;font-size:12.5px">${mast}% of Recall cards right on your last attempt</p></div></div>
       <div class="btnrow" style="margin-top:14px">
         <button class="btn primary" onclick="go('ai/${t.id}')">🎙 AI tutor</button>
         <button class="btn" onclick="go('cram/${t.id}')">📄 Cram sheet</button>
@@ -2451,8 +2522,12 @@ function renderVizList(t){
 }
 function playVizIdx(i){ try{ var v=_VIZLIST[i]; if(!v)return; var t=topById(_VIZTID); window.aiVisualize(v.text,(t&&t.name)||'',_VIZTID); }catch(e){} }
 function delVizIdx(i){ try{ var v=_VIZLIST[i]; if(!v)return;
-  if(v.src==='viz'&&DATA.viz&&DATA.viz[_VIZTID]){ DATA.viz[_VIZTID]=DATA.viz[_VIZTID].filter(function(x){return x.text!==v.text;}); if(!DATA.viz[_VIZTID].length)delete DATA.viz[_VIZTID]; }
-  else if(v.src==='card'&&DATA.cardViz&&v.key){ delete DATA.cardViz[v.key]; }
+  if(!confirm('Remove this saved explainer? Replaying it later has to build it again.')) return;
+  // the list is de-duped BY TEXT across DATA.viz and DATA.cardViz, so deleting only the source the row
+  // came from left the twin behind and the row reappeared on the next render — remove both copies
+  if(DATA.viz&&DATA.viz[_VIZTID]){ DATA.viz[_VIZTID]=DATA.viz[_VIZTID].filter(function(x){return !x||x.text!==v.text;}); if(!DATA.viz[_VIZTID].length)delete DATA.viz[_VIZTID]; }
+  if(DATA.cardViz) Object.keys(DATA.cardViz).forEach(function(k){
+    if(k.indexOf(_VIZTID+'|')!==0) return; var r=DATA.cardViz[k]; if(r&&r.text===v.text) delete DATA.cardViz[k]; });
   persist(); render();
 }catch(e){} }
 function genPrompt(topicId,kind,label){
@@ -2468,7 +2543,11 @@ async function buildExtraNow(topicId,kind,force,_retry){
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
   const r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/build-extra',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:topicId,kind,level,force:!!force})});
   if((r.status===502||r.status===503||r.status===504) && !_retry){ await new Promise(s=>setTimeout(s,2800)); return buildExtraNow(topicId,kind,force,true); }   // Render cold-start → auto-retry once
-  const out=await r.json();
+  // the proxy answers 413/502/504 with an HTML page, and r.json() on that used to surface to the
+  // student as "Unexpected token '<'" — read text first and turn a non-JSON body into a real message
+  let out={}; const raw=await r.text().catch(()=>'');
+  try{ out=JSON.parse(raw||'{}'); }
+  catch(e){ throw new Error(r.status===413?'That note is too large to build from.':'The build server is busy right now — try again in a minute.'); }
   if(!r.ok||!out.items) throw new Error(out.reason||out.error||'Could not build this.');
   t.extras=t.extras||{}; t.extras[kind]=out.items;   // cache locally → instant next time (server also saved it)
   return out.items;
@@ -2480,7 +2559,10 @@ async function genExtra(topicId,kind,btn){
 }
 async function rebuildExtra(topicId,kind,btn){
   if(btn){ btn.disabled=true; btn.textContent='Rebuilding… ~5s'; }
-  try{ const t=topById(topicId); if(t&&t.extras) delete t.extras[kind]; await buildExtraNow(topicId,kind,true); render(); }
+  // NOTE: do NOT clear t.extras[kind] up-front — buildExtraNow overwrites it on success, and clearing
+  // first meant a failed rebuild wiped the cached set (and replaced a LIVE q-bank session with the
+  // "isn't built yet" prompt, since renderQbank checks `items` before the active session).
+  try{ await buildExtraNow(topicId,kind,true); render(); }
   catch(e){ if(btn){ btn.disabled=false; btn.textContent='↻ Rebuild'; } mbToast('Rebuild failed: '+(e.message||'try again')); }
 }
 
@@ -2549,6 +2631,11 @@ function renderQbank(t){
   var skillOpts=[{v:'all',t:'All'}]; QB_SKILLS.forEach(function(sk){ if(items.some(function(q){return (q.skill||'')===sk[0];})) skillOpts.push({v:sk[0],t:sk[1]}); });
   var levelOpts=[{v:'all',t:'All'}]; QB_COGS.forEach(function(c){ if(items.some(function(q){return qbCogOf(q)===c[0];})) levelOpts.push({v:c[0],t:c[1]}); });
   var countOpts=[{v:'0',t:'All'}]; [10,20,30,50].forEach(function(n){ if(items.length>=n) countOpts.push({v:''+n,t:''+n}); });
+  // _qbCfg is global across topics: a filter picked on another lecture could match nothing here and
+  // disabled BOTH mode buttons ("No questions match") on a topic that is actually full of questions
+  if(!skillOpts.some(function(o){return o.v===cfg.skill;})) cfg.skill='all';
+  if(!levelOpts.some(function(o){return o.v===cfg.level;})) cfg.level='all';
+  if(cfg.count && cfg.count>items.length) cfg.count=0;
   var cfgBlock = qbCfgRow('🎯 Practice', skillOpts, cfg.skill)
     + (levelOpts.length>2 ? qbCfgRow('📈 Level', levelOpts, cfg.level, 'level') : '')
     + (countOpts.length>1 ? qbCfgRow('#️⃣ How many', countOpts, ''+(cfg.count||0), 'count') : '');
@@ -2582,7 +2669,7 @@ function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qba
   QB={topicId:id,mode:mode,items:items,i:0,picked:null,answered:false,correct:0,results:[],done:false,startTs:Date.now(),qStart:Date.now(),sid:qbUid()};
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
-function qbExit(){ QB=null; render(); }
+function qbExit(){ QB=null; if(window._qbInt){ clearInterval(window._qbInt); window._qbInt=null; } render(); }   // the 1s timer used to keep firing for the rest of the app session
 /* grade over what was actually ANSWERED — for a normally-finished session that's every item;
    for an early exit it's just the answered subset, so the score is never diluted by skipped questions. */
 function qbScore(){ var answered=(QB.results||[]).length; var n=(QB.endedEarly?answered:QB.items.length); var c=QB.correct||0; return {answered:answered, n:n, c:c, pct:n?Math.round(c/n*100):0}; }
@@ -2612,7 +2699,10 @@ function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct+
 function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore();
   var totMs=(QB.results||[]).reduce(function(a,r){return a+(r.ms||0);},0);
   var stype=(QB.kind||(QB.smart?'smart_drill':QB.mega?'mega':'topic'));
-  s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:QB.items.length, correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
+  /* an early-ended session must be logged over what was ANSWERED — logging the planned length made the trend
+     chart and the dashboard grade a 3-of-20 exit as 15% while the results screen showed 100% (qbScore). */
+  var ansN=(QB.results||[]).length;
+  s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:(QB.endedEarly?ansN:QB.items.length), correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
     session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'' });
   if(s._sessions.length>200) s._sessions=s._sessions.slice(s._sessions.length-200);
   // smart-drill completion event (paired with smart_drill_started) — planned vs completed, minimal metadata
@@ -2621,8 +2711,12 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
     planned:QB.items.length, completed:(QB.results||[]).length, correct:QB.correct}); }
   try{ persist(); }catch(e){}
 }
-function qbPick(j){ if(QB.answered) return; QB.picked=j;
-  if(QB.mode==='timed'){ qbRecord(j); setTimeout(qbNext,180); render(); return; }   // test mode: lock in, advance
+function qbPick(j){ if(QB.answered||QB._lock) return; QB.picked=j;
+  /* test mode never sets QB.answered (that would reveal the key), so without _lock a second tap inside the
+     180ms advance window records a SECOND attempt for the same question and queues a second qbNext —
+     double-counting the score (>100% is reachable) and silently skipping the next question. */
+  if(QB.mode==='timed'){ QB._lock=true; qbRecord(j);
+    setTimeout(function(){ if(!QB) return; QB._lock=false; if(!QB.done) qbNext(); },180); render(); return; }   // test mode: lock in, advance
   QB.answered=true; qbRecord(j); render();                                            // tutor mode: reveal rationale
 }
 function qbNext(){ QB._confDone=false;
@@ -2698,7 +2792,8 @@ function qbDoneHtml(){
       +(!r.ok?('<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+(q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))))+'\')">🔄 Retest this concept</button><span>a different question, same idea</span></div>'):'')
       +'</div>'; }).join('');
   var scope=(QB.topicId==='*'?'*':QB.topicId);
-  var retry = QB.mega ? '<button class="btn primary" onclick="mgStart(false)">↻ New Mega set</button>'
+  var wasQuick = (QB.kind==='quick_exam');
+  var retry = QB.mega ? '<button class="btn primary" onclick="mgStart('+(wasQuick?'true':'false')+')">↻ '+(wasQuick?'New Quick Exam':'New Mega set')+'</button>'
             : QB.mistakes ? '<button class="btn primary" onclick="qbStartMistakes(\''+scope+'\')">↻ Retry these</button>'
                           : '<button class="btn primary" onclick="qbStart(\''+QB.topicId+'\',\''+QB.mode+'\')">↻ Retry</button>';
   // point 9 — Mega results break down THIS session by course / cognitive level / skill
@@ -2887,9 +2982,16 @@ function mgTogSubj(id){ _mgCfg.subj[id]=!_mgCfg.subj[id]; render(); }
 function mgToggleChoose(){ _mgCfg.chooseTopics=!_mgCfg.chooseTopics; render(); }
 function mgTogTopic(id){ _mgCfg.topics[id]=!_mgCfg.topics[id]; render(); }
 function mgStart(quick){ var cfg=_mgCfg;
-  if(quick){ cfg.subj={}; cfg.topics={}; cfg.chooseTopics=false; cfg.exposure='blind'; cfg.mode='timed'; cfg.level='all'; cfg.skill='all'; cfg.count=20; }
   if(!quick && cfg.exposure==='adaptive'){ adaptStart(); return; }
-  var items=mgAssemble(cfg.count);
+  /* Quick Exam runs on its OWN preset. It used to overwrite _mgCfg in place, which silently reset the
+     student's whole Customize panel (courses, topic picks, exposure, mode, level, skill, count) every time
+     they tapped it. Swap a throwaway config in for the assemble, then put theirs back. */
+  var restore=null;
+  if(quick){ restore=cfg;
+    cfg={ subj:{}, topics:{}, chooseTopics:false, exposure:'blind', mode:'timed', level:'all', skill:'all', count:20, examDate:(restore&&restore.examDate)||null };
+    window._mgCfg=cfg; }
+  var items;
+  try{ items=mgAssemble(cfg.count); } finally{ if(restore) window._mgCfg=restore; }
   if(!items.length){ alert('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
   QB={ topicId:'*', mode:cfg.mode, items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':'custom') };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
@@ -2905,7 +3007,7 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ alert('Ans
   }); }); });
   if(!items.length){ return qbStartMistakes('*'); }   // nothing tagged weak yet → fall back to the mistakes pool
   items=qbShuffle(items).slice(0,20);
-  QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'blind' };
+  QB={ topicId:'*', mode:'tutor', items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:'blind', kind:'drill_weak' };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 function mgChipRow(label, opts, cur, kind){ return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
@@ -3358,8 +3460,13 @@ function pageMega(){
   // three distinct entry points — Quick Exam = test me · Smart Drill = improve me · Customize = choose (spec point 23)
   var quick='<div class="card mgquick" style="cursor:default"><div><div class="mgq-t">⚡ Quick Exam</div><div class="mgq-s">20 questions · Mixed · Blind · Timed — one click</div></div><button class="btn primary" onclick="mgStart(true)">Start ▶</button></div>';
   var smart=smartDrillCard('*');
-  var startBtn='<div class="btnrow" style="margin-top:16px"><button class="btn primary" style="min-width:200px" '+(n?'onclick="mgStart(false)"':'disabled style="opacity:.45"')+'>🚀 Start '+(n?nStart+' questions':'— none match')+'</button></div>';
-  var poolInfo='<div class="qbnodata" style="margin-top:6px">'+n+' question'+(n===1?'':'s')+' in your current selection.</div>';
+  /* "Choose…" with nothing ticked used to read "Start — none match ... widen the filter", which points at the
+     wrong control: the pool is empty because no topic is selected, not because the filters are too tight. */
+  var pickedTopics=Object.keys(cfg.topics).filter(function(k){return cfg.topics[k];}).length;
+  var needPick=(cfg.chooseTopics && cfg.exposure!=='blind' && cfg.exposure!=='adaptive' && !pickedTopics);
+  var canStart=(n>0 && !needPick);
+  var startBtn='<div class="btnrow" style="margin-top:16px"><button class="btn primary" style="min-width:200px" '+(canStart?'onclick="mgStart(false)"':'disabled style="opacity:.45"')+'>🚀 Start '+(needPick?'— choose a topic':(n?nStart+' questions':'— none match'))+'</button></div>';
+  var poolInfo='<div class="qbnodata" style="margin-top:6px">'+(needPick?'No topics ticked yet — tap the ones you want above, or switch back to “All topics”.':(n+' question'+(n===1?'':'s')+' in your current selection.'))+'</div>';
   var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+modeRow+lvlRow+skillRow+cntRow+startBtn+poolInfo+'</div>';
   return '<div class="wrap">'+head+quick+smart+custom+'</div>';
 }
@@ -3975,19 +4082,24 @@ function pageCards(subId){
       </div>`).join('')}</div>`;
   }
   const s=subjById(subId); if(!s) return pageCards();
-  const ready = s.modules.flatMap(m=>m.topics).filter(t=>t.ready);
+  const ready = s.modules.flatMap(m=>m.topics||[]).filter(t=>t.ready);
   const head = crumbs([{label:'Anki Cards',route:'cards'},{label:s.name}])+
     `<h1>${esc(s.name)} Anki Cards</h1>`;
   if(!ready.length)
     return head+`<div class="empty">No decks built for this subject yet.<br>
       Open <a onclick="go('subject/${s.id}')">${esc(s.name)}</a> to see the full topic list.</div>`;
   return head+`<p class="sub">${s.cardCount} cards across ${ready.length} built topics</p>`+
-    ready.map(t=>`<div class="card" style="cursor:default;margin-bottom:12px">
+    ready.map(t=>{
+      /* `.length` was unguarded: a topic built without one of the decks white-screened this whole
+       * page (startDeck/pageTopic already guard). An empty deck also offered a live button whose
+       * only destination is pageStudy's "This deck is empty." dead-end — disable it instead. */
+      const np=deckN(t.primer), nr=deckN(t.recall);
+      return `<div class="card" style="cursor:default;margin-bottom:12px">
        <h3>${t.sn?t.sn+'. ':''}${esc(t.name)}</h3><p>${esc(t.lecturer)}</p>
        <div class="btnrow" style="margin-top:13px">
-         <button class="btn primary" onclick="go('study/${t.id}/primer')">Primer · ${t.primer.length}</button>
-         <button class="btn green" onclick="go('study/${t.id}/recall')">Recall · ${t.recall.length}</button>
-       </div></div>`).join('');
+         <button class="btn primary"${np?'':' disabled title="No primer cards in this lecture"'} onclick="go('study/${t.id}/primer')">Primer · ${np}</button>
+         <button class="btn green"${nr?'':' disabled title="No recall cards in this lecture"'} onclick="go('study/${t.id}/recall')">Recall · ${nr}</button>
+       </div></div>`;}).join('');
 }
 
 /* ---------- study / sessions ---------- */
@@ -3995,7 +4107,7 @@ let S=null;
 
 function startDeck(topicId,deck,clinOnly,weakOnly){
   const t=topById(topicId); if(!t) return;
-  let cards = deck==='primer'? t.primer : t.recall;
+  let cards = (deck==='primer'? t.primer : t.recall) || [];   // a topic built without one of the decks must not crash the page
   if(clinOnly) cards = cards.filter(isClin);
   if(weakOnly) cards = cards.filter(c=>{ const st=cardState4(cid(t.id,deck,c)); return st==='unf'||st==='lrn'; });   // not-yet-mastered
   cards = cards.filter(c=>!isFlagged(cid(t.id,deck,c)));   // hide cards the student reported wrong
@@ -4045,16 +4157,18 @@ function bucketItems(k){
   if(k==='new') return planNew();
   if(k==='conf'){
     startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const id=cid(t.id,'recall',c), s=DATA.cards[id];
-      if(s&&s.box>=3&&s.due>today) out.push({t,c,id,deck:'recall',conf:true}); }));
+      if(s&&s.box>=3&&s.due>today&&!isFlagged(id)) out.push({t,c,id,deck:'recall',conf:true}); }));
     return out;
   }
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const id=cid(t.id,'recall',c), s=DATA.cards[id];
+    if(isFlagged(id)) return;                        // cards reported wrong are hidden from study
     if(s&&s.due<=today){ if(reviewBucket(s.box,!!DATA.starred[id])===k) out.push({t,c,id,deck:'recall',box:s.box,isNew:false}); } }));
   return out;
 }
 function startBucket(k){
-  const items=bucketItems(k); if(!items.length) return;
+  let items=bucketItems(k); if(!items.length) return;
   if(k!=='new'){ for(let i=items.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[items[i],items[j]]=[items[j],items[i]];} }
+  if(k==='conf') items=items.slice(0,5);   // the breakdown row advertises at most 5 — never launch the whole mastered deck
   const label=(BUCKETS.find(x=>x.k===k)||{}).label||'Review';
   S={mode:'daily',key:'bucket:'+k,label,items,order:items.map((_,x)=>x),i:0,show:false,
      session:{done:0,correct:0,total:items.length}};
@@ -4101,6 +4215,7 @@ function reviewWeak(lecturer){
 /* Home CTA: "Custom session" — a tiny scope + length picker feeding the same engine */
 var CS={sub:'',min:15};
 function customSessionOpen(){
+  if(document.getElementById('csov')) return;        // already open — a second overlay would duplicate the id and break csPick
   CS={sub:'',min:(DATA.daily.budget||15)};
   const subs=DB.subjects.map(sb=>`<button class="btn cs-sub" data-s="${sb.id}" onclick="csPick('sub',this)">${esc(sb.short)}</button>`).join('');
   const lens=[5,15,30,45].map(m=>`<button class="btn cs-len${m===CS.min?' cs-on':''}" data-m="${m}" onclick="csPick('len',this)">${m} min</button>`).join('');
@@ -4199,7 +4314,7 @@ function habitNudge(){
   // B — streak at risk: evening, streak alive, not yet met today. Always offer the off-ramp when a freeze is ready.
   if(st>=1 && !met && hr>=18){
     return frz==='ready'
-      ? {title:`Your ${st}-day streak ends at midnight`, body:`2 minutes keeps it alive — or tap to use a streak freeze. No pressure.`, url, kind:'save'}
+      ? {title:`Your ${st}-day streak ends at midnight`, body:`2 minutes keeps it alive — and if today gets away from you, a streak freeze covers it automatically. No pressure.`, url, kind:'save'}
       : {title:`Your ${st}-day streak ends at midnight`, body:`Just 2 minutes keeps it alive. You've come too far to stop.`, url, kind:'save'};
   }
   // C — re-engagement: away 2+ days
@@ -4279,7 +4394,12 @@ function nudgeTick(force){
     if(!s.remindOn) return;
     if(!('Notification' in window) || Notification.permission!=='granted') return;
     const hr=new Date().getHours();
-    if(!force && (hr<(s.quietStart||7) || hr>=(s.quietEnd||22))) return;   // quiet hours
+    /* SET-05: the active-hours window can legitimately wrap past midnight (a night-shift student
+       sets 22 → 7). The old `hr<start || hr>=end` test was TRUE for all 24 hours in that case, so
+       every nudge was silently suppressed forever. `start||7` also mis-read a valid midnight (0). */
+    const qs=(s.quietStart==null?7:s.quietStart)|0, qe=(s.quietEnd==null?22:s.quietEnd)|0;
+    const awake = (qs===qe) ? true : (qs<qe ? (hr>=qs && hr<qe) : (hr>=qs || hr<qe));
+    if(!force && !awake) return;   // outside the student's active hours
     const every=Math.max(5,(s.remindMins||120))*60e3;
     const now=Date.now();
     if(!force && now-(s.lastNudge||0) < every) return;
@@ -4322,28 +4442,37 @@ function startMistakes(days){
 function runMistakes(days){ startMistakes(days); go('review'); }
 
 /* ===== MOCK EXAM — timed, no instant feedback, scored ===== */
+/* a card can only be an exam question if it has ≥2 options AND a valid integer answer index.
+   `ans` is compared with === everywhere (pickOpt), so a string/undefined ans is unanswerable-forever. */
+function examUsable(c){ return !!(c && c.opts && c.opts.length>1 && Number.isInteger(c.ans) && c.ans>=0 && c.ans<c.opts.length); }
 function examPool(scope){                        // MCQ-capable recall cards for a scope
   let items=[];
-  if(scope==='clinical') items=clinItems();
+  if(scope==='clinical') items=clinItems();      // clinItems() is NOT MCQ-filtered — the shared filter below handles it
   else if(scope==='all'){ allTopics.forEach(t=>{ if(!t.ready) return;
-      (t.recall||[]).forEach(c=>{ if(c.opts&&c.opts.length) items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
+      (t.recall||[]).forEach(c=>{ items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
   else { const s=subjById(scope); if(s) s.modules.flatMap(m=>m.topics).forEach(t=>{ if(!t.ready) return;
-      (t.recall||[]).forEach(c=>{ if(c.opts&&c.opts.length) items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
+      (t.recall||[]).forEach(c=>{ items.push({t,c,id:cid(t.id,'recall',c),deck:'recall'}); }); }); }
+  // one gate for EVERY scope: usable MCQ + honour "reported wrong → hide it from my studying" (REV-04)
+  items=items.filter(it=>examUsable(it.c) && !isFlagged(it.id));
   // dedupe by question (twin syllabus decks)
   const seen={}, out=[]; items.forEach(it=>{ const k=hstr(it.c.q); if(seen[k])return; seen[k]=1; out.push(it); });
   return out;
 }
 function startExam(scope,count){
-  const pool=shuf(examPool(scope)); const items=pool.slice(0,Math.min(count,pool.length));
-  if(!items.length){ alert('No exam questions yet — open a topic → 🧠 Q-bank to build one first, then come back.'); return; }   // BUG: was a silent no-op on an empty account
+  const n=Math.max(1, Math.floor(+count)||20);
+  const pool=shuf(examPool(scope)); const items=pool.slice(0,Math.min(n,pool.length));
+  if(!items.length){ alert('No exam questions yet.\n\nMock exams are built from the multiple-choice cards in your lectures — add a lecture (Import) and let it finish building, then come back.'); return; }   // BUG: was a silent no-op on an empty account; and it used to point at 🧠 Q-bank, which never feeds this pool
   S={mode:'exam',key:'exam',items,order:items.map((_,k)=>k),i:0,scope,
      answers:new Array(items.length).fill(null), started:Date.now(), finished:0,
      session:{total:items.length}};
-  go('exam');
+  go('exam'); render();   // BUG: we are ALWAYS already on #/exam here, so go() fired no hashchange and "▶ Start exam" did nothing
 }
 function examPick(i){ if(!S||S.mode!=='exam'||S.finished) return; S.answers[S.order[S.i]]=i; render(); }
 function examNav(d){ if(!S||S.mode!=='exam')return; const n=S.i+d; if(n<0||n>=S.items.length)return; S.i=n; render(); window.scrollTo(0,0); }
-function examSubmit(){ if(!S||S.mode!=='exam')return; S.finished=Date.now(); render(); window.scrollTo(0,0); }
+function examSubmit(){ if(!S||S.mode!=='exam'||S.finished)return;
+  const blank=S.answers.filter(a=>a==null).length;   // submitting is irreversible — confirm like qbEndEarly does
+  if(blank && !confirm('Submit now? '+blank+' question'+(blank>1?'s are':' is')+' still blank and will be marked wrong.')) return;
+  S.finished=Date.now(); render(); window.scrollTo(0,0); }
 function examMissedItems(){ const out=[]; S.items.forEach((it,k)=>{ if(S.answers[k]!==it.c.ans) out.push(it); }); return out; }
 function examSendHard(){ if(!S)return; examMissedItems().forEach(it=>{ DATA.starred[it.id]=1; logMiss(it.id); });
   persist(); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){}
@@ -4445,7 +4574,7 @@ function sessionSummary(backLabel,backRoute){
       </div>
       ${s.over?`<div class="celeb-note">${s.over} extra due card${s.over===1?'':'s'} held for tomorrow to fit your time budget.</div>`:''}
       ${mile?`<div class="celeb-mile">${mile}</div>`:''}
-      <div class="celeb-streak">🔥 Streak extended → ${st} day${st===1?'':'s'}</div>
+      <div class="celeb-streak">${streakMet()?`🔥 Streak extended → ${st} day${st===1?'':'s'}`:`🔥 ${st}-day streak · finish today's target to keep it`}</div>
       <button class="celeb-next" onclick="go('${backRoute||'home'}')">See what’s next tomorrow →</button>
       ${remain?`<button class="celeb-more" onclick="startRecallSession();go('review')">Keep going · ${remain} more card${remain===1?'':'s'}</button>`:''}
     </div>`;
@@ -4753,7 +4882,11 @@ function pickOpt(i){
   if(it.conf){ if(!ok) rateSRS(it.id,false); }          // confidence check: miss re-enters pipeline
   else rateSRS(it.id,ok);
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);           // measure real answer time → rolling median
-  logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
+  // a first-ever exposure is a NEW card whichever pool served it — only planNew tags isNew, so a topic-deck /
+  // weak / cram card would otherwise be logged as a *review* and never count toward the new-card total or streak.
+  // (_pt was computed BEFORE rateSRS, so 'new' here means "had no SRS state a moment ago". Primer is excluded:
+  //  planNew's per-course budget is recall-only.)
+  logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);
   S.session.done++; if(ok) S.session.correct++;
   if(!ok && !it.conf){                                   // failed → auto-add to hard cards + mistakes log
     DATA.starred[it.id]=1; logMiss(it.id);
@@ -4863,7 +4996,7 @@ function rateCard(ok){
   if(it.conf){ if(!ok) rateSRS(it.id,false); }   // confidence check: correct = no change, miss = re-enter pipeline
   else rateSRS(it.id,ok);
   if(_ms>=1200) recordAnswerMs(it.id,_pt,_ms);
-  logRate(ok); logDaily(!!it.isNew, it.t.subject.id); touchTopic(it.t.id);
+  logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
   if(S.mode==='deck') DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);
@@ -4932,14 +5065,17 @@ function swipeAct(dir){
 document.addEventListener('keydown',e=>{
   const h=location.hash;
   if(/^#\/exam/.test(h) && S && S.mode==='exam' && !S.finished && S.items.length){   // exam keys
-    if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
-    const c=S.items[S.order[S.i]].c;
-    if(/^[1-9]$/.test(e.key)){ const idx=+e.key-1; if(idx<c.opts.length) examPick(idx); return; }
+    if(e.target && (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.isContentEditable)) return;
+    const c=S.items[S.order[S.i]].c, nOpt=(c.opts||[]).length;
+    if(/^[1-9]$/.test(e.key)){ const idx=+e.key-1; if(idx<nOpt) examPick(idx); return; }
+    if(/^[a-z]$/i.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey){   // the on-screen hint says "Pick A–D", so A–D must actually work
+      const idx=e.key.toUpperCase().charCodeAt(0)-65; if(idx>=0&&idx<nOpt){ examPick(idx); return; } }
     if(e.key==='ArrowRight'){ examNav(1); return; }
     if(e.key==='ArrowLeft'){ examNav(-1); return; }
     return;
   }
   if(!/^#\/(study|review|hard)/.test(h)) return;
+  if(e.target && (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.isContentEditable)) return;   // typing in a card note / inline editor must not rate or flip the card
   if(!S) return;
   const it=S.items[S.order[S.i]], canRate=it && it.deck!=='primer';
   if(isMcqCard(it)){                                   // MCQ keyboard flow
@@ -5022,7 +5158,7 @@ function pageWeek(){
       <div class="stat"><b style="color:var(--ped)">${w.completed}</b><span>topics completed</span></div>
       <div class="stat"><b style="color:#ff8a4d">${st}</b><span>current streak</span></div>
     </div>
-    <h2>This week</h2>
+    <h2>Last 7 days</h2>
     <div class="wgrid">${dayCells}</div>
     <h2>Focus next</h2>
     <div class="card" style="cursor:default">
@@ -5091,7 +5227,12 @@ function importData(input){ const f=input.files&&input.files[0]; if(!f) return; 
       if(!confirm('Restore this backup? It REPLACES all current progress on this device.')) return;
       localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
     }catch(e){ alert('Import failed: '+e.message); } };
-  rd.readAsText(f); }
+  /* SET-08: without onerror an unreadable file (iCloud placeholder, permission, IO) is a totally silent no-op */
+  rd.onerror=()=>{ alert('Import failed — that file could not be read. Export it again, or use "Restore from text" below.'); };
+  rd.readAsText(f);
+  /* SET-07: clear the input so picking the SAME file again still fires `change`.
+     Without this, cancelling the confirm (or any failure) leaves Import looking like a dead button. */
+  try{ input.value=''; }catch(e){} }
 
 /* ---- automatic backup to a file (File System Access API) ---- */
 function idbSet(k,v){ return new Promise((res,rej)=>{ const o=indexedDB.open('medbank_fs',1);
@@ -5133,6 +5274,15 @@ async function enableAutoBackup(){
 async function disableAutoBackup(){ DATA.settings.autoBackup=false; persist(); _bakHandle=null;
   try{ await idbSet('bakHandle',null); }catch(e){} render(); }
 async function resumeAutoBackup(){ await writeBackup(true); render(); }
+/* SET-06: "Back up now" used to call writeBackup(true) directly — no render, no toast, so a
+   successful write looked identical to a silently failed one (and "Last saved" never moved). */
+async function backupNow(){
+  if(!DATA.settings.autoBackup||!_bakHandle){ mbToast('Automatic backup is not set up on this device yet.'); return; }
+  const t0=DATA.settings.lastBackup||0;
+  await writeBackup(true); render();
+  mbToast((DATA.settings.lastBackup||0)>t0 ? '✓ Backed up just now'
+    : 'Backup did not complete — tap Resume and allow MedBank to write to your backup file.');
+}
 async function initAutoBackup(){
   if(!DATA.settings.autoBackup||!fsSupported()) return;
   try{ const h=await idbGet('bakHandle'); if(h){ _bakHandle=h; _bakPaused=!(await _perm(h,false));
@@ -5164,6 +5314,19 @@ function restoreFromText(){
     localStorage.setItem(SKEY,JSON.stringify(d)); location.reload();
   }catch(e){ alert('Restore failed: '+e.message); }
 }
+/* SET-01: Reset only ever cleared the LOCAL copy. For a signed-in student sync.js re-adopts the
+   cloud state on the very next load, so "Cannot be undone" was exactly backwards — the reset
+   undoes ITSELF and the student is left thinking the button is broken. A true account wipe needs a
+   server-side delete (logged as SET-01, proposed). Until then, say what actually happens. */
+function mbResetAll(){
+  let signedIn=false;
+  try{ signedIn=!!(window.MB_SYNC && MB_SYNC.currentProfileId && MB_SYNC.currentProfileId()); }catch(e){}
+  let msg='Reset ALL your progress on this device?';
+  if(signedIn) msg+='\n\nYou are signed in, so your progress is also saved to your account and will sync back down after the reload. Sign out first if you want this device left empty.';
+  if(!confirm(msg)) return;
+  try{ localStorage.removeItem(SKEY); }catch(e){}
+  location.reload();
+}
 function backupRel(){ const t=DATA.settings.lastBackup; if(!t) return 'not yet';
   const s=Math.floor((Date.now()-t)/1000);
   if(s<60) return 'just now'; if(s<3600) return Math.floor(s/60)+' min ago';
@@ -5181,17 +5344,36 @@ function testNudge(){
   swPing('payload',{title:n.title,body:n.body,url:n.url});
   playAlarm();
 }
+/* SET-04: remindOn used to be set BEFORE the permission prompt and was never reverted on a
+   denial — the panel then said "Turn off" and offered interval/quiet-hours/strict settings while
+   nudgeTick bailed at its permission check on every single tick. Only turn on if it can actually fire. */
 async function enableReminders(){
+  if(!('Notification' in window)){
+    alert("This browser can't show notifications. Install MedBank to your home screen (Settings → App) and try again — MedBank will still nudge you in-app while it's open.");
+    return;
+  }
+  let perm='denied';
+  try{ perm=await Notification.requestPermission(); }catch(e){ perm='denied'; }
+  if(perm!=='granted'){
+    DATA.settings.remindOn=false; persist(); render();
+    alert("Notifications are blocked for MedBank, so reminders can't be turned on. Allow notifications for this site in your browser (or phone) settings, then tap Turn on again.");
+    return;
+  }
   DATA.settings.remindOn=true; persist();
-  try{
-    if('Notification' in window){
-      const perm=await Notification.requestPermission();
-      if(perm==='granted'){ setupReminder(); new Notification('MedBank reminders on',{body:'You’ll get a nudge when cards are due.'}); }
-    }
-  }catch(e){}
+  try{ setupReminder(); }catch(e){}
+  try{ new Notification('MedBank reminders on',{body:'You’ll get a nudge when cards are due.'}); }catch(e){}
   render();
 }
-function disableReminders(){ DATA.settings.remindOn=false; persist(); render(); }
+function disableReminders(){ DATA.settings.remindOn=false; persist(); render();
+  /* SET-03: the service worker's periodicsync handler (sw.js maybeRemind) checks NEITHER remindOn
+     NOR quiet hours — it just replays the last staged payload. Leaving the registration in place
+     kept nudging a student who had just turned reminders off, at any hour, with no way to stop it. */
+  (async function(){
+    try{ if(navigator.serviceWorker){ const reg=await navigator.serviceWorker.ready;
+      if(reg && reg.periodicSync){ try{ await reg.periodicSync.unregister('medbank-nudge'); }catch(e){} } } }catch(e){}
+    try{ swPing('payload',{title:'',body:'',url:''}); }catch(e){}
+  })();
+}
 let settingsTab='study';
 function setSettingsTab(t){ settingsTab=t; render(); window.scrollTo(0,0); }
 async function loadPlanBadge(){
@@ -5202,7 +5384,11 @@ async function loadPlanBadge(){
     var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/me',{headers:{'Authorization':'Bearer '+tok}});
     var j=await r.json().catch(function(){return{};}); el=document.getElementById('planBadge'); if(!el)return;
     if(r.ok && j.premium){ el.className='planbadge prem'; el.textContent=j.test?'★ Premium · test':'★ Premium'; }
-    else if(r.ok){ el.className='planbadge free'; el.textContent='Basic'; }
+    else if(r.ok){ el.className='planbadge free'; el.textContent='Basic · Upgrade →';
+      /* ENT-07: the Plan row used to describe Premium with no way to buy it — the only subscribe
+         route in the app was paywall.js, reachable only by hitting a wall. Same target as that nudge. */
+      el.style.cursor='pointer'; el.title='See plans and subscribe';
+      el.onclick=function(){ try{ var C=window.MEDBANK_CONFIG||{}; window.open((C.WEBSITE_URL||(C.DOWNLOAD&&C.DOWNLOAD.pwa)||'#')+'#pricing','_blank'); }catch(e){} }; }
     else { el.textContent='—'; }
   }catch(e){ if(el)el.textContent='—'; }
 }
@@ -5320,7 +5506,7 @@ function pageSettings(){
           <div class="btnrow"><button class="btn primary" onclick="resumeAutoBackup()">Resume</button><button class="btn" onclick="disableAutoBackup()">Turn off</button></div></div>`;
       if(on && sup)
         return `<div class="setrow"><div><b>🔄 Automatic backup — on</b><span>Your progress saves to your chosen file automatically. Last saved ${backupRel()}.</span></div>
-          <div class="btnrow"><button class="btn" onclick="writeBackup(true)">Back up now</button><button class="btn" onclick="disableAutoBackup()">Turn off</button></div></div>`;
+          <div class="btnrow"><button class="btn" onclick="backupNow()">Back up now</button><button class="btn" onclick="disableAutoBackup()">Turn off</button></div></div>`;
       if(!sup)
         return `<div class="setrow"><div><b>Automatic backup</b><span>Continuous auto-backup needs Chrome or Edge (works on Android Chrome and desktop). On this browser, use Export / Import below.</span></div>
           <button class="btn" disabled>Unavailable here</button></div>`;
@@ -5344,8 +5530,8 @@ function pageSettings(){
       <button class="btn primary" onclick="restoreFromText()">Restore from text</button></div>
 
     <h2>Data</h2>
-    <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. Cannot be undone.</span></div>
-      <button class="btn miss" onclick="if(confirm('Reset ALL your progress on this device?')){localStorage.removeItem('${SKEY}');location.reload();}">Reset</button></div>`;
+    <div class="setrow"><div><b>Reset all progress</b><span>Clears streak, cards, statuses and settings on this device. If you're signed in, your account's copy syncs back down after the reload — signed-out devices are wiped for good.</span></div>
+      <button class="btn miss" onclick="mbResetAll()">Reset</button></div>`;
 
   return `<h1>Settings</h1><p class="sub">Everything is saved on this device.</p>${bar}${S[tab]||S.study}`;
 }
@@ -5399,10 +5585,10 @@ let _examTimer=null;
 function examScopeName(sc){ if(sc==='all')return 'All topics'; if(sc==='clinical')return 'Clinical scenarios'; const s=subjById(sc); return s?s.name:sc; }
 function pageExam(){
   if(!S || S.mode!=='exam'){                       // ---- setup screen ----
-    const clin=clinCount();
-    const scopes=[['all','📚','All topics',''],['clinical','🩺','Clinical only',clin+' scenarios']]
+    const clin=examPool('clinical').length;      // clinCount() counts ALL clinical cards, incl. ones with no options — the exam can only serve MCQ ones
+    const scopes=[['all','📚','All topics',''],['clinical','🩺','Clinical only',clin+' MCQ scenario'+(clin===1?'':'s')]]
       .concat(DB.subjects.filter(s=>s.readyCount).map(s=>[s.id,'●',s.short,s.cardCount+' cards']));
-    S=null;
+    // NOTE: this used to do `S=null`, which silently threw away a live review/deck session just for opening this tab.
     return `<h1>📝 Mock exam</h1><p class="sub">Timed, no feedback until you submit — like the real paper. Pick a scope and length.</p>
       <h2>Scope</h2>
       <div class="modes" id="examScopes">${scopes.map((x,k)=>`<button class="modebtn examscope${k===0?' on':''}" data-sc="${x[0]}" onclick="selExamScope(this)">
@@ -5441,7 +5627,7 @@ function selExamScope(el){ document.querySelectorAll('.examscope').forEach(b=>b.
 function selExamCount(el){ document.querySelectorAll('.examcount').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
 function launchExam(){ const sc=(document.querySelector('.examscope.on')||{}).dataset?.sc||'all';
   const n=+(((document.querySelector('.examcount.on')||{}).dataset||{}).n||20); startExam(sc,n); }
-function newExam(){ S=null; go('exam'); }
+function newExam(){ S=null; go('exam'); render(); }   // BUG: results screen is already at #/exam, so go() fired no hashchange and this button did nothing
 function examResult(){
   const n=S.items.length, dur=Math.round((S.finished-S.started)/1000);
   let correct=0; const bySub={};
@@ -5875,7 +6061,7 @@ function setExplainModel(v){ DATA.settings.explainModel=v||'deepseek-v4-flash'; 
 function setTutorEngine(v){ DATA.settings.tutorEngine=v||'deepseek-v4-flash'; persist(); loadPuter(); render(); }
 
 /* ---------- weekly topic plan (source of daily NEW cards) ---------- */
-function unseenCount(t){ return (t.recall||[]).filter(c=>!DATA.cards[cid(t.id,'recall',c)]).length; }
+function unseenCount(t){ return (t.recall||[]).filter(c=>{ const id=cid(t.id,'recall',c); return !DATA.cards[id] && !isFlagged(id); }).length; }   // must match planNew's pool: a flagged card is never served, so it is not "N new left"
 function planAdd(id){ DATA.plan=DATA.plan||[]; if(!DATA.plan.includes(id)) DATA.plan.unshift(id); persist(); render(); }
 function planRemove(id){ DATA.plan=(DATA.plan||[]).filter(x=>x!==id); persist(); render(); }
 function planTop(id){ DATA.plan=[id].concat((DATA.plan||[]).filter(x=>x!==id)); persist(); render(); }
@@ -5896,6 +6082,9 @@ function pagePlan(){
        :`<p class="sub">All built ${esc(sb.short)} topics are already in your plan.</p>`;
     out+=`<h2><span style="color:${COLOR[sb.id]}">●</span> ${esc(sb.name)} <span style="font-size:13px;color:var(--dim);font-weight:400">${planTopics.length} selected</span></h2>${rows||'<p class="sub">No topics selected yet — add some below.</p>'}${add}`;
   });
+  if(!out.trim()) return head+`<div class="alldone" style="margin-top:20px"><div class="big">🗓</div><b>No built topics yet.</b>
+    <p>Add a lecture and once it finishes building it will appear here, ready to go into this week's plan.</p>
+    <div class="btnrow" style="justify-content:center;margin-top:12px"><button class="btn primary" onclick="try{MB_openImport&&MB_openImport()}catch(e){}">＋ Add a lecture</button></div></div>`;
   return head+out;
 }
 
@@ -7693,7 +7882,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     document.body.appendChild(ov);
     $('vizX').onclick=closeModal;
   }
-  function closeModal(){ playing=false; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }
+  function closeModal(){ try{stop();}catch(e){} playing=false; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }   // stop() also clears the 9s speechSynthesis keep-alive + the say() watchdog, which used to keep ticking forever after close
   function mountPlayer(){
     var st=BP.narration_steps;
     var clean={}; Object.keys(BP).forEach(function(k){ if(k[0]!=='_')clean[k]=BP[k]; });
@@ -7711,12 +7900,12 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     $('vizRail').innerHTML=st.map(function(s,k){return '<span class="rc" data-k="'+k+'">'+(k+1)+'. '+esc(s.short||('S'+(k+1)))+'</span>'+(k<st.length-1?'<span class="rs">→</span>':'');}).join('');
     Array.prototype.forEach.call(document.querySelectorAll('#vizRail .rc'),function(c){ c.style.cursor='pointer'; c.onclick=function(){ jump(+c.getAttribute('data-k')); }; });
     $('vizScrub').max=st.length-1;
-    $('vizPlay').onclick=function(){ playing?stop():play(); };
+    $('vizPlay').onclick=function(){ if(playing){ stop(); return; } try{ if(window.unlockAudio)unlockAudio(); }catch(e){} play(); };   // unlock INSIDE the tap or iOS blocks the first clip and the step plays silent
     $('vizPrev').onclick=function(){ jump(Math.max(0,i-1)); };
     $('vizNext').onclick=function(){ jump(Math.min(st.length-1,i+1)); };
     $('vizRestart').onclick=function(){ jump(0); };
     $('vizQuizBtn').onclick=function(){ vizQuiz=!vizQuiz; this.classList.toggle('qon',vizQuiz); if(vizQuiz){vizScore={c:0,n:0,streak:0,best:0};_missed=[];updateStreak();} };
-    $('vizReplay').onclick=function(){ var s=BP.narration_steps[i]; if(s){ stop(); render(i); say(s.narration_text||''); } };
+    $('vizReplay').onclick=function(){ var s=BP.narration_steps[i]; if(s){ try{ if(window.unlockAudio)unlockAudio(); }catch(e){} stop(); render(i); say(s.narration_text||''); } };
     $('vizSimpler').onclick=function(){ simplerStep(); };
     $('vizSvg').addEventListener('click',onElClick);
     $('vizStage').addEventListener('click',function(e){ if(!(e.target.getAttribute&&e.target.getAttribute('data-el')))closeTip(); });
@@ -7759,7 +7948,10 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     function load(){ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);});
       sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');
       if(vizVoiceName)sel.value=vizVoiceName; }
-    load(); speechSynthesis.onvoiceschanged=load; }
+    // don't clobber the app-level voice loader (:1441) — that used to leave VOICES frozen for the rest of the
+    // session after Visualize was opened once, and kept firing into a detached <select> after the modal closed.
+    load(); var _prev=speechSynthesis.onvoiceschanged;
+    speechSynthesis.onvoiceschanged=function(){ try{ _prev&&_prev(); }catch(e){} if(document.getElementById('vizVoice')) load(); }; }
   var vizWatch=null,vizKeep=null,_kSpans=[],_kTimer=null;
   /* ---- karaoke captions: the spoken word lights up as it's said ---- */
   function buildKaraoke(text){ var parts=(text||'').split(/(\s+)/),html='',ci=0,wi=0; _kSpans=[];
@@ -7769,12 +7961,19 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   function setKaraoke(idx){ for(var j=0;j<_kSpans.length;j++){ var el=document.getElementById('cw'+_kSpans[j].wi); if(!el)continue; el.className='cw'+(j<idx?' said':(j===idx?' now':'')); } }
   function karaokeToChar(ci){ var idx=0; for(var j=0;j<_kSpans.length;j++){ if(_kSpans[j].start<=ci) idx=j; else break; } setKaraoke(idx); }
   function karaokeReset(){ if(_kTimer){clearInterval(_kTimer);_kTimer=null;} }
-  function startKaraokeTimed(text){ karaokeReset(); var n=_kSpans.length; if(!n)return; var total=Math.max(1400,(text||'').length*68/(vizRate||1)),per=Math.max(120,total/n),j=0;
+  /* the SPEED select only reaches the browser voice (u.rate); the app narrator is server-rendered audio and
+     ignores it — so caption/watchdog timing must use the rate that is ACTUALLY in effect, or 1.5× runs the
+     words (and the step advance) ahead of a clip still playing at 1×. */
+  function vizEffRate(){ return (vizVoiceName&&window.speechSynthesis)?(vizRate||1):1; }
+  function startKaraokeTimed(text){ karaokeReset(); var n=_kSpans.length; if(!n)return; var total=Math.max(1400,(text||'').length*68/vizEffRate()),per=Math.max(120,total/n),j=0;
     _kTimer=setInterval(function(){ setKaraoke(j); j++; if(j>=n){clearInterval(_kTimer);_kTimer=null;} },per); }
   function say(text,cb){
     if(vizWatch){clearTimeout(vizWatch);vizWatch=null;}
     var done=false; function fin(){ if(done)return; done=true; if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} karaokeReset(); setKaraoke(_kSpans.length); try{cb&&cb();}catch(e){} }
-    vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/(vizRate||1))+2600);   // watchdog: never stall
+    // watchdog: never stall. If the clip is NOT pre-generated the /tts round-trip is spent inside this budget,
+    // so the watchdog used to fire mid-sentence and advance the step over its own audio — allow for the fetch.
+    var _warm=false; try{ _warm=!!(vizVoiceName||(window._ttsHas&&window._ttsHas(text,'read'))); }catch(e){}
+    vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/vizEffRate())+2600+(_warm?0:15000));
     var ss=window.speechSynthesis;
     function speakSS(vn){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate; if(vn){var vv=ss.getVoices().find(function(v){return v.name===vn;}); if(vv)u.voice=vv;}
       var gotB=false; u.onboundary=function(e){ if(!gotB){gotB=true; if(_kTimer){clearInterval(_kTimer);_kTimer=null;}} karaokeToChar(e.charIndex||0); };  // real word-sync when available
@@ -7881,11 +8080,17 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   function shouldQuiz(){ if(!vizQuiz)return false; if(i>=BP.narration_steps.length-1)return false; if(vizScore.streak>=3)return Math.random()<0.5; return true; }  // adaptive: ease off on a hot streak
   function askNext(done){ var st=BP.narration_steps,ni=i+1; if(ni>=st.length){done();return;}
     var qz=st[i].quiz;   // AI-authored "why" question about the step just shown
-    if(qz&&qz.options&&qz.options.length>=2){ var corr=(qz.answer!=null&&qz.options[qz.answer]!=null)?qz.options[qz.answer]:qz.options[0];
-      showQuiz(qz.q||'Why does this happen?',qz.options.slice(),corr,qz.why||'',done); return; }
+    if(qz&&qz.options&&qz.options.length>=2){
+      // the model sometimes returns "2" / "B" / the option text as `answer`. Indexing with those silently
+      // yielded options[0] — teaching (and saving to the review deck) the WRONG answer. Only trust a real index.
+      var ax=(typeof qz.answer==='number')?qz.answer:parseInt(qz.answer,10);
+      var corr=(!isNaN(ax)&&ax>=0&&ax<qz.options.length&&qz.options[ax]!=null)?qz.options[ax]:null;
+      if(corr!=null){ showQuiz(qz.q||'Why does this happen?',qz.options.slice(),corr,qz.why||'',done); return; }
+    }
     var correct=(st[ni].short||st[ni].term||'Next step');
     var pool=st.map(function(s){return s.short||s.term;}).filter(function(x){return x&&x!==correct;});
     var ds=[]; for(var tr=0;tr<25&&ds.length<2&&pool.length;tr++){ var c=pool[Math.floor(Math.random()*pool.length)]; if(ds.indexOf(c)<0&&c!==correct)ds.push(c); }
+    if(!ds.length){ done(); return; }   // no distractors (every step shares one label) — a one-option "quiz" teaches nothing
     var opts=ds.concat([correct]); for(var a=opts.length-1;a>0;a--){var j=Math.floor(Math.random()*(a+1));var tmp=opts[a];opts[a]=opts[j];opts[j]=tmp;}
     showQuiz('🧠 What comes next?',opts,correct,(st[ni].narration_text||''),done); }
   function showQuiz(qText,opts,correct,why,done){ closeQuiz(); var box=document.createElement('div'); box.className='vizquiz'; box.id='vizQuiz';
@@ -7932,12 +8137,17 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       try{
         var r=await fetch(url,{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:body});
         if(r.status===429){ var j4=await r.json().catch(function(){return {};}); var e=new Error((j4&&(j4.message||j4.error))||'You’ve used all of today’s explainers.'); e.status=429; e.info=j4; throw e; }
-        if(r.status===502||r.status===503||r.status===504){ lastErr=new Error('Waking the Visualize server…'); await _vizSleep(1500*(attempt+1)); continue; }
+        if(r.status===502||r.status===503||r.status===504){
+          // a 502 from OUR handler is a real, deterministic failure (bad blueprint) and carries a JSON message —
+          // retrying it 5× only burns 5 more full model builds and hides the actionable text behind "Waking…".
+          var j5=await r.json().catch(function(){return null;});
+          if(j5&&(j5.error||j5.message)){ var e5=new Error(j5.message||j5.error); e5.fatal=true; throw e5; }
+          lastErr=new Error('Waking the Visualize server…'); await _vizSleep(1500*(attempt+1)); continue; }
         var j=await r.json().catch(function(){return {};});
         if(!r.ok||!j.blueprint) throw new Error((j&&(j.message||j.error))||'Could not build a visualization.');
         return j;
       }catch(err){
-        if(err&&err.status===429) throw err;                 // daily-limit — don't retry
+        if(err&&(err.status===429||err.fatal)) throw err;     // daily-limit / a real server verdict — don't retry
         lastErr=err;
         if(attempt<4){ await _vizSleep(1500*(attempt+1)); continue; }   // network "Failed to fetch" while server wakes → retry
       }
@@ -7969,6 +8179,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     setTimeout(removeVizFloat,3800);
   }
   function vizWarmVoices(){ try{ if(!BP||!BP.narration_steps||!window.warmSpeak) return;
+    if(vizVoiceName) return;                        // student picked a device voice — say() never touches these clips, so don't buy them
     var q=BP.narration_steps.map(function(s){return (s.narration_text||'').trim();}).filter(Boolean); var i=0;
     (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx2,nx2); })();
   }catch(e){} }
@@ -8002,13 +8213,22 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       try{
         if(window.warmSpeak){
           var _st=bp.narration_steps||[]; var _t0=((_st[0]&&_st[0].narration_text)||'').trim();
-          if(_t0) await window.warmSpeak(_t0,'read');
+          if(_t0) await Promise.race([window.warmSpeak(_t0,'read'), _vizSleep(12000)]);   // never let a hung /tts trap a FINISHED explainer behind a "Building…" pill
           _st.slice(1).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t) window.warmSpeak(t,'read'); });
         }
       }catch(e){}
       showVizFloat('ready');                                 // pill flips to "tap to watch" — first line is already cached
-    }catch(e){ vizFloatError((e&&e.message)||'Something went wrong'); }
+    }catch(e){
+      if(e&&e.status===429){ vizLimitHit(e); return; }        // out of explainers → upgrade path, not a 3-second error pill
+      vizFloatError((e&&e.message)||'Something went wrong'); }
   };
+  /* daily Visualize limit — offer the upgrade (basic) or say when it resets (premium). /simplify already did this. */
+  function vizLimitHit(e){
+    removeVizFloat(); var j=(e&&e.info)||{};
+    var msg=j.message||(e&&e.message)||"You've used all of today's explainers. They reset tomorrow.";
+    if(!j.premium && window.MB_PAYWALL) MB_PAYWALL.nudge("You're out of explainers today", msg, "Upgrade");
+    else vizNotice(msg);
+  }
   function applyLayout(bp){
     if(bp.layout==='tree'){ layoutTree(); }
     else if(bp.layout==='flow'){ layoutFlow(); }
@@ -8025,6 +8245,10 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
      never interrupts reading. When ready it surfaces a "watch" pill and a play-when-you-want player. */
   function mountInline(bp,text,topicId,hostId,poster){                           // render the paused inline player into hostId
     var host=document.getElementById(hostId); if(!host) return null;
+    // a saved/legacy record with no steps used to throw inside mountPlayer, leaving a blank host and no
+    // button (vizWatchSaved already hid it) — a silent dead end. Say so instead.
+    if(!bp||!bp.narration_steps||!bp.narration_steps.length){
+      host.innerHTML='<div class="vizgen err">This explainer didn\'t save properly — build it again.</div>'; return null; }
     BP=bp; SRC=text||''; applyLayout(bp);
     VIZ_TID=topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
     try{ vizWarmVoices(); }catch(e){}                                            // pre-generate voices so ▶ plays instantly
@@ -8035,7 +8259,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     if(poster){ var stg=document.getElementById('vizStage'); if(stg){         // video-style poster with a big play button
       var pv=document.createElement('div'); pv.className='vizposter';
       pv.innerHTML='<div class="vpbtn">▶</div><div class="vplab">Watch how to reach the answer</div>';
-      stg.appendChild(pv); pv.onclick=function(){ try{ if(!playing)play(); }catch(e){} }; } }
+      stg.appendChild(pv); pv.onclick=function(){ try{ if(window.unlockAudio)unlockAudio(); }catch(e){} try{ if(!playing)vizPlayWhenReady(); }catch(e){} }; } }
     return host;
   }
   window.aiVisualizeInline=async function(text, topicName, topicId, hostId, cardId){
@@ -8051,12 +8275,17 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       var host2=mountInline(bp,text,topicId,hostId,true);
       try{ setQuota(resp.viz_quota); }catch(e){}
       if(host2)showReadyPill(host2);
-    }catch(e){ var h=document.getElementById(hostId); if(h) h.innerHTML='<div class="vizgen err">'+esc((e&&e.message)||'Something went wrong')+'</div>'; }
+    }catch(e){ var h=document.getElementById(hostId);
+      if(h) h.innerHTML='<div class="vizgen err">'+esc((e&&e.message)||'Something went wrong')+'</div>';
+      if(e&&e.status===429) vizLimitHit(e); }
   };
   window.aiVisualizeInlineSaved=function(cardId, topicId, hostId){               // replay the card's saved explainer — instant, no rebuild
-    var rec=(window.DATA&&DATA.cardViz)?DATA.cardViz[cardId]:null; if(!rec||!rec.bp) return;
+    var rec=(window.DATA&&DATA.cardViz)?DATA.cardViz[cardId]:null;
+    if(!rec||!rec.bp){ var h0=document.getElementById(hostId);   // the "Watch your explainer" button is already hidden — never leave a blank gap
+      if(h0) h0.innerHTML='<div class="vizgen err">That saved explainer is missing — tap the card again to rebuild it.</div>'; return; }
+    try{ if(window.unlockAudio)unlockAudio(); }catch(e){}                          // still inside the "watch" tap — the 300ms timer below is not
     var host=mountInline(rec.bp, rec.text||'', topicId, hostId);
-    if(host){ setTimeout(function(){ try{ if(!playing)play(); }catch(e){} },300); }   // explicit "watch" → start playing
+    if(host){ setTimeout(function(){ try{ if(!playing)vizPlayWhenReady(); }catch(e){} },300); }   // explicit "watch" → play once step 0's clip is cached (no dead air)
   };
   function showReadyPill(host){
     var old=document.getElementById('vizReadyPill'); if(old)old.remove();
@@ -8064,7 +8293,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     if(inView()) return;                                                         // already on screen — no pill needed
     var pill=document.createElement('div'); pill.id='vizReadyPill'; pill.className='vizreadypill';
     pill.innerHTML='🎬 Your explainer is ready ↓';
-    pill.onclick=function(){ try{host.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){} pill.remove(); setTimeout(function(){ try{ if(!playing)play(); }catch(e){} },700); };
+    pill.onclick=function(){ try{ if(window.unlockAudio)unlockAudio(); }catch(e){} try{host.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){} pill.remove(); setTimeout(function(){ try{ if(!playing)vizPlayWhenReady(); }catch(e){} },700); };
     document.body.appendChild(pill);
     var iv=setInterval(function(){ if(!document.getElementById('vizReadyPill')){clearInterval(iv);return;} if(inView()){ pill.remove(); clearInterval(iv); } },700);
     setTimeout(function(){ if(pill&&pill.parentNode)pill.remove(); clearInterval(iv); },15000);

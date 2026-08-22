@@ -72,6 +72,9 @@
         var ea = allTopics.find(function(x){ return x.id === t.id; });
         // don't wipe a transcript we already loaded with a cache/refresh that lacks it
         if(fields.transcript == null){ if(em && em.transcript) fields.transcript = em.transcript; else if(ea && ea.transcript) fields.transcript = ea.transcript; }
+        // same for extras (q-bank / written test): buildExtraNow caches them on the topic locally,
+        // and a refresh whose payload lacks them must not wipe them back to "not built yet"
+        if(fields.extras == null){ if(em && em.extras) fields.extras = em.extras; else if(ea && ea.extras) fields.extras = ea.extras; }
         if(em) Object.assign(em, fields); else mod.topics.push(fields);
         if(ea) Object.assign(ea, fields); else allTopics.push(Object.assign({ subject:subj, module:mod.name }, fields));
         changed++;

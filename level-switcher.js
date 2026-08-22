@@ -27,14 +27,26 @@
     sheet.appendChild(el("div","color:#5b6b86;font-size:13.5px;margin-bottom:14px","Everything you build is kept for every level, forever."));
 
     var list = el("div","");
-    LEVELS.filter(function(L){ return L >= startLv; }).forEach(function(L){
+    // AUTH-09: with no current level (MB_SYNC.init bailed — no account row, no active profile,
+    // or the level_profiles read failed) curId/curLevel are null, so EVERY row fell through to
+    // the locked branch: six 🔒 rows, no "Go to next level", and no explanation whatsoever.
+    if(curLevel==null || !curId){
+      list.appendChild(el("div","border:1px solid #ffd9cf;background:#fff5f2;color:#b3391f;border-radius:12px;padding:14px;font-size:14px;line-height:1.5;font-weight:600",
+        "We couldn't load your levels right now.<br><span style='font-weight:500;color:#5b6b86'>Check your connection and reopen the app. If you've just created your account, finish picking your level and courses first.</span>"));
+    }
+    LEVELS.filter(function(L){ return (curLevel!=null && curId) && L >= startLv; }).forEach(function(L){
       var p = byLevel[L];
       var isCurrent = p && p.id===curId;
       var isDone    = p && !isCurrent;                     // entered before → completed/view-only
       var isLocked  = !p;                                  // above current, not yet unlocked
       var label, right, color, bg, clickable=false;
 
-      if(isCurrent){ label=L+" level"; right='<span style="color:#4f46e5;font-weight:800">current</span>'; color="#4f46e5"; bg="#eef0fe"; }
+      // AUTH-10: a student who switches BACK to a completed level makes it "current" while it is
+      // still archived — every import/AI feature is off there and nothing said so.
+      var curIsArchived = false;
+      try{ curIsArchived = !!(p && (p.archived || (MB_SYNC.currentProfileArchived && MB_SYNC.currentProfileArchived()))); }catch(e){}
+      if(isCurrent && curIsArchived){ label=L+" level"; right='<span style="color:#5b6b86;font-weight:700">current · view only</span>'; color="#4f46e5"; bg="#f7f8fb"; }
+      else if(isCurrent){ label=L+" level"; right='<span style="color:#4f46e5;font-weight:800">current</span>'; color="#4f46e5"; bg="#eef0fe"; }
       else if(isDone){ label=L+" level"; right='<span style="color:#5b6b86;font-weight:600">✓ view only · tap to open</span>'; color="#e7ebf3"; bg="#fff"; clickable=true; }
       else { label='🔒 '+L+" level"; right='<span style="color:#9aa6bd;font-weight:600">locked</span>'; color="#eef0f4"; bg="#f7f8fb"; }
 

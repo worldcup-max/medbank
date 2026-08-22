@@ -305,10 +305,19 @@
   }
 
   async function showAccount(sb){
-    var s=card({ title:"Your account", sub:"You're signed in and syncing." });
     var st=(window.MB_SYNC&&MB_SYNC.status)?MB_SYNC.status():{};
-    s.appendChild(el("div","background:#e6f6f3;color:#0b6b60;border-radius:11px;padding:11px 13px;font-size:13.5px;font-weight:600",
-      "✓ Sync on"+(st.level?(" · "+st.level+" level"):"")+(st.entitled? "":" · trial ended")));
+    // AUTH-04: only claim sync when sync is actually running. Being signed in is NOT enough —
+    // every early return in MB_SYNC.init leaves it inert, and this sheet used to say
+    // "signed in and syncing" while the student's work went nowhere but this device.
+    var s=card({ title:"Your account", sub: st.syncing ? "You're signed in and syncing."
+                                                       : "You're signed in, but your work isn't syncing yet." });
+    if(st.syncing){
+      s.appendChild(el("div","background:#e6f6f3;color:#0b6b60;border-radius:11px;padding:11px 13px;font-size:13.5px;font-weight:600",
+        "✓ Sync on"+(st.level?(" · "+st.level+" level"):"")+(st.entitled? "":" · trial ended")));
+    } else {
+      s.appendChild(el("div","background:#fdece7;color:#b3391f;border-radius:11px;padding:11px 13px;font-size:13.5px;font-weight:600;line-height:1.45",
+        "⚠ Not syncing — your progress is saved on this device only.<br><span style='font-weight:500'>Check your connection and reopen the app. If it keeps saying this, finish setting up your level and courses.</span>"));
+    }
     btn(s,"Switch level").onclick=function(){ close(); if(window.MB_openLevelSwitcher) MB_openLevelSwitcher(); };
     var out=btn(s,"Log out"); out.onclick=async function(){ try{ await sb.auth.signOut(); }catch(_){} updateChip(); close(); };
     link(s,"Close").onclick=close;
@@ -348,7 +357,10 @@
       menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6",
         "<div style='font-weight:800;color:"+C.ink+"'>"+esc(name||"Your account")+"</div>"+
         "<div style='font-size:12.5px;color:"+C.dim+";word-break:break-all'>"+esc(email)+"</div>"+
-        "<div style='font-size:12px;color:"+C.teal+";margin-top:4px;font-weight:600'>✓ Synced"+(st.level?(" · "+esc(st.level)+" level"):"")+"</div>"));
+        // AUTH-04 — don't say "Synced" unless MB_SYNC is actually active on this device
+        (st.syncing
+          ? "<div style='font-size:12px;color:"+C.teal+";margin-top:4px;font-weight:600'>✓ Synced"+(st.level?(" · "+esc(st.level)+" level"):"")+"</div>"
+          : "<div style='font-size:12px;color:#b3391f;margin-top:4px;font-weight:600'>⚠ Not syncing — this device only</div>")));
     } else {
       menu.appendChild(el("div","padding:14px 16px;border-bottom:1px solid #f0edf6;font-weight:700;color:"+C.ink,"Not signed in"));
     }
@@ -386,8 +398,14 @@
     if(!chip) return;
     var sb=client(); if(!sb){ chip.style.display="none"; return; }
     try{ var ses=await sb.auth.getSession();
-      if(ses.data.session){ var u=ses.data.session.user; chip.textContent=initialOf((u.user_metadata&&u.user_metadata.full_name),u.email); }
-      else { chip.textContent="☁"; }
+      if(ses.data.session){ var u=ses.data.session.user; chip.textContent=initialOf((u.user_metadata&&u.user_metadata.full_name),u.email);
+        // publish the signed-in name so app.html can greet the actual student (cached so the FIRST paint has it too)
+        try{ var fn=(u.user_metadata&&u.user_metadata.full_name)||"";
+          window.MB_USER={ name:fn, email:u.email||"" };
+          if(fn) localStorage.setItem("mb_user_name", fn); else localStorage.removeItem("mb_user_name");
+        }catch(_){}
+      }
+      else { chip.textContent="☁"; try{ window.MB_USER=null; localStorage.removeItem("mb_user_name"); }catch(_){} }
       chip.style.background=C.violet;
     }catch(_){}
   }
@@ -398,7 +416,22 @@
   if(typeof document!=="undefined"){
     if(configured()) document.addEventListener("DOMContentLoaded", function(){
       setTimeout(ensureChip, 800);
-      try{ var sbr=client(); if(sbr && sbr.auth && sbr.auth.onAuthStateChange){ sbr.auth.onAuthStateChange(function(ev){ if(ev==="PASSWORD_RECOVERY"){ try{ renderResetPassword(sbr); }catch(_){} } }); } }catch(_){}
+      try{ var sbr=client(); if(sbr && sbr.auth && sbr.auth.onAuthStateChange){ sbr.auth.onAuthStateChange(function(ev, session){
+        if(ev==="PASSWORD_RECOVERY"){ try{ renderResetPassword(sbr); }catch(_){} return; }
+        // Account-isolation guard for OUT-OF-BAND session changes (e.g. another tab/window signs in
+        // as a different user, or a sign-out elsewhere). The normal in-app login path already runs
+        // MB_SYNC.init() → uid-guard → reload; this covers the paths that don't. Without it, the tab
+        // keeps rendering the PREVIOUS account's in-memory DATA (and could push it over the new
+        // account's cloud state). We only reload on a genuine account CHANGE, so no reload loop.
+        try{
+          var prev = localStorage.getItem("mb_current_uid");
+          var now  = session && session.user && session.user.id;
+          if((ev==="SIGNED_IN"||ev==="TOKEN_REFRESHED"||ev==="USER_UPDATED") && now && prev && now!==prev){
+            location.reload(); return;
+          }
+          if(ev==="SIGNED_OUT" && prev){ try{ localStorage.removeItem("mb_current_uid"); }catch(_){} location.reload(); return; }
+        }catch(_){}
+      }); } }catch(_){}
       try{
         var wantsWelcome = /(\?|&)welcome=1\b/.test(location.search) || /welcome/.test(location.hash);
         if(wantsWelcome){ var sb=client(); if(sb) loadServerTemplates(sb); setTimeout(openWelcome, 700); }

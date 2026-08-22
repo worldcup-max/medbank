@@ -30,8 +30,12 @@
   async function courses(){
     if(!window.__mbSB) return [];
     var pid = profileId(); if(!pid) return [];
-    var r = await window.__mbSB.from("courses").select("id,name").eq("level_profile_id", pid).order("position");
-    return r.data || [];
+    /* Never let a network/Supabase rejection escape: openImport awaits this before it
+     * appends the sheet, so a throw here meant tapping "Add a lecture" did nothing at all. */
+    try{
+      var r = await window.__mbSB.from("courses").select("id,name").eq("level_profile_id", pid).order("position");
+      return r.data || [];
+    }catch(e){ return []; }
   }
   /* Create a course on the fly. Until now courses could ONLY be made during signup
    * (saveOnboarding in auth-ui.js), so a student with no course - or one taking a new
@@ -54,9 +58,13 @@
 
   async function lecturersFor(course_id){
     if(!window.__mbSB || !course_id || course_id==="__new__") return [];
-    var r = await window.__mbSB.from("topics").select("lecturer").eq("course_id", course_id);
+    var r;
+    /* same reason as courses(): a rejection here aborted openImport before the sheet
+     * was ever added to the page, and left the lecturer <select> completely empty. */
+    try{ r = await window.__mbSB.from("topics").select("lecturer").eq("course_id", course_id); }
+    catch(e){ return []; }
     var seen = {}, out = [];
-    (r.data || []).forEach(function(t){ var n=(t.lecturer||"").trim(); if(n && !seen[n.toLowerCase()]){ seen[n.toLowerCase()]=1; out.push(n); } });
+    ((r && r.data) || []).forEach(function(t){ var n=(t.lecturer||"").trim(); if(n && !seen[n.toLowerCase()]){ seen[n.toLowerCase()]=1; out.push(n); } });
     return out.sort();
   }
 
@@ -141,7 +149,17 @@
       function seg(id,label){
         var b=el("button","flex:1;min-width:70px;border:1px solid "+LINE+";background:#fff;color:"+INK+";border-radius:10px;padding:9px 6px;font-weight:700;font-size:13px;cursor:pointer",label);
         b.dataset.m=id;
-        b.onclick=function(){ if(id==="record"){ if(o.parentNode) document.body.removeChild(o); if(window.MB_openRecorder) MB_openRecorder(); return; } srcMode=id; paintSeg(); };
+        /* Only tear this sheet down if the recorder actually exists. If lecture-record.js
+         * failed to load, the old code closed the sheet and opened nothing — the student
+         * lost everything they'd typed and got no feedback (and in mandatory mode, no way back). */
+        b.onclick=function(){
+          if(id==="record"){
+            if(!window.MB_openRecorder){ show("Recording isn't available right now — reload the app, or use File / YouTube / Paste."); return; }
+            if(o.parentNode) document.body.removeChild(o);
+            MB_openRecorder(); return;
+          }
+          srcMode=id; paintSeg();
+        };
         return b;
       }
       [seg("file","📄 File"),seg("youtube","▶ YouTube"),seg("paste","✍ Paste"),seg("record","🎙 Record")].forEach(function(b){ segWrap.appendChild(b); });
@@ -216,8 +234,11 @@
         if(recAudio){ body.audio_base64 = await fileToB64(recAudio); body.audio_mime = recMime; }
         if(!recAudio && srcMode==="youtube"){ body.youtube_url = ytVal; }
         if(!recAudio && srcMode==="paste"){ body.text = pasteVal; }
-        // files: used in file mode, and as an optional add-on to a recording
-        var files=usableFiles(file.files);
+        // files: used in file mode, and as an optional add-on to a recording.
+        // The file <input> keeps its selection when the student switches to YouTube/Paste
+        // (it's only hidden), so without this mode check an abandoned PDF was silently
+        // uploaded alongside the link/text and fed to the model.
+        var files=(recAudio || srcMode==="file") ? usableFiles(file.files) : [];
         var pdf=files.find(isPdfFile);
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }
         var imgs=files.filter(isImgFile);
@@ -231,16 +252,32 @@
 
         var token=null;
         if(window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); token=ses.data.session && ses.data.session.access_token; }
+        /* Without this we sent the literal header "Bearer null" and the student got the
+         * server's raw 401 instead of being told their session had expired. */
+        if(!token){ show("You're signed out — sign in and try again."); go.disabled=false; go.textContent="Build my study set"; return; }
         var resp=await fetch(CFG.IMPORT_API.replace(/\/$/,"")+"/import",{
           method:"POST", headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token }, body:JSON.stringify(body) });
-        var out=await resp.json();
+        /* A proxy 413/502/504 returns HTML, not JSON: resp.json() then threw and the
+         * student saw "Unexpected token '<'…". Fall back to a message about the status. */
+        var out;
+        try{ out = await resp.json(); }catch(e){ out = null; }
+        if(!out){
+          show(resp.ok ? "The build finished but the reply couldn't be read. Check your topics before rebuilding."
+                       : (resp.status===413 ? "That upload is too large. Try a smaller PDF or fewer photos."
+                                            : "The import server didn't respond properly ("+resp.status+"). Try again in a moment."));
+          go.disabled=false; go.textContent="Build my study set"; return; }
         if(!resp.ok){
           if(out.error==="upgrade" && window.MB_PAYWALL){ if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "Subscribe"); return; }
           show(out.reason||out.error||"That didn't work. Try again."); go.disabled=false; go.textContent="Build my study set"; return; }
         if(o.parentNode) document.body.removeChild(o);
         try{ if(typeof window.onImported==="function") window.onImported(out.topic_id); }catch(e){}
         try{ location.hash="#/subject/course_"+course_id; }catch(e){}
-        alert("Done! Built "+out.primer+" primer + "+out.recall+" recall cards for "+topicName+". Open it to start studying.");
+        /* out.primer / out.recall are not guaranteed — the old line happily said
+         * "Built undefined primer + undefined recall cards". */
+        var _p=Number(out.primer), _r=Number(out.recall);
+        alert(isFinite(_p)&&isFinite(_r)
+          ? ("Done! Built "+_p+" primer + "+_r+" recall cards for "+topicName+". Open it to start studying.")
+          : ("Done! Built your study set for "+topicName+". Open it to start studying."));
       }catch(e){ show(e.message||"Something went wrong."); go.disabled=false; go.textContent="Build my study set"; }
     };
     s.appendChild(go);
