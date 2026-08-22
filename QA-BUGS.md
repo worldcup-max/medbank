@@ -4272,3 +4272,20 @@ The intelligence check passes: Management ranks **above** Investigation despite 
 **Observed (live):** for the Investigation gap concept, `fixQueue` offered "Learn → Practice → Retest", but calling `gapStart` returned early (Bronchiolitis has no second Investigation question with the *same* skill+tag+objective to build a distinct practice+retest). Because `fixQGo` calls `qbExit()` first, clicking the item would close the results screen and open **nothing** — a silent dead click (exactly the failure mode we were guarding against).
 **Fix:** made the queue availability-aware — `fixQueue` computes `canLoop = (gap && a distinct sibling exists)`; `fixQAction` routes a no-material gap to "Practise this" (a focused drill) instead of the loop; and `fixQGo` now treats `gapStart` as returning a boolean and **always falls back to `smartDrillDim`** if the loop can't build. No queue item can ever be a dead click now.
 **Verified:** `qa/flow-e2e.mjs` extended with a "gap with no material → falls back to a drill (no silent fail)" scenario; all four harnesses pass.
+
+---
+
+# 🔧 IMPORT-01 — ROOT CAUSE FOUND + FIXED — 2026-08-22 (import-server)
+
+**Failure:** POST `/import` with a premium account → 502 "The AI returned an unreadable response" after ~402s; no topic created.
+
+**Root cause (confirmed in code):** the base import's `generate()` call (`server.mjs` ~:833) did NOT pass `json:true`, so `response_format:{type:"json_object"}` was never set (:240). The premium tier uses `PREMIUM_MODEL = deepseek-v4-pro`, a **reasoning** model — without JSON mode it emits chain-of-thought prose, so `JSON.parse(raw.slice(first"{", last"}"))` fails ("bad json"). The 2-attempt retry (BUG-03) repeated it → two slow reasoning calls ≈ 402s → 502. The code comment at :239 literally names this ("eats the whole token budget before any JSON is emitted — the cause of parse failed on reasoning models"), and the working Q-bank path already passed `json:true` — the base import was the one call that didn't.
+
+**Fix (layered so it can't recur regardless of model behaviour):**
+1. **Force JSON mode on the base import** — added `json:true` to the `/import` `generate()` call. Suppresses the reasoning preamble; also makes the build much faster.
+2. **`extractJsonObject()`** — a robust extractor replacing the naive `slice(indexOf("{"), lastIndexOf("}"))`. Strips `<think>…</think>` and ```` ```json ```` fences, scans for BALANCED top-level `{...}` respecting strings/escapes, and returns the LARGEST parseable object (so a narrated inline example never wins over the real study set). Returns null on genuinely-unparseable/truncated output → clean retry, never a throw.
+3. **`generate()` defensive fallback** — if a model/proxy rejects `response_format:json_object` (a reasoner that doesn't support it, or DeepSeek wanting the word "json" in the prompt), it drops JSON mode and retries once; robust extraction then handles the raw reply. No build fails over a formatting hint.
+
+**Verified:** `node --check import-server/server.mjs` OK; new `qa/extract-json.mjs` (10/10) proves the extractor survives reasoning prose, `<think>` blocks, code fences, prose before/after, braces inside strings, nested objects, inline-example-then-real, and truncated/garbage → null. Added to the watchdog's harness set. **Not yet deployed** — needs commit + push (Render auto-redeploys the import-server from `main`).
+
+**Config recommendation (not code — for Frank):** `MEDBANK_PREMIUM_MODEL` (and `MEDBANK_EXTRAS_MODEL`) point at reasoning models (`deepseek-v4-pro`/`-flash`) — these are slow and unnecessary for a structured-JSON build. Consider a non-reasoning model (e.g. `deepseek-chat`) for the import + extras builds: much faster, and the JSON is cleaner. Also confirm those exact model IDs are valid on the DeepSeek endpoint. The code now works either way, but a non-reasoning model removes the 6-minute build time.

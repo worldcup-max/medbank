@@ -238,14 +238,26 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
   // JSON mode: forces a clean JSON object and suppresses chain-of-thought preamble that otherwise
   // eats the whole token budget before any JSON is emitted (the cause of "parse failed" on reasoning models)
   if(json) body.response_format = { type:"json_object" };
-  const ctrl = new AbortController(); const to = setTimeout(()=>ctrl.abort(), GEN_TIMEOUT_MS);   // never hang forever on a stalled model call
-  let r;
-  try{
-    r = await fetch(base+"/chat/completions", { method:"POST",
-      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body), signal: ctrl.signal });
-  }catch(e){ clearTimeout(to); throw new Error((isDeep?"DeepSeek":"OpenAI")+" request "+(e&&e.name==="AbortError"?("timed out after "+Math.round(GEN_TIMEOUT_MS/1000)+"s"):("failed: "+(e&&e.message||e)))); }
-  clearTimeout(to);
-  const j = await r.json().catch(()=>({}));
+  async function callOnce(){
+    const ctrl = new AbortController(); const to = setTimeout(()=>ctrl.abort(), GEN_TIMEOUT_MS);   // never hang forever on a stalled model call
+    let rr;
+    try{
+      rr = await fetch(base+"/chat/completions", { method:"POST",
+        headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+key }, body:JSON.stringify(body), signal: ctrl.signal });
+    }catch(e){ clearTimeout(to); throw new Error((isDeep?"DeepSeek":"OpenAI")+" request "+(e&&e.name==="AbortError"?("timed out after "+Math.round(GEN_TIMEOUT_MS/1000)+"s"):("failed: "+(e&&e.message||e)))); }
+    clearTimeout(to);
+    return { r:rr, j: await rr.json().catch(()=>({})) };
+  }
+  let { r, j } = await callOnce();
+  // Some models/proxies reject response_format:json_object (a reasoning model that doesn't support
+  // it, or DeepSeek wanting the literal word "json" in the prompt). Never fail the build over the
+  // formatting hint — drop json mode and retry once; robust extraction then handles the raw reply.
+  if(!r.ok && body.response_format){
+    const em = ((((j||{}).error)||{}).message || "").toLowerCase();
+    if(/response_format|json.?object|json mode|does not support|not support|must contain the word/.test(em)){
+      delete body.response_format; ({ r, j } = await callOnce());
+    }
+  }
   if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
   const msg=(((j.choices||[])[0]||{}).message)||{};
   // reasoning models sometimes leave `content` empty and put the answer in `reasoning_content`
@@ -304,6 +316,29 @@ function salvageItems(text){
     else if(ch===']' && depth===0){ break; }
   }
   return out;
+}
+/* Robustly pull the intended JSON OBJECT out of a model reply. Survives reasoning models that
+ * narrate first, wrap output in ```json fences, emit <think>…</think>, or trail prose after the
+ * JSON. Scans for the first BALANCED top-level {...} (respecting strings/escapes) and returns the
+ * first one that parses; falls back to a naive first{…last} slice. Returns null only if nothing
+ * parseable exists. This is the safety net that stops one stray reply from failing a whole build. */
+function extractJsonObject(raw){
+  let t = String(raw||"");
+  t = t.replace(/<think>[\s\S]*?<\/think>/gi, " ").replace(/<\/?think>/gi, " ");   // strip reasoning wrappers
+  t = t.replace(/```+\s*json/gi, " ").replace(/```+/g, " ");                        // strip markdown code fences
+  if(t.indexOf("{") < 0) return null;
+  // Collect every balanced top-level {...} that parses and keep the LARGEST — a reasoning model may
+  // narrate a tiny example object before the real one, and the real study set (note + decks) dwarfs it.
+  let best=null, bestLen=-1, depth=0, inStr=false, esc=false, start=-1;
+  for(let k=0; k<t.length; k++){ const ch=t[k];
+    if(inStr){ if(esc) esc=false; else if(ch==='\\') esc=true; else if(ch==='"') inStr=false; continue; }
+    if(ch==='"'){ inStr=true; continue; }
+    if(ch==='{'){ if(depth===0) start=k; depth++; }
+    else if(ch==='}'){ if(depth>0){ depth--; if(depth===0 && start>=0){ const slice=t.slice(start,k+1);
+      try{ const obj=JSON.parse(slice); if(slice.length>bestLen){ best=obj; bestLen=slice.length; } }catch(_){} start=-1; } } }
+  }
+  if(best) return best;
+  try{ return JSON.parse(t.slice(t.indexOf("{"), t.lastIndexOf("}")+1)); }catch(_){ return null; }   // last resort
 }
 /* generate one optional extra (fill_blank / written) from the built note; returns items[] or null */
 async function buildExtra(kind, level, note, model){
@@ -830,9 +865,14 @@ app.post("/import", async (req,res)=>{
       const fixNote = attempt>1
         ? "\n\nIMPORTANT — your previous output was rejected for: "+lastErrs.join("; ")+". Return STRICT valid JSON that fixes ALL of these. Requirements: note_md and simplified_md must each be at least 200 characters; include a primer deck and a recall deck; EVERY recall card must have exactly 4 items in \"opts\", an integer \"ans\" between 0 and 3, and an answer note \"a\"; every primer card must have q, lecturer, explain and tie."
         : "";
-      const gen = await generate({ model, prompt: prompt + fixNote, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: attempt>1 ? 0.35 : (Number(pt.data.temperature) || 0.3) });
-      const raw = gen.text || "", s=raw.indexOf("{"), e=raw.lastIndexOf("}");
-      let cand=null; try{ cand=JSON.parse(raw.slice(s,e+1)); }catch(err){ lastErr="bad json"; lastErrs=["the AI returned an unreadable (non-JSON) response"]; continue; }
+      // json:true forces response_format=json_object, which suppresses the chain-of-thought
+      // preamble a reasoning model (e.g. deepseek-v4-pro on the premium tier) otherwise emits —
+      // the exact cause of the "unreadable response" 502 (reasoning prose, never parseable JSON,
+      // 400s of it across two attempts). extractJsonObject is the belt-and-braces net for anything
+      // that still slips a fence or a stray sentence around the JSON.
+      const gen = await generate({ model, prompt: prompt + fixNote, parts, images, max_tokens: pt.data.max_tokens || 16000, temperature: attempt>1 ? 0.35 : (Number(pt.data.temperature) || 0.3), json:true });
+      const cand = extractJsonObject(gen.text || "");
+      if(!cand){ lastErr="bad json"; lastErrs=["the AI returned an unreadable (non-JSON) response"]; continue; }
       const errs = validateObj(cand);
       if(!errs.length){ obj=cand; winGen=gen; break; }
       lastErr=errs.join("; "); lastErrs=errs;
