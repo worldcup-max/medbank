@@ -4585,3 +4585,702 @@ Two defects at `:4728` (`return sessionSummary('Back to dashboard','home')`):
 
 ## 🔎 To verify (not a finding)
 HRD-01 is reproducible without a device: load the app on `#/hard` from a cold cache and check `S.items.length===0 && allTopics.length>0` in the console after content settles. If it reproduces, it also confirms NTF-02 by the same mechanism.
+
+---
+
+# Flow 19+ item 23 — `leeches` (leech pool) — code review, 2026-08-22
+**Scope read (log-only, nothing changed):** `LEECH_LAPSES` / `leechItems` / `leechCount` (`app.html:1597-1602`), the shared resolver `cardIndex`/`itemById` (`:1426-1433`), `startLeeches` (`:4607-4611`), `pageLeeches` (`:5736-5747`), the hub 🩸 button (`:4884`), `recallTabs` (`:6315`), route wiring (`:6341`, `:6366`).
+**Part A this run:** all 5 harnesses exit 0, `node --check import-server/server.mjs` clean, all 3 of `app.html`'s inline scripts parse. No regression to log.
+
+## 🔴 LCH-01 — the card index is memoised forever and is empty on first paint → Leeches (and Mistakes, and notes) can be silently dead for a whole page-load — **HIGH**
+`cardIndex()` (`app.html:1428`) caches into `_cardIx` on first call and **`_cardIx` is never reset anywhere in the repo** (only assignment sites: `:1427` init, `:1428` build). Meanwhile the boot `render()` at `app.html:6559` runs **inside the inline script, before `content-loader.js` is even fetched** (`:6579`), so `allTopics` is still `[]` — the app ships no static topic seed (`const allTopics=[]` at `:1109`; `content.js` is a 104-byte shim).
+
+So any first paint on a route that touches `itemById` builds and permanently caches an **empty index**:
+- reload / bookmark / PWA-shortcut on `#/leeches` → `pageLeeches` → `leechItems` → every `itemById` returns `null` → the page renders the cheerful **"✓ No leeches — well done."** empty state for a student who has dozens;
+- first paint on `#/today` → `practicePanel` computes `leechCount()` unconditionally (`:4880`, it is not tab-gated) → 🩸 button renders **disabled, "none yet"**, and stays that way;
+- the same poisoned index silently kills `pageMistakes` and the notes resolver for the rest of the session.
+
+`content-loader.js` calls `render()` after `hydrateFromCache()` (`:159`) and after `loadProfileContent()` (`:148`), but a re-render **cannot** repair this — `cardIndex()` short-circuits on the truthy cached `{}`. Only a full reload *onto a different route first* clears it.
+
+Second-order, same root cause: `applyContent` upserts with `Object.assign(ea, fields)` (`content-loader.js:79`), which **replaces** `recall`/`primer` with freshly-built card objects. After any background refresh or a new import (`window.onImported` → `loadProfileContent`, `:157`), the stale `_cardIx` still points at the *old* card objects — newly-imported leeches never appear, and edited cards render their pre-edit `q`/`a` text in Leeches/Mistakes/Notes until the tab is reloaded.
+
+**Why it matters:** this is the pilot's "cards quietly costing you marks" feature reporting a clean bill of health to a student whose leech pile is growing. It is silent — no error, no empty-ish state, an actively *congratulatory* one. Same family as HRD-01/NTF-02, but worse: the memoisation makes it sticky for the whole page-load instead of just the first frame.
+
+**PROPOSED fix (two lines, both outside the frozen engine):**
+1. `app.html:1428` — never cache an index built from nothing:
+   `function cardIndex(){ if(_cardIx) return _cardIx; if(!allTopics.length) return {}; _cardIx={}; …`
+2. add `window.MB_invalidateCardIndex=function(){ _cardIx=null; };` next to `:1433`, and call it in `content-loader.js` `applyContent` immediately before `recomputeStats()` (`:81`), guarded: `try{ if(window.MB_invalidateCardIndex) window.MB_invalidateCardIndex(); }catch(e){}`.
+Both are additive and reversible; neither touches `smart*`/`adapt*`.
+
+## 🟠 LCH-02 — the leech pool is the 13th pool missing the `isFlagged` filter, and it is the one pool a flagged card can never escape — **MEDIUM-HIGH**
+`leechItems()` (`app.html:1598-1601`) selects purely on `(st.lapses||0)>=LEECH_LAPSES` — no `!isFlagged(id)`. Every neighbouring pool has it: `planNew` (`:1650`), the due walk (`:1666`), `:1685`, `:1759`, `:1784`, `startDeck` (`:4289`), `examPool` (`:4632`), `unseenCount` (`:6260`). (REV-04 family — count is now 13 pools found.)
+
+**Why it matters:** a card the student explicitly reported as *wrong* is hidden from study everywhere else, but here it still (a) inflates the hub's 🩸 count, (b) is listed on the Leeches page with its bad question text, and (c) is **served and rated** by `startLeeches()` (`:4608`). Because it is wrong, the student keeps missing it, `rateSRS` (`:1270`) keeps incrementing `lapses`, and the `sort` at `:1601` pins it at the **top** of the list. With no un-flag UI (LIB-01) the student has no exit: the card they already told us is broken becomes the permanent headline of their "cards costing you marks" page.
+
+**PROPOSED fix:** `app.html:1600` → `if(st && (st.lapses||0)>=LEECH_LAPSES && !isFlagged(id)){ … }`. One conjunct, matches the eight existing call sites.
+
+## 🟠 LCH-03 — `lapses` is monotonic, so a leech is a leech for life — the pool can only ever grow — **MEDIUM**
+`lapses` is written in exactly one place, `rateSRS` (`app.html:1270`): `s.lapses=(s.lapses||0)+1`. Nothing anywhere decrements, decays, or resets it — not graduation, not `box>=3`, not the mastery path, not `qbReset`. `leechItems` reads only that counter and ignores the card's *current* state.
+
+**Why it matters:** a card missed four times in week 1 and then answered correctly ten times in a row — box 5, due in a month — is still bleeding 🩸 on the hub and still gets shuffled into "▶ Drill all N leeches". The count is a lifetime-lapse odometer presented as a live worklist, so it climbs monotonically all pilot long, the CTA's promise ("attack them directly") can never be discharged, and the student is repeatedly re-drilled on cards they have already fixed — which is exactly the review time the SRS scheduler was trying to give back. Expect this to read as "the Leeches number never goes down" in pilot feedback.
+
+**PROPOSED fix (pool-side, non-frozen, reversible):** in `leechItems` (`:1600`) skip cards that are currently strong —
+`if(st && (st.lapses||0)>=LEECH_LAPSES && !((st.box||0)>=3 && (st.due||0)>dayNum())){ … }`
+so a leech leaves the list when it graduates and returns the moment it lapses again. Prefer this over zeroing `s.lapses` in `rateSRS`: `lapses` also feeds the shakiness score (`:1698`, `:1704`), the weak-card sort (`:4375`) and `WEAK_PRED` (`:4383`), and resetting it would quietly move those thresholds mid-pilot.
+
+## 🟡 LCH-04 — a leech drill is indistinguishable from the daily session, and a reload silently swaps it for one — **MEDIUM**
+`startLeeches` (`:4609`) sets `mode:'daily', key:'leeches', label:'Leeches'`, then hands off to `#/review`. Two problems:
+- **`S.label` is dead.** It is written by `startLeeches` (`:4609`), `startMistakes` (`:4615`), `startDrill` (`:1706`) and `startRecallSession` (`:4357`) and **read by nothing** — `grep 'S.label'` returns no consumer. `pageReview` (`:4700-4718`) renders the generic daily meter/mix, and `sessionSummary` is called with `('Back to Active Recall','today')` (`:4699`), so finishing a leech drill returns the student to the hub, not to `#/leeches`, with no on-screen indication they were ever in a leech session.
+- **Reload wipes it into a different session, silently.** `pageReview`'s guard is `if(!S || S.mode!=='daily') startRecallSession(0)` (`:4697`) — it keys on `mode`, not `key`. `S` is in-memory only, so a refresh mid-drill (or the SW update banner reloading the tab) drops the leech session and `pageReview` quietly builds an **ordinary time-budgeted daily session** in its place. Same meter, same chrome, different cards — the student believes they are still clearing leeches. Identical exposure for `#/mistakes` (`key:'mistakes'`, same `mode:'daily'`).
+
+**PROPOSED fix:** (a) in `pageReview`, when `S.key!=='recall'` show `esc(S.label)` in the meter row and pass `('Back to leeches','leeches')` to `sessionSummary` for `S.key==='leeches'` (`'mistakes'` likewise); (b) persist `{key,label}` of the live session to `sessionStorage` in `startLeeches`/`startMistakes` and have `pageReview` rebuild the right pool on reload, or — cheaper and safer — have `pageReview` `mbToast('Session restarted as your daily review')` when it rebuilds over a lost non-`recall` key, so the swap is never silent.
+
+## 🟡 LCH-05 — the row's "Open" button hardcodes the recall deck and lands you at card 1 — **LOW-MEDIUM**
+`pageLeeches:5745` renders `onclick="go('study/${it.t.id}/recall')"` for every row, discarding `it.deck` (which `itemById` at `:1433` does resolve) and discarding `it.id`. So (a) a primer-deck leech opens the *recall* deck, and (b) the student who tapped a specific bleeding card is dropped at the top of a full deck with no indication which card they came for — on a 40-card deck that is a hunt, and the page's own copy ("Drill or rewrite them") implies otherwise. `pageMistakes:5758` has the identical line.
+**PROPOSED fix:** `go('study/'+it.t.id+'/'+(it.deck||'recall'))`, and follow up with a card-anchor param (`study/<t>/<deck>?card=<id>`) handled in `startDeck` so "Open" jumps to the card.
+
+## 🟡 LCH-06 — the list caps at 60 but the CTA drills the uncapped pool — **LOW**
+`pageLeeches:5742` renders `items.slice(0,60)`, while the button one line down (`:5746`) says "▶ Drill all **${items.length}** leeches" and `startLeeches()` (`:4608`) shuffles the whole array. Past 60 leeches the student is told a number they cannot see and drilled on cards the page never listed, with no "…and N more" affordance. Cosmetic, but it is also the only signal that the pool has outgrown the page (see LCH-03, which guarantees it eventually will).
+**PROPOSED fix:** append a `…and ${items.length-60} more` row when truncated, or drop the cap and virtualise.
+
+## ✅ Checked and clean (leeches)
+- **Family (b) `box`→`NaN`:** not reachable here. `leechItems` reads only `lapses`, guarded by `(st.lapses||0)`, and `lapses` has exactly one writer (`:1270`) which always produces an integer. A `NaN` `lapses` fails `>=4` and is simply excluded (a miss, not a crash). *If LCH-03's fix is taken, the new `st.box` read must keep the `(st.box||0)` guard for the same reason.*
+- **Families (c) and (d):** unreachable — the route parses no answer key beyond the shared `pickOpt` path and makes no network call, so no non-integer `ans` and no `r.json()`-on-HTML exposure.
+- **Escaping is sound.** `esc` (`:981`) is applied to `it.c.q`, `it.t.name` and `it.t.subject.short`; `it.t.id` reaches an `onclick` attribute at `:5745` but topic ids are server-generated, not free text. No ENT-08-style `innerHTML` sink.
+- **`it.t.subject.short` is safe on imported content.** `applyContent` builds subjects without a `short` (`content-loader.js:60`), but `recomputeStats` backfills `if(!s.short) s.short = s.name` (`:41`) on the same object reference before any render — so no `undefined` chip. (Worth keeping in mind: `esc` is `(s||'')`-guarded, so even a miss degrades to blank, not a throw.)
+- **`startLeeches`'s session shape is correct** — `order` is a fresh identity map, `session.total === items.length`, and `shuf` (`:4605`) mutates the array returned by `leechItems()`, which is freshly built on every call, so the underlying store is never reordered (same guarantee as `startHardQuick`).
+- **`leechItems` degrades safely on orphaned ids.** `DATA.cards` can hold ids for topics that are no longer loaded (level switch, unenrol); `itemById` returns `null` and the entry is skipped rather than throwing. Correct behaviour — but note it is also exactly what makes LCH-01 invisible.
+- **Route wiring is consistent** — `#/leeches` is a first-class `recallTabs` entry (`:6315`), `:6366` prepends the tabs, `:6341` dispatches, and `onStudyScreen` (`:991`) includes it so the study dock/timer engage.
+- **HRD-10 (un-ratable primer cards) does not reproduce here.** Primers are never rated (`canRate = !isP`, `:5008`), `rateSRS` is the only writer of `lapses`, so a primer can never reach 4 lapses — the pool is recall-only in practice, regardless of what `itemById`'s `deck` says. LCH-05 is a correctness nit, not a live dead-weight bug.
+
+## 🔎 To verify (not a finding)
+LCH-01 is reproducible in ~10 seconds with no device and no account: open the app, navigate to `#/leeches` once so cards are known to exist, then **hard-reload directly on `#/leeches`**. If the page shows "No leeches — well done" and `window.__mb` confirms `DATA.cards` still holds `lapses>=4` entries, it reproduces — and `go('mistakes')` in the same tab will also be empty, which confirms the shared-index blast radius.
+
+---
+
+# Flow 27 — Paywall module (`paywall.js`, 51 lines: `guard`, `nudge`, `trialBadge`) — code review, 2026-08-22
+**LOG-ONLY — nothing changed.** ENT-03 and ENT-08 were logged *against* this file from the outside; this is the first line-by-line read. Both are confirmed, and the file turns out to hold the only copy of a product rule that exists nowhere else.
+
+## 🔴 PW-01 — `guard()` has zero call sites, and it is the ONLY place in the entire product that enforces "an archived level is view-only" — **HIGH**
+`grep MB_PAYWALL` across the repo returns exactly four hits: the export (`paywall.js:50`) and three `.nudge(...)` calls (`app.html:2351`, `:8286`, `:8447`, `import-tab.js:270`). **`guard` is never called.** ENT-03 confirmed from inside the file.
+
+The new part is what that costs. `guard`'s archived branch (`:38`) is the *only* archived check in the shipping product:
+- `MB_SYNC.canUseFeatures()` (`sync.js:373`) is the one function that ANDs `entitled` with `!curArchived` — and its only consumer is `guard`. `status().archived` is read by `level-switcher.js` for labelling, never for blocking.
+- The server has no concept of levels at all: `isPremium` (`import-server/server.mjs:85-99`) reads `subscriptions.status` by `account_id` and nothing else — no `profile_id`, no `archived`, no `level_profile` (`grep archived import-server/server.mjs` → 0 hits).
+
+**Why it matters:** a student who has moved up a level can still import into, build q-banks on, podcast and Solve against their **archived** profile, and every one of those writes lands in the old profile's cloud row. Both the client rule and the server rule are absent, so "your old level is view-only" is a promise made only in a nudge string that never renders. It also means every gate in the app is a **post-upload 402** — the student waits through a multi-MB photo upload or a lecture parse before being told no.
+
+**PROPOSED fix:** wire `guard()` at the four token-costing entry points before their network call — Solve (`app.html:2342`), import submit (`import-tab.js`, before the `/import` POST), `/build-extra` (Q-bank + podcast), and the AI tutor send (`app.html:5934`). Do this **after PW-02**, or it will lock out paying students on every cold start.
+
+## 🔴 PW-02 — `guard()` fails CLOSED on a boot race and permanently after any `init()` early return — a paying student is told "Your free trial has ended" — **HIGH**
+`entitled` is initialised `false` (`sync.js:21`) and is only ever assigned inside `init()` after the async `subscriptions` read (`:254-256`). `guard` (`:34-41`) has three states collapsed into two:
+```js
+var st = MB_SYNC.status ? MB_SYNC.status() : {};
+if(st.canUseFeatures) return true;
+if(st.archived) …else nudge("Your free trial has ended", …)
+```
+There is no "not known yet" branch. So:
+- **Boot race:** `MB_SYNC.init()` runs on `DOMContentLoaded` (`app.html:6581`) and awaits a network round trip. Anything tapped before it resolves sees `entitled=false` → **"Your free trial has ended"** shown to a Premium subscriber. On a slow connection this is the whole first few seconds of every session.
+- **Permanent, not transient:** AUTH-04 established that *every* early return in `init()` leaves the module half-initialised — including the half-onboarded state ONB-01 creates on every email-verified signup. Those paths never reach `:254`, so `entitled` stays `false` **for the whole session**, and `guard` would refuse the student indefinitely with a copy line that is simply false.
+- **The `{}` default lands on the wrong branch too:** if `MB_SYNC` exists but `status` doesn't, `st` is `{}` → `canUseFeatures` undefined → `archived` undefined → trial-ended nudge. The shape guard is right; the default is not.
+- Note the asymmetry with AUTH-08: a *logged-out* student is waved straight through (`:35`), while a logged-in paying one is blocked. The gate is backwards in exactly the cases that matter.
+
+**PROPOSED fix:** have `status()` expose readiness (it already returns `syncing:!!ready` from the AUTH-04 fix) and make `guard` fail **open** until entitlement is actually known:
+```js
+var st = (MB_SYNC.status && MB_SYNC.status()) || {};
+if(st.canUseFeatures) return true;
+if(!st.syncing && !st.profileId) return true;   // entitlement not resolved yet — don't accuse
+```
+The server's 402 is still the backstop, so failing open here costs nothing and removes the false accusation.
+
+## 🟠 PW-03 — the archived nudge's button says "Go to current level" and opens the pricing page instead — **MEDIUM**
+`guard` (`:38`) passes `"Go to current level"` as the CTA, but `go.onclick` (`:22`) is hardcoded for one destination:
+```js
+go.onclick=function(){ var u=CFG.WEBSITE_URL||…; window.open(u+"#pricing","_blank"); … };
+```
+The `cta` argument only ever changes the **label**. So an archived-level student is told "Your notes and progress here are saved. This feature runs on your current level" — correct, actionable advice — and the button that offers to take them there opens `https://medbank.com.ng#pricing` in a new tab, i.e. asks a paying student to buy the thing they already have. The route they needed exists and is one call away: `window.MB_openLevelSwitcher()` (`level-switcher.js:63`), whose rows call `MB_SYNC.switchProfile(p.id)`.
+
+**Why it matters:** it is the second dead-end CTA of its kind (ENT-07 was Settings' Plan row) and it fires on the one screen where the student is already confused about which level they are in. Latent today only because PW-01 means the branch never runs — but it will be live the moment `guard()` is wired, which is the recommended fix for PW-01.
+
+**PROPOSED fix:** give `nudge` an optional action: `nudge(title,msg,cta,onCta)` defaulting to the pricing open, and pass `window.MB_openLevelSwitcher` from the archived branch.
+
+## 🟠 PW-04 — every `nudge()` call site pipes a server-controlled string into `innerHTML` unescaped, and the fallback path two lines away escapes it — **MEDIUM**
+`nudge` (`:16-18`) builds its body by concatenation: `'…>'+title+'</div>'+'…>'+msg+'</div>'` with no escaping. ENT-08 confirmed. All three live callers pass a value that came off the wire:
+- `app.html:2351` — `MB_PAYWALL.nudge('Solve is premium', why, 'Subscribe')` where `why = o.reason` from `/solve`.
+- `app.html:8286` / `:8447` — `jj.message` / `msg` from `/simplify` and the Visualize 429.
+- `import-tab.js:270` — `out.reason` from `/import`.
+
+**Why it matters (and why it's MEDIUM, not HIGH):** all four server-side strings are static literals today (`server.mjs:822`, `:1199` — verified, no interpolation of user content into any `reason:`/`message:`), so there is no live injection. The finding is the **asymmetry**: `app.html:2352-2353`'s own else-branch, written as the fallback for when paywall.js hasn't loaded, does `esc(why)`. The paywall path is strictly *less* safe than the path that exists because the paywall is missing, and the moment anyone adds a lecture title or a filename to an upgrade reason it becomes a live sink in a `position:fixed;inset:0` overlay.
+
+**PROPOSED fix:** `esc()` inside `nudge` — build the two inner divs with `textContent` (`var t=document.createElement('div'); t.textContent=title;`) rather than a template string. Keeps the emoji header as the only `innerHTML`.
+
+## 🟠 PW-05 — the nudge's `z-index:10000` sits *below* six of the app's own overlays — **MEDIUM**
+`o.style.cssText` (`:13`) pins `z-index:10000`. Measured against every `position:fixed` overlay in the app:
+
+| overlay | z-index | above the nudge? |
+|---|---|---|
+| `.csov` custom session picker (`app.html:557`) | 100020 | ✅ |
+| `.mbtoast` (`:830`) | 100004 | ✅ |
+| `.viznotice` (`:6920`) | 100003 | ✅ |
+| import sheet (`import-tab.js:78`) | 100001 | ✅ |
+| `.gapov` V1.6 gap loop (`:6814`) | 100000 | ✅ |
+| login gate (`:6600`) | 99990 | ✅ |
+| `.vizov` Visualize player (`:6621`) | 9500 | ❌ (nudge wins) |
+
+**Why it matters:** a nudge raised from inside the gap loop, the session picker or the import sheet renders **behind an opaque full-screen backdrop** — the student sees the button they tapped do nothing, and the invisible overlay is still there swallowing the backdrop click. The only currently-live exposure is `import-tab.js:270`, which dodges it by removing its own overlay first (`if(o.parentNode) document.body.removeChild(o)`) — that looks deliberate, and it is the shape of workaround that says the author hit this. It becomes live the moment `guard()` is wired (PW-01), because the natural gate points — Q-bank build, podcast, the gap loop's LEARN step — are all inside 100000+ overlays.
+**PROPOSED fix:** one character class of change — `z-index:100050` on `o`, above everything except nothing. No other overlay needs to move.
+
+## 🟠 PW-06 — a blocked `window.open` is swallowed and the modal closes anyway, so "Subscribe" is a silent no-op — **MEDIUM**
+`:22` — `try{ window.open(u+"#pricing","_blank"); }catch(e){} document.body.removeChild(o);`. The `catch` is empty and the `removeChild` runs unconditionally, outside the try. `window.open` also **returns `null`** rather than throwing when a popup is suppressed, so the `catch` never even fires for the common case.
+
+**Why it matters:** MedBank ships a `manifest.webmanifest` and a service worker and the whole pilot is a home-screen PWA. In iOS standalone display mode `window.open(url,'_blank')` is the least reliable navigation primitive there is — it can return `null`, open a detached window the student can't find, or do nothing. Either way the modal vanishes on tap and the student is returned to the same blocked feature with no page, no error and no second prompt: the conversion path terminates in silence, on the one button whose entire job is conversion. This is the SOLVE-04 / ENT-07 pattern a third time — the upgrade route dead-ends for exactly the basic-tier students it exists to convert.
+**PROPOSED fix:**
+```js
+var w=null; try{ w=window.open(u+"#pricing","_blank"); }catch(e){}
+if(!w){ try{ location.href=u+"#pricing"; }catch(e){} }
+if(o.parentNode) o.remove();
+```
+
+## 🟡 PW-07 — `CFG` is snapshotted once at load, and its fallback makes Subscribe open a second copy of the app — **LOW-MEDIUM**
+`:8` — `var CFG = (window.MEDBANK_CONFIG) || {};` evaluated at IIFE time. Load order is currently safe (`config.js:6570` → `paywall.js:6574`), but two things follow:
+- **The `"#"` fallback is broken.** `u = CFG.WEBSITE_URL || (CFG.DOWNLOAD&&CFG.DOWNLOAD.pwa) || "#"` then `window.open(u+"#pricing")` → `window.open("##pricing")`, which resolves relative and opens **a second tab of the app itself**. So if `config.js` is ever missing, Subscribe silently duplicates the app.
+- **That failure mode is reachable.** SW-02 (flow 26) established that the offline fallback answers non-navigation requests with `app.html`, so a missing `config.js` is served as HTML, `window.MEDBANK_CONFIG` is never defined, and `CFG` freezes as `{}` for the session with no error — family (d)'s silent-half-load, one layer down.
+
+**PROPOSED fix:** read `window.MEDBANK_CONFIG` *inside* `go.onclick` instead of closing over a snapshot, and make the last-resort fallback the known production origin (`https://medbank.com.ng`) rather than `"#"`.
+
+## 🟡 PW-08 — `trialBadge()` is dead code, and its logic is wrong in three ways if anyone wires it up — **LOW-MEDIUM**
+`grep trialBadge` → two hits, both in `paywall.js` (`:44` definition, `:50` export). Zero consumers. LIB-01 / ENT-03 / SIDE-08 / NTF-04 pattern — the fifth exported-but-never-called API found in this codebase. Worse, it is not merely unfinished, it is incorrect:
+- It reads `st.entitled`, not `st.canUseFeatures`, so an **archived**-level student with a live subscription gets an empty badge — the exact case a status badge exists for.
+- `!st.entitled` is also true for a logged-out student, for the whole boot window, and permanently after any AUTH-04 early return (see PW-02) — all three would be labelled **"Trial ended · Subscribe"**.
+- Its own comment concedes the feature was abandoned: *"days-left text can be added once the app surfaces trial_ends_at"*. `trial_ends_at` **is** already selected (`sync.js:254`) and used for the `trialing` check (`:256`) — it is simply never put on `status()`.
+
+**PROPOSED fix:** either delete it, or (better, since ENT-02 says trial students are currently told nothing) add `trialEndsAt` to `status()`'s return, key the badge on `canUseFeatures`, return `""` when `!st.profileId`, and render it in the Settings Plan row that ENT-07 just gave a destination.
+
+## 🟡 PW-09 — nudges stack without limit and every dismiss path can throw — **LOW**
+Three separate handlers call `document.body.removeChild(o)` (`:22` CTA, `:26` Not now, `:28` backdrop) and there is no singleton guard — compare the login gate (`app.html:6598`), which does `if(document.getElementById(ID)) return`. `vizLimitHit` (`app.html:8444`) fires once per tap with no debounce, so two quick taps on 🔄 Simpler build two full-screen overlays the student must dismiss one at a time, each re-darkening the screen. `removeChild` also throws `NotFoundError` on any node already detached (e.g. a `render()` that rebuilds `document.body` between show and dismiss), and none of the three call sites is guarded — unlike `import-tab.js:270`, which checks `o.parentNode` first.
+There is also no `Escape` handler, no background scroll lock, and no focus move — the modal is dismissible only by mouse/touch.
+**PROPOSED fix:** `o.id='mbPaywallNudge'; if(document.getElementById(o.id)) return;` at the top, and replace all three `document.body.removeChild(o)` with `o.remove()`.
+
+## 🟡 PW-10 — a long message pushes "Not now" off-screen with no way to scroll to it — **LOW**
+`c` (`:15`) sets `max-width:360px;width:90%;padding:24px` but **no `max-height` and no `overflow-y`**, inside an `inset:0; display:flex; align-items:center` parent. A flex child taller than the viewport centred this way is clipped at *both* ends and cannot be scrolled — so if a server `reason` ever runs long (the import one at `server.mjs:822` is already 180 characters), on a small phone in landscape the "Not now" button goes below the fold and the modal becomes undismissable except by the backdrop, which is not signposted. `.gapcard` (`app.html:6815`) already solved this: `max-height:92vh;overflow-y:auto`.
+Also cosmetic-but-inconsistent: this is the only surface in the app that hardcodes a light palette (`#fff`, `#0f1729`, `#5b6b86`, `#f2f3f9`) instead of `var(--panel)` / `var(--text)` / `var(--dim)`, and it ignores `env(safe-area-inset-bottom)`. No `prefers-color-scheme` rule exists anywhere in `app.html`/`site.css` today, so there is no live theming bug — but it will be the one element that doesn't follow if a dark mode ever lands.
+**PROPOSED fix:** add `max-height:88vh;overflow-y:auto` to `c` and swap the four literals for the existing CSS variables with the current values as fallbacks.
+
+## ✅ Checked and clean (paywall)
+- **Recurring family (a) — missing `isFlagged`:** not applicable. `paywall.js` reads no card pool.
+- **Family (b) — `box`→`NaN`:** not applicable. No card state is touched.
+- **Family (c) — non-integer answer key:** not applicable. No answers are parsed.
+- **Family (d) — `r.json()` on an HTML 413/502:** not applicable *here* — the module makes no network call at all. Every parse happens in the callers, and all three of those were already hardened (SOLVE-03 `app.html:2344`, the `.catch(function(){return{};})` at `:8283`, IMP-03 in `import-tab.js`).
+- **The load order is correct and the module is lazy in the right place.** `config.js`(6570) → `sync.js`(6572) → `paywall.js`(6574), and `paywall.js` only *reads* `MB_SYNC` from inside `guard`/`trialBadge`, never at define time — so it survives `MB_SYNC` being defined late. (The one thing it does eagerly, the `CFG` snapshot, is PW-07.)
+- **`guard` correctly fails OPEN for logged-out / local-only mode** (`:35`) — that is the right call for a study app whose data is local-first, and it is consistent with `sync.js` treating a signed-out student as unblocked (AUTH-08).
+- **The optional-call guard on `status` is right.** `MB_SYNC.status ? MB_SYNC.status() : {}` won't throw if the sync surface changes shape. Only the *default value* is wrong (PW-02).
+- **Backdrop dismissal is correctly scoped** — `if(e.target===o)` (`:28`) means a click inside the card doesn't close it. Correct, and better than several of the app's own overlays.
+- **`paywall.js` is in the SW precache list** (`sw.js:30`), so the module is available offline and the `window.MB_PAYWALL` existence checks at all four call sites should hold. Note this also means PW-05/PW-06 fixes need the `CACHE` bump that flow 26 already queued.
+- **No dead `var`, no leaked globals** — one IIFE, one export, three named functions, all reachable from the export. Small and readable; the problems here are all about what it is *connected* to.
+
+## 🔎 To verify (not a finding)
+PW-02 is a 5-second console check on the live app with no account switching: hard-reload, and **immediately** (before the avatar shows a synced state) run `MB_PAYWALL.guard('test')` on a known-Premium account. If the "Your free trial has ended" modal appears, the boot race reproduces. Then run `MB_SYNC.status()` and confirm `entitled:false, syncing:false` — if `syncing` stays `false` after ~5s, that account is also sitting in an AUTH-04 early return and the block is permanent, not transient.
+
+---
+
+# Flow 28 — Lecture recorder (`lecture-record.js` + the `MB_openRecorder` handoff)
+**Reviewed 2026-08-22 · log-only, nothing changed.** Scope: `lecture-record.js` (139 lines) and the three call sites
+(`app.html:1913` nav, `auth-ui.js:371` account sheet, `import-tab.js:155-160` source selector), plus the return
+handoff into `MB_openImport({audioBlob,audioMime,durationSec})` (`import-tab.js:121,234,241`).
+12 findings (REC-01..12) + clean notes. Part A (all 5 harnesses + `node --check`) passed this run — nothing logged for Part A.
+
+### REC-01 — HIGH — Cancelling during the mic-permission prompt leaves a hot mic recording forever, with no UI
+`lecture-record.js:82-117`. `open()` appends the overlay and wires Cancel (`:86`) **before** it awaits
+`getUserMedia` (`:90`). If the student taps **Cancel** while the browser's permission prompt is up, `teardown()`
+runs and sets `overlay=null` — but `open()` is still suspended at the await. When permission is then granted,
+execution resumes with **no `if(!overlay) return;` re-entry check**: `stream` is assigned a live mic (`:90`),
+`keepAwake()` fires (`:96`), a `MediaRecorder` is built and **`rec.start(1000)` actually begins recording** (`:113`),
+and `setInterval` starts writing to a detached `timeEl` (`:114`). Execution then hits `:117`
+(`overlay.querySelector("#mbRecWave")`) and throws `TypeError: Cannot read properties of null` inside an
+un-awaited async function (`window.MB_openRecorder = open`, `:138`) — an unhandled rejection nobody sees.
+**Why it matters:** the mic stays live and the recording indicator stays lit indefinitely, with no overlay, no Stop
+button (`:132` is never reached), a leaked 500 ms interval and a leaked wake lock. Nothing can stop it short of a
+reload. Worst case in this file: a student in a lecture theatre believes they cancelled and is still being recorded.
+**PROPOSED fix:** add a generation token — `var gen = ++openGen;` at the top of `open()`, and immediately after the
+`getUserMedia` await do `if(gen!==openGen || !overlay){ try{stream.getTracks().forEach(t=>t.stop());}catch(_){} return; }`.
+Bump `openGen` in `teardown()`. Also wrap the body of `open()` in try/catch so a late DOM error can't become a silent
+unhandled rejection.
+
+### REC-02 — HIGH — If `MB_openImport` is missing, the finished recording is destroyed silently
+`lecture-record.js:104-110`. `rec.onstop` calls `teardown()` (`:107`) — which removes the overlay — and only then
+does `if(window.MB_openImport){ … }` (`:109`). There is **no `else`**. If `import-tab.js` failed to load (offline
+first-run, a stale SW cache, a JS error in that file), a 50-minute lecture recording is dropped on the floor with
+no alert, no error, no download, no console message: the student presses "Stop & build my cards", the screen closes,
+and nothing happens. This is exactly the failure IMP-01 fixed *on the way in* (`import-tab.js:157` now refuses to
+tear down the sheet if `MB_openRecorder` is absent) — the same guard was never added on the way **out**.
+**Why it matters:** unrecoverable data loss of the single most expensive artefact the app ever produces, presented
+as a no-op.
+**PROPOSED fix:** in the `else`, keep the overlay up and offer the audio as a file:
+`var u=URL.createObjectURL(blob); alert("Your recording is safe but MedBank couldn't open the build screen — save the file and reload."); var a=document.createElement("a"); a.href=u; a.download="lecture-"+Date.now()+".webm"; a.click();`
+Better still, `teardown()` should be moved *after* a successful handoff, not before it.
+
+### REC-03 — HIGH — Dead Stop button + a live mic on two of the three `fail()` paths
+`lecture-record.js:98-113`. Only the `getUserMedia` rejection path wires an escape
+(`overlay.querySelector("#mbRecStop").onclick=teardown`, `:93`). The two later `fail()` calls — MediaRecorder
+unsupported (`:100`) and `rec.start()` failing (`:113`) — `return` **before** `:132` ever assigns the Stop handler.
+Both of those are reached *after* `getUserMedia` succeeded, so the microphone stream is already open and is never
+stopped. `fail()` relabels the control "Close" (`:79`), so the UI actively invites a tap that does nothing.
+**Why it matters:** the only exit is the small underlined "Cancel" link, and until it is found the mic (and the
+device recording indicator) stays on. The label lies about what the big red button does.
+**PROPOSED fix:** move `overlay.querySelector("#mbRecStop").onclick=teardown;` into `fail()` itself, so every
+failure path is guaranteed to have a working exit and stops the tracks.
+
+### REC-04 — MEDIUM — Cancel discards a long recording with no confirmation
+`lecture-record.js:86`. Cancel is a single tap: it nulls `rec.onstop`, stops the recorder and tears down — no
+`confirm()`, no undo, no length check. It sits 18 px under the 88 px Stop button (`:65`) and is the last focusable
+control, so it's an easy mis-tap on a phone held one-handed mid-lecture.
+**Why it matters:** SET-01-class destructive action — irreversible, unconfirmed, and the thing destroyed cannot be
+regenerated.
+**PROPOSED fix:** `if(elapsedSec()>15 && !confirm("Discard this recording? This can't be undone.")) return;` at the
+top of the Cancel handler.
+
+### REC-05 — MEDIUM — Pause double-counts the elapsed time when `rec.pause()` is unsupported
+`lecture-record.js:124-130`. The pause branch runs `accMs += Date.now()-segStart;` **first**, then
+`rec.pause()`, then `setPaused(true)`. If `rec.pause()` throws — Safari/iOS `MediaRecorder` has historically
+lacked `pause()`, which is precisely why the `catch(_){}` comment says "pause unsupported on this device" — the
+catch swallows it and `setPaused(true)` never runs. `paused` stays `false` and `segStart` is unchanged, so
+`elapsedSec()` (`:25`) now returns `accMs + (now - segStart)` where both terms cover the *same* interval.
+**Why it matters:** the big timer jumps to roughly double, and the wrong `durationSec` is handed to
+`MB_openImport` (`:109`) and rendered as "MM:SS · ready to transcribe" (`import-tab.js:127-130`). The `dur<3`
+short-recording guard (`:108`) is computed from the same corrupted number. Non-integer/NaN-adjacent corruption of a
+value the next screen displays as fact.
+**PROPOSED fix:** only mutate the clock if the pause succeeded:
+`var t=Date.now(); if(rec.state==="recording") rec.pause(); accMs+=t-segStart; setPaused(true);` — and if the call
+throws, leave `accMs`/`segStart` untouched and surface "Pause isn't supported on this device" via `#mbRecStatus`.
+
+### REC-06 — MEDIUM — Wake locks leak; the screen can be held awake permanently after recording ends
+`lecture-record.js:27,96,127,135`. `keepAwake()` overwrites `wake` with a new `WakeLockSentinel` **without
+releasing the previous one**, and it is called on open (`:96`), on every resume (`:127`) and on every
+`visibilitychange` back into the app (`:135`). `releaseAwake()` (`:28`) only ever releases the last handle, so every
+earlier sentinel is orphaned.
+**Why it matters:** after a lecture with a few tab-switches and pauses the phone's screen may never sleep again
+until the page is reloaded — silent battery drain on the device of a student who has just recorded for an hour.
+**PROPOSED fix:** `async function keepAwake(){ if(wake) return; try{ wake=await navigator.wakeLock.request("screen"); wake.addEventListener("release",function(){ wake=null; }); }catch(_){} }`
+
+### REC-07 — MEDIUM — The `visibilitychange` listener is added on every open and never removed
+`lecture-record.js:135`. The listener is registered inside `open()` as an anonymous function, so `teardown()`
+cannot remove it. Open the recorder five times in a session and five identical listeners are attached, each
+compounding REC-06 (five `keepAwake()` calls per tab-switch, five orphaned sentinels).
+**Why it matters:** unbounded listener growth across a session, and it is the direct multiplier on the wake-lock
+leak. It also keeps firing long after the recorder has been closed.
+**PROPOSED fix:** hoist to a named `onVis` and `document.removeEventListener("visibilitychange", onVis)` in
+`teardown()`; or register it once at module scope and have it no-op when `overlay` is null.
+
+### REC-08 — MEDIUM — Two of the three entry points are silent no-ops if `lecture-record.js` didn't load
+`app.html:1913` — `onclick="try{…;MB_openRecorder&&MB_openRecorder()}catch(e){}"` — closes the nav drawer and then
+does nothing at all if the module is absent, and the `catch(e){}` swallows anything else.
+`auth-ui.js:371` — `["🎙","Record a lecture",function(){ if(window.MB_openRecorder) MB_openRecorder(); }]` — same
+silent no-op, and the account sheet stays open so the tap reads as "the button is broken".
+Only `import-tab.js:157` tells the student anything ("Recording isn't available right now — reload the app, or use
+File / YouTube / Paste"). This is the residue the progress note predicted: **IMP-01 fixed the caller, never the
+other two callers.**
+**Why it matters:** `lecture-record.js` is precached by the SW (`sw.js:31`), so a stale/partial cache is a realistic
+way to lose it — and the student gets a dead button with no diagnosis on the two most prominent entry points.
+**PROPOSED fix:** give both call sites the `import-tab.js:157` message. Cheapest form for the nav:
+`MB_openRecorder?MB_openRecorder():alert('Recording isn\'t available right now — reload the app, or use File / YouTube / Paste.')`.
+
+### REC-09 — MEDIUM — No length cap, and a long recording fails with a message about PDFs
+`lecture-record.js:113` starts an unbounded recording. The blob then goes to `MB_openImport`, which
+base64-encodes the whole thing into a single JSON POST (`import-tab.js:234`, `fileToB64` at `:15`). At the
+configured 32 kbps (`:99`), a 2-hour lecture is ≈29 MB of audio → ≈38 MB of base64 in one request body, held
+entirely in memory as a string. When the proxy rejects it, IMP-03's handler prints
+**"That upload is too large. Try a smaller PDF or fewer photos."** (`import-tab.js:266`) — advice that is
+meaningless for a recording and gives the student no way to recover the hour they just spent.
+**Why it matters:** the failure lands *after* the recording exists, and the only actionable instruction offered is
+about a file they never attached. Effective data loss for long lectures.
+**PROPOSED fix:** (a) warn in `#mbRecHint` past ~75 min and hard-stop at a configured cap with a clear message;
+(b) branch the 413 copy on `body.audio_base64` — "That recording is too long to upload in one go. Record in ~45-minute
+parts."; (c) longer term, send audio as `multipart/form-data` rather than base64-in-JSON.
+
+### REC-10 — LOW — "Too short" recordings are discarded after the screen has already closed
+`lecture-record.js:105-108`. `teardown()` runs first, so the `alert("That recording was too short. Give it another
+go.")` fires against whatever page is underneath and the student is dropped back to the app with no recorder open —
+they have to find the entry point again. The threshold (`dur<3`) is also read from the possibly-corrupted clock in
+REC-05.
+**PROPOSED fix:** check `dur`/`blob.size` **before** tearing down, and on failure keep the overlay up with the
+message in `#mbRecHint` and the timer reset, so "give it another go" is one tap.
+
+### REC-11 — LOW — `chunks` is module-scoped and retains the whole recording after the screen closes
+`lecture-record.js:24,102,103`. `chunks` is only reset at the *start* of the next `open()` (`:102`); neither
+`teardown()` nor `rec.onstop` clears it. After a 1-hour recording the array (tens of MB) stays reachable for the
+rest of the session, on top of the `Blob` handed to the import sheet. The Cancel path (`:86`) is worse — it nulls
+`onstop`, so nothing ever consumes or frees them.
+**PROPOSED fix:** `chunks=[];` inside `teardown()`, and `URL.revokeObjectURL` on any URL created for REC-02.
+
+### REC-12 — LOW — The brand lock-up icon is a bare relative path
+`lecture-record.js:47` — `<img src='icon.svg' …>` resolves against the current document URL. It works today
+(`app.html` is served from the domain root, per `CNAME`), but any move to a subpath, or opening the app from a
+nested route on a host that doesn't rewrite, renders a broken-image glyph in the centre of the one screen whose
+stated purpose is "anyone who glances at your phone in class sees MedBank".
+**PROPOSED fix:** use a root-absolute `/icon.svg`, and add `onerror="this.style.display='none'"` so the pill
+degrades to clean wordmark-only.
+
+## ✅ Checked and clean (lecture recorder)
+- **Recurring family (a) — missing `isFlagged`:** not applicable. The recorder reads no card pool.
+- **Family (b) — card `box` → `NaN`:** not applicable. No SRS state is touched. The nearest analogue is the
+  `accMs`/`segStart` clock, which *is* corruptible — logged as REC-05.
+- **Family (c) — non-integer answer key:** not applicable. No answers are graded here.
+- **Family (d) — `r.json()` on an HTML 413/502:** the recorder makes no network call; the one place it matters is
+  the handoff target, already hardened at `import-tab.js:262-268` (IMP-03). The *copy* on that path is wrong for
+  audio, which is REC-09.
+- **Pause accounting is conceptually right.** `MediaRecorder.pause()` stops emitting data and `elapsedSec()` (`:25`)
+  excludes paused spans, so `durationSec` and the audio length stay in agreement — provided `pause()` doesn't throw
+  (REC-05).
+- **`pickMime()` (`:15-20`) degrades correctly** — it probes four codecs, returns `""` when
+  `MediaRecorder.isTypeSupported` is missing, and `:99-100` falls back to a no-options `MediaRecorder`, then to a
+  clean `fail()`. The blob type is taken from `rec.mimeType` first (`:106`), which is the right source of truth.
+- **`fmt()`/`two()` (`:21-22`) are sound** — `Math.floor`, `padStart`, and hours only appear past 60 min.
+- **`if(overlay) return;` (`:83`) blocks double-open** from the three entry points; the remaining re-entrancy hole is
+  the pre-await one in REC-01, not this guard.
+- **The stop handler is defensive** (`:132`) — checks `rec.state!=="inactive"` and falls back to `teardown()` in both
+  the else and the catch, so the button can't wedge once it is wired.
+- **The `import-tab.js` receiving side is correct.** `opts.audioBlob/audioMime/durationSec` are read with defaults
+  (`:121`), the recording branch skips the file/YouTube/paste validators (`:214-219`), sets the slow-build copy
+  (`:221`), and correctly *allows* an optional PDF/photos alongside the audio (`:241`) while excluding a stale file
+  selection in YouTube/Paste mode. The "nothing to build from" guard (`:249`) counts `audio_base64`.
+- **`import-tab.js:155-160` is the model the other two callers should copy** — it checks for the recorder *before*
+  removing the sheet, so a missing module can no longer strand the student (the IMP-01 fix). REC-08 is only about
+  the two call sites that never got it.
+- **Nothing in this flow touches the frozen engine.** No `smart*`, no `adapt*`, no SRS write — the recorder's entire
+  output is a `Blob` handed to the import sheet.
+
+## 🔎 To verify (not a finding)
+REC-01 is a 20-second manual repro and worth doing before the next pilot cohort: on a fresh profile (so the mic
+prompt actually appears), tap **🎙 Record lecture**, and tap **Cancel** *while the permission dialog is still up*,
+then **Allow**. Expect: overlay gone, but the tab's recording indicator still lit, a `TypeError … querySelector of
+null` in the console, and `document.hidden` handlers still firing. If the indicator is lit, the hot mic is confirmed.
+
+---
+
+# Flow 29 — Visualize server: subject routing + prompt build (`import-server/visualize.mjs:17-2666`) — code review, 2026-08-22
+
+Scope: `registerAssets`, `assetDefs`, `renderHints`, `VOCAB`/`assetMapText`, the PHYS/BIO/CS/ORG gates and
+`phyPick`/`csPick`/`pickOrganic`/`pickExemplar`, `buildVisualPrompt`, `textKey`. The QC validators (`:2669-3611`)
+are flow 30 and were **not** reviewed here. Findings below were reproduced by importing the module in Node
+(read-only; nothing was written to the repo).
+
+## 🔴 VIZM-01 — One malformed approved asset spec takes the WHOLE Visualize feature down until restart — HIGH — proposed, needs review
+`assetMapText()` (`visualize.mjs:65-66`) does `(m.valid_templates||[]).join("/")` and `m.valid_zones.join(",")` with
+**no type check**, and `registerAssets` (`:40-54`) stores whatever the spec gives it verbatim
+(`valid_templates: a.valid_templates||[…]`, `…(a.valid_zones ? {valid_zones:a.valid_zones} : {})`).
+
+The specs are **LLM output**. `ASSET_DRAFT_SYS` (`server.mjs:~1450`) asks the model for
+`"valid_zones":[optional]` — a model that answers `"valid_zones":"body"` or `"valid_templates":"membrane_cell"`
+(a bare string instead of an array) produces an entry whose `.join` is not a function.
+
+Reproduced:
+
+```
+> registerAssets([{ id:"x", valid_zones:"notanarray" }])
+> buildVisualPrompt("anything", "biology")
+TypeError: m.valid_zones.join is not a function
+    at visualize.mjs:66  →  assetMapText (:64)  →  visSystem (:273)  →  buildVisualPrompt (:2662)
+```
+
+Why it matters — this is the worst blast radius found in the module:
+- `visSystem()` is rebuilt **on every call** (`:71-72` comment is explicit about this), so the throw is not a
+  one-off — it happens on **every** `/visualize` build for **every** user.
+- The throw lands in the generic `catch(e)` of the `/visualize` handler, so students get a bare
+  `500 {"error":"m.valid_zones.join is not a function"}`, not a diagnosable message.
+- It is **self-persisting**: `loadApprovedOverlay()` (`server.mjs:1458-1461`) re-registers every `approved` row at
+  boot, so restarting does not clear it. The only recovery is a DB edit.
+- The entry point is one admin tap — `/admin/viz/approve` calls `registerAssets([r.data.spec])` (`server.mjs:1532`)
+  "live immediately — no deploy", with the spec never validated between the model and the module.
+- `/admin/viz/selftest` would surface it (`server.mjs:1473` also calls `buildVisualPrompt`), but only if someone
+  runs it after approving.
+
+PROPOSED FIX (in `registerAssets`, so bad data can never enter `ASSET`):
+```
+const arr = v => Array.isArray(v) ? v.filter(x=>typeof x==="string" && x.trim()) : [];
+const id  = (a && typeof a.id==="string") ? a.id.trim() : "";
+if(!id) continue;
+const vt  = arr(a.valid_templates);
+const vz  = arr(a.valid_zones);
+ASSET[id] = { category:String(a.category||"custom"), scale:String(a.scale||"molecular"),
+              valid_templates: vt.length ? vt : ["membrane_cell","neuro_pathway"],
+              ...(vz.length ? {valid_zones:vz} : {}),
+              ...(typeof a.svg==="string" ? {svg:a.svg} : {}), source:"overlay" };
+```
+…and belt-and-braces, wrap `assetMapText()`'s body in a `try/catch` that skips the offending entry rather than
+killing the prompt, so a future field can never repeat this. Have `/admin/viz/approve` return the count from
+`registerAssets` and refuse the approval when it returns 0.
+
+## 🟠 VIZM-02 — An approved overlay asset silently OVERWRITES a built-in manifest asset, irreversibly — MEDIUM — proposed, needs review
+`registerAssets` does `ASSET[a.id] = {…}` (`:44`) with no collision check, and `ASSET` **is** `MANIFEST.assets`
+(same object, `:18`) — so the write mutates the single source of truth the file's own header promises is
+authoritative.
+
+Reproduced: `registerAssets([{id:"hormone_bubble", category:"custom"}])` turned the built-in
+`{category:"signal", scale:"molecular", valid_templates:[…]}` into `{category:"custom", …, source:"overlay"}`.
+
+Why it matters: the built-in entry is the thing that makes "the wrong-scale mistake impossible" (`:1-7`). An LLM
+drafting an asset for a name it has seen before will happily reuse an existing id, and the approve tap then
+rewrites `scale` and `valid_templates` for the **built-in** renderer — the prompt, the QC allowlist and the
+engine's `_defs` all shift underneath a drawing function that has not changed. There is no unwind: `viz-assets.json`
+is only read once at module load (`:14`).
+
+PROPOSED FIX: refuse ids already present with `source !== "overlay"` —
+`if(ASSET[id] && ASSET[id].source!=="overlay"){ skipped.push(id); continue; }` — and return
+`{registered, skipped}` so `/admin/viz/approve` can tell the admin *"that id is already a built-in asset, rename it"*
+instead of silently clobbering it.
+
+## 🟠 VIZM-03 — Rejecting/deleting an approved asset does nothing to a running server — MEDIUM — proposed, needs review
+`registerAssets` is **additive only** — there is no unregister path anywhere in the module.
+
+Reproduced: register `temp_asset_x`, then call `registerAssets([])` (the "nothing is approved any more" state) —
+`temp_asset_x` is still in `ASSET`, and therefore still in `VOCAB.assets`, still in the prompt's asset map, still
+served by `assetDefs`.
+
+Why it matters: `/admin/viz/reject` (`server.mjs:~1540`) flips the row's status but never touches the module, and
+`loadApprovedOverlay()` only ever adds. So an asset that was approved, found to render badly, and then rejected
+keeps being offered to the model and keeps being drawn — **until someone restarts the process**. The admin UI
+reports success while the live behaviour is unchanged, which is the same "the button did nothing" class as SET-01:
+a destructive action that the next read silently undoes.
+
+PROPOSED FIX: add `export function resetOverlay(){ for(const [k,v] of Object.entries(ASSET)) if(v.source==="overlay") delete ASSET[k]; }`
+and have `/admin/viz/reject` (and `/admin/viz/approve`, for the edited-spec case) call
+`resetOverlay(); await loadApprovedOverlay();` so the overlay is always a full re-projection of the approved rows
+rather than an append-only log.
+
+## 🟡 VIZM-04 — Cached blueprints are replayed without ever re-running QC, and the key has no prompt version — LOW/MEDIUM — proposed, needs review
+Extends VIZ-10 (which covers the *subject* half of this key) with the part that has more reach.
+
+`textKey` (`:2666`) is `md5(text.toLowerCase().replace(/\s+/g," ").trim())` — text and nothing else. The cache-read
+path (`server.mjs:1285`) re-validates only two things: `LAYOUTS.has(layout)` and `narratedSteps(bp)>=2`. It never
+calls `qcCheck`, `graphCheck` or `chainOf`, all of which the *write* path runs (`:1349`).
+
+Why it matters:
+- This is a 3611-line file whose exemplars, system prompt and router change often. Every change is invisible to the
+  cache — a highlight generated under an older prompt is served **forever**, and (per VIZ-09/the notes above) cached
+  replays are free and unmetered, so there is no natural pressure to rebuild.
+- When a QC rule is tightened, every already-cached blueprint that the new rule would reject keeps being served.
+  The rule only protects new builds. VIZ-01's "poisoned rows" observation is the same shape; this is the general case.
+
+PROPOSED FIX: `export const PROMPT_VERSION = "2026-08-22-a";` and
+`textKey(text, subject)` → `md5(PROMPT_VERSION + "|" + (subject||"") + "|" + norm(text))`, bumped by hand whenever
+`visSystem`/`EXEMPLARS`/the router changes; and run the same `qcCheck`/`LAYOUTS` gate on the cache-read path so a
+row that no longer passes is rebuilt instead of replayed. (Note the subject half carries the cost trade-off VIZ-10
+already flagged — a version prefix alone is nearly free and buys most of the benefit.)
+
+## 🟡 VIZM-05 — `pickExemplar` ignores the subject the student already told us — LOW — proposed, needs review
+`buildVisualPrompt(text, subject)` (`:2659-2663`) passes `subject` into the *tail* of the prompt but calls
+`pickExemplar(text)` — routing is regex-on-the-highlight only.
+
+Reproduced: `buildVisualPrompt("The rate increases with temperature.", "Organic Chemistry")` and the same sentence
+with `"Biology"` select the **identical** few-shot.
+
+Why it matters: the whole 400-line gate stack (`:2244-2655`) exists to stop one subject stealing another's
+vocabulary — and the single most reliable disambiguating signal available, the subject the student is studying, is
+thrown away. "The rate increases with temperature", "translation", "carrier", "current", "table" are exactly the
+words the comments agonise over, and every one of them is settled instantly by the subject.
+
+PROPOSED FIX: route on subject first, then fall back to the regexes —
+`function pickExemplar(text, subject){ const s=(subject||"").toLowerCase();
+  if(/organic/.test(s)) return pickOrganic(t); if(/comput|\bcs\b|ict/.test(s)) return csPick(t);
+  if(/physics/.test(s)) return phyPick(t); … }` — with the existing cascade unchanged as the no-subject path.
+Cheap, and it makes VIZM-04's subject-in-the-key change actually meaningful.
+
+## 🟡 VIZM-NOTES — smaller observations, not fixed
+- **Dead regex alternative — `Δ[ghs]` can never match** (`:2648`). The branch is tested against `t`, which is
+  `text.toLowerCase()`, and `"Δ".toLowerCase()` is `"δ"` (U+0394 → U+03B4) — confirmed in Node. The chem *gate* at
+  `:2637` gets this right (`/Δ[ghs]/i.test(text||"")` on the raw string), so a passage reading only "ΔG < 0"
+  correctly enters chemistry and then **misses** the Gibbs decision tree, falling through to the generic chem flow
+  (`:2650`). Fix: test the raw `text` for the symbol, or add `δ[ghs]` to the alternation.
+- **`renderHints(null)` is indistinguishable from "scale 1"** at the consumer. `renderHints` returns `null` for an
+  unknown template (`:24`), and `app.html:8089` reads `(BP._render&&BP._render.zscale&&BP._render.zscale[el.zone])||1`.
+  The manifest ships **only two** templates (`membrane_cell`, `neuro_pathway` — confirmed), so any scene the model
+  invents a template for renders silently at scale 1 rather than erroring. That is the "wrong-scale mistake is
+  impossible" guarantee in `:1-7` degrading quietly. Consider returning `{scale:1, zscale:{}, unknown:true}` and
+  letting QC reject an unknown template outright (flow 30 territory).
+- **`renderHints().scale` is dead payload** — `app.html:8089` is the only reader of `_render` and it uses `zscale`
+  only; the template-level `scale` is never consumed.
+- **`(cfg && cfg.scale) || 1`** (`:26`) turns a legitimate `scale: 0` into `1`. No zone uses 0 today, so this is
+  latent, but it is the same `||`-instead-of-`??` shape logged elsewhere.
+- **Blank ids are accepted.** `if(!a || !a.id) continue` (`:43`) passes `"  "`, producing an `ASSET["  "]` entry that
+  is then advertised to the model as a legal asset name in `assetMapText()`. Covered by the VIZM-01 fix.
+- **`assetDefs` de-dupes but does not filter falsy types** — `new Set(types||[])` over
+  `(bp.elements||[]).map(e=>e.type)` (`server.mjs:1350`) includes `undefined` for a malformed element; harmless
+  today because the `ASSET[t]` lookup misses, but it makes the set size a misleading metric.
+- **`csPick` step 3 fires on a bare `\bconvert(ed|ing|s)?\b`** (`:2427`) — inside the CS gate that is mostly safe,
+  but "convert the pseudocode to a flowchart" is routed to the *worked-solution* exemplar rather than the flowchart.
+  Consider requiring a base/units cue alongside it.
+- **`ORG_EXEMPLAR.ladder` is index 55 and `EXEMPLARS.length` is exactly 56** — every index in all four `*_EXEMPLAR`
+  maps is in range today (verified), but `pickExemplar` has **no guard**: a future off-by-one returns `undefined`
+  and `buildVisualPrompt` dies on `e.text` (`:2661`) with the same feature-wide blast radius as VIZM-01. One-line
+  insurance: `const e = pickExemplar(text) || EXEMPLARS[2];`
+- **Nothing in this module touches the frozen engine.** No `smart*`, no `adapt*`, no SRS state — the module is pure
+  string/manifest work plus one md5.
+
+## 🔎 To verify (not a finding)
+Worth a one-off query before the next admin "grow assets" run: `select id, spec from viz_asset_proposals where
+status='approved'` and check every row for (a) a non-array `valid_zones`/`valid_templates` — that is a live
+VIZM-01 outage waiting for the next restart — and (b) an `id` that collides with one of the 17 built-ins in
+`viz-assets.json` (VIZM-02). Both are read-only checks.
+
+---
+
+# Flow 30 — Visualize server: blueprint QC validators (`import-server/visualize.mjs:2669-3611`)
+Reviewed 2026-08-22 (scheduled run). Scope: `qcCheck` (`:3416`), `chainOf` (`:3482`), `graphCheck` (`:3542`),
+`parseBlueprint` (`:3574`), `LAYOUTS` (`:3413`) and the 18 per-layout `*Check(bp)` functions (`:2669-3412`).
+**LOG-ONLY — nothing was changed.** All claims below were reproduced in Node against the real module
+(read-only import; no network, no model calls). Part A harnesses all passed on this run.
+
+The headline for this file: **QC is a critic, not a gate.** `server.mjs:1306` computes `ev = evalBp(bp)` and uses
+`ev.pass` for exactly one thing — deciding whether to fire *one* corrective retry (`:1315`). After that retry the
+blueprint ships **whatever QC said**; the only hard gates are "did it parse", `narratedSteps(bp) >= 2` (`:1325`)
+and "is the layout in `LAYOUTS`" (`:1330`). A QC-failing blueprint is then upserted into the **global**
+`visualizations` cache (`:1349`, `verified:false`) and the cache read at `:1285` re-checks only `narratedSteps`
+and the layout — it never re-runs `qcCheck`. So every finding below is a permanent, all-students cache poisoning,
+not a one-off. This is the VIZ-01 shape again, one layer up: the validator sees the problem and nothing acts on it.
+
+## 🔴 QCV-01 — A malformed `reveal`/`active` (string instead of array) crashes `qcCheck` itself → HTTP 500, no retry — HIGH — logged, not fixed
+**Where:** every layout check + the scene branch, e.g. `:2694`, `:2715`, `:2737`, `:2765`, `:3466-3468`.
+Every one is `(s.reveal||[]).forEach(...)` / `(s.active||[]).forEach(...)` / `(bp.markers||[]).forEach(...)`.
+The `||[]` guard only defends against `null`/`undefined` — a **string** is truthy, and `"a".forEach` is not a function.
+**Reproduced:**
+```
+qcCheck({layout:"tree",meta:{title:"t"},nodes:[…],narration_steps:[{narration_text:"x",reveal:"a"}]})
+  → TypeError: (s.reveal || []).forEach is not a function
+```
+**Why it matters:** `qcCheck` runs inside the `/visualize` route's `try` (`server.mjs:1306`), so the throw is caught
+by the outer handler at `:1357` and returned as `500 {error:"(s.reveal || []).forEach is not a function"}`. The
+student sees a raw JS type error. Worse, the throw happens **before** the corrective retry — the one mechanism in the
+whole route designed to fix malformed model output never gets to run. `reveal:"anode"` instead of `reveal:["anode"]`
+is one of the most likely single-token mistakes a small model makes, and it is unrecoverable by design here.
+**Proposed fix:** one helper at the top of the file, used everywhere a model-supplied field is iterated:
+`const arr = v => Array.isArray(v) ? v : (v==null ? [] : [v]);` — then `arr(s.reveal).forEach(...)`. Coercing a bare
+string to a one-element array also makes the common mistake *self-healing* rather than fatal. Belt-and-braces:
+wrap `evalBp` in `server.mjs` so a validator throw degrades to `{pass:false, issues:["blueprint is malformed"]}`
+and feeds the retry, instead of 500-ing the request.
+
+## 🔴 QCV-02 — `chainOf` throws on blueprints QC already rejected — burns the daily quota, poisons the cache, then 500s — HIGH — logged, not fixed
+**Where:** `chainOf` (`:3482`) — the tree walk (`:3532-3536`), `matrix` (`:3510`), `logic` (`:3524`).
+`chainOf` is called at `server.mjs:1352`, **unguarded and after** the cache upsert (`:1349`) and the `viz_events`
+insert that spends the student's daily explainer (`:1350`). Because QC never blocks (see the header), `chainOf` is
+routinely handed blueprints its own validators flagged.
+**Reproduced:**
+- **Cyclic tree → stack overflow.** `chainOf`'s traversal `(function walk(id){ const n=byId[id]; if(!n)return;
+  out.push(…); nodes.filter(x=>x.parent===id).forEach(x=>walk(x.id)); })(root)` has **no visited-set**, unlike
+  `treeCheck`'s reachability walk (`:2685`), which correctly guards with `if(reach[id])return`. A 3-node cycle
+  (a→c→b→a) with three properly narrated steps: `qcCheck` → `pass:false, ["the tree has a cycle…"]`;
+  `chainOf` → `RangeError: Maximum call stack size exceeded`.
+- **`matrix` with a short/!2×2 `M`.** `const M=bp.M||[[1,0],[0,1]]` then `M[1][0]` (`:3510`) →
+  `chainOf({layout:"matrix",M:[[1,0]]})` → `TypeError: Cannot read properties of undefined (reading '0')`.
+  `matrixCheck:2958` flags exactly this and is ignored.
+- **`logic` with a non-array `inputs`.** `(bp.inputs||[]).map` (`:3524`) → `TypeError: … .map is not a function`.
+**Why it matters:** the student is charged a daily explainer, the broken blueprint is written to the **global**
+`visualizations` table, and *then* the request dies as `500 server error`. On their retry they hit the cache
+(`:1285`, which does not call `chainOf`) and get the broken diagram; every other student on that sentence gets it
+too, forever. Worst case is the cyclic tree — it is now the cached answer for that text and the app-side tree
+renderer walks the same parent links.
+**Proposed fix:** (a) add a visited set to `chainOf`'s tree walk, mirroring `treeCheck:2685`; (b) defensive reads
+in the `matrix`/`vectors`/`logic` branches (`Array.isArray` before indexing); (c) in `server.mjs`, move `chainOf`
+inside a `try{}catch{}` — it is explicitly labelled "transparency / debugging", so it must never be able to fail a
+build; and (d) **do not cache a blueprint that failed QC** — gate the `:1349` upsert on `ev.pass`, or store it with
+`verified:false` *and* make the `:1285` cache read require `verified` or re-run `qcCheck`. (d) is the real fix and
+it also closes QCV-03/04.
+
+## 🟠 QCV-03 — Four layout checks never require anything to be revealed → a fully blank, fully narrated diagram passes QC — MEDIUM/HIGH — logged, not fixed
+**Where:** `graphPlotCheck` (`:2745`), `orbitalCheck` (`:2772`), `geometryCheck` (`:2788`), `iceCheck` (`:2801`),
+`vennCheck` (`:2827`). The other 13 checks end with a `"… is never revealed"` sweep (`treeCheck:2697`,
+`flowCheck:2718`, `cellCheck:2740`, `unitCircleCheck:2881`, `solveCheck:2922`, `vectorsCheck:2948`,
+`matrixCheck:2975`, and the fbd/circuit/logic/table/punnett/curly checks). These five do not.
+**Reproduced:**
+```
+qcCheck({layout:"geometry",meta:{title:"t"},center:"C",shape:"bent",
+         narration_steps:[{narration_text:"a"},{narration_text:"b"}]})   → { pass:true, issues:[] }
+qcCheck({layout:"graph",…,curves:[{id:"c1",points:[[0,0],[1,1]]}],
+         narration_steps:[3 steps, none with a reveal]})                 → { pass:true, issues:[] }
+```
+**Why it matters:** `reveal` is the *only* vocabulary by which a fixed-layout diagram's parts are switched on —
+for `geometry` the entire drawable set is `GEO_PARTS = {bonds, lp, info}` (`:2793`), for `ice` it is
+`{rxn, I, C, E}` (`:2800`). A blueprint that reveals none of them is a clean QC pass, clears `narratedSteps >= 2`,
+spends a daily explainer, and gives the student a voice-over against an empty canvas — then caches that globally.
+`graphPlotCheck` is the same story with declared-but-never-revealed curves. This is precisely the "no steps" hole
+VIZ-01 closed for scene mode, still open on five layouts.
+**Proposed fix:** give each of the five the same closing sweep the other 13 have — for `geometry`/`ice` a
+`["bonds"]` / `["I","C","E"]` core-parts requirement in the shape of `cellCheck:2740`; for `graph`/`venn`/`orbital`
+a "every declared curve/set/subshell must be revealed by some step" sweep in the shape of `treeCheck:2697`.
+
+## 🟠 QCV-04 — `parseBlueprint` takes the FIRST fenced block, so an illustrative example beats the real blueprint — MEDIUM — logged, not fixed
+**Where:** `:3574-3587`. `const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i); if(fence) t = fence[1];` — first
+match wins, and everything after it is discarded before the brace scan ever runs.
+**Reproduced:**
+```
+parseBlueprint('Here is the shape:\n```json\n{"layout":"tree"}\n```\nAnd here is the real one:\n{"layout":"flow",…}')
+  → {"layout":"tree"}          // the example, not the blueprint
+parseBlueprint('<think>I will use {"a":1} as a sketch\n{"layout":"flow","meta":{"title":"REAL"}}')
+  → {"a":1}                    // unclosed <think>: the tag is stripped, the reasoning text is not
+```
+**Why it matters:** this is the **same bug the import server already fixed**. `extractJsonObject` in
+`server.mjs` is covered by `qa/extract-json.mjs`, which has explicit cases for *"inline example object before the
+real one → returns the REAL (largest) one"* and for `<think>` preambles. `/visualize` has a second, weaker
+implementation of the same idea and none of that hardening. The failure is expensive rather than loud: the tiny
+example object fails QC, burns the corrective retry (a second paid model call), and usually ends as
+"couldn't build a visualization — try again in a moment" on a retry that can never work.
+**Proposed fix:** make `parseBlueprint` pick the **best** candidate rather than the first — scan *all* fenced
+blocks and all balanced `{…}` runs in the text, `tryParse` each, and return the largest object that parses (tie-break
+on "has a `layout` or `narration_steps` key"). Better still, export `extractJsonObject` from `server.mjs` (or lift
+it into a shared module) and delete this duplicate, so `qa/extract-json.mjs` guards both paths. Note the second
+case needs the `<think>`-with-no-closing-tag branch too: strip everything before the last `</think>` **or** before
+the first `{` that starts a parseable object.
+
+## 🟡 QCV-05 — Non-integer / string numerics pass the numeric gates — LOW/MEDIUM — logged, not fixed
+**Where:** `orbitalCheck:2777-2778`. `if(!(s.boxes>=1))` and `if(s.electrons==null||s.electrons<0||s.electrons>2*s.boxes)`.
+Both comparisons coerce, so `boxes:"1"` passes (`"1">=1` → true, `2*"1"` → 2) and `boxes:1.5` passes.
+**Reproduced:** `qcCheck({layout:"orbital",…,subshells:[{id:"1s",boxes:"1",electrons:2}],…})` → `{pass:true,issues:[]}`.
+**Why it matters:** the renderer draws `boxes` boxes; a fractional or string count is the QB-01 / VIZ-02 /
+REV-01 non-integer family on a fifth surface. Low severity only because the blast radius is one diagram.
+**Proposed fix:** `Number.isInteger(s.boxes) && s.boxes>=1`, same for `electrons`. Worth a sweep of the other
+numeric gates while in there (`graphPlotCheck`'s `x.min`/`x.max` are `!=null`-checked but never type-checked, so
+`{"min":"0"}` passes and reaches the axis maths).
+
+## 🟡 QCV-NOTES — smaller observations, not fixed
+- **Inconsistent step ceilings.** `flowCheck` (`:2702`) is the only check with a `steps.length <` floor and **no**
+  ceiling; every sibling caps at 8–16. A 40-step flow is a clean pass. `orbitalCheck`/`geometryCheck`/`iceCheck`
+  also have no ceiling.
+- **Three checks have no 260-char narration cap** — `orbitalCheck`, `geometryCheck`, `iceCheck` (and
+  `vectorsCheck`/`matrixCheck`). Reproduced: a 900-character narration step passes QC on `orbital`. Every other
+  check enforces it, and the cap exists because the caption box and the TTS budget both assume it.
+- **`treeCheck` does not detect duplicate node ids** (`:2676` just overwrites `byId[n.id]`) while `flowCheck` does
+  (`:2709`, `"duplicate node id"`). Two nodes sharing an id in a tree means one silently disappears from `byId`,
+  the other's children re-parent onto it, and `chainOf`'s pre-order walk prints the wrong branch.
+- **`treeCheck`'s `seen={}` (`:2682`) is declared and never used** — dead local, harmless.
+- **`vennParseId` (`:2816`) splits on `_or_` / `_and_` with `indexOf(...)>0`**, so a set literally named
+  `x_and_y` cannot be distinguished from the intersection of `x` and `y`. Latent; no live blueprint hits it.
+- **`graphCheck` correctly no-ops for non-scene layouts** (`:3543`) and returns `components:1` — that is by design
+  and matches how `evalBp` ANDs the two results. Checked and clean.
+- **`LAYOUTS` (`:3413`) and `qcCheck`'s delegation chain (`:3418-3435`) are exactly in sync** — all 18 non-scene
+  layouts have a branch, and `scene` correctly falls through to the manifest check. Checked and clean.
+- **`qcCheck`'s unknown-layout guard (`:3417`) is the only early return that ignores `bp.meta`** — an unknown
+  layout reports *only* the layout issue, so the retry prompt tells the model one thing at a time. Minor: it costs
+  an extra round-trip when the blueprint is wrong in two ways.
+- **`repair()` (`:3600`) pops the bracket stack without matching** — `}` pops a pending `]`. It is a last-resort
+  salvage path so a wrong repair just fails `tryParse` and returns `null`; noted, not a bug.
+- **Nothing in this range touches the frozen engine.** No `smart*`, no `adapt*`, no SRS state.
+
+## 🔎 To verify (not a finding)
+`select text_key, subject, blueprint->>'layout' from visualizations where verified = false` — every row is a
+blueprint that shipped **without** anyone checking `qcCheck` passed (see the section header). Re-running `qcCheck`
+over that table offline is a read-only way to size QCV-03's real-world footprint and to find any cyclic `tree`
+rows (QCV-02) already cached against live students.
+
+---
+
+# ✅ IMPORT-01 — TRUE ROOT CAUSE (via self-diagnostics) + FINAL FIX — 2026-08-22
+
+Added a `diag` field to the import 502 response + `console.warn` logging. A real failed import returned:
+`{"model":"deepseek-v4-flash","finish_reason":"length","json_mode":true,"from_reasoning":true,"out_tokens":16000,"raw_len":66488,"head":"We need answer JSON only. Need produce note_md, simplified_md, primer, recall...","tail":"..."}`
+
+**True root cause:** DeepSeek's V4 models (`deepseek-v4-flash` AND `deepseek-v4-pro`) are **hybrid reasoning models**. With no `reasoning_effort` set, they default to "thinking" and pour the ENTIRE token budget into chain-of-thought (`reasoning_content`) — `finish_reason:"length"`, `out_tokens` pinned at the 16000 cap, `content` empty (`from_reasoning:true`), so no parseable JSON is ever emitted. JSON mode does NOT stop the thinking. This is model-independent across the V4 family, which is why switching flash↔pro made no difference. (Confirmed against DeepSeek API docs: the legacy non-reasoning names `deepseek-chat`/`deepseek-reasoner` were **retired 2026-07-24** — do NOT configure them.)
+
+**Final fix (code, not env):** send `reasoning_effort: "none"` on every DeepSeek request (`generate()`), overridable via `DEEPSEEK_REASONING_EFFORT`. "none" = Non-think mode → the model answers directly and fast, JSON lands in `content`. Keep the model as `deepseek-v4-flash` (valid + fast). This composes with the earlier layers (JSON mode + `extractJsonObject` + json-reject fallback), which remain the safety net.
+
+**Verified:** `node --check` OK; extractor test green. **Needs deploy** (import-server auto/manual redeploy). Expected result: imports build in well under a minute and produce note + Q-bank cleanly.
+
+Sources: DeepSeek API docs (Thinking Mode; Change Log — legacy model retirement 2026-07-24).

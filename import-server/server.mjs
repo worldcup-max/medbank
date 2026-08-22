@@ -233,7 +233,14 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
   if(!isDeep) imgs.forEach(i=> content.push({ type:"image_url", image_url:{ url:"data:"+i.media_type+";base64,"+i.data } }));
   textParts.forEach(t=> content.push({ type:"text", text:t }));
   const body = { model, messages:[{ role:"user", content }] };
-  if(isDeep){ body.max_tokens = max_tokens; body.temperature = temperature; }
+  if(isDeep){ body.max_tokens = max_tokens; body.temperature = temperature;
+    // DeepSeek V4 (flash/pro) are HYBRID thinkers: with no reasoning_effort they default to "thinking"
+    // and burn the entire token budget on chain-of-thought (reasoning_content) before ever emitting the
+    // JSON answer — finish_reason:"length", empty content, unparseable. "none" = Non-think mode: the model
+    // answers directly and fast. Override via env if a task ever needs reasoning. (Confirmed against
+    // DeepSeek API docs — the legacy deepseek-chat/deepseek-reasoner names were retired 2026-07-24.)
+    body.reasoning_effort = process.env.DEEPSEEK_REASONING_EFFORT || "none";
+  }
   else { body.max_completion_tokens = max_tokens; }   // OpenAI newer models: leave temperature default
   // JSON mode: forces a clean JSON object and suppresses chain-of-thought preamble that otherwise
   // eats the whole token budget before any JSON is emitted (the cause of "parse failed" on reasoning models)
