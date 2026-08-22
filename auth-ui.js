@@ -429,7 +429,11 @@
           if((ev==="SIGNED_IN"||ev==="TOKEN_REFRESHED"||ev==="USER_UPDATED") && now && prev && now!==prev){
             location.reload(); return;
           }
-          if(ev==="SIGNED_OUT" && prev){ try{ localStorage.removeItem("mb_current_uid"); }catch(_){} location.reload(); return; }
+          // On sign-out, reload to drop the previous account's in-memory DATA from the screen,
+          // but KEEP mb_current_uid so the next login by a DIFFERENT user still trips the
+          // init() uid-guard (purge + clean load). Clearing it here would let the next student
+          // merge/adopt the previous student's local data (AUTH-03).
+          if(ev==="SIGNED_OUT" && prev){ location.reload(); return; }
         }catch(_){}
       }); } }catch(_){}
       try{

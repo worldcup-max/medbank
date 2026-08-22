@@ -24,5 +24,65 @@ log findings + any conservative fix to `QA-BUGS.md`, then check the box here. Do
 - [x] 17. Auth / sync — login, logout, level switcher, cross-account isolation (`auth-ui.js`, `sync.js`, + `level-switcher.js`) — 12 findings (AUTH-01..12 + notes). Biggest: **`pull()` never checked `r.error`, so a failed `profile_state` read was indistinguishable from "this profile has never synced" — and `init` answered that by uploading this device's `DATA` over the account's real cloud state; on a fresh device that is an empty blob replacing everything** (AUTH-01, HIGH, FIXED — `pull` now throws and sync fails closed). Also: **switching level never clears `medbank_v1`, and `setMeta({rev:0})` makes the next `init` read `firstOnDevice`, so the OLD level's cards/streak/log are merged into the new profile and pushed to its cloud row — one round trip and both levels hold the union, permanently** (AUTH-02, HIGH, logged — the content cache does the same via `hydrateFromCache` + upsert-only `applyContent`); and **logout deletes `mb_current_uid`, which is the whole of BUG-01's isolation guard, so A logs out → B logs in merges A's entire local data into B's account and pushes it up** (AUTH-03, HIGH, logged — the key is cleared to prevent a SIGNED_OUT reload loop, so both candidate fixes need a human). **AUTH-04: every early return in `init` leaves `ready=false`, making `markDirty` a permanent no-op — including the half-onboarded state ONB-01 creates on every email-verified signup — while the account sheet said "You're signed in and syncing ✓" and the menu said "✓ Synced"** (FIXED: `status().syncing` + honest labels). 7 fixes applied (AUTH-01, 04, 06 unchecked level writes + archive-before-create lockout, 07 unfiltered `maybeSingle` = the FIXED-01 shape, 09 switcher shows six 🔒 with no explanation, 10 archived level labelled "current", 11 = root cause of MINOR-02 multiple GoTrueClient, 12 purge missed `mb_pending_onboard`), 4 logged for review (**AUTH-02, AUTH-03, AUTH-05 `pushNow` has no rev CAS so a stale open tab overwrites the other device's day, AUTH-08 a failed subscription read renders as "trial ended" while a logged-out student is not blocked → flow 18**), 11 notes. `mergeState`/`mergeCards`/`mergeQbankStore` themselves check out.
 - [x] 18. Streak / freezes + paywall/entitlement gating (`app.html`, `import-server/server.mjs isPremium`) — 12 findings (STK-01..05, ENT-01..08). Biggest: **a successful Paystack payment can silently fail to grant Premium** — the webhook `.update()`s a `subscriptions` row that nothing in the repo ever inserts (zero matched rows is a silent success), matches `accounts.email` case-sensitively when `isPremium` lowercases everywhere and its own comment says that column is sometimes blank, and returns `200` on every path so Paystack never retries and nothing is logged (ENT-01, HIGH, partly FIXED — **CHECK THE SCHEMA for a signup trigger that inserts a `subscriptions` row**; if there isn't one, no first payment has ever activated). Also: **the free trial grants nothing** — `sync.js:255` counts a live `trialing` as entitled while `isPremium` accepts only `"active"`, so a trial student is told "✓ Sync on" and then refused by Solve/import/10-a-day/Fish voices, with Settings' own badge reading "Basic" in the same session (ENT-02, HIGH, proposed); **`MB_PAYWALL.guard()` has ZERO call sites** — the whole client gate, including the only "archived level is view-only" enforcement in the product, is dead code, and every gate is therefore a post-upload 402 (ENT-03, HIGH, proposed, LIB-01 pattern); and **the streak has two contradictory rules where the lenient one always wins** — `markActive()` bumps it on a card *flip*, so `streakMet()`'s 20-new/65%-review target never decides anything, and the app spends all day telling a student with a banked streak to "study today to keep it alive", including a 6pm "your streak ends at midnight" false alarm (STK-01, HIGH, proposed — supersedes PRG-01). 6 fixes applied (ENT-01 webhook logging + lowercase fallback + affected-row check, ENT-04 logging on four silent fail-opens, ENT-07 Settings' Plan row was a dead end with no way to buy, STK-04 reminder promised a manual freeze tap that doesn't exist), 6 logged for review (**STK-02 freezes are spent by merely opening the app on a non-study day and never refunded; STK-03 `streak.frozen` is write-only so a rescued day renders as a plain gap; ENT-05 the free tier caps the one cheap thing — 1 import — and leaves build-extra/podcast/tts/mega/mock-exam unmetered; ENT-06 `/tts` lets any client pick the paid Fish provider via `use:'tutor'`, which "ask the hosts" sends unconditionally; ENT-08 `nudge()` innerHTML sink**), 11 notes. Nothing in the codebase ever *downgrades* an account — `status:"active"` is permanent once set.
 
+## Round 2 — routes and files never reviewed (added 2026-08-22)
+Flows 1–18 covered the main student journey. These are the surfaces that journey never touched.
+Same rules: one flow per run, log to `QA-BUGS.md`, fix only what is small/clearly-safe/localized.
+Cross-check the four recurring families against every new pool you read:
+**(a)** missing `isFlagged` filter (REV-04 — found in 11 separate pools), **(b)** card state with no `box` → `NaN`
+(REV-01/TOP-01), **(c)** non-integer answer key silently mis-grading (QB-01/VIZ-02/MX-05),
+**(d)** `r.json()` on an HTML 413/502 → "Unexpected token '<'" (IMP-03/TOP-05/SOLVE-03).
+
+- [ ] 19. Study screen + Subject page — `pageStudy` (`app.html:4486`), `pageSubject` (`app.html:2358`). The most-trafficked route in the app (19 `go('study/…')` call sites, 6 for `subject/`); `pageSubject` shares `topicRow`, which LIB-03 already crashed once.
+- [ ] 20. Recall side-sessions — `pageHard` + `startHardQuick` (`app.html:4528`, `:4257`), `pageLeeches` (`:5540`), `pageMistakes` (`:5553`), `startNudgeSession` (`:4281`). Check families (a) and (b) reached all four pools. NOTE: the `hardnudge` route (`:6142`) has **no entry point anywhere in the repo** — verify it is orphaned before deleting.
+- [ ] 21. Notification → session landing — the `#/nudge` deep link the service worker sends students to (`sw.js:85,92,101,110,120`), the strict overlay's `go('nudge')` (`app.html:4362`), and `startNudgeSession`. Overlaps the still-proposed `sw.js` half of SET-03 (quiet hours / `remindOn` not checked in the worker).
+- [ ] 22. Status lists + Jump back in — `pageStatusList` (`app.html:6092`, serves `duenow`/`inprogress`/`completed`), `pageJumpback` (`:5116`). PRG-05 already relabelled one "this week" definition here; check the counts these lists print against the pools they actually open.
+- [ ] 23. Search + Cram + AI tutor — `pageSearch` (`app.html:5174`), `pageCram` (`:5569`), `pageAI` (`:5884`). All three are in the student nav or reachable from a topic; none has ever been read.
+- [ ] 24. Study timer + study dock — `study-timer.js` (361 lines), `study-dock.js` (215 lines), and the `MB_STUDY_ADD` / `MB_STUDY_GET` / `MB_DOCK` bridge in `app.html:987-1000`. `MB_STUDY_ADD` writes into `DATA.study` and calls `persist()`, so it is on the sync path.
+- [ ] 25. Content pipeline — `content-loader.js` (161 lines), the `content.js` bootstrap shim, `hydrateFromCache` / `applyContent`. TOP-02 fixed one line here; still open: `applyContent` is upsert-only (a deleted lecture never disappears, LIB-NOTES) and the content cache is the second half of AUTH-02's level-bleed.
+- [ ] 26. Service worker — `sw.js` (125 lines): cache strategy, `maybeRemind`, the `periodicsync` handler, `notificationclick`, `readFlag`/`writeFlag`. **Do NOT touch the CACHE string.** SET-03's proposed fix lives here.
+- [ ] 27. Paywall module — `paywall.js` (51 lines): `guard`, `nudge`, tier reads. ENT-03 (zero `guard()` call sites) and ENT-08 (`innerHTML` sink) were logged *against* this file from outside; the module itself has never been read line-by-line.
+- [ ] 28. Lecture recorder — `lecture-record.js` (139 lines) + the `MB_openRecorder` handoff from the nav and from `import-tab.js`. IMP-01 only fixed the caller, never the recorder.
+- [ ] 29. Visualize server — subject routing + prompt build — `import-server/visualize.mjs:17-2666`: `registerAssets`, `assetDefs`, `renderHints`, the PHYS/BIO/CS/ORG regexes, `phyPick`/`csPick`/`pickOrganic`/`pickExemplar`, `buildVisualPrompt`, `textKey`. Largest unreviewed file in the repo (3611 lines total). Flow 6 reviewed the `/visualize` endpoint, never this module.
+- [ ] 30. Visualize server — blueprint QC validators — `import-server/visualize.mjs:2669-3611`: `qcCheck` (`:3416`), `chainOf` (`:3482`), `graphCheck` (`:3542`), `parseBlueprint` (`:3574`), `LAYOUTS` (`:3413`) and the ~15 per-diagram `*Check(bp)` functions (tree/flow/cell/orbital/geometry/ice/venn/unitcircle/solve/vectors/matrix/fbd…). This is what decides whether VIZ-01's "no steps" case can still get through.
+- [ ] 31. Voice text prep — `import-server/med-voice.mjs` (59 lines): `kokoroPrep`, `sayPrep`, `mergeTerms`, `knownTerm`, `MED_IPA`/`MED_SAY`, `KOKORO_DEFAULT`. Flow 5 covered the TTS endpoints but not the text that goes into them.
+- [ ] 32. Admin surfaces — `pageAdmin` (`app.html:3934`), `pageVizAdmin` (`:3995`), `pagePilot` (`:3142`), `pageBuilder` (`:2238`), and `window.IS_ADMIN` (set in `content-loader.js:142`). Dev-facing, so lower priority — but note `pagePilot` is the one admin page with **no `IS_ADMIN` guard**, and it READS the frozen engine (`smartValidation`), so restyle only, never re-logic. LIB-08 already flagged `pageBuilder`'s student-facing copy.
+- [ ] 33. Config + entry pages + dead files — `config.js` (41), `index.html` (195), `404.html`. Also confirm `restore.js` and `mb-personal-restore.js` are the spent one-line stubs they appear to be (referenced only by the `sw.js` cache list) and can be deleted.
+
 ## Runtime-only (need YOU present + live app — task can only code-review, not run)
 - Podcast audio actually playing, Visualize animation + voice-sync delay, real import→qbank end-to-end. Flag these for a live session.
+
+## Flow 19+ — previously-unreviewed routes & files (log-only; added 2026-08-22)
+Each run: pick the FIRST unchecked item, review ONLY it, LOG findings to QA-BUGS.md (do not edit code), then tick it.
+
+### Unreviewed app routes (in `app.html`)
+- [ ] 19. `study` — card study session (pageStudy, session build, swipe, rating, dock)
+- [ ] 20. `cram` — cram sheet route
+- [ ] 21. `mistakes` — mistakes pool + drill-missed
+- [ ] 22. `hard` / `hardnudge` — hard-card quick session
+- [ ] 23. `leeches` — leech pool
+- [ ] 24. `nudge` — notification quick-review session
+- [ ] 25. `duenow` / `inprogress` / `completed` — status list pages (pageStatusList)
+- [ ] 26. `jumpback` — resume-last page
+- [ ] 27. `search` — search page + searchRun
+- [ ] 28. `ai` — Ask-AI tutor panel (pageAI)
+- [ ] 29. `builder` — note builder
+- [ ] 30. `admin` / `vizadmin` / `intel` — internal dashboards (confirm they're gated from students)
+
+### Unreviewed source files
+- [ ] 31. `paywall.js` — entitlement/guard logic on its own (ties to ENT-01/02/03)
+- [ ] 32. `restore.js` — backup restore path (ties to SET-01/02)
+- [ ] 33. `mb-personal-restore.js` — personal restore path
+- [ ] 34. `content.js` — content model/accessors
+- [ ] 35. `content-loader.js` — content hydration (topic load, __MB_CONTENT_READY)
+- [ ] 36. `study-dock.js` — study dock UI/state
+- [ ] 37. `study-timer.js` — study time accounting (feeds streak/progress)
+- [ ] 38. `lecture-record.js` — record-lecture import path
+- [ ] 39. `config.js` — flags/keys review (no secrets in client, REQUIRE_LOGIN, etc.)
+- [ ] 40. `sw.js` — service worker cache/versioning (finish the half-review)
+- [ ] 41. `import-server/visualize.mjs` — /visualize server path
+- [ ] 42. `import-server/med-voice.mjs` — TTS/voice server path
+
+### Schema/live-log items (need Frank or a live check — flag, don't guess)
+- [ ] 43. ENT-01 — does signup/trial ever INSERT a `subscriptions` row? (webhook only UPDATEs)
+- [ ] 44. SRV-04 — is there a UNIQUE index on `card_key`?
+- [ ] 45. QB-09 — is `max_tokens:12000` clamped or rejected by the live EXTRAS_MODEL?
