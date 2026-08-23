@@ -1425,10 +1425,11 @@ app.post("/topic-preview", async (req,res)=>{
     const account_id = user.id;
     const { topic_id, force } = req.body||{};
     if(!topic_id) return res.status(400).json({ error:"topic_id required" });
-    const t = await admin.from("topics").select("id,account_id,title,note_md,subject,preview").eq("id",topic_id).maybeSingle();
+    const t = await admin.from("topics").select("id,account_id,title,note_md,subject").eq("id",topic_id).maybeSingle();
     if(!t.data) return res.status(404).json({ error:"topic not found" });
     if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
-    if(!force && t.data.preview && t.data.preview.status==="ready") return res.json(t.data.preview);   // cached
+    // cache read is best-effort and SEPARATE, so the feature works even if the topics.preview column doesn't exist yet
+    if(!force){ try{ const c = await admin.from("topics").select("preview").eq("id",topic_id).maybeSingle(); if(c.data && c.data.preview && c.data.preview.status==="ready") return res.json(c.data.preview); }catch(_){} }
     const note = String(t.data.note_md||"");
     if(note.replace(/\s+/g," ").trim().length < 400){ const skip={status:"skipped",scenes:[]}; try{ await admin.from("topics").update({ preview:skip }).eq("id",topic_id); }catch(_){}; return res.json(skip); }
     const built = await buildTopicPreview(note, t.data.subject||t.data.title||"Medicine");
