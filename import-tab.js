@@ -77,6 +77,7 @@
 
     var o = el("div","position:fixed;inset:0;background:rgba(28,20,45,.55);display:flex;align-items:flex-end;justify-content:center;z-index:100001;font-family:-apple-system,Segoe UI,Roboto,sans-serif");
     var s = el("div","background:#fff;width:100%;max-width:460px;max-height:94vh;overflow-y:auto;border-radius:18px 18px 0 0;padding:20px 18px 26px;box-shadow:0 -12px 44px rgba(28,20,45,.28)");
+    s.appendChild(el("div","width:38px;height:4px;border-radius:3px;background:"+LINE+";margin:-6px auto 12px"));   // bottom-sheet drag handle
     s.appendChild(el("div","font-weight:800;font-size:19px;color:"+INK+";margin-bottom:2px","Add a lecture"));
     s.appendChild(el("div","color:"+DIM+";font-size:13.5px;margin-bottom:6px","Upload a PDF or photos of your notes — MedBank builds your note, a simplified version, flashcards and a cram sheet."));
 
@@ -200,6 +201,64 @@
     var msg=el("div","margin-top:12px;font-size:13.5px;color:#b3391f;display:none;background:#fdece7;border-radius:9px;padding:9px 11px"); s.appendChild(msg);
     function show(m){ msg.textContent=m; msg.style.display="block"; }
 
+    /* ---- polished build experience: animated steps + rotating tips, then an in-app success screen
+            (replaces the button-text "Building…" state and the native alert). ---- */
+    var TINT="#ece3fb", TINTB="#ddd0f5", VD="#4c1d95", TEAL="#0d9488";
+    function esc2(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+    function startBuilding(topicTitle, slow){
+      s.style.position="relative";
+      var p=el("div","position:absolute;inset:0;background:#fff;border-radius:18px 18px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 24px;z-index:6");
+      var defs=["Reading your lecture","Writing your notes","Building flashcards"];
+      if(builds.qbank) defs.push("Writing the Q-bank");
+      if(builds.written) defs.push("Writing the written test");
+      var stepsHtml=defs.map(function(t,i){ return '<div class="mbi-step" style="display:flex;align-items:center;gap:11px;padding:7px 0;font-size:14px;color:'+DIM+'"><span class="mbi-ic" style="width:22px;height:22px;border-radius:50%;border:2px solid '+LINE+';flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;color:'+DIM+'">'+(i+1)+'</span><span>'+t+'</span></div>'; }).join("");
+      p.innerHTML=
+        '<div style="width:52px;height:52px;border-radius:16px;background:'+V+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px">🧠</div>'+
+        '<div style="font-weight:800;font-size:17px;margin:14px 0 2px;color:'+INK+'">Building your study set…</div>'+
+        '<div style="font-size:13px;color:'+DIM+';margin-bottom:14px">'+esc2(topicTitle)+' · usually '+(slow?"1–2 minutes":"30–60 seconds")+'</div>'+
+        '<div style="width:100%;max-width:250px;text-align:left">'+stepsHtml+'</div>'+
+        '<div style="height:6px;border-radius:6px;background:'+TINT+';overflow:hidden;width:100%;max-width:250px;margin-top:16px"><i class="mbi-bar" style="display:block;height:100%;background:'+V+';width:8%;transition:width .5s ease"></i></div>'+
+        '<div class="mbi-tip" style="margin-top:16px;background:'+TINT+';border:1px solid '+TINTB+';border-radius:12px;padding:11px 13px;font-size:12.5px;color:'+VD+';line-height:1.45;max-width:270px;min-height:56px;display:flex;align-items:center;text-align:left;transition:opacity .2s"></div>';
+      s.appendChild(p);
+      var stepEls=p.querySelectorAll(".mbi-step"), bar=p.querySelector(".mbi-bar"), tipEl=p.querySelector(".mbi-tip");
+      var n=stepEls.length, cur=0;
+      function paint(){ Array.prototype.forEach.call(stepEls,function(elx,i){ var ic=elx.querySelector(".mbi-ic");
+        if(i<cur){ elx.style.color=INK; elx.style.fontWeight="400"; ic.style.background=TEAL; ic.style.borderColor=TEAL; ic.style.color="#fff"; ic.textContent="✓"; }
+        else if(i===cur){ elx.style.color=INK; elx.style.fontWeight="700"; ic.style.borderColor=V; ic.style.color=V; ic.style.background="#fff"; ic.textContent=(i+1); }
+        else { elx.style.color=DIM; elx.style.fontWeight="400"; ic.style.borderColor=LINE; ic.style.color=DIM; ic.style.background="#fff"; ic.textContent=(i+1); } });
+        bar.style.width=Math.min(94,(cur/n)*100+8)+"%"; }
+      paint();
+      var per=(slow?18000:11000);
+      var stepT=setInterval(function(){ if(cur<n-1){ cur++; paint(); } }, per);
+      var tips=["💡 Spaced repetition beats cramming — small daily reviews stick far longer.",
+                "🩺 Your Q-bank is written in exam-style single-best-answer questions.",
+                "🎯 Smart Drill finds what you get wrong while feeling sure — then fixes it.",
+                "📈 Confidence and accuracy together show what you truly know.",
+                "⏱ Almost there — most lectures finish in under a minute."];
+      var ti=0; tipEl.textContent=tips[0];
+      var tipT=setInterval(function(){ ti=(ti+1)%tips.length; tipEl.style.opacity="0"; setTimeout(function(){ tipEl.textContent=tips[ti]; tipEl.style.opacity="1"; },200); }, 3200);
+      return {
+        stop:function(){ clearInterval(stepT); clearInterval(tipT); if(p.parentNode) p.parentNode.removeChild(p); },
+        success:function(out, topicTitle2, cid){ clearInterval(stepT); clearInterval(tipT); cur=n; paint();
+          var pr=Number(out.primer), rc=Number(out.recall), chips="";
+          if(isFinite(pr)) chips+='<span class="mbi-chip">'+pr+' primer</span>';
+          if(isFinite(rc)) chips+='<span class="mbi-chip">'+rc+' recall</span>';
+          if(builds.qbank) chips+='<span class="mbi-chip">Q-bank</span>';
+          if(builds.written) chips+='<span class="mbi-chip">Written</span>';
+          p.innerHTML=
+            '<div style="width:60px;height:60px;border-radius:50%;background:'+TEAL+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px">✓</div>'+
+            '<div style="font-weight:800;font-size:18px;margin:14px 0 2px;color:'+INK+'">Your study set is ready</div>'+
+            (chips?'<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0 4px">'+chips+'</div>':"")+
+            '<div style="font-size:13.5px;color:'+DIM+';margin:6px 0 18px">'+esc2(topicTitle2)+' is built and ready to study.</div>'+
+            '<button class="mbi-open" style="width:100%;max-width:280px;border:0;border-radius:12px;padding:14px;font-weight:800;font-size:15px;cursor:pointer;background:'+V+';color:#fff">Open topic →</button>'+
+            '<div class="mbi-again" style="color:'+DIM+';font-size:13px;margin-top:14px;cursor:pointer">Add another lecture</div>';
+          var stEl=document.createElement("style"); stEl.textContent=".mbi-chip{background:"+TINT+";border:1px solid "+TINTB+";color:"+VD+";border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700}"; p.appendChild(stEl);
+          p.querySelector(".mbi-open").onclick=function(){ if(o.parentNode) document.body.removeChild(o); try{ if(window.onImported) onImported(out.topic_id); }catch(e){} try{ location.hash="#/topic/"+out.topic_id; }catch(e){} };
+          p.querySelector(".mbi-again").onclick=function(){ if(o.parentNode) document.body.removeChild(o); openImport(); };
+        }
+      };
+    }
+
     var go=el("button","width:100%;margin-top:16px;border:0;background:"+V+";color:#fff;border-radius:12px;padding:14px;font-weight:800;cursor:pointer;font-size:15px","Build my study set");
     go.onclick=async function(){
       msg.style.display="none";
@@ -219,13 +278,11 @@
       }
       if(!CFG.IMPORT_API){ show("Import isn't configured yet. Try again shortly."); return; }
       var slow = recAudio || srcMode==="youtube";
-      go.disabled=true; go.textContent = slow ? "Transcribing & building… ~1–2 min" : "Building… this can take ~30–60s";
+      var buildUI = startBuilding(topicName, slow);
       try{
         var subjectName = newCourse || (sel.options[sel.selectedIndex]||{}).textContent;
         if(sel.value==="__new__"){
-          go.textContent="Adding the course\u2026";
           course_id = await createCourse(newCourse);
-          go.textContent = slow ? "Transcribing & building\u2026 ~1\u20132 min" : "Building\u2026 this can take ~30\u201360s";
         }
         var body={ topicName:topicName, course_id:course_id, lecturer:lecturer, subject:subjectName };
         try{ var _lv=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel()); if(_lv!=null&&_lv!=="") body.level=_lv; }catch(e){}   // per-level prompt selection
@@ -247,14 +304,13 @@
         /* Never send an import with nothing to build from - that is what produced the
          * confusing "model returned invalid JSON" instead of a useful message. */
         if(!body.pdf_base64 && !(body.images&&body.images.length) && !body.text && !body.youtube_url && !body.audio_base64){
-          show("Nothing to build from \u2014 attach a PDF or photos, paste the lecture text, or record the lecture.");
-          go.disabled=false; go.textContent="Build my study set"; return; }
+          buildUI.stop(); show("Nothing to build from \u2014 attach a PDF or photos, paste the lecture text, or record the lecture."); return; }
 
         var token=null;
         if(window.__mbSB){ var ses=await window.__mbSB.auth.getSession(); token=ses.data.session && ses.data.session.access_token; }
         /* Without this we sent the literal header "Bearer null" and the student got the
          * server's raw 401 instead of being told their session had expired. */
-        if(!token){ show("You're signed out — sign in and try again."); go.disabled=false; go.textContent="Build my study set"; return; }
+        if(!token){ buildUI.stop(); show("You're signed out — sign in and try again."); return; }
         var resp=await fetch(CFG.IMPORT_API.replace(/\/$/,"")+"/import",{
           method:"POST", headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token }, body:JSON.stringify(body) });
         /* A proxy 413/502/504 returns HTML, not JSON: resp.json() then threw and the
@@ -262,23 +318,17 @@
         var out;
         try{ out = await resp.json(); }catch(e){ out = null; }
         if(!out){
+          buildUI.stop();
           show(resp.ok ? "The build finished but the reply couldn't be read. Check your topics before rebuilding."
                        : (resp.status===413 ? "That upload is too large. Try a smaller PDF or fewer photos."
                                             : "The import server didn't respond properly ("+resp.status+"). Try again in a moment."));
-          go.disabled=false; go.textContent="Build my study set"; return; }
+          return; }
         if(!resp.ok){
-          if(out.error==="upgrade" && window.MB_PAYWALL){ if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "Subscribe"); return; }
-          show(out.reason||out.error||"That didn't work. Try again."); go.disabled=false; go.textContent="Build my study set"; return; }
-        if(o.parentNode) document.body.removeChild(o);
-        try{ if(typeof window.onImported==="function") window.onImported(out.topic_id); }catch(e){}
-        try{ location.hash="#/subject/course_"+course_id; }catch(e){}
-        /* out.primer / out.recall are not guaranteed — the old line happily said
-         * "Built undefined primer + undefined recall cards". */
-        var _p=Number(out.primer), _r=Number(out.recall);
-        alert(isFinite(_p)&&isFinite(_r)
-          ? ("Done! Built "+_p+" primer + "+_r+" recall cards for "+topicName+". Open it to start studying.")
-          : ("Done! Built your study set for "+topicName+". Open it to start studying."));
-      }catch(e){ show(e.message||"Something went wrong."); go.disabled=false; go.textContent="Build my study set"; }
+          if(out.error==="upgrade" && window.MB_PAYWALL){ buildUI.stop(); if(o.parentNode) document.body.removeChild(o); MB_PAYWALL.nudge("Upgrade to import more", out.reason||"Subscribe to build more lectures — your built work stays free.", "Subscribe"); return; }
+          buildUI.stop(); show(out.reason||out.error||"That didn't work. Try again."); return; }
+        /* success — swap the building screen for the in-app "ready" screen (no native alert) */
+        buildUI.success(out, topicName, course_id);
+      }catch(e){ try{ buildUI.stop(); }catch(_){} show(e.message||"Something went wrong."); }
     };
     s.appendChild(go);
     if(opts.mandatory){

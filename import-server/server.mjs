@@ -1361,6 +1361,83 @@ app.post("/visualize", async (req,res)=>{
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* =====================================================================
+ * TOPIC PREVIEW — the "pre-read orientation video" (SPEC-TOPIC-PREVIEW.md)
+ * A 3–4 min guided visual tour of a WHOLE note: an overview MAP, one scene per
+ * heading (right visual per relationship), auto-inserted CONTRAST scenes at
+ * confusion zones, then a closing TAKEAWAY. Each scene is a normal Visualize
+ * blueprint, so the existing renderer draws it — this endpoint only adds the
+ * SEQUENCING: it plans the scenes over the note, then renders each through the
+ * same proven buildVisualPrompt → generate → parseBlueprint → qcCheck path.
+ * ===================================================================== */
+function previewPlanPrompt(note, subject){
+  return (
+`You are building a 3–4 minute PRE-READ PREVIEW for a medical student — a guided mental map of an ENTIRE lecture note, shown BEFORE they read it. Its job is to give them the STRUCTURE first, in the simplest possible words, so that when they read the detailed note they are filling in a framework they have already seen — not discovering it for the first time.
+
+Return ONLY JSON: {"title":"<topic>","scenes":[{"heading":"","beat":"map|segment|contrast|takeaway","mode":"flow|tree|table|diagram|graph","focus":""}]}.
+
+RULES — follow every one:
+- SCENE 1 is always beat "map": a single overview showing the whole topic at a glance (its major headings as one diagram/tree and the ONE core relationship that ties them together).
+- Then ONE scene per MAJOR HEADING in the note, in order — beat "segment". Touch EVERY major heading; skip none. Dive into that heading's key subtopics, but only the organising principle + a few key items (this is orientation, NOT the full detail).
+- Insert beat "contrast" scenes wherever the note has a commonly-confused pair or set (e.g. nephrotic vs nephritic, primary vs secondary, acute vs chronic, upper vs lower). Use mode "table". These are the "here's the difference to keep straight" beats.
+- The LAST scene is beat "takeaway": the whole structure brought back together as one map (causes → mechanism → features → investigations → diagnosis → management → complications, adapted to this note).
+- Pick "mode" by the RELATIONSHIP, not habit: classification/hierarchy → "tree"; process/causal chain/mechanism → "flow"; comparison → "table"; structure/anatomy/relationships → "diagram"; a distribution/curve → "graph".
+- "focus" is a 1–2 sentence instruction, in PLAIN words simpler than the note, describing exactly what THAT scene should visualise and orient the student to. It must name the concrete items to show. Do NOT copy the note's technical wording — translate it down.
+- Total 7–12 scenes for a normal note; fewer if the note is short. Aim ~3 minutes of narration.
+- Build the model PROGRESSIVELY: each scene should connect to the previous (cause → mechanism → features → …), not feel independent.
+- Base everything strictly on the note. Never invent facts, drugs, or numbers.
+
+SUBJECT: ${subject||"Medicine"}
+LECTURE NOTE:
+${note}`);
+}
+/* render one preview scene into a blueprint via the existing engine (lean: 1 gen + 1 corrective retry, no completeness pass) */
+async function renderPreviewScene(scene, subject){
+  const framing = "[PREVIEW SCENE — orient a student in the SIMPLEST possible words BEFORE they read the full note. Keep narration short and high-level; teach the organising principle and how the pieces connect, NOT every detail. Prefer the "+(scene.mode||"clearest")+" visual form.] ";
+  const text = framing + (scene.focus||scene.heading||"");
+  const prompt = buildVisualPrompt(text, subject);
+  for(let attempt=1; attempt<=2; attempt++){
+    const p = attempt>1 ? (prompt+"\n\nYour previous JSON was not a valid, drawable blueprint. Return ONLY corrected JSON with a valid \"layout\" and at least 2 narration_steps.") : prompt;
+    const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:6000, temperature:0.2, json:true });
+    const bp = parseBlueprint(gen.text);
+    if(bp && (!bp.layout || LAYOUTS.has(bp.layout)) && narratedSteps(bp)>=2 && qcCheck(bp).pass){
+      if(!bp.layout || bp.layout==="scene"){ try{ bp._render=renderHints(bp.template); bp._defs=assetDefs((bp.elements||[]).map(e=>e.type)); }catch(_){} }
+      return bp;
+    }
+  }
+  return null;
+}
+async function buildTopicPreview(note, subject){
+  const planGen = await generate({ model: BASIC_MODEL, prompt: previewPlanPrompt(note, subject), parts:[], images:[], max_tokens:2500, temperature:0.3, json:true });
+  const plan = extractJsonObject(planGen.text||"");
+  let list = (plan && Array.isArray(plan.scenes)) ? plan.scenes.slice(0,12) : [];
+  if(!list.length) return { status:"failed", scenes:[] };
+  const scenes=[];
+  for(const sc of list){
+    try{ const bp = await renderPreviewScene(sc, subject); if(bp) scenes.push({ heading: sc.heading||"", beat: sc.beat||"segment", blueprint: bp }); }
+    catch(e){ console.warn("[preview] scene failed:", (e&&e.message)||e); }
+  }
+  return { status: scenes.length>=3 ? "ready" : "failed", title:(plan&&plan.title)||"", scenes };
+}
+app.post("/topic-preview", async (req,res)=>{
+  try{
+    const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
+    const account_id = user.id;
+    const { topic_id, force } = req.body||{};
+    if(!topic_id) return res.status(400).json({ error:"topic_id required" });
+    const t = await admin.from("topics").select("id,account_id,title,note_md,subject,preview").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id !== account_id) return res.status(403).json({ error:"not your topic" });
+    if(!force && t.data.preview && t.data.preview.status==="ready") return res.json(t.data.preview);   // cached
+    const note = String(t.data.note_md||"");
+    if(note.replace(/\s+/g," ").trim().length < 400){ const skip={status:"skipped",scenes:[]}; try{ await admin.from("topics").update({ preview:skip }).eq("id",topic_id); }catch(_){}; return res.json(skip); }
+    const built = await buildTopicPreview(note, t.data.subject||t.data.title||"Medicine");
+    try{ await admin.from("topics").update({ preview: built }).eq("id",topic_id); }catch(_){}   // needs a jsonb "preview" column; ignored if absent
+    try{ await admin.rpc("bump_ai_usage", { p_account:account_id, p_feature:"preview", p_tokens:0 }); }catch(_){}
+    res.json(built);
+  }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* Explain-simpler — re-say one narration step in plainer words (interactive study mode).
  * Tiny, cheap call; best-effort. Never caches — it's on-demand per tap. */
 app.post("/simplify", async (req,res)=>{

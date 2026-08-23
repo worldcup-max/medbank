@@ -2410,6 +2410,48 @@ function pageLecturer(id){
 }
 
 let topicTab='note', topicTabFor=null;
+/* ===== Topic Preview — the pre-read "orientation video" (SPEC-TOPIC-PREVIEW.md; flag-gated) ===== */
+var _PREVIEW={};   // in-memory per-topic cache (kept OUT of DATA so big blueprints never bloat the synced blob)
+function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.TOPIC_PREVIEW); }catch(e){ return false; } }
+function ensureTopicPreview(t){
+  if(!previewOn()||!t||!t.id||_PREVIEW[t.id]) return;
+  var note=(t.note||''); if(note.replace(/\s+/g,' ').trim().length<400){ _PREVIEW[t.id]={status:'skipped'}; return; }
+  _PREVIEW[t.id]={status:'building'};                                      // first note-open → build quietly in the background
+  (async function(){
+    try{
+      var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB){ _PREVIEW[t.id]={status:'failed'}; return; }
+      var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token;
+      if(!token){ _PREVIEW[t.id]={status:'failed'}; return; }
+      var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/topic-preview',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:t.id})});
+      var j=null; try{ j=await r.json(); }catch(e){}
+      _PREVIEW[t.id]=(j&&j.status)?j:{status:'failed'};
+      try{ if(window.smartLog&&j&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
+    }catch(e){ _PREVIEW[t.id]={status:'failed'}; }
+    try{ if((location.hash||'').indexOf(t.id)>=0) render(); }catch(e){}     // refresh the card the moment it's ready
+  })();
+}
+function topicPreviewCard(t){
+  if(!previewOn()||!t) return '';
+  var pv=_PREVIEW[t.id]||{status:'building'};
+  if(pv.status==='skipped'||pv.status==='failed') return '';               // nothing worth showing
+  var ready=(pv.status==='ready' && pv.scenes && pv.scenes.length);
+  var center = ready
+    ? '<button class="tpv-play" aria-label="Watch the preview" onclick="playTopicPreview(\''+t.id+'\')">▶</button>'
+    : '<div class="tpv-prep"><div class="tpv-spin"></div>Preparing your preview…</div>';
+  return '<div class="tpv-card">'
+    + '<div class="tpv-poster'+(ready?" ready":"")+'"'+(ready?" onclick=\"playTopicPreview('"+t.id+"')\"":"")+'>'
+    +   '<span class="tpv-chip">▶ PREVIEW</span><span class="tpv-dur">~3 min · visual + narrated</span>'+center
+    + '</div>'
+    + '<div class="tpv-meta"><div class="tpv-t">Get the picture first</div>'
+    +   '<div class="tpv-s">A quick visual tour of '+esc(t.name||'this topic')+' — build a mental map before you read.</div></div>'
+    + '</div>';
+}
+function playTopicPreview(tid){
+  var pv=_PREVIEW[tid];
+  if(!pv||pv.status!=='ready'||!pv.scenes||!pv.scenes.length){ if(window.mbToast)mbToast('Your preview is still building — one moment.'); return; }
+  try{ if(window.smartLog) smartLog({t:'preview_shown', topic_id:tid}); }catch(e){}
+  if(window.MB_playPreview) window.MB_playPreview(pv.scenes, tid);
+}
 function pageTopic(id){
   const t=topById(id); if(!t) return pageHome();
   IMGBASE = t.imgBase || '';
@@ -2424,7 +2466,9 @@ function pageTopic(id){
       <pre class="copy" style="margin-top:14px;text-align:left">Build MedBank topic ${t.sn??''} (${esc(t.subject.short)}) - ${esc(t.name)}</pre>
       The built note, simplified note, PDF, Primer Cards and Recall Cards will appear right here.</div>`;
   } else if(topicTab==='note'){
-    body = (t.pdf?`<div class="btnrow" style="margin-bottom:18px"><a class="btn" href="${t.pdf}" target="_blank">⬇ Open PDF</a></div>`:'')
+    try{ ensureTopicPreview(t); }catch(e){}                               // first note-open → build the preview in the background
+    body = topicPreviewCard(t)
+         + (t.pdf?`<div class="btnrow" style="margin-bottom:18px"><a class="btn" href="${t.pdf}" target="_blank">⬇ Open PDF</a></div>`:'')
          + `<div class="md notebody">${md(t.note)}</div>`;
   } else if(topicTab==='simplified'){
     const rd=isRead(t.id);
@@ -6829,6 +6873,21 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .fixq-t{font-weight:700;font-size:13.5px;margin-bottom:3px}
 .fixq-dg{font-weight:700;font-size:11.5px;white-space:nowrap}
 .fixq-why{font-size:12.5px;color:var(--dim);line-height:1.45;margin-bottom:8px}
+/* Topic Preview card (pre-read orientation video) */
+.tpv-card{border:1px solid var(--line,#e6e3f0);border-radius:14px;overflow:hidden;margin-bottom:18px;background:var(--panel,#fff)}
+.tpv-poster{position:relative;height:158px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#4c1d95 0%,#5b21b6 45%,#7c5cff 100%)}
+.tpv-poster.ready{cursor:pointer}
+.tpv-poster:before{content:"";position:absolute;inset:0;background:radial-gradient(120px 80px at 30% 30%,rgba(255,255,255,.16),transparent),radial-gradient(140px 90px at 75% 70%,rgba(255,255,255,.10),transparent);filter:blur(2px)}
+.tpv-chip{position:absolute;top:11px;left:11px;background:rgba(0,0,0,.34);color:#fff;font-size:11px;font-weight:800;letter-spacing:.6px;padding:3px 9px;border-radius:6px;z-index:2}
+.tpv-dur{position:absolute;bottom:11px;right:11px;background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:6px;z-index:2}
+.tpv-play{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.96);color:#5b21b6;border:0;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .12s}
+.tpv-play:hover{transform:scale(1.08)}
+.tpv-prep{z-index:2;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+.tpv-spin{width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.35);border-top-color:#fff;animation:tpvsp .9s linear infinite}
+@keyframes tpvsp{to{transform:rotate(360deg)}}
+.tpv-meta{padding:12px 15px}
+.tpv-t{font-weight:800;font-size:15px;color:var(--text,#1c1830)}
+.tpv-s{font-size:13px;color:var(--dim,#5c5570);margin-top:2px;line-height:1.45}
 .mgb-h{font-weight:700;font-size:12.5px;margin:10px 0 4px}
 .mgb-h:first-of-type{margin-top:4px}
 /* Q-bank performance dashboard */
@@ -7065,6 +7124,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       zones:{peri:{x:120,y:150,gap:34},axon:{x:410,y:150,gap:0},cns:{x:790,y:158,gap:46},pre:{x:405,y:360,gap:50},cleft:{x:505,y:405,gap:0},post:{x:635,y:405,gap:0},eff:{x:800,y:360,gap:120}}}
   };
   var BP=null,T2=null,i=0,playing=false,elMap={},curVB=[0,0,960,560],vizRate=1,SRC='',vizVoiceName='';
+  var PV=null;   // topic-preview sequencer state (null = normal single Visualize)
   var TYPEINFO={hormone_bubble:['#e0632b','hormone / signal'],toxin:['#e0632b','toxin'],receptor:['#0d9488','receptor'],gprotein:['#9333ea','G-protein'],enzyme:['#6d28d9','enzyme'],messenger:['#7c3aed','messenger'],kinase:['#9333ea','kinase'],vesicle:['#14b8a6','vesicle'],channel:['#14b8a6','channel'],water:['#2563eb','water'],neuron_soma:['#6d28d9','neuron'],snare:['#9333ea','SNARE'],muscle:['#b45309','muscle'],lightning:['#f59e0b','effect / result'],node:['#dc2626','marker']};
   function vizBanner(){ if(!SRC)return ''; var html=esc(SRC);
     (BP.narration_steps||[]).map(function(s){return s.term;}).filter(Boolean).forEach(function(t){
@@ -8100,7 +8160,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     document.body.appendChild(ov);
     $('vizX').onclick=closeModal;
   }
-  function closeModal(){ try{stop();}catch(e){} playing=false; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }   // stop() also clears the 9s speechSynthesis keep-alive + the say() watchdog, which used to keep ticking forever after close
+  function closeModal(){ try{stop();}catch(e){} playing=false; PV=null; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }   // stop() also clears the 9s speechSynthesis keep-alive + the say() watchdog, which used to keep ticking forever after close
   function mountPlayer(){
     var st=BP.narration_steps;
     var clean={}; Object.keys(BP).forEach(function(k){ if(k[0]!=='_')clean[k]=BP[k]; });
@@ -8334,7 +8394,9 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     $('rAgain').onclick=function(){ box.remove(); vizScore={c:0,n:0,streak:0,best:0}; _missed=[]; updateStreak(); vizQuiz=true; var qb=$('vizQuizBtn'); if(qb)qb.classList.add('qon'); jump(0); setTimeout(play,300); };
     $('rClose').onclick=function(){ box.remove(); }; }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return;
-    if(i<BP.narration_steps.length-1){ if(shouldQuiz()){ askNext(function(){ if(!playing)return; i++; playStep(); }); } else { i++; playStep(); } } else { stop(); showResults(); } }); }
+    if(i<BP.narration_steps.length-1){ if(PV){ i++; playStep(); } else if(shouldQuiz()){ askNext(function(){ if(!playing)return; i++; playStep(); }); } else { i++; playStep(); } }   // preview mode never quizzes — it just flows
+    else if(PV){ stop(); setTimeout(function(){ if(PV) PV.next(); }, 650); }   // scene finished → glide to the next scene
+    else { stop(); showResults(); } }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause';
     var _pp=document.querySelector('.vizposter'); if(_pp)_pp.remove();
     // keep-alive: Chrome silently stops speechSynthesis after ~15s — pause+resume resets that timer
@@ -8496,6 +8558,46 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     }catch(e){ var h=document.getElementById(hostId);
       if(h) h.innerHTML='<div class="vizgen err">'+esc((e&&e.message)||'Something went wrong')+'</div>';
       if(e&&e.status===429) vizLimitHit(e); }
+  };
+  /* ===== Topic Preview — sequenced "pre-read orientation" player (chains scene blueprints) ===== */
+  function pvBar(){
+    var ov=$('vizov'); if(!ov||!PV) return;
+    var head=(PV.scenes[PV.k]&&PV.scenes[PV.k].heading)||'';
+    var bar=document.getElementById('mbpvbar');
+    if(!bar){ bar=document.createElement('div'); bar.id='mbpvbar';
+      bar.style.cssText='position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;background:rgba(28,20,45,.94);color:#fff;z-index:30;font-size:13px;font-weight:600';
+      ov.appendChild(bar); }
+    var bstyle='background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:9px;padding:8px 12px;font-size:14px;font-weight:700;cursor:pointer';
+    bar.innerHTML='<span style="opacity:.9">🎬 Preview · '+(PV.k+1)+' / '+PV.scenes.length+(head?' · '+esc(head):'')+'</span>'+
+      '<span style="display:flex;gap:8px"><button id="mbpvPrev" style="'+bstyle+'">◀</button><button id="mbpvNext" style="'+bstyle+'">▶</button>'+
+      '<button id="mbpvRead" style="background:#7c5cff;color:#fff;border:0;border-radius:9px;padding:8px 14px;font-size:13.5px;font-weight:800;cursor:pointer">Start reading →</button></span>';
+    document.getElementById('mbpvPrev').onclick=function(){ if(PV&&PV.k>0){ try{stop();}catch(e){} pvLoad(PV.k-1); } };
+    document.getElementById('mbpvNext').onclick=function(){ if(!PV)return; try{stop();}catch(e){} if(PV.k<PV.scenes.length-1) pvLoad(PV.k+1); else pvFinish(); };
+    document.getElementById('mbpvRead').onclick=function(){ pvFinish(); };
+  }
+  function pvLoad(k){
+    if(!PV) return; PV.k=k; var sc=PV.scenes[k];
+    if(!sc||!sc.blueprint||!sc.blueprint.narration_steps||!sc.blueprint.narration_steps.length){ if(k<PV.scenes.length-1){ pvLoad(k+1); } else { pvFinish(); } return; }
+    try{ BP=sc.blueprint; SRC=''; VIZ_TID=PV.topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
+      applyLayout(BP); mountPlayer(); pvBar();
+      try{ if(k===0 && window.smartLog) smartLog({t:'preview_started', topic_id:PV.topicId, scenes:PV.scenes.length}); }catch(e){}
+      try{ if(window.smartLog) smartLog({t:'preview_scene', topic_id:PV.topicId, i:k}); }catch(e){}
+      try{ vizWarmVoices(); }catch(e){}
+      play();
+    }catch(e){ if(k<PV.scenes.length-1) pvLoad(k+1); else pvFinish(); }
+  }
+  function pvFinish(){
+    var done = PV ? (PV.k>=PV.scenes.length-1) : false, tid = PV&&PV.topicId, watched=PV?(PV.k+1):0, tot=PV?PV.scenes.length:0;
+    try{ if(window.smartLog) smartLog({t:(done?'preview_completed':'preview_skipped'), topic_id:tid, watched_scenes:watched, of:tot, at:'mid'}); }catch(e){}
+    PV=null; try{ stop(); }catch(e){} try{ var b=document.getElementById('mbpvbar'); if(b&&b.parentNode)b.parentNode.removeChild(b); }catch(e){}
+    try{ closeModal(); }catch(e){}
+  }
+  window.MB_playPreview=function(scenes, topicId){
+    if(!scenes||!scenes.length) return;
+    try{ if(window.unlockAudio)unlockAudio(); }catch(e){}
+    openModal();
+    PV={ scenes:scenes.slice(), k:0, topicId:topicId||'', next:function(){ if(!PV)return; if(PV.k<PV.scenes.length-1) pvLoad(PV.k+1); else pvFinish(); } };
+    pvLoad(0);
   };
   window.aiVisualizeInlineSaved=function(cardId, topicId, hostId){               // replay the card's saved explainer — instant, no rebuild
     var rec=(window.DATA&&DATA.cardViz)?DATA.cardViz[cardId]:null;
