@@ -2427,13 +2427,20 @@ function ensureTopicPreview(t){
       _PREVIEW[t.id]=(j&&j.status)?j:{status:'failed'};
       try{ if(window.smartLog&&j&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
     }catch(e){ _PREVIEW[t.id]={status:'failed'}; }
-    try{ if((location.hash||'').indexOf(t.id)>=0) render(); }catch(e){}     // refresh the card the moment it's ready
+    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) render(); }catch(e){}     // refresh the card when ready — but never yank a student who's already scrolled into the note
   })();
 }
+function retryTopicPreview(tid){ try{ delete _PREVIEW[tid]; }catch(e){} var t=topById(tid); if(t){ ensureTopicPreview(t); render(); } }
 function topicPreviewCard(t){
   if(!previewOn()||!t) return '';
   var pv=_PREVIEW[t.id]||{status:'building'};
-  if(pv.status==='skipped'||pv.status==='failed') return '';               // nothing worth showing
+  if(pv.status==='skipped') return '';                                     // note too short → nothing to show
+  if(pv.status==='failed'){                                                // don't vanish silently — offer a retry
+    return '<div class="tpv-card"><div class="tpv-poster" style="height:96px">'
+      + '<span class="tpv-chip">▶ PREVIEW</span>'
+      + '<button class="tpv-play" style="width:44px;height:44px;font-size:17px" onclick="retryTopicPreview(\''+t.id+'\')" aria-label="Retry preview">↻</button></div>'
+      + '<div class="tpv-meta"><div class="tpv-t">Preview couldn\'t build</div><div class="tpv-s">Tap ↻ to try again.</div></div></div>';
+  }
   var ready=(pv.status==='ready' && pv.scenes && pv.scenes.length);
   var center = ready
     ? '<button class="tpv-play" aria-label="Watch the preview" onclick="playTopicPreview(\''+t.id+'\')">▶</button>'
@@ -8250,17 +8257,18 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     var done=false; function fin(){ if(done)return; done=true; if(vizWatch){clearTimeout(vizWatch);vizWatch=null;} karaokeReset(); setKaraoke(_kSpans.length); try{cb&&cb();}catch(e){} }
     // watchdog: never stall. If the clip is NOT pre-generated the /tts round-trip is spent inside this budget,
     // so the watchdog used to fire mid-sentence and advance the step over its own audio — allow for the fetch.
-    var _warm=false; try{ _warm=!!(vizVoiceName||(window._ttsHas&&window._ttsHas(text,'read'))); }catch(e){}
+    var _warm=false; try{ _warm=!!(vizVoiceName||(window._ttsHas&&window._ttsHas(text,_vizUse))); }catch(e){}
     vizWatch=setTimeout(fin, Math.max(3800,(text||'').length*70/vizEffRate())+2600+(_warm?0:15000));
     var ss=window.speechSynthesis;
     function speakSS(vn){ var u=new SpeechSynthesisUtterance(text); u.rate=vizRate; if(vn){var vv=ss.getVoices().find(function(v){return v.name===vn;}); if(vv)u.voice=vv;}
       var gotB=false; u.onboundary=function(e){ if(!gotB){gotB=true; if(_kTimer){clearInterval(_kTimer);_kTimer=null;}} karaokeToChar(e.charIndex||0); };  // real word-sync when available
       u.onend=fin; u.onerror=fin; try{ss.cancel();}catch(e){} startKaraokeTimed(text); try{ss.speak(u);}catch(e){fin();} }
     if(vizVoiceName && ss){ speakSS(vizVoiceName); return; }
-    try{ if(window.voiceSpeak){ startKaraokeTimed(text); window.voiceSpeak(text,fin,'read',vizRate); return; } }catch(e){}
+    try{ if(window.voiceSpeak){ startKaraokeTimed(text); window.voiceSpeak(text,fin,_vizUse,vizRate); return; } }catch(e){}
     if(ss){ speakSS(''); } else { startKaraokeTimed(text); } }
   /* ===== Interactive study layer: smart quiz · scoring · tap-to-learn · recap ===== */
   var vizQuiz=false,_tip=null,VIZ_TID='';
+  var _vizUse='read';   // TTS "use" tier: 'read' for normal Visualize, 'preview' for the topic-preview player (server picks Fish/Kokoro by entitlement)
   var vizScore={c:0,n:0,streak:0,best:0},_missed=[];
   function updateStreak(){ var el=$('vizStreak'); if(!el)return; if(!vizQuiz||vizScore.n===0){el.textContent='';return;}
     el.textContent='🔥 '+vizScore.streak+'  ·  '+vizScore.c+'/'+vizScore.n; }
@@ -8395,7 +8403,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     $('rClose').onclick=function(){ box.remove(); }; }
   function playStep(){ render(i); say(BP.narration_steps[i].narration_text||'',function(){ if(!playing)return;
     if(i<BP.narration_steps.length-1){ if(PV){ i++; playStep(); } else if(shouldQuiz()){ askNext(function(){ if(!playing)return; i++; playStep(); }); } else { i++; playStep(); } }   // preview mode never quizzes — it just flows
-    else if(PV){ stop(); setTimeout(function(){ if(PV) PV.next(); }, 650); }   // scene finished → glide to the next scene
+    else if(PV){ var _pvk=PV.k; stop(); setTimeout(function(){ if(PV && PV.k===_pvk) PV.next(); }, 180); }   // scene finished → glide into the next (guarded so a manual Next during the gap can't double-advance; audio pre-cached = no gap)
     else { stop(); showResults(); } }); }
   function play(){ playing=true; var b=$('vizPlay'); if(b)b.textContent='❚❚ Pause';
     var _pp=document.querySelector('.vizposter'); if(_pp)_pp.remove();
@@ -8461,7 +8469,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   function vizWarmVoices(){ try{ if(!BP||!BP.narration_steps||!window.warmSpeak) return;
     if(vizVoiceName) return;                        // student picked a device voice — say() never touches these clips, so don't buy them
     var q=BP.narration_steps.map(function(s){return (s.narration_text||'').trim();}).filter(Boolean); var i=0;
-    (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],'read').then(nx2,nx2); })();
+    (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],_vizUse).then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],_vizUse).then(nx2,nx2); })();
   }catch(e){} }
   function vizPlayWhenReady(){ // step-0's voice is pre-generated before the pill flips to "ready", so this is normally instant
     var t=((BP.narration_steps&&BP.narration_steps[0]&&BP.narration_steps[0].narration_text)||'').trim();
@@ -8470,7 +8478,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,'read')||n++>16){ play(); } else setTimeout(poll,250); })();  // safety net: never wait more than ~4s of silence
   }
   function playVizFloat(){
-    var d=_vizFloatReady; if(!d)return; removeVizFloat();
+    var d=_vizFloatReady; if(!d)return; _vizUse='read'; removeVizFloat();
     try{ unlockAudio(); }catch(e){}                                       // unlock the audio element INSIDE the tap gesture so the first clip plays instantly (mobile blocks play() outside a gesture)
     openModal();
     BP=d.bp; SRC=d.text||''; applyLayout(d.bp);
@@ -8524,6 +8532,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   /* INLINE explainer: builds in the background under the card's explanation, never auto-plays,
      never interrupts reading. When ready it surfaces a "watch" pill and a play-when-you-want player. */
   function mountInline(bp,text,topicId,hostId,poster){                           // render the paused inline player into hostId
+    _vizUse='read';
     var host=document.getElementById(hostId); if(!host) return null;
     // a saved/legacy record with no steps used to throw inside mountPlayer, leaving a blank host and no
     // button (vizWatchSaved already hid it) — a silent dead end. Say so instead.
@@ -8592,12 +8601,35 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     PV=null; try{ stop(); }catch(e){} try{ var b=document.getElementById('mbpvbar'); if(b&&b.parentNode)b.parentNode.removeChild(b); }catch(e){}
     try{ closeModal(); }catch(e){}
   }
+  function pvLoadingBar(done,total){
+    var ov=$('vizov'); if(!ov) return; var el=document.getElementById('pvload');
+    if(!el){ el=document.createElement('div'); el.id='pvload'; el.style.cssText='position:absolute;inset:0;background:rgba(28,20,45,.97);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:40;text-align:center;padding:24px'; ov.appendChild(el); }
+    var pct=total?Math.round(done/total*100):0;
+    el.innerHTML='<div style="font-size:30px;margin-bottom:12px">🎬</div><div style="font-weight:800;font-size:17px">Preparing your preview…</div>'
+      +'<div style="font-size:13px;opacity:.85;margin:6px 0 15px">Loading the narration so it plays without any breaks</div>'
+      +'<div style="width:230px;height:6px;border-radius:6px;background:rgba(255,255,255,.2);overflow:hidden"><i style="display:block;height:100%;width:'+pct+'%;background:#7c5cff;transition:width .3s"></i></div>'
+      +'<div style="font-size:12px;opacity:.7;margin-top:9px">'+done+' / '+total+'</div>';
+  }
+  function pvPreloadThenPlay(){
+    if(!PV) return;
+    var texts=[]; PV.scenes.forEach(function(sc){ (((sc.blueprint||{}).narration_steps)||[]).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t)texts.push(t); }); });
+    var total=texts.length, done=0, started=false;
+    function start(){ if(started||!PV)return; started=true; try{ var l=document.getElementById('pvload'); if(l&&l.parentNode)l.parentNode.removeChild(l); }catch(e){} pvLoad(0); }
+    pvLoadingBar(0,total);
+    if(!window.warmSpeak || !total || vizVoiceName){ start(); return; }   // device-voice users: no clips to pre-buy
+    var next=0, active=0, MAXP=3;
+    function one(){ if(!PV){return;} if(next>=texts.length){ if(active===0) start(); return; } var t=texts[next++]; active++;
+      window.warmSpeak(t,_vizUse).then(f,f); function f(){ active--; done++; try{pvLoadingBar(done,total);}catch(e){} if(done>=total) start(); else one(); } }
+    for(var p=0;p<MAXP;p++) one();
+    setTimeout(start, 35000);   // safety: never trap the student behind a hung /tts
+  }
   window.MB_playPreview=function(scenes, topicId){
     if(!scenes||!scenes.length) return;
     try{ if(window.unlockAudio)unlockAudio(); }catch(e){}
+    _vizUse='preview';                                   // paying → Fish, free → Kokoro (server decides)
     openModal();
     PV={ scenes:scenes.slice(), k:0, topicId:topicId||'', next:function(){ if(!PV)return; if(PV.k<PV.scenes.length-1) pvLoad(PV.k+1); else pvFinish(); } };
-    pvLoad(0);
+    pvPreloadThenPlay();                                  // pre-generate every scene's audio, THEN play seamlessly
   };
   window.aiVisualizeInlineSaved=function(cardId, topicId, hostId){               // replay the card's saved explainer — instant, no rebuild
     var rec=(window.DATA&&DATA.cardViz)?DATA.cardViz[cardId]:null;

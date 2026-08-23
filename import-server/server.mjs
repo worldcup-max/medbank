@@ -1237,9 +1237,17 @@ app.post("/tts", async (req,res)=>{
     const user = await getUser(req); if(!user) return res.status(401).json({ error:"not signed in" });
     // open to any signed-in student — read-aloud on their own content
     const text = (req.body.text||"").toString().slice(0,3000); if(!text.trim()) return res.status(400).json({ error:"no text" });
-    const isTutor = req.body.use === "tutor";
+    const use = req.body.use;
+    const isTutor = use === "tutor";
     let provider = isTutor ? "fish" : "kokoro";
     let voice = req.body.voice || (isTutor ? (process.env.FISH_VOICE_TUTOR || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read);
+    // Topic Preview audio tier: paying (premium OR basic/trial → isPremium) get Fish; free users get Kokoro.
+    if(use === "preview"){
+      const entitled = await isPremium(user.id, user.email).catch(()=>false);
+      provider = entitled ? "fish" : "kokoro";
+      // ignore any client-sent voice here — it's an OpenAI/Kokoro name and would be an invalid Fish reference id
+      voice = provider === "fish" ? (process.env.FISH_VOICE_PREVIEW || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read;
+    }
     // "Ask the hosts": answer in one of the podcast's OWN two host voices (voiceKey = ethan/laura/…)
     const vk = (req.body.voiceKey||"").toString().toLowerCase();
     if(vk && FISH_VOICE_BY_KEY[vk]){ provider = "fish"; voice = fishRefForKey(vk, voice); }
@@ -1398,7 +1406,7 @@ async function renderPreviewScene(scene, subject){
   const prompt = buildVisualPrompt(text, subject);
   for(let attempt=1; attempt<=2; attempt++){
     const p = attempt>1 ? (prompt+"\n\nYour previous JSON was not a valid, drawable blueprint. Return ONLY corrected JSON with a valid \"layout\" and at least 2 narration_steps.") : prompt;
-    const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:6000, temperature:0.2, json:true });
+    const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
     const bp = parseBlueprint(gen.text);
     if(bp && (!bp.layout || LAYOUTS.has(bp.layout)) && narratedSteps(bp)>=2 && qcCheck(bp).pass){
       if(!bp.layout || bp.layout==="scene"){ try{ bp._render=renderHints(bp.template); bp._defs=assetDefs((bp.elements||[]).map(e=>e.type)); }catch(_){} }
