@@ -295,6 +295,7 @@
         // The file <input> keeps its selection when the student switches to YouTube/Paste
         // (it's only hidden), so without this mode check an abandoned PDF was silently
         // uploaded alongside the link/text and fed to the model.
+        if(window.MB_PAYWALL && !MB_PAYWALL.guard("Importing a lecture")){ buildUI.stop(); return; }   // PW-01: gate before the base64 read + upload, not after
         var files=(recAudio || srcMode==="file") ? usableFiles(file.files) : [];
         var pdf=files.find(isPdfFile);
         if(pdf){ body.pdf_base64=await fileToB64(pdf); }
@@ -320,7 +321,8 @@
         if(!out){
           buildUI.stop();
           show(resp.ok ? "The build finished but the reply couldn't be read. Check your topics before rebuilding."
-                       : (resp.status===413 ? "That upload is too large. Try a smaller PDF or fewer photos."
+                       : (resp.status===413 ? (body.audio_base64 ? "That recording is too long to upload in one go. Record in ~45-minute parts."   // REC-09b
+                                                                  : "That upload is too large. Try a smaller PDF or fewer photos.")
                                             : "The import server didn't respond properly ("+resp.status+"). Try again in a moment."));
           return; }
         if(!resp.ok){

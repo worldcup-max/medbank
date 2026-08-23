@@ -38,22 +38,14 @@ export const VOCAB = {
  * approved asset is instantly usable by the prompt + QC + engine with NO code deploy.
  * A data-driven asset carries an `svg` spec (tokens @X @Y @LABEL @COLOR) the engine renders. */
 export function registerAssets(list){
-  // VIZM-01: specs are LLM output. Coerce to the right SHAPE here so a bare string
-  // (valid_zones:"body") can never enter ASSET and later blow up assetMapText's .join
-  // on EVERY /visualize build, feature-wide, un-restartable (loadApprovedOverlay re-registers).
-  const strArr = v => Array.isArray(v) ? v.filter(x => typeof x === "string" && x.trim()) : [];
   let n = 0;
   for(const a of (list||[])){
-    const id = (a && typeof a.id === "string") ? a.id.trim() : "";
-    if(!id) continue;
-    if(ASSET[id] && ASSET[id].source !== "overlay") continue;   // VIZM-02: never let an overlay silently overwrite a built-in manifest asset
-    const vt = strArr(a.valid_templates);
-    const vz = strArr(a.valid_zones);
-    ASSET[id] = {
-      category: String((a && a.category) || "custom"), scale: String((a && a.scale) || "molecular"),
-      valid_templates: vt.length ? vt : ["membrane_cell","neuro_pathway"],
-      ...(vz.length ? { valid_zones:vz } : {}),
-      ...(a && typeof a.svg === "string" ? { svg:a.svg } : {}),
+    if(!a || !a.id) continue;
+    ASSET[a.id] = {
+      category: a.category||"custom", scale: a.scale||"molecular",
+      valid_templates: a.valid_templates||["membrane_cell","neuro_pathway"],
+      ...(a.valid_zones ? { valid_zones:a.valid_zones } : {}),
+      ...(a.svg ? { svg:a.svg } : {}),
       source: "overlay"
     };
     n++;
@@ -69,14 +61,11 @@ export function assetDefs(types){
 
 /* compact "asset : allowed templates[/zones]" map so the model never crosses scales */
 function assetMapText(){
-  // VIZM-01 belt-and-braces: a malformed entry skips itself, never kills the whole prompt.
   return Object.entries(ASSET).map(([id,m])=>{
-    try{
-      let s = id+" → "+_arr(m.valid_templates).join("/");
-      if(m.valid_zones) s += " [zones: "+_arr(m.valid_zones).join(",")+"]";
-      return s;
-    }catch(_){ return null; }
-  }).filter(Boolean).join("\n");
+    let s = id+" → "+(m.valid_templates||[]).join("/");
+    if(m.valid_zones) s += " [zones: "+m.valid_zones.join(",")+"]";
+    return s;
+  }).join("\n");
 }
 
 /* built fresh each call so overlay-approved templates/assets appear immediately */
@@ -2702,7 +2691,7 @@ export function treeCheck(bp){
   const revealed={}; steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
+    (s.reveal||[]).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
     if(s.point && !byId[s.point]) issues.push("step "+(i+1)+" point bad ref "+s.point);
   });
   nodes.forEach(n=>{ if(!revealed[n.id]) issues.push("node '"+(n.label||n.id)+"' is never revealed (missing step)"); });
@@ -2723,7 +2712,7 @@ export function flowCheck(bp){
   const revealed={}; steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
+    (s.reveal||[]).forEach(r=>{ if(!byId[r]) issues.push("step "+(i+1)+" reveals unknown node "+r); revealed[r]=1; });
     if(s.point && !byId[s.point]) issues.push("step "+(i+1)+" point bad ref "+s.point);
   });
   nodes.forEach(n=>{ if(!revealed[n.id]) issues.push("node '"+(n.label||n.id)+"' is never revealed (missing step)"); });
@@ -2745,7 +2734,7 @@ export function cellCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!CELL_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part "+r); revealed[r]=1; });
+    (s.reveal||[]).forEach(r=>{ if(!CELL_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part "+r); revealed[r]=1; });
     if(s.point && !CELL_PARTS.has(s.point)) issues.push("step "+(i+1)+" point not a cell part: "+s.point);
   });
   ["anode","cathode","wire","bridge"].forEach(p=>{ if(!revealed[p]) issues.push("core part '"+p+"' is never revealed"); });
@@ -2764,20 +2753,18 @@ export function graphPlotCheck(bp){
   const ids = {};
   curves.forEach((c,i)=>{ if(!c.id){issues.push("curve "+i+" missing id");return;} ids[c.id]=1;
     if(!Array.isArray(c.points)||c.points.length<2) issues.push("curve '"+c.id+"' needs ≥2 points"); });
-  _arr(bp.markers).forEach((m,i)=>{ if(!m.id){issues.push("marker "+i+" missing id");return;} ids[m.id]=1;
+  (bp.markers||[]).forEach((m,i)=>{ if(!m.id){issues.push("marker "+i+" missing id");return;} ids[m.id]=1;
     if(!Array.isArray(m.at)||m.at.length!==2) issues.push("marker '"+m.id+"' needs at:[x,y]"); });
-  _arr(bp.regions).forEach((r,i)=>{ if(!r.id){issues.push("region "+i+" missing id");return;} ids[r.id]=1; });
+  (bp.regions||[]).forEach((r,i)=>{ if(!r.id){issues.push("region "+i+" missing id");return;} ids[r.id]=1; });
   const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
   if(steps.length<3) issues.push("too few steps ("+steps.length+")");
   if(steps.length>10) issues.push("too many steps ("+steps.length+")");
-  const gRevealed={};
   steps.forEach((s,i)=>{
     if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); else gRevealed[r]=1; });
+    (s.reveal||[]).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
     if(s.point && !ids[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
   });
-  curves.forEach(c=>{ if(c.id && !gRevealed[c.id]) issues.push("curve '"+c.id+"' is declared but never revealed by any step — it won't appear"); });   // QCV-03
   return { pass: issues.length===0, issues };
 }
 
@@ -2787,14 +2774,12 @@ export function orbitalCheck(bp){
   if(!bp.meta||!bp.meta.title)issues.push("missing meta.title");
   const subs=Array.isArray(bp.subshells)?bp.subshells:[]; if(subs.length<1)issues.push("no subshells");
   const ids={}; subs.forEach((s,i)=>{ if(!s.id){issues.push("subshell "+i+" missing id");return;} ids[s.id]=1;
-    if(!(Number.isInteger(s.boxes)&&s.boxes>=1))issues.push("subshell '"+s.id+"' needs an integer boxes ≥1");   // QCV-05: no "1"/1.5
-    if(!Number.isInteger(s.electrons)||s.electrons<0||s.electrons>2*s.boxes)issues.push("subshell '"+s.id+"' electrons must be an integer 0.."+(2*s.boxes)); });
+    if(!(s.boxes>=1))issues.push("subshell '"+s.id+"' needs boxes ≥1");
+    if(s.electrons==null||s.electrons<0||s.electrons>2*s.boxes)issues.push("subshell '"+s.id+"' electrons must be 0.."+(2*s.boxes)); });
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const oRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!ids[r])issues.push("step "+(i+1)+" reveals unknown subshell "+r);else oRevealed[r]=1;});
+    (s.reveal||[]).forEach(r=>{if(!ids[r])issues.push("step "+(i+1)+" reveals unknown subshell "+r);});
     if(s.point&&!ids[s.point])issues.push("step "+(i+1)+" point unknown "+s.point); });
-  subs.forEach(s=>{ if(s.id && !oRevealed[s.id])issues.push("subshell '"+s.id+"' is never revealed — it won't appear"); });   // QCV-03
   return {pass:issues.length===0,issues};
 }
 /* VSEPR GEOMETRY validity. */
@@ -2806,11 +2791,9 @@ export function geometryCheck(bp){
   if(!bp.center)issues.push("missing center atom");
   if(!GEO_SHAPES.has(bp.shape))issues.push("shape must be one of: "+[...GEO_SHAPES].join(", "));
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const geoRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!GEO_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);else geoRevealed[r]=1;});
+    (s.reveal||[]).forEach(r=>{if(!GEO_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
     if(s.point&&!GEO_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
-  if(!geoRevealed["bonds"])issues.push("the bonds are never revealed — the molecule won't be drawn");   // QCV-03
   return {pass:issues.length===0,issues};
 }
 /* ICE table validity. */
@@ -2822,11 +2805,9 @@ export function iceCheck(bp){
   const sp=Array.isArray(bp.species)?bp.species:[]; if(sp.length<2)issues.push("need ≥2 species");
   const rows=bp.rows||{}; ["I","C","E"].forEach(r=>{ if(!Array.isArray(rows[r])||rows[r].length!==sp.length)issues.push("row "+r+" must have "+sp.length+" cells"); });
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const iceRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!ICE_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);else iceRevealed[r]=1;});
+    (s.reveal||[]).forEach(r=>{if(!ICE_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
     if(s.point&&!ICE_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
-  ["I","C","E"].forEach(r=>{ if(!iceRevealed[r])issues.push("row '"+r+"' is never revealed — the ICE table stays blank"); });   // QCV-03
   return {pass:issues.length===0,issues};
 }
 
@@ -2867,15 +2848,13 @@ export function vennCheck(bp){
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
   if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
   if(steps.length>10) issues.push("too many steps ("+steps.length+")");
-  const vRevealed={};
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); else vRevealed[r]=1; });
-    _arr(s.active).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
+    (s.reveal||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
+    (s.active||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
     if(s.point && !ok[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
   });
-  ids.forEach(x=>{ if(!vRevealed[x])issues.push("set '"+x+"' is never revealed — the diagram would be blank"); });   // QCV-03
   return { pass: issues.length===0, issues };
 }
 
@@ -2895,8 +2874,8 @@ export function unitCircleCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>320) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...UC_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...UC_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!UC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
     if(s.point && !UC_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
   });
   ["radius","sin","cos"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — the unit-circle story needs the radius, the sine height and the cosine across"); });
@@ -2936,8 +2915,8 @@ export function solveCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a line id"+(nl?", or 'nl' for the number line":"")+")"); else revealed.add(r); });
-    _arr(s.active).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a line id"+(nl?", or 'nl' for the number line":"")+")"); else revealed.add(r); });
+    (s.active||[]).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point && !ok[s.point]) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'");
   });
   lines.forEach(ln=>{ if(ln.id && !revealed.has(ln.id)) issues.push("line '"+ln.id+"' is never revealed — it will not appear"); });
@@ -2962,8 +2941,8 @@ export function vectorsCheck(bp){
   const seen=new Set();
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
-    _arr(s.reveal).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...VEC_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...VEC_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!VEC_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
     if(s.point && !VEC_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
   });
   ["a","shift","res"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — tip-to-tail needs the first vector, the slid copy and the resultant"); });
@@ -2989,8 +2968,8 @@ export function matrixCheck(bp){
   const seen=new Set();
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
-    _arr(s.reveal).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...MAT_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" reveals unknown part '"+r+"' (use "+[...MAT_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!MAT_PARTS.has(r)) issues.push("step "+(i+1)+" active unknown part '"+r+"'"); });
     if(s.point && !MAT_PARTS.has(s.point)) issues.push("step "+(i+1)+" point is not a part: "+s.point);
   });
   ["orig","ti","tj"].forEach(p=>{ if(!seen.has(p)) issues.push("part '"+p+"' is never revealed — show the unit square and where BOTH basis vectors land"); });
@@ -3053,8 +3032,8 @@ export function fbdCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a force id, or one of "+[...FBD_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a force id, or one of "+[...FBD_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'");
   });
   forces.forEach(f=>{ if(f.id&&!seen.has(f.id)) issues.push("force '"+f.id+"' is never revealed — it will not appear"); });
@@ -3119,8 +3098,8 @@ export function circuitCheck(bp){
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
     if(/used up|uses up the current|current is consumed/i.test(s.narration_text||"")) issues.push("step "+(i+1)+" says the current is used up — it is not. Say 'the charge comes back; the ENERGY is delivered'");
-    _arr(s.reveal).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a component id, or one of "+[...CIR_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a component id, or one of "+[...CIR_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'");
   });
   comps.forEach(c=>{ if(c.id&&!seen.has(c.id)) issues.push("component '"+c.id+"' is never revealed — it will not appear"); });
@@ -3226,8 +3205,8 @@ export function logicCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use an input/gate/output id, or "+[...LOG_PARTS].join(", ")+")"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use an input/gate/output id, or "+[...LOG_PARTS].join(", ")+")"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'");
     if(s.inputs!=null){ if(!Array.isArray(s.inputs)||s.inputs.length!==ins.length) issues.push("step "+(i+1)+" 'inputs' must be a list of "+ins.length+" bits, one per input pin");
       else s.inputs.forEach(b=>{ if(b!==0&&b!==1) issues.push("step "+(i+1)+" 'inputs' may only contain 0 and 1"); }); }
@@ -3265,8 +3244,8 @@ export function tableCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a row id, a column id, 'head' or 'caption')"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a row id, a column id, 'head' or 'caption')"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'"); });
   if(!seen.has("head")) issues.push("'head' is never revealed — the column headings must go up first, or the numbers mean nothing");
   rows.forEach((r,i)=>{ const rid=r.id||("r"+i); if(!seen.has(rid)) issues.push("row '"+rid+"' is never revealed — it will not appear"); });
@@ -3311,8 +3290,8 @@ export function punnettCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>420) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a cell id, 'p1', 'p2', 'gtop', 'gside', 'tally' or 'ratio')"); else seen.add(r); });
-    _arr(s.active).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a cell id, 'p1', 'p2', 'gtop', 'gside', 'tally' or 'ratio')"); else seen.add(r); });
+    (s.active||[]).forEach(r=>{ if(!known(r)) issues.push("step "+(i+1)+" active unknown id '"+r+"'"); });
     if(s.point&&!known(s.point)) issues.push("step "+(i+1)+" point unknown id '"+s.point+"'"); });
   ["gtop","gside","ratio"].forEach(p=>{ if(!seen.has(p)) issues.push("'"+p+"' is never revealed — "+
     (p==="ratio"?"the cross has to end with the ratio":"the headers must be earned from the gametes before any cell means anything")); });
@@ -3414,15 +3393,15 @@ export function curlyCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text&&s.narration_text.length>380) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a frame, species or arrow id, or "+[...CURLY_PARTS].join(", ")+")"); else { seen.add(r); if(id[r]==="arrow")arrowSeen=true; } });
-    _arr(s.active).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" activates unknown id '"+r+"'"); });
+    (s.reveal||[]).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" reveals unknown id '"+r+"' (use a frame, species or arrow id, or "+[...CURLY_PARTS].join(", ")+")"); else { seen.add(r); if(id[r]==="arrow")arrowSeen=true; } });
+    (s.active||[]).forEach(r=>{ if(!ok(r)) issues.push("step "+(i+1)+" activates unknown id '"+r+"'"); });
     if(s.point&&!ok(s.point)) issues.push("step "+(i+1)+" points at unknown id '"+s.point+"'"); });
   frames.forEach(f=>{ if(f.id&&!seen.has(f.id)) issues.push("frame '"+f.id+"' is never revealed by any step"); });
   frames.forEach(f=>(Array.isArray(f.arrows)?f.arrows:[]).forEach(a=>{
     if(a.id&&!seen.has(a.id)) issues.push("arrow '"+a.id+"' is never revealed — an arrow that never fires teaches nothing"); }));
   if(!arrowSeen) issues.push("no arrow is ever revealed — a curly-arrow mechanism with no arrows is just a list of structures");
   // a frame's arrows must not be revealed before the frame they live on
-  const at={}; steps.forEach((s,i)=>_arr(s.reveal).forEach(r=>{ if(at[r]==null)at[r]=i; }));
+  const at={}; steps.forEach((s,i)=>(s.reveal||[]).forEach(r=>{ if(at[r]==null)at[r]=i; }));
   frames.forEach(f=>(Array.isArray(f.arrows)?f.arrows:[]).forEach(a=>{
     if(at[a.id]!=null&&at[f.id]!=null&&at[a.id]<at[f.id]) issues.push("arrow '"+a.id+"' is revealed before its frame '"+f.id+"'"); }));
   // concerted: every arrow on a frame fires in ONE beat, because that IS the claim being made
@@ -3485,10 +3464,10 @@ export function qcCheck(bp){
   steps.forEach((s,i)=>{
     if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
-    _arr(s.active).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
-    _arr(s.arrows).forEach(a=>{ if(!okRef(a.from)||!okRef(a.to)) issues.push("step "+(i+1)+" arrow bad ref"); anyFlow=true; });
-    _arr(s.move).forEach(m=>{ if(!ids[m.id]) issues.push("step "+(i+1)+" move unknown id"); anyFlow=true; });
+    (s.reveal||[]).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
+    (s.active||[]).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
+    (s.arrows||[]).forEach(a=>{ if(!okRef(a.from)||!okRef(a.to)) issues.push("step "+(i+1)+" arrow bad ref"); anyFlow=true; });
+    (s.move||[]).forEach(m=>{ if(!ids[m.id]) issues.push("step "+(i+1)+" move unknown id"); anyFlow=true; });
     if(s.point && !okRef(s.point)) issues.push("step "+(i+1)+" point bad ref "+s.point);
   });
   if(!anyFlow) issues.push("no directional flow (no arrows/moves anywhere)");
@@ -3502,56 +3481,56 @@ export function qcCheck(bp){
 const ANNOTATION = new Set(["label","blockx","lightning"]);
 function _arr(v){ return Array.isArray(v)?v:(v==null?[]:[v]); }  // QCV-01: coerce a model-supplied field to an array (string reveal:"x" -> ["x"]) instead of throwing
 export function chainOf(bp){
-  if(bp && bp.layout==="orbital") return _arr(bp.subshells).map(s=>s.label||s.id);
+  if(bp && bp.layout==="orbital") return (bp.subshells||[]).map(s=>s.label||s.id);
   if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
   if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
-  if(bp && bp.layout==="graph") return _arr(bp.markers).map(m=>m.label||m.id);
+  if(bp && bp.layout==="graph") return (bp.markers||[]).map(m=>m.label||m.id);
   if(bp && bp.layout==="punnett"){ const P=bp.parents||{}, G=bp.gametes||{};
     return [ ((P.p1&&P.p1.genotype)||"?")+" × "+((P.p2&&P.p2.genotype)||"?"),
              "gametes: "+((G.top||[]).join(", "))+"  /  "+((G.side||[]).join(", ")) ]
-      .concat(_arr(bp.cells).map(c=>c.geno||c.id))
-      .concat(_arr(bp.traits).map(t=>t.label||t.key))
+      .concat((bp.cells||[]).map(c=>c.geno||c.id))
+      .concat((bp.traits||[]).map(t=>t.label||t.key))
       .concat([bp.ratio||""]).filter(Boolean); }
   if(bp && bp.layout==="curly") return [(bp.mode||"stepwise")+" mechanism", bp.reaction||""]
-    .concat(_arr(bp.frames).map(f=>(f.title||f.id)+(f.badge?"  ["+f.badge+"]":"")+"  · charge "+(f.charge||"0")))
-    .concat(_arr(bp.frames).flatMap(f=>(f.arrows||[]).map(a=>"arrow: "+(a.label||a.id)+"  (tail = "+(a.tail||"?")+")")))
+    .concat((bp.frames||[]).map(f=>(f.title||f.id)+(f.badge?"  ["+f.badge+"]":"")+"  · charge "+(f.charge||"0")))
+    .concat((bp.frames||[]).flatMap(f=>(f.arrows||[]).map(a=>"arrow: "+(a.label||a.id)+"  (tail = "+(a.tail||"?")+")")))
     .filter(Boolean);
   if(bp && bp.layout==="unitcircle") return ["unit circle (r = 1)","angle θ = "+(bp.angle==null?50:bp.angle)+"°","cos θ = x","sin θ = y","cos²θ + sin²θ = 1"];
-  if(bp && bp.layout==="solve") return _arr(bp.lines).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
+  if(bp && bp.layout==="solve") return (bp.lines||[]).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
     .concat(bp.numberline?["solution set: x "+(bp.numberline.op||"≥")+" "+bp.numberline.value]:[]);
   if(bp && bp.layout==="vectors"){ const a=bp.a||[0,0],b=bp.b||[0,0];
     return ["a = ("+a[0]+", "+a[1]+")","b = ("+b[0]+", "+b[1]+")","b slid tip-to-tail","a + b = ("+(a[0]+b[0])+", "+(a[1]+b[1])+")"]; }
-  if(bp && bp.layout==="matrix"){ const M=(Array.isArray(bp.M)&&Array.isArray(bp.M[0])&&Array.isArray(bp.M[1])&&bp.M[0].length>=2&&bp.M[1].length>=2)?bp.M:[[1,0],[0,1]];   // QCV-02: guard a short/!2×2 M
+  if(bp && bp.layout==="matrix"){ const M=bp.M||[[1,0],[0,1]];
     return ["unit square with i and j","i → ("+M[0][0]+", "+M[1][0]+")","j → ("+M[0][1]+", "+M[1][1]+")","det = "+(M[0][0]*M[1][1]-M[0][1]*M[1][0])+" (area scale factor)"]; }
   if(bp && bp.layout==="fbd") return ["isolate the body"]
-    .concat(_arr(bp.forces).map(f=>(f.label||f.id)+(f.agent?" — "+f.agent:"")))
-    .concat(_arr(bp.components).map(c=>c.label||""))
+    .concat((bp.forces||[]).map(f=>(f.label||f.id)+(f.agent?" — "+f.agent:"")))
+    .concat((bp.components||[]).map(c=>c.label||""))
     .concat(bp.net?[bp.net.label||"F_net"]:[])
     .concat(bp.accel?[(bp.accel.label||"a")+" (not a force)"]:[]);
   if(bp && bp.layout==="circuit") return [((bp.battery||{}).label)||"battery"]
-    .concat(_arr(bp.components).map(c=>c.label||c.id))
+    .concat((bp.components||[]).map(c=>c.label||c.id))
     .concat([((bp.current||{}).label)||"current — the same everywhere"])
-    .concat(_arr(bp.ladder).map(e=>e.label||(((+e.v||0)>0?"+":"")+e.v+" V")));
-  if(bp && bp.layout==="logic") return _arr(bp.inputs).map(p=>(p.label||p.id)+" = "+(p.value?1:0))
-    .concat(_arr(bp.gates).map(g=>(g.type||"")+((g.label)?" — "+g.label:"")))
-    .concat(_arr(bp.outputs).map(o=>o.label||o.id))
-    .concat(bp.truth_table?["truth table — all "+Math.pow(2,_arr(bp.inputs).length)+" rows"]:[]);
-  if(bp && bp.layout==="table") return [_arr(bp.columns).map(c=>c.label||c.id).join(" | ")]
-    .concat(_arr(bp.rows).map(r=>(r.cells||[]).join(" | ")));
-  if(bp && bp.layout==="venn") return _arr(bp.sets).map(s=>s.label||s.id)
-    .concat(_arr(bp.regions).map(r=>(r.id||"")+(r.label?" = "+r.label:"")));
+    .concat((bp.ladder||[]).map(e=>e.label||(((+e.v||0)>0?"+":"")+e.v+" V")));
+  if(bp && bp.layout==="logic") return (bp.inputs||[]).map(p=>(p.label||p.id)+" = "+(p.value?1:0))
+    .concat((bp.gates||[]).map(g=>(g.type||"")+((g.label)?" — "+g.label:"")))
+    .concat((bp.outputs||[]).map(o=>o.label||o.id))
+    .concat(bp.truth_table?["truth table — all "+Math.pow(2,(bp.inputs||[]).length)+" rows"]:[]);
+  if(bp && bp.layout==="table") return [(bp.columns||[]).map(c=>c.label||c.id).join(" | ")]
+    .concat((bp.rows||[]).map(r=>(r.cells||[]).join(" | ")));
+  if(bp && bp.layout==="venn") return (bp.sets||[]).map(s=>s.label||s.id)
+    .concat((bp.regions||[]).map(r=>(r.id||"")+(r.label?" = "+r.label:"")));
   if(bp && bp.layout==="cell") return [(bp.anode&&bp.anode.label)||"anode","e⁻ → wire","(cathode)"+((bp.cathode&&bp.cathode.label)||""),bp.bridge||"salt bridge"];
-  if(bp && bp.layout==="flow") return _arr(bp.nodes).map(n=>n.label||n.id);   // flow = the node sequence
+  if(bp && bp.layout==="flow") return (bp.nodes||[]).map(n=>n.label||n.id);   // flow = the node sequence
   if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
     const nodes = bp.nodes||[], byId={}; nodes.forEach(n=>byId[n.id]=n);
-    const root = bp.root || (nodes[0]&&nodes[0].id), out=[], seen={};   // QCV-02: visited set — a cyclic tree no longer stack-overflows
-    (function walk(id){ const n=byId[id]; if(!n||seen[id])return; seen[id]=1; out.push(n.label||n.id); nodes.filter(x=>x.parent===id).forEach(x=>walk(x.id)); })(root);
+    const root = bp.root || (nodes[0]&&nodes[0].id), out=[];
+    (function walk(id){ const n=byId[id]; if(!n)return; out.push(n.label||n.id); nodes.filter(x=>x.parent===id).forEach(x=>walk(x.id)); })(root);
     return out.length?out:nodes.map(n=>n.label||n.id);
   }
   const els = (bp && bp.elements || []).filter(e => e.id && !ANNOTATION.has(e.type));
   const steps = (bp && bp.narration_steps) || [];
   const firstReveal = {};
-  steps.forEach((s,i)=> _arr(s.reveal).forEach(id=>{ if(firstReveal[id]==null) firstReveal[id]=i; }));
+  steps.forEach((s,i)=> (s.reveal||[]).forEach(id=>{ if(firstReveal[id]==null) firstReveal[id]=i; }));
   return els
     .map((e,idx)=>({ e, order:(firstReveal[e.id]!=null?firstReveal[e.id]:999), idx }))
     .sort((a,b)=> a.order-b.order || a.idx-b.idx)
@@ -3571,15 +3550,15 @@ export function graphCheck(bp){
 
   // every chain element must be revealed at some step, or it never renders
   const revealed = new Set();
-  steps.forEach(s => _arr(s.reveal).forEach(id => revealed.add(id)));
+  steps.forEach(s => (s.reveal||[]).forEach(id => revealed.add(id)));
   for(const e of els) if(!revealed.has(e.id)) issues.push("element '"+(e.label||e.id)+"' is never revealed — it won't appear (missing step)");
 
   // build the undirected connectivity graph from arrows (+ moves) between chain elements
   const adj = {}; els.forEach(e => adj[e.id]=new Set());
   const linked = new Set();
   const addEdge = (a,b)=>{ if(ids.has(a)&&ids.has(b)&&a!==b){ adj[a].add(b); adj[b].add(a); linked.add(a); linked.add(b); } };
-  steps.forEach(s=>{ _arr(s.arrows).forEach(a=>addEdge(a.from,a.to));
-                     _arr(s.move).forEach(m=>{ if(m.to_id) addEdge(m.id,m.to_id); }); });
+  steps.forEach(s=>{ (s.arrows||[]).forEach(a=>addEdge(a.from,a.to));
+                     (s.move||[]).forEach(m=>{ if(m.to_id) addEdge(m.id,m.to_id); }); });
 
   // orphans: chain elements with no connection to anything (a link was skipped)
   for(const e of els) if(!linked.has(e.id)) issues.push("element '"+(e.label||e.id)+"' is never connected by an arrow (a causal link is missing)");
@@ -3594,33 +3573,22 @@ export function graphCheck(bp){
 }
 
 export function parseBlueprint(raw){
-  // QCV-04: pick the BEST parseable object, not the first fenced block — an illustrative
-  // example ("here is the shape: {…}") or a <think> sketch no longer beats the real blueprint.
   let t = raw || "";
   if(!t) return null;
+  // drop reasoning / think blocks and markdown code fences
   t = t.replace(/<think>[\s\S]*?<\/think>/gi, "").replace(/<\/?think>/gi, "");
-  // gather candidate texts: every fenced block, plus the whole thing
-  const chunks = [];
-  let fm, fre=/```(?:json)?\s*([\s\S]*?)```/gi;
-  while((fm=fre.exec(t))) chunks.push(fm[1]);
-  chunks.push(t);
-  const score = o => ((o && (o.layout || o.narration_steps || o.template)) ? 1e7 : 0) + JSON.stringify(o||"").length;
-  let best=null, bestScore=-1;
-  const consider = o => { if(!o) return; const sc=score(o); if(sc>bestScore){ best=o; bestScore=sc; } };
-  for(const chunk of chunks){
-    // scan EVERY balanced {…} run (not just the first), so a preamble object can't win
-    for(let i=0;i<chunk.length;i++){
-      if(chunk[i] !== "{") continue;
-      const bal = balanced(chunk, i);
-      if(!bal){ continue; }
-      consider(tryParse(bal));
-      i += bal.length - 1;
-    }
-    // last resort: repair a truncated object from the first "{"
-    const s0 = chunk.indexOf("{");
-    if(s0 >= 0) consider(tryParse(repair(chunk.slice(s0))));
-  }
-  return best;
+  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if(fence) t = fence[1];
+  const s = t.indexOf("{");
+  if(s < 0) return null;
+  // 1) fast path: first "{" … last "}"
+  const e = t.lastIndexOf("}");
+  if(e > s){ const one = tryParse(t.slice(s, e+1)); if(one) return one; }
+  // 2) brace-balanced scan from the first "{" (ignores braces inside strings)
+  const bal = balanced(t, s); if(bal){ const two = tryParse(bal); if(two) return two; }
+  // 3) last resort: repair a truncated object (unclosed brackets/quote + trailing comma)
+  const rep = tryParse(repair(t.slice(s))); if(rep) return rep;
+  return null;
 }
 function tryParse(x){ try{ return JSON.parse(x); }catch(_){ return null; } }
 function balanced(t, start){

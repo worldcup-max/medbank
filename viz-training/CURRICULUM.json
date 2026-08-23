@@ -1,0 +1,2854 @@
+{
+  "meta": {
+    "purpose": "Master worklist for the hourly Visualize-scene author (medbank-viz3d-corpus). The task walks this structure-by-structure, authoring one VisualScene per structure in SCHEMA v2 (model3d-scene-spec-v2.md), then running tools/validate-scenes.mjs and tools/build-scene-index.mjs. A scene that fails validation is written status:\"blocked\" and never counted as done.",
+    "narrative": "Each structure scene tells: (1) see it in the body, (2) see it among associated organs, (3) see how it works — plus cross-section / contraction-filter / vasculature / glands where the structure needs them.",
+    "itemsPerRun": 2,
+    "itemsPerRunRationale": "207 structures total across the 4 courses. Each structure bundles several authored + validated views (location, associated organs, mechanism, cross-section, vasculature, muscle filter). 2 structures/run is the sweet spot: each still gets full precise multi-view authoring with every mesh URL verified, while finishing in ~104 runs instead of 207. Do not exceed 2 — beyond that, per-scene precision and URL validation suffer.",
+    "totals": {
+      "gross": 81,
+      "embryology": 46,
+      "neuroanatomy": 34,
+      "histology": 46,
+      "all": 207,
+      "runsAt2": 104
+    },
+    "viewModes": {
+      "location": "Highlight the structure inside its whole region / body context.",
+      "associated_organs": "Show it among neighbouring organs/structures, each its own labelled mesh.",
+      "mechanism": "Animate the function — how it works (pumping, peristalsis, breathing, CSF/bile flow, reflex).",
+      "cross_section": "Cut plane revealing chambers, spaces, or layers.",
+      "contraction_filter": "Relaxed to contracted toggle for skeletal muscle (e.g. flexing the biceps).",
+      "vasculature": "Arteries and veins in/around the structure, correctly positioned (own meshes, red/blue).",
+      "glands": "Associated glands and a note on their secretion."
+    },
+    "schema": 2,
+    "modeRouting": {
+      "principle": "Mode is a property of the LEARNING CONCEPT, never of the subject it sits in. Each course carries defaultModes; each structure carries preferred_modes - an ORDERED fallback list. The author takes the first mode an engine can render today and keeps the rest on the record. This is deliberate: today's provider coverage must never harden into a permanent curriculum rule. A structure routed to `diagram` now becomes a 3D scene the day a mesh for it exists, with no curriculum edit.",
+      "assignment": "Assigned by what is being TAUGHT, not by what BodyParts3D happens to hold. A concept whose subject is a process (conduction, circulation, gametogenesis, a mechanism) leads with diagram/sequence even in Gross Anatomy. A tissue-level concept leads with microscopic. Everything spatial leads with 3d_anatomy. Whether a mesh exists is decided per structure at authoring time by the validator - not here.",
+      "modes": {
+        "3d_anatomy": "spatial relationships, nerves, vessels, organs, muscles, pathways - viz3d.js + a provider adapter",
+        "microscopic": "histology, pathology, cellular structure - the existing SVG Visualize engine",
+        "diagram": "physiology, pathways, algorithms - the existing SVG Visualize engine",
+        "sequence": "ordered developmental or process stages - the SVG engine, played as beats",
+        "comparison": "X vs Y, differentials - either engine, driven by COMPARE_STRUCTURES",
+        "imaging": "X-ray/CT/MRI/ultrasound - NO engine yet; author as status:\"planned\""
+      },
+      "structuresRetaining3D": {
+        "gross": "81/81",
+        "embryology": "19/46",
+        "neuroanatomy": "34/34",
+        "histology": "16/46"
+      },
+      "meshCoverageEstimate": {
+        "advisory": true,
+        "note": "Loose name match against the 934-mesh catalog, for planning only - NOT used to assign modes. gross 45/81, neuro 16/34, embryo 11/46, histology 15/46; the last two are mostly false positives."
+      }
+    }
+  },
+  "order": [
+    "gross",
+    "embryology",
+    "neuroanatomy",
+    "histology"
+  ],
+  "courses": {
+    "gross": {
+      "level": 200,
+      "name": "Gross Anatomy",
+      "topics": [
+        {
+          "topic": "Back & Vertebral Column",
+          "structures": [
+            {
+              "name": "Vertebral column",
+              "views": [
+                "location",
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "regions + curves; cross-section of a typical vertebra; mechanism = flexion/load bearing",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Typical vertebra",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "body, arch, foramen, processes",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Intervertebral disc",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "nucleus pulposus/annulus; compression + herniation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Spinal cord in vertebral canal",
+              "views": [
+                "location",
+                "cross_section",
+                "vasculature"
+              ],
+              "note": "canal relations; segmental blood supply",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Erector spinae / deep back muscles",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "extension of the trunk",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Pectoral Region & Breast",
+          "structures": [
+            {
+              "name": "Pectoralis major",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "adduction/medial rotation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pectoralis minor",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "axillary landmark",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Breast (mammary gland)",
+              "views": [
+                "location",
+                "cross_section",
+                "glands"
+              ],
+              "note": "lobules/ducts; lactation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Clavicle",
+              "views": [
+                "location"
+              ],
+              "note": "strut of the shoulder",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Axillary vessels & lymph nodes",
+              "views": [
+                "vasculature",
+                "glands"
+              ],
+              "note": "drainage; breast cancer spread",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Axilla & Brachial Plexus",
+          "structures": [
+            {
+              "name": "Brachial plexus",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "roots-trunks-divisions-cords-branches; which movement each nerve drives",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Axillary artery",
+              "views": [
+                "vasculature",
+                "associated_organs"
+              ],
+              "note": "3 parts, branches",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Axillary vein",
+              "views": [
+                "vasculature"
+              ],
+              "note": "venous return of the limb",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Axillary lymph nodes",
+              "views": [
+                "location",
+                "glands"
+              ],
+              "note": "levels I-III",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Rotator cuff muscles",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "SITS; shoulder stability",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Arm (Brachium)",
+          "structures": [
+            {
+              "name": "Biceps brachii",
+              "views": [
+                "location",
+                "contraction_filter",
+                "associated_organs"
+              ],
+              "note": "flex/supinate; flexing animation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Triceps brachii",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "elbow extension",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Humerus",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "shaft, radial groove",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Brachial artery",
+              "views": [
+                "vasculature",
+                "associated_organs"
+              ],
+              "note": "course to cubital fossa",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Median, ulnar & radial nerves",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "motor/sensory territories",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Forearm & Hand",
+          "structures": [
+            {
+              "name": "Flexor compartment of forearm",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "wrist/finger flexion",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Extensor compartment of forearm",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "wrist/finger extension",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Radius & ulna",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "pronation/supination",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Carpal tunnel",
+              "views": [
+                "cross_section",
+                "associated_organs"
+              ],
+              "note": "flexor tendons + median nerve",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Intrinsic hand muscles & arches",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "grip; palmar arches (vasculature)",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Gluteal Region & Hip Joint",
+          "structures": [
+            {
+              "name": "Gluteus maximus",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "hip extension",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Hip joint",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "ball-and-socket; range of motion",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Proximal femur",
+              "views": [
+                "location",
+                "vasculature"
+              ],
+              "note": "neck; retinacular blood supply",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Sciatic nerve",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "course through gluteal region",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Gluteal vessels",
+              "views": [
+                "vasculature"
+              ],
+              "note": "superior/inferior gluteal",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Thigh",
+          "structures": [
+            {
+              "name": "Quadriceps femoris",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "knee extension",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Hamstrings",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "knee flexion/hip extension",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Femoral triangle",
+              "views": [
+                "cross_section",
+                "vasculature"
+              ],
+              "note": "femoral artery/vein/nerve (NAVEL)",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Adductor canal",
+              "views": [
+                "cross_section",
+                "associated_organs"
+              ],
+              "note": "passage of femoral vessels",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Femur",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "shaft; medullary cavity",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Leg & Foot",
+          "structures": [
+            {
+              "name": "Gastrocnemius & soleus",
+              "views": [
+                "location",
+                "contraction_filter",
+                "mechanism"
+              ],
+              "note": "plantarflexion; calf muscle pump for venous return",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Tibia & fibula",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "weight bearing vs strut",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Ankle joint",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "hinge; dorsi/plantarflexion",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Popliteal fossa",
+              "views": [
+                "cross_section",
+                "vasculature"
+              ],
+              "note": "popliteal artery/vein, tibial nerve",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Arches of the foot",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "shock absorption",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Thoracic Wall & Diaphragm",
+          "structures": [
+            {
+              "name": "Ribs & sternum (thoracic cage)",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "bucket/pump handle movement",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Intercostal muscles",
+              "views": [
+                "location",
+                "contraction_filter",
+                "mechanism"
+              ],
+              "note": "elevate/depress ribs in breathing",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Diaphragm",
+              "views": [
+                "location",
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "primary muscle of respiration; openings",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Intercostal neurovascular bundle",
+              "views": [
+                "cross_section",
+                "vasculature"
+              ],
+              "note": "VAN order under the rib",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pleura & pleural cavity",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "layers; negative pressure",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Heart & Pericardium",
+          "structures": [
+            {
+              "name": "Heart (external)",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "position in mediastinum; surfaces/borders",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Heart chambers",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "4 chambers + septa + valves in cut view",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cardiac cycle (pumping)",
+              "views": [
+                "mechanism"
+              ],
+              "note": "systole/diastole + blood flow through the chambers",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Coronary arteries & cardiac veins",
+              "views": [
+                "vasculature",
+                "location"
+              ],
+              "note": "supply of the myocardium",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Conducting system",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "SA-AV-His-Purkinje spread",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Heart valves",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "opening/closing during the cycle",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Lungs & Mediastinum",
+          "structures": [
+            {
+              "name": "Lungs",
+              "views": [
+                "location",
+                "cross_section",
+                "associated_organs"
+              ],
+              "note": "lobes/fissures; bronchopulmonary segments",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Tracheobronchial tree",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "airflow to alveoli",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Mediastinum",
+              "views": [
+                "location",
+                "associated_organs",
+                "cross_section"
+              ],
+              "note": "divisions + contents",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Great vessels",
+              "views": [
+                "vasculature",
+                "associated_organs"
+              ],
+              "note": "aorta, pulmonary trunk, venae cavae",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Trachea",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "C-rings; bifurcation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Anterior Abdominal Wall & Inguinal Region",
+          "structures": [
+            {
+              "name": "Rectus abdominis",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "trunk flexion; rectus sheath",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Flat abdominal muscles",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "external/internal oblique, transversus",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Inguinal canal",
+              "views": [
+                "cross_section",
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "contents; shutter mechanism; hernias",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Rectus sheath",
+              "views": [
+                "cross_section"
+              ],
+              "note": "above/below arcuate line",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Inguinal ligament & landmarks",
+              "views": [
+                "location"
+              ],
+              "note": "surface anatomy",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Stomach & Intestines",
+          "structures": [
+            {
+              "name": "Stomach",
+              "views": [
+                "location",
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "regions; wall layers; peristalsis/mixing",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Small intestine",
+              "views": [
+                "cross_section",
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "villi; segmentation/absorption",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Large intestine",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "frame of the abdomen; mass movements",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Peritoneum & mesentery",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "intraperitoneal vs retroperitoneal",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Gut blood supply (coeliac/SMA/IMA)",
+              "views": [
+                "vasculature"
+              ],
+              "note": "foregut/midgut/hindgut supply",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Liver, Biliary Tract, Pancreas & Spleen",
+          "structures": [
+            {
+              "name": "Liver",
+              "views": [
+                "location",
+                "associated_organs",
+                "cross_section"
+              ],
+              "note": "lobes/segments; porta hepatis",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Biliary tree & gallbladder",
+              "views": [
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "bile flow/storage/release",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pancreas",
+              "views": [
+                "location",
+                "glands",
+                "associated_organs"
+              ],
+              "note": "exocrine + endocrine (islets)",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Spleen",
+              "views": [
+                "location",
+                "vasculature"
+              ],
+              "note": "relations; splenic vessels",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Portal venous system",
+              "views": [
+                "vasculature",
+                "mechanism"
+              ],
+              "note": "portal drainage; porto-systemic anastomoses",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Kidney & Posterior Abdominal Wall",
+          "structures": [
+            {
+              "name": "Kidney",
+              "views": [
+                "location",
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "cortex/medulla/pelvis; urine formation overview",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Suprarenal (adrenal) gland",
+              "views": [
+                "location",
+                "glands"
+              ],
+              "note": "cortex/medulla hormones",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Ureters",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "course; peristalsis; constrictions",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Abdominal aorta & IVC",
+              "views": [
+                "vasculature",
+                "associated_organs"
+              ],
+              "note": "branches/tributaries",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Psoas major & posterior wall",
+              "views": [
+                "location",
+                "contraction_filter"
+              ],
+              "note": "hip flexion; relations",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Pelvis & Perineum",
+          "structures": [
+            {
+              "name": "Bony pelvis",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "pelvic inlet/outlet; male vs female",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pelvic diaphragm (levator ani)",
+              "views": [
+                "location",
+                "contraction_filter",
+                "mechanism"
+              ],
+              "note": "support/continence",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Urinary bladder",
+              "views": [
+                "location",
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "trigone; micturition",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Internal reproductive organs",
+              "views": [
+                "location",
+                "cross_section",
+                "associated_organs"
+              ],
+              "note": "male/female organs in situ",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Internal iliac vessels",
+              "views": [
+                "vasculature"
+              ],
+              "note": "pelvic blood supply",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultModes": [
+        "3d_anatomy",
+        "diagram"
+      ]
+    },
+    "embryology": {
+      "level": 200,
+      "name": "Embryology",
+      "topics": [
+        {
+          "topic": "Gametogenesis & Fertilization",
+          "structures": [
+            {
+              "name": "Spermatogenesis & oogenesis",
+              "views": [
+                "mechanism"
+              ],
+              "note": "meiosis; gamete formation",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Fertilization",
+              "views": [
+                "mechanism"
+              ],
+              "note": "capacitation to zygote",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cleavage & morula",
+              "views": [
+                "mechanism"
+              ],
+              "note": "early divisions",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Blastocyst",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "inner cell mass/trophoblast",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+          "structures": [
+            {
+              "name": "Implantation",
+              "views": [
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "trophoblast invasion",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Bilaminar embryonic disc",
+              "views": [
+                "cross_section"
+              ],
+              "note": "epiblast/hypoblast",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Amniotic cavity & yolk sac",
+              "views": [
+                "cross_section",
+                "location"
+              ],
+              "note": "early cavities",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Chorion & placenta (early)",
+              "views": [
+                "associated_organs",
+                "mechanism"
+              ],
+              "note": "maternal-fetal exchange",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Week 3: Gastrulation",
+          "structures": [
+            {
+              "name": "Primitive streak",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "cell migration",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Trilaminar disc (3 germ layers)",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "ecto/meso/endoderm",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Notochord",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "axis + induction",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Neurulation (neural plate/tube)",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "neural tube closure",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Folding of the Embryo",
+          "structures": [
+            {
+              "name": "Cranio-caudal folding",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "head/tail fold",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Lateral folding",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "gut tube formation",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Primitive gut tube",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "foregut/midgut/hindgut",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Body cavity (coelom)",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "partitioning",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Pharyngeal Apparatus",
+          "structures": [
+            {
+              "name": "Pharyngeal arches",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "arch derivatives",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pharyngeal pouches",
+              "views": [
+                "cross_section",
+                "glands"
+              ],
+              "note": "endodermal derivatives",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pharyngeal clefts & membranes",
+              "views": [
+                "cross_section"
+              ],
+              "note": "ectoderm derivatives",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Thyroid gland development",
+              "views": [
+                "mechanism",
+                "glands"
+              ],
+              "note": "descent from foramen cecum",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Cardiovascular Development",
+          "structures": [
+            {
+              "name": "Heart tube formation",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "fusion of endocardial tubes",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Cardiac looping",
+              "views": [
+                "mechanism"
+              ],
+              "note": "D-loop; chamber positioning",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Septation of heart",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "atrial/ventricular septa; defects",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Fetal circulation",
+              "views": [
+                "vasculature",
+                "mechanism"
+              ],
+              "note": "shunts; changes at birth",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Respiratory System Development",
+          "structures": [
+            {
+              "name": "Respiratory diverticulum",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "lung bud from foregut",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Tracheoesophageal septum",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "separation; TE fistula",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Bronchial tree branching",
+              "views": [
+                "mechanism"
+              ],
+              "note": "stages of lung maturation",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Alveolar development",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "surfactant",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "GIT Development",
+          "structures": [
+            {
+              "name": "Foregut derivatives",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "esophagus to duodenum, liver, pancreas",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Midgut rotation",
+              "views": [
+                "mechanism"
+              ],
+              "note": "physiological herniation + rotation",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Hindgut & cloaca",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "partitioning of cloaca",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Liver & pancreas buds",
+              "views": [
+                "mechanism",
+                "glands"
+              ],
+              "note": "outgrowths; annular pancreas",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Urogenital Development",
+          "structures": [
+            {
+              "name": "Kidney development (pro/meso/metanephros)",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "ascent; blood supply changes",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Bladder & urethra",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "urogenital sinus",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Gonad development",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "indifferent to differentiated",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Genital duct systems",
+              "views": [
+                "mechanism"
+              ],
+              "note": "mesonephric/paramesonephric",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Nervous System Development",
+          "structures": [
+            {
+              "name": "Neural tube",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "alar/basal plates",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Brain vesicles",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "primary/secondary vesicles",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Neural crest",
+              "views": [
+                "mechanism",
+                "associated_organs"
+              ],
+              "note": "wide derivatives",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Neural tube defects",
+              "views": [
+                "cross_section"
+              ],
+              "note": "spina bifida/anencephaly",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Head, Face & Palate Development",
+          "structures": [
+            {
+              "name": "Facial prominences",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "fusion of processes",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Palate formation",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "primary/secondary palate; cleft",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Eye & ear development",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "optic/otic placodes",
+              "preferred_modes": [
+                "sequence",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Limb Development",
+          "structures": [
+            {
+              "name": "Limb buds",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "AER/ZPA signalling",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Limb rotation",
+              "views": [
+                "mechanism"
+              ],
+              "note": "dermatome pattern",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Digit formation",
+              "views": [
+                "mechanism"
+              ],
+              "note": "apoptosis; syndactyly",
+              "preferred_modes": [
+                "sequence",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultModes": [
+        "sequence",
+        "diagram"
+      ]
+    },
+    "neuroanatomy": {
+      "level": 300,
+      "name": "Neuroanatomy",
+      "topics": [
+        {
+          "topic": "Cerebrum — Gross & Lobes",
+          "structures": [
+            {
+              "name": "Cerebral hemispheres & lobes",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "frontal/parietal/temporal/occipital",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Gyri & sulci landmarks",
+              "views": [
+                "location"
+              ],
+              "note": "central/lateral sulcus",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Functional cortical areas",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "motor/sensory/language",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "White matter tracts",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "association/commissural/projection",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Ventricular System & CSF",
+          "structures": [
+            {
+              "name": "Ventricles",
+              "views": [
+                "cross_section",
+                "location"
+              ],
+              "note": "lateral/3rd/4th",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Choroid plexus",
+              "views": [
+                "location",
+                "glands",
+                "mechanism"
+              ],
+              "note": "CSF production",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "CSF circulation",
+              "views": [
+                "mechanism",
+                "vasculature"
+              ],
+              "note": "flow + absorption; hydrocephalus",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Meninges",
+              "views": [
+                "cross_section",
+                "associated_organs"
+              ],
+              "note": "dura/arachnoid/pia; spaces",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Basal Ganglia & Diencephalon",
+          "structures": [
+            {
+              "name": "Basal ganglia",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "caudate/putamen/globus pallidus; movement",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Thalamus",
+              "views": [
+                "cross_section",
+                "location"
+              ],
+              "note": "relay nuclei",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Hypothalamus & pituitary",
+              "views": [
+                "location",
+                "glands",
+                "mechanism"
+              ],
+              "note": "endocrine control",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Internal capsule",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "motor/sensory pathways",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Brainstem",
+          "structures": [
+            {
+              "name": "Midbrain",
+              "views": [
+                "cross_section",
+                "location"
+              ],
+              "note": "colliculi; cerebral peduncles",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Pons",
+              "views": [
+                "cross_section",
+                "location"
+              ],
+              "note": "cranial nerve nuclei",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Medulla oblongata",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "vital centres; decussation",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Reticular formation",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "arousal",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Cerebellum",
+          "structures": [
+            {
+              "name": "Cerebellar lobes",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "anterior/posterior/flocculonodular",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cerebellar peduncles",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "connections",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Deep cerebellar nuclei",
+              "views": [
+                "cross_section"
+              ],
+              "note": "dentate etc.",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cerebellar function",
+              "views": [
+                "mechanism"
+              ],
+              "note": "coordination/balance",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Spinal Cord",
+          "structures": [
+            {
+              "name": "Spinal cord cross-section",
+              "views": [
+                "cross_section"
+              ],
+              "note": "grey/white matter; horns",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Ascending tracts",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "DCML, spinothalamic",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Descending tracts",
+              "views": [
+                "mechanism",
+                "cross_section"
+              ],
+              "note": "corticospinal",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Reflex arc",
+              "views": [
+                "mechanism"
+              ],
+              "note": "stretch/withdrawal reflex",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Cranial Nerves",
+          "structures": [
+            {
+              "name": "Cranial nerve nuclei",
+              "views": [
+                "location",
+                "cross_section"
+              ],
+              "note": "brainstem columns",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cranial nerve courses",
+              "views": [
+                "location",
+                "associated_organs"
+              ],
+              "note": "exits + targets",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "CN function testing",
+              "views": [
+                "mechanism"
+              ],
+              "note": "motor/sensory/autonomic",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Blood Supply of the Brain",
+          "structures": [
+            {
+              "name": "Circle of Willis",
+              "views": [
+                "vasculature",
+                "location"
+              ],
+              "note": "anastomotic ring",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Anterior circulation",
+              "views": [
+                "vasculature",
+                "mechanism"
+              ],
+              "note": "ACA/MCA territories",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Posterior circulation",
+              "views": [
+                "vasculature"
+              ],
+              "note": "vertebrobasilar",
+              "preferred_modes": [
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Dural venous sinuses",
+              "views": [
+                "vasculature",
+                "cross_section"
+              ],
+              "note": "venous drainage",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Limbic System",
+          "structures": [
+            {
+              "name": "Hippocampus",
+              "views": [
+                "location",
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "memory",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Amygdala",
+              "views": [
+                "location",
+                "mechanism"
+              ],
+              "note": "emotion",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Fornix & Papez circuit",
+              "views": [
+                "mechanism",
+                "location"
+              ],
+              "note": "limbic connections",
+              "preferred_modes": [
+                "3d_anatomy",
+                "diagram"
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultModes": [
+        "3d_anatomy",
+        "diagram"
+      ]
+    },
+    "histology": {
+      "level": 200,
+      "name": "Histology",
+      "note": "Histology is layered/microscopic — scenes lean on cross_section (layers) + mechanism (secretion/transport) with zoom, less on revolving mesh.",
+      "topics": [
+        {
+          "topic": "Epithelium",
+          "structures": [
+            {
+              "name": "Simple epithelia",
+              "views": [
+                "cross_section"
+              ],
+              "note": "squamous/cuboidal/columnar",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Stratified epithelia",
+              "views": [
+                "cross_section"
+              ],
+              "note": "skin/esophagus",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Glandular epithelium",
+              "views": [
+                "cross_section",
+                "glands",
+                "mechanism"
+              ],
+              "note": "exocrine secretion modes",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cell junctions",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "tight/adherens/gap",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Connective Tissue",
+          "structures": [
+            {
+              "name": "Loose vs dense CT",
+              "views": [
+                "cross_section"
+              ],
+              "note": "fibres/cells",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Cells of CT",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "fibroblasts, mast, macrophage",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Adipose tissue",
+              "views": [
+                "cross_section"
+              ],
+              "note": "white/brown",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Extracellular matrix",
+              "views": [
+                "mechanism"
+              ],
+              "note": "collagen/elastin/ground substance",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Muscle Tissue",
+          "structures": [
+            {
+              "name": "Skeletal muscle",
+              "views": [
+                "cross_section",
+                "mechanism",
+                "contraction_filter"
+              ],
+              "note": "sarcomere; sliding filament",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Cardiac muscle",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "intercalated discs",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Smooth muscle",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "peristalsis",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Nervous Tissue",
+          "structures": [
+            {
+              "name": "Neuron",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "soma/axon/dendrites; impulse",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Synapse",
+              "views": [
+                "mechanism"
+              ],
+              "note": "neurotransmission",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Glial cells",
+              "views": [
+                "cross_section"
+              ],
+              "note": "astrocytes/oligodendrocytes/microglia",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Myelination",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "saltatory conduction",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Blood & Haemopoiesis",
+          "structures": [
+            {
+              "name": "Blood cells",
+              "views": [
+                "cross_section"
+              ],
+              "note": "RBC/WBC/platelets",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Haemopoiesis",
+              "views": [
+                "mechanism"
+              ],
+              "note": "marrow lineages",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Blood smear",
+              "views": [
+                "cross_section"
+              ],
+              "note": "differential",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Cartilage & Bone",
+          "structures": [
+            {
+              "name": "Cartilage types",
+              "views": [
+                "cross_section"
+              ],
+              "note": "hyaline/elastic/fibro",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Compact bone (osteon)",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "Haversian system",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Ossification",
+              "views": [
+                "mechanism"
+              ],
+              "note": "endochondral/intramembranous",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Cardiovascular Histology",
+          "structures": [
+            {
+              "name": "Artery vs vein wall",
+              "views": [
+                "cross_section"
+              ],
+              "note": "3 tunics",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Capillaries",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "exchange",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Heart wall layers",
+              "views": [
+                "cross_section"
+              ],
+              "note": "endo/myo/epicardium",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Lymphoid Organs",
+          "structures": [
+            {
+              "name": "Lymph node",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "cortex/medulla; filtration",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Spleen",
+              "views": [
+                "cross_section"
+              ],
+              "note": "red/white pulp",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Thymus",
+              "views": [
+                "cross_section",
+                "glands"
+              ],
+              "note": "T-cell maturation",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Skin (Integument)",
+          "structures": [
+            {
+              "name": "Epidermis layers",
+              "views": [
+                "cross_section"
+              ],
+              "note": "strata",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Dermis & appendages",
+              "views": [
+                "cross_section",
+                "glands"
+              ],
+              "note": "sweat/sebaceous glands",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Hair follicle",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "growth cycle",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "GIT Histology",
+          "structures": [
+            {
+              "name": "General gut wall (4 layers)",
+              "views": [
+                "cross_section"
+              ],
+              "note": "mucosa to serosa",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Stomach mucosa",
+              "views": [
+                "cross_section",
+                "glands",
+                "mechanism"
+              ],
+              "note": "gastric glands; acid",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Small intestine mucosa",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "villi; absorption",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Liver lobule",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "hepatocytes; bile/blood flow",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Respiratory Histology",
+          "structures": [
+            {
+              "name": "Conducting airway epithelium",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "mucociliary escalator",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Alveolus",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "gas exchange; pneumocytes",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Urinary Histology",
+          "structures": [
+            {
+              "name": "Nephron",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "filtration/reabsorption",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Renal corpuscle",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "glomerulus/filtration barrier",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Juxtaglomerular apparatus",
+              "views": [
+                "mechanism",
+                "glands"
+              ],
+              "note": "renin",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Endocrine Histology",
+          "structures": [
+            {
+              "name": "Pituitary gland",
+              "views": [
+                "cross_section",
+                "glands",
+                "mechanism"
+              ],
+              "note": "anterior/posterior hormones",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Thyroid & parathyroid",
+              "views": [
+                "cross_section",
+                "glands",
+                "mechanism"
+              ],
+              "note": "follicles; calcium control",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Adrenal gland",
+              "views": [
+                "cross_section",
+                "glands"
+              ],
+              "note": "cortex zones/medulla",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Pancreatic islets",
+              "views": [
+                "cross_section",
+                "glands",
+                "mechanism"
+              ],
+              "note": "insulin/glucagon",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Reproductive Histology",
+          "structures": [
+            {
+              "name": "Testis & seminiferous tubule",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "spermatogenesis",
+              "preferred_modes": [
+                "microscopic",
+                "diagram",
+                "3d_anatomy"
+              ]
+            },
+            {
+              "name": "Ovary & follicles",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "folliculogenesis",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            },
+            {
+              "name": "Uterus/endometrium",
+              "views": [
+                "cross_section",
+                "mechanism"
+              ],
+              "note": "menstrual cycle changes",
+              "preferred_modes": [
+                "microscopic",
+                "diagram"
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultModes": [
+        "microscopic",
+        "diagram"
+      ]
+    }
+  }
+}

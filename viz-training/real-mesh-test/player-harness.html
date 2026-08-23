@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · viz3d.js harness — the real player, outside the app</title>
+<style>
+  :root{--bg:#0f0e1b;--ink:#f3f0ff;--dim:#a9a4c8;--acc:#7c5cff;--line:#2c2948;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:20px 18px 60px}
+  h1{font-size:19px;margin:0 0 4px}
+  p.sub{color:var(--dim);font-size:13px;margin:0 0 18px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  button{font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}
+  button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  input{font:inherit;font-size:13px;padding:8px 11px;border-radius:9px;border:1px solid #35315a;background:#1b1930;color:#e9e6ff;min-width:230px}
+  #host{min-height:520px}
+  .warn{border:1px solid #6b4a12;background:#2a1f0d;color:#ffd58a;padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px}
+  code{background:#1b1930;padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .log{margin-top:14px;font-size:12.5px;color:var(--dim);white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>viz3d.js harness</h1>
+  <p class="sub">The same file <code>app.html</code> loads, running against the real <code>scenes/*.json</code> — so the player can be proven without touching the app.</p>
+
+  <div class="warn" id="filewarn" style="display:none">
+    You opened this over <code>file://</code>, so the browser will refuse to fetch the scene JSON.
+    Serve the repo root over HTTP first — e.g. <code>npx serve .</code> or <code>python -m http.server</code> —
+    then open <code>/viz-training/real-mesh-test/player-harness.html</code>.
+  </div>
+
+  <div class="row" id="scenes"></div>
+  <div class="row">
+    <input id="term" placeholder="highlight a term, e.g. long head of biceps"/>
+    <button id="go">🧬 See it in 3D</button>
+    <button id="dispose">Dispose</button>
+  </div>
+
+  <div id="host"></div>
+  <div class="log" id="log"></div>
+</div>
+
+<script src="../../viz3d.js"></script>
+<script>
+(function(){
+  try{ localStorage.setItem('mb3d','1'); }catch(e){}          // the harness always runs with the flag on
+  var log=document.getElementById('log');
+  function say(m){ log.textContent += m + '\n'; }
+  if(location.protocol==='file:') document.getElementById('filewarn').style.display='block';
+
+  say('MB3D.on() = ' + MB3D.on() + '  ·  base = ' + MB3D.base());
+
+  MB3D.loadIndex().then(function(idx){
+    say('index.json → ' + idx.count + ' scenes, ' + idx.ready + ' ready');
+    var row=document.getElementById('scenes');
+    idx.scenes.forEach(function(s){
+      var b=document.createElement('button');
+      b.textContent=s.structure+' ('+s.counts.parts+' parts)';
+      b.onclick=function(){
+        Array.prototype.forEach.call(row.children,function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        say('\nmounting '+s.id+' …');
+        MB3D.mount('host', s.id).then(function(){ say('mounted · provider '+s.provider+' · mode '+s.mode); })
+          .catch(function(e){ say('FAILED: '+e.message); });
+      };
+      row.appendChild(b);
+    });
+    if(idx.scenes[0]) row.children[0].click();
+  }).catch(function(e){ say('index failed: '+e.message); });
+
+  document.getElementById('go').onclick=function(){
+    var t=document.getElementById('term').value;
+    MB3D.partForTerm(t).then(function(hit){
+      if(!hit){ say('\nno part matches "'+t+'"'); return; }
+      say('\n"'+t+'" → scene '+hit.scene+' · part '+hit.key+' (matched on "'+hit.label+'")');
+      MB3D.mount('host', hit.scene, {part:hit.key});
+    });
+  };
+  document.getElementById('dispose').onclick=function(){ MB3D.dispose(); document.getElementById('host').innerHTML=''; say('\ndisposed'); };
+})();
+</script>
+</body>
+</html>

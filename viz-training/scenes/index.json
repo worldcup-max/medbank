@@ -1,0 +1,317 @@
+{
+  "generated_by": "viz-training/tools/build-scene-index.mjs",
+  "schema": 2,
+  "count": 2,
+  "ready": 2,
+  "scenes": [
+    {
+      "id": "gross__arm__biceps-triceps",
+      "file": "viz-training/scenes/gross__arm__biceps-triceps.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "ready",
+      "student_ready": true,
+      "authored_by": "human",
+      "approved_by": "frank",
+      "degrades": [
+        "TRACE_STRUCTURE"
+      ],
+      "course": "Gross Anatomy",
+      "topic": "Arm (Brachium)",
+      "structure": "Biceps brachii & Triceps brachii",
+      "learning_goal": "Know the heads of each muscle, what each head crosses, and which movement it drives.",
+      "gaps": 0,
+      "match": {
+        "topics": [
+          "arm",
+          "brachium",
+          "upper limb",
+          "elbow",
+          "anterior compartment of arm",
+          "posterior compartment of arm",
+          "arm brachium",
+          "biceps brachii triceps brachii"
+        ],
+        "terms": [
+          "biceps",
+          "biceps brachii",
+          "triceps",
+          "triceps brachii",
+          "elbow flexion",
+          "elbow extension"
+        ]
+      },
+      "parts": [
+        {
+          "key": "bic_long",
+          "label": "Biceps — long head",
+          "group": "Biceps brachii"
+        },
+        {
+          "key": "bic_short",
+          "label": "Biceps — short head",
+          "group": "Biceps brachii"
+        },
+        {
+          "key": "tri_long",
+          "label": "Triceps — long head",
+          "group": "Triceps brachii"
+        },
+        {
+          "key": "tri_lat",
+          "label": "Triceps — lateral head",
+          "group": "Triceps brachii"
+        },
+        {
+          "key": "tri_med",
+          "label": "Triceps — medial head",
+          "group": "Triceps brachii"
+        }
+      ],
+      "terms": {
+        "scapula": "scapula",
+        "shoulder blade": "scapula",
+        "supraglenoid tubercle": "scapula",
+        "infraglenoid tubercle": "scapula",
+        "coracoid process": "scapula",
+        "right scapula": "scapula",
+        "humerus": "humerus",
+        "radial groove": "humerus",
+        "bicipital groove": "humerus",
+        "intertubercular sulcus": "humerus",
+        "right humerus": "humerus",
+        "radius": "radius",
+        "radial tuberosity": "radius",
+        "right radius": "radius",
+        "ulna": "ulna",
+        "olecranon": "ulna",
+        "right ulna": "ulna",
+        "long head of biceps": "bic_long",
+        "biceps long head": "bic_long",
+        "long head of right biceps brachii": "bic_long",
+        "short head of biceps": "bic_short",
+        "biceps short head": "bic_short",
+        "coracobrachialis": "bic_short",
+        "short head of right biceps brachii": "bic_short",
+        "long head of triceps": "tri_long",
+        "triceps long head": "tri_long",
+        "long head of right triceps brachii": "tri_long",
+        "lateral head of triceps": "tri_lat",
+        "triceps lateral head": "tri_lat",
+        "lateral head of right triceps brachii": "tri_lat",
+        "medial head of triceps": "tri_med",
+        "triceps medial head": "tri_med",
+        "deep head": "tri_med",
+        "medial head of right triceps brachii": "tri_med"
+      },
+      "counts": {
+        "structures": 9,
+        "parts": 5,
+        "views": 4
+      }
+    },
+    {
+      "id": "gross__heart-pericardium__heart",
+      "file": "viz-training/scenes/gross__heart-pericardium__heart.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "ready",
+      "student_ready": true,
+      "authored_by": "human",
+      "approved_by": "frank",
+      "degrades": [
+        "TRACE_STRUCTURE"
+      ],
+      "course": "Gross Anatomy",
+      "topic": "Heart & Pericardium",
+      "structure": "Heart",
+      "learning_goal": "Know the heart's valves, its own blood supply, and the great vessels entering and leaving it.",
+      "gaps": 3,
+      "match": {
+        "topics": [
+          "heart",
+          "pericardium",
+          "mediastinum",
+          "thorax",
+          "cardiovascular system",
+          "heart pericardium"
+        ],
+        "terms": [
+          "heart",
+          "valve",
+          "coronary",
+          "aorta",
+          "great vessels",
+          "cardiac cycle"
+        ]
+      },
+      "parts": [
+        {
+          "key": "tricuspid",
+          "label": "Tricuspid valve",
+          "group": "Valves"
+        },
+        {
+          "key": "mitral",
+          "label": "Mitral valve",
+          "group": "Valves"
+        },
+        {
+          "key": "pulm_valve",
+          "label": "Pulmonary valve",
+          "group": "Valves"
+        },
+        {
+          "key": "pap_ant_rv",
+          "label": "Papillary muscle — anterior, RV",
+          "group": "Papillary muscles"
+        },
+        {
+          "key": "pap_post_lv",
+          "label": "Papillary muscle — posterior, LV",
+          "group": "Papillary muscles"
+        },
+        {
+          "key": "asc_aorta",
+          "label": "Ascending aorta",
+          "group": "Great vessels"
+        },
+        {
+          "key": "aortic_arch",
+          "label": "Arch of aorta",
+          "group": "Great vessels"
+        },
+        {
+          "key": "desc_aorta",
+          "label": "Descending aorta",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_artery",
+          "label": "Pulmonary artery",
+          "group": "Great vessels"
+        },
+        {
+          "key": "pulm_vein",
+          "label": "Pulmonary vein",
+          "group": "Great vessels"
+        },
+        {
+          "key": "svc",
+          "label": "Superior vena cava",
+          "group": "Great vessels"
+        },
+        {
+          "key": "ivc",
+          "label": "Inferior vena cava",
+          "group": "Great vessels"
+        },
+        {
+          "key": "lca",
+          "label": "Left coronary artery",
+          "group": "Coronary arteries"
+        },
+        {
+          "key": "circumflex",
+          "label": "Circumflex branch",
+          "group": "Coronary arteries"
+        },
+        {
+          "key": "rca",
+          "label": "Right coronary artery",
+          "group": "Coronary arteries"
+        },
+        {
+          "key": "marginal",
+          "label": "Marginal branch",
+          "group": "Coronary arteries"
+        },
+        {
+          "key": "great_cardiac_vein",
+          "label": "Great cardiac vein",
+          "group": "Cardiac veins"
+        },
+        {
+          "key": "coronary_sinus",
+          "label": "Coronary sinus",
+          "group": "Cardiac veins"
+        }
+      ],
+      "terms": {
+        "heart": "heart_wall",
+        "myocardium": "heart_wall",
+        "wall of heart": "heart_wall",
+        "cardiac muscle": "heart_wall",
+        "heart myocardium": "heart_wall",
+        "tricuspid valve": "tricuspid",
+        "right atrioventricular valve": "tricuspid",
+        "mitral valve": "mitral",
+        "bicuspid valve": "mitral",
+        "left atrioventricular valve": "mitral",
+        "pulmonary valve": "pulm_valve",
+        "pulmonic valve": "pulm_valve",
+        "papillary muscle": "pap_ant_rv",
+        "chordae tendineae": "pap_ant_rv",
+        "anterior papillary muscle": "pap_ant_rv",
+        "papillary muscle anterior rv": "pap_ant_rv",
+        "anterior papillary muscle of right ventricle": "pap_ant_rv",
+        "posterior papillary muscle": "pap_post_lv",
+        "left ventricle papillary": "pap_post_lv",
+        "papillary muscle posterior lv": "pap_post_lv",
+        "posterior papillary muscle of left ventricle": "pap_post_lv",
+        "ascending aorta": "asc_aorta",
+        "aortic root": "asc_aorta",
+        "aorta": "asc_aorta",
+        "aortic arch": "aortic_arch",
+        "arch of aorta": "aortic_arch",
+        "ligamentum arteriosum": "aortic_arch",
+        "descending aorta": "desc_aorta",
+        "thoracic aorta": "desc_aorta",
+        "pulmonary artery": "pulm_artery",
+        "pulmonary trunk": "pulm_artery",
+        "pulmonary vein": "pulm_vein",
+        "pulmonary veins": "pulm_vein",
+        "superior vena cava": "svc",
+        "svc": "svc",
+        "inferior vena cava": "ivc",
+        "ivc": "ivc",
+        "left coronary artery": "lca",
+        "lca": "lca",
+        "left main": "lca",
+        "stem of left coronary artery": "lca",
+        "circumflex artery": "circumflex",
+        "circumflex branch": "circumflex",
+        "circumflex branch of left coronary artery": "circumflex",
+        "right coronary artery": "rca",
+        "rca": "rca",
+        "trunk of right coronary artery": "rca",
+        "marginal branch": "marginal",
+        "acute marginal": "marginal",
+        "marginal branch of right coronary artery": "marginal",
+        "great cardiac vein": "great_cardiac_vein",
+        "coronary sinus": "coronary_sinus",
+        "right lung": "lung_ul_r",
+        "upper lobe": "lung_ul_r",
+        "right lung upper lobe": "lung_ul_r",
+        "upper lobe of right lung": "lung_ul_r",
+        "lower lobe": "lung_ll_r",
+        "right lung lower lobe": "lung_ll_r",
+        "lower lobe of right lung": "lung_ll_r",
+        "left lung": "lung_ul_l",
+        "left lung upper lobe": "lung_ul_l",
+        "upper lobe of left lung": "lung_ul_l",
+        "left lung lower lobe": "lung_ll_l",
+        "lower lobe of left lung": "lung_ll_l",
+        "trachea": "trachea",
+        "windpipe": "trachea"
+      },
+      "counts": {
+        "structures": 24,
+        "parts": 18,
+        "views": 5
+      }
+    }
+  ]
+}

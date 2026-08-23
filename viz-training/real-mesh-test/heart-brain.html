@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · Real-mesh 3D test — Heart & Brain</title>
+<style>
+  :root{--bg:#141225;--panel:#1c1a30;--ink:#f3f0ff;--dim:#a9a4c8;--accent:#7c5cff;--ok:#28c093;--warn:#ffb020;}
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  #wrap{display:flex;flex-direction:column;height:100vh;max-width:1000px;margin:0 auto;}
+  header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid #2b2846;}
+  .brand{font-size:14px;color:var(--dim);} .brand b{color:var(--accent);}
+  .tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;}
+  .tab{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid #35315a;background:#221f3a;color:#cfc9ee;}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  #stage{position:relative;flex:1;min-height:0;}
+  canvas{display:block;width:100%;height:100%;}
+  #status{position:absolute;left:16px;top:14px;font-size:13px;background:rgba(20,18,37,.72);border:1px solid #35315a;padding:7px 12px;border-radius:9px;color:var(--dim);}
+  #status.ok{color:var(--ok);} #status.warn{color:var(--warn);}
+  #hint{position:absolute;right:16px;bottom:14px;font-size:12px;color:#8681ab;}
+  #drop{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(124,92,255,.14);border:2px dashed var(--accent);font-size:18px;color:#fff;}
+  footer{padding:10px 16px;border-top:1px solid #2b2846;font-size:12px;color:var(--dim);display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  footer a{color:#b3a6ff;} .filebtn{font:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer;}
+  .mat{display:flex;gap:6px;align-items:center;margin-left:auto;}
+  .swatch{width:18px;height:18px;border-radius:50%;border:2px solid #ffffff33;cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <div class="brand">MedBank · <b>Real-mesh 3D test</b> — genuine atlas geometry, revolving</div>
+    <div class="tabs">
+      <button class="tab on" data-k="heart">❤️ Heart</button>
+      <button class="tab" data-k="brain">🧠 Brain</button>
+      <button class="tab" data-k="brain2">🧠 Brain (alt)</button>
+    </div>
+  </header>
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="status">Loading…</div>
+    <div id="hint">drag to rotate · scroll to zoom · auto-revolving</div>
+    <div id="drop">Drop a .stl / .glb / .gltf / .obj to view it</div>
+  </div>
+  <footer>
+    <span>Meshes: real CC-BY models from Wikimedia Commons.</span>
+    <button class="filebtn" id="pick">Load a file…</button>
+    <input id="file" type="file" accept=".stl,.glb,.gltf,.obj" style="display:none"/>
+    <div class="mat" title="material colour">
+      <span style="color:#8681ab">tint:</span>
+      <span class="swatch" style="background:#a83a30" data-col="0xa83a30"></span>
+      <span class="swatch" style="background:#d9b3a4" data-col="0xd9b3a4"></span>
+      <span class="swatch" style="background:#e9e2cf" data-col="0xe9e2cf"></span>
+      <span class="swatch" style="background:#c9c4e6" data-col="0xc9c4e6"></span>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+<script>
+(function(){
+  var SOURCES = {
+    heart:  { url:"https://upload.wikimedia.org/wikipedia/commons/d/d2/3D_model_of_a_human_heart.stl", col:0xa83a30, name:"Human heart (CC-BY, Wikimedia)" },
+    brain:  { url:"https://upload.wikimedia.org/wikipedia/commons/a/ad/Brain_AS.stl",                    col:0xd9b3a4, name:"Human brain (CC-BY, Wikimedia)" },
+    brain2: { url:"https://upload.wikimedia.org/wikipedia/commons/3/36/3DPX-003765_3DModel_of_Brain_Nevit_Dilmen.stl", col:0xd9b3a4, name:"Human brain — Nevit Dilmen (CC-BY, Wikimedia)" }
+  };
+
+  var statusEl=document.getElementById('status');
+  function setStatus(t,cls){ statusEl.textContent=t; statusEl.className=cls||''; }
+  if(!window.THREE || !THREE.STLLoader){ setStatus("Could not load the 3D library (are you online?).","warn"); return; }
+
+  var canvas=document.getElementById('c'), stage=document.getElementById('stage');
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  var scene=new THREE.Scene(); scene.background=new THREE.Color(0x141225);
+  var camera=new THREE.PerspectiveCamera(45,1,0.01,1000); camera.position.set(0,0.5,6);
+  var controls=new THREE.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true; controls.dampingFactor=0.08; controls.autoRotate=true; controls.autoRotateSpeed=1.1;
+  controls.minDistance=2; controls.maxDistance=30;
+
+  scene.add(new THREE.HemisphereLight(0xf2ecff,0x20203a,0.95));
+  var k=new THREE.DirectionalLight(0xffffff,1.25); k.position.set(5,8,6); scene.add(k);
+  var f=new THREE.DirectionalLight(0xbfd0ff,0.55); f.position.set(-6,2,4); scene.add(f);
+  var r=new THREE.DirectionalLight(0x9d8bff,0.6); r.position.set(-3,3,-6); scene.add(r);
+
+  var material=new THREE.MeshStandardMaterial({color:0xa83a30,roughness:0.62,metalness:0.04});
+  var current=null;
+
+  function fit(obj3d){
+    var box=new THREE.Box3().setFromObject(obj3d), c=new THREE.Vector3(), s=new THREE.Vector3();
+    box.getCenter(c); box.getSize(s);
+    obj3d.position.sub(c);                                  // recenter
+    var m=Math.max(s.x,s.y,s.z)||1, scale=3.4/m;
+    var holder=new THREE.Group(); holder.add(obj3d); holder.scale.setScalar(scale);
+    return holder;
+  }
+  function show(obj3d){
+    if(current){ scene.remove(current); }
+    current=obj3d; scene.add(current);
+    controls.target.set(0,0,0); camera.position.set(0,0.6,6); controls.update();
+  }
+
+  function applyMesh(geometry, col){
+    geometry.computeVertexNormals();
+    material=new THREE.MeshStandardMaterial({color:col,roughness:0.6,metalness:0.04});
+    var mesh=new THREE.Mesh(geometry, material);
+    mesh.rotation.x=-Math.PI/2;                             // STL is usually Z-up → make it Y-up
+    show(fit(mesh));
+  }
+  function applyObject(obj, col){
+    material=new THREE.MeshStandardMaterial({color:col,roughness:0.6,metalness:0.04});
+    obj.traverse(function(n){ if(n.isMesh){ n.material=material; if(n.geometry) n.geometry.computeVertexNormals(); }});
+    show(fit(obj));
+  }
+
+  function loadURL(src){
+    setStatus("Loading "+src.name+" …");
+    var loader=new THREE.STLLoader();
+    loader.load(src.url, function(geo){ applyMesh(geo, src.col); setStatus("Loaded: "+src.name,"ok"); },
+      function(p){ if(p&&p.total){ setStatus("Loading "+src.name+" … "+Math.round(p.loaded/p.total*100)+"%"); } },
+      function(err){ setStatus("Couldn't fetch that mesh online. Drag a downloaded .stl/.glb here, or click ‘Load a file…’.","warn"); console.warn(err); });
+  }
+
+  // ---- file / drag-drop fallback (works even fully offline) ----
+  function loadFile(file){
+    var ext=(file.name.split('.').pop()||'').toLowerCase(), reader=new FileReader();
+    setStatus("Reading "+file.name+" …");
+    reader.onload=function(e){
+      try{
+        if(ext==='stl'){ var g=new THREE.STLLoader().parse(e.target.result); applyMesh(g, material.color.getHex()); }
+        else if(ext==='obj'){ var o=new THREE.OBJLoader().parse(e.target.result); applyObject(o, material.color.getHex()); }
+        else if(ext==='glb'||ext==='gltf'){ new THREE.GLTFLoader().parse(e.target.result,'',function(gltf){ show(fit(gltf.scene)); },function(err){ setStatus("GLTF parse failed.","warn"); }); }
+        else { setStatus("Unsupported file type.","warn"); return; }
+        setStatus("Loaded: "+file.name,"ok");
+      }catch(err){ setStatus("Could not parse "+file.name,"warn"); console.warn(err); }
+    };
+    if(ext==='obj'||ext==='gltf') reader.readAsText(file); else reader.readAsArrayBuffer(file);
+  }
+  var drop=document.getElementById('drop');
+  ['dragenter','dragover'].forEach(function(ev){ stage.addEventListener(ev,function(e){ e.preventDefault(); drop.style.display='flex'; }); });
+  ['dragleave','drop'].forEach(function(ev){ stage.addEventListener(ev,function(e){ e.preventDefault(); if(ev==='drop'&&e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); drop.style.display='none'; }); });
+  document.getElementById('pick').addEventListener('click',function(){ document.getElementById('file').click(); });
+  document.getElementById('file').addEventListener('change',function(e){ if(e.target.files[0]) loadFile(e.target.files[0]); });
+
+  // ---- tabs + tint ----
+  document.querySelectorAll('.tab').forEach(function(b){ b.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    loadURL(SOURCES[b.dataset.k]);
+  });});
+  document.querySelectorAll('.swatch').forEach(function(s){ s.addEventListener('click',function(){
+    var col=parseInt(s.dataset.col); if(material){ material.color.setHex(col); }
+  });});
+
+  function resize(){ var w=stage.clientWidth,h=stage.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  window.addEventListener('resize',resize); resize();
+  (function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
+
+  loadURL(SOURCES.heart);   // start on the heart
+})();
+</script>
+</body>
+</html>

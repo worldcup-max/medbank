@@ -1,0 +1,61 @@
+{
+  "_comment": "Regression fixture — a deliberately broken scene. Copy it into a scratch scenes/ folder and run validate-scenes.mjs: it must report all 11 errors across existence, canonical, ops, purity and lifecycle. FMA7196 is the SPLEEN; the v1 heart scene labelled it 'left lung'. If this fixture ever passes, the gate is broken.",
+  "schema": 2,
+  "id": "regression",
+  "mode": "3d_anatomy",
+  "status": "ready",
+  "learning_goal": "x",
+  "provider": {
+    "primary": "bodyparts3d"
+  },
+  "provenance": {
+    "author": "ai"
+  },
+  "structures": [
+    {
+      "key": "heart",
+      "name": "heart",
+      "label": "Heart",
+      "role": "context",
+      "refs": {
+        "bodyparts3d": "FMA7088"
+      }
+    },
+    {
+      "key": "lung_l",
+      "name": "left lung",
+      "label": "Left lung",
+      "role": "part",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      }
+    },
+    {
+      "key": "ra",
+      "name": "right atrium",
+      "label": "Right atrium",
+      "role": "part",
+      "refs": {
+        "bodyparts3d": "FMA7096"
+      },
+      "url": "https://cdn.jsdelivr.net/gh/x/BodyParts3D@main/stl/FMA7096.stl"
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "title": "t",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "nonexistent"
+        },
+        {
+          "op": "FLY_THROUGH",
+          "target": "*"
+        }
+      ],
+      "narration": "n"
+    }
+  ]
+}

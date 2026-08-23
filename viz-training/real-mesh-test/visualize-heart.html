@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · Visualize model3d — Heart (real per-part meshes + parts buttons)</title>
+<style>
+  :root{--bg:#141225;--panel:#1b1930;--panel2:#221f39;--ink:#f3f0ff;--dim:#a9a4c8;--accent:#7c5cff;--ok:#28c093;--warn:#ffb020;--line:#2c2948;}
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  #wrap{display:flex;flex-direction:column;height:100vh;max-width:1160px;margin:0 auto;}
+  header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 16px;border-bottom:1px solid var(--line);}
+  .brand{font-size:14px;color:var(--dim);} .brand b{color:var(--accent);}
+  #main{flex:1;min-height:0;display:flex;}
+  #stage{position:relative;flex:1;min-height:0;} canvas{display:block;width:100%;height:100%;}
+  #labels{position:absolute;inset:0;pointer-events:none;}
+  .hl{position:absolute;transform:translate(-50%,-50%);font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;opacity:0;transition:opacity .2s;}
+  .hl.on{opacity:1;} .hl i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;box-shadow:0 0 9px currentColor;}
+  .hl b{background:rgba(12,10,24,.85);padding:2px 7px;border-radius:6px;border:1px solid currentColor;}
+  #status{position:absolute;left:14px;top:12px;font-size:12.5px;background:rgba(20,18,37,.72);border:1px solid #35315a;padding:6px 11px;border-radius:9px;color:var(--dim);max-width:70%;}
+  #status.ok{color:var(--ok);} #status.warn{color:var(--warn);}
+  #hint{position:absolute;right:14px;bottom:12px;font-size:11.5px;color:#8681ab;}
+  aside{width:290px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;}
+  .ah{padding:11px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .ah a{font-size:11px;color:#b3a6ff;text-transform:none;letter-spacing:0;cursor:pointer;text-decoration:underline;}
+  .plist{overflow:auto;flex:1;padding:6px;}
+  .part{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;color:#e7e3ff;cursor:pointer;}
+  .part:hover{background:var(--panel2);} .part.on{background:#2a2650;border-color:#4a4488;}
+  .part[disabled]{opacity:.4;cursor:not-allowed;}
+  .dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:2px;border:2px solid #ffffff2a;}
+  .part small{display:block;color:#8f8ab5;font-size:11px;margin-top:1px;}
+  .actions{padding:10px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{font:inherit;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer;}
+  .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
+  footer{padding:8px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim);}
+  footer a{color:#b3a6ff;}
+  @media(max-width:860px){ aside{display:none;} }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header><div class="brand">MedBank · <b>Visualize model3d</b> · Heart — real per-part meshes · tap a part to isolate & highlight</div></header>
+  <div id="main">
+    <div id="stage"><canvas id="c"></canvas><div id="labels"></div><div id="status">Loading real heart meshes…</div><div id="hint">drag to rotate · scroll to zoom · auto-revolving</div></div>
+    <aside>
+      <div class="ah"><span id="ahname">Parts</span><a id="all">show all</a></div>
+      <div class="plist" id="plist"></div>
+      <div class="actions"><button class="btn pri" id="tour">▶ Play parts tour</button><button class="btn" id="ghost">Ghost others</button></div>
+    </aside>
+  </div>
+  <footer id="src">BodyParts3D, © DBCLS, CC-BY-SA 2.1 JP · loaded per-part so each button isolates the real structure.</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script>
+(function(){
+  var T=window.THREE; if(!T||!T.STLLoader){document.getElementById('status').textContent="Could not load 3D library (are you online?)";return;}
+  var GH='https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/stl/';
+  // Heart parts as separate real meshes (BodyParts3D FMA files). Each button isolates the actual structure.
+  var PARTS=[
+    {id:'ra',  label:'Right atrium',    fma:'FMA7096', color:0x8f6fb0, desc:'Collects oxygen-poor blood from the body.'},
+    {id:'rv',  label:'Right ventricle', fma:'FMA7098', color:0x4f7fd0, desc:'Pumps that blood to the lungs.'},
+    {id:'la',  label:'Left atrium',     fma:'FMA7097', color:0xd08a8a, desc:'Receives oxygen-rich blood from the lungs.'},
+    {id:'lv',  label:'Left ventricle',  fma:'FMA7101', color:0xb23a3a, desc:'Thick-walled powerhouse — drives blood to the body.'},
+    {id:'ao',  label:'Aorta',           fma:'FMA3734', color:0xd98a80, desc:'Great artery to the whole body.'},
+    {id:'pt',  label:'Pulmonary trunk', fma:'FMA8612', color:0x6f8fd0, desc:'Carries blood from the RV to the lungs.'},
+    {id:'svc', label:'Superior vena cava', fma:'FMA4720', color:0x5f7fc0, desc:'Returns blood from the upper body.'},
+    {id:'ivc', label:'Inferior vena cava', fma:'FMA10951', color:0x5575b5, desc:'Returns blood from the lower body.'}
+  ];
+  var FALLBACK={label:'Whole heart', url:'https://upload.wikimedia.org/wikipedia/commons/d/d2/3D_model_of_a_human_heart.stl', color:0xa5382f};
+
+  var stage=document.getElementById('stage'),canvas=document.getElementById('c'),labelWrap=document.getElementById('labels');
+  function st(t,c){var e=document.getElementById('status');e.textContent=t;e.className=c||'';}
+  var renderer=new T.WebGLRenderer({canvas:canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputEncoding=T.sRGBEncoding;
+  var scene=new T.Scene();scene.background=new T.Color(0x141225);
+  var camera=new T.PerspectiveCamera(45,1,0.01,2000);camera.position.set(0,0.4,7);
+  var controls=new T.OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=0.09;controls.autoRotate=true;controls.autoRotateSpeed=0.9;controls.minDistance=1.5;controls.maxDistance=60;
+  scene.add(new T.HemisphereLight(0xf2ecff,0x20203a,1.0));
+  var k=new T.DirectionalLight(0xffffff,1.15);k.position.set(5,8,6);scene.add(k);
+  var f=new T.DirectionalLight(0xbfd0ff,0.5);f.position.set(-6,2,4);scene.add(f);
+  var rl=new T.DirectionalLight(0x9d8bff,0.6);rl.position.set(-3,3,-6);scene.add(rl);
+
+  var holder=new T.Group(); scene.add(holder);
+  var meshes={}, loaded=[], pinEls={}, selected=[], ghost=false, modelR=3;
+
+  function loadOne(p){ return new Promise(function(res){
+    new T.STLLoader().load(GH+p.fma+'.stl', function(geo){ geo.computeVertexNormals();
+      var m=new T.Mesh(geo,new T.MeshStandardMaterial({color:p.color,roughness:0.55,metalness:0.03,transparent:true,opacity:1}));
+      m.userData=p; holder.add(m); meshes[p.id]=m; loaded.push(p); res(true);
+    }, null, function(){ res(false); }); }); }
+
+  function fitAll(){ var box=new T.Box3().setFromObject(holder),c=new T.Vector3(),s=new T.Vector3();box.getCenter(c);box.getSize(s);
+    holder.children.forEach(function(m){m.position.sub(c);}); var mx=Math.max(s.x,s.y,s.z)||1; holder.scale.setScalar(3.4/mx); modelR=(s.length()/2)*(3.4/mx);
+    holder.rotation.x=-Math.PI/2; }
+
+  function buildList(){ var pl=document.getElementById('plist'); pl.innerHTML=''; labelWrap.innerHTML=''; pinEls={};
+    document.getElementById('ahname').textContent='Heart · '+loaded.length+' parts';
+    PARTS.forEach(function(p){ var on=!!meshes[p.id];
+      var b=document.createElement('button'); b.className='part'; if(!on)b.setAttribute('disabled','');
+      b.innerHTML='<span class="dot" style="background:'+(on?('#'+new T.Color(p.color).getHexString()):'#3a365e')+'"></span><span><b style="font-weight:600">'+p.label+'</b><small>'+(on?p.desc:'not in this dataset')+'</small></span>';
+      if(on)b.addEventListener('click',function(){toggle(p.id,b);}); pl.appendChild(b);
+      if(on){var d=document.createElement('div');d.className='hl';d.innerHTML='<i style="background:#'+new T.Color(p.color).getHexString()+';color:#'+new T.Color(p.color).getHexString()+'"></i><b>'+p.label+'</b>';labelWrap.appendChild(d);pinEls[p.id]=d;} });
+  }
+  function toggle(id,btn){ var i=selected.indexOf(id); if(i>=0)selected.splice(i,1); else selected.push(id);
+    if(btn)btn.classList.toggle('on',selected.indexOf(id)>=0); paint(); }
+  function paint(){ var anySel=selected.length>0;
+    loaded.forEach(function(p){ var m=meshes[p.id],sel=selected.indexOf(p.id)>=0;
+      if(!anySel){ m.material.opacity=1; m.material.emissive.setHex(0x000000); }
+      else if(sel){ m.material.opacity=1; m.material.emissive.setHex(p.color); m.material.emissiveIntensity=0.45; }
+      else { m.material.opacity=ghost?0.12:1; m.material.emissive.setHex(0x000000); }
+      m.material.needsUpdate=true;
+    });
+    Object.keys(pinEls).forEach(function(id){ pinEls[id].classList.toggle('on', selected.indexOf(id)>=0); });
+    document.querySelectorAll('.part').forEach(function(b){ });
+  }
+
+  function start(){
+    Promise.all(PARTS.map(loadOne)).then(function(){
+      if(loaded.length===0){ // fallback: single whole-heart mesh
+        st('Per-part meshes unreachable — loading the whole real heart instead (no separate parts).','warn');
+        new T.STLLoader().load(FALLBACK.url,function(geo){geo.computeVertexNormals();var m=new T.Mesh(geo,new T.MeshStandardMaterial({color:FALLBACK.color,roughness:0.6}));holder.add(m);fitAll();document.getElementById('ahname').textContent='Heart (whole)';document.getElementById('plist').innerHTML='<div style="padding:10px;color:#8f8ab5;font-size:12.5px">This dataset served the heart as one mesh, so there are no separate part buttons. The production engine loads the per-chamber meshes from our own server.</div>';},null,function(){st('Could not load any heart mesh online.','warn');});
+        return;
+      }
+      fitAll(); buildList();
+      st('Loaded '+loaded.length+' real heart parts — tap a part to highlight it.','ok');
+    });
+  }
+
+  document.getElementById('all').addEventListener('click',function(){selected=[];document.querySelectorAll('.part').forEach(function(b){b.classList.remove('on');});paint();});
+  document.getElementById('ghost').addEventListener('click',function(){ghost=!ghost;this.classList.toggle('pri',ghost);paint();});
+  var tourTimer=null,ti=0;
+  document.getElementById('tour').addEventListener('click',function(){if(tourTimer){clearInterval(tourTimer);tourTimer=null;return;}ti=0;stepTour();tourTimer=setInterval(stepTour,2600);});
+  function stepTour(){ if(ti>=loaded.length){clearInterval(tourTimer);tourTimer=null;selected=[];paint();return;} selected=[loaded[ti].id]; document.querySelectorAll('.part').forEach(function(b){b.classList.remove('on');}); ghost=true; document.getElementById('ghost').classList.add('pri'); paint(); ti++; }
+
+  var v=new T.Vector3();
+  function updatePins(){var w=stage.clientWidth,h=stage.clientHeight;Object.keys(pinEls).forEach(function(id){var m=meshes[id];if(!m)return;m.geometry.computeBoundingSphere();var c=m.geometry.boundingSphere.center.clone();m.localToWorld(c);v.copy(c).project(camera);pinEls[id].style.left=((v.x*0.5+0.5)*w)+'px';pinEls[id].style.top=((-v.y*0.5+0.5)*h)+'px';});}
+  function resize(){var w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+  (function loop(){requestAnimationFrame(loop);controls.update();updatePins();renderer.render(scene,camera);})();
+  start();
+})();
+</script>
+</body>
+</html>

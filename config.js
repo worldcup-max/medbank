@@ -44,5 +44,9 @@ window.MEDBANK_CONFIG = {
   //   GAP_LOOP             = at-miss Knowledge-Gap → Learn → Practice → Retest loop (SPEC-GAP-LEARN-LOOP.md)
   //   POST_SESSION_FIX_QUEUE = post-session "3 things to fix" prioritisation layer that routes to interventions
   //   TOPIC_PREVIEW = the pre-read "orientation video" at the top of the note (SPEC-TOPIC-PREVIEW.md)
-  FEATURES: { GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true }
+  //   MODEL3D      = the 3D anatomy player (viz3d.js) — a NEW renderer beside the SVG Visualize engine,
+  //                  reading viz-training/scenes/*.json. Default OFF: with the flag false nothing loads,
+  //                  no tab appears and no network request is made. To test without flipping it live,
+  //                  run localStorage.mb3d = '1' in the console on your own device.
+  FEATURES: { GAP_LOOP: true, POST_SESSION_FIX_QUEUE: true, TOPIC_PREVIEW: true, MODEL3D: false }
 };

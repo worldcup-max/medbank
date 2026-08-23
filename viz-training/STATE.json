@@ -1,0 +1,12 @@
+{
+  "cursor": {
+    "courseKey": "gross",
+    "topicIndex": 0,
+    "structureIndex": 0
+  },
+  "coveredStructures": {},
+  "done": false,
+  "runs": 3,
+  "lastRunAt": "2026-08-23T17:01:51Z",
+  "note": "The hourly task walks CURRICULUM.courses in `order`. Cursor points at course\u2192topic\u2192structure. Each run authors ONE structure's scene (itemsPerRun=1), then advances structureIndex; at end of a topic's structures advance topicIndex; at end of a course's topics move to the next course in `order`; past the last course set done=true. coveredStructures[courseKey] is a list of structure names already authored (skip duplicates)."
+}

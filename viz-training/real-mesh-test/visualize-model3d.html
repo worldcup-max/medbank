@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · Visualize model3d — bright part highlight (Scapula · Biceps · Triceps)</title>
+<style>
+  :root{--bg:#141225;--panel:#1b1930;--panel2:#221f39;--ink:#f3f0ff;--dim:#a9a4c8;--accent:#7c5cff;--ok:#28c093;--warn:#ffb020;--line:#2c2948;}
+  *{box-sizing:border-box;} html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  #wrap{display:flex;flex-direction:column;height:100vh;max-width:1160px;margin:0 auto;}
+  header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 16px;border-bottom:1px solid var(--line);}
+  .brand{font-size:14px;color:var(--dim);} .brand b{color:var(--accent);}
+  .tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;}
+  .tab{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid #35315a;background:#221f3a;color:#cfc9ee;}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .tab .badge{font-size:10px;padding:1px 6px;border-radius:999px;background:#00000030;margin-left:5px;}
+  #main{flex:1;min-height:0;display:flex;}
+  #stage{position:relative;flex:1;min-height:0;}
+  canvas{display:block;width:100%;height:100%;}
+  #labels{position:absolute;inset:0;pointer-events:none;}
+  .pin{position:absolute;transform:translate(-50%,-50%);font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
+  .pin.on{opacity:1;} .pin i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;box-shadow:0 0 10px currentColor,0 0 3px #000;}
+  .pin b{background:rgba(12,10,24,.9);padding:3px 8px;border-radius:7px;border:1px solid currentColor;}
+  #status{position:absolute;left:14px;top:12px;font-size:12.5px;background:rgba(20,18,37,.72);border:1px solid #35315a;padding:6px 11px;border-radius:9px;color:var(--dim);max-width:60%;}
+  #status.ok{color:var(--ok);} #status.warn{color:var(--warn);}
+  #hint{position:absolute;right:14px;bottom:60px;font-size:11.5px;color:#8681ab;}
+  #drop{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(124,92,255,.14);border:2px dashed var(--accent);font-size:17px;color:#fff;}
+  #cap{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(16,14,30,.97),rgba(16,14,30,.66));border-top:1px solid var(--line);padding:10px 14px;}
+  #capmeta{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);}
+  #captext{font-size:14px;line-height:1.45;margin-top:3px;min-height:2.5em;}
+  aside{width:288px;border-left:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;}
+  .ah{padding:10px 14px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .ah a{font-size:11px;color:#b3a6ff;text-transform:none;letter-spacing:0;cursor:pointer;text-decoration:underline;}
+  .plist{overflow:auto;flex:1;padding:6px;}
+  .part{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;color:#e7e3ff;cursor:pointer;}
+  .part:hover{background:var(--panel2);} .part.on{background:#2a2650;border-color:#4a4488;}
+  .dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:2px;border:2px solid #ffffff2a;background:#3a365e;}
+  .part.on .dot{border-color:#fff;box-shadow:0 0 10px currentColor;}
+  .part small{display:block;color:#8f8ab5;font-size:11px;margin-top:1px;}
+  .actions{padding:10px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{font:inherit;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer;}
+  .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.on{background:#28c093;border-color:#28c093;color:#062;}
+  footer{padding:8px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim);display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+  footer a{color:#b3a6ff;} .fbadge{font-size:10.5px;padding:2px 7px;border-radius:999px;border:1px solid #4a4488;color:#c9c2ff;}
+  @media(max-width:860px){ aside{display:none;} }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <header>
+    <div class="brand">MedBank · <b>Visualize model3d</b> · click a part → bright glow + fly-to · multi-select = separate colours</div>
+    <div class="tabs">
+      <button class="tab on" data-k="scapula">Scapula<span class="badge">real</span></button>
+      <button class="tab" data-k="biceps">Biceps</button>
+      <button class="tab" data-k="triceps">Triceps</button>
+    </div>
+  </header>
+  <div id="main">
+    <div id="stage">
+      <canvas id="c"></canvas>
+      <div id="labels"></div>
+      <div id="status">Loading…</div>
+      <div id="hint">drag to rotate · scroll to zoom · click parts →</div>
+      <div id="drop">Drop a .stl / .glb / .obj to view it</div>
+      <div id="cap"><div id="capmeta">PARTS</div><div id="captext">Click a part on the right — it lights up brightly on the exact surface and the camera flies to it. Select several to compare, each its own colour.</div></div>
+    </div>
+    <aside>
+      <div class="ah"><span id="ahname">Parts</span><a id="clear">clear</a></div>
+      <div class="plist" id="plist"></div>
+      <div class="actions">
+        <button class="btn pri" id="tour">▶ Play tour</button>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn" id="calib" title="Turn on, select a part, then click on the bone to place its glow exactly">🎯 Calibrate</button>
+      </div>
+    </aside>
+  </div>
+  <footer>
+    <span id="src">—</span>
+    <span class="fbadge" id="kind">—</span>
+    <button class="btn" id="pick" style="padding:5px 10px">Load a real mesh…</button>
+    <input id="file" type="file" accept=".stl,.glb,.gltf,.obj" style="display:none"/>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+<script>
+(function(){
+  var T=window.THREE; if(!T||!T.STLLoader){document.getElementById('status').textContent="Could not load 3D library (are you online?)";return;}
+  var V3=function(a,b,c){return new T.Vector3(a,b,c);};
+  var PAL=[0xffe14d,0x37b6ff,0x37e39b,0xff6ec7,0xb98bff,0xff9a3d,0x8bff5a,0xff5a5a];
+  var stage=document.getElementById('stage'),canvas=document.getElementById('c'),labelWrap=document.getElementById('labels');
+  function st(t,c){var e=document.getElementById('status');e.textContent=t;e.className=c||'';}
+  var renderer=new T.WebGLRenderer({canvas:canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputEncoding=T.sRGBEncoding;
+  var scene=new T.Scene();scene.background=new T.Color(0x141225);
+  var camera=new T.PerspectiveCamera(45,1,0.01,2000);camera.position.set(0,0.4,6.6);
+  var controls=new T.OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=0.09;controls.autoRotate=true;controls.autoRotateSpeed=0.9;controls.minDistance=1.4;controls.maxDistance=60;
+  scene.add(new T.HemisphereLight(0xf2ecff,0x20203a,1.0));
+  var kk=new T.DirectionalLight(0xffffff,1.15);kk.position.set(5,8,6);scene.add(kk);
+  var fl=new T.DirectionalLight(0xbfd0ff,0.5);fl.position.set(-6,2,4);scene.add(fl);
+  var rl=new T.DirectionalLight(0x9d8bff,0.6);rl.position.set(-3,3,-6);scene.add(rl);
+
+  // procedural muscle fallbacks (tagged for whole-submesh highlight)
+  function fbm(x,y,z){return Math.sin(x*1.7+y*0.9)*Math.cos(z*1.6-y*0.7)*0.5+Math.sin(x*3.3-z*2.1)*0.28+Math.cos(y*4.2+x*1.4)*0.15;}
+  function disp(g,a,fq){var p=g.attributes.position;for(var i=0;i<p.count;i++){var x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=Math.sqrt(x*x+y*y+z*z)||1,d=fbm(x*fq,y*fq,z*fq)*a;p.setXYZ(i,x+x/n*d,y+y/n*d,z+z/n*d);}p.needsUpdate=true;g.computeVertexNormals();return g;}
+  function lathe(pr,s){return new T.LatheGeometry(pr.map(function(p){return new T.Vector2(p[0],p[1]);}),s||30);}
+  function mm(c){return new T.MeshStandardMaterial({color:c,roughness:0.55,emissive:0x000000});}
+  function Mesh(g,m){return new T.Mesh(g,m);}
+  function tag(m,id){m.userData.partId=id;m.userData.baseCol=m.material.color.getHex();return m;}
+  function buildBiceps(){var g=new T.Group();
+    var hum=tag(Mesh(new T.CylinderGeometry(0.22,0.26,4.8,20),mm(0xe9e1cc)),'hum');hum.position.set(0.6,-0.1,-0.6);g.add(hum);
+    var bp=[[0.02,-2.3],[0.18,-1.7],[0.34,-0.9],[0.55,-0.1],[0.62,0.5],[0.5,1.2],[0.32,1.8],[0.14,2.2],[0.02,2.4]];
+    var b1=tag(Mesh(disp(lathe(bp),0.03,2),mm(0xb23a3a)),'belly');b1.position.set(-0.2,0,0.15);b1.scale.set(1,1,0.82);g.add(b1);
+    var b2=tag(Mesh(disp(lathe(bp),0.03,2),mm(0xb23a3a)),'belly');b2.position.set(0.3,0.05,0.05);b2.scale.set(0.78,0.98,0.7);g.add(b2);
+    var t1=tag(Mesh(new T.CylinderGeometry(0.06,0.09,1.7,12),mm(0xe7dfc7)),'lh');t1.position.set(-0.22,2.25,0.1);t1.rotation.z=0.12;g.add(t1);
+    var t2=tag(Mesh(new T.CylinderGeometry(0.06,0.09,1.4,12),mm(0xe7dfc7)),'sh');t2.position.set(0.34,2.15,0.05);t2.rotation.z=-0.14;g.add(t2);
+    var apo=tag(Mesh(new T.BoxGeometry(0.7,0.06,0.5),mm(0xe7dfc7)),'apo');apo.position.set(-0.1,-2.0,0.25);apo.rotation.z=0.5;g.add(apo);
+    var td=tag(Mesh(new T.CylinderGeometry(0.1,0.06,1.2,12),mm(0xe7dfc7)),'dist');td.position.set(0.05,-2.5,0.1);g.add(td);
+    g.scale.setScalar(0.82);return g;}
+  function buildTriceps(){var g=new T.Group();
+    var hum=tag(Mesh(new T.CylinderGeometry(0.22,0.26,4.8,20),mm(0xe9e1cc)),'hum');hum.position.set(0,-0.1,-0.2);g.add(hum);
+    var bp=[[0.02,-2.2],[0.16,-1.5],[0.32,-0.7],[0.5,0.1],[0.56,0.7],[0.42,1.4],[0.24,2.0],[0.08,2.3]];
+    var lg=tag(Mesh(disp(lathe(bp),0.03,2),mm(0xb23a3a)),'long');lg.position.set(0,0.1,-0.75);lg.scale.set(0.95,1.05,0.8);g.add(lg);
+    var lat=tag(Mesh(disp(lathe(bp),0.03,2),mm(0xb23a3a)),'lat');lat.position.set(-0.62,0.25,-0.5);lat.scale.set(0.7,0.95,0.7);g.add(lat);
+    var med=tag(Mesh(disp(lathe(bp),0.03,2),mm(0xb23a3a)),'med');med.position.set(0.62,-0.05,-0.5);med.scale.set(0.6,0.8,0.6);g.add(med);
+    var ct=tag(Mesh(new T.BoxGeometry(0.55,0.9,0.4),mm(0xe7dfc7)),'ct');ct.position.set(0,-1.9,-0.45);g.add(ct);
+    var ol=tag(Mesh(new T.SphereGeometry(0.28,16,14),mm(0xe9e1cc)),'ol');ol.position.set(0,-2.5,-0.4);g.add(ol);
+    g.scale.setScalar(0.82);return g;}
+
+  var SCAPULA_PARTS=[
+    {id:'body',label:'Body (blade)',desc:'Thin triangular plate that glides on the ribcage.',f:[0.5,0.5,0.45],r:0.22},
+    {id:'spine',label:'Spine',desc:'Ridge across the back, dividing the two fossae.',f:[0.5,0.7,0.28],r:0.15},
+    {id:'acromion',label:'Acromion',desc:'Flat lateral tip of the spine — point of the shoulder.',f:[0.82,0.9,0.4],r:0.11},
+    {id:'glenoid',label:'Glenoid cavity',desc:'Shallow socket for the head of the humerus.',f:[0.86,0.62,0.55],r:0.11},
+    {id:'coracoid',label:'Coracoid process',desc:'Forward hook — biceps short head & coracobrachialis.',f:[0.72,0.83,0.8],r:0.10},
+    {id:'supf',label:'Supraspinous fossa',desc:'Hollow above the spine — supraspinatus.',f:[0.5,0.83,0.3],r:0.12},
+    {id:'inff',label:'Infraspinous fossa',desc:'Large hollow below the spine — infraspinatus.',f:[0.5,0.4,0.32],r:0.16},
+    {id:'sup',label:'Superior angle',desc:'Where superior & medial borders meet.',f:[0.33,0.95,0.4],r:0.10},
+    {id:'inf',label:'Inferior angle',desc:'Lowest point — palpable; overlies rib 7.',f:[0.5,0.05,0.4],r:0.10},
+    {id:'medb',label:'Medial border',desc:'Long edge nearest the spine (vertebral border).',f:[0.16,0.4,0.4],r:0.11},
+    {id:'latb',label:'Lateral border',desc:'Thick edge running to the glenoid (axillary).',f:[0.8,0.32,0.46],r:0.11}
+  ];
+  var BICEPS_PARTS=[
+    {id:'lh',label:'Long head',desc:'Tendon from the supraglenoid tubercle, in the bicipital groove.'},
+    {id:'sh',label:'Short head',desc:'From the coracoid process with coracobrachialis.'},
+    {id:'belly',label:'Muscle belly',desc:'The two heads fuse into one spindle-shaped belly.'},
+    {id:'apo',label:'Bicipital aponeurosis',desc:'Flat sheet fanning into the forearm fascia.'},
+    {id:'dist',label:'Distal tendon',desc:'Inserts on the radial tuberosity — flexes & supinates.'}
+  ];
+  var TRICEPS_PARTS=[
+    {id:'long',label:'Long head',desc:'Crosses the shoulder — from the infraglenoid tubercle.'},
+    {id:'lat',label:'Lateral head',desc:'From the humerus above the radial groove.'},
+    {id:'med',label:'Medial head',desc:'Deep head below the radial groove; always active.'},
+    {id:'ct',label:'Common tendon',desc:'The three heads converge into one broad tendon.'},
+    {id:'ol',label:'Olecranon insertion',desc:'Inserts on the olecranon — prime elbow extensor.'}
+  ];
+
+  var STRUCT={
+    scapula:{kind:'real',urls:['https://upload.wikimedia.org/wikipedia/commons/6/67/Human_scapula_1.stl','https://upload.wikimedia.org/wikipedia/commons/3/34/BodyParts3D_Scapula.stl'],parts:SCAPULA_PARTS,col:0xe9e1cc,rotX:-Math.PI/2,src:'Scapula — Human scapula (CC-BY), via Wikimedia'},
+    biceps:{kind:'proc-real',urls:['https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/stl/FMA37670.stl'],build:buildBiceps,parts:BICEPS_PARTS,col:0xb23a3a,rotX:-Math.PI/2,src:'Biceps brachii — engine supplies the mesh in-app; procedural stand-in here'},
+    triceps:{kind:'proc-real',urls:['https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/stl/FMA37692.stl'],build:buildTriceps,parts:TRICEPS_PARTS,col:0xb23a3a,rotX:-Math.PI/2,src:'Triceps brachii — engine supplies the mesh in-app; procedural stand-in here'}
+  };
+
+  var curKey='scapula',cfg=null,holder=null,singleMesh=null,procGroup=null,parts=[],selected=[],pins=[],overlays=[],modelR=3,geoR=1,calib=false;
+  var focusTarget=null,focusDist=null,focusEase=0;
+
+  function clearScene(){ if(holder){scene.remove(holder);holder=null;} singleMesh=null;procGroup=null;
+    overlays.forEach(function(o){o.parent&&o.parent.remove(o);});overlays=[]; labelWrap.innerHTML='';pins=[]; }
+  function fitHolder(obj){var box=new T.Box3().setFromObject(obj),c=new T.Vector3(),s=new T.Vector3();box.getCenter(c);box.getSize(s);obj.position.sub(c);var m=Math.max(s.x,s.y,s.z)||1;var h=new T.Group();h.add(obj);h.scale.setScalar(3.4/m);return h;}
+  function resetCam(){controls.target.set(0,0,0);camera.position.set(0,0.4,6.6);controls.update();focusTarget=null;}
+
+  function afterMount(){
+    var box=new T.Box3().setFromObject(holder),mn=box.min.clone(),sz=new T.Vector3();box.getSize(sz);modelR=sz.length()/2;
+    if(singleMesh){ singleMesh.geometry.computeBoundingSphere(); geoR=singleMesh.geometry.boundingSphere.radius; }
+    // Real scanned meshes have an unknown coordinate frame, so preset landmark positions can't be trusted.
+    // Anchors on a single mesh are placed by CLICK (Calibrate) — never auto-guessed, so a glow is never wrong.
+    parts.forEach(function(p){
+      if(procGroup && p.pos){ var wa=holder.localToWorld(V3(p.pos[0],p.pos[1],p.pos[2])); p._hl=holder.worldToLocal(wa.clone()); }
+    });
+    repaint();
+  }
+  function snapToSurface(gl){ // nearest vertex on the mesh to a target point (keeps anchors ON the bone)
+    var pos=singleMesh.geometry.attributes.position,best=1e9,bx=0,by=0,bz=0;
+    for(var i=0;i<pos.count;i++){var dx=pos.getX(i)-gl.x,dy=pos.getY(i)-gl.y,dz=pos.getZ(i)-gl.z,d=dx*dx+dy*dy+dz*dz;if(d<best){best=d;bx=pos.getX(i);by=pos.getY(i);bz=pos.getZ(i);}}
+    return V3(bx,by,bz);
+  }
+
+  function buildOverlays(){
+    overlays.forEach(function(o){o.parent&&o.parent.remove(o);});overlays=[];
+    if(!singleMesh)return;
+    var pos=singleMesh.geometry.attributes.position;
+    selected.forEach(function(id,si){ var p=partById(id); if(!p||!p._gl)return; var col=PAL[si%PAL.length];
+      var rad=(p.r||0.13)*geoR, r2=rad*rad, a=p._gl, verts=[];
+      for(var t=0;t<pos.count;t+=3){ var c0x=(pos.getX(t)+pos.getX(t+1)+pos.getX(t+2))/3,c0y=(pos.getY(t)+pos.getY(t+1)+pos.getY(t+2))/3,c0z=(pos.getZ(t)+pos.getZ(t+1)+pos.getZ(t+2))/3;
+        var dx=c0x-a.x,dy=c0y-a.y,dz=c0z-a.z; if(dx*dx+dy*dy+dz*dz<r2){ for(var q=0;q<3;q++){verts.push(pos.getX(t+q),pos.getY(t+q),pos.getZ(t+q));} } }
+      if(!verts.length)return;
+      var og=new T.BufferGeometry(); og.setAttribute('position',new T.Float32BufferAttribute(verts,3)); og.computeVertexNormals();
+      var omat=new T.MeshBasicMaterial({color:col,polygonOffset:true,polygonOffsetFactor:-6,polygonOffsetUnits:-6,transparent:true,opacity:0.98});
+      var om=new T.Mesh(og,omat); singleMesh.add(om); overlays.push(om);
+      // thin outline glow: a second slightly-scaled additive shell
+    });
+  }
+
+  function baseColorReset(){ if(procGroup){procGroup.traverse(function(n){if(n.isMesh&&n.material){if(n.material.emissive)n.material.emissive.setHex(0x000000);if(n.userData.baseCol!=null)n.material.color.setHex(n.userData.baseCol);}});} }
+  function repaint(){
+    baseColorReset();
+    if(procGroup){ selected.forEach(function(id,si){ var c=PAL[si%PAL.length]; procGroup.traverse(function(n){ if(n.isMesh&&n.userData.partId===id){ n.material.color.setHex(c); if(n.material.emissive){n.material.emissive.setHex(c);n.material.emissiveIntensity=0.55;} } }); }); }
+    buildOverlays();
+    parts.forEach(function(p,ix){ var siIdx=selected.indexOf(p.id),on=siIdx>=0,el=document.querySelectorAll('.part')[ix];
+      if(el){el.classList.toggle('on',on);var dot=el.querySelector('.dot');var hc=on?('#'+new T.Color(PAL[siIdx%PAL.length]).getHexString()):null;dot.style.background=on?hc:'#3a365e';dot.style.color=on?hc:'transparent';}
+      if(pins[ix]){pins[ix].classList.toggle('on',on);var pel=pins[ix];if(on){var hc2='#'+new T.Color(PAL[siIdx%PAL.length]).getHexString();pel.querySelector('i').style.background=hc2;pel.style.color=hc2;pel.querySelector('b').style.color='#fff';}} });
+  }
+  function partById(id){for(var i=0;i<parts.length;i++)if(parts[i].id===id)return parts[i];return null;}
+
+  function toggle(id){var i=selected.indexOf(id);if(i>=0)selected.splice(i,1);else{selected.push(id);var p=partById(id);document.getElementById('captext').textContent=p.label+' — '+p.desc;document.getElementById('capmeta').textContent='PART · '+selected.length+' selected';
+    if(singleMesh&&!p._gl){ st('Click the '+p.label.toLowerCase()+' on the bone to light it exactly (Calibrate is on).',''); } }repaint();}
+
+  function renderList(){var pl=document.getElementById('plist');pl.innerHTML='';labelWrap.innerHTML='';pins=[];
+    document.getElementById('ahname').textContent=(curKey[0].toUpperCase()+curKey.slice(1))+' · '+parts.length+' parts';
+    parts.forEach(function(p){var b=document.createElement('button');b.className='part';b.innerHTML='<span class="dot"></span><span><b style="font-weight:600">'+p.label+'</b><small>'+p.desc+'</small></span>';b.addEventListener('click',function(){toggle(p.id);});pl.appendChild(b);
+      var d=document.createElement('div');d.className='pin';d.innerHTML='<i></i><b>'+p.label+'</b>';labelWrap.appendChild(d);pins.push(d);});}
+
+  function setCalib(on){calib=on;var b=document.getElementById('calib');b.classList.toggle('on',on);b.textContent=on?'🎯 Calibrate on':'🎯 Calibrate';}
+  function setSingle(geo){geo.computeVertexNormals();var mesh=new T.Mesh(geo,new T.MeshStandardMaterial({color:cfg.col,roughness:0.66,metalness:0.02}));if(cfg.rotX)mesh.rotation.x=cfg.rotX;holder=fitHolder(mesh);singleMesh=mesh;scene.add(holder);resetCam();afterMount();setCalib(true);}
+  function setGroup(grp){holder=fitHolder(grp);procGroup=grp;scene.add(holder);resetCam();afterMount();setCalib(false);}
+  function tryUrls(urls,i,onFail){if(i>=urls.length){onFail();return;}st('Loading mesh…');new T.STLLoader().load(urls[i],function(geo){clearScene();setSingle(geo);st('Loaded real mesh','ok');document.getElementById('kind').textContent='real mesh';},null,function(){tryUrls(urls,i+1,onFail);});}
+
+  function loadStruct(key){curKey=key;cfg=STRUCT[key];parts=cfg.parts.map(function(p){return Object.assign({},p);});selected=[];clearScene();renderList();
+    document.getElementById('src').textContent=cfg.src;document.getElementById('kind').textContent='loading…';
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.dataset.k===key);});
+    document.getElementById('captext').textContent=(cfg.kind==='real')?'Rotate freely (drag / scroll). To light a landmark: click it in the list, then click that spot on the bone — it glows exactly there, in its own colour. Multi-select stacks colours.':'Click a part on the right — the matching muscle head lights up in its own colour.';
+    document.getElementById('capmeta').textContent='PARTS';controls.autoRotate=true;
+    if(cfg.kind==='real'){tryUrls(cfg.urls,0,function(){st('Could not fetch mesh online — drop a downloaded .stl/.glb here.','warn');});}
+    else{tryUrls(cfg.urls,0,function(){clearScene();setGroup(cfg.build());st('In the app the engine serves this muscle mesh. Offline here → procedural stand-in; drop a real mesh to replace.','warn');document.getElementById('kind').textContent='procedural';});}
+  }
+
+  function loadFile(file){var ext=(file.name.split('.').pop()||'').toLowerCase(),rd=new FileReader();st('Reading '+file.name+' …');
+    rd.onload=function(e){try{clearScene();
+      if(ext==='stl'){setSingle(new T.STLLoader().parse(e.target.result));}
+      else if(ext==='obj'){setGroup(new T.OBJLoader().parse(e.target.result));}
+      else if(ext==='glb'||ext==='gltf'){new T.GLTFLoader().parse(e.target.result,'',function(g){setGroup(g.scene);},function(){st('GLTF parse failed','warn');});}
+      else{st('Unsupported file','warn');return;}
+      st('Loaded '+file.name+' — use 🎯 Calibrate to place each glow exactly.','ok');document.getElementById('kind').textContent='your mesh';
+    }catch(err){st('Could not parse '+file.name,'warn');}};
+    if(ext==='obj'||ext==='gltf')rd.readAsText(file);else rd.readAsArrayBuffer(file);}
+  var drop=document.getElementById('drop');
+  ['dragenter','dragover'].forEach(function(ev){stage.addEventListener(ev,function(e){e.preventDefault();drop.style.display='flex';});});
+  ['dragleave','drop'].forEach(function(ev){stage.addEventListener(ev,function(e){e.preventDefault();if(ev==='drop'&&e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);drop.style.display='none';});});
+  document.getElementById('pick').addEventListener('click',function(){document.getElementById('file').click();});
+  document.getElementById('file').addEventListener('change',function(e){if(e.target.files[0])loadFile(e.target.files[0]);});
+  document.getElementById('clear').addEventListener('click',function(){selected=[];repaint();});
+  document.getElementById('reset').addEventListener('click',function(){controls.autoRotate=true;focusTarget=null;resetCam();});
+  document.getElementById('calib').addEventListener('click',function(){setCalib(!calib);st(calib?'Calibrate ON — select a part, then click the bone to place its glow exactly.':'Calibrate off','');});
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){loadStruct(t.dataset.k);});});
+  controls.addEventListener('start',function(){focusTarget=null;});
+
+  // click-to-calibrate raycast (distinguish click from drag)
+  var ray=new T.Raycaster(),ndc=new T.Vector2(),downXY=null;
+  canvas.addEventListener('pointerdown',function(e){downXY=[e.clientX,e.clientY];});
+  canvas.addEventListener('pointerup',function(e){ if(!downXY)return; var moved=Math.abs(e.clientX-downXY[0])+Math.abs(e.clientY-downXY[1]); downXY=null;
+    if(moved>5||!calib||!singleMesh||!selected.length)return;
+    var r=canvas.getBoundingClientRect(); ndc.x=((e.clientX-r.left)/r.width)*2-1; ndc.y=-((e.clientY-r.top)/r.height)*2+1; ray.setFromCamera(ndc,camera);
+    var hit=ray.intersectObject(singleMesh,true)[0]; if(!hit)return;
+    var id=selected[selected.length-1], p=partById(id); var gl=singleMesh.worldToLocal(hit.point.clone()); p._gl=gl; p._hl=holder.worldToLocal(hit.point.clone());
+    var box=new T.Box3().setFromObject(holder),mn=box.min,sz=new T.Vector3();box.getSize(sz);var w=holder.localToWorld(p._hl.clone());
+    var fr=[( (w.x-mn.x)/sz.x).toFixed(3),((w.y-mn.y)/sz.y).toFixed(3),((w.z-mn.z)/sz.z).toFixed(3)];
+    console.log('CALIBRATED',id,'f:['+fr.join(',')+']'); st('Placed "'+p.label+'"  f:['+fr.join(', ')+']  — copy from console','ok'); repaint(); });
+
+  // tour
+  var tourTimer=null,ti=0;
+  document.getElementById('tour').addEventListener('click',function(){if(tourTimer){clearInterval(tourTimer);tourTimer=null;return;}selected=[];repaint();ti=0;stepTour();tourTimer=setInterval(stepTour,3600);});
+  function stepTour(){if(ti>=parts.length){clearInterval(tourTimer);tourTimer=null;return;}selected=[parts[ti].id];var p=parts[ti];document.getElementById('captext').textContent=p.label+' — '+p.desc;document.getElementById('capmeta').textContent='TOUR · '+(ti+1)+' / '+parts.length;repaint();ti++;}
+
+  var v=new T.Vector3();
+  function updatePins(){if(!holder)return;var w=stage.clientWidth,h=stage.clientHeight;parts.forEach(function(p,ix){if(!p._hl||!pins[ix])return;v.copy(p._hl);holder.localToWorld(v);v.project(camera);pins[ix].style.left=((v.x*0.5+0.5)*w)+'px';pins[ix].style.top=((-v.y*0.5+0.5)*h)+'px';if(v.z>1&&pins[ix].classList.contains('on'))pins[ix].style.opacity='0.1';});}
+  function resize(){var w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+  (function loop(){requestAnimationFrame(loop);
+    controls.update();updatePins();renderer.render(scene,camera);})();
+
+  loadStruct('scapula');
+})();
+</script>
+</body>
+</html>

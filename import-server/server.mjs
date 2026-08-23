@@ -1261,7 +1261,7 @@ app.post("/tts", async (req,res)=>{
  * catch broken wiring; this catches missing physiology. Guarded + best-effort — never blocks. */
 async function completenessCheck(text, bp){
   if(process.env.VIZ_COMPLETENESS === "0") return { missing:[] };
-  const chain = chainOf(bp);
+  let chain; try{ chain = chainOf(bp); }catch(_){ chain = []; }   /* QCV-02: chainOf is debug-only — must never fail a build */
   if(chain.length < 2) return { missing:[] };
   const prompt =
 `You are a strict medical accuracy checker. Do NOT rewrite anything — only judge completeness.
@@ -1297,7 +1297,7 @@ app.post("/visualize", async (req,res)=>{
     const key = textKey(text);
     // cache read (best-effort — skips silently if the table isn't created yet)
     try{ const c = await admin.from("visualizations").select("blueprint").eq("text_key",key).maybeSingle();
-      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout)) && narratedSteps(c.data.blueprint)>=2){ const b=c.data.blueprint; if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
+      if(c.data && c.data.blueprint && (!c.data.blueprint.layout || LAYOUTS.has(c.data.blueprint.layout)) && narratedSteps(c.data.blueprint)>=2 && (()=>{ try{ return qcCheck(c.data.blueprint).pass; }catch(_){ return false; } })()){ const b=c.data.blueprint;   /* QCV-02: re-validate the cached blueprint (guarded) — never serve a poisoned/cyclic row */ if(!b.layout||b.layout==="scene"){ b._render=renderHints(b.template); b._defs=assetDefs((b.elements||[]).map(e=>e.type)); } return res.json({ ok:true, cached:true, blueprint:b, viz_quota:await vizQuota(user.id, user.email) }); } }catch(_){}
     // --- daily limit: only NEW builds count (cached replays above are free & unlimited) ---
     const premium = await isPremium(user.id, user.email).catch(()=>false);
     const limit = premium ? 10 : 3;
@@ -1318,7 +1318,7 @@ app.post("/visualize", async (req,res)=>{
     let gen = await generate({ model: BASIC_MODEL, prompt, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
     let bp = parseBlueprint(gen.text);
     // combined validity: structural (QC) + causal-completeness (graph). Both feed the corrective retry.
-    const evalBp = (b)=>{ const q=qcCheck(b), g=b?graphCheck(b):{pass:false,issues:[]}; return { pass:q.pass&&g.pass, issues:[...(q.issues||[]),...(g.issues||[])], qc:q, g }; };
+    const evalBp = (b)=>{ try{ const q=qcCheck(b), g=b?graphCheck(b):{pass:false,issues:[]}; return { pass:q.pass&&g.pass, issues:[...(q.issues||[]),...(g.issues||[])], qc:q, g }; }catch(e){ return { pass:false, issues:["blueprint is malformed: "+(e&&e.message||e)], qc:{pass:false,issues:[]}, g:{pass:false,issues:[]} }; } };   /* QCV-01: a validator throw degrades to a retry, never a 500 */
     let ev = evalBp(bp);
     if(!bp) console.warn("[visualize] parse failed. raw head:", (gen.text||"").slice(0,300), "| len:", (gen.text||"").length);
     // capture genuine demand: assets the model reached for that don't exist yet (before the retry forces it back)
@@ -1358,13 +1358,13 @@ app.post("/visualize", async (req,res)=>{
       }catch(e){ console.warn("[visualize] completeness regen skipped:", e.message); }
     }
     // cache write (best-effort)
-    try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified:false }); }catch(_){}
+    try{ await admin.from("visualizations").upsert({ text_key:key, concept_id:(bp.meta&&bp.meta.concept_id)||key, subject, blueprint:bp, verified: !!(ev && ev.pass) }); }catch(_){}   /* QCV-02: mark whether it actually passed QC (the cache read re-validates regardless) */
     try{ await admin.from("viz_events").insert({ account_id:user.id }); }catch(_){}   // count this NEW build against the daily limit
     if(!bp.layout||bp.layout==="scene"){                   // scene-mode only: tree mode needs no zones/assets
       bp._render = renderHints(bp.template);   // manifest-derived scale slice for the engine (kept out of the cached row)
       bp._defs = assetDefs((bp.elements||[]).map(e=>e.type));   // svg specs for any data-driven (overlay-approved) assets used
     }
-    bp._chain = chainOf(bp);                 // the causal chain / tree traversal, in order (transparency / debugging)
+    try{ bp._chain = chainOf(bp); }catch(_){ bp._chain = []; }                 // the causal chain / tree traversal, in order (transparency / debugging) — QCV-02 guarded
     res.json({ ok:true, cached:false, blueprint:bp, qc_issues:ev.issues, completeness, viz_quota:{ limit, remaining:Math.max(0,limit-(used+1)), premium } });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -1573,7 +1573,7 @@ app.get("/admin/viz/selftest", async (req,res)=>{
     out.parse_ok = true; out.template = bp.template; out.elements = (bp.elements||[]).length; out.steps = (bp.narration_steps||[]).length;
     const qc = qcCheck(bp), g = graphCheck(bp);
     out.qc_pass = qc.pass; out.qc_issues = qc.issues;
-    out.graph_pass = g.pass; out.graph_issues = g.issues; out.chain = chainOf(bp);
+    out.graph_pass = g.pass; out.graph_issues = g.issues; try{ out.chain = chainOf(bp); }catch(_){ out.chain = []; }   /* QCV-02 guarded */
     try{ out.completeness = await completenessCheck(sentence, bp); }catch(e){ out.completeness = { missing:[], error:e.message }; }
     out.stage = (qc.pass && g.pass) ? "ok" : "warnings";   // warnings don't block delivery (a blueprint that parses is still shown)
     res.json({ ok:true, ...out });

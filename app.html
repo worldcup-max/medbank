@@ -1424,8 +1424,13 @@ function clinCount(){ return clinItems().length; }
 function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
 
 /* ---- shared id → card resolver (powers leeches, mistakes, notes) ---- */
-let _cardIx=null;
-function cardIndex(){ if(_cardIx) return _cardIx; _cardIx={};
+let _cardIx=null, _cardIxN=-1, _cardIxReady=false;
+function cardIndex(){
+  // LCH-01: rebuild when the topic set changes (content-loader hydrates AFTER the first render),
+  // so a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the session.
+  const ready = !!window.__MB_CONTENT_READY;
+  if(_cardIx && _cardIxN===allTopics.length && _cardIxReady===ready) return _cardIx;
+  _cardIx={}; _cardIxN=allTopics.length; _cardIxReady=ready;
   allTopics.forEach(t=>{ if(!t.ready) return;
     (t.primer||[]).forEach(c=>{ _cardIx[cid(t.id,'primer',c)]={t,c,deck:'primer'}; });
     (t.recall||[]).forEach(c=>{ _cardIx[cid(t.id,'recall',c)]={t,c,deck:'recall'}; }); });
@@ -1597,7 +1602,7 @@ function closeNoteFull(){ const o=document.getElementById('noteov'); if(o) o.rem
 const LEECH_LAPSES=4;
 function leechItems(){ const out=[];
   for(const id in DATA.cards){ const st=DATA.cards[id];
-    if(st && (st.lapses||0)>=LEECH_LAPSES){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }
+    if(st && (st.lapses||0)>=LEECH_LAPSES && !isFlagged(id)){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }   // LCH-02: a reported-wrong card is never a leech drill
   out.sort((a,b)=>b.lapses-a.lapses); return out; }
 function leechCount(){ return leechItems().length; }
 
@@ -1606,8 +1611,8 @@ function logMiss(id){ DATA.missLog[id]=dstr(); }
 function missItems(days){ const cut=dayNum()-(days-1), out=[];
   for(const id in (DATA.missLog||{})){
     const dn=dayNum(new Date(DATA.missLog[id]+'T00:00'));
-    if(dn>=cut){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }
-  out.sort((a,b)=> a.missOn<b.missOn?1:-1); return out; }
+    if(dn>=cut && !isFlagged(id)){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }   // MIS-09: hide reported-wrong cards
+  out.sort((a,b)=> a.missOn<b.missOn?1:(a.missOn>b.missOn?-1:0)); return out; }   // MIS-08: stable order on same-day rows
 function missCountToday(){ return missItems(1).length; }
 function missCountWeek(){ return missItems(7).length; }
 
@@ -1854,7 +1859,7 @@ function starItems(){
   const out=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
     ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
-      const id=cid(t.id,dk,c); if(DATA.starred[id]) out.push({t,c,id,deck:dk});
+      const id=cid(t.id,dk,c); if(DATA.starred[id] && !isFlagged(id)) out.push({t,c,id,deck:dk});   // HRD-07: reported-wrong cards leave the Hard pool too
     }));
   });
   return out;
@@ -1910,7 +1915,7 @@ function renderNav(){
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
-  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openRecorder&&MB_openRecorder()}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
+  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():alert('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
@@ -2330,6 +2335,7 @@ async function solveNow(){
   const text=(document.getElementById('solveText').value||'').trim();
   const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
   if(!f && !text){ msg.textContent='Add a photo or type the question first.'; return; }
+  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;   // PW-01: gate before the photo upload, not after
   btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
@@ -2493,6 +2499,8 @@ function pageTopic(id){
     body = renderPodcast(t);
   } else if(topicTab==='videos'){
     body = renderVizList(t);
+  } else if(topicTab==='model3d'){
+    body = renderModel3d(t);
   } else {
     const rp=DATA.pos['pos:'+t.id+'recall'], pp=DATA.pos['pos:'+t.id+'primer'];
     const mast=Math.round(topicMastery(t)*100);
@@ -2553,7 +2561,59 @@ function modeSwitcher(t){
     ${sw('🧪 Written',"topicTab='written';render()",topicTab==='written')}
     ${sw('🎧 Podcast',"topicTab='podcast';render()",topicTab==='podcast')}
     ${(()=>{ const n=topicVizList(t).length; return sw('🎬 Videos'+(n?' ('+n+')':''),"topicTab='videos';render()",topicTab==='videos'); })()}
+    ${(()=>{ return mb3dScenes(t).length ? sw('🧬 3D',"topicTab='model3d';render()",topicTab==='model3d') : ''; })()}
   </div>`;
+}
+
+/* ===== 3D anatomy (model3d) — the ONLY app-side surface of viz3d.js =====
+ * Everything here is dormant unless FEATURES.MODEL3D is on (or localStorage.mb3d==='1').
+ * It never touches the SVG Visualize engine or the frozen Smart-Drill engine. */
+var _MB3D_SCENES={}, _MB3D_PICK={};
+function mb3dOn(){ try{ return !!(window.MB3D && MB3D.on()); }catch(e){ return false; } }
+/* Which 3D scenes suit this topic? The index fetch is async, so the first call returns [] and
+ * re-renders once the answer arrives — the same pattern ensureTopicPreview uses. */
+function mb3dScenes(t){
+  if(!mb3dOn()||!t) return [];
+  var v=_MB3D_SCENES[t.id];
+  if(Array.isArray(v)) return v;
+  if(v==='pending') return [];
+  _MB3D_SCENES[t.id]='pending';
+  try{
+    MB3D.scenesForTopic(t.name,(t.subject&&t.subject.name)||'').then(function(list){
+      _MB3D_SCENES[t.id]=list||[];
+      // only re-render if the student is still on this topic and hasn't scrolled away
+      try{ if((list||[]).length && (location.hash||'').indexOf(t.id)>=0 && (window.scrollY||0)<240) render(); }catch(e){}
+    }).catch(function(){ _MB3D_SCENES[t.id]=[]; });
+  }catch(e){ _MB3D_SCENES[t.id]=[]; }
+  return [];
+}
+function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
+function renderModel3d(t){
+  var list=mb3dScenes(t);
+  if(!list.length) return '<div class="empty" style="text-align:left"><b style="color:var(--text)">No 3D scene for this topic yet.</b><br><br>3D scenes are authored per anatomical structure and appear here automatically once one matches this lecture.</div>';
+  var pick=_MB3D_PICK[t.id]||list[0].id, cur=list.filter(function(s){return s.id===pick;})[0]||list[0];
+  var chips=list.length>1 ? '<div style="display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px">'+list.map(function(s){
+      return '<button onclick="mb3dPick(\''+t.id+'\',\''+s.id+'\')" style="flex:none;border:1px solid '+(s.id===pick?'var(--accent)':'var(--line)')+';background:'+(s.id===pick?'var(--accent)':'var(--panel)')+';color:'+(s.id===pick?'#fff':'var(--text)')+';border-radius:9px;padding:7px 12px;font-weight:600;font-size:12.5px;cursor:pointer;white-space:nowrap">'+esc(s.structure)+'</button>';
+    }).join('')+'</div>' : '';
+  setTimeout(function(){ try{ MB3D.mount('mb3dHost', pick); }catch(e){} },0);
+  return chips
+    + (cur.learning_goal?'<div style="color:var(--dim);font-size:13px;margin-bottom:10px">'+esc(cur.learning_goal)+'</div>':'')
+    + '<div id="mb3dHost"></div>';
+}
+/* dev-only route #/viz3d[/sceneId] — not in student nav; lets any scene be opened without a topic */
+function pageViz3d(id){
+  if(!mb3dOn()) return '<h1>🧬 3D scenes</h1><div class="empty" style="text-align:left">The 3D player is off. Turn on <b>FEATURES.MODEL3D</b> in config.js, or run <code>localStorage.mb3d=\'1\'</code> here and reload.</div>';
+  if(!id){
+    setTimeout(function(){ MB3D.loadIndex().then(function(idx){
+      var h=document.getElementById('mb3dHost'); if(!h)return;
+      h.innerHTML=(idx.scenes||[]).map(function(s){
+        return '<div class="card" style="cursor:pointer" onclick="go(\'viz3d/'+s.id+'\')"><h3>'+esc(s.structure)+'</h3><p>'+esc(s.course+' · '+s.topic)+' — '+s.counts.parts+' parts · '+s.counts.views+' views · <b>'+esc(s.status)+'</b></p></div>';
+      }).join('')||'<div class="empty">No scenes in the index yet.</div>';
+    }).catch(function(e){ var h=document.getElementById('mb3dHost'); if(h)h.innerHTML='<div class="empty">Could not load the scene index: '+esc(e.message)+'</div>'; }); },0);
+    return '<h1>🧬 3D scenes</h1><p class="sub">Dev route — every authored scene in viz-training/scenes/.</p><div id="mb3dHost"></div>';
+  }
+  setTimeout(function(){ try{ MB3D.mount('mb3dHost', id); }catch(e){} },0);
+  return crumbs([{label:'3D scenes',route:'viz3d'},{label:id}])+'<h1>🧬 '+esc(id)+'</h1><div id="mb3dHost"></div>';
 }
 /* every explainer for a topic — merges note-highlight videos (DATA.viz[topicId]) AND
    review-card videos (DATA.cardViz keyed by cardId, which starts with the topic id) */
@@ -2596,6 +2656,7 @@ function genPrompt(topicId,kind,label){
 }
 async function buildExtraNow(topicId,kind,force,_retry){
   const t=topById(topicId); if(!t) return null;
+  if(!_retry && window.MB_PAYWALL && !MB_PAYWALL.guard('Building this')) return null;   // PW-01: gate the build (guard fails open until entitlement known; not re-run on the 502 retry)
   const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
   let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
@@ -4508,6 +4569,7 @@ function nudgeItems(max){
 function startNudgeSession(){
   const items=nudgeItems(10);
   S={mode:'daily',key:'nudge',label:'Quick review',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // NTF-02: rebuild the (cold-start empty) nudge session once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* build the notification body carrying the actual card Q&A */
@@ -4651,6 +4713,7 @@ function nudgeTick(force){
 function startHard(){
   const items=starItems();
   S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // HRD-01: so a cold-start empty build rebuilds once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -4658,6 +4721,7 @@ function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a
 function startLeeches(){
   const items=shuf(leechItems());
   S={mode:'daily',key:'leeches',label:'Leeches',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // LCH-01: rebuild once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* review the cards you missed recently — rated session */
@@ -4771,7 +4835,7 @@ function pageReview(){
 }
 /* hard-card review runner */
 function pageHard(){
-  if(!S || S.mode!=='hard') startHard();
+  if(!S || S.mode!=='hard' || (!S.builtReady && window.__MB_CONTENT_READY)) startHard();   // HRD-01: rebuild once content is ready
   if(!S.items.length) return `<h1>Hard cards</h1>
     <div class="alldone"><div class="big">★</div><b>No hard cards yet.</b>
       <p>While studying, tap the ☆ on any tricky card to save it here. Then you can drill just your hard cards — great for the weekend.</p>
@@ -5994,6 +6058,7 @@ async function geminiTutor(sys, history, key){
 async function aiSend(topicId, text, alts){
   const engine=(DATA.settings.tutorEngine&&DATA.settings.tutorEngine.indexOf('deepseek')===0)?DATA.settings.tutorEngine:'deepseek-v4-flash';
   if(AIBUSY) return;
+  if(window.MB_PAYWALL && !MB_PAYWALL.guard('The AI tutor')) return;   // PW-01: gate the tutor (fails open until entitlement known)
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
   // if the answer came from voice with several possible hearings, send them all so the tutor grades by meaning
@@ -6375,6 +6440,7 @@ function pageLoadingTopic(){
 }
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
+  try{ if(window.MB3D) MB3D.dispose(); }catch(e){}   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
   // Topic-bound routes: if content hasn't loaded yet, show a loader instead of flashing Home.
   const NEEDS_TOPIC={topic:1,study:1,cram:1,cards:1,ai:1};
   if(NEEDS_TOPIC[p[0]] && p[1] && !window.__MB_CONTENT_READY && typeof topById==='function' && !topById(p[1])){
@@ -6387,7 +6453,7 @@ function render(){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
-    case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
+    case 'nudge':     if(!S||S.key!=='nudge'||(!S.builtReady && window.__MB_CONTENT_READY)) startNudgeSession(); html=pageReview(); break;   // NTF-02: rebuild once content is ready
     case 'hard':      html=pageHard(); break;
     case 'leeches':   html=pageLeeches(); break;
     case 'mistakes':  html=pageMistakes(); break;
@@ -6402,6 +6468,7 @@ function render(){
     case 'admin':     html=pageAdmin(); break;
     case 'intel':     html=pagePilot(); break;   // dev-only pilot readout (not in student nav)
     case 'vizadmin':  html=pageVizAdmin(); break;
+    case 'viz3d':     html=pageViz3d(p[1]); break;   // dev-only 3D scene opener (not in student nav)
     case 'builder':   html=pageBuilder(); break;
     case 'subject':   html=pageSubject(p[1]); break;
     case 'lecturers': html=pageLecturers(); break;
@@ -6629,6 +6696,8 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="study-dock.js"></script>
 <script src="content-loader.js"></script>
 <script src="auth-ui.js"></script>
+<script src="viz3d.js"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
+
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC) MB_SYNC.init(); }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
 setTimeout(function(){ if(!window.__MB_CONTENT_READY){ window.__MB_CONTENT_READY=true; try{ render(); }catch(e){} } },9000);
@@ -8225,10 +8294,24 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     return anchor(ref,i); }
   function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
     c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; follow(p); }
-  /* camera-follow: scroll the fixed-height stage so the active step is centred (screen never jumps) */
-  function follow(p){ var stg=$('vizStage'),cv=$('vizCanvas'); if(!stg||!cv||!p)return;
-    var yFrac=(p.y-curVB[1])/curVB[3], target=yFrac*cv.offsetHeight - stg.clientHeight/2;
-    try{ stg.scrollTo({top:Math.max(0,target),behavior:'smooth'}); }catch(e){ stg.scrollTop=Math.max(0,target); } }
+  /* camera-follow: scroll the fixed-height stage so the WHOLE active element is on-screen while it's narrated.
+     Prefer the real rendered node (every node carries data-el) so we centre its actual box — exact for any
+     layout (map/graph/tree/flow). Fall back to the point-anchor maths only when no DOM node matches. */
+  function activeRef(){ var s=BP.narration_steps[i]||{}; var r=s.point||s.active;
+    if(!r && s.reveal) r=Array.isArray(s.reveal)?s.reveal[s.reveal.length-1]:s.reveal; return r||null; }
+  function elForRef(cv,ref){ if(!ref)return null; ref=String(ref);
+    var all=cv.querySelectorAll('[data-el]'); for(var k=0;k<all.length;k++){ if(all[k].getAttribute('data-el')===ref) return all[k]; } return null; }
+  function follow(p){ var stg=$('vizStage'),cv=$('vizCanvas'); if(!stg||!cv)return;
+    var vis=stg.clientHeight, target=null, el=elForRef(cv,activeRef());
+    if(el){ var er=el.getBoundingClientRect(), cr=cv.getBoundingClientRect();
+      var top=er.top-cr.top+cv.scrollTop*0, h=er.height||0; top=er.top-cr.top;
+      // if the node is taller than most of the viewport, pin its top with a small margin; else sit its
+      // centre a touch above the middle (reads better, and the caption lives below the stage).
+      target=(h>vis*0.82)?(top-vis*0.10):(top+h/2-vis*0.44); }
+    if(target===null && p){ var yFrac=(p.y-curVB[1])/curVB[3]; target=yFrac*cv.offsetHeight - vis*0.44; }
+    if(target===null)return;
+    var max=Math.max(0, cv.offsetHeight - vis); target=Math.max(0, Math.min(target, max));
+    try{ stg.scrollTo({top:target,behavior:'smooth'}); }catch(e){ stg.scrollTop=target; } }
   function fillVoices(){ var sel=$('vizVoice'); if(!sel||!window.speechSynthesis)return;
     function load(){ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);});
       sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');

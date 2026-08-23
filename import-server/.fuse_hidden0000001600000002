@@ -38,22 +38,14 @@ export const VOCAB = {
  * approved asset is instantly usable by the prompt + QC + engine with NO code deploy.
  * A data-driven asset carries an `svg` spec (tokens @X @Y @LABEL @COLOR) the engine renders. */
 export function registerAssets(list){
-  // VIZM-01: specs are LLM output. Coerce to the right SHAPE here so a bare string
-  // (valid_zones:"body") can never enter ASSET and later blow up assetMapText's .join
-  // on EVERY /visualize build, feature-wide, un-restartable (loadApprovedOverlay re-registers).
-  const strArr = v => Array.isArray(v) ? v.filter(x => typeof x === "string" && x.trim()) : [];
   let n = 0;
   for(const a of (list||[])){
-    const id = (a && typeof a.id === "string") ? a.id.trim() : "";
-    if(!id) continue;
-    if(ASSET[id] && ASSET[id].source !== "overlay") continue;   // VIZM-02: never let an overlay silently overwrite a built-in manifest asset
-    const vt = strArr(a.valid_templates);
-    const vz = strArr(a.valid_zones);
-    ASSET[id] = {
-      category: String((a && a.category) || "custom"), scale: String((a && a.scale) || "molecular"),
-      valid_templates: vt.length ? vt : ["membrane_cell","neuro_pathway"],
-      ...(vz.length ? { valid_zones:vz } : {}),
-      ...(a && typeof a.svg === "string" ? { svg:a.svg } : {}),
+    if(!a || !a.id) continue;
+    ASSET[a.id] = {
+      category: a.category||"custom", scale: a.scale||"molecular",
+      valid_templates: a.valid_templates||["membrane_cell","neuro_pathway"],
+      ...(a.valid_zones ? { valid_zones:a.valid_zones } : {}),
+      ...(a.svg ? { svg:a.svg } : {}),
       source: "overlay"
     };
     n++;
@@ -69,14 +61,11 @@ export function assetDefs(types){
 
 /* compact "asset : allowed templates[/zones]" map so the model never crosses scales */
 function assetMapText(){
-  // VIZM-01 belt-and-braces: a malformed entry skips itself, never kills the whole prompt.
   return Object.entries(ASSET).map(([id,m])=>{
-    try{
-      let s = id+" → "+_arr(m.valid_templates).join("/");
-      if(m.valid_zones) s += " [zones: "+_arr(m.valid_zones).join(",")+"]";
-      return s;
-    }catch(_){ return null; }
-  }).filter(Boolean).join("\n");
+    let s = id+" → "+(m.valid_templates||[]).join("/");
+    if(m.valid_zones) s += " [zones: "+m.valid_zones.join(",")+"]";
+    return s;
+  }).join("\n");
 }
 
 /* built fresh each call so overlay-approved templates/assets appear immediately */
@@ -2770,14 +2759,12 @@ export function graphPlotCheck(bp){
   const steps = Array.isArray(bp.narration_steps)?bp.narration_steps:[];
   if(steps.length<3) issues.push("too few steps ("+steps.length+")");
   if(steps.length>10) issues.push("too many steps ("+steps.length+")");
-  const gRevealed={};
   steps.forEach((s,i)=>{
     if(!s.narration_text || !s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); else gRevealed[r]=1; });
+    _arr(s.reveal).forEach(r=>{ if(!ids[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
     if(s.point && !ids[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
   });
-  curves.forEach(c=>{ if(c.id && !gRevealed[c.id]) issues.push("curve '"+c.id+"' is declared but never revealed by any step — it won't appear"); });   // QCV-03
   return { pass: issues.length===0, issues };
 }
 
@@ -2787,14 +2774,12 @@ export function orbitalCheck(bp){
   if(!bp.meta||!bp.meta.title)issues.push("missing meta.title");
   const subs=Array.isArray(bp.subshells)?bp.subshells:[]; if(subs.length<1)issues.push("no subshells");
   const ids={}; subs.forEach((s,i)=>{ if(!s.id){issues.push("subshell "+i+" missing id");return;} ids[s.id]=1;
-    if(!(Number.isInteger(s.boxes)&&s.boxes>=1))issues.push("subshell '"+s.id+"' needs an integer boxes ≥1");   // QCV-05: no "1"/1.5
-    if(!Number.isInteger(s.electrons)||s.electrons<0||s.electrons>2*s.boxes)issues.push("subshell '"+s.id+"' electrons must be an integer 0.."+(2*s.boxes)); });
+    if(!(s.boxes>=1))issues.push("subshell '"+s.id+"' needs boxes ≥1");
+    if(s.electrons==null||s.electrons<0||s.electrons>2*s.boxes)issues.push("subshell '"+s.id+"' electrons must be 0.."+(2*s.boxes)); });
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const oRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!ids[r])issues.push("step "+(i+1)+" reveals unknown subshell "+r);else oRevealed[r]=1;});
+    _arr(s.reveal).forEach(r=>{if(!ids[r])issues.push("step "+(i+1)+" reveals unknown subshell "+r);});
     if(s.point&&!ids[s.point])issues.push("step "+(i+1)+" point unknown "+s.point); });
-  subs.forEach(s=>{ if(s.id && !oRevealed[s.id])issues.push("subshell '"+s.id+"' is never revealed — it won't appear"); });   // QCV-03
   return {pass:issues.length===0,issues};
 }
 /* VSEPR GEOMETRY validity. */
@@ -2806,11 +2791,9 @@ export function geometryCheck(bp){
   if(!bp.center)issues.push("missing center atom");
   if(!GEO_SHAPES.has(bp.shape))issues.push("shape must be one of: "+[...GEO_SHAPES].join(", "));
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const geoRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!GEO_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);else geoRevealed[r]=1;});
+    _arr(s.reveal).forEach(r=>{if(!GEO_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
     if(s.point&&!GEO_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
-  if(!geoRevealed["bonds"])issues.push("the bonds are never revealed — the molecule won't be drawn");   // QCV-03
   return {pass:issues.length===0,issues};
 }
 /* ICE table validity. */
@@ -2822,11 +2805,9 @@ export function iceCheck(bp){
   const sp=Array.isArray(bp.species)?bp.species:[]; if(sp.length<2)issues.push("need ≥2 species");
   const rows=bp.rows||{}; ["I","C","E"].forEach(r=>{ if(!Array.isArray(rows[r])||rows[r].length!==sp.length)issues.push("row "+r+" must have "+sp.length+" cells"); });
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[]; if(steps.length<2)issues.push("too few steps");
-  const iceRevealed={};
   steps.forEach((s,i)=>{ if(!s.narration_text||!s.narration_text.trim())issues.push("step "+(i+1)+" no narration");
-    _arr(s.reveal).forEach(r=>{if(!ICE_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);else iceRevealed[r]=1;});
+    _arr(s.reveal).forEach(r=>{if(!ICE_PARTS.has(r))issues.push("step "+(i+1)+" reveals unknown part "+r);});
     if(s.point&&!ICE_PARTS.has(s.point))issues.push("step "+(i+1)+" point not a part "+s.point); });
-  ["I","C","E"].forEach(r=>{ if(!iceRevealed[r])issues.push("row '"+r+"' is never revealed — the ICE table stays blank"); });   // QCV-03
   return {pass:issues.length===0,issues};
 }
 
@@ -2867,15 +2848,13 @@ export function vennCheck(bp){
   const steps=Array.isArray(bp.narration_steps)?bp.narration_steps:[];
   if(steps.length<3) issues.push("too few steps ("+steps.length+", need ≥3)");
   if(steps.length>10) issues.push("too many steps ("+steps.length+")");
-  const vRevealed={};
   steps.forEach((s,i)=>{
     if(!s.narration_text||!s.narration_text.trim()) issues.push("step "+(i+1)+" has no narration");
     if(s.narration_text && s.narration_text.length>260) issues.push("step "+(i+1)+" narration too long");
-    _arr(s.reveal).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); else vRevealed[r]=1; });
+    _arr(s.reveal).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" reveals unknown id "+r); });
     _arr(s.active).forEach(r=>{ if(!ok[r]) issues.push("step "+(i+1)+" active unknown id "+r); });
     if(s.point && !ok[s.point]) issues.push("step "+(i+1)+" point unknown id "+s.point);
   });
-  ids.forEach(x=>{ if(!vRevealed[x])issues.push("set '"+x+"' is never revealed — the diagram would be blank"); });   // QCV-03
   return { pass: issues.length===0, issues };
 }
 
@@ -3502,46 +3481,46 @@ export function qcCheck(bp){
 const ANNOTATION = new Set(["label","blockx","lightning"]);
 function _arr(v){ return Array.isArray(v)?v:(v==null?[]:[v]); }  // QCV-01: coerce a model-supplied field to an array (string reveal:"x" -> ["x"]) instead of throwing
 export function chainOf(bp){
-  if(bp && bp.layout==="orbital") return _arr(bp.subshells).map(s=>s.label||s.id);
+  if(bp && bp.layout==="orbital") return (bp.subshells||[]).map(s=>s.label||s.id);
   if(bp && bp.layout==="geometry") return [bp.center||"", bp.shape_label||bp.shape||""];
   if(bp && bp.layout==="ice") return [bp.reaction||"", "Initial","Change","Equilibrium"];
   if(bp && bp.layout==="graph") return _arr(bp.markers).map(m=>m.label||m.id);
   if(bp && bp.layout==="punnett"){ const P=bp.parents||{}, G=bp.gametes||{};
     return [ ((P.p1&&P.p1.genotype)||"?")+" × "+((P.p2&&P.p2.genotype)||"?"),
              "gametes: "+((G.top||[]).join(", "))+"  /  "+((G.side||[]).join(", ")) ]
-      .concat(_arr(bp.cells).map(c=>c.geno||c.id))
-      .concat(_arr(bp.traits).map(t=>t.label||t.key))
+      .concat((bp.cells||[]).map(c=>c.geno||c.id))
+      .concat((bp.traits||[]).map(t=>t.label||t.key))
       .concat([bp.ratio||""]).filter(Boolean); }
   if(bp && bp.layout==="curly") return [(bp.mode||"stepwise")+" mechanism", bp.reaction||""]
-    .concat(_arr(bp.frames).map(f=>(f.title||f.id)+(f.badge?"  ["+f.badge+"]":"")+"  · charge "+(f.charge||"0")))
-    .concat(_arr(bp.frames).flatMap(f=>(f.arrows||[]).map(a=>"arrow: "+(a.label||a.id)+"  (tail = "+(a.tail||"?")+")")))
+    .concat((bp.frames||[]).map(f=>(f.title||f.id)+(f.badge?"  ["+f.badge+"]":"")+"  · charge "+(f.charge||"0")))
+    .concat((bp.frames||[]).flatMap(f=>(f.arrows||[]).map(a=>"arrow: "+(a.label||a.id)+"  (tail = "+(a.tail||"?")+")")))
     .filter(Boolean);
   if(bp && bp.layout==="unitcircle") return ["unit circle (r = 1)","angle θ = "+(bp.angle==null?50:bp.angle)+"°","cos θ = x","sin θ = y","cos²θ + sin²θ = 1"];
-  if(bp && bp.layout==="solve") return _arr(bp.lines).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
+  if(bp && bp.layout==="solve") return (bp.lines||[]).map(l=>(l.math||l.id)+(l.why?"  ("+l.why+")":""))
     .concat(bp.numberline?["solution set: x "+(bp.numberline.op||"≥")+" "+bp.numberline.value]:[]);
   if(bp && bp.layout==="vectors"){ const a=bp.a||[0,0],b=bp.b||[0,0];
     return ["a = ("+a[0]+", "+a[1]+")","b = ("+b[0]+", "+b[1]+")","b slid tip-to-tail","a + b = ("+(a[0]+b[0])+", "+(a[1]+b[1])+")"]; }
   if(bp && bp.layout==="matrix"){ const M=(Array.isArray(bp.M)&&Array.isArray(bp.M[0])&&Array.isArray(bp.M[1])&&bp.M[0].length>=2&&bp.M[1].length>=2)?bp.M:[[1,0],[0,1]];   // QCV-02: guard a short/!2×2 M
     return ["unit square with i and j","i → ("+M[0][0]+", "+M[1][0]+")","j → ("+M[0][1]+", "+M[1][1]+")","det = "+(M[0][0]*M[1][1]-M[0][1]*M[1][0])+" (area scale factor)"]; }
   if(bp && bp.layout==="fbd") return ["isolate the body"]
-    .concat(_arr(bp.forces).map(f=>(f.label||f.id)+(f.agent?" — "+f.agent:"")))
-    .concat(_arr(bp.components).map(c=>c.label||""))
+    .concat((bp.forces||[]).map(f=>(f.label||f.id)+(f.agent?" — "+f.agent:"")))
+    .concat((bp.components||[]).map(c=>c.label||""))
     .concat(bp.net?[bp.net.label||"F_net"]:[])
     .concat(bp.accel?[(bp.accel.label||"a")+" (not a force)"]:[]);
   if(bp && bp.layout==="circuit") return [((bp.battery||{}).label)||"battery"]
-    .concat(_arr(bp.components).map(c=>c.label||c.id))
+    .concat((bp.components||[]).map(c=>c.label||c.id))
     .concat([((bp.current||{}).label)||"current — the same everywhere"])
-    .concat(_arr(bp.ladder).map(e=>e.label||(((+e.v||0)>0?"+":"")+e.v+" V")));
-  if(bp && bp.layout==="logic") return _arr(bp.inputs).map(p=>(p.label||p.id)+" = "+(p.value?1:0))
-    .concat(_arr(bp.gates).map(g=>(g.type||"")+((g.label)?" — "+g.label:"")))
-    .concat(_arr(bp.outputs).map(o=>o.label||o.id))
-    .concat(bp.truth_table?["truth table — all "+Math.pow(2,_arr(bp.inputs).length)+" rows"]:[]);
-  if(bp && bp.layout==="table") return [_arr(bp.columns).map(c=>c.label||c.id).join(" | ")]
-    .concat(_arr(bp.rows).map(r=>(r.cells||[]).join(" | ")));
-  if(bp && bp.layout==="venn") return _arr(bp.sets).map(s=>s.label||s.id)
+    .concat((bp.ladder||[]).map(e=>e.label||(((+e.v||0)>0?"+":"")+e.v+" V")));
+  if(bp && bp.layout==="logic") return (bp.inputs||[]).map(p=>(p.label||p.id)+" = "+(p.value?1:0))
+    .concat((bp.gates||[]).map(g=>(g.type||"")+((g.label)?" — "+g.label:"")))
+    .concat((bp.outputs||[]).map(o=>o.label||o.id))
+    .concat(bp.truth_table?["truth table — all "+Math.pow(2,(bp.inputs||[]).length)+" rows"]:[]);
+  if(bp && bp.layout==="table") return [(bp.columns||[]).map(c=>c.label||c.id).join(" | ")]
+    .concat((bp.rows||[]).map(r=>(r.cells||[]).join(" | ")));
+  if(bp && bp.layout==="venn") return (bp.sets||[]).map(s=>s.label||s.id)
     .concat(_arr(bp.regions).map(r=>(r.id||"")+(r.label?" = "+r.label:"")));
   if(bp && bp.layout==="cell") return [(bp.anode&&bp.anode.label)||"anode","e⁻ → wire","(cathode)"+((bp.cathode&&bp.cathode.label)||""),bp.bridge||"salt bridge"];
-  if(bp && bp.layout==="flow") return _arr(bp.nodes).map(n=>n.label||n.id);   // flow = the node sequence
+  if(bp && bp.layout==="flow") return (bp.nodes||[]).map(n=>n.label||n.id);   // flow = the node sequence
   if(bp && bp.layout==="tree"){   // pre-order traversal of the tree
     const nodes = bp.nodes||[], byId={}; nodes.forEach(n=>byId[n.id]=n);
     const root = bp.root || (nodes[0]&&nodes[0].id), out=[], seen={};   // QCV-02: visited set — a cyclic tree no longer stack-overflows

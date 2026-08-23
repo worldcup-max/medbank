@@ -1,0 +1,46 @@
+{
+  "id": "200-gross-anatomy__scapula",
+  "level": 200, "course": "Gross Anatomy", "topic": "Scapula (shoulder blade)",
+  "authored": "seed-example (hand-written template for the hourly task to match)",
+  "why_hard": [
+    "Students confuse the many named angles/borders/processes on one flat bone.",
+    "The 3 surfaces (costal, posterior) and their fossae are hard to picture from 2D plates.",
+    "The glenoid's orientation and the coracoid/acromion relationship only 'click' in 3D."
+  ],
+  "three_d_plan": {
+    "needs_revolve": true,
+    "structures": ["scapula (whole)", "glenoid cavity", "spine + acromion", "coracoid process"],
+    "source": { "name": "BodyParts3D", "license": "CC-BY-SA", "ref_hint": "scapula (FMA13394)",
+                "url": "https://github.com/Kevin-Mattheus-Moerman/BodyParts3D",
+                "fallback": "Leiden LUMC Open3DModel (overview-skeleton) — https://caskanatomy.info/open3dviewer/?model=overview-skeleton" },
+    "camera": "auto-revolve ~0.006 rad/frame, drag to override; start posterior then rotate to lateral for the glenoid."
+  },
+  "blueprint_plan": [
+    { "beat": "overview", "mode": "model3d", "note": "whole scapula revolving; label body, borders, angles" },
+    { "beat": "segment",  "mode": "model3d", "note": "spine → acromion ridge" },
+    { "beat": "segment",  "mode": "model3d", "note": "rotate to lateral: glenoid cavity" },
+    { "beat": "contrast", "mode": "table",   "note": "costal vs posterior surface (subscapular / supraspinous / infraspinous fossae)" },
+    { "beat": "takeaway", "mode": "model3d", "note": "coracoid process + recap of the 4 landmarks" }
+  ],
+  "draft_blueprint": {
+    "meta": { "title": "Scapula", "subject": "Gross Anatomy" },
+    "scenes": [
+      { "heading": "Scapula", "mode": "model3d", "beat": "overview",
+        "model": { "source": "BodyParts3D", "license": "CC-BY-SA", "ref": "scapula", "structures": ["scapula"], "autoRotate": 0.006, "framing": "posterior" },
+        "anchors": [
+          { "id": "body", "pos": [0.1,-0.4,0.2], "label": "Body (blade)" },
+          { "id": "spine", "pos": [-0.2,1.05,-0.2], "label": "Spine" },
+          { "id": "acromion", "pos": [1.15,1.25,-0.25], "label": "Acromion" },
+          { "id": "glenoid", "pos": [1.45,0.6,0.0], "label": "Glenoid cavity" },
+          { "id": "coracoid", "pos": [1.1,1.5,0.5], "label": "Coracoid process" }
+        ],
+        "narration_steps": [
+          { "point": "body", "reveal": ["body"], "short": "Overview", "narration_text": "The scapula — your shoulder blade. A flat triangular bone on the back of the ribcage." },
+          { "point": "spine", "reveal": ["body","spine","acromion"], "short": "The ridge", "narration_text": "The raised ridge is the spine, ending sideways in the acromion." },
+          { "point": "glenoid", "reveal": ["glenoid"], "short": "The socket", "narration_text": "Rotating to the side: the shallow glenoid cavity, where the arm bone sits." },
+          { "point": "coracoid", "reveal": ["coracoid"], "short": "The hook", "narration_text": "The hook in front is the coracoid process, an anchor for muscles and ligaments." }
+        ]
+      }
+    ]
+  }
+}

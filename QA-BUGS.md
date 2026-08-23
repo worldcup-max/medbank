@@ -5284,3 +5284,72 @@ Added a `diag` field to the import 502 response + `console.warn` logging. A real
 **Verified:** `node --check` OK; extractor test green. **Needs deploy** (import-server auto/manual redeploy). Expected result: imports build in well under a minute and produce note + Q-bank cleanly.
 
 Sources: DeepSeek API docs (Thinking Mode; Change Log — legacy model retirement 2026-07-24).
+
+---
+# ✅ FIXED — Flow 27 paywall (PW-01..10) — 2026-08-23 (Claude)
+Rewrote `paywall.js` and wired `guard()`; `node --check` + app.html inline-parse + all 5 qa harnesses green.
+- **PW-02 (HIGH)** guard now FAILS OPEN until entitlement is resolved (`status().syncing===true`, which flips only after the subscriptions read at sync.js:299). Verified with a 5-case table: boot-race/half-init/logged-out → allowed; only a resolved trial-ended/archived account is blocked. No more "trial ended" to paying students on cold start.
+- **PW-01 (HIGH)** `guard()` wired at the four token-costing entries, gating BEFORE the spend: Solve (before photo upload, app.html solveNow), import (before base64+upload, import-tab.js), build-extra Q-bank/written (buildExtraNow, skipped on the 502 retry), AI tutor (aiSend). Fails open so no false lockouts.
+- **PW-03** archived nudge now routes to `MB_openLevelSwitcher` via a new `onCta` arg, not the pricing page.
+- **PW-04** title/msg set via `textContent` (escaped) — kills the unescaped innerHTML sink.
+- **PW-05** overlay z-index 10000→100050 (above .csov/gap/import/login overlays).
+- **PW-06** `window.open` null → `location.href` fallback; removeChild guarded.
+- **PW-07** config read at click time; last-resort URL is medbank.com.ng, never `"#"`.
+- **PW-08** `trialBadge` keyed off `canUseFeatures`; "" when not resolved / logged-out; distinct archived label.
+- **PW-09** singleton id guard; `o.remove()` everywhere; Escape-to-close.
+- **PW-10** card `max-height:88vh;overflow-y:auto` + safe-area padding; themable CSS vars with light fallbacks.
+Frozen engine untouched. Needs the usual commit/push + `sw.js` CACHE bump to reach installed clients.
+
+---
+# ✅ FIXED — Flow 28 lecture recorder (REC-01..12) — 2026-08-23 (Claude)
+Rewrote `lecture-record.js`; fixed the two silent call sites (app.html nav, auth-ui.js sheet) + the 413 copy (import-tab.js). All parse; 5 harnesses green.
+- **REC-01 (HIGH)** generation token `openGen`: after the getUserMedia await we bail (and stop any tracks) if Cancel ran during the permission prompt — no more hidden hot mic. `open()` body wrapped in try/catch so a late DOM error can't become a silent unhandled rejection.
+- **REC-02 (HIGH)** if `MB_openImport` is missing the recording is no longer dropped — the blob downloads and the student is told; teardown moved after a successful handoff.
+- **REC-03 (HIGH)** `fail()` now stops the mic and wires the big button to a working Close on every failure path (was only the permission path).
+- **REC-04** Cancel confirms when >15 s recorded.
+- **REC-05** pause advances the clock only if `rec.pause()` actually succeeded (no double-count on iOS); surfaces "pause unsupported".
+- **REC-06** `keepAwake()` no-ops if a sentinel is held and self-clears on OS release — no orphaned wake locks.
+- **REC-07** `visibilitychange` is a single named handler, removed in `teardown()`.
+- **REC-08** the nav and account-sheet entries now show the same "Recording isn't available… reload or use File/YouTube/Paste" message instead of a silent no-op.
+- **REC-09** 90-min hard cap + 75-min warning; the 413 message branches on audio ("record in ~45-min parts").
+- **REC-10** too-short keeps the screen up and offers one-tap "Record again".
+- **REC-11** `chunks=[]` and `revokeObjectURL` in `teardown()`.
+- **REC-12** `/icon.svg` root-absolute + `onerror` graceful degrade.
+Frozen engine untouched. Needs commit/push + sw.js CACHE bump to reach installed clients.
+
+---
+# ✅ FIXED — Flow 26 service worker (SW-01..09) — 2026-08-23 (Claude) · CACHE→v214
+Rewrote the flag store, fetch fallback, activate, message + notificationclick. `node --check` clean.
+- **SW-01 (HIGH / = NTF-01)** flags now key on a real http(s) URL (`__mbflag/…`) in an unversioned `medbank-flags` cache with try/catch — the `'flag:'`-scheme `Cache.put` reject is gone, so staged nudge payloads/strict/hardCount/lastStudied actually persist and the background nudge uses the real habit copy.
+- **SW-02** flags live outside the versioned cache → a deploy no longer wipes them.
+- **SW-03** offline fallback serves the app shell ONLY for navigations; a missing script/style now returns `Response.error()` instead of HTML (kills the silent "Unexpected token '<'" half-load).
+- **SW-04** activate backfills the new cache from the old before purging → one flaky precache can't degrade offline.
+- **SW-05** `waitUntil` holds the worker for the revalidate write and the message-handler writes/notification.
+- **SW-06** `maybeRemind` returns early if `lastStudied === today`.
+- **SW-07** real `remindOff` switch checked first in `maybeRemind` (blanking the payload used to fall through to the generic nudge). [app.html side — send `reminders {off}` + unregister both tags — in Batch 7.]
+- **SW-08** install no longer `skipWaiting()`s; upgrade is banner-driven so a deploy can't reload a student out of a live exam. [app.html `controllerchange` gate on a live session — Batch 7.]
+- **SW-09** `notificationclick` prefers the app window, awaits navigate, falls back to openWindow.
+- SW-10 single tag confirmed intentional (comment). SW-11 dead stubs kept (needs a delete + this same CACHE bump; low, deferred).
+Engine frozen. New CACHE (v214) means this ships on the next commit/push.
+
+---
+# ✅ FIXED — Flows 6/29/30 Visualize server (QCV-01..05, VIZM-01/02/04) — 2026-08-23 (Claude)
+Hardened `import-server/visualize.mjs` + `server.mjs`. node --check clean on both; QC repro tests + 5 harnesses green.
+- **QCV-01 (HIGH)** every model-supplied iterable (`s.reveal/active/arrows/move`, `bp.markers/regions/…`) coerced via `_arr()` so a bare-string field self-heals instead of throwing; **server** `evalBp` wrapped in try/catch so any validator throw degrades to a corrective retry, never a raw 500.
+- **QCV-02 (HIGH)** `chainOf` tree walk got a visited-set (cyclic tree no longer stack-overflows); matrix M guarded; all `(bp.x||[])` coerced; the **three server `chainOf` calls wrapped** in try/catch (debug-only, must never fail a build); **cache write** now records `verified:!!ev.pass` and the **cache read re-runs a guarded `qcCheck`** so a poisoned/cyclic row is never served again.
+- **QCV-03 (MED)** the five layouts that lacked a "nothing revealed" sweep (graph/orbital/geometry/ice/venn) now fail a fully-narrated but blank diagram (verified: blank geometry/graph fail, a proper one still passes).
+- **QCV-04 (MED)** `parseBlueprint` now scans EVERY balanced `{…}` run across all fenced blocks and returns the largest/most-blueprint-like object — an illustrative example or `<think>` sketch no longer beats the real blueprint (both repro cases pass).
+- **QCV-05 (LOW)** orbital `boxes`/`electrons` require `Number.isInteger` ("1"/1.5 rejected).
+- **VIZM-01 (HIGH)** `registerAssets` coerces the LLM asset spec to the right shape (a bare `valid_zones:"body"` can't enter ASSET), and `assetMapText` skips a bad entry instead of killing every `/visualize` build feature-wide.
+- **VIZM-02 (MED)** an overlay can no longer silently overwrite a built-in manifest asset.
+- **VIZM-04 (LOW/MED)** resolved by the QCV-02 cache-read re-validate.
+Remaining (lower priority, admin-only): VIZM-03 (no unregister → reject is a no-op on a running server), VIZM-05 (pickExemplar ignores subject). Frozen engine untouched. Needs Render redeploy of import-server.
+
+---
+# ✅ FIXED (in progress) — app.html cross-cutting families — 2026-08-23 (Claude)
+app.html inline JS parses; 5 harnesses green; frozen engine untouched. (app.html held from the current deploy push.)
+- **LCH-02 / MIS-09 / HRD-07 (family a):** `leechItems`, `missItems`, `starItems` now filter `!isFlagged(id)` — a reported-wrong card no longer appears in the leech/mistakes/hard pools.
+- **MIS-08:** `missItems` comparator returns 0 on equal → same-day rows keep a stable order.
+- **LCH-01 (HIGH):** `cardIndex()` (`_cardIx`) rebuilds when the topic set changes or content becomes ready — a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the whole page-load anymore.
+- **HRD-01 (HIGH) / NTF-02 (HIGH):** `startHard` / `startNudgeSession` stamp `builtReady`; `pageHard` and the `nudge` route rebuild the (cold-start empty) session once `__MB_CONTENT_READY` flips — no more permanent "No hard cards yet." / empty nudge on a cold start.
+Still open in this family: MIS-01/HRD-05 (summary reports the daily pool), STU-09 (session-destruction on navigation), DCK-01/02, and the per-route items in Batches 6-7.

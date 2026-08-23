@@ -1,0 +1,310 @@
+{
+  "schema": 2,
+  "id": "gross__arm__biceps-triceps",
+  "mode": "3d_anatomy",
+  "course": "Gross Anatomy",
+  "topic": "Arm (Brachium)",
+  "structure": "Biceps brachii & Triceps brachii",
+  "learning_goal": "Know the heads of each muscle, what each head crosses, and which movement it drives.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "arm",
+      "brachium",
+      "upper limb",
+      "elbow",
+      "anterior compartment of arm",
+      "posterior compartment of arm"
+    ],
+    "terms": [
+      "biceps",
+      "biceps brachii",
+      "triceps",
+      "triceps brachii",
+      "elbow flexion",
+      "elbow extension"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "scapula",
+        "shoulder blade",
+        "supraglenoid tubercle",
+        "infraglenoid tubercle",
+        "coracoid process"
+      ],
+      "narration": "The shoulder blade — origin of the long heads of both muscles."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "radial groove",
+        "bicipital groove",
+        "intertubercular sulcus"
+      ],
+      "narration": "The arm bone both muscles wrap around."
+    },
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "radial tuberosity"
+      ],
+      "narration": "The biceps inserts here, on the radial tuberosity."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "olecranon"
+      ],
+      "narration": "The triceps inserts here, on the olecranon."
+    },
+    {
+      "key": "bic_long",
+      "name": "long head of right biceps brachii",
+      "label": "Biceps — long head",
+      "role": "part",
+      "group": "Biceps brachii",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA37686"
+      },
+      "terms": [
+        "long head of biceps",
+        "biceps long head",
+        "supraglenoid tubercle",
+        "bicipital groove"
+      ],
+      "narration": "From the supraglenoid tubercle of the scapula, running in the bicipital groove."
+    },
+    {
+      "key": "bic_short",
+      "name": "short head of right biceps brachii",
+      "label": "Biceps — short head",
+      "role": "part",
+      "group": "Biceps brachii",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA37684"
+      },
+      "terms": [
+        "short head of biceps",
+        "biceps short head",
+        "coracoid process",
+        "coracobrachialis"
+      ],
+      "narration": "From the coracoid process, alongside coracobrachialis."
+    },
+    {
+      "key": "tri_long",
+      "name": "long head of right triceps brachii",
+      "label": "Triceps — long head",
+      "role": "part",
+      "group": "Triceps brachii",
+      "layer": "muscle",
+      "color": "#9a2f2f",
+      "refs": {
+        "bodyparts3d": "FMA37699"
+      },
+      "terms": [
+        "long head of triceps",
+        "triceps long head",
+        "infraglenoid tubercle"
+      ],
+      "narration": "The only head crossing the shoulder — from the infraglenoid tubercle."
+    },
+    {
+      "key": "tri_lat",
+      "name": "lateral head of right triceps brachii",
+      "label": "Triceps — lateral head",
+      "role": "part",
+      "group": "Triceps brachii",
+      "layer": "muscle",
+      "color": "#b84a3a",
+      "refs": {
+        "bodyparts3d": "FMA37697"
+      },
+      "terms": [
+        "lateral head of triceps",
+        "triceps lateral head",
+        "radial groove"
+      ],
+      "narration": "From the humerus above the radial groove."
+    },
+    {
+      "key": "tri_med",
+      "name": "medial head of right triceps brachii",
+      "label": "Triceps — medial head",
+      "role": "part",
+      "group": "Triceps brachii",
+      "layer": "muscle",
+      "color": "#c86a5a",
+      "refs": {
+        "bodyparts3d": "FMA37695"
+      },
+      "terms": [
+        "medial head of triceps",
+        "triceps medial head",
+        "deep head"
+      ],
+      "narration": "The deep head below the radial groove — active in all extension."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The biceps sits on the front of the arm, the triceps on the back — an antagonist pair moving the elbow."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "On the bones",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Bones",
+          "intensity": 0.3
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bic_long",
+          "to": "radius",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tri_long",
+          "to": "ulna",
+          "kind": "inserts on"
+        }
+      ],
+      "narration": "They span from the scapula across the humerus to the radius — biceps — and the ulna — triceps."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 3,
+      "title": "Flex vs extend",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Biceps brachii",
+            "Triceps brachii"
+          ],
+          "layout": "antagonists"
+        }
+      ],
+      "animation": {
+        "type": "muscle_state",
+        "flexors": [
+          "bic_long",
+          "bic_short"
+        ],
+        "extensors": [
+          "tri_long",
+          "tri_lat",
+          "tri_med"
+        ],
+        "states": [
+          "relaxed",
+          "contracted"
+        ]
+      },
+      "narration": "The biceps contracts to flex the elbow; the triceps contracts to straighten it."
+    },
+    {
+      "mode": "mechanism",
+      "title": "Follow the long head",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "bic_long"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "bic_long",
+          "path": [
+            "scapula",
+            "humerus",
+            "radius"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "Follow the long head from the scapula, down the bicipital groove of the humerus, to the radial tuberosity."
+    }
+  ],
+  "provenance": {
+    "author": "human",
+    "authored_at": "2026-08-23",
+    "approved_by": "frank",
+    "approved_at": "2026-08-23"
+  }
+}

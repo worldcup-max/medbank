@@ -1,5 +1,6 @@
 /* MedBank service worker — offline caching + best-effort daily reminder */
-const CACHE = 'medbank-v213';   // v213: ACCOUNT-ISOLATION FIX (BUG-01) — on login, if a DIFFERENT account is signed in than the one cached locally, purge the previous account's local data (medbank_v1, sync meta, content caches) before rendering/syncing, then reload clean. Prevents account B seeing/overwriting account A's cards/notes/progress on a shared device or account switch. First-ever login is NOT purged (preserves studied-logged-out→signup merge). sync.js only; engine still frozen at v203. Verified: parse + 4 switch-logic checks.
+const CACHE = 'medbank-v214';   // v214: SW bug batch (SW-01..09) — flag store now writes (was 'flag:' URL-scheme reject → all background nudges generic); flags moved to an UNVERSIONED cache so deploys don't wipe them; offline fallback no longer serves app.html for script/style requests (killed the silent "Unexpected token '<'" half-load); activate backfills the new cache from the old before purging; message/revalidate work held with waitUntil; install no longer skipWaiting()s a student out of a live exam (banner-driven upgrade); maybeRemind suppresses when already-studied-today or reminders off; notificationclick prefers the app window. Engine still frozen at v203.
+// v213: ACCOUNT-ISOLATION FIX (BUG-01) — on login, if a DIFFERENT account is signed in than the one cached locally, purge the previous account's local data (medbank_v1, sync meta, content caches) before rendering/syncing, then reload clean. Prevents account B seeing/overwriting account A's cards/notes/progress on a shared device or account switch. First-ever login is NOT purged (preserves studied-logged-out→signup merge). sync.js only; engine still frozen at v203. Verified: parse + 4 switch-logic checks.
 // v212: SYNC DATA-LOSS FIX — logging in no longer adopts an EMPTY cloud copy over real local progress. On the same level-profile, if the cloud is empty but the device has data, sync now MERGES (keeps local) and pushes up instead of blind-adopting. Genuine level-switches and normal cloud adopts still work. This is the bug behind "logged in and my data vanished." Makes the REQUIRE_LOGIN pilot safe to ship. (sync.js only; Smart Drill engine still frozen at v203.) Verified: 12 sync-merge checks pass.
 // v211: import UI - (a) a non-PDF/non-image attachment (e.g. .pptx) passed the "pick a file" check but was dropped from the request, so the server built from nothing and returned "model returned invalid JSON"; unsupported types are now rejected up front with a Save-as-PDF hint, PDFs detect by MIME as well as name, and an empty import is never sent. (b) Courses could only ever be created during signup (saveOnboarding), so a student with no course could never build a lecture and had nowhere to add one - the Course dropdown now has "+ Add a course" with an inline name field, mirroring the lecturer flow. Engine still frozen at v203.
 // v208: PILOT TELEMETRY TRANSPORT — additive, engine still frozen at v203. smartLog now ALSO mirrors its four events (smart_drill_started/completed, reco_accept, reco_agree) to a Supabase table, tagged with an anonymous random device id (no PII). Fully inert until MB_SUPABASE_URL/ANON are pasted in app.html — behaves exactly as v207 otherwise. Offline-safe queue with retry. Ships with backend/ (SQL schema + RLS insert-only, SETUP-BACKEND.md, and a secret-free pilot-dashboard.html for the cohort view). Verified: 85 checks (80 prior + 5 transport safety) + app/dashboard parse clean.
@@ -29,21 +30,33 @@ const CACHE = 'medbank-v213';   // v213: ACCOUNT-ISOLATION FIX (BUG-01) — on l
 const ASSETS = ['./', './index.html', './app.html', './content.js', './icon.svg', './manifest.webmanifest',
   './site.css', './config.js', './sync.js', './level-switcher.js', './paywall.js', './import-tab.js',
   './lecture-record.js', './study-timer.js', './study-dock.js', './content-loader.js', './auth-ui.js',
-  './restore.js', './mb-personal-restore.js', './404.html'];
+  './restore.js', './mb-personal-restore.js', './viz3d.js', './404.html'];
+
+const FLAGS = 'medbank-flags';                                   // SW-02: unversioned — survives deploys
+const FLAG_BASE = new URL('__mbflag/', self.location).href;     // SW-01: a real http(s) URL, not the 'flag:' scheme
 
 self.addEventListener('install', e => {
   // Resilient precache: cache each asset individually so ONE missing/failed file
-  // can never fail the whole install (which would leave users stuck on the old build).
+  // can never fail the whole install. SW-08: do NOT skipWaiting() — the page's update
+  // banner drives activation so a deploy can't reload a student out of a live exam.
   e.waitUntil(
     caches.open(CACHE).then(c => Promise.all(ASSETS.map(u => c.add(u).catch(() => {}))))
-      .then(() => self.skipWaiting())
   );
 });
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  // SW-04: backfill the new cache from the old ones BEFORE deleting, so one flaky asset
+  // during install can't permanently degrade the offline shell. Keep the flags cache.
+  e.waitUntil((async () => {
+    const c = await caches.open(CACHE);
+    const keys = await caches.keys();
+    const olds = keys.filter(k => k !== CACHE && k !== FLAGS);
+    for (const u of ASSETS) {
+      if (await c.match(u)) continue;
+      for (const k of olds) { const hit = await (await caches.open(k)).match(u); if (hit) { await c.put(u, hit.clone()); break; } }
+    }
+    await Promise.all(olds.map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
 /* Stale-while-revalidate: serve the app shell INSTANTLY from cache, then refresh the
    cache in the background for next time. The whole shell stays one consistent cache
@@ -55,18 +68,24 @@ self.addEventListener('fetch', e => {
   let url; try { url = new URL(e.request.url); } catch (_) { return; }
   // never touch cross-origin requests (Supabase, Render API, Puter, CDNs) — straight to network
   if (url.origin !== self.location.origin) return;
+  if (url.href.indexOf(FLAG_BASE) === 0) return;                // never intercept internal flag URLs
+  // SW-03: only the app shell may be the offline fallback, and only for a NAVIGATION.
+  const isNav = e.request.mode === 'navigate' || e.request.destination === 'document';
+  const fetching = fetch(e.request).then(res => {
+    if (res && res.status === 200 && res.type === 'basic') {
+      const copy = res.clone();
+      caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+    }
+    return res;
+  }).catch(() => null);
   e.respondWith(
     caches.match(e.request).then(cached => {
-      const fetching = fetch(e.request).then(res => {
-        // only cache good, same-origin (basic) responses — never opaque/error responses
-        if (res && res.status === 200 && res.type === 'basic') {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
-        }
-        return res;
-      }).catch(() => null);
-      // cache first (fast); if nothing cached, wait on the network; final fallback = app shell
-      return cached || fetching.then(r => r || caches.match('./app.html')).then(r => r || caches.match('./index.html'));
+      if (cached) { e.waitUntil(fetching); return cached; }     // SW-05: hold the worker open for the revalidate
+      return fetching.then(r => {
+        if (r) return r;
+        if (isNav) return caches.match('./app.html').then(x => x || caches.match('./index.html'));
+        return Response.error();                                // SW-03: a script/style 404s as an error, not HTML
+      });
     })
   );
 });
@@ -87,6 +106,11 @@ function notifyOpts(body, url, strict) {
 }
 async function maybeRemind() {
   try {
+    // SW-07: an explicit off switch stops every path (blanking the payload only downgraded it).
+    if ((await readFlag('remindOff')) === '1') return;
+    // SW-06: don't nag a student who already studied today.
+    const today = new Date().toISOString().slice(0, 10);
+    if ((await readFlag('lastStudied')) === today) return;
     // prefer a page-staged payload that carries the actual cards
     const body = await readFlag('payloadBody');
     const url  = (await readFlag('payloadUrl')) || './app.html#/nudge';
@@ -104,22 +128,33 @@ async function maybeRemind() {
 /* message channel: page tells the SW its state, stages a card payload, or asks it to notify */
 self.addEventListener('message', e => {
   const d = e.data || {};
-  if (d.type === 'skipWaiting') self.skipWaiting();
-  if (d.type === 'studied')   writeFlag('lastStudied', d.date);
-  if (d.type === 'hardcount') writeFlag('hardCount', String(d.n || 0));
-  if (d.type === 'payload')   { writeFlag('payloadBody', d.body || ''); writeFlag('payloadUrl', d.url || './app.html#/nudge'); writeFlag('payloadTitle', d.title || 'MedBank'); }
-  if (d.type === 'notify')    { writeFlag('strict', d.strict ? '1' : '0'); self.registration.showNotification(d.title || 'MedBank', notifyOpts(d.body, d.url, d.strict)); }
+  if (d.type === 'skipWaiting') { self.skipWaiting(); return; }
+  const jobs = [];                                              // SW-05: hold the worker open for the writes/notification
+  if (d.type === 'studied')   jobs.push(writeFlag('lastStudied', d.date));
+  if (d.type === 'hardcount') jobs.push(writeFlag('hardCount', String(d.n || 0)));
+  if (d.type === 'reminders') jobs.push(writeFlag('remindOff', d.off ? '1' : '0'));   // SW-07: real off switch
+  if (d.type === 'payload')   { jobs.push(writeFlag('payloadBody', d.body || ''), writeFlag('payloadUrl', d.url || './app.html#/nudge'), writeFlag('payloadTitle', d.title || 'MedBank')); }
+  if (d.type === 'notify')    { jobs.push(writeFlag('strict', d.strict ? '1' : '0'), self.registration.showNotification(d.title || 'MedBank', notifyOpts(d.body, d.url, d.strict))); }
+  if (jobs.length && e.waitUntil) e.waitUntil(Promise.all(jobs).catch(() => {}));
 });
-/* tiny IndexedDB-free flag store using Cache API */
-async function writeFlag(k, v) { const c = await caches.open(CACHE); await c.put('flag:' + k, new Response(v)); }
-async function readFlag(k) { const c = await caches.open(CACHE); const r = await c.match('flag:' + k); return r ? r.text() : null; }
+/* tiny flag store using the Cache API. SW-01: key on a real same-origin http(s) URL
+   (the old 'flag:'+k made a 'flag' URL SCHEME, which Cache.put rejects — so nothing was
+   ever stored and every background nudge fell back to the generic copy). SW-02: unversioned. */
+async function writeFlag(k, v) {
+  try { const c = await caches.open(FLAGS); await c.put(FLAG_BASE + encodeURIComponent(k), new Response(String(v == null ? '' : v))); } catch (_) {}
+}
+async function readFlag(k) {
+  try { const c = await caches.open(FLAGS); const r = await c.match(FLAG_BASE + encodeURIComponent(k)); return r ? r.text() : null; } catch (_) { return null; }
+}
 
 self.addEventListener('notificationclick', e => {
   e.notification.close();
   if (e.action === 'later') return;            // dismiss without opening
   const url = (e.notification.data && e.notification.data.url) || './app.html#/nudge';
-  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cs => {
-    for (const c of cs) { if ('focus' in c) { if (c.navigate) { try { c.navigate(url); } catch (_) {} } return c.focus(); } }
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async cs => {
+    // SW-09: prefer the actual app window, await the navigate, and fall back to opening one.
+    const app = cs.find(c => c.url && c.url.indexOf('app.html') !== -1) || cs[0];
+    if (app) { try { const n = app.navigate ? await app.navigate(url) : null; return (n || app).focus(); } catch (_) { return self.clients.openWindow(url); } }
     return self.clients.openWindow(url);
   }));
 });
