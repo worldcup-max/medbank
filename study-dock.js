@@ -163,7 +163,12 @@
     }
     if(active==="note" && ctx && ctx.cardId){
       var save=drawer.querySelector("#mbDockNoteSave"), noteTa=drawer.querySelector("#mbDockNote");
-      if(save) save.onclick=function(){ d.saveNote(ctx.cardId, noteTa.value||""); save.textContent="Saved ✓"; setTimeout(function(){ save.textContent="Save note"; },1200); };
+      if(save) save.onclick=function(){
+        // DCK-01: re-read the live context at click time — never write a note onto a card the student has already advanced past.
+        var cur=(d&&d.ctx&&d.ctx())||null, curId=(cur&&cur.cardId)||"";
+        if(curId && curId!==ctx.cardId){ save.textContent="Card changed — reopen"; setTimeout(function(){ save.textContent="Save note"; },1500); return; }
+        d.saveNote(ctx.cardId, noteTa.value||""); save.textContent="Saved ✓"; setTimeout(function(){ save.textContent="Save note"; },1200);
+      };
     }
     if(active==="source" && hl){ var sbody=drawer.querySelector(".dbody"); if(sbody) setTimeout(function(){ highlightIn(sbody, hl); }, 60); }
     if(active==="source" && hlT!=null){
@@ -194,6 +199,9 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 
   window.MB_DOCK_OPEN = open;
+  // DCK-01: the app calls this at the end of every render() so the dock re-binds to the CURRENT card
+  // (advancing a card doesn't change the hash, so hashchange never fired and the panel went stale).
+  window.MB_DOCK_REFRESH = function(){ try{ if(isOpen && onStudy()){ render(); } apply(); }catch(e){} };
   // called by a card's "📄 Show in the note" chip: open Source and flash the passage the card came from
   window.MB_DOCK_SOURCE = function(phrase){
     var d=DOCK(); var c=(d&&d.ctx&&d.ctx())||null;

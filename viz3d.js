@@ -176,16 +176,25 @@
       '.mb3d-err{padding:26px 20px;text-align:center;color:var(--m3dim);font-size:13.5px}',
       '.mb3d-slider{display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid var(--m3line);font-size:11.5px;color:var(--m3dim)}',
       '.mb3d-slider input{flex:1}',
-      '@media(max-width:860px){.mb3d-main{flex-direction:column;height:auto}.mb3d-stage{height:320px}.mb3d-side{width:auto;border-left:0;border-top:1px solid var(--m3line);max-height:250px}}'
+      /* the "See it in 3D" overlay — opened from a note, never embedded beside every paragraph */
+      '.mb3d-ov{position:fixed;inset:0;z-index:9000;background:rgba(8,7,16,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}',
+      '.mb3d-shell{width:min(1100px,100%);max-height:calc(100vh - 36px);display:flex;flex-direction:column;background:#141225;border:1px solid #2c2948;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}',
+      '.mb3d-ovhd{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #2c2948;color:#f3f0ff;font-size:14px;font-weight:600}',
+      '.mb3d-ovhd small{font-weight:400;color:#a9a4c8;font-size:12.5px}',
+      '.mb3d-ovhd button{margin-left:auto;font:inherit;font-size:16px;line-height:1;padding:6px 10px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}',
+      '.mb3d-ovbody{overflow:auto;padding:12px}',
+      '@media(max-width:860px){.mb3d-main{flex-direction:column;height:auto}.mb3d-stage{height:320px}.mb3d-side{width:auto;border-left:0;border-top:1px solid var(--m3line);max-height:250px}.mb3d-ov{padding:0}.mb3d-shell{max-height:100vh;border-radius:0;height:100%}}'
     ].join('');
     document.head.appendChild(css);
   }
 
   /* ======================= the index ======================= */
-  var _index = null;
+  var _index = null, _indexData = null;
   function loadIndex() {
     if (_index) return _index;
-    _index = getJSON(SCENES + 'index.json').catch(function (e) { _index = null; throw e; });
+    _index = getJSON(SCENES + 'index.json')
+      .then(function (d) { _indexData = d; return d; })
+      .catch(function (e) { _index = null; throw e; });
     return _index;
   }
 
@@ -219,6 +228,100 @@
     }).catch(function () { return null; });
   }
 
+  /* Synchronous lookup against the already-loaded index. Returns null (and warms the index) if it has not
+     arrived yet — used by the selection popup, where an async answer would make the button flicker in late. */
+  function partForTermSync(term) {
+    if (!_indexData) { loadIndex(); return null; }
+    var k = norm(term), best = null;
+    if (k.length < 3) return null;
+    (_indexData.scenes || []).forEach(function (s) {
+      if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
+      Object.keys(s.terms || {}).forEach(function (t) {
+        if (k === t || (k.length > 5 && k.indexOf(t) >= 0) || (t.length > 5 && t.indexOf(k) >= 0)) {
+          var score = (k === t ? 100 : Math.min(t.length, k.length));
+          if (!best || score > best.score) best = { score: score, scene: s.id, key: s.terms[t], label: t };
+        }
+      });
+    });
+    return best;
+  }
+
+  /* Every term the corpus can put a student in front of, longest first.
+     Only terms that resolve to a PART are offered: a part is something the student can tap and isolate.
+     Context scaffolding (the humerus behind a muscle) is real anatomy but not a destination — offering
+     "see it in 3D" on it opens a viewer where nothing is selected. */
+  function terms() {
+    if (!_indexData) { loadIndex(); return []; }
+    var out = [];
+    (_indexData.scenes || []).forEach(function (s) {
+      if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
+      var partKeys = {};
+      (s.parts || []).forEach(function (p) { partKeys[p.key] = 1; });
+      Object.keys(s.terms || {}).forEach(function (t) {
+        if (t.length > 4 && partKeys[s.terms[t]]) out.push({ term: t, scene: s.id, key: s.terms[t] });
+      });
+    });
+    out.sort(function (a, b) { return b.term.length - a.term.length; });
+    return out;
+  }
+
+  /* ======================= is this mention worth showing in 3D? =======================
+     "The humerus is a long bone of the upper limb" needs no model — the sentence already says it.
+     "The long head of biceps arises from the supraglenoid tubercle and passes through the intertubercular
+     groove" is exactly what a flat page cannot carry: an origin, a course, a relationship in space.
+     Triggering on every anatomical noun would bury a note in chips and teach nothing extra. */
+
+  /* verbs and prepositions that mean a spatial relationship or a course is being described */
+  var RELATIONAL = /\b(aris\w+|origin\w*|insert\w*|attach\w*|pass\w*|run\w*|travel\w*|accompan\w*|cross\w*|pierc\w*|emerg\w*|branch\w*|suppl\w*|drain\w*|divid\w*|cours\w*|enter\w*|exit\w*|wind\w*|wrap\w*|descend\w*|ascend\w*|terminat\w*|continu\w*|lie\w*|border\w*|bound\w*|separat\w*|surround\w*|contain\w*|receiv\w*|connect\w*)\b|\b(deep|superficial|medial|lateral|anterior|posterior|proximal|distal|superior|inferior)\s+to\b|\bbetween\b|\bwithin\b|\bbeneath\b|\bbehind\b|\bin front of\b/i;
+  /* a bare definition — "X is a long bone", "Y are the muscles of..." — carries no spatial payload */
+  var DEFINITIONAL = /\b(is|are|was|were)\s+(a|an|the)\b/i;
+
+  function sentencesOf(text) {
+    var out = [], re = /[^.!?;\n]+[.!?;\n]?/g, m;
+    while ((m = re.exec(text))) { if (m[0].trim()) out.push({ text: m[0], at: m.index }); }
+    return out.length ? out : [{ text: text, at: 0 }];
+  }
+
+  function termRe(term) {
+    try {
+      return new RegExp('\\b' + term.split(' ').map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('[\\s\\-]+') + '\\b', 'i');
+    } catch (e) { return null; }
+  }
+
+  /* Score every structure this text mentions. Higher = more worth seeing.
+       +4  the sentence describes a relationship or a course   (priority 2 — the real reason 3D helps)
+       +2  the term is central: it opens the sentence           (priority 1 — what the sentence is about)
+       +1  the term is specific ("long head of biceps" beats "biceps")
+       -3  the sentence is a bare definition with no spatial content (priority 4 — merely mentioned)
+     Returns hits sorted best-first, each with the offset where the chip belongs. */
+  function rankMentions(text) {
+    var list = terms();
+    if (!list.length || !text) return [];
+    var hits = [], best = {};
+    sentencesOf(text).forEach(function (s) {
+      var relational = RELATIONAL.test(s.text);
+      var definitional = !relational && DEFINITIONAL.test(s.text);
+      list.forEach(function (t) {
+        var re = termRe(t.term); if (!re) return;
+        var m = re.exec(s.text); if (!m) return;
+        var score = 1;
+        var why = 'mentioned';
+        if (relational) { score += 4; why = 'a relationship worth seeing'; }
+        if (m.index <= Math.max(24, s.text.length * 0.35)) { score += 2; if (!relational) why = 'what this sentence is about'; }
+        if (t.term.indexOf(' ') >= 0) score += 1;
+        if (definitional) { score -= 3; why = 'definition only'; }
+        var id = t.scene + '|' + t.key;
+        if (!best[id] || score > best[id].score) {
+          best[id] = { term: t.term, scene: t.scene, key: t.key, score: score, why: why,
+                       index: s.at + m.index, match: m[0] };
+        }
+      });
+    });
+    Object.keys(best).forEach(function (k) { hits.push(best[k]); });
+    hits.sort(function (a, b) { return b.score - a.score || a.index - b.index; });
+    return hits;
+  }
+
   /* ======================= the player ======================= */
   var LIVE = null;
 
@@ -228,10 +331,30 @@
     if (!host) return Promise.reject(new Error('no host element'));
     injectCSS();
     dispose();
-
     host.innerHTML = '<div class="mb3d"><div class="mb3d-err">Loading the 3D scene…</div></div>';
+    return getJSON(SCENES + sceneId + '.json').then(function (scene) { return render(host, scene, opts); })
+      .catch(function (e) { fail(host, e); throw e; });
+  }
 
-    return getJSON(SCENES + sceneId + '.json')
+  /* Render a scene OBJECT rather than an id. Two callers need this: a page that inlines its scenes (the
+     file:// mesh check), and — later — an AI-drafted candidate that has not been written to disk yet. */
+  function mountScene(host, scene, opts) {
+    opts = opts || {};
+    host = (typeof host === 'string') ? document.getElementById(host) : host;
+    if (!host) return Promise.reject(new Error('no host element'));
+    injectCSS();
+    dispose();
+    host.innerHTML = '<div class="mb3d"><div class="mb3d-err">Loading the 3D scene…</div></div>';
+    return Promise.resolve().then(function () { return render(host, scene, opts); })
+      .catch(function (e) { fail(host, e); throw e; });
+  }
+
+  function fail(host, e) {
+    host.innerHTML = '<div class="mb3d"><div class="mb3d-err"><b style="color:#f3f0ff">3D isn\'t available right now.</b><br><br>' + esc(e && e.message || e) + '</div></div>';
+  }
+
+  function render(host, scene, opts) {
+    return Promise.resolve(scene)
       .then(function (scene) {
         var providerName = (scene.provider && scene.provider.primary) || 'bodyparts3d';
         var adapter = ADAPTERS[providerName];
@@ -239,10 +362,6 @@
         if (adapter.unsupported) throw new Error(adapter.unsupported);
         if (scene.mode && scene.mode !== '3d_anatomy') throw new Error('This scene is authored for the "' + scene.mode + '" engine.');
         return loadThree().then(function (T) { return build(T, host, scene, adapter, opts); });
-      })
-      .catch(function (e) {
-        host.innerHTML = '<div class="mb3d"><div class="mb3d-err"><b style="color:#f3f0ff">3D isn\'t available right now.</b><br><br>' + esc(e.message || e) + '</div></div>';
-        throw e;
       });
   }
 
@@ -371,13 +490,17 @@
           '<span><b style="font-weight:600">' + esc(p.label) + '</b><small>' + esc(ok ? (p.narration || '') : 'not available in this mesh set') + '</small></span>';
         if (ok) b.addEventListener('click', function () { toggle(p.key); });
         list.appendChild(b);
-        if (ok) {
-          var pin = document.createElement('div'); pin.className = 'mb3d-pin';
-          var col = esc(p.color || '#7c5cff');
-          pin.innerHTML = '<i style="background:' + col + ';color:' + col + '"></i><b>' + esc(p.label) + '</b>';
-          pinWrap.appendChild(pin); pins[p.key] = pin;
-        }
+        if (ok) addPin(p);
       });
+      // context structures get a pin too — no button, but when a view highlights one it must be named
+      structures.forEach(function (s) { if (s.role !== 'part' && meshes[s.key]) addPin(s); });
+    }
+    function addPin(s) {
+      if (pins[s.key]) return;
+      var pin = document.createElement('div'); pin.className = 'mb3d-pin';
+      var col = esc(s.color || '#7c5cff');
+      pin.innerHTML = '<i style="background:' + col + ';color:' + col + '"></i><b>' + esc(s.label || s.key) + '</b>';
+      pinWrap.appendChild(pin); pins[s.key] = pin;
     }
 
     function buildChips() {
@@ -608,13 +731,62 @@
 
   function dispose() { if (LIVE) { try { LIVE.dispose(); } catch (e) {} LIVE = null; } }
 
+  /* ======================= "See it in 3D" — the note-side entry point =======================
+     A student highlights a term and taps one button; the viewer opens already looking at that
+     structure. The reading page stays clean — no model parked beside every paragraph. */
+  var _ov = null;
+  function close() {
+    if (!_ov) return;
+    dispose();
+    document.removeEventListener('keydown', onKey, true);
+    if (_ov.parentNode) _ov.parentNode.removeChild(_ov);
+    _ov = null;
+  }
+  function onKey(e) { if (e.key === 'Escape') { e.stopPropagation(); close(); } }
+
+  function open(sceneId, opts) {
+    opts = opts || {};
+    if (!flagOn()) return Promise.resolve(null);
+    injectCSS();
+    close();
+    _ov = document.createElement('div');
+    _ov.className = 'mb3d-ov';
+    _ov.innerHTML = '<div class="mb3d-shell"><div class="mb3d-ovhd">🧬 <span>' + esc(opts.title || 'See it in 3D') + '</span>' +
+      (opts.subtitle ? '<small>' + esc(opts.subtitle) + '</small>' : '') +
+      '<button aria-label="Close" data-r="x">✕</button></div>' +
+      '<div class="mb3d-ovbody"><div data-r="host"></div></div></div>';
+    _ov.addEventListener('click', function (e) { if (e.target === _ov) close(); });
+    _ov.querySelector('[data-r="x"]').addEventListener('click', close);
+    document.body.appendChild(_ov);
+    document.addEventListener('keydown', onKey, true);
+    var host = _ov.querySelector('[data-r="host"]');
+    return (typeof sceneId === 'string' ? mount(host, sceneId, opts) : mountScene(host, sceneId, opts))
+      .catch(function () { return null; });
+  }
+
+  /* term → the one scene+part that term means → the viewer, focused on it */
+  function openTerm(term) {
+    return partForTerm(term).then(function (hit) {
+      if (!hit) return null;
+      return open(hit.scene, { part: hit.key, title: term, subtitle: 'matched: ' + hit.label });
+    });
+  }
+
   window.MB3D = {
     on: flagOn,
     base: function (b) { if (b != null) { BASE = b; SCENES = BASE + 'viz-training/scenes/'; _index = null; } return BASE; },
     loadIndex: loadIndex,
     scenesForTopic: scenesForTopic,
     partForTerm: partForTerm,
+    partForTermSync: partForTermSync,
+    terms: terms,
+    rankMentions: rankMentions,
+    MIN_SCORE: 4,          // below this a mention is not worth a chip — see rankMentions
     mount: mount,
+    mountScene: mountScene,
+    open: open,
+    openTerm: openTerm,
+    close: close,
     dispose: dispose,
     register: register,
     adapters: ADAPTERS

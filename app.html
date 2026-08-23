@@ -1424,13 +1424,8 @@ function clinCount(){ return clinItems().length; }
 function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
 
 /* ---- shared id → card resolver (powers leeches, mistakes, notes) ---- */
-let _cardIx=null, _cardIxN=-1, _cardIxReady=false;
-function cardIndex(){
-  // LCH-01: rebuild when the topic set changes (content-loader hydrates AFTER the first render),
-  // so a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the session.
-  const ready = !!window.__MB_CONTENT_READY;
-  if(_cardIx && _cardIxN===allTopics.length && _cardIxReady===ready) return _cardIx;
-  _cardIx={}; _cardIxN=allTopics.length; _cardIxReady=ready;
+let _cardIx=null;
+function cardIndex(){ if(_cardIx) return _cardIx; _cardIx={};
   allTopics.forEach(t=>{ if(!t.ready) return;
     (t.primer||[]).forEach(c=>{ _cardIx[cid(t.id,'primer',c)]={t,c,deck:'primer'}; });
     (t.recall||[]).forEach(c=>{ _cardIx[cid(t.id,'recall',c)]={t,c,deck:'recall'}; }); });
@@ -1602,7 +1597,7 @@ function closeNoteFull(){ const o=document.getElementById('noteov'); if(o) o.rem
 const LEECH_LAPSES=4;
 function leechItems(){ const out=[];
   for(const id in DATA.cards){ const st=DATA.cards[id];
-    if(st && (st.lapses||0)>=LEECH_LAPSES && !isFlagged(id)){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }   // LCH-02: a reported-wrong card is never a leech drill
+    if(st && (st.lapses||0)>=LEECH_LAPSES){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }
   out.sort((a,b)=>b.lapses-a.lapses); return out; }
 function leechCount(){ return leechItems().length; }
 
@@ -1611,8 +1606,8 @@ function logMiss(id){ DATA.missLog[id]=dstr(); }
 function missItems(days){ const cut=dayNum()-(days-1), out=[];
   for(const id in (DATA.missLog||{})){
     const dn=dayNum(new Date(DATA.missLog[id]+'T00:00'));
-    if(dn>=cut && !isFlagged(id)){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }   // MIS-09: hide reported-wrong cards
-  out.sort((a,b)=> a.missOn<b.missOn?1:(a.missOn>b.missOn?-1:0)); return out; }   // MIS-08: stable order on same-day rows
+    if(dn>=cut){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }
+  out.sort((a,b)=> a.missOn<b.missOn?1:-1); return out; }
 function missCountToday(){ return missItems(1).length; }
 function missCountWeek(){ return missItems(7).length; }
 
@@ -1859,7 +1854,7 @@ function starItems(){
   const out=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
     ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
-      const id=cid(t.id,dk,c); if(DATA.starred[id] && !isFlagged(id)) out.push({t,c,id,deck:dk});   // HRD-07: reported-wrong cards leave the Hard pool too
+      const id=cid(t.id,dk,c); if(DATA.starred[id]) out.push({t,c,id,deck:dk});
     }));
   });
   return out;
@@ -1915,7 +1910,7 @@ function renderNav(){
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
-  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():alert('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
+  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openRecorder&&MB_openRecorder()}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
@@ -2335,7 +2330,6 @@ async function solveNow(){
   const text=(document.getElementById('solveText').value||'').trim();
   const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
   if(!f && !text){ msg.textContent='Add a photo or type the question first.'; return; }
-  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;   // PW-01: gate before the photo upload, not after
   btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
@@ -2588,6 +2582,50 @@ function mb3dScenes(t){
   return [];
 }
 function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
+/* In-note trigger. Not "this note mentions anatomy" but "this sentence describes something a flat page
+ * can't carry" — an origin, a course, a relationship in space. MB3D.rankMentions() scores every mention;
+ * only the best few clear the bar, so a note about the heart never sprouts seventeen chips. */
+var _MB3D_MAX_CHIPS=3;
+function mb3dScanNote(){
+  if(!mb3dOn()) return;
+  var host=document.querySelector('#main .notebody'); if(!host) return;
+  if(host.getAttribute('data-mb3d')==='1') return;                       // scan a rendered note once, never twice
+  var list=[]; try{ list=MB3D.terms(); }catch(e){}
+  if(!list.length){ try{ MB3D.loadIndex().then(function(){ setTimeout(mb3dScanNote,0); }).catch(function(){}); }catch(e){} return; }
+  host.setAttribute('data-mb3d','1');
+  var nodes=[], w=document.createTreeWalker(host,NodeFilter.SHOW_TEXT,null), n;
+  while(n=w.nextNode()) nodes.push(n);
+  /* rank every candidate across the whole note first, then place only the strongest — a weak mention in
+   * paragraph 1 must not use up a chip that paragraph 6 deserves. */
+  var cands=[];
+  nodes.forEach(function(node){
+    var pe=node.parentElement;
+    if(!pe || !pe.closest || pe.closest('.mb3dmark,.vizmark,code,pre,a,button,h1,h2')) return;
+    var hits=[]; try{ hits=MB3D.rankMentions(node.nodeValue)||[]; }catch(e){}
+    if(hits.length) cands.push({node:node, hit:hits[0]});   // one chip per text node keeps offsets valid
+  });
+  cands=cands.filter(function(c){ return c.hit.score>=(MB3D.MIN_SCORE||4); });
+  cands.sort(function(a,b){ return b.hit.score-a.hit.score; });
+  var placed=0, seen={};
+  for(var i=0;i<cands.length && placed<_MB3D_MAX_CHIPS;i++){
+    var node=cands[i].node, h=cands[i].hit, id=h.scene+'|'+h.key;
+    if(seen[id]) continue;
+    var before=node.nodeValue.slice(0,h.index), hit=h.match, after=node.nodeValue.slice(h.index+hit.length);
+    if(node.nodeValue.slice(h.index,h.index+hit.length).toLowerCase()!==hit.toLowerCase()) continue;   // offset drifted — skip rather than corrupt the note
+    var frag=document.createDocumentFragment();
+    if(before) frag.appendChild(document.createTextNode(before));
+    var mark=document.createElement('span'); mark.className='mb3dmark'; mark.textContent=hit;
+    mark.style.cssText='border-bottom:1.5px dotted var(--accent)';
+    var chip=document.createElement('button'); chip.className='mb3dchip'; chip.textContent='👁 3D';
+    chip.title='See '+hit+' in 3D — '+h.why;
+    chip.style.cssText='margin-left:5px;font:inherit;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;vertical-align:middle';
+    chip.onclick=(function(h,label){ return function(e){ e.stopPropagation(); try{ MB3D.open(h.scene,{part:h.key,title:label,subtitle:'from your note'}); }catch(err){} }; })(h,hit);
+    frag.appendChild(mark); frag.appendChild(chip);
+    if(after) frag.appendChild(document.createTextNode(after));
+    node.parentNode.replaceChild(frag,node);
+    seen[id]=1; placed++;
+  }
+}
 function renderModel3d(t){
   var list=mb3dScenes(t);
   if(!list.length) return '<div class="empty" style="text-align:left"><b style="color:var(--text)">No 3D scene for this topic yet.</b><br><br>3D scenes are authored per anatomical structure and appear here automatically once one matches this lecture.</div>';
@@ -2656,7 +2694,6 @@ function genPrompt(topicId,kind,label){
 }
 async function buildExtraNow(topicId,kind,force,_retry){
   const t=topById(topicId); if(!t) return null;
-  if(!_retry && window.MB_PAYWALL && !MB_PAYWALL.guard('Building this')) return null;   // PW-01: gate the build (guard fails open until entitlement known; not re-run on the 502 retry)
   const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
   let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
@@ -4569,7 +4606,6 @@ function nudgeItems(max){
 function startNudgeSession(){
   const items=nudgeItems(10);
   S={mode:'daily',key:'nudge',label:'Quick review',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // NTF-02: rebuild the (cold-start empty) nudge session once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* build the notification body carrying the actual card Q&A */
@@ -4713,7 +4749,6 @@ function nudgeTick(force){
 function startHard(){
   const items=starItems();
   S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // HRD-01: so a cold-start empty build rebuilds once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -4721,7 +4756,6 @@ function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a
 function startLeeches(){
   const items=shuf(leechItems());
   S={mode:'daily',key:'leeches',label:'Leeches',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // LCH-01: rebuild once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* review the cards you missed recently — rated session */
@@ -4835,7 +4869,7 @@ function pageReview(){
 }
 /* hard-card review runner */
 function pageHard(){
-  if(!S || S.mode!=='hard' || (!S.builtReady && window.__MB_CONTENT_READY)) startHard();   // HRD-01: rebuild once content is ready
+  if(!S || S.mode!=='hard') startHard();
   if(!S.items.length) return `<h1>Hard cards</h1>
     <div class="alldone"><div class="big">★</div><b>No hard cards yet.</b>
       <p>While studying, tap the ☆ on any tricky card to save it here. Then you can drill just your hard cards — great for the weekend.</p>
@@ -6058,7 +6092,6 @@ async function geminiTutor(sys, history, key){
 async function aiSend(topicId, text, alts){
   const engine=(DATA.settings.tutorEngine&&DATA.settings.tutorEngine.indexOf('deepseek')===0)?DATA.settings.tutorEngine:'deepseek-v4-flash';
   if(AIBUSY) return;
-  if(window.MB_PAYWALL && !MB_PAYWALL.guard('The AI tutor')) return;   // PW-01: gate the tutor (fails open until entitlement known)
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
   // if the answer came from voice with several possible hearings, send them all so the tutor grades by meaning
@@ -6254,10 +6287,15 @@ function showExplainBtn(r, canViz){
     document.body.appendChild(_explBtn); }
   var html='<button class="explbtn" data-a="explain">✨ Let AI explain</button>';
   if(canViz) html+='<button class="explbtn vizbtn2" data-a="viz">🎬 Visualize this</button>';
+  /* 3D only appears when the highlighted words actually resolve to a structure we can show — never a
+     button that opens onto "nothing here". */
+  var m3=null; try{ if(mb3dOn()) m3=MB3D.partForTermSync(_selText); }catch(e){}
+  if(m3) html+='<button class="explbtn mb3dbtn" data-a="mb3d">🧬 See it in 3D</button>';
   _explBtn.innerHTML=html;
   _explBtn.querySelector('[data-a=explain]').onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); };
   var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName(), (window.currentTopicId?currentTopicId():'')); };
-  const bw=168, bh=canViz?90:42;
+  var m3b=_explBtn.querySelector('[data-a=mb3d]'); if(m3b) m3b.onclick=function(){ const t=_selText; hideExplainBtn(); try{ MB3D.open(m3.scene,{part:m3.key,title:t,subtitle:'matched: '+m3.label}); }catch(e){} };
+  const bw=168, bh=(canViz?90:42)+(m3?48:0);
   let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
   let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
   _explBtn.style.top=top+'px'; _explBtn.style.left=left+'px'; _explBtn.style.display='flex';
@@ -6453,7 +6491,7 @@ function render(){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
-    case 'nudge':     if(!S||S.key!=='nudge'||(!S.builtReady && window.__MB_CONTENT_READY)) startNudgeSession(); html=pageReview(); break;   // NTF-02: rebuild once content is ready
+    case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
     case 'hard':      html=pageHard(); break;
     case 'leeches':   html=pageLeeches(); break;
     case 'mistakes':  html=pageMistakes(); break;
@@ -6484,6 +6522,7 @@ function render(){
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
+  if(p[0]==='topic' && topicTab==='note') setTimeout(mb3dScanNote,60);   // mark structures the 3D corpus can show (no-op when the flag is off)
   if(p[0]==='settings' && window.loadPlanBadge) setTimeout(loadPlanBadge,40);
   if(p[0]==='search'){ const b=$('#sbox'); if(b){ searchRun(); b.focus(); b.setSelectionRange(b.value.length,b.value.length); } }
   if(p[0]==='ai') aiScroll();

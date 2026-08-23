@@ -5353,3 +5353,25 @@ app.html inline JS parses; 5 harnesses green; frozen engine untouched. (app.html
 - **LCH-01 (HIGH):** `cardIndex()` (`_cardIx`) rebuilds when the topic set changes or content becomes ready — a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the whole page-load anymore.
 - **HRD-01 (HIGH) / NTF-02 (HIGH):** `startHard` / `startNudgeSession` stamp `builtReady`; `pageHard` and the `nudge` route rebuild the (cold-start empty) session once `__MB_CONTENT_READY` flips — no more permanent "No hard cards yet." / empty nudge on a cold start.
 Still open in this family: MIS-01/HRD-05 (summary reports the daily pool), STU-09 (session-destruction on navigation), DCK-01/02, and the per-route items in Batches 6-7.
+
+---
+# ✅ FIXED — content-loader.js (CNT), study-timer (TIM), session summary — 2026-08-23 (Claude)
+All parse; 5 harnesses green; frozen engine untouched. (app.html/content-loader/study-timer/sync/auth-ui held for the second deploy bundle.)
+- **CNT-01 (HIGH):** `switchProfile` + `goToNextLevel` (sync.js) now purge `medbank_content_*` before reload → a level switch no longer shows BOTH levels' lectures permanently.
+- **CNT-02 (HIGH):** SIGNED_OUT (auth-ui.js) purges the content cache → a signed-out/shared browser can't paint the previous student's library.
+- **CNT-03 (HIGH):** a failed `cards` read now throws (via `fetchAll`) instead of coercing to `[]`; `applyContent` also protects already-loaded primer/recall decks from a card-less refresh.
+- **CNT-04 (HIGH):** `fetchRaw` throws on a courses/topics error so a transient failure skips BOTH apply and cache (good cache preserved); `hydrateFromCache` rejects an empty `courses:[]`; a zero-card payload never overwrites a cache that had cards.
+- **CNT-05 (HIGH):** cards are now paged with `.range()` in a loop → heavy accounts no longer silently truncate at the 1000-row cap. (Frank: still worth the one live count check.)
+- **CNT-06 (HIGH):** the `accounts` read is filtered by `uid` and checks `.error` (the FIXED-01 shape) — a policy widening no longer empties the library.
+- **CNT-08:** a renamed course now updates its name/short.
+- **CNT-09:** `__MB_CONTENT_READY` is set only on a clean outcome (not in a `finally` on error) → a valid topic deep-link waits for the 9s watchdog instead of 404-ing after a silent failure.
+- **CNT-10:** the "older schema" fallback only fires on a genuine missing-column error, not any network/RLS error.
+- **TIM-05 (data-loss):** `persist()` returns a boolean and toasts once on a storage-full failure; `MB_STUDY_ADD` returns it; the timer's `flush()` only clears `pending` on success (keeps the seconds otherwise) — an hour of study is no longer silently destroyed on a full device.
+- **MIS-01 / HRD-05:** `sessionSummary` keys off the session's own label (`startHard` now labels 'Hard cards') — a Hard/Leeches/Mistakes drill no longer headlines "Active Recall complete!" or offers "N more due" from the global count.
+Remaining CNT: CNT-07 (upsert-only deletes/moves reconciliation, MEDIUM). Needs deploy (static) + import-server unaffected.
+
+---
+# ✅ FIXED — study dock (DCK-01/02) — 2026-08-23 (Claude)
+study-dock.js + app.html parse; harnesses green.
+- **DCK-01 (HIGH):** the app now calls a new `MB_DOCK_REFRESH()` at the end of every `render()`, so advancing a card re-binds the dock to the CURRENT card (card advance doesn't change the hash, so the panel used to stay on the previous card and "Save note" wrote onto — and destroyed — the wrong card's note). Belt-and-braces: Save re-reads the live ctx and refuses if the card changed.
+- **DCK-02 (HIGH):** `onStudyScreen` now returns true whenever a live `QB`/`GAPLOOP` session exists (and adds mega/exam/solve), so "📄 Show in the note" works in the Mega Q-bank and the V1.6 gap loop instead of silently no-op'ing; `ctx()` prefers the innermost live session (gap → Mega → flashcards) so it never binds to a stale `S`.

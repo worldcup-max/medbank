@@ -85,12 +85,39 @@ approval → corpus. The AI expands a checked knowledge base rather than improvi
   slider, term→part deep link, degradation notice, dispose. **Real CDN meshes still need one look in a
   browser** — the build container cannot reach jsdelivr.
 
+## "See it in 3D" — the reading experience (built)
+Two triggers, both flag-gated, neither of them a model parked beside a paragraph:
+- **Highlight a term** → the selection popup grows a `🧬 See it in 3D` button, but only when those words
+  resolve to a real part (`MB3D.partForTermSync`). It opens `MB3D.open()` — a full-screen viewer already
+  focused on that structure, ESC or backdrop to close.
+- **Reading a note** → `mb3dScanNote()` marks at most **3** structures, each with a small `👁 3D` chip.
+  Code, links and existing Visualize marks are skipped; a rendered note is scanned once.
+
+**What earns a chip** (`MB3D.rankMentions`, threshold `MB3D.MIN_SCORE`): not "this note mentions anatomy"
+but "this sentence describes something a flat page cannot carry".
+
+| signal | score | example |
+|---|---|---|
+| the sentence describes a relationship or a course | **+4** | "arises from … passes through …", "lies between", "deep to" |
+| the term opens the sentence — it is what the sentence is about | +2 | "The mitral valve lies between…" |
+| the term is specific | +1 | "long head of biceps" over "biceps" |
+| a bare definition with no spatial content | **−3** | "The humerus is a long bone of the upper limb" |
+
+Every mention in the note is scored first, then the best three are placed — a weak mention in paragraph 1
+never spends a chip that paragraph 6 deserves. Verified: definitional sentences ("The humerus is a long
+bone", "Biceps is a muscle") produce **no** candidate at all.
+
+`MB3D.terms()` only offers terms that resolve to a **part** — context scaffolding (the humerus behind a
+muscle) is real anatomy but not a destination, and a chip on it would open a viewer with nothing selected.
+
 ## Next
-1. Open the harness over HTTP and confirm the real meshes render (the container could only use stubs).
-2. Phase 2 — note term → part: add `🧬 See in 3D` to `showExplainBtn()` using `MB3D.partForTerm(text)`.
-3. Let the hourly task accumulate v2 scenes from Thursday; review `scenes/` + `CORPUS.md`.
-4. Heart chambers and other unsegmented structures: pull from the fuller BodyParts3D archive
+1. **Open `real-mesh-test/real-mesh-check.html`** (double-click it — it inlines its scenes, so `file://`
+   works) and judge the real meshes: do they look good enough to teach from? That is a product question the
+   container cannot answer — it can't reach the CDN.
+2. Let the hourly task accumulate v2 scenes from Thursday; review `scenes/` + `CORPUS.md`.
+3. Heart chambers and other unsegmented structures: pull from the fuller upstream archive
    (dbarchive.biosciencedbc.jp) via the self-host ingest.
+4. Intelligence layer: note → concept detection → index lookup → trigger; AI candidate only on a miss.
 
 ## Constraints (must hold)
 Never modify the frozen Smart-Drill engine. Never pollute the real account `frankthewiz1@gmail.com` — test

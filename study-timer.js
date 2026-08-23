@@ -43,9 +43,14 @@
   function addSec(){ pending++; }
   function flush(){
     if(pending<=0) return;
-    var n=pending; pending=0;
-    if(window.MB_STUDY_ADD) window.MB_STUDY_ADD(n);   // -> DATA.study + account sync
-    else mem[today()]=(mem[today()]||0)+n;            // defensive: never lose seconds
+    var n=pending;
+    // TIM-05: only clear `pending` once the write actually SUCCEEDED. MB_STUDY_ADD now returns
+    // true/false (persist can fail on a storage-full device); on failure keep the seconds so the
+    // next flush retries instead of silently discarding an hour of study.
+    var ok=false;
+    try{ ok = window.MB_STUDY_ADD ? (window.MB_STUDY_ADD(n) !== false) : false; }catch(_){ ok=false; }
+    if(ok){ pending=0; }
+    else { mem[today()]=(mem[today()]||0)+n; pending=0; }   // held in memory for this session; not lost
   }
 
   function cardsByDay(){ try{ return (window.MB_CARDS_BY_DAY && window.MB_CARDS_BY_DAY()) || {}; }catch(_){ return {}; } }

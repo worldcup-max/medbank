@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · real BodyParts3D mesh check</title>
+<style>
+  :root{--bg:#0f0e1b;--ink:#f3f0ff;--dim:#a9a4c8;--acc:#7c5cff;--ok:#28c093;--warn:#ffb020;--line:#2c2948}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:18px 16px 60px}
+  h1{font-size:19px;margin:0 0 3px}
+  p.sub{color:var(--dim);font-size:13px;margin:0 0 16px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+  button{font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}
+  button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  #host{min-height:520px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;margin:14px 0}
+  .stat{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#17162a}
+  .stat b{display:block;font-size:20px;margin-bottom:2px}
+  .stat span{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+  .stat.ok b{color:var(--ok)} .stat.warn b{color:var(--warn)}
+  .log{margin-top:12px;font-size:12.5px;color:var(--dim);white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:10px}
+  .q{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:14px;background:#17162a;font-size:13.5px}
+  .q b{color:#c9bcff}
+  .q li{margin:4px 0;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Real BodyParts3D mesh check</h1>
+  <p class="sub">Opens the actual meshes from the CDN — the one thing the build container could not reach. This file inlines its scenes, so it works straight from <code>file://</code> with no server.</p>
+
+  <div class="row">
+    <button id="bArm" class="on">Arm — 9 real meshes</button>
+    <button id="bHeart">Heart — 24 real meshes</button>
+    <button id="bTerm">🧬 openTerm("long head of biceps")</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div id="host"></div>
+
+  <div class="q">
+    <b>What to judge — this is the product question, not the architecture question:</b>
+    <ul>
+      <li>Does the anatomy look good enough to teach from?</li>
+      <li>When you tap a part, is the right thing lit — and is it obvious which one?</li>
+      <li>Cross-section, isolate and the camera views: useful, or fiddly?</li>
+      <li>Does "Follow the long head" (a degraded TRACE) actually read as following a course?</li>
+      <li>How does it feel on your phone — load time, frame rate, the parts list?</li>
+    </ul>
+  </div>
+
+  <div class="log" id="log"></div>
+</div>
+
+<script src="../../viz3d.js"></script>
+<script>
+window.__SCENES = {
+ "arm": {
+  "schema": 2,
+  "id": "gross__arm__biceps-triceps",
+  "mode": "3d_anatomy",
+  "course": "Gross Anatomy",
+  "topic": "Arm (Brachium)",
+  "structure": "Biceps brachii & Triceps brachii",
+  "learning_goal": "Know the heads of each muscle, what each head crosses, and which movement it drives.",
+  "status": "ready",
+  "provider": {
+   "primary": "bodyparts3d",
+   "fallbacks": []
+  },
+  "match": {
+   "topics": [
+    "arm",
+    "brachium",
+    "upper limb",
+    "elbow",
+    "anterior compartment of arm",
+    "posterior compartment of arm"
+   ],
+   "terms": [
+    "biceps",
+    "biceps brachii",
+    "triceps",
+    "triceps brachii",
+    "elbow flexion",
+    "elbow extension"
+   ]
+  },
+  "camera": {
+   "framing": "anterior",
+   "autoRotate": 0.006,
+   "initialYaw": 0.4
+  },
+  "structures": [
+   {
+    "key": "scapula",
+    "name": "right scapula",
+    "label": "Scapula",
+    "role": "context",
+    "group": "Bones",
+    "layer": "bone",
+    "color": "#e9e1cc",
+    "refs": {
+     "bodyparts3d": "FMA13395"
+    },
+    "terms": [
+     "scapula",
+     "shoulder blade",
+     "supraglenoid tubercle",
+     "infraglenoid tubercle",
+     "coracoid process"
+    ],
+    "narration": "The shoulder blade — origin of the long heads of both muscles."
+   },
+   {
+    "key": "humerus",
+    "name": "right humerus",
+    "label": "Humerus",
+    "role": "context",
+    "group": "Bones",
+    "layer": "bone",
+    "color": "#e4dcc4",
+    "refs": {
+     "bodyparts3d": "FMA23130"
+    },
+    "terms": [
+     "humerus",
+     "radial groove",
+     "bicipital groove",
+     "intertubercular sulcus"
+    ],
+    "narration": "The arm bone both muscles wrap around."
+   },
+   {
+    "key": "radius",
+    "name": "right radius",
+    "label": "Radius",
+    "role": "context",
+    "group": "Bones",
+    "layer": "bone",
+    "color": "#e4dcc4",
+    "refs": {
+     "bodyparts3d": "FMA23464"
+    },
+    "terms": [
+     "radius",
+     "radial tuberosity"
+    ],
+    "narration": "The biceps inserts here, on the radial tuberosity."
+   },
+   {
+    "key": "ulna",
+    "name": "right ulna",
+    "label": "Ulna",
+    "role": "context",
+    "group": "Bones",
+    "layer": "bone",
+    "color": "#e4dcc4",
+    "refs": {
+     "bodyparts3d": "FMA23467"
+    },
+    "terms": [
+     "ulna",
+     "olecranon"
+    ],
+    "narration": "The triceps inserts here, on the olecranon."
+   },
+   {
+    "key": "bic_long",
+    "name": "long head of right biceps brachii",
+    "label": "Biceps — long head",
+    "role": "part",
+    "group": "Biceps brachii",
+    "layer": "muscle",
+    "color": "#c23a3a",
+    "refs": {
+     "bodyparts3d": "FMA37686"
+    },
+    "terms": [
+     "long head of biceps",
+     "biceps long head",
+     "supraglenoid tubercle",
+     "bicipital groove"
+    ],
+    "narration": "From the supraglenoid tubercle of the scapula, running in the bicipital groove."
+   },
+   {
+    "key": "bic_short",
+    "name": "short head of right biceps brachii",
+    "label": "Biceps — short head",
+    "role": "part",
+    "group": "Biceps brachii",
+    "layer": "muscle",
+    "color": "#d85a4a",
+    "refs": {
+     "bodyparts3d": "FMA37684"
+    },
+    "terms": [
+     "short head of biceps",
+     "biceps short head",
+     "coracoid process",
+     "coracobrachialis"
+    ],
+    "narration": "From the coracoid process, alongside coracobrachialis."
+   },
+   {
+    "key": "tri_long",
+    "name": "long head of right triceps brachii",
+    "label": "Triceps — long head",
+    "role": "part",
+    "group": "Triceps brachii",
+    "layer": "muscle",
+    "color": "#9a2f2f",
+    "refs": {
+     "bodyparts3d": "FMA37699"
+    },
+    "terms": [
+     "long head of triceps",
+     "triceps long head",
+     "infraglenoid tubercle"
+    ],
+    "narration": "The only head crossing the shoulder — from the infraglenoid tubercle."
+   },
+   {
+    "key": "tri_lat",
+    "name": "lateral head of right triceps brachii",
+    "label": "Triceps — lateral head",
+    "role": "part",
+    "group": "Triceps brachii",
+    "layer": "muscle",
+    "color": "#b84a3a",
+    "refs": {
+     "bodyparts3d": "FMA37697"
+    },
+    "terms": [
+     "lateral head of triceps",
+     "triceps lateral head",
+     "radial groove"
+    ],
+    "narration": "From the humerus above the radial groove."
+   },
+   {
+    "key": "tri_med",
+    "name": "medial head of right triceps brachii",
+    "label": "Triceps — medial head",
+    "role": "part",
+    "group": "Triceps brachii",
+    "layer": "muscle",
+    "color": "#c86a5a",
+    "refs": {
+     "bodyparts3d": "FMA37695"
+    },
+    "terms": [
+     "medial head of triceps",
+     "triceps medial head",
+     "deep head"
+    ],
+    "narration": "The deep head below the radial groove — active in all extension."
+   }
+  ],
+  "views": [
+   {
+    "mode": "location",
+    "beat": 1,
+    "title": "See it in the body",
+    "ops": [
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "*"
+     },
+     {
+      "op": "ROTATE_TO_VIEW",
+      "view": "anterior"
+     }
+    ],
+    "narration": "The biceps sits on the front of the arm, the triceps on the back — an antagonist pair moving the elbow."
+   },
+   {
+    "mode": "associated_organs",
+    "beat": 2,
+    "title": "On the bones",
+    "ops": [
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "*"
+     },
+     {
+      "op": "HIGHLIGHT_STRUCTURE",
+      "target": "Bones",
+      "intensity": 0.3
+     },
+     {
+      "op": "SHOW_RELATIONSHIP",
+      "from": "bic_long",
+      "to": "radius",
+      "kind": "inserts on"
+     },
+     {
+      "op": "SHOW_RELATIONSHIP",
+      "from": "tri_long",
+      "to": "ulna",
+      "kind": "inserts on"
+     }
+    ],
+    "narration": "They span from the scapula across the humerus to the radius — biceps — and the ulna — triceps."
+   },
+   {
+    "mode": "contraction_filter",
+    "beat": 3,
+    "title": "Flex vs extend",
+    "ops": [
+     {
+      "op": "COMPARE_STRUCTURES",
+      "targets": [
+       "Biceps brachii",
+       "Triceps brachii"
+      ],
+      "layout": "antagonists"
+     }
+    ],
+    "animation": {
+     "type": "muscle_state",
+     "flexors": [
+      "bic_long",
+      "bic_short"
+     ],
+     "extensors": [
+      "tri_long",
+      "tri_lat",
+      "tri_med"
+     ],
+     "states": [
+      "relaxed",
+      "contracted"
+     ]
+    },
+    "narration": "The biceps contracts to flex the elbow; the triceps contracts to straighten it."
+   },
+   {
+    "mode": "mechanism",
+    "title": "Follow the long head",
+    "ops": [
+     {
+      "op": "ISOLATE_REGION",
+      "target": "bic_long"
+     },
+     {
+      "op": "TRACE_STRUCTURE",
+      "target": "bic_long",
+      "path": [
+       "scapula",
+       "humerus",
+       "radius"
+      ],
+      "duration": 6
+     }
+    ],
+    "narration": "Follow the long head from the scapula, down the bicipital groove of the humerus, to the radial tuberosity."
+   }
+  ],
+  "provenance": {
+   "author": "human",
+   "authored_at": "2026-08-23",
+   "approved_by": "frank",
+   "approved_at": "2026-08-23"
+  }
+ },
+ "heart": {
+  "schema": 2,
+  "id": "gross__heart-pericardium__heart",
+  "mode": "3d_anatomy",
+  "course": "Gross Anatomy",
+  "topic": "Heart & Pericardium",
+  "structure": "Heart",
+  "learning_goal": "Know the heart's valves, its own blood supply, and the great vessels entering and leaving it.",
+  "status": "ready",
+  "gaps": [
+   "The four chambers have no separate models in this source set - the chambers are taught here through their valves and papillary muscles. Resolve true chamber models from the fuller upstream archive when the self-host ingest runs.",
+   "No aortic valve model exists in this source set (mitral, tricuspid and pulmonary do).",
+   "No pericardium model exists in this source set - the pericardium half of this topic is narration-only until then."
+  ],
+  "provider": {
+   "primary": "bodyparts3d",
+   "fallbacks": []
+  },
+  "match": {
+   "topics": [
+    "heart",
+    "pericardium",
+    "mediastinum",
+    "thorax",
+    "cardiovascular system"
+   ],
+   "terms": [
+    "heart",
+    "valve",
+    "coronary",
+    "aorta",
+    "great vessels",
+    "cardiac cycle"
+   ]
+  },
+  "camera": {
+   "framing": "anterior",
+   "autoRotate": 0.006,
+   "initialYaw": 0.2
+  },
+  "structures": [
+   {
+    "key": "heart_wall",
+    "name": "wall of heart",
+    "label": "Heart (myocardium)",
+    "role": "context",
+    "group": "Heart",
+    "layer": "organ",
+    "color": "#a23a33",
+    "refs": {
+     "bodyparts3d": "FMA7274"
+    },
+    "terms": [
+     "heart",
+     "myocardium",
+     "wall of heart",
+     "cardiac muscle"
+    ],
+    "narration": "The muscular wall itself — thickest around the left ventricle, which drives blood to the whole body."
+   },
+   {
+    "key": "tricuspid",
+    "name": "tricuspid valve",
+    "label": "Tricuspid valve",
+    "role": "part",
+    "group": "Valves",
+    "layer": "organ",
+    "color": "#f2c14e",
+    "refs": {
+     "bodyparts3d": "FMA7234"
+    },
+    "terms": [
+     "tricuspid valve",
+     "right atrioventricular valve"
+    ],
+    "narration": "Between the right atrium and right ventricle — three cusps, held by the papillary muscles."
+   },
+   {
+    "key": "mitral",
+    "name": "mitral valve",
+    "label": "Mitral valve",
+    "role": "part",
+    "group": "Valves",
+    "layer": "organ",
+    "color": "#f2a33c",
+    "refs": {
+     "bodyparts3d": "FMA7235"
+    },
+    "terms": [
+     "mitral valve",
+     "bicuspid valve",
+     "left atrioventricular valve"
+    ],
+    "narration": "Between the left atrium and left ventricle — two cusps, on the high-pressure side."
+   },
+   {
+    "key": "pulm_valve",
+    "name": "pulmonary valve",
+    "label": "Pulmonary valve",
+    "role": "part",
+    "group": "Valves",
+    "layer": "organ",
+    "color": "#7fb3ff",
+    "refs": {
+     "bodyparts3d": "FMA7246"
+    },
+    "terms": [
+     "pulmonary valve",
+     "pulmonic valve"
+    ],
+    "narration": "Guards the exit from the right ventricle into the pulmonary artery."
+   },
+   {
+    "key": "pap_ant_rv",
+    "name": "anterior papillary muscle of right ventricle",
+    "label": "Papillary muscle — anterior, RV",
+    "role": "part",
+    "group": "Papillary muscles",
+    "layer": "organ",
+    "color": "#b8524a",
+    "refs": {
+     "bodyparts3d": "FMA7260"
+    },
+    "terms": [
+     "papillary muscle",
+     "chordae tendineae",
+     "anterior papillary muscle"
+    ],
+    "narration": "Pulls on the chordae to stop the tricuspid cusps prolapsing when the ventricle squeezes."
+   },
+   {
+    "key": "pap_post_lv",
+    "name": "posterior papillary muscle of left ventricle",
+    "label": "Papillary muscle — posterior, LV",
+    "role": "part",
+    "group": "Papillary muscles",
+    "layer": "organ",
+    "color": "#c2645a",
+    "refs": {
+     "bodyparts3d": "FMA7266"
+    },
+    "terms": [
+     "posterior papillary muscle",
+     "left ventricle papillary"
+    ],
+    "narration": "Its blood supply is single in most hearts — which is why it fails after an inferior infarct."
+   },
+   {
+    "key": "asc_aorta",
+    "name": "ascending aorta",
+    "label": "Ascending aorta",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#d9453c",
+    "refs": {
+     "bodyparts3d": "FMA3736"
+    },
+    "terms": [
+     "ascending aorta",
+     "aortic root",
+     "aorta"
+    ],
+    "narration": "Leaves the left ventricle — the coronary arteries branch from its very first centimetre."
+   },
+   {
+    "key": "aortic_arch",
+    "name": "arch of aorta",
+    "label": "Arch of aorta",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#e05147",
+    "refs": {
+     "bodyparts3d": "FMA3768"
+    },
+    "terms": [
+     "aortic arch",
+     "arch of aorta",
+     "ligamentum arteriosum"
+    ],
+    "narration": "Arches back and to the left, giving off the vessels to the head and the arms."
+   },
+   {
+    "key": "desc_aorta",
+    "name": "descending aorta",
+    "label": "Descending aorta",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#c93f37",
+    "refs": {
+     "bodyparts3d": "FMA3784"
+    },
+    "terms": [
+     "descending aorta",
+     "thoracic aorta"
+    ],
+    "narration": "Continues down behind the heart against the vertebral column."
+   },
+   {
+    "key": "pulm_artery",
+    "name": "pulmonary artery",
+    "label": "Pulmonary artery",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#4f9bff",
+    "refs": {
+     "bodyparts3d": "FMA66326"
+    },
+    "terms": [
+     "pulmonary artery",
+     "pulmonary trunk"
+    ],
+    "narration": "The one artery carrying oxygen-poor blood — right ventricle to lungs."
+   },
+   {
+    "key": "pulm_vein",
+    "name": "pulmonary vein",
+    "label": "Pulmonary vein",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#ff6b6b",
+    "refs": {
+     "bodyparts3d": "FMA66643"
+    },
+    "terms": [
+     "pulmonary vein",
+     "pulmonary veins"
+    ],
+    "narration": "The one vein carrying oxygen-rich blood — lungs back to the left atrium."
+   },
+   {
+    "key": "svc",
+    "name": "superior vena cava",
+    "label": "Superior vena cava",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#5a8fd6",
+    "refs": {
+     "bodyparts3d": "FMA4720"
+    },
+    "terms": [
+     "superior vena cava",
+     "SVC"
+    ],
+    "narration": "Brings blood back from the head, neck and arms into the right atrium."
+   },
+   {
+    "key": "ivc",
+    "name": "inferior vena cava",
+    "label": "Inferior vena cava",
+    "role": "part",
+    "group": "Great vessels",
+    "layer": "vessel",
+    "color": "#4a7fc4",
+    "refs": {
+     "bodyparts3d": "FMA10951"
+    },
+    "terms": [
+     "inferior vena cava",
+     "IVC"
+    ],
+    "narration": "Brings blood back from everything below the diaphragm."
+   },
+   {
+    "key": "lca",
+    "name": "stem of left coronary artery",
+    "label": "Left coronary artery",
+    "role": "part",
+    "group": "Coronary arteries",
+    "layer": "vessel",
+    "color": "#ff8f3c",
+    "refs": {
+     "bodyparts3d": "FMA4685"
+    },
+    "terms": [
+     "left coronary artery",
+     "LCA",
+     "left main"
+    ],
+    "narration": "A short stem off the aortic root that divides almost immediately."
+   },
+   {
+    "key": "circumflex",
+    "name": "circumflex branch of left coronary artery",
+    "label": "Circumflex branch",
+    "role": "part",
+    "group": "Coronary arteries",
+    "layer": "vessel",
+    "color": "#ffa657",
+    "refs": {
+     "bodyparts3d": "FMA3895"
+    },
+    "terms": [
+     "circumflex artery",
+     "circumflex branch"
+    ],
+    "narration": "Curves left around the heart in the coronary groove to supply the left side."
+   },
+   {
+    "key": "rca",
+    "name": "trunk of right coronary artery",
+    "label": "Right coronary artery",
+    "role": "part",
+    "group": "Coronary arteries",
+    "layer": "vessel",
+    "color": "#ff7043",
+    "refs": {
+     "bodyparts3d": "FMA3802"
+    },
+    "terms": [
+     "right coronary artery",
+     "RCA"
+    ],
+    "narration": "Runs right in the coronary groove — supplies the SA and AV nodes in most people."
+   },
+   {
+    "key": "marginal",
+    "name": "marginal branch of right coronary artery",
+    "label": "Marginal branch",
+    "role": "part",
+    "group": "Coronary arteries",
+    "layer": "vessel",
+    "color": "#ff8a65",
+    "refs": {
+     "bodyparts3d": "FMA3818"
+    },
+    "terms": [
+     "marginal branch",
+     "acute marginal"
+    ],
+    "narration": "Runs along the sharp lower border to the right ventricle."
+   },
+   {
+    "key": "great_cardiac_vein",
+    "name": "great cardiac vein",
+    "label": "Great cardiac vein",
+    "role": "part",
+    "group": "Cardiac veins",
+    "layer": "vessel",
+    "color": "#6f86d6",
+    "refs": {
+     "bodyparts3d": "FMA4707"
+    },
+    "terms": [
+     "great cardiac vein"
+    ],
+    "narration": "Runs beside the anterior interventricular artery and drains into the coronary sinus."
+   },
+   {
+    "key": "coronary_sinus",
+    "name": "coronary sinus",
+    "label": "Coronary sinus",
+    "role": "part",
+    "group": "Cardiac veins",
+    "layer": "vessel",
+    "color": "#5c6bc0",
+    "refs": {
+     "bodyparts3d": "FMA4706"
+    },
+    "terms": [
+     "coronary sinus"
+    ],
+    "narration": "The heart's own venous return, emptying straight into the right atrium."
+   },
+   {
+    "key": "lung_ul_r",
+    "name": "upper lobe of right lung",
+    "label": "Right lung — upper lobe",
+    "role": "context",
+    "group": "Lungs",
+    "layer": "organ",
+    "color": "#e3c9d8",
+    "refs": {
+     "bodyparts3d": "FMA7333"
+    },
+    "terms": [
+     "right lung",
+     "upper lobe"
+    ],
+    "narration": ""
+   },
+   {
+    "key": "lung_ll_r",
+    "name": "lower lobe of right lung",
+    "label": "Right lung — lower lobe",
+    "role": "context",
+    "group": "Lungs",
+    "layer": "organ",
+    "color": "#dcc0d0",
+    "refs": {
+     "bodyparts3d": "FMA7337"
+    },
+    "terms": [
+     "right lung",
+     "lower lobe"
+    ],
+    "narration": ""
+   },
+   {
+    "key": "lung_ul_l",
+    "name": "upper lobe of left lung",
+    "label": "Left lung — upper lobe",
+    "role": "context",
+    "group": "Lungs",
+    "layer": "organ",
+    "color": "#e3c9d8",
+    "refs": {
+     "bodyparts3d": "FMA7370"
+    },
+    "terms": [
+     "left lung",
+     "upper lobe"
+    ],
+    "narration": ""
+   },
+   {
+    "key": "lung_ll_l",
+    "name": "lower lobe of left lung",
+    "label": "Left lung — lower lobe",
+    "role": "context",
+    "group": "Lungs",
+    "layer": "organ",
+    "color": "#dcc0d0",
+    "refs": {
+     "bodyparts3d": "FMA7371"
+    },
+    "terms": [
+     "left lung",
+     "lower lobe"
+    ],
+    "narration": ""
+   },
+   {
+    "key": "trachea",
+    "name": "trachea",
+    "label": "Trachea",
+    "role": "context",
+    "group": "Airway",
+    "layer": "organ",
+    "color": "#cfd8dc",
+    "refs": {
+     "bodyparts3d": "FMA7394"
+    },
+    "terms": [
+     "trachea",
+     "windpipe"
+    ],
+    "narration": ""
+   }
+  ],
+  "views": [
+   {
+    "mode": "location",
+    "beat": 1,
+    "title": "See it in the body",
+    "ops": [
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "*"
+     },
+     {
+      "op": "ISOLATE_REGION",
+      "target": "Heart"
+     },
+     {
+      "op": "ROTATE_TO_VIEW",
+      "view": "anterior"
+     }
+    ],
+    "narration": "The heart sits in the middle of the chest, tilted so its tip points down and to the left, behind the sternum."
+   },
+   {
+    "mode": "associated_organs",
+    "beat": 2,
+    "title": "Among its neighbours",
+    "ops": [
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "*"
+     },
+     {
+      "op": "HIGHLIGHT_STRUCTURE",
+      "target": "Lungs",
+      "intensity": 0.25
+     }
+    ],
+    "narration": "It nestles between the two lungs, above the diaphragm, with the great vessels rising from its top."
+   },
+   {
+    "mode": "cross_section",
+    "title": "Inside — the valves",
+    "ops": [
+     {
+      "op": "CROSS_SECTION",
+      "axis": "z",
+      "offset": 0.0,
+      "animate": true
+     },
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "Valves"
+     },
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "Papillary muscles"
+     },
+     {
+      "op": "HIGHLIGHT_STRUCTURE",
+      "target": "Valves"
+     }
+    ],
+    "narration": "Cut it open and the four chambers are defined by their doors: tricuspid and pulmonary on the right, mitral on the left, each held shut by the papillary muscles."
+   },
+   {
+    "mode": "mechanism",
+    "beat": 3,
+    "title": "How it works — one beat",
+    "ops": [
+     {
+      "op": "TRACE_STRUCTURE",
+      "target": "blood",
+      "path": [
+       "svc",
+       "tricuspid",
+       "pulm_valve",
+       "pulm_artery",
+       "pulm_vein",
+       "mitral",
+       "asc_aorta",
+       "aortic_arch"
+      ],
+      "duration": 8
+     }
+    ],
+    "animation": {
+     "type": "pump",
+     "bpm": 60,
+     "flow_color": {
+      "deoxygenated": "#4f9bff",
+      "oxygenated": "#ff5a5a"
+     }
+    },
+    "narration": "Blue blood arrives through the venae cavae, past the tricuspid, out the pulmonary valve to the lungs; it returns red through the pulmonary veins, past the mitral valve, and is driven out the aorta to the body."
+   },
+   {
+    "mode": "vasculature",
+    "title": "Its own blood supply",
+    "ops": [
+     {
+      "op": "ISOLATE_REGION",
+      "target": "Coronary arteries"
+     },
+     {
+      "op": "SHOW_STRUCTURE",
+      "target": "Cardiac veins"
+     },
+     {
+      "op": "COMPARE_STRUCTURES",
+      "targets": [
+       "lca",
+       "rca"
+      ],
+      "layout": "left-vs-right"
+     }
+    ],
+    "narration": "The coronary arteries branch off the aortic root and wrap the heart to feed the muscle itself; the cardiac veins return that blood through the coronary sinus."
+   }
+  ],
+  "provenance": {
+   "author": "human",
+   "authored_at": "2026-08-23",
+   "approved_by": "frank",
+   "approved_at": "2026-08-23"
+  }
+ }
+};
+</script>
+<script>
+(function(){
+  try{ localStorage.setItem('mb3d','1'); }catch(e){}
+  var log=document.getElementById('log'), t0=0;
+  function say(m){ log.textContent += m + "\n"; log.scrollTop=1e6; }
+  function stats(items){ document.getElementById('stats').innerHTML=items.map(function(s){
+    return '<div class="stat '+(s.cls||'')+'"><b>'+s.v+'</b><span>'+s.k+'</span></div>'; }).join(''); }
+
+  function tris(p){ var n=0; Object.keys(p.meshes).forEach(function(k){ var g=p.meshes[k].geometry; if(g&&g.attributes&&g.attributes.position) n+=g.attributes.position.count/3; }); return Math.round(n); }
+
+  function run(key,btn){
+    ['bArm','bHeart'].forEach(function(id){ document.getElementById(id).classList.toggle('on', id===btn); });
+    var sc=window.__SCENES[key];
+    say("\nmounting "+sc.id+" — "+sc.structures.length+" real meshes from the CDN…");
+    stats([{k:'loading',v:'…'}]);
+    t0=performance.now();
+    MB3D.mountScene('host', sc).then(function(p){
+      var ms=Math.round(performance.now()-t0), got=Object.keys(p.meshes).length, want=sc.structures.length;
+      say("loaded "+got+"/"+want+" in "+ms+"ms · "+tris(p).toLocaleString()+" triangles");
+      stats([
+        {k:'meshes loaded',v:got+'/'+want, cls: got===want?'ok':'warn'},
+        {k:'load time',v:(ms/1000).toFixed(1)+'s', cls: ms<8000?'ok':'warn'},
+        {k:'triangles',v:tris(p).toLocaleString()},
+        {k:'provider',v:'BodyParts3D'}
+      ]);
+    }).catch(function(e){ say("FAILED: "+e.message); stats([{k:'failed',v:'✗',cls:'warn'}]); });
+  }
+
+  document.getElementById('bArm').onclick=function(){ run('arm','bArm'); };
+  document.getElementById('bHeart').onclick=function(){ run('heart','bHeart'); };
+  document.getElementById('bTerm').onclick=function(){
+    // the note path: a term resolves to one scene + one part, and the viewer opens focused on it.
+    var hit=null, sc=window.__SCENES.arm;
+    sc.structures.forEach(function(s){ if((s.terms||[]).indexOf('long head of biceps')>=0) hit=s.key; });
+    say("\nterm 'long head of biceps' → part "+hit);
+    MB3D.open(sc,{part:hit,title:'long head of biceps',subtitle:'as it opens from a note'});
+  };
+
+  say("MB3D.on() = "+MB3D.on());
+  if(location.protocol==='file:') say("running from file:// — scenes are inlined, meshes come from the CDN");
+  run('arm','bArm');
+})();
+</script>
+</body>
+</html>

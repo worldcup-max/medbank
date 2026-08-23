@@ -433,7 +433,11 @@
           // but KEEP mb_current_uid so the next login by a DIFFERENT user still trips the
           // init() uid-guard (purge + clean load). Clearing it here would let the next student
           // merge/adopt the previous student's local data (AUTH-03).
-          if(ev==="SIGNED_OUT" && prev){ location.reload(); return; }
+          if(ev==="SIGNED_OUT" && prev){
+            // CNT-02: also drop the cached lectures so a signed-out (or shared) browser can't paint the previous student's library
+            try{ Object.keys(localStorage).forEach(function(k){ if(/^medbank_content_/.test(k)){ try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){}
+            location.reload(); return;
+          }
         }catch(_){}
       }); } }catch(_){}
       try{

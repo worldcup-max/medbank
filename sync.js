@@ -326,6 +326,8 @@
         log("switch update error", up.error.message); return;
       }
       setMeta({ rev:0, pushedAt:0, dirty:false, profileId:newId });
+      // CNT-01: purge the OLD level's content cache so hydrateFromCache can't repaint it on reload (both levels' lectures otherwise show, permanently)
+      try{ Object.keys(localStorage).forEach(function(k){ if(/^medbank_content_/.test(k)){ try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){}
       // reload rebuilds the app cleanly for the new profile (content + state)
       if(typeof location !== "undefined") location.reload();
     }catch(e){ log("switch error", e && e.message); notify("Couldn't switch levels just now. Check your connection and try again."); }
@@ -364,6 +366,7 @@
       // level (the old one just keeps its features), so it must not block the move.
       try{ await sb.from("level_profiles").update({ archived:true }).eq("id", profileId); }catch(_){}
       setMeta({ rev:0, pushedAt:0, dirty:false, profileId:id });
+      try{ Object.keys(localStorage).forEach(function(k){ if(/^medbank_content_/.test(k)){ try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){}   // CNT-01: drop the archived level's content cache
       if(typeof location !== "undefined") location.reload();
     }catch(e){ log("goToNextLevel error", e && e.message); notify("Couldn't move up a level just now. Check your connection and try again."); }
   }
