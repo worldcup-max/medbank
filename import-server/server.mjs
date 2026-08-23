@@ -1406,7 +1406,7 @@ async function renderPreviewScene(scene, subject){
   const prompt = buildVisualPrompt(text, subject);
   for(let attempt=1; attempt<=2; attempt++){
     const p = attempt>1 ? (prompt+"\n\nYour previous JSON was not a valid, drawable blueprint. Return ONLY corrected JSON with a valid \"layout\" and at least 2 narration_steps.") : prompt;
-    const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:8000, temperature:0.2, json:true });
+    const gen = await generate({ model: BASIC_MODEL, prompt:p, parts:[], images:[], max_tokens:12000, temperature:0.2, json:true });   // generous ceiling; with reasoning_effort:none the model outputs only the blueprint and stops, so no truncation and no wasted spend
     const bp = parseBlueprint(gen.text);
     if(bp && (!bp.layout || LAYOUTS.has(bp.layout)) && narratedSteps(bp)>=2 && qcCheck(bp).pass){
       if(!bp.layout || bp.layout==="scene"){ try{ bp._render=renderHints(bp.template); bp._defs=assetDefs((bp.elements||[]).map(e=>e.type)); }catch(_){} }
@@ -1416,7 +1416,7 @@ async function renderPreviewScene(scene, subject){
   return null;
 }
 async function buildTopicPreview(note, subject){
-  const planGen = await generate({ model: BASIC_MODEL, prompt: previewPlanPrompt(note, subject), parts:[], images:[], max_tokens:2500, temperature:0.3, json:true });
+  const planGen = await generate({ model: BASIC_MODEL, prompt: previewPlanPrompt(note, subject), parts:[], images:[], max_tokens:4000, temperature:0.3, json:true });   // headroom so a 12-scene plan never truncates
   const plan = extractJsonObject(planGen.text||"");
   let list = (plan && Array.isArray(plan.scenes)) ? plan.scenes.slice(0,12) : [];
   if(!list.length) return { status:"failed", scenes:[] };
