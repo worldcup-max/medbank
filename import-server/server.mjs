@@ -265,6 +265,20 @@ async function generate({ model, prompt, parts, images, max_tokens, temperature,
       delete body.response_format; ({ r, j } = await callOnce());
     }
   }
+  // QB-09: some OpenAI-compatible models REJECT (rather than clamp) a max_tokens above their output cap — the
+  // legacy deepseek-chat capped at 8192, and smaller OpenAI models cap lower. That 400 would otherwise fail every
+  // parallel qbank batch identically and surface as a generic "couldn't build — try again", making a provider-cap
+  // config problem look like a transient error forever. The current default (deepseek-v4-flash, 384k output cap)
+  // is safe at 12000; this guard only fires on a genuine cap rejection, clamps to a known-safe 8000, and retries once.
+  if(!r.ok){
+    const em = ((((j||{}).error)||{}).message || "").toLowerCase();
+    const tokField = isDeep ? "max_tokens" : "max_completion_tokens";
+    const cur = body[tokField]||0;
+    if(cur>8000 && /token/.test(em) && /(max|maximum|exceed|too large|less than or equal|out of range|invalid|limit|cap)/.test(em)){
+      console.warn("[generate] "+(isDeep?"DeepSeek":"OpenAI")+" rejected "+tokField+"="+cur+" → clamping to 8000 and retrying once");
+      body[tokField]=8000; ({ r, j } = await callOnce());
+    }
+  }
   if(!r.ok) throw new Error((isDeep?"DeepSeek":"OpenAI")+": "+((j.error&&j.error.message)||r.status));
   const choice=((j.choices||[])[0])||{}; const msg=choice.message||{};
   // reasoning models sometimes leave `content` empty and put the answer in `reasoning_content`
