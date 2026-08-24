@@ -106,6 +106,10 @@ the exact `uvw`. Either way, an anchor stays `status:"needs-review"` until a hum
 - Auto-rotation is a 3-second first glance that any touch cancels permanently.
 - Trackball rotation: every axis, no pole to hang on.
 
+**On a phone** (checked at 393 × 727): the stage takes 46vh with a 280px floor, the parts list caps at 32vh,
+all four controls sit on one row, and the "See it in 3D" overlay goes full-bleed with the match note hidden.
+The status pill fades after 4.5s so it stops covering a small stage. No horizontal scroll.
+
 ## Scene lifecycle
 `ready | candidate | planned | blocked`. **Only `ready` reaches a student** — `scenesForTopic()` filters on
 it. An AI-drafted scene is refused `ready` without `provenance.approved_by`, so the corpus grows as a

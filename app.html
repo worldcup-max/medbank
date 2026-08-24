@@ -2800,6 +2800,9 @@ async function buildExtraNow(topicId,kind,force,_retry){
   catch(e){ throw new Error(r.status===413?'That note is too large to build from.':'The build server is busy right now — try again in a minute.'); }
   if(!r.ok||!out.items) throw new Error(out.reason||out.error||'Could not build this.');
   t.extras=t.extras||{}; t.extras[kind]=out.items;   // cache locally → instant next time (server also saved it)
+  // QB-06: a partial build isn't persisted server-side; keep a session-only flag so the page can offer a rebuild
+  // for the full set. Cleared on a complete build. (On next app load the server has no cache → a fresh build runs.)
+  if(kind==='qbank'){ if(out.partial) t._qbPartial=out.items.length; else delete t._qbPartial; }
   return out.items;
 }
 async function genExtra(topicId,kind,btn){
@@ -2870,7 +2873,10 @@ function renderQbank(t){
   const acc=qbData(t.id);
   const head=`<div class="btnrow" style="justify-content:space-between;align-items:center;margin-bottom:12px">
     <div style="font-size:13px;color:var(--dim)">${acc.seen?('Your accuracy: <b style="color:var(--text)">'+Math.round(acc.correct/acc.seen*100)+'%</b> · '+acc.seen+' answered'+qbWeakest(acc)):items.length+' questions ready'}</div>
-    <button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`;
+    <button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`
+    +(t._qbPartial?`<div class="card" style="cursor:default;background:#fff6e6;border-color:#f3d79a;color:#8a5a12;font-size:12.5px;padding:10px 12px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <span>⚠️ Only ${t._qbPartial} question${t._qbPartial===1?'':'s'} built this time (the server was busy). Rebuild for the full set.</span>
+      <button class="btn" style="margin-left:auto;font-size:12px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`:'');
   if(QB && (QB.topicId===t.id || QB.mistakes)){          // an active session (incl. cross-topic mistakes practice)
     return head+(QB.done?qbDoneHtml():qbQuestionHtml());
   }

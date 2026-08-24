@@ -192,7 +192,7 @@
       '.mb3d-ovhd small{font-weight:400;color:#a9a4c8;font-size:12.5px}',
       '.mb3d-ovhd button{margin-left:auto;font:inherit;font-size:16px;line-height:1;padding:6px 10px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}',
       '.mb3d-ovbody{overflow:auto;padding:12px}',
-      '@media(max-width:860px){.mb3d-main{flex-direction:column;height:auto}.mb3d-stage{height:320px}.mb3d-side{width:auto;border-left:0;border-top:1px solid var(--m3line);max-height:250px}.mb3d-ov{padding:0}.mb3d-shell{max-height:100vh;border-radius:0;height:100%}}'
+      '@media(max-width:860px){.mb3d-main{flex-direction:column;height:auto}.mb3d-stage{height:46vh;min-height:280px}.mb3d-side{width:auto;border-left:0;border-top:1px solid var(--m3line);max-height:32vh}.mb3d-status{font-size:11.5px;padding:5px 9px;max-width:86%}.mb3d-acts{padding:7px;gap:6px}.mb3d-btn{font-size:12px;padding:6px 10px}.mb3d-narr{padding:9px 12px;font-size:13px}.mb3d-ov{padding:0}.mb3d-shell{max-height:100vh;border-radius:0;height:100%}.mb3d-ovbody{padding:0}.mb3d-ov .mb3d{border:0;border-radius:0}.mb3d-ovhd small{display:none}.mb3d-ovhd span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}'
     ].join('');
     document.head.appendChild(css);
   }
@@ -532,7 +532,14 @@
 
     var $ = function (r) { return host.querySelector('[data-r="' + r + '"]'); };
     var stage = $('stage'), canvas = $('canvas'), pinWrap = $('pins'), leads = $('leads');
-    function st(t, c) { var e = $('status'); e.textContent = t; e.className = 'mb3d-status' + (c ? ' ' + c : ''); }
+    var stFade = null;
+    function st(t, c, fade) {
+      var e = $('status'); e.textContent = t; e.className = 'mb3d-status' + (c ? ' ' + c : '');
+      e.style.opacity = '1';
+      if (stFade) clearTimeout(stFade);
+      // once the scene is up, the pill has said its piece — fade it so it stops covering a small stage
+      if (fade) stFade = setTimeout(function () { if (e) { e.style.transition = 'opacity .6s'; e.style.opacity = '0'; } }, 4500);
+    }
 
     var renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -633,7 +640,7 @@
       applyView(0);
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
       var msg = 'Loaded ' + loadedKeys.length + ' of ' + structures.length + ' parts';
-      st(missing.length ? msg + ' — ' + missing.length + ' unavailable' : msg + ' — tap any part to isolate it.', missing.length ? 'warn' : 'ok');
+      st(missing.length ? msg + ' — ' + missing.length + ' unavailable' : msg + ' — tap any part to isolate it.', missing.length ? 'warn' : 'ok', true);
       note();
       return player;
     });
@@ -949,7 +956,7 @@
     }
     function stopTour() {
       if (tourTimer) clearInterval(tourTimer);
-      tourTimer = null; $('tour').textContent = '▶ Tour the parts';
+      tourTimer = null; $('tour').textContent = 'Tour parts';
     }
 
     /* ---------- calibrate mode: put a landmark exactly where it belongs ----------

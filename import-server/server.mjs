@@ -356,13 +356,14 @@ async function buildExtra(kind, level, note, model){
   const tmpl = (row && row.template) || DEFAULT_PROMPTS[kind];
   if(!tmpl) return null;
   const mdl = (row && row.model) || model;
+  // returns { items:[...], partial:bool } or null. `partial` only ever true for qbank (a multi-batch build).
   if(kind==="qbank") return buildQbankBatched(tmpl, note, mdl, row && row.max_tokens, row && row.temperature);
   // written (and any other single-shot kind): one call
   // `Number(x)||0.3` turned a deliberately configured temperature of 0 back into 0.3 — check for null instead
   const rowTemp = (row && row.temperature != null && !isNaN(Number(row.temperature))) ? Number(row.temperature) : 0.3;
   const raw = await genRawItems(tmpl.replace(/\{\{note\}\}/g, note || ""), mdl, (row&&row.max_tokens)||8000, rowTemp);
   const items = (raw||[]).filter(it => it && String(it.prompt||"").trim());
-  return items.length ? items : null;
+  return items.length ? { items, partial:false } : null;
 }
 /* one generate() call → parsed raw items[] (full parse, else salvage a truncated/dirty response) */
 async function genRawItems(prompt, model, maxTok, temperature){
@@ -408,6 +409,17 @@ function validateQbankItems(rawArr){
     if(s.length<=3 && /^[a-j][).:]?$/i.test(s)) return s.toUpperCase().charCodeAt(0)-65;   // "B" / "B)" / "B."
     return NaN;
   };
+  let ratDropped=0;   // QB-08: count items whose rationales couldn't be trusted to be positionally aligned
+  /* Rationales are indexed positionally by the client (q.rationales[j] for option j). If the array is SHORTER
+     than options, we cannot tell an end-truncation (entries present are aligned, safe to keep) from a middle
+     omission (every later entry shifts up one → the right explanation renders under the WRONG option, which for
+     an exam app is worse than showing none). Since the two are indistinguishable from the data, a short array is
+     dropped entirely; an equal-or-longer one is sliced (extra tail is safely discarded) and kept. */
+  const alignRationales = (arr, nOpts) => {
+    const a = Array.isArray(arr) ? arr : [];
+    if(a.length < nOpts){ if(a.length) ratDropped++; return []; }
+    return a.slice(0, nOpts).map(cleanRationale);
+  };
   let items = (rawArr||[])
     .map(it => (it && typeof it==="object" && !Array.isArray(it))
         ? Object.assign({}, it, { answer: coerceAnswer(it.answer, it.options) })
@@ -426,7 +438,7 @@ function validateQbankItems(rawArr){
         lead_in: String(it.lead_in||"").trim().slice(0,160),
         options: it.options.map(o=>String(o).trim()),
         answer: it.answer,
-        rationales: (Array.isArray(it.rationales) ? it.rationales : []).slice(0,it.options.length).map(cleanRationale),
+        rationales: alignRationales(it.rationales, it.options.length),
         objective, teaching: objective,
         trap_type: trapType, trap_explanation: trapExpl, trap: trapExpl,
         subtopic, tag: subtopic,
@@ -442,19 +454,26 @@ function validateQbankItems(rawArr){
   const wordSet = s => new Set(String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3));
   const jac = (a,b)=>{ let inter=0; a.forEach(w=>{ if(b.has(w)) inter++; }); const uni=a.size+b.size-inter; return uni?inter/uni:0; };
   const shares = (a,b)=>{ for(const w of a) if(b.has(w)) return true; return false; };
+  // QB-07: on a collision, keep the RARER / higher-value cognitive level rather than whichever arrived first.
+  // FOCI order put exam_trap + complex_reasoning last, so "keep first" silently culled exactly the two levels the
+  // v1.7 spec cares most about whenever a thin lecture forced two batches onto the same subtopic.
+  const COG_RANK = { interpretation:0, clinical_reasoning:1, complex_reasoning:2, exam_trap:3 };
+  const rank = it => COG_RANK[it && it.cognitive_level] || 0;
+  const collides = (f,k) =>
+       jac(f.ws,k.ws)>0.72                                                          // near-copy stem
+    || (f.st && k.st===f.st)                                                         // identical subtopic label
+    || (jac(f.ws,k.ws)>0.5 && f.sk && f.sk===k.sk && (shares(f.sw,k.sw) || shares(f.aw,k.aw)))  // similar stem, same skill, shared concept/answer
+    || (f.sk && f.sk===k.sk && shares(f.aw,k.aw) && jac(f.sw,k.sw)>0.5);            // same skill + same answer + same subtopic-concept
   const kept=[], K=[]; const before=items.length;
   items.forEach(it=>{
-    const ws=wordSet(it.stem), st=(it.subtopic||"").toLowerCase().trim(),
-          sw=wordSet(it.subtopic), aw=wordSet(it.options[it.answer]||""), sk=it.skill||"";
-    const dup = K.some(k =>
-         jac(ws,k.ws)>0.72                                                         // near-copy stem
-      || (st && k.st===st)                                                          // identical subtopic label
-      || (jac(ws,k.ws)>0.5 && sk && sk===k.sk && (shares(sw,k.sw) || shares(aw,k.aw)))  // similar stem, same skill, shared concept/answer
-      || (sk && sk===k.sk && shares(aw,k.aw) && jac(sw,k.sw)>0.5)                  // same skill + same answer + same subtopic-concept (even if worded differently)
-    );
-    if(!dup){ kept.push(it); K.push({ws,st,sw,aw,sk}); }
+    const f={ ws:wordSet(it.stem), st:(it.subtopic||"").toLowerCase().trim(),
+              sw:wordSet(it.subtopic), aw:wordSet(it.options[it.answer]||""), sk:it.skill||"" };
+    const hitIx = K.findIndex(k => collides(f,k));
+    if(hitIx<0){ kept.push(it); K.push(f); }
+    else if(rank(it) > rank(kept[hitIx])){ kept[hitIx]=it; K[hitIx]=f; }             // clash → the higher-value question wins
   });
   if(kept.length<before) console.log("[build-extra] qbank de-duped "+(before-kept.length)+" repeat(s) → "+kept.length+" distinct");
+  if(ratDropped) console.warn("[build-extra] qbank dropped misaligned rationales on "+ratDropped+" item(s) (short array — kept the question, hid the explanations rather than risk mis-attributing them)");
   return kept;
 }
 /* qbank: fire several small FOCUSED calls in PARALLEL, then merge + validate + dedup.
@@ -478,13 +497,25 @@ async function buildQbankBatched(tmpl, note, model, rowMax, rowTemp){
   const settled = await Promise.all(foci.map((f,i) =>
     genRawItems(base + "\n\nFOR THIS BATCH: " + f, model, per, temp).catch(e => { failed++; console.warn("[build-extra] qbank batch "+(i+1)+"/"+foci.length+" failed: "+((e&&e.message)||e)); return []; })
   ));
-  const raw = [].concat(...settled);
+  // QB-07: interleave the batches round-robin instead of concatenating them. The de-dup keeps the FIRST of any
+  // colliding pair, and FOCI is ordered interpretation → … → complex_reasoning → exam_trap (last). A plain concat
+  // therefore lets the earlier foci win every collision, so on a thin lecture the questions dropped are
+  // disproportionately the complex_reasoning + exam_trap ones — exactly the highest-value levels. Round-robin gives
+  // each focus an equal shot at surviving.
+  const raw = [];
+  { const maxLen = settled.reduce((m,s)=>Math.max(m,s.length),0);
+    for(let r=0;r<maxLen;r++) for(const s of settled) if(r<s.length) raw.push(s[r]); }
   const empty = settled.filter(s=>!s.length).length;
   console.log("[build-extra] qbank "+foci.length+" parallel batches → "+raw.length+" raw items in "+(Date.now()-t0)+"ms"
     + (empty ? " ("+failed+" errored, "+empty+" of "+foci.length+" returned nothing)" : ""));
   if(!raw.length) return null;
   const items = validateQbankItems(raw);
-  return items.length ? items : null;
+  if(!items.length) return null;
+  // QB-06: a build where a batch errored/returned nothing, or that came back thin, is NOT a complete q-bank.
+  // Flag it so the caller can avoid caching it as final (a 3-question set otherwise sticks forever behind the cache).
+  const partial = empty>0 || items.length<6;
+  if(partial) console.warn("[build-extra] qbank PARTIAL — "+items.length+" item(s), "+empty+"/"+foci.length+" batch(es) empty; caller will not cache as complete");
+  return { items, partial };
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
@@ -923,7 +954,10 @@ app.post("/import", async (req,res)=>{
     if(wantBuilds.length){
       const extras={};
       for(const kind of wantBuilds){
-        try{ const items = await buildExtra(kind, level, obj.note_md, model); if(items && items.length) extras[kind]=items; else console.warn("[import] extra '"+kind+"' produced no items (topic "+topicId+")"); }
+        try{ const r = await buildExtra(kind, level, obj.note_md, model);
+          if(r && r.items && r.items.length && !r.partial) extras[kind]=r.items;                                    // QB-06: only cache a COMPLETE build
+          else if(r && r.partial) console.warn("[import] extra '"+kind+"' partial ("+r.items.length+" item(s)) — not caching; first open will rebuild (topic "+topicId+")");
+          else console.warn("[import] extra '"+kind+"' produced no items (topic "+topicId+")"); }
         catch(e){ console.warn("[import] extra '"+kind+"' failed (topic "+topicId+"): "+((e&&e.message)||e)); }   // was swallowed silently
       }
       if(Object.keys(extras).length){ await admin.from("topics").update({ extras }).eq("id",topicId); }   // needs a jsonb "extras" column; ignored if absent
@@ -969,12 +1003,17 @@ app.post("/build-extra", async (req,res)=>{
     const model = EXTRAS_MODEL;
     const _t0 = Date.now();
     console.log("[build-extra] start topic="+topic_id+" kind="+kind+" model="+model+" force="+(!!req.body.force));
-    const items = await buildExtra(kind, level, t.data.note_md, model);
-    console.log("[build-extra] done topic="+topic_id+" kind="+kind+" items="+((items&&items.length)||0)+" in "+(Date.now()-_t0)+"ms");
-    if(!items) return res.status(502).json({ error:"couldn't build this — try again" });
-    const extras = Object.assign({}, t.data.extras||{}, { [kind]: items });
+    const r = await buildExtra(kind, level, t.data.note_md, model);
+    console.log("[build-extra] done topic="+topic_id+" kind="+kind+" items="+((r&&r.items&&r.items.length)||0)+(r&&r.partial?" (PARTIAL)":"")+" in "+(Date.now()-_t0)+"ms");
+    if(!r || !r.items || !r.items.length) return res.status(502).json({ error:"couldn't build this — try again" });
+    if(r.partial){
+      // QB-06: a partial build must not be cached as complete (it would stick behind the cache forever). Hand it back
+      // for this session so the student can use what built, and flag it so the client can offer a one-tap rebuild.
+      return res.json({ ok:true, items:r.items, partial:true });
+    }
+    const extras = Object.assign({}, t.data.extras||{}, { [kind]: r.items });
     await admin.from("topics").update({ extras }).eq("id",topic_id);   // ignored if extras column absent
-    res.json({ ok:true, items });
+    res.json({ ok:true, items:r.items });
   }catch(e){ console.error(e); res.status(500).json({ error:e.message||"server error" }); }
 });
 
