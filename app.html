@@ -503,20 +503,6 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .h2streak.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
 .h2streak b{font-weight:900}
 .h2fl{font-size:16px}
-.cmt{background:#fff;border:1px solid #ece7db;border-radius:16px;padding:15px 16px;cursor:pointer}
-.cmt-hd{font-size:13px;font-weight:800;color:#3a3a3a;margin-bottom:12px}
-.cmt-row{display:flex;align-items:baseline;justify-content:space-between}
-.cmt-l{font-size:13.5px;color:#333}
-.cmt-row b{font-weight:900;font-size:13.5px;color:#111}
-.cmt-sub{font-size:11.5px;color:#8a857a;margin:2px 0 6px}
-.cmt-bar{position:relative;height:8px;background:#f1eee6;border-radius:20px;overflow:hidden}
-.cmt-bar>div{height:100%;border-radius:20px;transition:width .5s ease}
-.cmt-mark{position:absolute;left:65%;top:0;bottom:0;width:1px;background:#c9c2b2;z-index:1}
-.cmt-safe{margin-top:13px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;background:#fff6e6;border:1px solid #f3d79a;color:#8a5a12;border-radius:20px;padding:8px 12px}
-.cmt-safe.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
-.cmt-due{margin-top:11px;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#4a3fb0;background:#efecff;border:1px solid #d9d2f5;border-radius:12px;padding:9px 11px;cursor:pointer}
-.cmt-due b{font-weight:900}
-.cmt-due-go{margin-left:auto;font-weight:800;color:#5b3df5}
 .h2frz{margin-left:auto;font-weight:900;font-size:12.5px;color:#3a6df0;background:#e8f0ff;border-radius:20px;padding:3px 10px;white-space:nowrap}
 .h2weak{display:flex;align-items:center;gap:9px;background:#fff0ec;border:1px solid #f6c3b4;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#a83f28;cursor:pointer}
 .h2wtx{flex:1;min-width:0}
@@ -998,21 +984,14 @@ const COLOR = {'pediatrics':'var(--ped)','og':'var(--og)','community-medicine':'
 window.MB_CARDS_BY_DAY = function(){ try{ return DATA.log || {}; }catch(e){ return {}; } };
 window.MB_STREAK = function(){ try{ return curStreak(); }catch(e){ return 0; } };
 /* study time lives inside DATA so it syncs with the account via profile_state (same path as cards) */
-window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) return true; var k=dstr(); DATA.study[k]=(DATA.study[k]||0)+sec; return persist(); }catch(e){ return false; } };   // TIM-05: report success so the timer can retry on failure
+window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) return; var k=dstr(); DATA.study[k]=(DATA.study[k]||0)+sec; persist(); }catch(e){} };
 window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ return {}; } };
 /* provider for the docked Ask / Source / Note panel (study-dock.js) */
 window.MB_DOCK = {
-  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0];   // DCK-02: Mega/exam/gap are state overlays on their own routes; the dock's precondition is "content on screen"
-    if((typeof QB!=='undefined'&&QB)||(typeof GAPLOOP!=='undefined'&&GAPLOOP)) return true;
-    return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge','mega','exam','solve'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
+  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0]; return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
   ctx: function(){
     var t=null, card=null, cardId=null;
-    // DCK-02: prefer the INNERMOST live session (gap loop → Mega Q-bank → flashcards), so the dock never binds to a stale S.
-    try{
-      if(typeof GAPLOOP!=='undefined' && GAPLOOP){ var gm=GAPLOOP.mt||null; var gt=topById(GAPLOOP.topicId||(gm&&gm.topicId)); if(gt){ t=gt; card=gm; cardId=(gm&&gm.id)||''; } }
-      if(!t && typeof QB!=='undefined' && QB && QB.items && QB.items.length){ var q=QB.items[QB.i]; var qt=topById((q&&q.topicId)||QB.topicId); if(qt){ t=qt; card=q; cardId=(q&&(q.id||q.key))||''; } }
-      if(!t && typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } }
-    }catch(e){}
+    try{ if(typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } } }catch(e){}
     if(!t){ var p=(location.hash.slice(2)||'').split('/'); if(p[1] && (p[0]==='topic'||p[0]==='study'||p[0]==='cram')){ try{ t=topById(p[1]); }catch(e){} } }
     if(!t) return null;
     return { topicId:t.id, topicName:t.name||'', subject:(t.subject&&t.subject.name)||'', pdf:t.pdf||'',
@@ -1143,12 +1122,7 @@ const SKEY='medbank_v1';
 const APP_VERSION='2026.08.21s';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
-const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
-/* New-card half of the streak is ADAPTIVE, not a hard-coded number. Baseline minimum new cards
-   PER ACTIVE COURSE by how many courses are active (keeps the daily load sane as courses stack):
-   1–2 courses → 10/course · 3–5 → 7/course · 6+ → 5/course. Students may RAISE their per-course
-   minimum in Settings but never lower it below this baseline. dailyNewTarget = activeCourses × min. */
-function minNewPerCourse(n){ return n<=2 ? 10 : (n<=5 ? 7 : 5); }
+const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
 
 let DATA = (()=>{
   let d={};
@@ -1184,16 +1158,9 @@ let DATA = (()=>{
   if(!d.flags.budget15){ if(d.daily.budget===0) d.daily.budget=15; d.flags.budget15=1; }   // Session Engine: adopt a 15-min default budget once (still user-changeable)
   return d;
 })();
-var _persistWarned=false;
-function persist(){ var ok=true;
-  try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }
-  catch(e){ ok=false;   // TIM-05: surface a storage-full failure ONCE instead of silently losing study/progress
-    if(!_persistWarned){ _persistWarned=true; try{ mbToast("Your device is out of storage — recent progress may not be saved. Free some space, then reopen MedBank."); }catch(_){} }
-  }
-  if(ok) _persistWarned=false;
+function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}
   try{ if(typeof scheduleBackup==='function') scheduleBackup(); }catch(e){}
-  try{ if(window.MB_SYNC) MB_SYNC.markDirty(); }catch(e){}
-  return ok; }
+  try{ if(window.MB_SYNC) MB_SYNC.markDirty(); }catch(e){} }
 /* non-blocking toast — replaces blocking alert() for errors so a failure never freezes the page */
 function mbToast(msg){ try{ var n=document.createElement('div'); n.className='mbtoast'; n.textContent=String(msg||'');
   document.body.appendChild(n); setTimeout(function(){ n.style.opacity='0'; setTimeout(function(){ if(n.parentNode)n.remove(); },300); },3600);
@@ -1233,7 +1200,7 @@ function reviewIntervalText(id){ const s=DATA.cards[id]; if(!s) return ''; retur
 function markActive(){
   const d=dstr();
   if(!DATA.log[d]) DATA.log[d]={cards:0,correct:0};
-  maybeBumpStreak();   // STK-01: the streak advances ONLY when the day's target is met — never on a single card flip
+  bumpStreak(d);
   try{ if(typeof swPing==='function') swPing('studied',{date:d}); }catch(e){}
 }
 function freezeAvail(){ return (DATA.streak.freezes||0)>0; }        // earned freezes in the bank
@@ -1287,70 +1254,11 @@ function logDaily(isNew, subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct
   DATA.log[d]=L; maybeBumpStreak(); }
 function newDoneToday(){ const nw=todayLog().new||{}; return Object.values(nw).reduce((a,b)=>a+b,0); }
 function reviewTotals(){ const revDone=todayLog().rev||0, revDue=buildQueue().due.length; return {done:revDone, total:revDone+revDue}; }
-/* ---- adaptive streak policy: daily new learning + review maintenance ---- */
-/* Active course = a course in the student's STUDY PLAN (DATA.plan — the weekly top-5/course that feeds new cards).
-   This is set BEFORE studying, so the day's target can't be shrunk by simply not opening a course today. Deriving it
-   from today's activity would be a loophole (skip a course → smaller denominator → easier streak). Day-one only, when
-   no plan exists yet, we fall back to started courses — a fallback that can only RAISE the count, never dodge it. */
-function activeCourseIds(){
-  const set={}; (DATA.plan||[]).forEach(id=>{ const t=topById(id); if(t&&t.ready){ const sb=subjById(t.subject.id); if(sb&&sb.readyCount>0) set[t.subject.id]=1; } });
-  let ids=Object.keys(set);
-  if(!ids.length) ids=DB.subjects.filter(sb=> sb.readyCount>0 && allTopics.some(t=>t.ready && t.subject.id===sb.id && status(t.id)!=='notstarted')).map(sb=>sb.id);
-  return ids; }
-function activeCourseCount(){ return activeCourseIds().length; }
-/* the student's per-course new-card minimum: their chosen value, floored at the Medbank baseline for their course count */
-function streakPerCourseMin(){ const n=Math.max(1,activeCourseCount()); const base=minNewPerCourse(n);
-  const chosen=(DATA.daily.newPerCourse!=null)?DATA.daily.newPerCourse:base; return Math.max(base, chosen); }
-/* the day's REQUIRED new-card count = active courses × per-course minimum */
-function dailyNewTarget(){ return Math.max(1,activeCourseCount()) * streakPerCourseMin(); }
-/* unseen, unflagged new cards still available from the active plan (top 5 topics/course) — used only to detect an emptied deck */
-function planUnseenCount(){ let n=0;
-  DB.subjects.forEach(sb=>{ let per=0;
-    (DATA.plan||[]).forEach(id=>{ if(per>=5) return; const t=topById(id);
-      if(!t||!t.ready||t.subject.id!==sb.id) return;
-      const unseen=(t.recall||[]).filter(c=>{ const cd=cid(t.id,'recall',c); return !DATA.cards[cd] && !isFlagged(cd); });
-      if(unseen.length){ per++; n+=unseen.length; } }); });
-  return n; }
-/* how many new cards the student could still do today = done so far + what's left in the deck */
-function newCardsAvailableToday(){ return newDoneToday()+planUnseenCount(); }
-/* effective new-card requirement — the full target, unless the deck is genuinely exhausted (never lowered just for heavy reviews) */
-function newTarget(){ return Math.min(dailyNewTarget(), newCardsAvailableToday()); }
-/* SINGLE SOURCE OF TRUTH for the streak — the gate AND every UI read the same object, so no screen can show a
-   target the gate doesn't enforce. `fullTarget` is the committed goal (activeCourses×perCourse); `newTarget` is
-   what's achievable today (lowered only if the deck is genuinely short); `capped` flags that difference. */
-function streakStatus(){
-  const nd=newDoneToday(), nt=newTarget(), full=dailyNewTarget();
-  const rt=reviewTotals(); const revPct = rt.total ? Math.round(rt.done/rt.total*100) : 100;
-  const revOk = rt.total===0 ? true : (rt.done/rt.total)>=STREAK_REV;
-  const newOk = nt<=0 || nd>=nt;
-  return { newDone:nd, newTarget:nt, fullTarget:full, capped:nt<full,
-           courses:Math.max(1,activeCourseCount()), perCourse:streakPerCourseMin(),
-           revDone:rt.done, revTotal:rt.total, revPct, newOk, revOk, safe:newOk&&revOk }; }
-function streakMet(){ return streakStatus().safe; }    // the day's threshold to keep the streak
+function streakMet(){                                   // the day's threshold to keep the streak
+  const rt=reviewTotals(); const revOk = rt.total===0 ? true : (rt.done/rt.total)>=STREAK_REV;
+  return newDoneToday()>=STREAK_NEW && revOk;
+}
 function maybeBumpStreak(){ if(streakMet()) bumpStreak(dstr()); }   // bumpStreak is idempotent per day
-/* Today's Commitment card — the ONE renderer for the streak breakdown, used on Home, Today (and mirrored in Settings) */
-function commitmentCard(){
-  const s=streakStatus();
-  const newVal = s.newDone>=s.newTarget ? '✓ '+s.newDone : s.newDone+' / '+s.newTarget;
-  const calc = s.capped ? `${s.newTarget} available — only new cards left in your deck`
-                        : `${s.perCourse} per course × ${s.courses} course${s.courses===1?'':'s'}`;
-  const revVal = s.revTotal ? (s.revDone>=Math.ceil(s.revTotal*STREAK_REV) ? '✓ '+s.revDone : s.revDone+' / '+s.revTotal) : 'none due';
-  const nBar = s.newTarget>0 ? Math.min(100,Math.round(s.newDone/s.newTarget*100)) : 100;
-  const rBar = s.revTotal ? Math.min(100,Math.round(s.revDone/s.revTotal*100)) : 100;
-  const need = s.safe ? '' : (!s.newOk && !s.revOk ? 'new learning &amp; reviews' : (!s.newOk ? 'new learning' : 'reviews'));
-  const foot = s.safe ? `<div class="cmt-safe ok">🔥 Streak protected</div>`
-                      : `<div class="cmt-safe">🔥 Finish your ${need} to protect your streak</div>`;
-  return `<div class="cmt" onclick="go('today')">
-    <div class="cmt-hd">Today's commitment</div>
-    <div class="cmt-row"><span class="cmt-l">🆕 New learning</span><b>${newVal}</b></div>
-    <div class="cmt-sub">${calc}</div>
-    <div class="cmt-bar"><div style="width:${nBar}%;background:var(--recall)"></div></div>
-    <div class="cmt-row" style="margin-top:11px"><span class="cmt-l">🔄 Reviews</span><b>${revVal}</b></div>
-    <div class="cmt-sub">${s.revTotal?'65% of due reviews required':'nothing due today'}</div>
-    <div class="cmt-bar">${s.revTotal?`<i class="cmt-mark"></i>`:''}<div style="width:${rBar}%;background:#e0a53a"></div></div>
-    ${(()=>{ const dn=(typeof qbDueCount==='function')?qbDueCount():0; return dn?`<div class="cmt-due" onclick="event.stopPropagation();qbStartDue()">🧠 <b>${dn}</b> Q-bank concept${dn===1?'':'s'} due for retest<span class="cmt-due-go">Start ›</span></div>`:''; })()}
-    ${foot}
-  </div>`; }
 
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
@@ -1386,7 +1294,7 @@ function recordAnswerMs(id,type,ms){ ms=Math.max(1500,Math.min(120000,ms|0));
 /* ===== Adaptive new-card cap — new cards are a privilege earned by keeping reviews under control ===== */
 function avgReviewSec(){ return Math.max(6, Math.round(typeMedian('review')/1000)); }        // measured seconds per review (floor 6s)
 function dueReviewCount(){ const today=dayNum(); let n=0;
-  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s && s.box>=0 && s.due<=today && !isFlagged(cid(t.id,'recall',c))) n++; })); return n; }   // SL-02/PRG-03: phantom flagged reviews must not zero the daily new-card cap
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s && s.box>=0 && s.due<=today) n++; })); return n; }
 function reviewLoadRatio(){ const budget=DATA.daily.budget||15; const capacity=Math.max(1,(budget*60)/avgReviewSec()); return dueReviewCount()/capacity; }
 function examSoon(days){ return DB.subjects.some(sb=>{ const d=examDays(sb.id); return d!=null && d>=0 && d<=(days||14); }); }
 function effectiveNewCap(){ const d=DATA.daily; const manual=(d.newPerDay!=null)?d.newPerDay:20; const adaptive=(d.newCap!=null)?d.newCap:12; return Math.max(0,Math.min(manual, adaptive)); }
@@ -1516,13 +1424,8 @@ function clinCount(){ return clinItems().length; }
 function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
 
 /* ---- shared id → card resolver (powers leeches, mistakes, notes) ---- */
-let _cardIx=null, _cardIxN=-1, _cardIxReady=false;
-function cardIndex(){
-  // LCH-01: rebuild when the topic set changes (content-loader hydrates AFTER the first render),
-  // so a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the session.
-  const ready = !!window.__MB_CONTENT_READY;
-  if(_cardIx && _cardIxN===allTopics.length && _cardIxReady===ready) return _cardIx;
-  _cardIx={}; _cardIxN=allTopics.length; _cardIxReady=ready;
+let _cardIx=null;
+function cardIndex(){ if(_cardIx) return _cardIx; _cardIx={};
   allTopics.forEach(t=>{ if(!t.ready) return;
     (t.primer||[]).forEach(c=>{ _cardIx[cid(t.id,'primer',c)]={t,c,deck:'primer'}; });
     (t.recall||[]).forEach(c=>{ _cardIx[cid(t.id,'recall',c)]={t,c,deck:'recall'}; }); });
@@ -1694,7 +1597,7 @@ function closeNoteFull(){ const o=document.getElementById('noteov'); if(o) o.rem
 const LEECH_LAPSES=4;
 function leechItems(){ const out=[];
   for(const id in DATA.cards){ const st=DATA.cards[id];
-    if(st && (st.lapses||0)>=LEECH_LAPSES && !isFlagged(id)){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }   // LCH-02: a reported-wrong card is never a leech drill
+    if(st && (st.lapses||0)>=LEECH_LAPSES){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }
   out.sort((a,b)=>b.lapses-a.lapses); return out; }
 function leechCount(){ return leechItems().length; }
 
@@ -1703,8 +1606,8 @@ function logMiss(id){ DATA.missLog[id]=dstr(); }
 function missItems(days){ const cut=dayNum()-(days-1), out=[];
   for(const id in (DATA.missLog||{})){
     const dn=dayNum(new Date(DATA.missLog[id]+'T00:00'));
-    if(dn>=cut && !isFlagged(id)){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }   // MIS-09: hide reported-wrong cards
-  out.sort((a,b)=> a.missOn<b.missOn?1:(a.missOn>b.missOn?-1:0)); return out; }   // MIS-08: stable order on same-day rows
+    if(dn>=cut){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }
+  out.sort((a,b)=> a.missOn<b.missOn?1:-1); return out; }
 function missCountToday(){ return missItems(1).length; }
 function missCountWeek(){ return missItems(7).length; }
 
@@ -1752,11 +1655,7 @@ function planNew(){
         out.push({t:q.t,c,id:cid(q.t.id,'recall',c),deck:'recall',isNew:true}); added++; any=true; } }
       if(!any) break; }
   });
-  // Supply must always reach the streak floor (so the daily new-card requirement is never unmeetable when unseen
-  // cards exist); on lighter days the adaptive cap can offer MORE than the floor as a recommendation. PRG-01.
-  const floorRemain=Math.max(0, dailyNewTarget()-newDoneToday());
-  const adaptRemain=Math.max(0, effectiveNewCap()-newDoneToday());
-  const remain=Math.max(floorRemain, adaptRemain);
+  const remain=Math.max(0, effectiveNewCap()-newDoneToday());   // adaptive daily new-card cap (upper bound), minus what's already done today
   return out.slice(0, remain);
 }
 function planCount(){ return (DATA.plan||[]).filter(id=>{const t=topById(id);return t&&t.ready;}).length; }
@@ -1897,7 +1796,7 @@ function reviewHealth(){
   const today=dayNum(); let dueNow=0, overdue=0; const waiting=new Set();
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const s=DATA.cards[cid(t.id,'recall',c)];
-    if(s&&s.due<=today && !isFlagged(cid(t.id,'recall',c))){ dueNow++; waiting.add(t.id); if(s.due<today) overdue++; }   // SL-02: the tile must match the servable pool
+    if(s&&s.due<=today){ dueNow++; waiting.add(t.id); if(s.due<today) overdue++; }
   }));
   const goal=DATA.daily.goal||40;
   let pct = overdue===0 ? 100 : Math.max(20, Math.round(100 - overdue/(2*goal)*100));
@@ -1921,7 +1820,7 @@ function topicStage(t){
 function dueCount(){
   const today=dayNum(); let n=0;
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
-    const st=DATA.cards[cid(t.id,'recall',c)]; if(st && st.due<=today && !isFlagged(cid(t.id,'recall',c))) n++;   // SL-02: nav badge / Home / nudge / cleared-check must not count hidden cards
+    const st=DATA.cards[cid(t.id,'recall',c)]; if(st && st.due<=today) n++;
   }));
   return n;
 }
@@ -1950,12 +1849,12 @@ function lecProgress(l){
 function isStar(id){ return !!DATA.starred[id]; }
 function toggleStar(id){ if(DATA.starred[id]) delete DATA.starred[id]; else DATA.starred[id]=1; persist();
   try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} render(); }
-function starCount(){ return starItems().length; }   // HRD-06: match the resolved Hard-cards pool (raw Object.keys counted stars for topics/levels no longer loaded)
+function starCount(){ return Object.keys(DATA.starred).length; }
 function starItems(){
   const out=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
-    ['recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{   // HRD-10: only recall cards are rateable — a starred primer card was un-ratable dead weight that inflated the summary and could never leave the pool
-      const id=cid(t.id,dk,c); if(DATA.starred[id] && !isFlagged(id)) out.push({t,c,id,deck:dk});   // HRD-07: reported-wrong cards leave the Hard pool too
+    ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
+      const id=cid(t.id,dk,c); if(DATA.starred[id]) out.push({t,c,id,deck:dk});
     }));
   });
   return out;
@@ -2011,7 +1910,7 @@ function renderNav(){
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
-  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():alert('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
+  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openRecorder&&MB_openRecorder()}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
@@ -2185,7 +2084,10 @@ function pageHome(){
         <b style="color:#3a6df0">${freezeCount()}</b><span class="h2stat-s">auto-saves a day</span>
       </div>
     </div>
-    ${commitmentCard()}
+    <div class="h2streak ${met?'ok':''}" onclick="go('today')">
+      <span class="h2fl">🔥</span><span><b>${st}-day streak</b> ${met?'— safe today, nice work.':'— study today to keep it alive!'}</span>
+      ${freezeCount()>0?`<span class="h2frz" title="${freezeCount()} streak freeze${freezeCount()===1?'':'s'} — auto-used if you miss a day">🛡 ${freezeCount()}</span>`:''}
+    </div>
     ${(ws.weak&&ws.weakN>0)?`<div class="h2weak" onclick="reviewWeak('${lecArg}')">
       <span class="h2tg">🎯</span><span class="h2wtx">Weakest area: <b>${esc(ws.weak)}</b> — ${ws.weakN} card${ws.weakN===1?'':'s'} in relearning</span><span class="h2fix">Fix these →</span>
     </div>`:''}
@@ -2258,10 +2160,10 @@ function pageHomeClassic(){
           const revDone=tl.rev||0, revDue=buildQueue().due.length, revTot=revDone+revDue, rp=revTot?Math.round(revDone/revTot*100):100;
           const ar=`<div class="cbar"><div class="cbtop"><span>🧠 Active recall (reviews)</span><b>${revDone} / ${revTot}</b></div>
               <div class="dbar"><div style="width:${Math.min(100,rp)}%;background:var(--recall)"></div></div></div>`;
-          const nd=newDoneToday(), nt=newTarget(), met=streakMet();
+          const nd=newDoneToday(), met=streakMet();
           const status=met
             ? `<div class="strkstat ok">✅ Day’s target met — streak safe</div>`
-            : `<div class="strkstat">🔥 Keep streak: new ${nd>=nt?'✓':nd+'/'+nt} · reviews ${rp>=65?'✓':rp+'% (need 65%)'}</div>`;
+            : `<div class="strkstat">🔥 Keep streak: new ${nd>=STREAK_NEW?'✓':nd+'/'+STREAK_NEW} · reviews ${rp>=65?'✓':rp+'% (need 65%)'}</div>`;
           return (bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`)+ar+status;
         })()}
       </div>
@@ -2428,7 +2330,6 @@ async function solveNow(){
   const text=(document.getElementById('solveText').value||'').trim();
   const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
   if(!f && !text){ msg.textContent='Add a photo or type the question first.'; return; }
-  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;   // PW-01: gate before the photo upload, not after
   btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
@@ -2681,6 +2582,24 @@ function mb3dScenes(t){
   return [];
 }
 function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
+/* 3D events ride the EXISTING pilot rail: smartLog writes into DATA._events, which sync.js already
+ * syncs to profile_state for every signed-in student. No new transport, no second dashboard. */
+(function mb3dTelemetry(){
+  function wire(){
+    if(!window.MB3D || !MB3D.sink) return false;
+    MB3D.sink(function(name, d){
+      try{
+        if(typeof smartLog!=='function') return;
+        var ev={t:'mb3d_'+name};
+        Object.keys(d||{}).forEach(function(k){ ev[k]=d[k]; });
+        try{ ev.topic=(window.currentTopicId?currentTopicId():'')||''; }catch(e){}
+        smartLog(ev);
+      }catch(e){}
+    });
+    return true;
+  }
+  if(!wire()) document.addEventListener('DOMContentLoaded',wire);
+})();
 /* In-note trigger. Not "this note mentions anatomy" but "this sentence describes something a flat page
  * can't carry" — an origin, a course, a relationship in space. How MANY chips a note gets is decided by
  * MB3D.planNote() from the note's own length, the spacing between opportunities and how many structures
@@ -2714,12 +2633,18 @@ function mb3dScanNote(){
     chip.title='See '+hit+' in 3D — '+op.why+(op.related?(' (with '+op.related+' related structure'+(op.related===1?'':'s')+')'):'');
     chip.style.cssText='margin-left:5px;font:inherit;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;vertical-align:middle';
     chip.onclick=(function(op,label){ return function(e){ e.stopPropagation();
-      try{ MB3D.recordEngagement('opened'); MB3D.open(op.scene,{part:op.key,title:label,subtitle:'from your note'}); }catch(err){} }; })(op,hit);
+      try{ MB3D.recordEngagement('opened'); MB3D.open(op.scene,{part:op.key,title:label,subtitle:'from your note',via:'note',why:op.why}); }catch(err){} }; })(op,hit);
     frag.appendChild(mark); frag.appendChild(chip);
     if(after) frag.appendChild(document.createTextNode(after));
     node.parentNode.replaceChild(frag,node);
   });
-  if(plan.length){ try{ MB3D.recordEngagement('shown', plan.length); }catch(e){} }
+  if(plan.length){
+    try{ MB3D.recordEngagement('shown', plan.length); }catch(e){}
+    // log the OFFER, not just the tap — an unopened chip is data about the trigger, not silence
+    try{ if(typeof smartLog==='function') smartLog({t:'mb3d_shown', n:plan.length,
+      scenes:plan.map(function(o){return o.scene;}), reasons:plan.map(function(o){return o.why;}),
+      scores:plan.map(function(o){return o.score;}), topic:(window.currentTopicId?currentTopicId():'')}); }catch(e){}
+  }
 }
 var _MB3D_NK=0;
 function nodeKey(n){ if(!n.__mb3dk) n.__mb3dk=++_MB3D_NK; return n.__mb3dk; }
@@ -2791,7 +2716,6 @@ function genPrompt(topicId,kind,label){
 }
 async function buildExtraNow(topicId,kind,force,_retry){
   const t=topById(topicId); if(!t) return null;
-  if(!_retry && window.MB_PAYWALL && !MB_PAYWALL.guard('Building this')) return null;   // PW-01: gate the build (fails open until entitlement known; not re-run on the 502 retry)
   const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
   let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
@@ -2804,9 +2728,6 @@ async function buildExtraNow(topicId,kind,force,_retry){
   catch(e){ throw new Error(r.status===413?'That note is too large to build from.':'The build server is busy right now — try again in a minute.'); }
   if(!r.ok||!out.items) throw new Error(out.reason||out.error||'Could not build this.');
   t.extras=t.extras||{}; t.extras[kind]=out.items;   // cache locally → instant next time (server also saved it)
-  // QB-06: a partial build isn't persisted server-side; keep a session-only flag so the page can offer a rebuild
-  // for the full set. Cleared on a complete build. (On next app load the server has no cache → a fresh build runs.)
-  if(kind==='qbank'){ if(out.partial) t._qbPartial=out.items.length; else delete t._qbPartial; }
   return out.items;
 }
 async function genExtra(topicId,kind,btn){
@@ -2877,10 +2798,7 @@ function renderQbank(t){
   const acc=qbData(t.id);
   const head=`<div class="btnrow" style="justify-content:space-between;align-items:center;margin-bottom:12px">
     <div style="font-size:13px;color:var(--dim)">${acc.seen?('Your accuracy: <b style="color:var(--text)">'+Math.round(acc.correct/acc.seen*100)+'%</b> · '+acc.seen+' answered'+qbWeakest(acc)):items.length+' questions ready'}</div>
-    <button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`
-    +(t._qbPartial?`<div class="card" style="cursor:default;background:#fff6e6;border-color:#f3d79a;color:#8a5a12;font-size:12.5px;padding:10px 12px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
-      <span>⚠️ Only ${t._qbPartial} question${t._qbPartial===1?'':'s'} built this time (the server was busy). Rebuild for the full set.</span>
-      <button class="btn" style="margin-left:auto;font-size:12px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`:'');
+    <button class="btn" style="font-size:12.5px" onclick="rebuildExtra('${t.id}','qbank',this)">↻ Rebuild</button></div>`;
   if(QB && (QB.topicId===t.id || QB.mistakes)){          // an active session (incl. cross-topic mistakes practice)
     return head+(QB.done?qbDoneHtml():qbQuestionHtml());
   }
@@ -2922,8 +2840,6 @@ function qbCfgRow(label, opts, cur, kind){ kind=kind||'skill';
   }).join('')+'</div></div>'; }
 function qbSetCfg(kind,val){ _qbCfg[kind]=(kind==='count'?parseInt(val,10):val); render(); }
 function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qbank)||[]; if(!all.length)return;
-  // TOP-10: don't silently discard a live Mega / mistakes / drill session (answered questions + grading) with no warning.
-  if(typeof QB!=='undefined' && QB && !QB.done && QB.results && QB.results.length && !confirm('You have a question session in progress — start a new one and discard it?')) return;
   var cfg=_qbCfg||{};
   var items=all.filter(function(q){ return (!cfg.skill||cfg.skill==='all'||(q.skill||'')===cfg.skill) && (!cfg.level||cfg.level==='all'||qbCogOf(q)===cfg.level); });
   if(!items.length){ alert('No questions match that filter — try All.'); return; }
@@ -2943,7 +2859,7 @@ function qbEndEarly(){ if(!QB || QB.done) return;
   if(!confirm('End now and grade the '+answered+' question'+(answered>1?'s':'')+' you’ve answered'+(remaining>0?(' (skipping the remaining '+remaining+')'):'')+'?')) return;
   QB.endedEarly=true; qbFinalize(); QB.done=true; render();
 }
-function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); s._events=(s._events||[]).filter(function(e){return e.topicId!==id;});   /* SET-01: also drop this topic's telemetry events (was never cleared). NOTE: sync's union merge can still re-adopt cloud copies — an authoritative reset (tombstone/rev-bump) needs a product decision. */ persist(); render(); }
+function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); persist(); render(); }
 function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){ var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
 function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++;
   var ms = QB.qStart ? (Date.now()-QB.qStart) : 0;
@@ -2973,70 +2889,6 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
     planned:QB.items.length, completed:(QB.results||[]).length, correct:QB.correct}); }
   try{ persist(); }catch(e){}
 }
-/* ==============================================================
- * V1.5 — Q-bank spaced-retest scheduler (the "memory loop" over the pool)
- * Reads the FROZEN engine's signals (outcome + confidence); never modifies it.
- * A concept (keyed by question hash) enters the schedule on a MISS or a FRAGILE
- * (correct-but-unsure) answer, rides a performance-aware 1→3→7→14 ladder, and
- * GRADUATES off once proven cold-and-confident. Decisions locked 2026-08-24
- * (V1.5-INTELLIGENCE-MAP.md §5). Confidence scale: 0 guess · 1 unsure · 2 confident · 3 very.
- *   wrong+confident → misconception, priority 3 (strongest)
- *   wrong+unsure/unknown → priority 2
- *   correct+unsure → fragile, priority 1 (holds its step)
- *   correct+confident/unknown → secure: never newly scheduled; advances a schedule if one exists
- * ============================================================== */
-var QB_LADDER=[1,3,7,14];
-function qbSched(){ var s=qbStore(); return s._sched=s._sched||{}; }        // qh -> { qh,n,streak,interval,dueAt,lastOk,conf,miscon,prio,lastSeen,firstAt,_day }
-function qbLadderNext(iv){ for(var i=0;i<QB_LADDER.length;i++){ if(QB_LADDER[i]>iv) return QB_LADDER[i]; } return 99; }   // 99 = past 14 → graduate
-/* apply ONE finalized attempt to the schedule. ok=bool; conf=0..3 or null (modes without a confidence prompt). */
-function qbSchedApply(qh, ok, conf){ try{
-  if(!qh) return; var sc=qbSched(), e=sc[qh], today=dayNum();
-  var known=(conf!=null && !isNaN(conf)), hi=known&&conf>=2, lo=known&&conf<=1;
-  var action, prio=0, miscon=false;
-  if(!ok){ action='reset'; prio=hi?3:2; miscon=hi; }                        // wrong (confident-wrong = misconception)
-  else if(lo){ action='hold'; prio=1; }                                    // correct-but-unsure = fragile
-  else { action = e ? 'advance' : 'none'; }                                // secure correct: advance an existing schedule, never create one
-  if(action==='none') return;
-  if(!e){ e={ qh:qh, n:0, streak:0, interval:0, dueAt:today, firstAt:today }; }
-  if(e._day!==today){                                                      // move the ladder at most once per attempt-day
-    e.n=(e.n||0)+1;
-    if(action==='reset'){ e.streak=0; e.interval=1; }                      // failure → back to +1, escalate (does NOT continue the ladder)
-    else if(action==='hold'){ if(!e.interval) e.interval=1; }             // fragile holds its current step
-    else if(action==='advance'){ e.streak=(e.streak||0)+1; e.interval=qbLadderNext(e.interval);
-      if(e.interval===99){ delete sc[qh]; persist(); return; } }           // proven past 14 → graduate off the schedule
-    e.dueAt=today+e.interval; e._day=today;
-  }
-  e.lastOk=ok; if(known)e.conf=conf; e.miscon=miscon; e.prio=prio; e.lastSeen=today;
-  sc[qh]=e; persist();
-}catch(err){} }
-/* build a QB item from a stored _qmeta record (carries _qh + _topicId so qbRecord/qbNext work) */
-function qbItemFromMeta(qh,m){ if(!m) return null; return { _qh:qh, _topicId:m.topicId||'*', stem:m.stem, lead_in:m.lead_in||'',
-  options:m.options, answer:m.answer, rationales:m.rationales||[], objective:m.objective||m.teaching||'', teaching:m.teaching||m.objective||'',
-  trap:m.trap_explanation||m.trap||'', trap_type:m.trap_type||'', trap_explanation:m.trap_explanation||m.trap||'',
-  tag:m.tag||m.subtopic||'General', subtopic:m.subtopic||m.tag||'', system:m.system||'', cognitive_level:m.cognitive_level||qbCogOf(m),
-  difficulty:m.difficulty||'', skill:m.skill||'', src:m.src||'' }; }
-/* concepts due for retest today, highest priority (confident-wrong) first, then most overdue */
-function qbDueList(){ var sc=qbSched(), meta=qbStore()._qmeta||{}, today=dayNum(), out=[];
-  Object.keys(sc).forEach(function(qh){ var e=sc[qh]; if(!e || e.dueAt>today || !meta[qh]) return; out.push(e); });
-  out.sort(function(a,b){ return (b.prio||0)-(a.prio||0) || (a.dueAt||0)-(b.dueAt||0); });
-  return out; }
-function qbDueCount(){ return qbDueList().length; }
-function qbScheduledCount(){ return Object.keys(qbSched()).length; }
-/* start a spaced-retest session from the due concepts (cold, tutor, renders on the Mega page) */
-function qbStartDue(){ var due=qbDueList(); if(!due.length){ mbToast('No Q-bank retests are due right now — nice.'); return; }
-  var meta=qbStore()._qmeta||{}, items=due.map(function(e){ return qbItemFromMeta(e.qh, meta[e.qh]); }).filter(Boolean).slice(0,20);
-  if(!items.length){ mbToast('Those concepts are no longer available to retest.'); return; }
-  QB={ topicId:'*', mode:'tutor', items:qbShuffle(items), i:0, picked:null, answered:false, correct:0, results:[], done:false,
-    startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'due_retest', mistakes:true,
-    smartWhy:'Spaced retest — concepts you missed or were unsure about, brought back on schedule.',
-    smartReasons:['Cold retest to prove these stuck — right-and-confident advances them, a miss brings them back sooner.'], smartFocus:[] };
-  if(typeof smartLog==='function') smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'due_retest', dimension:'schedule', reason:QB.smartWhy||'', mode:QB.mode, planned:items.length});
-  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); go('mega'); }
-/* ---- Phase 0 coverage (groundwork for readiness; not surfaced prominently yet) ---- */
-function qbPoolSize(scope){ var n=0; (allTopics||[]).forEach(function(t){ if(!t||!t.ready) return; if(scope&&scope!=='*'&&t.id!==scope) return;
-  var qs=(t.extras&&t.extras.qbank)||[]; n+=qs.length; }); return n; }
-function qbCoverage(scope){ var agg=qbAgg(scope||'*'), size=qbPoolSize(scope); return { seen:agg.qcount, total:size, pct: size?Math.round(agg.qcount/size*100):0 }; }
-
 function qbPick(j){ if(QB.answered||QB._lock) return; QB.picked=j;
   /* test mode never sets QB.answered (that would reveal the key), so without _lock a second tap inside the
      180ms advance window records a SECOND attempt for the same question and queues a second qbNext —
@@ -3046,11 +2898,6 @@ function qbPick(j){ if(QB.answered||QB._lock) return; QB.picked=j;
   QB.answered=true; qbRecord(j); render();                                            // tutor mode: reveal rationale
 }
 function qbNext(){ QB._confDone=false;
-  // V1.5: finalize the just-answered question into the spaced-retest schedule (once per question, all modes;
-  // confidence, if the mode captured it, is already on the result by now).
-  try{ var _r=QB.results[QB.results.length-1], _it=QB.items[QB.i];
-    if(_r && _it){ var _qh=_it._qh || qbHash((_it.stem||'')+'|'+((_it.options||[]).join('|')));
-      qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf)); } }catch(e){}
   if(QB.adaptive){
     var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
     if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }
@@ -3592,8 +3439,39 @@ function pagePilot(){ var v=smartValidation();
     +'<h3 style="margin:22px 0 6px">🔴 Disagreements — what MedBank thought vs what was rejected</h3>'
     +'<p class="sub" style="margin-top:0">The most valuable dataset: where the engine and the student disagree.</p>'
     +'<table class="pilottbl"><tr><th>Diagnosis</th><th>Dimension</th><th>Area rejected</th></tr>'+rej+'</table>'
+    +mb3dPilot()
     +'<div class="btnrow" style="margin-top:18px"><button class="btn" onclick="pilotExport()">⬇ Copy pilot data (JSON)</button></div>'
     +'</div>'; }
+/* 3D readout — answers "do they use it", from the same _events log. Dev-only, same page as the Q-bank one. */
+function mb3dPilot(){ try{
+  var ev=(qbStore()._events)||[];
+  var shown=ev.filter(function(e){return e.t==='mb3d_shown';});
+  var opens=ev.filter(function(e){return e.t==='mb3d_open';});
+  var closes=ev.filter(function(e){return e.t==='mb3d_close';});
+  var offered=shown.reduce(function(n,e){return n+(e.n||0);},0);
+  if(!offered && !opens.length) return '<h3 style="margin:22px 0 6px">🧬 3D anatomy</h3>'
+    +'<p class="sub" style="margin-top:0">No 3D activity on this device yet. Chips offered and scenes opened will appear here.</p>';
+  var openPct=offered? Math.round(opens.length/offered*100):0;
+  // dwell + interaction depth: the difference between "opened it" and "used it"
+  var mss=closes.map(function(e){return e.ms||0;}).sort(function(a,b){return a-b;});
+  var med=mss.length? Math.round(mss[Math.floor(mss.length/2)]/1000):0;
+  var used=closes.filter(function(e){return (e.part_taps||0)+(e.views||0)+(e.traces||0)>0;}).length;
+  // which trigger earns the tap — the reason string travels with the chip
+  var byVia={}; opens.forEach(function(e){ var k=e.via||'?'; byVia[k]=(byVia[k]||0)+1; });
+  var byWhy={}; shown.forEach(function(e){ (e.reasons||[]).forEach(function(r){ byWhy[r]=(byWhy[r]||0)+1; }); });
+  function rows(m,label){ var ks=Object.keys(m); if(!ks.length) return '<tr><td colspan="2" style="color:var(--dimmer)">—</td></tr>';
+    return ks.sort(function(a,b){return m[b]-m[a];}).map(function(k){ return '<tr><td>'+esc(k)+'</td><td style="text-align:right">'+m[k]+'</td></tr>'; }).join(''); }
+  return '<h3 style="margin:22px 0 6px">🧬 3D anatomy — do they use it?</h3>'
+    +'<div class="pilotgrid">'
+      +'<div class="pilotstat"><b>'+offered+'</b><span>chips offered</span></div>'
+      +'<div class="pilotstat"><b>'+opens.length+'</b><span>scenes opened ('+openPct+'%)</span></div>'
+      +'<div class="pilotstat"><b>'+med+'s</b><span>median time in a scene</span></div>'
+      +'<div class="pilotstat"><b>'+(closes.length?Math.round(used/closes.length*100):0)+'%</b><span>opens where they interacted</span></div>'
+    +'</div>'
+    +'<table class="pilottbl"><tr><th>Opened from</th><th style="text-align:right">n</th></tr>'+rows(byVia)+'</table>'
+    +'<table class="pilottbl" style="margin-top:10px"><tr><th>Why the chip fired</th><th style="text-align:right">offered</th></tr>'+rows(byWhy)+'</table>'
+    +'<p class="sub">A chip offered and ignored is data too. Read the open rate per trigger reason before touching the scoring.</p>';
+}catch(e){ return ''; } }
 function pilotExport(){ try{ var s=qbStore(); var blob={ exportedAt:new Date().toISOString(), metrics:smartValidation(), events:s._events||[], sessions:s._sessions||[] };
   var txt=JSON.stringify(blob); if(navigator&&navigator.clipboard){ navigator.clipboard.writeText(txt); alert('Pilot data copied to clipboard ('+((s._events||[]).length)+' events). Paste into your aggregation sheet.'); }
   else { alert(txt.slice(0,4000)); } }catch(e){ alert('Export failed: '+e); } }
@@ -4704,21 +4582,6 @@ function startFilteredSession(pred, label, key, budgetMin){
      session:{done:0,correct:0,total:items.length,over:g.over}};
   return items.length;
 }
-/* SL-01: a Due-now row must actually serve that topic's DUE cards in the grading runner,
-   not open the whole recall deck at the last saved (already-passed) position. */
-function startTopicDue(tid){
-  const today=dayNum();
-  const n=startFilteredSession((st,t)=>t.id===tid && st && st.box>=0 && st.due<=today, (topById(tid)||{}).name||'Due', 'due:'+tid, 999);
-  if(n){ go('review'); } else { go('topic/'+tid); }   // nothing actually due here → just open the topic
-}
-/* MIS-05/LCH-05: open the deck AT the card the student tapped, not at the last saved (already-passed) position. */
-function openCardAt(tid, deck, cardId){
-  const t=topById(tid); if(!t){ go('topic/'+tid); return; }
-  const arr=t[deck||'recall']||[]; let idx=-1;
-  for(let k=0;k<arr.length;k++){ if(cid(tid,deck||'recall',arr[k])===cardId){ idx=k; break; } }
-  if(idx>=0){ DATA.pos=DATA.pos||{}; DATA.pos['pos:'+tid+(deck||'recall')]=idx; try{persist();}catch(e){} }
-  go('study/'+tid+'/'+(deck||'recall'));
-}
 const WEAK_PRED=(scope)=>((st,t)=>!!st && (st.box<0 || (st.lapses||0)>=2) && (!scope||t.lecturer===scope));
 /* Home CTA: "Review weak cards" / "Fix these" — same engine, weak filter (± a lecturer scope). Never dead-ends. */
 function reviewWeak(lecturer){
@@ -4796,7 +4659,6 @@ function nudgeItems(max){
 function startNudgeSession(){
   const items=nudgeItems(10);
   S={mode:'daily',key:'nudge',label:'Quick review',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // NTF-02: rebuild the cold-start empty nudge session once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* build the notification body carrying the actual card Q&A */
@@ -4875,16 +4737,9 @@ function strictOverlay(n){
   o.innerHTML=`<div class="strictbox"><div class="sbig">⏰</div>
     <b>Time to review</b>
     <p>${n} card${n===1?'':'s'} waiting. A two-minute round now keeps them from slipping.</p>
-    <button class="btn primary" onclick="strictStart()">Start review now</button>
+    <button class="btn primary" onclick="document.getElementById('strictov').remove();go('nudge')">Start review now</button>
     <button class="btn" onclick="document.getElementById('strictov').remove()">Snooze</button></div>`;
   document.body.appendChild(o);
-}
-function strictStart(){
-  var ov=document.getElementById('strictov'); if(ov) ov.remove();
-  // NTF-05: only start a nudge session if there's no live session to destroy — the strict overlay appears
-  // while the app is visible (often mid-session). If a session is in progress, just dismiss and let them continue.
-  var live = (typeof S!=='undefined') && S && S.items && S.items.length && S.session && (S.session.done < S.items.length);
-  if(!live) go('nudge');
 }
 /* Idle Detection (Android/Chrome): nudge sooner when the phone is unlocked & in use.
    Only runs while MedBank's worker is alive; unsupported/blocked on iPhone. */
@@ -4946,8 +4801,7 @@ function nudgeTick(force){
 }
 function startHard(){
   const items=starItems();
-  S={mode:'hard',key:'hard',label:'Hard cards',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // HRD-01: cold-start empty build rebuilds once content hydrates
+  S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
      session:{done:0,correct:0,total:items.length}};
 }
 function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -4955,7 +4809,6 @@ function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a
 function startLeeches(){
   const items=shuf(leechItems());
   S={mode:'daily',key:'leeches',label:'Leeches',items,order:items.map((_,k)=>k),i:0,show:false,
-     builtReady:!!window.__MB_CONTENT_READY,   // LCH-01: rebuild once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* review the cards you missed recently — rated session */
@@ -5069,7 +4922,7 @@ function pageReview(){
 }
 /* hard-card review runner */
 function pageHard(){
-  if(!S || S.key!=='hard' || (!S.builtReady && window.__MB_CONTENT_READY)) startHard();   // HRD-01: rebuild once content is ready; HRD-03: key-aware so a 5-card #/hardnudge can't hijack the Hard tab
+  if(!S || S.mode!=='hard') startHard();
   if(!S.items.length) return `<h1>Hard cards</h1>
     <div class="alldone"><div class="big">★</div><b>No hard cards yet.</b>
       <p>While studying, tap the ☆ on any tricky card to save it here. Then you can drill just your hard cards — great for the weekend.</p>
@@ -5097,9 +4950,7 @@ function sessionSummary(backLabel,backRoute){
   const s=S.session, done=s.done||0, correct=s.correct||0, mastered=s.mastered||0;
   const acc=done?Math.round(correct/done*100):0;
   if(done>=20 && correct===done && !DATA.flags.perfect){ DATA.flags.perfect=1; persist(); }
-  // MIS-01/HRD-05: a NAMED side-session (Hard/Leeches/Mistakes/Quick review) is not the daily due pool.
-  const named = S.label && S.key!=='today' ? S.label : '';
-  const remain = named ? 0 : dueCount(), cleared=(!named && remain===0), st=curStreak();
+  const remain=dueCount(), cleared=(remain===0), st=curStreak();
   const budget=DATA.daily.budget||15, minToday=Math.round((todayLog().ms||0)/60000), ringPct=Math.min(100,Math.round(minToday/budget*100)), ringClosed=ringPct>=100;
   const sub=CELEB_PRAISE[done%CELEB_PRAISE.length];
   let mile='';
@@ -5108,7 +4959,7 @@ function sessionSummary(backLabel,backRoute){
   else if(acc>=100 && done>=10) mile=`🎯 ${done} for ${done} — flawless round.`;
   return `<div class="celeb">
       <div class="celeb-top">🎉</div>
-      <h1 class="celeb-h">${named ? esc(named)+' complete!' : (cleared?'Active Recall complete!':'Session complete!')}</h1>
+      <h1 class="celeb-h">${cleared?'Active Recall complete!':'Session complete!'}</h1>
       <p class="celeb-sub">${sub}</p>
       <div class="celeb-ring">${goalRing(ringPct,120,10,'#a6f05a')}<span>${ringPct}%</span></div>
       <div class="celeb-ringcap">${ringClosed?'Daily ring closed':'Daily goal · '+minToday+' / '+budget+' min'}</div>
@@ -5188,8 +5039,7 @@ function pageToday(){
 
   /* ---- TODAY ---- */
   const todayPanel = `
-    ${commitmentCard()}
-    ${total>0 ? `<div class="arcols" style="margin-top:12px">
+    ${total>0 ? `<div class="arcols">
       <div class="armix">
         <div class="armix-lab">Today's mix</div>
         <div class="archips">
@@ -5538,8 +5388,6 @@ function celebrate(kind,text){
 }
 function rateCard(ok){
   if(!S) return; if(window.vizInlineStop)vizInlineStop(); const it=S.items[S.order[S.i]]; if(!it) return;
-  S.answered=S.answered||{}; if(S.answered[it.id]!=null) return;   // REV-05: this card was already rated this sitting — a second tap must not re-mutate SRS/streak/mistakes
-  S.answered[it.id]=ok?1:0;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
   const _pt=cardTimeState(it.id,false), _ms=S._shownAt?Date.now()-S._shownAt:0;
@@ -5549,7 +5397,6 @@ function rateCard(ok){
   logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
-  else if(ok && DATA.missLog && DATA.missLog[it.id]!=null){ delete DATA.missLog[it.id]; }   // MIS-04/SIDE-03: a now-correct card leaves the recent-mistakes pool (was append-only forever)
   if(S.mode==='deck' && !S.clinOnly && !S.weakOnly) DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);   // saved place belongs to the FULL deck — a filtered pass writes an index into 4 cards, not 60
   persist();
   if(!it.conf) flashReview(it.id, ok);
@@ -5570,7 +5417,7 @@ function rateCard(ok){
 var PREV_BASE='';
 var SWIPE_USED=(function(){ try{ return parseInt(localStorage.getItem('mb_swipe_used')||'0',10)||0; }catch(e){ return 0; } })();
 var SWIPE_NEXTS=0, _mbViaSwipe=false;
-function swipeHintEligible(){ return window.innerWidth<=720 && SWIPE_USED<2 && /^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash) && S && S.items && S.items.length; }
+function swipeHintEligible(){ return window.innerWidth<=720 && SWIPE_USED<2 && /^#\/(study|review|hard)/.test(location.hash) && S && S.items && S.items.length; }
 function markSwipeUsed(){ SWIPE_USED++; try{ localStorage.setItem('mb_swipe_used',String(SWIPE_USED)); }catch(e){} hideSwipeHint(); }
 function bumpNext(){ if(!swipeHintEligible()) return; SWIPE_NEXTS++; if(SWIPE_NEXTS%3===0) showSwipeHint(); }   // still tapping Next after 3 → remind them they can swipe
 function showSwipeHint(){ if(!swipeHintEligible()||document.getElementById('mbSwipeHint')) return;
@@ -5581,18 +5428,17 @@ function showSwipeHint(){ if(!swipeHintEligible()||document.getElementById('mbSw
 }
 function hideSwipeHint(){ var d=document.getElementById('mbSwipeHint'); if(d){ d.style.opacity='0'; setTimeout(function(){ if(d&&d.parentNode)d.remove(); },260); } }
 function swipeAct(dir){
-  if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash)||!S) return;
+  if(!/^#\/(study|review|hard)/.test(location.hash)||!S) return;
   const it=S.items[S.order[S.i]]; if(!it) return;
   if(dir==='up') return;                                                  // up does nothing — starring by accident was too easy
   markSwipeUsed();                                                        // a left/right swipe = feature learned
   if(dir==='right'){ if(S.i>0){ _mbViaSwipe=true; step(-1); } return;
   }   // previous
   if(dir==='left'){                                                       // next / skip
-    if(isMcqCard(it)){ _mbViaSwipe=true; mcqNext(); }
-    else if(!S.show){ reveal(); }                                         // flip: first swipe reveals (not a "next", so don't arm _mbViaSwipe)
-    else if(S.i<S.items.length-1){ _mbViaSwipe=true; step(1); }
-    else if(S.mode!=='deck'){ _mbViaSwipe=true; sessionNext(); }          // SWP-02: last card in a session → reach the results screen (was a silent no-op)
-    else { _mbViaSwipe=false; }                                           // SWP-03: nothing to advance → never leak the flag onto the next tap
+    _mbViaSwipe=true;
+    if(isMcqCard(it)){ mcqNext(); }
+    else if(!S.show){ reveal(); }                                         // flip: first swipe reveals
+    else if(S.i<S.items.length-1){ step(1); }
     return;
   }
 }
@@ -5600,7 +5446,7 @@ function swipeAct(dir){
   var sx=0,sy=0,st=0,live=false;
   document.addEventListener('touchstart',function(e){
     live=false; if(window.innerWidth>720) return;
-    if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash)) return;
+    if(!/^#\/(study|review|hard)/.test(location.hash)) return;
     if(e.touches.length!==1) return;
     var t=e.target;
     if(t&&t.closest&&t.closest('.vizmiss,.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns')) return;   // don't hijack controls/answers/video
@@ -5626,7 +5472,7 @@ document.addEventListener('keydown',e=>{
     if(e.key==='ArrowLeft'){ examNav(-1); return; }
     return;
   }
-  if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(h)) return;
+  if(!/^#\/(study|review|hard)/.test(h)) return;
   if(e.target && (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.isContentEditable)) return;   // typing in a card note / inline editor must not rate or flip the card
   if(!S) return;
   const it=S.items[S.order[S.i]], canRate=it && it.deck!=='primer';
@@ -5733,7 +5579,7 @@ function searchRun(){
   const box=document.getElementById('sres'); if(!box) return;
   const q=SQ.trim().toLowerCase();
   if(q.length<2){ box.innerHTML='<p class="sub">Type at least 2 letters.</p>'; return; }
-  const topics=allTopics.filter(t=>(t.name+' '+(t.lecturer||'')).toLowerCase().includes(q)).slice(0,25);   // SCA-09: a missing lecturer no longer stringifies to "undefined" and matches "und"/"ned"/"def"
+  const topics=allTopics.filter(t=>((t.name+' '+t.lecturer)||'').toLowerCase().includes(q)).slice(0,25);
   const cardHits=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
     ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
@@ -5747,7 +5593,7 @@ function searchRun(){
   if(cardHits.length){
     h+=`<div class="modhead" style="margin-top:26px">Card questions · ${cardHits.length}</div><div class="rows">`+
       cardHits.slice(0,40).map(x=>`
-       <div class="row" onclick="openCardAt('${x.t.id}','${x.dk}','${cid(x.t.id,x.dk,x.c)}')">
+       <div class="row" onclick="go('study/${x.t.id}/${x.dk}')">
          <span class="sn">${x.dk==='primer'?'A':'B'}</span>
          <span class="mid"><span class="tt">${esc(x.c.q)}</span>
            <div class="meta">${esc(x.t.name)} · ${x.dk==='primer'?'Primer':'Recall'}</div></span></div>`).join('')+
@@ -5761,9 +5607,6 @@ function searchRun(){
 function setGoal(v){ v=Math.max(5,Math.min(300,parseInt(v)||40)); DATA.daily.goal=v; if(DATA.daily.floor>v)DATA.daily.floor=v; persist(); render(); }
 function setFloor(v){ v=Math.max(1,Math.min(DATA.daily.goal,parseInt(v)||10)); DATA.daily.floor=v; persist(); render(); }
 function setBudget(v){ v=Math.max(0,Math.min(120,parseInt(v)||0)); DATA.daily.budget=v; persist(); render(); }
-/* per-course new-card minimum for the streak — students may RAISE it, never lower below the Medbank baseline */
-function setNewPerCourse(v){ const base=minNewPerCourse(Math.max(1,activeCourseCount()));
-  v=parseInt(v); if(isNaN(v)) v=base; v=Math.max(base,Math.min(40,v)); DATA.daily.newPerCourse=v; persist(); render(); }
 function setInterleave(on){ DATA.settings.interleave=!!on; persist(); render(); }
 function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exams[subId]; persist(); render(); }
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
@@ -5959,11 +5802,8 @@ function pageSettings(){
     <h2>Daily targets</h2>
     <div class="setrow"><div><b>Daily goal</b><span>Cards you aim to review each day.</span></div>
       <input class="numin" type="number" min="5" max="300" value="${d.goal}" onchange="setGoal(this.value)"></div>
-    <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — a gentle nudge, separate from the streak below.</span></div>
+    <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — hitting it keeps your streak.</span></div>
       <input class="numin" type="number" min="1" max="${d.goal}" value="${d.floor}" onchange="setFloor(this.value)"></div>
-    ${(()=>{ const st=streakStatus(); const ac=st.courses, base=minNewPerCourse(ac), per=st.perCourse;
-      return `<div class="setrow"><div><b>Daily new learning goal</b><span>Minimum new cards <b>per course</b>. This is your daily new-learning commitment — meeting it (plus ≥65% of due reviews) is what protects your streak. Medbank minimum <b>${base}/course</b> for your ${ac} active course${ac===1?'':'s'} → <b>${ac*per} new cards/day</b>. You can raise it, not lower it below the minimum.</span></div>
-      <input class="numin" type="number" min="${base}" max="40" value="${per}" onchange="setNewPerCourse(this.value)"></div>`; })()}
     <div class="setrow"><div><b>Daily session length</b><span>Your session fills to this time budget and stops — card count follows your real pace (0 = no limit). Extra due cards roll to tomorrow.</span>
       <div style="display:flex;gap:6px;margin-top:8px">${[5,15,30,45].map(m=>`<button class="btn tiny${(d.budget||15)===m?' primary':''}" onclick="setBudget(${m})">${m} min</button>`).join('')}</div></div>
       <input class="numin" type="number" min="0" max="120" value="${d.budget||15}" onchange="setBudget(this.value)"></div>
@@ -6104,8 +5944,7 @@ function pageLeeches(){
   const rows=items.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount">${it.lapses}×</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('')
-      + (items.length>60?`<div class="leechrow" style="justify-content:center;color:var(--dim)">…and ${items.length-60} more — use “Drill all” above</div>`:'');   // LCH-06
+      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
   return head+`<div class="btnrow" style="margin:4px 0 16px"><button class="btn primary" onclick="startLeeches();go('review')">▶ Drill all ${items.length} leech${items.length===1?'':'es'}</button></div>${rows}`;
 }
 /* ---------- Recent mistakes ---------- */
@@ -6118,8 +5957,7 @@ function pageMistakes(){
   const rows=week.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount miss">${dayLabel(it.missOn)}</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('')
-      + (week.length>60?`<div class="leechrow" style="justify-content:center;color:var(--dim)">…and ${week.length-60} more — drill “This week” above</div>`:'');   // MIS-07
+      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
   return head+`<div class="modes" style="grid-template-columns:1fr 1fr">
       <button class="modebtn${today.length?'':' dis'}" ${today.length?'':'disabled'} onclick="runMistakes(1)"><span class="mic">📅</span><b>Today's misses</b><span class="msub">${today.length} card${today.length===1?'':'s'}</span></button>
       <button class="modebtn${week.length?'':' dis'}" ${week.length?'':'disabled'} onclick="runMistakes(7)"><span class="mic">🗓️</span><b>This week</b><span class="msub">${week.length} card${week.length===1?'':'s'}</span></button>
@@ -6307,7 +6145,6 @@ async function geminiTutor(sys, history, key){
 async function aiSend(topicId, text, alts){
   const engine=(DATA.settings.tutorEngine&&DATA.settings.tutorEngine.indexOf('deepseek')===0)?DATA.settings.tutorEngine:'deepseek-v4-flash';
   if(AIBUSY) return;
-  if(window.MB_PAYWALL && !MB_PAYWALL.guard('The AI tutor')) return;   // PW-01: gate the tutor (fails open until entitlement known)
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
   // if the answer came from voice with several possible hearings, send them all so the tutor grades by meaning
@@ -6425,22 +6262,15 @@ function aiMicOnce(topicId){                        // push-to-talk outside the 
   VOICE.topic=topicId; aiListen(topicId);
 }
 function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('aiin'); if(!el)return;
-  const v=el.value.trim(); if(!v)return;
-  if(typeof AIBUSY!=='undefined' && AIBUSY) return;   // SCA-04: tutor still replying — leave the message in the box instead of clearing + dropping it
-  el.value=''; aiSend(topicId, v); }
-function clearAI(topicId){ if((AICHAT[topicId]||[]).length && !confirm('Clear this tutor chat?')) return;   // SCA-08: confirm the one-tap wipe (it sits right next to "Start voice quiz")
-  AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
+  const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
+function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
 function aiAudioOn(){ return DATA.settings.aiVoice!==false; }
 function toggleAiVoice(){ DATA.settings.aiVoice=!aiAudioOn(); persist();
   if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} stopCloud(); } render(); }
 function aiRedo(topicId){ const a=AICHAT[topicId]||[];
   if(a.length && a[a.length-1].role==='model') a.pop();
-  let lastUser=null;
-  if(a.length && a[a.length-1].role==='user'){ lastUser=a[a.length-1]; a.pop(); }
-  render();
-  if(VOICE.on && sttSupported()) aiListen(topicId);
-  else if(lastUser) aiSend(topicId, lastUser.text, lastUser.alts);   // SCA-07: text path — RETRY the question instead of silently deleting it
-}
+  if(a.length && a[a.length-1].role==='user') a.pop();
+  render(); if(VOICE.on && sttSupported()) aiListen(topicId); }
 function aiStatus(){
   if(AIBUSY) return {k:'think', big:'💭 Thinking…', chip:'thinking', icon:'💭'};
   if(VOICE.on && VOICE.phase==='think') return {k:'think', big:'✍️ Writing down your answer…', chip:'transcribing', icon:'✍️'};
@@ -6517,7 +6347,8 @@ function showExplainBtn(r, canViz){
   _explBtn.innerHTML=html;
   _explBtn.querySelector('[data-a=explain]').onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); };
   var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName(), (window.currentTopicId?currentTopicId():'')); };
-  var m3b=_explBtn.querySelector('[data-a=mb3d]'); if(m3b) m3b.onclick=function(){ const t=_selText; hideExplainBtn(); try{ MB3D.open(m3.scene,{part:m3.key,title:t,subtitle:'matched: '+m3.label}); }catch(e){} };
+  var m3b=_explBtn.querySelector('[data-a=mb3d]'); if(m3b) m3b.onclick=function(){ const t=_selText; hideExplainBtn();
+    try{ MB3D.recordEngagement('opened'); MB3D.open(m3.scene,{part:m3.key,title:t,subtitle:'matched: '+m3.label,via:'highlight'}); }catch(e){} };
   const bw=168, bh=(canViz?90:42)+(m3?48:0);
   let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
   let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
@@ -6669,7 +6500,7 @@ function pageStatusList(kind){
     const rows=Object.values(by).sort((a,b)=>b.n-a.n);
     const list=rows.length? rows.map(r=>`<div class="leechrow"><span class="lcount">${r.n}</span>
         <div class="lmid"><b>${esc(r.t.name)}</b><span>${esc(r.t.subject.short)}</span></div>
-        <button class="btn" onclick="startTopicDue('${r.t.id}')">Open</button></div>`).join('')   // SL-01
+        <button class="btn" onclick="go('study/${r.t.id}/recall')">Open</button></div>`).join('')
       : `<div class="alldone"><div class="big">✓</div><b>Nothing due right now.</b><p>You're caught up — learn a new topic or come back later.</p></div>`;
     return `<h1>◎ Due now</h1><p class="sub">${rows.length?rows.reduce((s,r)=>s+r.n,0)+' cards due across '+rows.length+' topic'+(rows.length===1?'':'s'):'All caught up.'}</p>
       ${rows.length?`<div class="btnrow" style="margin:2px 0 14px"><button class="btn primary" onclick="startRecallSession();go('review')">▶ Start Active Recall</button></div>`:''}${list}`;
@@ -6702,8 +6533,6 @@ function pageLoadingTopic(){
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   try{ if(window.MB3D) MB3D.dispose(); }catch(e){}   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
-  // TOP-08: leaving a topic (or switching to a different topic) stops podcast audio — it lived on document.body and kept playing forever otherwise.
-  try{ if(typeof podStopAudio==='function' && (p[0]!=='topic' || (typeof POD!=='undefined' && POD && p[1]!==POD.topicId))) podStopAudio(); }catch(e){}
   // Topic-bound routes: if content hasn't loaded yet, show a loader instead of flashing Home.
   const NEEDS_TOPIC={topic:1,study:1,cram:1,cards:1,ai:1};
   if(NEEDS_TOPIC[p[0]] && p[1] && !window.__MB_CONTENT_READY && typeof topById==='function' && !topById(p[1])){
@@ -6716,7 +6545,7 @@ function render(){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
-    case 'nudge':     if(!S||S.key!=='nudge'||(!S.builtReady && window.__MB_CONTENT_READY)) startNudgeSession(); html=pageReview(); break;   // NTF-02: rebuild once content is ready
+    case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
     case 'hard':      html=pageHard(); break;
     case 'leeches':   html=pageLeeches(); break;
     case 'mistakes':  html=pageMistakes(); break;
@@ -6746,7 +6575,6 @@ function render(){
   }
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
-  try{ if(window.MB_DOCK_REFRESH) MB_DOCK_REFRESH(); }catch(e){}   // DCK-01: re-bind the study dock to the CURRENT card on every render (card advance doesn't change the hash)
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
   if(p[0]==='topic' && topicTab==='note') setTimeout(mb3dScanNote,60);   // mark structures the 3D corpus can show (no-op when the flag is off)
   if(p[0]==='settings' && window.loadPlanBadge) setTimeout(loadPlanBadge,40);
@@ -6754,7 +6582,7 @@ function render(){
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
   if(window.scheduleVizTeaser) scheduleVizTeaser(p[0]==='topic'?p[1]:null);   // teaser waits ~1 min of reading, then plays once
-  if(/^(study|review|hard|nudge|hardnudge)$/.test(p[0]) && !/^(study|review|hard|nudge|hardnudge)$/.test(PREV_BASE)) setTimeout(showSwipeHint,700);   // teach swipe-to-next on entering a card session
+  if(/^(study|review|hard)$/.test(p[0]) && !/^(study|review|hard)$/.test(PREV_BASE)) setTimeout(showSwipeHint,700);   // teach swipe-to-next on entering a card session
   PREV_BASE=p[0];
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){

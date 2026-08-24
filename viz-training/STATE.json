@@ -6,7 +6,7 @@
   },
   "coveredStructures": {},
   "done": false,
-  "runs": 3,
-  "lastRunAt": "2026-08-23T17:01:51Z",
-  "note": "The hourly task walks CURRICULUM.courses in `order`. Cursor points at course\u2192topic\u2192structure. Each run authors ONE structure's scene (itemsPerRun=1), then advances structureIndex; at end of a topic's structures advance topicIndex; at end of a course's topics move to the next course in `order`; past the last course set done=true. coveredStructures[courseKey] is a list of structure names already authored (skip duplicates)."
+  "runs": 0,
+  "lastRunAt": null,
+  "note": "The hourly task walks CURRICULUM.courses in `order`. The cursor points at course -> topic -> structure. Each run authors CURRICULUM.meta.itemsPerRun structures (2), then advances; at the end of a topic advance topicIndex; at the end of a course move to the next course in `order`; past the last course set done=true. coveredStructures[courseKey] lists structures already authored (skip duplicates). Advance the cursor ONLY past structures whose scene passed tools/validate-scenes.mjs \u2014 a blocked scene stays on the worklist."
 }

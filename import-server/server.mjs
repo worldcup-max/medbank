@@ -23,6 +23,7 @@ import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
+import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, candidateFilter, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -533,6 +534,63 @@ async function buildQbankBatched(tmpl, note, model, rowMax, rowTemp){
   return { items, partial };
 }
 
+/* ============================ Knowledge Target layer (Phase A — SHADOW MODE) ============================
+ * Observes + annotates q-bank questions with a knowledge target. It NEVER blocks or alters generation:
+ * every call is best-effort, fire-and-forget, and fully guarded. With MEDBANK_TARGETS unset/"off" it is inert,
+ * and disabling it yields byte-identical q-bank behaviour. The scheduler does NOT consume any of this yet (A6). */
+function targetsMode(){ return String(process.env.MEDBANK_TARGETS||"off").toLowerCase(); }   // 'off' | 'shadow'
+/* replicate the CLIENT's qbHash EXACTLY so question_targets.qh matches the scheduler's key when A6 arrives */
+function qbHashServer(str){ let h=5381,i=(str||"").length; while(i){ h=(h*33)^(str||"").charCodeAt(--i); } return (h>>>0).toString(36); }
+function qhOf(q){ return qbHashServer((q.stem||"")+"|"+((q.options||[]).join("|"))); }
+async function loadTargets(){ try{ const r=await admin.from("knowledge_targets").select("*").neq("status","deprecated").neq("status","merged"); return r.data||[]; }catch(e){ return []; } }
+async function tExtractBatch(questions){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:buildExtractBatchPrompt(questions), parts:[], images:[], max_tokens:6000, temperature:0.2, json:true });
+    return parseProposedBatch(gen.text||"", questions.length);
+  }catch(e){ console.warn("[targets] extract batch failed:", e.message); return new Array(questions.length).fill(null); }
+}
+async function tReconcile(proposed, candidates){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:buildReconcilePrompt(proposed, candidates), parts:[], images:[], max_tokens:400, temperature:0, json:true });
+    const t=gen.text||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); let o={}; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){}
+    return { target_id:o.target_id||null, confidence:Number(o.confidence)||0, second_id:o.second_id||null, second_confidence:Number(o.second_confidence)||0 };
+  }catch(e){ console.warn("[targets] reconcile failed:", e.message); return null; }
+}
+/* annotate a batch of questions — idempotent (skips already-mapped qh); never throws to the caller */
+async function annotateTargets(questions, ctx){
+  try{
+    if(targetsMode()==="off") return;
+    const qs=(questions||[]).filter(q=>q&&q.stem&&Array.isArray(q.options)&&q.options.length);
+    if(!qs.length) return;
+    const hs=qs.map(qhOf);
+    const seen=await admin.from("question_targets").select("qh").in("qh",hs);
+    const done=new Set((seen.data||[]).map(r=>r.qh));
+    const todo=qs.filter((q,i)=>!done.has(hs[i]));
+    if(!todo.length) return;
+    const proposals=await tExtractBatch(todo);
+    let targets=await loadTargets();
+    for(let i=0;i<todo.length;i++){
+      const q=todo[i], qh=qhOf(q), proposed=proposals[i];
+      if(!proposed) continue;
+      const cands=candidateFilter(proposed, targets);
+      let adj=null; if(cands.length) adj=await tReconcile(proposed, cands);
+      const dec=decide(proposed, cands, adj);
+      let target_id=null;
+      if(dec.state==="MATCH"){ target_id=dec.target_id; }
+      else if(dec.state==="NEW"){
+        const id=mintTargetId(proposed.topic, proposed.skill, targets.map(t=>t.target_id));
+        const rec=newTargetRecord(proposed, id, q.difficulty||q.cognitive_level);
+        const ins=await admin.from("knowledge_targets").insert(rec);
+        if(!ins.error){ targets.push(rec); target_id=id; }
+      }
+      const candScores=cands.map(c=>({ target_id:c.target_id,
+        score: adj&&adj.target_id===c.target_id?adj.confidence : (adj&&adj.second_id===c.target_id?adj.second_confidence:null) }));
+      await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
+        proposed, candidates:candScores, topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
+        updated_at:new Date().toISOString() }, { onConflict:"qh" });
+    }
+    console.log("[targets] annotated "+todo.length+" question(s)"+(ctx&&ctx.topic_id?" (topic "+ctx.topic_id+")":""));
+  }catch(e){ console.warn("[targets] annotate failed (non-blocking):", e.message); }
+}
+
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
 async function resolveModel(account_id, level){
   // in-app generation (podcast script, extras, tutor, etc.) ALWAYS uses Flash.
@@ -976,6 +1034,7 @@ app.post("/import", async (req,res)=>{
         catch(e){ console.warn("[import] extra '"+kind+"' failed (topic "+topicId+"): "+((e&&e.message)||e)); }   // was swallowed silently
       }
       if(Object.keys(extras).length){ await admin.from("topics").update({ extras }).eq("id",topicId); }   // needs a jsonb "extras" column; ignored if absent
+      if(extras.qbank && targetsMode()!=="off") annotateTargets(extras.qbank, { topic_id:topicId, account_id }).catch(()=>{});   // shadow-mode annotation
     }
 
     // --- meter usage ---
@@ -1021,6 +1080,7 @@ app.post("/build-extra", async (req,res)=>{
     const r = await buildExtra(kind, level, t.data.note_md, model);
     console.log("[build-extra] done topic="+topic_id+" kind="+kind+" items="+((r&&r.items&&r.items.length)||0)+(r&&r.partial?" (PARTIAL)":"")+" in "+(Date.now()-_t0)+"ms");
     if(!r || !r.items || !r.items.length) return res.status(502).json({ error:"couldn't build this — try again" });
+    if(kind==="qbank" && targetsMode()!=="off") annotateTargets(r.items, { topic_id, account_id }).catch(()=>{});   // shadow-mode: annotate, never block
     if(r.partial){
       // QB-06: a partial build must not be cached as complete (it would stick behind the cache forever). Hand it back
       // for this session so the student can use what built, and flag it so the client can offer a one-tap rebuild.
@@ -1689,6 +1749,74 @@ app.post("/admin/viz/reject", async (req,res)=>{
     const r = await admin.from("viz_asset_proposals").update({ status:"rejected" }).eq("id",id);
     if(r.error) return res.status(500).json({ error:r.error.message });
     res.json({ ok:true });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ---- Admin: Knowledge Target layer (Phase A) — backfill + audit (shadow mode; scheduler untouched) ---- */
+app.post("/admin/targets/backfill", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    if(targetsMode()==="off") return res.status(409).json({ error:"MEDBANK_TARGETS is off — set it to 'shadow' to enable annotation" });
+    const limit=Math.min(100, Number(req.body&&req.body.limitTopics)||30);
+    const tr=await admin.from("topics").select("id,account_id,extras").not("extras","is",null).limit(limit);
+    const topics=(tr.data||[]).filter(t=>t.extras && Array.isArray(t.extras.qbank) && t.extras.qbank.length);
+    let processed=0, topicsDone=0;
+    for(const t of topics){ await annotateTargets(t.extras.qbank, { topic_id:t.id, account_id:t.account_id }); processed+=t.extras.qbank.length; topicsDone++; }
+    res.json({ ok:true, topicsScanned:topics.length, topicsDone, questionsSeen:processed, note:"idempotent — already-mapped questions were skipped" });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/targets/stats", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const qt=await admin.from("question_targets").select("qh,target_id,map_state,map_confidence,resolution");
+    const rows=qt.data||[];
+    const kt=await admin.from("knowledge_targets").select("target_id,status");
+    const targets=kt.data||[];
+    const n=rows.length, by=s=>rows.filter(r=>r.map_state===s).length, pct=x=>n?Math.round(x/n*100):0;
+    const resolved=rows.filter(r=>r.resolution).length;
+    const unresolvedAmb=rows.filter(r=>r.map_state==="AMBIGUOUS" && !r.resolution).length;
+    const perT={}; rows.forEach(r=>{ const id=(r.resolution&&r.resolution.target_id)||r.target_id; if(id) perT[id]=(perT[id]||0)+1; });
+    const counts=Object.keys(perT).map(id=>({ target_id:id, count:perT[id] })).sort((a,b)=>b.count-a.count);
+    const dist={ "lt45":0, "45to80":0, "gte80":0 };
+    rows.forEach(r=>{ const c=r.map_confidence||0; if(c<0.45)dist.lt45++; else if(c<0.80)dist["45to80"]++; else dist.gte80++; });
+    res.json({ ok:true, processed:n, match:by("MATCH"), new:by("NEW"), ambiguous:by("AMBIGUOUS"),
+      matchPct:pct(by("MATCH")), newPct:pct(by("NEW")), ambiguousPct:pct(by("AMBIGUOUS")),
+      resolved, unresolvedAmbiguous:unresolvedAmb, targetsCreated:targets.length,
+      questionsPerTarget:counts.slice(0,20), singletonTargets:counts.filter(x=>x.count===1).length,
+      heavyTargets:counts.filter(x=>x.count>=8), confidenceDistribution:dist });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/targets/ambiguous", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("question_targets").select("*").eq("map_state","AMBIGUOUS").is("resolution",null).limit(50);
+    const rows=r.data||[];
+    const ids=[...new Set(rows.flatMap(x=>(x.candidates||[]).map(c=>c.target_id)).filter(Boolean))];
+    const tr= ids.length ? await admin.from("knowledge_targets").select("*").in("target_id",ids) : { data:[] };
+    const tmap={}; (tr.data||[]).forEach(t=>{ tmap[t.target_id]=t; });
+    res.json({ ok:true, items: rows.map(x=>({ qh:x.qh, proposed:x.proposed, confidence:x.map_confidence,
+      candidates:(x.candidates||[]).map(c=>({ target_id:c.target_id, score:c.score, target:tmap[c.target_id]||null })) })) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/targets/resolve", async (req,res)=>{
+  try{
+    const user=await requireAdmin(req); if(!user) return res.status(403).json({ error:"admins only" });
+    const { qh, action, target_id } = req.body||{};   // action: 'match' | 'new' | 'keep'
+    if(!qh || !action) return res.status(400).json({ error:"qh and action required" });
+    const cur=await admin.from("question_targets").select("*").eq("qh",qh).maybeSingle();
+    if(!cur.data) return res.status(404).json({ error:"mapping not found" });
+    let finalId=null;
+    if(action==="match"){ if(!target_id) return res.status(400).json({ error:"target_id required for match" }); finalId=target_id; }
+    else if(action==="new"){
+      const p=cur.data.proposed||{}; const targets=await loadTargets();
+      const id=mintTargetId(p.topic, p.skill, targets.map(t=>t.target_id));
+      const rec=newTargetRecord(p, id, "medium"); rec.source="human_defined"; rec.reviewed_by=(user.email||user.id); rec.reviewed_at=new Date().toISOString();
+      const ins=await admin.from("knowledge_targets").insert(rec); if(ins.error) throw ins.error; finalId=id;
+    } else if(action!=="keep"){ return res.status(400).json({ error:"action must be match | new | keep" }); }
+    // record the human decision as its OWN event — map_state (the AI verdict) is preserved, never overwritten
+    const resolution={ action, target_id:finalId, by:(user.email||user.id), at:new Date().toISOString(), from_state:cur.data.map_state };
+    await admin.from("question_targets").update({ target_id:finalId, resolution, resolved_by:resolution.by, resolved_at:resolution.at, updated_at:resolution.at }).eq("qh",qh);
+    res.json({ ok:true, resolution });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 

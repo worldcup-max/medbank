@@ -354,6 +354,12 @@
   };
   function setPolicy(p) { if (p) Object.keys(p).forEach(function (k) { POLICY[k] = p[k]; }); return POLICY; }
 
+  /* The player reports what happened; the app decides where that goes. Keeping the sink abstract is what
+     lets viz3d.js stay a renderer rather than something that knows about MedBank's telemetry. */
+  var SINK = null;
+  function sink(fn) { SINK = (typeof fn === 'function') ? fn : null; }
+  function emit(name, data) { try { if (SINK) SINK(name, data || {}); } catch (e) {} }
+
   /* engagement: cheap, local, per-device. Used only to nudge the budget, never to hide 3D entirely. */
   function engagement() {
     try { return JSON.parse(localStorage.getItem('mb3d_engage') || '{"shown":0,"opened":0}'); }
@@ -581,6 +587,9 @@
       renderer.domElement.addEventListener(ev, stopSpin, { passive: true });
     });
     var selected = [], ghost = false, solo = false, running = true, raf = 0, tourTimer = null, playTimer = null;
+    /* interaction depth — the difference between "opened it" and "used it" */
+    var useCount = { partTaps: 0, views: 0, traces: 0, solo: 0, ghost: 0, played: 0, tours: 0 };
+    var openedAt = (window.performance || Date).now();
     var degraded = {};
 
     /* ---------- load every structure; a failure is reported, never fatal ---------- */
@@ -639,6 +648,9 @@
       buildList(); buildChips();
       applyView(0);
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
+      emit('open', { scene: scene.id, via: opts.via || 'tab', part: opts.part || null,
+                     structures: structures.length, loaded: loadedKeys.length, missing: missing.length,
+                     load_ms: Math.round((window.performance || Date).now() - openedAt) });
       var msg = 'Loaded ' + loadedKeys.length + ' of ' + structures.length + ' parts';
       st(missing.length ? msg + ' — ' + missing.length + ' unavailable' : msg + ' — tap any part to isolate it.', missing.length ? 'warn' : 'ok', true);
       note();
@@ -756,6 +768,7 @@
 
     function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
+      useCount.views++;
       stopTour();
       if (!fromPlay) stopPlay();
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-chip'), function (c, k) { c.classList.toggle('on', k === i); });
@@ -817,6 +830,7 @@
       return Math.max(1.6, Math.min(9, world * 3.2 + 1.2));
     }
     function trace(o) {
+      useCount.traces++;
       var subject = o.target && meshes[o.target] ? o.target : null;
       var path = (o.path || []).filter(function (k) { return meshes[k]; });
       if (!path.length) return;
@@ -861,6 +875,7 @@
     }
 
     function toggle(key) {
+      useCount.partTaps++;
       var i = selected.indexOf(key);
       if (i >= 0) selected.splice(i, 1); else selected.push(key);
       var b = host.querySelector('.mb3d-part[data-key="' + key + '"]');
@@ -910,11 +925,11 @@
       paint();
     });
     $('ghost').addEventListener('click', function () {
-      ghost = !ghost; if (ghost) { solo = false; $('solo').classList.remove('pri'); }
+      ghost = !ghost; if (ghost) { useCount.ghost++; solo = false; $('solo').classList.remove('pri'); }
       this.classList.toggle('pri', ghost); paint();
     });
     $('solo').addEventListener('click', function () {
-      solo = !solo; if (solo) { ghost = false; $('ghost').classList.remove('pri'); }
+      solo = !solo; if (solo) { useCount.solo++; ghost = false; $('ghost').classList.remove('pri'); }
       this.classList.toggle('pri', solo); paint();
     });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
@@ -925,6 +940,7 @@
        its highlights and its line of narration — but still a live model the student can grab at any time. */
     function startPlay() {
       if (!views.length) return;
+      useCount.played++;
       stopTour(); stopSpin();
       var i = 0;
       $('play').textContent = '■ Stop'; $('play').classList.add('pri');
@@ -943,6 +959,7 @@
     }
 
     function startTour() {
+      useCount.tours++;
       var i = 0, keys = parts.filter(function (p) { return meshes[p.key]; }).map(function (p) { return p.key; });
       if (!keys.length) return;
       ghost = true; $('ghost').classList.add('pri'); $('tour').textContent = '■ Stop';
@@ -1061,6 +1078,10 @@
     loop();
 
     function teardown() {
+      if (running) emit('close', { scene: scene.id, via: opts.via || 'tab',
+                                   ms: Math.round((window.performance || Date).now() - openedAt),
+                                   part_taps: useCount.partTaps, views: useCount.views, traces: useCount.traces,
+                                   solo: useCount.solo, ghost: useCount.ghost, played: useCount.played, tours: useCount.tours });
       running = false;
       if (raf) cancelAnimationFrame(raf);
       if (tourTimer) clearInterval(tourTimer);
@@ -1120,7 +1141,7 @@
   function openTerm(term) {
     return partForTerm(term).then(function (hit) {
       if (!hit) return null;
-      return open(hit.scene, { part: hit.key, title: term, subtitle: 'matched: ' + hit.label });
+      return open(hit.scene, { part: hit.key, title: term, subtitle: 'matched: ' + hit.label, via: 'highlight' });
     });
   }
 
@@ -1138,6 +1159,7 @@
     getPolicy: function () { return POLICY; },
     engagement: engagement,
     recordEngagement: recordEngagement,
+    sink: sink,
     MIN_SCORE: 4,          // legacy alias for POLICY.minScore
     mount: mount,
     mountScene: mountScene,
