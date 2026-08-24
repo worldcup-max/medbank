@@ -5,7 +5,7 @@
   "course": "Gross Anatomy",
   "topic": "Arm (Brachium)",
   "structure": "Biceps brachii & Triceps brachii",
-  "learning_goal": "Know the heads of each muscle, what each head crosses, and which movement it drives.",
+  "learning_goal": "Know where each head of biceps and triceps starts and ends, and the exact bony landmark it uses.",
   "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
@@ -199,6 +199,154 @@
         "deep head"
       ],
       "narration": "The deep head below the radial groove — active in all extension."
+    },
+    {
+      "key": "supraglenoid_tubercle",
+      "label": "Supraglenoid tubercle",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.102,
+          0.212,
+          0.97
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 8.3,
+      "terms": [
+        "supraglenoid tubercle"
+      ],
+      "narration": "The small bump just above the glenoid — where the long head of biceps begins."
+    },
+    {
+      "key": "intertubercular_groove",
+      "label": "Intertubercular groove",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffb020",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.662,
+          0.182,
+          0.935
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 0.1,
+      "terms": [
+        "intertubercular groove",
+        "bicipital groove",
+        "intertubercular sulcus"
+      ],
+      "narration": "The gutter between the two tubercles — the tendon runs down it, held in by the transverse ligament."
+    },
+    {
+      "key": "radial_tuberosity",
+      "label": "Radial tuberosity",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ff9f43",
+      "anchor": {
+        "on": "radius",
+        "uvw": [
+          0.863,
+          0.641,
+          0.816
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 1.3,
+      "terms": [
+        "radial tuberosity",
+        "bicipital tuberosity"
+      ],
+      "narration": "Where the biceps tendon attaches — pulling here supinates as well as flexes."
+    },
+    {
+      "key": "coracoid_process",
+      "label": "Coracoid process",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffd98a",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.345,
+          0.134,
+          0.875
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 0.1,
+      "terms": [
+        "coracoid process"
+      ],
+      "narration": "The hook in front — origin of the short head, with coracobrachialis."
+    },
+    {
+      "key": "infraglenoid_tubercle",
+      "label": "Infraglenoid tubercle",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#f2a33c",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.178,
+          0.367,
+          0.689
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 3.1,
+      "terms": [
+        "infraglenoid tubercle"
+      ],
+      "narration": "Below the glenoid — the long head of triceps starts here, which is why it crosses the shoulder."
+    },
+    {
+      "key": "olecranon",
+      "label": "Olecranon",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffbe6b",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.891,
+          0.932,
+          0.898
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest point on the parent bone to the attaching muscle mesh, computed from the source meshes themselves (gap to muscle in mm recorded per landmark)",
+      "calibration_gap_mm": 4.7,
+      "terms": [
+        "olecranon",
+        "olecranon process"
+      ],
+      "narration": "The point of the elbow — all three heads of triceps end here."
     }
   ],
   "views": [
@@ -288,17 +436,21 @@
           "target": "bic_long"
         },
         {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
           "op": "TRACE_STRUCTURE",
           "target": "bic_long",
           "path": [
-            "scapula",
-            "humerus",
-            "radius"
+            "supraglenoid_tubercle",
+            "intertubercular_groove",
+            "radial_tuberosity"
           ],
-          "duration": 6
+          "duration": 9
         }
       ],
-      "narration": "Follow the long head from the scapula, down the bicipital groove of the humerus, to the radial tuberosity."
+      "narration": "Origin, course, insertion: it starts at the supraglenoid tubercle, runs down the intertubercular groove, and ends on the radial tuberosity."
     }
   ],
   "provenance": {
@@ -306,5 +458,8 @@
     "authored_at": "2026-08-23",
     "approved_by": "frank",
     "approved_at": "2026-08-23"
-  }
+  },
+  "gaps": [
+    "The six landmarks are computed from the meshes (nearest bone surface to the attaching muscle), not hand-placed: gaps to the muscle are 0.1–8.3 mm, which is tendon thickness. They stay status:\"needs-review\" until a human has looked at them once in the viewer."
+  ]
 }

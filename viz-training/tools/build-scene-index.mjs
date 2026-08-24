@@ -23,7 +23,7 @@ const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim
 
 /* which ops each adapter only approximates — recorded so corpus review can see which scenes are waiting
    on a better renderer rather than silently under-delivering. Mirrors viz3d.js and validate-scenes.mjs. */
-const DEGRADED = { bodyparts3d: ['TRACE_STRUCTURE', 'PEEL_LAYER'], svg: [] };
+const DEGRADED = { bodyparts3d: ['PEEL_LAYER'], svg: [] };
 
 const files = readdirSync(SCENES).filter(f => f.endsWith('.json') && f !== 'index.json').sort();
 const scenes = [];

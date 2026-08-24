@@ -37,6 +37,9 @@
 
   var THREE_URLS = [
     'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+    /* Trackball, not Orbit. OrbitControls pins an "up" axis, so the model stops dead at the poles and a
+       student cannot look at it from underneath or roll it — which reads as the viewer being stuck. */
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TrackballControls.js',
     'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js',
     'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js'
   ];
@@ -71,7 +74,7 @@
   function loadThree() {
     if (_three) return _three;
     _three = new Promise(function (resolve, reject) {
-      if (window.THREE && window.THREE.STLLoader && window.THREE.OrbitControls) return resolve(window.THREE);
+      if (window.THREE && window.THREE.STLLoader && (window.THREE.TrackballControls || window.THREE.OrbitControls)) return resolve(window.THREE);
       var i = 0, timer = setTimeout(function () { reject(new Error('3D library timed out — check your connection.')); }, 20000);
       (function next() {
         if (i >= THREE_URLS.length) {
@@ -102,8 +105,8 @@
     stlBase: 'https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/assets/BodyParts3D_data/stl/',
     capabilities: {
       native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
-        'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP'],
-      degraded: ['TRACE_STRUCTURE', 'PEEL_LAYER']
+        'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'TRACE_STRUCTURE'],
+      degraded: ['PEEL_LAYER']
     },
     resolve: function (s) {
       var id = s && s.refs && s.refs.bodyparts3d;
@@ -149,10 +152,16 @@
       '.mb3d-main{display:flex;min-height:0;height:440px}',
       '.mb3d-stage{position:relative;flex:1;min-width:0}',
       '.mb3d canvas{display:block;width:100%;height:100%}',
-      '.mb3d-pins{position:absolute;inset:0;pointer-events:none}',
-      '.mb3d-pin{position:absolute;transform:translate(-50%,-50%);font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;opacity:0;transition:opacity .2s}',
-      '.mb3d-pin.on{opacity:1}.mb3d-pin i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;box-shadow:0 0 9px currentColor}',
-      '.mb3d-pin b{background:rgba(12,10,24,.85);padding:2px 7px;border-radius:6px;border:1px solid currentColor;font-weight:700}',
+      '.mb3d-pins{position:absolute;inset:0;pointer-events:none;overflow:hidden}',
+      '.mb3d-leads{position:absolute;inset:0;width:100%;height:100%}',
+      '.mb3d-pin{position:absolute;transform:translateY(-50%);font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;opacity:0;transition:opacity .15s}',
+      '.mb3d-pin.on{opacity:1}',
+      '.mb3d-pin b{background:rgba(12,10,24,.9);padding:2px 8px;border-radius:6px;border:1px solid currentColor;font-weight:700}',
+      '.mb3d-pin.occl{opacity:.45}',
+      /* the dot sits ON the structure; the label is pushed clear and joined by a leader line, so a label
+         never has to pretend to be where the anatomy is */
+      '.mb3d-anchor{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;border:1.5px solid #fff;opacity:0;transition:opacity .15s;box-shadow:0 0 8px currentColor}',
+      '.mb3d-anchor.on{opacity:1}',
       '.mb3d-status{position:absolute;left:12px;top:11px;font-size:12.5px;background:rgba(20,18,37,.78);border:1px solid #35315a;padding:6px 11px;border-radius:9px;color:var(--m3dim);max-width:74%}',
       '.mb3d-status.ok{color:var(--m3ok)}.mb3d-status.warn{color:var(--m3warn)}',
       '.mb3d-hint{position:absolute;right:12px;bottom:10px;font-size:11px;color:#8681ab}',
@@ -322,6 +331,136 @@
     return hits;
   }
 
+  /* ======================= how many opportunities a note can carry =======================
+     "Three" was a safety rail, not a rule. A 200-word note with one good relationship deserves one chip;
+     a 3,000-word anatomy chapter with eighteen deserves far more than three; a pharmacology chapter that
+     mentions the liver in passing deserves none. The number is a POLICY — tunable without touching the
+     scanner — not a constant baked into the product. */
+  var POLICY = {
+    minScore: 4,          // below this a mention is not worth surfacing at all
+    wordsPerChip: 220,    // reading budget: roughly one opportunity per this many words
+    minGapChars: 700,     // density: how far apart two chips must sit in the reading flow
+    ceiling: 3,           // TEMPORARY testing ceiling. Set to null to let the budget decide.
+    floor: 0,             // a note with nothing worth showing gets nothing
+    /* Personalisation is confidence-graded on purpose. Two ignored chips say nothing about a student;
+       eighty observations say a great deal. Below adaptMinObs the global policy applies unchanged; between
+       adaptMinObs and adaptFullObs the student's own behaviour fades in; only past adaptFullObs does it
+       carry its full (still bounded) weight. */
+    adapt: true,
+    adaptMinObs: 20,      // no personalisation at all below this many chips shown
+    adaptFullObs: 80,     // full (still bounded) personal weight at this many
+    adaptBaseline: 0.25,  // an open rate around this is "normal" — no tilt either way
+    adaptStrength: 0.35   // the most personalisation can ever move the budget: ±35%
+  };
+  function setPolicy(p) { if (p) Object.keys(p).forEach(function (k) { POLICY[k] = p[k]; }); return POLICY; }
+
+  /* engagement: cheap, local, per-device. Used only to nudge the budget, never to hide 3D entirely. */
+  function engagement() {
+    try { return JSON.parse(localStorage.getItem('mb3d_engage') || '{"shown":0,"opened":0}'); }
+    catch (e) { return { shown: 0, opened: 0 }; }
+  }
+  function recordEngagement(kind, n) {
+    try {
+      var e = engagement();
+      e[kind] = (e[kind] || 0) + (n || 1);
+      localStorage.setItem('mb3d_engage', JSON.stringify(e));
+    } catch (err) {}
+  }
+
+  /* Plan a whole note at once.
+       passages: [{ text, ref }]  — ref is whatever the caller needs back (a DOM text node, say)
+     Returns the opportunities to surface, in reading order, each with the offset inside its passage. */
+  function planNote(passages) {
+    var list = terms();
+    if (!list.length || !passages || !passages.length) return [];
+
+    /* 1 — score every mention, keeping its position in the document as a whole */
+    var cands = [], docAt = 0, words = 0;
+    passages.forEach(function (p) {
+      var text = p.text || '';
+      words += (text.match(/\S+/g) || []).length;
+      sentencesOf(text).forEach(function (s) {
+        var relational = RELATIONAL.test(s.text);
+        var definitional = !relational && DEFINITIONAL.test(s.text);
+        list.forEach(function (t) {
+          var re = termRe(t.term); if (!re) return;
+          var m = re.exec(s.text); if (!m) return;
+          var score = 1, why = 'mentioned';
+          if (relational) { score += 4; why = 'a relationship worth seeing'; }
+          if (m.index <= Math.max(24, s.text.length * 0.35)) { score += 2; if (!relational) why = 'what this sentence is about'; }
+          if (t.term.indexOf(' ') >= 0) score += 1;
+          if (definitional) { score -= 3; why = 'definition only'; }
+          cands.push({ ref: p.ref, index: s.at + m.index, docIndex: docAt + s.at + m.index,
+                       sentence: docAt + s.at,
+                       match: m[0], term: t.term, scene: t.scene, key: t.key, score: score, why: why });
+        });
+      });
+      docAt += text.length;
+    });
+
+    cands = cands.filter(function (c) { return c.score >= POLICY.minScore; });
+    if (!cands.length) return [];
+    cands.sort(function (a, b) { return a.docIndex - b.docIndex; });
+
+    /* 2 — cluster: several structures from ONE scene described in ONE sentence are ONE opportunity.
+       "The median nerve arises from the cords, travels with the brachial artery, and passes through the
+       cubital fossa" is a single thing to see, not four chips. Clustering is deliberately limited to a
+       single sentence: two neighbouring sentences can describe two genuinely different ideas, and merging
+       them would put a "+2 related" label on a chip that misrepresents what it opens. Sentences sitting
+       too close together are handled by the density rule below instead. */
+    var clusters = [], byKey = {};
+    cands.forEach(function (c) {
+      var id = c.scene + '@' + c.sentence;
+      var cl = byKey[id];
+      if (cl) {
+        if (cl.keys.indexOf(c.key) < 0) cl.keys.push(c.key);
+        if (c.score > cl.anchor.score) cl.anchor = c;        // the strongest mention carries the chip
+        return;
+      }
+      cl = { scene: c.scene, keys: [c.key], anchor: c };
+      byKey[id] = cl; clusters.push(cl);
+    });
+
+    /* 3 — the budget: what this note can carry without becoming a gallery */
+    var budget = Math.max(POLICY.floor, Math.round(words / POLICY.wordsPerChip) || 1);
+    if (POLICY.adapt) {
+      var e = engagement();
+      if (e.shown >= POLICY.adaptMinObs) {
+        var rate = e.opened / e.shown;
+        var base = POLICY.adaptBaseline || 0.25;
+        // how far this student sits from normal, clamped to ±1
+        var tilt = Math.max(-1, Math.min(1, (rate - base) / base));
+        // how much we are entitled to believe it yet, 0 → 1 across the observation window
+        var weight = Math.max(0, Math.min(1, (e.shown - POLICY.adaptMinObs) / Math.max(1, POLICY.adaptFullObs - POLICY.adaptMinObs)));
+        budget = Math.max(1, Math.round(budget * (1 + (POLICY.adaptStrength || 0.35) * tilt * weight)));
+      }
+    }
+    if (POLICY.ceiling != null) budget = Math.min(budget, POLICY.ceiling);
+
+    /* 4 — density: strongest first, but never two chips inside the same reading window */
+    var ranked = clusters.slice().sort(function (a, b) {
+      return b.anchor.score - a.anchor.score || b.keys.length - a.keys.length || a.anchor.docIndex - b.anchor.docIndex;
+    });
+    var taken = [], usedScenes = {};
+    for (var i = 0; i < ranked.length && taken.length < budget; i++) {
+      var cl = ranked[i], ok = true;
+      for (var j = 0; j < taken.length; j++) {
+        if (Math.abs(cl.anchor.docIndex - taken[j].anchor.docIndex) < POLICY.minGapChars) { ok = false; break; }
+      }
+      if (!ok) continue;
+      if (usedScenes[cl.scene + '|' + cl.anchor.key]) continue;    // never the same structure twice
+      usedScenes[cl.scene + '|' + cl.anchor.key] = 1;
+      taken.push(cl);
+    }
+
+    taken.sort(function (a, b) { return a.anchor.docIndex - b.anchor.docIndex; });
+    return taken.map(function (cl) {
+      var a = cl.anchor;
+      return { ref: a.ref, index: a.index, match: a.match, scene: a.scene, key: a.key,
+               score: a.score, why: a.why, related: cl.keys.length - 1 };
+    });
+  }
+
   /* ======================= the player ======================= */
   var LIVE = null;
 
@@ -374,12 +513,16 @@
       '<div class="mb3d">' +
         '<div class="mb3d-chips" data-r="chips"></div>' +
         '<div class="mb3d-main">' +
-          '<div class="mb3d-stage" data-r="stage"><canvas data-r="canvas"></canvas><div class="mb3d-pins" data-r="pins"></div>' +
+          '<div class="mb3d-stage" data-r="stage"><canvas data-r="canvas"></canvas>' +
+            '<div class="mb3d-pins" data-r="pins"><svg class="mb3d-leads" data-r="leads"></svg></div>' +
             '<div class="mb3d-status" data-r="status">Loading meshes…</div><div class="mb3d-hint">drag to rotate · scroll to zoom</div></div>' +
           '<div class="mb3d-side">' +
             '<div class="mb3d-sh"><span data-r="sidehd">Parts</span><a data-r="showall">show all</a></div>' +
             '<div class="mb3d-list" data-r="list"></div>' +
-            '<div class="mb3d-acts"><button class="mb3d-btn pri" data-r="tour">▶ Tour the parts</button><button class="mb3d-btn" data-r="ghost">Ghost others</button></div>' +
+            '<div class="mb3d-acts"><button class="mb3d-btn pri" data-r="play">▶ Play</button>' +
+              '<button class="mb3d-btn" data-r="tour">Tour parts</button>' +
+              '<button class="mb3d-btn" data-r="ghost">Ghost others</button>' +
+              '<button class="mb3d-btn" data-r="solo">Only this</button></div>' +
           '</div>' +
         '</div>' +
         '<div class="mb3d-slider" data-r="cliprow" style="display:none">Cut plane<input type="range" data-r="clip" min="-1" max="1" step="0.01" value="0"></div>' +
@@ -388,7 +531,7 @@
       '</div>';
 
     var $ = function (r) { return host.querySelector('[data-r="' + r + '"]'); };
-    var stage = $('stage'), canvas = $('canvas'), pinWrap = $('pins');
+    var stage = $('stage'), canvas = $('canvas'), pinWrap = $('pins'), leads = $('leads');
     function st(t, c) { var e = $('status'); e.textContent = t; e.className = 'mb3d-status' + (c ? ' ' + c : ''); }
 
     var renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true });
@@ -398,10 +541,19 @@
 
     var sceneObj = new T.Scene(); sceneObj.background = new T.Color(0x141225);
     var camera = new T.PerspectiveCamera(45, 1, 0.01, 4000); camera.position.set(0, 0.4, 7);
-    var controls = new T.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; controls.dampingFactor = 0.09;
-    controls.autoRotate = true; controls.autoRotateSpeed = 0.9;
-    controls.minDistance = 1.2; controls.maxDistance = 200;
+    /* Trackball: no fixed up-axis, so the model turns freely on every axis instead of jamming at the
+       poles. OrbitControls stays as a fallback if the trackball script did not load. */
+    var trackball = !!T.TrackballControls;
+    var controls = trackball ? new T.TrackballControls(camera, renderer.domElement)
+                             : new T.OrbitControls(camera, renderer.domElement);
+    if (trackball) {
+      controls.rotateSpeed = 3.2; controls.zoomSpeed = 1.2; controls.panSpeed = 0.8;
+      controls.staticMoving = false; controls.dynamicDampingFactor = 0.15;
+      controls.minDistance = 1.2; controls.maxDistance = 200;
+    } else {
+      controls.enableDamping = true; controls.dampingFactor = 0.09;
+      controls.minDistance = 1.2; controls.maxDistance = 200;
+    }
 
     sceneObj.add(new T.HemisphereLight(0xf2ecff, 0x20203a, 1.0));
     var k1 = new T.DirectionalLight(0xffffff, 1.15); k1.position.set(5, 8, 6); sceneObj.add(k1);
@@ -412,19 +564,21 @@
     var overlay = new T.Group(); sceneObj.add(overlay);          // relationship lines
     var meshes = {}, pins = {}, loadedKeys = [], missing = [];
     var clipPlane = new T.Plane(new T.Vector3(0, 0, -1), 0), clipping = false;
-    var selected = [], ghost = false, running = true, raf = 0, tourTimer = null;
+    /* Auto-rotation is an invitation, not a behaviour. It shows the thing is three-dimensional for three
+       seconds, then the model belongs to the student — and the first touch ends it for good, so nothing
+       ever drifts out from under a finger. */
+    var SPIN_MS = 3000, spinTill = 0, spinning = false, lastT = 0;
+    function startSpin() { spinning = true; spinTill = (window.performance || Date).now() + SPIN_MS; }
+    function stopSpin() { spinning = false; }
+    ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+      renderer.domElement.addEventListener(ev, stopSpin, { passive: true });
+    });
+    var selected = [], ghost = false, solo = false, running = true, raf = 0, tourTimer = null, playTimer = null;
     var degraded = {};
 
     /* ---------- load every structure; a failure is reported, never fatal ---------- */
-    var jobs = structures.map(function (s) {
-      if (s.render === 'anchor') {
-        var g = new T.Mesh(new T.SphereGeometry((s.anchor && s.anchor.radius) || 0.09, 20, 16),
-          new T.MeshStandardMaterial({ color: new T.Color(s.color || '#ffb020'), emissive: new T.Color(s.color || '#ffb020'), emissiveIntensity: 0.35, transparent: true }));
-        var a = (s.anchor && s.anchor.xyz) || [0, 0, 0];
-        g.position.set(a[0], a[1], a[2]); g.userData = s;
-        holder.add(g); meshes[s.key] = g; loadedKeys.push(s.key);
-        return Promise.resolve(true);
-      }
+    var anchorStructs = structures.filter(function (s) { return s.render === 'anchor'; });
+    var jobs = structures.filter(function (s) { return s.render !== 'anchor'; }).map(function (s) {
       return adapter.load(T, s).then(function (m) {
         if (!m) { missing.push(s.label || s.key); return false; }
         holder.add(m); meshes[s.key] = m; loadedKeys.push(s.key);
@@ -432,8 +586,37 @@
       });
     });
 
+    /* A landmark is a place ON a bone, not a model of its own: the supraglenoid tubercle has no mesh, it
+       is a spot on the scapula. Anchors are authored in the parent's own bounding box as fractions
+       (uvw, each 0–1), so they survive any scaling the viewer applies and travel with the parent when it
+       moves. They are children of the parent mesh, which is what keeps them exactly where they were put. */
+    function placeAnchors() {
+      anchorStructs.forEach(function (s) {
+        var a = s.anchor || {}, parent = meshes[a.on];
+        var col = new T.Color(s.color || '#ffcf5c');
+        var r = a.radius || 0.05;
+        var g = new T.Mesh(new T.SphereGeometry(1, 20, 16),
+          new T.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.65, transparent: true, depthTest: false }));
+        g.renderOrder = 5; g.userData = s;
+        if (parent) {
+          if (!parent.geometry.boundingBox) parent.geometry.computeBoundingBox();
+          var bb = parent.geometry.boundingBox, size = bb.getSize(new T.Vector3());
+          var uvw = a.uvw || [0.5, 0.5, 0.5];
+          g.position.set(bb.min.x + size.x * uvw[0], bb.min.y + size.y * uvw[1], bb.min.z + size.z * uvw[2]);
+          g.scale.setScalar(r * Math.max(size.x, size.y, size.z));
+          parent.add(g);                                   // rides the parent's transform for free
+        } else if (a.xyz) {
+          g.position.set(a.xyz[0], a.xyz[1], a.xyz[2]);
+          g.scale.setScalar(r * 4);
+          holder.add(g);
+        } else { return; }
+        meshes[s.key] = g; loadedKeys.push(s.key);
+      });
+    }
+
     var player = {
       scene: scene, host: host, meshes: meshes,
+      camera: camera, controls: controls,          // exposed for tests and for tuning from the console
       dispose: function () { teardown(); }
     };
     LIVE = player;
@@ -443,8 +626,9 @@
     var ready = Promise.all(jobs).then(function () {
       if (!loadedKeys.length) { st('No meshes could be loaded — check your connection.', 'warn'); return player; }
       fit();
+      placeAnchors();                                // after fit(), so landmarks land on the settled bones
       holder.rotation.y = (scene.camera && scene.camera.initialYaw) || 0;
-      controls.autoRotateSpeed = ((scene.camera && scene.camera.autoRotate) || 0.006) * 150;
+      startSpin();                                   // a 3-second first glance, then it is the student's
       buildList(); buildChips();
       applyView(0);
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
@@ -475,7 +659,9 @@
 
     /* ---------- parts list ---------- */
     function buildList() {
-      var list = $('list'); list.innerHTML = ''; pinWrap.innerHTML = ''; pins = {};
+      var list = $('list'); list.innerHTML = '';
+      Array.prototype.slice.call(pinWrap.children).forEach(function (c) { if (c !== leads) pinWrap.removeChild(c); });
+      leads.innerHTML = ''; pins = {};
       $('sidehd').textContent = (scene.structure || 'Parts') + ' · ' + parts.length;
       var lastGrp = null;
       parts.forEach(function (p) {
@@ -497,10 +683,17 @@
     }
     function addPin(s) {
       if (pins[s.key]) return;
-      var pin = document.createElement('div'); pin.className = 'mb3d-pin';
       var col = esc(s.color || '#7c5cff');
-      pin.innerHTML = '<i style="background:' + col + ';color:' + col + '"></i><b>' + esc(s.label || s.key) + '</b>';
-      pinWrap.appendChild(pin); pins[s.key] = pin;
+      var label = document.createElement('div');
+      label.className = 'mb3d-pin'; label.style.color = col;
+      label.innerHTML = '<b>' + esc(s.label || s.key) + '</b>';
+      var dot = document.createElement('div');
+      dot.className = 'mb3d-anchor'; dot.style.background = col; dot.style.color = col;
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('stroke', col); line.setAttribute('stroke-width', '1.2');
+      line.setAttribute('opacity', '0');
+      leads.appendChild(line); pinWrap.appendChild(dot); pinWrap.appendChild(label);
+      pins[s.key] = { label: label, dot: dot, line: line };
     }
 
     function buildChips() {
@@ -554,14 +747,17 @@
       paint(); drawPairs();
     }
 
-    function applyView(i) {
+    function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
       stopTour();
+      if (!fromPlay) stopPlay();
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-chip'), function (c, k) { c.classList.toggle('on', k === i); });
       selected = [];
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });
-      runOps(v.ops);
+      /* the view's own line goes up FIRST, so an op that narrates per step (TRACE) overwrites it rather
+         than being overwritten by it */
       $('narr').innerHTML = '<b>' + esc(v.title || v.mode) + '</b> — ' + esc(v.narration || '');
+      runOps(v.ops);
       var row = $('cliprow');
       row.style.display = state.clip ? 'flex' : 'none';
       if (state.clip) { $('clip').value = state.clip.offset; setClip(state.clip.axis, state.clip.offset); }
@@ -589,19 +785,53 @@
       })();
     }
 
-    /* TRACE degrades to a timed sequential highlight along the authored path — the teaching survives
-       even though this renderer cannot draw a true swept path. */
+    /* TRACE: walk the authored path one waypoint at a time — the structure stays on screen, the camera
+       travels to each landmark in turn, and the narration bar says what you are looking at. "Arises from
+       the supraglenoid tubercle and passes through the intertubercular groove" is three stops on a
+       journey, not three bones lighting up. */
     var traceTimer = null;
+    function flyTo(pos, dist, ms) {
+      var from = camera.position.clone();
+      var tgtFrom = (controls.target || new T.Vector3()).clone();
+      var dir = camera.position.clone().sub(tgtFrom).normalize();
+      var to = pos.clone().add(dir.multiplyScalar(dist || camera.position.distanceTo(tgtFrom)));
+      var t0 = (window.performance || Date).now(); ms = ms || 700;
+      (function step() {
+        var t = Math.min(1, ((window.performance || Date).now() - t0) / ms), e = t * t * (3 - 2 * t);
+        camera.position.lerpVectors(from, to, e);
+        if (controls.target) controls.target.lerpVectors(tgtFrom, pos, e);
+        if (t < 1 && running) requestAnimationFrame(step);
+      })();
+    }
+    function frameDist(m) {
+      if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+      var s = m.geometry.boundingBox.getSize(new T.Vector3());
+      var world = Math.max(s.x, s.y, s.z) * holder.scale.x * (m.scale ? m.scale.x : 1);
+      return Math.max(1.6, Math.min(9, world * 3.2 + 1.2));
+    }
     function trace(o) {
+      var subject = o.target && meshes[o.target] ? o.target : null;
       var path = (o.path || []).filter(function (k) { return meshes[k]; });
       if (!path.length) return;
-      var i = 0, step = Math.max(700, ((o.duration || 6) * 1000) / path.length);
+      var i = 0, step = Math.max(1600, ((o.duration || 6) * 1000) / path.length);
       clearInterval(traceTimer);
-      traceTimer = setInterval(function () {
+      stopSpin();
+      function go() {
         if (!running || i >= path.length) { clearInterval(traceTimer); traceTimer = null; return; }
-        state.hi = {}; state.hi[path[i]] = 0.6; state.ghosted = true; state.only = [path[i]];
-        paint(); i++;
-      }, step);
+        var k = path[i], m = meshes[k];
+        state.hi = {}; state.hi[k] = 0.85;
+        if (subject) state.hi[subject] = 0.45;                 // the structure being traced stays lit
+        state.only = subject ? [k, subject] : [k];
+        state.ghosted = true;
+        paint();
+        flyTo(center(m), frameDist(m), 900);
+        var s = structures.filter(function (x) { return x.key === k; })[0];
+        if (s) $('narr').innerHTML = '<b>' + esc(s.label) + '</b>' + (s.narration ? ' — ' + esc(s.narration) : '') +
+          '<span style="color:#8f8ab5;font-size:12px"> · step ' + (i + 1) + ' of ' + path.length + '</span>';
+        i++;
+      }
+      go();
+      traceTimer = setInterval(go, step);
     }
 
     function drawPairs() {
@@ -614,9 +844,12 @@
       });
     }
 
+    /* The bounding-BOX centre, not the bounding-sphere centre. For a long thin muscle the sphere centre
+       can sit well off the mesh; the box centre stays on it, which is what makes the dot land on the
+       structure rather than near it. */
     function center(m) {
-      if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
-      var c = m.geometry.boundingSphere.center.clone();
+      if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+      var c = m.geometry.boundingBox.getCenter(new T.Vector3());
       m.localToWorld(c); return c;
     }
 
@@ -643,6 +876,8 @@
         var m = meshes[s.key]; if (!m) return;
         var visible = state.visible ? state.visible[s.key] !== false : true;
         if (state.only && state.only.indexOf(s.key) < 0 && !state.ghosted) visible = false;
+        // "Only this": ghosting to 10% still leaves a haze. Sometimes a student wants the structure alone.
+        if (solo && anySel && selected.indexOf(s.key) < 0) visible = false;
         m.visible = visible;
         var isSel = selected.indexOf(s.key) >= 0;
         var isHi = isSel || (state.hi && state.hi[s.key] != null);
@@ -654,19 +889,51 @@
         m.material.needsUpdate = true;
       });
       Object.keys(pins).forEach(function (k) {
-        var show = selected.indexOf(k) >= 0 || (state.hi && state.hi[k] != null);
-        pins[k].classList.toggle('on', !!show && !!(meshes[k] && meshes[k].visible));
+        var show = !!(selected.indexOf(k) >= 0 || (state.hi && state.hi[k] != null)) && !!(meshes[k] && meshes[k].visible);
+        pins[k].label.classList.toggle('on', show);
+        pins[k].dot.classList.toggle('on', show);
+        pins[k].line.setAttribute('opacity', show ? '0.75' : '0');
       });
     }
 
     $('showall').addEventListener('click', function () {
-      selected = []; ghost = false;
+      selected = []; ghost = false; solo = false;
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });
-      $('ghost').classList.remove('pri');
+      $('ghost').classList.remove('pri'); $('solo').classList.remove('pri');
       paint();
     });
-    $('ghost').addEventListener('click', function () { ghost = !ghost; this.classList.toggle('pri', ghost); paint(); });
+    $('ghost').addEventListener('click', function () {
+      ghost = !ghost; if (ghost) { solo = false; $('solo').classList.remove('pri'); }
+      this.classList.toggle('pri', ghost); paint();
+    });
+    $('solo').addEventListener('click', function () {
+      solo = !solo; if (solo) { ghost = false; $('ghost').classList.remove('pri'); }
+      this.classList.toggle('pri', solo); paint();
+    });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
+    $('play').addEventListener('click', function () { playTimer ? stopPlay() : startPlay(); });
+
+    /* ---------- play the scene as a short narrated sequence ----------
+       This is the "visualize video" shape: the beats the author wrote, in order, each with its camera,
+       its highlights and its line of narration — but still a live model the student can grab at any time. */
+    function startPlay() {
+      if (!views.length) return;
+      stopTour(); stopSpin();
+      var i = 0;
+      $('play').textContent = '■ Stop'; $('play').classList.add('pri');
+      function beat() {
+        if (!running || i >= views.length) { stopPlay(); return; }
+        applyView(i, true);
+        i++;
+      }
+      beat();
+      playTimer = setInterval(beat, 7000);
+    }
+    function stopPlay() {
+      if (playTimer) clearInterval(playTimer);
+      playTimer = null;
+      var b = $('play'); if (b) { b.textContent = '▶ Play'; b.classList.add('pri'); }
+    }
 
     function startTour() {
       var i = 0, keys = parts.filter(function (p) { return meshes[p.key]; }).map(function (p) { return p.key; });
@@ -685,26 +952,103 @@
       tourTimer = null; $('tour').textContent = '▶ Tour the parts';
     }
 
-    /* ---------- loop ---------- */
-    var v3 = new T.Vector3();
-    function updatePins() {
-      var w = stage.clientWidth, h = stage.clientHeight;
-      Object.keys(pins).forEach(function (k) {
-        var m = meshes[k]; if (!m || !m.visible) return;
-        v3.copy(center(m)).project(camera);
-        pins[k].style.left = ((v3.x * 0.5 + 0.5) * w) + 'px';
-        pins[k].style.top = ((-v3.y * 0.5 + 0.5) * h) + 'px';
+    /* ---------- calibrate mode: put a landmark exactly where it belongs ----------
+       Turn on with localStorage.mb3dcal = '1'. Click anywhere on a bone and the viewer prints the anchor
+       JSON for that exact spot, in the parent's own coordinates, ready to paste into the scene file.
+       Authored once by us, never by a student — and the validator keeps it "needs-review" until a human
+       has looked at it. */
+    function calOn() { try { return localStorage.getItem('mb3dcal') === '1'; } catch (e) { return false; } }
+    if (calOn()) {
+      canvas.style.cursor = 'crosshair';
+      canvas.addEventListener('click', function (e) {
+        var r = canvas.getBoundingClientRect();
+        var ndc = new T.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+        ray.setFromCamera(ndc, camera);
+        var hit = ray.intersectObjects(holder.children, false).filter(function (h) { return h.object.visible; })[0];
+        if (!hit) return;
+        var m = hit.object, s = m.userData || {};
+        if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+        var bb = m.geometry.boundingBox, size = bb.getSize(new T.Vector3());
+        var local = m.worldToLocal(hit.point.clone());
+        var uvw = [(local.x - bb.min.x) / size.x, (local.y - bb.min.y) / size.y, (local.z - bb.min.z) / size.z]
+          .map(function (n) { return Math.round(n * 1000) / 1000; });
+        var snippet = '{ "key": "NEW_LANDMARK", "label": "Name it", "role": "part", "render": "anchor",\n' +
+          '  "anchor": { "on": "' + (s.key || '?') + '", "uvw": [' + uvw.join(', ') + '], "radius": 0.05 },\n' +
+          '  "status": "needs-review", "terms": [], "narration": "" }';
+        try { console.log('[mb3d calibrate] on ' + (s.key || '?') + ':\n' + snippet); } catch (x) {}
+        $('narr').innerHTML = '<b>Calibrate</b> — on <b>' + esc(s.label || s.key) + '</b>, uvw = [' + uvw.join(', ') +
+          ']<br><textarea readonly style="width:100%;height:74px;margin-top:6px;background:#141225;color:#c9bcff;border:1px solid #35315a;border-radius:8px;padding:7px;font:12px ui-monospace,Menlo,Consolas,monospace">' +
+          esc(snippet) + '</textarea>';
       });
     }
+
+    /* ---------- labels ---------- */
+    var v3 = new T.Vector3(), ray = new T.Raycaster(), occlAt = 0;
+    var LABEL_H = 26;                                  // the vertical room one label needs
+    function updatePins() {
+      var w = stage.clientWidth, h = stage.clientHeight, live = [];
+
+      Object.keys(pins).forEach(function (k) {
+        var p = pins[k], m = meshes[k];
+        if (!p.label.classList.contains('on') || !m || !m.visible) { park(p); return; }
+        v3.copy(center(m)).project(camera);
+        if (v3.z > 1) { park(p); return; }              // behind the camera — no label at all
+        live.push({ k: k, p: p, m: m, x: (v3.x * 0.5 + 0.5) * w, y: (-v3.y * 0.5 + 0.5) * h });
+      });
+
+      /* Declutter: labels are laid out top-to-bottom and pushed apart until none overlap, then nudged
+         inside the frame. The dot stays put — only the label moves, and the leader line keeps the two
+         connected, so a crowd of structures never becomes a pile of unreadable text. */
+      live.sort(function (a, b) { return a.y - b.y; });
+      var floorY = -1e9;
+      live.forEach(function (it) {
+        var ly = Math.max(it.y, floorY + LABEL_H);
+        ly = Math.min(ly, h - 10);
+        floorY = ly;
+        var side = it.x > w * 0.55 ? -1 : 1;            // put the label on the roomier side of the dot
+        var lx = it.x + side * 16;
+        var lw = it.p.label.offsetWidth || 90;
+        if (side > 0) lx = Math.min(lx, w - lw - 6); else lx = Math.max(6, lx - lw);
+        it.p.label.style.left = lx + 'px';
+        it.p.label.style.top = ly + 'px';
+        it.p.dot.style.left = it.x + 'px';
+        it.p.dot.style.top = it.y + 'px';
+        it.p.dot.style.display = it.p.label.style.display = '';
+        var lineX = side > 0 ? lx : lx + lw;
+        it.p.line.setAttribute('x1', it.x); it.p.line.setAttribute('y1', it.y);
+        it.p.line.setAttribute('x2', lineX); it.p.line.setAttribute('y2', ly);
+      });
+
+      /* Is the structure actually visible from here, or buried behind another mesh? Checked a few times a
+         second, not every frame — a dimmed label is honest about a structure you cannot currently see. */
+      var now = (window.performance || Date).now();
+      if (live.length && now - occlAt > 180) {
+        occlAt = now;
+        var solids = holder.children.filter(function (o) { return o.visible && o.material && o.material.opacity > 0.5; });
+        live.forEach(function (it) {
+          var target = center(it.m);
+          ray.set(camera.position, target.clone().sub(camera.position).normalize());
+          var hit = ray.intersectObjects(solids, false)[0];
+          it.p.label.classList.toggle('occl', !!(hit && hit.object !== it.m));
+        });
+      }
+    }
+    function park(p) { p.dot.style.display = 'none'; p.label.style.display = 'none'; p.line.setAttribute('opacity', '0'); }
+
     function resize() {
       var w = stage.clientWidth || 640, h = stage.clientHeight || 400;
       renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+      leads.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      if (controls.handleResize) controls.handleResize();   // trackball needs to be told
     }
     window.addEventListener('resize', resize); resize();
     function loop() {
       if (!running) return;
       raf = requestAnimationFrame(loop);
       if (document.hidden) return;                     // don't burn battery in a background tab
+      var now = (window.performance || Date).now(), dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0;
+      lastT = now;
+      if (spinning) { if (now > spinTill) spinning = false; else holder.rotation.y += dt * 0.55; }
       controls.update(); updatePins(); renderer.render(sceneObj, camera);
     }
     loop();
@@ -714,6 +1058,7 @@
       if (raf) cancelAnimationFrame(raf);
       if (tourTimer) clearInterval(tourTimer);
       if (traceTimer) clearInterval(traceTimer);
+      if (playTimer) clearInterval(playTimer);
       window.removeEventListener('resize', resize);
       try {
         Object.keys(meshes).forEach(function (k) {
@@ -781,7 +1126,12 @@
     partForTermSync: partForTermSync,
     terms: terms,
     rankMentions: rankMentions,
-    MIN_SCORE: 4,          // below this a mention is not worth a chip — see rankMentions
+    planNote: planNote,
+    policy: setPolicy,                 // MB3D.policy({ceiling:null, wordsPerChip:250}) — tune without code changes
+    getPolicy: function () { return POLICY; },
+    engagement: engagement,
+    recordEngagement: recordEngagement,
+    MIN_SCORE: 4,          // legacy alias for POLICY.minScore
     mount: mount,
     mountScene: mountScene,
     open: open,

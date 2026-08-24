@@ -5375,3 +5375,43 @@ Remaining CNT: CNT-07 (upsert-only deletes/moves reconciliation, MEDIUM). Needs 
 study-dock.js + app.html parse; harnesses green.
 - **DCK-01 (HIGH):** the app now calls a new `MB_DOCK_REFRESH()` at the end of every `render()`, so advancing a card re-binds the dock to the CURRENT card (card advance doesn't change the hash, so the panel used to stay on the previous card and "Save note" wrote onto — and destroyed — the wrong card's note). Belt-and-braces: Save re-reads the live ctx and refuses if the card changed.
 - **DCK-02 (HIGH):** `onStudyScreen` now returns true whenever a live `QB`/`GAPLOOP` session exists (and adds mega/exam/solve), so "📄 Show in the note" works in the Mega Q-bank and the V1.6 gap loop instead of silently no-op'ing; `ctx()` prefers the innermost live session (gap → Mega → flashcards) so it never binds to a stale `S`.
+
+---
+# ✅ FIXED — SL-01/02, SET-01 (part) — 2026-08-23 (Claude)
+- **SL-02 (HIGH):** `reviewHealth`, `dueCount`, `dueReviewCount` now exclude `isFlagged` cards → the "overdue" tile / nav badge / Home / nudge / cleared-check match the servable pool; no more phantom overdue that can't clear, no daily nag about hidden cards, no zeroed new-card cap from ghost reviews (PRG-03).
+- **SL-01 (HIGH):** the Due-now "Open" button now serves that topic's DUE cards through the grading runner (`startTopicDue` → `startFilteredSession`, budget-uncapped) instead of opening the whole deck at a stale, already-passed position; falls back to opening the topic when nothing is actually due.
+- **SET-01 (part):** `qbReset` now also clears the topic's `_events` (was never cleared). The remaining half — sync's UNION merge re-adopting cloud copies after a reset — needs a product decision (tombstone/rev-bump vs "never lose history") and is left for Frank.
+
+# ⚑ NEEDS FRANK — product decisions / live checks (not code bugs to silently change)
+- **STK-01 + PRG-01 (streak):** the streak advances on a single card flip (markActive bumps unconditionally) while the copy demands new≥20 + reviews≥65% — and 20 is unreachable (effectiveNewCap starts at 12, →5 near exams, →0 on a review backlog). Fixing this changes what "a day" means for the streak/freeze economy — a motivation-mechanic decision. Recommend: streak target = the day's ACHIEVABLE plan (met all planned new + review %), and only advance via the gate, not the flip.
+- **SET-01 union-resurrection, SET-02 (restore discarded when signed in):** both hinge on the same "authoritative reset/restore vs union-merge" design tension.
+- **ENT-02/03/05, ENT-06:** trials/entitlement + pricing model + `/tts` paid-voice selection — pricing/enforcement decisions.
+- **CNT-05, QB-09:** live checks (card count vs shown; max_tokens clamp) noted inline.
+
+---
+# ✅ FIXED — swipe / podcast / session-guard batch — 2026-08-23 (Claude)
+app.html parses; 5 harnesses green.
+- **SWP-01:** swipe navigation + coach mark now active on `#/nudge` (the phone notification session) — all five route gates broadened to study|review|hard|nudge|hardnudge.
+- **SWP-02:** a left-swipe on the last card now reaches the results screen (was a silent no-op) via `sessionNext()` for session modes.
+- **SWP-03:** `_mbViaSwipe` is armed only inside branches that actually advance, so it can't leak `true` onto the next tap.
+- **TOP-08:** leaving a topic (or switching topics) stops podcast audio — it lived on `document.body` and played forever otherwise.
+- **TOP-10:** starting a topic Q-bank now confirms before discarding a live Mega/mistakes/drill session (answered + graded questions).
+- **REV-05:** `rateCard` gained the same-session already-rated guard the MCQ path already had — a double-tap can't re-mutate SRS/streak/mistakes.
+Deferred: HRD-04 (needs extracting pageReview's meter into a shared `sessionMeter()` — a refactor).
+
+---
+# ⚠️ INCIDENT — app.html clobbered by the concurrent 3D chat, re-applied — 2026-08-23 (Claude)
+The separate 3D-anatomy chat re-saved `app.html` (its own copy + MODEL3D wiring) and reverted ~10 of my earlier
+app.html bug fixes (PW-01, REC-08, LCH-01/02, HRD-01/07, NTF-02, MIS-01/08/09, HRD-05, SL-02, DCK-01/02, TIM-05).
+All NON-app.html fixes were untouched. I re-applied every lost app.html edit and re-verified: inline JS parses, 5
+harnesses green, markers present, `builtReady`×5.
+**Coordination rule going forward: only ONE chat edits app.html at a time.** The 3D wiring is in; if that chat
+edits app.html again it will clobber these again. Deploy the CURRENT app.html (post-reapply), not the earlier card.
+
+---
+# ✅ FIXED — search / strict-overlay batch — 2026-08-24 (Claude)
+app.html parses; 5 harnesses green.
+- **SCA-09:** topic search no longer stringifies a missing lecturer to "undefined" (so "und"/"ned"/"def" stop matching every lecturer-less topic).
+- **SCA-10:** a card search hit now opens the matched card (via `openCardAt`), not the deck's last saved position.
+- **NTF-05:** the strict overlay's "Start review now" dismisses (and lets the student continue) when a session is already in progress, instead of discarding it for a nudge session.
+- Also this session: HRD-06 (star count = resolved pool), HRD-03 (key-aware Hard rebuild), MIS-05/LCH-05 (rows open the tapped card), SWP-01/02/03, TOP-08/10, REV-05, SL-01/02.

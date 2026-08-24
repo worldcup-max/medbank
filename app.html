@@ -984,14 +984,21 @@ const COLOR = {'pediatrics':'var(--ped)','og':'var(--og)','community-medicine':'
 window.MB_CARDS_BY_DAY = function(){ try{ return DATA.log || {}; }catch(e){ return {}; } };
 window.MB_STREAK = function(){ try{ return curStreak(); }catch(e){ return 0; } };
 /* study time lives inside DATA so it syncs with the account via profile_state (same path as cards) */
-window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) return; var k=dstr(); DATA.study[k]=(DATA.study[k]||0)+sec; persist(); }catch(e){} };
+window.MB_STUDY_ADD = function(sec){ try{ sec=Math.round(sec)||0; if(sec<=0) return true; var k=dstr(); DATA.study[k]=(DATA.study[k]||0)+sec; return persist(); }catch(e){ return false; } };   // TIM-05: report success so the timer can retry on failure
 window.MB_STUDY_GET = function(){ try{ return DATA.study || {}; }catch(e){ return {}; } };
 /* provider for the docked Ask / Source / Note panel (study-dock.js) */
 window.MB_DOCK = {
-  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0]; return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
+  onStudyScreen: function(){ var r=(location.hash.slice(2)||'').split('/')[0];   // DCK-02: Mega/exam/gap are state overlays on their own routes; the dock's precondition is "content on screen"
+    if((typeof QB!=='undefined'&&QB)||(typeof GAPLOOP!=='undefined'&&GAPLOOP)) return true;
+    return ['topic','study','review','cram','hard','leeches','mistakes','nudge','hardnudge','mega','exam','solve'].indexOf(r)>=0; },   // NOT 'today' (the hub is a menu, not reading/study content)
   ctx: function(){
     var t=null, card=null, cardId=null;
-    try{ if(typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } } }catch(e){}
+    // DCK-02: prefer the INNERMOST live session (gap loop → Mega Q-bank → flashcards), so the dock never binds to a stale S.
+    try{
+      if(typeof GAPLOOP!=='undefined' && GAPLOOP){ var gm=GAPLOOP.mt||null; var gt=topById(GAPLOOP.topicId||(gm&&gm.topicId)); if(gt){ t=gt; card=gm; cardId=(gm&&gm.id)||''; } }
+      if(!t && typeof QB!=='undefined' && QB && QB.items && QB.items.length){ var q=QB.items[QB.i]; var qt=topById((q&&q.topicId)||QB.topicId); if(qt){ t=qt; card=q; cardId=(q&&(q.id||q.key))||''; } }
+      if(!t && typeof S!=='undefined' && S && S.items && S.items.length){ var it=S.items[S.order[S.i]]; if(it){ t=it.t; card=it.c; cardId=it.id; } }
+    }catch(e){}
     if(!t){ var p=(location.hash.slice(2)||'').split('/'); if(p[1] && (p[0]==='topic'||p[0]==='study'||p[0]==='cram')){ try{ t=topById(p[1]); }catch(e){} } }
     if(!t) return null;
     return { topicId:t.id, topicName:t.name||'', subject:(t.subject&&t.subject.name)||'', pdf:t.pdf||'',
@@ -1158,9 +1165,16 @@ let DATA = (()=>{
   if(!d.flags.budget15){ if(d.daily.budget===0) d.daily.budget=15; d.flags.budget15=1; }   // Session Engine: adopt a 15-min default budget once (still user-changeable)
   return d;
 })();
-function persist(){ try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }catch(e){}
+var _persistWarned=false;
+function persist(){ var ok=true;
+  try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }
+  catch(e){ ok=false;   // TIM-05: surface a storage-full failure ONCE instead of silently losing study/progress
+    if(!_persistWarned){ _persistWarned=true; try{ mbToast("Your device is out of storage — recent progress may not be saved. Free some space, then reopen MedBank."); }catch(_){} }
+  }
+  if(ok) _persistWarned=false;
   try{ if(typeof scheduleBackup==='function') scheduleBackup(); }catch(e){}
-  try{ if(window.MB_SYNC) MB_SYNC.markDirty(); }catch(e){} }
+  try{ if(window.MB_SYNC) MB_SYNC.markDirty(); }catch(e){}
+  return ok; }
 /* non-blocking toast — replaces blocking alert() for errors so a failure never freezes the page */
 function mbToast(msg){ try{ var n=document.createElement('div'); n.className='mbtoast'; n.textContent=String(msg||'');
   document.body.appendChild(n); setTimeout(function(){ n.style.opacity='0'; setTimeout(function(){ if(n.parentNode)n.remove(); },300); },3600);
@@ -1294,7 +1308,7 @@ function recordAnswerMs(id,type,ms){ ms=Math.max(1500,Math.min(120000,ms|0));
 /* ===== Adaptive new-card cap — new cards are a privilege earned by keeping reviews under control ===== */
 function avgReviewSec(){ return Math.max(6, Math.round(typeMedian('review')/1000)); }        // measured seconds per review (floor 6s)
 function dueReviewCount(){ const today=dayNum(); let n=0;
-  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s && s.box>=0 && s.due<=today) n++; })); return n; }
+  startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{ const s=DATA.cards[cid(t.id,'recall',c)]; if(s && s.box>=0 && s.due<=today && !isFlagged(cid(t.id,'recall',c))) n++; })); return n; }   // SL-02/PRG-03: phantom flagged reviews must not zero the daily new-card cap
 function reviewLoadRatio(){ const budget=DATA.daily.budget||15; const capacity=Math.max(1,(budget*60)/avgReviewSec()); return dueReviewCount()/capacity; }
 function examSoon(days){ return DB.subjects.some(sb=>{ const d=examDays(sb.id); return d!=null && d>=0 && d<=(days||14); }); }
 function effectiveNewCap(){ const d=DATA.daily; const manual=(d.newPerDay!=null)?d.newPerDay:20; const adaptive=(d.newCap!=null)?d.newCap:12; return Math.max(0,Math.min(manual, adaptive)); }
@@ -1424,8 +1438,13 @@ function clinCount(){ return clinItems().length; }
 function clinInDeck(t){ return (t&&t.recall||[]).filter(isClin).length; }
 
 /* ---- shared id → card resolver (powers leeches, mistakes, notes) ---- */
-let _cardIx=null;
-function cardIndex(){ if(_cardIx) return _cardIx; _cardIx={};
+let _cardIx=null, _cardIxN=-1, _cardIxReady=false;
+function cardIndex(){
+  // LCH-01: rebuild when the topic set changes (content-loader hydrates AFTER the first render),
+  // so a cold deep-link onto #/leeches / #/mistakes / #/today can't cache an EMPTY index for the session.
+  const ready = !!window.__MB_CONTENT_READY;
+  if(_cardIx && _cardIxN===allTopics.length && _cardIxReady===ready) return _cardIx;
+  _cardIx={}; _cardIxN=allTopics.length; _cardIxReady=ready;
   allTopics.forEach(t=>{ if(!t.ready) return;
     (t.primer||[]).forEach(c=>{ _cardIx[cid(t.id,'primer',c)]={t,c,deck:'primer'}; });
     (t.recall||[]).forEach(c=>{ _cardIx[cid(t.id,'recall',c)]={t,c,deck:'recall'}; }); });
@@ -1597,7 +1616,7 @@ function closeNoteFull(){ const o=document.getElementById('noteov'); if(o) o.rem
 const LEECH_LAPSES=4;
 function leechItems(){ const out=[];
   for(const id in DATA.cards){ const st=DATA.cards[id];
-    if(st && (st.lapses||0)>=LEECH_LAPSES){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }
+    if(st && (st.lapses||0)>=LEECH_LAPSES && !isFlagged(id)){ const it=itemById(id); if(it){ it.lapses=st.lapses; out.push(it); } } }   // LCH-02: a reported-wrong card is never a leech drill
   out.sort((a,b)=>b.lapses-a.lapses); return out; }
 function leechCount(){ return leechItems().length; }
 
@@ -1606,8 +1625,8 @@ function logMiss(id){ DATA.missLog[id]=dstr(); }
 function missItems(days){ const cut=dayNum()-(days-1), out=[];
   for(const id in (DATA.missLog||{})){
     const dn=dayNum(new Date(DATA.missLog[id]+'T00:00'));
-    if(dn>=cut){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }
-  out.sort((a,b)=> a.missOn<b.missOn?1:-1); return out; }
+    if(dn>=cut && !isFlagged(id)){ const it=itemById(id); if(it){ it.missOn=DATA.missLog[id]; out.push(it); } } }   // MIS-09: hide reported-wrong cards
+  out.sort((a,b)=> a.missOn<b.missOn?1:(a.missOn>b.missOn?-1:0)); return out; }   // MIS-08: stable order on same-day rows
 function missCountToday(){ return missItems(1).length; }
 function missCountWeek(){ return missItems(7).length; }
 
@@ -1796,7 +1815,7 @@ function reviewHealth(){
   const today=dayNum(); let dueNow=0, overdue=0; const waiting=new Set();
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
     const s=DATA.cards[cid(t.id,'recall',c)];
-    if(s&&s.due<=today){ dueNow++; waiting.add(t.id); if(s.due<today) overdue++; }
+    if(s&&s.due<=today && !isFlagged(cid(t.id,'recall',c))){ dueNow++; waiting.add(t.id); if(s.due<today) overdue++; }   // SL-02: the tile must match the servable pool
   }));
   const goal=DATA.daily.goal||40;
   let pct = overdue===0 ? 100 : Math.max(20, Math.round(100 - overdue/(2*goal)*100));
@@ -1820,7 +1839,7 @@ function topicStage(t){
 function dueCount(){
   const today=dayNum(); let n=0;
   startedTopics().forEach(t=>(t.recall||[]).forEach(c=>{
-    const st=DATA.cards[cid(t.id,'recall',c)]; if(st && st.due<=today) n++;
+    const st=DATA.cards[cid(t.id,'recall',c)]; if(st && st.due<=today && !isFlagged(cid(t.id,'recall',c))) n++;   // SL-02: nav badge / Home / nudge / cleared-check must not count hidden cards
   }));
   return n;
 }
@@ -1849,12 +1868,12 @@ function lecProgress(l){
 function isStar(id){ return !!DATA.starred[id]; }
 function toggleStar(id){ if(DATA.starred[id]) delete DATA.starred[id]; else DATA.starred[id]=1; persist();
   try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} render(); }
-function starCount(){ return Object.keys(DATA.starred).length; }
+function starCount(){ return starItems().length; }   // HRD-06: match the resolved Hard-cards pool (raw Object.keys counted stars for topics/levels no longer loaded)
 function starItems(){
   const out=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
     ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
-      const id=cid(t.id,dk,c); if(DATA.starred[id]) out.push({t,c,id,deck:dk});
+      const id=cid(t.id,dk,c); if(DATA.starred[id] && !isFlagged(id)) out.push({t,c,id,deck:dk});   // HRD-07: reported-wrong cards leave the Hard pool too
     }));
   });
   return out;
@@ -1910,7 +1929,7 @@ function renderNav(){
   const inSubj = r.startsWith('subject/')||r.startsWith('topic/');
   let h  = it('home','⌂','Home',st?('🔥'+st):'',r==='home');
   h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openImport&&MB_openImport()}catch(e){}"><span class="ic">＋</span><span>Add lecture</span></div>`;
-  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');MB_openRecorder&&MB_openRecorder()}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
+  h += `<div class="navitem navimport" onclick="try{document.body.classList.remove('navopen');window.MB_openRecorder?MB_openRecorder():alert('Recording isn\\'t available right now — reload the app, or use File / YouTube / Paste.')}catch(e){}"><span class="ic">🎙</span><span>Record lecture</span></div>`;
   h += it('today','🧠','Active recall',dueCount()||'',inRecall);
   h += it('solve','🧮','Solve','',r==='solve');
   h += it('plan','🗓','This week',planCount()||'',r==='plan');
@@ -2330,6 +2349,7 @@ async function solveNow(){
   const text=(document.getElementById('solveText').value||'').trim();
   const msg=document.getElementById('solveMsg'), out=document.getElementById('solveOut'), btn=document.getElementById('solveBtn');
   if(!f && !text){ msg.textContent='Add a photo or type the question first.'; return; }
+  if(window.MB_PAYWALL && !MB_PAYWALL.guard('Solve')) return;   // PW-01: gate before the photo upload, not after
   btn.disabled=true; btn.textContent='Solving… ~10s'; msg.textContent=''; out.innerHTML='';
   try{
     const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
@@ -2583,9 +2603,9 @@ function mb3dScenes(t){
 }
 function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
 /* In-note trigger. Not "this note mentions anatomy" but "this sentence describes something a flat page
- * can't carry" — an origin, a course, a relationship in space. MB3D.rankMentions() scores every mention;
- * only the best few clear the bar, so a note about the heart never sprouts seventeen chips. */
-var _MB3D_MAX_CHIPS=3;
+ * can't carry" — an origin, a course, a relationship in space. How MANY chips a note gets is decided by
+ * MB3D.planNote() from the note's own length, the spacing between opportunities and how many structures
+ * belong to one idea — not by a number hard-coded here. Tune it with MB3D.policy({...}). */
 function mb3dScanNote(){
   if(!mb3dOn()) return;
   var host=document.querySelector('#main .notebody'); if(!host) return;
@@ -2593,39 +2613,37 @@ function mb3dScanNote(){
   var list=[]; try{ list=MB3D.terms(); }catch(e){}
   if(!list.length){ try{ MB3D.loadIndex().then(function(){ setTimeout(mb3dScanNote,0); }).catch(function(){}); }catch(e){} return; }
   host.setAttribute('data-mb3d','1');
-  var nodes=[], w=document.createTreeWalker(host,NodeFilter.SHOW_TEXT,null), n;
-  while(n=w.nextNode()) nodes.push(n);
-  /* rank every candidate across the whole note first, then place only the strongest — a weak mention in
-   * paragraph 1 must not use up a chip that paragraph 6 deserves. */
-  var cands=[];
-  nodes.forEach(function(node){
-    var pe=node.parentElement;
-    if(!pe || !pe.closest || pe.closest('.mb3dmark,.vizmark,code,pre,a,button,h1,h2')) return;
-    var hits=[]; try{ hits=MB3D.rankMentions(node.nodeValue)||[]; }catch(e){}
-    if(hits.length) cands.push({node:node, hit:hits[0]});   // one chip per text node keeps offsets valid
-  });
-  cands=cands.filter(function(c){ return c.hit.score>=(MB3D.MIN_SCORE||4); });
-  cands.sort(function(a,b){ return b.hit.score-a.hit.score; });
-  var placed=0, seen={};
-  for(var i=0;i<cands.length && placed<_MB3D_MAX_CHIPS;i++){
-    var node=cands[i].node, h=cands[i].hit, id=h.scene+'|'+h.key;
-    if(seen[id]) continue;
-    var before=node.nodeValue.slice(0,h.index), hit=h.match, after=node.nodeValue.slice(h.index+hit.length);
-    if(node.nodeValue.slice(h.index,h.index+hit.length).toLowerCase()!==hit.toLowerCase()) continue;   // offset drifted — skip rather than corrupt the note
+  var passages=[], w=document.createTreeWalker(host,NodeFilter.SHOW_TEXT,null), n;
+  while(n=w.nextNode()){
+    var pe=n.parentElement;
+    if(!pe || !pe.closest || pe.closest('.mb3dmark,.vizmark,code,pre,a,button,h1,h2')) continue;
+    passages.push({text:n.nodeValue, ref:n});
+  }
+  var plan=[]; try{ plan=MB3D.planNote(passages)||[]; }catch(e){ return; }
+  var byNode={};                                                          // one chip per text node keeps offsets valid
+  plan.forEach(function(op){
+    var node=op.ref; if(!node || !node.parentNode || byNode[nodeKey(node)]) return;
+    if(node.nodeValue.slice(op.index,op.index+op.match.length).toLowerCase()!==op.match.toLowerCase()) return;  // offset drifted — skip rather than corrupt the note
+    byNode[nodeKey(node)]=1;
+    var before=node.nodeValue.slice(0,op.index), hit=op.match, after=node.nodeValue.slice(op.index+hit.length);
     var frag=document.createDocumentFragment();
     if(before) frag.appendChild(document.createTextNode(before));
     var mark=document.createElement('span'); mark.className='mb3dmark'; mark.textContent=hit;
     mark.style.cssText='border-bottom:1.5px dotted var(--accent)';
-    var chip=document.createElement('button'); chip.className='mb3dchip'; chip.textContent='👁 3D';
-    chip.title='See '+hit+' in 3D — '+h.why;
+    var chip=document.createElement('button'); chip.className='mb3dchip';
+    chip.textContent=op.related?('👁 3D · +'+op.related):'👁 3D';
+    chip.title='See '+hit+' in 3D — '+op.why+(op.related?(' (with '+op.related+' related structure'+(op.related===1?'':'s')+')'):'');
     chip.style.cssText='margin-left:5px;font:inherit;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;vertical-align:middle';
-    chip.onclick=(function(h,label){ return function(e){ e.stopPropagation(); try{ MB3D.open(h.scene,{part:h.key,title:label,subtitle:'from your note'}); }catch(err){} }; })(h,hit);
+    chip.onclick=(function(op,label){ return function(e){ e.stopPropagation();
+      try{ MB3D.recordEngagement('opened'); MB3D.open(op.scene,{part:op.key,title:label,subtitle:'from your note'}); }catch(err){} }; })(op,hit);
     frag.appendChild(mark); frag.appendChild(chip);
     if(after) frag.appendChild(document.createTextNode(after));
     node.parentNode.replaceChild(frag,node);
-    seen[id]=1; placed++;
-  }
+  });
+  if(plan.length){ try{ MB3D.recordEngagement('shown', plan.length); }catch(e){} }
 }
+var _MB3D_NK=0;
+function nodeKey(n){ if(!n.__mb3dk) n.__mb3dk=++_MB3D_NK; return n.__mb3dk; }
 function renderModel3d(t){
   var list=mb3dScenes(t);
   if(!list.length) return '<div class="empty" style="text-align:left"><b style="color:var(--text)">No 3D scene for this topic yet.</b><br><br>3D scenes are authored per anatomical structure and appear here automatically once one matches this lecture.</div>';
@@ -2694,6 +2712,7 @@ function genPrompt(topicId,kind,label){
 }
 async function buildExtraNow(topicId,kind,force,_retry){
   const t=topById(topicId); if(!t) return null;
+  if(!_retry && window.MB_PAYWALL && !MB_PAYWALL.guard('Building this')) return null;   // PW-01: gate the build (fails open until entitlement known; not re-run on the 502 retry)
   const CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API) throw new Error('Not configured yet.');
   let token=null; if(window.__mbSB){ const ses=await window.__mbSB.auth.getSession(); token=ses.data.session&&ses.data.session.access_token; }
   const level=(window.MB_SYNC&&MB_SYNC.currentLevel&&MB_SYNC.currentLevel())||null;
@@ -2818,6 +2837,8 @@ function qbCfgRow(label, opts, cur, kind){ kind=kind||'skill';
   }).join('')+'</div></div>'; }
 function qbSetCfg(kind,val){ _qbCfg[kind]=(kind==='count'?parseInt(val,10):val); render(); }
 function qbStart(id,mode){ var t=topById(id); var all=(t&&t.extras&&t.extras.qbank)||[]; if(!all.length)return;
+  // TOP-10: don't silently discard a live Mega / mistakes / drill session (answered questions + grading) with no warning.
+  if(typeof QB!=='undefined' && QB && !QB.done && QB.results && QB.results.length && !confirm('You have a question session in progress — start a new one and discard it?')) return;
   var cfg=_qbCfg||{};
   var items=all.filter(function(q){ return (!cfg.skill||cfg.skill==='all'||(q.skill||'')===cfg.skill) && (!cfg.level||cfg.level==='all'||qbCogOf(q)===cfg.level); });
   if(!items.length){ alert('No questions match that filter — try All.'); return; }
@@ -2837,7 +2858,7 @@ function qbEndEarly(){ if(!QB || QB.done) return;
   if(!confirm('End now and grade the '+answered+' question'+(answered>1?'s':'')+' you’ve answered'+(remaining>0?(' (skipping the remaining '+remaining+')'):'')+'?')) return;
   QB.endedEarly=true; qbFinalize(); QB.done=true; render();
 }
-function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); persist(); render(); }
+function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); s._events=(s._events||[]).filter(function(e){return e.topicId!==id;});   /* SET-01: also drop this topic's telemetry events (was never cleared). NOTE: sync's union merge can still re-adopt cloud copies — an authoritative reset (tombstone/rev-bump) needs a product decision. */ persist(); render(); }
 function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){ var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
 function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++;
   var ms = QB.qStart ? (Date.now()-QB.qStart) : 0;
@@ -4529,6 +4550,21 @@ function startFilteredSession(pred, label, key, budgetMin){
      session:{done:0,correct:0,total:items.length,over:g.over}};
   return items.length;
 }
+/* SL-01: a Due-now row must actually serve that topic's DUE cards in the grading runner,
+   not open the whole recall deck at the last saved (already-passed) position. */
+function startTopicDue(tid){
+  const today=dayNum();
+  const n=startFilteredSession((st,t)=>t.id===tid && st && st.box>=0 && st.due<=today, (topById(tid)||{}).name||'Due', 'due:'+tid, 999);
+  if(n){ go('review'); } else { go('topic/'+tid); }   // nothing actually due here → just open the topic
+}
+/* MIS-05/LCH-05: open the deck AT the card the student tapped, not at the last saved (already-passed) position. */
+function openCardAt(tid, deck, cardId){
+  const t=topById(tid); if(!t){ go('topic/'+tid); return; }
+  const arr=t[deck||'recall']||[]; let idx=-1;
+  for(let k=0;k<arr.length;k++){ if(cid(tid,deck||'recall',arr[k])===cardId){ idx=k; break; } }
+  if(idx>=0){ DATA.pos=DATA.pos||{}; DATA.pos['pos:'+tid+(deck||'recall')]=idx; try{persist();}catch(e){} }
+  go('study/'+tid+'/'+(deck||'recall'));
+}
 const WEAK_PRED=(scope)=>((st,t)=>!!st && (st.box<0 || (st.lapses||0)>=2) && (!scope||t.lecturer===scope));
 /* Home CTA: "Review weak cards" / "Fix these" — same engine, weak filter (± a lecturer scope). Never dead-ends. */
 function reviewWeak(lecturer){
@@ -4606,6 +4642,7 @@ function nudgeItems(max){
 function startNudgeSession(){
   const items=nudgeItems(10);
   S={mode:'daily',key:'nudge',label:'Quick review',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // NTF-02: rebuild the cold-start empty nudge session once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* build the notification body carrying the actual card Q&A */
@@ -4684,9 +4721,16 @@ function strictOverlay(n){
   o.innerHTML=`<div class="strictbox"><div class="sbig">⏰</div>
     <b>Time to review</b>
     <p>${n} card${n===1?'':'s'} waiting. A two-minute round now keeps them from slipping.</p>
-    <button class="btn primary" onclick="document.getElementById('strictov').remove();go('nudge')">Start review now</button>
+    <button class="btn primary" onclick="strictStart()">Start review now</button>
     <button class="btn" onclick="document.getElementById('strictov').remove()">Snooze</button></div>`;
   document.body.appendChild(o);
+}
+function strictStart(){
+  var ov=document.getElementById('strictov'); if(ov) ov.remove();
+  // NTF-05: only start a nudge session if there's no live session to destroy — the strict overlay appears
+  // while the app is visible (often mid-session). If a session is in progress, just dismiss and let them continue.
+  var live = (typeof S!=='undefined') && S && S.items && S.items.length && S.session && (S.session.done < S.items.length);
+  if(!live) go('nudge');
 }
 /* Idle Detection (Android/Chrome): nudge sooner when the phone is unlocked & in use.
    Only runs while MedBank's worker is alive; unsupported/blocked on iPhone. */
@@ -4748,7 +4792,8 @@ function nudgeTick(force){
 }
 function startHard(){
   const items=starItems();
-  S={mode:'hard',key:'hard',items,order:items.map((_,k)=>k),i:0,show:false,
+  S={mode:'hard',key:'hard',label:'Hard cards',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // HRD-01: cold-start empty build rebuilds once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -4756,6 +4801,7 @@ function shuf(a){ for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a
 function startLeeches(){
   const items=shuf(leechItems());
   S={mode:'daily',key:'leeches',label:'Leeches',items,order:items.map((_,k)=>k),i:0,show:false,
+     builtReady:!!window.__MB_CONTENT_READY,   // LCH-01: rebuild once content hydrates
      session:{done:0,correct:0,total:items.length}};
 }
 /* review the cards you missed recently — rated session */
@@ -4869,7 +4915,7 @@ function pageReview(){
 }
 /* hard-card review runner */
 function pageHard(){
-  if(!S || S.mode!=='hard') startHard();
+  if(!S || S.key!=='hard' || (!S.builtReady && window.__MB_CONTENT_READY)) startHard();   // HRD-01: rebuild once content is ready; HRD-03: key-aware so a 5-card #/hardnudge can't hijack the Hard tab
   if(!S.items.length) return `<h1>Hard cards</h1>
     <div class="alldone"><div class="big">★</div><b>No hard cards yet.</b>
       <p>While studying, tap the ☆ on any tricky card to save it here. Then you can drill just your hard cards — great for the weekend.</p>
@@ -4897,7 +4943,9 @@ function sessionSummary(backLabel,backRoute){
   const s=S.session, done=s.done||0, correct=s.correct||0, mastered=s.mastered||0;
   const acc=done?Math.round(correct/done*100):0;
   if(done>=20 && correct===done && !DATA.flags.perfect){ DATA.flags.perfect=1; persist(); }
-  const remain=dueCount(), cleared=(remain===0), st=curStreak();
+  // MIS-01/HRD-05: a NAMED side-session (Hard/Leeches/Mistakes/Quick review) is not the daily due pool.
+  const named = S.label && S.key!=='today' ? S.label : '';
+  const remain = named ? 0 : dueCount(), cleared=(!named && remain===0), st=curStreak();
   const budget=DATA.daily.budget||15, minToday=Math.round((todayLog().ms||0)/60000), ringPct=Math.min(100,Math.round(minToday/budget*100)), ringClosed=ringPct>=100;
   const sub=CELEB_PRAISE[done%CELEB_PRAISE.length];
   let mile='';
@@ -4906,7 +4954,7 @@ function sessionSummary(backLabel,backRoute){
   else if(acc>=100 && done>=10) mile=`🎯 ${done} for ${done} — flawless round.`;
   return `<div class="celeb">
       <div class="celeb-top">🎉</div>
-      <h1 class="celeb-h">${cleared?'Active Recall complete!':'Session complete!'}</h1>
+      <h1 class="celeb-h">${named ? esc(named)+' complete!' : (cleared?'Active Recall complete!':'Session complete!')}</h1>
       <p class="celeb-sub">${sub}</p>
       <div class="celeb-ring">${goalRing(ringPct,120,10,'#a6f05a')}<span>${ringPct}%</span></div>
       <div class="celeb-ringcap">${ringClosed?'Daily ring closed':'Daily goal · '+minToday+' / '+budget+' min'}</div>
@@ -5335,6 +5383,8 @@ function celebrate(kind,text){
 }
 function rateCard(ok){
   if(!S) return; if(window.vizInlineStop)vizInlineStop(); const it=S.items[S.order[S.i]]; if(!it) return;
+  S.answered=S.answered||{}; if(S.answered[it.id]!=null) return;   // REV-05: this card was already rated this sitting — a second tap must not re-mutate SRS/streak/mistakes
+  S.answered[it.id]=ok?1:0;
   const beforeCards=todayLog().cards, beforeLvl=levelInfo().i, beforeStreak=curStreak(), goal=DATA.daily.goal, floor=DATA.daily.floor, beforeMet=streakMet();
   markActive();
   const _pt=cardTimeState(it.id,false), _ms=S._shownAt?Date.now()-S._shownAt:0;
@@ -5364,7 +5414,7 @@ function rateCard(ok){
 var PREV_BASE='';
 var SWIPE_USED=(function(){ try{ return parseInt(localStorage.getItem('mb_swipe_used')||'0',10)||0; }catch(e){ return 0; } })();
 var SWIPE_NEXTS=0, _mbViaSwipe=false;
-function swipeHintEligible(){ return window.innerWidth<=720 && SWIPE_USED<2 && /^#\/(study|review|hard)/.test(location.hash) && S && S.items && S.items.length; }
+function swipeHintEligible(){ return window.innerWidth<=720 && SWIPE_USED<2 && /^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash) && S && S.items && S.items.length; }
 function markSwipeUsed(){ SWIPE_USED++; try{ localStorage.setItem('mb_swipe_used',String(SWIPE_USED)); }catch(e){} hideSwipeHint(); }
 function bumpNext(){ if(!swipeHintEligible()) return; SWIPE_NEXTS++; if(SWIPE_NEXTS%3===0) showSwipeHint(); }   // still tapping Next after 3 → remind them they can swipe
 function showSwipeHint(){ if(!swipeHintEligible()||document.getElementById('mbSwipeHint')) return;
@@ -5375,17 +5425,18 @@ function showSwipeHint(){ if(!swipeHintEligible()||document.getElementById('mbSw
 }
 function hideSwipeHint(){ var d=document.getElementById('mbSwipeHint'); if(d){ d.style.opacity='0'; setTimeout(function(){ if(d&&d.parentNode)d.remove(); },260); } }
 function swipeAct(dir){
-  if(!/^#\/(study|review|hard)/.test(location.hash)||!S) return;
+  if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash)||!S) return;
   const it=S.items[S.order[S.i]]; if(!it) return;
   if(dir==='up') return;                                                  // up does nothing — starring by accident was too easy
   markSwipeUsed();                                                        // a left/right swipe = feature learned
   if(dir==='right'){ if(S.i>0){ _mbViaSwipe=true; step(-1); } return;
   }   // previous
   if(dir==='left'){                                                       // next / skip
-    _mbViaSwipe=true;
-    if(isMcqCard(it)){ mcqNext(); }
-    else if(!S.show){ reveal(); }                                         // flip: first swipe reveals
-    else if(S.i<S.items.length-1){ step(1); }
+    if(isMcqCard(it)){ _mbViaSwipe=true; mcqNext(); }
+    else if(!S.show){ reveal(); }                                         // flip: first swipe reveals (not a "next", so don't arm _mbViaSwipe)
+    else if(S.i<S.items.length-1){ _mbViaSwipe=true; step(1); }
+    else if(S.mode!=='deck'){ _mbViaSwipe=true; sessionNext(); }          // SWP-02: last card in a session → reach the results screen (was a silent no-op)
+    else { _mbViaSwipe=false; }                                           // SWP-03: nothing to advance → never leak the flag onto the next tap
     return;
   }
 }
@@ -5393,7 +5444,7 @@ function swipeAct(dir){
   var sx=0,sy=0,st=0,live=false;
   document.addEventListener('touchstart',function(e){
     live=false; if(window.innerWidth>720) return;
-    if(!/^#\/(study|review|hard)/.test(location.hash)) return;
+    if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(location.hash)) return;
     if(e.touches.length!==1) return;
     var t=e.target;
     if(t&&t.closest&&t.closest('.vizmiss,.vizinlinehost,.vizctrl,input,select,textarea,.mcqopt,.ratebtns,.navbtns')) return;   // don't hijack controls/answers/video
@@ -5419,7 +5470,7 @@ document.addEventListener('keydown',e=>{
     if(e.key==='ArrowLeft'){ examNav(-1); return; }
     return;
   }
-  if(!/^#\/(study|review|hard)/.test(h)) return;
+  if(!/^#\/(study|review|hard|nudge|hardnudge)/.test(h)) return;
   if(e.target && (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.isContentEditable)) return;   // typing in a card note / inline editor must not rate or flip the card
   if(!S) return;
   const it=S.items[S.order[S.i]], canRate=it && it.deck!=='primer';
@@ -5526,7 +5577,7 @@ function searchRun(){
   const box=document.getElementById('sres'); if(!box) return;
   const q=SQ.trim().toLowerCase();
   if(q.length<2){ box.innerHTML='<p class="sub">Type at least 2 letters.</p>'; return; }
-  const topics=allTopics.filter(t=>((t.name+' '+t.lecturer)||'').toLowerCase().includes(q)).slice(0,25);
+  const topics=allTopics.filter(t=>(t.name+' '+(t.lecturer||'')).toLowerCase().includes(q)).slice(0,25);   // SCA-09: a missing lecturer no longer stringifies to "undefined" and matches "und"/"ned"/"def"
   const cardHits=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
     ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
@@ -5540,7 +5591,7 @@ function searchRun(){
   if(cardHits.length){
     h+=`<div class="modhead" style="margin-top:26px">Card questions · ${cardHits.length}</div><div class="rows">`+
       cardHits.slice(0,40).map(x=>`
-       <div class="row" onclick="go('study/${x.t.id}/${x.dk}')">
+       <div class="row" onclick="openCardAt('${x.t.id}','${x.dk}','${cid(x.t.id,x.dk,x.c)}')">
          <span class="sn">${x.dk==='primer'?'A':'B'}</span>
          <span class="mid"><span class="tt">${esc(x.c.q)}</span>
            <div class="meta">${esc(x.t.name)} · ${x.dk==='primer'?'Primer':'Recall'}</div></span></div>`).join('')+
@@ -5891,7 +5942,7 @@ function pageLeeches(){
   const rows=items.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount">${it.lapses}×</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
+      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('');
   return head+`<div class="btnrow" style="margin:4px 0 16px"><button class="btn primary" onclick="startLeeches();go('review')">▶ Drill all ${items.length} leech${items.length===1?'':'es'}</button></div>${rows}`;
 }
 /* ---------- Recent mistakes ---------- */
@@ -5904,7 +5955,7 @@ function pageMistakes(){
   const rows=week.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount miss">${dayLabel(it.missOn)}</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="go('study/${it.t.id}/recall')">Open</button></div>`).join('');
+      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('');
   return head+`<div class="modes" style="grid-template-columns:1fr 1fr">
       <button class="modebtn${today.length?'':' dis'}" ${today.length?'':'disabled'} onclick="runMistakes(1)"><span class="mic">📅</span><b>Today's misses</b><span class="msub">${today.length} card${today.length===1?'':'s'}</span></button>
       <button class="modebtn${week.length?'':' dis'}" ${week.length?'':'disabled'} onclick="runMistakes(7)"><span class="mic">🗓️</span><b>This week</b><span class="msub">${week.length} card${week.length===1?'':'s'}</span></button>
@@ -6092,6 +6143,7 @@ async function geminiTutor(sys, history, key){
 async function aiSend(topicId, text, alts){
   const engine=(DATA.settings.tutorEngine&&DATA.settings.tutorEngine.indexOf('deepseek')===0)?DATA.settings.tutorEngine:'deepseek-v4-flash';
   if(AIBUSY) return;
+  if(window.MB_PAYWALL && !MB_PAYWALL.guard('The AI tutor')) return;   // PW-01: gate the tutor (fails open until entitlement known)
   const t=topById(topicId); if(!t) return;
   AICHAT[topicId]=AICHAT[topicId]||[];
   // if the answer came from voice with several possible hearings, send them all so the tutor grades by meaning
@@ -6446,7 +6498,7 @@ function pageStatusList(kind){
     const rows=Object.values(by).sort((a,b)=>b.n-a.n);
     const list=rows.length? rows.map(r=>`<div class="leechrow"><span class="lcount">${r.n}</span>
         <div class="lmid"><b>${esc(r.t.name)}</b><span>${esc(r.t.subject.short)}</span></div>
-        <button class="btn" onclick="go('study/${r.t.id}/recall')">Open</button></div>`).join('')
+        <button class="btn" onclick="startTopicDue('${r.t.id}')">Open</button></div>`).join('')   // SL-01
       : `<div class="alldone"><div class="big">✓</div><b>Nothing due right now.</b><p>You're caught up — learn a new topic or come back later.</p></div>`;
     return `<h1>◎ Due now</h1><p class="sub">${rows.length?rows.reduce((s,r)=>s+r.n,0)+' cards due across '+rows.length+' topic'+(rows.length===1?'':'s'):'All caught up.'}</p>
       ${rows.length?`<div class="btnrow" style="margin:2px 0 14px"><button class="btn primary" onclick="startRecallSession();go('review')">▶ Start Active Recall</button></div>`:''}${list}`;
@@ -6479,6 +6531,8 @@ function pageLoadingTopic(){
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
   try{ if(window.MB3D) MB3D.dispose(); }catch(e){}   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
+  // TOP-08: leaving a topic (or switching to a different topic) stops podcast audio — it lived on document.body and kept playing forever otherwise.
+  try{ if(typeof podStopAudio==='function' && (p[0]!=='topic' || (typeof POD!=='undefined' && POD && p[1]!==POD.topicId))) podStopAudio(); }catch(e){}
   // Topic-bound routes: if content hasn't loaded yet, show a loader instead of flashing Home.
   const NEEDS_TOPIC={topic:1,study:1,cram:1,cards:1,ai:1};
   if(NEEDS_TOPIC[p[0]] && p[1] && !window.__MB_CONTENT_READY && typeof topById==='function' && !topById(p[1])){
@@ -6491,7 +6545,7 @@ function render(){
     case 'today':     html=pageToday(); break;
     case 'review':    html=pageReview(); break;
     case 'hardnudge': if(!S||S.key!=='hardquick') startHardQuick(); html=pageHard(); break;
-    case 'nudge':     if(!S||S.key!=='nudge') startNudgeSession(); html=pageReview(); break;
+    case 'nudge':     if(!S||S.key!=='nudge'||(!S.builtReady && window.__MB_CONTENT_READY)) startNudgeSession(); html=pageReview(); break;   // NTF-02: rebuild once content is ready
     case 'hard':      html=pageHard(); break;
     case 'leeches':   html=pageLeeches(); break;
     case 'mistakes':  html=pageMistakes(); break;
@@ -6521,6 +6575,7 @@ function render(){
   }
   if(p[0]==='today'||p[0]==='hard'||p[0]==='mistakes'||p[0]==='leeches') html = recallTabs(p[0]) + html;
   $('#main').innerHTML=html; renderNav();
+  try{ if(window.MB_DOCK_REFRESH) MB_DOCK_REFRESH(); }catch(e){}   // DCK-01: re-bind the study dock to the CURRENT card on every render (card advance doesn't change the hash)
   $('#main').classList.toggle('wide', p[0]===''||p[0]==='home');   // home fills the wide screen (no Ask-AI panel here)
   if(p[0]==='topic' && topicTab==='note') setTimeout(mb3dScanNote,60);   // mark structures the 3D corpus can show (no-op when the flag is off)
   if(p[0]==='settings' && window.loadPlanBadge) setTimeout(loadPlanBadge,40);
@@ -6528,7 +6583,7 @@ function render(){
   if(p[0]==='ai') aiScroll();
   if(p[0]==='topic' && window.markWatchedNote) setTimeout(window.markWatchedNote,30);
   if(window.scheduleVizTeaser) scheduleVizTeaser(p[0]==='topic'?p[1]:null);   // teaser waits ~1 min of reading, then plays once
-  if(/^(study|review|hard)$/.test(p[0]) && !/^(study|review|hard)$/.test(PREV_BASE)) setTimeout(showSwipeHint,700);   // teach swipe-to-next on entering a card session
+  if(/^(study|review|hard|nudge|hardnudge)$/.test(p[0]) && !/^(study|review|hard|nudge|hardnudge)$/.test(PREV_BASE)) setTimeout(showSwipeHint,700);   // teach swipe-to-next on entering a card session
   PREV_BASE=p[0];
   if(_examTimer){ clearInterval(_examTimer); _examTimer=null; }
   if(p[0]==='exam' && S && S.mode==='exam' && !S.finished && S.items && S.items.length){

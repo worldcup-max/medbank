@@ -70,6 +70,42 @@ Six additive hunks in `app.html`, none inside the Visualize IIFE (~line 7150+) o
 
 `sw.js` gains `'./viz3d.js'` in `ASSETS`; it precaches on the next `CACHE` bump.
 
+## Landmarks are places, not models
+The supraglenoid tubercle has no mesh — it is a **spot on the scapula**. Those are authored as
+`render:"anchor"` structures carrying `anchor:{on:"<parent key>", uvw:[u,v,w]}` — fractions of the parent's
+own bounding box, so they survive any scaling and ride the parent's transform. They appear in the parts
+list like any other part and can be traced, highlighted and soloed.
+
+**They are computed, not hand-placed.** A muscle mesh knows where it attaches, so the landmark is the
+nearest point on the parent bone to the attaching muscle. The arm scene's six landmarks were derived that
+way from the source meshes, and the gap to the muscle is recorded per landmark as the check:
+
+| landmark | on | gap to muscle |
+|---|---|---|
+| intertubercular groove | humerus | 0.1 mm |
+| coracoid process | scapula | 0.1 mm |
+| radial tuberosity | radius | 1.3 mm |
+| infraglenoid tubercle | scapula | 3.1 mm |
+| olecranon | ulna | 4.7 mm |
+| supraglenoid tubercle | scapula | 8.3 mm (tendon crossing the joint) |
+
+Cross-check: supraglenoid ↔ coracoid = 31.8 mm, supraglenoid ↔ infraglenoid = 48.5 mm — both anatomically
+right, which is what makes the frame trustworthy rather than merely self-consistent.
+
+**Calibrating by hand still works** when a landmark has no muscle to derive it from: set
+`localStorage.mb3dcal='1'`, click the spot on the bone, and the viewer prints a ready-to-paste snippet with
+the exact `uvw`. Either way, an anchor stays `status:"needs-review"` until a human sets `reviewed_by`.
+
+## Viewer controls
+- **▶ Play** — runs the scene's views in order with their narration: the "visualize video" shape, but the
+  model stays live and grabbable throughout.
+- **TRACE** flies the camera from waypoint to waypoint, lighting each landmark and narrating "step 2 of 3",
+  while the structure being traced stays lit. That is what makes *origin → course → insertion* legible.
+- **Ghost others** fades the surroundings to 10%; **Only this** removes them entirely — context when you
+  want it, the bare structure when you don't.
+- Auto-rotation is a 3-second first glance that any touch cancels permanently.
+- Trackball rotation: every axis, no pole to hang on.
+
 ## Scene lifecycle
 `ready | candidate | planned | blocked`. **Only `ready` reaches a student** — `scenesForTopic()` filters on
 it. An AI-drafted scene is refused `ready` without `provenance.approved_by`, so the corpus grows as a
@@ -90,7 +126,7 @@ Two triggers, both flag-gated, neither of them a model parked beside a paragraph
 - **Highlight a term** → the selection popup grows a `🧬 See it in 3D` button, but only when those words
   resolve to a real part (`MB3D.partForTermSync`). It opens `MB3D.open()` — a full-screen viewer already
   focused on that structure, ESC or backdrop to close.
-- **Reading a note** → `mb3dScanNote()` marks at most **3** structures, each with a small `👁 3D` chip.
+- **Reading a note** → `mb3dScanNote()` marks the structures worth seeing, each with a small `👁 3D` chip.
   Code, links and existing Visualize marks are skipped; a rendered note is scanned once.
 
 **What earns a chip** (`MB3D.rankMentions`, threshold `MB3D.MIN_SCORE`): not "this note mentions anatomy"
@@ -103,9 +139,36 @@ but "this sentence describes something a flat page cannot carry".
 | the term is specific | +1 | "long head of biceps" over "biceps" |
 | a bare definition with no spatial content | **−3** | "The humerus is a long bone of the upper limb" |
 
-Every mention in the note is scored first, then the best three are placed — a weak mention in paragraph 1
+Every mention in the note is scored first, then the strongest are placed — a weak mention in paragraph 1
 never spends a chip that paragraph 6 deserves. Verified: definitional sentences ("The humerus is a long
 bone", "Biceps is a muscle") produce **no** candidate at all.
+
+**How many chips (`MB3D.planNote`) is a policy, not a constant.** Tune it live with `MB3D.policy({...})`:
+
+| knob | default | what it does |
+|---|---|---|
+| `minScore` | 4 | below this a mention is never surfaced |
+| `wordsPerChip` | 220 | the reading budget — a note earns opportunities by length |
+| `minGapChars` | 700 | density: two chips never land in the same reading window |
+| `ceiling` | **3** | **temporary testing rail — set `null` to let the budget decide** |
+| `adapt` | true | nudges the budget by how much this student actually opens 3D |
+
+Personalisation is **confidence-graded**: nothing at all below `adaptMinObs` (20 chips shown), then the
+student's own open-rate fades in linearly to full weight at `adaptFullObs` (80), and even then it can only
+move the budget by `adaptStrength` (±35%). Two ignored chips must never convince MedBank a student dislikes
+3D. Measured on a 1,557-word note: baseline 7 · 2 shown/0 opened → 7 · 20/0 → 7 · 50/2 → 6 · 80/2 → 5 ·
+80/20 (normal rate) → 7 · 80/45 → 8.
+
+Structures from one scene described in **one sentence** collapse into a single opportunity — "the median
+nerve arises from the cords, travels with the brachial artery, and passes through the cubital fossa" is one
+thing to see, and the chip reads `👁 3D · +2`. Clustering deliberately stops at the sentence boundary:
+neighbouring sentences can describe genuinely different ideas, and merging them would put a "+2 related"
+label on a chip that misrepresents what it opens. Adjacent sentences are handled by the density rule.
+
+Measured with the ceiling lifted: 13-word note → 1 · 585 words → 3 · 1,362 words → 6 · 1,557 words → 7 ·
+360-word pharmacology note with no anatomy → **0**. A student who ignored 20 chips and opened 1 gets 5
+instead of 6; one who opened 14 of 20 gets 7. Engagement counts live in `localStorage.mb3d_engage`
+(`shown`/`opened`) — the first telemetry for evolving the scoring from real behaviour rather than guesswork.
 
 `MB3D.terms()` only offers terms that resolve to a **part** — context scaffolding (the humerus behind a
 muscle) is real anatomy but not a destination, and a chip on it would open a viewer with nothing selected.

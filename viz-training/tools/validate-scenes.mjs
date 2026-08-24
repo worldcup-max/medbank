@@ -49,8 +49,8 @@ const STATUSES = new Set(['ready', 'candidate', 'planned', 'blocked']);
 const CAPABILITIES = {
   bodyparts3d: {
     native: ['SHOW_STRUCTURE', 'HIDE_STRUCTURE', 'HIGHLIGHT_STRUCTURE', 'ISOLATE_REGION', 'ROTATE_TO_VIEW',
-      'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP'],
-    degraded: ['TRACE_STRUCTURE', 'PEEL_LAYER'],
+      'CROSS_SECTION', 'COMPARE_STRUCTURES', 'SHOW_RELATIONSHIP', 'TRACE_STRUCTURE'],
+    degraded: ['PEEL_LAYER'],
     catalog: 'available-meshes.json'
   },
   svg: { native: [], degraded: [], catalog: null }
@@ -103,8 +103,18 @@ function validate(scene) {
     if (!s.label) E('schema', `${s.key}: no label — the student needs something to read`);
 
     if (s.render === 'anchor') {
-      if (!s.anchor || !Array.isArray(s.anchor.xyz) || s.anchor.xyz.length !== 3) E('schema', `${s.key}: anchor render needs anchor.xyz [x,y,z]`);
-      if (s.status !== 'needs-review') E('lifecycle', `${s.key}: an authored anchor must carry status:"needs-review" until a human clears it`);
+      /* A landmark is a place ON a parent structure. Authored as uvw — fractions of the parent's own
+         bounding box — so it survives scaling and travels with the parent. xyz stays legal for a point
+         that belongs to the scene rather than to one structure. */
+      const a = s.anchor || {};
+      const uvwOk = Array.isArray(a.uvw) && a.uvw.length === 3 && a.uvw.every(n => typeof n === 'number' && n >= -0.5 && n <= 1.5);
+      const xyzOk = Array.isArray(a.xyz) && a.xyz.length === 3;
+      if (!uvwOk && !xyzOk) E('schema', `${s.key}: anchor needs anchor.uvw [u,v,w] (0–1 within its parent) or anchor.xyz`);
+      if (uvwOk && !a.on) E('schema', `${s.key}: anchor.uvw needs anchor.on — the key of the structure it sits on`);
+      if (a.on && !keys.has(a.on) && !structures.some(x => x.key === a.on)) E('ops', `${s.key}: anchor.on "${a.on}" matches no structure in this scene`);
+      if (s.status !== 'needs-review' && !s.reviewed_by)
+        E('lifecycle', `${s.key}: an authored anchor stays status:"needs-review" until a human clears it — set reviewed_by to release it`);
+      if (!s.calibrated_by) W('lifecycle', `${s.key}: no calibrated_by — record how the anchor was placed (geometry, author, calibrate-click)`);
       continue;
     }
     if (scene.mode !== '3d_anatomy') continue;         // diagram/microscopic scenes carry no model refs

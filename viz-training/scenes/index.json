@@ -14,14 +14,12 @@
       "student_ready": true,
       "authored_by": "human",
       "approved_by": "frank",
-      "degrades": [
-        "TRACE_STRUCTURE"
-      ],
+      "degrades": [],
       "course": "Gross Anatomy",
       "topic": "Arm (Brachium)",
       "structure": "Biceps brachii & Triceps brachii",
-      "learning_goal": "Know the heads of each muscle, what each head crosses, and which movement it drives.",
-      "gaps": 0,
+      "learning_goal": "Know where each head of biceps and triceps starts and ends, and the exact bony landmark it uses.",
+      "gaps": 1,
       "match": {
         "topics": [
           "arm",
@@ -67,6 +65,36 @@
           "key": "tri_med",
           "label": "Triceps — medial head",
           "group": "Triceps brachii"
+        },
+        {
+          "key": "supraglenoid_tubercle",
+          "label": "Supraglenoid tubercle",
+          "group": "Landmarks"
+        },
+        {
+          "key": "intertubercular_groove",
+          "label": "Intertubercular groove",
+          "group": "Landmarks"
+        },
+        {
+          "key": "radial_tuberosity",
+          "label": "Radial tuberosity",
+          "group": "Landmarks"
+        },
+        {
+          "key": "coracoid_process",
+          "label": "Coracoid process",
+          "group": "Landmarks"
+        },
+        {
+          "key": "infraglenoid_tubercle",
+          "label": "Infraglenoid tubercle",
+          "group": "Landmarks"
+        },
+        {
+          "key": "olecranon",
+          "label": "Olecranon",
+          "group": "Landmarks"
         }
       ],
       "terms": {
@@ -103,11 +131,14 @@
         "medial head of triceps": "tri_med",
         "triceps medial head": "tri_med",
         "deep head": "tri_med",
-        "medial head of right triceps brachii": "tri_med"
+        "medial head of right triceps brachii": "tri_med",
+        "intertubercular groove": "intertubercular_groove",
+        "bicipital tuberosity": "radial_tuberosity",
+        "olecranon process": "olecranon"
       },
       "counts": {
-        "structures": 9,
-        "parts": 5,
+        "structures": 15,
+        "parts": 11,
         "views": 4
       }
     },
@@ -121,9 +152,7 @@
       "student_ready": true,
       "authored_by": "human",
       "approved_by": "frank",
-      "degrades": [
-        "TRACE_STRUCTURE"
-      ],
+      "degrades": [],
       "course": "Gross Anatomy",
       "topic": "Heart & Pericardium",
       "structure": "Heart",
