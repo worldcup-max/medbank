@@ -514,6 +514,9 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .cmt-mark{position:absolute;left:65%;top:0;bottom:0;width:1px;background:#c9c2b2;z-index:1}
 .cmt-safe{margin-top:13px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;background:#fff6e6;border:1px solid #f3d79a;color:#8a5a12;border-radius:20px;padding:8px 12px}
 .cmt-safe.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
+.cmt-due{margin-top:11px;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#4a3fb0;background:#efecff;border:1px solid #d9d2f5;border-radius:12px;padding:9px 11px;cursor:pointer}
+.cmt-due b{font-weight:900}
+.cmt-due-go{margin-left:auto;font-weight:800;color:#5b3df5}
 .h2frz{margin-left:auto;font-weight:900;font-size:12.5px;color:#3a6df0;background:#e8f0ff;border-radius:20px;padding:3px 10px;white-space:nowrap}
 .h2weak{display:flex;align-items:center;gap:9px;background:#fff0ec;border:1px solid #f6c3b4;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#a83f28;cursor:pointer}
 .h2wtx{flex:1;min-width:0}
@@ -1345,6 +1348,7 @@ function commitmentCard(){
     <div class="cmt-row" style="margin-top:11px"><span class="cmt-l">🔄 Reviews</span><b>${revVal}</b></div>
     <div class="cmt-sub">${s.revTotal?'65% of due reviews required':'nothing due today'}</div>
     <div class="cmt-bar">${s.revTotal?`<i class="cmt-mark"></i>`:''}<div style="width:${rBar}%;background:#e0a53a"></div></div>
+    ${(()=>{ const dn=(typeof qbDueCount==='function')?qbDueCount():0; return dn?`<div class="cmt-due" onclick="event.stopPropagation();qbStartDue()">🧠 <b>${dn}</b> Q-bank concept${dn===1?'':'s'} due for retest<span class="cmt-due-go">Start ›</span></div>`:''; })()}
     ${foot}
   </div>`; }
 
@@ -2969,6 +2973,70 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
     planned:QB.items.length, completed:(QB.results||[]).length, correct:QB.correct}); }
   try{ persist(); }catch(e){}
 }
+/* ==============================================================
+ * V1.5 — Q-bank spaced-retest scheduler (the "memory loop" over the pool)
+ * Reads the FROZEN engine's signals (outcome + confidence); never modifies it.
+ * A concept (keyed by question hash) enters the schedule on a MISS or a FRAGILE
+ * (correct-but-unsure) answer, rides a performance-aware 1→3→7→14 ladder, and
+ * GRADUATES off once proven cold-and-confident. Decisions locked 2026-08-24
+ * (V1.5-INTELLIGENCE-MAP.md §5). Confidence scale: 0 guess · 1 unsure · 2 confident · 3 very.
+ *   wrong+confident → misconception, priority 3 (strongest)
+ *   wrong+unsure/unknown → priority 2
+ *   correct+unsure → fragile, priority 1 (holds its step)
+ *   correct+confident/unknown → secure: never newly scheduled; advances a schedule if one exists
+ * ============================================================== */
+var QB_LADDER=[1,3,7,14];
+function qbSched(){ var s=qbStore(); return s._sched=s._sched||{}; }        // qh -> { qh,n,streak,interval,dueAt,lastOk,conf,miscon,prio,lastSeen,firstAt,_day }
+function qbLadderNext(iv){ for(var i=0;i<QB_LADDER.length;i++){ if(QB_LADDER[i]>iv) return QB_LADDER[i]; } return 99; }   // 99 = past 14 → graduate
+/* apply ONE finalized attempt to the schedule. ok=bool; conf=0..3 or null (modes without a confidence prompt). */
+function qbSchedApply(qh, ok, conf){ try{
+  if(!qh) return; var sc=qbSched(), e=sc[qh], today=dayNum();
+  var known=(conf!=null && !isNaN(conf)), hi=known&&conf>=2, lo=known&&conf<=1;
+  var action, prio=0, miscon=false;
+  if(!ok){ action='reset'; prio=hi?3:2; miscon=hi; }                        // wrong (confident-wrong = misconception)
+  else if(lo){ action='hold'; prio=1; }                                    // correct-but-unsure = fragile
+  else { action = e ? 'advance' : 'none'; }                                // secure correct: advance an existing schedule, never create one
+  if(action==='none') return;
+  if(!e){ e={ qh:qh, n:0, streak:0, interval:0, dueAt:today, firstAt:today }; }
+  if(e._day!==today){                                                      // move the ladder at most once per attempt-day
+    e.n=(e.n||0)+1;
+    if(action==='reset'){ e.streak=0; e.interval=1; }                      // failure → back to +1, escalate (does NOT continue the ladder)
+    else if(action==='hold'){ if(!e.interval) e.interval=1; }             // fragile holds its current step
+    else if(action==='advance'){ e.streak=(e.streak||0)+1; e.interval=qbLadderNext(e.interval);
+      if(e.interval===99){ delete sc[qh]; persist(); return; } }           // proven past 14 → graduate off the schedule
+    e.dueAt=today+e.interval; e._day=today;
+  }
+  e.lastOk=ok; if(known)e.conf=conf; e.miscon=miscon; e.prio=prio; e.lastSeen=today;
+  sc[qh]=e; persist();
+}catch(err){} }
+/* build a QB item from a stored _qmeta record (carries _qh + _topicId so qbRecord/qbNext work) */
+function qbItemFromMeta(qh,m){ if(!m) return null; return { _qh:qh, _topicId:m.topicId||'*', stem:m.stem, lead_in:m.lead_in||'',
+  options:m.options, answer:m.answer, rationales:m.rationales||[], objective:m.objective||m.teaching||'', teaching:m.teaching||m.objective||'',
+  trap:m.trap_explanation||m.trap||'', trap_type:m.trap_type||'', trap_explanation:m.trap_explanation||m.trap||'',
+  tag:m.tag||m.subtopic||'General', subtopic:m.subtopic||m.tag||'', system:m.system||'', cognitive_level:m.cognitive_level||qbCogOf(m),
+  difficulty:m.difficulty||'', skill:m.skill||'', src:m.src||'' }; }
+/* concepts due for retest today, highest priority (confident-wrong) first, then most overdue */
+function qbDueList(){ var sc=qbSched(), meta=qbStore()._qmeta||{}, today=dayNum(), out=[];
+  Object.keys(sc).forEach(function(qh){ var e=sc[qh]; if(!e || e.dueAt>today || !meta[qh]) return; out.push(e); });
+  out.sort(function(a,b){ return (b.prio||0)-(a.prio||0) || (a.dueAt||0)-(b.dueAt||0); });
+  return out; }
+function qbDueCount(){ return qbDueList().length; }
+function qbScheduledCount(){ return Object.keys(qbSched()).length; }
+/* start a spaced-retest session from the due concepts (cold, tutor, renders on the Mega page) */
+function qbStartDue(){ var due=qbDueList(); if(!due.length){ mbToast('No Q-bank retests are due right now — nice.'); return; }
+  var meta=qbStore()._qmeta||{}, items=due.map(function(e){ return qbItemFromMeta(e.qh, meta[e.qh]); }).filter(Boolean).slice(0,20);
+  if(!items.length){ mbToast('Those concepts are no longer available to retest.'); return; }
+  QB={ topicId:'*', mode:'tutor', items:qbShuffle(items), i:0, picked:null, answered:false, correct:0, results:[], done:false,
+    startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'due_retest', mistakes:true,
+    smartWhy:'Spaced retest — concepts you missed or were unsure about, brought back on schedule.',
+    smartReasons:['Cold retest to prove these stuck — right-and-confident advances them, a miss brings them back sooner.'], smartFocus:[] };
+  if(typeof smartLog==='function') smartLog({t:'smart_drill_started', sid:QB.sid, session_type:'due_retest', dimension:'schedule', reason:QB.smartWhy||'', mode:QB.mode, planned:items.length});
+  _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); go('mega'); }
+/* ---- Phase 0 coverage (groundwork for readiness; not surfaced prominently yet) ---- */
+function qbPoolSize(scope){ var n=0; (allTopics||[]).forEach(function(t){ if(!t||!t.ready) return; if(scope&&scope!=='*'&&t.id!==scope) return;
+  var qs=(t.extras&&t.extras.qbank)||[]; n+=qs.length; }); return n; }
+function qbCoverage(scope){ var agg=qbAgg(scope||'*'), size=qbPoolSize(scope); return { seen:agg.qcount, total:size, pct: size?Math.round(agg.qcount/size*100):0 }; }
+
 function qbPick(j){ if(QB.answered||QB._lock) return; QB.picked=j;
   /* test mode never sets QB.answered (that would reveal the key), so without _lock a second tap inside the
      180ms advance window records a SECOND attempt for the same question and queues a second qbNext —
@@ -2978,6 +3046,11 @@ function qbPick(j){ if(QB.answered||QB._lock) return; QB.picked=j;
   QB.answered=true; qbRecord(j); render();                                            // tutor mode: reveal rationale
 }
 function qbNext(){ QB._confDone=false;
+  // V1.5: finalize the just-answered question into the spaced-retest schedule (once per question, all modes;
+  // confidence, if the mode captured it, is already on the result by now).
+  try{ var _r=QB.results[QB.results.length-1], _it=QB.items[QB.i];
+    if(_r && _it){ var _qh=_it._qh || qbHash((_it.stem||'')+'|'+((_it.options||[]).join('|')));
+      qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf)); } }catch(e){}
   if(QB.adaptive){
     var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
     if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }

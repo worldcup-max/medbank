@@ -488,6 +488,7 @@ function validateQbankItems(rawArr){
   });
   if(kept.length<before) console.log("[build-extra] qbank de-duped "+(before-kept.length)+" repeat(s) → "+kept.length+" distinct");
   if(ratDropped) console.warn("[build-extra] qbank dropped misaligned rationales on "+ratDropped+" item(s) (short array — kept the question, hid the explanations rather than risk mis-attributing them)");
+  console.log("[build-extra] qbank yield raw="+before+" removed="+(before-kept.length)+" final="+kept.length);   // QB-12: one parseable line to monitor the raw→distinct collapse across builds
   return kept;
 }
 /* qbank: fire several small FOCUSED calls in PARALLEL, then merge + validate + dedup.
