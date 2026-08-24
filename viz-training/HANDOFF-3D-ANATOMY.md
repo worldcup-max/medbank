@@ -76,21 +76,29 @@ The supraglenoid tubercle has no mesh — it is a **spot on the scapula**. Those
 own bounding box, so they survive any scaling and ride the parent's transform. They appear in the parts
 list like any other part and can be traced, highlighted and soloed.
 
-**They are computed, not hand-placed.** A muscle mesh knows where it attaches, so the landmark is the
-nearest point on the parent bone to the attaching muscle. The arm scene's six landmarks were derived that
-way from the source meshes, and the gap to the muscle is recorded per landmark as the check:
+**They are measured, not hand-placed.** A muscle mesh knows where it attaches, so the landmark is the
+nearest **contact** between the bone and the muscle that attaches there. The arm scene's six landmarks were
+derived that way from the source meshes, and the gap is recorded per landmark as the check:
 
-| landmark | on | gap to muscle |
+| landmark | on | gap |
 |---|---|---|
-| intertubercular groove | humerus | 0.1 mm |
-| coracoid process | scapula | 0.1 mm |
-| radial tuberosity | radius | 1.3 mm |
-| infraglenoid tubercle | scapula | 3.1 mm |
-| olecranon | ulna | 4.7 mm |
-| supraglenoid tubercle | scapula | 8.3 mm (tendon crossing the joint) |
+| supraglenoid tubercle | scapula | 0.0 mm |
+| coracoid process | scapula | 0.0 mm |
+| intertubercular groove | humerus | 0.09 mm |
+| infraglenoid tubercle | scapula | 0.1 mm |
+| radial tuberosity | radius | 0.1 mm |
+| olecranon | ulna | 0.2 mm |
 
-Cross-check: supraglenoid ↔ coracoid = 31.8 mm, supraglenoid ↔ infraglenoid = 48.5 mm — both anatomically
-right, which is what makes the frame trustworthy rather than merely self-consistent.
+Cross-checks on the scapula land on textbook figures: supraglenoid ↔ coracoid **24.1 mm** (textbook 2–3 cm),
+supraglenoid ↔ infraglenoid **38.4 mm** (glenoid height 35–40 mm). That is what makes the frame trustworthy
+rather than merely self-consistent — and it is why an earlier "topmost vertex of the muscle" method was
+thrown away: it drifted up onto the acromion and gave 31.8 / 48.5 mm.
+
+**`tools/derive-landmarks.html` does this for any scene.** Open it (no server needed), drop in a scene, and
+every muscle is asked where it attaches. It reports origin and insertion per muscle, plus contact candidates
+along the course with where on the muscle each sits, previews the merged scene in the real player, and hands
+back scene JSON to paste. Naming a groove is a judgement, so the tool proposes and the author names; finding
+the contact is arithmetic, so the tool does that part. Pairings over 6 mm are flagged and over 12 mm dropped.
 
 **Calibrating by hand still works** when a landmark has no muscle to derive it from: set
 `localStorage.mb3dcal='1'`, click the spot on the bone, and the viewer prints a ready-to-paste snippet with

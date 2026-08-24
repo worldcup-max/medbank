@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MedBank · derive landmarks</title>
+<style>
+  :root{--bg:#0f0e1b;--pan:#17162a;--ink:#f3f0ff;--dim:#a9a4c8;--acc:#7c5cff;--ok:#28c093;--warn:#ffb020;--line:#2c2948}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 16px 70px}
+  h1{font-size:19px;margin:0 0 3px}
+  p.sub{color:var(--dim);font-size:13px;margin:0 0 16px}
+  .why{border:1px solid var(--line);border-radius:11px;padding:12px 14px;background:var(--pan);font-size:13.5px;margin-bottom:16px}
+  .why b{color:#c9bcff}
+  .drop{border:1.5px dashed #3a3560;border-radius:11px;padding:16px;text-align:center;color:var(--dim);font-size:13px;margin-bottom:10px}
+  .drop.hot{border-color:var(--acc);color:var(--ink);background:#1b1930}
+  textarea{width:100%;min-height:150px;background:#141225;color:#c9bcff;border:1px solid #35315a;border-radius:10px;padding:10px;font:12.5px ui-monospace,Menlo,Consolas,monospace}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+  button{font:inherit;font-size:13px;font-weight:600;padding:9px 14px;border-radius:9px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}
+  button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+  button[disabled]{opacity:.45;cursor:not-allowed}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th{text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #211f38;vertical-align:top}
+  td.gap b{color:var(--ok)} td.gap.far b{color:var(--warn)}
+  input[type=text]{background:#141225;color:var(--ink);border:1px solid #35315a;border-radius:7px;padding:5px 8px;font:inherit;font-size:12.5px;width:100%}
+  .log{margin-top:10px;font-size:12.5px;color:var(--dim);white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;max-height:180px;overflow:auto}
+  #preview{margin-top:14px}
+  .hint{font-size:12px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Derive landmarks</h1>
+  <p class="sub">Paste or drop a v2 scene. Every muscle in it is asked where it attaches, and the answer becomes a landmark.</p>
+
+  <div class="why">
+    <b>Why this is not guesswork.</b> A landmark like the supraglenoid tubercle has no model of its own — but the
+    muscle that attaches there does. The nearest point on the bone to the end of that muscle <i>is</i> the landmark.
+    Each row below reports the gap in millimetres: a few mm is tendon thickness, a large gap means the pairing is
+    wrong and should be dropped rather than shipped.
+  </div>
+
+  <div class="drop" id="drop">Drop a scene <code>.json</code> here — or paste it below</div>
+  <textarea id="in" spellcheck="false" placeholder='{ "schema": 2, "id": "…", "structures": [ … ] }'></textarea>
+
+  <div class="row">
+    <button class="pri" id="go">Derive landmarks</button>
+    <button id="preview-btn" disabled>Preview the merged scene</button>
+    <button id="copy" disabled>Copy merged scene</button>
+    <span class="hint" id="count"></span>
+  </div>
+
+  <table id="tbl" style="display:none">
+    <thead><tr><th style="width:26%">landmark</th><th style="width:14%">on</th><th style="width:12%">gap</th><th style="width:26%">uvw</th><th style="width:22%">from</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <div id="preview"></div>
+  <textarea id="out" spellcheck="false" style="margin-top:12px;display:none"></textarea>
+  <div class="log" id="log"></div>
+</div>
+
+<!-- viz3d.js is inlined so this tool works from any folder, with no server -->
+<script>
+__VIZ3D__
+</script>
+<script>
+(function(){
+  try{ localStorage.setItem('mb3d','1'); }catch(e){}
+  const BASE='https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/assets/BodyParts3D_data/stl/';
+  const $=id=>document.getElementById(id);
+  const say=m=>{ $('log').textContent += m+'\n'; $('log').scrollTop=1e6; };
+  let merged=null;
+
+  /* ---------- mesh loading + geometry ---------- */
+  const cache={};
+  async function pts(id){
+    if(cache[id]) return cache[id];
+    const r=await fetch(BASE+id+'.stl');
+    if(!r.ok) throw new Error('HTTP '+r.status+' for '+id);
+    const buf=await r.arrayBuffer(), dv=new DataView(buf), n=dv.getUint32(80,true);
+    if(84+n*50!==buf.byteLength) throw new Error(id+' is not a binary STL');
+    const a=new Float32Array(n*9); let o=84,k=0;
+    for(let i=0;i<n;i++){ o+=12; for(let j=0;j<9;j++){ a[k++]=dv.getFloat32(o,true); o+=4; } o+=2; }
+    return cache[id]=a;
+  }
+  const bbox=p=>{const mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9];for(let i=0;i<p.length;i+=3)for(let a=0;a<3;a++){const v=p[i+a];if(v<mn[a])mn[a]=v;if(v>mx[a])mx[a]=v;}return{mn,mx,size:[mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2]]};};
+  const longAxis=b=>b.size.indexOf(Math.max(...b.size));
+  function bandPts(p,axis,lo,hi){
+    const b=bbox(p), L=b.mn[axis]+b.size[axis]*lo, H=b.mn[axis]+b.size[axis]*hi, out=[];
+    for(let i=0;i<p.length;i+=3){ const v=p[i+axis]; if(v>=L&&v<=H) out.push([p[i],p[i+1],p[i+2]]); }
+    return out.filter((_,i)=>i%Math.max(1,Math.floor(out.length/260))===0);
+  }
+  function endRegion(p,axis,dir,frac){
+    const b=bbox(p), lo=b.mn[axis], hi=b.mx[axis], span=b.size[axis];
+    const cut = dir>0 ? hi-span*frac : lo+span*frac, out=[];
+    for(let i=0;i<p.length;i+=3){ const v=p[i+axis]; if(dir>0?v>=cut:v<=cut) out.push([p[i],p[i+1],p[i+2]]); }
+    return out.filter((_,i)=>i%Math.max(1,Math.floor(out.length/450))===0);   // sample: accuracy is set by the bone side
+  }
+  function nearestPair(bone, cloud){
+    let best=null,bd=1e18;
+    for(let j=0;j<cloud.length;j++){ const q=cloud[j];
+      for(let i=0;i<bone.length;i+=3){ const dx=bone[i]-q[0],dy=bone[i+1]-q[1],dz=bone[i+2]-q[2];
+        const d=dx*dx+dy*dy+dz*dz; if(d<bd){ bd=d; best=[bone[i],bone[i+1],bone[i+2]]; } } }
+    return {pt:best, dist:Math.sqrt(bd)};
+  }
+  const uvwOf=(pt,p)=>{const b=bbox(p);return [0,1,2].map(a=>+(((pt[a]-b.mn[a])/b.size[a])).toFixed(3));};
+
+  /* ---------- derive ---------- */
+  async function derive(){
+    const scene=JSON.parse($('in').value);
+    const S=(scene.structures||[]).filter(s=>s.refs&&s.refs.bodyparts3d);
+    const muscles=S.filter(s=>(s.layer==='muscle')||/muscle|head of/i.test(s.name||''));
+    const bones=S.filter(s=>s.layer==='bone'||/bone|scapula|humerus|radius|ulna|femur|tibia|fibula|vertebra|rib|clavicle|pelvis|skull|mandible/i.test(s.name||''));
+    if(!muscles.length||!bones.length) throw new Error('need at least one muscle and one bone with refs in this scene');
+    say(`${muscles.length} muscle(s) × ${bones.length} bone(s)`);
+
+    const bonePts={}; for(const b of bones){ bonePts[b.key]=await pts(b.refs.bodyparts3d); say('loaded '+b.label); }
+    const found=[];
+    for(const m of muscles){
+      const mp=await pts(m.refs.bodyparts3d); say('loaded '+m.label);
+      const ax=longAxis(bbox(mp));
+      /* Ends give origin and insertion. Everything between them is the muscle's COURSE, and a muscle
+         lying along a bone touches it in many places — so the course is reported as candidates the author
+         names (the most proximal and most distal contacts that are not the ends), with where along the
+         muscle each sits. Naming a groove is a judgement; finding the contacts is not. */
+      for(const [dir,kind] of [[+1,'origin'],[-1,'insertion']]){
+        const region=endRegion(mp,ax,dir,0.12);
+        let win=null;
+        for(const b of bones){ const r=nearestPair(bonePts[b.key],region);
+          if(!win||r.dist<win.dist) win={bone:b, ...r}; }
+        if(!win || win.dist>12){ say(`  ${kind} of ${m.label}: no bone within 12mm — skipped`); continue; }
+        if(win.dist>6) say(`  ${kind} of ${m.label}: ${win.dist.toFixed(1)}mm gap — check this one`);
+        found.push({ kind, muscle:m, bone:win.bone, pt:win.pt, gap:+win.dist.toFixed(1),
+                     uvw:uvwOf(win.pt, bonePts[win.bone.key]) });
+      }
+      const contacts=[];
+      for(let st=0; st<12; st++){
+        const lo=0.16+st*0.06, hi=lo+0.06;
+        const region=bandPts(mp,ax,lo,hi); if(!region.length) continue;
+        let win=null;
+        for(const b of bones){ const r=nearestPair(bonePts[b.key],region);
+          if(!win||r.dist<win.dist) win={bone:b, ...r}; }
+        if(win && win.dist<1.0) contacts.push({along:+((lo+hi)/2).toFixed(2), ...win});
+      }
+      [contacts[contacts.length-1], contacts[0]].forEach(function(c){        // most proximal, most distal
+        if(!c) return;
+        if(found.some(f=>f.bone.key===c.bone.key && Math.hypot(...[0,1,2].map(a=>f.pt[a]-c.pt[a]))<15)) return;
+        if(found.some(f=>f.kind==='course' && f.bone.key===c.bone.key && Math.hypot(...[0,1,2].map(a=>f.pt[a]-c.pt[a]))<15)) return;
+        found.push({ kind:'course', along:c.along, muscle:m, bone:c.bone, pt:c.pt, gap:+c.dist.toFixed(2),
+                     uvw:uvwOf(c.pt, bonePts[c.bone.key]) });
+      });
+    }
+    /* two heads of one muscle often share a landmark — merge points within 6mm on the same bone */
+    const keep=[];
+    for(const f of found){
+      const near=keep.find(k=>k.bone.key===f.bone.key && Math.hypot(...[0,1,2].map(a=>k.pt[a]-f.pt[a]))<6);
+      if(near){ near.shared.push(f.muscle.label); continue; }
+      f.shared=[f.muscle.label]; keep.push(f);
+    }
+    return {scene, keep};
+  }
+
+  function slug(s){ return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,''); }
+  function render(scene, keep){
+    $('tbl').style.display='';
+    $('rows').innerHTML='';
+    keep.forEach((f,i)=>{
+      const suggested = f.kind==='origin' ? ('origin of '+f.muscle.label)
+                      : f.kind==='insertion' ? ('insertion of '+f.muscle.label)
+                      : (f.bone.label+' contact at '+Math.round(f.along*100)+'% along '+f.muscle.label);
+      const tr=document.createElement('tr');
+      tr.innerHTML =
+        '<td><input type="text" data-i="'+i+'" value="'+suggested.replace(/"/g,'&quot;')+'"></td>'+
+        '<td>'+f.bone.label+'</td>'+
+        '<td class="gap'+(f.gap>12?' far':'')+'"><b>'+f.gap+' mm</b></td>'+
+        '<td><code>['+f.uvw.join(', ')+']</code></td>'+
+        '<td>'+f.shared.join('<br>')+(f.kind==='course'?'<br><span class="hint">'+Math.round(f.along*100)+'% along — name it or delete the row</span>':'')+'</td>';
+      $('rows').appendChild(tr);
+    });
+    $('count').textContent = keep.length+' landmark(s) — rename any of them before copying';
+    rebuild(scene, keep);
+    document.querySelectorAll('#rows input').forEach(inp=>inp.addEventListener('input',()=>rebuild(scene,keep)));
+  }
+
+  function rebuild(scene, keep){
+    const out=JSON.parse(JSON.stringify(scene));
+    out.structures=(out.structures||[]).filter(s=>!(s.render==='anchor'&&s.calibrated_by&&/^geometry/.test(s.calibrated_by)));
+    keep.forEach((f,i)=>{
+      const label=(document.querySelector('#rows input[data-i="'+i+'"]')||{}).value||('landmark '+i);
+      out.structures.push({
+        key: slug(label), label, role:'part', group:'Landmarks', render:'anchor',
+        color: f.kind==='origin' ? '#ffcf5c' : f.kind==='insertion' ? '#ff9f43' : '#ffb020',
+        anchor: { on:f.bone.key, uvw:f.uvw, radius:0.02 },
+        status:'needs-review',
+        calibrated_by:'geometry: nearest point on '+f.bone.label+' to the '+(f.kind==='course'?'mid-course of ':f.kind+' end of ')+f.shared.join(' / '),
+        calibration_gap_mm: f.gap,
+        terms:[label.toLowerCase()],
+        narration:''
+      });
+    });
+    merged=out;
+    $('out').style.display=''; $('out').value=JSON.stringify(out,null,2);
+    $('copy').disabled=false; $('preview-btn').disabled=false;
+  }
+
+  /* ---------- wiring ---------- */
+  $('go').onclick=async function(){
+    $('log').textContent=''; this.disabled=true;
+    try{ const {scene,keep}=await derive(); render(scene,keep); say('\ndone — '+keep.length+' landmarks'); }
+    catch(e){ say('FAILED: '+e.message); }
+    this.disabled=false;
+  };
+  $('copy').onclick=function(){ $('out').select(); document.execCommand('copy'); this.textContent='Copied ✓'; setTimeout(()=>this.textContent='Copy merged scene',1500); };
+  $('preview-btn').onclick=function(){ if(merged) MB3D.mountScene('preview', merged).catch(e=>say('preview failed: '+e.message)); };
+
+  const drop=$('drop');
+  ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hot');}));
+  ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hot');}));
+  drop.addEventListener('drop',ev=>{ const f=ev.dataTransfer.files[0]; if(!f)return;
+    const rd=new FileReader(); rd.onload=()=>{ $('in').value=rd.result; say('loaded '+f.name); }; rd.readAsText(f); });
+
+  say('ready · meshes come from the CDN, so this page needs a connection');
+})();
+</script>
+</body>
+</html>
