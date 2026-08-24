@@ -154,7 +154,7 @@
     var max=Math.max(1,...week.map(secsOn));
     var rows=week.map(function(k,i){
       var isToday=(k===today());
-      var label = isToday?"Today":new Date(k).toLocaleDateString(undefined,{weekday:"short"});
+      var label = isToday?"Today":new Date(k+"T00:00").toLocaleDateString(undefined,{weekday:"short"});
       var w=Math.round((secsOn(k)/max)*100), c=cardsOn(k);
       return "<div style='display:flex;align-items:center;gap:8px;margin-top:6px'>"+
         "<span style='width:44px;color:#5c5570;font-size:12px'>"+label+"</span>"+
@@ -207,8 +207,8 @@
       var bars = days.map(function(k,i){
         var isToday=(k===today()), s=secsOn(k), c=cardsOn(k);
         var hpc = Math.round((s/maxS)*100);
-        var lab = range==="week" ? new Date(k).toLocaleDateString(undefined,{weekday:"short"}).slice(0,2)
-                                 : (i%5===0? String(new Date(k).getDate()) : "");
+        var lab = range==="week" ? new Date(k+"T00:00").toLocaleDateString(undefined,{weekday:"short"}).slice(0,2)
+                                 : (i%5===0? String(new Date(k+"T00:00").getDate()) : "");
         return "<div style='flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px'>"+
           (showLabels && s ? "<span style='font-size:9.5px;color:#8a83a0'>"+(c||"")+"</span>" : "")+
           "<div style='width:100%;height:130px;display:flex;align-items:flex-end'>"+
@@ -310,7 +310,9 @@
   }
   function stillIdle(){ return visible && !genieUp && isStudying() && (Date.now()-lastActivity)>WARN_MS && !document.querySelector("#vizov, .vizinlinebody"); }
   /* prepare the AI voice FIRST, then reveal the genie + start the voice at the same instant (no lag) */
-  function armGenie(){ if(genieUp||geniePending) return; geniePending=true;
+  var _genieTriedAt=0;
+  function armGenie(){ if(genieUp||geniePending||(Date.now()-_genieTriedAt)<15000) return;   // TIM-06: a reveal that returns without setting genieUp must not re-request TTS every 1s tick — 15s cooldown
+    geniePending=true; _genieTriedAt=Date.now();
     var msg=GENIE_LINES[Math.floor(Math.random()*GENIE_LINES.length)];
     if(muted || !window.mbPrepareVoice){ geniePending=false; if(stillIdle())showGenie(msg,null); return; }
     var to=setTimeout(function(){ if(geniePending){ geniePending=false; if(stillIdle())showGenie(msg,null); } }, 4500);   // don't wait forever for TTS
@@ -337,7 +339,9 @@
   }
   function hideGenie(){ if(!genieUp) return; genieUp=false;
     if(_geniePlay&&_geniePlay.cancel){ try{_geniePlay.cancel();}catch(_){} } _geniePlay=null;
-    try{ if(window.stopSpeak)stopSpeak(); }catch(_){}
+    // TIM-04: only cancel the genie's own browser-voice fallback — NOT global stopSpeak(), whose stopCloud()
+    // was silently stopping the student's podcast on their very next tap.
+    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(_){}
     var g=document.getElementById("mbGenie"); if(g){ g.style.transition="opacity .25s"; g.style.opacity="0"; setTimeout(function(){ if(g&&g.parentNode)g.remove(); },260); }
   }
 

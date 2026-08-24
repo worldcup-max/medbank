@@ -22,3 +22,7 @@ One block per hourly run. Model-free (no API spend). Log-only.
 - 2026-08-24T01:02:12Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
 - 2026-08-24T04:03:03Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
 - 2026-08-24T07:40:50Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
+- 2026-08-24T08:02:01Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
+- 2026-08-24T09:01:50Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
+- 2026-08-24T10:01:57Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.
+- 2026-08-24T11:01:48Z — dormant (date guard): local date 2026-08-24 is before start date 2026-08-27. Schema v2 prompt active; no scene work done.

@@ -5382,8 +5382,37 @@ study-dock.js + app.html parse; harnesses green.
 - **SL-01 (HIGH):** the Due-now "Open" button now serves that topic's DUE cards through the grading runner (`startTopicDue` → `startFilteredSession`, budget-uncapped) instead of opening the whole deck at a stale, already-passed position; falls back to opening the topic when nothing is actually due.
 - **SET-01 (part):** `qbReset` now also clears the topic's `_events` (was never cleared). The remaining half — sync's UNION merge re-adopting cloud copies after a reset — needs a product decision (tombstone/rev-bump vs "never lose history") and is left for Frank.
 
+# ✅ FIXED — STK-01 + PRG-01 (streak) — Frank chose: daily new learning + review maintenance (2026-08-24)
+Frank's decision: keep a daily new-card requirement (this is a medical-study app — learn new + maintain old every day),
+kill the hard-coded `STREAK_NEW=20`, and make the new half ADAPTIVE and per-course.
+Implemented in `app.html` (PROGRESS ENGINE + Settings, frozen Smart-Drill engine untouched):
+- `minNewPerCourse(n)` baseline: 1–2 courses→10/course · 3–5→7 · 6+→5. `activeCourseCount()` = courses in the student's
+  STUDY PLAN (`DATA.plan`), set before studying — NOT courses touched today (that would be a loophole: skip a course →
+  smaller denominator → easier streak). Empty-plan day-one fallback = started courses (can only raise the count).
+- Single source of truth: `streakStatus()` is the one calc; `streakMet()` returns `streakStatus().safe`, and the
+  "Today's commitment" card (`commitmentCard()`, shown on Home + Today) and the Settings row all read the same object —
+  the gate can never enforce a target a screen doesn't show. No cached target: plan changes recompute everywhere live.
+- Settings control renamed "Streak: new cards per course" → "Daily new learning goal" (framed as learning, streak as
+  the consequence); baseline-floored, upward-only (`setNewPerCourse` clamps `max(baseline,…)`).
+- `streakPerCourseMin()` = student's chosen per-course min, floored at the baseline (Settings lets them RAISE, never lower).
+- `dailyNewTarget()` = activeCourses × perCourseMin. `newTarget()` = that target, only lowered if the deck is genuinely
+  exhausted (`newCardsAvailableToday`), NEVER lowered just because reviews are heavy.
+- `streakMet()` now = `newDoneToday() >= newTarget()` **AND** ≥65% of due reviews (dueReviews=0 → new alone decides).
+- `markActive()` no longer calls `bumpStreak` unconditionally — `maybeBumpStreak()` (the gate) is the only writer, so the
+  streak stops advancing on a single card flip. (STK-01 root cause removed.)
+- `planNew()` supply floor raised to `max(streakFloorRemaining, adaptiveRemaining)` so the target is always reachable when
+  unseen cards exist (adaptive still recommends MORE on light days). (PRG-01 root cause removed.)
+- Copy: Home pill + classic strkstat now read `new X/target · reviews Y%`; Settings "Daily targets" gains a
+  "Streak: new cards per course" control showing baseline + today's computed target; stale "floor keeps your streak" fixed.
+Verified: inline-JS parse OK; all 5 qa harnesses green; 19-case streak scenario suite + 7-case supply-floor suite run
+against the REAL function bodies extracted from app.html (stubbed data primitives). Covers Frank's full table:
+4 planned/touch 2 → 28 (not 14) · 5→35 · 6→30 · raise 7→10 → 40 · lower 7→5 blocked (stays 7) · 28+65% safe ·
+28+64% not safe · 15-new+100% not safe · target 35 but 18 eligible → 18 · heavy-review day floor NOT lowered (planNew
+still deals 28 with adaptive cap 0; deals 40 on a light day) · short deck supplies only what exists · no-due-reviews →
+new alone decides · Home/Today/Settings same target · plan changed 4→2 mid-session → target/status/count all recompute
+to 20 (no stale cache).
+
 # ⚑ NEEDS FRANK — product decisions / live checks (not code bugs to silently change)
-- **STK-01 + PRG-01 (streak):** the streak advances on a single card flip (markActive bumps unconditionally) while the copy demands new≥20 + reviews≥65% — and 20 is unreachable (effectiveNewCap starts at 12, →5 near exams, →0 on a review backlog). Fixing this changes what "a day" means for the streak/freeze economy — a motivation-mechanic decision. Recommend: streak target = the day's ACHIEVABLE plan (met all planned new + review %), and only advance via the gate, not the flip.
 - **SET-01 union-resurrection, SET-02 (restore discarded when signed in):** both hinge on the same "authoritative reset/restore vs union-merge" design tension.
 - **ENT-02/03/05, ENT-06:** trials/entitlement + pricing model + `/tts` paid-voice selection — pricing/enforcement decisions.
 - **CNT-05, QB-09:** live checks (card count vs shown; max_tokens clamp) noted inline.
@@ -5415,3 +5444,24 @@ app.html parses; 5 harnesses green.
 - **SCA-10:** a card search hit now opens the matched card (via `openCardAt`), not the deck's last saved position.
 - **NTF-05:** the strict overlay's "Start review now" dismisses (and lets the student continue) when a session is already in progress, instead of discarding it for a nudge session.
 - Also this session: HRD-06 (star count = resolved pool), HRD-03 (key-aware Hard rebuild), MIS-05/LCH-05 (rows open the tapped card), SWP-01/02/03, TOP-08/10, REV-05, SL-01/02.
+
+---
+# ✅ FIXED — tutor / timer polish batch — 2026-08-24 (Claude)
+app.html + study-timer.js parse; 5 harnesses green.
+- **SCA-04:** sending to the tutor while it's still replying no longer clears + drops the message — it's left in the box (guarded on AIBUSY before clearing).
+- **SCA-08:** "Clear chat" now confirms before wiping the tutor transcript (it sits right next to Start voice quiz).
+- **TIM-02:** stats-chart weekday/day labels parse the date as LOCAL midnight (`k+"T00:00"`), so bars west of UTC are labelled the right day.
+- **TIM-04:** dismissing the idle genie cancels only its own browser-voice fallback, not global `stopSpeak()` — the student's podcast no longer stops on the next tap.
+
+---
+# ✅ FIXED — tutor redo / mistakes prune — 2026-08-24 (Claude)
+- **SCA-07:** `↺ Redo` on the text path now re-sends the question (retry) instead of silently deleting the exchange.
+- **MIS-04/SIDE-03:** a correct answer now removes the card from `DATA.missLog`, so the recent-mistakes pool stops being append-only-forever (the sync-union resurrection remains part of the SET-01 reset design decision).
+app.html parses; 5 harnesses green.
+
+---
+# ✅ FIXED — LOW/perf tail — 2026-08-24 (Claude)
+- **HRD-10:** the Hard-cards pool is recall-only now — starred primer cards (un-ratable) no longer clog the drill or inflate the summary denominator.
+- **MIS-07 / LCH-06:** the mistakes + leech lists show a "…and N more" row when truncated past 60, so the count on the button matches what's visible.
+- **TIM-06:** a genie reveal that fails to mount no longer re-requests TTS every 1s tick (15s cooldown).
+app.html + study-timer.js parse; 5 harnesses green.

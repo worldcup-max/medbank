@@ -503,6 +503,17 @@ pre.copy{background:var(--panel);border:1px solid var(--line);border-radius:11px
 .h2streak.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
 .h2streak b{font-weight:900}
 .h2fl{font-size:16px}
+.cmt{background:#fff;border:1px solid #ece7db;border-radius:16px;padding:15px 16px;cursor:pointer}
+.cmt-hd{font-size:13px;font-weight:800;color:#3a3a3a;margin-bottom:12px}
+.cmt-row{display:flex;align-items:baseline;justify-content:space-between}
+.cmt-l{font-size:13.5px;color:#333}
+.cmt-row b{font-weight:900;font-size:13.5px;color:#111}
+.cmt-sub{font-size:11.5px;color:#8a857a;margin:2px 0 6px}
+.cmt-bar{position:relative;height:8px;background:#f1eee6;border-radius:20px;overflow:hidden}
+.cmt-bar>div{height:100%;border-radius:20px;transition:width .5s ease}
+.cmt-mark{position:absolute;left:65%;top:0;bottom:0;width:1px;background:#c9c2b2;z-index:1}
+.cmt-safe{margin-top:13px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;background:#fff6e6;border:1px solid #f3d79a;color:#8a5a12;border-radius:20px;padding:8px 12px}
+.cmt-safe.ok{background:#e8f7ef;border-color:#a9e3c2;color:#0d7a4e}
 .h2frz{margin-left:auto;font-weight:900;font-size:12.5px;color:#3a6df0;background:#e8f0ff;border-radius:20px;padding:3px 10px;white-space:nowrap}
 .h2weak{display:flex;align-items:center;gap:9px;background:#fff0ec;border:1px solid #f6c3b4;border-radius:14px;padding:12px 15px;font-size:13.5px;color:#a83f28;cursor:pointer}
 .h2wtx{flex:1;min-width:0}
@@ -1129,7 +1140,12 @@ const SKEY='medbank_v1';
 const APP_VERSION='2026.08.21s';   // bump this each release
 const LADDER=[1,3,7,7,7,14,14];        // days to next review after each consecutive pass (1→3→7→7→7→14→14…)
 const DEFAULTS={goal:40,newPerDay:20,floor:10,budget:15,courseGoal:30};   // budget = the daily time budget in minutes (the "15-minute session")
-const STREAK_NEW=20, STREAK_REV=0.65;   // to keep the streak: ≥20 new cards (both courses) + ≥65% of due reviews done
+const STREAK_REV=0.65;   // review half of the streak: ≥65% of the day's due reviews
+/* New-card half of the streak is ADAPTIVE, not a hard-coded number. Baseline minimum new cards
+   PER ACTIVE COURSE by how many courses are active (keeps the daily load sane as courses stack):
+   1–2 courses → 10/course · 3–5 → 7/course · 6+ → 5/course. Students may RAISE their per-course
+   minimum in Settings but never lower it below this baseline. dailyNewTarget = activeCourses × min. */
+function minNewPerCourse(n){ return n<=2 ? 10 : (n<=5 ? 7 : 5); }
 
 let DATA = (()=>{
   let d={};
@@ -1214,7 +1230,7 @@ function reviewIntervalText(id){ const s=DATA.cards[id]; if(!s) return ''; retur
 function markActive(){
   const d=dstr();
   if(!DATA.log[d]) DATA.log[d]={cards:0,correct:0};
-  bumpStreak(d);
+  maybeBumpStreak();   // STK-01: the streak advances ONLY when the day's target is met — never on a single card flip
   try{ if(typeof swPing==='function') swPing('studied',{date:d}); }catch(e){}
 }
 function freezeAvail(){ return (DATA.streak.freezes||0)>0; }        // earned freezes in the bank
@@ -1268,11 +1284,69 @@ function logDaily(isNew, subId){ const d=dstr(), L=DATA.log[d]||{cards:0,correct
   DATA.log[d]=L; maybeBumpStreak(); }
 function newDoneToday(){ const nw=todayLog().new||{}; return Object.values(nw).reduce((a,b)=>a+b,0); }
 function reviewTotals(){ const revDone=todayLog().rev||0, revDue=buildQueue().due.length; return {done:revDone, total:revDone+revDue}; }
-function streakMet(){                                   // the day's threshold to keep the streak
-  const rt=reviewTotals(); const revOk = rt.total===0 ? true : (rt.done/rt.total)>=STREAK_REV;
-  return newDoneToday()>=STREAK_NEW && revOk;
-}
+/* ---- adaptive streak policy: daily new learning + review maintenance ---- */
+/* Active course = a course in the student's STUDY PLAN (DATA.plan — the weekly top-5/course that feeds new cards).
+   This is set BEFORE studying, so the day's target can't be shrunk by simply not opening a course today. Deriving it
+   from today's activity would be a loophole (skip a course → smaller denominator → easier streak). Day-one only, when
+   no plan exists yet, we fall back to started courses — a fallback that can only RAISE the count, never dodge it. */
+function activeCourseIds(){
+  const set={}; (DATA.plan||[]).forEach(id=>{ const t=topById(id); if(t&&t.ready){ const sb=subjById(t.subject.id); if(sb&&sb.readyCount>0) set[t.subject.id]=1; } });
+  let ids=Object.keys(set);
+  if(!ids.length) ids=DB.subjects.filter(sb=> sb.readyCount>0 && allTopics.some(t=>t.ready && t.subject.id===sb.id && status(t.id)!=='notstarted')).map(sb=>sb.id);
+  return ids; }
+function activeCourseCount(){ return activeCourseIds().length; }
+/* the student's per-course new-card minimum: their chosen value, floored at the Medbank baseline for their course count */
+function streakPerCourseMin(){ const n=Math.max(1,activeCourseCount()); const base=minNewPerCourse(n);
+  const chosen=(DATA.daily.newPerCourse!=null)?DATA.daily.newPerCourse:base; return Math.max(base, chosen); }
+/* the day's REQUIRED new-card count = active courses × per-course minimum */
+function dailyNewTarget(){ return Math.max(1,activeCourseCount()) * streakPerCourseMin(); }
+/* unseen, unflagged new cards still available from the active plan (top 5 topics/course) — used only to detect an emptied deck */
+function planUnseenCount(){ let n=0;
+  DB.subjects.forEach(sb=>{ let per=0;
+    (DATA.plan||[]).forEach(id=>{ if(per>=5) return; const t=topById(id);
+      if(!t||!t.ready||t.subject.id!==sb.id) return;
+      const unseen=(t.recall||[]).filter(c=>{ const cd=cid(t.id,'recall',c); return !DATA.cards[cd] && !isFlagged(cd); });
+      if(unseen.length){ per++; n+=unseen.length; } }); });
+  return n; }
+/* how many new cards the student could still do today = done so far + what's left in the deck */
+function newCardsAvailableToday(){ return newDoneToday()+planUnseenCount(); }
+/* effective new-card requirement — the full target, unless the deck is genuinely exhausted (never lowered just for heavy reviews) */
+function newTarget(){ return Math.min(dailyNewTarget(), newCardsAvailableToday()); }
+/* SINGLE SOURCE OF TRUTH for the streak — the gate AND every UI read the same object, so no screen can show a
+   target the gate doesn't enforce. `fullTarget` is the committed goal (activeCourses×perCourse); `newTarget` is
+   what's achievable today (lowered only if the deck is genuinely short); `capped` flags that difference. */
+function streakStatus(){
+  const nd=newDoneToday(), nt=newTarget(), full=dailyNewTarget();
+  const rt=reviewTotals(); const revPct = rt.total ? Math.round(rt.done/rt.total*100) : 100;
+  const revOk = rt.total===0 ? true : (rt.done/rt.total)>=STREAK_REV;
+  const newOk = nt<=0 || nd>=nt;
+  return { newDone:nd, newTarget:nt, fullTarget:full, capped:nt<full,
+           courses:Math.max(1,activeCourseCount()), perCourse:streakPerCourseMin(),
+           revDone:rt.done, revTotal:rt.total, revPct, newOk, revOk, safe:newOk&&revOk }; }
+function streakMet(){ return streakStatus().safe; }    // the day's threshold to keep the streak
 function maybeBumpStreak(){ if(streakMet()) bumpStreak(dstr()); }   // bumpStreak is idempotent per day
+/* Today's Commitment card — the ONE renderer for the streak breakdown, used on Home, Today (and mirrored in Settings) */
+function commitmentCard(){
+  const s=streakStatus();
+  const newVal = s.newDone>=s.newTarget ? '✓ '+s.newDone : s.newDone+' / '+s.newTarget;
+  const calc = s.capped ? `${s.newTarget} available — only new cards left in your deck`
+                        : `${s.perCourse} per course × ${s.courses} course${s.courses===1?'':'s'}`;
+  const revVal = s.revTotal ? (s.revDone>=Math.ceil(s.revTotal*STREAK_REV) ? '✓ '+s.revDone : s.revDone+' / '+s.revTotal) : 'none due';
+  const nBar = s.newTarget>0 ? Math.min(100,Math.round(s.newDone/s.newTarget*100)) : 100;
+  const rBar = s.revTotal ? Math.min(100,Math.round(s.revDone/s.revTotal*100)) : 100;
+  const need = s.safe ? '' : (!s.newOk && !s.revOk ? 'new learning &amp; reviews' : (!s.newOk ? 'new learning' : 'reviews'));
+  const foot = s.safe ? `<div class="cmt-safe ok">🔥 Streak protected</div>`
+                      : `<div class="cmt-safe">🔥 Finish your ${need} to protect your streak</div>`;
+  return `<div class="cmt" onclick="go('today')">
+    <div class="cmt-hd">Today's commitment</div>
+    <div class="cmt-row"><span class="cmt-l">🆕 New learning</span><b>${newVal}</b></div>
+    <div class="cmt-sub">${calc}</div>
+    <div class="cmt-bar"><div style="width:${nBar}%;background:var(--recall)"></div></div>
+    <div class="cmt-row" style="margin-top:11px"><span class="cmt-l">🔄 Reviews</span><b>${revVal}</b></div>
+    <div class="cmt-sub">${s.revTotal?'65% of due reviews required':'nothing due today'}</div>
+    <div class="cmt-bar">${s.revTotal?`<i class="cmt-mark"></i>`:''}<div style="width:${rBar}%;background:#e0a53a"></div></div>
+    ${foot}
+  </div>`; }
 
 /* ---- spaced repetition (Recall cards only) ---- */
 function rateSRS(id,ok){
@@ -1674,7 +1748,11 @@ function planNew(){
         out.push({t:q.t,c,id:cid(q.t.id,'recall',c),deck:'recall',isNew:true}); added++; any=true; } }
       if(!any) break; }
   });
-  const remain=Math.max(0, effectiveNewCap()-newDoneToday());   // adaptive daily new-card cap (upper bound), minus what's already done today
+  // Supply must always reach the streak floor (so the daily new-card requirement is never unmeetable when unseen
+  // cards exist); on lighter days the adaptive cap can offer MORE than the floor as a recommendation. PRG-01.
+  const floorRemain=Math.max(0, dailyNewTarget()-newDoneToday());
+  const adaptRemain=Math.max(0, effectiveNewCap()-newDoneToday());
+  const remain=Math.max(floorRemain, adaptRemain);
   return out.slice(0, remain);
 }
 function planCount(){ return (DATA.plan||[]).filter(id=>{const t=topById(id);return t&&t.ready;}).length; }
@@ -1872,7 +1950,7 @@ function starCount(){ return starItems().length; }   // HRD-06: match the resolv
 function starItems(){
   const out=[];
   allTopics.forEach(t=>{ if(!t.ready) return;
-    ['primer','recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{
+    ['recall'].forEach(dk=>(t[dk]||[]).forEach(c=>{   // HRD-10: only recall cards are rateable — a starred primer card was un-ratable dead weight that inflated the summary and could never leave the pool
       const id=cid(t.id,dk,c); if(DATA.starred[id] && !isFlagged(id)) out.push({t,c,id,deck:dk});   // HRD-07: reported-wrong cards leave the Hard pool too
     }));
   });
@@ -2103,10 +2181,7 @@ function pageHome(){
         <b style="color:#3a6df0">${freezeCount()}</b><span class="h2stat-s">auto-saves a day</span>
       </div>
     </div>
-    <div class="h2streak ${met?'ok':''}" onclick="go('today')">
-      <span class="h2fl">🔥</span><span><b>${st}-day streak</b> ${met?'— safe today, nice work.':'— study today to keep it alive!'}</span>
-      ${freezeCount()>0?`<span class="h2frz" title="${freezeCount()} streak freeze${freezeCount()===1?'':'s'} — auto-used if you miss a day">🛡 ${freezeCount()}</span>`:''}
-    </div>
+    ${commitmentCard()}
     ${(ws.weak&&ws.weakN>0)?`<div class="h2weak" onclick="reviewWeak('${lecArg}')">
       <span class="h2tg">🎯</span><span class="h2wtx">Weakest area: <b>${esc(ws.weak)}</b> — ${ws.weakN} card${ws.weakN===1?'':'s'} in relearning</span><span class="h2fix">Fix these →</span>
     </div>`:''}
@@ -2179,10 +2254,10 @@ function pageHomeClassic(){
           const revDone=tl.rev||0, revDue=buildQueue().due.length, revTot=revDone+revDue, rp=revTot?Math.round(revDone/revTot*100):100;
           const ar=`<div class="cbar"><div class="cbtop"><span>🧠 Active recall (reviews)</span><b>${revDone} / ${revTot}</b></div>
               <div class="dbar"><div style="width:${Math.min(100,rp)}%;background:var(--recall)"></div></div></div>`;
-          const nd=newDoneToday(), met=streakMet();
+          const nd=newDoneToday(), nt=newTarget(), met=streakMet();
           const status=met
             ? `<div class="strkstat ok">✅ Day’s target met — streak safe</div>`
-            : `<div class="strkstat">🔥 Keep streak: new ${nd>=STREAK_NEW?'✓':nd+'/'+STREAK_NEW} · reviews ${rp>=65?'✓':rp+'% (need 65%)'}</div>`;
+            : `<div class="strkstat">🔥 Keep streak: new ${nd>=nt?'✓':nd+'/'+nt} · reviews ${rp>=65?'✓':rp+'% (need 65%)'}</div>`;
           return (bars||`<div class="dgrow"><span>Cards today</span><b>${tl.cards} / ${goal}</b></div><div class="dbar"><div style="width:${pct}%"></div></div>`)+ar+status;
         })()}
       </div>
@@ -5034,7 +5109,8 @@ function pageToday(){
 
   /* ---- TODAY ---- */
   const todayPanel = `
-    ${total>0 ? `<div class="arcols">
+    ${commitmentCard()}
+    ${total>0 ? `<div class="arcols" style="margin-top:12px">
       <div class="armix">
         <div class="armix-lab">Today's mix</div>
         <div class="archips">
@@ -5394,6 +5470,7 @@ function rateCard(ok){
   logRate(ok); logDaily(!!it.isNew || (_pt==='new' && it.deck!=='primer'), it.t.subject.id); touchTopic(it.t.id);   // see :4877 — first exposure counts as new whichever pool served it
   S.session.done++; if(ok)S.session.correct++;
   if(!ok && !it.conf){ DATA.starred[it.id]=1; logMiss(it.id); try{ if(typeof swPing==='function') swPing('hardcount',{n:starCount()}); }catch(e){} }  // failed → hard card + mistakes log
+  else if(ok && DATA.missLog && DATA.missLog[it.id]!=null){ delete DATA.missLog[it.id]; }   // MIS-04/SIDE-03: a now-correct card leaves the recent-mistakes pool (was append-only forever)
   if(S.mode==='deck' && !S.clinOnly && !S.weakOnly) DATA.pos['pos:'+S.t.id+S.deck]=Math.min(S.i+1,S.items.length-1);   // saved place belongs to the FULL deck — a filtered pass writes an index into 4 cards, not 60
   persist();
   if(!it.conf) flashReview(it.id, ok);
@@ -5605,6 +5682,9 @@ function searchRun(){
 function setGoal(v){ v=Math.max(5,Math.min(300,parseInt(v)||40)); DATA.daily.goal=v; if(DATA.daily.floor>v)DATA.daily.floor=v; persist(); render(); }
 function setFloor(v){ v=Math.max(1,Math.min(DATA.daily.goal,parseInt(v)||10)); DATA.daily.floor=v; persist(); render(); }
 function setBudget(v){ v=Math.max(0,Math.min(120,parseInt(v)||0)); DATA.daily.budget=v; persist(); render(); }
+/* per-course new-card minimum for the streak — students may RAISE it, never lower below the Medbank baseline */
+function setNewPerCourse(v){ const base=minNewPerCourse(Math.max(1,activeCourseCount()));
+  v=parseInt(v); if(isNaN(v)) v=base; v=Math.max(base,Math.min(40,v)); DATA.daily.newPerCourse=v; persist(); render(); }
 function setInterleave(on){ DATA.settings.interleave=!!on; persist(); render(); }
 function setExam(subId,val){ if(val) DATA.exams[subId]=val; else delete DATA.exams[subId]; persist(); render(); }
 function setRemindAt(v){ DATA.settings.remindAt=v; persist(); }
@@ -5800,8 +5880,11 @@ function pageSettings(){
     <h2>Daily targets</h2>
     <div class="setrow"><div><b>Daily goal</b><span>Cards you aim to review each day.</span></div>
       <input class="numin" type="number" min="5" max="300" value="${d.goal}" onchange="setGoal(this.value)"></div>
-    <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — hitting it keeps your streak.</span></div>
+    <div class="setrow"><div><b>Minimum day (floor)</b><span>A tiny target for busy days — a gentle nudge, separate from the streak below.</span></div>
       <input class="numin" type="number" min="1" max="${d.goal}" value="${d.floor}" onchange="setFloor(this.value)"></div>
+    ${(()=>{ const st=streakStatus(); const ac=st.courses, base=minNewPerCourse(ac), per=st.perCourse;
+      return `<div class="setrow"><div><b>Daily new learning goal</b><span>Minimum new cards <b>per course</b>. This is your daily new-learning commitment — meeting it (plus ≥65% of due reviews) is what protects your streak. Medbank minimum <b>${base}/course</b> for your ${ac} active course${ac===1?'':'s'} → <b>${ac*per} new cards/day</b>. You can raise it, not lower it below the minimum.</span></div>
+      <input class="numin" type="number" min="${base}" max="40" value="${per}" onchange="setNewPerCourse(this.value)"></div>`; })()}
     <div class="setrow"><div><b>Daily session length</b><span>Your session fills to this time budget and stops — card count follows your real pace (0 = no limit). Extra due cards roll to tomorrow.</span>
       <div style="display:flex;gap:6px;margin-top:8px">${[5,15,30,45].map(m=>`<button class="btn tiny${(d.budget||15)===m?' primary':''}" onclick="setBudget(${m})">${m} min</button>`).join('')}</div></div>
       <input class="numin" type="number" min="0" max="120" value="${d.budget||15}" onchange="setBudget(this.value)"></div>
@@ -5942,7 +6025,8 @@ function pageLeeches(){
   const rows=items.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount">${it.lapses}×</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('');
+      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('')
+      + (items.length>60?`<div class="leechrow" style="justify-content:center;color:var(--dim)">…and ${items.length-60} more — use “Drill all” above</div>`:'');   // LCH-06
   return head+`<div class="btnrow" style="margin:4px 0 16px"><button class="btn primary" onclick="startLeeches();go('review')">▶ Drill all ${items.length} leech${items.length===1?'':'es'}</button></div>${rows}`;
 }
 /* ---------- Recent mistakes ---------- */
@@ -5955,7 +6039,8 @@ function pageMistakes(){
   const rows=week.slice(0,60).map(it=>`<div class="leechrow">
       <span class="lcount miss">${dayLabel(it.missOn)}</span>
       <div class="lmid"><b>${esc(it.c.q)}</b><span>${esc(it.t.name)} · ${esc(it.t.subject.short)}</span></div>
-      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('');
+      <button class="btn" onclick="openCardAt('${it.t.id}','${it.deck||'recall'}','${it.id}')">Open</button></div>`).join('')
+      + (week.length>60?`<div class="leechrow" style="justify-content:center;color:var(--dim)">…and ${week.length-60} more — drill “This week” above</div>`:'');   // MIS-07
   return head+`<div class="modes" style="grid-template-columns:1fr 1fr">
       <button class="modebtn${today.length?'':' dis'}" ${today.length?'':'disabled'} onclick="runMistakes(1)"><span class="mic">📅</span><b>Today's misses</b><span class="msub">${today.length} card${today.length===1?'':'s'}</span></button>
       <button class="modebtn${week.length?'':' dis'}" ${week.length?'':'disabled'} onclick="runMistakes(7)"><span class="mic">🗓️</span><b>This week</b><span class="msub">${week.length} card${week.length===1?'':'s'}</span></button>
@@ -6261,15 +6346,22 @@ function aiMicOnce(topicId){                        // push-to-talk outside the 
   VOICE.topic=topicId; aiListen(topicId);
 }
 function aiSendFromInput(topicId){ warmTTS(); const el=document.getElementById('aiin'); if(!el)return;
-  const v=el.value.trim(); if(!v)return; el.value=''; aiSend(topicId, v); }
-function clearAI(topicId){ AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
+  const v=el.value.trim(); if(!v)return;
+  if(typeof AIBUSY!=='undefined' && AIBUSY) return;   // SCA-04: tutor still replying — leave the message in the box instead of clearing + dropping it
+  el.value=''; aiSend(topicId, v); }
+function clearAI(topicId){ if((AICHAT[topicId]||[]).length && !confirm('Clear this tutor chat?')) return;   // SCA-08: confirm the one-tap wipe (it sits right next to "Start voice quiz")
+  AICHAT[topicId]=[]; if(VOICE.on) stopVoice(); else render(); }
 function aiAudioOn(){ return DATA.settings.aiVoice!==false; }
 function toggleAiVoice(){ DATA.settings.aiVoice=!aiAudioOn(); persist();
   if(DATA.settings.aiVoice) warmTTS(); else { try{speechSynthesis.cancel();}catch(e){} stopCloud(); } render(); }
 function aiRedo(topicId){ const a=AICHAT[topicId]||[];
   if(a.length && a[a.length-1].role==='model') a.pop();
-  if(a.length && a[a.length-1].role==='user') a.pop();
-  render(); if(VOICE.on && sttSupported()) aiListen(topicId); }
+  let lastUser=null;
+  if(a.length && a[a.length-1].role==='user'){ lastUser=a[a.length-1]; a.pop(); }
+  render();
+  if(VOICE.on && sttSupported()) aiListen(topicId);
+  else if(lastUser) aiSend(topicId, lastUser.text, lastUser.alts);   // SCA-07: text path — RETRY the question instead of silently deleting it
+}
 function aiStatus(){
   if(AIBUSY) return {k:'think', big:'💭 Thinking…', chip:'thinking', icon:'💭'};
   if(VOICE.on && VOICE.phase==='think') return {k:'think', big:'✍️ Writing down your answer…', chip:'transcribing', icon:'✍️'};
