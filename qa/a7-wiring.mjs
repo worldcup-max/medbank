@@ -25,10 +25,11 @@ function admApi(path, opts){ apiCalls.push({path, body:opts&&opts.body});
 
 const names=['qbItemFromMeta','qbQuestionsForTarget','a7On','a7Api','a7TriggerReplenish','a7TakeCachedCandidate','qbServeForRecord'];
 let src='var _a7Pool={}, _a7Inflight={};\n'+names.map(grab).join('\n');
-const factory=new Function('DATA','qbStore','qbHash','qbCogOf','dayNum','allTopics','admApi',
+const factory=new Function('DATA','qbStore','qbHash','qbCogOf','dayNum','allTopics','admApi','window',
   src+'\n return { qbServeForRecord, a7TriggerReplenish, a7TakeCachedCandidate, a7On, _get:()=>({_a7Pool,_a7Inflight}) };');
 let API;
-function build(){ API=factory(DATA,qbStore,qbHash,qbCogOf,dayNum,allTopics,admApi); }
+let _win={};
+function build(){ API=factory(DATA,qbStore,qbHash,qbCogOf,dayNum,allTopics,admApi,_win); }
 
 function setCorpus(targetId, n){ allTopics=[{ id:'t1', ready:true, extras:{ qbank: Array.from({length:n},(_,i)=>({ stem:'Q'+i+' '+targetId, options:['a','b','c','d'], answer:0, target_id:targetId })) } }]; }
 function rec(targetId, served){ return { key:'t:'+targetId, servedQhs:served||[] }; }

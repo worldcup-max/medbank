@@ -79,3 +79,28 @@ when a target is due:
 **A6 exit criterion:** Target-ID scheduling behaves correctly with the existing Q-bank (right question served for the due target, previously-served excluded, no AMBIGUOUS leakage), across repeated runs.
 
 **✅ A6 EXIT MET — 2026-08-25.** Deployed (commit pushed by Frank; Render + medbank.com.ng live). Stamp run once: 53 stamped, 12 AMBIGUOUS skipped, 2 ai-NEW skipped, 0 stale, `invariantOk:true`. Live scheduler on frankthejay@gmail.com: 14/14 (schedules under Target, serves fresh sibling, never re-serves the seen question, exhausted→no_fresh_assessment with no substitution, migration idempotent). **A6 FROZEN.** Next: A7 — AI parallel-retest generator for the no_fresh_assessment gap.
+
+---
+
+## ✅ A7 — AI Parallel-Retest Generator — VALIDATED / FROZEN (2026-08-25, live shadow test)
+
+Live shadow test on frankthejay@gmail.com, Target **BRONCH-NEXT-002**, deployed build. State snapshotted + fully restored (retest_pool emptied, _sched restored, flag off). Evidence:
+
+| Step | Result |
+|------|--------|
+| Serve last canonical | served the actual last canonical, **unchanged**, returned in **1 ms** (non-blocking) |
+| Exhaustion trigger | fire-and-forget `/retest/replenish` fired; canonical serve never waited |
+| Background generation | **3 candidates**, all `passed / reconciled_to=BRONCH-NEXT-002 / confidence 0.95 / matched_via T1`; **1 anti-dup reject** (valid reason); pool reached **CAP=3** |
+| Disposability | candidates in `retest_pool` only; canonical corpus **16 → 16** unchanged |
+| No target minting | knowledge_targets **76 → 76** unchanged |
+| Due-again serve | pre-validated candidate served (`a7:true`), **no inline generation** |
+| Anti-repeat | served qh entered `servedQhs`; a second serve returned a **different** candidate |
+| Retention parity | after the answer-flow `_qmeta` snapshot, `qbRetentionKey → t:BRONCH-NEXT-002`; Target record advanced; **no orphan `q:` record** |
+| Emergency path | lazy `want=1` correctly **gated by backoff** (prior same-day anti-dup failure) → `no_fresh_assessment`, **no substitution** (live failure-safety confirmation) |
+| Final invariants | knowledge_targets 76, canonical corpus 16 — unchanged before/after |
+
+Deterministic backing: `qa/a7-retestpool.mjs` 39/39, `qa/a7-wiring.mjs` 14/14.
+
+**Subtle dependency (verified, not a defect):** retention parity relies on `qbRecord` snapshotting the served A7 item's `target_id` into `_qmeta` before `qbSchedApply` runs. The answer-flow ordering guarantees this; confirmed live. Optional future hardening: let `qbRetentionKey` also read the live item's `target_id`.
+
+**A7 FROZEN.** Rollout is a separate decision: `DATA.flags.a7` is OFF in production (enabled only for the test session, now reverted). Deferred: canonical-served stems in the anti-dup prior set (currently pool stems only); in-memory budget resets on server restart (v1).
