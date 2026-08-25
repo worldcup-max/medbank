@@ -75,12 +75,38 @@ for (const f of files) {
   });
 }
 
+/* ---------------------------------------------------------------- the wanted list
+   The corpus is a cache, and a cache needs to know what it is missing. Every curriculum structure that has
+   no ready scene goes into `wanted`, so the app can notice when a student reads about something we cannot
+   yet show and say so — turning 207 structures in curriculum order into a queue in DEMAND order. */
+const covered = new Set();
+for (const s of scenes) if (s.status === 'ready') covered.add(norm(s.structure));
+
+const wanted = [];
+try {
+  const cur = JSON.parse(readFileSync(join(ROOT, 'CURRICULUM.json'), 'utf8'));
+  for (const [key, course] of Object.entries(cur.courses || {})) {
+    for (const t of course.topics || []) {
+      for (const st of t.structures || []) {
+        const n = norm(st.name);
+        if (!n || covered.has(n)) continue;
+        wanted.push({
+          name: st.name, course: key, topic: t.topic,
+          modes: st.preferred_modes || course.defaultModes || [],
+          term: n
+        });
+      }
+    }
+  }
+} catch (e) { console.error('no CURRICULUM.json — index built without a wanted list'); }
+
 const index = {
   generated_by: 'viz-training/tools/build-scene-index.mjs',
   schema: 2,
   count: scenes.length,
   ready: scenes.filter(s => s.status === 'ready').length,
-  scenes
+  scenes,
+  wanted
 };
 
 writeFileSync(join(SCENES, 'index.json'), JSON.stringify(index, null, 2) + '\n');

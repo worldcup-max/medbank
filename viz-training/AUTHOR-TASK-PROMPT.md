@@ -1,6 +1,7 @@
 # The authoring prompt the live task carries
 
-**Nothing to paste.** This file is a record, not a to-do. The instructions below are already inside the
+**One change needs pasting — see the DEMAND step below (added 2026-08-24).** Otherwise this file is a
+record, not a to-do. The instructions below are already inside the
 scheduled task “MedBank 3D scene author (v2)” (`trig_01QTUT9eFVLxLG9KhHqQhUkm`), created 2026-08-23.
 It is here so the prompt is reviewable in the repo and diffable when it changes.
 
@@ -24,7 +25,14 @@ READ FIRST, every run:
   viz-training/STATE.json                 ← the cursor
   viz-training/available-meshes.json      ← the ONLY source of valid model ids (934 of them)
 
-ONE RUN = the next 2 structures at the cursor.
+PRIORITY — demand beats the alphabet.
+If viz-training/DEMAND.json exists and its `wanted` list is non-empty, take the next 2 structures from the
+TOP of that list instead of from the cursor, skipping any already in coveredStructures. Say in RUNLOG that
+the run was demand-driven and name the structures. DEMAND.json is built from what students actually read
+about while the corpus had nothing to show (tools/build-demand.mjs) — it is evidence, and evidence outranks
+curriculum order. When DEMAND is empty or exhausted, fall back to the cursor as below.
+
+ONE RUN = the next 2 structures (from DEMAND if it has any, otherwise at the cursor).
 
 For each structure:
 

@@ -23,6 +23,12 @@ window.MEDBANK_CONFIG = {
   // Leave "" to show a styled "coming soon" placeholder.
   VIDEO_URL: "",
 
+  // Where the 3D player fetches anatomy meshes. Empty = the public BodyParts3D CDN (free, no chambers).
+  // After running viz-training/tools/ingest-full-archive.mjs --upload, point this at our own store:
+  //   MESH_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/"
+  // No scene file changes — only the adapter reads this.
+  MESH_BASE: "",
+
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
   IMPORT_API: "https://medbank-import.onrender.com",
   // Your website URL — paywall nudges link here for subscribing.

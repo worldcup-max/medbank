@@ -110,7 +110,12 @@
     },
     resolve: function (s) {
       var id = s && s.refs && s.refs.bodyparts3d;
-      return id ? this.stlBase + id + '.stl' : null;
+      if (!id) return null;
+      /* Self-hosting is a config line, not a code change: set MESH_BASE in config.js once the ingest has
+         put meshes in our own store, and every scene follows without being touched. */
+      var base = '';
+      try { base = (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_BASE) || ''; } catch (e) {}
+      return (base || this.stlBase) + id + '.stl';
     },
     load: function (T, s) {
       var url = this.resolve(s);
@@ -329,6 +334,29 @@
     Object.keys(best).forEach(function (k) { hits.push(best[k]); });
     hits.sort(function (a, b) { return b.score - a.score || a.index - b.index; });
     return hits;
+  }
+
+  /* ======================= what the corpus could not show =======================
+     A miss is worth more than a hit for deciding what to author next. When a student reads a sentence that
+     deserved a picture about a structure the curriculum names but no scene covers yet, that is demand —
+     and demand should set the authoring order, not the alphabet. Only relational sentences count: a passing
+     mention of the femur is not a request for a femur scene. */
+  function missesIn(text) {
+    if (!_indexData || !text) return [];
+    var wanted = _indexData.wanted || [];
+    if (!wanted.length) return [];
+    var out = [], seen = {};
+    sentencesOf(text).forEach(function (sen) {
+      if (!RELATIONAL.test(sen.text)) return;                 // demand means "this needed a picture"
+      wanted.forEach(function (w) {
+        if (seen[w.term] || w.term.length < 5) return;
+        var re = termRe(w.term); if (!re) return;
+        var m = re.exec(sen.text); if (!m) return;
+        seen[w.term] = 1;
+        out.push({ name: w.name, course: w.course, topic: w.topic, modes: w.modes, match: m[0] });
+      });
+    });
+    return out;
   }
 
   /* ======================= how many opportunities a note can carry =======================
@@ -1154,6 +1182,7 @@
     partForTermSync: partForTermSync,
     terms: terms,
     rankMentions: rankMentions,
+    missesIn: missesIn,
     planNote: planNote,
     policy: setPolicy,                 // MB3D.policy({ceiling:null, wordsPerChip:250}) — tune without code changes
     getPolicy: function () { return POLICY; },

@@ -1,7 +1,30 @@
-*.bak
-*.src.md
-*.tmp
-*.png#
-*.emf
-_old_sadoh_DELETE/
-.fuse_hidden*
+
+
+# 3D anatomy: the downloaded BodyParts3D archive and the meshes we derive from it.
+# Both are large and reproducible — the ingest script rebuilds them, Supabase Storage serves them.
+viz-training/.archive/
+viz-training/meshes/
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/note.md
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/note.pdf
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/septum-primum-secundum.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/primer.json
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/foramen-ovale.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/heart-tube-labeled.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/cardinal-veins.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/cardiac-defects-table-1.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/ventricular-conotruncal-septation.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/cardiac-defects-table-2.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/heart-tube-looping.jpg
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/simplified.md
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/heart-anatomy.jpg
+content/Pediatrics/Chidomere/Introduction to Neurology_Investigations of the Central Nervous System/img/lu423xbfc.tmp
+content/Pediatrics/Chidomere/Introduction to Neurology_Investigations of the Central Nervous System/img/s39-1.emf
+content/Pediatrics/Ewurum/Pneumonia/img/_small41.bak
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/recall.json
+content/Pediatrics/Ewurum/Pneumonia/img/_small42.bak
+content/Pediatrics/Ewurum/Pneumonia/img/_small43.bak
+content/Pediatrics/_old_sadoh_DELETE/Embryology of the Cardiovascular System/img/atrial-septation-stages.jpg
+content/Pediatrics/Ewurum/Pneumonia/note.pdf.src.md
+.fuse_hidden0000001600000001
+.fuse_hidden0000001600000002
+.fuse_hidden0000001700000002

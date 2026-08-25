@@ -1820,6 +1820,35 @@ app.post("/admin/targets/resolve", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* ---- Admin: NEW_WITH_CANDIDATE near-miss diagnostic (OBSERVABILITY ONLY — no decision change) ----
+ * A question assigned NEW that nonetheless had ≥1 pre-filter candidate. This is the bucket we can't otherwise
+ * see: did the target legitimately fork (correct NEW) or did the model under-score a true match (false NEW)? */
+app.get("/admin/targets/near-miss", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const limit=Math.min(200, Number(req.query.limit)||60);
+    const r=await admin.from("question_targets").select("qh,proposed,candidates,map_confidence,topic_id,target_id").eq("map_state","NEW").limit(500);
+    let rows=(r.data||[]).filter(x=>Array.isArray(x.candidates) && x.candidates.length>0);
+    const top=x=>Math.max.apply(null, x.candidates.map(c=>c.score==null?-1:c.score));
+    rows.sort((a,b)=>top(b)-top(a));                     // strongest near-misses first (most likely false-NEW)
+    rows=rows.slice(0, limit);
+    const ids=[...new Set(rows.flatMap(x=>x.candidates.map(c=>c.target_id)).filter(Boolean))];
+    const tr= ids.length ? await admin.from("knowledge_targets").select("target_id,canonical_statement,topic,skill").in("target_id",ids) : { data:[] };
+    const tmap={}; (tr.data||[]).forEach(t=>{ tmap[t.target_id]=t; });
+    // attach the question stem by matching qh inside each source topic's extras.qbank
+    const topicIds=[...new Set(rows.map(x=>x.topic_id).filter(Boolean))];
+    const stemByQh={};
+    if(topicIds.length){ const tp=await admin.from("topics").select("id,extras").in("id",topicIds);
+      (tp.data||[]).forEach(t=>{ const qs=(t.extras&&t.extras.qbank)||[]; qs.forEach(q=>{ stemByQh[qhOf(q)]=q.stem; }); }); }
+    res.json({ ok:true, count:rows.length, items: rows.map(x=>({
+      qh:x.qh, stem: stemByQh[x.qh]||null, decision:"NEW", confidence:x.map_confidence,
+      proposed_statement: (x.proposed||{}).knowledge_statement||null,
+      proposed: x.proposed,
+      candidates: (x.candidates||[]).map(c=>({ target_id:c.target_id, score:c.score,
+        statement:(tmap[c.target_id]||{}).canonical_statement||null })).sort((a,b)=>(b.score==null?-1:b.score)-(a.score==null?-1:a.score)) })) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Paystack webhook: confirm a payment server-side and activate the sub ---- */
 app.post("/paystack/webhook", async (req,res)=>{
   try{

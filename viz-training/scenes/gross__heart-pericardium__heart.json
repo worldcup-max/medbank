@@ -8,9 +8,9 @@
   "learning_goal": "Know the heart's valves, its own blood supply, and the great vessels entering and leaving it.",
   "status": "ready",
   "gaps": [
-    "The four chambers have no separate models in this source set - the chambers are taught here through their valves and papillary muscles. Resolve true chamber models from the fuller upstream archive when the self-host ingest runs.",
-    "No aortic valve model exists in this source set (mitral, tricuspid and pulmonary do).",
-    "No pericardium model exists in this source set - the pericardium half of this topic is narration-only until then."
+    "The four chambers, the aortic valve and the interventricular septum are NOT in the free source set, but they ARE in the full BodyParts3D archive: right atrium FMA7096, left atrium FMA7097, right ventricle FMA7098, left ventricle FMA7101, aortic valve FMA7236. Run tools/ingest-full-archive.mjs --fetch on those ids to close this gap; no scene rewrite is needed beyond adding the parts.",
+    "The pericardium is absent from BOTH source sets - it appears in neither the part-of nor the is-a parts list, so this gap cannot be closed from BodyParts3D at all. The pericardium half of this topic stays narration-only until another provider supplies it.",
+    "Until the ingest runs, the chambers are taught through their valves and papillary muscles, which is honest but second-best."
   ],
   "provider": {
     "primary": "bodyparts3d",

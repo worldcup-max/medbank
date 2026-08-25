@@ -118,6 +118,63 @@ the exact `uvw`. Either way, an anchor stays `status:"needs-review"` until a hum
 all four controls sit on one row, and the "See it in 3D" overlay goes full-bleed with the match note hidden.
 The status pill fades after 4.5s so it stops covering a small stage. No horizontal scroll.
 
+## The meshes the free set doesn't have
+The public subset has 934 meshes and **no cardiac chambers**. The full BodyParts3D archive has them — it is
+just shaped differently, and that shape is the whole problem:
+
+```
+partof_element_parts.txt     FMA7096  right atrium  →  FJ2421, FJ2424, FJ2433 …   (5 element files)
+partof_BP3D_4.0_obj_99.zip   partof_BP3D_4.0_obj_99/FJ2421.obj …                  (65 MB, FJ ids)
+```
+
+One concept is the **union** of several element meshes, named by a third id scheme (FJ) that appears in
+neither parts list. `tools/ingest-full-archive.mjs` resolves FMA → FJ set, pulls those entries out of the
+zip, merges them and writes one binary `FMA7096.stl` — **the filename the adapter already asks for**, so no
+scene and no player code changes. Run it on a machine with internet (not the workspace, not the container):
+
+```
+node viz-training/tools/ingest-full-archive.mjs --list
+node viz-training/tools/ingest-full-archive.mjs --fetch FMA7096 FMA7097 FMA7098 FMA7101 FMA7236
+node viz-training/tools/ingest-full-archive.mjs --upload     # SUPABASE_URL + SUPABASE_SERVICE_KEY in env
+```
+
+Then one line in `config.js` — `MESH_BASE: "…/storage/v1/object/public/viz-meshes/"` — and every scene
+follows. Verified end to end on a synthetic archive: zip reading, quad triangulation, element merging,
+binary STL output, catalog update, and the resulting file rendering in the player through `MESH_BASE`.
+
+**Confirmed available:** right atrium `FMA7096`, left atrium `FMA7097`, right ventricle `FMA7098`, left
+ventricle `FMA7101`, aortic valve `FMA7236` — plus ~430 other concepts we don't currently have.
+**Confirmed impossible:** the **pericardium** is in neither the part-of nor the is-a list. That gap cannot
+be closed from BodyParts3D by any means, and the heart scene now says so instead of implying it is pending.
+
+## Corpus as cache — and how the cache learns
+`index.json` carries a **wanted** list: every curriculum structure with no ready scene. When a note
+describes one of those spatially, the app logs `mb3d_miss` — a student read a sentence that deserved a
+picture and got nothing. That is demand, and demand should set the authoring order:
+
+```
+student reads a spatial sentence
+        ↓
+scene index lookup ── hit ──→ 👁 3D chip
+        ↓ miss
+mb3d_miss logged (structure, course, topic)
+        ↓
+#/intel shows "most-wanted scenes"
+        ↓
+tools/build-demand.mjs <pilot-export.json …>  →  DEMAND.json
+        ↓
+the authoring task builds those FIRST
+```
+
+Ranked by **students, then reads** — four different people asking beats one person asking four times — and
+anything already covered is dropped. Only relational sentences count: "The nephron is a functional unit"
+produces no demand; "the brachial plexus is formed by roots that unite behind the clavicle" produces two.
+
+**The AI-drafting half is specified but not built.** A miss currently becomes a queue entry for the
+authoring task, not an on-the-fly AI scene, because runtime drafting needs a server endpoint that does not
+exist yet. The lifecycle already refuses to promote an AI-authored scene without `provenance.approved_by`,
+so that half can be added without revisiting the contract.
+
 ## Scene lifecycle
 `ready | candidate | planned | blocked`. **Only `ready` reaches a student** — `scenesForTopic()` filters on
 it. An AI-drafted scene is refused `ready` without `provenance.approved_by`, so the corpus grows as a

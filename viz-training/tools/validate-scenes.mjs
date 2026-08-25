@@ -152,12 +152,24 @@ function validate(scene) {
     }
   }
 
-  /* ---- 7 purity ---- */
-  const notes = JSON.stringify({ gaps: scene.gaps || [], blocked_reason: scene.blocked_reason || [] });
-  const whole = JSON.stringify(scene);
-  const body = whole.split(notes).join('');            // human notes are exempt; the machine-read scene is not
+  /* ---- 7 purity ----
+     gaps[] and blocked_reason[] are prose written for a human reader — a gap that says "the chambers are in
+     the full BodyParts3D archive, fetch FMA7096" is exactly the note a maintainer needs. Strip those two
+     arrays before scanning, so the rule polices the machine-read scene without gagging the notes.
+     (The earlier version stripped a synthesised {gaps,blocked_reason} object that never appears verbatim in
+     the scene, so the exemption silently did nothing.) */
+  const strip = (text) => {
+    for (const arr of [scene.gaps, scene.blocked_reason]) {
+      if (!Array.isArray(arr) || !arr.length) continue;
+      const json = JSON.stringify(arr);
+      text = text.split(json).join('');                                  // as it appears in the whole scene
+      for (const item of arr) text = text.split(JSON.stringify(item)).join('');   // and item by item
+    }
+    return text;
+  };
+  const body = strip(JSON.stringify(scene));
   for (const [re, what] of FORBIDDEN) if (re.test(body)) E('purity', `the scene contains ${what} — delivery belongs to the adapter, not the scene`);
-  const outsideRefs = JSON.stringify({ ...scene, provider: null, structures: (scene.structures || []).map(s => ({ ...s, refs: null })) }).split(notes).join('');
+  const outsideRefs = strip(JSON.stringify({ ...scene, provider: null, structures: (scene.structures || []).map(s => ({ ...s, refs: null })) }));
   for (const re of PROVIDER_NAMES) if (re.test(outsideRefs)) E('purity', `the scene names a provider outside provider{} and refs{} — a scene should not know who renders it`);
 
   /* ---- 8 lifecycle ---- */
