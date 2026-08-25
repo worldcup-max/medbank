@@ -23,6 +23,8 @@ Evidence says the answer is currently **yes**: 0 observed false merges across th
 | V1 adjudicator prompt | passes labeled A/B/C gates: **A 5/5 MATCH · B 0 false merges · C 0 forced-MATCH** | frozen — production |
 | `excludes` / false-merge protection | 0 false merges on adversarial over-broad targets | frozen |
 | Near-miss safety net (`null`+strong candidate → AMBIGUOUS) | prevents silent forks; uncertain never auto-MATCH | frozen (don't tune 0.30 yet) |
+| **A6 Target-ID scheduling** (retention keyed by `target_id`, per-Target anti-repeat, `no_fresh_assessment`, idempotent migration) | **live-verified 2026-08-25**: stamp 53 authoritative / 12 AMBIGUOUS skipped / **invariant `ambiguousReceivedId=0`**; in-app scheduler 14/14 on real data (fresh-sibling served, Q1 never re-served, no cross-Target substitution, migration idempotent); 23/23 pure matrix + 13/13 stamp unit | **frozen** |
+| A6 stamping = propagate-only (MATCH ai + human resolutions; ai-NEW & AMBIGUOUS excluded) | never mints/infers a mapping; self-correcting (strips stale ids) | frozen |
 | Sticky human resolutions (`mapping_source=human`, reprocess skips resolved) | 7/7 preserved across re-runs incl. #0 | production rule |
 | T3 token-overlap retrieval | located every excluded target at 0.6–0.95 | validated v1 (embeddings = future scale path, not now) |
 
@@ -75,3 +77,5 @@ when a target is due:
 **Explicitly NOT in A6:** atomicity splitting, new taxonomy, Intervention Engine, **AI retest generation**, Retest Pool, scheduler redesign. Those are A7+. A7 is specifically: "what happens when a Target has no unused existing question?" → that is where the AI parallel-retest generator belongs.
 
 **A6 exit criterion:** Target-ID scheduling behaves correctly with the existing Q-bank (right question served for the due target, previously-served excluded, no AMBIGUOUS leakage), across repeated runs.
+
+**✅ A6 EXIT MET — 2026-08-25.** Deployed (commit pushed by Frank; Render + medbank.com.ng live). Stamp run once: 53 stamped, 12 AMBIGUOUS skipped, 2 ai-NEW skipped, 0 stale, `invariantOk:true`. Live scheduler on frankthejay@gmail.com: 14/14 (schedules under Target, serves fresh sibling, never re-serves the seen question, exhausted→no_fresh_assessment with no substitution, migration idempotent). **A6 FROZEN.** Next: A7 — AI parallel-retest generator for the no_fresh_assessment gap.
