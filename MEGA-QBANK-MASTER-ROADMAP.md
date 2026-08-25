@@ -47,10 +47,10 @@ MEGA QBANK
 │
 ├── V1.6 — INTERVENTION ENGINE  🟢 NEXT MAJOR (re-baselined on A6+A7; identity = target_id)
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
-│   ├── Phase 1 instrumentation (durable intervention_events, both diagnosis levels, stable A/B bucket) ✅ built · 8/8 tests · pending deploy+migration+flag
-│   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; identity=target_id; gap_practice masked from frozen engine) ✅ built · 15/15 · GAP_LOOP=OFF (dormant for pilot) · pilot-gated
-│   ├── Phase 3 Fragile (light: confirm→reinforce→optional practice→A6) 📝 CONTRACT written · not built · pilot-gated
-│   ├── Phase 4 Misconception challenge ⬜ (pilot-gated, hardest)
+│   ├── Phase 1 instrumentation ✅ LIVE + collecting · pilot-sim: diagnosis 81/98/83/98% acc, misconception→gap 0.7%, strong predictiveness, A/B detectable (PILOT-EVIDENCE.md)
+│   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; gap_practice masked) ✅ built · 15/15 · GAP_LOOP=ON (activated; live A/B)
+│   ├── Phase 3 Fragile (light reinforce; post-session; A6 owns retest; masked) ✅ built · 9/9 · FRAGILE=ON (activated; live A/B)
+│   ├── Phase 4 Misconception (contrast the wrong rule; soft wording; at-miss+queue) 📝 CONTRACT written · not built · hardest gate
 │   └── boundary: V1.6 selects intervention · A6 schedules retest · A7 supplies fresh · V1.6 never generates
 │
 ├── MASTER THIS QUESTION (reasoning tutor, runs ACROSS)  🟡 taxonomy protected
@@ -103,10 +103,10 @@ Per-box record templates:
 
 ## CURRENT POSITION & IMMEDIATE PATH
 
-Foundation 🔒 → A6 🔒 → A7 🔒 (frozen) → A8 ⏸ (deferred, no evidence yet) → **V1.6 Phase 1 🟢 PILOT / DATA COLLECTION (current checkpoint)** · Phase 2 ✅ built/OFF · Phase 3 📝 contract · Phase 4 ⬜ → V1.7 → V1.8+.
+Foundation 🔒 → A6 🔒 → A7 🔒 → A8 ⏸ → **V1.6: Phase 1 🟢 live-collecting · Phase 2 ✅ ON · Phase 3 ✅ ON · Phase 4 📝 contract** → V1.7 → V1.8+. (Frank activated Phase 2/3 on the diagnosis-validation evidence; live A/B runs, cut if it doesn't beat generic.)
 
 Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.8 in parallel.
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
 
-_Last ticked: 2026-08-25 — CURRENT CHECKPOINT: V1.6 Phase 1 PILOT / data collection (telemetry live-verified). Found GAP_LOOP+POST_SESSION_FIX_QUEUE were shipped TRUE → set both FALSE so Phase 2 is truly dormant during the pilot (needs deploy). gap_practice masking RESOLVED (kept out of frozen _attempts, logged separately). Phase 3 (Fragile) contract written — not built. A7 frozen. Do NOT activate any V1.6 intervention until the pilot A/B earns it._
+_Last ticked: 2026-08-25 — Frank ACTIVATED Phase 2 (gap) + Phase 3 (fragile) on the pilot-sim diagnosis evidence (81/98/83/98% acc, misconception→gap 0.7%, strong predictiveness). Phase 3 built as a light reinforce variant (9/9). Longitudinal fail-checker: 60 students × 45 days, 0 crashes, 0 schedule pathologies. Phase 4 (misconception) contract written. Live A/B now runs for gap+fragile — cut any intervention that doesn't beat generic. Efficacy still only provable by real users; sim proved engine intelligence + robustness._
