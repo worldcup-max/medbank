@@ -125,6 +125,40 @@ function bbox(verts, live) {
   return { lo, hi };
 }
 
+/* ------------------------------------------------------- stray fragments
+   Source meshes carry junk. FMA7333 (right lung, upper lobe) is 30,398 triangles in three pieces: the
+   lobe, and two 2-triangle specks a tenth of a millimetre across sitting 34 mm away — scanner noise that
+   was never anatomy. Decimation deletes them, correctly. But a naive deviation measurement then samples
+   those specks' own vertices, finds the nearest surviving surface 34 mm away, and reports 34 mm of
+   "surface movement" on a lobe whose mean movement is 0.024 mm.
+
+   That number is not wrong, it is misattributed, and misattribution is worse than noise: it refused a
+   good mesh and the obvious workaround — raising the ceiling past 34 mm — would have disabled the gate
+   for every real defect too. So specks are identified, excluded from the gate, and REPORTED. A component
+   only counts as a speck if it is a rounding error next to the model; anything bigger that gets dropped
+   is real damage and still fails. */
+function components(verts, tris) {
+  const nv = verts.length / 3;
+  const parent = new Int32Array(nv);
+  for (let i = 0; i < nv; i++) parent[i] = i;
+  const find = a => { while (parent[a] !== a) { parent[a] = parent[parent[a]]; a = parent[a]; } return a; };
+  const union = (a, b) => { a = find(a); b = find(b); if (a !== b) parent[b] = a; };
+  const nt = tris.length / 3;
+  for (let t = 0; t < nt; t++) { union(tris[t * 3], tris[t * 3 + 1]); union(tris[t * 3 + 1], tris[t * 3 + 2]); }
+  const box = new Map(), count = new Map();
+  for (let t = 0; t < nt; t++) {
+    const r = find(tris[t * 3]);
+    count.set(r, (count.get(r) || 0) + 1);
+    let e = box.get(r);
+    if (!e) { e = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity]; box.set(r, e); }
+    for (let s = 0; s < 3; s++) {
+      const v = tris[t * 3 + s] * 3;
+      for (let k = 0; k < 3; k++) { if (verts[v + k] < e[k]) e[k] = verts[v + k]; if (verts[v + k] > e[3 + k]) e[3 + k] = verts[v + k]; }
+    }
+  }
+  return { find, count, box, roots: [...count.keys()] };
+}
+
 /* ------------------------------------------------------------------ heap */
 class Heap {
   constructor() { this.a = []; }
@@ -341,7 +375,7 @@ function pointToTri(p, ax, ay, az, bx, by, bz, cx, cy, cz) {
   return Math.abs((apx * nx + apy * ny + apz * nz) / nl);
 }
 
-function deviation(srcPos, verts, tris, samples) {
+function deviation(srcPos, verts, tris, samples, speckTri) {
   /* bucket the decimated triangles so each sample only tests its neighbourhood */
   const b = bbox(verts, null);
   const span = Math.max(b.hi[0] - b.lo[0], b.hi[1] - b.lo[1], b.hi[2] - b.lo[2]) || 1;
@@ -351,20 +385,36 @@ function deviation(srcPos, verts, tris, samples) {
   const cellOf = (x, y, z) => [Math.min(G - 1, Math.max(0, Math.floor((x - b.lo[0]) / cell))),
                                Math.min(G - 1, Math.max(0, Math.floor((y - b.lo[1]) / cell))),
                                Math.min(G - 1, Math.max(0, Math.floor((z - b.lo[2]) / cell)))];
+  /* Register each triangle in EVERY cell its bounding box overlaps, not just the three cells its corners
+     land in. This matters more than it looks. The search below stops early once it has a hit closer than
+     the nearest unsearched shell (`bestD < r * cell`) — a bound that is only sound if a triangle can be
+     found from any cell it passes through. Decimation makes triangles large: bucket one by its corners
+     alone and a sample point sitting in the middle of a wide triangle cannot see it, so the search settles
+     for something further away and the early exit locks that wrong answer in.
+
+     That bug reported 34 mm of movement on a lung that had barely moved (mean 0.008 mm), and the tool
+     refused three perfectly good meshes because of it. It fails safe — a missed triangle can only make the
+     distance look bigger, never smaller — but a verifier that cries wolf gets overridden, and then it is
+     worth nothing at all. */
   for (let t = 0; t < tris.length / 3; t++) {
-    const seen = new Set();
+    let lo0 = Infinity, lo1 = Infinity, lo2 = Infinity, hi0 = -Infinity, hi1 = -Infinity, hi2 = -Infinity;
     for (let s = 0; s < 3; s++) {
       const v = tris[t * 3 + s] * 3;
-      const [i, j, k] = cellOf(verts[v], verts[v + 1], verts[v + 2]);
+      if (verts[v] < lo0) lo0 = verts[v];       if (verts[v] > hi0) hi0 = verts[v];
+      if (verts[v + 1] < lo1) lo1 = verts[v + 1]; if (verts[v + 1] > hi1) hi1 = verts[v + 1];
+      if (verts[v + 2] < lo2) lo2 = verts[v + 2]; if (verts[v + 2] > hi2) hi2 = verts[v + 2];
+    }
+    const [i0, j0, k0] = cellOf(lo0, lo1, lo2);
+    const [i1, j1, k1] = cellOf(hi0, hi1, hi2);
+    for (let i = i0; i <= i1; i++) for (let j = j0; j <= j1; j++) for (let k = k0; k <= k1; k++) {
       const kk = key(i, j, k);
-      if (seen.has(kk)) continue; seen.add(kk);
       if (!grid.has(kk)) grid.set(kk, []);
       grid.get(kk).push(t);
     }
   }
   const nSrc = srcPos.length / 9;
   const step = Math.max(1, Math.floor(nSrc / samples));
-  let max = 0, sum = 0, n = 0;
+  let max = 0, sum = 0, n = 0, speckMax = 0, speckN = 0;
   for (let t = 0; t < nSrc; t += step) {
     const p = [srcPos[t * 9], srcPos[t * 9 + 1], srcPos[t * 9 + 2]];
     const [ci, cj, ck] = cellOf(p[0], p[1], p[2]);
@@ -379,11 +429,16 @@ function deviation(srcPos, verts, tris, samples) {
           if (d < bestD) bestD = d;
         }
       }
-      if (bestD < r * cell) break;                             // nothing further out can beat this
+      /* The point sits SOMEWHERE inside its own cell, possibly right against a face, so a triangle
+         reachable from a cell at ring r can come as close as (r-1)*cell. Testing against r*cell instead
+         exits one ring too early and locks in an answer that is merely the best seen so far. */
+      if (bestD < (r - 1) * cell) break;
     }
-    if (bestD < Infinity) { max = Math.max(max, bestD); sum += bestD; n++; }
+    if (bestD === Infinity) continue;
+    if (speckTri && speckTri[t]) { speckMax = Math.max(speckMax, bestD); speckN++; continue; }
+    max = Math.max(max, bestD); sum += bestD; n++;
   }
-  return { max, mean: n ? sum / n : 0, samples: n, span };
+  return { max, mean: n ? sum / n : 0, samples: n, span, speckMax, speckN };
 }
 
 /* ------------------------------------------------------------------ run */
@@ -410,6 +465,24 @@ for (const f of files) {
     const { verts, tris } = weld(pos, Math.max(span0 * 1e-7, 1e-6));
     const before = bbox(verts, null);
 
+    /* mark triangles belonging to stray specks so the gate is not judged on scanner dust */
+    let speckTri = null, specks = 0, speckBiggest = 0;
+    if (VERIFY) {
+      const modelSpan = Math.hypot(before.hi[0] - before.lo[0], before.hi[1] - before.lo[1], before.hi[2] - before.lo[2]);
+      const cmp = components(verts, tris);
+      const SPECK = modelSpan * 0.01;                    // 1% of the model's diagonal, and no bigger
+      const speckRoots = new Set();
+      for (const r of cmp.roots) {
+        const e = cmp.box.get(r);
+        const d = Math.hypot(e[3] - e[0], e[4] - e[1], e[5] - e[2]);
+        if (cmp.roots.length > 1 && d < SPECK) { speckRoots.add(r); specks++; speckBiggest = Math.max(speckBiggest, d); }
+      }
+      if (speckRoots.size) {
+        speckTri = new Uint8Array(tris.length / 3);
+        for (let t = 0; t < tris.length / 3; t++) if (speckRoots.has(cmp.find(tris[t * 3]))) speckTri[t] = 1;
+      }
+    }
+
     const want = RATIO ? Math.max(4, Math.round(srcTris * RATIO)) : TARGET;
     let res;
     if (srcTris <= want) res = { verts, tris };
@@ -430,7 +503,8 @@ for (const f of files) {
 
     let dev = null;
     if (VERIFY && outTris < srcTris) {
-      dev = deviation(pos, res.verts, res.tris, 4000);
+      dev = deviation(pos, res.verts, res.tris, 4000, speckTri);
+      dev.specks = specks; dev.speckBiggest = speckBiggest;
       if (dev.max > MAX_DEV) {
         refused++;
         rows.push({ name, srcTris, outTris, srcBytes, outBytes: 0, drift, dev, note: `REFUSED — surface moved ${dev.max.toFixed(3)} mm (ceiling ${MAX_DEV} mm)` });
@@ -459,7 +533,8 @@ console.log(`${'file'.padEnd(pad)}  ${'triangles'.padStart(19)}  ${'size'.padSta
 console.log('-'.repeat(W));
 for (const r of rows) {
   if (r.note) { console.log(`${r.name.padEnd(pad)}  ${r.note}`); continue; }
-  const d = r.dev ? `   ${r.dev.max.toFixed(3)} / ${r.dev.mean.toFixed(3)} mm  (${(r.dev.max / r.dev.span * 100).toFixed(2)}% of span)` : (VERIFY ? '   unchanged' : '');
+  let d = r.dev ? `   ${r.dev.max.toFixed(3)} / ${r.dev.mean.toFixed(3)} mm  (${(r.dev.max / r.dev.span * 100).toFixed(2)}% of span)` : (VERIFY ? '   unchanged' : '');
+  if (r.dev && r.dev.specks) d += `  · dropped ${r.dev.specks} stray fragment${r.dev.specks === 1 ? '' : 's'} (≤${r.dev.speckBiggest.toFixed(2)} mm)`;
   console.log(`${r.name.padEnd(pad)}  ${String(r.srcTris).padStart(7)} → ${String(r.outTris).padStart(7)}    ${mb(r.srcBytes).padStart(8)} → ${mb(r.outBytes).padStart(8)}   ${r.drift === 0 ? 'none' : r.drift.toExponential(1)}${d}`);
 }
 console.log('-'.repeat(W));
