@@ -3081,7 +3081,10 @@ function qbServeForRecord(e){ var meta=qbStore()._qmeta||{};
       if(pool.length===1) a7TriggerReplenish(tid);          // serving the LAST unused canonical → background replenish (fire-and-forget, constraints 2 & 8)
       return {item:pool[0]}; }                              // canonical serve UNCHANGED (constraint 1)
     var cand=a7TakeCachedCandidate(tid);                    // canonical exhausted → A7 pool candidate (constraint 3: only after exhaustion)
-    if(cand){ e.noFresh=false; return {item:cand, a7:true}; }
+    if(cand){ e.noFresh=false;
+      try{ var _m=qbStore()._qmeta, _h=cand._qh||qbHash((cand.stem||'')+'|'+((cand.options||[]).join('|')));   // snapshot target_id NOW so qbRetentionKey→t:X regardless of qbRecord ordering (hardening)
+        if(!_m[_h]) _m[_h]={ target_id:tid, stem:cand.stem, lead_in:cand.lead_in||'', options:cand.options, answer:cand.answer, rationales:cand.rationales||[] }; }catch(_e){}
+      return {item:cand, a7:true}; }
     e.noFresh=true; return {noFresh:true, a7Pending:true, targetId:tid}; }   // lazy fallback populated async by qbEnsureA7
   var qh=(e.key&&e.key.indexOf('q:')===0)?e.key.slice(2):e.key; var it=qbItemFromMeta(qh, meta[qh]);
   if(!it){ return {noFresh:true}; } return {item:it}; }
@@ -4575,7 +4578,7 @@ function pageTargetsAudit(){ if(!window.IS_ADMIN) return pageHome();
   setTimeout(taFetch,40);
   return crumbs([{label:'Home',route:'home'},{label:'Admin · Targets'}])+
     `<h1>🎯 Knowledge Targets — audit</h1>
-     <p class="sub">Shadow-mode: the Q-bank is being annotated with knowledge targets. The scheduler does <b>not</b> use these yet. AMBIGUOUS mappings are your call — a false merge is worse than a duplicate.</p>
+     <p class="sub">Live: Target-ID scheduling (A6) and AI parallel-retest generation (A7) are active. AMBIGUOUS mappings are your call — a false merge is worse than a duplicate.</p>
      <div class="btnrow" style="gap:10px;flex-wrap:wrap;margin-bottom:6px">
        <button class="btn" onclick="taBackfill(this)">▶ Run corpus backfill</button>
        <button class="btn" onclick="taStamp(this)">🏷 Stamp target_ids → questions</button>
@@ -4586,7 +4589,10 @@ function pageTargetsAudit(){ if(!window.IS_ADMIN) return pageHome();
      <div id="taAmb"><p class="sub">Loading…</p></div>
      <h2 style="margin-top:18px">Near-miss — NEW, but a candidate existed <span class="sub" style="font-weight:400">(diagnostic only — no action)</span></h2>
      <div class="btnrow" style="margin-bottom:6px"><button class="btn" onclick="taNearMiss(this)">Load near-miss bucket</button></div>
-     <div id="taNM"></div>`;
+     <div id="taNM"></div>
+     <h2 style="margin-top:18px">A7 Retest Pool <span class="sub" style="font-weight:400">(AI-generated retests — live)</span></h2>
+     <div class="btnrow" style="margin-bottom:6px"><button class="btn" onclick="taRetestFetch(this)">↻ Load retest pool</button></div>
+     <div id="taRetest"></div>`;
 }
 async function taFetch(){ try{
   const s=await admApi('/admin/targets/stats'); if(s.ok) taRenderStats(s.data); else throw new Error((s.data&&s.data.error)||'stats failed');
@@ -4661,6 +4667,35 @@ function taRenderNM(items){ var el=$('#taNM'); if(!el)return;
       +'<div class="sub" style="margin:6px 0 4px;font-weight:700">Candidate it did NOT match:</div>'+cands+'</div>';
   }).join('');
 }
+/* A7 admin panel: pool summary + per-candidate rows (status, confidence, matched_via, reject reason, served count) + budget. */
+async function taRetestFetch(btn){ if(btn){btn.disabled=true;btn.textContent='Loading…';} try{
+  var st=await admApi('/admin/retest/stats'); var pl=await admApi('/admin/retest/pool');
+  if(btn){btn.disabled=false;btn.textContent='↻ Load retest pool';}
+  var el=$('#taRetest'); if(!el)return;
+  if(!st.ok){ el.textContent='Could not load: '+((st.data&&st.data.error)||'stats failed'); return; }
+  var d=st.data, b=d.budget||{}, items=(pl.data&&pl.data.items)||[];
+  var reasons=Object.keys(d.invalidReasons||{}).map(function(k){return k+': '+d.invalidReasons[k];}).join(' · ')||'—';
+  var col=function(x){ return x==='candidate'?'#0a9d55':x==='served'?'#2563eb':x==='invalid'?'#c0392b':x==='quarantined'?'#b7791f':'#888'; };
+  var rows=items.slice(0,80).map(function(x){
+    return '<tr style="border-top:1px solid var(--line,#eee)"><td style="font-family:monospace;padding:3px 6px">'+esc(x.target_id||'')+'</td>'
+      +'<td style="padding:3px 6px;color:'+col(x.status)+';font-weight:600">'+esc(x.status||'')+'</td>'
+      +'<td align="center" style="padding:3px 6px">'+(x.confidence!=null?x.confidence:'')+'</td>'
+      +'<td align="center" style="padding:3px 6px">'+esc(x.matched_via||'')+'</td>'
+      +'<td style="padding:3px 6px;color:#c0392b">'+esc(x.reason||'')+'</td>'
+      +'<td align="center" style="padding:3px 6px">'+(x.served_count||0)+'</td>'
+      +'<td style="padding:3px 6px;color:#666">'+esc((x.stem||'').slice(0,64))+'</td>'
+      +'<td style="padding:3px 6px">'+((x.status==='candidate'||x.status==='served')?('<a href="#" onclick="taQuarantine(event,\''+esc(x.target_id||'')+'\',\''+esc(x.qh||'')+'\')" title="Withhold this retest" style="color:#b7791f">⚑ flag</a>'):'')+'</td></tr>';
+  }).join('');
+  el.innerHTML='<div class="sub" style="margin-bottom:8px"><b>'+(d.candidate||0)+'</b> candidate · <b>'+(d.served||0)+'</b> served · <b>'+(d.invalid||0)+'</b> invalid · <b>'+(d.quarantined||0)+'</b> quarantined · <b>'+(d.expired||0)+'</b> expired'
+    +' &nbsp;|&nbsp; reject reasons: '+esc(reasons)
+    +' &nbsp;|&nbsp; today: '+(b.generatedToday_allAccounts!=null?b.generatedToday_allAccounts:'?')+' generated (cap '+(b.dailyMaxPerAccount||'?')+'/account/day)</div>'
+    +(rows?'<table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="text-align:left;color:#888"><th style="padding:3px 6px">target</th><th>status</th><th>conf</th><th>via</th><th style="padding:3px 6px">reason</th><th>served</th><th style="padding:3px 6px">stem</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>':'<p class="sub">Pool is empty.</p>');
+}catch(e){ if(btn){btn.disabled=false;btn.textContent='↻ Load retest pool';} var el=$('#taRetest'); if(el) el.textContent='Error: '+(e.message||e); } }
+async function taQuarantine(ev, target_id, qh){ if(ev&&ev.preventDefault)ev.preventDefault();
+  if(!qh || !confirm('Withhold this retest? It will never be served again (reversible).')) return;
+  try{ var r=await admApi('/admin/retest/quarantine',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({qh:qh,target_id:target_id})});
+    if(r.ok){ mbToast('Quarantined'); taRetestFetch(); } else { alert('Failed: '+((r.data&&r.data.error)||'?')); }
+  }catch(e){ alert('Failed: '+(e.message||e)); } }
 
 
 /* ===== Admin: Visualize asset library — automated growth (is_admin only) ===== */

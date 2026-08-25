@@ -701,12 +701,13 @@ async function a7Reconcile(item){
 
 /* --- Supabase-backed pool. Each addCandidate is an INDEPENDENT commit → crash-resilient (a mid-fill crash
        leaves prior candidates usable; the next invocation fills the remaining slots). --- */
-function makeDbPool(account_id){
+function makeDbPool(account_id, canonicalStems){
   return {
     async candidateCount(t){ const r=await admin.from("retest_pool").select("id",{count:"exact",head:true}).eq("target_id",t).eq("status","candidate"); return r.count||0; },
-    async priorStatements(t){                                               // served generated + unused candidate stems (FIX4). Canonical-served stems: fast-follow.
+    async priorStatements(t){                                               // FIX4: served canonical + served generated + unused candidate stems
       const r=await admin.from("retest_pool").select("content,status").eq("target_id",t).in("status",["served","candidate"]);
-      return (r.data||[]).map(x=>x.content&&x.content.stem).filter(Boolean);
+      const poolStems=(r.data||[]).map(x=>x.content&&x.content.stem).filter(Boolean);
+      return (canonicalStems||[]).concat(poolStems);
     },
     async addCandidate(t,item,v){ await admin.from("retest_pool").upsert({ target_id:t, qh:qhOf(item), account_id, content:item, model:EXTRAS_MODEL, validation:Object.assign({passed:true},v), status:"candidate" }, { onConflict:"target_id,qh" }); },
     async addInvalid(t,item,v){ await admin.from("retest_pool").upsert({ target_id:t, qh:qhOf(item), account_id, content:item, model:EXTRAS_MODEL, validation:Object.assign({passed:false},v), status:"invalid" }, { onConflict:"target_id,qh" }); },
@@ -719,18 +720,26 @@ function makeDbPool(account_id){
   };
 }
 
-/* --- in-memory budget (per-process; resets on restart — acceptable for v1). Two counters + exponential backoff. --- */
-const _a7Budget = (()=>{ const att={}, failn={}, backoff={}; let day=null, daily=0;
-  const today=()=>Math.floor(Date.now()/864e5);
-  const roll=()=>{ const d=today(); if(d!==day){ day=d; daily=0; } };
+/* --- PERSISTENT per-account generation budget: the daily ceiling is derived from retest_pool rows (each
+   generation that produced output writes a row), so it survives server restarts and is scoped per account
+   (A7_DAILY_MAX generations / account / day). Backoff stays in-memory — a minor optimization; on restart a
+   previously-failing Target is simply retried a little sooner, which is harmless (fails toward MORE tries, not
+   wrong serves). Interface matches the frozen orchestrator (canStart/canAttempt/noteAttempt/noteFailure). --- */
+function startOfUtcDayISO(){ const d=new Date(); d.setUTCHours(0,0,0,0); return d.toISOString(); }
+function makeDbBudget(account_id){
+  const backoff={}, failn={}; const today=()=>Math.floor(Date.now()/864e5);
   return {
-    canStart(t){ roll(); if(daily>=A7_DAILY_MAX) return false; if((backoff[t]||-1)>=today()) return false; return true; },
-    canAttempt(){ roll(); return daily<A7_DAILY_MAX; },
-    noteAttempt(t){ roll(); att[t]=(att[t]||0)+1; daily++; },
-    noteFailure(t){ failn[t]=(failn[t]||0)+1; const n=Math.min(failn[t]-1, A7_CFG.BACKOFF_DAYS.length-1); backoff[t]=today()+A7_CFG.BACKOFF_DAYS[n]; },
-    _stats(){ return { dailyUsed:daily, dailyMax:A7_DAILY_MAX, targetsWithFailures:Object.keys(failn).length }; }
+    async canAttempt(){ const r=await admin.from("retest_pool").select("id",{count:"exact",head:true}).eq("account_id",account_id).gte("generated_at",startOfUtcDayISO()); return (r.count||0) < A7_DAILY_MAX; },
+    async canStart(t){ if((backoff[t]||-1)>=today()) return false; return await this.canAttempt(); },
+    noteAttempt(){ /* daily count is derived from the rows generation creates — no separate counter to keep */ },
+    noteFailure(t){ failn[t]=(failn[t]||0)+1; const n=Math.min(failn[t]-1, A7_CFG.BACKOFF_DAYS.length-1); backoff[t]=today()+A7_CFG.BACKOFF_DAYS[n]; }
   };
-})();
+}
+async function a7BudgetStats(account_id){
+  const all=await admin.from("retest_pool").select("id",{count:"exact",head:true}).gte("generated_at",startOfUtcDayISO());
+  let mine=null; if(account_id){ const r=await admin.from("retest_pool").select("id",{count:"exact",head:true}).eq("account_id",account_id).gte("generated_at",startOfUtcDayISO()); mine=r.count||0; }
+  return { generatedToday_allAccounts:all.count||0, generatedToday_thisAccount:mine, dailyMaxPerAccount:A7_DAILY_MAX };
+}
 
 async function a7LoadContract(target_id){
   const r=await admin.from("knowledge_targets").select("*").eq("target_id",target_id).maybeSingle();
@@ -738,9 +747,20 @@ async function a7LoadContract(target_id){
   const nb=await admin.from("knowledge_targets").select("canonical_statement").eq("topic",t.topic).neq("target_id",target_id).limit(6);
   return Object.assign({}, t, { _neighbors:(nb.data||[]).map(x=>x.canonical_statement).filter(Boolean) });
 }
+async function a7CanonicalStems(target_id){
+  try{
+    const qt=await admin.from("question_targets").select("topic_id").eq("target_id",target_id);
+    const tids=[...new Set((qt.data||[]).map(r=>r.topic_id).filter(Boolean))];
+    if(!tids.length) return [];
+    const tp=await admin.from("topics").select("extras").in("id",tids);
+    const out=[]; (tp.data||[]).forEach(t=>{ ((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(q&&q.target_id===target_id && q.stem) out.push(q.stem); }); });
+    return out;
+  }catch(e){ return []; }
+}
 async function a7ReplenishTarget(target_id, account_id, want){
   const tc=await a7LoadContract(target_id); if(!tc) return { error:"unknown target" };
-  const deps={ targetContract:tc, generate:a7Generate, reconcile:a7Reconcile, pool:makeDbPool(account_id), budget:_a7Budget, cfg:A7_CFG };
+  const canonStems=await a7CanonicalStems(target_id);                       // FIX4: don't let a retest duplicate an existing canonical question
+  const deps={ targetContract:tc, generate:a7Generate, reconcile:a7Reconcile, pool:makeDbPool(account_id, canonStems), budget:makeDbBudget(account_id), cfg:A7_CFG };
   return await replenish(target_id, deps, want);                            // want default = POOL_CAP (background fill)
 }
 
@@ -789,6 +809,19 @@ app.get("/admin/retest/pool", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+app.post("/admin/retest/quarantine", async (req,res)=>{
+  /* Withhold a served/candidate retest that was later found bad → status='quarantined' (never served again;
+     never canonical). Reversible by flipping status back. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { qh, target_id } = req.body||{};
+    if(!qh) return res.status(400).json({ error:"qh required" });
+    let q=admin.from("retest_pool").update({ status:"quarantined" }).eq("qh",qh);
+    if(target_id) q=q.eq("target_id",target_id);
+    const r=await q;
+    res.json({ ok:!r.error, quarantined:qh });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.post("/admin/retest/reset", async (req,res)=>{
   /* SHADOW-TEST cleanup: delete retest_pool rows for ONE target_id (or all if reset_all=true). Never touches
      knowledge_targets or topics.extras.qbank. Admin-only. Used to restore state after A7.5. */
@@ -808,7 +841,7 @@ app.get("/admin/retest/stats", async (req,res)=>{
     const rows=r.data||[]; const by=s=>rows.filter(x=>x.status===s).length;
     const reasons={}; rows.filter(x=>x.status==="invalid").forEach(x=>{ const k=(x.validation&&x.validation.reason)||"?"; reasons[k]=(reasons[k]||0)+1; });
     res.json({ ok:true, total:rows.length, candidate:by("candidate"), served:by("served"), invalid:by("invalid"),
-      quarantined:by("quarantined"), expired:by("expired"), invalidReasons:reasons, budget:_a7Budget._stats() });
+      quarantined:by("quarantined"), expired:by("expired"), invalidReasons:reasons, budget: await a7BudgetStats() });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
@@ -2157,6 +2190,50 @@ app.get("/admin/targets/matches", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+app.get("/admin/targets/health", async (req,res)=>{
+  /* Read-only target-layer diagnostics (no mutation). Surfaces the evidence for the deferred decisions:
+     orphans (targets with 0 authoritative question mappings), over-broad targets (atomicity candidates),
+     and the confidence + AMBIGUOUS distribution (threshold-calibration evidence). */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const overBroadMin = Number(req.query.overBroadMin)||5;
+    const kt=await admin.from("knowledge_targets").select("target_id,topic,skill,canonical_statement,status");
+    const qt=await admin.from("question_targets").select("target_id,map_state,map_confidence,mapping_source,mapping_status");
+    const targets=(kt.data||[]).filter(t=>t.status!=="deprecated"&&t.status!=="merged");
+    const rows=(qt.data||[]).filter(r=> (r.mapping_status||"active")==="active");
+    const members={};                                            // authoritative mappings per target
+    rows.forEach(r=>{ const auth = r.target_id && (r.map_state==="MATCH" || r.mapping_source==="human");
+      if(auth) members[r.target_id]=(members[r.target_id]||0)+1; });
+    const orphans=targets.filter(t=>!members[t.target_id]).map(t=>({ target_id:t.target_id, topic:t.topic, statement:(t.canonical_statement||"").slice(0,90) }));
+    const overBroad=targets.map(t=>({ target_id:t.target_id, topic:t.topic, members:members[t.target_id]||0, statement:(t.canonical_statement||"").slice(0,90) }))
+      .filter(t=>t.members>=overBroadMin).sort((a,b)=>b.members-a.members);
+    // confidence distribution over MATCH mappings + AMBIGUOUS count (calibration evidence)
+    const conf={ "0.80-0.85":0, "0.85-0.90":0, "0.90-0.95":0, "0.95-1.00":0 };
+    let matches=0, ambiguous=0;
+    rows.forEach(r=>{ if(r.map_state==="MATCH"){ matches++; const c=r.map_confidence||0;
+      if(c>=0.95)conf["0.95-1.00"]++; else if(c>=0.90)conf["0.90-0.95"]++; else if(c>=0.85)conf["0.85-0.90"]++; else if(c>=0.80)conf["0.80-0.85"]++; }
+      else if(r.map_state==="AMBIGUOUS") ambiguous++; });
+    res.json({ ok:true, targets:targets.length,
+      orphans:{ count:orphans.length, items:orphans.slice(0,50) },
+      overBroad:{ threshold:overBroadMin, count:overBroad.length, items:overBroad.slice(0,50) },
+      calibration:{ matchConfidence:conf, matches, ambiguous, ambiguousRate: (matches+ambiguous)? Math.round(ambiguous/(matches+ambiguous)*100):0 } });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/targets/deprecate-orphans", async (req,res)=>{
+  /* REVERSIBLE orphan cleanup: mark targets with 0 authoritative mappings as status='deprecated' (loadTargets
+     already excludes deprecated). Not a hard delete — flip status back to 'active' to restore. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const kt=await admin.from("knowledge_targets").select("target_id,status");
+    const qt=await admin.from("question_targets").select("target_id,map_state,mapping_source,mapping_status");
+    const auth={}; (qt.data||[]).forEach(r=>{ if((r.mapping_status||"active")==="active" && r.target_id && (r.map_state==="MATCH"||r.mapping_source==="human")) auth[r.target_id]=1; });
+    const orphanIds=(kt.data||[]).filter(t=>t.status!=="deprecated"&&t.status!=="merged"&&!auth[t.target_id]).map(t=>t.target_id);
+    if(!orphanIds.length) return res.json({ ok:true, deprecated:0 });
+    if(req.body && req.body.dryRun) return res.json({ ok:true, wouldDeprecate:orphanIds.length, ids:orphanIds.slice(0,100) });
+    const up=await admin.from("knowledge_targets").update({ status:"deprecated" }).in("target_id",orphanIds);
+    res.json({ ok:!up.error, deprecated:orphanIds.length, ids:orphanIds.slice(0,100) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.get("/admin/targets/churn-audit", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
