@@ -33,6 +33,7 @@ const store = { mb_current_uid: "student-123" };
 const sandbox = {
   qbStore: () => SCENARIO,
   smartPool: () => POOL,
+  qbQuestionsForTarget: (tid, served) => POOL.filter(q=>q.target_id===tid && !(served||[]).includes(q._qh)),
   smartCourseMap: () => ({}),
   qbHash: (str) => { let h=5381,i=(str||"").length; while(i){ h=(h*33)^(str||"").charCodeAt(--i);} return (h>>>0).toString(36); },
   persist: () => {}, render: () => {},
@@ -67,10 +68,10 @@ function setup({ skill, tag, n, ok, conf, siblings=1, flag }){
     SCENARIO._attempts.push({ u:"a"+k, qh, topicId:"t1", ok, conf, ms:3000, ts: now-k*1000 });
   }
   // the just-missed question + N sibling questions on the same concept for the pool
-  SCENARIO._qmeta[missedQh] = { skill, tag, cognitive_level:"clinical_reasoning", objective:"Obj "+tag };
+  SCENARIO._qmeta[missedQh] = { skill, tag, target_id:"TGT_"+tag, cognitive_level:"clinical_reasoning", objective:"Obj "+tag };
   POOL = [];
   for(let k=0;k<siblings;k++){
-    POOL.push({ _qh: skill+"_"+tag+"_sib"+k, skill, tag, subtopic:tag, options:["a","b","c","d"], answer:0,
+    POOL.push({ _qh: skill+"_"+tag+"_sib"+k, skill, tag, subtopic:tag, target_id:"TGT_"+tag, options:["a","b","c","d"], answer:0,
                 stem:"sib "+k, objective:"Obj "+tag });
   }
   sandbox.window.MEDBANK_CONFIG = { FEATURES: { GAP_LOOP: !!flag } };
@@ -79,7 +80,7 @@ function setup({ skill, tag, n, ok, conf, siblings=1, flag }){
 
 let fails = [];
 function check(name, cond){ console.log(`  [${cond?"PASS":"FAIL"}] ${name}`); if(!cond) fails.push(name); }
-const missQ = (skill,tag)=>({ skill, tag, subtopic:tag, options:["a","b","c","d"], answer:0, _qh: skill+"_"+tag+"_missed" });
+const missQ = (skill,tag)=>({ skill, tag, subtopic:tag, target_id:"TGT_"+tag, options:["a","b","c","d"], answer:0, _qh: skill+"_"+tag+"_missed" });
 
 console.log("V1.6 gap-loop decision logic — " + new Date().toISOString());
 

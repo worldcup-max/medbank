@@ -36,6 +36,7 @@ const store = { mb_current_uid: "student-xyz" };
 const sandbox = {
   qbStore: () => SCENARIO,
   smartPool: () => POOL,
+  qbQuestionsForTarget: (tid, served) => POOL.filter(q=>q.target_id===tid && !(served||[]).includes(q._qh)),
   smartCourseMap: () => ({}),
   persist: () => {},
   render: () => {},
@@ -74,12 +75,12 @@ function reset(){ SCENARIO = { _attempts: [], _qmeta: {}, _events: [] }; POOL = 
 function addAttempts(spec){
   spec.forEach(s => { for(let k=0;k<s.n;k++){
     const qh = s.skill+"_"+s.tag+"_"+k;
-    SCENARIO._qmeta[qh] = { skill:s.skill, tag:s.tag, subtopic:s.tag, cognitive_level:"clinical_reasoning", objective:"OBJ_"+s.tag, src:"note#"+s.tag };
+    SCENARIO._qmeta[qh] = { skill:s.skill, tag:s.tag, subtopic:s.tag, target_id:"TGT_"+s.tag, cognitive_level:"clinical_reasoning", objective:"OBJ_"+s.tag, src:"note#"+s.tag };
     SCENARIO._attempts.push({ u:"a"+(uidN++), qh, topicId:"t1", ok:!!s.ok, conf:s.conf, ms:3000, ts: Date.now()-(SCENARIO._attempts.length*1000) });
   }});
 }
 function addPool(skill, tag, count){
-  for(let k=0;k<count;k++) POOL.push({ _qh: skill+"_"+tag+"_pool"+k, _topicId:"t1", skill, tag, subtopic:tag,
+  for(let k=0;k<count;k++) POOL.push({ _qh: skill+"_"+tag+"_pool"+k, _topicId:"t1", skill, tag, subtopic:tag, target_id:"TGT_"+tag,
     objective:"OBJ_"+tag, teaching:"OBJ_"+tag, options:["a","b","c","d"], answer:0, stem:"pool "+tag+" "+k, src:"note#"+tag });
 }
 
@@ -110,29 +111,22 @@ let g = A.getGAPLOOP();
 check("gap loop opened from queue", !!g && g.step);
 check("intervention_shown source=queue", (last("intervention_shown")||{}).source==="queue");
 
-// practice + retest must be DIFFERENT questions on the SAME objective
-check("retest is a DIFFERENT question from practice",
-      g && g.practiceQ && g.retestQ && g.practiceQ._qh !== g.retestQ._qh,
-      g&&g.practiceQ&&g.retestQ ? (g.practiceQ._qh+" vs "+g.retestQ._qh) : "");
-check("practice & retest share the SAME objective",
-      g && g.practiceQ && g.retestQ && g.practiceQ.objective === g.retestQ.objective && /^OBJ_/.test(g.practiceQ.objective));
+// RE-BASELINE: practice drawn from the Target's A6 siblings; NO in-overlay retest (A6 owns retention)
+check("practice question present (Target sibling)", !!(g && g.practiceQ && g.practiceQ._qh));
+check("NO in-overlay retest question (A6 owns retention)", g && g.retestQ===undefined);
+check("identity === target_id", g && typeof g.target_id==="string" && g.concept===g.target_id);
 
-// drive: (learn→)practice→retest→result
+// drive: (learn→)practice→result  (no retest step)
 if(g.step==="learn"){ A.gapToPractice(); check("LEARN step logged", (ev().filter(e=>e.t==="intervention_step"&&e.step==="learn").length)>=1); }
 g = A.getGAPLOOP();
 A.gapPick(g.practiceQ.answer);        // answer practice correctly
-A.gapAdvance();                       // → retest
+A.gapAdvance();                       // → result (straight; no retest step)
 g = A.getGAPLOOP();
-check("advanced to retest", g.step==="retest");
-check("retest-step telemetry", ev().some(e=>e.t==="intervention_step"&&e.step==="retest"));
-A.gapPick(g.retestQ.answer);          // answer retest correctly (cold)
-A.gapAdvance();                       // → result
-g = A.getGAPLOOP();
-check("reached RESULT with retestOk=true", g.step==="result" && g.retestOk===true);
-check("intervention_completed logged with retest_ok", (last("intervention_completed")||{}).retest_ok===true);
-// practice + retest recorded as ordinary attempts so the engine counts them
+check("advanced straight to RESULT (no retest step)", g.step==="result");
+check("intervention_completed logged with practice_ok", (last("intervention_completed")||{}).practice_ok===true);
+// practice recorded as an ordinary attempt so the engine counts it
 const gapModes = SCENARIO._attempts.filter(a=>/^gap_/.test(a.mode)).map(a=>a.mode);
-check("practice+retest logged as ordinary attempts", gapModes.includes("gap_practice") && gapModes.includes("gap_retest"), gapModes.join(","));
+check("practice logged as ordinary attempt (gap_practice)", gapModes.includes("gap_practice"), gapModes.join(","));
 
 /* ============ ROUTING: misconception → drill, fragile → drill ============ */
 reset();

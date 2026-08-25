@@ -3052,7 +3052,7 @@ function qbQuestionsForTarget(targetId, served){ var out=[], sv={}; (served||[])
    Every A7 effect is gated by a7On() and is fire-and-forget, so with A7 off (or offline) the canonical path is
    byte-for-byte unchanged and no network call ever fires. ==== */
 var _a7Pool={}, _a7Inflight={};
-function a7On(){ try{ if(window.MEDBANK_CONFIG && MEDBANK_CONFIG.FEATURES && MEDBANK_CONFIG.FEATURES.A7) return true; return !!(DATA && DATA.flags && DATA.flags.a7); }catch(e){ return false; } }
+function a7On(){ try{ var c=window.MEDBANK_CONFIG; if(c && c.FEATURES && c.FEATURES.A7) return true; return !!(DATA && DATA.flags && DATA.flags.a7); }catch(e){ return false; } }
 function a7Api(path, opts){ return (typeof admApi==='function') ? admApi(path, opts) : Promise.reject(new Error('no api')); }
 /* fire-and-forget, idempotent: NEVER awaited on the canonical path; dedupes in-flight work per Target (constraint 8) */
 function a7TriggerReplenish(tid){ if(!a7On() || !tid || _a7Inflight[tid]) return;
@@ -3296,7 +3296,7 @@ function fixQueue(scope){
 }
 /* the intervention each diagnosis routes to (misconception is interim → focused drill until intervention #3) */
 function fixQAction(dg, canLoop){
-  if(dg.type==='gap')           return canLoop ? { verb:'Learn → Practice → Retest', kind:'gap' }
+  if(dg.type==='gap')           return canLoop ? { verb:'Learn → Practice', kind:'gap' }
                                                : { verb:'Practise this',            kind:'drill' };   // no material for a distinct loop → drill the concept
   if(dg.type==='misconception') return { verb:'Practise & confront',       kind:'drill' };
   return { verb:'Smart Drill', kind:'drill' };   // fragile → retrieval / reinforcement
@@ -3822,12 +3822,16 @@ function gapDiag(q){ if(!q) return null; var sk=(q.skill||''); if(!sk) return nu
   var st=smartStats('*'); var b=st.bySkill[sk]; if(!b) return null; return smartDiagnose(b); }
 /* OTHER questions on the same concept (skill+tag), for practice + retest (reuses conceptRetest filter) */
 function gapConceptPool(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return [];
-  var sameTag=(mt.tag||mt.subtopic||'General'), sameSkill=(mt.skill||'');
-  return smartPool().filter(function(q){ if(q._qh===qh) return false; if((q.tag||q.subtopic||'General')!==sameTag) return false; if(sameSkill&&(q.skill||'')!==sameSkill) return false; return true; }); }
+  var tid=mt.target_id||null;                                          // V1.6 Phase 2: identity = target_id (no parallel selection system)
+  if(!tid || typeof qbQuestionsForTarget!=='function') return [];
+  return qbQuestionsForTarget(tid, [qh]).filter(function(q){ return q._qh!==qh; }); }   // A6 Target siblings (the SAME pool A6 serves)
 /* eligible to OFFER at a miss: flag on, a real gap diagnosis, not already in a loop, and something to teach with */
 function gapEligible(q, picked){ if(!gapOn()||!q) return null; if(GAPLOOP) return null;
-  if(picked===q.answer) return null; var dg=gapDiag(q); if(!dg||dg.type!=='gap') return null;
-  var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))); if(!gapConceptPool(qh).length) return null; return dg; }
+  if(picked===q.answer) return null;
+  var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
+  var mt=(qbStore()._qmeta||{})[qh]||{}; if(!(mt.target_id||q.target_id)) return null;   // Target-keyed only (AMBIGUOUS/unmapped → plain drill)
+  var dg=gapDiag(q); if(!dg||dg.type!=='gap') return null;
+  if(!gapConceptPool(qh).length) return null; return dg; }
 /* deterministic ~50/50 A/B bucket per student+concept (matched = full loop, generic = skip LEARN) */
 function gapBucket(concept){ var uid=''; try{ uid=localStorage.getItem('mb_current_uid')||''; }catch(e){}
   var n=parseInt(qbHash(uid+'|'+concept),36)||0; return (n%2===0)?'matched':'generic'; }
@@ -3836,16 +3840,17 @@ function gapOfferHtml(qh){ return '<div class="gapoffer"><div class="gapoffer-h"
   +'<button class="btn sm ghost" onclick="gapDismiss()">Keep going</button></div></div>'; }
 function gapDismiss(){ /* opt-in: student simply stays in the drill */ }
 function gapStart(qh, fromQueue){ if(!gapOn() && !fromQueue) return false; var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return false;
-  var pool=gapConceptPool(qh); if(!pool.length) return false;   // caller must fall back — never silently no-op
+  var tid=mt.target_id||null; if(!tid) return false;                    // Target-keyed only
+  var pool=gapConceptPool(qh); if(!pool.length) return false;           // caller must fall back — never silently no-op
   var seen=smartStats('*').seenQh;
   var ordered=qbShuffle(pool.filter(function(q){return !seen[q._qh];})).concat(qbShuffle(pool.filter(function(q){return seen[q._qh];})));
-  var practiceQ=ordered[0]||null, retestQ=ordered[1]||ordered[0]||null;   // degrade gracefully if only one exists
-  var concept=(mt.skill||'')+'|'+(mt.tag||mt.subtopic||'')+'|'+(mt.objective||mt.teaching||'');
+  var practiceQ=ordered[0]||null;                                       // ONE immediate practice question (no in-overlay retest — A6 owns retention)
+  var concept=tid;                                                      // identity = target_id
   var ab=gapBucket(concept);
-  GAPLOOP={ fromQh:qh, mt:mt, concept:concept, ab:ab, step:(ab==='generic'?'practice':'learn'),
-            practiceQ:practiceQ, retestQ:retestQ, picked:null, answered:false, pStart:0, retestOk:null };
-  smartLog({t:'intervention_shown', itype:'gap', concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss')});
-  smartLog({t:'intervention_step', itype:'gap', step:GAPLOOP.step, concept:concept});
+  GAPLOOP={ fromQh:qh, mt:mt, concept:concept, target_id:tid, ab:ab, step:(ab==='generic'?'practice':'learn'),
+            practiceQ:practiceQ, picked:null, answered:false, pStart:0, practiceOk:null };
+  smartLog({t:'intervention_shown', itype:'gap', target_id:tid, concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss'), diagnosis_version:'v1.5', intervention_version:'v1.6-phase2'});
+  smartLog({t:'intervention_step', itype:'gap', step:GAPLOOP.step, target_id:tid});
   if(GAPLOOP.step==='practice'){ GAPLOOP.pStart=Date.now(); }
   gapRender(); return true; }
 function gapClose(){ var o=document.getElementById('gapOverlay'); if(o&&o.parentNode) o.parentNode.removeChild(o); }
@@ -3853,12 +3858,11 @@ function gapExit(){ if(GAPLOOP && GAPLOOP.step!=='result') smartLog({t:'interven
 function gapShowNote(){ try{ if(GAPLOOP&&GAPLOOP.mt&&GAPLOOP.mt.src&&window.MB_DOCK_SOURCE){ MB_DOCK_SOURCE(GAPLOOP.mt.src); } else if(window.MB_DOCK_OPEN){ MB_DOCK_OPEN('source'); } }catch(e){} }
 function gapToPractice(){ if(!GAPLOOP) return; GAPLOOP.step='practice'; GAPLOOP.answered=false; GAPLOOP.picked=null; GAPLOOP.pStart=Date.now();
   smartLog({t:'intervention_step', itype:'gap', step:'practice', concept:GAPLOOP.concept}); gapRender(); }
-function gapPick(j){ var g=GAPLOOP; if(!g||g.answered) return; var q=(g.step==='practice')?g.practiceQ:g.retestQ; if(!q) return;
+function gapPick(j){ var g=GAPLOOP; if(!g||g.answered) return; var q=g.practiceQ; if(!q) return;
   g.picked=j; g.answered=true; var ok=(j===q.answer); var ms=g.pStart?(Date.now()-g.pStart):0;
-  gapLogAttempt(q, j, ok, ms, 'gap_'+g.step); if(g.step==='retest') g.retestOk=ok; gapRender(); }
+  gapLogAttempt(q, j, ok, ms, 'gap_practice'); g.practiceOk=ok; gapRender(); }
 function gapAdvance(){ var g=GAPLOOP; if(!g) return;
-  if(g.step==='practice'){ g.step='retest'; g.answered=false; g.picked=null; g.pStart=Date.now(); smartLog({t:'intervention_step', itype:'gap', step:'retest', concept:g.concept}); gapRender(); return; }
-  g.step='result'; smartLog({t:'intervention_completed', itype:'gap', concept:g.concept, ab:g.ab, retest_ok:!!g.retestOk}); gapRender(); }
+  g.step='result'; smartLog({t:'intervention_completed', itype:'gap', target_id:g.target_id, concept:g.concept, ab:g.ab, practice_ok:!!g.practiceOk, diagnosis_version:'v1.5', intervention_version:'v1.6-phase2'}); gapRender(); }
 /* practice/retest answers are ordinary attempts so the frozen engine's stats include them */
 function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
   s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, target_id:(q.target_id||null), stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
@@ -3871,21 +3875,20 @@ function gapBodyHtml(){ var g=GAPLOOP; if(!g) return '';
   var lbl=(g.mt.skill?qbSkillLabel(g.mt.skill)+' · ':'')+(g.mt.tag||g.mt.subtopic||'');
   if(g.step==='learn'){ var obj=g.mt.objective||g.mt.teaching||'';
     return '<div class="gaph">📖 Learn · '+esc(lbl)+'</div>'+(obj?'<div class="gapobj">🎯 '+esc(obj)+'</div>':'')
-      +'<div class="gapmsg">Read this idea through, then try a fresh question on it — cold.</div>'
+      +'<div class="gapmsg">Read this idea through, then apply it in one fresh practice question.</div>'
       +(g.mt.src?'<div class="gaprow"><button class="btn sm" onclick="gapShowNote()">📄 Open the note</button></div>':'')
       +'<div class="gaprow"><button class="btn primary" onclick="gapToPractice()">I’ve read this → practise</button><button class="btn sm ghost" onclick="gapExit()">Exit</button></div>'; }
-  if(g.step==='practice'||g.step==='retest'){ var q=(g.step==='practice')?g.practiceQ:g.retestQ; if(!q) return gapResultHtml();
-    var head=(g.step==='practice')?'✍️ Practice — same idea, guided':'🎯 Retest — cold, no hints';
+  if(g.step==='practice'){ var q=g.practiceQ; if(!q) return gapResultHtml();
     var opts=q.options.map(function(o,j){ var cls='qbopt'; if(g.answered){ if(j===q.answer)cls+=' right'; else if(j===g.picked)cls+=' wrong'; } else if(g.picked===j)cls+=' sel';
       return '<button class="'+cls+'" '+(g.answered?'disabled':'onclick="gapPick('+j+')"')+'><span class="qbol">'+qbLetter(j)+'</span><span>'+esc(o)+'</span></button>'; }).join('');
-    var rat=''; if(g.answered && g.step==='practice'){ rat='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
+    var rat=''; if(g.answered){ rat='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'; }
-    var cont=g.answered?'<div class="gaprow"><button class="btn primary" onclick="gapAdvance()">'+(g.step==='practice'?'Continue → retest':'See result')+'</button></div>':'<div class="gaprow"><button class="btn sm ghost" onclick="gapExit()">Exit</button></div>';
-    return '<div class="gaph">'+head+'</div><div class="gapstem">'+esc(q.stem)+'</div><div class="qbopts">'+opts+'</div>'+rat+cont; }
+    var cont=g.answered?'<div class="gaprow"><button class="btn primary" onclick="gapAdvance()">See result</button></div>':'<div class="gaprow"><button class="btn sm ghost" onclick="gapExit()">Exit</button></div>';
+    return '<div class="gaph">✍️ Practice — apply what you just learned</div><div class="gapstem">'+esc(q.stem)+'</div><div class="qbopts">'+opts+'</div>'+rat+cont; }
   return gapResultHtml(); }
-function gapResultHtml(){ var g=GAPLOOP, ok=g.retestOk;
-  return '<div class="gaph">'+(ok?'✅ Gap closing':'🟠 We’ll revisit this')+'</div>'
-    +'<div class="gapmsg">'+(ok?'You got the retest right cold — nice.':'Still shaky — we’ll bring this concept back for you.')+'</div>'
+function gapResultHtml(){ var g=GAPLOOP, ok=g.practiceOk;
+  return '<div class="gaph">'+(ok?'✅ You applied it':'🟠 Still settling')+'</div>'
+    +'<div class="gapmsg">'+(ok?'You applied the idea correctly just now. We’ll bring this concept back on schedule to confirm it stuck.':'That’s okay — you just learned it. We’ll bring this concept back on schedule to check it stuck.')+'</div>'
     +'<div class="gaprow"><button class="btn primary" onclick="gapExit()">Done</button></div>'; }
 /* ---- Confidence capture (non-interruptive; tutor reveal) ---- */
 function qbSetConf(v){ if(!QB) return; v=parseInt(v,10); var r=QB.results[QB.results.length-1]; if(r) r.conf=v;

@@ -48,7 +48,7 @@ MEGA QBANK
 ├── V1.6 — INTERVENTION ENGINE  🟢 NEXT MAJOR (re-baselined on A6+A7; identity = target_id)
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
 │   ├── Phase 1 instrumentation (durable intervention_events, both diagnosis levels, stable A/B bucket) ✅ built · 8/8 tests · pending deploy+migration+flag
-│   ├── Phase 2 Gap loop ⬜ (pilot-gated: matched A/B beats generic)
+│   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; identity=target_id) ✅ built · 13/13 · behind GAP_LOOP · pilot-gated
 │   ├── Phase 3 Fragile SRS ⬜ (pilot-gated)
 │   ├── Phase 4 Misconception challenge ⬜ (pilot-gated, hardest)
 │   └── boundary: V1.6 selects intervention · A6 schedules retest · A7 supplies fresh · V1.6 never generates
@@ -109,4 +109,4 @@ Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
 
-_Last ticked: 2026-08-25 — V1.6 Phase 1 instrumentation BUILT + verified (14/14 telemetry test; observe-only invariant proven). Awaiting: intervention_events migration + FEATURES.V16_TELEMETRY flip + deploy, then pilot. Phases 2–4 gated on matched-intervention A/B._
+_Last ticked: 2026-08-25 — Phase 1 telemetry LIVE (verified end-to-end). Phase 2 Gap re-baseline BUILT (Learn+Practice, no in-overlay retest, identity=target_id, A6 owns retention; INVARIANT proven: loop never touches _sched). 10/10 harnesses green incl. loop-sim (13/13 fast-forward). Behind GAP_LOOP (off) + pilot-gated on matched-vs-generic A/B. Foundation loop stress-tested clean._
