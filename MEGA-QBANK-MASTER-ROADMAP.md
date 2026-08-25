@@ -35,7 +35,7 @@ MEGA QBANK
 ├── A6 — TARGET SCHEDULING  🔒 FROZEN
 │   └── target_id propagation ✅ · Target retention ✅ · sibling rotation ✅ · anti-repeat ✅ · no_fresh_assessment ✅ · migration ✅ · live 14/14 ✅
 │
-├── A7 — AI PARALLEL RETEST  🟢 DEPLOYED / FROZEN CORE
+├── A7 — AI PARALLEL RETEST  🔒 BUILT · LIVE-DEPLOYED · FROZEN
 │   ├── no_fresh→generation ✅ · server Retest Pool ✅ · validation gate (round-trip MATCH→X, conf≥0.85) ✅
 │   ├── hybrid trigger (exhaustion pre-gen + lazy fallback) ✅ · anti-repeat/parity ✅ · live shadow 17-step ✅
 │   ├── ROLLOUT: FEATURES.A7=true (live, CDN-propagating) ✅
@@ -48,8 +48,8 @@ MEGA QBANK
 ├── V1.6 — INTERVENTION ENGINE  🟢 NEXT MAJOR (re-baselined on A6+A7; identity = target_id)
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
 │   ├── Phase 1 instrumentation (durable intervention_events, both diagnosis levels, stable A/B bucket) ✅ built · 8/8 tests · pending deploy+migration+flag
-│   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; identity=target_id) ✅ built · 13/13 · behind GAP_LOOP · pilot-gated
-│   ├── Phase 3 Fragile SRS ⬜ (pilot-gated)
+│   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; identity=target_id; gap_practice masked from frozen engine) ✅ built · 15/15 · GAP_LOOP=OFF (dormant for pilot) · pilot-gated
+│   ├── Phase 3 Fragile (light: confirm→reinforce→optional practice→A6) 📝 CONTRACT written · not built · pilot-gated
 │   ├── Phase 4 Misconception challenge ⬜ (pilot-gated, hardest)
 │   └── boundary: V1.6 selects intervention · A6 schedules retest · A7 supplies fresh · V1.6 never generates
 │
@@ -103,10 +103,10 @@ Per-box record templates:
 
 ## CURRENT POSITION & IMMEDIATE PATH
 
-Foundation 🔒 → A6 🔒 → **A7 🟢 (current: deployed, core frozen; hygiene done)** → A8 (only via contract) → **V1.6 Intervention Engine (next major)** → V1.7 → V1.8+.
+Foundation 🔒 → A6 🔒 → A7 🔒 (frozen) → A8 ⏸ (deferred, no evidence yet) → **V1.6 Phase 1 🟢 PILOT / DATA COLLECTION (current checkpoint)** · Phase 2 ✅ built/OFF · Phase 3 📝 contract · Phase 4 ⬜ → V1.7 → V1.8+.
 
 Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.8 in parallel.
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
 
-_Last ticked: 2026-08-25 — Phase 1 telemetry LIVE (verified end-to-end). Phase 2 Gap re-baseline BUILT (Learn+Practice, no in-overlay retest, identity=target_id, A6 owns retention; INVARIANT proven: loop never touches _sched). 10/10 harnesses green incl. loop-sim (13/13 fast-forward). Behind GAP_LOOP (off) + pilot-gated on matched-vs-generic A/B. Foundation loop stress-tested clean._
+_Last ticked: 2026-08-25 — CURRENT CHECKPOINT: V1.6 Phase 1 PILOT / data collection (telemetry live-verified). Found GAP_LOOP+POST_SESSION_FIX_QUEUE were shipped TRUE → set both FALSE so Phase 2 is truly dormant during the pilot (needs deploy). gap_practice masking RESOLVED (kept out of frozen _attempts, logged separately). Phase 3 (Fragile) contract written — not built. A7 frozen. Do NOT activate any V1.6 intervention until the pilot A/B earns it._

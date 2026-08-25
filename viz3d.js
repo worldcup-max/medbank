@@ -739,6 +739,10 @@
       frames: function () { return frames; },
       alive: function () { return running; },
       lastError: function () { return loopErr; },
+      /* ticks counts loop entries, frames counts frames actually drawn. ticks climbing while frames
+         stays at 0 means the loop is being called and choosing not to draw — a very different fault
+         from the loop never being scheduled at all, and indistinguishable from outside without this. */
+      stats: function () { return { ticks: ticks, frames: frames, skippedHidden: skippedHidden, hidden: document.hidden, spinning: spinning }; },
       dispose: function () { teardown(); }
     };
     /* One more chance to have been overtaken: three.js and the scene JSON are loaded, the renderer exists,
@@ -1285,6 +1289,15 @@
       if (controls.handleResize) controls.handleResize();   // trackball needs to be told
     }
     window.addEventListener('resize', resize); resize();
+    /* Coming back to the tab must repaint immediately rather than waiting on whatever the browser
+       decides to do with a rAF chain that was parked while hidden. */
+    /* Paint one frame directly rather than starting a second rAF chain — calling loop() again here would
+       leave two chains running and render everything twice a frame, forever. */
+    function wake() {
+      if (!running || document.hidden) return;
+      try { controls.update(); renderer.render(sceneObj, camera); frames++; } catch (e) {}
+    }
+    document.addEventListener('visibilitychange', wake);
     /* The render loop, and the loop's own black-box recorder.
        A viewport that renders nothing is the hardest failure in this player to diagnose, because every
        way it can happen looks identical from outside: a black rectangle that ignores the mouse. It can be
@@ -1295,11 +1308,18 @@
        So the loop counts its own frames, reports the first exception to the student instead of repeating
        it, and stops. `frames` and `alive` are on the player, which is what lets "is it drawing?" be
        answered in one line from the console rather than inferred from a rotation value. */
-    var frames = 0, loopErr = null;
+    var frames = 0, loopErr = null, ticks = 0, skippedHidden = 0;
     function loop() {
       if (!running) return;
       raf = requestAnimationFrame(loop);
-      if (document.hidden) return;                     // don't burn battery in a background tab
+      ticks++;
+      /* Skip the work in a background tab to save battery — but NEVER before the first frame is drawn.
+         A viewer that has not yet rendered has nothing on screen but black, so "economising" at that point
+         saves nothing and costs everything. `document.hidden` is also true in more situations than the
+         name suggests — a prerendered page, a tab restored in the background, a window occluded at the
+         moment of mount — and any of them left this player scheduled, alive, error-free and permanently
+         blank. Draw once, always; economise only once there is something to look at. */
+      if (document.hidden && frames > 0) { skippedHidden++; return; }
       try {
         var now = (window.performance || Date).now(), dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0;
         lastT = now;
@@ -1328,6 +1348,7 @@
       if (traceTimer) clearInterval(traceTimer);
       if (playTimer) clearInterval(playTimer);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', wake);
       try {
         Object.keys(meshes).forEach(function (k) {
           var m = meshes[k];

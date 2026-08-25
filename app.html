@@ -3866,8 +3866,14 @@ function gapAdvance(){ var g=GAPLOOP; if(!g) return;
 /* practice/retest answers are ordinary attempts so the frozen engine's stats include them */
 function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
   s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, target_id:(q.target_id||null), stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
-  s._attempts.push({ u:qbUid(), qh:qh, topicId:q._topicId||'*', chosen:chosen, answer:q.answer, ok:ok, ms:ms, mode:mode, ts:Date.now() });
-  if(s._attempts.length>4000) s._attempts=s._attempts.slice(s._attempts.length-4000); persist(); }catch(e){} }
+  /* V1.6 Phase 2 MASKING FIX: gap_practice is INTERVENTION telemetry, NOT a V1.5 diagnostic attempt. It must NEVER
+     enter _attempts (which feeds the frozen smartStats/smartDiagnose) — a correct immediate practice is acquisition,
+     not retention, and letting it overwrite the standing diagnosis would contaminate the Phase-1 experiment. The
+     frozen engine is untouched; we simply don't feed it. Logged separately + durably for analysis. */
+  s._gapPractice=s._gapPractice||[]; s._gapPractice.push({ qh:qh, target_id:(q.target_id||null), chosen:chosen, ok:!!ok, ms:ms, mode:(mode||'gap_practice'), ts:Date.now() });
+  if(s._gapPractice.length>2000) s._gapPractice=s._gapPractice.slice(-2000);
+  try{ if(typeof admApi==='function') admApi('/telemetry/intervention',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ t:'gap_practice', target_id:(q.target_id||null), qh:qh, ok:!!ok, attempt_signal:(ok?'correct':'incorrect'), diagnosis_version:'v1.5', intervention_version:'v1.6-phase2' })}).then(function(){},function(){}); }catch(_e){}
+  persist(); }catch(e){} }
 function gapRender(){ if(!GAPLOOP){ gapClose(); return; }
   var o=document.getElementById('gapOverlay'); if(!o){ o=document.createElement('div'); o.id='gapOverlay'; o.className='gapov'; o.onclick=function(e){ if(e.target===o) gapExit(); }; document.body.appendChild(o); }
   o.innerHTML='<div class="gapcard">'+gapBodyHtml()+'</div>'; }

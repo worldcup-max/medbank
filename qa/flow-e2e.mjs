@@ -125,8 +125,10 @@ g = A.getGAPLOOP();
 check("advanced straight to RESULT (no retest step)", g.step==="result");
 check("intervention_completed logged with practice_ok", (last("intervention_completed")||{}).practice_ok===true);
 // practice recorded as an ordinary attempt so the engine counts it
-const gapModes = SCENARIO._attempts.filter(a=>/^gap_/.test(a.mode)).map(a=>a.mode);
-check("practice logged as ordinary attempt (gap_practice)", gapModes.includes("gap_practice"), gapModes.join(","));
+const gapPrac = (SCENARIO._gapPractice||[]).map(a=>a.mode);
+check("gap_practice logged SEPARATELY, never in _attempts (masking fix)",
+      gapPrac.includes("gap_practice") && !SCENARIO._attempts.some(a=>/^gap_/.test(a.mode)),
+      "gapPractice=["+gapPrac.join(",")+"] _attempts-gap="+SCENARIO._attempts.filter(a=>/^gap_/.test(a.mode)).length);
 
 /* ============ ROUTING: misconception → drill, fragile → drill ============ */
 reset();

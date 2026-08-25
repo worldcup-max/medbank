@@ -83,4 +83,8 @@ win.MEDBANK_CONFIG.FEATURES.GAP_LOOP=true;
 // telemetry carries target_id + versions
 ok(logged.some(e=>e.t==='intervention_shown' && e.target_id==='TG' && e.intervention_version==='v1.6-phase2'), 'R8 telemetry keyed by target_id + version');
 
+// R9 MASKING INVARIANT: gap_practice logged separately, NEVER into the frozen engine's _attempts
+ok((qbStore()._gapPractice||[]).some(a=>a.mode==='gap_practice'), 'R9 gap_practice logged separately (_gapPractice)');
+ok(!(qbStore()._attempts||[]).some(a=>/^gap_/.test(a.mode||'')), 'R9 gap_practice NEVER enters _attempts (standing diagnosis uncontaminated)');
+
 console.log('\n'+pass+' passed, '+fail+' failed'); process.exit(fail?1:0);
