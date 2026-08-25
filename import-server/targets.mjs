@@ -261,6 +261,39 @@ Return exactly:
 HARD RULE: a shared topic, disease, treatment, mechanism, clinical scenario, or single fact is NOT sufficient - the claim a learner must master to answer must be the same. But when the claim IS the same (even reworded), you MUST return it with high confidence, never null.`;
 }
 
+/* V3 adjudication prompt — encodes an ORDERED hierarchy with atomic-claim reasoning and an explicit
+   facet/subset/consequence/broader-target guard (the exact failure mode V2 fell into). Under A/B/C
+   evaluation vs V1; not in production. */
+export function buildReconcilePromptV3(proposed, candidates){
+  const list = candidates.map((c,i)=>`${i+1}. id=${c.target_id}
+   statement: ${c.canonical_statement}
+   excludes: ${(c.excludes||[]).join("; ")||"(none)"}`).join("\n");
+  return `You are reconciling a medical knowledge target. A Knowledge Target is ONE independently-testable claim (atomic) — not a bundle of related facts. Decide which EXISTING target (if any) tests the SAME atomic claim as the PROPOSED one. Answer ONLY JSON.
+
+Reason in THIS ORDER:
+1. Identify the single atomic claim of the PROPOSED statement, and of each candidate.
+2. Is the proposed claim merely a FACET, SUBSET, SPECIFIC INSTANCE, or CONSEQUENCE of a candidate's claim — or is a candidate BROADER and covering more than the proposed? If YES -> NOT the same (return null). Critical: "the candidate contains the information needed to answer the proposed question" does NOT make them the same target.
+3. If NEITHER claim contains the other: would mastering the candidate's exact atomic claim NECESSARILY let a learner answer a question on the proposed atomic claim, and vice versa? If YES -> SAME target, return it with HIGH confidence (0.90-1.0).
+4. Otherwise -> NOT the same (null). If you genuinely cannot tell whether they are one atomic claim, return the closest with MIDDLE confidence (0.5-0.7).
+
+These are NOT the same target (return null), even at high word overlap:
+- a facet vs a broader bundle (e.g. "NG-feeding indication" vs "admission + oxygen + feeding management")
+- a consequence/complication vs the diagnostic criterion (e.g. "DIC causes bleeding and ischaemia" vs "DIC lab picture: low platelets, high D-dimer")
+- prevention vs treatment; aetiology/portal-of-entry vs clinical presentation; an admission criterion vs a treatment/oxygen decision.
+
+PROPOSED statement: ${proposed.knowledge_statement}
+
+EXISTING CANDIDATES (choose only from these):
+${list}
+
+Return exactly:
+{ "target_id": "<id of the SAME atomic claim, or null>",
+  "confidence": <0..1 — high ONLY when the atomic claims are the same; null/low when one is a facet/subset/consequence of the other>,
+  "second_id": "<next closest id or null>", "second_confidence": <0..1> }
+
+HARD RULE: shared topic, disease, treatment, mechanism, clinical scenario, or single fact is NOT sufficient. Same atomic claim (even reworded) -> high confidence MATCH. A facet/subset/consequence/broader relationship -> null.`;
+}
+
 /* build a fresh canonical target record from a proposal (used when the decision is NEW) */
 export function newTargetRecord(proposed, target_id, difficulty){
   return {
