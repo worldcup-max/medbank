@@ -2220,6 +2220,43 @@ app.get("/admin/targets/matches", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+app.get("/admin/integrated/inventory", async (req,res)=>{
+  /* READ-ONLY Integrated inventory probe. A heuristic CANDIDATE SCAN, NOT a classifier: it surfaces questions that
+     MIGHT integrate ≥2 domains for HUMAN REVIEW. It writes nothing, sets no metadata, and changes no student
+     behavior. Candidates are NOT "integrated questions" until a human confirms integrated_topics[]. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const DOMAINS={ cardio:/\b(cardiac|heart|myocard|angina|chest pain|ecg|arrhythm|hypertensi|heart failure)\b/i,
+      renal:/\b(renal|kidney|ckd|nephro|creatinine|dialysis|aki)\b/i, endocrine:/\b(diabet|thyroid|insulin|glucose|adrenal|endocrine)\b/i,
+      resp:/\b(respirat|lung|pneumonia|asthma|copd|dyspn|bronch|pulmonary)\b/i, neuro:/\b(neuro|seizure|stroke|meningit|consciousness|cerebral|epilep)\b/i,
+      infect:/\b(sepsis|infection|fever|antibiotic|malaria|hiv|tubercul|\btb\b)\b/i, hepatic:/\b(liver|hepat|jaundice|cirrhos)\b/i,
+      obgyn:/\b(pregnan|obstetric|eclampsia|labour|postpartum|puerper|gynae)\b/i, gi:/\b(gastro|bowel|diarrhoea|gi bleed|abdomin|pancreat)\b/i,
+      haem:/\b(anaemia|anemia|bleeding|coagul|platelet|sickle)\b/i, neonate:/\b(neonat|newborn|prematur|birth asphyxia)\b/i };
+    const SYNTH=new Set(["management","next_step","complications","differential"]);
+    const tr=await admin.from("topics").select("id,extras").not("extras","is",null).limit(3000);
+    const topics=(tr.data||[]).filter(t=>t.extras && Array.isArray(t.extras.qbank));
+    let total=0, candidates=0; const byCombo={}, bySkill={};
+    topics.forEach(t=>{ t.extras.qbank.forEach(q=>{ if(!q||!q.stem) return; total++;
+      const stem=String(q.stem);
+      const hit=Object.keys(DOMAINS).filter(d=>DOMAINS[d].test(stem));
+      if(hit.length>=2 && SYNTH.has(String(q.skill||"").toLowerCase())){
+        candidates++;
+        const combo=hit.slice(0,2).sort().join(" + "); byCombo[combo]=(byCombo[combo]||0)+1;
+        const sk=String(q.skill||"?"); bySkill[sk]=(bySkill[sk]||0)+1;
+      }
+    }); });
+    const comboArr=Object.entries(byCombo).map(([k,v])=>({combo:k,n:v})).sort((a,b)=>b.n-a.n);
+    // GATES (informational — human decides): enough candidates, enough breadth, enough per-combo for MIN_EV=3
+    const distinctCombos=comboArr.length;
+    const combosOverMinEv=comboArr.filter(c=>c.n>=3).length;
+    res.json({ ok:true, disclaimer:"HEURISTIC CANDIDATES — require human review. NOT a classifier; nothing written.",
+      totals:{ questions_scanned:total, topics:topics.length, candidate_questions:candidates, candidate_rate_pct: total?Math.round(candidates/total*1000)/10:0 },
+      by_apparent_combination: comboArr.slice(0,25),
+      by_skill: bySkill,
+      gates:{ distinct_combinations:distinctCombos, "combinations_with_ev>=3":combosOverMinEv,
+        note:"Gate1 enough candidates? Gate2 enough breadth (distinct combos)? Gate3 enough per-combo for MIN_EV=3 learning analytics?" } });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.get("/admin/targets/health", async (req,res)=>{
   /* Read-only target-layer diagnostics (no mutation). Surfaces the evidence for the deferred decisions:
      orphans (targets with 0 authoritative question mappings), over-broad targets (atomicity candidates),
