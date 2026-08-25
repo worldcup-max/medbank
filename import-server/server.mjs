@@ -23,7 +23,7 @@ import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
-import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
+import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, buildReconcilePromptV2, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -1866,6 +1866,58 @@ app.post("/admin/targets/reset", async (req,res)=>{
    exists but under a DIFFERENT topic/skill, so the hard pre-filter excluded it), C_matcher (a same-topic+skill
    candidate existed and the matcher still said not-same). Answers: how many of the +N duplicates are pre-filter
    exclusions? Changes NOTHING. ---- */
+/* ---- Admin: adjudicator A/B eval (read-only). Builds a calibration set from the DB with OBJECTIVE labels
+   (human-resolved MATCH/NEW = authority; AMBIGUOUS whose proposed≈candidate at ≥0.85 overlap = must-MATCH),
+   then runs each case through the V1 and V2 reconcile prompts. Requirement: obvious-same -> MATCH, human-NEW ->
+   not MATCH (zero false merges). Nothing is written. ---- */
+app.post("/admin/targets/adjudicate-eval", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const tr=await admin.from("knowledge_targets").select("target_id,canonical_statement,excludes");
+    const tmap={}; (tr.data||[]).forEach(t=>{ tmap[t.target_id]=t; });
+    const qr=await admin.from("question_targets").select("qh,target_id,map_state,proposed,candidates,decision,resolution");
+    const rows=qr.data||[];
+    const toks=x=>new Set(String(x||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3));
+    const jac=(a,b)=>{ let i=0; a.forEach(w=>{ if(b.has(w)) i++; }); const u=a.size+b.size-i; return u?i/u:0; };
+    const cases=[];
+    rows.forEach(r=>{
+      const p=r.proposed||{}; if(!p.knowledge_statement) return;
+      let candId=null, expect=null;
+      if(r.resolution && r.resolution.action==="match"){ candId=r.resolution.target_id; expect="MATCH"; }
+      else if(r.resolution && r.resolution.action==="new"){ candId=(r.candidates&&r.candidates[0]&&r.candidates[0].target_id)||null; expect="NOT_MATCH"; }
+      else if(r.map_state==="MATCH" && r.decision && (r.decision.matched_via==="T2"||r.decision.matched_via==="T3")){ candId=r.target_id; expect="MATCH"; }
+      else if(r.map_state==="AMBIGUOUS" && !r.resolution){ candId=(r.candidates&&r.candidates[0]&&r.candidates[0].target_id)||null;
+        const cs=candId&&tmap[candId]?tmap[candId].canonical_statement:""; const ov=jac(toks(p.knowledge_statement), toks(cs));
+        expect = ov>=0.85 ? "MATCH" : "UNSURE"; }
+      else return;
+      if(!candId || !tmap[candId]) return;
+      cases.push({ qh:r.qh, proposed:p, candId, candStmt:tmap[candId].canonical_statement, candExcludes:tmap[candId].excludes||[], expect });
+    });
+    async function adjudicate(promptFn, cse){
+      const cand=[{ target_id:cse.candId, canonical_statement:cse.candStmt, excludes:cse.candExcludes }];
+      let adj=null;
+      try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:promptFn(cse.proposed, cand), parts:[], images:[], max_tokens:300, temperature:0, json:true });
+        const t=gen.text||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); let o={}; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){}
+        adj={ target_id:o.target_id||null, confidence:Number(o.confidence)||0, second_id:o.second_id||null, second_confidence:Number(o.second_confidence)||0 };
+      }catch(e){ adj=null; }
+      const dec=decide(cse.proposed, cand, adj, TARGET_CFG);
+      return { state:dec.state, conf:(adj?adj.confidence:0) };
+    }
+    const out=[];
+    for(const cse of cases){
+      const v1=await adjudicate(buildReconcilePrompt, cse);
+      const v2=await adjudicate(buildReconcilePromptV2, cse);
+      out.push({ qh:cse.qh.slice(0,6), expect:cse.expect, v1:v1.state, v1c:v1.conf, v2:v2.state, v2c:v2.conf,
+        P:(cse.proposed.knowledge_statement||"").slice(0,70), C:(cse.candStmt||"").slice(0,70) });
+    }
+    const summ=(key)=>{ const s={ expected_match:0, got_match_of_expected:0, expected_notmatch:0, false_match:0, unsure:0, unsure_match:0 };
+      out.forEach(o=>{ if(o.expect==="MATCH"){ s.expected_match++; if(o[key]==="MATCH") s.got_match_of_expected++; }
+        else if(o.expect==="NOT_MATCH"){ s.expected_notmatch++; if(o[key]==="MATCH") s.false_match++; }
+        else { s.unsure++; if(o[key]==="MATCH") s.unsure_match++; } }); return s; };
+    res.json({ ok:true, nCases:cases.length, v1:summ("v1"), v2:summ("v2"), items:out });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 /* ---- Admin: list MATCH rows by retrieval tier (read-only) — the false-MATCH precision gate. Shows each match's
    proposed statement vs the matched target's canonical contract so every non-T1 (widened-recall) match can be
    inspected for genuine independently-testable equivalence. ---- */

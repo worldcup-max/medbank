@@ -234,6 +234,33 @@ Return exactly:
 Be conservative: if the proposed target tests a different fact, angle, or reasoning step than a candidate — even within the same disease — return null. Do NOT merely match on shared topic words.`;
 }
 
+/* V2 adjudication prompt — same output contract as V1 but explicitly instructs the model to COMMIT on obvious
+   equivalence (identical / paraphrase → high confidence) instead of defaulting to null, while keeping the hard
+   rule (shared topic/treatment/mechanism/fact ≠ same target). Under A/B evaluation vs V1; not in production. */
+export function buildReconcilePromptV2(proposed, candidates){
+  const list = candidates.map((c,i)=>`${i+1}. id=${c.target_id}
+   statement: ${c.canonical_statement}
+   excludes: ${(c.excludes||[]).join("; ")||"(none)"}`).join("\n");
+  return `You are reconciling a medical knowledge target. Decide which EXISTING target (if any) tests the SAME independently-testable knowledge claim as the PROPOSED one. Answer ONLY JSON.
+
+Apply this hierarchy exactly:
+- IDENTICAL, or a PARAPHRASE of a candidate's claim (same underlying fact/principle, different wording) -> that IS the same target. Return it with HIGH confidence (0.90-1.0). Do NOT hesitate on obvious equivalence.
+- A DIFFERENT facet of the same disease (diagnosis vs management vs investigation vs complication vs etiology/prevention), a related-but-different fact, or one requiring knowledge the candidate does not entail -> NOT the same. Return null.
+- Genuine uncertainty (you truly cannot tell if it is the same claim) -> return your closest candidate with a MIDDLE confidence (0.5-0.7); do NOT force a null.
+
+PROPOSED statement: ${proposed.knowledge_statement}
+
+EXISTING CANDIDATES (choose only from these):
+${list}
+
+Return exactly:
+{ "target_id": "<id of the SAME target, or null>",
+  "confidence": <0..1 that it is the SAME independently-testable claim - USE THE FULL SCALE: high for clear equivalence, middle for genuine uncertainty, low/null for different>,
+  "second_id": "<next closest id or null>", "second_confidence": <0..1> }
+
+HARD RULE: a shared topic, disease, treatment, mechanism, clinical scenario, or single fact is NOT sufficient - the claim a learner must master to answer must be the same. But when the claim IS the same (even reworded), you MUST return it with high confidence, never null.`;
+}
+
 /* build a fresh canonical target record from a proposal (used when the decision is NEW) */
 export function newTargetRecord(proposed, target_id, difficulty){
   return {
