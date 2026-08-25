@@ -2220,6 +2220,31 @@ app.get("/admin/targets/matches", async (req,res)=>{
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
+/* User topic management — rename / delete your OWN topic. Ownership-checked; outside the frozen V1.6/A6/A7 boundaries. */
+app.post("/topic/rename", async (req,res)=>{
+  try{
+    const user=await getUser(req); if(!user) return res.status(401).json({ error:"auth required" });
+    const { topic_id, name } = req.body||{};
+    if(!topic_id || !name || !String(name).trim()) return res.status(400).json({ error:"topic_id and name required" });
+    const t=await admin.from("topics").select("id,account_id").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id && t.data.account_id!==user.id) return res.status(403).json({ error:"not your topic" });
+    const up=await admin.from("topics").update({ title:String(name).trim() }).eq("id",topic_id);
+    res.json({ ok:!up.error, error:(up.error&&up.error.message)||null });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/topic/delete", async (req,res)=>{
+  try{
+    const user=await getUser(req); if(!user) return res.status(401).json({ error:"auth required" });
+    const { topic_id } = req.body||{};
+    if(!topic_id) return res.status(400).json({ error:"topic_id required" });
+    const t=await admin.from("topics").select("id,account_id").eq("id",topic_id).maybeSingle();
+    if(!t.data) return res.status(404).json({ error:"topic not found" });
+    if(t.data.account_id && t.data.account_id!==user.id) return res.status(403).json({ error:"not your topic" });
+    const del=await admin.from("topics").delete().eq("id",topic_id);
+    res.json({ ok:!del.error, deleted:topic_id, error:(del.error&&del.error.message)||null });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.get("/admin/integrated/inventory", async (req,res)=>{
   /* READ-ONLY Integrated inventory probe. A heuristic CANDIDATE SCAN, NOT a classifier: it surfaces questions that
      MIGHT integrate ≥2 domains for HUMAN REVIEW. It writes nothing, sets no metadata, and changes no student

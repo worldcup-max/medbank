@@ -1489,6 +1489,20 @@ function resetTopicProgress(id){
   delete DATA.done[t.id]; delete DATA.read[t.id]; delete DATA.topics[t.id];
   persist(); render();
 }
+/* Rename / remove a topic (your own content; server-backed so it persists across reload). */
+async function mbRenameTopic(id){ var t=topById(id); if(!t) return;
+  var name=prompt('Rename this topic:', t.name||''); if(name==null) return; name=String(name).trim();
+  if(!name || name===t.name) return;
+  try{ var r=await admApi('/topic/rename',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:id, name:name})});
+    if(r&&r.ok&&r.data&&r.data.ok){ t.name=name; if(typeof MB_loadProfileContent==='function'){ try{ await MB_loadProfileContent(); }catch(e){} } render(); try{mbToast('Renamed');}catch(e){} }
+    else alert('Rename failed: '+((r&&r.data&&r.data.error)||'server error')); }
+  catch(e){ alert('Rename failed: '+(e.message||e)); } }
+async function mbDeleteTopic(id){ var t=topById(id); if(!t) return;
+  if(!confirm('Delete the topic "'+(t.name||'')+'" and all its cards & questions? This cannot be undone.')) return;
+  try{ var r=await admApi('/topic/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:id})});
+    if(r&&r.ok&&r.data&&r.data.ok){ if(typeof MB_loadProfileContent==='function'){ try{ await MB_loadProfileContent(); }catch(e){} } location.hash='#/home'; render(); try{mbToast('Topic deleted');}catch(e){} }
+    else alert('Delete failed: '+((r&&r.data&&r.data.error)||'server error')); }
+  catch(e){ alert('Delete failed: '+(e.message||e)); } }
 function exportTopicPDF(id){
   const t=topById(id); if(!t) return;
   const w=window.open('','_blank'); if(!w){ alert('Allow pop-ups for this site to export, then try again.'); return; }
@@ -2637,7 +2651,7 @@ function pageTopic(id){
      ${pipeline}
      ${t.ready?masteryChips((t.recall||[]).map(c=>cid(t.id,'recall',c))):''}
      ${t.ready?modeSwitcher(t):''}
-     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="addToFolderPrompt('${t.id}')">📁 Add to folder</button><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button></div>`:''}
+     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="addToFolderPrompt('${t.id}')">📁 Add to folder</button><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button><button class="btn" style="font-size:12.5px" onclick="mbRenameTopic('${t.id}')">✏️ Rename</button><button class="btn" style="font-size:12.5px;color:#c0392b" onclick="mbDeleteTopic('${t.id}')">🗑 Remove</button></div>`:''}
      ${body}`;
 }
 
