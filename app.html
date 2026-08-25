@@ -2951,7 +2951,7 @@ function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct+
   var tid = q._topicId || QB.topicId;
   var s=qbStore(); var qh = q._qh || (q._qh = qbHash(q.stem+'|'+(q.options||[]).join('|'))); QB._lastQh=qh;
   // snapshot the question so it can be re-served & analysed even after the topic is rebuilt
-  s._qmeta[qh] = { topicId:tid, stem:q.stem, lead_in:q.lead_in||'', options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), trap:(q.trap_explanation||q.trap||''), trap_type:(q.trap_type||''), trap_explanation:(q.trap_explanation||q.trap||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), system:(q.system||''), cognitive_level:qbCogOf(q), difficulty:(q.difficulty||''), skill:(q.skill||''), src:(q.src||'') };
+  s._qmeta[qh] = { topicId:tid, target_id:(q.target_id||null), stem:q.stem, lead_in:q.lead_in||'', options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), trap:(q.trap_explanation||q.trap||''), trap_type:(q.trap_type||''), trap_explanation:(q.trap_explanation||q.trap||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), system:(q.system||''), cognitive_level:qbCogOf(q), difficulty:(q.difficulty||''), skill:(q.skill||''), src:(q.src||'') };
   s._attempts.push({ u:qbUid(), qh:qh, topicId:tid, chosen:j, answer:q.answer, ok:ok, ms:ms, mode:QB.mode, ts:Date.now() });
   if(s._attempts.length>4000) s._attempts=s._attempts.slice(s._attempts.length-4000);
   // legacy per-topic cache (keeps the old quick-accuracy line working with no recompute)
@@ -2986,46 +2986,92 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
  *   correct+confident/unknown → secure: never newly scheduled; advances a schedule if one exists
  * ============================================================== */
 var QB_LADDER=[1,3,7,14];
-function qbSched(){ var s=qbStore(); return s._sched=s._sched||{}; }        // qh -> { qh,n,streak,interval,dueAt,lastOk,conf,miscon,prio,lastSeen,firstAt,_day }
+function qbSched(){ var s=qbStore(); return s._sched=s._sched||{}; }        // retentionKey -> { key,n,streak,interval,dueAt,lastOk,conf,miscon,prio,lastSeen,firstAt,_day,servedQhs,noFresh }
 function qbLadderNext(iv){ for(var i=0;i<QB_LADDER.length;i++){ if(QB_LADDER[i]>iv) return QB_LADDER[i]; } return 99; }   // 99 = past 14 → graduate
-/* apply ONE finalized attempt to the schedule. ok=bool; conf=0..3 or null (modes without a confidence prompt). */
+function qbUniq(a){ var seen={},o=[]; (a||[]).forEach(function(x){ if(x==null)return; var k=String(x); if(!seen[k]){seen[k]=1;o.push(x);} }); return o; }
+/* A6: retention identity. A question inherits its Target's schedule when it has one; otherwise it falls back to
+   its own hash (legacy path, and the path for AMBIGUOUS / not-yet-annotated questions). target_id is resolved from
+   the stored _qmeta snapshot, which the server stamps onto MATCH / human-NEW questions only (AMBIGUOUS → null). */
+function qbTargetOf(qh){ var m=(qbStore()._qmeta||{})[qh]; return (m&&m.target_id)?m.target_id:null; }
+function qbRetentionKey(qh){ var t=qbTargetOf(qh); return t?('t:'+t):('q:'+qh); }
+/* one-time, idempotent fold of legacy bare-qh schedule records into retention-keyed records. Safe to call on every
+   load: already-migrated keys ('t:'/'q:') are skipped; a legacy qh whose Target is now known folds into 't:'+id. */
+function qbMigrateSched(){ try{ var sc=qbSched(), dirty=false;
+  Object.keys(sc).forEach(function(K){ if(K.indexOf('t:')===0||K.indexOf('q:')===0) return;   // already retention-keyed
+    dirty=true; var qh=K, t=qbTargetOf(qh), nk=t?('t:'+t):('q:'+qh), old=sc[K]||{}, cur=sc[nk];
+    if(!cur){ old.key=nk; old.servedQhs=qbUniq((old.servedQhs||[]).concat(qh)); sc[nk]=old; }
+    else { cur.dueAt=Math.min(cur.dueAt,old.dueAt); cur.interval=Math.max(cur.interval||0,old.interval||0);
+      cur.servedQhs=qbUniq((cur.servedQhs||[]).concat(old.servedQhs||[],qh)); cur.prio=Math.max(cur.prio||0,old.prio||0);
+      cur.miscon=!!(cur.miscon||old.miscon); cur.n=Math.max(cur.n||0,old.n||0); }
+    delete sc[K]; });
+  if(dirty) persist(); }catch(err){} }
+/* apply ONE finalized attempt to the schedule, keyed by retention identity (Target when known, else qh).
+   ok=bool; conf=0..3 or null (modes without a confidence prompt). Anti-repeat: the answered qh is recorded on the
+   record's servedQhs so a Target-level retest never re-serves a question the student already saw for that Target. */
 function qbSchedApply(qh, ok, conf){ try{
-  if(!qh) return; var sc=qbSched(), e=sc[qh], today=dayNum();
+  if(!qh) return; var sc=qbSched(), key=qbRetentionKey(qh), e=sc[key], today=dayNum();
   var known=(conf!=null && !isNaN(conf)), hi=known&&conf>=2, lo=known&&conf<=1;
   var action, prio=0, miscon=false;
   if(!ok){ action='reset'; prio=hi?3:2; miscon=hi; }                        // wrong (confident-wrong = misconception)
   else if(lo){ action='hold'; prio=1; }                                    // correct-but-unsure = fragile
   else { action = e ? 'advance' : 'none'; }                                // secure correct: advance an existing schedule, never create one
   if(action==='none') return;
-  if(!e){ e={ qh:qh, n:0, streak:0, interval:0, dueAt:today, firstAt:today }; }
+  if(!e){ e={ key:key, n:0, streak:0, interval:0, dueAt:today, firstAt:today, servedQhs:[] }; }
   if(e._day!==today){                                                      // move the ladder at most once per attempt-day
     e.n=(e.n||0)+1;
     if(action==='reset'){ e.streak=0; e.interval=1; }                      // failure → back to +1, escalate (does NOT continue the ladder)
     else if(action==='hold'){ if(!e.interval) e.interval=1; }             // fragile holds its current step
     else if(action==='advance'){ e.streak=(e.streak||0)+1; e.interval=qbLadderNext(e.interval);
-      if(e.interval===99){ delete sc[qh]; persist(); return; } }           // proven past 14 → graduate off the schedule
+      if(e.interval===99){ delete sc[key]; persist(); return; } }          // proven past 14 → graduate off the schedule
     e.dueAt=today+e.interval; e._day=today;
   }
   e.lastOk=ok; if(known)e.conf=conf; e.miscon=miscon; e.prio=prio; e.lastSeen=today;
-  sc[qh]=e; persist();
+  e.servedQhs=qbUniq((e.servedQhs||[]).concat(qh)); e.key=key; e.noFresh=false;
+  sc[key]=e; persist();
 }catch(err){} }
 /* build a QB item from a stored _qmeta record (carries _qh + _topicId so qbRecord/qbNext work) */
-function qbItemFromMeta(qh,m){ if(!m) return null; return { _qh:qh, _topicId:m.topicId||'*', stem:m.stem, lead_in:m.lead_in||'',
+function qbItemFromMeta(qh,m){ if(!m) return null; return { _qh:qh, _topicId:m.topicId||'*', target_id:(m.target_id||null), stem:m.stem, lead_in:m.lead_in||'',
   options:m.options, answer:m.answer, rationales:m.rationales||[], objective:m.objective||m.teaching||'', teaching:m.teaching||m.objective||'',
   trap:m.trap_explanation||m.trap||'', trap_type:m.trap_type||'', trap_explanation:m.trap_explanation||m.trap||'',
   tag:m.tag||m.subtopic||'General', subtopic:m.subtopic||m.tag||'', system:m.system||'', cognitive_level:m.cognitive_level||qbCogOf(m),
   difficulty:m.difficulty||'', skill:m.skill||'', src:m.src||'' }; }
-/* concepts due for retest today, highest priority (confident-wrong) first, then most overdue */
-function qbDueList(){ var sc=qbSched(), meta=qbStore()._qmeta||{}, today=dayNum(), out=[];
-  Object.keys(sc).forEach(function(qh){ var e=sc[qh]; if(!e || e.dueAt>today || !meta[qh]) return; out.push(e); });
+/* A6: all live questions belonging to a Target, minus ones already served for it. Used to pick a FRESH assessment
+   of the same knowledge at retest time (never the identical question, never another Target's question). */
+function qbQuestionsForTarget(targetId, served){ var out=[], sv={}; (served||[]).forEach(function(h){ sv[h]=1; });
+  (allTopics||[]).forEach(function(t){ if(!t||!t.ready) return; var qs=(t.extras&&t.extras.qbank)||[];
+    qs.forEach(function(q){ if(!q||q.target_id!==targetId) return; var h=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
+      if(sv[h]) return; var it=qbItemFromMeta(h, { topicId:t.id, target_id:targetId, stem:q.stem, lead_in:q.lead_in, options:q.options, answer:q.answer,
+        rationales:q.rationales, objective:q.objective, teaching:q.teaching, trap_explanation:q.trap_explanation, trap:q.trap, trap_type:q.trap_type,
+        tag:q.tag, subtopic:q.subtopic, system:q.system, cognitive_level:qbCogOf(q), difficulty:q.difficulty, skill:q.skill, src:q.src });
+      if(it) out.push(it); }); });
+  return out; }
+/* resolve the item to actually serve for a due schedule record. Target records draw a fresh, unused question for the
+   Target; if none remain we flag no_fresh_assessment (A7 will generate one) and serve nothing. Legacy 'q:' records
+   re-serve their own stored question, exactly as the Phase-1 scheduler did. Returns {item} or {noFresh:true}. */
+function qbServeForRecord(e){ var meta=qbStore()._qmeta||{};
+  if(e.key && e.key.indexOf('t:')===0){ var tid=e.key.slice(2), pool=qbQuestionsForTarget(tid, e.servedQhs||[]);
+    if(!pool.length){ e.noFresh=true; return {noFresh:true}; } e.noFresh=false; return {item:pool[0]}; }
+  var qh=(e.key&&e.key.indexOf('q:')===0)?e.key.slice(2):e.key; var it=qbItemFromMeta(qh, meta[qh]);
+  if(!it){ return {noFresh:true}; } return {item:it}; }
+/* concepts due for retest today that can actually be served, highest priority (confident-wrong) first, then most
+   overdue. A due Target with no fresh question left (no_fresh_assessment) is intentionally excluded here so it does
+   not inflate the commitment count; it stays due and reappears once a fresh question exists. */
+function qbDueList(){ var sc=qbSched(), today=dayNum(), out=[];
+  Object.keys(sc).forEach(function(key){ var e=sc[key]; if(!e || e.dueAt>today) return; e.key=e.key||key;
+    var served=qbServeForRecord(e); if(served.noFresh) return; e._serve=served.item; out.push(e); });
   out.sort(function(a,b){ return (b.prio||0)-(a.prio||0) || (a.dueAt||0)-(b.dueAt||0); });
   return out; }
 function qbDueCount(){ return qbDueList().length; }
 function qbScheduledCount(){ return Object.keys(qbSched()).length; }
-/* start a spaced-retest session from the due concepts (cold, tutor, renders on the Mega page) */
+/* start a spaced-retest session from the due concepts (cold, tutor, renders on the Mega page). Each due record
+   contributes ONE fresh item; serving it records the qh on that record's servedQhs so the next retest rotates on. */
 function qbStartDue(){ var due=qbDueList(); if(!due.length){ mbToast('No Q-bank retests are due right now — nice.'); return; }
-  var meta=qbStore()._qmeta||{}, items=due.map(function(e){ return qbItemFromMeta(e.qh, meta[e.qh]); }).filter(Boolean).slice(0,20);
+  var items=[], sc=qbSched();
+  due.forEach(function(e){ var it=e._serve; if(!it) return; items.push(it);
+    var rec=sc[e.key]; if(rec){ rec.servedQhs=qbUniq((rec.servedQhs||[]).concat(it._qh)); } });
+  items=items.slice(0,20);
   if(!items.length){ mbToast('Those concepts are no longer available to retest.'); return; }
+  persist();
   QB={ topicId:'*', mode:'tutor', items:qbShuffle(items), i:0, picked:null, answered:false, correct:0, results:[], done:false,
     startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, smart:true, exposure:'focused', kind:'due_retest', mistakes:true,
     smartWhy:'Spaced retest — concepts you missed or were unsure about, brought back on schedule.',
@@ -3754,7 +3800,7 @@ function gapAdvance(){ var g=GAPLOOP; if(!g) return;
   g.step='result'; smartLog({t:'intervention_completed', itype:'gap', concept:g.concept, ab:g.ab, retest_ok:!!g.retestOk}); gapRender(); }
 /* practice/retest answers are ordinary attempts so the frozen engine's stats include them */
 function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
-  s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
+  s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, target_id:(q.target_id||null), stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
   s._attempts.push({ u:qbUid(), qh:qh, topicId:q._topicId||'*', chosen:chosen, answer:q.answer, ok:ok, ms:ms, mode:mode, ts:Date.now() });
   if(s._attempts.length>4000) s._attempts=s._attempts.slice(s._attempts.length-4000); persist(); }catch(e){} }
 function gapRender(){ if(!GAPLOOP){ gapClose(); return; }
@@ -6785,6 +6831,7 @@ function pageLoadingTopic(){
 }
 function render(){
   const p=(location.hash.slice(2)||'home').split('/');
+  try{ if(!window._qbSchedMigrated && typeof qbMigrateSched==='function'){ window._qbSchedMigrated=true; qbMigrateSched(); } }catch(e){}   // A6: one-time idempotent fold of legacy qh-keyed schedule records into Target-keyed records
   try{ if(window.MB3D) MB3D.dispose(); }catch(e){}   // free the 3D canvas/GPU memory before the page is replaced (re-mounts below if the new page needs it)
   // TOP-08: leaving a topic (or switching to a different topic) stops podcast audio — it lived on document.body and kept playing forever otherwise.
   try{ if(typeof podStopAudio==='function' && (p[0]!=='topic' || (typeof POD!=='undefined' && POD && p[1]!==POD.topicId))) podStopAudio(); }catch(e){}

@@ -597,7 +597,38 @@ async function annotateTargets(questions, ctx){
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
     }
     console.log("[targets] annotated "+todo.length+" question(s)"+(ctx&&ctx.topic_id?" (topic "+ctx.topic_id+")":""));
+    if(ctx&&ctx.topic_id) await stampTargetIds(ctx.topic_id);   // A6: propagate resolved target_ids onto extras.qbank for the client scheduler
   }catch(e){ console.warn("[targets] annotate failed (non-blocking):", e.message); }
+}
+
+
+/* A6: project the AUTHORITATIVE Target mappings from question_targets onto each question in a topic's extras.qbank,
+   so the offline client scheduler can key retention by target_id. Authoritative = MATCH (ai) OR any human
+   resolution (human NEW / human-resolved). ai-NEW and AMBIGUOUS/unresolved are deliberately NOT stamped
+   (structurally excluded from Target scheduling). Idempotent + self-correcting: a superseded/removed mapping
+   strips a stale target_id. Never touches question_targets — read-only projection. */
+async function stampTargetIds(topic_id){
+  try{
+    if(!topic_id) return { stamped:0 };
+    const t=await admin.from("topics").select("id,extras").eq("id",topic_id).maybeSingle();
+    if(!t.data||!t.data.extras||!Array.isArray(t.data.extras.qbank)) return { stamped:0 };
+    const qs=t.data.extras.qbank, hs=qs.map(qhOf);
+    const qt=await admin.from("question_targets").select("qh,target_id,map_state,mapping_source,mapping_status").in("qh",hs);
+    const map={};
+    (qt.data||[]).forEach(r=>{
+      if(r.mapping_status && r.mapping_status!=="active") return;
+      const authoritative = r.target_id && (r.map_state==="MATCH" || r.mapping_source==="human");
+      if(authoritative) map[r.qh]=r.target_id;
+    });
+    let stamped=0, changed=false;
+    qs.forEach((q,i)=>{
+      const want=map[hs[i]]||null;
+      if(want && q.target_id!==want){ q.target_id=want; stamped++; changed=true; }
+      else if(!want && q.target_id!=null){ delete q.target_id; changed=true; }   // strip stale/AMBIGUOUS ids
+    });
+    if(changed) await admin.from("topics").update({ extras:t.data.extras }).eq("id",topic_id);
+    return { stamped, total:qs.length, changed };
+  }catch(e){ console.warn("[targets] stamp failed (non-blocking):", e.message); return { stamped:0, error:e.message }; }
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
@@ -1762,6 +1793,19 @@ app.post("/admin/viz/reject", async (req,res)=>{
 });
 
 /* ---- Admin: Knowledge Target layer (Phase A) — backfill + audit (shadow mode; scheduler untouched) ---- */
+app.post("/admin/targets/stamp", async (req,res)=>{
+  /* A6 backfill: stamp target_id onto every topic's extras.qbank from the authoritative question_targets mappings.
+     Pure projection — reconciliation already ran; this only propagates resolved ids to the client scheduler. */
+  try{
+    const user=await requireAdmin(req); if(!user) return res.status(403).json({ error:"admins only" });
+    const limit=Math.min(2000, Number((req.body&&req.body.limit)||500));
+    const tr=await admin.from("topics").select("id,extras").not("extras","is",null).limit(limit);
+    const topics=(tr.data||[]).filter(t=>t.extras && Array.isArray(t.extras.qbank) && t.extras.qbank.length);
+    let topicsDone=0, stampedTotal=0, changedTopics=0;
+    for(const t of topics){ const r=await stampTargetIds(t.id); topicsDone++; stampedTotal+=(r.stamped||0); if(r.changed) changedTopics++; }
+    res.json({ ok:true, topicsScanned:topics.length, topicsChanged:changedTopics, questionsStamped:stampedTotal });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.post("/admin/targets/backfill", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
@@ -1834,7 +1878,8 @@ app.post("/admin/targets/resolve", async (req,res)=>{
     // record the human decision as its OWN event — map_state (the AI verdict) is preserved, never overwritten
     const resolution={ action, target_id:finalId, by:(user.email||user.id), at:new Date().toISOString(), from_state:cur.data.map_state };
     await admin.from("question_targets").update({ target_id:finalId, resolution, resolved_by:resolution.by, resolved_at:resolution.at, mapping_source:"human", mapping_status:"active", updated_at:resolution.at }).eq("qh",qh);
-    res.json({ ok:true, resolution });
+    let stampRes=null; if(cur.data.topic_id) stampRes=await stampTargetIds(cur.data.topic_id);   // A6: push the human-resolved target_id onto the question in extras.qbank
+    res.json({ ok:true, resolution, stamped:stampRes });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 
