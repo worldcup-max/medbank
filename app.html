@@ -3213,6 +3213,7 @@ function qbDoneHtml(){
       +(!r.ok?('<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+(q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|'))))+'\')">🔄 Retest this concept</button><span>a different question, same idea</span></div>'):'')
       +'</div>'; }).join('');
   var scope=(QB.topicId==='*'?'*':QB.topicId);
+  var profileCard = QB.mega ? reasoningProfileHtml(scope) : '';
   var wasQuick = (QB.kind==='quick_exam');
   var retry = QB.mega ? '<button class="btn primary" onclick="mgStart('+(wasQuick?'true':'false')+')">↻ '+(wasQuick?'New Quick Exam':'New Mega set')+'</button>'
             : QB.mistakes ? '<button class="btn primary" onclick="qbStartMistakes(\''+scope+'\')">↻ Retry these</button>'
@@ -3235,7 +3236,7 @@ function qbDoneHtml(){
     +'<div style="font-weight:700">'+c+' / '+n+' correct'+(totS?' · '+Math.floor(totS/60)+'m '+(totS%60)+'s':'')+' — '+msg+'</div>'+endedNote
     +'<div class="btnrow" style="justify-content:center;margin-top:14px;gap:10px;flex-wrap:wrap">'+retry+'<button class="btn" onclick="qbOpenDash(\''+scope+'\')">📊 My performance</button><button class="btn" onclick="qbExit()">Done</button></div></div>'
     +(typeof fixQueueHtml==='function'?fixQueueHtml(scope):'')   // V1.6 (flag-gated) — post-session "3 things to fix" prioritisation layer
-    +megaBreak
+    +megaBreak+profileCard
     +(QB.adaptive?adaptRecapHtml():'')
     +((QB.mega||QB.smart)?smartNextCard(QB.topicId||'*'):'')
     +'<div style="margin-top:16px;font-weight:700">Review &amp; explanations</div>'+review;
@@ -3355,6 +3356,43 @@ function qbAgg(scope){
   return { att:att, cumulative:cumulative, firstPass:firstPass, bySys:bySys, byTag:byTag, byCog:byCog, bySkill:bySkill, byMode:byMode, fastWrong:fastWrong, grid:grid, mistakes:mistakes, sessions:sess, qcount:Object.keys(lastByQ).length };
 }
 function qbPct(b){ return b&&b.seen?Math.round(b.correct/b.seen*100):0; }
+/* ===== V1.7 Phase 3 — Reasoning Profile: DESCRIPTIVE + EVIDENCE-GATED consolidation of qbAgg. Never diagnoses
+   ability; never fabricates skill×cog conclusions. Reuses frozen SMART tiers. Touches nothing frozen. ===== */
+var RP_SEP=15;
+function profileTier(seen){ if(seen<SMART.MIN_EV) return 'insufficient'; if(seen<SMART.EV_MED) return 'tentative'; if(seen<SMART.EV_HIGH) return 'measured'; return 'confident'; }
+function profileNarrative(dims, baselinePct){
+  var elig=dims.filter(function(d){ var t=profileTier(d.band.seen); return t==='measured'||t==='confident'; })
+    .map(function(d){ return { key:d.key, _type:d._type, _k:d._k, pct:qbPct(d.band), n:d.band.seen }; })
+    .sort(function(a,b){ return a.pct-b.pct; });
+  if(!elig.length) return { ok:false, reason:'insufficient' };
+  var w=elig[0];
+  if(baselinePct - w.pct < RP_SEP) return { ok:false, reason:'no clear pattern' };
+  return { ok:true, key:w.key, _type:w._type, _k:w._k, pct:w.pct, n:w.n, baseline:baselinePct,
+           text:'You scored '+w.pct+'% on '+w.key+' (n='+w.n+'), below your '+baselinePct+'% overall.' };
+}
+function rpRow(label, band, baseline){ var t=profileTier(band.seen);
+  if(t==='insufficient'){ var need=Math.max(1, SMART.MIN_EV-band.seen);
+    return '<div class="rp-row"><div class="rp-k">'+esc(label)+'</div><div class="rp-v ins">Not enough evidence yet — '+band.seen+' question'+(band.seen===1?'':'s')+'. Complete '+need+' more to start seeing a pattern.</div></div>'; }
+  var pct=qbPct(band), below=(baseline-pct>=8), above=(pct-baseline>=8);
+  var note = below?(' · <span class="rp-below">below your '+baseline+'% overall</span>') : above?(' · <span class="rp-above">above your '+baseline+'% overall</span>') : '';
+  return '<div class="rp-row"><div class="rp-k">'+esc(label)+'</div><div class="rp-v"><b>'+pct+'%</b> · '+band.seen+' question'+(band.seen===1?'':'s')+' · '+t+' evidence'+note+'</div></div>'; }
+function reasoningProfileHtml(scope){ scope=scope||'*'; var agg=qbAgg(scope), overall=agg.cumulative||{seen:0,correct:0};
+  if(overall.seen<SMART.MIN_EV) return '<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🧭 Reasoning profile</div><div class="qbnodata">Not enough data yet — '+overall.seen+' question'+(overall.seen===1?'':'s')+'. Answer a few more to start seeing your profile.</div></div>';
+  var baseline=qbPct(overall); function bf(m,k){ return m[k]||{seen:0,correct:0}; }
+  var skillRows=QB_SKILLS.filter(function(sk){ return bf(agg.bySkill,sk[0]).seen>0; }).map(function(sk){ return rpRow(qbSkillLabel(sk[0]), bf(agg.bySkill,sk[0]), baseline); }).join('');
+  var cogRows=QB_COGS.filter(function(c){ return bf(agg.byCog,c[0]).seen>0; }).map(function(c){ return rpRow(qbCogLabel(c[0]), bf(agg.byCog,c[0]), baseline); }).join('');
+  var dims=[]; QB_SKILLS.forEach(function(sk){ var b=bf(agg.bySkill,sk[0]); if(b.seen) dims.push({key:qbSkillLabel(sk[0]),_type:'skill',_k:sk[0],band:b}); });
+  QB_COGS.forEach(function(c){ var b=bf(agg.byCog,c[0]); if(b.seen) dims.push({key:qbCogLabel(c[0]),_type:'cog',_k:c[0],band:b}); });
+  var nar=profileNarrative(dims, baseline), insight;
+  if(nar.ok){ insight='<div class="rp-insight">🧭 '+esc(nar.text)+'</div><div class="btnrow" style="margin-top:6px"><button class="btn sm primary" onclick="smartDrillDim(\''+nar._type+'\',\''+encodeURIComponent(nar._k)+'\',\''+scope+'\')">Drill this ▶</button></div>'; }
+  else { insight='<div class="qbnodata">'+(nar.reason==='no clear pattern'?'No single area stands out clearly yet — your accuracy is fairly even.':'Not enough evidence for a cross-cutting insight yet — keep going.')+'</div>'; }
+  var combo='<div class="rp-row"><div class="rp-k">Integrated / cross-topic reasoning</div><div class="rp-v ins">Insufficient — needs Integrated Mode to measure how you combine areas.</div></div>';
+  return '<div class="card" style="cursor:default;margin-top:12px"><div class="qbsec-h">🧭 Reasoning profile <span class="sub" style="font-weight:400">(accumulated performance)</span></div>'
+    +'<div class="rp-overall">Overall <b>'+baseline+'%</b> · '+overall.seen+' questions</div>'
+    +'<div class="rp-sec">Clinical skills</div>'+(skillRows||'<div class="qbnodata">No skill data yet.</div>')
+    +'<div class="rp-sec">Cognitive tasks</div>'+(cogRows||'<div class="qbnodata">No cognitive data yet.</div>')
+    +'<div class="rp-sec">Cross-topic</div>'+combo
+    +'<div class="rp-sec">Insight</div>'+insight+'</div>'; }
 function qbBandColor(p){ return p>=80?'#0d9488':p>=65?'#3b82f6':p>=50?'#c98a00':'#e2574b'; }
 function qbBar(label,b,note){ var p=qbPct(b),c=qbBandColor(p),avg=b.seen?Math.round(b.ms/b.seen/1000):0;
   return '<div class="qbbar"><div class="qbbar-l"><span class="qbbar-k">'+esc(label)+'</span><span class="qbbar-n">'+b.correct+'/'+b.seen+(note?' · '+note:(avg?' · '+avg+'s':''))+'</span></div><div class="qbbar-t"><div class="qbbar-f" style="width:'+Math.max(p,2)+'%;background:'+c+'"></div></div><div class="qbbar-p" style="color:'+c+'">'+p+'%</div></div>'; }
@@ -7333,6 +7371,17 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 <style>
 /* selection popover (two stacked buttons) */
 
+
+/* V1.7 Reasoning Profile */
+.rp-overall{font-size:14px;margin:2px 0 8px}
+.rp-sec{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);margin:10px 0 4px}
+.rp-row{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;padding:3px 0;border-top:1px solid var(--line,#eee)}
+.rp-k{font-weight:600}
+.rp-v{color:var(--dim);text-align:right}
+.rp-v.ins{opacity:.75;font-style:italic}
+.rp-below{color:#c0392b}
+.rp-above{color:#0a9d55}
+.rp-insight{font-size:13px;padding:8px 10px;border:1px solid var(--line,#e3e0ef);border-radius:10px;background:rgba(124,58,237,.05)}
 /* V1.7 Blueprint panel */
 .mgbp{margin:6px 0 2px}
 .mgbp-grid{display:flex;flex-wrap:wrap;gap:8px}
