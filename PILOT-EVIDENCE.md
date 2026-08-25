@@ -65,3 +65,26 @@ across 870–960 attempts / 630–720 retest-serves per seed.
 **Verdict:** the frozen diagnosis engine is stably accurate and the whole loop (V1.5 → V1.6 → A6 → A7) is robust over
 long timelines at scale, reproducibly. Efficacy of the interventions themselves remains real-user-gated (live A/B on
 gap+fragile now running; misconception built but flag-off until its A/B earns it).
+
+---
+
+## Run 2026-08-25 (3) — V1.6 ADVERSARIAL BATTERY (qa/v16-adversarial.mjs) — 20/20
+
+Deliberate attempts to break the frozen boundaries. All 10 of Frank's scenarios pass:
+1. **Oscillating** (wrong-confident↔correct-unsure↔…): diagnosis never returns an invalid type; no thrash to bad states.
+2. **Mixed diagnoses on one Target**: one coherent standing diagnosis (never multiple).
+3. **Sparse (<MIN_EV)**: returns NO diagnosis — no overconfidence from thin evidence.
+4. **Persistent misconception** (20× confident-wrong): ONE Target record, stays interval-1/miscon/p3, schedule healthy — no multiplication, no flood.
+5. **Persistent gap** (20× wrong-unsure): one record, interval 1, healthy.
+6. **Intervention-resistant** (completes the loop, still fails): ≤1 retest/intervention per day; schedule healthy across 30 days. *(see finding)*
+7. **Multi-Target exhaustion while intervening**: NEVER substitutes another Target's question; reaches `no_fresh` (A7 seam); healthy.
+8. **Restart/persistence**: schedule survives serialize→restore unchanged; migration idempotent post-restart (no loss/dup).
+9. **Concurrent** (many Targets due same day): each due record serves its OWN Target; no cross-wire; healthy.
+10. **Flag transitions OFF→ON→OFF**: toggling an intervention flag never alters existing `_sched` (flags gate UI only).
+
+### ⚠️ KEY FINDING — degradation behavior (as Frank asked)
+V1.6 does **not** loop uncontrollably within a session — a single global loop, opt-in offers, a queue capped at 3, and ≤1 retest/day give it hard per-cycle bounds. **But there is NO bounded-escalation / give-up rule.** A Target the interventions repeatedly fail to fix keeps recurring at interval 1 and keeps being offered its intervention. In this A7-less sim it self-limits at canonical exhaustion (~6 cycles); **with A7 supplying fresh retests it would recur indefinitely** — `intervention → fail → intervention → fail …`.
+
+**This is a product decision, not a bug** (Frank: "establish the failure behavior, then decide whether V1.6 needs a bounded escalation rule"). Candidate follow-up (NOT built): after N consecutively-failed interventions on a Target → escalate (hand to human / different modality), cool down, or cap intervention offers while A6 keeps the spaced retest. **Deferred to Frank's decision.**
+
+**Verdict:** V1.6 passes the adversarial battery. The only open item is the escalation-policy decision above.

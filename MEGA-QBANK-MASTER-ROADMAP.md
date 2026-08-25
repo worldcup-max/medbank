@@ -45,7 +45,7 @@ MEGA QBANK
 ├── A8 — RETEST POOL → CANONICAL PROMOTION  ⬜ (contract required, NOT auto)
 │   └── promotion contract ⬜ · quality gate ⬜ · Target preservation ⬜ · canonical insertion ⬜
 │
-├── V1.6 — INTERVENTION ENGINE  🟢 COMPLETE 3-way system (gap+fragile live · misconception built/off) · identity=target_id
+├── V1.6 — INTERVENTION ENGINE  🔒 ARCHITECTURALLY COMPLETE + FROZEN (adversarial 20/20) · gap+fragile live · misconception built/off
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
 │   ├── Phase 1 instrumentation ✅ LIVE + collecting · pilot-sim: diagnosis 81/98/83/98% acc, misconception→gap 0.7%, strong predictiveness, A/B detectable (PILOT-EVIDENCE.md)
 │   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; gap_practice masked) ✅ built · 15/15 · GAP_LOOP=ON (activated; live A/B)
@@ -74,6 +74,7 @@ MEGA QBANK
 | Threshold calibration (0.30 / 0.40 / K=8) | 🔒 frozen | MATCHes all ≥0.90 conf, no 0.80–0.90 marginal band; ambiguous 29% | a marginal MATCH cluster appears, or false merges/forks emerge |
 | A7 backoff persistence | 🟡 deferred | in-memory backoff resets on restart → retries a bit sooner (harmless) | if restart-thrash causes real cost |
 | A8 promotion | 🟡 deferred | needs its own contract; A7 existing ≠ A8 implied | when generated retests prove worthy + a contract is written |
+| V1.6 bounded-escalation rule | 🟡 deferred (Frank's decision) | adversarial found no give-up rule: a repeatedly-failing Target recurs indefinitely (bounded per-cycle, not per-lifetime). Not a bug. | if live data shows Targets stuck in intervention→fail loops |
 
 ## REJECTED REGISTER (do not revisit without contradicting evidence)
 
@@ -109,4 +110,4 @@ Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
 
-_Last ticked: 2026-08-25 — V1.6 is now a COMPLETE 3-way Intervention Engine: gap (Learn+Practice) + fragile (reinforce) LIVE; misconception (contrast) BUILT but flag-off (build≠trust, A/B-gated). Phase 4 test 11/11. Multi-seed evidence (6 seeds): diagnosis acc gap 76–82 / miscon 98–99 / fragile 80–85 / solid 98–99%; longitudinal 0 pathologies every seed. All 14 harnesses green. V1.7 PAUSED per Frank — finish + test V1.6 first. A6/A7 untouched. Efficacy remains real-user-gated._
+_Last ticked: 2026-08-25 — 🔒 V1.6 ARCHITECTURALLY COMPLETE + FROZEN. Adversarial battery 20/20 (all 10 scenarios: oscillating, mixed, sparse, persistent miscon/gap, intervention-resistant, exhaustion, restart, concurrent, flag transitions). 15/15 harnesses green. ONE open item = a product decision, not a bug: no bounded-escalation rule for Targets that repeatedly fail intervention (recurs indefinitely once A7 supplies) — deferred to Frank. gap+fragile live, misconception built/off. V1.7 may now open. A6/A7 untouched._
