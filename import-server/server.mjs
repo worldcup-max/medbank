@@ -608,27 +608,33 @@ async function annotateTargets(questions, ctx){
    (structurally excluded from Target scheduling). Idempotent + self-correcting: a superseded/removed mapping
    strips a stale target_id. Never touches question_targets — read-only projection. */
 async function stampTargetIds(topic_id){
+  const acc={ stamped:0, already:0, ambiguous:0, aiNew:0, unmapped:0, stripped:0, ambiguousReceivedId:0, total:0, changed:false };
   try{
-    if(!topic_id) return { stamped:0 };
+    if(!topic_id) return acc;
     const t=await admin.from("topics").select("id,extras").eq("id",topic_id).maybeSingle();
-    if(!t.data||!t.data.extras||!Array.isArray(t.data.extras.qbank)) return { stamped:0 };
-    const qs=t.data.extras.qbank, hs=qs.map(qhOf);
+    if(!t.data||!t.data.extras||!Array.isArray(t.data.extras.qbank)) return acc;
+    const qs=t.data.extras.qbank, hs=qs.map(qhOf); acc.total=qs.length;
     const qt=await admin.from("question_targets").select("qh,target_id,map_state,mapping_source,mapping_status").in("qh",hs);
-    const map={};
-    (qt.data||[]).forEach(r=>{
-      if(r.mapping_status && r.mapping_status!=="active") return;
-      const authoritative = r.target_id && (r.map_state==="MATCH" || r.mapping_source==="human");
-      if(authoritative) map[r.qh]=r.target_id;
-    });
-    let stamped=0, changed=false;
+    const rowByQh={};
+    (qt.data||[]).forEach(r=>{ if(r.mapping_status && r.mapping_status!=="active") return; rowByQh[r.qh]=r; });
+    const isAuth=(r)=> !!(r && r.target_id && (r.map_state==="MATCH" || r.mapping_source==="human"));
     qs.forEach((q,i)=>{
-      const want=map[hs[i]]||null;
-      if(want && q.target_id!==want){ q.target_id=want; stamped++; changed=true; }
-      else if(!want && q.target_id!=null){ delete q.target_id; changed=true; }   // strip stale/AMBIGUOUS ids
+      const r=rowByQh[hs[i]], want = isAuth(r) ? r.target_id : null;
+      if(want){                                                       // AUTHORITATIVE mapping (MATCH ai OR any human resolution)
+        if(q.target_id===want) acc.already++;
+        else { q.target_id=want; acc.stamped++; acc.changed=true; }
+      } else {                                                        // NOT authoritative → must NOT carry a target_id
+        if(!r) acc.unmapped++;
+        else if(r.map_state==="AMBIGUOUS") acc.ambiguous++;           // AMBIGUOUS/unresolved: deliberately skipped
+        else if(r.map_state==="NEW") acc.aiNew++;                     // ai-NEW: structurally excluded per A6 spec
+        if(q.target_id!=null){ delete q.target_id; acc.stripped++; acc.changed=true; }   // self-correct any stale id
+      }
     });
-    if(changed) await admin.from("topics").update({ extras:t.data.extras }).eq("id",topic_id);
-    return { stamped, total:qs.length, changed };
-  }catch(e){ console.warn("[targets] stamp failed (non-blocking):", e.message); return { stamped:0, error:e.message }; }
+    // INVARIANT audit: after stamping, no AMBIGUOUS/unresolved question may hold a target_id (must be 0)
+    qs.forEach((q,i)=>{ const r=rowByQh[hs[i]]; if(q.target_id!=null && !isAuth(r)) acc.ambiguousReceivedId++; });
+    if(acc.changed) await admin.from("topics").update({ extras:t.data.extras }).eq("id",topic_id);
+    return acc;
+  }catch(e){ console.warn("[targets] stamp failed (non-blocking):", e.message); acc.error=e.message; return acc; }
 }
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
@@ -1801,9 +1807,14 @@ app.post("/admin/targets/stamp", async (req,res)=>{
     const limit=Math.min(2000, Number((req.body&&req.body.limit)||500));
     const tr=await admin.from("topics").select("id,extras").not("extras","is",null).limit(limit);
     const topics=(tr.data||[]).filter(t=>t.extras && Array.isArray(t.extras.qbank) && t.extras.qbank.length);
-    let topicsDone=0, stampedTotal=0, changedTopics=0;
-    for(const t of topics){ const r=await stampTargetIds(t.id); topicsDone++; stampedTotal+=(r.stamped||0); if(r.changed) changedTopics++; }
-    res.json({ ok:true, topicsScanned:topics.length, topicsChanged:changedTopics, questionsStamped:stampedTotal });
+    const agg={ questionsStamped:0, alreadyStamped:0, skippedAmbiguous:0, skippedAiNew:0, skippedUnmapped:0, staleStripped:0, ambiguousReceivedId:0, questionsScanned:0 };
+    let topicsDone=0, changedTopics=0;
+    for(const t of topics){ const r=await stampTargetIds(t.id); topicsDone++; if(r.changed) changedTopics++;
+      agg.questionsStamped+=(r.stamped||0); agg.alreadyStamped+=(r.already||0); agg.skippedAmbiguous+=(r.ambiguous||0);
+      agg.skippedAiNew+=(r.aiNew||0); agg.skippedUnmapped+=(r.unmapped||0); agg.staleStripped+=(r.stripped||0);
+      agg.ambiguousReceivedId+=(r.ambiguousReceivedId||0); agg.questionsScanned+=(r.total||0); }
+    res.json({ ok:true, topicsScanned:topics.length, topicsChanged:changedTopics,
+      invariantOk: agg.ambiguousReceivedId===0, ...agg });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.post("/admin/targets/backfill", async (req,res)=>{

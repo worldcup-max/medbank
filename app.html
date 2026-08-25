@@ -4546,6 +4546,7 @@ function pageTargetsAudit(){ if(!window.IS_ADMIN) return pageHome();
      <p class="sub">Shadow-mode: the Q-bank is being annotated with knowledge targets. The scheduler does <b>not</b> use these yet. AMBIGUOUS mappings are your call — a false merge is worse than a duplicate.</p>
      <div class="btnrow" style="gap:10px;flex-wrap:wrap;margin-bottom:6px">
        <button class="btn" onclick="taBackfill(this)">▶ Run corpus backfill</button>
+       <button class="btn" onclick="taStamp(this)">🏷 Stamp target_ids → questions</button>
        <button class="btn" onclick="taFetch()">↻ Refresh</button>
      </div>
      <div id="taStats" style="margin:14px 0">Loading…</div>
@@ -4601,6 +4602,15 @@ async function taBackfill(btn){ if(btn){btn.disabled=true;btn.textContent='Runni
   if(!r.ok) throw new Error((r.data&&r.data.error)||'backfill failed');
   mbToast('Backfill: '+r.data.questionsSeen+' questions across '+r.data.topicsDone+' topics'); setTimeout(taFetch,600);
 }catch(e){ if(btn){btn.disabled=false;btn.textContent='▶ Run corpus backfill';} alert('Backfill failed: '+(e.message||e)); } }
+async function taStamp(btn){ if(btn){btn.disabled=true;btn.textContent='Stamping…';} try{
+  var r=await admApi('/admin/targets/stamp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({limit:500})});
+  if(btn){btn.disabled=false;btn.textContent='🏷 Stamp target_ids → questions';}
+  if(!r.ok) throw new Error((r.data&&r.data.error)||'stamp failed');
+  var d=r.data, inv=d.invariantOk?'✓ invariant OK':('⚠ '+d.ambiguousReceivedId+' AMBIGUOUS got an id!');
+  mbToast('Stamped '+d.questionsStamped+' new · '+d.alreadyStamped+' already · '+d.skippedAmbiguous+' AMBIGUOUS skipped · '+inv);
+  if(!d.invariantOk) alert('A6 INVARIANT VIOLATION: '+d.ambiguousReceivedId+' AMBIGUOUS/unresolved question(s) received a target_id. Do NOT freeze A6 — investigate.');
+  setTimeout(taFetch,600);
+}catch(e){ if(btn){btn.disabled=false;btn.textContent='🏷 Stamp target_ids → questions';} alert('Stamp failed: '+(e.message||e)); } }
 async function taNearMiss(btn){ if(btn){btn.disabled=true;btn.textContent='Loading…';} try{
   var r=await admApi('/admin/targets/near-miss?limit=60'); if(btn){btn.disabled=false;btn.textContent='Load near-miss bucket';}
   if(!r.ok) throw new Error((r.data&&r.data.error)||'near-miss failed'); taRenderNM((r.data&&r.data.items)||[]);

@@ -89,13 +89,22 @@ state involved. That is the whole point of shipping it dark first.
 
 ## 7 · What students need
 
-- **A connection**, the first time they open a scene: three.js (~600 KB, then browser-cached) and the meshes
-  (~1–3 MB per scene, browser-cached per URL). Later opens of the same scene are cheap.
+- **A connection**, the first time they open a scene: three.js (~600 KB, then browser-cached) and the meshes,
+  browser-cached per URL. Later opens of the same scene are cheap.
+- **The mesh payload is the real cost, and it is bigger than this doc used to claim.** Measured against the
+  live archive on 2026-08-25: the arm scene is **~15 MB** across nine files — scapula alone is 5.4 MB
+  (113,256 triangles), and two of the nine took over 40 seconds to arrive from the CDN. On a Nigerian phone
+  on mobile data that is not acceptable, and it is the one thing between this build and a pilot. See §8.
 - **WebGL**, which every browser MedBank already supports has.
 - Nothing else — no account change, no new permission, no install.
 
 ## 8 · Known limits at launch
 
+- **Meshes are undecimated.** V1 serves BodyParts3D's raw triangle counts straight off a public CDN.
+  ~15 MB for the arm scene, and CDN latency we do not control. The fix is not in the player: decimate on
+  ingest (`ingest-full-archive.mjs`) to roughly 15–20k triangles per structure — at this viewing distance the
+  loss is invisible, the scapula drops from 5.4 MB to well under 1 MB — then serve from our own bucket via
+  `MESH_BASE`. Do this before any student sees the feature, not after.
 - Two scenes (arm, heart). The 3D tab appears only on topics that match one of them; every other topic is
   unchanged. The corpus grows from Thursday.
 - The heart declares three real gaps (no chamber meshes, no aortic valve, no pericardium) rather than faking them.
