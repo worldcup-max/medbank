@@ -3,6 +3,45 @@
 **Status:** specification only — no code until §7 decisions are signed off. Supersedes the earlier `DESIGN-V1.6.md` sketch.
 **Sequencing:** V1.5 (frozen) → **Pilot** → **V1.6 Interventions (this doc)** → V1.7 Mega Clinical Reasoning (`SPEC-V1.7-MEGA.md`) → V1.8+ branching.
 
+## 0-REBASE. V1.6 RE-BASELINED ON A6 + A7 (2026-08-25 — LOCKED, supersedes the pre-A6 framing below)
+
+The body of this spec predates A6/A7. Where the two conflict, THIS section wins. A6 (Target scheduling) and A7 (Retest Pool) are frozen and part of `main`. V1.6 builds **upward** on them — it does not re-implement scheduling or generation.
+
+**Layering (frozen boundary):**
+```
+V1.5  DIAGNOSE      smartDiagnose (frozen; V1.6 READS it, never modifies it)
+   │  smartDiagnose
+   ▼
+V1.6  INTERVENE     selects the intervention for a diagnosed problem, keyed by target_id
+   │  target_id
+   ▼
+A6    SCHEDULE      owns WHEN the Target is reassessed + which canonical sibling to serve (frozen)
+   │  canonical exhausted?
+   ▼
+A7    SUPPLY        owns fresh validated retest when canonical Target questions are exhausted (frozen)
+```
+
+**Locked facts for V1.6:**
+- V1.6 **reads** `smartDiagnose`; it does **not** modify V1.5 diagnosis/routing.
+- **Intervention identity = `target_id`** (not question id / free-text concept). The unit being remediated is the Knowledge Target.
+- **A6 owns retest scheduling.** V1.6 does not build a scheduler. Remediation hands the Target back to A6 for the next assessment.
+- **A7 owns fresh assessment supply.** When A6 reaches `no_fresh_assessment`, A7 supplies a validated retest. V1.6 does **not** generate questions.
+- **Phase 1 = instrumentation only.** No student-visible intervention, no AI generation.
+- **Phases 2–4 remain pilot-gated** on the *matched-intervention A/B outcome* (matched intervention must beat generic re-drill), not on the diagnosis merely "sounding right."
+
+**Branch rule (supersedes §0/D7 below):** V1.6 branches from **current `main`** (which already contains frozen A6 + A7), **not** from the historical `v207-pilot` baseline — branching backward would strip the Target identity + retest infrastructure V1.6 depends on. `smartDiagnose` stays frozen; the only V1.5 relationship is read-only.
+
+**Example (the clean loop):** `Q184 → BRONCH-NEXT-002` missed → V1.6 attaches an intervention state to `BRONCH-NEXT-002` → remediation → A6 serves the next canonical sibling of that Target (or, if exhausted, A7 supplies a fresh validated retest) → outcome updates the Target's learning state.
+
+**Phase 1 instrumentation — the data chain to capture (no UI):**
+```
+attempt → smartDiagnose → diagnosis(gap|fragile|misconception) → target_id
+        → intervention-eligibility (would-fire, but does NOT fire) → future retest outcome
+```
+Goal: answer *"when MedBank says gap / fragile / misconception for a Target, does that diagnosis predict what happens on the next Target assessment?"* — the evidence that gates Phases 2–4.
+
+---
+
 ## 0. Baseline & branch rule (read first — there is a version discrepancy to settle)
 
 The pilot baseline is the build students actually run. Today that is **`main` = v207** (engine v203 + pilot telemetry instrumentation + End&grade). The earlier intervention sketch said "main frozen at v209" — that was wrong; **v209/v212 work lives on the `v1.6-experiments` branch and is NOT what students run.**

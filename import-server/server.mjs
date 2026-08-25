@@ -781,6 +781,36 @@ app.post("/retest/replenish", async (req,res)=>{
 /* USER serve endpoint: return one validated retest for a due, canonically-exhausted Target.
    Fast path = a pre-validated pool candidate (instant). Slow path = lazy generate ONE (want=1). Else no_fresh.
    Marks the row served; the client adds its qh to the A6 servedQhs (retention parity is untouched). */
+/* V1.6 Phase 1 — append-only telemetry ingest. Non-fatal by contract: NEVER 500-loops the client, and the
+   client never awaits this. If the insert fails, learning is unaffected (the client already moved on). */
+app.post("/telemetry/intervention", async (req,res)=>{
+  try{
+    const user=await getUser(req); if(!user) return res.status(200).json({ ok:false, skipped:"no auth" });
+    const e=req.body||{};
+    await admin.from("intervention_events").insert({
+      account_id:user.id, target_id:e.target_id||null, qh:e.qh||null,
+      event_type:e.t||e.event_type||"intervention_eligibility",
+      ok:(typeof e.ok==="boolean"?e.ok:null), confidence:(e.confidence==null?null:Number(e.confidence)),
+      attempt_signal:e.attempt_signal||null, standing_diagnosis:e.standing_diagnosis||null,
+      ab_bucket:e.ab_bucket||null, diagnosis_version:e.diagnosis_version||null, intervention_version:e.intervention_version||null
+    });
+    res.json({ ok:true });
+  }catch(err){ res.status(200).json({ ok:false, error:err.message||"insert failed" }); }   // 200 on purpose — telemetry is non-fatal
+});
+app.get("/admin/intervention/stats", async (req,res)=>{
+  /* pilot cross-tab: attempt_signal × standing_diagnosis × bucket. Read-only. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("intervention_events").select("attempt_signal,standing_diagnosis,ab_bucket,ok,confidence").limit(50000);
+    const rows=r.data||[];
+    const bump=(o,k)=>{ o[k]=(o[k]||0)+1; };
+    const bySignal={}, byStanding={}, byBucket={}, signalXstanding={};
+    rows.forEach(x=>{ bump(bySignal,x.attempt_signal||"?"); bump(byStanding,x.standing_diagnosis||"none"); bump(byBucket,x.ab_bucket||"?");
+      bump(signalXstanding,(x.attempt_signal||"?")+" → "+(x.standing_diagnosis||"none")); });
+    res.json({ ok:true, total:rows.length, bySignal, byStanding, byBucket, signalXstanding });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.post("/retest/serve", async (req,res)=>{
   try{
     const user=await getUser(req); if(!user) return res.status(401).json({ error:"auth required" });

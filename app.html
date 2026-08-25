@@ -3131,7 +3131,8 @@ function qbNext(){ QB._confDone=false;
   // confidence, if the mode captured it, is already on the result by now).
   try{ var _r=QB.results[QB.results.length-1], _it=QB.items[QB.i];
     if(_r && _it){ var _qh=_it._qh || qbHash((_it.stem||'')+'|'+((_it.options||[]).join('|')));
-      qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf)); } }catch(e){}
+      qbSchedApply(_qh, !!_r.ok, (_r.conf==null?null:_r.conf));
+      try{ ivEmit(_it, _qh, (qbStore()._qmeta[_qh]||{}).target_id, !!_r.ok, (_r.conf==null?null:_r.conf)); }catch(_e){}   /* V1.6 Phase-1 telemetry — observe only */ } }catch(e){}
   if(QB.adaptive){
     var last=QB.results[QB.results.length-1]; if(last) adaptAdjust(last);
     if(QB.items.length < QB.adaptTarget){ var nx=adaptPick(); if(nx){ QB.items.push(nx); QB.adaptSeen[nx._qh]=1; } }
@@ -3596,6 +3597,31 @@ function smartBandOf(st,type,key){ return type==='skill'?st.bySkill[key] : type=
 var _smartAgreed={};   // transient UI memory for the "is this actually your weak spot?" tap
 var _recoShown={};     // snapshot of each recommendation AS SHOWN, so a 👍/👎 still means something if the engine later changes
 function smartLog(ev){ try{ var s=qbStore(); if(!s) return; if(!s._events) s._events=[]; ev.ts=Date.now(); s._events.push(ev); if(s._events.length>1000) s._events=s._events.slice(-1000); persist(); }catch(e){} }
+/* ===== V1.6 Phase 1 — intervention telemetry (OBSERVE-ONLY). NEVER in the learning decision path:
+   every path here is gated by ivOn(), fire-and-forget, and try/caught. If this whole subsystem fails,
+   the QBank / A6 scheduling / A7 supply behave exactly as before. Returns nothing the scheduler reads. ===== */
+var IV_DIAG_VERSION='v1.5', IV_INTV_VERSION='v1.6-phase1';
+function ivOn(){ try{ var c=window.MEDBANK_CONFIG; return !!(c && c.FEATURES && c.FEATURES.V16_TELEMETRY); }catch(e){ return false; } }
+function ivAccountId(){ try{ var u=window.MB_USER; return (u&&(u.id||u.email))||null; }catch(e){ return null; } }
+function ivBucket(accountId){ var str=accountId||'', h=5381,i=str.length; while(i){ h=(h*33)^str.charCodeAt(--i); } return ((h>>>0)%2)?'B':'A'; }   // stable, deterministic, ~50/50
+function ivAttemptSignal(ok, conf){ var known=(conf!=null&&!isNaN(conf)), hi=known&&conf>=2, lo=known&&conf<=1;
+  if(!ok) return hi?'wrong_confident':(known?'wrong_unsure':'wrong');
+  return lo?'correct_unsure':(hi?'correct_confident':'correct'); }
+function ivStandingDiagnosis(q){ try{ if(typeof smartDiagnose!=='function'||typeof smartStats!=='function') return null;
+  var st=smartStats('*'), key=(q&&(q.skill||q.subtopic))||null; if(!key||!st||!st.bySkill||!st.bySkill[key]) return null;
+  var dg=smartDiagnose(st.bySkill[key]); return (dg&&dg.type)||null; }catch(e){ return null; } }
+/* emit ONE eligibility observation for a just-finalized attempt. Fire-and-forget; never throws into the caller. */
+function ivEmit(q, qh, targetId, ok, conf){ try{
+  if(!ivOn()) return;                                                   // Phase-1 inert until FEATURES.V16_TELEMETRY
+  var acct=ivAccountId();
+  var ev={ t:'intervention_eligibility', target_id:targetId||null, qh:qh||null, ok:!!ok,
+    confidence:(conf==null?null:conf), attempt_signal:ivAttemptSignal(ok,conf), standing_diagnosis:ivStandingDiagnosis(q),
+    ab_bucket:ivBucket(acct), diagnosis_version:IV_DIAG_VERSION, intervention_version:IV_INTV_VERSION };
+  try{ if(typeof smartLog==='function') smartLog(ev); }catch(_e){}       // local debug copy
+  try{ ivPost(ev); }catch(_e){}                                         // durable server copy (async, non-blocking)
+}catch(_e){} }
+function ivPost(ev){ try{ if(typeof admApi!=='function') return;
+  admApi('/telemetry/intervention',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ev)}).then(function(){},function(){}); }catch(_e){} }
 /* Telemetry needs no separate transport: _events live in DATA and already sync to profile_state
    for every logged-in student (see sync.js). The admin dashboard reads those synced blobs. */
 function _recoSnap(type,key){ return _recoShown[type+':'+key] || {}; }
