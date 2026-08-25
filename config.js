@@ -27,7 +27,7 @@ window.MEDBANK_CONFIG = {
   // After running viz-training/tools/ingest-full-archive.mjs --upload, point this at our own store:
   //   MESH_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/"
   // No scene file changes — only the adapter reads this.
-  MESH_BASE: "",
+  MESH_BASE: "https://tytbrhuzikqkscxdnkmr.supabase.co/storage/v1/object/public/viz-meshes/",
 
   // The import server URL (Phase 5) — used by the app's Import tab. e.g. https://medbank-api.onrender.com
   IMPORT_API: "https://medbank-import.onrender.com",

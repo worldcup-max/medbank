@@ -64,3 +64,26 @@ alter table public.question_targets add column if not exists mapping_source text
 alter table public.question_targets add column if not exists mapping_status text not null default 'active'; -- active | superseded
 -- backfill: any row a human has already resolved is authoritative
 update public.question_targets set mapping_source = 'human' where resolution is not null;
+
+-- ============================================================================
+-- A7 — Retest Pool. Disposable, AI-generated alternate assessments of an EXISTING
+-- Target, served only when a Target is due and its canonical pool is exhausted.
+-- NEVER canonical: a row here can never migrate into topics.extras.qbank, and this
+-- pipeline has no write path to knowledge_targets (I1/I4/I11).
+-- ============================================================================
+create table if not exists public.retest_pool (
+  id            uuid primary key default gen_random_uuid(),
+  target_id     text not null references public.knowledge_targets(target_id),
+  qh            text not null,                                   -- hash(stem+'|'+options) — same identity fn as the scheduler
+  account_id    text,
+  content       jsonb not null,                                  -- {stem, lead_in, options, answer, rationales, ...} qbank-shaped item
+  source        text not null default 'ai_retest',
+  model         text,
+  generated_at  timestamptz not null default now(),
+  validation    jsonb,                                           -- {passed, reason, reconciled_to, confidence, matched_via}
+  status        text not null default 'candidate',               -- candidate | served | invalid | quarantined | expired
+  served_count  int  not null default 0,
+  served_at     timestamptz,
+  unique(target_id, qh)                                          -- idempotent: same generated item can't double-insert
+);
+create index if not exists retest_pool_target_status_idx on public.retest_pool (target_id, status);

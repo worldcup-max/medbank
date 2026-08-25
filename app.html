@@ -3048,9 +3048,41 @@ function qbQuestionsForTarget(targetId, served){ var out=[], sv={}; (served||[])
 /* resolve the item to actually serve for a due schedule record. Target records draw a fresh, unused question for the
    Target; if none remain we flag no_fresh_assessment (A7 will generate one) and serve nothing. Legacy 'q:' records
    re-serve their own stored question, exactly as the Phase-1 scheduler did. Returns {item} or {noFresh:true}. */
+/* ==== A7 client glue — retest_pool trigger + serve. NO second scheduler; it only feeds the existing serve path.
+   Every A7 effect is gated by a7On() and is fire-and-forget, so with A7 off (or offline) the canonical path is
+   byte-for-byte unchanged and no network call ever fires. ==== */
+var _a7Pool={}, _a7Inflight={};
+function a7On(){ try{ return !!(DATA && DATA.flags && DATA.flags.a7); }catch(e){ return false; } }
+function a7Api(path, opts){ return (typeof admApi==='function') ? admApi(path, opts) : Promise.reject(new Error('no api')); }
+/* fire-and-forget, idempotent: NEVER awaited on the canonical path; dedupes in-flight work per Target (constraint 8) */
+function a7TriggerReplenish(tid){ if(!a7On() || !tid || _a7Inflight[tid]) return;
+  _a7Inflight[tid]=true;
+  try{ a7Api('/retest/replenish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({target_id:tid})})
+        .then(function(){ _a7Inflight[tid]=false; }, function(){ _a7Inflight[tid]=false; }); }
+  catch(e){ _a7Inflight[tid]=false; } }
+/* take one pre-validated candidate the client cached for this Target (populated by qbEnsureA7 before a session) */
+function a7TakeCachedCandidate(tid){ var arr=_a7Pool[tid]; if(!arr||!arr.length) return null; var it=arr.shift(); if(it && !it.target_id) it.target_id=tid; return it; }
+/* async pre-session step: for each due Target whose canonical pool is exhausted and has no cached candidate, ask the
+   server to serve one (pre-validated pool candidate, else lazy want=1). Guarded — any failure leaves the Target no_fresh. */
+async function qbEnsureA7(){ if(!a7On()) return; var sc=qbSched(), today=dayNum();
+  var need=Object.keys(sc).filter(function(k){ return k.indexOf('t:')===0; })
+    .filter(function(k){ var e=sc[k], tid=k.slice(2); return e && e.dueAt<=today && qbQuestionsForTarget(tid, e.servedQhs||[]).length===0 && !(_a7Pool[tid]&&_a7Pool[tid].length); });
+  for(var i=0;i<need.length;i++){ var tid=need[i].slice(2);
+    try{ var r=await a7Api('/retest/serve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({target_id:tid})});
+      if(r && r.ok && r.data && r.data.item){ var it=r.data.item; it.target_id=tid; it._qh=it._qh||r.data.qh||qbHash((it.stem||'')+'|'+((it.options||[]).join('|'))); (_a7Pool[tid]=_a7Pool[tid]||[]).push(it); } }
+    catch(e){ /* leave this Target no_fresh */ } } }
+
+/* resolve the item to actually serve for a due schedule record. Target records draw a fresh, unused CANONICAL question;
+   once canonical is exhausted A7 serves a validated retest_pool candidate; else no_fresh_assessment. Legacy 'q:' records
+   re-serve their own stored question, exactly as the Phase-1 scheduler did. Returns {item} or {noFresh:true}. */
 function qbServeForRecord(e){ var meta=qbStore()._qmeta||{};
   if(e.key && e.key.indexOf('t:')===0){ var tid=e.key.slice(2), pool=qbQuestionsForTarget(tid, e.servedQhs||[]);
-    if(!pool.length){ e.noFresh=true; return {noFresh:true}; } e.noFresh=false; return {item:pool[0]}; }
+    if(pool.length){ e.noFresh=false;
+      if(pool.length===1) a7TriggerReplenish(tid);          // serving the LAST unused canonical → background replenish (fire-and-forget, constraints 2 & 8)
+      return {item:pool[0]}; }                              // canonical serve UNCHANGED (constraint 1)
+    var cand=a7TakeCachedCandidate(tid);                    // canonical exhausted → A7 pool candidate (constraint 3: only after exhaustion)
+    if(cand){ e.noFresh=false; return {item:cand, a7:true}; }
+    e.noFresh=true; return {noFresh:true, a7Pending:true, targetId:tid}; }   // lazy fallback populated async by qbEnsureA7
   var qh=(e.key&&e.key.indexOf('q:')===0)?e.key.slice(2):e.key; var it=qbItemFromMeta(qh, meta[qh]);
   if(!it){ return {noFresh:true}; } return {item:it}; }
 /* concepts due for retest today that can actually be served, highest priority (confident-wrong) first, then most
@@ -3065,7 +3097,7 @@ function qbDueCount(){ return qbDueList().length; }
 function qbScheduledCount(){ return Object.keys(qbSched()).length; }
 /* start a spaced-retest session from the due concepts (cold, tutor, renders on the Mega page). Each due record
    contributes ONE fresh item; serving it records the qh on that record's servedQhs so the next retest rotates on. */
-function qbStartDue(){ var due=qbDueList(); if(!due.length){ mbToast('No Q-bank retests are due right now — nice.'); return; }
+async function qbStartDue(){ await qbEnsureA7(); var due=qbDueList(); if(!due.length){ mbToast('No Q-bank retests are due right now — nice.'); return; }
   var items=[], sc=qbSched();
   due.forEach(function(e){ var it=e._serve; if(!it) return; items.push(it);
     var rec=sc[e.key]; if(rec){ rec.servedQhs=qbUniq((rec.servedQhs||[]).concat(it._qh)); } });

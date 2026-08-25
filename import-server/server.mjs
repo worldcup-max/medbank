@@ -24,7 +24,8 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
-import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
+import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
+import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -636,6 +637,180 @@ async function stampTargetIds(topic_id){
     return acc;
   }catch(e){ console.warn("[targets] stamp failed (non-blocking):", e.message); acc.error=e.message; return acc; }
 }
+
+/* ============================================================================
+ * A7 — Retest Pool server side (A7.3). Uses the FROZEN retestpool.mjs orchestrator
+ * (same core the 39/39 harness pins) with real async deps: a real DeepSeek generator,
+ * the FROZEN reconciliation pipeline as the validator, a Supabase-backed pool, and an
+ * in-memory budget. NO write path to knowledge_targets or topics.extras.qbank.
+ * ========================================================================== */
+const A7_DAILY_MAX = Number(process.env.A7_DAILY_MAX) || 200;
+
+/* --- Target Contract → generation prompt. Identity flows IN; the generator never infers it. --- */
+function a7BuildGenPrompt(tc){
+  const excl = (Array.isArray(tc.excludes)&&tc.excludes.length) ? tc.excludes.join("; ") : "(none listed)";
+  const neigh = (tc._neighbors||[]).map(n=>"- "+n).join("\n") || "(none)";
+  return `You are a medical education question writer. Produce ONE new single-best-answer multiple-choice question that assesses EXACTLY the knowledge target below. Answer ONLY with a JSON object, no prose.
+
+TARGET CONTRACT (authoritative — do NOT reinterpret, broaden, or narrow it):
+target_id: ${tc.target_id}
+canonical claim: ${tc.canonical_statement}
+scope (what IS included): ${tc.scope||tc.subtopic||tc.topic}
+exclusions (explicitly OUTSIDE this target): ${excl}
+topic / subtopic / skill: ${tc.topic} / ${tc.subtopic||""} / ${tc.skill||""}
+difficulty: ${tc.difficulty_band||"medium"}
+
+NEIGHBORING targets you must NOT drift into (these are DIFFERENT targets):
+${neigh}
+
+Requirements:
+- test THIS canonical claim as an independently-testable single-best-answer item
+- do NOT broaden the target, narrow it to a facet/subset, or test a neighboring target
+- do NOT paraphrase an already-used question for this target
+- exactly one unambiguously correct option; plausible distractors
+
+Return exactly:
+{ "stem":"<clinical vignette or direct question>",
+  "lead_in":"<the question line, e.g. 'What is the single most appropriate next step?'>",
+  "options":["<A>","<B>","<C>","<D>"],
+  "answer":<0-based index of the correct option>,
+  "rationales":["<why A>","<why B>","<why C>","<why D>"] }`;
+}
+async function a7Generate(tc){
+  const gen = await generate({ model:EXTRAS_MODEL, prompt:a7BuildGenPrompt(tc), parts:[], images:[], max_tokens:1200, temperature:0.5, json:true });
+  const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return null;
+  let o=null; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){ return null; }
+  if(!o || !o.stem || !Array.isArray(o.options)) return null;
+  return { stem:String(o.stem), lead_in:String(o.lead_in||""), options:o.options.map(x=>String(x)),
+           answer:Number.isInteger(o.answer)?o.answer:0, rationales:Array.isArray(o.rationales)?o.rationales:[],
+           target_id:tc.target_id, source:"ai_retest" };
+}
+
+/* --- FROZEN reconciliation adapter: extract-from-ANSWERED → retrieve → decide. Returns only what A7 needs.
+       Independently re-derives the target — identity is CONFIRMED here, never asserted from the prompt. --- */
+async function a7Reconcile(item){
+  const gen = await generate({ model:EXTRAS_MODEL, prompt:buildExtractPrompt(item), parts:[], images:[], max_tokens:500, temperature:0.2, json:true });
+  const proposed = parseProposed((gen&&gen.text)||"");                       // buildExtractPrompt includes the keyed correct answer → I11
+  if(!proposed) return { state:"EXTRACT_FAIL", target_id:null, confidence:0, matched_via:null, reason:"extract_null" };
+  const targets = await loadTargets();
+  const cands = retrieveCandidates(proposed, targets, RETRIEVAL_CFG);
+  let adj=null; if(cands.length) adj = await tReconcile(proposed, cands);    // frozen V1 adjudicator
+  const dec = decide(proposed, cands, adj, TARGET_CFG);                      // frozen decide()
+  return { state:dec.state, target_id:dec.target_id, confidence:dec.confidence, matched_via:dec.matched_via||null, reason:dec.note||null };
+}
+
+/* --- Supabase-backed pool. Each addCandidate is an INDEPENDENT commit → crash-resilient (a mid-fill crash
+       leaves prior candidates usable; the next invocation fills the remaining slots). --- */
+function makeDbPool(account_id){
+  return {
+    async candidateCount(t){ const r=await admin.from("retest_pool").select("id",{count:"exact",head:true}).eq("target_id",t).eq("status","candidate"); return r.count||0; },
+    async priorStatements(t){                                               // served generated + unused candidate stems (FIX4). Canonical-served stems: fast-follow.
+      const r=await admin.from("retest_pool").select("content,status").eq("target_id",t).in("status",["served","candidate"]);
+      return (r.data||[]).map(x=>x.content&&x.content.stem).filter(Boolean);
+    },
+    async addCandidate(t,item,v){ await admin.from("retest_pool").upsert({ target_id:t, qh:qhOf(item), account_id, content:item, model:EXTRAS_MODEL, validation:Object.assign({passed:true},v), status:"candidate" }, { onConflict:"target_id,qh" }); },
+    async addInvalid(t,item,v){ await admin.from("retest_pool").upsert({ target_id:t, qh:qhOf(item), account_id, content:item, model:EXTRAS_MODEL, validation:Object.assign({passed:false},v), status:"invalid" }, { onConflict:"target_id,qh" }); },
+    async takeCandidate(t){
+      const r=await admin.from("retest_pool").select("*").eq("target_id",t).eq("status","candidate").order("generated_at",{ascending:true}).limit(1).maybeSingle();
+      if(!r.data) return null; const row=r.data;
+      await admin.from("retest_pool").update({ status:"served", served_count:(row.served_count||0)+1, served_at:new Date().toISOString() }).eq("id",row.id);
+      return Object.assign({ target_id:t, _qh:row.qh }, row.content);
+    }
+  };
+}
+
+/* --- in-memory budget (per-process; resets on restart — acceptable for v1). Two counters + exponential backoff. --- */
+const _a7Budget = (()=>{ const att={}, failn={}, backoff={}; let day=null, daily=0;
+  const today=()=>Math.floor(Date.now()/864e5);
+  const roll=()=>{ const d=today(); if(d!==day){ day=d; daily=0; } };
+  return {
+    canStart(t){ roll(); if(daily>=A7_DAILY_MAX) return false; if((backoff[t]||-1)>=today()) return false; return true; },
+    canAttempt(){ roll(); return daily<A7_DAILY_MAX; },
+    noteAttempt(t){ roll(); att[t]=(att[t]||0)+1; daily++; },
+    noteFailure(t){ failn[t]=(failn[t]||0)+1; const n=Math.min(failn[t]-1, A7_CFG.BACKOFF_DAYS.length-1); backoff[t]=today()+A7_CFG.BACKOFF_DAYS[n]; },
+    _stats(){ return { dailyUsed:daily, dailyMax:A7_DAILY_MAX, targetsWithFailures:Object.keys(failn).length }; }
+  };
+})();
+
+async function a7LoadContract(target_id){
+  const r=await admin.from("knowledge_targets").select("*").eq("target_id",target_id).maybeSingle();
+  if(!r.data) return null; const t=r.data;
+  const nb=await admin.from("knowledge_targets").select("canonical_statement").eq("topic",t.topic).neq("target_id",target_id).limit(6);
+  return Object.assign({}, t, { _neighbors:(nb.data||[]).map(x=>x.canonical_statement).filter(Boolean) });
+}
+async function a7ReplenishTarget(target_id, account_id, want){
+  const tc=await a7LoadContract(target_id); if(!tc) return { error:"unknown target" };
+  const deps={ targetContract:tc, generate:a7Generate, reconcile:a7Reconcile, pool:makeDbPool(account_id), budget:_a7Budget, cfg:A7_CFG };
+  return await replenish(target_id, deps, want);                            // want default = POOL_CAP (background fill)
+}
+
+/* --- endpoints --- */
+/* NON-BLOCKING replenish trigger: fired by the client the moment it observes canonical exhaustion for a Target.
+   Responds 202 immediately so the canonical learning path NEVER waits on A7 generation. */
+app.post("/retest/replenish", async (req,res)=>{
+  try{
+    const user=await getUser(req); if(!user) return res.status(401).json({ error:"auth required" });
+    const { target_id } = req.body||{};
+    if(!target_id) return res.status(400).json({ error:"target_id required" });
+    if(targetsMode()==="off") return res.status(200).json({ ok:true, skipped:"targets off" });
+    res.status(202).json({ ok:true, queued:true, target_id });             // immediate — background does the work
+    a7ReplenishTarget(target_id, user.id).then(r=>console.log("[a7] replenish "+target_id+":", JSON.stringify(r))).catch(e=>console.warn("[a7] replenish failed:", e.message));
+  }catch(e){ try{ res.status(500).json({ error:e.message||"server error" }); }catch(_){} }
+});
+
+/* USER serve endpoint: return one validated retest for a due, canonically-exhausted Target.
+   Fast path = a pre-validated pool candidate (instant). Slow path = lazy generate ONE (want=1). Else no_fresh.
+   Marks the row served; the client adds its qh to the A6 servedQhs (retention parity is untouched). */
+app.post("/retest/serve", async (req,res)=>{
+  try{
+    const user=await getUser(req); if(!user) return res.status(401).json({ error:"auth required" });
+    const { target_id } = req.body||{};
+    if(!target_id) return res.status(400).json({ error:"target_id required" });
+    if(targetsMode()==="off") return res.status(200).json({ ok:true, noFresh:true, skipped:"targets off" });
+    const pool=makeDbPool(user.id);
+    let taken=await pool.takeCandidate(target_id);                          // pre-validated candidate → instant
+    if(!taken){ await a7ReplenishTarget(target_id, user.id, 1); taken=await pool.takeCandidate(target_id); }  // lazy fallback: want=1
+    if(!taken) return res.status(200).json({ ok:true, noFresh:true });
+    res.json({ ok:true, item:taken, qh:taken._qh });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.get("/admin/retest/pool", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    let q=admin.from("retest_pool").select("target_id,qh,status,validation,served_count,generated_at,served_at,model,content").order("generated_at",{ascending:false}).limit(200);
+    if(req.query.target_id) q=q.eq("target_id",req.query.target_id);
+    const r=await q;
+    res.json({ ok:true, items:(r.data||[]).map(x=>({ target_id:x.target_id, qh:x.qh, status:x.status,
+      generated_at:x.generated_at, served_at:x.served_at||null, model:x.model||null,
+      validation_state:(x.validation&&x.validation.passed)?"passed":"failed",
+      reconciled_to:x.validation&&x.validation.reconciled_to, confidence:x.validation&&x.validation.confidence,
+      matched_via:x.validation&&x.validation.matched_via, reason:x.validation&&x.validation.reason,
+      served_count:x.served_count, stem:((x.content&&x.content.stem)||"").slice(0,140) })) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.post("/admin/retest/reset", async (req,res)=>{
+  /* SHADOW-TEST cleanup: delete retest_pool rows for ONE target_id (or all if reset_all=true). Never touches
+     knowledge_targets or topics.extras.qbank. Admin-only. Used to restore state after A7.5. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { target_id, reset_all } = req.body||{};
+    if(!target_id && !reset_all) return res.status(400).json({ error:"target_id or reset_all required" });
+    let q=admin.from("retest_pool").delete();
+    q = reset_all ? q.neq("target_id","") : q.eq("target_id",target_id);
+    const r=await q;
+    res.json({ ok:true, cleared:!r.error, scope: reset_all?"all":target_id });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/retest/stats", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("retest_pool").select("target_id,status,validation");
+    const rows=r.data||[]; const by=s=>rows.filter(x=>x.status===s).length;
+    const reasons={}; rows.filter(x=>x.status==="invalid").forEach(x=>{ const k=(x.validation&&x.validation.reason)||"?"; reasons[k]=(reasons[k]||0)+1; });
+    res.json({ ok:true, total:rows.length, candidate:by("candidate"), served:by("served"), invalid:by("invalid"),
+      quarantined:by("quarantined"), expired:by("expired"), invalidReasons:reasons, budget:_a7Budget._stats() });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 
 /* resolve the model for a student (paid vs trial), reused by extras / podcast */
 async function resolveModel(account_id, level){
