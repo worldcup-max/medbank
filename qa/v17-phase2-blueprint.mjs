@@ -4,28 +4,13 @@
    skill-authoritative + cog best-effort, no generation, and THE identity invariant
    (selection changes only WHICH questions — never their Target identity). */
 
-/* ---------- pure selector (no randomness, no target_id derivation, read-only on questions) ---------- */
-function blueprintSelect(pool, blueprint){
-  const count=blueprint.count|0, skillMix=blueprint.skillMix||{}, cogMix=blueprint.cogMix||null;
-  const sorted=pool.slice().sort((a,b)=> a._qh<b._qh?-1:(a._qh>b._qh?1:0));   // stable, deterministic
-  const used=new Set(), selected=[], shortfall=[];
-  function cogOrder(avail, n){
-    if(!cogMix) return avail;                                                  // no cog preference → stable order
-    const buckets={}; avail.forEach(q=>{ const c=q.cognitive_level||'?'; (buckets[c]=buckets[c]||[]).push(q); });
-    const out=[]; Object.keys(cogMix).forEach(c=>{ const want=Math.round(n*(cogMix[c]/100)); (buckets[c]||[]).slice(0,want).forEach(q=>out.push(q)); });
-    avail.forEach(q=>{ if(out.indexOf(q)<0) out.push(q); });                   // fill remainder stably
-    return out;
-  }
-  Object.keys(skillMix).forEach(sk=>{
-    const targetN=Math.round(count*(skillMix[sk]/100));
-    const avail=sorted.filter(q=>q.skill===sk && !used.has(q._qh));
-    const picked=cogOrder(avail, targetN).slice(0, Math.min(targetN, avail.length));
-    picked.forEach(q=>{ used.add(q._qh); selected.push(q); });
-    if(picked.length<targetN) shortfall.push({ skill:sk, requested:targetN, available:avail.length, delivered:picked.length });
-  });
-  const deliveredSkill={}; selected.forEach(q=>{ deliveredSkill[q.skill]=(deliveredSkill[q.skill]||0)+1; });
-  return { selected, shortfall, requested:{count, skillMix, cogMix}, delivered:{ count:selected.length, skill:deliveredSkill } };
-}
+/* ---------- WIRED selector: extracted verbatim from app.html (tests the shipped code, not a copy) ---------- */
+import { readFileSync } from 'node:fs';
+const html=readFileSync('app.html','utf8');
+function grab(name){ const re=new RegExp('function '+name+'\\s*\\('); const i=html.search(re); if(i<0)throw new Error('missing '+name);
+  let j=html.indexOf('{',i),d=0,k=j; for(;k<html.length;k++){const c=html[k];if(c==='{')d++;else if(c==='}'){d--;if(!d){k++;break;}}} return html.slice(i,k); }
+function qbCogOf(q){ return (q&&q.cognitive_level)||'?'; }   // stub matching app usage
+const blueprintSelect = new Function('qbCogOf', grab('blueprintSelect')+'\n return blueprintSelect;')(qbCogOf);
 
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 

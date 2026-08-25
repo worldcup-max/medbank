@@ -2944,7 +2944,10 @@ function qbEndEarly(){ if(!QB || QB.done) return;
   QB.endedEarly=true; qbFinalize(); QB.done=true; render();
 }
 function qbReset(id){ if(!confirm('Reset your question-bank stats for this topic? Your attempt history for it will be cleared.'))return; var s=qbStore(); DATA.qbank[id]={seen:0,correct:0,byTag:{}}; s._attempts=(s._attempts||[]).filter(function(a){return a.topicId!==id;}); s._sessions=(s._sessions||[]).filter(function(x){return x.topicId!==id;}); s._events=(s._events||[]).filter(function(e){return e.topicId!==id;});   /* SET-01: also drop this topic's telemetry events (was never cleared). NOTE: sync's union merge can still re-adopt cloud copies — an authoritative reset (tombstone/rev-bump) needs a product decision. */ persist(); render(); }
-function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){ var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
+function qbTick(){ var el=document.getElementById('qbTimer'); if(el&&QB&&QB.startTs&&!QB.done){
+  if(QB.examDeadline){ var rem=Math.max(0,Math.floor((QB.examDeadline-Date.now())/1000)); el.textContent='⏱ '+Math.floor(rem/60)+':'+String(rem%60).padStart(2,'0');
+    if(rem<=0 && !QB._autosub){ QB._autosub=true; try{ qbEndEarly(); }catch(e){} } return; }
+  var s=Math.floor((Date.now()-QB.startTs)/1000); el.textContent='⏱ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); } }
 function qbRecord(j){ var q=QB.items[QB.i], ok=(j===q.answer); if(ok)QB.correct++;
   var ms = QB.qStart ? (Date.now()-QB.qStart) : 0;
   QB.results.push({i:QB.i,picked:j,ok:ok,ms:ms});
@@ -2965,7 +2968,7 @@ function qbFinalize(){ if(!QB||QB._saved) return; QB._saved=true; var s=qbStore(
      chart and the dashboard grade a 3-of-20 exit as 15% while the results screen showed 100% (qbScore). */
   var ansN=(QB.results||[]).length;
   s._sessions.push({ sid:QB.sid||qbUid(), topicId:QB.topicId, mode:QB.mode, ts:Date.now(), n:(QB.endedEarly?ansN:QB.items.length), correct:QB.correct, ms:totMs, mistakes:!!QB.mistakes,
-    session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'' });
+    session_type:stype, kind:stype, smart:!!QB.smart, exposure:QB.exposure||'', blueprint:(QB.blueprint?{ requested:QB.blueprint.requested, delivered:QB.blueprint.delivered, shortfall:QB.blueprint.shortfall }:null) });
   if(s._sessions.length>200) s._sessions=s._sessions.slice(s._sessions.length-200);
   // smart-drill completion event (paired with smart_drill_started) — planned vs completed, minimal metadata
   if(QB.smart){ smartLog({t:'smart_drill_completed', sid:QB.sid, session_type:stype,
@@ -3459,7 +3462,8 @@ function qbStartMistakes(scope){ var agg=qbAgg(scope); var pool=agg.mistakes;
 }
 
 /* ===== 🧠 MEGA Q-BANK — topic mastery -> unpredictable clinical application (Focused / Mixed / Blind) ===== */
-window._mgCfg = window._mgCfg || { subj:{}, topics:{}, chooseTopics:false, exposure:'mixed', mode:'timed', level:'all', skill:'all', count:20 };
+window._mgCfg = window._mgCfg || { subj:{}, topics:{}, chooseTopics:false, exposure:'mixed', mode:'timed', level:'all', skill:'all', count:20, skillMix:{}, cogMix:{}, examMins:0 };
+window._mgLastBlueprint = window._mgLastBlueprint || null;
 function mgPools(){ var out=[]; if(typeof DB==='undefined'||!DB.subjects) return out;
   DB.subjects.forEach(function(s){ var ts=[]; (s.modules||[]).forEach(function(m){ (m.topics||[]).forEach(function(t){ if(t&&t.ready&&t.extras&&t.extras.qbank&&t.extras.qbank.length) ts.push(t); }); }); if(ts.length) out.push({s:s,topics:ts}); });
   return out; }
@@ -3474,10 +3478,36 @@ function mgTopicGroups(){ var cfg=_mgCfg, pools=mgPools();
     }); });
   return groups; }
 function mgBuildItems(){ var f=[]; mgTopicGroups().forEach(function(g){ f=f.concat(g.items); }); return f; }  // flat pool (for the count readout)
+/* ===== V1.7 Phase 2 — Exam Blueprint selector. PURE + deterministic + READ-ONLY on questions. It only chooses
+   WHICH existing questions run; it never reads/writes/derives target_id, never touches scheduling or retention.
+   Skill distribution is authoritative; cognitive mix is best-effort within slices; shortfalls are reported and
+   NEVER silently substituted/backfilled. ===== */
+function blueprintSelect(pool, blueprint){
+  var count=blueprint.count|0, skillMix=blueprint.skillMix||{}, cogMix=blueprint.cogMix||null;
+  var sorted=pool.slice().sort(function(a,b){ var ka=a._qh||'', kb=b._qh||''; return ka<kb?-1:(ka>kb?1:0); });
+  var used={}, selected=[], shortfall=[];
+  function cogOrder(avail, nSlot){ if(!cogMix) return avail;
+    var buckets={}; avail.forEach(function(q){ var c=qbCogOf(q)||'?'; (buckets[c]=buckets[c]||[]).push(q); });
+    var out=[]; Object.keys(cogMix).forEach(function(c){ var want=Math.round(nSlot*(cogMix[c]/100)); (buckets[c]||[]).slice(0,want).forEach(function(q){ out.push(q); }); });
+    avail.forEach(function(q){ if(out.indexOf(q)<0) out.push(q); }); return out; }
+  Object.keys(skillMix).forEach(function(sk){
+    var targetN=Math.round(count*(skillMix[sk]/100));
+    var avail=sorted.filter(function(q){ return (q.skill||'')===sk && !used[q._qh]; });
+    var picked=cogOrder(avail, targetN).slice(0, Math.min(targetN, avail.length));
+    picked.forEach(function(q){ used[q._qh]=1; selected.push(q); });
+    if(picked.length<targetN) shortfall.push({ skill:sk, requested:targetN, available:avail.length, delivered:picked.length });
+  });
+  var deliveredSkill={}; selected.forEach(function(q){ deliveredSkill[q.skill||'?']=(deliveredSkill[q.skill||'?']||0)+1; });
+  return { selected:selected, shortfall:shortfall, requested:{count:count, skillMix:skillMix, cogMix:cogMix}, delivered:{count:selected.length, skill:deliveredSkill} };
+}
 /* Focused = plain shuffle of selected topics; Mixed/Blind = balanced round-robin so a big topic can't dominate (point 8) */
 function mgAssemble(count){ var cfg=_mgCfg, groups=mgTopicGroups();
   var flat=[]; groups.forEach(function(g){ flat=flat.concat(g.items); });
   var target = count ? Math.min(count, flat.length) : flat.length;
+  if(cfg.exposure==='blueprint'){                                  // V1.7 Phase 2: additive session-composition layer
+    var bp=blueprintSelect(flat, { count:(cfg.count||flat.length), skillMix:cfg.skillMix||{}, cogMix:cfg.cogMix||null });
+    window._mgLastBlueprint=bp;                                    // requested/delivered/shortfall for the UI + analytics (never touches attempts/A6)
+    return qbShuffle(bp.selected.slice()); }
   if(cfg.exposure==='focused'){ return qbShuffle(flat).slice(0, target); }
   var decks=groups.map(function(g){ return qbShuffle(g.items.slice()); }), out=[], gi=0, guard=0;
   while(out.length<target && guard<flat.length*3){
@@ -3501,7 +3531,8 @@ function mgStart(quick){ var cfg=_mgCfg;
   var items;
   try{ items=mgAssemble(cfg.count); } finally{ if(restore) window._mgCfg=restore; }
   if(!items.length){ alert('No questions match your selection yet. Build a few topic Q-banks first, or widen the filter.'); return; }
-  QB={ topicId:'*', mode:cfg.mode, items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':'custom') };
+  var _bp=(cfg.exposure==='blueprint'); var _bpTimed=(_bp && (cfg.examMins|0)>0);
+  QB={ topicId:'*', mode:(_bpTimed?'timed':cfg.mode), items:items, i:0, picked:null, answered:false, correct:0, results:[], done:false, startTs:Date.now(), qStart:Date.now(), sid:qbUid(), mega:true, exposure:cfg.exposure, kind:(quick?'quick_exam':(_bp?'blueprint':'custom')), examDeadline:(_bpTimed?(Date.now()+(cfg.examMins|0)*60000):0), blueprint:(_bp?window._mgLastBlueprint:null) };
   _qbDash.open=false; if(!window._qbInt) window._qbInt=setInterval(qbTick,1000); render();
 }
 /* point 13 — Drill my weaknesses: build a tutor set from the existing pool, weighted to weak skills/levels (pure analytics + filter, no generation) */
@@ -3521,6 +3552,23 @@ function mgDrillWeak(){ var agg=qbAgg('*'); if(!agg.cumulative.seen){ alert('Ans
 function mgChipRow(label, opts, cur, kind){ return '<div class="qbcfg"><div class="qbcfg-l">'+label+'</div><div class="qbcfg-c">'+opts.map(function(o){
     return '<button class="qbchipbtn'+(cur===o.v?' on':'')+'" onclick="mgSet(\''+kind+'\',\''+o.v+'\')">'+esc(o.t)+'</button>';
   }).join('')+'</div></div>'; }
+/* V1.7 Phase 2 — Blueprint config setters (session-composition only; never touch questions/A6/A7) */
+function mgSetSkillPct(sk,val){ _mgCfg.skillMix=_mgCfg.skillMix||{}; var v=Math.max(0,Math.min(100,parseInt(val,10)||0)); if(v) _mgCfg.skillMix[sk]=v; else delete _mgCfg.skillMix[sk]; render(); }
+function mgSetCogPct(cg,val){ _mgCfg.cogMix=_mgCfg.cogMix||{}; var v=Math.max(0,Math.min(100,parseInt(val,10)||0)); if(v) _mgCfg.cogMix[cg]=v; else delete _mgCfg.cogMix[cg]; render(); }
+function mgSetExamMins(val){ _mgCfg.examMins=Math.max(0,parseInt(val,10)||0); render(); }
+function mgBlueprintPanel(){ var cfg=_mgCfg, pct=function(o){var t=0;Object.keys(o||{}).forEach(function(k){t+=o[k];});return t;};
+  var skillIn=QB_SKILLS.map(function(sk){ return '<label class="mgbp-in"><span>'+esc(sk[1])+'</span><input type="number" min="0" max="100" value="'+((cfg.skillMix||{})[sk[0]]||'')+'" oninput="mgSetSkillPct(\''+sk[0]+'\',this.value)">%</label>'; }).join('');
+  var cogIn=QB_COGS.map(function(c){ return '<label class="mgbp-in"><span>'+esc(c[1])+'</span><input type="number" min="0" max="100" value="'+((cfg.cogMix||{})[c[0]]||'')+'" oninput="mgSetCogPct(\''+c[0]+'\',this.value)">%</label>'; }).join('');
+  var sSum=pct(cfg.skillMix), cSum=pct(cfg.cogMix);
+  // live requested-vs-available-vs-delivered preview (this IS the shortfall report — shown BEFORE start, never silently substituted)
+  var preview=''; if(sSum>0){ var bp=blueprintSelect(mgBuildItems(), {count:(cfg.count||20), skillMix:cfg.skillMix||{}, cogMix:cfg.cogMix||null});
+    var rows=Object.keys(cfg.skillMix||{}).map(function(sk){ var req=Math.round((cfg.count||20)*(cfg.skillMix[sk]/100)); var got=bp.delivered.skill[sk]||0; var sh=(got<req);
+      return '<div class="mgbp-row'+(sh?' short':'')+'"><span>'+esc((QB_SKILLS.filter(function(x){return x[0]===sk;})[0]||[0,sk])[1])+'</span><span>requested '+req+' · delivered '+got+(sh?' ⚠ short':'')+'</span></div>'; }).join('');
+    preview='<div class="mgbp-prev"><div class="mgbp-h">This exam will contain <b>'+bp.delivered.count+'</b> question'+(bp.delivered.count===1?'':'s')+(bp.delivered.count<(cfg.count||20)?(' <span class="short">(you requested '+(cfg.count||20)+' — not enough in your pool to fill every slice; not substituted)</span>'):'')+'</div>'+rows+'</div>'; }
+  return '<div class="mgbp"><div class="qbcfg-l" style="margin-bottom:4px">📋 Blueprint — skill mix'+(sSum!==100&&sSum>0?' <span class="short">(sums to '+sSum+'%, aim for 100)</span>':'')+'</div><div class="mgbp-grid">'+skillIn+'</div>'
+    +'<div class="qbcfg-l" style="margin:8px 0 4px">🧠 Cognitive mix (optional)'+(cSum!==100&&cSum>0?' <span class="short">('+cSum+'%)</span>':'')+'</div><div class="mgbp-grid">'+cogIn+'</div>'
+    +'<div class="qbcfg-l" style="margin:8px 0 4px">⏱ Whole-exam timer</div><label class="mgbp-in"><input type="number" min="0" value="'+(cfg.examMins||'')+'" oninput="mgSetExamMins(this.value)"> minutes <span style="opacity:.6">(0 = untimed; auto-submits at 0)</span></label>'
+    +preview+'</div>'; }
 /* ============================================================
    Q-BANK V1.5 — SMART ENGINE  (intelligence over the EXISTING pool)
    Personalises from attempt history: recency half-life + confidence +
@@ -4103,7 +4151,7 @@ function pageMega(){
   }
   var chooseBtn='<div class="qbcfg"><div class="qbcfg-l">📚 Topics</div><div class="qbcfg-c"><button class="qbchipbtn'+(!cfg.chooseTopics?' on':'')+'" onclick="if(_mgCfg.chooseTopics){mgToggleChoose()}">All topics</button><button class="qbchipbtn'+(cfg.chooseTopics?' on':'')+'" onclick="if(!_mgCfg.chooseTopics){mgToggleChoose()}">Choose…</button></div></div>'+topicPick;
   // exposure — Focused (as selected) / Mixed (balanced switch) / Blind (whole course, hidden till after)
-  var expoOpts=[{v:'focused',t:'🎯 Focused'},{v:'mixed',t:'🔀 Mixed'},{v:'blind',t:'🙈 Blind'},{v:'adaptive',t:'🎚 Adaptive'}];
+  var expoOpts=[{v:'focused',t:'🎯 Focused'},{v:'mixed',t:'🔀 Mixed'},{v:'blind',t:'🙈 Blind'},{v:'adaptive',t:'🎚 Adaptive'},{v:'blueprint',t:'📋 Blueprint'}];
   var expoRow=mgChipRow('👁 Exposure', expoOpts, cfg.exposure, 'exposure');
   var expoTxt=cfg.exposure==='focused'?'Draws from your selected topics. (Topic still hidden until you answer.)':cfg.exposure==='mixed'?'Balanced switch across your selected topics — no topic dominates.':cfg.exposure==='adaptive'?'Difficulty auto-tunes from your answers, confidence and pace — rises when you succeed, eases when you struggle. <b>Level chip is set automatically.</b>':'Random across the whole course(s), topic hidden until you answer. <b>Best for exam prep.</b>';
   var expoNote='<div class="qbnodata" style="margin:-4px 0 6px 102px">'+expoTxt+'</div>';
@@ -4123,7 +4171,8 @@ function pageMega(){
   var canStart=(n>0 && !needPick);
   var startBtn='<div class="btnrow" style="margin-top:16px"><button class="btn primary" style="min-width:200px" '+(canStart?'onclick="mgStart(false)"':'disabled style="opacity:.45"')+'>🚀 Start '+(needPick?'— choose a topic':(n?nStart+' questions':'— none match'))+'</button></div>';
   var poolInfo='<div class="qbnodata" style="margin-top:6px">'+(needPick?'No topics ticked yet — tap the ones you want above, or switch back to “All topics”.':(n+' question'+(n===1?'':'s')+' in your current selection.'))+'</div>';
-  var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+modeRow+lvlRow+skillRow+cntRow+startBtn+poolInfo+'</div>';
+  var bpPanel=(cfg.exposure==='blueprint')?mgBlueprintPanel():'';
+  var custom='<div class="mgcustom">Customize your session</div><div class="card" style="cursor:default">'+subjChips+chooseBtn+'<div class="mgdiv"></div>'+expoRow+expoNote+(cfg.exposure==='blueprint'?bpPanel:(modeRow+lvlRow+skillRow))+cntRow+startBtn+poolInfo+'</div>';
   return '<div class="wrap">'+head+quick+smart+custom+'</div>';
 }
 
@@ -7283,6 +7332,16 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 })();</script>
 <style>
 /* selection popover (two stacked buttons) */
+
+/* V1.7 Blueprint panel */
+.mgbp{margin:6px 0 2px}
+.mgbp-grid{display:flex;flex-wrap:wrap;gap:8px}
+.mgbp-in{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--dim)}
+.mgbp-in input{width:52px;padding:3px 5px;border:1px solid var(--line,#e3e0ef);border-radius:7px;font-size:12px}
+.mgbp-prev{margin-top:10px;padding:8px 10px;border:1px solid var(--line,#e3e0ef);border-radius:10px;background:rgba(124,58,237,.04)}
+.mgbp-h{font-size:13px;margin-bottom:4px}
+.mgbp-row{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);padding:2px 0}
+.mgbp-row.short,.mgbp .short{color:#c0392b}
 .selpop{position:fixed;z-index:9000;display:none;flex-direction:column;gap:6px}
 .selpop .explbtn{position:static;display:block;box-shadow:0 8px 22px rgba(91,33,182,.4)}
 .selpop .vizbtn2{background:linear-gradient(135deg,#7c3aed,#0d9488)!important}
