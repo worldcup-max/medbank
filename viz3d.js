@@ -820,7 +820,25 @@
       $('note').innerHTML = bits.join(' · ');
     }
 
+    /* Frame the model: centre it on the origin and scale it to a standard size.
+       This MUST be safe to call more than once, because it now is — a mesh that arrives after the scene
+       has opened re-frames the group so the new bone is included.
+
+       The previous version was destructive twice over, and calling it a second time produced a solid black
+       viewport that looked for all the world like a lighting bug: it measured `setFromObject(holder)`,
+       which already includes the scale set by the first call, so the second call saw a model 4.2 units
+       across and "corrected" the scale to ~1 — blowing a 545 mm scene up by more than a hundredfold and
+       leaving the camera inside the geometry. It also subtracted the centre from each child's position
+       every time, so the model walked off-centre as well. The render loop kept running perfectly; there
+       was simply nothing in front of the camera but the inside of a humerus.
+
+       Reset to a known state, then measure. Idempotence by construction, not by care. */
     function fit() {
+      holder.scale.setScalar(1);
+      holder.children.forEach(function (m) {
+        if (m.__mb3dHome) m.position.copy(m.__mb3dHome);
+        else m.__mb3dHome = m.position.clone();          // where the provider actually put it
+      });
       var box = new T.Box3().setFromObject(holder), c = new T.Vector3(), s = new T.Vector3();
       box.getCenter(c); box.getSize(s);
       holder.children.forEach(function (m) { m.position.sub(c); });
