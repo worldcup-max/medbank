@@ -24,7 +24,7 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
-import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, buildReconcilePromptV2, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
+import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
