@@ -60,7 +60,7 @@ MEGA QBANK
 │   ├── D1-D5 LOCKED (reuse-first · whole-exam timer · defer saved blueprints · assemble+showcase cases · content-free-first order)
 │   ├── LOCKED: integrated item → ONE primary target_id (A6); integrated_topics[]/case_id/case_stage = metadata only
 │   ├── Phase 1 Foundation ✅ acceptance-proven (9/9) — additive schema coexists with frozen A6/A7, ZERO scheduling change
-│   └── Phases: 1 schema ✅ · 2 Exam Blueprint ✅ BUILT (wired selector 11/11; shortfall no-substitution; whole-exam timer; requested-vs-delivered analytics; Focused/Mixed/Blind intact; identity invariant held) · 3 reasoning profile · 4 integrated · 5 case
+│   └── Phases: 1 schema ✅ · 2 Exam Blueprint ✅ BUILT (wired selector 11/11; shortfall no-substitution; whole-exam timer; requested-vs-delivered analytics; Focused/Mixed/Blind intact; identity invariant held) · 3 Reasoning Profile 📝 contract+framework tests done (8/8) — descriptive/evidence-gated; combination axis reserved until Integrated; IMPL HELD for approval · 4 integrated · 5 case
 │
 └── V1.8+ — BRANCHING  ⬜ future
     └── branching cases ⬜ · evolving patient state ⬜ · multi-step decisions ⬜ · adaptive cases ⬜ · AI advanced variants ⬜
