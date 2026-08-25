@@ -57,8 +57,10 @@ MEGA QBANK
 │   └── Exam Rule · Apply Rule · Decisive Clue · Why Tempting · What Would Change It · Differential · Exam Trap · Remember This (progressive disclosure by difficulty)
 │
 ├── V1.7 — MEGA CLINICAL REASONING  📝 CONTRACT + gap analysis written (V1.7-CONTRACT.md) · not implemented
-│   ├── LOCKED: integrated item → ONE primary target_id (A6 retention); integrated_topics[] = analytics axis only (A6/A7 untouched)
-│   └── Phases: 1 schema · 2 sourcing · 3 integrated mode · 4 case mode · 5 exam blueprint · 6 reasoning profile (each gated)
+│   ├── D1-D5 LOCKED (reuse-first · whole-exam timer · defer saved blueprints · assemble+showcase cases · content-free-first order)
+│   ├── LOCKED: integrated item → ONE primary target_id (A6); integrated_topics[]/case_id/case_stage = metadata only
+│   ├── Phase 1 Foundation ✅ acceptance-proven (9/9) — additive schema coexists with frozen A6/A7, ZERO scheduling change
+│   └── Phases (resequenced): 1 schema ✅ · 2 blueprint · 3 reasoning profile · 4 integrated · 5 case (branching→V1.8)
 │
 └── V1.8+ — BRANCHING  ⬜ future
     └── branching cases ⬜ · evolving patient state ⬜ · multi-step decisions ⬜ · adaptive cases ⬜ · AI advanced variants ⬜
