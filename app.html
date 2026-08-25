@@ -2672,7 +2672,7 @@ function mb3dScenes(t){
   if(v==='pending') return [];
   _MB3D_SCENES[t.id]='pending';
   try{
-    MB3D.scenesForTopic(t.name,(t.subject&&t.subject.name)||'').then(function(list){
+    MB3D.scenesForTopic(t.name,(t.subject&&t.subject.name)||'',t.note||'').then(function(list){
       _MB3D_SCENES[t.id]=list||[];
       // only re-render if the student is still on this topic and hasn't scrolled away
       try{ if((list||[]).length && (location.hash||'').indexOf(t.id)>=0 && (window.scrollY||0)<240) render(); }catch(e){}

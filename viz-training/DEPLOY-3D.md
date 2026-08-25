@@ -22,8 +22,15 @@ Nothing in the Visualize IIFE or the frozen Smart-Drill engine is touched. Confi
 git diff --stat
 node --check viz3d.js
 node viz-training/tools/validate-scenes.mjs      # must end "2/2 scenes valid."
+node viz-training/tools/test-topic-match.mjs     # must end "18/18 expectations met."
 node viz-training/tools/build-scene-index.mjs    # regenerate if any scene changed
 ```
+
+`test-topic-match.mjs` is not optional. A topic that fails to match produces **no error and no log** —
+zero scenes is a legal answer — so the tab simply never appears and nothing anywhere says why. That is
+exactly how the `t.length > 3` bug survived a green deploy check on 2026-08-25: it excluded the string
+`"arm"`, so a note titled "Anatomy of the Arm" matched nothing. The match table is the only place this
+class of failure is visible; assert it every push.
 
 ## 2 · Deploy
 
@@ -100,13 +107,56 @@ state involved. That is the whole point of shipping it dark first.
 
 ## 8 · Known limits at launch
 
-- **Meshes are undecimated.** V1 serves BodyParts3D's raw triangle counts straight off a public CDN.
-  ~15 MB for the arm scene, and CDN latency we do not control. The fix is not in the player: decimate on
-  ingest (`ingest-full-archive.mjs`) to roughly 15–20k triangles per structure — at this viewing distance the
-  loss is invisible, the scapula drops from 5.4 MB to well under 1 MB — then serve from our own bucket via
-  `MESH_BASE`. Do this before any student sees the feature, not after.
+- **Meshes are undecimated.** V1 serves BodyParts3D's raw triangle counts straight off a public CDN:
+  ~15 MB for the arm scene, and CDN latency we do not control. §9 is the fix. Do it before any student sees
+  the feature, not after.
 - Two scenes (arm, heart). The 3D tab appears only on topics that match one of them; every other topic is
   unchanged. The corpus grows from Thursday.
 - The heart declares three real gaps (no chamber meshes, no aortic valve, no pericardium) rather than faking them.
 - Landmark anchors are `needs-review` until a human clears them — they render, they are simply not signed off.
 - Engagement counts live in `localStorage` only; nothing reaches a server yet.
+
+## 9 · Getting the meshes down to phone size
+
+Three steps, run once per batch of new scenes. **Step 1 needs the open internet, so run it in your own
+terminal** — neither the Cowork cloud container nor the desktop workspace VM can reach the mesh hosts, and
+both answer `403` for every id, which looks like "the mesh doesn't exist" if you aren't expecting it.
+
+```
+# 1 · fetch only what the corpus references (your own terminal)
+node viz-training/tools/fetch-scene-meshes.mjs
+
+# 2 · decimate, and prove the geometry survived
+node viz-training/tools/decimate-meshes.mjs viz-training/meshes \
+     --target 8000 --verify --out viz-training/meshes-lite
+
+# 3 · upload meshes-lite/ to the bucket, then in config.js:
+#     MESH_BASE: "https://<project>.supabase.co/storage/v1/object/public/viz-meshes/"
+```
+
+`--target 8000` is the recommendation, not a law. Measured on a 35k-triangle test solid with a deliberately
+thin process (to stand in for a coracoid), the surface moves like this:
+
+| triangles kept | file size | max surface movement | as % of the model |
+|---:|---:|---:|---:|
+| 19,803 | 0.94 MB | 0.016 mm | 0.01% |
+| 11,802 | 0.56 MB | 0.020 mm | 0.02% |
+| 5,803 | 0.28 MB | 0.038 mm | 0.03% |
+| 2,803 | 0.13 MB | 0.096 mm | 0.07% |
+| 1,302 | 0.06 MB | 0.210 mm | 0.16% |
+
+Even at a 27× cut the surface moves a fifth of a millimetre. Detail is not what is at risk here; the payload
+is. At `--target 8000` the arm scene should land near 3 MB instead of 15.
+
+**Why `--verify` is not optional.** Landmark anchors are stored as `uvw` fractions of a mesh's bounding box —
+the supraglenoid tubercle is `[0.254, 0.311, 0.863]` of the scapula's box, not a vertex id. Move the box by
+a millimetre and every landmark on that bone moves with it, silently, and the contact-measured calibration
+(supraglenoid↔coracoid 24.1 mm, supraglenoid↔infraglenoid 38.4 mm) quietly stops being true with nothing on
+screen to show it. So the decimator freezes every vertex that defines the box, asserts the box is
+bit-identical before writing, and refuses the file outright if it is not. `--verify` adds the second
+measurement: how far the *surface* moved, in millimetres, sampled against the original. A refusal is
+information — raise `--target`, don't raise the ceiling to make it go away.
+
+After step 3, re-run the landmark check by opening a scene and confirming the gold pin still sits on the
+supraglenoid tubercle rather than out on the acromion. The numbers can be right and the pin still wrong if
+the wrong mesh was uploaded under the right filename.

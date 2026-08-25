@@ -212,14 +212,32 @@
     return _index;
   }
 
-  function scenesForTopic(topicName, subjectName) {
+  /* Whole-word containment over a norm()'d string.
+     norm() has already reduced everything to lowercase alphanumerics separated by single spaces, so
+     padding both sides with a space makes ' arm ' a true word test with no regex and no escaping.
+     This replaces a raw indexOf, which forced a t.length>3 guard to keep 'arm' out of 'warm' — and that
+     guard then silently excluded 'arm' itself, the single most common way a note names the topic.
+     Word boundaries let short real anatomy through (arm, hip, rib, jaw, eye, ear) while still refusing
+     'ear' inside 'heart', which raw substring matching would have happily accepted. */
+  function hasWord(hay, t) { return t.length > 2 && hay.indexOf(' ' + t + ' ') >= 0; }
+
+  /* Which scenes suit this topic?
+     Title+subject is the primary signal. bodyText is a fallback for the pasted-lecture case, where the
+     title is "Week 3" or a lecturer's name and says nothing about the anatomy. The body is held to a
+     stricter test — a multi-word topic — so that one stray "arm" in a paragraph cannot grow a 3D tab on
+     an unrelated note. Single words in body prose are the inline chips' job, not the tab's. */
+  function scenesForTopic(topicName, subjectName, bodyText) {
     return loadIndex().then(function (idx) {
-      var hay = norm(topicName) + ' ' + norm(subjectName || '');
-      if (!hay.trim()) return [];
+      var title = ' ' + norm(topicName) + ' ' + norm(subjectName || '') + ' ';
+      var body = bodyText ? ' ' + norm(String(bodyText).slice(0, 40000)) + ' ' : '';
+      if (!title.trim() && !body.trim()) return [];
       return (idx.scenes || []).filter(function (s) {
         // students see validated scenes only — candidate/planned/blocked are for the dev route
         if (s.mode !== '3d_anatomy' || s.status !== 'ready') return false;
-        return (s.match.topics || []).some(function (t) { return t.length > 3 && hay.indexOf(t) >= 0; });
+        var topics = (s.match.topics || []).map(norm);
+        if (topics.some(function (t) { return hasWord(title, t); })) return true;
+        if (!body) return false;
+        return topics.some(function (t) { return t.indexOf(' ') > 0 && hasWord(body, t); });
       });
     }).catch(function () { return []; });
   }
