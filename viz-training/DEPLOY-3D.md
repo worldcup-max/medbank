@@ -23,6 +23,7 @@ git diff --stat
 node --check viz3d.js
 node viz-training/tools/validate-scenes.mjs      # must end "2/2 scenes valid."
 node viz-training/tools/test-topic-match.mjs     # must end "18/18 expectations met."
+node viz-training/tools/test-mesh-loading.mjs    # must end "6/6 expectations met." (takes ~40s)
 node viz-training/tools/build-scene-index.mjs    # regenerate if any scene changed
 ```
 
@@ -107,9 +108,17 @@ state involved. That is the whole point of shipping it dark first.
 
 ## 8 · Known limits at launch
 
-- **Meshes are undecimated.** V1 serves BodyParts3D's raw triangle counts straight off a public CDN:
-  ~15 MB for the arm scene, and CDN latency we do not control. §9 is the fix. Do it before any student sees
-  the feature, not after.
+- **The public CDN is not a production source, and this is now the blocking issue.** Opened on the live site
+  2026-08-25, the arm scene reported *"Loaded 2 of 15 parts — 8 unavailable"*: seven meshes that render
+  perfectly failed to arrive. The meshes are fine; the CDN is not, for files this size. §9 is the fix, and
+  it is no longer an optimisation — the feature does not work without it.
+- Two defects on our side of that, now fixed but worth knowing about: the loader tried **once**, with **no
+  timeout**, and reported a failed download as *"not available in this mesh set"* — telling the student a
+  permanent falsehood about the corpus, and very nearly sending us to price a different mesh provider we do
+  not need. It now retries three times against a 12-second timeout, opens the scene after 8 seconds with
+  whatever has arrived and folds in stragglers as they land, offers **↻ Retry** for the ones that gave up,
+  and says *"download failed"* and *"no 3D model of this structure yet"* as the different things they are.
+  `test-mesh-loading.mjs` holds that distinction in place.
 - Two scenes (arm, heart). The 3D tab appears only on topics that match one of them; every other topic is
   unchanged. The corpus grows from Thursday.
 - The heart declares three real gaps (no chamber meshes, no aortic valve, no pericardium) rather than faking them.

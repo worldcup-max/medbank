@@ -117,19 +117,43 @@
       try { base = (window.MEDBANK_CONFIG && window.MEDBANK_CONFIG.MESH_BASE) || ''; } catch (e) {}
       return (base || this.stlBase) + id + '.stl';
     },
+    /* Resolves to a mesh, or to a REASON it has none. The two are not the same thing and the difference
+       matters to a student: "there is no model of this structure" is a fact about the corpus, while "the
+       download failed" is a fact about the last ten seconds. Reporting the second as the first tells the
+       student a lie and sends whoever reads the bug report hunting for a better mesh set that they do not
+       need. So: no ref → {reason:'none'}; anything else → {reason:'failed'} after retries are exhausted.
+
+       Retries exist because a public CDN is not a guarantee. Measured 2026-08-25 against the mirror, two of
+       the arm scene's nine meshes took over 40 seconds and one never arrived at all on the first attempt —
+       with a single try and no timeout, that is a permanently greyed-out muscle for no good reason. */
     load: function (T, s) {
       var url = this.resolve(s);
-      if (!url) return Promise.resolve(null);
-      return new Promise(function (res) {
-        new T.STLLoader().load(url, function (geo) {
-          geo.computeVertexNormals();
-          var col = new T.Color(s.color || '#c9c3d8');
-          var mat = new T.MeshStandardMaterial({ color: col, roughness: 0.62, metalness: 0.02, transparent: true, opacity: 1, side: T.DoubleSide });
-          var mesh = new T.Mesh(geo, mat);
-          mesh.userData = s;
-          res(mesh);
-        }, null, function () { res(null); });
-      });
+      if (!url) return Promise.resolve({ mesh: null, reason: 'none' });
+      var ATTEMPTS = 3, TIMEOUT = 12000;
+      function attempt(n) {
+        return new Promise(function (res) {
+          var settled = false;
+          var timer = setTimeout(function () { if (!settled) { settled = true; res(null); } }, TIMEOUT);
+          try {
+            new T.STLLoader().load(url + (n ? (url.indexOf('?') < 0 ? '?' : '&') + 'retry=' + n : ''), function (geo) {
+              if (settled) return; settled = true; clearTimeout(timer);
+              try {
+                geo.computeVertexNormals();
+                var col = new T.Color(s.color || '#c9c3d8');
+                var mat = new T.MeshStandardMaterial({ color: col, roughness: 0.62, metalness: 0.02, transparent: true, opacity: 1, side: T.DoubleSide });
+                var mesh = new T.Mesh(geo, mat);
+                mesh.userData = s;
+                res(mesh);
+              } catch (e) { res(null); }
+            }, null, function () { if (!settled) { settled = true; clearTimeout(timer); res(null); } });
+          } catch (e) { if (!settled) { settled = true; clearTimeout(timer); res(null); } }
+        }).then(function (m) {
+          if (m || n + 1 >= ATTEMPTS) return m;
+          /* back off before trying again — hammering a CDN that just refused makes it likelier to refuse */
+          return new Promise(function (r) { setTimeout(r, 400 * Math.pow(2, n)); }).then(function () { return attempt(n + 1); });
+        });
+      }
+      return attempt(0).then(function (m) { return { mesh: m, reason: m ? null : 'failed' }; });
     }
   });
 
@@ -572,6 +596,7 @@
             '<div class="mb3d-sh"><span data-r="sidehd">Parts</span><a data-r="showall">show all</a></div>' +
             '<div class="mb3d-list" data-r="list"></div>' +
             '<div class="mb3d-acts"><button class="mb3d-btn pri" data-r="play">▶ Play</button>' +
+              '<button class="mb3d-btn" data-r="retry" style="display:none">↻ Retry</button>' +
               '<button class="mb3d-btn" data-r="tour">Tour parts</button>' +
               '<button class="mb3d-btn" data-r="ghost">Ghost others</button>' +
               '<button class="mb3d-btn" data-r="solo">Only this</button></div>' +
@@ -621,7 +646,9 @@
 
     var holder = new T.Group(); sceneObj.add(holder);
     var overlay = new T.Group(); sceneObj.add(overlay);          // relationship lines
-    var meshes = {}, pins = {}, loadedKeys = [], missing = [];
+    /* missing = the corpus has no model for this structure (a real, permanent gap)
+       failed  = there IS a model and we could not fetch it (transient, and retryable) */
+    var meshes = {}, pins = {}, loadedKeys = [], missing = [], failed = [], failedKeys = [];
     var clipPlane = new T.Plane(new T.Vector3(0, 0, -1), 0), clipping = false;
     /* Auto-rotation is an invitation, not a behaviour. It shows the thing is three-dimensional for three
        seconds, then the model belongs to the student — and the first touch ends it for good, so nothing
@@ -633,6 +660,7 @@
       renderer.domElement.addEventListener(ev, stopSpin, { passive: true });
     });
     var selected = [], ghost = false, solo = false, running = true, raf = 0, tourTimer = null, playTimer = null;
+    var currentView = 0;                               // so a retry can restore the view the student was on
     /* interaction depth — the difference between "opened it" and "used it" */
     var useCount = { partTaps: 0, views: 0, traces: 0, solo: 0, ghost: 0, played: 0, tours: 0 };
     var openedAt = (window.performance || Date).now();
@@ -640,19 +668,34 @@
 
     /* ---------- load every structure; a failure is reported, never fatal ---------- */
     var anchorStructs = structures.filter(function (s) { return s.render === 'anchor'; });
-    var jobs = structures.filter(function (s) { return s.render !== 'anchor'; }).map(function (s) {
-      return adapter.load(T, s).then(function (m) {
-        if (!m) { missing.push(s.label || s.key); return false; }
-        holder.add(m); meshes[s.key] = m; loadedKeys.push(s.key);
+    var meshStructs = structures.filter(function (s) { return s.render !== 'anchor'; });
+    function loadOne(s) {
+      return Promise.resolve(adapter.load(T, s)).then(function (r) {
+        /* adapters may still return a bare mesh or null; normalise so an old adapter keeps working */
+        if (!r || r.isObject3D) r = { mesh: r || null, reason: r ? null : 'none' };
+        if (!r.mesh) {
+          (r.reason === 'failed' ? failed : missing).push(s.label || s.key);
+          if (r.reason === 'failed') failedKeys.push(s.key);
+          return false;
+        }
+        holder.add(r.mesh); meshes[s.key] = r.mesh; loadedKeys.push(s.key);
         return true;
       });
-    });
+    }
+    var jobs = meshStructs.map(loadOne);
 
     /* A landmark is a place ON a bone, not a model of its own: the supraglenoid tubercle has no mesh, it
        is a spot on the scapula. Anchors are authored in the parent's own bounding box as fractions
        (uvw, each 0–1), so they survive any scaling the viewer applies and travel with the parent when it
        moves. They are children of the parent mesh, which is what keeps them exactly where they were put. */
+    /* Idempotent on purpose: this runs again whenever a late or retried bone arrives, and a landmark that
+       got added twice would sit in the scene as a doubled, double-bright pin that never goes away. */
     function placeAnchors() {
+      anchorStructs.forEach(function (s) {
+        var old = meshes[s.key];
+        if (old) { if (old.parent) old.parent.remove(old); delete meshes[s.key];
+          var li = loadedKeys.indexOf(s.key); if (li >= 0) loadedKeys.splice(li, 1); }
+      });
       anchorStructs.forEach(function (s) {
         var a = s.anchor || {}, parent = meshes[a.on];
         var col = new T.Color(s.color || '#ffcf5c');
@@ -685,8 +728,31 @@
 
     /* mount() resolves only once every mesh has settled, so callers can trust that the parts list,
        the view chips and any requested part focus are on screen when the promise resolves. */
-    var ready = Promise.all(jobs).then(function () {
-      if (!loadedKeys.length) { st('No meshes could be loaded — check your connection.', 'warn'); return player; }
+    /* Do not hold the whole viewer hostage to the slowest file. Three attempts against a 12-second
+       timeout means one dead mesh could keep a student staring at an empty stage for over half a minute
+       while eight others sat loaded and ready. So the scene opens on whichever arrives first: everything,
+       or a deadline. Stragglers are still running, and each one that lands afterwards folds itself in. */
+    var OPEN_AFTER = 8000;
+    var settled = false, lateTimer = null;
+    jobs.forEach(function (j) { j.then(function () { if (settled) scheduleLate(); }); });
+
+    function scheduleLate() {                              // debounced: several may land together
+      if (lateTimer) return;
+      lateTimer = setTimeout(function () {
+        lateTimer = null;
+        if (!LIVE || LIVE !== player) return;              // the student navigated away; do nothing
+        fit(); placeAnchors(); buildList(); buildChips(); applyView(currentView || 0);
+        showLoadStatus();
+      }, 250);
+    }
+
+    var ready = Promise.race([
+      Promise.all(jobs),
+      new Promise(function (r) { setTimeout(r, OPEN_AFTER); })
+    ]).then(function () {
+      settled = true;
+      if (!loadedKeys.length && !meshStructs.length) { st('This scene has no 3D models.', 'warn'); return player; }
+      if (!loadedKeys.length) { st('Still fetching — nothing has arrived yet.', 'warn'); return player; }
       fit();
       placeAnchors();                                // after fit(), so landmarks land on the settled bones
       holder.rotation.y = (scene.camera && scene.camera.initialYaw) || 0;
@@ -695,13 +761,53 @@
       applyView(0);
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
       emit('open', { scene: scene.id, via: opts.via || 'tab', part: opts.part || null,
-                     structures: structures.length, loaded: loadedKeys.length, missing: missing.length,
+                     structures: structures.length, loaded: loadedKeys.length,
+                     missing: missing.length, failed: failed.length,
                      load_ms: Math.round((window.performance || Date).now() - openedAt) });
-      var msg = 'Loaded ' + loadedKeys.length + ' of ' + structures.length + ' parts';
-      st(missing.length ? msg + ' — ' + missing.length + ' unavailable' : msg + ' — tap any part to isolate it.', missing.length ? 'warn' : 'ok', true);
+      showLoadStatus();
       note();
       return player;
     });
+
+    /* Say which of the two things happened, because they call for different responses: a gap is the
+       corpus's problem and there is nothing the student can do, while a failed download is worth one tap. */
+    function showLoadStatus() {
+      /* Three states, and conflating any two of them misinforms the student:
+           pending — still on the wire. Saying anything final about it now would be guessing.
+           failed  — tried and gave up. One tap can fix it.
+           missing — the corpus has no model. Nothing to tap.                                        */
+      var pending = meshStructs.length - meshStructs.filter(function (s) {
+        return meshes[s.key] || failedKeys.indexOf(s.key) >= 0 || missing.indexOf(s.label || s.key) >= 0;
+      }).length;
+      var msg = 'Loaded ' + loadedKeys.length + ' of ' + structures.length + ' parts';
+      showRetry(failed.length > 0 && !retrying);
+      if (pending > 0) st(msg + ' — still fetching ' + pending + '…', 'warn', false);
+      else if (failed.length) st(msg + ' — ' + failed.length + " didn't download. Tap ↻ Retry.", 'warn', false);
+      else if (missing.length) st(msg + ' — ' + missing.length + ' have no 3D model yet.', 'warn', true);
+      else st(msg + ' — tap any part to isolate it.', 'ok', true);
+    }
+
+    function showRetry(on) {
+      var e = $('retry'); if (!e) return;
+      e.style.display = on ? '' : 'none';
+    }
+
+    /* Retry only the ones that failed. Nothing that already loaded is touched, so a retry can never
+       cost a student a working mesh. */
+    var retrying = false;
+    function retryFailed() {
+      if (retrying || !failedKeys.length) return;
+      retrying = true;
+      var again = meshStructs.filter(function (s) { return failedKeys.indexOf(s.key) >= 0; });
+      failed.length = 0; failedKeys.length = 0;
+      st('Retrying ' + again.length + '…', 'warn', false);
+      emit('retry', { scene: scene.id, parts: again.length });
+      Promise.all(again.map(loadOne)).then(function () {
+        retrying = false;
+        fit(); placeAnchors(); buildList(); buildChips(); applyView(currentView || 0);
+        showLoadStatus();
+      });
+    }
 
     function note() {
       var bits = [];
@@ -738,7 +844,10 @@
         b.className = 'mb3d-part'; b.setAttribute('data-key', p.key);
         if (!ok) b.setAttribute('disabled', '');
         b.innerHTML = '<span class="mb3d-dot" style="background:' + (ok ? esc(p.color || '#7c5cff') : '#3a365e') + '"></span>' +
-          '<span><b style="font-weight:600">' + esc(p.label) + '</b><small>' + esc(ok ? (p.narration || '') : 'not available in this mesh set') + '</small></span>';
+          '<span><b style="font-weight:600">' + esc(p.label) + '</b><small>' + esc(
+            ok ? (p.narration || '')
+               : (failedKeys.indexOf(p.key) >= 0 ? 'download failed — tap ↻ Retry above' : 'no 3D model of this structure yet')
+          ) + '</small></span>';
         if (ok) b.addEventListener('click', function () { toggle(p.key); });
         list.appendChild(b);
         if (ok) addPin(p);
@@ -814,6 +923,7 @@
 
     function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
+      currentView = i;
       useCount.views++;
       stopTour();
       if (!fromPlay) stopPlay();
@@ -980,6 +1090,7 @@
     });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
     $('play').addEventListener('click', function () { playTimer ? stopPlay() : startPlay(); });
+    $('retry').addEventListener('click', retryFailed);
 
     /* ---------- play the scene as a short narrated sequence ----------
        This is the "visualize video" shape: the beats the author wrote, in order, each with its camera,
