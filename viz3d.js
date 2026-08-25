@@ -539,6 +539,13 @@
 
   /* ======================= the player ======================= */
   var LIVE = null;
+  /* Every mount gets a ticket. The app re-renders its whole page on any state change and schedules a fresh
+     MB3D.mount() each time, so two mounts of the same scene can easily be in flight at once — and because
+     each one loads three.js, a scene file and a dozen meshes, they finish in whatever order the network
+     decides. Without a ticket the loser can finish LAST, overwrite LIVE, and leave the player pointing at
+     a canvas inside a DOM node the app has already thrown away: a black rectangle that ignores the mouse,
+     while a perfectly good renderer draws into nothing. The newest mount always wins. */
+  var MOUNT_SEQ = 0;
 
   function mount(host, sceneId, opts) {
     opts = opts || {};
@@ -547,8 +554,9 @@
     injectCSS();
     dispose();
     host.innerHTML = '<div class="mb3d"><div class="mb3d-err">Loading the 3D scene…</div></div>';
-    return getJSON(SCENES + sceneId + '.json').then(function (scene) { return render(host, scene, opts); })
-      .catch(function (e) { fail(host, e); throw e; });
+    var seq = ++MOUNT_SEQ;
+    return getJSON(SCENES + sceneId + '.json').then(function (scene) { return render(host, scene, opts, seq); })
+      .catch(function (e) { if (seq === MOUNT_SEQ) fail(host, e); throw e; });
   }
 
   /* Render a scene OBJECT rather than an id. Two callers need this: a page that inlines its scenes (the
@@ -560,15 +568,17 @@
     injectCSS();
     dispose();
     host.innerHTML = '<div class="mb3d"><div class="mb3d-err">Loading the 3D scene…</div></div>';
-    return Promise.resolve().then(function () { return render(host, scene, opts); })
-      .catch(function (e) { fail(host, e); throw e; });
+    var seq = ++MOUNT_SEQ;
+    return Promise.resolve().then(function () { return render(host, scene, opts, seq); })
+      .catch(function (e) { if (seq === MOUNT_SEQ) fail(host, e); throw e; });
   }
 
   function fail(host, e) {
     host.innerHTML = '<div class="mb3d"><div class="mb3d-err"><b style="color:#f3f0ff">3D isn\'t available right now.</b><br><br>' + esc(e && e.message || e) + '</div></div>';
   }
 
-  function render(host, scene, opts) {
+  function render(host, scene, opts, seq) {
+    if (seq === undefined) seq = ++MOUNT_SEQ;
     return Promise.resolve(scene)
       .then(function (scene) {
         var providerName = (scene.provider && scene.provider.primary) || 'bodyparts3d';
@@ -576,11 +586,13 @@
         if (!adapter) throw new Error('No renderer for provider "' + providerName + '".');
         if (adapter.unsupported) throw new Error(adapter.unsupported);
         if (scene.mode && scene.mode !== '3d_anatomy') throw new Error('This scene is authored for the "' + scene.mode + '" engine.');
-        return loadThree().then(function (T) { return build(T, host, scene, adapter, opts); });
+        return loadThree().then(function (T) { return build(T, host, scene, adapter, opts, seq); });
       });
   }
 
-  function build(T, host, scene, adapter, opts) {
+  function build(T, host, scene, adapter, opts, seq) {
+    /* Superseded while three.js was loading — do not touch the DOM the newer mount now owns. */
+    if (seq !== undefined && seq !== MOUNT_SEQ) return null;
     var structures = (scene.structures || []).filter(function (s) { return s.key; });
     var parts = structures.filter(function (s) { return s.role === 'part'; });
     var views = scene.views || [];
@@ -720,10 +732,19 @@
     }
 
     var player = {
-      scene: scene, host: host, meshes: meshes,
-      camera: camera, controls: controls,          // exposed for tests and for tuning from the console
+      scene: scene, host: host, meshes: meshes,     // `scene` is the scene JSON; `object3d` is the three.js one
+      camera: camera, controls: controls,           // exposed for tests and for tuning from the console
+      object3d: sceneObj, holder: holder, renderer: renderer,
+      /* "Is it actually drawing?" — the one question a black viewport cannot answer for itself. */
+      frames: function () { return frames; },
+      alive: function () { return running; },
+      lastError: function () { return loopErr; },
       dispose: function () { teardown(); }
     };
+    /* One more chance to have been overtaken: three.js and the scene JSON are loaded, the renderer exists,
+       but a newer mount may have started while all that was happening. Free the GPU objects and stand
+       down rather than claiming LIVE. */
+    if (seq !== undefined && seq !== MOUNT_SEQ) { teardown(); return player; }
     LIVE = player;
 
     /* mount() resolves only once every mesh has settled, so callers can trust that the parts list,
@@ -750,6 +771,7 @@
       Promise.all(jobs),
       new Promise(function (r) { setTimeout(r, OPEN_AFTER); })
     ]).then(function () {
+      if (seq !== undefined && seq !== MOUNT_SEQ) return player;   // a newer mount owns the host now
       settled = true;
       if (!loadedKeys.length && !meshStructs.length) { st('This scene has no 3D models.', 'warn'); return player; }
       if (!loadedKeys.length) { st('Still fetching — nothing has arrived yet.', 'warn'); return player; }
@@ -1263,14 +1285,35 @@
       if (controls.handleResize) controls.handleResize();   // trackball needs to be told
     }
     window.addEventListener('resize', resize); resize();
+    /* The render loop, and the loop's own black-box recorder.
+       A viewport that renders nothing is the hardest failure in this player to diagnose, because every
+       way it can happen looks identical from outside: a black rectangle that ignores the mouse. It can be
+       the loop never starting, the loop being torn down by a stray dispose(), or a throw inside the body —
+       and a throw is the cruellest, because `raf` is already scheduled by then, so the next frame throws
+       at the same line forever and the console fills with one repeated error nobody reads.
+
+       So the loop counts its own frames, reports the first exception to the student instead of repeating
+       it, and stops. `frames` and `alive` are on the player, which is what lets "is it drawing?" be
+       answered in one line from the console rather than inferred from a rotation value. */
+    var frames = 0, loopErr = null;
     function loop() {
       if (!running) return;
       raf = requestAnimationFrame(loop);
       if (document.hidden) return;                     // don't burn battery in a background tab
-      var now = (window.performance || Date).now(), dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0;
-      lastT = now;
-      if (spinning) { if (now > spinTill) spinning = false; else holder.rotation.y += dt * 0.55; }
-      controls.update(); updatePins(); renderer.render(sceneObj, camera);
+      try {
+        var now = (window.performance || Date).now(), dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0;
+        lastT = now;
+        if (spinning) { if (now > spinTill) spinning = false; else holder.rotation.y += dt * 0.55; }
+        controls.update(); updatePins(); renderer.render(sceneObj, camera);
+        frames++;
+      } catch (e) {
+        loopErr = e;
+        running = false;
+        if (raf) cancelAnimationFrame(raf);
+        try { console.error('[MB3D] render loop stopped:', e); } catch (e2) {}
+        try { st('3D stopped drawing: ' + (e && e.message || e), 'warn'); } catch (e2) {}
+        try { emit('loop_error', { scene: scene.id, message: String(e && e.message || e), frames: frames }); } catch (e2) {}
+      }
     }
     loop();
 
