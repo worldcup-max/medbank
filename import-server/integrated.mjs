@@ -1,0 +1,61 @@
+/* Integrated Content Pipeline — PURE deterministic core. No AI, no DB. The AI candidate-miner and adversarial
+ * reviewer are upstream, non-deterministic seams (mocked in tests). THESE functions are the exact gates that
+ * decide what may enter the Integrated Bank: the dependency test, the QA score, and the content-readiness gate.
+ * AI is a candidate-finder; these gates + a human are the judges. */
+
+export const TIERS = { mechanistic:1, diagnostic:2, management:3, competing:4, longitudinal:5 };
+
+/* THE dependency test — genuine integration iff BOTH domains are required AND the secondary is a real reasoning
+   domain (not a symptom/comorbidity/vocabulary of the primary). Kills the `infect`/fever false positives. */
+export function dependencyGate(v){
+  v=v||{};
+  const pass = !!(v.removeA_changes && v.removeB_changes && v.bothRequired && v.secondaryIsRealDomain);
+  const reasons=[];
+  if(!v.removeA_changes)        reasons.push("domain A not required (answer unchanged without it)");
+  if(!v.removeB_changes)        reasons.push("domain B not required (answer unchanged without it)");
+  if(!v.bothRequired)           reasons.push("both domains not jointly required");
+  if(!v.secondaryIsRealDomain)  reasons.push("secondary is a symptom/comorbidity, not a reasoning domain");
+  return { pass, reasons };
+}
+
+/* QA score — 7 criteria; approve iff total ≥ 15/19 AND dependency ≥ 3 (dependency is mandatory). */
+export const QA_MAX = { dependency:3, coherence:3, educational:3, discrimination:3, targetClarity:2, difficulty:2, noArtificialComplexity:3 };
+export const QA_TOTAL_MAX = 19, QA_THRESHOLD = 15, QA_DEP_MIN = 3;
+export function qaScore(scores){
+  scores=scores||{}; let total=0;
+  Object.keys(QA_MAX).forEach(k=>{ total += Math.max(0, Math.min(QA_MAX[k], scores[k]||0)); });
+  const dep=scores.dependency||0;
+  const approve = total>=QA_THRESHOLD && dep>=QA_DEP_MIN;
+  return { total, max:QA_TOTAL_MAX, dependency:dep, approve,
+    reason: approve?null:(dep<QA_DEP_MIN ? ("dependency "+dep+" < "+QA_DEP_MIN+" (mandatory)") : ("total "+total+" < "+QA_THRESHOLD)) };
+}
+
+/* Content-readiness gate over the APPROVED bank. Do NOT expose Integrated Mode until ready. */
+export const READINESS = { minApproved:100, minFamilies:8, minPerFamily:10, maxFamilyShare:0.30, minPerPairAnalytics:3 };
+export function readinessGate(approved, cfg){
+  const R=Object.assign({}, READINESS, cfg||{});
+  approved=approved||[];
+  const byFamily={}; approved.forEach(it=>{ const f=(it&&it.integration_family)||"?"; byFamily[f]=(byFamily[f]||0)+1; });
+  const total=approved.length, families=Object.keys(byFamily);
+  const familiesOverMin=families.filter(f=>byFamily[f]>=R.minPerFamily);
+  const biggestShare = total ? Math.max(0, ...families.map(f=>byFamily[f]/total)) : 0;
+  const checks={
+    enough_total: total>=R.minApproved,
+    enough_families: families.length>=R.minFamilies,
+    families_over_min_size: familiesOverMin.length>=R.minFamilies,
+    no_family_dominates: biggestShare<=R.maxFamilyShare
+  };
+  const ready = Object.values(checks).every(Boolean);
+  const analytics_ready_families = families.filter(f=>byFamily[f]>=R.minPerPairAnalytics);
+  return { ready, total, families:families.length, byFamily, biggest_family_share:Math.round(biggestShare*100)/100,
+    checks, analytics_ready_families, gate:R };
+}
+
+/* review lifecycle: candidate → ai_reviewed → pending → approved | rejected | needs_edit → (resubmit) pending */
+export function nextStatus(cur, action){
+  const flow={ candidate:{ ai_review:"ai_reviewed", reject:"rejected" },
+    ai_reviewed:{ to_human:"pending", reject:"rejected" },
+    pending:{ approve:"approved", reject:"rejected", edit:"needs_edit" },
+    needs_edit:{ resubmit:"pending", reject:"rejected" } };
+  return (flow[cur] && flow[cur][action]) || cur;
+}
