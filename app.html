@@ -2083,6 +2083,10 @@ const topicRow = (t,showLec) => `
         t.imgCount?` · ${t.imgCount} images`:''}</div>
     </span>
     ${statusChip(t)}
+    <span class="rowacts" onclick="event.stopPropagation()">
+      <button class="rowact" title="Rename topic" onclick="event.stopPropagation();mbRenameTopic('${t.id}')">✏️</button>
+      <button class="rowact" title="Remove topic" onclick="event.stopPropagation();mbDeleteTopic('${t.id}')">🗑</button>
+    </span>
   </div>`;
 
 /* ---------- pages ---------- */
@@ -2651,7 +2655,7 @@ function pageTopic(id){
      ${pipeline}
      ${t.ready?masteryChips((t.recall||[]).map(c=>cid(t.id,'recall',c))):''}
      ${t.ready?modeSwitcher(t):''}
-     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="addToFolderPrompt('${t.id}')">📁 Add to folder</button><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button><button class="btn" style="font-size:12.5px" onclick="mbRenameTopic('${t.id}')">✏️ Rename</button><button class="btn" style="font-size:12.5px;color:#c0392b" onclick="mbDeleteTopic('${t.id}')">🗑 Remove</button></div>`:''}
+     ${t.ready?`<div class="btnrow" style="gap:8px;margin:-6px 0 14px;flex-wrap:wrap"><button class="btn" style="font-size:12.5px" onclick="addToFolderPrompt('${t.id}')">📁 Add to folder</button><button class="btn" style="font-size:12.5px" onclick="exportTopicPDF('${t.id}')">⬇ Export PDF</button><button class="btn" style="font-size:12.5px" onclick="resetTopicProgress('${t.id}')">↺ Reset progress</button></div>`:''}
      ${body}`;
 }
 
@@ -7396,6 +7400,11 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .rp-below{color:#c0392b}
 .rp-above{color:#0a9d55}
 .rp-insight{font-size:13px;padding:8px 10px;border:1px solid var(--line,#e3e0ef);border-radius:10px;background:rgba(124,58,237,.05)}
+/* Topic-row rename/remove controls */
+.rowacts{display:inline-flex;gap:2px;align-items:center;margin-left:6px}
+.rowact{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 5px;border-radius:7px;opacity:.55;line-height:1}
+.rowact:hover{opacity:1;background:rgba(0,0,0,.06)}
+.row:hover .rowact{opacity:.8}
 /* V1.7 Blueprint panel */
 .mgbp{margin:6px 0 2px}
 .mgbp-grid{display:flex;flex-wrap:wrap;gap:8px}
