@@ -42,3 +42,26 @@ low-confidence gap behaviour, gap recall is 81%. Not a defect — a calibration 
   gated on real matched-vs-generic outcomes**, not on this simulation.
 
 **Verdict:** engine intelligence + predictiveness + experiment soundness = validated. Efficacy = still real-user-gated.
+
+---
+
+## Run 2026-08-25 (2) — multi-seed stability (6 seeds: 1, 7, 42, 100, 2024, 31337)
+
+Purpose: prove the diagnosis + robustness results are not a single-seed artifact. Full V1.6 intervention system now
+built (gap+fragile activated, misconception built/flag-off).
+
+**Diagnosis accuracy stability (pilot-sim, N=300/archetype/seed):**
+| archetype | range across 6 seeds |
+|---|---|
+| gap | 76–82% |
+| misconception | **98–99%** |
+| fragile | 80–85% |
+| solid | **98–99%** |
+All 9/9 assertions pass on every seed (misconception→gap ≤ ~1%, predictiveness + A/B-detectability hold each time).
+
+**Longitudinal robustness (60 students × 45 days, 6 seeds):** 4/4 every seed · **0 crashes · 0 schedule pathologies**
+across 870–960 attempts / 630–720 retest-serves per seed.
+
+**Verdict:** the frozen diagnosis engine is stably accurate and the whole loop (V1.5 → V1.6 → A6 → A7) is robust over
+long timelines at scale, reproducibly. Efficacy of the interventions themselves remains real-user-gated (live A/B on
+gap+fragile now running; misconception built but flag-off until its A/B earns it).

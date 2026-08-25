@@ -41,7 +41,7 @@ function qbQuestionsForTarget(targetId, served){ var out=[], sv={}; (served||[])
     out.push(qbItemFromMeta(h,{topicId:t.id,target_id:targetId,stem:q.stem,options:q.options,answer:q.answer,rationales:q.rationales})); })); return out; }
 
 const names=['gapOn','gapDiag','gapConceptPool','gapEligible','gapBucket','gapStart','gapPick','gapAdvance','gapLogAttempt'];
-const src='var GAPLOOP=null;\n'+names.map(grab).join('\n');
+const src='var GAPLOOP=null;\n'+'function fragOn(){return false;}\nfunction misconOn(){return false;}\nfunction ivPhase(it){return it==="fragile"?"v1.6-phase3":it==="misconception"?"v1.6-phase4":"v1.6-phase2";}\n'+names.map(grab).join('\n');
 const f=new Function('qbStore','qbHash','qbShuffle','qbCogOf','persist','smartStats','smartDiagnose','smartPool','qbSkillLabel','esc','smartLog','qbUid','qbSchedApply','window','qbItemFromMeta','qbQuestionsForTarget','gapRender',
   src+'\n return { gapOn, gapEligible, gapConceptPool, gapBucket, gapStart, gapPick, gapAdvance, _loop:()=>GAPLOOP, _setLoop:(v)=>{GAPLOOP=v;} };');
 const API=f(qbStore,qbHash,qbShuffle,qbCogOf,persist,smartStats,smartDiagnose,smartPool,qbSkillLabel,esc,smartLog,qbUid,qbSchedApply,win,qbItemFromMeta,qbQuestionsForTarget,gapRender);

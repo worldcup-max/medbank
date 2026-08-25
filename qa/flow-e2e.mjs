@@ -58,7 +58,7 @@ const pieces = [
   extractFn("smartExamDate"), extractFn("smartHalfLife"), extractFn("smartBand"),
   extractFn("smartStats"), extractFn("smartAcc"), extractFn("smartDiagnose"),
   extractFn("qbSkillLabel"), extractFn("qbShuffle"), extractFn("qbHash"), extractFn("smartLog"),
-  extractFn("gapOn"), extractFn("fragOn"), extractFn("gapDiag"), extractFn("gapConceptPool"), extractFn("gapBucket"),
+  extractFn("gapOn"), extractFn("fragOn"), extractFn("misconOn"), extractFn("ivPhase"), extractFn("gapDiag"), extractFn("gapConceptPool"), extractFn("gapBucket"),
   extractFn("gapStart"), extractFn("gapToPractice"), extractFn("gapPick"), extractFn("gapAdvance"), extractFn("gapLogAttempt"),
   extractFn("fixQConceptQh"), extractFn("fixQueue"), extractFn("fixQAction"), extractFn("fixQGo"),
 ];

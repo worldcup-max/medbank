@@ -3154,7 +3154,9 @@ function qbQuestionHtml(){
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'+qbTeachHtml(q,QB.i);
     if(QB.picked!==q.answer){ var qhc=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
       var _gapDg=(typeof gapEligible==='function')?gapEligible(q,QB.picked):null;   // V1.6 (flag-gated): gap miss → offer the Learn loop instead of the plain retest
+      var _misDg=(!_gapDg && typeof misconEligible==='function')?misconEligible(q,QB.picked):null;   // else confident-wrong → offer the contrast (soft wording)
       if(_gapDg){ rationale+=gapOfferHtml(qhc); }
+      else if(_misDg){ rationale+=misconOfferHtml(qhc, QB.picked); }
       else { rationale+='<div class="qbretest"><button class="btn sm" onclick="conceptRetest(\''+qhc+'\')">🔄 Retest this concept</button><span>a different question, same idea — proves you learned it</span></div>'; } }
   }
   // V1.5 — non-interruptive confidence capture (tutor reveal), asked once per question
@@ -3290,7 +3292,7 @@ function fixQueue(scope){
     c.qh=fixQConceptQh(st,c.type,c.key);
     // only a gap concept that actually has a distinct sibling question can run the Learn→Practice→Retest loop;
     // otherwise the item must route to a drill instead (never offer an action that silently can't launch).
-    c.canLoop = (c.dg.type==='gap' || c.dg.type==='fragile') && !!c.qh && (typeof gapConceptPool==='function') && gapConceptPool(c.qh).length>0;
+    c.canLoop = (c.dg.type==='gap' || c.dg.type==='fragile' || c.dg.type==='misconception') && !!c.qh && (typeof gapConceptPool==='function') && gapConceptPool(c.qh).length>0;
     picked.push(c); }
   return picked;
 }
@@ -3298,7 +3300,7 @@ function fixQueue(scope){
 function fixQAction(dg, canLoop){
   if(dg.type==='gap')           return canLoop ? { verb:'Learn → Practice', kind:'gap' }
                                                : { verb:'Practise this',            kind:'drill' };   // no material for a distinct loop → drill the concept
-  if(dg.type==='misconception') return { verb:'Practise & confront',       kind:'drill' };
+  if(dg.type==='misconception') return (canLoop && misconOn()) ? { verb:'Sharpen the distinction', kind:'misconception' } : { verb:'Practise & confront', kind:'drill' };
   if(dg.type==='fragile') return (canLoop && fragOn()) ? { verb:'Reinforce', kind:'fragile' } : { verb:'Smart Drill', kind:'drill' };
   return { verb:'Smart Drill', kind:'drill' };
 }
@@ -3322,6 +3324,7 @@ function fixQGo(i){ var it=_FIXQ[i]; if(!it) return; var a=fixQAction(it.dg, it.
   var launched=false;
   if(a.kind==='gap' && it.qh){ launched = gapStart(it.qh, true); }         // returns false if it couldn't build the loop
   if(a.kind==='fragile' && it.qh){ launched = gapStart(it.qh, true, 'fragile'); }
+  if(a.kind==='misconception' && it.qh){ launched = gapStart(it.qh, true, 'misconception', null); }
   if(!launched){ smartDrillDim(it.type, encodeURIComponent(it.key), '*'); }   // guaranteed fallback — never a dead click
 }
 /* ===== Q-bank performance analytics — weakness mapping (all derived from the attempts log) ===== */
@@ -3819,6 +3822,8 @@ function conceptRetest(qh){ var s=qbStore(), mt=(s._qmeta||{})[qh];
  * ===================================================================== */
 function gapOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.GAP_LOOP); }catch(e){ return false; } }
 function fragOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.FRAGILE); }catch(e){ return false; } }   // V1.6 Phase 3 (fragile) — post-session reinforce only
+function misconOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.MISCONCEPTION); }catch(e){ return false; } }   // V1.6 Phase 4 (misconception) — build ≠ trust: default OFF, activation A/B-gated
+function ivPhase(itype){ return itype==='fragile'?'v1.6-phase3':itype==='misconception'?'v1.6-phase4':'v1.6-phase2'; }
 var GAPLOOP=null;
 /* diagnose the concept (skill band) behind a question — evidence-gated, frozen engine */
 function gapDiag(q){ if(!q) return null; var sk=(q.skill||''); if(!sk) return null;
@@ -3842,7 +3847,9 @@ function gapOfferHtml(qh){ return '<div class="gapoffer"><div class="gapoffer-h"
   +'<div class="gapoffer-b"><button class="btn primary sm" onclick="gapStart(\''+qh+'\')">Learn this</button>'
   +'<button class="btn sm ghost" onclick="gapDismiss()">Keep going</button></div></div>'; }
 function gapDismiss(){ /* opt-in: student simply stays in the drill */ }
-function gapStart(qh, fromQueue, itype){ if(!gapOn() && !fromQueue) return false; itype=itype||'gap';
+function gapStart(qh, fromQueue, itype, distractor){ itype=itype||'gap';
+  var flagOk = fromQueue || (itype==='gap'?gapOn():itype==='fragile'?fragOn():itype==='misconception'?misconOn():false);
+  if(!flagOk) return false;
   var s=qbStore(), mt=(s._qmeta||{})[qh]; if(!mt) return false;
   var tid=mt.target_id||null; if(!tid) return false;                    // Target-keyed only
   var pool=gapConceptPool(qh); if(!pool.length) return false;           // needs a Target sibling for practice — else caller drills
@@ -3851,14 +3858,23 @@ function gapStart(qh, fromQueue, itype){ if(!gapOn() && !fromQueue) return false
   var practiceQ=ordered[0]||null;                                       // ONE immediate practice question (A6 owns retention retest)
   var concept=tid;                                                      // identity = target_id
   var ab=gapBucket(itype+'|'+concept);
-  var firstStep=(itype==='fragile')?'reinforce':(ab==='generic'?'practice':'learn');   // fragile is LIGHT: confirm/reinforce first
-  var phase=(itype==='fragile')?'v1.6-phase3':'v1.6-phase2';
-  GAPLOOP={ fromQh:qh, mt:mt, concept:concept, target_id:tid, itype:itype, ab:ab, step:firstStep,
+  var firstStep=(itype==='fragile')?'reinforce':(itype==='misconception')?'contrast':(ab==='generic'?'practice':'learn');
+  GAPLOOP={ fromQh:qh, mt:mt, concept:concept, target_id:tid, itype:itype, distractor:(distractor==null?null:distractor), ab:ab, step:firstStep,
             practiceQ:practiceQ, picked:null, answered:false, pStart:0, practiceOk:null };
-  smartLog({t:'intervention_shown', itype:itype, target_id:tid, concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss'), diagnosis_version:'v1.5', intervention_version:phase});
+  smartLog({t:'intervention_shown', itype:itype, target_id:tid, concept:concept, ab:ab, source:(fromQueue?'queue':'at_miss'), diagnosis_version:'v1.5', intervention_version:ivPhase(itype)});
   smartLog({t:'intervention_step', itype:itype, step:firstStep, target_id:tid});
   if(firstStep==='practice'){ GAPLOOP.pStart=Date.now(); }
   gapRender(); return true; }
+function misconEligible(q, picked){ if(!misconOn()||!q) return null; if(GAPLOOP) return null;
+  if(picked===q.answer) return null;
+  var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
+  var mt=(qbStore()._qmeta||{})[qh]||{}; if(!(mt.target_id||q.target_id)) return null;
+  var dg=gapDiag(q); if(!dg||dg.type!=='misconception') return null;
+  if(!gapConceptPool(qh).length) return null; return dg; }
+function misconOfferHtml(qh, picked){ return '<div class="gapoffer"><div class="gapoffer-h">🧭 Let\'s sharpen a distinction here.</div>'
+  +'<div class="gapoffer-b"><button class="btn primary sm" onclick="misconStart(\''+qh+'\','+(picked==null?'null':picked)+')">Challenge me</button>'
+  +'<button class="btn sm ghost" onclick="gapDismiss()">Keep going</button></div></div>'; }
+function misconStart(qh, picked){ return gapStart(qh, false, 'misconception', picked); }
 function gapClose(){ var o=document.getElementById('gapOverlay'); if(o&&o.parentNode) o.parentNode.removeChild(o); }
 function gapExit(){ if(GAPLOOP && GAPLOOP.step!=='result') smartLog({t:'intervention_abandoned', itype:'gap', step:GAPLOOP.step, concept:GAPLOOP.concept}); GAPLOOP=null; gapClose(); }
 function gapShowNote(){ try{ if(GAPLOOP&&GAPLOOP.mt&&GAPLOOP.mt.src&&window.MB_DOCK_SOURCE){ MB_DOCK_SOURCE(GAPLOOP.mt.src); } else if(window.MB_DOCK_OPEN){ MB_DOCK_OPEN('source'); } }catch(e){} }
@@ -3866,9 +3882,9 @@ function gapToPractice(){ if(!GAPLOOP) return; GAPLOOP.step='practice'; GAPLOOP.
   smartLog({t:'intervention_step', itype:'gap', step:'practice', concept:GAPLOOP.concept}); gapRender(); }
 function gapPick(j){ var g=GAPLOOP; if(!g||g.answered) return; var q=g.practiceQ; if(!q) return;
   g.picked=j; g.answered=true; var ok=(j===q.answer); var ms=g.pStart?(Date.now()-g.pStart):0;
-  gapLogAttempt(q, j, ok, ms, (g.itype==='fragile'?'fragile_practice':'gap_practice')); g.practiceOk=ok; gapRender(); }
+  gapLogAttempt(q, j, ok, ms, (g.itype==='fragile'?'fragile_practice':g.itype==='misconception'?'misconception_practice':'gap_practice')); g.practiceOk=ok; gapRender(); }
 function gapAdvance(){ var g=GAPLOOP; if(!g) return;
-  g.step='result'; smartLog({t:'intervention_completed', itype:(g.itype||'gap'), target_id:g.target_id, concept:g.concept, ab:g.ab, practice_ok:!!g.practiceOk, diagnosis_version:'v1.5', intervention_version:((g.itype==='fragile')?'v1.6-phase3':'v1.6-phase2')}); gapRender(); }
+  g.step='result'; smartLog({t:'intervention_completed', itype:(g.itype||'gap'), target_id:g.target_id, concept:g.concept, ab:g.ab, practice_ok:!!g.practiceOk, diagnosis_version:'v1.5', intervention_version:ivPhase(g.itype||'gap')}); gapRender(); }
 /* practice/retest answers are ordinary attempts so the frozen engine's stats include them */
 function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q._qh||qbHash((q.stem||'')+'|'+((q.options||[]).join('|')));
   s._qmeta[qh]=s._qmeta[qh]||{ topicId:q._topicId, target_id:(q.target_id||null), stem:q.stem, options:q.options, answer:q.answer, rationales:q.rationales||[], objective:(q.objective||q.teaching||''), teaching:(q.teaching||q.objective||''), tag:(q.tag||q.subtopic||'General'), subtopic:(q.subtopic||q.tag||''), skill:(q.skill||''), cognitive_level:qbCogOf(q), src:(q.src||'') };
@@ -3878,13 +3894,22 @@ function gapLogAttempt(q, chosen, ok, ms, mode){ try{ var s=qbStore(); var qh=q.
      frozen engine is untouched; we simply don't feed it. Logged separately + durably for analysis. */
   s._gapPractice=s._gapPractice||[]; s._gapPractice.push({ qh:qh, target_id:(q.target_id||null), chosen:chosen, ok:!!ok, ms:ms, mode:(mode||'gap_practice'), ts:Date.now() });
   if(s._gapPractice.length>2000) s._gapPractice=s._gapPractice.slice(-2000);
-  try{ if(typeof admApi==='function') admApi('/telemetry/intervention',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ t:(mode||'gap_practice'), target_id:(q.target_id||null), qh:qh, ok:!!ok, attempt_signal:(ok?'correct':'incorrect'), diagnosis_version:'v1.5', intervention_version:((mode==='fragile_practice')?'v1.6-phase3':'v1.6-phase2') })}).then(function(){},function(){}); }catch(_e){}
+  try{ if(typeof admApi==='function') admApi('/telemetry/intervention',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ t:(mode||'gap_practice'), target_id:(q.target_id||null), qh:qh, ok:!!ok, attempt_signal:(ok?'correct':'incorrect'), diagnosis_version:'v1.5', intervention_version:((mode==='fragile_practice')?'v1.6-phase3':(mode==='misconception_practice')?'v1.6-phase4':'v1.6-phase2') })}).then(function(){},function(){}); }catch(_e){}
   persist(); }catch(e){} }
 function gapRender(){ if(!GAPLOOP){ gapClose(); return; }
   var o=document.getElementById('gapOverlay'); if(!o){ o=document.createElement('div'); o.id='gapOverlay'; o.className='gapov'; o.onclick=function(e){ if(e.target===o) gapExit(); }; document.body.appendChild(o); }
   o.innerHTML='<div class="gapcard">'+gapBodyHtml()+'</div>'; }
 function gapBodyHtml(){ var g=GAPLOOP; if(!g) return '';
   var lbl=(g.mt.skill?qbSkillLabel(g.mt.skill)+' · ':'')+(g.mt.tag||g.mt.subtopic||'');
+  if(g.step==='contrast'){ var mt=g.mt, ans=mt.answer, rats=mt.rationales||[], ch=(g.distractor!=null && g.distractor!==ans)?g.distractor:null;
+    var chTxt=(ch!=null&&mt.options)?mt.options[ch]:'', chRat=(ch!=null&&rats[ch])?rats[ch]:'';
+    var coTxt=(mt.options?mt.options[ans]:''), coRat=rats[ans]||mt.objective||mt.teaching||'';
+    return '<div class="gaph">🧭 Sharpen the distinction · '+esc(lbl)+'</div>'
+      +'<div class="gapmsg">You may be using a misleading rule here — let\'s pin down the difference.</div>'
+      +(ch!=null?('<div class="gapobj">You leaned toward <b>'+qbLetter(ch)+'</b>'+(chTxt?': '+esc(chTxt):'')+'.'+(chRat?' '+esc(chRat):'')+'</div>'):'')
+      +'<div class="gapobj">The better answer is <b>'+qbLetter(ans)+'</b>'+(coTxt?': '+esc(coTxt):'')+'.'+(coRat?' <span class="sub">'+esc(coRat)+'</span>':'')+'</div>'
+      +(mt.src?'<div class="gaprow"><button class="btn sm" onclick="gapShowNote()">📄 Open the note</button></div>':'')
+      +'<div class="gaprow"><button class="btn primary" onclick="gapToPractice()">Try one on this distinction</button><button class="btn sm ghost" onclick="gapAdvance()">Got it</button></div>'; }
   if(g.step==='reinforce'){ var ro=g.mt.objective||g.mt.teaching||'';     // V1.6 Phase 3: fragile = you got it right but unsure — a light lock-in, not a lesson
     return '<div class="gaph">🟡 Reinforce · '+esc(lbl)+'</div>'+(ro?'<div class="gapobj">🎯 '+esc(ro)+'</div>':'')
       +'<div class="gapmsg">You’re getting these right — you just weren’t sure. Lock in the key idea.</div>'
@@ -3900,13 +3925,14 @@ function gapBodyHtml(){ var g=GAPLOOP; if(!g) return '';
       return '<button class="'+cls+'" '+(g.answered?'disabled':'onclick="gapPick('+j+')"')+'><span class="qbol">'+qbLetter(j)+'</span><span>'+esc(o)+'</span></button>'; }).join('');
     var rat=''; if(g.answered){ rat='<div class="qbrat">'+q.options.map(function(o,j){ var r=(q.rationales&&q.rationales[j])||''; if(!r)return ''; var right=(j===q.answer);
       return '<div class="qbrat-row '+(right?'r':'w')+'"><b>'+qbLetter(j)+(right?' — correct':'')+'</b> '+esc(r)+'</div>'; }).join('')+'</div>'; }
-    var cont=g.answered?'<div class="gaprow"><button class="btn primary" onclick="gapAdvance()">See result</button></div>':('<div class="gaprow">'+(g.itype==='fragile'?'<button class="btn sm ghost" onclick="gapAdvance()">Skip</button>':'<button class="btn sm ghost" onclick="gapExit()">Exit</button>')+'</div>');
-    var phead=(g.itype==='fragile')?'✍️ Quick check — one to lock it in':'✍️ Practice — apply what you just learned';
+    var cont=g.answered?'<div class="gaprow"><button class="btn primary" onclick="gapAdvance()">See result</button></div>':('<div class="gaprow">'+((g.itype==='fragile'||g.itype==='misconception')?'<button class="btn sm ghost" onclick="gapAdvance()">Skip</button>':'<button class="btn sm ghost" onclick="gapExit()">Exit</button>')+'</div>');
+    var phead=(g.itype==='fragile')?'✍️ Quick check — one to lock it in':(g.itype==='misconception')?'✍️ One on this distinction':'✍️ Practice — apply what you just learned';
     return '<div class="gaph">'+phead+'</div><div class="gapstem">'+esc(q.stem)+'</div><div class="qbopts">'+opts+'</div>'+rat+cont; }
   return gapResultHtml(); }
-function gapResultHtml(){ var g=GAPLOOP, ok=g.practiceOk, frag=(g.itype==='fragile');
-  var head = frag ? '🟡 Reinforced' : (ok?'✅ You applied it':'🟠 Still settling');
-  var msg = frag ? 'Nice — we’ll bring this concept back on schedule so your confidence catches up to your accuracy.'
+function gapResultHtml(){ var g=GAPLOOP, ok=g.practiceOk, frag=(g.itype==='fragile'), mis=(g.itype==='misconception');
+  var head = mis ? '🧭 Distinction sharpened' : frag ? '🟡 Reinforced' : (ok?'✅ You applied it':'🟠 Still settling');
+  var msg = mis ? 'Good — we’ll bring this concept back on schedule to check the distinction holds.'
+                : frag ? 'Nice — we’ll bring this concept back on schedule so your confidence catches up to your accuracy.'
                  : (ok?'You applied the idea correctly just now. We’ll bring this concept back on schedule to confirm it stuck.':'That’s okay — you just learned it. We’ll bring this concept back on schedule to check it stuck.');
   return '<div class="gaph">'+head+'</div><div class="gapmsg">'+msg+'</div>'
     +'<div class="gaprow"><button class="btn primary" onclick="gapExit()">Done</button></div>'; }

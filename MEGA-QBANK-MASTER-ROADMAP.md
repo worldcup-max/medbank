@@ -45,12 +45,12 @@ MEGA QBANK
 ├── A8 — RETEST POOL → CANONICAL PROMOTION  ⬜ (contract required, NOT auto)
 │   └── promotion contract ⬜ · quality gate ⬜ · Target preservation ⬜ · canonical insertion ⬜
 │
-├── V1.6 — INTERVENTION ENGINE  🟢 NEXT MAJOR (re-baselined on A6+A7; identity = target_id)
+├── V1.6 — INTERVENTION ENGINE  🟢 COMPLETE 3-way system (gap+fragile live · misconception built/off) · identity=target_id
 │   ├── SPEC re-baselined (target_id identity; A6 owns scheduling; A7 owns supply; reads smartDiagnose) ✅
 │   ├── Phase 1 instrumentation ✅ LIVE + collecting · pilot-sim: diagnosis 81/98/83/98% acc, misconception→gap 0.7%, strong predictiveness, A/B detectable (PILOT-EVIDENCE.md)
 │   ├── Phase 2 Gap loop (Learn+Practice; A6 owns retest; gap_practice masked) ✅ built · 15/15 · GAP_LOOP=ON (activated; live A/B)
 │   ├── Phase 3 Fragile (light reinforce; post-session; A6 owns retest; masked) ✅ built · 9/9 · FRAGILE=ON (activated; live A/B)
-│   ├── Phase 4 Misconception (contrast the wrong rule; soft wording; at-miss+queue) 📝 CONTRACT written · not built · hardest gate
+│   ├── Phase 4 Misconception (contrast the wrong rule; soft wording; at-miss+queue) ✅ built · 11/11 · MISCONCEPTION=OFF (build≠trust; A/B-gated)
 │   └── boundary: V1.6 selects intervention · A6 schedules retest · A7 supplies fresh · V1.6 never generates
 │
 ├── MASTER THIS QUESTION (reasoning tutor, runs ACROSS)  🟡 taxonomy protected
@@ -109,4 +109,4 @@ Do NOT: reopen Target retrieval, redo A6, tune V1 adjudicator, or start V1.7/V1.
 
 **Working protocol (agreed):** each run I re-open this file and tick what shipped. Before starting any box, I state what I understand about that box and ask for the context you'll provide — no code until the contract is agreed.
 
-_Last ticked: 2026-08-25 — Frank ACTIVATED Phase 2 (gap) + Phase 3 (fragile) on the pilot-sim diagnosis evidence (81/98/83/98% acc, misconception→gap 0.7%, strong predictiveness). Phase 3 built as a light reinforce variant (9/9). Longitudinal fail-checker: 60 students × 45 days, 0 crashes, 0 schedule pathologies. Phase 4 (misconception) contract written. Live A/B now runs for gap+fragile — cut any intervention that doesn't beat generic. Efficacy still only provable by real users; sim proved engine intelligence + robustness._
+_Last ticked: 2026-08-25 — V1.6 is now a COMPLETE 3-way Intervention Engine: gap (Learn+Practice) + fragile (reinforce) LIVE; misconception (contrast) BUILT but flag-off (build≠trust, A/B-gated). Phase 4 test 11/11. Multi-seed evidence (6 seeds): diagnosis acc gap 76–82 / miscon 98–99 / fragile 80–85 / solid 98–99%; longitudinal 0 pathologies every seed. All 14 harnesses green. V1.7 PAUSED per Frank — finish + test V1.6 first. A6/A7 untouched. Efficacy remains real-user-gated._

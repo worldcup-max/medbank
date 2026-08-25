@@ -26,7 +26,7 @@ function qbQuestionsForTarget(tid, served){ var out=[],sv={};(served||[]).forEac
   allTopics[0].extras.qbank.forEach(q=>{ if(q.target_id!==tid||sv[q._qh]) return; out.push(qbItemFromMeta(q._qh,{target_id:tid,stem:q.stem,options:q.options,answer:q.answer,rationales:q.rationales})); }); return out; }
 
 const names=['gapOn','fragOn','gapConceptPool','gapBucket','gapStart','gapPick','gapAdvance','gapLogAttempt','fixQAction'];
-const src='var GAPLOOP=null;\n'+names.map(grab).join('\n');
+const src='var GAPLOOP=null;\n'+'function misconOn(){return false;}\nfunction ivPhase(it){return it==="fragile"?"v1.6-phase3":it==="misconception"?"v1.6-phase4":"v1.6-phase2";}\n'+names.map(grab).join('\n');
 const f=new Function('qbStore','qbHash','qbShuffle','qbCogOf','persist','smartStats','qbSchedApply','qbLetter','esc','qbSkillLabel','smartLog','gapRender','qbUid','window','qbItemFromMeta','qbQuestionsForTarget',
   src+'\n return { gapStart, gapPick, gapAdvance, fixQAction, fragOn, _loop:()=>GAPLOOP, _set:(v)=>{GAPLOOP=v;} };');
 const A=f(qbStore,qbHash,qbShuffle,qbCogOf,persist,smartStats,qbSchedApply,qbLetter,esc,qbSkillLabel,smartLog,gapRender,qbUid,win,qbItemFromMeta,qbQuestionsForTarget);
