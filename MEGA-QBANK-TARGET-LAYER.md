@@ -253,3 +253,67 @@ Implementation:
 Why #0 matters as evidence, not a defect: `AI: NOT_SAME ~0.70 → human: MATCH` is exactly what the admin review layer exists for. The engine can reproduce human NEW decisions (the created target bakes them in) but *cannot* reproduce a human MATCH override — so human mappings MUST be sticky. #0 is calibration truth and will not be touched again.
 
 **Revised stability test:** we are NOT testing whether the AI reproduces human judgment. We test the production property: *does the growing Target set stay stable when the UNRESOLVED corpus is re-reconciled against it?* → `reprocess (unresolved only) → backfill → inspect`. Then a separate new-question generalization test.
+
+---
+
+## 12. Tiered candidate retrieval — DESIGN (2026-08-24, NOT yet implemented)
+
+### Finding
+Hard exact `topic + skill` candidate pre-filtering caused **13 of 14** duplicate-target creations during the stability re-run. The semantic adjudicator produced **0** matcher failures — when a candidate was retrieved, it decided correctly. Drift occurs on **both** axes: skill (`management ↔ next_step ↔ investigation`) and topic granularity (`DIC ↔ Hematology`, `PD ↔ BHS`). The excluded true targets had statement overlaps of **0.6–0.95** with the duplicate.
+
+### Root cause
+`candidateFilter` requires an EXACT topic AND skill match. The extractor is non-deterministic on classification *granularity*, so a regenerated question's own target — same knowledge statement — falls outside the candidate set and is re-minted as a duplicate. **The failure is in retrieval (recall), not in the semantic decision (precision).**
+
+### Decision
+Replace hard metadata filtering with **tiered candidate retrieval**. **Metadata (topic, skill, subtopic) controls candidate priority/recall; it does NOT define semantic target identity.** Identity is the canonical knowledge-target contract, decided by semantic adjudication.
+
+### The tiers
+```
+Tier 1  exact topic + exact skill     → precision-first (today's pre-filter)
+Tier 2  same topic, ANY skill         → recovers SKILL drift  (NS-MGMT ↔ NS-NEXT)
+Tier 3  semantic neighborhood         → recovers TOPIC drift  (DIC ↔ Hematology)
+        statement token-overlap ≥ RETRIEVAL_FLOOR across ALL active targets,
+        any topic/skill; top-K
+```
+Retrieval policy: **union of Tier 1 ∪ Tier 2 ∪ Tier 3, capped at K (priority T1 > T2 > T3)** — NOT a stop-at-first cascade, because a wrong-but-same-metadata Tier-1 candidate must not shadow the correct Tier-3 one. Tier 3 uses the SAME token-overlap the churn-audit used (it located every excluded target at 0.6–0.95). Embeddings + a vector index are the scale-path; token-overlap is v1 and is sufficient for the pilot corpus.
+
+No topic taxonomy is needed: a topic-family map would inherit the same label drift (`DIC` vs `Hematology`). Tier 3 sidesteps topic labels entirely by retrieving on the knowledge STATEMENT.
+
+### Invariant (new)
+**A semantically equivalent existing target must remain discoverable despite topic/skill classification drift.** Corollary: a question's own prior target (near-identical statement) is always in the Tier-3 pool (overlap ≈ 1.0). This is not a "match-yourself" shortcut — metadata simply may never *exclude* a target from consideration; the adjudicator still decides.
+
+### Safety — UNCHANGED (recall widens; precision preserved by existing guards)
+1. `knowledge_statement` is the primary semantic signal.
+2. `excludes` can force targets apart, however similar.
+3. The chosen target must come from the retrieved candidate set (no out-of-set).
+4. Near-miss (`null` + strong candidate ≥ nearMiss) → AMBIGUOUS.
+5. Tie / uncertainty band → AMBIGUOUS.
+6. Human resolution → sticky authority (`mapping_source=human`).
+7. No automatic MATCH merely because topic/subtopic is similar — statement-equivalence required.
+
+Because the adjudicator never false-rejected (C=0) and the `excludes` guard is unchanged, widening retrieval raises recall without authorizing new merges.
+
+### Parameters (tunable, NOT yet calibrated)
+- `RETRIEVAL_FLOOR` — Tier-3 token-overlap to be a candidate. Start ~0.40 (a *recall* floor, distinct from the 0.80 MATCH threshold).
+- `RETRIEVAL_K` — max candidates presented to adjudication. Start ~8.
+
+### Success metric — re-run the exact stability experiment
+```
+Targets:            74 → ?    (expect ↓ toward ~60 as B-duplicates stop forming)
+MATCH:              46 → ?    (expect ↑)
+NEW:                14 → ?    (expect ↓ toward ~1 — the lone A_new)
+AMBIGUOUS:           7 → ?    (expect 7 sticky-only; watch for NEW near-miss AMBIGUOUS)
+B_prefilter churn:  13 → ~0
+```
+Pass = the 13 known B_prefilter duplicates disappear (each drift-affected question re-finds its existing target via Tier 2/3), WITHOUT new false merges (spot-check any new MATCHes) and WITHOUT an AMBIGUOUS spike. That isolates the fix to the retrieval layer and leaves the semantic decision layer untouched.
+
+### Implementation sketch (for review — not built)
+- `targets.mjs`: `candidateFilter` → `retrieveCandidates(proposed, targets, cfg)` returning the tiered union (pure, unit-testable); add a token-overlap helper.
+- `server.mjs`: pass the retrieved set to `decide()` (unchanged). Adjudication prompt unchanged. `excludes`, near-miss, sticky — all unchanged.
+- No SQL change, no scheduler change, same shadow flag. Then reset(sticky)→reprocess→backfill and read the success metric.
+
+### §12 — BUILT (2026-08-24, shadow, pending deploy)
+- `targets.mjs`: `retrieveCandidates(proposed, targets, cfg)` — T1 exact ∪ T2 same-topic/any-skill ∪ T3 normalized-**statement** token-overlap; deduped, ranked T1>T2>T3, capped at `K` with the top `reserveT3` statement-matches reserved so the cap can never drop a semantically-equivalent target. `decide()` unchanged except it now reports `matched_via` (winning tier). `RETRIEVAL={floor:0.40,K:8,reserveT3:3}`.
+- `server.mjs`: annotate uses `retrieveCandidates` (env `RETRIEVAL_FLOOR`/`RETRIEVAL_K`); stores `candidates[].tier`, `decision.matched_via`; stats add `matchedViaMatch` / `matchedViaAmbiguous` tier breakdowns. `excludes`, near-miss, sticky, prompts — all unchanged.
+- Verified: 9 retrieval unit tests (skill-drift→T2, topic-drift→T3, unrelated→none, exact→T1, reserve-under-cap invariant, matched_via through decide), 5 app harnesses, both modules parse. No SQL change, no scheduler change.
+- **Acceptance re-run (same stability experiment):** (A) the 13 B-prefilter duplicates resolve back to existing targets; (B) no new false MATCHes — spot-check T3-origin matches; (C) AMBIGUOUS stays controlled (small ↑ ok, large ↑ = floor too broad); (D) true-NEW stay NEW. Plus `matchedVia` tier distribution as calibration data.

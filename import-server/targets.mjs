@@ -130,6 +130,36 @@ export function candidateFilter(proposed, targets){
     && (!ps || !nkey(t.skill) || nkey(t.skill)===ps) );
 }
 
+/* ---- TIERED CANDIDATE RETRIEVAL (recall-first; identity still decided semantically) ----
+   Metadata (topic/skill) controls candidate PRIORITY/RECALL, never identity. Union of:
+     T1 exact topic + skill · T2 same topic, any skill · T3 normalized-STATEMENT lexical overlap (any topic/skill).
+   Deduped, ranked T1>T2>T3 (T3 by overlap desc), capped at K — with the strongest T3 statement-matches RESERVED
+   so the cap can never drop a semantically-equivalent target (the discoverability invariant). Each candidate is
+   tagged with `_tier` so the caller can record matchedVia. Statement overlap on the KNOWLEDGE STATEMENT (the
+   target representation), not the question stem (surface form). Token-overlap is v1; embeddings are the scale path. */
+export const RETRIEVAL = { floor:0.40, K:8, reserveT3:3 };
+function normStatement(x){ return String(x||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim(); }
+function stmtTokens(x){ return new Set(normStatement(x).split(" ").filter(w=>w.length>3)); }
+function jaccard(a,b){ let i=0; a.forEach(w=>{ if(b.has(w)) i++; }); const u=a.size+b.size-i; return u?i/u:0; }
+export function retrieveCandidates(proposed, targets, cfg){
+  const R = Object.assign({}, RETRIEVAL, cfg||{});
+  const active=(targets||[]).filter(t=> t && t.status!=="deprecated" && t.status!=="merged");
+  const pt=nkey(proposed.topic), ps=nkey(proposed.skill), pTok=stmtTokens(proposed.knowledge_statement);
+  const seen={}, ranked=[];
+  const add=(t,tier,score)=>{ if(seen[t.target_id]) return; seen[t.target_id]=1; ranked.push(Object.assign({}, t, { _tier:tier, _retScore:(score==null?null:+score.toFixed(2)) })); };
+  active.forEach(t=>{ if(nkey(t.topic)===pt && (!ps || !nkey(t.skill) || nkey(t.skill)===ps)) add(t,"T1",null); });   // T1
+  active.forEach(t=>{ if(nkey(t.topic)===pt) add(t,"T2",null); });                                                    // T2
+  const t3=active.map(t=>({t, ov:jaccard(pTok, stmtTokens(t.canonical_statement))}))
+    .filter(x=>x.ov>=R.floor).sort((a,b)=>b.ov-a.ov);                                                                 // T3 (overlap desc)
+  t3.forEach(x=> add(x.t,"T3",x.ov));
+  if(ranked.length<=R.K) return ranked;
+  // cap, but RESERVE the strongest statement-matches so the invariant holds
+  const reserved = ranked.filter(c=>c._tier==="T3").slice(0, Math.min(R.reserveT3, R.K));
+  const head = ranked.slice(0, Math.max(0, R.K - reserved.length));
+  const outSeen={}, out=[]; head.concat(reserved).forEach(c=>{ if(!outSeen[c.target_id]){ outSeen[c.target_id]=1; out.push(c); } });
+  return out.slice(0, R.K);
+}
+
 /* A proposal that falls inside a candidate's `excludes` is FORCED APART, however similar the
    statement. This is the guard against collapsing "management" into "differential", etc. */
 export function excludesConflict(proposed, target){
@@ -170,12 +200,13 @@ export function decide(proposed, candidates, adj, cfg){
     const nearScore= (id && byId[id]) ? conf : (adj && typeof adj.second_confidence==="number" ? adj.second_confidence : 0);
     if(nearId && nearScore >= T.nearMiss){
       return { state:"AMBIGUOUS", target_id:null, confidence:0, note:"near-miss ≥ "+T.nearMiss+" (model said not-same)",
-               model_decision:"NOT_SAME", nearest_candidate_id:nearId, nearest_candidate_score:nearScore, near_miss:true };
+               model_decision:"NOT_SAME", nearest_candidate_id:nearId, nearest_candidate_score:nearScore, near_miss:true,
+               matched_via:(byId[nearId]&&byId[nearId]._tier)||null };
     }
     return { state:"NEW", target_id:null, confidence:(id?conf:0), note:"no candidate close enough" };
   }
-  if(conf < T.T_match)       return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"in the uncertainty band" };
-  return { state:"MATCH", target_id:id, confidence:conf, note:"statement-equivalent to existing target" };
+  if(conf < T.T_match)       return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"in the uncertainty band", matched_via:(byId[id]&&byId[id]._tier)||null };
+  return { state:"MATCH", target_id:id, confidence:conf, note:"statement-equivalent to existing target", matched_via:(byId[id]&&byId[id]._tier)||null };
 }
 
 /* ---- reconciliation prompt: adjudicate a proposal AGAINST a bounded candidate set only ---- */

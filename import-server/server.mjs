@@ -23,7 +23,7 @@ import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./med-voice.mjs";
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
-import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, candidateFilter, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
+import { buildExtractBatchPrompt, parseProposedBatch, buildReconcilePrompt, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -541,6 +541,9 @@ async function buildQbankBatched(tmpl, note, model, rowMax, rowTemp){
 function targetsMode(){ return String(process.env.MEDBANK_TARGETS||"off").toLowerCase(); }   // 'off' | 'shadow'
 /* near-miss safety-net floor, env-configurable via AMBIGUOUS_NEAR_MISS_THRESHOLD (undefined -> module default 0.30; NOT yet calibrated) */
 const TARGET_CFG = (()=>{ const v=Number(process.env.AMBIGUOUS_NEAR_MISS_THRESHOLD); return (isFinite(v)&&v>0)?{nearMiss:v}:undefined; })();
+/* tiered-retrieval params, env-configurable (RETRIEVAL_FLOOR = T3 statement-overlap recall floor; RETRIEVAL_K = candidate cap) — NOT yet calibrated */
+const RETRIEVAL_CFG = (()=>{ const c={}; const f=Number(process.env.RETRIEVAL_FLOOR), k=Number(process.env.RETRIEVAL_K);
+  if(isFinite(f)&&f>0) c.floor=f; if(isFinite(k)&&k>0) c.K=k; return Object.keys(c).length?c:undefined; })();
 /* replicate the CLIENT's qbHash EXACTLY so question_targets.qh matches the scheduler's key when A6 arrives */
 function qbHashServer(str){ let h=5381,i=(str||"").length; while(i){ h=(h*33)^(str||"").charCodeAt(--i); } return (h>>>0).toString(36); }
 function qhOf(q){ return qbHashServer((q.stem||"")+"|"+((q.options||[]).join("|"))); }
@@ -572,7 +575,7 @@ async function annotateTargets(questions, ctx){
     for(let i=0;i<todo.length;i++){
       const q=todo[i], qh=qhOf(q), proposed=proposals[i];
       if(!proposed) continue;
-      const cands=candidateFilter(proposed, targets);
+      const cands=retrieveCandidates(proposed, targets, RETRIEVAL_CFG);   // tiered: T1 exact ∪ T2 same-topic ∪ T3 statement-overlap
       let adj=null; if(cands.length) adj=await tReconcile(proposed, cands);
       const dec=decide(proposed, cands, adj, TARGET_CFG);
       let target_id=null;
@@ -583,11 +586,11 @@ async function annotateTargets(questions, ctx){
         const ins=await admin.from("knowledge_targets").insert(rec);
         if(!ins.error){ targets.push(rec); target_id=id; }
       }
-      const candScores=cands.map(c=>({ target_id:c.target_id,
+      const candScores=cands.map(c=>({ target_id:c.target_id, tier:c._tier||null, ret:(c._retScore!=null?c._retScore:null),
         score: adj&&adj.target_id===c.target_id?adj.confidence : (adj&&adj.second_id===c.target_id?adj.second_confidence:null) }));
       const decision={ model_decision: dec.model_decision||null, nearest_candidate_id: dec.nearest_candidate_id||null,
         nearest_candidate_score: (dec.nearest_candidate_score!=null?dec.nearest_candidate_score:null),
-        near_miss: !!dec.near_miss, final_state: dec.state, note: dec.note||null };
+        near_miss: !!dec.near_miss, matched_via: dec.matched_via||null, final_state: dec.state, note: dec.note||null };
       await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
         proposed, candidates:candScores, decision, mapping_source:"ai", mapping_status:"active", topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
@@ -1789,10 +1792,13 @@ app.get("/admin/targets/stats", async (req,res)=>{
     const confirmedMatch=rows.filter(r=>r.resolution && r.resolution.action==="match").length;
     const confirmedNew=rows.filter(r=>r.resolution && r.resolution.action==="new").length;
     const keptAmbiguous=rows.filter(r=>r.resolution && r.resolution.action==="keep").length;
+    const viaCount=(st)=>{ const o={T1:0,T2:0,T3:0,none:0}; rows.filter(r=>r.map_state===st).forEach(r=>{ const v=(r.decision&&r.decision.matched_via)||"none"; o[v]=(o[v]||0)+1; }); return o; };
+    const matchedViaMatch=viaCount("MATCH"), matchedViaAmbiguous=viaCount("AMBIGUOUS");
     res.json({ ok:true, processed:n, match:by("MATCH"), new:by("NEW"), ambiguous:by("AMBIGUOUS"),
       matchPct:pct(by("MATCH")), newPct:pct(by("NEW")), ambiguousPct:pct(by("AMBIGUOUS")),
       resolved, unresolvedAmbiguous:unresolvedAmb, targetsCreated:targets.length,
       newWithCandidate, ambiguousFromNearMiss, confirmedMatch, confirmedNew, keptAmbiguous,
+      matchedViaMatch, matchedViaAmbiguous,
       questionsPerTarget:counts.slice(0,20), singletonTargets:counts.filter(x=>x.count===1).length,
       heavyTargets:counts.filter(x=>x.count>=8), confidenceDistribution:dist });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
