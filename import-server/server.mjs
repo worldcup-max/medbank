@@ -1855,6 +1855,36 @@ app.post("/admin/targets/reset", async (req,res)=>{
 /* ---- Admin: NEW_WITH_CANDIDATE near-miss diagnostic (OBSERVABILITY ONLY — no decision change) ----
  * A question assigned NEW that nonetheless had ≥1 pre-filter candidate. This is the bucket we can't otherwise
  * see: did the target legitimately fork (correct NEW) or did the model under-score a true match (false NEW)? */
+/* ---- Admin: CHURN AUDIT (read-only diagnostic). For every NEW question mapping, find its closest OTHER target by
+   statement token-overlap and classify why it forked: A_new (no similar target), B_prefilter (a same-claim target
+   exists but under a DIFFERENT topic/skill, so the hard pre-filter excluded it), C_matcher (a same-topic+skill
+   candidate existed and the matcher still said not-same). Answers: how many of the +N duplicates are pre-filter
+   exclusions? Changes NOTHING. ---- */
+app.get("/admin/targets/churn-audit", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const tr=await admin.from("knowledge_targets").select("target_id,canonical_statement,topic,skill");
+    const targets=tr.data||[];
+    const qr=await admin.from("question_targets").select("qh,target_id,proposed,candidates").eq("map_state","NEW");
+    const news=qr.data||[];
+    const toks=x=>new Set(String(x||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3));
+    const jac=(a,b)=>{ let i=0; a.forEach(w=>{ if(b.has(w)) i++; }); const u=a.size+b.size-i; return u?i/u:0; };
+    const nk=x=>String(x||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+    const tTok=targets.map(t=>({t, tk:toks(t.canonical_statement)}));
+    const items=news.map(n=>{
+      const p=n.proposed||{}, pk=toks(p.knowledge_statement); let best=null;
+      tTok.forEach(({t,tk})=>{ if(t.target_id===n.target_id) return; const ov=jac(pk,tk);
+        if(!best||ov>best.overlap) best={ target_id:t.target_id, topic:t.topic, skill:t.skill, overlap:+ov.toFixed(2), statement:t.canonical_statement }; });
+      const sameFilter = !!(best && nk(best.topic)===nk(p.topic) && nk(best.skill)===nk(p.skill));
+      const hadCand=(n.candidates||[]).length>0;
+      let cls; if(!best||best.overlap<0.35) cls="A_new"; else if(!sameFilter) cls="B_prefilter"; else cls="C_matcher";
+      return { qh:n.qh, own_target:n.target_id, proposed_topic:p.topic, proposed_skill:p.skill,
+               proposed_statement:p.knowledge_statement, best, sameFilter, hadCandidate:hadCand, classification:cls }; });
+    const summary={ A_new:0, B_prefilter:0, C_matcher:0 }; items.forEach(i=>summary[i.classification]++);
+    res.json({ ok:true, totalNew:news.length, totalTargets:targets.length, summary, items });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.get("/admin/targets/near-miss", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
