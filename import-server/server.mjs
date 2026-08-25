@@ -1866,6 +1866,24 @@ app.post("/admin/targets/reset", async (req,res)=>{
    exists but under a DIFFERENT topic/skill, so the hard pre-filter excluded it), C_matcher (a same-topic+skill
    candidate existed and the matcher still said not-same). Answers: how many of the +N duplicates are pre-filter
    exclusions? Changes NOTHING. ---- */
+/* ---- Admin: list MATCH rows by retrieval tier (read-only) — the false-MATCH precision gate. Shows each match's
+   proposed statement vs the matched target's canonical contract so every non-T1 (widened-recall) match can be
+   inspected for genuine independently-testable equivalence. ---- */
+app.get("/admin/targets/matches", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const via = req.query.via ? String(req.query.via).split(",").map(x=>x.trim()) : null;   // e.g. ?via=T2,T3
+    const r=await admin.from("question_targets").select("qh,target_id,map_confidence,proposed,decision").eq("map_state","MATCH").limit(500);
+    let rows=(r.data||[]).filter(x=>{ const v=(x.decision&&x.decision.matched_via)||null; return !via || via.indexOf(v)>=0; });
+    const ids=[...new Set(rows.map(x=>x.target_id).filter(Boolean))];
+    const tr= ids.length ? await admin.from("knowledge_targets").select("target_id,canonical_statement,topic,skill").in("target_id",ids) : { data:[] };
+    const tmap={}; (tr.data||[]).forEach(t=>{ tmap[t.target_id]=t; });
+    res.json({ ok:true, count:rows.length, items: rows.map(x=>({ qh:x.qh, via:(x.decision&&x.decision.matched_via)||null, conf:x.map_confidence,
+      proposed:(x.proposed&&x.proposed.knowledge_statement)||null, target_id:x.target_id,
+      target:(tmap[x.target_id]||{}).canonical_statement||null, target_topic:(tmap[x.target_id]||{}).topic, target_skill:(tmap[x.target_id]||{}).skill })) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.get("/admin/targets/churn-audit", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
