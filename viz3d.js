@@ -1113,16 +1113,21 @@
     /* ---------- play the scene as a short narrated sequence ----------
        This is the "visualize video" shape: the beats the author wrote, in order, each with its camera,
        its highlights and its line of narration — but still a live model the student can grab at any time. */
+    /* Play walks the views from WHERE THE STUDENT IS, wrapping round to end where it began.
+       It used to restart at view 0 every time, so pressing Play on "Flex vs extend" silently threw you
+       back to "See it in the body" — the student asked to see this explained and got navigated away from
+       it. Starting here and wrapping visits every view exactly once either way. */
     function startPlay() {
       if (!views.length) return;
       useCount.played++;
       stopTour(); stopSpin();
-      var i = 0;
+      var order = views.map(function (_, k) { return (currentView + k) % views.length; });
+      var n = 0;
       $('play').textContent = '■ Stop'; $('play').classList.add('pri');
       function beat() {
-        if (!running || i >= views.length) { stopPlay(); return; }
-        applyView(i, true);
-        i++;
+        if (!running || n >= order.length) { stopPlay(); return; }
+        applyView(order[n], true);
+        n++;
       }
       beat();
       playTimer = setInterval(beat, 7000);
@@ -1133,9 +1138,26 @@
       var b = $('play'); if (b) { b.textContent = '▶ Play'; b.classList.add('pri'); }
     }
 
+    /* Which parts does the CURRENT view actually talk about?
+       Touring all fifteen parts on every view made "Tour parts" a table of contents rather than a tour —
+       on "Follow the long head" it wandered off to the coracoid process, which that view is not about.
+       The view's own ops name its subject, so read them; fall back to whatever is on screen. */
+    function tourKeys() {
+      var v = views[currentView], named = [];
+      (v && v.ops || []).forEach(function (o) {
+        [].concat(o.target || [], o.targets || [], o.path || [], o.from || [], o.to || []).forEach(function (t) {
+          if (t && t !== '*') named = named.concat(keysFor(t));
+        });
+      });
+      var seen = {}, out = [];
+      named.forEach(function (k) { if (!seen[k] && meshes[k]) { seen[k] = 1; out.push(k); } });
+      if (out.length >= 2) return out;
+      return parts.filter(function (p) { return meshes[p.key] && meshes[p.key].visible; }).map(function (p) { return p.key; });
+    }
+
     function startTour() {
       useCount.tours++;
-      var i = 0, keys = parts.filter(function (p) { return meshes[p.key]; }).map(function (p) { return p.key; });
+      var i = 0, keys = tourKeys();
       if (!keys.length) return;
       ghost = true; $('ghost').classList.add('pri'); $('tour').textContent = '■ Stop';
       function step() {
@@ -1344,6 +1366,10 @@
     close: close,
     dispose: dispose,
     register: register,
+    /* The live player, for diagnosing a scene that is on screen and misbehaving. Read-only in spirit:
+       nothing in the app calls this. It exists because "the viewport is black" is impossible to diagnose
+       from outside — camera, holder scale and material state are the whole answer and were unreachable. */
+    player: function () { return LIVE; },
     adapters: ADAPTERS
   };
 })();
