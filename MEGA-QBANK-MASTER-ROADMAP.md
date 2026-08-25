@@ -56,8 +56,9 @@ MEGA QBANK
 ├── MASTER THIS QUESTION (reasoning tutor, runs ACROSS)  🟡 taxonomy protected
 │   └── Exam Rule · Apply Rule · Decisive Clue · Why Tempting · What Would Change It · Differential · Exam Trap · Remember This (progressive disclosure by difficulty)
 │
-├── V1.7 — MEGA CLINICAL REASONING  ⬜ after V1.6
-│   └── integrated questions ⬜ · linear clinical cases ⬜ · exam blueprint ⬜ · cross-topic reasoning ⬜ · reasoning profile ⬜
+├── V1.7 — MEGA CLINICAL REASONING  📝 CONTRACT + gap analysis written (V1.7-CONTRACT.md) · not implemented
+│   ├── LOCKED: integrated item → ONE primary target_id (A6 retention); integrated_topics[] = analytics axis only (A6/A7 untouched)
+│   └── Phases: 1 schema · 2 sourcing · 3 integrated mode · 4 case mode · 5 exam blueprint · 6 reasoning profile (each gated)
 │
 └── V1.8+ — BRANCHING  ⬜ future
     └── branching cases ⬜ · evolving patient state ⬜ · multi-step decisions ⬜ · adaptive cases ⬜ · AI advanced variants ⬜
@@ -74,7 +75,7 @@ MEGA QBANK
 | Threshold calibration (0.30 / 0.40 / K=8) | 🔒 frozen | MATCHes all ≥0.90 conf, no 0.80–0.90 marginal band; ambiguous 29% | a marginal MATCH cluster appears, or false merges/forks emerge |
 | A7 backoff persistence | 🟡 deferred | in-memory backoff resets on restart → retries a bit sooner (harmless) | if restart-thrash causes real cost |
 | A8 promotion | 🟡 deferred | needs its own contract; A7 existing ≠ A8 implied | when generated retests prove worthy + a contract is written |
-| V1.6 bounded-escalation rule | 🟡 deferred (Frank's decision) | adversarial found no give-up rule: a repeatedly-failing Target recurs indefinitely (bounded per-cycle, not per-lifetime). Not a bug. | if live data shows Targets stuck in intervention→fail loops |
+| **V1.6.1 — repeated-intervention-failure / escalation policy** | 🟡 deferred (product policy, NOT an unfreeze of V1.6) | adversarial: current behavior is safe + deterministic; there is simply no give-up rule for a Target that repeatedly fails intervention. | decide from ACTUAL usage patterns — do NOT add a cooldown just because it feels cleaner |
 
 ## REJECTED REGISTER (do not revisit without contradicting evidence)
 
