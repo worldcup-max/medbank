@@ -59,3 +59,39 @@ export function nextStatus(cur, action){
     needs_edit:{ resubmit:"pending", reject:"rejected" } };
   return (flow[cur] && flow[cur][action]) || cur;
 }
+
+/* ---- pipeline orchestration. AI seams (mine, adversarial) are INJECTED — candidate-finders, never judges.
+   The canonical question is READ-ONLY here; transformation yields a NEW record carrying source_question_ids[].
+   No path produces "approved" — the only route to approved is applyHumanReview(). ---- */
+export async function runCandidate(question, deps){
+  const srcId = question.id || question._qh || null;
+  const proposal = await deps.mine(question);                          // AI proposes a candidate integration (or null)
+  if(!proposal) return { review_status:"rejected", reason:"no candidate", source_question_ids:[srcId] };
+  const verdict = await deps.adversarial(question, proposal);          // AI actively tries to DISPROVE integration
+  const dep = dependencyGate(verdict||{});
+  const rec = {
+    question_id: srcId,
+    primary_topic: proposal.primary_topic||null,
+    integrated_topics: proposal.integrated_topics||[],
+    integration_type: proposal.integration_type||null,
+    integration_family: proposal.integration_family||null,
+    integration_rationale: proposal.rationale||null,
+    integration_dependency: proposal.dependency||null,
+    transformed_content: proposal.transformed_content||null,          // NEW content, if any — original stays untouched
+    source_question_ids: proposal.source_question_ids||[srcId],
+    dependency_evidence: verdict||null
+  };
+  if(!dep.pass) return Object.assign(rec, { review_status:"rejected", reason:dep.reasons.join("; ") });
+  return Object.assign(rec, { review_status:"ai_reviewed" });          // → human queue; NEVER auto-approved
+}
+/* The ONLY route to 'approved'. Requires an explicit approve action AND a passing QA score; a failing QA on an
+   approve attempt is bounced to needs_edit (a mediocre item cannot slip into the bank). */
+export function applyHumanReview(item, action, qaScores, reviewer){
+  const at=new Date().toISOString();
+  if(action==="approve"){ const qa=qaScore(qaScores||{});
+    if(!qa.approve) return Object.assign({}, item, { review_status:"needs_edit", qa, reviewer, reviewed_at:at, reason:qa.reason });
+    return Object.assign({}, item, { review_status:"approved", qa, reviewer, reviewed_at:at }); }
+  if(action==="reject") return Object.assign({}, item, { review_status:"rejected", reviewer, reviewed_at:at });
+  if(action==="edit")   return Object.assign({}, item, { review_status:"needs_edit", reviewer, reviewed_at:at });
+  return item;
+}

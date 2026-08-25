@@ -1,6 +1,7 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
-import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS } from '../import-server/integrated.mjs';
+import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
+(async()=>{
 
 // --- dependency test ---
 ok(dependencyGate({removeA_changes:true,removeB_changes:true,bothRequired:true,secondaryIsRealDomain:true}).pass, 'D1 all-true → genuine integration');
@@ -44,5 +45,37 @@ ok(nextStatus('candidate','ai_review')==='ai_reviewed' && nextStatus('ai_reviewe
 ok(nextStatus('pending','reject')==='rejected' && nextStatus('pending','edit')==='needs_edit' && nextStatus('needs_edit','resubmit')==='pending', 'L2 reject/edit/resubmit transitions');
 ok(nextStatus('candidate','approve')==='candidate', 'L3 illegal transition is a no-op (cannot skip review)');
 
+
+// --- pipeline orchestration (AI seams mocked, deterministic) ---
+const goodProposal={ primary_topic:'Cardiology', integrated_topics:['Nephrology'], integration_type:'management', integration_family:'cardio_renal', rationale:'renal fn changes drug choice', dependency:'diuresis worsens renal fn', source_question_ids:['Q1'] };
+const genuineVerdict={removeA_changes:true,removeB_changes:true,bothRequired:true,secondaryIsRealDomain:true};
+const fakeVerdict={removeA_changes:true,removeB_changes:false,bothRequired:false,secondaryIsRealDomain:false};
+
+// P1: genuine → ai_reviewed (NOT approved), provenance preserved, canonical untouched
+{ const q={ id:'Q1', stem:'HF patient...', options:['a','b','c','d'], answer:0, target_id:'T-CARD' };
+  const before=JSON.stringify(q);
+  const r=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict });
+  ok(r.review_status==='ai_reviewed', 'P1 genuine candidate → ai_reviewed (never auto-approved)');
+  ok(r.source_question_ids[0]==='Q1' && r.integration_family==='cardio_renal', 'P1 provenance + family preserved');
+  ok(JSON.stringify(q)===before, 'P1 INVARIANT: canonical question object NOT mutated'); }
+// P2: adversarial disproves (fake) → rejected with reason
+{ const q={ id:'Q2', stem:'febrile pneumonia', target_id:'T-RESP' };
+  const r=await runCandidate(q, { mine:async()=>({primary_topic:'Respiratory',integrated_topics:['Infectious'],integration_family:'resp_infect',source_question_ids:['Q2']}), adversarial:async()=>fakeVerdict });
+  ok(r.review_status==='rejected' && /required|symptom/.test(r.reason), 'P2 adversarial disproves → rejected (infect-noise killed)'); }
+// P3: no candidate → rejected
+{ const r=await runCandidate({id:'Q3'}, { mine:async()=>null, adversarial:async()=>genuineVerdict });
+  ok(r.review_status==='rejected' && r.reason==='no candidate', 'P3 no candidate → rejected'); }
+// P4: ONLY human approval yields approved — and only with passing QA
+{ const q={ id:'Q4', target_id:'T' };
+  const ai=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict });
+  ok(ai.review_status!=='approved', 'P4 pipeline output is NOT approved');
+  const goodQA={dependency:3,coherence:3,educational:3,discrimination:3,targetClarity:2,difficulty:2,noArtificialComplexity:3};
+  const appr=applyHumanReview(ai,'approve',goodQA,'frank'); ok(appr.review_status==='approved' && appr.reviewer==='frank', 'P4 human approve + passing QA → approved');
+  const badQA={dependency:2,coherence:3,educational:3,discrimination:3,targetClarity:2,difficulty:2,noArtificialComplexity:3};
+  const bounced=applyHumanReview(ai,'approve',badQA,'frank'); ok(bounced.review_status==='needs_edit', 'P4 human approve + FAILING QA → needs_edit (cannot slip in)');
+  ok(applyHumanReview(ai,'reject',null,'frank').review_status==='rejected', 'P4 human reject → rejected'); }
+
+
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);
+})();

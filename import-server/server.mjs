@@ -26,6 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2245,6 +2246,111 @@ app.post("/topic/delete", async (req,res)=>{
     res.json({ ok:!del.error, deleted:topic_id, error:(del.error&&del.error.message)||null });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
+
+/* ===== V1.7 Integrated Content Pipeline (server). AI = candidate-finder + adversarial disprover; the tested
+   dependency gate + a HUMAN decide. Never mutates canonical questions; only 'approved' items are ever exposed. ===== */
+function a17MinePrompt(q){
+  const opts=(q.options||[]).map((o,i)=>String.fromCharCode(65+i)+". "+o).join("\n");
+  return `You are a medical-education content strategist. Decide if this single-best-answer question can be the seed of a GENUINE cross-domain integrated question — one where solving it REQUIRES reasoning across 2+ distinct clinical domains, not one domain with incidental mentions of another. Answer ONLY JSON.
+
+QUESTION (topic: ${q._topic||""}, skill: ${q.skill||""}):
+${q.stem||""}
+${opts}
+Correct: ${String.fromCharCode(65+(q.answer||0))}
+
+Return: { "integrable": true|false,
+  "primary_topic": "<owning clinical domain>",
+  "integrated_topics": ["<the ADDITIONAL domain(s) genuinely required>"],
+  "integration_type": "mechanistic|diagnostic|management|competing|longitudinal",
+  "integration_family": "<e.g. cardio_renal>",
+  "rationale": "<one sentence>",
+  "dependency": "<why the secondary domain is NECESSARY to the answer>" }
+Set integrable=false if the second domain is merely a symptom, comorbidity, risk factor, or vocabulary of the primary disease.`;
+}
+async function a17Mine(q){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17MinePrompt(q), parts:[], images:[], max_tokens:500, temperature:0.3, json:true });
+    const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return null;
+    let o=null; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){ return null; }
+    if(!o||!o.integrable) return null;
+    return { primary_topic:o.primary_topic||null, integrated_topics:o.integrated_topics||[], integration_type:o.integration_type||null,
+      integration_family:o.integration_family||null, rationale:o.rationale||null, dependency:o.dependency||null, source_question_ids:[q.id||q._qh] };
+  }catch(e){ return null; }
+}
+function a17AdvPrompt(q, p){
+  return `You are an adversarial reviewer. Your job is to DISPROVE that the question below is genuinely integrated across [${p.primary_topic}] + [${(p.integrated_topics||[]).join(", ")}]. Be skeptical. Answer ONLY JSON.
+
+QUESTION: ${q.stem||""}
+Claimed integration: ${p.rationale||""} — dependency: ${p.dependency||""}
+
+Apply the dependency test and answer:
+{ "removeA_changes": <does removing the PRIMARY domain change the answer?>,
+  "removeB_changes": <does removing the SECONDARY domain change the answer?>,
+  "bothRequired": <are BOTH domains jointly required to solve it?>,
+  "secondaryIsRealDomain": <is the secondary a real reasoning domain, NOT a symptom/comorbidity/vocabulary?>,
+  "why": "<one sentence>" }
+Default to false when unsure — a false positive pollutes the bank.`;
+}
+async function a17Adversarial(q, p){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17AdvPrompt(q,p), parts:[], images:[], max_tokens:300, temperature:0, json:true });
+    const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return {};
+    try{ return JSON.parse(t.slice(a,b+1)); }catch(_){ return {}; }
+  }catch(e){ return {}; }
+}
+
+app.post("/admin/integrated/mine", async (req,res)=>{
+  /* Run the candidate pipeline over a batch of not-yet-processed questions. Inserts ai_reviewed|rejected rows.
+     NEVER touches topics.extras.qbank. Admin-only; bounded by limit (AI cost). */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const limit=Math.min(50, Number((req.body&&req.body.limit)||15));
+    const done=await admin.from("integrated_items").select("question_id");
+    const seen=new Set((done.data||[]).map(r=>r.question_id));
+    const tr=await admin.from("topics").select("id,extras").not("extras","is",null).limit(500);
+    const pool=[]; (tr.data||[]).forEach(t=>{ ((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(!q||!q.stem) return;
+      const qh=qhOf(q); if(seen.has(qh)) return; pool.push(Object.assign({}, q, { id:qh, _qh:qh, _topic:t.title||t.name||"" })); }); });
+    const batch=pool.slice(0, limit); let ai_reviewed=0, rejected=0;
+    for(const q of batch){
+      const rec=await runCandidate(q, { mine:a17Mine, adversarial:a17Adversarial });
+      await admin.from("integrated_items").insert({ question_id:rec.question_id, primary_topic:rec.primary_topic||null,
+        integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||null,
+        integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
+        transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[qhOf(q)],
+        dependency_evidence:rec.dependency_evidence||null, review_status:rec.review_status, model:EXTRAS_MODEL });
+      if(rec.review_status==="ai_reviewed") ai_reviewed++; else rejected++;
+    }
+    res.json({ ok:true, scanned:batch.length, ai_reviewed, rejected, remaining_unprocessed: Math.max(0, pool.length-batch.length) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/integrated/pending", async (req,res)=>{
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("integrated_items").select("*").in("review_status",["ai_reviewed","needs_edit"]).order("created_at",{ascending:true}).limit(200);
+    res.json({ ok:true, items:r.data||[] });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/integrated/review", async (req,res)=>{
+  /* The ONLY route to 'approved'. Human action + (for approve) a passing QA score. */
+  try{
+    const user=await requireAdmin(req); if(!user) return res.status(403).json({ error:"admins only" });
+    const { id, action, qa } = req.body||{};
+    if(!id || !action) return res.status(400).json({ error:"id and action required" });
+    const cur=await admin.from("integrated_items").select("*").eq("id",id).maybeSingle();
+    if(!cur.data) return res.status(404).json({ error:"item not found" });
+    const updated=applyHumanReview(cur.data, action, qa, (user.email||user.id));
+    await admin.from("integrated_items").update({ review_status:updated.review_status, qa:updated.qa||null, reviewer:updated.reviewer||null, reviewed_at:updated.reviewed_at||new Date().toISOString() }).eq("id",id);
+    res.json({ ok:true, review_status:updated.review_status, reason:updated.reason||null });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.get("/admin/integrated/readiness", async (req,res)=>{
+  /* live readiness of the APPROVED bank against the locked gate. */
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const r=await admin.from("integrated_items").select("integration_family,review_status").eq("review_status","approved");
+    const gate=readinessGate((r.data||[]).map(x=>({ integration_family:x.integration_family })));
+    const counts=await admin.from("integrated_items").select("review_status");
+    const by={}; (counts.data||[]).forEach(x=>{ by[x.review_status]=(by[x.review_status]||0)+1; });
+    res.json({ ok:true, readiness:gate, by_status:by });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
 app.get("/admin/integrated/inventory", async (req,res)=>{
   /* READ-ONLY Integrated inventory probe. A heuristic CANDIDATE SCAN, NOT a classifier: it surfaces questions that
      MIGHT integrate ≥2 domains for HUMAN REVIEW. It writes nothing, sets no metadata, and changes no student

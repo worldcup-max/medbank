@@ -58,7 +58,7 @@ MEGA QBANK
 │
 ├── V1.7 CONTENT PIPELINE (content-acquisition, precedes Integrated/Case)  🟢 CURRENT
 │   ├── deterministic core ✅ (taxonomy · dependency gate · QA score · readiness gate · lifecycle) 17/17
-│   ├── integrated_items table ⬜ · AI miner+adversarial reviewer ⬜ · review workbench ⬜ · inventory dashboard ⬜
+│   ├── integrated_items table ✅ (SQL) · AI miner+adversarial reviewer ✅ (server; mocked-tested) · human-approval gate ✅ · endpoints ✅ (mine/pending/review/readiness) · review workbench ⬜ · inventory dashboard ⬜
 │   └── GATE: ≥100 approved · ≥8 families · ≥10/family · no family>30% · ≥3/pair → then unlock Integrated Mode
 │
 ├── V1.7 — MEGA CLINICAL REASONING  📝 CONTRACT + gap analysis written (V1.7-CONTRACT.md) · not implemented
