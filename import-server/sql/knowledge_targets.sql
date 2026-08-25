@@ -56,3 +56,11 @@ alter table public.question_targets  enable row level security;
 -- 2026-08-24: near-miss safety-net provenance. Records the model's OWN verdict (e.g. NOT_SAME) and the nearest
 -- candidate alongside the FINAL decision, so an AMBIGUOUS-from-near-miss row never pretends the model said "X% same".
 alter table public.question_targets add column if not exists decision jsonb;
+
+-- 2026-08-24: STICKY INVARIANT — a human-resolved mapping is authoritative and is never re-derived by the engine.
+-- mapping_source distinguishes an AI mapping from a human one; mapping_status supports later supersession.
+-- The scheduler trusts: active human mapping > active AI mapping.
+alter table public.question_targets add column if not exists mapping_source text not null default 'ai';    -- ai | human
+alter table public.question_targets add column if not exists mapping_status text not null default 'active'; -- active | superseded
+-- backfill: any row a human has already resolved is authoritative
+update public.question_targets set mapping_source = 'human' where resolution is not null;

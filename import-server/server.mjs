@@ -589,7 +589,7 @@ async function annotateTargets(questions, ctx){
         nearest_candidate_score: (dec.nearest_candidate_score!=null?dec.nearest_candidate_score:null),
         near_miss: !!dec.near_miss, final_state: dec.state, note: dec.note||null };
       await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
-        proposed, candidates:candScores, decision, topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
+        proposed, candidates:candScores, decision, mapping_source:"ai", mapping_status:"active", topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
     }
     console.log("[targets] annotated "+todo.length+" question(s)"+(ctx&&ctx.topic_id?" (topic "+ctx.topic_id+")":""));
@@ -1826,8 +1826,19 @@ app.post("/admin/targets/resolve", async (req,res)=>{
     } else if(action!=="keep"){ return res.status(400).json({ error:"action must be match | new | keep" }); }
     // record the human decision as its OWN event — map_state (the AI verdict) is preserved, never overwritten
     const resolution={ action, target_id:finalId, by:(user.email||user.id), at:new Date().toISOString(), from_state:cur.data.map_state };
-    await admin.from("question_targets").update({ target_id:finalId, resolution, resolved_by:resolution.by, resolved_at:resolution.at, updated_at:resolution.at }).eq("qh",qh);
+    await admin.from("question_targets").update({ target_id:finalId, resolution, resolved_by:resolution.by, resolved_at:resolution.at, mapping_source:"human", mapping_status:"active", updated_at:resolution.at }).eq("qh",qh);
     res.json({ ok:true, resolution });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ---- Admin: reprocess = clear the QUESTION mappings but KEEP the (possibly human-resolved) targets, so a
+   re-backfill reconciles the same corpus against the current target set. This is the STABILITY test: do questions
+   return to their resolved canonical targets rather than re-flag AMBIGUOUS? Human decisions are NOT destroyed. ---- */
+app.post("/admin/targets/reprocess", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const a=await admin.from("question_targets").delete().is("resolution",null);   // STICKY INVARIANT: never delete a human-resolved (authoritative) mapping
+    res.json({ ok:true, clearedMappings:!a.error, keptTargets:true, keptResolved:true, note:"unresolved AI mappings cleared; resolved (human) mappings kept; now re-run /admin/targets/backfill" });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 

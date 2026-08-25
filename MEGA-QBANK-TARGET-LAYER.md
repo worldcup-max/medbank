@@ -214,3 +214,42 @@ Gate unchanged: **no scheduler changes before A6**, and A6 only proceeds once th
 **Change (routing only — no prompt/threshold/merge/scheduler change):** a **near-miss safety net** in `decide()`. When the model does NOT confirm a same-target (target_id null, out-of-set, or below `T_new`) BUT a real candidate is close enough (nearest score ≥ `nearMiss`, env `AMBIGUOUS_NEAR_MISS_THRESHOLD`, default **0.30, not yet calibrated**) → route to **AMBIGUOUS** for human review. It **never auto-merges**; it only stops a silent fork. Provenance is preserved in a new `question_targets.decision` column: `{model_decision:"NOT_SAME", nearest_candidate_id, nearest_candidate_score, near_miss:true, final_state:"AMBIGUOUS"}` — we do not pretend the model said "X% same". New audit metrics: `newWithCandidate`, `ambiguousFromNearMiss`, and post-review `confirmedMatch/confirmedNew`. A `/admin/targets/reset` endpoint clears the shadow tables so a re-backfill regenerates under the **current** policy (reproducible, not a flag flip).
 
 **Verified:** targets + server parse; 12 guard tests + 16 near-miss routing tests green (incl. the exact live pattern: out-of-set primary + strong valid second → AMBIGUOUS); 5 app harnesses green. Calibration of `nearMiss` is deferred until the re-run's AMBIGUOUS set is human-reviewed (measure: among null+near≥X, how often is it truly SAME).
+
+---
+
+## 10. First calibration set + stricter MATCH rule (2026-08-24)
+
+Re-backfill under the near-miss net (67 questions): **6 MATCH · 54 NEW · 7 AMBIGUOUS (all from the net)** — up from 0 AMBIGUOUS under the old policy. The 7 were human-resolved (provenance preserved: model verdict NOT_SAME + nearest candidate + final human decision):
+
+| # | proposed → nearest candidate | decision | new target |
+|---|---|---|---|
+| 0 | sepsis: cultures + empiric antibiotics ↔ empiric abx after cultures | **MATCH** | → NS-NEXT-001 |
+| 1 | DIC: consumption → transfusions may not correct ↔ DIC lab picture | NEW | DIC-DX-002 |
+| 2 | DIC: consumption → bleeding + ischemia ↔ DIC lab picture | NEW | DIC-DX-003 |
+| 3 | tetanus: umbilical portal of entry ↔ tetanus presentation | NEW | NT-DX-002 |
+| 4 | maternal tetanus toxoid prevention ↔ tetanus treatment | NEW | NT-MGMT-004 |
+| 5 | bronchiolitis: NG feeding preferred ↔ admit → O2 + NG | NEW | BRONCH-NEXT-004 |
+| 6 | bronchiolitis: O2 for hypoxia ↔ admit → O2 + NG | NEW | BRONCH-NEXT-005 |
+
+**Result: 1 MATCH / 6 NEW.** Most near-misses were genuinely distinct knowledge targets — confirming the taxonomy is more granular than first assumed (a *good* sign for the scheduler), and the near-miss net's job is exactly this: low-confidence similarity → human review → sometimes MATCH, often legitimate NEW. Zero false merges throughout. `nearMiss=0.30` left untuned.
+
+**Target-quality finding:** `BRONCH-NEXT-001` ("admit → oxygen + NG feeding") is **over-broad** — it bundles three independently-testable claims (when to admit / when to give oxygen / when/how to NG-feed). Flagged for later contract-splitting, not merged into. The reconciliation engine surfaced not just a matching gap but an *authoring* gap.
+
+**LOCKED reconciliation rule (to add to the contract):** *A shared fact, intervention, finding, or clinical scenario is insufficient for MATCH. The candidate target must cover the same independently-testable knowledge claim; if the proposed question requires knowledge not entailed by the candidate's canonical contract, prefer NEW or AMBIGUOUS.* Prevents "umbrella targets." (To be encoded in `buildReconcilePrompt` AFTER the stability re-run, so the two changes aren't conflated.)
+
+**Next — stability re-run:** new `/admin/targets/reprocess` endpoint clears the question mappings but KEEPS the resolved targets, then a re-backfill re-reconciles the same corpus against them. The test: does #0 return to NS-NEXT-001, and do the 6 NEW cases return to their own targets rather than re-flag AMBIGUOUS? That's the difference between "stable" and "merely similar", and it gates A6.
+
+---
+
+## 11. STICKY INVARIANT (locked 2026-08-24)
+
+**Once a human resolves a question→Target mapping, that mapping is AUTHORITATIVE and is never silently re-derived by the reconciliation engine.** The AI proposes; the engine decides; a human resolution is final. This supports a legitimate fourth relationship beyond MATCH/NEW/AMBIGUOUS: `AI decision → human adjudication → authoritative mapping`.
+
+Implementation:
+- `question_targets.mapping_source` = `ai | human`; `mapping_status` = `active | superseded`. Scheduler trust order: **active human > active AI**.
+- `/admin/targets/reprocess` deletes only `resolution IS NULL` rows — resolved (human) mappings are kept. Combined with the idempotent backfill skip, resolved mappings are sticky end-to-end.
+- Resolve sets `mapping_source='human'`; annotation sets `mapping_source='ai'`.
+
+Why #0 matters as evidence, not a defect: `AI: NOT_SAME ~0.70 → human: MATCH` is exactly what the admin review layer exists for. The engine can reproduce human NEW decisions (the created target bakes them in) but *cannot* reproduce a human MATCH override — so human mappings MUST be sticky. #0 is calibration truth and will not be touched again.
+
+**Revised stability test:** we are NOT testing whether the AI reproduces human judgment. We test the production property: *does the growing Target set stay stable when the UNRESOLVED corpus is re-reconciled against it?* → `reprocess (unresolved only) → backfill → inspect`. Then a separate new-question generalization test.
