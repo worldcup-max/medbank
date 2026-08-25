@@ -52,3 +52,7 @@ create index if not exists question_targets_state_idx  on public.question_target
 -- anon/auth clients get no access, which is what we want for a build-time/back-office layer.
 alter table public.knowledge_targets enable row level security;
 alter table public.question_targets  enable row level security;
+
+-- 2026-08-24: near-miss safety-net provenance. Records the model's OWN verdict (e.g. NOT_SAME) and the nearest
+-- candidate alongside the FINAL decision, so an AMBIGUOUS-from-near-miss row never pretends the model said "X% same".
+alter table public.question_targets add column if not exists decision jsonb;

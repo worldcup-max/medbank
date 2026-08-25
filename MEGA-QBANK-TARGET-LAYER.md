@@ -202,3 +202,15 @@ Gated by `MEDBANK_TARGETS` env (`off` default → fully inert · `shadow` → an
 **To activate (Frank):** run `import-server/sql/knowledge_targets.sql` in Supabase, deploy the server, set `MEDBANK_TARGETS=shadow`, then Admin → Knowledge Targets audit → Run corpus backfill. Leaving the flag `off` keeps everything inert.
 
 Gate unchanged: **no scheduler changes before A6**, and A6 only proceeds once the A5 audit shows the mapping is trustworthy.
+
+---
+
+## 9. Live finding + near-miss safety net (2026-08-24)
+
+**First live backfill (70 questions, 7 topics):** 9 MATCH · 61 NEW · **0 AMBIGUOUS** · 55/61 singletons. A Bronchiolitis rebuild (8 fresh Qs) → 4 MATCH · 4 NEW. Then the `NEW_WITH_CANDIDATE` diagnostic surfaced 27 rows; a sampled inspection showed the **mid-score near-misses (candidate ~0.3–0.6) are mostly genuine same-targets that got forked** (false NEW), while low-score ones (≤0.2) are correctly distinct.
+
+**Root cause (not the thresholds):** every near-miss row has `map_confidence = 0` because the reconcile model returns **`target_id: null` ("not the same")** rather than a graded mid-confidence — so the AMBIGUOUS band (0.45–0.80) can never fire and borderline same-targets fall straight to NEW. Confirmed by inspection: the model's *null* verdict is reliable at low candidate similarity but under-merges at mid similarity.
+
+**Change (routing only — no prompt/threshold/merge/scheduler change):** a **near-miss safety net** in `decide()`. When the model does NOT confirm a same-target (target_id null, out-of-set, or below `T_new`) BUT a real candidate is close enough (nearest score ≥ `nearMiss`, env `AMBIGUOUS_NEAR_MISS_THRESHOLD`, default **0.30, not yet calibrated**) → route to **AMBIGUOUS** for human review. It **never auto-merges**; it only stops a silent fork. Provenance is preserved in a new `question_targets.decision` column: `{model_decision:"NOT_SAME", nearest_candidate_id, nearest_candidate_score, near_miss:true, final_state:"AMBIGUOUS"}` — we do not pretend the model said "X% same". New audit metrics: `newWithCandidate`, `ambiguousFromNearMiss`, and post-review `confirmedMatch/confirmedNew`. A `/admin/targets/reset` endpoint clears the shadow tables so a re-backfill regenerates under the **current** policy (reproducible, not a flag flip).
+
+**Verified:** targets + server parse; 12 guard tests + 16 near-miss routing tests green (incl. the exact live pattern: out-of-set primary + strong valid second → AMBIGUOUS); 5 app harnesses green. Calibration of `nearMiss` is deferred until the re-run's AMBIGUOUS set is human-reviewed (measure: among null+near≥X, how often is it truly SAME).

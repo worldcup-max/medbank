@@ -116,7 +116,7 @@ export function parseProposed(text){
 }
 
 /* ---- A3: reconciliation ---- */
-export const RECON = { T_match:0.80, T_new:0.45, tieGap:0.12 };   // conservative; tuned from the A5 audit, not guessed live
+export const RECON = { T_match:0.80, T_new:0.45, tieGap:0.12, nearMiss:0.30 };   // conservative; nearMiss = the near-miss safety-net floor (env-configurable, NOT yet calibrated). Others tuned from the A5 audit, not guessed live.
 
 /* normalise a topic for comparison (so "Bronchiolitis" == "bronchiolitis ") */
 function nkey(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
@@ -160,7 +160,20 @@ export function decide(proposed, candidates, adj, cfg){
   const second = adj && typeof adj.second_confidence==="number" ? adj.second_confidence : 0;
   if(id && second>0 && (conf-second) < T.tieGap) return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"top two candidates near-tie" };
 
-  if(!id || conf < T.T_new) return { state:"NEW", target_id:null, confidence:conf, note:"no candidate close enough" };
+  if(!id || conf < T.T_new){
+    // NEAR-MISS SAFETY NET (observability-preserving): the model did NOT confirm a same-target (target_id was null,
+    // out-of-set, or its confidence is below T_new). But a REAL candidate is close enough that silently FORKING a new
+    // target is unsafe (a false merge is worse than a duplicate, and so is a false fork). Route to AMBIGUOUS for human
+    // review. This NEVER auto-merges. We record that the model's own verdict was NOT_SAME — we are not pretending it
+    // said "X% same"; the deterministic layer is refusing to treat that rejection as sufficient proof of NEW.
+    const nearId   = (id && byId[id]) ? id : (adj && adj.second_id && byId[adj.second_id] ? adj.second_id : null);
+    const nearScore= (id && byId[id]) ? conf : (adj && typeof adj.second_confidence==="number" ? adj.second_confidence : 0);
+    if(nearId && nearScore >= T.nearMiss){
+      return { state:"AMBIGUOUS", target_id:null, confidence:0, note:"near-miss ≥ "+T.nearMiss+" (model said not-same)",
+               model_decision:"NOT_SAME", nearest_candidate_id:nearId, nearest_candidate_score:nearScore, near_miss:true };
+    }
+    return { state:"NEW", target_id:null, confidence:(id?conf:0), note:"no candidate close enough" };
+  }
   if(conf < T.T_match)       return { state:"AMBIGUOUS", target_id:null, confidence:conf, note:"in the uncertainty band" };
   return { state:"MATCH", target_id:id, confidence:conf, note:"statement-equivalent to existing target" };
 }

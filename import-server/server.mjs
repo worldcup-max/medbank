@@ -539,6 +539,8 @@ async function buildQbankBatched(tmpl, note, model, rowMax, rowTemp){
  * every call is best-effort, fire-and-forget, and fully guarded. With MEDBANK_TARGETS unset/"off" it is inert,
  * and disabling it yields byte-identical q-bank behaviour. The scheduler does NOT consume any of this yet (A6). */
 function targetsMode(){ return String(process.env.MEDBANK_TARGETS||"off").toLowerCase(); }   // 'off' | 'shadow'
+/* near-miss safety-net floor, env-configurable via AMBIGUOUS_NEAR_MISS_THRESHOLD (undefined -> module default 0.30; NOT yet calibrated) */
+const TARGET_CFG = (()=>{ const v=Number(process.env.AMBIGUOUS_NEAR_MISS_THRESHOLD); return (isFinite(v)&&v>0)?{nearMiss:v}:undefined; })();
 /* replicate the CLIENT's qbHash EXACTLY so question_targets.qh matches the scheduler's key when A6 arrives */
 function qbHashServer(str){ let h=5381,i=(str||"").length; while(i){ h=(h*33)^(str||"").charCodeAt(--i); } return (h>>>0).toString(36); }
 function qhOf(q){ return qbHashServer((q.stem||"")+"|"+((q.options||[]).join("|"))); }
@@ -572,7 +574,7 @@ async function annotateTargets(questions, ctx){
       if(!proposed) continue;
       const cands=candidateFilter(proposed, targets);
       let adj=null; if(cands.length) adj=await tReconcile(proposed, cands);
-      const dec=decide(proposed, cands, adj);
+      const dec=decide(proposed, cands, adj, TARGET_CFG);
       let target_id=null;
       if(dec.state==="MATCH"){ target_id=dec.target_id; }
       else if(dec.state==="NEW"){
@@ -583,8 +585,11 @@ async function annotateTargets(questions, ctx){
       }
       const candScores=cands.map(c=>({ target_id:c.target_id,
         score: adj&&adj.target_id===c.target_id?adj.confidence : (adj&&adj.second_id===c.target_id?adj.second_confidence:null) }));
+      const decision={ model_decision: dec.model_decision||null, nearest_candidate_id: dec.nearest_candidate_id||null,
+        nearest_candidate_score: (dec.nearest_candidate_score!=null?dec.nearest_candidate_score:null),
+        near_miss: !!dec.near_miss, final_state: dec.state, note: dec.note||null };
       await admin.from("question_targets").upsert({ qh, target_id, map_state:dec.state, map_confidence:dec.confidence,
-        proposed, candidates:candScores, topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
+        proposed, candidates:candScores, decision, topic_id:(ctx&&ctx.topic_id)||null, account_id:(ctx&&ctx.account_id)||null,
         updated_at:new Date().toISOString() }, { onConflict:"qh" });
     }
     console.log("[targets] annotated "+todo.length+" question(s)"+(ctx&&ctx.topic_id?" (topic "+ctx.topic_id+")":""));
@@ -1768,7 +1773,7 @@ app.post("/admin/targets/backfill", async (req,res)=>{
 app.get("/admin/targets/stats", async (req,res)=>{
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
-    const qt=await admin.from("question_targets").select("qh,target_id,map_state,map_confidence,resolution");
+    const qt=await admin.from("question_targets").select("qh,target_id,map_state,map_confidence,resolution,candidates,decision");
     const rows=qt.data||[];
     const kt=await admin.from("knowledge_targets").select("target_id,status");
     const targets=kt.data||[];
@@ -1779,9 +1784,15 @@ app.get("/admin/targets/stats", async (req,res)=>{
     const counts=Object.keys(perT).map(id=>({ target_id:id, count:perT[id] })).sort((a,b)=>b.count-a.count);
     const dist={ "lt45":0, "45to80":0, "gte80":0 };
     rows.forEach(r=>{ const c=r.map_confidence||0; if(c<0.45)dist.lt45++; else if(c<0.80)dist["45to80"]++; else dist.gte80++; });
+    const newWithCandidate=rows.filter(r=>r.map_state==="NEW" && Array.isArray(r.candidates) && r.candidates.length>0).length;
+    const ambiguousFromNearMiss=rows.filter(r=>r.map_state==="AMBIGUOUS" && r.decision && r.decision.near_miss).length;
+    const confirmedMatch=rows.filter(r=>r.resolution && r.resolution.action==="match").length;
+    const confirmedNew=rows.filter(r=>r.resolution && r.resolution.action==="new").length;
+    const keptAmbiguous=rows.filter(r=>r.resolution && r.resolution.action==="keep").length;
     res.json({ ok:true, processed:n, match:by("MATCH"), new:by("NEW"), ambiguous:by("AMBIGUOUS"),
       matchPct:pct(by("MATCH")), newPct:pct(by("NEW")), ambiguousPct:pct(by("AMBIGUOUS")),
       resolved, unresolvedAmbiguous:unresolvedAmb, targetsCreated:targets.length,
+      newWithCandidate, ambiguousFromNearMiss, confirmedMatch, confirmedNew, keptAmbiguous,
       questionsPerTarget:counts.slice(0,20), singletonTargets:counts.filter(x=>x.count===1).length,
       heavyTargets:counts.filter(x=>x.count>=8), confidenceDistribution:dist });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
@@ -1794,7 +1805,7 @@ app.get("/admin/targets/ambiguous", async (req,res)=>{
     const ids=[...new Set(rows.flatMap(x=>(x.candidates||[]).map(c=>c.target_id)).filter(Boolean))];
     const tr= ids.length ? await admin.from("knowledge_targets").select("*").in("target_id",ids) : { data:[] };
     const tmap={}; (tr.data||[]).forEach(t=>{ tmap[t.target_id]=t; });
-    res.json({ ok:true, items: rows.map(x=>({ qh:x.qh, proposed:x.proposed, confidence:x.map_confidence,
+    res.json({ ok:true, items: rows.map(x=>({ qh:x.qh, proposed:x.proposed, confidence:x.map_confidence, decision:x.decision||null,
       candidates:(x.candidates||[]).map(c=>({ target_id:c.target_id, score:c.score, target:tmap[c.target_id]||null })) })) });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
@@ -1817,6 +1828,16 @@ app.post("/admin/targets/resolve", async (req,res)=>{
     const resolution={ action, target_id:finalId, by:(user.email||user.id), at:new Date().toISOString(), from_state:cur.data.map_state };
     await admin.from("question_targets").update({ target_id:finalId, resolution, resolved_by:resolution.by, resolved_at:resolution.at, updated_at:resolution.at }).eq("qh",qh);
     res.json({ ok:true, resolution });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+/* ---- Admin: reset the shadow tables so a re-backfill regenerates mappings under the CURRENT policy (not a flag flip) ---- */
+app.post("/admin/targets/reset", async (req,res)=>{
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const a=await admin.from("question_targets").delete().neq("qh","");
+    const b=await admin.from("knowledge_targets").delete().neq("target_id","");
+    res.json({ ok:true, cleared:{ question_targets:!a.error, knowledge_targets:!b.error }, note:"now re-run /admin/targets/backfill to regenerate under the current rule" });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 

@@ -4523,7 +4523,8 @@ function taRenderStats(d){ var el=$('#taStats'); if(!el)return; var cd=d.confide
    +'</div>'
    +'<div class="sub" style="margin-top:8px">Confidence — &lt;45%: '+(cd.lt45||0)+' · 45–80%: '+(cd['45to80']||0)+' · ≥80%: '+(cd.gte80||0)
    +' · singleton targets: '+(d.singletonTargets||0)+' · heavy (≥8 Qs): '+((d.heavyTargets||[]).length)
-   +(d.resolved?(' · resolved by you: '+d.resolved):'')+'</div>';
+   +(d.resolved?(' · resolved by you: '+d.resolved):'')+'</div>'
+   +'<div class="sub" style="margin-top:4px">Near-miss net — '+(d.newWithCandidate||0)+' NEW-with-candidate · <b>'+(d.ambiguousFromNearMiss||0)+'</b> routed to AMBIGUOUS by the safety net'+((d.confirmedMatch||d.confirmedNew)?(' · you confirmed: '+(d.confirmedMatch||0)+' match / '+(d.confirmedNew||0)+' new'):'')+'</div>';
 }
 function taRenderAmb(items){ var el=$('#taAmb'); if(!el)return;
   if(!items.length){ el.innerHTML='<p class="sub">No unresolved ambiguous mappings. 🎉</p>'; return; }
@@ -4535,6 +4536,7 @@ function taRenderAmb(items){ var el=$('#taAmb'); if(!el)return;
         +'<span class="sub">'+esc(t.canonical_statement||'(no statement)')+'</span><br>'
         +'<button class="btn sm" style="margin-top:6px" onclick="taResolve(\''+it.qh+'\',\'match\',\''+esc(c.target_id)+'\')">Match this target</button></div>'; }).join('');
     return '<div class="card" style="cursor:default;margin-bottom:12px">'
+      +((it.decision&&it.decision.near_miss)?('<div class="sub" style="background:#fff6e6;border:1px solid #f3d79a;color:#8a5a12;border-radius:8px;padding:6px 9px;margin-bottom:8px">\u26a0 Near-miss: the model judged <b>NOT the same</b>, but the nearest candidate scored '+(it.decision.nearest_candidate_score!=null?Math.round(it.decision.nearest_candidate_score*100)+'%':'\u2014')+' \u2014 the safety net flagged it for review rather than silently forking a new target. (Never auto-merged.)</div>'):'')
       +'<div><b>Proposed target:</b> '+esc(p.knowledge_statement||'')+'</div>'
       +'<div class="sub" style="margin:3px 0 8px">'+esc(p.topic||'')+' · '+esc(p.subtopic||'')+' · '+esc(p.skill||'')+' · overall conf '+(it.confidence!=null?Math.round(it.confidence*100)+'%':'—')+'</div>'
       +'<div class="sub" style="font-weight:700">Candidate existing targets:</div>'
