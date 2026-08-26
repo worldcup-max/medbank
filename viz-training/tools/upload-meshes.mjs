@@ -39,7 +39,34 @@ const CHECK = argv.includes('--check');
 const FORCE = argv.includes('--force');
 const DIR = argv.find(a => !a.startsWith('--')) || join(ROOT, 'meshes-lite');
 
-const KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '';
+/* Strip what a shell leaves behind. `set KEY="eyJ..."` in cmd keeps the quotes IN the value, and a
+   copy-paste from a web page often carries a trailing newline or a stray space. Either one turns a
+   perfectly good key into a string the API rejects, and the error it gives back — "Invalid Compact
+   JWS" — says nothing about quotes. */
+const KEY = (process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '')
+  .trim().replace(/^["']|["']$/g, '').trim();
+
+/* A JWT is three base64url segments separated by dots. Check the SHAPE before sending 142 files at a
+   server that will refuse every one of them. The first version of this did not, and a mistyped key
+   produced 142 identical failures over several minutes — the error was on line one and you had to
+   read to the end to be sure it was on every line. */
+if (KEY && !CHECK) {
+  const segs = KEY.split('.');
+  const shape = /^[A-Za-z0-9_-]+$/;
+  const bad = segs.length !== 3 || !segs.every(x => x && shape.test(x));
+  if (bad) {
+    console.error('\nSUPABASE_SERVICE_KEY does not look like a JWT.\n');
+    console.error(`  length: ${KEY.length} characters`);
+    console.error(`  dot-separated segments: ${segs.length} (a JWT has exactly 3)`);
+    if (/\s/.test(KEY)) console.error('  contains whitespace — the value was probably split or wrapped');
+    if (/^["']|["']$/.test(process.env.SUPABASE_SERVICE_KEY || '')) console.error('  starts or ends with a quote');
+    console.error(`  starts with: ${KEY.slice(0, 12)}…   ends with: …${KEY.slice(-8)}`);
+    console.error('\nA service_role key starts "eyJ" and is several hundred characters long. In cmd use');
+    console.error('  set SUPABASE_SERVICE_KEY=eyJ...        (no quotes, no spaces around the =)');
+    console.error('and set it in the SAME window you run node in — cmd and PowerShell do not share it.\n');
+    process.exit(2);
+  }
+}
 if (!KEY && !CHECK) {
   console.error('\nSUPABASE_SERVICE_KEY is not set.\n');
   console.error('  Windows cmd:  set SUPABASE_SERVICE_KEY=eyJ...');
@@ -108,7 +135,18 @@ for (const f of files) {
     continue;
   }
   const err = await put(f, readFileSync(join(DIR, f)));
-  if (err) { failed++; console.log(`  FAIL    ${label}  ${err}`); continue; }
+  if (err) {
+    failed++; console.log(`  FAIL    ${label}  ${err}`);
+    /* An auth or permission refusal is about the CREDENTIAL, not this file. Trying the next 141 files
+       will fail the same way and bury the one line that matters under a screen of noise. Stop. */
+    if (/^40[013]/.test(err)) {
+      console.log('\nThat is the server refusing the key, not the file. Every remaining upload would fail');
+      console.log('the same way, so stopping here. Check SUPABASE_SERVICE_KEY is the service_role key,');
+      console.log('pasted whole, with no quotes, in this same terminal window.\n');
+      process.exit(1);
+    }
+    continue;
+  }
 
   /* Verify, do not assume. A 200 from the API is not the same as the object being served. */
   const after = await remoteSize(f);

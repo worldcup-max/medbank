@@ -1,0 +1,596 @@
+{
+  "schema": 2,
+  "id": "gross__pectoral-region-breast__pectoralis-minor",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pectoral Region & Breast",
+  "structure": "Pectoralis minor",
+  "covers": [
+    "Pectoralis minor"
+  ],
+  "learning_goal": "Give the origin, insertion, nerve supply and actions of pectoralis minor, and use it to divide the axillary artery into its three parts and the axillary nodes into their three levels.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pectoral region",
+      "chest wall",
+      "anterior thoracic wall",
+      "axilla",
+      "upper limb",
+      "shoulder",
+      "breast",
+      "pectoralis"
+    ],
+    "terms": [
+      "pectoralis minor",
+      "pec minor",
+      "coracoid process",
+      "third rib",
+      "fourth rib",
+      "fifth rib",
+      "medial pectoral nerve",
+      "lateral pectoral nerve",
+      "clavipectoral fascia",
+      "costocoracoid ligament",
+      "anterior wall of axilla",
+      "axillary artery",
+      "first part of axillary artery",
+      "second part of axillary artery",
+      "third part of axillary artery",
+      "axillary lymph nodes",
+      "level I nodes",
+      "level II nodes",
+      "level III nodes",
+      "Patey mastectomy",
+      "protraction of scapula",
+      "scapular depression",
+      "accessory muscle of respiration",
+      "thoracic outlet syndrome",
+      "pectoralis minor syndrome",
+      "subclavius",
+      "serratus anterior",
+      "coracobrachialis",
+      "short head of biceps",
+      "pectoralis major"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "pec_minor",
+      "name": "right pectoralis minor",
+      "label": "Pectoralis minor",
+      "role": "part",
+      "group": "Pectoralis minor",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA13375"
+      },
+      "terms": [
+        "pectoralis minor",
+        "pec minor",
+        "anterior wall of axilla"
+      ],
+      "narration": "A flat triangle deep to pectoralis major. Three digitations below, one tendon above. Its base is on the ribs and its apex is on the coracoid process, so every fibre pulls the shoulder forward and down."
+    },
+    {
+      "key": "rib3",
+      "name": "right third rib",
+      "label": "3rd rib",
+      "role": "part",
+      "group": "Origin",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA7909"
+      },
+      "terms": [
+        "third rib",
+        "rib 3"
+      ],
+      "narration": "The highest of the three origins. The slips arise near the costal cartilages, close to the front of the chest."
+    },
+    {
+      "key": "rib4",
+      "name": "right fourth rib",
+      "label": "4th rib",
+      "role": "part",
+      "group": "Origin",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA7957"
+      },
+      "terms": [
+        "fourth rib",
+        "rib 4"
+      ],
+      "narration": "The middle slip. Ribs three, four and five is the classic answer, though the muscle often shifts one rib up or down."
+    },
+    {
+      "key": "rib5",
+      "name": "right fifth rib",
+      "label": "5th rib",
+      "role": "part",
+      "group": "Origin",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA8066"
+      },
+      "terms": [
+        "fifth rib",
+        "rib 5"
+      ],
+      "narration": "The lowest slip. Below this the chest wall is covered by pectoralis major alone."
+    },
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula — coracoid process",
+      "role": "part",
+      "group": "Insertion",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "coracoid process",
+        "scapula",
+        "medial border of coracoid"
+      ],
+      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm."
+    },
+    {
+      "key": "pec_major_sternocostal",
+      "name": "sternocostal part of right pectoralis major",
+      "label": "Pectoralis major — sternocostal head",
+      "role": "context",
+      "group": "Superficial to it",
+      "layer": "muscle",
+      "color": "#a06868",
+      "refs": {
+        "bodyparts3d": "FMA79979"
+      },
+      "terms": [
+        "pectoralis major",
+        "sternocostal head"
+      ],
+      "narration": "The bulk of pectoralis major lies directly over pectoralis minor. In the living body you cannot see or feel the minor through it."
+    },
+    {
+      "key": "pec_major_clavicular",
+      "name": "clavicular part of right pectoralis major",
+      "label": "Pectoralis major — clavicular head",
+      "role": "context",
+      "group": "Superficial to it",
+      "layer": "muscle",
+      "color": "#b07878",
+      "refs": {
+        "bodyparts3d": "FMA34690"
+      },
+      "terms": [
+        "clavicular head",
+        "pectoralis major"
+      ],
+      "narration": "The upper head, from the medial half of the clavicle."
+    },
+    {
+      "key": "subclavius",
+      "name": "right subclavius",
+      "label": "Subclavius",
+      "role": "context",
+      "group": "Clavipectoral fascia",
+      "layer": "muscle",
+      "color": "#b8654a",
+      "refs": {
+        "bodyparts3d": "FMA13412"
+      },
+      "terms": [
+        "subclavius",
+        "clavipectoral fascia",
+        "costocoracoid membrane"
+      ],
+      "narration": "The clavipectoral fascia runs from the clavicle down to the axillary fascia and splits to enclose two muscles: subclavius above and pectoralis minor below. Learn them as a pair — they share a wrapping."
+    },
+    {
+      "key": "clavicle",
+      "name": "right clavicle",
+      "label": "Clavicle",
+      "role": "context",
+      "group": "Clavipectoral fascia",
+      "layer": "bone",
+      "color": "#e3d8ba",
+      "refs": {
+        "bodyparts3d": "FMA13322"
+      },
+      "terms": [
+        "clavicle",
+        "subclavian groove"
+      ],
+      "narration": "The upper attachment of the clavipectoral fascia. Four things pierce that fascia: the cephalic vein going in, and the thoracoacromial artery, the lateral pectoral nerve and the lymphatics coming out."
+    },
+    {
+      "key": "rib1",
+      "name": "right first rib",
+      "label": "1st rib",
+      "role": "context",
+      "group": "Axillary artery",
+      "layer": "bone",
+      "color": "#ddd2b4",
+      "refs": {
+        "bodyparts3d": "FMA7857"
+      },
+      "terms": [
+        "first rib",
+        "lateral border of first rib",
+        "outer border of first rib"
+      ],
+      "narration": "The lateral border of this rib is where the subclavian artery changes its name to the axillary artery. Names change at borders, not at branches."
+    },
+    {
+      "key": "subclavian_artery",
+      "name": "right subclavian artery",
+      "label": "Subclavian artery",
+      "role": "context",
+      "group": "Axillary artery",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3953"
+      },
+      "terms": [
+        "subclavian artery",
+        "axillary artery",
+        "brachial artery"
+      ],
+      "narration": "Follow this vessel laterally. At the outer border of the first rib it becomes the axillary artery, and at the lower border of teres major it becomes the brachial artery. One continuous tube, three names, two borders."
+    },
+    {
+      "key": "subclavian_vein",
+      "name": "right subclavian vein",
+      "label": "Subclavian vein",
+      "role": "context",
+      "group": "Axillary artery",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "refs": {
+        "bodyparts3d": "FMA4755"
+      },
+      "terms": [
+        "subclavian vein",
+        "axillary vein",
+        "cephalic vein"
+      ],
+      "narration": "The vein lies medial and anterior to the artery throughout, which is why a needle aimed too deep for the vein finds the artery, and one aimed deeper still finds the pleura."
+    },
+    {
+      "key": "coracobrachialis",
+      "name": "right coracobrachialis",
+      "label": "Coracobrachialis",
+      "role": "context",
+      "group": "Coracoid crowd",
+      "layer": "muscle",
+      "color": "#a8543f",
+      "refs": {
+        "bodyparts3d": "FMA37665"
+      },
+      "terms": [
+        "coracobrachialis",
+        "coracoid process",
+        "musculocutaneous nerve"
+      ],
+      "narration": "One of the three structures on the coracoid. It runs down to the middle of the humerus and the musculocutaneous nerve pierces it."
+    },
+    {
+      "key": "biceps_short",
+      "name": "short head of right biceps brachii",
+      "label": "Biceps brachii — short head",
+      "role": "context",
+      "group": "Coracoid crowd",
+      "layer": "muscle",
+      "color": "#8f2727",
+      "refs": {
+        "bodyparts3d": "FMA37684"
+      },
+      "terms": [
+        "short head of biceps",
+        "conjoint tendon",
+        "coracoid process"
+      ],
+      "narration": "The second. Short head of biceps and coracobrachialis share a conjoint tendon on the tip of the coracoid; pectoralis minor takes the medial border. Three attachments, one small hook of bone."
+    },
+    {
+      "key": "serratus_anterior",
+      "name": "right serratus anterior",
+      "label": "Serratus anterior",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#c08a6a",
+      "refs": {
+        "bodyparts3d": "FMA13398"
+      },
+      "terms": [
+        "serratus anterior",
+        "protraction",
+        "long thoracic nerve"
+      ],
+      "narration": "The other protractor. Serratus anterior pulls the scapula forward while holding it against the chest wall; pectoralis minor pulls it forward and tips it, so the two are allies in protraction but opposites in rotation."
+    },
+    {
+      "key": "subscapularis",
+      "name": "right subscapularis",
+      "label": "Subscapularis",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#9a7f66",
+      "refs": {
+        "bodyparts3d": "FMA13414"
+      },
+      "terms": [
+        "subscapularis",
+        "posterior wall of axilla"
+      ],
+      "narration": "On the front of the scapula, forming part of the posterior wall of the axilla. Pectoralis minor is on the anterior wall, so the axillary contents run in the gap between them."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus"
+      ],
+      "narration": "For orientation only. Pectoralis minor never reaches the humerus — that is the single fact that separates it from pectoralis major."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Hidden under pectoralis major",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Take pectoralis major off the chest wall and pectoralis minor is what lies underneath. It is much smaller and it points the other way: pectoralis major runs from the midline outward to the arm, pectoralis minor runs from the ribs upward and outward to the shoulder blade. Everything it does is to the scapula."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Ribs three, four and five to the coracoid",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis minor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Origin"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Insertion"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "pec_minor",
+          "path": [
+            "rib5",
+            "rib4",
+            "rib3",
+            "pec_minor",
+            "scapula"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Three slips from the outer surfaces of ribs three, four and five, near their cartilages. They converge upward and laterally into one flat tendon on the medial border of the coracoid process. Nerve supply is the medial pectoral nerve from the medial cord, C8 and T1, and that nerve pierces the muscle to reach pectoralis major beyond it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "What it does to the scapula",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pec_minor",
+            "serratus_anterior"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "scapula",
+          "kind": "pulls the coracoid forward and down"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three actions. It protracts the scapula, drawing it forward around the chest wall. It depresses the shoulder tip, pulling the coracoid down. And it rotates the scapula downward, turning the glenoid to face the floor, which is the opposite of what serratus anterior and trapezius do when you raise your arm above your head. With the scapula fixed by other muscles it becomes an accessory muscle of inspiration, lifting ribs three to five — that is why a breathless patient braces the arms on a table."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The muscle that divides the axillary artery",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis minor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Axillary artery"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "subclavian_artery",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial_blood",
+          "path": [
+            "subclavian_artery",
+            "rib1",
+            "pec_minor",
+            "humerus"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "This is the exam fact. The axillary artery begins at the outer border of the first rib and runs behind pectoralis minor on its way to the arm. The muscle cuts it into three parts: the first part is above the muscle, the second part is behind it, the third part is below it. The number of branches follows the number of the part. One branch from the first part, the superior thoracic. Two from the second, the thoracoacromial and the lateral thoracic. Three from the third, the subscapular and the two circumflex humeral arteries. One, two, three — the muscle is what makes that countable."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Three levels of axillary nodes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "subclavian_vein",
+          "kind": "landmark for nodal levels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The same muscle levels the axillary lymph nodes, and this is how a breast cancer is staged in theatre. Level one lies lateral to and below the muscle. Level two lies behind it. Level three lies medial to and above it, up at the apex of the axilla. In the Patey modified radical mastectomy pectoralis minor is divided precisely so the surgeon can reach level three, and pectoralis major is left alone. Remember the direction: artery parts are numbered from above downward, node levels from below upward."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Cut across the anterior axillary wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.1,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pec_minor",
+            "subscapularis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across at the level of the fourth rib and read from front to back. Skin, then superficial fascia holding the breast, then pectoral fascia, then pectoralis major. Then the clavipectoral fascia with pectoralis minor inside it. Then the axillary vessels and the cords of the brachial plexus. Then subscapularis on the front of the scapula behind. The anterior wall of the axilla is those two pectoral muscles plus that fascia; the posterior wall is subscapularis, teres major and latissimus dorsi."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "When it goes wrong",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis minor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Axillary artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "scapula"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "scapula",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A tight, shortened pectoralis minor tips the scapula forward and holds it there. The medial border lifts off the chest wall and the shoulder rolls in — the posture of someone who sits hunched over a desk. Because the vessels and the cords pass right behind the muscle, a tight one can compress them: numbness and heaviness in the arm that is worse when the arm is raised. That is pectoralis minor syndrome, and it belongs to the thoracic outlet group. Test the muscle by lying the patient flat and looking at how far the shoulder tip stays off the couch."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "No coracoid process mesh. The insertion is taught on the whole right scapula, with the coracoid named in narration and highlighted as part of the bone. This is the option-(b) route in the authoring rules — an adjacent structure that does exist — and it is a good candidate for a measured landmark anchor once the scapula geometry can be inspected offline.",
+    "No axillary artery and no axillary vein. The catalog stops at the subclavian vessels, so beat 4 traces the subclavian artery to the first rib and then narrates the three parts of the axillary artery against the muscle rather than showing them. The single most examined fact about this muscle is therefore spoken, not seen. None of the named branches — superior thoracic, thoracoacromial, lateral thoracic, subscapular, circumflex humeral — exist as meshes either.",
+    "No lymph nodes anywhere in the catalog. Beat 5 places the three nodal levels by their relation to the muscle in narration only. The curriculum's separate 'Axillary lymph nodes' entry cannot be authored as a 3D scene from this catalog and should take its deferred diagram mode when the cursor reaches it.",
+    "No pectoral nerves. The medial pectoral nerve piercing the muscle, and the lateral pectoral nerve piercing the clavipectoral fascia, are both taught here and neither can be shown; the catalog holds two optic nerves and nothing else named.",
+    "No fascia of any kind. The clavipectoral fascia is the organising idea of beats 2 and 6 — it encloses this muscle and subclavius, and four structures pierce it — and it has no model. Subclavius stands in for it visually.",
+    "Ribs are shown as whole ribs. The origin is from the outer surfaces of ribs three to five near their cartilages, not from the whole shaft, so the highlighted bone is larger than the true attachment area."
+  ]
+}

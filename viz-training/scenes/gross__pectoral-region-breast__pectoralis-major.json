@@ -1,0 +1,596 @@
+{
+  "schema": 2,
+  "id": "gross__pectoral-region-breast__pectoralis-major",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pectoral Region & Breast",
+  "structure": "Pectoralis major",
+  "covers": [
+    "Pectoralis major"
+  ],
+  "learning_goal": "Name the three heads of pectoralis major and their origins, say where all three insert and why the tendon is folded, and give the movement each head produces.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pectoral region",
+      "chest wall",
+      "anterior thoracic wall",
+      "upper limb",
+      "shoulder",
+      "axilla",
+      "breast",
+      "pectoralis"
+    ],
+    "terms": [
+      "pectoralis major",
+      "pec major",
+      "clavicular head",
+      "sternocostal head",
+      "abdominal head",
+      "clavicular part",
+      "sternocostal part",
+      "abdominal part",
+      "bicipital groove",
+      "intertubercular sulcus",
+      "lateral lip",
+      "bilaminar tendon",
+      "anterior axillary fold",
+      "deltopectoral groove",
+      "deltopectoral triangle",
+      "clavipectoral triangle",
+      "cephalic vein",
+      "lateral pectoral nerve",
+      "medial pectoral nerve",
+      "thoracoacromial artery",
+      "pectoral fascia",
+      "adduction",
+      "medial rotation",
+      "pectoralis minor",
+      "serratus anterior",
+      "subclavius",
+      "Poland syndrome",
+      "pectoralis major flap"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "pec_clavicular",
+      "name": "clavicular part of right pectoralis major",
+      "label": "Pectoralis major — clavicular head",
+      "role": "part",
+      "group": "Pectoralis major",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA34690"
+      },
+      "terms": [
+        "clavicular head",
+        "clavicular part",
+        "pectoralis major"
+      ],
+      "narration": "From the front of the medial half of the clavicle. Its fibres run downward and laterally, so this head flexes the arm at the shoulder."
+    },
+    {
+      "key": "pec_sternocostal",
+      "name": "sternocostal part of right pectoralis major",
+      "label": "Pectoralis major — sternocostal head",
+      "role": "part",
+      "group": "Pectoralis major",
+      "layer": "muscle",
+      "color": "#a82f2f",
+      "refs": {
+        "bodyparts3d": "FMA79979"
+      },
+      "terms": [
+        "sternocostal head",
+        "sternocostal part",
+        "pectoralis major"
+      ],
+      "narration": "The bulk of the muscle. It arises from the front of the sternum and the upper six costal cartilages, and its fibres run almost straight laterally. This is the head that adducts and medially rotates."
+    },
+    {
+      "key": "pec_abdominal",
+      "name": "abdominal part of right pectoralis major",
+      "label": "Pectoralis major — abdominal head",
+      "role": "part",
+      "group": "Pectoralis major",
+      "layer": "muscle",
+      "color": "#8f2727",
+      "refs": {
+        "bodyparts3d": "FMA45874"
+      },
+      "terms": [
+        "abdominal head",
+        "abdominal part",
+        "external oblique aponeurosis",
+        "rectus sheath"
+      ],
+      "narration": "A small slip from the aponeurosis of external oblique over the upper rectus sheath. Its fibres run upward and laterally, and they end up highest of all on the humerus."
+    },
+    {
+      "key": "clavicle",
+      "name": "right clavicle",
+      "label": "Clavicle",
+      "role": "context",
+      "group": "Origins",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA13322"
+      },
+      "terms": [
+        "clavicle",
+        "medial half of clavicle"
+      ],
+      "narration": "The medial half gives origin to the clavicular head. Deltoid takes the lateral third, and the gap between the two is the deltopectoral groove."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "context",
+      "group": "Origins",
+      "layer": "bone",
+      "color": "#e3d8ba",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "sternal angle"
+      ],
+      "narration": "The upper part of the sternal origin."
+    },
+    {
+      "key": "sternum_body",
+      "name": "body of sternum",
+      "label": "Body of sternum",
+      "role": "context",
+      "group": "Origins",
+      "layer": "bone",
+      "color": "#e3d8ba",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "sternum",
+        "body of sternum"
+      ],
+      "narration": "The sternocostal head grips the front of the sternum down to about the sixth cartilage. The two muscles meet at the midline but do not cross it."
+    },
+    {
+      "key": "cc2",
+      "name": "right second costal cartilage",
+      "label": "2nd costal cartilage",
+      "role": "context",
+      "group": "Origins",
+      "layer": "cartilage",
+      "color": "#cfe0ea",
+      "refs": {
+        "bodyparts3d": "FMA7886"
+      },
+      "terms": [
+        "second costal cartilage"
+      ],
+      "narration": "The costal cartilages, not the ribs, are what the muscle arises from."
+    },
+    {
+      "key": "cc3",
+      "name": "right third costal cartilage",
+      "label": "3rd costal cartilage",
+      "role": "context",
+      "group": "Origins",
+      "layer": "cartilage",
+      "color": "#cfe0ea",
+      "refs": {
+        "bodyparts3d": "FMA7913"
+      },
+      "terms": [
+        "third costal cartilage"
+      ],
+      "narration": "Origin continues down the cartilages in order."
+    },
+    {
+      "key": "cc4",
+      "name": "right fourth costal cartilage",
+      "label": "4th costal cartilage",
+      "role": "context",
+      "group": "Origins",
+      "layer": "cartilage",
+      "color": "#cfe0ea",
+      "refs": {
+        "bodyparts3d": "FMA7976"
+      },
+      "terms": [
+        "fourth costal cartilage",
+        "nipple level"
+      ],
+      "narration": "The fourth space is the level of the nipple in a man, and a useful landmark on this wall."
+    },
+    {
+      "key": "cc5",
+      "name": "right fifth costal cartilage",
+      "label": "5th costal cartilage",
+      "role": "context",
+      "group": "Origins",
+      "layer": "cartilage",
+      "color": "#cfe0ea",
+      "refs": {
+        "bodyparts3d": "FMA8070"
+      },
+      "terms": [
+        "fifth costal cartilage"
+      ],
+      "narration": "Origin continues."
+    },
+    {
+      "key": "cc6",
+      "name": "right sixth costal cartilage",
+      "label": "6th costal cartilage",
+      "role": "context",
+      "group": "Origins",
+      "layer": "cartilage",
+      "color": "#cfe0ea",
+      "refs": {
+        "bodyparts3d": "FMA8194"
+      },
+      "terms": [
+        "sixth costal cartilage"
+      ],
+      "narration": "The lowest cartilage of the sternocostal origin. Below this the abdominal slip takes over."
+    },
+    {
+      "key": "external_oblique",
+      "name": "right external oblique",
+      "label": "External oblique — aponeurosis",
+      "role": "context",
+      "group": "Origins",
+      "layer": "muscle",
+      "color": "#c8a882",
+      "refs": {
+        "bodyparts3d": "FMA13336"
+      },
+      "terms": [
+        "external oblique",
+        "external oblique aponeurosis"
+      ],
+      "narration": "The abdominal head arises from this sheet, which is why pectoralis major is continuous with the abdominal wall and not just a chest muscle."
+    },
+    {
+      "key": "rectus_abdominis",
+      "name": "right rectus abdominis",
+      "label": "Rectus abdominis",
+      "role": "context",
+      "group": "Origins",
+      "layer": "muscle",
+      "color": "#bb9c78",
+      "refs": {
+        "bodyparts3d": "FMA13377"
+      },
+      "terms": [
+        "rectus abdominis",
+        "rectus sheath"
+      ],
+      "narration": "The sheath in front of this muscle is what the abdominal slip lies on."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus — bicipital groove",
+      "role": "context",
+      "group": "Insertion",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "bicipital groove",
+        "intertubercular sulcus",
+        "lateral lip"
+      ],
+      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor."
+    },
+    {
+      "key": "pec_minor",
+      "name": "right pectoralis minor",
+      "label": "Pectoralis minor",
+      "role": "context",
+      "group": "Deep to it",
+      "layer": "muscle",
+      "color": "#a06868",
+      "refs": {
+        "bodyparts3d": "FMA13375"
+      },
+      "terms": [
+        "pectoralis minor",
+        "coracoid process",
+        "third fourth fifth ribs"
+      ],
+      "narration": "Directly deep to pectoralis major, from ribs three to five up to the coracoid process. It is the landmark that divides the axillary artery into its three parts."
+    },
+    {
+      "key": "subclavius",
+      "name": "right subclavius",
+      "label": "Subclavius",
+      "role": "context",
+      "group": "Deep to it",
+      "layer": "muscle",
+      "color": "#b07878",
+      "refs": {
+        "bodyparts3d": "FMA13412"
+      },
+      "terms": [
+        "subclavius"
+      ],
+      "narration": "A small muscle under the clavicle. With pectoralis minor it is enclosed by the clavipectoral fascia."
+    },
+    {
+      "key": "serratus_anterior",
+      "name": "right serratus anterior",
+      "label": "Serratus anterior",
+      "role": "context",
+      "group": "Deep to it",
+      "layer": "muscle",
+      "color": "#c08a6a",
+      "refs": {
+        "bodyparts3d": "FMA13398"
+      },
+      "terms": [
+        "serratus anterior"
+      ],
+      "narration": "It clothes the side of the chest wall deeper again, running back to the medial border of the scapula."
+    },
+    {
+      "key": "deltoid_clavicular",
+      "name": "clavicular part of right deltoid",
+      "label": "Deltoid — clavicular fibres",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#b8654a",
+      "refs": {
+        "bodyparts3d": "FMA34680"
+      },
+      "terms": [
+        "deltoid",
+        "deltopectoral groove",
+        "anterior deltoid"
+      ],
+      "narration": "The other side of the deltopectoral groove. Both muscles reach the clavicle, and the gap between them is where the cephalic vein climbs to reach the axillary vein."
+    },
+    {
+      "key": "latissimus",
+      "name": "right latissimus dorsi",
+      "label": "Latissimus dorsi",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#8f98a2",
+      "refs": {
+        "bodyparts3d": "FMA13358"
+      },
+      "terms": [
+        "latissimus dorsi",
+        "posterior axillary fold"
+      ],
+      "narration": "The muscle that forms the posterior axillary fold, and the antagonist that shares two of pectoralis major's actions — adduction and medial rotation — from behind."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The muscle of the front of the chest",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Pectoralis major",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Pectoralis major is a thick fan covering the upper chest wall. It has a wide origin along the midline and a narrow insertion on the humerus, which is what a muscle looks like when it is built to pull the arm towards the body. Its lower border makes the anterior axillary fold you can pinch between your fingers."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Three heads, three origins",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Origins"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_clavicular",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Read the origin from the top down. Clavicular head from the medial half of the clavicle. Sternocostal head from the front of the sternum and the upper six costal cartilages. Abdominal head from the aponeurosis of external oblique. The heads are named for what they come from, so the name is the answer."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The tendon folds on itself",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_abdominal",
+          "to": "humerus",
+          "kind": "lowest fibres insert highest"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "pec_sternocostal",
+          "path": [
+            "sternum_body",
+            "cc4",
+            "pec_sternocostal",
+            "humerus"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "All three heads end on the lateral lip of the bicipital groove, but not in the order you expect. The clavicular fibres go in front and reach lowest. The sternocostal and abdominal fibres fold behind them and reach highest. So the tendon has two laminae and the lowest fibres of the muscle insert highest on the bone. That twist is why the muscle can pull the arm through such a wide arc without slackening."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 4,
+      "title": "What each head does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pec_clavicular",
+            "pec_sternocostal"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The whole muscle adducts and medially rotates the arm. Split it and the two halves oppose each other. The clavicular head flexes the shoulder, so it lifts the arm forward from the side. The sternocostal head extends the flexed arm, so it pulls the arm back down again. Test the clavicular head by pushing the arm forward against resistance and the sternocostal head by pressing the hands together in front of the chest. With the arm fixed above the head, both heads pull the trunk up to the arm, which is how you climb."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The deltopectoral groove",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pec_clavicular",
+            "deltoid_clavicular"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_clavicular",
+          "to": "clavicle",
+          "kind": "medial half of the clavicle"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Between the clavicular head and deltoid is a furrow, the deltopectoral groove. The cephalic vein runs up in it and dives through the clavipectoral fascia to join the axillary vein. At the top the groove widens into the deltopectoral triangle, bounded by clavicle, deltoid and pectoralis major, and that triangle is the surface landmark used for infraclavicular blocks and for shoulder approaches."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Cut across the chest wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across at the level of the fourth cartilage and count inward. Skin and superficial fascia, and in a woman the breast lies in that layer. Then pectoral fascia, then pectoralis major. Then the clavipectoral fascia with pectoralis minor inside it. Then the ribs and intercostals, then pleura. The breast sits on the fascia over the muscle, which is why a carcinoma tethered to the muscle becomes fixed when the arm is abducted against resistance."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Nerve supply and clinical points",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pectoralis major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pec_minor"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_abdominal",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Both pectoral nerves supply this muscle: the lateral pectoral nerve from the lateral cord to the clavicular head, the medial pectoral nerve from the medial cord to the sternocostal and abdominal heads. The medial nerve pierces pectoralis minor on its way, so the nerve named medial lies lateral to the other one at the muscle. Three things to carry: absence of the sternocostal head is the defining feature of Poland syndrome; the muscle is a workhorse flap for head, neck and chest wall reconstruction because its blood supply from the thoracoacromial artery enters near the clavicle; and a rupture at the tendon tears the sternocostal head, typically in bench pressing, leaving a lump on the chest and a hollow at the axillary fold."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "No pectoral nerves and no thoracoacromial artery. Every nerve and vessel in this scene is narrated over muscle and bone: the lateral and medial pectoral nerves, the cephalic vein in the deltopectoral groove, and the arterial supply that makes the muscle a flap. The catalog holds two optic nerves and no named branch of the axillary artery, so beats 5 and 7 describe structures the student cannot see.",
+    "No fascia. The pectoral fascia and the clavipectoral fascia are both taught here — the clavipectoral fascia is what the cephalic vein pierces and what encloses pectoralis minor and subclavius — and neither has a model. The cross-section beat counts layers by narration.",
+    "No breast. Searching the catalog for breast, mammary gland or nipple returns nothing at all. The relationship of the breast to the pectoral fascia is narrated in beat 6, but the curriculum's separate 'Breast (mammary gland)' entry cannot be authored as a 3D scene from this catalog and should be routed to its deferred diagram mode when it comes up.",
+    "The intercostal muscles exist only as three unsided whole-body meshes (external, internal, innermost), so they are named in the cross-section narration rather than shown; adding one would render the entire rib cage's worth of muscle on both sides.",
+    "The insertion is taught on the whole humerus. There is no separate mesh for the bicipital groove or its lips, so 'lateral lip of the intertubercular sulcus' is narrated against the bone rather than marked on it. This is a good candidate for a measured landmark anchor once the humerus geometry is available offline."
+  ]
+}

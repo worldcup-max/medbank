@@ -2715,6 +2715,15 @@ function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
          completion (server voice → cloud → device, whichever answers), so hand its callback straight
          through. If it is missing, call back at once and let the player fall back to its own timing —
          a silent sequence that keeps moving beats one that stalls. */
+      /* Pre-buy the player's narration the same way the topic preview does, so the first line of a
+         scene starts speaking instead of starting to be generated. warmSpeak caches per line and
+         de-duplicates in-flight requests, so calling it again for a line already bought is free. */
+      if(MB3D.warmer) MB3D.warmer(function(lines){
+        try{
+          if(!window.warmSpeak || !Array.isArray(lines)) return;
+          lines.forEach(function(t){ try{ window.warmSpeak(t,'read'); }catch(e){} });
+        }catch(e){}
+      });
       if(MB3D.speaker) MB3D.speaker(function(text, done){
         try{
           if(text===null||text===undefined||text===''){ if(typeof stopSpeak==='function') stopSpeak(); return; }
@@ -9364,16 +9373,23 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     f.innerHTML='<span class="vf-core">⚠️</span><span class="vf-lab">'+esc(msg)+'</span>';
     setTimeout(removeVizFloat,3800);
   }
-  function vizWarmVoices(){ try{ if(!BP||!BP.narration_steps||!window.warmSpeak) return;
+  /* Warm the clips under the SAME key they will be played under.
+     `_vizUse` is a global that says which voice bucket we are in ('read' for an explainer, 'preview'
+     for the topic video), and it was read once here and again at play time — with a chance to change
+     in between. A clip bought as 'preview' and looked up as 'read' is a cache miss, so the pre-buy
+     silently paid for nothing and the student still waited for a cold fetch. The caller now says which
+     bucket it means, rather than trusting a global to have stayed put. */
+  function vizWarmVoices(use){ try{ if(!BP||!BP.narration_steps||!window.warmSpeak) return;
     if(vizVoiceName) return;                        // student picked a device voice — say() never touches these clips, so don't buy them
+    var u=use||_vizUse;
     var q=BP.narration_steps.map(function(s){return (s.narration_text||'').trim();}).filter(Boolean); var i=0;
-    (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],_vizUse).then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],_vizUse).then(nx2,nx2); })();
+    (function nx(){ if(i>=q.length) return; window.warmSpeak(q[i++],u).then(nx,nx); })(); (function nx2(){ if(i>=q.length) return; window.warmSpeak(q[i++],u).then(nx2,nx2); })();
   }catch(e){} }
   function vizPlayWhenReady(){ // step-0's voice is pre-generated before the pill flips to "ready", so this is normally instant
     var t=((BP.narration_steps&&BP.narration_steps[0]&&BP.narration_steps[0].narration_text)||'').trim();
     if(!t || !window._ttsHas){ play(); return; }
-    if(window._ttsHas(t,'read')){ play(); return; }                       // already cached → no dead air, go now
-    var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,'read')||n++>16){ play(); } else setTimeout(poll,250); })();  // safety net: never wait more than ~4s of silence
+    if(window._ttsHas(t,_vizUse)){ play(); return; }                      // already cached → no dead air, go now
+    var n=0; (function poll(){ if(!$('vizSvg')) return; if(window._ttsHas(t,_vizUse)||n++>16){ play(); } else setTimeout(poll,250); })();  // safety net: never wait more than ~4s of silence
   }
   function playVizFloat(){
     var d=_vizFloatReady; if(!d)return; _vizUse='read'; removeVizFloat();
@@ -9381,7 +9397,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     openModal();
     BP=d.bp; SRC=d.text||''; applyLayout(d.bp);
     VIZ_TID=d.topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
-    mountPlayer(); vizWarmVoices(); vizPlayWhenReady();
+    mountPlayer(); vizWarmVoices('read'); vizPlayWhenReady();
   }
   window.aiVisualize=async function(text, topicName, topicId){
     var words=(text||'').trim().split(/\s+/).filter(Boolean).length;
@@ -9438,7 +9454,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       host.innerHTML='<div class="vizgen err">This explainer didn\'t save properly — build it again.</div>'; return null; }
     BP=bp; SRC=text||''; applyLayout(bp);
     VIZ_TID=topicId||''; vizScore={c:0,n:0,streak:0,best:0}; _missed=[];
-    try{ vizWarmVoices(); }catch(e){}                                            // pre-generate voices so ▶ plays instantly
+    try{ vizWarmVoices('read'); }catch(e){}                                            // pre-generate voices so ▶ plays instantly
     host.innerHTML='<div class="vizready">✓ Your explainer is ready — press ▶ to see how to reach the answer.</div>'
       +'<div class="vizbody vizinlinebody" id="vizBody"></div>';
     mountPlayer();                                                              // paused at step 0
@@ -9489,7 +9505,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       applyLayout(BP); mountPlayer(); pvBar();
       try{ if(k===0 && window.smartLog) smartLog({t:'preview_started', topic_id:PV.topicId, scenes:PV.scenes.length}); }catch(e){}
       try{ if(window.smartLog) smartLog({t:'preview_scene', topic_id:PV.topicId, i:k}); }catch(e){}
-      try{ vizWarmVoices(); }catch(e){}
+      try{ vizWarmVoices('read'); }catch(e){}
       play();
     }catch(e){ if(k<PV.scenes.length-1) pvLoad(k+1); else pvFinish(); }
   }

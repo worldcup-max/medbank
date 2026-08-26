@@ -1,14 +1,18 @@
 {
   "cursor": {
     "courseKey": "gross",
-    "topicIndex": 0,
-    "structureIndex": 3
+    "topicIndex": 2,
+    "structureIndex": 2
   },
   "coveredStructures": {
     "gross": [
       "Vertebral column",
       "Typical vertebra",
       "Intervertebral disc",
+      "Erector spinae / deep back muscles",
+      "Pectoralis major",
+      "Pectoralis minor",
+      "Clavicle",
       "Biceps brachii",
       "Triceps brachii",
       "Heart (external)",
@@ -21,5 +25,5 @@
   "runs": 0,
   "lastRunAt": null,
   "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
-  "syncedAt": "2026-08-26T14:02:08.858Z"
+  "syncedAt": "2026-08-26T17:08:41.707Z"
 }

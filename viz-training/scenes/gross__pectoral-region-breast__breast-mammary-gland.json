@@ -1,0 +1,424 @@
+{
+  "schema": 2,
+  "id": "gross__pectoral-region-breast__breast-mammary-gland",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pectoral Region & Breast",
+  "structure": "Breast (mammary gland)",
+  "covers": [
+    "Breast (mammary gland)"
+  ],
+  "learning_goal": "Draw the breast in sagittal section with its lobes, ducts, suspensory ligaments and retromammary space, state its extent and its blood and lymphatic supply, and explain skin dimpling, peau d'orange and nipple retraction from that anatomy.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pectoral region",
+      "breast",
+      "chest wall",
+      "anterior thoracic wall",
+      "axilla",
+      "female reproductive system",
+      "surgery",
+      "oncology"
+    ],
+    "terms": [
+      "breast",
+      "mammary gland",
+      "nipple",
+      "areola",
+      "areolar glands",
+      "Montgomery tubercles",
+      "lobe",
+      "lobule",
+      "lactiferous duct",
+      "lactiferous sinus",
+      "suspensory ligaments of Cooper",
+      "Cooper ligaments",
+      "retromammary space",
+      "axillary tail",
+      "tail of Spence",
+      "pectoral fascia",
+      "internal thoracic artery",
+      "lateral thoracic artery",
+      "thoracoacromial artery",
+      "posterior intercostal arteries",
+      "axillary lymph nodes",
+      "parasternal nodes",
+      "internal mammary nodes",
+      "peau d'orange",
+      "skin dimpling",
+      "nipple retraction",
+      "carcinoma of the breast",
+      "mastitis",
+      "breast abscess",
+      "gynaecomastia",
+      "colostrum",
+      "prolactin",
+      "oxytocin",
+      "milk ejection reflex",
+      "triple assessment"
+    ]
+  },
+  "camera": {
+    "framing": "sagittal"
+  },
+  "structures": [
+    {
+      "key": "skin",
+      "label": "Skin & superficial fascia",
+      "role": "context",
+      "layer": "skin",
+      "color": "#f0d5c0",
+      "terms": [
+        "skin",
+        "superficial fascia"
+      ],
+      "narration": "The breast is a modified sweat gland sitting inside the superficial fascia. It is not a separate organ laid on the chest — it is a thickening of the layer just under the skin, which is why breast tissue and skin move together."
+    },
+    {
+      "key": "nipple",
+      "label": "Nipple",
+      "role": "part",
+      "layer": "skin",
+      "color": "#b5766a",
+      "terms": [
+        "nipple",
+        "fourth intercostal space",
+        "nipple retraction"
+      ],
+      "narration": "In the young woman the nipple lies over the fourth intercostal space, though the breast is mobile enough that this is a rough guide only. It has no fat and no hair, and smooth muscle in it makes it erect. Fifteen to twenty lactiferous ducts open on its tip."
+    },
+    {
+      "key": "areola",
+      "label": "Areola",
+      "role": "part",
+      "layer": "skin",
+      "color": "#c78d80",
+      "terms": [
+        "areola",
+        "areolar glands",
+        "Montgomery tubercles",
+        "sebaceous glands"
+      ],
+      "narration": "The pigmented ring around the nipple. It darkens permanently in pregnancy. The small bumps on it are areolar glands of Montgomery — sebaceous glands that oil the nipple during suckling."
+    },
+    {
+      "key": "lobe",
+      "label": "Lobe of the gland",
+      "role": "part",
+      "layer": "organ",
+      "color": "#e8c48a",
+      "terms": [
+        "lobe",
+        "fifteen to twenty lobes",
+        "mammary gland"
+      ],
+      "narration": "Fifteen to twenty lobes arranged around the nipple like the spokes of a wheel. Each is an independent gland with its own duct, which is why an infection or a cancer usually stays within one segment at first."
+    },
+    {
+      "key": "lobule",
+      "label": "Lobule & terminal duct unit",
+      "role": "part",
+      "layer": "organ",
+      "color": "#e0b46e",
+      "terms": [
+        "lobule",
+        "terminal duct lobular unit",
+        "acini",
+        "alveoli"
+      ],
+      "narration": "Each lobe is built of lobules, and each lobule is a cluster of secretory acini draining into a terminal duct. This terminal duct lobular unit is where almost every breast carcinoma begins, so it is worth a name."
+    },
+    {
+      "key": "duct",
+      "label": "Lactiferous duct",
+      "role": "part",
+      "layer": "organ",
+      "color": "#f2e6c4",
+      "terms": [
+        "lactiferous duct",
+        "lactiferous sinus",
+        "ampulla"
+      ],
+      "narration": "One duct per lobe, running towards the nipple. Just deep to the areola each widens into a lactiferous sinus that holds a small reservoir of milk, then narrows again to open on the nipple."
+    },
+    {
+      "key": "cooper",
+      "label": "Suspensory ligaments of Cooper",
+      "role": "part",
+      "layer": "fascia",
+      "color": "#d9d2c4",
+      "terms": [
+        "suspensory ligaments of Cooper",
+        "Cooper ligaments",
+        "skin dimpling"
+      ],
+      "narration": "Fibrous strands running from the dermis of the skin through the gland to the pectoral fascia behind. They hold the breast up. They also tether skin to deep fascia, and that tethering is what turns a small tumour into a visible dimple."
+    },
+    {
+      "key": "fat",
+      "label": "Fat between the lobes",
+      "role": "part",
+      "layer": "organ",
+      "color": "#f6e7c7",
+      "terms": [
+        "fat",
+        "adipose tissue",
+        "breast size"
+      ],
+      "narration": "Fat fills the space between the lobes and gives the breast its size and shape. Size therefore says nothing about how much glandular tissue is present or how well the breast will lactate."
+    },
+    {
+      "key": "retromammary",
+      "label": "Retromammary space",
+      "role": "part",
+      "layer": "fascia",
+      "color": "#cfe0ea",
+      "terms": [
+        "retromammary space",
+        "submammary space",
+        "loose areolar tissue"
+      ],
+      "narration": "A thin plane of loose areolar tissue between the back of the breast and the pectoral fascia. It is what lets you slide a normal breast over the chest wall. When a cancer crosses it the breast stops sliding — fixity to the muscle is a late sign, and implants are placed in this plane."
+    },
+    {
+      "key": "pec_fascia",
+      "label": "Pectoral fascia & pectoralis major",
+      "role": "context",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "terms": [
+        "pectoral fascia",
+        "pectoralis major",
+        "serratus anterior",
+        "external oblique"
+      ],
+      "narration": "The floor. Two thirds of the breast lies on the fascia over pectoralis major; the lower outer third lies on serratus anterior and the aponeurosis of external oblique."
+    },
+    {
+      "key": "axillary_tail",
+      "label": "Axillary tail of Spence",
+      "role": "part",
+      "layer": "organ",
+      "color": "#dfa95e",
+      "terms": [
+        "axillary tail",
+        "tail of Spence",
+        "deep fascia",
+        "foramen of Langer"
+      ],
+      "narration": "An upper outer prolongation of the gland that pierces the deep fascia and enters the axilla. It matters twice: it is the commonest site of breast cancer, and a lump felt in the axilla may be breast tissue rather than a node."
+    },
+    {
+      "key": "arteries",
+      "label": "Arterial supply",
+      "role": "part",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "internal thoracic artery",
+        "lateral thoracic artery",
+        "thoracoacromial artery",
+        "posterior intercostal arteries",
+        "perforating branches"
+      ],
+      "narration": "Medially from perforating branches of the internal thoracic artery through the upper intercostal spaces. Laterally from the lateral thoracic and thoracoacromial branches of the axillary artery. Posteriorly from the second to fourth posterior intercostal arteries. Veins follow the arteries, and the vertebral venous plexus is the route by which breast cancer reaches the spine and skull."
+    },
+    {
+      "key": "lymph_axillary",
+      "label": "Axillary nodes — 75%",
+      "role": "part",
+      "layer": "organ",
+      "color": "#7fa87f",
+      "terms": [
+        "axillary lymph nodes",
+        "anterior pectoral nodes",
+        "sentinel node",
+        "level I",
+        "level II",
+        "level III"
+      ],
+      "narration": "About three quarters of the lymph of the breast, and almost all of the lateral part, goes to the axillary nodes — first to the anterior pectoral group along the lower border of pectoralis minor. Pectoralis minor divides these nodes into levels one, two and three. The sentinel node is the first node the lateral breast drains into, and it is the node biopsied to stage the axilla."
+    },
+    {
+      "key": "lymph_parasternal",
+      "label": "Parasternal nodes — 25%",
+      "role": "part",
+      "layer": "organ",
+      "color": "#6d94a8",
+      "terms": [
+        "parasternal nodes",
+        "internal mammary nodes",
+        "internal thoracic nodes"
+      ],
+      "narration": "The medial quadrants drain along the perforating vessels to the parasternal nodes beside the internal thoracic artery, and from there into the thorax. Some crosses the midline to the opposite breast, and some of the lower breast drains down to the nodes of the anterior abdominal wall. A medial cancer can therefore spread where no surgeon is looking."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the breast sits",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_fascia",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "The base of the breast runs from the second rib above to the sixth rib below, and from the lateral border of the sternum medially to the mid-axillary line laterally. It lies on the pectoral fascia over pectoralis major, with serratus anterior and external oblique under its lower outer part. The axillary tail runs up and out into the axilla."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Sagittal section — the layers",
+      "ops": [
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "retromammary",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Read the section from front to back. Skin. Superficial fascia holding the gland and its fat. Suspensory ligaments running through, tying skin to the fascia behind. Then the retromammary space. Then pectoral fascia, pectoralis major, ribs. Every clinical sign in the breast comes out of that order."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "Lobes, ducts and the nipple",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "lobe"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "lobule"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duct"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:milk",
+          "path": [
+            "lobule",
+            "lobe",
+            "duct",
+            "nipple"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "Follow milk out of the breast. It is made in the acini of a lobule, gathers in the lobe's duct, waits in the lactiferous sinus under the areola, and leaves through a separate opening on the nipple. Fifteen to twenty lobes, fifteen to twenty openings. Prolactin makes the milk, oxytocin squeezes the myoepithelial cells that eject it, and the suckling infant drives both."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Why the skin dimples",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cooper",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cooper",
+          "to": "skin",
+          "kind": "tumour shortens the ligament and pulls the skin in"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "duct",
+          "to": "nipple",
+          "kind": "fibrosis along the duct retracts the nipple"
+        }
+      ],
+      "narration": "A carcinoma invades the suspensory ligaments and shortens them. Because those ligaments are anchored in the skin, the skin is pulled inward and a dimple appears — the earliest sign of a small cancer, and one you only see if you ask the patient to raise her arms or press her hands on her hips. A cancer in a duct fibroses along it and pulls the nipple in the same way, which is why new nipple retraction is a warning and long-standing inversion is usually not. Fixity to muscle means the retromammary space is crossed; fixity to the chest wall means the ribs are involved."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "Blood supply and lymphatic drainage",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arteries",
+          "intensity": 0.8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lymph_axillary",
+            "lymph_parasternal"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Three sources of blood: internal thoracic medially, lateral thoracic and thoracoacromial laterally, posterior intercostals behind. Two main routes of lymph: three quarters to the axilla, a quarter to the parasternal nodes. Blockage of the subdermal lymphatics by tumour cells is what causes peau d'orange — the skin is held down at each hair follicle while the swollen skin between bulges, so it looks like orange peel."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "Clinical anatomy to carry",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "axillary_tail",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lobule",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Five things. The upper outer quadrant and its axillary tail hold the most glandular tissue and the most cancers. The terminal duct lobular unit is where those cancers start. Lactational abscesses point forward and are drained by a radial incision to spare the ducts, while a retromammary abscess is drained through a submammary incision. Any breast lump is worked up by triple assessment: examination, imaging, and needle biopsy. And in the male the same anatomy is present but rudimentary, so a hard eccentric lump behind the male nipple is not gynaecomastia until proved otherwise."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog was searched for breast, mammary, nipple, areola and lactiferous and returns nothing at all — there is no model of the breast, of a lobe, of a duct, of the suspensory ligaments or of the retromammary space. This is a provider gap, not a curriculum decision: 3d_anatomy stays first in preferred_modes and is recorded here in deferred_modes, so this becomes a 3D scene the day a mammary mesh exists, with no curriculum edit.",
+    "Status is 'planned', not 'ready'. The scene is a complete authored diagram — structures, beats, ops and narration are all written — but no artwork has been drawn for the SVG engine yet, so nothing renders today. It should be promoted to 'ready' once the sagittal-section artwork and the labelled regions exist and the engine can play the six beats.",
+    "The CROSS_SECTION op in beat 2 is authored as the teaching move the section needs. On a hand-drawn diagram the cut is already in the artwork, so the engine will treat this as a reveal rather than a live cut plane.",
+    "No lymph nodes exist as models anywhere in the catalog, so beat 5 could not have been shown in 3D even if the gland itself had a mesh. The same gap blocks the topic's 'Axillary vessels & lymph nodes' entry.",
+    "Sagittal framing is declared in camera.framing, which is outside the six named rotation views of the op vocabulary. The SVG engine ignores camera framing; it is recorded so a future 3D version of this scene knows which plane the teaching assumes."
+  ]
+}

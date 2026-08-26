@@ -61,7 +61,18 @@ if (!MB3D || !MB3D.scenesForTopic) { console.error('viz3d.js did not expose MB3D
 const ARM = 'gross__arm__biceps-triceps';
 const HEART = 'gross__heart-pericardium__heart';
 
-/* [title, subject, body, expected scene ids] */
+/* [title, subject, body, expected scene ids]
+ *
+ * A non-empty expectation means "these must be offered", not "only these". It used to mean only these,
+ * and that broke the moment the authoring task wrote a pectoralis major scene: "Upper limb muscles"
+ * quite correctly started offering the pectoral scene alongside the arm, and a green test went red for
+ * doing the right thing. An exact-set assertion against a corpus that grows every hour fails on every
+ * correct addition, and a test that cries wolf hourly stops being read.
+ *
+ * The opposite direction stays exact, because that is where the danger is: a case expecting NOTHING
+ * must return nothing. Those are the near-miss traps — "Warm ischaemia", "Harm reduction" — and they
+ * are what catches a matcher gone loose. And a topic about the arm must never be answered with the
+ * heart, however many scenes get authored, so that is asserted too. */
 const CASES = [
   /* the live failure that started this — a pasted lecture whose title says "Arm" */
   ['Anatomy of the Arm — Biceps & Triceps', 'Paediatrics', '', [ARM]],
@@ -97,7 +108,11 @@ const pad = Math.max(...CASES.map(c => (c[0] || '(empty)').length));
 
 for (const [title, subject, body, want] of CASES) {
   const got = (await MB3D.scenesForTopic(title, subject, body)).map(s => s.id).sort();
-  const ok = JSON.stringify(got) === JSON.stringify([...want].sort());
+  const missing = want.filter(id => got.indexOf(id) < 0);
+  /* the other half of the guarantee: the arm is not the heart, and must never be offered as it */
+  const forbidden = want.indexOf(ARM) >= 0 ? [HEART] : want.indexOf(HEART) >= 0 ? [ARM] : [];
+  const wrong = forbidden.filter(id => got.indexOf(id) >= 0);
+  const ok = want.length ? (!missing.length && !wrong.length) : got.length === 0;
   if (!ok) failed++;
   const label = (title || '(empty)').padEnd(pad);
   const shown = got.length ? got.map(id => id.split('__')[1]).join(',') : '—';

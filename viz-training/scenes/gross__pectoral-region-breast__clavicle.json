@@ -1,0 +1,600 @@
+{
+  "schema": 2,
+  "id": "gross__pectoral-region-breast__clavicle",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pectoral Region & Breast",
+  "structure": "Clavicle",
+  "covers": [
+    "Clavicle"
+  ],
+  "learning_goal": "Describe the clavicle's two curves, its two joints and its muscle attachments, and explain why it breaks at the junction of the curves and how the two fragments then displace.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pectoral region",
+      "pectoral girdle",
+      "shoulder girdle",
+      "upper limb",
+      "chest wall",
+      "anterior thoracic wall",
+      "clavicle",
+      "osteology",
+      "shoulder"
+    ],
+    "terms": [
+      "clavicle",
+      "collar bone",
+      "collarbone",
+      "sternoclavicular joint",
+      "acromioclavicular joint",
+      "medial two-thirds",
+      "lateral third",
+      "conoid tubercle",
+      "trapezoid line",
+      "coracoclavicular ligament",
+      "costoclavicular ligament",
+      "subclavian groove",
+      "subclavius",
+      "sternocleidomastoid",
+      "trapezius",
+      "deltoid",
+      "pectoralis major",
+      "clavicular head",
+      "middle third fracture",
+      "fractured clavicle",
+      "intramembranous ossification",
+      "first bone to ossify",
+      "medial epiphysis",
+      "strut of the shoulder",
+      "saddle joint",
+      "articular disc",
+      "subclavian artery",
+      "subclavian vein",
+      "brachial plexus",
+      "apex of lung",
+      "cervical pleura",
+      "central line",
+      "supraclavicular fossa",
+      "infraclavicular fossa",
+      "cleidocranial dysostosis"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "clavicle",
+      "name": "right clavicle",
+      "label": "Clavicle",
+      "role": "part",
+      "group": "Clavicle",
+      "layer": "bone",
+      "color": "#f2e6c2",
+      "refs": {
+        "bodyparts3d": "FMA13322"
+      },
+      "terms": [
+        "clavicle",
+        "collar bone",
+        "collarbone",
+        "subclavian groove",
+        "conoid tubercle"
+      ],
+      "narration": "The only bone that joins the arm to the trunk. It lies just under the skin along its whole length, so you can feel every inch of it from the notch at the front of the neck out to the point of the shoulder. Look at it from above and it is an S: the inner two-thirds curve forward, the outer third curves back."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium — sternoclavicular joint",
+      "role": "part",
+      "group": "Its two joints",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "sternoclavicular joint",
+        "jugular notch",
+        "suprasternal notch",
+        "articular disc"
+      ],
+      "narration": "The medial end sits on the manubrium at the sternoclavicular joint. This is a saddle-shaped synovial joint with a complete articular disc, and it is the only synovial joint between the upper limb and the axial skeleton. The disc is why the joint almost never dislocates — force travelling down the bone breaks the shaft instead."
+    },
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula — acromion and coracoid",
+      "role": "part",
+      "group": "Its two joints",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "acromion",
+        "acromioclavicular joint",
+        "coracoid process",
+        "coracoclavicular ligament",
+        "conoid ligament",
+        "trapezoid ligament",
+        "scapula"
+      ],
+      "narration": "The lateral end meets the acromion at the acromioclavicular joint, a small plane synovial joint that gives very little movement. The real holding is done below it, by the coracoclavicular ligament running from the coracoid process up to the conoid tubercle and trapezoid line on the underside of the clavicle. Tear that ligament and the shoulder drops away from the bone — the step you see in a grade three separation."
+    },
+    {
+      "key": "rib1",
+      "name": "right first rib",
+      "label": "1st rib",
+      "role": "part",
+      "group": "What lies beneath",
+      "layer": "bone",
+      "color": "#ddd2b4",
+      "refs": {
+        "bodyparts3d": "FMA7857"
+      },
+      "terms": [
+        "first rib",
+        "costoclavicular ligament",
+        "rhomboid ligament",
+        "costoclavicular space"
+      ],
+      "narration": "The costoclavicular ligament ties the medial end of the clavicle down to the first rib and its cartilage. It is the fulcrum of the bone: every movement of the clavicle turns about it. The gap between the clavicle above and this rib below is the costoclavicular space, and the subclavian vessels and the lower trunk of the brachial plexus have to pass through it."
+    },
+    {
+      "key": "subclavius",
+      "name": "right subclavius",
+      "label": "Subclavius",
+      "role": "part",
+      "group": "What lies beneath",
+      "layer": "muscle",
+      "color": "#b8654a",
+      "refs": {
+        "bodyparts3d": "FMA13412"
+      },
+      "terms": [
+        "subclavius",
+        "subclavian groove",
+        "nerve to subclavius",
+        "clavipectoral fascia"
+      ],
+      "narration": "A small muscle running from the first costal cartilage out to the subclavian groove on the undersurface of the middle third. Its job is protective. It lies as a cushion between the bone and the vessels behind it, which is why the subclavian vessels usually survive a fractured clavicle."
+    },
+    {
+      "key": "sternocleidomastoid",
+      "name": "right sternocleidomastoid",
+      "label": "Sternocleidomastoid",
+      "role": "part",
+      "group": "Muscles attached to it",
+      "layer": "muscle",
+      "color": "#c05a4a",
+      "refs": {
+        "bodyparts3d": "FMA13408"
+      },
+      "terms": [
+        "sternocleidomastoid",
+        "clavicular head of sternocleidomastoid",
+        "medial fragment"
+      ],
+      "narration": "Its clavicular head takes the upper surface of the medial third. Remember this muscle when you look at a fracture film: it is what pulls the medial fragment upward."
+    },
+    {
+      "key": "trapezius",
+      "name": "descending part of right trapezius",
+      "label": "Trapezius — descending part",
+      "role": "part",
+      "group": "Muscles attached to it",
+      "layer": "muscle",
+      "color": "#a8543f",
+      "refs": {
+        "bodyparts3d": "FMA33586"
+      },
+      "terms": [
+        "trapezius",
+        "descending fibres of trapezius",
+        "upper trapezius",
+        "posterior border of clavicle"
+      ],
+      "narration": "The upper fibres of trapezius come down onto the posterior border of the lateral third. Trapezius above and deltoid below share that outer third between them, one on each border."
+    },
+    {
+      "key": "deltoid",
+      "name": "clavicular part of right deltoid",
+      "label": "Deltoid — clavicular part",
+      "role": "part",
+      "group": "Muscles attached to it",
+      "layer": "muscle",
+      "color": "#b8735a",
+      "refs": {
+        "bodyparts3d": "FMA34680"
+      },
+      "terms": [
+        "deltoid",
+        "clavicular fibres of deltoid",
+        "anterior border of clavicle",
+        "deltopectoral groove"
+      ],
+      "narration": "Deltoid takes the anterior border of the lateral third. Its front edge meets the edge of pectoralis major here, and the gap between them is the deltopectoral groove where the cephalic vein runs up to disappear under the clavicle."
+    },
+    {
+      "key": "pec_major_clavicular",
+      "name": "clavicular part of right pectoralis major",
+      "label": "Pectoralis major — clavicular head",
+      "role": "part",
+      "group": "Muscles attached to it",
+      "layer": "muscle",
+      "color": "#b07878",
+      "refs": {
+        "bodyparts3d": "FMA34690"
+      },
+      "terms": [
+        "clavicular head of pectoralis major",
+        "pectoralis major",
+        "medial half of clavicle"
+      ],
+      "narration": "The clavicular head of pectoralis major arises from the front of the medial half. It is the head that flexes the arm forward, and it is the one you isolate when you press the hands together in front of the chest."
+    },
+    {
+      "key": "subclavian_artery",
+      "name": "right subclavian artery",
+      "label": "Subclavian artery",
+      "role": "context",
+      "group": "Danger behind the bone",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3953"
+      },
+      "terms": [
+        "subclavian artery",
+        "third part of subclavian artery",
+        "axillary artery"
+      ],
+      "narration": "The artery crosses over the first rib behind the bone, hidden by subclavius. At the outer border of that rib it becomes the axillary artery."
+    },
+    {
+      "key": "subclavian_vein",
+      "name": "right subclavian vein",
+      "label": "Subclavian vein",
+      "role": "context",
+      "group": "Danger behind the bone",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "refs": {
+        "bodyparts3d": "FMA4755"
+      },
+      "terms": [
+        "subclavian vein",
+        "central line",
+        "infraclavicular approach",
+        "cephalic vein"
+      ],
+      "narration": "The vein lies in front of the artery and slightly lower, separated from it by subclavius and by the scalene tubercle of the first rib. A subclavian central line is aimed just under the middle of the clavicle and walked along the back of the bone precisely because the bone is the landmark you can feel and the vein is the tube you cannot."
+    },
+    {
+      "key": "brachiocephalic_vein",
+      "name": "right brachiocephalic vein",
+      "label": "Brachiocephalic vein",
+      "role": "context",
+      "group": "Danger behind the bone",
+      "layer": "vessel",
+      "color": "#365f86",
+      "refs": {
+        "bodyparts3d": "FMA4751"
+      },
+      "terms": [
+        "brachiocephalic vein",
+        "innominate vein",
+        "venous angle",
+        "thoracic duct",
+        "right lymphatic duct"
+      ],
+      "narration": "Behind the sternoclavicular joint the subclavian vein meets the internal jugular to form the brachiocephalic vein. That corner is the venous angle, and it is where the great lymph ducts empty — the thoracic duct on the left, the right lymphatic duct on this side."
+    },
+    {
+      "key": "lung_apex",
+      "name": "upper lobe of right lung",
+      "label": "Apex of lung",
+      "role": "context",
+      "group": "Danger behind the bone",
+      "layer": "organ",
+      "color": "#9fb8c4",
+      "refs": {
+        "bodyparts3d": "FMA7333"
+      },
+      "terms": [
+        "apex of lung",
+        "cervical pleura",
+        "suprapleural membrane",
+        "pneumothorax"
+      ],
+      "narration": "The apex of the lung and its covering of cervical pleura rise above the first rib, behind the medial part of the clavicle. This is why a needle placed too deep under the clavicle can drop a lung, and why a pneumothorax is the complication you look for on the check film after a central line."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "The limb it carries",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "upper limb"
+      ],
+      "narration": "The whole weight of the arm hangs from the scapula, and the scapula hangs from the clavicle. Take the clavicle away and the shoulder falls forward and inward toward the midline."
+    },
+    {
+      "key": "sternum_body",
+      "name": "body of sternum",
+      "label": "Body of sternum",
+      "role": "context",
+      "group": "Midline reference",
+      "layer": "bone",
+      "color": "#e0d6b8",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of sternum",
+        "sternal angle",
+        "angle of Louis"
+      ],
+      "narration": "Below the manubrium, for orientation. The ridge where the two meet is the sternal angle, the landmark for the second costal cartilage."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The strut you can feel",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clavicle",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Run a finger from the notch at the base of your neck outward and you are on the clavicle the whole way. It sits horizontally across the top of the chest, subcutaneous from end to end. That is the first thing to know about it: it is the most commonly broken long bone in the body partly because there is nothing over it, and every part of it can be examined by touch."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "An S seen only from above",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clavicle"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clavicle",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "From the front the clavicle looks like a straight rod. From above it is clearly an S. The medial two-thirds are convex forward and roughly round in cross-section. The lateral third is concave forward and flattened from above downward. The junction of the two curves is the weakest point of the bone, and it is where the bone breaks. Learn the shape and the fracture site comes for free."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "A joint at each end",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Clavicle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Its two joints"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clavicle",
+          "to": "manubrium",
+          "kind": "sternoclavicular joint"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clavicle",
+          "to": "scapula",
+          "kind": "acromioclavicular joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Medially it meets the manubrium at the sternoclavicular joint. Laterally it meets the acromion at the acromioclavicular joint. Both are synovial, and the medial one is the only synovial link the whole upper limb has with the axial skeleton. The medial joint has a strong articular disc and dislocates very rarely. The lateral joint is flat and weak, and it separates easily — a fall on the point of the shoulder gives you the step deformity of a separated shoulder, while a fall on the outstretched hand travels up the arm and breaks the shaft."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Four muscles, four surfaces",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Muscles attached to it"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "clavicle",
+          "path": [
+            "sternocleidomastoid",
+            "pec_major_clavicular",
+            "subclavius",
+            "deltoid",
+            "trapezius"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Divide the bone in half and the attachments sort themselves out. On the medial half: sternocleidomastoid on the top, pectoralis major on the front, subclavius underneath in its groove. On the lateral third: trapezius on the back border, deltoid on the front border. Sternohyoid also takes a small area on the undersurface of the medial end, and the sternoclavicular joint capsule and the costoclavicular ligament hold the medial end down. Five muscles in all, and the two that matter for fractures are sternocleidomastoid pulling up and deltoid pulling down."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "What is hiding behind it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Muscles attached to it"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Danger behind the bone"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clavicle",
+          "to": "subclavian_vein",
+          "kind": "the vein runs directly behind the middle third"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Behind the middle third, in the space between the clavicle and the first rib, lie the subclavian vein in front, the subclavian artery behind it, and the trunks of the brachial plexus behind that. Higher and further back sits the apex of the lung under its cervical pleura. Subclavius lies between all of this and the bone, which is why these structures usually escape a fracture. When they do not escape, the vein is the one most often torn, and a badly displaced medial fragment is what does it. This same anatomy is why a narrowed costoclavicular space causes thoracic outlet symptoms and why an infraclavicular central line risks a pneumothorax."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Cut through the costoclavicular space",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": -0.25,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "clavicle",
+            "rib1"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across just under the collarbone and read from front to back. Skin and platysma, then the clavicle, then subclavius in its groove, then the subclavian vein, then the artery, then the plexus, then the first rib and the pleural dome below and behind. The clavicle above and the first rib below are the two walls of a corridor, and everything going to the arm has to travel through it. Depress the shoulder or add a cervical rib and that corridor narrows — that is the mechanism of costoclavicular thoracic outlet syndrome."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "How it breaks and where the pieces go",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clavicle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Muscles attached to it"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clavicle",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sternocleidomastoid",
+          "to": "deltoid",
+          "kind": "opposing pulls on the two fragments"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The usual story is a fall on the outstretched hand or on the point of the shoulder. Force runs up the limb and the bone fails at the junction of its two curves, in the middle third — about eight fractures in ten sit here. Then the muscles take over. Sternocleidomastoid pulls the medial fragment up. The weight of the arm and the pull of deltoid and pectoralis major drag the lateral fragment down and forward, and pectoralis minor and the other adductors pull it medially so the two ends overlap and the shoulder shortens. The patient sits with the head tilted toward the injured side to slacken sternocleidomastoid, and supports the elbow with the other hand. Most of these unite with a sling alone, and the lump of callus you can feel afterwards is a normal finding."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "First to start, last to finish",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clavicle"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "manubrium",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The clavicle is the first bone in the body to begin ossifying, in the fifth week, and it is the last to finish. Most of it ossifies in membrane rather than in cartilage, which is unusual for a long bone. The epiphysis at the medial end appears late, around eighteen, and fuses around twenty-five — the last epiphysis in the skeleton to close, which makes it useful for estimating age. Two clinical consequences follow. A clavicle can break during a difficult delivery and still heal without treatment. And in cleidocranial dysostosis, where membranous ossification fails, the clavicles are absent or tiny and the patient can bring the shoulders together in front of the chest."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "The clavicle's own surface landmarks have no meshes and could not be added as measured anchors. The conoid tubercle, the trapezoid line, the subclavian groove, the sternal facet and the acromial facet are all taught in narration only. The house standard for an anchor is a position measured on the source mesh, and the clavicle mesh is not in the local mesh set, so guessing uvw values here would have been worse than saying nothing. This is the first thing to add once that mesh can be inspected offline.",
+    "No sternohyoid in the catalog. Its small attachment to the undersurface of the medial end is named in beat 4 and not shown.",
+    "No ligaments of any kind. The costoclavicular ligament, the coracoclavicular ligament with its conoid and trapezoid parts, and the articular disc of the sternoclavicular joint are the three things that actually explain the clavicle's stability, and none of them exist as models. Bone-to-bone relationships stand in for them: the first rib for the costoclavicular ligament, the scapula for the coracoclavicular.",
+    "No brachial plexus. Beats 5 and 6 place the trunks behind the artery in narration; the catalog holds two optic nerves and no other named nerve.",
+    "No pleura. The cervical pleura over the lung apex is the structure at risk in an infraclavicular line, and the upper lobe of the lung stands in for it.",
+    "The axillary artery and axillary vein do not exist as models, so the subclavian vessels are shown and the name change at the outer border of the first rib is narrated rather than seen. Same limitation as the pectoralis minor scene.",
+    "The joints themselves are drawn only as two bones meeting. There is no capsule, no joint space and no disc, so the sternoclavicular and acromioclavicular joints are shown as approximations of contact rather than as articulations."
+  ]
+}

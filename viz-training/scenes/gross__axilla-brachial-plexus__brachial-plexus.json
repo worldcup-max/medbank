@@ -1,0 +1,845 @@
+{
+  "schema": 2,
+  "id": "gross__axilla-brachial-plexus__brachial-plexus",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Axilla & Brachial Plexus",
+  "structure": "Brachial plexus",
+  "covers": [
+    "Brachial plexus"
+  ],
+  "learning_goal": "Draw the plexus from roots to terminal branches, name the root value of each branch, and work out from any lesion which muscles and which patch of skin will fail.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "axilla",
+      "brachial plexus",
+      "upper limb",
+      "posterior triangle of the neck",
+      "root of the neck",
+      "shoulder",
+      "arm",
+      "peripheral nerve injury",
+      "regional anaesthesia"
+    ],
+    "terms": [
+      "brachial plexus",
+      "roots",
+      "ventral rami",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "T1",
+      "trunks",
+      "upper trunk",
+      "middle trunk",
+      "lower trunk",
+      "divisions",
+      "anterior division",
+      "posterior division",
+      "cords",
+      "lateral cord",
+      "posterior cord",
+      "medial cord",
+      "musculocutaneous nerve",
+      "axillary nerve",
+      "radial nerve",
+      "median nerve",
+      "ulnar nerve",
+      "lateral root of median nerve",
+      "medial root of median nerve",
+      "dorsal scapular nerve",
+      "long thoracic nerve",
+      "suprascapular nerve",
+      "nerve to subclavius",
+      "lateral pectoral nerve",
+      "medial pectoral nerve",
+      "medial cutaneous nerve of arm",
+      "medial cutaneous nerve of forearm",
+      "upper subscapular nerve",
+      "lower subscapular nerve",
+      "thoracodorsal nerve",
+      "interscalene",
+      "scalenus anterior",
+      "scalenus medius",
+      "Erb's palsy",
+      "Erb Duchenne",
+      "waiter's tip",
+      "policeman's tip",
+      "Klumpke palsy",
+      "claw hand",
+      "Horner syndrome",
+      "winged scapula",
+      "wrist drop",
+      "regimental badge",
+      "surgical neck of humerus",
+      "spiral groove",
+      "radial groove",
+      "brachial plexus block",
+      "Randy Travis Drinks Cold Beer"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "scalenes",
+      "label": "Scalenus anterior & medius",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "muscle",
+      "color": "#c9a08a",
+      "terms": [
+        "scalenus anterior",
+        "scalenus medius",
+        "interscalene groove",
+        "scalene gap"
+      ],
+      "narration": "The roots leave the neck between scalenus anterior in front and scalenus medius behind. That gap is the interscalene groove, and it is where the anaesthetist puts the needle for a shoulder block."
+    },
+    {
+      "key": "rib1",
+      "label": "First rib",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "terms": [
+        "first rib",
+        "outer border of the first rib",
+        "cervical rib"
+      ],
+      "narration": "The trunks cross the upper surface of the first rib with the subclavian artery. A cervical rib pushes the lower trunk up, which is why an extra rib gives C8 and T1 symptoms."
+    },
+    {
+      "key": "clavicle",
+      "label": "Clavicle",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "terms": [
+        "clavicle",
+        "supraclavicular",
+        "infraclavicular",
+        "middle third of the clavicle"
+      ],
+      "narration": "The clavicle is the dividing line. Everything above it is roots and trunks; the divisions lie behind it; the cords and branches are below it. This is also why a fractured middle third of the clavicle threatens the plexus."
+    },
+    {
+      "key": "artery",
+      "label": "Axillary artery",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "vessel",
+      "color": "#b03030",
+      "terms": [
+        "axillary artery",
+        "second part of the axillary artery",
+        "subclavian artery"
+      ],
+      "narration": "The cords are named for where they lie around the second part of the axillary artery. The artery is the reference point for the whole lower half of the plexus."
+    },
+    {
+      "key": "root_c5",
+      "label": "C5 root",
+      "role": "part",
+      "group": "Roots",
+      "layer": "nerve",
+      "color": "#f2c94c",
+      "terms": [
+        "C5",
+        "C5 root",
+        "ventral ramus of C5"
+      ],
+      "narration": "The roots are ventral rami, not the dorsal and ventral rootlets of the cord. C5 is the highest and the one most often torn when the head and shoulder are forced apart."
+    },
+    {
+      "key": "root_c6",
+      "label": "C6 root",
+      "role": "part",
+      "group": "Roots",
+      "layer": "nerve",
+      "color": "#f2c94c",
+      "terms": [
+        "C6",
+        "C6 root",
+        "ventral ramus of C6"
+      ],
+      "narration": "C6 joins C5 to make the upper trunk. Together they carry shoulder abduction, elbow flexion and supination."
+    },
+    {
+      "key": "root_c7",
+      "label": "C7 root",
+      "role": "part",
+      "group": "Roots",
+      "layer": "nerve",
+      "color": "#f2c94c",
+      "terms": [
+        "C7",
+        "C7 root",
+        "ventral ramus of C7"
+      ],
+      "narration": "C7 continues alone as the middle trunk. It is the main root value of the radial nerve and of the triceps."
+    },
+    {
+      "key": "root_c8",
+      "label": "C8 root",
+      "role": "part",
+      "group": "Roots",
+      "layer": "nerve",
+      "color": "#f2c94c",
+      "terms": [
+        "C8",
+        "C8 root",
+        "ventral ramus of C8"
+      ],
+      "narration": "C8 joins T1 to make the lower trunk. These two roots supply the small muscles of the hand."
+    },
+    {
+      "key": "root_t1",
+      "label": "T1 root",
+      "role": "part",
+      "group": "Roots",
+      "layer": "nerve",
+      "color": "#f2c94c",
+      "terms": [
+        "T1",
+        "T1 root",
+        "ventral ramus of T1",
+        "sympathetic fibres"
+      ],
+      "narration": "T1 lies against the neck of the first rib. Sympathetic fibres to the eye run beside it, so a T1 root lesion can give a Horner syndrome."
+    },
+    {
+      "key": "trunk_upper",
+      "label": "Upper trunk (C5, C6)",
+      "role": "part",
+      "group": "Trunks",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "upper trunk",
+        "superior trunk",
+        "C5 C6",
+        "Erb's point"
+      ],
+      "narration": "C5 and C6 unite at Erb's point. Two nerves leave here — the suprascapular nerve and the nerve to subclavius — and they are the only branches of any trunk."
+    },
+    {
+      "key": "trunk_middle",
+      "label": "Middle trunk (C7)",
+      "role": "part",
+      "group": "Trunks",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "middle trunk",
+        "C7"
+      ],
+      "narration": "C7 simply becomes the middle trunk. It gives no branches at all."
+    },
+    {
+      "key": "trunk_lower",
+      "label": "Lower trunk (C8, T1)",
+      "role": "part",
+      "group": "Trunks",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "lower trunk",
+        "inferior trunk",
+        "C8 T1"
+      ],
+      "narration": "C8 and T1 unite behind the artery on the first rib. It gives no branches, but it is the trunk stretched by a cervical rib or by traction on an abducted arm."
+    },
+    {
+      "key": "div_anterior",
+      "label": "Anterior divisions",
+      "role": "part",
+      "group": "Divisions",
+      "layer": "nerve",
+      "color": "#8bbf6a",
+      "terms": [
+        "anterior division",
+        "flexor compartment"
+      ],
+      "narration": "Every trunk splits into an anterior and a posterior division behind the clavicle. Anterior divisions carry the flexors and the skin over them."
+    },
+    {
+      "key": "div_posterior",
+      "label": "Posterior divisions",
+      "role": "part",
+      "group": "Divisions",
+      "layer": "nerve",
+      "color": "#5a9e4a",
+      "terms": [
+        "posterior division",
+        "extensor compartment"
+      ],
+      "narration": "Posterior divisions carry the extensors. All three of them join to form one cord, which is why the posterior cord holds C5 to T1."
+    },
+    {
+      "key": "cord_lateral",
+      "label": "Lateral cord",
+      "role": "part",
+      "group": "Cords",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "lateral cord",
+        "anterior divisions of upper and middle trunks",
+        "C5 C6 C7"
+      ],
+      "narration": "Anterior divisions of the upper and middle trunks — C5, C6, C7. It lies lateral to the artery and gives the lateral pectoral nerve, the musculocutaneous nerve and the lateral root of the median."
+    },
+    {
+      "key": "cord_posterior",
+      "label": "Posterior cord",
+      "role": "part",
+      "group": "Cords",
+      "layer": "nerve",
+      "color": "#3f7fbf",
+      "terms": [
+        "posterior cord",
+        "all three posterior divisions",
+        "C5 to T1",
+        "ULTRA"
+      ],
+      "narration": "All three posterior divisions — C5 to T1. Its branches from above down are upper subscapular, thoracodorsal, lower subscapular, axillary, radial: ULTRA."
+    },
+    {
+      "key": "cord_medial",
+      "label": "Medial cord",
+      "role": "part",
+      "group": "Cords",
+      "layer": "nerve",
+      "color": "#2f6aa8",
+      "terms": [
+        "medial cord",
+        "anterior division of the lower trunk",
+        "C8 T1"
+      ],
+      "narration": "The anterior division of the lower trunk alone — C8 and T1. It lies medial to the artery and carries everything that works the hand."
+    },
+    {
+      "key": "n_dorsal_scapular",
+      "label": "Dorsal scapular nerve (C5)",
+      "role": "part",
+      "group": "Supraclavicular branches",
+      "layer": "nerve",
+      "color": "#b07fd0",
+      "terms": [
+        "dorsal scapular nerve",
+        "rhomboids",
+        "levator scapulae",
+        "C5"
+      ],
+      "narration": "Straight off the C5 root. It supplies the rhomboids and levator scapulae, so it retracts the scapula."
+    },
+    {
+      "key": "n_long_thoracic",
+      "label": "Long thoracic nerve (C5, C6, C7)",
+      "role": "part",
+      "group": "Supraclavicular branches",
+      "layer": "nerve",
+      "color": "#b07fd0",
+      "terms": [
+        "long thoracic nerve",
+        "nerve to serratus anterior",
+        "winged scapula",
+        "C5 C6 C7",
+        "Bell's nerve"
+      ],
+      "narration": "From the C5, C6 and C7 roots — 5, 6, 7 raise your arm to heaven. It runs down the medial wall of the axilla on serratus anterior, so an axillary clearance can divide it and wing the scapula."
+    },
+    {
+      "key": "n_suprascapular",
+      "label": "Suprascapular nerve (C5, C6)",
+      "role": "part",
+      "group": "Supraclavicular branches",
+      "layer": "nerve",
+      "color": "#b07fd0",
+      "terms": [
+        "suprascapular nerve",
+        "supraspinatus",
+        "infraspinatus",
+        "suprascapular notch"
+      ],
+      "narration": "From the upper trunk through the suprascapular notch to supraspinatus and infraspinatus — the first fifteen degrees of abduction and lateral rotation."
+    },
+    {
+      "key": "n_subclavius",
+      "label": "Nerve to subclavius (C5, C6)",
+      "role": "part",
+      "group": "Supraclavicular branches",
+      "layer": "nerve",
+      "color": "#b07fd0",
+      "terms": [
+        "nerve to subclavius",
+        "accessory phrenic nerve"
+      ],
+      "narration": "The other branch of the upper trunk. It sometimes carries an accessory phrenic root down to the diaphragm."
+    },
+    {
+      "key": "n_lateral_pectoral",
+      "label": "Lateral pectoral nerve",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "lateral pectoral nerve",
+        "pectoralis major"
+      ],
+      "narration": "From the lateral cord to pectoralis major. Lateral cord, but it pierces the clavipectoral fascia to reach the muscle in front."
+    },
+    {
+      "key": "n_medial_pectoral",
+      "label": "Medial pectoral nerve",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "medial pectoral nerve",
+        "pectoralis minor"
+      ],
+      "narration": "From the medial cord. It supplies pectoralis minor and passes through it to reach pectoralis major."
+    },
+    {
+      "key": "n_mcna",
+      "label": "Medial cutaneous nerve of arm",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "medial cutaneous nerve of arm",
+        "medial brachial cutaneous nerve",
+        "intercostobrachial nerve"
+      ],
+      "narration": "Skin of the medial arm. It joins the intercostobrachial nerve from the second intercostal space, which is why the inner arm goes numb after an axillary dissection."
+    },
+    {
+      "key": "n_mcnf",
+      "label": "Medial cutaneous nerve of forearm",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "medial cutaneous nerve of forearm",
+        "medial antebrachial cutaneous nerve"
+      ],
+      "narration": "Skin of the medial forearm, down to the wrist."
+    },
+    {
+      "key": "n_upper_subscapular",
+      "label": "Upper subscapular nerve",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "upper subscapular nerve",
+        "subscapularis"
+      ],
+      "narration": "First branch of the posterior cord — the upper part of subscapularis."
+    },
+    {
+      "key": "n_thoracodorsal",
+      "label": "Thoracodorsal nerve",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "thoracodorsal nerve",
+        "nerve to latissimus dorsi",
+        "middle subscapular nerve"
+      ],
+      "narration": "To latissimus dorsi, down the posterior wall of the axilla. The surgeon must find and spare it during a clearance."
+    },
+    {
+      "key": "n_lower_subscapular",
+      "label": "Lower subscapular nerve",
+      "role": "part",
+      "group": "Cord branches",
+      "layer": "nerve",
+      "color": "#7fb3d5",
+      "terms": [
+        "lower subscapular nerve",
+        "teres major"
+      ],
+      "narration": "The lower part of subscapularis and teres major."
+    },
+    {
+      "key": "n_musculocutaneous",
+      "label": "Musculocutaneous nerve (C5–C7)",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "musculocutaneous nerve",
+        "coracobrachialis",
+        "biceps brachii",
+        "brachialis",
+        "lateral cutaneous nerve of forearm",
+        "BBC"
+      ],
+      "narration": "From the lateral cord. It pierces coracobrachialis, then supplies biceps and brachialis — BBC — and ends as the lateral cutaneous nerve of the forearm. Cut it and elbow flexion and supination are weak."
+    },
+    {
+      "key": "n_axillary",
+      "label": "Axillary nerve (C5, C6)",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "axillary nerve",
+        "circumflex nerve",
+        "deltoid",
+        "teres minor",
+        "surgical neck of humerus",
+        "quadrangular space",
+        "regimental badge area"
+      ],
+      "narration": "From the posterior cord, round the surgical neck of the humerus through the quadrangular space to deltoid and teres minor. Test it after any shoulder dislocation: sensation over the regimental badge area, then abduction."
+    },
+    {
+      "key": "n_radial",
+      "label": "Radial nerve (C5–T1)",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "radial nerve",
+        "triceps",
+        "spiral groove",
+        "radial groove",
+        "wrist drop",
+        "extensor compartment",
+        "Saturday night palsy"
+      ],
+      "narration": "The big end of the posterior cord. It winds down the spiral groove of the humerus, so a mid-shaft fracture gives wrist drop with sensation lost over the first dorsal web space."
+    },
+    {
+      "key": "n_median",
+      "label": "Median nerve (C6–T1)",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "median nerve",
+        "lateral root of median nerve",
+        "medial root of median nerve",
+        "M of the median",
+        "carpal tunnel",
+        "thenar muscles",
+        "hand of benediction"
+      ],
+      "narration": "The only terminal branch with two roots — one from the lateral cord, one from the medial cord — meeting in front of the artery to make the M. It supplies most forearm flexors and the thenar muscles."
+    },
+    {
+      "key": "n_ulnar",
+      "label": "Ulnar nerve (C8, T1)",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "ulnar nerve",
+        "medial epicondyle",
+        "claw hand",
+        "interossei",
+        "hypothenar",
+        "funny bone"
+      ],
+      "narration": "The continuation of the medial cord. It passes behind the medial epicondyle and supplies almost every small muscle of the hand, so its lesions claw the hand."
+    },
+    {
+      "key": "lesion_erb",
+      "label": "Erb's palsy — upper trunk",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "Erb's palsy",
+        "Erb Duchenne palsy",
+        "upper trunk lesion",
+        "C5 C6",
+        "waiter's tip",
+        "policeman's tip",
+        "shoulder dystocia"
+      ],
+      "narration": "C5 and C6 torn when the head and shoulder are pulled apart — a difficult delivery, or a fall on the shoulder. The arm hangs adducted and medially rotated, the elbow extended, the forearm pronated: the waiter's tip position."
+    },
+    {
+      "key": "lesion_klumpke",
+      "label": "Klumpke palsy — lower trunk",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "Klumpke palsy",
+        "lower trunk lesion",
+        "C8 T1",
+        "claw hand",
+        "Horner syndrome",
+        "cervical rib",
+        "Pancoast tumour"
+      ],
+      "narration": "C8 and T1 stretched when the arm is snatched upwards, or compressed by a cervical rib or an apical lung tumour. The small muscles of the hand fail and the hand claws. Look for a Horner syndrome on the same side."
+    },
+    {
+      "key": "lesion_winging",
+      "label": "Winged scapula — long thoracic",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "winged scapula",
+        "long thoracic nerve injury",
+        "serratus anterior palsy",
+        "axillary clearance"
+      ],
+      "narration": "Serratus anterior loses its nerve, so the medial border of the scapula lifts off the chest wall when the patient pushes against a wall. Common after axillary surgery."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the plexus runs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The plexus starts in the neck and ends in the axilla. Roots emerge between scalenus anterior and scalenus medius. Trunks cross the first rib with the subclavian artery. Divisions lie behind the clavicle. Cords and branches sit in the axilla around the axillary artery. Learn that journey once and the rest of the plexus follows it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Five, three, six, three, five",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Roots"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Trunks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Divisions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cords"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Terminal branches"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:nerve_fibres",
+          "path": [
+            "Roots",
+            "Trunks",
+            "Divisions",
+            "Cords",
+            "Terminal branches"
+          ],
+          "duration": 12
+        }
+      ],
+      "narration": "Five roots, three trunks, six divisions, three cords, five terminal branches. Randy Travis Drinks Cold Beer. C5 and C6 make the upper trunk, C7 alone is the middle, C8 and T1 make the lower. Every trunk then splits front and back."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "How the divisions build the cords",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Divisions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cords"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "artery"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "div_posterior",
+          "to": "cord_posterior",
+          "kind": "forms"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "div_anterior",
+          "to": "cord_lateral",
+          "kind": "forms"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "div_anterior",
+          "to": "cord_medial",
+          "kind": "forms"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "artery",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "All three posterior divisions join into one posterior cord, which is why it carries C5 to T1 and why it supplies every extensor. The anterior divisions of the upper and middle trunks make the lateral cord. The anterior division of the lower trunk alone becomes the medial cord. Lateral, posterior, medial are positions around the second part of the axillary artery, not descriptions of the fibres."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The M in the axilla",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Terminal branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cords"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cord_lateral",
+          "to": "n_median",
+          "kind": "lateral root"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cord_medial",
+          "to": "n_median",
+          "kind": "medial root"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "n_musculocutaneous",
+            "n_ulnar"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Find the M and the five branches fall out of it. The outer limb of the M is musculocutaneous from the lateral cord, the inner limb is ulnar from the medial cord, and the two roots of the median meet in the middle in front of the artery. Behind them the posterior cord gives axillary and radial. Musculocutaneous, axillary, radial, median, ulnar."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The branches that leave early",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Supraclavicular branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cord branches"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "n_long_thoracic",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cord_posterior",
+          "to": "n_thoracodorsal",
+          "kind": "gives"
+        }
+      ],
+      "narration": "Above the clavicle only four nerves leave: dorsal scapular from C5, long thoracic from C5, C6 and C7, and suprascapular and nerve to subclavius from the upper trunk. Below it the cords give their own branches — remember the posterior cord's as ULTRA: upper subscapular, thoracodorsal, lower subscapular, axillary, radial."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Read the lesion backwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lesions"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lesion_erb",
+            "lesion_klumpke"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_erb",
+          "to": "trunk_upper",
+          "kind": "lesion of"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_klumpke",
+          "to": "trunk_lower",
+          "kind": "lesion of"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_winging",
+          "to": "n_long_thoracic",
+          "kind": "lesion of"
+        }
+      ],
+      "narration": "In the exam you are given the deficit and asked for the level. Shoulder and elbow weak, hand normal, arm in the waiter's tip position: upper trunk, Erb's. Hand wasted and clawed with a Horner syndrome: lower trunk, Klumpke's. One muscle only means a named branch, not a cord — a winged scapula is the long thoracic nerve and nothing else."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no nerve of the upper limb at all — searching it for plexus, nerve, root, trunk and cord returns only the two optic nerves and the choroid plexuses of the cerebral hemispheres. There is nothing to resolve for a single one of this scene's thirty nerve structures, so a 3D scene here would show scaffolding with no subject in it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb nerve models exist, with no curriculum edit.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — structures, six beats, ops and narration — but no artwork has been drawn for the SVG engine, so nothing renders today. Promote it to 'ready' once the roots-to-branches artwork exists with the labelled regions this scene names and the engine can play the six beats.",
+    "The scalenes, first rib, clavicle and axillary artery are authored as context regions of the diagram, not as models. Scalenus anterior, scalenus medius and the axillary artery have no entry in the catalog either; the first rib and clavicle do, which is one more reason to expect a 3D version of this scene eventually.",
+    "The 'Lesions' group is a teaching device rather than an anatomical structure — three named clinical pictures drawn beside the level that produces them. Beat 6 uses SHOW_RELATIONSHIP to tie each to its trunk or branch. A renderer that treats structures as strictly anatomical will need to accept these as annotation regions.",
+    "TRACE_STRUCTURE in beat 2 follows concept:nerve_fibres along the five stages rather than a subject with a model, in the same way the heart scene traces blood. The stages are group names, so the trace walks Roots to Trunks to Divisions to Cords to Terminal branches.",
+    "Root values are given as the standard prefixed plexus. Postfixed and prefixed variants are mentioned in no beat, and neither is the contribution from C4 or T2, because the exam asks for the standard arrangement."
+  ]
+}

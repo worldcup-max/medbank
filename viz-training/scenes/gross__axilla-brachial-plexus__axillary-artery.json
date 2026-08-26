@@ -1,0 +1,563 @@
+{
+  "schema": 2,
+  "id": "gross__axilla-brachial-plexus__axillary-artery",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Axilla & Brachial Plexus",
+  "structure": "Axillary artery",
+  "covers": [
+    "Axillary artery"
+  ],
+  "learning_goal": "State where the axillary artery begins and ends, divide it into three parts by pectoralis minor, name the one, two and three branches of each part, and say where the vessel can safely be tied.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "axilla",
+      "axillary artery",
+      "upper limb",
+      "arterial supply of the upper limb",
+      "shoulder",
+      "pectoral region",
+      "breast",
+      "vascular surgery"
+    ],
+    "terms": [
+      "axillary artery",
+      "first part of the axillary artery",
+      "second part of the axillary artery",
+      "third part of the axillary artery",
+      "pectoralis minor",
+      "outer border of the first rib",
+      "lower border of teres major",
+      "subclavian artery",
+      "brachial artery",
+      "superior thoracic artery",
+      "highest thoracic artery",
+      "thoracoacromial artery",
+      "acromiothoracic artery",
+      "pectoral branch",
+      "acromial branch",
+      "clavicular branch",
+      "deltoid branch",
+      "lateral thoracic artery",
+      "external mammary artery",
+      "lateral mammary branches",
+      "subscapular artery",
+      "circumflex scapular artery",
+      "thoracodorsal artery",
+      "anterior circumflex humeral artery",
+      "posterior circumflex humeral artery",
+      "quadrangular space",
+      "scapular anastomosis",
+      "axillary sheath",
+      "axillary vein",
+      "cords of the brachial plexus",
+      "ligation of the axillary artery",
+      "Screw The Lawyer Save A Patient"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "rib1",
+      "label": "Outer border of the 1st rib",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "terms": [
+        "first rib",
+        "outer border of the first rib",
+        "lateral border of the first rib"
+      ],
+      "narration": "The name changes here. Medial to this line the vessel is the subclavian artery; lateral to it, the axillary. Nothing about the vessel itself changes — only the name."
+    },
+    {
+      "key": "teres_major",
+      "label": "Lower border of teres major",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#c07050",
+      "terms": [
+        "teres major",
+        "lower border of teres major"
+      ],
+      "narration": "And it ends here. Below the lower border of teres major it is called the brachial artery. One vessel, three names, two landmarks."
+    },
+    {
+      "key": "pec_minor",
+      "label": "Pectoralis minor",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#d08a6a",
+      "terms": [
+        "pectoralis minor",
+        "coracoid process",
+        "third fourth fifth ribs"
+      ],
+      "narration": "Pectoralis minor crosses in front of the artery and is what divides it into three parts. It is the single most useful muscle in the axilla for the exam, because it also gives the surgeon the three levels of nodes."
+    },
+    {
+      "key": "subclavian",
+      "label": "Subclavian artery",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "vessel",
+      "color": "#8a2020",
+      "terms": [
+        "subclavian artery"
+      ],
+      "narration": "What the axillary artery is before it crosses the first rib."
+    },
+    {
+      "key": "brachial",
+      "label": "Brachial artery",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "vessel",
+      "color": "#8a2020",
+      "terms": [
+        "brachial artery"
+      ],
+      "narration": "What it becomes in the arm."
+    },
+    {
+      "key": "part1",
+      "label": "1st part — above pectoralis minor",
+      "role": "part",
+      "group": "Parts",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "first part of the axillary artery",
+        "one branch"
+      ],
+      "narration": "From the outer border of the first rib to the upper border of pectoralis minor. It is covered by the clavipectoral fascia and gives one branch."
+    },
+    {
+      "key": "part2",
+      "label": "2nd part — behind pectoralis minor",
+      "role": "part",
+      "group": "Parts",
+      "layer": "vessel",
+      "color": "#b03030",
+      "terms": [
+        "second part of the axillary artery",
+        "two branches",
+        "cords of the brachial plexus"
+      ],
+      "narration": "The part lying behind the muscle. It gives two branches, and it is the part the three cords of the brachial plexus are named around."
+    },
+    {
+      "key": "part3",
+      "label": "3rd part — below pectoralis minor",
+      "role": "part",
+      "group": "Parts",
+      "layer": "vessel",
+      "color": "#a02828",
+      "terms": [
+        "third part of the axillary artery",
+        "three branches"
+      ],
+      "narration": "From the lower border of pectoralis minor to the lower border of teres major. It gives three branches and it is the longest and the most exposed part."
+    },
+    {
+      "key": "br_superior_thoracic",
+      "label": "Superior thoracic artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "superior thoracic artery",
+        "highest thoracic artery",
+        "first and second intercostal spaces"
+      ],
+      "narration": "The only branch of the first part. A small vessel to the first and second intercostal spaces."
+    },
+    {
+      "key": "br_thoracoacromial",
+      "label": "Thoracoacromial artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "thoracoacromial artery",
+        "acromiothoracic artery",
+        "acromial branch",
+        "clavicular branch",
+        "deltoid branch",
+        "pectoral branch",
+        "clavipectoral fascia"
+      ],
+      "narration": "A short trunk that pierces the clavipectoral fascia and at once breaks into four: acromial, clavicular, deltoid, pectoral. Remember them as ACDP."
+    },
+    {
+      "key": "br_lateral_thoracic",
+      "label": "Lateral thoracic artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "lateral thoracic artery",
+        "external mammary artery",
+        "lateral mammary branches",
+        "serratus anterior"
+      ],
+      "narration": "Runs down the lateral chest wall along the lower border of pectoralis minor. In the woman it gives lateral mammary branches, so it is part of the blood supply of the breast."
+    },
+    {
+      "key": "br_subscapular",
+      "label": "Subscapular artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "subscapular artery",
+        "circumflex scapular artery",
+        "thoracodorsal artery",
+        "largest branch"
+      ],
+      "narration": "The largest branch. It divides into the circumflex scapular artery, which turns back through the triangular space onto the scapula, and the thoracodorsal artery, which goes on to latissimus dorsi."
+    },
+    {
+      "key": "br_ant_circumflex",
+      "label": "Anterior circumflex humeral artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "anterior circumflex humeral artery",
+        "surgical neck of humerus",
+        "ascending branch",
+        "head of humerus"
+      ],
+      "narration": "The smaller of the pair. It crosses in front of the surgical neck and sends an ascending branch up the intertubercular groove to the head of the humerus."
+    },
+    {
+      "key": "br_post_circumflex",
+      "label": "Posterior circumflex humeral artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "posterior circumflex humeral artery",
+        "quadrangular space",
+        "axillary nerve",
+        "surgical neck of humerus",
+        "deltoid"
+      ],
+      "narration": "The larger of the pair. It passes backwards through the quadrangular space with the axillary nerve — which is why a fracture of the surgical neck can take out both together."
+    },
+    {
+      "key": "vein",
+      "label": "Axillary vein",
+      "role": "part",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#3a5fa0",
+      "terms": [
+        "axillary vein",
+        "medial to the artery",
+        "basilic vein"
+      ],
+      "narration": "Always medial to the artery and always in front of it at the lower end. In the axilla the vein is what the surgeon meets first."
+    },
+    {
+      "key": "cords",
+      "label": "Cords of the brachial plexus",
+      "role": "part",
+      "group": "Relations",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "lateral cord",
+        "posterior cord",
+        "medial cord",
+        "cords of the brachial plexus"
+      ],
+      "narration": "Lateral, posterior and medial cords take their names from where they lie against the second part of this artery. If you can find the artery you can name every cord."
+    },
+    {
+      "key": "sheath",
+      "label": "Axillary sheath",
+      "role": "part",
+      "group": "Relations",
+      "layer": "fascia",
+      "color": "#cbbfa8",
+      "terms": [
+        "axillary sheath",
+        "prevertebral fascia",
+        "axillary block",
+        "brachial plexus block"
+      ],
+      "narration": "A sleeve of prevertebral fascia wrapping the artery and the cords together — but not the vein. Local anaesthetic put inside it blocks the whole limb, and that is the anatomy behind an axillary block."
+    },
+    {
+      "key": "anastomosis",
+      "label": "Scapular anastomosis",
+      "role": "part",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#7a3f8a",
+      "terms": [
+        "scapular anastomosis",
+        "suprascapular artery",
+        "dorsal scapular artery",
+        "circumflex scapular artery",
+        "collateral circulation",
+        "ligation"
+      ],
+      "narration": "Around the scapula the suprascapular and dorsal scapular arteries from the subclavian meet the circumflex scapular from the subscapular. That bypass is what allows the artery to be tied between the first rib and the subscapular branch and the limb to survive."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Where it starts and where it stops",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Boundaries",
+          "intensity": 0.7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial_blood",
+          "path": [
+            "subclavian",
+            "part1",
+            "part2",
+            "part3",
+            "brachial"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "One continuous vessel runs from the aortic arch to the fingers and changes its name twice on the way. At the outer border of the first rib the subclavian becomes the axillary. At the lower border of teres major the axillary becomes the brachial. Those two landmarks are worth marks on their own."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Pectoralis minor cuts it in three",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parts"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pec_minor"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "part2",
+          "kind": "lies in front of"
+        }
+      ],
+      "narration": "Lay pectoralis minor across the artery. What is above the muscle is the first part, what is behind it is the second, what is below it is the third. Everything else in this topic hangs off that one muscle."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "One, two, three",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Parts"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Branches"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part1",
+          "to": "br_superior_thoracic",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part2",
+          "to": "br_thoracoacromial",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part2",
+          "to": "br_lateral_thoracic",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part3",
+          "to": "br_subscapular",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part3",
+          "to": "br_ant_circumflex",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "part3",
+          "to": "br_post_circumflex",
+          "kind": "gives"
+        }
+      ],
+      "narration": "The parts number their own branches: one, two, three. First part, superior thoracic. Second part, thoracoacromial and lateral thoracic. Third part, subscapular, anterior circumflex humeral, posterior circumflex humeral. In order: Screw The Lawyer Save A Patient."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "What travels with it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parts"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cords",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cords",
+          "to": "part2",
+          "kind": "named around"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "part2",
+            "vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Peel the axillary sheath off and three things are inside it: the artery and the cords, wrapped together. The vein is outside the sheath, medial to the artery, and it is the structure at risk in a clearance. This arrangement is why one injection into the sheath anaesthetises the whole arm."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "Where you may tie it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parts"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "anastomosis"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anastomosis",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "br_subscapular",
+          "to": "anastomosis",
+          "kind": "feeds"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral_flow",
+          "path": [
+            "subclavian",
+            "anastomosis",
+            "br_subscapular",
+            "part3"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "Blood can reach the limb round the scapula without passing through the axilla. So the artery may be tied proximal to the origin of the subscapular artery and the collateral circulation will carry the limb. Tie it distal to that origin and you have cut off the bypass as well — that limb is in danger."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Two clinical branches",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Branches"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "br_post_circumflex",
+            "br_lateral_thoracic"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "br_post_circumflex",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Two branches come up again and again. The posterior circumflex humeral runs with the axillary nerve through the quadrangular space around the surgical neck of the humerus, so a fracture or a dislocation threatens both. The lateral thoracic supplies the lateral part of the breast, so it matters in breast surgery and in the blood supply questions that go with it."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog has no axillary artery and none of its six branches — searching it for axillary, thoracoacromial, circumflex humeral and subscapular returns nothing. The nearest models are the subclavian artery and the subclavian vein, which are the proximal continuations, not this vessel. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes.",
+    "This scene is deliberately NOT a second 3D axilla scene. The existing 'Axillary vessels & lymph nodes' scene already shows the space of the axilla in 3D using the subclavian continuations and the four walls, and its own gaps record that the one-two-three branch rule 'is the most examinable fact in this entry and it currently has no picture'. This diagram is that picture. The two scenes are complementary: the 3D scene teaches the space, this one teaches the branching tree that has no models. Authoring a third 3D scene from the same handful of wall muscles would have duplicated the first without teaching anything new.",
+    "Status is 'planned', not 'ready'. Structures, six beats, ops and narration are all authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the three-part artery with its six labelled branches exists as artwork and the engine can play the six beats.",
+    "The scapular anastomosis is drawn as a single labelled region rather than as its individual vessels. The suprascapular and dorsal scapular arteries have no models and no separate diagram regions here; naming them inside the anastomosis region keeps beat 5 about the principle of collateral flow rather than about a vessel list.",
+    "PEEL_LAYER in beat 4 is authored because the teaching move is to take the sheath off and see what is inside it. On a drawn diagram the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
+    "The axillary sheath itself has no model in the catalog, as the axillary vessels scene also records. It exists here only as a diagram region."
+  ]
+}

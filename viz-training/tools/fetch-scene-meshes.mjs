@@ -30,6 +30,11 @@ const ROOT = join(HERE, '..');
 const SCENES = join(ROOT, 'scenes');
 const OUT = join(ROOT, 'meshes');
 const MIRROR = 'https://cdn.jsdelivr.net/gh/Kevin-Mattheus-Moerman/BodyParts3D@main/assets/BodyParts3D_data/stl/';
+/* The CDN refuses any file over 20 MB with a 403 — not a proxy, not a missing mesh, a size cap:
+     FMA13336 (right external oblique, 27.5 MB) → 403 "File size exceeded the configured limit of 20 MB"
+   The same file from GitHub raw is a clean 200. A 403 that means "too big" is indistinguishable from a
+   403 that means "blocked", so the only way to tell them apart is to ask the other host and see. */
+const ORIGIN_RAW = 'https://raw.githubusercontent.com/Kevin-Mattheus-Moerman/BodyParts3D/main/assets/BodyParts3D_data/stl/';
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => { const i = argv.indexOf('--' + n); return i < 0 ? d : argv[i + 1]; };
@@ -73,7 +78,12 @@ for (const [id, users] of [...want].sort()) {
     continue;
   }
   try {
-    const r = await fetch(MIRROR + id + '.stl');
+    let r = await fetch(MIRROR + id + '.stl');
+    let via = 'cdn';
+    if (!r.ok && r.status !== 404) {                       // could be the size cap — ask the origin
+      const r2 = await fetch(ORIGIN_RAW + id + '.stl');
+      if (r2.ok) { r = r2; via = 'raw'; }
+    }
     if (!r.ok) {
       failed++;
       /* 404 means the mirror really does not carry this concept. Anything else — 403 from a corporate or
@@ -89,7 +99,7 @@ for (const [id, users] of [...want].sort()) {
     if (LIST_ONLY) { got++; console.log(`  ok    ${id}  ${(buf.length / 1048576).toFixed(2)} MB   ${who}`); continue; }
     writeFileSync(dest, buf);
     got++;
-    console.log(`  got   ${id}  ${(buf.length / 1048576).toFixed(2)} MB   ${who}`);
+    console.log(`  got   ${id}  ${(buf.length / 1048576).toFixed(2)} MB   ${who}${via === 'raw' ? '   [via origin — too big for the CDN]' : ''}`);
   } catch (e) {
     failed++; unreachable.push(id);
     console.log(`  ERR   ${id}  ${e.message}   ${who}`);

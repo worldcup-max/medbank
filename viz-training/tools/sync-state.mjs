@@ -104,11 +104,18 @@ for (const w of worklist) {
   (covered[w.courseKey] = covered[w.courseKey] || []).push(w.name);
 }
 
-/* cursor = the first structure with no ready scene */
+/* cursor = the first structure with NO SCENE AT ALL.
+   It used to be the first structure with no READY scene, and that quietly created a trap. "Spinal cord
+   in vertebral canal" has a scene, held at `candidate` because the catalog contains no spinal cord —
+   a gap no amount of authoring can close. The cursor parked on it permanently, so every run arrived at
+   a structure it could not advance, re-authored the identical file or stepped around it, and the run
+   after that did the same. A cursor that cannot move is not a queue.
+   So a structure with any scene is ATTENDED and the cursor moves past it. It is not forgotten: it is
+   listed under "held" below, every run, with its status and the reason it is not ready. Skipped means
+   invisible; held means someone has to look. */
 let cursor = null;
 for (const w of worklist) {
-  const a = authored.get(w.key);
-  if (a && a.status === 'ready') continue;
+  if (authored.has(w.key)) continue;
   cursor = { courseKey: w.courseKey, topicIndex: w.topicIndex, structureIndex: w.structureIndex };
   break;
 }
@@ -151,10 +158,19 @@ if (orphans.length) {
   for (const o of orphans) console.log(`  ? ${o.file} · structure "${o.structure}"`);
 }
 
-const next = worklist.find(w => {
+const next = worklist.find(w => !authored.has(w.key));
+
+/* Everything that has a scene but is not shippable. This list is the whole point of moving the cursor
+   past them: they stay in front of a human every run instead of stalling the queue in silence. */
+const held = [];
+for (const w of worklist) {
   const a = authored.get(w.key);
-  return !(a && a.status === 'ready');
-});
+  if (a && a.status !== 'ready') held.push({ w, a });
+}
+if (held.length) {
+  console.log(`\n${held.length} structure(s) HELD — a scene exists but is not ready. Not skipped: they need a decision.`);
+  for (const { w, a } of held) console.log(`  · ${w.courseKey}/${w.topic} · ${w.name}  →  ${a.id} (${a.status})`);
+}
 console.log(`\nnext to author: ${done ? 'nothing — the curriculum is covered' : `${next.courseKey} / ${next.topic} / ${next.name}`}`);
 
 if (CHECK) {

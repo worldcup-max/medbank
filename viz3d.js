@@ -563,6 +563,56 @@
     });
   }
 
+  /* ---------- where the labels go ----------
+     Pure geometry, deliberately outside the player: given each label's dot position and the size of the
+     stage, decide which gutter it belongs in and what height it sits at. No DOM, no three.js — so it can
+     be tested directly, which matters because label placement fails visually and silently. A label a few
+     pixels wrong still looks like a label; it is only wrong to the student trying to read the bone under
+     it. Returns [{ i, side:'L'|'R', ly }] for the labels that fit, and drops the rest. */
+  function planLabels(dots, w, h, labelH) {
+    var LH = labelH || 24;
+    if (!dots.length) return [];
+    var minX = Infinity, maxX = -Infinity, i;
+    for (i = 0; i < dots.length; i++) { if (dots[i].x < minX) minX = dots[i].x; if (dots[i].x > maxX) maxX = dots[i].x; }
+    var mid = (minX + maxX) / 2;
+    var capacity = Math.max(1, Math.floor((h - 8) / LH));
+
+    var order = dots.map(function (d, k) { return { i: k, x: d.x, y: d.y }; })
+                    .sort(function (a, b) { return a.y - b.y; });
+    var L = [], R = [];
+    order.forEach(function (it) { (it.x <= mid ? L : R).push(it); });
+
+    /* A column taller than the frame is a stack down the middle again — which is what this exists to
+       stop. It happens on anything mostly vertical (a spine seen head-on shares one x across every
+       dot), so deal them out left, right, left, right down the screen instead. Each label still sits
+       at its own dot's height, so the leaders fan out instead of crossing. */
+    /* Two triggers, and the first is the one that matters. When the dots barely differ in x the model
+       is narrow on screen and "which side is this on" carries no information at all — on the vertebral
+       column the whole split came down to a pixel of jitter, which put eight labels in one gutter and
+       four in the other and dragged leaders across the bone. The second is simple overflow. */
+    var narrow = (maxX - minX) < w * 0.15;
+    if (narrow || L.length > capacity || R.length > capacity) {
+      L = []; R = [];
+      order.forEach(function (it, k) { (k % 2 ? R : L).push(it); });
+    }
+
+    var out = [];
+    [['L', L], ['R', R]].forEach(function (pair) {
+      var side = pair[0], col = pair[1].slice(0, capacity);   // what cannot fit is dropped, not piled up
+      if (!col.length) return;
+      var top = LH / 2 + 4, bottom = h - LH / 2 - 4, prev = -1e9, k;
+      col.forEach(function (it) { it.ly = Math.max(Math.max(it.y, top), prev + LH); prev = it.ly; });
+      if (prev > bottom) {                                    // ran off the end — walk back up
+        var next = bottom + LH;
+        for (k = col.length - 1; k >= 0; k--) { col[k].ly = Math.min(col[k].ly, next - LH); next = col[k].ly; }
+        var floor2 = -1e9;
+        col.forEach(function (it) { it.ly = Math.max(it.ly, Math.max(top, floor2 + LH)); floor2 = it.ly; });
+      }
+      col.forEach(function (it) { out.push({ i: it.i, side: side, ly: it.ly }); });
+    });
+    return out;
+  }
+
   /* ======================= the player ======================= */
   /* Narration is the APP's job, not the player's. MedBank already has a tuned voice — rate, pitch, the
      cloud voice when it is on — and a student who hears one voice in Visualize should hear the same voice
@@ -577,6 +627,20 @@
      SPEAK(text, done) speaks a line and calls done() when the sound stops; SPEAK(null) stops. */
   var SPEAK = null, sayTurn = 0, sayTimer = null, speaking = false;
   function speaker(fn) { SPEAK = (typeof fn === 'function') ? fn : null; }
+
+  /* Buy the clip before it is needed.
+     Waiting for the voice is right; waiting in silence for the voice to be MADE is not. A cloud clip
+     takes seconds to generate the first time, and because the player now holds the picture until the
+     line finishes, that generation time became dead air at the front of every scene. MedBank already
+     solved this for the topic preview — it pre-buys every clip behind a progress bar and only then
+     starts — so the player asks for the same thing: WARM(lines) generates and caches, and by the time
+     `say` wants them they are local. Nothing here plays anything. */
+  var WARM = null;
+  function warmer(fn) { WARM = (typeof fn === 'function') ? fn : null; }
+  function warm(lines) {
+    if (!WARM || !lines || !lines.length) return;
+    try { WARM(lines.filter(function (t) { return t && String(t).trim(); })); } catch (e) {}
+  }
   function nowMs() { return (window.performance || Date).now(); }
 
   /* How long a line takes to read aloud, when nothing tells us. ~165 wpm plus a beat to start. */
@@ -1034,8 +1098,9 @@
       label.innerHTML = '<b>' + esc(s.label || s.key) + '</b>';
       var dot = document.createElement('div');
       dot.className = 'mb3d-anchor'; dot.style.background = col; dot.style.color = col;
-      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
       line.setAttribute('stroke', col); line.setAttribute('stroke-width', '1.2');
+      line.setAttribute('fill', 'none'); line.setAttribute('stroke-linejoin', 'round');
       line.setAttribute('opacity', '0');
       leads.appendChild(line); pinWrap.appendChild(dot); pinWrap.appendChild(label);
       pins[s.key] = { label: label, dot: dot, line: line };
@@ -1092,6 +1157,21 @@
       paint(); drawPairs();
     }
 
+    /* Everything this view will say, in the order it will say it: its own line, then each stop of any
+       trace it runs — which is exactly what `trace()` speaks, so the two must not drift apart. */
+    function linesOf(v) {
+      if (!v) return [];
+      var out = [v.narration || ''];
+      (v.ops || []).forEach(function (o) {
+        if (o.op !== 'TRACE_STRUCTURE') return;
+        (o.path || []).forEach(function (k) {
+          var s = structures.filter(function (x) { return x.key === k; })[0];
+          if (s) out.push(s.label + (s.narration ? '. ' + s.narration : ''));
+        });
+      });
+      return out;
+    }
+
     function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
       say(null);                                       // never let the previous view keep talking over this one
@@ -1106,6 +1186,11 @@
          blood path all at once, and left the caption frozen on step 1 with nothing in the console
          unless you went looking. Scope is not a detail. */
       if (v.narration && (v.ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; })) say(v.narration);
+      /* This view's lines are wanted now; the next view's are wanted in a few seconds. Buying both
+         costs nothing extra — warmSpeak caches per line and never generates the same one twice — and
+         it means pressing a chip or letting Play move on does not restart the wait. */
+      warm(linesOf(v));
+      if (views.length > 1) warm(linesOf(views[(i + 1) % views.length]));
       useCount.views++;
       stopTour();
       if (!fromPlay) stopPlay();
@@ -1282,8 +1367,16 @@
       });
     }
 
+    /* "Show all" has to outrank the VIEW, not just the student's taps.
+       It used to clear the selection, the ghost flag and the solo flag and nothing else — but a view is
+       staged by ops, and ISOLATE_REGION leaves `state.only` set, HIDE_STRUCTURE leaves entries false in
+       `state.visible`, and a trace leaves `state.ghosted` true. So on "Where the discs sit", which
+       isolates, pressing it recomputed exactly the same picture. The button did fire; it simply had no
+       authority over the thing that was hiding everything, which is indistinguishable from broken. */
     $('showall').addEventListener('click', function () {
       selected = []; ghost = false; solo = false;
+      state.only = null; state.ghosted = false; state.hi = {};
+      structures.forEach(function (s) { state.visible[s.key] = true; });
       Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });
       $('ghost').classList.remove('pri'); $('solo').classList.remove('pri');
       paint();
@@ -1406,7 +1499,9 @@
 
     /* ---------- labels ---------- */
     var v3 = new T.Vector3(), ray = new T.Raycaster(), occlAt = 0;
-    var LABEL_H = 26;                                  // the vertical room one label needs
+    var LABEL_H = 24;                                  // the vertical room one label needs
+    var GUTTER = 8;                                    // how far the label column sits from the frame edge
+    var TAIL = 14;                                     // the horizontal run of the leader into the label
     function updatePins() {
       var w = stage.clientWidth, h = stage.clientHeight, live = [];
 
@@ -1418,28 +1513,24 @@
         live.push({ k: k, p: p, m: m, x: (v3.x * 0.5 + 0.5) * w, y: (-v3.y * 0.5 + 0.5) * h });
       });
 
-      /* Declutter: labels are laid out top-to-bottom and pushed apart until none overlap, then nudged
-         inside the frame. The dot stays put — only the label moves, and the leader line keeps the two
-         connected, so a crowd of structures never becomes a pile of unreadable text. */
-      live.sort(function (a, b) { return a.y - b.y; });
-      var floorY = -1e9;
-      live.forEach(function (it) {
-        var ly = Math.max(it.y, floorY + LABEL_H);
-        ly = Math.min(ly, h - 10);
-        floorY = ly;
-        var side = it.x > w * 0.55 ? -1 : 1;            // put the label on the roomier side of the dot
-        var lx = it.x + side * 16;
+      /* The maths is planLabels() above — pure, and tested. Here we only move DOM. */
+      if (!live.length) return;
+      var plan = planLabels(live, w, h, LABEL_H);
+      var placed = {};
+      plan.forEach(function (q) {
+        var it = live[q.i]; placed[q.i] = 1;
         var lw = it.p.label.offsetWidth || 90;
-        if (side > 0) lx = Math.min(lx, w - lw - 6); else lx = Math.max(6, lx - lw);
+        var lx = q.side === 'L' ? GUTTER : Math.max(GUTTER, w - GUTTER - lw);
+        var edge = q.side === 'L' ? lx + lw : lx;                     // the side the leader meets
+        var tail = q.side === 'L' ? Math.min(edge + TAIL, it.x) : Math.max(edge - TAIL, it.x);
         it.p.label.style.left = lx + 'px';
-        it.p.label.style.top = ly + 'px';
+        it.p.label.style.top = q.ly + 'px';
         it.p.dot.style.left = it.x + 'px';
         it.p.dot.style.top = it.y + 'px';
         it.p.dot.style.display = it.p.label.style.display = '';
-        var lineX = side > 0 ? lx : lx + lw;
-        it.p.line.setAttribute('x1', it.x); it.p.line.setAttribute('y1', it.y);
-        it.p.line.setAttribute('x2', lineX); it.p.line.setAttribute('y2', ly);
+        it.p.line.setAttribute('points', it.x + ',' + it.y + ' ' + tail + ',' + q.ly + ' ' + edge + ',' + q.ly);
       });
+      live.forEach(function (it, k) { if (!placed[k]) park(it.p); });
 
       /* Is the structure actually visible from here, or buried behind another mesh? Checked a few times a
          second, not every frame — a dimmed label is honest about a structure you cannot currently see. */
@@ -1609,6 +1700,7 @@
     dispose: dispose,
     register: register,
     speaker: speaker,
+    warmer: warmer,
     /* The live player, for diagnosing a scene that is on screen and misbehaving. Read-only in spirit:
        nothing in the app calls this. It exists because "the viewport is black" is impossible to diagnose
        from outside — camera, holder scale and material state are the whole answer and were unreachable. */

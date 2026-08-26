@@ -1,0 +1,621 @@
+{
+  "schema": 2,
+  "id": "gross__pectoral-region-breast__axillary-vessels-lymph-nodes",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pectoral Region & Breast",
+  "structure": "Axillary vessels & lymph nodes",
+  "covers": [
+    "Axillary vessels & lymph nodes"
+  ],
+  "learning_goal": "Say where the axillary artery and vein begin and end, divide the artery into three parts by pectoralis minor and name the branches of each, and place the five groups and three levels of axillary nodes well enough to explain how breast cancer spreads.",
+  "status": "candidate",
+  "candidate_reason": "The three subjects this curriculum entry names — the axillary artery, the axillary vein and the axillary lymph nodes — have no models in the catalog. The scene teaches them through the subclavian vessels, the first rib, pectoralis minor and teres major, which do exist, and narrates the rest. It is honest teaching but it is not the scene the entry asks for, so it is held for review rather than marked ready. See gaps.",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "axilla",
+      "pectoral region",
+      "upper limb",
+      "shoulder",
+      "breast",
+      "lymphatic drainage",
+      "vasculature",
+      "chest wall"
+    ],
+    "terms": [
+      "axillary artery",
+      "axillary vein",
+      "axillary lymph nodes",
+      "axilla",
+      "first part of axillary artery",
+      "second part of axillary artery",
+      "third part of axillary artery",
+      "superior thoracic artery",
+      "thoracoacromial artery",
+      "lateral thoracic artery",
+      "subscapular artery",
+      "anterior circumflex humeral artery",
+      "posterior circumflex humeral artery",
+      "subclavian artery",
+      "subclavian vein",
+      "brachial artery",
+      "basilic vein",
+      "cephalic vein",
+      "venae comitantes",
+      "outer border of first rib",
+      "lower border of teres major",
+      "pectoralis minor",
+      "anterior group",
+      "pectoral group",
+      "posterior group",
+      "subscapular group",
+      "lateral group",
+      "humeral group",
+      "central group",
+      "apical group",
+      "infraclavicular nodes",
+      "level I nodes",
+      "level II nodes",
+      "level III nodes",
+      "sentinel node",
+      "sentinel lymph node biopsy",
+      "axillary clearance",
+      "Patey mastectomy",
+      "lymphoedema",
+      "peau d'orange",
+      "internal thoracic nodes",
+      "parasternal nodes",
+      "subclavian lymph trunk",
+      "brachial plexus cords",
+      "axillary sheath",
+      "brachial plexus block",
+      "anterior wall of axilla",
+      "posterior wall of axilla",
+      "medial wall of axilla",
+      "lateral wall of axilla"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "subclavian_artery",
+      "name": "right subclavian artery",
+      "label": "Subclavian artery → axillary artery",
+      "role": "part",
+      "group": "The artery",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3953"
+      },
+      "terms": [
+        "subclavian artery",
+        "axillary artery",
+        "brachial artery",
+        "third part of subclavian artery"
+      ],
+      "narration": "One continuous tube with three names. It is the subclavian artery until the outer border of the first rib, the axillary artery from there to the lower border of teres major, and the brachial artery after that. The model shows only the subclavian length, so follow it in your mind past the rib and into the axilla."
+    },
+    {
+      "key": "subclavian_vein",
+      "name": "right subclavian vein",
+      "label": "Axillary vein → subclavian vein",
+      "role": "part",
+      "group": "The vein",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "refs": {
+        "bodyparts3d": "FMA4755"
+      },
+      "terms": [
+        "subclavian vein",
+        "axillary vein",
+        "basilic vein",
+        "cephalic vein",
+        "venae comitantes"
+      ],
+      "narration": "Read the vein in the opposite direction, because blood in it travels toward the heart. The basilic vein becomes the axillary vein at the lower border of teres major, and the axillary vein becomes the subclavian vein at the outer border of the first rib. Same two borders as the artery, same three names, opposite direction of flow."
+    },
+    {
+      "key": "brachiocephalic_vein",
+      "name": "right brachiocephalic vein",
+      "label": "Brachiocephalic vein",
+      "role": "context",
+      "group": "The vein",
+      "layer": "vessel",
+      "color": "#365f86",
+      "refs": {
+        "bodyparts3d": "FMA4751"
+      },
+      "terms": [
+        "brachiocephalic vein",
+        "venous angle",
+        "right lymphatic duct",
+        "thoracic duct",
+        "subclavian lymph trunk"
+      ],
+      "narration": "Where the whole limb finally drains. Behind the sternoclavicular joint the subclavian vein meets the internal jugular at the venous angle, and the lymph from the axilla joins the blood at exactly the same corner through the subclavian lymph trunk."
+    },
+    {
+      "key": "rib1",
+      "name": "right first rib",
+      "label": "1st rib — where the artery is born",
+      "role": "part",
+      "group": "The two borders",
+      "layer": "bone",
+      "color": "#ddd2b4",
+      "refs": {
+        "bodyparts3d": "FMA7857"
+      },
+      "terms": [
+        "first rib",
+        "outer border of first rib",
+        "lateral border of first rib",
+        "apex of axilla"
+      ],
+      "narration": "The outer border of this rib is the upper border of the axilla. Cross it and the subclavian artery becomes the axillary artery. Names in the limb change at borders, not at branches — that one sentence answers a lot of questions."
+    },
+    {
+      "key": "teres_major",
+      "name": "right teres major",
+      "label": "Teres major — where the artery ends",
+      "role": "part",
+      "group": "The two borders",
+      "layer": "muscle",
+      "color": "#a8543f",
+      "refs": {
+        "bodyparts3d": "FMA32551"
+      },
+      "terms": [
+        "teres major",
+        "lower border of teres major",
+        "brachial artery",
+        "posterior wall of axilla"
+      ],
+      "narration": "The lower border of teres major is the lower limit of the axilla. Cross it and the axillary artery becomes the brachial artery. This muscle also forms part of the posterior wall, so it is both a boundary and a wall."
+    },
+    {
+      "key": "pec_minor",
+      "name": "right pectoralis minor",
+      "label": "Pectoralis minor — the divider",
+      "role": "part",
+      "group": "The divider",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA13375"
+      },
+      "terms": [
+        "pectoralis minor",
+        "pec minor",
+        "three parts of axillary artery",
+        "level I nodes",
+        "level II nodes",
+        "level III nodes",
+        "Patey mastectomy"
+      ],
+      "narration": "The single most useful muscle in this region, because it cuts everything behind it into three. The axillary artery has a first part above it, a second part behind it and a third part below it. The axillary nodes have level one lateral to it, level two behind it and level three medial to it. Learn the muscle and both lists follow."
+    },
+    {
+      "key": "pec_major_sternocostal",
+      "name": "sternocostal part of right pectoralis major",
+      "label": "Pectoralis major — anterior wall",
+      "role": "part",
+      "group": "Walls of the axilla",
+      "layer": "muscle",
+      "color": "#a06868",
+      "refs": {
+        "bodyparts3d": "FMA79979"
+      },
+      "terms": [
+        "pectoralis major",
+        "anterior wall of axilla",
+        "anterior axillary fold"
+      ],
+      "narration": "The anterior wall is pectoralis major in front, pectoralis minor and subclavius behind it, and the clavipectoral fascia wrapping the two. Its lower border is the anterior axillary fold you can pinch between finger and thumb."
+    },
+    {
+      "key": "subscapularis",
+      "name": "right subscapularis",
+      "label": "Subscapularis — posterior wall",
+      "role": "part",
+      "group": "Walls of the axilla",
+      "layer": "muscle",
+      "color": "#9a7f66",
+      "refs": {
+        "bodyparts3d": "FMA13414"
+      },
+      "terms": [
+        "subscapularis",
+        "posterior wall of axilla",
+        "subscapular nodes"
+      ],
+      "narration": "Subscapularis covers the front of the scapula and makes the upper part of the posterior wall. The posterior group of nodes lies along its lower border, on the subscapular vessels."
+    },
+    {
+      "key": "latissimus_dorsi",
+      "name": "right latissimus dorsi",
+      "label": "Latissimus dorsi — posterior wall",
+      "role": "part",
+      "group": "Walls of the axilla",
+      "layer": "muscle",
+      "color": "#8d6c52",
+      "refs": {
+        "bodyparts3d": "FMA13358"
+      },
+      "terms": [
+        "latissimus dorsi",
+        "posterior axillary fold",
+        "posterior wall of axilla"
+      ],
+      "narration": "With teres major it completes the posterior wall and forms the posterior axillary fold. Feel the anterior fold and the posterior fold together and you are holding the axilla between your fingers."
+    },
+    {
+      "key": "serratus_anterior",
+      "name": "right serratus anterior",
+      "label": "Serratus anterior — medial wall",
+      "role": "part",
+      "group": "Walls of the axilla",
+      "layer": "muscle",
+      "color": "#c08a6a",
+      "refs": {
+        "bodyparts3d": "FMA13398"
+      },
+      "terms": [
+        "serratus anterior",
+        "medial wall of axilla",
+        "long thoracic nerve",
+        "lateral thoracic artery",
+        "anterior group of nodes",
+        "pectoral group"
+      ],
+      "narration": "The medial wall is the upper ribs clothed by serratus anterior. The long thoracic nerve runs down its outer surface here, which is why it is cut in an axillary clearance and why the scapula then wings. The anterior group of nodes sits on this wall along the lower border of pectoralis minor, and it is the group that first receives lymph from the breast."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus — lateral wall",
+      "role": "part",
+      "group": "Walls of the axilla",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "intertubercular groove",
+        "lateral wall of axilla",
+        "lateral group of nodes",
+        "humeral group"
+      ],
+      "narration": "The lateral wall is narrow — just the intertubercular groove of the humerus with the tendons of biceps and coracobrachialis in it. The lateral or humeral group of nodes lies against the axillary vein on this side and drains the whole upper limb."
+    },
+    {
+      "key": "clavicle",
+      "name": "right clavicle",
+      "label": "Clavicle — apex of the axilla",
+      "role": "context",
+      "group": "The apex",
+      "layer": "bone",
+      "color": "#f2e6c2",
+      "refs": {
+        "bodyparts3d": "FMA13322"
+      },
+      "terms": [
+        "clavicle",
+        "apex of axilla",
+        "cervicoaxillary canal",
+        "infraclavicular nodes",
+        "apical group"
+      ],
+      "narration": "The apex of the axilla is a gap bounded by the clavicle in front, the first rib medially and the upper border of the scapula behind. Everything entering or leaving the limb passes through it, and the apical group of nodes sits right here — the last group in the axilla and the one that drains all the others."
+    },
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula",
+      "role": "context",
+      "group": "The apex",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "scapula",
+        "coracoid process",
+        "upper border of scapula"
+      ],
+      "narration": "The back edge of the apex, and the bone pectoralis minor pulls on. For orientation."
+    },
+    {
+      "key": "subclavius",
+      "name": "right subclavius",
+      "label": "Subclavius",
+      "role": "context",
+      "group": "The apex",
+      "layer": "muscle",
+      "color": "#b8654a",
+      "refs": {
+        "bodyparts3d": "FMA13412"
+      },
+      "terms": [
+        "subclavius",
+        "clavipectoral fascia",
+        "costoclavicular ligament"
+      ],
+      "narration": "Subclavius and pectoralis minor are the two muscles enclosed by the clavipectoral fascia. Lymphatics from the apical nodes pierce that fascia on their way out of the axilla."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A pyramid with four walls",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Walls of the axilla",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The axilla is a pyramid lying on its side between the arm and the chest wall. Anterior wall: the two pectoral muscles and the fascia between them. Posterior wall: subscapularis above, latissimus dorsi and teres major below. Medial wall: the upper ribs covered by serratus anterior. Lateral wall: a narrow strip of humerus. Apex above, toward the neck. Base below, the skin of the armpit. Everything in this scene lives inside that pyramid."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Two borders, three names",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two borders"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial_blood",
+          "path": [
+            "subclavian_artery",
+            "rib1",
+            "pec_minor",
+            "teres_major",
+            "humerus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Follow the blood out of the chest. It leaves as the subclavian artery. At the outer border of the first rib the name changes to axillary. At the lower border of teres major it changes again to brachial. Two borders, three names, one uninterrupted tube. Nothing about the vessel itself changes at either point — only what we call it — and that is exactly the kind of fact examiners like, because it is a boundary you can point to."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "One, two, three — the branches count themselves",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The divider"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two borders"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "subclavian_artery",
+          "kind": "divides the artery into three parts"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Pectoralis minor crosses in front of the artery and cuts it into three. The first part is above the muscle, the second behind it, the third below it. The number of branches equals the number of the part. One from the first: the superior thoracic. Two from the second: the thoracoacromial and the lateral thoracic. Three from the third: the subscapular, and the anterior and posterior circumflex humeral arteries. Six branches in all, counted one, two, three. The subscapular is the largest and the posterior circumflex humeral is the one that goes through the quadrangular space with the axillary nerve."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The vein, and why it matters more in practice",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "subclavian_artery",
+            "subclavian_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "subclavian_vein",
+          "to": "brachiocephalic_vein",
+          "kind": "drainage of the whole upper limb"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The axillary vein is formed at the lower border of teres major by the basilic vein joining the venae comitantes of the brachial artery. It runs up on the medial and slightly anterior side of the artery all the way, and becomes the subclavian vein at the first rib. The cephalic vein comes over the front of the shoulder, dives through the clavipectoral fascia and joins it near the top. Three practical points. The vein lies in front of the artery, so a needle from the front finds the vein first. Its tributaries follow the artery's branches, so the vein is what the nodes lie along. And a wound here can suck air in, because the fascia holds the vein open — an air embolus is a real risk in axillary trauma."
+    },
+    {
+      "mode": "glands",
+      "beat": 5,
+      "title": "Five groups of nodes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Walls of the axilla",
+          "intensity": 0.7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "serratus_anterior",
+          "to": "subclavian_vein",
+          "kind": "the anterior nodes drain toward the central and apical groups"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "There are twenty to forty nodes in the axilla, in five groups, and each group sits on a wall you have already learned. The anterior or pectoral group lies on the medial wall at the lower border of pectoralis minor, and takes lymph from the breast and the front of the trunk. The posterior or subscapular group lies on the posterior wall along the lower border of subscapularis, and takes the back of the trunk down to the iliac crest. The lateral or humeral group lies on the lateral wall against the vein, and takes the whole upper limb. Those three drain into the central group in the fat of the axilla, and the central group drains into the apical group at the apex, behind the clavicle. From the apex, lymph leaves as the subclavian trunk and joins the venous angle. Three groups in, one in the middle, one at the top."
+    },
+    {
+      "mode": "glands",
+      "beat": 6,
+      "title": "Three levels, and why the surgeon uses them",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The divider"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Walls of the axilla"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The apex"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "clavicle",
+          "kind": "level III lies between the muscle and the apex"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The surgeon ignores the five groups and uses the same muscle that divided the artery. Level one is everything lateral to and below pectoralis minor. Level two is behind it. Level three is medial to and above it, up at the apex. Note the direction: the artery is numbered from above downward, the nodes from below upward, so the two numbering systems run against each other. In the Patey modified radical mastectomy pectoralis minor is divided so that level three can be reached, and pectoralis major is spared. A level one and two clearance is the usual operation."
+    },
+    {
+      "mode": "glands",
+      "beat": 7,
+      "title": "How a breast cancer travels",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lymph",
+          "path": [
+            "serratus_anterior",
+            "pec_minor",
+            "clavicle",
+            "subclavian_vein",
+            "brachiocephalic_vein"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "About three-quarters of the lymph from the breast goes to the axilla, and most of it arrives first at the anterior group. From there it moves to the central group, then the apical group, then out at the root of the neck. The remaining quarter goes medially to the internal thoracic nodes beside the sternum, which is why a medial tumour can spread inside the chest with a clinically normal axilla. This is the anatomy behind the sentinel node biopsy: inject dye or tracer at the tumour, find the first node it reaches, and if that node is clear the rest usually are too. It is also the anatomy behind lymphoedema — clear the axilla and the arm's own drainage, the lateral group, goes with it, so the limb swells. Blocked dermal lymphatics give the dimpled skin called peau d'orange."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Cut across the axilla",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.05,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pec_major_sternocostal",
+            "subscapularis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across and read from front to back. Pectoralis major, then pectoralis minor in its fascia, then the axillary vein, then the artery behind and lateral to it, then the cords of the brachial plexus wrapped around the artery and named for where they sit relative to it, then subscapularis on the front of the scapula. Vein, artery, nerves, back wall — in that order, front to back. The vessels and the cords share one sleeve of fascia, the axillary sheath, which is what makes an axillary brachial plexus block possible: one injection into the sheath reaches all of them."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "There is no axillary artery in the catalog and no axillary vein. Both are shown as their proximal continuations, the subclavian artery and the subclavian vein, with the name change at the outer border of the first rib narrated against the rib itself. The central subject of this curriculum entry is therefore spoken rather than seen, and this is the main reason the scene is held as a candidate rather than marked ready.",
+    "None of the six branches of the axillary artery exist as models: superior thoracic, thoracoacromial, lateral thoracic, subscapular, anterior circumflex humeral, posterior circumflex humeral. Beat 3 counts them one-two-three against pectoralis minor without showing any of them. The one-two-three rule is the most examinable fact in this entry and it currently has no picture.",
+    "There are no lymph nodes anywhere in the catalog — not one, on any wall, in any region. All five axillary groups and all three surgical levels are placed by their relation to a muscle or a wall in narration only. Measured anchors would be the right fix, but the house standard for an anchor is a position measured on the source mesh, and the meshes for these walls are not in the local mesh set, so no anchor was authored rather than guessing one. This is the single change that would let the scene reach ready.",
+    "No lymphatic vessels and no subclavian lymph trunk, so beat 7 traces the route of spread as a concept along the structures the route passes, not along the vessels themselves.",
+    "No brachial plexus. The cords are named in beat 8 by their position around the artery and cannot be shown, and the long thoracic nerve on the medial wall — the nerve whose injury wings the scapula after an axillary clearance — has no model either.",
+    "No breast. The organ whose drainage this entry exists to explain is not in the catalog, so beat 7 begins at the medial wall rather than at the tumour. The separate breast scene is planned for the same reason.",
+    "No axillary sheath and no clavipectoral fascia. The sheath is the whole basis of the axillary block described in beat 8; the fascia is what holds the vein open in the air-embolus point in beat 4. Neither exists as a model.",
+    "No internal thoracic or parasternal nodes, so the medial quarter of the breast's drainage in beat 7 is narrated with nothing on screen.",
+    "The walls are shown as whole muscles. Serratus anterior, subscapularis and latissimus dorsi each contribute only the part of themselves that faces the axilla, so the highlighted muscle is larger than the wall it forms."
+  ]
+}
