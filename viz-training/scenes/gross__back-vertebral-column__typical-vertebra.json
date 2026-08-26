@@ -1,0 +1,319 @@
+{
+  "schema": 2,
+  "id": "gross__back-vertebral-column__typical-vertebra",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Back & Vertebral Column",
+  "structure": "Typical vertebra",
+  "covers": [
+    "Typical vertebra"
+  ],
+  "learning_goal": "Recognise a typical vertebra from any angle, and say which part bears weight, which encloses the cord, and how a cervical, thoracic and lumbar vertebra differ.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "back",
+      "vertebral column",
+      "typical vertebra",
+      "osteology of the back",
+      "spine"
+    ],
+    "terms": [
+      "typical vertebra",
+      "atypical vertebra",
+      "vertebral body",
+      "vertebral arch",
+      "neural arch",
+      "pedicle",
+      "lamina",
+      "vertebral foramen",
+      "vertebral canal",
+      "spinous process",
+      "transverse process",
+      "superior articular process",
+      "inferior articular process",
+      "articular facet",
+      "intervertebral foramen",
+      "costal facet",
+      "foramen transversarium",
+      "bifid spine",
+      "lumbar vertebra",
+      "thoracic vertebra",
+      "cervical vertebra"
+    ]
+  },
+  "camera": {
+    "framing": "superior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "l2",
+      "name": "second lumbar vertebra",
+      "label": "L2 — the exemplar",
+      "role": "part",
+      "group": "Typical vertebra",
+      "layer": "bone",
+      "color": "#f0dfa8",
+      "refs": {
+        "bodyparts3d": "FMA13073"
+      },
+      "terms": [
+        "typical vertebra",
+        "lumbar vertebra",
+        "L2",
+        "vertebral body",
+        "vertebral arch",
+        "spinous process"
+      ],
+      "narration": "A lumbar vertebra shows every feature of the typical plan at its largest: a big body in front, an arch behind, and processes off the arch."
+    },
+    {
+      "key": "t6",
+      "name": "sixth thoracic vertebra",
+      "label": "T6 — thoracic",
+      "role": "part",
+      "group": "Regional comparison",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9945"
+      },
+      "terms": [
+        "thoracic vertebra",
+        "T6",
+        "costal facet",
+        "demifacet"
+      ],
+      "narration": "The same plan with costal facets added for the ribs, a heart-shaped body, and a long spine sloping downwards."
+    },
+    {
+      "key": "c5",
+      "name": "fifth cervical vertebra",
+      "label": "C5 — cervical",
+      "role": "part",
+      "group": "Regional comparison",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12523"
+      },
+      "terms": [
+        "cervical vertebra",
+        "C5",
+        "foramen transversarium",
+        "bifid spine"
+      ],
+      "narration": "The same plan shrunk: small body, large triangular foramen, a hole in each transverse process, and a bifid spine."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1 — above",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "L1",
+        "first lumbar vertebra"
+      ],
+      "narration": "The vertebra above — its inferior articular processes grip L2."
+    },
+    {
+      "key": "l3",
+      "name": "third lumbar vertebra",
+      "label": "L3 — below",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13074"
+      },
+      "terms": [
+        "L3",
+        "third lumbar vertebra"
+      ],
+      "narration": "The vertebra below — L2 grips it in turn, and the pair leave a gap for the nerve root."
+    },
+    {
+      "key": "d_l1",
+      "name": "intervertebral disk of first lumbar vertebra",
+      "label": "Disc above L2",
+      "role": "context",
+      "group": "Discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16033"
+      },
+      "terms": [
+        "intervertebral disc",
+        "L1/L2 disc"
+      ],
+      "narration": "The pad between L1 and L2 — the joint between the two bodies."
+    },
+    {
+      "key": "d_l2",
+      "name": "intervertebral disk of second lumbar vertebra",
+      "label": "Disc below L2",
+      "role": "context",
+      "group": "Discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16034"
+      },
+      "terms": [
+        "intervertebral disc",
+        "L2/L3 disc"
+      ],
+      "narration": "The pad between L2 and L3."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One unit of the column",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "l2",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Every vertebra is built to the same plan. Take one out of the stack and the plan is easy to read."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The plan from above",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "l2"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "From above: the thick body sits in front, the arch sweeps back from it, and the ring between them is the vertebral foramen. The blunt process pointing straight back is the spinous process; the two pointing sideways are the transverse processes."
+    },
+    {
+      "mode": "cross_section",
+      "title": "Body in front, ring behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "l2"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across it and the two jobs separate cleanly. Solid bone in front takes the weight; the hollow ring behind protects the cord. Stack the rings and you have the vertebral canal."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "How the neighbours lock on",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l2"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Discs"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "l2",
+          "to": "l3",
+          "kind": "articulates with"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "l1",
+          "to": "l2",
+          "kind": "articulates with"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Two vertebrae meet in three places: a disc between the bodies and a small synovial joint on each side between the articular processes. The notch left between the pedicles is the intervertebral foramen, and the spinal nerve leaves through it."
+    },
+    {
+      "mode": "comparison",
+      "title": "Same plan, three regions",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Regional comparison"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l2"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "c5",
+            "t6",
+            "l2"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Put the three side by side and each region announces itself. A hole in the transverse process means cervical. A facet for a rib means thoracic. A large kidney-shaped body with a flat blunt spine means lumbar."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "The named parts of a typical vertebra — body, pedicle, lamina, vertebral foramen, spinous process, transverse process, superior and inferior articular processes — have NO separate models in the catalog. Whole vertebrae are the smallest unit it holds.",
+    "They should be authored as landmark anchors on the L2 mesh, the way the arm scene places bony landmarks. That was not possible this run: anchor coordinates must be measured on the source geometry, and the vertebral meshes are not present locally while this task has no network access. Guessed coordinates would put a label on the wrong process, which is exactly the failure the canonical-name check exists to prevent.",
+    "Because of that the scene teaches the plan by rotation, cross-section and narration rather than by labelled parts, so it is held at status \"candidate\" and the structure stays on the worklist. Fetch the vertebral meshes, derive the anchors, add them as role \"part\" with render \"anchor\", and this becomes ready with no other change."
+  ]
+}

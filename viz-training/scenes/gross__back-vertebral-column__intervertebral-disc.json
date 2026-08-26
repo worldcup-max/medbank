@@ -1,0 +1,522 @@
+{
+  "schema": 2,
+  "id": "gross__back-vertebral-column__intervertebral-disc",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Back & Vertebral Column",
+  "structure": "Intervertebral disc",
+  "covers": [
+    "Intervertebral disc"
+  ],
+  "learning_goal": "Say what a disc joins, why it is thickest in the lumbar region, and why a prolapse goes backwards and to the side rather than forwards.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "back",
+      "vertebral column",
+      "intervertebral disc",
+      "intervertebral joint",
+      "spine",
+      "disc prolapse",
+      "slipped disc",
+      "low back pain"
+    ],
+    "terms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "disc",
+      "nucleus pulposus",
+      "annulus fibrosus",
+      "anulus fibrosus",
+      "symphysis",
+      "secondary cartilaginous joint",
+      "vertebral end plate",
+      "disc prolapse",
+      "disc herniation",
+      "slipped disc",
+      "posterolateral herniation",
+      "sciatica",
+      "L4/5 disc",
+      "L5/S1 disc",
+      "lumbosacral disc",
+      "intervertebral foramen",
+      "nerve root compression",
+      "posterior longitudinal ligament",
+      "anterior longitudinal ligament"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.006,
+    "initialYaw": 1.1
+  },
+  "structures": [
+    {
+      "key": "disc_l45",
+      "name": "intervertebral disk of fourth lumbar vertebra",
+      "label": "L4/5 disc — the exemplar",
+      "role": "part",
+      "group": "Lumbar discs",
+      "layer": "cartilage",
+      "color": "#4f90c4",
+      "refs": {
+        "bodyparts3d": "FMA16036"
+      },
+      "terms": [
+        "intervertebral disc",
+        "L4/5 disc",
+        "lumbar disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The pad between the bodies of L4 and L5. It is a joint, not a spacer: a secondary cartilaginous joint that allows a little movement at every level and a lot over the whole column."
+    },
+    {
+      "key": "disc_l5s1",
+      "name": "intervertebral disk of fifth lumbar vertebra",
+      "label": "L5/S1 disc — the lumbosacral disc",
+      "role": "part",
+      "group": "Lumbar discs",
+      "layer": "cartilage",
+      "color": "#3a76a8",
+      "refs": {
+        "bodyparts3d": "FMA16037"
+      },
+      "terms": [
+        "L5/S1 disc",
+        "lumbosacral disc",
+        "disc prolapse",
+        "sciatica"
+      ],
+      "narration": "The lowest and the most wedged disc, sitting on the sloping top of the sacrum. It carries the most load and is one of the two levels that prolapse most often."
+    },
+    {
+      "key": "disc_t67",
+      "name": "intervertebral disk of sixth thoracic vertebra",
+      "label": "T6/7 disc — thoracic",
+      "role": "part",
+      "group": "Regional discs",
+      "layer": "cartilage",
+      "color": "#8fb8d6",
+      "refs": {
+        "bodyparts3d": "FMA13503"
+      },
+      "terms": [
+        "thoracic disc",
+        "T6/7 disc"
+      ],
+      "narration": "Thin relative to its vertebral body, and splinted by the ribs. Little movement is asked of it, and thoracic discs rarely prolapse."
+    },
+    {
+      "key": "disc_c56",
+      "name": "intervertebral disk of fifth cervical vertebra",
+      "label": "C5/6 disc — cervical",
+      "role": "part",
+      "group": "Regional discs",
+      "layer": "cartilage",
+      "color": "#a8cbe2",
+      "refs": {
+        "bodyparts3d": "FMA13898"
+      },
+      "terms": [
+        "cervical disc",
+        "C5/6 disc",
+        "cervical spondylosis"
+      ],
+      "narration": "Small, but thick for the size of its body — which is why the neck is the most mobile region despite having the smallest bones."
+    },
+    {
+      "key": "disc_l12",
+      "name": "intervertebral disk of first lumbar vertebra",
+      "label": "L1/2 disc",
+      "role": "context",
+      "group": "Lumbar discs",
+      "layer": "cartilage",
+      "color": "#6fa3cc",
+      "refs": {
+        "bodyparts3d": "FMA16033"
+      },
+      "terms": [
+        "L1/2 disc"
+      ],
+      "narration": "One of the stack — every level has the same construction."
+    },
+    {
+      "key": "disc_l23",
+      "name": "intervertebral disk of second lumbar vertebra",
+      "label": "L2/3 disc",
+      "role": "context",
+      "group": "Lumbar discs",
+      "layer": "cartilage",
+      "color": "#6fa3cc",
+      "refs": {
+        "bodyparts3d": "FMA16034"
+      },
+      "terms": [
+        "L2/3 disc"
+      ],
+      "narration": "One of the stack."
+    },
+    {
+      "key": "disc_l34",
+      "name": "intervertebral disk of third lumbar vertebra",
+      "label": "L3/4 disc",
+      "role": "context",
+      "group": "Lumbar discs",
+      "layer": "cartilage",
+      "color": "#6fa3cc",
+      "refs": {
+        "bodyparts3d": "FMA16035"
+      },
+      "terms": [
+        "L3/4 disc"
+      ],
+      "narration": "One of the stack."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "L1"
+      ],
+      "narration": "Top of the lumbar stack."
+    },
+    {
+      "key": "l2",
+      "name": "second lumbar vertebra",
+      "label": "L2",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13073"
+      },
+      "terms": [
+        "L2"
+      ],
+      "narration": "A lumbar body — one half of the joint above and below it."
+    },
+    {
+      "key": "l3",
+      "name": "third lumbar vertebra",
+      "label": "L3",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13074"
+      },
+      "terms": [
+        "L3"
+      ],
+      "narration": "A lumbar body."
+    },
+    {
+      "key": "l4",
+      "name": "fourth lumbar vertebra",
+      "label": "L4 — above the exemplar",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#f0dfa8",
+      "refs": {
+        "bodyparts3d": "FMA13075"
+      },
+      "terms": [
+        "L4",
+        "fourth lumbar vertebra"
+      ],
+      "narration": "The vertebra above the exemplar disc. Its lower surface is one face of the joint."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "L5 — below the exemplar",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#f0dfa8",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "L5",
+        "fifth lumbar vertebra"
+      ],
+      "narration": "The vertebra below. Its upper surface is the other face — the disc is glued to both."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#ded3b4",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacral promontory"
+      ],
+      "narration": "The sloping platform the last disc sits on."
+    },
+    {
+      "key": "t6",
+      "name": "sixth thoracic vertebra",
+      "label": "T6",
+      "role": "context",
+      "group": "Regional context",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9945"
+      },
+      "terms": [
+        "T6",
+        "thoracic vertebra"
+      ],
+      "narration": "Thoracic body, for scale against its disc."
+    },
+    {
+      "key": "c5",
+      "name": "fifth cervical vertebra",
+      "label": "C5",
+      "role": "context",
+      "group": "Regional context",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12523"
+      },
+      "terms": [
+        "C5",
+        "cervical vertebra"
+      ],
+      "narration": "Cervical body, for scale against its disc."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the discs sit",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Lumbar discs",
+          "intensity": 0.55
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A disc lies between the bodies of every two neighbouring vertebrae, from the axis down to the sacrum. Twenty-three in all — there is no disc between the atlas and the axis. Together they make up about a quarter of the column's height."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "One joint, two bones",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "disc_l45"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l4"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l5"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "l4",
+          "to": "disc_l45",
+          "kind": "rests on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "disc_l45",
+          "to": "l5",
+          "kind": "rests on"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Strip away the rest and the joint is simple: two vertebral bodies with one pad between them, bound to the end plate of each. Bone, cartilage, bone — a symphysis, which is why it moves a little and never dislocates."
+    },
+    {
+      "mode": "cross_section",
+      "title": "Soft centre, tough ring",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "disc_l45"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across it. The outer part is the annulus fibrosus — concentric rings of fibrocartilage running in alternating directions, thick in front and thinner behind. At the centre sits the nucleus pulposus, a gel that is largely water. The nucleus takes the pressure and the annulus holds it in; when the annulus tears, the nucleus is what escapes."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Why a prolapse goes backwards and sideways",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar discs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "disc_l45",
+          "intensity": 0.7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:disc-load",
+          "path": [
+            "l3",
+            "disc_l34",
+            "l4",
+            "disc_l45",
+            "l5",
+            "disc_l5s1",
+            "sacrum"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Load runs down the bodies and through every disc, heaviest at the bottom. Bending forward squeezes the front of the disc and drives the nucleus backwards. The annulus is thinnest behind, and the posterior longitudinal ligament reinforces the middle of the back wall — so the weak point is behind and to the side. That is where the nucleus escapes, and that is where the nerve root is."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The nerve next door",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lumbar vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_l45"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_l5s1"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The gap between two pedicles is the intervertebral foramen, and it lies just behind and above the disc. The nerve leaving there is the one named for the vertebra above — but a posterolateral prolapse at L4/5 usually misses that nerve and catches the one crossing to the level below, giving L5 symptoms. L5/S1 catches S1. Learn the pair: the level of the disc and the root it traps are not the same number."
+    },
+    {
+      "mode": "comparison",
+      "title": "Thicker where you bend",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Regional discs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_l45"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "disc_c56",
+            "disc_t67",
+            "disc_l45"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Disc thickness tracks movement, not size. The cervical discs are thick for their small bodies and the neck is mobile. The thoracic discs are thin and the ribs hold that region still. The lumbar discs are the thickest of all, and the loin bends most — and pays for it."
+    },
+    {
+      "mode": "mechanism",
+      "title": "Take the discs away",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lumbar vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar discs"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "cartilage",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Remove them and the bodies sit bone on bone. Every millimetre of bending in the column is borrowed from these pads, and the height you lose during the day — and with age — is water leaving them."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Nucleus pulposus and annulus fibrosus have no separate entries in the catalog — the smallest unit it holds is the whole disc. The cross-section beat therefore teaches the two zones by narration over a solid disc rather than by two labelled parts. Two models, or one measured anchor at the centre of the nucleus, would make that beat literal.",
+    "No spinal nerve, nerve root or cauda equina exists in the catalog (the only nerves it holds are the two optic nerves), so the root a prolapse traps is described but never shown. The 'nerve next door' beat is deliberately authored anyway: the day a nerve model exists it becomes a SHOW_RELATIONSHIP with no other edit.",
+    "The anterior and posterior longitudinal ligaments are absent from the catalog, so the reason the back wall fails posterolaterally rather than in the midline is narrated, not seen.",
+    "Vertebral end plates are not separate models either; the disc-to-bone attachment is shown as contact between meshes."
+  ]
+}

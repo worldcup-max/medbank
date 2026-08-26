@@ -1,0 +1,783 @@
+{
+  "schema": 2,
+  "id": "gross__back-vertebral-column__vertebral-column",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Back & Vertebral Column",
+  "structure": "Vertebral column",
+  "covers": [
+    "Vertebral column"
+  ],
+  "learning_goal": "Name the five regions and their counts, point out the four curves on an intact column, and say which part of a vertebra carries load and which part encloses the cord.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "back",
+      "vertebral column",
+      "spine",
+      "spinal column",
+      "axial skeleton",
+      "osteology of the back"
+    ],
+    "terms": [
+      "vertebral column",
+      "spine",
+      "backbone",
+      "vertebra",
+      "vertebrae",
+      "cervical vertebrae",
+      "thoracic vertebrae",
+      "lumbar vertebrae",
+      "sacrum",
+      "coccyx",
+      "atlas",
+      "axis",
+      "vertebra prominens",
+      "primary curvature",
+      "secondary curvature",
+      "cervical lordosis",
+      "thoracic kyphosis",
+      "lumbar lordosis",
+      "scoliosis",
+      "vertebral canal",
+      "intervertebral disc",
+      "sacral promontory"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.005,
+    "initialYaw": 1.2
+  },
+  "structures": [
+    {
+      "key": "c1",
+      "name": "atlas",
+      "label": "C1 — atlas",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12519"
+      },
+      "terms": [
+        "atlas",
+        "C1",
+        "first cervical vertebra"
+      ],
+      "narration": "No body and no spinous process — a ring that carries the skull."
+    },
+    {
+      "key": "c2",
+      "name": "axis",
+      "label": "C2 — axis",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12520"
+      },
+      "terms": [
+        "axis",
+        "C2",
+        "second cervical vertebra",
+        "dens",
+        "odontoid process"
+      ],
+      "narration": "Its dens projects up into the atlas and the head rotates about it."
+    },
+    {
+      "key": "c3",
+      "name": "third cervical vertebra",
+      "label": "C3",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12521"
+      },
+      "terms": [
+        "C3",
+        "third cervical vertebra"
+      ],
+      "narration": "A typical cervical vertebra — small body, large triangular foramen."
+    },
+    {
+      "key": "c4",
+      "name": "fourth cervical vertebra",
+      "label": "C4",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12522"
+      },
+      "terms": [
+        "C4",
+        "fourth cervical vertebra"
+      ],
+      "narration": "Foramina transversaria carry the vertebral arteries up to the skull."
+    },
+    {
+      "key": "c5",
+      "name": "fifth cervical vertebra",
+      "label": "C5",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12523"
+      },
+      "terms": [
+        "C5",
+        "fifth cervical vertebra"
+      ],
+      "narration": "Bifid spinous process, a feature of C3 to C6."
+    },
+    {
+      "key": "c6",
+      "name": "sixth cervical vertebra",
+      "label": "C6",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12524"
+      },
+      "terms": [
+        "C6",
+        "sixth cervical vertebra",
+        "carotid tubercle"
+      ],
+      "narration": "Its anterior tubercle is the carotid tubercle — the carotid is compressed against it."
+    },
+    {
+      "key": "c7",
+      "name": "seventh cervical vertebra",
+      "label": "C7",
+      "role": "part",
+      "group": "Cervical vertebrae",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12525"
+      },
+      "terms": [
+        "C7",
+        "seventh cervical vertebra",
+        "vertebra prominens"
+      ],
+      "narration": "Vertebra prominens — the long spine you feel at the base of the neck."
+    },
+    {
+      "key": "t1",
+      "name": "first thoracic vertebra",
+      "label": "T1",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9165"
+      },
+      "terms": [
+        "T1",
+        "first thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t2",
+      "name": "second thoracic vertebra",
+      "label": "T2",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9187"
+      },
+      "terms": [
+        "T2",
+        "second thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t3",
+      "name": "third thoracic vertebra",
+      "label": "T3",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9209"
+      },
+      "terms": [
+        "T3",
+        "third thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "T4",
+        "fourth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t5",
+      "name": "fifth thoracic vertebra",
+      "label": "T5",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9922"
+      },
+      "terms": [
+        "T5",
+        "fifth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t6",
+      "name": "sixth thoracic vertebra",
+      "label": "T6",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9945"
+      },
+      "terms": [
+        "T6",
+        "sixth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t7",
+      "name": "seventh thoracic vertebra",
+      "label": "T7",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9968"
+      },
+      "terms": [
+        "T7",
+        "seventh thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t8",
+      "name": "eighth thoracic vertebra",
+      "label": "T8",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9991"
+      },
+      "terms": [
+        "T8",
+        "eighth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t9",
+      "name": "ninth thoracic vertebra",
+      "label": "T9",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10014"
+      },
+      "terms": [
+        "T9",
+        "ninth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t10",
+      "name": "tenth thoracic vertebra",
+      "label": "T10",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10037"
+      },
+      "terms": [
+        "T10",
+        "tenth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t11",
+      "name": "eleventh thoracic vertebra",
+      "label": "T11",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10059"
+      },
+      "terms": [
+        "T11",
+        "eleventh thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12",
+      "role": "part",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "T12",
+        "twelfth thoracic vertebra",
+        "thoracic vertebra",
+        "costal facet"
+      ],
+      "narration": "Carries a pair of ribs on costal facets — the reason this region barely moves."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1",
+      "role": "part",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "L1",
+        "first lumbar vertebra",
+        "lumbar vertebra"
+      ],
+      "narration": "Massive kidney-shaped body — this is where body weight is carried."
+    },
+    {
+      "key": "l2",
+      "name": "second lumbar vertebra",
+      "label": "L2",
+      "role": "part",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13073"
+      },
+      "terms": [
+        "L2",
+        "second lumbar vertebra",
+        "lumbar vertebra"
+      ],
+      "narration": "Massive kidney-shaped body — this is where body weight is carried."
+    },
+    {
+      "key": "l3",
+      "name": "third lumbar vertebra",
+      "label": "L3",
+      "role": "part",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13074"
+      },
+      "terms": [
+        "L3",
+        "third lumbar vertebra",
+        "lumbar vertebra"
+      ],
+      "narration": "Massive kidney-shaped body — this is where body weight is carried."
+    },
+    {
+      "key": "l4",
+      "name": "fourth lumbar vertebra",
+      "label": "L4",
+      "role": "part",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13075"
+      },
+      "terms": [
+        "L4",
+        "fourth lumbar vertebra",
+        "lumbar vertebra"
+      ],
+      "narration": "Massive kidney-shaped body — this is where body weight is carried."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "L5",
+      "role": "part",
+      "group": "Lumbar vertebrae",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "L5",
+        "fifth lumbar vertebra",
+        "lumbar vertebra"
+      ],
+      "narration": "Massive kidney-shaped body — this is where body weight is carried."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "part",
+      "group": "Sacrum",
+      "layer": "bone",
+      "color": "#cdc3a6",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacral",
+        "S1",
+        "sacral promontory",
+        "sacroiliac joint"
+      ],
+      "narration": "Five vertebrae fused into one wedge that transmits weight into the pelvis."
+    },
+    {
+      "key": "d_l1",
+      "name": "intervertebral disk of first lumbar vertebra",
+      "label": "Disc below L1",
+      "role": "context",
+      "group": "Intervertebral discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16033"
+      },
+      "terms": [
+        "Disc below L1",
+        "intervertebral disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    },
+    {
+      "key": "d_l2",
+      "name": "intervertebral disk of second lumbar vertebra",
+      "label": "Disc below L2",
+      "role": "context",
+      "group": "Intervertebral discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16034"
+      },
+      "terms": [
+        "Disc below L2",
+        "intervertebral disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    },
+    {
+      "key": "d_l3",
+      "name": "intervertebral disk of third lumbar vertebra",
+      "label": "Disc below L3",
+      "role": "context",
+      "group": "Intervertebral discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16035"
+      },
+      "terms": [
+        "Disc below L3",
+        "intervertebral disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    },
+    {
+      "key": "d_l4",
+      "name": "intervertebral disk of fourth lumbar vertebra",
+      "label": "Disc below L4",
+      "role": "context",
+      "group": "Intervertebral discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16036"
+      },
+      "terms": [
+        "Disc below L4",
+        "intervertebral disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    },
+    {
+      "key": "d_l5",
+      "name": "intervertebral disk of fifth lumbar vertebra",
+      "label": "Disc below L5",
+      "role": "context",
+      "group": "Intervertebral discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA16037"
+      },
+      "terms": [
+        "Disc below L5",
+        "intervertebral disc",
+        "nucleus pulposus",
+        "annulus fibrosus"
+      ],
+      "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "From the side the column is not straight. It curves back in the thorax and sacrum, and forward in the neck and loin — four curves that let it bend and still bear weight."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "The five regions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Cervical vertebrae",
+          "intensity": 0.35
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Thoracic vertebrae",
+          "intensity": 0.35
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Lumbar vertebrae",
+          "intensity": 0.35
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Sacrum",
+          "intensity": 0.35
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Seven cervical, twelve thoracic, five lumbar, then the fused sacrum and the coccyx below it. Count them from the top: the numbers are exam currency."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "Atlas and axis",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cervical vertebrae"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "c1",
+            "c2"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The top two are not typical. The atlas is a ring with no body; the axis has the dens, and the head turns on it."
+    },
+    {
+      "mode": "cross_section",
+      "title": "Body in front, canal behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lumbar vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Intervertebral discs"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Intervertebral discs",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "Cut the column in the midline and two columns appear: the bodies and discs in front taking the load, and the ring of arches behind them forming the canal that holds the cord."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "How weight comes down",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:body-weight",
+          "path": [
+            "c1",
+            "c7",
+            "t6",
+            "t12",
+            "l3",
+            "l5",
+            "sacrum"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "Weight from the skull passes down the bodies, disc to disc, growing heavier as it descends — which is why the lumbar bodies are the largest and why L4 and L5 are where discs most often fail."
+    },
+    {
+      "mode": "mechanism",
+      "title": "Take the discs away",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lumbar vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Intervertebral discs"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "cartilage",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Remove the discs and the bodies sit bone on bone with no space to bend and no cushion. Every millimetre of movement in the column is borrowed from that pad."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "The coccyx has no entry in the catalog, so the fifth region is narrated but never shown. Until a model exists the count of five regions is taught on four.",
+    "Sub-parts of a vertebra — body, pedicle, lamina, spinous and transverse processes, vertebral foramen — are not separate models in the catalog. They are taught here by cross-section and narration rather than as labelled parts.",
+    "Only the five lumbar discs are included, as context for the load and cross-section beats. The full set of cervical and thoracic discs exists in the catalog and can be added without changing any op.",
+    "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none."
+  ]
+}

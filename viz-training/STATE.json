@@ -2,10 +2,12 @@
   "cursor": {
     "courseKey": "gross",
     "topicIndex": 0,
-    "structureIndex": 0
+    "structureIndex": 1
   },
   "coveredStructures": {
     "gross": [
+      "Vertebral column",
+      "Intervertebral disc",
       "Biceps brachii",
       "Triceps brachii",
       "Heart (external)",
@@ -18,5 +20,5 @@
   "runs": 0,
   "lastRunAt": null,
   "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
-  "syncedAt": "2026-08-26T12:20:55.822Z"
+  "syncedAt": "2026-08-26T13:08:22.749Z"
 }

@@ -1,0 +1,751 @@
+{
+  "schema": 2,
+  "id": "gross__back-vertebral-column__spinal-cord-in-vertebral-canal",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Back & Vertebral Column",
+  "structure": "Spinal cord in vertebral canal",
+  "covers": [
+    "Spinal cord in vertebral canal"
+  ],
+  "learning_goal": "Trace the vertebral canal from the foramen magnum to the sacral hiatus, say where the cord ends in an adult and in a newborn, and give the reason lumbar puncture is done at L3/4 or L4/5.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "back",
+      "vertebral column",
+      "spinal cord",
+      "vertebral canal",
+      "spinal canal",
+      "lumbar puncture",
+      "meninges",
+      "spinal nerves",
+      "neuroanatomy of the back"
+    ],
+    "terms": [
+      "spinal cord",
+      "vertebral canal",
+      "spinal canal",
+      "vertebral foramen",
+      "central canal",
+      "conus medullaris",
+      "cauda equina",
+      "filum terminale",
+      "lumbar cistern",
+      "dural sac",
+      "lumbar puncture",
+      "spinal tap",
+      "intercristal line",
+      "Tuffier's line",
+      "cervical enlargement",
+      "lumbosacral enlargement",
+      "intervertebral foramen",
+      "spinal nerve",
+      "nerve root",
+      "dura mater",
+      "arachnoid mater",
+      "pia mater",
+      "subarachnoid space",
+      "cerebrospinal fluid",
+      "epidural space",
+      "foramen magnum",
+      "sacral hiatus",
+      "caudal block"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.005,
+    "initialYaw": 1.2
+  },
+  "structures": [
+    {
+      "key": "central_canal",
+      "name": "central canal of spinal cord",
+      "label": "Central canal — the axis of the cord",
+      "role": "part",
+      "group": "Cord",
+      "layer": "organ",
+      "color": "#e8c8d8",
+      "refs": {
+        "bodyparts3d": "FMA78497"
+      },
+      "terms": [
+        "central canal",
+        "spinal cord",
+        "cord",
+        "conus medullaris"
+      ],
+      "narration": "This thread is the central canal, the narrow lumen that runs down the middle of the spinal cord. The cord itself is not modelled here, so read the canal as its axis: wherever this runs, the cord is wrapped around it, filling most of the width of the bony canal."
+    },
+    {
+      "key": "c1",
+      "name": "atlas",
+      "label": "C1 — atlas",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12519"
+      },
+      "terms": [
+        "c1",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c2",
+      "name": "axis",
+      "label": "C2 — axis",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12520"
+      },
+      "terms": [
+        "c2",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c3",
+      "name": "third cervical vertebra",
+      "label": "C3",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12521"
+      },
+      "terms": [
+        "c3",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c4",
+      "name": "fourth cervical vertebra",
+      "label": "C4",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12522"
+      },
+      "terms": [
+        "c4",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c5",
+      "name": "fifth cervical vertebra",
+      "label": "C5",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12523"
+      },
+      "terms": [
+        "c5",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c6",
+      "name": "sixth cervical vertebra",
+      "label": "C6",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12524"
+      },
+      "terms": [
+        "c6",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "c7",
+      "name": "seventh cervical vertebra",
+      "label": "C7",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA12525"
+      },
+      "terms": [
+        "c7",
+        "cervical vertebra"
+      ],
+      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+    },
+    {
+      "key": "t1",
+      "name": "first thoracic vertebra",
+      "label": "T1",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9165"
+      },
+      "terms": [
+        "t1",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t2",
+      "name": "second thoracic vertebra",
+      "label": "T2",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9187"
+      },
+      "terms": [
+        "t2",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t3",
+      "name": "third thoracic vertebra",
+      "label": "T3",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9209"
+      },
+      "terms": [
+        "t3",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "t4",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t5",
+      "name": "fifth thoracic vertebra",
+      "label": "T5",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9922"
+      },
+      "terms": [
+        "t5",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t6",
+      "name": "sixth thoracic vertebra",
+      "label": "T6",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9945"
+      },
+      "terms": [
+        "t6",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t7",
+      "name": "seventh thoracic vertebra",
+      "label": "T7",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9968"
+      },
+      "terms": [
+        "t7",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t8",
+      "name": "eighth thoracic vertebra",
+      "label": "T8",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA9991"
+      },
+      "terms": [
+        "t8",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t9",
+      "name": "ninth thoracic vertebra",
+      "label": "T9",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10014"
+      },
+      "terms": [
+        "t9",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t10",
+      "name": "tenth thoracic vertebra",
+      "label": "T10",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10037"
+      },
+      "terms": [
+        "t10",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t11",
+      "name": "eleventh thoracic vertebra",
+      "label": "T11",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10059"
+      },
+      "terms": [
+        "t11",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "t12",
+        "thoracic vertebra"
+      ],
+      "narration": "A thoracic ring. The canal is narrowest and most circular in the thorax, so there is least room to spare around the cord here."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1 — the cord ends about here",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#f0dfa8",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "L1",
+        "first lumbar vertebra",
+        "conus medullaris",
+        "cord termination"
+      ],
+      "narration": "In the adult the cord tapers to the conus medullaris at the lower border of L1 or the upper border of L2. Below this line the canal holds nerve roots only."
+    },
+    {
+      "key": "l2",
+      "name": "second lumbar vertebra",
+      "label": "L2",
+      "role": "part",
+      "group": "Canal walls",
+      "layer": "bone",
+      "color": "#f0dfa8",
+      "refs": {
+        "bodyparts3d": "FMA13073"
+      },
+      "terms": [
+        "L2",
+        "second lumbar vertebra"
+      ],
+      "narration": "The last level at which cord may still be present. Everything below is cauda equina."
+    },
+    {
+      "key": "l3",
+      "name": "third lumbar vertebra",
+      "label": "L3",
+      "role": "part",
+      "group": "Lumbar levels",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13074"
+      },
+      "terms": [
+        "L3",
+        "lumbar puncture"
+      ],
+      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it."
+    },
+    {
+      "key": "l4",
+      "name": "fourth lumbar vertebra",
+      "label": "L4 — level of the iliac crests",
+      "role": "part",
+      "group": "Lumbar levels",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13075"
+      },
+      "terms": [
+        "L4",
+        "intercristal line",
+        "Tuffier's line",
+        "lumbar puncture"
+      ],
+      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "L5",
+      "role": "part",
+      "group": "Lumbar levels",
+      "layer": "bone",
+      "color": "#e6dcc0",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "L5",
+        "lumbar puncture"
+      ],
+      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Lumbar levels",
+      "layer": "bone",
+      "color": "#ded3b4",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacral hiatus",
+        "dural sac"
+      ],
+      "narration": "The canal continues into the sacrum and ends at the sacral hiatus. The dural sac itself stops around S2."
+    },
+    {
+      "key": "disc_l34",
+      "name": "intervertebral disk of third lumbar vertebra",
+      "label": "L3/4 disc — a puncture level",
+      "role": "part",
+      "group": "Interspaces",
+      "layer": "cartilage",
+      "color": "#4f90c4",
+      "refs": {
+        "bodyparts3d": "FMA16035"
+      },
+      "terms": [
+        "L3/4",
+        "lumbar puncture",
+        "interspinous space"
+      ],
+      "narration": "One of the two spaces used for lumbar puncture. The needle passes between the spines of L3 and L4, well below the end of the cord."
+    },
+    {
+      "key": "disc_l45",
+      "name": "intervertebral disk of fourth lumbar vertebra",
+      "label": "L4/5 disc — a puncture level",
+      "role": "part",
+      "group": "Interspaces",
+      "layer": "cartilage",
+      "color": "#4f90c4",
+      "refs": {
+        "bodyparts3d": "FMA16036"
+      },
+      "terms": [
+        "L4/5",
+        "lumbar puncture"
+      ],
+      "narration": "The other usual space. A line joining the highest points of the iliac crests crosses the body of L4, and that is how the level is found at the bedside."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One long tube",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Cord",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Stack the vertebral foramina and they line up into one continuous tube — the vertebral canal. It begins at the foramen magnum, follows every curve of the column, and ends at the sacral hiatus. The cord lies inside it, wrapped in three membranes and floating in cerebrospinal fluid."
+    },
+    {
+      "mode": "cross_section",
+      "title": "What fills the ring",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "t6"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across at a mid-thoracic level. The ring behind the body is the canal. Inside it, from outside in: fat and veins in the epidural space, then dura, then arachnoid, then cerebrospinal fluid in the subarachnoid space, and the cord in the middle held by pia. The thoracic canal is the tightest of all, which is why cord compression shows itself early here."
+    },
+    {
+      "mode": "cross_section",
+      "title": "The canal in the midline",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Canal walls"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cord"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "central_canal",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Split the column in the midline and the canal reads as a single passage with the bodies in front of it and the arches behind. The cord runs the upper two thirds of it and stops; the lower third holds roots and fluid."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Where the cord stops",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:spinal-cord",
+          "path": [
+            "c1",
+            "c5",
+            "t1",
+            "t6",
+            "t12",
+            "l1"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "central_canal",
+          "to": "l1",
+          "kind": "ends at the level of"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "l1",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The cord runs from the foramen magnum to the lower border of L1 in most adults, tapering into the conus medullaris. It is fatter in two places — the cervical enlargement for the arm and the lumbosacral enlargement for the leg. The column keeps growing after the cord has stopped, so in a newborn the cord reaches L3. That single fact decides everything below."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "How the nerves get out",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Canal walls"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "l1",
+          "to": "l2",
+          "kind": "bound the intervertebral foramen"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Between every two vertebrae, the notches on the pedicles leave a window — the intervertebral foramen — and a pair of spinal nerves leaves through it. Thirty-one pairs in all. Because the cord ends high, the lower roots must run downwards inside the canal to reach their own foramen; that bundle is the cauda equina."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Where the needle goes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lumbar levels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Interspaces"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l2"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Interspaces",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Lumbar puncture is done at L3/4 or L4/5. The cord has already ended at L1, so the needle enters the lumbar cistern — cerebrospinal fluid with the cauda equina floating in it, and roots slide aside rather than tear. Find the level by the intercristal line, which crosses L4. In a child go lower still, because the cord ends lower."
+    },
+    {
+      "mode": "comparison",
+      "title": "Room to spare, region by region",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "c5",
+            "t6",
+            "l4"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Look at the size of the ring in each region. Wide and triangular in the neck, narrow and round in the thorax, wide again in the loin. Where the ring is narrowest the cord is most vulnerable, and where it is widest the canal is holding either an enlargement or a bundle of roots."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "THE SPINAL CORD ITSELF HAS NO MODEL. The catalog holds 934 meshes and not one of them is the cord: the only entry in its neighbourhood is FMA78497, the central canal, a thread down the middle of the cord. The scene is built on the bony canal, which is complete, and uses the central canal to show where the cord runs. That is honest but it is not the cord, and it is the reason this scene is candidate and not ready.",
+    "Because the cord is missing, so is everything the cord teaches at this level: the cervical and lumbosacral enlargements, the conus medullaris and the filum terminale, and grey matter against white. All are narrated. The moment a cord model exists it becomes the subject of the TRACE_STRUCTURE in beat 2 in place of concept:spinal-cord, with no other edit.",
+    "The extent of the central canal mesh has not been checked against vertebral levels — the source geometry is not held locally and this run has no network access — so no teaching in this scene depends on where that mesh happens to stop. The cord's termination at L1/L2 is taught from the vertebrae, which are measured.",
+    "No meninges in the catalog: dura, arachnoid and pia, the epidural and subarachnoid spaces, and the lumbar cistern are all narrated over bone. The layers a needle crosses are the exam question and they cannot be shown.",
+    "No spinal nerves, roots or cauda equina exist (the catalog's only nerves are the two optic nerves), so 'How the nerves get out' shows the foramen and describes what passes through it.",
+    "The coccyx has no entry, so the canal is followed only to the sacrum; the sacral hiatus is narrated."
+  ]
+}

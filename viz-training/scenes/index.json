@@ -1,8 +1,8 @@
 {
   "generated_by": "viz-training/tools/build-scene-index.mjs",
   "schema": 2,
-  "count": 2,
-  "ready": 2,
+  "count": 6,
+  "ready": 4,
   "scenes": [
     {
       "id": "gross__arm__biceps-triceps",
@@ -140,6 +140,735 @@
         "structures": 15,
         "parts": 11,
         "views": 3
+      }
+    },
+    {
+      "id": "gross__back-vertebral-column__intervertebral-disc",
+      "file": "viz-training/scenes/gross__back-vertebral-column__intervertebral-disc.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "ready",
+      "student_ready": true,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [
+        "PEEL_LAYER"
+      ],
+      "course": "Gross Anatomy",
+      "topic": "Back & Vertebral Column",
+      "structure": "Intervertebral disc",
+      "learning_goal": "Say what a disc joins, why it is thickest in the lumbar region, and why a prolapse goes backwards and to the side rather than forwards.",
+      "gaps": 4,
+      "match": {
+        "topics": [
+          "back",
+          "vertebral column",
+          "intervertebral disc",
+          "intervertebral joint",
+          "spine",
+          "disc prolapse",
+          "slipped disc",
+          "low back pain",
+          "back vertebral column"
+        ],
+        "terms": [
+          "intervertebral disc",
+          "intervertebral disk",
+          "disc",
+          "nucleus pulposus",
+          "annulus fibrosus",
+          "anulus fibrosus",
+          "symphysis",
+          "secondary cartilaginous joint",
+          "vertebral end plate",
+          "disc prolapse",
+          "disc herniation",
+          "slipped disc",
+          "posterolateral herniation",
+          "sciatica",
+          "l4 5 disc",
+          "l5 s1 disc",
+          "lumbosacral disc",
+          "intervertebral foramen",
+          "nerve root compression",
+          "posterior longitudinal ligament",
+          "anterior longitudinal ligament"
+        ]
+      },
+      "parts": [
+        {
+          "key": "disc_l45",
+          "label": "L4/5 disc — the exemplar",
+          "group": "Lumbar discs"
+        },
+        {
+          "key": "disc_l5s1",
+          "label": "L5/S1 disc — the lumbosacral disc",
+          "group": "Lumbar discs"
+        },
+        {
+          "key": "disc_t67",
+          "label": "T6/7 disc — thoracic",
+          "group": "Regional discs"
+        },
+        {
+          "key": "disc_c56",
+          "label": "C5/6 disc — cervical",
+          "group": "Regional discs"
+        }
+      ],
+      "terms": {
+        "intervertebral disc": "disc_l45",
+        "l4 5 disc": "disc_l45",
+        "lumbar disc": "disc_l45",
+        "nucleus pulposus": "disc_l45",
+        "annulus fibrosus": "disc_l45",
+        "l4 5 disc the exemplar": "disc_l45",
+        "intervertebral disk of fourth lumbar vertebra": "disc_l45",
+        "l5 s1 disc": "disc_l5s1",
+        "lumbosacral disc": "disc_l5s1",
+        "disc prolapse": "disc_l5s1",
+        "sciatica": "disc_l5s1",
+        "l5 s1 disc the lumbosacral disc": "disc_l5s1",
+        "intervertebral disk of fifth lumbar vertebra": "disc_l5s1",
+        "thoracic disc": "disc_t67",
+        "t6 7 disc": "disc_t67",
+        "t6 7 disc thoracic": "disc_t67",
+        "intervertebral disk of sixth thoracic vertebra": "disc_t67",
+        "cervical disc": "disc_c56",
+        "c5 6 disc": "disc_c56",
+        "cervical spondylosis": "disc_c56",
+        "c5 6 disc cervical": "disc_c56",
+        "intervertebral disk of fifth cervical vertebra": "disc_c56",
+        "l1 2 disc": "disc_l12",
+        "intervertebral disk of first lumbar vertebra": "disc_l12",
+        "l2 3 disc": "disc_l23",
+        "intervertebral disk of second lumbar vertebra": "disc_l23",
+        "l3 4 disc": "disc_l34",
+        "intervertebral disk of third lumbar vertebra": "disc_l34",
+        "first lumbar vertebra": "l1",
+        "second lumbar vertebra": "l2",
+        "third lumbar vertebra": "l3",
+        "fourth lumbar vertebra": "l4",
+        "l4 above the exemplar": "l4",
+        "fifth lumbar vertebra": "l5",
+        "l5 below the exemplar": "l5",
+        "sacrum": "sacrum",
+        "sacral promontory": "sacrum",
+        "thoracic vertebra": "t6",
+        "sixth thoracic vertebra": "t6",
+        "cervical vertebra": "c5",
+        "fifth cervical vertebra": "c5"
+      },
+      "counts": {
+        "structures": 15,
+        "parts": 4,
+        "views": 7
+      }
+    },
+    {
+      "id": "gross__back-vertebral-column__spinal-cord-in-vertebral-canal",
+      "file": "viz-training/scenes/gross__back-vertebral-column__spinal-cord-in-vertebral-canal.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Back & Vertebral Column",
+      "structure": "Spinal cord in vertebral canal",
+      "learning_goal": "Trace the vertebral canal from the foramen magnum to the sacral hiatus, say where the cord ends in an adult and in a newborn, and give the reason lumbar puncture is done at L3/4 or L4/5.",
+      "gaps": 6,
+      "match": {
+        "topics": [
+          "back",
+          "vertebral column",
+          "spinal cord",
+          "vertebral canal",
+          "spinal canal",
+          "lumbar puncture",
+          "meninges",
+          "spinal nerves",
+          "neuroanatomy of the back",
+          "back vertebral column",
+          "spinal cord in vertebral canal"
+        ],
+        "terms": [
+          "spinal cord",
+          "vertebral canal",
+          "spinal canal",
+          "vertebral foramen",
+          "central canal",
+          "conus medullaris",
+          "cauda equina",
+          "filum terminale",
+          "lumbar cistern",
+          "dural sac",
+          "lumbar puncture",
+          "spinal tap",
+          "intercristal line",
+          "tuffier s line",
+          "cervical enlargement",
+          "lumbosacral enlargement",
+          "intervertebral foramen",
+          "spinal nerve",
+          "nerve root",
+          "dura mater",
+          "arachnoid mater",
+          "pia mater",
+          "subarachnoid space",
+          "cerebrospinal fluid",
+          "epidural space",
+          "foramen magnum",
+          "sacral hiatus",
+          "caudal block"
+        ]
+      },
+      "parts": [
+        {
+          "key": "central_canal",
+          "label": "Central canal — the axis of the cord",
+          "group": "Cord"
+        },
+        {
+          "key": "c1",
+          "label": "C1 — atlas",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c2",
+          "label": "C2 — axis",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c3",
+          "label": "C3",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c4",
+          "label": "C4",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c5",
+          "label": "C5",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c6",
+          "label": "C6",
+          "group": "Canal walls"
+        },
+        {
+          "key": "c7",
+          "label": "C7",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t1",
+          "label": "T1",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t2",
+          "label": "T2",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t3",
+          "label": "T3",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t4",
+          "label": "T4",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t5",
+          "label": "T5",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t6",
+          "label": "T6",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t7",
+          "label": "T7",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t8",
+          "label": "T8",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t9",
+          "label": "T9",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t10",
+          "label": "T10",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t11",
+          "label": "T11",
+          "group": "Canal walls"
+        },
+        {
+          "key": "t12",
+          "label": "T12",
+          "group": "Canal walls"
+        },
+        {
+          "key": "l1",
+          "label": "L1 — the cord ends about here",
+          "group": "Canal walls"
+        },
+        {
+          "key": "l2",
+          "label": "L2",
+          "group": "Canal walls"
+        },
+        {
+          "key": "l3",
+          "label": "L3",
+          "group": "Lumbar levels"
+        },
+        {
+          "key": "l4",
+          "label": "L4 — level of the iliac crests",
+          "group": "Lumbar levels"
+        },
+        {
+          "key": "l5",
+          "label": "L5",
+          "group": "Lumbar levels"
+        },
+        {
+          "key": "disc_l34",
+          "label": "L3/4 disc — a puncture level",
+          "group": "Interspaces"
+        },
+        {
+          "key": "disc_l45",
+          "label": "L4/5 disc — a puncture level",
+          "group": "Interspaces"
+        }
+      ],
+      "terms": {
+        "central canal": "central_canal",
+        "spinal cord": "central_canal",
+        "cord": "central_canal",
+        "conus medullaris": "central_canal",
+        "central canal the axis of the cord": "central_canal",
+        "central canal of spinal cord": "central_canal",
+        "cervical vertebra": "c1",
+        "c1 atlas": "c1",
+        "atlas": "c1",
+        "c2 axis": "c2",
+        "axis": "c2",
+        "third cervical vertebra": "c3",
+        "fourth cervical vertebra": "c4",
+        "fifth cervical vertebra": "c5",
+        "sixth cervical vertebra": "c6",
+        "seventh cervical vertebra": "c7",
+        "thoracic vertebra": "t1",
+        "first thoracic vertebra": "t1",
+        "second thoracic vertebra": "t2",
+        "third thoracic vertebra": "t3",
+        "fourth thoracic vertebra": "t4",
+        "fifth thoracic vertebra": "t5",
+        "sixth thoracic vertebra": "t6",
+        "seventh thoracic vertebra": "t7",
+        "eighth thoracic vertebra": "t8",
+        "ninth thoracic vertebra": "t9",
+        "t10": "t10",
+        "tenth thoracic vertebra": "t10",
+        "t11": "t11",
+        "eleventh thoracic vertebra": "t11",
+        "t12": "t12",
+        "twelfth thoracic vertebra": "t12",
+        "first lumbar vertebra": "l1",
+        "cord termination": "l1",
+        "l1 the cord ends about here": "l1",
+        "second lumbar vertebra": "l2",
+        "lumbar puncture": "l3",
+        "third lumbar vertebra": "l3",
+        "intercristal line": "l4",
+        "tuffier s line": "l4",
+        "l4 level of the iliac crests": "l4",
+        "fourth lumbar vertebra": "l4",
+        "fifth lumbar vertebra": "l5",
+        "sacrum": "sacrum",
+        "sacral hiatus": "sacrum",
+        "dural sac": "sacrum",
+        "l3 4": "disc_l34",
+        "interspinous space": "disc_l34",
+        "l3 4 disc a puncture level": "disc_l34",
+        "intervertebral disk of third lumbar vertebra": "disc_l34",
+        "l4 5": "disc_l45",
+        "l4 5 disc a puncture level": "disc_l45",
+        "intervertebral disk of fourth lumbar vertebra": "disc_l45"
+      },
+      "counts": {
+        "structures": 28,
+        "parts": 27,
+        "views": 7
+      }
+    },
+    {
+      "id": "gross__back-vertebral-column__typical-vertebra",
+      "file": "viz-training/scenes/gross__back-vertebral-column__typical-vertebra.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "candidate",
+      "student_ready": false,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [],
+      "course": "Gross Anatomy",
+      "topic": "Back & Vertebral Column",
+      "structure": "Typical vertebra",
+      "learning_goal": "Recognise a typical vertebra from any angle, and say which part bears weight, which encloses the cord, and how a cervical, thoracic and lumbar vertebra differ.",
+      "gaps": 3,
+      "match": {
+        "topics": [
+          "back",
+          "vertebral column",
+          "typical vertebra",
+          "osteology of the back",
+          "spine",
+          "back vertebral column"
+        ],
+        "terms": [
+          "typical vertebra",
+          "atypical vertebra",
+          "vertebral body",
+          "vertebral arch",
+          "neural arch",
+          "pedicle",
+          "lamina",
+          "vertebral foramen",
+          "vertebral canal",
+          "spinous process",
+          "transverse process",
+          "superior articular process",
+          "inferior articular process",
+          "articular facet",
+          "intervertebral foramen",
+          "costal facet",
+          "foramen transversarium",
+          "bifid spine",
+          "lumbar vertebra",
+          "thoracic vertebra",
+          "cervical vertebra"
+        ]
+      },
+      "parts": [
+        {
+          "key": "l2",
+          "label": "L2 — the exemplar",
+          "group": "Typical vertebra"
+        },
+        {
+          "key": "t6",
+          "label": "T6 — thoracic",
+          "group": "Regional comparison"
+        },
+        {
+          "key": "c5",
+          "label": "C5 — cervical",
+          "group": "Regional comparison"
+        }
+      ],
+      "terms": {
+        "typical vertebra": "l2",
+        "lumbar vertebra": "l2",
+        "vertebral body": "l2",
+        "vertebral arch": "l2",
+        "spinous process": "l2",
+        "l2 the exemplar": "l2",
+        "second lumbar vertebra": "l2",
+        "thoracic vertebra": "t6",
+        "costal facet": "t6",
+        "demifacet": "t6",
+        "t6 thoracic": "t6",
+        "sixth thoracic vertebra": "t6",
+        "cervical vertebra": "c5",
+        "foramen transversarium": "c5",
+        "bifid spine": "c5",
+        "c5 cervical": "c5",
+        "fifth cervical vertebra": "c5",
+        "first lumbar vertebra": "l1",
+        "l1 above": "l1",
+        "third lumbar vertebra": "l3",
+        "l3 below": "l3",
+        "intervertebral disc": "d_l1",
+        "l1 l2 disc": "d_l1",
+        "disc above l2": "d_l1",
+        "intervertebral disk of first lumbar vertebra": "d_l1",
+        "l2 l3 disc": "d_l2",
+        "disc below l2": "d_l2",
+        "intervertebral disk of second lumbar vertebra": "d_l2"
+      },
+      "counts": {
+        "structures": 7,
+        "parts": 3,
+        "views": 5
+      }
+    },
+    {
+      "id": "gross__back-vertebral-column__vertebral-column",
+      "file": "viz-training/scenes/gross__back-vertebral-column__vertebral-column.json",
+      "schema": 2,
+      "mode": "3d_anatomy",
+      "provider": "bodyparts3d",
+      "status": "ready",
+      "student_ready": true,
+      "authored_by": "task",
+      "approved_by": null,
+      "degrades": [
+        "PEEL_LAYER"
+      ],
+      "course": "Gross Anatomy",
+      "topic": "Back & Vertebral Column",
+      "structure": "Vertebral column",
+      "learning_goal": "Name the five regions and their counts, point out the four curves on an intact column, and say which part of a vertebra carries load and which part encloses the cord.",
+      "gaps": 4,
+      "match": {
+        "topics": [
+          "back",
+          "vertebral column",
+          "spine",
+          "spinal column",
+          "axial skeleton",
+          "osteology of the back",
+          "back vertebral column"
+        ],
+        "terms": [
+          "vertebral column",
+          "spine",
+          "backbone",
+          "vertebra",
+          "vertebrae",
+          "cervical vertebrae",
+          "thoracic vertebrae",
+          "lumbar vertebrae",
+          "sacrum",
+          "coccyx",
+          "atlas",
+          "axis",
+          "vertebra prominens",
+          "primary curvature",
+          "secondary curvature",
+          "cervical lordosis",
+          "thoracic kyphosis",
+          "lumbar lordosis",
+          "scoliosis",
+          "vertebral canal",
+          "intervertebral disc",
+          "sacral promontory"
+        ]
+      },
+      "parts": [
+        {
+          "key": "c1",
+          "label": "C1 — atlas",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c2",
+          "label": "C2 — axis",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c3",
+          "label": "C3",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c4",
+          "label": "C4",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c5",
+          "label": "C5",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c6",
+          "label": "C6",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "c7",
+          "label": "C7",
+          "group": "Cervical vertebrae"
+        },
+        {
+          "key": "t1",
+          "label": "T1",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t2",
+          "label": "T2",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t3",
+          "label": "T3",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t4",
+          "label": "T4",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t5",
+          "label": "T5",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t6",
+          "label": "T6",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t7",
+          "label": "T7",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t8",
+          "label": "T8",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t9",
+          "label": "T9",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t10",
+          "label": "T10",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t11",
+          "label": "T11",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "t12",
+          "label": "T12",
+          "group": "Thoracic vertebrae"
+        },
+        {
+          "key": "l1",
+          "label": "L1",
+          "group": "Lumbar vertebrae"
+        },
+        {
+          "key": "l2",
+          "label": "L2",
+          "group": "Lumbar vertebrae"
+        },
+        {
+          "key": "l3",
+          "label": "L3",
+          "group": "Lumbar vertebrae"
+        },
+        {
+          "key": "l4",
+          "label": "L4",
+          "group": "Lumbar vertebrae"
+        },
+        {
+          "key": "l5",
+          "label": "L5",
+          "group": "Lumbar vertebrae"
+        },
+        {
+          "key": "sacrum",
+          "label": "Sacrum",
+          "group": "Sacrum"
+        }
+      ],
+      "terms": {
+        "atlas": "c1",
+        "first cervical vertebra": "c1",
+        "c1 atlas": "c1",
+        "axis": "c2",
+        "second cervical vertebra": "c2",
+        "dens": "c2",
+        "odontoid process": "c2",
+        "c2 axis": "c2",
+        "third cervical vertebra": "c3",
+        "fourth cervical vertebra": "c4",
+        "fifth cervical vertebra": "c5",
+        "sixth cervical vertebra": "c6",
+        "carotid tubercle": "c6",
+        "seventh cervical vertebra": "c7",
+        "vertebra prominens": "c7",
+        "first thoracic vertebra": "t1",
+        "thoracic vertebra": "t1",
+        "costal facet": "t1",
+        "second thoracic vertebra": "t2",
+        "third thoracic vertebra": "t3",
+        "fourth thoracic vertebra": "t4",
+        "fifth thoracic vertebra": "t5",
+        "sixth thoracic vertebra": "t6",
+        "seventh thoracic vertebra": "t7",
+        "eighth thoracic vertebra": "t8",
+        "ninth thoracic vertebra": "t9",
+        "t10": "t10",
+        "tenth thoracic vertebra": "t10",
+        "t11": "t11",
+        "eleventh thoracic vertebra": "t11",
+        "t12": "t12",
+        "twelfth thoracic vertebra": "t12",
+        "first lumbar vertebra": "l1",
+        "lumbar vertebra": "l1",
+        "second lumbar vertebra": "l2",
+        "third lumbar vertebra": "l3",
+        "fourth lumbar vertebra": "l4",
+        "fifth lumbar vertebra": "l5",
+        "sacrum": "sacrum",
+        "sacral": "sacrum",
+        "sacral promontory": "sacrum",
+        "sacroiliac joint": "sacrum",
+        "disc below l1": "d_l1",
+        "intervertebral disc": "d_l1",
+        "nucleus pulposus": "d_l1",
+        "annulus fibrosus": "d_l1",
+        "intervertebral disk of first lumbar vertebra": "d_l1",
+        "disc below l2": "d_l2",
+        "intervertebral disk of second lumbar vertebra": "d_l2",
+        "disc below l3": "d_l3",
+        "intervertebral disk of third lumbar vertebra": "d_l3",
+        "disc below l4": "d_l4",
+        "intervertebral disk of fourth lumbar vertebra": "d_l4",
+        "disc below l5": "d_l5",
+        "intervertebral disk of fifth lumbar vertebra": "d_l5"
+      },
+      "counts": {
+        "structures": 30,
+        "parts": 25,
+        "views": 6
       }
     },
     {
@@ -345,16 +1074,6 @@
   ],
   "wanted": [
     {
-      "name": "Vertebral column",
-      "course": "gross",
-      "topic": "Back & Vertebral Column",
-      "modes": [
-        "3d_anatomy",
-        "diagram"
-      ],
-      "term": "vertebral column"
-    },
-    {
       "name": "Typical vertebra",
       "course": "gross",
       "topic": "Back & Vertebral Column",
@@ -363,16 +1082,6 @@
         "diagram"
       ],
       "term": "typical vertebra"
-    },
-    {
-      "name": "Intervertebral disc",
-      "course": "gross",
-      "topic": "Back & Vertebral Column",
-      "modes": [
-        "3d_anatomy",
-        "diagram"
-      ],
-      "term": "intervertebral disc"
     },
     {
       "name": "Spinal cord in vertebral canal",
