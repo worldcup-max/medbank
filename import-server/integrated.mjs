@@ -136,6 +136,21 @@ export function readinessGate(approved, cfg){
     checks, analytics_ready_families, gate:R };
 }
 
+/* Deterministic answer-position rebalancer. The transformer biases the key toward option A; we FIX it after
+   generation (not by asking the model to "vary it"): seeded Fisher-Yates reorder of the options, key remapped to
+   the new position of the SAME correct option, and any parallel per-option array (rationales) reordered identically.
+   Seeded off the stem so it's reproducible per item but ~uniform across a batch. Reordering can't change meaning
+   (same option strings) or add ambiguity. */
+function _strSeed(s){ let h=2166136261>>>0; s=String(s||""); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function _mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+export function rebalanceOptions(tc, seedStr){
+  tc=tc||{}; const opts=(tc.options||[]).slice(); const ans=Number.isInteger(tc.answer)?tc.answer:0;
+  if(opts.length<2) return { options:opts, answer:ans, order:opts.map((_,i)=>i) };
+  const order=opts.map((_,i)=>i); const rnd=_mulberry32(_strSeed(seedStr||tc.stem||""));
+  for(let i=order.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); const t=order[i]; order[i]=order[j]; order[j]=t; }
+  return { options:order.map(i=>opts[i]), answer:order.indexOf(ans), order };
+}
+
 /* review lifecycle: candidate → ai_reviewed → pending → approved | rejected | needs_edit → (resubmit) pending */
 export function nextStatus(cur, action){
   const flow={ candidate:{ ai_review:"ai_reviewed", reject:"rejected" },

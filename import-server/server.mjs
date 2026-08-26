@@ -26,7 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2374,7 +2374,12 @@ async function a17SbaReview(q, p){
 
 function a17TransformPrompt(q, family){
   const opts=(q.options||[]).map((o,i)=>String.fromCharCode(65+i)+". "+o).join("\n");
-  return `You are a medical-education author. TRANSFORM the validated single-topic question below into a GENUINELY integrated question for the family "${family}". HIGH BAR: the two domains must JOINTLY determine the decision through an interaction, trade-off, causal relationship, or competing priority — the learner must actively CONNECT both domains to reason to the answer. Do NOT produce a question answerable by a simple modifier/lookup (e.g. "eGFR is X so drug Y is contraindicated"); that is NOT integration. If a smart student could answer correctly without integrating both domains, return {"ok":false}. Keep the validated clinical core; no artificial or implausible scenarios. Answer ONLY JSON, or {"ok":false} if a genuine high-bar integration cannot be made honestly.
+  return `You are a medical-education author. TRANSFORM the validated single-topic question below into a GENUINELY integrated question for the family "${family}". HIGH BAR: the two domains must JOINTLY determine the decision through an interaction, trade-off, causal relationship, or competing priority — the learner must actively CONNECT both domains to reason to the answer. Do NOT produce a question answerable by a simple modifier/lookup (e.g. "eGFR is X so drug Y is contraindicated"); that is NOT integration. If a smart student could answer correctly without integrating both domains, return {"ok":false}. Keep the validated clinical core; no artificial or implausible scenarios.
+
+BUILD THE REASONING CHAIN explicitly, do NOT merely staple two vignettes together:
+  Domain A finding → mechanism/decision it forces → Domain B implication → final answer.
+SELF-GATE BEFORE EMITTING (mandatory): ask "if the Domain B information were removed, would the correct answer or management decision materially change?" If the answer is NO, the integration is cosmetic — return {"ok":false}. Do not try to satisfy a downstream reviewer; only emit candidates where the cross-domain dependency is real.
+Answer ONLY JSON, or {"ok":false} if a genuine high-bar integration cannot be made honestly.
 
 SOURCE (topic: ${q._topic||""}, skill: ${q.skill||""}):
 ${q.stem||""}
@@ -2386,17 +2391,22 @@ Return: { "ok":true,
   "primary_topic":"<owning domain>", "integrated_topics":["<second domain>"],
   "integration_type":"mechanistic|diagnostic|management|competing|longitudinal",
   "integration_family":"${family}",
-  "rationale":"<one sentence>", "dependency":"<why the second domain is NECESSARY to the answer>" }`;
+  "rationale":"<one sentence>", "dependency":"<why the second domain is NECESSARY to the answer>",
+  "dependency_removal_test":"<what specifically changes in the answer/decision if the Domain B information is removed>" }`;
 }
 async function a17Transform(q, family){
   try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17TransformPrompt(q, family), parts:[], images:[], max_tokens:900, temperature:0.4, json:true });
     const t=(gen&&gen.text)||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return null;
     let o=null; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){ return null; }
     if(!o||!o.ok||!o.stem) return null;
+    // FIX answer-position bias deterministically: reorder options + remap key + reorder rationales in lockstep.
+    const ans0=(Number.isInteger(o.answer)?o.answer:0); const rat0=o.rationales||[];
+    const bal=rebalanceOptions({ options:o.options||[], answer:ans0, stem:o.stem }, o.stem);
+    const rationales=bal.order.map(i=>rat0[i]!==undefined?rat0[i]:"");
     return { primary_topic:o.primary_topic||null, integrated_topics:o.integrated_topics||[], integration_type:o.integration_type||null,
       integration_family:o.integration_family||family, rationale:o.rationale||null, dependency:o.dependency||null,
       source_question_ids:[q.id||q._qh],
-      transformed_content:{ stem:o.stem, options:o.options||[], answer:(Number.isInteger(o.answer)?o.answer:0), rationales:o.rationales||[] } };
+      transformed_content:{ stem:o.stem, options:bal.options, answer:bal.answer, rationales } };
   }catch(e){ return null; }
 }
 app.post("/admin/integrated/transform", async (req,res)=>{

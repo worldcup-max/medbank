@@ -1,6 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
 import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
-         clinicalGate, sbaGate, qaVerdict } from '../import-server/integrated.mjs';
+         clinicalGate, sbaGate, qaVerdict, rebalanceOptions } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -170,6 +170,21 @@ const BND=[
   { n:'answer-preference',     clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]}, sba:sbaOK, iq:'strong', expect:'major' }
 ];
 BND.forEach(b=>{ const v=qaVerdict({dependency:b.dep||depPass,integration_quality:b.iq,clinical:b.clinical,sba:b.sba}); ok(v.severity===b.expect, 'BND '+b.n+' → '+b.expect+' (got '+v.severity+')'); });
+
+// --- answer-position rebalancer (generator fix) ---
+{ const tc={options:['CORRECT','b','c','d'],answer:0,rationales:['rC','rb','rc','rd']}; const r=rebalanceOptions(tc,'seed-x');
+  ok(r.options[r.answer]==='CORRECT', 'RB1 key still points to the same correct option after reorder');
+  ok(r.options.slice().sort().join('|')===['CORRECT','b','c','d'].sort().join('|'), 'RB2 option set preserved (no content change)');
+  ok(r.order.map(i=>['rC','rb','rc','rd'][i])[r.answer]==='rC', 'RB3 parallel rationales reorder in lockstep with the key'); }
+{ const r=rebalanceOptions({options:['x'],answer:0},'s'); ok(r.answer===0 && r.options.length===1, 'RB4 <2 options → no-op'); }
+{ const a=rebalanceOptions({options:['w','x','y','z'],answer:2},'same'); const b=rebalanceOptions({options:['w','x','y','z'],answer:2},'same');
+  ok(JSON.stringify(a.order)===JSON.stringify(b.order), 'RB5 deterministic for a given seed'); }
+// DISTRIBUTION REGRESSION: across many items (key always A pre-shuffle), post-shuffle positions must be ~uniform,
+// not skewed to A. Fails if any position <15% or >35% over a large batch (the 69%-A stress-test finding).
+{ const N=400, dist=[0,0,0,0];
+  for(let i=0;i<N;i++){ const r=rebalanceOptions({options:['A','B','C','D'],answer:0}, 'item-'+i+'-stem'); dist[r.answer]++; }
+  const share=dist.map(d=>d/N); const ok4=share.every(s=>s>=0.15 && s<=0.35);
+  ok(ok4, 'RB6 anti-skew: post-rebalance answer positions ~uniform over 400 ('+share.map(s=>Math.round(s*100)).join('/')+')'); }
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);
