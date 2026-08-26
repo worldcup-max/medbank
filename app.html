@@ -4808,19 +4808,18 @@ function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidenc
 }
 async function iwReview(id, action){ var qa=null;
   if(action==='approve'){ qa={}; ['dependency','coherence','educational','discrimination','targetClarity','difficulty','noArtificialComplexity'].forEach(function(k){ var el=document.getElementById('qa_'+id+'_'+k); qa[k]=el?parseInt(el.value,10)||0:0; }); }
-  if(action==='reject' && !confirm('Reject this candidate?')) return;
   try{ var r=await admApi('/admin/integrated/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id, action:action, qa:qa})});
     if(r.ok){ mbToast(r.data.review_status+(r.data.reason?(' — '+r.data.reason):'')); iwReadiness(); iwFetchPending(); }
-    else alert('Failed: '+((r.data&&r.data.error)||'?')); }catch(e){ alert('Failed: '+(e.message||e)); } }
+    else mbToast('Failed: '+((r.data&&r.data.error)||'?')); }catch(e){ mbToast('Failed: '+(e.message||e)); } }
 async function iwTransform(btn){ var q=(document.getElementById('iwQ')||{}).value, fam=(document.getElementById('iwFam')||{}).value;
-  if(!q||!q.trim()){ alert('Enter a source question_id (qh).'); return; }
+  if(!q||!q.trim()){ mbToast('Enter a source question_id (qh).'); return; }
   if(btn){btn.disabled=true;btn.textContent='Transforming…';}
   try{ var r=await admApi('/admin/integrated/transform',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question_id:q.trim(), family:fam})});
     if(btn){btn.disabled=false;btn.textContent='Transform →';}
     var m=document.getElementById('iwSeedMsg'); if(m) m.textContent = r.ok ? ('Result: '+r.data.review_status+(r.data.reason?(' — '+r.data.reason):(' · '+(r.data.family||'')))) : ('Failed: '+((r.data&&r.data.error)||'?'));
     iwFetchPending(); iwReadiness();
-  }catch(e){ if(btn){btn.disabled=false;btn.textContent='Transform →';} alert('Failed: '+(e.message||e)); } }
-async function iwMine(btn){ if(!confirm('Mine a batch of 10 (spends model budget)?')) return; if(btn){btn.disabled=true;btn.textContent='Mining…';}
+  }catch(e){ if(btn){btn.disabled=false;btn.textContent='Transform →';} mbToast('Failed: '+(e.message||e)); } }
+async function iwMine(btn){ if(btn){btn.disabled=true;btn.textContent='Mining…';}
   try{ var r=await admApi('/admin/integrated/mine',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({limit:10})});
     if(btn){btn.disabled=false;btn.textContent='Mine a batch (10)';}
     var m=document.getElementById('iwSeedMsg'); if(m) m.textContent = r.ok ? ('Mined '+r.data.scanned+' → '+r.data.ai_reviewed+' candidate(s), '+r.data.rejected+' rejected') : 'Mine failed';
