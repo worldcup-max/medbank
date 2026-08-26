@@ -4,13 +4,16 @@ let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  
 (async()=>{
 
 // --- dependency test ---
-ok(dependencyGate({removeA_changes:true,removeB_changes:true,bothRequired:true,secondaryIsRealDomain:true}).pass, 'D1 all-true → genuine integration');
-// febrile pneumonia: removing "infection" doesn't change it (it IS the disease) + secondary not a real domain
-ok(!dependencyGate({removeA_changes:true,removeB_changes:false,bothRequired:false,secondaryIsRealDomain:false}).pass, 'D2 febrile-pneumonia style → NOT integrated');
-// secondary is a symptom/comorbidity only
-ok(!dependencyGate({removeA_changes:true,removeB_changes:true,bothRequired:true,secondaryIsRealDomain:false}).pass, 'D3 secondary is symptom/comorbidity → rejected');
-{ const r=dependencyGate({removeA_changes:true,removeB_changes:false,bothRequired:true,secondaryIsRealDomain:true});
-  ok(!r.pass && r.reasons.some(x=>/domain B not required/.test(x)), 'D4 one domain removable → rejected with reason'); }
+const GEN5={removeA_changes:true,removeB_changes:true,inferential:true,moreThanLookup:true,createsDecision:true};
+ok(dependencyGate(GEN5).pass, 'D1 all 5 checks true → genuine integration');
+// diabetes+CKD dose-adjust: materially changes answer (removeB) but is a LOOKUP, not inferential cross-domain
+ok(!dependencyGate({removeA_changes:true,removeB_changes:true,inferential:false,moreThanLookup:false,createsDecision:false}).pass, 'D2 diabetes+CKD dose-lookup → REJECTED (high bar)');
+{ const r=dependencyGate({removeA_changes:true,removeB_changes:true,inferential:true,moreThanLookup:false,createsDecision:true});
+  ok(!r.pass && r.reasons.some(x=>/lookup/.test(x)), 'D3 more-than-lookup fails → rejected with lookup reason'); }
+{ const r=dependencyGate(Object.assign({},GEN5,{removeA_changes:false}));
+  ok(!r.pass && r.reasons.some(x=>/primary domain/.test(x)), 'D4 primary domain not required → rejected'); }
+{ const r=dependencyGate(Object.assign({},GEN5,{createsDecision:false}));
+  ok(!r.pass && r.reasons.some(x=>/create the clinical decision/.test(x)), 'D5 interaction does not create the decision → rejected'); }
 
 // --- QA score ---
 { const full={dependency:3,coherence:3,educational:3,discrimination:3,targetClarity:2,difficulty:2,noArtificialComplexity:3};
@@ -48,8 +51,8 @@ ok(nextStatus('candidate','approve')==='candidate', 'L3 illegal transition is a 
 
 // --- pipeline orchestration (AI seams mocked, deterministic) ---
 const goodProposal={ primary_topic:'Cardiology', integrated_topics:['Nephrology'], integration_type:'management', integration_family:'cardio_renal', rationale:'renal fn changes drug choice', dependency:'diuresis worsens renal fn', source_question_ids:['Q1'] };
-const genuineVerdict={removeA_changes:true,removeB_changes:true,bothRequired:true,secondaryIsRealDomain:true};
-const fakeVerdict={removeA_changes:true,removeB_changes:false,bothRequired:false,secondaryIsRealDomain:false};
+const genuineVerdict={removeA_changes:true,removeB_changes:true,inferential:true,moreThanLookup:true,createsDecision:true};
+const fakeVerdict={removeA_changes:true,removeB_changes:true,inferential:false,moreThanLookup:false,createsDecision:false};
 
 // P1: genuine → ai_reviewed (NOT approved), provenance preserved, canonical untouched
 { const q={ id:'Q1', stem:'HF patient...', options:['a','b','c','d'], answer:0, target_id:'T-CARD' };
@@ -61,7 +64,7 @@ const fakeVerdict={removeA_changes:true,removeB_changes:false,bothRequired:false
 // P2: adversarial disproves (fake) → rejected with reason
 { const q={ id:'Q2', stem:'febrile pneumonia', target_id:'T-RESP' };
   const r=await runCandidate(q, { mine:async()=>({primary_topic:'Respiratory',integrated_topics:['Infectious'],integration_family:'resp_infect',source_question_ids:['Q2']}), adversarial:async()=>fakeVerdict });
-  ok(r.review_status==='rejected' && /required|symptom/.test(r.reason), 'P2 adversarial disproves → rejected (infect-noise killed)'); }
+  ok(r.review_status==='rejected' && /lookup|inferential|create/.test(r.reason), 'P2 adversarial disproves → rejected (shallow integration killed)'); }
 // P3: no candidate → rejected
 { const r=await runCandidate({id:'Q3'}, { mine:async()=>null, adversarial:async()=>genuineVerdict });
   ok(r.review_status==='rejected' && r.reason==='no candidate', 'P3 no candidate → rejected'); }

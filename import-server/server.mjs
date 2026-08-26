@@ -2282,13 +2282,14 @@ function a17AdvPrompt(q, p){
 QUESTION: ${q.stem||""}
 Claimed integration: ${p.rationale||""} — dependency: ${p.dependency||""}
 
-Apply the dependency test and answer:
-{ "removeA_changes": <does removing the PRIMARY domain change the answer?>,
-  "removeB_changes": <does removing the SECONDARY domain change the answer?>,
-  "bothRequired": <are BOTH domains jointly required to solve it?>,
-  "secondaryIsRealDomain": <is the secondary a real reasoning domain, NOT a symptom/comorbidity/vocabulary?>,
+Apply the HIGH-bar dependency test and answer ONLY JSON:
+{ "removeA_changes": <does removing the PRIMARY domain MATERIALLY change the reasoning?>,
+  "removeB_changes": <does removing the SECONDARY domain MATERIALLY change the reasoning?>,
+  "inferential": <must the learner actively CONNECT the two domains (not just recall two parallel facts)?>,
+  "moreThanLookup": <is it MORE than a simple contraindication/dosing/screening/risk-factor lookup applied to the primary domain?>,
+  "createsDecision": <does the INTERACTION between the domains create the clinical decision?>,
   "why": "<one sentence>" }
-Default to false when unsure — a false positive pollutes the bank.`;
+NORTH STAR: if a smart student could answer correctly WITHOUT actually integrating both domains (e.g. "because eGFR is X, drug Y is contraindicated"), set moreThanLookup=false. Default to false when unsure — a false positive pollutes the bank.`;
 }
 async function a17Adversarial(q, p){
   try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17AdvPrompt(q,p), parts:[], images:[], max_tokens:300, temperature:0, json:true });
@@ -2299,7 +2300,7 @@ async function a17Adversarial(q, p){
 
 function a17TransformPrompt(q, family){
   const opts=(q.options||[]).map((o,i)=>String.fromCharCode(65+i)+". "+o).join("\n");
-  return `You are a medical-education author. TRANSFORM the validated single-topic question below into a GENUINELY integrated question for the family "${family}" — one where solving it REQUIRES reasoning across BOTH domains (removing either domain changes the answer). Keep the validated clinical core; add the second domain as a real constraint, not decoration. Do NOT invent an artificial or implausible scenario. Answer ONLY JSON, or {"ok":false} if a genuine integration cannot be made honestly.
+  return `You are a medical-education author. TRANSFORM the validated single-topic question below into a GENUINELY integrated question for the family "${family}". HIGH BAR: the two domains must JOINTLY determine the decision through an interaction, trade-off, causal relationship, or competing priority — the learner must actively CONNECT both domains to reason to the answer. Do NOT produce a question answerable by a simple modifier/lookup (e.g. "eGFR is X so drug Y is contraindicated"); that is NOT integration. If a smart student could answer correctly without integrating both domains, return {"ok":false}. Keep the validated clinical core; no artificial or implausible scenarios. Answer ONLY JSON, or {"ok":false} if a genuine high-bar integration cannot be made honestly.
 
 SOURCE (topic: ${q._topic||""}, skill: ${q.skill||""}):
 ${q.stem||""}
@@ -2387,16 +2388,16 @@ app.post("/admin/integrated/minedebug", async (req,res)=>{
         return { integrable:(o?o.integrable:null), family:(o?o.integration_family:null), primary:(o?o.primary_topic:null), integ:(o?o.integrated_topics:null), dependency:(o?o.dependency:null), raw:(o?null:t.slice(0,300)) }; }catch(e){ return { error:e.message||String(e) }; } };
       // also prove the TRANSFORMER is productive: take a plain single-domain source + a family, transform, then
       // run the REAL adversarial on the TRANSFORMED content and the dependency gate.
-      const SRC={ _topic:"Endocrinology", skill:"management", answer:0,
-        stem:"A 58-year-old with type 2 diabetes and HbA1c 9.2% needs better glycaemic control. Which oral agent is most appropriate?",
-        options:["Metformin","Glibenclamide","Pioglitazone","Acarbose"], id:"__selftest_src__", _qh:"__selftest_src__" };
+      const SRC={ _topic:"Cardiology", skill:"management", answer:0,
+        stem:"A 70-year-old with acute decompensated heart failure is on IV furosemide. Over 48h his creatinine rises and urine output falls. What is the most appropriate management step?",
+        options:["Reassess volume status and adjust diuresis for cardiorenal physiology","Double the furosemide dose immediately","Add an NSAID for symptom control","Stop all cardiac medications"], id:"__selftest_src__", _qh:"__selftest_src__" };
       let transformResult=null;
-      try{ const rec=await runCandidate(SRC, { mine:(q)=>a17Transform(q, "endocrine_renal"), adversarial:a17Adversarial });
+      try{ const rec=await runCandidate(SRC, { mine:(q)=>a17Transform(q, "cardio_renal"), adversarial:a17Adversarial });
         transformResult={ review_status:rec.review_status, reason:rec.reason||null, family:rec.integration_family||null,
           transformed_stem:(rec.transformed_content&&rec.transformed_content.stem||"").slice(0,180),
           dependency:rec.integration_dependency||null, dependency_evidence:rec.dependency_evidence||null,
           source_question_ids:rec.source_question_ids||null }; }catch(e){ transformResult={ error:e.message||String(e) }; }
-      return res.json({ ok:true, model:EXTRAS_MODEL, positive_expect_true:await run(POS), negative_expect_false:await run(NEG), transform_expect_ai_reviewed:transformResult });
+      return res.json({ ok:true, model:EXTRAS_MODEL, positive_expect_true:await run(POS), negative_expect_false:await run(NEG), transform_cardio_renal:transformResult });
     }
     const limit=Math.min(5, Number((req.body&&req.body.limit)||3));
     const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);

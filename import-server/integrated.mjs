@@ -9,13 +9,23 @@ export const TIERS = { mechanistic:1, diagnostic:2, management:3, competing:4, l
    domain (not a symptom/comorbidity/vocabulary of the primary). Kills the `infect`/fever false positives. */
 export function dependencyGate(v){
   v=v||{};
-  const pass = !!(v.removeA_changes && v.removeB_changes && v.bothRequired && v.secondaryIsRealDomain);
+  // HIGH bar (Frank): a second domain qualifies only if it MATERIALLY changes the reasoning AND the answer is not
+  // reachable by a simple modifier/lookup. North star: if a smart student could answer WITHOUT integrating, reject.
+  const checks = {
+    removeA_changes: !!v.removeA_changes,   // remove primary domain → reasoning materially changes
+    removeB_changes: !!v.removeB_changes,   // remove secondary domain → reasoning materially changes
+    inferential:     !!v.inferential,       // learner must CONNECT the domains (not two parallel facts)
+    moreThanLookup:  !!v.moreThanLookup,     // NOT a simple contraindication/dosing/screening/risk-factor lookup
+    createsDecision: !!v.createsDecision     // the interaction CREATES the clinical decision
+  };
+  const pass = Object.values(checks).every(Boolean);
   const reasons=[];
-  if(!v.removeA_changes)        reasons.push("domain A not required (answer unchanged without it)");
-  if(!v.removeB_changes)        reasons.push("domain B not required (answer unchanged without it)");
-  if(!v.bothRequired)           reasons.push("both domains not jointly required");
-  if(!v.secondaryIsRealDomain)  reasons.push("secondary is a symptom/comorbidity, not a reasoning domain");
-  return { pass, reasons };
+  if(!checks.removeA_changes) reasons.push("removing the primary domain does not materially change the reasoning");
+  if(!checks.removeB_changes) reasons.push("removing the secondary domain does not materially change the reasoning");
+  if(!checks.inferential)     reasons.push("domains are not inferentially connected (no cross-domain reasoning)");
+  if(!checks.moreThanLookup)  reasons.push("answer reachable by a simple modifier/lookup (dose/contraindication/screening)");
+  if(!checks.createsDecision) reasons.push("the domain interaction does not create the clinical decision");
+  return { pass, checks, reasons };
 }
 
 /* QA score — 7 criteria; approve iff total ≥ 15/19 AND dependency ≥ 3 (dependency is mandatory). */
