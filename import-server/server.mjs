@@ -2311,7 +2311,7 @@ app.post("/admin/integrated/mine", async (req,res)=>{
     const batch=pool.slice(0, limit); let ai_reviewed=0, rejected=0;
     for(const q of batch){
       const rec=await runCandidate(q, { mine:a17Mine, adversarial:a17Adversarial });
-      await admin.from("integrated_items").insert({ question_id:rec.question_id, primary_topic:rec.primary_topic||null,
+      await admin.from("integrated_items").insert({ question_id:rec.question_id||qhOf(q), primary_topic:rec.primary_topic||null,
         integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||null,
         integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
         transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[qhOf(q)],
@@ -2319,6 +2319,27 @@ app.post("/admin/integrated/mine", async (req,res)=>{
       if(rec.review_status==="ai_reviewed") ai_reviewed++; else rejected++;
     }
     res.json({ ok:true, scanned:batch.length, ai_reviewed, rejected, remaining_unprocessed: Math.max(0, pool.length-batch.length) });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+app.post("/admin/integrated/minedebug", async (req,res)=>{
+  /* DIAGNOSTIC (no insert): run ONLY the miner over a tiny batch and return the raw model output + parse + error,
+     so we can see whether the miner is erroring vs legitimately returning integrable:false. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const limit=Math.min(5, Number((req.body&&req.body.limit)||3));
+    const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);
+    const pool=[]; (tr.data||[]).forEach(t=>{ ((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(q&&q.stem) pool.push(Object.assign({}, q, { id:qhOf(q), _qh:qhOf(q), _topic:t.title||t.name||"" })); }); });
+    const out=[];
+    for(const q of pool.slice(0, limit)){
+      let raw=null, err=null, parsed=null;
+      try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17MinePrompt(q), parts:[], images:[], max_tokens:500, temperature:0.3, json:true });
+        raw=((gen&&gen.text)||"").slice(0,500);
+        const a=raw.indexOf("{"), b=raw.lastIndexOf("}");
+        if(a>=0&&b>=0){ try{ parsed=JSON.parse(raw.slice(a,b+1)); }catch(e){ err="parse_error: "+e.message; } } else { err="no_json_in_output"; }
+      }catch(e){ err="generate_error: "+(e.message||e); }
+      out.push({ qh:q.id, topic:q._topic, skill:q.skill||"", stem:(q.stem||"").slice(0,90), integrable:(parsed?parsed.integrable:null), family:(parsed?parsed.integration_family:null), error:err, raw:(err?raw:null) });
+    }
+    res.json({ ok:true, model:EXTRAS_MODEL, pool_size:pool.length, details:out });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.get("/admin/integrated/pending", async (req,res)=>{

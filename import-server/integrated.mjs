@@ -66,7 +66,7 @@ export function nextStatus(cur, action){
 export async function runCandidate(question, deps){
   const srcId = question.id || question._qh || null;
   const proposal = await deps.mine(question);                          // AI proposes a candidate integration (or null)
-  if(!proposal) return { review_status:"rejected", reason:"no candidate", source_question_ids:[srcId] };
+  if(!proposal) return { question_id:srcId, review_status:"rejected", reason:"no candidate", mined:false, source_question_ids:[srcId] };
   const verdict = await deps.adversarial(question, proposal);          // AI actively tries to DISPROVE integration
   const dep = dependencyGate(verdict||{});
   const rec = {
