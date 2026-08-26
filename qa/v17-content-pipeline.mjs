@@ -126,6 +126,13 @@ const sbaOK={pass:true,single_best:true,distractor_flaw:'none',leakage:false};
   ok(v.severity==='minor' && v.action==='minor_edit', 'V5 adequate integration → minor edit'); }
 { const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'correct',leakage:false}});
   ok(v.severity==='hard', 'V6 a distractor is actually correct → hard'); }
+// V7 (live-calibration #6 fix): reviewer prefers another VALID answer (valid:true, matches_key:false) is a
+// single-best DISPUTE → major, NOT a hard clinical fail.
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]},sba:{single_best:false,distractor_flaw:'strong',leakage:false}});
+  ok(v.severity==='major' && v.review_status==='ai_reviewed', 'V7 valid key-dispute (two defensible answers) → major, not hard'); }
+// V8: a genuine clinical error still overrides everything → hard (guards against the fix over-softening)
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['impossible mechanism']},sba:{single_best:true,distractor_flaw:'none',leakage:true}});
+  ok(v.severity==='hard', 'V8 clinical error → hard (overrides)'); }
 
 // --- runCandidate with the specialist reviewers ---
 // clinical hard-fail must reject even when dependency passes (the SIADH/ODS #3 lesson, at pipeline level)
@@ -150,7 +157,7 @@ const CAL=[
   { n:'#3 neuro_endocrine',  sig:{dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['2 mmol/L rise cannot cause ODS']},sba:{single_best:true,distractor_flaw:'none',leakage:true}}, expect:'hard' },
   { n:'#4 hepatic_pharm',    sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'weak',leakage:false}}, expect:'minor' },
   { n:'#5 resp_cardiac',     sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:sbaOK}, expect:'none' },
-  { n:'#6 gi_hepatic',       sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}}, expect:'major' }
+  { n:'#6 gi_hepatic',       sig:{dependency:depPass,integration_quality:'strong',clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]},sba:{single_best:false,distractor_flaw:'strong',leakage:false}}, expect:'major' }
 ];
 CAL.forEach(c=>{ const v=qaVerdict(c.sig); ok(v.severity===c.expect, 'CAL '+c.n+' → '+c.expect+' (got '+v.severity+')'); });
 // the machine-vs-human headline: 6/6 old-gate passes, but only 1/6 is production-clean under the new gate

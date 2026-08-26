@@ -69,15 +69,19 @@ export function qaVerdict(inp){
 
   // 1 cross-domain dependency (hard: not eligible for Integrated if it isn't genuinely integrated)
   dep.pass ? pass("cross_domain_dependency") : fail("cross_domain_dependency","hard",(dep.reasons||[]).join("; ")||"not integrated");
-  // 2 clinical validity (hard: false premise/physiology/timeline OR reconstruction ≠ key)
+  // 2 clinical validity — HARD only on an ACTUAL clinical error (wrong physiology/timeline/dose/impossible premise).
+  //   A key the reviewer merely disagrees with while reporting no error (valid:true, matches_key:false) is NOT a
+  //   clinical error — it's a single-best-answer dispute, handled in criterion 3. (Live-calibration fix: #6.)
   if(!clin.valid) fail("clinical_validity","hard",(clin.errors||[]).join("; ")||"clinically invalid");
-  else if(!clin.matches_key) fail("clinical_validity","hard","independent reconstruction does not support the keyed answer");
   else pass("clinical_validity");
-  // 3 single-best-answer (hard: two equivalent answers)
-  sba.single_best ? pass("single_best_answer") : fail("single_best_answer","hard","more than one defensible best answer");
-  // 4 distractor validity (correct→hard, strong→major, weak→minor)
-  if(sba.distractor_flaw==="correct") fail("distractor_validity","hard","a distractor is actually correct");
-  else if(sba.distractor_flaw==="strong") fail("distractor_validity","major","a distractor is a strong competing answer");
+  // 3 single-best-answer — a distractor actually correct → HARD (two correct answers). A defensible competitor, a
+  //   not-single-best verdict, OR the clinical reviewer independently preferring another VALID answer → MAJOR.
+  const answerDispute = clin.valid && clin.matches_key===false;      // R2 prefers a different, still-valid answer
+  if(sba.distractor_flaw==="correct") fail("single_best_answer","hard","a distractor is actually correct (two correct answers)");
+  else if(sba.single_best===false || answerDispute) fail("single_best_answer","major","more than one defensible answer; the keyed answer's priority is not established");
+  else pass("single_best_answer");
+  // 4 distractor validity (strong→major, weak→minor; 'correct' already hard-failed in criterion 3)
+  if(sba.distractor_flaw==="strong") fail("distractor_validity","major","a distractor is a strong competing answer");
   else if(sba.distractor_flaw==="weak") fail("distractor_validity","minor","a distractor is mildly defensible");
   else pass("distractor_validity");
   // 5 integration quality (artificial→major, adequate→minor, strong→pass)
@@ -87,7 +91,7 @@ export function qaVerdict(inp){
   // 6 stem sufficiency (major)
   clin.stem_sufficient ? pass("stem_sufficiency") : fail("stem_sufficiency","major","stem needs an unstated assumption");
   // 7 no answer leakage (hard if it forces an UNjustified key; else major)
-  if(sba.leakage) fail("answer_leakage", (!clin.matches_key?"hard":"major"), "wording/imaging/sequence announces the answer");
+  if(sba.leakage) fail("answer_leakage", (!clin.valid?"hard":"major"), "wording/imaging/sequence announces the answer");
   else pass("answer_leakage");
 
   let sev="none";

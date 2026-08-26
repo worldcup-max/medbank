@@ -2311,9 +2311,10 @@ OPTIONS:
 ${opts}
 KEYED ANSWER: ${L[q.answer]||q.answer}
 
-STEP 1 — Ignore the keyed answer. From the case facts alone, reason: what do the numbers, timeline, physiology and findings actually support? Watch for: impossible/contradictory timelines, values that don't match the claimed diagnosis, physiology or pharmacology that is wrong, dangerous or contraindicated management, and downstream findings (e.g. an MRI) that contradict the preceding data.
+STEP 1 — Ignore the keyed answer. From the case facts alone, reason: what do the numbers, timeline, physiology and findings actually support? Watch for: impossible/contradictory timelines, values that don't match the claimed diagnosis, physiology or pharmacology that is wrong, dangerous or contraindicated management.
+STEP 1b — MECHANISM CHECK (critical): if a diagnosis REQUIRES a precipitating process — an overcorrection, an overdose, a specific rate, a specific timing, a threshold being crossed — verify the QUANTITATIVE data in the stem actually demonstrates that process. A classic, "pathognomonic", or textbook-looking finding (e.g. an MRI appearance) does NOT override contradictory numbers. Example: osmotic demyelination requires RAPID sodium correction (typically >8–10 mmol/L/24h); a rise of only 2 mmol/L cannot cause it, no matter what an MRI is said to show. If the stem's numbers do not support the mechanism the keyed diagnosis needs, then valid=false and record the specific numeric inconsistency in errors.
 STEP 2 — State the answer YOUR reconstruction lands on.
-STEP 3 — Compare to the keyed answer.
+STEP 3 — Compare to the keyed answer. Do NOT reverse-engineer: if a downstream finding seems to point at an answer the preceding data cannot justify, that is a red flag, not a confirmation.
 
 Answer ONLY JSON:
 { "reconstructed": "<the option letter your independent reasoning supports>",
@@ -2342,7 +2343,8 @@ KEYED ANSWER: ${L[q.answer]||q.answer}
 
 Judge, given ONLY the information supplied in the stem:
 - Is the keyed answer clearly superior to every other option, or is another option also defensible?
-- Grade the strongest distractor: "none" (all clearly inferior), "weak" (one is mildly defensible — needs tightening), "strong" (one is a serious competing answer that could be argued equal), "correct" (a distractor is actually right → the item has more than one correct answer).
+- CONTRA-KEY CHECK: actively look for any finding in the stem that ARGUES AGAINST the keyed answer or that would make a competing option seriously defensible — including NEGATIVE findings and discriminating clues (e.g. "no retinopathy" undercuts diabetic nephropathy; a competing precipitant that is equally treatable; a normal value that the keyed diagnosis should have perturbed). If such a clue makes another option a serious competitor, grade "strong", not "weak".
+- Grade the strongest distractor: "none" (all clearly inferior), "weak" (one is only mildly defensible — a small tightening), "strong" (one is a serious competing answer whose priority over the key is not established), "correct" (a distractor is actually right → more than one correct answer).
 - Leakage: does the wording, an imaging description, an unusually explicit clue, or the temporal sequence announce the answer independently of the intended reasoning?
 
 Answer ONLY JSON:
