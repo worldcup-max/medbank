@@ -1,7 +1,7 @@
 # MedBank VisualScene — schema **v2** (provider-agnostic)
 
 Supersedes `model3d-production-spec.md` (kept for the authoring rationale) and `model3d-scene-spec.md` (v1).
-Every scene authored from **2026-08-27** onward must be v2. The two existing scenes are migrated.
+Every scene is v2. Both existing scenes are migrated; there is no v1 left to author against.
 
 ## The one idea
 
@@ -54,8 +54,8 @@ is simply false.
   "learning_goal": "Know the heads of each muscle, what each crosses, and which movement it drives.",
 
   "status": "ready",                 // ready | candidate | planned | blocked  — only `ready` reaches a student
-  "provenance": { "author": "task", "authored_at": "2026-08-27",
-                  "approved_by": "frank", "approved_at": "2026-08-27" },
+  "provenance": { "author": "task", "authored_at": "<YYYY-MM-DD>",
+                  "approved_by": "frank", "approved_at": "<YYYY-MM-DD>" },
 
   "provider": { "primary": "bodyparts3d", "fallbacks": [] },
 
