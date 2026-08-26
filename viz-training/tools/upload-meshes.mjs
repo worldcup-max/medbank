@@ -1,0 +1,135 @@
+#!/usr/bin/env node
+/* MedBank · viz-training/tools/upload-meshes.mjs
+ *
+ * Put the decimated meshes in the bucket — and prove they arrived.
+ *
+ * Dragging the folder onto the Supabase dashboard looked like it worked and did not. New files were
+ * created; files that already existed were left exactly as they were, with no error and no warning.
+ * On 2026-08-26 that meant sixteen new discs uploaded fine while sixty re-decimated meshes stayed at
+ * their old sizes — the corpus was complete, every URL returned 200, and the payload was still the
+ * big one. A silent skip is the worst kind of failure: everything says success.
+ *
+ * The storage API overwrites only when asked, via the `x-upsert` header. This asks.
+ *
+ *   set SUPABASE_SERVICE_KEY=<the service role key>          (Windows cmd)
+ *   $env:SUPABASE_SERVICE_KEY="<the service role key>"       (PowerShell)
+ *   export SUPABASE_SERVICE_KEY=...                          (bash)
+ *
+ *   node viz-training/tools/upload-meshes.mjs                # upload viz-training/meshes-lite
+ *   node viz-training/tools/upload-meshes.mjs --check        # compare local vs remote, upload nothing
+ *   node viz-training/tools/upload-meshes.mjs --force        # re-send even files that already match
+ *
+ * The key is read from the environment and never written anywhere. Do not paste it into a file, and
+ * do not pass it as an argument — arguments end up in shell history.
+ *
+ * The bucket URL is read from config.js, so there is one place that says where meshes live and this
+ * cannot drift from what the app actually fetches.
+ *
+ * Node 18+ (needs global fetch). No dependencies.
+ */
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(HERE, '..');
+const REPO = join(ROOT, '..');
+const argv = process.argv.slice(2);
+const CHECK = argv.includes('--check');
+const FORCE = argv.includes('--force');
+const DIR = argv.find(a => !a.startsWith('--')) || join(ROOT, 'meshes-lite');
+
+const KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '';
+if (!KEY && !CHECK) {
+  console.error('\nSUPABASE_SERVICE_KEY is not set.\n');
+  console.error('  Windows cmd:  set SUPABASE_SERVICE_KEY=eyJ...');
+  console.error('  PowerShell:   $env:SUPABASE_SERVICE_KEY="eyJ..."');
+  console.error('  bash:         export SUPABASE_SERVICE_KEY=eyJ...\n');
+  console.error('Then re-run. The key is used from the environment and never written to disk.\n');
+  process.exit(2);
+}
+
+/* ---- where the meshes live, according to the app itself ---- */
+const cfgPath = [join(REPO, 'config.js'), join(ROOT, 'config.js')].find(existsSync);
+if (!cfgPath) { console.error('cannot find config.js next to viz-training/ — run this from inside the repo'); process.exit(2); }
+const cfg = readFileSync(cfgPath, 'utf8');
+const m = cfg.match(/^\s*MESH_BASE\s*:\s*"([^"]+)"/m);
+if (!m) { console.error('could not read MESH_BASE from config.js — has it been renamed?'); process.exit(1); }
+const MESH_BASE = m[1].replace(/\/+$/, '') + '/';
+const parts = MESH_BASE.match(/^(https:\/\/[^/]+)\/storage\/v1\/object\/public\/([^/]+)\//);
+if (!parts) { console.error(`MESH_BASE does not look like a Supabase public object URL:\n  ${MESH_BASE}`); process.exit(1); }
+const [, ORIGIN, BUCKET] = parts;
+
+if (!existsSync(DIR)) { console.error(`no such directory: ${DIR}`); process.exit(2); }
+const files = readdirSync(DIR).filter(f => f.toLowerCase().endsWith('.stl')).sort();
+if (!files.length) { console.error(`no .stl files in ${DIR}`); process.exit(2); }
+
+console.log(`\n${files.length} mesh(es) in ${DIR}`);
+console.log(`bucket: ${BUCKET} at ${ORIGIN}\n`);
+
+/* ---- what is already there? ---- */
+async function remoteSize(name) {
+  try {
+    const r = await fetch(`${MESH_BASE}${name}?cb=${Date.now()}`, { method: 'HEAD', cache: 'no-store' });
+    if (!r.ok) return null;
+    const n = Number(r.headers.get('content-length'));
+    return Number.isFinite(n) ? n : null;
+  } catch (e) { return null; }
+}
+
+async function put(name, buf) {
+  const r = await fetch(`${ORIGIN}/storage/v1/object/${BUCKET}/${name}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + KEY,
+      'Content-Type': 'application/octet-stream',
+      'x-upsert': 'true'                    // the whole point: overwrite what is already there
+    },
+    body: buf
+  });
+  if (r.ok) return null;
+  let why = r.status + ' ' + r.statusText;
+  try { const j = await r.json(); if (j && (j.message || j.error)) why += ' — ' + (j.message || j.error); } catch (e) {}
+  return why;
+}
+
+let sent = 0, same = 0, failed = 0, bytes = 0;
+const wrong = [];
+
+for (const f of files) {
+  const local = statSync(join(DIR, f)).size;
+  const remote = await remoteSize(f);
+  const label = f.padEnd(16) + String(local).padStart(8) + ' bytes';
+
+  if (remote === local && !FORCE) { same++; console.log(`  same    ${label}`); continue; }
+  if (CHECK) {
+    wrong.push({ f, local, remote });
+    console.log(`  DIFFERS ${label}  remote ${remote === null ? 'missing' : remote + ' bytes'}`);
+    continue;
+  }
+  const err = await put(f, readFileSync(join(DIR, f)));
+  if (err) { failed++; console.log(`  FAIL    ${label}  ${err}`); continue; }
+
+  /* Verify, do not assume. A 200 from the API is not the same as the object being served. */
+  const after = await remoteSize(f);
+  if (after !== local) {
+    failed++;
+    console.log(`  FAIL    ${label}  uploaded but the bucket serves ${after === null ? 'nothing' : after + ' bytes'}`);
+    continue;
+  }
+  sent++; bytes += local;
+  console.log(`  sent    ${label}  ${remote === null ? '(new)' : 'replacing ' + remote + ' bytes'}`);
+}
+
+console.log('');
+if (CHECK) {
+  console.log(`${same} already match, ${wrong.length} differ or are missing.`);
+  if (wrong.length) console.log(`Run without --check to upload them.`);
+  process.exit(wrong.length ? 1 : 0);
+}
+console.log(`${sent} uploaded (${(bytes / 1048576).toFixed(1)} MB), ${same} already current, ${failed} failed.`);
+if (failed) {
+  console.log('\nA failure here means the app will fetch an old mesh, or none. Fix it before pushing —');
+  console.log('the scene JSON and the bucket have to agree or the student gets a hole in the picture.');
+  process.exit(1);
+}
