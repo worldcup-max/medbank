@@ -1,6 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
 import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
-         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal } from '../import-server/integrated.mjs';
+         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -210,6 +210,19 @@ const corpus=[
   ok(d.tier==='high' || d.tier==='moderate', 'DV2 reworded same-pattern (same family+intervention) → flagged (not ok)'); }
 { const d=diversitySignal({ stem:'A 30-year-old woman with sepsis and lactic acidosis needs fluid resuscitation; which vasopressor is first-line after fluids?', options:['Noradrenaline','Dopamine','Adrenaline','Vasopressin'], answer:0, integration_family:'infect_immunology' }, corpus);
   ok(d.tier==='ok', 'DV3 unrelated question → ok (no false diversity flag)'); }
+
+// --- source-aware budget (provenance) ---
+{ const corpus=[
+   { question_id:'S1', source_question_ids:['S1'], review_status:'ai_reviewed', qa:{diversity:{tier:'ok'}} },
+   { question_id:'S1', source_question_ids:['S1'], review_status:'approved', qa:{diversity:{tier:'moderate'}} },
+   { question_id:'S1', source_question_ids:['S1'], review_status:'ai_reviewed', qa:{diversity:{tier:'high'}} },   // near-dup, doesn't count
+   { question_id:'S1', source_question_ids:['S1'], review_status:'rejected', qa:{} }                              // rejected, doesn't count
+  ];
+  const b=sourceBudget('S1', corpus, 3);
+  ok(b.count===2 && !b.exhausted, 'SB1 counts only distinct good candidates (2), not near-dups/rejects'); }
+{ const corpus=[1,2,3].map(()=>({ question_id:'S2', source_question_ids:['S2'], review_status:'ai_reviewed', qa:{diversity:{tier:'ok'}} }));
+  ok(sourceBudget('S2', corpus, 3).exhausted, 'SB2 3 distinct good → exhausted (stop mining this source)'); }
+{ ok(!sourceBudget('S3', [], 3).exhausted, 'SB3 unseen source → not exhausted'); }
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);

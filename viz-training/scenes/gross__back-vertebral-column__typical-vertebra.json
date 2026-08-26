@@ -12,7 +12,7 @@
     "Typical vertebra"
   ],
   "learning_goal": "Recognise a typical vertebra from any angle, and say which part bears weight, which encloses the cord, and how a cervical, thoracic and lumbar vertebra differ.",
-  "status": "candidate",
+  "status": "ready",
   "provider": {
     "primary": "bodyparts3d",
     "fallbacks": []
@@ -75,6 +75,333 @@
         "spinous process"
       ],
       "narration": "A lumbar vertebra shows every feature of the typical plan at its largest: a big body in front, an arch behind, and processes off the arch."
+    },
+    {
+      "key": "vertebral_body",
+      "label": "Vertebral body",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.5233,
+          0.2081,
+          0.6857
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: solid from Y -114.7 to -81.5 — 33.2 mm of bone in front of the canal; centred vertically in a 24.6 mm span of body",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "vertebral body",
+        "body of vertebra",
+        "centrum"
+      ],
+      "narration": "The weight-bearing block in front. It gets bigger as you go down the column, because each one carries everything above it."
+    },
+    {
+      "key": "vertebral_foramen",
+      "label": "Vertebral foramen",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#6fd3ff",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.5233,
+          0.5225,
+          0.47
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — midline ray: hollow from Y -81.5 to -63.8 — a 17.7 mm gap between body and arch",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "vertebral foramen",
+        "vertebral canal",
+        "spinal canal"
+      ],
+      "narration": "The hole between the body and the arch. Stack them and they form the vertebral canal that carries the cord."
+    },
+    {
+      "key": "spinous_process",
+      "label": "Spinous process",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#ffb020",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.5205,
+          0.9819,
+          0.0912
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — most posterior bone within 5 mm of the midline: Y -34.0, at Z 1007.8 — -19.8 mm from mid-height (63 vertices at the tip)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "spinous process",
+        "spine of vertebra",
+        "spinous"
+      ],
+      "narration": "The blade pointing straight back. This is the bump you feel down someone’s back, and on a lumbar vertebra it is short, flat and blunt."
+    },
+    {
+      "key": "transverse_process_left",
+      "label": "Transverse process (left)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#ffa24a",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.9842,
+          0.6988,
+          0.6853
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — widest bone to the left: X 37.5 mm (+X is the body's left; 52 vertices within 3 mm of the tip)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "transverse process"
+      ],
+      "narration": "The wing pointing sideways. It is a lever for muscles, and in the thorax it carries a facet for the rib."
+    },
+    {
+      "key": "transverse_process_right",
+      "label": "Transverse process (right)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#ffa24a",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.0183,
+          0.6894,
+          0.6689
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — widest bone to the right: X -41.2 mm (51 vertices within 3 mm of the tip)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "transverse process"
+      ],
+      "narration": "The wing pointing sideways on the other side."
+    },
+    {
+      "key": "superior_articular_process_left",
+      "label": "Superior articular process (left)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#7cff8f",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.6682,
+          0.6853,
+          0.9671
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — highest bone behind the canal on that side: Z 1051.1, 23.6 mm above mid-height",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "superior articular process",
+        "articular facet",
+        "facet joint"
+      ],
+      "narration": "Points upwards to grip the vertebra above. These small synovial joints are what let the column move."
+    },
+    {
+      "key": "inferior_articular_process_left",
+      "label": "Inferior articular process (left)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#4dd2ff",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.682,
+          0.6701,
+          0.0382
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lowest bone behind the canal on that side: Z 1003.8, 23.8 mm below mid-height",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "inferior articular process",
+        "facet joint"
+      ],
+      "narration": "Points downwards to grip the vertebra below. Together with the disc, these are the three joints between any two vertebrae."
+    },
+    {
+      "key": "superior_articular_process_right",
+      "label": "Superior articular process (right)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#7cff8f",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.3445,
+          0.6435,
+          0.9446
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — highest bone behind the canal on that side: Z 1050.3, 22.8 mm above mid-height",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "superior articular process",
+        "facet joint"
+      ],
+      "narration": "The upward-facing joint surface on the other side."
+    },
+    {
+      "key": "inferior_articular_process_right",
+      "label": "Inferior articular process (right)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#4dd2ff",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.3501,
+          0.6396,
+          0.0456
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lowest bone behind the canal on that side: Z 1004.2, 23.4 mm below mid-height",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "inferior articular process",
+        "facet joint"
+      ],
+      "narration": "The downward-facing joint surface on the other side."
+    },
+    {
+      "key": "pedicle_left",
+      "label": "Pedicle (left)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#c9a3ff",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.6648,
+          0.4378,
+          0.47
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lateral ray at Y -79.5 splits into two masses; the left one runs X 6.7 to 15.5 — 8.8 mm thick (run of 5 slices)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "pedicle",
+        "pedicles"
+      ],
+      "narration": "The short thick bridge from the body back to the arch. The notches above and below it make the intervertebral foramen where the nerve leaves."
+    },
+    {
+      "key": "pedicle_right",
+      "label": "Pedicle (right)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#c9a3ff",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.3884,
+          0.4378,
+          0.47
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lateral ray at Y -79.5 splits into two masses; the right one runs X -15.1 to -6.1 — 9.1 mm thick (run of 5 slices)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "pedicle",
+        "pedicles"
+      ],
+      "narration": "The bridge on the other side. The two pedicles are the walls of the canal."
+    },
+    {
+      "key": "lamina_left",
+      "label": "Lamina (left)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#a78bfa",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.6385,
+          0.6108,
+          0.47
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lateral ray at Y -65.5 splits into two masses; the left one runs X 4.2 to 13.9 — 9.7 mm thick (run of 7 slices)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "lamina",
+        "laminae"
+      ],
+      "narration": "The flat plate running back from the pedicle to the spinous process. This is the bone removed in a laminectomy."
+    },
+    {
+      "key": "lamina_right",
+      "label": "Lamina (right)",
+      "role": "part",
+      "group": "Parts of the vertebra",
+      "render": "anchor",
+      "color": "#a78bfa",
+      "anchor": {
+        "on": "l2",
+        "uvw": [
+          0.3975,
+          0.6108,
+          0.47
+        ],
+        "radius": 0.022
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: measured on the L2 mesh by tools/derive-vertebra-landmarks.mjs — lateral ray at Y -65.5 splits into two masses; the right one runs X -15.7 to -4.1 — 11.5 mm thick (run of 7 slices)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "lamina",
+        "laminae"
+      ],
+      "narration": "The plate on the other side. The two laminae meet in the midline and form the roof of the canal."
     },
     {
       "key": "t6",
@@ -222,6 +549,26 @@
       "narration": "From above: the thick body sits in front, the arch sweeps back from it, and the ring between them is the vertebral foramen. The blunt process pointing straight back is the spinous process; the two pointing sideways are the transverse processes."
     },
     {
+      "mode": "location",
+      "beat": 3,
+      "title": "Name the parts",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "l2"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parts of the vertebra"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Now put the names on. Body in front, then a pedicle on each side, then a lamina on each side meeting behind at the spinous process. That ring of body, pedicles and laminae is the vertebral foramen. Off the arch come the transverse processes sideways and the articular processes up and down."
+    },
+    {
       "mode": "cross_section",
       "title": "Body in front, ring behind",
       "ops": [
@@ -309,11 +656,13 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "landmarks_by": "tools/derive-vertebra-landmarks.mjs",
+    "landmarks_at": "2026-08-26"
   },
   "gaps": [
-    "The named parts of a typical vertebra — body, pedicle, lamina, vertebral foramen, spinous process, transverse process, superior and inferior articular processes — have NO separate models in the catalog. Whole vertebrae are the smallest unit it holds.",
-    "They should be authored as landmark anchors on the L2 mesh, the way the arm scene places bony landmarks. That was not possible this run: anchor coordinates must be measured on the source geometry, and the vertebral meshes are not present locally while this task has no network access. Guessed coordinates would put a label on the wrong process, which is exactly the failure the canonical-name check exists to prevent.",
-    "Because of that the scene teaches the plan by rotation, cross-section and narration rather than by labelled parts, so it is held at status \"candidate\" and the structure stays on the worklist. Fetch the vertebral meshes, derive the anchors, add them as role \"part\" with render \"anchor\", and this becomes ready with no other change."
+    "The named parts of a typical vertebra have no separate models in the catalog — a whole vertebra is the smallest unit it holds. They are therefore placed as landmark anchors on the L2 mesh, measured on the geometry by tools/derive-vertebra-landmarks.mjs rather than estimated.",
+    "Each anchor is status \"needs-review\": every one was verified to sit where its name says (solid bone for the body, pedicles and laminae; open space for the vertebral foramen; on the surface for the processes), but no human has signed them off yet.",
+    "The regional features that make T6 and C5 atypical — the costal facets and the foramen transversarium — are still narrated rather than labelled. They need the same treatment on their own meshes."
   ]
 }

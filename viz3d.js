@@ -568,9 +568,50 @@
      cloud voice when it is on — and a student who hears one voice in Visualize should hear the same voice
      here. So viz3d asks to be spoken for and never touches speechSynthesis itself: SPEAK(text) says a
      line, SPEAK(null) stops. With no speaker registered the player is silent and nothing changes. */
-  var SPEAK = null;
+  /* The voice sets the pace, not a stopwatch.
+     Play advanced every 7 s, a trace every 1.6 s, whatever the line said. Both numbers were guesses at
+     how long a sentence takes to read, and both were wrong: the narration was cut off mid-word at every
+     stop, and only the last one — with nothing after it to interrupt — was ever heard to the end. A
+     guided walk whose guide is talked over is worse than a silent one.
+     So the player asks the app to speak AND to say when it has finished, and moves on then.
+     SPEAK(text, done) speaks a line and calls done() when the sound stops; SPEAK(null) stops. */
+  var SPEAK = null, sayTurn = 0, sayTimer = null, speaking = false;
   function speaker(fn) { SPEAK = (typeof fn === 'function') ? fn : null; }
-  function say(text) { try { if (SPEAK) SPEAK(text); } catch (e) {} }
+  function nowMs() { return (window.performance || Date).now(); }
+
+  /* How long a line takes to read aloud, when nothing tells us. ~165 wpm plus a beat to start. */
+  function readMs(text) {
+    var words = String(text || '').split(/\s+/).filter(Boolean).length;
+    return Math.min(24000, 700 + words * 364);
+  }
+
+  /* Speak `text`, then call `done`.
+     `done` fires when the app reports the sound has stopped — or, failing that, after a read-time
+     estimate. The estimate is not a nicety: an app that ignores the callback (an older app.html), a
+     voice the browser refuses to start, a network TTS that never returns — any of those would leave the
+     sequence frozen on step one forever. A timer races the callback and the first to arrive wins.
+     `floorMs` keeps a stop on screen long enough for the camera to arrive even if the line is short. */
+  function sayThen(text, done, floorMs) {
+    var turn = ++sayTurn, t0 = nowMs(), settled = false;
+    if (sayTimer) { clearTimeout(sayTimer); sayTimer = null; }
+    speaking = !!text;
+    function finish() {
+      if (settled || turn !== sayTurn) return;
+      settled = true; speaking = false;
+      var wait = Math.max(0, (floorMs || 0) - (nowMs() - t0));
+      if (done) sayTimer = setTimeout(function () { if (turn === sayTurn) done(); }, wait);
+    }
+    var spoke = false;
+    if (text && SPEAK) { try { SPEAK(text, function () { finish(); }); spoke = true; } catch (e) {} }
+    var cap = text ? readMs(text) + (spoke ? 8000 : 0) : 0;
+    setTimeout(finish, Math.max(cap, floorMs || 0, 200));
+  }
+  /* say(text) speaks without waiting; say(null) stops and cancels any pending advance. */
+  function say(text) {
+    sayTurn++; speaking = false;
+    if (sayTimer) { clearTimeout(sayTimer); sayTimer = null; }
+    try { if (SPEAK) SPEAK(text || null); } catch (e) {}
+  }
 
   var LIVE = null;
   /* Every mount gets a ticket. The app re-renders its whole page on any state change and schedules a fresh
@@ -1054,6 +1095,9 @@
     function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
       say(null);                                       // never let the previous view keep talking over this one
+      /* A trace belonging to the view we are leaving must be declared over as well. It is what Play
+         waits on, so a trace left flagged as live would freeze the sequence on this view for good. */
+      traceTurn++; traceLive = false;
       currentView = i;
       /* The view's line goes first, then the trace speaks each waypoint as the camera arrives.
          This used to sit inside runOps(ops) — which never receives the view — so it threw
@@ -1103,7 +1147,7 @@
        travels to each landmark in turn, and the narration bar says what you are looking at. "Arises from
        the supraglenoid tubercle and passes through the intertubercular groove" is three stops on a
        journey, not three bones lighting up. */
-    var traceTimer = null;
+    var traceTimer = null, traceTurn = 0, traceLive = false;
     function flyTo(pos, dist, ms) {
       var from = camera.position.clone();
       var tgtFrom = (controls.target || new T.Vector3()).clone();
@@ -1130,9 +1174,11 @@
       if (!path.length) return;
       var i = 0, step = Math.max(1600, ((o.duration || 6) * 1000) / path.length);
       clearInterval(traceTimer);
+      var myTrace = ++traceTurn;
+      traceLive = true;
       stopSpin();
       function go() {
-        if (!running || i >= path.length) { clearInterval(traceTimer); traceTimer = null; return; }
+        if (!running || myTrace !== traceTurn || i >= path.length) { traceLive = (myTrace === traceTurn) ? false : traceLive; return; }
         var k = path[i], m = meshes[k];
         state.hi = {}; state.hi[k] = 0.85;
         if (subject) state.hi[subject] = 0.45;                 // the structure being traced stays lit
@@ -1146,12 +1192,13 @@
             '<span style="color:#8f8ab5;font-size:12px"> · step ' + (i + 1) + ' of ' + path.length + '</span>';
           /* Say it as it flies. A trace is a journey with stops; the voice arriving with the camera is
              what makes it a guided walk rather than three bones lighting up in silence. */
-          say(s.label + (s.narration ? '. ' + s.narration : ''));
         }
         i++;
+        /* Wait for this stop to be spoken before flying to the next one. `step` is the floor, so the
+           camera always has time to land even when the line is one word long. */
+        sayThen(s ? (s.label + (s.narration ? '. ' + s.narration : '')) : '', go, step);
       }
       go();
-      traceTimer = setInterval(go, step);
     }
 
     function drawPairs() {
@@ -1267,17 +1314,27 @@
       var order = views.map(function (_, k) { return (currentView + k) % views.length; });
       var n = 0;
       $('play').textContent = '■ Stop'; $('play').classList.add('pri');
+      var MIN_DWELL = 4000, lastBeat = 0;
       function beat() {
         if (!running || n >= order.length) { stopPlay(); return; }
         applyView(order[n], true);
-        n++;
+        n++; lastBeat = nowMs();
       }
       beat();
-      playTimer = setInterval(beat, 7000);
+      /* Poll rather than march. A view whose line is still being read, or whose trace is still walking
+         its waypoints, is not finished — and the old fixed 7 s interval had no way to know that, so it
+         talked over both. MIN_DWELL keeps a silent view on screen long enough to be seen. */
+      playTimer = setInterval(function () {
+        if (!running) { stopPlay(); return; }
+        if (speaking || traceLive) return;
+        if (nowMs() - lastBeat < MIN_DWELL) return;
+        beat();
+      }, 400);
     }
     function stopPlay() {
       if (playTimer) clearInterval(playTimer);
       playTimer = null;
+      traceTurn++; traceLive = false;
       var b = $('play'); if (b) { b.textContent = '▶ Play'; b.classList.add('pri'); }
     }
 
@@ -1464,7 +1521,9 @@
       say(null);                                       // a voice must not outlive the picture it describes
       if (raf) cancelAnimationFrame(raf);
       if (tourTimer) clearInterval(tourTimer);
+      traceTurn++; traceLive = false;
       if (traceTimer) clearInterval(traceTimer);
+      if (sayTimer) { clearTimeout(sayTimer); sayTimer = null; }
       if (playTimer) clearInterval(playTimer);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', wake);

@@ -1,0 +1,895 @@
+{
+  "schema": 2,
+  "id": "gross__back-vertebral-column__erector-spinae-deep-back-muscles",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Back & Vertebral Column",
+  "structure": "Erector spinae / deep back muscles",
+  "covers": [
+    "Erector spinae / deep back muscles"
+  ],
+  "learning_goal": "Name the three columns of erector spinae from lateral to medial, strip the back down to them layer by layer, and say what bilateral and unilateral contraction each layer produces.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "back",
+      "back muscles",
+      "deep back muscles",
+      "intrinsic back muscles",
+      "vertebral column",
+      "erector spinae",
+      "posture",
+      "trunk extension",
+      "low back pain"
+    ],
+    "terms": [
+      "erector spinae",
+      "sacrospinalis",
+      "iliocostalis",
+      "longissimus",
+      "spinalis",
+      "iliocostalis lumborum",
+      "iliocostalis thoracis",
+      "iliocostalis cervicis",
+      "longissimus thoracis",
+      "longissimus cervicis",
+      "longissimus capitis",
+      "spinalis thoracis",
+      "spinalis cervicis",
+      "transversospinalis",
+      "semispinalis",
+      "semispinalis capitis",
+      "multifidus",
+      "rotatores",
+      "levatores costarum",
+      "splenius capitis",
+      "splenius cervicis",
+      "intrinsic back muscles",
+      "extrinsic back muscles",
+      "superficial back muscles",
+      "thoracolumbar fascia",
+      "erector spinae aponeurosis",
+      "paravertebral gutter",
+      "dorsal rami",
+      "posterior ramus",
+      "trapezius",
+      "latissimus dorsi",
+      "rhomboid major",
+      "rhomboid minor",
+      "serratus posterior superior",
+      "serratus posterior inferior",
+      "trunk extension",
+      "lateral flexion",
+      "back strain"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 3.1
+  },
+  "structures": [
+    {
+      "key": "ilio_lumborum",
+      "name": "right iliocostalis lumborum",
+      "label": "Iliocostalis lumborum",
+      "role": "part",
+      "group": "Iliocostalis",
+      "layer": "muscle",
+      "color": "#b8452f",
+      "refs": {
+        "bodyparts3d": "FMA22740"
+      },
+      "terms": [
+        "iliocostalis",
+        "iliocostalis lumborum"
+      ],
+      "narration": "The lowest and most lateral part of the column. It runs from the sacrum and the iliac crest up to the angles of the lower ribs."
+    },
+    {
+      "key": "ilio_thoracis",
+      "name": "right iliocostalis thoracis",
+      "label": "Iliocostalis thoracis",
+      "role": "part",
+      "group": "Iliocostalis",
+      "layer": "muscle",
+      "color": "#c2543c",
+      "refs": {
+        "bodyparts3d": "FMA22742"
+      },
+      "terms": [
+        "iliocostalis thoracis"
+      ],
+      "narration": "It climbs rib angle to rib angle. Each fibre bundle skips about six ribs before it inserts."
+    },
+    {
+      "key": "ilio_cervicis",
+      "name": "right iliocostalis cervicis",
+      "label": "Iliocostalis cervicis",
+      "role": "part",
+      "group": "Iliocostalis",
+      "layer": "muscle",
+      "color": "#cc6349",
+      "refs": {
+        "bodyparts3d": "FMA22744"
+      },
+      "terms": [
+        "iliocostalis cervicis"
+      ],
+      "narration": "The column ends on the transverse processes of the lower cervical vertebrae. Iliocostalis has no part that reaches the skull."
+    },
+    {
+      "key": "long_thoracis",
+      "name": "right longissimus thoracis",
+      "label": "Longissimus thoracis",
+      "role": "part",
+      "group": "Longissimus",
+      "layer": "muscle",
+      "color": "#a8582a",
+      "refs": {
+        "bodyparts3d": "FMA22751"
+      },
+      "terms": [
+        "longissimus",
+        "longissimus thoracis"
+      ],
+      "narration": "The longest and bulkiest column, lying between iliocostalis and spinalis. It is the muscle you feel as the ridge beside the lumbar spines."
+    },
+    {
+      "key": "long_cervicis",
+      "name": "right longissimus cervicis",
+      "label": "Longissimus cervicis",
+      "role": "part",
+      "group": "Longissimus",
+      "layer": "muscle",
+      "color": "#b8683a",
+      "refs": {
+        "bodyparts3d": "FMA22757"
+      },
+      "terms": [
+        "longissimus cervicis"
+      ],
+      "narration": "It carries the column into the neck, transverse process to transverse process."
+    },
+    {
+      "key": "long_capitis",
+      "name": "right longissimus capitis",
+      "label": "Longissimus capitis",
+      "role": "part",
+      "group": "Longissimus",
+      "layer": "muscle",
+      "color": "#c47a4a",
+      "refs": {
+        "bodyparts3d": "FMA22754"
+      },
+      "terms": [
+        "longissimus capitis",
+        "mastoid process"
+      ],
+      "narration": "This is the one part of erector spinae that reaches the skull. It ends on the back of the mastoid process, so it also extends and turns the head."
+    },
+    {
+      "key": "spin_thoracis",
+      "name": "right spinalis thoracis",
+      "label": "Spinalis thoracis",
+      "role": "part",
+      "group": "Spinalis",
+      "layer": "muscle",
+      "color": "#8a3f5a",
+      "refs": {
+        "bodyparts3d": "FMA22779"
+      },
+      "terms": [
+        "spinalis",
+        "spinalis thoracis"
+      ],
+      "narration": "The thinnest and most medial column, lying right against the spinous processes. It runs spine to spine, upper thoracic to lower thoracic."
+    },
+    {
+      "key": "spin_cervicis",
+      "name": "right spinalis cervicis",
+      "label": "Spinalis cervicis",
+      "role": "part",
+      "group": "Spinalis",
+      "layer": "muscle",
+      "color": "#9a4f6a",
+      "refs": {
+        "bodyparts3d": "FMA22781"
+      },
+      "terms": [
+        "spinalis cervicis"
+      ],
+      "narration": "A small and variable slip in the neck. Spinalis is the column students forget, because it is the one you can barely see."
+    },
+    {
+      "key": "semispinalis_capitis",
+      "name": "right semispinalis capitis",
+      "label": "Semispinalis capitis",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#5f7fa8",
+      "refs": {
+        "bodyparts3d": "FMA22876"
+      },
+      "terms": [
+        "semispinalis capitis",
+        "transversospinalis"
+      ],
+      "narration": "The thick strap on the back of the neck, from transverse processes up to the occipital bone. It is the main extensor of the head, and it is what aches after hours bent over a book."
+    },
+    {
+      "key": "semispinalis_cervicis",
+      "name": "right semispinalis cervicis",
+      "label": "Semispinalis cervicis",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#6f8fb8",
+      "refs": {
+        "bodyparts3d": "FMA22874"
+      },
+      "terms": [
+        "semispinalis cervicis"
+      ],
+      "narration": "Fibres run from a transverse process upward and medially to a spine four to six segments higher."
+    },
+    {
+      "key": "semispinalis_thoracis",
+      "name": "right semispinalis thoracis",
+      "label": "Semispinalis thoracis",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#7f9fc8",
+      "refs": {
+        "bodyparts3d": "FMA22872"
+      },
+      "terms": [
+        "semispinalis thoracis"
+      ],
+      "narration": "The same oblique pattern in the thorax. Semispinalis is the longest of the three transversospinal muscles, so it spans the most segments."
+    },
+    {
+      "key": "multifidus",
+      "name": "right multifidus",
+      "label": "Multifidus",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#4f6f98",
+      "refs": {
+        "bodyparts3d": "FMA22878"
+      },
+      "terms": [
+        "multifidus",
+        "segmental stability"
+      ],
+      "narration": "It fills the groove beside the spines all the way down, and is thickest in the lumbar region. Each bundle crosses two to four segments. Multifidus is a segmental stabiliser more than a mover, and it wastes early in chronic low back pain."
+    },
+    {
+      "key": "rotator_thoracic",
+      "name": "thoracic rotator",
+      "label": "Rotatores (thoracic) — both sides in one model",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#3f5f88",
+      "refs": {
+        "bodyparts3d": "FMA23083"
+      },
+      "terms": [
+        "rotatores",
+        "rotatores breves",
+        "rotatores longi"
+      ],
+      "narration": "The deepest and shortest of the three, crossing one or two segments only. Rotatores are best developed in the thorax. This model holds both sides together, so read it as a pair rather than as the right side alone."
+    },
+    {
+      "key": "rotator_lumbar",
+      "name": "right lumbar rotator",
+      "label": "Rotatores (lumbar)",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#456590",
+      "refs": {
+        "bodyparts3d": "FMA23089"
+      },
+      "terms": [
+        "lumbar rotatores"
+      ],
+      "narration": "Small and inconstant in the loin. Their short lever makes them poor rotators and good position sensors."
+    },
+    {
+      "key": "rotator_cervical",
+      "name": "right cervical rotator",
+      "label": "Rotatores (cervical)",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#4b6b96",
+      "refs": {
+        "bodyparts3d": "FMA81752"
+      },
+      "terms": [
+        "cervical rotatores"
+      ],
+      "narration": "The same short deep bundles in the neck."
+    },
+    {
+      "key": "levatores_longi",
+      "name": "set of right levatores costarum longi",
+      "label": "Levatores costarum longi",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#7a6aa0",
+      "refs": {
+        "bodyparts3d": "FMA74075"
+      },
+      "terms": [
+        "levatores costarum",
+        "levatores costarum longi"
+      ],
+      "narration": "From a transverse process down to the rib two levels below. They are back muscles by position but rib elevators by action."
+    },
+    {
+      "key": "levatores_breves",
+      "name": "set of right levatores costarum breves",
+      "label": "Levatores costarum breves",
+      "role": "part",
+      "group": "Transversospinalis",
+      "layer": "muscle",
+      "color": "#8a7ab0",
+      "refs": {
+        "bodyparts3d": "FMA74077"
+      },
+      "terms": [
+        "levatores costarum breves"
+      ],
+      "narration": "The short version, reaching only the rib immediately below."
+    },
+    {
+      "key": "splenius_capitis",
+      "name": "right splenius capitis",
+      "label": "Splenius capitis",
+      "role": "part",
+      "group": "Splenius",
+      "layer": "muscle",
+      "color": "#c9973f",
+      "refs": {
+        "bodyparts3d": "FMA22728"
+      },
+      "terms": [
+        "splenius capitis",
+        "spinotransverse"
+      ],
+      "narration": "Splenius runs the other way from everything under it: from spines upward and laterally to transverse processes and the mastoid. That is why it turns the head to its own side."
+    },
+    {
+      "key": "splenius_cervicis",
+      "name": "right splenius cervicis",
+      "label": "Splenius cervicis",
+      "role": "part",
+      "group": "Splenius",
+      "layer": "muscle",
+      "color": "#d5a54f",
+      "refs": {
+        "bodyparts3d": "FMA22726"
+      },
+      "terms": [
+        "splenius cervicis"
+      ],
+      "narration": "The lower half of the same bandage, ending on upper cervical transverse processes."
+    },
+    {
+      "key": "trapezius_desc",
+      "name": "descending part of right trapezius",
+      "label": "Trapezius — upper fibres",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#9aa3ad",
+      "refs": {
+        "bodyparts3d": "FMA33586"
+      },
+      "terms": [
+        "trapezius",
+        "upper trapezius"
+      ],
+      "narration": "Trapezius is a shoulder muscle sitting on the back, supplied by the accessory nerve. It is superficial to everything in this scene."
+    },
+    {
+      "key": "trapezius_trans",
+      "name": "transverse part of right trapezius",
+      "label": "Trapezius — middle fibres",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#a4adb7",
+      "refs": {
+        "bodyparts3d": "FMA33584"
+      },
+      "terms": [
+        "trapezius"
+      ],
+      "narration": "Middle fibres, retracting the scapula."
+    },
+    {
+      "key": "trapezius_asc",
+      "name": "ascending part of right trapezius",
+      "label": "Trapezius — lower fibres",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#aeb7c1",
+      "refs": {
+        "bodyparts3d": "FMA33581"
+      },
+      "terms": [
+        "trapezius"
+      ],
+      "narration": "Lower fibres, depressing the scapula."
+    },
+    {
+      "key": "latissimus",
+      "name": "right latissimus dorsi",
+      "label": "Latissimus dorsi",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#8f98a2",
+      "refs": {
+        "bodyparts3d": "FMA13358"
+      },
+      "terms": [
+        "latissimus dorsi",
+        "thoracolumbar fascia"
+      ],
+      "narration": "It arises from the thoracolumbar fascia, which is the sheet that roofs the erector spinae, and it goes to the humerus. Another limb muscle covering the back."
+    },
+    {
+      "key": "rhomboid_major",
+      "name": "right rhomboid major",
+      "label": "Rhomboid major",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#96a0aa",
+      "refs": {
+        "bodyparts3d": "FMA13381"
+      },
+      "terms": [
+        "rhomboid major"
+      ],
+      "narration": "Under trapezius, pulling the scapula back and up."
+    },
+    {
+      "key": "rhomboid_minor",
+      "name": "right rhomboid minor",
+      "label": "Rhomboid minor",
+      "role": "context",
+      "group": "Superficial extrinsic",
+      "layer": "muscle",
+      "color": "#9ca6b0",
+      "refs": {
+        "bodyparts3d": "FMA13383"
+      },
+      "terms": [
+        "rhomboid minor"
+      ],
+      "narration": "The smaller slip above rhomboid major."
+    },
+    {
+      "key": "serratus_post_sup",
+      "name": "right serratus posterior superior",
+      "label": "Serratus posterior superior",
+      "role": "context",
+      "group": "Intermediate layer",
+      "layer": "muscle",
+      "color": "#c0b088",
+      "refs": {
+        "bodyparts3d": "FMA13403"
+      },
+      "terms": [
+        "serratus posterior superior"
+      ],
+      "narration": "A thin sheet between the extrinsic muscles and erector spinae. It elevates the upper ribs and is a respiratory muscle, not a back muscle."
+    },
+    {
+      "key": "serratus_post_inf",
+      "name": "right serratus posterior inferior",
+      "label": "Serratus posterior inferior",
+      "role": "context",
+      "group": "Intermediate layer",
+      "layer": "muscle",
+      "color": "#c8b890",
+      "refs": {
+        "bodyparts3d": "FMA13405"
+      },
+      "terms": [
+        "serratus posterior inferior"
+      ],
+      "narration": "The lower sheet, pulling the last four ribs down. Same layer, same nerve supply from ventral rami."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e3d8ba",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "erector spinae origin"
+      ],
+      "narration": "The common tendon of erector spinae grips the back of the sacrum here."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone — iliac crest",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded3b4",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "iliac crest",
+        "posterior superior iliac spine"
+      ],
+      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments."
+    },
+    {
+      "key": "rib6",
+      "name": "right sixth rib",
+      "label": "Sixth rib — angle",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA8175"
+      },
+      "terms": [
+        "rib angle"
+      ],
+      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines."
+    },
+    {
+      "key": "rib12",
+      "name": "right twelfth rib",
+      "label": "Twelfth rib",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e8dfc4",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "twelfth rib"
+      ],
+      "narration": "The lowest rib, where the lumbar part of the column starts to fan out."
+    },
+    {
+      "key": "occiput",
+      "name": "occipital bone",
+      "label": "Occipital bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#efe8d0",
+      "refs": {
+        "bodyparts3d": "FMA52735"
+      },
+      "terms": [
+        "occipital bone",
+        "nuchal lines"
+      ],
+      "narration": "The top end of the system. Semispinalis capitis takes hold between the nuchal lines here."
+    },
+    {
+      "key": "temporal",
+      "name": "right temporal bone",
+      "label": "Temporal bone — mastoid process",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#efe8d0",
+      "refs": {
+        "bodyparts3d": "FMA52738"
+      },
+      "terms": [
+        "mastoid process"
+      ],
+      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The back has two kinds of muscle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Superficial extrinsic",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "What you see first on the back is not back muscle. Trapezius, latissimus dorsi and the rhomboids all move the upper limb, and all are supplied by ventral rami or the accessory nerve. They are extrinsic. The true back muscles lie under them, run between vertebrae and ribs, and every one of them is supplied by dorsal rami. That nerve supply is the definition, not the position."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Strip the layers off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superficial extrinsic"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Intermediate layer",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Take the extrinsic layer away and two thin sheets appear: serratus posterior superior and inferior. They are still not back muscles. They act on the ribs and are supplied by ventral rami. Take them off as well and you are finally at the intrinsic mass."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Three columns, lateral to medial",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superficial extrinsic"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Intermediate layer"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Transversospinalis"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Splenius"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Iliocostalis",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Erector spinae rises from one broad tendon on the sacrum, iliac crest and lumbar spines, then splits into three columns. Lateral is iliocostalis, on the ribs. Middle is longissimus, the longest. Medial is spinalis, on the spines. Say it lateral to medial every time and the names tell you where each one attaches: ribs, transverse processes, spines."
+    },
+    {
+      "mode": "comparison",
+      "beat": 4,
+      "title": "Which column is which",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Iliocostalis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Longissimus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Spinalis"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ilio_thoracis",
+            "long_thoracis",
+            "spin_thoracis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Compare them at the same thoracic level. Iliocostalis is a flat lateral strap on the rib angles. Longissimus is the thick belly in the middle and the only column that reaches the skull. Spinalis is a thin ribbon hugging the spines, and it is often hard to separate on a real cadaver. Each column has a lumborum, thoracis and cervicis part where the region allows it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "In the gutter beside the spine",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superficial extrinsic"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the trunk. The intrinsic muscles sit in the paravertebral gutter, the trough between the spinous processes in the midline and the angles of the ribs laterally. The thoracolumbar fascia closes that trough behind, so the muscles are held in a compartment. Pull the column back to front on this section and you can see why the deep layers are pressed against bone and the superficial ones are free to slide."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The deep layer runs the other way",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Transversospinalis"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "multifidus",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "semispinalis_cervicis",
+          "to": "multifidus",
+          "kind": "same oblique plan, fewer segments crossed"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Deep to erector spinae is the transversospinal group. Every fibre in it runs from a transverse process upward and medially to a spinous process, which is the opposite slope to splenius. Three muscles, one plan, sorted by how far each one travels. Semispinalis crosses four to six segments, multifidus two to four, rotatores one to two. The shorter the muscle, the less it moves and the more it senses and stabilises."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 7,
+      "title": "What contraction does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superficial extrinsic"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Intermediate layer"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Longissimus",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Both sides together extend the trunk and hold the curves against gravity. One side alone bends the trunk to that same side. The transversospinal muscles add rotation, and because their fibres slope up and medially, one side turns the trunk to the opposite side. Splenius, sloping the other way, turns the head to its own side. When you bend forward the erector spinae is not shortening at all, it is paying out under load, and that eccentric work is what fails in a lifting strain."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "One column, sacrum to skull",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Longissimus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "long_thoracis",
+          "path": [
+            "sacrum",
+            "hip_bone",
+            "rib12",
+            "long_thoracis",
+            "long_cervicis",
+            "long_capitis",
+            "temporal"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow the middle column from the bottom up. It starts on the sacrum and iliac crest, is relayed segment by segment through the thorax and the neck, and finishes on the mastoid process. No single fibre makes that journey. The column is a chain of overlapping bundles, which is how it can hold every part of the spine at once and still bend one region without the next."
+    },
+    {
+      "mode": "location",
+      "beat": 9,
+      "title": "Why it matters in clinic",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superficial extrinsic"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "multifidus",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Three things carry marks. The intrinsic back muscles are the only muscles in the body supplied entirely by dorsal rami, so a dorsal ramus lesion weakens the back and numbs a strip of skin over it, and nothing else. Multifidus atrophy on the painful side is a standard finding on lumbar imaging in chronic back pain. And a posterior approach to the spine goes through the midline between the two masses, because the plane there is fascial and the nerve supply comes in from the side."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "There is no mesh called 'erector spinae'. The catalog's smallest units are the nine named parts of the three columns, so the muscle is taught by assembling them — option (a) of the resolve rule, a more specific sibling that does exist. The consequence is that the common tendon of origin, the single sheet from which all three columns rise, has no model and is narrated over the sacrum and hip bone.",
+    "Spinalis capitis is absent from the catalog. This costs less than it looks: spinalis capitis is inconstant in real bodies and usually blends with semispinalis capitis, which is present. Iliocostalis correctly has no capitis part at all.",
+    "No fascia anywhere in the catalog. The thoracolumbar fascia, the erector spinae aponeurosis and the ligamentum nuchae are all narrated over bone and muscle. The thoracolumbar fascia is the roof of the compartment and the origin of latissimus dorsi, so the cross-section beat describes a boundary the student cannot see.",
+    "No nerves. The whole teaching point of this scene — that intrinsic back muscles are supplied by dorsal rami and extrinsic ones are not — cannot be shown, only said. The catalog holds two optic nerves and nothing else.",
+    "The rotatores exist as 'thoracic rotator', one unsided mesh covering both sides, while the cervical and lumbar rotators are sided. The scene is otherwise built on the right side, so that one model is labelled as a bilateral pair rather than silently left to look like a right-sided muscle.",
+    "Interspinales and intertransversarii are in the catalog only as unsided sets. They are genuine deep back muscles but would render across the midline in a right-sided scene, so they are omitted here and named in the narration instead.",
+    "PEEL_LAYER is not authored. The layer vocabulary in the spec runs skin, fascia, muscle, vessel, organ, bone — it cannot name the three dissection layers this structure is actually taught in (superficial extrinsic, intermediate, deep intrinsic), and every muscle here is layer 'muscle', so a peel would clear the whole scene at once. The layer dissection is authored with HIDE_STRUCTURE on groups instead, which is native and does exactly what the teaching needs. If the layer vocabulary ever gains dissection depth, beats 2 and 3 become PEEL_LAYER with no other edit."
+  ]
+}

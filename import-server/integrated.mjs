@@ -193,6 +193,25 @@ export function diversitySignal(cand, corpus, cfg){
   return best;
 }
 
+/* Source-aware budget (provenance). A single source question yields only so many GENUINELY distinct integrated
+   candidates; past that, transforming it again just manufactures near-duplicates the diversity layer will reject.
+   Count the good, distinct candidates already produced from a source (ai_reviewed|approved, not exact/high-dup);
+   once >= cap, stop mining that source. This is smarter than comparing final text — it reasons per starting point. */
+export const SOURCE_CAP = 3;
+export function sourceBudget(sourceId, corpus, cap){
+  cap = cap || SOURCE_CAP;
+  let count=0;
+  (corpus||[]).forEach(it=>{
+    const src = it.question_id===sourceId || (Array.isArray(it.source_question_ids) && it.source_question_ids.includes(sourceId));
+    if(!src) return;
+    const good = it.review_status==="ai_reviewed" || it.review_status==="approved";
+    const divTier = it.qa && it.qa.diversity && it.qa.diversity.tier;
+    const distinct = divTier!=="exact" && divTier!=="high";
+    if(good && distinct) count++;
+  });
+  return { source_id:sourceId, count, cap, exhausted:count>=cap };
+}
+
 /* review lifecycle: candidate → ai_reviewed → pending → approved | rejected | needs_edit → (resubmit) pending */
 export function nextStatus(cur, action){
   const flow={ candidate:{ ai_review:"ai_reviewed", reject:"rejected" },

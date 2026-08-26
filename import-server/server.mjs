@@ -26,7 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal, sourceBudget } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2421,6 +2421,10 @@ app.post("/admin/integrated/transform", async (req,res)=>{
     const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);
     let src=null; (tr.data||[]).some(t=>((t.extras&&t.extras.qbank)||[]).some(q=>{ if(q&&q.stem&&qhOf(q)===question_id){ src=Object.assign({}, q, { id:question_id, _qh:question_id, _topic:t.title||t.name||"" }); return true; } return false; }));
     if(!src) return res.status(404).json({ error:"source question not found" });
+    // SOURCE BUDGET: don't over-mine one source. If it already yielded enough distinct good candidates, skip.
+    const prov=await admin.from("integrated_items").select("question_id,source_question_ids,review_status,qa").or("question_id.eq."+question_id+",source_question_ids.cs.[\""+question_id+"\"]").limit(200);
+    const budget=sourceBudget(question_id, (prov.data||[]).map(r=>({ question_id:r.question_id, source_question_ids:r.source_question_ids||[], review_status:r.review_status, qa:r.qa })));
+    if(budget.exhausted && !(req.body&&req.body.force)) return res.json({ ok:true, review_status:"skipped", severity:null, reason:"source budget reached ("+budget.count+"/"+budget.cap+" distinct good candidates already)", family, source_budget:budget });
     const rec=await runCandidate(src, { mine:(q)=>a17Transform(q, family), adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
     // DIVERSITY layer (advisory; independent of the reviewers). Compare to the existing corpus for this family.
     let diversity=null;

@@ -516,9 +516,37 @@
         "sacral",
         "S1",
         "sacral promontory",
-        "sacroiliac joint"
+        "sacroiliac joint",
+        "sacrococcygeal joint"
       ],
       "narration": "Five vertebrae fused into one wedge that transmits weight into the pelvis."
+    },
+    {
+      "key": "coccyx",
+      "label": "Coccyx",
+      "role": "part",
+      "group": "Sacrum & coccyx",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "sacrum",
+        "uvw": [
+          0.4908,
+          0.8217,
+          0.1471
+        ],
+        "radius": 0.05
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the sacrum and the coccyx are segmented as ONE mesh, which is why the catalog has no coccyx entry — there is no separate object, not a missing bone (all nine of its “coccy” entries are pelvic floor muscles). Measured on that mesh: a single connected piece 145.3 mm tall, narrowing past a third of its widest at Z 832, leaving 104.0 mm of sacrum above a 41.3 mm midline tail below (32.8 × 25.5 mm, centred 0.2 mm off the midline). An adult sacrum is 100–115 mm and an adult coccyx 30–45 mm. The anchor sits at the tail’s centroid, inside the bone, 4.6 mm from the surface.",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "coccyx",
+        "tailbone",
+        "coccygeal",
+        "sacrococcygeal joint"
+      ],
+      "narration": "The tailbone. Three to five tiny vertebrae fused into one, hanging from the tip of the sacrum. It is the last of the 33, and here it is part of the same piece of bone as the sacrum."
     },
     {
       "key": "d_l1",
@@ -614,6 +642,312 @@
         "annulus fibrosus"
       ],
       "narration": "The fibrocartilage pad between two bodies — shock absorber and the joint that lets the column bend."
+    },
+    {
+      "key": "d_c2",
+      "name": "intervertebral disk of axis",
+      "label": "C2/3 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA25058"
+      },
+      "terms": [
+        "c2/3 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_c3",
+      "name": "intervertebral disk of third cervical vertebra",
+      "label": "C3/4 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13896"
+      },
+      "terms": [
+        "c3/4 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_c4",
+      "name": "intervertebral disk of fourth cervical vertebra",
+      "label": "C4/5 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13897"
+      },
+      "terms": [
+        "c4/5 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_c5",
+      "name": "intervertebral disk of fifth cervical vertebra",
+      "label": "C5/6 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13898"
+      },
+      "terms": [
+        "c5/6 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_c6",
+      "name": "intervertebral disk of sixth cervical vertebra",
+      "label": "C6/7 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13899"
+      },
+      "terms": [
+        "c6/7 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_c7",
+      "name": "intervertebral disk of seventh cervical vertebra",
+      "label": "C7/T1 disc",
+      "role": "context",
+      "group": "Cervical discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13900"
+      },
+      "terms": [
+        "c7/t1 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t1",
+      "name": "intervertebral disk of first thoracic vertebra",
+      "label": "T1/2 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA10458"
+      },
+      "terms": [
+        "t1/2 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t2",
+      "name": "intervertebral disk of second thoracic vertebra",
+      "label": "T2/3 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13495"
+      },
+      "terms": [
+        "t2/3 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t3",
+      "name": "intervertebral disk of third thoracic vertebra",
+      "label": "T3/4 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13500"
+      },
+      "terms": [
+        "t3/4 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t4",
+      "name": "intervertebral disk of fourth thoracic vertebra",
+      "label": "T4/5 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13501"
+      },
+      "terms": [
+        "t4/5 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t5",
+      "name": "intervertebral disk of fifth thoracic vertebra",
+      "label": "T5/6 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13502"
+      },
+      "terms": [
+        "t5/6 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t6",
+      "name": "intervertebral disk of sixth thoracic vertebra",
+      "label": "T6/7 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13503"
+      },
+      "terms": [
+        "t6/7 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t7",
+      "name": "intervertebral disk of seventh thoracic vertebra",
+      "label": "T7/8 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13504"
+      },
+      "terms": [
+        "t7/8 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t8",
+      "name": "intervertebral disk of eighth thoracic vertebra",
+      "label": "T8/9 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13505"
+      },
+      "terms": [
+        "t8/9 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t9",
+      "name": "intervertebral disk of ninth thoracic vertebra",
+      "label": "T9/10 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13506"
+      },
+      "terms": [
+        "t9/10 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t10",
+      "name": "intervertebral disk of tenth thoracic vertebra",
+      "label": "T10/11 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13507"
+      },
+      "terms": [
+        "t10/11 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t11",
+      "name": "intervertebral disk of eleventh thoracic vertebra",
+      "label": "T11/12 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13508"
+      },
+      "terms": [
+        "t11/12 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
+    },
+    {
+      "key": "d_t12",
+      "name": "intervertebral disk of twelfth thoracic vertebra",
+      "label": "T12/L1 disc",
+      "role": "context",
+      "group": "Thoracic discs",
+      "layer": "cartilage",
+      "color": "#7fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA13509"
+      },
+      "terms": [
+        "t12/l1 disc",
+        "intervertebral disc"
+      ],
+      "narration": "One of the twenty-three discs — a pad between two neighbouring bodies."
     }
   ],
   "views": [
@@ -775,9 +1109,10 @@
     "authored_at": "2026-08-26"
   },
   "gaps": [
-    "The coccyx has no entry in the catalog, so the fifth region is narrated but never shown. Until a model exists the count of five regions is taught on four.",
     "Sub-parts of a vertebra — body, pedicle, lamina, spinous and transverse processes, vertebral foramen — are not separate models in the catalog. They are taught here by cross-section and narration rather than as labelled parts.",
     "Only the five lumbar discs are included, as context for the load and cross-section beats. The full set of cervical and thoracic discs exists in the catalog and can be added without changing any op.",
-    "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none."
+    "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none.",
+    "The column is complete from the atlas to the sacrum: all 24 vertebrae and all 23 intervertebral discs. Earlier versions of this scene showed only part of it, which left visible gaps in the stack and made two isolated vertebrae float on their own with nothing between them and the rest.",
+    "The COCCYX is present but not separately modelled: it is segmented together with the sacrum as a single mesh, which is why the catalog lists no coccyx. Measured on that mesh, 104.0 mm of sacrum sits above a 41.3 mm midline tail — textbook proportions for both — so the coccyx is labelled with a measured landmark anchor rather than declared missing."
   ]
 }

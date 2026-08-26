@@ -2710,11 +2710,18 @@ function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
   function wire(){
     if(!window.MB3D) return false;
     try{
-      if(MB3D.speaker) MB3D.speaker(function(text){
+      /* The player needs to know when a line has FINISHED, not just that it started. Without that it
+         advanced on a stopwatch and cut every narration off mid-sentence. voiceSpeak already reports
+         completion (server voice → cloud → device, whichever answers), so hand its callback straight
+         through. If it is missing, call back at once and let the player fall back to its own timing —
+         a silent sequence that keeps moving beats one that stalls. */
+      if(MB3D.speaker) MB3D.speaker(function(text, done){
         try{
           if(text===null||text===undefined||text===''){ if(typeof stopSpeak==='function') stopSpeak(); return; }
+          if(typeof voiceSpeak==='function'){ voiceSpeak(text, done||null, 'read'); return; }
           if(typeof speak==='function') speak(text);
-        }catch(e){}
+          if(done) done();
+        }catch(e){ if(done) done(); }
       });
     }catch(e){}
     try{

@@ -2,7 +2,7 @@
   "generated_by": "viz-training/tools/build-scene-index.mjs",
   "schema": 2,
   "count": 6,
-  "ready": 4,
+  "ready": 5,
   "scenes": [
     {
       "id": "gross__arm__biceps-triceps",
@@ -159,7 +159,7 @@
       "topic": "Back & Vertebral Column",
       "structure": "Intervertebral disc",
       "learning_goal": "Say what a disc joins, why it is thickest in the lumbar region, and why a prolapse goes backwards and to the side rather than forwards.",
-      "gaps": 4,
+      "gaps": 6,
       "match": {
         "topics": [
           "back",
@@ -216,6 +216,11 @@
           "key": "disc_c56",
           "label": "C5/6 disc — cervical",
           "group": "Regional discs"
+        },
+        {
+          "key": "coccyx",
+          "label": "Coccyx",
+          "group": "Sacrum & coccyx"
         }
       ],
       "terms": {
@@ -256,14 +261,77 @@
         "l5 below the exemplar": "l5",
         "sacrum": "sacrum",
         "sacral promontory": "sacrum",
+        "sacrococcygeal joint": "coccyx",
+        "coccyx": "coccyx",
+        "tailbone": "coccyx",
+        "coccygeal": "coccyx",
         "thoracic vertebra": "t6",
         "sixth thoracic vertebra": "t6",
         "cervical vertebra": "c5",
-        "fifth cervical vertebra": "c5"
+        "fifth cervical vertebra": "c5",
+        "atlas": "c1",
+        "first cervical vertebra": "c1",
+        "c1 atlas": "c1",
+        "axis": "c2",
+        "second cervical vertebra": "c2",
+        "dens": "c2",
+        "c2 axis": "c2",
+        "third cervical vertebra": "c3",
+        "fourth cervical vertebra": "c4",
+        "sixth cervical vertebra": "c6",
+        "seventh cervical vertebra": "c7",
+        "vertebra prominens": "c7",
+        "c7 vertebra prominens": "c7",
+        "first thoracic vertebra": "t1",
+        "second thoracic vertebra": "t2",
+        "third thoracic vertebra": "t3",
+        "fourth thoracic vertebra": "t4",
+        "fifth thoracic vertebra": "t5",
+        "seventh thoracic vertebra": "t7",
+        "eighth thoracic vertebra": "t8",
+        "ninth thoracic vertebra": "t9",
+        "t10": "t10",
+        "tenth thoracic vertebra": "t10",
+        "t11": "t11",
+        "eleventh thoracic vertebra": "t11",
+        "t12": "t12",
+        "twelfth thoracic vertebra": "t12",
+        "c2 3 disc": "d_c2",
+        "intervertebral disk of axis": "d_c2",
+        "c3 4 disc": "d_c3",
+        "intervertebral disk of third cervical vertebra": "d_c3",
+        "c4 5 disc": "d_c4",
+        "intervertebral disk of fourth cervical vertebra": "d_c4",
+        "c6 7 disc": "d_c6",
+        "intervertebral disk of sixth cervical vertebra": "d_c6",
+        "c7 t1 disc": "d_c7",
+        "intervertebral disk of seventh cervical vertebra": "d_c7",
+        "t1 2 disc": "d_t1",
+        "intervertebral disk of first thoracic vertebra": "d_t1",
+        "t2 3 disc": "d_t2",
+        "intervertebral disk of second thoracic vertebra": "d_t2",
+        "t3 4 disc": "d_t3",
+        "intervertebral disk of third thoracic vertebra": "d_t3",
+        "t4 5 disc": "d_t4",
+        "intervertebral disk of fourth thoracic vertebra": "d_t4",
+        "t5 6 disc": "d_t5",
+        "intervertebral disk of fifth thoracic vertebra": "d_t5",
+        "t7 8 disc": "d_t7",
+        "intervertebral disk of seventh thoracic vertebra": "d_t7",
+        "t8 9 disc": "d_t8",
+        "intervertebral disk of eighth thoracic vertebra": "d_t8",
+        "t9 10 disc": "d_t9",
+        "intervertebral disk of ninth thoracic vertebra": "d_t9",
+        "t10 11 disc": "d_t10",
+        "intervertebral disk of tenth thoracic vertebra": "d_t10",
+        "t11 12 disc": "d_t11",
+        "intervertebral disk of eleventh thoracic vertebra": "d_t11",
+        "t12 l1 disc": "d_t12",
+        "intervertebral disk of twelfth thoracic vertebra": "d_t12"
       },
       "counts": {
-        "structures": 15,
-        "parts": 4,
+        "structures": 49,
+        "parts": 5,
         "views": 7
       }
     },
@@ -331,7 +399,7 @@
       "parts": [
         {
           "key": "central_canal",
-          "label": "Central canal — the axis of the cord",
+          "label": "Central canal — upper 34 mm only",
           "group": "Cord"
         },
         {
@@ -467,10 +535,7 @@
       ],
       "terms": {
         "central canal": "central_canal",
-        "spinal cord": "central_canal",
-        "cord": "central_canal",
-        "conus medullaris": "central_canal",
-        "central canal the axis of the cord": "central_canal",
+        "central canal upper 34 mm only": "central_canal",
         "central canal of spinal cord": "central_canal",
         "cervical vertebra": "c1",
         "c1 atlas": "c1",
@@ -499,6 +564,7 @@
         "t12": "t12",
         "twelfth thoracic vertebra": "t12",
         "first lumbar vertebra": "l1",
+        "conus medullaris": "l1",
         "cord termination": "l1",
         "l1 the cord ends about here": "l1",
         "second lumbar vertebra": "l2",
@@ -532,8 +598,8 @@
       "schema": 2,
       "mode": "3d_anatomy",
       "provider": "bodyparts3d",
-      "status": "candidate",
-      "student_ready": false,
+      "status": "ready",
+      "student_ready": true,
       "authored_by": "task",
       "approved_by": null,
       "degrades": [],
@@ -582,6 +648,71 @@
           "group": "Typical vertebra"
         },
         {
+          "key": "vertebral_body",
+          "label": "Vertebral body",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "vertebral_foramen",
+          "label": "Vertebral foramen",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "spinous_process",
+          "label": "Spinous process",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "transverse_process_left",
+          "label": "Transverse process (left)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "transverse_process_right",
+          "label": "Transverse process (right)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "superior_articular_process_left",
+          "label": "Superior articular process (left)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "inferior_articular_process_left",
+          "label": "Inferior articular process (left)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "superior_articular_process_right",
+          "label": "Superior articular process (right)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "inferior_articular_process_right",
+          "label": "Inferior articular process (right)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "pedicle_left",
+          "label": "Pedicle (left)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "pedicle_right",
+          "label": "Pedicle (right)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "lamina_left",
+          "label": "Lamina (left)",
+          "group": "Parts of the vertebra"
+        },
+        {
+          "key": "lamina_right",
+          "label": "Lamina (right)",
+          "group": "Parts of the vertebra"
+        },
+        {
           "key": "t6",
           "label": "T6 — thoracic",
           "group": "Regional comparison"
@@ -595,11 +726,37 @@
       "terms": {
         "typical vertebra": "l2",
         "lumbar vertebra": "l2",
-        "vertebral body": "l2",
+        "vertebral body": "vertebral_body",
         "vertebral arch": "l2",
-        "spinous process": "l2",
+        "spinous process": "spinous_process",
         "l2 the exemplar": "l2",
         "second lumbar vertebra": "l2",
+        "body of vertebra": "vertebral_body",
+        "centrum": "vertebral_body",
+        "vertebral foramen": "vertebral_foramen",
+        "vertebral canal": "vertebral_foramen",
+        "spinal canal": "vertebral_foramen",
+        "spine of vertebra": "spinous_process",
+        "spinous": "spinous_process",
+        "transverse process": "transverse_process_left",
+        "transverse process left": "transverse_process_left",
+        "transverse process right": "transverse_process_right",
+        "superior articular process": "superior_articular_process_left",
+        "articular facet": "superior_articular_process_left",
+        "facet joint": "superior_articular_process_left",
+        "superior articular process left": "superior_articular_process_left",
+        "inferior articular process": "inferior_articular_process_left",
+        "inferior articular process left": "inferior_articular_process_left",
+        "superior articular process right": "superior_articular_process_right",
+        "inferior articular process right": "inferior_articular_process_right",
+        "pedicle": "pedicle_left",
+        "pedicles": "pedicle_left",
+        "pedicle left": "pedicle_left",
+        "pedicle right": "pedicle_right",
+        "lamina": "lamina_left",
+        "laminae": "lamina_left",
+        "lamina left": "lamina_left",
+        "lamina right": "lamina_right",
         "thoracic vertebra": "t6",
         "costal facet": "t6",
         "demifacet": "t6",
@@ -623,9 +780,9 @@
         "intervertebral disk of second lumbar vertebra": "d_l2"
       },
       "counts": {
-        "structures": 7,
-        "parts": 3,
-        "views": 5
+        "structures": 20,
+        "parts": 16,
+        "views": 6
       }
     },
     {
@@ -645,7 +802,7 @@
       "topic": "Back & Vertebral Column",
       "structure": "Vertebral column",
       "learning_goal": "Name the five regions and their counts, point out the four curves on an intact column, and say which part of a vertebra carries load and which part encloses the cord.",
-      "gaps": 4,
+      "gaps": 5,
       "match": {
         "topics": [
           "back",
@@ -806,6 +963,11 @@
           "key": "sacrum",
           "label": "Sacrum",
           "group": "Sacrum"
+        },
+        {
+          "key": "coccyx",
+          "label": "Coccyx",
+          "group": "Sacrum & coccyx"
         }
       ],
       "terms": {
@@ -851,6 +1013,10 @@
         "sacral": "sacrum",
         "sacral promontory": "sacrum",
         "sacroiliac joint": "sacrum",
+        "sacrococcygeal joint": "coccyx",
+        "coccyx": "coccyx",
+        "tailbone": "coccyx",
+        "coccygeal": "coccyx",
         "disc below l1": "d_l1",
         "intervertebral disc": "d_l1",
         "nucleus pulposus": "d_l1",
@@ -863,11 +1029,47 @@
         "disc below l4": "d_l4",
         "intervertebral disk of fourth lumbar vertebra": "d_l4",
         "disc below l5": "d_l5",
-        "intervertebral disk of fifth lumbar vertebra": "d_l5"
+        "intervertebral disk of fifth lumbar vertebra": "d_l5",
+        "c2 3 disc": "d_c2",
+        "intervertebral disk of axis": "d_c2",
+        "c3 4 disc": "d_c3",
+        "intervertebral disk of third cervical vertebra": "d_c3",
+        "c4 5 disc": "d_c4",
+        "intervertebral disk of fourth cervical vertebra": "d_c4",
+        "c5 6 disc": "d_c5",
+        "intervertebral disk of fifth cervical vertebra": "d_c5",
+        "c6 7 disc": "d_c6",
+        "intervertebral disk of sixth cervical vertebra": "d_c6",
+        "c7 t1 disc": "d_c7",
+        "intervertebral disk of seventh cervical vertebra": "d_c7",
+        "t1 2 disc": "d_t1",
+        "intervertebral disk of first thoracic vertebra": "d_t1",
+        "t2 3 disc": "d_t2",
+        "intervertebral disk of second thoracic vertebra": "d_t2",
+        "t3 4 disc": "d_t3",
+        "intervertebral disk of third thoracic vertebra": "d_t3",
+        "t4 5 disc": "d_t4",
+        "intervertebral disk of fourth thoracic vertebra": "d_t4",
+        "t5 6 disc": "d_t5",
+        "intervertebral disk of fifth thoracic vertebra": "d_t5",
+        "t6 7 disc": "d_t6",
+        "intervertebral disk of sixth thoracic vertebra": "d_t6",
+        "t7 8 disc": "d_t7",
+        "intervertebral disk of seventh thoracic vertebra": "d_t7",
+        "t8 9 disc": "d_t8",
+        "intervertebral disk of eighth thoracic vertebra": "d_t8",
+        "t9 10 disc": "d_t9",
+        "intervertebral disk of ninth thoracic vertebra": "d_t9",
+        "t10 11 disc": "d_t10",
+        "intervertebral disk of tenth thoracic vertebra": "d_t10",
+        "t11 12 disc": "d_t11",
+        "intervertebral disk of eleventh thoracic vertebra": "d_t11",
+        "t12 l1 disc": "d_t12",
+        "intervertebral disk of twelfth thoracic vertebra": "d_t12"
       },
       "counts": {
-        "structures": 30,
-        "parts": 25,
+        "structures": 49,
+        "parts": 26,
         "views": 6
       }
     },
@@ -1073,16 +1275,6 @@
     }
   ],
   "wanted": [
-    {
-      "name": "Typical vertebra",
-      "course": "gross",
-      "topic": "Back & Vertebral Column",
-      "modes": [
-        "3d_anatomy",
-        "diagram"
-      ],
-      "term": "typical vertebra"
-    },
     {
       "name": "Spinal cord in vertebral canal",
       "course": "gross",

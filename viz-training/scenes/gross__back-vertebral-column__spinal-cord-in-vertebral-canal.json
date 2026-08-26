@@ -69,7 +69,7 @@
     {
       "key": "central_canal",
       "name": "central canal of spinal cord",
-      "label": "Central canal — the axis of the cord",
+      "label": "Central canal — upper 34 mm only",
       "role": "part",
       "group": "Cord",
       "layer": "organ",
@@ -78,12 +78,9 @@
         "bodyparts3d": "FMA78497"
       },
       "terms": [
-        "central canal",
-        "spinal cord",
-        "cord",
-        "conus medullaris"
+        "central canal"
       ],
-      "narration": "This thread is the central canal, the narrow lumen that runs down the middle of the spinal cord. The cord itself is not modelled here, so read the canal as its axis: wherever this runs, the cord is wrapped around it, filling most of the width of the bony canal."
+      "narration": "This thread is the central canal, the lumen down the middle of the cord — but the model holds only its topmost 34 millimetres, level with the atlas and axis and reaching up into the skull. It does not run down the back, so do not read its lower end as the end of the cord."
     },
     {
       "key": "c1",
@@ -647,12 +644,6 @@
           "duration": 9
         },
         {
-          "op": "SHOW_RELATIONSHIP",
-          "from": "central_canal",
-          "to": "l1",
-          "kind": "ends at the level of"
-        },
-        {
           "op": "HIGHLIGHT_STRUCTURE",
           "target": "l1",
           "intensity": 0.8
@@ -662,7 +653,7 @@
           "view": "posterior"
         }
       ],
-      "narration": "The cord runs from the foramen magnum to the lower border of L1 in most adults, tapering into the conus medullaris. It is fatter in two places — the cervical enlargement for the arm and the lumbosacral enlargement for the leg. The column keeps growing after the cord has stopped, so in a newborn the cord reaches L3. That single fact decides everything below."
+      "narration": "The cord ends as the conus medullaris at the lower border of L1 in the adult, and about L3 in the newborn. Below that the canal holds only the cauda equina in cerebrospinal fluid — which is why a lumbar puncture goes in at L3/4 or L4/5. That level is read off the vertebrae here; there is no cord model to show it ending."
     },
     {
       "mode": "associated_organs",
@@ -738,14 +729,16 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-26"
+    "authored_at": "2026-08-26",
+    "corrected_at": "2026-08-26",
+    "corrected_by": "measurement of FMA78497 against the vertebral levels"
   },
   "gaps": [
-    "THE SPINAL CORD ITSELF HAS NO MODEL. The catalog holds 934 meshes and not one of them is the cord: the only entry in its neighbourhood is FMA78497, the central canal, a thread down the middle of the cord. The scene is built on the bony canal, which is complete, and uses the central canal to show where the cord runs. That is honest but it is not the cord, and it is the reason this scene is candidate and not ready.",
+    "THE SPINAL CORD ITSELF HAS NO MODEL. The catalog holds 934 meshes and not one of them is the cord: the only entry in its neighbourhood is the central canal, a thread down the middle of the cord. The scene is built on the bony canal, which is complete, and uses the central canal to show where the cord runs. That is honest but it is not the cord, and it is the reason this scene is candidate and not ready.",
     "Because the cord is missing, so is everything the cord teaches at this level: the cervical and lumbosacral enlargements, the conus medullaris and the filum terminale, and grey matter against white. All are narrated. The moment a cord model exists it becomes the subject of the TRACE_STRUCTURE in beat 2 in place of concept:spinal-cord, with no other edit.",
-    "The extent of the central canal mesh has not been checked against vertebral levels — the source geometry is not held locally and this run has no network access — so no teaching in this scene depends on where that mesh happens to stop. The cord's termination at L1/L2 is taught from the vertebrae, which are measured.",
+    "The extent of the central canal mesh HAS now been measured (tools/derive-vertebra-landmarks.mjs shares the STL reader used for it), and the answer changed this scene. the central canal mesh spans Z 1470.8 to 1504.4 — 33.6 mm, level with C1 and C2 and continuing up into the skull. It is not present at C5 or anywhere below. It therefore cannot stand in for the course of the cord, and the earlier wording that read it as \"the axis of the cord, wherever this runs\" was wrong: it runs for 34 mm at the top of the neck. The SHOW_RELATIONSHIP tying it to L1 has been removed, its terms no longer claim \"spinal cord\" or \"conus medullaris\", and the cord's termination is taught from the vertebrae, which are measured.",
     "No meninges in the catalog: dura, arachnoid and pia, the epidural and subarachnoid spaces, and the lumbar cistern are all narrated over bone. The layers a needle crosses are the exam question and they cannot be shown.",
     "No spinal nerves, roots or cauda equina exist (the catalog's only nerves are the two optic nerves), so 'How the nerves get out' shows the foramen and describes what passes through it.",
-    "The coccyx has no entry, so the canal is followed only to the sacrum; the sacral hiatus is narrated."
+    "The coccyx is not a separate model: it is segmented together with the sacrum in one mesh (measured: 104.0 mm of sacrum above a 41.3 mm midline tail). The canal is therefore followed to the sacrum, and the sacral hiatus — at the bottom of that same mesh — is narrated rather than labelled."
   ]
 }
