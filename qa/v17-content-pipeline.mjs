@@ -104,65 +104,72 @@ ok(clinicalGate({valid:true,matches_key:true,stem_sufficient:true,errors:[]}).pa
 ok(!clinicalGate({valid:false,matches_key:true,stem_sufficient:true,errors:['wrong physiology']}).pass, 'CG2 clinical error → fail');
 ok(!clinicalGate({valid:true,matches_key:false,stem_sufficient:true,errors:[]}).pass, 'CG3 reconstruction ≠ key → fail');
 
-// --- Reviewer 3: single-best-answer gate ---
-ok(sbaGate({single_best:true,distractor_flaw:'none',leakage:false}).pass, 'SG1 one best, clean distractors, no leak → pass');
-ok(!sbaGate({single_best:true,distractor_flaw:'strong',leakage:false}).pass, 'SG2 strong competing distractor → fail');
-ok(!sbaGate({single_best:true,distractor_flaw:'none',leakage:true}).pass, 'SG3 answer leakage → fail');
-ok(sbaGate({distractor_flaw:'bogus'}).distractor_flaw==='none', 'SG4 unknown grade coerced to none');
+// --- Reviewer 3: single-best-answer gate (decisive = defensible_alternative boolean; grade is metadata) ---
+ok(sbaGate({defensible_alternative:false,leakage:false}).pass, 'SG1 no defensible alternative, no leak → pass');
+ok(!sbaGate({defensible_alternative:true}).pass, 'SG2 a genuinely defensible alternative → fail');
+ok(!sbaGate({distractor_answer_actually_correct:true}).pass && sbaGate({distractor_answer_actually_correct:true}).distractor_correct, 'SG3 a distractor actually correct → fail (two correct)');
+ok(!sbaGate({leakage:true}).pass, 'SG4 answer leakage → fail');
+// INVARIANT (the #5 lesson): a clearly-inferior distractor the model merely labels "weak" is NOT a flaw.
+ok(sbaGate({defensible_alternative:false,distractor_flaw:'weak',leakage:false}).pass, 'SG5 inferior distractor graded "weak" but no defensible alternative → PASS (metadata ≠ severity)');
 
 // --- qaVerdict: severity aggregation (deterministic) ---
 const depPass={pass:true}, depFail={pass:false,reasons:['not integrated']};
 const clinOK={pass:true,valid:true,matches_key:true,stem_sufficient:true,errors:[]};
-const sbaOK={pass:true,single_best:true,distractor_flaw:'none',leakage:false};
+const sbaOK={pass:true,defensible_alternative:false,distractor_correct:false,leakage:false,distractor_flaw:'none',single_best:true};
 { const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:sbaOK});
   ok(v.severity==='none' && v.action==='pass' && v.review_status==='ai_reviewed', 'V1 all clean → pass severity, to human'); }
 { const v=qaVerdict({dependency:depFail,integration_quality:'strong',clinical:clinOK,sba:sbaOK});
   ok(v.severity==='hard' && v.review_status==='rejected', 'V2 dependency fail → hard → rejected'); }
 { const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['bad']},sba:sbaOK});
   ok(v.severity==='hard' && v.review_status==='rejected', 'V3 clinical invalid → hard → rejected'); }
-{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}});
-  ok(v.severity==='major' && v.action==='major_edit' && v.review_status==='ai_reviewed', 'V4 strong competing distractor → major edit'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:Object.assign({},sbaOK,{defensible_alternative:true})});
+  ok(v.severity==='major' && v.action==='major_edit' && v.review_status==='ai_reviewed', 'V4 genuinely defensible alternative → major'); }
 { const v=qaVerdict({dependency:depPass,integration_quality:'adequate',clinical:clinOK,sba:sbaOK});
-  ok(v.severity==='minor' && v.action==='minor_edit', 'V5 adequate integration → minor edit'); }
-{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'correct',leakage:false}});
+  ok(v.severity==='minor' && v.action==='minor_edit', 'V5 adequate integration → minor'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:Object.assign({},sbaOK,{distractor_correct:true})});
   ok(v.severity==='hard', 'V6 a distractor is actually correct → hard'); }
-// V7 (live-calibration #6 fix): reviewer prefers another VALID answer (valid:true, matches_key:false) is a
-// single-best DISPUTE → major, NOT a hard clinical fail.
-{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]},sba:{single_best:false,distractor_flaw:'strong',leakage:false}});
-  ok(v.severity==='major' && v.review_status==='ai_reviewed', 'V7 valid key-dispute (two defensible answers) → major, not hard'); }
-// V8: a genuine clinical error still overrides everything → hard (guards against the fix over-softening)
-{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['impossible mechanism']},sba:{single_best:true,distractor_flaw:'none',leakage:true}});
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]},sba:sbaOK});
+  ok(v.severity==='major' && v.review_status==='ai_reviewed', 'V7 valid key-dispute (R2 prefers another valid answer) → major, not hard'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['impossible mechanism']},sba:Object.assign({},sbaOK,{leakage:true})});
   ok(v.severity==='hard', 'V8 clinical error → hard (overrides)'); }
+// INVARIANT: an inferior distractor graded "weak" must NOT create a flag through qaVerdict either (the #5 regression)
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:Object.assign({},sbaOK,{distractor_flaw:'weak'})});
+  ok(v.severity==='none', 'V9 weak-labelled but inferior distractor → still none (no severity from metadata)'); }
 
 // --- runCandidate with the specialist reviewers ---
-// clinical hard-fail must reject even when dependency passes (the SIADH/ODS #3 lesson, at pipeline level)
 { const q={ id:'QC', stem:'SIADH, Na 128→130, MRI central pontine → ODS?', options:['a','b','c','d'], answer:1 };
   const r=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict,
     clinical:async()=>({valid:false,matches_key:false,stem_sufficient:true,errors:['2 mmol/L is not overcorrection']}),
-    sba:async()=>({single_best:true,distractor_flaw:'none',leakage:true}) });
+    sba:async()=>({defensible_alternative:false,leakage:true}) });
   ok(r.review_status==='rejected' && r.severity==='hard', 'PC1 clinically invalid candidate → hard-rejected despite passing dependency'); }
-// human may NOT approve over a machine hard-fail
 { const q={ id:'QC2' };
   const hard=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict,
-    clinical:async()=>({valid:false,matches_key:false,stem_sufficient:true,errors:['x']}), sba:async()=>sbaOK });
+    clinical:async()=>({valid:false,matches_key:false,stem_sufficient:true,errors:['x']}), sba:async()=>({defensible_alternative:false}) });
   const goodQA={dependency:3,coherence:3,educational:3,discrimination:3,targetClarity:2,difficulty:2,noArtificialComplexity:3};
   ok(applyHumanReview(hard,'approve',goodQA,'frank').review_status==='rejected', 'PC2 human cannot approve over a machine hard-fail'); }
 
-// --- CALIBRATION REGRESSION (permanent): the 6-sample set from the first human review. ---
-// Encodes the reviewer SIGNALS a correct specialist should emit for each item; asserts the severity model
-// reproduces Frank's verdicts. #3 is the adversarial exemplar: medically wrong answer behind a suggestive MRI.
-const CAL=[
-  { n:'#1 cardio_endocrine', sig:{dependency:depPass,integration_quality:'adequate',clinical:clinOK,sba:sbaOK}, expect:'minor' },
-  { n:'#2 endocrine_renal',  sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}}, expect:'major' },
-  { n:'#3 neuro_endocrine',  sig:{dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['2 mmol/L rise cannot cause ODS']},sba:{single_best:true,distractor_flaw:'none',leakage:true}}, expect:'hard' },
-  { n:'#4 hepatic_pharm',    sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'weak',leakage:false}}, expect:'minor' },
-  { n:'#5 resp_cardiac',     sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:sbaOK}, expect:'none' },
-  { n:'#6 gi_hepatic',       sig:{dependency:depPass,integration_quality:'strong',clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]},sba:{single_best:false,distractor_flaw:'strong',leakage:false}}, expect:'major' }
+// --- SAFETY INVARIANTS (must always hold — tested against the reviewer SIGNALS, not exact ordinal labels) ---
+// These encode the architecture's guarantees; the LIVE run additionally checks the REASONING (e.g. #3 cites Na).
+const inv=(clinical,sba,iq)=>qaVerdict({dependency:depPass,integration_quality:iq||'strong',clinical,sba}).severity;
+ok(inv({valid:false,matches_key:false,stem_sufficient:true,errors:['Na 128→130 cannot cause ODS']},sbaOK)==='hard', 'INV1 #3-type: clinical error → HARD (never passes as valid)');
+ok(inv(clinOK,Object.assign({},sbaOK,{defensible_alternative:false,distractor_flaw:'weak'}))==='none', 'INV2 #5-type: inferior distractor never creates hard/major');
+ok(inv({valid:true,matches_key:false,stem_sufficient:true,errors:[]},sbaOK)==='major', 'INV3 #6-type: R2 prefers another VALID answer → MAJOR, not hard');
+ok(inv({valid:true,matches_key:true,stem_sufficient:true,errors:[]},sbaOK)==='none', 'INV4 clean item → none');
+
+// --- BOUNDARY ARCHETYPES (mapping generalization beyond the 6; blind-content versions run live post-deploy) ---
+const BND=[
+  { n:'clean',                 clinical:clinOK, sba:sbaOK, iq:'strong', expect:'none' },
+  { n:'inferior-distractor',   clinical:clinOK, sba:Object.assign({},sbaOK,{distractor_flaw:'weak'}), iq:'strong', expect:'none' },
+  { n:'competing-diagnosis',   clinical:clinOK, sba:Object.assign({},sbaOK,{defensible_alternative:true}), iq:'strong', expect:'major' },
+  { n:'missing-info',          clinical:{valid:true,matches_key:true,stem_sufficient:false,errors:[]}, sba:sbaOK, iq:'strong', expect:'major' },
+  { n:'false-premise',         clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['x']}, sba:sbaOK, iq:'strong', expect:'hard' },
+  { n:'tempting-downstream',   clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['finding contradicts physiology']}, sba:Object.assign({},sbaOK,{leakage:true}), iq:'strong', expect:'hard' },
+  { n:'ambiguous-wording',     clinical:clinOK, sba:sbaOK, iq:'adequate', expect:'minor' },
+  { n:'two-correct',           clinical:clinOK, sba:Object.assign({},sbaOK,{distractor_correct:true}), iq:'strong', expect:'hard' },
+  { n:'not-integrated',        clinical:clinOK, sba:sbaOK, iq:'strong', dep:depFail, expect:'hard' },
+  { n:'answer-preference',     clinical:{valid:true,matches_key:false,stem_sufficient:true,errors:[]}, sba:sbaOK, iq:'strong', expect:'major' }
 ];
-CAL.forEach(c=>{ const v=qaVerdict(c.sig); ok(v.severity===c.expect, 'CAL '+c.n+' → '+c.expect+' (got '+v.severity+')'); });
-// the machine-vs-human headline: 6/6 old-gate passes, but only 1/6 is production-clean under the new gate
-ok(CAL.filter(c=>c.expect==='none').length===1, 'CAL headline: exactly 1/6 is clean-pass (rest edit/reject)');
-ok(CAL.filter(c=>c.expect==='hard').length===1, 'CAL headline: exactly 1/6 is a hard clinical fail (#3)');
+BND.forEach(b=>{ const v=qaVerdict({dependency:b.dep||depPass,integration_quality:b.iq,clinical:b.clinical,sba:b.sba}); ok(v.severity===b.expect, 'BND '+b.n+' → '+b.expect+' (got '+v.severity+')'); });
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);

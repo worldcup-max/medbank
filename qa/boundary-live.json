@@ -1,0 +1,52 @@
+{
+  "note": "Blind generalization set for the multi-reviewer pipeline. Deliberately DIFFERENT content from the 6 calibration items. Run each through POST /admin/integrated/review-debug {stem,options,answer,primary_topic,integrated_topics,integration_family,rationale} and compare live severity to expected_severity. 'kind' is the archetype. Expectations marked (INV) are safety invariants that MUST hold; (pref) are calibration preferences that may land one level off.",
+  "cases": [
+    { "id":"B1", "kind":"clean", "expected_severity":"none", "level":"pref",
+      "family":"resp_cardiac", "primary_topic":"Respiratory", "integrated_topics":["Cardiology"],
+      "rationale":"chronic hypoxia drives pulmonary hypertension and right heart failure",
+      "stem":"A 70-year-old man with severe COPD and resting hypoxaemia (PaO2 52 mmHg) has cor pulmonale with peripheral oedema and a raised JVP. Left ventricular function is normal. Which intervention has been shown to improve survival in this setting?",
+      "options":["Long-term home oxygen therapy","Oral furosemide monotherapy","Inhaled long-acting beta-agonist","Digoxin"], "answer":0 },
+
+    { "id":"B2", "kind":"inferior-distractor", "expected_severity":"none", "level":"INV",
+      "family":"cardio_renal", "primary_topic":"Cardiology", "integrated_topics":["Nephrology"],
+      "rationale":"renal function constrains the safe heart-failure agent",
+      "stem":"A 68-year-old woman with HFrEF (EF 30%) and CKD stage 4 (eGFR 22) has serum potassium 5.4 mmol/L. She is already on maximally tolerated sacubitril/valsartan and a beta-blocker. Which addition is most appropriate to reduce mortality while respecting her renal function and potassium?",
+      "options":["Empagliflozin","Spironolactone","Increase the ACE-inhibitor dose","Amiloride"], "answer":0 },
+
+    { "id":"B3", "kind":"competing-diagnosis", "expected_severity":"major", "level":"pref",
+      "family":"endocrine_renal", "primary_topic":"Endocrinology", "integrated_topics":["Nephrology"],
+      "rationale":"diabetes vs an alternative glomerular process",
+      "stem":"A 55-year-old man with type 2 diabetes for 6 years presents with 3+ proteinuria. Urinalysis also shows dysmorphic red cells and red-cell casts. Blood pressure is 150/95. There is no diabetic retinopathy. Which is the most likely diagnosis?",
+      "options":["Diabetic nephropathy","Glomerulonephritis","Benign nephrosclerosis","Minimal change disease"], "answer":0 },
+
+    { "id":"B4", "kind":"missing-info", "expected_severity":"major", "level":"pref",
+      "family":"cardio_endocrine", "primary_topic":"Endocrinology", "integrated_topics":["Cardiology"],
+      "rationale":"thyroid status changes cardiac management",
+      "stem":"A 60-year-old woman presents with new atrial fibrillation and a fine tremor. Which is the most appropriate next step in management?",
+      "options":["Start a beta-blocker and check thyroid function","Immediate DC cardioversion","Start amiodarone","Start warfarin alone"], "answer":0 },
+
+    { "id":"B5", "kind":"false-premise", "expected_severity":"hard", "level":"INV",
+      "family":"cardio_renal", "primary_topic":"Cardiology", "integrated_topics":["Nephrology"],
+      "rationale":"electrolyte effect on the ECG",
+      "stem":"A 50-year-old man with CKD has serum potassium 6.8 mmol/L. His ECG is said to show prominent U waves and a prolonged QT, which in this case are the hallmark of his hyperkalaemia. Which is the most appropriate immediate treatment?",
+      "options":["Intravenous calcium gluconate","Intravenous potassium chloride","Oral potassium citrate","Reassurance, no treatment"], "answer":0 },
+
+    { "id":"B6", "kind":"tempting-downstream", "expected_severity":"hard", "level":"INV",
+      "family":"neuro_endocrine", "primary_topic":"Endocrinology", "integrated_topics":["Neurology"],
+      "rationale":"electrolyte disturbance and neurologic sequelae",
+      "stem":"A 40-year-old woman with hyponatraemia (Na 130 mmol/L) is treated with fluid restriction. Over 24 hours her sodium rises to 132 mmol/L. She then becomes confused, and an MRI shows central pontine hyperintensity, so the team diagnoses osmotic demyelination from overcorrection. Which was the key management error?",
+      "options":["Overly rapid correction of sodium","No error occurred in the sodium management","Insufficient fluid restriction","Failure to give hypertonic saline"], "answer":0 },
+
+    { "id":"B7", "kind":"ambiguous-wording", "expected_severity":"minor", "level":"pref",
+      "family":"gi_hepatic", "primary_topic":"Hepatology", "integrated_topics":["Gastroenterology"],
+      "rationale":"hepatic failure drives GI/portal complications",
+      "stem":"A 58-year-old man with cirrhosis has a large-volume ascites tap. Afterwards, which measure is generally appropriate?",
+      "options":["Albumin infusion to reduce post-paracentesis circulatory dysfunction","Routine broad-spectrum antibiotics for all taps","Immediate TIPS","Fluid restriction to 500 mL/day"], "answer":0 },
+
+    { "id":"B8", "kind":"two-correct", "expected_severity":"hard", "level":"INV",
+      "family":"infect_immunology", "primary_topic":"Infectious disease", "integrated_topics":["Immunology"],
+      "rationale":"immune state changes management of infection",
+      "stem":"A neutropenic patient (neutrophils 0.2) develops a fever of 38.5°C after chemotherapy. Which is an appropriate immediate step?",
+      "options":["Start empirical broad-spectrum antibiotics urgently","Take blood cultures before antibiotics","Wait for culture results before treating","Give paracetamol and review in the morning"], "answer":0 }
+  ]
+}

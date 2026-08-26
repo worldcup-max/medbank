@@ -688,10 +688,36 @@
        highlights off rather than clip them. Exposure compensates so the overall image is not darker — just
        no longer saturated at the top end. */
     var LIGHTS = { ambient: 0.45, key: 0.50, fill: 0.22, rim: 0.26, exposure: 0.95 };
+
+    /* THE LIGHTS RIDE THE CAMERA.
+       They used to sit at fixed points in the world — key at (5, 8, 6). The model does not turn when you
+       orbit; the camera does. So one side of the scapula was permanently lit and the other permanently in
+       shadow, and rotating the arm took you from a white bone to a grey one with nothing in between. Two
+       screenshots of the same scene looked like two different renders.
+
+       Parenting the lights to the camera fixes it by construction: the key is always up-and-right of
+       wherever you are looking from, so every face you turn towards you is lit the same way. This is what
+       inspection viewers do, and it is why a CAD model never has a "dark side".
+
+       Both the light AND its target must be children of the camera — a DirectionalLight aims from its
+       position to its target, and leaving the target at the world origin would swing the direction around
+       as you orbit, which is the bug again in a subtler form. The camera itself must be added to the
+       scene, or three.js never walks its children and none of these lights exist. */
+    var rig = new T.Group();
+    camera.add(rig);
+    sceneObj.add(camera);
+    function rigLight(light, x, y, z) {
+      light.position.set(x, y, z);
+      light.target.position.set(0, 0, -1);      // straight ahead, in camera space
+      rig.add(light); rig.add(light.target);
+      return light;
+    }
+    /* The hemisphere stays in WORLD space on purpose: a faint sense of up and down is what stops the model
+       reading as a flat sticker, and because the model does not rotate it never becomes a dark side. */
     var lAmb = new T.HemisphereLight(0xf2ecff, 0x20203a, LIGHTS.ambient); sceneObj.add(lAmb);
-    var k1 = new T.DirectionalLight(0xfff4e6, LIGHTS.key); k1.position.set(5, 8, 6); sceneObj.add(k1);
-    var k2 = new T.DirectionalLight(0xbfd0ff, LIGHTS.fill); k2.position.set(-6, 2, 4); sceneObj.add(k2);
-    var k3 = new T.DirectionalLight(0x9d8bff, LIGHTS.rim); k3.position.set(-3, 3, -6); sceneObj.add(k3);
+    var k1 = rigLight(new T.DirectionalLight(0xfff4e6, LIGHTS.key), 0.55, 0.75, 0.45);   // key, upper right
+    var k2 = rigLight(new T.DirectionalLight(0xbfd0ff, LIGHTS.fill), -0.9, 0.05, 0.35);  // fill, from the left
+    var k3 = rigLight(new T.DirectionalLight(0x9d8bff, LIGHTS.rim), 0.1, -0.55, -0.9);   // rim, below and behind
     if (T.ACESFilmicToneMapping) {
       renderer.toneMapping = T.ACESFilmicToneMapping;
       renderer.toneMappingExposure = LIGHTS.exposure;

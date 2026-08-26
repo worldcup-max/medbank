@@ -2343,14 +2343,26 @@ KEYED ANSWER: ${L[q.answer]||q.answer}
 
 Judge, given ONLY the information supplied in the stem:
 - Is the keyed answer clearly superior to every other option, or is another option also defensible?
-- CONTRA-KEY CHECK: actively look for any finding in the stem that ARGUES AGAINST the keyed answer or that would make a competing option seriously defensible — including NEGATIVE findings and discriminating clues (e.g. "no retinopathy" undercuts diabetic nephropathy; a competing precipitant that is equally treatable; a normal value that the keyed diagnosis should have perturbed). If such a clue makes another option a serious competitor, grade "strong", not "weak".
-- Grade the strongest distractor: "none" (all clearly inferior), "weak" (one is only mildly defensible — a small tightening), "strong" (one is a serious competing answer whose priority over the key is not established), "correct" (a distractor is actually right → more than one correct answer).
+- CONTRA-KEY CHECK: actively look for any finding in the stem that ARGUES AGAINST the keyed answer — including NEGATIVE findings and discriminating clues (e.g. "no retinopathy" undercuts diabetic nephropathy and would prompt a workup for another cause; a competing precipitant that is equally treatable; a normal value the keyed diagnosis should have perturbed).
+- GRADE ON DEFENSIBILITY-AFTER-REASONING, NOT ON EFFORT-TO-EXCLUDE. A distractor that is clearly wrong once you correctly apply the case facts is "none" — even if excluding it requires real clinical knowledge. That is the NORMAL job of a distractor; do NOT grade it "weak" merely because reasoning is needed to rule it out.
+  - "none": every distractor is definitively excluded by correct reasoning from the stem.
+  - "weak": one distractor stays only mildly defensible AFTER correct reasoning — a small tightening.
+  - "strong": a red-flag/atypical/negative finding or a competing precipitant leaves another option genuinely defensible AFTER correct reasoning — a competitor whose inferiority to the key the stem does not establish (guideline-level reconsideration warranted).
+  - "correct": a distractor is actually right → more than one correct answer.
+  DEFAULT IS "none". A well-built question is SUPPOSED to have plausible-but-wrong distractors; that is not a flaw. Do not default to "weak". Only leave "none" if a distractor genuinely survives correct reasoning.
+  Boundary examples (different topics — apply the principle, don't match the surface):
+   • Keyed = first-line antibiotic for a clear infection; a distractor is a real antibiotic that simply doesn't cover the likely organism → "none" (excluded by correct reasoning, even though it's a real drug).
+   • Keyed = a diagnosis, but the stem states a finding that guidelines treat as a reason to DOUBT that diagnosis or work up an alternative (an atypical presentation, or an expected feature that is explicitly ABSENT) → "strong" (the alternative survives reasoning; the key's priority isn't established by the stem).
+   • Keyed answer differs from a distractor only by a small hedge or degree, both defensible after reasoning → "weak".
 - Leakage: does the wording, an imaging description, an unusually explicit clue, or the temporal sequence announce the answer independently of the intended reasoning?
 
-Answer ONLY JSON:
-{ "single_best": <true if exactly one option is clearly the best given the stem>,
-  "distractor_flaw": "<none | weak | strong | correct>",
-  "leakage": <true if the answer is effectively given away>,
+Answer ONLY JSON. The DECISIVE field is defensible_alternative — answer it directly; the grade is only metadata:
+{ "defensible_alternative": <true ONLY if, AFTER correct reasoning from the stem, a NON-keyed option remains genuinely defensible (a real competitor whose inferiority the stem does not establish). A distractor that correct reasoning clearly excludes is NOT a defensible alternative, even if it is a real clinical entity>,
+  "alternative": "<the competing option + the stem finding that keeps it defensible, or 'none'>",
+  "distractor_answer_actually_correct": <true if a distractor is actually a correct answer → two correct answers>,
+  "distractor_flaw": "<none | weak | strong — metadata only>",
+  "single_best": <true if exactly one option is clearly best — metadata only>,
+  "leakage": <true if the wording/imaging/sequence gives the answer away>,
   "why": "<one sentence>" }`;
 }
 async function a17SbaReview(q, p){

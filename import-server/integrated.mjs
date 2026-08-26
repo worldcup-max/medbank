@@ -46,11 +46,15 @@ export function clinicalGate(v){
 export const DISTRACTOR_GRADES = ["none","weak","strong","correct"];
 export function sbaGate(v){
   v=v||{};
-  const single_best = v.single_best!==false;                           // exactly one defensible best answer
-  const distractor_flaw = DISTRACTOR_GRADES.includes(v.distractor_flaw) ? v.distractor_flaw : "none";
+  // DECISIVE: does a genuinely defensible alternative survive correct reasoning? (boolean, not the ordinal grade)
+  const defensible_alternative = v.defensible_alternative===true;
+  const distractor_correct = v.distractor_answer_actually_correct===true || v.distractor_flaw==="correct";
   const leakage = v.leakage===true;                                    // wording/imaging/sequence announces the answer
-  const pass = single_best && distractor_flaw==="none" && !leakage;
-  return { pass, single_best, distractor_flaw, leakage };
+  // metadata only — NOT allowed to drive severity (an inferior distractor the model labels "weak" is not a flaw):
+  const distractor_flaw = DISTRACTOR_GRADES.includes(v.distractor_flaw) ? v.distractor_flaw : "none";
+  const single_best = v.single_best!==false;
+  const pass = !defensible_alternative && !distractor_correct && !leakage;
+  return { pass, defensible_alternative, distractor_correct, leakage, distractor_flaw, single_best, alternative:v.alternative||null };
 }
 
 /* ── Aggregate the specialist verdicts into ONE severity + recommended action. Deterministic and unit-tested;
@@ -74,16 +78,13 @@ export function qaVerdict(inp){
   //   clinical error — it's a single-best-answer dispute, handled in criterion 3. (Live-calibration fix: #6.)
   if(!clin.valid) fail("clinical_validity","hard",(clin.errors||[]).join("; ")||"clinically invalid");
   else pass("clinical_validity");
-  // 3 single-best-answer — a distractor actually correct → HARD (two correct answers). A defensible competitor, a
-  //   not-single-best verdict, OR the clinical reviewer independently preferring another VALID answer → MAJOR.
+  // 3 single-best-answer — DECISIVE signal is R3's defensible_alternative boolean (or R2 independently preferring
+  //   another VALID answer). A clearly-inferior distractor NEVER flags here, whatever its none/weak/strong metadata
+  //   says — that was the #5 over-flag. A distractor that is actually correct → HARD (two correct answers).
   const answerDispute = clin.valid && clin.matches_key===false;      // R2 prefers a different, still-valid answer
-  if(sba.distractor_flaw==="correct") fail("single_best_answer","hard","a distractor is actually correct (two correct answers)");
-  else if(sba.single_best===false || answerDispute) fail("single_best_answer","major","more than one defensible answer; the keyed answer's priority is not established");
+  if(sba.distractor_correct) fail("single_best_answer","hard","a distractor is actually correct (two correct answers)");
+  else if(sba.defensible_alternative || answerDispute) fail("single_best_answer","major","a competing answer remains defensible after reasoning; the keyed answer's priority is not established");
   else pass("single_best_answer");
-  // 4 distractor validity (strong→major, weak→minor; 'correct' already hard-failed in criterion 3)
-  if(sba.distractor_flaw==="strong") fail("distractor_validity","major","a distractor is a strong competing answer");
-  else if(sba.distractor_flaw==="weak") fail("distractor_validity","minor","a distractor is mildly defensible");
-  else pass("distractor_validity");
   // 5 integration quality (artificial→major, adequate→minor, strong→pass)
   if(iq==="artificial") fail("integration_quality","major","integration is an artificial label pairing");
   else if(iq==="adequate") fail("integration_quality","minor","integration is real but close to pattern-recognition");

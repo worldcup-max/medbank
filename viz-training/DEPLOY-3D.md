@@ -26,6 +26,7 @@ node viz-training/tools/test-topic-match.mjs     # must end "18/18 expectations 
 node viz-training/tools/test-mesh-loading.mjs    # must end "6/6 expectations met." (takes ~40s)
 node viz-training/tools/test-fit-idempotent.mjs  # must end "5/5 expectations met." (needs `npm i three@0.128.0`)
 node viz-training/tools/lint-viz3d.mjs           # must end "every name resolves" (needs `npm i eslint`)
+node viz-training/tools/test-lighting-rig.mjs    # must end "4/4 expectations met."
 node viz-training/tools/test-fourchamber-ingest.mjs  # must end "13/13 expectations met."
 node viz-training/tools/build-scene-index.mjs    # regenerate if any scene changed
 ```
