@@ -96,6 +96,24 @@
   var ADAPTERS = {};
   function register(name, adapter) { ADAPTERS[name] = adapter; }
 
+  /* Bone in this corpus is authored a step from white — #e9e1cc, #e4dcc4. Under any light that leaves
+     almost no headroom: the lit side clips to flat white and a tubercle stops reading as raised, which is
+     the one thing the scene exists to show. Turning the lights down alone does not fix it, because the
+     problem is the material, and it makes every muscle muddy on the way past.
+
+     So cap the brightest channel and scale the others with it. Hue and saturation survive exactly; only
+     colours that were near-white move, and they move just far enough to have somewhere to go. Muscle
+     (#c23a3a) is untouched — its brightest channel is already well under the ceiling.
+
+     Also roughness 0.62 → 0.80: most of what read as "blinding" was a specular hotspot, and bone is not
+     shiny. */
+  var BONE_CEILING = 0.78;
+  function boneSafe(col) {
+    var mx = Math.max(col.r, col.g, col.b);
+    if (mx > BONE_CEILING) col.multiplyScalar(BONE_CEILING / mx);
+    return col;
+  }
+
   register('bodyparts3d', {
     label: 'BodyParts3D',
     /* The adapter delivers the model, so the adapter owns the credit. Scene files never carry an
@@ -139,8 +157,8 @@
               if (settled) return; settled = true; clearTimeout(timer);
               try {
                 geo.computeVertexNormals();
-                var col = new T.Color(s.color || '#c9c3d8');
-                var mat = new T.MeshStandardMaterial({ color: col, roughness: 0.62, metalness: 0.02, transparent: true, opacity: 1, side: T.DoubleSide });
+                var col = boneSafe(new T.Color(s.color || '#c9c3d8'));
+                var mat = new T.MeshStandardMaterial({ color: col, roughness: 0.80, metalness: 0.02, transparent: true, opacity: 1, side: T.DoubleSide });
                 var mesh = new T.Mesh(geo, mat);
                 mesh.userData = s;
                 res(mesh);
@@ -669,7 +687,7 @@
        Roughly half the light, a warm-neutral key instead of pure white, and ACES tone mapping to roll the
        highlights off rather than clip them. Exposure compensates so the overall image is not darker — just
        no longer saturated at the top end. */
-    var LIGHTS = { ambient: 0.55, key: 0.72, fill: 0.30, rim: 0.34, exposure: 1.15 };
+    var LIGHTS = { ambient: 0.45, key: 0.50, fill: 0.22, rim: 0.26, exposure: 0.95 };
     var lAmb = new T.HemisphereLight(0xf2ecff, 0x20203a, LIGHTS.ambient); sceneObj.add(lAmb);
     var k1 = new T.DirectionalLight(0xfff4e6, LIGHTS.key); k1.position.set(5, 8, 6); sceneObj.add(k1);
     var k2 = new T.DirectionalLight(0xbfd0ff, LIGHTS.fill); k2.position.set(-6, 2, 4); sceneObj.add(k2);
@@ -989,11 +1007,7 @@
             state.only.forEach(function (k) { state.hi[k] = 0.5; });
             break;
           case 'SHOW_RELATIONSHIP': state.pairs.push(o); state.hi[o.from] = 0.5; state.hi[o.to] = 0.5; break;
-          case 'TRACE_STRUCTURE':
-            degraded.TRACE_STRUCTURE = 1;
-            if (v.narration) say(v.narration);              // set the scene, then walk it
-            trace(o);
-            break;
+          case 'TRACE_STRUCTURE': degraded.TRACE_STRUCTURE = 1; trace(o); break;
           case 'PEEL_LAYER':
             degraded.PEEL_LAYER = 1;
             structures.forEach(function (s) { if (s.layer === o.layer) state.visible[s.key] = false; });
@@ -1007,6 +1021,13 @@
       var v = views[i]; if (!v) return;
       say(null);                                       // never let the previous view keep talking over this one
       currentView = i;
+      /* The view's line goes first, then the trace speaks each waypoint as the camera arrives.
+         This used to sit inside runOps(ops) — which never receives the view — so it threw
+         "v is not defined" on every traced view, silently, from inside a forEach. That one
+         ReferenceError took out the narration, the step-through, the Play/Stop toggle and the heart's
+         blood path all at once, and left the caption frozen on step 1 with nothing in the console
+         unless you went looking. Scope is not a detail. */
+      if (v.narration && (v.ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; })) say(v.narration);
       useCount.views++;
       stopTour();
       if (!fromPlay) stopPlay();
@@ -1142,15 +1163,20 @@
       var anySel = selected.length > 0;
       structures.forEach(function (s) {
         var m = meshes[s.key]; if (!m) return;
+        var selIdx = selected.indexOf(s.key);
+        var isSel = selIdx >= 0;
         var visible = state.visible ? state.visible[s.key] !== false : true;
         if (state.only && state.only.indexOf(s.key) < 0 && !state.ghosted) visible = false;
         // "Only this": ghosting to 10% still leaves a haze. Sometimes a student wants the structure alone.
-        if (solo && anySel && selected.indexOf(s.key) < 0) visible = false;
+        if (solo && anySel && !isSel) visible = false;
+        /* An explicit tap outranks the view's framing. "Follow the long head" isolates one muscle, so
+           every other part was offstage at 10% opacity — and tapping one in the list recoloured it
+           correctly while leaving it almost invisible, which reads as "the colour did nothing". If a
+           student picked it, they get to see it. */
+        if (isSel) visible = true;
         m.visible = visible;
-        var selIdx = selected.indexOf(s.key);
-        var isSel = selIdx >= 0;
         var isHi = isSel || (state.hi && state.hi[s.key] != null);
-        var offstage = (anySel && !isSel) || (state.only && state.only.indexOf(s.key) < 0);
+        var offstage = !isSel && (anySel || (state.only && state.only.indexOf(s.key) < 0));
         m.material.opacity = isHi ? 1 : (offstage ? (ghost || state.ghosted ? 0.10 : 0.55) : 1);
         /* A selected part takes a colour of its own, not a brighter version of the colour it already had.
            Lighting up a cream bone in cream told a student nothing, and picking three parts lit three

@@ -25,6 +25,8 @@ node viz-training/tools/validate-scenes.mjs      # must end "2/2 scenes valid."
 node viz-training/tools/test-topic-match.mjs     # must end "18/18 expectations met."
 node viz-training/tools/test-mesh-loading.mjs    # must end "6/6 expectations met." (takes ~40s)
 node viz-training/tools/test-fit-idempotent.mjs  # must end "5/5 expectations met." (needs `npm i three@0.128.0`)
+node viz-training/tools/lint-viz3d.mjs           # must end "every name resolves" (needs `npm i eslint`)
+node viz-training/tools/test-fourchamber-ingest.mjs  # must end "13/13 expectations met."
 node viz-training/tools/build-scene-index.mjs    # regenerate if any scene changed
 ```
 
@@ -33,6 +35,13 @@ zero scenes is a legal answer — so the tab simply never appears and nothing an
 exactly how the `t.length > 3` bug survived a green deploy check on 2026-08-25: it excluded the string
 `"arm"`, so a note titled "Anatomy of the Arm" matched nothing. The match table is the only place this
 class of failure is visible; assert it every push.
+
+**`lint-viz3d.mjs` is the one that would have caught the worst bug of the build.** `node --check` only
+asks whether the file parses, and `if (v.narration) …` in a function that never receives `v` parses
+perfectly. It deployed, passed every test we had, and then threw `ReferenceError: v is not defined` on
+every traced view — from inside a forEach, so it took out the narration, the step-through, the Play/Stop
+toggle and the heart's blood path at once, left the caption frozen on step 1, and said nothing in the
+console unless you went looking. ESLint's scope analysis finds it in under a second. Run it every push.
 
 ## 2 · Deploy
 
