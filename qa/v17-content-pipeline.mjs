@@ -76,6 +76,18 @@ const fakeVerdict={removeA_changes:true,removeB_changes:false,bothRequired:false
   ok(applyHumanReview(ai,'reject',null,'frank').review_status==='rejected', 'P4 human reject → rejected'); }
 
 
+// P5: TRANSFORMATION — mine seam returns transformed content + provenance; carried through the gate, never auto-approved
+{ const q={ id:'Q9', stem:'diabetic nephropathy basics', target_id:'T-ENDO' };
+  const before=JSON.stringify(q);
+  const transformProposal={ primary_topic:'Endocrinology', integrated_topics:['Nephrology'], integration_type:'management', integration_family:'endocrine_renal',
+    rationale:'renal function constrains glycaemic drug choice', dependency:'CKD changes safe agent', source_question_ids:['Q9'],
+    transformed_content:{ stem:'diabetic with CKD stage 4 — which agent?', options:['a','b','c','d'], answer:0, rationales:['','','',''] } };
+  const r=await runCandidate(q, { mine:async()=>transformProposal, adversarial:async()=>genuineVerdict });
+  ok(r.review_status==='ai_reviewed', 'P5 transformed candidate → ai_reviewed (not auto-approved)');
+  ok(r.transformed_content && r.transformed_content.stem==='diabetic with CKD stage 4 — which agent?', 'P5 transformed_content carried through');
+  ok(r.source_question_ids[0]==='Q9' && r.integration_family==='endocrine_renal', 'P5 provenance (source Q9) + family preserved');
+  ok(JSON.stringify(q)===before, 'P5 INVARIANT: source question NOT mutated by transformation'); }
+
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);
 })();

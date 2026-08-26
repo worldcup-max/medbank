@@ -2297,6 +2297,53 @@ async function a17Adversarial(q, p){
   }catch(e){ return {}; }
 }
 
+function a17TransformPrompt(q, family){
+  const opts=(q.options||[]).map((o,i)=>String.fromCharCode(65+i)+". "+o).join("\n");
+  return `You are a medical-education author. TRANSFORM the validated single-topic question below into a GENUINELY integrated question for the family "${family}" — one where solving it REQUIRES reasoning across BOTH domains (removing either domain changes the answer). Keep the validated clinical core; add the second domain as a real constraint, not decoration. Do NOT invent an artificial or implausible scenario. Answer ONLY JSON, or {"ok":false} if a genuine integration cannot be made honestly.
+
+SOURCE (topic: ${q._topic||""}, skill: ${q.skill||""}):
+${q.stem||""}
+${opts}
+Correct: ${String.fromCharCode(65+(q.answer||0))}
+
+Return: { "ok":true,
+  "stem":"<transformed vignette>", "options":["A","B","C","D"], "answer":<0-based>, "rationales":["","","",""],
+  "primary_topic":"<owning domain>", "integrated_topics":["<second domain>"],
+  "integration_type":"mechanistic|diagnostic|management|competing|longitudinal",
+  "integration_family":"${family}",
+  "rationale":"<one sentence>", "dependency":"<why the second domain is NECESSARY to the answer>" }`;
+}
+async function a17Transform(q, family){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17TransformPrompt(q, family), parts:[], images:[], max_tokens:900, temperature:0.4, json:true });
+    const t=(gen&&gen.text)||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return null;
+    let o=null; try{ o=JSON.parse(t.slice(a,b+1)); }catch(_){ return null; }
+    if(!o||!o.ok||!o.stem) return null;
+    return { primary_topic:o.primary_topic||null, integrated_topics:o.integrated_topics||[], integration_type:o.integration_type||null,
+      integration_family:o.integration_family||family, rationale:o.rationale||null, dependency:o.dependency||null,
+      source_question_ids:[q.id||q._qh],
+      transformed_content:{ stem:o.stem, options:o.options||[], answer:(Number.isInteger(o.answer)?o.answer:0), rationales:o.rationales||[] } };
+  }catch(e){ return null; }
+}
+app.post("/admin/integrated/transform", async (req,res)=>{
+  /* Author-by-transformation: turn ONE validated question into a candidate integrated item (family-targeted).
+     Same downstream as mining: adversarial reviewer + dependency gate → ai_reviewed | rejected → human approves.
+     Canonical question is READ-ONLY; provenance kept in source_question_ids. */
+  try{
+    if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const { question_id, family } = req.body||{};
+    if(!question_id || !family) return res.status(400).json({ error:"question_id and family required" });
+    const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);
+    let src=null; (tr.data||[]).some(t=>((t.extras&&t.extras.qbank)||[]).some(q=>{ if(q&&q.stem&&qhOf(q)===question_id){ src=Object.assign({}, q, { id:question_id, _qh:question_id, _topic:t.title||t.name||"" }); return true; } return false; }));
+    if(!src) return res.status(404).json({ error:"source question not found" });
+    const rec=await runCandidate(src, { mine:(q)=>a17Transform(q, family), adversarial:a17Adversarial });
+    await admin.from("integrated_items").insert({ question_id:rec.question_id||question_id, primary_topic:rec.primary_topic||null,
+      integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||family,
+      integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
+      transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[question_id],
+      dependency_evidence:rec.dependency_evidence||null, review_status:rec.review_status, model:EXTRAS_MODEL });
+    res.json({ ok:true, review_status:rec.review_status, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
 app.post("/admin/integrated/mine", async (req,res)=>{
   /* Run the candidate pipeline over a batch of not-yet-processed questions. Inserts ai_reviewed|rejected rows.
      NEVER touches topics.extras.qbank. Admin-only; bounded by limit (AI cost). */
