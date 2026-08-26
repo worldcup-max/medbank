@@ -58,7 +58,8 @@ MEGA QBANK
 │
 ├── V1.7 CONTENT PIPELINE (content-acquisition, precedes Integrated/Case)  🟢 CURRENT
 │   ├── deterministic core ✅ (taxonomy · dependency gate · QA score · readiness gate · lifecycle) 17/17
-│   ├── storage ✅ · miner+adversarial+gate ✅ (mining pool → 0 integrable: pool lacks integration, PROVEN not a bug) · PIVOT → transformation ✅ (/transform, provenance) · review workbench ⬜ · inventory dashboard ⬜
+│   ├── storage ✅ · miner+adversarial+gate ✅ · transformation ✅ · HIGH-bar 5-check gate ✅ (verified: HF→cardio_renal passes, diabetes+CKD lookup rejects) · Review Workbench ✅ (#/admin-integrated) · readiness dashboard ✅
+│   └── TOOLCHAIN COMPLETE — remaining is CONTENT (feed good sources) → unlock Integrated Mode at gate (≥100 approved)
 │   └── GATE: ≥100 approved · ≥8 families · ≥10/family · no family>30% · ≥3/pair → then unlock Integrated Mode
 │
 ├── V1.7 — MEGA CLINICAL REASONING  📝 CONTRACT + gap analysis written (V1.7-CONTRACT.md) · not implemented

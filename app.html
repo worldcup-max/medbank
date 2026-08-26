@@ -4702,6 +4702,7 @@ function pageAdmin(){
      <p class="sub">Edit the AI build prompt for each build, per level. A level-specific prompt wins; “Default” is the safety net used when a level has none.</p>
      <div class="btnrow" style="gap:10px;flex-wrap:wrap">
        <button class="btn" style="margin-bottom:8px" onclick="go('admin-targets')">🎯 Knowledge Targets audit →</button>
+       <button class="btn" style="margin-bottom:8px" onclick="go('admin-integrated')">🔗 Integrated Workbench →</button>
        <select id="admKind" class="sbox" style="width:auto" onchange="admFetch()">${kinds.map(k=>`<option value="${k[0]}">${k[1]}</option>`).join('')}</select>
        <select id="admLevel" class="sbox" style="width:auto" onchange="admFetch()">${levels.map(l=>`<option value="${l[0]}">${l[1]}</option>`).join('')}</select>
      </div>
@@ -4754,6 +4755,78 @@ async function admSave(){
 }
 
 /* ===== Admin: Knowledge Targets audit (Phase A, shadow mode; is_admin only) ===== */
+/* ===== V1.7 Integrated Review Workbench (admin) — review AI candidates, human approve/reject/edit, run transforms,
+   watch readiness. Read/review over integrated_items only; touches nothing frozen. ===== */
+function pageIntegratedWorkbench(){ if(!window.IS_ADMIN) return pageHome();
+  setTimeout(function(){ iwReadiness(); iwFetchPending(); },40);
+  var fams=['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','hepatic_pharm','infect_immunology','onco_haem'];
+  return crumbs([{label:'Home',route:'home'},{label:'Admin · Integrated Workbench'}])+
+    '<h1>🔗 Integrated Content Workbench</h1>'
+    +'<p class="sub">AI proposes candidates (mine/transform); the dependency gate + <b>you</b> decide. Nothing is approved without your review, and canonical questions are never altered.</p>'
+    +'<div id="iwReady" class="card" style="cursor:default;margin-bottom:12px">Loading readiness…</div>'
+    +'<div class="card" style="cursor:default;margin-bottom:12px"><div class="qbsec-h">Seed by transformation</div>'
+      +'<div class="sub" style="margin-bottom:6px">Transform a validated question into a high-bar integrated candidate.</div>'
+      +'<div class="btnrow" style="gap:8px;flex-wrap:wrap"><input id="iwQ" class="sbox" style="width:200px" placeholder="source question_id (qh)"> '
+      +'<select id="iwFam" class="sbox" style="width:auto">'+fams.map(function(f){return '<option value="'+f+'">'+f+'</option>';}).join('')+'</select> '
+      +'<button class="btn primary" onclick="iwTransform(this)">Transform →</button>'
+      +'<button class="btn" onclick="iwMine(this)">Mine a batch (10)</button></div>'
+      +'<div id="iwSeedMsg" class="sub" style="margin-top:6px"></div></div>'
+    +'<h2 style="margin-top:6px">Pending review <span class="sub" style="font-weight:400">(ai_reviewed + needs_edit)</span></h2>'
+    +'<div id="iwPending"><p class="sub">Loading…</p></div>';
+}
+async function iwReadiness(){ try{ var r=await admApi('/admin/integrated/readiness'); var el=document.getElementById('iwReady'); if(!el)return;
+  if(!r.ok){ el.textContent='Could not load readiness'; return; }
+  var g=r.data.readiness||{}, by=r.data.by_status||{}, fam=g.byFamily||{};
+  var famRows=Object.keys(fam).sort(function(a,b){return fam[b]-fam[a];}).map(function(k){return '<span class="iw-fam">'+esc(k)+' <b>'+fam[k]+'</b></span>';}).join('') || '<span class="sub">none yet</span>';
+  var checks=g.checks||{};
+  el.innerHTML='<div class="qbsec-h">Readiness — <b style="color:'+(g.ready?'#0a9d55':'#c0392b')+'">'+(g.ready?'READY':'NOT READY')+'</b> · approved '+(g.total||0)+'/'+((g.gate&&g.gate.minApproved)||100)+'</div>'
+    +'<div class="sub" style="margin:4px 0">status: approved '+(by.approved||0)+' · pending(ai) '+(by.ai_reviewed||0)+' · needs_edit '+(by.needs_edit||0)+' · rejected '+(by.rejected||0)+'</div>'
+    +'<div class="iw-checks">'+['enough_total','enough_families','families_over_min_size','no_family_dominates'].map(function(c){return '<span class="'+(checks[c]?'ok':'no')+'">'+(checks[c]?'✓':'✗')+' '+c+'</span>';}).join(' ')+'</div>'
+    +'<div style="margin-top:6px">'+famRows+'</div>';
+}catch(e){} }
+async function iwFetchPending(){ try{ var r=await admApi('/admin/integrated/pending'); var el=document.getElementById('iwPending'); if(!el)return;
+  if(!r.ok){ el.textContent='Could not load: '+((r.data&&r.data.error)||'?'); return; }
+  var items=(r.data&&r.data.items)||[]; if(!items.length){ el.innerHTML='<p class="sub">Nothing pending review. Transform or mine to create candidates.</p>'; return; }
+  el.innerHTML=items.map(iwCard).join('');
+}catch(e){ } }
+function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidence||{};
+  var opts=(tc.options||[]).map(function(o,j){ return '<div class="iw-opt'+(j===tc.answer?' r':'')+'">'+qbLetter(j)+'. '+esc(o)+(j===tc.answer?' ✓':'')+'</div>'; }).join('');
+  var checks=['removeA_changes','removeB_changes','inferential','moreThanLookup','createsDecision'].map(function(c){ return '<span class="'+(ev[c]?'ok':'no')+'">'+(ev[c]?'✓':'✗')+' '+c+'</span>'; }).join(' ');
+  var id=it.id;
+  var qa=[['dependency',3],['coherence',3],['educational',3],['discrimination',3],['targetClarity',2],['difficulty',2],['noArtificialComplexity',3]];
+  var qaIn=qa.map(function(k){ return '<label class="iw-qa">'+k[0]+'<input type="number" min="0" max="'+k[1]+'" value="'+k[1]+'" id="qa_'+id+'_'+k[0]+'"></label>'; }).join('');
+  return '<div class="card iw-item" style="cursor:default;margin-bottom:10px">'
+    +'<div class="iw-h"><b>'+esc(it.integration_family||'?')+'</b> · '+esc(it.integration_type||'')+' · '+esc(it.primary_topic||'')+' → '+esc((it.integrated_topics||[]).join(', '))+' <span class="iw-st">'+esc(it.review_status)+'</span></div>'
+    +(tc.stem?('<div class="iw-stem">'+esc(tc.stem)+'</div>'+'<div class="iw-opts">'+opts+'</div>'):'<div class="sub">(no transformed content — original question)</div>')
+    +'<div class="iw-dep"><b>Dependency:</b> '+esc(it.integration_dependency||'')+'</div>'
+    +'<div class="iw-checks">'+checks+'</div>'
+    +'<div class="sub" style="margin:4px 0">source: '+esc((it.source_question_ids||[]).join(', '))+'</div>'
+    +'<div class="iw-qarow"><span class="sub">QA:</span> '+qaIn+'</div>'
+    +'<div class="btnrow" style="gap:8px;margin-top:6px"><button class="btn primary sm" onclick="iwReview(\''+id+'\',\'approve\')">Approve</button>'
+    +'<button class="btn sm" onclick="iwReview(\''+id+'\',\'edit\')">Needs edit</button>'
+    +'<button class="btn sm" style="color:#c0392b" onclick="iwReview(\''+id+'\',\'reject\')">Reject</button></div></div>';
+}
+async function iwReview(id, action){ var qa=null;
+  if(action==='approve'){ qa={}; ['dependency','coherence','educational','discrimination','targetClarity','difficulty','noArtificialComplexity'].forEach(function(k){ var el=document.getElementById('qa_'+id+'_'+k); qa[k]=el?parseInt(el.value,10)||0:0; }); }
+  if(action==='reject' && !confirm('Reject this candidate?')) return;
+  try{ var r=await admApi('/admin/integrated/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id, action:action, qa:qa})});
+    if(r.ok){ mbToast(r.data.review_status+(r.data.reason?(' — '+r.data.reason):'')); iwReadiness(); iwFetchPending(); }
+    else alert('Failed: '+((r.data&&r.data.error)||'?')); }catch(e){ alert('Failed: '+(e.message||e)); } }
+async function iwTransform(btn){ var q=(document.getElementById('iwQ')||{}).value, fam=(document.getElementById('iwFam')||{}).value;
+  if(!q||!q.trim()){ alert('Enter a source question_id (qh).'); return; }
+  if(btn){btn.disabled=true;btn.textContent='Transforming…';}
+  try{ var r=await admApi('/admin/integrated/transform',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question_id:q.trim(), family:fam})});
+    if(btn){btn.disabled=false;btn.textContent='Transform →';}
+    var m=document.getElementById('iwSeedMsg'); if(m) m.textContent = r.ok ? ('Result: '+r.data.review_status+(r.data.reason?(' — '+r.data.reason):(' · '+(r.data.family||'')))) : ('Failed: '+((r.data&&r.data.error)||'?'));
+    iwFetchPending(); iwReadiness();
+  }catch(e){ if(btn){btn.disabled=false;btn.textContent='Transform →';} alert('Failed: '+(e.message||e)); } }
+async function iwMine(btn){ if(!confirm('Mine a batch of 10 (spends model budget)?')) return; if(btn){btn.disabled=true;btn.textContent='Mining…';}
+  try{ var r=await admApi('/admin/integrated/mine',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({limit:10})});
+    if(btn){btn.disabled=false;btn.textContent='Mine a batch (10)';}
+    var m=document.getElementById('iwSeedMsg'); if(m) m.textContent = r.ok ? ('Mined '+r.data.scanned+' → '+r.data.ai_reviewed+' candidate(s), '+r.data.rejected+' rejected') : 'Mine failed';
+    iwFetchPending(); iwReadiness();
+  }catch(e){ if(btn){btn.disabled=false;btn.textContent='Mine a batch (10)';} } }
+
 function pageTargetsAudit(){ if(!window.IS_ADMIN) return pageHome();
   setTimeout(taFetch,40);
   return crumbs([{label:'Home',route:'home'},{label:'Admin · Targets'}])+
@@ -7118,6 +7191,7 @@ function render(){
     case 'settings':  html=pageSettings(); break;
     case 'admin':     html=pageAdmin(); break;
     case 'admin-targets': html=pageTargetsAudit(); break;
+    case 'admin-integrated': html=pageIntegratedWorkbench(); break;
     case 'intel':     html=pagePilot(); break;   // dev-only pilot readout (not in student nav)
     case 'vizadmin':  html=pageVizAdmin(); break;
     case 'viz3d':     html=pageViz3d(p[1]); break;   // dev-only 3D scene opener (not in student nav)
@@ -7400,6 +7474,21 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .rp-below{color:#c0392b}
 .rp-above{color:#0a9d55}
 .rp-insight{font-size:13px;padding:8px 10px;border:1px solid var(--line,#e3e0ef);border-radius:10px;background:rgba(124,58,237,.05)}
+
+/* Integrated Workbench */
+.iw-item .iw-h{font-size:13px;margin-bottom:6px}
+.iw-st{float:right;font-size:11px;color:var(--dim);text-transform:uppercase}
+.iw-stem{font-size:13.5px;margin:4px 0}
+.iw-opt{font-size:12.5px;padding:2px 0}
+.iw-opt.r{color:#0a9d55;font-weight:600}
+.iw-dep{font-size:12.5px;margin:6px 0;color:var(--dim)}
+.iw-checks span,.iw-checks span{font-size:11.5px;margin-right:8px}
+.iw-checks .ok{color:#0a9d55}
+.iw-checks .no{color:#c0392b}
+.iw-qarow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.iw-qa{font-size:11px;color:var(--dim);display:inline-flex;flex-direction:column}
+.iw-qa input{width:44px;padding:2px 4px;border:1px solid var(--line,#e3e0ef);border-radius:6px}
+.iw-fam{display:inline-block;margin:2px 8px 2px 0;font-size:12px;color:var(--dim)}
 /* Topic-row rename/remove controls */
 .rowacts{display:inline-flex;gap:2px;align-items:center;margin-left:6px}
 .rowact{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 5px;border-radius:7px;opacity:.55;line-height:1}
