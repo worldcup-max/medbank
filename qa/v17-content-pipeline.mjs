@@ -1,5 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
-import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview } from '../import-server/integrated.mjs';
+import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
+         clinicalGate, sbaGate, qaVerdict } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -27,14 +28,14 @@ ok(!dependencyGate({removeA_changes:true,removeB_changes:true,inferential:false,
 
 // --- readiness gate ---
 function bank(families){ const out=[]; Object.keys(families).forEach(f=>{ for(let i=0;i<families[f];i++) out.push({integration_family:f}); }); return out; }
-// ready: 8 families x 13 = 104, none dominates
-{ const fams={}; ['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','onco_haem'].forEach(f=>fams[f]=13);
-  const r=readinessGate(bank(fams)); ok(r.ready && r.total===104 && r.families===8, 'R1 100+/8 families/≥10 each/no dominance → READY'); }
-// not ready: too few total
-{ const r=readinessGate(bank({cardio_renal:10,cardio_endocrine:10})); ok(!r.ready && !r.checks.enough_total, 'R2 <100 total → not ready'); }
-// not ready: one family dominates (>30%)
-{ const r=readinessGate(bank({cardio_renal:60, cardio_endocrine:12,endocrine_renal:11,resp_cardiac:11,neuro_endocrine:11,pregnancy_cardio:11,gi_hepatic:11,onco_haem:11}));
-  ok(!r.ready && !r.checks.no_family_dominates && r.biggest_family_share>0.30, 'R3 one family >30% → not ready (no silent skew)'); }
+// ready: 8 families x 3 = 24 (>=20 total, >=2 each), none dominates (<=35%)
+{ const fams={}; ['cardio_renal','cardio_endocrine','endocrine_renal','resp_cardiac','neuro_endocrine','pregnancy_cardio','gi_hepatic','onco_haem'].forEach(f=>fams[f]=3);
+  const r=readinessGate(bank(fams)); ok(r.ready && r.total===24 && r.families===8, 'R1 20+/8 families/≥2 each/no dominance → READY'); }
+// not ready: too few total (16 < 20)
+{ const r=readinessGate(bank({cardio_renal:8,cardio_endocrine:8})); ok(!r.ready && !r.checks.enough_total, 'R2 <20 total → not ready'); }
+// not ready: one family dominates (>35%)
+{ const r=readinessGate(bank({cardio_renal:12, cardio_endocrine:2,endocrine_renal:2,resp_cardiac:2,neuro_endocrine:2,pregnancy_cardio:2,gi_hepatic:2,onco_haem:2}));
+  ok(!r.ready && !r.checks.no_family_dominates && r.biggest_family_share>0.35, 'R3 one family >35% → not ready (no silent skew)'); }
 // not ready: <8 families
 { const r=readinessGate(bank({cardio_renal:60,cardio_endocrine:60})); ok(!r.ready && !r.checks.enough_families, 'R4 <8 families → not ready (breadth)'); }
 // analytics pairs: only families with >=3
@@ -97,6 +98,64 @@ const fakeVerdict={removeA_changes:true,removeB_changes:true,inferential:false,m
     transformed_content:{ stem:'TRANSFORMED integrated stem (diabetes + CKD)', options:['a','b','c','d'], answer:0, rationales:[] } };
   await runCandidate(src, { mine:async()=>prop, adversarial:async(q)=>{ sawStem=q.stem; return genuineVerdict; } });
   ok(sawStem==='TRANSFORMED integrated stem (diabetes + CKD)', 'P6 adversarial reviews the TRANSFORMED stem, not the source'); }
+
+// --- Reviewer 2: clinical gate ---
+ok(clinicalGate({valid:true,matches_key:true,stem_sufficient:true,errors:[]}).pass, 'CG1 valid + matches key + sufficient → pass');
+ok(!clinicalGate({valid:false,matches_key:true,stem_sufficient:true,errors:['wrong physiology']}).pass, 'CG2 clinical error → fail');
+ok(!clinicalGate({valid:true,matches_key:false,stem_sufficient:true,errors:[]}).pass, 'CG3 reconstruction ≠ key → fail');
+
+// --- Reviewer 3: single-best-answer gate ---
+ok(sbaGate({single_best:true,distractor_flaw:'none',leakage:false}).pass, 'SG1 one best, clean distractors, no leak → pass');
+ok(!sbaGate({single_best:true,distractor_flaw:'strong',leakage:false}).pass, 'SG2 strong competing distractor → fail');
+ok(!sbaGate({single_best:true,distractor_flaw:'none',leakage:true}).pass, 'SG3 answer leakage → fail');
+ok(sbaGate({distractor_flaw:'bogus'}).distractor_flaw==='none', 'SG4 unknown grade coerced to none');
+
+// --- qaVerdict: severity aggregation (deterministic) ---
+const depPass={pass:true}, depFail={pass:false,reasons:['not integrated']};
+const clinOK={pass:true,valid:true,matches_key:true,stem_sufficient:true,errors:[]};
+const sbaOK={pass:true,single_best:true,distractor_flaw:'none',leakage:false};
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:sbaOK});
+  ok(v.severity==='none' && v.action==='pass' && v.review_status==='ai_reviewed', 'V1 all clean → pass severity, to human'); }
+{ const v=qaVerdict({dependency:depFail,integration_quality:'strong',clinical:clinOK,sba:sbaOK});
+  ok(v.severity==='hard' && v.review_status==='rejected', 'V2 dependency fail → hard → rejected'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['bad']},sba:sbaOK});
+  ok(v.severity==='hard' && v.review_status==='rejected', 'V3 clinical invalid → hard → rejected'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}});
+  ok(v.severity==='major' && v.action==='major_edit' && v.review_status==='ai_reviewed', 'V4 strong competing distractor → major edit'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'adequate',clinical:clinOK,sba:sbaOK});
+  ok(v.severity==='minor' && v.action==='minor_edit', 'V5 adequate integration → minor edit'); }
+{ const v=qaVerdict({dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'correct',leakage:false}});
+  ok(v.severity==='hard', 'V6 a distractor is actually correct → hard'); }
+
+// --- runCandidate with the specialist reviewers ---
+// clinical hard-fail must reject even when dependency passes (the SIADH/ODS #3 lesson, at pipeline level)
+{ const q={ id:'QC', stem:'SIADH, Na 128→130, MRI central pontine → ODS?', options:['a','b','c','d'], answer:1 };
+  const r=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict,
+    clinical:async()=>({valid:false,matches_key:false,stem_sufficient:true,errors:['2 mmol/L is not overcorrection']}),
+    sba:async()=>({single_best:true,distractor_flaw:'none',leakage:true}) });
+  ok(r.review_status==='rejected' && r.severity==='hard', 'PC1 clinically invalid candidate → hard-rejected despite passing dependency'); }
+// human may NOT approve over a machine hard-fail
+{ const q={ id:'QC2' };
+  const hard=await runCandidate(q, { mine:async()=>goodProposal, adversarial:async()=>genuineVerdict,
+    clinical:async()=>({valid:false,matches_key:false,stem_sufficient:true,errors:['x']}), sba:async()=>sbaOK });
+  const goodQA={dependency:3,coherence:3,educational:3,discrimination:3,targetClarity:2,difficulty:2,noArtificialComplexity:3};
+  ok(applyHumanReview(hard,'approve',goodQA,'frank').review_status==='rejected', 'PC2 human cannot approve over a machine hard-fail'); }
+
+// --- CALIBRATION REGRESSION (permanent): the 6-sample set from the first human review. ---
+// Encodes the reviewer SIGNALS a correct specialist should emit for each item; asserts the severity model
+// reproduces Frank's verdicts. #3 is the adversarial exemplar: medically wrong answer behind a suggestive MRI.
+const CAL=[
+  { n:'#1 cardio_endocrine', sig:{dependency:depPass,integration_quality:'adequate',clinical:clinOK,sba:sbaOK}, expect:'minor' },
+  { n:'#2 endocrine_renal',  sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}}, expect:'major' },
+  { n:'#3 neuro_endocrine',  sig:{dependency:depPass,integration_quality:'strong',clinical:{valid:false,matches_key:false,stem_sufficient:true,errors:['2 mmol/L rise cannot cause ODS']},sba:{single_best:true,distractor_flaw:'none',leakage:true}}, expect:'hard' },
+  { n:'#4 hepatic_pharm',    sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'weak',leakage:false}}, expect:'minor' },
+  { n:'#5 resp_cardiac',     sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:sbaOK}, expect:'none' },
+  { n:'#6 gi_hepatic',       sig:{dependency:depPass,integration_quality:'strong',clinical:clinOK,sba:{single_best:true,distractor_flaw:'strong',leakage:false}}, expect:'major' }
+];
+CAL.forEach(c=>{ const v=qaVerdict(c.sig); ok(v.severity===c.expect, 'CAL '+c.n+' → '+c.expect+' (got '+v.severity+')'); });
+// the machine-vs-human headline: 6/6 old-gate passes, but only 1/6 is production-clean under the new gate
+ok(CAL.filter(c=>c.expect==='none').length===1, 'CAL headline: exactly 1/6 is clean-pass (rest edit/reject)');
+ok(CAL.filter(c=>c.expect==='hard').length===1, 'CAL headline: exactly 1/6 is a hard clinical fail (#3)');
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);

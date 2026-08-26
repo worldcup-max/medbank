@@ -4822,9 +4822,15 @@ async function iwFetchPending(){ try{ var r=await admApi('/admin/integrated/pend
   var items=(r.data&&r.data.items)||[]; if(!items.length){ el.innerHTML='<p class="sub">Nothing pending review. Transform or mine to create candidates.</p>'; return; }
   el.innerHTML=items.map(iwCard).join('');
 }catch(e){ } }
-function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidence||{};
+function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidence||{}, qav=it.qa||{};
   var opts=(tc.options||[]).map(function(o,j){ return '<div class="iw-opt'+(j===tc.answer?' r':'')+'">'+qbLetter(j)+'. '+esc(o)+(j===tc.answer?' ✓':'')+'</div>'; }).join('');
   var checks=['removeA_changes','removeB_changes','inferential','moreThanLookup','createsDecision'].map(function(c){ return '<span class="'+(ev[c]?'ok':'no')+'">'+(ev[c]?'✓':'✗')+' '+c+'</span>'; }).join(' ');
+  // multi-reviewer severity + the specific flags the specialists raised
+  var sevMap={hard:['🔴 HARD FAIL','#c0392b'],major:['🟠 MAJOR EDIT','#c77800'],minor:['🟡 MINOR EDIT','#8a6d00'],none:['🟢 CLEAN','#0a9d55']};
+  var sev=sevMap[qav.severity]||null;
+  var sevHtml = sev ? ('<div class="iw-sev" style="color:'+sev[1]+';font-weight:600;font-size:12.5px;margin:6px 0">'+sev[0]
+      +(qav.action?(' · '+esc(qav.action)):'')+'</div>'
+      +((qav.reasons&&qav.reasons.length)?('<ul class="iw-flags" style="margin:2px 0 4px;padding-left:18px;font-size:12px;color:var(--dim)">'+qav.reasons.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'):'')) : '';
   var id=it.id;
   var qa=[['dependency',3],['coherence',3],['educational',3],['discrimination',3],['targetClarity',2],['difficulty',2],['noArtificialComplexity',3]];
   var qaIn=qa.map(function(k){ return '<label class="iw-qa">'+k[0]+'<input type="number" min="0" max="'+k[1]+'" value="'+k[1]+'" id="qa_'+id+'_'+k[0]+'"></label>'; }).join('');
@@ -4833,6 +4839,7 @@ function iwCard(it){ var tc=it.transformed_content||{}, ev=it.dependency_evidenc
     +(tc.stem?('<div class="iw-stem">'+esc(tc.stem)+'</div>'+'<div class="iw-opts">'+opts+'</div>'):'<div class="sub">(no transformed content — original question)</div>')
     +'<div class="iw-dep"><b>Dependency:</b> '+esc(it.integration_dependency||'')+'</div>'
     +'<div class="iw-checks">'+checks+'</div>'
+    +sevHtml
     +'<div class="sub" style="margin:4px 0">source: '+esc((it.source_question_ids||[]).join(', '))+'</div>'
     +'<div class="iw-qarow"><span class="sub">QA:</span> '+qaIn+'</div>'
     +'<div class="btnrow" style="gap:8px;margin-top:6px"><button class="btn primary sm" onclick="iwReview(\''+id+'\',\'approve\')">Approve</button>'

@@ -26,7 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2288,11 +2288,71 @@ Apply the HIGH-bar dependency test and answer ONLY JSON:
   "inferential": <must the learner actively CONNECT the two domains (not just recall two parallel facts)?>,
   "moreThanLookup": <is it MORE than a simple contraindication/dosing/screening/risk-factor lookup applied to the primary domain?>,
   "createsDecision": <does the INTERACTION between the domains create the clinical decision?>,
+  "quality": "<'strong' if the integration is clinically meaningful and hard to shortcut; 'adequate' if real but close to pattern-recognition; 'artificial' if it just places two subject labels in one vignette>",
   "why": "<one sentence>" }
 NORTH STAR: if a smart student could answer correctly WITHOUT actually integrating both domains (e.g. "because eGFR is X, drug Y is contraindicated"), set moreThanLookup=false. Default to false when unsure — a false positive pollutes the bank.`;
 }
 async function a17Adversarial(q, p){
-  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17AdvPrompt(q,p), parts:[], images:[], max_tokens:300, temperature:0, json:true });
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17AdvPrompt(q,p), parts:[], images:[], max_tokens:320, temperature:0, json:true });
+    const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return {};
+    try{ return JSON.parse(t.slice(a,b+1)); }catch(_){ return {}; }
+  }catch(e){ return {}; }
+}
+
+/* Reviewer 2 — CLINICAL VALIDITY. CRITICAL: reconstruct the case from the facts FIRST, reach a conclusion
+   INDEPENDENTLY, and only THEN compare to the keyed answer. Never reason backwards from the key — that is exactly
+   how the SIADH/ODS item (a 2 mmol/L 'correction' with a pontine-MRI clue) slipped past dependency review. */
+function a17ClinicalPrompt(q){
+  const L=["A","B","C","D","E"]; const opts=(q.options||[]).map((o,i)=>L[i]+". "+o).join("\n");
+  return `You are a senior physician examiner auditing a question for CLINICAL CORRECTNESS. Do NOT trust the keyed answer.
+
+STEM: ${q.stem||""}
+OPTIONS:
+${opts}
+KEYED ANSWER: ${L[q.answer]||q.answer}
+
+STEP 1 — Ignore the keyed answer. From the case facts alone, reason: what do the numbers, timeline, physiology and findings actually support? Watch for: impossible/contradictory timelines, values that don't match the claimed diagnosis, physiology or pharmacology that is wrong, dangerous or contraindicated management, and downstream findings (e.g. an MRI) that contradict the preceding data.
+STEP 2 — State the answer YOUR reconstruction lands on.
+STEP 3 — Compare to the keyed answer.
+
+Answer ONLY JSON:
+{ "reconstructed": "<the option letter your independent reasoning supports>",
+  "matches_key": <true only if your reconstruction genuinely supports the keyed answer>,
+  "valid": <false if ANY clinical fact, physiology, timeline, dose, or causal claim in the item is incorrect>,
+  "stem_sufficient": <can the answer be determined from the stem WITHOUT an unstated assumption?>,
+  "errors": ["<each specific clinical error; empty array if none>"] }`;
+}
+async function a17ClinicalReview(q, p){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17ClinicalPrompt(q), parts:[], images:[], max_tokens:500, temperature:0, json:true });
+    const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return {};
+    try{ return JSON.parse(t.slice(a,b+1)); }catch(_){ return {}; }
+  }catch(e){ return {}; }
+}
+
+/* Reviewer 3 — SINGLE-BEST-ANSWER. Grades distractor competitiveness: none / weak / strong / correct, and
+   flags answer leakage. Catches the "defensible competitor" items (no-retinopathy nephropathy, K+ vs paracentesis). */
+function a17SbaPrompt(q){
+  const L=["A","B","C","D","E"]; const opts=(q.options||[]).map((o,i)=>L[i]+". "+o).join("\n");
+  return `You are a test-construction reviewer checking SINGLE-BEST-ANSWER quality. Assume the medicine may be correct; judge answer UNIQUENESS only.
+
+STEM: ${q.stem||""}
+OPTIONS:
+${opts}
+KEYED ANSWER: ${L[q.answer]||q.answer}
+
+Judge, given ONLY the information supplied in the stem:
+- Is the keyed answer clearly superior to every other option, or is another option also defensible?
+- Grade the strongest distractor: "none" (all clearly inferior), "weak" (one is mildly defensible — needs tightening), "strong" (one is a serious competing answer that could be argued equal), "correct" (a distractor is actually right → the item has more than one correct answer).
+- Leakage: does the wording, an imaging description, an unusually explicit clue, or the temporal sequence announce the answer independently of the intended reasoning?
+
+Answer ONLY JSON:
+{ "single_best": <true if exactly one option is clearly the best given the stem>,
+  "distractor_flaw": "<none | weak | strong | correct>",
+  "leakage": <true if the answer is effectively given away>,
+  "why": "<one sentence>" }`;
+}
+async function a17SbaReview(q, p){
+  try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17SbaPrompt(q), parts:[], images:[], max_tokens:320, temperature:0, json:true });
     const t=(gen&&gen.text)||""; const a=t.indexOf("{"), b=t.lastIndexOf("}"); if(a<0||b<0) return {};
     try{ return JSON.parse(t.slice(a,b+1)); }catch(_){ return {}; }
   }catch(e){ return {}; }
@@ -2336,13 +2396,13 @@ app.post("/admin/integrated/transform", async (req,res)=>{
     const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);
     let src=null; (tr.data||[]).some(t=>((t.extras&&t.extras.qbank)||[]).some(q=>{ if(q&&q.stem&&qhOf(q)===question_id){ src=Object.assign({}, q, { id:question_id, _qh:question_id, _topic:t.title||t.name||"" }); return true; } return false; }));
     if(!src) return res.status(404).json({ error:"source question not found" });
-    const rec=await runCandidate(src, { mine:(q)=>a17Transform(q, family), adversarial:a17Adversarial });
+    const rec=await runCandidate(src, { mine:(q)=>a17Transform(q, family), adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
     await admin.from("integrated_items").insert({ question_id:rec.question_id||question_id, primary_topic:rec.primary_topic||null,
       integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||family,
       integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
       transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[question_id],
-      dependency_evidence:rec.dependency_evidence||null, review_status:rec.review_status, model:EXTRAS_MODEL });
-    res.json({ ok:true, review_status:rec.review_status, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content });
+      dependency_evidence:rec.dependency_evidence||null, qa:rec.qa||null, review_status:rec.review_status, model:EXTRAS_MODEL });
+    res.json({ ok:true, review_status:rec.review_status, severity:rec.severity||null, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.post("/admin/integrated/mine", async (req,res)=>{
@@ -2358,12 +2418,12 @@ app.post("/admin/integrated/mine", async (req,res)=>{
       const qh=qhOf(q); if(seen.has(qh)) return; pool.push(Object.assign({}, q, { id:qh, _qh:qh, _topic:t.title||t.name||"" })); }); });
     const batch=pool.slice(0, limit); let ai_reviewed=0, rejected=0;
     for(const q of batch){
-      const rec=await runCandidate(q, { mine:a17Mine, adversarial:a17Adversarial });
+      const rec=await runCandidate(q, { mine:a17Mine, adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
       await admin.from("integrated_items").insert({ question_id:rec.question_id||qhOf(q), primary_topic:rec.primary_topic||null,
         integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||null,
         integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
         transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[qhOf(q)],
-        dependency_evidence:rec.dependency_evidence||null, review_status:rec.review_status, model:EXTRAS_MODEL });
+        dependency_evidence:rec.dependency_evidence||null, qa:rec.qa||null, review_status:rec.review_status, model:EXTRAS_MODEL });
       if(rec.review_status==="ai_reviewed") ai_reviewed++; else rejected++;
     }
     res.json({ ok:true, scanned:batch.length, ai_reviewed, rejected, remaining_unprocessed: Math.max(0, pool.length-batch.length) });
@@ -2392,7 +2452,7 @@ app.post("/admin/integrated/minedebug", async (req,res)=>{
         stem:"A 70-year-old with acute decompensated heart failure is on IV furosemide. Over 48h his creatinine rises and urine output falls. What is the most appropriate management step?",
         options:["Reassess volume status and adjust diuresis for cardiorenal physiology","Double the furosemide dose immediately","Add an NSAID for symptom control","Stop all cardiac medications"], id:"__selftest_src__", _qh:"__selftest_src__" };
       let transformResult=null;
-      try{ const rec=await runCandidate(SRC, { mine:(q)=>a17Transform(q, "cardio_renal"), adversarial:a17Adversarial });
+      try{ const rec=await runCandidate(SRC, { mine:(q)=>a17Transform(q, "cardio_renal"), adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
         transformResult={ review_status:rec.review_status, reason:rec.reason||null, family:rec.integration_family||null,
           transformed_stem:(rec.transformed_content&&rec.transformed_content.stem||"").slice(0,180),
           dependency:rec.integration_dependency||null, dependency_evidence:rec.dependency_evidence||null,
@@ -2442,6 +2502,36 @@ app.get("/admin/integrated/readiness", async (req,res)=>{
     const counts=await admin.from("integrated_items").select("review_status");
     const by={}; (counts.data||[]).forEach(x=>{ by[x.review_status]=(by[x.review_status]||0)+1; });
     res.json({ ok:true, readiness:gate, by_status:by });
+  }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
+});
+
+app.post("/admin/integrated/review-debug", async (req,res)=>{
+  /* CALIBRATION diagnostic (no writes). Run all THREE specialist reviewers on a stored item (by id) or on raw
+     content, and return each reviewer's RAW output + the gate decisions + final severity — so we can inspect not
+     just the verdict but the REASONING (does R2 actually reconstruct the case, not echo the key?). */
+  try{ if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    const b=req.body||{};
+    let content=null, proposal=null;
+    if(b.id){
+      const r=await admin.from("integrated_items").select("*").eq("id",b.id).maybeSingle();
+      if(r.error||!r.data) return res.status(404).json({ error:"item not found" });
+      const it=r.data, tc=it.transformed_content||{};
+      content={ stem:tc.stem||"", options:tc.options||[], answer:tc.answer||0 };
+      proposal={ primary_topic:it.primary_topic, integrated_topics:it.integrated_topics||[], integration_family:it.integration_family,
+                 rationale:it.integration_rationale, dependency:it.integration_dependency };
+    } else {
+      content={ stem:b.stem||"", options:b.options||[], answer:b.answer||0 };
+      proposal={ primary_topic:b.primary_topic, integrated_topics:b.integrated_topics||[], integration_family:b.integration_family,
+                 rationale:b.rationale, dependency:b.dependency };
+    }
+    const depRaw=await a17Adversarial(content, proposal);
+    const clinRaw=await a17ClinicalReview(content, proposal);
+    const sbaRaw=await a17SbaReview(content, proposal);
+    const dep=dependencyGate(depRaw), clin=clinicalGate(clinRaw), sba=sbaGate(sbaRaw);
+    const qa=qaVerdict({ dependency:dep, integration_quality:(depRaw&&depRaw.quality)||"adequate", clinical:clin, sba });
+    res.json({ ok:true, family:proposal.integration_family, keyed_answer:content.answer,
+      R1_dependency:{ raw:depRaw, gate:dep }, R2_clinical:{ raw:clinRaw, gate:clin }, R3_sba:{ raw:sbaRaw, gate:sba },
+      severity:qa.severity, action:qa.action, review_status:qa.review_status, reasons:qa.reasons });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 

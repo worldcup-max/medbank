@@ -1,0 +1,20 @@
+{
+  "note": "Permanent 6-case live calibration set. IDs are the exact ai_reviewed items from the first human review. Run each through POST /admin/integrated/review-debug {id} after deploying the multi-reviewer server. Compare live severity + reasoning against expected + the human reference verdict.",
+  "human_reference": "6/6 machine-pass under the OLD single-reviewer gate; only 1/6 production-clean.",
+  "cases": [
+    { "n": 1, "family": "cardio_endocrine", "id": "eee61146-dd7d-41da-9f51-c31ae1109acf", "keyed_answer": 0, "expected_severity": "minor", "human_verdict": "EDIT — integration close to pattern-recognition" },
+    { "n": 2, "family": "endocrine_renal", "id": "62f62b7d-fe59-4538-83ba-11446ea6684b", "keyed_answer": 0, "expected_severity": "major", "human_verdict": "REJECT — no retinopathy makes diabetic nephropathy insecure; strong competing dx" },
+    { "n": 3, "family": "neuro_endocrine", "id": "204aef05-dc92-46d2-b7e8-026918be7637", "keyed_answer": 1, "expected_severity": "hard", "human_verdict": "REJECT — 2 mmol/L rise cannot cause ODS; MRI clue forces an unjustified answer. MUST identify the sodium-trajectory inconsistency, not merely echo the MRI." },
+    { "n": 4, "family": "hepatic_pharm", "id": "0fbe0fcd-748d-444a-b095-2da155752fb8", "keyed_answer": 0, "expected_severity": "minor", "human_verdict": "EDIT — distractor B mildly defensible" },
+    { "n": 5, "family": "resp_cardiac", "id": "a31f22db-1892-4803-80f6-2d0c6080341f", "keyed_answer": 1, "expected_severity": "none", "human_verdict": "APPROVE — genuine COPD→PH→LTOT integration. MUST recognize real integration, not pattern-match COPD→oxygen." },
+    { "n": 6, "family": "gi_hepatic", "id": "b2045848-954c-400a-9e87-21fc2d546540", "keyed_answer": 2, "expected_severity": "major", "human_verdict": "EDIT — hypokalaemia is a strong competing HE precipitant vs paracentesis" }
+  ],
+  "success_criteria": [
+    "Final severity correct on all six",
+    "R2 clinical reconstruction correct on all six",
+    "R3 SBA judgment correct on all six",
+    "No hard-fail case downgraded (100%)",
+    "#3: R2 must cite the Na 128->130 inconsistency, not the MRI",
+    "#5: R1 must grade integration genuine (strong/adequate), not artificial"
+  ]
+}

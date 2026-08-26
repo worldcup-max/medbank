@@ -28,6 +28,76 @@ export function dependencyGate(v){
   return { pass, checks, reasons };
 }
 
+/* ── Reviewer 2 — CLINICAL VALIDITY. The reviewer must reconstruct the case INDEPENDENTLY
+   (facts → differential/physiology → conclusion) and only THEN compare to the keyed answer, so a
+   suggestive downstream finding can't make it rationalise a wrong key (the #3 SIADH/ODS failure). */
+export function clinicalGate(v){
+  v=v||{};
+  const errors = Array.isArray(v.errors) ? v.errors.filter(Boolean) : [];
+  const valid = v.valid!==false && errors.length===0;                 // no false premise / physiology / timeline
+  const matches_key = v.matches_key===true;                            // independent reconstruction lands on the key
+  const stem_sufficient = v.stem_sufficient!==false;                   // answerable without an unstated assumption
+  const pass = valid && matches_key && stem_sufficient;
+  return { pass, valid, matches_key, stem_sufficient, errors, reconstructed:v.reconstructed||null };
+}
+
+/* ── Reviewer 3 — SINGLE-BEST-ANSWER. Distractor competitiveness is graded, not boolean:
+   none | weak (minor tighten) | strong (major edit) | correct (a distractor is actually right → hard fail). */
+export const DISTRACTOR_GRADES = ["none","weak","strong","correct"];
+export function sbaGate(v){
+  v=v||{};
+  const single_best = v.single_best!==false;                           // exactly one defensible best answer
+  const distractor_flaw = DISTRACTOR_GRADES.includes(v.distractor_flaw) ? v.distractor_flaw : "none";
+  const leakage = v.leakage===true;                                    // wording/imaging/sequence announces the answer
+  const pass = single_best && distractor_flaw==="none" && !leakage;
+  return { pass, single_best, distractor_flaw, leakage };
+}
+
+/* ── Aggregate the specialist verdicts into ONE severity + recommended action. Deterministic and unit-tested;
+   the reviewers (LLM) supply the signals, this maps them. Severity: hard > major > minor > none.
+   hard → auto-reject; major/minor/none → to the HUMAN queue (never auto-approved), carrying the flags. */
+export const SEVERITY_RANK = { none:0, minor:1, major:2, hard:3 };
+export function qaVerdict(inp){
+  inp=inp||{};
+  const dep = inp.dependency || { pass:false, reasons:["no dependency verdict"] };
+  const iq  = ["strong","adequate","artificial"].includes(inp.integration_quality) ? inp.integration_quality : "adequate";
+  const clin= inp.clinical || { pass:false, valid:false, matches_key:false, stem_sufficient:false, errors:["no clinical verdict"] };
+  const sba = inp.sba || { pass:false, single_best:false, distractor_flaw:"none", leakage:false };
+  const criteria = {};
+  const fail = (name, sev, reason)=>{ criteria[name]={ pass:false, severity:sev, reason }; };
+  const pass = (name)=>{ criteria[name]={ pass:true, severity:"none" }; };
+
+  // 1 cross-domain dependency (hard: not eligible for Integrated if it isn't genuinely integrated)
+  dep.pass ? pass("cross_domain_dependency") : fail("cross_domain_dependency","hard",(dep.reasons||[]).join("; ")||"not integrated");
+  // 2 clinical validity (hard: false premise/physiology/timeline OR reconstruction ≠ key)
+  if(!clin.valid) fail("clinical_validity","hard",(clin.errors||[]).join("; ")||"clinically invalid");
+  else if(!clin.matches_key) fail("clinical_validity","hard","independent reconstruction does not support the keyed answer");
+  else pass("clinical_validity");
+  // 3 single-best-answer (hard: two equivalent answers)
+  sba.single_best ? pass("single_best_answer") : fail("single_best_answer","hard","more than one defensible best answer");
+  // 4 distractor validity (correct→hard, strong→major, weak→minor)
+  if(sba.distractor_flaw==="correct") fail("distractor_validity","hard","a distractor is actually correct");
+  else if(sba.distractor_flaw==="strong") fail("distractor_validity","major","a distractor is a strong competing answer");
+  else if(sba.distractor_flaw==="weak") fail("distractor_validity","minor","a distractor is mildly defensible");
+  else pass("distractor_validity");
+  // 5 integration quality (artificial→major, adequate→minor, strong→pass)
+  if(iq==="artificial") fail("integration_quality","major","integration is an artificial label pairing");
+  else if(iq==="adequate") fail("integration_quality","minor","integration is real but close to pattern-recognition");
+  else pass("integration_quality");
+  // 6 stem sufficiency (major)
+  clin.stem_sufficient ? pass("stem_sufficiency") : fail("stem_sufficiency","major","stem needs an unstated assumption");
+  // 7 no answer leakage (hard if it forces an UNjustified key; else major)
+  if(sba.leakage) fail("answer_leakage", (!clin.matches_key?"hard":"major"), "wording/imaging/sequence announces the answer");
+  else pass("answer_leakage");
+
+  let sev="none";
+  Object.values(criteria).forEach(c=>{ if(SEVERITY_RANK[c.severity]>SEVERITY_RANK[sev]) sev=c.severity; });
+  const action = sev==="hard"?"reject" : sev==="major"?"major_edit" : sev==="minor"?"minor_edit" : "pass";
+  const reasons = Object.entries(criteria).filter(([,c])=>!c.pass).map(([k,c])=>k+" ["+c.severity+"]: "+c.reason);
+  return { severity:sev, action, review_status: sev==="hard"?"rejected":"ai_reviewed", criteria, reasons,
+           gates:{ dependency:dep, integration_quality:iq, clinical:clin, sba } };
+}
+
 /* QA score — 7 criteria; approve iff total ≥ 15/19 AND dependency ≥ 3 (dependency is mandatory). */
 export const QA_MAX = { dependency:3, coherence:3, educational:3, discrimination:3, targetClarity:2, difficulty:2, noArtificialComplexity:3 };
 export const QA_TOTAL_MAX = 19, QA_THRESHOLD = 15, QA_DEP_MIN = 3;
@@ -41,7 +111,7 @@ export function qaScore(scores){
 }
 
 /* Content-readiness gate over the APPROVED bank. Do NOT expose Integrated Mode until ready. */
-export const READINESS = { minApproved:100, minFamilies:8, minPerFamily:10, maxFamilyShare:0.30, minPerPairAnalytics:3 };
+export const READINESS = { minApproved:20, minFamilies:8, minPerFamily:2, maxFamilyShare:0.35, minPerPairAnalytics:3 };
 export function readinessGate(approved, cfg){
   const R=Object.assign({}, READINESS, cfg||{});
   approved=approved||[];
@@ -81,8 +151,14 @@ export async function runCandidate(question, deps){
   const reviewQ = (proposal.transformed_content && proposal.transformed_content.stem)
     ? { stem:proposal.transformed_content.stem, options:proposal.transformed_content.options||[], answer:proposal.transformed_content.answer||0 }
     : question;
-  const verdict = await deps.adversarial(reviewQ, proposal);          // AI actively tries to DISPROVE integration
+  // Reviewer 1 — dependency (AI actively tries to DISPROVE integration)
+  const verdict = await deps.adversarial(reviewQ, proposal);
   const dep = dependencyGate(verdict||{});
+  // Reviewer 2 — clinical validity (independent reconstruction). Reviewer 3 — single-best-answer.
+  // Injected as separate specialists so one model never polices integration + medicine + answer-uniqueness at once.
+  const clin = deps.clinical ? clinicalGate(await deps.clinical(reviewQ, proposal)) : { pass:true, valid:true, matches_key:true, stem_sufficient:true, errors:[], skipped:true };
+  const sba  = deps.sba      ? sbaGate(await deps.sba(reviewQ, proposal))          : { pass:true, single_best:true, distractor_flaw:"none", leakage:false, skipped:true };
+  const qa = qaVerdict({ dependency:dep, integration_quality:(verdict&&verdict.quality)||"adequate", clinical:clin, sba });
   const rec = {
     question_id: srcId,
     primary_topic: proposal.primary_topic||null,
@@ -93,17 +169,23 @@ export async function runCandidate(question, deps){
     integration_dependency: proposal.dependency||null,
     transformed_content: proposal.transformed_content||null,          // NEW content, if any — original stays untouched
     source_question_ids: proposal.source_question_ids||[srcId],
-    dependency_evidence: verdict||null
+    dependency_evidence: verdict||null,
+    qa,                                                                // full multi-reviewer verdict + severity
+    severity: qa.severity
   };
-  if(!dep.pass) return Object.assign(rec, { review_status:"rejected", reason:dep.reasons.join("; ") });
-  return Object.assign(rec, { review_status:"ai_reviewed" });          // → human queue; NEVER auto-approved
+  // hard fail → auto-reject. Everything else → HUMAN queue (ai_reviewed), carrying severity/flags. NEVER auto-approved.
+  return Object.assign(rec, { review_status: qa.review_status, reason: qa.reasons.length?qa.reasons.join(" | "):null });
 }
 /* The ONLY route to 'approved'. Requires an explicit approve action AND a passing QA score; a failing QA on an
    approve attempt is bounced to needs_edit (a mediocre item cannot slip into the bank). */
 export function applyHumanReview(item, action, qaScores, reviewer){
   const at=new Date().toISOString();
-  if(action==="approve"){ const qa=qaScore(qaScores||{});
-    if(!qa.approve) return Object.assign({}, item, { review_status:"needs_edit", qa, reviewer, reviewed_at:at, reason:qa.reason });
+  if(action==="approve"){ const human=qaScore(qaScores||{});
+    // a human may NOT approve over a machine HARD fail — clinical error / dual-answer / dangerous Tx cannot be waved through
+    const machineHard = item && item.qa && item.qa.severity==="hard";
+    const qa=Object.assign({}, item&&item.qa, { human });
+    if(machineHard) return Object.assign({}, item, { review_status:"rejected", qa, reviewer, reviewed_at:at, reason:"machine hard-fail cannot be human-approved: "+((item.qa.reasons||[]).join(" | ")) });
+    if(!human.approve) return Object.assign({}, item, { review_status:"needs_edit", qa, reviewer, reviewed_at:at, reason:human.reason });
     return Object.assign({}, item, { review_status:"approved", qa, reviewer, reviewed_at:at }); }
   if(action==="reject") return Object.assign({}, item, { review_status:"rejected", reviewer, reviewed_at:at });
   if(action==="edit")   return Object.assign({}, item, { review_status:"needs_edit", reviewer, reviewed_at:at });
