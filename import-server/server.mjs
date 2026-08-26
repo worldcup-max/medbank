@@ -2326,6 +2326,20 @@ app.post("/admin/integrated/minedebug", async (req,res)=>{
      so we can see whether the miner is erroring vs legitimately returning integrable:false. */
   try{
     if(!await requireAdmin(req)) return res.status(403).json({ error:"admins only" });
+    // SELF-TEST: prove the miner discriminates — a known-genuine cross-domain item should return integrable:true,
+    // a single-domain item should return false. Independent of what's in the pool.
+    if(req.body && req.body.selftest){
+      const POS={ _topic:"Cardiology", skill:"management", answer:0,
+        stem:"A 68-year-old with severe heart failure on high-dose IV furosemide develops rising creatinine and worsening renal function. Which single change best explains the deterioration and how should management be adjusted?",
+        options:["Reduce diuresis and reassess volume status (cardiorenal syndrome)","Increase furosemide dose further","Start a nephrotoxic NSAID for comfort","Ignore the creatinine — it is irrelevant"] };
+      const NEG={ _topic:"Seizure Disorders", skill:"diagnosis", answer:0,
+        stem:"A 6-year-old girl has episodes of staring and unresponsiveness with 3Hz spike-and-wave on EEG. What is the most likely diagnosis?",
+        options:["Childhood absence epilepsy","Focal seizure","Syncope","Breath-holding spell"] };
+      const run=async(q)=>{ try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17MinePrompt(q), parts:[], images:[], max_tokens:500, temperature:0.3, json:true });
+        const t=(gen&&gen.text)||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); let o=null; if(a>=0&&b>=0){ try{ o=JSON.parse(t.slice(a,b+1)); }catch(e){} }
+        return { integrable:(o?o.integrable:null), family:(o?o.integration_family:null), primary:(o?o.primary_topic:null), integ:(o?o.integrated_topics:null), dependency:(o?o.dependency:null), raw:(o?null:t.slice(0,300)) }; }catch(e){ return { error:e.message||String(e) }; } };
+      return res.json({ ok:true, model:EXTRAS_MODEL, positive_expect_true:await run(POS), negative_expect_false:await run(NEG) });
+    }
     const limit=Math.min(5, Number((req.body&&req.body.limit)||3));
     const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);
     const pool=[]; (tr.data||[]).forEach(t=>{ ((t.extras&&t.extras.qbank)||[]).forEach(q=>{ if(q&&q.stem) pool.push(Object.assign({}, q, { id:qhOf(q), _qh:qhOf(q), _topic:t.title||t.name||"" })); }); });
