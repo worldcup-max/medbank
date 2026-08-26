@@ -2385,7 +2385,18 @@ app.post("/admin/integrated/minedebug", async (req,res)=>{
       const run=async(q)=>{ try{ const gen=await generate({ model:EXTRAS_MODEL, prompt:a17MinePrompt(q), parts:[], images:[], max_tokens:500, temperature:0.3, json:true });
         const t=(gen&&gen.text)||"", a=t.indexOf("{"), b=t.lastIndexOf("}"); let o=null; if(a>=0&&b>=0){ try{ o=JSON.parse(t.slice(a,b+1)); }catch(e){} }
         return { integrable:(o?o.integrable:null), family:(o?o.integration_family:null), primary:(o?o.primary_topic:null), integ:(o?o.integrated_topics:null), dependency:(o?o.dependency:null), raw:(o?null:t.slice(0,300)) }; }catch(e){ return { error:e.message||String(e) }; } };
-      return res.json({ ok:true, model:EXTRAS_MODEL, positive_expect_true:await run(POS), negative_expect_false:await run(NEG) });
+      // also prove the TRANSFORMER is productive: take a plain single-domain source + a family, transform, then
+      // run the REAL adversarial on the TRANSFORMED content and the dependency gate.
+      const SRC={ _topic:"Endocrinology", skill:"management", answer:0,
+        stem:"A 58-year-old with type 2 diabetes and HbA1c 9.2% needs better glycaemic control. Which oral agent is most appropriate?",
+        options:["Metformin","Glibenclamide","Pioglitazone","Acarbose"], id:"__selftest_src__", _qh:"__selftest_src__" };
+      let transformResult=null;
+      try{ const rec=await runCandidate(SRC, { mine:(q)=>a17Transform(q, "endocrine_renal"), adversarial:a17Adversarial });
+        transformResult={ review_status:rec.review_status, reason:rec.reason||null, family:rec.integration_family||null,
+          transformed_stem:(rec.transformed_content&&rec.transformed_content.stem||"").slice(0,180),
+          dependency:rec.integration_dependency||null, dependency_evidence:rec.dependency_evidence||null,
+          source_question_ids:rec.source_question_ids||null }; }catch(e){ transformResult={ error:e.message||String(e) }; }
+      return res.json({ ok:true, model:EXTRAS_MODEL, positive_expect_true:await run(POS), negative_expect_false:await run(NEG), transform_expect_ai_reviewed:transformResult });
     }
     const limit=Math.min(5, Number((req.body&&req.body.limit)||3));
     const tr=await admin.from("topics").select("id,title,extras").not("extras","is",null).limit(500);

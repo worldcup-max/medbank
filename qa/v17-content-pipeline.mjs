@@ -88,6 +88,13 @@ const fakeVerdict={removeA_changes:true,removeB_changes:false,bothRequired:false
   ok(r.source_question_ids[0]==='Q9' && r.integration_family==='endocrine_renal', 'P5 provenance (source Q9) + family preserved');
   ok(JSON.stringify(q)===before, 'P5 INVARIANT: source question NOT mutated by transformation'); }
 
+// P6: adversarial must review the TRANSFORMED candidate, not the source (regression for the review-target bug)
+{ let sawStem=null; const src={ id:'Q10', stem:'ORIGINAL single-domain stem', target_id:'T' };
+  const prop={ primary_topic:'Endocrinology', integrated_topics:['Nephrology'], integration_family:'endocrine_renal', source_question_ids:['Q10'],
+    transformed_content:{ stem:'TRANSFORMED integrated stem (diabetes + CKD)', options:['a','b','c','d'], answer:0, rationales:[] } };
+  await runCandidate(src, { mine:async()=>prop, adversarial:async(q)=>{ sawStem=q.stem; return genuineVerdict; } });
+  ok(sawStem==='TRANSFORMED integrated stem (diabetes + CKD)', 'P6 adversarial reviews the TRANSFORMED stem, not the source'); }
+
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);
 })();

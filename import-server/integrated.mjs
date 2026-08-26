@@ -67,7 +67,11 @@ export async function runCandidate(question, deps){
   const srcId = question.id || question._qh || null;
   const proposal = await deps.mine(question);                          // AI proposes a candidate integration (or null)
   if(!proposal) return { question_id:srcId, review_status:"rejected", reason:"no candidate", mined:false, source_question_ids:[srcId] };
-  const verdict = await deps.adversarial(question, proposal);          // AI actively tries to DISPROVE integration
+  // review the ACTUAL candidate: the TRANSFORMED question if this was a transformation, else the original.
+  const reviewQ = (proposal.transformed_content && proposal.transformed_content.stem)
+    ? { stem:proposal.transformed_content.stem, options:proposal.transformed_content.options||[], answer:proposal.transformed_content.answer||0 }
+    : question;
+  const verdict = await deps.adversarial(reviewQ, proposal);          // AI actively tries to DISPROVE integration
   const dep = dependencyGate(verdict||{});
   const rec = {
     question_id: srcId,
