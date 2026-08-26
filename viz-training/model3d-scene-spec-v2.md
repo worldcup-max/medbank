@@ -123,6 +123,17 @@ renderer lacks, because the day a better renderer arrives the teaching is alread
 | `COMPARE_STRUCTURES` | `targets[]`, `layout?` | two structures lit, others ghosted | native |
 | `SHOW_RELATIONSHIP` | `from`, `to`, `kind` | light both, draw a connector | native |
 | `TRACE_STRUCTURE` | `target`, `path[]`, `duration?` | follow a structure along its course | **degrades** → timed sequential highlight along `path` |
+
+Every `target`, `targets[]`, `path[]`, `from` and `to` must name a structure `key` or a `group` in the same
+scene, or be `*`. The validator rejects anything else — that check is what stops a mistyped waypoint from
+shipping as a step the camera silently skips.
+
+**Tracing something that has no mesh.** Blood through the chambers, air down the airway, CSF round the
+ventricles: the *path* is anatomy but the *subject* is not a model. Write it as `concept:<slug>` —
+`"target": "concept:blood"` — and the renderer walks the path without lighting a subject. Say what the
+concept is in the narration; the slug is a contract, not a label. Never invent a bare word like `blood` as
+a target: it reads exactly like a typo, and a validator lenient enough to accept it is lenient enough to
+accept the typo too.
 | `PEEL_LAYER` | `layer`, `direction?` | remove an anatomical layer | **degrades** → hides structures tagged with that `layer` |
 
 The player shows a "≈ simplified" note whenever it degrades an op, and `index.json` records it per scene, so

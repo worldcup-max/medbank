@@ -136,7 +136,14 @@ function validate(scene) {
   }
 
   /* ---- 5 ops + 6 capability ---- */
-  const resolves = t => t === '*' || t === 'blood' || keys.has(t) || groups.has(t);
+  /* A trace can follow something that has no mesh — blood through the chambers, air down the airway, CSF
+     round the ventricles. That is a real teaching move, not a mistake, so the vocabulary says so out loud:
+     `concept:blood` is a declared abstraction and the renderer walks the path without lighting a subject.
+     What this replaces was the literal `t === 'blood'` — a magic string wired into the validator to make
+     one scene pass, which quietly granted every future scene a free undefined target spelled "blood" and
+     left a real typo indistinguishable from a deliberate one. */
+  const CONCEPT = /^concept:[a-z][a-z0-9_-]*$/;
+  const resolves = t => t === '*' || CONCEPT.test(t) || keys.has(t) || groups.has(t);
   for (const v of (scene.views || [])) {
     const where = JSON.stringify(v.title || v.mode);
     if (!v.narration) W('ops', `view ${where}: no narration`);

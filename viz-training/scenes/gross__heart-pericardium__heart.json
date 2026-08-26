@@ -523,7 +523,7 @@
       "ops": [
         {
           "op": "TRACE_STRUCTURE",
-          "target": "blood",
+          "target": "concept:blood",
           "path": [
             "svc",
             "tricuspid",
