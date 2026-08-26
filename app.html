@@ -2699,6 +2699,39 @@ function mb3dScenes(t){
   return [];
 }
 function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
+/* One voice for the whole app, and one telemetry rail.
+ * The 3D player never calls speechSynthesis itself — it asks to be spoken for. That way a trace narrates
+ * through the SAME tuned voice (cloud voice included) the student already hears in Visualize and Smart
+ * Drill, instead of a second, differently-pitched robot appearing inside one tab.
+ * The sink below is the demand pipeline: mb3d_miss events are what build-demand.mjs turns into the
+ * authoring queue, so without it the queue stays empty and scenes get authored in alphabetical order
+ * rather than in the order students actually need them. */
+(function mb3dHooks(){
+  function wire(){
+    if(!window.MB3D) return false;
+    try{
+      if(MB3D.speaker) MB3D.speaker(function(text){
+        try{
+          if(text===null||text===undefined||text===''){ if(typeof stopSpeak==='function') stopSpeak(); return; }
+          if(typeof speak==='function') speak(text);
+        }catch(e){}
+      });
+    }catch(e){}
+    try{
+      if(MB3D.sink) MB3D.sink(function(name, d){
+        try{
+          if(typeof smartLog!=='function') return;
+          var ev={t:'mb3d_'+name};
+          Object.keys(d||{}).forEach(function(k){ ev[k]=d[k]; });
+          try{ ev.topic=(window.currentTopicId?currentTopicId():'')||''; }catch(e){}
+          smartLog(ev);
+        }catch(e){}
+      });
+    }catch(e){}
+    return true;
+  }
+  if(!wire()) document.addEventListener('DOMContentLoaded',wire);
+})();
 /* In-note trigger. Not "this note mentions anatomy" but "this sentence describes something a flat page
  * can't carry" — an origin, a course, a relationship in space. How MANY chips a note gets is decided by
  * MB3D.planNote() from the note's own length, the spacing between opportunities and how many structures

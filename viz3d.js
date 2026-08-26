@@ -538,6 +538,14 @@
   }
 
   /* ======================= the player ======================= */
+  /* Narration is the APP's job, not the player's. MedBank already has a tuned voice — rate, pitch, the
+     cloud voice when it is on — and a student who hears one voice in Visualize should hear the same voice
+     here. So viz3d asks to be spoken for and never touches speechSynthesis itself: SPEAK(text) says a
+     line, SPEAK(null) stops. With no speaker registered the player is silent and nothing changes. */
+  var SPEAK = null;
+  function speaker(fn) { SPEAK = (typeof fn === 'function') ? fn : null; }
+  function say(text) { try { if (SPEAK) SPEAK(text); } catch (e) {} }
+
   var LIVE = null;
   /* Every mount gets a ticket. The app re-renders its whole page on any state change and schedules a fresh
      MB3D.mount() each time, so two mounts of the same scene can easily be in flight at once — and because
@@ -651,10 +659,35 @@
       controls.minDistance = 1.2; controls.maxDistance = 200;
     }
 
-    sceneObj.add(new T.HemisphereLight(0xf2ecff, 0x20203a, 1.0));
-    var k1 = new T.DirectionalLight(0xffffff, 1.15); k1.position.set(5, 8, 6); sceneObj.add(k1);
-    var k2 = new T.DirectionalLight(0xbfd0ff, 0.5); k2.position.set(-6, 2, 4); sceneObj.add(k2);
-    var k3 = new T.DirectionalLight(0x9d8bff, 0.6); k3.position.set(-3, 3, -6); sceneObj.add(k3);
+    /* Lighting, and why it is this dim.
+       Bone in this corpus is authored near-white (#e9e1cc, #e4dcc4). The old rig put a full-strength white
+       key at 1.15 on top of a 1.0 hemisphere and two fills — over three units of light onto a surface that
+       starts one step from white. From the lit side the scapula clipped to flat white, and a blown-out
+       highlight has no gradient, which is precisely what a tubercle needs in order to read as raised. The
+       scene lost the detail it exists to teach.
+
+       Roughly half the light, a warm-neutral key instead of pure white, and ACES tone mapping to roll the
+       highlights off rather than clip them. Exposure compensates so the overall image is not darker — just
+       no longer saturated at the top end. */
+    var LIGHTS = { ambient: 0.55, key: 0.72, fill: 0.30, rim: 0.34, exposure: 1.15 };
+    var lAmb = new T.HemisphereLight(0xf2ecff, 0x20203a, LIGHTS.ambient); sceneObj.add(lAmb);
+    var k1 = new T.DirectionalLight(0xfff4e6, LIGHTS.key); k1.position.set(5, 8, 6); sceneObj.add(k1);
+    var k2 = new T.DirectionalLight(0xbfd0ff, LIGHTS.fill); k2.position.set(-6, 2, 4); sceneObj.add(k2);
+    var k3 = new T.DirectionalLight(0x9d8bff, LIGHTS.rim); k3.position.set(-3, 3, -6); sceneObj.add(k3);
+    if (T.ACESFilmicToneMapping) {
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = LIGHTS.exposure;
+    }
+    /* Tunable live from the console so the look can be judged by eye without a deploy:
+         MB3D.player().setLighting({ key: 0.6, exposure: 1.0 }) */
+    function setLighting(o) {
+      o = o || {};
+      Object.keys(o).forEach(function (k) { if (typeof o[k] === 'number') LIGHTS[k] = o[k]; });
+      lAmb.intensity = LIGHTS.ambient; k1.intensity = LIGHTS.key;
+      k2.intensity = LIGHTS.fill; k3.intensity = LIGHTS.rim;
+      renderer.toneMappingExposure = LIGHTS.exposure;
+      return LIGHTS;
+    }
 
     var holder = new T.Group(); sceneObj.add(holder);
     var overlay = new T.Group(); sceneObj.add(overlay);          // relationship lines
@@ -743,6 +776,7 @@
          stays at 0 means the loop is being called and choosing not to draw — a very different fault
          from the loop never being scheduled at all, and indistinguishable from outside without this. */
       stats: function () { return { ticks: ticks, frames: frames, skippedHidden: skippedHidden, hidden: document.hidden, spinning: spinning }; },
+      setLighting: setLighting,
       dispose: function () { teardown(); }
     };
     /* One more chance to have been overtaken: three.js and the scene JSON are loaded, the renderer exists,
@@ -955,7 +989,11 @@
             state.only.forEach(function (k) { state.hi[k] = 0.5; });
             break;
           case 'SHOW_RELATIONSHIP': state.pairs.push(o); state.hi[o.from] = 0.5; state.hi[o.to] = 0.5; break;
-          case 'TRACE_STRUCTURE': degraded.TRACE_STRUCTURE = 1; trace(o); break;
+          case 'TRACE_STRUCTURE':
+            degraded.TRACE_STRUCTURE = 1;
+            if (v.narration) say(v.narration);              // set the scene, then walk it
+            trace(o);
+            break;
           case 'PEEL_LAYER':
             degraded.PEEL_LAYER = 1;
             structures.forEach(function (s) { if (s.layer === o.layer) state.visible[s.key] = false; });
@@ -967,6 +1005,7 @@
 
     function applyView(i, fromPlay) {
       var v = views[i]; if (!v) return;
+      say(null);                                       // never let the previous view keep talking over this one
       currentView = i;
       useCount.views++;
       stopTour();
@@ -1047,8 +1086,13 @@
         paint();
         flyTo(center(m), frameDist(m), 900);
         var s = structures.filter(function (x) { return x.key === k; })[0];
-        if (s) $('narr').innerHTML = '<b>' + esc(s.label) + '</b>' + (s.narration ? ' — ' + esc(s.narration) : '') +
-          '<span style="color:#8f8ab5;font-size:12px"> · step ' + (i + 1) + ' of ' + path.length + '</span>';
+        if (s) {
+          $('narr').innerHTML = '<b>' + esc(s.label) + '</b>' + (s.narration ? ' — ' + esc(s.narration) : '') +
+            '<span style="color:#8f8ab5;font-size:12px"> · step ' + (i + 1) + ' of ' + path.length + '</span>';
+          /* Say it as it flies. A trace is a journey with stops; the voice arriving with the camera is
+             what makes it a guided walk rather than three bones lighting up in silence. */
+          say(s.label + (s.narration ? '. ' + s.narration : ''));
+        }
         i++;
       }
       go();
@@ -1092,6 +1136,8 @@
       paint();
     }
 
+    /* Distinct, high-contrast against cream bone, pink muscle and a near-black background. */
+    var HILITE = ['#4dd2ff', '#ffd54a', '#7cff8f', '#ff6ad5', '#c9a3ff', '#ff9d6a'];
     function paint() {
       var anySel = selected.length > 0;
       structures.forEach(function (s) {
@@ -1101,12 +1147,23 @@
         // "Only this": ghosting to 10% still leaves a haze. Sometimes a student wants the structure alone.
         if (solo && anySel && selected.indexOf(s.key) < 0) visible = false;
         m.visible = visible;
-        var isSel = selected.indexOf(s.key) >= 0;
+        var selIdx = selected.indexOf(s.key);
+        var isSel = selIdx >= 0;
         var isHi = isSel || (state.hi && state.hi[s.key] != null);
         var offstage = (anySel && !isSel) || (state.only && state.only.indexOf(s.key) < 0);
         m.material.opacity = isHi ? 1 : (offstage ? (ghost || state.ghosted ? 0.10 : 0.55) : 1);
-        m.material.emissive.set(isHi ? new T.Color(s.color || '#7c5cff') : 0x000000);
-        m.material.emissiveIntensity = isSel ? 0.5 : (state.hi && state.hi[s.key]) || 0;
+        /* A selected part takes a colour of its own, not a brighter version of the colour it already had.
+           Lighting up a cream bone in cream told a student nothing, and picking three parts lit three
+           things in three shades of the same cream. Each selection now gets the next colour from a fixed
+           palette, so "the second thing I tapped" is answerable at a glance — and the swatch in the list
+           and the pin on the model take the same colour, so list and model always agree. */
+        var glow = isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff');
+        m.material.color.set(isSel ? glow : (s.color || '#c9c3d8'));
+        m.material.emissive.set(isHi ? new T.Color(glow) : 0x000000);
+        m.material.emissiveIntensity = isSel ? 0.42 : (state.hi && state.hi[s.key]) || 0;
+        var btn = host.querySelector('.mb3d-part[data-key="' + s.key + '"]');
+        if (btn) { var d = btn.querySelector('.mb3d-dot'); if (d) d.style.background = isSel ? glow : (s.color || '#7c5cff'); }
+        if (pins[s.key]) pins[s.key].dot.style.background = glow;
         m.material.clippingPlanes = (clipping && s.role !== 'part') ? [clipPlane] : null;
         m.material.needsUpdate = true;
       });
@@ -1195,6 +1252,7 @@
       step(); tourTimer = setInterval(step, 2600);
     }
     function stopTour() {
+      say(null);
       if (tourTimer) clearInterval(tourTimer);
       tourTimer = null; $('tour').textContent = 'Tour parts';
     }
@@ -1343,6 +1401,7 @@
                                    part_taps: useCount.partTaps, views: useCount.views, traces: useCount.traces,
                                    solo: useCount.solo, ghost: useCount.ghost, played: useCount.played, tours: useCount.tours });
       running = false;
+      say(null);                                       // a voice must not outlive the picture it describes
       if (raf) cancelAnimationFrame(raf);
       if (tourTimer) clearInterval(tourTimer);
       if (traceTimer) clearInterval(traceTimer);
@@ -1430,6 +1489,7 @@
     close: close,
     dispose: dispose,
     register: register,
+    speaker: speaker,
     /* The live player, for diagnosing a scene that is on screen and misbehaving. Read-only in spirit:
        nothing in the app calls this. It exists because "the viewport is black" is impossible to diagnose
        from outside — camera, holder scale and material state are the whole answer and were unreachable. */

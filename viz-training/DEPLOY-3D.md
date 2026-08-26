@@ -24,6 +24,7 @@ node --check viz3d.js
 node viz-training/tools/validate-scenes.mjs      # must end "2/2 scenes valid."
 node viz-training/tools/test-topic-match.mjs     # must end "18/18 expectations met."
 node viz-training/tools/test-mesh-loading.mjs    # must end "6/6 expectations met." (takes ~40s)
+node viz-training/tools/test-fit-idempotent.mjs  # must end "5/5 expectations met." (needs `npm i three@0.128.0`)
 node viz-training/tools/build-scene-index.mjs    # regenerate if any scene changed
 ```
 
@@ -99,31 +100,51 @@ state involved. That is the whole point of shipping it dark first.
 
 - **A connection**, the first time they open a scene: three.js (~600 KB, then browser-cached) and the meshes,
   browser-cached per URL. Later opens of the same scene are cheap.
-- **The mesh payload is the real cost, and it is bigger than this doc used to claim.** Measured against the
-  live archive on 2026-08-25: the arm scene is **~15 MB** across nine files — scapula alone is 5.4 MB
-  (113,256 triangles), and two of the nine took over 40 seconds to arrive from the CDN. On a Nigerian phone
-  on mobile data that is not acceptable, and it is the one thing between this build and a pilot. See §8.
+- **Mesh payload, after §9:** arm scene **3.3 MB** (was 14.2), heart **7.0 MB** (was 41.5), served from our
+  own Supabase bucket rather than a public CDN that dropped most of the files. Maximum surface movement from
+  decimation is 0.12 mm on the scapula — a tenth of a millimetre on a 158 mm bone.
 - **WebGL**, which every browser MedBank already supports has.
 - Nothing else — no account change, no new permission, no install.
 
-## 8 · Known limits at launch
+## 8 · Known limits, and the four bugs that got us here
 
-- **The public CDN is not a production source, and this is now the blocking issue.** Opened on the live site
-  2026-08-25, the arm scene reported *"Loaded 2 of 15 parts — 8 unavailable"*: seven meshes that render
-  perfectly failed to arrive. The meshes are fine; the CDN is not, for files this size. §9 is the fix, and
-  it is no longer an optimisation — the feature does not work without it.
-- Two defects on our side of that, now fixed but worth knowing about: the loader tried **once**, with **no
-  timeout**, and reported a failed download as *"not available in this mesh set"* — telling the student a
-  permanent falsehood about the corpus, and very nearly sending us to price a different mesh provider we do
-  not need. It now retries three times against a 12-second timeout, opens the scene after 8 seconds with
-  whatever has arrived and folds in stragglers as they land, offers **↻ Retry** for the ones that gave up,
-  and says *"download failed"* and *"no 3D model of this structure yet"* as the different things they are.
-  `test-mesh-loading.mjs` holds that distinction in place.
-- Two scenes (arm, heart). The 3D tab appears only on topics that match one of them; every other topic is
-  unchanged. The corpus grows from Thursday.
+Everything in this section was found by opening the thing on the live site and looking at it. None of it
+was caught by a green `check-deploy` run, and that is the lesson: file-exists checks say nothing about
+whether a student can reach a working picture.
+
+**Fixed, 2026-08-25 — keep the tests, they are the only thing holding these shut:**
+
+1. **No 3D tab on a note about the arm.** `scenesForTopic` filtered keywords with `t.length > 3`, which
+   excluded the string `"arm"` — the commonest way a note names that topic. Zero scenes is a legal answer,
+   so nothing errored and nothing logged. → whole-word matching, `test-topic-match.mjs`.
+2. **"Loaded 2 of 15 parts", muscles greyed out as "not available in this mesh set".** The meshes were
+   fine; the public CDN dropped them. One attempt, no timeout, and a network failure reported as a
+   permanent fact about the corpus — which nearly sent us to price a different mesh provider.
+   → retries, a 12s timeout, honest wording, `test-mesh-loading.mjs`.
+3. **Solid black viewport.** `fit()` measured a group that already carried the scale it had set on the
+   previous call, so re-framing after a late mesh blew a 545 mm scene up 128× with the camera inside it.
+   → reset-then-measure, `test-fit-idempotent.mjs`.
+4. **Solid black viewport, again, and nothing wrong anywhere.** The render loop skipped its work whenever
+   `document.hidden` was true — including before it had ever drawn a frame. Camera, scale, materials and
+   host all checked out; the loop was simply saving battery on a viewer showing nothing. `document.hidden`
+   is true in more cases than the name suggests: a prerendered page, a tab restored in the background, a
+   window occluded at the moment of mount. → never skip before the first frame.
+
+Two of those were black rectangles with entirely different causes, and neither announced itself. The
+player now carries its own instruments: `MB3D.player().stats()` reports `ticks` against `frames` (called
+but not drawing is a different fault from never scheduled), `lastError()` surfaces a throw inside the loop
+instead of repeating it silently forever, and a mount that has been superseded stands down rather than
+claiming `LIVE` and rendering into a discarded DOM node.
+
+**Still true at launch:**
+
+- Two scenes (arm, heart). The 3D tab appears only on topics that match one; every other topic is unchanged.
+- **No motion op.** "Flex vs extend" shows the antagonist pair side by side — it does not animate flexion.
+  No renderer we have moves a joint. Better to rename the op than to imply motion that is not there.
 - The heart declares three real gaps (no chamber meshes, no aortic valve, no pericardium) rather than faking them.
 - Landmark anchors are `needs-review` until a human clears them — they render, they are simply not signed off.
 - Engagement counts live in `localStorage` only; nothing reaches a server yet.
+- `FEATURES.MODEL3D` is still **false**. Nothing above is visible to a student until that line flips.
 
 ## 9 · Getting the meshes down to phone size
 

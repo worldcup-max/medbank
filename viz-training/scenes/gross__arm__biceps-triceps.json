@@ -396,38 +396,6 @@
       "narration": "They span from the scapula across the humerus to the radius — biceps — and the ulna — triceps."
     },
     {
-      "mode": "contraction_filter",
-      "beat": 3,
-      "title": "Flex vs extend",
-      "ops": [
-        {
-          "op": "COMPARE_STRUCTURES",
-          "targets": [
-            "Biceps brachii",
-            "Triceps brachii"
-          ],
-          "layout": "antagonists"
-        }
-      ],
-      "animation": {
-        "type": "muscle_state",
-        "flexors": [
-          "bic_long",
-          "bic_short"
-        ],
-        "extensors": [
-          "tri_long",
-          "tri_lat",
-          "tri_med"
-        ],
-        "states": [
-          "relaxed",
-          "contracted"
-        ]
-      },
-      "narration": "The biceps contracts to flex the elbow; the triceps contracts to straighten it."
-    },
-    {
       "mode": "mechanism",
       "title": "Follow the long head",
       "ops": [
