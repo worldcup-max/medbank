@@ -5,6 +5,10 @@
   "course": "Gross Anatomy",
   "topic": "Arm (Brachium)",
   "structure": "Biceps brachii & Triceps brachii",
+  "covers": [
+    "Biceps brachii",
+    "Triceps brachii"
+  ],
   "learning_goal": "Know where each head of biceps and triceps starts and ends, and the exact bony landmark it uses.",
   "status": "ready",
   "provider": {

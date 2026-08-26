@@ -4,9 +4,19 @@
     "topicIndex": 0,
     "structureIndex": 0
   },
-  "coveredStructures": {},
+  "coveredStructures": {
+    "gross": [
+      "Biceps brachii",
+      "Triceps brachii",
+      "Heart (external)",
+      "Cardiac cycle (pumping)",
+      "Coronary arteries & cardiac veins",
+      "Heart valves"
+    ]
+  },
   "done": false,
   "runs": 0,
   "lastRunAt": null,
-  "note": "The hourly task walks CURRICULUM.courses in `order`. The cursor points at course -> topic -> structure. Each run authors CURRICULUM.meta.itemsPerRun structures (2), then advances; at the end of a topic advance topicIndex; at the end of a course move to the next course in `order`; past the last course set done=true. coveredStructures[courseKey] lists structures already authored (skip duplicates). Advance the cursor ONLY past structures whose scene passed tools/validate-scenes.mjs \u2014 a blocked scene stays on the worklist."
+  "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
+  "syncedAt": "2026-08-26T12:20:55.822Z"
 }

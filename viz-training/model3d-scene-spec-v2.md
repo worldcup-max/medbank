@@ -124,6 +124,14 @@ renderer lacks, because the day a better renderer arrives the teaching is alread
 | `SHOW_RELATIONSHIP` | `from`, `to`, `kind` | light both, draw a connector | native |
 | `TRACE_STRUCTURE` | `target`, `path[]`, `duration?` | follow a structure along its course | **degrades** → timed sequential highlight along `path` |
 
+**`covers[]` — what curriculum structures this scene actually teaches.** An array of CURRICULUM.json
+structure names, spelled exactly as the curriculum spells them. `tools/sync-state.mjs` reads it to work out
+what is left to author, so it is what stops the same structure being authored twice. Declare only what the
+scene can genuinely teach: the arm scene covers both "Biceps brachii" and "Triceps brachii", but the heart
+scene does **not** cover "Heart chambers" — it has no chamber meshes and says so in `gaps[]`. Claiming a
+structure the scene cannot teach is worse than leaving it unauthored, because the gap stops being visible
+and nobody returns to it. A name matching no curriculum entry is reported as a typo, not silently accepted.
+
 Every `target`, `targets[]`, `path[]`, `from` and `to` must name a structure `key` or a `group` in the same
 scene, or be `*`. The validator rejects anything else — that check is what stops a mistyped waypoint from
 shipping as a step the camera silently skips.

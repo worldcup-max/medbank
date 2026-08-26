@@ -36,11 +36,29 @@ for (const f of files) {
   const structures = s.structures || [];
   const parts = structures.filter(x => x.role === 'part');
 
-  // term → structure key. Sources, most specific first: authored terms, label, catalog name.
+  /* term → structure key, resolved by SPECIFICITY, not by file order.
+     This used to be first-come-wins over structures[], and the bones are listed first. So the scapula —
+     which lists "supraglenoid tubercle" and "coracoid process" among its features — claimed both terms
+     before the landmark anchors that ARE those things ever got a look in. The radius claimed "radial
+     tuberosity"; the ulna claimed "olecranon". Every one of them then resolved to a `role:"context"`
+     structure, and viz3d only offers `role:"part"` keys, so all six landmarks silently vanished from the
+     note scanner. A student reading "originates from the supraglenoid tubercle" got no chip for the one
+     structure the sentence is about, on a scene built specifically to show it.
+
+     Now every claim is scored and the best wins:
+       +4  the term IS this structure's own name or label — an identity, not a mention
+       +2  it is a part (something a student can tap and isolate) rather than background context
+       +1  it is a landmark anchor — the most specific thing a term can point at */
   const terms = {};
+  const claim = {};
   for (const x of structures) {
-    const cands = [].concat(x.terms || [], x.label || [], x.name || []);
-    for (const t of cands) { const k = norm(t); if (k.length > 2 && !terms[k]) terms[k] = x.key; }
+    const own = new Set([x.label, x.name].filter(Boolean).map(norm));
+    for (const t of [].concat(x.terms || [], x.label || [], x.name || [])) {
+      const k = norm(t);
+      if (k.length <= 2) continue;
+      const score = (own.has(k) ? 4 : 0) + (x.role === 'part' ? 2 : 0) + (x.render === 'anchor' ? 1 : 0);
+      if (!(k in claim) || score > claim[k]) { claim[k] = score; terms[k] = x.key; }
+    }
   }
 
   const provider = (s.provider && s.provider.primary) || null;

@@ -356,9 +356,17 @@
     return out.length ? out : [{ text: text, at: 0 }];
   }
 
+  /* Match a corpus term against prose a human actually wrote.
+     A rigid word-for-word match fails on the two things every note does. "long head of biceps" does not
+     match "the long head of THE biceps", and "intertubercular groove" does not match "intertubercular
+     (BICIPITAL) groove" — which is exactly how the sentence is written in the lecture this scene was built
+     for. So between any two words of a term, tolerate one parenthetical aside and one article. Nothing
+     more: the words must still be adjacent, so "long head of biceps" can never drift into matching "long
+     head of triceps" or reach across a clause. */
+  var TERM_GAP = '[\\s\\-]+(?:\\([^)]{0,40}\\)[\\s\\-]*)?(?:(?:the|a|an)[\\s\\-]+)?';
   function termRe(term) {
     try {
-      return new RegExp('\\b' + term.split(' ').map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('[\\s\\-]+') + '\\b', 'i');
+      return new RegExp('\\b' + term.split(' ').map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join(TERM_GAP) + '\\b', 'i');
     } catch (e) { return null; }
   }
 

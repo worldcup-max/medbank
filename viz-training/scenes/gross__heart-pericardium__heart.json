@@ -5,6 +5,12 @@
   "course": "Gross Anatomy",
   "topic": "Heart & Pericardium",
   "structure": "Heart",
+  "covers": [
+    "Heart (external)",
+    "Heart valves",
+    "Coronary arteries & cardiac veins",
+    "Cardiac cycle (pumping)"
+  ],
   "learning_goal": "Know the heart's valves, its own blood supply, and the great vessels entering and leaving it.",
   "status": "ready",
   "gaps": [
