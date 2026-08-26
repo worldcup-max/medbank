@@ -1,6 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
 import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
-         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions } from '../import-server/integrated.mjs';
+         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -199,6 +199,17 @@ BND.forEach(b=>{ const v=qaVerdict({dependency:b.dep||depPass,integration_qualit
 // normalize → rebalance still moves text + rationale + answer together
 { const clean=normalizeOptions(['A. CORRECT','B. b','C. c','D. d']); const r=rebalanceOptions({options:clean,answer:0},'seed-nm');
   ok(r.options[r.answer]==='CORRECT' && r.options.slice().sort().join('|')===['CORRECT','b','c','d'].sort().join('|'), 'NM6 normalize+rebalance preserves key + option set'); }
+
+// --- diversity signal (advisory content-boundary layer) ---
+const corpus=[
+  { id:'x1', integration_family:'cardio_renal', stem:'A 65-year-old man with heart failure and CKD develops worsening creatinine on diuresis. What is the next step?', options:['Add a thiazide','Stop diuretics','Start dialysis','Give fluids'], answer:0 }
+];
+{ const d=diversitySignal({ stem:'A 65-year-old man with heart failure and CKD develops worsening creatinine on diuresis. What is the next step?', options:['Add a thiazide','Stop diuretics','Start dialysis','Give fluids'], answer:0, integration_family:'cardio_renal' }, corpus);
+  ok(d.tier==='exact', 'DV1 identical stem → exact'); }
+{ const d=diversitySignal({ stem:'A 66-year-old man with heart failure and chronic kidney disease has a rising creatinine while on diuresis; what is the best next step?', options:['Add a thiazide diuretic','Stop diuretics','Start dialysis','Give fluids'], answer:0, integration_family:'cardio_renal' }, corpus);
+  ok(d.tier==='high' || d.tier==='moderate', 'DV2 reworded same-pattern (same family+intervention) → flagged (not ok)'); }
+{ const d=diversitySignal({ stem:'A 30-year-old woman with sepsis and lactic acidosis needs fluid resuscitation; which vasopressor is first-line after fluids?', options:['Noradrenaline','Dopamine','Adrenaline','Vasopressin'], answer:0, integration_family:'infect_immunology' }, corpus);
+  ok(d.tier==='ok', 'DV3 unrelated question → ok (no false diversity flag)'); }
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);

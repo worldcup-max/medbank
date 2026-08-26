@@ -26,7 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions, diversitySignal } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2422,12 +2422,22 @@ app.post("/admin/integrated/transform", async (req,res)=>{
     let src=null; (tr.data||[]).some(t=>((t.extras&&t.extras.qbank)||[]).some(q=>{ if(q&&q.stem&&qhOf(q)===question_id){ src=Object.assign({}, q, { id:question_id, _qh:question_id, _topic:t.title||t.name||"" }); return true; } return false; }));
     if(!src) return res.status(404).json({ error:"source question not found" });
     const rec=await runCandidate(src, { mine:(q)=>a17Transform(q, family), adversarial:a17Adversarial, clinical:a17ClinicalReview, sba:a17SbaReview });
+    // DIVERSITY layer (advisory; independent of the reviewers). Compare to the existing corpus for this family.
+    let diversity=null;
+    if(rec.transformed_content && rec.review_status!=="rejected"){
+      const cx=await admin.from("integrated_items").select("id,integration_family,transformed_content").eq("integration_family",family).limit(500);
+      const corpus=(cx.data||[]).map(r=>({ id:r.id, integration_family:r.integration_family, stem:(r.transformed_content||{}).stem, options:(r.transformed_content||{}).options||[], answer:(r.transformed_content||{}).answer }));
+      const c=rec.transformed_content; diversity=diversitySignal({ stem:c.stem, options:c.options, answer:c.answer, integration_family:family }, corpus);
+      if(diversity.tier==="exact"){ rec.review_status="rejected"; rec.reason=(rec.reason?rec.reason+" | ":"")+"exact duplicate of "+(diversity.matched||"existing item"); }
+      else if(diversity.tier==="high"){ rec.qa=Object.assign({}, rec.qa, { diversity }); if(!rec.severity||rec.severity==="none"||rec.severity==="minor"){ rec.severity="major"; if(rec.qa) rec.qa.severity="major"; rec.reason=(rec.reason?rec.reason+" | ":"")+"diversity[high]: near-duplicate reasoning — "+(diversity.reasons||[]).join("; "); } }
+      else { rec.qa=Object.assign({}, rec.qa, { diversity }); }   // moderate/ok = metadata only
+    }
     await admin.from("integrated_items").insert({ question_id:rec.question_id||question_id, primary_topic:rec.primary_topic||null,
       integrated_topics:rec.integrated_topics||[], integration_type:rec.integration_type||null, integration_family:rec.integration_family||family,
       integration_rationale:rec.integration_rationale||null, integration_dependency:rec.integration_dependency||null,
       transformed_content:rec.transformed_content||null, source_question_ids:rec.source_question_ids||[question_id],
       dependency_evidence:rec.dependency_evidence||null, qa:rec.qa||null, review_status:rec.review_status, model:EXTRAS_MODEL });
-    res.json({ ok:true, review_status:rec.review_status, severity:rec.severity||null, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content });
+    res.json({ ok:true, review_status:rec.review_status, severity:rec.severity||null, reason:rec.reason||null, family:rec.integration_family||family, transformed:!!rec.transformed_content, diversity:diversity?diversity.tier:null });
   }catch(e){ res.status(500).json({ error:e.message||"server error" }); }
 });
 app.post("/admin/integrated/mine", async (req,res)=>{

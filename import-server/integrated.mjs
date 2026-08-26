@@ -164,6 +164,35 @@ export function rebalanceOptions(tc, seedStr){
   return { options:order.map(i=>opts[i]), answer:order.indexOf(ans), order };
 }
 
+/* Diversity signal (ADVISORY, no embeddings). Compares a candidate to the existing corpus on BOTH wording and
+   reasoning STRUCTURE (family + intervention/answer + demographic template), so two differently-worded questions
+   testing the same pattern are still caught. Tiers: exact → auto-reject; high → suppress (kept out of the clean
+   queue, human sees it); moderate → warning (metadata only). Does NOT touch R1/R2/R3. */
+export const DIVERSITY = { high:0.6, moderate:0.4 };
+function _dnorm(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim(); }
+function _dtok(s){ return new Set(_dnorm(s).split(" ").filter(w=>w.length>3)); }
+function _djac(a,b){ if(!a.size||!b.size) return 0; let i=0; a.forEach(x=>{ if(b.has(x))i++; }); return i/(a.size+b.size-i); }
+function _ddemo(s){ const m=_dnorm(s).match(/(\d{1,3}) year old (man|woman|male|female|boy|girl)/); return m?(m[1]+"|"+m[2]):null; }
+export function diversitySignal(cand, corpus, cfg){
+  const R=Object.assign({}, DIVERSITY, cfg||{}); cand=cand||{};
+  const cStem=_dnorm(cand.stem), cTok=_dtok(cand.stem), cOpts=_dtok((cand.options||[]).join(" "));
+  const cAns=_dnorm((cand.options||[])[cand.answer]), cDemo=_ddemo(cand.stem), cFam=cand.integration_family||"";
+  const rank={ok:0,moderate:1,high:2,exact:3}; let best={ tier:"ok", sim:0, matched:null, reasons:[] };
+  (corpus||[]).forEach(o=>{
+    if(best.tier==="exact") return;
+    const oStem=_dnorm(o.stem);
+    if(oStem && oStem===cStem){ best={ tier:"exact", sim:1, matched:o.id||null, reasons:["identical stem"] }; return; }
+    const stemSim=_djac(cTok,_dtok(o.stem)), optSim=_djac(cOpts,_dtok((o.options||[]).join(" ")));
+    const sameStruct = cFam && cFam===(o.integration_family||"") && cAns && cAns===_dnorm((o.options||[])[o.answer]);
+    const sameDemo = cDemo && cDemo===_ddemo(o.stem);
+    let tier="ok"; const reasons=[];
+    if(stemSim>=R.high || (sameStruct && stemSim>=R.moderate)){ tier="high"; reasons.push("stem "+Math.round(stemSim*100)+"%"+(sameStruct?" + same family/intervention":"")); }
+    else if(stemSim>=R.moderate || sameStruct || (sameDemo && optSim>=R.moderate)){ tier="moderate"; reasons.push(sameStruct?"same family + same intervention":(sameDemo?"same demographic template":"stem "+Math.round(stemSim*100)+"%")); }
+    if(rank[tier]>rank[best.tier]) best={ tier, sim:Math.max(stemSim,optSim), matched:o.id||null, reasons };
+  });
+  return best;
+}
+
 /* review lifecycle: candidate → ai_reviewed → pending → approved | rejected | needs_edit → (resubmit) pending */
 export function nextStatus(cur, action){
   const flow={ candidate:{ ai_review:"ai_reviewed", reject:"rejected" },

@@ -17,6 +17,8 @@ Remove these topics (and their cards + integrated_items) when done.
 | onco_haem | Acute Leukemia and Tumor Lysis Syndrome (SEED) | 256cd0cb-278c-4401-b2a8-cb48564c2658 |
 | gi_hepatic | Cirrhosis: Variceal Bleeding and Encephalopathy (SEED) | 541da27c-3f93-495c-9ed8-0d11efa554e5 |
 | infect_immunology | Sepsis and the Dysregulated Immune Response (SEED) | 8a41807e-7c1d-478b-9c4b-64fff8c34c7c |
+| cardio_renal (dedicated) | Cardiorenal Syndrome — Deep Dive (SEED2) | 1b5d05e4-e30e-4e57-9d6b-0fa12e3e73ba |
+| gi_hepatic (dedicated) | Portal Hypertension & Its Complications (SEED2) | 68f67f9d-7496-4c6e-8356-74759cebb810 |
 
 ## Removal SQL (run when done)
 ```sql
