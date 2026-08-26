@@ -141,6 +141,19 @@ export function readinessGate(approved, cfg){
    the new position of the SAME correct option, and any parallel per-option array (rationales) reordered identically.
    Seeded off the stem so it's reproducible per item but ~uniform across a batch. Reordering can't change meaning
    (same option strings) or add ambiguity. */
+/* Content-boundary normalizer: the generator sometimes emits option text already carrying its OWN positional
+   letter label ("A. Initiate…"); the UI then adds a letter too → "A. A. Initiate…". Strip ONLY the option's own
+   positional prefix (idx 0 → "A", idx 1 → "B", …) so we never touch legitimate content like "E. coli" (unless it
+   sits at position E AND was double-labelled, which strips correctly). Idempotent. Storage holds bare text; the
+   letter is a render concern; the answer key stays an index. Does not touch reviewer/generator logic. */
+export function normalizeOptions(options){
+  return (options||[]).map((o,i)=>{
+    const letter=String.fromCharCode(65+i);
+    const re=new RegExp("^\\s*"+letter+"\\s*[.)\\-:]\\s+","i");
+    let s=String(o==null?"":o); if(re.test(s)) s=s.replace(re,"");   // strip at most one positional prefix
+    return s.trim();
+  });
+}
 function _strSeed(s){ let h=2166136261>>>0; s=String(s||""); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
 function _mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 export function rebalanceOptions(tc, seedStr){

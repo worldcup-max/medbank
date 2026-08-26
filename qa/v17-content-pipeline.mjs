@@ -1,6 +1,6 @@
 /* V1.7 Integrated Content Pipeline — deterministic core tests (real import-server/integrated.mjs). */
 import { dependencyGate, qaScore, readinessGate, nextStatus, READINESS, runCandidate, applyHumanReview,
-         clinicalGate, sbaGate, qaVerdict, rebalanceOptions } from '../import-server/integrated.mjs';
+         clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions } from '../import-server/integrated.mjs';
 let pass=0, fail=0; const ok=(c,m)=>{ if(c)pass++; else{ fail++; console.log('  ✗ '+m); } };
 (async()=>{
 
@@ -185,6 +185,20 @@ BND.forEach(b=>{ const v=qaVerdict({dependency:b.dep||depPass,integration_qualit
   for(let i=0;i<N;i++){ const r=rebalanceOptions({options:['A','B','C','D'],answer:0}, 'item-'+i+'-stem'); dist[r.answer]++; }
   const share=dist.map(d=>d/N); const ok4=share.every(s=>s>=0.15 && s<=0.35);
   ok(ok4, 'RB6 anti-skew: post-rebalance answer positions ~uniform over 400 ('+share.map(s=>Math.round(s*100)).join('/')+')'); }
+
+// --- option-prefix normalization (double-letter fix) ---
+{ const n=normalizeOptions(['A. Initiate hemodialysis','B. Rasburicase','C. IV fluids','D. Sodium polystyrene']);
+  ok(n[0]==='Initiate hemodialysis' && n[1]==='Rasburicase', 'NM1 strips the generator\'s positional letter prefix'); }
+{ const n=normalizeOptions(['Initiate hemodialysis','Rasburicase']); ok(n[0]==='Initiate hemodialysis', 'NM2 unprefixed text left unchanged'); }
+{ const once=normalizeOptions(['A. X','B. Y']); const twice=normalizeOptions(once); ok(JSON.stringify(once)===JSON.stringify(twice), 'NM3 idempotent'); }
+// the key regression Frank asked for: normalized + UI-rendered letter must NEVER read "A. A."
+{ const n=normalizeOptions(['A. X','B. Y','C. Z','D. W']); const rendered=n.map((o,i)=>String.fromCharCode(65+i)+'. '+o);
+  ok(rendered.every((r,i)=>!new RegExp('^'+String.fromCharCode(65+i)+'\\. '+String.fromCharCode(65+i)+'\\.').test(r)), 'NM4 render never produces "A. A."'); }
+// don't strip legitimate non-positional content: "E. coli" at position A stays intact
+{ const n=normalizeOptions(['E. coli sepsis','B. other']); ok(n[0]==='E. coli sepsis', 'NM5 non-positional letter (E. coli at idx0) NOT stripped'); }
+// normalize → rebalance still moves text + rationale + answer together
+{ const clean=normalizeOptions(['A. CORRECT','B. b','C. c','D. d']); const r=rebalanceOptions({options:clean,answer:0},'seed-nm');
+  ok(r.options[r.answer]==='CORRECT' && r.options.slice().sort().join('|')===['CORRECT','b','c','d'].sort().join('|'), 'NM6 normalize+rebalance preserves key + option set'); }
 
 console.log('\n'+pass+' passed, '+fail+' failed');
 process.exit(fail?1:0);

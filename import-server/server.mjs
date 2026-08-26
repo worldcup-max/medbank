@@ -26,7 +26,7 @@ import { kokoroPrep, sayPrep, mergeTerms, knownTerm, KOKORO_DEFAULT } from "./me
 import { buildVisualPrompt, qcCheck, graphCheck, chainOf, parseBlueprint, textKey, renderHints, registerAssets, assetDefs, LAYOUTS } from "./visualize.mjs";
 import { buildExtractBatchPrompt, buildExtractPrompt, parseProposedBatch, parseProposed, buildReconcilePrompt, buildReconcilePromptV2, buildReconcilePromptV3, candidateFilter, retrieveCandidates, decide, mintTargetId, newTargetRecord } from "./targets.mjs";
 import { replenish, onCanonicalExhausted, A7_CFG } from "./retestpool.mjs";
-import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions } from "./integrated.mjs";
+import { runCandidate, applyHumanReview, readinessGate, qaScore, dependencyGate, clinicalGate, sbaGate, qaVerdict, rebalanceOptions, normalizeOptions } from "./integrated.mjs";
 const require = createRequire(import.meta.url);
 
 const admin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth:{ persistSession:false } });
@@ -2401,7 +2401,8 @@ async function a17Transform(q, family){
     if(!o||!o.ok||!o.stem) return null;
     // FIX answer-position bias deterministically: reorder options + remap key + reorder rationales in lockstep.
     const ans0=(Number.isInteger(o.answer)?o.answer:0); const rat0=o.rationales||[];
-    const bal=rebalanceOptions({ options:o.options||[], answer:ans0, stem:o.stem }, o.stem);
+    const cleanOpts=normalizeOptions(o.options||[]);                  // strip generator's own positional letter prefixes
+    const bal=rebalanceOptions({ options:cleanOpts, answer:ans0, stem:o.stem }, o.stem);
     const rationales=bal.order.map(i=>rat0[i]!==undefined?rat0[i]:"");
     return { primary_topic:o.primary_topic||null, integrated_topics:o.integrated_topics||[], integration_type:o.integration_type||null,
       integration_family:o.integration_family||family, rationale:o.rationale||null, dependency:o.dependency||null,
