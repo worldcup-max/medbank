@@ -1520,8 +1520,14 @@
         if (isSel) visible = true;
         m.visible = visible;
         var isHi = isSel || (state.hi && state.hi[s.key] != null);
-        var offstage = !isSel && (anySel || (state.only && state.only.indexOf(s.key) < 0));
-        m.material.opacity = isHi ? 1 : (offstage ? (ghost || state.ghosted ? 0.10 : 0.55) : 1);
+        /* Tapping a part must not dissolve the rest of the model.
+           Selecting used to drop every other structure to 55% opacity, so picking one head of triceps
+           turned the whole arm to glass — and the student had asked to look AT something, not to have
+           everything else taken away. There is already a control for that, and its name is on it:
+           "Ghost others". A tap now only recolours; fading is something the student turns on, or that a
+           view/trace explicitly asks for with `ghosted`. */
+        var ghosting = (ghost && anySel) || state.ghosted;
+        m.material.opacity = (isSel || isHi) ? 1 : (ghosting ? 0.10 : 1);
         /* A selected part takes a colour of its own, not a brighter version of the colour it already had.
            Lighting up a cream bone in cream told a student nothing, and picking three parts lit three
            things in three shades of the same cream. Each selection now gets the next colour from a fixed
