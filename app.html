@@ -2718,11 +2718,23 @@ function mb3dPick(tid,sceneId){ _MB3D_PICK[tid]=sceneId; render(); }
       /* Pre-buy the player's narration the same way the topic preview does, so the first line of a
          scene starts speaking instead of starting to be generated. warmSpeak caches per line and
          de-duplicates in-flight requests, so calling it again for a line already bought is free. */
-      if(MB3D.warmer) MB3D.warmer(function(lines){
+      /* Pre-buy the player's narration the same way the topic preview does — three at a time, reporting
+         progress so the player can show how far it has got, and never more than three in flight so a
+         fourteen-line scene does not open fourteen simultaneous requests. warmSpeak caches per line and
+         de-duplicates what is already in flight, so a line bought once is free forever after. */
+      if(MB3D.warmer) MB3D.warmer(function(lines, onProgress){
         try{
-          if(!window.warmSpeak || !Array.isArray(lines)) return;
-          lines.forEach(function(t){ try{ window.warmSpeak(t,'read'); }catch(e){} });
-        }catch(e){}
+          if(!window.warmSpeak || !Array.isArray(lines) || !lines.length){ if(onProgress) onProgress(0,0); return; }
+          var total=lines.length, done=0, next=0, active=0, MAXP=3;
+          function tick(){ done++; active--; try{ if(onProgress) onProgress(done,total); }catch(e){} if(done>=total) return; one(); }
+          function one(){
+            if(next>=total) return;
+            var t=lines[next++]; active++;
+            try{ window.warmSpeak(t,'read').then(tick,tick); }catch(e){ tick(); }
+          }
+          try{ if(onProgress) onProgress(0,total); }catch(e){}
+          for(var i=0;i<MAXP;i++) one();
+        }catch(e){ if(onProgress) onProgress(0,0); }
       });
       if(MB3D.speaker) MB3D.speaker(function(text, done){
         try{

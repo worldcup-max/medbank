@@ -225,6 +225,15 @@
       '.mb3d-acts{padding:9px;border-top:1px solid var(--m3line);display:flex;gap:7px;flex-wrap:wrap}',
       '.mb3d-btn{font:inherit;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid #35315a;background:#221f3a;color:#e9e6ff;cursor:pointer}',
       '.mb3d-btn.pri{background:var(--m3acc);border-color:var(--m3acc);color:#fff}',
+      /* The narration bar sits under the stage; the loading strip replaces its top edge so the model
+         and the controls stay visible and usable the whole time the clips are being bought. The
+         preview video hides the picture behind a full-screen pill because it has nothing to show yet;
+         a 3D scene already has everything to show, so blocking it would be a downgrade. */
+      '.mb3d-warm{display:none;align-items:center;gap:10px;padding:8px 14px;border-top:1px solid var(--m3line);background:var(--m3pan);font-size:12.5px;color:#b9b2d8}',
+      '.mb3d-warm.on{display:flex}',
+      '.mb3d-warm i{display:block;height:100%;width:0;background:#7c5cff;border-radius:5px;transition:width .3s}',
+      '.mb3d-warmbar{flex:1;height:5px;border-radius:5px;background:rgba(255,255,255,.14);overflow:hidden;max-width:260px}',
+      '.mb3d-warm b{color:#cfc7f2;font-weight:600}',
       '.mb3d-narr{padding:11px 14px;border-top:1px solid var(--m3line);font-size:13.5px;line-height:1.5;color:#e7e3ff;background:var(--m3pan)}',
       '.mb3d-narr b{color:#c9bcff}',
       '.mb3d-foot{padding:7px 14px;border-top:1px solid var(--m3line);font-size:11px;color:var(--m3dim);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}',
@@ -637,9 +646,16 @@
      `say` wants them they are local. Nothing here plays anything. */
   var WARM = null;
   function warmer(fn) { WARM = (typeof fn === 'function') ? fn : null; }
-  function warm(lines) {
-    if (!WARM || !lines || !lines.length) return;
-    try { WARM(lines.filter(function (t) { return t && String(t).trim(); })); } catch (e) {}
+  function warm(lines, onProgress) {
+    if (!WARM || !lines || !lines.length) return false;
+    var clean = [];
+    var seen = {};
+    lines.forEach(function (t) {
+      var k = String(t || '').trim();
+      if (k && !seen[k]) { seen[k] = 1; clean.push(k); }   // the same line in two views is bought once
+    });
+    if (!clean.length) return false;
+    try { WARM(clean, onProgress || null); return true; } catch (e) { return false; }
   }
   function nowMs() { return (window.performance || Date).now(); }
 
@@ -754,6 +770,7 @@
           '</div>' +
         '</div>' +
         '<div class="mb3d-slider" data-r="cliprow" style="display:none">Cut plane<input type="range" data-r="clip" min="-1" max="1" step="0.01" value="0"></div>' +
+        '<div class="mb3d-warm" data-r="warm"><span>Loading the narration so it plays without any breaks</span>' + '<span class="mb3d-warmbar"><i data-r="warmbar"></i></span><b data-r="warmnum"></b></div>' +
         '<div class="mb3d-narr" data-r="narr"></div>' +
         '<div class="mb3d-foot"><span>' + esc(adapter.attribution || '') + '</span><span data-r="note"></span></div>' +
       '</div>';
@@ -800,7 +817,12 @@
        Roughly half the light, a warm-neutral key instead of pure white, and ACES tone mapping to roll the
        highlights off rather than clip them. Exposure compensates so the overall image is not darker — just
        no longer saturated at the top end. */
-    var LIGHTS = { ambient: 0.45, key: 0.50, fill: 0.22, rim: 0.26, exposure: 0.95 };
+    /* Bone wants a brighter key and a little more exposure than the first camera-attached rig had: at
+     key 0.50 / exposure 0.95 the scapula read grey and its ridges flattened out. The bone highlight
+     ceiling (BONE_CEILING) and the 0.80 roughness are what stop that turning into the blown-out white
+     we started with, so brightness here costs no detail. Override live with
+     MB3D.player().setLighting({ key: 0.7, exposure: 1.1 }) if a scene needs it. */
+  var LIGHTS = { ambient: 0.50, key: 0.62, fill: 0.26, rim: 0.28, exposure: 1.05 };
 
     /* THE LIGHTS RIDE THE CAMERA.
        They used to sit at fixed points in the world — key at (5, 8, 6). The model does not turn when you
@@ -976,6 +998,8 @@
       startSpin();                                   // a 3-second first glance, then it is the student's
       buildList(); buildChips();
       applyView(0);
+      /* The model is on screen and interactive by now — start buying the voice behind it. */
+      warmScene();
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
       emit('open', { scene: scene.id, via: opts.via || 'tab', part: opts.part || null,
                      structures: structures.length, loaded: loadedKeys.length,
@@ -1157,6 +1181,40 @@
       paint(); drawPairs();
     }
 
+    /* ---------- buy every line before any of them is needed ----------
+       The player waits for the voice to finish a line before moving on, which is right — but the first
+       time a line is spoken the clip has to be GENERATED, and that wait is silence at the front of the
+       scene. MedBank already solved this for the topic preview: pre-buy every clip, show how far it has
+       got, then play. The one thing to do differently here is not to hide anything. The preview covers
+       the screen because it has no picture yet; a 3D scene has the model up and orbitable from the first
+       frame, so the strip goes under the stage and the student can rotate, tap parts and read while the
+       clips arrive. Only ▶ Play waits. */
+    var warmedAll = false, warmReady = false;
+    function warmScene() {
+      if (warmedAll) return;
+      var all = [];
+      views.forEach(function (v) { all = all.concat(linesOf(v)); });
+      warmedAll = true;
+      var started = warm(all, function (done, total) {
+        var box = $('warm'); if (!box) return;
+        if (done >= total) {
+          warmReady = true;
+          box.classList.remove('on');
+          return;
+        }
+        box.classList.add('on');
+        var bar = $('warmbar'); if (bar) bar.style.width = Math.round(done / Math.max(1, total) * 100) + '%';
+        var num = $('warmnum'); if (num) num.textContent = done + ' / ' + total;
+      });
+      if (!started) warmReady = true;                 // no warmer registered — nothing to wait for
+      /* Never let a hung voice service hold the scene hostage. */
+      setTimeout(function () {
+        if (warmReady) return;
+        warmReady = true;
+        var box = $('warm'); if (box) box.classList.remove('on');
+      }, 40000);
+    }
+
     /* Everything this view will say, in the order it will say it: its own line, then each stop of any
        trace it runs — which is exactly what `trace()` speaks, so the two must not drift apart. */
     function linesOf(v) {
@@ -1189,8 +1247,7 @@
       /* This view's lines are wanted now; the next view's are wanted in a few seconds. Buying both
          costs nothing extra — warmSpeak caches per line and never generates the same one twice — and
          it means pressing a chip or letting Play move on does not restart the wait. */
-      warm(linesOf(v));
-      if (views.length > 1) warm(linesOf(views[(i + 1) % views.length]));
+      if (!warmedAll) warm(linesOf(v));            // until the whole-scene pass is under way, at least this view
       useCount.views++;
       stopTour();
       if (!fromPlay) stopPlay();
@@ -1402,6 +1459,21 @@
        it. Starting here and wrapping visits every view exactly once either way. */
     function startPlay() {
       if (!views.length) return;
+      /* Play is the one thing that waits. Starting it mid-warm gives the student the exact stutter the
+         pre-buy exists to remove — the first line plays from cache, the second stops to be generated. */
+      if (!warmReady) {
+        var box = $('warm'); if (box) box.classList.add('on');
+        var b = $('play'); if (b) b.textContent = '… loading voice';
+        var t0 = nowMs();
+        var poll = setInterval(function () {
+          if (!running) { clearInterval(poll); return; }
+          if (!warmReady && nowMs() - t0 < 40000) return;
+          clearInterval(poll);
+          var bb = $('play'); if (bb) bb.textContent = '▶ Play';
+          startPlay();
+        }, 300);
+        return;
+      }
       useCount.played++;
       stopTour(); stopSpin();
       var order = views.map(function (_, k) { return (currentView + k) % views.length; });

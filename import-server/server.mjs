@@ -1640,8 +1640,18 @@ app.post("/tts", async (req,res)=>{
     const isTutor = use === "tutor";
     let provider = isTutor ? "fish" : "kokoro";
     let voice = req.body.voice || (isTutor ? (process.env.FISH_VOICE_TUTOR || FISH_VOICE_HOST_A) : KOKORO_DEFAULT.read);
-    // Topic Preview audio tier: paying (premium OR basic/trial → isPremium) get Fish; free users get Kokoro.
-    if(use === "preview"){
+    // Audio tier: paying (premium OR basic/trial → isPremium) get Fish; free users get Kokoro.
+    //
+    // "read" is in here deliberately. It was not, and the result was a voice that CHANGED mid-session:
+    // the topic preview asked for "preview" and got Fish, while the 3D player and the Visualize
+    // explainer asked for "read" and always got Kokoro, whoever the student was. Same student, same
+    // note, two different narrators a minute apart. One product should have one voice.
+    //
+    // This does cost more — every read-aloud for an entitled student is now a Fish clip, not just the
+    // preview. Set TTS_READ_TIER=kokoro on the host to put read-aloud back on Kokoro for everyone
+    // without touching this file.
+    const READ_TIER = (process.env.TTS_READ_TIER || "fish").toLowerCase();
+    if(use === "preview" || (use === "read" && READ_TIER === "fish")){
       const entitled = await isPremium(user.id, user.email).catch(()=>false);
       provider = entitled ? "fish" : "kokoro";
       // ignore any client-sent voice here — it's an OpenAI/Kokoro name and would be an invalid Fish reference id
