@@ -125,6 +125,26 @@ const straightAhead = new T.Vector3(0, 0, -1);
 const off = key.angleTo(straightAhead) * 180 / Math.PI;
 ok('the key is off-axis, so form still reads', off > 12 && off < 70, `${off.toFixed(1)}° off the view axis`);
 
+/* 5 — bone must be matte. A specular highlight is brightest exactly where the surface curves most,
+       which is where the ridges and fossae are, so sheen erases the detail a student is meant to read.
+       A drawn atlas has no specular at all. */
+{
+  const bone = src.match(/roughness: isBone \? ([\d.]+) : ([\d.]+)/);
+  const metal = src.match(/metalness: isBone \? ([\d.]+) : ([\d.]+)/);
+  const r = bone ? parseFloat(bone[1]) : NaN, mm = metal ? parseFloat(metal[1]) : NaN;
+  ok('bone is matte and non-metallic', r >= 0.9 && mm === 0,
+    bone ? `bone roughness ${r}, metalness ${mm} (soft tissue keeps ${bone[2]} / ${metal[2]})` : 'could not find the bone material');
+}
+
+/* 6 — the key-to-fill ratio carries the contrast. Too wide and the shadow side crushes to black, which
+       is what happened the first time this was tuned; the fix then was to raise the fill, not the key. */
+{
+  const L = src.match(/var LIGHTS = \{ ambient: ([\d.]+), key: ([\d.]+), fill: ([\d.]+)/);
+  const key = L ? parseFloat(L[2]) : NaN, fill = L ? parseFloat(L[3]) : NaN;
+  const ratio = key / fill;
+  ok('key-to-fill contrast stays modest', ratio > 1 && ratio < 2.2, `key ${key} : fill ${fill} = ${ratio.toFixed(2)}:1`);
+}
+
 let bad = 0;
 const pad = Math.max(...checks.map(c => c[0].length));
 for (const [name, pass, detail] of checks) {

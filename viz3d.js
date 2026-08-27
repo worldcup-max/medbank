@@ -157,8 +157,22 @@
               if (settled) return; settled = true; clearTimeout(timer);
               try {
                 geo.computeVertexNormals();
-                var col = boneSafe(new T.Color(s.color || '#c9c3d8'));
-                var mat = new T.MeshStandardMaterial({ color: col, roughness: 0.80, metalness: 0.02, transparent: true, opacity: 1, side: T.DoubleSide });
+                /* Bone is chalk, not porcelain.
+                   At roughness 0.80 with a touch of metalness the scapula still carried a broad specular
+                   sheen, and a specular highlight is the enemy of surface detail: it is brightest exactly
+                   where the surface curves most, so the ridges and fossae a student is meant to read are
+                   the first thing it erases. A drawn atlas has no specular at all — the form is carried
+                   entirely by diffuse shading, which is why every crest is legible.
+                   So bone goes near-matte and fully non-metallic. Soft tissue keeps a little sheen,
+                   because a wet muscle belly genuinely has one and it helps tell muscle from bone. */
+                var isBone = (s.layer === 'bone') || (s.render === 'anchor');
+                var col = boneSafe(new T.Color(s.color || (isBone ? '#d9cdb8' : '#c9c3d8')));
+                var mat = new T.MeshStandardMaterial({
+                  color: col,
+                  roughness: isBone ? 0.96 : 0.78,
+                  metalness: isBone ? 0.0 : 0.03,
+                  transparent: true, opacity: 1, side: T.DoubleSide
+                });
                 var mesh = new T.Mesh(geo, mat);
                 mesh.userData = s;
                 res(mesh);
@@ -822,7 +836,18 @@
      ceiling (BONE_CEILING) and the 0.80 roughness are what stop that turning into the blown-out white
      we started with, so brightness here costs no detail. Override live with
      MB3D.player().setLighting({ key: 0.7, exposure: 1.1 }) if a scene needs it. */
-  var LIGHTS = { ambient: 0.50, key: 0.62, fill: 0.26, rim: 0.28, exposure: 1.05 };
+  /* The look we are after is a printed anatomy plate: warm, evenly lit, low contrast, and every ridge
+     readable. Mocked up as a CSS filter it was brightness(0.88) contrast(1.05) saturate(1.15)
+     sepia(0.2) — but a CSS filter over the canvas would also dull the labels, the pins and every overlay
+     drawn on top, so the same result is built into the rig instead:
+       brightness(0.88)  → exposure down from 1.05 to 0.94
+       contrast(1.05)    → a MODEST key-to-fill ratio, not a hard one. The key comes down and the fill
+                           and ambient come up, so shadow sides stay readable instead of crushing.
+       sepia + saturate  → warmth moved into the lights and the bone's base colour rather than a filter,
+                           which keeps the UI and the landmark patches their true colour.
+     Overdoing directional contrast is what crushed the background to black last time, so the fill is
+     deliberately close to the key. */
+  var LIGHTS = { ambient: 0.62, key: 0.46, fill: 0.34, rim: 0.16, exposure: 0.94 };
 
     /* THE LIGHTS RIDE THE CAMERA.
        They used to sit at fixed points in the world — key at (5, 8, 6). The model does not turn when you
@@ -849,10 +874,10 @@
     }
     /* The hemisphere stays in WORLD space on purpose: a faint sense of up and down is what stops the model
        reading as a flat sticker, and because the model does not rotate it never becomes a dark side. */
-    var lAmb = new T.HemisphereLight(0xf2ecff, 0x20203a, LIGHTS.ambient); sceneObj.add(lAmb);
-    var k1 = rigLight(new T.DirectionalLight(0xfff4e6, LIGHTS.key), 0.55, 0.75, 0.45);   // key, upper right
-    var k2 = rigLight(new T.DirectionalLight(0xbfd0ff, LIGHTS.fill), -0.9, 0.05, 0.35);  // fill, from the left
-    var k3 = rigLight(new T.DirectionalLight(0x9d8bff, LIGHTS.rim), 0.1, -0.55, -0.9);   // rim, below and behind
+    var lAmb = new T.HemisphereLight(0xfff6e8, 0x2a2436, LIGHTS.ambient); sceneObj.add(lAmb);
+    var k1 = rigLight(new T.DirectionalLight(0xffeeda, LIGHTS.key), 0.55, 0.75, 0.45);   // key, upper right, warm
+    var k2 = rigLight(new T.DirectionalLight(0xf3e8dd, LIGHTS.fill), -0.9, 0.05, 0.35);  // fill, warm-neutral, close to the key
+    var k3 = rigLight(new T.DirectionalLight(0xb9a8d6, LIGHTS.rim), 0.1, -0.55, -0.9);   // rim, quiet — it was adding a cold sheen
     if (T.ACESFilmicToneMapping) {
       renderer.toneMapping = T.ACESFilmicToneMapping;
       renderer.toneMappingExposure = LIGHTS.exposure;
