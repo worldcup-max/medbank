@@ -892,6 +892,20 @@
 
     /* ---------- load every structure; a failure is reported, never fatal ---------- */
     var anchorStructs = structures.filter(function (s) { return s.render === 'anchor'; });
+
+    /* Landmark colours are ATLAS colours, not highlight colours.
+       The first version painted the patch in the landmark's authored colour — pale golds and ambers,
+       chosen when a landmark was a small glowing pin and only had to be findable. As a patch on cream
+       bone they read as a smear of light rather than a marked area, and where one attachment stopped
+       and the next began was guesswork. An atlas does not do that: it uses flat, saturated, mutually
+       distinct colour with a hard edge, because the boundary IS the teaching — this much bone, and not
+       a millimetre more.
+       A scene can override per landmark with `patch_color`; otherwise they are dealt from this palette
+       in order, so no two landmarks on one bone can come out alike. */
+    var PATCH = ['#d1344b', '#2f6fd0', '#2e9e5b', '#d98324', '#8b46c9', '#16897f', '#c0392b', '#1f7a8c'];
+    anchorStructs.forEach(function (s, i) {
+      s.color = s.patch_color || PATCH[i % PATCH.length];   // sphere, list swatch, pin and patch all agree
+    });
     var meshStructs = structures.filter(function (s) { return s.render !== 'anchor'; });
     function loadOne(s) {
       return Promise.resolve(adapter.load(T, s)).then(function (r) {
@@ -1382,6 +1396,88 @@
 
     /* Distinct, high-contrast against cream bone, pink muscle and a near-black background. */
     var HILITE = ['#4dd2ff', '#ffd54a', '#7cff8f', '#ff6ad5', '#c9a3ff', '#ff9d6a'];
+    /* ---------- landmarks as a patch of colour ON the bone ----------
+       A landmark used to be a glowing dot with a line to a label — accurate, and nothing like what a
+       student sees in an atlas, where the supraglenoid tubercle is a coloured AREA on the bone and its
+       size tells you how much of the bone it is. A dot says "somewhere here"; a patch says "this much,
+       this shape, this place". The dot stays, because it marks the measured point exactly, but the bone
+       under it is now painted.
+
+       This is per-vertex colour, not a second mesh: for a bone that hosts landmarks the structure's own
+       colour is written into every vertex and the material is left white, so the product is unchanged,
+       and then the vertices inside a landmark's radius are overwritten with its colour. Nothing is
+       added to the scene and nothing needs a new mesh from the catalog — which matters, because the
+       catalog has no mesh for any landmark and never will.
+
+       A patch is drawn only while its landmark is being talked about: selected, or lit by a view or a
+       trace step. Painting every landmark at once would give you a bone in tiger stripes. */
+    var patched = {};                                  // parent key -> true, so a bone repaints only when needed
+    function ensureColorAttr(m) {
+      var g = m.geometry;
+      if (g.getAttribute('color')) return g.getAttribute('color');
+      var n = g.getAttribute('position').count;
+      var attr = new T.BufferAttribute(new Float32Array(n * 3), 3);
+      g.setAttribute('color', attr);
+      m.material.vertexColors = true;
+      m.material.needsUpdate = true;
+      return attr;
+    }
+    function paintPatches() {
+      /* which bones host a landmark that is currently being talked about? */
+      var live = {};
+      anchorStructs.forEach(function (s) {
+        var on = (s.anchor || {}).on; if (!on || !meshes[on]) return;
+        var lit = selected.indexOf(s.key) >= 0 || (state.hi && state.hi[s.key] != null);
+        if (!live[on]) live[on] = [];
+        if (lit) live[on].push(s);
+      });
+      Object.keys(live).forEach(function (key) {
+        var m = meshes[key]; if (!m || !m.geometry || !m.geometry.getAttribute) return;
+        var lit = live[key];
+        if (!lit.length && !patched[key]) return;        // nothing lit and nothing to undo
+        var attr = ensureColorAttr(m);
+        var pos = m.geometry.getAttribute('position');
+        var base = new T.Color(m.userData.__baseCol != null ? m.userData.__baseCol : m.material.color.getHex());
+        m.material.color.set(0xffffff);                  // the colour now lives in the vertices
+        var arr = attr.array, i, n = pos.count;
+        for (i = 0; i < n; i++) { arr[i * 3] = base.r; arr[i * 3 + 1] = base.g; arr[i * 3 + 2] = base.b; }
+
+        if (lit.length) {
+          if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+          var bb = m.geometry.boundingBox, size = bb.getSize(new T.Vector3());
+          var span = Math.max(size.x, size.y, size.z);
+          lit.forEach(function (s) {
+            var a = s.anchor || {}, uvw = a.uvw || [0.5, 0.5, 0.5];
+            var cx = bb.min.x + size.x * uvw[0], cy = bb.min.y + size.y * uvw[1], cz = bb.min.z + size.z * uvw[2];
+            /* The patch is deliberately wider than the marker sphere. The sphere is the measured point;
+               the patch is the attachment area a student is asked to recognise, and an area the size of
+               a pinhead teaches nothing. */
+            var R = Math.max(span * (a.radius || 0.05) * 3.0, span * 0.045);
+            var R2 = R * R, col = new T.Color(s.color || '#ffcf5c');
+            for (i = 0; i < n; i++) {
+              var dx = pos.getX(i) - cx, dy = pos.getY(i) - cy, dz = pos.getZ(i) - cz;
+              var d2 = dx * dx + dy * dy + dz * dz;
+              if (d2 > R2) continue;
+              /* solid in the middle, a short feather at the rim so it reads as a marked area rather
+                 than a decal someone stuck on */
+              /* 0.35 of the radius spent fading made a soft-edged glow. 0.06 is a painted edge: solid
+               to within a few per cent of the rim, then a hairline of blend so it is not aliased. */
+            var t = Math.min(1, Math.max(0, (1 - Math.sqrt(d2) / R) / 0.06));
+              arr[i * 3] += (col.r - arr[i * 3]) * t;
+              arr[i * 3 + 1] += (col.g - arr[i * 3 + 1]) * t;
+              arr[i * 3 + 2] += (col.b - arr[i * 3 + 2]) * t;
+            }
+          });
+        }
+        /* Emissive is added AFTER the vertex colour, so a bone lit by the view glows through the patch
+           and turns a crimson origin into a pink haze — the exact washed-out look this replaced. While
+           a patch is on this bone, keep the glow down so the paint stays the colour it was given. */
+        if (lit.length) { m.material.emissiveIntensity = Math.min(m.material.emissiveIntensity, 0.08); }
+        attr.needsUpdate = true;
+        patched[key] = lit.length > 0;
+      });
+    }
+
     function paint() {
       var anySel = selected.length > 0;
       structures.forEach(function (s) {
@@ -1408,6 +1504,10 @@
            and the pin on the model take the same colour, so list and model always agree. */
         var glow = isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff');
         m.material.color.set(isSel ? glow : (s.color || '#c9c3d8'));
+        /* Remember what this structure's colour SHOULD be. paintPatches() blanks material.color to white
+           and moves the colour into the vertices, so on the next paint the material is no longer a
+           record of anything — reading it back would make the bone white, then white again, for ever. */
+        m.userData.__baseCol = m.material.color.getHex();
         m.material.emissive.set(isHi ? new T.Color(glow) : 0x000000);
         m.material.emissiveIntensity = isSel ? 0.42 : (state.hi && state.hi[s.key]) || 0;
         var btn = host.querySelector('.mb3d-part[data-key="' + s.key + '"]');
@@ -1416,6 +1516,7 @@
         m.material.clippingPlanes = (clipping && s.role !== 'part') ? [clipPlane] : null;
         m.material.needsUpdate = true;
       });
+      paintPatches();
       Object.keys(pins).forEach(function (k) {
         var show = !!(selected.indexOf(k) >= 0 || (state.hi && state.hi[k] != null)) && !!(meshes[k] && meshes[k].visible);
         pins[k].label.classList.toggle('on', show);
