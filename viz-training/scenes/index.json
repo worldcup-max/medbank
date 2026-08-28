@@ -22832,8 +22832,18 @@
         },
         {
           "key": "scapula",
-          "label": "Scapula — acromion and coracoid",
+          "label": "Scapula",
           "group": "Its two joints"
+        },
+        {
+          "key": "acromion",
+          "label": "Acromion",
+          "group": "Landmarks"
+        },
+        {
+          "key": "coracoid_process",
+          "label": "Coracoid process",
+          "group": "Landmarks"
         },
         {
           "key": "rib1",
@@ -22876,7 +22886,7 @@
         "collar bone": "clavicle",
         "collarbone": "clavicle",
         "subclavian groove": "clavicle",
-        "conoid tubercle": "clavicle",
+        "conoid tubercle": "coracoid_process",
         "right clavicle": "clavicle",
         "manubrium": "manubrium",
         "sternoclavicular joint": "manubrium",
@@ -22884,15 +22894,16 @@
         "suprasternal notch": "manubrium",
         "articular disc": "manubrium",
         "manubrium sternoclavicular joint": "manubrium",
-        "acromion": "scapula",
-        "acromioclavicular joint": "scapula",
-        "coracoid process": "scapula",
-        "coracoclavicular ligament": "scapula",
-        "conoid ligament": "scapula",
-        "trapezoid ligament": "scapula",
         "scapula": "scapula",
-        "scapula acromion and coracoid": "scapula",
+        "shoulder blade": "scapula",
         "right scapula": "scapula",
+        "acromion": "acromion",
+        "acromioclavicular joint": "acromion",
+        "ac joint": "acromion",
+        "lateral end": "acromion",
+        "coracoid process": "coracoid_process",
+        "coracoid": "coracoid_process",
+        "coracoclavicular ligament": "coracoid_process",
         "first rib": "rib1",
         "costoclavicular ligament": "rib1",
         "rhomboid ligament": "rib1",
@@ -22968,8 +22979,8 @@
         "angle of louis": "sternum_body"
       },
       "counts": {
-        "structures": 18,
-        "parts": 10,
+        "structures": 20,
+        "parts": 12,
         "views": 8
       }
     },
@@ -23209,7 +23220,12 @@
         },
         {
           "key": "scapula",
-          "label": "Scapula — coracoid process",
+          "label": "Scapula",
+          "group": "Insertion"
+        },
+        {
+          "key": "coracoid_process",
+          "label": "Coracoid process",
           "group": "Insertion"
         }
       ],
@@ -23230,11 +23246,12 @@
         "rib 5": "rib5",
         "5th rib": "rib5",
         "right fifth rib": "rib5",
-        "coracoid process": "scapula",
         "scapula": "scapula",
-        "medial border of coracoid": "scapula",
-        "scapula coracoid process": "scapula",
+        "shoulder blade": "scapula",
         "right scapula": "scapula",
+        "coracoid process": "coracoid_process",
+        "medial border of coracoid": "coracoid_process",
+        "coracoid": "coracoid_process",
         "pectoralis major": "pec_major_sternocostal",
         "sternocostal head": "pec_major_sternocostal",
         "pectoralis major sternocostal head": "pec_major_sternocostal",
@@ -23280,8 +23297,8 @@
         "right humerus": "humerus"
       },
       "counts": {
-        "structures": 17,
-        "parts": 5,
+        "structures": 18,
+        "parts": 6,
         "views": 7
       }
     },

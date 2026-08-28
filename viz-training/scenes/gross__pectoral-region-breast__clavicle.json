@@ -116,7 +116,7 @@
     {
       "key": "scapula",
       "name": "right scapula",
-      "label": "Scapula — acromion and coracoid",
+      "label": "Scapula",
       "role": "part",
       "group": "Its two joints",
       "layer": "bone",
@@ -125,19 +125,64 @@
         "bodyparts3d": "FMA13395"
       },
       "terms": [
+        "scapula",
+        "shoulder blade"
+      ],
+      "narration": "The shoulder blade. Two of its parts matter to the clavicle: the acromion it joints with, and the coracoid the holding ligament runs up from."
+    },
+    {
+      "key": "acromion",
+      "label": "Acromion",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.2137,
+          0.3826,
+          0.967
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the scapula and the clavicle — the acromioclavicular joint (gap 0.99 mm)",
+      "calibration_gap_mm": 0.99,
+      "terms": [
         "acromion",
         "acromioclavicular joint",
-        "coracoid process",
-        "coracoclavicular ligament",
-        "conoid ligament",
-        "trapezoid ligament",
-        "scapula"
+        "ac joint",
+        "lateral end"
       ],
-      "narration": "The lateral end meets the acromion at the acromioclavicular joint, a small plane synovial joint that gives very little movement. The real holding is done below it, by the coracoclavicular ligament running from the coracoid process up to the conoid tubercle and trapezoid line on the underside of the clavicle. Tear that ligament and the shoulder drops away from the bone — the step you see in a grade three separation.",
-      "approx": {
-        "shown_as": "Scapula",
-        "detail": "acromion and coracoid"
-      }
+      "narration": "The lateral end meets the acromion at the acromioclavicular joint, a small plane synovial joint that gives very little movement. The real holding is done below it, by the coracoclavicular ligament running from the coracoid process up to the conoid tubercle and trapezoid line on the underside of the clavicle. Tear that ligament and the shoulder drops away from the bone — the step you see in a grade three separation."
+    },
+    {
+      "key": "coracoid_process",
+      "label": "Coracoid process",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.3257,
+          0.0458,
+          0.8437
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the point on the scapula where pectoralis minor, coracobrachialis and the short head of biceps all make contact (gaps 0.20, 0.16 and 0.14 mm; the three agree to within 12.8 mm on a 158 mm bone)",
+      "calibration_gap_mm": 0.2,
+      "terms": [
+        "coracoid process",
+        "coracoid",
+        "conoid tubercle",
+        "coracoclavicular ligament"
+      ],
+      "narration": "The hook of bone the coracoclavicular ligament runs up from to the underside of the clavicle. That ligament, not the joint above it, is what holds the shoulder up."
     },
     {
       "key": "rib1",
@@ -489,7 +534,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "clavicle",
-          "to": "scapula",
+          "to": "acromion",
           "kind": "acromioclavicular joint"
         },
         {

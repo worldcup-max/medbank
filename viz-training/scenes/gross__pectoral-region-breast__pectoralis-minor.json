@@ -139,7 +139,7 @@
     {
       "key": "scapula",
       "name": "right scapula",
-      "label": "Scapula — coracoid process",
+      "label": "Scapula",
       "role": "part",
       "group": "Insertion",
       "layer": "bone",
@@ -148,15 +148,36 @@
         "bodyparts3d": "FMA13395"
       },
       "terms": [
-        "coracoid process",
         "scapula",
-        "medial border of coracoid"
+        "shoulder blade"
       ],
-      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm.",
-      "approx": {
-        "shown_as": "Scapula",
-        "detail": "coracoid process"
-      }
+      "narration": "The shoulder blade. Pectoralis minor never reaches the arm — everything it does, it does by pulling on the hook of bone at the top of this blade."
+    },
+    {
+      "key": "coracoid_process",
+      "label": "Coracoid process",
+      "role": "part",
+      "group": "Insertion",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "scapula",
+        "uvw": [
+          0.3257,
+          0.0458,
+          0.8437
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the point on the scapula where pectoralis minor, coracobrachialis and the short head of biceps all make contact (gaps 0.20, 0.16 and 0.14 mm; the three agree to within 12.8 mm on a 158 mm bone)",
+      "calibration_gap_mm": 0.2,
+      "terms": [
+        "coracoid process",
+        "medial border of coracoid",
+        "coracoid"
+      ],
+      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm."
     },
     {
       "key": "pec_major_sternocostal",
@@ -421,7 +442,7 @@
             "rib4",
             "rib3",
             "pec_minor",
-            "scapula"
+            "coracoid_process"
           ],
           "duration": 7
         },
@@ -452,7 +473,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "pec_minor",
-          "to": "scapula",
+          "to": "coracoid_process",
           "kind": "pulls the coracoid forward and down"
         },
         {
@@ -570,11 +591,11 @@
         },
         {
           "op": "SHOW_STRUCTURE",
-          "target": "scapula"
+          "target": "coracoid_process"
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "scapula",
+          "target": "coracoid_process",
           "intensity": 0.7
         },
         {
