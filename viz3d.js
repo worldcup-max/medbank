@@ -368,6 +368,10 @@
     if (!k || k.length < 3 || allStop(k)) return null;
     ctx = ctx || {};
     var ctxHay = ' ' + norm((ctx.topic || '') + ' ' + (ctx.subject || '') + ' ' + (ctx.course || '')) + ' ';
+    /* Half a name is ambiguous by nature: "Pectoralis" is the first word of both muscles, and picking
+       one by index order gave a student minor's sentence and major's model. The sentence they were
+       reading settles it — it is right there, and it says which one. */
+    var senHay = ctx.sentence ? (' ' + norm(ctx.sentence) + ' ') : '';
     var kPad = ' ' + k + ' ', best = null;
     (idx.scenes || []).forEach(function (s) {
       if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
@@ -385,6 +389,10 @@
         if (!soloOk(t) && score !== 100) return;                             // never hang a match on a lone generic word
         if (structN && (structN === t || hasWord(' ' + structN + ' ', t) || hasWord(' ' + t + ' ', structN))) score += 25;
         if (inCtx) score += 18;
+        if (senHay) {                                   // the sentence around the highlight breaks the tie
+          if (structN && hasWord(senHay, structN)) score += 16;
+          else if (hasWord(senHay, t)) score += 12;
+        }
         if (!partKeys[key]) score -= 10;                                     // scenery, not something to select
         score += Math.min(8, (t.split(' ').length - 1) * 3);
         if (!best || score > best.score || (score === best.score && t.length > best.label.length)) {
@@ -1802,7 +1810,10 @@
     var teachTurn = 0, teachOn = false;
     function stopTeach() { teachTurn++; teachOn = false; }
     var GEN2 = { the:1, a:1, an:1, of:1, and:1, or:1, to:1, in:1, on:1, its:1, part:1, parts:1, process:1,
-                 head:1, region:1, body:1, left:1, right:1, muscle:1, bone:1, border:1, surface:1, area:1 };
+                 head:1, region:1, body:1, left:1, right:1, muscle:1, bone:1, border:1, surface:1, area:1,
+                 artery:1, arteries:1, vein:1, veins:1, nerve:1, nerves:1, ligament:1, tendon:1, trunk:1,
+                 duct:1, gland:1, canal:1, wall:1, sheath:1, fascia:1, joint:1, sinus:1, node:1, nodes:1,
+                 branch:1, branches:1, layer:1, space:1, cavity:1 };
     function tokensOf(label) {
       var all = norm(label).split(' ').filter(Boolean);
       var keep = all.filter(function (w) { return w.length > 3 && !GEN2[w]; });
@@ -1819,14 +1830,47 @@
         return tok.indexOf(w) === 0 && tok.length - w.length <= 2 && w.length > 3;
       });
     }
-    function namedIn(sentence, label) {
-      var hay = ' ' + norm(sentence) + ' ', toks = tokensOf(label);
+    function nameScore(sentence, name) {
+      var hay = ' ' + norm(sentence) + ' ', toks = tokensOf(name);
       if (!toks.length) return 0;
       var hit = 0; toks.forEach(function (t) { if (tokenIn(hay, t)) hit++; });
       return hit / toks.length;
     }
-    /* the words the note itself puts between two structures — the relationship, in the student's book */
-    function relationPhrase(sentence, aLabel, bLabel) {
+    /* A structure has more than one name, and a note will use whichever one it likes. "Scapula —
+       coracoid process" was missed by every sentence that says "inserts into the coracoid process"
+       without naming the bone: scoring the whole label demanded BOTH words and got 0.5. So score every
+       name the structure answers to — its authored `terms` (which is the authoritative list: the
+       coracoid carries "coracoid process", "scapula", "medial border of coracoid"), and each half of a
+       "Parent — detail" label separately — and keep the best. A note naming any one of them means the
+       sentence is about this structure. */
+    function namesOf(st2) {
+      var label = (st2 && st2.label) || String(st2 || ''), names = [label];
+      String(label).split(/\s+[\u2014\u2013]\s+/).forEach(function (half) { if (half.trim()) names.push(half.trim()); });
+      /* `terms` is a SEARCH vocabulary, not a list of names: coracobrachialis and the short head of
+         biceps both carry "coracoid process" because they attach there. Taking terms at face value put
+         two muscles the sentence never mentions into the tour. A term counts as a name for this
+         structure only when it shares a word with the structure's own label or key — which is true of
+         the coracoid's "coracoid process" and false of the muscles that merely attach to it. */
+      var self = ' ' + norm(label) + ' ' + norm((st2 && st2.key) || '') + ' ';
+      (st2 && st2.terms || []).forEach(function (t) {
+        if (!t) return;
+        var toks = tokensOf(t);
+        if (toks.some(function (w) { return tokenIn(self, w); })) names.push(t);
+      });
+      return names;
+    }
+    function namedIn(sentence, st2) {
+      var best = 0;
+      namesOf(st2).forEach(function (n) { var sc = nameScore(sentence, n); if (sc > best) best = sc; });
+      return best;
+    }
+    /* The words the note itself puts between two structures — the relationship, in the student's own
+       book. Cutting blindly between the two mentions dragged the whole clause chain along with it
+       ("is a small triangular muscle that arises from the 3rd, 4th"). What actually names a relationship
+       is the VERB, so find the last relational verb before the second structure is mentioned and read
+       from there: "arises from", "inserts into the medial border". */
+    var REL_VERB = /\b(aris\w+|originat\w*|insert\w*|attach\w*|pass\w+|runs?|running|travel\w*|accompan\w*|cross\w+|pierc\w+|emerg\w+|branch\w+|suppl\w+|drain\w+|divid\w+|cours\w+|enter\w+|exits?|wind\w*|wrap\w+|descend\w*|ascend\w*|terminat\w+|continu\w+|separat\w+|surround\w+|contain\w+|receiv\w+|connect\w+|join\w+|hook\w+|spans?)\b/gi;
+    function relationPhrase(sentence, aLabel, bName) {
       var flat = String(sentence || '').replace(/\s+/g, ' ');
       var low = ' ' + flat.toLowerCase() + ' ';
       function findAt(label) {
@@ -1834,18 +1878,30 @@
         toks.forEach(function (t) { var i = low.indexOf(' ' + (t.length > 4 ? t.slice(0, 4) : t)); if (i >= 0 && (at < 0 || i < at)) at = i; });
         return at;
       }
-      var a = findAt(aLabel), b = findAt(bLabel);
-      if (a < 0 || b < 0) return '';
-      var from = Math.min(a, b), to = Math.max(a, b);
-      var mid = flat.slice(from, to).trim();
-      /* what is left has the first structure's own name on the front and a dangling article on the end —
-         "minor arises from the" is not a relationship, "arises from" is */
-      var own = norm(aLabel).split(' ').concat(tokensOf(aLabel));
-      var w = mid.split(/\s+/);
-      while (w.length && own.indexOf(norm(w[0])) >= 0) w.shift();
-      mid = w.join(' ').replace(/[\s,;:]+$/, '').trim();
-      mid = mid.replace(/\s+(the|a|an|of|into|from|to|at|on|in|and|its|their|with)$/i, '').trim();
-      if (mid.length > 90 || mid.length < 3) return '';
+      var a = findAt(aLabel), b = findAt(bName);
+      if (b < 0) return '';
+      var to = b, verbAt = -1, m;
+      REL_VERB.lastIndex = 0;
+      while ((m = REL_VERB.exec(flat))) {
+        if (m.index >= to) break;
+        if (a >= 0 && m.index < a) continue;              // a verb belonging to an earlier clause
+        verbAt = m.index;
+      }
+      if (verbAt < 0) return '';
+      var mid = flat.slice(verbAt, to).trim();
+      /* trim the tail: the list fragment and the dangling article the cut leaves behind */
+      /* Trim what the cut left dangling — a half-read list ("from the 3rd, 4th"), a trailing article —
+         but KEEP the preposition: "arises from" is the relationship, "arises" is not. */
+      for (var pass = 0; pass < 5; pass++) {
+        var before = mid;
+        mid = mid.replace(/[\s,;:]+$/, '')
+                 .replace(/[\s,;]*\b\d+(st|nd|rd|th)?\b[\s,;]*$/i, '')
+                 .replace(/\s+(the|a|an|and|or|its|their)$/i, '')
+                 .trim();
+        if (mid === before) break;
+      }
+      mid = mid.replace(/\s+of$/i, '').trim();               // "…medial border of" reads unfinished; "…medial border" does not
+      if (mid.length > 80 || mid.length < 3) return '';
       return mid;
     }
     function teachRelated(key, sentence) {
@@ -1853,12 +1909,25 @@
       var out = [];
       if (sentence) {
         parts.concat(structures.filter(function (x) { return x.role !== 'part'; })).forEach(function (st2) {
-          if (st2.key === key || !meshes[st2.key]) return;
+          /* An anchored landmark has no mesh of its own — its geometry rides the parent bone under
+             `anchor.on`, which is how focusPart and paintPatches already reach it. Testing only its own
+             key would drop it from the tour while the sidebar happily lists it. */
+          var mesh = meshes[st2.key] || meshes[(st2.anchor || {}).on];
+          if (st2.key === key || !mesh) return;
           if (out.some(function (o) { return o.key === st2.key; })) return;
-          var sc = namedIn(sentence, st2.label);
-          if (sc >= 0.75) out.push({ key: st2.key, label: st2.label, score: sc,
-                                    rel: relationPhrase(sentence, me ? me.label : key, st2.label),
-                                    narration: st2.narration || '' });
+          var sc = namedIn(sentence, st2);
+          if (sc < 0.75) return;
+          /* the phrase is cut between the two structures AS THE NOTE NAMES THEM — if the sentence said
+             "coracoid process", the relation runs to those words, not to the label "Scapula" */
+          var used = st2.label, bestn = nameScore(sentence, st2.label);
+          namesOf(st2).forEach(function (n) {
+            n = String(n || '').trim(); if (!n) return;
+            var sc2 = nameScore(sentence, n);
+            if (sc2 > bestn) { bestn = sc2; used = n; }
+          });
+          out.push({ key: st2.key, label: st2.label, score: sc, named: used,
+                     rel: relationPhrase(sentence, me ? me.label : key, used),
+                     narration: st2.narration || '' });
         });
       }
       out.sort(function (a, b) { return b.score - a.score; });

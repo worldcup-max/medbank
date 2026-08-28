@@ -7261,7 +7261,7 @@ function showExplainBtn(r, canViz){
      button that opens onto "nothing here", and never one that opens onto a different region because a
      fragment of the selection happened to appear in some other scene's vocabulary. The note being read
      is handed to the resolver as context, so a chest note stays in the chest. */
-  var m3=null, m3ctx={topic:currentTopicName(), subject:(window.currentTopicSubject?currentTopicSubject():'')};
+  var m3=null, m3ctx={topic:currentTopicName(), subject:(window.currentTopicSubject?currentTopicSubject():''), sentence:_selSentence||''};
   try{ if(mb3dOn()) m3=MB3D.partForTermSync(_selText, m3ctx); }catch(e){}
   if(m3) html+='<button class="explbtn mb3dbtn" data-a="mb3d">🧬 See '+esc(m3.structure||'it')+' in 3D</button>';
   _explBtn.innerHTML=html;
