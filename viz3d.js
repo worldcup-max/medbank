@@ -230,6 +230,10 @@
       '.mb3d-sh{padding:10px 13px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--m3dim);border-bottom:1px solid var(--m3line);display:flex;justify-content:space-between;align-items:center}',
       '.mb3d-sh a{font-size:11px;color:#b3a6ff;text-transform:none;letter-spacing:0;cursor:pointer;text-decoration:underline}',
       '.mb3d-list{overflow:auto;flex:1;padding:6px;min-height:0}',
+      '.mb3d-find{margin:7px 9px 0;display:flex;align-items:center;gap:7px;background:#1b1930;border:1px solid #35315a;border-radius:8px;padding:5px 9px}',
+      '.mb3d-find input{flex:1;min-width:0;font:inherit;font-size:12.5px;background:transparent;border:0;outline:none;color:#e9e6ff}',
+      '.mb3d-find input::placeholder{color:#7d78a3}',
+      '.mb3d-approx{color:#f0b354}',
       '.mb3d-grp{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8f8ab5;padding:9px 10px 3px}',
       '.mb3d-part{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:13px;padding:7px 10px;border-radius:8px;border:1px solid transparent;background:transparent;color:#e7e3ff;cursor:pointer}',
       '.mb3d-part:hover{background:var(--m3pan2)}.mb3d-part.on{background:#2a2650;border-color:#4a4488}',
@@ -296,51 +300,102 @@
       var title = ' ' + norm(topicName) + ' ' + norm(subjectName || '') + ' ';
       var body = bodyText ? ' ' + norm(String(bodyText).slice(0, 40000)) + ' ' : '';
       if (!title.trim() && !body.trim()) return [];
-      return (idx.scenes || []).filter(function (s) {
+      /* Ordered by how well the scene fits THIS topic, because the caller opens the first one: the
+         "Pectoralis Major and Minor" note used to land on Biceps & Triceps purely because that scene
+         sits earlier in the index. A title hit outranks a body hit, an exact structure hit outranks
+         both, and longer topic phrases count for more than one shared word. */
+      var out = [];
+      (idx.scenes || []).forEach(function (s) {
         // students see validated scenes only — candidate/planned/blocked are for the dev route
-        if (s.mode !== '3d_anatomy' || s.status !== 'ready') return false;
-        var topics = (s.match.topics || []).map(norm);
-        if (topics.some(function (t) { return hasWord(title, t); })) return true;
-        if (!body) return false;
-        return topics.some(function (t) { return t.indexOf(' ') > 0 && hasWord(body, t); });
+        if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
+        var topics = (s.match.topics || []).map(norm), score = 0;
+        topics.forEach(function (t) {
+          if (hasWord(title, t)) score += 10 + Math.min(12, (t.split(' ').length - 1) * 4);
+          else if (body && t.indexOf(' ') > 0 && hasWord(body, t)) score += 3;
+        });
+        var structN = norm(s.structure || '');
+        if (structN && hasWord(title, structN)) score += 30;      // the note is about exactly this structure
+        if (score > 0) out.push({ s: s, score: score });
       });
+      out.sort(function (a, b) { return b.score - a.score; });
+      return out.map(function (o) { return o.s; });
     }).catch(function () { return []; });
   }
 
-  function partForTerm(term) {
-    var k = norm(term);
-    if (k.length < 3) return Promise.resolve(null);
-    return loadIndex().then(function (idx) {
-      var best = null;
-      (idx.scenes || []).forEach(function (s) {
-        if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
-        Object.keys(s.terms || {}).forEach(function (t) {
-          if (k === t || (k.length > 5 && k.indexOf(t) >= 0) || (t.length > 5 && t.indexOf(k) >= 0)) {
-            var score = (k === t ? 100 : Math.min(t.length, k.length));
-            if (!best || score > best.score) best = { score: score, scene: s.id, key: s.terms[t], label: t };
-          }
-        });
-      });
-      return best;
-    }).catch(function () { return null; });
-  }
+  /* ======================= resolving a phrase to ONE structure =======================
+     This used to be raw substring containment, which is why "the pectoral region" opened a Clavicle
+     (because "pectoral" sits inside "clavipectoral fascia"), "major" opened the deep back (inside
+     "rhomboid major") and the bare word "The" opened a lumbar spine (inside "l4 5 disc the exemplar").
+     A fragment of a word is not a mention of a structure. Everything below matches whole words only.
 
-  /* Synchronous lookup against the already-loaded index. Returns null (and warms the index) if it has not
-     arrived yet — used by the selection popup, where an async answer would make the button flicker in late. */
-  function partForTermSync(term) {
-    if (!_indexData) { loadIndex(); return null; }
-    var k = norm(term), best = null;
-    if (k.length < 3) return null;
-    (_indexData.scenes || []).forEach(function (s) {
+     It also used to be TWO resolvers — one behind the inline pill, one behind the selection popup —
+     so the same phrase could open two different models depending on how you asked. There is one now.
+
+     Ranking, in order of what a student means by highlighting something:
+       exact term                                     100
+       the term sits whole inside what they selected   62   ("origin of pectoralis minor")
+       what they selected sits whole inside the term   44   ("pectoralis minor" → "right pectoralis minor")
+       + the scene is ABOUT that structure             +25   (its own scene beats a scene that merely names it)
+       + the scene belongs to the note being read      +18   (context, so a breast note stays in the chest)
+       - the term resolves to scenery, not a part      -10   (opening on nothing selected is not an answer)
+     The +25 is what fixes "pectoralis minor" landing in the Pectoralis major scene: the term is a real
+     term in both, scored 100 in both, and the first one in the index used to win. */
+  var STOPW = { the:1, a:1, an:1, of:1, and:1, or:1, to:1, in:1, on:1, at:1, by:1, is:1, are:1, was:1, were:1,
+                it:1, its:1, this:1, that:1, these:1, those:1, with:1, from:1, for:1, as:1, into:1, than:1, then:1 };
+  /* Words that are never a structure ON THEIR OWN. "Major" is half of a dozen muscles; "head" is part of
+     twenty. Selected alone they carry no destination, and guessing one is how a student ends up in the
+     wrong region entirely. As part of a phrase they are fine — this list only blocks them solo. */
+  var GENERICW = { major:1, minor:1, head:1, heads:1, part:1, parts:1, body:1, region:1, muscle:1, muscles:1,
+                   nerve:1, nerves:1, artery:1, arteries:1, vein:1, veins:1, bone:1, bones:1, joint:1, fascia:1,
+                   ligament:1, tendon:1, branch:1, branches:1, process:1, border:1, surface:1, layer:1, wall:1,
+                   canal:1, ring:1, groove:1, notch:1, fossa:1, space:1, line:1, side:1, left:1, right:1, upper:1,
+                   lower:1, anterior:1, posterior:1, superior:1, inferior:1, medial:1, lateral:1, deep:1,
+                   superficial:1, proximal:1, distal:1, origin:1, insertion:1, supply:1, area:1, group:1 };
+  /* strip the punctuation a selection drags in — "pectoralis minor." must not become a different phrase */
+  function normSel(t) { return norm(String(t || '').replace(/[.,;:!?)\]}"'\u2019\u201d]+$/, '')); }
+  function allStop(k) { var w = k.split(' '); for (var i = 0; i < w.length; i++) if (!STOPW[w[i]]) return false; return true; }
+  function soloOk(k) { return k.indexOf(' ') > 0 || (!GENERICW[k] && k.length >= 5); }
+
+  function _resolveIn(idx, term, ctx) {
+    var k = normSel(term);
+    if (!k || k.length < 3 || allStop(k)) return null;
+    ctx = ctx || {};
+    var ctxHay = ' ' + norm((ctx.topic || '') + ' ' + (ctx.subject || '') + ' ' + (ctx.course || '')) + ' ';
+    var kPad = ' ' + k + ' ', best = null;
+    (idx.scenes || []).forEach(function (s) {
       if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
+      var partKeys = {}; (s.parts || []).forEach(function (p) { partKeys[p.key] = 1; });
+      var structN = norm(s.structure || '');
+      var topics = (s.match && s.match.topics || []).map(norm);
+      var inCtx = ctxHay.trim() && (topics.some(function (t) { return hasWord(ctxHay, t); }) ||
+                                    (structN && hasWord(ctxHay, structN)));
       Object.keys(s.terms || {}).forEach(function (t) {
-        if (k === t || (k.length > 5 && k.indexOf(t) >= 0) || (t.length > 5 && t.indexOf(k) >= 0)) {
-          var score = (k === t ? 100 : Math.min(t.length, k.length));
-          if (!best || score > best.score) best = { score: score, scene: s.id, key: s.terms[t], label: t };
+        var key = s.terms[t], score = 0;
+        if (k === t) score = 100;
+        else if (t.length >= 5 && hasWord(kPad, t)) score = 62;              // term whole-word inside the selection
+        else if (soloOk(k) && k.length >= 5 && hasWord(' ' + t + ' ', k)) score = 44;   // selection whole-word inside the term
+        else return;
+        if (!soloOk(t) && score !== 100) return;                             // never hang a match on a lone generic word
+        if (structN && (structN === t || hasWord(' ' + structN + ' ', t) || hasWord(' ' + t + ' ', structN))) score += 25;
+        if (inCtx) score += 18;
+        if (!partKeys[key]) score -= 10;                                     // scenery, not something to select
+        score += Math.min(8, (t.split(' ').length - 1) * 3);
+        if (!best || score > best.score || (score === best.score && t.length > best.label.length)) {
+          best = { score: score, scene: s.id, key: key, label: t, structure: s.structure || '', topic: s.topic || '' };
         }
       });
     });
-    return best;
+    return (best && best.score >= 40) ? best : null;
+  }
+
+  function partForTerm(term, ctx) {
+    return loadIndex().then(function (idx) { return _resolveIn(idx, term, ctx); }).catch(function () { return null; });
+  }
+  /* Synchronous lookup against the already-loaded index. Returns null (and warms the index) if it has not
+     arrived yet — used by the selection popup, where an async answer would make the button flicker in late. */
+  function partForTermSync(term, ctx) {
+    if (!_indexData) { loadIndex(); return null; }
+    return _resolveIn(_indexData, term, ctx);
   }
 
   /* Every term the corpus can put a student in front of, longest first.
@@ -354,8 +409,12 @@
       if (s.mode !== '3d_anatomy' || s.status !== 'ready') return;
       var partKeys = {};
       (s.parts || []).forEach(function (p) { partKeys[p.key] = 1; });
+      var structN = norm(s.structure || '');
       Object.keys(s.terms || {}).forEach(function (t) {
-        if (t.length > 4 && partKeys[s.terms[t]]) out.push({ term: t, scene: s.id, key: s.terms[t] });
+        if (t.length <= 4 || !partKeys[s.terms[t]]) return;
+        if (!soloOk(t)) return;                       // "major" alone is not a structure — never plant a pill on it
+        out.push({ term: t, scene: s.id, key: s.terms[t],
+                   primary: !!(structN && (structN === t || hasWord(' ' + structN + ' ', t))) });
       });
     });
     out.sort(function (a, b) { return b.term.length - a.term.length; });
@@ -414,6 +473,7 @@
         if (relational) { score += 4; why = 'a relationship worth seeing'; }
         if (m.index <= Math.max(24, s.text.length * 0.35)) { score += 2; if (!relational) why = 'what this sentence is about'; }
         if (t.term.indexOf(' ') >= 0) score += 1;
+        if (t.primary) score += 2;                    // its own scene, not a scene that merely mentions it
         if (definitional) { score -= 3; why = 'definition only'; }
         var id = t.scene + '|' + t.key;
         if (!best[id] || score > best[id].score) {
@@ -459,7 +519,7 @@
     minScore: 4,          // below this a mention is not worth surfacing at all
     wordsPerChip: 220,    // reading budget: roughly one opportunity per this many words
     minGapChars: 700,     // density: how far apart two chips must sit in the reading flow
-    ceiling: 3,           // TEMPORARY testing ceiling. Set to null to let the budget decide.
+    ceiling: 6,           // a hard cap so a long chapter can't become a gallery; the budget usually bites first
     floor: 0,             // a note with nothing worth showing gets nothing
     /* Personalisation is confidence-graded on purpose. Two ignored chips say nothing about a student;
        eighty observations say a great deal. Below adaptMinObs the global policy applies unchanged; between
@@ -514,6 +574,7 @@
           if (relational) { score += 4; why = 'a relationship worth seeing'; }
           if (m.index <= Math.max(24, s.text.length * 0.35)) { score += 2; if (!relational) why = 'what this sentence is about'; }
           if (t.term.indexOf(' ') >= 0) score += 1;
+          if (t.primary) score += 2;                  // its own scene, not a scene that merely mentions it
           if (definitional) { score -= 3; why = 'definition only'; }
           cands.push({ ref: p.ref, index: s.at + m.index, docIndex: docAt + s.at + m.index,
                        sentence: docAt + s.at,
@@ -523,6 +584,16 @@
       docAt += text.length;
     });
 
+    /* Where each structure is first named in the note. A chip that lands on the third mention because
+       that sentence scored highest reads as arbitrary to a student skimming: they meet the structure,
+       there is no icon, they meet it again, still nothing, and then an icon appears further down. The
+       structure still has to EARN a chip somewhere in the note — but once it has, the chip goes where
+       the reader first meets it. */
+    var firstAt = {};
+    cands.forEach(function (c) {
+      var id = c.scene + '|' + c.key;
+      if (!firstAt[id] || c.docIndex < firstAt[id].docIndex) firstAt[id] = c;
+    });
     cands = cands.filter(function (c) { return c.score >= POLICY.minScore; });
     if (!cands.length) return [];
     cands.sort(function (a, b) { return a.docIndex - b.docIndex; });
@@ -578,12 +649,15 @@
       taken.push(cl);
     }
 
-    taken.sort(function (a, b) { return a.anchor.docIndex - b.anchor.docIndex; });
-    return taken.map(function (cl) {
-      var a = cl.anchor;
+    var out = taken.map(function (cl) {
+      var a = cl.anchor, f = firstAt[a.scene + '|' + a.key];
+      if (f && f.docIndex < a.docIndex) a = { ref: f.ref, index: f.index, match: f.match, docIndex: f.docIndex,
+                                              scene: a.scene, key: a.key, score: a.score, why: a.why };
       return { ref: a.ref, index: a.index, match: a.match, scene: a.scene, key: a.key,
-               score: a.score, why: a.why, related: cl.keys.length - 1 };
+               docIndex: a.docIndex, score: a.score, why: a.why, related: cl.keys.length - 1 };
     });
+    out.sort(function (a, b) { return a.docIndex - b.docIndex; });
+    return out;
   }
 
   /* ---------- where the labels go ----------
@@ -775,12 +849,17 @@
             '<div class="mb3d-status" data-r="status">Loading meshes…</div><div class="mb3d-hint">drag to rotate · scroll to zoom</div></div>' +
           '<div class="mb3d-side">' +
             '<div class="mb3d-sh"><span data-r="sidehd">Parts</span><a data-r="showall">show all</a></div>' +
+            '<div class="mb3d-find">🔎<input data-r="find" type="search" placeholder="Find a part…" aria-label="Find a part"></div>' +
             '<div class="mb3d-list" data-r="list"></div>' +
             '<div class="mb3d-acts"><button class="mb3d-btn pri" data-r="play">▶ Play</button>' +
               '<button class="mb3d-btn" data-r="retry" style="display:none">↻ Retry</button>' +
+              '<button class="mb3d-btn pri" data-r="nb" title="Show this structure with what it touches">🔗 Neighbours</button>' +
               '<button class="mb3d-btn" data-r="tour">Tour parts</button>' +
               '<button class="mb3d-btn" data-r="ghost">Ghost others</button>' +
               '<button class="mb3d-btn" data-r="solo">Only this</button>' +
+              '<button class="mb3d-btn" data-r="labels" title="Name every part on the model">🏷 Labels</button>' +
+              '<button class="mb3d-btn" data-r="reset" title="Recentre and show everything">⟲ Reset</button>' +
+              '<button class="mb3d-btn" data-r="full" title="Full screen">⛶</button>' +
               '<select class="mb3d-btn" data-r="speed" title="Narration speed" style="padding:7px 8px">' +
                 [0.75,0.9,1,1.25,1.5,1.75,2].map(function(v){ return '<option value="'+v+'"'+(v===1?' selected':'')+'>'+v+'\u00d7</option>'; }).join('') +
               '</select></div>' +
@@ -1039,7 +1118,10 @@
       holder.rotation.y = (scene.camera && scene.camera.initialYaw) || 0;
       startSpin();                                   // a 3-second first glance, then it is the student's
       buildList(); buildChips();
-      applyView(0);
+      /* Which tab opens matters when the student arrived by highlighting a structure: landing on the
+         scene's first view — "See it in the body" — answers a question they did not ask. Open on the
+         view that actually names what they highlighted. */
+      applyView(opts.part ? viewFor(opts.part) : 0);
       /* The model is on screen and interactive by now — start buying the voice behind it. */
       warmScene();
       if (opts.part && meshes[opts.part]) focusPart(opts.part);
@@ -1097,9 +1179,12 @@
       /* A scene that has not passed the gate can still be opened on the dev route — it must never look
          like finished teaching. scenesForTopic() only ever hands students `ready` scenes. */
       if (scene.status && scene.status !== 'ready') bits.push('<span class="mb3d-gap">' + esc(scene.status.toUpperCase()) + ' — not shown to students</span>');
-      if ((scene.gaps || []).length) bits.push('<span class="mb3d-gap" title="' + esc(scene.gaps.join(' · ')) + '">⚠ ' + scene.gaps.length + ' known gap' + (scene.gaps.length === 1 ? '' : 's') + '</span>');
+      if ((scene.gaps || []).length && scene.status !== 'ready') bits.push('<span class="mb3d-gap" title="' + esc(scene.gaps.join(' · ')) + '">⚠ ' + scene.gaps.length + ' known gap' + (scene.gaps.length === 1 ? '' : 's') + '</span>');
+      /* PEEL_LAYER / TRACE_STRUCTURE are names of renderer capabilities, not something a student can act
+         on — they read as a leaked developer note in the middle of the page. They stay on the dev route,
+         where they are diagnostic, and stay out of a validated scene a student opened from their note. */
       var d = Object.keys(degraded);
-      if (d.length) bits.push('<span class="mb3d-gap" title="This renderer approximates: ' + esc(d.join(', ')) + '">≈ simplified: ' + esc(d.join(', ').toLowerCase().replace(/_/g, ' ')) + '</span>');
+      if (d.length && scene.status !== 'ready') bits.push('<span class="mb3d-gap" title="This renderer approximates: ' + esc(d.join(', ')) + '">≈ simplified: ' + esc(d.join(', ').toLowerCase().replace(/_/g, ' ')) + '</span>');
       $('note').innerHTML = bits.join(' · ');
     }
 
@@ -1130,6 +1215,20 @@
     }
 
     /* ---------- parts list ---------- */
+    /* "Scapula — coracoid process" isolates the WHOLE scapula, because the catalog has no mesh for the
+       coracoid process and never will. Silently lighting the whole bone teaches the wrong shape; the
+       fix is not to hide it but to say it, where the student is looking. A label of the form
+       "Parent — detail" whose mesh key doesn't carry the detail is exactly that case. */
+    function approxOf(p) {
+      var lb = String(p.label || ''), cut = lb.split(/\s+[\u2014\u2013-]\s+/);
+      if (cut.length < 2) return '';
+      var parent = cut[0].trim(), detail = cut.slice(1).join(' ').trim();
+      if (!detail) return '';
+      var k = norm(p.key), words = norm(detail).split(' ').filter(function (w) { return w.length > 3; });
+      var carried = words.some(function (w) { return k.indexOf(w.slice(0, 5)) >= 0; });
+      if (carried) return '';                                   // it has its own mesh — nothing to explain
+      return 'shown as the whole ' + parent.toLowerCase() + ' — this model has no separate ' + detail.toLowerCase();
+    }
     function buildList() {
       var list = $('list'); list.innerHTML = '';
       Array.prototype.slice.call(pinWrap.children).forEach(function (c) { if (c !== leads) pinWrap.removeChild(c); });
@@ -1144,11 +1243,12 @@
         var b = document.createElement('button');
         b.className = 'mb3d-part'; b.setAttribute('data-key', p.key);
         if (!ok) b.setAttribute('disabled', '');
+        var ax = ok ? approxOf(p) : '';
         b.innerHTML = '<span class="mb3d-dot" style="background:' + (ok ? esc(p.color || '#7c5cff') : '#3a365e') + '"></span>' +
           '<span><b style="font-weight:600">' + esc(p.label) + '</b><small>' + esc(
             ok ? (p.narration || '')
                : (failedKeys.indexOf(p.key) >= 0 ? 'download failed — tap ↻ Retry above' : 'no 3D model of this structure yet')
-          ) + '</small></span>';
+          ) + (ax ? '<br><span class="mb3d-approx">≈ ' + esc(ax) + '</span>' : '') + '</small></span>';
         if (ok) b.addEventListener('click', function () { toggle(p.key); });
         list.appendChild(b);
         if (ok) addPin(p);
@@ -1172,11 +1272,24 @@
       pins[s.key] = { label: label, dot: dot, line: line };
     }
 
+    /* the first view whose ops name this key, else view 0 */
+    function viewFor(key) {
+      for (var i = 0; i < views.length; i++) {
+        var named = [];
+        (views[i].ops || []).forEach(function (o) {
+          [].concat(o.target || [], o.targets || [], o.path || [], o.from || [], o.to || []).forEach(function (t) {
+            if (t && t !== '*') named = named.concat(keysFor(t));
+          });
+        });
+        if (named.indexOf(key) >= 0) return i;
+      }
+      return 0;
+    }
     function buildChips() {
       var chips = $('chips'); chips.innerHTML = '';
       views.forEach(function (v, i) {
         var b = document.createElement('button');
-        b.className = 'mb3d-chip' + (i === 0 ? ' on' : '');
+        b.className = 'mb3d-chip' + (i === (currentView || 0) ? ' on' : '');
         b.textContent = v.title || v.mode;
         b.addEventListener('click', function () { applyView(i); });
         chips.appendChild(b);
@@ -1291,7 +1404,17 @@
          ReferenceError took out the narration, the step-through, the Play/Stop toggle and the heart's
          blood path all at once, and left the caption frozen on step 1 with nothing in the console
          unless you went looking. Scope is not a detail. */
-      if (v.narration && (v.ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; })) say(v.narration);
+      /* A view WITHOUT a trace used to be silent: its line was written into the caption bar and never
+         spoken, so Play on such a scene was a camera moving over captions — which is exactly what
+         "there is no narration in the 3D player" looks like from the outside, even though the voice was
+         wired the whole time. Every view with a line now speaks it. Traced views still hand off to the
+         trace, which narrates each waypoint as the camera arrives; untraced views speak through
+         sayThen so `speaking` is true while the line is being read and Play waits for it instead of
+         marching on over it. */
+      if (v.narration) {
+        if ((v.ops || []).some(function (o) { return o.op === 'TRACE_STRUCTURE'; })) say(v.narration);
+        else sayThen(v.narration, null, 0);
+      }
       /* This view's lines are wanted now; the next view's are wanted in a few seconds. Buying both
          costs nothing extra — warmSpeak caches per line and never generates the same one twice — and
          it means pressing a chip or letting Play move on does not restart the wait. */
@@ -1424,7 +1547,9 @@
       var b = host.querySelector('.mb3d-part[data-key="' + key + '"]');
       if (b) { b.classList.add('on'); try { b.scrollIntoView({ block: 'nearest' }); } catch (e) {} }
       var s = structures.filter(function (x) { return x.key === key; })[0];
-      if (s) $('narr').innerHTML = '<b>' + esc(s.label) + '</b> — ' + esc(s.narration || '');
+      if (s) { var ax = approxOf(s);
+        $('narr').innerHTML = '<b>' + esc(s.label) + '</b> — ' + esc(s.narration || '') +
+          (ax ? ' <span class="mb3d-approx">(≈ ' + esc(ax) + ')</span>' : ''); }
       paint();
     }
 
@@ -1512,6 +1637,7 @@
       });
     }
 
+    var labelsAll = false;
     function paint() {
       var anySel = selected.length > 0;
       structures.forEach(function (s) {
@@ -1558,7 +1684,7 @@
       });
       paintPatches();
       Object.keys(pins).forEach(function (k) {
-        var show = !!(selected.indexOf(k) >= 0 || (state.hi && state.hi[k] != null)) && !!(meshes[k] && meshes[k].visible);
+        var show = !!(labelsAll || selected.indexOf(k) >= 0 || (state.hi && state.hi[k] != null)) && !!(meshes[k] && meshes[k].visible);
         pins[k].label.classList.toggle('on', show);
         pins[k].dot.classList.toggle('on', show);
         pins[k].line.setAttribute('opacity', show ? '0.75' : '0');
@@ -1588,6 +1714,95 @@
       this.classList.toggle('pri', solo); paint();
     });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
+
+    /* ---------- "show me how it sits" ----------
+       The thing a student highlighting a structure actually wants: that structure, in place, with what
+       it touches — not one part alone in the dark, and not the whole scene with fifteen equal parts.
+       Neighbours = whatever the scene's own views put on screen alongside it (the author already decided
+       what belongs together); failing that, every part that has a mesh. The subject keeps its colour and
+       full opacity, the neighbours stay visible and named, everything else steps back. */
+    function neighboursOf(key) {
+      var out = {}, found = false;
+      views.forEach(function (v) {
+        var named = [];
+        (v.ops || []).forEach(function (o) {
+          [].concat(o.target || [], o.targets || [], o.path || [], o.from || [], o.to || []).forEach(function (t) {
+            if (t && t !== '*') named = named.concat(keysFor(t));
+          });
+        });
+        if (named.indexOf(key) < 0) return;
+        found = true;
+        named.forEach(function (k) { if (k !== key && meshes[k]) out[k] = 1; });
+      });
+      var list = Object.keys(out);
+      if (!found || !list.length) list = parts.filter(function (p) { return meshes[p.key] && p.key !== key; })
+                                             .map(function (p) { return p.key; });
+      return list.slice(0, 8);
+    }
+    function showNeighbours(key) {
+      if (!key) return;
+      stopTour(); stopPlay(); stopSpin();
+      var nb = neighboursOf(key);
+      state.only = null; state.ghosted = false; state.hi = {};
+      structures.forEach(function (st2) { state.visible[st2.key] = true; });
+      selected = [key].concat(nb);
+      solo = false; ghost = true; labelsAll = true;
+      $('ghost').classList.add('pri'); $('solo').classList.remove('pri'); $('labels').classList.add('pri');
+      Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) {
+        b.classList.toggle('on', selected.indexOf(b.getAttribute('data-key')) >= 0);
+      });
+      var me = structures.filter(function (x) { return x.key === key; })[0];
+      var names = nb.map(function (k) { var t = structures.filter(function (x) { return x.key === k; })[0]; return t ? t.label : k; });
+      $('narr').innerHTML = '<b>' + esc(me ? me.label : key) + ' in place</b> — ' +
+        (names.length ? esc('with ' + names.join(', ')) : 'nothing else in this scene touches it') +
+        '. Drag to turn it and see how they meet.';
+      useCount.neighbours = (useCount.neighbours || 0) + 1;
+      emit('neighbours', { scene: scene.id, part: key, with: nb.length });
+      paint();
+    }
+    $('nb').addEventListener('click', function () {
+      showNeighbours(selected[0] || opts.part || (parts.filter(function (p) { return meshes[p.key]; })[0] || {}).key);
+    });
+    $('labels').addEventListener('click', function () {
+      labelsAll = !labelsAll; this.classList.toggle('pri', labelsAll); paint();
+    });
+    /* Reset is the way back from any state at all: no selection, nothing hidden, model recentred. */
+    $('reset').addEventListener('click', function () {
+      stopTour(); stopPlay(); stopSpin();
+      selected = []; ghost = false; solo = false; labelsAll = false;
+      state.only = null; state.ghosted = false; state.hi = {};
+      structures.forEach(function (st2) { state.visible[st2.key] = true; });
+      Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) { b.classList.remove('on'); });
+      $('ghost').classList.remove('pri'); $('solo').classList.remove('pri'); $('labels').classList.remove('pri');
+      try { fit(); } catch (e) {}
+      holder.rotation.y = (scene.camera && scene.camera.initialYaw) || 0;
+      var f = $('find'); if (f) { f.value = ''; filterList(''); }
+      paint();
+    });
+    $('full').addEventListener('click', function () {
+      var box = host.closest ? (host.closest('.mb3d-shell') || host) : host;
+      try {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (box.requestFullscreen) box.requestFullscreen();
+      } catch (e) {}
+    });
+    /* A fifteen-part scene is a scroll; a student who knows the name should be able to type it. */
+    function filterList(q) {
+      q = norm(q || '');
+      Array.prototype.forEach.call(host.querySelectorAll('.mb3d-part'), function (b) {
+        var t = norm(b.textContent || '');
+        b.style.display = (!q || t.indexOf(q) >= 0) ? '' : 'none';
+      });
+      Array.prototype.forEach.call(host.querySelectorAll('.mb3d-grp'), function (g) { g.style.display = q ? 'none' : ''; });
+    }
+    (function () { var f = $('find'); if (!f) return;
+      f.addEventListener('input', function () { filterList(this.value); });
+      f.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        var first = host.querySelector('.mb3d-part:not([style*="display: none"]):not([disabled])');
+        if (first) first.click();
+      });
+    })();
     $('play').addEventListener('click', function () { playTimer ? stopPlay() : startPlay(); });
     /* Narration speed. The player does not own the voice — the app does — so this just tells the app's
        narrator how fast to read, and it takes effect on the line already playing. */
@@ -1893,10 +2108,12 @@
   }
 
   /* term → the one scene+part that term means → the viewer, focused on it */
-  function openTerm(term) {
-    return partForTerm(term).then(function (hit) {
+  function openTerm(term, ctx) {
+    return partForTerm(term, ctx).then(function (hit) {
       if (!hit) return null;
-      return open(hit.scene, { part: hit.key, title: term, subtitle: 'matched: ' + hit.label, via: 'highlight' });
+      return open(hit.scene, { part: hit.key, title: normSel(term) ? String(term).replace(/[.,;:!?]+$/, '') : term,
+                               subtitle: hit.structure ? (hit.structure + ' · matched "' + hit.label + '"') : ('matched: ' + hit.label),
+                               via: 'highlight' });
     });
   }
 
@@ -1907,6 +2124,8 @@
     scenesForTopic: scenesForTopic,
     partForTerm: partForTerm,
     partForTermSync: partForTermSync,
+    resolve: partForTermSync,        // one resolver behind the pill, the popup and the tab
+    normSel: normSel,
     terms: terms,
     rankMentions: rankMentions,
     missesIn: missesIn,

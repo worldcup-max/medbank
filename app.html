@@ -1185,10 +1185,41 @@ let DATA = (()=>{
   return d;
 })();
 var _persistWarned=false;
+/* A failed save is almost never "the device is out of storage" — it is this ONE SITE's browser storage
+   allowance (a few MB) filled by things MedBank can rebuild for free: the cached course content, the
+   saved explainer blueprints, the voice samples. Telling a student to go delete photos was both wrong
+   and useless. So: make room, in order of what costs least to lose, and retry. Study progress is the
+   last thing standing, never the first thing dropped. */
+function _lsKeys(pred){ var out=[]; try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k&&pred(k)) out.push(k); } }catch(e){} return out; }
+function mbFreeSpace(stage){
+  var freed=false;
+  try{
+    if(stage===1){                                   // 1. host voice samples — re-fetchable, pure convenience
+      _lsKeys(function(k){ return k.indexOf('pod_smp_')===0; }).forEach(function(k){ try{ localStorage.removeItem(k); freed=true; }catch(e){} });
+    } else if(stage===2){                            // 2. saved explainers inside the blob itself — keep the 30 newest
+      var cv=(window.DATA&&DATA.cardViz)||null;
+      if(cv){ var ids=Object.keys(cv); if(ids.length>30){
+        ids.sort(function(a,b){ return ((cv[b]||{}).ts||0)-((cv[a]||{}).ts||0); });
+        ids.slice(30).forEach(function(id){ delete cv[id]; }); freed=true; } }
+    } else if(stage===3){                            // 3. the cached course content — re-downloaded on the next open
+      _lsKeys(function(k){ return k.indexOf('medbank_content')===0; }).forEach(function(k){ try{ localStorage.removeItem(k); freed=true; }catch(e){} });
+    } else if(stage===4){                            // 4. the pre-sync safety copy — only once the account HAS the data
+      var synced=false; try{ var m=JSON.parse(localStorage.getItem('medbank_sync_meta')||'{}'); synced=!!(m&&m.rev&&!m.dirty); }catch(e){}
+      if(synced){ try{ localStorage.removeItem('medbank_presync_backup'); freed=true; }catch(e){} }
+    }
+  }catch(e){}
+  return freed;
+}
 function persist(){ var ok=true;
   try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); }
-  catch(e){ ok=false;   // TIM-05: surface a storage-full failure ONCE instead of silently losing study/progress
-    if(!_persistWarned){ _persistWarned=true; try{ mbToast("Your device is out of storage — recent progress may not be saved. Free some space, then reopen MedBank."); }catch(_){} }
+  catch(e){
+    for(var stage=1; stage<=4 && !ok; stage++){      // make room and try again before saying anything
+      if(!mbFreeSpace(stage)) continue;
+      try{ localStorage.setItem(SKEY,JSON.stringify(DATA)); ok=true; }catch(e2){}
+    }
+    if(!ok && !_persistWarned){ _persistWarned=true;
+      try{ mbToast("This browser won't hold any more of MedBank's data, so the last few minutes may not be saved here. Your account still has your progress — sign in on another browser, or clear this site's data and reopen."); }catch(_){}
+    }
   }
   if(ok) _persistWarned=false;
   try{ if(typeof scheduleBackup==='function') scheduleBackup(); }catch(e){}
@@ -2543,22 +2574,50 @@ let topicTab='note', topicTabFor=null;
 /* ===== Topic Preview — the pre-read "orientation video" (SPEC-TOPIC-PREVIEW.md; flag-gated) ===== */
 var _PREVIEW={};   // in-memory per-topic cache (kept OUT of DATA so big blueprints never bloat the synced blob)
 function previewOn(){ try{ var C=window.MEDBANK_CONFIG||{}; return !!(C.FEATURES&&C.FEATURES.TOPIC_PREVIEW); }catch(e){ return false; } }
+/* The preview used to collapse every possible setback into one dead end: no auth session YET (the
+   commonest one — on a cold load Supabase has not finished restoring it when the first note opens),
+   a dropped connection, a 502 from a waking server, a rate limit, or the server honestly answering
+   "still building". All of them wrote {status:'failed'} into a cache that is never revisited, so one
+   unlucky moment at startup left "Preview couldn't build" sitting on the note for the rest of the
+   session. Only a real, final refusal should look final; everything else is worth another go. */
+function _pvSoft(t, why, attempt){
+  var waits=[1500,4000,10000,20000];
+  if(attempt>=waits.length){ _PREVIEW[t.id]={status:'failed', why:why}; try{ render(); }catch(e){} return; }
+  _PREVIEW[t.id]={status:'building'};
+  setTimeout(function(){ _pvFetch(t, attempt+1); }, waits[attempt]);
+}
+async function _pvFetch(t, attempt){
+  attempt=attempt||0;
+  try{
+    var CFG=window.MEDBANK_CONFIG||{};
+    if(!CFG.IMPORT_API||!window.__mbSB) return _pvSoft(t,'offline',attempt);           // config/SDK not up yet
+    var ses=null; try{ ses=await window.__mbSB.auth.getSession(); }catch(e){}
+    var token=ses&&ses.data&&ses.data.session&&ses.data.session.access_token;
+    if(!token) return _pvSoft(t,'signin',attempt);                                      // session still restoring — wait, don't give up
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/topic-preview',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:t.id})});
+    if(r.status===401||r.status===403) return _pvSoft(t,'signin',attempt);
+    if(r.status===429) return _pvSoft(t,'busy',Math.max(attempt,2));                    // rate-limited: wait long, try twice
+    if(r.status>=500) return _pvSoft(t,'server',attempt);
+    var j=null; try{ j=await r.json(); }catch(e){}
+    if(!j||!j.status) return _pvSoft(t,'server',attempt);
+    if(j.status==='building'||j.status==='queued'||j.status==='pending'){               // the server is on it — keep checking
+      _PREVIEW[t.id]={status:'building'};
+      if(attempt<12) setTimeout(function(){ _pvFetch(t, attempt+1); }, 6000);
+      else _PREVIEW[t.id]={status:'failed', why:'slow'};
+      return;
+    }
+    _PREVIEW[t.id]=j;                                                                    // ready / skipped / a real refusal
+    try{ if(window.smartLog&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
+  }catch(e){ return _pvSoft(t,'offline',attempt); }                                      // network blip
+  finally{
+    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) render(); }catch(e){}   // refresh the card when ready — but never yank a student who's already scrolled into the note
+  }
+}
 function ensureTopicPreview(t){
   if(!previewOn()||!t||!t.id||_PREVIEW[t.id]) return;
   var note=(t.note||''); if(note.replace(/\s+/g,' ').trim().length<400){ _PREVIEW[t.id]={status:'skipped'}; return; }
   _PREVIEW[t.id]={status:'building'};                                      // first note-open → build quietly in the background
-  (async function(){
-    try{
-      var CFG=window.MEDBANK_CONFIG||{}; if(!CFG.IMPORT_API||!window.__mbSB){ _PREVIEW[t.id]={status:'failed'}; return; }
-      var ses=await window.__mbSB.auth.getSession(); var token=ses.data.session&&ses.data.session.access_token;
-      if(!token){ _PREVIEW[t.id]={status:'failed'}; return; }
-      var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/topic-preview',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({topic_id:t.id})});
-      var j=null; try{ j=await r.json(); }catch(e){}
-      _PREVIEW[t.id]=(j&&j.status)?j:{status:'failed'};
-      try{ if(window.smartLog&&j&&j.status==='ready') smartLog({t:'preview_generated', topic_id:t.id, scenes:(j.scenes||[]).length}); }catch(e){}
-    }catch(e){ _PREVIEW[t.id]={status:'failed'}; }
-    try{ if((location.hash||'').indexOf(t.id)>=0 && (window.scrollY||window.pageYOffset||0) < 240) render(); }catch(e){}     // refresh the card when ready — but never yank a student who's already scrolled into the note
-  })();
+  _pvFetch(t,0);
 }
 function retryTopicPreview(tid){ try{ delete _PREVIEW[tid]; }catch(e){} var t=topById(tid); if(t){ ensureTopicPreview(t); render(); } }
 function topicPreviewCard(t){
@@ -2566,10 +2625,16 @@ function topicPreviewCard(t){
   var pv=_PREVIEW[t.id]||{status:'building'};
   if(pv.status==='skipped') return '';                                     // note too short → nothing to show
   if(pv.status==='failed'){                                                // don't vanish silently — offer a retry
+    var WHY={signin:['Sign in to get the preview','Your session dropped — sign in again, then tap ↻.'],
+             offline:['Preview needs a connection','Reconnect and tap ↻ to build it.'],
+             busy:['The studio is busy right now','Give it a minute, then tap ↻.'],
+             slow:['Still building — it\'s a long one','Tap ↻ to check again.'],
+             server:['Preview couldn\'t build','Tap ↻ to try again.']};
+    var w=WHY[pv.why]||WHY.server;
     return '<div class="tpv-card"><div class="tpv-poster" style="height:96px">'
       + '<span class="tpv-chip">▶ PREVIEW</span>'
       + '<button class="tpv-play" style="width:44px;height:44px;font-size:17px" onclick="retryTopicPreview(\''+t.id+'\')" aria-label="Retry preview">↻</button></div>'
-      + '<div class="tpv-meta"><div class="tpv-t">Preview couldn\'t build</div><div class="tpv-s">Tap ↻ to try again.</div></div></div>';
+      + '<div class="tpv-meta"><div class="tpv-t">'+esc(w[0])+'</div><div class="tpv-s">'+esc(w[1])+'</div></div></div>';
   }
   var ready=(pv.status==='ready' && pv.scenes && pv.scenes.length);
   var center = ready
@@ -7165,13 +7230,20 @@ function showExplainBtn(r, canViz){
   var html='<button class="explbtn" data-a="explain">✨ Let AI explain</button>';
   if(canViz) html+='<button class="explbtn vizbtn2" data-a="viz">🎬 Visualize this</button>';
   /* 3D only appears when the highlighted words actually resolve to a structure we can show — never a
-     button that opens onto "nothing here". */
-  var m3=null; try{ if(mb3dOn()) m3=MB3D.partForTermSync(_selText); }catch(e){}
-  if(m3) html+='<button class="explbtn mb3dbtn" data-a="mb3d">🧬 See it in 3D</button>';
+     button that opens onto "nothing here", and never one that opens onto a different region because a
+     fragment of the selection happened to appear in some other scene's vocabulary. The note being read
+     is handed to the resolver as context, so a chest note stays in the chest. */
+  var m3=null, m3ctx={topic:currentTopicName(), subject:(window.currentTopicSubject?currentTopicSubject():'')};
+  try{ if(mb3dOn()) m3=MB3D.partForTermSync(_selText, m3ctx); }catch(e){}
+  if(m3) html+='<button class="explbtn mb3dbtn" data-a="mb3d">🧬 See '+esc(m3.structure||'it')+' in 3D</button>';
   _explBtn.innerHTML=html;
   _explBtn.querySelector('[data-a=explain]').onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiExplain(t, currentTopicName()); };
   var vb=_explBtn.querySelector('[data-a=viz]'); if(vb) vb.onclick=function(){ const t=_selText; hideExplainBtn(); if(t) aiVisualize(t, currentTopicName(), (window.currentTopicId?currentTopicId():'')); };
-  var m3b=_explBtn.querySelector('[data-a=mb3d]'); if(m3b) m3b.onclick=function(){ const t=_selText; hideExplainBtn(); try{ MB3D.open(m3.scene,{part:m3.key,title:t,subtitle:'matched: '+m3.label}); }catch(e){} };
+  var m3b=_explBtn.querySelector('[data-a=mb3d]'); if(m3b) m3b.onclick=function(){
+    var t=String(_selText||'').replace(/[.,;:!?)\]}"'\u2019\u201d]+$/,'').trim();   // a trailing full stop is not part of the name
+    hideExplainBtn();
+    try{ MB3D.recordEngagement('opened'); }catch(e){}
+    try{ MB3D.open(m3.scene,{part:m3.key,title:t||m3.structure,subtitle:(m3.structure&&m3.structure.toLowerCase()!==t.toLowerCase())?(m3.structure+' · from your note'):'from your note',via:'highlight'}); }catch(e){} };
   const bw=168, bh=(canViz?90:42)+(m3?48:0);
   let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
   let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
@@ -9763,7 +9835,10 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
       if(!document.getElementById(hostId)) return;                              // student already moved on
       if(!bp||!bp.narration_steps||!bp.narration_steps.length){ var he=document.getElementById(hostId); if(he)he.innerHTML='<div class="vizgen err">Couldn\'t build this one — try the next card.</div>'; return; }
       recordViz(topicId||'', text);
-      if(cardId){ try{ window.DATA=window.DATA||{}; DATA.cardViz=DATA.cardViz||{}; DATA.cardViz[cardId]={bp:bp,text:text,ts:Date.now()}; if(window.persist)persist(); if(window.MB_SYNC&&MB_SYNC.flush)MB_SYNC.flush(); }catch(e){} }   // saved to THIS card, pushed immediately
+      if(cardId){ try{ window.DATA=window.DATA||{}; DATA.cardViz=DATA.cardViz||{}; DATA.cardViz[cardId]={bp:bp,text:text,ts:Date.now()};
+        var _ids=Object.keys(DATA.cardViz);            // keep the 60 most recent — blueprints are big and old ones are never replayed
+        if(_ids.length>60){ _ids.sort(function(a,b){ return ((DATA.cardViz[b]||{}).ts||0)-((DATA.cardViz[a]||{}).ts||0); });
+          _ids.slice(60).forEach(function(id){ delete DATA.cardViz[id]; }); } if(window.persist)persist(); if(window.MB_SYNC&&MB_SYNC.flush)MB_SYNC.flush(); }catch(e){} }   // saved to THIS card, pushed immediately
       var host2=mountInline(bp,text,topicId,hostId,true);
       try{ setQuota(resp.viz_quota); }catch(e){}
       if(host2)showReadyPill(host2);
