@@ -97,7 +97,7 @@
         "c1",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "A ring rather than a vertebra — no body, no spinous process, and it carries the skull. The canal is at its widest here, which is why the cord usually escapes in a fracture of the atlas. The cervical enlargement lies lower down."
     },
     {
       "key": "c2",
@@ -114,7 +114,7 @@
         "c2",
         "cervical vertebra"
       ],
-      "narration": "A cervical ring. The canal is widest and most triangular here, because the cervical enlargement of the cord sits at this level."
+      "narration": "The dens rises from its body into the ring of the atlas above. The canal is still wide at this level. The cervical enlargement of the cord begins below it, from about C4."
     },
     {
       "key": "c3",
@@ -475,7 +475,11 @@
         "Tuffier's line",
         "lumbar puncture"
       ],
-      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it."
+      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it.",
+      "approx": {
+        "shown_as": "L4",
+        "detail": "level of the iliac crests"
+      }
     },
     {
       "key": "l5",

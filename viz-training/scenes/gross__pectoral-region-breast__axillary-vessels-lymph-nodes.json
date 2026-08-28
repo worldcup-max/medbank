@@ -320,7 +320,11 @@
         "infraclavicular nodes",
         "apical group"
       ],
-      "narration": "The apex of the axilla is a gap bounded by the clavicle in front, the first rib medially and the upper border of the scapula behind. Everything entering or leaving the limb passes through it, and the apical group of nodes sits right here — the last group in the axilla and the one that drains all the others."
+      "narration": "The apex of the axilla is a gap bounded by the clavicle in front, the first rib medially and the upper border of the scapula behind. Everything entering or leaving the limb passes through it, and the apical group of nodes sits right here — the last group in the axilla and the one that drains all the others.",
+      "approx": {
+        "shown_as": "Clavicle",
+        "detail": "apex of the axilla"
+      }
     },
     {
       "key": "scapula",

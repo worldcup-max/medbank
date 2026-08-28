@@ -552,7 +552,11 @@
         "iliac crest",
         "posterior superior iliac spine"
       ],
-      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments."
+      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments.",
+      "approx": {
+        "shown_as": "Hip bone",
+        "detail": "iliac crest"
+      }
     },
     {
       "key": "rib6",
@@ -568,7 +572,11 @@
       "terms": [
         "rib angle"
       ],
-      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines."
+      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines.",
+      "approx": {
+        "shown_as": "Sixth rib",
+        "detail": "angle"
+      }
     },
     {
       "key": "rib12",
@@ -617,7 +625,11 @@
       "terms": [
         "mastoid process"
       ],
-      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process."
+      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process.",
+      "approx": {
+        "shown_as": "Temporal bone",
+        "detail": "mastoid process"
+      }
     }
   ],
   "views": [

@@ -133,7 +133,11 @@
         "trapezoid ligament",
         "scapula"
       ],
-      "narration": "The lateral end meets the acromion at the acromioclavicular joint, a small plane synovial joint that gives very little movement. The real holding is done below it, by the coracoclavicular ligament running from the coracoid process up to the conoid tubercle and trapezoid line on the underside of the clavicle. Tear that ligament and the shoulder drops away from the bone — the step you see in a grade three separation."
+      "narration": "The lateral end meets the acromion at the acromioclavicular joint, a small plane synovial joint that gives very little movement. The real holding is done below it, by the coracoclavicular ligament running from the coracoid process up to the conoid tubercle and trapezoid line on the underside of the clavicle. Tear that ligament and the shoulder drops away from the bone — the step you see in a grade three separation.",
+      "approx": {
+        "shown_as": "Scapula",
+        "detail": "acromion and coracoid"
+      }
     },
     {
       "key": "rib1",
@@ -230,6 +234,25 @@
       "narration": "Deltoid takes the anterior border of the lateral third. Its front edge meets the edge of pectoralis major here, and the gap between them is the deltopectoral groove where the cephalic vein runs up to disappear under the clavicle."
     },
     {
+      "key": "sternohyoid",
+      "name": "right sternohyoid",
+      "label": "Sternohyoid — the fifth attachment",
+      "role": "part",
+      "group": "Muscles attached to it",
+      "layer": "muscle",
+      "color": "#cf7358",
+      "refs": {
+        "bodyparts3d": "FMA13346"
+      },
+      "terms": [
+        "sternohyoid",
+        "infrahyoid muscles",
+        "strap muscles",
+        "ansa cervicalis"
+      ],
+      "narration": "A strap muscle of the neck taking a small slip from the back of the medial end of the clavicle, alongside its origin from the upper posterior manubrium and the posterior sternoclavicular ligament. Four muscles are usually taught on this bone; this is the fifth, and it sits behind the sternocleidomastoid rather than on a surface of its own."
+    },
+    {
       "key": "pec_major_clavicular",
       "name": "clavicular part of right pectoralis major",
       "label": "Pectoralis major — clavicular head",
@@ -282,7 +305,7 @@
         "infraclavicular approach",
         "cephalic vein"
       ],
-      "narration": "The vein lies in front of the artery and slightly lower, separated from it by subclavius and by the scalene tubercle of the first rib. A subclavian central line is aimed just under the middle of the clavicle and walked along the back of the bone precisely because the bone is the landmark you can feel and the vein is the tube you cannot."
+      "narration": "The vein lies in front of the artery and slightly lower, separated from it by scalenus anterior, which descends between the two to insert on the scalene tubercle of the first rib. Subclavius lies higher again, between both vessels and the bone. A subclavian central line is aimed just under the middle of the clavicle and walked along the back of the bone precisely because the bone is the landmark you can feel and the vein is the tube you cannot."
     },
     {
       "key": "brachiocephalic_vein",
@@ -460,9 +483,10 @@
             "pec_major_clavicular",
             "subclavius",
             "deltoid",
-            "trapezius"
+            "trapezius",
+            "sternohyoid"
           ],
-          "duration": 8
+          "duration": 10
         },
         {
           "op": "ROTATE_TO_VIEW",
@@ -590,7 +614,6 @@
   },
   "gaps": [
     "The clavicle's own surface landmarks have no meshes and could not be added as measured anchors. The conoid tubercle, the trapezoid line, the subclavian groove, the sternal facet and the acromial facet are all taught in narration only. The house standard for an anchor is a position measured on the source mesh, and the clavicle mesh is not in the local mesh set, so guessing uvw values here would have been worse than saying nothing. This is the first thing to add once that mesh can be inspected offline.",
-    "No sternohyoid in the catalog. Its small attachment to the undersurface of the medial end is named in beat 4 and not shown.",
     "No ligaments of any kind. The costoclavicular ligament, the coracoclavicular ligament with its conoid and trapezoid parts, and the articular disc of the sternoclavicular joint are the three things that actually explain the clavicle's stability, and none of them exist as models. Bone-to-bone relationships stand in for them: the first rib for the costoclavicular ligament, the scapula for the coracoclavicular.",
     "No brachial plexus. Beats 5 and 6 place the trunks behind the artery in narration; the catalog holds two optic nerves and no other named nerve.",
     "No pleura. The cervical pleura over the lung apex is the structure at risk in an infraclavicular line, and the upper lobe of the lung stands in for it.",

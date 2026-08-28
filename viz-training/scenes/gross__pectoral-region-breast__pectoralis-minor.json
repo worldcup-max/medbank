@@ -152,7 +152,11 @@
         "scapula",
         "medial border of coracoid"
       ],
-      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm."
+      "narration": "The insertion is the medial border and upper surface of the coracoid process, the hook of bone at the top of this blade. Because the muscle pulls on the coracoid and not on the humerus, it moves the scapula, never the arm.",
+      "approx": {
+        "shown_as": "Scapula",
+        "detail": "coracoid process"
+      }
     },
     {
       "key": "pec_major_sternocostal",

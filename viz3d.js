@@ -1228,19 +1228,29 @@
     }
 
     /* ---------- parts list ---------- */
-    /* "Scapula — coracoid process" isolates the WHOLE scapula, because the catalog has no mesh for the
-       coracoid process and never will. Silently lighting the whole bone teaches the wrong shape; the
-       fix is not to hide it but to say it, where the student is looking. A label of the form
-       "Parent — detail" whose mesh key doesn't carry the detail is exactly that case. */
+    /* ---------- approximated regions ----------
+       "Scapula — coracoid process" isolates the WHOLE scapula, because the mesh catalog has one model
+       per bone and none for the landmarks on it. Lighting the entire blade in the same colour a real
+       part gets teaches a student the wrong shape, silently — the one failure a model can cause that a
+       flat page cannot. Guessing the shape from the label was worse: it flagged "Duodenum — the outlet"
+       (a whole organ, correctly modelled) as an approximation on 300-odd structures.
+
+       So it is DATA, not inference: a structure whose mesh is really its parent carries
+       `approx: {shown_as, detail}` in the scene file, and only those are marked. They are marked three
+       ways — in the list, in the narration line, and on the model itself, where they take a distinct
+       amber highlight, a dashed leader and a "≈" on the pin, so an approximated region can never be
+       mistaken for a precisely modelled one. */
+    var APPROX_COL = '#f0b354';
     function approxOf(p) {
-      var lb = String(p.label || ''), cut = lb.split(/\s+[\u2014\u2013-]\s+/);
-      if (cut.length < 2) return '';
-      var parent = cut[0].trim(), detail = cut.slice(1).join(' ').trim();
-      if (!detail) return '';
-      var k = norm(p.key), words = norm(detail).split(' ').filter(function (w) { return w.length > 3; });
-      var carried = words.some(function (w) { return k.indexOf(w.slice(0, 5)) >= 0; });
-      if (carried) return '';                                   // it has its own mesh — nothing to explain
-      return 'shown as the whole ' + parent.toLowerCase() + ' — this model has no separate ' + detail.toLowerCase();
+      var a = p && p.approx; if (!a) return '';
+      var parent = String(a.shown_as || '').trim(), detail = String(a.detail || '').trim();
+      if (!parent || !detail) return '';
+      return 'the whole ' + parent.toLowerCase().replace(/\s*\(\w+\)$/, '') +
+             ' is highlighted — there is no separate model of the ' + detail.toLowerCase();
+    }
+    function isApprox(key) {
+      var st2 = structures.filter(function (x) { return x.key === key; })[0];
+      return !!(st2 && st2.approx && st2.approx.detail);
     }
     function buildList() {
       var list = $('list'); list.innerHTML = '';
@@ -1257,11 +1267,11 @@
         b.className = 'mb3d-part'; b.setAttribute('data-key', p.key);
         if (!ok) b.setAttribute('disabled', '');
         var ax = ok ? approxOf(p) : '';
-        b.innerHTML = '<span class="mb3d-dot" style="background:' + (ok ? esc(p.color || '#7c5cff') : '#3a365e') + '"></span>' +
+        b.innerHTML = '<span class="mb3d-dot" style="background:' + (ok ? esc(ax ? APPROX_COL : (p.color || '#7c5cff')) : '#3a365e') + (ax ? ';border-style:dashed' : '') + '"></span>' +
           '<span><b style="font-weight:600">' + esc(p.label) + '</b><small>' + esc(
             ok ? (p.narration || '')
                : (failedKeys.indexOf(p.key) >= 0 ? 'download failed — tap ↻ Retry above' : 'no 3D model of this structure yet')
-          ) + (ax ? '<br><span class="mb3d-approx">≈ ' + esc(ax) + '</span>' : '') + '</small></span>';
+          ) + (ax ? '<br><span class="mb3d-approx">\u2248 ' + esc(ax) + '</span>' : '') + '</small></span>';
         if (ok) b.addEventListener('click', function () { stopTeach(); toggle(p.key); });
         list.appendChild(b);
         if (ok) addPin(p);
@@ -1271,14 +1281,17 @@
     }
     function addPin(s) {
       if (pins[s.key]) return;
-      var col = esc(s.color || '#7c5cff');
+      var ax = !!(s.approx && s.approx.detail);
+      var col = esc(ax ? APPROX_COL : (s.color || '#7c5cff'));
       var label = document.createElement('div');
       label.className = 'mb3d-pin'; label.style.color = col;
-      label.innerHTML = '<b>' + esc(s.label || s.key) + '</b>';
+      label.innerHTML = '<b>' + (ax ? '\u2248 ' : '') + esc(s.label || s.key) + '</b>';
+      if (ax) label.title = 'approximate — ' + approxOf(s);
       var dot = document.createElement('div');
       dot.className = 'mb3d-anchor'; dot.style.background = col; dot.style.color = col;
       var line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
       line.setAttribute('stroke', col); line.setAttribute('stroke-width', '1.2');
+      if (ax) line.setAttribute('stroke-dasharray', '4 3');       // dashed = "somewhere on this bone", not an outline
       line.setAttribute('fill', 'none'); line.setAttribute('stroke-linejoin', 'round');
       line.setAttribute('opacity', '0');
       leads.appendChild(line); pinWrap.appendChild(dot); pinWrap.appendChild(label);
@@ -1681,14 +1694,16 @@
            things in three shades of the same cream. Each selection now gets the next colour from a fixed
            palette, so "the second thing I tapped" is answerable at a glance — and the swatch in the list
            and the pin on the model take the same colour, so list and model always agree. */
-        var glow = isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff');
+        var approx = !!(s.approx && s.approx.detail);
+        var glow = approx ? APPROX_COL : (isSel ? HILITE[selIdx % HILITE.length] : (s.color || '#7c5cff'));
         m.material.color.set(isSel ? glow : (s.color || '#c9c3d8'));
         /* Remember what this structure's colour SHOULD be. paintPatches() blanks material.color to white
            and moves the colour into the vertices, so on the next paint the material is no longer a
            record of anything — reading it back would make the bone white, then white again, for ever. */
         m.userData.__baseCol = m.material.color.getHex();
         m.material.emissive.set(isHi ? new T.Color(glow) : 0x000000);
-        m.material.emissiveIntensity = isSel ? 0.42 : (state.hi && state.hi[s.key]) || 0;
+        /* dimmer glow for an approximation: it is a region on a bone, not an outlined structure */
+        m.material.emissiveIntensity = isSel ? (approx ? 0.22 : 0.42) : (state.hi && state.hi[s.key]) || 0;
         var btn = host.querySelector('.mb3d-part[data-key="' + s.key + '"]');
         if (btn) { var d = btn.querySelector('.mb3d-dot'); if (d) d.style.background = isSel ? glow : (s.color || '#7c5cff'); }
         if (pins[s.key]) pins[s.key].dot.style.background = glow;
