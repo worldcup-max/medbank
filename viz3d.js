@@ -234,6 +234,13 @@
       '.mb3d-find input{flex:1;min-width:0;font:inherit;font-size:12.5px;background:transparent;border:0;outline:none;color:#e9e6ff}',
       '.mb3d-find input::placeholder{color:#7d78a3}',
       '.mb3d-approx{color:#f0b354}',
+      '.mb3d-conn{display:none;gap:7px;align-items:center;flex-wrap:wrap;padding:8px 14px;border-top:1px solid var(--m3line);background:var(--m3pan);font-size:12px;color:var(--m3dim)}',
+      '.mb3d-conn.on{display:flex}',
+      '.mb3d-conn b{color:#cfc7f2;font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:10.5px}',
+      '.mb3d-conn button{font:inherit;font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid #3d3866;background:#221f3a;color:#e2ddff;cursor:pointer}',
+      '.mb3d-conn button.on{background:var(--m3acc);border-color:var(--m3acc);color:#fff}',
+      '.mb3d-conn button:hover{border-color:#6d5cff}',
+      '.mb3d-conn i{font-style:normal;color:#8f8ab5}',
       '.mb3d-grp{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8f8ab5;padding:9px 10px 3px}',
       '.mb3d-part{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;font:inherit;font-size:13px;padding:7px 10px;border-radius:8px;border:1px solid transparent;background:transparent;color:#e7e3ff;cursor:pointer}',
       '.mb3d-part:hover{background:var(--m3pan2)}.mb3d-part.on{background:#2a2650;border-color:#4a4488}',
@@ -867,6 +874,7 @@
         '</div>' +
         '<div class="mb3d-slider" data-r="cliprow" style="display:none">Cut plane<input type="range" data-r="clip" min="-1" max="1" step="0.01" value="0"></div>' +
         '<div class="mb3d-warm" data-r="warm"><span>Loading the narration so it plays without any breaks</span>' + '<span class="mb3d-warmbar"><i data-r="warmbar"></i></span><b data-r="warmnum"></b></div>' +
+        '<div class="mb3d-conn" data-r="conn"></div>' +
         '<div class="mb3d-narr" data-r="narr"></div>' +
         '<div class="mb3d-foot"><span>' + esc(adapter.attribution || '') + '</span><span data-r="note"></span></div>' +
       '</div>';
@@ -1124,7 +1132,12 @@
       applyView(opts.part ? viewFor(opts.part) : 0);
       /* The model is on screen and interactive by now — start buying the voice behind it. */
       warmScene();
-      if (opts.part && meshes[opts.part]) focusPart(opts.part);
+      if (opts.part && meshes[opts.part]) {
+        focusPart(opts.part);
+        /* Arriving from a highlight means the student asked to be TAUGHT that sentence, not handed a
+           model. Teach it: isolate what they highlighted and walk its relations, out loud. */
+        if (opts.sentence || opts.teach) { try { teachFrom(opts.part, opts.sentence || ''); } catch (e) {} }
+      }
       emit('open', { scene: scene.id, via: opts.via || 'tab', part: opts.part || null,
                      structures: structures.length, loaded: loadedKeys.length,
                      missing: missing.length, failed: failed.length,
@@ -1249,7 +1262,7 @@
             ok ? (p.narration || '')
                : (failedKeys.indexOf(p.key) >= 0 ? 'download failed — tap ↻ Retry above' : 'no 3D model of this structure yet')
           ) + (ax ? '<br><span class="mb3d-approx">≈ ' + esc(ax) + '</span>' : '') + '</small></span>';
-        if (ok) b.addEventListener('click', function () { toggle(p.key); });
+        if (ok) b.addEventListener('click', function () { stopTeach(); toggle(p.key); });
         list.appendChild(b);
         if (ok) addPin(p);
       });
@@ -1760,6 +1773,141 @@
       emit('neighbours', { scene: scene.id, part: key, with: nb.length });
       paint();
     }
+    /* ======================= teach the sentence =======================
+       "See it in 3D" is not a request for a model — it is a request to be taught the sentence the
+       student was reading. So the sentence comes with them. The player finds which of THIS scene's
+       structures that sentence actually names, isolates the one they highlighted, and walks a short
+       tour of exactly those relations: the subject first with the sentence itself read aloud, then each
+       structure it connects to, with the connecting words lifted out of the student's own note ("arises
+       from", "inserts into", "passes deep to"). Everything the sentence does not mention stays out of
+       it — a tour of fifteen parts would be the scene's tour, not this sentence's.
+
+       Nothing here invents anatomy: the spoken lines are the student's own sentence and the structure
+       narration the scene's author wrote. */
+    var teachTurn = 0, teachOn = false;
+    function stopTeach() { teachTurn++; teachOn = false; }
+    var GEN2 = { the:1, a:1, an:1, of:1, and:1, or:1, to:1, in:1, on:1, its:1, part:1, parts:1, process:1,
+                 head:1, region:1, body:1, left:1, right:1, muscle:1, bone:1, border:1, surface:1, area:1 };
+    function tokensOf(label) {
+      var all = norm(label).split(' ').filter(Boolean);
+      var keep = all.filter(function (w) { return w.length > 3 && !GEN2[w]; });
+      return keep.length ? keep : all;
+    }
+    /* A token matches a whole word, allowing only a two-letter tail for plurals and endings: "rib" finds
+       "ribs", "coracoid" finds "coracoid" — but NOT "coracobrachialis", which a looser stem match happily
+       accepted and which would have put a muscle the sentence never mentions into the tour. */
+    function tokenIn(hay, tok) {
+      return hay.split(' ').some(function (w) {
+        if (!w) return false;
+        if (w === tok) return true;
+        if (w.indexOf(tok) === 0 && w.length - tok.length <= 2) return true;
+        return tok.indexOf(w) === 0 && tok.length - w.length <= 2 && w.length > 3;
+      });
+    }
+    function namedIn(sentence, label) {
+      var hay = ' ' + norm(sentence) + ' ', toks = tokensOf(label);
+      if (!toks.length) return 0;
+      var hit = 0; toks.forEach(function (t) { if (tokenIn(hay, t)) hit++; });
+      return hit / toks.length;
+    }
+    /* the words the note itself puts between two structures — the relationship, in the student's book */
+    function relationPhrase(sentence, aLabel, bLabel) {
+      var flat = String(sentence || '').replace(/\s+/g, ' ');
+      var low = ' ' + flat.toLowerCase() + ' ';
+      function findAt(label) {
+        var toks = tokensOf(label), at = -1;
+        toks.forEach(function (t) { var i = low.indexOf(' ' + (t.length > 4 ? t.slice(0, 4) : t)); if (i >= 0 && (at < 0 || i < at)) at = i; });
+        return at;
+      }
+      var a = findAt(aLabel), b = findAt(bLabel);
+      if (a < 0 || b < 0) return '';
+      var from = Math.min(a, b), to = Math.max(a, b);
+      var mid = flat.slice(from, to).trim();
+      /* what is left has the first structure's own name on the front and a dangling article on the end —
+         "minor arises from the" is not a relationship, "arises from" is */
+      var own = norm(aLabel).split(' ').concat(tokensOf(aLabel));
+      var w = mid.split(/\s+/);
+      while (w.length && own.indexOf(norm(w[0])) >= 0) w.shift();
+      mid = w.join(' ').replace(/[\s,;:]+$/, '').trim();
+      mid = mid.replace(/\s+(the|a|an|of|into|from|to|at|on|in|and|its|their|with)$/i, '').trim();
+      if (mid.length > 90 || mid.length < 3) return '';
+      return mid;
+    }
+    function teachRelated(key, sentence) {
+      var me = structures.filter(function (x) { return x.key === key; })[0];
+      var out = [];
+      if (sentence) {
+        parts.concat(structures.filter(function (x) { return x.role !== 'part'; })).forEach(function (st2) {
+          if (st2.key === key || !meshes[st2.key]) return;
+          if (out.some(function (o) { return o.key === st2.key; })) return;
+          var sc = namedIn(sentence, st2.label);
+          if (sc >= 0.75) out.push({ key: st2.key, label: st2.label, score: sc,
+                                    rel: relationPhrase(sentence, me ? me.label : key, st2.label),
+                                    narration: st2.narration || '' });
+        });
+      }
+      out.sort(function (a, b) { return b.score - a.score; });
+      if (!out.length) {                                    // the sentence named nothing else — fall back to the scene
+        neighboursOf(key).slice(0, 3).forEach(function (k) {
+          var st2 = structures.filter(function (x) { return x.key === k; })[0];
+          if (st2) out.push({ key: k, label: st2.label, score: 0, rel: '', narration: st2.narration || '' });
+        });
+      }
+      return out.slice(0, 5);
+    }
+    function drawConnects(key, rel, activeKey) {
+      var box = $('conn'); if (!box) return;
+      if (!rel.length) { box.className = 'mb3d-conn'; box.innerHTML = ''; return; }
+      box.className = 'mb3d-conn on';
+      box.innerHTML = '<b>Connects to</b>' + rel.map(function (r) {
+        return '<button data-k="' + esc(r.key) + '"' + (r.key === activeKey ? ' class="on"' : '') + '>' + esc(r.label) +
+               (r.rel ? ' <i>· ' + esc(r.rel.length > 34 ? r.rel.slice(0, 32) + '…' : r.rel) + '</i>' : '') + '</button>';
+      }).join('');
+      Array.prototype.forEach.call(box.querySelectorAll('button'), function (b) {
+        b.addEventListener('click', function () { stopTeach(); focusPart(b.getAttribute('data-k')); drawConnects(key, rel, b.getAttribute('data-k')); });
+      });
+    }
+    function teachFrom(key, sentence) {
+      var me = structures.filter(function (x) { return x.key === key; })[0];
+      if (!me) return;
+      var rel = teachRelated(key, sentence);
+      drawConnects(key, rel, key);
+      var opening = sentence ? ('From your note. ' + String(sentence).replace(/\s+/g, ' ').trim()) : '';
+      var mine = (me.label + (me.narration ? '. ' + me.narration : ''));
+      var stops = [{ key: key, line: (opening ? opening + ' Here it is on the model. ' : '') + mine }];
+      rel.forEach(function (r) {
+        stops.push({ key: r.key, line: (r.rel ? (me.label + ' ' + r.rel + ' ' + r.label + '. ') : (r.label + '. ')) +
+                                       (r.narration || '') });
+      });
+      try { warm(stops.map(function (x) { return x.line; })); } catch (e) {}   // buy the whole tour up front
+      var turn = ++teachTurn, n = 0; teachOn = true;
+      stopTour(); stopSpin();
+      function step() {
+        if (turn !== teachTurn || !running) return;
+        if (n >= stops.length) {                       // end on the subject, in context, with its neighbours up
+          teachOn = false;
+          selected = [key].concat(rel.map(function (r) { return r.key; }));
+          ghost = true; labelsAll = true; $('ghost').classList.add('pri'); $('labels').classList.add('pri');
+          drawConnects(key, rel, key);
+          $('narr').innerHTML = '<b>' + esc(me.label) + '</b> — that is the sentence, on the model. ' +
+            'Tap a name above to go back to it, or drag to turn it over.';
+          paint();
+          return;
+        }
+        var st2 = stops[n++];
+        focusPart(st2.key);
+        drawConnects(key, rel, st2.key);
+        $('narr').innerHTML = '<b>' + esc((structures.filter(function (x) { return x.key === st2.key; })[0] || {}).label || st2.key) +
+          '</b> — ' + esc(st2.line.replace(/^From your note\. /, ''));
+        sayThen(st2.line, step, 2200);
+      }
+      step();
+    }
+    /* any deliberate action by the student ends the tour — they are driving now */
+    ['showall', 'solo', 'ghost', 'reset', 'tour', 'play', 'nb'].forEach(function (r) {
+      var b = $(r); if (b) b.addEventListener('click', stopTeach, true);
+    });
+
     $('nb').addEventListener('click', function () {
       showNeighbours(selected[0] || opts.part || (parts.filter(function (p) { return meshes[p.key]; })[0] || {}).key);
     });
@@ -2113,7 +2261,7 @@
       if (!hit) return null;
       return open(hit.scene, { part: hit.key, title: normSel(term) ? String(term).replace(/[.,;:!?]+$/, '') : term,
                                subtitle: hit.structure ? (hit.structure + ' · matched "' + hit.label + '"') : ('matched: ' + hit.label),
-                               via: 'highlight' });
+                               sentence: (ctx && ctx.sentence) || '', via: 'highlight' });
     });
   }
 

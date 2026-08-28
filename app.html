@@ -2870,8 +2870,9 @@ function mb3dScanNote(){
     chip.textContent=op.related?('👁 3D · +'+op.related):'👁 3D';
     chip.title='See '+hit+' in 3D — '+op.why+(op.related?(' (with '+op.related+' related structure'+(op.related===1?'':'s')+')'):'');
     chip.style.cssText='margin-left:5px;font:inherit;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;vertical-align:middle';
-    chip.onclick=(function(op,label){ return function(e){ e.stopPropagation();
-      try{ MB3D.recordEngagement('opened'); MB3D.open(op.scene,{part:op.key,title:label,subtitle:'from your note'}); }catch(err){} }; })(op,hit);
+    var sen=sentenceAround(node.nodeValue||'', op.index, hit.length);   // the sentence this chip grew out of
+    chip.onclick=(function(op,label,sen){ return function(e){ e.stopPropagation();
+      try{ MB3D.recordEngagement('opened'); MB3D.open(op.scene,{part:op.key,title:label,subtitle:'from your note',sentence:sen,teach:true,via:'chip'}); }catch(err){} }; })(op,hit,sen);
     frag.appendChild(mark); frag.appendChild(chip);
     if(after) frag.appendChild(document.createTextNode(after));
     node.parentNode.replaceChild(frag,node);
@@ -7217,10 +7218,37 @@ function inReadable(node){ let el=node&&(node.nodeType===1?node:node.parentEleme
   while(el){ if(el.classList&&(el.classList.contains('md')||el.classList.contains('cramsheet')||el.classList.contains('ansblock'))) return true; el=el.parentElement; } return false; }
 function inNoteBody(node){ let el=node&&(node.nodeType===1?node:node.parentElement);
   while(el){ if(el.classList&&el.classList.contains('notebody')) return true; el=el.parentElement; } return false; }
+/* The sentence a highlight was taken from — because "See it in 3D" is a request to be taught THAT
+   sentence, not to be handed a model. Walk out from the selection to the sentence boundaries inside the
+   block it sits in, so "pectoralis minor" carries "pectoralis minor arises from the 3rd to 5th ribs and
+   inserts into the coracoid process of the scapula" with it. */
+function sentenceAround(text, at, len){
+  text=String(text||'').replace(/\s+/g,' ');
+  if(at==null||at<0) return text.slice(0,400);
+  var pre=text.slice(0,at), post=text.slice(at+(len||0));
+  var b=Math.max(pre.lastIndexOf('. '), pre.lastIndexOf('; '), pre.lastIndexOf('! '), pre.lastIndexOf('? '), pre.lastIndexOf(' • '));
+  var start=(b<0)?0:b+2;
+  var ends=[post.indexOf('. '), post.indexOf('; '), post.indexOf('! '), post.indexOf('? ')].filter(function(x){return x>=0;});
+  var end=at+(len||0)+(ends.length?Math.min.apply(null,ends)+1:post.length);
+  return text.slice(start,end).trim().slice(0,420);
+}
+function selectionSentence(){
+  try{
+    var sel=window.getSelection(); if(!sel||!sel.rangeCount) return '';
+    var node=sel.anchorNode, el=node&&(node.nodeType===1?node:node.parentElement); if(!el) return '';
+    var block=(el.closest&&el.closest('p,li,td,th,blockquote,h3,h4,div'))||el;
+    var text=(block.textContent||'').replace(/\s+/g,' ').trim();
+    var needle=(sel.toString()||'').replace(/\s+/g,' ').trim();
+    if(!text) return '';
+    var at=needle?text.toLowerCase().indexOf(needle.toLowerCase()):-1;
+    return sentenceAround(text, at, needle.length);
+  }catch(e){ return ''; }
+}
+var _selSentence='';
 function onSelChange(){ try{
   const sel=window.getSelection(); const txt=sel&&sel.toString().trim();
   if(txt && txt.length>=3 && sel.rangeCount && inReadable(sel.anchorNode) && currentTopicName()){
-    _selText=txt; const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r, inNoteBody(sel.anchorNode));
+    _selText=txt; _selSentence=selectionSentence(); const r=sel.getRangeAt(0).getBoundingClientRect(); showExplainBtn(r, inNoteBody(sel.anchorNode));
   } else hideExplainBtn();
 }catch(e){} }
 function showExplainBtn(r, canViz){
@@ -7243,7 +7271,9 @@ function showExplainBtn(r, canViz){
     var t=String(_selText||'').replace(/[.,;:!?)\]}"'\u2019\u201d]+$/,'').trim();   // a trailing full stop is not part of the name
     hideExplainBtn();
     try{ MB3D.recordEngagement('opened'); }catch(e){}
-    try{ MB3D.open(m3.scene,{part:m3.key,title:t||m3.structure,subtitle:(m3.structure&&m3.structure.toLowerCase()!==t.toLowerCase())?(m3.structure+' · from your note'):'from your note',via:'highlight'}); }catch(e){} };
+    try{ MB3D.open(m3.scene,{part:m3.key,title:t||m3.structure,
+      subtitle:(m3.structure&&m3.structure.toLowerCase()!==t.toLowerCase())?(m3.structure+' · from your note'):'from your note',
+      sentence:_selSentence||'', teach:true, via:'highlight'}); }catch(e){} };
   const bw=168, bh=(canViz?90:42)+(m3?48:0);
   let top=r.bottom+8; if(top+bh > window.innerHeight-10) top=Math.max(8, r.top-bh-8);
   let left=r.left + r.width/2 - bw/2; left=Math.max(8, Math.min(window.innerWidth-bw-8, left));
