@@ -9235,6 +9235,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   }
   function closeModal(){ try{stop();}catch(e){} playing=false; PV=null; try{if(window.stopSpeak)stopSpeak();}catch(e){} var o=$('vizov'); if(o)o.remove(); }   // stop() also clears the 9s speechSynthesis keep-alive + the say() watchdog, which used to keep ticking forever after close
   function mountPlayer(){
+    CAM={on:false,key:'',plan:null,box:null};        // new blueprint → re-plan the boards from scratch
     var st=BP.narration_steps;
     var clean={}; Object.keys(BP).forEach(function(k){ if(k[0]!=='_')clean[k]=BP[k]; });
     $('vizBody').innerHTML=''
@@ -9265,11 +9266,16 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     fillVoices(); $('vizVoice').onchange=function(){ vizVoiceName=this.value; };
     render(0);
   }
-  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; try{closeTip();closeQuiz();}catch(e){}
+  function vizVB(){
     var VBMAP={tree:TREE&&TREE.vb,flow:FLOW&&FLOW.vb,cell:[960,560],graph:[960,540],orbital:[960,440],geometry:[960,500],ice:[960,440],venn:[960,540],unitcircle:[960,540],solve:[960,540],vectors:[960,540],matrix:[960,540],fbd:[960,540],circuit:[960,540],logic:[960,540],table:[960,540],punnett:[960,560],curly:[960,560]};
-    var vbm=VBMAP[BP.layout]; curVB=vbm?[0,0,vbm[0],vbm[1]]:fitVB();
+    var vbm=VBMAP[BP.layout]; return vbm?[0,0,vbm[0],vbm[1]]:fitVB(); }
+  function vizSVGFor(step){
     var SV={tree:treeSVG,flow:flowSVG,cell:cellSVG,graph:graphSVG,orbital:orbitalSVG,geometry:geometrySVG,ice:iceSVG,venn:vennSVG,unitcircle:unitCircleSVG,solve:solveSVG,vectors:vectorsSVG,matrix:matrixSVG,fbd:fbdSVG,circuit:circuitSVG,logic:logicSVG,table:tableSVG,punnett:punnettSVG,curly:curlySVG};
-    w.innerHTML=SV[BP.layout]?SV[BP.layout](i):sceneSVG(i); move();
+    return SV[BP.layout]?SV[BP.layout](step):sceneSVG(step); }
+  function render(idx){ i=idx; var w=$('vizSvg'); if(!w)return; try{closeTip();closeQuiz();}catch(e){}
+    curVB=vizVB();
+    camEnsure();
+    w.innerHTML=vizSVGFor(i); camApply(i); move();
     var s=BP.narration_steps[i];
     $('vizCap').innerHTML='<span class="lab">STEP '+(i+1)+' / '+BP.narration_steps.length+(s.short?' · '+esc(s.short):'')+'</span><span class="capw">'+buildKaraoke(s.narration_text||'')+'</span>';
     karaokeReset(); setKaraoke(playing?-1:_kSpans.length);   // dim while playing (say() lights words up); full text when paused
@@ -9290,7 +9296,8 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     if(BP.layout==='unitcircle'||BP.layout==='solve'||BP.layout==='vectors'||BP.layout==='matrix'||BP.layout==='fbd'||BP.layout==='circuit'||BP.layout==='logic'||BP.layout==='table'||BP.layout==='punnett'){ return (MPT&&MPT[ref])||null; }
     return anchor(ref,i); }
   function move(){ var c=$('vizCur'); if(!c)return; var p=pointPos(BP.narration_steps[i].point); if(!p)return;
-    c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%'; follow(p); }
+    c.style.left=((p.x-curVB[0])/curVB[2]*100)+'%'; c.style.top=((p.y-curVB[1])/curVB[3]*100)+'%';
+    if(!CAM.on) follow(p); }   // the board camera already holds the right part of the diagram on screen
   /* camera-follow: scroll the fixed-height stage so the WHOLE active element is on-screen while it's narrated.
      Prefer the real rendered node (every node carries data-el) so we centre its actual box — exact for any
      layout (map/graph/tree/flow). Fall back to the point-anchor maths only when no DOM node matches. */
@@ -9309,6 +9316,115 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     if(target===null)return;
     var max=Math.max(0, cv.offsetHeight - vis); target=Math.max(0, Math.min(target, max));
     try{ stg.scrollTo({top:target,behavior:'smooth'}); }catch(e){ stg.scrollTop=target; } }
+  /* ===== the board camera ==================================================================
+     A diagram taller than the stage used to be SCROLLED: the student had to drag up and down
+     mid-sentence to see the thing being named, and the top of a cascade was off-screen by the time
+     its bottom was explained. A teacher does not do that — a teacher fills one board, teaches
+     everything on it, then moves to the next board.
+
+     So the player now plans BOARDS: one screenful of the diagram, held completely still and whole
+     for as long as its steps are being taught, then moved on. A step whose subject sits inside the
+     current board moves nothing at all. A recap step zooms out to the entire diagram instead, so a
+     summary can point back at what came earlier — which is the one time scrolling back is the
+     right answer.
+
+     It is a transform on the canvas rather than a scroll, so nothing can be half-off the edge: the
+     board either fits or the camera pulls back until it does. */
+  var CAM={on:false,key:'',plan:null,box:null};
+  function camEls(){ return {stg:$('vizStage'), cv:$('vizCanvas')}; }
+  function camStageH(){ try{ return Math.max(260, Math.min(Math.round(window.innerHeight*0.56), 560)); }catch(e){ return 420; } }
+  /* Every element's box in viewBox units, measured from a hidden pass of the FINAL step (where
+     everything has been revealed). getBBox reports user units, so no conversion is needed. */
+  function camMeasure(){
+    var o=camEls(); if(!o.cv) return null;
+    var holder=document.createElement('div');
+    holder.style.cssText='position:absolute;left:0;top:0;width:100%;visibility:hidden;pointer-events:none;z-index:-1';
+    try{ holder.innerHTML=vizSVGFor(BP.narration_steps.length-1); }catch(e){ return null; }
+    o.cv.appendChild(holder);
+    var map={}, any=false;
+    try{ var nodes=holder.querySelectorAll('[data-el]');
+      for(var k=0;k<nodes.length;k++){ var id=nodes[k].getAttribute('data-el'); if(!id||map[id]) continue;
+        try{ var b=nodes[k].getBBox(); if(b&&b.width>0&&b.height>0){ map[id]={x:b.x,y:b.y,w:b.width,h:b.height}; any=true; } }catch(e){} } }catch(e){}
+    try{ holder.parentNode.removeChild(holder); }catch(e){}
+    return any?map:null;
+  }
+  function camStepRefs(k){
+    var st=BP.narration_steps[k]||{}, out=[];
+    function add(v){ if(!v) return; if(Array.isArray(v)) v.forEach(add); else out.push(String(v)); }
+    add(st.point); add(st.active); add(st.reveal);
+    return out;
+  }
+  /* What this step is actually about, as a box. Falls back to the point-anchor when the layout
+     doesn't publish element nodes. */
+  function camStepBox(k){
+    var refs=camStepRefs(k), b=null;
+    for(var n=0;n<refs.length;n++){
+      var e=CAM.box&&CAM.box[refs[n]];
+      if(!e){ var p=null; try{ p=pointPos(refs[n]); }catch(_){}
+        if(p) e={x:p.x-60,y:p.y-40,w:120,h:80}; }
+      if(!e) continue;
+      b=b?{x:Math.min(b.x,e.x),y:Math.min(b.y,e.y),
+           x2:Math.max(b.x2,e.x+e.w),y2:Math.max(b.y2,e.y+e.h)}
+        :{x:e.x,y:e.y,x2:e.x+e.w,y2:e.y+e.h};
+    }
+    if(!b) return null;
+    return {x:b.x,y:b.y,w:b.x2-b.x,h:b.y2-b.y};
+  }
+  function camIsRecap(k){
+    var st=BP.narration_steps[k]||{}; if(st.recap===true) return true;
+    var t=((st.short||'')+' '+(st.narration_text||'')).toLowerCase();
+    return /\b(recap|to recap|in summary|in short|summing up|putting (it|this) together|the whole picture|big picture|step back|all together|altogether|looking back|so far we)\b/.test(t);
+  }
+  /* Walk the steps once and decide which board each one belongs to: keep the board we are on for as
+     long as the next step's subject still fits inside it, otherwise start a new one. */
+  function camPlan(){
+    var o=camEls(); if(!o.stg) return null;
+    var stgH=camStageH(), stgW=o.stg.clientWidth||1;
+    var vbX=curVB[0], vbY=curVB[1], vbW=curVB[2], vbH=curVB[3];
+    var Hwin=Math.min(vbH, vbW*stgH/stgW);          // exactly one screenful at fit-width zoom
+    var pad=Math.min(30, Hwin*0.07), maxTop=Math.max(vbY, vbY+vbH-Hwin);
+    var tops=[], recap=[], top=null, located=0;
+    for(var k=0;k<BP.narration_steps.length;k++){
+      var b=camStepBox(k);
+      var wide=!!(b && b.h>Hwin*0.98);              // one subject taller than a board → show it all, zoomed out
+      if(camIsRecap(k)||wide){ recap.push(true); tops.push(top==null?vbY:top); continue; }
+      recap.push(false);
+      if(b){
+        located++;
+        var needsMove = (top==null) || (b.y-pad<top) || (b.y+b.h+pad>top+Hwin);
+        if(needsMove) top=Math.max(vbY, Math.min(b.y-pad, maxTop));
+      }
+      tops.push(top==null?vbY:top);
+    }
+    /* Nothing could be located — a layout that publishes neither element nodes nor point anchors.
+       Rather than sit on the top board and hide the rest, show the whole diagram, zoomed to fit. */
+    if(!located) for(var r=0;r<recap.length;r++) recap[r]=true;
+    return {Hwin:Hwin, tops:tops, recap:recap, stgH:stgH};
+  }
+  function camEnsure(){
+    var o=camEls(); if(!o.stg||!o.cv){ CAM.on=false; return; }
+    var key=(BP&&BP.layout||'')+'|'+((BP&&BP.narration_steps||[]).length)+'|'+Math.round(o.stg.clientWidth)+'|'+curVB.join(',');
+    if(CAM.key===key && CAM.plan) return;
+    CAM.key=key; CAM.box=camMeasure(); CAM.plan=camPlan(); CAM.on=!!CAM.plan;
+    if(CAM.on){ o.stg.style.height=CAM.plan.stgH+'px'; o.stg.style.maxHeight='none'; o.stg.style.overflow='hidden'; o.stg.scrollTop=0; }
+  }
+  function camApply(step, instant){
+    var o=camEls(); if(!CAM.on||!CAM.plan||!o.stg||!o.cv) return;
+    var cvW=o.cv.offsetWidth, stgH=o.stg.clientHeight||CAM.plan.stgH; if(!cvW||!stgH) return;
+    var ppu=cvW/curVB[2];                                            // px per viewBox unit at scale 1
+    var winY, winH;
+    if(CAM.plan.recap[step]){ winY=curVB[1]; winH=curVB[3]; }         // recap: pull back to the whole diagram
+    else { winY=CAM.plan.tops[step]; winH=CAM.plan.Hwin; }
+    var k=Math.min(1, stgH/Math.max(1,(winH*ppu)));                   // never zoom past fit-width — text stays legible
+    var fullH=curVB[3]*ppu*k, tx=(cvW-cvW*k)/2, ty;
+    if(fullH<=stgH) ty=(stgH-fullH)/2;                                // the whole thing fits — centre it
+    else { ty=-(winY-curVB[1])*ppu*k; ty=Math.min(0, Math.max(stgH-fullH, ty)); }
+    o.cv.style.transformOrigin='0 0';
+    o.cv.style.transition=instant?'none':'transform .5s cubic-bezier(.4,0,.2,1)';
+    o.cv.style.transform='translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+k.toFixed(4)+')';
+    o.stg.scrollTop=0;
+  }
+  try{ window.addEventListener('resize', function(){ if($('vizStage')&&BP){ CAM.key=''; try{ camEnsure(); camApply(i,true); }catch(e){} } }); }catch(e){}
   function fillVoices(){ var sel=$('vizVoice'); if(!sel||!window.speechSynthesis)return;
     function load(){ var vs=speechSynthesis.getVoices().filter(function(v){return /en/i.test(v.lang);});
       sel.innerHTML='<option value="">Narrator (app)</option>'+vs.map(function(v){return '<option value="'+esc(v.name)+'">'+esc(v.name.replace(/\s*\(.*\)/,''))+'</option>';}).join('');
