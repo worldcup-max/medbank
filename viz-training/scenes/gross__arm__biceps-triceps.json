@@ -205,6 +205,24 @@
       "narration": "The deep head below the radial groove — active in all extension."
     },
     {
+      "key": "coracobrach",
+      "name": "right coracobrachialis",
+      "label": "Coracobrachialis",
+      "role": "context",
+      "group": "Biceps brachii",
+      "layer": "muscle",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA37665"
+      },
+      "terms": [
+        "coracobrachialis",
+        "conjoint tendon of the coracoid",
+        "pierced by the musculocutaneous nerve"
+      ],
+      "narration": "The short head of biceps does not leave the coracoid alone: coracobrachialis leaves it with them, as a conjoint tendon. It is named twice in this scene, so it is drawn — the student can see which of the two muscles running down from the coracoid ends on the humerus and which carries on to the radius."
+    },
+    {
       "key": "supraglenoid_tubercle",
       "label": "Supraglenoid tubercle",
       "role": "part",
@@ -401,6 +419,7 @@
     },
     {
       "mode": "mechanism",
+      "beat": 3,
       "title": "Follow the long head",
       "ops": [
         {
@@ -423,15 +442,56 @@
         }
       ],
       "narration": "Origin, course, insertion: it starts at the supraglenoid tubercle, runs down the intertubercular groove, and ends on the radial tuberosity."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 4,
+      "title": "What each one does when it shortens",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Biceps brachii",
+            "Triceps brachii"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bic_long",
+          "to": "radial_tuberosity",
+          "kind": "shortening pulls the tuberosity forwards and round — flexion plus supination"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tri_med",
+          "to": "olecranon",
+          "kind": "shortening pulls the olecranon backwards — extension"
+        }
+      ],
+      "narration": "Watch the two ends of each muscle approach each other and the action names itself. Biceps pulls the radial tuberosity forwards and rotates it laterally, so it flexes the elbow and supinates the forearm — which is why it is strongest with the elbow bent, and why a corkscrew turns clockwise for a right-handed person. Triceps pulls the olecranon backwards and extends. The medial head does that in every extension; the long and lateral heads are recruited when the movement is resisted, and only the long head can also help extend and adduct the shoulder, because only it crosses the shoulder joint."
     }
   ],
   "provenance": {
     "author": "human",
     "authored_at": "2026-08-23",
     "approved_by": "frank",
-    "approved_at": "2026-08-23"
+    "approved_at": "2026-08-23",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
+    "The transverse humeral ligament, which holds the long head's tendon in the intertubercular groove and is named in that landmark's narration, does not exist in the catalog — searched 2026-08-28 as 'transverse humeral', 'transverse ligament' and 'ligament'. Narration only; nothing on screen holds the tendon down.",
+    "There is no bicipital aponeurosis and no glenoid labrum in the catalog either, so the biceps' second, fascial insertion into the deep fascia of the forearm is not shown; the scene teaches only the tendinous insertion on the radial tuberosity.",
+    "Brachialis (FMA37668) and anconeus (FMA37705) are in the catalog and are deliberately NOT in this scene: the curriculum entry is biceps and triceps, and the flexor/extensor supporting cast belongs to the compartment scenes. This is a scope decision, not a missing mesh.",
     "The six landmarks are measured, not placed: each is the nearest contact point between the bone and the muscle that attaches there (gaps 0.0–0.2 mm). Cross-checks on the scapula come out at textbook distances — supraglenoid to coracoid 24.1 mm, supraglenoid to infraglenoid 38.4 mm. They stay status:\"needs-review\" until a human has looked at them once."
   ]
 }

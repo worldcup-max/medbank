@@ -40,6 +40,8 @@
       "pubic symphysis",
       "iliac crest",
       "tubercle of the iliac crest",
+      "supracristal plane",
+      "transtubercular plane",
       "mid-inguinal point",
       "midpoint of the inguinal ligament",
       "midinguinal point",
@@ -315,15 +317,16 @@
         "midway between ASIS and pubic tubercle",
         "deep inguinal ring",
         "internal ring",
-        "one and a quarter centimetres above",
+        "one centimetre above",
+        "a finger's breadth above",
         "indirect inguinal hernia",
         "internal ring occlusion test"
       ],
-      "narration": "This is the other midpoint, and students lose marks by confusing the two. The midpoint of the inguinal ligament is halfway between the anterior superior iliac spine and the pubic tubercle, not the symphysis, so it lies a little lateral to the mid-inguinal point. About one and a quarter centimetres above it is the deep inguinal ring. Press here after reducing a hernia: if the lump stays down, it was indirect; if it still bulges, it was direct."
+      "narration": "This is the other midpoint, and students lose marks by confusing the two. The midpoint of the inguinal ligament is halfway between the anterior superior iliac spine and the pubic tubercle, not the symphysis, so it lies a little lateral to the mid-inguinal point. About one centimetre — a finger's breadth — above it is the deep inguinal ring. The old teaching was that pressing here after reducing a hernia tells you the type: lump stays down, indirect; lump still bulges, direct. Know the test, because you will be asked for it, but know also that it is unreliable and does not settle the diagnosis. What settles it is which side of the inferior epigastric artery the sac emerges from, and that is seen at operation."
     },
     {
       "key": "iliac_crest",
-      "label": "Iliac crest — the tubercle",
+      "label": "Iliac crest — highest point (supracristal plane)",
       "role": "part",
       "group": "Landmarks",
       "color": "#48c9b0",
@@ -341,13 +344,12 @@
       "calibrated_by": "geometry: EXTREME — the highest (most superior) vertex of the right hip bone, 103.4 mm from its surface centroid: the top of the iliac crest; see tools/derive-inguinal-sheath-landmarks.mjs",
       "terms": [
         "iliac crest",
-        "tubercle of the iliac crest",
-        "L4 level",
+        "highest point of the iliac crest",
         "supracristal plane",
-        "lumbar puncture",
-        "transtubercular plane"
+        "L4 level",
+        "lumbar puncture"
       ],
-      "narration": "The highest point of the crest sits at the level of the fourth lumbar vertebra — the line between the two crests is the plane you find before a lumbar puncture. The crest is also the upper attachment of the flat muscles, so it is the top of the wall whose lower border you are studying."
+      "narration": "This marker is the HIGHEST point of the crest, and the line joining the two of them is the supracristal plane, at the level of the fourth lumbar vertebra — the plane you find before a lumbar puncture. Do not confuse it with the tubercle of the iliac crest, which is a separate point about five centimetres behind the anterior superior iliac spine and lies a vertebra lower, at L5; the line joining the two tubercles is the transtubercular plane. Two crest points, two planes, two vertebral levels. The crest is also the upper attachment of the flat muscles, so it is the top of the wall whose lower border you are studying."
     },
     {
       "key": "hip_r",
@@ -670,7 +672,7 @@
           "kind": "the femoral artery lies deep to this point"
         }
       ],
-      "narration": "This is the classic examination trap, so learn both names as a pair. The mid-inguinal point is midway between the anterior superior iliac spine and the pubic symphysis, and the femoral artery lies deep to it. The midpoint of the inguinal ligament is midway between the anterior superior iliac spine and the pubic tubercle, and the deep inguinal ring lies about one and a quarter centimetres above it. The symphysis is medial to the tubercle, so the mid-inguinal point is the more medial of the two. Artery to the symphysis point, deep ring above the tubercle point."
+      "narration": "This is the classic examination trap, so learn both names as a pair. The mid-inguinal point is midway between the anterior superior iliac spine and the pubic symphysis, and the femoral artery lies deep to it. The midpoint of the inguinal ligament is midway between the anterior superior iliac spine and the pubic tubercle, and the deep inguinal ring lies about one centimetre — a finger's breadth — above it. The symphysis is medial to the tubercle, so the mid-inguinal point is the more medial of the two. Artery to the symphysis point, deep ring above the tubercle point."
     },
     {
       "mode": "location",
@@ -786,12 +788,14 @@
           "duration": 10
         }
       ],
-      "narration": "Run the chain once from top to bottom and you have the surface anatomy of the whole region. Highest point of the iliac crest, the L4 level for a lumbar puncture. Anterior superior iliac spine, the start of the ligament and of sartorius, and the outer end of McBurney's point. Midpoint of the ligament, with the deep ring just above it. Mid-inguinal point, with the femoral artery under it. Pubic tubercle at the end of the pubic crest, the point that separates inguinal from femoral. Pubic symphysis in the midline. Six points, all palpable, all examinable."
+      "narration": "Run the chain once from top to bottom and you have the surface anatomy of the whole region. Highest point of the iliac crest — the supracristal plane, L4, the level for a lumbar puncture, and not the same as the tubercle of the crest at L5. Anterior superior iliac spine, the start of the ligament and of sartorius, and the outer end of McBurney's point. Midpoint of the ligament, with the deep ring a finger's breadth above it. Mid-inguinal point, with the femoral artery under it. Pubic tubercle at the end of the pubic crest, the point that separates inguinal from femoral. Pubic symphysis in the midline. Six points, all palpable, all examinable."
     }
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
     "The PUBIC TUBERCLE — the single most clinically useful point in this scene — has no separate model and could not be isolated geometrically: nothing in the surface of the hip bone distinguishes the tubercle from the rest of the pubic crest. The anchor therefore carries the honest name 'pubic crest', measured as the point where the rectus abdominis actually meets the bone, and the narration says the tubercle lies at its lateral end, about two and a half centimetres from the midline. Everything taught against the tubercle — the hernia rule, the midpoint of the ligament — is stated against a landmark that is a centimetre or two medial to it, and says so.",
@@ -800,7 +804,7 @@
     "The FEMORAL SHEATH and FEMORAL CANAL have no models. The canal in particular is a potential space, not an object, so no provider will ship it. Beat 4 teaches the lateral-to-medial order of the compartment as a list against the artery and vein, which are present.",
     "The FEMORAL NERVE is not in the catalog, so the 'nerve' of nerve-artery-vein-canal-lymphatics is spoken but not shown. Nor is the ILIOINGUINAL nerve, which is the one at risk in a hernia repair and the reason a patient can be left with numbness over the scrotum or labium.",
     "The SPERMATIC CORD, the ROUND LIGAMENT and the CONJOINT TENDON are all absent. The conjoint tendon is the common ending of internal oblique and transversus, and both of those parent muscles are in the scene, so it is taught as their shared insertion rather than as an object.",
-    "The inguinal ligament models themselves are in the catalog but were not on disk, so no anchor sits on the ligament. Every landmark here is measured on the right hip bone, which was available, and the ligament's course is authored as a trace between two measured bony points. Nothing was mirrored across the midline to fake a left-sided landmark.",
+    "No anchor sits on the inguinal ligament itself. When the landmarks were derived the ligament models were in the catalog but not on disk, so every landmark here was measured on the right hip bone, which was available, and the ligament's course is authored as a trace between two measured bony points. As of the 2026-08-28 audit all sixteen models this scene references are on disk, including both ligaments, so a future pass could re-derive the two midpoints on the ligament surface rather than on the bone. Nothing was mirrored across the midline to fake a left-sided landmark.",
     "All six anchors are measured extremes, contacts or midpoints of measured points, each records how it was placed, and all six remain status 'needs-review' until a human clears them in-app."
   ]
 }

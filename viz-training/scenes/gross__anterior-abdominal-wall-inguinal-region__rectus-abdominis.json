@@ -716,7 +716,7 @@
           "layout": "side-by-side"
         }
       ],
-      "narration": "The medial border faces the linea alba; the lateral border is the linea semilunaris. Each has its own hernia. Through the linea alba, above the umbilicus where it is broad, comes the epigastric hernia — a small painful knuckle of fat. Along the linea semilunaris, just below the umbilicus, comes the Spigelian hernia — which burrows under an intact external oblique and so has no visible lump. Look at the two recti together and you can also see why they drift apart in pregnancy: nothing joins them except that white line."
+      "narration": "The medial border faces the linea alba; the lateral border is the linea semilunaris. Each has its own hernia. Through the linea alba, above the umbilicus where it is broad, comes the epigastric hernia — a small painful knuckle of fat. Along the linea semilunaris, just below the umbilicus, comes the Spigelian hernia — which burrows under an intact external oblique, so there is nothing to see and only a vague deep fullness to feel. Look at the two recti together and you can also see why they drift apart in pregnancy: nothing joins them except that white line."
     },
     {
       "mode": "location",
@@ -830,7 +830,7 @@
           "duration": 8
         }
       ],
-      "narration": "The muscle is supplied segmentally by the lower six thoracic nerves, T7 to T12. They run between internal oblique and transversus, then pierce the sheath at the lateral border and enter the muscle from behind. Two consequences. A wide lateral incision cuts nerve after nerve and leaves a paralysed bulging wall, so surgeons split muscle rather than cut across it. And because the nerves supplying the skin are the same ones supplying the muscle, tensing the muscle can tell you where the pain is: a lump or a tenderness that persists when the patient lifts their head off the bed is in the wall, not in the abdomen. That is Carnett's sign."
+      "narration": "The muscle is supplied segmentally by the lower six thoracic nerves, T7 to T12. They run between internal oblique and transversus, then pierce the sheath at the lateral border and enter the muscle from behind. Two consequences. A wide lateral incision cuts nerve after nerve and leaves a paralysed bulging wall, so surgeons split muscle rather than cut across it. And because the muscle lies in front of everything inside, tensing it tells you which side of the wall the trouble is on: ask the patient to lift their head off the bed and press again. Tenderness that persists or worsens is arising in the wall itself, which the contraction has brought closer to your hand. Tenderness that eases is inside the abdomen, now shielded by a board of contracted muscle. That is Carnett's sign, and it is a test of position, not of innervation."
     },
     {
       "mode": "location",
@@ -875,7 +875,9 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
     "The tendinous intersections have no mesh and never will — they are markings on the muscle, not objects. Three of them are usually described, at the xiphoid, the umbilicus and midway between, and they are the reason the six-pack is visible and the reason a rectus sheath haematoma above the umbilicus is compartmentalised while one below it is free to spread. All of that is narration in this scene. A provider that shipped rectus abdominis as several bellies rather than one would let this be shown.",
@@ -883,7 +885,7 @@
     "There is no rectus sheath in the catalog as an object — only the muscles whose aponeuroses form it. The sheath is therefore taught through relationships between the flat muscles and the rectus, plus one measured anchor where the external oblique actually contacts the muscle. The curriculum's 'Rectus sheath' entry still needs its own scene and this one does not claim it.",
     "The umbilicus is absent from the catalog. It is the reference point for almost every statement about this wall — the arcuate line is midway between it and the pubis, the Spigelian hernia is just below it, divarication shows above it, and it is the T10 dermatome. Every one of those is narrated against attachments that do exist rather than against the umbilicus itself.",
     "No nerve or vessel of the abdominal wall exists in the catalog: not the thoracoabdominal nerves, not the superior or inferior epigastric arteries. Beat 6 traces the segmental nerves as a declared concept along the structures they pass. This is a real teaching loss, because the inferior epigastric artery is both the cause of a rectus sheath haematoma and the landmark that separates a direct from an indirect inguinal hernia.",
-    "Only the right side of the wall could be measured. The left rectus, the linea alba, the pyramidales, the xiphoid, the seventh costal cartilage, the internal oblique, the transversus and the inguinal ligament are all in the catalog and are all referenced by this scene, but none of them was on disk, so no landmark was derived from them. Every anchor here is on the right rectus abdominis and says so. Nothing was mirrored across the midline to fake a left-sided landmark.",
+    "Only the right side of the wall could be measured. The left rectus, the linea alba, the pyramidales, the xiphoid, the seventh costal cartilage, the internal oblique, the transversus and the inguinal ligament are all in the catalog and are all referenced by this scene, but none of them was on disk when the landmarks were derived, so no landmark was derived from them. As of the 2026-08-28 audit all seventeen models this scene references are on disk, so left-sided and midline landmarks could now be measured rather than left out. Every anchor here is on the right rectus abdominis and says so. Nothing was mirrored across the midline to fake a left-sided landmark.",
     "The 'medial_border' anchor is the single most medial vertex of the muscle, which falls at the pubic end where the two recti converge, not halfway up where a student pictures the medial border. The label and the calibrated_by note both say so rather than rounding the discrepancy away. A true medial border would need an edge-extraction step this tool does not have.",
     "All eight anchors are measured contacts or extremes and every one records how it was placed. All eight remain status 'needs-review' until a human clears them in-app."
   ]

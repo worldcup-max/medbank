@@ -454,6 +454,60 @@
       "narration": "Above the costal margin the rectus lies directly on cartilage like this one — no posterior wall of sheath between them."
     },
     {
+      "key": "cc6_r",
+      "name": "right sixth costal cartilage",
+      "label": "Sixth costal cartilage",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#c8cdcd",
+      "refs": {
+        "bodyparts3d": "FMA8194"
+      },
+      "terms": [
+        "sixth costal cartilage",
+        "origin of rectus abdominis",
+        "above the costal margin"
+      ],
+      "narration": "One of the three cartilages the upper end of the rectus takes origin from and lies directly upon. Naming five, six and seven and drawing only one would leave two of them imaginary, so all three are here."
+    },
+    {
+      "key": "cc5_r",
+      "name": "right fifth costal cartilage",
+      "label": "Fifth costal cartilage",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA8070"
+      },
+      "terms": [
+        "fifth costal cartilage",
+        "origin of rectus abdominis",
+        "highest attachment"
+      ],
+      "narration": "The highest of the three costal attachments of rectus abdominis. Above the costal margin the muscle rests on these cartilages with only an anterior wall of sheath in front of it."
+    },
+    {
+      "key": "extiliac_r",
+      "name": "right external iliac artery",
+      "label": "External iliac artery (right) — where the inferior epigastric begins",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "origin of the inferior epigastric artery",
+        "just above the inguinal ligament"
+      ],
+      "narration": "The inferior epigastric artery is not in the catalog, but its parent is. It arises from the front of this vessel just above the inguinal ligament, then climbs medially, crosses the arcuate line and runs up behind the rectus. When beat 5 traces that vessel, it starts here — at a real artery — and the traced line beyond this point is a declared concept, not a model."
+    },
+    {
       "key": "xiphoid",
       "name": "xiphoid process",
       "label": "Xiphoid process",
@@ -645,7 +699,8 @@
           "path": [
             "rectus_upper_end",
             "sheath_posterior_surface",
-            "rectus_lower_end"
+            "rectus_lower_end",
+            "extiliac_r"
           ],
           "duration": 8
         },
@@ -705,14 +760,17 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
     "There is no rectus sheath in the catalog as an object, and there never will be one: the sheath is the arrangement of three aponeuroses, not a body part with its own surface. This scene therefore teaches the sheath through the four models that actually make it — external oblique, internal oblique, transversus abdominis and the rectus they wrap — plus one measured contact where the external oblique genuinely touches the muscle. Every statement about front wall and back wall is a relationship between models that exist, not a model of the wall itself.",
     "The ARCUATE LINE has no model. It is the free lower edge of the posterior wall — a line on a fascia — and its level is defined against the umbilicus, which is also absent from the catalog. Beats 3 and 4 therefore teach it by cutting the body at two levels and stating the rule at each, and no anchor is placed on the line itself. An anchor typed in by eye would put the words 'arcuate line' somewhere plausible and the student would believe it.",
     "The three aponeuroses are not separable from their muscle bellies in the catalog: 'right external oblique' is one model covering muscle and aponeurosis together. So the scene can show that the external oblique reaches the rectus and lies in front of it, but it cannot show the aponeurotic sheet as a distinct surface, and it cannot show the internal oblique aponeurosis actually splitting into two laminae. That split is the single most examined fact about this region and it is carried entirely by narration and by SHOW_RELATIONSHIP.",
     "Transversalis fascia, extraperitoneal fat and parietal peritoneum are all absent from the catalog. They are the posterior relations of the muscle below the arcuate line and the reason that region is thin, so they are named in narration at every level where they matter.",
-    "No vessel or nerve of the abdominal wall is in the catalog — not the superior or inferior epigastric arteries, not the thoracoabdominal nerves. Beat 5 traces both as declared concepts along structures that do exist. This is a real loss: the inferior epigastric artery is both the cause of the rectus sheath haematoma taught in beat 6 and the landmark that separates a direct from an indirect inguinal hernia.",
+    "No vessel or nerve OF THE WALL ITSELF is in the catalog — searched 2026-08-28 under epigastric, thoracoabdominal, subcostal, intercostal nerve and internal thoracic, all absent. Their PARENT vessel is not: the right external iliac artery (FMA18806) exists and has been added as context, so beat 5's inferior-epigastric trace now begins at a real artery instead of nowhere. Beyond that origin the trace is still a declared concept. This remains a real loss: the inferior epigastric artery is both the cause of the rectus sheath haematoma taught in beat 6 and the landmark that separates a direct from an indirect inguinal hernia.",
+    "Transversalis fascia, extraperitoneal fat, parietal peritoneum, the umbilicus, the arcuate line, the linea semilunaris and any object named 'rectus sheath' were all re-searched in the catalog on 2026-08-28 under those and adjacent spellings, and none exists. That search, not an earlier note, is the evidence for the gap statements above.",
     "The tendinous intersections have no model. They adhere to the anterior wall and not the posterior, which is why the six-pack is visible and why a haematoma above the umbilicus is compartmentalised while one below it spreads. Narration only.",
     "Only right-sided models were on disk, so both anchors on the muscle and the landmark values in this scene were measured on the right side alone. The left rectus, both internal obliques, both transversi and the linea alba are all referenced here and are all in the catalog, but none was available to measure, and nothing was mirrored across the midline to fake a left-sided landmark.",
     "All five anchors are measured extremes or contacts, each records how it was placed, and all five remain status 'needs-review' until a human clears them in-app."

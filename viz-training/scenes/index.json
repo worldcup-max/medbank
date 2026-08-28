@@ -4617,7 +4617,7 @@
       "topic": "Pharyngeal Apparatus",
       "structure": "Pharyngeal pouches",
       "learning_goal": "Name the derivative of each of the four pharyngeal pouches from its dorsal and ventral wings, explain by the descent of the thymus why the inferior parathyroids come from a higher pouch than the superior ones, and use that to predict the findings in DiGeorge syndrome and to locate an ectopic parathyroid gland.",
-      "gaps": 14,
+      "gaps": 15,
       "match": {
         "topics": [
           "pharyngeal pouches",
@@ -9133,7 +9133,6 @@
         "the abdominal wall extends above the costal margin": "eo_upper_end",
         "upper limit against the ribs": "eo_upper_end",
         "supracristal plane": "iliac_crest_r",
-        "transpyloric plane": "iliac_crest_r",
         "common attachment": "iliac_crest_r",
         "summit of the iliac crest": "iliac_crest_r",
         "rectus abdominis": "rect_r",
@@ -9255,7 +9254,9 @@
           "femoral canal",
           "hernioplasty",
           "herniorrhaphy",
-          "above and medial to the pubic tubercle"
+          "above and medial to the pubic tubercle",
+          "ureter",
+          "water under the bridge"
         ]
       },
       "parts": [
@@ -9352,8 +9353,15 @@
         "ductus deferens": "vas_r",
         "deferent duct": "vas_r",
         "vasectomy": "vas_r",
+        "water under the bridge": "vas_r",
+        "crosses the ureter": "vas_r",
         "vas deferens the cord s main content": "vas_r",
         "right deferent duct": "vas_r",
+        "ureter": "ureter_r",
+        "vas crosses in front of the ureter": "ureter_r",
+        "pelvic ureter": "ureter_r",
+        "ureter right": "ureter_r",
+        "right ureter": "ureter_r",
         "lower free border": "eo_lower_free_border",
         "level of the canal": "eo_lower_free_border",
         "above the medial half of the inguinal ligament": "eo_lower_free_border",
@@ -9398,7 +9406,7 @@
         "right external iliac vein": "extiliac_v_r"
       },
       "counts": {
-        "structures": 14,
+        "structures": 15,
         "parts": 9,
         "views": 7
       }
@@ -9446,6 +9454,8 @@
           "pubic symphysis",
           "iliac crest",
           "tubercle of the iliac crest",
+          "supracristal plane",
+          "transtubercular plane",
           "mid inguinal point",
           "midpoint of the inguinal ligament",
           "midinguinal point",
@@ -9535,7 +9545,7 @@
         },
         {
           "key": "iliac_crest",
-          "label": "Iliac crest — the tubercle",
+          "label": "Iliac crest — highest point (supracristal plane)",
           "group": "Landmarks"
         }
       ],
@@ -9599,17 +9609,17 @@
         "midway between asis and pubic tubercle": "midpoint_of_ligament",
         "deep inguinal ring": "midpoint_of_ligament",
         "internal ring": "midpoint_of_ligament",
-        "one and a quarter centimetres above": "midpoint_of_ligament",
+        "one centimetre above": "midpoint_of_ligament",
+        "a finger s breadth above": "midpoint_of_ligament",
         "indirect inguinal hernia": "midpoint_of_ligament",
         "internal ring occlusion test": "midpoint_of_ligament",
         "midpoint of the ligament the deep ring is just above": "midpoint_of_ligament",
         "iliac crest": "iliac_crest",
-        "tubercle of the iliac crest": "iliac_crest",
-        "l4 level": "iliac_crest",
+        "highest point of the iliac crest": "iliac_crest",
         "supracristal plane": "iliac_crest",
+        "l4 level": "iliac_crest",
         "lumbar puncture": "iliac_crest",
-        "transtubercular plane": "iliac_crest",
-        "iliac crest the tubercle": "iliac_crest",
+        "iliac crest highest point supracristal plane": "iliac_crest",
         "hip bone": "hip_r",
         "ilium": "hip_r",
         "pubis": "hip_r",
@@ -9961,7 +9971,7 @@
       "topic": "Anterior Abdominal Wall & Inguinal Region",
       "structure": "Rectus sheath",
       "learning_goal": "State which aponeurosis lies in front of and behind rectus abdominis above and below the arcuate line, name the contents of the sheath, and use those two facts to explain a rectus sheath haematoma, a Spigelian hernia and the safety of a midline incision.",
-      "gaps": 8,
+      "gaps": 9,
       "match": {
         "topics": [
           "rectus sheath",
@@ -10164,6 +10174,17 @@
         "costal margin": "cc7_r",
         "the muscle lies on it directly": "cc7_r",
         "right seventh costal cartilage": "cc7_r",
+        "sixth costal cartilage": "cc6_r",
+        "origin of rectus abdominis": "cc6_r",
+        "right sixth costal cartilage": "cc6_r",
+        "fifth costal cartilage": "cc5_r",
+        "highest attachment": "cc5_r",
+        "right fifth costal cartilage": "cc5_r",
+        "external iliac artery": "extiliac_r",
+        "origin of the inferior epigastric artery": "extiliac_r",
+        "just above the inguinal ligament": "extiliac_r",
+        "external iliac artery right where the inferior epigastric begins": "extiliac_r",
+        "right external iliac artery": "extiliac_r",
         "xiphoid process": "xiphoid",
         "upper end of the linea alba": "xiphoid",
         "inguinal ligament": "inglig_r",
@@ -10173,7 +10194,7 @@
         "right inguinal ligament": "inglig_r"
       },
       "counts": {
-        "structures": 20,
+        "structures": 23,
         "parts": 11,
         "views": 6
       }
@@ -10193,7 +10214,7 @@
       "topic": "Arm (Brachium)",
       "structure": "Biceps brachii & Triceps brachii",
       "learning_goal": "Know where each head of biceps and triceps starts and ends, and the exact bony landmark it uses.",
-      "gaps": 1,
+      "gaps": 4,
       "match": {
         "topics": [
           "arm",
@@ -10294,7 +10315,7 @@
         "long head of right biceps brachii": "bic_long",
         "short head of biceps": "bic_short",
         "biceps short head": "bic_short",
-        "coracobrachialis": "bic_short",
+        "coracobrachialis": "coracobrach",
         "short head of right biceps brachii": "bic_short",
         "long head of triceps": "tri_long",
         "triceps long head": "tri_long",
@@ -10306,14 +10327,17 @@
         "triceps medial head": "tri_med",
         "deep head": "tri_med",
         "medial head of right triceps brachii": "tri_med",
+        "conjoint tendon of the coracoid": "coracobrach",
+        "pierced by the musculocutaneous nerve": "coracobrach",
+        "right coracobrachialis": "coracobrach",
         "intertubercular groove": "intertubercular_groove",
         "bicipital tuberosity": "radial_tuberosity",
         "olecranon process": "olecranon"
       },
       "counts": {
-        "structures": 15,
+        "structures": 16,
         "parts": 11,
-        "views": 3
+        "views": 4
       }
     },
     {
@@ -12808,7 +12832,7 @@
       "topic": "Back & Vertebral Column",
       "structure": "Spinal cord in vertebral canal",
       "learning_goal": "Trace the vertebral canal from the foramen magnum to the sacral hiatus, say where the cord ends in an adult and in a newborn, and give the reason lumbar puncture is done at L3/4 or L4/5.",
-      "gaps": 6,
+      "gaps": 7,
       "match": {
         "topics": [
           "back",

@@ -448,7 +448,7 @@
       "narration": "Cut across and notice that the third and fourth pouches are not single pockets. Each has a dorsal and a ventral wing, and each wing has its own fate. Both dorsal wings make parathyroid tissue. The ventral wing of the third makes the thymus; the ventral wing of the fourth makes the ultimopharyngeal body. Two pouches, four organs, and the pattern is symmetrical enough to reconstruct under pressure."
     },
     {
-      "mode": "associated_organs",
+      "mode": "glands",
       "beat": 3,
       "title": "Down the series: ear, tonsil, thymus, parathyroid",
       "ops": [
@@ -589,6 +589,7 @@
     "Whether the C cells are endodermal or neural crest is not universally stated the same way across texts. The scene teaches the neural crest origin because that is what makes medullary thyroid carcinoma and its behaviour make sense, and it says so explicitly rather than leaving it implied.",
     "Immunology beyond the consequence of an absent thymus is not taught here. T cell development, thymic selection and the full immunodeficiency differential belong to physiology and immunology; this scene names only the clinical picture that follows from the pouch failing.",
     "The parathyroid glands' physiology — parathyroid hormone, calcium regulation, primary and secondary hyperparathyroidism — is named only where it explains the surgical relevance of an ectopic gland. It appears in match.terms so a highlighted term still reaches this scene.",
-    "Week numbers are the standard teaching approximations — pouches appearing through weeks four and five, thymic descent complete by about week eight. Texts differ by several days and the narration gives them as approximations."
+    "Week numbers are the standard teaching approximations — pouches appearing through weeks four and five, thymic descent complete by about week eight. Texts differ by several days and the narration gives them as approximations.",
+    "VIEW MODES: CURRICULUM.json asks this structure for `cross_section` and `glands`. Beat 2 supplied cross_section; nothing supplied glands, and no validator stage compares a scene`s beat modes to its curriculum views, so the omission went unseen. Beat 3 — the run down the four pouches to middle ear, tonsil, thymus and both parathyroid pairs — was already a glands view in substance and was moded associated_organs; it is now moded `glands`. Beat 5, the failure case, stays associated_organs. No narration changed."
   ]
 }

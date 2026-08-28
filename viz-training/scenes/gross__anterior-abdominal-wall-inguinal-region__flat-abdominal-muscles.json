@@ -361,7 +361,7 @@
         "radius": 0.02
       },
       "status": "needs-review",
-      "calibrated_by": "geometry: the lowest (most inferior) vertex of the right external oblique, 235.2 mm from its surface centroid — the bottom of the sheet, at the level where its free lower border rolls back as the inguinal ligament. The ligament is a separate mesh that is not on disk, so this marks the LEVEL and not the ligament; see tools/derive-flat-muscle-landmarks.mjs",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the right external oblique, 235.2 mm from its surface centroid — the bottom of the sheet, at the level where its free lower border rolls back as the inguinal ligament. The ligament is a separate mesh and is now on disk, but no anchor has been measured on it, so this marks the LEVEL and not the ligament; see tools/derive-flat-muscle-landmarks.mjs",
       "terms": [
         "lower free border",
         "inguinal ligament",
@@ -447,7 +447,6 @@
         "iliac crest",
         "supracristal plane",
         "L4",
-        "transpyloric plane",
         "common attachment"
       ],
       "narration": "All three flat muscles take hold of this crest, each from a slightly different part of it. It is also the most useful bony line in the abdomen: the highest points of the two crests lie at the level of the fourth lumbar vertebra, which is the plane a lumbar puncture aims below."
@@ -738,7 +737,7 @@
           "duration": 8
         }
       ],
-      "narration": "The deepest sheet, and the only one running horizontally. It arises from the inner surfaces of the lower six costal cartilages, the thoracolumbar fascia, the iliac crest and the lateral third of the inguinal ligament. When it contracts it narrows the waist and pushes the viscera backwards, which is how intra-abdominal pressure rises for coughing, vomiting, micturition, defaecation and childbirth. The nerves to the whole wall run forwards on its outer surface, sandwiched against the internal oblique. Anaesthetists inject into that sandwich — the transversus abdominis plane block."
+      "narration": "The deepest sheet, and the only one running horizontally. It arises from the inner surfaces of the lower six costal cartilages, the thoracolumbar fascia, the iliac crest and the lateral third of the inguinal ligament. When it contracts it narrows the waist and pushes the viscera backwards, which is how intra-abdominal pressure rises for coughing, vomiting, micturition, defaecation and childbirth. The nerves to the whole wall run forwards on its outer surface, sandwiched against the internal oblique. Anaesthetists inject into that sandwich — the transversus abdominis plane block. Nerve supply: the lower six thoracic nerves plus the first lumbar, the same as the internal oblique."
     },
     {
       "mode": "cross_section",
@@ -849,15 +848,17 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
     "The catalog carries no aponeurosis as a separate object — every flat muscle is one mesh from its fleshy origin to its tendinous end. So the single most important fact in this topic, that a muscle becomes a sheet and that the sheet then chooses a side of the rectus, is taught by relationships and by one measured contact rather than by anything the student can see change. A provider that shipped muscle and aponeurosis separately would close this outright, and it is the highest-value acquisition for this topic.",
     "The arcuate line has no mesh and never will: it is the lower edge of the posterior sheath, a line on a fascia. Beats 5 and 6 state the rule above and below it and the cross-section shows the level, but the line itself cannot be drawn. It belongs to the curriculum's separate 'Rectus sheath' entry, which this scene does not claim.",
     "The conjoint tendon, the transversalis fascia, Camper's and Scarpa's fasciae and the thoracolumbar fascia are all named in the narration and none of them exists in the catalog. Camper's and Scarpa's matter clinically — extravasated urine tracks in the plane deep to Scarpa's — and the layers list in beat 5 is spoken rather than shown.",
     "No nerve exists for this wall: not the thoracoabdominal nerves, not the iliohypogastric, not the ilioinguinal. Beat 4 traces them as a declared concept along the plane they run in, because the transversus abdominis plane is defined by those nerves and is worth authoring even degraded. The ilioinguinal nerve is also the one injured in a hernia repair, so this is a real loss.",
-    "Only the right external oblique is on disk, so every anchor in this scene sits on that one muscle plus one on the right hip bone. The right internal oblique and right transversus abdominis are in the catalog and are referenced here, but nothing was measured on them, and no landmark was invented on the outer layer and relabelled as the deeper one. Ingesting FMA13892 and FMA22344 locally would let the origins, the arching lower borders and the conjoint tendon be measured where they actually are.",
-    "The 'eo_lower_free_border' anchor is the lowest vertex of the external oblique, so it marks the LEVEL of the inguinal ligament and of the superficial ring, not either structure. The inguinal ligament is a separate mesh that is referenced as context here but is not on disk, so no anchor was placed on it. The label says level and the calibrated_by note says why.",
+    "AUDIT 2026-08-28: all fifteen models of this scene are now on disk in meshes-lite, including the right internal oblique FMA13892, the right transversus abdominis FMA22344 and both inguinal ligaments — the earlier note here that only the external oblique had been ingested is out of date and has been corrected. What remains true is that every anchor still sits on the right external oblique plus one on the right hip bone: nothing has yet been MEASURED on the deeper two sheets, and no landmark was invented on the outer layer and relabelled as the deeper one. Re-running tools/derive-flat-muscle-landmarks.mjs against the newly present meshes would let the origins, the arching lower borders and the conjoint tendon be measured where they actually are.",
+    "The 'eo_lower_free_border' anchor is the lowest vertex of the external oblique, so it marks the LEVEL of the inguinal ligament and of the superficial ring, not either structure. The inguinal ligament is a separate mesh, referenced as context here and now on disk, but no anchor has yet been measured on it. The label says level and the calibrated_by note says why.",
     "All eight anchors are measured contacts or extremes, every one records how it was placed, and all eight remain status 'needs-review' until a human clears them in-app.",
     "This scene does not claim 'Rectus sheath' or 'Inguinal ligament & landmarks'. The sheath rule is stated because these three muscles are what forms it, and the inguinal ligament is present as context, but the arcuate line, the two sheath pictures as separate views, and the surface landmarks of the groin — the mid-inguinal point, the midpoint of the inguinal ligament, the pubic tubercle — are not taught here. Both entries stay on the worklist."
   ]

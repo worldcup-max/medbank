@@ -78,7 +78,9 @@
       "femoral canal",
       "hernioplasty",
       "herniorrhaphy",
-      "above and medial to the pubic tubercle"
+      "above and medial to the pubic tubercle",
+      "ureter",
+      "water under the bridge"
     ]
   },
   "camera": {
@@ -213,9 +215,30 @@
         "ductus deferens",
         "deferent duct",
         "spermatic cord",
-        "vasectomy"
+        "vasectomy",
+        "water under the bridge",
+        "crosses the ureter"
       ],
-      "narration": "The principal content of the spermatic cord, and the one structure in it you can feel: rolled between finger and thumb at the neck of the scrotum it is a firm cord like a thin wire. It enters at the deep ring, runs the length of the canal, leaves at the superficial ring and hooks over the ureter into the pelvis."
+      "narration": "The principal content of the spermatic cord, and the one structure in it you can feel: rolled between finger and thumb at the neck of the scrotum it is a firm cord like a thin wire. Follow it the way it runs. From the tail of the epididymis it climbs the cord, enters the canal at the SUPERFICIAL ring, runs the length of the canal upwards, backwards and laterally, and leaves at the DEEP ring into the extraperitoneal plane. Only then does it cross the ureter — passing in front of it, water under the bridge — to reach the back of the bladder. Get that order the right way round: the canal is travelled from superficial and medial to deep and lateral by everything leaving the scrotum, and the opposite way by everything the testis was given on its way down."
+    },
+    {
+      "key": "ureter_r",
+      "name": "right ureter",
+      "label": "Ureter (right)",
+      "role": "context",
+      "group": "Contents & destination",
+      "layer": "organ",
+      "color": "#f0b27a",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "ureter",
+        "water under the bridge",
+        "vas crosses in front of the ureter",
+        "pelvic ureter"
+      ],
+      "narration": "Present so that the crossing is shown and not merely asserted. Beyond the deep ring the deferent duct passes in FRONT of the ureter on its way to the base of the bladder — water under the bridge. The same relation, with the uterine artery in place of the duct, is what a surgeon is protecting during a hysterectomy."
     },
     {
       "key": "eo_lower_free_border",
@@ -576,7 +599,7 @@
           "duration": 10
         }
       ],
-      "narration": "In the male the canal transmits the spermatic cord; in the female, the round ligament of the uterus. Both also carry the ilioinguinal nerve, which enters through the side wall rather than at the deep ring and leaves through the superficial ring. The cord itself is three arteries, three nerves, three other things: testicular, cremasteric and artery to the vas; genital branch of the genitofemoral, sympathetics and the ilioinguinal running with it; and the vas deferens, the pampiniform plexus and the lymphatics. Its coverings are the three layers it pushed through — internal spermatic fascia from transversalis fascia, cremasteric fascia from internal oblique, external spermatic fascia from the external oblique aponeurosis. Testicular lymph drains to para-aortic nodes and scrotal skin to the superficial inguinal nodes, which is why a testicular tumour and a scrotal skin lesion enlarge completely different nodes."
+      "narration": "In the male the canal transmits the spermatic cord; in the female, the round ligament of the uterus. Both also carry the ilioinguinal nerve, which enters through the side wall rather than at the deep ring and leaves through the superficial ring. The cord itself is three arteries, three nerves, three other things: testicular, cremasteric and artery to the vas; genital branch of the genitofemoral, sympathetics and the ilioinguinal running with it; and the vas deferens, the pampiniform plexus and the lymphatics. Its coverings are the three layers it pushed through — internal spermatic fascia from transversalis fascia, cremasteric fascia from internal oblique, external spermatic fascia from the external oblique aponeurosis. Testicular lymph drains to para-aortic nodes and scrotal skin to the superficial inguinal nodes, which is why a testicular tumour and a scrotal skin lesion enlarge completely different nodes. Follow the vas the way it actually travels: in at the superficial ring, out at the deep ring, and only then across the front of the ureter — which is drawn here — to the back of the bladder."
     },
     {
       "mode": "mechanism",
@@ -663,16 +686,18 @@
   ],
   "provenance": {
     "author": "task",
-    "authored_at": "2026-08-27"
+    "authored_at": "2026-08-27",
+    "audited_at": "2026-08-28",
+    "audited_by": "task"
   },
   "gaps": [
     "The canal itself is a space and has no mesh. It is taught here entirely through the four structures that bound it — external oblique, internal oblique, transversus abdominis and the inguinal ligament — which is option (b) in the authoring rule: teach it through the adjacent structures that do exist. Three of the four walls are real models. The posterior wall is transversalis fascia, which has no mesh at all, so it is narrated over the muscles in front of it. The lumen between them is not, and a provider will never ship it, so this gap is permanent and only a labelled overlay or a diagram will ever close it.",
     "Neither ring exists as a model. The deep ring is a hole in the transversalis fascia and the superficial ring is a gap in an aponeurosis, and neither fascia nor aponeurosis is a separate object in the catalog. Beat 3 places both rings in words against two measured bony landmarks — the midpoint of the inguinal ligament and the pubic tubercle — rather than putting a marker at a guessed spot. This is the single biggest teaching loss in the scene.",
     "The inferior epigastric artery is not in the catalog, and it is the one structure that decides whether a hernia is indirect or direct. The right external iliac artery, which gives rise to it, IS present and is used as the stand-in: the narration says where the branch arises and what it separates. An inferior epigastric mesh would be the highest-value single acquisition for this topic.",
-    "The spermatic cord, the pampiniform plexus, the cremaster, the transversalis fascia, the conjoint tendon and the lacunar ligament are all absent. The vas deferens is not: the catalog carries it as 'right deferent duct' FMA19235 and 'left deferent duct' FMA19236, and searching for 'vas deferens' rather than the catalog's own name is why three scenes recorded it as missing. It is the principal content of the cord and should be drawn. The cord is therefore traced as a declared concept from the deep ring level to the testis, and its contents and coverings are narration. The testis itself is present, so the destination of the trace is real even where the tunnel is not.",
+    "The spermatic cord, the pampiniform plexus, the cremaster, the transversalis fascia, the conjoint tendon and the lacunar ligament are all absent — re-searched 2026-08-28 under 'conjoint', 'falx', 'transversalis', 'cremaster', 'pampiniform', 'spermatic', 'lacunar', 'pectineal', 'processus' and 'gubernaculum', and none of them returns anything. The vas deferens IS present and is now drawn: the catalog carries it as 'right deferent duct' FMA19235, and searching for 'vas deferens' rather than the catalog's own name is why three scenes once recorded it as missing. The right ureter FMA15571 was added in the same audit so that the crossing the vas makes beyond the deep ring is shown rather than asserted. The cord as a whole is still traced as a declared concept, and its contents and coverings are narration; the testis and the duct are real, so the trace has real ends even where the tunnel is not.",
     "No nerve of the region exists: not the ilioinguinal, not the genitofemoral. The ilioinguinal is the nerve injured in hernia repair and the afferent limb of the cremasteric reflex, so its absence costs two examinable facts that are spoken instead of shown.",
     "The pubic tubercle and the anterior superior iliac spine are not separately modelled — they are features of the hip bone. The two anchors here are honest extremes of that bone, the symphyseal surface and the summit of the iliac crest, and each label and calibrated_by note says plainly that the tubercle and the spine lie a stated distance away rather than at the marker. Given that the whole clinical method of this region is 'which side of the pubic tubercle is the lump', measured markers for the tubercle would be worth a targeted acquisition.",
-    "Only the right external oblique and the right hip bone were on disk, so no anchor could be placed on the internal oblique, the transversus or the inguinal ligament even though all three are referenced. The arching lower borders that form the roof and the shutter are the exact geometry this scene most needs measured. Ingesting FMA13892, FMA22344 and FMA21964 locally would fix that.",
+    "AUDIT 2026-08-28: every model this scene references is now on disk in meshes-lite, the internal oblique FMA13892, the transversus FMA22344 and the inguinal ligament FMA21964 included — the earlier note that only the external oblique and the hip bone had been ingested is out of date and has been corrected. No anchor has yet been MEASURED on those three, so the three anchors still hang on the external oblique and the hip bone. The arching lower borders that form the roof and the shutter are the exact geometry this scene most needs measured, and the meshes to measure them on are now present.",
     "The three anchors are measured extremes, all three record how they were placed, and all three remain status 'needs-review' until a human clears them in-app.",
     "This scene does not claim 'Inguinal ligament & landmarks'. The ligament is a full part here and its attachments are stated, but the surface anatomy that entry asks for — the mid-inguinal point against the midpoint of the inguinal ligament, the pubic tubercle, the anterior superior iliac spine as palpable points — needs markers this run could not measure. The entry stays on the worklist."
   ]
