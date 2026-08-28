@@ -1,0 +1,1012 @@
+{
+  "schema": 2,
+  "id": "gross__gluteal-region-hip-joint__sciatic-nerve",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Gluteal Region & Hip Joint",
+  "structure": "Sciatic nerve",
+  "covers": [
+    "Sciatic nerve"
+  ],
+  "learning_goal": "Trace the sciatic nerve from the greater sciatic foramen to the popliteal fossa naming what it lies on at every step, mark its course on a patient, say what each of its two divisions supplies, and work out from a foot drop or a flail foot where the nerve has been damaged.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "gluteal region",
+      "buttock",
+      "sciatic nerve",
+      "lower limb",
+      "posterior thigh",
+      "sacral plexus",
+      "popliteal fossa",
+      "foot drop",
+      "intramuscular injection",
+      "peripheral nerve injury"
+    ],
+    "terms": [
+      "sciatic nerve",
+      "greater sciatic foramen",
+      "below piriformis",
+      "piriformis",
+      "piriformis syndrome",
+      "sacral plexus",
+      "L4",
+      "L5",
+      "S1",
+      "S2",
+      "S3",
+      "tibial division",
+      "common fibular division",
+      "common peroneal nerve",
+      "tibial nerve",
+      "largest nerve in the body",
+      "gemellus superior",
+      "obturator internus",
+      "gemellus inferior",
+      "quadratus femoris",
+      "midway between the ischial tuberosity and the greater trochanter",
+      "posterior superior iliac spine",
+      "ischial tuberosity",
+      "greater trochanter",
+      "hamstrings",
+      "long head of biceps femoris",
+      "short head of biceps femoris",
+      "semitendinosus",
+      "semimembranosus",
+      "hamstring part of adductor magnus",
+      "apex of the popliteal fossa",
+      "neck of the fibula",
+      "foot drop",
+      "flail foot",
+      "high steppage gait",
+      "sciatica",
+      "prolapsed intervertebral disc",
+      "straight leg raise",
+      "upper outer quadrant",
+      "injection injury",
+      "posterior dislocation of the hip",
+      "artery to the sciatic nerve",
+      "inferior gluteal artery",
+      "no branch in the gluteal region",
+      "saphenous nerve",
+      "sensory loss below the knee"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.15
+  },
+  "structures": [
+    {
+      "key": "piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis",
+      "role": "part",
+      "group": "Gateway",
+      "layer": "muscle",
+      "color": "#7f5aa8",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "key to the gluteal region",
+        "below piriformis",
+        "piriformis syndrome"
+      ],
+      "narration": "The one muscle you must find first. It comes out of the pelvis through the greater sciatic foramen and fills it, leaving a gap above and a gap below. The sciatic nerve uses the gap below. Everything else in the buttock is described as above piriformis or below piriformis."
+    },
+    {
+      "key": "gemellus_sup",
+      "name": "right gemellus superior",
+      "label": "Gemellus superior",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#6f4d94",
+      "refs": {
+        "bodyparts3d": "FMA22334"
+      },
+      "terms": [
+        "gemellus superior",
+        "ischial spine",
+        "floor of the gluteal region"
+      ],
+      "narration": "The first thing the nerve lies on after it leaves the pelvis. From the ischial spine."
+    },
+    {
+      "key": "obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#634587",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "tendon of obturator internus",
+        "lesser sciatic foramen"
+      ],
+      "narration": "Its tendon turns a right angle through the lesser sciatic notch and comes out between the two twins. The nerve crosses that tendon second."
+    },
+    {
+      "key": "gemellus_inf",
+      "name": "right gemellus inferior",
+      "label": "Gemellus inferior",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#573c78",
+      "refs": {
+        "bodyparts3d": "FMA22336"
+      },
+      "terms": [
+        "gemellus inferior",
+        "ischial tuberosity",
+        "floor of the gluteal region"
+      ],
+      "narration": "The lower twin. Third in the sequence."
+    },
+    {
+      "key": "quadratus_femoris",
+      "name": "right quadratus femoris",
+      "label": "Quadratus femoris",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#4b3468",
+      "refs": {
+        "bodyparts3d": "FMA22338"
+      },
+      "terms": [
+        "quadratus femoris",
+        "the nerve lies on quadratus femoris",
+        "intertrochanteric crest"
+      ],
+      "narration": "The last and the largest bed. The sciatic nerve lies flat on quadratus femoris as it leaves the buttock, and that is the level at which it is midway between the ischial tuberosity and the greater trochanter."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Roof",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "roof of the gluteal region",
+        "buttock",
+        "deep to gluteus maximus"
+      ],
+      "narration": "The roof. The whole gluteal course of the nerve is hidden under this one muscle, which is why nothing in this region can be felt and why a needle in the wrong quadrant reaches the nerve without warning."
+    },
+    {
+      "key": "glut_med",
+      "name": "right gluteus medius",
+      "label": "Gluteus medius",
+      "role": "context",
+      "group": "Roof",
+      "layer": "muscle",
+      "color": "#c9743a",
+      "refs": {
+        "bodyparts3d": "FMA22330"
+      },
+      "terms": [
+        "gluteus medius",
+        "upper outer quadrant",
+        "safe injection site"
+      ],
+      "narration": "Well above and lateral to the nerve. That is the whole reason an intramuscular injection is aimed at the upper outer quadrant and nowhere else."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "greater sciatic notch",
+        "ischial spine",
+        "ischial tuberosity",
+        "posterior superior iliac spine",
+        "acetabulum"
+      ],
+      "narration": "Three points on this bone fix the nerve: the greater sciatic notch it comes through, the ischial spine it passes below, and the ischial tuberosity that is one end of its surface marking. The acetabulum matters too — the nerve lies directly behind the hip joint."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacral plexus",
+        "S1",
+        "S2",
+        "S3",
+        "anterior sacral foramina",
+        "greater sciatic foramen"
+      ],
+      "narration": "The roots come out of the front of this bone. The sacral plexus lies on piriformis inside the pelvis, and the nerve it forms leaves through the foramen bounded by the sacrum, the sacrotuberous ligament and the greater sciatic notch."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "greater trochanter",
+        "posterior dislocation of the hip",
+        "back of the femur"
+      ],
+      "narration": "The greater trochanter is the landmark you can feel and the other end of the surface marking. The head of the femur is just in front of the nerve — a posterior dislocation drives it backwards into the nerve, which is why every dislocated hip is tested for foot drop before anything else is done."
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e0d5ba",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "neck of the fibula",
+        "common fibular nerve",
+        "common peroneal nerve",
+        "tight plaster",
+        "foot drop"
+      ],
+      "narration": "The neck of this bone is the most dangerous point in the lower limb. The common fibular division winds round it under nothing but skin, so a tight plaster, a badly placed strap or a night on a hard edge produces a foot drop."
+    },
+    {
+      "key": "biceps_long",
+      "name": "long head of right biceps femoris",
+      "label": "Biceps femoris — long head",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#a63f5e",
+      "refs": {
+        "bodyparts3d": "FMA45888"
+      },
+      "terms": [
+        "long head of biceps femoris",
+        "hamstring",
+        "ischial tuberosity",
+        "crosses the sciatic nerve",
+        "tibial division"
+      ],
+      "narration": "The only muscle that crosses the nerve. It runs down and laterally over it, so in the thigh the nerve is deep to this head and lateral to the other two hamstrings. Tibial division."
+    },
+    {
+      "key": "semitendinosus",
+      "name": "right semitendinosus",
+      "label": "Semitendinosus",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#93374f",
+      "refs": {
+        "bodyparts3d": "FMA22358"
+      },
+      "terms": [
+        "semitendinosus",
+        "hamstring",
+        "knee flexion",
+        "tibial division"
+      ],
+      "narration": "Tibial division, like every hamstring except one."
+    },
+    {
+      "key": "semimembranosus",
+      "name": "right semimembranosus",
+      "label": "Semimembranosus",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#87304a",
+      "refs": {
+        "bodyparts3d": "FMA22448"
+      },
+      "terms": [
+        "semimembranosus",
+        "hamstring",
+        "medial hamstring",
+        "tibial division"
+      ],
+      "narration": "Tibial division. Together with semitendinosus it forms the medial boundary of the popliteal fossa, where the nerve divides."
+    },
+    {
+      "key": "adductor_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus — hamstring part",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#7f3045",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "hamstring part of adductor magnus",
+        "ischial part",
+        "two nerve supplies",
+        "obturator nerve",
+        "tibial division"
+      ],
+      "narration": "The nerve lies on the back of this muscle all the way down the thigh. Its ischial part is a hamstring and takes the tibial division; the rest of the muscle is obturator. One muscle, two nerves — a favourite question."
+    },
+    {
+      "key": "gastroc_medial",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#b04a63",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "gastrocnemius",
+        "calf",
+        "plantarflexion",
+        "tibial nerve",
+        "S1",
+        "ankle jerk"
+      ],
+      "narration": "Below the knee the tibial nerve takes the whole back of the leg. Lose it and the patient cannot stand on tiptoe and the ankle jerk is gone."
+    },
+    {
+      "key": "soleus",
+      "name": "right soleus",
+      "label": "Soleus",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#a44059",
+      "refs": {
+        "bodyparts3d": "FMA22558"
+      },
+      "terms": [
+        "soleus",
+        "plantarflexion",
+        "tibial nerve",
+        "calf pump"
+      ],
+      "narration": "Tibial nerve. The nerve passes under the tendinous arch of this muscle to reach the deep back of the leg."
+    },
+    {
+      "key": "tibialis_posterior",
+      "name": "right tibialis posterior",
+      "label": "Tibialis posterior",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#98364f",
+      "refs": {
+        "bodyparts3d": "FMA65018"
+      },
+      "terms": [
+        "tibialis posterior",
+        "inversion",
+        "tibial nerve",
+        "medial longitudinal arch"
+      ],
+      "narration": "Tibial nerve. It inverts the foot, so inversion is lost in a tibial lesion and preserved in a fibular one — that single movement separates the two."
+    },
+    {
+      "key": "flexor_digitorum_longus",
+      "name": "right flexor digitorum longus",
+      "label": "Flexor digitorum longus",
+      "role": "part",
+      "group": "Tibial division",
+      "layer": "muscle",
+      "color": "#8c3049",
+      "refs": {
+        "bodyparts3d": "FMA65016"
+      },
+      "terms": [
+        "flexor digitorum longus",
+        "toe flexion",
+        "tibial nerve",
+        "tarsal tunnel"
+      ],
+      "narration": "Tibial nerve. The tibial division also takes every small muscle of the sole, and all the sensation there."
+    },
+    {
+      "key": "biceps_short",
+      "name": "short head of right biceps femoris",
+      "label": "Biceps femoris — short head",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#5f8f3a",
+      "refs": {
+        "bodyparts3d": "FMA45891"
+      },
+      "terms": [
+        "short head of biceps femoris",
+        "linea aspera",
+        "common fibular division",
+        "the only muscle above the knee"
+      ],
+      "narration": "The exception that examiners love. Every other hamstring is tibial; this one head is the only muscle the common fibular division supplies above the knee."
+    },
+    {
+      "key": "tibialis_anterior",
+      "name": "right tibialis anterior",
+      "label": "Tibialis anterior",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#7a9f3f",
+      "refs": {
+        "bodyparts3d": "FMA22544"
+      },
+      "terms": [
+        "tibialis anterior",
+        "dorsiflexion",
+        "deep fibular nerve",
+        "deep peroneal nerve",
+        "foot drop",
+        "L4",
+        "L5"
+      ],
+      "narration": "The muscle that lifts the front of the foot. Deep fibular nerve. When this is paralysed the toes catch on the ground and the patient lifts the knee high to clear them."
+    },
+    {
+      "key": "extensor_digitorum_longus",
+      "name": "right extensor digitorum longus",
+      "label": "Extensor digitorum longus",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#6d9137",
+      "refs": {
+        "bodyparts3d": "FMA22548"
+      },
+      "terms": [
+        "extensor digitorum longus",
+        "toe extension",
+        "deep fibular nerve",
+        "anterior compartment"
+      ],
+      "narration": "Deep fibular nerve, anterior compartment. Extends the toes as the foot is lifted."
+    },
+    {
+      "key": "extensor_hallucis_longus",
+      "name": "right extensor hallucis longus",
+      "label": "Extensor hallucis longus",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#628432",
+      "refs": {
+        "bodyparts3d": "FMA22546"
+      },
+      "terms": [
+        "extensor hallucis longus",
+        "big toe extension",
+        "L5",
+        "deep fibular nerve"
+      ],
+      "narration": "Deep fibular nerve. Ask the patient to pull the big toe up against your finger — that is the cleanest test of L5 in the whole examination."
+    },
+    {
+      "key": "fibularis_longus",
+      "name": "right fibularis longus",
+      "label": "Fibularis longus",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#8fae55",
+      "refs": {
+        "bodyparts3d": "FMA22552"
+      },
+      "terms": [
+        "fibularis longus",
+        "peroneus longus",
+        "eversion",
+        "superficial fibular nerve",
+        "lateral compartment"
+      ],
+      "narration": "Superficial fibular nerve, lateral compartment. It everts the foot. Eversion is lost in a common fibular lesion and kept in a tibial one."
+    },
+    {
+      "key": "fibularis_brevis",
+      "name": "right fibularis brevis",
+      "label": "Fibularis brevis",
+      "role": "part",
+      "group": "Common fibular division",
+      "layer": "muscle",
+      "color": "#82a44b",
+      "refs": {
+        "bodyparts3d": "FMA22554"
+      },
+      "terms": [
+        "fibularis brevis",
+        "peroneus brevis",
+        "eversion",
+        "superficial fibular nerve",
+        "base of the fifth metatarsal"
+      ],
+      "narration": "The other evertor, on the same nerve."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where it comes out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Tibial division"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "The sciatic nerve is formed inside the pelvis from L4, L5, S1, S2 and S3 and leaves through the greater sciatic foramen. Piriformis fills that foramen, and the nerve comes out below its lower border. That is the arrangement in about nine people in ten. In the rest the common fibular part pierces the muscle or passes above it, and those are the legs that ache when the muscle is tight."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Take the roof off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Tibial division"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_max",
+          "intensity": 0.8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Gluteus maximus is the lid. Lift it and the nerve is there, lying in fat on a floor of small muscles. Nothing in the gluteal region can be palpated, and the nerve gives off no branch at all while it is here — it is simply passing through."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "What it lies on, in order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gluteal floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gateway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sciatic_nerve",
+          "path": [
+            "sacrum",
+            "piriformis",
+            "gemellus_sup",
+            "obturator_internus",
+            "gemellus_inf",
+            "quadratus_femoris",
+            "femur"
+          ],
+          "duration": 11
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The path traced here is the nerve itself. Learn the beds in order: gemellus superior, the tendon of obturator internus, gemellus inferior, then quadratus femoris. Recite that list in a viva and you have described the gluteal course exactly. Behind it lies only gluteus maximus; in front of it lies the capsule of the hip joint."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Mark it on a patient",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hip_bone",
+          "to": "femur",
+          "kind": "surface marking"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Two bony points give you the line. Start midway between the posterior superior iliac spine and the ischial tuberosity. Curve laterally and downwards to a point midway between the ischial tuberosity and the greater trochanter. Then run straight down the middle of the back of the thigh to the top of the diamond behind the knee. Every clinical fact about this nerve hangs on that line."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Down the back of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "biceps_long",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "biceps_long",
+          "to": "adductor_magnus",
+          "kind": "the nerve runs between these"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sciatic_nerve",
+          "path": [
+            "quadratus_femoris",
+            "adductor_magnus",
+            "biceps_long",
+            "semimembranosus"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "In the thigh the nerve lies on the back of adductor magnus with the hamstrings around it. Only one muscle crosses it: the long head of biceps femoris, running down and out over the top of it. Its branches to the hamstrings come off the medial side, which is why a surgeon works from the lateral side of the nerve."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Two nerves in one sheath",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Tibial division",
+            "Common fibular division"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The sciatic nerve is not one nerve. It is a tibial nerve and a common fibular nerve bound in a common sheath, and they separate at the top of the popliteal fossa. Lit on one side is everything tibial: all the hamstrings except one head, the hamstring part of adductor magnus, the whole back of the leg and the whole sole. Lit on the other is everything common fibular: the short head of biceps femoris, then the front and the side of the leg. Learn the division and you never have to learn a lesion."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The one head that breaks the rule",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Tibial division"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "biceps_long",
+            "biceps_short"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "biceps_short",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "One muscle, two heads, two different nerves. The long head is tibial like the rest of the hamstrings. The short head is common fibular, and it is the only muscle that division supplies above the knee. Because of it, a common fibular lesion high in the thigh weakens knee flexion very slightly, while a lesion at the fibula does not touch the thigh at all."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Foot drop at the neck of the fibula",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fibula"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fibula",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:common_fibular_nerve",
+          "path": [
+            "biceps_short",
+            "fibula",
+            "fibularis_longus",
+            "tibialis_anterior",
+            "extensor_hallucis_longus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The common fibular nerve leaves the fossa along the tendon of biceps femoris, then winds round the neck of the fibula with nothing over it but skin. It is the most commonly injured nerve in the lower limb. The result is a foot drop: no dorsiflexion, no eversion, and a patch of numbness over the front and outer side of the leg and the top of the foot. The patient lifts the knee high and slaps the foot down. Inversion still works, because tibialis posterior is tibial."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "The whole nerve cut",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Tibial division",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Common fibular division",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "A complete lesion in the buttock paralyses everything lit here. The hamstrings go, so knee flexion is weak, though gracilis and sartorius still bend it a little. Every muscle below the knee goes, so the foot is flail. Sensation is lost below the knee everywhere except a strip down the medial side, which belongs to the saphenous nerve from the femoral. The knee jerk is normal and the ankle jerk is absent — that pair localises the injury on its own."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "How it gets damaged",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Tibial division"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_med",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "quadratus_femoris",
+          "kind": "posterior dislocation"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Three ways, and all three are examined. A needle in the wrong quadrant of the buttock — inject only into the upper outer quadrant, into gluteus medius, well clear of the nerve. A posterior dislocation of the hip, where the head of the femur is driven back onto the nerve. And surgery on the hip. Test dorsiflexion in every one of these patients before and after, and write down what you found."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Sciatica is not a sciatic nerve lesion",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gateway"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacrum",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "piriformis",
+          "kind": "roots on piriformis"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Sciatica is pain down the back of the leg, and the usual cause is a prolapsed disc pressing a nerve root at L5 or S1, far above anything shown in the buttock. The trunk itself is rarely the problem. Piriformis syndrome is the exception worth knowing: a tight or overworked piriformis squeezing the nerve at the foramen, giving buttock pain that is worse on sitting. A straight leg raise reproduces the pain in both, so the history and the level of the sensory loss decide."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 12,
+      "title": "How deep is it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Tibial division"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Common fibular division"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "quadratus_femoris",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Drag the cut and count the layers a needle passes: skin, a thick pad of fat, gluteus maximus, then the loose fat that holds the nerve and the gluteal vessels, then the short rotators on the back of the hip joint. The nerve sits in that fourth layer, about as wide as your little finger. In a large adult it can be five centimetres or more from the surface, and there is no warning on the way down."
+    }
+  ],
+  "gaps": [
+    "The subject of this scene has no model. There is no nerve of the lower limb in the catalog — of 934 entries the only nerves are the right and left optic nerves — so the sciatic nerve is authored as a traced concept path across the muscles it lies on, and its two divisions are taught by lighting the muscles they supply. Every other structure named here resolves to a real model, and the teaching is the standard one: in the gluteal region the nerve has no branches and no palpable landmark, so it is located entirely by what it crosses.",
+    "Status is 'candidate', not 'ready'. The scene passes the gate and renders, but the structure the curriculum asked for is present only as a concept path, and a human should decide whether a trace over the correct beds is enough to call the entry taught. Promote to 'ready' on that decision, or when a sciatic nerve model exists and the traces are re-authored against it.",
+    "3d_anatomy is used and 'diagram' is recorded in deferred_modes. A drawn diagram would show the nerve itself, the root values and the sensory map far better than a trace does; the 3D scene is stronger on the relations, the depth and the injection anatomy. Ideally the topic ends up with both.",
+    "No ligament of the pelvis is modelled. The sacrotuberous and sacrospinous ligaments complete the greater sciatic foramen the nerve leaves through, and the sacrospinous ligament separates it from the lesser sciatic foramen. Both are narrated only.",
+    "The greater sciatic notch, the ischial spine, the ischial tuberosity, the posterior superior iliac spine, the greater trochanter and the neck of the fibula are sub-features of whole-bone models. Beat 4 marks the nerve on a patient using two of them, and does it by lighting the whole bone and naming the point. Placing them as measured landmark anchors is the clear next improvement for this scene — the humerus scene shows the pattern — but the pelvis and fibula meshes were not measured in this run, and an anchor placed by eye on a nerve that runs beside the hip joint would be worse than none.",
+    "The sensory territory of the nerve cannot be shown. The only skin in the catalog is FMA7163, a single whole-body mesh with no regional divisions, so a dermatome patch cannot be lit on it and beats 8 and 9 describe the numb areas instead. The saphenous strip on the medial side of the leg, which is the exception that proves the lesion is sciatic and not spinal, is narration only.",
+    "The intrinsic muscles of the sole are not modelled individually here, so the tibial division's hand-like control of the foot is represented by flexor digitorum longus and named in narration.",
+    "The artery to the sciatic nerve, from the inferior gluteal artery, is named but not shown. No gluteal vessel exists as a model — that gap belongs to the Gluteal vessels entry, which is authored separately and which this scene does not claim to cover.",
+    "This scene does not cover Gluteus maximus, Hip joint or Proximal femur. Those muscles and bones appear only as the roof, the floor and the frame that fix the nerve's position."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

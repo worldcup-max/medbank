@@ -1,0 +1,551 @@
+{
+  "schema": 2,
+  "id": "gross__thoracic-wall-diaphragm__intercostal-neurovascular-bundle",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thoracic Wall & Diaphragm",
+  "structure": "Intercostal neurovascular bundle",
+  "covers": [
+    "Intercostal neurovascular bundle"
+  ],
+  "learning_goal": "State the VAN order from above downwards, name the plane the bundle runs in, say where in the intercostal space a needle or drain should enter and why, and explain what the collateral branch does to that rule.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thorax",
+      "thoracic wall",
+      "chest wall",
+      "intercostal space",
+      "chest drain",
+      "pleural tap",
+      "procedures"
+    ],
+    "terms": [
+      "intercostal neurovascular bundle",
+      "neurovascular bundle",
+      "VAN",
+      "vein artery nerve",
+      "intercostal nerve",
+      "intercostal artery",
+      "intercostal vein",
+      "posterior intercostal artery",
+      "anterior intercostal artery",
+      "internal thoracic artery",
+      "costal groove",
+      "subcostal groove",
+      "neurovascular plane",
+      "collateral branch",
+      "lateral cutaneous branch",
+      "anterior cutaneous branch",
+      "intercostal space",
+      "thoracocentesis",
+      "pleural tap",
+      "chest drain",
+      "intercostal drain",
+      "safe triangle",
+      "intercostal nerve block",
+      "dermatome",
+      "T4 nipple",
+      "T10 umbilicus",
+      "herpes zoster",
+      "shingles",
+      "rib fracture"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.004,
+    "initialYaw": 0.5
+  },
+  "structures": [
+    {
+      "key": "rib5",
+      "name": "right fifth rib",
+      "label": "Rib 5 — the rib above the space",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8066"
+      },
+      "terms": [
+        "rib 5",
+        "fifth rib",
+        "costal groove",
+        "subcostal groove",
+        "lower border of the rib",
+        "intercostal space"
+      ],
+      "narration": "The fifth intercostal space is the one below this rib — a space is always named for the rib above it. Along the inner surface of this rib's lower border runs a shelf, the costal groove, and the bundle shelters under it."
+    },
+    {
+      "key": "rib6",
+      "name": "right sixth rib",
+      "label": "Rib 6 — the rib below the space",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8175"
+      },
+      "terms": [
+        "rib 6",
+        "sixth rib",
+        "upper border of the rib",
+        "collateral branch",
+        "intercostal space"
+      ],
+      "narration": "The upper border of the rib below is the safer edge — but it is not an empty edge, because the collateral branch runs along it."
+    },
+    {
+      "key": "rib4",
+      "name": "right fourth rib",
+      "label": "Rib 4",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7957"
+      },
+      "terms": [
+        "rib 4",
+        "fourth rib",
+        "intercostal space"
+      ],
+      "narration": "Every space above and below is built the same way, with its own bundle under its own rib."
+    },
+    {
+      "key": "ext_ic",
+      "name": "external intercostal muscle",
+      "label": "External intercostal",
+      "role": "part",
+      "group": "Neurovascular plane",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA9756"
+      },
+      "terms": [
+        "external intercostal",
+        "external intercostal muscle",
+        "hands in pockets"
+      ],
+      "narration": "The outermost layer. A needle passes through this first, and the bundle is nowhere near it yet."
+    },
+    {
+      "key": "int_ic",
+      "name": "internal intercostal muscle",
+      "label": "Internal intercostal",
+      "role": "part",
+      "group": "Neurovascular plane",
+      "layer": "muscle",
+      "color": "#a82f2f",
+      "refs": {
+        "bodyparts3d": "FMA9757"
+      },
+      "terms": [
+        "internal intercostal",
+        "internal intercostal muscle",
+        "neurovascular plane"
+      ],
+      "narration": "The middle layer. The bundle lies on the deep surface of this muscle — this is the front wall of the corridor it runs in."
+    },
+    {
+      "key": "innermost_ic",
+      "name": "innermost intercostal muscle",
+      "label": "Innermost intercostal",
+      "role": "part",
+      "group": "Neurovascular plane",
+      "layer": "muscle",
+      "color": "#8e2626",
+      "refs": {
+        "bodyparts3d": "FMA9758"
+      },
+      "terms": [
+        "innermost intercostal",
+        "intercostalis intimus",
+        "neurovascular plane",
+        "parietal pleura"
+      ],
+      "narration": "The deepest layer, and the back wall of the corridor. The bundle runs between this and the internal intercostal — that gap is the neurovascular plane. Deep to this muscle there is only pleura and then lung."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Descending aorta",
+      "role": "context",
+      "group": "Supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "descending aorta",
+        "thoracic aorta",
+        "posterior intercostal artery"
+      ],
+      "narration": "The posterior intercostal arteries for spaces three to eleven come straight off the back of the thoracic aorta. That is where the bundle's blood starts."
+    },
+    {
+      "key": "sternal_body",
+      "name": "body of sternum",
+      "label": "Body of sternum",
+      "role": "context",
+      "group": "Supply",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "sternum",
+        "internal thoracic artery",
+        "anterior intercostal artery",
+        "anastomosis"
+      ],
+      "narration": "Behind the sternum the internal thoracic artery runs down and sends anterior intercostal branches out into each space. They meet the posterior ones coming the other way, so every space is supplied from both ends."
+    },
+    {
+      "key": "ic_vein",
+      "label": "V — intercostal vein (highest)",
+      "role": "part",
+      "group": "The bundle",
+      "render": "anchor",
+      "color": "#2c6fa8",
+      "anchor": {
+        "on": "rib5",
+        "uvw": [
+          0.037,
+          0.538,
+          0.389
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: costal groove measured on the full-resolution rib mesh — most inferior point of the internal surface at the mid-axillary station, with the rib's along-course descent (0.34 mm/deg, fitted on a wide window) removed. Stable to 2.0 mm across slab widths of 1.5-6 degrees. See tools/derive-costal-groove.mjs.",
+      "calibration_gap_mm": 2,
+      "terms": [
+        "intercostal vein",
+        "posterior intercostal vein",
+        "VAN",
+        "azygos"
+      ],
+      "narration": "The vein is the highest of the three, tucked closest up into the groove. On the right the posterior intercostal veins drain to the azygos, on the left to the hemiazygos."
+    },
+    {
+      "key": "ic_artery",
+      "label": "A — intercostal artery (middle)",
+      "role": "part",
+      "group": "The bundle",
+      "render": "anchor",
+      "color": "#c0392b",
+      "anchor": {
+        "on": "rib5",
+        "uvw": [
+          0.037,
+          0.538,
+          0.373
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "ESTIMATE: placed 2 mm below the measured groove point. The groove itself is measured from the mesh; the spacing between vein, artery and nerve inside it cannot be read off a bone, so it is set by anatomical convention and marked as an estimate. See tools/derive-costal-groove.mjs.",
+      "calibration_gap_mm": 2,
+      "terms": [
+        "intercostal artery",
+        "posterior intercostal artery",
+        "VAN"
+      ],
+      "narration": "The artery sits between the vein and the nerve. It is the one that matters when a needle goes in the wrong place, because it bleeds into the pleural cavity and there is nothing there to tamponade it."
+    },
+    {
+      "key": "ic_nerve",
+      "label": "N — intercostal nerve (lowest)",
+      "role": "part",
+      "group": "The bundle",
+      "render": "anchor",
+      "color": "#f2c14e",
+      "anchor": {
+        "on": "rib5",
+        "uvw": [
+          0.037,
+          0.538,
+          0.357
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "ESTIMATE: placed 4 mm below the measured groove point. The groove itself is measured from the mesh; the spacing between vein, artery and nerve inside it cannot be read off a bone, so it is set by anatomical convention and marked as an estimate. See tools/derive-costal-groove.mjs.",
+      "calibration_gap_mm": 4,
+      "terms": [
+        "intercostal nerve",
+        "anterior ramus",
+        "VAN",
+        "dermatome",
+        "lateral cutaneous branch",
+        "anterior cutaneous branch",
+        "intercostal nerve block"
+      ],
+      "narration": "The nerve is the lowest and therefore the most exposed — it hangs below the shelter of the groove. It is the anterior ramus of the thoracic spinal nerve, it supplies the muscles of its own space and the strip of skin over it, and it is the one you numb in an intercostal block."
+    },
+    {
+      "key": "collateral",
+      "label": "Collateral branch",
+      "role": "part",
+      "group": "The bundle",
+      "render": "anchor",
+      "color": "#e08a3c",
+      "anchor": {
+        "on": "rib6",
+        "uvw": [
+          0.068,
+          0.518,
+          0.477
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: most superior point of the internal surface of the rib below, measured at the same mid-axillary station on the full-resolution mesh, trend removed. Stable to 3.5 mm across slab widths of 1.5-6 degrees. See tools/derive-costal-groove.mjs.",
+      "calibration_gap_mm": 3.5,
+      "terms": [
+        "collateral branch",
+        "collateral intercostal artery",
+        "upper border of the rib below"
+      ],
+      "narration": "Near the angle of the rib the bundle gives off a collateral branch that crosses the space and runs forward along the upper border of the rib below. So the lower half of the space is not truly empty — it is only safer, not safe."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One space, close up",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rib5",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Look at a single intercostal space from the side. Rib above, rib below, three sheets of muscle filling the gap, and a bundle of three structures running forward through it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Which layer is it between",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Neurovascular plane"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ribs"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "int_ic",
+            "innermost_ic"
+          ],
+          "layout": "stacked"
+        }
+      ],
+      "narration": "Cut across the space and count inwards: external, internal, innermost. The bundle is not in a muscle — it is in the plane between the internal and the innermost. Name that plane and you have answered half the question."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "VAN, from the top down",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bundle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "rib5"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ic_vein",
+            "ic_artery",
+            "ic_nerve"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Under the lower border of the rib above, in order from the top: vein, artery, nerve. VAN. The nerve is last, which is why it is the first to be caught by a needle coming up from below and the one that is blocked deliberately for pain."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Where the blood comes from",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:posterior-intercostal-artery",
+          "path": [
+            "aorta",
+            "ic_artery",
+            "sternal_body"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aorta",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The posterior intercostal artery leaves the aorta behind, runs forward in the groove, and meets the anterior intercostal branch of the internal thoracic artery in front. Two sources, one continuous channel — which is why bleeding from a torn intercostal artery does not stop when you press on one end."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Where to put the needle",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bundle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ribs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ic_nerve",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ic_nerve",
+          "to": "rib6",
+          "kind": "clearance"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The bundle hugs the rib above, so you go in just above the upper border of the rib below and walk the needle over the bone. Never scrape along the underside of the rib above — that is exactly where the artery is. In practice you also stay in the safe triangle in the axilla, above the fifth space, to keep clear of the diaphragm and the liver."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The branch that spoils the rule",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bundle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ribs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "collateral",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-branch",
+          "path": [
+            "ic_artery",
+            "collateral"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Behind the angle of the rib the artery splits and sends a collateral branch down to run along the top of the rib below. So the lower border of the space has a vessel too. The rule still holds, because the main bundle is far bigger — but this is why textbooks say safer rather than safe, and why a drain is inserted by blunt dissection rather than by pushing a trocar in blind."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "What the nerve supplies",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ic_nerve",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:dermatome",
+          "path": [
+            "ic_nerve",
+            "rib5",
+            "sternal_body"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Each intercostal nerve gives a lateral cutaneous branch in the mid-axillary line and ends as an anterior cutaneous branch beside the sternum. It supplies one band of skin, and those bands are the thoracic dermatomes: T4 at the nipple, T10 at the umbilicus. Shingles follows one of these bands and stops dead at the midline."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "THE SUBJECT OF THIS SCENE HAS NO MESH. There is no intercostal vein, artery or nerve in the catalog at any level — a search of all 934 names for artery, vein and nerve returns 49 entries and not one of them is intercostal. No azygos vein and no internal thoracic artery either. This is why the scene is status:\"candidate\" and not \"ready\": every one of the three things the student is here to learn is carried by an authored marker rather than by a model.",
+    "The V, A and N markers are placed in a groove that was MEASURED and at a spacing that was ESTIMATED. tools/derive-costal-groove.mjs finds the costal groove on the full-resolution rib mesh and reports it stable to 2.0 mm across slab widths; the 2 mm gaps between vein, artery and nerve inside that groove cannot be read off a bone and are set by convention. Each marker records which of the two it is in calibrated_by. All four markers remain status:\"needs-review\" until a human clears them in-app.",
+    "The bundle is shown at ONE station on ONE rib — the mid-axillary point of the right fifth rib, chosen because that is where a chest drain goes in. Its course from the aorta to the sternum is carried by concept traces and narration, not by a modelled line, so the student sees where the bundle sits but not the whole length it travels.",
+    "The collateral branch is anchored on the upper border of the rib below at the same station. Anatomically it arises near the ANGLE of the rib, well behind that point. The tool does not measure curvature and so cannot locate the angle honestly, and the marker is placed where the branch runs rather than where it starts. Beat 6 says so in narration.",
+    "The lateral and anterior cutaneous branches have no markers. Beat 7 names them and traces a concept path towards the sternum, but the dermatome band itself — the thing actually examined — is a surface pattern that no op draws. A diagram-mode companion is the right home for dermatomes and diagram is recorded as the deferred mode.",
+    "There is no parietal pleura mesh, so the last layer a needle crosses cannot be shown. Beat 2 ends at the innermost intercostal and says what lies beyond it.",
+    "Each intercostal muscle mesh spans every space at once rather than one space, so the single space this scene teaches cannot be isolated geometrically. The ribs above and below bound it visually instead."
+  ]
+}

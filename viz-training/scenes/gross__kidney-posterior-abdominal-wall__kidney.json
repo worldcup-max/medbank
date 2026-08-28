@@ -1,0 +1,1036 @@
+{
+  "schema": 2,
+  "id": "gross__kidney-posterior-abdominal-wall__kidney",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Kidney & Posterior Abdominal Wall",
+  "structure": "Kidney",
+  "covers": [
+    "Kidney"
+  ],
+  "learning_goal": "Place both kidneys on the posterior abdominal wall against T12 to L3, say why the right sits lower than the left, name the coverings from the renal capsule out to the pararenal fat, order the structures in the hilum from front to back and the layers from cortex to pelvis, trace blood in by the renal artery and out by the renal vein, and use that anatomy to explain the loin approach, the loin-to-groin pain of a stone and why the left renal vein is the vulnerable one.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "kidney",
+      "renal anatomy",
+      "urinary system",
+      "posterior abdominal wall",
+      "retroperitoneum",
+      "renal vasculature",
+      "loin pain",
+      "renal colic",
+      "urine formation",
+      "nephrectomy",
+      "renal transplant",
+      "abdomen",
+      "excretory system"
+    ],
+    "terms": [
+      "kidney",
+      "kidneys",
+      "renal",
+      "ren",
+      "nephro",
+      "right kidney",
+      "left kidney",
+      "bean shaped",
+      "eleven centimetres",
+      "retroperitoneal",
+      "primarily retroperitoneal",
+      "posterior abdominal wall",
+      "T12",
+      "L1",
+      "L2",
+      "L3",
+      "transpyloric plane",
+      "hilum",
+      "renal hilum",
+      "renal sinus",
+      "upper pole",
+      "lower pole",
+      "anterior surface",
+      "posterior surface",
+      "medial border",
+      "lateral border",
+      "renal capsule",
+      "fibrous capsule",
+      "perirenal fat",
+      "perinephric fat",
+      "renal fascia",
+      "Gerota's fascia",
+      "pararenal fat",
+      "paranephric fat",
+      "renal cortex",
+      "cortex",
+      "renal medulla",
+      "medulla",
+      "renal pyramid",
+      "renal papilla",
+      "renal column",
+      "column of Bertin",
+      "minor calyx",
+      "major calyx",
+      "renal pelvis",
+      "pelviureteric junction",
+      "PUJ",
+      "hydronephrosis",
+      "renal artery",
+      "right renal artery",
+      "left renal artery",
+      "segmental artery",
+      "end artery",
+      "renal segment",
+      "renal vein",
+      "left renal vein",
+      "right renal vein",
+      "nutcracker syndrome",
+      "gonadal vein",
+      "testicular vein",
+      "ovarian vein",
+      "left suprarenal vein",
+      "varicocele",
+      "vein artery ureter",
+      "VAU",
+      "front to back in the hilum",
+      "psoas major",
+      "quadratus lumborum",
+      "transversus abdominis",
+      "diaphragm",
+      "twelfth rib",
+      "eleventh rib",
+      "costodiaphragmatic recess",
+      "pleura",
+      "renal angle",
+      "costovertebral angle",
+      "renal angle tenderness",
+      "Murphy's kidney punch",
+      "loin",
+      "loin to groin",
+      "renal colic",
+      "renal stone",
+      "staghorn calculus",
+      "nephrolithiasis",
+      "percutaneous nephrolithotomy",
+      "loin incision",
+      "subcostal nerve",
+      "iliohypogastric nerve",
+      "ilioinguinal nerve",
+      "renal ptosis",
+      "floating kidney",
+      "horseshoe kidney",
+      "inferior mesenteric artery",
+      "pelvic kidney",
+      "polycystic kidney disease",
+      "renal cell carcinoma",
+      "nephrectomy",
+      "renal transplant",
+      "iliac fossa",
+      "renal plexus",
+      "T10 to L1",
+      "referred pain",
+      "urine formation",
+      "nephron",
+      "glomerulus",
+      "renal corpuscle",
+      "loop of Henle",
+      "collecting duct",
+      "one point two litres per minute",
+      "twenty percent of cardiac output"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney",
+      "role": "part",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#8c3b2f",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "kidney",
+        "bean shaped",
+        "upper pole",
+        "lower pole",
+        "hilum",
+        "renal angle",
+        "lower than the left",
+        "liver pushes it down",
+        "twelfth rib",
+        "renal cortex",
+        "renal medulla",
+        "renal pelvis"
+      ],
+      "narration": "A bean-shaped organ about eleven centimetres long, six wide and three thick, lying on the posterior abdominal wall behind the peritoneum. The right kidney sits about half a vertebral body lower than the left because the liver occupies the space above it — so it spans roughly the body of L1 to the body of L3, and its upper pole is crossed by the twelfth rib only. Its hilum faces medially and slightly forward, and the whole organ is tilted so that its anterior surface looks forward and laterally. In a thin patient the lower pole of the right kidney can be balloted bimanually on deep inspiration; the left almost never can."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "part",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#a0463a",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "kidney",
+        "higher than the right",
+        "eleventh rib",
+        "twelfth rib",
+        "transpyloric plane",
+        "hilum",
+        "spleen",
+        "pancreas",
+        "descending colon"
+      ],
+      "narration": "The left kidney is the higher of the two, spanning about T12 to L2, and it is crossed behind by both the eleventh and the twelfth ribs. Its hilum lies almost exactly on the transpyloric plane, at the level of the lower border of L1 — the single most useful level in the abdomen, because the pylorus, the neck of the pancreas, the fundus of the gallbladder and the origin of the superior mesenteric artery all sit on it. In front it is related to the stomach, the spleen, the tail of the pancreas, the splenic vessels, the left colic flexure and coils of jejunum."
+    },
+    {
+      "key": "right_renal_artery",
+      "name": "right renal artery",
+      "label": "Right renal artery — the longer one",
+      "role": "part",
+      "group": "Renal vessels",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14752"
+      },
+      "terms": [
+        "right renal artery",
+        "renal artery",
+        "L1",
+        "L2",
+        "behind the inferior vena cava",
+        "longer",
+        "segmental artery",
+        "end artery",
+        "accessory renal artery"
+      ],
+      "narration": "Arises from the side of the aorta just below the origin of the superior mesenteric artery, at about the L1 to L2 disc. Because the aorta lies to the left of the midline, the right renal artery is the longer of the two and must pass behind the inferior vena cava to reach its kidney. It divides at the hilum into five segmental arteries, and those are functional end arteries — they do not anastomose, so occluding one infarcts its segment completely. Accessory renal arteries are common, usually reaching the lower pole, and they matter because an accessory artery divided at nephrectomy or transplantation kills the territory it supplied."
+    },
+    {
+      "key": "left_renal_artery",
+      "name": "left renal artery",
+      "label": "Left renal artery",
+      "role": "part",
+      "group": "Renal vessels",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA14753"
+      },
+      "terms": [
+        "left renal artery",
+        "renal artery",
+        "shorter",
+        "L1",
+        "L2",
+        "renal blood flow",
+        "twenty percent of cardiac output",
+        "renal artery stenosis"
+      ],
+      "narration": "Shorter than the right, because the aorta already lies on the left. Between them the two renal arteries carry about a fifth of the cardiac output — over a litre of blood a minute through organs that together weigh three hundred grams. That enormous flow is what makes the kidney so sensitive to a drop in perfusion, and it is why a narrowed renal artery drives renin, and with it secondary hypertension."
+    },
+    {
+      "key": "right_renal_vein",
+      "name": "right renal vein",
+      "label": "Right renal vein — the short one",
+      "role": "part",
+      "group": "Renal vessels",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14335"
+      },
+      "terms": [
+        "right renal vein",
+        "renal vein",
+        "short",
+        "inferior vena cava",
+        "right gonadal vein",
+        "right testicular vein",
+        "right ovarian vein",
+        "right suprarenal vein"
+      ],
+      "narration": "Short and direct, because the inferior vena cava lies on the right. It receives no tributaries of consequence: the right gonadal vein and the right suprarenal vein drain straight into the cava instead. That asymmetry is the whole reason the right kidney is the harder one to take for transplantation — a short vein is difficult to anastomose."
+    },
+    {
+      "key": "left_renal_vein",
+      "name": "left renal vein",
+      "label": "Left renal vein — the long one, and the vulnerable one",
+      "role": "part",
+      "group": "Renal vessels",
+      "layer": "vessel",
+      "color": "#3498db",
+      "refs": {
+        "bodyparts3d": "FMA14336"
+      },
+      "terms": [
+        "left renal vein",
+        "renal vein",
+        "long",
+        "crosses the aorta",
+        "in front of the aorta",
+        "behind the superior mesenteric artery",
+        "nutcracker syndrome",
+        "left gonadal vein",
+        "left testicular vein",
+        "left ovarian vein",
+        "left suprarenal vein",
+        "left varicocele",
+        "renal cell carcinoma"
+      ],
+      "narration": "Three times as long as the right, because it must cross the midline. It runs to the right in front of the aorta and behind the superior mesenteric artery to reach the cava, and that sandwich is the nutcracker: compression there raises pressure in everything draining into it. Unlike the right, the left renal vein collects the left suprarenal vein and the left gonadal vein, so nutcracker compression, or a tumour thrombus growing up the vein, presents as a left varicocele that does not empty when the man lies down. A left-sided varicocele in an adult male is a renal cell carcinoma until proven otherwise. This length is also why the left kidney is the one usually harvested for transplant."
+    },
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Right ureter — the outflow",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "right ureter",
+        "ureter",
+        "renal pelvis",
+        "pelviureteric junction",
+        "PUJ",
+        "hydronephrosis",
+        "psoas major",
+        "tips of the transverse processes",
+        "renal colic"
+      ],
+      "narration": "The renal pelvis funnels down and narrows at the pelviureteric junction to become the ureter, which then runs downwards on the psoas major, crossing the tips of the lumbar transverse processes. The junction is the first of the three constrictions where a stone lodges, and obstruction there backs urine up into the pelvis and calyces — hydronephrosis. Shown here only as the exit from the kidney; the ureter's own course, blood supply and constrictions are a structure in their own right."
+    },
+    {
+      "key": "left_ureter",
+      "name": "left ureter",
+      "label": "Left ureter",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA15572"
+      },
+      "terms": [
+        "left ureter",
+        "ureter",
+        "renal pelvis",
+        "pelviureteric junction",
+        "loin to groin"
+      ],
+      "narration": "Mirror image on the left. Follow it on a plain film and it lies along a line through the tips of the lumbar transverse processes, over the sacroiliac joint, out to the ischial spine and then medially to the bladder — the route that turns a stone into loin-to-groin pain."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — the artery's origin",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "L1",
+        "L2",
+        "renal artery origin",
+        "left of the midline",
+        "aortic bifurcation",
+        "L4"
+      ],
+      "narration": "The abdominal aorta lies just left of the midline on the bodies of the lumbar vertebrae and gives its paired renal branches at about L1 to L2. Its position off-centre is the single fact that explains the asymmetry of this whole region: a long right artery and a short right vein, a short left artery and a long left vein."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — the vein's destination",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "right of the midline",
+        "renal vein",
+        "tumour thrombus",
+        "right suprarenal vein",
+        "right gonadal vein"
+      ],
+      "narration": "Formed at L5 and running up to the right of the aorta, the cava receives both renal veins at about L1. Its closeness on the right is why the right renal vein is short and why a renal cell carcinoma on the right can extend a tumour thrombus into the cava and up towards the right atrium."
+    },
+    {
+      "key": "sma",
+      "name": "superior mesenteric artery",
+      "label": "Superior mesenteric artery — the upper jaw of the nutcracker",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14749"
+      },
+      "terms": [
+        "superior mesenteric artery",
+        "L1",
+        "transpyloric plane",
+        "nutcracker syndrome",
+        "left renal vein",
+        "third part of the duodenum",
+        "horseshoe kidney"
+      ],
+      "narration": "Leaves the front of the aorta at L1, just above the renal arteries, and immediately arches forwards. The left renal vein and the third part of the duodenum both have to pass through the angle between it and the aorta — which is why both can be compressed there. It is not the hook that arrests an ascending horseshoe kidney — that is the inferior mesenteric artery, lower down."
+    },
+    {
+      "key": "right_adrenal",
+      "name": "right adrenal gland",
+      "label": "Right suprarenal gland",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA15629"
+      },
+      "terms": [
+        "right suprarenal gland",
+        "right adrenal gland",
+        "upper pole",
+        "separate fascial compartment",
+        "renal ptosis"
+      ],
+      "narration": "Caps the upper pole but is not part of the kidney. Between the two lies a septum of renal fascia, and that is why a dropped kidney takes its vessels with it but leaves the suprarenal gland where it was."
+    },
+    {
+      "key": "left_adrenal",
+      "name": "left adrenal gland",
+      "label": "Left suprarenal gland",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA15630"
+      },
+      "terms": [
+        "left suprarenal gland",
+        "left adrenal gland",
+        "left renal vein",
+        "left suprarenal vein"
+      ],
+      "narration": "Sits on the medial side of the upper pole rather than on top of it. Its vein is long and drains into the left renal vein, unlike the right, which drains into the cava."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — why the right kidney is lower",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "right lobe",
+        "renal impression",
+        "hepatorenal recess",
+        "Morison's pouch",
+        "right kidney lower"
+      ],
+      "narration": "The bulk of the right lobe occupies the space above the right kidney and pushes it down. The peritoneal recess between the two — Morison's pouch — is the lowest part of the upper peritoneal cavity when a patient lies supine, and therefore the first window of a trauma scan."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen — left anterior relation",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#7e5109",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "left kidney",
+        "anterior relation",
+        "lienorenal ligament",
+        "splenomegaly",
+        "ballotable"
+      ],
+      "narration": "Lies against the upper part of the anterior surface of the left kidney, tethered to it by the lienorenal ligament carrying the splenic vessels. Its presence is one of the two clinical points that separate an enlarged spleen from an enlarged left kidney: a kidney is ballotable and you can get above it, a spleen is neither."
+    },
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum — over the right hilum",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "second part of the duodenum",
+        "descending duodenum",
+        "right renal hilum",
+        "retroperitoneal",
+        "third part of the duodenum"
+      ],
+      "narration": "The second part of the duodenum descends directly over the hilum of the right kidney — an anterior relation that must be mobilised, by the Kocher manoeuvre, before the right renal vessels can be reached from in front."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — marking the pancreas",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreas",
+        "tail of the pancreas",
+        "body of the pancreas",
+        "anterior relation",
+        "left kidney"
+      ],
+      "narration": "The duct runs the length of the gland and so shows where it lies: the body and tail of the pancreas cross the front of the left kidney on their way to the hilum of the spleen. Pancreatic tail surgery is therefore renal surgery's near neighbour."
+    },
+    {
+      "key": "right_psoas",
+      "name": "right psoas major",
+      "label": "Psoas major (right) — the medial bed",
+      "role": "part",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "posterior abdominal wall",
+        "muscular bed",
+        "medial",
+        "ureter runs on psoas",
+        "psoas abscess",
+        "lumbar plexus"
+      ],
+      "narration": "Runs down from the lumbar vertebrae and forms the medial part of the muscular bed on which the kidney rests. The ureter descends on its front, and the lumbar plexus is formed within its substance — which is why a psoas abscess tracking down from tuberculous lumbar spine can produce both a groin swelling and referred pain along those nerves."
+    },
+    {
+      "key": "left_psoas",
+      "name": "left psoas major",
+      "label": "Psoas major (left)",
+      "role": "context",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22343"
+      },
+      "terms": [
+        "psoas major",
+        "left",
+        "psoas shadow",
+        "plain abdominal film"
+      ],
+      "narration": "The same on the left. Both psoas outlines are visible on a plain abdominal film, and loss of the psoas shadow is a classical sign of retroperitoneal fluid or blood."
+    },
+    {
+      "key": "right_ql",
+      "name": "right quadratus lumborum",
+      "label": "Quadratus lumborum (right) — the middle of the bed",
+      "role": "part",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#ca6f1e",
+      "refs": {
+        "bodyparts3d": "FMA22348"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "twelfth rib",
+        "iliac crest",
+        "posterior abdominal wall",
+        "subcostal nerve",
+        "iliohypogastric nerve",
+        "ilioinguinal nerve"
+      ],
+      "narration": "Runs from the iliac crest up to the twelfth rib and the lumbar transverse processes, forming the middle of the renal bed. Three nerves cross its front behind the kidney, running downwards and laterally: the subcostal, the iliohypogastric and the ilioinguinal. They are the nerves cut or stretched in a loin incision, and the reason a nephrectomy scar can be followed by numbness and a bulging flank."
+    },
+    {
+      "key": "left_ql",
+      "name": "left quadratus lumborum",
+      "label": "Quadratus lumborum (left)",
+      "role": "context",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#ca6f1e",
+      "refs": {
+        "bodyparts3d": "FMA22349"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "left",
+        "renal bed"
+      ],
+      "narration": "The left half of the same muscular floor."
+    },
+    {
+      "key": "right_ta",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis — the lateral bed",
+      "role": "part",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "aponeurosis",
+        "lateral",
+        "renal bed",
+        "lumbar triangle"
+      ],
+      "narration": "Its posterior aponeurosis completes the bed laterally. So the kidney lies on four things from medial to lateral: psoas major, quadratus lumborum, the aponeurosis of transversus abdominis, and above them the diaphragm."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — the roof of the bed",
+      "role": "part",
+      "group": "Posterior wall muscles",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "upper pole",
+        "moves with respiration",
+        "costodiaphragmatic recess",
+        "pleura",
+        "pneumothorax",
+        "kidney descends on inspiration"
+      ],
+      "narration": "The upper pole of each kidney rests on the diaphragm, so both kidneys descend two or three centimetres with a deep breath — which is what makes a right kidney ballotable on inspiration, and what forces a surgeon to time the puncture in a percutaneous approach. Behind the diaphragm at this level lies the costodiaphragmatic recess of the pleura, and that is the structure a needle passing above the twelfth rib enters."
+    },
+    {
+      "key": "rib11",
+      "name": "right eleventh rib",
+      "label": "Eleventh rib",
+      "role": "context",
+      "group": "Bony landmarks",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA8531"
+      },
+      "terms": [
+        "eleventh rib",
+        "floating rib",
+        "left kidney",
+        "posterior relation",
+        "pleura"
+      ],
+      "narration": "Crosses the back of the LEFT kidney only. The right kidney, sitting lower, is crossed by the twelfth alone. Learn this pair the right way round: it is a favourite one-mark question and it is also the practical difference between entering the chest and not."
+    },
+    {
+      "key": "rib12",
+      "name": "right twelfth rib",
+      "label": "Twelfth rib — the surgical landmark",
+      "role": "part",
+      "group": "Bony landmarks",
+      "layer": "bone",
+      "color": "#bfc9ca",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "twelfth rib",
+        "renal angle",
+        "costovertebral angle",
+        "erector spinae",
+        "renal angle tenderness",
+        "loin incision",
+        "below the twelfth rib",
+        "pleura"
+      ],
+      "narration": "Crosses the back of both kidneys and is the landmark for everything done from behind. The renal angle — between the lower border of the twelfth rib and the lateral border of erector spinae — is where you press for tenderness in pyelonephritis and where the kidney comes closest to the surface. Every posterior approach stays BELOW this rib, because the pleural recess dips behind its medial half and a needle passed above it will find the pleura before it finds the kidney."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "First lumbar vertebra — the transpyloric plane",
+      "role": "context",
+      "group": "Bony landmarks",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "first lumbar vertebra",
+        "L1",
+        "transpyloric plane",
+        "renal hilum",
+        "left renal hilum",
+        "vertebral levels",
+        "T12",
+        "L3"
+      ],
+      "narration": "The reference level for the whole region. The hilum of the left kidney lies on the transpyloric plane at the lower border of L1; the right hilum is a little below it. The kidneys as a pair span T12 to L3, moving down by half a vertebra on the right."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Urinary bladder — where it all ends up",
+      "role": "context",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "ureteric orifice",
+        "trigone",
+        "vesicoureteric junction",
+        "urine"
+      ],
+      "narration": "The end of the line. Urine formed in the cortex and medulla passes calyx to pelvis to ureter and reaches the bladder at the vesicoureteric junction — the third and narrowest constriction, and the commonest place for a stone to arrest."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where they are, and why they are not level",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Posterior wall muscles"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Bony landmarks"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Kidneys",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "right_kidney",
+          "kind": "pushes it half a vertebra lower"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spleen",
+          "to": "left_kidney",
+          "kind": "anterior relation"
+        }
+      ],
+      "narration": "Both kidneys lie behind the peritoneum on the posterior abdominal wall, one on each side of the vertebral column, tilted so their hila face medially and forwards. They are not level. The left spans about T12 to L2, the right about L1 to L3 — half a vertebral body lower — because the right lobe of the liver takes the space above it. Fix the level by the transpyloric plane at the lower border of L1: the left hilum sits on it. In front, the right kidney is covered by the liver, the second part of the duodenum over its hilum, and the right colic flexure; the left by the stomach, spleen, pancreas, left colic flexure and jejunum. Notice what that means clinically. An enlarged kidney is ballotable, you can get above it, and there is a band of colonic resonance over it; an enlarged spleen moves towards the right iliac fossa, has a notch, is dull to percussion, is not ballotable, and you cannot get above it. Those two signs, taken together, separate the two swellings in the left hypochondrium."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The bed behind, and the ribs across",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Posterior wall muscles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rib12",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rib12",
+          "to": "right_kidney",
+          "kind": "crosses the upper pole"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rib11",
+          "to": "left_kidney",
+          "kind": "crosses the left kidney only"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "Kidneys",
+          "kind": "roofs the bed and moves them on breathing"
+        }
+      ],
+      "narration": "Turn the body round and the kidney lies on a muscular bed of four structures. From medial to lateral, psoas major, quadratus lumborum and the aponeurosis of transversus abdominis; above all three, the diaphragm. Three nerves run downwards and laterally across quadratus lumborum immediately behind the kidney — subcostal, iliohypogastric and ilioinguinal — and they are what a loin incision must respect. The ribs are the exam point. The twelfth rib crosses the back of BOTH kidneys; the eleventh crosses the LEFT kidney only, because the left is higher. Behind the medial half of the twelfth rib the pleura dips down as the costodiaphragmatic recess, so any posterior approach — a percutaneous nephrolithotomy tract, a renal biopsy, a loin incision — is made below the twelfth rib. Go above it and you enter the pleura before the kidney and produce a pneumothorax. The renal angle itself, between the lower border of the twelfth rib and the lateral border of erector spinae, is where the kidney is nearest the skin: that is where you tap for tenderness in pyelonephritis, and where the needle goes in."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Coverings, then cortex to pelvis",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Kidneys"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Renal vessels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_kidney",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut a kidney in the coronal plane and read it from outside in. Four coverings first, and their order is a standing question: the fibrous renal capsule stripped straight off the surface, then perirenal fat, then renal fascia — the fascia of Gerota — and outside that pararenal fat, heaviest behind. The fascia is open inferiorly, which is why blood or pus from the kidney can track down towards the pelvis, and why a kidney that loses its fat sags: renal ptosis, a mobile kidney with intermittent obstruction. Inside the capsule, the outer third is cortex, granular, and it dips inwards between the pyramids as the renal columns of Bertin. The inner two thirds are medulla, arranged as eight to eighteen striated pyramids whose bases face the cortex and whose apices — the papillae — point into the sinus. Each papilla is pierced by collecting ducts and projects into a minor calyx. Two or three minor calyces join to form a major calyx, two or three major calyces form the renal pelvis, and the pelvis narrows at the pelviureteric junction into the ureter. A nephron straddles the two zones — corpuscle and convoluted tubules in the cortex, the loop of Henle running down into the medulla — which is why the medulla can concentrate urine, and why the outer medulla — where the straight proximal tubule and the thick ascending limb do the most work on the least oxygen — is the zone that dies first in ischaemic acute tubular necrosis."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "In at the hilum, out at the hilum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Renal vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Great vessels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:renal-blood",
+          "path": [
+            "aorta",
+            "right_renal_artery",
+            "right_kidney",
+            "right_renal_vein",
+            "ivc"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_renal_vein",
+            "left_renal_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "left_renal_vein",
+          "kind": "compresses it against the aorta"
+        }
+      ],
+      "narration": "Three things pass through the hilum and their order front to back is fixed: vein, artery, ureter — V, A, U. Say it as you look at the picture and you will not lose the mark. The renal arteries leave the aorta at L1 to L2, just below the superior mesenteric artery. Because the aorta lies left of the midline the right artery is long and passes behind the inferior vena cava, while the left is short. The veins are the mirror: the right is short and joins the cava directly, the left is three times longer, crossing in front of the aorta and behind the superior mesenteric artery. Two consequences follow from that crossing and both are examinable. First, the left renal vein is squeezed in the angle between artery and aorta — the nutcracker — and because it also receives the left gonadal and left suprarenal veins, that compression, or a tumour thrombus in it, shows up as a left varicocele that does not empty on lying down. Second, the left kidney is the one taken for transplantation, because a long vein is easier to sew. Inside the kidney the artery divides into five segmental branches which are true end arteries with no anastomoses between them, so each segment can be resected — and each can be infarcted — on its own."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "From glomerulus to bladder",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Renal vessels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:urine",
+          "path": [
+            "right_kidney",
+            "right_ureter",
+            "bladder"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Outflow",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Urine formation in one line of anatomy. About a fifth of the cardiac output — over a litre a minute — enters by the renal arteries and reaches roughly a million glomeruli in the cortex of each kidney. Filtration there produces about 180 litres a day of filtrate; the tubules reabsorb ninety-nine per cent of it, so one to two litres leaves as urine. The convoluted tubules sit in the cortex, the loops of Henle and the collecting ducts run down through the pyramids, and the ducts open on the papilla into a minor calyx. From there the route is fixed and worth reciting: minor calyx, major calyx, renal pelvis, pelviureteric junction, ureter, vesicoureteric junction, bladder. Smooth muscle in the pelvis and ureter drives peristaltic waves — urine does not simply run downhill — and it is that peristalsis working against an obstruction which produces the severe colicky pain of a stone."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "Reading the clinic off the anatomy",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Kidneys"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rib12",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_kidney",
+          "to": "right_ureter",
+          "kind": "pelviureteric junction — first constriction"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_renal_vein",
+          "to": "ivc",
+          "kind": "route of tumour thrombus"
+        }
+      ],
+      "narration": "Five presentations, all readable off what you have just seen. Renal colic: a stone lodges at the pelviureteric junction, at the pelvic brim, or at the vesicoureteric junction, and the pain follows the nerve supply of the kidney and ureter from T10 to L1 — loin to groin, radiating to the scrotum or labium, colicky, with the patient rolling about rather than lying still. Pyelonephritis: constant loin pain with fever, and tenderness elicited in the renal angle below the twelfth rib. Obstruction: back-pressure dilates the pelvis and calyces into a hydronephrosis, which is why an obstructed kidney is a surgical emergency and an unobstructed one is not. Trauma and access: the kidney is retroperitoneal, so bleeding is often contained by renal fascia, and every posterior approach stays below the twelfth rib to keep out of the pleura. And tumour: a renal cell carcinoma presents late with the triad of loin pain, a mass and haematuria, spreads along the renal vein into the cava, and on the left announces itself as a varicocele that will not empty. Two developmental variants complete the picture — the horseshoe kidney fused at its lower poles and caught under the inferior mesenteric artery during its ascent, and the pelvic kidney that never ascended at all, which is felt as a pelvic mass and injured in pelvic surgery."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The kidney is one solid model. The catalog holds no renal cortex, medulla, pyramid, papilla, column of Bertin, minor calyx, major calyx or renal pelvis, so beat three teaches the internal architecture entirely by narration over a CROSS_SECTION cut of the whole organ. A student can see that the organ has an inside but cannot click a pyramid or a calyx. Every internal name is carried in match.terms and in the kidney structures' own terms[], so a note that says 'column of Bertin' still opens this scene at the right subject. An internal-structure model, or a companion diagram-mode scene of the coronal section, is the single highest-value addition for this topic.",
+    "There is no renal capsule, no perirenal fat, no renal fascia and no pararenal fat. The four coverings are one of the two things most reliably asked about the kidney and none of them has a mesh. They are narrated in beat three and PEEL_LAYER is authored there so that the beat becomes real the day layered models exist; today the op degrades to hiding the organ layer, which is an honest approximation of stripping the coverings but not a demonstration of them.",
+    "The renal pelvis has no separate model, so the pelviureteric junction is shown as the point where the ureter model begins rather than as a named narrowing. Hydronephrosis therefore cannot be shown as a dilated pelvis, only described.",
+    "No landmark anchors were authored. Anchors in this corpus are placed by measurement on the actual geometry, and these meshes are not in the local decimated set, so the hilum, the upper and lower poles, the renal angle and the three ureteric constrictions could not be positioned honestly. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect. Ingesting FMA7204, FMA7205 and FMA15571 locally would yield at least six anchors and would make beats two, three and six clickable rather than narrated.",
+    "The peritoneum is absent, as it is throughout this corpus, so 'retroperitoneal' is asserted rather than shown. Morison's pouch is described against the liver and the right kidney, both of which exist.",
+    "The five segmental arteries are not in the catalog; only the main renal artery trunk on each side is. The end-artery principle and the avascular plane of Brodel are therefore narrated against a single vessel.",
+    "The gonadal veins are not in the catalog, so the left varicocele story is told through the left renal vein alone. This weakens beat four's strongest clinical hook, since the vein whose obstruction the student must picture cannot be drawn.",
+    "This scene does not claim to cover 'Ureters', 'Suprarenal (adrenal) gland' or 'Abdominal aorta & IVC' even though all of them appear in it. The ureters are here as the kidney's outflow, not as a course with three constrictions and a segmental blood supply; the suprarenal glands are here as a relation; the aorta and cava are here only to fix where the renal vessels begin and end. All three remain on the worklist as separate curriculum entries.",
+    "Ribs are single-sided models in the catalog. The eleventh rib shown is the right eleventh rib, used to teach a left-sided relation, because it is the same bone mirrored and the teaching point is the level rather than the side. The label and narration say plainly that it is the left kidney that the eleventh rib crosses, so nothing is misrepresented, but a student rotating the scene will see the rib on the wrong side."
+  ]
+}

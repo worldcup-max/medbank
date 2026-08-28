@@ -1,0 +1,696 @@
+{
+  "schema": 2,
+  "id": "embryology__cardiovascular-development__fetal-circulation",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Cardiovascular Development",
+  "structure": "Fetal circulation",
+  "covers": [
+    "Fetal circulation"
+  ],
+  "learning_goal": "Trace one red cell from the placenta back to the placenta, name the three shunts and say what each one bypasses and why, explain why the best-oxygenated blood reaches the brain and the heart, describe what the first breath and the clamped cord change about pressure and resistance, list what each fetal vessel becomes in the adult, and use all of it to explain patent ductus arteriosus, duct-dependent lesions and persistent fetal circulation.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "fetal circulation",
+      "circulation before birth",
+      "changes at birth",
+      "neonatal circulation",
+      "cardiovascular development",
+      "placenta",
+      "shunts",
+      "transitional circulation",
+      "congenital heart disease"
+    ],
+    "terms": [
+      "fetal circulation",
+      "placenta",
+      "umbilical vein",
+      "umbilical arteries",
+      "ductus venosus",
+      "liver bypass",
+      "inferior vena cava",
+      "superior vena cava",
+      "right atrium",
+      "crista dividens",
+      "streaming",
+      "foramen ovale",
+      "septum primum",
+      "septum secundum",
+      "left atrium",
+      "left ventricle",
+      "ascending aorta",
+      "coronary arteries",
+      "carotid arteries",
+      "brain sparing",
+      "right ventricle",
+      "pulmonary trunk",
+      "ductus arteriosus",
+      "descending aorta",
+      "high pulmonary vascular resistance",
+      "low systemic vascular resistance",
+      "placental resistance",
+      "oxygen saturation",
+      "80 percent",
+      "65 percent",
+      "first breath",
+      "lung expansion",
+      "cord clamping",
+      "functional closure",
+      "anatomical closure",
+      "prostaglandin E2",
+      "bradykinin",
+      "indomethacin",
+      "ibuprofen",
+      "prostaglandin E1",
+      "alprostadil",
+      "ligamentum teres hepatis",
+      "round ligament of the liver",
+      "ligamentum venosum",
+      "fossa ovalis",
+      "ligamentum arteriosum",
+      "medial umbilical ligaments",
+      "superior vesical arteries",
+      "patent ductus arteriosus",
+      "PDA",
+      "machinery murmur",
+      "continuous murmur",
+      "congenital rubella",
+      "prematurity",
+      "duct dependent circulation",
+      "coarctation",
+      "transposition of the great arteries",
+      "hypoplastic left heart",
+      "pulmonary atresia",
+      "persistent fetal circulation",
+      "persistent pulmonary hypertension of the newborn",
+      "meconium aspiration",
+      "recurrent laryngeal nerve"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "the_problem",
+      "label": "The problem a fetus has to solve",
+      "role": "context",
+      "group": "The problem",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "gas exchange at the placenta",
+        "lungs are not used",
+        "fluid filled lungs",
+        "high pulmonary vascular resistance",
+        "low systemic vascular resistance",
+        "placenta is a low resistance bed",
+        "liver",
+        "three shunts"
+      ],
+      "narration": "The fetus breathes through the placenta, not the lungs. The lungs are full of fluid and their vessels are clamped tight, so pulmonary resistance is very high, while the placenta is a huge low-resistance bed that keeps systemic resistance low. Blood therefore wants to go anywhere except the lungs. Three shunts are built to let it: one past the liver, one past the right side of the heart, and one past the lungs. Every fetal peculiarity follows from those two resistances and those three shunts."
+    },
+    {
+      "key": "umbilical_vein",
+      "label": "Umbilical vein — the only truly oxygenated vessel",
+      "role": "part",
+      "group": "From the placenta",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "umbilical vein",
+        "single umbilical vein",
+        "left umbilical vein",
+        "80 percent saturated",
+        "oxygenated blood",
+        "falciform ligament",
+        "ligamentum teres hepatis",
+        "round ligament of the liver",
+        "two arteries one vein"
+      ],
+      "narration": "One umbilical vein leaves the placenta carrying blood at about eighty percent saturation — the highest anywhere in the fetus, and lower than any adult arterial value. Note the reversal that catches students out: in the cord the vein carries the oxygenated blood and the two arteries carry the deoxygenated. It enters the abdomen at the umbilicus and runs up in the free edge of the falciform ligament, which is exactly where you will find its adult remnant."
+    },
+    {
+      "key": "ductus_venosus",
+      "label": "Ductus venosus — shunt one, past the liver",
+      "role": "part",
+      "group": "From the placenta",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "terms": [
+        "ductus venosus",
+        "bypasses the liver",
+        "portal sinus",
+        "left portal vein",
+        "inferior vena cava",
+        "half the flow",
+        "ligamentum venosum",
+        "sphincter"
+      ],
+      "narration": "Most of that blood does not enter the hepatic sinusoids. The ductus venosus carries roughly half of it straight from the umbilical vein into the inferior vena cava, so the liver — an organ the fetus does not need for detoxification while the mother's liver is available — does not slow down the delivery of oxygen. The rest perfuses the liver itself and rejoins by the hepatic veins."
+    },
+    {
+      "key": "ivc_stream",
+      "label": "Inferior vena cava — the well-oxygenated stream",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "vessel",
+      "color": "#d98880",
+      "terms": [
+        "inferior vena cava",
+        "mixing",
+        "70 percent saturated",
+        "right atrium",
+        "hepatic veins",
+        "streaming",
+        "laminar"
+      ],
+      "narration": "The shunted blood mixes with venous return from the lower body and reaches the right atrium at about seventy percent saturation. It arrives as a stream rather than a swirl — this is the single most important idea in the whole topic, because the fetus has no way to separate oxygenated from deoxygenated blood except by keeping the two streams apart as they cross the right atrium."
+    },
+    {
+      "key": "crista_dividens",
+      "label": "Crista dividens — the ledge that aims the stream",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "crista dividens",
+        "lower edge of septum secundum",
+        "streaming",
+        "preferential flow",
+        "foramen ovale",
+        "right atrium",
+        "eustachian valve"
+      ],
+      "narration": "The free lower edge of the septum secundum overhangs the mouth of the inferior vena cava as a ledge called the crista dividens. It splits the incoming stream, sending most of it straight through the foramen ovale into the left atrium and letting the remainder turn down into the right ventricle. The fetus does not mix and then divide; it aims."
+    },
+    {
+      "key": "foramen_ovale",
+      "label": "Foramen ovale — shunt two, past the lungs and the right heart",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "foramen ovale",
+        "septum primum",
+        "septum secundum",
+        "flap valve",
+        "right to left shunt",
+        "right atrial pressure exceeds left",
+        "left atrium",
+        "fossa ovalis"
+      ],
+      "narration": "Because right atrial pressure exceeds left, the thin septum primum is pushed aside and blood crosses right to left through the foramen ovale. The best-oxygenated blood in the body therefore arrives in the left atrium without ever passing through the lungs or the right ventricle."
+    },
+    {
+      "key": "brain_first",
+      "label": "Left ventricle to the head — the best blood goes to the brain",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "terms": [
+        "left atrium",
+        "left ventricle",
+        "ascending aorta",
+        "coronary arteries",
+        "brachiocephalic",
+        "carotid arteries",
+        "head and upper limbs",
+        "65 percent",
+        "brain sparing"
+      ],
+      "narration": "From the left atrium the blood passes to the left ventricle and out into the ascending aorta, whose first branches are the coronaries and then the vessels to the head and upper limbs. So the two organs that can least tolerate hypoxia, the brain and the heart itself, are supplied first and with the best available blood. Understand the streaming and this arrangement is not a coincidence but the point of the whole design."
+    },
+    {
+      "key": "svc_stream",
+      "label": "Superior vena cava — the poorly oxygenated stream",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "terms": [
+        "superior vena cava",
+        "deoxygenated",
+        "returning from the head",
+        "right atrium",
+        "right ventricle",
+        "tricuspid valve",
+        "kept separate"
+      ],
+      "narration": "Blood returning from the head and upper limbs enters the right atrium from above, is directed downwards across the tricuspid valve into the right ventricle, and barely mixes with the inferior caval stream at all. Two streams, two destinations, in the same chamber."
+    },
+    {
+      "key": "ductus_arteriosus",
+      "label": "Ductus arteriosus — shunt three, past the lungs",
+      "role": "part",
+      "group": "Through the heart",
+      "layer": "vessel",
+      "color": "#5dade2",
+      "terms": [
+        "ductus arteriosus",
+        "pulmonary trunk",
+        "descending aorta",
+        "right to left shunt",
+        "high pulmonary vascular resistance",
+        "distal to the left subclavian",
+        "prostaglandin E2",
+        "low oxygen tension",
+        "ligamentum arteriosum",
+        "recurrent laryngeal nerve"
+      ],
+      "narration": "The right ventricle pumps into the pulmonary trunk, but pulmonary resistance is so high that only a small fraction reaches the lungs — enough to grow them, no more. The rest crosses the ductus arteriosus into the descending aorta, entering below the origin of the left subclavian artery, which is why the lower body receives blood that is less saturated than the head. The duct is held open by low oxygen tension and by prostaglandin E2 from the placenta, and both of those facts become treatment later."
+    },
+    {
+      "key": "umbilical_arteries",
+      "label": "Umbilical arteries — back to the placenta",
+      "role": "part",
+      "group": "Back to the placenta",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "terms": [
+        "umbilical arteries",
+        "internal iliac artery",
+        "two umbilical arteries",
+        "single umbilical artery",
+        "58 percent",
+        "medial umbilical ligaments",
+        "superior vesical arteries",
+        "renal anomalies"
+      ],
+      "narration": "Two umbilical arteries branch from the internal iliac arteries, run either side of the bladder and back out along the cord to the placenta, carrying blood at roughly fifty-five to sixty percent saturation for reoxygenation. A cord with only one artery instead of two is worth reporting at delivery, because it carries a raised rate of renal and other anomalies."
+    },
+    {
+      "key": "first_breath",
+      "label": "The first breath — resistance falls in the lungs",
+      "role": "part",
+      "group": "What birth changes",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "first breath",
+        "lung expansion",
+        "alveolar oxygen",
+        "pulmonary vasodilatation",
+        "pulmonary vascular resistance falls",
+        "pulmonary blood flow rises",
+        "left atrial pressure rises",
+        "pulmonary venous return"
+      ],
+      "narration": "The lungs inflate, the fluid is cleared and alveolar oxygen dilates the pulmonary vessels. Pulmonary vascular resistance collapses, pulmonary blood flow increases many times over, and all that blood returns to the left atrium, whose pressure now rises."
+    },
+    {
+      "key": "cord_clamped",
+      "label": "The cord is clamped — resistance rises in the body",
+      "role": "part",
+      "group": "What birth changes",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "cord clamping",
+        "placenta removed",
+        "systemic vascular resistance rises",
+        "right atrial pressure falls",
+        "umbilical venous return stops",
+        "ductus venosus closes",
+        "pressure reversal"
+      ],
+      "narration": "Clamping the cord removes the largest low-resistance bed in the circulation, so systemic resistance jumps. At the same time the umbilical venous return stops, so right atrial pressure falls. Two changes, one result: left atrial pressure now exceeds right for the first time, and it stays that way for life."
+    },
+    {
+      "key": "shunts_close",
+      "label": "The three shunts close, in their own ways",
+      "role": "part",
+      "group": "What birth changes",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "terms": [
+        "functional closure",
+        "anatomical closure",
+        "foramen ovale closes",
+        "flap valve pressed shut",
+        "ductus arteriosus closes",
+        "rising oxygen",
+        "falling prostaglandin E2",
+        "bradykinin",
+        "10 to 15 hours",
+        "2 to 3 weeks",
+        "ductus venosus closes"
+      ],
+      "narration": "The foramen ovale shuts because the pressures reversed and the septum primum is pressed against the septum secundum — no tissue has to grow for that, only for permanent fusion over the following months. The ductus arteriosus constricts within about ten to fifteen hours as oxygen tension rises, placental prostaglandin E2 disappears and bradykinin acts on its muscular wall, and it is anatomically sealed within two to three weeks. The ductus venosus closes once umbilical flow stops. Distinguish functional closure, which happens in hours, from anatomical closure, which takes weeks — that distinction is the whole reason a duct can be reopened with a drug."
+    },
+    {
+      "key": "remnants",
+      "label": "What each vessel becomes — the list to memorise",
+      "role": "part",
+      "group": "What birth changes",
+      "layer": "vessel",
+      "color": "#af601a",
+      "terms": [
+        "ligamentum teres hepatis",
+        "round ligament of the liver",
+        "falciform ligament",
+        "ligamentum venosum",
+        "fossa ovalis",
+        "limbus fossae ovalis",
+        "ligamentum arteriosum",
+        "medial umbilical ligaments",
+        "superior vesical arteries",
+        "adult remnants"
+      ],
+      "narration": "Five pairs to know cold. Umbilical vein becomes the ligamentum teres hepatis in the free edge of the falciform ligament. Ductus venosus becomes the ligamentum venosum. Foramen ovale becomes the fossa ovalis, with the edge of the septum secundum as its limbus. Ductus arteriosus becomes the ligamentum arteriosum, and the left recurrent laryngeal nerve stays hooked under it for life. The distal umbilical arteries become the medial umbilical ligaments while their proximal parts stay open as the superior vesical arteries — the only fetal vessel on this list that keeps a job."
+    },
+    {
+      "key": "pda",
+      "label": "Patent ductus arteriosus — and the shunt that now runs the other way",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "terms": [
+        "patent ductus arteriosus",
+        "PDA",
+        "prematurity",
+        "congenital rubella",
+        "high altitude",
+        "continuous murmur",
+        "machinery murmur",
+        "left subclavicular",
+        "bounding pulses",
+        "wide pulse pressure",
+        "left to right shunt",
+        "indomethacin",
+        "ibuprofen",
+        "Eisenmenger"
+      ],
+      "narration": "If the duct stays open after birth the pressure gradient has reversed, so flow now runs from aorta to pulmonary trunk — left to right, through both systole and diastole. That is the continuous machinery murmur below the left clavicle, with bounding pulses and a wide pulse pressure. It is common in premature babies and classically associated with congenital rubella. Because prostaglandin holds the duct open, a prostaglandin synthesis inhibitor such as indomethacin or ibuprofen closes it."
+    },
+    {
+      "key": "duct_dependent",
+      "label": "Duct-dependent lesions — when you must keep it open",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "vessel",
+      "color": "#f5b041",
+      "terms": [
+        "duct dependent circulation",
+        "prostaglandin E1",
+        "alprostadil",
+        "keep the duct open",
+        "transposition of the great arteries",
+        "pulmonary atresia",
+        "critical coarctation",
+        "hypoplastic left heart",
+        "collapse at day 2",
+        "cyanosis",
+        "absent femoral pulses"
+      ],
+      "narration": "Reverse the logic and you have the most useful fact in neonatal cardiology. In some malformations the only route between the two circulations is the duct itself — transposition, pulmonary atresia, critical coarctation, hypoplastic left heart. Those babies are stable while the duct is open and collapse in the first days of life as it closes. Prostaglandin E1 keeps it open and buys time for surgery. A newborn who is well at birth and becomes blue or shocked on day two or three, especially with absent femoral pulses, is a duct closing on a lesion that needed it."
+    },
+    {
+      "key": "persistent_fetal",
+      "label": "Persistent fetal circulation",
+      "role": "part",
+      "group": "When the change fails",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "persistent fetal circulation",
+        "persistent pulmonary hypertension of the newborn",
+        "PPHN",
+        "pulmonary vascular resistance stays high",
+        "meconium aspiration",
+        "birth asphyxia",
+        "sepsis",
+        "congenital diaphragmatic hernia",
+        "right to left shunt persists",
+        "differential cyanosis",
+        "hypoxia",
+        "acidosis",
+        "vicious cycle"
+      ],
+      "narration": "The transition can also fail on the lung side. If pulmonary vascular resistance does not fall — after meconium aspiration, birth asphyxia, sepsis or with hypoplastic lungs — the foramen ovale and duct keep shunting right to left and the baby stays hypoxic. Hypoxia and acidosis constrict the pulmonary vessels further, so the failure feeds itself. This is why the transition is described as a circulation that must be actively completed rather than a switch that flips at delivery."
+    },
+    {
+      "key": "exam_frame",
+      "label": "How to answer any fetal circulation question",
+      "role": "part",
+      "group": "How to answer",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "trace the blood",
+        "three shunts",
+        "two resistances",
+        "pressure gradient",
+        "before and after birth",
+        "remnants",
+        "saturation values"
+      ],
+      "narration": "Four moves, in order. One: trace a red cell from placenta to placenta and name every vessel and shunt out loud — most marks are here. Two: at each shunt say what is being bypassed and which pressure difference drives the flow. Three: at birth, apply the two changes, lungs open and cord clamped, and let every closure follow from them. Four: name the remnant. Answer in that order and you never have to memorise the diagram as a picture."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "Two resistances decide everything",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The problem"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "the_problem",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "the_problem",
+          "to": "ductus_venosus",
+          "kind": "an organ the fetus does not yet need is bypassed by"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "the_problem",
+          "to": "foramen_ovale",
+          "kind": "high pulmonary resistance means the right heart is bypassed through"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "the_problem",
+          "to": "ductus_arteriosus",
+          "kind": "whatever still enters the right ventricle bypasses the lungs through"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Start with two numbers rather than a diagram. Pulmonary vascular resistance is very high because the lungs are fluid-filled and their vessels are constricted. Systemic vascular resistance is very low because the placenta is an enormous low-resistance bed. Blood goes where resistance is least, so it avoids the lungs and heads for the placenta, and three shunts exist to let it do that — one past the liver, one past the right heart, one past the lungs. Learn the two resistances and the three shunts stop being a list to memorise."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Follow one red cell from the placenta",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:blood",
+          "path": [
+            "umbilical_vein",
+            "ductus_venosus",
+            "ivc_stream",
+            "crista_dividens",
+            "foramen_ovale",
+            "brain_first",
+            "svc_stream",
+            "ductus_arteriosus",
+            "umbilical_arteries"
+          ],
+          "duration": 20
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Now walk the whole route once, out loud. Umbilical vein at eighty percent, the highest in the body. Ductus venosus past the liver into the inferior vena cava. Into the right atrium at about seventy percent, aimed by the crista dividens through the foramen ovale into the left atrium. Left ventricle, ascending aorta, coronaries and carotids — the brain and the heart get the best of it. Meanwhile the superior caval stream crosses into the right ventricle, meets a shut pulmonary bed and crosses the ductus arteriosus into the descending aorta below the left subclavian. Then out along the two umbilical arteries to the placenta to start again. Say that route until it is automatic; most of the marks in this topic are in it."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Streaming — why the fetus is not just mixed blood",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Through the heart"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crista_dividens",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ivc_stream",
+            "svc_stream"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "crista_dividens",
+          "to": "brain_first",
+          "kind": "aiming the caval stream through the foramen ovale is what delivers the best blood to"
+        }
+      ],
+      "narration": "Cut across the right atrium and look at the two streams. The inferior caval stream is well oxygenated and the superior caval stream is not, and they cross the same chamber without properly mixing. The crista dividens, the free lower edge of the septum secundum, splits the inferior stream and sends most of it through the foramen ovale. That is the mechanism behind the exam favourite: the fetal brain and heart receive the most saturated blood, and the lower body receives the least, because the ductus arteriosus empties into the aorta beyond the head and arm vessels."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Two events at birth, every closure follows",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What birth changes"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "first_breath",
+            "cord_clamped"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "first_breath",
+          "to": "shunts_close",
+          "kind": "rising pulmonary flow raises left atrial pressure, which drives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cord_clamped",
+          "to": "shunts_close",
+          "kind": "losing the placenta raises systemic resistance and lowers right atrial pressure, which drives"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:transition",
+          "path": [
+            "first_breath",
+            "cord_clamped",
+            "shunts_close",
+            "remnants"
+          ],
+          "duration": 12
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Back to the placenta"
+        }
+      ],
+      "narration": "Two events, and you can derive the rest. The lungs open, so pulmonary resistance falls, pulmonary flow rises and left atrial pressure goes up. The cord is clamped, so systemic resistance rises and right atrial pressure comes down. Left now exceeds right, the flap valve is pressed shut and the foramen ovale closes functionally in minutes. Rising oxygen and the loss of placental prostaglandin constrict the ductus arteriosus over ten to fifteen hours. Umbilical flow stops, so the ductus venosus closes. Then name what each becomes: ligamentum teres, ligamentum venosum, fossa ovalis, ligamentum arteriosum, medial umbilical ligaments — and remember the superior vesical arteries stay open and keep working."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "When the transition fails — in both directions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When the change fails"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pda",
+            "duct_dependent"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ductus_arteriosus",
+          "to": "pda",
+          "kind": "the same vessel, after the pressures have reversed, shunts the other way as"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "first_breath",
+          "to": "persistent_fetal",
+          "kind": "if pulmonary resistance never falls, the fetal pattern persists as"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "vessel",
+          "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "exam_frame",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "The duct can be wrong in either direction. Left open when it should have shut, the reversed gradient makes it shunt left to right — a continuous machinery murmur, bounding pulses, and a prostaglandin inhibitor to close it. But in a duct-dependent lesion it is the only connection the baby has, and closing it causes collapse on day two or three; there prostaglandin E1 keeps it open until surgery. The third failure is on the lung side: if pulmonary resistance never falls, the shunts keep running right to left and the newborn stays blue, with hypoxia and acidosis making the constriction worse. Finish every question the same way — trace the blood, name the shunt and the gradient, apply the two birth events, then name the remnant."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram only — no 3d_anatomy is offered for this structure and none was invented, so deferred_modes carries diagram alone. That is the right call: the teaching object here is a circuit with saturations and pressure gradients, and a labelled flow diagram carries it better than geometry would.",
+    "Status is 'planned'. Eighteen regions, five beats, ops and narration complete, but no artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a whole-fetus circuit diagram with placenta, cord, liver, heart, lungs and lower body, drawn once and reused unchanged in every beat so the student learns one picture; a colour-graded version of that same circuit where the shade tracks saturation continuously from the umbilical vein down to the umbilical arteries rather than switching between two flat colours; a right atrial detail showing the crista dividens splitting the inferior caval stream with the superior caval stream crossing it; a before-and-after pair of the same circuit at one minute before and one hour after birth, with the three shunts drawn open and then closed; and a remnants panel using the identical layout with adult names substituted, so the map does not change when the labels do.",
+    "The two-colour convention of most textbooks is actively misleading here and must not be used. Nothing in the fetus is arterial by adult standards — the best blood in the body is about eighty percent saturated — so a red-and-blue drawing teaches a separation that does not exist. Use a graded scale with the numbers printed on the vessel: eighty at the umbilical vein, about seventy in the inferior vena cava, about sixty-five in the ascending aorta, lower in the descending aorta, and about fifty-eight in the umbilical arteries.",
+    "Saturation values are the standard teaching approximations and vary between texts and between species from which they were originally measured. They are given so the student can rank the vessels correctly, which is what is examined; they are not a physiological dataset.",
+    "Beat 2 traces concept:blood along the full circuit and beat 4 traces concept:transition. Neither subject is a drawn region — the first is a red cell, the second is the sequence of events over the first hours of life.",
+    "Beat 5 authors PEEL_LAYER outward on the vessel layer to strip the great vessels off and leave the duct and its two connections visible. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the point of the beat is one vessel behaving in three different ways.",
+    "Beat 4 uses HIDE_STRUCTURE on the 'Back to the placenta' group at the moment the cord is clamped. Removing the placental limb from the picture is the teaching move: the pressure changes are much easier to accept when the low-resistance bed visibly disappears.",
+    "'Septation of heart' is NOT claimed in covers[]. The foramen ovale is used here as a working valve, and the overlap of septum primum and secundum is stated only as the reason flow is one-way. How the two septa are built, the ostium primum and secundum sequence, and the atrial septal defects belong to that entry.",
+    "'Cardiac looping' and 'Heart tube formation' are NOT claimed. Nothing here teaches how the chambers came to be where they are.",
+    "Aortic arch artery development is not covered. The ductus arteriosus is taught as a functioning shunt and as the ligamentum arteriosum, but its origin from the left sixth arch artery, and the reason the left recurrent laryngeal nerve is hooked under it while the right is not, belong with arch remodelling — which has no curriculum entry in this topic and is a real corpus gap worth raising.",
+    "Placental structure and function are out of scope. The placenta appears only as a low-resistance bed and a source of prostaglandin E2; villous structure, the maternal-fetal barrier and placental gas exchange belong to the placenta entries.",
+    "The clinical material is pitched at what an examination tests and a house officer acts on: the murmur, the classic association, and the one drug decision. Doses, ventilation strategies, inhaled nitric oxide and surgical timing are neonatology and are deliberately absent."
+  ]
+}

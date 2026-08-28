@@ -1,0 +1,609 @@
+{
+  "schema": 2,
+  "id": "gross__arm__humerus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Arm (Brachium)",
+  "structure": "Humerus",
+  "covers": [
+    "Humerus"
+  ],
+  "learning_goal": "Point to every named part of the humerus on the bone, and say which nerve is at risk at each of the four places it commonly breaks.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "arm",
+      "brachium",
+      "humerus",
+      "upper limb",
+      "shoulder",
+      "elbow",
+      "long bones",
+      "osteology of upper limb"
+    ],
+    "terms": [
+      "humerus",
+      "head of humerus",
+      "anatomical neck",
+      "surgical neck",
+      "greater tubercle",
+      "lesser tubercle",
+      "intertubercular groove",
+      "bicipital groove",
+      "deltoid tuberosity",
+      "radial groove",
+      "spiral groove",
+      "medial epicondyle",
+      "lateral epicondyle",
+      "trochlea",
+      "capitulum",
+      "axillary nerve",
+      "radial nerve",
+      "ulnar nerve",
+      "supracondylar fracture"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "part",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "arm bone",
+        "shaft of humerus",
+        "body of humerus"
+      ],
+      "narration": "One bone from shoulder to elbow. A rounded head above, a triangular shaft, and a wide flattened end below."
+    },
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "scapula",
+        "glenoid cavity",
+        "shoulder joint"
+      ],
+      "narration": "Above, the head sits in the glenoid cavity of the scapula — a shallow socket, which is why the shoulder is mobile and dislocates."
+    },
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "head of radius",
+        "radiocapitellar joint"
+      ],
+      "narration": "Below, the head of the radius spins against the capitulum."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "trochlear notch",
+        "olecranon",
+        "elbow joint"
+      ],
+      "narration": "The trochlear notch of the ulna grips the trochlea — a hinge, so the elbow only flexes and extends."
+    },
+    {
+      "key": "head_of_humerus",
+      "label": "Head of humerus",
+      "role": "part",
+      "group": "Proximal end",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.939,
+          0.65,
+          0.877
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the scapula, within the proximal 30% — the glenohumeral joint (gap 1.00 mm); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "head of humerus",
+        "anatomical neck",
+        "glenohumeral joint"
+      ],
+      "narration": "Faces up, back and medially into the glenoid. The narrow line round its rim is the anatomical neck."
+    },
+    {
+      "key": "greater_tubercle",
+      "label": "Greater tubercle",
+      "role": "part",
+      "group": "Proximal end",
+      "render": "anchor",
+      "color": "#ffc247",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.515,
+          0.396,
+          0.921
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most lateral point of the proximal 12% of the bone, measured on the mesh (14.1 mm lateral of the shaft axis); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "greater tubercle",
+        "greater tuberosity",
+        "supraspinatus",
+        "infraspinatus",
+        "teres minor"
+      ],
+      "narration": "The lateral bump. Three cuff muscles land here: supraspinatus, infraspinatus, teres minor."
+    },
+    {
+      "key": "lesser_tubercle",
+      "label": "Lesser tubercle",
+      "role": "part",
+      "group": "Proximal end",
+      "render": "anchor",
+      "color": "#ffb020",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.816,
+          0.158,
+          0.903
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and subscapularis (gap 0.09 mm); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "lesser tubercle",
+        "lesser tuberosity",
+        "subscapularis"
+      ],
+      "narration": "The smaller bump in front. Subscapularis is the only muscle that reaches it."
+    },
+    {
+      "key": "intertubercular_groove",
+      "label": "Intertubercular groove",
+      "role": "part",
+      "group": "Proximal end",
+      "render": "anchor",
+      "color": "#ff9f43",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.679,
+          0.216,
+          0.976
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the long head of biceps (gap 0.39 mm); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "intertubercular groove",
+        "bicipital groove",
+        "intertubercular sulcus",
+        "long head of biceps",
+        "latissimus dorsi",
+        "pectoralis major",
+        "teres major"
+      ],
+      "narration": "The gutter between the two tubercles. The long head of biceps runs down it, and three muscles attach on its lips — a lady between two majors."
+    },
+    {
+      "key": "surgical_neck",
+      "label": "Surgical neck",
+      "role": "part",
+      "group": "Proximal end",
+      "render": "anchor",
+      "color": "#f2703c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.633,
+          0.286,
+          0.813
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the narrowest level in the 10% of bone directly below the lowest tubercle — 28.8 mm wide against a 21.1 mm mid-shaft (Z-fraction 0.816); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "surgical neck",
+        "axillary nerve",
+        "posterior circumflex humeral artery",
+        "deltoid paralysis",
+        "regimental badge"
+      ],
+      "narration": "Where the flared top narrows into shaft — and the common fracture site in the elderly. The axillary nerve wraps round here, so a break can paralyse deltoid and numb the badge patch on the shoulder."
+    },
+    {
+      "key": "deltoid_tuberosity",
+      "label": "Deltoid tuberosity",
+      "role": "part",
+      "group": "Shaft",
+      "render": "anchor",
+      "color": "#e2603a",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.412,
+          0.364,
+          0.612
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and deltoid, restricted to the middle of the shaft (gap 0.75 mm, 13.2 mm off the shaft axis); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "deltoid tuberosity",
+        "deltoid insertion"
+      ],
+      "narration": "A rough V on the lateral shaft, halfway down. Deltoid ends here."
+    },
+    {
+      "key": "radial_groove",
+      "label": "Radial groove",
+      "role": "part",
+      "group": "Shaft",
+      "render": "anchor",
+      "color": "#d2492f",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.463,
+          0.82,
+          0.564
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: midpoint between the humeral contact of the lateral head of triceps (which arises above the groove, gap 0.30 mm) and that of the medial head (which arises below it, gap 0.40 mm), snapped back onto the bone (4.61 mm); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "radial groove",
+        "spiral groove",
+        "radial nerve",
+        "profunda brachii artery",
+        "wrist drop"
+      ],
+      "narration": "A shallow spiral on the back of the shaft. The radial nerve and profunda brachii artery lie in it — a mid-shaft fracture here gives wrist drop."
+    },
+    {
+      "key": "medial_epicondyle",
+      "label": "Medial epicondyle",
+      "role": "part",
+      "group": "Distal end",
+      "render": "anchor",
+      "color": "#b8433c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.626,
+          0.651,
+          0.066
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most medial point of the distal 12% of the bone (33.0 mm from the centre of the distal end); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "medial epicondyle",
+        "common flexor origin",
+        "ulnar nerve",
+        "funny bone",
+        "cubital tunnel"
+      ],
+      "narration": "The prominent medial bump — the common flexor origin. The ulnar nerve runs in a groove behind it, which is why knocking it tingles the little finger."
+    },
+    {
+      "key": "lateral_epicondyle",
+      "label": "Lateral epicondyle",
+      "role": "part",
+      "group": "Distal end",
+      "render": "anchor",
+      "color": "#a83a5e",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.0,
+          0.796,
+          0.081
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most lateral point of the distal 12% of the bone (31.0 mm from the centre of the distal end); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "lateral epicondyle",
+        "common extensor origin",
+        "tennis elbow",
+        "lateral epicondylitis"
+      ],
+      "narration": "The smaller lateral bump — the common extensor origin. Overuse of those tendons is tennis elbow."
+    },
+    {
+      "key": "trochlea",
+      "label": "Trochlea",
+      "role": "part",
+      "group": "Distal end",
+      "render": "anchor",
+      "color": "#8e6bb8",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.291,
+          0.776,
+          0.067
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the ulna, within the distal 15% — the humero-ulnar joint (gap 0.62 mm); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "trochlea",
+        "trochlear notch",
+        "humeroulnar joint",
+        "pulley"
+      ],
+      "narration": "The medial pulley. It grips the trochlear notch of the ulna and makes the elbow a hinge."
+    },
+    {
+      "key": "capitulum",
+      "label": "Capitulum",
+      "role": "part",
+      "group": "Distal end",
+      "render": "anchor",
+      "color": "#6b8ec4",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.223,
+          0.635,
+          0.023
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and the radius, within the distal 15% — the radiocapitellar joint (gap 4.85 mm, the widest of the set); see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "capitulum",
+        "head of radius",
+        "radiocapitellar joint"
+      ],
+      "narration": "The lateral ball. The head of the radius spins on it during pronation and supination."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "humerus",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "The humerus runs from the glenoid of the scapula down to the radius and ulna. Ball joint above, hinge below."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The top end",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Proximal end"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Head, then two tubercles with the groove between them, then the surgical neck where the flare ends. Learn them in that order and the muscle attachments follow."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Turn it round: the shaft",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Shaft"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "radial_groove",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "From behind: the deltoid tuberosity on the lateral side and the radial groove spiralling across the back."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Cut across the shaft",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Slide the cut down the bone. The shaft is a tube of compact bone round a marrow cavity, and it turns from round at the top to triangular lower down."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "The bottom end",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal end"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trochlea",
+          "to": "ulna",
+          "kind": "articulates with"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "capitulum",
+          "to": "radius",
+          "kind": "articulates with"
+        }
+      ],
+      "narration": "Two epicondyles for muscle, two articular surfaces for bone. Trochlea to the ulna, capitulum to the radius — medial to medial, lateral to lateral."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The radial nerve's route",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:radial_nerve",
+          "path": [
+            "surgical_neck",
+            "radial_groove",
+            "lateral_epicondyle"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "The radial nerve leaves the axilla, crosses the back of the shaft in its groove, then passes in front of the lateral epicondyle. It is pinned to the bone in that groove, which is exactly why a mid-shaft fracture drops the wrist."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Break it here, lose that nerve",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Proximal end"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Shaft"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal end"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "surgical_neck",
+            "radial_groove",
+            "medial_epicondyle"
+          ],
+          "layout": "stacked"
+        }
+      ],
+      "narration": "Three fracture sites, three nerves. Surgical neck takes the axillary nerve. Mid-shaft takes the radial. Medial epicondyle takes the ulnar. Say the site, then say the nerve."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Every named part of the humerus is a landmark anchor, because the catalog's smallest unit is the whole bone — there is no separate mesh for a tubercle, a groove or an epicondyle. Each anchor was measured on the mesh by tools/derive-humerus-landmarks.mjs and carries its definition and its measurement in calibrated_by. All stay status:\"needs-review\" until a human has looked at them once.",
+    "The capitulum anchor has the largest contact gap of the set (4.85 mm to the radial head) because the joint space is wide there on the decimated meshes. It is the one anchor most worth a human eye.",
+    "The surgical neck is a short region rather than a point, and the anatomical neck is a line round the head that no measurement here isolates; both are taught in narration on the nearest measured anchor.",
+    "No nerve meshes exist in the catalog, so the radial nerve is traced as a concept along bony waypoints rather than shown as a structure. The axillary and ulnar nerves are named in narration only."
+  ]
+}

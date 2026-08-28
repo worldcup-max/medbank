@@ -1,0 +1,683 @@
+{
+  "schema": 2,
+  "id": "embryology__week-3-gastrulation__trilaminar-disc-3-germ-layers",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Week 3: Gastrulation",
+  "structure": "Trilaminar disc (3 germ layers)",
+  "covers": [
+    "Trilaminar disc (3 germ layers)"
+  ],
+  "learning_goal": "Draw a cut trilaminar disc with the three layers the right way up, name the three subdivisions of mesoderm on a transverse section, and give the adult derivatives of each germ layer well enough to work backwards from an organ to the layer it came from.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "trilaminar disc",
+      "germ layers",
+      "gastrulation",
+      "week 3",
+      "early development",
+      "mesoderm",
+      "organogenesis",
+      "teratoma"
+    ],
+    "terms": [
+      "trilaminar disc",
+      "trilaminar embryonic disc",
+      "three germ layers",
+      "germ layers",
+      "gastrulation",
+      "day 16",
+      "week 3",
+      "epiblast",
+      "hypoblast",
+      "primitive streak",
+      "ectoderm",
+      "surface ectoderm",
+      "neuroectoderm",
+      "neural plate",
+      "neural crest",
+      "mesoderm",
+      "intraembryonic mesoderm",
+      "paraxial mesoderm",
+      "somitomere",
+      "somite",
+      "sclerotome",
+      "myotome",
+      "dermatome",
+      "intermediate mesoderm",
+      "urogenital ridge",
+      "nephrogenic cord",
+      "lateral plate mesoderm",
+      "somatic mesoderm",
+      "parietal mesoderm",
+      "splanchnic mesoderm",
+      "visceral mesoderm",
+      "intraembryonic coelom",
+      "body cavity",
+      "endoderm",
+      "definitive endoderm",
+      "gut tube",
+      "epithelial lining",
+      "parenchyma",
+      "liver",
+      "pancreas",
+      "thyroid",
+      "lungs",
+      "bladder epithelium",
+      "urothelium",
+      "adrenal cortex",
+      "adrenal medulla",
+      "dura mater",
+      "enamel",
+      "dentine",
+      "anterior pituitary",
+      "posterior pituitary",
+      "Rathke's pouch",
+      "oropharyngeal membrane",
+      "cloacal membrane",
+      "notochord",
+      "cardiogenic area",
+      "teratoma",
+      "dermoid cyst",
+      "germ layer derivatives"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "disc",
+      "label": "The trilaminar disc — day 16 onwards",
+      "role": "context",
+      "group": "The three layers",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "trilaminar disc",
+        "trilaminar embryonic disc",
+        "three-layered disc",
+        "day 16",
+        "week 3",
+        "embryo proper",
+        "flat plate",
+        "amniotic cavity",
+        "yolk sac"
+      ],
+      "narration": "By the middle of week three gastrulation has turned a two-layer plate into a three-layer one. The disc is still flat and still slung between the amniotic cavity above and the yolk sac below, but everything the body is made of is now present in sheet form. Folding and organogenesis are only rearrangements of these three sheets."
+    },
+    {
+      "key": "one_source",
+      "label": "All three come from the epiblast",
+      "role": "part",
+      "group": "The three layers",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "epiblast",
+        "one source",
+        "primitive streak",
+        "ingression",
+        "definitive endoderm",
+        "displaces hypoblast",
+        "hypoblast contributes nothing",
+        "pluripotent"
+      ],
+      "narration": "One fact underlies the whole topic and it is counter-intuitive: all three layers are epiblast. Cells that went through the streak first became endoderm and threw the hypoblast out; cells that followed stopped in the middle as mesoderm; cells that stayed on the surface are ectoderm. The hypoblast contributes not one cell to the fetus. Say this before you list any derivative."
+    },
+    {
+      "key": "ectoderm",
+      "label": "Ectoderm — the upper sheet",
+      "role": "part",
+      "group": "The three layers",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "ectoderm",
+        "upper layer",
+        "dorsal",
+        "surface ectoderm",
+        "neuroectoderm",
+        "neural plate",
+        "neural crest",
+        "epidermis",
+        "hair",
+        "nails",
+        "sweat glands",
+        "mammary gland",
+        "enamel",
+        "lens",
+        "inner ear",
+        "anterior pituitary",
+        "Rathke's pouch",
+        "central nervous system",
+        "peripheral nervous system",
+        "adrenal medulla",
+        "melanocytes"
+      ],
+      "narration": "The layer left on the surface, facing the amniotic cavity. Remember it as everything that touches the outside world plus the entire nervous system. Surface ectoderm gives epidermis, hair, nails, sweat and mammary glands, enamel, the lens and the inner ear; neuroectoderm gives brain, cord and retina; neural crest gives peripheral ganglia, melanocytes, most of the face and the adrenal medulla."
+    },
+    {
+      "key": "mesoderm",
+      "label": "Mesoderm — the middle sheet",
+      "role": "part",
+      "group": "The three layers",
+      "layer": "organ",
+      "color": "#27ae60",
+      "terms": [
+        "mesoderm",
+        "intraembryonic mesoderm",
+        "middle layer",
+        "mesenchyme",
+        "supporting tissue",
+        "muscle",
+        "bone",
+        "cartilage",
+        "connective tissue",
+        "blood",
+        "blood vessels",
+        "heart",
+        "kidney",
+        "gonad",
+        "spleen",
+        "adrenal cortex",
+        "serous membranes",
+        "dermis"
+      ],
+      "narration": "The layer that spread between the other two. It builds everything structural and everything circulating: bone, cartilage, muscle of all three kinds, dermis, connective tissue, blood and blood vessels, the heart, the kidneys and gonads, the spleen, the adrenal cortex and the serous membranes. If an organ is neither a lining nor a nerve, start with mesoderm."
+    },
+    {
+      "key": "endoderm",
+      "label": "Endoderm — the lower sheet",
+      "role": "part",
+      "group": "The three layers",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "endoderm",
+        "definitive endoderm",
+        "lower layer",
+        "ventral",
+        "gut tube",
+        "epithelial lining",
+        "liver",
+        "gallbladder",
+        "pancreas",
+        "thyroid",
+        "parathyroid",
+        "thymus",
+        "tonsil",
+        "respiratory epithelium",
+        "lungs",
+        "bladder epithelium",
+        "urethra",
+        "tympanic cavity",
+        "auditory tube"
+      ],
+      "narration": "The layer facing the yolk sac, which becomes the roof of the gut tube. Hold it as linings and the glands that bud off them: the epithelium of the whole gut from pharynx to upper anal canal, the liver, gallbladder and pancreas, the respiratory tract down to the alveoli, the thyroid, parathyroids, thymus and tonsils, the bladder and urethral epithelium, and the middle ear cavity with the auditory tube."
+    },
+    {
+      "key": "paraxial",
+      "label": "Paraxial mesoderm — beside the midline",
+      "role": "part",
+      "group": "Mesoderm splits into three",
+      "layer": "organ",
+      "color": "#1e8449",
+      "terms": [
+        "paraxial mesoderm",
+        "beside the notochord",
+        "somitomere",
+        "somite",
+        "day 20",
+        "segmentation",
+        "sclerotome",
+        "myotome",
+        "dermatome",
+        "vertebrae",
+        "skeletal muscle",
+        "dermis of the back"
+      ],
+      "narration": "The column nearest the midline thickens and, from about day twenty, breaks into blocks called somites. Each somite splits three ways: sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back. This is where segmentation of the body comes from, and it is why a dermatome map exists at all."
+    },
+    {
+      "key": "intermediate",
+      "label": "Intermediate mesoderm — the narrow strip",
+      "role": "part",
+      "group": "Mesoderm splits into three",
+      "layer": "organ",
+      "color": "#52be80",
+      "terms": [
+        "intermediate mesoderm",
+        "nephrogenic cord",
+        "urogenital ridge",
+        "kidney",
+        "ureter",
+        "gonad",
+        "genital duct",
+        "pronephros",
+        "mesonephros",
+        "metanephros"
+      ],
+      "narration": "A thin strip between the paraxial column and the flat plate lateral to it. It makes the urinary and genital systems and almost nothing else, which makes it the easiest of the three to remember: kidneys, ureters, gonads and their ducts. The fact that both systems come from one strip is why urinary and genital anomalies so often turn up in the same patient."
+    },
+    {
+      "key": "lateral_plate",
+      "label": "Lateral plate — and the cavity in it",
+      "role": "part",
+      "group": "Mesoderm splits into three",
+      "layer": "organ",
+      "color": "#7dcea0",
+      "terms": [
+        "lateral plate mesoderm",
+        "somatic mesoderm",
+        "parietal mesoderm",
+        "splanchnic mesoderm",
+        "visceral mesoderm",
+        "intraembryonic coelom",
+        "body cavity",
+        "parietal pleura",
+        "visceral pleura",
+        "peritoneum",
+        "pericardium",
+        "limb bones",
+        "gut wall muscle",
+        "heart"
+      ],
+      "narration": "The flattest and most lateral part splits into two sheets with a space between them. The upper, somatic sheet stays with the ectoderm and makes the body wall, the limb bones and the parietal serous membranes; the lower, splanchnic sheet stays with the endoderm and makes the gut wall, its muscle and the visceral serous membranes, and the heart. The space between them is the intraembryonic coelom, the future pericardial, pleural and peritoneal cavities."
+    },
+    {
+      "key": "no_mesoderm",
+      "label": "Two places that stay two-layered",
+      "role": "part",
+      "group": "Exceptions and edges",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "oropharyngeal membrane",
+        "buccopharyngeal membrane",
+        "cloacal membrane",
+        "no mesoderm",
+        "ectoderm and endoderm fused",
+        "future mouth",
+        "future anus",
+        "membrane rupture",
+        "imperforate anus"
+      ],
+      "narration": "Mesoderm reaches everywhere except two spots. Cranially the oropharyngeal membrane and caudally the cloacal membrane keep ectoderm and endoderm stuck together with nothing between them. Both later break down to open the mouth and the anus. A cloacal membrane that fails to rupture is an imperforate anus, so these two islands are worth marking on the drawing."
+    },
+    {
+      "key": "notochord_edge",
+      "label": "The midline column, named but not taught here",
+      "role": "context",
+      "group": "Exceptions and edges",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "notochord",
+        "notochordal process",
+        "midline",
+        "axial",
+        "induction",
+        "neural plate",
+        "nucleus pulposus"
+      ],
+      "narration": "A rod of cells sits in the midline between ectoderm and endoderm, laid down through the primitive pit. It is the reference point the three mesoderm columns are described against — paraxial means beside it. What it induces and what becomes of it is taught on its own."
+    },
+    {
+      "key": "backwards",
+      "label": "Working backwards from an organ",
+      "role": "part",
+      "group": "Using the layers",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "germ layer derivatives",
+        "lining versus wall",
+        "epithelium",
+        "parenchyma",
+        "stroma",
+        "gut wall",
+        "bladder epithelium",
+        "detrusor",
+        "adrenal cortex",
+        "adrenal medulla",
+        "anterior pituitary",
+        "posterior pituitary",
+        "enamel",
+        "dentine",
+        "dura mater"
+      ],
+      "narration": "Most organs are built from more than one layer, and the exam question is usually about the seam. The gut is endodermal lining in a mesodermal wall. The bladder is endodermal epithelium with mesodermal detrusor. The adrenal is mesodermal cortex around a neural crest medulla. The pituitary is ectodermal throughout but from two different ectoderms — Rathke's pouch in front, neuroectoderm behind. A tooth is ectodermal enamel on neural crest dentine. Name the part before you name the layer."
+    },
+    {
+      "key": "teratoma_layers",
+      "label": "Why a teratoma contains hair and teeth",
+      "role": "part",
+      "group": "Using the layers",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "teratoma",
+        "dermoid cyst",
+        "mature cystic teratoma",
+        "all three germ layers",
+        "pluripotent",
+        "germ cell tumour",
+        "ovary",
+        "testis",
+        "sacrococcygeal",
+        "hair",
+        "teeth",
+        "sebaceous glands",
+        "thyroid tissue",
+        "struma ovarii"
+      ],
+      "narration": "A teratoma is defined by containing tissue from all three germ layers, and that definition only makes sense once you know a single cell can still choose any of the three. Hair and sebaceous glands are ectoderm, cartilage and fat are mesoderm, respiratory or thyroid epithelium is endoderm. An ovarian dermoid cyst full of hair and teeth is not an oddity — it is a pluripotent cell doing exactly what the epiblast does, in the wrong place and at the wrong time."
+    },
+    {
+      "key": "whats_next",
+      "label": "What the three sheets do next",
+      "role": "part",
+      "group": "Using the layers",
+      "layer": "organ",
+      "color": "#85929e",
+      "terms": [
+        "folding",
+        "craniocaudal folding",
+        "lateral folding",
+        "gut tube",
+        "neurulation",
+        "neural plate",
+        "somites",
+        "cardiogenic area",
+        "organogenesis",
+        "week 4",
+        "week 8"
+      ],
+      "narration": "Nothing is added after week three; the rest of embryology is these three sheets folding and rolling. The ectoderm rolls into a tube to make the nervous system. The disc folds head to tail and side to side, and the endoderm becomes the gut tube. The mesoderm segments and cavitates. Organogenesis runs from week four to week eight, which is why that window is the vulnerable one for teratogens."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cut it — three sheets, the right way up",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three layers"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "disc",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The drawing is the bilaminar one with a sheet inserted. Ectoderm on top, facing the amniotic cavity. Endoderm underneath, facing the yolk sac. Mesoderm between them. Same orientation as week two, so dorsal still means the amniotic side. Get the three names in that order and the rest of this topic is derivatives."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "One layer made all three",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "one_source",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "one_source",
+          "to": "endoderm",
+          "kind": "first wave — displaced the hypoblast"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "one_source",
+          "to": "mesoderm",
+          "kind": "second wave — stopped in the middle"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "one_source",
+          "to": "ectoderm",
+          "kind": "never moved — stayed on the surface"
+        }
+      ],
+      "narration": "Three arrows from one box. Epiblast cells that went through the streak first replaced the hypoblast and are the definitive endoderm. Those that followed stopped between the sheets as mesoderm. Those that never entered the streak are the ectoderm. The hypoblast is gone and gives the fetus nothing. Students who assume the bottom layer was already there answer half the derivative questions wrongly."
+    },
+    {
+      "mode": "comparison",
+      "beat": 3,
+      "title": "Ectoderm — outside, and the whole nervous system",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ectoderm",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Mesoderm splits into three"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ectoderm",
+            "endoderm"
+          ],
+          "layout": "stacked"
+        }
+      ],
+      "narration": "One rule holds most of ectoderm: what meets the outside world, and what conducts. Epidermis with its hair, nails, sweat and mammary glands. Enamel, the lens, the inner ear, the anterior pituitary from Rathke's pouch. Then neuroectoderm — brain, spinal cord, retina, posterior pituitary. Then neural crest — sensory and autonomic ganglia, Schwann cells, melanocytes, most of the facial skeleton, and the adrenal medulla. Crest is worth a separate line because it explains too many syndromes to be buried in a list."
+    },
+    {
+      "mode": "comparison",
+      "beat": 4,
+      "title": "Endoderm — linings, and the glands that bud from them",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "endoderm",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "endoderm",
+          "to": "whats_next",
+          "kind": "rolls up to become the gut tube"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Mesoderm splits into three"
+        }
+      ],
+      "narration": "Endoderm is easiest as one tube and its buds. The epithelium of the gut from the pharynx to the upper anal canal. Budding off it: liver, gallbladder, pancreas, the whole respiratory tract to the alveoli, thyroid, parathyroids, thymus and tonsils. At the far end, the epithelium of the bladder and urethra. And from the first pouch, the middle ear cavity and auditory tube. Every one of them is a lining or a gland that grew out of a lining."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Mesoderm splits into three columns",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Mesoderm splits into three"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "notochord_edge"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "paraxial",
+            "intermediate",
+            "lateral_plate"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Cut across the disc and read outwards from the midline. Nearest the notochord, paraxial mesoderm, which segments into somites. Next, a thin strip of intermediate mesoderm. Then the wide lateral plate. Three columns, named by position, and each has its own destiny — this transverse picture is worth more than any list, because the names only make sense as positions."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "What each column becomes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Mesoderm splits into three"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "paraxial",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lateral_plate",
+          "to": "whats_next",
+          "kind": "its cavity becomes the body cavities"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:mesoderm-fates",
+          "path": [
+            "paraxial",
+            "intermediate",
+            "lateral_plate"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "Paraxial breaks into somites from about day twenty, and each somite gives sclerotome for vertebrae and ribs, myotome for skeletal muscle, dermatome for the dermis of the back — segmentation, and the reason dermatomes exist. Intermediate makes the kidneys, ureters, gonads and genital ducts, which is why urinary and genital anomalies travel together. Lateral plate splits in two: somatic with the ectoderm for body wall, limb bones and parietal serous membranes, splanchnic with the endoderm for gut wall, heart and visceral serous membranes. The gap between them is the intraembryonic coelom."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where the disc stays two layers thick",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Exceptions and edges"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "no_mesoderm",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ectoderm",
+          "to": "no_mesoderm",
+          "kind": "stays fused to endoderm here"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Two spots never get a middle layer. At the cranial end the oropharyngeal membrane sits over the prechordal plate; at the caudal end the cloacal membrane. Ectoderm and endoderm are fused at both, and both must later break down — one to open the mouth, one to open the anus and urogenital tract. A cloacal membrane that does not rupture presents as an imperforate anus at the first newborn examination."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "Working backwards, and why teratomas look the way they do",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Using the layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "backwards",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "teratoma_layers",
+          "to": "one_source",
+          "kind": "a cell that could still become any of the three"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "whats_next",
+          "to": "disc",
+          "kind": "folds and rolls these sheets — nothing new is added"
+        }
+      ],
+      "narration": "Two uses. First, work backwards from an organ by naming its parts: gut is endodermal lining in a mesodermal wall, bladder is endodermal epithelium with mesodermal muscle, adrenal is mesodermal cortex around a crest-derived medulla, pituitary is two different ectoderms meeting, a tooth is ectodermal enamel on crest dentine. Second, a teratoma is defined as containing all three germ layers — hair and sebaceous glands, cartilage and fat, respiratory or thyroid epithelium in one ovarian cyst. That is only strange if you have not just learned that one cell type made all three. From here nothing new is added: the sheets fold, roll and segment, and organogenesis runs from week four to week eight."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option for this structure. Only diagram is deferred. The curriculum asks for cross_section and mechanism views; beats 1, 5 and 7 are cuts.",
+    "Status is 'planned'. Thirteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a sagittal cut of the three-layered disc with the amniotic cavity above and yolk sac below, a transverse cut through the disc showing notochord, paraxial, intermediate and lateral plate columns in order outward on both sides, the lateral plate drawn already split into somatic and splanchnic sheets with the coelom between them, and the oropharyngeal and cloacal membranes marked as two-layered islands on a dorsal view.",
+    "The transverse panel must show both sides of the midline. Drawing one half to save room would make the three columns read as a stack rather than as bilateral columns, and the somites in beat 6 only make sense as paired blocks.",
+    "The sagittal panel must keep ectoderm uppermost, matching the bilaminar disc scene. Beat 1 explicitly tells the student the orientation is unchanged from week two, and a flipped panel would contradict the beat it is illustrating.",
+    "Beat 6 traces concept:mesoderm-fates. The subject is the divergence of three columns into their derivatives, which is a set of fates rather than a drawn object.",
+    "'Primitive streak' is a SEPARATE curriculum entry in this topic and is NOT claimed in covers[], although beat 2 names the two waves through the streak because the origin of the layers cannot be stated without them. How the streak forms, its parts, ingression and its clinical failures are authored in that scene in the same run.",
+    "'Notochord' is NOT claimed. The notochord appears as a context region only, because paraxial mesoderm is defined by its position beside it and beat 5 cannot be read without the midline marked. Induction, the notochordal canal and the nucleus pulposus belong to that entry.",
+    "'Neurulation (neural plate/tube)' is NOT claimed. The neural plate and neural crest appear inside the ectoderm derivative list, which is where every text puts them, but neural tube closure and its defects belong to that entry.",
+    "'Body cavity (coelom)' in the Folding topic is NOT claimed. The intraembryonic coelom is named in beat 6 because the lateral plate split creates it, but its partitioning into pericardial, pleural and peritoneal cavities belongs to that entry.",
+    "Derivative lists are the standard teaching ones and are deliberately incomplete. They cover what Nigerian MBBS papers ask to be reproduced; rarer derivatives are omitted rather than compressed, because a list a student cannot finish is worse than a shorter one they can.",
+    "Neural crest is narrated as a fourth population within ectoderm rather than given its own region. Several texts teach it as a fourth germ layer. The scene follows the majority convention and keeps it under ectoderm; if a neural crest curriculum entry is ever added, this narration should shrink to one line and point at it.",
+    "The adrenal, pituitary and tooth examples in beat 8 are chosen because each has parts from two different origins and each is examined that way. They are teaching examples, not a claim on any Gross Anatomy or Histology entry."
+  ]
+}

@@ -1,0 +1,788 @@
+{
+  "schema": 2,
+  "id": "gross__pelvis-perineum__pelvic-diaphragm-levator-ani",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pelvis & Perineum",
+  "structure": "Pelvic diaphragm (levator ani)",
+  "covers": [
+    "Pelvic diaphragm (levator ani)"
+  ],
+  "learning_goal": "Name the two muscles of the pelvic diaphragm and the three parts of levator ani, state the origin of each part from the pubis, the tendinous arch and the ischial spine, describe the line of attachment and the funnel shape it produces, list what passes through the urogenital hiatus and what does not, explain why the puborectalis sling sets the anorectal angle and how that angle is the mechanical basis of faecal continence, give the nerve supply, and account for stress incontinence, pelvic organ prolapse and obstetric floor injury from the anatomy.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pelvic diaphragm",
+      "pelvic floor",
+      "levator ani",
+      "perineum",
+      "pelvis",
+      "continence",
+      "defaecation",
+      "micturition",
+      "prolapse",
+      "labour",
+      "episiotomy",
+      "urogynaecology",
+      "anal canal",
+      "rectum"
+    ],
+    "terms": [
+      "pelvic diaphragm",
+      "pelvic floor",
+      "levator ani",
+      "levatores ani",
+      "pubococcygeus",
+      "puborectalis",
+      "iliococcygeus",
+      "pubovaginalis",
+      "puboprostaticus",
+      "levator prostatae",
+      "coccygeus",
+      "ischiococcygeus",
+      "tendinous arch of levator ani",
+      "arcus tendineus levator ani",
+      "white line",
+      "obturator internus fascia",
+      "ischial spine",
+      "body of the pubis",
+      "anococcygeal body",
+      "anococcygeal raphe",
+      "levator plate",
+      "perineal body",
+      "central tendon of the perineum",
+      "urogenital hiatus",
+      "levator hiatus",
+      "genital hiatus",
+      "anorectal angle",
+      "anorectal ring",
+      "anorectal junction",
+      "puborectalis sling",
+      "faecal continence",
+      "urinary continence",
+      "stress incontinence",
+      "pelvic organ prolapse",
+      "cystocele",
+      "rectocele",
+      "uterine prolapse",
+      "vault prolapse",
+      "nerve to levator ani",
+      "S3 S4",
+      "sacral nerve roots",
+      "pudendal nerve",
+      "inferior rectal nerve",
+      "external anal sphincter",
+      "internal anal sphincter",
+      "sphincter urethrae",
+      "external urethral sphincter",
+      "urogenital diaphragm",
+      "deep perineal pouch",
+      "perineal membrane",
+      "ischioanal fossa",
+      "ischiorectal fossa",
+      "pudendal canal",
+      "Alcock's canal",
+      "pelvic viscera support",
+      "intra-abdominal pressure",
+      "Valsalva",
+      "coughing",
+      "straining",
+      "defaecation",
+      "obstructed defaecation",
+      "anismus",
+      "Kegel exercises",
+      "pelvic floor exercises",
+      "levator avulsion",
+      "obstetric anal sphincter injury",
+      "OASIS",
+      "episiotomy",
+      "mediolateral episiotomy",
+      "second stage of labour",
+      "crowning",
+      "digital rectal examination",
+      "puborectalis palpation",
+      "funnel shaped floor",
+      "pelvic outlet",
+      "bladder neck support",
+      "vaginal wall support",
+      "rectum",
+      "anal canal",
+      "prostate",
+      "urethra"
+    ]
+  },
+  "camera": {
+    "framing": "inferior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "right_pubococcygeus",
+      "name": "right pubococcygeus",
+      "label": "Pubococcygeus (right) — pubis to coccyx",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA45854"
+      },
+      "terms": [
+        "pubococcygeus",
+        "levator ani",
+        "body of the pubis",
+        "anococcygeal body",
+        "pubovaginalis",
+        "levator prostatae",
+        "puboprostaticus",
+        "pelvic floor"
+      ],
+      "narration": "The main and most medial part. It arises from the back of the body of the pubis, runs backwards almost horizontally beside the midline structures, and is inserted into the coccyx and the anococcygeal body. Its most medial fibres are named again by what they wrap: pubovaginalis in the female, sweeping round the side of the vagina and supporting the bladder neck, and levator prostatae — puboprostaticus — in the male, slinging under the prostate. That is why a torn pubococcygeus produces a dropped bladder neck and stress incontinence rather than a weak leg."
+    },
+    {
+      "key": "left_pubococcygeus",
+      "name": "left pubococcygeus",
+      "label": "Pubococcygeus (left)",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA45855"
+      },
+      "terms": [
+        "pubococcygeus",
+        "left",
+        "midline raphe",
+        "levator hiatus",
+        "genital hiatus"
+      ],
+      "narration": "The mirror muscle. The two pubococcygei approach each other behind the midline viscera and meet in the anococcygeal body, so the pair form a shelf with a gap left in front. That gap is the urogenital hiatus, and everything the floor fails to close is a hole the viscera can come through."
+    },
+    {
+      "key": "right_puborectalis",
+      "name": "right puborectalis",
+      "label": "Puborectalis (right) — the sling that makes the angle",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA45856"
+      },
+      "terms": [
+        "puborectalis",
+        "puborectalis sling",
+        "anorectal angle",
+        "anorectal ring",
+        "anorectal junction",
+        "faecal continence",
+        "external anal sphincter",
+        "obstructed defaecation",
+        "anismus"
+      ],
+      "narration": "The most inferior and most important fibres. They arise from the pubis, pass backwards without any bony insertion at all, and blend with the fibres of the other side behind the anorectal junction — a U-shaped sling, not a sheet. Tone in the sling drags the junction forwards and holds the anorectal angle at about eighty degrees at rest. That angle, not the sphincters, is the main mechanism of gross faecal continence: the anterior rectal wall is pressed against the top of the anal canal like a flap valve every time intra-abdominal pressure rises."
+    },
+    {
+      "key": "left_puborectalis",
+      "name": "left puborectalis",
+      "label": "Puborectalis (left)",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#943126",
+      "refs": {
+        "bodyparts3d": "FMA45857"
+      },
+      "terms": [
+        "puborectalis",
+        "left",
+        "sling",
+        "anorectal ring",
+        "fistula surgery"
+      ],
+      "narration": "The other limb of the same sling. The two together with the upper part of the external anal sphincter form the palpable anorectal ring on rectal examination — the ridge a finger meets at the top of the anal canal. It is the structure a surgeon must not divide when laying open a fistula, because cutting it makes the patient incontinent no matter how well the sphincters are preserved."
+    },
+    {
+      "key": "right_iliococcygeus",
+      "name": "right iliococcygeus",
+      "label": "Iliococcygeus (right) — the thin lateral sheet",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA45858"
+      },
+      "terms": [
+        "iliococcygeus",
+        "tendinous arch of levator ani",
+        "arcus tendineus",
+        "ischial spine",
+        "anococcygeal raphe",
+        "levator plate"
+      ],
+      "narration": "The most posterior and most lateral part, and often the thinnest — sometimes barely muscular at all. It arises from the tendinous arch behind and from the ischial spine, and runs medially to the anococcygeal body and the coccyx. With its fellow it forms the levator plate, the flat shelf behind the anorectal junction on which the pelvic viscera rest when the patient is upright."
+    },
+    {
+      "key": "left_iliococcygeus",
+      "name": "left iliococcygeus",
+      "label": "Iliococcygeus (left)",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "muscle",
+      "color": "#e67e22",
+      "refs": {
+        "bodyparts3d": "FMA45859"
+      },
+      "terms": [
+        "iliococcygeus",
+        "left",
+        "levator plate",
+        "prolapse",
+        "vault prolapse"
+      ],
+      "narration": "The same on the left. When the levator plate sags from horizontal towards vertical — after childbirth, with age, with chronic straining — the vagina and the rectum lose the shelf they lie on and the hiatus takes the load instead. That change of angle is the beginning of prolapse."
+    },
+    {
+      "key": "tendinous_arch",
+      "name": "tendinous arch of levator ani",
+      "label": "Tendinous arch — the origin that is not bone",
+      "role": "part",
+      "group": "Levator ani",
+      "layer": "fascia",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA46442"
+      },
+      "terms": [
+        "tendinous arch of levator ani",
+        "arcus tendineus levator ani",
+        "white line",
+        "obturator internus fascia",
+        "body of the pubis",
+        "ischial spine",
+        "linear origin"
+      ],
+      "narration": "The single fact that makes the shape of this muscle make sense. Levator ani cannot arise from bone along its whole length, because the side wall of the pelvis is muscle. So it arises from a thickened white line in the fascia over obturator internus, running from the back of the body of the pubis in front to the ischial spine behind. Learn that line and the origin of all three parts follows from it: pubococcygeus and puborectalis from the pubis at its front end, iliococcygeus from the arch itself and from the spine at its back end."
+    },
+    {
+      "key": "right_coccygeus",
+      "name": "right coccygeus",
+      "label": "Coccygeus (right) — the second muscle of the diaphragm",
+      "role": "part",
+      "group": "Coccygeus",
+      "layer": "muscle",
+      "color": "#9c640c",
+      "refs": {
+        "bodyparts3d": "FMA46443"
+      },
+      "terms": [
+        "coccygeus",
+        "ischiococcygeus",
+        "sacrospinous ligament",
+        "ischial spine",
+        "sacrum",
+        "coccyx",
+        "pelvic diaphragm"
+      ],
+      "narration": "The pelvic diaphragm is levator ani plus coccygeus — do not answer with levator ani alone. Coccygeus is a small triangular sheet from the ischial spine to the side of the lower sacrum and the coccyx, completing the floor behind where levator ani stops. It lies directly on the sacrospinous ligament, muscle and ligament being effectively the same structure, one fleshy and one fibrous."
+    },
+    {
+      "key": "left_coccygeus",
+      "name": "left coccygeus",
+      "label": "Coccygeus (left)",
+      "role": "part",
+      "group": "Coccygeus",
+      "layer": "muscle",
+      "color": "#b7950b",
+      "refs": {
+        "bodyparts3d": "FMA46444"
+      },
+      "terms": [
+        "coccygeus",
+        "left",
+        "sacrospinous ligament",
+        "greater sciatic foramen",
+        "lesser sciatic foramen"
+      ],
+      "narration": "The same on the left. Because it lies on the sacrospinous ligament, it also marks the division of the sciatic notch into the greater and lesser foramina — the boundary between the floor of the pelvis and the exits from it."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum — what the sling holds",
+      "role": "part",
+      "group": "Through the floor",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "anorectal junction",
+        "anorectal angle",
+        "anal canal",
+        "flap valve",
+        "defaecation",
+        "digital rectal examination"
+      ],
+      "narration": "The rectum comes down the hollow of the sacrum and then turns sharply backwards to become the anal canal. That turn is not a property of the gut — it is made by the puborectalis sling pulling forwards from the pubis. Relax the sling and the angle straightens; that is the first event of defaecation, and it is why squatting, which straightens the same angle passively, makes defaecation easier."
+    },
+    {
+      "key": "external_anal_sphincter",
+      "name": "external anal sphincter",
+      "label": "External anal sphincter — blending with the sling",
+      "role": "part",
+      "group": "Through the floor",
+      "layer": "muscle",
+      "color": "#873600",
+      "refs": {
+        "bodyparts3d": "FMA21930"
+      },
+      "terms": [
+        "external anal sphincter",
+        "internal anal sphincter",
+        "anorectal ring",
+        "inferior rectal nerve",
+        "pudendal nerve",
+        "voluntary continence",
+        "obstetric anal sphincter injury",
+        "OASIS",
+        "third degree tear"
+      ],
+      "narration": "Voluntary, striated, supplied by the inferior rectal branch of the pudendal nerve, and continuous above with puborectalis — the two are not separable on a finger. Continence is therefore layered: the internal sphincter, smooth muscle and involuntary, holds the canal shut at rest; the external sphincter gives conscious emergency closure for a minute or so; and the puborectalis angle does the sustained work. A third-degree perineal tear in labour that runs into this muscle is repaired at once, because a sphincter left torn gives lifelong faecal urgency."
+    },
+    {
+      "key": "urethra",
+      "name": "urethra",
+      "label": "Urethra — through the hiatus in front",
+      "role": "part",
+      "group": "Through the floor",
+      "layer": "organ",
+      "color": "#f5b041",
+      "refs": {
+        "bodyparts3d": "FMA19667"
+      },
+      "terms": [
+        "urethra",
+        "urogenital hiatus",
+        "levator hiatus",
+        "sphincter urethrae",
+        "external urethral sphincter",
+        "bladder neck",
+        "stress incontinence",
+        "urethral support"
+      ],
+      "narration": "The urethra leaves the pelvis through the gap left in front between the two pubococcygei. The floor does not close round it — the sphincter urethrae, in the deep perineal pouch below, does that. What levator ani provides is the backstop: the pubovaginalis fibres and the fascia slung between them hold the urethra against a firm hammock, so that a cough presses the urethra shut against it. Lose that support and the same cough simply pushes urine out. That is stress incontinence in one sentence."
+    },
+    {
+      "key": "urinary_bladder",
+      "name": "urinary bladder",
+      "label": "Bladder — resting on the floor",
+      "role": "context",
+      "group": "Viscera above",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "bladder neck",
+        "cystocele",
+        "pelvic organ prolapse",
+        "support"
+      ],
+      "narration": "Shown to make the word support concrete. The bladder does not hang from anything; it sits on the pelvic floor and on the pubic bones in front. When the anterior support fails, the bladder descends into the vaginal wall as a cystocele."
+    },
+    {
+      "key": "prostate",
+      "name": "prostate",
+      "label": "Prostate — slung by levator prostatae",
+      "role": "context",
+      "group": "Viscera above",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA9600"
+      },
+      "terms": [
+        "prostate",
+        "levator prostatae",
+        "puboprostaticus",
+        "prostatic urethra",
+        "male pelvic floor"
+      ],
+      "narration": "In the male the medial fibres of pubococcygeus sling directly under the prostate and are named for it. The prostate rests on the pelvic diaphragm, which is why it is felt to move with the floor on rectal examination and why radical prostatectomy, which works right down onto these fibres, risks incontinence."
+    },
+    {
+      "key": "right_obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus (right) — the wall the arch runs on",
+      "role": "context",
+      "group": "Pelvic side wall",
+      "layer": "muscle",
+      "color": "#ca8a04",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "obturator fascia",
+        "tendinous arch",
+        "ischioanal fossa",
+        "ischiorectal fossa",
+        "pudendal canal",
+        "Alcock's canal"
+      ],
+      "narration": "Lines the side wall of the lesser pelvis, and its fascia carries the tendinous arch. Below the arch the same fascia forms the lateral wall of the ischioanal fossa — the fat-filled wedge under the levator — and splits to make the pudendal canal, through which the pudendal nerve travels forwards to supply the external anal sphincter. So the muscle that gives levator ani its origin also carries the nerve that works its neighbour."
+    },
+    {
+      "key": "left_obturator_internus",
+      "name": "left obturator internus",
+      "label": "Obturator internus (left)",
+      "role": "context",
+      "group": "Pelvic side wall",
+      "layer": "muscle",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA22325"
+      },
+      "terms": [
+        "obturator internus",
+        "left",
+        "side wall",
+        "funnel"
+      ],
+      "narration": "The same on the left. Seeing both makes the shape obvious: the floor is not flat but a funnel, sloping down and inwards from the two side walls to the anorectal junction at the bottom."
+    },
+    {
+      "key": "right_piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis (right) — behind the floor, not part of it",
+      "role": "context",
+      "group": "Pelvic side wall",
+      "layer": "muscle",
+      "color": "#7d6608",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "posterior wall",
+        "greater sciatic foramen",
+        "sacral plexus",
+        "not part of the pelvic diaphragm"
+      ],
+      "narration": "A common exam trap. Piriformis lies on the back wall of the pelvis and leaves through the greater sciatic foramen; it is a wall muscle, not a floor muscle. The pelvic diaphragm is levator ani and coccygeus only. The sacral plexus lies on piriformis, and it is from the third and fourth sacral roots there that levator ani takes its nerve."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — pubis and ischial spine",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "body of the pubis",
+        "ischial spine",
+        "ischiopubic ramus",
+        "pelvic outlet"
+      ],
+      "narration": "Two points on this bone anchor the whole floor: the back of the body of the pubis in front and the ischial spine behind. The tendinous arch is the line stretched between them.",
+      "approx": {
+        "shown_as": "Hip bone (right)",
+        "detail": "pubis and ischial spine"
+      }
+    },
+    {
+      "key": "left_hip_bone",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "hip bone",
+        "left",
+        "pubic symphysis",
+        "outlet"
+      ],
+      "narration": "The mirror bone, completing the ring the floor is slung across."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the back of the floor",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "coccyx",
+        "anococcygeal body",
+        "S3",
+        "S4",
+        "nerve to levator ani",
+        "sacral plexus"
+      ],
+      "narration": "Behind, the floor attaches to the lower sacrum and the coccyx. The sacrum also delivers the nerve supply: the ventral rami of the third and fourth sacral nerves give the nerve to levator ani from above, and the pudendal nerve, which is S2 to S4, reaches the external anal sphincter from below in the perineum."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A funnel, not a floor",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Viscera above"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Levator ani",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_obturator_internus",
+          "to": "tendinous_arch",
+          "kind": "fascia over the side wall thickens into the arch"
+        }
+      ],
+      "narration": "The pelvic outlet is closed by a sheet of muscle called the pelvic diaphragm, and the pelvic diaphragm is two muscles: levator ani in front and at the sides, coccygeus behind. Look down into the pelvis from above. The sheet is not flat. It slopes down and inwards from both side walls to meet in the midline, so the true shape is a funnel with the anorectal junction at its lowest point. Above it is the pelvic cavity with the bladder, the rectum and the internal reproductive organs sitting on it; below it, on each side, is the fat-filled ischioanal fossa. The upper surface is covered by pelvic fascia and peritoneum, the lower by the fascia of the fossa. Get the funnel into your head first — every clinical problem in this topic is a failure of that funnel to hold what is above it."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "One origin line, three parts",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Levator ani"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tendinous_arch",
+          "intensity": 1
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "tendinous_arch",
+          "path": [
+            "right_hip_bone",
+            "tendinous_arch",
+            "right_iliococcygeus"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_pubococcygeus",
+            "right_iliococcygeus"
+          ],
+          "layout": "overlay"
+        }
+      ],
+      "narration": "Levator ani arises along a continuous line, and only its two ends are bone. In front, the back of the body of the pubis. Behind, the ischial spine. Between them the origin is the tendinous arch of levator ani — a white thickening in the fascia over obturator internus, because the side wall of the pelvis at that level is muscle, not bone. Trace that line and the three parts name themselves by where they start and where they end. Pubococcygeus, from the pubis to the coccyx and the anococcygeal body, is the main mass. Puborectalis, the lowest fibres, also from the pubis, but with no bony insertion at all — it slings behind the anorectal junction. Iliococcygeus, from the arch and the spine, runs medially to the anococcygeal body and coccyx as a thin lateral sheet. Add coccygeus, from the ischial spine to the sacrum and coccyx, and the diaphragm is complete. Nerve supply is the ventral rami of S3 and S4 for levator ani; the external anal sphincter is taken by the pudendal nerve, which is S2, S3 and S4 — S2, 3, 4 keeps the pelvis off the floor is the old and useful line."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The hiatus in front — what the floor does not close",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Levator ani"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Through the floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Viscera above"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "urethra",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_pubococcygeus",
+          "to": "left_pubococcygeus",
+          "kind": "the gap between them is the urogenital hiatus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "urethra",
+          "to": "right_pubococcygeus",
+          "kind": "hammock support of the bladder neck"
+        }
+      ],
+      "narration": "The two halves of levator ani do not meet in front. The gap they leave is the urogenital hiatus, and through it pass the urethra and the anal canal in both sexes, with the vagina between them in the female. Behind the anal canal the two halves do meet, in the anococcygeal body. So the floor is deficient exactly where the viscera need to escape, and that deficiency is the weak point of the whole pelvis: it is through the hiatus that the bladder, the uterus and the rectum prolapse. Note what the floor does not do. It does not close the urethra — that is the sphincter urethrae in the deep perineal pouch below, a separate structure often called the urogenital diaphragm. What levator ani provides is a firm hammock behind the urethra, so a rise in abdominal pressure compresses the urethra against it. The perineal body, the fibromuscular node between the anal canal and the vagina or bulb of the penis, is the other anchor: levator ani, the external anal sphincter, the perineal muscles and the vaginal wall all meet there, which is why it is the structure protected by a mediolateral episiotomy."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 4,
+      "title": "Contract the sling — the anorectal angle",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Through the floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_puborectalis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_puborectalis"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_puborectalis",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_puborectalis",
+          "to": "rectum",
+          "kind": "pulls the anorectal junction forwards — angle about 80 degrees"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_puborectalis",
+          "to": "external_anal_sphincter",
+          "kind": "continuous — together the anorectal ring"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:faeces",
+          "path": [
+            "rectum",
+            "external_anal_sphincter"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "Watch one muscle from the side. Puborectalis runs from the pubis, round behind the anorectal junction, and back to the pubis on the other side — a sling with both ends in front. When it contracts it pulls the junction forwards and the angle between rectum and anal canal closes to about eighty degrees. The anterior rectal wall is then pressed down onto the top of the anal canal, and any rise in abdominal pressure presses it harder: a flap valve that gets tighter the more it is challenged. That is why gross faecal continence survives division of the anal sphincters but not division of this sling, and why the anorectal ring — puborectalis plus the top of the external sphincter, palpable as a distinct ridge on rectal examination — is the one thing that must never be cut in fistula surgery. Defaecation is the reverse in order: sit or squat, puborectalis relaxes, the angle opens towards a straight line, the internal sphincter relaxes to the rectoanal inhibitory reflex, the external sphincter is voluntarily released, and abdominal pressure does the rest. When the sling fails to relax and paradoxically contracts instead, the patient strains against a closed angle — anismus, a cause of obstructed defaecation that no laxative will fix."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Support, pressure and the floor that gave way",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.1,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "urinary_bladder",
+          "to": "right_pubococcygeus",
+          "kind": "rests on the floor — fails as a cystocele"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prostate",
+          "to": "left_pubococcygeus",
+          "kind": "levator prostatae slings beneath"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:intra-abdominal-pressure",
+          "path": [
+            "urinary_bladder",
+            "right_pubococcygeus",
+            "right_puborectalis",
+            "external_anal_sphincter"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Four jobs, and the clinical picture when each is lost. First, support: the viscera sit on this sheet, and it holds tone continuously, tightening reflexly whenever abdominal pressure rises with a cough, a laugh or a lift. Weaken it and the bladder descends into the anterior vaginal wall as a cystocele, the rectum into the posterior wall as a rectocele, the uterus down the canal as uterine prolapse. Second, urinary continence: the hammock behind the urethra turns a cough into compression rather than leakage, so loss of it gives stress incontinence — urine on coughing, not urgency. Third, faecal continence, through the puborectalis angle already seen. Fourth, it assists the abdominal wall in raising pressure for coughing, vomiting, micturition and the second stage of labour, and it guides the fetal head, its funnel shape turning the head forwards to be born face to the sacrum. The commonest way it is damaged is childbirth: the head stretches levator ani to several times its resting length, and the muscle may be avulsed from the pubis or the pudendal nerve stretched. That is why pelvic floor exercises are taught antenatally and postnatally, why a prolonged second stage matters, and why a third-degree tear into the external sphincter is repaired immediately. On examination the floor is not abstract — a finger in the rectum or the vagina feels the anorectal ring, and the patient can be asked to squeeze against it."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "There is no vagina, uterus or pubovaginalis in the catalog, so the entire female floor — which is where this topic is examined and where it matters clinically — is taught in narration over male viscera. Pubovaginalis, the vaginal wall as the anterior and posterior support, cystocele, rectocele and uterine prolapse are all spoken, not shown. This is the largest gap in the scene and the same missing female pelvis set that has blocked 'Internal reproductive organs' since run 34.",
+    "The perineal body has no mesh. It is the central anchor of the floor, the structure an episiotomy is angled to spare, and the point where levator ani, the external anal sphincter and the perineal muscles converge. Beat three names it over empty space between the anal canal and the urethra.",
+    "The anococcygeal body and the midline raphe behind the anal canal have no models either, so the posterior meeting of the two halves — the counterpart of the hiatus in front — cannot be lit. Both are narrated in beats two and three.",
+    "No coccyx exists in the catalog, and every part of levator ani except puborectalis inserts into it. The sacrum model ends where the coccyx would begin, so the posterior insertion is shown ending in air.",
+    "No nerve meshes: the nerve to levator ani from S3 and S4, the pudendal nerve and its inferior rectal branch are all narrated only. This is the thirty-sixth run in which the absence of nerve models has cost a scene its most examinable relationship, and here it costs two — the innervation of the floor and the course of the pudendal nerve through the canal in obturator fascia.",
+    "The perineal membrane and the sphincter urethrae — the so-called urogenital diaphragm below the pelvic diaphragm — have no models. The distinction between the two diaphragms is a standard exam question and beat three has to make it in words alone.",
+    "No sacrospinous or sacrotuberous ligament, so coccygeus is again used as a proxy marker for the sacrospinous ligament it lies on, as in the bony pelvis scene.",
+    "The anal canal and the internal anal sphincter are not separate models; the rectum mesh ends at the junction and the external anal sphincter is the only sphincter present. The layered account of continence in beat four therefore lights one of the three muscles it describes.",
+    "The anorectal angle cannot be measured or drawn on the geometry. Beat four uses SHOW_RELATIONSHIP between the sling and the rectum and states the value; a future renderer with measured anchors on the pubis and the anorectal junction could draw it and animate the change on contraction, which for this scene would be close to the whole teaching point.",
+    "This scene does not claim to cover 'Bony pelvis', 'Urinary bladder' or 'Internal reproductive organs' although parts of all three appear in it. The hip bones and sacrum are here only to carry the origin line, the bladder and prostate only to make the word support concrete."
+  ]
+}

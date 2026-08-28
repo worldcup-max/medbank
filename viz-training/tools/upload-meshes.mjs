@@ -95,17 +95,47 @@ console.log(`\n${files.length} mesh(es) in ${DIR}`);
 console.log(`bucket: ${BUCKET} at ${ORIGIN}\n`);
 
 /* ---- what is already there? ---- */
+/* A three-hundred-file upload runs for minutes over a domestic connection, and on 2026-08-28 one of
+   those minutes contained a DNS hiccup:
+
+     [TypeError: fetch failed] { [cause]: Error: getaddrinfo EAI_AGAIN tytbrhuzikqkscxdnkmr.supabase.co }
+
+   Node's fetch throws rather than returning a response, nothing here caught it, and the whole run died
+   at file 104 of 250 with an uncaught exception and a stack trace. Nothing was lost — the size compare
+   makes a re-run resume — but a transient name-lookup failure should never end a job that was working.
+
+   So: network faults are retried with a widening pause, and everything else is left alone. A 401 is not
+   a hiccup and must not be retried; neither is a 404. Only the errors that mean "the wire twitched". */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const TRANSIENT = /EAI_AGAIN|ENOTFOUND|ECONNRESET|ECONNREFUSED|ETIMEDOUT|EPIPE|ENETUNREACH|socket hang up|terminated|fetch failed/i;
+const reason = e => [e && e.message, e && e.cause && e.cause.code, e && e.cause && e.cause.message]
+  .filter(Boolean).join(' ');
+
+async function net(fn, what) {
+  let last;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try { return await fn(); }
+    catch (e) {
+      last = e;
+      if (!TRANSIENT.test(reason(e))) throw e;
+      const wait = Math.min(30000, 1000 * 2 ** attempt);
+      console.log(`          ${what}: ${(e.cause && e.cause.code) || e.message} — waiting ${wait / 1000}s, then retrying`);
+      await sleep(wait);
+    }
+  }
+  throw last;
+}
+
 async function remoteSize(name) {
-  try {
-    const r = await fetch(`${MESH_BASE}${name}?cb=${Date.now()}`, { method: 'HEAD', cache: 'no-store' });
-    if (!r.ok) return null;
-    const n = Number(r.headers.get('content-length'));
-    return Number.isFinite(n) ? n : null;
-  } catch (e) { return null; }
+  const r = await net(() => fetch(`${MESH_BASE}${name}?cb=${Date.now()}`, { method: 'HEAD', cache: 'no-store' }),
+                      `HEAD ${name}`);
+  if (!r.ok) return null;                   // a genuine 404: the object is not there
+  const n = Number(r.headers.get('content-length'));
+  return Number.isFinite(n) ? n : null;
 }
 
 async function put(name, buf) {
-  const r = await fetch(`${ORIGIN}/storage/v1/object/${BUCKET}/${name}`, {
+  const r = await net(() => fetch(`${ORIGIN}/storage/v1/object/${BUCKET}/${name}`, {
     method: 'POST',
     headers: {
       'Authorization': 'Bearer ' + KEY,
@@ -113,7 +143,7 @@ async function put(name, buf) {
       'x-upsert': 'true'                    // the whole point: overwrite what is already there
     },
     body: buf
-  });
+  }), `PUT ${name}`);
   if (r.ok) return null;
   let why = r.status + ' ' + r.statusText;
   try { const j = await r.json(); if (j && (j.message || j.error)) why += ' — ' + (j.message || j.error); } catch (e) {}
@@ -125,8 +155,17 @@ const wrong = [];
 
 for (const f of files) {
   const local = statSync(join(DIR, f)).size;
-  const remote = await remoteSize(f);
   const label = f.padEnd(16) + String(local).padStart(8) + ' bytes';
+
+  /* Even after the retries, one file that will not go should be one line of output and a non-zero
+     exit — not a stack trace that hides the hundred files that went fine above it. */
+  let remote;
+  try { remote = await remoteSize(f); }
+  catch (e) {
+    failed++;
+    console.log(`  FAIL    ${label}  could not reach the bucket — ${reason(e)}`);
+    continue;
+  }
 
   if (remote === local && !FORCE) { same++; console.log(`  same    ${label}`); continue; }
   if (CHECK) {
@@ -134,7 +173,9 @@ for (const f of files) {
     console.log(`  DIFFERS ${label}  remote ${remote === null ? 'missing' : remote + ' bytes'}`);
     continue;
   }
-  const err = await put(f, readFileSync(join(DIR, f)));
+  let err;
+  try { err = await put(f, readFileSync(join(DIR, f))); }
+  catch (e) { err = 'could not reach the bucket — ' + reason(e); }
   if (err) {
     failed++; console.log(`  FAIL    ${label}  ${err}`);
     /* An auth or permission refusal is about the CREDENTIAL, not this file. Trying the next 141 files
@@ -149,10 +190,12 @@ for (const f of files) {
   }
 
   /* Verify, do not assume. A 200 from the API is not the same as the object being served. */
-  const after = await remoteSize(f);
+  let after;
+  try { after = await remoteSize(f); } catch (e) { after = -1; }
   if (after !== local) {
     failed++;
-    console.log(`  FAIL    ${label}  uploaded but the bucket serves ${after === null ? 'nothing' : after + ' bytes'}`);
+    const served = after === null ? 'nothing' : after < 0 ? 'an answer we could not read' : after + ' bytes';
+    console.log(`  FAIL    ${label}  uploaded but the bucket serves ${served}`);
     continue;
   }
   sent++; bytes += local;
@@ -167,6 +210,8 @@ if (CHECK) {
 }
 console.log(`${sent} uploaded (${(bytes / 1048576).toFixed(1)} MB), ${same} already current, ${failed} failed.`);
 if (failed) {
+  console.log('\nRe-running this command resumes: files that already match are skipped, so nothing');
+  console.log('is re-sent and only the failures are retried. The key is still set in this window.');
   console.log('\nA failure here means the app will fetch an old mesh, or none. Fix it before pushing —');
   console.log('the scene JSON and the bucket have to agree or the student gets a hole in the picture.');
   process.exit(1);

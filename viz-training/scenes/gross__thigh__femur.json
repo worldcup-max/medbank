@@ -1,0 +1,755 @@
+{
+  "schema": 2,
+  "id": "gross__thigh__femur",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thigh",
+  "structure": "Femur",
+  "covers": [
+    "Femur"
+  ],
+  "learning_goal": "Describe the femur as a whole bone — shaft, linea aspera, the two ends — name what attaches along it, explain why the shaft is a hollow tube with a medullary cavity rather than a solid rod, and predict the deformity, the blood loss and the compartment at risk in a fractured shaft.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thigh",
+      "femur",
+      "femoral shaft",
+      "lower limb",
+      "long bone",
+      "medullary cavity",
+      "bone marrow",
+      "fracture",
+      "osteology",
+      "linea aspera",
+      "knee",
+      "distal femur"
+    ],
+    "terms": [
+      "femur",
+      "thigh bone",
+      "femoral shaft",
+      "shaft of femur",
+      "body of femur",
+      "linea aspera",
+      "medial lip",
+      "lateral lip",
+      "pectineal line",
+      "spiral line",
+      "gluteal tuberosity",
+      "popliteal surface",
+      "medial supracondylar line",
+      "lateral supracondylar line",
+      "adductor tubercle",
+      "medial condyle",
+      "lateral condyle",
+      "medial epicondyle",
+      "lateral epicondyle",
+      "intercondylar fossa",
+      "patellar surface",
+      "medullary cavity",
+      "marrow cavity",
+      "bone marrow",
+      "compact bone",
+      "cortex",
+      "cancellous bone",
+      "trabecular bone",
+      "periosteum",
+      "endosteum",
+      "diaphysis",
+      "metaphysis",
+      "epiphysis",
+      "epiphyseal plate",
+      "growth plate",
+      "nutrient artery",
+      "nutrient foramen",
+      "profunda femoris",
+      "perforating arteries",
+      "longest bone in the body",
+      "strongest bone",
+      "femoral shaft fracture",
+      "midshaft fracture",
+      "intramedullary nail",
+      "fat embolism",
+      "traction",
+      "anterior bow",
+      "three compartments of the thigh",
+      "intermuscular septa"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "part",
+      "group": "The bone",
+      "layer": "bone",
+      "color": "#efe6cf",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "thigh bone",
+        "shaft of femur",
+        "body of femur",
+        "diaphysis",
+        "linea aspera",
+        "gluteal tuberosity",
+        "pectineal line",
+        "spiral line",
+        "popliteal surface",
+        "adductor tubercle",
+        "medial condyle",
+        "lateral condyle",
+        "intercondylar fossa",
+        "patellar surface",
+        "longest bone in the body"
+      ],
+      "narration": "The longest and strongest bone in the body. Take it as three pieces: an upper end that belongs to the hip, a shaft, and a lower end that belongs to the knee. The shaft is not straight — it is bowed forwards and it slants inwards from hip to knee, so the two knees sit closer together than the two hips. That slant is why the load line of the leg passes through the knee and not down the middle of the bone."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#e2d8bd",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "acetabulum",
+        "hip joint",
+        "innominate bone"
+      ],
+      "narration": "The upper end of the femur is captured in the acetabulum. Everything above the intertrochanteric line belongs to the Proximal femur scene; here the hip is only the anchor at the top of the bone."
+    },
+    {
+      "key": "patella",
+      "name": "right patella",
+      "label": "Patella",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#efe4cb",
+      "refs": {
+        "bodyparts3d": "FMA24486"
+      },
+      "terms": [
+        "patella",
+        "patellar surface of femur",
+        "trochlear groove",
+        "sesamoid bone"
+      ],
+      "narration": "The patella slides in the groove on the front of the lower end — the patellar surface. That groove has a higher lateral lip, which is the bony reason the patella does not simply slip sideways when the quadriceps pulls."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "knee joint",
+        "tibial plateau",
+        "femoral condyles"
+      ],
+      "narration": "The two condyles at the lower end roll and glide on the tibial plateau. The medial condyle reaches further down than the lateral one, which is what levels the knee joint line even though the shaft comes in at a slant."
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#d8cdb0",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "head of fibula",
+        "lateral collateral ligament"
+      ],
+      "narration": "The fibula takes no part in the knee joint itself. Its head lies below and behind the lateral condyle, and the lateral collateral ligament runs from the epicondyle down to it."
+    },
+    {
+      "key": "vast_lat",
+      "name": "right vastus lateralis",
+      "label": "Vastus lateralis",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#d4694a",
+      "refs": {
+        "bodyparts3d": "FMA38930"
+      },
+      "terms": [
+        "vastus lateralis",
+        "lateral lip of linea aspera",
+        "gluteal tuberosity",
+        "greater trochanter"
+      ],
+      "narration": "Takes the lateral lip of the linea aspera and sweeps round the outside of the shaft. Notice how far up its origin runs — as high as the gluteal tuberosity."
+    },
+    {
+      "key": "vast_med",
+      "name": "right vastus medialis",
+      "label": "Vastus medialis",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#c25a6b",
+      "refs": {
+        "bodyparts3d": "FMA38932"
+      },
+      "terms": [
+        "vastus medialis",
+        "medial lip of linea aspera",
+        "spiral line",
+        "intertrochanteric line"
+      ],
+      "narration": "Takes the medial lip of the same ridge and follows it up along the spiral line to the intertrochanteric line. Lateral lip and medial lip, one vastus each — that is the simplest way to hold the linea aspera in mind."
+    },
+    {
+      "key": "vast_int",
+      "name": "right vastus intermedius",
+      "label": "Vastus intermedius",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#a8452f",
+      "refs": {
+        "bodyparts3d": "FMA38934"
+      },
+      "terms": [
+        "vastus intermedius",
+        "anterior surface of femoral shaft",
+        "lateral surface of femoral shaft"
+      ],
+      "narration": "The only muscle that arises from the flat front and side of the shaft rather than from a ridge. In a cross section it is the muscle sitting directly on the bone."
+    },
+    {
+      "key": "add_longus",
+      "name": "right adductor longus",
+      "label": "Adductor longus",
+      "role": "part",
+      "group": "Medial compartment",
+      "layer": "muscle",
+      "color": "#7f9ec4",
+      "refs": {
+        "bodyparts3d": "FMA22456"
+      },
+      "terms": [
+        "adductor longus",
+        "linea aspera",
+        "middle third",
+        "obturator nerve"
+      ],
+      "narration": "Comes from the front of the pubis to the middle third of the linea aspera. The adductors reach the same ridge as the vasti but from the opposite side of the bone, so the linea aspera is where the front and the inside of the thigh meet."
+    },
+    {
+      "key": "add_brevis",
+      "name": "right adductor brevis",
+      "label": "Adductor brevis",
+      "role": "part",
+      "group": "Medial compartment",
+      "layer": "muscle",
+      "color": "#6e8fb8",
+      "refs": {
+        "bodyparts3d": "FMA22452"
+      },
+      "terms": [
+        "adductor brevis",
+        "pectineal line of femur",
+        "upper linea aspera"
+      ],
+      "narration": "A shorter fan to the pectineal line and the upper part of the linea aspera, lying behind pectineus and adductor longus."
+    },
+    {
+      "key": "add_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus",
+      "role": "part",
+      "group": "Medial compartment",
+      "layer": "muscle",
+      "color": "#5b7ea8",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "gluteal tuberosity",
+        "linea aspera",
+        "medial supracondylar line",
+        "adductor tubercle",
+        "adductor hiatus"
+      ],
+      "narration": "The largest attachment on the whole bone. It runs almost the entire length of the back of the shaft, from the gluteal tuberosity down the linea aspera and the medial supracondylar line, and ends on the adductor tubercle. The gap between its lower fibres and the tubercle is the adductor hiatus, where the femoral vessels pass behind the bone to become popliteal."
+    },
+    {
+      "key": "pectineus",
+      "name": "right pectineus",
+      "label": "Pectineus",
+      "role": "part",
+      "group": "Medial compartment",
+      "layer": "muscle",
+      "color": "#8fa9c9",
+      "refs": {
+        "bodyparts3d": "FMA22450"
+      },
+      "terms": [
+        "pectineus",
+        "pectineal line of femur",
+        "lesser trochanter",
+        "floor of femoral triangle"
+      ],
+      "narration": "Runs from the pecten pubis to the pectineal line of the femur, the short ridge from the lesser trochanter to the linea aspera. It makes part of the floor of the femoral triangle."
+    },
+    {
+      "key": "biceps_short",
+      "name": "short head of right biceps femoris",
+      "label": "Biceps femoris — short head",
+      "role": "part",
+      "group": "Posterior compartment",
+      "layer": "muscle",
+      "color": "#8d6a3f",
+      "refs": {
+        "bodyparts3d": "FMA45891"
+      },
+      "terms": [
+        "short head of biceps femoris",
+        "linea aspera",
+        "lateral supracondylar line",
+        "common fibular nerve"
+      ],
+      "narration": "The only hamstring that starts on the femur rather than the ischial tuberosity — it arises from the linea aspera and the lateral supracondylar line. It is also the only one supplied by the common fibular division of the sciatic nerve. A muscle that begins on the shaft cannot extend the hip, which is why the short head flexes the knee only."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Posterior compartment",
+      "layer": "muscle",
+      "color": "#a06a4e",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "gluteal tuberosity",
+        "iliotibial tract",
+        "third trochanter"
+      ],
+      "narration": "Only about a quarter of its fibres reach the bone; they land on the gluteal tuberosity, the rough upward continuation of the lateral lip of the linea aspera. The rest go into the iliotibial tract."
+    },
+    {
+      "key": "popliteus",
+      "name": "right popliteus",
+      "label": "Popliteus",
+      "role": "part",
+      "group": "Posterior compartment",
+      "layer": "muscle",
+      "color": "#9b7f52",
+      "refs": {
+        "bodyparts3d": "FMA22591"
+      },
+      "terms": [
+        "popliteus",
+        "lateral condyle",
+        "popliteal groove",
+        "unlocking the knee"
+      ],
+      "narration": "A small muscle arising from a pit on the outer side of the lateral condyle, inside the knee joint capsule. Its origin is on the femur but it pulls on the tibia, and it is the muscle that unlocks a fully extended knee before flexion can begin."
+    },
+    {
+      "key": "gastroc_med",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "part",
+      "group": "Posterior compartment",
+      "layer": "muscle",
+      "color": "#b0764f",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "medial head of gastrocnemius",
+        "popliteal surface",
+        "above medial condyle"
+      ],
+      "narration": "Starts above the medial condyle, on the popliteal surface. Because it comes off the femur, gastrocnemius crosses the knee as well as the ankle."
+    },
+    {
+      "key": "gastroc_lat",
+      "name": "lateral head of right gastrocnemius",
+      "label": "Gastrocnemius — lateral head",
+      "role": "part",
+      "group": "Posterior compartment",
+      "layer": "muscle",
+      "color": "#c0855b",
+      "refs": {
+        "bodyparts3d": "FMA45960"
+      },
+      "terms": [
+        "lateral head of gastrocnemius",
+        "lateral condyle",
+        "popliteal fossa"
+      ],
+      "narration": "Starts on the back of the lateral condyle. The two heads and the two hamstrings above them box in the popliteal fossa, and the popliteal surface of the femur is its floor."
+    },
+    {
+      "key": "psoas",
+      "name": "right psoas major",
+      "label": "Psoas major",
+      "role": "context",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#9c6f9e",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "lesser trochanter",
+        "iliopsoas"
+      ],
+      "narration": "Ends on the lesser trochanter, the highest attachment on the medial side. Its pull is what flexes and externally rotates the upper fragment when the shaft breaks."
+    },
+    {
+      "key": "it_tract",
+      "name": "right iliotibial tract",
+      "label": "Iliotibial tract",
+      "role": "context",
+      "group": "Fascia",
+      "layer": "fascia",
+      "color": "#e0d2a8",
+      "refs": {
+        "bodyparts3d": "FMA58776"
+      },
+      "terms": [
+        "iliotibial tract",
+        "fascia lata",
+        "lateral intermuscular septum",
+        "compartments of the thigh"
+      ],
+      "narration": "The fascia lata thickens laterally into this band and sends septa inwards to the linea aspera. Those septa are the walls between the three compartments of the thigh, and the ridge on the back of the femur is where all of them are anchored."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One bone, hip to knee",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The femur spans the whole thigh. It is a ball joint at the top and a hinge at the bottom, and everything between is a tube of bone for muscles to pull on. Length matters clinically: measure from the anterior superior iliac spine to the medial malleolus and you are testing whether the two femurs are the same."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The bone alone",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Strip everything off and look at the front. It is almost featureless — smooth shaft, the patellar groove at the bottom. Every rough marking on this bone is on the back, and that is not an accident: the muscles that need leverage pull backwards on it."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The linea aspera",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Turn it round. The vertical ridge down the middle of the back is the linea aspera, and it has a medial and a lateral lip. Trace it upwards and the lateral lip becomes the gluteal tuberosity while the medial lip becomes the spiral line to the intertrochanteric line. Trace it downwards and the two lips diverge into the supracondylar lines, enclosing the flat popliteal surface. Learn the ridge and you have learnt most of the bone."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The lower end",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Joints above and below"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "tibia",
+          "kind": "articulation"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "patella",
+          "kind": "articulation"
+        }
+      ],
+      "narration": "From below, the lower end is two condyles separated behind by the intercondylar fossa and joined in front by the patellar surface. The medial condyle is longer and its epicondyle carries the adductor tubercle just above it. The cruciate ligaments take their femoral attachments from the walls of that fossa — the anterior cruciate from the medial side of the lateral condyle, the posterior cruciate from the lateral side of the medial condyle."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Everything that pulls on the shaft",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Medial compartment",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Posterior compartment",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Almost the entire back of the shaft is muscle attachment. The adductors come to it from the inside, the vasti from the front and side, gluteus maximus and the short head of biceps from above and behind. Adductor magnus alone covers the ridge from top to bottom."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "A hollow tube, not a solid rod",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Slide the cut down the shaft. In the middle third the wall is thick compact bone around a wide medullary cavity — the shaft is a tube. A tube resists bending nearly as well as a solid rod of the same outer size but weighs far less, which is the whole design of a long bone. Move the cut towards either end and the cavity opens out into spongy cancellous bone with no true cavity at all."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "What is inside the cavity",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:medullary_cavity",
+          "path": [
+            "femur"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "The medullary cavity holds marrow — red and haemopoietic in a child, replaced by yellow fatty marrow in the adult shaft. It is lined by endosteum and the bone outside is covered by periosteum, and both layers are where new bone comes from after a fracture. That fatty marrow is also why a femoral shaft fracture can throw fat globules into the circulation and produce fat embolism syndrome a day or two later."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "How the bone is fed",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "femur"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:nutrient_artery",
+          "path": [
+            "add_magnus",
+            "femur"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The path traced here is the nutrient artery, a branch of a perforating artery from the profunda femoris. It enters through a nutrient foramen near the linea aspera, angled away from the growing end, and supplies the inner two thirds of the cortex. The outer third is fed from periosteal vessels. Strip the periosteum carelessly at surgery and you take away half the blood supply of the shaft."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "The three compartments around it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Anterior compartment",
+            "Posterior compartment"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Cut across the mid-thigh and the femur sits slightly towards the back with three compartments arranged around it. Anterior holds the quadriceps and the femoral nerve, medial holds the adductors and the obturator nerve, posterior holds the hamstrings and the sciatic nerve. The septa that divide them all run from the fascia lata to the linea aspera, so the ridge on the bone is the hinge of the whole arrangement."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "When the shaft breaks",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "psoas",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Medial compartment",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "It takes great force to break this shaft, so assume other injuries. The muscles then deform the fragments in a predictable way: psoas and the gluteal muscles flex and rotate the upper fragment outwards, the adductors pull the lower fragment medially, and gastrocnemius tilts the very lowest fragment backwards towards the popliteal artery. A closed femoral shaft fracture can hide a litre or more of blood in the thigh, which is enough to make a young adult shocked with no external bleeding at all."
+    },
+    {
+      "mode": "location",
+      "beat": 11,
+      "title": "Peel down to bone",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The bone"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Peel the thigh in order: fascia lata, then the muscles of each compartment, then periosteum, then cortex, then the cavity. Reciting that order is how you answer any question about the femur — it tells you what a surgeon passes through to reach the bone, and what a nail passes down once inside it."
+    }
+  ],
+  "gaps": [
+    "The medullary cavity, the endosteum, the periosteum, the trabecular pattern and the epiphyseal plates are internal architecture that a surface model cannot show. The cut-plane beats open the outer shell and describe what a real sawn section would reveal; the marrow itself is authored as a traced concept rather than displayed.",
+    "The linea aspera, the gluteal tuberosity, the pectineal and spiral lines, the supracondylar lines, the adductor tubercle, the intercondylar fossa, the nutrient foramen and the patellar surface are all sub-features of one whole-femur mesh. Each is taught by lighting the femur and naming the feature. Measured landmark anchors are the obvious next improvement, and were not attempted here because an anchor placed by eye would be worse than none.",
+    "No artery of the lower limb below the external iliac exists in the catalog, so the nutrient artery, the profunda femoris and its perforating branches are authored as a traced concept path along the back of the shaft and named in narration.",
+    "No ligament of the knee exists in the catalog — the only ligaments in it are the inguinal and the long plantar. The cruciates, the collaterals and the knee capsule are named in the lower-end beat but not shown, so the femoral attachments of the cruciate ligaments are narration only.",
+    "The adductor hiatus is defined by the gap between adductor magnus and the femur rather than by a modelled opening, and the femoral vessels that pass through it have no models, so the hiatus is described where adductor magnus meets the adductor tubercle.",
+    "This scene does not cover Proximal femur, Hip joint or Quadriceps femoris. The upper end, the acetabulum and the four heads of quadriceps appear here only as the ends of the bone and the muscles hanging off the shaft; the retinacular blood supply of the head belongs to the Proximal femur scene and is deliberately not repeated."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

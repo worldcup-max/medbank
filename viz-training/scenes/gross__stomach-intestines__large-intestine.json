@@ -1,0 +1,837 @@
+{
+  "schema": 2,
+  "id": "gross__stomach-intestines__large-intestine",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Stomach & Intestines",
+  "structure": "Large intestine",
+  "covers": [
+    "Large intestine"
+  ],
+  "learning_goal": "Name the parts of the large intestine in order, tell large bowel from small bowel on four features at a spotter table, use the three taeniae to find the base of the appendix and the rectosigmoid junction, place the midgut–hindgut line at the splenic flexure and say what that means for blood supply, and explain why the caecum, the sigmoid and the rectum are the three places large bowel disease presents.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "large intestine",
+      "large bowel",
+      "colon",
+      "caecum",
+      "appendix",
+      "rectum",
+      "anal canal",
+      "hindgut",
+      "midgut",
+      "abdomen",
+      "pelvis",
+      "inferior mesenteric artery",
+      "gastrointestinal tract",
+      "intestinal obstruction",
+      "appendicitis"
+    ],
+    "terms": [
+      "large intestine",
+      "large bowel",
+      "colon",
+      "taenia coli",
+      "taeniae coli",
+      "three taeniae",
+      "taenia libera",
+      "free taenia",
+      "taenia omentalis",
+      "omental taenia",
+      "taenia mesocolica",
+      "mesocolic taenia",
+      "haustra",
+      "haustrations",
+      "sacculations",
+      "appendices epiploicae",
+      "omental appendages",
+      "caecum",
+      "cecum",
+      "ileocaecal valve",
+      "ileocaecal junction",
+      "appendix",
+      "vermiform appendix",
+      "base of the appendix",
+      "McBurney's point",
+      "retrocaecal appendix",
+      "pelvic appendix",
+      "ascending colon",
+      "right paracolic gutter",
+      "hepatic flexure",
+      "right colic flexure",
+      "transverse colon",
+      "transverse mesocolon",
+      "splenic flexure",
+      "left colic flexure",
+      "phrenicocolic ligament",
+      "descending colon",
+      "left paracolic gutter",
+      "sigmoid colon",
+      "sigmoid mesocolon",
+      "rectosigmoid junction",
+      "rectum",
+      "sacral flexure",
+      "houston valves",
+      "transverse rectal folds",
+      "ampulla of the rectum",
+      "anal canal",
+      "pectinate line",
+      "dentate line",
+      "internal anal sphincter",
+      "external anal sphincter",
+      "anorectal ring",
+      "puborectalis",
+      "levator ani",
+      "superior mesenteric artery",
+      "ileocolic artery",
+      "right colic artery",
+      "middle colic artery",
+      "inferior mesenteric artery",
+      "left colic artery",
+      "sigmoid arteries",
+      "superior rectal artery",
+      "marginal artery",
+      "marginal artery of Drummond",
+      "arc of Riolan",
+      "watershed",
+      "griffiths point",
+      "sudeck point",
+      "midgut",
+      "hindgut",
+      "portal venous drainage",
+      "superior rectal vein",
+      "middle rectal vein",
+      "inferior rectal vein",
+      "portosystemic anastomosis",
+      "haemorrhoids",
+      "water absorption",
+      "faecal continence",
+      "mass movement",
+      "gastrocolic reflex",
+      "large bowel obstruction",
+      "sigmoid volvulus",
+      "caecal volvulus",
+      "coffee bean sign",
+      "colorectal carcinoma",
+      "apple core lesion",
+      "diverticular disease",
+      "diverticulitis",
+      "ulcerative colitis",
+      "lead pipe colon",
+      "toxic megacolon",
+      "Hirschsprung disease",
+      "amoebic colitis",
+      "amoeboma",
+      "typhoid",
+      "appendicitis",
+      "peritonitis",
+      "digital rectal examination",
+      "sigmoidoscopy",
+      "colonoscopy",
+      "barium enema",
+      "stoma",
+      "colostomy",
+      "Hartmann's procedure"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.15
+  },
+  "structures": [
+    {
+      "key": "free_taenia",
+      "name": "free taenia",
+      "label": "Taenia libera — the free band",
+      "role": "part",
+      "group": "Taeniae coli",
+      "layer": "organ",
+      "color": "#c0651a",
+      "refs": {
+        "bodyparts3d": "FMA76893"
+      },
+      "terms": [
+        "taenia libera",
+        "free taenia",
+        "taenia coli",
+        "taeniae coli",
+        "anterior band",
+        "caecum",
+        "base of the appendix",
+        "McBurney's point"
+      ],
+      "narration": "The band that lies free on the front of the ascending and descending colon, with nothing attached to it. It is the one the surgeon sees first when a loop of large bowel is delivered through a wound. Follow it down into the right iliac fossa and it takes you to the base of the appendix — all three taeniae converge there, and that is how you find an appendix you cannot see."
+    },
+    {
+      "key": "mesocolic_taenia",
+      "name": "mesocolic taenia",
+      "label": "Taenia mesocolica — the mesenteric band",
+      "role": "part",
+      "group": "Taeniae coli",
+      "layer": "organ",
+      "color": "#a34d12",
+      "refs": {
+        "bodyparts3d": "FMA76891"
+      },
+      "terms": [
+        "taenia mesocolica",
+        "mesocolic taenia",
+        "transverse mesocolon",
+        "sigmoid mesocolon",
+        "mesenteric border"
+      ],
+      "narration": "The band along the line where the mesocolon is attached — posteromedial on the ascending and descending colon, posterior on the transverse. It marks the mesenteric border, which is where the vessels enter and where a colonic anastomosis is most at risk of leaking. On the ascending and descending colon there is no mesocolon in the adult, because those two segments are plastered to the back wall; the band still marks where the mesocolon used to be before it fused."
+    },
+    {
+      "key": "omental_taenia",
+      "name": "omental taenia",
+      "label": "Taenia omentalis — the omental band",
+      "role": "part",
+      "group": "Taeniae coli",
+      "layer": "organ",
+      "color": "#8a3f0c",
+      "refs": {
+        "bodyparts3d": "FMA76892"
+      },
+      "terms": [
+        "taenia omentalis",
+        "omental taenia",
+        "greater omentum",
+        "appendices epiploicae",
+        "omental appendages",
+        "posterolateral band"
+      ],
+      "narration": "The band that carries the attachment of the greater omentum on the transverse colon, and lies posterolateral on the ascending and descending colon. Along it hang the appendices epiploicae, small tags of fat found on large bowel and never on small bowel. A tag can twist on itself and infarct, which gives sudden localised abdominal pain in a patient who is otherwise well — epiploic appendagitis, and it mimics appendicitis or diverticulitis."
+    },
+    {
+      "key": "appendix",
+      "name": "appendix",
+      "label": "Vermiform appendix",
+      "role": "part",
+      "group": "Where it begins",
+      "layer": "organ",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA14542"
+      },
+      "terms": [
+        "appendix",
+        "vermiform appendix",
+        "caecum",
+        "base of the appendix",
+        "McBurney's point",
+        "retrocaecal",
+        "pelvic appendix",
+        "appendicitis",
+        "appendicular artery",
+        "ileocaecal junction",
+        "right iliac fossa"
+      ],
+      "narration": "A blind tube of gut hanging from the posteromedial wall of the caecum, about two centimetres below the ileocaecal opening. Its base is constant and lies at McBurney's point — a third of the way along a line from the right anterior superior iliac spine to the umbilicus — but its tip wanders. Retrocaecal is commonest, then pelvic, and the position of the tip decides the signs: a retrocaecal appendix irritates psoas and gives a positive psoas test, a pelvic one irritates the rectum and gives tenderness on rectal examination. Its artery is an end artery in the mesoappendix, which is why an inflamed appendix gangrenes and perforates rather than settling."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum",
+      "role": "part",
+      "group": "Where it ends",
+      "layer": "organ",
+      "color": "#a569bd",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "rectosigmoid junction",
+        "S3",
+        "sacral flexure",
+        "ampulla of the rectum",
+        "transverse rectal folds",
+        "houston valves",
+        "superior rectal artery",
+        "digital rectal examination",
+        "rectal carcinoma",
+        "pouch of Douglas",
+        "rectovesical pouch"
+      ],
+      "narration": "Twelve centimetres of gut from the third sacral vertebra to the anorectal junction, following the curve of the sacrum. Three things mark its start: the taeniae spread out into a continuous outer muscle coat, the appendices epiploicae stop, and the mesocolon ends. It has no mesentery, so it cannot twist. Its lower part widens into the ampulla, which is the part you feel on rectal examination and where faeces are held until continence is voluntarily released. The upper third is covered by peritoneum in front and at the sides, the middle third in front only, and the lower third not at all, which is why the pouch of Douglas is within reach of a finger and a pelvic abscess can be felt through the rectal wall."
+    },
+    {
+      "key": "anal_sphincter",
+      "name": "external anal sphincter",
+      "label": "External anal sphincter",
+      "role": "part",
+      "group": "Where it ends",
+      "layer": "muscle",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA21930"
+      },
+      "terms": [
+        "external anal sphincter",
+        "internal anal sphincter",
+        "anal canal",
+        "anorectal ring",
+        "puborectalis",
+        "levator ani",
+        "inferior rectal nerve",
+        "pudendal nerve",
+        "S2 S3 S4",
+        "continence",
+        "pectinate line",
+        "dentate line",
+        "haemorrhoids",
+        "anal fissure",
+        "fistula in ano"
+      ],
+      "narration": "Skeletal muscle under voluntary control, supplied by the inferior rectal branch of the pudendal nerve. It surrounds the whole anal canal and overlaps the involuntary internal sphincter, which is thickened circular smooth muscle of the gut wall. Continence is the two sphincters plus the puborectalis sling, which pulls the anorectal junction forward and keeps the anorectal angle acute. Divide the sphincter above the anorectal ring when laying open a fistula and the patient is incontinent — that is the single most important line in anal surgery."
+    },
+    {
+      "key": "ileum",
+      "name": "ileum",
+      "label": "Terminal ileum",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA7208"
+      },
+      "terms": [
+        "ileum",
+        "terminal ileum",
+        "ileocaecal valve",
+        "ileocaecal junction",
+        "small bowel",
+        "valvulae conniventes",
+        "peripheral gas shadows"
+      ],
+      "narration": "Ends by opening into the caecum through the ileocaecal valve. Compare the two here and the differences are the ones you will be asked for: small bowel is smooth, mobile and central with folds crossing the whole width, large bowel is sacculated, mostly fixed, peripheral, and carries taeniae, haustra and fatty tags. The valve holds contents back long enough for the terminal ileum to absorb bile salts and vitamin B12, and it is competent in about a third of people — a competent valve turns large bowel obstruction into a closed loop and the caecum bursts first."
+    },
+    {
+      "key": "sma",
+      "name": "superior mesenteric artery",
+      "label": "Superior mesenteric artery — the midgut half",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14749"
+      },
+      "terms": [
+        "superior mesenteric artery",
+        "SMA",
+        "ileocolic artery",
+        "right colic artery",
+        "middle colic artery",
+        "appendicular artery",
+        "midgut",
+        "L1"
+      ],
+      "narration": "Supplies the large intestine as far as two thirds of the way along the transverse colon, through the ileocolic, right colic and middle colic arteries. That is the midgut, and its pain refers to the umbilicus. This is why early appendicitis hurts around the navel and only shifts to the right iliac fossa when the inflamed appendix touches the parietal peritoneum."
+    },
+    {
+      "key": "ima",
+      "name": "inferior mesenteric artery",
+      "label": "Inferior mesenteric artery — the hindgut half",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA14750"
+      },
+      "terms": [
+        "inferior mesenteric artery",
+        "IMA",
+        "L3",
+        "left colic artery",
+        "sigmoid arteries",
+        "superior rectal artery",
+        "hindgut",
+        "marginal artery",
+        "watershed",
+        "ischaemic colitis"
+      ],
+      "narration": "Leaves the front of the aorta at L3 and supplies the rest — the distal third of the transverse colon, the descending colon, the sigmoid and the upper rectum. That is the hindgut, and its pain refers to the suprapubic region. The two territories meet near the splenic flexure, joined only by the marginal artery running in the mesentery along the whole length of the colon. That junction is a watershed with the poorest collateral supply in the gut, which is why ischaemic colitis picks the splenic flexure."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Portal drainage",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "inferior mesenteric vein",
+        "portal vein",
+        "portal drainage",
+        "superior rectal vein",
+        "middle rectal vein",
+        "portosystemic anastomosis",
+        "colorectal liver metastases"
+      ],
+      "narration": "The whole colon drains to the portal vein, so colorectal cancer spreads to the liver first. The exception is the lower rectum and anal canal: the superior rectal vein is portal but the middle and inferior rectal veins are systemic, and where they meet is a portosystemic anastomosis. A low rectal tumour can therefore reach the lungs without touching the liver."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "hepatic flexure",
+        "right colic flexure",
+        "amoebic liver abscess"
+      ],
+      "narration": "The right lobe sits over the hepatic flexure, which is why that bend lies lower and more anterior than the splenic flexure. Colonic amoebiasis reaches the liver by the portal vein and forms the anchovy-sauce abscess that is still common in this region."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "splenic flexure",
+        "left colic flexure",
+        "phrenicocolic ligament"
+      ],
+      "narration": "The splenic flexure is tucked up under the spleen, higher, more posterior and more acute than the hepatic flexure, and slung from the diaphragm by the phrenicocolic ligament. Two consequences: it is the hardest bend to get a scope round, and traction on the colon at surgery tears the splenic capsule."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "greater curvature",
+        "greater omentum",
+        "gastrocolic reflex",
+        "gastrocolic ligament"
+      ],
+      "narration": "The greater omentum hangs from the greater curvature and is attached to the transverse colon along the omental band. Food entering the stomach triggers mass movement in the colon — the gastrocolic reflex, and the reason the urge to defaecate follows a meal."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney",
+      "role": "context",
+      "group": "Colonic bed",
+      "layer": "organ",
+      "color": "#884ea0",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "ascending colon",
+        "right paracolic gutter",
+        "retroperitoneal"
+      ],
+      "narration": "Lies behind the hepatic flexure. The ascending colon runs up in front of the lower pole and the right ureter, both of which are at risk in a right hemicolectomy."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "context",
+      "group": "Colonic bed",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "descending colon",
+        "left paracolic gutter",
+        "left ureter"
+      ],
+      "narration": "Lies behind the splenic flexure and the start of the descending colon. The left ureter crosses the pelvic brim near the sigmoid mesocolon and is the structure most often injured in sigmoid surgery."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "L1",
+        "L3",
+        "superior mesenteric artery origin",
+        "inferior mesenteric artery origin"
+      ],
+      "narration": "Included to fix the order: superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. Where those two territories meet on the colon is the watershed."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Where it ends",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "S3",
+        "sacral flexure",
+        "rectosigmoid junction",
+        "presacral space"
+      ],
+      "narration": "The rectum begins in front of S3 and follows the sacral hollow. That curve is why a rigid sigmoidoscope must be angled backwards after the first few centimetres, and why rectal mobilisation is done in the plane in front of the sacrum."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Urinary bladder",
+      "role": "context",
+      "group": "Where it ends",
+      "layer": "organ",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "rectovesical pouch",
+        "pouch of Douglas",
+        "pelvic appendix",
+        "colovesical fistula"
+      ],
+      "narration": "Lies in front of the rectum, with the peritoneum dipping between them. A pelvic appendix or a sigmoid loaded with diverticula can lie on the bladder, which is why appendicitis and diverticulitis both cause urinary frequency, and why a colovesical fistula presents with air in the urine."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three bands draw the whole colon",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Taeniae coli",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The longitudinal muscle of the large intestine is not a complete coat. It is gathered into three flat bands — the taeniae coli — and they run the length of the colon from the base of the appendix to the rectosigmoid junction. The bands are shorter than the gut they lie on, so the bowel is puckered into pouches between them; those pouches are the haustra. Learn the colon by its bands and you get its course, its sacculation and its landmarks in one idea. The free band lies in front, the mesocolic band along the mesenteric attachment, and the omental band carries the greater omentum and the fatty tags."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "From the right iliac fossa to the anus",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Taeniae coli"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "rectum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Colonic bed"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:faecal-stream",
+          "path": [
+            "ileum",
+            "appendix",
+            "free_taenia",
+            "liver",
+            "omental_taenia",
+            "spleen",
+            "mesocolic_taenia",
+            "rectum",
+            "anal_sphincter"
+          ],
+          "duration": 12
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ileum",
+          "to": "appendix",
+          "kind": "ileocaecal junction"
+        }
+      ],
+      "narration": "Walk it in order. The ileum opens into the caecum in the right iliac fossa, and the appendix hangs just below the opening. The ascending colon runs up the right flank to the hepatic flexure under the liver. The transverse colon loops forward and down across the abdomen, hung on the transverse mesocolon, and rises again to the splenic flexure high on the left under the spleen. The descending colon runs down the left flank to the pelvic brim. There it becomes the sigmoid colon, which is on a mesentery and therefore mobile, and at the third sacral vertebra it becomes the rectum. Ascending and descending are fixed to the back wall; caecum, transverse and sigmoid hang free. Which parts are mobile is the whole of the volvulus answer."
+    },
+    {
+      "mode": "comparison",
+      "beat": 3,
+      "title": "Large bowel or small bowel",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Taeniae coli"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ileum"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Taeniae coli",
+            "ileum"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "free_taenia",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Four features and you will be asked for them at the table. Taeniae: three bands on large bowel, a complete coat on small bowel. Haustra: sacculations on large bowel, a smooth tube on small. Appendices epiploicae: fatty tags on large bowel, none on small. Calibre and position: large bowel is wider and lies around the outside of the abdomen, small bowel is narrower and lies centrally. The same four separate them on a plain film — large bowel gas is peripheral with haustral folds that cross only part of the width, small bowel gas is central with valvulae conniventes that cross the whole width."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The line at the splenic flexure",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Taeniae coli"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "rectum"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sma",
+            "ima"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "sma",
+            "appendix",
+            "free_taenia",
+            "ima",
+            "rectum"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "ima",
+          "kind": "meet at the watershed"
+        }
+      ],
+      "narration": "One line divides the large intestine in two. Everything up to the junction of the proximal two thirds and distal third of the transverse colon is midgut and belongs to the superior mesenteric artery. Everything after it is hindgut and belongs to the inferior mesenteric artery. That line sits near the splenic flexure and it explains three separate exam answers: the referred pain shifts from umbilical to suprapubic across it, the venous drainage stays portal on both sides but the lymphatics follow the arteries, and the collateral supply is thinnest there. The marginal artery runs along the whole mesenteric border joining the two systems — it is what allows a colon to survive ligation of one trunk, and where it fails you get ischaemic colitis at the flexure."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The end of the tube",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where it ends"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anal_sphincter",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rectum",
+          "to": "anal_sphincter",
+          "kind": "anorectal junction"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        }
+      ],
+      "narration": "At the rectosigmoid junction the taeniae fan out and the outer muscle becomes a complete coat again, the fatty tags stop and the mesocolon ends. The rectum then follows the sacrum, widens into the ampulla, and passes through the pelvic floor to become the anal canal. Inside the canal the pectinate line divides two different worlds. Above it the lining is columnar, the blood supply is superior rectal, the veins are portal, the lymph goes to internal iliac nodes and there is no somatic sensation. Below it the lining is squamous, the supply is inferior rectal, the veins are systemic, the lymph goes to superficial inguinal nodes and it is exquisitely painful. That single line explains why internal haemorrhoids are painless and an anal fissure is agony, and why a low anal cancer can present as a lump in the groin."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "What it is actually for",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Taeniae coli"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Where it begins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Where it ends"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:water",
+          "path": [
+            "appendix",
+            "free_taenia",
+            "omental_taenia",
+            "mesocolic_taenia",
+            "rectum"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "free_taenia",
+          "kind": "gastrocolic reflex"
+        }
+      ],
+      "narration": "About one and a half litres of fluid arrives from the ileum each day and about a hundred millilitres leaves in the stool. The colon absorbs water and electrolytes and nothing else of consequence, so its diseases present as diarrhoea and dehydration, not as malnutrition. Its bacteria make vitamin K and short-chain fatty acids. Movement is slow and mostly segmental, with two or three mass movements a day that sweep contents into the rectum — usually after a meal, by the gastrocolic reflex. Rectal filling is what produces the urge to defaecate, and continence is held by the internal sphincter, the external sphincter and the puborectalis sling until it is voluntarily released."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where it goes wrong",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "appendix",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rectum",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rectum",
+          "to": "bladder",
+          "kind": "rectovesical pouch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Three places account for most of it. The caecum and appendix: appendicitis is the commonest abdominal emergency, and a competent ileocaecal valve makes the caecum the segment that perforates in large bowel obstruction because it is the widest. The sigmoid: it is long, mobile and on a mesentery, so it twists — sigmoid volvulus is common in this region, presents with gross distension and absolute constipation, and shows a coffee-bean loop pointing to the right upper quadrant; it is also the seat of diverticular disease. The rectum: over half of colorectal cancers are within reach of a finger or a sigmoidoscope, so any adult with a change in bowel habit, bleeding per rectum or unexplained anaemia gets a rectal examination. Remember also that large bowel obstruction gives late vomiting, early distension and gross constipation, the mirror image of the small bowel picture."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no caecum and no colon of any kind in the catalog. Searching all 934 entries for colon, caecum, cecum, bowel, intestine, flexure, haustrum and appendage returns nothing but the three taeniae, the appendix, the rectum and the external anal sphincter. So the colon is taught through the three bands that run along it — option (b) of the resolution rule, teaching a structure through an adjacent one that exists — and this works better than it sounds, because the taeniae ARE the course of the colon: they start at the base of the appendix, run the length of every segment, and fan out at the rectosigmoid junction. What cannot be shown is the tube itself. A student cannot point at the ascending colon as an object, only at the bands lying on it, and the labels say so.",
+    "Because the tube is missing, this scene is held at 'candidate' rather than 'ready'. Everything the validator checks passes, but a large intestine scene with no caecum and no colon wall cannot answer a spotter question that says 'identify the structure arrowed'. Ingesting caecum and colon meshes from a fuller archive would promote it with no re-authoring: the beats, the ops and the narration are already written to accept them.",
+    "The three taeniae exist and the earlier small-intestine scene said they did not — its gaps[] claims 'not one large-bowel mesh apart from the appendix and the rectum', which was wrong because the search there did not include the word taenia. FMA76891, FMA76892 and FMA76893 are all in the catalog. That gap note in gross__stomach-intestines__small-intestine should be corrected by a human; it is not this scene's file to edit.",
+    "Haustra and appendices epiploicae have no models. Both are named in every large-versus-small-bowel answer and both are narrated in beats 1 and 3 and carried in terms[], but the haustra are a consequence of the taeniae being short and have no separate mesh, and the fatty tags are not in the catalog at all.",
+    "The ileocaecal valve is narrated and not drawn. It has no mesh, and without a caecum there is nothing for it to sit on. Its competence decides whether large bowel obstruction becomes a closed loop, so it is exam-relevant and is in terms[] — a note naming it opens this scene and hears the answer in beat 3.",
+    "No anal canal, no internal anal sphincter and no pectinate line. Only the external sphincter, FMA21930, exists. Beat 5 therefore teaches the canal by cutting through the rectum and the external sphincter and narrating the line, which is the part students actually lose marks on. A model of the anal canal with its columns would let the pectinate line be authored as a measured anchor.",
+    "The colic arteries have no meshes. Only the two trunks exist, so beat 4 traces from the aorta through each trunk to the bowel it supplies and narrates the ileocolic, right colic, middle colic, left colic, sigmoid and superior rectal branches. The marginal artery of Drummond — the anastomosis the whole watershed idea depends on — is named and not drawn, and it is the single most useful vessel in this topic.",
+    "The colic flexures are taught by their neighbours: the hepatic flexure through the liver and the splenic flexure through the spleen, both carried as context. That is deliberate, because the relations are what makes the flexures examinable — the splenic flexure is higher, more posterior and more acute, and it tears the spleen when the colon is pulled. But neither bend is a selectable object in this scene.",
+    "No mesocolon and no peritoneum. The transverse and sigmoid mesocolons, the paracolic gutters and the fusion that made the ascending and descending colon secondarily retroperitoneal are all narrated and all in terms[], but a fold of peritoneum has no model. 'Peritoneum & mesentery' is its own curriculum entry, authored in the same run as this scene and routed to diagram mode for exactly this reason.",
+    "No landmark anchors were authored. None of these meshes is in the local decimated set, so McBurney's point, the rectosigmoid junction at S3 and the anorectal ring could not be placed by measurement, and this corpus does not place anchors by eye. Ingesting FMA14542, FMA76893 and FMA14544 locally would allow all three: McBurney's point as the taeniae-to-appendix convergence, the rectosigmoid junction as a taenia-to-rectum contact, and the anorectal ring as a rectum-to-sphincter contact."
+  ]
+}

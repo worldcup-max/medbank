@@ -1,0 +1,622 @@
+{
+  "schema": 2,
+  "id": "gross__axilla-brachial-plexus__axillary-lymph-nodes",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Axilla & Brachial Plexus",
+  "structure": "Axillary lymph nodes",
+  "covers": [
+    "Axillary lymph nodes"
+  ],
+  "learning_goal": "Name the five anatomical groups of axillary nodes and say what each one drains, convert them into the surgeon's three levels using pectoralis minor, and use both to explain sentinel node biopsy, axillary clearance and the three nerves that can be injured doing it.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "axilla",
+      "axillary lymph nodes",
+      "lymphatic drainage",
+      "upper limb",
+      "breast",
+      "pectoral region",
+      "breast cancer",
+      "glands",
+      "oncology"
+    ],
+    "terms": [
+      "axillary lymph nodes",
+      "anterior group",
+      "pectoral group",
+      "posterior group",
+      "subscapular group",
+      "lateral group",
+      "humeral group",
+      "brachial group",
+      "central group",
+      "apical group",
+      "infraclavicular nodes",
+      "interpectoral nodes",
+      "Rotter's nodes",
+      "level I",
+      "level II",
+      "level III",
+      "pectoralis minor",
+      "sentinel lymph node",
+      "sentinel node biopsy",
+      "axillary clearance",
+      "axillary dissection",
+      "Patey mastectomy",
+      "modified radical mastectomy",
+      "lymphoedema",
+      "peau d'orange",
+      "long thoracic nerve",
+      "nerve of Bell",
+      "winged scapula",
+      "thoracodorsal nerve",
+      "intercostobrachial nerve",
+      "internal thoracic nodes",
+      "parasternal nodes",
+      "supraclavicular nodes",
+      "Virchow's node",
+      "subclavian lymph trunk",
+      "thoracic duct",
+      "right lymphatic duct",
+      "venous angle",
+      "axillary tail of Spence",
+      "quadrants of the breast",
+      "TNM staging",
+      "N stage"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "pec_minor",
+      "label": "Pectoralis minor — the key to the whole topic",
+      "role": "part",
+      "group": "The divider",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "terms": [
+        "pectoralis minor",
+        "coracoid process",
+        "third fourth fifth ribs",
+        "level I",
+        "level II",
+        "level III"
+      ],
+      "narration": "One small muscle running from ribs three, four and five to the coracoid process. It divides the axillary artery into three parts and the axillary nodes into three levels. If you remember nothing else from the axilla, remember this muscle."
+    },
+    {
+      "key": "anterior_group",
+      "label": "Anterior (pectoral) group",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#7fa05a",
+      "terms": [
+        "anterior group",
+        "pectoral group",
+        "lower border of pectoralis minor",
+        "lateral thoracic vessels",
+        "medial wall",
+        "breast",
+        "sentinel node"
+      ],
+      "narration": "Four or five nodes on the medial wall of the axilla, along the lower border of pectoralis minor with the lateral thoracic vessels. They drain the front of the trunk above the umbilicus and most of the breast. This is where breast cancer usually arrives first, so this is usually where the sentinel node is."
+    },
+    {
+      "key": "posterior_group",
+      "label": "Posterior (subscapular) group",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#7fa05a",
+      "terms": [
+        "posterior group",
+        "subscapular group",
+        "lower border of subscapularis",
+        "subscapular vessels",
+        "thoracodorsal nerve",
+        "posterior wall"
+      ],
+      "narration": "Six or seven nodes on the posterior wall along the lower border of subscapularis, on the subscapular vessels and the thoracodorsal nerve. They drain the back of the trunk down as far as the iliac crest. The nerve running with them is the one that must be preserved in a clearance."
+    },
+    {
+      "key": "lateral_group",
+      "label": "Lateral (humeral) group",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#7fa05a",
+      "terms": [
+        "lateral group",
+        "humeral group",
+        "brachial group",
+        "axillary vein",
+        "lateral wall",
+        "upper limb",
+        "lymphoedema"
+      ],
+      "narration": "Four to six nodes on the lateral wall, lying medial to the axillary vein. They drain almost the whole upper limb. Take them out and the arm has lost its own drainage — this is the group behind lymphoedema after breast surgery."
+    },
+    {
+      "key": "central_group",
+      "label": "Central group",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#6f9450",
+      "terms": [
+        "central group",
+        "axillary fat",
+        "base of the axilla",
+        "intercostobrachial nerve",
+        "palpable nodes"
+      ],
+      "narration": "Three or four large nodes in the fat at the base of the axilla. They receive from the anterior, posterior and lateral groups. They are the nodes you actually feel when you examine an axilla, and the intercostobrachial nerve runs right through them."
+    },
+    {
+      "key": "apical_group",
+      "label": "Apical (infraclavicular) group",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#5f8544",
+      "terms": [
+        "apical group",
+        "infraclavicular nodes",
+        "apex of the axilla",
+        "medial to pectoralis minor",
+        "subclavian lymph trunk",
+        "level III"
+      ],
+      "narration": "Six to twelve nodes at the apex, medial to and above pectoralis minor along the upper part of the axillary vein. Everything in the axilla eventually drains here, and from here lymph leaves the limb altogether as the subclavian trunk. The last group in, and the only way out."
+    },
+    {
+      "key": "interpectoral",
+      "label": "Interpectoral nodes (Rotter's)",
+      "role": "part",
+      "group": "The five groups",
+      "layer": "organ",
+      "color": "#8caf68",
+      "terms": [
+        "interpectoral nodes",
+        "Rotter's nodes",
+        "between pectoralis major and minor"
+      ],
+      "narration": "One to four nodes between pectoralis major and pectoralis minor. They are not one of the classical five, but they are counted as level two by the surgeon and they are easy to leave behind."
+    },
+    {
+      "key": "level1",
+      "label": "Level I — lateral to pectoralis minor",
+      "role": "part",
+      "group": "The three levels",
+      "layer": "organ",
+      "color": "#c9a227",
+      "terms": [
+        "level I",
+        "low axilla",
+        "lateral to pectoralis minor",
+        "anterior group",
+        "posterior group",
+        "lateral group"
+      ],
+      "narration": "Everything lateral to and below the lower border of pectoralis minor. In group language that is the anterior, posterior and lateral groups together. Most sentinel nodes sit here."
+    },
+    {
+      "key": "level2",
+      "label": "Level II — behind pectoralis minor",
+      "role": "part",
+      "group": "The three levels",
+      "layer": "organ",
+      "color": "#c08c1e",
+      "terms": [
+        "level II",
+        "behind pectoralis minor",
+        "central group",
+        "interpectoral nodes",
+        "Rotter's nodes"
+      ],
+      "narration": "Everything behind the muscle: the central group and the interpectoral nodes. A standard clearance takes level one and level two."
+    },
+    {
+      "key": "level3",
+      "label": "Level III — medial to pectoralis minor",
+      "role": "part",
+      "group": "The three levels",
+      "layer": "organ",
+      "color": "#a8760f",
+      "terms": [
+        "level III",
+        "apex of the axilla",
+        "medial to pectoralis minor",
+        "apical group",
+        "Patey mastectomy"
+      ],
+      "narration": "Medial to and above the muscle, at the apex — the apical group. To reach it the surgeon has to divide pectoralis minor, and that division is exactly what makes an operation a Patey."
+    },
+    {
+      "key": "breast",
+      "label": "Breast & the axillary tail",
+      "role": "part",
+      "group": "What drains in",
+      "layer": "organ",
+      "color": "#d9a7a7",
+      "terms": [
+        "breast",
+        "mammary gland",
+        "axillary tail of Spence",
+        "upper outer quadrant",
+        "subareolar plexus",
+        "peau d'orange"
+      ],
+      "narration": "About three-quarters of the lymph of the breast goes to the axilla, most of it from the upper outer quadrant and the axillary tail. The remaining quarter goes medially through the intercostal spaces to the internal thoracic nodes. That split is why a medial tumour can spread inside the chest with a normal-feeling axilla."
+    },
+    {
+      "key": "limb",
+      "label": "Upper limb",
+      "role": "part",
+      "group": "What drains in",
+      "layer": "organ",
+      "color": "#c9b79a",
+      "terms": [
+        "upper limb",
+        "superficial lymphatics",
+        "deep lymphatics",
+        "supratrochlear nodes",
+        "cellulitis",
+        "ascending lymphangitis"
+      ],
+      "narration": "Nearly all the limb drains to the lateral group, apart from a strip on the lateral side that follows the cephalic vein straight to the apical or supraclavicular nodes. A septic finger therefore gives tender axillary nodes and red streaks up the arm."
+    },
+    {
+      "key": "trunk_wall",
+      "label": "Trunk wall above the umbilicus",
+      "role": "part",
+      "group": "What drains in",
+      "layer": "organ",
+      "color": "#c9b79a",
+      "terms": [
+        "trunk wall",
+        "umbilicus",
+        "watershed",
+        "inguinal nodes"
+      ],
+      "narration": "The skin of the trunk drains to the axilla above the level of the umbilicus and to the groin below it. The umbilicus is the watershed, front and back."
+    },
+    {
+      "key": "internal_thoracic",
+      "label": "Internal thoracic (parasternal) nodes",
+      "role": "part",
+      "group": "Where it goes out",
+      "layer": "organ",
+      "color": "#8a9ec4",
+      "terms": [
+        "internal thoracic nodes",
+        "parasternal nodes",
+        "medial quadrants",
+        "opposite breast",
+        "liver"
+      ],
+      "narration": "Beside the sternum along the internal thoracic vessels. They take the medial quadrants of the breast, and from them spread can cross to the other breast or run down to the liver. They cannot be felt and they are not removed in a standard clearance."
+    },
+    {
+      "key": "supraclavicular",
+      "label": "Supraclavicular nodes & the venous angle",
+      "role": "part",
+      "group": "Where it goes out",
+      "layer": "organ",
+      "color": "#8a9ec4",
+      "terms": [
+        "supraclavicular nodes",
+        "Virchow's node",
+        "subclavian lymph trunk",
+        "thoracic duct",
+        "right lymphatic duct",
+        "venous angle",
+        "N3 disease"
+      ],
+      "narration": "From the apical group lymph runs as the subclavian trunk to the root of the neck and joins the thoracic duct on the left or the right lymphatic duct on the right, entering the blood at the venous angle. Palpable supraclavicular nodes mean the disease has left the axilla."
+    },
+    {
+      "key": "long_thoracic",
+      "label": "Long thoracic nerve",
+      "role": "part",
+      "group": "Nerves at risk",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "long thoracic nerve",
+        "nerve of Bell",
+        "serratus anterior",
+        "winged scapula",
+        "medial wall",
+        "C5 C6 C7"
+      ],
+      "narration": "Runs down the medial wall on the surface of serratus anterior, unprotected. Cut it and serratus anterior is paralysed and the scapula wings when the patient pushes against a wall. C five, six, seven — keep the wings from heaven."
+    },
+    {
+      "key": "thoracodorsal",
+      "label": "Thoracodorsal nerve",
+      "role": "part",
+      "group": "Nerves at risk",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "thoracodorsal nerve",
+        "nerve to latissimus dorsi",
+        "posterior wall",
+        "subscapular vessels"
+      ],
+      "narration": "Crosses the posterior wall with the subscapular vessels, in among the posterior group of nodes. Cut it and latissimus dorsi is lost — and with it the muscle used for breast reconstruction."
+    },
+    {
+      "key": "intercostobrachial",
+      "label": "Intercostobrachial nerve",
+      "role": "part",
+      "group": "Nerves at risk",
+      "layer": "nerve",
+      "color": "#6aa8e0",
+      "terms": [
+        "intercostobrachial nerve",
+        "second intercostal nerve",
+        "medial side of the arm",
+        "numbness after axillary surgery"
+      ],
+      "narration": "The lateral cutaneous branch of the second intercostal nerve, crossing the axilla to the medial side of the arm. It is often sacrificed in a clearance, and the numb patch on the inner arm afterwards is this nerve. Warn the patient before, not after."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Five groups, each on a wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The five groups",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "There are twenty to forty nodes in the axilla and they are not scattered at random. Each group sits on a wall of the pyramid you already know. Anterior group on the medial wall, at the lower border of pectoralis minor. Posterior group on the posterior wall, at the lower border of subscapularis. Lateral group on the lateral wall, against the axillary vein. Central group in the fat in the middle. Apical group at the apex. Learn the walls and the groups place themselves."
+    },
+    {
+      "mode": "glands",
+      "beat": 2,
+      "title": "What each group drains",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The five groups"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "What drains in"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "breast",
+          "to": "anterior_group",
+          "kind": "drains to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "limb",
+          "to": "lateral_group",
+          "kind": "drains to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trunk_wall",
+          "to": "posterior_group",
+          "kind": "drains to"
+        }
+      ],
+      "narration": "Three groups take lymph in from outside and each has its own territory. The anterior group takes the breast and the front of the trunk above the umbilicus. The posterior group takes the back of the trunk down to the iliac crest. The lateral group takes the upper limb. Say those three sentences and you have answered most of what is asked about this topic. The other two groups take nothing from outside — they only take from each other."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "Three in, one in the middle, one at the top",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The five groups"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lymph",
+          "path": [
+            "anterior_group",
+            "central_group",
+            "apical_group",
+            "supraclavicular"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "posterior_group",
+          "to": "central_group",
+          "kind": "drains to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lateral_group",
+          "to": "central_group",
+          "kind": "drains to"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Where it goes out"
+        }
+      ],
+      "narration": "Now the order of flow, which is a single sentence. Anterior, posterior and lateral all drain into the central group; the central group drains into the apical group; the apical group drains out of the axilla as the subclavian trunk to the venous angle at the root of the neck. Three in, one in the middle, one at the top, then out. Some lymph from the breast reaches the apical group directly, which is why an apical node can be involved with nothing below it."
+    },
+    {
+      "mode": "glands",
+      "beat": 4,
+      "title": "The surgeon's three levels",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three levels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pec_minor"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pec_minor",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "level2",
+          "kind": "lies in front of"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "level1",
+            "level3"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The surgeon does not use the five groups. He uses pectoralis minor and counts three levels. Level one is everything lateral to and below the muscle — the anterior, posterior and lateral groups. Level two is behind it — the central and interpectoral nodes. Level three is medial to and above it, at the apex — the apical group. Watch the direction, because it catches people out: the artery is numbered downwards and the nodes upwards, so the two numbering systems run against each other. Level three is the apex for the nodes but the first part is the apex for the artery."
+    },
+    {
+      "mode": "glands",
+      "beat": 5,
+      "title": "How a breast cancer travels",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:tumour_spread",
+          "path": [
+            "breast",
+            "anterior_group",
+            "central_group",
+            "apical_group",
+            "supraclavicular"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "breast",
+          "to": "internal_thoracic",
+          "kind": "the medial quarter goes this way"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anterior_group",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Three-quarters of the breast drains laterally to the axilla and arrives first at the anterior group, then travels central, apical, supraclavicular. One quarter goes medially through the intercostal spaces to the internal thoracic nodes beside the sternum, and from there spread can reach the other breast, the pleura or the liver. Two consequences follow. A medial tumour can be advanced with a clinically normal axilla. And because spread through the axilla is orderly, the first node the lymph reaches predicts the rest — inject dye or tracer at the tumour, find that sentinel node, and if it is clear the axilla is usually clear. That is the anatomy that spared thousands of women a full clearance."
+    },
+    {
+      "mode": "glands",
+      "beat": 6,
+      "title": "Clearing the axilla — and the three nerves",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three levels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Nerves at risk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pec_minor"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Nerves at risk",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A standard clearance takes levels one and two. To take level three the surgeon divides pectoralis minor — that is the Patey modified radical mastectomy, in which pectoralis major is spared. Three nerves are in the way and each has its own signature if it is cut. The long thoracic nerve on the medial wall: serratus anterior is paralysed and the scapula wings. The thoracodorsal nerve on the posterior wall: latissimus dorsi is lost, and with it the flap used for reconstruction. The intercostobrachial nerve crossing the middle: a permanent numb patch on the inner arm, which is why the patient is warned beforehand. And above them all runs the axillary vein — the surgeon works below it and never strips it, because taking the lateral group off it is already enough to swell the arm. That swelling is lymphoedema, and blocked skin lymphatics over the breast give the dimpled peau d'orange."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Examining an axilla",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The five groups"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "central_group"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pec_minor"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "central_group",
+          "to": "anterior_group",
+          "kind": "feel forward against the anterior fold"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Take the weight of the patient's arm so the axillary fascia relaxes — with the arm held out you will feel nothing. Cup your fingers high into the apex and draw them down against the chest wall for the central and apical groups. Then feel forward against the anterior fold for the pectoral group, backward against the posterior fold for the subscapular group, and laterally against the humerus for the humeral group. Use your right hand for the patient's left axilla. Then go on and feel the supraclavicular fossa, because a node there changes the stage."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "There are no lymph nodes anywhere in available-meshes.json — searching the 934 entries for 'lymph' and for 'node' returns nothing, in any region of the body. Not one node exists to render, so a 3D scene of this structure is impossible today rather than merely thin. Routed to its deferred diagram mode; 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes.",
+    "There are also no lymphatic vessels and no subclavian lymph trunk, so the routes in beats 3 and 5 are traced as concepts along the groups the lymph passes through rather than along any vessel.",
+    "This scene does not duplicate the existing 'Axillary vessels & lymph nodes' scene. That scene is 3D, teaches the pyramid and its walls, and its own gaps record that all five groups and all three levels are 'placed by their relation to a muscle or a wall in narration only' and that supplying them is 'the single change that would let the scene reach ready'. This is the picture that scene cannot draw: the five groups, the three levels, the direction of flow, and the operative anatomy. The two are complementary — the 3D scene teaches the space, this one teaches the nodes in it.",
+    "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are authored, but no artwork exists for the drawing engine, so nothing renders today. Promote to 'ready' once the five groups on their walls, the pectoralis minor overlay that converts them to three levels, and the drainage routes of beats 3 and 5 exist as artwork and the engine can play the beats.",
+    "The five groups and the three levels are authored as two separate sets of drawn regions covering the same nodes, because the conversion between them is the examinable move and a student needs to see both labelled at once in beat 4. On artwork they should be the same nodes under two overlays, not two sets of nodes.",
+    "PEEL_LAYER in beat 6 is authored because the operative move is to lift pectoralis major and minor off the axilla and expose the nerves. On drawn artwork the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
+    "The breast has no model in the catalog either, which is also why the 'Breast (mammary gland)' scene is held. Here the breast is a drawn region and only needs to show which quadrant drains which way.",
+    "Node counts per group are given as the ranges in standard texts. They vary between sources and between people; they are narrated as approximate and no exam answer should depend on the exact figure."
+  ]
+}

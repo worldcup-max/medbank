@@ -1,0 +1,507 @@
+{
+  "schema": 2,
+  "id": "embryology__respiratory-system-development__respiratory-diverticulum",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Respiratory System Development",
+  "structure": "Respiratory diverticulum",
+  "covers": [
+    "Respiratory diverticulum"
+  ],
+  "learning_goal": "Say where and when the lung bud appears, name the exact level of the foregut it grows from, state which tissues the endoderm gives and which the surrounding splanchnic mesoderm gives, follow the diverticulum to the two bronchial buds and into the pericardioperitoneal canals, and explain why the recurrent laryngeal nerve supplies the larynx from below.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "respiratory diverticulum",
+      "lung bud",
+      "respiratory system development",
+      "development of the lungs",
+      "foregut derivatives",
+      "week 4",
+      "larynx development",
+      "trachea development",
+      "pleura development"
+    ],
+    "terms": [
+      "respiratory diverticulum",
+      "lung bud",
+      "laryngotracheal diverticulum",
+      "laryngotracheal groove",
+      "laryngotracheal tube",
+      "tracheobronchial diverticulum",
+      "ventral wall of foregut",
+      "primitive foregut",
+      "cranial foregut",
+      "floor of the primitive pharynx",
+      "fourth pharyngeal pouch",
+      "sixth pharyngeal arch",
+      "fourth pharyngeal arch",
+      "hypobranchial eminence",
+      "day 22",
+      "day 26",
+      "day 28",
+      "week 4",
+      "endoderm",
+      "splanchnic mesoderm",
+      "splanchnopleuric mesoderm",
+      "visceral mesoderm",
+      "bronchial buds",
+      "primary bronchial buds",
+      "main bronchi",
+      "principal bronchi",
+      "secondary bronchial buds",
+      "lobar bronchi",
+      "pericardioperitoneal canal",
+      "pleural cavity",
+      "visceral pleura",
+      "parietal pleura",
+      "pleuropericardial fold",
+      "pleuroperitoneal membrane",
+      "somatic mesoderm",
+      "laryngeal orifice",
+      "arytenoid swellings",
+      "epiglottic swelling",
+      "epiglottis",
+      "laryngeal cartilages",
+      "cricoid cartilage",
+      "thyroid cartilage",
+      "recurrent laryngeal nerve",
+      "superior laryngeal nerve",
+      "vagus nerve",
+      "tracheal rings",
+      "smooth muscle of trachea",
+      "pulmonary agenesis",
+      "pulmonary hypoplasia",
+      "tracheal agenesis",
+      "accessory lung lobe",
+      "ectopic lung tissue",
+      "congenital diaphragmatic hernia",
+      "Bochdalek hernia"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "foregut",
+      "label": "The primitive foregut — everything starts as one tube",
+      "role": "context",
+      "group": "Where the bud comes from",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "terms": [
+        "primitive foregut",
+        "cranial foregut",
+        "primitive gut tube",
+        "endodermal tube",
+        "primitive pharynx",
+        "oesophagus",
+        "esophagus"
+      ],
+      "narration": "After lateral and cranio-caudal folding the embryo has a single endodermal gut tube. The part below the pharynx is the foregut, and at the start of week four it is the only tube in the neck and upper chest. The airway does not arrive from anywhere else. It is grown out of this tube, and that single fact explains almost every congenital problem in this topic."
+    },
+    {
+      "key": "laryngotracheal_groove",
+      "label": "The laryngotracheal groove — day 22 to 26",
+      "role": "part",
+      "group": "Where the bud comes from",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "laryngotracheal groove",
+        "respiratory primordium",
+        "median outgrowth",
+        "ventral wall of foregut",
+        "floor of the primitive pharynx",
+        "caudal to the fourth pharyngeal pouch",
+        "day 22",
+        "day 26",
+        "week 4"
+      ],
+      "narration": "In the fourth week, at about day twenty-two, a median groove appears in the ventral wall of the foregut. It sits in the floor of the primitive pharynx just caudal to the fourth pair of pharyngeal pouches. Three words in that sentence earn marks: ventral, median, and caudal to the fourth pouch. Ventral is why the trachea ends up in front of the oesophagus. Median is why the defect, when it comes, is a midline one."
+    },
+    {
+      "key": "diverticulum",
+      "label": "The respiratory diverticulum — the lung bud itself",
+      "role": "part",
+      "group": "Where the bud comes from",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "respiratory diverticulum",
+        "laryngotracheal diverticulum",
+        "tracheobronchial diverticulum",
+        "lung bud",
+        "respiratory bud",
+        "outpouching",
+        "grows caudally and ventrally",
+        "in front of the oesophagus"
+      ],
+      "narration": "The groove deepens into a blind pouch, the respiratory diverticulum, and grows caudally and ventrally, staying in front of the foregut. This one pouch becomes the whole lower airway from the larynx down to the alveoli. Note that it stays open into the pharynx at its upper end — that opening is the future laryngeal inlet, and it must never be separated from the pharynx, only from the oesophagus behind it."
+    },
+    {
+      "key": "endoderm_fate",
+      "label": "What the endoderm gives — the lining only",
+      "role": "part",
+      "group": "Two tissues, two sets of derivatives",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "endoderm",
+        "epithelium",
+        "respiratory epithelium",
+        "glands",
+        "mucous glands",
+        "lining of larynx",
+        "lining of trachea",
+        "lining of bronchi",
+        "alveolar epithelium",
+        "type I pneumocyte",
+        "type II pneumocyte"
+      ],
+      "narration": "The endoderm of the diverticulum gives the epithelium and the glands, and nothing else. That means the lining of the larynx, trachea, bronchi and the alveolar cells all come from the gut tube. When a question asks the origin of type two pneumocytes, the answer is foregut endoderm."
+    },
+    {
+      "key": "mesoderm_fate",
+      "label": "What the splanchnic mesoderm gives — everything around the lining",
+      "role": "part",
+      "group": "Two tissues, two sets of derivatives",
+      "layer": "muscle",
+      "color": "#d68910",
+      "terms": [
+        "splanchnic mesoderm",
+        "splanchnopleuric mesoderm",
+        "visceral mesoderm",
+        "surrounding mesenchyme",
+        "cartilage",
+        "tracheal rings",
+        "smooth muscle",
+        "trachealis",
+        "connective tissue",
+        "visceral pleura",
+        "pulmonary vasculature"
+      ],
+      "narration": "The splanchnic mesoderm that surrounds the growing bud gives the cartilage, the smooth muscle, the connective tissue, the vessels and the visceral pleura. Learn the pair as one rule: endoderm inside, splanchnic mesoderm outside. It is the same rule that governs the whole gut tube, and it is why the trachea has endodermal lining but mesodermal C-shaped rings."
+    },
+    {
+      "key": "bronchial_buds",
+      "label": "Two bronchial buds — the first branch, and it is already unequal",
+      "role": "part",
+      "group": "The bud divides",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "bronchial buds",
+        "primary bronchial buds",
+        "day 28",
+        "week 5",
+        "right main bronchus",
+        "left main bronchus",
+        "principal bronchi",
+        "secondary bronchial buds",
+        "lobar bronchi",
+        "three lobes on the right",
+        "two lobes on the left"
+      ],
+      "narration": "By about day twenty-eight the lower end of the diverticulum divides into a right and a left bronchial bud. These become the main bronchi. In week five each bud divides again into secondary buds — three on the right, two on the left — and those become the lobar bronchi. The lobe count is decided this early, and the right bud is already the wider, more vertical one, which is why an inhaled groundnut in a child ends up on the right."
+    },
+    {
+      "key": "canals",
+      "label": "Pericardioperitoneal canals — the space the buds grow into",
+      "role": "part",
+      "group": "The bud divides",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "pericardioperitoneal canal",
+        "primitive pleural cavity",
+        "intraembryonic coelom",
+        "pleural cavity",
+        "visceral pleura",
+        "parietal pleura",
+        "somatic mesoderm",
+        "pleuropericardial fold",
+        "pleuroperitoneal membrane"
+      ],
+      "narration": "The bronchial buds enlarge sideways into the pericardioperitoneal canals, the narrow parts of the coelom on each side of the foregut. As a bud pushes in, the splanchnic mesoderm draped over it becomes visceral pleura and the somatic mesoderm lining the body wall becomes parietal pleura. The lung is therefore outside the pleural cavity and never in it, exactly as a fist pushed into a balloon is never inside the balloon."
+    },
+    {
+      "key": "larynx",
+      "label": "The upper end — the laryngeal inlet and its cartilages",
+      "role": "part",
+      "group": "The upper end becomes the larynx",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "laryngeal orifice",
+        "laryngeal inlet",
+        "arytenoid swellings",
+        "T-shaped opening",
+        "epiglottic swelling",
+        "hypobranchial eminence",
+        "epiglottis",
+        "fourth pharyngeal arch",
+        "sixth pharyngeal arch",
+        "thyroid cartilage",
+        "cricoid cartilage",
+        "arytenoid cartilage",
+        "neural crest",
+        "recanalisation",
+        "laryngeal atresia",
+        "laryngeal web"
+      ],
+      "narration": "The opening of the diverticulum into the pharynx is flanked by two arytenoid swellings, turning the slit into a T-shaped laryngeal inlet, and the epiglottis grows from the hypobranchial eminence behind it. The cartilages come from the mesenchyme of the fourth and sixth pharyngeal arches. The epithelium also proliferates and briefly occludes the lumen before recanalising, and failure of that recanalisation gives a laryngeal web or atresia."
+    },
+    {
+      "key": "nerve_supply",
+      "label": "Why the recurrent laryngeal nerve comes from below",
+      "role": "part",
+      "group": "The upper end becomes the larynx",
+      "layer": "vessel",
+      "color": "#8e44ad",
+      "terms": [
+        "recurrent laryngeal nerve",
+        "superior laryngeal nerve",
+        "external laryngeal nerve",
+        "vagus nerve",
+        "fourth arch nerve",
+        "sixth arch nerve",
+        "cricothyroid",
+        "intrinsic muscles of the larynx",
+        "aortic arch",
+        "right subclavian artery",
+        "hoarseness",
+        "thyroidectomy"
+      ],
+      "narration": "Nerve follows arch, always. The fourth arch is supplied by the superior laryngeal nerve and the sixth by the recurrent laryngeal nerve, both branches of the vagus. This is why cricothyroid, a fourth arch muscle, is the one intrinsic muscle not supplied by the recurrent nerve. The recurrent nerve is dragged caudally with the sixth arch artery as the heart descends, hooking round the aortic arch on the left and the right subclavian artery on the right — which is why it can be injured at thyroidectomy and why hoarseness is a sign of a chest lesion."
+    },
+    {
+      "key": "clinical",
+      "label": "What goes wrong with the bud itself",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "pulmonary agenesis",
+        "unilateral pulmonary agenesis",
+        "tracheal agenesis",
+        "accessory lung lobe",
+        "ectopic lung tissue",
+        "pulmonary sequestration",
+        "congenital diaphragmatic hernia",
+        "Bochdalek hernia",
+        "pulmonary hypoplasia",
+        "oligohydramnios",
+        "Potter sequence",
+        "surfactant"
+      ],
+      "narration": "Three failures belong to the bud. If a bronchial bud never forms, that lung is absent — pulmonary agenesis, survivable when one-sided. If the diverticulum forms but never elongates properly, tracheal agenesis follows, which is not. If an extra bud sprouts from the foregut it becomes ectopic lung tissue or a sequestration, whose blood supply comes from the aorta rather than the pulmonary artery. Separately, a lung bud may develop normally and still be crushed: in a Bochdalek diaphragmatic hernia the gut occupies the pleural cavity and the lung is hypoplastic, and it is the hypoplasia, not the hernia, that kills the baby."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One tube, and a groove in its floor",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where the bud comes from"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "laryngotracheal_groove",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Look at the embryo from the side in the fourth week. There is one gut tube. In the floor of the primitive pharynx, just caudal to the fourth pharyngeal pouch, a median groove appears at about day twenty-two. It deepens ventrally into the respiratory diverticulum, growing downwards in front of the foregut. Everything below the larynx in the adult airway is this one pouch."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Endoderm inside, splanchnic mesoderm outside",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Two tissues, two sets of derivatives"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "endoderm_fate",
+            "mesoderm_fate"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diverticulum",
+          "to": "mesoderm_fate",
+          "kind": "grows into surrounding mesenchyme, which supplies"
+        }
+      ],
+      "narration": "Strip the wall of the bud apart. The endoderm gives only the lining — epithelium and glands, from larynx to alveolus, including both pneumocytes. The splanchnic mesoderm around it gives everything else: cartilage rings, smooth muscle, connective tissue, vessels and the visceral pleura. Two tissues, one rule, and it holds all the way down the branching tree."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "One bud becomes two, then five",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bud divides"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "larynx",
+            "diverticulum",
+            "bronchial_buds"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "bronchial_buds",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "By day twenty-eight the lower end divides into two bronchial buds, the future main bronchi. In week five each divides again — three secondary buds on the right, two on the left — and the adult lobe count is settled. Follow the path an inhaled breath will eventually take, from the laryngeal inlet down the single tube and into the two buds, and you have the airway in the order the embryo built it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Into the canals — how the lung gets its two pleurae",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bud divides"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "canals",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bronchial_buds",
+          "to": "canals",
+          "kind": "expand laterally into, becoming invested by"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the embryo at the level of the buds. On each side of the foregut is a pericardioperitoneal canal, the future pleural cavity. The bud pushes into it like a fist into a balloon. The splanchnic mesoderm stretched over the bud becomes visceral pleura, the somatic mesoderm of the body wall becomes parietal pleura, and the slit left between them is the pleural cavity. The lung is never inside that cavity — a point worth being certain about before you meet a pneumothorax."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The upper end, its arches, and its nerves",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The upper end becomes the larynx"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "larynx",
+          "to": "nerve_supply",
+          "kind": "is built from the fourth and sixth arches, and therefore takes"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "At the top, the opening of the diverticulum stays in the pharynx and becomes the laryngeal inlet, shaped into a T by the two arytenoid swellings, with the epiglottis rising behind it from the hypobranchial eminence. The cartilages are fourth and sixth arch mesenchyme, so the nerves are the superior and the recurrent laryngeal branches of the vagus. Cricothyroid is a fourth arch muscle and keeps the superior laryngeal nerve; every other intrinsic muscle is sixth arch and takes the recurrent."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "When the bud fails",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clinical",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bronchial_buds",
+          "to": "clinical",
+          "kind": "absent, extra or compressed, gives"
+        }
+      ],
+      "narration": "No bud on one side gives pulmonary agenesis. A bud that never elongates gives tracheal agenesis. An extra bud off the foregut gives ectopic lung tissue or a sequestration fed by a systemic artery from the aorta. And a perfectly formed bud can still be ruined from outside: in a Bochdalek hernia the abdominal viscera fill the pleural cavity and the lung stays hypoplastic. The division of the diverticulum from the oesophagus behind it is the next scene, and it is where the common malformation lives."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram for this structure, so deferred_modes carries diagram. No 3d re-authoring is defensible: available-meshes.json holds adult airway geometry only, and standing an adult trachea in for a week-four diverticulum would teach the wrong thing with a straight face.",
+    "Status is 'planned'. Ten regions, six beats, ops and narration complete, but no artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a lateral view of the week-four embryo showing the foregut with the laryngotracheal groove marked in the ventral wall caudal to the fourth pouch; a three-panel growth series showing groove, then diverticulum, then two bronchial buds, with day numbers printed; a transverse section through the bud showing endodermal lining and the ring of splanchnic mesoderm around it, labelled separately; a transverse section at the level of the buds showing the pericardioperitoneal canals with visceral and parietal pleura named on the drawing; and a superior view of the laryngeal inlet with the two arytenoid swellings and the epiglottic swelling making the T-shape.",
+    "The endoderm/mesoderm colour key set here must be reused unchanged in the bronchial tree branching and alveolar development scenes. Those two scenes are the same rule applied further down the tree, and re-colouring between them costs the student the one thing the colours were carrying.",
+    "Beat 3 traces concept:air. The subject is not a drawn region — it is the direction the airway will eventually conduct, used here only to put the parts in order.",
+    "Beat 2 authors PEEL_LAYER outward on the muscle layer to lift the mesodermal coat off the endodermal lining. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because layer-by-layer removal is exactly how the two-tissue rule should be shown.",
+    "'Tracheoesophageal septum' is NOT claimed in covers[]. The separation of the diverticulum from the oesophagus, the tracheoesophageal folds and the fistula types belong to that entry, and this scene only names the separation as what happens next.",
+    "'Bronchial tree branching' is NOT claimed. The first two divisions are shown because they set the lobe count, but the tertiary buds, the pseudoglandular, canalicular, terminal saccular and alveolar stages belong to that entry.",
+    "'Alveolar development' is NOT claimed. Type I and type II pneumocytes appear only as endodermal derivatives; surfactant, its timing, and respiratory distress syndrome belong to that entry.",
+    "'Foregut derivatives' (GIT Development) is NOT claimed. The foregut is drawn as the source tube only; stomach, duodenum, liver and pancreas buds belong to the GIT entries.",
+    "Pharyngeal arch cartilage and nerve derivatives are named in the larynx beat but the arches themselves are NOT claimed — they belong to the Pharyngeal Apparatus topic, and appear here in match.terms only so a highlighted term still reaches this scene.",
+    "Day numbers are the standard teaching approximations — groove at about day 22, bronchial buds by about day 28. Texts vary by a day or two and the narration says 'about' throughout.",
+    "The larynx beat gives the cartilages to the fourth and sixth arches. Some texts add a contribution from the fifth arch or describe the arytenoids as sixth-arch alone; the four-and-six account is the one Nigerian MBBS papers ask for, and the disagreement is worth a footnote rather than a beat."
+  ]
+}

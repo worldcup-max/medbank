@@ -1,0 +1,1267 @@
+{
+  "schema": 2,
+  "id": "gross__thoracic-wall-diaphragm__ribs-sternum",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thoracic Wall & Diaphragm",
+  "structure": "Ribs & sternum (thoracic cage)",
+  "covers": [
+    "Ribs & sternum (thoracic cage)"
+  ],
+  "learning_goal": "Count the ribs from the sternal angle, sort them into true, false and floating, name the three parts of the sternum, and explain why the upper ribs move like a pump handle and the lower ribs like a bucket handle.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thorax",
+      "thoracic wall",
+      "thoracic cage",
+      "rib cage",
+      "chest wall",
+      "osteology of the thorax",
+      "respiratory mechanics"
+    ],
+    "terms": [
+      "ribs",
+      "rib",
+      "thoracic cage",
+      "rib cage",
+      "sternum",
+      "manubrium",
+      "body of sternum",
+      "xiphoid process",
+      "sternal angle",
+      "angle of Louis",
+      "jugular notch",
+      "suprasternal notch",
+      "true ribs",
+      "false ribs",
+      "floating ribs",
+      "costal cartilage",
+      "costal margin",
+      "costal groove",
+      "costochondral joint",
+      "sternocostal joint",
+      "costovertebral joint",
+      "costotransverse joint",
+      "pump handle",
+      "bucket handle",
+      "intercostal space",
+      "flail chest",
+      "rib fracture",
+      "thoracic inlet",
+      "thoracic outlet",
+      "infrasternal angle",
+      "cervical rib"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "part",
+      "group": "Sternum",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "manubrium sterni",
+        "jugular notch",
+        "suprasternal notch",
+        "sternoclavicular joint"
+      ],
+      "narration": "The top piece. Its upper border is the jugular notch you can feel at the root of the neck, and it takes the clavicle on each side."
+    },
+    {
+      "key": "sternal_body",
+      "name": "body of sternum",
+      "label": "Body of sternum",
+      "role": "part",
+      "group": "Sternum",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of sternum",
+        "sternal body",
+        "gladiolus",
+        "sternum",
+        "sternal angle",
+        "angle of Louis",
+        "manubriosternal joint"
+      ],
+      "narration": "The long middle plate. Where it meets the manubrium the bone steps back — that ridge is the sternal angle."
+    },
+    {
+      "key": "xiphoid",
+      "name": "xiphoid process",
+      "label": "Xiphoid process",
+      "role": "part",
+      "group": "Sternum",
+      "layer": "bone",
+      "color": "#e8dcc0",
+      "refs": {
+        "bodyparts3d": "FMA7488"
+      },
+      "terms": [
+        "xiphoid process",
+        "xiphisternum",
+        "xiphisternal joint",
+        "infrasternal angle"
+      ],
+      "narration": "The small cartilaginous tip that ossifies late. It marks the infrasternal angle and is the landmark for hand position in chest compressions."
+    },
+    {
+      "key": "r1",
+      "name": "right first rib",
+      "label": "Right rib 1",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA7857"
+      },
+      "terms": [
+        "rib 1",
+        "first rib",
+        "right first rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "Short, broad and the most sharply curved. Its upper surface carries the groove for the subclavian vein in front of the scalene tubercle and the groove for the subclavian artery behind it."
+    },
+    {
+      "key": "l1",
+      "name": "left first rib",
+      "label": "Left rib 1",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA7987"
+      },
+      "terms": [
+        "rib 1",
+        "first rib",
+        "left first rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "Short, broad and the most sharply curved. Its upper surface carries the groove for the subclavian vein in front of the scalene tubercle and the groove for the subclavian artery behind it."
+    },
+    {
+      "key": "r2",
+      "name": "right second rib",
+      "label": "Right rib 2",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA7882"
+      },
+      "terms": [
+        "rib 2",
+        "second rib",
+        "right second rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "Twice as long as the first. Its cartilage meets the sternum exactly at the sternal angle, which is why counting ribs starts here."
+    },
+    {
+      "key": "l2",
+      "name": "left second rib",
+      "label": "Left rib 2",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8012"
+      },
+      "terms": [
+        "rib 2",
+        "second rib",
+        "left second rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "Twice as long as the first. Its cartilage meets the sternum exactly at the sternal angle, which is why counting ribs starts here."
+    },
+    {
+      "key": "r3",
+      "name": "right third rib",
+      "label": "Right rib 3",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA7909"
+      },
+      "terms": [
+        "rib 3",
+        "third rib",
+        "right third rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "l3",
+      "name": "left third rib",
+      "label": "Left rib 3",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8039"
+      },
+      "terms": [
+        "rib 3",
+        "third rib",
+        "left third rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "r4",
+      "name": "right fourth rib",
+      "label": "Right rib 4",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA7957"
+      },
+      "terms": [
+        "rib 4",
+        "fourth rib",
+        "right fourth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "l4",
+      "name": "left fourth rib",
+      "label": "Left rib 4",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8148"
+      },
+      "terms": [
+        "rib 4",
+        "fourth rib",
+        "left fourth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "r5",
+      "name": "right fifth rib",
+      "label": "Right rib 5",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8066"
+      },
+      "terms": [
+        "rib 5",
+        "fifth rib",
+        "right fifth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "l5",
+      "name": "left fifth rib",
+      "label": "Left rib 5",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8093"
+      },
+      "terms": [
+        "rib 5",
+        "fifth rib",
+        "left fifth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "r6",
+      "name": "right sixth rib",
+      "label": "Right rib 6",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8175"
+      },
+      "terms": [
+        "rib 6",
+        "sixth rib",
+        "right sixth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "l6",
+      "name": "left sixth rib",
+      "label": "Left rib 6",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8202"
+      },
+      "terms": [
+        "rib 6",
+        "sixth rib",
+        "left sixth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "r7",
+      "name": "right seventh rib",
+      "label": "Right rib 7",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8229"
+      },
+      "terms": [
+        "rib 7",
+        "seventh rib",
+        "right seventh rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "l7",
+      "name": "left seventh rib",
+      "label": "Left rib 7",
+      "role": "part",
+      "group": "True ribs",
+      "layer": "bone",
+      "color": "#efe6d0",
+      "refs": {
+        "bodyparts3d": "FMA8256"
+      },
+      "terms": [
+        "rib 7",
+        "seventh rib",
+        "left seventh rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A typical true rib — head, neck, tubercle, angle, then a shaft whose lower border carries the costal groove. Its own cartilage reaches the sternum."
+    },
+    {
+      "key": "r8",
+      "name": "right eighth rib",
+      "label": "Right rib 8",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8283"
+      },
+      "terms": [
+        "rib 8",
+        "eighth rib",
+        "right eighth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "l8",
+      "name": "left eighth rib",
+      "label": "Left rib 8",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8310"
+      },
+      "terms": [
+        "rib 8",
+        "eighth rib",
+        "left eighth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "r9",
+      "name": "right ninth rib",
+      "label": "Right rib 9",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8364"
+      },
+      "terms": [
+        "rib 9",
+        "ninth rib",
+        "right ninth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "l9",
+      "name": "left ninth rib",
+      "label": "Left rib 9",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8391"
+      },
+      "terms": [
+        "rib 9",
+        "ninth rib",
+        "left ninth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "r10",
+      "name": "right tenth rib",
+      "label": "Right rib 10",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8445"
+      },
+      "terms": [
+        "rib 10",
+        "tenth rib",
+        "right tenth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "l10",
+      "name": "left tenth rib",
+      "label": "Left rib 10",
+      "role": "part",
+      "group": "False ribs",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA8472"
+      },
+      "terms": [
+        "rib 10",
+        "tenth rib",
+        "left tenth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A false rib. Its cartilage does not reach the sternum; it joins the cartilage above, and ribs seven to ten together build the costal margin."
+    },
+    {
+      "key": "r11",
+      "name": "right eleventh rib",
+      "label": "Right rib 11",
+      "role": "part",
+      "group": "Floating ribs",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA8531"
+      },
+      "terms": [
+        "rib 11",
+        "eleventh rib",
+        "right eleventh rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A floating rib. No anterior attachment at all — the shaft simply ends in the muscle of the posterior abdominal wall. It has no tubercle and no angle."
+    },
+    {
+      "key": "l11",
+      "name": "left eleventh rib",
+      "label": "Left rib 11",
+      "role": "part",
+      "group": "Floating ribs",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA8532"
+      },
+      "terms": [
+        "rib 11",
+        "eleventh rib",
+        "left eleventh rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A floating rib. No anterior attachment at all — the shaft simply ends in the muscle of the posterior abdominal wall. It has no tubercle and no angle."
+    },
+    {
+      "key": "r12",
+      "name": "right twelfth rib",
+      "label": "Right rib 12",
+      "role": "part",
+      "group": "Floating ribs",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "rib 12",
+        "twelfth rib",
+        "right twelfth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A floating rib. No anterior attachment at all — the shaft simply ends in the muscle of the posterior abdominal wall. It has no tubercle and no angle."
+    },
+    {
+      "key": "l12",
+      "name": "left twelfth rib",
+      "label": "Left rib 12",
+      "role": "part",
+      "group": "Floating ribs",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA8534"
+      },
+      "terms": [
+        "rib 12",
+        "twelfth rib",
+        "left twelfth rib",
+        "rib",
+        "costal groove",
+        "head of rib",
+        "tubercle of rib",
+        "angle of rib"
+      ],
+      "narration": "A floating rib. No anterior attachment at all — the shaft simply ends in the muscle of the posterior abdominal wall. It has no tubercle and no angle."
+    },
+    {
+      "key": "cc_right",
+      "name": "right costal cartilage",
+      "label": "Costal cartilage (right)",
+      "role": "part",
+      "group": "Costal cartilage",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP28"
+      },
+      "terms": [
+        "costal cartilage",
+        "costal margin",
+        "costochondral joint",
+        "sternocostal joint",
+        "interchondral joint"
+      ],
+      "narration": "The springy bar that carries each rib forwards. It is what lets a rib move at all — a ring of pure bone could not."
+    },
+    {
+      "key": "cc_left",
+      "name": "left costal cartilage",
+      "label": "Costal cartilage (left)",
+      "role": "part",
+      "group": "Costal cartilage",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP24"
+      },
+      "terms": [
+        "costal cartilage",
+        "costal margin",
+        "costochondral joint",
+        "sternocostal joint",
+        "interchondral joint"
+      ],
+      "narration": "The springy bar that carries each rib forwards. It is what lets a rib move at all — a ring of pure bone could not."
+    },
+    {
+      "key": "t1",
+      "name": "first thoracic vertebra",
+      "label": "T1",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9165"
+      },
+      "terms": [
+        "T1",
+        "first thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t2",
+      "name": "second thoracic vertebra",
+      "label": "T2",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9187"
+      },
+      "terms": [
+        "T2",
+        "second thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t3",
+      "name": "third thoracic vertebra",
+      "label": "T3",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9209"
+      },
+      "terms": [
+        "T3",
+        "third thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "T4",
+        "fourth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t5",
+      "name": "fifth thoracic vertebra",
+      "label": "T5",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9922"
+      },
+      "terms": [
+        "T5",
+        "fifth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t6",
+      "name": "sixth thoracic vertebra",
+      "label": "T6",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9945"
+      },
+      "terms": [
+        "T6",
+        "sixth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t7",
+      "name": "seventh thoracic vertebra",
+      "label": "T7",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9968"
+      },
+      "terms": [
+        "T7",
+        "seventh thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t8",
+      "name": "eighth thoracic vertebra",
+      "label": "T8",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA9991"
+      },
+      "terms": [
+        "T8",
+        "eighth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t9",
+      "name": "ninth thoracic vertebra",
+      "label": "T9",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA10014"
+      },
+      "terms": [
+        "T9",
+        "ninth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t10",
+      "name": "tenth thoracic vertebra",
+      "label": "T10",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA10037"
+      },
+      "terms": [
+        "T10",
+        "tenth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t11",
+      "name": "eleventh thoracic vertebra",
+      "label": "T11",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA10059"
+      },
+      "terms": [
+        "T11",
+        "eleventh thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12",
+      "role": "context",
+      "group": "Thoracic vertebrae",
+      "layer": "bone",
+      "color": "#ded5bc",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "T12",
+        "twelfth thoracic vertebra",
+        "costal facet",
+        "costovertebral joint",
+        "costotransverse joint"
+      ],
+      "narration": "The rib fixes here behind — head to the bodies, tubercle to the transverse process. Two joints, one axis."
+    },
+    {
+      "key": "clav_r",
+      "name": "right clavicle",
+      "label": "Right clavicle",
+      "role": "context",
+      "group": "Shoulder girdle",
+      "layer": "bone",
+      "color": "#d5cbb0",
+      "refs": {
+        "bodyparts3d": "FMA13322"
+      },
+      "terms": [
+        "clavicle",
+        "collar bone",
+        "sternoclavicular joint"
+      ],
+      "narration": "Meets the manubrium at the sternoclavicular joint — the only bony joint between the upper limb and the axial skeleton."
+    },
+    {
+      "key": "clav_l",
+      "name": "left clavicle",
+      "label": "Left clavicle",
+      "role": "context",
+      "group": "Shoulder girdle",
+      "layer": "bone",
+      "color": "#d5cbb0",
+      "refs": {
+        "bodyparts3d": "FMA13323"
+      },
+      "terms": [
+        "clavicle",
+        "collar bone",
+        "sternoclavicular joint"
+      ],
+      "narration": "Meets the manubrium at the sternoclavicular joint — the only bony joint between the upper limb and the axial skeleton."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Twelve pairs of ribs behind, the sternum in front, and the twelve thoracic vertebrae holding the whole thing at the back. It is a cage built to move — every breath changes its shape."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "True, false, floating",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "True ribs",
+          "intensity": 0.45
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "False ribs",
+          "intensity": 0.35
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Floating ribs",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Ribs one to seven are true — each reaches the sternum by its own cartilage. Eight, nine and ten are false; their cartilage joins the one above. Eleven and twelve are floating and reach nothing in front."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The three parts of the sternum",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Sternum"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "manubrium",
+          "intensity": 0.5
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sternal_body",
+          "intensity": 0.5
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "xiphoid",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "Manubrium, body, xiphoid process. Feel the jugular notch on top, run your finger down until the bone steps back — that step is the sternal angle."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Counting ribs from the sternal angle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sternum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "True ribs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Costal cartilage"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sternal_body",
+          "to": "r2",
+          "kind": "landmark-level"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "t4",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The second costal cartilage meets the sternum at the angle. Find the angle, find rib two, and count down from there — the first rib is hidden under the clavicle and cannot be counted. The angle also lies level with the disc between T4 and T5."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "How a rib is fixed behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Thoracic vertebrae"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "r5"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "l5"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "r5",
+          "to": "t5",
+          "kind": "articulation"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "A typical rib holds on at two points: its head to the bodies of its own vertebra and the one above, its tubercle to the transverse process. Two fixed points make an axis, and the rib swings about that axis."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Pump handle — the upper ribs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:pump-handle",
+          "path": [
+            "t1",
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "r6",
+            "sternal_body"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The upper ribs run downwards and forwards. When they rise, the sternum is pushed up and out and the chest deepens front to back — like lifting the handle of a water pump."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Bucket handle — the lower ribs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:bucket-handle",
+          "path": [
+            "t7",
+            "r7",
+            "r8",
+            "r9",
+            "r10",
+            "l10",
+            "l9",
+            "l8",
+            "l7"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The lower ribs swing outwards instead. Their middles lift away from the midline and the chest widens side to side — the handle of a bucket rising from the rim."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Cut across a space",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "True ribs",
+          "intensity": 0.4
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Seen from above the cage is kidney-shaped, not round, because the vertebral bodies push forward into it. The gap between two neighbouring ribs is an intercostal space — eleven on each side, each named for the rib above it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Take the cartilage away",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "cartilage",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Strip the cartilage and the ribs no longer reach the sternum. That elastic bar is the whole reason the cage springs: in the elderly it calcifies, the chest stiffens, and breathing costs more work."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Costal cartilage is carried as one composite model per side, so a single cartilage cannot be highlighted on its own. The catalog does hold the first to seventh cartilages individually on each side; they can replace the composite without changing a single op if per-cartilage teaching is ever needed.",
+    "The costal margin — formed by the cartilages of ribs seven to ten — therefore cannot be lit separately from the rest of the cartilage. It is taught by narration over the false-rib highlight in beat 2.",
+    "Sub-parts of a rib (head, neck, tubercle, angle, costal groove) are not separate models. They are taught by narration and by the cross-section beat rather than as labelled parts. Landmark anchors were not placed because anchor coordinates must be measured on the source geometry, and a guessed anchor teaches a wrong place with full confidence.",
+    "Pump-handle and bucket-handle movement is authored as a trace along the ribs, not as animated rotation about the costovertebral axis. No op in the vocabulary moves a structure, so the motion is shown as a sequence and carried by the narration. This is the strongest candidate in the topic for the deferred diagram mode.",
+    "The thoracic inlet and the sternoclavicular joint are shown by their bones (first ribs, manubrium, clavicles) but are not separate structures; the first rib and the manubrium carry that narration."
+  ]
+}

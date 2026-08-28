@@ -121,8 +121,14 @@ if (missing.length) {
 }
 
 if (!LIST_ONLY && got + skipped && !unreachable.length) {
+  /* The house target is 3000, not 8000. The bucket's existing meshes were all built at 3000, and a
+     mixed corpus shows: two models in one scene, one visibly denser than the other. 8000 is the
+     FALLBACK for the handful that refuse at 3000 — broad thin sheets like the obliques, where
+     collapsing that far moves the surface past the half-millimetre ceiling. Printing 8000 here as
+     the first step sent someone down that road on 2026-08-28. */
   console.log('\nRaw archive meshes are far too large to ship. Next:');
-  console.log('  node viz-training/tools/decimate-meshes.mjs viz-training/meshes --target 8000 --verify \\');
-  console.log('       --out viz-training/meshes-lite');
-  console.log('then upload meshes-lite/ and point config.js MESH_BASE at it.');
+  console.log('  node viz-training/tools/decimate-meshes.mjs viz-training/meshes --target 3000 \\');
+  console.log('       --out viz-training/meshes-lite --skip-existing --verify');
+  console.log('Anything it REFUSES gets a second pass at --target 8000, and only those files.');
+  console.log('Then: node viz-training/tools/upload-meshes.mjs   (needs SUPABASE_SERVICE_KEY set).');
 }

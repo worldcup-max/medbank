@@ -1,0 +1,623 @@
+{
+  "schema": 2,
+  "id": "gross__axilla-brachial-plexus__axillary-vein",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Axilla & Brachial Plexus",
+  "structure": "Axillary vein",
+  "covers": [
+    "Axillary vein"
+  ],
+  "learning_goal": "State where the axillary vein begins and ends, name what forms it and what drains into it, place it correctly against the artery and the cords at every level, and explain the three things that go wrong with it — air embolism, effort thrombosis, and lymphoedema after clearance.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "axilla",
+      "axillary vein",
+      "upper limb",
+      "venous drainage of the upper limb",
+      "vasculature",
+      "pectoral region",
+      "breast",
+      "shoulder",
+      "central venous access"
+    ],
+    "terms": [
+      "axillary vein",
+      "basilic vein",
+      "brachial veins",
+      "venae comitantes",
+      "cephalic vein",
+      "subclavian vein",
+      "brachiocephalic vein",
+      "venous angle",
+      "lower border of teres major",
+      "outer border of the first rib",
+      "pectoralis minor",
+      "clavipectoral fascia",
+      "deltopectoral groove",
+      "axillary artery",
+      "medial to the artery",
+      "medial cord",
+      "medial cutaneous nerve of forearm",
+      "medial cutaneous nerve of arm",
+      "axillary sheath",
+      "thoracoacromial vein",
+      "lateral thoracic vein",
+      "thoracoepigastric vein",
+      "subscapular vein",
+      "circumflex humeral veins",
+      "lateral group of axillary nodes",
+      "humeral group",
+      "axillary clearance",
+      "lymphoedema",
+      "air embolism",
+      "axillary vein thrombosis",
+      "effort thrombosis",
+      "Paget-Schroetter syndrome",
+      "thoracic outlet syndrome",
+      "infraclavicular venous puncture",
+      "central line",
+      "Mondor disease",
+      "caput medusae of the chest wall",
+      "superior vena cava obstruction"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "basilic",
+      "label": "Basilic vein",
+      "role": "part",
+      "group": "How it is formed",
+      "layer": "vessel",
+      "color": "#3f6ea8",
+      "terms": [
+        "basilic vein",
+        "superficial vein",
+        "medial side of the arm"
+      ],
+      "narration": "A superficial vein that runs up the medial side of the arm, pierces the deep fascia about halfway up, and then runs deep. It is the main root of the axillary vein."
+    },
+    {
+      "key": "brachial_vc",
+      "label": "Brachial venae comitantes",
+      "role": "part",
+      "group": "How it is formed",
+      "layer": "vessel",
+      "color": "#4a7ab5",
+      "terms": [
+        "brachial veins",
+        "venae comitantes",
+        "venae comitantes of the brachial artery",
+        "deep veins of the arm"
+      ],
+      "narration": "The pair of deep veins that sandwich the brachial artery. They join the basilic vein to make the axillary vein — so the vein has one superficial root and two deep ones."
+    },
+    {
+      "key": "teres_major",
+      "label": "Lower border of teres major — it begins here",
+      "role": "part",
+      "group": "The two borders",
+      "layer": "muscle",
+      "color": "#a8543f",
+      "terms": [
+        "teres major",
+        "lower border of teres major",
+        "posterior wall of the axilla"
+      ],
+      "narration": "The lower limit of the axilla. Below this border the vessels are called brachial; above it they are called axillary. The vein is born at this line, exactly where the artery dies."
+    },
+    {
+      "key": "rib1",
+      "label": "Outer border of the 1st rib — it ends here",
+      "role": "part",
+      "group": "The two borders",
+      "layer": "bone",
+      "color": "#ddd2b4",
+      "terms": [
+        "first rib",
+        "outer border of the first rib",
+        "lateral border of the first rib",
+        "apex of the axilla"
+      ],
+      "narration": "The upper limit of the axilla. Cross it and the axillary vein becomes the subclavian vein. Two borders, three names — and they are the same two borders the artery uses."
+    },
+    {
+      "key": "vein_lower",
+      "label": "Axillary vein — lower part",
+      "role": "part",
+      "group": "The trunk",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "terms": [
+        "axillary vein",
+        "third part of the axilla",
+        "anteromedial to the artery"
+      ],
+      "narration": "In the lower axilla the vein lies anteromedial to the artery — in front of it as well as inside it. A needle coming from the front here meets the vein before the artery, and a knife here meets the vein first too."
+    },
+    {
+      "key": "vein_mid",
+      "label": "Axillary vein — behind pectoralis minor",
+      "role": "part",
+      "group": "The trunk",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "terms": [
+        "axillary vein",
+        "second part of the axilla",
+        "medial cord",
+        "central group of nodes"
+      ],
+      "narration": "Behind pectoralis minor the vein is medial to the artery and the medial cord of the brachial plexus is squeezed between the two. That is the whole reason the cord is called medial."
+    },
+    {
+      "key": "vein_upper",
+      "label": "Axillary vein — upper part",
+      "role": "part",
+      "group": "The trunk",
+      "layer": "vessel",
+      "color": "#2c5f8a",
+      "terms": [
+        "axillary vein",
+        "first part of the axilla",
+        "apical nodes",
+        "level III"
+      ],
+      "narration": "Above pectoralis minor the vein runs up to the first rib with the apical nodes clustered along it. This is the level the surgeon calls the roof of the clearance: dissect below the vein, never above it."
+    },
+    {
+      "key": "subclavian_vein",
+      "label": "Subclavian vein",
+      "role": "part",
+      "group": "Where it goes",
+      "layer": "vessel",
+      "color": "#365f86",
+      "terms": [
+        "subclavian vein",
+        "first rib",
+        "central line",
+        "infraclavicular approach"
+      ],
+      "narration": "The same tube, renamed at the first rib. It arches over the rib in a groove in front of the scalene tubercle, with the artery and the plexus behind the scalenus anterior — vein in front of the muscle, artery behind it."
+    },
+    {
+      "key": "brachiocephalic",
+      "label": "Brachiocephalic vein & the venous angle",
+      "role": "part",
+      "group": "Where it goes",
+      "layer": "vessel",
+      "color": "#3b5f80",
+      "terms": [
+        "brachiocephalic vein",
+        "venous angle",
+        "internal jugular vein",
+        "thoracic duct",
+        "right lymphatic duct",
+        "subclavian lymph trunk",
+        "superior vena cava"
+      ],
+      "narration": "Behind the sternoclavicular joint the subclavian vein meets the internal jugular at the venous angle and becomes the brachiocephalic vein. Lymph from the whole axilla rejoins the blood at that same corner. Blood and lymph from the limb end in the same place."
+    },
+    {
+      "key": "cephalic",
+      "label": "Cephalic vein",
+      "role": "part",
+      "group": "Tributaries",
+      "layer": "vessel",
+      "color": "#5b8fc9",
+      "terms": [
+        "cephalic vein",
+        "deltopectoral groove",
+        "clavipectoral fascia",
+        "infraclavicular fossa",
+        "cut-down"
+      ],
+      "narration": "The odd one out. It climbs the lateral side of the arm, runs in the deltopectoral groove between deltoid and pectoralis major, then dives through the clavipectoral fascia and joins the vein near its upper end. It is superficial the whole way, which is why it is the classic vein for a cut-down and for a pacemaker lead."
+    },
+    {
+      "key": "trib_thoracoacromial",
+      "label": "Thoracoacromial vein",
+      "role": "part",
+      "group": "Tributaries",
+      "layer": "vessel",
+      "color": "#6fa0d4",
+      "terms": [
+        "thoracoacromial vein",
+        "acromiothoracic vein"
+      ],
+      "narration": "Companion of the artery of the same name. It joins near the cephalic vein, having pierced the same fascia."
+    },
+    {
+      "key": "trib_lateral_thoracic",
+      "label": "Lateral thoracic & thoracoepigastric veins",
+      "role": "part",
+      "group": "Tributaries",
+      "layer": "vessel",
+      "color": "#6fa0d4",
+      "terms": [
+        "lateral thoracic vein",
+        "thoracoepigastric vein",
+        "superficial epigastric vein",
+        "Mondor disease",
+        "porto-systemic anastomosis",
+        "breast"
+      ],
+      "narration": "The lateral thoracic vein drains the side of the chest and the breast. Down the flank the thoracoepigastric vein links it to the superficial epigastric vein below, so it is a route from the axilla to the femoral vein. Thrombophlebitis in this vein over the breast is Mondor disease, and dilated veins here appear when the superior vena cava or the inferior vena cava is blocked."
+    },
+    {
+      "key": "trib_subscapular",
+      "label": "Subscapular & circumflex humeral veins",
+      "role": "part",
+      "group": "Tributaries",
+      "layer": "vessel",
+      "color": "#6fa0d4",
+      "terms": [
+        "subscapular vein",
+        "circumflex scapular vein",
+        "thoracodorsal vein",
+        "anterior circumflex humeral vein",
+        "posterior circumflex humeral vein"
+      ],
+      "narration": "The rest of the tributaries simply copy the branches of the artery and carry the same names. Learn the artery's branches and you have learned the vein's tributaries — with the cephalic vein added on top."
+    },
+    {
+      "key": "artery",
+      "label": "Axillary artery",
+      "role": "part",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "axillary artery",
+        "lateral to the vein",
+        "subclavian artery",
+        "brachial artery"
+      ],
+      "narration": "Always lateral to the vein, and in the lower axilla behind it as well. Say it once and keep it: the vein is medial. Every relation in this topic is described from the vein outward."
+    },
+    {
+      "key": "medial_cord",
+      "label": "Medial cord & its nerves",
+      "role": "part",
+      "group": "Relations",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "medial cord",
+        "medial cutaneous nerve of the arm",
+        "medial cutaneous nerve of the forearm",
+        "ulnar nerve",
+        "intercostobrachial nerve"
+      ],
+      "narration": "The medial cord lies between the vein and the artery behind pectoralis minor. Its two cutaneous nerves cross in front of the vein to reach the skin, and they are the nerves at risk when the vein is dissected."
+    },
+    {
+      "key": "sheath",
+      "label": "Axillary sheath — and why the vein is outside it",
+      "role": "part",
+      "group": "Relations",
+      "layer": "fascia",
+      "color": "#cbbfa8",
+      "terms": [
+        "axillary sheath",
+        "prevertebral fascia",
+        "brachial plexus block",
+        "axillary block"
+      ],
+      "narration": "The sheath of prevertebral fascia wraps the artery and the cords. It does not wrap the vein — the vein is left outside it, held open by the surrounding fascia. One fact, two consequences: an injection into the sheath blocks the limb, and a cut in the vein does not collapse."
+    },
+    {
+      "key": "lateral_nodes",
+      "label": "Lateral (humeral) group of nodes",
+      "role": "part",
+      "group": "Relations",
+      "layer": "organ",
+      "color": "#7fa05a",
+      "terms": [
+        "lateral group",
+        "humeral group",
+        "axillary lymph nodes",
+        "lymphoedema",
+        "axillary clearance"
+      ],
+      "narration": "Four to six nodes lie against the medial side of the vein and take almost all the lymph of the upper limb. They are why clearing the axilla for breast cancer can swell the arm: the limb's own drainage is sitting on the vein and goes out with the specimen."
+    },
+    {
+      "key": "pec_minor",
+      "label": "Pectoralis minor",
+      "role": "context",
+      "group": "Relations",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "terms": [
+        "pectoralis minor",
+        "coracoid process",
+        "level I",
+        "level II",
+        "level III"
+      ],
+      "narration": "The same divider as for the artery and the nodes. Above it, behind it, below it — three levels for everything in the axilla."
+    },
+    {
+      "key": "pec_major",
+      "label": "Pectoralis major",
+      "role": "context",
+      "group": "Relations",
+      "layer": "muscle",
+      "color": "#a8543f",
+      "terms": [
+        "pectoralis major",
+        "anterior axillary fold"
+      ],
+      "narration": "The most superficial thing the knife meets in front of the axilla, and the first item to name when reading the cross-section from front to back."
+    },
+    {
+      "key": "subscapularis",
+      "label": "Subscapularis",
+      "role": "context",
+      "group": "Relations",
+      "layer": "muscle",
+      "color": "#9a7f66",
+      "terms": [
+        "subscapularis",
+        "posterior wall of the axilla"
+      ],
+      "narration": "The posterior wall at this level, lying on the front of the scapula. It is the last item in the front-to-back list and the back wall of the space the vein runs through."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Born at one border, renamed at the other",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The two borders",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous_blood",
+          "path": [
+            "basilic",
+            "brachial_vc",
+            "vein_lower",
+            "vein_mid",
+            "vein_upper",
+            "subclavian_vein",
+            "brachiocephalic"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Read the vein upward, because the blood is going home. At the lower border of teres major the basilic vein is joined by the two venae comitantes of the brachial artery, and that union is the axillary vein. It runs up the axilla and at the outer border of the first rib it is renamed the subclavian vein. Behind the sternoclavicular joint it meets the internal jugular and becomes the brachiocephalic. The artery uses the same two borders in the opposite direction. Learn the borders once and you have both vessels."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Medial to the artery, all the way",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "vein_mid",
+            "artery"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vein_mid",
+          "to": "medial_cord",
+          "kind": "the cord lies between vein and artery"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vein_lower",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The one relation worth memorising is that the vein is medial to the artery from beginning to end. Low down it is also in front of it, so an anterior approach meets the vein first. Behind pectoralis minor the medial cord of the plexus is caught between the two vessels — which is where its name comes from — and the medial cutaneous nerves of the arm and forearm cross in front of the vein. If you can find the vein you can name the cord."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "The tributaries copy the branches",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Tributaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The trunk"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trib_thoracoacromial",
+          "to": "vein_upper",
+          "kind": "drains into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trib_lateral_thoracic",
+          "to": "vein_mid",
+          "kind": "drains into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trib_subscapular",
+          "to": "vein_lower",
+          "kind": "drains into"
+        }
+      ],
+      "narration": "There is no list to learn here. Every tributary of the axillary vein is the companion of a branch of the axillary artery and carries the same name: thoracoacromial, lateral thoracic, subscapular, anterior and posterior circumflex humeral. Two things are worth extra attention. The lateral thoracic vein drains the breast and continues down the flank as the thoracoepigastric vein, linking the axilla to the femoral vein — a bypass that opens up and becomes visible when the superior or inferior vena cava is obstructed. And thrombophlebitis of that vein over the breast has its own name: Mondor disease."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The cephalic vein comes in from outside",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cephalic",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cephalic",
+          "to": "vein_upper",
+          "kind": "pierces the clavipectoral fascia to join"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The cephalic vein is the exception and examiners like exceptions. It is superficial from the wrist to the shoulder, runs up in the deltopectoral groove between deltoid and pectoralis major, then pierces the clavipectoral fascia in the infraclavicular fossa and joins the axillary vein near the first rib. Three things pierce that fascia going out — the cephalic vein, the thoracoacromial vessels and the lateral pectoral nerve — and lymphatics from the apical nodes pierce it going in. Because the cephalic vein is superficial and constant, it is the vein used for a cut-down and for feeding a pacemaker lead into the heart."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Cut across: front to back",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.05,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "vein_mid",
+            "sheath"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the axilla behind pectoralis minor and read from the front backwards: pectoralis major, pectoralis minor in its fascia, then the vein, then the artery with the cords around it, then subscapularis on the front of the scapula. Now the detail that matters. The axillary sheath wraps the artery and the cords together but leaves the vein outside it. That single arrangement explains two separate exam answers: an injection into the sheath anaesthetises the whole limb, and the vein cannot collapse when it is cut."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "Three things that go wrong",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lateral_nodes",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lateral_nodes",
+          "to": "vein_mid",
+          "kind": "lie on the medial side of the vein"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pec_minor",
+          "to": "vein_upper",
+          "kind": "the upper limit of a clearance"
+        }
+      ],
+      "narration": "First, air embolism. The fascia holds the vein open, so a wound in the axilla or a badly managed central line can suck air straight into the right heart. Lie the patient head down and on the left side. Second, thrombosis. The vein can clot where it is squeezed between the clavicle and the first rib, classically in a young person after heavy overhead work — effort thrombosis, or Paget-Schroetter syndrome. The arm becomes swollen, blue and heavy. Third, lymphoedema. The lateral group of nodes lies on the medial side of this vein and drains the whole limb, so an axillary clearance takes the arm's drainage with the cancer. That is why the surgeon dissects below the vein and never strips it: the vein is the roof of the operation."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Putting a needle in it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where it goes"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "rib1"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "subclavian_vein",
+          "to": "rib1",
+          "kind": "the rib is the shield behind the vein"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The infraclavicular approach to a central line is pure axillary anatomy. The needle goes under the clavicle at the junction of its medial two-thirds and lateral third and is aimed at the suprasternal notch, staying flat against the back of the bone. The first rib lies behind the vein at that point and is the shield that keeps the needle off the pleura. Go too deep or too lateral and you find the artery behind, or the dome of the pleura, and cause a pneumothorax. Remember the order at the first rib from front to back: vein, then scalenus anterior with the phrenic nerve on it, then artery and plexus."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode rather than 3D. The catalog holds no axillary vein, no basilic vein, no cephalic vein, no brachial venae comitantes and none of the named tributaries — searching available-meshes.json for 'vein' returns 21 entries and not one of them is in the upper limb below the subclavian. The nearest existing models are the right and left subclavian veins (FMA4755, FMA4763) and the brachiocephalic veins (FMA4751, FMA4761), which are the continuations of this vessel, not this vessel. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes; the day an upper-limb venous model set exists this scene becomes a 3D scene with no curriculum edit.",
+    "This is deliberately NOT a second 3D axilla scene. The existing 'Axillary vessels & lymph nodes' scene already teaches the vein in 3D through the subclavian vein and the four walls, and its own gaps record that the vein 'is spoken rather than seen'. Building a third 3D scene from the same fourteen wall-and-boundary meshes would have duplicated that scene without adding a single new picture. This diagram supplies what the 3D scene cannot: the tributary tree, the vein-artery-cord section, and the clinical anatomy of the vein itself. It follows the same reasoning already recorded in the axillary artery scene.",
+    "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are authored, but no artwork exists for the drawing engine yet, so nothing renders today. Promote to 'ready' once the trunk with its five tributaries, the cross-section of beat 5 and the infraclavicular approach of beat 7 exist as artwork and the engine can play the beats.",
+    "The axillary sheath and the clavipectoral fascia have no models in the catalog, as the axillary vessels scene also records. Both exist here only as drawn regions, and both carry real teaching weight in beats 4 and 5 — the sheath is the basis of the axillary block and of the air-embolism point, the fascia is what the cephalic vein pierces.",
+    "There are no lymph nodes anywhere in the catalog. The lateral (humeral) group is present here as a single drawn region against the vein because it is the anatomical reason for lymphoedema, not as an attempt to teach the node groups — that is the separate 'Axillary lymph nodes' scene.",
+    "PEEL_LAYER in beat 4 is authored because the teaching move is to lift the clavipectoral fascia and watch the cephalic vein pass through it. On drawn artwork the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
+    "The vein is drawn as three segments named by their relation to pectoralis minor. That division is a teaching device borrowed from the artery, not a standard anatomical description of the vein — anatomists do not conventionally divide the axillary vein into parts. It is used here only so that the ops can address the vein at a given level, and the narration never claims the vein has three named parts."
+  ]
+}

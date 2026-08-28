@@ -1,0 +1,693 @@
+{
+  "schema": 2,
+  "id": "gross__leg-foot__popliteal-fossa",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Leg & Foot",
+  "structure": "Popliteal fossa",
+  "covers": [
+    "Popliteal fossa"
+  ],
+  "learning_goal": "Name the four muscular boundaries, the floor and the roof of the popliteal fossa, list its contents in order from superficial to deep, and use that order to explain why a swelling behind the knee gives the signs it does.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "popliteal fossa",
+      "back of knee",
+      "knee",
+      "leg",
+      "lower limb",
+      "thigh",
+      "hamstrings",
+      "vasculature",
+      "nerve injury",
+      "supracondylar fracture of femur"
+    ],
+    "terms": [
+      "popliteal fossa",
+      "popliteal space",
+      "back of the knee",
+      "diamond shaped space",
+      "biceps femoris",
+      "long head of biceps femoris",
+      "short head of biceps femoris",
+      "semitendinosus",
+      "semimembranosus",
+      "hamstrings",
+      "medial head of gastrocnemius",
+      "lateral head of gastrocnemius",
+      "plantaris",
+      "popliteus",
+      "popliteal surface of femur",
+      "oblique popliteal ligament",
+      "popliteal fascia",
+      "roof of popliteal fossa",
+      "floor of popliteal fossa",
+      "popliteal artery",
+      "popliteal vein",
+      "tibial nerve",
+      "common fibular nerve",
+      "common peroneal nerve",
+      "lateral popliteal nerve",
+      "medial popliteal nerve",
+      "sciatic nerve",
+      "sural nerve",
+      "small saphenous vein",
+      "short saphenous vein",
+      "popliteal lymph nodes",
+      "popliteal pulse",
+      "adductor hiatus",
+      "tendinous arch of soleus",
+      "anterior tibial artery",
+      "posterior tibial artery",
+      "genicular anastomosis",
+      "popliteal aneurysm",
+      "Baker's cyst",
+      "popliteal cyst",
+      "foot drop",
+      "neck of fibula",
+      "supracondylar fracture"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.006,
+    "initialYaw": 3.1
+  },
+  "structures": [
+    {
+      "key": "bic_long",
+      "name": "long head of right biceps femoris",
+      "label": "Biceps femoris — long head",
+      "role": "part",
+      "group": "Upper boundaries",
+      "layer": "muscle",
+      "color": "#b5432f",
+      "refs": {
+        "bodyparts3d": "FMA45888"
+      },
+      "terms": [
+        "biceps femoris",
+        "long head of biceps femoris",
+        "superolateral boundary",
+        "lateral hamstring"
+      ],
+      "narration": "The long head runs down from the ischial tuberosity and makes the upper outer edge of the diamond. Follow its tendon to the head of the fibula. That tendon is the landmark you feel for on the outside of the flexed knee, and the common fibular nerve is hugging its medial side the whole way down."
+    },
+    {
+      "key": "bic_short",
+      "name": "short head of right biceps femoris",
+      "label": "Biceps femoris — short head",
+      "role": "context",
+      "group": "Upper boundaries",
+      "layer": "muscle",
+      "color": "#9c3a29",
+      "refs": {
+        "bodyparts3d": "FMA45891"
+      },
+      "terms": [
+        "short head of biceps femoris",
+        "linea aspera",
+        "common fibular nerve supply"
+      ],
+      "narration": "The short head arises from the linea aspera of the femur, joins the long head and shares its tendon. It is the one hamstring head supplied by the common fibular division of the sciatic nerve, which is why it is spared in some patterns of hamstring weakness."
+    },
+    {
+      "key": "semitend",
+      "name": "right semitendinosus",
+      "label": "Semitendinosus",
+      "role": "part",
+      "group": "Upper boundaries",
+      "layer": "muscle",
+      "color": "#c0553c",
+      "refs": {
+        "bodyparts3d": "FMA22358"
+      },
+      "terms": [
+        "semitendinosus",
+        "superomedial boundary",
+        "medial hamstring",
+        "pes anserinus"
+      ],
+      "narration": "Semitendinosus lies behind semimembranosus and becomes a long cord-like tendon halfway down the thigh. That cord is the more superficial of the two tendons you can pinch on the inner side of the back of the knee. It ends on the upper medial tibia as part of the pes anserinus."
+    },
+    {
+      "key": "semimemb",
+      "name": "right semimembranosus",
+      "label": "Semimembranosus",
+      "role": "part",
+      "group": "Upper boundaries",
+      "layer": "muscle",
+      "color": "#a94a34",
+      "refs": {
+        "bodyparts3d": "FMA22448"
+      },
+      "terms": [
+        "semimembranosus",
+        "superomedial boundary",
+        "oblique popliteal ligament",
+        "medial hamstring",
+        "Baker's cyst"
+      ],
+      "narration": "Semimembranosus is the deeper and broader of the two medial hamstrings. Part of its tendon turns upwards and laterally across the back of the joint as the oblique popliteal ligament, which strengthens the capsule and forms much of the floor of the fossa. A bursa lies between this tendon and the medial head of gastrocnemius, and when the knee joint leaks into it you get the popliteal cyst students know as a Baker's cyst."
+    },
+    {
+      "key": "gastroc_med",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "part",
+      "group": "Lower boundaries",
+      "layer": "muscle",
+      "color": "#8f5a3c",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "medial head of gastrocnemius",
+        "inferomedial boundary",
+        "medial condyle of femur"
+      ],
+      "narration": "The medial head arises from the back of the medial femoral condyle and makes the lower inner edge of the diamond. It is the larger of the two heads. The bursa behind semimembranosus sits right against it, so a cyst here bulges medially and is felt best with the knee straight."
+    },
+    {
+      "key": "gastroc_lat",
+      "name": "lateral head of right gastrocnemius",
+      "label": "Gastrocnemius — lateral head",
+      "role": "part",
+      "group": "Lower boundaries",
+      "layer": "muscle",
+      "color": "#7d4e33",
+      "refs": {
+        "bodyparts3d": "FMA45960"
+      },
+      "terms": [
+        "lateral head of gastrocnemius",
+        "inferolateral boundary",
+        "lateral condyle of femur"
+      ],
+      "narration": "The lateral head comes off the back of the lateral femoral condyle and makes the lower outer edge. Both heads cross the knee as well as the ankle, so gastrocnemius flexes the knee and plantarflexes the foot, and it cannot do both fully at once."
+    },
+    {
+      "key": "plantaris",
+      "name": "right plantaris",
+      "label": "Plantaris",
+      "role": "part",
+      "group": "Lower boundaries",
+      "layer": "muscle",
+      "color": "#6f4a3a",
+      "refs": {
+        "bodyparts3d": "FMA22560"
+      },
+      "terms": [
+        "plantaris",
+        "freshman's nerve",
+        "long thin tendon",
+        "inferolateral boundary"
+      ],
+      "narration": "A small belly with a very long thin tendon, lying with the lateral head of gastrocnemius. Its tendon is so cord-like that it is mistaken for a nerve in the dissection room. It is absent in about one person in ten and its rupture is one cause of a sudden pain in the calf."
+    },
+    {
+      "key": "popliteus",
+      "name": "right popliteus",
+      "label": "Popliteus",
+      "role": "part",
+      "group": "Floor",
+      "layer": "muscle",
+      "color": "#5f7fa8",
+      "refs": {
+        "bodyparts3d": "FMA22591"
+      },
+      "terms": [
+        "popliteus",
+        "unlocking the knee",
+        "floor of popliteal fossa",
+        "lateral meniscus"
+      ],
+      "narration": "Popliteus covers the lower part of the floor. It runs from the lateral femoral condyle downwards and medially to the back of the tibia — note that this is upside down compared with most muscles, and it is the reason it rotates the femur laterally on a fixed tibia. That single movement unlocks the fully extended knee so flexion can begin."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur — popliteal surface",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#efe4c8",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "popliteal surface of femur",
+        "femoral condyles",
+        "supracondylar fracture",
+        "floor of popliteal fossa"
+      ],
+      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel.",
+      "approx": {
+        "shown_as": "Femur",
+        "detail": "popliteal surface"
+      }
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia — posterior surface",
+      "role": "context",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e2d7ba",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "posterior surface of tibia",
+        "soleal line",
+        "floor of popliteal fossa"
+      ],
+      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends.",
+      "approx": {
+        "shown_as": "Tibia",
+        "detail": "posterior surface"
+      }
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula — head & neck",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#ddd0a6",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "head of fibula",
+        "neck of fibula",
+        "common fibular nerve",
+        "common peroneal nerve",
+        "foot drop"
+      ],
+      "narration": "The head of the fibula is the bony point at the lower outer angle of the diamond, and it is where the biceps tendon ends. Just below it the common fibular nerve winds round the bare neck of the bone. Nowhere else in the body does a large nerve lie so directly on bone under thin skin, and that is why a tight plaster, a badly placed leg support or a fracture here gives foot drop."
+    },
+    {
+      "key": "patella",
+      "name": "right patella",
+      "label": "Patella",
+      "role": "context",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e8dcc0",
+      "refs": {
+        "bodyparts3d": "FMA24486"
+      },
+      "terms": [
+        "patella",
+        "knee joint",
+        "front of the knee"
+      ],
+      "narration": "The patella is on the front and is shown only to keep you oriented. Everything in this scene is behind the joint it sits in front of."
+    },
+    {
+      "key": "add_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus (adductor hiatus)",
+      "role": "part",
+      "group": "Entry and exit",
+      "layer": "muscle",
+      "color": "#a76a4a",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "adductor hiatus",
+        "hiatus in adductor magnus",
+        "femoral artery becomes popliteal artery"
+      ],
+      "narration": "The gap in the lower tendon of adductor magnus is the adductor hiatus, and it is the doorway into the fossa. The femoral artery passes through it and changes its name to the popliteal artery on the other side. Learn the vessel by its doorways: it enters at the hiatus and leaves at the arch of soleus."
+    },
+    {
+      "key": "soleus",
+      "name": "right soleus",
+      "label": "Soleus (tendinous arch)",
+      "role": "part",
+      "group": "Entry and exit",
+      "layer": "muscle",
+      "color": "#96613f",
+      "refs": {
+        "bodyparts3d": "FMA22558"
+      },
+      "terms": [
+        "soleus",
+        "tendinous arch of soleus",
+        "posterior tibial artery",
+        "anterior tibial artery",
+        "lower limit of popliteal fossa"
+      ],
+      "narration": "The upper border of soleus is a fibrous arch between tibia and fibula, and it is the way out. At the lower border of popliteus the popliteal artery divides: the anterior tibial branch goes forward through the gap in the interosseous membrane, and the continuation passes under this arch as the posterior tibial artery."
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right leg",
+      "label": "Interosseous membrane",
+      "role": "context",
+      "group": "Entry and exit",
+      "layer": "fascia",
+      "color": "#cfc59d",
+      "refs": {
+        "bodyparts3d": "FMA35192"
+      },
+      "terms": [
+        "interosseous membrane",
+        "anterior tibial artery",
+        "anterior compartment of leg"
+      ],
+      "narration": "The membrane between tibia and fibula has an opening at its top edge. The anterior tibial artery leaves the fossa through that opening to reach the front of the leg, which is why an injury behind the knee can starve the anterior compartment."
+    },
+    {
+      "key": "tendo_calcaneus",
+      "name": "right calcaneal tendon",
+      "label": "Calcaneal tendon",
+      "role": "context",
+      "group": "Lower boundaries",
+      "layer": "muscle",
+      "color": "#c4b087",
+      "refs": {
+        "bodyparts3d": "FMA258847"
+      },
+      "terms": [
+        "calcaneal tendon",
+        "Achilles tendon",
+        "gastrocnemius",
+        "soleus"
+      ],
+      "narration": "Shown only to complete the calf. The two heads of gastrocnemius that form the lower half of the diamond end, with soleus, in this tendon."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the fossa is",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Upper boundaries",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Lower boundaries",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "The popliteal fossa is the diamond-shaped hollow behind the knee. It is not a hole in anything — it is simply the space left over where four muscles diverge above and converge below. Look at the back of the limb and the diamond appears on its own once you know which four muscles to look at."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The four walls",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Upper boundaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lower boundaries"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "bic_long",
+            "semimemb"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Two above and two below. Superolateral is biceps femoris. Superomedial is semimembranosus with semitendinosus lying on it. Inferolateral is the lateral head of gastrocnemius with plantaris. Inferomedial is the medial head of gastrocnemius. One lateral hamstring against two medial hamstrings above, and the two heads of one muscle below — that is the whole boundary in a sentence."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Floor and roof",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Floor"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "popliteus",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The floor has three parts from above down: the popliteal surface of the femur, the capsule of the knee joint reinforced by the oblique popliteal ligament, and popliteus with the fascia over it. The roof is skin and the deep fascia of the thigh continued down as the popliteal fascia. That roof is tough and it does not stretch, which matters when anything inside the fossa swells."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "In from the hiatus, out under the arch",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Entry and exit",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:popliteal_artery",
+          "path": [
+            "add_magnus",
+            "femur",
+            "popliteus",
+            "soleus"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "Follow the traced path. The femoral artery reaches the back of the thigh through the adductor hiatus in adductor magnus and becomes the popliteal artery. It runs down on the popliteal surface of the femur, then across the back of the joint capsule, then onto popliteus. At the lower border of popliteus it ends by dividing into anterior and posterior tibial arteries. The artery is the deepest thing in the fossa, lying against bone, and that is exactly why its pulse is the hardest in the limb to feel."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "The order of the contents",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:tibial_nerve",
+          "path": [
+            "bic_long",
+            "femur",
+            "popliteus",
+            "soleus"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:common_fibular_nerve",
+          "path": [
+            "bic_long",
+            "fibula"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "From the skin inwards the order is nerve, vein, artery. The sciatic nerve divides at the top of the fossa, usually at its apex. The tibial nerve is the larger part and runs straight down the middle, the most superficial of the three, and it leaves under the arch of soleus with the artery. The common fibular nerve peels off laterally and follows the medial border of the biceps tendon to the neck of the fibula. The popliteal vein lies between the two, wrapped in the same fibrous sheath as the artery. Remember it as NVA from behind forwards, and remember that the deepest structure is the one you can injure without seeing any bleeding at the surface."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Cut across the fossa",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        }
+      ],
+      "narration": "Bring the cut plane down through the knee and look at the section from below. You are seeing what a transverse section through the fossa shows: hamstring tendons on either side, the two heads of gastrocnemius behind, bone and capsule in front, and in the middle a wedge of fat carrying the nerve, the vein and the artery in that order from back to front. Nearly all of the fossa is fat. That fat is why a swelling here is so easily missed until it is large."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Peel down to the contents",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Floor"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Dissect it in order and you meet the contents in a fixed sequence: skin, then the popliteal fascia forming the roof, then the small saphenous vein piercing that fascia to end in the popliteal vein, then the tibial nerve, then the vein, then the artery on the bone. The popliteal lymph nodes sit in the fat around the vessels — they drain the small saphenous territory — the lateral border of the foot, the heel and the back of the leg — so a wound on the heel or the outer foot is felt for here, while the rest of the sole drains to the groin."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 8,
+      "title": "Why the pulse is hard to feel",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Floor"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "popliteus",
+          "kind": "adjacency"
+        }
+      ],
+      "narration": "The artery lies deep, against the femur and the capsule, with the roof of tough fascia and a mass of fat over it. To feel it you must take the fascia off tension: flex the knee to about thirty degrees, put both thumbs on the patella side and press the fingers of both hands firmly into the hollow. If a pulse here is easy to feel and expansile, that is abnormal — the popliteal artery is the commonest site of a peripheral aneurysm."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Three ways it goes wrong",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fibula",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "semimemb",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Three lesions carry the whole clinical weight of this space. A supracondylar fracture of the femur or a posterior dislocation of the knee tears the artery, and the leg below turns cold and pulseless while the skin looks intact. A popliteal cyst from the semimembranosus bursa presents as a smooth lump behind the medial side of the knee, most obvious on standing, and it can rupture into the calf and mimic a deep vein thrombosis. A lesion at the neck of the fibula divides the common fibular nerve and gives foot drop with loss of sensation over the outer leg and the dorsum of the foot. Bone, bursa and nerve — one of each."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "The knee still works without the artery",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Entry and exit"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:genicular_anastomosis",
+          "path": [
+            "femur",
+            "patella",
+            "tibia"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Around the knee the genicular branches of the popliteal artery join a ring of vessels on the front and sides of the joint, fed from above by the descending genicular and descending branch of the lateral circumflex femoral, and from below by the recurrent branches of the anterior tibial artery. This is the genicular anastomosis, traced here around the bones. It is enough to keep the leg alive if the popliteal artery is narrowed slowly. It is not enough if the artery is cut suddenly, which is the difference between a chronic block and an acute injury."
+    }
+  ],
+  "gaps": [
+    "None of the contents of the fossa exist in the catalog. The popliteal artery, the popliteal vein, the tibial nerve, the common fibular nerve, the sural nerve, the small saphenous vein and the popliteal lymph nodes are the whole point of this region, and not one has a model. They are authored as traced concept paths between the muscles and bones that do exist, and named in narration. This is the largest gap in the scene and the first thing to revisit if a lower-limb neurovascular set becomes available.",
+    "No lower limb vessel below the external iliac artery is in the catalog at all, so the femoral, popliteal, anterior tibial and posterior tibial arteries and the genicular anastomosis are all taught by tracing a named concept between bones.",
+    "The popliteal fascia forming the roof has no model, and the deep fascia of the thigh is not in the catalog. The roof is described in narration only, which is a real loss because its lack of stretch is what makes a swelling here painful.",
+    "The knee joint capsule and the oblique popliteal ligament are not modelled, so the middle third of the floor is taught by lighting the femur and popliteus on either side of it.",
+    "There is no model of the semimembranosus bursa or of the fat that fills the fossa, so the popliteal cyst is taught by highlighting semimembranosus and the medial head of gastrocnemius between which it forms.",
+    "The sciatic nerve scene for the gluteal region is where the division into tibial and common fibular nerves is introduced; this scene picks the two up at the apex of the fossa without a model for either.",
+    "This scene does not cover Ankle joint or Arches of the foot. Soleus, the calcaneal tendon and the interosseous membrane appear here only as the lower doorway out of the fossa."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

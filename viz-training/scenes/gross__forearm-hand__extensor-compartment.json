@@ -1,0 +1,753 @@
+{
+  "schema": 2,
+  "id": "gross__forearm-hand__extensor-compartment",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Forearm & Hand",
+  "structure": "Extensor compartment of forearm",
+  "covers": [
+    "Extensor compartment of forearm"
+  ],
+  "learning_goal": "Split the back of the forearm into a superficial group off the lateral epicondyle and a deep group off the radius and ulna, say what each moves, and name the three tendons that bound the anatomical snuffbox.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "forearm",
+      "posterior compartment of forearm",
+      "extensor compartment",
+      "upper limb",
+      "wrist",
+      "hand",
+      "elbow"
+    ],
+    "terms": [
+      "extensor compartment",
+      "posterior compartment of forearm",
+      "common extensor origin",
+      "lateral epicondyle",
+      "tennis elbow",
+      "brachioradialis",
+      "extensor carpi radialis longus",
+      "extensor carpi radialis brevis",
+      "extensor digitorum",
+      "extensor digiti minimi",
+      "extensor carpi ulnaris",
+      "anconeus",
+      "supinator",
+      "abductor pollicis longus",
+      "extensor pollicis brevis",
+      "extensor pollicis longus",
+      "extensor indicis",
+      "anatomical snuffbox",
+      "wrist extension",
+      "supination",
+      "radial nerve"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.006,
+    "initialYaw": 3
+  },
+  "structures": [
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "lateral epicondyle",
+        "common extensor origin",
+        "lateral supracondylar ridge"
+      ],
+      "narration": "The superficial extensors share one origin: the lateral epicondyle. Overuse inflames it and you get tennis elbow."
+    },
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "radial styloid"
+      ],
+      "narration": "The bone the deep muscles wrap and turn."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "olecranon",
+        "supinator crest"
+      ],
+      "narration": "The fixed bone. The deep extensors take origin from its posterior surface."
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right forearm",
+      "label": "Interosseous membrane",
+      "role": "context",
+      "group": "Bones",
+      "layer": "fascia",
+      "color": "#cbb9a0",
+      "refs": {
+        "bodyparts3d": "FMA23707"
+      },
+      "terms": [
+        "interosseous membrane",
+        "interosseous border",
+        "compartment boundary",
+        "force transmission"
+      ],
+      "narration": "The sheet between radius and ulna. It is what makes the forearm two compartments rather than one space, its fibres run downwards and medially from radius to ulna so that force landing on the hand is carried up to the ulna and the elbow, and both deep muscle layers take origin from it."
+    },
+    {
+      "key": "mc1",
+      "name": "right first metacarpal bone",
+      "label": "First metacarpal",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24464"
+      },
+      "terms": [
+        "first metacarpal",
+        "thumb"
+      ],
+      "narration": "Abductor pollicis longus lands on its base."
+    },
+    {
+      "key": "mc5",
+      "name": "right fifth metacarpal bone",
+      "label": "Fifth metacarpal",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24472"
+      },
+      "terms": [
+        "fifth metacarpal",
+        "little finger"
+      ],
+      "narration": "Extensor carpi ulnaris ends here, on the ulnar side of the hand."
+    },
+    {
+      "key": "mc2",
+      "name": "right second metacarpal bone",
+      "label": "Second metacarpal",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24466"
+      },
+      "terms": [
+        "second metacarpal",
+        "index finger"
+      ],
+      "narration": "Extensor carpi radialis longus ends here; brevis on the third."
+    },
+    {
+      "key": "scaphoid",
+      "name": "right scaphoid",
+      "label": "Scaphoid",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24435"
+      },
+      "terms": [
+        "scaphoid",
+        "floor of the anatomical snuffbox",
+        "scaphoid fracture"
+      ],
+      "narration": "The floor of the snuffbox. Tenderness here after a fall on the outstretched hand means scaphoid fracture until proven otherwise."
+    },
+    {
+      "key": "trapezium",
+      "name": "right trapezium",
+      "label": "Trapezium",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24443"
+      },
+      "terms": [
+        "trapezium",
+        "snuffbox floor"
+      ],
+      "narration": "The second bone in the snuffbox floor, just distal to the scaphoid."
+    },
+    {
+      "key": "brachioradialis",
+      "name": "right brachioradialis",
+      "label": "Brachioradialis",
+      "role": "part",
+      "group": "Brachioradialis",
+      "layer": "muscle",
+      "color": "#c96a3a",
+      "refs": {
+        "bodyparts3d": "FMA38486"
+      },
+      "terms": [
+        "brachioradialis",
+        "lateral supracondylar ridge",
+        "radial styloid",
+        "the odd one out"
+      ],
+      "narration": "The exam favourite. It sits in the extensor compartment and is supplied by the radial nerve, but it flexes the elbow. Origin is the supracondylar ridge, not the epicondyle."
+    },
+    {
+      "key": "ecrl",
+      "name": "right extensor carpi radialis longus",
+      "label": "Extensor carpi radialis longus",
+      "role": "part",
+      "group": "Extensor carpi radialis longus",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA38495"
+      },
+      "terms": [
+        "extensor carpi radialis longus",
+        "ECRL"
+      ],
+      "narration": "Extends the wrist and pulls it towards the thumb. Ends on the second metacarpal."
+    },
+    {
+      "key": "ecrb",
+      "name": "right extensor carpi radialis brevis",
+      "label": "Extensor carpi radialis brevis",
+      "role": "part",
+      "group": "Extensor carpi radialis brevis",
+      "layer": "muscle",
+      "color": "#d04b3f",
+      "refs": {
+        "bodyparts3d": "FMA38498"
+      },
+      "terms": [
+        "extensor carpi radialis brevis",
+        "ECRB",
+        "tennis elbow"
+      ],
+      "narration": "The muscle most often blamed in tennis elbow. Its origin on the lateral epicondyle takes the strain."
+    },
+    {
+      "key": "extensor_digitorum",
+      "name": "right extensor digitorum",
+      "label": "Extensor digitorum",
+      "role": "part",
+      "group": "Extensor digitorum",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA38501"
+      },
+      "terms": [
+        "extensor digitorum",
+        "extensor expansion",
+        "MCP extension",
+        "wrist drop"
+      ],
+      "narration": "Four tendons to the fingers. It extends the knuckles; the interossei and lumbricals finish the job at the small joints."
+    },
+    {
+      "key": "edm",
+      "name": "right extensor digiti minimi",
+      "label": "Extensor digiti minimi",
+      "role": "part",
+      "group": "Extensor digiti minimi",
+      "layer": "muscle",
+      "color": "#e07a5f",
+      "refs": {
+        "bodyparts3d": "FMA38504"
+      },
+      "terms": [
+        "extensor digiti minimi",
+        "little finger extension"
+      ],
+      "narration": "An extra tendon for the little finger, which is why you can lift it on its own."
+    },
+    {
+      "key": "ecu_humeral",
+      "name": "humeral head of right extensor carpi ulnaris",
+      "label": "Extensor carpi ulnaris — humeral head",
+      "role": "part",
+      "group": "Extensor carpi ulnaris",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "refs": {
+        "bodyparts3d": "BP45"
+      },
+      "terms": [
+        "extensor carpi ulnaris",
+        "ECU",
+        "humeral head"
+      ],
+      "narration": "From the lateral epicondyle with the rest of the superficial group."
+    },
+    {
+      "key": "ecu_ulnar",
+      "name": "ulnar head of right extensor carpi ulnaris",
+      "label": "Extensor carpi ulnaris — ulnar head",
+      "role": "part",
+      "group": "Extensor carpi ulnaris",
+      "layer": "muscle",
+      "color": "#93382f",
+      "refs": {
+        "bodyparts3d": "BP47"
+      },
+      "terms": [
+        "ulnar head of extensor carpi ulnaris",
+        "posterior border of ulna"
+      ],
+      "narration": "A second origin along the back of the ulna. It ends on the fifth metacarpal."
+    },
+    {
+      "key": "anconeus",
+      "name": "right anconeus",
+      "label": "Anconeus",
+      "role": "part",
+      "group": "Anconeus",
+      "layer": "muscle",
+      "color": "#8d5b4a",
+      "refs": {
+        "bodyparts3d": "FMA37705"
+      },
+      "terms": [
+        "anconeus",
+        "olecranon",
+        "elbow extension"
+      ],
+      "narration": "A small triangle behind the elbow. It helps the triceps extend and steadies the joint."
+    },
+    {
+      "key": "supinator",
+      "name": "right supinator",
+      "label": "Supinator",
+      "role": "part",
+      "group": "Supinator",
+      "layer": "muscle",
+      "color": "#a83a6a",
+      "refs": {
+        "bodyparts3d": "FMA38513"
+      },
+      "terms": [
+        "supinator",
+        "posterior interosseous nerve",
+        "arcade of Frohse",
+        "supination"
+      ],
+      "narration": "It wraps the upper radius and turns the palm up. The posterior interosseous nerve passes through it — injure it here and the fingers will not extend."
+    },
+    {
+      "key": "apl",
+      "name": "right abductor pollicis longus",
+      "label": "Abductor pollicis longus",
+      "role": "part",
+      "group": "Abductor pollicis longus",
+      "layer": "muscle",
+      "color": "#7e2b52",
+      "refs": {
+        "bodyparts3d": "FMA38516"
+      },
+      "terms": [
+        "abductor pollicis longus",
+        "APL",
+        "snuffbox",
+        "de Quervain"
+      ],
+      "narration": "Pulls the thumb away from the hand. Its tendon makes the front edge of the snuffbox and is one of the two inflamed in de Quervain tenosynovitis."
+    },
+    {
+      "key": "epb",
+      "name": "right extensor pollicis brevis",
+      "label": "Extensor pollicis brevis",
+      "role": "part",
+      "group": "Extensor pollicis brevis",
+      "layer": "muscle",
+      "color": "#6f2a63",
+      "refs": {
+        "bodyparts3d": "FMA38519"
+      },
+      "terms": [
+        "extensor pollicis brevis",
+        "EPB",
+        "anterior border of snuffbox"
+      ],
+      "narration": "Runs beside abductor pollicis longus. The two of them form the anterior border of the snuffbox."
+    },
+    {
+      "key": "epl",
+      "name": "right extensor pollicis longus",
+      "label": "Extensor pollicis longus",
+      "role": "part",
+      "group": "Extensor pollicis longus",
+      "layer": "muscle",
+      "color": "#5d2a6e",
+      "refs": {
+        "bodyparts3d": "FMA38522"
+      },
+      "terms": [
+        "extensor pollicis longus",
+        "EPL",
+        "posterior border of snuffbox",
+        "Lister tubercle"
+      ],
+      "narration": "It hooks around the tubercle on the back of the radius and forms the back border of the snuffbox. That hook is why it ruptures after a wrist fracture."
+    },
+    {
+      "key": "ei",
+      "name": "right extensor indicis",
+      "label": "Extensor indicis",
+      "role": "part",
+      "group": "Extensor indicis",
+      "layer": "muscle",
+      "color": "#4f3070",
+      "refs": {
+        "bodyparts3d": "FMA38525"
+      },
+      "terms": [
+        "extensor indicis",
+        "index finger extension"
+      ],
+      "narration": "An extra tendon for the index finger, so it can point while the others stay down."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The extensor compartment is the back of the forearm. Every muscle here is supplied by the radial nerve or its posterior interosseous branch."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The superficial group",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Brachioradialis",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Extensor carpi radialis longus",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Extensor carpi radialis brevis",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Extensor digitorum",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Extensor digiti minimi",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Extensor carpi ulnaris",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Six superficial muscles, running radial to ulnar. Four of them start on the lateral epicondyle; brachioradialis and extensor carpi radialis longus start higher, on the supracondylar ridge."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The deep group",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Brachioradialis"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensor carpi radialis longus"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensor carpi radialis brevis"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensor digitorum"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensor digiti minimi"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensor carpi ulnaris"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Supinator"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Abductor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Extensor pollicis brevis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Extensor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Extensor indicis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Underneath are five deep muscles from the radius, ulna and the membrane between them: supinator at the top, then the three thumb muscles and extensor indicis."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Where the thumb muscles cross",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Abductor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Extensor pollicis brevis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Extensor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "apl",
+          "to": "mc1",
+          "kind": "inserts on"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The three thumb muscles come from deep in the forearm and wind round to the radial side of the wrist. That is why thumb pain is often a forearm problem."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The anatomical snuffbox",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Extensor pollicis brevis",
+            "Extensor pollicis longus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Abductor pollicis longus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "scaphoid",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trapezium",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Front border: abductor pollicis longus and extensor pollicis brevis. Back border: extensor pollicis longus. Floor: scaphoid and trapezium. The radial artery crosses that floor."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 6,
+      "title": "Which way does the wrist go",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Extensor carpi radialis longus",
+            "Extensor carpi ulnaris"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ecrl",
+          "to": "mc2",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ecu_ulnar",
+          "to": "mc5",
+          "kind": "inserts on"
+        }
+      ],
+      "narration": "Both extend the wrist, and they land on opposite sides of the hand. Fire one and the wrist deviates; fire both and it goes straight back."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Turning the palm up",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Supinator"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "supinator",
+          "to": "radius",
+          "kind": "wraps around"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "supinator",
+          "path": [
+            "humerus",
+            "ulna",
+            "radius"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "Supinator runs from the lateral epicondyle and the ulna, wraps the upper radius, and unwinds it. Biceps helps when the elbow is bent and the effort is heavy."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Cut across the back of the forearm",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "In cross-section the superficial group sits as a sheet behind the deep group, with radius and ulna in front of both. Front of the section is flexor, back is extensor."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Strip the muscles off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Take the muscles away and the plan is obvious: two bones, one fixed and one that rotates, with everything on the back either straightening the wrist and fingers or turning the radius."
+    }
+  ],
+  "gaps": [
+    "There is no extensor retinaculum mesh, so the six extensor compartments of the wrist and the tunnels that group these tendons are described but not shown. The flexor retinaculum does exist and is used in the flexor compartment scene.",
+    "The catalog holds no upper limb nerves or arteries, so the radial nerve, the posterior interosseous nerve running through supinator, and the radial artery crossing the snuffbox floor are narration only.",
+    "Extensor carpi ulnaris has no whole-muscle mesh; it is authored from its humeral and ulnar heads, so the student list shows two entries for one muscle.",
+    "There is no mesh for the common extensor origin or the extensor expansions on the fingers, so the shared origin and the finger insertions are described rather than shown. The interosseous membrane exists — FMA23707 — and beat 3 already narrates 'the membrane between them', so it should be drawn rather than described.",
+    "Lister's tubercle on the back of the radius has no separate mesh or authored landmark, so the pulley that extensor pollicis longus hooks around is named in narration only."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  }
+}

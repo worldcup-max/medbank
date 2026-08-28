@@ -1,0 +1,733 @@
+{
+  "schema": 2,
+  "id": "gross__pelvis-perineum__urinary-bladder",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pelvis & Perineum",
+  "structure": "Urinary bladder",
+  "covers": [
+    "Urinary bladder"
+  ],
+  "learning_goal": "Place the empty and the full bladder relative to the pubic symphysis and the peritoneum, name its apex, base, superior and inferolateral surfaces and neck, describe the trigone and why it is the one smooth part, explain the oblique passage of the ureters as the valve that prevents reflux, give the blood supply from the internal iliac artery and the lymphatic drainage, state the sympathetic, parasympathetic and somatic supply and use it to explain the micturition reflex and the pattern of a neurogenic bladder, and reason from the anatomy to suprapubic catheterisation, bladder rupture, urethral injury and the field of bladder cancer.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "urinary bladder",
+      "bladder",
+      "pelvis",
+      "urinary tract",
+      "micturition",
+      "catheterisation",
+      "pelvic viscera",
+      "renal",
+      "trauma",
+      "prostate",
+      "perineum"
+    ],
+    "terms": [
+      "urinary bladder",
+      "bladder",
+      "detrusor",
+      "detrusor muscle",
+      "trigone",
+      "trigone of the bladder",
+      "ureteric orifice",
+      "internal urethral orifice",
+      "interureteric bar",
+      "interureteric ridge",
+      "uvula vesicae",
+      "apex of the bladder",
+      "base of the bladder",
+      "fundus of the bladder",
+      "superior surface",
+      "inferolateral surface",
+      "neck of the bladder",
+      "bladder neck",
+      "median umbilical ligament",
+      "urachus",
+      "retropubic space",
+      "cave of Retzius",
+      "rectovesical pouch",
+      "uterovesical pouch",
+      "vesicouterine pouch",
+      "peritoneum",
+      "extraperitoneal",
+      "intraperitoneal rupture",
+      "extraperitoneal rupture",
+      "suprapubic catheter",
+      "suprapubic aspiration",
+      "suprapubic cystostomy",
+      "urethral catheter",
+      "male urethra",
+      "female urethra",
+      "prostatic urethra",
+      "membranous urethra",
+      "spongy urethra",
+      "sphincter urethrae",
+      "external urethral sphincter",
+      "internal urethral sphincter",
+      "ureter",
+      "vesicoureteric junction",
+      "intramural ureter",
+      "oblique course",
+      "vesicoureteric reflux",
+      "flap valve",
+      "ureteric orifice stone",
+      "superior vesical artery",
+      "inferior vesical artery",
+      "vaginal artery",
+      "internal iliac artery",
+      "vesical venous plexus",
+      "prostatic venous plexus",
+      "internal iliac lymph nodes",
+      "external iliac lymph nodes",
+      "pelvic splanchnic nerves",
+      "nervi erigentes",
+      "S2 S3 S4",
+      "inferior hypogastric plexus",
+      "hypogastric nerve",
+      "sympathetic L1 L2",
+      "pudendal nerve",
+      "micturition",
+      "micturition reflex",
+      "stretch receptors",
+      "neurogenic bladder",
+      "atonic bladder",
+      "automatic bladder",
+      "spinal shock",
+      "cauda equina syndrome",
+      "urinary retention",
+      "overflow incontinence",
+      "benign prostatic hyperplasia",
+      "bladder outflow obstruction",
+      "trabeculated bladder",
+      "cystoscopy",
+      "transitional epithelium",
+      "urothelium",
+      "transitional cell carcinoma",
+      "painless haematuria",
+      "schistosomiasis",
+      "Schistosoma haematobium",
+      "squamous cell carcinoma of the bladder",
+      "pelvic diaphragm support",
+      "cystocele",
+      "urinary bladder capacity"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Urinary bladder — a pyramid behind the pubis",
+      "role": "part",
+      "group": "Bladder",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "bladder",
+        "detrusor",
+        "apex of the bladder",
+        "base of the bladder",
+        "fundus",
+        "superior surface",
+        "inferolateral surface",
+        "neck of the bladder",
+        "median umbilical ligament",
+        "urachus",
+        "retropubic space",
+        "cave of Retzius",
+        "trabeculated bladder",
+        "urothelium",
+        "transitional epithelium"
+      ],
+      "narration": "Empty, the bladder is a three-sided pyramid lying entirely within the lesser pelvis, behind the pubic symphysis and in front of the rectum. Name its parts in the order the examiner asks for them: an apex pointing forwards at the upper border of the symphysis, from which the median umbilical ligament — the remnant of the urachus — runs up to the umbilicus; a base or fundus facing backwards and downwards, which carries the trigone; a superior surface covered by peritoneum; two inferolateral surfaces resting on the pubic bones and on levator ani; and a neck below, the lowest and most fixed part, where the urethra begins. The wall is detrusor, smooth muscle in three interlacing layers, and the lining is transitional epithelium thrown into folds that flatten as it fills. Capacity is about five hundred millilitres, with the first desire to void at around one hundred and fifty."
+    },
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Ureter (right) — entering obliquely",
+      "role": "part",
+      "group": "Ureters",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "ureter",
+        "vesicoureteric junction",
+        "intramural ureter",
+        "oblique course",
+        "ureteric orifice",
+        "flap valve",
+        "vesicoureteric reflux",
+        "third constriction",
+        "ureteric stone"
+      ],
+      "narration": "The ureter does not enter the bladder at right angles. It pierces the wall obliquely and runs about two centimetres within the muscle before opening at the ureteric orifice. That oblique intramural course is a valve made of nothing but geometry: as the bladder fills, the pressure inside squashes the tunnel shut, so urine cannot go back up. A short or straight tunnel — congenital, or after a stone is cut out — lets urine reflux to the kidney on voiding, and reflux plus infection scars the kidney. The vesicoureteric junction is also the narrowest of the three ureteric constrictions and the commonest place a stone finally lodges."
+    },
+    {
+      "key": "left_ureter",
+      "name": "left ureter",
+      "label": "Ureter (left)",
+      "role": "part",
+      "group": "Ureters",
+      "layer": "organ",
+      "color": "#dc7633",
+      "refs": {
+        "bodyparts3d": "FMA15572"
+      },
+      "terms": [
+        "ureter",
+        "left",
+        "interureteric bar",
+        "cystoscopy",
+        "trigone"
+      ],
+      "narration": "The same on the left. The two orifices sit at the upper two corners of the trigone, about two and a half centimetres apart in the empty bladder and five in the full one, joined by a raised interureteric bar. At cystoscopy that bar is the road between them: find one orifice, follow the bar, and the other is at its far end."
+    },
+    {
+      "key": "urethra",
+      "name": "urethra",
+      "label": "Urethra — leaving at the neck",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#f5b041",
+      "refs": {
+        "bodyparts3d": "FMA19667"
+      },
+      "terms": [
+        "urethra",
+        "internal urethral orifice",
+        "bladder neck",
+        "internal urethral sphincter",
+        "prostatic urethra",
+        "membranous urethra",
+        "spongy urethra",
+        "sphincter urethrae",
+        "external urethral sphincter",
+        "female urethra",
+        "urethral catheter",
+        "urethral injury"
+      ],
+      "narration": "The urethra begins at the internal urethral orifice, the lowest corner of the trigone and the lowest point of the whole bladder — which is why the bladder empties completely under gravity. In the male it is about twenty centimetres and has three named parts: prostatic, membranous as it pierces the pelvic floor where the sphincter urethrae surrounds it, and spongy in the penis. The membranous part is the shortest, the least mobile and the part torn in a pelvic fracture. In the female it is only about four centimetres, straight, and opens in the vestibule — short enough to make ascending infection easy and long enough to matter in continence. The internal sphincter at the neck is smooth muscle under sympathetic control and, in the male, closes during ejaculation to stop retrograde flow; the external sphincter, striated and supplied by the pudendal nerve, is the one under conscious control."
+    },
+    {
+      "key": "prostate",
+      "name": "prostate",
+      "label": "Prostate — sitting under the neck",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA9600"
+      },
+      "terms": [
+        "prostate",
+        "prostatic urethra",
+        "median lobe",
+        "benign prostatic hyperplasia",
+        "bladder outflow obstruction",
+        "urinary retention",
+        "trabeculation",
+        "uvula vesicae",
+        "high riding prostate"
+      ],
+      "narration": "In the male the neck of the bladder rests directly on the prostate, and the prostatic urethra runs through it. Everything difficult about the male bladder follows from that relationship. The median lobe enlarges upwards into the bladder neck in benign hyperplasia and behaves as a ball valve, giving hesitancy, poor stream, terminal dribbling and eventually retention; the detrusor hypertrophies against the obstruction and the lining is pushed between the muscle bundles into a trabeculated bladder with diverticula. On rectal examination after pelvic trauma a high-riding prostate means the urethra has been torn from it, and no catheter is passed per urethram."
+    },
+    {
+      "key": "right_seminal_vesicle",
+      "name": "right seminal vesicle",
+      "label": "Seminal vesicle (right) — on the base",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA19387"
+      },
+      "terms": [
+        "seminal vesicle",
+        "base of the bladder",
+        "vas deferens",
+        "ampulla",
+        "rectovesical pouch",
+        "rectal examination"
+      ],
+      "narration": "The base of the male bladder is not bare. The two vasa deferentia converge on the midline with a seminal vesicle lateral to each, all lying on the back of the bladder between it and the rectum. They are the reason the male base is separated from the rectum below the rectovesical pouch, and they are what a finger is feeling laterally when the prostate is examined."
+    },
+    {
+      "key": "left_seminal_vesicle",
+      "name": "left seminal vesicle",
+      "label": "Seminal vesicle (left)",
+      "role": "context",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA19388"
+      },
+      "terms": [
+        "seminal vesicle",
+        "left",
+        "ejaculatory duct"
+      ],
+      "narration": "The mirror vesicle. Its duct joins the vas to form the ejaculatory duct, which pierces the prostate to open into the prostatic urethra."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum — behind, across the pouch",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "rectovesical pouch",
+        "uterovesical pouch",
+        "vesicouterine pouch",
+        "peritoneum",
+        "digital rectal examination",
+        "pelvic abscess"
+      ],
+      "narration": "Behind the bladder the peritoneum leaves the superior surface, dips down and climbs onto the rectum, forming the rectovesical pouch in the male — the lowest point of the male peritoneal cavity, and therefore where pus and blood collect and where a pelvic abscess is felt and drained per rectum. In the female the uterus is interposed and there are two pouches, uterovesical in front and rectouterine behind, the latter deeper still."
+    },
+    {
+      "key": "right_internal_iliac",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery (right) — the vesical arteries",
+      "role": "part",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "superior vesical artery",
+        "inferior vesical artery",
+        "vaginal artery",
+        "umbilical artery",
+        "vesical venous plexus",
+        "prostatic venous plexus",
+        "internal iliac lymph nodes"
+      ],
+      "narration": "The blood supply is simple if you take it from one source. The superior vesical artery, the patent proximal part of the fetal umbilical artery, supplies the upper bladder; the inferior vesical artery in the male, or the vaginal artery in the female, supplies the base and neck. Both are branches of the internal iliac. Veins do not follow the arteries: they form the vesical venous plexus round the neck and base, communicating with the prostatic plexus and draining to the internal iliac vein — and, through connections with the vertebral venous plexus, giving prostatic and bladder cancer a route straight to the spine and pelvis. Lymph from the superior surface goes to the external iliac nodes, from the base and neck to the internal iliac nodes."
+    },
+    {
+      "key": "left_internal_iliac",
+      "name": "left internal iliac artery",
+      "label": "Internal iliac artery (left)",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA18810"
+      },
+      "terms": [
+        "internal iliac artery",
+        "left",
+        "pelvic blood supply"
+      ],
+      "narration": "The same on the left, mirroring the supply. Shown so the bladder is seen to receive from both sides — one reason it survives ligation of a single internal iliac artery."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Kidney (right) — the top of the tract",
+      "role": "context",
+      "group": "Upper tract",
+      "layer": "organ",
+      "color": "#8e5b3a",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "kidney",
+        "renal pelvis",
+        "upper urinary tract",
+        "reflux nephropathy",
+        "hydronephrosis"
+      ],
+      "narration": "Context, so the bladder is seen as the reservoir at the bottom of a continuous tract. Everything that goes wrong at the vesicoureteric junction or below is ultimately paid for up here: reflux scars the kidney, and long-standing outflow obstruction backs pressure up the ureters into hydronephrosis and renal failure."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Kidney (left)",
+      "role": "context",
+      "group": "Upper tract",
+      "layer": "organ",
+      "color": "#7e5109",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "kidney",
+        "left",
+        "urinary tract"
+      ],
+      "narration": "The left kidney, completing the pair. The tract is one system from calyx to meatus, and the bladder is the only part of it that is voluntary."
+    },
+    {
+      "key": "right_pubococcygeus",
+      "name": "right pubococcygeus",
+      "label": "Pubococcygeus (right) — what the bladder rests on",
+      "role": "part",
+      "group": "Support",
+      "layer": "muscle",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA45854"
+      },
+      "terms": [
+        "pubococcygeus",
+        "levator ani",
+        "pelvic diaphragm",
+        "bladder neck support",
+        "stress incontinence",
+        "cystocele"
+      ],
+      "narration": "The inferolateral surfaces of the bladder lie on levator ani, and the medial fibres of pubococcygeus support the neck and the urethra behind. The bladder is not slung from above; it sits on a muscular floor, and the floor's tone is part of continence. Lose it and the neck descends: a cough pushes urine out instead of pressing the urethra shut."
+    },
+    {
+      "key": "left_pubococcygeus",
+      "name": "left pubococcygeus",
+      "label": "Pubococcygeus (left)",
+      "role": "context",
+      "group": "Support",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA45855"
+      },
+      "terms": [
+        "pubococcygeus",
+        "left",
+        "pelvic floor"
+      ],
+      "narration": "The other half of the floor. Together they make the shelf the bladder rests on."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — pubis in front of the bladder",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "pubis",
+        "pubic symphysis",
+        "retropubic space",
+        "pubic ramus fracture",
+        "extraperitoneal rupture",
+        "suprapubic catheter"
+      ],
+      "narration": "The pubic bone is the bladder's relation in front, with only the fat of the retropubic space between them. Two clinical facts come straight off it. Fragments from a fractured pubic ramus tear the bladder below the peritoneum, giving an extraperitoneal rupture with urine in the retropubic space rather than in the abdomen. And a full bladder rises out of the pelvis above the symphysis, stripping the peritoneum off the anterior abdominal wall as it goes — which is what makes a suprapubic needle or catheter safe, because it enters the bladder without crossing the peritoneal cavity."
+    },
+    {
+      "key": "left_hip_bone",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "hip bone",
+        "left",
+        "pelvic ring"
+      ],
+      "narration": "The mirror bone, closing the ring in front at the symphysis."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the nerve roots behind",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "S2 S3 S4",
+        "pelvic splanchnic nerves",
+        "nervi erigentes",
+        "inferior hypogastric plexus",
+        "cauda equina syndrome",
+        "sacral nerve roots"
+      ],
+      "narration": "Behind the pelvis, the sacrum carries the roots that run the bladder. The parasympathetic supply is the pelvic splanchnic nerves from the ventral rami of S2, S3 and S4 — motor to detrusor and inhibitory to the neck — reaching the bladder through the inferior hypogastric plexus. Sympathetic fibres come from L1 and L2 through the hypogastric nerves. That is why a lesion of the cauda equina at these roots gives painless retention with overflow, and why saddle anaesthesia and retention together are a surgical emergency."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Empty in the pelvis, full in the abdomen",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Upper tract"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "bladder",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "right_hip_bone",
+          "kind": "retropubic space between them"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "right_pubococcygeus",
+          "kind": "rests on the pelvic floor"
+        }
+      ],
+      "narration": "Start with position, because everything clinical about this organ depends on it. Empty, the adult bladder lies wholly within the lesser pelvis, behind the pubic symphysis and in front of the rectum, resting on the pelvic floor and on the pubic bones. Between it and the pubis is the retropubic space, filled with loose fat and the vesical venous plexus. As it fills it does not expand sideways — it rises. The superior surface pushes up out of the pelvis and strips the peritoneum off the back of the anterior abdominal wall, so that a distended bladder lies directly against the muscle above the symphysis. That single movement explains why a full bladder is palpable and dull to percussion suprapubically, why it can be entered with a needle or a suprapubic catheter without crossing the peritoneal cavity, and why in an infant, whose pelvis is shallow, the bladder is an abdominal organ even when empty. It is also why a distended bladder is the commonest cause of a lower abdominal mass that disappears after catheterisation — always empty the bladder before you commit to any pelvic mass."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Apex, base, surfaces and neck",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bladder"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ureters"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "urethra",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "prostate",
+          "kind": "neck rests on the prostate"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "right_seminal_vesicle",
+          "kind": "vas and vesicle on the base"
+        }
+      ],
+      "narration": "Describe the empty bladder as a pyramid on its side and the parts fall into place. The apex points forwards to the top of the symphysis and gives attachment to the median umbilical ligament, the fibrous remnant of the urachus running to the umbilicus — a patent urachus leaks urine at the navel in the newborn. The base faces backwards and downwards and is the only surface with a fixed shape whether the bladder is full or empty; it carries the trigone inside and, in the male, the two vasa and the seminal vesicles outside. The superior surface is the only one covered by peritoneum, so it is the only one that ruptures into the abdomen. The two inferolateral surfaces rest on the pubic bones and levator ani. The neck is the lowest and the most fixed part, held by the puboprostatic ligaments in the male and pubovesical in the female, and it is where the urethra begins. Learn which surfaces are covered by peritoneum and you have already answered the question about bladder rupture."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Inside: the trigone and the oblique tunnel",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bladder"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ureters"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_ureter",
+            "left_ureter"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:urine",
+          "path": [
+            "right_ureter",
+            "bladder",
+            "urethra"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Cut the bladder open and almost all of the lining is thrown into folds that flatten as it fills — except for one triangle on the base, which is always smooth. That is the trigone, and it is smooth because the mucosa there is firmly bound to the muscle beneath. Its three corners are the two ureteric orifices above, joined by the raised interureteric bar, and the internal urethral orifice below. The trigone is developmentally different from the rest of the bladder — it comes from the absorbed ends of the mesonephric ducts rather than the cloaca — which is why it has its own sensitivity, why it is the first place inflammation is felt, and why it is the landmark that orients every cystoscopy. Now watch the ureter enter. It pierces the wall obliquely and travels two centimetres inside the muscle before it opens. As the bladder fills, the rising pressure flattens that intramural tunnel shut, so urine cannot reflux upwards; each ureter is closed by the very pressure that would push urine back. Peristalsis opens it briefly and squirts urine in, which is the jet seen at cystoscopy. Where the tunnel is too short or too straight — congenitally, or after surgery — reflux follows, and reflux with infection scars the growing kidney."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Micturition — and the bladder that has lost its nerve",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacrum",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "bladder",
+          "kind": "pelvic splanchnic nerves S2-S4 to detrusor"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:micturition-reflex",
+          "path": [
+            "bladder",
+            "sacrum",
+            "urethra"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "urethra",
+          "to": "right_pubococcygeus",
+          "kind": "external sphincter and floor released last"
+        }
+      ],
+      "narration": "Three supplies, and each does one thing. Parasympathetic, from S2, S3 and S4 through the pelvic splanchnic nerves — contract the detrusor, relax the neck: this is the nerve of emptying. Sympathetic, from L1 and L2 through the hypogastric nerves — relax the detrusor and, in the male, close the neck during ejaculation so semen does not go backwards. Somatic, the pudendal nerve from S2 to S4 — the external sphincter and the pelvic floor, the only part you control. Micturition then reads as a reflex with a voluntary brake. Filling stretches the wall; stretch receptors send afferents up with the parasympathetics to the sacral cord; the first desire comes at about one hundred and fifty millilitres and becomes urgent near four hundred. In the infant the sacral reflex simply fires. In the adult, descending inhibition from the pontine centre holds it until the moment is chosen, and then the brake is released: the external sphincter and the floor relax, the detrusor contracts, the neck funnels open and the bladder empties to the lowest point, which is the internal urethral orifice. Break the pathway and the pattern tells you where. A cord lesion above the sacral segments releases the reflex from control — after spinal shock, an automatic bladder that empties reflexly without warning. A lesion of the sacral segments or the cauda equina destroys the reflex itself — an atonic bladder, painless retention with overflow dribbling. And obstruction below, most often a big prostate, gives a hypertrophied trabeculated bladder that eventually decompensates into chronic retention. Retention with saddle anaesthesia is cauda equina compression until proved otherwise, and it is imaged the same day."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Reading the clinic off the bladder",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Upper tract"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "rectum",
+          "kind": "rectovesical pouch — intraperitoneal rupture drains here"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac",
+          "to": "bladder",
+          "kind": "superior and inferior vesical arteries"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:obstruction",
+          "path": [
+            "prostate",
+            "bladder",
+            "right_ureter",
+            "right_kidney"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Five things the anatomy explains. Rupture: a blow to a full bladder tears the peritoneum-covered superior surface and urine enters the peritoneal cavity, giving generalised abdominal pain, absent bowel sounds and a rising urea as urine is reabsorbed; a pelvic fracture tears it below the peritoneum instead, and urine collects in the retropubic space with no peritonism at all. The two are managed differently, and the difference is simply which surface has peritoneum on it. Urethral injury: blood at the meatus, a perineal haematoma, inability to void and a high-riding prostate mean a torn membranous urethra — no urethral catheter, pass a suprapubic one. Suprapubic access: safe only because the distended bladder has already pushed the peritoneum away from the abdominal wall, and only into a bladder you have confirmed is full. Obstruction: the prostate sits under the neck, so its enlargement obstructs first, and the pressure travels back through the trigone, up the ureters and into both kidneys — obstructive uropathy is a bladder problem read on a renal function test. Cancer: the whole lining is transitional epithelium exposed to whatever the urine carries, so the field is the entire tract, transitional cell carcinoma presents as painless haematuria, and in areas where Schistosoma haematobium is endemic the chronic irritation of the bladder wall produces squamous cell carcinoma instead — which is why painless haematuria in a Nigerian patient is cystoscoped and not dismissed as infection."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "The trigone has no mesh, and it is the single most examined internal feature of this organ. Beat three cuts the bladder open with CROSS_SECTION and names the three corners and the interureteric bar over an undifferentiated wall. The ureteric orifices and the internal urethral orifice likewise have no models and no anchors — three measured anchors on the base would turn the whole beat from a recitation into a clickable cystoscopic view, and would be the highest-value single addition to this scene.",
+    "The bladder is one hollow model with no wall layers, so detrusor, the interlacing muscle bundles and the transitional epithelium cannot be shown or peeled. Trabeculation and diverticula in outflow obstruction, narrated in beats two and five, have nothing to appear on.",
+    "The intramural course of the ureter — the oblique two-centimetre tunnel that is the anti-reflux valve — cannot be seen, because the ureter model stops at the bladder surface rather than running within its wall. This is the mechanism of beat three and it is taught entirely in narration with COMPARE_STRUCTURES between the two ureters as a visual anchor.",
+    "No female urethra, uterus or vagina in the catalog. The female bladder differs in every relation that matters — the uterus and vagina behind, two peritoneal pouches instead of one, a four-centimetre urethra, no prostate — and all of it is spoken over male viscera. Same missing female pelvis set that has now blocked three scenes in this topic.",
+    "No peritoneum model, so the rectovesical pouch and the peritoneal covering of the superior surface are narrated, not shown. Since the whole intraperitoneal-versus-extraperitoneal rupture distinction in beat five turns on which surface carries peritoneum, this is a real loss.",
+    "The median umbilical ligament and the urachus have no meshes, so the apex is described as giving attachment to something invisible.",
+    "No nerve meshes: pelvic splanchnic nerves, hypogastric nerves, the inferior hypogastric plexus and the pudendal nerve are all narrated. Beat four uses SHOW_RELATIONSHIP from the sacrum to the bladder as a stand-in for the S2-S4 supply, which is honest about being a proxy but shows a bone where a nerve should be. Thirty-six runs and the catalog still holds no nerve but the optic.",
+    "No vesical or prostatic venous plexus, and no lymph nodes, so the venous and lymphatic drainage in beat five is spoken over the arteries. The connection with the vertebral venous plexus, which is why pelvic cancer seeds the spine, has nothing to trace along.",
+    "The internal urethral sphincter at the neck and the sphincter urethrae below are neither of them separate models; the urethra is one tube. The distinction between the involuntary neck and the voluntary sphincter, which beats two and four both depend on, is narrated only.",
+    "This scene does not claim to cover 'Ureters', which is already authored in Kidney & Posterior Abdominal Wall, nor 'Pelvic diaphragm (levator ani)', 'Bony pelvis' or 'Internal reproductive organs', although parts of all four appear here as context or as the bladder's relations."
+  ]
+}

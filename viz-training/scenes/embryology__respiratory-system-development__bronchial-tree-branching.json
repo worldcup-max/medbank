@@ -1,0 +1,491 @@
+{
+  "schema": 2,
+  "id": "embryology__respiratory-system-development__bronchial-tree-branching",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Respiratory System Development",
+  "structure": "Bronchial tree branching",
+  "covers": [
+    "Bronchial tree branching"
+  ],
+  "learning_goal": "Count the airway generations from the bronchial buds to the terminal bronchiole, name the four stages of lung maturation with their weeks, say what tissue change defines each stage, and state the earliest age at which a preterm baby can exchange gas and why.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "bronchial tree branching",
+      "lung maturation",
+      "stages of lung development",
+      "respiratory system development",
+      "development of the lungs",
+      "branching morphogenesis",
+      "bronchopulmonary segments",
+      "prematurity and the lung"
+    ],
+    "terms": [
+      "bronchial tree branching",
+      "branching morphogenesis",
+      "dichotomous branching",
+      "bronchial buds",
+      "primary bronchial buds",
+      "main bronchi",
+      "principal bronchi",
+      "secondary bronchial buds",
+      "lobar bronchi",
+      "tertiary bronchial buds",
+      "segmental bronchi",
+      "bronchopulmonary segment",
+      "ten segments on the right",
+      "eight to ten segments on the left",
+      "terminal bronchiole",
+      "respiratory bronchiole",
+      "alveolar duct",
+      "seventeen generations",
+      "twenty-three generations",
+      "pseudoglandular stage",
+      "canalicular stage",
+      "terminal saccular stage",
+      "terminal sac stage",
+      "saccular stage",
+      "alveolar stage",
+      "week 5",
+      "week 16",
+      "week 17",
+      "week 26",
+      "week 28",
+      "week 36",
+      "8 years",
+      "splanchnic mesoderm",
+      "visceral mesoderm",
+      "endoderm",
+      "mesenchyme",
+      "epithelial-mesenchymal interaction",
+      "FGF10",
+      "sonic hedgehog",
+      "cuboidal epithelium",
+      "columnar epithelium",
+      "vascularisation",
+      "capillary network",
+      "blood-air barrier",
+      "type I pneumocyte",
+      "type II pneumocyte",
+      "surfactant",
+      "viability",
+      "preterm",
+      "prematurity",
+      "congenital cystic adenomatoid malformation",
+      "CCAM",
+      "congenital pulmonary airway malformation",
+      "bronchogenic cyst",
+      "pulmonary hypoplasia",
+      "oligohydramnios",
+      "Potter sequence",
+      "congenital diaphragmatic hernia"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "buds",
+      "label": "Where the branching starts — the two bronchial buds",
+      "role": "context",
+      "group": "Counting the generations",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "bronchial buds",
+        "primary bronchial buds",
+        "main bronchi",
+        "principal bronchi",
+        "right main bronchus",
+        "left main bronchus",
+        "day 28",
+        "week 5"
+      ],
+      "narration": "Branching begins from the two bronchial buds already made by the respiratory diverticulum. Each bud is a blind endodermal tube capped by splanchnic mesoderm, and every airway below it is made by the same trick repeated: the tube divides in two, and the mesenchyme around it tells it where and when."
+    },
+    {
+      "key": "lobar",
+      "label": "Second generation — the lobar bronchi, three right and two left",
+      "role": "part",
+      "group": "Counting the generations",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "secondary bronchial buds",
+        "lobar bronchi",
+        "three lobes on the right",
+        "two lobes on the left",
+        "upper lobe",
+        "middle lobe",
+        "lower lobe",
+        "lingula",
+        "week 5"
+      ],
+      "narration": "In week five each bud divides into secondary buds — three on the right, two on the left. These are the lobar bronchi, and the lobe count of the adult lung is fixed here. The left has two because the heart takes the space where a middle lobe would sit; the lingula is what remains of it."
+    },
+    {
+      "key": "segmental",
+      "label": "Third generation — segmental bronchi and the bronchopulmonary segments",
+      "role": "part",
+      "group": "Counting the generations",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "tertiary bronchial buds",
+        "segmental bronchi",
+        "bronchopulmonary segment",
+        "ten segments on the right",
+        "eight to ten segments on the left",
+        "week 6",
+        "week 7",
+        "surgical resection",
+        "segmentectomy"
+      ],
+      "narration": "By weeks six and seven the lobar bronchi divide into tertiary buds — ten on the right, eight to ten on the left. Each tertiary bud plus the lung tissue and the mesenchyme around it becomes one bronchopulmonary segment, wrapped in its own connective tissue with its own artery. That independence is why a surgeon can take out one segment and leave the rest of the lobe working."
+    },
+    {
+      "key": "generations",
+      "label": "Seventeen generations by birth, twenty-three in the adult",
+      "role": "part",
+      "group": "Counting the generations",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "seventeen generations",
+        "twenty-three generations",
+        "terminal bronchiole",
+        "respiratory bronchiole",
+        "alveolar duct",
+        "alveolar sac",
+        "conducting zone",
+        "respiratory zone",
+        "dichotomous branching",
+        "postnatal branching"
+      ],
+      "narration": "Branching is dichotomous and it does not stop at birth. Seventeen orders of branches exist by the time the baby is born; six more are added afterwards, giving the adult's twenty-three. Learn the boundary rather than the number: everything down to the terminal bronchiole only conducts air, and gas exchange begins at the respiratory bronchiole."
+    },
+    {
+      "key": "induction",
+      "label": "What tells the tube to branch — mesenchyme, not endoderm",
+      "role": "part",
+      "group": "Counting the generations",
+      "layer": "organ",
+      "color": "#d68910",
+      "terms": [
+        "splanchnic mesoderm",
+        "visceral mesoderm",
+        "mesenchyme",
+        "epithelial-mesenchymal interaction",
+        "induction",
+        "FGF10",
+        "sonic hedgehog",
+        "branching morphogenesis",
+        "space to grow"
+      ],
+      "narration": "The endodermal tube does not decide its own pattern. The surrounding splanchnic mesenchyme induces each division, and the endoderm supplies the epithelium that grows into it. Two consequences follow and both are examinable: the same rule as the diverticulum still holds — endoderm inside, splanchnic mesoderm outside — and a lung that has no room to expand cannot branch, so anything that crowds the thorax gives a hypoplastic lung."
+    },
+    {
+      "key": "pseudoglandular",
+      "label": "Pseudoglandular stage — weeks 5 to 16",
+      "role": "part",
+      "group": "The four stages of maturation",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "pseudoglandular stage",
+        "week 5",
+        "week 16",
+        "columnar epithelium",
+        "cuboidal epithelium",
+        "gland-like",
+        "conducting airways complete",
+        "terminal bronchiole",
+        "no respiration possible"
+      ],
+      "narration": "From week five to sixteen the lung looks like an exocrine gland under the microscope — tubules of thick columnar epithelium in loose mesenchyme, which is what gives the stage its name. All the conducting airways down to the terminal bronchioles are built in this window. Nothing here can exchange gas, so a fetus born in this stage cannot survive whatever is done for it."
+    },
+    {
+      "key": "canalicular",
+      "label": "Canalicular stage — weeks 16 to 26",
+      "role": "part",
+      "group": "The four stages of maturation",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "canalicular stage",
+        "week 16",
+        "week 26",
+        "respiratory bronchiole",
+        "alveolar duct",
+        "canalisation",
+        "vascularisation",
+        "capillary network",
+        "thinning epithelium",
+        "cuboidal to flat",
+        "limit of viability",
+        "22 weeks",
+        "24 weeks"
+      ],
+      "narration": "From sixteen to twenty-six weeks the terminal bronchioles canalise, each dividing into respiratory bronchioles and then alveolar ducts, and capillaries grow in around them while the epithelium thins. This is the stage where the lung first becomes a gas-exchanging organ rather than a branching tree. Towards its end, at about twenty-two to twenty-four weeks, some thin-walled sacs and their capillaries are close enough for a baby to survive with intensive care — this is the limit of viability, and it exists because of vascularisation, not because of branching."
+    },
+    {
+      "key": "saccular",
+      "label": "Terminal saccular stage — week 26 to birth",
+      "role": "part",
+      "group": "The four stages of maturation",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "terminal saccular stage",
+        "terminal sac stage",
+        "saccular stage",
+        "week 26",
+        "birth",
+        "terminal sacs",
+        "primitive alveoli",
+        "type I pneumocyte",
+        "type II pneumocyte",
+        "blood-air barrier",
+        "surfactant",
+        "week 20",
+        "week 28",
+        "week 34"
+      ],
+      "narration": "From twenty-six weeks to term, many more terminal sacs form and their walls thin to a true blood-air barrier — flat type one pneumocytes against capillary endothelium. Type two pneumocytes appear among them and begin making surfactant, in small amounts from about week twenty and in adequate amounts from about week twenty-six to twenty-eight. Survival after this point is largely a question of how much surfactant there is."
+    },
+    {
+      "key": "alveolar",
+      "label": "Alveolar stage — week 36 to about 8 years",
+      "role": "part",
+      "group": "The four stages of maturation",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "alveolar stage",
+        "week 36",
+        "8 years",
+        "mature alveoli",
+        "secondary septation",
+        "alveolarisation",
+        "95 percent after birth",
+        "50 million at birth",
+        "300 million in the adult",
+        "lung growth after birth"
+      ],
+      "narration": "Mature alveoli only start forming at about week thirty-six, and the great majority form after birth — roughly fifty million at term against three hundred million in the adult, with the process running to about eight years of age. Say this in an exam and say it exactly: the newborn lung is not a small adult lung, it is an unfinished one, and it grows by making new alveoli rather than by enlarging old ones."
+    },
+    {
+      "key": "clinical",
+      "label": "What goes wrong with branching",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "congenital cystic adenomatoid malformation",
+        "CCAM",
+        "congenital pulmonary airway malformation",
+        "CPAM",
+        "bronchogenic cyst",
+        "pulmonary sequestration",
+        "pulmonary hypoplasia",
+        "oligohydramnios",
+        "Potter sequence",
+        "renal agenesis",
+        "congenital diaphragmatic hernia",
+        "Bochdalek hernia",
+        "bronchopulmonary dysplasia"
+      ],
+      "narration": "Branching fails in two ways. It can go wrong in itself: an abnormal overgrowth of terminal bronchiolar tissue gives a cystic adenomatoid malformation, and a bud that pinches off from the airway gives a bronchogenic cyst. Or it can be prevented from outside, and this is the common one — a diaphragmatic hernia filling the chest, or oligohydramnios from renal agenesis, leaves the lung with nowhere to expand and no stimulus to divide, so it stays hypoplastic. In Potter sequence it is the lungs that kill the baby, not the kidneys."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "One tube divides in two, over and over",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Counting the generations"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "buds",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Start with the two bronchial buds. Branching morphogenesis is one move repeated: a blind endodermal tube divides into two, each daughter divides again, and the mesenchyme around it decides where. Nothing new is invented after this point — the whole tree from main bronchus to alveolar duct is this one move, run twenty-three times."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "The first three generations, and why the segments matter",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Counting the generations"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "buds",
+            "lobar",
+            "segmental",
+            "generations"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "segmental",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Follow one breath down. Main bronchus, then lobar — three right, two left, and the lobe count is settled in week five. Then segmental — ten right, eight to ten left — and each of those, with its mesenchyme and its own artery, becomes a bronchopulmonary segment. Then the count runs on: seventeen generations by birth, twenty-three in the adult, with gas exchange starting at the respiratory bronchiole."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Mesenchyme instructs, endoderm obeys",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Counting the generations"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "induction",
+          "to": "generations",
+          "kind": "induces each division of"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "induction",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Lift the mesodermal coat off the tube. The pattern is written in the mesenchyme, not the epithelium — signals from the splanchnic mesoderm tell the endodermal tip when and where to split. The same rule as the lung bud still holds, endoderm inside and splanchnic mesoderm outside, and it carries a clinical corollary: a lung with no space to expand receives no signal to branch."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Four stages, four weeks to remember",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four stages of maturation"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pseudoglandular",
+            "canalicular",
+            "saccular",
+            "alveolar"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Put the four stages side by side and read the weeks off: pseudoglandular five to sixteen, canalicular sixteen to twenty-six, terminal saccular twenty-six to birth, alveolar thirty-six weeks to eight years. Each is named for what the tissue looks like. Gland-like tubules, then canals with capillaries, then thin-walled sacs, then true alveoli. Learn the names as descriptions and the weeks come with them."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Where viability starts, and why",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The four stages of maturation"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "canalicular",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "canalicular",
+          "to": "saccular",
+          "kind": "thin walls and capillaries, then surfactant, make survival possible at"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        }
+      ],
+      "narration": "The line between a fetus that cannot survive and one that might is drawn late in the canalicular stage. It is not drawn by branching — the conducting airways were finished at sixteen weeks and could not exchange a molecule of gas. It is drawn by capillaries growing up against thinning epithelium, at about twenty-two to twenty-four weeks. Surfactant then decides how well: enough of it by twenty-six to twenty-eight weeks, and a preterm baby has a real chance."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Branching that goes wrong, and branching that is prevented",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clinical",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "induction",
+          "to": "clinical",
+          "kind": "no space to expand, therefore no signal to divide, giving"
+        }
+      ],
+      "narration": "Two groups. Disordered branching gives a cystic adenomatoid malformation or a bronchogenic cyst — local, and often resectable. Prevented branching gives pulmonary hypoplasia, and the causes are all mechanical: a diaphragmatic hernia with gut in the chest, or oligohydramnios from renal agenesis. Remember which one is the killer. In Potter sequence the kidneys are the diagnosis but the lungs are the cause of death."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, so deferred_modes carries diagram. 3d is not listed and would not help: available-meshes.json holds an adult tracheobronchial tree, and an adult tree cannot show a stage, which is the whole subject here.",
+    "Status is 'planned'. Ten regions, six beats, ops and narration complete, but no artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a branching series showing bud, then lobar, then segmental buds with the week printed beside each and the right/left counts named on the drawing; a single tube tip surrounded by mesenchyme, with the epithelium and the mesenchyme labelled separately and an arrow from mesenchyme to tip; a four-panel histology-style strip, one panel per stage, drawn at the same magnification so the wall thinning is visible across the panels; and a timeline bar from week 5 to 8 years with the four stage boundaries and the viability line marked on it.",
+    "The endoderm/mesoderm colour key is inherited unchanged from the respiratory diverticulum scene, as that scene's gaps[] requires. The same two colours must carry through to alveolar development.",
+    "Beat 2 traces concept:air. The subject is not a drawn region — it is the route a breath will take, used to put the generations in order.",
+    "Beat 3 authors PEEL_LAYER outward on the organ layer to lift the mesenchymal coat off the epithelial tube. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because layer removal is exactly how an epithelial-mesenchymal interaction should be shown.",
+    "'Alveolar development' is NOT claimed in covers[]. The alveolar stage appears here only as the fourth item on the timeline; the pneumocytes, surfactant, its composition and timing, and respiratory distress syndrome belong to that entry and are authored there.",
+    "'Respiratory diverticulum' is NOT claimed. The bronchial buds are the starting point of this scene, not its subject.",
+    "'Tracheoesophageal septum' is NOT claimed. Separation from the oesophagus and the fistula types belong to that entry.",
+    "Stage week boundaries are the standard teaching approximations and texts differ by one to two weeks, most often at the pseudoglandular/canalicular boundary (16 vs 17 weeks) and at the start of the alveolar stage (32, 36 weeks, or 'late fetal'). The narration uses the Langman/Moore figures that Nigerian MBBS papers mark against.",
+    "The left lung is given eight to ten bronchopulmonary segments because the apical and posterior segments of the upper lobe, and the anterior and medial basal segments of the lower lobe, commonly share a stem. Ten is often taught as the flat answer for both lungs; the range is stated so a student is not caught out either way.",
+    "Alveolar counts (about 50 million at term, about 300 million in the adult) vary widely between sources; they are given as orders of magnitude to make the point that most alveolarisation is postnatal, and the narration should not be read as quoting a measured figure."
+  ]
+}

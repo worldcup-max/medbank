@@ -1,0 +1,976 @@
+{
+  "schema": 2,
+  "id": "gross__thoracic-wall-diaphragm__intercostal-muscles",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thoracic Wall & Diaphragm",
+  "structure": "Intercostal muscles",
+  "covers": [
+    "Intercostal muscles"
+  ],
+  "learning_goal": "Name the three intercostal layers in order from the surface, state the fibre direction and the breathing action of each, and say which plane the neurovascular bundle runs in.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thorax",
+      "thoracic wall",
+      "chest wall",
+      "intercostal space",
+      "muscles of respiration",
+      "respiratory mechanics"
+    ],
+    "terms": [
+      "intercostal muscles",
+      "intercostal muscle",
+      "external intercostal",
+      "internal intercostal",
+      "innermost intercostal",
+      "intercostalis intimus",
+      "transversus thoracis",
+      "sternocostalis",
+      "subcostal muscle",
+      "intercostal space",
+      "external intercostal membrane",
+      "internal intercostal membrane",
+      "interchondral part",
+      "interosseous part",
+      "muscles of inspiration",
+      "muscles of expiration",
+      "quiet inspiration",
+      "forced expiration",
+      "intercostal nerve",
+      "neurovascular plane",
+      "chest drain",
+      "intercostal drain",
+      "thoracocentesis",
+      "internal thoracic artery"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "ext_ic",
+      "name": "external intercostal muscle",
+      "label": "External intercostal",
+      "role": "part",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA9756"
+      },
+      "terms": [
+        "external intercostal",
+        "external intercostal muscle",
+        "external intercostals",
+        "external intercostal membrane",
+        "hands in pockets",
+        "intercostal muscle"
+      ],
+      "narration": "The outermost of the three. Its fibres run downwards and forwards — the direction your hands take when you slide them into your front pockets. It elevates the rib below and is the muscle of quiet inspiration."
+    },
+    {
+      "key": "int_ic",
+      "name": "internal intercostal muscle",
+      "label": "Internal intercostal",
+      "role": "part",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#a82f2f",
+      "refs": {
+        "bodyparts3d": "FMA9757"
+      },
+      "terms": [
+        "internal intercostal",
+        "internal intercostal muscle",
+        "internal intercostals",
+        "internal intercostal membrane",
+        "interosseous part",
+        "interchondral part"
+      ],
+      "narration": "The middle layer. Its fibres run at right angles to the external — downwards and backwards. Its bony part depresses the ribs in forced expiration, while its cartilage part between the costal cartilages elevates them."
+    },
+    {
+      "key": "innermost_ic",
+      "name": "innermost intercostal muscle",
+      "label": "Innermost intercostal",
+      "role": "part",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#8e2626",
+      "refs": {
+        "bodyparts3d": "FMA9758"
+      },
+      "terms": [
+        "innermost intercostal",
+        "innermost intercostal muscle",
+        "intercostalis intimus",
+        "subcostal muscle",
+        "neurovascular plane"
+      ],
+      "narration": "The deepest and the most incomplete — it covers only the middle of each space. It matters because of the plane in front of it: the intercostal nerve and vessels run between this layer and the internal intercostal."
+    },
+    {
+      "key": "tt_right",
+      "name": "right transversus thoracis",
+      "label": "Transversus thoracis (right)",
+      "role": "part",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#7a2020",
+      "refs": {
+        "bodyparts3d": "FMA9761"
+      },
+      "terms": [
+        "transversus thoracis",
+        "sternocostalis",
+        "triangularis sterni",
+        "internal thoracic artery"
+      ],
+      "narration": "A fan on the inner surface of the anterior chest wall, spreading from the back of the sternum to costal cartilages two to six. The internal thoracic artery runs across its front."
+    },
+    {
+      "key": "tt_left",
+      "name": "left transversus thoracis",
+      "label": "Transversus thoracis (left)",
+      "role": "part",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#7a2020",
+      "refs": {
+        "bodyparts3d": "FMA9762"
+      },
+      "terms": [
+        "transversus thoracis",
+        "sternocostalis",
+        "triangularis sterni",
+        "internal thoracic artery"
+      ],
+      "narration": "A fan on the inner surface of the anterior chest wall, spreading from the back of the sternum to costal cartilages two to six. The internal thoracic artery runs across its front."
+    },
+    {
+      "key": "r1",
+      "name": "right first rib",
+      "label": "Right rib 1",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7857"
+      },
+      "terms": [
+        "rib 1",
+        "first rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the first intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l1",
+      "name": "left first rib",
+      "label": "Left rib 1",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7987"
+      },
+      "terms": [
+        "rib 1",
+        "first rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the first intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r2",
+      "name": "right second rib",
+      "label": "Right rib 2",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7882"
+      },
+      "terms": [
+        "rib 2",
+        "second rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the second intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l2",
+      "name": "left second rib",
+      "label": "Left rib 2",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8012"
+      },
+      "terms": [
+        "rib 2",
+        "second rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the second intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r3",
+      "name": "right third rib",
+      "label": "Right rib 3",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7909"
+      },
+      "terms": [
+        "rib 3",
+        "third rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the third intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l3",
+      "name": "left third rib",
+      "label": "Left rib 3",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8039"
+      },
+      "terms": [
+        "rib 3",
+        "third rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the third intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r4",
+      "name": "right fourth rib",
+      "label": "Right rib 4",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA7957"
+      },
+      "terms": [
+        "rib 4",
+        "fourth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the fourth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l4",
+      "name": "left fourth rib",
+      "label": "Left rib 4",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8148"
+      },
+      "terms": [
+        "rib 4",
+        "fourth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the fourth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r5",
+      "name": "right fifth rib",
+      "label": "Right rib 5",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8066"
+      },
+      "terms": [
+        "rib 5",
+        "fifth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the fifth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l5",
+      "name": "left fifth rib",
+      "label": "Left rib 5",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8093"
+      },
+      "terms": [
+        "rib 5",
+        "fifth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the fifth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r6",
+      "name": "right sixth rib",
+      "label": "Right rib 6",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8175"
+      },
+      "terms": [
+        "rib 6",
+        "sixth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the sixth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l6",
+      "name": "left sixth rib",
+      "label": "Left rib 6",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8202"
+      },
+      "terms": [
+        "rib 6",
+        "sixth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the sixth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r7",
+      "name": "right seventh rib",
+      "label": "Right rib 7",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8229"
+      },
+      "terms": [
+        "rib 7",
+        "seventh rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the seventh intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l7",
+      "name": "left seventh rib",
+      "label": "Left rib 7",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8256"
+      },
+      "terms": [
+        "rib 7",
+        "seventh rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the seventh intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r8",
+      "name": "right eighth rib",
+      "label": "Right rib 8",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8283"
+      },
+      "terms": [
+        "rib 8",
+        "eighth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the eighth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l8",
+      "name": "left eighth rib",
+      "label": "Left rib 8",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8310"
+      },
+      "terms": [
+        "rib 8",
+        "eighth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the eighth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r9",
+      "name": "right ninth rib",
+      "label": "Right rib 9",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8364"
+      },
+      "terms": [
+        "rib 9",
+        "ninth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the ninth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l9",
+      "name": "left ninth rib",
+      "label": "Left rib 9",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8391"
+      },
+      "terms": [
+        "rib 9",
+        "ninth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the ninth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r10",
+      "name": "right tenth rib",
+      "label": "Right rib 10",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8445"
+      },
+      "terms": [
+        "rib 10",
+        "tenth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the tenth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l10",
+      "name": "left tenth rib",
+      "label": "Left rib 10",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8472"
+      },
+      "terms": [
+        "rib 10",
+        "tenth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the tenth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r11",
+      "name": "right eleventh rib",
+      "label": "Right rib 11",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8531"
+      },
+      "terms": [
+        "rib 11",
+        "eleventh rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l11",
+      "name": "left eleventh rib",
+      "label": "Left rib 11",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8532"
+      },
+      "terms": [
+        "rib 11",
+        "eleventh rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the eleventh intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "r12",
+      "name": "right twelfth rib",
+      "label": "Right rib 12",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "rib 12",
+        "twelfth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the twelfth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "l12",
+      "name": "left twelfth rib",
+      "label": "Left rib 12",
+      "role": "context",
+      "group": "Ribs",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8534"
+      },
+      "terms": [
+        "rib 12",
+        "twelfth rib",
+        "rib",
+        "intercostal space",
+        "costal groove"
+      ],
+      "narration": "The space below this rib is the twelfth intercostal space — a space is named for the rib above it."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "context",
+      "group": "Sternum",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "sternum"
+      ],
+      "narration": "The upper piece of the sternum, closing the spaces in front."
+    },
+    {
+      "key": "sternal_body",
+      "name": "body of sternum",
+      "label": "Body of sternum",
+      "role": "context",
+      "group": "Sternum",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of sternum",
+        "sternum",
+        "sternal angle"
+      ],
+      "narration": "Transversus thoracis arises from the back of this plate, which is why you never see it from the front."
+    },
+    {
+      "key": "cc_right",
+      "name": "right costal cartilage",
+      "label": "Costal cartilage (right)",
+      "role": "context",
+      "group": "Costal cartilage",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP28"
+      },
+      "terms": [
+        "costal cartilage",
+        "interchondral part",
+        "costal margin"
+      ],
+      "narration": "Between the cartilages the internal intercostal continues as its interchondral part — the one part of that muscle that helps you breathe in."
+    },
+    {
+      "key": "cc_left",
+      "name": "left costal cartilage",
+      "label": "Costal cartilage (left)",
+      "role": "context",
+      "group": "Costal cartilage",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP24"
+      },
+      "terms": [
+        "costal cartilage",
+        "interchondral part",
+        "costal margin"
+      ],
+      "narration": "Between the cartilages the internal intercostal continues as its interchondral part — the one part of that muscle that helps you breathe in."
+    },
+    {
+      "key": "lev_longi",
+      "name": "set of right levatores costarum longi",
+      "label": "Levatores costarum longi",
+      "role": "context",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#9c4a2f",
+      "refs": {
+        "bodyparts3d": "FMA74075"
+      },
+      "terms": [
+        "levatores costarum",
+        "levator costae",
+        "transverse process",
+        "accessory muscle of inspiration"
+      ],
+      "narration": "Small fan-shaped muscles running from the transverse processes down to the rib below — the breves to the next rib, the longi skipping one. They elevate the ribs and are why the back of the wall is thicker than a front-on view suggests. Dorsal rami, not intercostal nerves."
+    },
+    {
+      "key": "lev_breves",
+      "name": "set of right levatores costarum breves",
+      "label": "Levatores costarum breves",
+      "role": "context",
+      "group": "Intercostal muscles",
+      "layer": "muscle",
+      "color": "#8a4028",
+      "refs": {
+        "bodyparts3d": "FMA74077"
+      },
+      "terms": [
+        "levatores costarum",
+        "levator costae",
+        "transverse process",
+        "accessory muscle of inspiration"
+      ],
+      "narration": "Small fan-shaped muscles running from the transverse processes down to the rib below — the breves to the next rib, the longi skipping one. They elevate the ribs and are why the back of the wall is thicker than a front-on view suggests. Dorsal rami, not intercostal nerves."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Eleven spaces on each side, and every one of them is filled by muscle. The ribs are only the frame; the intercostals are what turns the frame into a moving wall."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Take the ribs away",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Strip the cage and the muscle sheets remain as a continuous wall from the vertebrae behind to the sternum in front. That continuity is what makes the thorax airtight enough to hold a negative pressure."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 3,
+      "title": "Three layers, outside in",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Intercostal muscles"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ext_ic",
+            "int_ic",
+            "innermost_ic"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "External, internal, innermost — the same order as the three flat muscles of the abdominal wall, because they are the same sheet carried up into the chest."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 4,
+      "title": "Which way do the fibres run",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Intercostal muscles"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ext_ic",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "innermost_ic"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "External fibres run downwards and forwards — hands in your pockets. Internal fibres cross them at a right angle, downwards and backwards. Get the direction and you can name the layer on any specimen."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Breathing in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ext_ic",
+          "intensity": 0.7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:inspiration",
+          "path": [
+            "ext_ic",
+            "r3",
+            "r4",
+            "r5",
+            "r6",
+            "sternal_body"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The external intercostals pull each rib up towards the one above. Every rib rises a little, the cage widens and deepens, pressure inside falls, and air follows it in. In quiet breathing they work alongside the diaphragm and nothing else is needed."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Forcing air out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "int_ic",
+          "intensity": 0.7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:forced-expiration",
+          "path": [
+            "int_ic",
+            "r6",
+            "r5",
+            "r4",
+            "r3"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Quiet expiration is passive — the wall simply recoils. When you cough, shout or blow hard, the bony part of the internal intercostals pulls the ribs down and the abdominal muscles push from below."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "The plane that matters clinically",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Intercostal muscles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ribs"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "innermost_ic",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Between the internal and the innermost layer lies the neurovascular plane, and the vein, artery and nerve sit tucked under the lower border of the rib above. So a needle or a chest drain goes in just above the lower rib of the space, never below the upper one."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "The wall seen from inside",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Intercostal muscles"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tt_right",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tt_left",
+          "intensity": 0.6
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sternum"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Transversus thoracis is only visible from inside the chest. It fans from the back of the sternum onto the costal cartilages, and the internal thoracic artery crosses in front of it before dividing into the superior epigastric and musculophrenic arteries."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Each intercostal layer is one model covering all the spaces at once, not eleven separate muscles, so a single space cannot be isolated. The teaching that depends on one space — the neurovascular plane, drain insertion — is carried by the cross-section beat and the narration instead.",
+    "The external and internal intercostal membranes have no models. The external muscle is replaced in front by a membrane and the internal behind by another; both are named in narration only, and a student cannot see where each sheet stops.",
+    "Subcostal muscles are not in the catalog and are not shown. Levatores costarum ARE — FMA74075 and FMA74077 on the right, FMA74076 and FMA74078 on the left, as longi and breves sets — and an earlier note here wrongly said otherwise, which is why the posterior part of the wall looks thinner than it is. They should be added.",
+    "The intercostal nerve, artery and vein are not present. Only the plane they occupy can be shown, so this scene does NOT cover the curriculum structure \"Intercostal neurovascular bundle\" — that needs its own scene, and the VAN order still has to be taught there.",
+    "Fibre direction is the single most examinable fact here and it is narrated rather than shown, because no op draws fibre orientation. A diagram-mode companion would carry it better; diagram is recorded as the deferred mode."
+  ]
+}

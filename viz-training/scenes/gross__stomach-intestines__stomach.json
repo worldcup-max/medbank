@@ -1,0 +1,803 @@
+{
+  "schema": 2,
+  "id": "gross__stomach-intestines__stomach",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Stomach & Intestines",
+  "structure": "Stomach",
+  "covers": [
+    "Stomach"
+  ],
+  "learning_goal": "Place the stomach in the epigastrium and left hypochondrium, name its five regions and two curvatures, list what lies in its bed behind it, follow its arteries from the coeliac trunk to both curvatures, and explain why a posterior ulcer bleeds while an anterior one perforates.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "stomach",
+      "gastric anatomy",
+      "foregut",
+      "upper gastrointestinal tract",
+      "abdomen",
+      "epigastrium",
+      "coeliac trunk",
+      "peptic ulcer disease",
+      "gastro-oesophageal junction",
+      "hiatus hernia",
+      "abdominal examination",
+      "upper GI endoscopy",
+      "gastrectomy"
+    ],
+    "terms": [
+      "stomach",
+      "gastric",
+      "cardia",
+      "cardiac orifice",
+      "fundus",
+      "fundus of the stomach",
+      "gastric bubble",
+      "body of the stomach",
+      "pyloric antrum",
+      "antrum",
+      "pyloric canal",
+      "pylorus",
+      "pyloric sphincter",
+      "greater curvature",
+      "lesser curvature",
+      "incisura angularis",
+      "angular notch",
+      "rugae",
+      "gastric folds",
+      "magenstrasse",
+      "gastric canal",
+      "gastro-oesophageal junction",
+      "gastroesophageal junction",
+      "GOJ",
+      "oesophagogastric junction",
+      "Z-line",
+      "lower oesophageal sphincter",
+      "physiological sphincter",
+      "angle of His",
+      "oesophageal hiatus",
+      "T10",
+      "right crus of the diaphragm",
+      "hiatus hernia",
+      "sliding hiatus hernia",
+      "rolling hernia",
+      "gastro-oesophageal reflux",
+      "GORD",
+      "Barrett's oesophagus",
+      "lesser omentum",
+      "hepatogastric ligament",
+      "hepatoduodenal ligament",
+      "greater omentum",
+      "gastrosplenic ligament",
+      "gastrophrenic ligament",
+      "lesser sac",
+      "omental bursa",
+      "epiploic foramen",
+      "foramen of Winslow",
+      "stomach bed",
+      "coeliac trunk",
+      "celiac trunk",
+      "coeliac axis",
+      "T12",
+      "left gastric artery",
+      "right gastric artery",
+      "splenic artery",
+      "common hepatic artery",
+      "short gastric arteries",
+      "left gastro-omental artery",
+      "right gastro-omental artery",
+      "gastroepiploic artery",
+      "left gastric vein",
+      "portal vein",
+      "portal hypertension",
+      "oesophageal varices",
+      "porto-systemic anastomosis",
+      "coeliac plexus",
+      "vagus nerve",
+      "anterior vagal trunk",
+      "posterior vagal trunk",
+      "vagotomy",
+      "peptic ulcer",
+      "gastric ulcer",
+      "duodenal ulcer",
+      "posterior ulcer",
+      "anterior ulcer",
+      "perforation",
+      "haematemesis",
+      "melaena",
+      "gastric carcinoma",
+      "Virchow's node",
+      "Troisier's sign",
+      "linitis plastica",
+      "pyloric stenosis",
+      "projectile vomiting",
+      "succussion splash",
+      "Helicobacter pylori",
+      "parietal cells",
+      "chief cells",
+      "G cells",
+      "gastrin",
+      "intrinsic factor",
+      "oblique muscle layer",
+      "peristalsis",
+      "gastric emptying",
+      "receptive relaxation"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach",
+      "role": "part",
+      "group": "Stomach",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "gastric",
+        "fundus",
+        "body of the stomach",
+        "pyloric antrum",
+        "greater curvature",
+        "lesser curvature",
+        "incisura angularis",
+        "rugae",
+        "J-shaped"
+      ],
+      "narration": "A J-shaped bag lying in the epigastrium and left hypochondrium, tilted so that its long axis runs downwards, forwards and to the right. Read it in five regions from the top down: cardia at the entrance, fundus above the level of the entrance, body, pyloric antrum, and pyloric canal ending at the pylorus. Two borders join those regions — the short concave lesser curvature on the right and the long convex greater curvature on the left. Its size is not fixed: it holds about fifty millilitres empty and comfortably a litre and a half after a meal, which is why its lower limit moves in life and why the fundus, not the body, holds the gas bubble seen under the left dome on an erect abdominal film."
+    },
+    {
+      "key": "esophagus",
+      "name": "esophagus",
+      "label": "Oesophagus & cardia",
+      "role": "part",
+      "group": "Inlet & outlet",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA7131"
+      },
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "abdominal oesophagus",
+        "cardia",
+        "cardiac orifice",
+        "gastro-oesophageal junction",
+        "Z-line",
+        "lower oesophageal sphincter",
+        "angle of His",
+        "oesophageal hiatus",
+        "T10",
+        "right crus",
+        "hiatus hernia",
+        "reflux"
+      ],
+      "narration": "The oesophagus pierces the diaphragm at the level of T10 and runs only about two centimetres inside the abdomen before opening into the cardia. There is no anatomical sphincter here. Continence is a mechanism: the right crus of the diaphragm slings round the hiatus, the abdominal segment is squeezed by intra-abdominal pressure, and the oesophagus meets the fundus at a sharp angle — the angle of His — that acts as a flap valve. Lose the abdominal segment, as in a sliding hiatus hernia, and you lose the mechanism, which is why reflux follows."
+    },
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum — the outlet",
+      "role": "part",
+      "group": "Inlet & outlet",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "first part of the duodenum",
+        "duodenal cap",
+        "duodenal bulb",
+        "pylorus",
+        "pyloric sphincter",
+        "duodenal ulcer",
+        "gastroduodenal artery",
+        "transpyloric plane",
+        "L1",
+        "pyloric stenosis"
+      ],
+      "narration": "The pylorus is a true anatomical sphincter — a thickened ring of circular muscle you can feel between finger and thumb on a cadaver. It opens into the first part of the duodenum, the duodenal cap, at about the level of the transpyloric plane, L1, a finger's breadth to the right of the midline. That cap is where most duodenal ulcers sit. Behind it runs the gastroduodenal artery, so an ulcer on the posterior wall of the cap erodes that vessel and the patient bleeds; one on the anterior wall has only the peritoneal cavity in front of it and perforates instead."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "coeliac axis",
+        "coeliac artery",
+        "T12",
+        "foregut artery",
+        "trifurcation",
+        "median arcuate ligament",
+        "coeliac plexus"
+      ],
+      "narration": "The artery of the foregut. It leaves the front of the aorta at T12, just below the aortic hiatus, and is barely a centimetre and a half long before it divides into three: left gastric, splenic and common hepatic. Everything from the lower oesophagus to the second part of the duodenum is supplied from this one short stem, and pain from those organs is referred to the epigastrium."
+    },
+    {
+      "key": "lga",
+      "name": "left gastric artery",
+      "label": "Left gastric artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA14768"
+      },
+      "terms": [
+        "left gastric artery",
+        "lesser curvature",
+        "right gastric artery",
+        "left gastric vein",
+        "oesophageal branches",
+        "oesophageal varices",
+        "portal hypertension"
+      ],
+      "narration": "The smallest branch of the trunk and the most important one to name. It runs up to the cardia, gives oesophageal branches, then turns down along the lesser curvature to meet the right gastric artery coming the other way. Its accompanying vein drains into the portal vein while its oesophageal tributaries drain into the systemic azygos system — that junction is the porto-systemic anastomosis that becomes oesophageal varices in portal hypertension."
+    },
+    {
+      "key": "splenic_a",
+      "name": "splenic artery",
+      "label": "Splenic artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14773"
+      },
+      "terms": [
+        "splenic artery",
+        "tortuous",
+        "short gastric arteries",
+        "left gastro-omental artery",
+        "left gastroepiploic artery",
+        "upper border of the pancreas",
+        "posterior gastric ulcer"
+      ],
+      "narration": "The largest branch, running a famously tortuous course to the left along the upper border of the pancreas. On its way it gives short gastric arteries to the fundus and the left gastro-omental artery to the greater curvature. It lies directly behind the body of the stomach, which is why a posterior gastric ulcer erodes it and presents as torrential haematemesis rather than as perforation."
+    },
+    {
+      "key": "cha",
+      "name": "common hepatic artery",
+      "label": "Common hepatic artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#e6795f",
+      "refs": {
+        "bodyparts3d": "FMA14771"
+      },
+      "terms": [
+        "common hepatic artery",
+        "hepatic artery proper",
+        "gastroduodenal artery",
+        "right gastric artery",
+        "right gastro-omental artery",
+        "right gastroepiploic artery",
+        "hepatoduodenal ligament"
+      ],
+      "narration": "Runs to the right towards the porta hepatis and divides into the hepatic artery proper and the gastroduodenal artery. The gastroduodenal artery passes behind the first part of the duodenum and supplies the greater curvature from the right; the right gastric artery supplies the lesser curvature from the right. So each curvature receives an arch from two directions — a rich anastomosis, which is why the stomach almost never infarcts but bleeds heavily when it is cut."
+    },
+    {
+      "key": "splenic_v",
+      "name": "splenic vein",
+      "label": "Splenic vein",
+      "role": "part",
+      "group": "Venous & portal drainage",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "portal vein",
+        "behind the pancreas",
+        "portal hypertension",
+        "splenomegaly"
+      ],
+      "narration": "Runs behind the body of the pancreas, straight rather than tortuous like its artery, and joins the superior mesenteric vein behind the neck of the pancreas to form the portal vein. Every drop of blood leaving the stomach goes to the liver first — that is the definition of a portal system, and the reason gastric cancer spreads to the liver before it spreads anywhere else."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein",
+      "role": "part",
+      "group": "Venous & portal drainage",
+      "layer": "vessel",
+      "color": "#3f6fd8",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal vein",
+        "neck of the pancreas",
+        "confluence"
+      ],
+      "narration": "Comes up from the gut on the right of its artery and meets the splenic vein behind the neck of the pancreas. That confluence is the beginning of the portal vein and the reason a carcinoma in the head of the pancreas obstructs both the bile duct and the portal vein."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "left lobe of the liver",
+        "lesser omentum",
+        "hepatogastric ligament",
+        "gastric impression",
+        "caudate lobe"
+      ],
+      "narration": "The left lobe lies across the front of the stomach and hides most of it, which is why the stomach is not palpable in health. The lesser omentum runs from the lesser curvature to the liver, so the stomach is slung from the liver above and hangs into the greater omentum below."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "gastrosplenic ligament",
+        "short gastric arteries",
+        "left hypochondrium",
+        "ribs 9 to 11",
+        "splenomegaly"
+      ],
+      "narration": "Sits against the fundus on the left, behind ribs 9 to 11. The gastrosplenic ligament carries the short gastric vessels between the two, which is why a spleen removed carelessly can devascularise the fundus."
+    },
+    {
+      "key": "gallbladder",
+      "name": "gallbladder",
+      "label": "Gallbladder",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#7d8c1f",
+      "refs": {
+        "bodyparts3d": "FMA7202"
+      },
+      "terms": [
+        "gallbladder",
+        "fundus of the gallbladder",
+        "ninth costal cartilage",
+        "biliary colic",
+        "epigastric pain"
+      ],
+      "narration": "Lies just to the right of the pylorus, at the tip of the ninth costal cartilage. It matters here because biliary pain and gastric pain are both felt in the epigastrium, and telling them apart is a clinical problem before it is an anatomical one."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "left dome",
+        "oesophageal hiatus",
+        "T10",
+        "right crus",
+        "gastric bubble",
+        "aortic hiatus",
+        "T12"
+      ],
+      "narration": "The roof of the stomach's compartment. The fundus lies right up under the left dome, so gas in the fundus appears as a bubble under the left hemidiaphragm on an erect film — and free gas under the right one means a viscus has perforated."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — marking the pancreas",
+      "role": "context",
+      "group": "Stomach bed",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreas",
+        "body of the pancreas",
+        "pancreatic duct",
+        "lesser sac",
+        "stomach bed",
+        "pancreatic pseudocyst",
+        "posterior ulcer"
+      ],
+      "narration": "The duct runs the length of the pancreas, so it marks where the pancreas lies: straight across the bed of the stomach, separated from it only by the lesser sac. A posterior gastric ulcer that penetrates ends up in the pancreas, and the pain then bores through to the back."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "context",
+      "group": "Stomach bed",
+      "layer": "organ",
+      "color": "#884ea0",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "stomach bed",
+        "retroperitoneal",
+        "upper pole"
+      ],
+      "narration": "The upper part of the left kidney forms part of the bed. It is retroperitoneal; the stomach is intraperitoneal and slides over it on the lesser sac."
+    },
+    {
+      "key": "left_adrenal",
+      "name": "left adrenal gland",
+      "label": "Left suprarenal gland",
+      "role": "context",
+      "group": "Stomach bed",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA15630"
+      },
+      "terms": [
+        "left suprarenal gland",
+        "left adrenal gland",
+        "stomach bed",
+        "semilunar"
+      ],
+      "narration": "Caps the upper pole of the left kidney and completes the bed. Learn the bed as a list of five: left dome of the diaphragm, spleen, left kidney and suprarenal, pancreas, and transverse mesocolon."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "aortic hiatus",
+        "T12",
+        "coeliac trunk origin"
+      ],
+      "narration": "Enters the abdomen behind the diaphragm at T12 and gives the coeliac trunk almost immediately. Three midline branches feed the gut: coeliac at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find it in the abdomen",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Venous & portal drainage"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stomach",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "stomach",
+          "kind": "roofs"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "stomach",
+          "kind": "covers in front"
+        }
+      ],
+      "narration": "The stomach occupies the epigastrium, the left hypochondrium and part of the umbilical region. Almost all of it hides behind the ribs and the left lobe of the liver, so a normal stomach is neither seen nor felt on examination. Only when it is grossly distended, as in pyloric stenosis, does it become visible and give a succussion splash. Remember what it is not: it does not sit in the middle of the abdomen, and it does not lie vertically."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Five regions, two curvatures",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Inlet & outlet"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stomach",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "esophagus",
+          "to": "stomach",
+          "kind": "enters at the cardia"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "duodenum",
+          "kind": "leaves at the pylorus"
+        }
+      ],
+      "narration": "Trace the outline with your eye from the cardia. The fundus is everything above a horizontal line through the cardiac orifice — that is its definition, not its shape. Below it the body forms the bulk. The body ends at the incisura angularis, a notch on the lesser curvature that is the only sharp landmark on the whole organ. Beyond the incisura is the pyloric antrum, narrowing into the pyloric canal, ending at the pylorus. Examiners ask for the boundary between body and antrum: it is the incisura, and a line from it to the greater curvature."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "The bed of the stomach",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Stomach bed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spleen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "pancreatic_duct",
+          "kind": "lies on"
+        }
+      ],
+      "narration": "Turn the stomach forwards and a shelf of structures is revealed behind it. From above down: the left dome of the diaphragm, the spleen, the left kidney and suprarenal gland, the pancreas, and the transverse mesocolon. Between the stomach and that shelf is the lesser sac, a flat closed space entered only through the epiploic foramen. Every one of these relations is an exam answer and a clinical one: a posterior ulcer penetrates into pancreas, a fluid collection behind the stomach is a pancreatic pseudocyst, and pus in the lesser sac cannot escape."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Three branches, two arches",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "celiac",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "celiac",
+            "lga",
+            "cha",
+            "splenic_a",
+            "stomach"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lga",
+            "splenic_a"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "One trunk, three branches, two arches. The coeliac trunk leaves the aorta at T12 and splits into left gastric, splenic and common hepatic. The lesser curvature gets an arch from the left gastric above and the right gastric below. The greater curvature gets an arch from the left gastro-omental, a branch of the splenic, and the right gastro-omental, a branch of the gastroduodenal. The fundus gets short gastric arteries straight from the splenic. That is why you can tie off almost any one of them in surgery and the stomach still lives."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Through the wall",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "stomach"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "stomach",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Cut the wall and there are four coats: mucosa, submucosa, muscularis externa, serosa. The stomach is the only part of the gut with three muscle layers instead of two — an extra inner oblique layer inside the usual circular and longitudinal — and that third layer is what lets it churn rather than merely push. The mucosa is thrown into rugae that run lengthwise along the lesser curvature, forming the gastric canal down which fluid runs straight to the pylorus. The rugae flatten as the stomach fills, so a stomach that stays rigid and featureless on endoscopy is abnormal: that is linitis plastica."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Follow a meal through",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Inlet & outlet"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:chyme",
+          "path": [
+            "esophagus",
+            "stomach",
+            "duodenum"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "duodenum",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Food arrives at the cardia and the fundus relaxes to receive it without a rise in pressure — receptive relaxation, a vagal reflex. Storage happens in the fundus and body, where the muscle is thin and the waves are weak. Mixing happens in the antrum, where the muscle is thick and each wave drives contents against a closed pylorus and squirts most of it back — retropulsion. Only a few millilitres of liquid chyme pass at a time. Solids leave in one to three hours, fats last of all, which is why fatty food delays gastric emptying."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where it goes wrong",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "splenic_a"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "duodenum"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "splenic_a",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "splenic_a",
+          "kind": "posterior ulcer erodes into"
+        }
+      ],
+      "narration": "Two rules decide how an ulcer presents, and both come from what lies on the other side of the wall. Posteriorly there is an artery: the splenic behind the body of the stomach, the gastroduodenal behind the duodenal cap. A posterior ulcer therefore bleeds — haematemesis and melaena. Anteriorly there is only the peritoneal cavity, so an anterior ulcer perforates, and gas escapes to sit under the diaphragm on an erect chest film. Add one more: gastric cancer drains along the left gastric nodes to the coeliac group and, by the thoracic duct, to the left supraclavicular node — Virchow's node, and the sign of feeling it is Troisier's."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The stomach is one single model. The catalog holds no separate fundus, body, pyloric antrum, pyloric canal, cardia or pylorus, and no mesh for either curvature or the incisura angularis, so the five regions and the two curvatures are taught by narration and by term mapping rather than by a highlightable part. Every one of those names is in this scene's terms[] and in the stomach structure's own terms[], so a note that says 'pyloric antrum' still opens this scene at the right subject.",
+    "No landmark anchors were authored. Anchors in this corpus are measured on the actual geometry, and none of the meshes this scene names is in the local decimated set, so the incisura angularis, the cardiac orifice, the pylorus and the two curvatures could not be placed by measurement. They were not typed in by eye: an anchor put where a region looks plausible teaches a wrong point that the student has no way to detect. Ingesting FMA7148 locally is the single cheapest unlock for this topic, because it would give six anchors on one mesh.",
+    "There is no pancreas mesh in the catalog — only the pancreatic duct, FMA10419. The duct is used as context under the honest label 'Pancreatic duct — marking the pancreas', because the duct runs the length of the gland and so shows where it lies. Everything taught about the pancreas in the stomach bed is therefore taught against a line inside it rather than against its surface, and the narration says so.",
+    "No peritoneum, no omenta and no lesser sac. The lesser omentum, greater omentum, gastrosplenic ligament and omental bursa are all named in the narration of beats 1 and 3 and all appear in terms[], but a serous membrane and a potential space have no meshes and no proxy. This is the same limitation the pleura scene records and it is why 'Peritoneum & mesentery' is a separate curriculum entry.",
+    "Only three of the arteries taught in beat 4 exist as meshes: the coeliac trunk, the left gastric and the splenic, plus the common hepatic. The right gastric, both gastro-omental arteries, the short gastrics and the gastroduodenal artery have no models, so the two arches are narrated and traced through the vessels that do exist rather than drawn. The gastroduodenal artery is the highest-value single acquisition for this topic: it is the reason a posterior duodenal ulcer bleeds, and beat 7 currently has to teach that against the splenic artery alone.",
+    "There is no portal vein mesh, and no vagus nerve — no nerve of the abdomen is in the catalog. The portal confluence is taught through the splenic and superior mesenteric veins that form it, and the anterior and posterior vagal trunks, which matter for vagotomy and for receptive relaxation, are named in terms[] and narration only.",
+    "The transverse mesocolon and transverse colon are part of the stomach bed and part of the greater omentum's attachment, and no large-bowel mesh exists in the catalog at all. Beat 3 lists the mesocolon in the bed without showing it."
+  ]
+}

@@ -1,0 +1,679 @@
+{
+  "schema": 2,
+  "id": "gross__anterior-abdominal-wall-inguinal-region__inguinal-canal",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Anterior Abdominal Wall & Inguinal Region",
+  "structure": "Inguinal canal",
+  "covers": [
+    "Inguinal canal"
+  ],
+  "learning_goal": "State the four walls, the two rings and the contents of the inguinal canal in the order an examiner asks for them, explain the shutter mechanism and the obliquity that keep it shut, and use the relationship of the deep ring to the inferior epigastric artery to tell an indirect hernia from a direct one.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "inguinal region",
+      "inguinal canal",
+      "groin",
+      "anterior abdominal wall",
+      "hernia",
+      "abdomen",
+      "male reproductive system"
+    ],
+    "terms": [
+      "inguinal canal",
+      "inguinal region",
+      "groin",
+      "deep inguinal ring",
+      "internal ring",
+      "superficial inguinal ring",
+      "external ring",
+      "anterior wall of the inguinal canal",
+      "posterior wall of the inguinal canal",
+      "roof of the inguinal canal",
+      "floor of the inguinal canal",
+      "inguinal ligament",
+      "Poupart's ligament",
+      "lacunar ligament",
+      "Gimbernat's ligament",
+      "pectineal ligament",
+      "conjoint tendon",
+      "falx inguinalis",
+      "transversalis fascia",
+      "external oblique aponeurosis",
+      "internal oblique",
+      "transversus abdominis",
+      "spermatic cord",
+      "round ligament of the uterus",
+      "vas deferens",
+      "ductus deferens",
+      "testicular artery",
+      "pampiniform plexus",
+      "genital branch of the genitofemoral nerve",
+      "ilioinguinal nerve",
+      "cremaster",
+      "cremasteric reflex",
+      "processus vaginalis",
+      "descent of the testis",
+      "shutter mechanism",
+      "obliquity",
+      "ball valve",
+      "indirect inguinal hernia",
+      "direct inguinal hernia",
+      "inferior epigastric artery",
+      "Hesselbach's triangle",
+      "inguinal triangle",
+      "mid-inguinal point",
+      "midpoint of the inguinal ligament",
+      "pubic tubercle",
+      "anterior superior iliac spine",
+      "femoral hernia",
+      "femoral canal",
+      "hernioplasty",
+      "herniorrhaphy",
+      "above and medial to the pubic tubercle"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.5
+  },
+  "structures": [
+    {
+      "key": "extobl_r",
+      "name": "right external oblique",
+      "label": "External oblique — anterior wall",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#e67e22",
+      "refs": {
+        "bodyparts3d": "FMA13336"
+      },
+      "terms": [
+        "external oblique aponeurosis",
+        "anterior wall of the inguinal canal",
+        "superficial inguinal ring",
+        "intercrural fibres",
+        "inguinal ligament"
+      ],
+      "narration": "The aponeurosis of this muscle is the anterior wall along the whole length of the canal. Two things belong to it. Its lower free border, rolled back on itself, is the inguinal ligament, which is the floor. And a triangular gap in it just above and lateral to the pubic tubercle is the superficial inguinal ring, the way out."
+    },
+    {
+      "key": "intobl_r",
+      "name": "right internal oblique",
+      "label": "Internal oblique — roof, and the lateral anterior wall",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA13892"
+      },
+      "terms": [
+        "internal oblique",
+        "roof of the inguinal canal",
+        "arching fibres",
+        "conjoint tendon",
+        "cremaster",
+        "shutter mechanism",
+        "reinforces the anterior wall laterally"
+      ],
+      "narration": "Its lowest fibres arise from the lateral half of the inguinal ligament, arch over the canal and come down behind it to the pubic crest. That arch is the roof. Two extra jobs: laterally the muscle also lies in front of the canal and reinforces the anterior wall exactly where the deep ring is, and it gives the cremaster to the cord. The reinforcement is deliberate design — the wall is thickest where the weakness is."
+    },
+    {
+      "key": "transv_r",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis — roof, and the conjoint tendon behind",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#8e44ad",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "roof of the inguinal canal",
+        "conjoint tendon",
+        "falx inguinalis",
+        "posterior wall medially",
+        "transversalis fascia"
+      ],
+      "narration": "Its lowest fibres arise from the lateral third of the inguinal ligament and arch over the canal beside those of internal oblique, so the roof is made of both. Medially the two sets of fibres fuse into one tendon — the conjoint tendon — which turns down behind the superficial ring and strengthens the posterior wall at its weakest point. Laterally the posterior wall is transversalis fascia alone, and that is where the deep ring is."
+    },
+    {
+      "key": "inglig_r",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament — the floor",
+      "role": "part",
+      "group": "Walls",
+      "layer": "fascia",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "Poupart's ligament",
+        "floor of the inguinal canal",
+        "gutter",
+        "lacunar ligament",
+        "Gimbernat's ligament",
+        "anterior superior iliac spine",
+        "pubic tubercle"
+      ],
+      "narration": "From the anterior superior iliac spine to the pubic tubercle, and grooved along its upper surface — that gutter is the floor of the canal. At its medial end it fans backwards as the lacunar ligament, which is the sharp medial edge of the femoral ring and the thing that strangulates a femoral hernia. Remember it as the rolled edge of an aponeurosis, not as a separate strap: everything the groin does starts from that fold."
+    },
+    {
+      "key": "testis_r",
+      "name": "right testis",
+      "label": "Testis — where the canal leads",
+      "role": "part",
+      "group": "Contents & destination",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA7211"
+      },
+      "terms": [
+        "testis",
+        "descent of the testis",
+        "processus vaginalis",
+        "gubernaculum",
+        "spermatic cord",
+        "scrotum",
+        "cremasteric reflex",
+        "undescended testis",
+        "congenital hernia"
+      ],
+      "narration": "The canal exists because of this organ. The testis develops on the posterior abdominal wall and is dragged down through the wall into the scrotum before birth, taking its vessels, its duct and a sleeve of every layer it passes with it. The canal is the tunnel it left behind. If the peritoneal pouch that preceded it — the processus vaginalis — fails to close, that tunnel stays open and the child has a congenital indirect hernia. In the female the same canal carries only the round ligament of the uterus, which is why it is narrower and why indirect hernia is far less common in women."
+    },
+    {
+      "key": "vas_r",
+      "name": "right deferent duct",
+      "label": "Vas deferens — the cord's main content",
+      "role": "part",
+      "group": "Contents & destination",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA19235"
+      },
+      "terms": [
+        "vas deferens",
+        "ductus deferens",
+        "deferent duct",
+        "spermatic cord",
+        "vasectomy"
+      ],
+      "narration": "The principal content of the spermatic cord, and the one structure in it you can feel: rolled between finger and thumb at the neck of the scrotum it is a firm cord like a thin wire. It enters at the deep ring, runs the length of the canal, leaves at the superficial ring and hooks over the ureter into the pelvis."
+    },
+    {
+      "key": "eo_lower_free_border",
+      "label": "Level of the canal — the free lower border",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#abebc6",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.975,
+          0.37,
+          0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the right external oblique, 235.2 mm from its surface centroid — the bottom of the sheet, at the level where its free lower border rolls back as the inguinal ligament. The ligament is a separate mesh; this marks the LEVEL of the canal and of the superficial ring, not either structure; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "lower free border",
+        "superficial inguinal ring",
+        "level of the canal",
+        "above the medial half of the inguinal ligament"
+      ],
+      "narration": "The canal lies here: a four-centimetre slit above the medial half of the inguinal ligament, running downwards, forwards and medially. Everything about it is at this one level, which is why a groin lump is described by where it sits relative to the ligament and the pubic tubercle rather than by how deep it is."
+    },
+    {
+      "key": "pubic_symphysis_r",
+      "label": "Pubis — the medial bony end",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#d7bde2",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          1,
+          0.169,
+          0.217
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most medial (most body-left) vertex of the right hip bone, 101.9 mm from its surface centroid — the symphyseal surface of the pubis, i.e. the midline end of the bone. The pubic TUBERCLE lies a couple of centimetres lateral to this and is not a separate mesh, so it is not emitted; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "pubis",
+        "pubic symphysis",
+        "pubic tubercle",
+        "pubic crest",
+        "above and medial to the pubic tubercle",
+        "below and lateral to the pubic tubercle"
+      ],
+      "narration": "The medial end of the whole region. Two centimetres lateral to this point is the pubic tubercle, and the tubercle is the single most useful landmark in the groin. An inguinal hernia comes out above and medial to it. A femoral hernia comes out below and lateral to it. Find the tubercle on the patient, decide which side of it the lump sits, and you have made the diagnosis before any imaging."
+    },
+    {
+      "key": "iliac_crest_r",
+      "label": "Iliac crest — the lateral bony end",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#a2d9ce",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.278,
+          0.574,
+          1
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the right hip bone, 103.4 mm from its surface centroid — the summit of the iliac crest. The anterior superior iliac spine is the anterior END of this crest and is not separately modelled, so it is not emitted; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "iliac crest",
+        "anterior superior iliac spine",
+        "lateral attachment of the inguinal ligament",
+        "midpoint of the inguinal ligament",
+        "deep inguinal ring"
+      ],
+      "narration": "Run forwards along this crest and it ends at the anterior superior iliac spine, the lateral anchor of the inguinal ligament. Halfway between that spine and the pubic tubercle — the midpoint of the inguinal ligament — and one finger's breadth above it, is the deep inguinal ring. Do not confuse that with the mid-inguinal point, which is halfway between the spine and the pubic symphysis and marks the femoral artery. Two midpoints, two structures, and examiners like the difference."
+    },
+    {
+      "key": "hip_r",
+      "name": "right hip bone",
+      "label": "Hip bone (right)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d0d3d4",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "pubic tubercle",
+        "pubic crest",
+        "pecten pubis",
+        "pectineal line",
+        "anterior superior iliac spine"
+      ],
+      "narration": "Both ends of the inguinal ligament are on this bone, and so is the pecten pubis, where the conjoint tendon and the pectineal ligament take hold. A mesh repair is anchored to these same points."
+    },
+    {
+      "key": "hip_l",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "left hip bone",
+        "pelvis",
+        "bilateral hernia"
+      ],
+      "narration": "The other half of the pelvic frame. Everything here is mirrored, and inguinal hernias are frequently bilateral."
+    },
+    {
+      "key": "rect_r",
+      "name": "right rectus abdominis",
+      "label": "Rectus abdominis — the medial border of the triangle",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "muscle",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA13377"
+      },
+      "terms": [
+        "rectus abdominis",
+        "lateral border of rectus",
+        "Hesselbach's triangle",
+        "inguinal triangle",
+        "medial boundary"
+      ],
+      "narration": "Its lateral border is the medial side of Hesselbach's triangle. The other two sides are the inferior epigastric artery laterally and the inguinal ligament below. A hernia that pushes straight forwards through that triangle is a direct one."
+    },
+    {
+      "key": "extiliac_a_r",
+      "name": "right external iliac artery",
+      "label": "External iliac artery",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "inferior epigastric artery",
+        "femoral artery",
+        "mid-inguinal point",
+        "behind the inguinal ligament"
+      ],
+      "narration": "This artery runs down to the inguinal ligament, gives off the inferior epigastric artery just before it passes underneath, and becomes the femoral artery beyond it. Two facts hang on that. The inferior epigastric artery is the landmark that separates indirect from direct hernia. And the femoral artery is found at the mid-inguinal point, with the femoral vein medial to it and the femoral canal medial again — which is where a femoral hernia comes through."
+    },
+    {
+      "key": "extiliac_v_r",
+      "name": "right external iliac vein",
+      "label": "External iliac vein",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "external iliac vein",
+        "femoral vein",
+        "femoral canal",
+        "medial to the artery"
+      ],
+      "narration": "Medial to the artery as it passes under the ligament, and medial to the vein again is the empty femoral canal. Nerve, artery, vein, empty space, from lateral to medial — that is the order under the inguinal ligament, and the empty space is what a femoral hernia fills."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A gap that had to be left open",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "eo_lower_free_border",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "iliac_crest_r",
+          "to": "pubic_symphysis_r",
+          "kind": "the line of the inguinal ligament"
+        }
+      ],
+      "narration": "The abdominal wall is built to hold pressure in, and here it has a hole in it. The inguinal canal is an oblique passage about four centimetres long, lying above the medial half of the inguinal ligament, running downwards, forwards and medially. It exists because the testis had to leave the abdomen. Everything else in this scene is the wall's answer to the problem of having a hole in itself."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "The four walls, in the order you will be asked",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Walls"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.35,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extobl_r",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "inglig_r",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "intobl_r",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "transv_r",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Four walls, and each is made by a structure you already know. Anterior wall: the external oblique aponeurosis throughout, reinforced laterally by internal oblique. Posterior wall: transversalis fascia throughout, reinforced medially by the conjoint tendon. Roof: the arching lower fibres of internal oblique and transversus abdominis. Floor: the grooved upper surface of the inguinal ligament, with the lacunar ligament at its medial end. Notice the pattern — front is strong laterally, back is strong medially. Each ring therefore has support in front of it or behind it, never a weakness on both sides at once."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Two rings, at opposite ends and opposite depths",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Walls"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Vessels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "iliac_crest_r",
+            "pubic_symphysis_r"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extiliac_a_r",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The deep ring is a hole in the transversalis fascia, lateral, about one centimetre above the midpoint of the inguinal ligament, and immediately lateral to the inferior epigastric artery. The superficial ring is a triangular gap in the external oblique aponeurosis, medial, just above and lateral to the pubic tubercle. One is deep and lateral, the other superficial and medial, and the canal runs between them. That is the obliquity, and it is the first of the two defences: the two holes do not lie opposite each other, so a rise in pressure presses the front wall onto the back wall instead of pushing through."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The shutter, and why coughing does not give you a hernia",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Walls"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "intobl_r",
+          "to": "inglig_r",
+          "kind": "the arch flattens down onto the floor"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "transv_r",
+          "to": "inglig_r",
+          "kind": "the arch flattens down onto the floor"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:raised-intra-abdominal-pressure",
+          "path": [
+            "transv_r",
+            "intobl_r",
+            "eo_lower_free_border",
+            "inglig_r"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The same contraction that raises the pressure also closes the canal. When you cough or strain, the arched lower fibres of internal oblique and transversus straighten and descend towards the inguinal ligament, so the roof comes down onto the floor like a shutter. At the same time the deep ring is pulled upwards and laterally under the reinforced part of the anterior wall, and the conjoint tendon is pulled down behind the superficial ring. Three movements, all in the same instant. When this mechanism fails — chronic cough, straining, heavy lifting, ageing muscle, a divided ilioinguinal nerve after a previous repair — a hernia follows."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "What runs through it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Contents & destination"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Walls"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:spermatic-cord",
+          "path": [
+            "intobl_r",
+            "eo_lower_free_border",
+            "pubic_symphysis_r",
+            "testis_r"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "In the male the canal transmits the spermatic cord; in the female, the round ligament of the uterus. Both also carry the ilioinguinal nerve, which enters through the side wall rather than at the deep ring and leaves through the superficial ring. The cord itself is three arteries, three nerves, three other things: testicular, cremasteric and artery to the vas; genital branch of the genitofemoral, sympathetics and the ilioinguinal running with it; and the vas deferens, the pampiniform plexus and the lymphatics. Its coverings are the three layers it pushed through — internal spermatic fascia from transversalis fascia, cremasteric fascia from internal oblique, external spermatic fascia from the external oblique aponeurosis. Testicular lymph drains to para-aortic nodes and scrotal skin to the superficial inguinal nodes, which is why a testicular tumour and a scrotal skin lesion enlarge completely different nodes."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Indirect or direct — one artery decides",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extiliac_a_r",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rect_r",
+          "intensity": 0.7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:indirect-hernia",
+          "path": [
+            "iliac_crest_r",
+            "intobl_r",
+            "eo_lower_free_border",
+            "testis_r"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:direct-hernia",
+          "path": [
+            "rect_r",
+            "transv_r",
+            "eo_lower_free_border"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "An indirect hernia enters at the deep ring, lateral to the inferior epigastric artery, travels the whole length of the canal inside the coverings of the cord, and can reach the scrotum. It is the common one, it is commoner in the young, and it is the one that obstructs and strangulates. A direct hernia pushes straight forwards through the weak posterior wall in Hesselbach's triangle, medial to the artery. It is a disease of older men with weak muscle, it rarely enters the scrotum, and it seldom strangulates. At operation the surgeon sees which side of the inferior epigastric artery the sac emerges from and the question is settled. Clinically, the old test of occluding the deep ring after reduction is unreliable, so describe what you find rather than claim certainty."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "The lump in the groin — sorting it out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pubic_symphysis_r",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "extiliac_a_r",
+            "extiliac_v_r",
+            "inglig_r"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Everything comes back to the pubic tubercle. A lump above and medial to it is inguinal. A lump below and lateral to it is femoral, coming through the femoral canal, the empty space medial to the femoral vein — commoner in women, narrow-necked, and far more likely to strangulate. Under the inguinal ligament the order from lateral to medial is nerve, artery, vein, canal, and the canal is empty precisely so the vein can expand. Peel the layers away and you can see why a repair works: the surgeon reduces the sac, then rebuilds the posterior wall between the conjoint tendon and the inguinal ligament, with mesh rather than sutures under tension."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The canal itself is a space and has no mesh. It is taught here entirely through the four structures that bound it — external oblique, internal oblique, transversus abdominis and the inguinal ligament — which is option (b) in the authoring rule: teach it through the adjacent structures that do exist. Three of the four walls are real models. The posterior wall is transversalis fascia, which has no mesh at all, so it is narrated over the muscles in front of it. The lumen between them is not, and a provider will never ship it, so this gap is permanent and only a labelled overlay or a diagram will ever close it.",
+    "Neither ring exists as a model. The deep ring is a hole in the transversalis fascia and the superficial ring is a gap in an aponeurosis, and neither fascia nor aponeurosis is a separate object in the catalog. Beat 3 places both rings in words against two measured bony landmarks — the midpoint of the inguinal ligament and the pubic tubercle — rather than putting a marker at a guessed spot. This is the single biggest teaching loss in the scene.",
+    "The inferior epigastric artery is not in the catalog, and it is the one structure that decides whether a hernia is indirect or direct. The right external iliac artery, which gives rise to it, IS present and is used as the stand-in: the narration says where the branch arises and what it separates. An inferior epigastric mesh would be the highest-value single acquisition for this topic.",
+    "The spermatic cord, the pampiniform plexus, the cremaster, the transversalis fascia, the conjoint tendon and the lacunar ligament are all absent. The vas deferens is not: the catalog carries it as 'right deferent duct' FMA19235 and 'left deferent duct' FMA19236, and searching for 'vas deferens' rather than the catalog's own name is why three scenes recorded it as missing. It is the principal content of the cord and should be drawn. The cord is therefore traced as a declared concept from the deep ring level to the testis, and its contents and coverings are narration. The testis itself is present, so the destination of the trace is real even where the tunnel is not.",
+    "No nerve of the region exists: not the ilioinguinal, not the genitofemoral. The ilioinguinal is the nerve injured in hernia repair and the afferent limb of the cremasteric reflex, so its absence costs two examinable facts that are spoken instead of shown.",
+    "The pubic tubercle and the anterior superior iliac spine are not separately modelled — they are features of the hip bone. The two anchors here are honest extremes of that bone, the symphyseal surface and the summit of the iliac crest, and each label and calibrated_by note says plainly that the tubercle and the spine lie a stated distance away rather than at the marker. Given that the whole clinical method of this region is 'which side of the pubic tubercle is the lump', measured markers for the tubercle would be worth a targeted acquisition.",
+    "Only the right external oblique and the right hip bone were on disk, so no anchor could be placed on the internal oblique, the transversus or the inguinal ligament even though all three are referenced. The arching lower borders that form the roof and the shutter are the exact geometry this scene most needs measured. Ingesting FMA13892, FMA22344 and FMA21964 locally would fix that.",
+    "The three anchors are measured extremes, all three record how they were placed, and all three remain status 'needs-review' until a human clears them in-app.",
+    "This scene does not claim 'Inguinal ligament & landmarks'. The ligament is a full part here and its attachments are stated, but the surface anatomy that entry asks for — the mid-inguinal point against the midpoint of the inguinal ligament, the pubic tubercle, the anterior superior iliac spine as palpable points — needs markers this run could not measure. The entry stays on the worklist."
+  ]
+}

@@ -1,0 +1,775 @@
+{
+  "schema": 2,
+  "id": "gross__leg-foot__gastrocnemius-soleus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Leg & Foot",
+  "structure": "Gastrocnemius & soleus",
+  "covers": [
+    "Gastrocnemius & soleus"
+  ],
+  "learning_goal": "Separate gastrocnemius from soleus by origin, joints crossed and function, name the common tendon and its insertion, give the nerve and root value of the ankle jerk, and explain how the soleal pump returns venous blood and what happens when it stops.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "leg",
+      "calf",
+      "posterior compartment of leg",
+      "superficial posterior compartment",
+      "plantarflexion",
+      "ankle",
+      "venous return",
+      "lower limb",
+      "deep vein thrombosis",
+      "gait"
+    ],
+    "terms": [
+      "gastrocnemius",
+      "medial head of gastrocnemius",
+      "lateral head of gastrocnemius",
+      "soleus",
+      "triceps surae",
+      "plantaris",
+      "calf muscles",
+      "calcaneal tendon",
+      "Achilles tendon",
+      "tendo calcaneus",
+      "calcaneus",
+      "calcaneal tuberosity",
+      "soleal line",
+      "tendinous arch of soleus",
+      "posterior compartment of leg",
+      "superficial posterior compartment",
+      "deep posterior compartment",
+      "tibial nerve",
+      "S1 S2",
+      "ankle jerk",
+      "ankle reflex",
+      "Achilles reflex",
+      "plantarflexion",
+      "toe off",
+      "push off",
+      "tiptoe test",
+      "single heel raise",
+      "Simmonds test",
+      "Thompson test",
+      "Achilles tendon rupture",
+      "calf muscle pump",
+      "soleal pump",
+      "peripheral heart",
+      "soleal sinuses",
+      "venous return",
+      "deep vein thrombosis",
+      "DVT",
+      "varicose veins",
+      "venous ulcer",
+      "gastrocnemius strain",
+      "tennis leg",
+      "popliteal fossa",
+      "sesamoid",
+      "fabella",
+      "posterior tibial artery",
+      "tibial pulse",
+      "gastrocnemius flap"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 3.2
+  },
+  "structures": [
+    {
+      "key": "gastroc_med",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "part",
+      "group": "Gastrocnemius",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "medial head of gastrocnemius",
+        "popliteal surface of femur",
+        "above medial condyle",
+        "tennis leg",
+        "gastrocnemius strain"
+      ],
+      "narration": "The larger and lower of the two heads. It arises above the medial condyle of the femur, on the popliteal surface. Because it is the head under most load in push-off, it is the one that tears in a middle-aged player who feels a sudden blow to the calf — the injury called tennis leg."
+    },
+    {
+      "key": "gastroc_lat",
+      "name": "lateral head of right gastrocnemius",
+      "label": "Gastrocnemius — lateral head",
+      "role": "part",
+      "group": "Gastrocnemius",
+      "layer": "muscle",
+      "color": "#d4694a",
+      "refs": {
+        "bodyparts3d": "FMA45960"
+      },
+      "terms": [
+        "lateral head of gastrocnemius",
+        "lateral condyle of femur",
+        "popliteal fossa",
+        "fabella"
+      ],
+      "narration": "Arises from the back of the lateral condyle. The two heads form the lower boundary of the popliteal fossa — biceps femoris and the semi-muscles above, the two heads of gastrocnemius below. A small sesamoid bone, the fabella, sits in this head in about one person in five and is a normal finding on a lateral knee film."
+    },
+    {
+      "key": "soleus",
+      "name": "right soleus",
+      "label": "Soleus",
+      "role": "part",
+      "group": "Triceps surae",
+      "layer": "muscle",
+      "color": "#a8452f",
+      "refs": {
+        "bodyparts3d": "FMA22558"
+      },
+      "terms": [
+        "soleus",
+        "soleal line",
+        "tendinous arch of soleus",
+        "head of fibula",
+        "posture muscle",
+        "soleal sinuses",
+        "calf muscle pump",
+        "peripheral heart"
+      ],
+      "narration": "The broad flat muscle underneath, named for its shape like a sole fish. It arises from the back of the head and upper shaft of the fibula and from the soleal line of the tibia, and between those two origins its upper edge forms a tendinous arch. The popliteal artery and the tibial nerve pass under that arch to enter the deep compartment. Soleus starts below the knee, so it crosses only the ankle."
+    },
+    {
+      "key": "plantaris",
+      "name": "right plantaris",
+      "label": "Plantaris",
+      "role": "part",
+      "group": "Triceps surae",
+      "layer": "muscle",
+      "color": "#c9906b",
+      "refs": {
+        "bodyparts3d": "FMA22560"
+      },
+      "terms": [
+        "plantaris",
+        "lateral supracondylar line",
+        "freshman's nerve",
+        "vestigial",
+        "tendon graft"
+      ],
+      "narration": "A small belly with a very long thin tendon, running between gastrocnemius and soleus. It is functionally trivial and absent in about a tenth of people, but it is worth knowing for two reasons: students mistake its tendon for a nerve in dissection, and surgeons harvest it as a tendon graft."
+    },
+    {
+      "key": "calc_tendon",
+      "name": "right calcaneal tendon",
+      "label": "Calcaneal tendon",
+      "role": "part",
+      "group": "Triceps surae",
+      "layer": "muscle",
+      "color": "#e6d9b8",
+      "refs": {
+        "bodyparts3d": "FMA258847"
+      },
+      "terms": [
+        "calcaneal tendon",
+        "Achilles tendon",
+        "tendo calcaneus",
+        "strongest tendon in the body",
+        "watershed zone",
+        "Achilles tendon rupture",
+        "Simmonds test",
+        "Thompson test",
+        "fluoroquinolone"
+      ],
+      "narration": "The thickest and strongest tendon in the body, formed by gastrocnemius and soleus together. Its fibres spiral as they descend, and the stretch of tendon two to six centimetres above the heel has the poorest blood supply — that watershed is where it degenerates and where it ruptures. A patient who feels a snap, cannot stand on tiptoe, and whose foot does not move when you squeeze the calf has ruptured it."
+    },
+    {
+      "key": "calcaneus",
+      "name": "right calcaneus",
+      "label": "Calcaneus",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#efe4cb",
+      "refs": {
+        "bodyparts3d": "FMA24497"
+      },
+      "terms": [
+        "calcaneus",
+        "heel bone",
+        "calcaneal tuberosity",
+        "retrocalcaneal bursa",
+        "lever arm"
+      ],
+      "narration": "The whole muscle ends here, on the back of the calcaneal tuberosity. The heel behind the ankle joint is the lever arm: the longer it is, the more the calf can lift. This is the insertion answer whichever head is named in the question."
+    },
+    {
+      "key": "talus",
+      "name": "right talus",
+      "label": "Talus",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e2d8bd",
+      "refs": {
+        "bodyparts3d": "FMA24482"
+      },
+      "terms": [
+        "talus",
+        "ankle joint",
+        "talocrural joint",
+        "axis of plantarflexion"
+      ],
+      "narration": "The ankle joint is between the talus and the two leg bones. The axis of the joint runs through the talus, so the pull of the calcaneal tendon behind that axis is what tips the foot downwards."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "soleal line",
+        "medial border of tibia",
+        "subcutaneous surface"
+      ],
+      "narration": "Soleus takes its origin from the soleal line on the back of the tibia. Note that the front and medial surface of the tibia has no muscle on it at all — that is why the shin is the classic site of a compound fracture."
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d8cdb0",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "head of fibula",
+        "posterior surface of fibula",
+        "common fibular nerve"
+      ],
+      "narration": "The other origin of soleus, from the back of the head and upper shaft. Remember what wraps round the neck of this bone in front — the common fibular nerve, the nerve that is not involved in plantarflexion at all."
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right leg",
+      "label": "Interosseous membrane",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "fascia",
+      "color": "#c9bd93",
+      "refs": {
+        "bodyparts3d": "FMA35192"
+      },
+      "terms": [
+        "interosseous membrane",
+        "compartment boundary",
+        "compartment syndrome",
+        "deep posterior compartment"
+      ],
+      "narration": "The sheet between tibia and fibula, and the fourth wall of the box. Bone in front, membrane between the bones, deep fascia behind and the intermuscular septa at the sides — that is why pressure in the deep posterior compartment has nowhere to go, and why compartment syndrome is a surgical emergency here."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "medial condyle",
+        "lateral condyle",
+        "popliteal surface"
+      ],
+      "narration": "Gastrocnemius alone reaches this bone. That single fact — one muscle starting above the knee and one below it — is what separates the two and generates most of the examinable differences between them."
+    },
+    {
+      "key": "popliteus",
+      "name": "right popliteus",
+      "label": "Popliteus",
+      "role": "context",
+      "group": "Deep compartment",
+      "layer": "muscle",
+      "color": "#9b7f52",
+      "refs": {
+        "bodyparts3d": "FMA22591"
+      },
+      "terms": [
+        "popliteus",
+        "floor of popliteal fossa",
+        "unlocking the knee"
+      ],
+      "narration": "Lies deep to the two heads, forming the floor of the lower popliteal fossa. It unlocks the extended knee and takes no part in plantarflexion, but it is what you meet first when the calf is lifted off."
+    },
+    {
+      "key": "tib_post",
+      "name": "right tibialis posterior",
+      "label": "Tibialis posterior",
+      "role": "context",
+      "group": "Deep compartment",
+      "layer": "muscle",
+      "color": "#7f9ec4",
+      "refs": {
+        "bodyparts3d": "FMA65018"
+      },
+      "terms": [
+        "tibialis posterior",
+        "deep posterior compartment",
+        "inversion",
+        "medial longitudinal arch",
+        "Tom Dick and Harry"
+      ],
+      "narration": "The deepest of the three deep muscles, lying between the two leg bones. It inverts the foot and supports the medial arch. It is a plantarflexor too, but a weak one — the calf does the work."
+    },
+    {
+      "key": "fdl",
+      "name": "right flexor digitorum longus",
+      "label": "Flexor digitorum longus",
+      "role": "context",
+      "group": "Deep compartment",
+      "layer": "muscle",
+      "color": "#6e8fb8",
+      "refs": {
+        "bodyparts3d": "FMA65016"
+      },
+      "terms": [
+        "flexor digitorum longus",
+        "deep posterior compartment",
+        "behind medial malleolus",
+        "tarsal tunnel"
+      ],
+      "narration": "Runs down on the tibial side and passes behind the medial malleolus into the sole. Its tendon, the tibial vessels and the tibial nerve all pass through the tarsal tunnel there — which is why a posterior tibial pulse is felt behind the medial malleolus, not in the calf."
+    },
+    {
+      "key": "fhl",
+      "name": "right flexor hallucis longus",
+      "label": "Flexor hallucis longus",
+      "role": "context",
+      "group": "Deep compartment",
+      "layer": "muscle",
+      "color": "#5b7ea8",
+      "refs": {
+        "bodyparts3d": "FMA65014"
+      },
+      "terms": [
+        "flexor hallucis longus",
+        "deep posterior compartment",
+        "push off",
+        "big toe"
+      ],
+      "narration": "The most powerful of the deep three, arising from the fibula and running to the big toe. It gives the final push at the end of toe-off, after the calf has already lifted the heel."
+    },
+    {
+      "key": "tib_ant",
+      "name": "right tibialis anterior",
+      "label": "Tibialis anterior",
+      "role": "context",
+      "group": "Antagonists",
+      "layer": "muscle",
+      "color": "#8fbf7f",
+      "refs": {
+        "bodyparts3d": "FMA22544"
+      },
+      "terms": [
+        "tibialis anterior",
+        "dorsiflexion",
+        "deep fibular nerve",
+        "foot drop",
+        "L4 L5"
+      ],
+      "narration": "The opposite muscle, in the front of the leg, dorsiflexing the ankle through the deep fibular nerve. Set the two against each other: plantarflexion is tibial nerve, S1 and S2; dorsiflexion is deep fibular nerve, L4 and L5. A patient who cannot walk on their heels has lost the front; a patient who cannot walk on tiptoe has lost the back."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The back of the leg",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Gastrocnemius",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "soleus",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The calf is the superficial part of the posterior compartment of the leg. Gastrocnemius is the shape you see, soleus is the bulk underneath it, and plantaris is the small extra between them. Together the three are called triceps surae — three heads of the calf."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Two heads on the femur",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Gastrocnemius"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gastroc_med",
+          "to": "femur",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gastroc_lat",
+          "to": "femur",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Gastrocnemius has two heads and both start on the femur, above the condyles. That puts the muscle across the back of the knee as well as the back of the ankle. Its bellies also make the lower two sides of the diamond of the popliteal fossa."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Lift the gastrocnemius off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Gastrocnemius"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Antagonists"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "soleus",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "soleus",
+          "to": "tibia",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "soleus",
+          "to": "fibula",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Underneath is soleus, wider than the muscle that covered it and reaching further down the leg. Both its origins are below the knee: the soleal line of the tibia and the back of the fibula. Nothing about this muscle crosses the knee, so it acts on the ankle only whatever the knee is doing."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "One tendon to the heel",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep compartment"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Antagonists"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "calc_tendon",
+          "path": [
+            "femur",
+            "gastroc_med",
+            "soleus",
+            "calc_tendon",
+            "calcaneus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow the muscle down. Gastrocnemius and soleus join into a single tendon about halfway down the leg and that tendon narrows to insert on the back of the calcaneus. Three bellies, one tendon, one bone. The tendon can carry many times body weight in a running step, and it is loaded most not when you push off but when you land."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 5,
+      "title": "What the calf does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep compartment"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Triceps surae",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Gastrocnemius",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "calc_tendon",
+          "to": "talus",
+          "kind": "lever"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The tendon passes behind the ankle joint, so shortening it drives the heel up and the toes down — plantarflexion. This is the movement that lifts the whole body weight onto the ball of the foot at every step, and it is the strongest movement in the lower limb. Gastrocnemius also helps flex the knee."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 6,
+      "title": "Fast muscle and slow muscle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep compartment"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Antagonists"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Gastrocnemius",
+            "soleus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Compare them properly. Gastrocnemius crosses two joints, is mostly fast fibres, and does the sudden work — jumping and sprinting. Soleus crosses one joint, is mostly slow fibres, and does the quiet work — it is the muscle that stops you falling forwards while you stand still, contracting all day without tiring. Bend the knee and gastrocnemius goes slack, so plantarflexion tested with the knee flexed is testing soleus."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The nerve and the reflex",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Gastrocnemius"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:tibial_nerve",
+          "path": [
+            "popliteus",
+            "soleus",
+            "fdl",
+            "fhl",
+            "calcaneus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The path traced here is the tibial nerve. It comes down through the popliteal fossa, dives under the tendinous arch of soleus with the popliteal artery, and supplies both calf muscles and the deep three below them. Its root value for plantarflexion is S1 and S2. Tap the calcaneal tendon and you test that arc: the ankle jerk is an S1 reflex, and it is the first to disappear in an S1 root lesion from a prolapsed disc."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "The calf as a pump",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Gastrocnemius"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "soleus",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous_blood",
+          "path": [
+            "calcaneus",
+            "soleus",
+            "popliteus",
+            "femur"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The path traced here is venous blood going home. Deep veins run inside soleus in wide pouches called the soleal sinuses. Every time the muscle contracts it squeezes them empty, and the valves in the veins allow flow in one direction only, so blood is driven up the limb against gravity. This is why the calf is called the peripheral heart. Stop the pump — bed rest, a long flight, a plaster cast — and blood stagnates in exactly those sinuses, which is where a deep vein thrombosis usually begins. Let the pump fail chronically and the pressure stays high in the superficial veins, giving varicose veins and eventually an ulcer above the medial malleolus."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "A cut across the calf",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Deep compartment",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Slide the cut up and down the leg. Behind the two bones and the interosseous membrane sit two posterior compartments, one behind the other. Superficial holds gastrocnemius, soleus and plantaris. Deep holds popliteus, tibialis posterior, flexor digitorum longus and flexor hallucis longus, together with the tibial nerve and the posterior tibial vessels. A closed fascial box with a nerve and an artery in it is a compartment syndrome waiting to happen, and pain on passive stretch of the toes is the early sign."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "When the tendon goes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep compartment"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Triceps surae"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "calc_tendon",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "A ruptured calcaneal tendon leaves a palpable gap a few centimetres above the heel, and the patient cannot do a single heel raise on that leg. Squeeze the calf with the patient prone and the foot should plantarflex; if it does not, the muscle is no longer connected to the bone. The foot still moves a little at the ankle because the deep muscles and the fibularis muscles remain, which is exactly why the test must be the squeeze and not simply asking the patient to push down."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Peel the calf apart",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The dissection order to recite: skin, with the short saphenous vein and the sural nerve running in the fascia over the midline of the calf, then deep fascia, then gastrocnemius, then plantaris and soleus, then the tibial nerve and posterior tibial vessels on the deep muscles, then tibialis posterior on the bones. Learn the calf in those layers and every structure has an address."
+    }
+  ],
+  "gaps": [
+    "There is no vein of the lower limb below the external iliac in the catalog. The soleal sinuses, the posterior tibial and popliteal veins, the short saphenous vein and the perforators are the physiological point of this scene, so the calf pump is authored as a traced concept path running up through soleus. It is described, not displayed.",
+    "No artery below the external iliac is modelled either, so the popliteal and posterior tibial arteries, and the watershed blood supply of the calcaneal tendon, are named in narration only.",
+    "No nerve of the lower limb exists as a model. The tibial nerve is a traced concept path through the muscles it supplies; its root value, the ankle jerk and the contrast with the common fibular nerve are narration.",
+    "The soleal line of the tibia, the tendinous arch of soleus and the calcaneal tuberosity are sub-features of whole-bone and whole-muscle meshes, taught by lighting the parent and naming the feature. Measured landmark anchors would be a real improvement here, particularly for the arch, and were not attempted because an anchor placed by eye would be worse than none.",
+    "The retrocalcaneal and subcutaneous calcaneal bursae have no models, so the two kinds of posterior heel pain are named but not shown.",
+    "The deep fascia of the leg and the intermuscular septa are not modelled, so two of the walls that make the posterior compartments a closed box are described in the cross-section beat rather than drawn. The interosseous membrane is not one of them: FMA35192 is in the catalog and is authored in both the Tibia & fibula and Ankle joint scenes, so the fourth wall can be drawn here and should be.",
+    "The fabella is a variant sesamoid with no mesh; it is mentioned in the lateral head's narration only.",
+    "This scene does not cover Popliteal fossa, Ankle joint or Tibia & fibula. The bones, popliteus and the talus appear only as the frame the calf pulls on, and the boundaries and contents of the popliteal fossa are named rather than taught in order."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

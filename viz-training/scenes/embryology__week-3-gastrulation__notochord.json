@@ -1,0 +1,661 @@
+{
+  "schema": 2,
+  "id": "embryology__week-3-gastrulation__notochord",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Week 3: Gastrulation",
+  "structure": "Notochord",
+  "covers": [
+    "Notochord"
+  ],
+  "learning_goal": "Trace the notochord from the primitive pit through canal, plate and neurenteric canal to a solid rod, say exactly where it runs and what its two ends are, name the two things it induces, say what survives of it in the adult, and explain the tumour and the cysts that come from cells that should have gone.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "notochord",
+      "gastrulation",
+      "week 3",
+      "early development",
+      "axial skeleton",
+      "neural induction",
+      "vertebral column development",
+      "intervertebral disc"
+    ],
+    "terms": [
+      "notochord",
+      "notochordal process",
+      "prenotochordal cells",
+      "primitive pit",
+      "primitive node",
+      "Hensen's node",
+      "notochordal canal",
+      "notochordal plate",
+      "intercalation",
+      "neurenteric canal",
+      "canalis neurentericus",
+      "definitive notochord",
+      "prechordal plate",
+      "oropharyngeal membrane",
+      "buccopharyngeal membrane",
+      "cloacal membrane",
+      "primitive node to prechordal plate",
+      "midline",
+      "axial mesoderm",
+      "paraxial mesoderm",
+      "sclerotome",
+      "somite",
+      "neural plate",
+      "neural induction",
+      "sonic hedgehog",
+      "SHH",
+      "floor plate",
+      "basal plate",
+      "motor neurons",
+      "vertebral body",
+      "nucleus pulposus",
+      "annulus fibrosus",
+      "intervertebral disc",
+      "disc prolapse",
+      "chordoma",
+      "clivus",
+      "sacrococcygeal",
+      "physaliphorous cells",
+      "brachyury",
+      "neurenteric cyst",
+      "split notochord syndrome",
+      "persistent notochordal canal",
+      "notochordal remnant",
+      "apex of the dens",
+      "apical ligament of dens",
+      "day 16",
+      "day 17",
+      "day 18",
+      "day 20"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "disc_context",
+      "label": "The disc in median section — where the midline runs",
+      "role": "context",
+      "group": "Where it comes from",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "trilaminar disc",
+        "ectoderm",
+        "mesoderm",
+        "endoderm",
+        "median section",
+        "amniotic cavity",
+        "yolk sac",
+        "midline",
+        "week 3"
+      ],
+      "narration": "Cut the week-three disc down the middle from head to tail and look at it from the side. Amniotic cavity above, yolk sac below, three layers between them. Everything in this scene happens on that one line — the notochord is a midline structure and nothing about it makes sense until you are looking at the midline."
+    },
+    {
+      "key": "pit_origin",
+      "label": "Cells enter at the primitive pit",
+      "role": "part",
+      "group": "Where it comes from",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "primitive pit",
+        "primitive node",
+        "Hensen's node",
+        "prenotochordal cells",
+        "epiblast",
+        "ingression",
+        "midline entry",
+        "day 16"
+      ],
+      "narration": "The notochord starts as epiblast cells that sink in at the primitive pit, not at the groove. That single fact separates it from the germ layers: groove cells become endoderm and mesoderm, pit cells become the midline. They are called prenotochordal cells and they move forwards, in the midline, between the ectoderm above and the newly laid endoderm below."
+    },
+    {
+      "key": "process",
+      "label": "Stage 1 — the notochordal process",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "notochordal process",
+        "hollow tube",
+        "cranial migration",
+        "midline cord",
+        "day 16",
+        "day 17",
+        "prechordal plate"
+      ],
+      "narration": "The prenotochordal cells run cranially as a hollow tube — the notochordal process. Note the word hollow; students who learn the notochord as a solid rod from the start cannot explain the next three stages. The tube grows forward until it reaches the prechordal plate and stops there."
+    },
+    {
+      "key": "canal",
+      "label": "Stage 2 — the notochordal canal",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "notochordal canal",
+        "lumen",
+        "hollow",
+        "continuous with primitive pit",
+        "day 17"
+      ],
+      "narration": "The lumen of that tube is the notochordal canal, and it opens backwards into the primitive pit. So for a couple of days there is a channel running from the floor of the amniotic cavity forwards inside the midline. It is temporary, but what it does before it closes is the reason the next two stages exist."
+    },
+    {
+      "key": "plate",
+      "label": "Stage 3 — the floor breaks down and the plate intercalates",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "terms": [
+        "notochordal plate",
+        "intercalation",
+        "floor breaks down",
+        "fuses with endoderm",
+        "roof of the yolk sac",
+        "day 18",
+        "flattened"
+      ],
+      "narration": "The floor of the tube breaks down and the remaining cells flatten into the roof of the yolk sac. That flattened strip, set into the endoderm, is the notochordal plate. For a short time the notochord is literally part of the gut lining — which is why anything that fails here ties the future gut to the future spinal cord."
+    },
+    {
+      "key": "neurenteric",
+      "label": "The neurenteric canal — amnion talking to yolk sac",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "neurenteric canal",
+        "canalis neurentericus",
+        "transient communication",
+        "amniotic cavity",
+        "yolk sac",
+        "primitive pit",
+        "obliterates"
+      ],
+      "narration": "While the floor is open, the amniotic cavity and the yolk sac are briefly continuous through the pit — the neurenteric canal. It is a normal, transient communication and it closes on its own. Remember it exists, because a canal that does not close is a malformation you can name."
+    },
+    {
+      "key": "definitive",
+      "label": "Stage 4 — the definitive notochord",
+      "role": "part",
+      "group": "How it forms — four stages",
+      "layer": "organ",
+      "color": "#0e6655",
+      "terms": [
+        "definitive notochord",
+        "solid rod",
+        "detaches from endoderm",
+        "pinches off",
+        "day 20",
+        "mesoderm",
+        "axial mesoderm"
+      ],
+      "narration": "The plate then rolls up, pinches off from the endoderm and sits free in the mesoderm as a solid rod. That is the definitive notochord, complete by about day twenty. The endoderm closes underneath it and becomes a continuous gut roof again. Four steps in order: process, canal, plate, rod."
+    },
+    {
+      "key": "extent",
+      "label": "Its two ends",
+      "role": "part",
+      "group": "What it defines",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "prechordal plate",
+        "cranial end",
+        "primitive node",
+        "caudal end",
+        "oropharyngeal membrane",
+        "cloacal membrane",
+        "midline axis",
+        "extent"
+      ],
+      "narration": "The notochord runs from the primitive node behind to the prechordal plate in front. In front of the prechordal plate there is no notochord, which is why the head is patterned differently from the trunk. Behind, the streak is regressing towards the cloacal membrane. Those two ends are worth knowing by name — they are the anatomical boundaries of the whole axial story."
+    },
+    {
+      "key": "axis",
+      "label": "The primitive axis of the embryo",
+      "role": "part",
+      "group": "What it defines",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "midline",
+        "primitive axis",
+        "axial skeleton",
+        "body axis",
+        "median plane",
+        "bilateral symmetry",
+        "scaffold"
+      ],
+      "narration": "The notochord is the embryo's first skeleton. It is the axis everything else is arranged around, and the definition examiners want is short: a midline rod of mesoderm that defines the primitive axis and around which the vertebral column later forms. If you can only keep one sentence, keep that one."
+    },
+    {
+      "key": "induce_neural",
+      "label": "It induces the neural plate",
+      "role": "part",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "neural induction",
+        "neural plate",
+        "overlying ectoderm",
+        "neuroectoderm",
+        "thickens",
+        "sonic hedgehog",
+        "SHH",
+        "floor plate",
+        "basal plate",
+        "motor neurons",
+        "ventral patterning"
+      ],
+      "narration": "The notochord signals upwards to the ectoderm directly over it, and that ectoderm thickens into the neural plate. This is the single most examined thing the notochord does. It keeps signalling after the tube closes: sonic hedgehog from the notochord makes the floor plate and the ventral, motor half of the cord. No notochord, no neural plate — and no neurulation to teach."
+    },
+    {
+      "key": "induce_sclerotome",
+      "label": "It patterns the sclerotome",
+      "role": "part",
+      "group": "What it induces",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "paraxial mesoderm",
+        "somite",
+        "sclerotome",
+        "vertebral body",
+        "resegmentation",
+        "vertebral column",
+        "surrounds the notochord",
+        "chondrification"
+      ],
+      "narration": "Sideways, the notochord signals the somites to release their sclerotome, and sclerotome cells migrate round it to build the vertebral bodies. So the vertebral column is not made from notochord — it is made around notochord. Getting that preposition right is the difference between a correct answer and a common wrong one."
+    },
+    {
+      "key": "nucleus_pulposus",
+      "label": "What survives of it in you",
+      "role": "part",
+      "group": "What becomes of it",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "nucleus pulposus",
+        "intervertebral disc",
+        "annulus fibrosus",
+        "regresses within the vertebral body",
+        "apical ligament of dens",
+        "gelatinous",
+        "disc prolapse",
+        "herniation"
+      ],
+      "narration": "Where the notochord lies inside a vertebral body it disappears. Where it lies between two bodies it persists as the nucleus pulposus, the gelatinous centre of the intervertebral disc. A prolapsed disc is therefore notochord squeezing out through a torn annulus, and the apical ligament of the dens is another small remnant. That is the whole adult answer to what becomes of the notochord."
+    },
+    {
+      "key": "chordoma",
+      "label": "A remnant that grows — chordoma",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "chordoma",
+        "notochordal remnant",
+        "clivus",
+        "sacrococcygeal region",
+        "spheno-occipital",
+        "physaliphorous cells",
+        "brachyury",
+        "slow growing",
+        "locally invasive",
+        "midline tumour",
+        "cranial nerve palsy"
+      ],
+      "narration": "Notochordal cells left anywhere along the old axis can become a chordoma. It is a midline tumour, and the two places to name are the sacrococcygeal region and the clivus at the skull base. It grows slowly but eats bone locally, so a sacral one presents with pain and bowel or bladder trouble and a clival one with cranial nerve palsies. Its cells are described as physaliphorous — bubbly. When an examiner asks why a midline tumour appears in two such distant places, the answer is that the notochord ran between them."
+    },
+    {
+      "key": "split_notochord",
+      "label": "A canal that does not close",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cd6155",
+      "terms": [
+        "neurenteric cyst",
+        "split notochord syndrome",
+        "persistent neurenteric canal",
+        "gut and cord connected",
+        "dorsal enteric fistula",
+        "vertebral anomaly",
+        "diastematomyelia",
+        "spina bifida",
+        "hemivertebra"
+      ],
+      "narration": "If the neurenteric canal persists, gut stays connected to the back through a gap in the vertebral column. That is split notochord syndrome, and its milder end is a neurenteric cyst — a pouch of gut-type lining sitting in front of the cord. It explains why a child with an odd midline back lesion needs the spine and the gut imaged, not just the skin looked at."
+    },
+    {
+      "key": "notochord_absent",
+      "label": "When the axis fails",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "failed induction",
+        "no neural plate",
+        "vertebral body defects",
+        "hemivertebra",
+        "block vertebra",
+        "axial malformation",
+        "sirenomelia",
+        "caudal dysgenesis"
+      ],
+      "narration": "Because two systems depend on it, a notochord that forms badly damages both. The overlying ectoderm is never induced properly, so the neural tube is defective; the sclerotome has nothing to organise around, so vertebral bodies are fused, wedged or missing. This is why axial vertebral anomalies and cord anomalies so often turn up in the same child — one failure, two consequences."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find the midline, then find the pit",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where it comes from"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_context"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pit_origin",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Take the trilaminar disc and cut it from head to tail down the middle. Amnion above, yolk sac below. Now find the primitive pit at the back end. The cells that make the notochord go in there and nowhere else — groove cells make the germ layers, pit cells make the midline. Hold that split and the rest of this scene is bookkeeping."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "A hollow tube, not a rod — yet",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How it forms — four stages"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit_origin"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "process",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pit_origin",
+          "to": "process",
+          "kind": "cells run forward in the midline as"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "process",
+          "to": "canal",
+          "kind": "is hollow, and its lumen is"
+        }
+      ],
+      "narration": "Around day sixteen the prenotochordal cells run cranially as a hollow tube — the notochordal process — and its lumen is the notochordal canal, open behind into the pit. Say hollow out loud. Almost every mistake in this topic comes from a student who pictured a solid rod on day sixteen and then could not explain how it ever joined the endoderm."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The floor gives way and the notochord joins the gut roof",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How it forms — four stages"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "plate",
+          "intensity": 0.95
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "canal",
+          "to": "plate",
+          "kind": "its floor breaks down, leaving"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "plate",
+          "to": "neurenteric",
+          "kind": "while open, the pit connects the cavities as"
+        }
+      ],
+      "narration": "Cut across the embryo and watch the floor of the tube break down. The cells left flatten and intercalate into the roof of the yolk sac as the notochordal plate — for two days the notochord is part of the gut lining. While that floor is open the amniotic cavity drains into the yolk sac through the pit, which is the neurenteric canal. It is normal, and it closes."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "It rolls up, detaches, and becomes a rod",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How it forms — four stages"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:prenotochordal-cells",
+          "path": [
+            "process",
+            "canal",
+            "plate",
+            "definitive"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "definitive",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "neurenteric"
+        }
+      ],
+      "narration": "The plate then folds back on itself, pinches off from the endoderm and lies free in the mesoderm as a solid rod. That is the definitive notochord, and it is finished by about day twenty. The endoderm heals under it into a continuous gut roof. Learn the four stages as a sequence you can write in one line: process, canal, plate, rod."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "How far it runs, and where it stops",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What it defines"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extent",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extent",
+          "to": "axis",
+          "kind": "a midline rod from node to prechordal plate is"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The rod runs from the primitive node behind to the prechordal plate in front, and it goes no further forward than that. Everything in front of the prechordal plate is head, and the head is patterned without a notochord underneath it. Within its own extent the notochord is the primitive axis of the embryo — the first skeleton, and the line the vertebral column will be built around."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Two things it tells other tissues to do",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What it induces"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "definitive"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "induce_neural",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "definitive",
+          "to": "induce_neural",
+          "kind": "signals upward to thicken ectoderm into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "definitive",
+          "to": "induce_sclerotome",
+          "kind": "signals sideways to organise"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "induce_neural",
+            "induce_sclerotome"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Upwards, it induces the overlying ectoderm to thicken into the neural plate — the beginning of the whole nervous system, and the answer to the commonest question in this topic. It keeps talking afterwards: sonic hedgehog from the notochord builds the floor plate and the motor half of the cord. Sideways, it tells each somite to release its sclerotome, and those cells crawl round it to form the vertebral bodies. Round it, not from it."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "What is left of it when you are grown",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What becomes of it"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "induce_sclerotome"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "nucleus_pulposus",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "induce_sclerotome",
+          "to": "nucleus_pulposus",
+          "kind": "vertebral bodies squeeze it out, leaving between them"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Inside each vertebral body the notochord is crushed out of existence. Between the bodies it survives as the nucleus pulposus at the centre of every intervertebral disc, plus a scrap in the apical ligament of the dens. So you still carry your notochord, and when a disc prolapses it is notochordal tissue pushing through the torn annulus onto a nerve root."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "Cells that stayed, and a canal that did not close",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "extent"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extent",
+          "to": "chordoma",
+          "kind": "remnants anywhere along it become"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "neurenteric",
+          "to": "split_notochord",
+          "kind": "failing to close gives"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "How it forms — four stages"
+        }
+      ],
+      "narration": "Three clinical endings, and each is a stage of this scene going wrong. Cells left behind along the axis grow into a chordoma — midline, slow, bone-destroying, and found at the sacrum or the clivus because that is where the notochord ran. A neurenteric canal that stays open leaves gut connected to the back through a split vertebral column, from a small neurenteric cyst up to split notochord syndrome. And a notochord that forms poorly takes both its pupils down with it: no proper neural plate above, no organised vertebral bodies around. One rod, and the spine and the cord both depend on it."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, with no 3d option, so only diagram is deferred. The subject is a four-stage transformation of one midline structure over four days — the sequence engine is the right one, and no mesh exists at this scale in any case. The curriculum asks for location and mechanism views and both are authored.",
+    "Status is 'planned'. Sixteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a median section of the trilaminar disc with the primitive pit at the caudal end; the notochordal process drawn as a HOLLOW tube with its canal open into the pit; a transverse cut at the stage where the floor has broken down and the plate is intercalated into the yolk-sac roof; the neurenteric canal marked as a through-and-through channel; the detached solid rod with endoderm closed beneath it; and a later panel with sclerotome surrounding the rod and nucleus pulposus between two vertebral bodies.",
+    "The median section must keep the cranial end to the left in every panel and the amniotic cavity above. Beats 2, 4 and 5 all rely on the reader knowing which way the process is growing without being told again.",
+    "Beat 4 traces concept:prenotochordal-cells. The subject is a migrating cell population changing form, not a drawn object, so it cannot be a region.",
+    "Beat 7 authors PEEL_LAYER to strip the vertebral bodies off the surviving nucleus pulposus. Today's renderer degrades it to hiding structures tagged with that layer, which is a weaker effect but the correct teaching move, so it is authored rather than avoided.",
+    "'Neurulation (neural plate/tube)' is NOT claimed in covers[], although beat 6 names neural induction. Induction is what the notochord DOES and belongs here; how the plate folds, when the neuropores close and what happens when they do not is that entry's work and is authored alongside this one.",
+    "'Primitive streak' and 'Trilaminar disc (3 germ layers)' are NOT claimed. The primitive pit is named in beat 1 only as the door these cells come through.",
+    "Day numbers are the standard teaching ones — process about day 16, plate about day 18, definitive rod about day 20 — and are narrated as approximations. Texts differ by a day or two at each step.",
+    "Sonic hedgehog appears once in narration and in match.terms because Nigerian MBBS papers name it when asking about floor plate and motor neuron patterning. The signalling pathway itself is not taught here; if a molecular embryology topic is ever added, it belongs there.",
+    "Chordoma is taught in full here rather than being left to a pathology topic, because the only reason a midline tumour appears at both the clivus and the sacrum is the course of the notochord — the explanation is embryological and loses its point anywhere else.",
+    "Nucleus pulposus and disc prolapse are narrated here as the notochord's adult fate, but this scene does NOT claim the gross anatomy entry 'Intervertebral disc', which teaches the disc as a joint. The terms sit in match.terms so a highlighted 'nucleus pulposus' in a note can reach either scene."
+  ]
+}

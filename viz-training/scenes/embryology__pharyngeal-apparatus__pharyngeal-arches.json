@@ -1,0 +1,680 @@
+{
+  "schema": 2,
+  "id": "embryology__pharyngeal-apparatus__pharyngeal-arches",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Pharyngeal Apparatus",
+  "structure": "Pharyngeal arches",
+  "covers": [
+    "Pharyngeal arches"
+  ],
+  "learning_goal": "Build every pharyngeal arch from the same five ingredients, then name for arches 1, 2, 3, 4 and 6 the cartilage, the muscles, the cranial nerve and the artery, and use that one table to explain the course of both recurrent laryngeal nerves and the first-arch, second-arch and neural crest syndromes.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pharyngeal arches",
+      "branchial arches",
+      "pharyngeal apparatus",
+      "branchial apparatus",
+      "head and neck development",
+      "week 4",
+      "week 5",
+      "cranial nerves",
+      "aortic arch arteries",
+      "neural crest",
+      "face development",
+      "larynx development"
+    ],
+    "terms": [
+      "pharyngeal arch",
+      "branchial arch",
+      "first arch",
+      "mandibular arch",
+      "second arch",
+      "hyoid arch",
+      "third arch",
+      "fourth arch",
+      "fifth arch",
+      "sixth arch",
+      "arch cartilage",
+      "arch artery",
+      "arch nerve",
+      "aortic arch arteries",
+      "neural crest",
+      "paraxial mesoderm",
+      "somitomere",
+      "occipital somite",
+      "ectoderm",
+      "endoderm",
+      "Meckel cartilage",
+      "malleus",
+      "incus",
+      "anterior ligament of malleus",
+      "sphenomandibular ligament",
+      "mandible",
+      "intramembranous ossification",
+      "maxillary prominence",
+      "mandibular prominence",
+      "muscles of mastication",
+      "temporalis",
+      "masseter",
+      "medial pterygoid",
+      "lateral pterygoid",
+      "mylohyoid",
+      "anterior belly of digastric",
+      "tensor tympani",
+      "tensor veli palatini",
+      "trigeminal nerve",
+      "cranial nerve V",
+      "maxillary nerve",
+      "mandibular nerve",
+      "maxillary artery",
+      "Reichert cartilage",
+      "stapes",
+      "styloid process",
+      "stylohyoid ligament",
+      "lesser horn of hyoid",
+      "upper body of hyoid",
+      "muscles of facial expression",
+      "stapedius",
+      "stylohyoid",
+      "posterior belly of digastric",
+      "facial nerve",
+      "cranial nerve VII",
+      "stapedial artery",
+      "greater horn of hyoid",
+      "lower body of hyoid",
+      "stylopharyngeus",
+      "glossopharyngeal nerve",
+      "cranial nerve IX",
+      "common carotid artery",
+      "internal carotid artery",
+      "thyroid cartilage",
+      "epiglottic cartilage",
+      "cricothyroid",
+      "levator veli palatini",
+      "pharyngeal constrictors",
+      "superior laryngeal nerve",
+      "vagus nerve",
+      "cranial nerve X",
+      "arch of aorta",
+      "right subclavian artery",
+      "cricoid cartilage",
+      "arytenoid cartilage",
+      "corniculate cartilage",
+      "cuneiform cartilage",
+      "intrinsic muscles of the larynx",
+      "recurrent laryngeal nerve",
+      "right recurrent laryngeal nerve",
+      "left recurrent laryngeal nerve",
+      "ductus arteriosus",
+      "ligamentum arteriosum",
+      "pulmonary artery",
+      "cervical sinus",
+      "Treacher Collins syndrome",
+      "mandibulofacial dysostosis",
+      "TCOF1",
+      "Pierre Robin sequence",
+      "micrognathia",
+      "glossoptosis",
+      "cleft palate",
+      "hemifacial microsomia",
+      "first arch syndrome",
+      "DiGeorge syndrome",
+      "22q11.2 deletion",
+      "neurocristopathy",
+      "conductive deafness",
+      "hoarseness",
+      "thyroidectomy"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "arch_plan",
+      "label": "One body plan, repeated six times",
+      "role": "context",
+      "group": "The plan",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "pharyngeal arch",
+        "branchial arch",
+        "week 4",
+        "six pairs",
+        "bars of tissue",
+        "lateral wall of the pharynx",
+        "segmental",
+        "arch cartilage",
+        "arch muscle",
+        "arch nerve",
+        "arch artery"
+      ],
+      "narration": "In week four the future head and neck are six pairs of bars running round the side wall of the pharynx. Do not memorise them as six separate things. Every arch is built to the same plan: a cartilage bar, a block of muscle, one cranial nerve and one artery, wrapped in ectoderm outside and endoderm inside. Learn the plan once, then fill in five columns of a table."
+    },
+    {
+      "key": "arch_layers",
+      "label": "Three germ layers, three jobs",
+      "role": "part",
+      "group": "The plan",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "ectoderm",
+        "endoderm",
+        "mesoderm",
+        "neural crest",
+        "paraxial mesoderm",
+        "somitomere",
+        "occipital somite",
+        "skeletal element",
+        "connective tissue",
+        "arch musculature"
+      ],
+      "narration": "Ectoderm covers the arch outside, endoderm lines it inside, and the core is filled by mesoderm invaded by neural crest cells. The division of labour is exact and it is examinable. Neural crest builds the skeleton and the connective tissue of the arch. Paraxial mesoderm builds the muscles. That is why a neural crest disorder wrecks the face and the jaw while the muscles that move them are still innervated normally."
+    },
+    {
+      "key": "nerve_rule",
+      "label": "The nerve follows its muscle wherever the muscle goes",
+      "role": "part",
+      "group": "The plan",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "arch nerve",
+        "one nerve per arch",
+        "cranial nerve V",
+        "cranial nerve VII",
+        "cranial nerve IX",
+        "cranial nerve X",
+        "muscle migration",
+        "motor supply",
+        "special visceral efferent",
+        "branchiomotor"
+      ],
+      "narration": "Each arch is claimed by one cranial nerve: the fifth for arch one, the seventh for arch two, the ninth for arch three, the tenth for arches four and six. The muscle of an arch may migrate a long way from where it started, but it keeps the nerve it was born with. That single rule is why the stapedius deep in the middle ear is supplied by the facial nerve and why the stylopharyngeus, alone among the pharyngeal muscles, answers to the glossopharyngeal."
+    },
+    {
+      "key": "arch1",
+      "label": "Arch 1 — the mandibular arch: chewing, and two ear ossicles",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "first arch",
+        "mandibular arch",
+        "maxillary prominence",
+        "mandibular prominence",
+        "Meckel cartilage",
+        "malleus",
+        "incus",
+        "anterior ligament of malleus",
+        "sphenomandibular ligament",
+        "mandible",
+        "intramembranous ossification",
+        "muscles of mastication",
+        "temporalis",
+        "masseter",
+        "medial pterygoid",
+        "lateral pterygoid",
+        "mylohyoid",
+        "anterior belly of digastric",
+        "tensor tympani",
+        "tensor veli palatini",
+        "trigeminal nerve",
+        "cranial nerve V",
+        "maxillary artery"
+      ],
+      "narration": "Arch one splits into a maxillary and a mandibular prominence and builds the jaws. Its cartilage is Meckel's cartilage, and its fate is worth stating precisely: the dorsal end becomes the malleus and incus, the middle becomes the anterior ligament of the malleus and the sphenomandibular ligament, and the rest is resorbed while the mandible ossifies in membrane beside it. The mandible is not Meckel's cartilage turned to bone. Its muscles are the four muscles of mastication plus mylohyoid, the anterior belly of digastric, tensor tympani and tensor veli palatini. Nerve, trigeminal. Artery, the maxillary."
+    },
+    {
+      "key": "arch2",
+      "label": "Arch 2 — the hyoid arch: the face that smiles",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "second arch",
+        "hyoid arch",
+        "Reichert cartilage",
+        "stapes",
+        "styloid process",
+        "stylohyoid ligament",
+        "lesser horn of hyoid",
+        "upper body of hyoid",
+        "muscles of facial expression",
+        "orbicularis oculi",
+        "orbicularis oris",
+        "buccinator",
+        "occipitofrontalis",
+        "platysma",
+        "stapedius",
+        "stylohyoid",
+        "posterior belly of digastric",
+        "facial nerve",
+        "cranial nerve VII",
+        "stapedial artery",
+        "cervical sinus"
+      ],
+      "narration": "Arch two is the hyoid arch and its cartilage is Reichert's. From it come the stapes, the styloid process, the stylohyoid ligament, and the lesser horn and upper body of the hyoid. Its muscles are all the muscles of facial expression, plus stapedius, stylohyoid and the posterior belly of digastric — which is exactly the motor territory of the facial nerve. Arch two also overgrows arches three and four, burying them in a space called the cervical sinus. Remember that overgrowth: it is where the branchial cyst comes from."
+    },
+    {
+      "key": "arch3",
+      "label": "Arch 3 — one muscle, one nerve, half a hyoid",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "third arch",
+        "greater horn of hyoid",
+        "lower body of hyoid",
+        "stylopharyngeus",
+        "glossopharyngeal nerve",
+        "cranial nerve IX",
+        "common carotid artery",
+        "proximal internal carotid artery"
+      ],
+      "narration": "Arch three is the easiest to learn because it has one of everything. Its cartilage gives the greater horn and the lower body of the hyoid — so the hyoid is a two-arch bone, upper half from arch two and lower half from arch three. Its only muscle is stylopharyngeus and its nerve is the glossopharyngeal. Its artery becomes the common carotid and the first part of the internal carotid."
+    },
+    {
+      "key": "arch4",
+      "label": "Arch 4 — swallowing, and one laryngeal muscle",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "fourth arch",
+        "thyroid cartilage",
+        "epiglottic cartilage",
+        "cricothyroid",
+        "levator veli palatini",
+        "superior pharyngeal constrictor",
+        "middle pharyngeal constrictor",
+        "inferior pharyngeal constrictor",
+        "superior laryngeal nerve",
+        "external laryngeal nerve",
+        "vagus nerve",
+        "cranial nerve X",
+        "arch of aorta",
+        "right subclavian artery"
+      ],
+      "narration": "Arch four builds the thyroid and epiglottic cartilages, the three pharyngeal constrictors, levator veli palatini and one laryngeal muscle, the cricothyroid. Its nerve is the superior laryngeal branch of the vagus, and the external laryngeal branch of it runs with the superior thyroid artery — which is why cricothyroid is the muscle at risk in thyroid surgery and why the injured patient loses the top of the voice rather than the whole of it. Its artery is the arch of the aorta on the left and the right subclavian artery on the right."
+    },
+    {
+      "key": "arch5",
+      "label": "Arch 5 — the one that never counts",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#d5d8dc",
+      "terms": [
+        "fifth arch",
+        "never forms",
+        "regresses immediately",
+        "no derivatives",
+        "arches 1 2 3 4 and 6"
+      ],
+      "narration": "There is no fifth arch to learn. In the human it either never forms or regresses as soon as it appears, and it leaves no cartilage, no muscle, no nerve and no artery. Say the surviving arches out loud as one, two, three, four and six, and the missing number stops being a trap in the question."
+    },
+    {
+      "key": "arch6",
+      "label": "Arch 6 — the voice",
+      "role": "part",
+      "group": "Arches",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "sixth arch",
+        "cricoid cartilage",
+        "arytenoid cartilage",
+        "corniculate cartilage",
+        "cuneiform cartilage",
+        "intrinsic muscles of the larynx",
+        "posterior cricoarytenoid",
+        "except cricothyroid",
+        "recurrent laryngeal nerve",
+        "vagus nerve",
+        "ductus arteriosus",
+        "left pulmonary artery",
+        "right pulmonary artery"
+      ],
+      "narration": "Arch six gives the cricoid, arytenoid, corniculate and cuneiform cartilages and every intrinsic muscle of the larynx except the cricothyroid, which belonged to arch four. Its nerve is therefore the recurrent laryngeal branch of the vagus. Its artery becomes the proximal pulmonary artery on both sides, and on the left it also leaves the ductus arteriosus."
+    },
+    {
+      "key": "artery_fates",
+      "label": "The arch arteries, and why the two sides end up different",
+      "role": "part",
+      "group": "Nerves and arteries",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "terms": [
+        "aortic arch arteries",
+        "aortic sac",
+        "dorsal aorta",
+        "first arch artery",
+        "maxillary artery",
+        "second arch artery",
+        "stapedial artery",
+        "third arch artery",
+        "common carotid",
+        "internal carotid",
+        "fourth arch artery",
+        "arch of aorta",
+        "right subclavian artery",
+        "sixth arch artery",
+        "pulmonary artery",
+        "ductus arteriosus",
+        "regression",
+        "asymmetry"
+      ],
+      "narration": "Each arch is fed by an artery running from the aortic sac to the dorsal aorta, and the adult pattern is what survives after selective regression. Arch one leaves part of the maxillary artery, arch two the small stapedial artery, arch three the common carotid and the start of the internal carotid, arch four the aortic arch on the left and the right subclavian on the right, arch six the pulmonary arteries with the ductus arteriosus on the left. The right side loses more than the left, and that asymmetry is the whole explanation of the next point."
+    },
+    {
+      "key": "recurrent_nerves",
+      "label": "Why the left recurrent laryngeal nerve goes down into the chest",
+      "role": "part",
+      "group": "Nerves and arteries",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "terms": [
+        "recurrent laryngeal nerve",
+        "right recurrent laryngeal nerve",
+        "left recurrent laryngeal nerve",
+        "hooks under",
+        "right subclavian artery",
+        "ductus arteriosus",
+        "ligamentum arteriosum",
+        "arch of aorta",
+        "descent of the heart",
+        "hoarseness",
+        "left vocal cord palsy",
+        "bronchial carcinoma",
+        "mediastinal lymph node",
+        "aortic aneurysm",
+        "thyroidectomy"
+      ],
+      "narration": "The nerve of arch six is caught under the artery of arch six on each side. On the right, the fifth and sixth arch arteries regress, so the nerve slips up until it is caught by the next artery still standing — the fourth, which is the right subclavian. On the left the sixth arch artery persists as the ductus arteriosus, so the nerve stays hooked around it and is dragged into the chest as the heart descends. That is why a left vocal cord palsy sends you looking at the lung apex, the aortic arch and the mediastinal nodes, and why a right-sided one is almost always in the neck."
+    },
+    {
+      "key": "first_arch_syndromes",
+      "label": "First arch syndromes — a neural crest failure",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "first arch syndrome",
+        "Treacher Collins syndrome",
+        "mandibulofacial dysostosis",
+        "TCOF1",
+        "neural crest migration failure",
+        "malar hypoplasia",
+        "downslanting palpebral fissures",
+        "coloboma of the lower eyelid",
+        "malformed external ear",
+        "conductive deafness",
+        "Pierre Robin sequence",
+        "micrognathia",
+        "glossoptosis",
+        "cleft palate",
+        "airway obstruction",
+        "hemifacial microsomia"
+      ],
+      "narration": "Too few neural crest cells reach arch one and the whole arch is under-built. In Treacher Collins syndrome the cheekbones and mandible are hypoplastic, the palpebral fissures slant downwards, the lower lid is notched, the external ear is malformed and the hearing loss is conductive because the ossicles came from the same arch. In the Pierre Robin sequence a small mandible pushes the tongue back and up, which both obstructs the airway and blocks the palatal shelves from meeting — one primary defect, three consequences in a chain. The neonatal problem is the airway, not the cleft."
+    },
+    {
+      "key": "second_arch_clinical",
+      "label": "Second arch clinical — the facial nerve and the cervical sinus",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "facial nerve",
+        "congenital facial palsy",
+        "Moebius syndrome",
+        "stapedius",
+        "hyperacusis",
+        "cervical sinus",
+        "branchial cyst",
+        "lateral cervical cyst",
+        "anterior border of sternocleidomastoid",
+        "second arch overgrowth"
+      ],
+      "narration": "Two things follow from arch two. First, everything the facial nerve supplies came from one arch, so a single nerve lesion takes the whole face, taste from the front of the tongue and the stapedius reflex together — which is why hyperacusis belongs in a facial palsy history. Second, arch two overgrows the arches below it and the buried space, the cervical sinus, should disappear. When it does not, a branchial cyst appears in the young adult at the anterior border of sternocleidomastoid. The cyst is a cleft remnant, not an arch derivative, and this scene names it only so it is not learned twice."
+    },
+    {
+      "key": "neurocrest_clinical",
+      "label": "When the crest fails everywhere at once",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "terms": [
+        "DiGeorge syndrome",
+        "22q11.2 deletion",
+        "neurocristopathy",
+        "third and fourth arches",
+        "conotruncal septation",
+        "persistent truncus arteriosus",
+        "tetralogy of Fallot",
+        "interrupted aortic arch",
+        "hypocalcaemia",
+        "thymic aplasia",
+        "abnormal facies",
+        "cleft palate",
+        "retinoic acid embryopathy"
+      ],
+      "narration": "Neural crest cells serve the arches and the outflow tract of the heart, so one failure produces defects in both. In the twenty-two q eleven deletion the third and fourth arch territory is under-built: a small jaw and abnormal facies, cleft palate, a conotruncal heart defect such as interrupted aortic arch or truncus arteriosus, and the pouch derivatives missing behind them. When you find an arch defect, examine the heart, and when you find a conotruncal defect, look at the face. Excess retinoic acid does the same thing to the same cells, which is why isotretinoin is not given in pregnancy."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Six bars on the side of the neck",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The plan"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arch_plan",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Look at the week four embryo from the side. The head is bent over a series of bars stacked one above the other on the side of the pharynx, separated outside by clefts and inside by pouches. Six pairs form. Count them from the top and remember that the fifth is not there to be counted."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Cut one arch across and see the five ingredients",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The plan"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arch_layers",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch_layers",
+          "to": "nerve_rule",
+          "kind": "muscle from mesoderm keeps the nerve of its own arch, giving"
+        }
+      ],
+      "narration": "Cut one arch across and the plan is visible in a single picture. Ectoderm on the outside, endoderm on the inside, and in the core a cartilage bar, a muscle mass, a nerve and an artery. Neural crest makes the bar and the connective tissue, mesoderm makes the muscle. The nerve belongs to the muscle and never lets go of it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "Fill the table, arch by arch",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Arches"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arch-series",
+          "path": [
+            "arch1",
+            "arch2",
+            "arch3",
+            "arch4",
+            "arch5",
+            "arch6"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "arch1",
+            "arch2"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Now go down the series once and fill four columns for each arch. One: Meckel's cartilage, malleus and incus, the muscles of mastication, the trigeminal. Two: Reichert's cartilage, stapes and styloid, the muscles of facial expression, the facial. Three: greater horn of hyoid, stylopharyngeus, the glossopharyngeal. Four: thyroid cartilage, the constrictors and cricothyroid, the superior laryngeal branch of the vagus. Six: the remaining laryngeal cartilages and all the other intrinsic laryngeal muscles, the recurrent laryngeal branch of the vagus. Five: nothing. Notice the hyoid is shared between arches two and three, and the larynx between arches four and six."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The arteries, and the nerve that got left behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Nerves and arteries"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "artery_fates",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arch-artery-remodelling",
+          "path": [
+            "artery_fates",
+            "arch4",
+            "arch6",
+            "recurrent_nerves"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "arch4",
+            "arch6"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Put the arteries on and let them regress. On the right, the sixth arch artery disappears, so the recurrent laryngeal nerve rides up and hooks under the fourth arch artery — the right subclavian. On the left, the sixth arch artery survives as the ductus arteriosus, so the nerve stays under it and is towed down into the chest by the descending heart. Two different courses, one rule: each nerve hooks under the lowest arch artery that is still there."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "One arch fails, and you can predict the child",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch1",
+          "to": "first_arch_syndromes",
+          "kind": "too few neural crest cells reaching it gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch2",
+          "to": "second_arch_clinical",
+          "kind": "its single nerve and its overgrowth give"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch4",
+          "to": "neurocrest_clinical",
+          "kind": "crest failure in the third and fourth arch territory gives"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "vessel",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Hang a syndrome on each arch. Arch one under-built: Treacher Collins, with a small jaw, a malformed ear and conductive deafness, or the Pierre Robin sequence where the small mandible obstructs the airway and blocks the palate. Arch two: the facial nerve territory taken as one, and a branchial cyst from the cervical sinus. Arches three and four with the heart's outflow: the twenty-two q eleven deletion. The pattern to carry into the exam is that arch defects and conotruncal heart defects travel together, because they are the same cells failing."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram for this structure and no 3d option, so deferred_modes carries diagram only. A 3d re-authoring would be defensible the day a provider holds staged pharyngeal-region geometry, but the curriculum does not ask for it and this scene does not claim it.",
+    "Status is 'planned'. Thirteen regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a lateral view of the week-4 embryo with six arches numbered on the side wall, the fifth drawn as an outline that vanishes; a transverse section through one arch showing ectoderm outside, endoderm inside, and cartilage, muscle, nerve and artery in the core, colour-coded by germ-layer origin with neural crest distinguished from paraxial mesoderm; a five-column derivatives table with one row per arch; a paired left-and-right diagram of the aortic sac, the six arch arteries and the dorsal aortae, with the regressing segments drawn dotted and both recurrent laryngeal nerves drawn in place before and after descent of the heart; and a final arch diagram with the syndromes pinned at the arch each arises from.",
+    "The arch colour key must be identical in every panel — arch one the same colour in the lateral view, the derivatives table, the artery diagram and the syndrome map. The entire teaching point is that cartilage, muscle, nerve, artery and syndrome all belong to the same numbered block, and re-colouring between panels destroys exactly that.",
+    "The artery panel must draw the left and right sides together, not one generic side. The asymmetry of the two recurrent laryngeal nerves is the payoff of the beat and it is invisible on a single-sided drawing.",
+    "Beat 3 traces concept:arch-series and beat 4 traces concept:arch-artery-remodelling. In each the subject is a progression through the series or a pattern of regression over time, neither of which is a drawn region.",
+    "Beat 5 authors PEEL_LAYER on the vessel layer to take the arch arteries off the syndrome map after beat 4 has used them. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the arteries are needed to explain the nerves and then clutter the clinical panel.",
+    "'Pharyngeal pouches' is NOT claimed in covers[]. The pouches are the endodermal side of the same apparatus and are named here only as the inner lining of the arch. Thymus, parathyroids, tonsil and the tubotympanic recess belong to that entry and are deliberately absent from this narration.",
+    "'Pharyngeal clefts & membranes' is NOT claimed. The cervical sinus and the branchial cyst are named in the second-arch beat because the overgrowth that buries them is an arch event, but the clefts themselves, the tympanic membrane and the full account of cervical sinus remnants belong to that entry.",
+    "'Thyroid gland development' is NOT claimed. The descent from the foramen cecum, the thyroglossal duct and the ectopic thyroid are a separate entry; the external laryngeal nerve is mentioned only in its surgical relation to the superior thyroid artery.",
+    "'Facial prominences' and 'Palate formation' are NOT claimed. The maxillary and mandibular prominences are named as the split of arch one, and cleft palate appears only as a consequence in the Pierre Robin sequence; the prominences, the fusion lines and the palatal shelves belong to the Head, Face & Palate topic.",
+    "Aortic arch artery remodelling is taught here only as far as it explains the arch derivatives and the recurrent laryngeal nerves. The full account of the fates of all six pairs, the double aortic arch, the aberrant right subclavian artery and coarctation belongs with the Cardiovascular Development topic and appears here in match.terms only, so a highlighted term still reaches this scene until those exist.",
+    "The fifth arch is authored as a region rather than omitted, because a student who is never shown the gap reliably mis-numbers arch six as arch five. It carries no derivatives by design.",
+    "Week numbers are the standard teaching approximations — arches appearing through week four, cervical sinus obliterating in week seven. Texts differ by several days and the narration gives them as approximations.",
+    "Syndromes are named with their embryological mechanism and their classic presentation only. Management is paediatrics and surgery, not embryology, and is deliberately absent."
+  ]
+}

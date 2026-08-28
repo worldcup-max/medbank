@@ -1,0 +1,829 @@
+{
+  "schema": 2,
+  "id": "gross__forearm-hand__carpal-tunnel",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Forearm & Hand",
+  "structure": "Carpal tunnel",
+  "covers": [
+    "Carpal tunnel"
+  ],
+  "learning_goal": "Name the four bony pillars and the roof of the carpal tunnel, list the ten things inside it, name the things that pass outside it, and explain from that list why carpal tunnel syndrome numbs the fingers but spares the palm.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "carpal tunnel",
+      "wrist",
+      "hand",
+      "forearm",
+      "upper limb",
+      "median nerve",
+      "carpal tunnel syndrome",
+      "peripheral nerve compression"
+    ],
+    "terms": [
+      "carpal tunnel",
+      "flexor retinaculum",
+      "transverse carpal ligament",
+      "carpal bones",
+      "scaphoid",
+      "tubercle of scaphoid",
+      "trapezium",
+      "tubercle of trapezium",
+      "pisiform",
+      "hamate",
+      "hook of hamate",
+      "lunate",
+      "capitate",
+      "triquetral",
+      "trapezoid",
+      "carpal arch",
+      "flexor digitorum superficialis",
+      "flexor digitorum profundus",
+      "flexor pollicis longus",
+      "median nerve",
+      "carpal tunnel syndrome",
+      "thenar eminence",
+      "thenar wasting",
+      "recurrent branch of median nerve",
+      "palmar cutaneous branch",
+      "palmaris longus",
+      "flexor carpi radialis",
+      "ulnar nerve",
+      "Guyon's canal",
+      "Tinel sign",
+      "Phalen test",
+      "flexor retinaculum release"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "flexor_retinaculum",
+      "name": "flexor retinaculum of right wrist",
+      "label": "Flexor retinaculum",
+      "role": "part",
+      "group": "Roof",
+      "layer": "fascia",
+      "color": "#d8c39e",
+      "refs": {
+        "bodyparts3d": "FMA40120"
+      },
+      "terms": [
+        "flexor retinaculum",
+        "transverse carpal ligament",
+        "roof of the carpal tunnel"
+      ],
+      "narration": "A thick band, about two centimetres square, stretched across the front of the carpal arch. It is the roof and it does not stretch — which is the whole problem in carpal tunnel syndrome, and the reason the treatment is to cut it."
+    },
+    {
+      "key": "scaphoid",
+      "name": "right scaphoid",
+      "label": "Scaphoid",
+      "role": "part",
+      "group": "Lateral pillar",
+      "layer": "bone",
+      "color": "#efe6cd",
+      "refs": {
+        "bodyparts3d": "FMA24435"
+      },
+      "terms": [
+        "scaphoid",
+        "tubercle of scaphoid",
+        "lateral pillar"
+      ],
+      "narration": "Its tubercle is the upper lateral post the retinaculum is tied to. You feel it at the base of the thenar eminence when the wrist is bent back."
+    },
+    {
+      "key": "trapezium",
+      "name": "right trapezium",
+      "label": "Trapezium",
+      "role": "part",
+      "group": "Lateral pillar",
+      "layer": "bone",
+      "color": "#eae0c4",
+      "refs": {
+        "bodyparts3d": "FMA24443"
+      },
+      "terms": [
+        "trapezium",
+        "tubercle of trapezium",
+        "groove for flexor carpi radialis"
+      ],
+      "narration": "The lower lateral post. Its tubercle has a groove beside it, and flexor carpi radialis runs in that groove — inside the retinaculum's grip but outside the tunnel proper."
+    },
+    {
+      "key": "pisiform",
+      "name": "right pisiform",
+      "label": "Pisiform",
+      "role": "part",
+      "group": "Medial pillar",
+      "layer": "bone",
+      "color": "#efe6cd",
+      "refs": {
+        "bodyparts3d": "FMA24441"
+      },
+      "terms": [
+        "pisiform",
+        "medial pillar",
+        "sesamoid bone"
+      ],
+      "narration": "The upper medial post. A pea-sized sesamoid sitting in the tendon of flexor carpi ulnaris — the easiest carpal bone to feel on yourself."
+    },
+    {
+      "key": "hamate",
+      "name": "right hamate",
+      "label": "Hamate",
+      "role": "part",
+      "group": "Medial pillar",
+      "layer": "bone",
+      "color": "#eae0c4",
+      "refs": {
+        "bodyparts3d": "FMA24448"
+      },
+      "terms": [
+        "hamate",
+        "hook of hamate",
+        "medial pillar",
+        "Guyon's canal"
+      ],
+      "narration": "The lower medial post. Its hook is the ridge you press on beyond the pisiform; the ulnar nerve passes between the two, in Guyon's canal, on top of the retinaculum and outside the tunnel."
+    },
+    {
+      "key": "lunate",
+      "name": "right lunate",
+      "label": "Lunate",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e3d8b9",
+      "refs": {
+        "bodyparts3d": "FMA24437"
+      },
+      "terms": [
+        "lunate",
+        "floor of the carpal tunnel",
+        "lunate dislocation"
+      ],
+      "narration": "Part of the floor. A dislocated lunate falls forwards into the tunnel and squeezes the median nerve acutely — the one presentation of these symptoms that is an emergency."
+    },
+    {
+      "key": "capitate",
+      "name": "right capitate",
+      "label": "Capitate",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e3d8b9",
+      "refs": {
+        "bodyparts3d": "FMA24446"
+      },
+      "terms": [
+        "capitate",
+        "floor of the carpal tunnel",
+        "largest carpal bone"
+      ],
+      "narration": "The largest carpal bone, at the keystone of the arch. The floor is a curve, not a plate — the bones themselves make the hollow."
+    },
+    {
+      "key": "triquetral",
+      "name": "right triquetral",
+      "label": "Triquetral",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e3d8b9",
+      "refs": {
+        "bodyparts3d": "FMA24439"
+      },
+      "terms": [
+        "triquetral",
+        "triquetrum",
+        "proximal row"
+      ],
+      "narration": "Sits behind the pisiform in the proximal row and completes the medial side of the floor."
+    },
+    {
+      "key": "trapezoid",
+      "name": "right trapezoid",
+      "label": "Trapezoid",
+      "role": "part",
+      "group": "Floor",
+      "layer": "bone",
+      "color": "#e3d8b9",
+      "refs": {
+        "bodyparts3d": "FMA23725"
+      },
+      "terms": [
+        "trapezoid",
+        "distal row"
+      ],
+      "narration": "The small bone between trapezium and capitate, deep in the floor of the arch."
+    },
+    {
+      "key": "fds_humeroulnar",
+      "name": "humeroulnar head of right flexor digitorum superficialis",
+      "label": "Flexor digitorum superficialis — humeroulnar head",
+      "role": "part",
+      "group": "Contents — tendons",
+      "layer": "muscle",
+      "color": "#a83a6a",
+      "refs": {
+        "bodyparts3d": "FMA38638"
+      },
+      "terms": [
+        "flexor digitorum superficialis",
+        "FDS",
+        "four tendons",
+        "contents of the carpal tunnel"
+      ],
+      "narration": "Four tendons enter the tunnel from this muscle. In the tunnel they lie in two pairs — middle and ring in front, index and little behind — inside one common flexor sheath."
+    },
+    {
+      "key": "fds_radial",
+      "name": "radial head of right flexor digitorum superficialis",
+      "label": "Flexor digitorum superficialis — radial head",
+      "role": "part",
+      "group": "Contents — tendons",
+      "layer": "muscle",
+      "color": "#94305c",
+      "refs": {
+        "bodyparts3d": "FMA38640"
+      },
+      "terms": [
+        "radial head of flexor digitorum superficialis"
+      ],
+      "narration": "The second head of the same muscle. Its tendons join the same four."
+    },
+    {
+      "key": "fdp",
+      "name": "right flexor digitorum profundus",
+      "label": "Flexor digitorum profundus",
+      "role": "part",
+      "group": "Contents — tendons",
+      "layer": "muscle",
+      "color": "#7e2b52",
+      "refs": {
+        "bodyparts3d": "FMA38479"
+      },
+      "terms": [
+        "flexor digitorum profundus",
+        "FDP",
+        "four tendons",
+        "deepest in the tunnel"
+      ],
+      "narration": "Four more tendons, lying flat on the floor of the tunnel behind the superficialis pairs."
+    },
+    {
+      "key": "fpl",
+      "name": "right flexor pollicis longus",
+      "label": "Flexor pollicis longus",
+      "role": "part",
+      "group": "Contents — tendons",
+      "layer": "muscle",
+      "color": "#6f2a63",
+      "refs": {
+        "bodyparts3d": "FMA38482"
+      },
+      "terms": [
+        "flexor pollicis longus",
+        "FPL",
+        "ninth tendon",
+        "radial bursa"
+      ],
+      "narration": "The ninth tendon, most lateral, in its own sheath. Four plus four plus one is nine tendons — and the median nerve makes ten structures in the tunnel."
+    },
+    {
+      "key": "abductor_pollicis_brevis",
+      "name": "right abductor pollicis brevis",
+      "label": "Abductor pollicis brevis",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA37386"
+      },
+      "terms": [
+        "abductor pollicis brevis",
+        "thenar eminence",
+        "recurrent branch of median nerve",
+        "thumb abduction"
+      ],
+      "narration": "The muscle you test for a median nerve lesion: ask the patient to lift the thumb straight off the table against your finger. It arises partly from the retinaculum it sits on."
+    },
+    {
+      "key": "opponens_pollicis",
+      "name": "right opponens pollicis",
+      "label": "Opponens pollicis",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#cf5040",
+      "refs": {
+        "bodyparts3d": "FMA37390"
+      },
+      "terms": [
+        "opponens pollicis",
+        "opposition",
+        "thenar eminence"
+      ],
+      "narration": "Swings the thumb across the palm to meet the fingers. Lose it and the hand can no longer grip anything round."
+    },
+    {
+      "key": "fpb_superficial",
+      "name": "superficial head of right flexor pollicis brevis",
+      "label": "Flexor pollicis brevis — superficial head",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#c4433a",
+      "refs": {
+        "bodyparts3d": "FMA65198"
+      },
+      "terms": [
+        "flexor pollicis brevis",
+        "superficial head",
+        "thenar eminence"
+      ],
+      "narration": "The third thenar muscle supplied by the median nerve. All three waste together, and the thenar eminence flattens."
+    },
+    {
+      "key": "fpb_deep",
+      "name": "deep head of right flexor pollicis brevis",
+      "label": "Flexor pollicis brevis — deep head",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "refs": {
+        "bodyparts3d": "FMA46110"
+      },
+      "terms": [
+        "deep head of flexor pollicis brevis",
+        "ulnar nerve"
+      ],
+      "narration": "The exception: this head is usually ulnar. It is why a little thumb flexion survives even a complete median nerve lesion."
+    },
+    {
+      "key": "palmaris_longus",
+      "name": "right palmaris longus",
+      "label": "Palmaris longus",
+      "role": "part",
+      "group": "Passing outside",
+      "layer": "muscle",
+      "color": "#e07a5f",
+      "refs": {
+        "bodyparts3d": "FMA38463"
+      },
+      "terms": [
+        "palmaris longus",
+        "superficial to the retinaculum",
+        "palmar aponeurosis",
+        "surgical landmark"
+      ],
+      "narration": "Runs over the roof, not under it, and blends into the palmar aponeurosis. The median nerve lies just deep and lateral to it — which is exactly why a careless cut at the wrist finds the nerve."
+    },
+    {
+      "key": "fcr",
+      "name": "right flexor carpi radialis",
+      "label": "Flexor carpi radialis",
+      "role": "part",
+      "group": "Passing outside",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA38460"
+      },
+      "terms": [
+        "flexor carpi radialis",
+        "groove in the trapezium",
+        "outside the carpal tunnel"
+      ],
+      "narration": "Slips into its own groove in the trapezium, in a split layer of the retinaculum. Examiners like this one: it is under the retinaculum but never in the tunnel."
+    },
+    {
+      "key": "fcu_ulnar",
+      "name": "ulnar head of right flexor carpi ulnaris",
+      "label": "Flexor carpi ulnaris — ulnar head",
+      "role": "part",
+      "group": "Passing outside",
+      "layer": "muscle",
+      "color": "#93382f",
+      "refs": {
+        "bodyparts3d": "FMA38619"
+      },
+      "terms": [
+        "flexor carpi ulnaris",
+        "pisiform",
+        "outside the carpal tunnel"
+      ],
+      "narration": "Stops at the pisiform and never enters the tunnel. It is the tendon that leads your thumb to the pisiform, and the pisiform that leads you to Guyon's canal."
+    },
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "context",
+      "group": "Forearm bones",
+      "layer": "bone",
+      "color": "#d9cfb4",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "distal radius",
+        "Colles fracture"
+      ],
+      "narration": "The tunnel begins where the radius ends. A badly healed Colles fracture is one of the classic causes of a tunnel that has become too small."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "context",
+      "group": "Forearm bones",
+      "layer": "bone",
+      "color": "#d3c8ab",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "head of ulna"
+      ],
+      "narration": "Sits medial and stops short of the carpus."
+    },
+    {
+      "key": "mc1",
+      "name": "right first metacarpal bone",
+      "label": "First metacarpal",
+      "role": "context",
+      "group": "Hand bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24464"
+      },
+      "terms": [
+        "first metacarpal",
+        "thumb"
+      ],
+      "narration": "The thumb ray. The thenar muscles run from the retinaculum to its base."
+    },
+    {
+      "key": "mc3",
+      "name": "right third metacarpal bone",
+      "label": "Third metacarpal",
+      "role": "context",
+      "group": "Hand bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24468"
+      },
+      "terms": [
+        "third metacarpal",
+        "middle finger"
+      ],
+      "narration": "The middle ray, straight ahead of the tunnel's mouth — the line the long flexor tendons take into the palm."
+    },
+    {
+      "key": "mc5",
+      "name": "right fifth metacarpal bone",
+      "label": "Fifth metacarpal",
+      "role": "context",
+      "group": "Hand bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24472"
+      },
+      "terms": [
+        "fifth metacarpal",
+        "little finger",
+        "hypothenar"
+      ],
+      "narration": "The little finger ray, on the ulnar side — the territory the ulnar nerve keeps even when the median nerve is dead."
+    }
+  ],
+  "views": [
+    {
+      "mode": "associated_organs",
+      "beat": 1,
+      "title": "Where the tunnel is",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Roof",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The carpal tunnel is the space between the front of the wrist bones and the band stretched across them. Everything that has to reach the palm from the front of the forearm either goes through it or squeezes past it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "The floor is an arch",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Contents — tendons"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Passing outside"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Thenar muscles"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lateral pillar"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Medial pillar"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Eight carpal bones, two rows of four, and they do not lie flat. The row curls forwards at each end, so the bones alone already make a gutter. The tunnel is that gutter with a lid on it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "Four pillars",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Lateral pillar",
+            "Medial pillar"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "scaphoid",
+          "to": "pisiform",
+          "kind": "proximal attachments of the retinaculum"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trapezium",
+          "to": "hamate",
+          "kind": "distal attachments of the retinaculum"
+        }
+      ],
+      "narration": "The retinaculum is tied to four bony points. Laterally the tubercle of the scaphoid and the tubercle of the trapezium; medially the pisiform and the hook of the hamate. Proximal pair first, distal pair second — that is the order to recite them in."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Put the lid on",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "flexor_retinaculum",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "flexor_retinaculum",
+          "to": "Lateral pillar",
+          "kind": "attaches to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "flexor_retinaculum",
+          "to": "Medial pillar",
+          "kind": "attaches to"
+        }
+      ],
+      "narration": "The retinaculum bridges the four pillars and turns the gutter into a closed tunnel. Bone on three sides, a ligament on the fourth: nothing here can give way when the contents swell."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Cut across the tunnel",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Forearm bones"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents — tendons",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "This is the section every exam draws. Roof in front, carpal arch behind, and inside: the four superficialis tendons in two pairs, the four profundus tendons flat on the floor, flexor pollicis longus on the lateral side, and the median nerve pressed up against the roof."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Nine tendons",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Contents — tendons"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hand bones"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Count them: four from superficialis, four from profundus, one from flexor pollicis longus. Nine tendons and one nerve. Nothing else belongs in here — no artery, no vein of consequence, and no other nerve."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The tenth structure",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Forearm bones"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:median_nerve",
+          "path": [
+            "fds_humeroulnar",
+            "flexor_retinaculum",
+            "abductor_pollicis_brevis",
+            "mc1"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Thenar muscles",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The path traced here is the median nerve. It comes down the forearm behind flexor digitorum superficialis, enters the tunnel under the retinaculum with the nine tendons, and gives off its recurrent branch to the thenar muscles the moment it emerges. That branch is a few millimetres from the skin of the palm — the reason a wrist laceration can cost a thumb its opposition."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "What passes outside",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Forearm bones"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Passing outside",
+            "Contents — tendons"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "palmaris_longus",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Four things pass the wrist without entering the tunnel. Palmaris longus over the roof. Flexor carpi radialis in its own groove in the trapezium. Flexor carpi ulnaris stopping at the pisiform. And the ulnar nerve and artery in Guyon's canal, on top of the retinaculum between pisiform and hook of hamate. That is why carpal tunnel syndrome never affects the little finger."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Take the roof off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Forearm bones"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents — tendons",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Cutting the retinaculum is the operation. The tunnel opens, the pressure falls, and nothing important is lost — the band's only job is to stop the tendons bowstringing forwards when you grip."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "Why the palm is spared",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Thenar muscles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Roof"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hand bones"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "abductor_pollicis_brevis",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fpb_deep",
+          "intensity": 0.5
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Two findings follow from the anatomy. The palmar cutaneous branch leaves the median nerve above the wrist and crosses over the retinaculum, so the skin of the palm keeps its sensation while the fingers go numb — that sign separates a tunnel from a lesion higher up. And of the thenar muscles only the deep head of flexor pollicis brevis is ulnar, so in a long-standing case the eminence flattens but weak thumb flexion remains."
+    }
+  ],
+  "gaps": [
+    "There is no median nerve mesh in the catalog — no peripheral nerve of the upper limb has one — so the single most important content of the carpal tunnel is authored as a traced concept path with narration, not as a model. The same applies to the ulnar nerve and artery in Guyon's canal, the recurrent and palmar cutaneous branches, and the superficial palmar arch.",
+    "The catalog's smallest units here are whole carpal bones, so the tubercle of the scaphoid, the tubercle of the trapezium and the hook of the hamate — the four points the retinaculum is actually tied to — are taught by lighting the whole bone. They were not authored as landmark anchors because the carpal meshes are not in the local mesh set and this run may not fetch anything, so no anchor could be measured; an anchor placed by eye would be worse than none. Deriving them is the obvious next improvement to this scene.",
+    "There is no mesh for the common flexor synovial sheath, the radial bursa, the palmar aponeurosis or the transverse carpal ligament as a structure separate from the flexor retinaculum, so the sheaths the tendons run in are described rather than shown.",
+    "Tendons are not modelled separately from their muscle bellies: a scene that says \"nine tendons in the tunnel\" is showing four muscles whose tendons those are. The count is taught in narration and in the cross-section beat.",
+    "The scaphoid, lunate, capitate, triquetral and trapezoid also appear in the wrist beats of the Radius & ulna scene. That is deliberate overlap — this scene is the one that teaches them as the wall of a tunnel."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  }
+}

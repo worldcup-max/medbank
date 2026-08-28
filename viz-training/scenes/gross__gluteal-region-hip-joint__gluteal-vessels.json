@@ -1,0 +1,791 @@
+{
+  "schema": 2,
+  "id": "gross__gluteal-region-hip-joint__gluteal-vessels",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Gluteal Region & Hip Joint",
+  "structure": "Gluteal vessels",
+  "covers": [
+    "Gluteal vessels"
+  ],
+  "learning_goal": "Trace the superior and inferior gluteal arteries from the internal iliac artery to the buttock, use piriformis to say which structure leaves above it and which below, name what each artery supplies, and explain why a torn gluteal artery in a pelvic fracture is so dangerous and why the trochanteric and cruciate anastomoses matter.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "gluteal region",
+      "buttock",
+      "gluteal vessels",
+      "internal iliac artery",
+      "pelvic vasculature",
+      "lower limb blood supply",
+      "hip joint",
+      "pelvic fracture",
+      "anastomoses"
+    ],
+    "terms": [
+      "superior gluteal artery",
+      "inferior gluteal artery",
+      "gluteal vessels",
+      "internal iliac artery",
+      "hypogastric artery",
+      "anterior division of the internal iliac artery",
+      "posterior division of the internal iliac artery",
+      "largest branch of the internal iliac artery",
+      "common iliac artery",
+      "external iliac artery",
+      "internal iliac vein",
+      "greater sciatic foramen",
+      "above piriformis",
+      "below piriformis",
+      "piriformis",
+      "superior gluteal nerve",
+      "inferior gluteal nerve",
+      "sciatic nerve",
+      "internal pudendal artery",
+      "pudendal nerve",
+      "lesser sciatic foramen",
+      "pudendal canal",
+      "superficial branch",
+      "deep branch",
+      "trochanteric anastomosis",
+      "cruciate anastomosis",
+      "medial circumflex femoral artery",
+      "lateral circumflex femoral artery",
+      "first perforating artery",
+      "retinacular vessels",
+      "blood supply of the head of the femur",
+      "avascular necrosis",
+      "artery to the sciatic nerve",
+      "buttock claudication",
+      "pelvic fracture",
+      "gluteal aneurysm",
+      "no palpable pulse in the buttock",
+      "myocutaneous flap",
+      "gluteal advancement flap"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "int_iliac_a",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "hypogastric artery",
+        "anterior division",
+        "posterior division",
+        "superior gluteal artery",
+        "inferior gluteal artery",
+        "buttock claudication"
+      ],
+      "narration": "Both gluteal arteries are branches of this vessel, and it is the only part of their course you can actually see modelled. It is about four centimetres long, then splits into an anterior and a posterior division. The superior gluteal is the largest branch of the posterior division; the inferior gluteal comes off the anterior division. Block this artery and the patient gets buttock pain on walking — claudication in a place people do not expect it."
+    },
+    {
+      "key": "common_iliac_a",
+      "name": "right common iliac artery",
+      "label": "Common iliac artery",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14765"
+      },
+      "terms": [
+        "common iliac artery",
+        "bifurcation of the aorta",
+        "L4",
+        "sacroiliac joint"
+      ],
+      "narration": "The aorta divides at L4 into these two. Each divides again in front of the sacroiliac joint into an internal and an external iliac artery. That fork is where the blood supply of the buttock parts company with the blood supply of the leg."
+    },
+    {
+      "key": "ext_iliac_a",
+      "name": "right external iliac artery",
+      "label": "External iliac artery",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#922b21"
+    ,
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "femoral artery",
+        "inguinal ligament",
+        "profunda femoris",
+        "circumflex femoral arteries"
+      ],
+      "narration": "The other fork. It becomes the femoral artery under the inguinal ligament and supplies the limb. It matters here because the profunda femoris, two steps down from it, gives the two circumflex femoral arteries, which come round the femur to meet the gluteal arteries from behind, and those meetings are the anastomoses in beats 6 and 7."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "aorta",
+        "abdominal aorta",
+        "bifurcation",
+        "L4"
+      ],
+      "narration": "Where the whole supply starts. Follow it down to L4 and the story of the buttock begins at the bifurcation."
+    },
+    {
+      "key": "int_iliac_v",
+      "name": "right internal iliac vein",
+      "label": "Internal iliac vein",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#2e5a86",
+      "refs": {
+        "bodyparts3d": "FMA18887"
+      },
+      "terms": [
+        "internal iliac vein",
+        "superior gluteal vein",
+        "inferior gluteal vein",
+        "venae comitantes",
+        "valveless pelvic veins"
+      ],
+      "narration": "The veins simply mirror the arteries. Superior and inferior gluteal veins accompany their arteries back through the same two gaps and drain into this vessel. The pelvic veins are valveless and freely connected, which is how infection and tumour spread between the pelvis and the vertebral veins."
+    },
+    {
+      "key": "common_iliac_v",
+      "name": "right common iliac vein",
+      "label": "Common iliac vein",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#25496b",
+      "refs": {
+        "bodyparts3d": "FMA21387"
+      },
+      "terms": [
+        "common iliac vein",
+        "inferior vena cava",
+        "venous drainage of the pelvis"
+      ],
+      "narration": "Internal and external iliac veins join to form this, and the two common iliac veins form the inferior vena cava. That is the whole return path from the buttock in one line."
+    },
+    {
+      "key": "piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis",
+      "role": "part",
+      "group": "Gateway",
+      "layer": "muscle",
+      "color": "#7f5aa8",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "above piriformis",
+        "below piriformis",
+        "key to the gluteal region"
+      ],
+      "narration": "The single fact that organises this whole topic. Piriformis fills the greater sciatic foramen, leaving a gap above and a gap below. One artery and one nerve go above. Everything else — the inferior gluteal vessels, the inferior gluteal nerve, the sciatic nerve, the internal pudendal vessels, the pudendal nerve, the posterior cutaneous nerve of the thigh — goes below."
+    },
+    {
+      "key": "glut_med",
+      "name": "right gluteus medius",
+      "label": "Gluteus medius",
+      "role": "part",
+      "group": "Superior gluteal territory",
+      "layer": "muscle",
+      "color": "#c9743a",
+      "refs": {
+        "bodyparts3d": "FMA22330"
+      },
+      "terms": [
+        "gluteus medius",
+        "deep branch of the superior gluteal artery",
+        "superior gluteal nerve",
+        "abduction"
+      ],
+      "narration": "The deep branch of the superior gluteal artery runs forward between medius and minimus, with the superior gluteal nerve beside it. Artery and nerve keep company the whole way, so the same injury takes both and the patient loses abduction as well as blood."
+    },
+    {
+      "key": "glut_min",
+      "name": "right gluteus minimus",
+      "label": "Gluteus minimus",
+      "role": "part",
+      "group": "Superior gluteal territory",
+      "layer": "muscle",
+      "color": "#b3652f",
+      "refs": {
+        "bodyparts3d": "FMA22332"
+      },
+      "terms": [
+        "gluteus minimus",
+        "deep branch of the superior gluteal artery",
+        "plane between medius and minimus"
+      ],
+      "narration": "The other wall of that plane. The deep branch is the reason surgeons call the space between medius and minimus a bloody one."
+    },
+    {
+      "key": "tfl",
+      "name": "right tensor fasciae latae",
+      "label": "Tensor fasciae latae",
+      "role": "part",
+      "group": "Superior gluteal territory",
+      "layer": "muscle",
+      "color": "#d97f5a",
+      "refs": {
+        "bodyparts3d": "FMA22425"
+      },
+      "terms": [
+        "tensor fasciae latae",
+        "superior gluteal artery",
+        "superior gluteal nerve",
+        "end of the deep branch"
+      ],
+      "narration": "The deep branch ends here, at the front of the hip. Same territory as the superior gluteal nerve: medius, minimus and tensor fasciae latae."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Inferior gluteal territory",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "inferior gluteal artery",
+        "superficial branch of the superior gluteal artery",
+        "inferior gluteal nerve",
+        "myocutaneous flap",
+        "gluteal flap"
+      ],
+      "narration": "The main customer of the inferior gluteal artery, and it also takes the superficial branch of the superior gluteal from above. Two arteries into one muscle is what makes it a reliable flap for closing a pressure sore over the sacrum or the ischial tuberosity."
+    },
+    {
+      "key": "gemellus_sup",
+      "name": "right gemellus superior",
+      "label": "Gemellus superior",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#6f4d94",
+      "refs": {
+        "bodyparts3d": "FMA22334"
+      },
+      "terms": [
+        "gemellus superior",
+        "floor of the gluteal region",
+        "inferior gluteal vessels"
+      ],
+      "narration": "Part of the floor the inferior gluteal vessels and the sciatic nerve cross together after they come out below piriformis."
+    },
+    {
+      "key": "obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#634587",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "lesser sciatic foramen",
+        "internal pudendal artery",
+        "pudendal canal"
+      ],
+      "narration": "The internal pudendal artery leaves the pelvis below piriformis, crosses the back of the ischial spine, then turns straight back into the pelvis through the lesser sciatic foramen alongside this muscle's tendon. It only visits the buttock; it does not supply it."
+    },
+    {
+      "key": "quadratus_femoris",
+      "name": "right quadratus femoris",
+      "label": "Quadratus femoris",
+      "role": "part",
+      "group": "Gluteal floor",
+      "layer": "muscle",
+      "color": "#4b3468",
+      "refs": {
+        "bodyparts3d": "FMA22338"
+      },
+      "terms": [
+        "quadratus femoris",
+        "cruciate anastomosis",
+        "medial circumflex femoral artery",
+        "trochanteric anastomosis"
+      ],
+      "narration": "The cruciate anastomosis lies on the back of this muscle, at the level of the lesser trochanter. That is where the inferior gluteal artery meets the two circumflex femoral arteries and the first perforating artery."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "greater sciatic notch",
+        "ischial spine",
+        "posterior superior iliac spine",
+        "pelvic fracture",
+        "greater trochanter"
+      ],
+      "narration": "The superior gluteal artery leaves at the very top of the greater sciatic notch, hard against the bone. A fracture through the notch tears it there, and the torn end retracts back into the pelvis where no pressure can reach it."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacroiliac joint",
+        "greater sciatic foramen",
+        "sacrotuberous ligament",
+        "pressure sore"
+      ],
+      "narration": "The medial wall of the foramen. Surface marking of the superior gluteal artery: the junction of the upper and middle thirds of a line from the posterior superior iliac spine to the top of the greater trochanter."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "greater trochanter",
+        "trochanteric fossa",
+        "trochanteric anastomosis",
+        "retinacular vessels",
+        "head of the femur",
+        "avascular necrosis"
+      ],
+      "narration": "The trochanteric anastomosis sits in the hollow on the inner side of the greater trochanter. The retinacular vessels that feed the head of the femur come off it and run up the neck under the capsule — which is why a fracture of the neck can starve the head."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Where the buttock gets its blood",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parent vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "int_iliac_a",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "int_iliac_a",
+          "path": [
+            "aorta",
+            "common_iliac_a",
+            "int_iliac_a"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The aorta divides at L4. The common iliac artery divides in front of the sacroiliac joint. The internal iliac artery is the one that turns into the pelvis, and both arteries of the buttock come from it. Neither can be felt and neither can be compressed from outside — remember that now, because it is the point of the last beat."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Two divisions, two arteries",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Parent vessels"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "int_iliac_a",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "int_iliac_a",
+            "ext_iliac_a"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The internal iliac artery splits into a posterior and an anterior division. The posterior division gives three branches and the superior gluteal is by far the largest — big enough that it is often called the largest branch of the internal iliac artery outright. The anterior division gives everything else, including the inferior gluteal and the internal pudendal. Two arteries, two divisions: that is the answer to the commonest short question on this topic."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Above piriformis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Inferior gluteal territory"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:superior_gluteal_artery",
+          "path": [
+            "int_iliac_a",
+            "hip_bone",
+            "piriformis",
+            "glut_med",
+            "glut_min",
+            "tfl"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The superior gluteal artery is the only artery that leaves above piriformis, and the superior gluteal nerve is the only nerve. It passes backwards between the lumbosacral trunk and the first sacral nerve, out at the top of the greater sciatic notch, and immediately divides. The superficial branch goes back into gluteus maximus. The deep branch runs forward between medius and minimus to reach tensor fasciae latae."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Below piriformis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superior gluteal territory"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:inferior_gluteal_artery",
+          "path": [
+            "int_iliac_a",
+            "piriformis",
+            "gemellus_sup",
+            "quadratus_femoris",
+            "glut_max"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "quadratus_femoris",
+          "to": "glut_max",
+          "kind": "supplies"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The inferior gluteal artery comes out below piriformis in a crowd: the inferior gluteal nerve, the sciatic nerve, the posterior cutaneous nerve of the thigh, the internal pudendal vessels and the pudendal nerve are all in that gap with it. It supplies gluteus maximus and the structures around the back of the hip, and it gives the small artery that runs inside the sciatic nerve itself."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "The vessel that only passes through",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gluteal floor"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gateway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "obturator_internus",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:internal_pudendal_artery",
+          "path": [
+            "piriformis",
+            "hip_bone",
+            "obturator_internus"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Do not confuse it with the gluteal arteries. The internal pudendal artery leaves the pelvis below piriformis, crosses the back of the ischial spine, and goes straight back in through the lesser sciatic foramen to the perineum. It crosses the buttock and supplies nothing in it. Out through the greater, in through the lesser — say it that way and you will not lose the mark."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "The trochanteric anastomosis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Inferior gluteal territory"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:retinacular_vessels",
+          "path": [
+            "quadratus_femoris",
+            "femur"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "In the hollow on the medial side of the greater trochanter, four arteries meet: the superior gluteal, the inferior gluteal and the two circumflex femoral arteries. From this ring the retinacular vessels run up the neck of the femur under the capsule to feed the head. Break the neck and you tear them, and the head can die — avascular necrosis. That is why a fractured neck of femur in an elderly patient is a vascular emergency as much as a bony one."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 7,
+      "title": "The cruciate anastomosis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Superior gluteal territory"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "quadratus_femoris",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "int_iliac_a",
+          "to": "ext_iliac_a",
+          "kind": "collateral route"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "On the back of quadratus femoris, level with the lesser trochanter, the inferior gluteal artery meets the medial and lateral circumflex femoral arteries and the first perforating artery of profunda femoris. Four vessels crossing — hence the name. It matters because it links the internal iliac artery to the femoral artery. If the external iliac is slowly blocked, blood can still reach the thigh by this route, coming down from the buttock instead of through the groin."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 8,
+      "title": "Why a torn gluteal artery kills",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Inferior gluteal territory"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hip_bone",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "int_iliac_a",
+          "to": "hip_bone",
+          "kind": "at risk in fracture"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "The superior gluteal artery is short, wide and pinned against the top of the greater sciatic notch. A pelvic fracture tears it there, the cut end springs back into the pelvis, and the bleeding cannot be reached from the buttock or pressed from outside. There is no pulse to feel anywhere in the gluteal region. This is why pelvic fractures bleed to death, and why the treatment is a binder and angiographic embolisation rather than a search with a clamp. The same artery is at risk in a penetrating buttock wound and during hip surgery."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 9,
+      "title": "Nerve and artery travel together",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Superior gluteal territory",
+            "Inferior gluteal territory"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The two territories are the same for the artery and for the nerve. Above piriformis: superior gluteal artery and nerve, going to gluteus medius, gluteus minimus and tensor fasciae latae. Below piriformis: inferior gluteal artery and nerve, going to gluteus maximus. Learn one and you have learned the other, and a Trendelenburg gait after buttock surgery tells you which gap was damaged."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 10,
+      "title": "The veins go back the same way",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parent vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gateway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "int_iliac_v",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:gluteal_veins",
+          "path": [
+            "glut_max",
+            "piriformis",
+            "int_iliac_v",
+            "common_iliac_v"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Superior and inferior gluteal veins accompany their arteries as venae comitantes, pass back through the same two gaps, and empty into the internal iliac vein. From there it is the common iliac vein and the inferior vena cava. The pelvic veins have no valves and connect widely, including with the vertebral venous plexus — the route by which a pelvic cancer reaches the spine without ever passing through the lungs."
+    }
+  ],
+  "gaps": [
+    "Neither gluteal artery exists as a model. The catalog holds 26 arteries and none of them is a branch of the internal iliac artery, so the superior gluteal, inferior gluteal and internal pudendal arteries are authored as traced concept paths and taught through the parent vessel that does exist and the muscles they supply. This is the honest second option in the authoring rule: teach it through an adjacent structure that exists. The internal iliac artery, the common and external iliac arteries, the internal iliac vein and the common iliac vein are all real models and all resolve.",
+    "Status is 'candidate', not 'ready'. The scene passes the gate, but the two arteries the curriculum entry names are present only as concept traces, and a human should decide whether tracing them from a real parent vessel across real muscles is enough to call the entry taught. Promote to 'ready' on that decision, or when gluteal artery models exist.",
+    "The branching of the internal iliac artery into an anterior and a posterior division cannot be shown — the model is the undivided trunk. Beat 2 therefore teaches the division by narration over a highlighted trunk, which is weaker than a drawn diagram would be. This is the single strongest argument for also authoring the deferred diagram mode for this entry.",
+    "The trochanteric and cruciate anastomoses are the heart of beats 6 and 7 and neither can be drawn. The medial and lateral circumflex femoral arteries, the first perforating artery and the retinacular vessels have no models, so the anastomoses are traced as concepts onto the bone and muscle they lie on. A diagram would show these far better; the 3D scene contributes the depth and the exact position on quadratus femoris and in the trochanteric fossa.",
+    "The greater sciatic notch, the ischial spine and the trochanteric fossa are sub-features of whole-bone models. Beat 8 turns on the artery being pinned at the top of the notch and can only light the whole hip bone while naming the point. Measured landmark anchors on the pelvis would make beats 3, 5 and 8 substantially better and are the obvious next improvement.",
+    "No ligament of the pelvis is modelled. The sacrotuberous and sacrospinous ligaments complete both sciatic foramina, and the out-through-the-greater, in-through-the-lesser course of the internal pudendal artery in beat 5 is impossible to show properly without the sacrospinous ligament between them.",
+    "The superficial and deep branches of the superior gluteal artery are named and traced as one path. Splitting them into two traces would need branch points that do not exist as geometry, so the distinction is carried in narration and in the two territory groups.",
+    "This scene does not cover Gluteus maximus, Hip joint, Proximal femur or Sciatic nerve. Those muscles and bones appear only as the territory the vessels supply and the frame they run on; the sciatic nerve is named because it shares the gap below piriformis, and it is authored as its own scene."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

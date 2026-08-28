@@ -1,0 +1,642 @@
+{
+  "schema": 2,
+  "id": "gross__heart-pericardium__conducting-system",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Heart & Pericardium",
+  "structure": "Conducting system",
+  "covers": [
+    "Conducting system"
+  ],
+  "learning_goal": "Trace the impulse from the sinoatrial node to the Purkinje fibres, name where each part lies and what it contributes to the ECG, and predict which rhythm fails when a named coronary artery is blocked.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "heart",
+      "cardiac anatomy",
+      "conducting system",
+      "cardiac conduction",
+      "cardiac physiology",
+      "ECG",
+      "electrocardiogram",
+      "arrhythmia",
+      "heart block",
+      "thorax",
+      "mediastinum"
+    ],
+    "terms": [
+      "conducting system",
+      "conducting system of the heart",
+      "sinoatrial node",
+      "SA node",
+      "sinus node",
+      "pacemaker of the heart",
+      "crista terminalis",
+      "sulcus terminalis",
+      "internodal pathways",
+      "anterior internodal tract",
+      "middle internodal tract",
+      "posterior internodal tract",
+      "Bachmann's bundle",
+      "interatrial bundle",
+      "atrioventricular node",
+      "AV node",
+      "triangle of Koch",
+      "tendon of Todaro",
+      "opening of the coronary sinus",
+      "septal cusp of the tricuspid valve",
+      "AV nodal delay",
+      "atrioventricular bundle",
+      "bundle of His",
+      "penetrating bundle",
+      "membranous interventricular septum",
+      "fibrous skeleton of the heart",
+      "annulus fibrosus",
+      "right bundle branch",
+      "left bundle branch",
+      "left anterior fascicle",
+      "left posterior fascicle",
+      "moderator band",
+      "septomarginal trabecula",
+      "Purkinje fibres",
+      "Purkinje fibers",
+      "subendocardial plexus",
+      "P wave",
+      "PR interval",
+      "QRS complex",
+      "sinus rhythm",
+      "escape rhythm",
+      "intrinsic rate",
+      "first degree heart block",
+      "second degree heart block",
+      "complete heart block",
+      "Stokes-Adams attack",
+      "bundle branch block",
+      "atrial fibrillation",
+      "sinoatrial nodal artery",
+      "atrioventricular nodal artery",
+      "right coronary artery",
+      "left anterior descending artery",
+      "septal branches",
+      "inferior myocardial infarction",
+      "bradycardia",
+      "vagus nerve",
+      "sympathetic supply of the heart"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "sa_node",
+      "label": "Sinoatrial (SA) node",
+      "role": "part",
+      "group": "The pacemaker",
+      "layer": "organ",
+      "color": "#e8a33d",
+      "terms": [
+        "sinoatrial node",
+        "SA node",
+        "sinus node",
+        "pacemaker",
+        "crista terminalis",
+        "sulcus terminalis",
+        "sinus rhythm"
+      ],
+      "narration": "A strip of specialised muscle in the wall of the right atrium, at the upper end of the crista terminalis where the superior vena cava joins. It depolarises on its own about 60 to 100 times a minute, faster than anything else in the heart, so it sets the rate. Every normal beat starts here — that is what the word sinus rhythm means."
+    },
+    {
+      "key": "internodal",
+      "label": "Internodal pathways",
+      "role": "part",
+      "group": "Across the atria",
+      "layer": "organ",
+      "color": "#e0b062",
+      "terms": [
+        "internodal pathways",
+        "anterior internodal tract",
+        "middle internodal tract",
+        "posterior internodal tract",
+        "preferential conduction"
+      ],
+      "narration": "Three preferential routes of atrial muscle carry the impulse from the SA node down to the AV node. They are not insulated bundles like the ventricular ones — they are ordinary atrial muscle arranged so the current runs faster along it."
+    },
+    {
+      "key": "bachmann",
+      "label": "Bachmann's bundle",
+      "role": "part",
+      "group": "Across the atria",
+      "layer": "organ",
+      "color": "#d9a04a",
+      "terms": [
+        "Bachmann's bundle",
+        "interatrial bundle",
+        "left atrial activation",
+        "P wave"
+      ],
+      "narration": "A band running from the SA node across the top of the septum into the left atrium. It is why both atria contract almost together, and why the P wave is a single small hump and not two."
+    },
+    {
+      "key": "av_node",
+      "label": "Atrioventricular (AV) node",
+      "role": "part",
+      "group": "The gate",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "atrioventricular node",
+        "AV node",
+        "AV nodal delay",
+        "PR interval",
+        "gatekeeper",
+        "decremental conduction"
+      ],
+      "narration": "Sits in the wall of the right atrium just above the septal cusp of the tricuspid valve. It conducts slowly on purpose, holding the impulse for about a tenth of a second so the atria finish emptying before the ventricles squeeze. That delay is the flat part of the PR interval, and it is also the brake that protects the ventricles in atrial fibrillation."
+    },
+    {
+      "key": "koch",
+      "label": "Triangle of Koch",
+      "role": "part",
+      "group": "The gate",
+      "layer": "organ",
+      "color": "#d98880",
+      "terms": [
+        "triangle of Koch",
+        "tendon of Todaro",
+        "opening of the coronary sinus",
+        "septal cusp of the tricuspid valve",
+        "AV node landmark"
+      ],
+      "narration": "The landmark that finds the AV node in a real heart. Its three sides are the tendon of Todaro behind, the attachment of the septal cusp of the tricuspid valve in front, and the mouth of the coronary sinus below. The node lies at the apex of that triangle, which is why the surgeon and the ablation catheter both keep away from it."
+    },
+    {
+      "key": "his",
+      "label": "Atrioventricular bundle (bundle of His)",
+      "role": "part",
+      "group": "The bridge",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "bundle of His",
+        "atrioventricular bundle",
+        "penetrating bundle",
+        "membranous septum",
+        "only electrical connection"
+      ],
+      "narration": "The continuation of the AV node. It pierces the fibrous skeleton at the membranous part of the interventricular septum and runs down onto the muscular septum. This is the only muscular bridge between atria and ventricles in the whole heart. Cut it, and the ventricles must beat on their own — complete heart block."
+    },
+    {
+      "key": "fibrous_skeleton",
+      "label": "Fibrous skeleton (annuli fibrosi)",
+      "role": "part",
+      "group": "The bridge",
+      "layer": "organ",
+      "color": "#95a5a6",
+      "terms": [
+        "fibrous skeleton of the heart",
+        "annulus fibrosus",
+        "cardiac skeleton",
+        "electrical insulation",
+        "valve rings"
+      ],
+      "narration": "Four fibrous rings around the valve openings, fused into one plate. It anchors the valves and the muscle, but it also insulates: atrial muscle cannot conduct into ventricular muscle across it. That insulation is what makes the AV node and its bundle the only door, and it is why an accessory pathway through the ring gives pre-excitation."
+    },
+    {
+      "key": "rbb",
+      "label": "Right bundle branch",
+      "role": "part",
+      "group": "The branches",
+      "layer": "organ",
+      "color": "#3f7fbf",
+      "terms": [
+        "right bundle branch",
+        "moderator band",
+        "septomarginal trabecula",
+        "anterior papillary muscle",
+        "right bundle branch block",
+        "RSR pattern"
+      ],
+      "narration": "A single slim cord running down the right side of the septum. Near the bottom it crosses the cavity inside the moderator band to reach the anterior papillary muscle. Being one thin cord, it is easily interrupted — right bundle branch block is common and often means nothing."
+    },
+    {
+      "key": "lbb",
+      "label": "Left bundle branch & its fascicles",
+      "role": "part",
+      "group": "The branches",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "left bundle branch",
+        "left anterior fascicle",
+        "left posterior fascicle",
+        "hemiblock",
+        "left bundle branch block",
+        "axis deviation"
+      ],
+      "narration": "Fans out on the left side of the septum and splits into an anterior and a posterior fascicle. The posterior fascicle is broad and has a double blood supply, so it survives; the anterior fascicle is thin and fails first, giving left axis deviation. New left bundle branch block with chest pain is treated as an infarct until proved otherwise."
+    },
+    {
+      "key": "purkinje",
+      "label": "Purkinje fibres",
+      "role": "part",
+      "group": "The branches",
+      "layer": "organ",
+      "color": "#f1c40f",
+      "terms": [
+        "Purkinje fibres",
+        "Purkinje fibers",
+        "subendocardial plexus",
+        "fastest conduction",
+        "QRS complex",
+        "apex first"
+      ],
+      "narration": "The fine terminal network under the endocardium of both ventricles. It conducts faster than any other cardiac tissue, so the whole ventricular muscle is activated within about eighty milliseconds. Contraction therefore starts at the apex and wrings upward toward the outflows, which is a far better way to empty a chamber than squeezing from the top."
+    },
+    {
+      "key": "sa_artery",
+      "label": "Sinoatrial nodal artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "terms": [
+        "sinoatrial nodal artery",
+        "SA nodal artery",
+        "right coronary artery",
+        "left circumflex artery",
+        "sinus bradycardia"
+      ],
+      "narration": "Comes from the right coronary artery in about sixty per cent of people and from the circumflex in the rest. Lose it and the sinus node slows or stops, and a lower pacemaker takes over."
+    },
+    {
+      "key": "av_artery",
+      "label": "Atrioventricular nodal artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#a93226",
+      "terms": [
+        "atrioventricular nodal artery",
+        "AV nodal artery",
+        "right coronary artery",
+        "dominance",
+        "inferior myocardial infarction",
+        "heart block"
+      ],
+      "narration": "Arises from the dominant coronary artery — the right in about eighty per cent of people. This is why an inferior infarct, which is usually a right coronary occlusion, so often comes with bradycardia and varying degrees of heart block."
+    },
+    {
+      "key": "septal_branches",
+      "label": "Septal branches to the bundle branches",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "terms": [
+        "septal branches",
+        "left anterior descending artery",
+        "LAD",
+        "anterior interventricular artery",
+        "bundle branch block",
+        "anteroseptal infarct"
+      ],
+      "narration": "The bundle of His and the bundle branches live on septal branches of the left anterior descending artery. An anteroseptal infarct can therefore knock out a bundle branch, and block that appears in an anterior infarct is a bad sign because it means a large territory has died."
+    },
+    {
+      "key": "atria",
+      "label": "Atria",
+      "role": "context",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#5a8fd6",
+      "terms": [
+        "right atrium",
+        "left atrium",
+        "atrial contraction"
+      ],
+      "narration": "The chambers the first part of the system runs through."
+    },
+    {
+      "key": "ventricles",
+      "label": "Ventricles",
+      "role": "context",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "terms": [
+        "right ventricle",
+        "left ventricle",
+        "interventricular septum"
+      ],
+      "narration": "The chambers the branches and Purkinje fibres supply."
+    },
+    {
+      "key": "ecg",
+      "label": "ECG trace",
+      "role": "context",
+      "group": "On the tracing",
+      "layer": "organ",
+      "color": "#27ae60",
+      "terms": [
+        "ECG",
+        "electrocardiogram",
+        "P wave",
+        "PR interval",
+        "QRS complex",
+        "T wave"
+      ],
+      "narration": "The same events seen from the skin. P wave is atrial spread, the flat PR segment is the AV nodal delay, and the QRS is the ventricles going off through the branches and Purkinje network."
+    },
+    {
+      "key": "autonomic",
+      "label": "Vagus & cardiac sympathetics",
+      "role": "context",
+      "group": "On the tracing",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "vagus nerve",
+        "parasympathetic supply",
+        "cardiac plexus",
+        "sympathetic supply",
+        "T1 to T4",
+        "carotid sinus massage"
+      ],
+      "narration": "The nerves change the rate but do not create the beat. Vagal fibres slow the SA node and the AV node; sympathetic fibres from T1 to T4 speed both and strengthen the squeeze. A denervated transplanted heart still beats, at its own intrinsic rate."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the beat begins",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The pacemaker"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atria"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sa_node",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The heart does not wait for a nerve to tell it to beat. The sinoatrial node, a strip of specialised muscle high in the right atrial wall where the superior vena cava enters, depolarises by itself. It does so faster than any other part, so it wins, and every other pacemaker is suppressed. Find the upper end of the crista terminalis and you have found it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Across the atria — the P wave",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Across the atria"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sa_node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "atria"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:impulse",
+          "path": [
+            "sa_node",
+            "bachmann",
+            "internodal",
+            "av_node"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bachmann",
+          "to": "atria",
+          "kind": "activates the left atrium"
+        }
+      ],
+      "narration": "From the node the wave spreads through ordinary atrial muscle. Three internodal routes carry it down to the AV node, and Bachmann's bundle carries it across to the left atrium. Both atria contract almost together, and that whole event is the small P wave on the tracing."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The gate — AV node in the triangle of Koch",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The gate"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "av_node",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "koch",
+          "to": "av_node",
+          "kind": "locates"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The AV node lies in the atrial septum, at the apex of the triangle of Koch. Learn the three sides: the tendon of Todaro behind, the septal cusp of the tricuspid valve in front, the mouth of the coronary sinus below. The node conducts slowly, and that delay is deliberate. It lets the atria finish filling the ventricles, and in atrial fibrillation it blocks most of the four hundred impulses a minute arriving from above."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The only bridge",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The bridge"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "av_node"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fibrous_skeleton",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "his",
+          "to": "fibrous_skeleton",
+          "kind": "pierces"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "Atrial muscle and ventricular muscle never touch. The fibrous skeleton lies between them and does not conduct. Only the bundle of His crosses it, piercing the membranous part of the interventricular septum. Everything the ventricles do electrically arrives through that one thin bundle, which is why a lesion there produces complete heart block and an escape rhythm of about thirty a minute."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Branches, Purkinje, and the QRS",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "his"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ventricles"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:impulse",
+          "path": [
+            "his",
+            "rbb",
+            "lbb",
+            "purkinje",
+            "ventricles"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "rbb",
+            "lbb"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The bundle divides on the septum into a right branch and a left branch. The right is one slim cord that reaches the anterior papillary muscle through the moderator band. The left fans out and splits into an anterior and a posterior fascicle. Both end in Purkinje fibres under the endocardium, the fastest conducting tissue in the heart, so both ventricles fire within eighty milliseconds and the apex contracts first. On the tracing that is the QRS complex, and a QRS wider than three small squares means the impulse took the slow route through muscle instead."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "Blood supply — and which rhythm fails",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Blood supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The pacemaker"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The gate"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The branches"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "av_artery",
+          "to": "av_node",
+          "kind": "supplies"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "septal_branches",
+          "to": "rbb",
+          "kind": "supplies"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Blood supply",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "The right coronary artery supplies the SA node in most people and the AV node in about eighty per cent. So an inferior infarct brings bradycardia and heart block, and it usually settles. The bundle branches instead live on septal branches of the left anterior descending. Block appearing in an anterior infarct therefore means the septum itself has died, and it carries a far worse outlook."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "When the pacemaker fails",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sa_node",
+            "av_node",
+            "purkinje"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "sa_node"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "av_node",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "av_node",
+          "to": "ecg",
+          "kind": "escape rhythm"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Every part of the system can pace, just more slowly the further down you go. The SA node fires at sixty to a hundred, the AV junction at forty to sixty, the ventricular Purkinje network at twenty to forty. So the rate on the strip tells you where the beat is coming from. A patient at thirty-five with P waves marching independently of the QRS complexes has complete block and needs a pacemaker, not a drug."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, diagram, not as a downgrade. The curriculum lists diagram ahead of 3d_anatomy for this structure because the teaching point is the sequence and its timing, not a spatial form. 3d_anatomy is kept in deferred_modes.",
+    "No model exists for any part of the conducting system. Searching all 934 catalog entries for node, bundle, Purkinje, sinoatrial and atrioventricular returns nothing cardiac — the nearest entries are the papillary muscles, the moderator band's parent chamber and 'wall of heart'. The system is specialised muscle a few millimetres wide and is not separately segmented in the catalog, so this is not a fetch-more-meshes gap the way the chambers were.",
+    "Status is 'planned'. The scene is fully authored — seventeen regions, seven beats, ops and narration — but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once a cut-heart drawing exists with the labelled regions this scene names: SA node at the cavo-atrial junction, triangle of Koch, the penetrating bundle at the membranous septum, both branches on the septum, and the subendocardial Purkinje network.",
+    "The triangle of Koch, the fibrous skeleton and the ECG trace are authored as regions because the diagram must draw them, but only the first two are anatomy the student dissects. The ECG region exists so a highlighted term like 'PR interval' has somewhere to land.",
+    "Beats 2 and 5 trace concept:impulse rather than a modelled subject — the wave of depolarisation has no mesh and never will. The path waypoints are the conducting parts themselves, so the order is what the student rehearses.",
+    "Accessory pathways (Wolff-Parkinson-White, bundle of Kent) are named in the fibrous skeleton narration but not drawn as a region, since their position varies round the ring and a fixed drawing would teach a false constancy. Rates and percentages are the standard teaching figures: SA node 60-100, AV junction 40-60, ventricular 20-40; SA nodal artery from the right coronary in about 60 per cent, AV nodal artery from the dominant vessel in about 80 per cent."
+  ]
+}

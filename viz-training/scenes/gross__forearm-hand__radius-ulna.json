@@ -1,0 +1,899 @@
+{
+  "schema": 2,
+  "id": "gross__forearm-hand__radius-ulna",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Forearm & Hand",
+  "structure": "Radius & ulna",
+  "covers": [
+    "Radius & ulna"
+  ],
+  "learning_goal": "Tell the radius from the ulna at either end, name the parts of each, and explain how the radius turns over the ulna at two joints to pronate and supinate the hand.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "forearm",
+      "radius and ulna",
+      "bones of the forearm",
+      "upper limb",
+      "elbow",
+      "elbow joint",
+      "wrist",
+      "wrist joint",
+      "radioulnar joint",
+      "pronation and supination",
+      "osteology of the upper limb"
+    ],
+    "terms": [
+      "radius",
+      "ulna",
+      "head of radius",
+      "neck of radius",
+      "radial tuberosity",
+      "styloid process of radius",
+      "radial styloid",
+      "ulnar notch",
+      "olecranon",
+      "trochlear notch",
+      "coronoid process",
+      "radial notch",
+      "head of ulna",
+      "styloid process of ulna",
+      "ulnar styloid",
+      "interosseous membrane",
+      "proximal radioulnar joint",
+      "distal radioulnar joint",
+      "superior radioulnar joint",
+      "inferior radioulnar joint",
+      "annular ligament",
+      "pronation",
+      "supination",
+      "pronator teres",
+      "pronator quadratus",
+      "supinator",
+      "biceps brachii",
+      "Colles fracture",
+      "Smith fracture",
+      "Monteggia fracture",
+      "Galeazzi fracture",
+      "pulled elbow",
+      "subluxation of the radial head",
+      "olecranon fracture",
+      "radiocarpal joint"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "part",
+      "group": "Radius",
+      "layer": "bone",
+      "color": "#efe6cd",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "lateral bone of forearm",
+        "thumb-side bone"
+      ],
+      "narration": "The lateral bone — the thumb side. Small at the elbow, broad at the wrist. It is the bone that carries the hand."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "part",
+      "group": "Ulna",
+      "layer": "bone",
+      "color": "#e2d8bb",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "medial bone of forearm",
+        "little-finger-side bone"
+      ],
+      "narration": "The medial bone — the little finger side. Broad at the elbow, small at the wrist. It is the bone that carries the elbow. The two are mirror images in shape: whatever one is big at, the other is small at."
+    },
+    {
+      "key": "interosseous_membrane",
+      "name": "interosseous membrane of right forearm",
+      "label": "Interosseous membrane",
+      "role": "part",
+      "group": "Interosseous membrane",
+      "layer": "fascia",
+      "color": "#cbbda2",
+      "refs": {
+        "bodyparts3d": "FMA23707"
+      },
+      "terms": [
+        "interosseous membrane",
+        "interosseous border",
+        "middle radioulnar joint",
+        "force transfer"
+      ],
+      "narration": "A sheet between the two shafts. Its fibres run downwards and medially, from radius to ulna, so a force landing on the hand is passed from the radius up to the ulna and on to the humerus. It also divides the forearm into a flexor and an extensor compartment."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#d9cfb4",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "trochlea",
+        "capitulum",
+        "elbow joint"
+      ],
+      "narration": "Two surfaces at its lower end: the pulley-shaped trochlea for the ulna, the round capitulum for the radius."
+    },
+    {
+      "key": "scaphoid",
+      "name": "right scaphoid",
+      "label": "Scaphoid",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#d3c8ab",
+      "refs": {
+        "bodyparts3d": "FMA24435"
+      },
+      "terms": [
+        "scaphoid",
+        "radiocarpal joint",
+        "wrist joint"
+      ],
+      "narration": "One of the two carpal bones that sit against the lower end of the radius."
+    },
+    {
+      "key": "lunate",
+      "name": "right lunate",
+      "label": "Lunate",
+      "role": "context",
+      "group": "Neighbouring bones",
+      "layer": "bone",
+      "color": "#d3c8ab",
+      "refs": {
+        "bodyparts3d": "FMA24437"
+      },
+      "terms": [
+        "lunate",
+        "radiocarpal joint",
+        "wrist joint"
+      ],
+      "narration": "The other one. Scaphoid and lunate meet the radius; neither of them meets the ulna."
+    },
+    {
+      "key": "supinator",
+      "name": "right supinator",
+      "label": "Supinator",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA38513"
+      },
+      "terms": [
+        "supinator",
+        "supination",
+        "posterior interosseous nerve"
+      ],
+      "narration": "Wraps round the upper radius from the ulna and the lateral epicondyle. It unwinds the radius — that is supination. The posterior interosseous nerve passes through it."
+    },
+    {
+      "key": "biceps_long",
+      "name": "long head of right biceps brachii",
+      "label": "Biceps brachii — long head",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#cf4b40",
+      "refs": {
+        "bodyparts3d": "FMA37686"
+      },
+      "terms": [
+        "biceps brachii",
+        "long head of biceps",
+        "powerful supinator"
+      ],
+      "narration": "Biceps ends on the radial tuberosity, which sits on the medial side of the bone. Pulling on it spins the radius outwards, which is why biceps is the strongest supinator — and why you drive a screw in with the right hand."
+    },
+    {
+      "key": "biceps_short",
+      "name": "short head of right biceps brachii",
+      "label": "Biceps brachii — short head",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#c4433a",
+      "refs": {
+        "bodyparts3d": "FMA37684"
+      },
+      "terms": [
+        "short head of biceps",
+        "coracoid process"
+      ],
+      "narration": "The second head joins the same tendon, so it pulls on the same tuberosity."
+    },
+    {
+      "key": "pronator_teres_humeral",
+      "name": "humeral head of right pronator teres",
+      "label": "Pronator teres — humeral head",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "refs": {
+        "bodyparts3d": "FMA38560"
+      },
+      "terms": [
+        "pronator teres",
+        "pronation",
+        "medial epicondyle"
+      ],
+      "narration": "From the medial epicondyle to the middle of the lateral surface of the radius. It drags the radius across the ulna."
+    },
+    {
+      "key": "pronator_teres_ulnar",
+      "name": "ulnar head of right pronator teres",
+      "label": "Pronator teres — ulnar head",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#98362f",
+      "refs": {
+        "bodyparts3d": "FMA38562"
+      },
+      "terms": [
+        "ulnar head of pronator teres",
+        "coronoid process"
+      ],
+      "narration": "The second head comes off the coronoid process of the ulna. The median nerve runs between the two."
+    },
+    {
+      "key": "pronator_quadratus",
+      "name": "right pronator quadratus",
+      "label": "Pronator quadratus",
+      "role": "context",
+      "group": "Turning muscles",
+      "layer": "muscle",
+      "color": "#7e2b52",
+      "refs": {
+        "bodyparts3d": "FMA38454"
+      },
+      "terms": [
+        "pronator quadratus",
+        "distal radioulnar joint",
+        "pronation"
+      ],
+      "narration": "A flat square joining the two bones just above the wrist. It is the prime pronator and it also holds the distal radioulnar joint together."
+    },
+    {
+      "key": "head_of_radius",
+      "label": "Head of radius",
+      "role": "part",
+      "group": "Parts of the radius",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "radius",
+        "uvw": [
+          0.9608,
+          0.8709,
+          0.9902
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the radius and the humerus within the proximal 15% of the radius — the radial head turning on the capitulum (gap 4.85 mm); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 4.85,
+      "terms": [
+        "head of radius",
+        "radial head",
+        "capitulum",
+        "pulled elbow",
+        "annular ligament"
+      ],
+      "narration": "A shallow disc on top of a narrow neck. It spins on the capitulum and inside the annular ligament. In a small child a sharp pull on the arm slips it out of that ring — a pulled elbow."
+    },
+    {
+      "key": "radial_tuberosity",
+      "label": "Radial tuberosity",
+      "role": "part",
+      "group": "Parts of the radius",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "radius",
+        "uvw": [
+          0.8662,
+          0.6464,
+          0.8318
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the radius and the long head of biceps brachii in the upper third of the radius — the biceps tendon insertion (gap 0.10 mm, 20.5 mm off the shaft axis); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0.1,
+      "terms": [
+        "radial tuberosity",
+        "bicipital tuberosity",
+        "biceps insertion"
+      ],
+      "narration": "The bump below the neck where biceps lands. It faces medially, so the tendon has to wind round the bone — that winding is what makes biceps a supinator."
+    },
+    {
+      "key": "ulnar_notch",
+      "label": "Ulnar notch of the radius",
+      "role": "part",
+      "group": "Parts of the radius",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "radius",
+        "uvw": [
+          0.5273,
+          0.1244,
+          0.058
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the radius and the ulna within the distal 15% of the radius — the distal radioulnar joint (gap 1.45 mm); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 1.45,
+      "terms": [
+        "ulnar notch",
+        "distal radioulnar joint",
+        "inferior radioulnar joint"
+      ],
+      "narration": "A hollow on the medial side of the lower radius. The head of the ulna sits in it, and the radius swings around that head in pronation."
+    },
+    {
+      "key": "radial_styloid",
+      "label": "Styloid process of the radius",
+      "role": "part",
+      "group": "Parts of the radius",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "radius",
+        "uvw": [
+          0.0497,
+          0.1432,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most distal point of the distal 12% of the radius, 41.7 mm off the shaft axis on the lateral side; see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "styloid process of radius",
+        "radial styloid",
+        "anatomical snuffbox",
+        "Colles fracture"
+      ],
+      "narration": "The point you feel at the base of the thumb, in the floor of the anatomical snuffbox. In life it reaches about a centimetre lower than the ulnar styloid; after a Colles fracture it no longer does, and that lost step is what you are checking for."
+    },
+    {
+      "key": "olecranon",
+      "label": "Olecranon",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.8137,
+          0.8396,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most proximal point of the ulna, 34.0 mm off the shaft axis and 17.5 mm above the top of the radius; see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "olecranon",
+        "point of the elbow",
+        "triceps insertion",
+        "olecranon fossa"
+      ],
+      "narration": "The point of the elbow, and the only part of the forearm you lean on. Triceps pulls on it, and it drops into the olecranon fossa when the elbow straightens."
+    },
+    {
+      "key": "trochlear_notch",
+      "label": "Trochlear notch",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.7173,
+          0.7742,
+          0.9887
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the ulna and the humerus within the proximal 20% of the ulna — the notch gripping the trochlea (gap 0.62 mm); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0.62,
+      "terms": [
+        "trochlear notch",
+        "semilunar notch",
+        "hinge joint",
+        "elbow joint"
+      ],
+      "narration": "A deep C-shaped grip on the trochlea, between the olecranon behind and the coronoid process in front. This is the elbow joint proper — a hinge, and a very stable one."
+    },
+    {
+      "key": "coronoid_process",
+      "label": "Coronoid process",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.7262,
+          0.5371,
+          0.922
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most anterior point of the ulna between 78% and 95% of its height, 16.7 mm off the shaft axis; see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "coronoid process",
+        "brachialis insertion",
+        "flexor digitorum superficialis"
+      ],
+      "narration": "The front lip of the notch. Brachialis lands just below it, and the ulnar heads of pronator teres and flexor digitorum superficialis come off it."
+    },
+    {
+      "key": "radial_notch",
+      "label": "Radial notch of the ulna",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.5089,
+          0.6605,
+          0.8713
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the ulna and the radius within the proximal 20% of the ulna — the proximal radioulnar joint (gap 1.67 mm); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 1.67,
+      "terms": [
+        "radial notch",
+        "proximal radioulnar joint",
+        "superior radioulnar joint",
+        "annular ligament"
+      ],
+      "narration": "A small facet on the lateral side of the coronoid process. The radial head spins in it, held there by the annular ligament."
+    },
+    {
+      "key": "head_of_ulna",
+      "label": "Head of the ulna",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.0148,
+          0.0646,
+          0.0582
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the ulna and the radius within the distal 15% of the ulna — the ulnar head in the ulnar notch of the radius (gap 1.45 mm); see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 1.45,
+      "terms": [
+        "head of ulna",
+        "distal radioulnar joint",
+        "articular disc",
+        "triangular fibrocartilage"
+      ],
+      "narration": "The ulna has its head at the bottom, the radius has its head at the top. The ulnar head does not reach the carpus — an articular disc hangs between it and the wrist bones."
+    },
+    {
+      "key": "ulnar_styloid",
+      "label": "Styloid process of the ulna",
+      "role": "part",
+      "group": "Parts of the ulna",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "ulna",
+        "uvw": [
+          0.2223,
+          0.1379,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most distal point of the distal 12% of the ulna, 30.5 mm off the shaft axis; see tools/derive-forearm-landmarks.mjs",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "styloid process of ulna",
+        "ulnar styloid",
+        "back of the wrist"
+      ],
+      "narration": "A short peg off the back and medial side of the ulnar head. You can feel it on the back of your wrist below the little finger. Unlike the radial styloid it stays put while the hand turns."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Two bones, side by side",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Radius",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Ulna",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The forearm has two bones lying side by side. With the palm facing forward, the radius is lateral and the ulna is medial. Everything else in this scene exists to explain how those two get along."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Which is which",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Turning muscles"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Radius",
+            "Ulna"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Learn them by their ends. The ulna is heavy at the top and thin at the bottom. The radius is thin at the top and heavy at the bottom. If a bone is broad where you are looking, you are at the elbow end of the ulna or the wrist end of the radius."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The elbow end",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Ulna"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Radius"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "olecranon",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trochlear_notch",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "coronoid_process",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_of_radius",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "At the elbow the ulna does the work. Its trochlear notch grips the trochlea of the humerus like a spanner, with the olecranon behind and the coronoid process in front. The radial head only rests against the capitulum."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The wrist end",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Neighbouring bones"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "radial_styloid",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ulnar_styloid",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_of_ulna",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "radius",
+          "to": "scaphoid",
+          "kind": "articulates with"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "radius",
+          "to": "lunate",
+          "kind": "articulates with"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "At the wrist the radius does the work. Scaphoid and lunate meet the radius alone; the ulna is kept off the carpus by an articular disc. So a fall on the outstretched hand loads the radius, and the radius is what breaks."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Joined in three places",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Radius"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ulna"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Interosseous membrane"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Turning muscles"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "head_of_radius",
+          "to": "radial_notch",
+          "kind": "proximal radioulnar joint"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ulnar_notch",
+          "to": "head_of_ulna",
+          "kind": "distal radioulnar joint"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Interosseous membrane",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Three links hold the bones together: a pivot joint at the top, a pivot joint at the bottom, and the interosseous membrane in between. The two pivots always move together, because they are the two ends of the same turning axis."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The axis of rotation",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Radius"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ulna"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "radius",
+          "path": [
+            "head_of_radius",
+            "radial_tuberosity",
+            "ulnar_notch",
+            "radial_styloid"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "The turning axis runs from the centre of the radial head to the head of the ulna. The radius spins on that line at the top and swings around it at the bottom, which is why the hand turns but the elbow does not."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Pronation — the radius crosses over",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pronator_teres_humeral",
+            "pronator_quadratus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pronator_quadratus",
+          "to": "ulnar_notch",
+          "kind": "pulls the radius round the ulna"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "In pronation the radius rolls across the front of the ulna and the two bones cross. Pronator quadratus does it every time; pronator teres is added for speed and power. The ulna itself does not move."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Supination — unwinding it",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "supinator",
+            "biceps_long"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "biceps_long",
+          "to": "radial_tuberosity",
+          "kind": "inserts on"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "radial_tuberosity",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Supination unwinds the crossing. Supinator alone is enough for a slow turn; add force and biceps takes over, pulling on the radial tuberosity. Biceps only supinates well with the elbow bent, which is why you flex the elbow to open a stiff jar."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "Cut across the middle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Interosseous membrane",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Mid-shaft, both bones are triangular in section and face each other across a sharp interosseous border. The membrane strung between those borders is the wall that separates the flexors in front from the extensors behind."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "Where they break",
+      "ops": [
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Radius"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ulna"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "radial_styloid",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "olecranon",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Four names to keep. Colles: the lower radius breaks and the fragment tilts backwards — the dinner-fork wrist. Smith: the same break tilting forwards. Monteggia: the upper ulna breaks and the radial head dislocates. Galeazzi: the lower radius breaks and the distal radioulnar joint dislocates. In the last two, one bone breaking forces the other out of joint — because the two are a single ring."
+    }
+  ],
+  "gaps": [
+    "The catalog's smallest unit is a whole radius and a whole ulna, so every named feature — olecranon, coronoid process, trochlear and radial notches, both styloid processes, the radial tuberosity, both heads — is a derived landmark anchor rather than its own model. Each was measured on the meshes by tools/derive-forearm-landmarks.mjs and carries the measurement that placed it; all eleven stay status:\"needs-review\" until a human clears them in-app.",
+    "Measured on these meshes the ulna reaches 0.8 mm further distally than the radial styloid, so the roughly 1 cm step by which the radial styloid normally lies below the ulnar styloid is NOT visible on the model. The narration teaches the relationship because it is what a Colles fracture abolishes, but a student must not read the offset off this scene. The same is true in the full-resolution and lite mesh sets, so it is the source segmentation, not the decimation.",
+    "There is no mesh for the annular ligament, the triangular fibrocartilage / articular disc of the distal radioulnar joint, the oblique cord or the elbow joint capsule, so the ligaments that actually hold these two pivots together are described rather than shown.",
+    "Pronation and supination are taught as before-and-after positions with the muscles that drive them. The renderer cannot animate the radius crossing the ulna, because that needs an articulated skeleton and BodyParts3D delivers static meshes.",
+    "No nerve or artery meshes exist for the upper limb, so the posterior interosseous nerve winding through supinator and the median nerve passing between the heads of pronator teres — both common exam questions and both reasons these bones matter clinically — are narration only."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  }
+}

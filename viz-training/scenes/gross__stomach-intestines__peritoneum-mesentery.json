@@ -1,0 +1,759 @@
+{
+  "schema": 2,
+  "id": "gross__stomach-intestines__peritoneum-mesentery",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Stomach & Intestines",
+  "structure": "Peritoneum & mesentery",
+  "covers": [
+    "Peritoneum & mesentery"
+  ],
+  "learning_goal": "Say what the peritoneum is and why the cavity is a potential space, separate the greater sac from the lesser sac and find the way between them, name the mesenteries and what runs in each, sort the abdominal organs into intraperitoneal and retroperitoneal, and use the gutters and pouches to predict where pus and blood collect in a supine patient.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "peritoneum",
+      "peritoneal cavity",
+      "mesentery",
+      "omentum",
+      "lesser sac",
+      "abdomen",
+      "abdominal cavity",
+      "peritonitis",
+      "ascites",
+      "gastrointestinal tract",
+      "abdominal surgery"
+    ],
+    "terms": [
+      "peritoneum",
+      "parietal peritoneum",
+      "visceral peritoneum",
+      "peritoneal cavity",
+      "potential space",
+      "serous membrane",
+      "mesothelium",
+      "peritoneal fluid",
+      "greater sac",
+      "lesser sac",
+      "omental bursa",
+      "epiploic foramen",
+      "foramen of Winslow",
+      "Pringle manoeuvre",
+      "greater omentum",
+      "policeman of the abdomen",
+      "abdominal watchdog",
+      "gastrocolic ligament",
+      "gastrosplenic ligament",
+      "gastrophrenic ligament",
+      "lesser omentum",
+      "hepatogastric ligament",
+      "hepatoduodenal ligament",
+      "free edge of the lesser omentum",
+      "portal triad",
+      "mesentery",
+      "root of the mesentery",
+      "small bowel mesentery",
+      "transverse mesocolon",
+      "sigmoid mesocolon",
+      "mesoappendix",
+      "falciform ligament",
+      "ligamentum teres",
+      "round ligament of the liver",
+      "coronary ligament",
+      "bare area of the liver",
+      "triangular ligaments",
+      "broad ligament",
+      "intraperitoneal",
+      "retroperitoneal",
+      "primarily retroperitoneal",
+      "secondarily retroperitoneal",
+      "SAD PUCKER",
+      "peritoneal folds",
+      "median umbilical fold",
+      "medial umbilical fold",
+      "lateral umbilical fold",
+      "paracolic gutter",
+      "right paracolic gutter",
+      "left paracolic gutter",
+      "subphrenic space",
+      "subhepatic space",
+      "hepatorenal recess",
+      "Morison's pouch",
+      "rectovesical pouch",
+      "rectouterine pouch",
+      "pouch of Douglas",
+      "supracolic compartment",
+      "infracolic compartment",
+      "peritonitis",
+      "generalised peritonitis",
+      "rebound tenderness",
+      "guarding",
+      "board-like rigidity",
+      "subphrenic abscess",
+      "pelvic abscess",
+      "ascites",
+      "shifting dullness",
+      "fluid thrill",
+      "paracentesis",
+      "spontaneous bacterial peritonitis",
+      "adhesions",
+      "adhesive obstruction",
+      "internal hernia",
+      "peritoneal seeding",
+      "Sister Mary Joseph nodule",
+      "Krukenberg tumour",
+      "referred pain",
+      "somatic innervation",
+      "visceral innervation",
+      "shoulder tip pain",
+      "phrenic nerve",
+      "C3 C4 C5",
+      "FAST scan",
+      "peritoneal dialysis",
+      "laparotomy",
+      "omental patch",
+      "Graham patch"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "abdominal_wall",
+      "label": "Anterior abdominal wall",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#c9a37a",
+      "terms": [
+        "anterior abdominal wall",
+        "transversalis fascia",
+        "extraperitoneal fat",
+        "laparotomy"
+      ],
+      "narration": "Draw the wall first. The parietal peritoneum is the innermost of its layers, separated from the muscle by transversalis fascia and a thin sheet of extraperitoneal fat. That fat is why the surgeon can peel the peritoneum off the wall to reach a kidney without opening the cavity at all."
+    },
+    {
+      "key": "posterior_wall",
+      "label": "Posterior abdominal wall",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#b08968",
+      "terms": [
+        "posterior abdominal wall",
+        "retroperitoneum",
+        "psoas major",
+        "quadratus lumborum"
+      ],
+      "narration": "Everything behind the peritoneum on this wall is retroperitoneal. The peritoneum runs down over it like a sheet of cling film, and whatever is trapped behind the film never enters the cavity."
+    },
+    {
+      "key": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#a85f5f",
+      "terms": [
+        "diaphragm",
+        "subphrenic space",
+        "phrenic nerve",
+        "shoulder tip pain",
+        "C3 C4 C5"
+      ],
+      "narration": "The roof. Its peritoneum is supplied by the phrenic nerve, so blood or pus under the diaphragm is felt at the shoulder tip — C3, C4 and C5 keep the diaphragm alive and the shoulder tip is the same segments."
+    },
+    {
+      "key": "gut_tube",
+      "label": "Gut tube (stomach and intestines)",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#d8a05a",
+      "terms": [
+        "stomach",
+        "small intestine",
+        "colon",
+        "gut tube"
+      ],
+      "narration": "The organs are not inside the peritoneal cavity. They are behind the peritoneum, pushing into it, exactly as a fist pushes into a deflated balloon without ever entering it. Get that picture right and the rest of the topic follows."
+    },
+    {
+      "key": "parietal",
+      "label": "Parietal peritoneum",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#4a90d9",
+      "terms": [
+        "parietal peritoneum",
+        "somatic innervation",
+        "rebound tenderness",
+        "guarding",
+        "rigidity",
+        "localised pain"
+      ],
+      "narration": "Lines the abdominal wall, the diaphragm and the pelvis. It is supplied by the same somatic nerves as the overlying wall, so it is sensitive to touch, pressure, temperature and cutting, and it localises pain precisely to the spot. That is what makes the physical signs of peritonitis — tenderness, guarding and rebound — and it is why pain shifts to the right iliac fossa once an inflamed appendix touches the wall."
+    },
+    {
+      "key": "visceral",
+      "label": "Visceral peritoneum",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "visceral peritoneum",
+        "autonomic innervation",
+        "visceral pain",
+        "colicky pain",
+        "referred pain",
+        "midline pain"
+      ],
+      "narration": "Covers the organs and is continuous with the parietal layer at the mesenteries. Its nerve supply is autonomic, so it feels only stretch and ischaemia, not cutting. Its pain is dull, poorly localised and referred to the midline according to the embryological gut — epigastrium for foregut, umbilicus for midgut, suprapubic for hindgut. Two different sensations from one continuous membrane is the whole of the abdominal pain story."
+    },
+    {
+      "key": "cavity",
+      "label": "Peritoneal cavity",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#aed6f1",
+      "terms": [
+        "peritoneal cavity",
+        "potential space",
+        "peritoneal fluid",
+        "serous fluid",
+        "ascites",
+        "shifting dullness",
+        "peritoneal dialysis"
+      ],
+      "narration": "A closed potential space between the two layers, holding only a film of serous fluid — about fifty millilitres. It is closed in the male. In the female it is not: the uterine tubes open into it, which is why pelvic infection can ascend and why a ruptured ectopic bleeds directly into the cavity. Its huge surface area is what makes peritoneal dialysis possible and what makes generalised peritonitis so rapidly fatal."
+    },
+    {
+      "key": "greater_sac",
+      "label": "Greater sac",
+      "role": "part",
+      "group": "Two sacs",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "terms": [
+        "greater sac",
+        "supracolic compartment",
+        "infracolic compartment",
+        "transverse mesocolon"
+      ],
+      "narration": "The main cavity, everything you see on opening the abdomen. The transverse colon and its mesocolon divide it into a supracolic compartment holding liver, stomach and spleen, and an infracolic compartment holding the small and large bowel. Pus above the colon and pus below it behave differently, and that division is why."
+    },
+    {
+      "key": "lesser_sac",
+      "label": "Lesser sac (omental bursa)",
+      "role": "part",
+      "group": "Two sacs",
+      "layer": "organ",
+      "color": "#48789e",
+      "terms": [
+        "lesser sac",
+        "omental bursa",
+        "behind the stomach",
+        "pancreatic pseudocyst",
+        "posterior perforation"
+      ],
+      "narration": "A flattened space behind the stomach and the lesser omentum, in front of the pancreas. It exists because the stomach rotated in development and dragged a recess of peritoneum behind it. It matters twice: a gastric ulcer that perforates backwards discharges into it rather than into the general cavity, and pancreatic juice collecting in it forms a pseudocyst that bulges forward into the epigastrium."
+    },
+    {
+      "key": "epiploic_foramen",
+      "label": "Epiploic foramen (of Winslow)",
+      "role": "part",
+      "group": "Two sacs",
+      "layer": "organ",
+      "color": "#2e86c1",
+      "terms": [
+        "epiploic foramen",
+        "foramen of Winslow",
+        "omental foramen",
+        "hepatoduodenal ligament",
+        "portal triad",
+        "Pringle manoeuvre",
+        "inferior vena cava",
+        "caudate lobe"
+      ],
+      "narration": "The single opening between the two sacs, big enough for two fingers. Learn its four boundaries because they are asked as a set: in front, the free edge of the lesser omentum carrying the portal triad — bile duct to the right, hepatic artery to the left, portal vein behind; behind, the inferior vena cava; above, the caudate lobe of the liver; below, the first part of the duodenum. Pass a finger through it and pinch the free edge between finger and thumb and you have occluded the liver's whole blood supply — the Pringle manoeuvre, used to control bleeding from a torn liver."
+    },
+    {
+      "key": "greater_omentum",
+      "label": "Greater omentum",
+      "role": "part",
+      "group": "Omenta",
+      "layer": "organ",
+      "color": "#e8c547",
+      "terms": [
+        "greater omentum",
+        "policeman of the abdomen",
+        "abdominal watchdog",
+        "gastrocolic ligament",
+        "gastrosplenic ligament",
+        "four layers",
+        "omental patch",
+        "Graham patch"
+      ],
+      "narration": "A four-layered apron of fat and peritoneum hanging from the greater curvature of the stomach, draped over the intestines and attached to the transverse colon. It is mobile and it is alive: it migrates to an inflamed organ, wraps it and walls it off. That is why appendicitis in an adult may localise into a mass instead of becoming generalised peritonitis, and why children — whose omentum is short — get generalised peritonitis more readily. Surgeons use the same property deliberately, plugging a perforated duodenal ulcer with a tongue of omentum."
+    },
+    {
+      "key": "lesser_omentum",
+      "label": "Lesser omentum",
+      "role": "part",
+      "group": "Omenta",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "terms": [
+        "lesser omentum",
+        "hepatogastric ligament",
+        "hepatoduodenal ligament",
+        "free edge",
+        "portal triad",
+        "ventral mesogastrium"
+      ],
+      "narration": "Runs from the lesser curvature of the stomach and the first part of the duodenum up to the liver. Its two named parts are the thin hepatogastric ligament and the thick hepatoduodenal ligament, and that thick free right edge carries the portal triad to the liver. It is the surviving remnant of the ventral mesentery, which is why the liver alone among the gut organs has a mesentery in front of it as well as behind."
+    },
+    {
+      "key": "mesentery_proper",
+      "label": "The mesentery (small bowel)",
+      "role": "part",
+      "group": "Mesenteries",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "mesentery",
+        "root of the mesentery",
+        "fifteen centimetres",
+        "duodenojejunal flexure",
+        "right sacroiliac joint",
+        "superior mesenteric vessels",
+        "fan shaped",
+        "volvulus",
+        "malrotation"
+      ],
+      "narration": "A fan of two peritoneal layers suspending the jejunum and ileum. Its attached border — the root — is only about fifteen centimetres long and runs obliquely from the duodenojejunal flexure at L2 down to the right sacroiliac joint, crossing the third part of the duodenum, the aorta, the inferior vena cava and the right ureter. Its free border is six metres long and gathered into folds. Between the two layers run the superior mesenteric vessels, lymphatics, nodes, nerves and fat. A short root is what allows the whole midgut to twist on it in malrotation."
+    },
+    {
+      "key": "transverse_mesocolon",
+      "label": "Transverse mesocolon",
+      "role": "part",
+      "group": "Mesenteries",
+      "layer": "organ",
+      "color": "#dc7633",
+      "terms": [
+        "transverse mesocolon",
+        "middle colic artery",
+        "supracolic",
+        "infracolic",
+        "pancreas"
+      ],
+      "narration": "Suspends the transverse colon from the front of the pancreas and carries the middle colic vessels. It is the shelf that divides the greater sac into its upper and lower compartments, and it is the reason a collection above the colon and one below it stay separate for a while."
+    },
+    {
+      "key": "sigmoid_mesocolon",
+      "label": "Sigmoid mesocolon",
+      "role": "part",
+      "group": "Mesenteries",
+      "layer": "organ",
+      "color": "#ca6f1e",
+      "terms": [
+        "sigmoid mesocolon",
+        "inverted V",
+        "left ureter",
+        "sigmoid volvulus",
+        "sigmoid arteries"
+      ],
+      "narration": "An inverted-V attachment over the left sacroiliac region, with the left ureter running behind its apex. It gives the sigmoid colon a mobility the descending colon does not have, and a long narrow-based mesocolon is exactly the setup for sigmoid volvulus."
+    },
+    {
+      "key": "mesoappendix",
+      "label": "Mesoappendix",
+      "role": "part",
+      "group": "Mesenteries",
+      "layer": "organ",
+      "color": "#b9770e",
+      "terms": [
+        "mesoappendix",
+        "appendicular artery",
+        "end artery",
+        "appendicectomy"
+      ],
+      "narration": "A small triangular fold carrying the appendicular artery, a branch of the ileocolic. The artery is an end artery running in its free edge, so it is ligated first at appendicectomy, and thrombosing it is how an inflamed appendix becomes gangrenous."
+    },
+    {
+      "key": "falciform",
+      "label": "Falciform ligament & ligamentum teres",
+      "role": "part",
+      "group": "Mesenteries",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "falciform ligament",
+        "ligamentum teres",
+        "round ligament of the liver",
+        "left umbilical vein",
+        "bare area",
+        "coronary ligament",
+        "caput medusae"
+      ],
+      "narration": "A sickle-shaped double fold running from the umbilicus and the anterior abdominal wall to the liver, with the obliterated left umbilical vein — the ligamentum teres — in its free lower edge. Its layers separate over the liver to form the coronary and triangular ligaments and enclose the bare area, where the liver touches the diaphragm directly with no peritoneum between. In portal hypertension small veins along the ligamentum teres reopen and produce the dilated veins around the umbilicus."
+    },
+    {
+      "key": "intraperitoneal",
+      "label": "Intraperitoneal organs",
+      "role": "part",
+      "group": "Which side of the sheet",
+      "layer": "organ",
+      "color": "#58d68d",
+      "terms": [
+        "intraperitoneal",
+        "mesentery",
+        "mobile organs",
+        "stomach",
+        "jejunum",
+        "ileum",
+        "transverse colon",
+        "sigmoid colon",
+        "spleen",
+        "liver",
+        "caecum",
+        "appendix"
+      ],
+      "narration": "Organs almost completely wrapped in visceral peritoneum and slung on a mesentery: stomach, first part of the duodenum, jejunum, ileum, caecum, appendix, transverse colon, sigmoid colon, liver and spleen. They are mobile, they can be delivered out of a wound, they can twist, and they bleed into the cavity."
+    },
+    {
+      "key": "retroperitoneal",
+      "label": "Retroperitoneal organs",
+      "role": "part",
+      "group": "Which side of the sheet",
+      "layer": "organ",
+      "color": "#45b39d",
+      "terms": [
+        "retroperitoneal",
+        "primarily retroperitoneal",
+        "secondarily retroperitoneal",
+        "SAD PUCKER",
+        "kidney",
+        "ureter",
+        "aorta",
+        "inferior vena cava",
+        "pancreas",
+        "duodenum",
+        "adrenal gland",
+        "ascending colon",
+        "descending colon",
+        "loin pain"
+      ],
+      "narration": "Organs with peritoneum on their front surface only. The primarily retroperitoneal ones were never in the cavity — the kidneys, ureters, adrenals, aorta and inferior vena cava. The secondarily retroperitoneal ones started with a mesentery and were plastered to the back wall in development: most of the duodenum, the pancreas, and the ascending and descending colon. The list is remembered as SAD PUCKER. Two consequences that get asked: they are fixed and cannot twist, and disease in them causes back or loin pain rather than the colicky central pain of a mobile gut."
+    },
+    {
+      "key": "gutters",
+      "label": "Paracolic gutters",
+      "role": "part",
+      "group": "Where fluid goes",
+      "layer": "organ",
+      "color": "#85c1e9",
+      "terms": [
+        "paracolic gutter",
+        "right paracolic gutter",
+        "left paracolic gutter",
+        "phrenicocolic ligament",
+        "spread of infection"
+      ],
+      "narration": "Troughs lateral to the ascending and descending colon. The right gutter is deeper and runs uninterrupted from the right iliac fossa up to the subhepatic and subphrenic spaces, so pus from a burst appendix tracks up it to sit under the diaphragm. The left gutter is dammed at the top by the phrenicocolic ligament, so infection on the left more often tracks down into the pelvis."
+    },
+    {
+      "key": "morisons",
+      "label": "Hepatorenal recess (Morison's pouch)",
+      "role": "part",
+      "group": "Where fluid goes",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "hepatorenal recess",
+        "Morison's pouch",
+        "subhepatic space",
+        "subphrenic abscess",
+        "FAST scan",
+        "supine"
+      ],
+      "narration": "The space between the liver and the right kidney. In a patient lying on their back it is the lowest part of the upper abdominal cavity, so blood and pus collect there first — which is exactly why it is the first window of a FAST scan in abdominal trauma."
+    },
+    {
+      "key": "douglas",
+      "label": "Rectouterine / rectovesical pouch",
+      "role": "part",
+      "group": "Where fluid goes",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "pouch of Douglas",
+        "rectouterine pouch",
+        "rectovesical pouch",
+        "pelvic abscess",
+        "ectopic pregnancy",
+        "culdocentesis",
+        "boggy swelling",
+        "rectal examination"
+      ],
+      "narration": "The lowest point of the whole peritoneal cavity in both sexes — between the rectum and the uterus in the female, between the rectum and the bladder in the male. Fluid ends up here whether the patient is upright or supine, so a pelvic abscess presents with swinging fever, diarrhoea and a boggy tender swelling felt on rectal examination, and blood from a ruptured ectopic can be sampled through the posterior vaginal fornix."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A balloon and a fist",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Where fluid goes"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The two layers",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The peritoneum is a single continuous serous membrane lining the abdominal cavity. Where it lines the wall it is parietal; where it covers an organ it is visceral; and the two are one sheet, folded. Push your fist into a deflated balloon and the fist is covered by balloon but is never inside it — the organs sit outside the peritoneal cavity in exactly that way. The cavity itself holds only a film of fluid and is a potential space. It is closed in the male; in the female the uterine tubes open into it."
+    },
+    {
+      "mode": "comparison",
+      "beat": 2,
+      "title": "Two layers, two kinds of pain",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "parietal",
+            "visceral"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "parietal",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "visceral",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "parietal",
+          "to": "diaphragm",
+          "kind": "shares its nerve supply"
+        }
+      ],
+      "narration": "One membrane, two nerve supplies, and every abdominal pain question turns on it. The visceral layer has autonomic supply: it feels only stretch and ischaemia, gives dull colicky pain, and refers it to the midline by embryological gut — epigastric for foregut, umbilical for midgut, suprapubic for hindgut. The parietal layer has somatic supply from the overlying wall: it is exquisitely sensitive, localises exactly, and produces guarding and rebound. Appendicitis is the two in sequence — umbilical pain first while only the visceral layer is involved, then a shift to the right iliac fossa when the parietal peritoneum is touched. And the diaphragmatic peritoneum is phrenic, C3 to C5, so blood under the diaphragm is felt at the shoulder tip."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The greater sac, the lesser sac and the door between",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Two sacs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Omenta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "gut_tube"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "epiploic_foramen",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesser_sac",
+          "to": "greater_sac",
+          "kind": "communicate through the epiploic foramen"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "The cavity is one space with a side room. The greater sac is everything you see on opening the abdomen. The lesser sac lies behind the stomach and the lesser omentum and in front of the pancreas, and the only way in is the epiploic foramen. Its boundaries are a standard question: in front the free edge of the lesser omentum with the portal triad in it, behind the inferior vena cava, above the caudate lobe, below the first part of the duodenum. Compress that free edge between finger and thumb — the Pringle manoeuvre — and the liver's inflow stops. Clinically the lesser sac is where a posteriorly perforating gastric ulcer discharges and where a pancreatic pseudocyst forms."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Folds with a job: the mesenteries",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Mesenteries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Omenta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "gut_tube"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "mesentery_proper",
+          "path": [
+            "posterior_wall",
+            "mesentery_proper",
+            "gut_tube"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "transverse_mesocolon",
+          "to": "greater_sac",
+          "kind": "divides supracolic from infracolic"
+        }
+      ],
+      "narration": "A mesentery is two layers of peritoneum enclosing a route to an organ — vessels, lymphatics, nerves and fat. Learn each by what it carries. The mesentery proper suspends the jejunum and ileum, with a root only fifteen centimetres long running obliquely from L2 to the right sacroiliac joint and the superior mesenteric vessels inside it. The transverse mesocolon hangs the transverse colon off the pancreas and carries the middle colic vessels, and it is the shelf dividing the greater sac into upper and lower. The sigmoid mesocolon is an inverted V with the left ureter behind its apex. The mesoappendix carries the appendicular artery. The lesser omentum carries the portal triad, and the falciform ligament carries the ligamentum teres. Ligaments of the peritoneum are named for what they connect: gastrocolic, gastrosplenic, hepatogastric, hepatoduodenal."
+    },
+    {
+      "mode": "comparison",
+      "beat": 5,
+      "title": "Which side of the sheet",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Which side of the sheet"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "posterior_wall"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "intraperitoneal",
+            "retroperitoneal"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Sort every abdominal organ into one of two lists and a great deal follows. Intraperitoneal organs are slung on a mesentery: stomach, jejunum, ileum, caecum, appendix, transverse colon, sigmoid colon, liver and spleen. They are mobile, they can twist, and when they bleed the blood goes into the cavity. Retroperitoneal organs have peritoneum only on their front. The primarily retroperitoneal ones were never in the cavity: kidneys, ureters, adrenals, aorta, inferior vena cava. The secondarily retroperitoneal ones had a mesentery and lost it by fusion in development: most of the duodenum, the pancreas, the ascending colon and the descending colon. Remember them as SAD PUCKER. Their disease gives back or loin pain, and their bleeding forms a retroperitoneal haematoma rather than free fluid."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Where pus and blood collect",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Mesenteries"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Where fluid goes",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:peritoneal-fluid",
+          "path": [
+            "gutters",
+            "morisons",
+            "douglas"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Fluid in the peritoneal cavity does not stay where it started; it runs downhill along fixed routes, and knowing them tells you where to look. In a supine patient the two lowest points are the hepatorenal recess above and the pouch of Douglas below — which is why Morison's pouch is the first window of a FAST scan and why a pelvic collection is felt on rectal examination. The right paracolic gutter is a continuous channel from the right iliac fossa to the subphrenic space, so appendicitis can end as a subphrenic abscess. The left gutter is blocked above by the phrenicocolic ligament, so left-sided infection tends to drain into the pelvis instead. Suspect a subphrenic abscess in anyone with swinging fever a week or two after abdominal surgery: pus somewhere, pus nowhere, pus under the diaphragm."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where it goes wrong",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "greater_omentum",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cavity",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "greater_omentum",
+          "to": "cavity",
+          "kind": "walls off infection"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Peritonitis is the emergency: a perforated viscus spills gut content, the parietal peritoneum is inflamed, and the abdomen becomes rigid and silent with free gas under the diaphragm on an erect film. The greater omentum is the body's own defence — it migrates to the inflamed organ and walls it off, which is why an appendix mass forms in an adult and why generalised peritonitis is commoner in children. Ascites is fluid in the same space, detected as shifting dullness and a fluid thrill, and in a cirrhotic it can become infected without any perforation at all. Healing peritoneum forms fibrous adhesions, and adhesions from a previous laparotomy are the leading cause of small bowel obstruction in an operated abdomen. Finally, the cavity is a road for tumour: gastric and ovarian cancers seed across it, giving a nodule at the umbilicus or deposits in the ovary."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no peritoneum, no omentum and no mesentery of any kind — searching all 934 entries for peritoneum, mesentery, mesocolon, omentum, falciform, serous and sac returns nothing. The subject of this scene has no model, so a 3D scene here would show a stomach, a liver and some bowel with the actual structure missing from between them. 3d_anatomy stays first in the curriculum's preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day peritoneal fold models exist, with no curriculum edit.",
+    "This is the same absence as the pleura and the pericardium. The free BodyParts3D set is built from solid organs, muscles, bones and vessels; serous membranes and the double folds derived from them are simply not in it. Closing this gap needs a different provider or a purpose-built model, not a further ingest of the same archive.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-three regions, seven beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. It needs two drawings rather than one: a sagittal section showing the sheet folding round the organs, the lesser sac and the pouches, and a transverse section at the level of the epiploic foramen. Promote it to 'ready' once those exist with the labelled regions this scene names.",
+    "The abdominal wall, diaphragm, posterior wall and gut tube are authored as context regions of a drawing even though models for all of them exist in the catalog — diaphragm, stomach, liver, spleen, kidneys, the small bowel segments. They are drawn here because the diagram engine draws the whole picture. When the 3D version arrives they become real refs and only the peritoneal folds themselves stay as authored geometry.",
+    "The peritoneal folds of the anterior abdominal wall — the median, medial and lateral umbilical folds and the supravesical and inguinal fossae — are named in terms[] but are not authored as regions here. They belong to the inguinal region scenes, which are already authored, and repeating them would split the same teaching across two scenes.",
+    "The broad ligament is in terms[] and is deliberately not taught here beyond a mention. It is a peritoneal fold and belongs to this topic by definition, but its contents are the whole of female pelvic anatomy and it is properly taught in 'Internal reproductive organs' under Pelvis & Perineum, which is still unauthored.",
+    "The mesothelial lining, the microscopic structure that makes the membrane slippery and gives it its enormous absorptive area, is a histology subject. It is narrated only as a property here; the histology course should carry a microscopic-mode scene for serous membranes and this scene should link to it once it exists."
+  ]
+}

@@ -1,0 +1,680 @@
+{
+  "schema": 2,
+  "id": "gross__heart-pericardium__heart-chambers",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Heart & Pericardium",
+  "structure": "Heart chambers",
+  "covers": [
+    "Heart chambers"
+  ],
+  "learning_goal": "Identify each of the four chambers in a cut heart by its own wall markings, name what enters and leaves it, and explain why the left ventricle is thick and the right is thin.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "heart",
+      "cardiac anatomy",
+      "thorax",
+      "mediastinum",
+      "cardiovascular system",
+      "congenital heart disease",
+      "echocardiography"
+    ],
+    "terms": [
+      "heart chambers",
+      "right atrium",
+      "left atrium",
+      "right ventricle",
+      "left ventricle",
+      "atrium",
+      "ventricle",
+      "auricle",
+      "right auricle",
+      "left auricle",
+      "crista terminalis",
+      "sulcus terminalis",
+      "musculi pectinati",
+      "pectinate muscles",
+      "sinus venarum",
+      "fossa ovalis",
+      "limbus fossae ovalis",
+      "foramen ovale",
+      "patent foramen ovale",
+      "atrial septal defect",
+      "opening of coronary sinus",
+      "valve of the inferior vena cava",
+      "Eustachian valve",
+      "Thebesian valve",
+      "trabeculae carneae",
+      "moderator band",
+      "septomarginal trabecula",
+      "infundibulum",
+      "conus arteriosus",
+      "supraventricular crest",
+      "papillary muscle",
+      "chordae tendineae",
+      "interatrial septum",
+      "interventricular septum",
+      "membranous septum",
+      "muscular septum",
+      "ventricular septal defect",
+      "aortic vestibule",
+      "apex of the heart",
+      "crescentic",
+      "circular in section",
+      "three to one wall thickness"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "ra",
+      "label": "Right atrium",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#5a8fd6",
+      "terms": [
+        "right atrium",
+        "RA",
+        "sinus venarum",
+        "right auricle"
+      ],
+      "narration": "Receives all the deoxygenated blood of the body — superior vena cava above, inferior vena cava below, coronary sinus between them. It forms the whole right border of the heart."
+    },
+    {
+      "key": "rv",
+      "label": "Right ventricle",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#4f9bff",
+      "terms": [
+        "right ventricle",
+        "RV",
+        "anterior surface of the heart"
+      ],
+      "narration": "Forms most of the front of the heart, so it is the chamber a knife or a needle reaches first. Its wall is about 3 to 5 mm thick and it is crescent-shaped in cross-section, wrapped round the left ventricle."
+    },
+    {
+      "key": "la",
+      "label": "Left atrium",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "terms": [
+        "left atrium",
+        "LA",
+        "left auricle",
+        "base of the heart"
+      ],
+      "narration": "The most posterior chamber, taking four pulmonary veins. It lies directly in front of the oesophagus, which is why an enlarged left atrium shows on a barium swallow and why the echo probe goes down the gullet."
+    },
+    {
+      "key": "lv",
+      "label": "Left ventricle",
+      "role": "part",
+      "group": "Chambers",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "left ventricle",
+        "LV",
+        "apex",
+        "apex beat",
+        "hypertrophy"
+      ],
+      "narration": "Forms the apex and the left border. Its wall is three times the thickness of the right — 8 to 12 mm — and it is circular in section, because it pumps against the whole body's resistance rather than the lungs' alone."
+    },
+    {
+      "key": "crista_terminalis",
+      "label": "Crista terminalis",
+      "role": "part",
+      "group": "Inside the right atrium",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "terms": [
+        "crista terminalis",
+        "sulcus terminalis",
+        "smooth part",
+        "rough part",
+        "sinus venosus"
+      ],
+      "narration": "A vertical muscular ridge dividing the atrium into a smooth posterior part from the sinus venosus and a rough anterior part from the true atrium. The SA node sits at its upper end."
+    },
+    {
+      "key": "pectinate",
+      "label": "Pectinate muscles & right auricle",
+      "role": "part",
+      "group": "Inside the right atrium",
+      "layer": "organ",
+      "color": "#8fbdd6",
+      "terms": [
+        "musculi pectinati",
+        "pectinate muscles",
+        "auricle",
+        "atrial appendage",
+        "comb"
+      ],
+      "narration": "Parallel muscle ridges like the teeth of a comb, in front of the crista and inside the auricle. Blood stagnates between them in atrial fibrillation, which is where the clot of a cardioembolic stroke forms."
+    },
+    {
+      "key": "fossa_ovalis",
+      "label": "Fossa ovalis",
+      "role": "part",
+      "group": "Inside the right atrium",
+      "layer": "organ",
+      "color": "#a8cbdd",
+      "terms": [
+        "fossa ovalis",
+        "limbus",
+        "foramen ovale",
+        "patent foramen ovale",
+        "septum primum",
+        "septum secundum",
+        "paradoxical embolism"
+      ],
+      "narration": "A shallow oval dip on the septal wall — the closed remnant of the foramen ovale, with the limbus as its raised upper rim. It fails to seal in about a quarter of adults, which is how a venous clot can cross to the systemic side."
+    },
+    {
+      "key": "coronary_sinus_opening",
+      "label": "Openings: SVC, IVC & coronary sinus",
+      "role": "part",
+      "group": "Inside the right atrium",
+      "layer": "organ",
+      "color": "#6f86d6",
+      "terms": [
+        "opening of the coronary sinus",
+        "Thebesian valve",
+        "valve of the inferior vena cava",
+        "Eustachian valve",
+        "superior vena cava",
+        "inferior vena cava"
+      ],
+      "narration": "Three inlets and no valves worth the name. The superior cava enters above with nothing guarding it, the inferior cava below behind a rudimentary Eustachian valve, and the coronary sinus between the inferior cava and the tricuspid opening."
+    },
+    {
+      "key": "trabeculae",
+      "label": "Trabeculae carneae",
+      "role": "part",
+      "group": "Inside the ventricles",
+      "layer": "organ",
+      "color": "#7ab8f5",
+      "terms": [
+        "trabeculae carneae",
+        "muscular ridges",
+        "rough wall"
+      ],
+      "narration": "Irregular muscular ridges lining both ventricles. They are coarse in the right ventricle and finer in the left, so a cut chamber can be told apart by feel alone."
+    },
+    {
+      "key": "moderator_band",
+      "label": "Moderator band",
+      "role": "part",
+      "group": "Inside the ventricles",
+      "layer": "organ",
+      "color": "#3f7fbf",
+      "terms": [
+        "moderator band",
+        "septomarginal trabecula",
+        "right bundle branch",
+        "anterior papillary muscle"
+      ],
+      "narration": "A muscular strut crossing from the septum to the anterior papillary muscle — found only in the right ventricle. It carries the right bundle branch, so the apex is activated at the same time as the base."
+    },
+    {
+      "key": "papillary",
+      "label": "Papillary muscles & chordae tendineae",
+      "role": "part",
+      "group": "Inside the ventricles",
+      "layer": "organ",
+      "color": "#b8524a",
+      "terms": [
+        "papillary muscle",
+        "chordae tendineae",
+        "anterior papillary muscle",
+        "posterior papillary muscle",
+        "septal papillary muscle",
+        "prolapse"
+      ],
+      "narration": "Three in the right ventricle, two in the left. They tighten as the ventricle contracts and hold the cusps down, so the valve stays flat instead of blowing back into the atrium."
+    },
+    {
+      "key": "infundibulum",
+      "label": "Infundibulum (conus arteriosus)",
+      "role": "part",
+      "group": "Inside the ventricles",
+      "layer": "organ",
+      "color": "#5aa9e6",
+      "terms": [
+        "infundibulum",
+        "conus arteriosus",
+        "outflow tract",
+        "supraventricular crest",
+        "smooth outflow",
+        "tetralogy of Fallot"
+      ],
+      "narration": "The smooth funnel leading out of the right ventricle to the pulmonary valve. Narrowing here is the obstruction in tetralogy of Fallot."
+    },
+    {
+      "key": "aortic_vestibule",
+      "label": "Aortic vestibule",
+      "role": "part",
+      "group": "Inside the ventricles",
+      "layer": "organ",
+      "color": "#d9534f",
+      "terms": [
+        "aortic vestibule",
+        "left ventricular outflow tract",
+        "LVOT",
+        "smooth walled"
+      ],
+      "narration": "The smooth-walled outflow of the left ventricle below the aortic valve. Unlike the right, its inflow and outflow lie side by side, separated only by the anterior cusp of the mitral valve."
+    },
+    {
+      "key": "ias",
+      "label": "Interatrial septum",
+      "role": "part",
+      "group": "Septa",
+      "layer": "organ",
+      "color": "#9b59b6",
+      "terms": [
+        "interatrial septum",
+        "atrial septal defect",
+        "ASD",
+        "ostium secundum",
+        "ostium primum",
+        "fixed splitting"
+      ],
+      "narration": "The thin wall between the atria, carrying the fossa ovalis. A hole here shunts left to right and gives fixed splitting of the second heart sound."
+    },
+    {
+      "key": "ivs_muscular",
+      "label": "Interventricular septum — muscular part",
+      "role": "part",
+      "group": "Septa",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "interventricular septum",
+        "muscular septum",
+        "septal wall",
+        "bulges to the right"
+      ],
+      "narration": "Thick, muscular, and bulging into the right ventricle because the left side's pressure is higher. It behaves as part of the left ventricle."
+    },
+    {
+      "key": "ivs_membranous",
+      "label": "Interventricular septum — membranous part",
+      "role": "part",
+      "group": "Septa",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "membranous septum",
+        "ventricular septal defect",
+        "VSD",
+        "maladie de Roger",
+        "pansystolic murmur",
+        "bundle of His"
+      ],
+      "narration": "A small fibrous patch at the top, where the septum meets the valves. It is the last part to close in the fetus and the commonest site of a ventricular septal defect — a harsh pansystolic murmur at the left sternal edge."
+    },
+    {
+      "key": "tricuspid",
+      "label": "Tricuspid valve",
+      "role": "context",
+      "group": "Doors",
+      "layer": "organ",
+      "color": "#f2c14e",
+      "terms": [
+        "tricuspid valve",
+        "right atrioventricular valve"
+      ],
+      "narration": "The door from right atrium to right ventricle."
+    },
+    {
+      "key": "mitral",
+      "label": "Mitral valve",
+      "role": "context",
+      "group": "Doors",
+      "layer": "organ",
+      "color": "#f2a33c",
+      "terms": [
+        "mitral valve",
+        "bicuspid valve",
+        "left atrioventricular valve"
+      ],
+      "narration": "The door from left atrium to left ventricle."
+    },
+    {
+      "key": "pulm_valve",
+      "label": "Pulmonary valve",
+      "role": "context",
+      "group": "Doors",
+      "layer": "organ",
+      "color": "#7fb3ff",
+      "terms": [
+        "pulmonary valve"
+      ],
+      "narration": "The exit from the right ventricle."
+    },
+    {
+      "key": "aortic_valve",
+      "label": "Aortic valve",
+      "role": "context",
+      "group": "Doors",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "aortic valve",
+        "aortic root",
+        "sinuses of Valsalva"
+      ],
+      "narration": "The exit from the left ventricle, with the coronary arteries opening just above two of its cusps."
+    },
+    {
+      "key": "svc_in",
+      "label": "Superior & inferior vena cava",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#4a7fc4",
+      "terms": [
+        "superior vena cava",
+        "inferior vena cava",
+        "venous return"
+      ],
+      "narration": "Bring the body's blood into the right atrium."
+    },
+    {
+      "key": "pulm_veins_in",
+      "label": "Pulmonary veins",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#ff6b6b",
+      "terms": [
+        "pulmonary veins",
+        "four pulmonary veins"
+      ],
+      "narration": "Four of them, entering the back of the left atrium."
+    },
+    {
+      "key": "outflow_vessels",
+      "label": "Pulmonary trunk & aorta",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#d9453c",
+      "terms": [
+        "pulmonary trunk",
+        "ascending aorta",
+        "great vessels"
+      ],
+      "narration": "The two exits, crossing each other as they leave — the pulmonary trunk starts in front and passes to the left, the aorta starts behind it."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Four chambers, two pumps",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Chambers"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Two atria above, two ventricles below, and a septum keeping the right side from the left. The right side is a low-pressure pump sending blood a short way to the lungs; the left is a high-pressure pump sending it everywhere else. Almost every difference between the chambers comes from that one fact."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Open the right atrium",
+      "ops": [
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.2,
+          "animate": true
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Inside the right atrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ra"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crista_terminalis",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "crista_terminalis",
+          "to": "pectinate",
+          "kind": "divides smooth from rough"
+        }
+      ],
+      "narration": "Cut it open and one ridge explains the whole chamber. In front of the crista terminalis the wall is rough with pectinate muscles — that part came from the embryonic atrium. Behind it the wall is smooth — that part is absorbed vena cava. On the septal wall sits the fossa ovalis, and between the inferior cava and the tricuspid opening is the mouth of the coronary sinus."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Open the right ventricle",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Inside the ventricles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "rv"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Doors"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "moderator_band",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "moderator_band",
+          "to": "papillary",
+          "kind": "runs to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rv",
+          "to": "infundibulum",
+          "kind": "leads to"
+        }
+      ],
+      "narration": "The inflow is rough with coarse trabeculae; the outflow is a smooth funnel, the infundibulum, leading up to the pulmonary valve. Crossing the cavity is the moderator band, which no other chamber has — it carries the right bundle branch from the septum to the anterior papillary muscle. Find the moderator band and you have found the right ventricle."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Open the left side",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Chambers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lv",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aortic_vestibule"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "papillary"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lv",
+            "rv"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The left atrium is smooth almost everywhere, with pectinate muscle only in its auricle, and takes four pulmonary veins at the back. The left ventricle has fine trabeculae, two large papillary muscles, and a smooth aortic vestibule beside its inlet. Compare the two ventricles in section: the left is a thick circle, the right a thin crescent draped over it. A right ventricle that looks like the left has been pumping against pulmonary hypertension."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The septa and where they leak",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Septa"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ivs_membranous",
+            "ivs_muscular"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ias",
+          "to": "fossa_ovalis",
+          "kind": "carries"
+        }
+      ],
+      "narration": "The interatrial septum is thin and carries the fossa ovalis. The interventricular septum is mostly thick muscle that belongs functionally to the left ventricle, with a small membranous patch at the top. That patch is the last part to close before birth and the commonest place a hole is left — a loud pansystolic murmur at the left sternal edge, and the smaller the hole the louder the noise."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Follow one red cell",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chambers"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Doors"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Vessels"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:blood",
+          "path": [
+            "svc_in",
+            "ra",
+            "tricuspid",
+            "rv",
+            "infundibulum",
+            "pulm_valve",
+            "pulm_veins_in",
+            "la",
+            "mitral",
+            "lv",
+            "aortic_vestibule",
+            "aortic_valve",
+            "outflow_vessels"
+          ],
+          "duration": 12
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Chambers",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "Vena cava to right atrium, through the tricuspid to the right ventricle, up the infundibulum and out the pulmonary valve to the lungs. Back through four pulmonary veins to the left atrium, through the mitral valve to the left ventricle, up the vestibule and out the aortic valve to the body. Say the order out loud until the chamber and its door come as one pair."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Tell them apart in the pot",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ra",
+            "la"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "rv",
+            "lv"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fossa_ovalis",
+          "intensity": 0.8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "The spotter asks which chamber this is. Crista terminalis, pectinate muscles reaching well beyond the auricle, a fossa ovalis and the mouth of the coronary sinus: right atrium. Smooth walls, four veins entering behind, pectinate muscle only in the auricle: left atrium. A moderator band, coarse trabeculae, three papillary muscles and a thin crescentic wall: right ventricle. Thick circular wall, two papillary muscles, fine trabeculae and the apex: left ventricle."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no chamber at all: searching all 934 entries for atrium, ventricle, chamber and septum returns the four ventricles of the BRAIN, the septum pellucidum, the papillary muscles and the wall of heart, and nothing cardiac that is a chamber. The heart scene gross__heart-pericardium__heart deliberately does not claim to cover this structure for that reason, and authoring a second 3D scene from the same valves and papillary muscles would have repeated it without teaching a chamber.",
+    "The chambers ARE in the full BodyParts3D archive and this gap is closable without rewriting the curriculum: right atrium FMA7096, left atrium FMA7097, right ventricle FMA7098, left ventricle FMA7101, aortic valve FMA7236, interventricular septum FMA7133. Run tools/ingest-full-archive.mjs --fetch on those ids, then re-author this scene as 3d_anatomy — the structure list, the beats and the narration all survive the move.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-three regions, seven beats, ops and narration — but no artwork has been drawn for the SVG engine, so nothing renders today. Promote it to 'ready' once a four-chamber cut drawing exists with the labelled regions this scene names, or once the ingest above lets it become a 3D scene.",
+    "The valves and great vessels are authored as context regions here even though six of them DO exist in the catalog (tricuspid FMA7234, mitral FMA7235, pulmonary FMA7246, and the caval, pulmonary and aortic vessels). They are context because the valves are taught in full by the heart scene; this scene borrows them only as the doors between chambers. The aortic valve is the one door with no model in either set.",
+    "Beat 6 traces concept:blood through thirteen waypoints, several of which are the chambers themselves rather than a lumen. That is deliberate: the point of the beat is the ORDER, and a student who can say the order can answer the flow question in any form the exam asks it.",
+    "Wall thicknesses are given as the standard 3-5 mm right and 8-12 mm left. Chamber volumes, the conduction system's course through the septum, and the fibrous skeleton are not drawn — the conduction system has its own curriculum entry and its own scene to come."
+  ]
+}

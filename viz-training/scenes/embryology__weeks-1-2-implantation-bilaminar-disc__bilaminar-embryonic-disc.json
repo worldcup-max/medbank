@@ -1,0 +1,663 @@
+{
+  "schema": 2,
+  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__bilaminar-embryonic-disc",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+  "structure": "Bilaminar embryonic disc",
+  "covers": [
+    "Bilaminar embryonic disc"
+  ],
+  "learning_goal": "Draw a cut bilaminar disc with the two layers the right way up, say which cavity sits on which side and which layer lines it, state what each layer goes on to make, and use the prechordal plate to give the disc a head end.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "bilaminar disc",
+      "week 2",
+      "early development",
+      "germ layers",
+      "gastrulation",
+      "twinning",
+      "early pregnancy scan"
+    ],
+    "terms": [
+      "bilaminar embryonic disc",
+      "bilaminar disc",
+      "embryonic disc",
+      "germ disc",
+      "two-layered disc",
+      "epiblast",
+      "hypoblast",
+      "primitive endoderm",
+      "columnar",
+      "cuboidal",
+      "inner cell mass",
+      "embryoblast",
+      "day 8",
+      "day 9",
+      "day 12",
+      "day 13",
+      "day 14",
+      "week 2",
+      "amniotic cavity",
+      "amnioblasts",
+      "amnion",
+      "exocoelomic membrane",
+      "Heuser membrane",
+      "primary yolk sac",
+      "primitive yolk sac",
+      "exocoelomic cavity",
+      "secondary yolk sac",
+      "definitive yolk sac",
+      "extraembryonic mesoderm",
+      "extraembryonic somatic mesoderm",
+      "extraembryonic splanchnic mesoderm",
+      "extraembryonic coelom",
+      "chorionic cavity",
+      "chorion",
+      "connecting stalk",
+      "body stalk",
+      "umbilical cord",
+      "prechordal plate",
+      "cranial end",
+      "craniocaudal axis",
+      "dorsal",
+      "ventral",
+      "floor of the amniotic cavity",
+      "roof of the yolk sac",
+      "gastrulation",
+      "primitive streak",
+      "ectoderm",
+      "mesoderm",
+      "endoderm",
+      "pluripotent",
+      "week of twos",
+      "monoamniotic twins",
+      "conjoined twins",
+      "gestational sac",
+      "double bleb sign",
+      "yolk sac on ultrasound",
+      "14-day rule"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "icm_split",
+      "label": "The inner cell mass splits — day 8",
+      "role": "context",
+      "group": "How the disc appears",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "inner cell mass",
+        "embryoblast",
+        "day 8",
+        "delamination",
+        "two layers",
+        "differentiation"
+      ],
+      "narration": "While the trophoblast is busy invading, the inner cell mass does something quieter and more important. On about day eight it separates into two flat sheets stacked on each other. Everything the embryo will ever be is now a two-layer plate about the size of a full stop."
+    },
+    {
+      "key": "epiblast",
+      "label": "Epiblast — the upper layer",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "epiblast",
+        "upper layer",
+        "tall columnar",
+        "dorsal",
+        "floor of the amniotic cavity",
+        "amniotic side",
+        "pluripotent",
+        "all three germ layers",
+        "primitive streak",
+        "gastrulation"
+      ],
+      "narration": "The upper layer: tall columnar cells facing the amniotic cavity, whose floor they form. Learn one sentence about it and learn this one — every cell of the body comes from the epiblast. Ectoderm, mesoderm and endoderm are all made from it at gastrulation next week. The hypoblast contributes no tissue to the fetus at all."
+    },
+    {
+      "key": "hypoblast",
+      "label": "Hypoblast — the lower layer",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "hypoblast",
+        "primitive endoderm",
+        "lower layer",
+        "small cuboidal",
+        "ventral",
+        "roof of the yolk sac",
+        "yolk sac side",
+        "extraembryonic endoderm",
+        "displaced",
+        "signalling"
+      ],
+      "narration": "The lower layer: small cuboidal cells facing the yolk sac cavity, whose roof they form. It lines the yolk sac and it signals to the epiblast to set the head end, but it is displaced entirely at gastrulation and none of it survives in the fetus. Do not confuse it with definitive endoderm — that comes from epiblast."
+    },
+    {
+      "key": "disc",
+      "label": "The bilaminar disc itself",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "bilaminar embryonic disc",
+        "germ disc",
+        "embryonic disc",
+        "flat oval plate",
+        "between two cavities",
+        "day 8",
+        "day 14",
+        "embryo proper"
+      ],
+      "narration": "Put the two sheets together and you have the bilaminar embryonic disc — a flat oval plate lying between two balloons. Amniotic cavity above, yolk sac below, disc sandwiched between them. If you can draw that sandwich with the layers the right way up you can answer most of week two."
+    },
+    {
+      "key": "amniotic_cavity",
+      "label": "Amniotic cavity — above the epiblast",
+      "role": "part",
+      "group": "The two cavities",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "amniotic cavity",
+        "amnioblasts",
+        "amnion",
+        "day 8",
+        "dorsal",
+        "above the epiblast",
+        "floor of the amniotic cavity",
+        "amniotic fluid"
+      ],
+      "narration": "A slit opens within the epiblast on day eight and becomes the amniotic cavity. Its roof is a thin layer of amnioblasts derived from epiblast; its floor is the epiblast itself. So the amniotic cavity sits on the dorsal side of the embryo — that orientation is worth fixing early, because everything you later call dorsal is on the amniotic side."
+    },
+    {
+      "key": "primary_yolk_sac",
+      "label": "Primary yolk sac — below the hypoblast",
+      "role": "part",
+      "group": "The two cavities",
+      "layer": "organ",
+      "color": "#f7dc6f",
+      "terms": [
+        "primary yolk sac",
+        "primitive yolk sac",
+        "exocoelomic cavity",
+        "exocoelomic membrane",
+        "Heuser membrane",
+        "day 9",
+        "ventral",
+        "roof of the yolk sac"
+      ],
+      "narration": "On day nine, hypoblast cells migrate out and line the inside of the blastocyst cavity as a thin exocoelomic membrane, also called Heuser's membrane. The space they enclose is the primary yolk sac. Its roof is the hypoblast, so the yolk sac is on the ventral side of the disc — the mirror image of the amniotic cavity above."
+    },
+    {
+      "key": "extraembryonic_mesoderm",
+      "label": "Extraembryonic mesoderm",
+      "role": "part",
+      "group": "Filling and splitting",
+      "layer": "organ",
+      "color": "#a9dfbf",
+      "terms": [
+        "extraembryonic mesoderm",
+        "loose connective tissue",
+        "day 11",
+        "day 12",
+        "between trophoblast and yolk sac",
+        "somatic mesoderm",
+        "splanchnic mesoderm",
+        "somatopleuric",
+        "splanchnopleuric"
+      ],
+      "narration": "Around day eleven a loose tissue fills the gap between the exocoelomic membrane and the inner face of the cytotrophoblast. That is extraembryonic mesoderm. It then splits into two sheets: a somatic layer that lines the trophoblast and covers the amnion, and a splanchnic layer that covers the yolk sac. Everything outside the embryo is either somatic or splanchnic from here on."
+    },
+    {
+      "key": "chorionic_cavity",
+      "label": "Chorionic cavity (extraembryonic coelom)",
+      "role": "part",
+      "group": "Filling and splitting",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "chorionic cavity",
+        "extraembryonic coelom",
+        "day 12",
+        "chorion",
+        "cytotrophoblast",
+        "syncytiotrophoblast",
+        "somatic mesoderm",
+        "suspended",
+        "gestational sac"
+      ],
+      "narration": "The space that opens inside the extraembryonic mesoderm is the chorionic cavity. Its wall — somatic mesoderm plus cytotrophoblast plus syncytiotrophoblast — is the chorion, and that three-layer definition is the one to memorise. Once this cavity is open, the whole embryo hangs inside it on a stalk. On an early scan it is the fluid you see as the gestational sac."
+    },
+    {
+      "key": "secondary_yolk_sac",
+      "label": "Secondary yolk sac — day 12 to 13",
+      "role": "part",
+      "group": "Filling and splitting",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "secondary yolk sac",
+        "definitive yolk sac",
+        "day 12",
+        "day 13",
+        "hypoblast",
+        "pinched off",
+        "exocoelomic cysts",
+        "primordial germ cells",
+        "first blood cells",
+        "yolk sac on ultrasound"
+      ],
+      "narration": "The hypoblast produces a second wave of cells that pushes into the primary yolk sac and pinches off a smaller cavity — the secondary or definitive yolk sac. Scraps of the old one are left behind as exocoelomic cysts. The secondary sac matters for two reasons that come up later: the first blood cells and the primordial germ cells both arise in its wall. It is also the first structure seen inside a gestational sac on ultrasound, and its absence is an early warning sign."
+    },
+    {
+      "key": "connecting_stalk",
+      "label": "Connecting stalk",
+      "role": "part",
+      "group": "Filling and splitting",
+      "layer": "organ",
+      "color": "#7dcea0",
+      "terms": [
+        "connecting stalk",
+        "body stalk",
+        "extraembryonic mesoderm",
+        "caudal",
+        "suspends the embryo",
+        "umbilical cord",
+        "allantois"
+      ],
+      "narration": "The chorionic cavity does not open everywhere. A bridge of extraembryonic mesoderm is left at the caudal end, and the embryo hangs from the chorion by it. This is the connecting stalk, and it becomes the umbilical cord. So the cord is not something added later — it is the piece of tissue the cavity failed to cut through."
+    },
+    {
+      "key": "prechordal_plate",
+      "label": "Prechordal plate — the head end appears",
+      "role": "part",
+      "group": "Giving the disc an axis",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "prechordal plate",
+        "day 14",
+        "cranial end",
+        "craniocaudal axis",
+        "columnar hypoblast",
+        "thickened",
+        "oropharyngeal membrane",
+        "head organiser",
+        "signalling centre"
+      ],
+      "narration": "Late in week two a small patch of hypoblast becomes tall and columnar and sticks firmly to the epiblast above it. That is the prechordal plate. It marks the future mouth and it identifies the cranial end of the disc — the first time the embryo has a head end and a tail end at all. It is also a signalling centre for forebrain development, so a failure here shows up as a midline face and brain defect."
+    },
+    {
+      "key": "week_of_twos",
+      "label": "The week of twos",
+      "role": "part",
+      "group": "Giving the disc an axis",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "week of twos",
+        "two layers",
+        "two cavities",
+        "two trophoblast layers",
+        "epiblast",
+        "hypoblast",
+        "amniotic cavity",
+        "yolk sac",
+        "cytotrophoblast",
+        "syncytiotrophoblast",
+        "primary yolk sac",
+        "secondary yolk sac"
+      ],
+      "narration": "Week two is remembered as the week of twos. Two germ layers — epiblast and hypoblast. Two cavities — amniotic and yolk sac. Two trophoblast layers — cytotrophoblast and syncytiotrophoblast. Two yolk sacs in succession, primary then secondary. It is a memory hook rather than a principle, but it is the fastest way to check you have not left something out of an answer."
+    },
+    {
+      "key": "disc_clinical",
+      "label": "Why the disc has a legal and clinical weight",
+      "role": "part",
+      "group": "Giving the disc an axis",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "14-day rule",
+        "primitive streak",
+        "individuation",
+        "monoamniotic twins",
+        "monochorionic monoamniotic",
+        "conjoined twins",
+        "day 8",
+        "day 13",
+        "double bleb sign",
+        "gestational sac",
+        "yolk sac on ultrasound",
+        "sirenomelia",
+        "caudal dysgenesis"
+      ],
+      "narration": "Three practical points. A disc that splits between days eight and thirteen — after the amnion has formed — gives twins inside one amniotic sac, which carries a high risk of cord entanglement; a split after day thirteen leaves them conjoined. On an early scan the amniotic cavity and yolk sac either side of the disc give the double bleb appearance, and the yolk sac is the first thing to look for inside a gestational sac. And the fourteen-day limit on embryo research is drawn at this point, because the primitive streak has not yet appeared and the disc could still become more than one individual."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cut it and get the layers the right way up",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two layers"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "epiblast",
+            "hypoblast"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "One drawing carries this whole topic: a flat plate cut across, with a balloon above it and a balloon below. Tall columnar cells on top — epiblast, facing the amniotic cavity. Small cuboidal cells underneath — hypoblast, facing the yolk sac. Get that orientation right the first time and you will not have to unlearn it, because dorsal for the rest of embryology means the amniotic side."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Day 8 — one mass becomes two sheets",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How the disc appears"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two layers"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "icm_split",
+          "to": "epiblast",
+          "kind": "gives rise to the upper sheet"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "icm_split",
+          "to": "hypoblast",
+          "kind": "gives rise to the lower sheet"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "disc",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "On about day eight, while the trophoblast is invading, the inner cell mass flattens and separates into two sheets. The embryo proper is now a plate two cells thick. Everything from this point until gastrulation is about building the cavities and membranes around that plate — the plate itself does nothing until week three."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "A cavity on each side",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two cavities"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two layers"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "epiblast",
+          "to": "amniotic_cavity",
+          "kind": "forms its floor"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hypoblast",
+          "to": "primary_yolk_sac",
+          "kind": "forms its roof"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0
+        }
+      ],
+      "narration": "The cavities are defined by which layer lines them, and that is the examinable link. A slit inside the epiblast becomes the amniotic cavity, roofed by amnioblasts, floored by the epiblast itself. Hypoblast cells crawl out to line the old blastocyst cavity as Heuser's membrane, and the space inside is the primary yolk sac, roofed by hypoblast. Amnion above, yolk sac below, disc between."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "A new tissue fills the gap, then splits",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Filling and splitting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two cavities"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "extraembryonic_mesoderm",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extraembryonic_mesoderm",
+          "to": "chorionic_cavity",
+          "kind": "splits open to become it"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Around day eleven a loose mesoderm fills the space between the yolk sac and the cytotrophoblast. It then splits into two sheets — somatic, which lines the trophoblast and covers the amnion, and splanchnic, which covers the yolk sac — and the space that opens between them is the chorionic cavity. Its wall is the chorion: somatic mesoderm, cytotrophoblast, syncytiotrophoblast. Three layers, in that order, outwards."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The yolk sac is remade smaller",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Filling and splitting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hypoblast"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:yolk-sac-remodelling",
+          "path": [
+            "primary_yolk_sac",
+            "secondary_yolk_sac"
+          ],
+          "duration": 5
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "secondary_yolk_sac",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Around day twelve to thirteen the hypoblast sends out a second wave of cells that pushes into the primary yolk sac and pinches off a smaller one — the secondary, or definitive, yolk sac. Fragments of the primary sac are left as exocoelomic cysts. The secondary sac is the one that matters: the first blood cells form in its wall, and so do the primordial germ cells that will migrate to the gonads."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "The embryo hangs on a stalk",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Filling and splitting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "connecting_stalk",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "connecting_stalk",
+          "to": "chorionic_cavity",
+          "kind": "the bridge the cavity did not open"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The chorionic cavity opens everywhere except at one point at the caudal end, where a bridge of extraembryonic mesoderm remains. The disc, with its two cavities, now hangs inside the chorionic cavity from that bridge. It is the connecting stalk, and it becomes the umbilical cord — the cord is simply the tissue the cavity did not cut through."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Which end is the head",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Giving the disc an axis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two layers"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "prechordal_plate",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hypoblast",
+          "to": "prechordal_plate",
+          "kind": "thickens here to mark the cranial end"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prechordal_plate",
+          "to": "epiblast",
+          "kind": "adheres to it — the future mouth"
+        }
+      ],
+      "narration": "Until now the disc is a plate with no ends. Late in week two a patch of hypoblast at one edge becomes tall and columnar and sticks to the epiblast above it — the prechordal plate. It marks the future mouth, so it defines the cranial end, and the craniocaudal axis exists from that moment. It also signals to the overlying epiblast about forebrain formation, which is why defects here produce midline face and brain anomalies."
+    },
+    {
+      "mode": "comparison",
+      "beat": 8,
+      "title": "Only one of the two layers survives",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two layers"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "epiblast",
+            "hypoblast"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "epiblast",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Filling and splitting"
+        }
+      ],
+      "narration": "The single most examinable line in week two. Every tissue of the fetus comes from the epiblast — all three germ layers are made from it during gastrulation next week. The hypoblast lines the yolk sac, sets the head end, and is then completely displaced; it contributes nothing to the body. Students routinely assume the lower layer becomes endoderm because of where it sits. It does not. Definitive endoderm is epiblast that migrated down and pushed the hypoblast out."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "Two layers, two cavities, and what they mean in a clinic",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "week_of_twos",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "disc_clinical",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "disc_clinical",
+          "to": "amniotic_cavity",
+          "kind": "already formed — so a later split shares it"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "disc_clinical",
+          "to": "secondary_yolk_sac",
+          "kind": "the first thing seen on an early scan"
+        }
+      ],
+      "narration": "Close on the week of twos — two germ layers, two cavities, two trophoblast layers, two yolk sacs in sequence. Then three uses for it. Once the amniotic cavity exists, a disc that splits shares it, so twins from days eight to thirteen are monoamniotic and at risk of cord entanglement, and a split after that leaves them conjoined. On an early scan the two cavities either side of the disc give the double bleb appearance and the secondary yolk sac is the first structure to look for. And the fourteen-day rule stops research here precisely because the primitive streak has not yet appeared and this plate could still become more than one person."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is a staged process at a scale no mesh exists for. Only diagram is deferred. The curriculum asks for a cross_section view and beats 1 and 3 are the cut.",
+    "Status is 'planned'. Thirteen regions, nine beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a sagittal cut of the conceptus at day 9 and again at day 13, with tall columnar epiblast drawn visibly taller than cuboidal hypoblast, the amniotic cavity above and yolk sac below the disc, Heuser's membrane, extraembryonic mesoderm shown filling and then splitting into somatic and splanchnic sheets, the chorionic cavity, the connecting stalk at the caudal end, and the prechordal plate marked at the cranial end.",
+    "Beat 5 traces concept:yolk-sac-remodelling. The subject is the replacement of the primary sac by the secondary one, which is a change of state rather than a drawn object.",
+    "The drawing must keep the disc the same way up in every panel, epiblast uppermost. Reversing it between the day 9 and day 13 panels for layout convenience would teach the opposite of beat 1, which is the beat this whole scene rests on.",
+    "'Amniotic cavity & yolk sac' is a SEPARATE curriculum entry in this topic and is NOT claimed in covers[], although beats 3 and 5 describe both cavities. That entry asks for cross_section and location views and deserves the fuller treatment this scene does not give: how the amnion grows to obliterate the chorionic cavity, the fate of the yolk sac as the vitelline duct, Meckel's diverticulum, and the allantois. Naming the cavities here is not the same as teaching them.",
+    "'Chorion & placenta (early)' is likewise NOT claimed. The chorion is defined in beat 4 because the chorionic cavity cannot be described without it, but the villous tree, the placental barrier and maternal-fetal exchange belong to that entry.",
+    "Cytotrophoblast and syncytiotrophoblast appear only inside the chorion definition. They are taught as regions in the implantation scene authored in the same run; this scene deliberately does not repeat them.",
+    "Timings are the standard teaching ones — bilaminar disc about day 8, amniotic cavity day 8, primary yolk sac day 9, extraembryonic mesoderm about day 11, chorionic cavity and secondary yolk sac day 12 to 13, prechordal plate about day 14 — and are narrated as approximations. Published day numbers for the secondary yolk sac vary by a day either way and no single figure is stated as fact.",
+    "The fourteen-day rule is included because Nigerian MBBS ethics teaching raises it against exactly this stage, and because it gives students a reason to remember when the primitive streak appears. It is narrated as a research limit, not as a claim about law in any particular country."
+  ]
+}

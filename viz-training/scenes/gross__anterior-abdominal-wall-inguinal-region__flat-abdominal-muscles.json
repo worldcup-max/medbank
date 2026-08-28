@@ -1,0 +1,864 @@
+{
+  "schema": 2,
+  "id": "gross__anterior-abdominal-wall-inguinal-region__flat-abdominal-muscles",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Anterior Abdominal Wall & Inguinal Region",
+  "structure": "Flat abdominal muscles",
+  "covers": [
+    "Flat abdominal muscles"
+  ],
+  "learning_goal": "Name the three flat muscles in order from outside in, state the fibre direction, attachments and nerve supply of each, say what happens to each aponeurosis when it reaches the rectus, and use the fibre directions to explain rotation of the trunk, the shutter mechanism at the groin and why a surgeon splits this wall rather than cutting across it.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "anterior abdominal wall",
+      "abdomen",
+      "flat abdominal muscles",
+      "abdominal muscles",
+      "hernia",
+      "inguinal region",
+      "surgical incisions",
+      "regional anaesthesia",
+      "abdominal examination"
+    ],
+    "terms": [
+      "flat abdominal muscles",
+      "external oblique",
+      "external abdominal oblique",
+      "internal oblique",
+      "internal abdominal oblique",
+      "transversus abdominis",
+      "transversalis",
+      "three flat muscles",
+      "hands in pockets",
+      "fibre direction",
+      "aponeurosis",
+      "aponeuroses",
+      "linea alba",
+      "rectus sheath",
+      "anterior wall of the rectus sheath",
+      "posterior wall of the rectus sheath",
+      "arcuate line",
+      "conjoint tendon",
+      "falx inguinalis",
+      "inguinal ligament",
+      "Poupart's ligament",
+      "lacunar ligament",
+      "iliac crest",
+      "anterior superior iliac spine",
+      "pubic tubercle",
+      "thoracolumbar fascia",
+      "digitations",
+      "serratus anterior",
+      "latissimus dorsi",
+      "thoracoabdominal nerves",
+      "T7 to T12",
+      "subcostal nerve",
+      "iliohypogastric nerve",
+      "ilioinguinal nerve",
+      "neurovascular plane",
+      "transversus abdominis plane block",
+      "TAP block",
+      "rotation of the trunk",
+      "lateral flexion",
+      "raised intra-abdominal pressure",
+      "Valsalva",
+      "guarding",
+      "rigidity",
+      "grid iron incision",
+      "gridiron incision",
+      "McBurney's incision",
+      "muscle splitting",
+      "Spigelian hernia",
+      "shutter mechanism",
+      "transversalis fascia",
+      "superficial inguinal ring",
+      "deep inguinal ring",
+      "abdominal wall layers"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "extobl_r",
+      "name": "right external oblique",
+      "label": "External oblique (right)",
+      "role": "part",
+      "group": "External oblique",
+      "layer": "muscle",
+      "color": "#e67e22",
+      "refs": {
+        "bodyparts3d": "FMA13336"
+      },
+      "terms": [
+        "external oblique",
+        "external abdominal oblique",
+        "outermost flat muscle",
+        "hands in pockets",
+        "downwards and forwards",
+        "eight digitations",
+        "inguinal ligament"
+      ],
+      "narration": "The outermost of the three. Its fibres run downwards and forwards — the direction your hands go into your front trouser pockets. It arises by eight fleshy slips from the outer surfaces of the lower eight ribs, and it ends in two ways: the back fibres go straight down to the front half of the iliac crest, and all the rest become a broad aponeurosis in front. The lower free border of that aponeurosis, stretched between the anterior superior iliac spine and the pubic tubercle, rolls backwards on itself to form the inguinal ligament."
+    },
+    {
+      "key": "extobl_l",
+      "name": "left external oblique",
+      "label": "External oblique (left)",
+      "role": "part",
+      "group": "External oblique",
+      "layer": "muscle",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA13337"
+      },
+      "terms": [
+        "external oblique",
+        "left external oblique",
+        "aponeurosis crosses the midline",
+        "rotation to the opposite side"
+      ],
+      "narration": "The mirror muscle. Its aponeurosis interlaces with the right one in the linea alba, so the two sheets are really one continuous sling across the front of the abdomen. Note the direction: the left external oblique points down and towards the right, and it works with the right internal oblique. That pairing is why one external oblique turns the trunk to the opposite side."
+    },
+    {
+      "key": "intobl_r",
+      "name": "right internal oblique",
+      "label": "Internal oblique (right)",
+      "role": "part",
+      "group": "Internal oblique",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA13892"
+      },
+      "terms": [
+        "internal oblique",
+        "internal abdominal oblique",
+        "middle layer",
+        "upwards and forwards",
+        "at right angles to external oblique",
+        "thoracolumbar fascia",
+        "conjoint tendon",
+        "cremaster"
+      ],
+      "narration": "The middle layer, and its fibres run the other way — upwards and forwards, at right angles to the external oblique. It arises from the thoracolumbar fascia, the front two-thirds of the iliac crest and the lateral half of the inguinal ligament, and it inserts into the lower three or four ribs, the linea alba and the pubic crest. Its lowest fibres arch over the spermatic cord and join those of transversus abdominis to form the conjoint tendon. Those same low fibres send the cremaster down around the cord."
+    },
+    {
+      "key": "intobl_l",
+      "name": "left internal oblique",
+      "label": "Internal oblique (left)",
+      "role": "part",
+      "group": "Internal oblique",
+      "layer": "muscle",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA13893"
+      },
+      "terms": [
+        "internal oblique",
+        "left internal oblique",
+        "splits around the rectus",
+        "aponeurosis splits above the arcuate line"
+      ],
+      "narration": "The same on the left. This is the muscle whose aponeurosis behaves differently at different heights: above the arcuate line it splits and passes both in front of and behind the rectus, below the line it passes entirely in front. Learn this one muscle's behaviour and the whole rectus sheath follows."
+    },
+    {
+      "key": "transv_r",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis (right)",
+      "role": "part",
+      "group": "Transversus abdominis",
+      "layer": "muscle",
+      "color": "#8e44ad",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "transversalis muscle",
+        "deepest flat muscle",
+        "horizontal fibres",
+        "corset",
+        "belt",
+        "neurovascular plane",
+        "TAP block",
+        "conjoint tendon"
+      ],
+      "narration": "The deepest of the three, and the only one whose fibres run horizontally. It arises from the inner surfaces of the lower six costal cartilages, the thoracolumbar fascia, the iliac crest and the lateral third of the inguinal ligament, and it ends in an aponeurosis that reaches the linea alba. It squeezes the abdomen like a belt, which is what raises intra-abdominal pressure. The nerves of the wall run on its outer surface, between it and the internal oblique — that plane is the one an anaesthetist fills in a transversus abdominis plane block."
+    },
+    {
+      "key": "transv_l",
+      "name": "left transversus abdominis",
+      "label": "Transversus abdominis (left)",
+      "role": "part",
+      "group": "Transversus abdominis",
+      "layer": "muscle",
+      "color": "#7d3c98",
+      "refs": {
+        "bodyparts3d": "FMA22345"
+      },
+      "terms": [
+        "transversus abdominis",
+        "left transversus abdominis",
+        "posterior wall of the sheath",
+        "arcuate line"
+      ],
+      "narration": "The left half of the same belt. Its aponeurosis passes behind the rectus above the arcuate line and in front of it below, so it changes sides at exactly the same level as the deep leaf of the internal oblique. Below that line there is no posterior sheath at all: the rectus lies straight on transversalis fascia and peritoneum."
+    },
+    {
+      "key": "linea_alba_m",
+      "name": "linea alba",
+      "label": "Linea alba",
+      "role": "part",
+      "group": "Aponeurotic midline",
+      "layer": "fascia",
+      "color": "#f7f3e3",
+      "refs": {
+        "bodyparts3d": "FMA11336"
+      },
+      "terms": [
+        "linea alba",
+        "white line",
+        "interlacing aponeuroses",
+        "avascular",
+        "midline incision",
+        "epigastric hernia"
+      ],
+      "narration": "Where all six aponeuroses end. The fibres from each side cross the midline and interlace, so this white line is the tendon that all three flat muscles of both sides pull on. That is why the flat muscles work as one sheet rather than six separate muscles, and why an incision through this line divides no muscle and cuts no nerve."
+    },
+    {
+      "key": "eo_origin_rib5",
+      "label": "Origin — fifth rib, the highest slip",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f5b041",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.121,
+          0.475,
+          0.977
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the right external oblique and the right fifth rib — the highest of the eight rib origins, where its digitations interdigitate with serratus anterior (gap 0.55 mm); see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "fifth rib",
+        "origin of external oblique",
+        "digitations",
+        "serratus anterior",
+        "lower eight ribs"
+      ],
+      "narration": "The top slip. The external oblique arises by eight fleshy digitations from the outer surfaces of ribs five to twelve. Up here the top four interlock with the digitations of serratus anterior, which is why the two muscles make that zig-zag pattern on a lean chest."
+    },
+    {
+      "key": "eo_origin_rib12",
+      "label": "Origin — twelfth rib, the lowest slip",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f8c471",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.439,
+          0.944,
+          0.529
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the right external oblique and the right twelfth rib — the lowest of the eight rib origins, where its digitations interdigitate with latissimus dorsi (gap 0.65 mm); see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "twelfth rib",
+        "origin of external oblique",
+        "latissimus dorsi",
+        "lumbar triangle",
+        "Petit's triangle"
+      ],
+      "narration": "The bottom slip, and it is at the back. The lower four digitations interdigitate with latissimus dorsi. Between the back border of the external oblique, the front border of latissimus dorsi and the iliac crest lies the lumbar triangle of Petit — a real, if rare, site of herniation."
+    },
+    {
+      "key": "eo_iliac_attachment",
+      "label": "Insertion — anterior half of the iliac crest",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f9e79f",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.11,
+          0.686,
+          0.334
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the right external oblique and the right hip bone — the fleshy posterior fibres taking hold of the anterior half of the iliac crest. The matching point on the hip bone sits at uvw [0.065, 0.074, 0.759] of that bone's own box, i.e. its upper part, which is what identifies this as the CREST rather than the pubis (gap 0.22 mm); see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "iliac crest",
+        "insertion of external oblique",
+        "fleshy posterior fibres",
+        "anterior half of the crest"
+      ],
+      "narration": "Only the most posterior fibres reach bone. They insert directly into the front half of the outer lip of the iliac crest. Everything in front of them becomes aponeurosis instead, and that aponeurosis has no bony attachment until it reaches the linea alba and the pubis."
+    },
+    {
+      "key": "eo_aponeurosis_over_rectus",
+      "label": "Aponeurosis — in front of the rectus, at every level",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f5cba7",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.917,
+          0.075,
+          0.883
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the right external oblique and the right rectus abdominis — where its aponeurosis lies in front of the rectus as the anterior wall of the sheath (gap 0.34 mm). This is the same physical contact derive-abdominal-wall-landmarks.mjs measured from the rectus side at 0.34 mm; the two tools agree on the gap and differ only in which mesh the anchor hangs on; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "external oblique aponeurosis",
+        "anterior wall of the rectus sheath",
+        "always in front",
+        "rectus sheath"
+      ],
+      "narration": "This is the one rule with no exception: the external oblique aponeurosis passes in front of the rectus at every level, from the costal margin to the pubis. When you open the anterior sheath in a Pfannenstiel or a paramedian incision, this is the layer under your knife. The other two aponeuroses change sides at the arcuate line; this one never does."
+    },
+    {
+      "key": "eo_lower_free_border",
+      "label": "Lower free border — the inguinal ligament level",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#abebc6",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.975,
+          0.37,
+          0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the right external oblique, 235.2 mm from its surface centroid — the bottom of the sheet, at the level where its free lower border rolls back as the inguinal ligament. The ligament is a separate mesh that is not on disk, so this marks the LEVEL and not the ligament; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "lower free border",
+        "inguinal ligament",
+        "Poupart's ligament",
+        "superficial inguinal ring",
+        "rolled backwards on itself"
+      ],
+      "narration": "The bottom edge of the sheet. It has no bone to attach to between the anterior superior iliac spine and the pubic tubercle, so it rolls backwards on itself and becomes the inguinal ligament. A triangular gap in the aponeurosis just above and lateral to the pubic tubercle is the superficial inguinal ring. The whole inguinal region is built on this one free border."
+    },
+    {
+      "key": "eo_lateral_digitations",
+      "label": "Where fleshy muscle becomes aponeurosis",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#7fb3d5",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0,
+          0.579,
+          0.81
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most lateral (most body-right) vertex of the right external oblique, 136.7 mm from its surface centroid — the fleshy lateral part of the muscle, before it becomes aponeurotic; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "fleshy part",
+        "aponeurotic part",
+        "flank",
+        "linea semilunaris",
+        "gridiron incision",
+        "muscle splitting"
+      ],
+      "narration": "Out here the muscle is still red and fleshy; towards the midline it is white and tendinous. All three flat muscles change from muscle to aponeurosis at roughly the same curved line. That is why a gridiron incision in the right iliac fossa can split three muscles in three different directions and still close cleanly — you are separating fibres, not cutting a tendon."
+    },
+    {
+      "key": "eo_upper_end",
+      "label": "Upper limit against the ribs",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#a2d9ce",
+      "render": "anchor",
+      "anchor": {
+        "on": "extobl_r",
+        "uvw": [
+          0.095,
+          0.562,
+          1
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the right external oblique, 205.5 mm from its surface centroid — the top of the sheet against the lower ribs; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "upper limit",
+        "lower ribs",
+        "costal margin",
+        "the abdominal wall extends above the costal margin"
+      ],
+      "narration": "The top of the sheet, which is well above the costal margin. Remember that the abdominal wall overlaps the thoracic cage: a stab wound below the fourth intercostal space can be in the chest, in the abdomen, or in both."
+    },
+    {
+      "key": "iliac_crest_r",
+      "label": "Summit of the iliac crest",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#d7bde2",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.278,
+          0.574,
+          1
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the right hip bone, 103.4 mm from its surface centroid — the summit of the iliac crest. The anterior superior iliac spine is the anterior END of this crest and is not separately modelled, so it is not emitted; see tools/derive-flat-muscle-landmarks.mjs",
+      "terms": [
+        "iliac crest",
+        "supracristal plane",
+        "L4",
+        "transpyloric plane",
+        "common attachment"
+      ],
+      "narration": "All three flat muscles take hold of this crest, each from a slightly different part of it. It is also the most useful bony line in the abdomen: the highest points of the two crests lie at the level of the fourth lumbar vertebra, which is the plane a lumbar puncture aims below."
+    },
+    {
+      "key": "rect_r",
+      "name": "right rectus abdominis",
+      "label": "Rectus abdominis (right)",
+      "role": "context",
+      "group": "Rectus & midline",
+      "layer": "muscle",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA13377"
+      },
+      "terms": [
+        "rectus abdominis",
+        "vertical muscle",
+        "enclosed by the aponeuroses",
+        "rectus sheath"
+      ],
+      "narration": "The vertical muscle the three aponeuroses have to get past. Everything difficult about this wall comes from how they arrange themselves around it."
+    },
+    {
+      "key": "rect_l",
+      "name": "left rectus abdominis",
+      "label": "Rectus abdominis (left)",
+      "role": "context",
+      "group": "Rectus & midline",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA13378"
+      },
+      "terms": [
+        "rectus abdominis",
+        "left rectus",
+        "linea alba between them"
+      ],
+      "narration": "Its partner, with only the linea alba between the two."
+    },
+    {
+      "key": "inglig_r",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament (right)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "fascia",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "Poupart's ligament",
+        "rolled lower border of external oblique",
+        "floor of the inguinal canal",
+        "lateral half gives internal oblique",
+        "lateral third gives transversus"
+      ],
+      "narration": "The rolled lower border of the external oblique aponeurosis, running from the anterior superior iliac spine to the pubic tubercle. All three flat muscles are related to it: the external oblique makes it, the internal oblique arises from its lateral half, and transversus abdominis arises from its lateral third. That descending order — whole, half, third — is worth memorising."
+    },
+    {
+      "key": "inglig_l",
+      "name": "left inguinal ligament",
+      "label": "Inguinal ligament (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "fascia",
+      "color": "#f7dc6f",
+      "refs": {
+        "bodyparts3d": "FMA21965"
+      },
+      "terms": [
+        "inguinal ligament",
+        "left inguinal ligament",
+        "boundary between abdomen and thigh"
+      ],
+      "narration": "The same on the left. Both ligaments mark where the abdominal wall stops and the thigh begins."
+    },
+    {
+      "key": "hip_r",
+      "name": "right hip bone",
+      "label": "Hip bone (right)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d0d3d4",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "iliac crest",
+        "anterior superior iliac spine",
+        "pubic tubercle",
+        "pubic crest",
+        "lower attachment of the flat muscles"
+      ],
+      "narration": "The lower frame. The iliac crest, the anterior superior iliac spine and the pubic tubercle are all on this one bone, and between them they hold the bottom edge of all three flat muscles."
+    },
+    {
+      "key": "hip_l",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "left hip bone",
+        "iliac crest",
+        "pelvis"
+      ],
+      "narration": "The mirror half of the pelvic frame."
+    },
+    {
+      "key": "rib5_r",
+      "name": "right fifth rib",
+      "label": "Fifth rib",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA8066"
+      },
+      "terms": [
+        "fifth rib",
+        "highest origin of external oblique",
+        "lower eight ribs"
+      ],
+      "narration": "The highest rib the external oblique comes from."
+    },
+    {
+      "key": "rib12_r",
+      "name": "right twelfth rib",
+      "label": "Twelfth rib",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5dbdb",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "twelfth rib",
+        "floating rib",
+        "lowest origin of external oblique",
+        "lumbar triangle"
+      ],
+      "narration": "The lowest, and a free-floating one. The wall between it and the iliac crest is muscle only — no bone — which is why the flank is soft and why a kidney is reached from behind through these muscles."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three sheets, three directions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "External oblique",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "extobl_r",
+            "intobl_r",
+            "transv_r"
+          ],
+          "layout": "stacked"
+        }
+      ],
+      "narration": "The side wall of the abdomen is three flat muscles laid on top of one another, and each one runs in a different direction. External oblique on the outside, downwards and forwards. Internal oblique in the middle, upwards and forwards. Transversus abdominis deepest, straight across. Three sheets crossing at angles is far stronger than one thick sheet, which is the same reason plywood is made in layers."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "External oblique — ribs to crest to midline",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "External oblique"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "extobl_r",
+          "path": [
+            "eo_origin_rib5",
+            "eo_upper_end",
+            "eo_origin_rib12",
+            "eo_lateral_digitations",
+            "eo_iliac_attachment",
+            "eo_lower_free_border",
+            "eo_aponeurosis_over_rectus"
+          ],
+          "duration": 11
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "eo_lower_free_border",
+          "intensity": 1
+        }
+      ],
+      "narration": "Follow it from the top. Eight slips from the outer surfaces of ribs five to twelve, interlocking with serratus anterior above and latissimus dorsi below. The back fibres run down to the front half of the iliac crest. Everything else turns into aponeurosis, which passes in front of the rectus to the linea alba. And the bottom edge, with no bone to hold it between the anterior superior iliac spine and the pubic tubercle, folds back on itself as the inguinal ligament. Nerve supply: the lower six thoracic nerves."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Internal oblique — the muscle that fans out",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Internal oblique"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "intobl_r",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "intobl_r",
+          "to": "inglig_r",
+          "kind": "arises from the lateral half"
+        }
+      ],
+      "narration": "Peel off the external oblique and this is what lies under it. Its fibres fan: the upper ones run up and forwards to the lower ribs, the middle ones run forwards to the linea alba, and the lowest ones arch downwards over the inguinal canal to reach the pubic crest. It arises from the thoracolumbar fascia behind, the iliac crest, and the lateral half of the inguinal ligament. Nerve supply: the lower six thoracic nerves plus the first lumbar. That arching lower border is the roof of the inguinal canal and half of the conjoint tendon."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Transversus abdominis — the belt, and the plane on top of it",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Transversus abdominis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "transv_r",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:thoracoabdominal-nerves",
+          "path": [
+            "transv_r",
+            "eo_lateral_digitations",
+            "eo_aponeurosis_over_rectus"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The deepest sheet, and the only one running horizontally. It arises from the inner surfaces of the lower six costal cartilages, the thoracolumbar fascia, the iliac crest and the lateral third of the inguinal ligament. When it contracts it narrows the waist and pushes the viscera backwards, which is how intra-abdominal pressure rises for coughing, vomiting, micturition, defaecation and childbirth. The nerves to the whole wall run forwards on its outer surface, sandwiched against the internal oblique. Anaesthetists inject into that sandwich — the transversus abdominis plane block."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Cut across the wall and read the layers",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.15,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "eo_aponeurosis_over_rectus",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "intobl_r",
+          "to": "rect_r",
+          "kind": "aponeurosis splits above, passes in front below"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "transv_r",
+          "to": "rect_r",
+          "kind": "aponeurosis behind above the arcuate line, in front below"
+        }
+      ],
+      "narration": "A horizontal cut is the only honest way to see this. Working inwards from the skin: skin, fatty Camper's fascia, membranous Scarpa's fascia, external oblique, internal oblique, transversus abdominis, transversalis fascia, extraperitoneal fat, peritoneum. Now watch what the three aponeuroses do when they reach the rectus. External oblique goes in front, always. Above the arcuate line internal oblique splits around the muscle and transversus goes behind it. Below that line all three pass in front, and the back of the rectus has nothing but transversalis fascia against it. Learn the two pictures and you have the rectus sheath."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Why the fibres cross: rotation and the shutter",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "extobl_r",
+            "intobl_l"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extobl_r",
+          "to": "intobl_l",
+          "kind": "act together to turn the trunk to the left"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "intobl_r",
+          "to": "transv_r",
+          "kind": "arch down together as the shutter and the conjoint tendon"
+        }
+      ],
+      "narration": "Two consequences of the crossing directions, and both are examined. First, rotation: the external oblique of one side and the internal oblique of the other side run in the same line, so they pull together and turn the trunk towards the side of the contracting internal oblique. Right external oblique with left internal oblique turns you to the left. Second, the shutter: the lowest fibres of internal oblique and transversus arch over the inguinal canal, and when intra-abdominal pressure rises they contract and flatten down towards the inguinal ligament, closing the canal like a shutter. That is why coughing does not push a hernia out of a normal groin."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "How a surgeon gets through this wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "eo_lateral_digitations",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "linea_alba_m",
+          "intensity": 0.8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Three ways in, and each respects the layers differently. The midline incision goes through the linea alba, between the recti: no muscle divided, no nerve divided. The gridiron incision at McBurney's point splits each of the three muscles along its own fibre direction, one after another — that is why it is strong and why appendicectomy scars rarely herniate. A wide transverse incision across the flank cuts nerve after nerve, and the wall it leaves behind bulges for life. Peel the layers away one at a time and you can see why the order matters more than the depth."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The catalog carries no aponeurosis as a separate object — every flat muscle is one mesh from its fleshy origin to its tendinous end. So the single most important fact in this topic, that a muscle becomes a sheet and that the sheet then chooses a side of the rectus, is taught by relationships and by one measured contact rather than by anything the student can see change. A provider that shipped muscle and aponeurosis separately would close this outright, and it is the highest-value acquisition for this topic.",
+    "The arcuate line has no mesh and never will: it is the lower edge of the posterior sheath, a line on a fascia. Beats 5 and 6 state the rule above and below it and the cross-section shows the level, but the line itself cannot be drawn. It belongs to the curriculum's separate 'Rectus sheath' entry, which this scene does not claim.",
+    "The conjoint tendon, the transversalis fascia, Camper's and Scarpa's fasciae and the thoracolumbar fascia are all named in the narration and none of them exists in the catalog. Camper's and Scarpa's matter clinically — extravasated urine tracks in the plane deep to Scarpa's — and the layers list in beat 5 is spoken rather than shown.",
+    "No nerve exists for this wall: not the thoracoabdominal nerves, not the iliohypogastric, not the ilioinguinal. Beat 4 traces them as a declared concept along the plane they run in, because the transversus abdominis plane is defined by those nerves and is worth authoring even degraded. The ilioinguinal nerve is also the one injured in a hernia repair, so this is a real loss.",
+    "Only the right external oblique is on disk, so every anchor in this scene sits on that one muscle plus one on the right hip bone. The right internal oblique and right transversus abdominis are in the catalog and are referenced here, but nothing was measured on them, and no landmark was invented on the outer layer and relabelled as the deeper one. Ingesting FMA13892 and FMA22344 locally would let the origins, the arching lower borders and the conjoint tendon be measured where they actually are.",
+    "The 'eo_lower_free_border' anchor is the lowest vertex of the external oblique, so it marks the LEVEL of the inguinal ligament and of the superficial ring, not either structure. The inguinal ligament is a separate mesh that is referenced as context here but is not on disk, so no anchor was placed on it. The label says level and the calibrated_by note says why.",
+    "All eight anchors are measured contacts or extremes, every one records how it was placed, and all eight remain status 'needs-review' until a human clears them in-app.",
+    "This scene does not claim 'Rectus sheath' or 'Inguinal ligament & landmarks'. The sheath rule is stated because these three muscles are what forms it, and the inguinal ligament is present as context, but the arcuate line, the two sheath pictures as separate views, and the surface landmarks of the groin — the mid-inguinal point, the midpoint of the inguinal ligament, the pubic tubercle — are not taught here. Both entries stay on the worklist."
+  ]
+}

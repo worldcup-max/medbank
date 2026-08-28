@@ -1,0 +1,823 @@
+{
+  "schema": 2,
+  "id": "gross__kidney-posterior-abdominal-wall__ureters",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Kidney & Posterior Abdominal Wall",
+  "structure": "Ureters",
+  "covers": [
+    "Ureters"
+  ],
+  "learning_goal": "Trace each ureter from the pelviureteric junction to the bladder in its three parts, name the three constrictions and the vertebral levels at which they sit, say what crosses the ureter in the abdomen and in the pelvis in the male and the female, describe its segmental blood supply and why it is stripped at surgery, and use all of that to explain loin-to-groin colic and the operations in which a ureter is injured.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "ureter",
+      "ureters",
+      "urinary tract",
+      "urinary system",
+      "posterior abdominal wall",
+      "retroperitoneum",
+      "renal colic",
+      "urolithiasis",
+      "pelvic surgery",
+      "hysterectomy",
+      "obstructive uropathy",
+      "abdomen",
+      "pelvis"
+    ],
+    "terms": [
+      "ureter",
+      "ureters",
+      "right ureter",
+      "left ureter",
+      "ureteric",
+      "uretero",
+      "twenty five centimetres",
+      "abdominal ureter",
+      "pelvic ureter",
+      "intramural ureter",
+      "intravesical ureter",
+      "retroperitoneal",
+      "pelviureteric junction",
+      "PUJ",
+      "ureteropelvic junction",
+      "UPJ",
+      "pelvic brim",
+      "bifurcation of the common iliac artery",
+      "vesicoureteric junction",
+      "VUJ",
+      "ureterovesical junction",
+      "three constrictions",
+      "constriction",
+      "renal pelvis",
+      "psoas major",
+      "tips of the transverse processes",
+      "lumbar transverse processes",
+      "sacroiliac joint",
+      "ischial spine",
+      "L2",
+      "L5",
+      "gonadal vessels",
+      "testicular vessels",
+      "ovarian vessels",
+      "water under the bridge",
+      "uterine artery",
+      "vas deferens",
+      "ductus deferens",
+      "cervix",
+      "lateral fornix",
+      "broad ligament",
+      "peristalsis",
+      "ureteric peristalsis",
+      "smooth muscle",
+      "transitional epithelium",
+      "urothelium",
+      "renal colic",
+      "ureteric colic",
+      "loin to groin",
+      "colicky pain",
+      "T11",
+      "T12",
+      "L1",
+      "L2 referred pain",
+      "haematuria",
+      "ureteric stone",
+      "ureteric calculus",
+      "hydroureter",
+      "hydronephrosis",
+      "ureteric stent",
+      "JJ stent",
+      "double J stent",
+      "ureteroscopy",
+      "lithotripsy",
+      "ESWL",
+      "KUB",
+      "intravenous urogram",
+      "IVU",
+      "CT KUB",
+      "ureteric injury",
+      "hysterectomy injury",
+      "ureteric duplication",
+      "duplex ureter",
+      "ectopic ureter",
+      "vesicoureteric reflux",
+      "oblique passage through the bladder wall",
+      "trigone",
+      "ureteric orifice",
+      "ureteric bud",
+      "segmental blood supply",
+      "longitudinal anastomosis",
+      "adventitia",
+      "renal artery",
+      "gonadal artery",
+      "common iliac artery",
+      "internal iliac artery",
+      "vesical artery",
+      "medial to lateral rule",
+      "abdominal supply from medial",
+      "pelvic supply from lateral"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Right ureter",
+      "role": "part",
+      "group": "Ureters",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "right ureter",
+        "ureter",
+        "twenty five centimetres",
+        "abdominal ureter",
+        "pelvic ureter",
+        "intramural ureter",
+        "retroperitoneal",
+        "pelviureteric junction",
+        "psoas major",
+        "duodenum",
+        "gonadal vessels",
+        "right colic vessels",
+        "ileocolic vessels",
+        "root of the mesentery",
+        "appendix"
+      ],
+      "narration": "About twenty-five centimetres long, a muscular tube of roughly three millimetres bore that carries urine from the renal pelvis to the bladder. It is retroperitoneal for its whole length and is divided for teaching into three parts of about equal share: an abdominal part on psoas major, a pelvic part on the lateral pelvic wall, and a short intramural part running obliquely through the bladder wall. The right ureter begins behind the second part of the duodenum, so a stone in its upper end can be mistaken for duodenal pain. Lower down it lies behind the right colic and ileocolic vessels and behind the terminal ileum and the root of the mesentery — which is why an inflamed retrocaecal appendix sitting on it produces pus cells and red cells in the urine and mimics a stone."
+    },
+    {
+      "key": "left_ureter",
+      "name": "left ureter",
+      "label": "Left ureter",
+      "role": "part",
+      "group": "Ureters",
+      "layer": "organ",
+      "color": "#c9a227",
+      "refs": {
+        "bodyparts3d": "FMA15572"
+      },
+      "terms": [
+        "left ureter",
+        "ureter",
+        "sigmoid colon",
+        "sigmoid mesocolon",
+        "left colic vessels",
+        "intersigmoid recess",
+        "loin to groin",
+        "pelvic brim"
+      ],
+      "narration": "The mirror image on the left, and the one more often injured in general surgery. It is crossed by the left colic vessels and then runs behind the sigmoid colon and its mesentery, entering the pelvis at the apex of the sigmoid mesocolon in the intersigmoid recess — a fold the surgeon uses deliberately to find it. Anterior resection of the rectum and sigmoid colectomy are the operations in which the left ureter is at risk, and that is why it is identified and followed before the mesentery is divided."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney — where it begins",
+      "role": "context",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#8c3b2f",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "renal pelvis",
+        "pelviureteric junction",
+        "PUJ",
+        "hydronephrosis",
+        "L1",
+        "L2"
+      ],
+      "narration": "The ureter is the kidney's outflow. The renal pelvis funnels down inside the hilum and narrows at the pelviureteric junction — the first constriction — at about the level of L2 on the right. Obstruction here dilates the pelvis and calyces and produces a hydronephrosis with no dilated ureter below it, which is how a plain scan tells the level of a blockage without any dye."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "context",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#a0463a",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "renal pelvis",
+        "pelviureteric junction",
+        "transpyloric plane",
+        "L1"
+      ],
+      "narration": "The left kidney sits half a vertebral body higher than the right, so its pelviureteric junction lies a little above the right one, at about the lower border of L1. The difference is small but it is the reason the two ureters are never quite level on a film."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Urinary bladder — the third constriction",
+      "role": "part",
+      "group": "Ureters",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "vesicoureteric junction",
+        "VUJ",
+        "intramural ureter",
+        "oblique passage",
+        "ureteric orifice",
+        "trigone",
+        "interureteric bar",
+        "vesicoureteric reflux",
+        "flap valve",
+        "narrowest point"
+      ],
+      "narration": "The ureter does not enter the bladder head-on. It pierces the muscular wall obliquely and runs about two centimetres within it before opening at the ureteric orifice, at the upper lateral corner of the trigone. That oblique intramural course is a flap valve: as the bladder fills, the rising pressure squeezes the tunnel shut and urine cannot go back up. A short or straight tunnel — the common congenital fault — lets urine reflux to the kidney with every void, and repeated reflux of infected urine is what scars a child's kidney. The intramural part is also the narrowest point of the whole tube, so it is where a stone that has travelled the entire ureter finally arrests, giving suprapubic pain, strangury and frequency instead of loin pain."
+    },
+    {
+      "key": "vas_r",
+      "name": "right deferent duct",
+      "label": "Vas deferens (right)",
+      "role": "context",
+      "group": "Pelvic organs",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA19235"
+      },
+      "terms": [
+        "vas deferens",
+        "deferent duct",
+        "water under the bridge"
+      ],
+      "narration": "The male counterpart of the uterine artery's crossing. The vas passes above the ureter on its way to the base of the bladder — water under the bridge on this side too, and the reason the ureter is at risk in pelvic surgery in both sexes."
+    },
+    {
+      "key": "right_psoas",
+      "name": "right psoas major",
+      "label": "Psoas major (right) — the abdominal bed",
+      "role": "part",
+      "group": "Bed & landmarks",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "abdominal ureter",
+        "posterior abdominal wall",
+        "genitofemoral nerve",
+        "tips of the transverse processes",
+        "psoas shadow",
+        "moves with the muscle"
+      ],
+      "narration": "The abdominal part of the ureter runs vertically downwards on the front of psoas major, in the extraperitoneal fat, crossing the tips of the lumbar transverse processes. Because it lies on the muscle and not on the vertebral bodies, a ureter is displaced laterally by a psoas abscess and medially by a retroperitoneal fibrosis pulling it in. Between muscle and ureter runs the genitofemoral nerve, which is one reason ureteric pain radiates into the groin and scrotum."
+    },
+    {
+      "key": "left_psoas",
+      "name": "left psoas major",
+      "label": "Psoas major (left)",
+      "role": "context",
+      "group": "Bed & landmarks",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22343"
+      },
+      "terms": [
+        "psoas major",
+        "left",
+        "psoas shadow",
+        "plain abdominal film"
+      ],
+      "narration": "The same bed on the left. On a plain KUB film the psoas outline is the landmark against which the radiologist looks for a ureteric stone, because the abdominal ureter runs just lateral to the lumbar transverse processes and overlies that shadow."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "Fifth lumbar vertebra — the level of the brim",
+      "role": "context",
+      "group": "Bed & landmarks",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "fifth lumbar vertebra",
+        "L5",
+        "sacral promontory",
+        "pelvic brim",
+        "bifurcation of the common iliac artery",
+        "second constriction",
+        "transverse process"
+      ],
+      "narration": "The lumbar transverse processes are the line to follow on a film: the ureter runs across their tips from L2 down to L5. At the level of the sacroiliac joint the ureter reaches the pelvic brim, and that is the landmark for the second constriction."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the sacroiliac joint on the film",
+      "role": "context",
+      "group": "Bed & landmarks",
+      "layer": "bone",
+      "color": "#b3b6b7",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacroiliac joint",
+        "sacral promontory",
+        "pelvic brim",
+        "KUB",
+        "ureteric line",
+        "phlebolith"
+      ],
+      "narration": "The ureteric line on a plain film runs down the tips of the lumbar transverse processes, over the sacroiliac joint, out along the lateral wall of the pelvis to the ischial spine, and then turns medially to the bladder. Any calcified density on that line is a ureteric stone until proven otherwise; anything off it, particularly the small round ones low in the pelvis, is usually a phlebolith."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone — the ischial spine turn",
+      "role": "context",
+      "group": "Bed & landmarks",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "ischial spine",
+        "lateral pelvic wall",
+        "pelvic ureter",
+        "turns forwards and medially",
+        "greater sciatic notch"
+      ],
+      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it.",
+      "approx": {
+        "shown_as": "Hip bone",
+        "detail": "the ischial spine turn"
+      }
+    },
+    {
+      "key": "right_common_iliac_artery",
+      "name": "right common iliac artery",
+      "label": "Common iliac artery (right) — the second constriction",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14765"
+      },
+      "terms": [
+        "common iliac artery",
+        "bifurcation",
+        "pelvic brim",
+        "second constriction",
+        "crosses in front of the bifurcation",
+        "sacroiliac joint"
+      ],
+      "narration": "The ureter crosses the pelvic brim in front of the bifurcation of the common iliac artery, at the level of the sacroiliac joint. Kinking over that firm vessel is the second of the three constrictions, and it is the commonest place for a stone of moderate size to hang up. The relation runs the other way at operation: find the bifurcation and the ureter is the cord crossing it, and it is the cord that shows a slow worm-like contraction when you pinch it — an artery pulsates, a ureter peristalses."
+    },
+    {
+      "key": "left_common_iliac_artery",
+      "name": "left common iliac artery",
+      "label": "Common iliac artery (left)",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA14766"
+      },
+      "terms": [
+        "left common iliac artery",
+        "bifurcation",
+        "pelvic brim",
+        "second constriction"
+      ],
+      "narration": "The same crossing on the left. Both ureters enter the pelvis over the bifurcation, so a bilateral hydronephrosis with both ureters dilated to the brim and no further points to disease at that level — most often retroperitoneal fibrosis or nodal disease dragging them medially."
+    },
+    {
+      "key": "right_internal_iliac_artery",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery (right) — the pelvic supply",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "hypogastric artery",
+        "vesical artery",
+        "uterine artery",
+        "middle rectal artery",
+        "pelvic ureter",
+        "supply from lateral"
+      ],
+      "narration": "In the pelvis the ureter runs in front of the internal iliac artery and takes its blood from that artery's branches — vesical, uterine, middle rectal. Note the direction: in the abdomen the ureter is fed from the medial side, in the pelvis from the lateral side. That reversal is the practical rule for mobilising it — dissect a ureter on the side its vessels are not coming from."
+    },
+    {
+      "key": "left_internal_iliac_artery",
+      "name": "left internal iliac artery",
+      "label": "Internal iliac artery (left)",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA18810"
+      },
+      "terms": [
+        "left internal iliac artery",
+        "pelvic ureter",
+        "uterine artery",
+        "water under the bridge"
+      ],
+      "narration": "On the left the same artery gives the uterine artery in the female, and it is that branch which crosses above the ureter about two centimetres lateral to the cervix — water under the bridge. Clamping the uterine pedicle blind at hysterectomy is how the ureter is most often tied."
+    },
+    {
+      "key": "right_renal_artery",
+      "name": "right renal artery",
+      "label": "Renal artery (right) — the upper supply",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "bodyparts3d": "FMA14752"
+      },
+      "terms": [
+        "renal artery",
+        "upper ureter",
+        "segmental supply",
+        "longitudinal anastomosis",
+        "adventitia",
+        "stripping the ureter"
+      ],
+      "narration": "The upper third of the ureter is supplied by branches of the renal artery. The whole tube gets its blood segmentally — renal above, gonadal and aortic in the middle, vesical and uterine below — and those segments join in a fine longitudinal plexus running in the adventitia. That plexus is the reason a ureter survives being mobilised along its length but dies if it is stripped bare of its adventitia, which is the commonest cause of a leak or a stricture after pelvic surgery."
+    },
+    {
+      "key": "left_renal_artery",
+      "name": "left renal artery",
+      "label": "Renal artery (left)",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "bodyparts3d": "FMA14753"
+      },
+      "terms": [
+        "left renal artery",
+        "upper ureter",
+        "segmental supply"
+      ],
+      "narration": "The same on the left. Handle the ureter by the fat around it, never with a grasper on the wall."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — the medial neighbour",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "L4",
+        "aortic bifurcation",
+        "aortic aneurysm",
+        "retroperitoneal fibrosis",
+        "medial deviation"
+      ],
+      "narration": "The abdominal aorta lies medial to the left ureter and divides at L4, just above the brim. Two aortic problems present as ureteric ones: an inflammatory aneurysm and retroperitoneal fibrosis both wrap the ureters and pull them medially, so a urogram showing ureters dragged towards the midline with obstruction is a retroperitoneal diagnosis, not a stone."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — medial to the right ureter",
+      "role": "context",
+      "group": "Great vessels",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "right ureter",
+        "retrocaval ureter",
+        "circumcaval ureter",
+        "medial relation"
+      ],
+      "narration": "The cava lies immediately medial to the right ureter along its abdominal course. A developmental variant in which the right ureter passes behind the cava and hooks around it — the retrocaval or circumcaval ureter — produces a fish-hook deformity on urography and obstruction of the upper third in a young adult with no stone."
+    },
+    {
+      "key": "prostate",
+      "name": "prostate",
+      "label": "Prostate — the male pelvic relation",
+      "role": "context",
+      "group": "Pelvic organs",
+      "layer": "organ",
+      "color": "#a569bd",
+      "refs": {
+        "bodyparts3d": "FMA9600"
+      },
+      "terms": [
+        "prostate",
+        "bladder base",
+        "male pelvis",
+        "vas deferens",
+        "ductus deferens",
+        "crosses above the ureter",
+        "bladder outflow obstruction",
+        "bilateral hydronephrosis"
+      ],
+      "narration": "Sits under the bladder base, just below where the ureters enter. In the male the vas deferens is the structure that crosses above the ureter near the bladder — the male counterpart of the uterine artery. Clinically the prostate matters here because chronic outflow obstruction raises bladder pressure, defeats the flap valve at the vesicoureteric junction and backs up both ureters: bilateral hydroureter and hydronephrosis in an older man is a bladder outlet problem until you have excluded it."
+    },
+    {
+      "key": "right_seminal_vesicle",
+      "name": "right seminal vesicle",
+      "label": "Seminal vesicle — behind the bladder base",
+      "role": "context",
+      "group": "Pelvic organs",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA19387"
+      },
+      "terms": [
+        "seminal vesicle",
+        "bladder base",
+        "vas deferens",
+        "ampulla",
+        "male pelvis",
+        "ureteric orifice"
+      ],
+      "narration": "Lies on the back of the bladder base lateral to the ampulla of the vas, immediately medial to where the ureter pierces the wall. It is the marker used at radical prostatectomy for how close the dissection has come to the ureteric orifice."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One tube, three parts",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Bed & landmarks"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pelvic organs"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Ureters",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_kidney",
+          "to": "right_ureter",
+          "kind": "pelviureteric junction — where it starts"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_ureter",
+          "to": "bladder",
+          "kind": "vesicoureteric junction — where it ends"
+        }
+      ],
+      "narration": "The ureter is a twenty-five centimetre muscular tube, retroperitoneal from end to end, carrying urine from the renal pelvis to the bladder. Divide it into three parts and everything else follows. The abdominal part runs down on psoas major from the pelviureteric junction to the pelvic brim. The pelvic part runs on the lateral pelvic wall from the brim to the bladder. The intramural part is the last two centimetres, inside the bladder wall itself. Its wall has three coats — an inner transitional epithelium that tolerates urine, a middle smooth muscle coat that generates peristalsis, and an outer adventitia carrying the blood supply. Note what it is not: it is not a passive drainpipe. Urine is pushed along it in waves at one to five a minute, and a tube that has to push against an obstruction is a tube that produces colic."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The course, and what crosses it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bed & landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ureters"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "right_ureter",
+          "path": [
+            "right_psoas",
+            "l5",
+            "right_common_iliac_artery",
+            "right_hip_bone",
+            "bladder"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_common_iliac_artery",
+          "to": "right_ureter",
+          "kind": "the ureter crosses in front of the bifurcation"
+        }
+      ],
+      "narration": "Follow it down. From the pelviureteric junction the ureter runs vertically on psoas major, across the tips of the lumbar transverse processes, with the gonadal vessels crossing in front of it obliquely — a stone patient's pain and a varicocele are neighbours for a reason. On the right it starts behind the second part of the duodenum and is crossed by the right colic and ileocolic vessels and the root of the mesentery; on the left it is crossed by the left colic vessels and disappears behind the sigmoid mesocolon. At the pelvic brim it crosses in front of the bifurcation of the common iliac artery, at the level of the sacroiliac joint. In the pelvis it runs backwards and downwards on the lateral wall in front of the internal iliac artery, as far as the ischial spine, then turns forwards and medially to the bladder. The last crossing is the examinable one and it differs by sex. In the female the uterine artery crosses above it about two centimetres lateral to the cervix — water under the bridge — and the ureter there lies close to the lateral fornix of the vagina. In the male the vas deferens crosses above it in the same place. On a plain film the whole course is a line: transverse process tips, sacroiliac joint, ischial spine, then medially to the bladder."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Three constrictions and a wave",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Ureters"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:urine",
+          "path": [
+            "right_kidney",
+            "right_ureter",
+            "right_common_iliac_artery",
+            "bladder"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "bladder",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Three places narrow, and a stone stops at one of them. First, the pelviureteric junction, where the funnel of the renal pelvis becomes a three-millimetre tube. Second, the pelvic brim, where the ureter kinks forwards over the bifurcation of the common iliac artery. Third, the intramural part passing obliquely through the bladder wall — the narrowest of all. Learn them as start, brim, entry. Now the mechanism. Smooth muscle in the wall contracts in waves that begin at pacemaker cells in the renal pelvis and travel down at two to three centimetres a second, squeezing a bolus of urine ahead of them. When a stone blocks the lumen the wave meets an obstruction, the ureter above distends, and the pain that follows rises to a peak over minutes and then eases — colic, not constant pain. The patient with ureteric colic cannot lie still; the patient with peritonitis will not move. That single observation separates them at the bedside. The distension is also why an obstructed ureter dilates first, then the pelvis and calyces above it: hydroureter, then hydronephrosis, and after a few weeks of unrelieved obstruction the kidney is permanently damaged."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Segmental blood, and why the surgeon leaves the fat on",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Ureters"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Great vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_renal_artery",
+            "right_internal_iliac_artery"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "aorta",
+          "to": "right_ureter",
+          "kind": "middle third supplied from the medial side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "right_ureter",
+          "kind": "pelvic third supplied from the lateral side"
+        }
+      ],
+      "narration": "The ureter has no artery of its own. It is fed segmentally along its length: the upper third from the renal artery, the middle third from the gonadal artery and small branches straight off the aorta and the common iliac, the lower third from the vesical and uterine arteries of the internal iliac. Those segments anastomose in a delicate longitudinal plexus that runs in the adventitia — the sheath of fat and areolar tissue on the outside of the tube. Two rules come out of that and both are surgical. First, direction: in the abdomen the blood comes from medially, in the pelvis from laterally, so mobilise a ureter from the side its vessels are not on. Second, never strip it. A ureter can be lifted along a long stretch and will survive on its longitudinal plexus, but a ureter cleaned bare of adventitia loses that plexus and goes on to leak or to stricture weeks later. Venous and lymphatic drainage follow the arteries, and the lymph goes to the lateral aortic and iliac nodes — which is why ureteric and upper tract tumours are staged by those node groups. The nerve supply is autonomic from the renal, aortic and hypogastric plexuses, with afferents entering the cord from T11 to L2, and that segmental range is exactly the dermatome band of the pain."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Colic, and the ureters people cut",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Ureters",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_internal_iliac_artery",
+          "to": "left_ureter",
+          "kind": "uterine artery crosses above — water under the bridge"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prostate",
+          "to": "bladder",
+          "kind": "outflow obstruction backs up both ureters"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.1,
+          "animate": true
+        }
+      ],
+      "narration": "Read the clinic off the course. Renal colic: severe loin pain radiating to the groin, the scrotum or the labium, colicky, with a restless patient and microscopic haematuria. The site of the pain tracks the stone — loin for the upper ureter, iliac fossa as it crosses the brim, groin and genitalia lower down, and suprapubic pain with frequency and strangury once it reaches the intramural part. That is referred pain along T11 to L2, which is why it can be mistaken for appendicitis on the right and diverticulitis on the left. Most stones under five millimetres pass; larger ones and any obstructed infected kidney need drainage — a stent or a nephrostomy — as an emergency, because an obstructed infected system is the one that kills. Now injury. Four operations account for most ureteric damage: hysterectomy, where the ureter is clamped with the uterine pedicle two centimetres lateral to the cervix; anterior resection and sigmoid colectomy, where the left ureter lies behind the mesocolon; ovarian surgery at the pelvic brim, where the ureter is under the suspensory ligament with the ovarian vessels; and any pelvic operation for a large mass that has dragged the ureter out of place. A ureter tied is recognised late — loin pain and a rising creatinine or urine leaking from the wound. Which is why the rule in pelvic surgery is not to avoid the ureter but to see it, follow it, and know that the peristalsing cord crossing the iliac bifurcation is the one you must not cut."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The three constrictions have no models and no anchors. They are the single most examinable fact about the ureter and the student can only hear them, not click them. Anchors in this corpus are placed by measurement on real geometry and FMA15571 is not in the local decimated set, so positioning them would have been guesswork; a point dropped where a narrowing merely looks right teaches a location the student cannot check. Ingesting FMA15571 and FMA15572 locally would yield three honest anchors per side and would make beat three clickable rather than narrated.",
+    "The gonadal vessels are not in the catalog. The testicular and ovarian vessels crossing the ureter obliquely are a named relation in every syllabus and cannot be drawn, so beat two asserts the crossing in narration only.",
+    "There is no uterus, no cervix, no vagina, no broad ligament and no uterine artery in the catalog. The water-under-the-bridge relation — the commonest cause of surgical ureteric injury — is therefore taught through the internal iliac artery and words alone, which is the weakest part of this scene. A female pelvis model, or a companion diagram-mode scene of the uterine artery crossing, is the highest-value addition for this structure.",
+    "The male counterpart of that crossing is narrated against the seminal vesicle and prostate. It need not be: the vas is in the catalog under the name 'right deferent duct' (FMA19235), and adding it would let the vas-crosses-ureter relation be shown rather than described.",
+    "The renal pelvis has no separate model, so the pelviureteric junction is shown only as the point where the ureter mesh begins. Hydronephrosis and hydroureter cannot be shown as dilatation, only described.",
+    "The ureteric orifices, the interureteric bar and the trigone are not modelled — the bladder is one solid mesh. The oblique intramural course and the flap-valve mechanism, and therefore vesicoureteric reflux, are narrated over the outside of the bladder. A cut-open bladder base is what this beat actually needs.",
+    "The vesical and middle rectal arteries are absent, so the lower segmental supply is taught through the internal iliac trunk as a whole.",
+    "This scene does not claim to cover 'Kidney', 'Abdominal aorta & IVC' or 'Urinary bladder', although all appear in it as relations. The bladder is here as the ureter's destination and its flap valve, not as a structure with a trigone, a sphincter mechanism and micturition, and it remains on the worklist under Pelvis & Perineum.",
+    "The hip bone shown is the right one, used to teach the ischial spine turn on both sides. The teaching point is the level and the direction of the turn rather than the side, and the narration says so, but a student rotating the scene will see only one lateral wall."
+  ]
+}

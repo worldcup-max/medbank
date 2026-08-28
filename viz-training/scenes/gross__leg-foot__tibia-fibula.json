@@ -1,0 +1,747 @@
+{
+  "schema": 2,
+  "id": "gross__leg-foot__tibia-fibula",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Leg & Foot",
+  "structure": "Tibia & fibula",
+  "covers": [
+    "Tibia & fibula"
+  ],
+  "learning_goal": "Tell the tibia and the fibula apart on sight and by side, name the landmarks on each, explain why the tibia carries the body weight while the fibula is only a strut for muscles and for the ankle, and predict what is injured when each one breaks.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "leg",
+      "crus",
+      "lower limb",
+      "tibia",
+      "fibula",
+      "osteology",
+      "compartments of the leg",
+      "shin",
+      "ankle",
+      "knee",
+      "fracture",
+      "compartment syndrome",
+      "interosseous membrane"
+    ],
+    "terms": [
+      "tibia",
+      "shin bone",
+      "fibula",
+      "medial malleolus",
+      "lateral malleolus",
+      "tibial plateau",
+      "medial condyle of tibia",
+      "lateral condyle of tibia",
+      "intercondylar eminence",
+      "tibial tuberosity",
+      "anterior border of tibia",
+      "shin",
+      "subcutaneous surface of tibia",
+      "soleal line",
+      "head of fibula",
+      "neck of fibula",
+      "styloid process of fibula",
+      "apex of head of fibula",
+      "shaft of fibula",
+      "interosseous membrane",
+      "interosseous border",
+      "syndesmosis",
+      "superior tibiofibular joint",
+      "inferior tibiofibular joint",
+      "anterior compartment of leg",
+      "lateral compartment of leg",
+      "posterior compartment of leg",
+      "deep posterior compartment",
+      "tibialis anterior",
+      "tibialis posterior",
+      "extensor hallucis longus",
+      "extensor digitorum longus",
+      "fibularis longus",
+      "peroneus longus",
+      "fibularis brevis",
+      "peroneus brevis",
+      "soleus",
+      "flexor digitorum longus",
+      "flexor hallucis longus",
+      "common fibular nerve",
+      "common peroneal nerve",
+      "deep fibular nerve",
+      "superficial fibular nerve",
+      "foot drop",
+      "anterior tibial artery",
+      "posterior tibial artery",
+      "nutrient artery of tibia",
+      "compound fracture",
+      "open fracture",
+      "Pott's fracture",
+      "fibular graft",
+      "intraosseous access",
+      "medullary cavity"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "part",
+      "group": "The two bones",
+      "layer": "bone",
+      "color": "#efe6cf",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "shin bone",
+        "tibial plateau",
+        "medial condyle of tibia",
+        "lateral condyle of tibia",
+        "intercondylar eminence",
+        "tibial tuberosity",
+        "anterior border",
+        "subcutaneous surface",
+        "soleal line",
+        "medial malleolus"
+      ],
+      "narration": "The second longest bone in the body and the only one of the two that carries weight. Take it in three parts: a broad upper end that makes the knee, a triangular shaft, and a smaller lower end that makes the ankle. Its front border and its medial surface lie straight under the skin from top to bottom — that is the shin you can feel on yourself right now."
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula",
+      "role": "part",
+      "group": "The two bones",
+      "layer": "bone",
+      "color": "#e0d3b2",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "head of fibula",
+        "apex of head",
+        "styloid process of fibula",
+        "neck of fibula",
+        "shaft of fibula",
+        "lateral malleolus"
+      ],
+      "narration": "A thin strut on the outside of the leg. It takes no part in the knee joint and carries almost no body weight. Its head sits below and behind the lateral condyle of the tibia, and its lower end runs down past the tibia to form the lateral malleolus."
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right leg",
+      "label": "Interosseous membrane",
+      "role": "part",
+      "group": "The two bones",
+      "layer": "fascia",
+      "color": "#ded1a6",
+      "refs": {
+        "bodyparts3d": "FMA35192"
+      },
+      "terms": [
+        "interosseous membrane",
+        "interosseous border",
+        "syndesmosis",
+        "anterior compartment",
+        "deep posterior compartment"
+      ],
+      "narration": "A sheet of fibrous tissue slung between the interosseous borders of the two bones. Its fibres run downwards and laterally from tibia to fibula, so weight taken by the tibia is passed partly to the fibula rather than the other way round. It also gives muscles a second surface to arise from, and it separates the anterior compartment in front from the deep posterior compartment behind."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "femoral condyles",
+        "knee joint"
+      ],
+      "narration": "The femoral condyles rest on the tibial plateau. The knee is a joint between femur and tibia only — the fibula is not part of it, and that single fact answers a lot of questions."
+    },
+    {
+      "key": "patella",
+      "name": "right patella",
+      "label": "Patella",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#efe4cb",
+      "refs": {
+        "bodyparts3d": "FMA24486"
+      },
+      "terms": [
+        "patella",
+        "patellar ligament",
+        "tibial tuberosity",
+        "extensor mechanism"
+      ],
+      "narration": "The patellar ligament runs from the lower pole of the patella down to the tibial tuberosity. That is how quadriceps reaches the leg, and why the tuberosity is where an adolescent gets Osgood-Schlatter pain."
+    },
+    {
+      "key": "talus",
+      "name": "right talus",
+      "label": "Talus",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#e4d9bd",
+      "refs": {
+        "bodyparts3d": "FMA24482"
+      },
+      "terms": [
+        "talus",
+        "trochlea of talus",
+        "ankle joint",
+        "mortise"
+      ],
+      "narration": "The lower ends of both bones grip the talus like a spanner on a nut. The tibia gives the roof and the medial wall, the fibula gives the lateral wall, and the talus sits between them."
+    },
+    {
+      "key": "calcaneus",
+      "name": "right calcaneus",
+      "label": "Calcaneus",
+      "role": "context",
+      "group": "Joints above and below",
+      "layer": "bone",
+      "color": "#ddd2b6",
+      "refs": {
+        "bodyparts3d": "FMA24497"
+      },
+      "terms": [
+        "calcaneus",
+        "heel bone",
+        "calcaneal tendon"
+      ],
+      "narration": "Body weight passes from the tibia into the talus and then back into the calcaneus. Notice that the load never enters the fibula on its way to the ground."
+    },
+    {
+      "key": "tib_ant",
+      "name": "right tibialis anterior",
+      "label": "Tibialis anterior",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#d4694a",
+      "refs": {
+        "bodyparts3d": "FMA22544"
+      },
+      "terms": [
+        "tibialis anterior",
+        "lateral surface of tibia",
+        "dorsiflexion",
+        "inversion",
+        "deep fibular nerve"
+      ],
+      "narration": "Arises from the lateral surface of the tibia, just lateral to the sharp anterior border. Feel your shin, slide your finger a centimetre laterally, and you are on this muscle. It dorsiflexes and inverts the foot, and it is the muscle that fails in foot drop."
+    },
+    {
+      "key": "ehl",
+      "name": "right extensor hallucis longus",
+      "label": "Extensor hallucis longus",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#c2593d",
+      "refs": {
+        "bodyparts3d": "FMA22546"
+      },
+      "terms": [
+        "extensor hallucis longus",
+        "middle of medial surface of fibula",
+        "interosseous membrane",
+        "big toe extension"
+      ],
+      "narration": "Comes off the middle of the medial surface of the fibula and the membrane beside it. It buries itself between tibialis anterior and extensor digitorum longus, so it is the hardest of the three to find in the leg but the easiest to test at the big toe."
+    },
+    {
+      "key": "edl",
+      "name": "right extensor digitorum longus",
+      "label": "Extensor digitorum longus",
+      "role": "part",
+      "group": "Anterior compartment",
+      "layer": "muscle",
+      "color": "#b04a30",
+      "refs": {
+        "bodyparts3d": "FMA22548"
+      },
+      "terms": [
+        "extensor digitorum longus",
+        "medial surface of fibula",
+        "lateral condyle of tibia",
+        "toe extension"
+      ],
+      "narration": "Takes the upper part of the medial surface of the fibula and a bite of the lateral condyle of the tibia. It is the most lateral of the anterior three and its tendons fan to the four lateral toes."
+    },
+    {
+      "key": "fib_longus",
+      "name": "right fibularis longus",
+      "label": "Fibularis longus (peroneus longus)",
+      "role": "part",
+      "group": "Lateral compartment",
+      "layer": "muscle",
+      "color": "#c9973f",
+      "refs": {
+        "bodyparts3d": "FMA22552"
+      },
+      "terms": [
+        "fibularis longus",
+        "peroneus longus",
+        "head of fibula",
+        "upper lateral surface of fibula",
+        "eversion",
+        "superficial fibular nerve"
+      ],
+      "narration": "Arises from the head and the upper lateral surface of the fibula. Its tendon crosses under the sole to reach the first metatarsal and the medial cuneiform, so it everts the foot and holds up the transverse arch. Its fibres wrap around the neck of the fibula, and the common fibular nerve runs between them and the bone."
+    },
+    {
+      "key": "fib_brevis",
+      "name": "right fibularis brevis",
+      "label": "Fibularis brevis (peroneus brevis)",
+      "role": "part",
+      "group": "Lateral compartment",
+      "layer": "muscle",
+      "color": "#b8862f",
+      "refs": {
+        "bodyparts3d": "FMA22554"
+      },
+      "terms": [
+        "fibularis brevis",
+        "peroneus brevis",
+        "lower lateral surface of fibula",
+        "base of fifth metatarsal",
+        "avulsion fracture"
+      ],
+      "narration": "Below and deep to the longus, from the lower lateral surface of the fibula to the base of the fifth metatarsal. When the foot is violently inverted this tendon can pull that base clean off — the classic avulsion fracture that mimics a sprained ankle."
+    },
+    {
+      "key": "gastroc_med",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "context",
+      "group": "Superficial posterior compartment",
+      "layer": "muscle",
+      "color": "#b0764f",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "gastrocnemius",
+        "calf",
+        "plantarflexion"
+      ],
+      "narration": "Gastrocnemius comes off the femur, not the leg bones, so it is only the covering here. The Gastrocnemius & soleus scene handles the calf itself."
+    },
+    {
+      "key": "soleus",
+      "name": "right soleus",
+      "label": "Soleus",
+      "role": "part",
+      "group": "Superficial posterior compartment",
+      "layer": "muscle",
+      "color": "#a0663f",
+      "refs": {
+        "bodyparts3d": "FMA22558"
+      },
+      "terms": [
+        "soleus",
+        "soleal line",
+        "head of fibula",
+        "posterior surface of fibula",
+        "calf muscle pump"
+      ],
+      "narration": "The one muscle that shows you the soleal line. It arises from that oblique ridge on the back of the tibia and from the head and upper back of the fibula, spanning the two bones like a bridge. The popliteal vessels pass under that bridge to enter the deep compartment."
+    },
+    {
+      "key": "tib_post",
+      "name": "right tibialis posterior",
+      "label": "Tibialis posterior",
+      "role": "part",
+      "group": "Deep posterior compartment",
+      "layer": "muscle",
+      "color": "#7f9ec4",
+      "refs": {
+        "bodyparts3d": "FMA65018"
+      },
+      "terms": [
+        "tibialis posterior",
+        "interosseous membrane",
+        "posterior surface of tibia",
+        "posterior surface of fibula",
+        "inversion",
+        "medial longitudinal arch"
+      ],
+      "narration": "The deepest muscle of the leg, arising from both bones and from the membrane between them. It is the only muscle to take origin from all three. Its tendon passes behind the medial malleolus into the sole, where it inverts the foot and supports the medial longitudinal arch."
+    },
+    {
+      "key": "fdl",
+      "name": "right flexor digitorum longus",
+      "label": "Flexor digitorum longus",
+      "role": "part",
+      "group": "Deep posterior compartment",
+      "layer": "muscle",
+      "color": "#6e8fb8",
+      "refs": {
+        "bodyparts3d": "FMA65016"
+      },
+      "terms": [
+        "flexor digitorum longus",
+        "posterior surface of tibia",
+        "below soleal line",
+        "medial malleolus"
+      ],
+      "narration": "From the back of the tibia below the soleal line, on the medial side. Tibia for the toes, fibula for the big toe — that pairing is worth memorising because it is the reverse of what the names suggest."
+    },
+    {
+      "key": "fhl",
+      "name": "right flexor hallucis longus",
+      "label": "Flexor hallucis longus",
+      "role": "part",
+      "group": "Deep posterior compartment",
+      "layer": "muscle",
+      "color": "#5b7ea8",
+      "refs": {
+        "bodyparts3d": "FMA65014"
+      },
+      "terms": [
+        "flexor hallucis longus",
+        "posterior surface of fibula",
+        "big toe flexion",
+        "push off"
+      ],
+      "narration": "From the lower two thirds of the back of the fibula. It is the bulkiest of the deep three because it drives the final push-off from the big toe."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Two bones, one job each",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The two bones",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The leg has two bones between knee and ankle. The tibia is medial, thick, and takes the whole weight of the body. The fibula is lateral, thin, and takes almost none — it exists to give muscles a surface and to make the outer wall of the ankle. Hold that difference and everything else follows."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The bones alone, from the front",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two bones"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tibia",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Look at the tibia from in front. The upper end is a wide plateau with a medial and a lateral condyle and the intercondylar eminence between them. Below the plateau is the tibial tuberosity, where the patellar ligament lands. Run down from the tuberosity and you are on the anterior border, a sharp crest with the flat medial surface just beside it. Both are subcutaneous, which is why a broken tibia so easily becomes an open fracture."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The fibula on its own",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "fibula"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The fibula has a head, a neck, a shaft and a lower end. The head is felt at the side of the knee, a finger below the joint line. The neck below it is bare bone with the common fibular nerve wound directly around it — the most commonly injured nerve in the lower limb, and the reason a tight plaster at this point causes foot drop. The lower end is the lateral malleolus, which reaches about two centimetres lower than the medial one."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Side it and orient it",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two bones"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tibia",
+            "fibula"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "In the practical you will be handed one bone and asked for the side. For the tibia: the expanded end with the plateau is upper, the surface bearing the tuberosity is front, and the malleolus at the lower end points to the side you are looking for. For the fibula: the flattened end with a facet on its inner surface is the malleolus and so is lower, its pointed head is upper, and the malleolus is turned to the same side as the bone belongs. Say the rule aloud each time; guessing costs marks."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "What joins them",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two bones"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "iom",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tibia",
+          "to": "fibula",
+          "kind": "syndesmosis"
+        }
+      ],
+      "narration": "Three connections, and they are not the same kind of joint. At the top is the superior tibiofibular joint, a small synovial plane joint between the head of the fibula and the back of the lateral condyle. Along the shafts is the interosseous membrane. At the bottom is the inferior tibiofibular joint, a fibrous syndesmosis with no cavity at all, and it must stay tight or the ankle mortise widens and the talus shifts."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Cut across the mid-leg",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Joints above and below"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Slide the cut down the leg. The two bones and the membrane between them divide the leg into compartments, and the walls are the membrane, the bones themselves, and the deep fascia with its two intermuscular septa. Anterior compartment in front of the membrane, lateral compartment against the side of the fibula, posterior compartment behind, itself split into a superficial and a deep part. Four compartments, four nerves, four actions — this cut is the single most useful picture in the leg."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "Anterior and lateral",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Joints above and below"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Anterior compartment",
+            "Lateral compartment"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The anterior compartment holds tibialis anterior, extensor hallucis longus and extensor digitorum longus. They dorsiflex, they are supplied by the deep fibular nerve, and the anterior tibial artery runs down on the membrane with them. The lateral compartment holds only the two fibularis muscles. They evert, they are supplied by the superficial fibular nerve, and they contain no artery of their own. Note that both nerves are branches of the common fibular nerve at the neck of the fibula, so one injury there loses dorsiflexion and eversion together."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "The back of the leg",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Joints above and below"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Deep posterior compartment",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "soleus",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "Behind, soleus arises from the soleal line of the tibia and from the fibula, bridging the two. Deep to it lie tibialis posterior in the middle, flexor digitorum longus on the tibial side and flexor hallucis longus on the fibular side. All three are supplied by the tibial nerve and all three send tendons behind the medial malleolus into the sole. The order behind that malleolus, front to back, is tibialis posterior, flexor digitorum longus, the posterior tibial artery and tibial nerve, then flexor hallucis longus."
+    },
+    {
+      "mode": "location",
+      "beat": 9,
+      "title": "Everything that pulls on the fibula",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Joints above and below"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fibula",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Nine muscles take origin from this thin bone and it bears no weight, which is why a surgeon can remove the middle of a fibula as a bone graft and the patient still walks. Leave the upper quarter to protect the nerve and the lower quarter to keep the ankle mortise, and the rest is spare."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 10,
+      "title": "Inside the tibia",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "tibia"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:nutrient_artery",
+          "path": [
+            "tibia"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "The shaft is a triangular tube of compact bone around a medullary cavity, and the cavity is why the flat surface just below the tibial tuberosity is the standard site for intraosseous access in a collapsed child. The path traced here is the nutrient artery, the largest in the body relative to its bone, entering the upper posterior shaft from the posterior tibial artery. The junction of the middle and lower thirds is where the shaft is narrowest and the blood supply poorest, so that is where fractures are slowest to unite."
+    },
+    {
+      "mode": "location",
+      "beat": 11,
+      "title": "When they break",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The two bones",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fibula",
+          "to": "talus",
+          "kind": "articulation"
+        }
+      ],
+      "narration": "Three fractures to know. A tibial shaft fracture is the commonest long bone fracture to be open, because the front of the bone is only skin deep. A fracture of the neck of the fibula injures the common fibular nerve and produces foot drop with loss of eversion. An ankle fracture at the lower end, the Pott's type, matters according to whether the mortise is still intact — a broken lateral malleolus with a torn syndesmosis lets the talus move, and a talus that can move is an ankle that must be fixed."
+    },
+    {
+      "mode": "location",
+      "beat": 12,
+      "title": "Peel down to the bones",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two bones"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Peel the leg in order: skin, deep fascia, the muscles of each compartment, periosteum, cortex, cavity. On the medial side that list is short — skin, a thin layer of fascia, then bone. Nothing lies between, which is what makes the medial surface of the tibia both an easy landmark and an easy place for bone to come through skin."
+    }
+  ],
+  "gaps": [
+    "The catalog holds no arteries or nerves below the external iliac. The anterior tibial artery, the posterior tibial artery, the fibular artery, the common fibular nerve at the fibular neck and the tibial nerve are therefore named in narration and, for the nutrient artery, authored as a traced concept path. The fibular neck relationship is the single most examinable thing in this scene and it is currently taught by words rather than by a model.",
+    "The tibial tuberosity, the anterior border, the soleal line, the intercondylar eminence, the interosseous borders, the malleoli and the fibular styloid are all sub-features of one whole-bone mesh. Each is taught by lighting the bone and naming the feature. Measured landmark anchors would be the obvious improvement and were not attempted, because an anchor placed by eye is worse than none.",
+    "No ligaments of the knee or ankle exist in the catalog, so the superior and inferior tibiofibular joints are shown as a lit relationship between the two bones rather than as modelled ligaments, and the syndesmosis is described in narration.",
+    "The deep fascia of the leg and the anterior and posterior intermuscular septa have no models. They are named in the cross-section beat as the walls that complete each compartment.",
+    "The medullary cavity, periosteum and growth plates are internal architecture a surface model cannot show; the cut-plane beat opens the shell and describes what a sawn section would reveal.",
+    "This scene does not cover Ankle joint, Popliteal fossa or Arches of the foot. The talus, the calcaneus and gastrocnemius appear here only as the ends of the story."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

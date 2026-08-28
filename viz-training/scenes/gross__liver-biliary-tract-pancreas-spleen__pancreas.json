@@ -1,0 +1,820 @@
+{
+  "schema": 2,
+  "id": "gross__liver-biliary-tract-pancreas-spleen__pancreas",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Liver, Biliary Tract, Pancreas & Spleen",
+  "structure": "Pancreas",
+  "covers": [
+    "Pancreas"
+  ],
+  "learning_goal": "Place the pancreas across the transpyloric plane as a retroperitoneal organ, name its five parts and the structure each one is moulded around, list the anterior and posterior relations in the order a CT slice shows them, separate the exocrine acini draining to the ampulla from the endocrine islets draining to the portal vein, and explain from those relations why pancreatitis radiates to the back and why carcinoma of the head presents with painless jaundice.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pancreas",
+      "pancreatic anatomy",
+      "retroperitoneum",
+      "transpyloric plane",
+      "abdomen",
+      "foregut and midgut derivatives",
+      "pancreatitis",
+      "pancreatic carcinoma",
+      "islets of Langerhans",
+      "endocrine pancreas",
+      "exocrine pancreas",
+      "Whipple procedure",
+      "obstructive jaundice",
+      "coeliac plexus",
+      "lesser sac",
+      "diabetes mellitus"
+    ],
+    "terms": [
+      "pancreas",
+      "head of the pancreas",
+      "uncinate process",
+      "neck of the pancreas",
+      "body of the pancreas",
+      "tail of the pancreas",
+      "transpyloric plane",
+      "L1",
+      "retroperitoneal",
+      "secondarily retroperitoneal",
+      "lesser sac",
+      "omental bursa",
+      "pancreatic duct",
+      "duct of Wirsung",
+      "accessory pancreatic duct",
+      "duct of Santorini",
+      "minor duodenal papilla",
+      "major duodenal papilla",
+      "ampulla of Vater",
+      "hepatopancreatic ampulla",
+      "sphincter of Oddi",
+      "bile duct",
+      "double duct sign",
+      "acini",
+      "acinar cells",
+      "zymogen granules",
+      "trypsinogen",
+      "enterokinase",
+      "amylase",
+      "lipase",
+      "bicarbonate",
+      "secretin",
+      "cholecystokinin",
+      "CCK",
+      "exocrine",
+      "islets of Langerhans",
+      "islet cells",
+      "alpha cells",
+      "beta cells",
+      "delta cells",
+      "PP cells",
+      "insulin",
+      "glucagon",
+      "somatostatin",
+      "endocrine",
+      "portal vein",
+      "first pass",
+      "diabetes mellitus",
+      "insulinoma",
+      "gastrinoma",
+      "Zollinger-Ellison syndrome",
+      "coeliac trunk",
+      "superior mesenteric artery",
+      "gastroduodenal artery",
+      "superior pancreaticoduodenal artery",
+      "inferior pancreaticoduodenal artery",
+      "pancreaticoduodenal arcade",
+      "splenic artery",
+      "dorsal pancreatic artery",
+      "splenic vein",
+      "superior mesenteric vein",
+      "portal confluence",
+      "SMA syndrome",
+      "third part of the duodenum",
+      "acute pancreatitis",
+      "chronic pancreatitis",
+      "gallstones",
+      "alcohol",
+      "epigastric pain radiating to the back",
+      "relief on leaning forward",
+      "Cullen's sign",
+      "Grey Turner's sign",
+      "serum amylase",
+      "lipase",
+      "pseudocyst",
+      "pancreatic necrosis",
+      "carcinoma of the head of the pancreas",
+      "painless jaundice",
+      "Courvoisier's law",
+      "Trousseau's sign of malignancy",
+      "Whipple procedure",
+      "pancreaticoduodenectomy",
+      "distal pancreatectomy",
+      "splenectomy",
+      "coeliac plexus block",
+      "ventral pancreatic bud",
+      "dorsal pancreatic bud",
+      "annular pancreas",
+      "pancreas divisum"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — the line of the gland",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreatic duct",
+        "duct of Wirsung",
+        "accessory pancreatic duct",
+        "duct of Santorini",
+        "head of the pancreas",
+        "neck of the pancreas",
+        "body of the pancreas",
+        "tail of the pancreas",
+        "uncinate process",
+        "transpyloric plane",
+        "ampulla of Vater",
+        "major duodenal papilla",
+        "double duct sign",
+        "pancreas divisum"
+      ],
+      "narration": "This is the main duct, the duct of Wirsung, and it runs the whole length of the gland from tail to head — so it draws the axis of the pancreas even though the gland's own surface is not shown here. Read the five parts along it. The head sits in the C of the duodenum. The uncinate process hooks off the head backwards and to the left, behind the superior mesenteric vessels. The neck is the short piece in front of the portal confluence. The body crosses the aorta and the vertebral column at L1. The tail runs in the splenorenal ligament to the hilum of the spleen — the only part of the pancreas that is not retroperitoneal. Near the head the duct turns down and joins the bile duct in the ampulla of Vater. An accessory duct, the duct of Santorini, often persists and opens separately at the minor papilla about two centimetres higher, and when the two embryonic duct systems fail to fuse at all you have pancreas divisum."
+    },
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum — the C around the head",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "C of the duodenum",
+        "head of the pancreas",
+        "major duodenal papilla",
+        "minor duodenal papilla",
+        "second part of the duodenum",
+        "third part of the duodenum",
+        "SMA syndrome",
+        "annular pancreas",
+        "shared blood supply",
+        "Whipple procedure"
+      ],
+      "narration": "The head of the pancreas is clasped in the concavity of the duodenum, and the two are inseparable in three ways. They share the pancreaticoduodenal arcades, which is why a Whipple procedure has to remove the duodenum with the head of the pancreas. They share the ampulla on the posteromedial wall of the second part. And they share an embryological accident: if the ventral pancreatic bud rotates the wrong way it encircles the duodenum as an annular pancreas and obstructs it in the newborn. The third part of the duodenum crosses in front of the aorta and behind the superior mesenteric artery, so the uncinate process and the duodenum lie in the same narrow angle."
+    },
+    {
+      "key": "splenic_a",
+      "name": "splenic artery",
+      "label": "Splenic artery — along the upper border",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14773"
+      },
+      "terms": [
+        "splenic artery",
+        "tortuous",
+        "superior border of the pancreas",
+        "dorsal pancreatic artery",
+        "arteria pancreatica magna",
+        "coeliac trunk",
+        "body and tail of the pancreas",
+        "splenic artery aneurysm",
+        "pseudocyst"
+      ],
+      "narration": "The most tortuous artery in the body runs along the superior border of the body and tail of the pancreas on its way to the spleen, giving pancreatic branches as it goes. It supplies the body and tail; the head is supplied by the arcades instead. Its intimacy with the gland cuts both ways: chronic pancreatitis or a pseudocyst can erode its wall into a pseudoaneurysm that bleeds torrentially, and a distal pancreatectomy usually takes the artery and therefore the spleen with it."
+    },
+    {
+      "key": "splenic_v",
+      "name": "splenic vein",
+      "label": "Splenic vein — behind the body",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "posterior relation",
+        "portal confluence",
+        "neck of the pancreas",
+        "splenic vein thrombosis",
+        "left-sided portal hypertension",
+        "gastric varices",
+        "inferior mesenteric vein"
+      ],
+      "narration": "Unlike its artery, the splenic vein runs a straight course behind the body of the pancreas, buried in a groove on its posterior surface, and joins the superior mesenteric vein behind the neck. That adherence is why pancreatic disease so readily thromboses it. Splenic vein thrombosis gives left-sided or segmental portal hypertension: isolated gastric varices and splenomegaly with a normal liver and normal liver function tests — a favourite examination distinction."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein — the portal confluence",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal vein",
+        "confluence",
+        "neck of the pancreas",
+        "resectability",
+        "venous invasion",
+        "insulin",
+        "glucagon",
+        "first pass"
+      ],
+      "narration": "Comes up over the third part of the duodenum and the uncinate process to meet the splenic vein behind the neck of the pancreas; the portal vein begins at that junction. Two consequences worth holding together. Surgically, a tumour of the head or neck that grows into this confluence is what most often makes the disease unresectable, and the plane between the neck and the vein is the plane the surgeon develops first. Physiologically, every hormone the islets secrete enters the portal vein here and reaches the liver before the rest of the body — which is why the liver sees insulin at several times the concentration any peripheral tissue does, and why injected insulin never quite reproduces the natural gradient."
+    },
+    {
+      "key": "sma",
+      "name": "superior mesenteric artery",
+      "label": "Superior mesenteric artery — behind the neck",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14749"
+      },
+      "terms": [
+        "superior mesenteric artery",
+        "L1",
+        "uncinate process",
+        "third part of the duodenum",
+        "SMA syndrome",
+        "inferior pancreaticoduodenal artery",
+        "midgut artery",
+        "foregut midgut junction",
+        "arcades"
+      ],
+      "narration": "Leaves the aorta at L1, just below the coeliac trunk, and passes behind the neck of the pancreas and in front of the uncinate process and the third part of the duodenum. It is the midgut artery, and it matters here for two reasons. First, it gives the inferior pancreaticoduodenal artery, whose arcade with the superior pancreaticoduodenal from the gastroduodenal supplies the head — the head of the pancreas straddles the foregut-midgut junction and so has a dual supply. Second, when the fat in that angle is lost, the artery compresses the duodenum against the aorta and causes superior mesenteric artery syndrome, with vomiting relieved by lying prone."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk — the other supply",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "T12",
+        "gastroduodenal artery",
+        "superior pancreaticoduodenal artery",
+        "splenic artery",
+        "coeliac plexus",
+        "coeliac plexus block",
+        "referred pain",
+        "back pain"
+      ],
+      "narration": "Leaves the front of the aorta at T12 and gives the splenic artery to the body and tail and, through the common hepatic and gastroduodenal arteries, the superior pancreaticoduodenal artery to the head. Just as important is what wraps around it: the coeliac plexus lies on the aorta behind the pancreas, and it is the reason pancreatic pain is felt in the epigastrium and bores through to the back. Blocking that plexus with alcohol or local anaesthetic is a standard palliation in pancreatic cancer."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen — where the tail ends",
+      "role": "part",
+      "group": "Pancreas",
+      "layer": "organ",
+      "color": "#7e3b52",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "splenic hilum",
+        "tail of the pancreas",
+        "splenorenal ligament",
+        "distal pancreatectomy",
+        "splenectomy",
+        "pancreatic fistula",
+        "overwhelming post-splenectomy infection"
+      ],
+      "narration": "The tail of the pancreas travels in the splenorenal ligament and touches the hilum of the spleen, which makes it the only intraperitoneal part of the gland. The relation has surgical teeth in both directions: a splenectomy can injure the tail and leave a pancreatic fistula, and a distal pancreatectomy commonly sacrifices the spleen because the splenic vessels lie along the gland. Anyone losing a spleen needs vaccination against the encapsulated organisms."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach — the anterior relation",
+      "role": "context",
+      "group": "The bed",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "lesser sac",
+        "omental bursa",
+        "posterior wall of the stomach",
+        "pancreatic pseudocyst",
+        "cystgastrostomy",
+        "posterior gastric ulcer",
+        "gastroduodenal artery",
+        "haematemesis"
+      ],
+      "narration": "The stomach lies directly in front of the body of the pancreas with only the lesser sac between them. That thin space is where pancreatic juice collects after an attack of pancreatitis and walls itself off as a pseudocyst — and because only the stomach wall separates them, such a cyst can be drained into the stomach itself. The traffic goes the other way too: a posterior gastric ulcer erodes backwards into the pancreas and into the gastroduodenal artery lying on it, which is the classic cause of massive upper gastrointestinal bleeding."
+    },
+    {
+      "key": "gallbladder",
+      "name": "gallbladder",
+      "label": "Gallbladder — Courvoisier's sign",
+      "role": "context",
+      "group": "The bed",
+      "layer": "organ",
+      "color": "#7d8c1f",
+      "refs": {
+        "bodyparts3d": "FMA7202"
+      },
+      "terms": [
+        "gallbladder",
+        "Courvoisier's law",
+        "painless jaundice",
+        "bile duct",
+        "carcinoma of the head of the pancreas",
+        "gallstone pancreatitis",
+        "double duct sign"
+      ],
+      "narration": "The bile duct descends behind or through the head of the pancreas to reach the ampulla, so the gallbladder reports on what is happening in the head. A carcinoma there obstructs the duct slowly and painlessly, the biliary tree distends, and a previously healthy gallbladder becomes palpable — Courvoisier's law. In the opposite direction, a stone from that gallbladder impacted at the ampulla is the commonest cause of acute pancreatitis worldwide."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver",
+      "role": "context",
+      "group": "The bed",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "portal vein",
+        "hepatic metastases",
+        "first pass",
+        "insulin",
+        "bile duct",
+        "jaundice"
+      ],
+      "narration": "Everything the pancreas secretes into blood goes to the liver first, and everything malignant in the pancreas spreads there first. It is drawn here as the destination of the portal confluence and as the organ whose staging scan decides operability."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney — posterior relation",
+      "role": "context",
+      "group": "The bed",
+      "layer": "organ",
+      "color": "#884ea0",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "left renal vessels",
+        "posterior relation",
+        "retroperitoneal",
+        "hilum of the left kidney",
+        "splenorenal ligament",
+        "left ureter"
+      ],
+      "narration": "The body and tail of the pancreas lie on the front of the left kidney and its hilum, separated only by a leaf of fascia. This is one of the relations that makes pancreatic pain and pancreatic collections retroperitoneal: fluid tracks along the same planes as the kidney, not into the free peritoneal cavity."
+    },
+    {
+      "key": "left_adrenal",
+      "name": "left adrenal gland",
+      "label": "Left suprarenal gland",
+      "role": "context",
+      "group": "The bed",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA15630"
+      },
+      "terms": [
+        "left suprarenal gland",
+        "left adrenal gland",
+        "posterior relation",
+        "body of the pancreas",
+        "retroperitoneal"
+      ],
+      "narration": "Caps the upper pole of the left kidney immediately behind the body of the pancreas. It is listed because posterior relations are asked for as a set, and because a mass here and a mass in the pancreatic body look alike on an axial slice until you find the plane between them."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — the gland is pressed against it",
+      "role": "context",
+      "group": "The bed",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "coeliac trunk",
+        "superior mesenteric artery",
+        "T12",
+        "L1",
+        "coeliac plexus",
+        "boring back pain",
+        "leaning forward"
+      ],
+      "narration": "The body of the pancreas crosses the aorta at L1 with the coeliac plexus sandwiched between them. That single relation explains the most characteristic symptom in this topic: pancreatic pain bores straight through to the back, is worse lying flat and is eased by sitting up and leaning forward, because that posture lifts the inflamed gland off the plexus."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — behind the head",
+      "role": "context",
+      "group": "The bed",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "posterior relation",
+        "head of the pancreas",
+        "right renal vein",
+        "retroperitoneal",
+        "Whipple procedure"
+      ],
+      "narration": "Lies directly behind the head of the pancreas, with the right renal vein and the bile duct nearby. It is the reason the head cannot simply be shelled out: the dissection at a Whipple procedure is bounded in front by the portal confluence and behind by the cava."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1 — the transpyloric plane",
+      "role": "context",
+      "group": "Surface markings",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "first lumbar vertebra",
+        "L1",
+        "transpyloric plane",
+        "plane of Addison",
+        "neck of the pancreas",
+        "pylorus",
+        "fundus of the gallbladder",
+        "hila of the kidneys",
+        "origin of the portal vein",
+        "ninth costal cartilage"
+      ],
+      "narration": "The transpyloric plane passes through the lower border of L1, halfway between the suprasternal notch and the pubic symphysis, at the tips of the ninth costal cartilages. Almost everything in this topic is on it: the neck of the pancreas, the origin of the portal vein behind that neck, the pylorus, the fundus of the gallbladder, the hila of the kidneys, the duodenojejunal flexure and the origin of the superior mesenteric artery. Learn the plane once and you have located the pancreas on any patient and on any axial slice."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Across the back of the abdomen at L1",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "The bed"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pancreatic_duct",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "l1",
+          "kind": "crosses at the transpyloric plane"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "duodenum",
+          "kind": "head sits in the C"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "spleen",
+          "kind": "tail reaches the hilum"
+        }
+      ],
+      "narration": "The pancreas lies across the back of the abdomen, sloping up and to the left, about fifteen centimetres long and weighing under a hundred grams. It is retroperitoneal — secondarily so, having been swung back against the posterior wall during development — and that single fact governs its behaviour. It cannot be palpated. Its inflammation is felt in the back. Its collections spread along retroperitoneal planes rather than into the peritoneal cavity. Name the parts from right to left: head in the C of the duodenum, uncinate process hooking behind the superior mesenteric vessels, neck in front of the portal confluence, body crossing the aorta at L1, and tail in the splenorenal ligament touching the hilum of the spleen. Only that tail is intraperitoneal. The transpyloric plane at the lower border of L1 runs through the neck, and it is the single most useful line in abdominal anatomy: the pylorus, the fundus of the gallbladder, the origin of the portal vein, the renal hila and the origin of the superior mesenteric artery are all on it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "The bed — what lies in front and what lies behind",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "pancreatic_duct",
+          "kind": "lesser sac lies between"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "aorta",
+          "kind": "body crosses it at L1"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "left_kidney",
+          "kind": "body and tail lie on it"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "ivc",
+          "kind": "head lies on it"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Learn the relations as two lists, because that is how they are examined and how a CT is read. In front, across the lesser sac, is the stomach — which is why a pancreatic pseudocyst can be drained through the stomach wall, and why a posterior gastric ulcer erodes into the pancreas and the gastroduodenal artery lying on it. Below and in front, the transverse mesocolon takes off from the front of the gland, so pancreatic inflammation can spread along it to the colon. Behind, from right to left: the inferior vena cava and the bile duct behind the head, the aorta with the coeliac plexus and the origin of the superior mesenteric artery behind the neck and body, then the left kidney with its vessels and the left suprarenal gland behind the body and tail. Note that the neck has vessels on both sides of it — the superior mesenteric artery and vein pass behind it and the uncinate process wraps around them. That sandwich is the anatomy of resectability."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "One gland, two secretions, two destinations",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pancreas"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "smv"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pancreatic_duct",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:pancreatic-juice",
+          "path": [
+            "pancreatic_duct",
+            "duodenum"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:islet-hormones",
+          "path": [
+            "pancreatic_duct",
+            "splenic_v",
+            "smv",
+            "liver"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pancreatic_duct",
+            "smv"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The pancreas is the clearest example in the body of a gland that is both exocrine and endocrine, and the two halves are told apart by where their product goes. Ninety-eight per cent of the gland by mass is exocrine: acini of serous cells packed with zymogen granules, draining through ductules into the main duct and out at the ampulla into the duodenum. They secrete about a litre and a half a day of alkaline juice — amylase, lipase, and proteases released as inactive precursors. Trypsinogen becomes trypsin only when duodenal enterokinase cleaves it, and trypsin then activates the rest; premature activation inside the gland is precisely what acute pancreatitis is. Secretin from the duodenum drives the watery bicarbonate component that neutralises gastric acid, and cholecystokinin drives the enzyme-rich component. The remaining two per cent is a million islets of Langerhans, most densely in the tail, which have no ducts at all and secrete straight into the capillaries and so into the portal vein: beta cells make insulin, alpha cells glucagon, delta cells somatostatin, PP cells pancreatic polypeptide. Two destinations from one organ — duodenum for the juice, portal vein for the hormones — and every pancreatic disease can be sorted by which of the two it damages."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Two arteries in, one vein out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Pancreas"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "celiac",
+            "splenic_a",
+            "pancreatic_duct"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-blood",
+          "path": [
+            "pancreatic_duct",
+            "splenic_v",
+            "smv",
+            "liver"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "celiac",
+            "sma"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "splenic_a",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "The head straddles the junction between foregut and midgut, so it has a dual arterial supply and both must be named. From the coeliac trunk, the gastroduodenal artery gives the superior pancreaticoduodenal; from the superior mesenteric artery comes the inferior pancreaticoduodenal; the two form anterior and posterior arcades in the groove between the head and the duodenum, which is why the two organs cannot be separated surgically. The body and tail are supplied by pancreatic branches of the splenic artery running along the superior border. Venous drainage is simpler and all of it is portal: corresponding veins into the splenic vein and the superior mesenteric vein, which unite behind the neck as the portal vein. Two clinical consequences follow directly. Because the splenic vein is stuck to the back of the gland, pancreatic inflammation or tumour thromboses it and produces isolated gastric varices with a normal liver. And because the tortuous splenic artery lies on the gland, a pseudocyst can erode it into a pseudoaneurysm — a rare but lethal cause of bleeding in chronic pancreatitis."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The transpyloric slice",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Pancreas",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "smv",
+          "to": "splenic_v",
+          "kind": "confluence behind the neck"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "pancreatic_duct",
+          "kind": "passes behind the neck"
+        }
+      ],
+      "narration": "Slice the body at the transpyloric plane and read it from front to back, because this is exactly the order on an axial scan. Anterior abdominal wall, then the stomach, then the lesser sac, then the pancreas itself. Immediately behind the neck, the splenic vein joining the superior mesenteric vein to make the portal vein. Behind that, the superior mesenteric artery in its collar of fat, then the left renal vein crossing in front of the aorta to reach the cava, then the aorta on the left and the inferior vena cava on the right, and the vertebral body behind everything. Two landmarks make the pancreas findable on any scan even when the gland is atrophic: the splenic vein traces the posterior surface of the body like a drawn line, and the superior mesenteric artery sits in a ring of fat directly behind the neck. Fix those two and you have the gland."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Why pancreatic disease presents the way it does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aorta",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gallbladder",
+          "to": "pancreatic_duct",
+          "kind": "the shared ampulla"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "aorta",
+          "kind": "coeliac plexus lies between"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "gallbladder",
+            "duodenum"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pancreas"
+        }
+      ],
+      "narration": "Every classic presentation here is readable off the relations already drawn. Acute pancreatitis: gallstones and alcohol cause most of it, the pain is epigastric and bores through to the back because the coeliac plexus lies between the gland and the aorta, and the patient sits forward to relieve it. Enzymes tracking along retroperitoneal planes to the flank give Grey Turner's sign and around the falciform ligament to the umbilicus give Cullen's sign — both late, both signs of severe disease. Serum amylase rises early and falls fast; lipase stays up longer. Fluid walled off in the lesser sac becomes a pseudocyst weeks later. Chronic pancreatitis destroys the exocrine mass first, so steatorrhoea and weight loss come before the diabetes that follows when the islets go. Carcinoma of the head is the other half of the topic: it obstructs the bile duct behind it and gives painless obstructive jaundice with a palpable gallbladder by Courvoisier's law, and dilatation of both the bile duct and the pancreatic duct — the double duct sign. Carcinoma of the body and tail has no duct to obstruct, so it declares itself late with back pain and weight loss and a far worse prognosis. Resectability is decided by the relations in beat two: involvement of the portal confluence or encasement of the superior mesenteric artery is what takes a Whipple procedure off the table."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no pancreas in the catalog. Searching all 934 entries for pancreas, pancreatic, islet, acinus, uncinate, head, neck, body and tail returns the pancreatic duct alone. So the gland itself - the organ this scene is about - has no surface a student can click, and the scene is status:\"candidate\" for that reason. The duct is used as the gland's stand-in because it runs the full length of the pancreas and therefore occupies its exact position and axis: option (a), the most specific part that does exist. Every label and narration says openly that this is the duct standing for the gland. The head, neck, body, tail and uncinate process are read off the duct's course and named in narration, and all five are in terms[] so a note that says 'uncinate process' still opens this scene.",
+    "The islets of Langerhans have no mesh and could not have one at this scale - they are a microscopic subject. Beat three teaches the endocrine pancreas by tracing concept:islet-hormones from the gland into the splenic and superior mesenteric veins and on to the liver, which is geometrically true at every waypoint, but the islets themselves are narration. The curriculum keeps 'diagram' as this structure's deferred mode and the histology course carries the islets separately; a microscopic scene is the right home for alpha, beta and delta cells, not this one.",
+    "There is no bile duct. Its passage behind or through the head of the pancreas is the mechanism of Courvoisier's law and of the double duct sign, and it is taught in beats two and six through the gallbladder, which does exist, plus narration. The same absence is recorded in the liver and biliary scenes; a bile duct mesh is the single highest-value addition for this whole topic, since three consecutive structures are all missing it.",
+    "The gastroduodenal, superior and inferior pancreaticoduodenal arteries and the arcades between them have no meshes. Beat four therefore traces the arterial supply through the coeliac trunk and splenic artery, which exist, and names the arcades. The dual foregut-midgut supply of the head is stated but cannot be shown as two vessels meeting.",
+    "The portal vein has no mesh, so the confluence behind the neck is shown as the meeting of the splenic and superior mesenteric veins, which are both present. The narration says plainly that the portal vein begins at that junction, so nothing is misrepresented, but the vessel whose involvement decides resectability cannot itself be lit.",
+    "No landmark anchors were authored. The head, neck, body, tail, uncinate process, the groove for the splenic vein and the point where the duct meets the ampulla are all places ON meshes that are not in the local decimated set, and anchors in this corpus are measured on real geometry rather than estimated by eye. Ingesting FMA10419 and FMA7206 locally would yield at least six anchors and would make beats one, three and five clickable rather than narrated.",
+    "The lesser sac, the transverse mesocolon and the splenorenal ligament have no meshes - the same peritoneal absence recorded across this corpus. The pseudocyst relation in beat two is taught as a relation between the stomach and the gland, both of which are drawn.",
+    "This scene does not claim to cover 'Spleen' or 'Portal venous system' even though the spleen and both portal tributaries appear in it. The spleen is here as the end point of the tail and as the organ lost in a distal pancreatectomy, not as a taught organ with its own relations and vasculature; both remain on the worklist."
+  ]
+}

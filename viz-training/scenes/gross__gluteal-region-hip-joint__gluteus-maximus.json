@@ -1,0 +1,791 @@
+{
+  "schema": 2,
+  "id": "gross__gluteal-region-hip-joint__gluteus-maximus",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Gluteal Region & Hip Joint",
+  "structure": "Gluteus maximus",
+  "covers": [
+    "Gluteus maximus"
+  ],
+  "learning_goal": "Give the origin, insertion, nerve and action of gluteus maximus, say which everyday movements need it and which do not, separate it from the abductors that lie deep to it, and use its borders to choose a safe site for an intramuscular injection.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "gluteal region",
+      "buttock",
+      "hip",
+      "gluteus maximus",
+      "lower limb",
+      "hip extension",
+      "intramuscular injection",
+      "gait"
+    ],
+    "terms": [
+      "gluteus maximus",
+      "gluteal region",
+      "buttock",
+      "inferior gluteal nerve",
+      "hip extension",
+      "lateral rotation of the hip",
+      "iliotibial tract",
+      "iliotibial band",
+      "gluteal tuberosity",
+      "tensor fasciae latae",
+      "fascia lata",
+      "gluteus medius",
+      "gluteus minimus",
+      "superior gluteal nerve",
+      "Trendelenburg gait",
+      "Trendelenburg sign",
+      "piriformis",
+      "greater sciatic foramen",
+      "short lateral rotators",
+      "obturator internus",
+      "gemelli",
+      "quadratus femoris",
+      "ischial tuberosity",
+      "sacrotuberous ligament",
+      "posterior gluteal line",
+      "greater trochanter",
+      "upper outer quadrant",
+      "intramuscular injection",
+      "sciatic nerve",
+      "trochanteric bursa",
+      "rising from a chair",
+      "climbing stairs",
+      "gluteal aponeurosis"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Gluteus maximus",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "buttock",
+        "inferior gluteal nerve",
+        "hip extension",
+        "gluteal tuberosity",
+        "iliotibial tract"
+      ],
+      "narration": "The coarsest, heaviest muscle in the body. Its fibres run down and out at about forty-five degrees, from the back of the ilium, the sacrum, the coccyx and the sacrotuberous ligament, to two very different endings: the upper three quarters into the iliotibial tract, the lower quarter into the gluteal tuberosity of the femur. Inferior gluteal nerve, L5 S1 S2."
+    },
+    {
+      "key": "it_tract",
+      "name": "right iliotibial tract",
+      "label": "Iliotibial tract",
+      "role": "part",
+      "group": "Insertion",
+      "layer": "fascia",
+      "color": "#e0d2a8",
+      "refs": {
+        "bodyparts3d": "FMA58776"
+      },
+      "terms": [
+        "iliotibial tract",
+        "iliotibial band",
+        "fascia lata",
+        "lateral condyle of tibia",
+        "Gerdy's tubercle"
+      ],
+      "narration": "A thickened strip of the fascia lata running down the outside of the thigh to the tibia. Most of gluteus maximus pulls on this band, not on the femur — so the muscle acts on the knee as well as the hip, and helps hold the extended knee locked when you stand."
+    },
+    {
+      "key": "tfl",
+      "name": "right tensor fasciae latae",
+      "label": "Tensor fasciae latae",
+      "role": "part",
+      "group": "Insertion",
+      "layer": "muscle",
+      "color": "#d97f5a",
+      "refs": {
+        "bodyparts3d": "FMA22425"
+      },
+      "terms": [
+        "tensor fasciae latae",
+        "iliotibial tract",
+        "superior gluteal nerve",
+        "deltoid of the hip"
+      ],
+      "narration": "The front half of the same sling. Tensor fasciae latae in front and gluteus maximus behind both pull on the iliotibial tract, so between them they tighten it from either side. Note the nerve differs: tensor fasciae latae is superior gluteal, gluteus maximus is inferior gluteal."
+    },
+    {
+      "key": "glut_med",
+      "name": "right gluteus medius",
+      "label": "Gluteus medius",
+      "role": "part",
+      "group": "Abductors",
+      "layer": "muscle",
+      "color": "#c9743a",
+      "refs": {
+        "bodyparts3d": "FMA22330"
+      },
+      "terms": [
+        "gluteus medius",
+        "abduction",
+        "superior gluteal nerve",
+        "Trendelenburg",
+        "greater trochanter",
+        "upper outer quadrant"
+      ],
+      "narration": "Deep to maximus above, but uncovered in the upper outer corner of the buttock — which is the part you inject into. It abducts the hip and, more importantly, holds the pelvis level when you stand on one leg."
+    },
+    {
+      "key": "glut_min",
+      "name": "right gluteus minimus",
+      "label": "Gluteus minimus",
+      "role": "part",
+      "group": "Abductors",
+      "layer": "muscle",
+      "color": "#b3652f",
+      "refs": {
+        "bodyparts3d": "FMA22332"
+      },
+      "terms": [
+        "gluteus minimus",
+        "abduction",
+        "medial rotation",
+        "superior gluteal nerve"
+      ],
+      "narration": "The same job again, under medius. Both are superior gluteal. Both abduct and medially rotate — the opposite rotation to maximus, on a different nerve."
+    },
+    {
+      "key": "piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#7f5aa8",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "key to the gluteal region",
+        "sciatic nerve",
+        "piriformis syndrome"
+      ],
+      "narration": "The key to the region. It leaves the pelvis through the greater sciatic foramen and fills it, so everything else entering the buttock is described as above it or below it. The sciatic nerve normally emerges just below its lower border."
+    },
+    {
+      "key": "gemellus_sup",
+      "name": "right gemellus superior",
+      "label": "Gemellus superior",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#6f4d94",
+      "refs": {
+        "bodyparts3d": "FMA22334"
+      },
+      "terms": [
+        "gemellus superior",
+        "ischial spine",
+        "triceps coxae"
+      ],
+      "narration": "The upper twin, from the ischial spine."
+    },
+    {
+      "key": "obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#634587",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "lesser sciatic foramen",
+        "right-angle turn",
+        "triceps coxae"
+      ],
+      "narration": "It starts inside the pelvis, turns a right angle round the lesser sciatic notch and comes out into the buttock between its two twins. The three together are sometimes called triceps coxae."
+    },
+    {
+      "key": "gemellus_inf",
+      "name": "right gemellus inferior",
+      "label": "Gemellus inferior",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#573c78",
+      "refs": {
+        "bodyparts3d": "FMA22336"
+      },
+      "terms": [
+        "gemellus inferior",
+        "ischial tuberosity"
+      ],
+      "narration": "The lower twin, from the upper part of the ischial tuberosity."
+    },
+    {
+      "key": "quadratus_femoris",
+      "name": "right quadratus femoris",
+      "label": "Quadratus femoris",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#4b3468",
+      "refs": {
+        "bodyparts3d": "FMA22338"
+      },
+      "terms": [
+        "quadratus femoris",
+        "quadrate tubercle",
+        "intertrochanteric crest",
+        "flat and square"
+      ],
+      "narration": "Flat and square, from the ischial tuberosity to the back of the femur. The lowest of the deep rotators, and the one the sciatic nerve lies directly on."
+    },
+    {
+      "key": "obturator_externus",
+      "name": "right obturator externus",
+      "label": "Obturator externus",
+      "role": "part",
+      "group": "Short lateral rotators",
+      "layer": "muscle",
+      "color": "#41305c",
+      "refs": {
+        "bodyparts3d": "FMA22326"
+      },
+      "terms": [
+        "obturator externus",
+        "obturator nerve",
+        "lateral rotation"
+      ],
+      "narration": "The odd one out. It rotates the hip laterally like the rest, but it is supplied by the obturator nerve and reaches the femur by passing under the neck of the bone, not behind it."
+    },
+    {
+      "key": "biceps_femoris_long",
+      "name": "long head of right biceps femoris",
+      "label": "Biceps femoris — long head",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#a63f5e",
+      "refs": {
+        "bodyparts3d": "FMA45888"
+      },
+      "terms": [
+        "biceps femoris",
+        "hamstring",
+        "ischial tuberosity",
+        "hip extension",
+        "tibial division of sciatic nerve"
+      ],
+      "narration": "Hamstrings extend the hip too, and they are the ones that do it during ordinary walking. Gluteus maximus stays quiet on level ground and only joins in when the effort rises."
+    },
+    {
+      "key": "semitendinosus",
+      "name": "right semitendinosus",
+      "label": "Semitendinosus",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#93374f",
+      "refs": {
+        "bodyparts3d": "FMA22358"
+      },
+      "terms": [
+        "semitendinosus",
+        "hamstring",
+        "ischial tuberosity",
+        "pes anserinus"
+      ],
+      "narration": "From the ischial tuberosity, under the lower border of gluteus maximus."
+    },
+    {
+      "key": "adductor_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#7f3045",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "hamstring part",
+        "adductor tubercle",
+        "hip extension"
+      ],
+      "narration": "Its posterior part behaves as a hamstring and extends the hip as well. Worth knowing when a question asks which muscles extend the hip and expects more than two."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "ilium",
+        "ischium",
+        "iliac crest",
+        "posterior gluteal line",
+        "ischial tuberosity",
+        "posterior superior iliac spine"
+      ],
+      "narration": "Gluteus maximus arises from the roughened strip behind the posterior gluteal line, and from the back of the ischium below it. The iliac crest above and the ischial tuberosity below are the two landmarks you can find on a patient."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacrotuberous ligament",
+        "origin of gluteus maximus",
+        "greater sciatic foramen"
+      ],
+      "narration": "The medial half of the origin. The muscle crosses the sacroiliac joint, so it braces that joint as well as moving the hip."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "greater trochanter",
+        "gluteal tuberosity",
+        "intertrochanteric crest",
+        "trochanteric bursa"
+      ],
+      "narration": "The greater trochanter is the landmark you feel through the buttock; gluteus maximus passes over it with a bursa in between, and gluteus medius and minimus land on it. Only the lowest quarter of maximus reaches the bone itself, at the gluteal tuberosity."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The shape of the buttock",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_max",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "This one muscle is the buttock. Everything else in the gluteal region lies underneath it. Its lower border is not the gluteal fold you see in the skin — the border runs obliquely and the fold is horizontal, which is why the fold is a skin crease and not a muscle edge."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Where it comes from",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "glut_max",
+          "to": "hip_bone",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "glut_max",
+          "to": "sacrum",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The origin is a long curved line: the ilium behind the posterior gluteal line, then the back of the sacrum and coccyx, then the sacrotuberous ligament. From that wide base the fibres converge downwards and laterally. Remember the direction — it explains every action the muscle has."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Two very different insertions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Short lateral rotators"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "glut_max",
+          "path": [
+            "sacrum",
+            "hip_bone",
+            "glut_max",
+            "it_tract",
+            "femur"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow the fibres down. Three quarters of them stop at the iliotibial tract and never touch the femur; the deep lower quarter carries on to the gluteal tuberosity. So the muscle has one pull on the thigh bone and a much bigger pull on a fascial strap that crosses two joints."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The band it pulls on",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Short lateral rotators"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "glut_max",
+            "tfl"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "it_tract",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Tensor fasciae latae in front, gluteus maximus behind, both tightening the same band. Standing still, that tension steadies the hip and helps hold the knee straight without the quadriceps working. It is also why a tight band rubs on the lateral femoral condyle in runners."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 5,
+      "title": "When the muscle actually works",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Short lateral rotators"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_max",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hamstrings",
+          "intensity": 0.4
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Gluteus maximus is a power muscle, not a walking muscle. On level ground it is nearly silent and the hamstrings do the extending. It fires when you climb stairs, rise from a chair, straighten up from bending, run or jump. That is the answer to the classic question: the muscle of rising, not of walking."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 6,
+      "title": "It rotates the hip outwards too",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "glut_max",
+            "Abductors"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Because the fibres run downwards and laterally behind the joint, contraction also turns the thigh outwards. Its upper fibres help abduct; the lower fibres adduct. Compare with medius and minimus lit beside it, which abduct and rotate the hip inwards on a different nerve. Same region, opposite rotation."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "Take the maximus off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Short lateral rotators"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Underneath is a second floor of muscles, stacked from above down: piriformis, gemellus superior, obturator internus, gemellus inferior, quadratus femoris. Piriformis is the landmark. Above it the superior gluteal nerve and vessels come out; below it everything else does, including the sciatic nerve."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "What runs under the muscle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sciatic_nerve",
+          "path": [
+            "piriformis",
+            "gemellus_sup",
+            "obturator_internus",
+            "gemellus_inf",
+            "quadratus_femoris",
+            "femur"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "The path traced here is the sciatic nerve. It comes out below piriformis, crosses the back of the short rotators in that order, lies on quadratus femoris, then passes midway between the ischial tuberosity and the greater trochanter into the thigh. It is the width of your little finger and it is directly under this muscle — which is the whole reason the next beat matters."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "How deep is the buttock",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_max",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The section shows the layers a needle passes: skin, a thick pad of fat, then gluteus maximus, then the plane holding the nerves and vessels, then the deep rotators on the back of the hip joint. In a large adult the fat alone can be deeper than a standard needle is long, which is why an injection meant for muscle sometimes never reaches it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "Where to put the needle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Abductors"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_med",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Divide the buttock into quarters with a vertical and a horizontal line. Inject into the upper outer quadrant only. The needle lands in gluteus medius, well above and lateral to the sciatic nerve. Any other quadrant risks the nerve, and a sciatic injection injury means a foot that cannot dorsiflex. The safer alternative is further forward still, on the side of the hip between the two iliac spines."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Two nerves, two very different limps",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Short lateral rotators"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "glut_max",
+            "glut_med"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Inferior gluteal nerve supplies maximus; superior gluteal nerve supplies medius, minimus and tensor fasciae latae. Lose the inferior gluteal and the patient walks on the flat but cannot climb stairs or get out of a chair without pushing. Lose the superior gluteal and the pelvis drops on the unsupported side each step — the Trendelenburg gait. Two nerves a few centimetres apart, and you can tell them apart by watching the patient walk."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 12,
+      "title": "Peel the buttock in layers",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The order to recite for a dissection: fascia lata and gluteal aponeurosis, gluteus maximus, then the vessels and nerves in fat, then medius and minimus above with the short rotators below, then the capsule of the hip joint and the bone. Learn the region as four layers and every structure in it has an address."
+    }
+  ],
+  "gaps": [
+    "There is no coccyx mesh in the catalog, so the coccygeal part of the origin of gluteus maximus is narrated against the sacrum rather than shown.",
+    "No ligament of the pelvis is modelled — the sacrotuberous ligament gives about a fifth of the muscle's origin and the sacrospinous ligament divides the greater from the lesser sciatic foramen, and both are described only in narration.",
+    "No nerve of the lower limb exists as a model, so the sciatic nerve is authored as a traced concept path across the short rotators, and the inferior and superior gluteal nerves — the two nerves the whole clinical beat turns on — are taught by lighting the muscles they supply.",
+    "No artery is modelled in this region either. The superior and inferior gluteal vessels are named in narration only; they are the subject of the separate Gluteal vessels curriculum entry, which this scene does not claim to cover.",
+    "The greater trochanter, the gluteal tuberosity, the posterior gluteal line, the ischial tuberosity and the posterior superior iliac spine are all sub-features of whole-bone meshes. They are taught by lighting the femur or the hip bone and naming the feature. Authoring them as landmark anchors is the obvious next improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "The trochanteric and gluteal bursae have no meshes, so trochanteric bursitis is mentioned rather than shown.",
+    "This scene does not cover Hip joint, Proximal femur, Sciatic nerve or Gluteal vessels. The femur and hip bone appear here only as the frame the muscle is stretched over; the hip joint capsule itself is never shown."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "cursor": {
-    "courseKey": "gross",
-    "topicIndex": 2,
-    "structureIndex": 2
+    "courseKey": "embryology",
+    "topicIndex": 7,
+    "structureIndex": 0
   },
   "coveredStructures": {
     "gross": [
@@ -13,17 +13,69 @@
       "Pectoralis major",
       "Pectoralis minor",
       "Clavicle",
+      "Rotator cuff muscles",
       "Biceps brachii",
       "Triceps brachii",
+      "Humerus",
+      "Flexor compartment of forearm",
+      "Extensor compartment of forearm",
+      "Radius & ulna",
+      "Carpal tunnel",
+      "Intrinsic hand muscles & arches",
+      "Gluteus maximus",
+      "Hip joint",
+      "Proximal femur",
+      "Quadriceps femoris",
+      "Hamstrings",
+      "Femoral triangle",
+      "Adductor canal",
+      "Femur",
+      "Gastrocnemius & soleus",
+      "Tibia & fibula",
+      "Ankle joint",
+      "Popliteal fossa",
+      "Arches of the foot",
+      "Ribs & sternum (thoracic cage)",
+      "Intercostal muscles",
+      "Diaphragm",
       "Heart (external)",
       "Cardiac cycle (pumping)",
       "Coronary arteries & cardiac veins",
-      "Heart valves"
+      "Heart valves",
+      "Lungs",
+      "Tracheobronchial tree",
+      "Mediastinum",
+      "Great vessels",
+      "Trachea",
+      "Rectus abdominis",
+      "Flat abdominal muscles",
+      "Inguinal canal",
+      "Rectus sheath",
+      "Inguinal ligament & landmarks",
+      "Stomach",
+      "Small intestine",
+      "Liver",
+      "Spleen",
+      "Kidney",
+      "Suprarenal (adrenal) gland",
+      "Ureters",
+      "Abdominal aorta & IVC",
+      "Psoas major & posterior wall",
+      "Bony pelvis",
+      "Pelvic diaphragm (levator ani)",
+      "Urinary bladder",
+      "Internal iliac vessels"
     ]
   },
   "done": false,
   "runs": 0,
   "lastRunAt": null,
   "note": "coveredStructures and cursor are DERIVED from viz-training/scenes/ by tools/sync-state.mjs. Do not hand-edit them: the scenes directory is the source of truth, and a second one always drifts. The authoring task runs this tool first, every run, before choosing what to author.",
-  "syncedAt": "2026-08-26T17:08:41.707Z"
+  "syncedAt": "2026-08-28T17:18:59.029Z",
+  "meshGaps": {
+    "scenesEmpty": 0,
+    "scenesWithHoles": 0,
+    "modelsMissing": 0,
+    "checkedAt": "2026-08-28T17:18:59.018Z"
+  }
 }

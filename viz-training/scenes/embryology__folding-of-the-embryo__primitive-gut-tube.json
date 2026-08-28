@@ -1,0 +1,799 @@
+{
+  "schema": 2,
+  "id": "embryology__folding-of-the-embryo__primitive-gut-tube",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Folding of the Embryo",
+  "structure": "Primitive gut tube",
+  "covers": [
+    "Primitive gut tube"
+  ],
+  "learning_goal": "Divide the primitive gut into foregut, midgut and hindgut at their exact boundaries, name the artery and the vertebral level of each, list what each division becomes, and use those three divisions to place referred pain and to explain oesophageal atresia, duodenal atresia, malrotation, Hirschsprung disease and imperforate anus.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "primitive gut tube",
+      "gut tube",
+      "folding of the embryo",
+      "foregut",
+      "midgut",
+      "hindgut",
+      "GIT development",
+      "gastrointestinal development",
+      "week 4",
+      "referred pain",
+      "gut blood supply"
+    ],
+    "terms": [
+      "primitive gut tube",
+      "primitive gut",
+      "endoderm",
+      "gut tube",
+      "cranial to caudal",
+      "foregut",
+      "midgut",
+      "hindgut",
+      "buccopharyngeal membrane",
+      "oropharyngeal membrane",
+      "stomodeum",
+      "cloacal membrane",
+      "proctodeum",
+      "yolk sac",
+      "vitelline duct",
+      "omphalomesenteric duct",
+      "yolk stalk",
+      "splanchnic mesoderm",
+      "visceral peritoneum",
+      "smooth muscle of gut",
+      "epithelial lining",
+      "coeliac trunk",
+      "celiac trunk",
+      "T12",
+      "superior mesenteric artery",
+      "L1",
+      "inferior mesenteric artery",
+      "L3",
+      "major duodenal papilla",
+      "ampulla of Vater",
+      "second part of duodenum",
+      "junction of proximal two thirds and distal one third of transverse colon",
+      "left colic flexure",
+      "pectinate line",
+      "dentate line",
+      "oesophagus",
+      "esophagus",
+      "stomach",
+      "liver",
+      "gallbladder",
+      "pancreas",
+      "hepatic diverticulum",
+      "dorsal pancreatic bud",
+      "ventral pancreatic bud",
+      "respiratory diverticulum",
+      "lung bud",
+      "tracheo-oesophageal septum",
+      "duodenum",
+      "jejunum",
+      "ileum",
+      "caecum",
+      "appendix",
+      "ascending colon",
+      "transverse colon",
+      "descending colon",
+      "sigmoid colon",
+      "rectum",
+      "upper anal canal",
+      "urogenital sinus",
+      "urorectal septum",
+      "cloaca",
+      "physiological herniation",
+      "midgut rotation",
+      "270 degrees anticlockwise",
+      "week 6",
+      "week 10",
+      "vagus nerve",
+      "greater splanchnic nerve",
+      "T5 to T9",
+      "lesser splanchnic nerve",
+      "least splanchnic nerve",
+      "epigastric pain",
+      "periumbilical pain",
+      "suprapubic pain",
+      "referred pain",
+      "neural crest",
+      "enteric nervous system",
+      "myenteric plexus",
+      "Auerbach plexus",
+      "Meissner plexus",
+      "recanalization",
+      "oesophageal atresia",
+      "tracheo-oesophageal fistula",
+      "polyhydramnios",
+      "VACTERL",
+      "duodenal atresia",
+      "double bubble",
+      "Down syndrome",
+      "trisomy 21",
+      "jejunoileal atresia",
+      "apple peel",
+      "vascular accident",
+      "malrotation",
+      "midgut volvulus",
+      "Ladd bands",
+      "bilious vomiting",
+      "Meckel diverticulum",
+      "Hirschsprung disease",
+      "congenital aganglionic megacolon",
+      "RET gene",
+      "delayed passage of meconium",
+      "rectal biopsy",
+      "imperforate anus",
+      "anorectal malformation",
+      "annular pancreas"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "tube_forms",
+      "label": "One tube, made by folding",
+      "role": "context",
+      "group": "The tube",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "primitive gut tube",
+        "endoderm rolled into a tube",
+        "cranio-caudal folding",
+        "lateral folding",
+        "week 4",
+        "flat sheet becomes a tube",
+        "incorporated yolk sac"
+      ],
+      "narration": "The primitive gut is not a new organ. It is the roof of the yolk sac, rolled into a tube by the head, tail and lateral folds during week four. Hold that in mind and the whole gut becomes one tube that was cut into three by its blood supply."
+    },
+    {
+      "key": "tube_layers",
+      "label": "Endoderm lines it, splanchnic mesoderm builds it",
+      "role": "part",
+      "group": "The tube",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "endoderm",
+        "epithelial lining",
+        "glands",
+        "splanchnic mesoderm",
+        "visceral mesoderm",
+        "smooth muscle",
+        "connective tissue",
+        "visceral peritoneum",
+        "neural crest",
+        "enteric nervous system",
+        "myenteric plexus",
+        "Auerbach plexus",
+        "Meissner plexus"
+      ],
+      "narration": "Two germ layers build the gut and it is worth being exact about which does what. Endoderm gives only the epithelial lining and the glands that bud from it. Splanchnic mesoderm gives the muscle, the connective tissue and the visceral peritoneum. The nerve cells come from neither — neural crest cells migrate in to form the enteric plexuses, and when they fail to arrive you get Hirschsprung disease."
+    },
+    {
+      "key": "three_divisions",
+      "label": "Three divisions, defined by three arteries",
+      "role": "part",
+      "group": "The tube",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "foregut",
+        "midgut",
+        "hindgut",
+        "coeliac trunk",
+        "T12",
+        "superior mesenteric artery",
+        "L1",
+        "inferior mesenteric artery",
+        "L3",
+        "one artery per division",
+        "blood supply defines the boundary"
+      ],
+      "narration": "The gut is divided into foregut, midgut and hindgut, and the division is arterial, not anatomical convenience. Coeliac trunk at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. Learn the three arteries and their levels first; every boundary, every pattern of referred pain and half the surgical anatomy of the abdomen falls out of them."
+    },
+    {
+      "key": "boundary_papilla",
+      "label": "Foregut ends at the major duodenal papilla",
+      "role": "part",
+      "group": "The tube",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "second part of duodenum",
+        "opening of the bile duct",
+        "foregut midgut junction",
+        "coeliac to superior mesenteric"
+      ],
+      "narration": "The foregut ends and the midgut begins in the second part of the duodenum, exactly where the bile duct opens at the major duodenal papilla. That is why the duodenum has a double blood supply from both the coeliac and superior mesenteric territories: the boundary runs through the middle of it."
+    },
+    {
+      "key": "boundary_colon",
+      "label": "Midgut ends two thirds of the way along the transverse colon",
+      "role": "part",
+      "group": "The tube",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "junction of proximal two thirds and distal one third",
+        "transverse colon",
+        "midgut hindgut junction",
+        "superior mesenteric to inferior mesenteric",
+        "watershed",
+        "left colic flexure",
+        "marginal artery"
+      ],
+      "narration": "The midgut ends at the junction of the proximal two thirds and the distal one third of the transverse colon. That is the arterial watershed between superior and inferior mesenteric territories, and it is why ischaemic colitis has a favourite site near the left colic flexure."
+    },
+    {
+      "key": "foregut_derivs",
+      "label": "Foregut derivatives",
+      "role": "part",
+      "group": "Foregut",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "stomach",
+        "proximal duodenum",
+        "first part of duodenum",
+        "liver",
+        "gallbladder",
+        "bile ducts",
+        "pancreas",
+        "hepatic diverticulum",
+        "dorsal pancreatic bud",
+        "ventral pancreatic bud",
+        "respiratory diverticulum",
+        "trachea",
+        "lungs",
+        "coeliac trunk",
+        "greater splanchnic nerve",
+        "T5 to T9",
+        "epigastric pain"
+      ],
+      "narration": "Foregut: oesophagus, stomach, duodenum as far as the papilla, and the organs that bud off it — liver and biliary tree from the hepatic diverticulum, both pancreatic buds, and the respiratory diverticulum that becomes trachea and lungs. All supplied by the coeliac trunk, all sensed through the greater splanchnic nerve from T5 to T9, which is why foregut pain is felt in the epigastrium."
+    },
+    {
+      "key": "midgut_derivs",
+      "label": "Midgut derivatives",
+      "role": "part",
+      "group": "Midgut",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "distal duodenum",
+        "jejunum",
+        "ileum",
+        "caecum",
+        "appendix",
+        "ascending colon",
+        "proximal two thirds of transverse colon",
+        "superior mesenteric artery",
+        "lesser splanchnic nerve",
+        "T10 to T11",
+        "periumbilical pain",
+        "vitelline duct"
+      ],
+      "narration": "Midgut: duodenum beyond the papilla, jejunum, ileum, caecum, appendix, ascending colon and the proximal two thirds of the transverse colon. Superior mesenteric artery, lesser splanchnic nerve at T10 and T11, and therefore periumbilical pain — which is exactly why early appendicitis hurts around the umbilicus before it moves to the right iliac fossa."
+    },
+    {
+      "key": "midgut_loop",
+      "label": "The midgut loop, its hernia and its turn",
+      "role": "part",
+      "group": "Midgut",
+      "layer": "organ",
+      "color": "#148f77",
+      "terms": [
+        "midgut loop",
+        "vitelline duct",
+        "apex of the loop",
+        "cranial limb",
+        "caudal limb",
+        "caecal bud",
+        "physiological herniation",
+        "week 6",
+        "umbilical ring",
+        "270 degrees anticlockwise",
+        "counterclockwise",
+        "superior mesenteric artery is the axis",
+        "week 10",
+        "retroperitoneal fixation"
+      ],
+      "narration": "Only the midgut does something dramatic. Around week six the loop outgrows the abdomen and herniates into the umbilical cord, rotating ninety degrees anticlockwise around the superior mesenteric artery on the way out. It returns by about week ten, rotating a further one hundred and eighty degrees, so the total is two hundred and seventy degrees anticlockwise. That rotation is what carries the caecum to the right iliac fossa and lays the duodenum and the ascending and descending colon against the back wall."
+    },
+    {
+      "key": "hindgut_derivs",
+      "label": "Hindgut derivatives",
+      "role": "part",
+      "group": "Hindgut",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "distal one third of transverse colon",
+        "descending colon",
+        "sigmoid colon",
+        "rectum",
+        "upper anal canal",
+        "above the pectinate line",
+        "inferior mesenteric artery",
+        "least splanchnic nerve",
+        "T12",
+        "suprapubic pain",
+        "hypogastric pain",
+        "upper part of the urogenital sinus",
+        "bladder"
+      ],
+      "narration": "Hindgut: distal third of the transverse colon, descending and sigmoid colon, rectum and the anal canal down to the pectinate line. Inferior mesenteric artery, least splanchnic nerve at T12, hypogastric or suprapubic pain. The pectinate line is a germ-layer boundary, and it is why everything above it differs from everything below it in blood supply, venous drainage, lymphatics and sensation."
+    },
+    {
+      "key": "cloaca",
+      "label": "The cloaca is partitioned by the urorectal septum",
+      "role": "part",
+      "group": "Hindgut",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "cloaca",
+        "urorectal septum",
+        "anorectal canal",
+        "urogenital sinus",
+        "perineal body",
+        "cloacal membrane",
+        "anal membrane",
+        "urogenital membrane",
+        "week 7",
+        "proctodeum",
+        "anal pit",
+        "pectinate line",
+        "ectoderm"
+      ],
+      "narration": "The hindgut ends in a common chamber, the cloaca. A wedge of mesoderm, the urorectal septum, grows down and splits it into an anorectal canal behind and a urogenital sinus in front, meeting the cloacal membrane at what becomes the perineal body. The ectodermal proctodeum then meets the endoderm from inside, and their meeting point is the pectinate line."
+    },
+    {
+      "key": "membranes",
+      "label": "The tube is sealed at both ends until it is not",
+      "role": "part",
+      "group": "The ends",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "buccopharyngeal membrane",
+        "oropharyngeal membrane",
+        "stomodeum",
+        "week 4",
+        "ruptures",
+        "cloacal membrane",
+        "proctodeum",
+        "week 7",
+        "ectoderm meets endoderm",
+        "no mesoderm between"
+      ],
+      "narration": "At each end of the tube, ectoderm and endoderm touch with no mesoderm between them, and those two-layered spots are the buccopharyngeal membrane at the head and the cloacal membrane at the tail. The buccopharyngeal ruptures in week four to open the mouth, the cloacal in week seven to open the anus and urogenital tract. A membrane that never ruptures is an atresia — choanal or oesophageal at one end, imperforate anus at the other."
+    },
+    {
+      "key": "vitelline_stalk",
+      "label": "The vitelline duct — the tube's old connection to the yolk sac",
+      "role": "part",
+      "group": "The ends",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "vitelline duct",
+        "omphalomesenteric duct",
+        "yolk stalk",
+        "midgut apex",
+        "regresses",
+        "Meckel diverticulum",
+        "rule of twos",
+        "ectopic gastric mucosa",
+        "painless rectal bleeding"
+      ],
+      "narration": "Where the midgut still opens into the yolk sac, folding narrows the connection to a thin vitelline duct at the apex of the midgut loop. It should regress completely. When it does not, the commonest remnant is a Meckel diverticulum — a true diverticulum of the ileum, often with ectopic gastric mucosa, classically presenting as painless rectal bleeding in a small child."
+    },
+    {
+      "key": "recanalization",
+      "label": "The lumen is obliterated and reopened — and that is where atresias come from",
+      "role": "part",
+      "group": "The ends",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "solid cord stage",
+        "epithelial proliferation",
+        "recanalization",
+        "week 8",
+        "duodenum",
+        "atresia",
+        "stenosis",
+        "failure of recanalization",
+        "vascular accident"
+      ],
+      "narration": "In week six the proliferating epithelium temporarily plugs the lumen in places, especially the duodenum, and it must recanalize by about week eight. Fail completely and you get an atresia; fail partly and you get a stenosis. Remember the mechanism by region: duodenal atresia is a failure of recanalization, while jejunal and ileal atresia are usually a vascular accident in a segment that had already opened."
+    },
+    {
+      "key": "oesoph_atresia",
+      "label": "Oesophageal atresia and tracheo-oesophageal fistula",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "oesophageal atresia",
+        "esophageal atresia",
+        "tracheo-oesophageal fistula",
+        "TOF",
+        "tracheo-oesophageal septum",
+        "respiratory diverticulum",
+        "proximal blind pouch",
+        "distal fistula",
+        "commonest type",
+        "polyhydramnios",
+        "cannot pass nasogastric tube",
+        "frothing at the mouth",
+        "choking on first feed",
+        "VACTERL"
+      ],
+      "narration": "The respiratory diverticulum buds off the foregut and is separated from it by the tracheo-oesophageal septum. When that septum forms incompletely the oesophagus ends blind and usually communicates with the trachea below — the common variant is a proximal blind pouch with a distal fistula. Suspect it before birth from polyhydramnios, because the fetus cannot swallow amniotic fluid, and after birth when a nasogastric tube will not pass and the first feed causes choking. Look for the rest of the VACTERL group."
+    },
+    {
+      "key": "duodenal_atresia",
+      "label": "Duodenal atresia — the double bubble",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "duodenal atresia",
+        "failure of recanalization",
+        "double bubble sign",
+        "bilious vomiting",
+        "distal to the papilla",
+        "polyhydramnios",
+        "Down syndrome",
+        "trisomy 21",
+        "annular pancreas",
+        "ventral pancreatic bud"
+      ],
+      "narration": "Duodenal atresia is the recanalization failure, and it is the one tied to Down syndrome. The plain film shows a double bubble — stomach and proximal duodenum both distended, nothing beyond. The vomiting is bilious because the obstruction is usually distal to the major duodenal papilla. Annular pancreas, where the ventral bud encircles the duodenum, produces the same picture from outside."
+    },
+    {
+      "key": "malrotation",
+      "label": "Malrotation and midgut volvulus",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "malrotation",
+        "incomplete rotation",
+        "reversed rotation",
+        "midgut volvulus",
+        "narrow mesenteric base",
+        "Ladd bands",
+        "caecum in the right upper quadrant",
+        "bilious vomiting in a neonate",
+        "surgical emergency",
+        "corkscrew duodenum",
+        "upper GI contrast"
+      ],
+      "narration": "If the two hundred and seventy degree rotation is incomplete, the caecum never reaches the right iliac fossa and the mesentery stays attached over a narrow base instead of a broad oblique line. A narrow base is a pivot: the whole midgut can twist on the superior mesenteric artery and infarct within hours. Bilious vomiting in a neonate is malrotation with volvulus until imaging proves otherwise, and it is a surgical emergency, not an outpatient problem."
+    },
+    {
+      "key": "hirschsprung",
+      "label": "Hirschsprung disease — the neural crest cells never arrived",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "Hirschsprung disease",
+        "congenital aganglionic megacolon",
+        "neural crest migration failure",
+        "absent ganglion cells",
+        "myenteric plexus",
+        "submucosal plexus",
+        "rectosigmoid",
+        "always involves the rectum",
+        "cranio-caudal migration",
+        "RET gene",
+        "Down syndrome",
+        "delayed passage of meconium",
+        "48 hours",
+        "explosive stool on rectal examination",
+        "transition zone",
+        "narrow distal segment",
+        "rectal suction biopsy",
+        "enterocolitis"
+      ],
+      "narration": "Neural crest cells colonise the gut from the top down, so when migration fails it is the last segment that is left bare. That makes Hirschsprung disease always involve the rectum and extend proximally, most often only as far as the rectosigmoid. The aganglionic segment cannot relax, so it stays narrow and the normal bowel above it dilates — the megacolon is the healthy part. Failure to pass meconium in the first forty-eight hours is the clue, and the diagnosis is made on rectal biopsy showing absent ganglion cells."
+    },
+    {
+      "key": "imperforate_anus",
+      "label": "Imperforate anus and the anorectal malformations",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "terms": [
+        "imperforate anus",
+        "anorectal malformation",
+        "anal membrane fails to rupture",
+        "urorectal septum",
+        "rectovesical fistula",
+        "rectourethral fistula",
+        "rectovaginal fistula",
+        "perineal fistula",
+        "high lesion",
+        "low lesion",
+        "levator ani",
+        "VACTERL",
+        "meconium in urine"
+      ],
+      "narration": "At the tail end, two things can go wrong. The anal membrane may simply fail to rupture, giving a low lesion with a normally placed but covered anus. Or the urorectal septum may fail to reach the cloacal membrane, leaving the rectum communicating with the urinary tract or vagina — a high lesion with a fistula. Meconium appearing in the urine or at the vulva is what tells you which. As with oesophageal atresia, examine for the rest of the VACTERL association."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One tube from mouth to anus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The tube"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tube_forms",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tube_layers"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Start with the whole tube in side view, sealed at the head by the buccopharyngeal membrane and at the tail by the cloacal membrane, with the yolk sac still hanging from its middle. It is endoderm rolled up by the folds of week four. Endoderm gives the lining and the glands, splanchnic mesoderm gives the muscle and the peritoneum, and neural crest cells arrive later to supply the nerve cells. Three sources, three sets of diseases."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Three arteries cut the tube into three",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The tube"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "three_divisions",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "boundary_papilla",
+            "boundary_colon"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "three_divisions",
+          "to": "boundary_papilla",
+          "kind": "coeliac territory gives way to superior mesenteric at"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "three_divisions",
+          "to": "boundary_colon",
+          "kind": "superior mesenteric gives way to inferior mesenteric at"
+        }
+      ],
+      "narration": "Now put the arteries on. Coeliac trunk at T12, superior mesenteric at L1, inferior mesenteric at L3. The boundaries are exactly where one territory hands over to the next: the major duodenal papilla in the second part of the duodenum, and the junction of the proximal two thirds and distal one third of the transverse colon. Those are the two sentences to memorise verbatim — every derivative list and every referred pain answer depends on them."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "What each division becomes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "foregut_derivs",
+            "midgut_derivs",
+            "hindgut_derivs"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:gut-tube",
+          "path": [
+            "foregut_derivs",
+            "boundary_papilla",
+            "midgut_derivs",
+            "boundary_colon",
+            "hindgut_derivs",
+            "cloaca"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Run down the tube once, division by division. Foregut to the papilla, with the liver, gallbladder, pancreas and the lung bud all budding off it. Midgut to two thirds along the transverse colon, carrying the appendix and the vitelline duct. Hindgut to the pectinate line, ending in the cloaca. Then attach the nerve to each: greater splanchnic T5 to T9 for the foregut and epigastric pain, lesser splanchnic T10 to T11 for the midgut and periumbilical pain, least splanchnic T12 for the hindgut and suprapubic pain. That is why appendicitis starts at the umbilicus."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The midgut leaves the abdomen and comes back turned",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Midgut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "midgut_loop",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:midgut-rotation",
+          "path": [
+            "midgut_loop",
+            "vitelline_stalk",
+            "midgut_derivs"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Only the midgut rotates, and only because it runs out of room. It herniates into the cord at about week six, turning ninety degrees anticlockwise around the superior mesenteric artery, and returns by about week ten with a further one hundred and eighty degrees — two hundred and seventy in total, all anticlockwise, viewed from the front. The caecum lands in the right iliac fossa and the mesentery is left attached along a broad oblique line. Both of those facts matter in the last beat."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Opening the two ends",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The ends"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cloaca"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cloaca",
+          "to": "membranes",
+          "kind": "is divided by the urorectal septum down onto"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "recanalization",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Cut the embryo in the midline and look at the two ends. The buccopharyngeal membrane ruptures in week four, the cloacal in week seven, and before that rupture the urorectal septum has already split the cloaca into anorectal canal and urogenital sinus. In the middle of the tube, the duodenal lumen is temporarily plugged by proliferating epithelium and must reopen by week eight. Three events, three sets of atresias — and knowing which mechanism belongs to which region is what the question is actually testing."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Where each division fails",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "foregut_derivs",
+          "to": "oesoph_atresia",
+          "kind": "an incomplete tracheo-oesophageal septum gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "recanalization",
+          "to": "duodenal_atresia",
+          "kind": "failing in the duodenum gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "midgut_loop",
+          "to": "malrotation",
+          "kind": "returning without its full turn gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tube_layers",
+          "to": "hirschsprung",
+          "kind": "neural crest cells failing to reach the end gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cloaca",
+          "to": "imperforate_anus",
+          "kind": "an unruptured membrane or an incomplete septum gives"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "vessel",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Walk down the tube one more time and hang a disease on each step. Foregut septation fails: oesophageal atresia with a fistula, polyhydramnios, a tube that will not pass. Recanalization fails: duodenal atresia, double bubble, think of Down syndrome. Rotation fails: malrotation, and a narrow mesenteric base that lets the midgut twist — bilious vomiting in a neonate is an emergency. Neural crest migration fails: Hirschsprung, always involving the rectum, diagnosed by biopsy. The cloacal end fails: imperforate anus, with a fistula if the lesion is high. One tube, one developmental step each, and the whole paediatric surgical list in order."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so both are recorded in deferred_modes. The 3d option is genuine — a tube that herniates, rotates 270 degrees and fixes to the posterior wall is a spatial subject that a flat drawing serves badly — and this scene should be re-authored as 3d_anatomy the day a provider holds staged embryonic gut geometry. It is deferred because no such model exists in the catalog today, not because the subject is flat.",
+    "Status is 'planned'. Eighteen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a median-section side view of the week-4 embryo with the whole gut tube drawn as one continuous lumen from buccopharyngeal to cloacal membrane, the yolk sac and vitelline duct attached at the midgut apex; the same view repeated with the three arteries drawn in and the two boundaries marked at the major duodenal papilla and the transverse colon; a derivatives panel listing foregut, midgut and hindgut structures in three colour-coded columns; a four-stage anterior rotation sequence showing the midgut loop herniating, turning 90 degrees, returning and turning a further 180 degrees, with the superior mesenteric artery drawn as the axis in every stage; a midline enlargement of the cloaca being partitioned by the urorectal septum; and a final tube diagram with the six malformations pinned at the level each arises.",
+    "The three divisions must carry ONE colour key across every panel — foregut, midgut and hindgut the same colour in the derivatives table, the rotation sequence and the malformation map. The teaching point of the whole scene is that arterial territory, derivative list, referred pain level and malformation all belong to the same three blocks, and re-colouring between panels destroys exactly that.",
+    "The rotation sequence must state its viewpoint on the drawing. Anticlockwise is only anticlockwise when viewed from the front, and a sequence drawn without that label is the single commonest way students learn the direction backwards.",
+    "Beats 3 and 4 trace concept:gut-tube and concept:midgut-rotation. In each the subject is a lumen or a movement rather than a drawn object, so neither can be a region.",
+    "Beat 6 authors PEEL_LAYER on the vessel layer to take the arteries off the final map. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the arteries are needed to define the divisions in beat 2 and then get in the way when the malformations are pinned on.",
+    "'Lateral folding' and 'Cranio-caudal folding' are NOT claimed in covers[]. Both are named in beat 1 because they are what makes the tube, but each has its own scene and this one draws the finished tube rather than the folding.",
+    "'Body cavity (coelom)' is NOT claimed. The dorsal mesentery and retroperitoneal fixation are named as consequences of rotation, but the partitioning of the coelom, the pleuroperitoneal membranes and the mesenteries in detail belong to that entry.",
+    "Foregut, midgut and hindgut organ development in detail — stomach rotation, the two pancreatic buds fusing, the liver's ductal plate, spleen development — is named here only far enough to place each organ in its division. Those belong to the GIT Development topic and appear here in match.terms only, so a highlighted term still reaches this scene until those exist.",
+    "The pectinate line is named as the hindgut's caudal limit and as a germ-layer boundary, but its consequences for venous drainage, lymphatics and the difference between internal and external haemorrhoids are gross anatomy and are taught in the Pelvis & Perineum scenes.",
+    "Week and day numbers are the standard teaching approximations — folding through week 4, herniation from about week 6, return by about week 10, recanalization by about week 8. Texts differ by several days and the narration gives them as approximations.",
+    "Vertebral levels for the three arteries (T12, L1, L3) are the conventional teaching values and vary between individuals; they are given because they are what is examined.",
+    "The malformations are named with their embryological mechanism and their classic presentation only. Operative management is surgery, not embryology, and is deliberately absent."
+  ]
+}

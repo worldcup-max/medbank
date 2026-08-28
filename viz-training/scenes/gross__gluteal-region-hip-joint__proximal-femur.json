@@ -1,0 +1,780 @@
+{
+  "schema": 2,
+  "id": "gross__gluteal-region-hip-joint__proximal-femur",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Gluteal Region & Hip Joint",
+  "structure": "Proximal femur",
+  "covers": [
+    "Proximal femur"
+  ],
+  "learning_goal": "Name every landmark on the upper end of the femur and the muscle attached to each, trace the retinacular blood supply of the head, and explain why an intracapsular fracture of the neck causes avascular necrosis while an intertrochanteric fracture does not.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "proximal femur",
+      "neck of femur",
+      "hip",
+      "gluteal region",
+      "lower limb",
+      "fracture neck of femur",
+      "avascular necrosis",
+      "blood supply of femoral head",
+      "osteology of the lower limb"
+    ],
+    "terms": [
+      "proximal femur",
+      "upper end of femur",
+      "head of femur",
+      "fovea capitis",
+      "neck of femur",
+      "neck-shaft angle",
+      "angle of inclination",
+      "coxa vara",
+      "coxa valga",
+      "anteversion",
+      "greater trochanter",
+      "lesser trochanter",
+      "trochanteric fossa",
+      "intertrochanteric line",
+      "intertrochanteric crest",
+      "quadrate tubercle",
+      "gluteal tuberosity",
+      "linea aspera",
+      "calcar femorale",
+      "trabeculae",
+      "Ward's triangle",
+      "retinacular arteries",
+      "medial circumflex femoral artery",
+      "lateral circumflex femoral artery",
+      "profunda femoris",
+      "deep artery of the thigh",
+      "artery of the ligament of the head",
+      "obturator artery",
+      "external iliac artery",
+      "internal iliac artery",
+      "femoral artery",
+      "avascular necrosis",
+      "intracapsular fracture",
+      "extracapsular fracture",
+      "intertrochanteric fracture",
+      "fracture neck of femur",
+      "shortened externally rotated limb",
+      "Garden classification",
+      "hemiarthroplasty",
+      "dynamic hip screw",
+      "iliopsoas",
+      "gluteus medius",
+      "obturator externus",
+      "quadratus femoris",
+      "trochanteric bursitis"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur — upper end",
+      "role": "part",
+      "group": "Bone",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "head of femur",
+        "fovea capitis",
+        "neck of femur",
+        "greater trochanter",
+        "lesser trochanter",
+        "trochanteric fossa",
+        "intertrochanteric line",
+        "intertrochanteric crest",
+        "quadrate tubercle",
+        "gluteal tuberosity",
+        "linea aspera"
+      ],
+      "narration": "The longest and strongest bone in the body. Its upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle.",
+      "approx": {
+        "shown_as": "Femur",
+        "detail": "upper end"
+      }
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bone",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "acetabulum",
+        "ischial tuberosity",
+        "obturator foramen",
+        "greater sciatic foramen"
+      ],
+      "narration": "The socket the head sits in, and the origin of most of the muscles that land on the trochanters. The obturator foramen below is where the obturator artery leaves the pelvis."
+    },
+    {
+      "key": "glut_med",
+      "name": "right gluteus medius",
+      "label": "Gluteus medius",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#c9743a",
+      "refs": {
+        "bodyparts3d": "FMA22330"
+      },
+      "terms": [
+        "gluteus medius",
+        "lateral surface of greater trochanter",
+        "abduction",
+        "superior gluteal nerve"
+      ],
+      "narration": "Onto the oblique ridge on the lateral surface of the greater trochanter. It is the pull of this muscle and minimus that drags the greater trochanter upwards when the neck of the femur breaks."
+    },
+    {
+      "key": "glut_min",
+      "name": "right gluteus minimus",
+      "label": "Gluteus minimus",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#b3652f",
+      "refs": {
+        "bodyparts3d": "FMA22332"
+      },
+      "terms": [
+        "gluteus minimus",
+        "anterior surface of greater trochanter",
+        "abduction",
+        "medial rotation"
+      ],
+      "narration": "Onto the front of the greater trochanter, just in front of medius."
+    },
+    {
+      "key": "piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#7f5aa8",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "upper border of greater trochanter",
+        "lateral rotation"
+      ],
+      "narration": "Onto the very top of the greater trochanter — the highest attachment on the bone."
+    },
+    {
+      "key": "obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#634587",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "medial surface of greater trochanter",
+        "lateral rotation"
+      ],
+      "narration": "Onto the medial surface of the greater trochanter, with the two gemelli fused to its tendon above and below."
+    },
+    {
+      "key": "gemellus_sup",
+      "name": "right gemellus superior",
+      "label": "Gemellus superior",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#6f4d94",
+      "refs": {
+        "bodyparts3d": "FMA22334"
+      },
+      "terms": [
+        "gemellus superior",
+        "ischial spine"
+      ],
+      "narration": "Blends with the tendon of obturator internus above."
+    },
+    {
+      "key": "gemellus_inf",
+      "name": "right gemellus inferior",
+      "label": "Gemellus inferior",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#573c78",
+      "refs": {
+        "bodyparts3d": "FMA22336"
+      },
+      "terms": [
+        "gemellus inferior",
+        "ischial tuberosity"
+      ],
+      "narration": "Blends with the same tendon below."
+    },
+    {
+      "key": "obturator_externus",
+      "name": "right obturator externus",
+      "label": "Obturator externus",
+      "role": "part",
+      "group": "On the greater trochanter",
+      "layer": "muscle",
+      "color": "#41305c",
+      "refs": {
+        "bodyparts3d": "FMA22326"
+      },
+      "terms": [
+        "obturator externus",
+        "trochanteric fossa",
+        "under the neck",
+        "obturator nerve"
+      ],
+      "narration": "Onto the trochanteric fossa, the pit on the medial side of the greater trochanter. Its tendon gets there by winding underneath the neck of the femur, and the medial circumflex femoral artery runs with it — which is why this muscle matters to the blood supply and not only to rotation."
+    },
+    {
+      "key": "quadratus_femoris",
+      "name": "right quadratus femoris",
+      "label": "Quadratus femoris",
+      "role": "part",
+      "group": "On the intertrochanteric crest",
+      "layer": "muscle",
+      "color": "#4b3468",
+      "refs": {
+        "bodyparts3d": "FMA22338"
+      },
+      "terms": [
+        "quadratus femoris",
+        "quadrate tubercle",
+        "intertrochanteric crest",
+        "lateral rotation"
+      ],
+      "narration": "Onto the quadrate tubercle on the intertrochanteric crest. The medial circumflex femoral artery reaches the back of the neck by passing between this muscle and obturator externus."
+    },
+    {
+      "key": "psoas",
+      "name": "right psoas major",
+      "label": "Psoas major",
+      "role": "part",
+      "group": "On the lesser trochanter",
+      "layer": "muscle",
+      "color": "#c94f4a",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "iliopsoas",
+        "lesser trochanter",
+        "hip flexion"
+      ],
+      "narration": "The tendon of psoas major is the whole reason the lesser trochanter exists. When the neck breaks, this muscle pulls the shaft up and rotates it outwards."
+    },
+    {
+      "key": "iliacus",
+      "name": "right iliacus",
+      "label": "Iliacus",
+      "role": "part",
+      "group": "On the lesser trochanter",
+      "layer": "muscle",
+      "color": "#c05c46",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliopsoas",
+        "lesser trochanter",
+        "femoral nerve"
+      ],
+      "narration": "It joins the psoas tendon and spreads a little onto the bone below the lesser trochanter."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "On the shaft",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "gluteal tuberosity",
+        "iliotibial tract",
+        "hip extension"
+      ],
+      "narration": "Only its deep lower quarter reaches the bone, at the gluteal tuberosity below the greater trochanter. The rest of the muscle stops at the iliotibial tract."
+    },
+    {
+      "key": "vastus_lateralis",
+      "name": "right vastus lateralis",
+      "label": "Vastus lateralis",
+      "role": "part",
+      "group": "On the shaft",
+      "layer": "muscle",
+      "color": "#d1665c",
+      "refs": {
+        "bodyparts3d": "FMA38930"
+      },
+      "terms": [
+        "vastus lateralis",
+        "greater trochanter",
+        "intertrochanteric line",
+        "linea aspera",
+        "intramuscular injection"
+      ],
+      "narration": "It arises from the lower edge of the greater trochanter and the outer lip of the linea aspera, wrapping the outside of the shaft. It is also the safe site for an intramuscular injection in a small child."
+    },
+    {
+      "key": "vastus_medialis",
+      "name": "right vastus medialis",
+      "label": "Vastus medialis",
+      "role": "part",
+      "group": "On the shaft",
+      "layer": "muscle",
+      "color": "#c96f55",
+      "refs": {
+        "bodyparts3d": "FMA38932"
+      },
+      "terms": [
+        "vastus medialis",
+        "intertrochanteric line",
+        "spiral line",
+        "linea aspera"
+      ],
+      "narration": "From the lower part of the intertrochanteric line, continuing down the medial lip of the linea aspera. Between them the two vasti show that the intertrochanteric line is a muscular attachment as well as the front edge of the joint capsule."
+    },
+    {
+      "key": "vastus_intermedius",
+      "name": "right vastus intermedius",
+      "label": "Vastus intermedius",
+      "role": "part",
+      "group": "On the shaft",
+      "layer": "muscle",
+      "color": "#dd8a6b",
+      "refs": {
+        "bodyparts3d": "FMA38934"
+      },
+      "terms": [
+        "vastus intermedius",
+        "anterior surface of femur",
+        "knee extension"
+      ],
+      "narration": "Straight off the front and side of the shaft, under the other two."
+    },
+    {
+      "key": "ext_iliac_artery",
+      "name": "right external iliac artery",
+      "label": "External iliac artery",
+      "role": "part",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#b8322f",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "femoral artery",
+        "profunda femoris",
+        "deep artery of the thigh",
+        "medial circumflex femoral artery",
+        "lateral circumflex femoral artery"
+      ],
+      "narration": "This vessel becomes the femoral artery behind the inguinal ligament. The femoral gives off the profunda femoris, and the profunda gives off the two circumflex femoral arteries that supply the upper end of the femur. Follow the chain in that order and the blood supply of the head is easy to recite."
+    },
+    {
+      "key": "int_iliac_artery",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery",
+      "role": "part",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#9c2b28",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "obturator artery",
+        "acetabular branch",
+        "artery of the ligament of the head",
+        "foveolar artery"
+      ],
+      "narration": "The obturator artery comes off this trunk, leaves the pelvis through the obturator foramen, and sends an acetabular branch along the ligament of the head. That is the third and smallest source of blood to the head."
+    },
+    {
+      "key": "ext_iliac_vein",
+      "name": "right external iliac vein",
+      "label": "External iliac vein",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#2f5fb8",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "external iliac vein",
+        "femoral vein",
+        "deep vein thrombosis"
+      ],
+      "narration": "The femoral vein continues as this vessel. Worth knowing here because a fractured hip means immobility, and immobility in this venous system is how a fracture kills through pulmonary embolism rather than through the bone."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The upper end of the femur",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Everything in this scene is about the top few centimetres of one bone. Only one part of it can be felt on a patient: the greater trochanter, on the outside of the hip about a hand's breadth below the iliac crest. The head and neck are deep, and you find them by drawing lines rather than by touching them."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Name the landmarks",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bone"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "From the top down: the head, smooth and spherical, with the fovea on its medial side. Then the neck, running down and out. Then the greater trochanter laterally and the lesser trochanter pointing backwards and medially. Joining them in front, the intertrochanteric line; the pit between the crest and the neck behind is the trochanteric fossa. Learn these six names before you learn anything attached to them."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The same bone from behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bone"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Turn it round. The intertrochanteric crest behind is sharper than the line in front, and carries the rounded quadrate tubercle at its midpoint. Below it the gluteal tuberosity runs down into the linea aspera. The front and the back look different enough that a question can show you one view and expect you to say which it is."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Two angles that decide how the hip works",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bone"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "hip_bone",
+          "kind": "articulation"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The neck meets the shaft at about one hundred and twenty-five degrees in an adult, and it is also twisted about fifteen degrees forwards — anteversion, best seen from above like this. A smaller angle is coxa vara and shortens the limb; a larger one is coxa valga. In a child both angles are bigger, which is part of why children walk with their feet turned in."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Why the neck is built the way it is",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bone"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Cut the neck open. The bone inside is not solid: two systems of trabeculae cross each other, one running from the head down the medial side to resist compression, the other arching from the greater trochanter to resist tension. Where they cross is a dense strut called the calcar femorale; where they fail to overlap is a weak area, Ward's triangle. As bone is lost with age, Ward's triangle empties first, and that is where an elderly neck of femur gives way."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "Where the blood comes from",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "On the shaft"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bone"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Two trunks feed this region. The external iliac becomes the femoral artery, gives the profunda femoris, and the profunda gives the medial and lateral circumflex femoral arteries. The internal iliac gives the obturator artery. Between them they supply the head three ways, and the three ways are very unequal."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 7,
+      "title": "The retinacular arteries — the supply that matters",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "On the shaft"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "On the lesser trochanter"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "obturator_externus",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:retinacular_arteries",
+          "path": [
+            "ext_iliac_artery",
+            "quadratus_femoris",
+            "obturator_externus",
+            "femur"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "This is the path to learn. The medial circumflex femoral artery runs backwards between quadratus femoris and obturator externus, reaches the back of the neck, and there it breaks into small retinacular vessels that run up along the neck under the capsule, straight into the head. These supply most of the head in an adult. They are pressed against bone with nothing to protect them, so a fracture of the neck tears them."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 8,
+      "title": "The two supplies that cannot save the head",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bone"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:foveolar_artery",
+          "path": [
+            "int_iliac_artery",
+            "hip_bone",
+            "femur"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ext_iliac_artery",
+            "int_iliac_artery"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The second source is the artery in the ligament of the head, traced here from the obturator artery. It is large in a child and often obliterated by adulthood, so it supplies only a small area around the fovea and cannot keep the head alive alone. The third is the nutrient supply coming up the shaft, which reaches the neck but rarely crosses into the head. So the head effectively depends on the retinacular vessels — a single supply with no useful backup."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Inside or outside the capsule",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bone"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hip_bone",
+          "to": "femur",
+          "kind": "capsule"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The capsule attaches to the intertrochanteric line in front and only to the middle of the neck behind. A fracture medial to that attachment is intracapsular: it tears the retinacular vessels, the head loses its supply, and avascular necrosis follows in a large proportion of cases — so the head is usually replaced. A fracture through or below the trochanters is extracapsular: the vessels are outside the break, the bone unites, and it is fixed rather than replaced. One line on the bone, two completely different operations."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "Why the broken leg lies short and turned out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Vessels"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "On the shaft"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "On the lesser trochanter",
+            "On the greater trochanter"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "psoas",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Once the neck is broken, nothing holds the shaft against the head, and the muscles simply pull. Iliopsoas drags the lesser trochanter up and rotates the shaft outwards; the gluteal abductors pull the greater trochanter up; the short rotators turn it further out. The result is the classic bedside picture — a shortened, externally rotated limb the patient cannot lift. You can now explain it muscle by muscle instead of memorising it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 11,
+      "title": "Everything attached, in order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Vessels"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bone"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Recite it by landmark. Greater trochanter: piriformis on top, gluteus medius laterally, minimus in front, obturator internus and the gemelli medially, obturator externus in the fossa behind. Intertrochanteric crest: quadratus femoris at the quadrate tubercle. Lesser trochanter: iliopsoas. Below them: gluteus maximus at the gluteal tuberosity and the vasti spreading over the shaft. Five landmarks, and every muscle of the buttock has an address on one of them."
+    }
+  ],
+  "gaps": [
+    "The head, neck, greater trochanter, lesser trochanter, trochanteric fossa, intertrochanteric line and crest, quadrate tubercle and gluteal tuberosity are all sub-features of a single whole-femur mesh. Every one of them is taught by lighting the femur and naming the feature. This scene is the strongest case in the corpus so far for measured landmark anchors, and they were not attempted here because an anchor placed by eye would be worse than none.",
+    "The femoral artery, the profunda femoris and the medial and lateral circumflex femoral arteries have no models. The retinacular supply of the head — the single most examinable fact about this bone — is authored as a traced concept path from the external iliac artery through the plane between quadratus femoris and obturator externus onto the femur, with the named branches carried in narration.",
+    "The obturator artery and its acetabular branch have no models either, so the artery of the ligament of the head is traced as a concept from the internal iliac artery across the hip bone.",
+    "There is no ligament of the head of the femur, no capsule and no retinaculum in the catalog, so the capsular attachment that separates an intracapsular from an extracapsular fracture is shown with a relationship connector and a cut plane rather than as a surface.",
+    "Trabecular bone, the calcar femorale and Ward's triangle are internal architecture that a surface model cannot show. The cross-section beat cuts the outer shell and describes what a real section would reveal.",
+    "The trochanteric bursa has no model, so trochanteric bursitis is named but not shown.",
+    "This scene does not cover Hip joint, Sciatic nerve or Gluteal vessels. The hip bone and the two iliac vessels appear only as the frame and the parent trunks."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

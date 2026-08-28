@@ -1,0 +1,527 @@
+{
+  "schema": 2,
+  "id": "embryology__respiratory-system-development__alveolar-development",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Respiratory System Development",
+  "structure": "Alveolar development",
+  "covers": [
+    "Alveolar development"
+  ],
+  "learning_goal": "Name the three layers of the blood-air barrier, say what each pneumocyte does and where it comes from, state when surfactant appears and when it is adequate, explain the pathophysiology of neonatal respiratory distress syndrome from the law of Laplace, and say how antenatal steroids and the L:S ratio are used.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "alveolar development",
+      "surfactant",
+      "respiratory distress syndrome",
+      "hyaline membrane disease",
+      "blood-air barrier",
+      "pneumocytes",
+      "respiratory system development",
+      "lung maturation",
+      "first breath",
+      "prematurity"
+    ],
+    "terms": [
+      "alveolar development",
+      "alveolarisation",
+      "alveolar stage",
+      "terminal sac",
+      "primitive alveolus",
+      "mature alveolus",
+      "secondary septation",
+      "secondary septa",
+      "alveolar duct",
+      "alveolar sac",
+      "respiratory bronchiole",
+      "type I pneumocyte",
+      "type I alveolar cell",
+      "squamous alveolar cell",
+      "type II pneumocyte",
+      "type II alveolar cell",
+      "granular pneumocyte",
+      "lamellar bodies",
+      "alveolar macrophage",
+      "dust cell",
+      "blood-air barrier",
+      "respiratory membrane",
+      "fused basement membrane",
+      "capillary endothelium",
+      "surfactant",
+      "dipalmitoylphosphatidylcholine",
+      "DPPC",
+      "lecithin",
+      "sphingomyelin",
+      "L:S ratio",
+      "phosphatidylglycerol",
+      "surfactant proteins",
+      "SP-A",
+      "SP-B",
+      "SP-C",
+      "surface tension",
+      "law of Laplace",
+      "alveolar collapse",
+      "atelectasis",
+      "compliance",
+      "week 20",
+      "week 26",
+      "week 28",
+      "week 34",
+      "week 36",
+      "8 years",
+      "respiratory distress syndrome",
+      "RDS",
+      "neonatal respiratory distress syndrome",
+      "hyaline membrane disease",
+      "grunting",
+      "intercostal recession",
+      "ground-glass",
+      "air bronchogram",
+      "antenatal corticosteroids",
+      "dexamethasone",
+      "betamethasone",
+      "exogenous surfactant",
+      "CPAP",
+      "infant of a diabetic mother",
+      "hyperinsulinaemia",
+      "bronchopulmonary dysplasia",
+      "first breath",
+      "lung fluid",
+      "pulmonary vascular resistance"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "terminal_sac",
+      "label": "Where alveoli come from — the terminal sac",
+      "role": "context",
+      "group": "Building the alveolus",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "terminal sac",
+        "terminal saccular stage",
+        "primitive alveolus",
+        "alveolar duct",
+        "alveolar sac",
+        "respiratory bronchiole",
+        "week 26",
+        "thin-walled sac"
+      ],
+      "narration": "At the end of the airway, from about twenty-six weeks, sit thin-walled terminal sacs opening off the alveolar ducts. These are not yet alveoli. They are wide, shallow pouches, and a mature alveolus is made by subdividing them, not by growing new tubes."
+    },
+    {
+      "key": "septation",
+      "label": "Secondary septation — how one sac becomes many alveoli",
+      "role": "part",
+      "group": "Building the alveolus",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "secondary septation",
+        "secondary septa",
+        "alveolarisation",
+        "week 36",
+        "8 years",
+        "50 million at birth",
+        "300 million in the adult",
+        "postnatal lung growth",
+        "surface area",
+        "70 square metres"
+      ],
+      "narration": "From about week thirty-six, ridges of tissue push in from the wall of each sac and divide it into smaller compartments. This is secondary septation, and it is the only way the lung adds alveoli. Most of it happens after birth — roughly fifty million alveoli at term against three hundred million by adulthood, the process running to about eight years. The newborn lung is an unfinished lung, and that is the sentence to write."
+    },
+    {
+      "key": "type1",
+      "label": "Type I pneumocyte — the thin one that does the exchanging",
+      "role": "part",
+      "group": "The two cells and the barrier",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "type I pneumocyte",
+        "type I alveolar cell",
+        "squamous alveolar cell",
+        "simple squamous epithelium",
+        "97 percent of surface area",
+        "40 percent of cells",
+        "cannot divide",
+        "endoderm"
+      ],
+      "narration": "Type one pneumocytes are flat squamous cells derived from foregut endoderm. They are a minority of the cells but they cover about ninety-seven per cent of the alveolar surface, because each one is stretched thin. They cannot divide. When they are injured, type two cells divide and replace them — which is why the type two cell is the stem cell of the alveolus."
+    },
+    {
+      "key": "type2",
+      "label": "Type II pneumocyte — the cuboidal one that makes surfactant",
+      "role": "part",
+      "group": "The two cells and the barrier",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "type II pneumocyte",
+        "type II alveolar cell",
+        "granular pneumocyte",
+        "cuboidal",
+        "lamellar bodies",
+        "microvilli",
+        "stem cell of the alveolus",
+        "surfactant synthesis",
+        "endoderm",
+        "week 20",
+        "week 24"
+      ],
+      "narration": "Type two pneumocytes are cuboidal, sit in the corners of the alveolus, and carry lamellar bodies — the packaged surfactant, visible on electron microscopy and a favourite identification question. They appear from about week twenty. They do two jobs: they secrete surfactant, and they divide to replace both themselves and the type one cells. Both cells come from the same foregut endoderm."
+    },
+    {
+      "key": "barrier",
+      "label": "The blood-air barrier — three layers, half a micron",
+      "role": "part",
+      "group": "The two cells and the barrier",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "blood-air barrier",
+        "respiratory membrane",
+        "alveolocapillary membrane",
+        "type I pneumocyte",
+        "fused basement membrane",
+        "capillary endothelium",
+        "0.5 micrometres",
+        "diffusion distance",
+        "pulmonary oedema",
+        "fibrosis"
+      ],
+      "narration": "Count the layers between air and blood and there are three: the type one pneumocyte and its basement membrane, the fused basement membranes, and the capillary endothelial cell. Total thickness about half a micrometre. Every disease that impairs gas exchange by diffusion does so by adding to this distance — fluid in pulmonary oedema, collagen in fibrosis — and the exam wants the three layers named in order."
+    },
+    {
+      "key": "macrophage",
+      "label": "The alveolar macrophage — the third cell in the alveolus",
+      "role": "part",
+      "group": "The two cells and the barrier",
+      "layer": "organ",
+      "color": "#7f8c8d",
+      "terms": [
+        "alveolar macrophage",
+        "dust cell",
+        "heart failure cell",
+        "haemosiderin-laden macrophage",
+        "monocyte",
+        "bone marrow",
+        "mesoderm"
+      ],
+      "narration": "A third cell wanders the alveolar surface: the alveolar macrophage, or dust cell, which comes from blood monocytes and therefore from mesoderm, not from the endodermal lining. It clears inhaled particles and red cells. When it has swallowed red cells in left heart failure it is loaded with haemosiderin and called a heart failure cell."
+    },
+    {
+      "key": "surfactant",
+      "label": "Surfactant — what it is and when it arrives",
+      "role": "part",
+      "group": "Surfactant and the first breath",
+      "layer": "organ",
+      "color": "#f7dc6f",
+      "terms": [
+        "surfactant",
+        "dipalmitoylphosphatidylcholine",
+        "DPPC",
+        "lecithin",
+        "phospholipid",
+        "phosphatidylglycerol",
+        "surfactant proteins",
+        "SP-A",
+        "SP-B",
+        "SP-C",
+        "SP-D",
+        "lamellar bodies",
+        "week 20",
+        "week 26",
+        "week 28",
+        "week 34",
+        "cortisol",
+        "thyroxine"
+      ],
+      "narration": "Surfactant is mostly phospholipid, and the one to name is dipalmitoylphosphatidylcholine — lecithin — with smaller amounts of phosphatidylglycerol and four surfactant proteins. Type two cells begin making it at about week twenty, but the amount is small until twenty-six to twenty-eight weeks and only reliably adequate by about thirty-four. Cortisol drives its production, which is the whole basis of giving steroids to the mother."
+    },
+    {
+      "key": "laplace",
+      "label": "Why it matters — surface tension and the law of Laplace",
+      "role": "part",
+      "group": "Surfactant and the first breath",
+      "layer": "organ",
+      "color": "#f0b27a",
+      "terms": [
+        "surface tension",
+        "law of Laplace",
+        "P = 2T/r",
+        "alveolar collapse",
+        "atelectasis",
+        "compliance",
+        "work of breathing",
+        "small alveoli empty into large ones",
+        "stability"
+      ],
+      "narration": "An alveolus is a wet bubble, and by Laplace's law the pressure needed to keep a bubble open rises as its radius falls. Without surfactant, small alveoli would empty into large ones and collapse at every expiration. Surfactant lowers surface tension, and lowers it more as the alveolus gets smaller, so the small ones stay open. It also raises compliance, so the baby does less work to breathe."
+    },
+    {
+      "key": "first_breath",
+      "label": "The first breath — fluid out, blood in",
+      "role": "part",
+      "group": "Surfactant and the first breath",
+      "layer": "vessel",
+      "color": "#5dade2",
+      "terms": [
+        "first breath",
+        "lung fluid",
+        "fetal lung liquid",
+        "absorbed by lymphatics",
+        "squeezed out",
+        "pulmonary vascular resistance",
+        "pulmonary blood flow",
+        "ductus arteriosus",
+        "foramen ovale",
+        "transient tachypnoea of the newborn",
+        "caesarean section"
+      ],
+      "narration": "The fetal lung is full of fluid, not collapsed. At birth some is squeezed out in the birth canal and the rest is absorbed by the capillaries and lymphatics. Air entering the alveoli drops the pulmonary vascular resistance, pulmonary blood flow rises, and the fetal shunts close. A baby born by elective caesarean misses the squeeze and may retain fluid — transient tachypnoea of the newborn, which resolves, and must be told apart from respiratory distress syndrome, which does not."
+    },
+    {
+      "key": "rds",
+      "label": "Respiratory distress syndrome — and what to do about it",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "respiratory distress syndrome",
+        "RDS",
+        "neonatal respiratory distress syndrome",
+        "hyaline membrane disease",
+        "grunting",
+        "nasal flaring",
+        "intercostal recession",
+        "tachypnoea",
+        "cyanosis",
+        "ground-glass",
+        "air bronchogram",
+        "L:S ratio",
+        "lecithin sphingomyelin ratio",
+        "2:1",
+        "amniocentesis",
+        "antenatal corticosteroids",
+        "betamethasone",
+        "dexamethasone",
+        "exogenous surfactant",
+        "CPAP",
+        "infant of a diabetic mother",
+        "hyperinsulinaemia",
+        "bronchopulmonary dysplasia",
+        "retinopathy of prematurity"
+      ],
+      "narration": "Too little surfactant and the alveoli collapse at every breath. The baby is preterm, breathes fast within hours of birth, grunts, flares the nostrils and draws in the intercostal spaces; the film shows a ground-glass lung with air bronchograms; the alveolar ducts are lined with hyaline membranes of protein-rich exudate, which gives the old name. Maturity can be predicted before delivery from the lecithin to sphingomyelin ratio in amniotic fluid, and two to one is the figure to remember. Treatment runs along the pathophysiology: steroids to the mother beforehand, exogenous surfactant and CPAP to the baby afterwards. Note the two traps — the infant of a diabetic mother is at risk at term because insulin opposes cortisol, and oxygen given to treat the lung causes bronchopulmonary dysplasia and retinopathy of prematurity."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "A sac is not an alveolus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Building the alveolus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "septation",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Start at the blind end of the airway. From twenty-six weeks there are thin-walled terminal sacs, and from about thirty-six weeks ridges grow in from their walls and divide them. That is secondary septation, and it is the only mechanism by which the lung gains alveoli. Most of it is postnatal — fifty million at birth, three hundred million by adulthood, finished around eight years of age."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Cut the alveolar wall — three layers, half a micron",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two cells and the barrier"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "barrier",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "type1",
+          "to": "barrier",
+          "kind": "is the alveolar layer of"
+        }
+      ],
+      "narration": "Cut across the wall between an alveolus and its capillary. Three layers, in this order: the type one pneumocyte with its basement membrane, the fused basement membranes, the capillary endothelium. About half a micrometre in total. Anything that thickens this — oedema fluid, exudate, collagen — impairs diffusion, and that is the mechanism behind a long list of diseases you will meet later."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Two cells that look nothing alike and come from the same place",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two cells and the barrier"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "type1",
+            "type2"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "type2",
+          "to": "type1",
+          "kind": "divides to replace"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "macrophage"
+        }
+      ],
+      "narration": "Put them side by side. Type one is flat, cannot divide, and covers ninety-seven per cent of the surface. Type two is cuboidal, full of lamellar bodies, makes surfactant, and divides to replace both itself and the type one cell. Both are foregut endoderm. The third cell on the surface, the alveolar macrophage, is not — it comes from blood monocytes, so from mesoderm, and that difference is a common one-mark question."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Surfactant, and the bubble that would otherwise collapse",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Surfactant and the first breath"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "surfactant",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "surfactant",
+          "to": "laplace",
+          "kind": "lowers surface tension, and more so as radius falls, defeating"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        }
+      ],
+      "narration": "Surfactant is lecithin — dipalmitoylphosphatidylcholine — with phosphatidylglycerol and four proteins, made by type two cells from about week twenty, adequate by about thirty-four. Its job follows from Laplace: pressure to keep a bubble open is two times tension over radius, so the smallest alveoli are the most likely to collapse. Surfactant lowers tension most where the alveolus is smallest, which stops the small ones emptying into the large ones and makes the lung easy to inflate."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The first breath",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Surfactant and the first breath"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "terminal_sac",
+            "surfactant",
+            "first_breath",
+            "barrier"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "first_breath",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The fetal lung is fluid-filled, not collapsed. At delivery the fluid is squeezed out and absorbed, air reaches the sacs, surfactant holds them open, and gas crosses the barrier for the first time. Oxygen in the alveoli drops pulmonary vascular resistance, blood floods the lungs, and the fetal shunts close. A baby delivered by elective caesarean misses the squeeze, retains fluid and may be tachypnoeic for a day — that is transient tachypnoea, not distress syndrome."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Respiratory distress syndrome, from mechanism to management",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rds",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "surfactant",
+          "to": "rds",
+          "kind": "too little, too early, gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "laplace",
+          "to": "rds",
+          "kind": "unopposed surface tension collapses alveoli, producing"
+        }
+      ],
+      "narration": "Deliver a baby before the surfactant is there and the alveoli collapse at every expiration. Tachypnoea within hours, grunting, flaring, recession; ground-glass lungs with air bronchograms on the film; hyaline membranes lining the ducts down the microscope. Predict it with the lecithin to sphingomyelin ratio — two to one means mature. Prevent it with corticosteroids to the mother, treat it with exogenous surfactant and CPAP. Two catches worth marks: the infant of a diabetic mother gets it at term because insulin opposes cortisol, and the oxygen used to treat it causes bronchopulmonary dysplasia and retinopathy of prematurity."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, so deferred_modes carries diagram. The curriculum also lists cross_section among its views, which is authored here as two CROSS_SECTION beats rather than as a mode.",
+    "Status is 'planned'. Ten regions, six beats, ops and narration complete, but no artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a terminal sac before and after secondary septation, with the septa arrowed and the alveolar count printed under each panel; a single alveolus with a capillary against it, cut so the three layers of the blood-air barrier are drawn as three separate lines and labelled in order; a cellular view naming type I, type II with lamellar bodies, and an alveolar macrophage, with the endodermal cells coloured together and the macrophage coloured as mesoderm; a bubble pair — one small, one large, joined by a tube — drawn once without surfactant and once with, to carry the Laplace argument; and a timeline from week 20 to week 36 marking first surfactant, adequate surfactant, and the L:S ratio of 2:1.",
+    "The endoderm/mesoderm colour key is inherited unchanged from the respiratory diverticulum and bronchial tree branching scenes. Type I and type II pneumocytes therefore carry the endoderm colour family and the alveolar macrophage carries the mesoderm family — the colours are doing the teaching in beat 3 and must not be reassigned.",
+    "Beat 5 traces concept:air. The subject is not a drawn region — it is the first breath itself, used to order the events of the transition.",
+    "'Bronchial tree branching' is NOT claimed in covers[]. The four stages of maturation and the generations of branching belong to that entry; this scene enters at the terminal sac and assumes the tree.",
+    "'Respiratory diverticulum' is NOT claimed. The endodermal origin of both pneumocytes is stated because it is the answer to a common question, but the derivation belongs to that entry.",
+    "'Fetal circulation' (Cardiovascular Development) is NOT claimed. Beat 5 names the fall in pulmonary vascular resistance and the closure of the shunts as consequences of the first breath; the shunts themselves, their adult remnants and their timing belong to that entry.",
+    "Physiology is deliberately included — Laplace, compliance, the L:S ratio — because Nigerian MBBS embryology papers ask surfactant as a mechanism question and not as a list of derivatives. It is bounded to what the alveolus itself explains; ventilation, perfusion and their mismatch are not touched.",
+    "Surfactant timings are the standard teaching approximations and texts vary: first production is given as week 20 to 24, adequacy as week 26 to 28 for survival with support and week 34 to 35 for maturity. The narration says 'about' at each figure and gives 34 weeks as the maturity mark, which is the one most commonly examined.",
+    "Alveolar counts (about 50 million at term, about 300 million in the adult) and the 0.5 micrometre barrier thickness are order-of-magnitude teaching figures, not measurements; sources differ by a factor of two on the alveolar counts.",
+    "Hyaline membrane disease is given as a synonym for neonatal RDS. The membranes are a histological finding of the established disease rather than its cause, and the narration is worded so a student does not read the membranes as the primary lesion — the primary lesion is absent surfactant."
+  ]
+}

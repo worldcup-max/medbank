@@ -1,0 +1,1237 @@
+{
+  "schema": 2,
+  "id": "gross__lungs-mediastinum__great-vessels",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Lungs & Mediastinum",
+  "structure": "Great vessels",
+  "covers": [
+    "Great vessels"
+  ],
+  "learning_goal": "Name each great vessel, say where it begins, where it ends and at what vertebral level, recite the three branches of the arch in order, and follow one drop of blood from the venae cavae out to the body and back — then use that circuit to explain SVC obstruction, aortic transection and a saddle embolus.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "great vessels",
+      "mediastinum",
+      "thorax",
+      "aorta",
+      "aortic arch",
+      "vena cava",
+      "pulmonary circulation",
+      "heart",
+      "chest x-ray",
+      "cardiothoracic surgery",
+      "central line"
+    ],
+    "terms": [
+      "great vessels",
+      "aorta",
+      "ascending aorta",
+      "aortic root",
+      "sinuses of Valsalva",
+      "sinotubular junction",
+      "arch of the aorta",
+      "aortic arch",
+      "aortic knuckle",
+      "aortic knob",
+      "brachiocephalic trunk",
+      "innominate artery",
+      "left common carotid artery",
+      "left subclavian artery",
+      "three branches of the arch",
+      "aortic isthmus",
+      "aortic transection",
+      "traumatic rupture of the aorta",
+      "widened mediastinum",
+      "descending thoracic aorta",
+      "posterior intercostal arteries",
+      "aortic hiatus",
+      "T12",
+      "coarctation of the aorta",
+      "rib notching",
+      "radiofemoral delay",
+      "pulmonary trunk",
+      "pulmonary artery",
+      "right pulmonary artery",
+      "left pulmonary artery",
+      "bifurcation of the pulmonary trunk",
+      "saddle embolus",
+      "pulmonary embolism",
+      "ligamentum arteriosum",
+      "ductus arteriosus",
+      "patent ductus arteriosus",
+      "machinery murmur",
+      "left recurrent laryngeal nerve",
+      "hoarseness",
+      "pulmonary veins",
+      "four pulmonary veins",
+      "left atrium",
+      "superior vena cava",
+      "SVC",
+      "SVC obstruction",
+      "brachiocephalic veins",
+      "innominate veins",
+      "internal jugular vein",
+      "subclavian vein",
+      "cavo-atrial junction",
+      "central venous catheter",
+      "central line tip",
+      "inferior vena cava",
+      "IVC",
+      "caval opening",
+      "T8",
+      "central tendon",
+      "azygos vein",
+      "sternal angle",
+      "angle of Louis",
+      "T4/T5",
+      "second costal cartilage",
+      "deoxygenated blood",
+      "oxygenated blood",
+      "pulmonary circulation",
+      "systemic circulation"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "asc",
+      "name": "ascending aorta",
+      "label": "Ascending aorta",
+      "role": "part",
+      "group": "Aorta",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "bodyparts3d": "FMA3736"
+      },
+      "terms": [
+        "ascending aorta",
+        "aortic root",
+        "sinuses of Valsalva",
+        "sinotubular junction",
+        "coronary arteries",
+        "inside the pericardium",
+        "aortic dissection"
+      ],
+      "narration": "Begins at the aortic valve and runs upwards, forwards and to the right for about five centimetres. It is the only part of the aorta still inside the pericardial sac. That one fact carries the clinical weight: the coronary arteries are its only branches, and a dissection that starts here bleeds into the sac and tamponades the heart rather than into the chest."
+    },
+    {
+      "key": "arch",
+      "name": "arch of aorta",
+      "label": "Arch of the aorta",
+      "role": "part",
+      "group": "Aorta",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3768"
+      },
+      "terms": [
+        "arch of the aorta",
+        "aortic arch",
+        "aortic knuckle",
+        "aortic knob",
+        "three branches",
+        "brachiocephalic trunk",
+        "left common carotid",
+        "left subclavian artery",
+        "superior mediastinum"
+      ],
+      "narration": "Arches backwards and to the left, from the sternal angle to the sternal angle — it begins and ends on the same plane. Three branches leave its upper surface, always in this order from front to back: brachiocephalic trunk, left common carotid artery, left subclavian artery. On a chest film its left border is the aortic knuckle, and a knuckle that has widened after a road traffic crash means a torn aorta until proved otherwise."
+    },
+    {
+      "key": "desc",
+      "name": "descending aorta",
+      "label": "Descending thoracic aorta",
+      "role": "part",
+      "group": "Aorta",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "descending thoracic aorta",
+        "posterior mediastinum",
+        "posterior intercostal arteries",
+        "aortic hiatus",
+        "T12",
+        "abdominal aorta",
+        "moves to the midline"
+      ],
+      "narration": "Starts on the left side of T4 and works its way to the midline as it descends, so by T12 it is dead centre. It gives the posterior intercostal arteries to the lower nine spaces on the way down. It leaves the chest behind the diaphragm at T12 and is called the abdominal aorta from that moment on."
+    },
+    {
+      "key": "pa",
+      "name": "pulmonary artery",
+      "label": "Pulmonary trunk & pulmonary arteries",
+      "role": "part",
+      "group": "Pulmonary vessels",
+      "layer": "vessel",
+      "color": "#5dade2",
+      "refs": {
+        "bodyparts3d": "FMA66326"
+      },
+      "terms": [
+        "pulmonary trunk",
+        "pulmonary artery",
+        "right pulmonary artery",
+        "left pulmonary artery",
+        "bifurcation of the pulmonary trunk",
+        "saddle embolus",
+        "pulmonary embolism",
+        "deoxygenated blood in an artery"
+      ],
+      "narration": "The pulmonary trunk leaves the right ventricle and lies in front of everything else at the root of the heart. After about five centimetres it divides under the concavity of the arch into a right and a left pulmonary artery. The right one is longer and passes behind the ascending aorta and the superior vena cava to reach the right hilum. These are the arteries that carry deoxygenated blood, and a clot big enough to sit astride the division kills in minutes."
+    },
+    {
+      "key": "pv",
+      "name": "pulmonary vein",
+      "label": "Pulmonary veins",
+      "role": "part",
+      "group": "Pulmonary vessels",
+      "layer": "vessel",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA66643"
+      },
+      "terms": [
+        "pulmonary veins",
+        "four pulmonary veins",
+        "two from each lung",
+        "left atrium",
+        "oxygenated blood in a vein",
+        "atrial fibrillation",
+        "pulmonary vein isolation"
+      ],
+      "narration": "Four of them, two from each lung, and they are the exception every examiner reaches for: veins carrying oxygenated blood. They run forwards from each hilum below the artery and open into the back of the left atrium. Their muscular sleeves are where most atrial fibrillation starts, which is why the treatment is called pulmonary vein isolation."
+    },
+    {
+      "key": "svc",
+      "name": "superior vena cava",
+      "label": "Superior vena cava",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA4720"
+      },
+      "terms": [
+        "superior vena cava",
+        "SVC",
+        "SVC obstruction",
+        "azygos vein",
+        "thin walled",
+        "right of the midline",
+        "no valves"
+      ],
+      "narration": "Formed behind the right first costal cartilage by the union of the two brachiocephalic veins, running down on the right of the ascending aorta to reach the right atrium. It drains everything above the diaphragm. It is thin-walled and it sits in a bed of lymph nodes, so a right upper lobe carcinoma obstructs it long before it troubles the aorta beside it: the face and arms swell, the neck veins fill and stay filled, and the patient cannot lie flat."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "caval opening",
+        "T8",
+        "central tendon",
+        "shortest intrathoracic course",
+        "drains below the diaphragm"
+      ],
+      "narration": "Drains everything below the diaphragm. It pierces the central tendon at T8 and enters the right atrium within a couple of centimetres, so its course inside the chest is almost nothing. Because the opening is in the tendon rather than in muscle, it is held open when the diaphragm contracts and inspiration actually helps venous return."
+    },
+    {
+      "key": "bcv_r",
+      "name": "right brachiocephalic vein",
+      "label": "Right brachiocephalic vein",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA4751"
+      },
+      "terms": [
+        "right brachiocephalic vein",
+        "innominate vein",
+        "internal jugular vein",
+        "subclavian vein",
+        "venous angle",
+        "short and vertical"
+      ],
+      "narration": "Formed behind the right sternoclavicular joint where the internal jugular and subclavian veins meet — the venous angle. It is short and runs almost straight down, which is why a right-sided central line reaches the heart in a shorter, straighter path than a left-sided one."
+    },
+    {
+      "key": "bcv_l",
+      "name": "left brachiocephalic vein",
+      "label": "Left brachiocephalic vein",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#6fa8c9",
+      "refs": {
+        "bodyparts3d": "FMA4761"
+      },
+      "terms": [
+        "left brachiocephalic vein",
+        "crosses the midline",
+        "behind the manubrium",
+        "thoracic duct",
+        "left venous angle"
+      ],
+      "narration": "Twice as long as the right one, because it has to cross behind the manubrium from left to right to join it. That crossing is why the vein is at risk in a sternotomy, and why a left-sided line has to turn a corner. The thoracic duct empties into its left end."
+    },
+    {
+      "key": "carotid_l",
+      "name": "left common carotid artery",
+      "label": "Left common carotid artery",
+      "role": "part",
+      "group": "Arch branches",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "bodyparts3d": "FMA4058"
+      },
+      "terms": [
+        "left common carotid artery",
+        "second branch of the arch",
+        "arises from the arch itself",
+        "bovine arch"
+      ],
+      "narration": "The second branch, and the only common carotid that comes straight off the arch — the right one is a branch of the brachiocephalic trunk. That asymmetry is worth holding on to: the left side of the head is supplied by a vessel with a thoracic origin, so a mediastinal problem can present as a neurological one."
+    },
+    {
+      "key": "subclav_l",
+      "name": "left subclavian artery",
+      "label": "Left subclavian artery",
+      "role": "part",
+      "group": "Arch branches",
+      "layer": "vessel",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA4694"
+      },
+      "terms": [
+        "left subclavian artery",
+        "third branch of the arch",
+        "aortic isthmus",
+        "coarctation",
+        "preductal",
+        "postductal"
+      ],
+      "narration": "The third and last branch, arising well back on the arch and climbing almost vertically into the neck. The short segment between it and the ligamentum arteriosum is the isthmus, and coarctation is described as preductal or postductal — before or after the ligamentum, not before or after this branch. The distinction is practical: a postductal narrowing leaves the left arm pressure high and the legs low, which is the radiofemoral delay you feel at the bedside."
+    },
+    {
+      "key": "subclav_r",
+      "name": "right subclavian artery",
+      "label": "Right subclavian artery",
+      "role": "part",
+      "group": "Arch branches",
+      "layer": "vessel",
+      "color": "#dc7633",
+      "refs": {
+        "bodyparts3d": "FMA3953"
+      },
+      "terms": [
+        "right subclavian artery",
+        "branch of the brachiocephalic trunk",
+        "right recurrent laryngeal nerve",
+        "root of the neck"
+      ],
+      "narration": "Not a branch of the arch at all. It is one of the two terminal branches of the brachiocephalic trunk, splitting off in the root of the neck behind the right sternoclavicular joint. The right recurrent laryngeal nerve hooks around this artery, up in the neck, while the left nerve hooks around the arch down in the chest — which is why the two nerves are damaged by entirely different diseases."
+    },
+    {
+      "key": "carotid_r",
+      "name": "right common carotid artery",
+      "label": "Right common carotid artery",
+      "role": "part",
+      "group": "Arch branches",
+      "layer": "vessel",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA3941"
+      },
+      "terms": [
+        "right common carotid artery",
+        "branch of the brachiocephalic trunk",
+        "no thoracic course"
+      ],
+      "narration": "The other terminal branch of the brachiocephalic trunk. It has no course in the chest at all — it begins in the neck. Say that out loud once and you will never again list it among the branches of the arch."
+    },
+    {
+      "key": "aortic_root",
+      "label": "Aortic root",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f1948a",
+      "render": "anchor",
+      "anchor": {
+        "on": "asc",
+        "uvw": [
+          0.779,
+          0.242,
+          0.169
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the ascending aorta and the wall of the heart — the aortic root, where the aorta leaves the left ventricle and the coronary arteries arise (gap 0.15 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "aortic root",
+        "aortic valve",
+        "sinuses of Valsalva",
+        "coronary ostia",
+        "left ventricular outflow tract"
+      ],
+      "narration": "Where the aorta leaves the left ventricle. The wall bulges here into three sinuses behind the three valve cusps, and the right and left coronary arteries open from two of them. Blood fills those sinuses during diastole, which is why the heart feeds itself when it is relaxed."
+    },
+    {
+      "key": "arch_begins",
+      "label": "Ascending aorta becomes the arch",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f5b7b1",
+      "render": "anchor",
+      "anchor": {
+        "on": "asc",
+        "uvw": [
+          0.035,
+          0.244,
+          0.991
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the ascending aorta and the arch — where one becomes the other, at the level of the sternal angle (gap 0.13 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "ascending aorta ends",
+        "arch begins",
+        "sternal angle",
+        "second costal cartilage",
+        "level of T4"
+      ],
+      "narration": "The ascending aorta ends and the arch begins behind the right second costal cartilage, on the plane of the sternal angle. This is the upper end of the pericardium too: above this point a dissection is in the mediastinum, below it the blood is in the sac."
+    },
+    {
+      "key": "brachiocephalic_trunk_origin",
+      "label": "Origin of the brachiocephalic trunk",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f0b27a",
+      "render": "anchor",
+      "anchor": {
+        "on": "arch",
+        "uvw": [
+          0.286,
+          0.327,
+          0.83
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the arch of the aorta and the right subclavian artery — the arch end of the missing brachiocephalic trunk, so the printed gap of 17.84 mm IS the length of the vessel the catalog does not carry; see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "brachiocephalic trunk",
+        "innominate artery",
+        "first branch of the arch",
+        "divides behind the sternoclavicular joint",
+        "right common carotid",
+        "right subclavian"
+      ],
+      "narration": "The first and largest branch of the arch starts here and runs up and to the right for about four centimetres before dividing into the right common carotid and right subclavian arteries. There is no left equivalent — on the left those two vessels come off the arch separately. That is the single asymmetry that explains most of the differences between the two sides of the neck and the two recurrent laryngeal nerves."
+    },
+    {
+      "key": "aortic_isthmus",
+      "label": "Aortic isthmus",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#cd6155",
+      "render": "anchor",
+      "anchor": {
+        "on": "arch",
+        "uvw": [
+          0.7,
+          0.734,
+          0.02
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the arch of the aorta and the descending aorta — the isthmus, the fixed point just distal to the left subclavian artery where a decelerating aorta tears (gap 0.19 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "aortic isthmus",
+        "traumatic aortic transection",
+        "deceleration injury",
+        "widened mediastinum",
+        "ligamentum arteriosum",
+        "coarctation site"
+      ],
+      "narration": "Just beyond the left subclavian artery the aorta is tethered by the ligamentum arteriosum while the arch above it is free to swing. In a head-on crash the heart and arch keep moving and the tethered isthmus does not, so the vessel tears right here. It is also where coarctation narrows. One short segment, two of the classic aortic emergencies."
+    },
+    {
+      "key": "aortic_hiatus",
+      "label": "Aortic hiatus (T12)",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#d98880",
+      "render": "anchor",
+      "anchor": {
+        "on": "desc",
+        "uvw": [
+          0.113,
+          0.429,
+          0.45
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the descending aorta and the twelfth thoracic vertebra — the aortic hiatus at T12, where the aorta leaves the thorax behind the diaphragm (gap 0.95 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "aortic hiatus",
+        "T12",
+        "behind the diaphragm",
+        "thoracic duct",
+        "azygos vein",
+        "twelve ten eight"
+      ],
+      "narration": "The aorta leaves the chest at T12, behind the diaphragm rather than through it, so its flow is never squeezed by breathing. Two more things use the same opening: the thoracic duct and the azygos vein. Count the three diaphragmatic openings downwards by even numbers — caval at T8, oesophageal at T10, aortic at T12."
+    },
+    {
+      "key": "pulmonary_trunk_origin",
+      "label": "Origin of the pulmonary trunk",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#85c1e9",
+      "render": "anchor",
+      "anchor": {
+        "on": "pa",
+        "uvw": [
+          0.662,
+          0.298,
+          0.571
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the pulmonary artery mesh and the pulmonary valve — the origin of the trunk from the right ventricular outflow tract (gap 0.17 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "pulmonary trunk",
+        "pulmonary valve",
+        "right ventricular outflow tract",
+        "infundibulum",
+        "left second intercostal space",
+        "pulmonary area"
+      ],
+      "narration": "The trunk leaves the right ventricle here, in front of and to the left of the aortic root. It is the most anterior of all the great vessels, which is why the pulmonary valve is listened to highest and most to the left on the chest — the left second intercostal space beside the sternum."
+    },
+    {
+      "key": "pulmonary_bifurcation",
+      "label": "Bifurcation of the pulmonary trunk",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#5499c7",
+      "render": "anchor",
+      "anchor": {
+        "on": "pa",
+        "uvw": [
+          0.578,
+          0.409,
+          0.719
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the pulmonary artery and the arch of the aorta — the trunk divides here, under the concavity of the arch, and the ligamentum arteriosum bridges this exact gap of 1.93 mm; see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "bifurcation of the pulmonary trunk",
+        "saddle embolus",
+        "ligamentum arteriosum",
+        "ductus arteriosus",
+        "patent ductus arteriosus",
+        "machinery murmur",
+        "left recurrent laryngeal nerve",
+        "aortopulmonary window"
+      ],
+      "narration": "The trunk divides here, tucked under the concavity of the arch. Three things live in this small window. The ligamentum arteriosum runs from the start of the left pulmonary artery to the underside of the arch. The left recurrent laryngeal nerve hooks around that ligament, so a mass here makes the patient hoarse. And a clot large enough to straddle this division is the saddle embolus that arrests a healthy adult on the ward."
+    },
+    {
+      "key": "pulmonary_venous_return",
+      "label": "Pulmonary veins entering the left atrium",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#bb8fce",
+      "render": "anchor",
+      "anchor": {
+        "on": "pv",
+        "uvw": [
+          0.368,
+          0.508,
+          0.473
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the pulmonary vein and the wall of the heart — where oxygenated blood re-enters the left atrium (gap 0.30 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "pulmonary veins",
+        "left atrium",
+        "back of the heart",
+        "oesophagus in front",
+        "mitral stenosis",
+        "dysphagia"
+      ],
+      "narration": "The four veins open into the back of the left atrium, which is the most posterior chamber of the heart. The oesophagus lies directly behind it. That is why a left atrium enlarged by mitral stenosis presses on the oesophagus and causes difficulty swallowing, and why a barium swallow was once part of a cardiac work-up."
+    },
+    {
+      "key": "svc_formation",
+      "label": "Formation of the superior vena cava",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#a9cce3",
+      "render": "anchor",
+      "anchor": {
+        "on": "svc",
+        "uvw": [
+          0.331,
+          0.041,
+          0.964
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the superior vena cava and the right brachiocephalic vein — where the two brachiocephalic veins unite to form the cava, behind the right first costal cartilage (gap 0.23 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "formation of the SVC",
+        "right first costal cartilage",
+        "two brachiocephalic veins unite",
+        "behind the manubrium"
+      ],
+      "narration": "The two brachiocephalic veins join here, behind the lower border of the right first costal cartilage, and the superior vena cava begins. Everything draining into it from this point down is inside the mediastinum, which is why a mediastinal mass and not a neck lump is the usual cause of a swollen face."
+    },
+    {
+      "key": "svc_atrial_junction",
+      "label": "Cavo-atrial junction",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#7fb3d5",
+      "render": "anchor",
+      "anchor": {
+        "on": "svc",
+        "uvw": [
+          0.64,
+          0.055,
+          0.124
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the superior vena cava and the wall of the heart — the cavo-atrial junction, the point a central line tip should reach and not pass (gap 0.13 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "cavo-atrial junction",
+        "central line tip",
+        "right atrium",
+        "sinuatrial node",
+        "azygos vein joins here",
+        "carina on a chest film"
+      ],
+      "narration": "Where the superior vena cava opens into the right atrium. A central line tip belongs at this point and not beyond it — on a chest film you check it against the carina. The sinuatrial node sits in the atrial wall just here, which is why a guidewire pushed too far sets off ectopic beats. The azygos vein arches forwards over the right lung root and joins the cava just above this."
+    },
+    {
+      "key": "ivc_atrial_junction",
+      "label": "Opening of the inferior vena cava",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#5dade2",
+      "render": "anchor",
+      "anchor": {
+        "on": "ivc",
+        "uvw": [
+          0.965,
+          0.606,
+          0.986
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the inferior vena cava and the wall of the heart — where it enters the right atrium, a centimetre or two after piercing the central tendon at T8 (gap 0.34 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "opening of the IVC",
+        "caval opening",
+        "T8",
+        "central tendon",
+        "right atrium",
+        "shortest intrathoracic course"
+      ],
+      "narration": "The inferior vena cava pierces the central tendon at T8 and reaches the right atrium almost immediately. Of all the great vessels this is the one with essentially no thoracic course, so it belongs to the middle mediastinum and never to the posterior."
+    },
+    {
+      "key": "sternal_angle",
+      "label": "Sternal angle — the reference plane",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f4d03f",
+      "render": "anchor",
+      "anchor": {
+        "on": "manubrium",
+        "uvw": [
+          0.499,
+          0.011,
+          0.128
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the manubrium and the body of the sternum — the manubriosternal joint, i.e. the sternal angle, the plane the arch begins and ends on (gap 0.11 mm); see tools/derive-great-vessel-landmarks.mjs",
+      "terms": [
+        "sternal angle",
+        "angle of Louis",
+        "T4/T5",
+        "second costal cartilage",
+        "transthoracic plane",
+        "the arch begins and ends here"
+      ],
+      "narration": "Feel for the ridge where the manubrium meets the body of the sternum. The plane through it and the T4/T5 disc is how every great vessel is described: the arch begins and ends on it, the pulmonary trunk divides on it, the azygos vein joins the cava on it, and the trachea divides on it. Learn one landmark and four vessels fall into place."
+    },
+    {
+      "key": "heart",
+      "name": "wall of heart",
+      "label": "Heart",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA7274"
+      },
+      "terms": [
+        "heart",
+        "right ventricle",
+        "left ventricle",
+        "right atrium",
+        "left atrium",
+        "base of the heart"
+      ],
+      "narration": "The great vessels are defined by their two ends: a chamber of the heart at one end and the body or the lungs at the other. Keep the heart in view and every one of them has somewhere to start."
+    },
+    {
+      "key": "pulmvalve",
+      "name": "pulmonary valve",
+      "label": "Pulmonary valve",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#a9dfbf",
+      "refs": {
+        "bodyparts3d": "FMA7246"
+      },
+      "terms": [
+        "pulmonary valve",
+        "three semilunar cusps",
+        "right ventricular outflow",
+        "pulmonary stenosis"
+      ],
+      "narration": "The door the pulmonary trunk opens from. Three semilunar cusps that shut in diastole so blood in the trunk does not fall back into the right ventricle."
+    },
+    {
+      "key": "trachea",
+      "name": "trachea",
+      "label": "Trachea",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA7394"
+      },
+      "terms": [
+        "trachea",
+        "carina",
+        "arch crosses in front",
+        "tracheal deviation"
+      ],
+      "narration": "The arch of the aorta crosses the airway from front to left as both reach the sternal angle. This is the relationship that makes an aortic aneurysm show up as a cough, and it is why the carina is the landmark you measure a line tip against."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "suprasternal notch",
+        "sternoclavicular joint",
+        "retrosternal"
+      ],
+      "narration": "Every great vessel except the descending aorta lies behind this one bone. That is why they are impalpable, why they are invisible on examination, and why the chest film is read for their silhouettes rather than for the vessels themselves."
+    },
+    {
+      "key": "sternbody",
+      "name": "body of sternum",
+      "label": "Body of the sternum",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#d7dbdd",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of the sternum",
+        "median sternotomy",
+        "anterior mediastinum"
+      ],
+      "narration": "The lower half of the front wall. A median sternotomy splits this and the manubrium to reach the vessels behind them."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4 vertebra",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "fourth thoracic vertebra",
+        "T4",
+        "T4/T5 disc",
+        "level of the arch"
+      ],
+      "narration": "The vertebral half of the reference plane. The arch of the aorta arches across the front and left side of this bone."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12 vertebra",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "twelfth thoracic vertebra",
+        "T12",
+        "aortic hiatus",
+        "end of the thoracic aorta"
+      ],
+      "narration": "Where the thoracic aorta stops being thoracic. Everything below this is an abdominal vessel with an abdominal set of branches."
+    },
+    {
+      "key": "rul",
+      "name": "upper lobe of right lung",
+      "label": "Right upper lobe",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA7333"
+      },
+      "terms": [
+        "right upper lobe",
+        "SVC obstruction",
+        "hilum",
+        "mediastinal pleura"
+      ],
+      "narration": "A tumour in this lobe sits directly against the superior vena cava. That single spatial fact is the whole of superior vena cava obstruction."
+    },
+    {
+      "key": "lul",
+      "name": "upper lobe of left lung",
+      "label": "Left upper lobe",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#f2b0a8",
+      "refs": {
+        "bodyparts3d": "FMA7370"
+      },
+      "terms": [
+        "left upper lobe",
+        "cardiac notch",
+        "hilum",
+        "left recurrent laryngeal nerve"
+      ],
+      "narration": "The left hilum lies right beside the window under the arch, so a tumour here reaches the left recurrent laryngeal nerve early and the patient goes hoarse."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Six vessels, and what makes them great",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Aorta",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "The great vessels are the six trunks that enter or leave the heart: the aorta, the pulmonary trunk, the pulmonary veins, the two venae cavae, and — by courtesy — the brachiocephalic veins that form the upper one. They are called great for one reason only: every one of them carries the entire output of a chamber. Block any of them and the circulation stops in seconds, which is why they get their own name and their own lecture."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "The aorta in three parts",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "manubrium"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sternbody"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sternal_angle",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "asc",
+          "path": [
+            "aortic_root",
+            "arch_begins",
+            "aortic_isthmus",
+            "aortic_hiatus"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "One vessel, three named parts, and two of the boundaries are on the same plane. It starts at the aortic valve, climbs to the sternal angle as the ascending aorta, arches over from the sternal angle back to the sternal angle, then descends on the vertebral bodies to T12. Say it as up, over and down and you have the shape. Say ascending to T4, arch at T4, descending T4 to T12 and you have the levels."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Three branches, always in this order",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Arch branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "trachea"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "brachiocephalic_trunk_origin",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "brachiocephalic_trunk_origin",
+          "to": "carotid_r",
+          "kind": "brachiocephalic trunk divides into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "brachiocephalic_trunk_origin",
+          "to": "subclav_r",
+          "kind": "brachiocephalic trunk divides into"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "carotid_l",
+            "carotid_r"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Three branches leave the top of the arch, front to back: brachiocephalic trunk, left common carotid, left subclavian. Count them and you get three, but count the vessels reaching the neck and you get four, because the brachiocephalic trunk divides into the right common carotid and the right subclavian. So the right side gets its two arteries second-hand and the left side gets them straight from the arch. Every left-versus-right difference in the neck and the upper mediastinum comes from that."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The pulmonary side — an artery full of blue blood",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Pulmonary vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "arch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pulmonary_trunk_origin",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pulmonary_bifurcation",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pa",
+          "to": "arch",
+          "kind": "ligamentum arteriosum bridges"
+        }
+      ],
+      "narration": "The pulmonary trunk leaves the right ventricle in front of everything else and divides under the arch. Its arteries carry deoxygenated blood and its veins carry oxygenated blood — the pulmonary circulation reverses the usual rule, because artery means away from the heart and nothing else. Look at the gap between the trunk and the underside of the arch. The ligamentum arteriosum bridges it, the left recurrent laryngeal nerve hooks around that, and a clot straddling the division here is the saddle embolus."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "Everything drains to two veins",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Systemic veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "manubrium"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bcv_l",
+          "to": "bcv_r",
+          "kind": "unite to form the superior vena cava"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "svc_formation",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "svc_atrial_junction",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivc_atrial_junction",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Above the diaphragm everything drains to the superior vena cava; below it everything drains to the inferior. The superior is made behind the right first costal cartilage by the two brachiocephalic veins, and the left one crosses the midline behind the manubrium to get there. The inferior barely exists in the chest at all: it comes through the central tendon at T8 and is in the atrium a couple of centimetres later. Both open into the right atrium, and neither has a valve."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Follow one drop of blood",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:blood",
+          "path": [
+            "svc_atrial_junction",
+            "pulmonary_trunk_origin",
+            "pulmonary_bifurcation",
+            "pulmonary_venous_return",
+            "aortic_root",
+            "arch_begins",
+            "aortic_isthmus",
+            "aortic_hiatus"
+          ],
+          "duration": 14
+        }
+      ],
+      "narration": "Follow one drop and the whole topic becomes one sentence. In through the superior vena cava to the right atrium. Down to the right ventricle and out through the pulmonary trunk. Under the arch, into both lungs, and back through four pulmonary veins to the left atrium. Down to the left ventricle and out through the aortic root. Up the ascending aorta, over the arch, down to T12, and into the body. Every vessel in this scene is one step of that circuit."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "What lies against what",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "svc",
+          "to": "rul",
+          "kind": "compressed by a right upper lobe mass"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch",
+          "to": "trachea",
+          "kind": "crosses in front and to the left"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pv",
+          "to": "heart",
+          "kind": "enters the back of the left atrium"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Great vessels cause symptoms by what they touch. The superior vena cava is thin-walled and lies against the right upper lobe, so a tumour there swells the face. The arch crosses the trachea and the left main bronchus, so an aneurysm coughs. The left atrium and its veins lie against the oesophagus, so mitral stenosis causes dysphagia. And the aorta lies against the left side of the vertebral bodies, so an aneurysm erodes bone and presents as back pain."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Cut across at the sternal angle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sternal_angle",
+          "intensity": 1.0
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "svc",
+            "arch"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Slice across at the sternal angle and read from front to back, because that is the order a CT gives you and the order an examiner wants. Sternum in front. Then veins: the superior vena cava on the right, the left brachiocephalic vein crossing behind the manubrium. Then arteries: the arch and its three branches. Then the airway and the oesophagus. Then the vertebral body. Veins before arteries before tubes before bone — the same rule at every level of the upper mediastinum."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no brachiocephalic trunk in the catalog — the largest branch of the arch, and the one the whole left-versus-right asymmetry depends on. It is taught here through the two vessels it divides into, which do exist (right common carotid and right subclavian), plus a measured anchor at its origin on the arch. That anchor is a nearest-contact between the arch and the right subclavian artery, so the 17.84 mm it prints is literally the length of the missing vessel. Ingesting a brachiocephalic trunk mesh would upgrade beat 3 from an inference to a sight.",
+    "There is no pulmonary trunk of its own: the catalog carries one generic 'pulmonary artery' mesh covering the trunk and both branches together. The scene therefore cannot isolate the trunk from the right and left pulmonary arteries, and the right pulmonary artery's course behind the ascending aorta and the superior vena cava — a favourite viva question — is narrated rather than shown. The bifurcation is a measured anchor, so the division itself is at least located correctly.",
+    "The four pulmonary veins are a single generic 'pulmonary vein' mesh. The scene can show where pulmonary venous blood re-enters the left atrium but cannot count the veins, name them superior and inferior, or show that the right ones cross behind the left atrium. The count of four, two from each lung, is narration only.",
+    "There is no ligamentum arteriosum in the catalog, and no ductus arteriosus. The window between the pulmonary bifurcation and the underside of the arch is measured — the gap is 1.93 mm — and beat 4 draws a relationship across it, but the ligament itself cannot be drawn. Patent ductus arteriosus therefore has no model at all.",
+    "No nerve in the thorax exists in the catalog: not the left recurrent laryngeal, not the phrenic, not the vagus. Hoarseness from a hilar tumour is the single most examined consequence of great-vessel anatomy and it can only be narrated here.",
+    "The azygos vein is absent. Its arch over the right lung root into the superior vena cava is one of the six events on the plane of the sternal angle, and it is the collateral route that keeps a patient alive in slow superior vena cava obstruction, so it is named repeatedly and shown never.",
+    "There is no aortic valve mesh, although the pulmonary, mitral and tricuspid valves all exist. The aortic root is therefore taught with a measured anchor on the ascending aorta rather than with the valve itself, and the three sinuses and the coronary ostia are narration.",
+    "The descending aorta mesh does not stop at the diaphragm — it continues to the aortic bifurcation in the abdomen. The scene's aortic hiatus anchor is measured against the twelfth thoracic vertebra rather than taken as the lowest point of the mesh, because the lowest point of the mesh is in the pelvis and labelling it T12 would be a lie the student could not check. tools/derive-great-vessel-landmarks.mjs emits that lowest point separately as 'aorta_lowest' so the discrepancy stays visible; it is deliberately not carried into the scene.",
+    "All twelve anchors in this scene are measured contacts or extremes and every one records how it was placed. All twelve remain status 'needs-review' until a human clears them in-app. Four of them — sternal_angle, aortic_hiatus, svc_atrial_junction and ivc_atrial_junction — reproduce the Mediastinum scene's values to three decimal places, having been derived by a separate tool that never consulted it. A fifth agrees on the measurement but not on the anchor: this scene's pulmonary_bifurcation and the Mediastinum scene's ligamentum_arteriosum are the same arch-to-pulmonary-artery contact at the same 1.93 mm gap, but one is expressed on the pulmonary artery and the other on the arch, so their uvw values differ by construction and are not a match. That agreement across two independently written tools is the only real evidence either of them is right.",
+    "The scene does not claim to cover 'Heart chambers' or 'Heart valves'. It shows the heart as a single wall mesh and the pulmonary valve as context, so it can say which chamber each vessel leaves but cannot teach the chambers themselves."
+  ]
+}

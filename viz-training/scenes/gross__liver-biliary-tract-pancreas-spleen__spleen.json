@@ -1,0 +1,727 @@
+{
+  "schema": 2,
+  "id": "gross__liver-biliary-tract-pancreas-spleen__spleen",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Liver, Biliary Tract, Pancreas & Spleen",
+  "structure": "Spleen",
+  "covers": [
+    "Spleen"
+  ],
+  "learning_goal": "Place the spleen behind ribs nine to eleven on the left and say why a normal one is impalpable, name every organ that touches it and the two ligaments that carry its vessels, follow the splenic artery from the coeliac trunk to the hilum and the splenic vein back to the portal confluence, and use those relations to explain how an enlarged spleen is felt, how a ruptured one bleeds and what is at risk in a splenectomy.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "spleen",
+      "splenic anatomy",
+      "left hypochondrium",
+      "abdomen",
+      "abdominal examination",
+      "splenomegaly",
+      "splenectomy",
+      "abdominal trauma",
+      "portal hypertension",
+      "reticuloendothelial system",
+      "lymphoid organs",
+      "haematology",
+      "sickle cell disease",
+      "foregut derivatives",
+      "lesser sac"
+    ],
+    "terms": [
+      "spleen",
+      "splenic",
+      "lien",
+      "lienal",
+      "left hypochondrium",
+      "ninth tenth and eleventh ribs",
+      "1 3 5 7 9 11",
+      "long axis along the tenth rib",
+      "left midaxillary line",
+      "intraperitoneal",
+      "largest lymphoid organ",
+      "reticuloendothelial system",
+      "diaphragmatic surface",
+      "visceral surface",
+      "gastric impression",
+      "renal impression",
+      "colic impression",
+      "pancreatic impression",
+      "notched anterior border",
+      "splenic notch",
+      "hilum of the spleen",
+      "splenic artery",
+      "tortuous artery",
+      "coeliac trunk",
+      "celiac trunk",
+      "short gastric arteries",
+      "left gastroepiploic artery",
+      "splenic vein",
+      "portal vein",
+      "portal confluence",
+      "gastrosplenic ligament",
+      "lienorenal ligament",
+      "splenorenal ligament",
+      "phrenicocolic ligament",
+      "lesser sac",
+      "omental bursa",
+      "tail of the pancreas",
+      "left kidney",
+      "splenic flexure",
+      "accessory spleen",
+      "splenunculus",
+      "splenomegaly",
+      "massive splenomegaly",
+      "enlarges towards the right iliac fossa",
+      "cannot get above it",
+      "moves with respiration",
+      "dull to percussion",
+      "Traube's space",
+      "Castell's sign",
+      "kehr sign",
+      "left shoulder tip pain",
+      "splenic rupture",
+      "delayed splenic rupture",
+      "haemoperitoneum",
+      "FAST scan",
+      "splenectomy",
+      "OPSI",
+      "overwhelming post splenectomy infection",
+      "encapsulated organisms",
+      "Streptococcus pneumoniae",
+      "Haemophilus influenzae",
+      "Neisseria meningitidis",
+      "Howell-Jolly bodies",
+      "hyposplenism",
+      "autosplenectomy",
+      "sickle cell disease",
+      "sequestration crisis",
+      "malaria",
+      "kala azar",
+      "chronic myeloid leukaemia",
+      "myelofibrosis",
+      "hypersplenism",
+      "congestive splenomegaly",
+      "banti syndrome",
+      "red pulp",
+      "white pulp",
+      "T10 to L2",
+      "foregut derivative",
+      "dorsal mesogastrium",
+      "left tenth rib",
+      "left eleventh rib"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": -0.45
+  },
+  "structures": [
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen",
+      "role": "part",
+      "group": "Spleen",
+      "layer": "organ",
+      "color": "#7b3f5e",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "lien",
+        "splenic",
+        "left hypochondrium",
+        "largest lymphoid organ",
+        "diaphragmatic surface",
+        "visceral surface",
+        "notched anterior border",
+        "splenic notch",
+        "hilum of the spleen",
+        "red pulp",
+        "white pulp",
+        "splenomegaly",
+        "one ounce three inches five inches"
+      ],
+      "narration": "A soft purple organ about the size of a clenched fist, lying in the left hypochondrium with its long axis along the tenth rib. Its outer diaphragmatic surface is smooth and convex against the dome of the diaphragm; its inner visceral surface is moulded into impressions by the stomach, the left kidney, the tail of the pancreas and the colon. The anterior border is notched, and that notch is the single most useful sign at the bedside because no other left upper quadrant mass has one. It is entirely intraperitoneal except at the hilum, and its capsule is thin — which is why it is both the most commonly injured organ in blunt abdominal trauma and the organ that bleeds most freely when it is."
+    },
+    {
+      "key": "splenic_a",
+      "name": "splenic artery",
+      "label": "Splenic artery — the tortuous one",
+      "role": "part",
+      "group": "Splenic vessels",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14773"
+      },
+      "terms": [
+        "splenic artery",
+        "tortuous artery",
+        "largest branch of the coeliac trunk",
+        "upper border of the pancreas",
+        "lienorenal ligament",
+        "short gastric arteries",
+        "left gastroepiploic artery",
+        "splenic artery aneurysm",
+        "end arteries",
+        "splenic infarct"
+      ],
+      "narration": "The largest branch of the coeliac trunk. It runs left along the upper border of the pancreas, and it does so in loops — the most tortuous artery in the body, which is how you recognise it on a scan and why it is a common site of aneurysm. It reaches the spleen inside the lienorenal ligament, giving the short gastric and left gastroepiploic arteries to the stomach before it divides at the hilum. Its terminal branches behave as end arteries, so occlusion of one gives a wedge-shaped splenic infarct rather than a collateral supply."
+    },
+    {
+      "key": "splenic_v",
+      "name": "splenic vein",
+      "label": "Splenic vein — drains into the portal system",
+      "role": "part",
+      "group": "Splenic vessels",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "behind the body of the pancreas",
+        "inferior mesenteric vein",
+        "portal confluence",
+        "portal vein",
+        "portal hypertension",
+        "congestive splenomegaly",
+        "splenic vein thrombosis",
+        "left sided portal hypertension",
+        "gastric varices"
+      ],
+      "narration": "Leaves the hilum and runs straight and untortuous behind the body of the pancreas, picking up the inferior mesenteric vein on the way, until it meets the superior mesenteric vein behind the neck of the pancreas to form the portal vein. That single sentence explains most splenic medicine. Because the spleen drains into the portal system and not into the cava, anything that raises portal pressure backs up into it and enlarges it, and pancreatic disease sitting on this vein can thrombose it — giving isolated gastric varices with a normal liver, the picture called left-sided portal hypertension."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk — where the supply begins",
+      "role": "part",
+      "group": "Splenic vessels",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "T12",
+        "foregut artery",
+        "left gastric artery",
+        "common hepatic artery",
+        "splenic artery origin",
+        "referred pain to the epigastrium"
+      ],
+      "narration": "The spleen develops in the dorsal mesogastrium of the foregut, so its artery is a coeliac branch. The trunk leaves the front of the aorta at T12 and gives three vessels — left gastric, splenic and common hepatic. Foregut origin is also why splenic pain refers to the epigastrium, and why irritation of the diaphragm above it refers to the left shoulder tip instead."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach — gastric impression and gastrosplenic ligament",
+      "role": "part",
+      "group": "Bed",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "gastric impression",
+        "gastrosplenic ligament",
+        "short gastric arteries",
+        "greater curvature",
+        "lesser sac",
+        "omental bursa",
+        "splenectomy",
+        "gastric fundus"
+      ],
+      "narration": "The fundus and greater curvature press on the front of the visceral surface, making the largest of the impressions. The two are tied together by the gastrosplenic ligament, a fold of the old dorsal mesogastrium carrying the short gastric vessels. That ligament matters twice: it forms part of the left wall of the lesser sac, and it must be divided in a splenectomy — short gastric vessels tied too close to the stomach take the blood supply of the fundus with them."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney — renal impression and lienorenal ligament",
+      "role": "part",
+      "group": "Bed",
+      "layer": "organ",
+      "color": "#884ea0",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "renal impression",
+        "lienorenal ligament",
+        "splenorenal ligament",
+        "splenic vessels",
+        "tail of the pancreas",
+        "retroperitoneal",
+        "left loin mass",
+        "ballottable"
+      ],
+      "narration": "Lies behind and below, making the renal impression on the visceral surface. The peritoneum reflected from it to the spleen is the lienorenal ligament, and the splenic vessels and the tail of the pancreas travel inside it. This relation is also the bedside discriminator: an enlarged kidney is retroperitoneal, so it is ballottable, you can get your hand above it, and it is resonant because the colon lies in front of it. An enlarged spleen is none of those things."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — marking the tail at the hilum",
+      "role": "part",
+      "group": "Bed",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "tail of the pancreas",
+        "pancreatic duct",
+        "pancreatic impression",
+        "lienorenal ligament",
+        "splenectomy",
+        "pancreatic fistula",
+        "distal pancreatectomy"
+      ],
+      "narration": "The duct runs the length of the pancreas and so shows where the gland lies. Its left end is the tail, and the tail is the only part of the pancreas that is intraperitoneal — because it travels in the lienorenal ligament right up to the splenic hilum. In about a third of people it actually touches the spleen. That is why the tail is injured in a splenectomy and why a pancreatic fistula is a recognised complication of one, and why a distal pancreatectomy so often takes the spleen with it."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — the roof it moves with",
+      "role": "part",
+      "group": "Bed",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "left dome",
+        "diaphragmatic surface",
+        "moves with respiration",
+        "phrenic nerve",
+        "C3 C4 C5",
+        "Kehr's sign",
+        "left shoulder tip pain",
+        "left subphrenic space",
+        "left pleural effusion"
+      ],
+      "narration": "The whole convex surface of the spleen lies against the left dome, with the pleural recess and the base of the left lung above that. Two consequences follow. First, the spleen descends when the diaphragm descends, so an enlarged spleen moves with respiration — which is why you palpate on inspiration and why you start low, in the right iliac fossa. Second, blood from a ruptured spleen collecting under the left dome irritates a membrane supplied by the phrenic nerve from C3, C4 and C5, and the pain is felt at the left shoulder tip: Kehr's sign."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein — the other half of the portal vein",
+      "role": "context",
+      "group": "Splenic vessels",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal confluence",
+        "neck of the pancreas",
+        "portal vein"
+      ],
+      "narration": "Drawn only to show where the splenic vein ends. Behind the neck of the pancreas the two unite, and from that junction onwards the blood is portal blood."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — where the splenic blood is going",
+      "role": "context",
+      "group": "Splenic vessels",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "portal vein",
+        "portal hypertension",
+        "cirrhosis",
+        "congestive splenomegaly",
+        "hepatosplenomegaly"
+      ],
+      "narration": "The destination of everything the splenic vein carries. It is here as context because the commonest cause of a big spleen in adult practice is a diseased liver: fibrosis raises portal pressure, the pressure has nowhere to go but backwards, and the spleen becomes congested."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Splenic vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "coeliac trunk",
+        "T12"
+      ],
+      "narration": "Drawn only to fix the origin of the coeliac trunk at T12."
+    },
+    {
+      "key": "rib9",
+      "name": "left ninth rib",
+      "label": "Left ninth rib — upper limit",
+      "role": "context",
+      "group": "Surface markings",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA8391"
+      },
+      "terms": [
+        "left ninth rib",
+        "ninth to eleventh ribs",
+        "left midaxillary line",
+        "Traube's space",
+        "splenic dullness"
+      ],
+      "narration": "The upper of the three ribs that hide the spleen. Everything above it in the left upper quadrant is lung and pleura, which is why the spleen is dull to percussion only in a narrow band and why Traube's space — resonant over the gastric bubble — becomes dull when the spleen enlarges."
+    },
+    {
+      "key": "rib10",
+      "name": "left tenth rib",
+      "label": "Left tenth rib — the long axis",
+      "role": "context",
+      "group": "Surface markings",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA8472"
+      },
+      "terms": [
+        "left tenth rib",
+        "long axis of the spleen",
+        "1 3 5 7 9 11",
+        "left midaxillary line",
+        "surface marking"
+      ],
+      "narration": "The spleen's long axis lies along this rib, running downwards, forwards and laterally. The old teaching numbers are worth keeping: one inch thick, three inches broad, five inches long, seven ounces, behind ribs nine to eleven — 1, 3, 5, 7, 9, 11. Approximate, but they fix the shape and the position in one line."
+    },
+    {
+      "key": "rib11",
+      "name": "left eleventh rib",
+      "label": "Left eleventh rib — lower limit",
+      "role": "context",
+      "group": "Surface markings",
+      "layer": "bone",
+      "color": "#bfc9ca",
+      "refs": {
+        "bodyparts3d": "FMA8532"
+      },
+      "terms": [
+        "left eleventh rib",
+        "does not cross the midaxillary line",
+        "rib fracture",
+        "splenic rupture",
+        "left lower rib fractures"
+      ],
+      "narration": "The lower limit. A normal spleen does not reach below the costal margin and does not cross the midaxillary line — so a spleen you can feel is already about three times its normal size. Fractures of these lower left ribs are the classic mechanism of splenic rupture, and any patient with them deserves imaging of the spleen."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Behind ribs nine to eleven, along the tenth",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Splenic vessels"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spleen",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rib10",
+          "to": "spleen",
+          "kind": "the long axis lies along this rib"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "spleen",
+          "kind": "roofs it and moves it"
+        }
+      ],
+      "narration": "The spleen sits in the left hypochondrium, behind the ninth, tenth and eleventh ribs, with its long axis along the tenth rib in the midaxillary line. It is completely hidden by the rib cage, and it does not cross the midaxillary line. That single fact governs the examination. A normal spleen cannot be felt; if you can feel one at all it has roughly tripled in size and grown downwards and medially, towards the right iliac fossa, because the diaphragm and the ribs block every other direction. So palpate from the right iliac fossa upwards towards the left costal margin, one hand's breadth at a time, asking the patient to breathe in — and if you find nothing, roll them onto the right side and feel again, which brings a moderately enlarged spleen forwards under your fingers."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "The bed, read off the impressions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Surface markings"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spleen"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spleen",
+          "to": "stomach",
+          "kind": "gastric impression · gastrosplenic ligament"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spleen",
+          "to": "left_kidney",
+          "kind": "renal impression · lienorenal ligament"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spleen",
+          "to": "pancreatic_duct",
+          "kind": "the tail reaches the hilum"
+        }
+      ],
+      "narration": "Turn the spleen over and the visceral surface is a cast of its neighbours. The stomach makes the big impression in front, the left kidney one behind, the tail of the pancreas a small one at the hilum, and the splenic flexure of the colon one below. Two peritoneal folds are all that hold it: the gastrosplenic ligament running forwards to the greater curvature with the short gastric vessels inside it, and the lienorenal ligament running backwards to the kidney with the splenic vessels and the pancreatic tail inside it. Both are remnants of the dorsal mesogastrium, which is also why the spleen — an organ made of mesoderm in a mesentery — counts as a foregut structure and is supplied by the coeliac trunk. Below, the phrenicocolic ligament forms a shelf that the lower pole rests on, and that shelf is why an enlarging spleen is deflected medially rather than straight down."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "One artery in, one vein out — and the vein goes to the liver",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Splenic vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spleen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pancreatic_duct"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "celiac",
+            "splenic_a",
+            "spleen"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:portal-blood",
+          "path": [
+            "spleen",
+            "splenic_v",
+            "smv",
+            "liver"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "splenic_a",
+            "splenic_v"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Blood arrives by one route and leaves by one route, and the two behave very differently. The splenic artery, the largest coeliac branch, loops along the upper border of the pancreas — recognisably tortuous — gives the short gastric and left gastroepiploic branches to the stomach, and divides at the hilum into terminal branches that do not anastomose with each other. The splenic vein runs a straight course behind the body of the pancreas, takes the inferior mesenteric vein, and joins the superior mesenteric vein behind the neck of the pancreas to become the portal vein. Fix the direction of that outflow, because it explains the commonest exam scenario in this topic: the spleen drains into the portal system, so portal hypertension from cirrhosis or from schistosomiasis produces congestive splenomegaly, and it appears alongside oesophageal varices, caput medusae and ascites rather than on its own."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The hilum and the lesser sac behind the stomach",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Surface markings"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "splenic_a",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "splenic_a",
+          "to": "stomach",
+          "kind": "short gastric vessels in the gastrosplenic ligament"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Cut across at the level of the hilum and the arrangement makes surgical sense. The stomach lies in front, the spleen behind and to the left, and between them is the gastrosplenic ligament and, deep to the stomach, the cavity of the lesser sac. The two ligaments meet at the hilum, so the hilum is the one part of the spleen that is not covered by peritoneum — everything else is intraperitoneal, which is why a torn spleen bleeds straight into the general peritoneal cavity. Note also what is delivered to the hilum inside the lienorenal ligament: the splenic artery and vein, and the tail of the pancreas immediately behind them. A surgeon mobilising the spleen is working within millimetres of the pancreatic tail, and small accessory spleens — splenunculi, present in about one person in ten — hide in exactly these folds. Missing one is a classic cause of a failed splenectomy for haematological disease."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Telling a big spleen from a big kidney",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spleen"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "left_kidney"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Surface markings"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "spleen",
+            "left_kidney"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rib9",
+          "to": "spleen",
+          "kind": "upper limit of splenic dullness"
+        }
+      ],
+      "narration": "Both present as a left upper quadrant mass and the anatomy separates them completely. The spleen is intraperitoneal and hangs from the diaphragm, so it moves down on inspiration, you cannot get your hand between it and the costal margin, it is dull to percussion because nothing hollow lies in front of it, it has a notched medial border, and it enlarges towards the right iliac fossa along its long axis. The kidney is retroperitoneal, so it moves little, you can get above it, it is resonant because the colon lies in front, it has no notch, and it is ballottable between two hands. One more percussion sign is worth having: Traube's space, bounded by the sixth rib above, the left midaxillary line laterally and the left costal margin below, is normally resonant over the gastric air bubble, and dullness there is an early sign of splenic enlargement — before anything at all can be palpated."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Rupture, splenectomy, and the spleen you cannot afford to lose",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Bed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rib11",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spleen",
+          "to": "diaphragm",
+          "kind": "blood under the left dome refers to the shoulder tip"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:haemorrhage",
+          "path": [
+            "spleen",
+            "diaphragm",
+            "liver"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "Everything clinical here comes from the anatomy already drawn. Blunt trauma to the left lower ribs — a fall, a road traffic crash, a blow in sport — fractures ribs nine to eleven and tears a thin capsule over a soft, blood-filled organ, and the blood escapes into the peritoneal cavity. The patient is shocked, tender in the left upper quadrant, and may report left shoulder tip pain from phrenic irritation. Sometimes the capsule holds and a subcapsular haematoma ruptures days later, which is the trap of delayed splenic rupture. A spleen already enlarged by malaria, typhoid, infectious mononucleosis or sickling is softer, larger and less protected, so trivial trauma is enough — an important point where those infections are common. If the spleen must come out, the surgeon divides the two ligaments, takes the short gastric vessels without devascularising the gastric fundus, and ligates the splenic artery and vein while avoiding the pancreatic tail. Afterwards the patient has lost the filter for encapsulated organisms and is at lifelong risk of overwhelming post-splenectomy infection from pneumococcus, meningococcus and Haemophilus influenzae type b — so they need vaccination, ideally two weeks beforehand, and prophylactic penicillin. Howell-Jolly bodies on the film are the sign that a spleen is absent or, as in sickle cell disease after repeated infarction, has autosplenectomised itself."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no colon of any kind in the catalog — no caecum, ascending, transverse, descending or sigmoid colon, and no splenic flexure. The colic impression on the visceral surface and the phrenicocolic ligament that the lower pole rests on are therefore narrated in beats two and five and cannot be shown. This matters more than it sounds: the phrenicocolic shelf is the reason an enlarging spleen travels towards the right iliac fossa rather than straight down, which is the single most examined fact about splenomegaly. A caecum-and-colon set remains the outstanding acquisition from run 29 and it now blocks a second scene.",
+    "There is no pancreas mesh, only the pancreatic duct. The tail of the pancreas — the relation that makes the hilum surgically dangerous — is taught through the duct under the honest label 'Pancreatic duct - marking the tail at the hilum', which is option (a): the duct is inside the gland and runs its full length, so its left end genuinely is where the tail is. The same substitution and the same wording are used by the pancreas and liver scenes.",
+    "There is no portal vein. The splenic vein and the superior mesenteric vein both exist and both are drawn, and the narration says plainly that there is no portal vein until they meet behind the neck of the pancreas, so the outflow is taught truthfully to the point of the confluence and then narrated. Portal hypertension and congestive splenomegaly are therefore explained against the two tributaries and the liver rather than against the vessel that actually carries the pressure. This is the fourth consecutive scene in this topic to record the same gap.",
+    "No peritoneum and no peritoneal ligaments. The gastrosplenic ligament, the lienorenal ligament and the phrenicocolic ligament are the subject of beats two and four and none of them has a mesh; each is taught as a relation between two structures that do exist. The lesser sac is narrated in beat four against the stomach and the spleen. Same absence as recorded by the peritoneum, pleura and pericardium scenes — a provider question, not an ingest question.",
+    "No landmark anchors were authored. The hilum, the splenic notch and the four impressions on the visceral surface are all points that would be far more useful clicked than narrated, but FMA7196 is not in the local decimated set and anchors in this corpus are measured on real geometry rather than typed in by eye. Ingesting FMA7196 would yield at least six measured anchors on one mesh and would make beats one, two and four clickable.",
+    "No accessory spleen or splenunculus mesh exists, and none could — they are variable in number and position. Beat four names them and their usual hiding places in narration only.",
+    "Red pulp and white pulp are microscopic subjects and belong to a histology scene; they are in match.terms so a note that mentions them still opens this scene, but nothing here shows them. The curriculum keeps 'diagram' as this structure's second mode, recorded in deferred_modes, which is where the pulp architecture and the immunological function would properly be taught.",
+    "This scene does not claim to cover 'Portal venous system' even though the splenic vein, the superior mesenteric vein and the liver all appear in it. They are here as the spleen's outflow, not as the portal system with its porto-systemic anastomoses in their own right. That entry stays on the worklist."
+  ]
+}

@@ -1,0 +1,733 @@
+{
+  "schema": 2,
+  "id": "gross__arm__median-ulnar-radial-nerves",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Arm (Brachium)",
+  "structure": "Median, ulnar & radial nerves",
+  "covers": [
+    "Median, ulnar & radial nerves"
+  ],
+  "learning_goal": "Follow each of the three nerves through the arm, name the bony point where each is injured, and work out from a wrist drop, a claw hand or a hand of benediction which nerve has been cut and at what level.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "arm",
+      "brachium",
+      "upper limb",
+      "peripheral nerve injury",
+      "cubital fossa",
+      "elbow",
+      "wrist",
+      "hand",
+      "brachial plexus"
+    ],
+    "terms": [
+      "median nerve",
+      "ulnar nerve",
+      "radial nerve",
+      "lateral cord",
+      "medial cord",
+      "posterior cord",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "T1",
+      "radial groove",
+      "spiral groove",
+      "medial epicondyle",
+      "cubital tunnel",
+      "funny bone",
+      "carpal tunnel",
+      "Guyon's canal",
+      "supracondylar fracture",
+      "mid-shaft fracture of the humerus",
+      "Saturday night palsy",
+      "crutch palsy",
+      "wrist drop",
+      "claw hand",
+      "ulnar paradox",
+      "hand of benediction",
+      "pointing index finger",
+      "ape thumb",
+      "thenar wasting",
+      "hypothenar wasting",
+      "Froment's sign",
+      "first dorsal web space",
+      "regimental badge",
+      "posterior interosseous nerve",
+      "anterior interosseous nerve",
+      "pronator teres",
+      "flexor carpi ulnaris",
+      "brachioradialis",
+      "triceps",
+      "lumbricals",
+      "interossei",
+      "thenar muscles",
+      "carpal tunnel syndrome",
+      "motor territory",
+      "sensory territory",
+      "dermatome",
+      "cutaneous supply of the hand"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "terms": [
+        "humerus",
+        "shaft of the humerus",
+        "radial groove",
+        "spiral groove",
+        "medial epicondyle",
+        "supracondylar region"
+      ],
+      "narration": "Three points on one bone decide these three nerves: the radial groove behind the shaft, the supracondylar region in front of the lower end, and the back of the medial epicondyle. Learn the bone and the nerve injuries name themselves."
+    },
+    {
+      "key": "spiral_groove",
+      "label": "Radial (spiral) groove",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#d8cba8",
+      "terms": [
+        "radial groove",
+        "spiral groove",
+        "mid-shaft of the humerus",
+        "profunda brachii"
+      ],
+      "narration": "A shallow gutter running down and laterally across the back of the shaft. The radial nerve and the profunda brachii lie directly in it, on bare bone."
+    },
+    {
+      "key": "medial_epicondyle",
+      "label": "Medial epicondyle",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#d8cba8",
+      "terms": [
+        "medial epicondyle",
+        "cubital tunnel",
+        "funny bone",
+        "behind the medial epicondyle"
+      ],
+      "narration": "The ulnar nerve passes behind it, under the skin, with nothing to protect it. Knock it and the little finger tingles — that is why it is called the funny bone."
+    },
+    {
+      "key": "cubital_fossa",
+      "label": "Cubital fossa",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "fascia",
+      "color": "#cbbfa8",
+      "terms": [
+        "cubital fossa",
+        "brachial artery",
+        "tendon of biceps",
+        "bicipital aponeurosis"
+      ],
+      "narration": "Two of the three nerves enter the forearm through this hollow: the median medial to the artery, the radial hidden in its lateral corner. The ulnar nerve is nowhere near it — it is behind the elbow."
+    },
+    {
+      "key": "med_arm",
+      "label": "Median nerve in the arm",
+      "role": "part",
+      "group": "Median nerve",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "median nerve",
+        "lateral root",
+        "medial root",
+        "C6 C7 C8 T1",
+        "medial bicipital groove",
+        "no branch in the arm"
+      ],
+      "narration": "Formed from a lateral and a medial root in front of the axillary artery. It runs straight down the medial bicipital groove with the brachial artery and gives no branch in the arm at all."
+    },
+    {
+      "key": "med_elbow",
+      "label": "Median nerve at the elbow",
+      "role": "part",
+      "group": "Median nerve",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "median nerve at the elbow",
+        "medial to the brachial artery",
+        "pronator teres",
+        "two heads of pronator teres",
+        "anterior interosseous nerve"
+      ],
+      "narration": "It enters the cubital fossa medial to the brachial artery, then passes between the two heads of pronator teres into the forearm. Its deep branch, the anterior interosseous nerve, runs down on the interosseous membrane."
+    },
+    {
+      "key": "med_wrist",
+      "label": "Median nerve at the wrist",
+      "role": "part",
+      "group": "Median nerve",
+      "layer": "nerve",
+      "color": "#d95f5f",
+      "terms": [
+        "median nerve at the wrist",
+        "carpal tunnel",
+        "flexor retinaculum",
+        "palmaris longus tendon",
+        "recurrent branch"
+      ],
+      "narration": "It reaches the wrist lying just deep to the tendon of palmaris longus, then passes under the flexor retinaculum through the carpal tunnel. Its recurrent branch turns back to the thenar muscles."
+    },
+    {
+      "key": "uln_arm",
+      "label": "Ulnar nerve in the arm",
+      "role": "part",
+      "group": "Ulnar nerve",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "ulnar nerve",
+        "medial cord",
+        "C8 T1",
+        "medial intermuscular septum",
+        "posterior compartment",
+        "no branch in the arm"
+      ],
+      "narration": "From the medial cord, C8 and T1. It starts medial to the artery, then pierces the medial intermuscular septum in the middle of the arm and passes to the back. Like the median, it gives no branch in the arm."
+    },
+    {
+      "key": "uln_elbow",
+      "label": "Ulnar nerve at the elbow",
+      "role": "part",
+      "group": "Ulnar nerve",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "ulnar nerve at the elbow",
+        "behind the medial epicondyle",
+        "cubital tunnel",
+        "flexor carpi ulnaris",
+        "medial half of flexor digitorum profundus"
+      ],
+      "narration": "It grooves the back of the medial epicondyle, then enters the forearm between the two heads of flexor carpi ulnaris. Its first branches are to flexor carpi ulnaris and the medial half of flexor digitorum profundus."
+    },
+    {
+      "key": "uln_wrist",
+      "label": "Ulnar nerve at the wrist",
+      "role": "part",
+      "group": "Ulnar nerve",
+      "layer": "nerve",
+      "color": "#e2952f",
+      "terms": [
+        "ulnar nerve at the wrist",
+        "Guyon's canal",
+        "pisiform",
+        "lateral to the pisiform",
+        "deep branch",
+        "superficial branch"
+      ],
+      "narration": "It crosses in front of the retinaculum, not under it, passing lateral to the pisiform through Guyon's canal. That is why a carpal tunnel release does not touch it."
+    },
+    {
+      "key": "rad_axilla",
+      "label": "Radial nerve in the axilla",
+      "role": "part",
+      "group": "Radial nerve",
+      "layer": "nerve",
+      "color": "#7a9f3f",
+      "terms": [
+        "radial nerve",
+        "posterior cord",
+        "C5 C6 C7 C8 T1",
+        "long head of triceps",
+        "crutch palsy"
+      ],
+      "narration": "The largest branch of the brachial plexus, from the posterior cord. In the axilla it lies behind the artery and supplies the long and medial heads of triceps. A crutch pressed into the armpit compresses it here."
+    },
+    {
+      "key": "rad_groove",
+      "label": "Radial nerve in the radial groove",
+      "role": "part",
+      "group": "Radial nerve",
+      "layer": "nerve",
+      "color": "#7a9f3f",
+      "terms": [
+        "radial nerve in the spiral groove",
+        "radial groove",
+        "profunda brachii",
+        "mid-shaft fracture",
+        "Saturday night palsy",
+        "lateral head of triceps"
+      ],
+      "narration": "It winds round the back of the shaft in the radial groove with the profunda brachii, lying against bare bone. This is where a mid-shaft fracture or a night asleep over the back of a chair damages it."
+    },
+    {
+      "key": "rad_elbow",
+      "label": "Radial nerve at the elbow",
+      "role": "part",
+      "group": "Radial nerve",
+      "layer": "nerve",
+      "color": "#7a9f3f",
+      "terms": [
+        "radial nerve at the elbow",
+        "lateral intermuscular septum",
+        "brachioradialis",
+        "extensor carpi radialis longus",
+        "superficial branch",
+        "deep branch",
+        "posterior interosseous nerve",
+        "supinator"
+      ],
+      "narration": "It pierces the lateral intermuscular septum and comes to the front of the elbow between brachialis and brachioradialis. There it splits into a superficial sensory branch and a deep motor branch, which becomes the posterior interosseous nerve as it winds through supinator."
+    },
+    {
+      "key": "motor_median",
+      "label": "Median — the labourer of the forearm",
+      "role": "part",
+      "group": "Motor territory",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "terms": [
+        "median nerve motor supply",
+        "flexor compartment of the forearm",
+        "thenar muscles",
+        "lateral two lumbricals",
+        "LOAF muscles",
+        "opponens pollicis",
+        "abductor pollicis brevis",
+        "flexor pollicis brevis"
+      ],
+      "narration": "Everything in the front of the forearm except flexor carpi ulnaris and the medial half of flexor digitorum profundus. In the hand it takes the LOAF muscles: the lateral two Lumbricals, Opponens pollicis, Abductor pollicis brevis and Flexor pollicis brevis."
+    },
+    {
+      "key": "motor_ulnar",
+      "label": "Ulnar — the master of the hand",
+      "role": "part",
+      "group": "Motor territory",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "terms": [
+        "ulnar nerve motor supply",
+        "flexor carpi ulnaris",
+        "medial half of flexor digitorum profundus",
+        "interossei",
+        "medial two lumbricals",
+        "adductor pollicis",
+        "hypothenar muscles",
+        "intrinsic muscles of the hand"
+      ],
+      "narration": "Only one and a half muscles in the forearm, but almost every small muscle of the hand: all the interossei, the medial two lumbricals, adductor pollicis and the hypothenar group. That is why an ulnar lesion wastes the hand and a median lesion does not."
+    },
+    {
+      "key": "motor_radial",
+      "label": "Radial — the great extensor nerve",
+      "role": "part",
+      "group": "Motor territory",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "terms": [
+        "radial nerve motor supply",
+        "triceps",
+        "anconeus",
+        "brachioradialis",
+        "extensor carpi radialis longus",
+        "extensor compartment",
+        "no muscle in the hand"
+      ],
+      "narration": "Every extensor of the elbow, the wrist and the fingers, plus brachioradialis and supinator. It supplies no muscle in the hand at all, so a radial lesion never wastes the hand — it only drops the wrist."
+    },
+    {
+      "key": "sensory_median",
+      "label": "Median sensory territory",
+      "role": "part",
+      "group": "Sensory territory",
+      "layer": "skin",
+      "color": "#e8a0a0",
+      "terms": [
+        "median nerve sensory supply",
+        "lateral three and a half fingers",
+        "palmar surface",
+        "index finger pulp",
+        "palmar cutaneous branch"
+      ],
+      "narration": "The palm side of the lateral three and a half fingers and the nail beds behind them. Test it on the pulp of the index finger. Its palmar cutaneous branch leaves above the retinaculum, so in carpal tunnel syndrome the palm itself keeps its sensation."
+    },
+    {
+      "key": "sensory_ulnar",
+      "label": "Ulnar sensory territory",
+      "role": "part",
+      "group": "Sensory territory",
+      "layer": "skin",
+      "color": "#e8c48a",
+      "terms": [
+        "ulnar nerve sensory supply",
+        "medial one and a half fingers",
+        "little finger",
+        "medial border of the hand",
+        "dorsal cutaneous branch"
+      ],
+      "narration": "The medial one and a half fingers, front and back, and the medial border of the hand. Test it on the pulp of the little finger."
+    },
+    {
+      "key": "sensory_radial",
+      "label": "Radial sensory territory",
+      "role": "part",
+      "group": "Sensory territory",
+      "layer": "skin",
+      "color": "#b8d08a",
+      "terms": [
+        "radial nerve sensory supply",
+        "first dorsal web space",
+        "anatomical snuffbox",
+        "back of the hand",
+        "posterior cutaneous nerve of the forearm"
+      ],
+      "narration": "The back of the hand over the lateral part, but reliably only one small patch: the web between thumb and index finger. Test the first dorsal web space and nowhere else, because the other areas overlap."
+    },
+    {
+      "key": "lesion_wrist_drop",
+      "label": "Wrist drop — radial nerve",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "wrist drop",
+        "Saturday night palsy",
+        "mid-shaft fracture of the humerus",
+        "spiral groove lesion",
+        "triceps spared",
+        "first dorsal web space"
+      ],
+      "narration": "The wrist and fingers cannot be extended and the hand hangs. If the lesion is in the radial groove the triceps still works, because its branches left in the axilla. If the triceps is also paralysed the lesion is higher — in the axilla."
+    },
+    {
+      "key": "lesion_claw",
+      "label": "Claw hand — ulnar nerve",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "claw hand",
+        "main en griffe",
+        "ulnar paradox",
+        "Froment's sign",
+        "adductor pollicis",
+        "hypothenar wasting",
+        "cubital tunnel"
+      ],
+      "narration": "The ring and little fingers are hyperextended at the knuckle and bent at the other joints, because the interossei and medial lumbricals are gone. The paradox: a lesion at the wrist claws worse than a lesion at the elbow, because the high lesion also kills the long flexor that does the bending. Ask the patient to grip paper between thumb and index — if the thumb bends, that is Froment's sign."
+    },
+    {
+      "key": "lesion_benediction",
+      "label": "Hand of benediction — median nerve",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "hand of benediction",
+        "pointing index finger",
+        "ape thumb",
+        "thenar wasting",
+        "supracondylar fracture",
+        "carpal tunnel syndrome",
+        "loss of opposition"
+      ],
+      "narration": "Ask the patient to make a fist and the index and middle fingers stay straight. The thumb lies flat in the plane of the palm — the ape thumb — because opposition is lost. A high lesion at the elbow does this; a lesion at the wrist wastes the thenar eminence and takes the sensation but leaves the long flexors working."
+    },
+    {
+      "key": "lesion_carpal_tunnel",
+      "label": "Carpal tunnel syndrome",
+      "role": "part",
+      "group": "Lesions",
+      "layer": "nerve",
+      "color": "#a83232",
+      "terms": [
+        "carpal tunnel syndrome",
+        "flexor retinaculum",
+        "night pain",
+        "Tinel's sign",
+        "Phalen's test",
+        "pregnancy",
+        "hypothyroidism",
+        "rheumatoid arthritis",
+        "palm spared"
+      ],
+      "narration": "The commonest entrapment in the body. Tingling in the lateral three and a half fingers, worse at night, with wasting of the thenar eminence if it is old. The palm is spared, because its nerve branch passed over the retinaculum instead of under it — that one detail separates it from a lesion higher up."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three nerves, one arm",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Lesions"
+        }
+      ],
+      "narration": "Two of these nerves run down the front of the arm and one runs round the back. The median stays with the brachial artery the whole way. The ulnar leaves the front halfway down. The radial is behind the bone from the start. Fix those three courses and every injury in this topic follows from them."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Follow the median nerve",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Median nerve"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "med_arm",
+          "path": [
+            "med_arm",
+            "med_elbow",
+            "med_wrist"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "med_elbow",
+          "to": "cubital_fossa",
+          "kind": "passes through"
+        }
+      ],
+      "narration": "Down the medial bicipital groove with the artery, giving nothing away in the arm. Into the cubital fossa medial to the artery. Between the two heads of pronator teres into the forearm. Under the flexor retinaculum at the wrist. Four stages, and each one is a place it can be trapped."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Follow the ulnar nerve",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Ulnar nerve"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "uln_arm",
+          "path": [
+            "uln_arm",
+            "uln_elbow",
+            "uln_wrist"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "uln_elbow",
+          "to": "medial_epicondyle",
+          "kind": "passes behind"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "It starts in front with the artery but pierces the medial intermuscular septum in mid-arm and goes to the back. Behind the medial epicondyle it lies on bone with only skin over it. Then between the two heads of flexor carpi ulnaris, down the medial forearm, and across in front of the retinaculum at the wrist."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Follow the radial nerve",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Radial nerve"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "rad_axilla",
+          "path": [
+            "rad_axilla",
+            "rad_groove",
+            "rad_elbow"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rad_groove",
+          "to": "spiral_groove",
+          "kind": "lies in"
+        }
+      ],
+      "narration": "Turn the arm round to see it. From the axilla behind the artery, into the radial groove where it spirals across bare bone, then forward through the lateral intermuscular septum to the front of the elbow. It supplies the triceps before it enters the groove — remember that, because it decides the level of the lesion."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "What each nerve moves",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Motor territory"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "med_wrist",
+          "to": "motor_median",
+          "kind": "supplies"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "uln_wrist",
+          "to": "motor_ulnar",
+          "kind": "supplies"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rad_elbow",
+          "to": "motor_radial",
+          "kind": "supplies"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "motor_median",
+            "motor_ulnar"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Divide the limb in three. The radial extends: elbow, wrist, fingers, and nothing in the hand. The median does the bulk of the flexing in the forearm and moves the thumb. The ulnar owns the small muscles of the hand. A patient who cannot extend has a radial problem, one who cannot oppose the thumb has a median problem, one whose hand is wasted and clawed has an ulnar problem."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Where each nerve feels",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Sensory territory"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sensory_median",
+            "sensory_ulnar",
+            "sensory_radial"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sensory_radial",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The hand is split three and a half to one and a half on the palm: median laterally, ulnar medially. On the back, the radial takes the lateral side. Because the territories overlap, test each nerve at one autonomous point only. Index pulp for the median. Little finger pulp for the ulnar. First dorsal web space for the radial."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Read the hand backwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lesions"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_wrist_drop",
+          "to": "rad_groove",
+          "kind": "lesion of"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_claw",
+          "to": "uln_elbow",
+          "kind": "lesion of"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_benediction",
+          "to": "med_elbow",
+          "kind": "lesion of"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lesion_carpal_tunnel",
+          "to": "med_wrist",
+          "kind": "lesion of"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lesion_claw",
+            "lesion_benediction"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "In the exam you are shown a hand and asked for the nerve. A hanging wrist with normal triceps is the radial nerve in the radial groove. A clawed ring and little finger with a wasted hand is the ulnar nerve, and the more it claws the lower the lesion. A fist that will not close on the index and middle fingers, with a flat thumb, is the median nerve at the elbow. Tingling in those same fingers at night, with the palm spared, is the median nerve in the carpal tunnel."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no nerve of the upper limb — the only nerve models in all 934 entries are the right and left optic nerves. There is nothing to resolve for a single one of this scene's thirteen nerve structures. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb nerve models exist, with no curriculum edit.",
+    "This scene deliberately does NOT repeat the humerus scene's radial nerve beat. That scene is 3D and already traces the radial nerve as a concept along measured bony waypoints on the real humerus mesh, and pairs each of the four fracture sites with the nerve at risk. What it cannot do is show the median and ulnar nerves, the motor territories or the sensory maps, because none of those are bone. This scene is that half: three whole courses, what each nerve moves, what each nerve feels, and how to read a deformed hand backwards to the lesion. A student who works through both has the topic.",
+    "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are fully authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the three-nerve arm artwork exists — an anterior view, a posterior view and a hand map — with the labelled regions this scene names.",
+    "The humerus, the radial groove and the medial epicondyle are authored as drawn landmark regions here, although the humerus does exist as a model and its groove and epicondyle already exist as measured landmark anchors on the 3D humerus scene. When upper-limb nerve models arrive, those anchors are the waypoints this scene's traces should be re-authored against.",
+    "The 'Motor territory' and 'Sensory territory' groups are teaching regions, not individual muscles or dermatomes. Drawing every muscle each nerve supplies would need the forearm and hand topics, which are not yet authored; naming them inside three summary regions keeps beats 5 and 6 about the rule rather than about a muscle list.",
+    "The 'Lesions' group holds four clinical pictures rather than anatomical structures, following the pattern set by the brachial plexus scene. A renderer that treats every structure as strictly anatomical will need to accept these as annotation regions.",
+    "The axillary and musculocutaneous nerves are not covered here. They belong to the axilla and to the biceps respectively, and the brachial plexus scene already carries both. This entry names three nerves and this scene teaches exactly those three."
+  ]
+}

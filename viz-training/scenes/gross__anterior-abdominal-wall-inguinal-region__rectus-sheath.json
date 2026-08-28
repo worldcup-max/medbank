@@ -1,0 +1,720 @@
+{
+  "schema": 2,
+  "id": "gross__anterior-abdominal-wall-inguinal-region__rectus-sheath",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Anterior Abdominal Wall & Inguinal Region",
+  "structure": "Rectus sheath",
+  "covers": [
+    "Rectus sheath"
+  ],
+  "learning_goal": "State which aponeurosis lies in front of and behind rectus abdominis above and below the arcuate line, name the contents of the sheath, and use those two facts to explain a rectus sheath haematoma, a Spigelian hernia and the safety of a midline incision.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "rectus sheath",
+      "anterior abdominal wall",
+      "abdomen",
+      "abdominal wall layers",
+      "arcuate line",
+      "surgical incisions",
+      "abdominal hernia",
+      "laparotomy",
+      "TAP block"
+    ],
+    "terms": [
+      "rectus sheath",
+      "sheath of rectus abdominis",
+      "anterior wall of the rectus sheath",
+      "posterior wall of the rectus sheath",
+      "arcuate line",
+      "linea semicircularis",
+      "line of Douglas",
+      "fold of Douglas",
+      "aponeurosis",
+      "external oblique aponeurosis",
+      "internal oblique aponeurosis",
+      "transversus abdominis aponeurosis",
+      "the aponeurosis splits",
+      "bilaminar",
+      "linea alba",
+      "linea semilunaris",
+      "semilunar line",
+      "transversalis fascia",
+      "extraperitoneal fat",
+      "parietal peritoneum",
+      "contents of the rectus sheath",
+      "superior epigastric artery",
+      "inferior epigastric artery",
+      "thoracoabdominal nerves",
+      "T7 to T12",
+      "subcostal nerve",
+      "pyramidalis",
+      "tendinous intersections",
+      "rectus sheath haematoma",
+      "Fothergill's sign",
+      "Carnett's sign",
+      "Spigelian hernia",
+      "midline incision",
+      "paramedian incision",
+      "Pfannenstiel incision",
+      "rectus sheath block",
+      "layers of the anterior abdominal wall",
+      "skin fascia muscle fascia peritoneum"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "rect_r",
+      "name": "right rectus abdominis",
+      "label": "Rectus abdominis (right) — the muscle inside the sheath",
+      "role": "part",
+      "group": "Inside the sheath",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA13377"
+      },
+      "terms": [
+        "rectus abdominis",
+        "contents of the rectus sheath",
+        "the muscle in the sheath"
+      ],
+      "narration": "The sheath is not a thing on its own. It is the wrapping the three flat muscles make around this one vertical muscle as their aponeuroses run to the midline. Learn the muscle first and the sheath becomes one rule about what passes in front of it and what passes behind it."
+    },
+    {
+      "key": "pyr_r",
+      "name": "right pyramidalis",
+      "label": "Pyramidalis — also inside the sheath",
+      "role": "part",
+      "group": "Inside the sheath",
+      "layer": "muscle",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA22346"
+      },
+      "terms": [
+        "pyramidalis",
+        "contents of the rectus sheath",
+        "in front of the lower rectus",
+        "absent in twenty per cent"
+      ],
+      "narration": "A small triangle lying in front of the lowest part of the rectus, inside the same sheath. When you are asked for the contents of the rectus sheath, name it: rectus abdominis, pyramidalis, the superior and inferior epigastric vessels, and the lower six thoracic nerves."
+    },
+    {
+      "key": "extobl_r",
+      "name": "right external oblique",
+      "label": "External oblique (right) — always in front",
+      "role": "part",
+      "group": "Aponeuroses that form the sheath",
+      "layer": "muscle",
+      "color": "#f0b27a",
+      "refs": {
+        "bodyparts3d": "FMA13336"
+      },
+      "terms": [
+        "external oblique",
+        "external oblique aponeurosis",
+        "anterior wall of the sheath",
+        "hands in pockets"
+      ],
+      "narration": "The outermost flat muscle. Its fibres run downwards and forwards — the hands-in-pockets direction — and become aponeurotic well before they reach the rectus. Its aponeurosis passes in front of the rectus at every single level, from the costal margin to the pubis. That is the one line of the rule that never changes."
+    },
+    {
+      "key": "intobl_r",
+      "name": "right internal oblique",
+      "label": "Internal oblique (right) — the one that splits",
+      "role": "part",
+      "group": "Aponeuroses that form the sheath",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA13892"
+      },
+      "terms": [
+        "internal oblique",
+        "internal oblique aponeurosis",
+        "the aponeurosis splits",
+        "bilaminar",
+        "both in front and behind"
+      ],
+      "narration": "The middle layer, fibres running upwards and forwards, at right angles to the external oblique. At the lateral border of the rectus its aponeurosis splits into two sheets: one goes in front of the muscle, one goes behind. That split is the whole rectus sheath in one sentence — and it is the split that stops below the arcuate line."
+    },
+    {
+      "key": "transv_r",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis (right) — behind, then in front",
+      "role": "part",
+      "group": "Aponeuroses that form the sheath",
+      "layer": "muscle",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "horizontal fibres",
+        "posterior wall of the sheath",
+        "deepest layer",
+        "TAP block"
+      ],
+      "narration": "The deepest layer, fibres running horizontally like a belt. Above the arcuate line its aponeurosis is behind the rectus; below the line it swings in front. The nerves and vessels of the wall run in the plane between this muscle and the internal oblique before they enter the sheath — that plane is what a transversus abdominis plane block fills."
+    },
+    {
+      "key": "linea_alba_m",
+      "name": "linea alba",
+      "label": "Linea alba — where the two sheaths meet",
+      "role": "part",
+      "group": "Aponeuroses that form the sheath",
+      "layer": "fascia",
+      "color": "#f7f3e3",
+      "refs": {
+        "bodyparts3d": "FMA11336"
+      },
+      "terms": [
+        "linea alba",
+        "white line",
+        "midline raphe",
+        "avascular",
+        "midline incision",
+        "decussation of aponeuroses"
+      ],
+      "narration": "Medially, the front and back walls of the sheath fuse and interlace with the ones from the other side to form the linea alba. It is almost bloodless, which is why the midline is the fastest and safest way into the abdomen. Cutting here opens no sheath and cuts no muscle and no nerve — it simply separates two sheaths that were never joined to each other."
+    },
+    {
+      "key": "sheath_anterior_wall",
+      "label": "Anterior wall of the sheath",
+      "role": "part",
+      "group": "The two walls",
+      "color": "#f5cba7",
+      "render": "anchor",
+      "anchor": {
+        "on": "rect_r",
+        "uvw": [
+          0.86,
+          0.121,
+          0.936
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — nearest point on the right rectus abdominis to the right external oblique (gap 0.34 mm): where the external oblique aponeurosis lies against the muscle as the anterior wall of the rectus sheath; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "anterior wall of the rectus sheath",
+        "external oblique aponeurosis",
+        "tendinous intersections adhere here",
+        "present at every level"
+      ],
+      "narration": "The front wall exists at every level of the muscle, top to bottom. Above the arcuate line it is external oblique plus the anterior lamina of internal oblique. Below the line it is all three aponeuroses together, which is why the front wall is at its thickest exactly where the back wall has disappeared. The tendinous intersections of the muscle are stuck to this front wall and free from the back — that is why the six-pack shows through the skin, and why blood in the sheath is trapped in compartments above the umbilicus but tracks freely below it."
+    },
+    {
+      "key": "sheath_posterior_surface",
+      "label": "Back of the muscle — where the posterior wall runs out",
+      "role": "part",
+      "group": "The two walls",
+      "color": "#a9cce3",
+      "render": "anchor",
+      "anchor": {
+        "on": "rect_r",
+        "uvw": [
+          0.153,
+          0.602,
+          0.31
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONSTRAINED EXTREME — the most posterior vertex of the right rectus abdominis within the middle 40% of its height. The constraint matters: unconstrained, the most posterior vertex of this model is at the PUBIC end, where the muscle curves backwards to its origin, and a label reading \"posterior surface\" would land on the origin instead of on the belly; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "posterior wall of the rectus sheath",
+        "arcuate line",
+        "linea semicircularis",
+        "transversalis fascia",
+        "inferior epigastric artery enters here"
+      ],
+      "narration": "This is the face of the muscle the posterior wall covers. Follow it downwards and about midway between the umbilicus and the pubic symphysis the posterior wall simply stops with a free crescentic edge — the arcuate line. Below that point the muscle rests directly on transversalis fascia, extraperitoneal fat and peritoneum. The inferior epigastric vessels cross that free edge to enter the sheath, which is exactly why the classic rectus sheath haematoma is a lower abdominal one."
+    },
+    {
+      "key": "linea_semilunaris",
+      "label": "Linea semilunaris — where the aponeuroses split",
+      "role": "part",
+      "group": "The two walls",
+      "color": "#7fb3d5",
+      "render": "anchor",
+      "anchor": {
+        "on": "rect_r",
+        "uvw": [
+          0,
+          0.205,
+          0.755
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most lateral (most body-right) vertex of the right rectus abdominis, 94.5 mm from its surface centroid: the lateral border of the muscle, which is the linea semilunaris and the line along which the three aponeuroses split to form the sheath; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "linea semilunaris",
+        "semilunar line",
+        "lateral border of rectus",
+        "the aponeuroses split here",
+        "nerves enter the sheath here",
+        "Spigelian hernia"
+      ],
+      "narration": "The curved lateral border of the muscle. Everything about the sheath happens along this line. The three aponeuroses arrive here and divide. The nerves and vessels pierce here to get inside. And a Spigelian hernia comes out here, just below the level of the umbilicus, through the gap where the sheath is weakest — hidden under an intact external oblique, so there is often no lump to see and the diagnosis is missed."
+    },
+    {
+      "key": "rectus_lower_end",
+      "label": "Below the arcuate line — nothing behind the muscle",
+      "role": "part",
+      "group": "The two walls",
+      "color": "#a2d9ce",
+      "render": "anchor",
+      "anchor": {
+        "on": "rect_r",
+        "uvw": [
+          0.952,
+          0.939,
+          0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the lowest vertex of the right rectus abdominis, 220.2 mm from its surface centroid: the pubic end of the muscle, below the arcuate line, where the sheath is entirely in front of it; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "below the arcuate line",
+        "all three aponeuroses pass in front",
+        "transversalis fascia",
+        "no posterior wall",
+        "suprapubic"
+      ],
+      "narration": "Down here all three aponeuroses have gone in front of the muscle and the back of the sheath is gone. Say it as a list an examiner can tick: below the arcuate line the anterior wall is external oblique, internal oblique and transversus together, and the posterior relation of the muscle is transversalis fascia, extraperitoneal fat and peritoneum. This is the level a Pfannenstiel incision opens, which is why the surgeon meets one thick aponeurotic sheet and then, once the recti are separated, the peritoneum."
+    },
+    {
+      "key": "rectus_upper_end",
+      "label": "Above the costal margin — the third arrangement",
+      "role": "part",
+      "group": "The two walls",
+      "color": "#abebc6",
+      "render": "anchor",
+      "anchor": {
+        "on": "rect_r",
+        "uvw": [
+          0.443,
+          0.186,
+          1
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the highest vertex of the right rectus abdominis, 181.9 mm from its surface centroid: the costal end, where the muscle lies directly on the costal cartilages; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "above the costal margin",
+        "anterior wall only",
+        "external oblique aponeurosis",
+        "costal cartilages",
+        "superior epigastric artery"
+      ],
+      "narration": "Most students learn two levels and get caught by the third. Up here, above the costal margin, the front wall is external oblique aponeurosis alone and there is again no posterior wall, because the muscle lies straight on the fifth, sixth and seventh costal cartilages. So the sheath has three arrangements, not two: costal, above the arcuate line, and below the arcuate line."
+    },
+    {
+      "key": "rect_l",
+      "name": "left rectus abdominis",
+      "label": "Rectus abdominis (left)",
+      "role": "context",
+      "group": "The other side",
+      "layer": "muscle",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA13378"
+      },
+      "terms": [
+        "left rectus",
+        "its own sheath",
+        "never joined across the midline"
+      ],
+      "narration": "Each rectus has its own complete sheath. The two sheaths meet at the linea alba but the muscles never touch, which is the anatomical reason a rectus sheath haematoma does not cross the midline."
+    },
+    {
+      "key": "extobl_l",
+      "name": "left external oblique",
+      "label": "External oblique (left)",
+      "role": "context",
+      "group": "The other side",
+      "layer": "muscle",
+      "color": "#eb984e",
+      "refs": {
+        "bodyparts3d": "FMA13337"
+      },
+      "terms": [
+        "external oblique",
+        "aponeurosis interlaces at the midline"
+      ],
+      "narration": "Its aponeurosis crosses to interlace with its partner in the linea alba. That decussation is what holds the two halves of the wall together."
+    },
+    {
+      "key": "intobl_l",
+      "name": "left internal oblique",
+      "label": "Internal oblique (left)",
+      "role": "context",
+      "group": "The other side",
+      "layer": "muscle",
+      "color": "#ca8a04",
+      "refs": {
+        "bodyparts3d": "FMA13893"
+      },
+      "terms": [
+        "internal oblique",
+        "mirror image",
+        "splits the same way"
+      ],
+      "narration": "The mirror image, splitting around the left rectus in exactly the same way."
+    },
+    {
+      "key": "transv_l",
+      "name": "left transversus abdominis",
+      "label": "Transversus abdominis (left)",
+      "role": "context",
+      "group": "The other side",
+      "layer": "muscle",
+      "color": "#a16207",
+      "refs": {
+        "bodyparts3d": "FMA22345"
+      },
+      "terms": [
+        "transversus abdominis",
+        "mirror image"
+      ],
+      "narration": "The deepest layer of the left wall, behaving identically about its own arcuate line."
+    },
+    {
+      "key": "hip_r",
+      "name": "right hip bone",
+      "label": "Hip bone (right)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d0d3d4",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "pubic crest",
+        "pubic symphysis",
+        "iliac crest",
+        "lower limit of the sheath"
+      ],
+      "narration": "The sheath ends below on the pubic crest and the pubic symphysis, where the muscle it encloses takes origin."
+    },
+    {
+      "key": "hip_l",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "pubic crest",
+        "pubic symphysis",
+        "left side"
+      ],
+      "narration": "The mirror half of the lower frame."
+    },
+    {
+      "key": "cc7_r",
+      "name": "right seventh costal cartilage",
+      "label": "Seventh costal cartilage",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#c4c9c9",
+      "refs": {
+        "bodyparts3d": "FMA8248"
+      },
+      "terms": [
+        "seventh costal cartilage",
+        "costal margin",
+        "the muscle lies on it directly"
+      ],
+      "narration": "Above the costal margin the rectus lies directly on cartilage like this one — no posterior wall of sheath between them."
+    },
+    {
+      "key": "xiphoid",
+      "name": "xiphoid process",
+      "label": "Xiphoid process",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA7488"
+      },
+      "terms": [
+        "xiphoid process",
+        "upper end of the linea alba"
+      ],
+      "narration": "The top of the midline. The linea alba runs from here down to the pubic symphysis."
+    },
+    {
+      "key": "inglig_r",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament — right",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "fascia",
+      "color": "#f9e79f",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "lower border of external oblique",
+        "lower limit of the abdominal wall"
+      ],
+      "narration": "The rolled lower border of the external oblique aponeurosis, marking where the abdominal wall stops. The sheath ends just above and medial to it."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The sheath is what the flat muscles do at the midline",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rect_r",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "linea_semilunaris",
+          "intensity": 1
+        }
+      ],
+      "narration": "There is no separate object called the rectus sheath. The three flat muscles become aponeurotic before they reach the midline, and where those aponeuroses meet the lateral border of rectus abdominis they split and wrap it. Everything you have to memorise is one question asked at three levels: at this level, what is in front of the muscle and what is behind it?"
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Three aponeuroses, three behaviours",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Aponeuroses that form the sheath"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Inside the sheath"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extobl_r",
+          "to": "rect_r",
+          "kind": "aponeurosis passes in front at every level"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "intobl_r",
+          "to": "rect_r",
+          "kind": "aponeurosis splits and goes both ways"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "transv_r",
+          "to": "rect_r",
+          "kind": "aponeurosis passes behind, then in front"
+        }
+      ],
+      "narration": "Take them one at a time and the sheath stops being a memory test. External oblique is in front, always. Transversus is behind above the arcuate line and in front below it. Internal oblique splits and goes both ways above the line, and passes entirely in front below it. Three sentences. Every diagram of the rectus sheath you will ever be asked to draw is those three sentences at one chosen level."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Above the arcuate line — a front wall and a back wall",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.35,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sheath_anterior_wall",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sheath_posterior_surface",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut across the upper abdomen and the muscle is boxed in. In front of it: external oblique aponeurosis and the front lamina of internal oblique. Behind it: the back lamina of internal oblique and the aponeurosis of transversus, then transversalis fascia and peritoneum. Drag the cutting plane up and down and watch the arrangement stay the same all the way from the costal margin to a point midway between the umbilicus and the pubis."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The arcuate line, and what happens below it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.12,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rectus_lower_end",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "sheath_posterior_surface",
+            "rectus_lower_end"
+          ],
+          "layout": "stacked"
+        }
+      ],
+      "narration": "Now cut lower. About midway between the umbilicus and the pubic symphysis, the posterior wall ends in a sharp crescentic free edge — the arcuate line, or linea semicircularis. Below it all three aponeuroses swing in front of the muscle. So the front wall becomes thick and the back of the muscle lies bare on transversalis fascia, extraperitoneal fat and peritoneum. Compare the two levels side by side: same muscle, two completely different answers to the same question."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "What is inside — and how it gets in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Inside the sheath",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:epigastric-vessels",
+          "path": [
+            "rectus_upper_end",
+            "sheath_posterior_surface",
+            "rectus_lower_end"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:thoracoabdominal-nerves",
+          "path": [
+            "transv_r",
+            "linea_semilunaris",
+            "rect_r"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Four things live in the sheath: rectus abdominis, pyramidalis, the epigastric vessels and the lower six thoracic nerves. The superior epigastric artery comes down from the internal thoracic artery and enters from above. The inferior epigastric artery comes up from the external iliac artery, crosses the arcuate line and runs upwards behind the muscle. They anastomose inside the sheath — a route that opens up when the aorta is narrowed. The nerves take a different door: they run in the plane between transversus and internal oblique, pierce the sheath at the lateral border, and enter the muscle from behind."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "Three clinical facts that fall out of the rule",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "linea_alba_m",
+          "intensity": 1
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "linea_alba_m",
+            "linea_semilunaris"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rect_r",
+          "to": "rect_l",
+          "kind": "two separate sheaths, never joined"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        }
+      ],
+      "narration": "First, the rectus sheath haematoma. The inferior epigastric artery tears on a sudden cough or after an injection into the sheath, and the blood is trapped. The lump is painful, does not cross the midline, and becomes more prominent — not less — when the patient tenses the abdomen and lifts the head off the bed. That is Fothergill's sign, and it is Carnett's sign applied to a lump. Second, the Spigelian hernia at the lateral border, where the sheath is weakest, hiding under an intact external oblique. Third, the incisions: the midline goes through the linea alba between two intact sheaths and cuts no muscle and no nerve, while a wide lateral incision divides nerve after nerve at the point where they were about to enter — which is why surgeons split muscle rather than cut across it."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no rectus sheath in the catalog as an object, and there never will be one: the sheath is the arrangement of three aponeuroses, not a body part with its own surface. This scene therefore teaches the sheath through the four models that actually make it — external oblique, internal oblique, transversus abdominis and the rectus they wrap — plus one measured contact where the external oblique genuinely touches the muscle. Every statement about front wall and back wall is a relationship between models that exist, not a model of the wall itself.",
+    "The ARCUATE LINE has no model. It is the free lower edge of the posterior wall — a line on a fascia — and its level is defined against the umbilicus, which is also absent from the catalog. Beats 3 and 4 therefore teach it by cutting the body at two levels and stating the rule at each, and no anchor is placed on the line itself. An anchor typed in by eye would put the words 'arcuate line' somewhere plausible and the student would believe it.",
+    "The three aponeuroses are not separable from their muscle bellies in the catalog: 'right external oblique' is one model covering muscle and aponeurosis together. So the scene can show that the external oblique reaches the rectus and lies in front of it, but it cannot show the aponeurotic sheet as a distinct surface, and it cannot show the internal oblique aponeurosis actually splitting into two laminae. That split is the single most examined fact about this region and it is carried entirely by narration and by SHOW_RELATIONSHIP.",
+    "Transversalis fascia, extraperitoneal fat and parietal peritoneum are all absent from the catalog. They are the posterior relations of the muscle below the arcuate line and the reason that region is thin, so they are named in narration at every level where they matter.",
+    "No vessel or nerve of the abdominal wall is in the catalog — not the superior or inferior epigastric arteries, not the thoracoabdominal nerves. Beat 5 traces both as declared concepts along structures that do exist. This is a real loss: the inferior epigastric artery is both the cause of the rectus sheath haematoma taught in beat 6 and the landmark that separates a direct from an indirect inguinal hernia.",
+    "The tendinous intersections have no model. They adhere to the anterior wall and not the posterior, which is why the six-pack is visible and why a haematoma above the umbilicus is compartmentalised while one below it spreads. Narration only.",
+    "Only right-sided models were on disk, so both anchors on the muscle and the landmark values in this scene were measured on the right side alone. The left rectus, both internal obliques, both transversi and the linea alba are all referenced here and are all in the catalog, but none was available to measure, and nothing was mirrored across the midline to fake a left-sided landmark.",
+    "All five anchors are measured extremes or contacts, each records how it was placed, and all five remain status 'needs-review' until a human clears them in-app."
+  ]
+}

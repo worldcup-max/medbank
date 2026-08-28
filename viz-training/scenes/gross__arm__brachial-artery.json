@@ -1,0 +1,712 @@
+{
+  "schema": 2,
+  "id": "gross__arm__brachial-artery",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Arm (Brachium)",
+  "structure": "Brachial artery",
+  "covers": [
+    "Brachial artery"
+  ],
+  "learning_goal": "Trace the brachial artery from the lower border of teres major to its division in the cubital fossa, name its branches in order, place the median nerve against it at every level, and say why a supracondylar fracture threatens the forearm.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "arm",
+      "brachium",
+      "upper limb",
+      "arterial supply of the upper limb",
+      "cubital fossa",
+      "elbow",
+      "axilla",
+      "blood pressure",
+      "vascular surgery"
+    ],
+    "terms": [
+      "brachial artery",
+      "axillary artery",
+      "lower border of teres major",
+      "medial bicipital groove",
+      "bicipital aponeurosis",
+      "cubital fossa",
+      "neck of the radius",
+      "radial artery",
+      "ulnar artery",
+      "profunda brachii",
+      "deep artery of the arm",
+      "arteria profunda brachii",
+      "radial groove",
+      "spiral groove",
+      "nutrient artery of the humerus",
+      "superior ulnar collateral artery",
+      "inferior ulnar collateral artery",
+      "muscular branches",
+      "anastomosis around the elbow",
+      "radial recurrent artery",
+      "ulnar recurrent artery",
+      "interosseous recurrent artery",
+      "median nerve",
+      "ulnar nerve",
+      "radial nerve",
+      "basilic vein",
+      "venae comitantes",
+      "brachial pulse",
+      "blood pressure cuff",
+      "supracondylar fracture of the humerus",
+      "Volkmann's ischaemic contracture",
+      "compartment syndrome",
+      "brachial artery ligation",
+      "My Blood Turns Red"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "teres_major",
+      "label": "Lower border of teres major",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "muscle",
+      "color": "#c07050",
+      "terms": [
+        "teres major",
+        "lower border of teres major",
+        "axillary artery"
+      ],
+      "narration": "The artery begins here. Above this line the same vessel is called the axillary artery. Nothing changes in the vessel itself — only the name."
+    },
+    {
+      "key": "humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "terms": [
+        "humerus",
+        "shaft of the humerus",
+        "medial supracondylar ridge",
+        "supracondylar region"
+      ],
+      "narration": "The artery lies on the medial side of the shaft, so the bone is behind it for most of the arm. That relation is what makes a supracondylar fracture dangerous."
+    },
+    {
+      "key": "biceps",
+      "label": "Biceps brachii",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "terms": [
+        "biceps brachii",
+        "medial bicipital groove",
+        "medial border of biceps",
+        "tendon of biceps"
+      ],
+      "narration": "Feel down the medial border of the biceps and you are following the artery. That groove is where you put your fingers for the brachial pulse."
+    },
+    {
+      "key": "brachialis",
+      "label": "Brachialis",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "muscle",
+      "color": "#b8503f",
+      "terms": [
+        "brachialis",
+        "floor of the cubital fossa",
+        "coracobrachialis",
+        "medial head of triceps"
+      ],
+      "narration": "In the lower arm the artery lies on brachialis, which becomes the floor of the cubital fossa. Higher up it lies on the medial head of triceps and then on coracobrachialis."
+    },
+    {
+      "key": "cubital_fossa",
+      "label": "Cubital fossa",
+      "role": "context",
+      "group": "Landmarks",
+      "layer": "fascia",
+      "color": "#cbbfa8",
+      "terms": [
+        "cubital fossa",
+        "elbow crease",
+        "interepicondylar line",
+        "neck of the radius",
+        "radial head"
+      ],
+      "narration": "The triangular hollow in front of the elbow. The artery enters it under the bicipital aponeurosis and ends inside it, at the level of the neck of the radius."
+    },
+    {
+      "key": "aponeurosis",
+      "label": "Bicipital aponeurosis",
+      "role": "part",
+      "group": "Relations",
+      "layer": "fascia",
+      "color": "#d8cdb4",
+      "terms": [
+        "bicipital aponeurosis",
+        "lacertus fibrosus",
+        "median cubital vein"
+      ],
+      "narration": "A sheet from the biceps tendon that crosses the fossa and roofs the artery. It separates the artery from the median cubital vein in front of it, which is why a needle in that vein does not usually hit the artery."
+    },
+    {
+      "key": "seg_upper",
+      "label": "Upper third — medial to the humerus",
+      "role": "part",
+      "group": "Course",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "upper third of the brachial artery",
+        "medial to the humerus",
+        "median nerve lateral"
+      ],
+      "narration": "It starts medial to the bone, lying in the medial bicipital groove. Here the median nerve is lateral to the artery."
+    },
+    {
+      "key": "seg_middle",
+      "label": "Middle third — the nerve crosses",
+      "role": "part",
+      "group": "Course",
+      "layer": "vessel",
+      "color": "#b03030",
+      "terms": [
+        "middle third of the brachial artery",
+        "median nerve crosses",
+        "lateral to medial"
+      ],
+      "narration": "In the middle of the arm the median nerve crosses in front of the artery from lateral to medial. This crossing is the single most asked relation in the whole topic."
+    },
+    {
+      "key": "seg_lower",
+      "label": "Lower third — in front of the elbow",
+      "role": "part",
+      "group": "Course",
+      "layer": "vessel",
+      "color": "#a02828",
+      "terms": [
+        "lower third of the brachial artery",
+        "median nerve medial",
+        "cubital fossa"
+      ],
+      "narration": "By the elbow the artery has come to the front and the median nerve lies medial to it. It ends about one finger's breadth below the elbow crease."
+    },
+    {
+      "key": "br_profunda",
+      "label": "Profunda brachii",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "profunda brachii",
+        "deep artery of the arm",
+        "radial groove",
+        "spiral groove",
+        "radial nerve",
+        "radial collateral artery",
+        "middle collateral artery"
+      ],
+      "narration": "The first and largest branch. It leaves near the beginning and runs with the radial nerve in the radial groove behind the humerus. A mid-shaft fracture can take both."
+    },
+    {
+      "key": "br_nutrient",
+      "label": "Nutrient artery of the humerus",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "nutrient artery of the humerus",
+        "nutrient foramen",
+        "directed away from the growing end"
+      ],
+      "narration": "A single small vessel entering the nutrient foramen near the middle of the shaft. It runs downwards, away from the growing end of the bone."
+    },
+    {
+      "key": "br_sup_ulnar_collateral",
+      "label": "Superior ulnar collateral artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "superior ulnar collateral artery",
+        "ulnar nerve",
+        "medial intermuscular septum",
+        "behind the medial epicondyle"
+      ],
+      "narration": "It pierces the medial intermuscular septum and travels with the ulnar nerve behind the medial epicondyle. Where you find one, you find the other."
+    },
+    {
+      "key": "br_inf_ulnar_collateral",
+      "label": "Inferior ulnar collateral artery",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e07b5a",
+      "terms": [
+        "inferior ulnar collateral artery",
+        "supratrochlear artery",
+        "anastomosis around the elbow"
+      ],
+      "narration": "A small branch just above the elbow that joins the network in front of the joint."
+    },
+    {
+      "key": "br_muscular",
+      "label": "Muscular branches",
+      "role": "part",
+      "group": "Branches",
+      "layer": "vessel",
+      "color": "#e8927a",
+      "terms": [
+        "muscular branches",
+        "biceps",
+        "brachialis",
+        "coracobrachialis"
+      ],
+      "narration": "Unnamed branches to the muscles of the front of the arm. They are not examined by name, but they are why the arm survives a slow occlusion."
+    },
+    {
+      "key": "end_radial",
+      "label": "Radial artery",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "radial artery",
+        "smaller terminal branch",
+        "radial pulse",
+        "anatomical snuffbox"
+      ],
+      "narration": "The smaller of the two, though it looks like the straight continuation. It runs down the lateral side of the forearm to the wrist, where you feel the radial pulse."
+    },
+    {
+      "key": "end_ulnar",
+      "label": "Ulnar artery",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "ulnar artery",
+        "larger terminal branch",
+        "common interosseous artery",
+        "superficial palmar arch"
+      ],
+      "narration": "The larger of the two. It dives deep under the flexor muscles and gives the common interosseous artery, then ends as the superficial palmar arch in the hand."
+    },
+    {
+      "key": "median_nerve",
+      "label": "Median nerve",
+      "role": "part",
+      "group": "Relations",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "median nerve",
+        "lateral then medial",
+        "crosses in front of the artery"
+      ],
+      "narration": "The nerve that travels with the artery the whole way down the arm. Lateral above, in front in the middle, medial below."
+    },
+    {
+      "key": "ulnar_nerve",
+      "label": "Ulnar nerve",
+      "role": "part",
+      "group": "Relations",
+      "layer": "nerve",
+      "color": "#4a90d9",
+      "terms": [
+        "ulnar nerve",
+        "medial intermuscular septum",
+        "posterior compartment",
+        "medial epicondyle"
+      ],
+      "narration": "It begins beside the artery but leaves it halfway down, piercing the medial intermuscular septum to reach the back of the arm. So below mid-arm the ulnar nerve is no longer a relation of this artery."
+    },
+    {
+      "key": "venae",
+      "label": "Venae comitantes & basilic vein",
+      "role": "part",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#3a5fa0",
+      "terms": [
+        "venae comitantes",
+        "brachial veins",
+        "basilic vein",
+        "axillary vein"
+      ],
+      "narration": "Two small veins run one on each side of the artery and are joined by cross branches. The basilic vein joins them at the lower border of teres major to become the axillary vein."
+    },
+    {
+      "key": "elbow_anastomosis",
+      "label": "Anastomosis around the elbow",
+      "role": "part",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#7a3f8a",
+      "terms": [
+        "anastomosis around the elbow",
+        "collateral arteries",
+        "recurrent arteries",
+        "radial recurrent artery",
+        "anterior ulnar recurrent artery",
+        "posterior ulnar recurrent artery",
+        "interosseous recurrent artery",
+        "collateral circulation"
+      ],
+      "narration": "Four collateral arteries coming down meet four recurrent arteries coming up, in front of and behind the epicondyles. This network is what allows the artery to be tied above the elbow and the forearm to live."
+    },
+    {
+      "key": "clinical_pulse",
+      "label": "Brachial pulse & blood pressure",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "vessel",
+      "color": "#a83232",
+      "terms": [
+        "brachial pulse",
+        "blood pressure",
+        "sphygmomanometer",
+        "medial to the biceps tendon",
+        "Korotkoff sounds",
+        "infant CPR"
+      ],
+      "narration": "Press the artery against the humerus in the medial bicipital groove and you feel it. In the cubital fossa it lies medial to the biceps tendon — that is where the stethoscope goes when you take a blood pressure."
+    },
+    {
+      "key": "clinical_volkmann",
+      "label": "Supracondylar fracture & Volkmann's contracture",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "vessel",
+      "color": "#a83232",
+      "terms": [
+        "supracondylar fracture of the humerus",
+        "Volkmann's ischaemic contracture",
+        "compartment syndrome",
+        "pain on passive extension",
+        "flexor compartment",
+        "claw hand deformity",
+        "children"
+      ],
+      "narration": "A child falls on the outstretched hand and the sharp lower fragment tears or presses the artery in front of it. The flexor compartment loses its blood, the muscle dies and shortens, and the hand is pulled into a fixed claw. Pain on passive extension of the fingers is the early sign — not the absent pulse, which comes late."
+    },
+    {
+      "key": "coracobrachialis",
+      "label": "Coracobrachialis",
+      "role": "context",
+      "group": "Relations",
+      "layer": "muscle",
+      "color": "#b8503f",
+      "terms": [
+        "coracobrachialis",
+        "musculocutaneous nerve"
+      ],
+      "narration": "The second of the three muscles behind the artery in the upper arm. The musculocutaneous nerve pierces it, which is how that nerve leaves the axilla."
+    },
+    {
+      "key": "triceps_medial",
+      "label": "Triceps — medial head",
+      "role": "context",
+      "group": "Relations",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "terms": [
+        "triceps brachii",
+        "medial head of triceps"
+      ],
+      "narration": "The first of the three behind the artery. Highest up, the artery lies on it before coracobrachialis and then brachialis take over as the floor."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Where it starts and where it stops",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Landmarks",
+          "intensity": 0.6
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial_blood",
+          "path": [
+            "teres_major",
+            "seg_upper",
+            "seg_middle",
+            "seg_lower",
+            "end_radial",
+            "end_ulnar"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The brachial artery is the axillary artery with a new name. It begins at the lower border of teres major and ends in the cubital fossa at the level of the neck of the radius, about a finger's breadth below the elbow crease. There it divides into the radial and ulnar arteries. Two landmarks, one at each end — learn them as a pair."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "It travels from medial to anterior",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Course"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "biceps"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "brachialis"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_upper",
+          "to": "humerus",
+          "kind": "lies medial to"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_lower",
+          "to": "brachialis",
+          "kind": "lies on"
+        }
+      ],
+      "narration": "It starts on the medial side of the arm and works its way forward as it descends. The whole way down it lies in the medial bicipital groove, along the medial border of the biceps. Behind it are three muscles in order: the medial head of triceps, then coracobrachialis, then brachialis."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "The median nerve crosses in front",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Course"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "median_nerve"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "median_nerve",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "median_nerve",
+          "path": [
+            "seg_upper",
+            "seg_middle",
+            "seg_lower"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "median_nerve",
+          "to": "seg_middle",
+          "kind": "crosses in front of"
+        }
+      ],
+      "narration": "Follow the median nerve down beside the artery. In the upper arm it is lateral. In the middle of the arm it crosses in front of the artery. In the lower arm it is medial. Lateral, front, medial — say it in that order and you have answered the commonest question on this vessel."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The branches in order",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Course"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_upper",
+          "to": "br_profunda",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_middle",
+          "to": "br_nutrient",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_middle",
+          "to": "br_sup_ulnar_collateral",
+          "kind": "gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "seg_lower",
+          "to": "br_inf_ulnar_collateral",
+          "kind": "gives"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "br_profunda",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "From above down: profunda brachii, nutrient artery, superior ulnar collateral, inferior ulnar collateral, plus unnamed muscular branches. Two of them carry a nerve with them. The profunda brachii runs with the radial nerve in the radial groove, and the superior ulnar collateral runs with the ulnar nerve behind the medial epicondyle. Learn the branch and you have learnt the nerve."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "What lies with it in the cubital fossa",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "cubital_fossa"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "seg_lower"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "biceps"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "seg_lower",
+            "median_nerve"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Take the bicipital aponeurosis off the front of the fossa and the contents lie in a row. From medial to lateral: median nerve, brachial artery, tendon of biceps, radial nerve. My Blood Turns Red. The artery is the middle of the three you can name by touch, and it is always medial to the biceps tendon."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "Why the forearm survives a ligature",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Course"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Terminal branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "elbow_anastomosis"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "elbow_anastomosis",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral_flow",
+          "path": [
+            "seg_middle",
+            "br_sup_ulnar_collateral",
+            "elbow_anastomosis",
+            "end_ulnar"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "Four collateral branches come down to the elbow and four recurrent branches come up to meet them. Blood can therefore reach the forearm without passing through the lower brachial artery. That is why the vessel may be tied below the origin of the profunda brachii and the limb still lives, and why a slowly narrowing artery gives no symptoms at all."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "Where you press it and where it breaks",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Course"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "humerus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical_volkmann",
+          "to": "seg_lower",
+          "kind": "injures"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical_pulse",
+          "to": "seg_middle",
+          "kind": "palpated at"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clinical_volkmann",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Two clinical facts come from the same relation. Because the artery lies on the front of the bone, you can press it there to feel the pulse and to hear the blood pressure. And because it lies on the front of the bone, the sharp fragment of a supracondylar fracture can catch it. Watch that child for pain on passive extension of the fingers — the pulse can still be present while the compartment is dying."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no brachial artery and none of its branches — searching it for brachial, profunda, collateral, recurrent, radial artery and ulnar artery returns nothing at all. The nearest arterial models in the whole upper limb are the right and left subclavian arteries, which are two name-changes proximal to this vessel and cannot stand in for it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day upper-limb vessel models exist, with no curriculum edit.",
+    "Status is 'planned', not 'ready'. Structures, seven beats, ops and narration are fully authored, but no artwork has been drawn for the SVG engine, so nothing renders today. Promote to 'ready' once the arm-and-cubital-fossa artwork exists with the labelled regions this scene names and the engine can play the seven beats.",
+    "The humerus, biceps and brachialis are authored as context regions of the diagram even though the humerus, both heads of biceps and the triceps heads DO exist as models in the catalog. Mixing a real bone model into an otherwise drawn vessel diagram was rejected: the teaching here is the course and the branching, and half a 3D scene would teach neither well. When the vessels arrive the whole scene converts at once.",
+    "The whole muscle bed the artery lies on DOES exist in the catalog — right brachialis, right coracobrachialis, the three triceps heads and the two biceps heads are all present, as are the humerus, radius and ulna. So the only thing missing from a 3D version of this scene is the subject itself: every muscle, every bone and every relation could be shown, and the artery could not. That is worth recording precisely, because it means this scene converts to 3d_anatomy the moment a single vessel model arrives, with no other resolution work needed.",
+    "The four collateral and four recurrent arteries of the elbow are drawn as one labelled anastomosis region rather than as eight separate vessels. Beat 6 teaches the principle of collateral flow and the safe level of ligation; a vessel-by-vessel diagram of the elbow network belongs with the forearm topic, not here.",
+    "PEEL_LAYER in beat 5 is authored because the teaching move is to lift the bicipital aponeurosis and read the contents of the cubital fossa underneath. On drawn artwork the engine will reveal the layer rather than remove geometry, which is the intended degradation.",
+    "The 'Clinical' group holds two clinical pictures rather than anatomical structures, following the pattern already set by the brachial plexus scene's 'Lesions' group. A renderer that treats every structure as strictly anatomical will need to accept these as annotation regions."
+  ]
+}

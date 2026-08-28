@@ -1,0 +1,783 @@
+{
+  "schema": 2,
+  "id": "embryology__weeks-1-2-implantation-bilaminar-disc__chorion-placenta-early",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Weeks 1-2: Implantation & Bilaminar Disc",
+  "structure": "Chorion & placenta (early)",
+  "covers": [
+    "Chorion & placenta (early)"
+  ],
+  "learning_goal": "Define the chorion by its three layers, build a villus from primary to tertiary and say what each stage adds, explain why the placenta is a maternal blood lake rather than a mixing of circulations, list the layers of the barrier and the four ways things cross it, and name what goes wrong when trophoblast invades too little or too much.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "chorion",
+      "placenta",
+      "chorionic villi",
+      "week 2",
+      "week 3",
+      "fetal membranes",
+      "maternal-fetal exchange",
+      "early pregnancy",
+      "antenatal care"
+    ],
+    "terms": [
+      "chorion",
+      "chorionic cavity",
+      "extraembryonic coelom",
+      "somatic mesoderm",
+      "extraembryonic somatic mesoderm",
+      "cytotrophoblast",
+      "syncytiotrophoblast",
+      "trophoblast",
+      "lacunae",
+      "trophoblastic lacunae",
+      "primary villus",
+      "primary chorionic villus",
+      "secondary villus",
+      "tertiary villus",
+      "definitive villus",
+      "day 13",
+      "day 16",
+      "day 21",
+      "week 3",
+      "cytotrophoblastic shell",
+      "anchoring villi",
+      "floating villi",
+      "free villi",
+      "intervillous space",
+      "chorion frondosum",
+      "chorion laeve",
+      "smooth chorion",
+      "villous chorion",
+      "decidua",
+      "decidua basalis",
+      "decidua capsularis",
+      "decidua parietalis",
+      "decidual reaction",
+      "spiral arteries",
+      "spiral artery remodelling",
+      "extravillous trophoblast",
+      "low resistance",
+      "uteroplacental circulation",
+      "pre-eclampsia",
+      "preeclampsia",
+      "intrauterine growth restriction",
+      "IUGR",
+      "placental barrier",
+      "placental membrane",
+      "vasculosyncytial membrane",
+      "fetal capillary endothelium",
+      "simple diffusion",
+      "facilitated diffusion",
+      "active transport",
+      "pinocytosis",
+      "IgG",
+      "passive immunity",
+      "TORCH",
+      "rubella",
+      "syphilis",
+      "toxoplasma",
+      "HIV",
+      "thalidomide",
+      "alcohol",
+      "fetal alcohol syndrome",
+      "Rh isoimmunisation",
+      "anti-D",
+      "hCG",
+      "human chorionic gonadotropin",
+      "corpus luteum",
+      "pregnancy test",
+      "hPL",
+      "human placental lactogen",
+      "progesterone",
+      "oestrogen",
+      "estrogen",
+      "cotyledons",
+      "maternal surface",
+      "fetal surface",
+      "umbilical cord",
+      "chorionic villus sampling",
+      "CVS",
+      "hydatidiform mole",
+      "complete mole",
+      "partial mole",
+      "molar pregnancy",
+      "choriocarcinoma",
+      "gestational trophoblastic disease",
+      "snowstorm appearance",
+      "placenta praevia",
+      "placenta accreta",
+      "chorionicity",
+      "dichorionic",
+      "monochorionic"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "chorion_definition",
+      "label": "Chorion — three layers, in order",
+      "role": "part",
+      "group": "What the chorion is",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "chorion",
+        "chorionic cavity",
+        "extraembryonic coelom",
+        "somatic mesoderm",
+        "extraembryonic somatic mesoderm",
+        "cytotrophoblast",
+        "syncytiotrophoblast",
+        "wall of the chorionic cavity",
+        "day 12",
+        "day 13"
+      ],
+      "narration": "The chorion is not a new tissue. It is the wall of the chorionic cavity, and it has exactly three layers. From the inside out: extraembryonic somatic mesoderm, then cytotrophoblast, then syncytiotrophoblast. Write those three in that order and you have answered the commonest short question in this topic. Everything the placenta later does happens in the outer two layers; the mesoderm is what brings the fetal vessels in."
+    },
+    {
+      "key": "decidua",
+      "label": "Decidua — the mother's side of the arrangement",
+      "role": "part",
+      "group": "What the chorion is",
+      "layer": "organ",
+      "color": "#cd6155",
+      "terms": [
+        "decidua",
+        "decidual reaction",
+        "endometrium",
+        "glycogen",
+        "lipid",
+        "decidua basalis",
+        "decidua capsularis",
+        "decidua parietalis",
+        "shed at birth"
+      ],
+      "narration": "The endometrium the conceptus has buried itself in changes too. Its stromal cells swell with glycogen and lipid — the decidual reaction — and the whole layer is now called decidua, because it is shed at delivery. Learn the three parts by position: basalis lies deep to the conceptus and becomes the maternal side of the placenta, capsularis is the thin roof stretched over it, and parietalis lines the rest of the cavity. As the sac grows, capsularis meets parietalis and the uterine cavity is obliterated."
+    },
+    {
+      "key": "frondosum_laeve",
+      "label": "Chorion frondosum and chorion laeve",
+      "role": "part",
+      "group": "What the chorion is",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "chorion frondosum",
+        "villous chorion",
+        "chorion laeve",
+        "smooth chorion",
+        "embryonic pole",
+        "abembryonic",
+        "decidua basalis",
+        "decidua capsularis",
+        "fetal placenta",
+        "amniochorionic membrane"
+      ],
+      "narration": "At first villi cover the whole chorionic sac. They then survive only where the blood supply is good — at the embryonic pole, against the decidua basalis. That bushy area is the chorion frondosum and it becomes the fetal part of the placenta. Everywhere else the villi wither and the chorion goes bald: chorion laeve, the smooth chorion, which fuses with the amnion to become the membranes. So the placenta is discoid because the villi died everywhere except one patch."
+    },
+    {
+      "key": "lacunae",
+      "label": "Lacunae — the blood lake opens first",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "trophoblastic lacunae",
+        "syncytiotrophoblast",
+        "day 9",
+        "day 11",
+        "day 12",
+        "maternal sinusoids",
+        "eroded",
+        "maternal blood",
+        "uteroplacental circulation",
+        "intervillous space"
+      ],
+      "narration": "Before any villus exists, spaces open inside the syncytiotrophoblast. Around day eleven to twelve the syncytium erodes maternal capillaries and those spaces fill with maternal blood. That is the beginning of the uteroplacental circulation, and it explains the shape of everything that follows: the villi are not plugged into maternal vessels, they are dipped into a lake of maternal blood."
+    },
+    {
+      "key": "primary_villus",
+      "label": "Primary villus — a cytotrophoblast core",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "primary villus",
+        "primary chorionic villus",
+        "day 13",
+        "cytotrophoblast core",
+        "syncytiotrophoblast covering",
+        "two layers",
+        "no mesoderm"
+      ],
+      "narration": "Around day thirteen, cytotrophoblast pushes finger-like cords into the syncytium. A core of cytotrophoblast covered by syncytiotrophoblast — two layers, nothing inside. That is a primary villus. It can absorb nothing usefully because there is no vessel anywhere near it."
+    },
+    {
+      "key": "secondary_villus",
+      "label": "Secondary villus — mesoderm moves in",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#d68910",
+      "terms": [
+        "secondary villus",
+        "day 16",
+        "week 3",
+        "extraembryonic mesoderm core",
+        "three layers",
+        "mesenchyme"
+      ],
+      "narration": "By about day sixteen, extraembryonic mesoderm grows into the core of each villus. Now there are three layers — mesoderm inside, cytotrophoblast, syncytiotrophoblast. That is a secondary villus. Still no exchange, but the tissue that can make vessels has arrived."
+    },
+    {
+      "key": "tertiary_villus",
+      "label": "Tertiary villus — vessels appear and exchange begins",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#b9770e",
+      "terms": [
+        "tertiary villus",
+        "definitive villus",
+        "day 21",
+        "end of week 3",
+        "capillaries",
+        "fetal vessels",
+        "umbilical vessels",
+        "exchange begins",
+        "circulation established"
+      ],
+      "narration": "By the end of week three the mesodermal core has formed capillaries, and those capillaries link up with vessels forming in the connecting stalk and the embryo. A villus with a vessel in it is a tertiary, or definitive, villus, and only now can anything be exchanged. Primary, secondary, tertiary — core of cytotrophoblast, core of mesoderm, core with vessels. That progression is asked almost every year."
+    },
+    {
+      "key": "shell_anchoring",
+      "label": "Cytotrophoblastic shell, anchoring and floating villi",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#7d6608",
+      "terms": [
+        "cytotrophoblastic shell",
+        "anchoring villi",
+        "stem villi",
+        "floating villi",
+        "free villi",
+        "intervillous space",
+        "decidua basalis",
+        "surface area"
+      ],
+      "narration": "Some villi run right across the lake and plant themselves in the decidua; their cytotrophoblast spreads out sideways to form a continuous cytotrophoblastic shell against the maternal tissue. Those are anchoring villi, and they hold the placenta on. The rest hang free in the maternal blood as floating villi, and they are where exchange actually happens. Anchoring for attachment, floating for exchange — one word each."
+    },
+    {
+      "key": "intervillous_space",
+      "label": "Intervillous space — two circulations that never mix",
+      "role": "part",
+      "group": "How a villus is built",
+      "layer": "organ",
+      "color": "#922b21",
+      "terms": [
+        "intervillous space",
+        "maternal blood",
+        "fetal blood",
+        "never mix",
+        "bathed",
+        "spiral arteries",
+        "endometrial veins",
+        "haemochorial",
+        "hemochorial",
+        "counter-current"
+      ],
+      "narration": "The lacunae run together into one continuous intervillous space. Maternal blood spurts in from spiral arteries, washes over the villi, and drains into endometrial veins. Fetal blood stays inside the villous capillaries throughout. The two circulations come within a few micrometres of each other and never mix — which is why a human placenta is called haemochorial, and why a fetus can have a different blood group from its mother without either of them knowing."
+    },
+    {
+      "key": "spiral_arteries",
+      "label": "Spiral artery remodelling — the step that fails",
+      "role": "part",
+      "group": "Making room for blood",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "spiral arteries",
+        "spiral artery remodelling",
+        "extravillous trophoblast",
+        "endovascular trophoblast",
+        "smooth muscle replaced",
+        "low resistance",
+        "high flow",
+        "first wave",
+        "second wave",
+        "pre-eclampsia",
+        "preeclampsia",
+        "IUGR",
+        "intrauterine growth restriction",
+        "uterine artery Doppler",
+        "notching"
+      ],
+      "narration": "Trophoblast does not only build villi. Extravillous trophoblast invades the maternal spiral arteries and strips out their smooth muscle, converting narrow, contractile, high-resistance vessels into wide floppy tubes that pour blood into the intervillous space regardless of maternal vascular tone. If that invasion is shallow, the arteries stay narrow and reactive, the placenta is underperfused, and the result is pre-eclampsia and growth restriction. A single embryological step in the first half of pregnancy explains the commonest serious obstetric disease you will see."
+    },
+    {
+      "key": "placental_barrier",
+      "label": "The placental barrier and how it thins",
+      "role": "part",
+      "group": "Crossing the barrier",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "placental barrier",
+        "placental membrane",
+        "four layers",
+        "syncytiotrophoblast",
+        "cytotrophoblast",
+        "villous mesenchyme",
+        "connective tissue",
+        "fetal capillary endothelium",
+        "week 20",
+        "thins",
+        "vasculosyncytial membrane",
+        "two layers"
+      ],
+      "narration": "Early on, four layers separate the two bloods: syncytiotrophoblast, cytotrophoblast, the mesenchyme of the villus, and the fetal capillary endothelium. From about the twentieth week the cytotrophoblast largely disappears and the mesenchyme thins, so at term much of the barrier is little more than syncytiotrophoblast pressed against endothelium — the vasculosyncytial membrane. The barrier gets thinner as the fetus grows, which is exactly when its demands are highest."
+    },
+    {
+      "key": "exchange_mechanisms",
+      "label": "Four ways across",
+      "role": "part",
+      "group": "Crossing the barrier",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "simple diffusion",
+        "oxygen",
+        "carbon dioxide",
+        "water",
+        "urea",
+        "facilitated diffusion",
+        "glucose",
+        "GLUT",
+        "active transport",
+        "amino acids",
+        "iron",
+        "calcium",
+        "vitamins",
+        "pinocytosis",
+        "receptor-mediated",
+        "IgG",
+        "passive immunity"
+      ],
+      "narration": "Group everything that crosses by its mechanism and the list stops being memory work. Simple diffusion for gases, water, urea and most drugs — down the gradient, no carrier. Facilitated diffusion for glucose, which is why fetal glucose tracks maternal glucose so closely in diabetes. Active transport, against the gradient, for amino acids, iron, calcium and water-soluble vitamins — so the fetus takes iron even from an anaemic mother. And pinocytosis for maternal IgG, which is the fetus's only inherited immunity and the reason a newborn is protected for the first few months."
+    },
+    {
+      "key": "what_crosses_harmfully",
+      "label": "The barrier is not a filter",
+      "role": "part",
+      "group": "Crossing the barrier",
+      "layer": "organ",
+      "color": "#34495e",
+      "terms": [
+        "TORCH",
+        "toxoplasma",
+        "rubella",
+        "cytomegalovirus",
+        "herpes",
+        "syphilis",
+        "HIV",
+        "hepatitis B",
+        "malaria",
+        "placental malaria",
+        "thalidomide",
+        "alcohol",
+        "fetal alcohol syndrome",
+        "warfarin",
+        "tetracycline",
+        "nicotine",
+        "Rh isoimmunisation",
+        "anti-D",
+        "teratogen"
+      ],
+      "narration": "Calling it a barrier misleads students every year. It is a selective exchange surface, and small lipid-soluble molecules cross it freely. Alcohol, nicotine, most drugs and many organisms get through — the TORCH group, syphilis, HIV, hepatitis B, and in this region malaria, which sequesters in the intervillous space and causes low birth weight. Fetal red cells can also leak the other way and immunise a rhesus-negative mother, which is what anti-D prophylaxis exists to prevent. Nothing about the anatomy stops these things; that is why the drug history matters in antenatal clinic."
+    },
+    {
+      "key": "placenta_endocrine",
+      "label": "The placenta as an endocrine gland",
+      "role": "part",
+      "group": "The placenta at work",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "terms": [
+        "hCG",
+        "human chorionic gonadotropin",
+        "syncytiotrophoblast",
+        "corpus luteum",
+        "progesterone",
+        "pregnancy test",
+        "doubling time",
+        "peaks week 8",
+        "week 10",
+        "hPL",
+        "human placental lactogen",
+        "insulin resistance",
+        "gestational diabetes",
+        "oestrogen",
+        "estrogen",
+        "luteoplacental shift"
+      ],
+      "narration": "The syncytiotrophoblast is a gland from the moment it forms. It makes human chorionic gonadotropin, which keeps the corpus luteum alive so progesterone does not fall and the endometrium is not shed. That hormone is what a pregnancy test detects, it roughly doubles every couple of days early on, and it peaks around weeks eight to ten before falling as the placenta takes over steroid production itself. It also makes human placental lactogen, which pushes the mother towards insulin resistance so glucose is spared for the fetus — the reason gestational diabetes exists at all."
+    },
+    {
+      "key": "early_clinical",
+      "label": "Where this shows up in a clinic",
+      "role": "part",
+      "group": "The placenta at work",
+      "layer": "organ",
+      "color": "#616a6b",
+      "terms": [
+        "chorionic villus sampling",
+        "CVS",
+        "week 10",
+        "week 13",
+        "karyotype",
+        "hydatidiform mole",
+        "complete mole",
+        "partial mole",
+        "molar pregnancy",
+        "snowstorm appearance",
+        "grape-like vesicles",
+        "very high hCG",
+        "choriocarcinoma",
+        "gestational trophoblastic disease",
+        "placenta praevia",
+        "placenta accreta",
+        "chorionicity",
+        "dichorionic",
+        "monochorionic",
+        "lambda sign",
+        "T sign"
+      ],
+      "narration": "Four uses. Chorionic villus sampling takes fetal-origin tissue from the chorion frondosum at about ten to thirteen weeks, earlier than amniocentesis, at the price of a slightly higher loss rate. Trophoblast that proliferates without a normal embryo gives a hydatidiform mole — grape-like vesicles, a snowstorm on scan, and a very high hCG — which can progress to choriocarcinoma, so hCG is followed until it is undetectable. Where the chorion frondosum implants determines placenta praevia, and how deeply it invades determines accreta. And in twins, whether there is one chorion or two decides the risk, which is why chorionicity is settled on the first scan and not later."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Define the chorion before anything else",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the chorion is"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "chorion_definition",
+          "intensity": 0.95
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Cut the wall of the chorionic cavity and count outwards: somatic mesoderm, cytotrophoblast, syncytiotrophoblast. Three layers, that order. Students lose marks here by naming two of the three or by putting the cytotrophoblast outside — it is always the inner of the two trophoblast layers, because the syncytium is the part that faces the mother and does the invading."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Villi survive on one side only",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the chorion is"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "frondosum_laeve",
+            "decidua"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "frondosum_laeve",
+          "to": "decidua",
+          "kind": "villi persist against the basalis, wither under the capsularis"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Pair each chorion with the decidua it faces. Frondosum against basalis: good supply, villi flourish, and together they become the placenta. Laeve against capsularis: poor supply, villi wither, and it becomes the smooth membrane. That pairing answers the question about why the placenta is a disc rather than a shell."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The lake fills before the villi grow",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How a villus is built"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lacunae",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lacunae",
+          "to": "intervillous_space",
+          "kind": "run together into one continuous space"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "What the chorion is"
+        }
+      ],
+      "narration": "Get the order right. Spaces open in the syncytiotrophoblast around day nine, and by day eleven or twelve they have eroded maternal vessels and filled with maternal blood. Only then do villi grow into them. The placenta is built by dipping fetal fingers into a maternal pool that already exists — not by joining two sets of vessels together."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Primary, secondary, tertiary",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How a villus is built"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:villus-maturation",
+          "path": [
+            "primary_villus",
+            "secondary_villus",
+            "tertiary_villus"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "primary_villus",
+            "secondary_villus",
+            "tertiary_villus"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Three stages, one week apart, each adding a layer to the core. Day thirteen: cytotrophoblast core, syncytium outside — primary. Day sixteen: mesoderm invades the core — secondary. Day twenty-one: capillaries form in that mesoderm and connect to the embryo — tertiary. Exchange starts at the third stage and not before, so the fetal circulation and the placental circulation come on line together at the end of week three."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Anchored villi and floating villi",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "How a villus is built"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "shell_anchoring",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "shell_anchoring",
+          "to": "intervillous_space",
+          "kind": "one kind holds on, the other hangs in the blood"
+        }
+      ],
+      "narration": "Cut across the young placenta. Villi that reach the decidua and spread a cytotrophoblastic shell along it are anchoring villi — they are the attachment. Villi that end free in the maternal blood are the working surface. Exchange is a function of how much floating villus is bathed, which is why placental disease is usually a disease of surface area or of perfusion."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Two circulations, close but separate",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "How a villus is built"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "intervillous_space",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:maternal-blood",
+          "path": [
+            "spiral_arteries",
+            "intervillous_space",
+            "tertiary_villus"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "Follow maternal blood: in through a spiral artery, into the intervillous space, over the surface of the villi, out through an endometrial vein. Follow fetal blood and it never leaves the villous capillary. They are separated by a few micrometres of tissue and they do not mix. Say that explicitly in an answer — the mark is usually for the word 'never'."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The arteries are rebuilt, and sometimes are not",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Making room for blood"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "intervillous_space"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spiral_arteries",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spiral_arteries",
+          "to": "intervillous_space",
+          "kind": "converted to wide low-resistance channels"
+        }
+      ],
+      "narration": "Extravillous trophoblast burrows into the maternal spiral arteries and destroys their muscular walls, turning them into wide passive tubes. That is what guarantees flow into the intervillous space no matter what the mother's blood pressure is doing. When the invasion is shallow the vessels stay narrow and reactive, the placenta is chronically underperfused, and the clinical result is pre-eclampsia with growth restriction. This is the single most useful embryological fact in obstetrics."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "The layers between the two bloods",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Crossing the barrier"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.2,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "placental_barrier",
+          "intensity": 0.95
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Cut one villus across and count inwards: syncytiotrophoblast, cytotrophoblast, villous mesenchyme, fetal capillary endothelium. Four layers early, and from about week twenty the middle two largely vanish, leaving syncytium on endothelium. Draw both versions — the early four-layer villus and the term two-layer one — because the question is usually about why the barrier thins as pregnancy goes on."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "What crosses, and by which route",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Crossing the barrier"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "exchange_mechanisms",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "exchange_mechanisms",
+            "what_crosses_harmfully"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "placental_barrier",
+          "to": "what_crosses_harmfully",
+          "kind": "selective, not protective"
+        }
+      ],
+      "narration": "Four mechanisms carry everything useful: diffusion for gases, facilitated transport for glucose, active transport for amino acids and iron, pinocytosis for IgG. The same surface lets through alcohol, nicotine, most drugs, and organisms including rubella, syphilis, HIV, hepatitis B and malaria. It is an exchange surface with preferences, not a wall — teaching it as a barrier is what leaves students surprised by fetal alcohol syndrome."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 10,
+      "title": "A gland, a sample, and a tumour",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The placenta at work"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "frondosum_laeve"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "placenta_endocrine",
+          "to": "early_clinical",
+          "kind": "the hormone that is measured, and what raises it"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "frondosum_laeve",
+          "to": "early_clinical",
+          "kind": "the tissue that is sampled"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "End with the four things a house officer uses. The syncytiotrophoblast makes hCG, which rescues the corpus luteum and is what the pregnancy test measures. The chorion frondosum is the tissue taken at chorionic villus sampling from about ten weeks. Trophoblast growing without a viable embryo gives a molar pregnancy with a very high hCG and a snowstorm on scan, followed up until the hormone is undetectable because of the risk of choriocarcinoma. And where and how deeply the frondosum implants decides praevia and accreta. All of it follows from the two trophoblast layers described in the first beat."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option; the subject is a staged process with no mesh at this scale. Only diagram is deferred. The curriculum asks for associated_organs and mechanism views; beats 2, 9 and 10 supply the first and beats 3, 4, 6 and 7 the second.",
+    "Status is 'planned'. Sixteen regions, ten beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a cut through the chorionic wall labelled with its three layers in order; a whole-sac panel showing frondosum against decidua basalis and laeve against capsularis; a three-panel villus maturation strip drawn at the same magnification so the added core is the only thing that changes; a cut placenta showing anchoring villi reaching the cytotrophoblastic shell and floating villi in the intervillous space with spiral arteries entering and veins leaving; and a single villus cut across with the four barrier layers, plus a term version with two.",
+    "The villus maturation strip in beat 4 must be drawn at one magnification across all three panels. Redrawing each stage larger to fit its label would make the villus appear to grow rather than to gain a core, which inverts the only point of the beat.",
+    "Beats 4 and 6 trace concepts rather than objects: concept:villus-maturation is a change of composition over eight days, and concept:maternal-blood is a fluid, not a modelled structure. Both are declared abstractions the renderer walks without lighting a subject.",
+    "'Amniotic cavity & yolk sac' is a SEPARATE curriculum entry authored in the same run and is NOT claimed here. The chorionic cavity appears in that scene as the space the amnion obliterates; the amnion and the fetal membranes as such are not taught here.",
+    "'Implantation' is already covered by its own scene and is NOT re-claimed. Cytotrophoblast and syncytiotrophoblast are named here only as the layers of the chorion and the source of hCG; how the syncytium invades the endometrium belongs to that scene.",
+    "This entry is titled 'early' placenta and the scene keeps to what is established in the first trimester plus the fates that follow directly from it. Term placental gross anatomy — weight, cotyledon count, maternal and fetal surfaces, cord insertion — is named in match.terms so a note can find this scene, but is not taught in a beat. It belongs to a later fetal membranes topic if the curriculum adds one.",
+    "Timings are the standard teaching approximations — lacunae day 9, filled with maternal blood day 11 to 12, primary villus day 13, secondary day 16, tertiary about day 21 — and are narrated as approximations. The cytotrophoblast is described as largely disappearing from about week 20; texts place this anywhere from the fourth month onwards and no single week is stated as fact.",
+    "Spiral artery invasion is narrated as a single process. Many texts describe two waves, the second in the second trimester, and the depth and timing of the second wave are still debated; the scene teaches the consequence of shallow invasion rather than committing to a wave count.",
+    "Placental malaria is included because it is a leading cause of low birth weight in this region and Nigerian MBBS teaching covers it alongside the TORCH group, although it is not part of that acronym. The narration names it separately for that reason."
+  ]
+}

@@ -1,0 +1,533 @@
+{
+  "schema": 2,
+  "id": "embryology__respiratory-system-development__tracheoesophageal-septum",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Respiratory System Development",
+  "structure": "Tracheoesophageal septum",
+  "covers": [
+    "Tracheoesophageal septum"
+  ],
+  "learning_goal": "Describe how the tracheoesophageal ridges fuse into a septum that splits one foregut tube into trachea in front and oesophagus behind, say in which week it is completed and in which direction it zips, and use that single mechanism to explain the five types of oesophageal atresia and tracheo-oesophageal fistula, the newborn who froths and chokes on the first feed, and the coiled nasogastric tube on the film.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "tracheoesophageal septum",
+      "tracheo-oesophageal fistula",
+      "oesophageal atresia",
+      "respiratory system development",
+      "foregut septation",
+      "embryology",
+      "week 4",
+      "week 5",
+      "neonatal surgery",
+      "VACTERL"
+    ],
+    "terms": [
+      "tracheoesophageal septum",
+      "tracheo-oesophageal septum",
+      "tracheoesophageal ridges",
+      "tracheoesophageal folds",
+      "longitudinal ridges",
+      "fusion in the midline",
+      "laryngotracheal tube",
+      "primitive oesophagus",
+      "primitive esophagus",
+      "ventral trachea",
+      "dorsal oesophagus",
+      "week 4",
+      "week 5",
+      "caudal to cranial fusion",
+      "laryngeal inlet stays open",
+      "oesophageal atresia",
+      "esophageal atresia",
+      "tracheo-oesophageal fistula",
+      "tracheoesophageal fistula",
+      "TOF",
+      "TEF",
+      "EA",
+      "OA",
+      "type C fistula",
+      "proximal atresia with distal fistula",
+      "pure oesophageal atresia",
+      "type A",
+      "H-type fistula",
+      "N-type fistula",
+      "Gross classification",
+      "Vogt classification",
+      "polyhydramnios",
+      "absent stomach bubble",
+      "frothy oral secretions",
+      "choking with feeds",
+      "cyanosis with feeds",
+      "cannot pass nasogastric tube",
+      "coiled nasogastric tube",
+      "gasless abdomen",
+      "aspiration pneumonia",
+      "VACTERL",
+      "VATER",
+      "oesophageal stenosis",
+      "tracheal stenosis",
+      "tracheal atresia",
+      "laryngotracheo-oesophageal cleft",
+      "tracheomalacia",
+      "recanalisation",
+      "striated muscle upper third",
+      "smooth muscle lower third",
+      "splanchnic mesoderm"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "common_tube",
+      "label": "One tube, two futures",
+      "role": "context",
+      "group": "Before the septum",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "terms": [
+        "foregut",
+        "common foregut tube",
+        "laryngotracheal diverticulum",
+        "respiratory diverticulum",
+        "single lumen",
+        "ventral",
+        "dorsal"
+      ],
+      "narration": "At the end of the fourth week the respiratory diverticulum still opens widely into the foregut along its whole length. There is one lumen with two futures in it: the ventral part will be airway, the dorsal part will be oesophagus. Nothing yet separates them, and the entire topic is the story of that separation."
+    },
+    {
+      "key": "ridges",
+      "label": "Tracheoesophageal ridges — two walls growing towards each other",
+      "role": "part",
+      "group": "Before the septum",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "tracheoesophageal ridges",
+        "tracheoesophageal folds",
+        "longitudinal ridges",
+        "lateral grooves",
+        "mesenchymal ridges",
+        "indentation of the lateral walls",
+        "week 4"
+      ],
+      "narration": "Two longitudinal ridges appear in the lateral walls of the foregut, one on each side, at the line where the diverticulum meets the gut tube. They grow inward towards each other like a pair of curtains being drawn. They are ridges of the wall itself, not a new structure inserted between two tubes — the tubes do not yet exist to be separated."
+    },
+    {
+      "key": "septum",
+      "label": "The tracheoesophageal septum — the ridges fuse",
+      "role": "part",
+      "group": "The septum forms",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "tracheoesophageal septum",
+        "fusion in the midline",
+        "partition",
+        "caudal to cranial",
+        "zips upwards",
+        "week 5",
+        "completed by the end of week 5",
+        "splits one lumen into two"
+      ],
+      "narration": "The two ridges meet in the midline and fuse into the tracheoesophageal septum. Fusion runs from below upwards, and the partition is complete by about the end of the fifth week. One lumen has become two: a ventral laryngotracheal tube and a dorsal oesophagus. Hold on to the direction of fusion, because a septum that zips from below and stops short leaves its defect at the top — which is exactly where the common fistula is found."
+    },
+    {
+      "key": "trachea",
+      "label": "In front — the laryngotracheal tube",
+      "role": "part",
+      "group": "The septum forms",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "laryngotracheal tube",
+        "trachea",
+        "ventral tube",
+        "C-shaped cartilage",
+        "tracheal rings",
+        "trachealis",
+        "respiratory epithelium",
+        "splanchnic mesoderm",
+        "tracheomalacia"
+      ],
+      "narration": "The ventral tube is the trachea. Its lining is foregut endoderm and its cartilage rings and muscle are the splanchnic mesoderm around it. The rings are incomplete behind, where the trachealis muscle closes the gap against the oesophagus — the adult trachea still carries the shape of the surface it was separated from. Where the mesoderm is deficient the wall collapses on expiration, and that is tracheomalacia, which commonly accompanies a repaired fistula."
+    },
+    {
+      "key": "oesophagus",
+      "label": "Behind — the oesophagus",
+      "role": "part",
+      "group": "The septum forms",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "dorsal tube",
+        "short at first",
+        "elongates with descent of the heart",
+        "striated muscle upper third",
+        "smooth muscle lower third",
+        "vagus nerve",
+        "recanalisation",
+        "oesophageal atresia",
+        "oesophageal stenosis"
+      ],
+      "narration": "The dorsal tube is the oesophagus. It is short at first and lengthens rapidly as the heart and lungs descend into the thorax. Its epithelium proliferates and nearly obliterates the lumen before recanalising, so failure of recanalisation gives atresia or a stenosis, classically in the lower third. Its muscle is striated in the upper third from pharyngeal arch mesoderm and smooth in the lower third from splanchnic mesoderm, with the vagus supplying both."
+    },
+    {
+      "key": "why_it_fails",
+      "label": "Why the septum deviates",
+      "role": "part",
+      "group": "When separation fails",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "posterior deviation of the septum",
+        "incomplete fusion",
+        "unequal division",
+        "abnormal ridges",
+        "mechanical",
+        "notochord signalling",
+        "Sonic hedgehog",
+        "week 4",
+        "week 5",
+        "critical period"
+      ],
+      "narration": "Two things can go wrong with one partition. It can be pushed off the midline, dividing the foregut unequally, or it can fail to fuse along part of its length. Deviation posteriorly gives a narrow oesophagus that ends blindly; incomplete fusion leaves a hole between the two tubes. Both happen in weeks four and five, which is why these babies so often carry other defects formed in the same fortnight."
+    },
+    {
+      "key": "type_c",
+      "label": "Type C — proximal atresia with a distal fistula",
+      "role": "part",
+      "group": "When separation fails",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "type C",
+        "Gross type C",
+        "proximal oesophageal atresia",
+        "distal tracheo-oesophageal fistula",
+        "85 percent",
+        "commonest type",
+        "blind upper pouch",
+        "gas in the stomach",
+        "distended abdomen",
+        "reflux aspiration"
+      ],
+      "narration": "In about eighty-five in a hundred cases the upper oesophagus ends as a blind pouch and the lower segment opens into the trachea near the carina. Read the two halves separately. The blind upper pouch is why saliva has nowhere to go and why the tube will not pass. The lower fistula is why air enters the stomach and the abdomen distends, and why acid can run up into the lungs. If you can only remember one type, remember this one and its picture."
+    },
+    {
+      "key": "type_a",
+      "label": "Type A — pure atresia, no fistula",
+      "role": "part",
+      "group": "When separation fails",
+      "layer": "organ",
+      "color": "#af601a",
+      "terms": [
+        "type A",
+        "pure oesophageal atresia",
+        "isolated atresia",
+        "no fistula",
+        "gasless abdomen",
+        "scaphoid abdomen",
+        "long gap atresia",
+        "marked polyhydramnios",
+        "7 percent"
+      ],
+      "narration": "In about seven in a hundred there is no fistula at all: two blind ends and no connection to the airway. The abdomen is gasless and flat on the film, because no air can reach the gut. The gap between the ends is usually long, which makes the repair the hardest of the group. Polyhydramnios is most marked here, since nothing at all reaches the stomach for the fetus to absorb."
+    },
+    {
+      "key": "type_h",
+      "label": "H-type — a fistula with no atresia",
+      "role": "part",
+      "group": "When separation fails",
+      "layer": "organ",
+      "color": "#ca6f1e",
+      "terms": [
+        "H-type fistula",
+        "N-type fistula",
+        "type E",
+        "isolated fistula",
+        "no atresia",
+        "intact oesophagus",
+        "late presentation",
+        "recurrent pneumonia",
+        "coughing with feeds",
+        "abdominal distension",
+        "4 percent"
+      ],
+      "narration": "In about four in a hundred the oesophagus is continuous and there is only a small oblique communication with the trachea. The tube passes, the newborn feeds, and the diagnosis is missed for months. Suspect it in an older infant with recurrent pneumonia, coughing during feeds and a gassy abdomen. This is the type that presents to a paediatric outpatient rather than a delivery room."
+    },
+    {
+      "key": "presentation",
+      "label": "How the baby presents, and the one test",
+      "role": "part",
+      "group": "At the cot side",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "polyhydramnios",
+        "absent stomach bubble",
+        "antenatal ultrasound",
+        "frothy oral secretions",
+        "excessive drooling",
+        "choking with feeds",
+        "cyanosis with feeds",
+        "coughing",
+        "cannot pass nasogastric tube",
+        "coiled nasogastric tube",
+        "chest radiograph",
+        "aspiration pneumonia",
+        "keep nil by mouth",
+        "upper pouch suction",
+        "nurse head up"
+      ],
+      "narration": "The pregnancy is often complicated by polyhydramnios with no stomach bubble on scan, because the fetus cannot swallow liquor. After delivery the baby froths at the mouth, drools, and chokes and turns blue with the first feed. The test is at the cot side and costs nothing: pass a nasogastric tube. It stops at about ten centimetres and a plain film shows it coiled in the upper pouch. Do not feed a baby you suspect of this — keep the pouch on suction, nurse the head up, and refer, because the pneumonia that follows a feed is what kills."
+    },
+    {
+      "key": "associations",
+      "label": "Never stop at the oesophagus — VACTERL",
+      "role": "part",
+      "group": "At the cot side",
+      "layer": "organ",
+      "color": "#b03a2e",
+      "terms": [
+        "VACTERL",
+        "VATER",
+        "vertebral defects",
+        "anorectal malformation",
+        "imperforate anus",
+        "cardiac defects",
+        "tracheo-oesophageal fistula",
+        "renal anomalies",
+        "limb anomalies",
+        "radial ray defect",
+        "trisomy 18",
+        "trisomy 21",
+        "duodenal atresia",
+        "echocardiogram",
+        "renal ultrasound"
+      ],
+      "narration": "About half of these babies have another anomaly, because weeks four and five were building several systems at once. VACTERL is the checklist: vertebral, anorectal, cardiac, tracheo-oesophageal, renal and limb. Practically, every such baby needs the perineum examined, an echocardiogram and a renal scan before theatre. The cardiac lesion, not the fistula, is usually what decides whether the child survives."
+    },
+    {
+      "key": "cleft",
+      "label": "The rare end of the spectrum",
+      "role": "part",
+      "group": "When separation fails",
+      "layer": "organ",
+      "color": "#922b21",
+      "terms": [
+        "laryngotracheo-oesophageal cleft",
+        "complete failure of septation",
+        "tracheal stenosis",
+        "tracheal atresia",
+        "oesophageal stenosis",
+        "tracheal web",
+        "type B",
+        "type D",
+        "proximal fistula",
+        "double fistula"
+      ],
+      "narration": "At the extreme, the ridges never fuse at all and the larynx, trachea and oesophagus share one lumen — a laryngotracheo-oesophageal cleft. A septum that divides the tube unequally the other way gives tracheal stenosis or atresia instead of oesophageal. Two further Gross types complete the set: a proximal fistula with distal atresia, and fistulae at both ends. Together they account for only a few per cent, but they show that one mechanism failing in different ways produces the whole list."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cut across the foregut and watch the curtains close",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Before the septum"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ridges",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Cut across the foregut at the end of week four. There is a single lumen, wider in front where the respiratory diverticulum sits. Two longitudinal ridges push in from the lateral walls towards the midline. Watch the section rather than the diagram of two finished tubes: the trachea and the oesophagus are not two tubes being separated, they are one tube being divided."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "The septum zips from below upwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The septum forms"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:septation",
+          "path": [
+            "ridges",
+            "septum",
+            "trachea",
+            "oesophagus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "trachea",
+            "oesophagus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The ridges fuse in the midline and the partition runs from the caudal end upwards, finishing by about the end of week five. In front is the laryngotracheal tube, behind is the oesophagus, and the laryngeal inlet at the very top stays open into the pharynx on purpose. Both tubes are lined by the same endoderm and clothed by the same splanchnic mesoderm — which is why the trachea's cartilage rings are open at the back, along the surface it used to share."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "One mechanism, five malformations",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "At the cot side"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When separation fails"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "why_it_fails",
+          "to": "type_c",
+          "kind": "deviating posteriorly and fusing incompletely at the top gives"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "type_c",
+            "type_a",
+            "type_h"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Now make the septum misbehave. Push it backwards and the oesophagus is squeezed into a blind pouch. Leave a hole in it and the two tubes still communicate. Type C, at about eighty-five per cent, is both faults at once: blind upper pouch, lower segment joining the trachea, air in the stomach. Type A is atresia with no fistula at all and a gasless abdomen. The H-type is a fistula with no atresia, which is why that baby feeds, goes home, and comes back at six months with recurrent pneumonia."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The froth, the tube, and the film",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "At the cot side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "presentation",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "type_c",
+          "to": "presentation",
+          "kind": "a blind pouch above and a fistula below produces"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "presentation",
+          "to": "associations",
+          "kind": "and the same fortnight of development explains"
+        }
+      ],
+      "narration": "Polyhydramnios in the pregnancy, no stomach bubble on the scan, then a newborn who froths, drools and turns blue on the first feed. Pass a nasogastric tube: it stops short and coils in the upper pouch on the film, and that is the diagnosis. Keep the baby nil by mouth, suck the pouch out, nurse head up and refer. Then look for the rest — vertebral, anorectal, cardiac, renal and limb — because half of these babies have another defect built in the same two weeks, and the heart lesion usually matters more than the fistula."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The rare end, and why it belongs to the same story",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When separation fails"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cleft",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "septum",
+          "to": "cleft",
+          "kind": "failing along its whole length gives"
+        }
+      ],
+      "narration": "If the ridges never fuse, larynx, trachea and oesophagus share one lumen — a laryngotracheo-oesophageal cleft. If the septum is deviated the other way, it is the trachea that is narrowed or atretic. Two further types add a proximal fistula with distal atresia, and fistulae at both ends. Every entry on that list is the same partition failing in a different place, which is the reason to learn the mechanism first and the classification second."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so deferred_modes carries diagram and 3d_anatomy. The 3d option is genuinely live here — unlike the diverticulum, the finished trachea and oesophagus are adult structures a provider could hold — but the teaching in this entry is the partition forming over two weeks, which is a staged sequence and not a static pair of tubes. Re-author in 3d only as a companion to the sequence, never as a replacement.",
+    "Status is 'planned'. Twelve regions, five beats, ops and narration complete, but no artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a series of three transverse sections through the foregut showing the lateral ridges indenting, meeting and fused, with ventral and dorsal marked on every panel so orientation is never assumed; a lateral view of weeks four and five side by side showing the septum completing from caudal to cranial with the laryngeal inlet left open at the top; a transverse section of the finished trachea showing the C-ring open posteriorly against the oesophagus; a five-panel plate of the Gross types drawn to the same scale and orientation, each with its approximate percentage printed; and a plain-film schematic showing the coiled nasogastric tube with, on one panel, gas in the stomach and, on another, a gasless abdomen.",
+    "The five malformation panels must share one orientation and one colour key with each other and with the normal sagittal panel. The teaching is that each type is the same partition failing differently, and a plate where the types are drawn at different angles destroys exactly that comparison.",
+    "Beat 2 traces concept:septation. The subject is not a drawn region — it is the fusion front moving from caudal to cranial over about a week, and the direction is the point.",
+    "Beat 5 authors PEEL_LAYER inward on the organ layer to open the shared lumen of the cleft. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because opening the wall away is how a cleft should be shown rather than drawn from outside.",
+    "Percentages are the standard teaching approximations — about 85 per cent type C, about 7 per cent type A, about 4 per cent H-type. Series differ by a few points and the narration gives them as 'about'.",
+    "Gross letters are used because that is the lettering Nigerian MBBS papers and paediatric surgery texts use. Vogt numerals appear in match.terms so a note written the other way still finds this scene, but the narration does not carry both systems — teaching two classifications at once is how students end up sure of neither.",
+    "'Respiratory diverticulum' is NOT claimed in covers[]. The bud, its endodermal and mesodermal derivatives, the bronchial buds and the pleural cavities belong to that entry; this scene assumes the diverticulum already exists.",
+    "'Bronchial tree branching' and 'Alveolar development' are NOT claimed. Neither appears here beyond the carina being named as the site of the distal fistula.",
+    "'Foregut derivatives' (GIT Development) is NOT claimed. The oesophagus is followed only as far as its separation, its recanalisation and its muscle coats; the stomach and duodenum belong to that entry.",
+    "Antenatal and neonatal management is deliberately limited to what a house officer does before referral — nil by mouth, pouch suction, head-up nursing, look for VACTERL. Operative repair, gap length and staged procedures are surgical curriculum and are not narrated here, though the terms are in match.terms so a surgery note still reaches the scene.",
+    "The mechanism of septation is given as fusion of lateral mesenchymal ridges. This is the account the standard texts teach and the one exams ask for; some experimental work argues instead for differential growth of a single foregut without true ridge fusion, and that dispute is worth a footnote in the artwork rather than a change to the narration."
+  ]
+}

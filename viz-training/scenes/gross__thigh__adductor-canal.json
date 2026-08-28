@@ -1,0 +1,606 @@
+{
+  "schema": 2,
+  "id": "gross__thigh__adductor-canal",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thigh",
+  "structure": "Adductor canal",
+  "covers": [
+    "Adductor canal"
+  ],
+  "learning_goal": "State where the adductor canal begins and ends, name its three walls and its roof, list its four contents, say which content leaves through the adductor hiatus and which pierces the roof, and explain why an adductor canal block spares the quadriceps while a femoral nerve block does not.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thigh",
+      "adductor canal",
+      "subsartorial canal",
+      "medial thigh",
+      "lower limb",
+      "femoral artery",
+      "saphenous nerve",
+      "popliteal fossa",
+      "regional anaesthesia"
+    ],
+    "terms": [
+      "adductor canal",
+      "subsartorial canal",
+      "Hunter's canal",
+      "apex of femoral triangle",
+      "adductor hiatus",
+      "vastus medialis",
+      "adductor longus",
+      "adductor magnus",
+      "sartorius",
+      "subsartorial fascia",
+      "vastoadductor membrane",
+      "roof of adductor canal",
+      "femoral artery",
+      "external iliac artery",
+      "femoral vein",
+      "external iliac vein",
+      "popliteal artery",
+      "popliteal vein",
+      "saphenous nerve",
+      "nerve to vastus medialis",
+      "descending genicular artery",
+      "genicular anastomosis",
+      "adductor tubercle",
+      "linea aspera",
+      "obturator nerve",
+      "adductor canal block",
+      "saphenous neuralgia",
+      "femoropopliteal bypass",
+      "Hunter's ligation",
+      "medial compartment of thigh",
+      "triangular in cross section"
+    ]
+  },
+  "camera": {
+    "framing": "medial",
+    "autoRotate": 0.005,
+    "initialYaw": 0.6
+  },
+  "structures": [
+    {
+      "key": "vast_med",
+      "name": "right vastus medialis",
+      "label": "Vastus medialis — anterolateral wall",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#c25a6b",
+      "refs": {
+        "bodyparts3d": "FMA38932"
+      },
+      "terms": [
+        "vastus medialis",
+        "anterolateral wall",
+        "nerve to vastus medialis",
+        "medial lip of linea aspera",
+        "vastoadductor membrane"
+      ],
+      "narration": "The anterolateral wall of the canal. It is the reason the canal points forwards and outwards rather than straight in: the vessels run along the muscle's medial edge, sheltered by its bulk. One of the four contents, the nerve to vastus medialis, is simply the nerve that leaves the canal to enter this wall."
+    },
+    {
+      "key": "add_long",
+      "name": "right adductor longus",
+      "label": "Adductor longus — posterior wall, upper part",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#b8607e",
+      "refs": {
+        "bodyparts3d": "FMA22456"
+      },
+      "terms": [
+        "adductor longus",
+        "posterior wall",
+        "floor of adductor canal",
+        "apex of femoral triangle",
+        "linea aspera"
+      ],
+      "narration": "The upper part of the back wall. Its lower border is where the canal begins in earnest, because the apex of the femoral triangle sits where sartorius crosses this muscle. Above that point the vessels are in an open triangle; below it they are in a tunnel."
+    },
+    {
+      "key": "add_mag",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus — posterior wall, lower part",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#8f4a63",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "adductor hiatus",
+        "adductor tubercle",
+        "hamstring part",
+        "adductor part",
+        "obturator nerve",
+        "sciatic nerve",
+        "posterior wall"
+      ],
+      "narration": "The lower part of the back wall, and the muscle that ends the canal. Its adductor portion runs to the linea aspera and its hamstring portion to the adductor tubercle, and the gap left between the two is the adductor hiatus. The muscle is the composite one of the thigh — obturator nerve to the adductor part, tibial division of the sciatic to the hamstring part — which is worth a mark on its own."
+    },
+    {
+      "key": "sartorius",
+      "name": "right sartorius",
+      "label": "Sartorius — the roof",
+      "role": "part",
+      "group": "Walls",
+      "layer": "muscle",
+      "color": "#e0a05a",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "roof of adductor canal",
+        "subsartorial canal",
+        "subsartorial fascia",
+        "vastoadductor membrane",
+        "pes anserinus"
+      ],
+      "narration": "The roof is a strong sheet of fascia stretched from vastus medialis to adductor magnus, with sartorius lying on it. That is why the canal is also called the subsartorial canal, and why a surgeon exposing the femoral artery in the thigh retracts sartorius rather than cutting it. The saphenous nerve pierces this fascia to become superficial; the vessels do not."
+    },
+    {
+      "key": "fem_artery",
+      "name": "right external iliac artery",
+      "label": "Femoral artery (continuous with the external iliac artery)",
+      "role": "part",
+      "group": "Contents",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "femoral artery",
+        "external iliac artery",
+        "superficial femoral artery",
+        "popliteal artery",
+        "adductor hiatus",
+        "descending genicular artery",
+        "femoropopliteal bypass",
+        "Hunter's ligation"
+      ],
+      "narration": "One vessel with three names along its length: external iliac in the pelvis, femoral in the thigh, popliteal the moment it passes through the adductor hiatus. The catalog holds the pelvic length of it, so read the lower end as the femoral artery running down the canal. Before it leaves it gives the descending genicular artery to the anastomosis round the knee. This is the segment most often narrowed in peripheral arterial disease and the segment a femoropopliteal graft bypasses."
+    },
+    {
+      "key": "fem_vein",
+      "name": "right external iliac vein",
+      "label": "Femoral vein (continuous with the external iliac vein)",
+      "role": "part",
+      "group": "Contents",
+      "layer": "vessel",
+      "color": "#2c5f9e",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "femoral vein",
+        "external iliac vein",
+        "popliteal vein",
+        "behind the artery",
+        "deep vein thrombosis"
+      ],
+      "narration": "The vein travels with the artery and swaps sides as it goes. At the top of the canal it lies behind the artery; by the hiatus it has come to lie behind and lateral to it. Deep to the artery in the canal, superficial to it in the popliteal fossa — that reversal is a classic question."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "linea aspera",
+        "adductor tubercle",
+        "medial supracondylar line",
+        "shaft of femur"
+      ],
+      "narration": "The canal runs alongside the middle third of this shaft. Both walls take origin from it: vastus medialis from the medial lip of the linea aspera in front, the adductors from the linea aspera behind. The adductor tubercle at the lower end is the bony marker of the hiatus."
+    },
+    {
+      "key": "add_brevis",
+      "name": "right adductor brevis",
+      "label": "Adductor brevis",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#9c5570",
+      "refs": {
+        "bodyparts3d": "FMA22452"
+      },
+      "terms": [
+        "adductor brevis",
+        "obturator nerve",
+        "anterior division",
+        "posterior division",
+        "medial compartment"
+      ],
+      "narration": "It lies deep to adductor longus at the top of the canal and is the landmark for the obturator nerve, whose two divisions pass in front of and behind it. Keep the obturator nerve separate in your mind from the canal's contents: it supplies the wall, it does not travel in the tunnel."
+    },
+    {
+      "key": "gracilis",
+      "name": "right gracilis",
+      "label": "Gracilis",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#c98aa0",
+      "refs": {
+        "bodyparts3d": "FMA43883"
+      },
+      "terms": [
+        "gracilis",
+        "pes anserinus",
+        "medial compartment",
+        "strap muscle"
+      ],
+      "narration": "The thin strap on the medial edge of the thigh, superficial to the canal and medial to it. It is not a wall, but it is what your hand meets first on the inner thigh, so it orients the dissection."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "medial surface of tibia",
+        "pes anserinus",
+        "saphenous nerve",
+        "medial malleolus"
+      ],
+      "narration": "The saphenous nerve leaves the canal and carries on down the medial side of the leg along this bone to the medial malleolus. That is the sensory territory a canal block numbs and the reason a nerve of the thigh has a complaint felt at the ankle."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the canal is",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Walls",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The adductor canal is a fascial tunnel in the middle third of the thigh, on the medial side. It begins at the apex of the femoral triangle and ends at the adductor hiatus. Think of it as the corridor that carries the femoral vessels from the front of the thigh round to the back of the knee."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Three walls and a roof",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Walls"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vast_med",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Vastus medialis in front and to the side. Adductor longus above and adductor magnus below, behind. Over the top, the subsartorial fascia with sartorius riding on it. Three muscular walls, one fascial roof — that shape is why the canal is triangular in cross section."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Lifting the roof",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "sartorius"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Take sartorius away and the contents appear at once, lying on the fascia between vastus medialis and the adductors. This is exactly what the surgeon sees: retract sartorius medially, open the fascia, and the artery is there. Hunter tied the artery here for popliteal aneurysm, which is why the canal carries his name."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "A cut across the middle of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "In cross section the canal is a triangle lying on its side, with the femur behind it. Slide the cut down the thigh and watch it change: wide and open at the apex of the femoral triangle, a definite tunnel in the middle third, and then it stops as the vessels dive backwards through adductor magnus. The tunnel is about fifteen centimetres long."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The four contents",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "sartorius"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "fem_artery",
+            "fem_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vast_med",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Four things travel in the canal: the femoral artery, the femoral vein, the saphenous nerve and the nerve to vastus medialis. Two vessels and two nerves. Some books add the terminal part of the obturator nerve's anterior division, so say four and mention the obturator as a variable fifth if you are asked to be complete."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "The vessels swap places",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "sartorius"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fem_artery",
+          "to": "fem_vein",
+          "kind": "adjacent"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": -0.2,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The vein starts the canal directly behind the artery and finishes it behind and lateral. Keep the whole sequence straight: in the femoral triangle the vein is medial to the artery, in the canal it is behind it, and in the popliteal fossa it is superficial to it. Three levels, three relationships, and the question always names the level."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 7,
+      "title": "Out through the adductor hiatus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "sartorius"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fem_artery",
+          "path": [
+            "fem_artery",
+            "add_long",
+            "vast_med",
+            "add_mag",
+            "femur"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "add_mag",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Follow the artery down the canal to the gap in adductor magnus, between its adductor fibres and its hamstring fibres. That gap is the adductor hiatus, and the artery is called the popliteal artery from the moment it passes through. The hiatus is a fixed opening in a muscle, which is why the vessel is tethered there and why that point is where an artery tears in a violent hyperextension injury of the knee."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "The nerve that does not follow the artery",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:saphenous_nerve",
+          "path": [
+            "add_long",
+            "fem_artery",
+            "vast_med",
+            "sartorius",
+            "tibia"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The path traced here is the saphenous nerve, the last and longest branch of the femoral nerve. It enters the canal lateral to the artery, crosses in front of it to reach its medial side, and then does something the vessels never do — it pierces the roof and becomes superficial at the lower end of the canal. From there it runs with the great saphenous vein down the medial side of the leg to the medial malleolus and the medial border of the foot. It is purely sensory."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 9,
+      "title": "Why the block spares the quadriceps",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Contents"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vast_med"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sartorius"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fem_artery",
+          "to": "vast_med",
+          "kind": "adjacent"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "By the time the femoral nerve reaches this level almost everything left in it is sensory. Local anaesthetic put into the canal under ultrasound, using the artery as the landmark, numbs the front and inside of the knee but leaves the quadriceps working. A femoral nerve block up in the triangle catches the motor branches too and the patient cannot straighten the knee. Same nerve, different level, very different patient — that is the point of knowing where the canal is."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "Peel down to the tunnel",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The order from the surface inwards: skin, superficial fascia with the great saphenous vein, fascia lata, sartorius, the subsartorial fascia forming the roof, then the artery with the vein behind it and the saphenous nerve crossing in front, then the adductors and the femur. Recite it that way and you can name any structure a knife meets on the inner thigh."
+    }
+  ],
+  "gaps": [
+    "There is no femoral artery or femoral vein in the catalog. Both are taught through the vessel they are continuous with — the external iliac artery and vein — because they are the same tubes under different names along their course, and no join exists to mislead a student. The labels say so explicitly. The modelled length is mostly proximal, so the course through the canal is traced and narrated rather than shown at full length.",
+    "The popliteal artery and vein are not modelled, so the change of name at the adductor hiatus is narrated and shown by highlighting adductor magnus rather than by a separate vessel appearing below it.",
+    "The descending genicular artery and the genicular anastomosis round the knee have no meshes and are named in narration only.",
+    "No nerve of the lower limb exists as a model. The saphenous nerve — the content that makes this region clinically distinctive — is authored as a traced concept path from the canal, across the artery, through the roof and down the medial side of the leg. The nerve to vastus medialis and the variable obturator contribution are narration only.",
+    "The subsartorial fascia, also called the vastoadductor membrane, is the actual roof of the canal and has no mesh. It is taught by lighting sartorius and describing the sheet beneath it. A modelled roof would be the most useful addition here, because the whole teaching point of the roof is that the nerve pierces it and the vessels do not.",
+    "The adductor hiatus is a gap between two parts of adductor magnus, not an object, so it is taught by isolating and highlighting that muscle from behind and naming the opening. The adductor tubercle is a sub-feature of the whole femur mesh and is named rather than marked.",
+    "The great saphenous vein is not in the catalog, so the companionship of the saphenous nerve with that vein below the knee is narrated.",
+    "This scene does not cover Femur or Quadriceps femoris. The femur and vastus medialis appear here only as the wall and the frame of the canal."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

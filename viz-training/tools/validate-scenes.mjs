@@ -27,7 +27,7 @@
  *
  * Node 18+. No dependencies.
  */
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -192,7 +192,43 @@ function validate(scene) {
   return { errors, warnings, degrades: [...degrades] };
 }
 
-const files = readdirSync(SCENES).filter(f => f.endsWith('.json') && f !== 'index.json').sort();
+/* Validate a fixture WITHOUT putting it in the corpus.
+   The regression fixture is a deliberately broken scene, and its own instructions said to copy it into
+   a scenes folder and run this. Someone copied it into the REAL one and left it there: for a day the
+   corpus contained a scene claiming FMA7196 was the left lung — it is the spleen — and every run of
+   this validator reported 100/101 with the failure buried in the noise of a hundred passes. A test
+   that has to be smuggled into production to run is a test that will eventually be left there.
+     node viz-training/tools/validate-scenes.mjs --fixture tools/fixtures/regression-spleen.json
+   expects the file to FAIL, and exits non-zero if it somehow passes. */
+const fixtureArg = process.argv.indexOf('--fixture');
+if (fixtureArg > -1) {
+  const rel = process.argv[fixtureArg + 1];
+  if (!rel) { console.error('--fixture needs a path'); process.exit(2); }
+  const path = join(ROOT, rel.replace(/^viz-training[\\/]/, ''));
+  let scene;
+  try { scene = JSON.parse(readFileSync(path, 'utf8')); }
+  catch (e) { console.error(`cannot read ${rel}: ${e.message}`); process.exit(2); }
+  const { errors } = validate(scene);
+  console.log(`\nfixture: ${rel}`);
+  errors.forEach(e => console.log('    caught  ' + e));
+  if (!errors.length) {
+    console.log('\nThe fixture PASSED. It is meant to be broken — the validator has stopped catching');
+    console.log('something it used to catch. Do not ship until you know which check went quiet.\n');
+    process.exit(1);
+  }
+  console.log(`\n${errors.length} error(s) caught — the validator is still doing its job.\n`);
+  process.exit(0);
+}
+
+/* A scene folder holds scenes. Anything starting with __ is scratch and is refused by name, so a
+   stray fixture is reported as itself rather than as a mysteriously broken scene. */
+const all = readdirSync(SCENES).filter(f => f.endsWith('.json') && f !== 'index.json').sort();
+const scratch = all.filter(f => f.startsWith('__'));
+if (scratch.length) {
+  console.log(`\n${scratch.length} scratch file(s) in scenes/ — move them out; this folder is the corpus:`);
+  scratch.forEach(f => console.log('  ! ' + f));
+}
+const files = all.filter(f => !f.startsWith('__'));
 let bad = 0, total = 0;
 for (const f of files) {
   const path = join(SCENES, f);
@@ -222,4 +258,75 @@ for (const f of files) {
   }
 }
 console.log(`\n${total - bad}/${total} scenes valid.`);
+
+/* ------------------------------------------------------------------ delivery
+   A scene can be perfectly valid and still show a student nothing.
+   The eight stages above check the DOCUMENT: is the id real, does the name match the catalog, is the op
+   in the vocabulary. Every one of them consults available-meshes.json, which is a list of what the
+   provider publishes. The app does not fetch from the catalog. It fetches from the bucket, and the
+   bucket holds only what somebody downloaded and decimated.
+   On 2026-08-28 those two had drifted 245 models apart. Seven scenes were status:"ready", listed in
+   index.json and live — the whole of Leg & Foot, the intrinsic hand muscles, the adductor canal — and
+   not one of their meshes had ever been fetched. A student who opened Tibia & Fibula got an empty
+   stage with a full set of labels pointing into the dark, and every tool in the chain called it valid,
+   because no tool had been asked whether the geometry existed.
+   So this asks. meshes-lite/ is what gets uploaded, so it stands in for the bucket. A ready scene with
+   NOT ONE mesh in hand is held at "candidate" — nothing is wrong with the scene, the geometry simply
+   has not been delivered, and "blocked" would say the validator rejected it. Partial holes are
+   reported and not held: a scene missing four of thirty still teaches. */
+const liteDir = join(ROOT, 'meshes-lite');
+if (existsSync(liteDir)) {
+  const have = new Set(readdirSync(liteDir).filter(f => /\.stl$/i.test(f)).map(f => f.replace(/\.stl$/i, '')));
+  const held = [], freed = [], holed = [];
+
+  for (const f of files) {
+    const path = join(SCENES, f);
+    let scene;
+    try { scene = JSON.parse(readFileSync(path, 'utf8')); } catch (e) { continue; }
+    if (scene.mode !== '3d_anatomy') continue;
+    const ids = [...new Set((scene.structures || []).map(s => s.refs && s.refs.bodyparts3d).filter(Boolean))];
+    if (!ids.length) continue;
+    const present = ids.filter(i => have.has(i)).length;
+
+    if (present === 0 && scene.status === 'ready') {
+      held.push({ f, n: ids.length });
+      if (MARK) {
+        scene.status = 'candidate';
+        scene.delivery_hold = `None of the ${ids.length} models this scene references has been fetched, so it would draw an empty stage. Held at candidate until the meshes are in the bucket; nothing in the scene needs changing.`;
+        writeFileSync(path, JSON.stringify(scene, null, 2) + '\n');
+      }
+      continue;
+    }
+    /* Self-healing: the hold lifts itself the moment the geometry lands, so nobody has to remember
+       which seven files were demoted and hand-edit them back. */
+    if (present > 0 && scene.delivery_hold) {
+      freed.push({ f, present, n: ids.length });
+      if (MARK) {
+        scene.status = 'ready';
+        delete scene.delivery_hold;
+        writeFileSync(path, JSON.stringify(scene, null, 2) + '\n');
+      }
+      continue;
+    }
+    if (present < ids.length) holed.push({ f, missing: ids.length - present, n: ids.length });
+  }
+
+  if (held.length) {
+    console.log(`\n${held.length} scene(s) would DRAW NOTHING — no model fetched:`);
+    held.forEach(h => console.log(`  ✗ ${h.f}  (${h.n} models, 0 in hand)` + (MARK ? '  → held at "candidate"' : '')));
+    if (!MARK) console.log('  Run with --mark to hold them, or fetch the models (see viz-training/mesh-gaps.txt).');
+  }
+  if (freed.length) {
+    console.log(`\n${freed.length} scene(s) released — their models have arrived:`);
+    freed.forEach(h => console.log(`  ✓ ${h.f}  (${h.present}/${h.n} in hand)` + (MARK ? '  → back to "ready"' : '')));
+  }
+  if (holed.length) {
+    const worst = holed.sort((a, b) => b.missing - a.missing);
+    console.log(`\n${holed.length} scene(s) draw with holes (still shippable, still worth closing):`);
+    worst.slice(0, 8).forEach(h => console.log(`  · ${String(h.missing).padStart(3)}/${String(h.n).padEnd(3)} missing  ${h.f}`));
+    if (worst.length > 8) console.log(`  … and ${worst.length - 8} more — sync-state.mjs lists them all`);
+  }
+  if (held.length || freed.length || holed.length) console.log('');
+}
+
 process.exit(bad ? 1 : 0);

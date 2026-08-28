@@ -1,0 +1,637 @@
+{
+  "schema": 2,
+  "id": "embryology__pharyngeal-apparatus__pharyngeal-clefts-membranes",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Pharyngeal Apparatus",
+  "structure": "Pharyngeal clefts & membranes",
+  "covers": [
+    "Pharyngeal clefts & membranes"
+  ],
+  "learning_goal": "Say which pharyngeal cleft survives and what it becomes, explain by the overgrowth of the second arch why clefts two to four disappear into the cervical sinus, name the one membrane that persists and its three layers, and use that to place a branchial cyst, sinus or fistula on a patient's neck before you examine it.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "pharyngeal clefts",
+      "branchial clefts",
+      "pharyngeal grooves",
+      "branchial grooves",
+      "pharyngeal membranes",
+      "branchial membranes",
+      "pharyngeal apparatus",
+      "branchial apparatus",
+      "head and neck development",
+      "neck swellings",
+      "week 4",
+      "week 5",
+      "ectoderm",
+      "external ear development",
+      "tympanic membrane",
+      "branchial cyst",
+      "branchial fistula"
+    ],
+    "terms": [
+      "pharyngeal cleft",
+      "branchial cleft",
+      "pharyngeal groove",
+      "branchial groove",
+      "ectoderm",
+      "surface ectoderm",
+      "first cleft",
+      "second cleft",
+      "third cleft",
+      "fourth cleft",
+      "external acoustic meatus",
+      "external auditory meatus",
+      "meatal plug",
+      "meatal plate",
+      "recanalisation",
+      "congenital atresia of the external acoustic meatus",
+      "aural atresia",
+      "preauricular sinus",
+      "preauricular pit",
+      "auricular hillocks",
+      "accessory auricle",
+      "cervical sinus",
+      "cervical sinus of His",
+      "operculum",
+      "second arch overgrowth",
+      "epipericardial ridge",
+      "obliteration",
+      "pharyngeal membrane",
+      "branchial membrane",
+      "closing membrane",
+      "three layers",
+      "ectoderm mesoderm endoderm",
+      "tympanic membrane",
+      "eardrum",
+      "pars tensa",
+      "outer epithelial layer",
+      "middle fibrous layer",
+      "inner mucosal layer",
+      "tubotympanic recess",
+      "myringotomy",
+      "grommet",
+      "otitis media",
+      "branchial cyst",
+      "branchial cleft cyst",
+      "cervical lymphoepithelial cyst",
+      "anterior border of sternocleidomastoid",
+      "upper third of the neck",
+      "painless fluctuant swelling",
+      "enlarges after an upper respiratory tract infection",
+      "transilluminates",
+      "cholesterol crystals",
+      "branchial sinus",
+      "external branchial sinus",
+      "branchial fistula",
+      "complete branchial fistula",
+      "lower anterior border of sternocleidomastoid",
+      "tonsillar fossa",
+      "internal opening",
+      "mucoid discharge",
+      "second cleft anomaly",
+      "first cleft anomaly",
+      "duplicated external acoustic meatus",
+      "facial nerve",
+      "carotid bifurcation",
+      "excision",
+      "recurrence",
+      "cystic hygroma",
+      "thyroglossal duct cyst",
+      "midline",
+      "lateral neck swelling"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "cleft_plan",
+      "label": "Clefts are the OUTSIDE of the apparatus",
+      "role": "context",
+      "group": "The plan",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "pharyngeal cleft",
+        "branchial cleft",
+        "pharyngeal groove",
+        "ectoderm",
+        "surface ectoderm",
+        "four pairs",
+        "between the arches",
+        "pouches are inside",
+        "endoderm",
+        "skin and lining"
+      ],
+      "narration": "Fix the geography before any derivative. The arches are bars in the wall of the neck. On the outside, surface ectoderm dips between them as four pairs of grooves — the clefts. On the inside, endoderm pockets outwards between the same bars as the pouches. Clefts are ectoderm and give skin-type lining; pouches are endoderm and give glands and mucosa. A student who mixes these two sides loses marks in every question in this topic, so keep them apart from the first sentence."
+    },
+    {
+      "key": "cleft_fate_rule",
+      "label": "One cleft survives, three disappear",
+      "role": "part",
+      "group": "The plan",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "first cleft",
+        "second cleft",
+        "third cleft",
+        "fourth cleft",
+        "only the first persists",
+        "external acoustic meatus",
+        "cervical sinus",
+        "obliteration",
+        "one survivor"
+      ],
+      "narration": "The whole of cleft anatomy reduces to one rule: only the first cleft persists in the adult. It becomes the external acoustic meatus. Clefts two, three and four are buried by the growing second arch, merge into a single ectoderm-lined space called the cervical sinus, and normally vanish without trace. Every clinical anomaly in this scene is that vanishing going wrong."
+    },
+    {
+      "key": "cleft1",
+      "label": "Cleft 1 — the external acoustic meatus",
+      "role": "part",
+      "group": "Clefts",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "first cleft",
+        "first pharyngeal groove",
+        "external acoustic meatus",
+        "external auditory meatus",
+        "ear canal",
+        "auricular hillocks",
+        "first arch",
+        "second arch",
+        "auricle",
+        "pinna"
+      ],
+      "narration": "The first cleft deepens into a funnel that becomes the external acoustic meatus. Its inner end stops against the first pouch coming the other way. Around its opening, six auricular hillocks appear on the first and second arches and fuse into the auricle, which is why an abnormal external ear and an abnormal ear canal so often travel together in the same child."
+    },
+    {
+      "key": "meatal_plug",
+      "label": "The meatal plug and why the canal can be atretic",
+      "role": "part",
+      "group": "Clefts",
+      "layer": "organ",
+      "color": "#d98880",
+      "terms": [
+        "meatal plug",
+        "meatal plate",
+        "solid ectodermal cord",
+        "recanalisation",
+        "week 7",
+        "week 28",
+        "congenital atresia of the external acoustic meatus",
+        "aural atresia",
+        "conductive hearing loss",
+        "microtia",
+        "canalisation failure"
+      ],
+      "narration": "The floor of the first cleft first fills in with a solid plug of ectodermal cells that reaches the developing tympanic cavity. That plug only breaks down late, towards the end of fetal life, to open the canal. Failure of that recanalisation gives congenital atresia of the external acoustic meatus — a child with conductive deafness, an intact inner ear, and often a small or malformed auricle beside it. The pattern is the same as any canalisation failure elsewhere in the embryo: the tube forms solid first and hollows out afterwards."
+    },
+    {
+      "key": "cleft1_anomaly",
+      "label": "First cleft anomalies sit around the ear",
+      "role": "part",
+      "group": "Clefts",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "first cleft anomaly",
+        "preauricular sinus",
+        "preauricular pit",
+        "accessory auricle",
+        "duplicated external acoustic meatus",
+        "parotid region",
+        "angle of the mandible",
+        "facial nerve",
+        "recurrent discharge",
+        "infection"
+      ],
+      "narration": "Because the first cleft and the auricular hillocks are the same neighbourhood, first cleft anomalies present around the ear rather than down the neck. Preauricular pits and sinuses are the common ones, and a true first cleft duplication runs from the ear canal towards the angle of the mandible through the parotid. Say one thing about them in a viva: their tract is intimate with the facial nerve, so excision is a surgery with a named risk, not a minor procedure."
+    },
+    {
+      "key": "clefts234",
+      "label": "Clefts 2, 3 and 4 — buried into the cervical sinus",
+      "role": "part",
+      "group": "Clefts",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "second cleft",
+        "third cleft",
+        "fourth cleft",
+        "cervical sinus",
+        "cervical sinus of His",
+        "ectoderm lined cavity",
+        "obliteration",
+        "smooth neck",
+        "week 7"
+      ],
+      "narration": "The lower three clefts never become anything. As the second arch grows down over them, they are sealed off from the surface and their ectoderm-lined spaces run together into one cavity — the cervical sinus. In a normal embryo that sinus is completely obliterated by about week seven, and the skin of the neck becomes the smooth surface you see on a newborn."
+    },
+    {
+      "key": "operculum",
+      "label": "The second arch overgrows the rest — the operculum",
+      "role": "part",
+      "group": "Mechanism",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "operculum",
+        "second arch",
+        "hyoid arch",
+        "overgrowth",
+        "epipericardial ridge",
+        "grows caudally",
+        "fuses",
+        "buries the third and fourth arches",
+        "platysma",
+        "facial nerve"
+      ],
+      "narration": "One movement explains the whole of the lower neck. The second arch enlarges and grows downwards like a flap — the operculum — over the third and fourth arches, and fuses with the ridge below them. That is why the second arch derivatives spread so widely over the face and neck, and why the third and fourth arch structures end up deep in the neck rather than on its surface. The cervical sinus is simply the space left underneath that flap."
+    },
+    {
+      "key": "membrane_plan",
+      "label": "Where a cleft meets a pouch: a three-layered membrane",
+      "role": "part",
+      "group": "Membranes",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "pharyngeal membrane",
+        "branchial membrane",
+        "closing membrane",
+        "ectoderm",
+        "mesoderm",
+        "endoderm",
+        "three layers",
+        "cleft meets pouch",
+        "four pairs",
+        "only the first persists"
+      ],
+      "narration": "At the bottom of each cleft the ectoderm comes face to face with the endoderm of the matching pouch, with a thin sheet of intervening mesoderm between them. That sandwich is a pharyngeal membrane. Four pairs form. Only the first one survives in the adult — the other three break up along with the clefts that made them."
+    },
+    {
+      "key": "tympanic_membrane",
+      "label": "Membrane 1 — the tympanic membrane, and why it has three layers",
+      "role": "part",
+      "group": "Membranes",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "first pharyngeal membrane",
+        "tympanic membrane",
+        "eardrum",
+        "pars tensa",
+        "outer epithelial layer",
+        "middle fibrous layer",
+        "inner mucosal layer",
+        "ectoderm",
+        "mesoderm",
+        "endoderm",
+        "external acoustic meatus",
+        "tubotympanic recess",
+        "middle ear",
+        "myringotomy",
+        "grommet",
+        "perforation",
+        "healing"
+      ],
+      "narration": "The first membrane persists as the tympanic membrane, and its embryology is written into its histology. Outside is stratified squamous epithelium from the ectoderm of the first cleft. Inside is mucosa from the endoderm of the first pouch. Between them is a fibrous layer from the mesoderm. Three germ layers in one structure a few cells thick — which is why it is asked about so often, and why a perforation that spares the fibrous layer heals so much better than one that destroys it."
+    },
+    {
+      "key": "cleft_vs_pouch",
+      "label": "The discipline: outside versus inside",
+      "role": "part",
+      "group": "Membranes",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "cleft versus pouch",
+        "ectoderm versus endoderm",
+        "external acoustic meatus",
+        "middle ear cavity",
+        "auditory tube",
+        "palatine tonsil",
+        "thymus",
+        "parathyroid",
+        "common error",
+        "tympanic membrane is both"
+      ],
+      "narration": "Test yourself on one line before moving on. Outside the eardrum is cleft; inside the eardrum is pouch. The external acoustic meatus is the first cleft. The middle ear cavity and the auditory tube are the first pouch. The tympanic membrane is the only thing that belongs to both, which is exactly why it is the boundary between the external and the middle ear."
+    },
+    {
+      "key": "branchial_cyst",
+      "label": "Branchial cyst — a cervical sinus that never closed",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "branchial cyst",
+        "branchial cleft cyst",
+        "cervical lymphoepithelial cyst",
+        "second cleft",
+        "cervical sinus remnant",
+        "anterior border of sternocleidomastoid",
+        "upper third of the neck",
+        "junction of upper and middle third",
+        "young adult",
+        "painless",
+        "fluctuant",
+        "smooth",
+        "does not move on swallowing",
+        "enlarges after an upper respiratory tract infection",
+        "cholesterol crystals",
+        "aspiration",
+        "ultrasound",
+        "excision"
+      ],
+      "narration": "If a piece of the cervical sinus fails to obliterate and has no opening, it fills with fluid and becomes a branchial cyst. Learn its address: at the anterior border of sternocleidomastoid, in the upper third of the neck, in a teenager or young adult. It is painless, smooth and fluctuant, does not move on swallowing, and characteristically swells after a sore throat because the lymphoid tissue in its wall reacts. Aspirate it and you get turbid fluid containing cholesterol crystals. Because it is a remnant of the second cleft, its tract runs between the internal and external carotid arteries — which is why treatment is complete excision rather than drainage."
+    },
+    {
+      "key": "branchial_sinus_fistula",
+      "label": "Branchial sinus and fistula — where the openings are",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "branchial sinus",
+        "external branchial sinus",
+        "branchial fistula",
+        "complete branchial fistula",
+        "second cleft",
+        "second pouch",
+        "lower anterior border of sternocleidomastoid",
+        "junction of middle and lower third",
+        "tonsillar fossa",
+        "internal opening",
+        "mucoid discharge",
+        "recurrent infection",
+        "bilateral",
+        "excision of the whole tract",
+        "stepladder incision"
+      ],
+      "narration": "Now use the same embryology to place the openings. If the cervical sinus keeps a connection to the skin, you get a branchial sinus: a small pit at the lower anterior border of sternocleidomastoid, discharging mucus. If the cleft and the second pouch both persist and the membrane between them breaks down, the tract runs all the way through and you have a complete branchial fistula — external opening low on the neck, internal opening in the tonsillar fossa. Notice that the internal opening is at a pouch derivative and the external opening is at a cleft derivative. That is not a fact to memorise; it is the definition of a fistula in this region."
+    },
+    {
+      "key": "neck_lump_differential",
+      "label": "Reading a neck lump by its embryology",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#f1948a",
+      "terms": [
+        "lateral neck swelling",
+        "midline neck swelling",
+        "branchial cyst",
+        "thyroglossal duct cyst",
+        "moves on swallowing",
+        "moves on tongue protrusion",
+        "cystic hygroma",
+        "posterior triangle",
+        "transilluminates",
+        "lymph node",
+        "metastatic node",
+        "cystic metastasis",
+        "over forty",
+        "panendoscopy"
+      ],
+      "narration": "Position tells you the origin. A lateral cystic lump along the anterior border of sternocleidomastoid is a branchial cyst; a midline lump that rises on swallowing and on protruding the tongue is a thyroglossal duct cyst; a soft brilliantly transilluminating swelling in the posterior triangle of an infant is a cystic hygroma. One warning that belongs with the anatomy: a new cystic lateral neck swelling in a patient over forty is a metastatic node until proven otherwise, not a branchial cyst appearing late."
+    },
+    {
+      "key": "cleft_summary",
+      "label": "The four-line summary",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "cleft one becomes the external acoustic meatus",
+        "clefts two three four form the cervical sinus",
+        "cervical sinus obliterates",
+        "membrane one becomes the tympanic membrane",
+        "cyst sinus fistula",
+        "revision list"
+      ],
+      "narration": "Four lines hold the topic. One: cleft one becomes the external acoustic meatus. Two: clefts two, three and four sink into the cervical sinus and disappear. Three: membrane one becomes the tympanic membrane, with three layers from three germ layers. Four: a cervical sinus that fails to obliterate gives a cyst if closed, a sinus if it opens to skin, and a fistula if it opens to the tonsillar fossa as well."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Stand outside the embryo and count the grooves",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The plan"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cleft_plan",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Look at the side of a four-week embryo. The arches are the bars; the four grooves between them are the clefts, and every one of them is lined by surface ectoderm. Everything in this scene is on the outside of the apparatus. The pouches on the inside belong to a different lining and a different set of derivatives, and the single commonest error in this topic is attributing one side's derivative to the other."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Cut through a cleft and find the membrane",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Membranes"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "membrane_plan",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "membrane_plan",
+          "to": "tympanic_membrane",
+          "kind": "the first of these persists as"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cleft_vs_pouch",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Cut horizontally through the apparatus and the sandwich appears. Ectoderm from the cleft on the outside, endoderm from the pouch on the inside, a thin sheet of mesoderm between: a pharyngeal membrane. Four pairs form and only the first survives, as the tympanic membrane. Its three layers — squamous epithelium outside, fibrous layer in the middle, mucosa inside — are simply those three germ layers, unchanged."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The second arch grows down and buries the rest",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Mechanism"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "clefts234"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:operculum-overgrowth",
+          "path": [
+            "operculum",
+            "clefts234",
+            "cleft_fate_rule"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "operculum",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Watch the second arch enlarge and sweep downwards over the third and fourth arches, then fuse with the ridge below them. The lower three clefts are sealed under it and run together into one ectoderm-lined space, the cervical sinus. By about week seven it has been obliterated and the neck is smooth. Hold on to the picture of that trapped space, because everything that goes wrong later is a piece of it that stayed behind."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Down the series: the ear canal and nothing else",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clefts"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:cleft-series",
+          "path": [
+            "cleft1",
+            "meatal_plug",
+            "cleft1_anomaly",
+            "clefts234"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "cleft1",
+            "clefts234"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Run down the four clefts. The first deepens into the external acoustic meatus, fills temporarily with a solid meatal plug and only opens late in fetal life — so a canal that never recanalises gives congenital atresia with conductive deafness. Around its mouth the auricular hillocks build the auricle, which is why first cleft anomalies present at the ear and not down the neck. Clefts two, three and four contribute nothing to the adult at all."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "When the cervical sinus does not close",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clefts234",
+          "to": "branchial_cyst",
+          "kind": "a remnant with no opening becomes"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clefts234",
+          "to": "branchial_sinus_fistula",
+          "kind": "a remnant that stays open becomes"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "branchial_cyst",
+            "neck_lump_differential"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cleft_summary",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Leave part of the cervical sinus behind and you can predict the patient. Closed off entirely, it is a branchial cyst: painless, fluctuant, at the anterior border of sternocleidomastoid in the upper third of the neck, swelling after a sore throat. Open to the skin, it is a branchial sinus discharging mucus low on the same border. Open at both ends, it is a complete fistula running to the tonsillar fossa — external opening at a cleft derivative, internal opening at a pouch derivative. Finish by placing it against the two other congenital neck lumps: a midline swelling moving on tongue protrusion is thyroglossal, a transilluminating posterior triangle swelling in an infant is a cystic hygroma."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy for this structure, so deferred_modes carries diagram and 3d_anatomy. The 3d option is kept deliberately: the adult derivatives — external acoustic meatus, tympanic membrane, the tract of a second cleft fistula between the carotids — are genuinely spatial and would be worth a model the day one exists. Nothing here should be read as saying this structure is permanently a drawing.",
+    "Status is 'planned'. Fourteen regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a lateral view of a week-4 embryo with the four arches and the four clefts numbered on the surface; a horizontal section through one arch pair showing cleft ectoderm, pouch endoderm and the intervening mesoderm meeting as a closing membrane, with the three layers separately labelled; a two-stage overgrowth sequence showing the second arch operculum before and after it buries arches three and four, with the cervical sinus drawn as an enclosed space in the second frame; an enlargement of the first cleft with the meatal plug drawn solid in one frame and recanalised in the next; and a neck outline with the sites of a branchial cyst, a branchial sinus and the full course of a complete fistula to the tonsillar fossa marked on it.",
+    "Ectoderm and endoderm must carry the same two fills here that the pouches scene uses, and the mesoderm a third. The whole teaching value of the tympanic membrane panel is that a student can count three fills in one structure; a drawing that colours it uniformly teaches nothing that the sentence did not already say.",
+    "The overgrowth panel must be drawn as before and after on the same embryo outline. The cervical sinus is a space created by a movement over time; a single static picture turns it into a labelled blob to memorise instead of a consequence to understand.",
+    "Beat 3 traces concept:operculum-overgrowth and beat 4 traces concept:cleft-series. In each the subject is a movement or a progression through the series rather than a drawn region, so neither has a subject to light.",
+    "Beat 5 authors PEEL_LAYER on the organ layer to strip the derivatives off the clinical neck outline so the same panel can be read twice — once for what forms, once for what is left behind. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the teaching move is real even where today's rendering is approximate.",
+    "'Pharyngeal arches' is NOT claimed in covers[]. The arches appear only as the bars the clefts lie between and as the operculum that buries them. Arch cartilages, muscles, cranial nerves and arch arteries belong to that entry and are deliberately absent.",
+    "'Pharyngeal pouches' is NOT claimed. The first pouch is named because the tympanic membrane needs both sides of the apparatus to exist, and the second pouch is named because a complete fistula opens into the tonsillar fossa. The pouch derivative list, the wings, the thymic descent and DiGeorge belong to that entry.",
+    "'Thyroid gland development' is NOT claimed. The thyroglossal duct cyst appears once, in the differential for a neck lump, purely so a student can separate a midline swelling from a lateral one. The foramen cecum, the descent and the Sistrunk procedure belong to that entry.",
+    "External ear development is taught only as far as the clefts require. The auricular hillocks are named because first cleft anomalies cluster around the ear; the middle ear ossicles and their arch origins are arch content, not cleft content.",
+    "Texts differ on how completely the fourth cleft is even formed, and some describe only three well-defined clefts with a rudimentary fourth. The narration counts four pairs, which is the standard teaching statement, and the derivative claim is unaffected either way since none of the lower clefts contributes to the adult.",
+    "The claim that a second cleft fistula tract passes between the internal and external carotid arteries is the classical description and is what makes excision a defined operation. Individual courses vary; the narration gives it as the reason for complete excision rather than as an invariant.",
+    "Week numbers are the usual teaching approximations — clefts present through weeks four and five, cervical sinus obliterated by about week seven, meatal plug recanalising late in fetal life. Texts differ by several days and the narration says approximately.",
+    "The over-forty warning about a cystic lateral neck swelling is included because it is a safety point that follows directly from the anatomy, not because it is embryology. It is deliberately one sentence; the full head and neck cancer workup belongs elsewhere."
+  ]
+}

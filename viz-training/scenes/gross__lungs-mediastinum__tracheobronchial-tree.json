@@ -1,0 +1,718 @@
+{
+  "schema": 2,
+  "id": "gross__lungs-mediastinum__tracheobronchial-tree",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Lungs & Mediastinum",
+  "structure": "Tracheobronchial tree",
+  "covers": [
+    "Tracheobronchial tree",
+    "Trachea"
+  ],
+  "learning_goal": "Follow air from the cricoid cartilage to the alveolus, state the vertebral and surface level of every named point on that route, say why the right principal bronchus catches an inhaled object, and use those levels to place an endotracheal tube and read a bronchoscopy.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "tracheobronchial tree",
+      "trachea",
+      "airway",
+      "bronchi",
+      "respiratory system",
+      "thorax",
+      "lungs",
+      "mediastinum",
+      "bronchoscopy",
+      "intubation",
+      "foreign body aspiration",
+      "chest x-ray"
+    ],
+    "terms": [
+      "trachea",
+      "tracheobronchial tree",
+      "windpipe",
+      "cricoid cartilage",
+      "C6",
+      "lower border of cricoid",
+      "tracheal rings",
+      "C-shaped rings",
+      "trachealis",
+      "membranous posterior wall",
+      "sixteen to twenty rings",
+      "bifurcation of the trachea",
+      "carina",
+      "sternal angle",
+      "angle of Louis",
+      "plane of Ludwig",
+      "T4",
+      "T4/T5",
+      "lower border of T4",
+      "principal bronchus",
+      "main bronchus",
+      "primary bronchus",
+      "right main bronchus",
+      "left main bronchus",
+      "wider shorter more vertical",
+      "eparterial bronchus",
+      "hyparterial bronchus",
+      "lobar bronchus",
+      "secondary bronchus",
+      "segmental bronchus",
+      "tertiary bronchus",
+      "bronchopulmonary segment",
+      "ten segments",
+      "posterior basal segment",
+      "apical segment of lower lobe",
+      "bronchiole",
+      "terminal bronchiole",
+      "respiratory bronchiole",
+      "alveolar duct",
+      "alveolus",
+      "acinus",
+      "conducting zone",
+      "respiratory zone",
+      "anatomical dead space",
+      "150 ml",
+      "twenty-three generations",
+      "cartilage plates",
+      "goblet cells",
+      "pseudostratified ciliated columnar",
+      "mucociliary escalator",
+      "foreign body",
+      "aspiration",
+      "groundnut",
+      "endotracheal tube",
+      "right main bronchus intubation",
+      "21 cm",
+      "23 cm",
+      "bronchoscopy",
+      "widened carina",
+      "subcarinal lymph nodes",
+      "tracheostomy",
+      "second to fourth tracheal ring",
+      "tracheo-oesophageal fistula",
+      "postural drainage"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.15
+  },
+  "structures": [
+    {
+      "key": "trachea",
+      "name": "trachea",
+      "label": "Trachea",
+      "role": "part",
+      "group": "Conducting airway",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA7394"
+      },
+      "terms": [
+        "trachea",
+        "windpipe",
+        "tracheal rings",
+        "C-shaped rings",
+        "trachealis",
+        "sixteen to twenty rings",
+        "tracheostomy"
+      ],
+      "narration": "A tube about 10 to 12 cm long and 2 cm wide, held open by sixteen to twenty C-shaped bars of hyaline cartilage. The C opens backwards, and the gap is closed by the trachealis muscle and fibrous tissue. That soft back wall is why a swallowed bolus can indent the trachea, and why the oesophagus behind it can be reached by a fistula in a baby born with one."
+    },
+    {
+      "key": "bronchi",
+      "name": "bronchus",
+      "label": "Principal bronchi",
+      "role": "part",
+      "group": "Conducting airway",
+      "layer": "organ",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA7409"
+      },
+      "terms": [
+        "principal bronchus",
+        "main bronchus",
+        "primary bronchus",
+        "right main bronchus",
+        "left main bronchus",
+        "eparterial bronchus",
+        "hyparterial bronchus",
+        "wider shorter more vertical"
+      ],
+      "narration": "Two principal bronchi leave the carina. The right is about 2.5 cm long, wider, and runs more steeply down; the left is about 5 cm long, narrower, and runs more horizontally because the arch of the aorta and the heart push it aside. Learn those three words for the right — wider, shorter, more vertical — because every clinical consequence on this route follows from them."
+    },
+    {
+      "key": "carina",
+      "label": "Carina",
+      "role": "part",
+      "group": "Conducting airway",
+      "render": "anchor",
+      "color": "#f4d03f",
+      "anchor": {
+        "on": "trachea",
+        "uvw": [
+          0.53,
+          0.86,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the trachea — the bifurcation, where the carina sits, 65.5 mm from the trachea's surface centroid; see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "carina",
+        "bifurcation of the trachea",
+        "widened carina",
+        "subcarinal lymph nodes",
+        "cough reflex",
+        "T4/T5"
+      ],
+      "narration": "The sagittal ridge of cartilage at the fork, at the lower border of T4 — the sternal angle — in the cadaver, descending to T5 or T6 in the living on deep inspiration, because a cadaver is not breathing in. It is the most sensitive part of the airway — touch it and the patient coughs. At bronchoscopy a sharp carina is normal; a broad, splayed carina means the subcarinal nodes beneath it are enlarged, and in an adult smoker that is bronchial carcinoma until proved otherwise."
+    },
+    {
+      "key": "trachea_start",
+      "label": "Beginning of the trachea",
+      "role": "part",
+      "group": "Conducting airway",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "trachea",
+        "uvw": [
+          0.612,
+          0.44,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the trachea — its beginning at the lower border of the cricoid cartilage, 54.5 mm from the trachea's surface centroid; see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "lower border of cricoid",
+        "cricoid cartilage",
+        "C6",
+        "beginning of the trachea",
+        "cricothyroid membrane",
+        "tracheostomy",
+        "second to fourth tracheal ring"
+      ],
+      "narration": "The trachea begins at the lower border of the cricoid cartilage, level with the body of C6 — the same level at which the pharynx becomes the oesophagus. Feel the cricoid in your own neck, the first firm ring below the thyroid prominence. A tracheostomy is made through the second to fourth rings, after the isthmus of the thyroid gland — which lies across exactly those rings — has been retracted or divided. A low tracheostomy, genuinely below the isthmus, goes through the fifth and sixth."
+    },
+    {
+      "key": "t4_level",
+      "label": "T4 — the vertebral level of the fork",
+      "role": "part",
+      "group": "Levels",
+      "render": "anchor",
+      "color": "#a569bd",
+      "anchor": {
+        "on": "trachea",
+        "uvw": [
+          0.463,
+          0.995,
+          0.018
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the trachea and the fourth thoracic vertebra — the vertebral level the bifurcation lies at (gap 11.41 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "T4",
+        "T4/T5",
+        "lower border of T4",
+        "vertebral level",
+        "behind the airway",
+        "oesophagus between"
+      ],
+      "narration": "The back of the airway faces the bodies of the thoracic vertebrae, and the fork lies at the lower border of T4. The gap you can see here is real: the oesophagus lies between the trachea and the vertebral column, which is why a barium swallow shows the arch of the aorta indenting it from the left."
+    },
+    {
+      "key": "sternal_angle",
+      "label": "Sternal angle",
+      "role": "part",
+      "group": "Levels",
+      "render": "anchor",
+      "color": "#af7ac5",
+      "anchor": {
+        "on": "manubrium",
+        "uvw": [
+          0.499,
+          0.011,
+          0.128
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the manubrium and the body of the sternum — the manubriosternal joint, i.e. the sternal angle (gap 0.11 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "sternal angle",
+        "angle of Louis",
+        "manubriosternal joint",
+        "second costal cartilage",
+        "plane of Ludwig",
+        "T4/T5",
+        "surface marking"
+      ],
+      "narration": "Run a finger down from the suprasternal notch and it drops into a ridge — the sternal angle, where the manubrium meets the body of the sternum. The second costal cartilage joins here, which is how you start counting ribs. A line back from it to the disc between T4 and T5 is the plane that the trachea divides on."
+    },
+    {
+      "key": "arch_over_airway",
+      "label": "Arch of the aorta over the airway",
+      "role": "part",
+      "group": "Relations",
+      "render": "anchor",
+      "color": "#e74c3c",
+      "anchor": {
+        "on": "trachea",
+        "uvw": [
+          0.912,
+          0.757,
+          0.165
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the trachea and the arch of the aorta — the arch crossing the airway just above the bifurcation (gap 0.36 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "arch of the aorta",
+        "arches over the left bronchus",
+        "left recurrent laryngeal nerve",
+        "hoarseness",
+        "tracheal tug",
+        "aortic aneurysm"
+      ],
+      "narration": "The arch of the aorta reaches the airway on its left just above the fork and then passes over the left principal bronchus. This is why the left bronchus is pushed into a more horizontal course, why an aortic aneurysm can tug the trachea with each beat, and why a hilar tumour on the left causes hoarseness — the left recurrent laryngeal nerve hooks under the arch right here."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "context",
+      "group": "Chest wall",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "suprasternal notch",
+        "jugular notch",
+        "first costal cartilage"
+      ],
+      "narration": "The upper piece of the sternum. The trachea can be felt in the suprasternal notch at its top edge, and its lower edge makes the sternal angle."
+    },
+    {
+      "key": "sternbody",
+      "name": "body of sternum",
+      "label": "Body of the sternum",
+      "role": "context",
+      "group": "Chest wall",
+      "layer": "bone",
+      "color": "#d7dbdd",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of the sternum",
+        "sternum",
+        "second costal cartilage"
+      ],
+      "narration": "Below the angle. Everything the airway does happens behind this bone, which is why the levels are taught by the angle rather than by the vertebrae you cannot feel."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4 vertebra",
+      "role": "context",
+      "group": "Levels",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "fourth thoracic vertebra",
+        "T4",
+        "transthoracic plane",
+        "plane of Ludwig"
+      ],
+      "narration": "The plane through the sternal angle and the lower border of T4 divides the superior mediastinum from the inferior. Six things happen on it, and the trachea dividing is the one you meet first."
+    },
+    {
+      "key": "arch",
+      "name": "arch of aorta",
+      "label": "Arch of the aorta",
+      "role": "context",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA3768"
+      },
+      "terms": [
+        "arch of the aorta",
+        "aortic arch",
+        "left of the trachea",
+        "superior mediastinum"
+      ],
+      "narration": "Begins and ends at the level of the sternal angle, arching over the left principal bronchus and the left pulmonary artery."
+    },
+    {
+      "key": "rul",
+      "name": "upper lobe of right lung",
+      "label": "Right upper lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA7333"
+      },
+      "terms": [
+        "right upper lobe",
+        "RUL",
+        "eparterial bronchus",
+        "apical segment"
+      ],
+      "narration": "Its lobar bronchus is the only one that leaves above the pulmonary artery — the eparterial bronchus, found on the right and nowhere else."
+    },
+    {
+      "key": "rml",
+      "name": "middle lobe of lung",
+      "label": "Right middle lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7383"
+      },
+      "terms": [
+        "right middle lobe",
+        "RML",
+        "middle lobe syndrome",
+        "long narrow bronchus"
+      ],
+      "narration": "Its bronchus is long, narrow and ringed by lymph nodes, so it blocks and the lobe collapses more readily than any other."
+    },
+    {
+      "key": "rll",
+      "name": "lower lobe of right lung",
+      "label": "Right lower lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA7337"
+      },
+      "terms": [
+        "right lower lobe",
+        "RLL",
+        "posterior basal segment",
+        "apical segment of lower lobe",
+        "aspiration pneumonia"
+      ],
+      "narration": "The destination of most inhaled objects. Upright, they reach the posterior basal segment; supine, the apical segment of this lobe."
+    },
+    {
+      "key": "lul",
+      "name": "upper lobe of left lung",
+      "label": "Left upper lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#f2b0a8",
+      "refs": {
+        "bodyparts3d": "FMA7370"
+      },
+      "terms": [
+        "left upper lobe",
+        "LUL",
+        "lingular bronchus",
+        "lingula"
+      ],
+      "narration": "On the left the upper lobe bronchus also supplies the lingula, which is why the left upper lobe is drained in two different postures."
+    },
+    {
+      "key": "lll",
+      "name": "lower lobe of left lung",
+      "label": "Left lower lobe",
+      "role": "context",
+      "group": "Lungs",
+      "layer": "organ",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA7371"
+      },
+      "terms": [
+        "left lower lobe",
+        "LLL",
+        "basal segments"
+      ],
+      "narration": "Reached by the longer, more horizontal left bronchus — a harder route for a foreign body and for a suction catheter."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "One tube, two bronchi, two lungs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Conducting airway",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The airway below the larynx is a single tube that divides again and again. The trachea runs down the midline in front of the oesophagus, enters the chest behind the manubrium, and splits into a principal bronchus for each lung. Everything after that is the same event repeated: one tube becoming two, each a little narrower and a little more numerous, twenty-three times over."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Where it starts and where it ends",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Conducting airway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Chest wall"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Levels"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trachea_start",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "carina",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sternal_angle",
+          "to": "carina",
+          "kind": "same horizontal plane"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Two levels carry this whole topic. The trachea begins at the lower border of the cricoid cartilage, at C6. It ends by dividing at the lower border of T4, and that level is the sternal angle you can feel through the skin. So the answer to \"where does the trachea bifurcate\" is one you can point to on a living patient, not only on a vertebra."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Why the rings are open at the back",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "trachea"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.35,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trachea",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Cut across the trachea and the cartilage is a C, not an O. The open end faces backwards and is bridged by the trachealis muscle. Cartilage in front keeps the airway from collapsing when the pressure inside falls; soft tissue behind lets a swallowed bolus bulge forward into the space. On a chest film the trachea is the dark midline stripe, and the shape of that stripe is what a radiologist is reading when the mediastinum shifts."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The branching plan",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Conducting airway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lungs"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "bronchi",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bronchi",
+          "to": "rul",
+          "kind": "three lobar bronchi on the right"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bronchi",
+          "to": "lul",
+          "kind": "two lobar bronchi on the left"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Count in threes. Trachea to two principal bronchi. Each principal bronchus to lobar bronchi — three on the right, two on the left, matching the lobes. Each lobar bronchus to segmental bronchi — ten on the right, eight to ten on the left — and each of those supplies one bronchopulmonary segment with its own artery, so a segment can be cut out on its own. That is the unit a surgeon removes and the unit a physiotherapist drains."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Follow the air down",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Conducting airway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lungs"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "trachea_start",
+            "trachea",
+            "carina",
+            "bronchi",
+            "rul",
+            "rml",
+            "rll",
+            "lul",
+            "lll"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "carina",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Air passes the cricoid, runs the length of the trachea, meets the carina at the sternal angle and takes one side. Down through lobar and segmental bronchi it reaches bronchioles, which have no cartilage at all and are held open by the elastic pull of the lung around them. That is why the wheeze of asthma is expiratory: cartilage-free tubes narrow when the chest squeezes them. Past the terminal bronchiole comes the first alveolus, and gas exchange begins. Everything above that point is anatomical dead space — about 150 ml in an adult, air that is moved but never used."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Why it always goes right",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "bronchi"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lungs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "arch"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "rll",
+            "lll"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arch_over_airway",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rll",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The right principal bronchus is wider, shorter and more vertical, so it is the natural continuation of the trachea. An inhaled groundnut, a tooth, a bead, vomit, a dislodged tube tip — all go right. Push an endotracheal tube too far and it enters the right bronchus, the left lung stops being ventilated, and you hear breath sounds on one side only. The tube is at about 21 cm at the teeth in a woman and 23 cm in a man for that reason. On the left, the arch of the aorta lies across the bronchus and holds it in a flatter course."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "What the bronchoscope sees",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Conducting airway"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "carina",
+          "intensity": 1.0
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "carina",
+          "to": "t4_level",
+          "kind": "lies at this vertebral level"
+        }
+      ],
+      "narration": "Looking down the trachea, the first thing to identify is the carina, and the first question is whether it is sharp or splayed. Then two openings: the right one larger and almost straight ahead, the left one smaller and off to the side. Postural drainage uses the same map in reverse — to drain a segment, put the patient in the position that turns its bronchus downhill."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The catalog holds one generic 'bronchus' mesh and no separate right and left principal bronchi, so the difference that carries beat 6 — wider, shorter, more vertical on the right — is taught by narration, by the highlighted right lower lobe and by the arch anchor, not by two distinguishable models. Two principal bronchus meshes would let COMPARE_STRUCTURES do that work directly.",
+    "There are no lobar or segmental bronchus meshes, so the branching plan in beat 4 is named rather than drawn, and the lobes stand in for the bronchi that reach them. The bronchopulmonary segments — ten on the right, eight to ten on the left — have no meshes at all and appear only in terms[], which is enough for a note mentioning 'posterior basal segment' to find this scene but not enough to show one.",
+    "Nothing below the segmental bronchus exists as a model: bronchioles, terminal and respiratory bronchioles, alveolar ducts and alveoli are all beyond the resolution of a whole-body catalog. Beat 5 therefore ends inside the lobe and the acinus is carried by narration. The alveolus is properly a microscopic scene, and the histology course entry for the respiratory tract is where it should be taught.",
+    "The C-shaped ring in beat 3 is shown by cutting the trachea mesh across, but the mesh is a smooth surface with no separate cartilage and trachealis, so the cut shows the lumen and the outline rather than the cartilage bar itself. The teaching point survives the simplification; the histological distinction does not.",
+    "The larynx, cricoid cartilage and thyroid cartilage are not in the catalog as an airway — only the thyroid cartilage exists, and it is not modelled continuous with the trachea. The 'beginning of the trachea' anchor is therefore the top of the tracheal mesh, which is where the cricoid would sit, and the cricoid itself is named but not drawn.",
+    "The oesophagus is not shown, though it is the trachea's constant posterior relation, because it was not available locally to measure against and the scene already carries its relation in the T4 anchor's narration. The 11.41 mm gap in the t4_level measurement is exactly the space the oesophagus occupies, which is why that gap is recorded rather than hidden.",
+    "All six anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of an extreme or a contact, not a claim that the label sits where an anatomist would put a pin: the carina anchor is the lowest vertex of the tracheal mesh, which is the bifurcation, but the ridge itself has no geometry of its own. A human should clear each one in-app before release."
+  ]
+}

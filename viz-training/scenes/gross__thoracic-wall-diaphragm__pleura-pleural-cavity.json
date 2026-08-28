@@ -1,0 +1,666 @@
+{
+  "schema": 2,
+  "id": "gross__thoracic-wall-diaphragm__pleura-pleural-cavity",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thoracic Wall & Diaphragm",
+  "structure": "Pleura & pleural cavity",
+  "covers": [
+    "Pleura & pleural cavity"
+  ],
+  "learning_goal": "Name the two layers and the four parts of the parietal pleura, explain why the cavity is a potential space held at negative pressure, and use that to work out what happens in a pneumothorax and where an effusion collects.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thorax",
+      "thoracic wall",
+      "pleura",
+      "pleural cavity",
+      "respiratory system",
+      "lungs",
+      "mechanics of breathing",
+      "chest drain",
+      "pneumothorax"
+    ],
+    "terms": [
+      "pleura",
+      "pleural cavity",
+      "pleural space",
+      "visceral pleura",
+      "pulmonary pleura",
+      "parietal pleura",
+      "costal pleura",
+      "diaphragmatic pleura",
+      "mediastinal pleura",
+      "cervical pleura",
+      "cupola",
+      "dome of pleura",
+      "suprapleural membrane",
+      "Sibson's fascia",
+      "endothoracic fascia",
+      "pleural fluid",
+      "serous fluid",
+      "potential space",
+      "negative intrapleural pressure",
+      "subatmospheric pressure",
+      "surface tension",
+      "line of pleural reflection",
+      "costodiaphragmatic recess",
+      "costophrenic angle",
+      "costomediastinal recess",
+      "pulmonary ligament",
+      "hilum of lung",
+      "pleurisy",
+      "pleuritic chest pain",
+      "pleural rub",
+      "referred shoulder tip pain",
+      "phrenic nerve",
+      "intercostal nerve",
+      "pneumothorax",
+      "tension pneumothorax",
+      "haemothorax",
+      "pleural effusion",
+      "stony dull",
+      "thoracocentesis",
+      "pleural tap",
+      "chest drain",
+      "triangle of safety",
+      "8 10 12 rule",
+      "two ribs higher"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "chest_wall",
+      "label": "Thoracic wall (ribs & intercostals)",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "terms": [
+        "thoracic wall",
+        "rib",
+        "intercostal muscle",
+        "chest wall"
+      ],
+      "narration": "The outer boundary. Draw the wall first, because every part of the parietal pleura is named after the surface it lines."
+    },
+    {
+      "key": "lung",
+      "label": "Lung",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#e3c9d8",
+      "terms": [
+        "lung",
+        "pulmonary surface",
+        "lobe"
+      ],
+      "narration": "The inner boundary. The lung does not lie inside the pleural cavity; it invaginates the sac from behind, the way a fist pushes into a balloon."
+    },
+    {
+      "key": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#c46a5e",
+      "terms": [
+        "diaphragm",
+        "dome of the diaphragm",
+        "central tendon"
+      ],
+      "narration": "The floor of each sac. Its descent in inspiration is what opens the recess below the lung."
+    },
+    {
+      "key": "mediastinum",
+      "label": "Mediastinum",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#cbb7a6",
+      "terms": [
+        "mediastinum",
+        "heart",
+        "pericardium",
+        "great vessels"
+      ],
+      "narration": "The medial boundary. The two pleural sacs are entirely separate — they meet in the midline but never communicate, which is why a pneumothorax is one-sided."
+    },
+    {
+      "key": "endothoracic_fascia",
+      "label": "Endothoracic fascia",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "fascia",
+      "color": "#d8cfc0",
+      "terms": [
+        "endothoracic fascia",
+        "extrapleural plane"
+      ],
+      "narration": "A thin loose layer between the parietal pleura and the chest wall. It is the plane the surgeon strips in an extrapleural dissection."
+    },
+    {
+      "key": "visceral",
+      "label": "Visceral pleura",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#4a90d9",
+      "terms": [
+        "visceral pleura",
+        "pulmonary pleura",
+        "lung surface"
+      ],
+      "narration": "Stuck to the lung itself and dipping into every fissure. It cannot be peeled off. Its nerve supply is autonomic, so it feels no pain — a lesion confined to the lung is painless."
+    },
+    {
+      "key": "parietal",
+      "label": "Parietal pleura",
+      "role": "part",
+      "group": "The two layers",
+      "layer": "organ",
+      "color": "#d95f5f",
+      "terms": [
+        "parietal pleura",
+        "outer layer"
+      ],
+      "narration": "Lines the inside of the sac. Somatic nerves supply it, so it is exquisitely painful when inflamed, and the pain is felt in the body wall over it."
+    },
+    {
+      "key": "costal",
+      "label": "Costal pleura",
+      "role": "part",
+      "group": "Parts of the parietal pleura",
+      "layer": "organ",
+      "color": "#e07b7b",
+      "terms": [
+        "costal pleura",
+        "ribs",
+        "intercostal nerve"
+      ],
+      "narration": "Against the ribs and intercostal muscles. Supplied by the intercostal nerves, so inflammation here gives sharp pain in that dermatome, worse on inspiration."
+    },
+    {
+      "key": "diaphragmatic",
+      "label": "Diaphragmatic pleura",
+      "role": "part",
+      "group": "Parts of the parietal pleura",
+      "layer": "organ",
+      "color": "#e08a8a",
+      "terms": [
+        "diaphragmatic pleura",
+        "phrenic nerve",
+        "shoulder tip pain",
+        "C3 C4 C5"
+      ],
+      "narration": "On the upper surface of the diaphragm. Its central part takes the phrenic nerve — C3, C4, C5 — which is why irritation here is felt at the tip of the shoulder."
+    },
+    {
+      "key": "mediastinal",
+      "label": "Mediastinal pleura",
+      "role": "part",
+      "group": "Parts of the parietal pleura",
+      "layer": "organ",
+      "color": "#e09999",
+      "terms": [
+        "mediastinal pleura",
+        "hilum",
+        "root of lung"
+      ],
+      "narration": "Covers the mediastinum and is pierced by the root of the lung, where it turns and becomes visceral. Also phrenic in supply."
+    },
+    {
+      "key": "cervical",
+      "label": "Cervical pleura (cupola)",
+      "role": "part",
+      "group": "Parts of the parietal pleura",
+      "layer": "organ",
+      "color": "#eaa6a6",
+      "terms": [
+        "cervical pleura",
+        "cupola",
+        "dome of pleura",
+        "suprapleural membrane",
+        "Sibson's fascia"
+      ],
+      "narration": "The dome that rises about 2.5 cm above the medial third of the clavicle, held up by the suprapleural membrane. It is above the first rib, so a stab wound at the root of the neck enters the chest."
+    },
+    {
+      "key": "cavity",
+      "label": "Pleural cavity",
+      "role": "part",
+      "group": "The space",
+      "layer": "organ",
+      "color": "#9fd3f2",
+      "terms": [
+        "pleural cavity",
+        "pleural space",
+        "potential space",
+        "intrapleural"
+      ],
+      "narration": "A potential space, not a real one. In health the two layers are separated by nothing more than a film of fluid, and the cavity only becomes a space when air, blood or fluid gets in."
+    },
+    {
+      "key": "fluid",
+      "label": "Pleural fluid",
+      "role": "part",
+      "group": "The space",
+      "layer": "organ",
+      "color": "#cbe9fa",
+      "terms": [
+        "pleural fluid",
+        "serous fluid",
+        "surface tension",
+        "lubrication"
+      ],
+      "narration": "A few millilitres of serous fluid. It lubricates the layers as they slide, and its surface tension is what holds them together — the same reason two wet glass slides will slide but not separate."
+    },
+    {
+      "key": "negative_pressure",
+      "label": "Negative intrapleural pressure",
+      "role": "part",
+      "group": "The space",
+      "layer": "organ",
+      "color": "#7ec4e8",
+      "terms": [
+        "negative pressure",
+        "subatmospheric",
+        "intrapleural pressure",
+        "elastic recoil",
+        "transpulmonary pressure"
+      ],
+      "narration": "The lung's elastic recoil pulls inwards while the chest wall springs outwards. The two pull against each other across the cavity, and the pressure between them stays below atmospheric — about minus 5 cm of water at rest."
+    },
+    {
+      "key": "recess_costodiaphragmatic",
+      "label": "Costodiaphragmatic recess",
+      "role": "part",
+      "group": "Recesses",
+      "layer": "organ",
+      "color": "#6aa9c9",
+      "terms": [
+        "costodiaphragmatic recess",
+        "costophrenic angle",
+        "blunting",
+        "deepest recess"
+      ],
+      "narration": "The gutter where the costal pleura turns onto the diaphragm. The lung does not reach it at rest, so it is the lowest point of the cavity and the first place fluid collects — the blunted costophrenic angle on a chest film."
+    },
+    {
+      "key": "recess_costomediastinal",
+      "label": "Costomediastinal recess",
+      "role": "part",
+      "group": "Recesses",
+      "layer": "organ",
+      "color": "#7db6d4",
+      "terms": [
+        "costomediastinal recess",
+        "cardiac notch",
+        "lingula"
+      ],
+      "narration": "In front, behind the sternum, deepest on the left where the cardiac notch lets the pleura come in front of the heart."
+    },
+    {
+      "key": "reflection_lines",
+      "label": "Lines of pleural reflection",
+      "role": "part",
+      "group": "Recesses",
+      "layer": "organ",
+      "color": "#8fbdd6",
+      "terms": [
+        "line of pleural reflection",
+        "8 10 12 rule",
+        "6 8 10 rule",
+        "surface marking",
+        "two ribs higher"
+      ],
+      "narration": "Where the pleura turns a corner. In the midclavicular line the pleura reaches rib 8, in the midaxillary line rib 10, and beside the vertebral column rib 12 — always two ribs lower than the edge of the lung."
+    },
+    {
+      "key": "pulmonary_ligament",
+      "label": "Pulmonary ligament",
+      "role": "part",
+      "group": "Recesses",
+      "layer": "organ",
+      "color": "#a8cbdd",
+      "terms": [
+        "pulmonary ligament",
+        "below the hilum",
+        "dead space of the sleeve"
+      ],
+      "narration": "A double fold of pleura hanging below the root of the lung, like the empty end of a loose sleeve. It gives the root room to move down in inspiration."
+    },
+    {
+      "key": "pneumothorax",
+      "label": "Pneumothorax",
+      "role": "part",
+      "group": "When the space fills",
+      "layer": "organ",
+      "color": "#a83232",
+      "terms": [
+        "pneumothorax",
+        "collapsed lung",
+        "hyper-resonant",
+        "absent breath sounds",
+        "ruptured bulla",
+        "stab wound"
+      ],
+      "narration": "Air enters and the seal is broken. The lung recoils away from the wall and collapses towards its hilum while the chest wall springs out. Resonant to percussion, breath sounds gone on that side."
+    },
+    {
+      "key": "tension_pneumothorax",
+      "label": "Tension pneumothorax",
+      "role": "part",
+      "group": "When the space fills",
+      "layer": "organ",
+      "color": "#8d1f1f",
+      "terms": [
+        "tension pneumothorax",
+        "one-way valve",
+        "tracheal deviation",
+        "mediastinal shift",
+        "needle decompression",
+        "second intercostal space"
+      ],
+      "narration": "A one-way flap lets air in but not out. Pressure builds, pushes the mediastinum to the other side and kinks the great veins, so the patient dies of a fall in venous return. Decompress with a needle before any film is taken."
+    },
+    {
+      "key": "effusion",
+      "label": "Pleural effusion",
+      "role": "part",
+      "group": "When the space fills",
+      "layer": "organ",
+      "color": "#c9a227",
+      "terms": [
+        "pleural effusion",
+        "haemothorax",
+        "empyema",
+        "chylothorax",
+        "stony dull",
+        "meniscus sign"
+      ],
+      "narration": "Fluid instead of air. It sinks to the costodiaphragmatic recess, so the lower zone is stony dull with reduced breath sounds and the film shows a meniscus rising into the axilla."
+    },
+    {
+      "key": "triangle_of_safety",
+      "label": "Triangle of safety",
+      "role": "part",
+      "group": "When the space fills",
+      "layer": "organ",
+      "color": "#4f9e5f",
+      "terms": [
+        "triangle of safety",
+        "chest drain",
+        "intercostal drain",
+        "latissimus dorsi",
+        "pectoralis major",
+        "fifth intercostal space",
+        "above the rib"
+      ],
+      "narration": "Bounded by the lateral border of pectoralis major, the anterior border of latissimus dorsi and a line at the level of the nipple. Enter just above the lower rib, because the vessels and nerve run in the groove under the rib above."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Two sacs, one lung each",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The two layers",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Each lung sits in its own closed sac. The sac has an inner layer glued to the lung and an outer layer lining the chest, and the two are one continuous membrane that turns back on itself at the root of the lung. Because the sacs are separate, disease in one pleural cavity stays on that side."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "The potential space",
+      "ops": [
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "visceral",
+            "parietal"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cavity",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fluid"
+        }
+      ],
+      "narration": "Cut across the chest and the cavity is a line, not a gap. Visceral pleura on the lung, parietal pleura on the wall, a few millilitres of fluid between them. Students draw it as a space and then cannot explain why a pneumothorax is an emergency. It is a potential space: it exists only when something forces the layers apart."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Four parts, named by what they line",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Parts of the parietal pleura"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "costal",
+          "to": "chest_wall",
+          "kind": "lines"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragmatic",
+          "to": "diaphragm",
+          "kind": "lines"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mediastinal",
+          "to": "mediastinum",
+          "kind": "lines"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cervical",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Costal against the ribs, diaphragmatic on the diaphragm, mediastinal on the mediastinum, cervical arching above the first rib into the neck. The names are free marks — each part is called after the surface it lies on. Remember the cupola reaches 2.5 cm above the medial third of the clavicle, because a needle put in there for a subclavian line can drop a lung."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Why the lung follows the chest wall",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The space"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "negative_pressure",
+          "to": "lung",
+          "kind": "holds expanded"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "chest_wall",
+            "cavity",
+            "visceral",
+            "lung"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The lung always wants to recoil inwards and the chest wall always wants to spring outwards. The fluid film will not let them separate, so the pull of one against the other keeps the pressure between them below atmospheric. When the diaphragm descends and the ribs rise, the parietal layer moves out, the pressure drops further, and the lung is pulled open behind it. Air then follows the pressure down the airway. Nothing pushes air into the chest — the chest pulls it in."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "The recesses — where the lung is not",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Recesses"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.3,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "recess_costodiaphragmatic",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "lung",
+            "reflection_lines"
+          ],
+          "layout": "overlay"
+        }
+      ],
+      "narration": "The pleural sac is bigger than the lung inside it. At the bottom the two layers lie against each other in a gutter the lung enters only on deep inspiration — the costodiaphragmatic recess. Learn the two surface markings together: the lung ends at ribs 6, 8 and 10 in the midclavicular, midaxillary and paravertebral lines, and the pleura goes two ribs lower at 8, 10 and 12."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Break the seal",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "When the space fills"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pneumothorax",
+            "effusion"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tension_pneumothorax",
+          "to": "mediastinum",
+          "kind": "pushes"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "effusion",
+          "to": "recess_costodiaphragmatic",
+          "kind": "collects in"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "triangle_of_safety",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Let air in and the lung recoils away from the wall: resonant, silent, breathless. Let fluid in and it sinks to the recess: stony dull, quiet at the base. If the leak is a one-way valve the pressure keeps rising, shoves the mediastinum across and cuts venous return — that patient is decompressed with a needle first and X-rayed afterwards. A drain goes in the triangle of safety, hugging the top of the lower rib to miss the neurovascular bundle."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Why pleurisy hurts and pneumonia does not",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "visceral",
+            "parietal"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "diaphragmatic",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "costal",
+          "to": "chest_wall",
+          "kind": "pain felt over"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Visceral pleura has autonomic supply and no pain fibres, so a lung lesion is silent until it reaches the surface. Parietal pleura is somatic: intercostal nerves over the ribs, phrenic over the central diaphragm and the mediastinum. So costal pleurisy is a sharp catch in the chest wall on inspiration, while diaphragmatic irritation is felt at the tip of the shoulder — C3, C4, C5, and the same referral you meet again with a ruptured spleen."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Routed to its deferred diagram mode, not to 3D. The catalog holds no pleura of any kind — searching all 934 entries for pleura, serous, membrane and cavity returns interosseous membranes, the septum pellucidum and nothing else. The subject of this scene has no model, so a 3D scene here would show ribs, lungs and diaphragm with the actual structure missing from the middle of it. 3d_anatomy stays first in preferred_modes and is recorded in deferred_modes: this becomes a 3D scene the day a pleural sac model exists, with no curriculum edit.",
+    "The pericardium is absent from both BodyParts3D source sets, and the pleura appears to be absent for the same reason — the free set is built from solid organs, muscles, bones and vessels, and serous membranes are not in it. Closing this gap will need a different provider, not a further ingest.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-two regions, seven beats, ops and narration — but no artwork has been drawn for the SVG engine, so nothing renders today. Promote it to 'ready' once a cut-chest drawing exists with the labelled regions this scene names.",
+    "The chest wall, lung, diaphragm and mediastinum are authored as context regions of the diagram rather than as models, even though all four DO exist in the catalog (ribs, upper and lower lobes, FMA13295 diaphragm). They are drawn here because the diagram engine draws the whole picture; when the 3D version arrives those four become real refs and only the pleural layers stay as authored overlays.",
+    "'Negative intrapleural pressure' and 'Triangle of safety' are teaching regions, not anatomical structures — one is a physical state of the space, the other a surface landmark. A renderer that treats every structure as strictly anatomical will need to accept them as annotation regions, in the same way the brachial plexus scene draws its Lesions group.",
+    "TRACE_STRUCTURE in beat 4 follows concept:air from the moving chest wall through the cavity to the lung. There is no subject to light because the subject is a pressure change; the trace exists to make the order of events visible — wall moves first, lung follows.",
+    "Surface markings are given as the 6-8-10 lung and 8-10-12 pleura rule, which is what Nigerian MBBS notes and Snell teach. Variation between individuals and the difference in the right and left sixth costal cartilage are not drawn, because the exam asks for the standard rule."
+  ]
+}

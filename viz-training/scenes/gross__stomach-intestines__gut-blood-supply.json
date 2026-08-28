@@ -1,0 +1,972 @@
+{
+  "schema": 2,
+  "id": "gross__stomach-intestines__gut-blood-supply",
+  "mode": "diagram",
+  "deferred_modes": [
+    "3d_anatomy"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Stomach & Intestines",
+  "structure": "Gut blood supply (coeliac/SMA/IMA)",
+  "covers": [
+    "Gut blood supply (coeliac/SMA/IMA)"
+  ],
+  "learning_goal": "Divide the gut into foregut, midgut and hindgut, give each its artery, its vertebral level and its junction point in the bowel, name the branches of all three arteries in order, use the anastomoses to explain why some segments survive occlusion and the splenic flexure does not, and read a patient's referred pain back to the gut segment it came from.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "gut blood supply",
+      "abdominal aorta branches",
+      "coeliac trunk",
+      "superior mesenteric artery",
+      "inferior mesenteric artery",
+      "foregut",
+      "midgut",
+      "hindgut",
+      "mesenteric ischaemia",
+      "ischaemic colitis",
+      "portal venous system",
+      "referred abdominal pain",
+      "gastrointestinal tract",
+      "abdomen",
+      "colorectal surgery",
+      "embryology of the gut"
+    ],
+    "terms": [
+      "gut blood supply",
+      "foregut",
+      "midgut",
+      "hindgut",
+      "coeliac trunk",
+      "celiac trunk",
+      "coeliac axis",
+      "T12",
+      "superior mesenteric artery",
+      "SMA",
+      "L1",
+      "inferior mesenteric artery",
+      "IMA",
+      "L3",
+      "abdominal aorta",
+      "median arcuate ligament",
+      "median arcuate ligament syndrome",
+      "left gastric artery",
+      "splenic artery",
+      "common hepatic artery",
+      "hepatic artery proper",
+      "gastroduodenal artery",
+      "right gastric artery",
+      "left gastro-omental artery",
+      "right gastro-omental artery",
+      "gastroepiploic artery",
+      "short gastric arteries",
+      "superior pancreaticoduodenal artery",
+      "inferior pancreaticoduodenal artery",
+      "pancreaticoduodenal arcade",
+      "major duodenal papilla",
+      "ampulla of Vater",
+      "second part of the duodenum",
+      "jejunal arteries",
+      "ileal arteries",
+      "vasa recta",
+      "arcades",
+      "ileocolic artery",
+      "appendicular artery",
+      "right colic artery",
+      "middle colic artery",
+      "left colic artery",
+      "sigmoid arteries",
+      "superior rectal artery",
+      "middle rectal artery",
+      "inferior rectal artery",
+      "internal iliac artery",
+      "internal pudendal artery",
+      "marginal artery of Drummond",
+      "arc of Riolan",
+      "meandering mesenteric artery",
+      "watershed",
+      "splenic flexure",
+      "Griffiths point",
+      "Sudeck's point",
+      "rectosigmoid junction",
+      "two thirds of the way along the transverse colon",
+      "distal third of the transverse colon",
+      "midgut loop",
+      "vitelline duct",
+      "Meckel's diverticulum",
+      "malrotation",
+      "volvulus",
+      "acute mesenteric ischaemia",
+      "embolus",
+      "atrial fibrillation",
+      "pain out of proportion",
+      "chronic mesenteric ischaemia",
+      "mesenteric angina",
+      "postprandial pain",
+      "food fear",
+      "ischaemic colitis",
+      "thumbprinting",
+      "portal vein",
+      "superior mesenteric vein",
+      "splenic vein",
+      "inferior mesenteric vein",
+      "portal hypertension",
+      "porto-systemic anastomosis",
+      "oesophageal varices",
+      "caput medusae",
+      "haemorrhoids",
+      "referred pain",
+      "epigastric pain",
+      "periumbilical pain",
+      "suprapubic pain",
+      "hypogastric pain",
+      "greater splanchnic nerve",
+      "lesser splanchnic nerve",
+      "least splanchnic nerve",
+      "T5 to T9",
+      "T10 to T11",
+      "L1 to L2",
+      "appendicitis pain shift",
+      "high anterior resection",
+      "left hemicolectomy",
+      "right hemicolectomy"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "aorta",
+      "label": "Abdominal aorta",
+      "role": "context",
+      "group": "The trunk line",
+      "layer": "vessel",
+      "color": "#922b21",
+      "terms": [
+        "abdominal aorta",
+        "aortic hiatus",
+        "T12",
+        "L1",
+        "L3",
+        "L4 bifurcation",
+        "midline branches"
+      ],
+      "narration": "Draw the aorta as a vertical line from T12 to L4 and hang the whole topic off it. Three unpaired branches come off its front, and only three, and each one feeds one embryological division of the gut: coeliac at T12, superior mesenteric at L1, inferior mesenteric at L3. Everything else in this scene is a branch of a branch. If you can place those three levels you can reconstruct the rest under exam pressure."
+    },
+    {
+      "key": "foregut",
+      "label": "Foregut territory",
+      "role": "part",
+      "group": "Gut territories",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "foregut",
+        "lower oesophagus",
+        "stomach",
+        "first part of the duodenum",
+        "second part of the duodenum",
+        "major duodenal papilla",
+        "liver",
+        "gallbladder",
+        "pancreas",
+        "spleen",
+        "epigastric pain",
+        "T5 to T9"
+      ],
+      "narration": "Shade the gut from the lower oesophagus to the middle of the second part of the duodenum, and add the organs that bud off it: liver, gallbladder, pancreas and — although it is not gut at all — the spleen, which develops in the same dorsal mesogastrium. Its artery is the coeliac trunk. Its pain is referred to the epigastrium through the greater splanchnic nerve, T5 to T9. The junction with the midgut is not the end of the duodenum: it is the major duodenal papilla, where the bile duct enters, and that is the level examiners ask for."
+    },
+    {
+      "key": "midgut",
+      "label": "Midgut territory",
+      "role": "part",
+      "group": "Gut territories",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "terms": [
+        "midgut",
+        "distal duodenum",
+        "jejunum",
+        "ileum",
+        "caecum",
+        "appendix",
+        "ascending colon",
+        "proximal two thirds of the transverse colon",
+        "periumbilical pain",
+        "T10 to T11",
+        "midgut loop",
+        "malrotation"
+      ],
+      "narration": "From the major duodenal papilla to a point two-thirds of the way along the transverse colon. That is the jejunum, ileum, caecum, appendix, ascending colon and most of the transverse colon — the longest stretch and the one that herniates, rotates and returns during development. Its artery is the superior mesenteric. Its pain is periumbilical, through the lesser splanchnic nerve, T10 to T11, which is why early appendicitis hurts around the umbilicus long before the appendix itself is tender."
+    },
+    {
+      "key": "hindgut",
+      "label": "Hindgut territory",
+      "role": "part",
+      "group": "Gut territories",
+      "layer": "organ",
+      "color": "#a04000",
+      "terms": [
+        "hindgut",
+        "distal third of the transverse colon",
+        "splenic flexure",
+        "descending colon",
+        "sigmoid colon",
+        "rectum",
+        "upper anal canal",
+        "suprapubic pain",
+        "hypogastric pain",
+        "L1 to L2",
+        "pectinate line"
+      ],
+      "narration": "The distal third of the transverse colon, the splenic flexure, the descending and sigmoid colon, the rectum and the anal canal down to the pectinate line. Its artery is the inferior mesenteric. Its pain is suprapubic, through the least splanchnic and lumbar splanchnic nerves, L1 to L2. Below the pectinate line the gut stops being gut: that tissue is ectodermal, it is supplied by the inferior rectal artery from the internal iliac, and it has somatic sensation — which is why an external haemorrhoid is agonising and an internal one is painless."
+    },
+    {
+      "key": "celiac",
+      "label": "Coeliac trunk — T12",
+      "role": "part",
+      "group": "Coeliac trunk",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "coeliac axis",
+        "T12",
+        "trifurcation",
+        "median arcuate ligament",
+        "median arcuate ligament syndrome",
+        "coeliac plexus",
+        "coeliac plexus block"
+      ],
+      "narration": "A stubby stem barely a centimetre and a half long, leaving the front of the aorta at T12 immediately below the aortic hiatus, and dividing at once into three: left gastric, splenic, common hepatic. Learn it as a trifurcation and you have the foregut. Two clinical hooks: the median arcuate ligament can compress it and cause postprandial pain in a thin young patient, and the coeliac plexus surrounding it is the target of the nerve block given for pancreatic cancer pain."
+    },
+    {
+      "key": "lga",
+      "label": "Left gastric artery",
+      "role": "part",
+      "group": "Coeliac trunk",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "terms": [
+        "left gastric artery",
+        "lesser curvature",
+        "oesophageal branches",
+        "left gastric vein",
+        "oesophageal varices"
+      ],
+      "narration": "The smallest of the three. It runs up to the cardia, gives oesophageal branches, then turns down the lesser curvature to meet the right gastric artery. Its vein is the site of the porto-systemic anastomosis that becomes oesophageal varices."
+    },
+    {
+      "key": "splenic_a",
+      "label": "Splenic artery",
+      "role": "part",
+      "group": "Coeliac trunk",
+      "layer": "vessel",
+      "color": "#a93226",
+      "terms": [
+        "splenic artery",
+        "tortuous",
+        "upper border of the pancreas",
+        "short gastric arteries",
+        "left gastro-omental artery",
+        "pancreatic branches",
+        "posterior gastric ulcer"
+      ],
+      "narration": "The largest, running a tortuous course left along the upper border of the pancreas to the hilum of the spleen. On the way it supplies the pancreas, sends short gastric arteries to the fundus and gives the left gastro-omental artery to the greater curvature. It lies directly behind the body of the stomach — the reason a posterior gastric ulcer bleeds torrentially."
+    },
+    {
+      "key": "cha",
+      "label": "Common hepatic artery",
+      "role": "part",
+      "group": "Coeliac trunk",
+      "layer": "vessel",
+      "color": "#e6795f",
+      "terms": [
+        "common hepatic artery",
+        "hepatic artery proper",
+        "right gastric artery",
+        "cystic artery",
+        "hepatoduodenal ligament",
+        "portal triad"
+      ],
+      "narration": "Runs right towards the porta hepatis and divides into the hepatic artery proper — which ascends in the free edge of the lesser omentum with the bile duct and portal vein and gives the cystic artery — and the gastroduodenal artery. The right gastric artery comes off near that division and runs left along the lesser curvature."
+    },
+    {
+      "key": "gda",
+      "label": "Gastroduodenal artery",
+      "role": "part",
+      "group": "Coeliac trunk",
+      "layer": "vessel",
+      "color": "#d35400",
+      "terms": [
+        "gastroduodenal artery",
+        "superior pancreaticoduodenal artery",
+        "right gastro-omental artery",
+        "posterior duodenal ulcer",
+        "first part of the duodenum",
+        "haematemesis",
+        "melaena"
+      ],
+      "narration": "Descends behind the first part of the duodenum and splits into the superior pancreaticoduodenal artery and the right gastro-omental artery. Its position is the single most examined fact in this scene: a posterior duodenal ulcer erodes it and the patient bleeds, while an anterior one has only peritoneum in front of it and perforates instead."
+    },
+    {
+      "key": "sma",
+      "label": "Superior mesenteric artery — L1",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#b7950b",
+      "terms": [
+        "superior mesenteric artery",
+        "SMA",
+        "L1",
+        "neck of the pancreas",
+        "third part of the duodenum",
+        "root of the mesentery",
+        "SMA syndrome",
+        "nutcracker",
+        "acute mesenteric ischaemia",
+        "embolus"
+      ],
+      "narration": "Leaves the aorta at L1, one centimetre below the coeliac trunk, passes behind the neck of the pancreas and in front of the third part of the duodenum, then enters the root of the mesentery. That anatomical sandwich has two consequences: the duodenum can be pinched between artery and aorta in a rapidly wasted patient — superior mesenteric artery syndrome — and the artery's wide, shallow take-off angle makes it the vessel an embolus from a fibrillating heart lodges in."
+    },
+    {
+      "key": "ipda",
+      "label": "Inferior pancreaticoduodenal artery",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#d4ac0d",
+      "terms": [
+        "inferior pancreaticoduodenal artery",
+        "first branch of the SMA",
+        "pancreaticoduodenal arcade"
+      ],
+      "narration": "The first branch, and the one that gives the topic its logic. It turns back up to meet the superior pancreaticoduodenal artery from the coeliac side, forming an arcade around the head of the pancreas and the duodenum."
+    },
+    {
+      "key": "jejunal_ileal",
+      "label": "Jejunal & ileal arteries",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#e8c547",
+      "terms": [
+        "jejunal arteries",
+        "ileal arteries",
+        "arcades",
+        "vasa recta",
+        "long vasa recta",
+        "short vasa recta",
+        "windows of the mesentery",
+        "jejunum versus ileum"
+      ],
+      "narration": "Fifteen to twenty branches from the left side of the artery, running in the mesentery to the small bowel. Their pattern distinguishes jejunum from ileum on sight and in the viva: the jejunum has one or two large arcades with long straight vasa recta and fat-free windows, the ileum has many short arcades with short vasa recta and fat that creeps right up to the wall."
+    },
+    {
+      "key": "ileocolic",
+      "label": "Ileocolic artery",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#b9770e",
+      "terms": [
+        "ileocolic artery",
+        "appendicular artery",
+        "end artery",
+        "caecum",
+        "terminal ileum",
+        "appendicectomy",
+        "gangrenous appendix"
+      ],
+      "narration": "Supplies the terminal ileum, the caecum and the appendix. Its appendicular branch runs in the free edge of the mesoappendix and is a functional end artery — thrombose it and the appendix becomes gangrenous and perforates, which is why appendicitis is a time-limited emergency."
+    },
+    {
+      "key": "right_colic",
+      "label": "Right colic artery",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#af601a",
+      "terms": [
+        "right colic artery",
+        "ascending colon",
+        "hepatic flexure",
+        "absent in a third of people"
+      ],
+      "narration": "Supplies the ascending colon and hepatic flexure. It is the most variable branch in the abdomen and is absent in up to a third of people, its territory taken over by the ileocolic or middle colic — worth knowing because a variant is not a pathology."
+    },
+    {
+      "key": "middle_colic",
+      "label": "Middle colic artery",
+      "role": "part",
+      "group": "Superior mesenteric artery",
+      "layer": "vessel",
+      "color": "#ca6f1e",
+      "terms": [
+        "middle colic artery",
+        "transverse mesocolon",
+        "proximal two thirds of the transverse colon",
+        "midgut hindgut junction"
+      ],
+      "narration": "Runs forward in the transverse mesocolon and supplies the proximal two-thirds of the transverse colon. Where its territory ends and the left colic begins is the midgut–hindgut border, and it is the exact spot where the colon is most at risk."
+    },
+    {
+      "key": "ima",
+      "label": "Inferior mesenteric artery — L3",
+      "role": "part",
+      "group": "Inferior mesenteric artery",
+      "layer": "vessel",
+      "color": "#7d3c98",
+      "terms": [
+        "inferior mesenteric artery",
+        "IMA",
+        "L3",
+        "hindgut artery",
+        "left of the midline",
+        "aortic aneurysm repair"
+      ],
+      "narration": "Leaves the front of the aorta at L3, three or four centimetres above the bifurcation, and runs down and to the left. It is small enough that it is routinely sacrificed in aortic aneurysm surgery — and colonic ischaemia after that operation is the price when the collateral supply is poor."
+    },
+    {
+      "key": "left_colic",
+      "label": "Left colic artery",
+      "role": "part",
+      "group": "Inferior mesenteric artery",
+      "layer": "vessel",
+      "color": "#8e44ad",
+      "terms": [
+        "left colic artery",
+        "splenic flexure",
+        "descending colon",
+        "ascending branch",
+        "descending branch"
+      ],
+      "narration": "The first branch, dividing into an ascending limb to the splenic flexure and distal transverse colon and a descending limb to the descending colon. Its ascending limb is the hindgut half of the splenic flexure watershed."
+    },
+    {
+      "key": "sigmoid_a",
+      "label": "Sigmoid arteries",
+      "role": "part",
+      "group": "Inferior mesenteric artery",
+      "layer": "vessel",
+      "color": "#a569bd",
+      "terms": [
+        "sigmoid arteries",
+        "sigmoid mesocolon",
+        "sigmoid colon"
+      ],
+      "narration": "Two to four branches running in the sigmoid mesocolon to the sigmoid colon, anastomosing with the left colic above and the superior rectal below."
+    },
+    {
+      "key": "superior_rectal",
+      "label": "Superior rectal artery",
+      "role": "part",
+      "group": "Inferior mesenteric artery",
+      "layer": "vessel",
+      "color": "#c39bd3",
+      "terms": [
+        "superior rectal artery",
+        "terminal branch of the IMA",
+        "rectum",
+        "upper anal canal",
+        "internal haemorrhoids",
+        "Sudeck's point",
+        "rectosigmoid junction"
+      ],
+      "narration": "The continuation of the inferior mesenteric artery past the last sigmoid branch, crossing the pelvic brim to supply the rectum and the anal canal above the pectinate line. The junction between the lowest sigmoid branch and this artery is Sudeck's point, a classically weak anastomosis at the rectosigmoid."
+    },
+    {
+      "key": "rectal_anastomosis",
+      "label": "Middle & inferior rectal arteries",
+      "role": "part",
+      "group": "Inferior mesenteric artery",
+      "layer": "vessel",
+      "color": "#d7bde2",
+      "terms": [
+        "middle rectal artery",
+        "inferior rectal artery",
+        "internal iliac artery",
+        "internal pudendal artery",
+        "systemic supply",
+        "pectinate line",
+        "haemorrhoids"
+      ],
+      "narration": "The rectum is the one place the gut receives a second, systemic supply: the middle rectal from the internal iliac and the inferior rectal from the internal pudendal. This is why the rectum almost never becomes ischaemic even when the inferior mesenteric artery is tied, and why haemorrhoids above and below the pectinate line differ in every respect — supply, drainage, sensation and treatment."
+    },
+    {
+      "key": "pd_arcade",
+      "label": "Pancreaticoduodenal arcade",
+      "role": "part",
+      "group": "Anastomoses & watersheds",
+      "layer": "vessel",
+      "color": "#1abc9c",
+      "terms": [
+        "pancreaticoduodenal arcade",
+        "superior pancreaticoduodenal artery",
+        "inferior pancreaticoduodenal artery",
+        "coeliac SMA anastomosis",
+        "collateral circulation",
+        "median arcuate ligament syndrome"
+      ],
+      "narration": "The bridge between foregut and midgut, running round the head of the pancreas. Because of it, a slowly occluding coeliac trunk can be fed backwards from the superior mesenteric artery and vice versa. Gradual disease is therefore survivable where a sudden embolus is not — collaterals need time to open."
+    },
+    {
+      "key": "marginal",
+      "label": "Marginal artery of Drummond",
+      "role": "part",
+      "group": "Anastomoses & watersheds",
+      "layer": "vessel",
+      "color": "#16a085",
+      "terms": [
+        "marginal artery of Drummond",
+        "continuous anastomotic channel",
+        "ileocaecal junction to rectosigmoid",
+        "vasa recta",
+        "collateral"
+      ],
+      "narration": "A single continuous vessel running along the whole inner border of the colon from the ileocaecal junction to the rectosigmoid, linking every colic artery to its neighbours. Short vasa recta leave it for the bowel wall. It is the reason a surgeon can divide one named colic artery and the colon still lives — provided the marginal artery itself is intact."
+    },
+    {
+      "key": "riolan",
+      "label": "Arc of Riolan (meandering mesenteric artery)",
+      "role": "part",
+      "group": "Anastomoses & watersheds",
+      "layer": "vessel",
+      "color": "#48c9b0",
+      "terms": [
+        "arc of Riolan",
+        "meandering mesenteric artery",
+        "middle colic artery",
+        "left colic artery",
+        "central anastomosis",
+        "angiography"
+      ],
+      "narration": "A shorter, more central connection between the middle colic and the left colic arteries, lying nearer the root of the mesentery than the marginal artery. It is inconstant, but when it is large and visible on angiography it is a sign — it means one of the two mesenteric arteries is chronically occluded and this vessel has enlarged to carry the load."
+    },
+    {
+      "key": "splenic_flexure_watershed",
+      "label": "Splenic flexure watershed (Griffiths point)",
+      "role": "part",
+      "group": "Anastomoses & watersheds",
+      "layer": "vessel",
+      "color": "#0e6655",
+      "terms": [
+        "splenic flexure",
+        "Griffiths point",
+        "watershed",
+        "ischaemic colitis",
+        "thumbprinting",
+        "midgut hindgut junction",
+        "hypotension",
+        "shock"
+      ],
+      "narration": "Where the middle colic territory meets the left colic territory the anastomosis is at its thinnest, and in about a fifth of people it is barely present at all. This is Griffiths point at the splenic flexure, the classic watershed. In shock, sepsis or after aortic surgery this segment is the first to become ischaemic — the patient has left-sided abdominal pain with bloody diarrhoea, and the plain film or CT shows thumbprinting from mucosal oedema. The second watershed is Sudeck's point at the rectosigmoid, for the same reason."
+    },
+    {
+      "key": "portal_v",
+      "label": "Portal vein",
+      "role": "part",
+      "group": "Portal drainage",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "terms": [
+        "portal vein",
+        "neck of the pancreas",
+        "portal triad",
+        "hepatoduodenal ligament",
+        "portal hypertension",
+        "liver metastases"
+      ],
+      "narration": "Formed behind the neck of the pancreas by the superior mesenteric and splenic veins. Every drop of blood from the abdominal gut passes through the liver before it reaches the heart, which is the definition of a portal system. It is also why gut cancers seed to the liver first and why liver disease raises pressure in veins as far away as the oesophagus and the anal canal."
+    },
+    {
+      "key": "smv",
+      "label": "Superior mesenteric vein",
+      "role": "part",
+      "group": "Portal drainage",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "terms": [
+        "superior mesenteric vein",
+        "right of the artery",
+        "confluence",
+        "mesenteric venous thrombosis"
+      ],
+      "narration": "Runs up on the right of its artery and joins the splenic vein at the confluence. Thrombosis here causes a slower, subacute mesenteric ischaemia — days of vague abdominal pain rather than the sudden catastrophe of an arterial embolus, and it is a hunt for a thrombophilia when it happens in a young patient."
+    },
+    {
+      "key": "splenic_v",
+      "label": "Splenic vein",
+      "role": "part",
+      "group": "Portal drainage",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "terms": [
+        "splenic vein",
+        "behind the pancreas",
+        "inferior mesenteric vein",
+        "pancreatic carcinoma",
+        "left sided portal hypertension"
+      ],
+      "narration": "Runs behind the body of the pancreas, straight rather than tortuous like its artery, and receives the inferior mesenteric vein. A carcinoma in the body of the pancreas can thrombose it and produce isolated gastric varices with a normal liver — segmental, or left-sided, portal hypertension."
+    },
+    {
+      "key": "imv",
+      "label": "Inferior mesenteric vein",
+      "role": "part",
+      "group": "Portal drainage",
+      "layer": "vessel",
+      "color": "#a9cce3",
+      "terms": [
+        "inferior mesenteric vein",
+        "does not follow its artery",
+        "splenic vein",
+        "duodenojejunal flexure",
+        "ligament of Treitz"
+      ],
+      "narration": "The one vein that does not accompany its artery. It ascends to the left of the midline, passes beside the duodenojejunal flexure and drains into the splenic vein rather than into the portal vein directly. Examiners like it precisely because it breaks the rule that veins follow arteries."
+    },
+    {
+      "key": "referred_pain",
+      "label": "Referred pain zones",
+      "role": "part",
+      "group": "Reading the pain",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "referred pain",
+        "visceral pain",
+        "midline pain",
+        "epigastric",
+        "periumbilical",
+        "suprapubic",
+        "greater splanchnic nerve",
+        "lesser splanchnic nerve",
+        "least splanchnic nerve",
+        "T5 to T9",
+        "T10 to T11",
+        "L1 to L2",
+        "appendicitis",
+        "pain shift"
+      ],
+      "narration": "Three bands down the midline of the anterior abdominal wall, matching the three arteries exactly. Foregut pain is epigastric, midgut pain is periumbilical, hindgut pain is suprapubic. The sympathetic afferents that carry each run back with the artery, which is why the map is arterial and not anatomical proximity. Appendicitis is the whole system in one patient: periumbilical pain first because the appendix is midgut, then a shift to the right iliac fossa when the parietal peritoneum is touched and somatic nerves take over."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three arteries, three guts",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Anastomoses & watersheds"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Portal drainage"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Gut territories",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "celiac",
+          "to": "foregut",
+          "kind": "supplies"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "midgut",
+          "kind": "supplies"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ima",
+          "to": "hindgut",
+          "kind": "supplies"
+        }
+      ],
+      "narration": "The whole topic is one sentence: the gut is divided into three by its development, and each division keeps the artery it grew on. Coeliac trunk at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. Learn the two junction points because they are not where you would guess. Foregut becomes midgut at the major duodenal papilla, halfway along the second part of the duodenum, where the bile duct enters. Midgut becomes hindgut two-thirds of the way along the transverse colon. Every branch, every referred pain and every watershed in the rest of this scene follows from those two lines."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Coeliac trunk — the foregut",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Coeliac trunk"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "celiac",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "celiac",
+            "lga",
+            "splenic_a",
+            "cha",
+            "gda",
+            "foregut"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "One short stem at T12 dividing into three. Left gastric goes up to the cardia and down the lesser curvature. Splenic runs left along the top of the pancreas, giving pancreatic branches, short gastrics to the fundus and the left gastro-omental artery. Common hepatic runs right and divides into the hepatic artery proper — which supplies liver and, through the cystic artery, gallbladder — and the gastroduodenal artery, which descends behind the first part of the duodenum and ends as the superior pancreaticoduodenal and right gastro-omental arteries. Two clinical facts to carry out of this beat: the gastroduodenal artery behind the duodenal cap is what a posterior ulcer bleeds from, and the splenic artery behind the stomach is what a posterior gastric ulcer bleeds from."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Superior mesenteric artery — the midgut",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Superior mesenteric artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "midgut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "sma",
+            "ipda",
+            "jejunal_ileal",
+            "ileocolic",
+            "right_colic",
+            "middle_colic",
+            "midgut"
+          ],
+          "duration": 11
+        }
+      ],
+      "narration": "Branches in order, and the order is the exam answer. From the left side come fifteen to twenty jejunal and ileal arteries that form arcades in the mesentery. From the right side, in ascending order along the gut, come the ileocolic, the right colic and the middle colic. The first branch of all is the inferior pancreaticoduodenal, which turns back to meet its coeliac partner. Notice the geometry: the artery enters the root of the mesentery, which is only fifteen centimetres long, so the entire midgut hangs from a narrow stalk with one artery in it. That is why malrotation permits volvulus and why volvulus round the superior mesenteric artery infarcts the whole small bowel at once."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "Inferior mesenteric artery — the hindgut",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Inferior mesenteric artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ima",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "ima",
+            "left_colic",
+            "sigmoid_a",
+            "superior_rectal",
+            "hindgut"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "superior_rectal",
+            "rectal_anastomosis"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Three branches and a continuation. Left colic to the splenic flexure and descending colon, two to four sigmoid arteries, and then the artery continues over the pelvic brim as the superior rectal artery. The rectum is the exception in the whole gut: it also receives the middle rectal artery from the internal iliac and the inferior rectal from the internal pudendal, so it has a systemic supply on top of its gut supply. Learn that alongside the pectinate line, because everything changes at that line — above it, hindgut supply, portal drainage, visceral sensation and painless internal haemorrhoids; below it, systemic supply, systemic drainage, somatic sensation and exquisitely painful external ones."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Why some segments survive and the splenic flexure does not",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Portal drainage"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Reading the pain"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Anastomoses & watersheds",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-flow",
+          "path": [
+            "celiac",
+            "pd_arcade",
+            "sma",
+            "riolan",
+            "marginal",
+            "ima"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "middle_colic",
+          "to": "left_colic",
+          "kind": "meet at the watershed"
+        }
+      ],
+      "narration": "The three arteries are not three separate systems; they are joined. The pancreaticoduodenal arcade bridges coeliac and superior mesenteric round the head of the pancreas. The marginal artery of Drummond runs the entire inner border of the colon and links every colic artery to its neighbours, and the arc of Riolan makes a shorter central connection between middle and left colic. Because of these, a gradual occlusion is compensated and a named colic artery can be divided at surgery without losing the bowel. But the connections are weakest exactly where the middle colic territory ends and the left colic begins — Griffiths point at the splenic flexure — and again at the rectosigmoid, Sudeck's point. Those two spots are where ischaemic colitis happens after hypotension, sepsis or aortic surgery: left-sided pain, bloody diarrhoea, thumbprinting on imaging."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Where the blood goes afterwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Portal drainage"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Gut territories"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-blood",
+          "path": [
+            "midgut",
+            "smv",
+            "imv",
+            "splenic_v",
+            "portal_v"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "portal_v",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "imv",
+          "to": "splenic_v",
+          "kind": "drains into, not into its own artery's vein"
+        }
+      ],
+      "narration": "The veins mirror the arteries with one deliberate exception. The superior mesenteric vein runs on the right of its artery. The splenic vein runs behind the pancreas. The two meet behind the neck of the pancreas to form the portal vein. The inferior mesenteric vein breaks the pattern: it climbs to the left of the midline past the duodenojejunal flexure and joins the splenic vein. All of it goes through the liver first. Three consequences worth memorising: gut cancers metastasise to the liver before anywhere else; a pancreatic tumour at the confluence obstructs bile duct and portal vein together; and in portal hypertension the pressure escapes through porto-systemic anastomoses at the lower oesophagus, the umbilicus and the anal canal, giving varices, caput medusae and haemorrhoids."
+    },
+    {
+      "mode": "comparison",
+      "beat": 7,
+      "title": "Reading a patient backwards to an artery",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Portal drainage"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "referred_pain",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "foregut",
+            "midgut",
+            "hindgut"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Take the map into the ward. Midline visceral pain tells you the gut division and therefore the artery: epigastric is foregut and coeliac, periumbilical is midgut and superior mesenteric, suprapubic is hindgut and inferior mesenteric. Sudden severe central pain with a soft abdomen and a fibrillating pulse is an embolus in the superior mesenteric artery — pain out of proportion to the signs, and the diagnosis is made on CT angiography, not on examination. Postprandial pain with weight loss and fear of eating in an arteriopath is chronic mesenteric ischaemia, and it needs two of the three arteries to be diseased before it appears, because of the collaterals in beat five. Left iliac fossa pain with bloody diarrhoea in an elderly patient after a hypotensive episode is ischaemic colitis at the splenic flexure. And a shift of pain from the umbilicus to the right iliac fossa is appendicitis — midgut visceral pain first, somatic parietal pain second."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "Routed to diagram, which is the FIRST entry in this structure's preferred_modes, and 3d_anatomy is recorded in deferred_modes. That ordering is the curriculum's and it is right for the teaching: the subject here is a territory map — which artery owns which stretch of gut — and the answer is a plane of relationships, not a shape. A 3D scene would show three arteries floating in front of an aorta and would not show the two junction lines that the whole topic turns on.",
+    "Unusually for a deferred scene, the 3D version is fully resolvable today and the work is done here so nobody has to repeat it. The catalog holds the coeliac artery, the superior mesenteric artery, the inferior mesenteric artery, the left gastric, splenic and common hepatic arteries, the descending aorta, the splenic and superior mesenteric veins, and the gut segments themselves — duodenum, jejunum, ileum, appendix and rectum. Whoever promotes this scene should resolve each of those against available-meshes.json by name and keep the beats as authored.",
+    "Status is 'planned', not 'ready'. The scene is fully authored — twenty-nine labelled regions, seven beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. It needs one main drawing: the aorta with its three unpaired branches, the gut laid out in three shaded territories, the marginal artery running the length of the colon, and the two watershed points marked. A second small panel for the three referred-pain bands on the abdominal wall would complete beat seven.",
+    "The colon is missing from the catalog entirely — no caecum, no ascending, transverse, descending or sigmoid colon, and no flexures. The only large-gut meshes are the three taeniae coli, FMA76891, FMA76892 and FMA76893 — which, since they run the whole length of the colon, would let a 3D version trace the marginal artery along the bowel's actual course. Since three of this scene's seven beats are about colonic supply and both watersheds are colonic, a 3D version would be teaching the marginal artery against bowel that is not drawn. This is the same absence recorded by the Large intestine scene, and it is the highest-value acquisition for this topic.",
+    "No portal vein, no inferior mesenteric vein, no gastroduodenal artery, no colic arteries of any kind and no rectal arteries in the catalog. Beats three, four and six therefore name more vessels than any provider could currently render, which is correct: the teaching is the branching order, and abbreviating it to the four vessels that happen to have meshes would leave a student unable to answer a standard viva question.",
+    "The referred-pain bands are authored as a labelled region because that is what they are on a diagram. They have no anatomical surface of their own and never will; in a future 3D version they should become anchors on the anterior abdominal wall rather than structures.",
+    "Sympathetic afferent pathways — greater, lesser and least splanchnic nerves — are named in narration and terms[] but are not drawn. No nerve of the abdomen exists in the catalog, and the splanchnic route is better taught as a sequence-mode scene in the neuroanatomy course, which is entirely unauthored.",
+    "This scene deliberately does not claim to cover 'Portal venous system', which is a separate curriculum entry under Liver, Biliary Tract, Pancreas & Spleen. Beat six teaches the confluence and the porto-systemic sites because gut venous drainage cannot be taught without them, but the anastomoses themselves, their clinical measurement and their management belong to that entry and it stays unauthored."
+  ]
+}

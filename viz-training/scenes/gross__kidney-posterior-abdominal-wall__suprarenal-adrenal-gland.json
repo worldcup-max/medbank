@@ -1,0 +1,684 @@
+{
+  "schema": 2,
+  "id": "gross__kidney-posterior-abdominal-wall__suprarenal-adrenal-gland",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Kidney & Posterior Abdominal Wall",
+  "structure": "Suprarenal (adrenal) gland",
+  "covers": [
+    "Suprarenal (adrenal) gland"
+  ],
+  "learning_goal": "Place both suprarenal glands on the upper poles of the kidneys, tell the pyramidal right gland from the crescentic left one by its shape and its relations, name the three arteries that supply each gland and the single vein that drains it, explain why the right suprarenal vein is the vessel that tears in surgery, and separate the cortex with its three zones and their hormones from the medulla with its chromaffin cells and catecholamines.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "suprarenal gland",
+      "adrenal gland",
+      "endocrine anatomy",
+      "posterior abdominal wall",
+      "retroperitoneum",
+      "kidney",
+      "adrenal vasculature",
+      "Cushing syndrome",
+      "Conn syndrome",
+      "phaeochromocytoma",
+      "Addison disease",
+      "adrenalectomy",
+      "abdomen"
+    ],
+    "terms": [
+      "suprarenal gland",
+      "adrenal gland",
+      "suprarenal",
+      "adrenal",
+      "right suprarenal gland",
+      "left suprarenal gland",
+      "pyramidal",
+      "crescentic",
+      "semilunar",
+      "upper pole of the kidney",
+      "retroperitoneal",
+      "renal fascia",
+      "septum of renal fascia",
+      "perirenal fat",
+      "renal ptosis",
+      "five grams",
+      "T12",
+      "L1",
+      "right crus",
+      "left crus",
+      "diaphragm",
+      "bare area of the liver",
+      "inferior vena cava",
+      "lesser sac",
+      "omental bursa",
+      "stomach",
+      "pancreas",
+      "splenic artery",
+      "coeliac trunk",
+      "celiac trunk",
+      "coeliac plexus",
+      "suprarenal plexus",
+      "superior suprarenal artery",
+      "middle suprarenal artery",
+      "inferior suprarenal artery",
+      "inferior phrenic artery",
+      "abdominal aorta",
+      "renal artery",
+      "three arteries one vein",
+      "right suprarenal vein",
+      "left suprarenal vein",
+      "left renal vein",
+      "short vein",
+      "adrenalectomy",
+      "adrenal cortex",
+      "adrenal medulla",
+      "zona glomerulosa",
+      "zona fasciculata",
+      "zona reticularis",
+      "salt sugar sex",
+      "aldosterone",
+      "cortisol",
+      "androgens",
+      "dehydroepiandrosterone",
+      "chromaffin cells",
+      "adrenaline",
+      "epinephrine",
+      "noradrenaline",
+      "catecholamines",
+      "preganglionic sympathetic fibres",
+      "greater splanchnic nerve",
+      "modified sympathetic ganglion",
+      "neural crest",
+      "mesoderm",
+      "Cushing syndrome",
+      "Conn syndrome",
+      "primary hyperaldosteronism",
+      "phaeochromocytoma",
+      "pheochromocytoma",
+      "rule of tens",
+      "Addison disease",
+      "adrenal insufficiency",
+      "Waterhouse Friderichsen syndrome",
+      "adrenal haemorrhage",
+      "congenital adrenal hyperplasia",
+      "incidentaloma",
+      "MEN 2",
+      "adrenal crisis"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "right_adrenal",
+      "name": "right adrenal gland",
+      "label": "Right suprarenal gland — pyramidal",
+      "role": "part",
+      "group": "Suprarenal glands",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA15629"
+      },
+      "terms": [
+        "right suprarenal gland",
+        "right adrenal gland",
+        "pyramidal",
+        "triangular",
+        "upper pole",
+        "inferior vena cava",
+        "bare area of the liver",
+        "right crus",
+        "short vein",
+        "adrenalectomy"
+      ],
+      "narration": "Pyramidal, and it sits like a cap on the upper pole of the right kidney. Its relations are what make it the difficult gland. In front and medially lies the inferior vena cava; in front and laterally, the bare area of the liver; behind, the diaphragm and the right crus. It is therefore wedged between the cava and the liver in a space that is hard to reach and impossible to see well. Weigh it and it is only about five grams, yet it takes one of the richest blood supplies per gram in the body."
+    },
+    {
+      "key": "left_adrenal",
+      "name": "left adrenal gland",
+      "label": "Left suprarenal gland — crescentic",
+      "role": "part",
+      "group": "Suprarenal glands",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA15630"
+      },
+      "terms": [
+        "left suprarenal gland",
+        "left adrenal gland",
+        "crescentic",
+        "semilunar",
+        "medial border",
+        "upper pole",
+        "lesser sac",
+        "stomach",
+        "pancreas",
+        "splenic artery",
+        "left crus"
+      ],
+      "narration": "Crescentic or semilunar rather than pyramidal, and it does not cap the kidney — it lies along the medial border of the upper half of the left kidney, extending further down. In front, its upper part is separated from the stomach by the lesser sac while its lower part touches the pancreas and the splenic artery. Behind lies the diaphragm and the left crus. Learn the two shapes as a pair, because the difference is a standing one-mark question: pyramidal on the right, crescentic on the left."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney — the gland's bed",
+      "role": "part",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#8c3b2f",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "upper pole",
+        "renal fascia",
+        "septum",
+        "perirenal fat",
+        "renal ptosis",
+        "separate organ"
+      ],
+      "narration": "The gland sits on the kidney but is not attached to it. Both lie inside the renal fascia, and a thin septum of that fascia runs between them, separating the two into different compartments of perirenal fat. That septum is the reason a dropped kidney leaves its suprarenal gland behind, and it is the plane the surgeon looks for when removing one without the other."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "part",
+      "group": "Kidneys",
+      "layer": "organ",
+      "color": "#a0463a",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "medial border",
+        "upper pole",
+        "higher kidney",
+        "T12"
+      ],
+      "narration": "The left kidney is the higher of the two, and its gland runs down its medial border rather than sitting on its apex. Both glands lie at about the level of T12 to L1, against the crura of the diaphragm."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — where the right vein drains",
+      "role": "part",
+      "group": "Venous drainage",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "right suprarenal vein",
+        "very short vein",
+        "torn in adrenalectomy",
+        "anterior relation",
+        "catastrophic bleeding"
+      ],
+      "narration": "The cava lies directly in front of and medial to the right gland, and the right suprarenal vein is only a few millimetres long before it enters the back of the cava at an awkward angle. That single fact dominates right adrenal surgery: the vein must be found and secured early, because if it avulses it retracts into a cava that cannot simply be clamped. Contrast this with the left, whose vein is long and enters the left renal vein — comfortably accessible."
+    },
+    {
+      "key": "left_renal_vein",
+      "name": "left renal vein",
+      "label": "Left renal vein — where the left vein drains",
+      "role": "part",
+      "group": "Venous drainage",
+      "layer": "vessel",
+      "color": "#3498db",
+      "refs": {
+        "bodyparts3d": "FMA14336"
+      },
+      "terms": [
+        "left renal vein",
+        "left suprarenal vein",
+        "long vein",
+        "crosses the aorta",
+        "adrenal venous sampling",
+        "one vein per gland"
+      ],
+      "narration": "The left suprarenal vein descends from the lower end of the crescentic gland and joins the left renal vein as it crosses the front of the aorta. Note the asymmetry once more: on the right, gland to cava; on the left, gland to renal vein. It matters in practice — adrenal venous sampling, used to decide which gland is producing the aldosterone in Conn syndrome, is easy on the left and technically demanding on the right for exactly this reason."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — the middle suprarenal artery",
+      "role": "part",
+      "group": "Arterial supply",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "middle suprarenal artery",
+        "direct branch",
+        "T12",
+        "L1",
+        "three arteries"
+      ],
+      "narration": "The middle suprarenal artery arises directly from the aorta at about the level of the superior mesenteric artery. It is one of only a handful of direct paired visceral branches of the aorta, and it is the middle member of the gland's three-source supply."
+    },
+    {
+      "key": "right_renal_artery",
+      "name": "right renal artery",
+      "label": "Renal artery — the inferior suprarenal artery",
+      "role": "part",
+      "group": "Arterial supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14752"
+      },
+      "terms": [
+        "renal artery",
+        "inferior suprarenal artery",
+        "third source",
+        "lower pole of the gland"
+      ],
+      "narration": "The inferior suprarenal artery comes off the renal artery and runs up to the lower part of the gland. So the three sources arrive from three different levels — above, level with, and below — and they break up into as many as sixty small branches before they enter the capsule. That is why a small gland bleeds so freely and why no single vessel can be tied to devascularise it."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — the superior suprarenal artery and the posterior relation",
+      "role": "part",
+      "group": "Arterial supply",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "right crus",
+        "left crus",
+        "inferior phrenic artery",
+        "superior suprarenal artery",
+        "posterior relation",
+        "T12"
+      ],
+      "narration": "Both glands lie against the diaphragm and its crura behind. The inferior phrenic artery, running on the underside of the diaphragm, gives the superior suprarenal artery — the highest of the three sources. Remember the supply as a rule of one-from-each: phrenic above, aorta in the middle, renal below."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk — the plexus and the level",
+      "role": "context",
+      "group": "Arterial supply",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "coeliac plexus",
+        "suprarenal plexus",
+        "greater splanchnic nerve",
+        "preganglionic sympathetic",
+        "T10 to L1"
+      ],
+      "narration": "The coeliac trunk leaves the aorta at T12, and around it lies the coeliac plexus, from which the suprarenal plexus reaches each gland. The nerves that matter here are preganglionic sympathetic fibres from the greater splanchnic nerve, and they pass through the plexus without relay to synapse on the medullary cells themselves — a wiring arrangement found nowhere else."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — the right gland's anterolateral relation",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "bare area",
+        "suprarenal impression",
+        "right suprarenal gland",
+        "no peritoneum"
+      ],
+      "narration": "The bare area of the liver — the patch with no peritoneum on it — lies directly against the right suprarenal gland and leaves the suprarenal impression on the visceral surface. Approach the right gland from in front and the liver must be retracted upwards before anything can be seen."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach — across the lesser sac from the left gland",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "lesser sac",
+        "omental bursa",
+        "left suprarenal gland",
+        "anterior relation"
+      ],
+      "narration": "The upper part of the left gland is separated from the posterior wall of the stomach only by the lesser sac. That peritoneal space is the route by which the left gland is reached at open surgery, through the gastrocolic omentum."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — marking the pancreas",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreas",
+        "body of the pancreas",
+        "tail of the pancreas",
+        "splenic artery",
+        "left suprarenal gland",
+        "anterior relation"
+      ],
+      "narration": "The duct shows where the gland lies. The body and tail of the pancreas, with the splenic artery along its upper border, cross in front of the lower part of the left suprarenal gland."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#7e5109",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "left hypochondrium",
+        "splenic artery",
+        "left adrenalectomy"
+      ],
+      "narration": "Lateral and above on the left. It is drawn to show how crowded the left upper compartment is: an incautious left adrenalectomy can injure the spleen or the pancreatic tail."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "First lumbar vertebra — the level",
+      "role": "context",
+      "group": "Bony landmarks",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "first lumbar vertebra",
+        "L1",
+        "T12",
+        "transpyloric plane",
+        "vertebral level"
+      ],
+      "narration": "The glands straddle the T12 to L1 level, which is also where their arteries arise and where computed tomography finds them as thin inverted Y or V shapes against the crura."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Two glands, two shapes",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Arterial supply"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Suprarenal glands",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_adrenal",
+            "left_adrenal"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_adrenal",
+          "to": "right_kidney",
+          "kind": "caps the upper pole"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_adrenal",
+          "to": "left_kidney",
+          "kind": "lies along the medial border"
+        }
+      ],
+      "narration": "Two small retroperitoneal endocrine glands, about five grams each, at the level of T12 to L1 against the crura of the diaphragm. They are not identical and the differences are examinable. The right gland is pyramidal and sits like a cap on the upper pole of the right kidney. The left gland is crescentic and lies along the medial border of the upper half of the left kidney, reaching further down. Both lie within the renal fascia with the kidney, but a septum of that fascia separates the two organs — which is why a mobile kidney descends and leaves its gland behind, and why an adrenalectomy need not be a nephrectomy. The name suprarenal describes only the right one honestly; adrenal, meaning beside the kidney, describes both."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 2,
+      "title": "Why the right gland is the awkward one",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "right_adrenal"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ivc"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "right_kidney"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_adrenal",
+          "to": "ivc",
+          "kind": "anteromedial relation"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_adrenal",
+          "to": "liver",
+          "kind": "bare area lies against it"
+        }
+      ],
+      "narration": "Take the right gland's relations one face at a time. In front and medial: the inferior vena cava. In front and lateral: the bare area of the liver, the one patch of that organ with no peritoneum on it, which leaves the suprarenal impression. Behind: the diaphragm and its right crus. Below: the upper pole of the kidney. Every one of those is an obstruction. The gland is buried between the cava and the liver, and the surgeon must retract the liver upwards and mobilise the cava medially before the gland comes into view. The left gland's relations are gentler — stomach across the lesser sac above, pancreas and splenic artery below, diaphragm behind — and it is correspondingly easier to reach."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "Three arteries in, one vein out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Arterial supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Venous drainage"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Suprarenal glands"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Kidneys"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:suprarenal-arterial-supply",
+          "path": [
+            "diaphragm",
+            "aorta",
+            "right_renal_artery",
+            "right_adrenal"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ivc",
+            "left_renal_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_adrenal",
+          "to": "ivc",
+          "kind": "short right suprarenal vein"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_adrenal",
+          "to": "left_renal_vein",
+          "kind": "long left suprarenal vein"
+        }
+      ],
+      "narration": "The blood supply is the most reliably asked fact about this gland, and it has a shape worth memorising: three arteries in, one vein out, and the two sides drain differently. The superior suprarenal artery comes from the inferior phrenic artery above. The middle suprarenal artery comes straight off the aorta. The inferior suprarenal artery comes from the renal artery below. Between them they divide into dozens of small branches before entering the capsule, so the gland is one of the most richly perfused tissues in the body per gram — and it bleeds accordingly. Drainage is by a single vein on each side, and here the sides part company. The right suprarenal vein is very short and enters the inferior vena cava directly. The left suprarenal vein is long, descends, and joins the left renal vein. Three consequences. In surgery, the right vein is the one that avulses into a cava that cannot be clamped, so it is identified and ligated first. In diagnosis, adrenal venous sampling to localise an aldosterone-producing adenoma is straightforward on the left and technically difficult on the right. And in oncology, a right-sided adrenal tumour has a very short route into the cava."
+    },
+    {
+      "mode": "glands",
+      "beat": 4,
+      "title": "Cortex and medulla — two organs in one capsule",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Suprarenal glands"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "left_adrenal",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut the gland across and there are two tissues inside one capsule, with different origins, different control and different products. The outer yellow cortex is mesodermal and makes steroids in three zones, learned from outside in as salt, sugar, sex. Zona glomerulosa makes aldosterone under angiotensin II and potassium — the salt. Zona fasciculata, the thickest zone, makes cortisol under pituitary corticotropin — the sugar. Zona reticularis makes androgens, chiefly dehydroepiandrosterone — the sex. The inner grey-red medulla is neural crest tissue, effectively a modified sympathetic ganglion whose cells have lost their axons: preganglionic fibres of the greater splanchnic nerve pass through the coeliac plexus without relay and synapse directly on chromaffin cells, which release adrenaline and noradrenaline into the blood rather than onto a target. So the cortex is an endocrine gland taking orders from the pituitary, and the medulla is a piece of the sympathetic nervous system that secretes into the circulation. Only the cortex is essential to life: remove it, or destroy it, and the patient dies without replacement, whereas the medulla can be removed without hormone replacement at all."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "What goes wrong, and where you look for it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Suprarenal glands",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "celiac",
+          "to": "Suprarenal glands",
+          "kind": "suprarenal plexus reaches the medulla"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "l1",
+          "to": "Suprarenal glands",
+          "kind": "the T12 to L1 level on a scan"
+        }
+      ],
+      "narration": "Read the pathology off the two tissues. Too much cortisol from the fasciculata is Cushing syndrome — central obesity, moon face, purple striae, thin skin, proximal weakness, hypertension and diabetes. Too much aldosterone from the glomerulosa is Conn syndrome — hypertension with a low potassium, and adrenal venous sampling to decide which gland is at fault. Too much androgen from the reticularis, usually from a missing enzyme in congenital adrenal hyperplasia, virilises a female infant and causes salt loss. Too much catecholamine from the medulla is a phaeochromocytoma — episodic headache, sweating and palpitations on a background of hypertension, remembered by the rule of tens and treated by blocking alpha receptors before beta, never the other way round. Too little of everything is Addison disease — fatigue, weight loss, postural hypotension and pigmentation, which in this region is most often tuberculous or autoimmune, and which can present acutely as an adrenal crisis. And bilateral haemorrhagic destruction in meningococcal sepsis is Waterhouse-Friderichsen syndrome. On a scan the glands are thin V or Y shapes at T12 to L1 lying on the crura, and an adrenal mass found by accident while looking for something else — an incidentaloma — is worked up by asking two questions in order: is it functioning, and is it malignant."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The gland is one solid model. The catalog holds no adrenal cortex, no medulla and no zona glomerulosa, fasciculata or reticularis. Beat four therefore teaches the entire internal organisation — which is the whole endocrine point of the organ — by narration over a CROSS_SECTION of the undivided gland, with PEEL_LAYER authored so the beat becomes real the day layered models exist. Every zone and hormone name is in match.terms, so a note that says 'zona fasciculata' still opens this scene at the right subject. This structure's second preferred mode, diagram, would teach the cortex-medulla split far better than the 3D model does, and a companion diagram-mode scene is the highest-value addition here.",
+    "There is no right suprarenal vein and no left suprarenal vein in the catalog, and no inferior phrenic, superior suprarenal, middle suprarenal or inferior suprarenal artery. The entire vascular teaching of beat three — three arteries in, one vein out, and the left-right asymmetry that dominates adrenal surgery — is taught through the vessels the branches come FROM: the diaphragm for the inferior phrenic, the aorta for the middle, the renal artery for the inferior, and the cava and left renal vein as the two destinations. That is option (b), an adjacent structure that exists, and the labels say so plainly, but the student cannot see the short right vein that the narration calls the most dangerous vessel in the operation. Acquiring the two suprarenal veins would be the single most useful mesh addition for this scene.",
+    "The right renal artery model is used to carry the inferior suprarenal artery's teaching for both sides, because that branch arises from the renal artery. Its catalog name is right renal artery and the label says renal artery, so nothing is mislabelled, but a student rotating the scene sees only one side of a bilateral supply.",
+    "No landmark anchors were authored. Anchors in this corpus are placed by measurement on the real geometry and these meshes are not in the local decimated set, so the hilum of each gland, the point of entry of the right suprarenal vein into the cava, and the cortex-medulla junction could not be positioned honestly. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect.",
+    "There is no peritoneum and no lesser sac, so the left gland's relation to the stomach across the omental bursa is asserted rather than shown. The stomach and the gland are both present, so the relation is drawn between two real structures.",
+    "There are no splanchnic nerves and no coeliac plexus in the catalog. The medulla's unique innervation — preganglionic fibres synapsing directly on chromaffin cells — is taught against the coeliac artery as a positional proxy for the plexus that surrounds it, and the narration says that is what it is.",
+    "There is no pancreas mesh, only the pancreatic duct, used as context under the honest label 'Pancreatic duct - marking the pancreas' because the duct runs the length of the gland and shows where it lies.",
+    "This scene does not claim to cover 'Kidney' or 'Abdominal aorta & IVC' even though both kidneys, the aorta and the cava appear in it. The kidneys are here as the gland's bed and as the source of the inferior suprarenal artery, not as taught organs; the great vessels are here to fix where the gland's vessels begin and end. Both remain separate curriculum entries, and 'Kidney' is authored as its own scene."
+  ]
+}

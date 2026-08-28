@@ -1,0 +1,633 @@
+{
+  "schema": 2,
+  "id": "embryology__pharyngeal-apparatus__thyroid-gland-development",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Pharyngeal Apparatus",
+  "structure": "Thyroid gland development",
+  "covers": [
+    "Thyroid gland development"
+  ],
+  "learning_goal": "Trace the thyroid from the foramen cecum to the front of the trachea, say what the thyroglossal duct is and what its remnants become, and use that route to explain why a thyroglossal cyst moves on tongue protrusion, why the Sistrunk operation takes the body of the hyoid, and why an ectopic thyroid must be imaged before it is removed.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thyroid development",
+      "thyroid gland development",
+      "thyroglossal duct",
+      "descent of the thyroid",
+      "pharyngeal apparatus",
+      "branchial apparatus",
+      "head and neck development",
+      "endocrine development",
+      "neck swellings",
+      "midline neck lump",
+      "week 4",
+      "week 7",
+      "congenital hypothyroidism",
+      "newborn screening"
+    ],
+    "terms": [
+      "thyroid gland",
+      "thyroid primordium",
+      "thyroid diverticulum",
+      "endodermal thickening",
+      "floor of the pharynx",
+      "foramen cecum",
+      "foramen caecum",
+      "tuberculum impar",
+      "copula",
+      "junction of anterior two thirds and posterior third of the tongue",
+      "sulcus terminalis",
+      "first endocrine gland to develop",
+      "day 24",
+      "week 4",
+      "bilobed",
+      "thyroglossal duct",
+      "hyoid bone",
+      "body of the hyoid",
+      "anterior to the hyoid",
+      "loops behind the hyoid",
+      "laryngeal cartilages",
+      "thyroid cartilage",
+      "descent",
+      "final position",
+      "week 7",
+      "anterior to the trachea",
+      "second to fourth tracheal rings",
+      "isthmus",
+      "lateral lobes",
+      "pyramidal lobe",
+      "levator glandulae thyroideae",
+      "duct degenerates",
+      "colloid",
+      "follicle formation",
+      "week 11",
+      "thyroxine",
+      "maternal thyroxine",
+      "placental transfer",
+      "iodine",
+      "thyroid stimulating hormone",
+      "C cells",
+      "parafollicular cells",
+      "calcitonin",
+      "ultimopharyngeal body",
+      "ultimobranchial body",
+      "fourth pouch",
+      "neural crest",
+      "thyroglossal duct cyst",
+      "midline swelling",
+      "moves on swallowing",
+      "moves on tongue protrusion",
+      "subhyoid",
+      "infection",
+      "thyroglossal fistula",
+      "Sistrunk procedure",
+      "excision of the middle third of the hyoid",
+      "recurrence",
+      "lingual thyroid",
+      "ectopic thyroid",
+      "base of the tongue",
+      "dysphagia",
+      "only functioning thyroid tissue",
+      "radionuclide scan",
+      "technetium scan",
+      "ultrasound",
+      "thyroid agenesis",
+      "thyroid dysgenesis",
+      "congenital hypothyroidism",
+      "cretinism",
+      "heel prick",
+      "newborn screening",
+      "levothyroxine",
+      "goitre",
+      "iodine deficiency",
+      "thyroglossal duct carcinoma"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "pharyngeal_floor",
+      "label": "Where it starts — the floor of the pharynx",
+      "role": "context",
+      "group": "Origin",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "floor of the primitive pharynx",
+        "endoderm",
+        "tuberculum impar",
+        "copula",
+        "first arch",
+        "second arch",
+        "midline",
+        "week 4",
+        "day 24",
+        "first endocrine gland"
+      ],
+      "narration": "The thyroid does not come from a pouch. It begins as a midline thickening of endoderm in the floor of the primitive pharynx, between the tuberculum impar of the first arch and the copula behind it. It appears about day twenty-four, which makes it the first endocrine gland to develop in the embryo. Everything that follows is that patch of endoderm travelling downwards."
+    },
+    {
+      "key": "foramen_cecum",
+      "label": "Foramen cecum — the scar of the starting point",
+      "role": "part",
+      "group": "Origin",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "foramen cecum",
+        "foramen caecum",
+        "apex of the sulcus terminalis",
+        "junction of anterior two thirds and posterior third",
+        "dorsum of the tongue",
+        "midline pit",
+        "origin of the thyroid",
+        "upper end of the thyroglossal duct"
+      ],
+      "narration": "The pit that patch leaves behind is the foramen cecum, at the apex of the sulcus terminalis on the dorsum of the tongue — the junction of the anterior two thirds and the posterior third. It is a small blind pit with no function, but it is the fixed upper end of the whole journey. Every clinical sign in this scene depends on the fact that this end never moves."
+    },
+    {
+      "key": "diverticulum",
+      "label": "The thyroid diverticulum grows down as a bilobed bud",
+      "role": "part",
+      "group": "Descent",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "thyroid diverticulum",
+        "thyroid primordium",
+        "bilobed",
+        "diverticulum descends",
+        "anterior to the pharyngeal gut",
+        "in front of the foregut",
+        "two lobes and an isthmus",
+        "week 4",
+        "week 5"
+      ],
+      "narration": "The thickening sinks in and grows downwards as a diverticulum, in front of the pharyngeal gut. It quickly becomes bilobed, and those two lobes joined by a narrow bridge are already the lateral lobes and the isthmus of the adult gland. Note that it descends in front of everything — in front of the foregut, in front of the hyoid, in front of the laryngeal cartilages — because that anterior route is what puts the adult gland where you palpate it."
+    },
+    {
+      "key": "thyroglossal_duct",
+      "label": "The thyroglossal duct — the trail it descends on",
+      "role": "part",
+      "group": "Descent",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "terms": [
+        "thyroglossal duct",
+        "narrow canal",
+        "connects to the tongue",
+        "foramen cecum",
+        "descends in the midline",
+        "solid cord",
+        "degenerates",
+        "week 7",
+        "week 10",
+        "obliterated",
+        "remnant"
+      ],
+      "narration": "As the gland descends it stays tethered to the tongue by a narrow canal, the thyroglossal duct, which runs down the midline of the neck behind it. In a normal embryo this duct becomes a solid cord and then breaks up and disappears once the gland has arrived. Remember it as a trail rather than a tube with a job: nothing passes along it, and its only importance is what happens when part of it refuses to vanish."
+    },
+    {
+      "key": "hyoid_relation",
+      "label": "The duct passes at the hyoid — the fact the surgeon needs",
+      "role": "part",
+      "group": "Descent",
+      "layer": "organ",
+      "color": "#ca6f1e",
+      "terms": [
+        "hyoid bone",
+        "body of the hyoid",
+        "anterior to the hyoid",
+        "passes close to the hyoid",
+        "loops behind the hyoid",
+        "hyoid ossifies around the duct",
+        "intimate relation",
+        "middle third of the hyoid",
+        "Sistrunk procedure"
+      ],
+      "narration": "On its way down the duct passes immediately at the developing hyoid — descending in front of it and commonly looping behind its body before continuing. The hyoid then ossifies around that intimate relation, so duct tissue can be left buried in the bone itself. This single anatomical fact is why removing a thyroglossal cyst alone recurs, and why the operation that works takes the middle third of the hyoid with it."
+    },
+    {
+      "key": "final_position",
+      "label": "Where it stops — in front of the upper trachea",
+      "role": "part",
+      "group": "Descent",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "final position",
+        "week 7",
+        "anterior to the trachea",
+        "second to fourth tracheal rings",
+        "isthmus",
+        "lateral lobes",
+        "below the thyroid cartilage",
+        "invested by pretracheal fascia",
+        "moves on swallowing"
+      ],
+      "narration": "By about week seven the gland reaches its definitive position: the isthmus lying across the second to fourth tracheal rings, with a lateral lobe on each side reaching up alongside the larynx. Because it is wrapped by pretracheal fascia and attached to the larynx, the adult gland moves upwards on swallowing — the sign you use at the bedside to say a neck lump is thyroid."
+    },
+    {
+      "key": "pyramidal_lobe",
+      "label": "Pyramidal lobe — the bit of duct that stayed",
+      "role": "part",
+      "group": "Descent",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "pyramidal lobe",
+        "persistent distal thyroglossal duct",
+        "from the isthmus",
+        "upwards to the hyoid",
+        "levator glandulae thyroideae",
+        "fibrous or muscular band",
+        "normal variant",
+        "about half of people",
+        "remnant thyroid tissue after thyroidectomy"
+      ],
+      "narration": "In roughly half of people the lowest part of the duct does not disappear but becomes thyroid tissue: a pyramidal lobe running upwards from the isthmus, usually a little to the left, sometimes with a fibrous or muscular strand up to the hyoid called the levator glandulae thyroideae. It is a normal variant, not a disease, but it matters in surgery — a pyramidal lobe left behind is functioning thyroid tissue left behind."
+    },
+    {
+      "key": "c_cells",
+      "label": "The C cells arrive from somewhere else",
+      "role": "part",
+      "group": "Gland",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "C cells",
+        "parafollicular cells",
+        "calcitonin",
+        "ultimopharyngeal body",
+        "ultimobranchial body",
+        "fourth pouch",
+        "neural crest",
+        "two origins",
+        "follicular cells from endoderm",
+        "medullary thyroid carcinoma"
+      ],
+      "narration": "The gland has two lineages, and this is the exam point. The follicular cells that make thyroxine come from the midline endoderm you have just followed down. The parafollicular or C cells that make calcitonin do not: they arrive separately when the ultimopharyngeal body of the fourth pouch is absorbed into the gland, and they are neural crest in origin. One organ, two embryological ancestries — which is why a tumour of the C cells behaves nothing like a tumour of the follicular cells."
+    },
+    {
+      "key": "follicles_function",
+      "label": "When it starts working",
+      "role": "part",
+      "group": "Gland",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "follicle formation",
+        "colloid",
+        "week 11",
+        "week 12",
+        "thyroxine",
+        "fetal thyroid hormone",
+        "maternal thyroxine",
+        "placental transfer",
+        "iodine",
+        "brain development",
+        "thyroid stimulating hormone",
+        "first trimester"
+      ],
+      "narration": "Follicles with colloid appear from about week eleven and the fetal gland begins to make thyroxine soon after. Before that the fetus depends on maternal thyroxine crossing the placenta, and it continues to receive some throughout pregnancy. That dependence is the reason maternal hypothyroidism and maternal iodine deficiency damage fetal brain development in the first trimester, when the fetus has no gland of its own to compensate."
+    },
+    {
+      "key": "thyroglossal_cyst",
+      "label": "Thyroglossal duct cyst — the classic midline lump",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "thyroglossal duct cyst",
+        "midline neck swelling",
+        "subhyoid",
+        "below the hyoid",
+        "child",
+        "young adult",
+        "painless",
+        "smooth",
+        "fluctuant",
+        "moves up on swallowing",
+        "moves up on tongue protrusion",
+        "commonest congenital neck cyst",
+        "infection",
+        "thyroglossal fistula",
+        "ultrasound"
+      ],
+      "narration": "Any part of the duct that persists can secrete and become a cyst. It is the commonest congenital neck swelling and it is strictly midline, most often just below the hyoid, in a child or young adult. Two signs come straight out of the embryology. It rises on swallowing, because it is attached to the larynx below. And it rises on protruding the tongue, because its upper end is still tethered to the foramen cecum — the one test that separates it from every other midline lump. If it becomes infected and discharges, it leaves a thyroglossal fistula, which is always acquired rather than congenital because the duct never opened onto the skin in the first place."
+    },
+    {
+      "key": "sistrunk",
+      "label": "Sistrunk procedure — why the hyoid comes out",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "Sistrunk procedure",
+        "excision of the cyst",
+        "middle third of the hyoid",
+        "body of the hyoid",
+        "tract up to the foramen cecum",
+        "core of tongue base tissue",
+        "recurrence",
+        "simple excision recurs",
+        "duct tissue in the bone"
+      ],
+      "narration": "Treatment is the embryology made surgical. Because duct tissue can be buried in the ossified hyoid and can continue up towards the foramen cecum, taking the cyst alone leaves the source behind and it recurs. The Sistrunk procedure removes the cyst, the middle third of the body of the hyoid, and the tract above it towards the tongue base — and the recurrence rate falls accordingly. If you can say why the hyoid is taken, you have understood the descent."
+    },
+    {
+      "key": "ectopic_thyroid",
+      "label": "Ectopic thyroid — it can stop anywhere on the route",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#a93226",
+      "terms": [
+        "ectopic thyroid",
+        "lingual thyroid",
+        "base of the tongue",
+        "sublingual",
+        "incomplete descent",
+        "excessive descent",
+        "substernal",
+        "dysphagia",
+        "dysphonia",
+        "airway obstruction",
+        "only functioning thyroid tissue",
+        "radionuclide scan",
+        "technetium scan",
+        "scan before excision",
+        "hypothyroidism after removal",
+        "thyroglossal duct carcinoma"
+      ],
+      "narration": "Descent can stop early or go too far, and thyroid tissue is found anywhere between the tongue base and the mediastinum. The commonest is a lingual thyroid: a swelling at the back of the tongue causing dysphagia or a change in voice. One rule matters more than the diagnosis. In many of these patients the ectopic tissue is the only functioning thyroid they have, so it is imaged with a radionuclide scan before anyone removes it. A surgeon who excises a lingual thyroid without scanning first has made the patient permanently hypothyroid."
+    },
+    {
+      "key": "agenesis_screening",
+      "label": "When no gland forms at all",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#f1948a",
+      "terms": [
+        "thyroid agenesis",
+        "thyroid dysgenesis",
+        "congenital hypothyroidism",
+        "cretinism",
+        "prolonged jaundice",
+        "poor feeding",
+        "constipation",
+        "hypotonia",
+        "large tongue",
+        "umbilical hernia",
+        "hoarse cry",
+        "delayed milestones",
+        "heel prick",
+        "newborn screening",
+        "levothyroxine",
+        "irreversible intellectual disability",
+        "iodine deficiency"
+      ],
+      "narration": "If the primordium fails entirely, or the gland that forms is too small to work, the baby has congenital hypothyroidism. The point to hold is that the newborn looks normal at birth — protected by maternal thyroxine — and the signs appear over weeks as prolonged jaundice, poor feeding, constipation, hypotonia, a large tongue and a hoarse cry. By the time they are obvious, brain damage has begun and is not reversible. That is precisely why it is screened for on the heel prick rather than waited for, and why treatment with levothyroxine is started immediately."
+    },
+    {
+      "key": "thyroid_summary",
+      "label": "The five-line summary",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "starts at the foramen cecum",
+        "descends in front of the hyoid",
+        "arrives in front of the trachea by week seven",
+        "duct disappears",
+        "cyst moves on tongue protrusion",
+        "C cells from the fourth pouch",
+        "revision list"
+      ],
+      "narration": "Five lines carry the topic. One: it begins as midline endoderm in the floor of the pharynx and leaves the foramen cecum behind. Two: it descends in front of the hyoid and the laryngeal cartilages on the thyroglossal duct. Three: it arrives in front of the second to fourth tracheal rings by about week seven and the duct disappears. Four: a surviving piece of duct gives a midline cyst that moves on tongue protrusion and is treated by taking the middle third of the hyoid with it. Five: the follicular cells came down this route, but the C cells came in sideways from the fourth pouch and are neural crest."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Start at the back of the tongue",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Origin"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "foramen_cecum",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Look down onto the floor of the primitive pharynx. In the midline, between the tuberculum impar in front and the copula behind, a patch of endoderm thickens at about day twenty-four — the first endocrine gland in the embryo. Mark the spot, because the pit it leaves is the foramen cecum at the apex of the sulcus terminalis, and that end of the journey never moves for the rest of the patient's life."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Follow it down the neck",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Descent"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:thyroid-descent",
+          "path": [
+            "foramen_cecum",
+            "diverticulum",
+            "thyroglossal_duct",
+            "hyoid_relation",
+            "final_position"
+          ],
+          "duration": 11
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hyoid_relation",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Now watch it travel. The thickening sinks in, becomes a bilobed diverticulum, and grows downwards in front of the pharyngeal gut, trailing the thyroglossal duct behind it. It passes at the hyoid — in front of it, commonly looping behind its body — and then in front of the laryngeal cartilages. By about week seven it settles across the second to fourth tracheal rings. Watch that moment at the hyoid rather than the arrival, because it is the moment that decides an operation twenty years later."
+    },
+    {
+      "mode": "glands",
+      "beat": 3,
+      "title": "The gland that arrives, and the cells that join it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Gland"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "final_position"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pyramidal_lobe"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "c_cells",
+          "to": "final_position",
+          "kind": "neural crest cells from the fourth pouch join"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "c_cells",
+            "follicles_function"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The finished gland has two ancestries. The follicular cells came down the midline from the tongue and start making colloid and thyroxine from about week eleven, though the fetus leans on maternal thyroxine long before that. The parafollicular C cells arrived separately, carried in when the ultimopharyngeal body of the fourth pouch was absorbed, and they are neural crest. Add the pyramidal lobe — the lowest part of the duct turned into thyroid tissue in about half of people — and the adult anatomy is accounted for."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "A lump in the midline of the neck",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "thyroglossal_duct",
+          "to": "thyroglossal_cyst",
+          "kind": "a surviving segment becomes"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hyoid_relation",
+          "to": "sistrunk",
+          "kind": "duct tissue buried in the bone requires"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "thyroglossal_cyst",
+          "intensity": 0.95
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Leave a segment of duct behind and it fills to become a thyroglossal cyst — midline, usually just below the hyoid, painless and fluctuant, in a child or young adult. It rises on swallowing because it is attached below, and it rises on protruding the tongue because it is still tethered above to the foramen cecum. That second sign is the whole diagnosis. Cut sagittally through the neck and you can see why simple excision fails: duct tissue sits in the ossified hyoid and runs on up towards the tongue base, so the Sistrunk procedure takes the cyst, the middle third of the hyoid and the tract above it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Descent gone wrong, and the baby who looks well",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:ectopic-sites",
+          "path": [
+            "ectopic_thyroid",
+            "thyroglossal_cyst",
+            "agenesis_screening"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ectopic_thyroid",
+            "agenesis_screening"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "thyroid_summary",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Finally, the two ways descent fails. It can stop short, leaving thyroid tissue anywhere from the tongue base downwards — a lingual thyroid presenting with dysphagia or a changed voice — and that ectopic tissue is often the only functioning gland the patient has, so it is scanned before it is touched. Or the primordium never forms adequately at all, and the baby has congenital hypothyroidism. Note that this baby looks normal at birth because maternal thyroxine has been covering for it, and by the time the jaundice, the poor feeding, the hypotonia and the hoarse cry are obvious, damage has been done. That is the argument for the heel prick, and it is an embryological argument."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so deferred_modes carries diagram and 3d_anatomy. The 3d option is kept deliberately: the adult gland, its relation to the trachea and larynx, and the route past the hyoid are spatial and would be far better taught on a model. The catalog was not consulted for a mesh here because mode selection takes the first RENDERABLE preferred mode and sequence is renderable today; the 3d route is deferred, not refused.",
+    "Status is 'planned'. Fifteen regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a superior view of the tongue with the sulcus terminalis and the foramen cecum marked at its apex; a midsagittal neck showing the descent as three or four stages on one outline, with the thyroglossal duct drawn from the foramen cecum past the hyoid to the final gland and the relation to the body of the hyoid drawn explicitly; an anterior view of the definitive gland on the second to fourth tracheal rings with the isthmus, both lobes and a pyramidal lobe labelled; a small panel showing the ultimopharyngeal body of the fourth pouch being absorbed and dispersing as C cells, in the same two fills the pouches scene uses for endoderm and neural crest; and a route panel with the ectopic sites — lingual, sublingual, subhyoid, substernal — pinned along the line of descent.",
+    "The descent must be drawn as stages on ONE neck outline, not as separate figures. Every clinical sign in this scene is about relative position over time: a cyst moving on tongue protrusion, a gland stopping short, tissue trapped in the hyoid. Redrawn separately, those become three facts to memorise instead of one movement with three consequences.",
+    "The hyoid relation needs its own enlargement. The Sistrunk procedure is only comprehensible if the student can see duct tissue in the plane of the bone; a drawing that shows the duct passing cleanly in front of an unossified hyoid makes the operation look excessive.",
+    "Beat 2 traces concept:thyroid-descent and beat 5 traces concept:ectopic-sites. In each the subject is a migration over time or a distribution along a route rather than a drawn region, so neither has a subject to light.",
+    "Beat 5 authors PEEL_LAYER on the organ layer so the clinical route panel can be stripped back to the bare neck outline and re-read for what is missing rather than what is present. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the teaching move survives the degradation.",
+    "Beat 4 uses CROSS_SECTION on the z axis for a sagittal cut through the midline neck. Once artwork exists this should be checked against the drawing's own axis convention rather than assumed — the op is correct in intent and the axis letter is the one thing here a renderer could disagree with.",
+    "'Pharyngeal pouches' is NOT claimed in covers[]. The fourth pouch and the ultimopharyngeal body are named only as the source of the C cells, because the gland cannot be described honestly without saying that half its cell types came from somewhere else. The pouch derivative list, the dorsal and ventral wings, the thymic descent, the parathyroid crossover and DiGeorge belong to that entry.",
+    "'Pharyngeal arches' is NOT claimed. The tuberculum impar and the copula are named only to locate the origin in the pharyngeal floor; tongue development proper, the arch contributions to its muscles and its innervation belong to the arches entry and to a tongue development entry.",
+    "'Pharyngeal clefts & membranes' is NOT claimed. A thyroglossal cyst is contrasted with a branchial cyst in that scene and here only by the midline-versus-lateral distinction, which both scenes need and neither owns.",
+    "Medullary thyroid carcinoma and the MEN 2 association are deliberately NOT taught here beyond one clause noting that a C cell tumour behaves unlike a follicular one. That clinical thread is developed in the pouches scene where the neural crest origin is established; repeating it here would duplicate teaching without either scene owning it. It is left in match.terms so a highlighted term still reaches a scene.",
+    "Thyroid histology — follicles, colloid, follicular epithelium changing height with activity, C cells between follicles — is named only as the timing of when function begins. The tissue-level teaching belongs to the histology course, which routes it to microscopic.",
+    "Thyroid hormone physiology and the causes of goitre are out of scope. Iodine deficiency appears once, as the reason maternal supply matters to the fetal brain. The terms are kept in match.terms so a physiology note that mentions them can still open this scene for the developmental part of its answer.",
+    "Week numbers are the usual teaching approximations — primordium about day twenty-four, descent complete by about week seven, follicles and colloid from about week eleven. Texts vary by several days and the narration says approximately throughout.",
+    "The stated frequency of a pyramidal lobe is given as roughly half of people, which is the commonly quoted range in anatomy texts; reported figures vary widely with how carefully it is looked for. The narration gives it as approximate rather than as a number to recall.",
+    "Whether the thyroglossal duct passes in front of, behind, or through the developing hyoid is described differently across texts. The narration gives the anterior descent with a common loop behind the body, which is the description that makes the Sistrunk procedure make sense, and says 'commonly' rather than asserting one course."
+  ]
+}

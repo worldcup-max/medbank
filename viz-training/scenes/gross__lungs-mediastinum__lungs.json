@@ -1,0 +1,863 @@
+{
+  "schema": 2,
+  "id": "gross__lungs-mediastinum__lungs",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Lungs & Mediastinum",
+  "structure": "Lungs",
+  "covers": [
+    "Lungs"
+  ],
+  "learning_goal": "Tell the right lung from the left by its lobes, fissures and impressions, place each fissure on the chest wall well enough to auscultate a named lobe, name what enters and leaves at the hilum in order, and explain why an inhaled groundnut lands in the right lower lobe.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "lungs",
+      "respiratory system",
+      "thorax",
+      "mediastinum",
+      "pleura",
+      "chest examination",
+      "chest x-ray",
+      "bronchopulmonary segments",
+      "lobar pneumonia",
+      "lung cancer"
+    ],
+    "terms": [
+      "lung",
+      "lungs",
+      "right lung",
+      "left lung",
+      "upper lobe",
+      "middle lobe",
+      "lower lobe",
+      "superior lobe",
+      "inferior lobe",
+      "oblique fissure",
+      "horizontal fissure",
+      "transverse fissure",
+      "apex of the lung",
+      "cupola",
+      "suprapleural membrane",
+      "Sibson's fascia",
+      "base of the lung",
+      "diaphragmatic surface",
+      "costal surface",
+      "mediastinal surface",
+      "cardiac notch",
+      "cardiac impression",
+      "lingula",
+      "hilum of the lung",
+      "hilum",
+      "root of the lung",
+      "pulmonary ligament",
+      "principal bronchus",
+      "main bronchus",
+      "eparterial bronchus",
+      "hyparterial bronchus",
+      "RALS",
+      "pulmonary artery",
+      "pulmonary veins",
+      "bronchial arteries",
+      "bronchopulmonary segment",
+      "ten segments",
+      "postural drainage",
+      "foreign body aspiration",
+      "aspiration pneumonia",
+      "lobar pneumonia",
+      "Pancoast tumour",
+      "apical tumour",
+      "Horner syndrome",
+      "auscultation",
+      "midaxillary line",
+      "fourth rib",
+      "sixth rib",
+      "T4 spine",
+      "azygos lobe",
+      "phrenic nerve",
+      "vagus nerve",
+      "in front of the root",
+      "behind the root"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "rul",
+      "name": "upper lobe of right lung",
+      "label": "Right upper lobe",
+      "role": "part",
+      "group": "Right lung",
+      "layer": "organ",
+      "color": "#e08a8a",
+      "refs": {
+        "bodyparts3d": "FMA7333"
+      },
+      "terms": [
+        "right upper lobe",
+        "RUL",
+        "superior lobe of the right lung",
+        "apical segment",
+        "apex of the lung",
+        "Pancoast tumour"
+      ],
+      "narration": "The top third of the right lung, above the horizontal fissure. Its apex rises about two and a half centimetres above the medial third of the clavicle, so it is in the root of the neck and a stab there enters the chest. A tumour at that apex presses on the sympathetic chain and the lower brachial plexus — Horner's syndrome with wasting of the small muscles of the hand."
+    },
+    {
+      "key": "rml",
+      "name": "middle lobe of lung",
+      "label": "Right middle lobe",
+      "role": "part",
+      "group": "Right lung",
+      "layer": "organ",
+      "color": "#d9736f",
+      "refs": {
+        "bodyparts3d": "FMA7383"
+      },
+      "terms": [
+        "right middle lobe",
+        "RML",
+        "middle lobe",
+        "middle lobe syndrome",
+        "lateral segment",
+        "medial segment"
+      ],
+      "narration": "A small wedge that exists only on the right, between the horizontal and oblique fissures. It sits in front, low and medial, so it is heard best over the right side of the front of the chest just lateral to the sternum — not at the back. Its bronchus is long, narrow and surrounded by lymph nodes, which is why it collapses so readily."
+    },
+    {
+      "key": "rll",
+      "name": "lower lobe of right lung",
+      "label": "Right lower lobe",
+      "role": "part",
+      "group": "Right lung",
+      "layer": "organ",
+      "color": "#b8524a",
+      "refs": {
+        "bodyparts3d": "FMA7337"
+      },
+      "terms": [
+        "right lower lobe",
+        "RLL",
+        "inferior lobe of the right lung",
+        "posterior basal segment",
+        "apical segment of lower lobe",
+        "aspiration"
+      ],
+      "narration": "The largest lobe, and mostly behind. Lay a hand on the back below the scapula and you are over lower lobe, not upper. It is where aspirated material lands in a patient lying supine, because the right main bronchus is wider, shorter and more vertical than the left."
+    },
+    {
+      "key": "lul",
+      "name": "upper lobe of left lung",
+      "label": "Left upper lobe",
+      "role": "part",
+      "group": "Left lung",
+      "layer": "organ",
+      "color": "#e8a0a0",
+      "refs": {
+        "bodyparts3d": "FMA7370"
+      },
+      "terms": [
+        "left upper lobe",
+        "LUL",
+        "superior lobe of the left lung",
+        "cardiac notch",
+        "lingula",
+        "lingular segment"
+      ],
+      "narration": "Bigger than its right counterpart because the left lung has only two lobes. Its lower front edge is scooped out by the heart — the cardiac notch — and below that notch hangs a tongue of lung, the lingula, which is the left lung's answer to a middle lobe."
+    },
+    {
+      "key": "lll",
+      "name": "lower lobe of left lung",
+      "label": "Left lower lobe",
+      "role": "part",
+      "group": "Left lung",
+      "layer": "organ",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA7371"
+      },
+      "terms": [
+        "left lower lobe",
+        "LLL",
+        "inferior lobe of the left lung",
+        "basal segments"
+      ],
+      "narration": "Lies behind and below the oblique fissure, like the right lower lobe. The left lung is the smaller of the two overall, because the heart bulges into it and the left dome of the diaphragm is lower only by comparison — the liver pushes the right dome higher."
+    },
+    {
+      "key": "apex_right",
+      "label": "Apex of the right lung",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "rul",
+        "uvw": [
+          0.765,
+          0.632,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the upper lobe of the right lung, 85.9 mm from the lobe's surface centroid; see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "apex of the lung",
+        "cupola",
+        "suprapleural membrane",
+        "Sibson's fascia",
+        "subclavian artery groove",
+        "supraclavicular"
+      ],
+      "narration": "Rises about 2.5 cm above the medial third of the clavicle, into the root of the neck. It is roofed only by the suprapleural membrane, so a needle placed too low in the neck punctures lung."
+    },
+    {
+      "key": "apex_left",
+      "label": "Apex of the left lung",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "lul",
+        "uvw": [
+          0.211,
+          0.665,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the upper lobe of the left lung, 110.4 mm from the lobe's surface centroid; see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "apex of the left lung",
+        "cupola",
+        "root of the neck",
+        "subclavian vein"
+      ],
+      "narration": "The same height on the left. Both apices lie behind the sternoclavicular joint, which is why a subclavian line is a recognised cause of pneumothorax."
+    },
+    {
+      "key": "oblique_fissure_right",
+      "label": "Oblique fissure — right",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "rul",
+        "uvw": [
+          0.474,
+          0.995,
+          0.392
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the upper and lower lobes of the right lung — the oblique fissure surface (gap 0.10 mm); see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "oblique fissure",
+        "major fissure",
+        "T4 spine",
+        "sixth costochondral junction",
+        "fifth rib",
+        "midaxillary line"
+      ],
+      "narration": "Runs from the spine of T4 behind, round the chest along the line of the fifth rib, to the sixth costochondral junction in front. Everything behind and below it is lower lobe. Ask the patient to put a hand on the back of the head and the fissure follows the medial border of the scapula."
+    },
+    {
+      "key": "oblique_fissure_left",
+      "label": "Oblique fissure — left",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "lul",
+        "uvw": [
+          0.2,
+          0.798,
+          0.57
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the upper and lower lobes of the left lung — the oblique fissure surface (gap 0.13 mm); see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "oblique fissure",
+        "major fissure",
+        "left oblique fissure",
+        "more vertical"
+      ],
+      "narration": "The left oblique fissure is slightly more vertical than the right and is the only fissure the left lung has. Two lobes on the left, one fissure; three lobes on the right, two fissures."
+    },
+    {
+      "key": "cardiac_notch",
+      "label": "Cardiac notch",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#e74c3c",
+      "anchor": {
+        "on": "lul",
+        "uvw": [
+          0.624,
+          0.456,
+          0.32
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the upper lobe of the left lung and the wall of the heart — the cardiac impression, whose upper edge is the notch (gap 0.61 mm); see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "cardiac notch",
+        "cardiac impression",
+        "bare area of the heart",
+        "left fourth intercostal space",
+        "pericardiocentesis"
+      ],
+      "narration": "The heart pushes the front edge of the left lung aside, leaving a notch. Behind that notch the pericardium touches the chest wall directly, which is the window a needle uses to reach the pericardium and the reason cardiac dullness is heard where it is."
+    },
+    {
+      "key": "lingula",
+      "label": "Lingula",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#e59866",
+      "anchor": {
+        "on": "lul",
+        "uvw": [
+          0.415,
+          0.014,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the upper lobe of the left lung — the tongue that hangs below the cardiac notch, 133.1 mm from the lobe's surface centroid; see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "lingula",
+        "lingular segments",
+        "superior lingular",
+        "inferior lingular",
+        "equivalent of the middle lobe"
+      ],
+      "narration": "A tongue of upper lobe hanging below the cardiac notch. It is developmentally the left lung's middle lobe, kept as two segments of the upper lobe instead of a lobe of its own."
+    },
+    {
+      "key": "hilum_right",
+      "label": "Hilum of the right lung",
+      "role": "part",
+      "group": "Root of the lung",
+      "render": "anchor",
+      "color": "#5dade2",
+      "anchor": {
+        "on": "rul",
+        "uvw": [
+          0.894,
+          0.544,
+          0.47
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the upper lobe of the right lung and the pulmonary artery — the root of the lung (gap 0.73 mm); see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "hilum of the lung",
+        "root of the lung",
+        "eparterial bronchus",
+        "azygos vein",
+        "arches over the right root",
+        "pulmonary ligament"
+      ],
+      "narration": "The wedge on the medial surface where everything enters and leaves. On the right the upper lobe bronchus leaves above the artery — the eparterial bronchus, found only on this side — and the azygos vein arches over the root from behind to reach the superior vena cava."
+    },
+    {
+      "key": "hilum_left",
+      "label": "Hilum of the left lung",
+      "role": "part",
+      "group": "Root of the lung",
+      "render": "anchor",
+      "color": "#5499c7",
+      "anchor": {
+        "on": "lul",
+        "uvw": [
+          0.315,
+          0.486,
+          0.635
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the upper lobe of the left lung and the pulmonary artery — the root of the lung (gap 0.81 mm); see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "hilum of the left lung",
+        "RALS",
+        "artery above bronchus",
+        "arch of the aorta",
+        "left recurrent laryngeal nerve"
+      ],
+      "narration": "On the left the pulmonary artery is the highest thing in the root — remember RALS: Right Anterior, Left Superior, describing where the artery sits relative to the bronchus. The arch of the aorta passes over this root, and the left recurrent laryngeal nerve hooks under it."
+    },
+    {
+      "key": "base_right",
+      "label": "Base (diaphragmatic surface)",
+      "role": "part",
+      "group": "Surfaces & landmarks",
+      "render": "anchor",
+      "color": "#af7ac5",
+      "anchor": {
+        "on": "rll",
+        "uvw": [
+          0.288,
+          0.895,
+          0.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the lowest (most inferior) vertex of the lower lobe of the right lung — the diaphragmatic surface, 87.9 mm from the lobe's surface centroid; see tools/derive-lung-landmarks.mjs",
+      "terms": [
+        "base of the lung",
+        "diaphragmatic surface",
+        "costodiaphragmatic recess",
+        "right dome higher",
+        "lower border of the lung",
+        "chest drain"
+      ],
+      "narration": "The concave underside sitting on the dome of the diaphragm. The lung's lower border does not reach the bottom of the pleural cavity — the costodiaphragmatic recess below it is empty in quiet breathing, which is where fluid collects and where the needle goes."
+    },
+    {
+      "key": "trachea",
+      "name": "trachea",
+      "label": "Trachea",
+      "role": "context",
+      "group": "Airway",
+      "layer": "organ",
+      "color": "#aed6f1",
+      "refs": {
+        "bodyparts3d": "FMA7394"
+      },
+      "terms": [
+        "trachea",
+        "carina",
+        "T4",
+        "sternal angle",
+        "bifurcation"
+      ],
+      "narration": "Divides at the level of the sternal angle, T4 to T5, into the two principal bronchi. The ridge at the fork is the carina."
+    },
+    {
+      "key": "bronchus",
+      "name": "bronchus",
+      "label": "Principal bronchi",
+      "role": "context",
+      "group": "Airway",
+      "layer": "organ",
+      "color": "#85c1e9",
+      "refs": {
+        "bodyparts3d": "FMA7409"
+      },
+      "terms": [
+        "principal bronchus",
+        "main bronchus",
+        "right main bronchus",
+        "left main bronchus",
+        "wider shorter more vertical",
+        "foreign body"
+      ],
+      "narration": "The right principal bronchus is wider, shorter and more vertical than the left. Anything inhaled goes right, and in a supine patient it reaches the apical segment of the right lower lobe."
+    },
+    {
+      "key": "pa",
+      "name": "pulmonary artery",
+      "label": "Pulmonary artery",
+      "role": "context",
+      "group": "Root of the lung",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA66326"
+      },
+      "terms": [
+        "pulmonary artery",
+        "pulmonary trunk",
+        "deoxygenated blood",
+        "pulmonary embolism",
+        "functional supply"
+      ],
+      "narration": "Carries deoxygenated blood to the lung — the only artery in the adult that does. It is the functional supply; the lung tissue itself lives on small bronchial arteries from the aorta."
+    },
+    {
+      "key": "pv",
+      "name": "pulmonary vein",
+      "label": "Pulmonary veins",
+      "role": "context",
+      "group": "Root of the lung",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "bodyparts3d": "FMA66643"
+      },
+      "terms": [
+        "pulmonary vein",
+        "pulmonary veins",
+        "two from each lung",
+        "oxygenated blood",
+        "left atrium",
+        "most anterior and inferior"
+      ],
+      "narration": "Two leave each hilum, and they are the most anterior and most inferior structures in the root. They carry oxygenated blood to the left atrium — the only veins in the adult that do."
+    },
+    {
+      "key": "heart",
+      "name": "wall of heart",
+      "label": "Heart",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA7274"
+      },
+      "terms": [
+        "heart",
+        "cardiac impression",
+        "mediastinum",
+        "cardiac notch"
+      ],
+      "narration": "Sits between the two lungs and mostly to the left, hollowing out the left lung far more than the right."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "right dome",
+        "left dome",
+        "liver",
+        "costodiaphragmatic recess"
+      ],
+      "narration": "The floor the lungs rest on. Its right dome is higher because the liver is under it, which is why the right lung is shorter but still the larger of the two."
+    },
+    {
+      "key": "esophagus",
+      "name": "esophagus",
+      "label": "Oesophagus",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a9cce3",
+      "refs": {
+        "bodyparts3d": "FMA7131"
+      },
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "oesophageal groove",
+        "posterior mediastinum",
+        "behind the root"
+      ],
+      "narration": "Runs down behind the roots of the lungs, grooving the medial surface of the right lung. An enlarging bronchial tumour at the hilum can therefore cause difficulty swallowing."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See them in the chest",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Right lung",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Left lung",
+          "intensity": 0.7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "heart",
+          "to": "lul",
+          "kind": "indents"
+        }
+      ],
+      "narration": "Two lungs fill the chest on either side of the mediastinum. Each has an apex above, a base on the diaphragm, a costal surface against the ribs and a mediastinal surface facing the middle. The right lung is the bigger and shorter one; the left is longer and narrower because the heart takes room from it."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Lobes and fissures",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Right lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Left lung"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Right lung",
+            "Left lung"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "oblique_fissure_right",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "oblique_fissure_left",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three lobes on the right, two on the left. The oblique fissure is on both sides: from the spine of T4 behind, along the fifth rib, to the sixth costochondral junction in front. The right has a second, horizontal fissure running forward from the oblique along the fourth rib. Learn those two lines and you can name the lobe under your stethoscope instead of guessing."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "What makes the left lung left",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Left lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cardiac_notch",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lingula",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cardiac_notch",
+          "to": "lingula",
+          "kind": "sits above"
+        }
+      ],
+      "narration": "Handed a lung in the spotter, look at the front edge. A deep notch with a tongue below it, and only one fissure: that is the left lung. Two fissures, three lobes and a groove for the oesophagus on the medial surface: that is the right."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The root — what goes in, what comes out",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Root of the lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Airway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Right lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Left lung"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pa",
+          "to": "hilum_left",
+          "kind": "highest structure on the left"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pv",
+          "to": "hilum_right",
+          "kind": "most anterior and inferior"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "At each hilum: a principal bronchus, one pulmonary artery, two pulmonary veins, bronchial vessels, lymph nodes and nerves, all wrapped in a sleeve of pleura that trails down as the pulmonary ligament. The veins are always the most anterior and inferior. For the artery, remember RALS — on the Right it is Anterior to the bronchus, on the Left it is Superior."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Neighbours and impressions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.15,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "esophagus",
+            "heart"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "esophagus",
+          "to": "hilum_right",
+          "kind": "runs behind the root"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "base_right",
+          "kind": "supports"
+        }
+      ],
+      "narration": "Cut across the chest and the relations explain the grooves on a fixed lung. The oesophagus lies behind both roots and marks the right lung. The heart lies in front and to the left. The phrenic nerve runs in front of each root and the vagus behind it — one line worth memorising, because it decides which nerve a hilar tumour catches first."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Follow the air in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Airway"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Right lung"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Left lung"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:air",
+          "path": [
+            "trachea",
+            "bronchus",
+            "rul",
+            "rml",
+            "rll",
+            "lul",
+            "lll"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rll",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Air passes the carina at the sternal angle and takes one of two bronchi. The right one is wider, shorter and more nearly vertical, so an inhaled groundnut or tooth goes right. If the patient was upright it lodges in the posterior basal segment of the right lower lobe; if supine, in the apical segment of that lobe. That single fact answers a question in every professional exam."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where to put the stethoscope",
+      "ops": [
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Right lung"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rll",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rml",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "apex_right",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The back of the chest is almost all lower lobe. The front, above the fourth rib, is upper lobe. The middle lobe is heard only on the right, in front and low, beside the sternum. And the apex reaches into the neck above the clavicle, which is why apical disease is examined from in front and above, and why a tumour there is a neurological presentation before it is a respiratory one."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The horizontal fissure has no anchor. Every other landmark here was measured on the meshes with tools/derive-lung-landmarks.mjs, but the middle lobe mesh FMA7383 is in the catalog and not in the local decimated set, so the upper-to-middle-lobe contact could not be measured. The fissure is taught in the narration of beats 2 and 7 by its surface marking — the fourth rib in front — and the anchor should be derived and added once that mesh is ingested. It was not typed in by eye: an anchor placed by guess puts the words 'horizontal fissure' somewhere plausible and the student believes it.",
+    "The catalog name for the right middle lobe is the unqualified 'middle lobe of lung'. That is copied verbatim, as the canonical stage requires. Only the right lung has a middle lobe, so the name is not ambiguous in practice, but a reader comparing scene to catalog should know why the word 'right' is missing.",
+    "There is one generic 'bronchus' mesh and no separate right and left principal bronchi, so beat 6 traces the airway through a single context structure and the right-versus-left difference is carried by the narration rather than by two meshes. Bronchopulmonary segments — ten on the right, eight to ten on the left — have no meshes at all and are named in terms[] only, so a note mentioning 'posterior basal segment' still finds this scene.",
+    "Pleura is deliberately absent. It has its own curriculum entry and its own scene, gross__thoracic-wall-diaphragm__pleura-pleural-cavity, and no pleural mesh exists in the catalog. This scene mentions the costodiaphragmatic recess only where it explains the lung's lower border.",
+    "The phrenic and vagus nerves are named in beat 5 because their relation to the root is examinable, but neither is drawn — no nerve of the thorax is in the catalog. The azygos vein, which arches over the right root, is likewise named and not drawn.",
+    "All nine anchors are status 'needs-review' with the measurement that placed them recorded in calibrated_by. They are honest measurements of a contact or an extreme, not a claim that the label is in the exact spot an anatomist would mark: the cardiac notch anchor, for example, is the nearest contact between the left upper lobe and the wall of the heart, which lands in the cardiac impression rather than precisely on the notch's upper edge. A human should clear each one in-app before it is released."
+  ]
+}

@@ -1,0 +1,827 @@
+{
+  "schema": 2,
+  "id": "gross__thoracic-wall-diaphragm__diaphragm",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thoracic Wall & Diaphragm",
+  "structure": "Diaphragm",
+  "covers": [
+    "Diaphragm"
+  ],
+  "learning_goal": "Name the three openings of the diaphragm with their vertebral levels and what passes through each, describe how the dome moves in inspiration, and state the nerve supply and why it explains shoulder-tip pain.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thorax",
+      "diaphragm",
+      "thoracic wall",
+      "respiration",
+      "muscles of respiration",
+      "respiratory mechanics",
+      "thoracoabdominal diaphragm",
+      "abdomen",
+      "posterior abdominal wall",
+      "hiatus hernia"
+    ],
+    "terms": [
+      "diaphragm",
+      "thoracic diaphragm",
+      "primary muscle of respiration",
+      "dome of the diaphragm",
+      "central tendon",
+      "right crus",
+      "left crus",
+      "crura",
+      "median arcuate ligament",
+      "medial arcuate ligament",
+      "lateral arcuate ligament",
+      "caval opening",
+      "vena caval foramen",
+      "oesophageal hiatus",
+      "esophageal hiatus",
+      "aortic hiatus",
+      "T8",
+      "T10",
+      "T12",
+      "phrenic nerve",
+      "C3 C4 C5",
+      "referred shoulder pain",
+      "shoulder tip pain",
+      "Kehr sign",
+      "hiatus hernia",
+      "sliding hernia",
+      "rolling hernia",
+      "diaphragmatic hernia",
+      "Bochdalek",
+      "Morgagni",
+      "eventration",
+      "hiccup",
+      "intra-abdominal pressure",
+      "quiet inspiration"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm",
+      "role": "part",
+      "group": "Diaphragm",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "thoracic diaphragm",
+        "dome of the diaphragm",
+        "primary muscle of respiration",
+        "central tendon",
+        "crus",
+        "crura",
+        "hemidiaphragm"
+      ],
+      "narration": "A double dome of muscle that separates the chest from the abdomen. Its fibres all arise from the rim of the lower thoracic opening and run upwards to meet a flat central tendon. When they shorten, the dome flattens and the chest gets taller."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — the T8 opening",
+      "role": "part",
+      "group": "Openings",
+      "layer": "vessel",
+      "color": "#2c6fa8",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "caval opening",
+        "vena caval foramen",
+        "T8",
+        "right phrenic nerve"
+      ],
+      "narration": "The vena cava pierces the central tendon at the level of T8. Because the tendon is fibrous and cannot contract, the opening is held wide — so when the diaphragm descends it pulls the tendon down and actually helps blood upwards into the chest. The right phrenic nerve slips through the same hole."
+    },
+    {
+      "key": "esophagus",
+      "name": "esophagus",
+      "label": "Oesophagus — the T10 opening",
+      "role": "part",
+      "group": "Openings",
+      "layer": "organ",
+      "color": "#d8a05a",
+      "refs": {
+        "bodyparts3d": "FMA7131"
+      },
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "oesophageal hiatus",
+        "esophageal hiatus",
+        "T10",
+        "vagus",
+        "anterior vagal trunk",
+        "posterior vagal trunk",
+        "hiatus hernia",
+        "gastro-oesophageal reflux"
+      ],
+      "narration": "The oesophagus passes at T10, through a sling of muscle from the right crus. That sling is muscular, so it grips the oesophagus every time the diaphragm contracts and acts as a physiological sphincter. The two vagal trunks travel on the oesophagus through the same gap, and a weak hiatus here is what lets a hiatus hernia slide up."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — the T12 opening",
+      "role": "part",
+      "group": "Openings",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "aorta",
+        "descending aorta",
+        "thoracic aorta",
+        "aortic hiatus",
+        "T12",
+        "thoracic duct",
+        "azygos vein",
+        "median arcuate ligament"
+      ],
+      "narration": "The aorta passes at T12, behind the diaphragm rather than through it, under the arch of the median arcuate ligament. That is why the diaphragm never squeezes it. The thoracic duct and the azygos vein go through the same gap."
+    },
+    {
+      "key": "t8",
+      "name": "eighth thoracic vertebra",
+      "label": "T8",
+      "role": "context",
+      "group": "Vertebral levels",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA9991"
+      },
+      "terms": [
+        "T8",
+        "eighth thoracic vertebra",
+        "caval opening"
+      ],
+      "narration": "T8 — the level of the caval opening. Count the levels with the rhyme: I ate ten eggs at twelve."
+    },
+    {
+      "key": "t10",
+      "name": "tenth thoracic vertebra",
+      "label": "T10",
+      "role": "context",
+      "group": "Vertebral levels",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA10037"
+      },
+      "terms": [
+        "T10",
+        "tenth thoracic vertebra",
+        "oesophageal hiatus"
+      ],
+      "narration": "T10 — the level of the oesophageal hiatus. Ten letters in oesophagus if you spell it the short way; ten is the level."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12",
+      "role": "context",
+      "group": "Vertebral levels",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "T12",
+        "twelfth thoracic vertebra",
+        "aortic hiatus"
+      ],
+      "narration": "T12 — the level of the aortic hiatus, and the lowest of the three."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "L1",
+      "role": "context",
+      "group": "Vertebral levels",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "L1",
+        "first lumbar vertebra",
+        "crus",
+        "transpyloric plane"
+      ],
+      "narration": "The crura run down the front of the upper lumbar vertebrae — the right as far as L3, the left to L2. They are the only part of the diaphragm that reaches this far down."
+    },
+    {
+      "key": "psoas_r",
+      "name": "right psoas major",
+      "label": "Psoas major (right)",
+      "role": "context",
+      "group": "Arcuate ligaments",
+      "layer": "muscle",
+      "color": "#9b5c5c",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "medial arcuate ligament",
+        "arcuate ligament"
+      ],
+      "narration": "The medial arcuate ligament is a thickened arch of fascia over psoas major. The diaphragm springs from that arch, so psoas passes underneath it into the abdomen without being pinched."
+    },
+    {
+      "key": "psoas_l",
+      "name": "left psoas major",
+      "label": "Psoas major (left)",
+      "role": "context",
+      "group": "Arcuate ligaments",
+      "layer": "muscle",
+      "color": "#9b5c5c",
+      "refs": {
+        "bodyparts3d": "FMA22343"
+      },
+      "terms": [
+        "psoas major",
+        "medial arcuate ligament",
+        "arcuate ligament"
+      ],
+      "narration": "The medial arcuate ligament is a thickened arch of fascia over psoas major. The diaphragm springs from that arch, so psoas passes underneath it into the abdomen without being pinched."
+    },
+    {
+      "key": "ql_r",
+      "name": "right quadratus lumborum",
+      "label": "Quadratus lumborum (right)",
+      "role": "context",
+      "group": "Arcuate ligaments",
+      "layer": "muscle",
+      "color": "#8a5050",
+      "refs": {
+        "bodyparts3d": "FMA22348"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "lateral arcuate ligament",
+        "arcuate ligament",
+        "twelfth rib"
+      ],
+      "narration": "The lateral arcuate ligament arches over quadratus lumborum, from the first lumbar transverse process to rib 12. It is the lateral end of the same posterior origin."
+    },
+    {
+      "key": "ql_l",
+      "name": "left quadratus lumborum",
+      "label": "Quadratus lumborum (left)",
+      "role": "context",
+      "group": "Arcuate ligaments",
+      "layer": "muscle",
+      "color": "#8a5050",
+      "refs": {
+        "bodyparts3d": "FMA22349"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "lateral arcuate ligament",
+        "arcuate ligament",
+        "twelfth rib"
+      ],
+      "narration": "The lateral arcuate ligament arches over quadratus lumborum, from the first lumbar transverse process to rib 12. It is the lateral end of the same posterior origin."
+    },
+    {
+      "key": "rib11_r",
+      "name": "right eleventh rib",
+      "label": "Right rib 11",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8531"
+      },
+      "terms": [
+        "rib 11",
+        "floating rib",
+        "costal origin of diaphragm"
+      ],
+      "narration": "The costal fibres arise from the inner surfaces of ribs 7 to 12 and their cartilages."
+    },
+    {
+      "key": "rib11_l",
+      "name": "left eleventh rib",
+      "label": "Left rib 11",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8532"
+      },
+      "terms": [
+        "rib 11",
+        "floating rib",
+        "costal origin of diaphragm"
+      ],
+      "narration": "The costal fibres arise from the inner surfaces of ribs 7 to 12 and their cartilages."
+    },
+    {
+      "key": "rib12_r",
+      "name": "right twelfth rib",
+      "label": "Right rib 12",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "rib 12",
+        "floating rib",
+        "lateral arcuate ligament"
+      ],
+      "narration": "Rib 12 gives the outer attachment of the lateral arcuate ligament — the corner where the diaphragm's posterior origin ends."
+    },
+    {
+      "key": "rib12_l",
+      "name": "left twelfth rib",
+      "label": "Left rib 12",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "bone",
+      "color": "#e7dfc8",
+      "refs": {
+        "bodyparts3d": "FMA8534"
+      },
+      "terms": [
+        "rib 12",
+        "floating rib",
+        "lateral arcuate ligament"
+      ],
+      "narration": "Rib 12 gives the outer attachment of the lateral arcuate ligament — the corner where the diaphragm's posterior origin ends."
+    },
+    {
+      "key": "xiphoid",
+      "name": "xiphoid process",
+      "label": "Xiphoid process",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "bone",
+      "color": "#f2ead6",
+      "refs": {
+        "bodyparts3d": "FMA7488"
+      },
+      "terms": [
+        "xiphoid process",
+        "xiphisternum",
+        "sternal origin of diaphragm",
+        "Morgagni hernia"
+      ],
+      "narration": "Two small slips arise from the back of the xiphoid. The gap on either side of them is where a Morgagni hernia comes through."
+    },
+    {
+      "key": "cc_right",
+      "name": "right costal cartilage",
+      "label": "Costal cartilage (right)",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP28"
+      },
+      "terms": [
+        "costal cartilage",
+        "costal margin",
+        "costal origin of diaphragm"
+      ],
+      "narration": "The costal margin is the line of origin you can feel on a living patient — the diaphragm attaches just inside it."
+    },
+    {
+      "key": "cc_left",
+      "name": "left costal cartilage",
+      "label": "Costal cartilage (left)",
+      "role": "context",
+      "group": "Costal origin",
+      "layer": "cartilage",
+      "color": "#8fc0d8",
+      "refs": {
+        "bodyparts3d": "BP24"
+      },
+      "terms": [
+        "costal cartilage",
+        "costal margin",
+        "costal origin of diaphragm"
+      ],
+      "narration": "The costal margin is the line of origin you can feel on a living patient — the diaphragm attaches just inside it."
+    },
+    {
+      "key": "lung_r",
+      "name": "lower lobe of right lung",
+      "label": "Right lower lobe",
+      "role": "context",
+      "group": "Above the diaphragm",
+      "layer": "organ",
+      "color": "#e2b7bd",
+      "refs": {
+        "bodyparts3d": "FMA7337"
+      },
+      "terms": [
+        "lung",
+        "lower lobe",
+        "base of lung",
+        "costodiaphragmatic recess"
+      ],
+      "narration": "The lung base rests on the dome. It does not reach the bottom of the pleural cavity, and the empty gutter left over is the costodiaphragmatic recess — where fluid collects and where a chest tap is aimed."
+    },
+    {
+      "key": "lung_l",
+      "name": "lower lobe of left lung",
+      "label": "Left lower lobe",
+      "role": "context",
+      "group": "Above the diaphragm",
+      "layer": "organ",
+      "color": "#e2b7bd",
+      "refs": {
+        "bodyparts3d": "FMA7371"
+      },
+      "terms": [
+        "lung",
+        "lower lobe",
+        "base of lung",
+        "costodiaphragmatic recess"
+      ],
+      "narration": "The lung base rests on the dome. It does not reach the bottom of the pleural cavity, and the empty gutter left over is the costodiaphragmatic recess — where fluid collects and where a chest tap is aimed."
+    },
+    {
+      "key": "heart_wall",
+      "name": "wall of heart",
+      "label": "Heart",
+      "role": "context",
+      "group": "Above the diaphragm",
+      "layer": "organ",
+      "color": "#b3454f",
+      "refs": {
+        "bodyparts3d": "FMA7274"
+      },
+      "terms": [
+        "heart",
+        "pericardium",
+        "central tendon"
+      ],
+      "narration": "The heart sits directly on the central tendon, in the dip between the two domes. That is why the diaphragm's middle is flat and fibrous rather than domed."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver",
+      "role": "context",
+      "group": "Below the diaphragm",
+      "layer": "organ",
+      "color": "#8c5a44",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "right dome",
+        "bare area",
+        "subphrenic",
+        "shoulder tip pain",
+        "Kehr sign"
+      ],
+      "narration": "The liver fills the right dome, which is why that dome sits higher than the left. Blood or pus collecting between the liver and the diaphragm irritates the phrenic nerve, and the patient feels it in the shoulder tip."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach",
+      "role": "context",
+      "group": "Below the diaphragm",
+      "layer": "organ",
+      "color": "#c98f6a",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "fundus",
+        "left dome",
+        "gastro-oesophageal junction",
+        "hiatus hernia"
+      ],
+      "narration": "The fundus of the stomach sits under the left dome. The gas in it is what makes the dark bubble under the left hemidiaphragm on a chest film."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen",
+      "role": "context",
+      "group": "Below the diaphragm",
+      "layer": "organ",
+      "color": "#7a4a63",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "left dome",
+        "ribs 9 10 11",
+        "Kehr sign"
+      ],
+      "narration": "The spleen lies against the left dome behind ribs 9 to 11. A ruptured spleen bleeds under the diaphragm, and that is the classic cause of left shoulder-tip pain."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The floor of the chest",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "diaphragm",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "One sheet of muscle divides the whole trunk in two. Everything above it is chest, everything below it is abdomen, and every structure that needs to travel between them has to find a way through."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Two domes, not one",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Below the diaphragm"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "diaphragm",
+          "kind": "supports"
+        }
+      ],
+      "narration": "The right dome rides higher than the left because the liver is pushing it up. In quiet breathing the right reaches the fifth rib and the left the fifth space. Remember which is higher and you will not misread a raised hemidiaphragm on a film."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Where it comes from",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Costal origin"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Arcuate ligaments"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        }
+      ],
+      "narration": "The origin is a complete ring around the lower thoracic opening. Sternal fibres from the back of the xiphoid, costal fibres from ribs seven to twelve, and lumbar fibres from the crura and the arcuate ligaments behind. All of them run up and inwards to the central tendon."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The three openings",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Openings"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Vertebral levels"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "ivc",
+            "esophagus",
+            "aorta"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three things cross the diaphragm and each has its own level. Vena cava at T8, oesophagus at T10, aorta at T12. Say it as I ate ten eggs at twelve, and note that the numbers go up as you go down and back."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Why each opening behaves differently",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Openings"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivc",
+          "intensity": 0.8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ivc",
+          "to": "diaphragm",
+          "kind": "passes-through"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "The vena cava goes through tendon, so its opening is held open and widens as the diaphragm descends. The oesophagus goes through muscle, so its opening tightens when the diaphragm contracts. The aorta goes behind the whole thing and is never squeezed at all. One structure, three completely different arrangements, and each is asked about."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Breathing in",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "diaphragm",
+          "intensity": 0.8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:inspiration",
+          "path": [
+            "diaphragm",
+            "lung_r",
+            "lung_l"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "When the muscle fibres shorten the dome flattens and drops. The chest becomes taller, the pressure inside falls below atmospheric, and air runs in. The diaphragm alone does about two thirds of quiet breathing, and the abdominal organs are pushed down in front of it — which is why the belly rises when you breathe in."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Nerve supply and referred pain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "diaphragm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Below the diaphragm"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:phrenic-nerve",
+          "path": [
+            "spleen",
+            "diaphragm"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spleen",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The phrenic nerve is the whole motor supply, and it comes from C3, C4 and C5 — three, four, five keeps the diaphragm alive. Cut it and that half of the diaphragm is paralysed. Because the nerve started in the neck, the brain reads irritation of the diaphragm as pain in the shoulder tip, and that is the sign of blood under the diaphragm from a ruptured spleen."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 8,
+      "title": "Cut through it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "esophagus",
+          "intensity": 0.7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "In section the muscle is thin and the organs crowd it on both sides. A weak point here lets abdominal contents rise into the chest — sliding at the hiatus in an adult, or through a posterior defect in a newborn, where the gut in the chest stops the lung developing."
+    },
+    {
+      "mode": "location",
+      "beat": 9,
+      "title": "Peel back to the diaphragm alone",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "Strip everything else away and what is left is a muscular ring with a tendon in the middle. Seen from above, that is the whole diaphragm: the shape of the thoracic outlet, roofed over."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The catalog holds ONE diaphragm mesh and no sub-parts. There is no central tendon, no right or left crus, and no median, medial or lateral arcuate ligament — a search of all 934 names returns nothing for crus, crura, arcuate or central tendon. So the single most structural fact about this muscle, that a muscular rim converges on a fibrous centre, is narrated and cannot be shown or highlighted separately.",
+    "Because there is no crus mesh, the difference between the three openings is taught through WHAT PASSES THROUGH each rather than through the tissue each one is cut in. That is a deliberate substitution and it carries the levels and the contents correctly, but a student cannot see that the oesophageal hiatus is a muscular sling while the caval opening is a hole in tendon. Beat 5 states it in words and the geometry does not support it.",
+    "The arcuate ligaments are shown only by proxy: psoas major and quadratus lumborum are present and the ligaments arch over them, so the muscles mark where the arches must run. The arches themselves are not drawn.",
+    "The phrenic nerve has no mesh — no nerve of the trunk is in the catalog at all. Beat 7 traces a concept path from the spleen to the diaphragm to carry the referred-pain story, but the nerve's actual course down the neck and mediastinum is not shown. This is the largest gap in the scene, because C3-4-5 and shoulder-tip pain are the two facts most likely to be examined.",
+    "The pericardium is absent, so the heart is shown by its wall mesh sitting on the diaphragm. The fusion of fibrous pericardium with the central tendon is narrated, not rendered.",
+    "The costal origin from ribs 7 to 12 is represented by ribs 11 and 12 plus the costal cartilages, to keep the scene readable. Ribs 7 to 10 exist in the catalog and could be added if the origin needs to be traced rib by rib.",
+    "Diaphragm movement is a shape change, and no op deforms a mesh. Beat 6 highlights and traces to imply descent; it cannot animate the dome flattening. A diagram-mode companion would carry the mechanism better, and diagram is recorded as the deferred mode."
+  ]
+}

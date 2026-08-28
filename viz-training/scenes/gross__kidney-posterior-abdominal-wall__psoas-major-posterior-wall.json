@@ -1,0 +1,875 @@
+{
+  "schema": 2,
+  "id": "gross__kidney-posterior-abdominal-wall__psoas-major-posterior-wall",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Kidney & Posterior Abdominal Wall",
+  "structure": "Psoas major & posterior wall",
+  "covers": [
+    "Psoas major & posterior wall"
+  ],
+  "learning_goal": "Name the five muscles of the posterior abdominal wall and lay them out from medial to lateral, give the attachments and nerve supply of psoas major, iliacus and quadratus lumborum, say what psoas does at the hip and at the lumbar spine, list in order what lies on the front of psoas, explain why the lumbar plexus is formed inside it, and use those relations to account for the psoas sign, a psoas abscess pointing in the groin and the fixed flexion of an irritable hip.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "psoas major",
+      "posterior abdominal wall",
+      "iliopsoas",
+      "hip flexion",
+      "lumbar plexus",
+      "retroperitoneum",
+      "abdomen",
+      "psoas abscess",
+      "muscles of the abdomen",
+      "lower limb",
+      "hip joint",
+      "vertebral column"
+    ],
+    "terms": [
+      "psoas",
+      "psoas major",
+      "psoas minor",
+      "iliacus",
+      "iliopsoas",
+      "quadratus lumborum",
+      "QL",
+      "transversus abdominis",
+      "diaphragm",
+      "posterior abdominal wall",
+      "posterior wall of the abdomen",
+      "muscular bed",
+      "retroperitoneal",
+      "lumbar transverse process",
+      "transverse processes",
+      "lumbar vertebral bodies",
+      "intervertebral disc",
+      "T12",
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "iliac fossa",
+      "iliac crest",
+      "twelfth rib",
+      "lesser trochanter",
+      "inguinal ligament",
+      "muscular lacuna",
+      "lacuna musculorum",
+      "psoas fascia",
+      "iliac fascia",
+      "femoral sheath",
+      "hip flexion",
+      "hip flexor",
+      "chief flexor of the hip",
+      "lateral flexion of the trunk",
+      "sitting up from lying",
+      "postural muscle",
+      "lumbar plexus",
+      "anterior rami L1 to L4",
+      "femoral nerve",
+      "obturator nerve",
+      "genitofemoral nerve",
+      "lateral cutaneous nerve of thigh",
+      "iliohypogastric nerve",
+      "ilioinguinal nerve",
+      "subcostal nerve",
+      "L1 L2 L3 anterior rami",
+      "anterior rami of L2 and L3",
+      "femoral nerve L2 L3 L4",
+      "meralgia paraesthetica",
+      "psoas shadow",
+      "loss of psoas shadow",
+      "plain abdominal film",
+      "psoas sign",
+      "psoas stretch test",
+      "retrocaecal appendix",
+      "psoas abscess",
+      "cold abscess",
+      "Pott's disease",
+      "tuberculosis of the spine",
+      "tuberculous spondylitis",
+      "groin swelling below the inguinal ligament",
+      "fixed flexion deformity",
+      "irritable hip",
+      "septic arthritis of the hip",
+      "psoas bursa",
+      "ureter on psoas",
+      "kidney bed",
+      "renal bed",
+      "quadratus lumborum origin",
+      "lateral arcuate ligament",
+      "medial arcuate ligament",
+      "iliolumbar ligament",
+      "lumbar sympathetic trunk",
+      "aorta",
+      "inferior vena cava",
+      "common iliac vessels",
+      "external iliac artery",
+      "psoas major nerve supply",
+      "anterior rami directly",
+      "femoral nerve supplies iliacus"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "right_psoas",
+      "name": "right psoas major",
+      "label": "Psoas major (right) — the pillar of the wall",
+      "role": "part",
+      "group": "Psoas major",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "psoas",
+        "iliopsoas",
+        "hip flexor",
+        "lesser trochanter",
+        "lumbar transverse process",
+        "lumbar plexus",
+        "psoas shadow",
+        "psoas abscess",
+        "psoas sign",
+        "T12 to L5"
+      ],
+      "narration": "A long fusiform muscle that arises from the sides of the bodies of T12 to L5, from the intervertebral discs between them, and from the front of all five lumbar transverse processes. It runs downwards and laterally along the edge of the lumbar spine, enters the thigh behind the inguinal ligament, and ends on the lesser trochanter of the femur. Two things follow from that shape and both are exam material. First, because it crosses the hip in front of the joint's axis it is the chief flexor of the hip. Second, because its two layers of origin — one from the bodies and discs, one from the transverse processes — are separated by a gap, the anterior rami of L1 to L4 enter that gap, and the lumbar plexus is formed inside the muscle's substance."
+    },
+    {
+      "key": "left_psoas",
+      "name": "left psoas major",
+      "label": "Psoas major (left)",
+      "role": "part",
+      "group": "Psoas major",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22343"
+      },
+      "terms": [
+        "psoas major",
+        "left psoas",
+        "psoas shadow",
+        "lateral flexion",
+        "postural muscle",
+        "plain abdominal film"
+      ],
+      "narration": "The same muscle on the left. Working together the two psoas muscles flex the trunk on the hips — the movement of sitting up from lying — and hold the lumbar lordosis when you stand. Working alone, one bends the trunk to its own side. Both outlines show on a plain abdominal film as the psoas shadows, and loss of a psoas shadow is the classical sign of fluid, blood or pus in the retroperitoneum on that side."
+    },
+    {
+      "key": "right_iliacus",
+      "name": "right iliacus",
+      "label": "Iliacus (right) — the fan that joins it",
+      "role": "part",
+      "group": "Iliacus",
+      "layer": "muscle",
+      "color": "#c0662a",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliac fossa",
+        "iliopsoas",
+        "lesser trochanter",
+        "femoral nerve",
+        "hip flexion",
+        "L2 L3 L4"
+      ],
+      "narration": "A flat triangular muscle filling the iliac fossa, arising from its upper two thirds, from the inner lip of the iliac crest and from the front of the sacroiliac region. Its fibres converge on the lateral side of the psoas tendon and reach the lesser trochanter with it. Together the two are called iliopsoas, the single most powerful flexor of the hip. Their nerve supplies are not the same, and that difference is asked: psoas major is supplied directly by the anterior rami of L1, L2 and L3, iliacus by the femoral nerve, L2 to L4."
+    },
+    {
+      "key": "left_iliacus",
+      "name": "left iliacus",
+      "label": "Iliacus (left)",
+      "role": "context",
+      "group": "Iliacus",
+      "layer": "muscle",
+      "color": "#c0662a",
+      "refs": {
+        "bodyparts3d": "FMA22323"
+      },
+      "terms": [
+        "iliacus",
+        "iliac fossa",
+        "left"
+      ],
+      "narration": "Mirror image on the left, lining the left iliac fossa."
+    },
+    {
+      "key": "right_ql",
+      "name": "right quadratus lumborum",
+      "label": "Quadratus lumborum (right) — the lateral square",
+      "role": "part",
+      "group": "Quadratus lumborum",
+      "layer": "muscle",
+      "color": "#ca6f1e",
+      "refs": {
+        "bodyparts3d": "FMA22348"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "QL",
+        "iliac crest",
+        "iliolumbar ligament",
+        "twelfth rib",
+        "lumbar transverse process",
+        "lateral flexion",
+        "fixes the twelfth rib",
+        "subcostal nerve",
+        "iliohypogastric nerve",
+        "ilioinguinal nerve",
+        "renal bed"
+      ],
+      "narration": "A flat quadrilateral sheet lateral to psoas. It arises below from the iliolumbar ligament and the adjacent iliac crest, and inserts above into the lower border of the twelfth rib and the tips of the upper four lumbar transverse processes. It bends the trunk to its own side, and in quiet breathing it anchors the twelfth rib so the diaphragm has something firm to pull against. Three nerves cross its front from medial to lateral — subcostal, iliohypogastric and ilioinguinal — running downwards behind the kidney, which is why a loin incision that cuts them leaves a numb, bulging flank."
+    },
+    {
+      "key": "left_ql",
+      "name": "left quadratus lumborum",
+      "label": "Quadratus lumborum (left)",
+      "role": "context",
+      "group": "Quadratus lumborum",
+      "layer": "muscle",
+      "color": "#ca6f1e",
+      "refs": {
+        "bodyparts3d": "FMA22349"
+      },
+      "terms": [
+        "quadratus lumborum",
+        "left",
+        "twelfth rib"
+      ],
+      "narration": "The same on the left. Note that both quadratus lumborum muscles lie in front of the transverse processes, so the erector spinae — which lies behind them — is a different compartment entirely."
+    },
+    {
+      "key": "right_ta",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis (right) — the wall becomes flank",
+      "role": "part",
+      "group": "Transversus abdominis",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "posterior aponeurosis",
+        "thoracolumbar fascia",
+        "lateral border",
+        "renal bed",
+        "lumbar triangle"
+      ],
+      "narration": "Not a posterior wall muscle in its own right, but the wall does not simply stop at quadratus lumborum: the posterior aponeurosis of transversus abdominis completes the floor laterally, blending into the thoracolumbar fascia. So the bed on which the kidney lies reads, from medial to lateral, psoas major, quadratus lumborum and this aponeurosis, with the diaphragm above all three."
+    },
+    {
+      "key": "left_ta",
+      "name": "left transversus abdominis",
+      "label": "Transversus abdominis (left)",
+      "role": "context",
+      "group": "Transversus abdominis",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA22345"
+      },
+      "terms": [
+        "transversus abdominis",
+        "left",
+        "flank"
+      ],
+      "narration": "The same sheet on the left, wrapping forwards into the flank."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — the roof, and the arcuate ligaments",
+      "role": "part",
+      "group": "Diaphragm",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "medial arcuate ligament",
+        "lateral arcuate ligament",
+        "psoas arcade",
+        "crus",
+        "twelfth rib",
+        "roof of the posterior abdominal wall"
+      ],
+      "narration": "The roof of the whole region. It does not sit flat on the muscles below it — it arches over them on two thickenings of fascia. The medial arcuate ligament bridges psoas major from the body of L1 or L2 to its transverse process; the lateral arcuate ligament bridges quadratus lumborum from that transverse process out to the twelfth rib. Learn them as arcades: the diaphragm needs a doorway over each muscle so the muscle can pass from abdomen into the region behind, and the sympathetic trunk slips behind the medial arcuate ligament to enter the abdomen."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "First lumbar vertebra — top of the origin",
+      "role": "part",
+      "group": "Lumbar spine",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "first lumbar vertebra",
+        "L1",
+        "vertebral body",
+        "transverse process",
+        "medial arcuate ligament",
+        "transpyloric plane"
+      ],
+      "narration": "Psoas takes origin from the side of every lumbar body and from the front of every lumbar transverse process, so the vertebra is not scenery here — it is the attachment. Notice the two rows of origin on one vertebra: one on the body and disc, one out on the transverse process. The nerve roots emerge between them."
+    },
+    {
+      "key": "l3",
+      "name": "third lumbar vertebra",
+      "label": "Third lumbar vertebra",
+      "role": "context",
+      "group": "Lumbar spine",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13074"
+      },
+      "terms": [
+        "third lumbar vertebra",
+        "L3",
+        "transverse process",
+        "longest transverse process"
+      ],
+      "narration": "The middle of the lumbar column, with the longest transverse processes — which is why the muscle is at its thickest here and why the psoas shadow is widest at this level on a film."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "Fifth lumbar vertebra — bottom of the origin",
+      "role": "context",
+      "group": "Lumbar spine",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "fifth lumbar vertebra",
+        "L5",
+        "lumbosacral",
+        "iliolumbar ligament"
+      ],
+      "narration": "The last vertebra psoas arises from. Below this the muscle is free of the spine and simply crosses the pelvic brim on its way to the thigh."
+    },
+    {
+      "key": "l2_disc",
+      "name": "intervertebral disk of second lumbar vertebra",
+      "label": "Lumbar disc — part of the origin too",
+      "role": "context",
+      "group": "Lumbar spine",
+      "layer": "bone",
+      "color": "#d7dbdd",
+      "refs": {
+        "bodyparts3d": "FMA16034"
+      },
+      "terms": [
+        "intervertebral disc",
+        "lumbar disc",
+        "psoas origin",
+        "tuberculous spondylitis",
+        "disc destruction"
+      ],
+      "narration": "The discs are part of the origin, not just a filler between bones. That matters clinically: tuberculosis of the spine destroys the disc and the adjacent bodies, and the pus it produces is therefore already inside the sheath of a muscle that runs all the way down to the thigh."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — the iliac fossa",
+      "role": "part",
+      "group": "Bony attachments",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "ilium",
+        "iliac fossa",
+        "iliac crest",
+        "iliacus origin",
+        "iliolumbar ligament",
+        "pelvic brim",
+        "anterior superior iliac spine"
+      ],
+      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it. The inner lip of the iliac crest and the iliolumbar ligament give quadratus lumborum its lower attachment. Follow the brim forwards and both muscles are funnelled together under the inguinal ligament into the thigh.",
+      "approx": {
+        "shown_as": "Hip bone (right)",
+        "detail": "the iliac fossa"
+      }
+    },
+    {
+      "key": "right_femur",
+      "name": "right femur",
+      "label": "Femur (right) — the lesser trochanter",
+      "role": "part",
+      "group": "Bony attachments",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "lesser trochanter",
+        "iliopsoas insertion",
+        "hip flexion",
+        "avulsion of the lesser trochanter"
+      ],
+      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis.",
+      "approx": {
+        "shown_as": "Femur (right)",
+        "detail": "the lesser trochanter"
+      }
+    },
+    {
+      "key": "right_inguinal_ligament",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament — the doorway to the thigh",
+      "role": "part",
+      "group": "Bony attachments",
+      "layer": "fascia",
+      "color": "#f0d9b5",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "muscular lacuna",
+        "vascular lacuna",
+        "femoral nerve",
+        "femoral artery",
+        "iliopectineal arch",
+        "psoas abscess",
+        "groin swelling",
+        "femoral triangle"
+      ],
+      "narration": "Everything leaving the posterior abdominal wall for the thigh passes under this ligament. The space beneath it is divided by the iliopectineal arch: iliopsoas and the femoral nerve go through the lateral, muscular compartment; the femoral artery, vein and canal go through the medial, vascular one. That is why a psoas abscess, tracking down inside the muscle's fascial sheath, appears as a soft swelling BELOW the inguinal ligament — and why it is mistaken for a femoral hernia."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Kidney — lying on the bed",
+      "role": "context",
+      "group": "Relations",
+      "layer": "organ",
+      "color": "#8c3b2f",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "kidney",
+        "renal bed",
+        "retroperitoneal",
+        "psoas",
+        "quadratus lumborum",
+        "loin"
+      ],
+      "narration": "The kidney rests on the wall you are looking at — psoas medially, quadratus lumborum in the middle, the aponeurosis of transversus abdominis laterally. Shown here as a relation, so that the wall is learnt as something things lie on rather than as isolated muscles."
+    },
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Ureter — running down the front of psoas",
+      "role": "part",
+      "group": "Relations",
+      "layer": "organ",
+      "color": "#d4ac0d",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "ureter",
+        "on psoas major",
+        "tips of the lumbar transverse processes",
+        "genitofemoral nerve",
+        "pelvic brim",
+        "bifurcation of the common iliac artery",
+        "ureteric stone"
+      ],
+      "narration": "The ureter descends on the front of psoas major, in front of the tips of the lumbar transverse processes, and crosses the pelvic brim at the bifurcation of the common iliac artery. It is the closest of psoas's anterior relations and the one most often looked for at operation: find psoas, and the ureter is on it. The genitofemoral nerve lies on the same surface, so ureteric pain and pain in the groin and scrotum share a route."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — medial to the right psoas",
+      "role": "context",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "lumbar arteries",
+        "aortic bifurcation",
+        "L4",
+        "medial relation"
+      ],
+      "narration": "The aorta lies on the lumbar bodies just left of the midline, in the groove medial to psoas, giving four pairs of lumbar arteries that run backwards behind the muscle. It divides at L4, and the common iliac vessels then run down along the medial border of psoas into the pelvis."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — medial to the left of nothing, right of the aorta",
+      "role": "context",
+      "group": "Relations",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "L5",
+        "common iliac veins",
+        "right psoas",
+        "medial relation"
+      ],
+      "narration": "Formed at L5 by the two common iliac veins and running up on the right of the aorta, the cava lies against the medial edge of the right psoas. This is why a retroperitoneal collection alongside psoas can compress venous return, and why the muscle is the surgeon's landmark for both great vessels."
+    },
+    {
+      "key": "right_rib12",
+      "name": "right twelfth rib",
+      "label": "Twelfth rib — the upper attachment of QL",
+      "role": "context",
+      "group": "Bony attachments",
+      "layer": "bone",
+      "color": "#bfc9ca",
+      "refs": {
+        "bodyparts3d": "FMA8533"
+      },
+      "terms": [
+        "twelfth rib",
+        "quadratus lumborum insertion",
+        "lateral arcuate ligament",
+        "renal angle",
+        "loin incision"
+      ],
+      "narration": "Quadratus lumborum pulls down on the lower border of the twelfth rib and the lateral arcuate ligament arches from it to the transverse process of L1. The rib is also the surgical landmark of the region: every posterior approach to the kidney stays below it, because the pleural recess dips behind its medial half."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the floor of the wall behind",
+      "role": "context",
+      "group": "Bony attachments",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacral promontory",
+        "pelvic brim",
+        "sacroiliac joint",
+        "lumbosacral trunk"
+      ],
+      "narration": "The posterior abdominal wall ends at the pelvic brim, and the sacral promontory is its central marker. The lumbosacral trunk, carrying part of L4 and all of L5 from the lumbar plexus down to the sacral plexus, crosses the ala of the sacrum at the medial border of psoas — the anatomical hinge that joins the two plexuses."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Five muscles, medial to lateral",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Psoas major",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_psoas",
+          "to": "right_iliacus",
+          "kind": "join to form iliopsoas"
+        }
+      ],
+      "narration": "The posterior abdominal wall is a muscular floor, not a bone. Read it from the midline outwards and you have the whole thing in one line: psoas major beside the lumbar bodies, iliacus filling the iliac fossa lateral and below it, quadratus lumborum lateral to psoas between the iliac crest and the twelfth rib, the aponeurosis of transversus abdominis completing the floor laterally, and the diaphragm arching over all of them as the roof. Psoas major is the one to know cold. It arises in two rows — from the sides of the bodies of T12 to L5 and their intervening discs, and from the front of the lumbar transverse processes — runs down along the brim of the pelvis, is joined on its lateral side by iliacus, passes under the inguinal ligament and inserts on the lesser trochanter of the femur. That single course explains everything else in this scene: what it moves, what lies on it, and where its pus goes."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 2,
+      "title": "What it does — at the hip and at the spine",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Psoas major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Iliacus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony attachments"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "right_psoas",
+          "path": [
+            "l1",
+            "l3",
+            "l5",
+            "right_psoas",
+            "right_inguinal_ligament",
+            "right_femur"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_femur",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Follow the muscle from spine to femur and its actions fall out of the line it takes. It crosses in front of the hip joint, so iliopsoas is the chief flexor of the hip — the muscle that lifts the thigh in walking and that drags the trunk up when you sit up from lying with the legs held. Acting from below, with the femur fixed, it flexes the trunk on the hip instead: that is the sit-up. One psoas acting alone bends the trunk towards its own side. It is also a postural muscle, holding the lumbar curve when you stand. Two nerve supplies, and they differ: psoas major from the anterior rami of L1, L2 and L3 directly, iliacus from the femoral nerve, L2 to L4. Because the hip is held flexed by this muscle, anything that irritates it — an abscess in it, pus beside it, or an inflamed hip joint below it — produces a limb the patient will not straighten. That fixed flexion is a physical sign, and the anatomy is its whole explanation."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "What lies on psoas",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Psoas major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Quadratus lumborum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar spine"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Diaphragm"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_ureter",
+          "to": "right_psoas",
+          "kind": "descends on its anterior surface"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_kidney",
+          "to": "right_ql",
+          "kind": "rests on the muscular bed"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "right_ureter",
+          "path": [
+            "right_kidney",
+            "right_psoas",
+            "sacrum"
+          ],
+          "duration": 6
+        }
+      ],
+      "narration": "The front of psoas is a shelf, and a good deal of the abdomen lies on it. Working down: the kidney and its vessels above, the ureter running the length of the muscle, the gonadal vessels crossing it obliquely, the genitofemoral nerve on its surface, and on the right the caecum and appendix, on the left the descending and sigmoid colon. Medially, the aorta and the inferior vena cava lie in the groove between psoas and the vertebral bodies, with the lumbar sympathetic trunk hidden along the medial border. The ureter is the relation to remember for the operating theatre: find psoas and the ureter is on it, in front of the tips of the lumbar transverse processes, crossing the brim where the common iliac artery divides. Lateral to psoas, the kidney sits on the bed of quadratus lumborum with three nerves — subcostal, iliohypogastric and ilioinguinal — running downwards and laterally across it. Two clinical consequences. A retrocaecal appendix lies directly on the right psoas, so extending the hip stretches the muscle and reproduces the pain: the psoas sign. And an inflamed retroperitoneal structure of any kind can wipe out the psoas shadow on a plain film."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The lumbar plexus inside the muscle",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Psoas major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar spine"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "l3",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut across the muscle at L3 and you see why the lumbar plexus is where it is. Psoas arises in two sheets — one from the bodies and discs in front of the intervertebral foramina, one from the transverse processes behind them. The anterior rami of L1 to L4 emerge from the foramina straight into the cleft between those two sheets, and they branch and join there, inside the muscle. Learn the six branches and the side they leave by, because that is the question. Emerging on the LATERAL border, from above down: iliohypogastric and ilioinguinal, both from L1; then the lateral cutaneous nerve of the thigh from L2 and L3; then the femoral nerve, the largest, from L2, L3 and L4, in the groove between psoas and iliacus. Emerging on the MEDIAL border: the obturator nerve, L2, L3 and L4, and the lumbosacral trunk from L4 and L5. Piercing the ANTERIOR surface and running down on it: the genitofemoral nerve, L1 and L2. So a psoas haematoma — in a haemophiliac, or on an anticoagulant — presents as a flexed hip with a femoral nerve palsy: weak knee extension, lost knee jerk, numbness over the front of the thigh and the medial leg. That single presentation tests the whole of this beat."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "The roof: arcuate ligaments and the doorway out",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Relations"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "diaphragm",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "right_psoas",
+          "kind": "medial arcuate ligament arches over it"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "right_ql",
+          "kind": "lateral arcuate ligament arches over it"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_psoas",
+          "to": "right_inguinal_ligament",
+          "kind": "passes beneath into the thigh"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_psoas",
+            "right_ql"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The wall has a roof and a doorway, and both are made of arches. Above, the diaphragm cannot sit on the muscles or they could not pass, so it arches over each one on a thickened band of fascia. The medial arcuate ligament runs from the body of L1 or L2 to the transverse process of L1, over psoas; the lateral arcuate ligament continues from that transverse process out to the twelfth rib, over quadratus lumborum. The sympathetic trunk enters the abdomen behind the medial arch. Below, psoas and iliacus leave together under the inguinal ligament. The gap beneath that ligament is split by the iliopectineal arch into a lateral muscular compartment — iliopsoas and the femoral nerve — and a medial vascular one — femoral artery, vein and canal. Remember the order laterally to medially at the mid-inguinal point: nerve, artery, vein, empty space, lymph node. NAVEL."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Reading the clinic off the muscle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Psoas major"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lumbar spine"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony attachments"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:psoas-abscess",
+          "path": [
+            "l2_disc",
+            "l3",
+            "right_psoas",
+            "right_inguinal_ligament",
+            "right_femur"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_inguinal_ligament",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Four presentations, all readable off the course you have just traced. First, the psoas abscess. Tuberculosis of a lumbar vertebra destroys the disc and the bodies beside it, and pus collects inside the fascial sheath of psoas — where the muscle's own origin already is. The sheath is a closed tube down to the thigh, so the pus travels: it appears as a soft, fluctuant, non-tender swelling in the groin BELOW the inguinal ligament, sometimes with a second swelling above it, and the patient holds the hip flexed. Cold abscess, because there is no acute inflammation over it. Second, the psoas sign in appendicitis. A retrocaecal appendix lies on the right psoas, so extending the hip with the patient on the left side stretches the muscle and reproduces the pain. Third, the psoas haematoma. Bleeding into the muscle in a patient on an anticoagulant compresses the femoral nerve inside it: hip held flexed, weak knee extension, absent knee jerk. Fourth, the psoas shadow. Both muscles show as sharp oblique lines on a plain abdominal film, and losing one is evidence of blood, pus or fluid in the retroperitoneum on that side — from a leaking aneurysm, a ruptured kidney or a retroperitoneal abscess. Every one of those signs is the anatomy of a single long muscle read out loud."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "No nerve of the lumbar plexus exists in the catalog. The femoral, obturator, genitofemoral, iliohypogastric and ilioinguinal nerves, the lateral cutaneous nerve of the thigh and the lumbosacral trunk all have no model, so beat four teaches the plexus entirely by narration over a CROSS_SECTION of the muscle. This is the weakest point of the scene, because the plexus is the reason psoas is examined at all. Every branch and every root value is carried in match.terms and in the psoas structure's terms[], so a note naming any of them still opens this scene at the right subject.",
+    "Psoas minor is absent from the catalog. It is present in only about sixty per cent of people and is not examinable in its own right, so its omission costs little, but the scene cannot show the student the small muscle they may meet in the dissecting room in front of psoas major.",
+    "There is no psoas fascia and no iliac fascia. The fascial sheath is the whole mechanism of a psoas abscess tracking to the groin, and it cannot be drawn: beat six traces the route through the muscle body itself as the nearest honest approximation, and says in narration that the sheath is what confines the pus. PEEL_LAYER is authored in beat four so the beat becomes real the day layered models exist; today it degrades to hiding the muscle layer.",
+    "The lumbar sympathetic trunk, the lumbar arteries and the gonadal vessels are not in the catalog, so three of psoas's named relations are narrated rather than shown.",
+    "No landmark anchors were authored. The lesser trochanter, the sacral promontory, the tips of the lumbar transverse processes and the mid-inguinal point would all be worth anchoring, but anchors in this corpus are placed by measurement on the actual geometry and these meshes are not in the local decimated set. An anchor dropped where a region merely looks right teaches a wrong point the student cannot detect.",
+    "The intervertebral disc of L2 stands in for all five lumbar discs, which are separate models in the catalog. Only one is shown, to make the point that the discs are part of the origin, without turning the lumbar spine group into a wall of identical labels.",
+    "This scene does not claim to cover 'Kidney', 'Ureters' or 'Abdominal aorta & IVC' although all three appear in it. They are here as relations of psoas, to teach the wall as a bed, not as structures in their own right; all three already have their own scenes.",
+    "Ribs and inguinal ligaments are single-sided models. The right twelfth rib and right inguinal ligament are shown; the left-sided equivalents exist in the catalog but were omitted so the bony attachment group stays readable, since the teaching point is the level and the doorway rather than the side."
+  ]
+}

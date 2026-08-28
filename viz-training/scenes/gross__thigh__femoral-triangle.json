@@ -1,0 +1,701 @@
+{
+  "schema": 2,
+  "id": "gross__thigh__femoral-triangle",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thigh",
+  "structure": "Femoral triangle",
+  "covers": [
+    "Femoral triangle"
+  ],
+  "learning_goal": "Draw the three boundaries and the floor of the femoral triangle, list its contents in the NAVEL order from lateral to medial, say where the femoral artery begins and ends, and explain why a femoral hernia sits below and lateral to the pubic tubercle while an inguinal hernia sits above and medial to it.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thigh",
+      "femoral triangle",
+      "front of thigh",
+      "groin",
+      "lower limb",
+      "femoral sheath",
+      "femoral hernia",
+      "femoral artery",
+      "femoral vein",
+      "femoral nerve",
+      "vascular access"
+    ],
+    "terms": [
+      "femoral triangle",
+      "Scarpa's triangle",
+      "NAVEL",
+      "nerve artery vein empty space lymphatics",
+      "inguinal ligament",
+      "Poupart's ligament",
+      "anterior superior iliac spine",
+      "pubic tubercle",
+      "sartorius",
+      "medial border of sartorius",
+      "adductor longus",
+      "medial border of adductor longus",
+      "apex of femoral triangle",
+      "base of femoral triangle",
+      "floor of femoral triangle",
+      "iliopsoas",
+      "psoas major",
+      "iliacus",
+      "pectineus",
+      "femoral artery",
+      "external iliac artery",
+      "profunda femoris",
+      "deep artery of thigh",
+      "femoral vein",
+      "external iliac vein",
+      "great saphenous vein",
+      "saphenous opening",
+      "cribriform fascia",
+      "femoral sheath",
+      "femoral canal",
+      "femoral ring",
+      "Cloquet's node",
+      "deep inguinal lymph nodes",
+      "superficial inguinal lymph nodes",
+      "femoral hernia",
+      "inguinal hernia",
+      "mid-inguinal point",
+      "midpoint of inguinal ligament",
+      "femoral pulse",
+      "femoral line",
+      "femoral nerve block",
+      "adductor canal",
+      "fascia lata"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "inguinal_lig",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament — the base",
+      "role": "part",
+      "group": "Boundaries",
+      "layer": "fascia",
+      "color": "#e8c98a",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "Poupart's ligament",
+        "base of femoral triangle",
+        "anterior superior iliac spine",
+        "pubic tubercle",
+        "mid-inguinal point",
+        "midpoint of inguinal ligament"
+      ],
+      "narration": "The rolled-under lower edge of the external oblique aponeurosis, running from the anterior superior iliac spine to the pubic tubercle. It is the base of the triangle and the line everything in the groin is described against. Learn its two ends: the femoral artery enters at the mid-inguinal point, halfway between the anterior superior iliac spine and the pubic symphysis, and a femoral hernia appears below and lateral to the pubic tubercle."
+    },
+    {
+      "key": "sartorius",
+      "name": "right sartorius",
+      "label": "Sartorius — lateral border",
+      "role": "part",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#e0a05a",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "medial border of sartorius",
+        "lateral border of femoral triangle",
+        "anterior superior iliac spine",
+        "longest muscle in the body",
+        "tailor's muscle"
+      ],
+      "narration": "It leaves the anterior superior iliac spine and runs down and inwards across the thigh. Its medial border is the lateral wall of the triangle. Note the trick in the wording: the lateral boundary is the medial border of sartorius, and the medial boundary is the medial border of adductor longus. Examiners ask for the border, not just the muscle."
+    },
+    {
+      "key": "add_long",
+      "name": "right adductor longus",
+      "label": "Adductor longus — medial border",
+      "role": "part",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#b8607e",
+      "refs": {
+        "bodyparts3d": "FMA22456"
+      },
+      "terms": [
+        "adductor longus",
+        "medial border of adductor longus",
+        "medial boundary of femoral triangle",
+        "body of pubis",
+        "linea aspera",
+        "floor of femoral triangle",
+        "apex"
+      ],
+      "narration": "From the front of the body of the pubis to the middle of the linea aspera. Its medial border is the medial wall of the triangle, and its upper surface helps make the floor as well — the same muscle does both jobs. Where sartorius crosses over it, the two borders meet and the triangle ends: that meeting point is the apex."
+    },
+    {
+      "key": "psoas_major",
+      "name": "right psoas major",
+      "label": "Psoas major — floor, lateral part",
+      "role": "part",
+      "group": "Floor",
+      "layer": "muscle",
+      "color": "#9c6f9e",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "iliopsoas",
+        "floor of femoral triangle",
+        "lesser trochanter",
+        "psoas abscess",
+        "lumbar plexus"
+      ],
+      "narration": "Psoas comes down out of the abdomen behind the inguinal ligament and joins iliacus as iliopsoas. Together they form the lateral half of the floor. Because the muscle runs from the lumbar spine straight into the thigh, pus from a tuberculous lumbar spine can track down its sheath and point in the femoral triangle as a cold abscess."
+    },
+    {
+      "key": "iliacus",
+      "name": "right iliacus",
+      "label": "Iliacus — floor, lateral part",
+      "role": "part",
+      "group": "Floor",
+      "layer": "muscle",
+      "color": "#8a5f8c",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliac fossa",
+        "iliopsoas",
+        "floor of femoral triangle",
+        "femoral nerve"
+      ],
+      "narration": "The fan filling the iliac fossa, joining psoas to reach the lesser trochanter. The femoral nerve lies in the groove between the two muscles, on the floor and behind the fascia — which is why the nerve is outside the femoral sheath while the artery and vein are inside it."
+    },
+    {
+      "key": "pectineus",
+      "name": "right pectineus",
+      "label": "Pectineus — floor, medial part",
+      "role": "part",
+      "group": "Floor",
+      "layer": "muscle",
+      "color": "#a86f8f",
+      "refs": {
+        "bodyparts3d": "FMA22450"
+      },
+      "terms": [
+        "pectineus",
+        "pecten pubis",
+        "pectineal line",
+        "floor of femoral triangle",
+        "femoral ring",
+        "lacunar ligament"
+      ],
+      "narration": "A flat quadrilateral from the pecten pubis to the femur just below the lesser trochanter. It makes the middle of the floor, between iliopsoas laterally and adductor longus medially. Recite the floor from lateral to medial as iliopsoas, pectineus, adductor longus and you have it in the order you see it."
+    },
+    {
+      "key": "fem_artery",
+      "name": "right external iliac artery",
+      "label": "Femoral artery (continuous with the external iliac artery)",
+      "role": "part",
+      "group": "Contents",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "femoral artery",
+        "external iliac artery",
+        "mid-inguinal point",
+        "femoral pulse",
+        "profunda femoris",
+        "deep artery of thigh",
+        "common femoral artery",
+        "superficial femoral artery",
+        "femoral line",
+        "arterial access"
+      ],
+      "narration": "One vessel, two names. The external iliac artery becomes the femoral artery the moment it passes behind the inguinal ligament, and there is no join to find — the catalog holds the abdominal length of it, so read the lower end as the femoral artery in the triangle. It is the most lateral of the three structures in the sheath, it gives off the profunda femoris about four centimetres below the ligament, and it is the vessel you feel at the mid-inguinal point and puncture for arterial access."
+    },
+    {
+      "key": "fem_vein",
+      "name": "right external iliac vein",
+      "label": "Femoral vein (continuous with the external iliac vein)",
+      "role": "part",
+      "group": "Contents",
+      "layer": "vessel",
+      "color": "#2c5f9e",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "femoral vein",
+        "external iliac vein",
+        "great saphenous vein",
+        "saphenofemoral junction",
+        "saphenous opening",
+        "femoral line",
+        "central venous access",
+        "deep vein thrombosis"
+      ],
+      "narration": "The same rule on the venous side: the femoral vein becomes the external iliac vein at the inguinal ligament. It lies medial to the artery at the base of the triangle but slips behind it lower down, so the level at which you look changes the answer. The great saphenous vein joins its front through the saphenous opening about four centimetres below and lateral to the pubic tubercle."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "lesser trochanter",
+        "head of femur",
+        "neck of femur",
+        "linea aspera"
+      ],
+      "narration": "The head and neck of the femur lie directly behind the triangle, separated from the vessels only by iliopsoas and the hip joint capsule. That is why a hip joint effusion is felt as fullness in the groin and why the femoral vessels are at risk in anterior approaches to the hip."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "anterior superior iliac spine",
+        "pubic tubercle",
+        "pecten pubis",
+        "pubic symphysis",
+        "acetabulum"
+      ],
+      "narration": "Two landmarks on this bone define everything in the groin: the anterior superior iliac spine laterally and the pubic tubercle medially. Every hernia, every pulse and every needle in this region is described by its position relative to those two points."
+    },
+    {
+      "key": "vast_med",
+      "name": "right vastus medialis",
+      "label": "Vastus medialis",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#c25a6b",
+      "refs": {
+        "bodyparts3d": "FMA38932"
+      },
+      "terms": [
+        "vastus medialis",
+        "adductor canal",
+        "anterolateral wall",
+        "apex of femoral triangle"
+      ],
+      "narration": "It appears at the apex of the triangle and becomes the anterolateral wall of the adductor canal below it. The triangle does not end the vessels — it hands them on."
+    },
+    {
+      "key": "add_brevis",
+      "name": "right adductor brevis",
+      "label": "Adductor brevis",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#9c5570",
+      "refs": {
+        "bodyparts3d": "FMA22452"
+      },
+      "terms": [
+        "adductor brevis",
+        "obturator nerve",
+        "anterior division",
+        "posterior division",
+        "medial compartment"
+      ],
+      "narration": "It lies behind pectineus and adductor longus, out of the triangle but immediately deep to its medial floor. The two divisions of the obturator nerve sandwich it, which is the landmark for the nerve in the medial compartment."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find the triangle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Boundaries",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The femoral triangle is a hollow in the upper third of the front of the thigh, just below the groin crease. It is not a structure — it is a space, and its whole value is that it tells you what lies where when you put a hand or a needle into the groin. Point down, base up."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The three boundaries",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Boundaries"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "inguinal_lig",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Above, the inguinal ligament forms the base. Laterally, the medial border of sartorius. Medially, the medial border of adductor longus. Three lines, one space. Say them in that order — base, lateral, medial — and you will never leave one out."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Where the apex is",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sartorius",
+          "to": "add_long",
+          "kind": "crossing"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "vast_med"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Follow sartorius downwards and it crosses over adductor longus. Where the two borders meet is the apex, roughly a hand's breadth below the inguinal ligament. Below the apex the space does not close — it becomes the adductor canal, and the same vessels simply carry on."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The floor, from lateral to medial",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Floor"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The floor is a gutter, not a flat sheet. Iliopsoas fills the lateral half, pectineus the middle, adductor longus the medial edge. The dip between iliopsoas and pectineus is the trough the femoral vessels lie in, and it is why the pulse is felt in a definite line rather than anywhere in the groin."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "NAVEL — the order of the contents",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "inguinal_lig",
+          "intensity": 0.5
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "From lateral to medial under the inguinal ligament: nerve, artery, vein, empty space, lymphatics. NAVEL. The femoral nerve is the outermost and the only one outside the femoral sheath. Then the artery, then the vein, then the femoral canal with its fat and a lymph node, and the deep inguinal nodes most medially. Get the order right and the femoral pulse tells you where every other structure is."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 6,
+      "title": "Trace the artery through",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fem_artery",
+          "path": [
+            "hip_bone",
+            "inguinal_lig",
+            "fem_artery",
+            "add_long",
+            "vast_med"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The external iliac artery comes down inside the pelvis, passes behind the middle of the inguinal ligament and is called the femoral artery from that moment. It crosses the floor of the triangle, gives the profunda femoris from its back and lateral side about four centimetres down, and leaves at the apex into the adductor canal. Two landmarks worth memorising: the mid-inguinal point for the pulse, and the profunda origin, because that is the branch that supplies most of the thigh."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 7,
+      "title": "Artery and vein, and which is where",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "fem_artery",
+            "fem_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "At the base of the triangle the vein is medial to the artery. At the apex it has moved behind it. That single fact is the reason a femoral venous line is aimed a finger's breadth medial to the pulse and aimed high, close to the ligament, where the vein is still beside the artery rather than under it."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 8,
+      "title": "The nerve on the floor",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:femoral_nerve",
+          "path": [
+            "psoas_major",
+            "iliacus",
+            "inguinal_lig",
+            "sartorius",
+            "vast_med"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The path traced here is the femoral nerve, L2, L3 and L4. It forms inside psoas major, runs down in the groove between psoas and iliacus, and enters the thigh lateral to the artery and behind the iliac fascia rather than in the femoral sheath. About two centimetres below the ligament it explodes into its branches. That short trunk is why a femoral nerve block is placed high, just below the ligament and just lateral to the pulse."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "A cut just below the ligament",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.35,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Contents",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Slide the cut down from the ligament to the apex. High up the space is wide and the vessels sit side by side on iliopsoas and pectineus. As the cut descends, sartorius swings across the front, the vein tucks behind the artery, and the wide triangle narrows into the tunnel of the adductor canal. The femoral sheath itself is a funnel of transversalis and iliac fascia dragged down from the abdomen, and it ends about three centimetres in."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 10,
+      "title": "The femoral canal and the hernia",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Contents"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "inguinal_lig"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pectineus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fem_vein",
+          "to": "pectineus",
+          "kind": "boundary"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Medial to the vein, inside the sheath, is the femoral canal — a short space of fat and one lymph node that exists so the vein can expand. Its mouth, the femoral ring, is bounded in front by the inguinal ligament, behind by the pecten pubis, medially by the lacunar ligament and laterally by the vein. It is narrow and its edges are sharp, so a femoral hernia through it strangulates early. Distinguish it at the bedside by the pubic tubercle: femoral hernias lie below and lateral to it, inguinal hernias above and medial."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 11,
+      "title": "Why the groin nodes matter",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:inguinal_lymph_drainage",
+          "path": [
+            "fem_vein",
+            "inguinal_lig",
+            "hip_bone"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The path traced here is lymph leaving the groin. Superficial inguinal nodes lie in the fat below the ligament and take the whole lower limb, the perineum, the lower anal canal, the vulva or scrotal skin and the abdominal wall below the umbilicus. They drain into the deep inguinal nodes along the vein, the highest of which sits in the femoral canal and is called Cloquet's node. So enlarged groin nodes are a reason to examine the leg, the anus and the genitalia, not just the leg."
+    },
+    {
+      "mode": "location",
+      "beat": 12,
+      "title": "Peel down to the space",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The dissection order to recite: skin, then superficial fascia holding the superficial inguinal nodes and the great saphenous vein, then the fascia lata with its saphenous opening, then the femoral sheath with the artery and vein inside it, then the floor muscles with the femoral nerve lying on them. Learn the roof and the floor as layers and the contents have an address rather than a list."
+    }
+  ],
+  "gaps": [
+    "There is no femoral artery or femoral vein in the catalog. Both are taught through the vessel they are continuous with — the external iliac artery and vein — because the femoral vessels are the same tubes under a different name below the inguinal ligament, and no join exists to mislead a student. The labels say so explicitly. The consequence is that the modelled length lies mostly above the ligament, so the intra-triangle course is narrated and traced rather than shown at full length.",
+    "The profunda femoris (deep artery of the thigh) and its origin about four centimetres below the inguinal ligament are not modelled. This is the branch that supplies most of the thigh and the one that makes the difference between a common and a superficial femoral artery in a report, so it is named in narration on the artery and in the trace beat.",
+    "No nerve of the lower limb exists as a model. The femoral nerve — the N of NAVEL and the most lateral content — is authored as a traced concept path from psoas major through the groove with iliacus and under the inguinal ligament to the muscles it supplies. Its root value, its position outside the femoral sheath and its early branching are narration only.",
+    "No lymph node or lymphatic vessel is modelled anywhere in the catalog, so the superficial and deep inguinal groups and Cloquet's node in the femoral canal are taught as a traced concept path plus narration. This scene therefore does not claim to cover any lymph node curriculum entry.",
+    "The femoral sheath, the femoral canal and the femoral ring are fascial spaces with no mesh. They are the clinical heart of the region, so they are taught by lighting the vein and the pecten pubis of the hip bone and describing the four walls of the ring. A modelled sheath would be the single most valuable addition to this scene.",
+    "The great saphenous vein and the saphenous opening in the fascia lata are not in the catalog, so the saphenofemoral junction is described by its landmark — four centimetres below and lateral to the pubic tubercle — rather than shown.",
+    "The fascia lata itself has no mesh on this side of the thigh, so the roof of the triangle is narrated. The iliotibial tract exists but is a lateral structure and would misrepresent the roof if used for it.",
+    "The pubic tubercle, the pecten pubis and the anterior superior iliac spine are sub-features of the whole hip bone mesh. They are taught by lighting the bone and naming the feature. Landmark anchors would be a real improvement here, more than in most scenes, because hernia teaching turns entirely on the pubic tubercle — but the mesh was not measured in this run and an anchor placed by eye would be worse than none."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

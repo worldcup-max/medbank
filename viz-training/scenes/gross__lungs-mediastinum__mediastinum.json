@@ -1,0 +1,982 @@
+{
+  "schema": 2,
+  "id": "gross__lungs-mediastinum__mediastinum",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Lungs & Mediastinum",
+  "structure": "Mediastinum",
+  "covers": [
+    "Mediastinum"
+  ],
+  "learning_goal": "Draw the boundaries of the mediastinum, split it into its four divisions on the plane of the sternal angle, list the contents of each division in order from front to back, and use that order to say what a mass in a named division is most likely to be and what it will press on first.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "mediastinum",
+      "thorax",
+      "superior mediastinum",
+      "anterior mediastinum",
+      "middle mediastinum",
+      "posterior mediastinum",
+      "mediastinal mass",
+      "chest x-ray",
+      "great vessels",
+      "lungs",
+      "heart",
+      "thoracic surgery"
+    ],
+    "terms": [
+      "mediastinum",
+      "superior mediastinum",
+      "inferior mediastinum",
+      "anterior mediastinum",
+      "middle mediastinum",
+      "posterior mediastinum",
+      "divisions of the mediastinum",
+      "transthoracic plane",
+      "plane of Ludwig",
+      "sternal angle",
+      "angle of Louis",
+      "T4/T5",
+      "thoracic inlet",
+      "thoracic outlet",
+      "boundaries of the mediastinum",
+      "mediastinal pleura",
+      "thymus",
+      "thymic remnant",
+      "retrosternal goitre",
+      "arch of the aorta",
+      "ascending aorta",
+      "descending thoracic aorta",
+      "brachiocephalic trunk",
+      "left common carotid",
+      "left subclavian artery",
+      "three branches of the arch",
+      "brachiocephalic veins",
+      "superior vena cava",
+      "inferior vena cava",
+      "cavo-atrial junction",
+      "azygos vein",
+      "pulmonary trunk",
+      "pulmonary artery",
+      "pulmonary veins",
+      "ligamentum arteriosum",
+      "ductus arteriosus",
+      "left recurrent laryngeal nerve",
+      "hoarseness",
+      "phrenic nerve",
+      "vagus nerve",
+      "in front of the root",
+      "behind the root",
+      "thoracic duct",
+      "chylothorax",
+      "sympathetic chain",
+      "splanchnic nerves",
+      "oesophagus",
+      "esophagus",
+      "oesophageal constrictions",
+      "trachea",
+      "carina",
+      "pericardium",
+      "fibrous pericardium",
+      "cardiac tamponade",
+      "mediastinal shift",
+      "tension pneumothorax",
+      "mediastinal lymph nodes",
+      "lymphoma",
+      "the four Ts",
+      "aortic hiatus",
+      "T12",
+      "oesophageal hiatus",
+      "T10",
+      "caval opening",
+      "T8"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "heart",
+      "name": "wall of heart",
+      "label": "Heart",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "layer": "organ",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA7274"
+      },
+      "terms": [
+        "heart",
+        "middle mediastinum",
+        "pericardium",
+        "fibrous pericardium",
+        "cardiac tamponade"
+      ],
+      "narration": "The middle mediastinum is the heart and its pericardium, and almost nothing else. Define it that way and the other three divisions define themselves: anterior is in front of the pericardium, posterior is behind it, superior is above it. The fibrous pericardium is tough and does not stretch, which is why a small volume of blood in the sac stops the heart while a slow litre of fluid may not."
+    },
+    {
+      "key": "asc",
+      "name": "ascending aorta",
+      "label": "Ascending aorta",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "bodyparts3d": "FMA3736"
+      },
+      "terms": [
+        "ascending aorta",
+        "aortic root",
+        "coronary arteries",
+        "within the pericardium",
+        "aortic dissection"
+      ],
+      "narration": "Leaves the left ventricle and runs up and to the right, still inside the pericardial sac — which is why a dissection here bleeds into the pericardium and tamponades. Only the coronary arteries come off it."
+    },
+    {
+      "key": "arch",
+      "name": "arch of aorta",
+      "label": "Arch of the aorta",
+      "role": "part",
+      "group": "Superior mediastinum",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA3768"
+      },
+      "terms": [
+        "arch of the aorta",
+        "aortic arch",
+        "brachiocephalic trunk",
+        "left common carotid",
+        "left subclavian artery",
+        "three branches",
+        "aortic knuckle"
+      ],
+      "narration": "Arches back and to the left, from the sternal angle to the sternal angle — it begins and ends on the same plane. Three branches leave its upper surface in order: brachiocephalic trunk, left common carotid, left subclavian. On a chest film its left edge is the aortic knuckle, and a widened one after a road traffic accident means a torn aorta."
+    },
+    {
+      "key": "desc",
+      "name": "descending aorta",
+      "label": "Descending thoracic aorta",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "descending thoracic aorta",
+        "posterior mediastinum",
+        "posterior intercostal arteries",
+        "aortic hiatus",
+        "T12",
+        "moves to the midline"
+      ],
+      "narration": "Begins on the left side of T4 and works its way to the midline as it descends, giving posterior intercostal arteries on the way. It leaves the thorax behind the diaphragm at T12, through the aortic hiatus — behind, not through, the muscle, which is why its flow is not squeezed by breathing."
+    },
+    {
+      "key": "svc",
+      "name": "superior vena cava",
+      "label": "Superior vena cava",
+      "role": "part",
+      "group": "Superior mediastinum",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA4720"
+      },
+      "terms": [
+        "superior vena cava",
+        "SVC",
+        "SVC obstruction",
+        "azygos vein",
+        "right of the midline",
+        "thin walled"
+      ],
+      "narration": "Formed behind the right first costal cartilage by the two brachiocephalic veins, running down on the right of the ascending aorta. It is thin-walled and lies among lymph nodes, so a right upper lobe tumour compresses it: the face and arms swell, the neck veins fill and do not pulsate, and the patient cannot lie flat. The azygos vein joins it just before it enters the atrium."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "caval opening",
+        "T8",
+        "central tendon",
+        "shortest intrathoracic course"
+      ],
+      "narration": "Pierces the central tendon of the diaphragm at T8 and enters the right atrium after about 2 cm. It has almost no course inside the chest, so it is a middle mediastinal structure and never a posterior one — a favourite trap in a list question."
+    },
+    {
+      "key": "pa",
+      "name": "pulmonary artery",
+      "label": "Pulmonary trunk & arteries",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "layer": "vessel",
+      "color": "#5dade2",
+      "refs": {
+        "bodyparts3d": "FMA66326"
+      },
+      "terms": [
+        "pulmonary trunk",
+        "pulmonary artery",
+        "bifurcation of the pulmonary trunk",
+        "ligamentum arteriosum",
+        "saddle embolus"
+      ],
+      "narration": "Leaves the right ventricle in front of everything else at the root of the heart and divides under the arch of the aorta. A clot large enough to sit astride that division kills in minutes."
+    },
+    {
+      "key": "esophagus_note",
+      "label": "Oesophagus",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "render": "anchor",
+      "color": "#7dcea0",
+      "anchor": {
+        "on": "t4",
+        "uvw": [
+          0.5,
+          0.05,
+          0.5
+        ],
+        "radius": 0.03
+      },
+      "status": "needs-review",
+      "calibrated_by": "author: placed on the front of the fourth thoracic vertebral body, where the oesophagus runs. The oesophagus mesh was not available locally to measure a contact against, so this anchor marks the position it occupies rather than the organ itself — see gaps[].",
+      "terms": [
+        "oesophagus",
+        "esophagus",
+        "posterior mediastinum",
+        "oesophageal constrictions",
+        "arch of the aorta indents it",
+        "left atrium in front",
+        "oesophageal hiatus",
+        "T10",
+        "barium swallow"
+      ],
+      "narration": "Runs the whole length of the mediastinum in front of the vertebral bodies and behind the trachea, then behind the heart. Three things narrow it in the chest: the arch of the aorta, the left principal bronchus, and the diaphragm at T10. An enlarged left atrium presses on it from in front, which is why a barium swallow was once a cardiology investigation."
+    },
+    {
+      "key": "sternal_angle",
+      "label": "Sternal angle — the dividing plane",
+      "role": "part",
+      "group": "Levels",
+      "render": "anchor",
+      "color": "#f4d03f",
+      "anchor": {
+        "on": "manubrium",
+        "uvw": [
+          0.499,
+          0.011,
+          0.128
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the manubrium and the body of the sternum — the manubriosternal joint, i.e. the sternal angle (gap 0.11 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "sternal angle",
+        "angle of Louis",
+        "transthoracic plane",
+        "plane of Ludwig",
+        "T4/T5",
+        "second costal cartilage",
+        "six things happen here"
+      ],
+      "narration": "The one landmark this whole topic hangs on. The plane through it and the lower border of T4 separates superior from inferior mediastinum. Six things happen on this plane: the trachea divides, the arch of the aorta begins and ends, the azygos vein enters the superior vena cava, the thoracic duct crosses to the left, the pulmonary trunk divides, and the second costal cartilage joins the sternum."
+    },
+    {
+      "key": "ludwig_posterior",
+      "label": "Back of the dividing plane (T4/T5)",
+      "role": "part",
+      "group": "Levels",
+      "render": "anchor",
+      "color": "#f5b041",
+      "anchor": {
+        "on": "t4",
+        "uvw": [
+          0.633,
+          0.162,
+          0.174
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the fourth thoracic vertebra and the descending aorta — the back end of the transthoracic plane, where the superior mediastinum stops (gap 3.72 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "T4/T5",
+        "lower border of T4",
+        "transthoracic plane",
+        "posterior end of the plane"
+      ],
+      "narration": "The back end of the same plane. Draw it from the sternal angle straight back to the disc between T4 and T5, and everything above it is superior mediastinum."
+    },
+    {
+      "key": "arch_summit",
+      "label": "Summit of the arch",
+      "role": "part",
+      "group": "Superior mediastinum",
+      "render": "anchor",
+      "color": "#e59866",
+      "anchor": {
+        "on": "arch",
+        "uvw": [
+          0.578,
+          0.405,
+          1.0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the highest (most superior) vertex of the arch of the aorta, 22.2 mm from the arch's surface centroid; see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "summit of the arch",
+        "midpoint of the manubrium",
+        "three branches",
+        "aortic arch"
+      ],
+      "narration": "The top of the arch reaches about the middle of the manubrium — above the sternal angle but below the top of the sternum. That is why the arch is a superior mediastinal structure while the ascending aorta below it is not."
+    },
+    {
+      "key": "ligamentum_arteriosum",
+      "label": "Ligamentum arteriosum",
+      "role": "part",
+      "group": "Superior mediastinum",
+      "render": "anchor",
+      "color": "#f7dc6f",
+      "anchor": {
+        "on": "arch",
+        "uvw": [
+          0.632,
+          0.224,
+          0.015
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the arch of the aorta and the pulmonary artery — where the ligamentum arteriosum runs and the left recurrent laryngeal nerve hooks (gap 1.93 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "ligamentum arteriosum",
+        "ductus arteriosus",
+        "patent ductus arteriosus",
+        "left recurrent laryngeal nerve",
+        "hoarseness",
+        "aortopulmonary window"
+      ],
+      "narration": "The remnant of the ductus arteriosus, running from the start of the left pulmonary artery to the underside of the arch. The left recurrent laryngeal nerve hooks around it. That single fact explains why a hoarse voice can be the first sign of a left hilar carcinoma, and why the left nerve is at risk in thoracic surgery while the right one is not."
+    },
+    {
+      "key": "svc_atrial_junction",
+      "label": "Cavo-atrial junction",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "render": "anchor",
+      "color": "#85c1e9",
+      "anchor": {
+        "on": "svc",
+        "uvw": [
+          0.64,
+          0.055,
+          0.124
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the superior vena cava and the wall of the heart — the cavo-atrial junction (gap 0.13 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "cavo-atrial junction",
+        "central line tip",
+        "right atrium",
+        "sinuatrial node",
+        "crista terminalis"
+      ],
+      "narration": "Where the superior vena cava opens into the right atrium — the point a central line tip should reach and not pass. The sinuatrial node sits in the atrial wall right here, which is why a guidewire pushed too far sets off ectopics."
+    },
+    {
+      "key": "ivc_atrial_junction",
+      "label": "Opening of the inferior vena cava",
+      "role": "part",
+      "group": "Middle mediastinum",
+      "render": "anchor",
+      "color": "#aed6f1",
+      "anchor": {
+        "on": "ivc",
+        "uvw": [
+          0.965,
+          0.606,
+          0.986
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the inferior vena cava and the wall of the heart — where it enters the right atrium after piercing the diaphragm (gap 0.34 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "inferior vena cava",
+        "caval opening",
+        "T8",
+        "central tendon",
+        "right atrium",
+        "shortest intrathoracic course"
+      ],
+      "narration": "The inferior vena cava pierces the central tendon of the diaphragm at T8 and enters the right atrium almost at once. Its course inside the chest is only about 2 cm, so it belongs to the middle mediastinum and contributes nothing to the posterior."
+    },
+    {
+      "key": "aortic_hiatus",
+      "label": "Aortic hiatus (T12)",
+      "role": "part",
+      "group": "Posterior mediastinum",
+      "render": "anchor",
+      "color": "#d98880",
+      "anchor": {
+        "on": "desc",
+        "uvw": [
+          0.113,
+          0.429,
+          0.45
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the descending aorta and the twelfth thoracic vertebra — the aortic hiatus, where the aorta leaves the posterior mediastinum behind the diaphragm at T12 (gap 0.95 mm); see tools/derive-mediastinum-landmarks.mjs",
+      "terms": [
+        "aortic hiatus",
+        "T12",
+        "behind the diaphragm",
+        "thoracic duct",
+        "azygos vein",
+        "twelve, ten, eight"
+      ],
+      "narration": "The lower end of the posterior mediastinum. Three things pass here: the aorta, the thoracic duct and the azygos vein — and because the opening is behind the muscle rather than through it, none of them is squeezed when the diaphragm contracts. Count the openings by their levels: caval at T8, oesophageal at T10, aortic at T12."
+    },
+    {
+      "key": "manubrium",
+      "name": "manubrium",
+      "label": "Manubrium",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA7486"
+      },
+      "terms": [
+        "manubrium",
+        "suprasternal notch",
+        "thoracic inlet",
+        "anterior boundary"
+      ],
+      "narration": "The front wall of the superior mediastinum. Its top edge, with the first ribs and T1, is the thoracic inlet — the way in from the neck, which is how a goitre reaches the chest."
+    },
+    {
+      "key": "sternbody",
+      "name": "body of sternum",
+      "label": "Body of the sternum",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#d7dbdd",
+      "refs": {
+        "bodyparts3d": "FMA7487"
+      },
+      "terms": [
+        "body of the sternum",
+        "anterior mediastinum",
+        "retrosternal",
+        "median sternotomy"
+      ],
+      "narration": "The front wall of the inferior mediastinum. The narrow gap between this bone and the pericardium is the whole anterior mediastinum."
+    },
+    {
+      "key": "t4",
+      "name": "fourth thoracic vertebra",
+      "label": "T4 vertebra",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA9248"
+      },
+      "terms": [
+        "fourth thoracic vertebra",
+        "T4",
+        "posterior boundary",
+        "vertebral bodies"
+      ],
+      "narration": "The mediastinum is bounded behind by the twelve thoracic vertebral bodies. T4 is the one that matters, because the plane through its lower border divides the space in two."
+    },
+    {
+      "key": "t12",
+      "name": "twelfth thoracic vertebra",
+      "label": "T12 vertebra",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA10081"
+      },
+      "terms": [
+        "twelfth thoracic vertebra",
+        "T12",
+        "aortic hiatus",
+        "lower limit"
+      ],
+      "narration": "The bottom of the posterior mediastinum. Below the diaphragm the same structures continue, but they are abdominal from here."
+    },
+    {
+      "key": "trachea",
+      "name": "trachea",
+      "label": "Trachea",
+      "role": "context",
+      "group": "Superior mediastinum",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA7394"
+      },
+      "terms": [
+        "trachea",
+        "carina",
+        "superior mediastinum",
+        "mediastinal shift",
+        "tracheal deviation"
+      ],
+      "narration": "Runs down the superior mediastinum and divides on the dividing plane. A trachea pushed off the midline is the physical sign that the whole mediastinum has shifted — away from a tension pneumothorax, towards a collapsed lung."
+    },
+    {
+      "key": "bronchi",
+      "name": "bronchus",
+      "label": "Principal bronchi",
+      "role": "context",
+      "group": "Middle mediastinum",
+      "layer": "organ",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA7409"
+      },
+      "terms": [
+        "principal bronchi",
+        "roots of the lungs",
+        "middle mediastinum",
+        "subcarinal nodes"
+      ],
+      "narration": "The bifurcation and the roots of the lungs belong to the middle mediastinum, along with the heart. This is where the mediastinal lymph nodes cluster."
+    },
+    {
+      "key": "brachiocephalic_v",
+      "name": "right brachiocephalic vein",
+      "label": "Right brachiocephalic vein",
+      "role": "context",
+      "group": "Superior mediastinum",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA4751"
+      },
+      "terms": [
+        "brachiocephalic vein",
+        "innominate vein",
+        "behind the manubrium",
+        "left crosses the midline"
+      ],
+      "narration": "The right one is short and almost vertical; the left crosses behind the manubrium to join it, and that crossing is why a sternotomy in a small child is a venous risk. Together they make the superior vena cava."
+    },
+    {
+      "key": "subclavian_a",
+      "name": "right subclavian artery",
+      "label": "Right subclavian artery",
+      "role": "context",
+      "group": "Superior mediastinum",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "bodyparts3d": "FMA3953"
+      },
+      "terms": [
+        "subclavian artery",
+        "brachiocephalic trunk",
+        "thoracic inlet",
+        "right recurrent laryngeal nerve"
+      ],
+      "narration": "On the right it comes from the brachiocephalic trunk, and the right recurrent laryngeal nerve hooks around it in the root of the neck — not in the chest. That asymmetry is the reason the two nerves are injured by different diseases."
+    },
+    {
+      "key": "rul",
+      "name": "upper lobe of right lung",
+      "label": "Right upper lobe",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA7333"
+      },
+      "terms": [
+        "mediastinal pleura",
+        "lateral boundary",
+        "right lung"
+      ],
+      "narration": "The mediastinum is walled on each side by the mediastinal pleura and the lung behind it. Those walls are soft, which is why the mediastinum can be pushed."
+    },
+    {
+      "key": "lul",
+      "name": "upper lobe of left lung",
+      "label": "Left upper lobe",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "organ",
+      "color": "#f2b0a8",
+      "refs": {
+        "bodyparts3d": "FMA7370"
+      },
+      "terms": [
+        "mediastinal pleura",
+        "lateral boundary",
+        "left lung",
+        "cardiac notch"
+      ],
+      "narration": "On the left the lung is scooped away in front of the heart, so the pericardium touches the chest wall directly there."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The space between the lungs",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "rul",
+            "lul"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "heart",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "The mediastinum is not an organ. It is the space left over in the middle of the chest once the two lungs are taken out: sternum in front, thoracic vertebrae behind, mediastinal pleura on each side, thoracic inlet above, diaphragm below. Everything crossing the chest that is not lung is in here."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Cut it in two at the sternal angle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sternal_angle",
+          "intensity": 1.0
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sternal_angle",
+          "to": "ludwig_posterior",
+          "kind": "the transthoracic plane"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "One plane does all the work. From the sternal angle in front, straight back to the disc between T4 and T5. Above it is the superior mediastinum. Below it is the inferior mediastinum, which the pericardium then divides into three: anterior in front of it, middle which is the pericardium and its contents, posterior behind it. Four divisions from one line you can feel with a finger."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Superior mediastinum — front to back",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Superior mediastinum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "arch_summit",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "brachiocephalic_v",
+          "to": "svc",
+          "kind": "forms"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "arch",
+          "to": "subclavian_a",
+          "kind": "third branch"
+        }
+      ],
+      "narration": "Learn the superior mediastinum as four layers from front to back. First the thymus. Then the veins: the two brachiocephalic veins joining to make the superior vena cava. Then the arteries: the arch of the aorta with its three branches — brachiocephalic trunk, left common carotid, left subclavian. Then the airway and food pipe: trachea in front of oesophagus, with the thoracic duct behind and to the left. Veins in front of arteries, arteries in front of tubes. That order is the answer to most viva questions about this division."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Middle mediastinum — the heart and what enters it",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Middle mediastinum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "svc_atrial_junction",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ivc_atrial_junction",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pa",
+          "to": "heart",
+          "kind": "leaves the right ventricle"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The middle mediastinum is the pericardium and everything in it: the heart, the ascending aorta, the pulmonary trunk, the ends of both venae cavae and the pulmonary veins, the roots of the lungs and the phrenic nerves running down on each side of the pericardium. Note where the two cavae open. The superior comes in from above at the cavo-atrial junction; the inferior pierces the diaphragm at T8 and enters almost immediately, so it barely exists inside the chest at all."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "Anterior mediastinum — a gap, and what fills it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sternbody",
+          "to": "heart",
+          "kind": "the anterior mediastinum lies between"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Between the body of the sternum and the front of the pericardium there is almost nothing: fat, a few lymph nodes, small vessels, and in a child the lower part of the thymus. It is a thin space, but it is where the classic anterior mediastinal masses sit, and they are remembered as the four Ts — thymoma, teratoma, thyroid that has grown down through the inlet, and terrible lymphoma."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "Posterior mediastinum — behind the heart",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Posterior mediastinum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "heart"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": -0.1,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "esophagus_note",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aortic_hiatus",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Behind the pericardium and in front of the vertebral bodies, from the dividing plane down to the diaphragm. Its contents are the descending thoracic aorta, the oesophagus with the vagal trunks on it, the thoracic duct, the azygos and hemiazygos veins, and the sympathetic chains and splanchnic nerves on the sides of the vertebrae. This is why a stab wound in the back that misses the lung can still be fatal, and why an oesophageal tear here floods the space with saliva and gastric contents."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The nerves that explain the symptoms",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "rul"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "lul"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ligamentum_arteriosum",
+          "intensity": 1.0
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:left-recurrent-laryngeal-nerve",
+          "path": [
+            "arch_summit",
+            "ligamentum_arteriosum",
+            "trachea",
+            "esophagus_note"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Two nerve rules earn marks and save patients. First: the phrenic nerve runs in front of the root of the lung on the pericardium, the vagus behind it — so a hilar mass takes the vagus first and the diaphragm later. Second: the left recurrent laryngeal nerve leaves the vagus at the arch, hooks under it beside the ligamentum arteriosum, and climbs back up in the groove between trachea and oesophagus. Anything in that window — a carcinoma, a node, an aneurysm, an enlarged left atrium — makes the patient hoarse. The right nerve turns at the subclavian artery in the neck and is spared."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "Reading a shifted mediastinum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trachea",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "svc",
+            "arch"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "svc",
+          "to": "rul",
+          "kind": "compressed by a right upper lobe mass"
+        }
+      ],
+      "narration": "The side walls are soft, so the mediastinum moves. Air trapped under pressure in one pleural cavity pushes it away; a collapsed lung pulls it towards. You read that shift on a film from the trachea and the heart shadow, and at the bedside from the trachea in the suprasternal notch and the apex beat. And because the superior vena cava is the thinnest-walled thing up there, a right upper lobe tumour obstructs it long before it obstructs the aorta beside it."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no pericardium mesh in the catalog, so the middle mediastinum is shown as the heart and the great vessel roots rather than as the sac that actually defines it. This matters more here than in most scenes, because the anterior, middle and posterior divisions are defined by the pericardium: without it, beats 4 to 6 draw their boundaries from the heart's own surface and say so in narration. A pericardium mesh would make this scene substantially better.",
+    "The oesophagus is a defining content of the posterior mediastinum and its mesh exists in the catalog, but it was not available locally to measure a contact against, so it appears here as an authored anchor on the front of the T4 body rather than as a model. That anchor is marked 'author' in calibrated_by, not 'geometry' — it is the one landmark in this scene that was not measured, and it should be replaced by the mesh once ingested. The Lungs scene already carries the oesophagus as a context model, so the id is known good.",
+    "The thymus exists as two lobe meshes and is the front layer of the superior mediastinum and the classic anterior mediastinal mass, but neither lobe was available locally and the scene teaches it in narration only. Adding both lobes would let beat 5 show the four-Ts space with the structure that most often fills it.",
+    "No nerve of the thorax is in the catalog: not the phrenic, not the vagus, not the recurrent laryngeals, not the sympathetic chain or the splanchnics. Beat 7 therefore traces the left recurrent laryngeal nerve as a declared concept along the structures it passes, rather than as a model. This is a real teaching loss — the phrenic-in-front, vagus-behind rule is examined constantly and can only be narrated here.",
+    "The azygos vein and the thoracic duct are absent from the catalog. Both are named repeatedly, because the azygos arch is one of the six events on the transthoracic plane and the duct is the reason a posterior mediastinal injury causes chylothorax, but neither can be shown.",
+    "The diaphragm mesh exists in the catalog but was not available locally, so the floor of the mediastinum is implied rather than drawn and the three openings are taught by their vertebral levels. The T8, T10 and T12 rule survives that; the shape of the openings does not.",
+    "Mediastinal lymph nodes have no meshes anywhere in the catalog, so nodal disease — the commonest reason a student is asked about this space at all — is entirely narrated.",
+    "The scene deliberately does not claim to cover the curriculum's 'Great vessels' entry. The arch, the ascending and descending aorta, both cavae and the pulmonary arteries are all present here as the contents that define the divisions, but the branching pattern, the surface markings and the development that a great-vessels scene owes the student are not taught, and marking that entry covered here would hide it.",
+    "Eight of the nine anchors are measured contacts or extremes and are recorded as such; all nine are status 'needs-review' until a human clears them in-app. The ludwig_posterior anchor has a 3.72 mm gap because the descending aorta lies just off the front-left of the T4 body rather than against it, which is anatomically correct and is why the number is printed rather than rounded away."
+  ]
+}

@@ -1,0 +1,760 @@
+{
+  "schema": 2,
+  "id": "gross__thigh__hamstrings",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thigh",
+  "structure": "Hamstrings",
+  "covers": [
+    "Hamstrings"
+  ],
+  "learning_goal": "Name the three hamstrings and their heads, give the common origin from the ischial tuberosity and the two different insertions, state the rule that defines a hamstring and the one head that breaks it, and explain why the tibial and common fibular divisions of the sciatic nerve matter here.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thigh",
+      "posterior compartment of thigh",
+      "hamstrings",
+      "knee flexion",
+      "hip extension",
+      "lower limb",
+      "sciatic nerve",
+      "popliteal fossa"
+    ],
+    "terms": [
+      "hamstrings",
+      "hamstring muscles",
+      "posterior compartment of thigh",
+      "biceps femoris",
+      "long head of biceps femoris",
+      "short head of biceps femoris",
+      "semitendinosus",
+      "semimembranosus",
+      "ischial tuberosity",
+      "common hamstring origin",
+      "linea aspera",
+      "head of fibula",
+      "medial condyle of tibia",
+      "pes anserinus",
+      "gracilis",
+      "sartorius",
+      "adductor magnus",
+      "hamstring part of adductor magnus",
+      "sciatic nerve",
+      "tibial division",
+      "common fibular division",
+      "common peroneal nerve",
+      "L5 S1 S2",
+      "knee flexion",
+      "hip extension",
+      "hamstring strain",
+      "pulled hamstring",
+      "avulsion of the ischial tuberosity",
+      "straight leg raise",
+      "popliteal fossa",
+      "gastrocnemius",
+      "hamstring tightness",
+      "gluteal fold"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "bic_fem_long",
+      "name": "long head of right biceps femoris",
+      "label": "Biceps femoris — long head",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#a63f5e",
+      "refs": {
+        "bodyparts3d": "FMA45888"
+      },
+      "terms": [
+        "long head of biceps femoris",
+        "ischial tuberosity",
+        "tibial division of sciatic nerve",
+        "head of fibula",
+        "lateral hamstring",
+        "hip extension"
+      ],
+      "narration": "The lateral hamstring. It arises with semitendinosus from the ischial tuberosity, crosses both the hip and the knee, and is supplied by the tibial division of the sciatic nerve. Its tendon is the cord you can feel on the outer side behind a bent knee."
+    },
+    {
+      "key": "bic_fem_short",
+      "name": "short head of right biceps femoris",
+      "label": "Biceps femoris — short head",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#8d3450",
+      "refs": {
+        "bodyparts3d": "FMA45891"
+      },
+      "terms": [
+        "short head of biceps femoris",
+        "linea aspera",
+        "common fibular division",
+        "common peroneal nerve",
+        "not a true hamstring",
+        "lateral supracondylar line"
+      ],
+      "narration": "The exception that examiners love. It arises from the linea aspera on the femur, not from the ischium, so it crosses only the knee. It is also the one head supplied by the common fibular division of the sciatic nerve. On both counts — origin and nerve — it fails the definition of a true hamstring."
+    },
+    {
+      "key": "semitendinosus",
+      "name": "right semitendinosus",
+      "label": "Semitendinosus",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#b04a63",
+      "refs": {
+        "bodyparts3d": "FMA22358"
+      },
+      "terms": [
+        "semitendinosus",
+        "ischial tuberosity",
+        "pes anserinus",
+        "medial hamstring",
+        "long cord-like tendon",
+        "graft"
+      ],
+      "narration": "Named for its tendon, which is half the length of the muscle. It shares a common origin with the long head of biceps femoris and ends on the medial surface of the tibia as part of the pes anserinus. Its cord-like tendon is the more lateral of the two you feel on the medial side of the back of the knee, and it is commonly harvested as a graft."
+    },
+    {
+      "key": "semimembranosus",
+      "name": "right semimembranosus",
+      "label": "Semimembranosus",
+      "role": "part",
+      "group": "Hamstrings",
+      "layer": "muscle",
+      "color": "#96405a",
+      "refs": {
+        "bodyparts3d": "FMA22448"
+      },
+      "terms": [
+        "semimembranosus",
+        "ischial tuberosity",
+        "medial condyle of tibia",
+        "flat membranous tendon",
+        "oblique popliteal ligament",
+        "Baker's cyst"
+      ],
+      "narration": "Named for the flat membranous tendon at its upper end, which lies deep to semitendinosus. It arises from the ischial tuberosity on its own facet, lateral and above the other two, and ends on the back of the medial condyle of the tibia. An expansion of its tendon reinforces the back of the knee capsule, and its bursa is the usual source of a popliteal cyst."
+    },
+    {
+      "key": "add_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus — hamstring part",
+      "role": "part",
+      "group": "Hybrid",
+      "layer": "muscle",
+      "color": "#7f3045",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "hamstring part of adductor magnus",
+        "ischial tuberosity",
+        "adductor tubercle",
+        "tibial division of sciatic nerve",
+        "obturator nerve",
+        "hip extension"
+      ],
+      "narration": "A muscle with two halves and two nerves. Its adductor part comes off the pubis and is supplied by the obturator nerve; its posterior part comes off the ischial tuberosity, runs to the adductor tubercle and is supplied by the tibial division of the sciatic nerve. That posterior part behaves as a fourth hamstring and extends the hip. Give it when a question asks for the hip extensors and expects more than gluteus maximus and the three hamstrings."
+    },
+    {
+      "key": "gracilis",
+      "name": "right gracilis",
+      "label": "Gracilis",
+      "role": "part",
+      "group": "Pes anserinus",
+      "layer": "muscle",
+      "color": "#c98a5a",
+      "refs": {
+        "bodyparts3d": "FMA43883"
+      },
+      "terms": [
+        "gracilis",
+        "pes anserinus",
+        "obturator nerve",
+        "medial thigh",
+        "adductor"
+      ],
+      "narration": "A strap muscle of the medial compartment on the obturator nerve, not a hamstring. It matters here only because it lands on the tibia beside semitendinosus."
+    },
+    {
+      "key": "sartorius",
+      "name": "right sartorius",
+      "label": "Sartorius",
+      "role": "part",
+      "group": "Pes anserinus",
+      "layer": "muscle",
+      "color": "#e0a05a",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "pes anserinus",
+        "femoral nerve",
+        "goose's foot"
+      ],
+      "narration": "The third tendon of the pes anserinus, and the most anterior of the three. Sartorius, gracilis and semitendinosus land together on the medial tibia on three different nerves — femoral, obturator and sciatic. One footprint, three nerves; that is the point of learning the goose's foot."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Overlying",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "gluteal fold",
+        "inferior gluteal nerve",
+        "hip extension",
+        "common hamstring origin"
+      ],
+      "narration": "The upper ends of the hamstrings pass under the lower border of gluteus maximus, so the common origin is not palpable in a standing patient. Both extend the hip, but on different nerves and at different times: the hamstrings do the ordinary walking and gluteus maximus joins in for the heavy work."
+    },
+    {
+      "key": "gastroc_med",
+      "name": "medial head of right gastrocnemius",
+      "label": "Gastrocnemius — medial head",
+      "role": "context",
+      "group": "Popliteal boundary",
+      "layer": "muscle",
+      "color": "#a86a4a",
+      "refs": {
+        "bodyparts3d": "FMA45957"
+      },
+      "terms": [
+        "medial head of gastrocnemius",
+        "popliteal fossa",
+        "lower boundary",
+        "medial femoral condyle"
+      ],
+      "narration": "The lower medial border of the popliteal fossa. It arises above the knee, from the back of the medial femoral condyle."
+    },
+    {
+      "key": "gastroc_lat",
+      "name": "lateral head of right gastrocnemius",
+      "label": "Gastrocnemius — lateral head",
+      "role": "context",
+      "group": "Popliteal boundary",
+      "layer": "muscle",
+      "color": "#96603f",
+      "refs": {
+        "bodyparts3d": "FMA45960"
+      },
+      "terms": [
+        "lateral head of gastrocnemius",
+        "popliteal fossa",
+        "lower boundary",
+        "lateral femoral condyle"
+      ],
+      "narration": "The lower lateral border of the same diamond. Above it, the tendon of biceps femoris and the common fibular nerve run together towards the neck of the fibula."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "ischial tuberosity",
+        "common hamstring origin",
+        "sacrotuberous ligament",
+        "sitting bone"
+      ],
+      "narration": "The ischial tuberosity is the whole story of the origin. It is the bone you sit on, it carries two facets — one for semimembranosus, one shared by semitendinosus and the long head of biceps — and it is the site that avulses in a young sprinter."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "linea aspera",
+        "adductor tubercle",
+        "lateral supracondylar line",
+        "popliteal surface"
+      ],
+      "narration": "Only two things in this scene touch the femur: the short head of biceps femoris arising from the linea aspera, and the posterior part of adductor magnus ending at the adductor tubercle. Every other hamstring skips the bone entirely and goes from the pelvis to the leg."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "medial condyle of tibia",
+        "pes anserinus",
+        "medial hamstring insertion"
+      ],
+      "narration": "The medial landing site. Semitendinosus lands on its medial surface with gracilis and sartorius; semimembranosus lands behind, on the medial condyle."
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "head of fibula",
+        "neck of fibula",
+        "common fibular nerve",
+        "foot drop",
+        "insertion of biceps femoris"
+      ],
+      "narration": "The lateral landing site, and a dangerous one. Both heads of biceps femoris insert into the head of the fibula, and the common fibular nerve winds round the neck just below it, where it lies against bare bone. A fracture or a tight cast there gives foot drop."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The back of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hamstrings",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Three muscles fill the posterior compartment of the thigh: biceps femoris on the lateral side, semitendinosus and semimembranosus on the medial side. Biceps femoris has two heads, so there are four bellies but three names. Count them that way and you will not be caught out."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "One origin for nearly all of them",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hamstrings"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bic_fem_long",
+          "to": "hip_bone",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "semitendinosus",
+          "to": "hip_bone",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "semimembranosus",
+          "to": "hip_bone",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The common hamstring origin is the ischial tuberosity. Semimembranosus takes its own facet, above and lateral; semitendinosus and the long head of biceps share a facet below and medial to it. Because the origin is on the pelvis, these muscles cross the hip as well as the knee — which is the definition of a hamstring."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The head that is not a hamstring",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Overlying"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "bic_fem_long",
+            "bic_fem_short"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bic_fem_short",
+          "to": "femur",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Compare the two heads of biceps femoris. The long head starts on the ischium and is tibial; the short head starts on the linea aspera of the femur and is common fibular. So the short head crosses one joint, not two, and it is the only muscle of the compartment on the fibular division. Three things make a true hamstring: an ischial origin, an action at two joints, and a tibial nerve supply. The short head has none of them."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Two very different endings",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Overlying"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bic_fem_long",
+          "to": "fibula",
+          "kind": "insertion"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "semitendinosus",
+          "to": "tibia",
+          "kind": "insertion"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "semimembranosus",
+          "to": "tibia",
+          "kind": "insertion"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Below the knee the group splits in two. Biceps femoris goes laterally to the head of the fibula; semitendinosus and semimembranosus go medially to the tibia. Feel the back of your own bent knee — one cord laterally, two medially — and you have identified all three muscles without a single label."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The goose's foot",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Overlying"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Popliteal boundary"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "semitendinosus",
+            "Pes anserinus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Three tendons converge on the upper medial tibia: sartorius in front, gracilis in the middle, semitendinosus behind. Together they are the pes anserinus. Learn them in that order from front to back with their nerves — femoral, obturator, sciatic — because that trio of nerves on one insertion is a favourite question."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 6,
+      "title": "What they do",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hamstrings",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "glut_max",
+          "intensity": 0.35
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "They flex the knee and extend the hip. Because most of them cross both joints they cannot shorten fully at both at once: with the hip flexed the knee cannot be fully extended, which is exactly what a straight leg raise tests. In walking, they are the muscles that decelerate the swinging leg before the heel strikes — they work most just before the foot lands, not when it pushes off."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 7,
+      "title": "They rotate the flexed knee",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Overlying"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "bic_fem_long",
+            "semimembranosus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "With the knee bent, the lateral one turns the leg outwards and the medial two turn it inwards. That is simply their line of pull: biceps femoris passes to the lateral side, the other two to the medial side. Rotation is only possible in flexion — the extended knee is locked."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "One nerve, two divisions",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sciatic_nerve",
+          "path": [
+            "hip_bone",
+            "add_magnus",
+            "semitendinosus",
+            "bic_fem_long",
+            "bic_fem_short",
+            "fibula"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The path traced here is the sciatic nerve. It enters the back of the thigh below gluteus maximus, lies on adductor magnus, and supplies the whole compartment as it descends. Its tibial division supplies all the hamstrings except one; its common fibular division supplies only the short head of biceps femoris and then runs on to the neck of the fibula. The sciatic nerve's own root value is L4 to S3; the hamstrings themselves draw mainly on L5, S1 and S2."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 9,
+      "title": "A cut across the back of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hamstrings",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Slide the cut down the thigh. Biceps femoris sits laterally, semitendinosus superficial and medial with semimembranosus flat beneath it, and adductor magnus forms the floor with the sciatic nerve lying on it. The posterior compartment is separated from the anterior one by the intermuscular septa running from the fascia lata to the linea aspera."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 10,
+      "title": "The diamond behind the knee",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Overlying"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hybrid"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Popliteal boundary"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bic_fem_long"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "semitendinosus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "semimembranosus"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "As the three muscles separate above the knee they open a diamond. Biceps femoris makes the upper lateral border, semitendinosus and semimembranosus the upper medial border, and the two heads of gastrocnemius the lower two. That diamond is the popliteal fossa, and it is where you feel the popliteal pulse — deepest of all the structures in it, against the bone."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Why hamstrings tear",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pes anserinus"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hip_bone",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "bic_fem_long",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "A two-joint muscle lengthening under load is the muscle that tears. It happens at the end of the swing phase in sprinting, when the hip is flexed and the knee is straightening and the hamstrings are braking both. The long head of biceps femoris tears most often, near the junction of muscle and tendon. In an adolescent the tendon holds and the ischial tuberosity apophysis pulls off instead, because the growth plate is the weakest link before it fuses."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 12,
+      "title": "Peel the back of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The dissection order to recite: skin and fascia lata, then the lower border of gluteus maximus, then the sciatic nerve entering the compartment, then semitendinosus and biceps femoris superficially, then semimembranosus, then adductor magnus as the floor, then the femur. Four layers, and every structure in the posterior thigh has an address."
+    }
+  ],
+  "gaps": [
+    "No nerve of the lower limb exists as a model. The sciatic nerve — the single most important structure in this compartment — is authored as a traced concept path down the muscles it supplies, and the split into tibial and common fibular divisions is narration only. The common fibular nerve winding round the neck of the fibula is taught by lighting the fibula and naming it.",
+    "There is no popliteal artery or vein in the catalog, so the contents of the popliteal fossa are described rather than shown. The fossa itself is the separate Popliteal fossa curriculum entry, which this scene does not claim to cover.",
+    "No tendon is modelled separately from its muscle, so the long cord of semitendinosus, the membranous upper tendon of semimembranosus and the conjoint tendon of the common origin are taught from the muscle bellies and the narration.",
+    "The ischial tuberosity, the linea aspera, the adductor tubercle and the head of the fibula are sub-features of whole-bone meshes. They are taught by lighting the hip bone, femur or fibula and naming the feature; authoring them as landmark anchors is the next improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "The sacrotuberous ligament, which the common hamstring origin blends with, has no mesh in the catalog and is described in narration.",
+    "The semimembranosus bursa is not modelled, so a popliteal cyst is mentioned rather than shown.",
+    "This scene does not cover Femur, Gluteus maximus, Sciatic nerve or Popliteal fossa. Gluteus maximus appears only as the muscle whose lower border the hamstrings pass under, the gastrocnemius heads only as the lower borders of the diamond, and the bones only as the frame."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

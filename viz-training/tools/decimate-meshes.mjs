@@ -16,6 +16,7 @@
  *   --out DIR      where to write (default: alongside the input, suffixed -lite)
  *   --ratio R      alternative to --target: keep this fraction of triangles (e.g. 0.2)
  *   --report       print the table and write nothing
+ *   --skip-existing  leave alone any mesh already in --out that is newer than its source
  *   --verify       measure how far the surface actually moved, in mm, and fail if it moves too far
  *   --max-dev MM   the deviation ceiling --verify enforces (default 0.5 mm)
  *
@@ -46,6 +47,7 @@ const TARGET = parseInt(flag('target', '20000'), 10);
 const RATIO = flag('ratio', null) ? parseFloat(flag('ratio', null)) : null;
 const OUTDIR = flag('out', null);
 const REPORT_ONLY = has('report');
+const SKIP_EXISTING = has('skip-existing');
 const VERIFY = has('verify');
 const MAX_DEV = parseFloat(flag('max-dev', '0.5'));
 
@@ -451,10 +453,24 @@ for (const p of inputs) {
 if (!files.length) { console.error('no .stl files found'); process.exit(2); }
 
 const rows = [];
-let inBytes = 0, outBytes = 0, refused = 0;
+let inBytes = 0, outBytes = 0, refused = 0, kept = 0;
 
 for (const f of files) {
   const name = basename(f);
+
+  /* --skip-existing: the corpus grows a few hundred meshes at a time, and re-decimating the four hundred
+     that were already done to add the fifty that are new costs an hour of QEM for an identical result.
+     Skipped only when the output is at least as new as the input, so a re-fetched source is still redone. */
+  if (SKIP_EXISTING && OUTDIR) {
+    const dest = join(OUTDIR, name);
+    if (existsSync(dest) && statSync(dest).mtimeMs >= statSync(f).mtimeMs) {
+      kept++;
+      outBytes += statSync(dest).size;
+      inBytes += statSync(f).size;
+      continue;
+    }
+  }
+
   try {
     const pos = readBinarySTL(f);
     const srcTris = pos.length / 9;
@@ -540,6 +556,7 @@ for (const r of rows) {
 console.log('-'.repeat(W));
 console.log(`${'TOTAL'.padEnd(pad)}  ${' '.repeat(19)}  ${mb(inBytes).padStart(8)} → ${mb(outBytes).padStart(8)}   ${inBytes && outBytes ? (inBytes / outBytes).toFixed(1) + '× smaller' : ''}`);
 if (REPORT_ONLY) console.log('\n--report: nothing was written.');
+if (kept) console.log(`\n${kept} file(s) already decimated and up to date — left alone (--skip-existing).`);
 if (refused) {
   console.log(`\n${refused} file(s) refused — nothing was written for them.`);
   console.log('  bbox moved      → every landmark anchor on that mesh would have silently moved with it.');

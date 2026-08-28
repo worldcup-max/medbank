@@ -1,0 +1,533 @@
+{
+  "schema": 2,
+  "id": "embryology__cardiovascular-development__cardiac-looping",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Cardiovascular Development",
+  "structure": "Cardiac looping",
+  "covers": [
+    "Cardiac looping"
+  ],
+  "learning_goal": "Explain why the straight heart tube must bend, describe the normal D-loop as a set of three movements, say where each of the five segments finishes after looping and why that arrangement is what septation needs, and use left-right patterning to account for L-loop, dextrocardia and the heterotaxy syndromes.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "cardiac looping",
+      "heart looping",
+      "heart development",
+      "cardiovascular development",
+      "week 4",
+      "laterality",
+      "left-right axis",
+      "congenital heart disease",
+      "dextrocardia"
+    ],
+    "terms": [
+      "cardiac looping",
+      "heart looping",
+      "D-loop",
+      "dextro-loop",
+      "L-loop",
+      "levo-loop",
+      "bulboventricular loop",
+      "day 23",
+      "day 28",
+      "secondary heart field",
+      "second heart field",
+      "anterior heart field",
+      "elongation",
+      "pericardial cavity",
+      "dorsal mesocardium",
+      "transverse pericardial sinus",
+      "bulbus cordis",
+      "conus cordis",
+      "truncus arteriosus",
+      "primitive ventricle",
+      "primitive atrium",
+      "sinus venosus",
+      "bulboventricular sulcus",
+      "primary interventricular foramen",
+      "atrioventricular canal",
+      "endocardial cushions",
+      "sinuatrial orifice",
+      "atria move dorsally and cranially",
+      "ventricles move ventrally and caudally",
+      "side by side ventricles",
+      "atria above ventricles",
+      "nodal",
+      "Pitx2",
+      "Nkx2-5",
+      "left-right patterning",
+      "primitive node",
+      "nodal cilia",
+      "situs solitus",
+      "situs inversus",
+      "situs ambiguus",
+      "dextrocardia",
+      "dextroposition",
+      "isolated dextrocardia",
+      "dextrocardia with situs inversus",
+      "Kartagener syndrome",
+      "primary ciliary dyskinesia",
+      "bronchiectasis",
+      "heterotaxy",
+      "asplenia",
+      "polysplenia",
+      "right isomerism",
+      "left isomerism",
+      "congenitally corrected transposition",
+      "ventricular inversion",
+      "looping defect"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "why_it_bends",
+      "label": "Why a straight tube cannot stay straight",
+      "role": "context",
+      "group": "The reason",
+      "layer": "organ",
+      "color": "#af601a",
+      "terms": [
+        "elongation",
+        "grows faster than the pericardial cavity",
+        "fixed at both ends",
+        "arterial pole",
+        "venous pole",
+        "secondary heart field",
+        "second heart field",
+        "day 23",
+        "day 28"
+      ],
+      "narration": "By day twenty-three the heart tube is tied at both ends — arteries above, veins below — and it is elongating faster than the pericardial cavity around it. Cells added at both poles from the secondary heart field keep lengthening it. A tube that is growing, held at both ends and running out of room can only do one thing, and it bends. Looping is mechanics before it is genetics; the genes decide which way, not whether."
+    },
+    {
+      "key": "free_middle",
+      "label": "The dorsal mesocardium has already broken down",
+      "role": "part",
+      "group": "The reason",
+      "layer": "organ",
+      "color": "#d68910",
+      "terms": [
+        "dorsal mesocardium",
+        "breakdown",
+        "transverse pericardial sinus",
+        "free in the pericardial cavity",
+        "attached at both ends only"
+      ],
+      "narration": "The middle of the dorsal mesocardium has already given way, so the tube hangs free between its two fixed ends. That is what makes bending possible at all. The gap it leaves behind is the transverse pericardial sinus, which is why in the adult you can pass a finger behind the aorta and pulmonary trunk and in front of the atria."
+    },
+    {
+      "key": "move_ventral_right",
+      "label": "Movement one — the bulbus swings ventrally, caudally and to the RIGHT",
+      "role": "part",
+      "group": "The three movements",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "D-loop",
+        "dextro-loop",
+        "bulbus cordis",
+        "ventral",
+        "caudal",
+        "to the right",
+        "bulboventricular loop",
+        "C-shaped loop"
+      ],
+      "narration": "The first movement is the one that names the loop. The bulbus cordis, the cranial half of the tube, swings forwards, downwards and to the right. That is the D-loop, D for dextro, and it is the normal direction in every healthy human heart. Say it as one sentence you can repeat under exam pressure: the bulbus goes ventral, caudal and right."
+    },
+    {
+      "key": "move_dorsal_left",
+      "label": "Movement two — the ventricle swings dorsally and to the LEFT",
+      "role": "part",
+      "group": "The three movements",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "primitive ventricle",
+        "dorsal",
+        "to the left",
+        "left ventricle",
+        "bulboventricular sulcus",
+        "primary interventricular foramen"
+      ],
+      "narration": "The second movement is the mirror of the first. The primitive ventricle moves backwards and to the left. Bulbus to the right, ventricle to the left, and the two now sit side by side rather than one behind the other. The groove between them outside is the bulboventricular sulcus, and the opening between them inside is the primary interventricular foramen — the hole the muscular septum will later grow up towards."
+    },
+    {
+      "key": "move_atria_up",
+      "label": "Movement three — the atria climb up behind",
+      "role": "part",
+      "group": "The three movements",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "primitive atrium",
+        "sinus venosus",
+        "dorsal",
+        "cranial",
+        "atria above the ventricles",
+        "atrioventricular canal",
+        "sinuatrial orifice",
+        "atria behind the outflow"
+      ],
+      "narration": "The third movement carries the atrium and the sinus venosus backwards and upwards, so the inflow end comes to lie behind and above the ventricles instead of below them. This is the movement that produces the adult arrangement: atria posterior and superior, ventricles anterior and inferior, and the great vessels rising between the two atria in front. Every relation you learn in the adult mediastinum was set here."
+    },
+    {
+      "key": "result_geometry",
+      "label": "What the loop leaves you with",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "S-shaped heart",
+        "day 28",
+        "side by side ventricles",
+        "atrioventricular canal",
+        "primary interventricular foramen",
+        "outflow between the atria",
+        "four chamber arrangement"
+      ],
+      "narration": "By about day twenty-eight the tube has become an S. The two future ventricles lie side by side, the two future atria lie side by side behind and above them, the atrioventricular canal joins the atrial half to the ventricular half, and the outflow tract runs up in the midline between the atria. Nothing has been divided yet — this is one continuous lumen. But the pieces are now in the right places relative to each other."
+    },
+    {
+      "key": "why_it_matters",
+      "label": "Looping is the setup for septation",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "septation of heart",
+        "endocardial cushions",
+        "atrioventricular canal",
+        "interventricular septum",
+        "aorticopulmonary septum",
+        "alignment",
+        "conotruncal defect",
+        "double outlet right ventricle",
+        "transposition of the great arteries"
+      ],
+      "narration": "Understand looping as the step that brings each part alongside the part it must be joined to. The septa built next are all short walls between structures that looping has already parked next to one another. That is why a looping or alignment error shows up later as a connection fault rather than a hole: the great arteries coming off the wrong ventricle, or both off the right. If the pieces are put in the wrong place, no amount of correct wall-building fixes it."
+    },
+    {
+      "key": "laterality_genes",
+      "label": "What decides right rather than left",
+      "role": "part",
+      "group": "Laterality",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "left-right patterning",
+        "primitive node",
+        "nodal cilia",
+        "nodal flow",
+        "Nodal",
+        "Lefty",
+        "Pitx2",
+        "Nkx2-5",
+        "left sided expression",
+        "week 3",
+        "gastrulation"
+      ],
+      "narration": "The direction of the loop is decided before the loop happens. Motile cilia at the primitive node sweep fluid to the left, that leftward flow switches on Nodal and then Pitx2 in the left lateral plate mesoderm, and the two sides of the embryo stop being equivalent. The heart tube reads that asymmetry and turns to the right. So laterality is a week-three event with a week-four consequence, and a cilia defect explains a heart defect."
+    },
+    {
+      "key": "l_loop",
+      "label": "L-loop — the tube turns the wrong way",
+      "role": "part",
+      "group": "Laterality",
+      "layer": "organ",
+      "color": "#e59866",
+      "terms": [
+        "L-loop",
+        "levo-loop",
+        "ventricular inversion",
+        "congenitally corrected transposition",
+        "atrioventricular discordance",
+        "ventriculoarterial discordance",
+        "double discordance",
+        "systemic right ventricle",
+        "heart block"
+      ],
+      "narration": "If the tube loops to the left instead of the right, the ventricles end up inverted — the morphological right ventricle on the left and the left ventricle on the right. When the great arteries are also transposed, the two errors cancel each other for flow and the child is pink: congenitally corrected transposition. Do not read 'corrected' as 'normal'. The right ventricle is pumping to the body for a lifetime, and it fails eventually, with conduction tissue that is abnormally placed and prone to block."
+    },
+    {
+      "key": "dextrocardia",
+      "label": "Dextrocardia — and the difference from dextroposition",
+      "role": "part",
+      "group": "Laterality",
+      "layer": "organ",
+      "color": "#d98880",
+      "terms": [
+        "dextrocardia",
+        "situs solitus",
+        "situs inversus",
+        "situs inversus totalis",
+        "isolated dextrocardia",
+        "dextroposition",
+        "apex to the right",
+        "mirror image",
+        "chest X-ray",
+        "ECG lead placement",
+        "Kartagener syndrome",
+        "primary ciliary dyskinesia",
+        "bronchiectasis",
+        "sinusitis",
+        "infertility"
+      ],
+      "narration": "Dextrocardia means the heart is built pointing to the right; dextroposition means a normal heart has been pushed to the right by something else, such as a right lung agenesis or a left tension pneumothorax. The distinction is the first thing to make on the film. When dextrocardia comes with full situs inversus the internal relations are a clean mirror image and the heart is usually otherwise normal. Isolated dextrocardia, with the abdominal organs in the usual place, carries a high rate of associated defects. About a quarter of situs inversus cases are Kartagener syndrome, where immotile cilia give bronchiectasis, chronic sinusitis and infertility alongside the mirrored anatomy — one ciliary defect, four findings."
+    },
+    {
+      "key": "heterotaxy",
+      "label": "Heterotaxy — when the body cannot decide",
+      "role": "part",
+      "group": "Laterality",
+      "layer": "organ",
+      "color": "#cd6155",
+      "terms": [
+        "heterotaxy",
+        "situs ambiguus",
+        "right isomerism",
+        "left isomerism",
+        "asplenia",
+        "polysplenia",
+        "Ivemark syndrome",
+        "bilateral right sidedness",
+        "bilateral left sidedness",
+        "trilobed lungs",
+        "bilobed lungs",
+        "complex congenital heart disease",
+        "midline liver",
+        "Howell-Jolly bodies",
+        "encapsulated organisms"
+      ],
+      "narration": "Worse than a mirror image is no decision at all. In right isomerism the embryo builds two right sides: two trilobed lungs, a midline liver, no spleen, and severe cardiac defects — the asplenia or Ivemark syndrome. In left isomerism it builds two left sides: two bilobed lungs and several small spleens, with milder cardiac lesions but conduction problems. The clinical hook is the spleen. An asplenic child needs pneumococcal, meningococcal and Haemophilus cover and prophylactic penicillin, and Howell-Jolly bodies on the film are the clue that the spleen is not working."
+    },
+    {
+      "key": "exam_frame",
+      "label": "How to answer a laterality question in three steps",
+      "role": "part",
+      "group": "Laterality",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "terms": [
+        "segmental approach",
+        "situs",
+        "loop",
+        "great artery relationship",
+        "atrial situs",
+        "ventricular loop",
+        "connections",
+        "discordance",
+        "concordance"
+      ],
+      "narration": "Answer these questions in a fixed order and they stop being confusing. First, where are the atria — normal, mirrored, or ambiguous. Second, which way did the ventricles loop, D or L. Third, where do the great arteries come off. Situs, loop, connections. A child can be abnormal at any one of the three, and naming which one is abnormal is most of the diagnosis."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "A growing tube in a box that is not growing",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The reason"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "why_it_bends",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "free_middle",
+          "to": "why_it_bends",
+          "kind": "a tube free in its middle but fixed at both ends can only respond to elongation by"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Start with the straight tube at day twenty-three. It is anchored above by the arch arteries and below by the veins, its dorsal mesocardium has broken down in the middle, and the secondary heart field keeps adding cells at both poles so it lengthens inside a pericardial cavity that does not lengthen with it. Held at both ends, free in the middle, growing. It bends."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Three movements — say them in order",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three movements"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:d-loop",
+          "path": [
+            "move_ventral_right",
+            "move_dorsal_left",
+            "move_atria_up"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "move_ventral_right",
+            "move_dorsal_left"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three sentences, in this order. One: the bulbus cordis swings ventrally, caudally and to the right — that is the D-loop. Two: the primitive ventricle moves dorsally and to the left, so the two future ventricles now lie side by side. Three: the atrium and sinus venosus move dorsally and cranially, so the inflow ends up behind and above the outflow. If you can say those three lines you can draw the loop from memory."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Where every segment has landed",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The result"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "result_geometry",
+          "intensity": 0.95
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "result_geometry",
+          "to": "why_it_matters",
+          "kind": "puts each chamber alongside the one it must be joined to, which is the precondition for"
+        }
+      ],
+      "narration": "By day twenty-eight it is an S-shaped heart with a single continuous lumen. Ventricles side by side in front and below, atria side by side behind and above, joined through the atrioventricular canal, with the outflow tract climbing between the two atria. Cut it across and check yourself against the segment colours from the tube scene — nothing has been added or lost, the same five segments have simply been repositioned. That repositioning is the whole purpose of the step, because septation is only short walls between parts that are already correctly parked."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Cilia at the node decide which way",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Laterality"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "laterality_genes",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "laterality_genes",
+          "to": "move_ventral_right",
+          "kind": "left-sided Nodal and Pitx2 expression is what turns the bulbus rightwards in"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Go back to week three for the answer. Motile cilia at the primitive node drive fluid to the left, Nodal and then Pitx2 switch on in the left lateral plate mesoderm, and the embryo acquires a left and a right. The heart reads that signal and loops rightwards. This is why a defect in ciliary motility produces a heart that is a mirror image, and why the same patient has sinusitis and bronchiectasis — the cilia in the airway are the same cilia."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "When the loop goes the other way, or nowhere",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Laterality"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "move_ventral_right",
+            "l_loop"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "laterality_genes",
+          "to": "dextrocardia",
+          "kind": "a ciliary or signalling failure reverses the whole body plan, giving"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "laterality_genes",
+          "to": "heterotaxy",
+          "kind": "an absent left-right signal duplicates one side, giving"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "exam_frame",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Three ways this goes wrong. Loop the other way and the ventricles are inverted: congenitally corrected transposition, pink at birth but with a right ventricle doing systemic work for life. Reverse the whole plan and you get situs inversus with dextrocardia, usually a normal heart, and about a quarter of the time Kartagener syndrome. Fail to choose a side at all and you get isomerism — two right sides with asplenia and severe cardiac disease, or two left sides with polysplenia and conduction problems. Then answer any case in the same three steps: situs, loop, connections."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so deferred_modes carries diagram and 3d_anatomy. A 3d re-authoring is exactly the right eventual home for this scene — looping is a three-dimensional movement that flat panels can only approximate — but no provider in available-meshes.json holds staged embryonic cardiac geometry, and no adult heart mesh was substituted to fake it.",
+    "Status is 'planned'. Twelve regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a straight tube at day 23 with the arterial and venous anchors marked and the broken dorsal mesocardium shown; a three-frame series of the loop in ventral view with a rotation arrow on each frame, the bulbus going ventral-caudal-right, the ventricle dorsal-left, the atria dorsal-cranial; the same three frames repeated in lateral view, because the ventral view alone cannot show the atria climbing behind; a day-28 S-shaped heart with the atrioventricular canal, primary interventricular foramen and bulboventricular sulcus labelled; and a mirrored pair of D-loop and L-loop drawings side by side with the morphological right ventricle shaded identically in both, so inversion is visible rather than asserted.",
+    "The five segment colours MUST be the same colours used in the heart tube formation scene. The teaching claim of this scene is that looping moves the segments without adding or removing any, and that claim is only legible if a student can see the same five colours arriving in new positions. Recolouring between the two scenes destroys the entire beat 3 payoff.",
+    "Every frame needs an explicit L and R marker on the page. A looping diagram without a left-right label is ambiguous exactly where the whole subject is left and right, and a reader who assumes the drawing is a view from behind will learn the loop backwards.",
+    "Beat 2 traces concept:d-loop. The subject is a movement of the tube over roughly five days, not a drawn region.",
+    "Beat 4 authors PEEL_LAYER outward on the organ layer to lift the cardiac regions off and leave the node and its cilia visible. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the point of the beat is that the cause lies outside the heart.",
+    "'Heart tube formation' is NOT claimed in covers[]. The cardiogenic field, the fusion of the endocardial tubes, the wall layers and the five segments with their derivatives belong to that entry; this scene assumes them and names the segments only by position.",
+    "'Septation of heart' is NOT claimed. The endocardial cushions, the septum primum and secundum, the membranous and muscular interventricular septum and the aorticopulmonary septum are named here only as what looping prepares for. Transposition of the great arteries and double outlet right ventricle are named as alignment consequences, but their mechanism and their full clinical account belong to that entry.",
+    "'Fetal circulation' is NOT claimed. Nothing here addresses the shunts or the changes at birth; the pink newborn in congenitally corrected transposition is explained by double discordance only.",
+    "Day numbers are the standard teaching approximations — looping beginning about day 23 and complete about day 28. Texts differ by a day or two and the narration gives them as approximations.",
+    "The isomerism section names asplenia and polysplenia with their classic associations. Real cases are far more variable than the two tidy syndromes, and the narration teaches the pattern that examinations test rather than the full spectrum. Management is paediatrics, not embryology, and only the splenic prophylaxis point is carried because it is the one that changes what a house officer does."
+  ]
+}

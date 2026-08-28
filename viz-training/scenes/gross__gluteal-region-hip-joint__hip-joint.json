@@ -1,0 +1,1008 @@
+{
+  "schema": 2,
+  "id": "gross__gluteal-region-hip-joint__hip-joint",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Gluteal Region & Hip Joint",
+  "structure": "Hip joint",
+  "covers": [
+    "Hip joint"
+  ],
+  "learning_goal": "Describe the hip as a ball-and-socket joint, say which bony parts form the ball and the socket, name the muscle group that produces each of its six movements, explain why the joint is stable where the shoulder is not, and predict the deformity and the nerve at risk in a posterior dislocation.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "hip joint",
+      "gluteal region",
+      "lower limb",
+      "ball and socket joint",
+      "synovial joint",
+      "range of motion",
+      "hip dislocation",
+      "osteoarthritis of hip",
+      "acetabulum"
+    ],
+    "terms": [
+      "hip joint",
+      "coxal joint",
+      "ball-and-socket",
+      "acetabulum",
+      "lunate surface",
+      "acetabular fossa",
+      "acetabular labrum",
+      "transverse acetabular ligament",
+      "head of femur",
+      "fovea capitis",
+      "ligament of head of femur",
+      "ligamentum teres",
+      "neck of femur",
+      "capsule of hip joint",
+      "iliofemoral ligament",
+      "ligament of Bigelow",
+      "pubofemoral ligament",
+      "ischiofemoral ligament",
+      "retinacula",
+      "flexion",
+      "extension",
+      "abduction",
+      "adduction",
+      "medial rotation",
+      "lateral rotation",
+      "circumduction",
+      "psoas major",
+      "iliacus",
+      "iliopsoas",
+      "psoas bursa",
+      "obturator externus",
+      "piriformis",
+      "gluteus medius",
+      "gluteus minimus",
+      "adductor longus",
+      "sciatic nerve",
+      "posterior dislocation of hip",
+      "shortened adducted medially rotated",
+      "obturator nerve",
+      "referred knee pain",
+      "Trendelenburg",
+      "greater trochanter",
+      "acetabular labrum tear",
+      "hip osteoarthritis"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone — the socket",
+      "role": "part",
+      "group": "Bones of the joint",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "acetabulum",
+        "lunate surface",
+        "acetabular fossa",
+        "acetabular notch",
+        "ilium",
+        "ischium",
+        "pubis"
+      ],
+      "narration": "The socket is the acetabulum, and all three parts of the hip bone build it: ilium above, ischium behind and below, pubis in front. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament.",
+      "approx": {
+        "shown_as": "Hip bone",
+        "detail": "the socket"
+      }
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur — the ball",
+      "role": "part",
+      "group": "Bones of the joint",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "head of femur",
+        "fovea capitis",
+        "neck of femur",
+        "greater trochanter",
+        "lesser trochanter",
+        "intertrochanteric line",
+        "intertrochanteric crest",
+        "neck-shaft angle"
+      ],
+      "narration": "The ball is the head of the femur, more than half a sphere, carried on a neck that runs up and medially at about one hundred and twenty-five degrees to the shaft. The small pit on the head is the fovea, where the ligament of the head attaches. That long neck is what gives the hip its range — and what makes it the classic fracture in an elderly patient.",
+      "approx": {
+        "shown_as": "Femur",
+        "detail": "the ball"
+      }
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum",
+      "role": "context",
+      "group": "Bones of the joint",
+      "layer": "bone",
+      "color": "#d8cdae",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacroiliac joint",
+        "weight transmission",
+        "femoral arch"
+      ],
+      "narration": "Weight comes down the vertebral column into the sacrum, crosses the sacroiliac joint into the ilium, and is delivered to the acetabulum. Everything above the hip joint stands on these two bones meeting."
+    },
+    {
+      "key": "inguinal_lig",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament",
+      "role": "context",
+      "group": "Anterior relations",
+      "layer": "fascia",
+      "color": "#e0d2a8",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "femoral triangle",
+        "mid-inguinal point",
+        "femoral nerve",
+        "femoral artery"
+      ],
+      "narration": "The front of the joint lies just below the middle of this ligament. That is where you feel the femoral pulse, and it is the surface marking a clinician uses to find the joint from outside."
+    },
+    {
+      "key": "psoas",
+      "name": "right psoas major",
+      "label": "Psoas major",
+      "role": "part",
+      "group": "Flexors",
+      "layer": "muscle",
+      "color": "#c94f4a",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "iliopsoas",
+        "lesser trochanter",
+        "hip flexion",
+        "psoas bursa",
+        "psoas abscess"
+      ],
+      "narration": "The chief flexor. It comes from the lumbar vertebrae, crosses the front of the joint capsule, and ends on the lesser trochanter. A bursa separates its tendon from the capsule and often communicates with the joint — which is how a psoas abscess tracking down from the spine can present as a painful hip."
+    },
+    {
+      "key": "iliacus",
+      "name": "right iliacus",
+      "label": "Iliacus",
+      "role": "part",
+      "group": "Flexors",
+      "layer": "muscle",
+      "color": "#c05c46",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliac fossa",
+        "iliopsoas",
+        "femoral nerve",
+        "hip flexion"
+      ],
+      "narration": "It fills the iliac fossa and joins the psoas tendon, so the two are usually taught as one muscle, iliopsoas. Femoral nerve, L2 and L3."
+    },
+    {
+      "key": "rectus_femoris",
+      "name": "right rectus femoris",
+      "label": "Rectus femoris",
+      "role": "part",
+      "group": "Flexors",
+      "layer": "muscle",
+      "color": "#d1665c",
+      "refs": {
+        "bodyparts3d": "FMA38928"
+      },
+      "terms": [
+        "rectus femoris",
+        "straight head",
+        "reflected head",
+        "anterior inferior iliac spine",
+        "hip flexion",
+        "knee extension"
+      ],
+      "narration": "The only part of quadriceps that crosses the hip. Its straight head takes origin from the anterior inferior iliac spine and its reflected head from the rim of the acetabulum itself, so a strip of it is attached to the socket."
+    },
+    {
+      "key": "sartorius",
+      "name": "right sartorius",
+      "label": "Sartorius",
+      "role": "part",
+      "group": "Flexors",
+      "layer": "muscle",
+      "color": "#dd8a6b",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "anterior superior iliac spine",
+        "tailor's muscle",
+        "flexion abduction lateral rotation",
+        "pes anserinus"
+      ],
+      "narration": "The longest muscle in the body, running from the anterior superior iliac spine across the thigh to the medial side of the tibia. At the hip it flexes, abducts and laterally rotates all at once — the position a tailor sits in, which is where its name comes from."
+    },
+    {
+      "key": "pectineus",
+      "name": "right pectineus",
+      "label": "Pectineus",
+      "role": "part",
+      "group": "Flexors",
+      "layer": "muscle",
+      "color": "#c96f55",
+      "refs": {
+        "bodyparts3d": "FMA22450"
+      },
+      "terms": [
+        "pectineus",
+        "pectineal line",
+        "femoral nerve",
+        "obturator nerve",
+        "flexion and adduction"
+      ],
+      "narration": "A flat square muscle on the floor of the femoral triangle that both flexes and adducts. It sits on the boundary between the two nerve territories and is often supplied by both the femoral and the obturator nerve."
+    },
+    {
+      "key": "tfl",
+      "name": "right tensor fasciae latae",
+      "label": "Tensor fasciae latae",
+      "role": "part",
+      "group": "Abductors",
+      "layer": "muscle",
+      "color": "#d97f5a",
+      "refs": {
+        "bodyparts3d": "FMA22425"
+      },
+      "terms": [
+        "tensor fasciae latae",
+        "iliotibial tract",
+        "superior gluteal nerve",
+        "medial rotation",
+        "abduction"
+      ],
+      "narration": "It abducts and medially rotates the hip and steadies the trunk on the standing leg. Superior gluteal nerve, like the two gluteal abductors behind it."
+    },
+    {
+      "key": "glut_med",
+      "name": "right gluteus medius",
+      "label": "Gluteus medius",
+      "role": "part",
+      "group": "Abductors",
+      "layer": "muscle",
+      "color": "#c9743a",
+      "refs": {
+        "bodyparts3d": "FMA22330"
+      },
+      "terms": [
+        "gluteus medius",
+        "abduction",
+        "greater trochanter",
+        "superior gluteal nerve",
+        "Trendelenburg sign"
+      ],
+      "narration": "The main abductor. Its real job is not lifting the leg sideways but holding the pelvis level when you stand on one leg. Weakness here drops the opposite side of the pelvis with every step."
+    },
+    {
+      "key": "glut_min",
+      "name": "right gluteus minimus",
+      "label": "Gluteus minimus",
+      "role": "part",
+      "group": "Abductors",
+      "layer": "muscle",
+      "color": "#b3652f",
+      "refs": {
+        "bodyparts3d": "FMA22332"
+      },
+      "terms": [
+        "gluteus minimus",
+        "abduction",
+        "medial rotation",
+        "greater trochanter",
+        "superior gluteal nerve"
+      ],
+      "narration": "The same action again, deep to medius, and it lies directly on the capsule of the joint. Both abductors are supplied by the superior gluteal nerve and both medially rotate the hip."
+    },
+    {
+      "key": "add_longus",
+      "name": "right adductor longus",
+      "label": "Adductor longus",
+      "role": "part",
+      "group": "Adductors",
+      "layer": "muscle",
+      "color": "#a35270",
+      "refs": {
+        "bodyparts3d": "FMA22456"
+      },
+      "terms": [
+        "adductor longus",
+        "body of pubis",
+        "linea aspera",
+        "obturator nerve",
+        "adductor strain",
+        "groin strain"
+      ],
+      "narration": "The most anterior adductor and the one you can feel as a cord in the groin. Obturator nerve, like the rest of this group."
+    },
+    {
+      "key": "add_brevis",
+      "name": "right adductor brevis",
+      "label": "Adductor brevis",
+      "role": "part",
+      "group": "Adductors",
+      "layer": "muscle",
+      "color": "#94465f",
+      "refs": {
+        "bodyparts3d": "FMA22452"
+      },
+      "terms": [
+        "adductor brevis",
+        "obturator nerve",
+        "anterior and posterior divisions"
+      ],
+      "narration": "It lies behind longus, and the two divisions of the obturator nerve split around it — one in front of it, one behind. That relationship is a favourite question."
+    },
+    {
+      "key": "add_magnus",
+      "name": "right adductor magnus",
+      "label": "Adductor magnus",
+      "role": "part",
+      "group": "Adductors",
+      "layer": "muscle",
+      "color": "#7f3045",
+      "refs": {
+        "bodyparts3d": "FMA22459"
+      },
+      "terms": [
+        "adductor magnus",
+        "adductor part",
+        "hamstring part",
+        "obturator nerve",
+        "sciatic nerve",
+        "adductor hiatus"
+      ],
+      "narration": "The biggest of the group and a hybrid: its adductor part is obturator nerve, its hamstring part is sciatic. So it both adducts and extends the hip, on two different nerves."
+    },
+    {
+      "key": "gracilis",
+      "name": "right gracilis",
+      "label": "Gracilis",
+      "role": "part",
+      "group": "Adductors",
+      "layer": "muscle",
+      "color": "#8f5570",
+      "refs": {
+        "bodyparts3d": "FMA43883"
+      },
+      "terms": [
+        "gracilis",
+        "obturator nerve",
+        "pes anserinus",
+        "adduction"
+      ],
+      "narration": "The strap on the inner edge of the thigh. It is the only adductor that crosses the knee as well as the hip."
+    },
+    {
+      "key": "glut_max",
+      "name": "right gluteus maximus",
+      "label": "Gluteus maximus",
+      "role": "part",
+      "group": "Extensors",
+      "layer": "muscle",
+      "color": "#c2413c",
+      "refs": {
+        "bodyparts3d": "FMA22328"
+      },
+      "terms": [
+        "gluteus maximus",
+        "hip extension",
+        "lateral rotation",
+        "inferior gluteal nerve",
+        "rising from a chair"
+      ],
+      "narration": "The powerful extensor, used for climbing and rising rather than level walking. It also rotates the hip laterally, and it covers the whole back of the joint."
+    },
+    {
+      "key": "biceps_femoris_long",
+      "name": "long head of right biceps femoris",
+      "label": "Biceps femoris — long head",
+      "role": "part",
+      "group": "Extensors",
+      "layer": "muscle",
+      "color": "#a63f5e",
+      "refs": {
+        "bodyparts3d": "FMA45888"
+      },
+      "terms": [
+        "biceps femoris",
+        "hamstring",
+        "ischial tuberosity",
+        "hip extension",
+        "sciatic nerve"
+      ],
+      "narration": "Hamstrings extend the hip in ordinary walking. All three arise from the ischial tuberosity, which sits just below and behind the joint."
+    },
+    {
+      "key": "semitendinosus",
+      "name": "right semitendinosus",
+      "label": "Semitendinosus",
+      "role": "part",
+      "group": "Extensors",
+      "layer": "muscle",
+      "color": "#93374f",
+      "refs": {
+        "bodyparts3d": "FMA22358"
+      },
+      "terms": [
+        "semitendinosus",
+        "hamstring",
+        "ischial tuberosity",
+        "hip extension"
+      ],
+      "narration": "A long tendon on the medial side, running to the pes anserinus on the tibia."
+    },
+    {
+      "key": "semimembranosus",
+      "name": "right semimembranosus",
+      "label": "Semimembranosus",
+      "role": "part",
+      "group": "Extensors",
+      "layer": "muscle",
+      "color": "#87304a",
+      "refs": {
+        "bodyparts3d": "FMA22448"
+      },
+      "terms": [
+        "semimembranosus",
+        "hamstring",
+        "ischial tuberosity",
+        "medial condyle of tibia"
+      ],
+      "narration": "The deepest hamstring, membranous above and tendinous below."
+    },
+    {
+      "key": "piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#7f5aa8",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "lateral rotation",
+        "sciatic nerve",
+        "posterior capsule"
+      ],
+      "narration": "It runs out of the pelvis and across the back of the joint to the top of the greater trochanter. The sciatic nerve appears just below it, which is why a posterior dislocation of the hip threatens that nerve."
+    },
+    {
+      "key": "gemellus_sup",
+      "name": "right gemellus superior",
+      "label": "Gemellus superior",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#6f4d94",
+      "refs": {
+        "bodyparts3d": "FMA22334"
+      },
+      "terms": [
+        "gemellus superior",
+        "ischial spine",
+        "lateral rotation"
+      ],
+      "narration": "Upper twin, from the ischial spine."
+    },
+    {
+      "key": "obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#634587",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "lesser sciatic foramen",
+        "lateral rotation",
+        "medial surface of greater trochanter"
+      ],
+      "narration": "It begins inside the pelvis, turns a right angle round the lesser sciatic notch, and reaches the medial surface of the greater trochanter with a twin above and below it."
+    },
+    {
+      "key": "gemellus_inf",
+      "name": "right gemellus inferior",
+      "label": "Gemellus inferior",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#573c78",
+      "refs": {
+        "bodyparts3d": "FMA22336"
+      },
+      "terms": [
+        "gemellus inferior",
+        "ischial tuberosity",
+        "lateral rotation"
+      ],
+      "narration": "Lower twin, from the upper part of the ischial tuberosity."
+    },
+    {
+      "key": "quadratus_femoris",
+      "name": "right quadratus femoris",
+      "label": "Quadratus femoris",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#4b3468",
+      "refs": {
+        "bodyparts3d": "FMA22338"
+      },
+      "terms": [
+        "quadratus femoris",
+        "quadrate tubercle",
+        "intertrochanteric crest",
+        "lateral rotation"
+      ],
+      "narration": "Flat and square, from the ischial tuberosity to the back of the femur. The sciatic nerve lies directly on it as it leaves the buttock."
+    },
+    {
+      "key": "obturator_externus",
+      "name": "right obturator externus",
+      "label": "Obturator externus",
+      "role": "part",
+      "group": "Lateral rotators",
+      "layer": "muscle",
+      "color": "#41305c",
+      "refs": {
+        "bodyparts3d": "FMA22326"
+      },
+      "terms": [
+        "obturator externus",
+        "obturator nerve",
+        "neck of femur",
+        "trochanteric fossa",
+        "lateral rotation"
+      ],
+      "narration": "The one that goes underneath. Its tendon winds below the neck of the femur to reach the trochanteric fossa, so it is the only one of the group that reaches the femur from below the neck rather than crossing straight across the back of the joint. Obturator nerve, not sciatic — the odd one out of the group."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find the joint",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Bones of the joint",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "The hip joint is buried. Muscle covers it on every side, so you can never see it or feel it directly on a patient. You locate it instead: about two centimetres below the midpoint of the inguinal ligament in front, and midway between the ischial tuberosity and the greater trochanter behind."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Two bones, one socket",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "femur",
+          "to": "hip_bone",
+          "kind": "articulation"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Strip the muscle away and the joint is simple: a spherical head sitting in a deep cup. This is a synovial ball-and-socket joint of the multiaxial type, so it moves in three planes. Compare it with the shoulder, where the socket is a shallow saucer. Here the cup holds more than half the ball, and that single fact explains everything about hip stability."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Cut through the ball and socket",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Drag the plane through the joint. Inside, the horseshoe-shaped lunate surface carries the load; the fossa in its centre is filled with fat and the ligament of the head. Cartilage covers the head everywhere except at the fovea. The fibrocartilaginous labrum on the rim grips past the equator of the head, so the joint holds the head in even before any muscle acts."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Where the capsule ends",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "femur",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The capsule runs from the acetabular rim to the intertrochanteric line in front, but behind it stops halfway along the neck. So the whole neck is inside the capsule in front and only the medial half behind. That line is the difference between an intracapsular and an extracapsular fracture, and therefore between a neck that loses its blood supply and one that does not."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The ligaments that stop you falling backwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "hip_bone",
+          "to": "femur",
+          "kind": "ligament"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Three ligaments thicken the capsule, all spiralling in the same direction. The iliofemoral ligament in front is an inverted Y and the strongest ligament in the body; the pubofemoral is below and in front; the ischiofemoral is behind. Standing upright pushes the pelvis backwards, all three wind tight, and the hip locks with no muscular effort. That is why you can stand all day without tiring your hip."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Weight goes through here",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:body_weight",
+          "path": [
+            "sacrum",
+            "hip_bone",
+            "femur"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Follow the load. Body weight comes down the vertebral column into the sacrum, through the sacroiliac joint into the ilium, and reaches the acetabulum along a thickened strut of bone. It crosses into the head of the femur and turns a corner down the neck to the shaft. Standing on one leg, the force across this joint is around three times body weight; running, it is far more. The joint is built for load first and movement second."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Flexion and extension",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Adductors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Lateral rotators"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Flexors",
+            "Extensors"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "In front, the flexors: iliopsoas chiefly, helped by rectus femoris, sartorius and pectineus. Behind, the extensors: hamstrings for ordinary walking, gluteus maximus for power. Flexion reaches about one hundred and twenty degrees with the knee bent, but far less with the knee straight, because the hamstrings run out of length. Extension is only about twenty degrees, checked by the iliofemoral ligament."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Abduction and adduction",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Flexors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensors"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Abductors",
+            "Adductors"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Laterally, gluteus medius, gluteus minimus and tensor fasciae latae abduct, all on the superior gluteal nerve. Medially, the adductor group pulls the other way, all on the obturator nerve. Learn the pair as two nerves rather than two lists: superior gluteal abducts, obturator adducts. The abductors matter more clinically, because they are what keeps the pelvis level in single-leg stance."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Rotation, and the muscle that goes under the neck",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Adductors"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lateral rotators"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "obturator_externus",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Six short muscles rotate the hip laterally: piriformis, gemellus superior, obturator internus, gemellus inferior, quadratus femoris and obturator externus. Five of them cross behind the joint. Obturator externus is the exception — highlighted here — winding under the neck of the femur to the trochanteric fossa, and supplied by the obturator nerve while the others are not. Medial rotation has no dedicated muscle at all; it is done by gluteus minimus, the front fibres of gluteus medius and tensor fasciae latae, which is why medial rotation is the weakest movement of the hip."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 10,
+      "title": "What lies against the capsule",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Adductors"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "psoas",
+            "piriformis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Learn the joint's neighbours by side. In front, iliopsoas with its bursa, and beyond it the femoral nerve, artery and vein in the femoral triangle. Above, the reflected head of rectus femoris and gluteus minimus lying straight on the capsule. Behind, piriformis and the short rotators, and on them the sciatic nerve. Below, obturator externus and the obturator nerve. Every one of these is a route by which hip disease refers pain somewhere else."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Posterior dislocation",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Flexors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Abductors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "glut_max"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sciatic_nerve",
+          "path": [
+            "piriformis",
+            "quadratus_femoris",
+            "femur"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Dislocation needs great force, and nine times out of ten it goes backwards. The classic setting is a dashboard injury: the hip flexed and adducted when the knee strikes, so the head is driven out behind the acetabulum. The leg then lies shortened, adducted and medially rotated — the picture to recognise in an exam. The traced path is the sciatic nerve passing right behind the joint; it is injured in about one dislocation in ten, and the foot drop that follows is the reason you always test dorsiflexion afterwards."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 12,
+      "title": "Why the hip hurts at the knee",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Extensors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Lateral rotators"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Adductors",
+            "Flexors"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "The capsule is supplied by branches of the femoral, obturator and sciatic nerves — and the same three nerves supply the knee. So a child with hip disease often complains only of knee pain, and a normal knee examination does not exclude a hip problem. Always examine the joint above."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 13,
+      "title": "Peel down to the joint",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones of the joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Recite the approach: skin and fascia, then the outer muscular sleeve, then the deeper rotators and abductors lying on the capsule, then the capsule and its three spiral ligaments, then the labrum, then the head in the socket. Five layers, and after this the hip should feel like a place with an address rather than a name in a list."
+    }
+  ],
+  "gaps": [
+    "The catalog holds no capsule or ligament of the hip. The iliofemoral, pubofemoral and ischiofemoral ligaments carry most of the joint's stability and two whole beats turn on them, but they can only be narrated against the bones and shown with a relationship connector.",
+    "There is no acetabular labrum, no transverse acetabular ligament and no ligament of the head of the femur in the catalog, so the deepening of the socket and the fovea are taught by cutting the bone models and describing what would be there.",
+    "No articular cartilage is modelled, so the lunate surface and the non-articular acetabular fossa are shown as bone shape only.",
+    "The head, neck, greater and lesser trochanters are features of the whole femur mesh rather than separate models, so they are taught by lighting the femur and naming the feature. Authoring them as measured landmark anchors is the obvious next improvement and was not attempted in this run.",
+    "No nerve of the lower limb exists as a model. The sciatic nerve behind the joint is authored as a traced concept path across piriformis and quadratus femoris, and the femoral and obturator nerves are taught by lighting the muscles they supply.",
+    "No artery of the lower limb is modelled, so the blood supply of the head of the femur is not shown here at all. It is taught in the Proximal femur scene, which this scene does not claim to cover.",
+    "The psoas bursa is described but has no model, so its communication with the joint cavity is narration only.",
+    "This scene does not cover Proximal femur, Sciatic nerve or Gluteal vessels."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

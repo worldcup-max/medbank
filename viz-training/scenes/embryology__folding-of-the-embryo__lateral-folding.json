@@ -1,0 +1,622 @@
+{
+  "schema": 2,
+  "id": "embryology__folding-of-the-embryo__lateral-folding",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Folding of the Embryo",
+  "structure": "Lateral folding",
+  "covers": [
+    "Lateral folding"
+  ],
+  "learning_goal": "Draw the transverse section of the embryo at three stages of lateral folding, say what each of the two lateral folds carries towards the midline, explain how a flat disc becomes a tube within a tube with the somatopleure as body wall and the splanchnopleure as gut wall, and use a failure of ventral closure to separate omphalocele, gastroschisis and bladder exstrophy.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "folding of the embryo",
+      "lateral folding",
+      "transverse folding",
+      "week 4",
+      "body wall formation",
+      "ventral body wall",
+      "gut tube formation",
+      "abdominal wall defects"
+    ],
+    "terms": [
+      "lateral folding",
+      "transverse folding",
+      "horizontal plane",
+      "transverse section",
+      "left and right body folds",
+      "week 4",
+      "trilaminar disc",
+      "tube within a tube",
+      "cylindrical embryo",
+      "lateral plate mesoderm",
+      "intraembryonic coelom",
+      "somatic mesoderm",
+      "parietal mesoderm",
+      "somatopleure",
+      "splanchnic mesoderm",
+      "visceral mesoderm",
+      "splanchnopleure",
+      "extraembryonic coelom",
+      "chorionic cavity",
+      "body wall",
+      "ventral body wall",
+      "midgut",
+      "yolk sac",
+      "vitelline duct",
+      "omphalomesenteric duct",
+      "yolk stalk",
+      "primitive gut tube",
+      "dorsal mesentery",
+      "ventral mesentery",
+      "peritoneal cavity",
+      "serous membrane",
+      "parietal peritoneum",
+      "visceral peritoneum",
+      "amnion",
+      "umbilical ring",
+      "umbilical cord",
+      "physiological herniation",
+      "omphalocele",
+      "exomphalos",
+      "gastroschisis",
+      "right of the umbilicus",
+      "bladder exstrophy",
+      "ectopia vesicae",
+      "epispadias",
+      "cloacal exstrophy",
+      "ectopia cordis",
+      "pentalogy of Cantrell",
+      "Meckel diverticulum",
+      "vitelline fistula",
+      "rule of twos",
+      "AFP",
+      "alpha-fetoprotein"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "transverse_frame",
+      "label": "Cut across the embryo and watch one section",
+      "role": "context",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "transverse section",
+        "cross section",
+        "horizontal plane",
+        "one level",
+        "trunk",
+        "flat disc",
+        "amnion above",
+        "yolk sac below"
+      ],
+      "narration": "Lateral folding is a transverse story, so cut across the trunk and keep the same section on screen throughout. Amniotic cavity above, flat trilaminar disc in the middle, yolk sac hanging below. Draw that one picture three times and you have the entire topic."
+    },
+    {
+      "key": "lpm_split",
+      "label": "The lateral plate mesoderm has already split in two",
+      "role": "part",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#5d6d7e",
+      "terms": [
+        "lateral plate mesoderm",
+        "splits",
+        "intraembryonic coelom",
+        "cavity within mesoderm",
+        "somatic mesoderm",
+        "parietal layer",
+        "splanchnic mesoderm",
+        "visceral layer",
+        "week 3"
+      ],
+      "narration": "Before anything folds, the lateral plate mesoderm on each side has already split around a cavity — the intraembryonic coelom. The half that sticks to the ectoderm above is somatic, or parietal. The half that sticks to the endoderm below is splanchnic, or visceral. That split is the reason a body cavity exists at all, and folding is what closes it."
+    },
+    {
+      "key": "somatopleure",
+      "label": "Somatopleure — the future body wall",
+      "role": "part",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#2874a6",
+      "terms": [
+        "somatopleure",
+        "somatic mesoderm",
+        "parietal",
+        "plus ectoderm",
+        "body wall",
+        "dermis",
+        "parietal peritoneum",
+        "parietal pleura"
+      ],
+      "narration": "Ectoderm plus somatic mesoderm is the somatopleure. Remember it as the outer sandwich: it becomes the body wall, the dermis of the trunk, and the parietal layer of every serous membrane. Somatic goes with soma — the wall of the body."
+    },
+    {
+      "key": "splanchnopleure",
+      "label": "Splanchnopleure — the future gut wall",
+      "role": "part",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#117864",
+      "terms": [
+        "splanchnopleure",
+        "splanchnic mesoderm",
+        "visceral",
+        "plus endoderm",
+        "gut wall",
+        "smooth muscle",
+        "visceral peritoneum",
+        "visceral pleura",
+        "cardiac muscle"
+      ],
+      "narration": "Endoderm plus splanchnic mesoderm is the splanchnopleure — the inner sandwich. It becomes the wall of the gut: the endoderm gives the lining, the mesoderm gives the smooth muscle and the visceral layer of the serous membranes. Splanchnic goes with viscera."
+    },
+    {
+      "key": "folds_rise",
+      "label": "The two lateral folds swing ventrally",
+      "role": "part",
+      "group": "The fold",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "left lateral fold",
+        "right lateral fold",
+        "two body folds",
+        "swing ventrally",
+        "towards the midline",
+        "somite growth",
+        "amnion expands",
+        "week 4"
+      ],
+      "narration": "The somites grow rapidly on each side of the neural tube and push the edges of the disc downwards and inwards, while the amnion expands around the outside. Two folds, left and right, swing under the embryo towards the midline. Draw them as two arms closing over a chest."
+    },
+    {
+      "key": "wall_fusion",
+      "label": "They meet in the midline and close the body wall",
+      "role": "part",
+      "group": "The fold",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "fusion in the midline",
+        "ventral body wall",
+        "closed",
+        "except at the umbilicus",
+        "umbilical ring",
+        "linea alba",
+        "sternum",
+        "cylindrical embryo"
+      ],
+      "narration": "The two somatopleuric edges meet in the ventral midline and fuse, closing the body wall from the neck down — everywhere except one hole at the umbilicus, kept open for the cord. The embryo stops being a disc and becomes a cylinder. Every ventral wall defect later in this scene is that fusion failing at one level."
+    },
+    {
+      "key": "coelom_closes",
+      "label": "The body cavity is sealed off from the outside",
+      "role": "part",
+      "group": "The fold",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "intraembryonic coelom",
+        "closed cavity",
+        "loses continuity",
+        "extraembryonic coelom",
+        "chorionic cavity",
+        "peritoneal cavity",
+        "pleural cavity",
+        "pericardial cavity",
+        "serous cavity"
+      ],
+      "narration": "Until now the coelom inside the embryo opened freely into the extraembryonic coelom on both sides. Folding pinches those two openings shut, and the cavity becomes a closed space lined by somatopleure outside and splanchnopleure over the viscera. That closed space is the future pericardial, pleural and peritoneal cavities — and it is why every serous cavity has a parietal and a visceral layer."
+    },
+    {
+      "key": "gut_tube",
+      "label": "The endoderm rolls into a tube at the same time",
+      "role": "part",
+      "group": "The fold",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "endoderm rolls up",
+        "gut tube",
+        "midgut",
+        "wide connection narrows",
+        "vitelline duct",
+        "yolk stalk",
+        "omphalomesenteric duct",
+        "tube within a tube"
+      ],
+      "narration": "While the outer edges close, the flat sheet of endoderm is rolled into a tube by the same movement. What was a wide connection between midgut and yolk sac narrows to a thin vitelline duct running in the cord. That is the phrase to hold on to: lateral folding turns the embryo into a tube within a tube."
+    },
+    {
+      "key": "mesentery",
+      "label": "The dorsal mesentery is what is left of the roof",
+      "role": "part",
+      "group": "The fold",
+      "layer": "organ",
+      "color": "#ba4a00",
+      "terms": [
+        "dorsal mesentery",
+        "double layer of peritoneum",
+        "suspends the gut",
+        "posterior body wall",
+        "ventral mesentery",
+        "septum transversum",
+        "lesser omentum",
+        "falciform ligament"
+      ],
+      "narration": "As the gut tube pulls away from the back wall, the splanchnic mesoderm behind it is drawn out into a double sheet — the dorsal mesentery, which suspends the gut and carries its vessels and nerves. A ventral mesentery exists only in the upper abdomen, from the septum transversum, and that is why the lesser omentum and falciform ligament are there and nowhere lower."
+    },
+    {
+      "key": "umbilical_ring",
+      "label": "The one hole left — the umbilical ring",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "umbilical ring",
+        "primitive umbilical ring",
+        "amnion",
+        "umbilical cord",
+        "vitelline duct",
+        "connecting stalk",
+        "umbilical vessels",
+        "physiological herniation",
+        "week 6",
+        "week 10"
+      ],
+      "narration": "Where the folds stop short, a ring of amnion-covered wall remains — the umbilical ring, carrying the vitelline duct, the allantois and the umbilical vessels. It matters because from about week six the midgut grows faster than the abdomen can hold and herniates through this ring on purpose, returning by about week ten. A normal hernia with a deadline."
+    },
+    {
+      "key": "result_tube",
+      "label": "The result — a tube within a tube",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#9b59b6",
+      "terms": [
+        "tube within a tube",
+        "cylindrical body",
+        "gut tube suspended",
+        "closed coelom",
+        "ventral body wall",
+        "week 4 embryo",
+        "body plan"
+      ],
+      "narration": "Stand back from the finished section. An outer tube of body wall, an inner tube of gut hung from the back by a mesentery, and a sealed cavity between them. That is the vertebrate body plan, and it was produced in a few days by two folds meeting in the midline."
+    },
+    {
+      "key": "omphalocele",
+      "label": "Omphalocele — the gut never came back",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "omphalocele",
+        "exomphalos",
+        "midline",
+        "through the umbilical ring",
+        "covered by amnion and peritoneum",
+        "sac",
+        "cord inserts on the sac",
+        "failure of gut to return",
+        "trisomy 13",
+        "trisomy 18",
+        "Beckwith-Wiedemann",
+        "associated anomalies"
+      ],
+      "narration": "In omphalocele the herniated midgut fails to return, so bowel sits in the midline at the umbilicus inside a covering of amnion and peritoneum, with the cord inserting onto the sac itself. The membrane is the diagnostic feature. It matters far beyond the bowel: omphalocele carries a high rate of chromosomal and cardiac anomalies, so the finding triggers a search for the rest."
+    },
+    {
+      "key": "gastroschisis",
+      "label": "Gastroschisis — a hole beside the umbilicus",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "gastroschisis",
+        "right of the umbilicus",
+        "paraumbilical",
+        "no covering sac",
+        "bowel free in amniotic fluid",
+        "normal cord insertion",
+        "failure of body wall closure",
+        "isolated",
+        "matted bowel",
+        "raised AFP"
+      ],
+      "narration": "Gastroschisis is the other one, and the distinction is worth marks every year. The wall itself fails to close just to the right of a normally inserted cord, so bowel escapes with no sac over it and floats free in amniotic fluid, arriving thickened and matted. It is usually isolated, without the chromosomal baggage of omphalocele. No membrane, off the midline, normal cord — that is gastroschisis."
+    },
+    {
+      "key": "exstrophy",
+      "label": "Below the umbilicus — bladder exstrophy",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "bladder exstrophy",
+        "ectopia vesicae",
+        "infra-umbilical",
+        "lower ventral wall",
+        "cloacal membrane",
+        "deficient mesoderm",
+        "epispadias",
+        "wide pubic symphysis",
+        "cloacal exstrophy",
+        "continuous urine leak"
+      ],
+      "narration": "Fail to close below the umbilicus and the defect involves the bladder. Mesoderm never reinforces the lower ventral wall, the cloacal membrane breaks down, and the posterior bladder wall lies open on the abdomen leaking urine — bladder exstrophy, almost always with epispadias and a widely separated pubic symphysis. The more severe cloacal exstrophy adds bowel to the same open field."
+    },
+    {
+      "key": "vitelline",
+      "label": "The vitelline duct that should have disappeared",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "vitelline duct",
+        "omphalomesenteric duct",
+        "persists",
+        "Meckel diverticulum",
+        "rule of twos",
+        "2 percent",
+        "2 feet from ileocaecal valve",
+        "2 inches long",
+        "ectopic gastric mucosa",
+        "painless rectal bleeding",
+        "vitelline fistula",
+        "umbilical sinus",
+        "vitelline cyst",
+        "fibrous band",
+        "volvulus"
+      ],
+      "narration": "Lateral folding narrows the yolk sac connection to the vitelline duct, which should then vanish. When part of it persists you get the Meckel diverticulum and its rule of twos — about two percent of people, two feet from the ileocaecal valve, two inches long, two types of ectopic mucosa, usually presenting under two years with painless rectal bleeding. Persist along its whole length and it is a faecal fistula at the umbilicus; persist in the middle and it is a cyst; persist as a fibrous band and it is a volvulus waiting to happen."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "The section before anything folds",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Before folding"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "somatopleure",
+            "splanchnopleure"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "lpm_split",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut across the trunk before folding. The lateral plate mesoderm on each side has already split around the intraembryonic coelom. The layer against the ectoderm is somatic and forms the somatopleure — future body wall. The layer against the endoderm is splanchnic and forms the splanchnopleure — future gut wall. Get those two names right now, because the whole of serous membrane anatomy follows from them."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Two folds swing under and meet",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The fold"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "folds_rise",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lateral-fold",
+          "path": [
+            "folds_rise",
+            "wall_fusion",
+            "coelom_closes"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "folds_rise",
+          "to": "wall_fusion",
+          "kind": "meet in the ventral midline and fuse as"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Growing somites push the edges of the disc down and in, and the expanding amnion draws them round. The two somatopleuric edges meet in the ventral midline and fuse, leaving one hole at the umbilicus. In the same movement the coelom loses its two openings into the extraembryonic cavity and becomes a closed body cavity, which is why every serous cavity has a parietal and a visceral layer."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The same movement rolls the gut into a tube",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The fold"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gut_tube",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "mesentery"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.35
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gut_tube",
+          "to": "mesentery",
+          "kind": "is suspended from the back wall by"
+        }
+      ],
+      "narration": "Look at the endoderm in the same three sections. It is rolled from a flat sheet into a tube, and its wide mouth into the yolk sac narrows to the vitelline duct. Behind it the splanchnic mesoderm is drawn out into the dorsal mesentery, which suspends the gut and carries its vessels. A ventral mesentery forms only in the upper abdomen — remember that and the lesser omentum and falciform ligament stop being arbitrary."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "A tube within a tube, and one hole left open",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The result"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "gut_tube"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "wall_fusion"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "umbilical_ring",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The finished embryo is an outer tube of body wall around an inner tube of gut, with a sealed cavity between them and a mesentery holding the gut up. One hole remains, the umbilical ring, and it is deliberately left open: from about week six the midgut herniates through it because the abdomen is too small, and returns by about week ten. Knowing that this hernia is normal is what makes the next beat make sense."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Omphalocele or gastroschisis — look for the membrane",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "omphalocele",
+            "gastroschisis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "umbilical_ring",
+          "to": "omphalocele",
+          "kind": "gut failing to return through it gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "wall_fusion",
+          "to": "gastroschisis",
+          "kind": "failing just lateral to the midline gives"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0.6
+        }
+      ],
+      "narration": "Two babies with bowel on the outside, and one question separates them. Is there a membrane? Omphalocele is midline, through the umbilical ring, covered by amnion and peritoneum, with the cord inserting on the sac, and it comes with chromosomal and cardiac anomalies. Gastroschisis is a hole in the wall itself, usually to the right of a normal cord, with no covering at all, and is usually isolated. Membrane, midline, cord insertion — three checks, in that order."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "The rest of the ventral wall, and a duct that lingers",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "wall_fusion"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "wall_fusion",
+          "to": "exstrophy",
+          "kind": "failing below the umbilicus gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gut_tube",
+          "to": "vitelline",
+          "kind": "a duct that fails to regress gives"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Map the failures by level. Above the umbilicus and the heart is exposed. At the umbilicus, omphalocele. Beside it, gastroschisis. Below it, bladder exstrophy with epispadias and a wide pubic symphysis, and in its severe form cloacal exstrophy. Then one loose end: the vitelline duct should disappear, and when it does not you get a Meckel diverticulum, or a fistula at the umbilicus, or a cyst, or a fibrous band that later twists the bowel. One fold, one plane, and most of the newborn abdominal wall surgery in the syllabus."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so BOTH are recorded in deferred_modes. The 3d option is real: two folds closing round a cavity is a genuinely spatial subject and the day a provider holds staged embryo geometry this scene should be re-authored as 3d_anatomy. It is deferred because no such model exists in the catalog today, not because the subject is flat.",
+    "Status is 'planned'. Fifteen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: three transverse sections of the same embryo — flat disc, folds half closed, fully closed — drawn at one scale and one orientation, each colouring ectoderm, somatic mesoderm, splanchnic mesoderm and endoderm identically so the somatopleure and splanchnopleure can be followed across all three; the intraembryonic coelom shaded so its two openings into the extraembryonic coelom can be seen closing; the dorsal mesentery appearing in the third panel; plus a small ventral view of the trunk with the four defect levels marked from ectopia cordis down to bladder exstrophy.",
+    "The three transverse panels must use ONE colour key for the four layers across all three. The teaching point is that the same two sheets become body wall and gut wall, and re-colouring between panels destroys exactly that.",
+    "Beat 2 traces concept:lateral-fold. The subject is a movement of two sheets rather than a drawn object, so it cannot be a region.",
+    "Beat 6 authors PEEL_LAYER to lift the ventral body wall off the defects. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because 'what is missing is the wall in front' is the move that puts all four lesions on one map.",
+    "'Body cavity (coelom)' is NOT claimed in covers[]. The split of lateral plate mesoderm and the closing of the coelom are named here because lateral folding is what closes it, but the partitioning of the coelom into pericardial, pleural and peritoneal cavities, the pleuropericardial and pleuroperitoneal membranes and the mesenteries in detail are that entry's work and are authored separately.",
+    "'Primitive gut tube' is NOT claimed. The rolling of endoderm into a tube is named because it is the same movement, but foregut, midgut and hindgut derivatives, their arteries and their rotation belong to that entry.",
+    "'Cranio-caudal folding' is NOT claimed. The two folds are simultaneous in life and both scenes say so, but this one draws only the transverse plane; the median story is authored alongside it.",
+    "Midgut rotation is named only as far as the physiological herniation and its return by about week ten, because that is what makes omphalocele intelligible. Rotation, malrotation and volvulus belong to GIT Development and appear here in match.terms only, so a highlighted term still reaches this scene until that one exists.",
+    "Week numbers are the standard teaching approximations — folding through week 4, physiological herniation from about week 6 returning by about week 10. Texts differ by a few days and the narration gives them as approximations.",
+    "The Meckel rule of twos is given in its conventional teaching form. It is a mnemonic rather than an epidemiological statement, and the narration presents it as such."
+  ]
+}

@@ -1,0 +1,685 @@
+{
+  "schema": 2,
+  "id": "gross__thigh__quadriceps-femoris",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Thigh",
+  "structure": "Quadriceps femoris",
+  "covers": [
+    "Quadriceps femoris"
+  ],
+  "learning_goal": "Name the four heads of quadriceps femoris, say which one crosses two joints and why that matters, give the common insertion through the patella into the tibial tuberosity, state the nerve and root value, and explain what a femoral nerve lesion does to walking.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "thigh",
+      "anterior compartment of thigh",
+      "quadriceps",
+      "quadriceps femoris",
+      "knee extension",
+      "lower limb",
+      "femoral nerve",
+      "knee jerk",
+      "patella"
+    ],
+    "terms": [
+      "quadriceps",
+      "quadriceps femoris",
+      "rectus femoris",
+      "vastus lateralis",
+      "vastus medialis",
+      "vastus intermedius",
+      "vastus medialis obliquus",
+      "articularis genu",
+      "anterior compartment of thigh",
+      "extensor compartment",
+      "femoral nerve",
+      "L2 L3 L4",
+      "knee jerk",
+      "patellar reflex",
+      "patellar tendon reflex",
+      "quadriceps tendon",
+      "patellar ligament",
+      "patella",
+      "sesamoid bone",
+      "tibial tuberosity",
+      "anterior inferior iliac spine",
+      "acetabulum",
+      "linea aspera",
+      "extensor mechanism",
+      "Q angle",
+      "patellar tracking",
+      "knee extension",
+      "hip flexion",
+      "two-joint muscle",
+      "sartorius",
+      "psoas major",
+      "iliacus",
+      "iliopsoas",
+      "iliotibial tract",
+      "quadriceps wasting",
+      "intramuscular injection vastus lateralis",
+      "straight leg raise"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "rect_fem",
+      "name": "right rectus femoris",
+      "label": "Rectus femoris",
+      "role": "part",
+      "group": "Quadriceps femoris",
+      "layer": "muscle",
+      "color": "#c9413c",
+      "refs": {
+        "bodyparts3d": "FMA38928"
+      },
+      "terms": [
+        "rectus femoris",
+        "straight head",
+        "reflected head",
+        "anterior inferior iliac spine",
+        "two-joint muscle",
+        "hip flexion",
+        "kicking muscle"
+      ],
+      "narration": "The only head that starts above the hip. Its straight head comes off the anterior inferior iliac spine and its reflected head from the rim of the acetabulum, so the muscle crosses the hip joint as well as the knee. That is why it both flexes the hip and extends the knee, and why it is the head that works hardest when you kick a ball."
+    },
+    {
+      "key": "vast_lat",
+      "name": "right vastus lateralis",
+      "label": "Vastus lateralis",
+      "role": "part",
+      "group": "Quadriceps femoris",
+      "layer": "muscle",
+      "color": "#d4694a",
+      "refs": {
+        "bodyparts3d": "FMA38930"
+      },
+      "terms": [
+        "vastus lateralis",
+        "greater trochanter",
+        "linea aspera",
+        "lateral lip",
+        "intramuscular injection",
+        "biopsy site"
+      ],
+      "narration": "The biggest of the four. It arises from the greater trochanter and the lateral lip of the linea aspera and wraps round the outside of the shaft. Its middle third is the safest intramuscular injection site in an infant, because there is no large nerve or vessel under it."
+    },
+    {
+      "key": "vast_med",
+      "name": "right vastus medialis",
+      "label": "Vastus medialis",
+      "role": "part",
+      "group": "Quadriceps femoris",
+      "layer": "muscle",
+      "color": "#c25a6b",
+      "refs": {
+        "bodyparts3d": "FMA38932"
+      },
+      "terms": [
+        "vastus medialis",
+        "vastus medialis obliquus",
+        "medial lip of linea aspera",
+        "intertrochanteric line",
+        "patellar tracking",
+        "last thirty degrees",
+        "teardrop"
+      ],
+      "narration": "It arises from the intertrochanteric line and the medial lip of the linea aspera and comes further down the thigh than the others. Its lowest fibres run almost horizontally into the medial edge of the patella and hold the bone from sliding laterally. It is the first part of the quadriceps to waste after a knee injury, and you can see the loss above the knee before you can measure it."
+    },
+    {
+      "key": "vast_int",
+      "name": "right vastus intermedius",
+      "label": "Vastus intermedius",
+      "role": "part",
+      "group": "Quadriceps femoris",
+      "layer": "muscle",
+      "color": "#a8452f",
+      "refs": {
+        "bodyparts3d": "FMA38934"
+      },
+      "terms": [
+        "vastus intermedius",
+        "articularis genu",
+        "front of femoral shaft",
+        "suprapatellar bursa",
+        "deep head"
+      ],
+      "narration": "The hidden head, lying flat on the front and side of the femoral shaft under the other three. Its deepest few fibres are named separately as articularis genu and pull the suprapatellar bursa up out of the way when the knee straightens. In a cross section it is the head sitting directly on the bone."
+    },
+    {
+      "key": "patella",
+      "name": "right patella",
+      "label": "Patella",
+      "role": "part",
+      "group": "Extensor mechanism",
+      "layer": "bone",
+      "color": "#efe4cb",
+      "refs": {
+        "bodyparts3d": "FMA24486"
+      },
+      "terms": [
+        "patella",
+        "sesamoid bone",
+        "quadriceps tendon",
+        "patellar ligament",
+        "extensor mechanism",
+        "patellar reflex",
+        "Q angle",
+        "lateral dislocation"
+      ],
+      "narration": "The largest sesamoid bone in the body, formed inside the quadriceps tendon. It lifts the tendon away from the knee and lengthens the lever arm, so the same muscle produces more turning force. Everything above it is quadriceps tendon and everything below it is patellar ligament — the tap that tests the reflex lands below the bone, not on it."
+    },
+    {
+      "key": "sartorius",
+      "name": "right sartorius",
+      "label": "Sartorius",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#e0a05a",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "longest muscle in the body",
+        "anterior superior iliac spine",
+        "pes anserinus",
+        "femoral triangle",
+        "adductor canal",
+        "tailor's muscle"
+      ],
+      "narration": "The longest muscle in the body, running from the anterior superior iliac spine across the thigh to the medial side of the tibia. It shares the femoral nerve with the quadriceps but is the boundary muscle of the region, not part of the four. Its medial border makes the lateral wall of the femoral triangle, and its roof covers the adductor canal below that."
+    },
+    {
+      "key": "psoas_major",
+      "name": "right psoas major",
+      "label": "Psoas major",
+      "role": "part",
+      "group": "Hip flexors",
+      "layer": "muscle",
+      "color": "#9c6f9e",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "iliopsoas",
+        "lesser trochanter",
+        "chief flexor of the hip",
+        "lumbar plexus"
+      ],
+      "narration": "The chief flexor of the hip, coming down from the lumbar vertebrae to the lesser trochanter. Compare it with rectus femoris: both flex the hip, but only rectus femoris also extends the knee. If a question asks for the strongest hip flexor the answer is iliopsoas, not quadriceps."
+    },
+    {
+      "key": "iliacus",
+      "name": "right iliacus",
+      "label": "Iliacus",
+      "role": "part",
+      "group": "Hip flexors",
+      "layer": "muscle",
+      "color": "#8a5f8c",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliac fossa",
+        "iliopsoas",
+        "femoral nerve",
+        "lesser trochanter"
+      ],
+      "narration": "The fan on the inner surface of the ilium that joins psoas major to form iliopsoas. It is supplied by the femoral nerve above the inguinal ligament, which is why a high femoral lesion weakens hip flexion as well as knee extension."
+    },
+    {
+      "key": "it_tract",
+      "name": "right iliotibial tract",
+      "label": "Iliotibial tract",
+      "role": "context",
+      "group": "Fascia",
+      "layer": "fascia",
+      "color": "#e0d2a8",
+      "refs": {
+        "bodyparts3d": "FMA58776"
+      },
+      "terms": [
+        "iliotibial tract",
+        "fascia lata",
+        "lateral intermuscular septum",
+        "compartment"
+      ],
+      "narration": "The thickened strip of fascia lata lying over vastus lateralis. The fascia lata sends septa inwards to the linea aspera, and those septa are what divide the thigh into an anterior, a medial and a posterior compartment. The quadriceps fills the anterior one."
+    },
+    {
+      "key": "femur",
+      "name": "right femur",
+      "label": "Femur",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "linea aspera",
+        "greater trochanter",
+        "intertrochanteric line",
+        "femoral shaft",
+        "medullary cavity"
+      ],
+      "narration": "Three of the four heads arise from this bone. The linea aspera on the back of the shaft is the ridge they take their origin from, so the vasti wrap the shaft from three sides and leave almost none of it uncovered."
+    },
+    {
+      "key": "hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "anterior inferior iliac spine",
+        "anterior superior iliac spine",
+        "acetabulum",
+        "iliac fossa"
+      ],
+      "narration": "Two spines to keep apart on the front of the ilium. The upper one, the anterior superior iliac spine, gives sartorius and the inguinal ligament. The lower one, the anterior inferior iliac spine, gives the straight head of rectus femoris."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#ded4b9",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "tibial tuberosity",
+        "patellar ligament",
+        "Osgood-Schlatter",
+        "insertion of quadriceps"
+      ],
+      "narration": "The whole muscle ends here, on the tibial tuberosity. Four heads, one tendon, one bony insertion — that is the answer to the insertion question no matter which head is named. In an adolescent the traction of that tendon on a growing tuberosity is what produces Osgood-Schlatter disease."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The front of the thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Quadriceps femoris",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The quadriceps is the anterior compartment of the thigh. Four heads, one nerve, one action at the knee. Learn it as a single muscle with four origins and one insertion, and the details fall into place."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Naming the four heads",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Quadriceps femoris"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "rect_fem",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Rectus femoris lies in the middle, straight down the front. Vastus lateralis is on the outside, vastus medialis on the inside, and vastus intermedius is hidden between them on the bone. Say them in that order every time and you will not lose one under exam pressure."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Where each head starts",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Quadriceps femoris"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rect_fem",
+          "to": "hip_bone",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vast_lat",
+          "to": "femur",
+          "kind": "origin"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "vast_med",
+          "to": "femur",
+          "kind": "origin"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Three of the heads come off the femur itself and only one comes off the pelvis. Vastus lateralis takes the lateral lip of the linea aspera, vastus medialis the medial lip, vastus intermedius the flat front of the shaft. Rectus femoris is the exception, and every exception in anatomy is worth a mark."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The head that crosses two joints",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hip flexors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "rect_fem",
+          "path": [
+            "hip_bone",
+            "rect_fem",
+            "patella",
+            "tibia"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow rectus femoris from the pelvis to the leg. It passes in front of the hip and in front of the knee, so it can act on both. Because it does, it cannot be at its strongest at both ends at once: it extends the knee best when the hip is extended, which is why you kick harder from a run-up than from a chair."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Four heads, one tendon",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hip flexors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "patella",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "Quadriceps femoris",
+          "to": "patella",
+          "kind": "insertion"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "patella",
+          "to": "tibia",
+          "kind": "insertion"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "All four heads converge into one tendon that takes the patella in its substance and carries on as the patellar ligament to the tibial tuberosity. This chain is the extensor mechanism. Break it anywhere — tendon rupture, a fractured patella, an avulsed tuberosity — and the patient cannot straighten the knee against gravity, whatever the muscle itself is doing."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 6,
+      "title": "A cut across the mid-thigh",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hip flexors"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "vast_int",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Slide the cut up and down the thigh. At mid-shaft the femur sits in the middle with vastus intermedius plastered on its front, the other two vasti on either side and rectus femoris riding on top of them all. That layering is the answer to the classic question of which head lies deepest."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 7,
+      "title": "What contraction does",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Quadriceps femoris",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hip flexors",
+          "intensity": 0.35
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "All four heads extend the knee; rectus femoris alone also flexes the hip. The muscle works hardest not when you kick but when you lower yourself — going down stairs, sitting into a chair — because it is paying out length under load. It also holds the knee locked in standing, which is why the leg gives way when it is weak."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Why the patella does not slip sideways",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Hip flexors"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neighbours"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "vast_med",
+            "vast_lat"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "patella",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The thigh bone slants inward from hip to knee, so the pull of the quadriceps is not straight up — it drags the patella laterally. That angle is the Q angle, and it is wider in women. The low horizontal fibres of vastus medialis are the check that opposes it. Weak vastus medialis, or a wide Q angle, and the patella tracks laterally and gives anterior knee pain or a frank dislocation."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "One nerve for the whole compartment",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:femoral_nerve",
+          "path": [
+            "psoas_major",
+            "iliacus",
+            "hip_bone",
+            "sartorius",
+            "rect_fem",
+            "vast_med"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The path traced here is the femoral nerve, L2, L3 and L4. It forms in the substance of psoas major, runs down in the groove between psoas and iliacus, passes under the inguinal ligament lateral to the femoral artery, and breaks up almost at once into branches for sartorius and all four heads of quadriceps. Remember its position in the femoral triangle: nerve, artery, vein, empty space, lymphatics — from lateral to medial."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "When the nerve fails",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Fascia"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Quadriceps femoris",
+            "Hip flexors"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Cut the femoral nerve and the knee cannot be extended, the knee jerk disappears, and sensation is lost over the front of the thigh and the medial side of the leg down to the medial malleolus. The patient walks by throwing the leg forward and locking the knee back with the hip, because a knee that will not extend collapses under body weight. Test the same reflex arc at the bedside and you are testing L3 and L4."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Peel the thigh open",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The dissection order to recite: skin and superficial fascia with the great saphenous vein in it, then fascia lata, then sartorius crossing the field, then rectus femoris, then the two vasti on either side, then vastus intermedius, then the femur. Learn the anterior thigh as those layers and every structure has an address."
+    }
+  ],
+  "gaps": [
+    "No tendon of the thigh is modelled. The quadriceps tendon and the patellar ligament — the two halves of the extensor mechanism and the thing the reflex hammer actually strikes — are taught by lighting the patella between the muscle and the tibia and describing them in narration.",
+    "No nerve of the lower limb exists as a model, so the femoral nerve is authored as a traced concept path from psoas major through iliacus and under the inguinal ligament to the muscles it supplies. Its root value and its branches are narration only.",
+    "There is no femoral artery or femoral vein in the catalog — the arterial supply of the quadriceps from the profunda femoris and its perforators is named, not shown, and the NAVEL order of the femoral triangle is described rather than displayed. This matters most for the separate Femoral triangle and Adductor canal entries, which this scene does not claim to cover.",
+    "The anterior inferior iliac spine, the linea aspera, the intertrochanteric line and the tibial tuberosity are sub-features of whole-bone meshes. They are taught by lighting the hip bone, the femur or the tibia and naming the feature. Authoring them as landmark anchors is the next obvious improvement, but the meshes were not measured in this run and an anchor placed by eye would be worse than none.",
+    "Articularis genu has no separate mesh, so it is described as the deep fibres of vastus intermedius rather than shown apart from it.",
+    "The suprapatellar bursa and the knee joint capsule are not modelled, so the relation of the bursa to the joint cavity is narrated only.",
+    "This scene does not cover Femur, Femoral triangle or Adductor canal. The femur, hip bone and tibia appear here only as the frame the muscle is stretched over, and sartorius appears as the boundary muscle rather than as the roof of the canal."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

@@ -1,0 +1,568 @@
+{
+  "schema": 2,
+  "id": "embryology__cardiovascular-development__heart-tube-formation",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Cardiovascular Development",
+  "structure": "Heart tube formation",
+  "covers": [
+    "Heart tube formation"
+  ],
+  "learning_goal": "Trace the heart from splanchnic mesoderm to a single beating tube: name the cardiogenic field, explain how lateral and cranio-caudal folding carry it into the thorax and fuse the two endocardial tubes into one, name the five segments of that tube in order with what each becomes, and say where the inflow and outflow of the tube connect.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "heart tube",
+      "heart development",
+      "cardiovascular development",
+      "cardiogenesis",
+      "week 3",
+      "week 4",
+      "embryonic folding",
+      "primitive heart",
+      "circulation"
+    ],
+    "terms": [
+      "heart tube",
+      "primitive heart tube",
+      "endocardial tube",
+      "endocardial heart tube",
+      "cardiogenic field",
+      "cardiogenic area",
+      "primary heart field",
+      "secondary heart field",
+      "cardiogenic mesoderm",
+      "splanchnic mesoderm",
+      "lateral plate mesoderm",
+      "somatic mesoderm",
+      "intraembryonic coelom",
+      "pericardial cavity",
+      "angioblastic cords",
+      "angiogenic cell clusters",
+      "vasculogenesis",
+      "buccopharyngeal membrane",
+      "oropharyngeal membrane",
+      "septum transversum",
+      "cranio-caudal folding",
+      "cephalocaudal folding",
+      "lateral folding",
+      "fusion of endocardial tubes",
+      "dorsal mesocardium",
+      "transverse pericardial sinus",
+      "cardiac jelly",
+      "myocardium",
+      "endocardium",
+      "epicardium",
+      "proepicardial organ",
+      "myoepicardial mantle",
+      "truncus arteriosus",
+      "conotruncus",
+      "bulbus cordis",
+      "conus cordis",
+      "primitive ventricle",
+      "primitive atrium",
+      "sinus venosus",
+      "right horn of sinus venosus",
+      "left horn of sinus venosus",
+      "aortic sac",
+      "aortic arches",
+      "dorsal aorta",
+      "vitelline vein",
+      "umbilical vein",
+      "common cardinal vein",
+      "day 22",
+      "first beat",
+      "ectopia cordis",
+      "cardiac looping",
+      "dextrocardia"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "cardiogenic_field",
+      "label": "The cardiogenic field — a horseshoe in front of the head",
+      "role": "context",
+      "group": "Where the heart starts",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "cardiogenic field",
+        "cardiogenic area",
+        "primary heart field",
+        "horseshoe",
+        "splanchnic mesoderm",
+        "lateral plate mesoderm",
+        "cranial to the buccopharyngeal membrane",
+        "week 3",
+        "day 18",
+        "day 19"
+      ],
+      "narration": "The heart begins in the third week as a horseshoe of splanchnic mesoderm lying in front of the buccopharyngeal membrane, above the head end of the embryo. Fix that position now, because everything that follows is the story of this horseshoe being carried down and folded together. The cells of the horseshoe are the primary heart field, and they are committed to cardiac muscle before the embryo has any recognisable heart at all."
+    },
+    {
+      "key": "endocardial_tubes",
+      "label": "Two endocardial tubes",
+      "role": "part",
+      "group": "Where the heart starts",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "terms": [
+        "endocardial tube",
+        "endocardial heart tube",
+        "angioblastic cords",
+        "angiogenic cell clusters",
+        "vasculogenesis",
+        "paired tubes",
+        "left and right",
+        "canalise"
+      ],
+      "narration": "Within the horseshoe, clusters of angiogenic cells hollow out and join into a pair of thin-walled endocardial tubes, one on each side. The heart is a paired organ before it is a single one. That fact matters clinically: everything about heart formation is the fusion of two things in the midline, and failure of fusion is the shape that the earliest cardiac malformations take."
+    },
+    {
+      "key": "pericardial_cavity",
+      "label": "The pericardial cavity — the space the heart is folded into",
+      "role": "part",
+      "group": "Where the heart starts",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "pericardial cavity",
+        "intraembryonic coelom",
+        "somatic mesoderm",
+        "splanchnic mesoderm",
+        "septum transversum",
+        "horseshoe cavity"
+      ],
+      "narration": "The intraembryonic coelom above the cardiogenic field becomes the pericardial cavity, and the septum transversum sits at its caudal edge. Splanchnic mesoderm forms the heart itself; somatic mesoderm forms the wall of the sac around it. This is why the visceral pericardium is on the heart and the parietal pericardium is on the sac — the two layers were never the same tissue."
+    },
+    {
+      "key": "craniocaudal_fold",
+      "label": "Cranio-caudal folding — the heart is swung under the head",
+      "role": "part",
+      "group": "The two foldings",
+      "layer": "organ",
+      "color": "#af601a",
+      "terms": [
+        "cranio-caudal folding",
+        "cephalocaudal folding",
+        "head fold",
+        "rapid brain growth",
+        "180 degree rotation",
+        "inversion",
+        "buccopharyngeal membrane",
+        "septum transversum",
+        "position reversal"
+      ],
+      "narration": "The brain grows fast and the head end of the embryo folds forward over the cardiogenic area. The heart tube is swung through roughly a hundred and eighty degrees, so it ends up below and behind the buccopharyngeal membrane instead of in front of it. The order along the axis is turned over as well. What began as pericardial cavity, then heart, then septum transversum now reads septum transversum, then heart, then pericardial cavity from below upwards. Every adult relation of the heart to the diaphragm and the mouth dates from this one movement."
+    },
+    {
+      "key": "lateral_fold",
+      "label": "Lateral folding — two tubes become one",
+      "role": "part",
+      "group": "The two foldings",
+      "layer": "organ",
+      "color": "#d68910",
+      "terms": [
+        "lateral folding",
+        "fusion of endocardial tubes",
+        "single heart tube",
+        "midline fusion",
+        "day 21",
+        "day 22",
+        "cranial to caudal fusion",
+        "cardia bifida",
+        "ectopia cordis"
+      ],
+      "narration": "At the same time the flat embryo folds inwards at both sides. The two endocardial tubes are pushed to the midline and zip together from the cranial end backwards, giving one tube by about day twenty-two. Two clinical points hang on this. If the lateral folds fail to bring the tubes together, the embryo has two separate hearts — cardia bifida, seen experimentally and incompatible with life. If the ventral body wall fails to close over the fused tube, the heart lies outside the chest as ectopia cordis."
+    },
+    {
+      "key": "tube_walls",
+      "label": "Three layers, and the jelly between them",
+      "role": "part",
+      "group": "The tube itself",
+      "layer": "organ",
+      "color": "#7d3c98",
+      "terms": [
+        "endocardium",
+        "cardiac jelly",
+        "myocardium",
+        "myoepicardial mantle",
+        "epicardium",
+        "visceral pericardium",
+        "proepicardial organ",
+        "sinus venosus",
+        "extracellular matrix"
+      ],
+      "narration": "Cut the tube across and there are three coats. The endocardial tube itself becomes endocardium. Around it the splanchnic mesoderm thickens into myocardium. Between them lies a thick layer of extracellular matrix called cardiac jelly. Do not treat the jelly as packing — it is where the endocardial cushions will form, and therefore where the atrioventricular valves and part of the septa come from. The outer epicardium arrives last and from elsewhere, migrating over the tube from the proepicardial organ near the sinus venosus."
+    },
+    {
+      "key": "dorsal_mesocardium",
+      "label": "Dorsal mesocardium — the mesentery that has to break",
+      "role": "part",
+      "group": "The tube itself",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "dorsal mesocardium",
+        "ventral mesocardium",
+        "transverse pericardial sinus",
+        "suspended in the pericardial cavity",
+        "breakdown",
+        "free to loop"
+      ],
+      "narration": "The tube hangs in the pericardial cavity by a dorsal mesocardium; the ventral mesocardium never really forms. The dorsal mesocardium then breaks down in its middle, leaving the tube attached only at its two ends and free in between. The hole it leaves is the transverse pericardial sinus, the space the surgeon passes a finger through behind the aorta and pulmonary trunk. The breakdown is also the permission slip for looping — a tube tied down along its whole length cannot bend."
+    },
+    {
+      "key": "seg_truncus",
+      "label": "Truncus arteriosus — the outflow",
+      "role": "part",
+      "group": "Five segments",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "terms": [
+        "truncus arteriosus",
+        "conotruncus",
+        "aortic sac",
+        "aortic arches",
+        "ascending aorta",
+        "pulmonary trunk",
+        "outflow tract",
+        "neural crest"
+      ],
+      "narration": "The most cranial segment is the truncus arteriosus. It opens into the aortic sac and from there into the aortic arch arteries. Later it is divided by a spiral septum into the ascending aorta and the pulmonary trunk. Remember that neural crest cells come into this segment, because that is why arch defects and outflow tract defects appear in the same child."
+    },
+    {
+      "key": "seg_bulbus",
+      "label": "Bulbus cordis — the right ventricle and both outflow tracts",
+      "role": "part",
+      "group": "Five segments",
+      "layer": "organ",
+      "color": "#eb984e",
+      "terms": [
+        "bulbus cordis",
+        "conus cordis",
+        "conus arteriosus",
+        "right ventricle",
+        "trabeculated part of right ventricle",
+        "aortic vestibule",
+        "smooth outflow tract"
+      ],
+      "narration": "Next comes the bulbus cordis, and it is the segment students most often get wrong. Its proximal third becomes the trabeculated part of the right ventricle. Its middle, the conus cordis, becomes the smooth outflow tract of both ventricles — the conus arteriosus on the right and the aortic vestibule on the left. So the right ventricle is not simply a mirror of the left; most of it is bulbus, while the left ventricle is almost all primitive ventricle."
+    },
+    {
+      "key": "seg_ventricle",
+      "label": "Primitive ventricle — the left ventricle",
+      "role": "part",
+      "group": "Five segments",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "primitive ventricle",
+        "left ventricle",
+        "trabeculated part of left ventricle",
+        "interventricular sulcus",
+        "muscular interventricular septum"
+      ],
+      "narration": "The primitive ventricle becomes the trabeculated part of the left ventricle. The groove between it and the bulbus cordis is where the muscular interventricular septum will grow up, which is the reason a muscular ventricular septal defect sits exactly there."
+    },
+    {
+      "key": "seg_atrium",
+      "label": "Primitive atrium — the rough parts of both atria",
+      "role": "part",
+      "group": "Five segments",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "primitive atrium",
+        "trabeculated atrium",
+        "pectinate muscles",
+        "right auricle",
+        "left auricle",
+        "crista terminalis",
+        "atrial appendage"
+      ],
+      "narration": "The primitive atrium gives the rough, pectinate-muscled parts of both atria — in the adult, the two auricles. Everything smooth-walled in an atrium came from somewhere else: from the sinus venosus on the right and from the absorbed pulmonary vein on the left."
+    },
+    {
+      "key": "seg_sinus",
+      "label": "Sinus venosus — the inflow, and where the node is born",
+      "role": "part",
+      "group": "Five segments",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "terms": [
+        "sinus venosus",
+        "right horn of sinus venosus",
+        "left horn of sinus venosus",
+        "sinus venarum",
+        "smooth part of right atrium",
+        "coronary sinus",
+        "oblique vein of left atrium",
+        "crista terminalis",
+        "sinuatrial node",
+        "vitelline vein",
+        "umbilical vein",
+        "common cardinal vein"
+      ],
+      "narration": "The most caudal segment is the sinus venosus, and three pairs of veins drain into it: vitelline, umbilical and common cardinal. Its right horn is absorbed into the right atrium as the smooth sinus venarum, and the crista terminalis is the surviving seam between smooth and rough. Its left horn shrinks to the coronary sinus and the oblique vein of the left atrium. The sinuatrial node develops in this territory, which is why the pacemaker of the adult heart ends up high in the right atrium near the opening of the superior vena cava."
+    },
+    {
+      "key": "flow_direction",
+      "label": "Which way the blood runs through the tube",
+      "role": "part",
+      "group": "The first beat",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "terms": [
+        "day 22",
+        "first beat",
+        "unidirectional flow",
+        "day 24",
+        "caudal to cranial",
+        "peristaltic contraction",
+        "sinus venosus to truncus arteriosus",
+        "aortic arches",
+        "dorsal aorta"
+      ],
+      "narration": "The tube starts contracting at about day twenty-two and moves blood in one direction by about day twenty-four, which makes the heart the first organ in the body to work. Flow enters caudally at the sinus venosus and leaves cranially through the truncus arteriosus into the aortic arches. Name the segments in that order — sinus venosus, primitive atrium, primitive ventricle, bulbus cordis, truncus arteriosus — and you have both the anatomy and the direction of flow in one list."
+    },
+    {
+      "key": "growth_mismatch",
+      "label": "Why the tube must bend",
+      "role": "part",
+      "group": "The first beat",
+      "layer": "organ",
+      "color": "#884ea0",
+      "terms": [
+        "cardiac looping",
+        "day 23",
+        "grows faster than the pericardial cavity",
+        "fixed at both ends",
+        "secondary heart field",
+        "D-loop"
+      ],
+      "narration": "The tube elongates faster than the pericardial cavity that holds it, and it is anchored at both ends by the arteries above and the veins below. A lengthening tube fixed at both ends and growing in a box has only one option, which is to bend. Cells added from the secondary heart field at both poles keep that elongation going. This is the point at which the next scene, cardiac looping, takes over."
+    },
+    {
+      "key": "clinical_early",
+      "label": "What goes wrong at this stage",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "ectopia cordis",
+        "cardia bifida",
+        "pentalogy of Cantrell",
+        "ventral body wall defect",
+        "teratogen",
+        "week 3",
+        "week 4",
+        "critical period",
+        "maternal diabetes",
+        "rubella",
+        "retinoic acid"
+      ],
+      "narration": "Two malformations belong to tube formation itself. Failure of the lateral folds to bring the tubes together gives cardia bifida. Failure of the ventral body wall to close over the fused tube gives ectopia cordis, where the heart beats outside the chest, and when it comes with a sternal cleft, a diaphragmatic and pericardial defect and an omphalocele it is the pentalogy of Cantrell. Note the timing rather than the rarity: the heart is being built in weeks three and four, often before a woman knows she is pregnant, which is why teratogen counselling and folate matter before conception and not after."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The heart starts above the head",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where the heart starts"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cardiogenic_field",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Look down on the flat trilaminar disc in the third week. In front of the buccopharyngeal membrane there is a horseshoe of splanchnic mesoderm — the cardiogenic field. Inside it, angiogenic cells hollow out into a pair of endocardial tubes, and the coelom above them will be the pericardial cavity. Nothing about this picture looks like a heart yet, and it is on the wrong side of the head."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Two foldings, one tube in the right place",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two foldings"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:embryonic-folding",
+          "path": [
+            "cardiogenic_field",
+            "craniocaudal_fold",
+            "lateral_fold",
+            "endocardial_tubes"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "craniocaudal_fold",
+          "to": "pericardial_cavity",
+          "kind": "inverts the order of the field, the cavity and the septum transversum, giving"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Now fold the embryo twice at once. The head fold swings the cardiogenic area through a hundred and eighty degrees so it comes to lie under the pharynx and above the septum transversum, and the order of the structures along the axis is reversed with it. The lateral folds push the two endocardial tubes together in the midline and they fuse from the head end back, giving a single tube by about day twenty-two. The heart did not migrate. The embryo folded around it."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Cut the tube across",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The tube itself"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tube_walls",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "dorsal_mesocardium",
+          "to": "growth_mismatch",
+          "kind": "breaks down in its middle, freeing the tube for"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Cut across the new tube. Endocardium inside, myocardium outside, cardiac jelly between them — and that jelly is not filler, it is the future endocardial cushions and therefore the future atrioventricular valves. The epicardium is not there yet; it crawls over the tube later from the proepicardial organ. The tube hangs by a dorsal mesocardium which then breaks down in the middle, leaving it fixed only at its two ends and leaving behind the transverse pericardial sinus."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Five segments, caudal to cranial",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Clinical"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Five segments"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:blood",
+          "path": [
+            "seg_sinus",
+            "seg_atrium",
+            "seg_ventricle",
+            "seg_bulbus",
+            "seg_truncus"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "seg_ventricle",
+            "seg_bulbus"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Follow a drop of blood from the tail end forwards and you name the five segments in order. Sinus venosus, taking the vitelline, umbilical and common cardinal veins, giving the smooth part of the right atrium and the coronary sinus. Primitive atrium, giving the rough pectinate parts of both atria. Primitive ventricle, giving the trabeculated left ventricle. Bulbus cordis, giving the trabeculated right ventricle and the smooth outflow of both. Truncus arteriosus, giving the ascending aorta and the pulmonary trunk. Learn the list in the direction of flow and you never have to memorise it twice."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The first beat, and the bend that follows",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The first beat"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "flow_direction",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "growth_mismatch",
+          "to": "seg_bulbus",
+          "kind": "a tube elongating inside a fixed cavity must bend, carrying"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "lateral_fold",
+          "to": "clinical_early",
+          "kind": "failure of fusion or of ventral wall closure gives"
+        }
+      ],
+      "narration": "The tube contracts from about day twenty-two and moves blood one way by day twenty-four, making the heart the first working organ. Then it outgrows its cavity while staying tied at both ends, and it bends — that is looping, and it is the next scene. Two things can already have gone wrong: the tubes may never have fused, giving cardia bifida, or the body wall may not have closed over them, giving ectopia cordis. Both belong to weeks three and four, before most pregnancies are recognised."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy for this structure, so deferred_modes carries diagram and 3d_anatomy. A 3d re-authoring becomes defensible the day a provider holds staged embryonic cardiac geometry; nothing in available-meshes.json does today, and this scene deliberately does not resolve adult heart meshes to stand in for an embryonic tube.",
+    "Status is 'planned'. Fifteen regions, five beats, ops and narration complete, but no SVG artwork exists so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a dorsal view of the week-3 disc with the cardiogenic horseshoe drawn cranial to the buccopharyngeal membrane; a paired before-and-after sagittal pair showing cranio-caudal folding with the septum transversum, pericardial cavity and heart labelled in both, so the inversion is visible rather than asserted; a series of three transverse sections showing the two endocardial tubes approaching and fusing; a transverse section of the fused tube showing endocardium, cardiac jelly, myocardium and the dorsal mesocardium before and after its breakdown; and a labelled five-segment tube drawn caudal to cranial with the adult derivative printed beside each segment.",
+    "The five-segment colour key must be identical in every panel and must be reused unchanged in the cardiac looping and septation scenes. The whole point of the segment list is that it survives looping — the same colours moving into new positions is the teaching, and re-colouring between scenes destroys it.",
+    "Beat 2 traces concept:embryonic-folding and beat 4 traces concept:blood. Neither subject is a drawn region: the first is a movement of the whole embryo over time and the second is the direction of flow through the tube.",
+    "Beat 3 authors PEEL_LAYER inward on the organ layer to strip the tube wall coat by coat. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because layer-by-layer removal is exactly how cardiac jelly should be introduced.",
+    "'Cardiac looping' is NOT claimed in covers[]. Looping is named at the end only as the consequence of the growth mismatch, and the D-loop, the position of the chambers and dextrocardia belong to that entry.",
+    "'Septation of heart' is NOT claimed. The endocardial cushions, the septum primum and secundum, the spiral aorticopulmonary septum and the septal defects are named here only as the future of cardiac jelly and of the truncus, and belong to that entry.",
+    "'Fetal circulation' is NOT claimed. The vitelline, umbilical and cardinal veins are named as the tributaries of the sinus venosus; the shunts and the changes at birth belong to that entry.",
+    "Aortic arch artery remodelling is deliberately absent. The truncus is followed only as far as the aortic sac and the arch arteries; the fates of the six pairs sit with the pharyngeal apparatus and with later cardiovascular entries, and appear here in match.terms only so a highlighted term still reaches this scene.",
+    "Day numbers are the standard teaching approximations — tubes fusing about day 22, unidirectional flow about day 24. Texts differ by a day or two either way and the narration gives them as approximations.",
+    "The epicardium is attributed to the proepicardial organ rather than to the myoepicardial mantle. Older texts derive all three coats from the same splanchnic mesoderm in situ; the migratory origin is the current account and the difference is worth one sentence, not a beat."
+  ]
+}

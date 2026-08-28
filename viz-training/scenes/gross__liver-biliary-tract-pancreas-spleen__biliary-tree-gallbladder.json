@@ -1,0 +1,681 @@
+{
+  "schema": 2,
+  "id": "gross__liver-biliary-tract-pancreas-spleen__biliary-tree-gallbladder",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Liver, Biliary Tract, Pancreas & Spleen",
+  "structure": "Biliary tree & gallbladder",
+  "covers": [
+    "Biliary tree & gallbladder"
+  ],
+  "learning_goal": "Trace bile from the liver to the duodenum in the correct order, name the boundaries of Calot's triangle and what is tied inside it, place the gallbladder on the body surface and elicit Murphy's sign, and predict from the level of an obstruction whether the patient will have biliary colic, cholecystitis, obstructive jaundice, cholangitis or gallstone pancreatitis.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "biliary tree",
+      "gallbladder",
+      "extrahepatic biliary system",
+      "bile",
+      "hepatobiliary",
+      "gallstones",
+      "cholelithiasis",
+      "cholecystitis",
+      "obstructive jaundice",
+      "cholangitis",
+      "cholecystectomy",
+      "ERCP",
+      "right hypochondrium",
+      "abdomen",
+      "foregut derivatives",
+      "gallstone pancreatitis"
+    ],
+    "terms": [
+      "gallbladder",
+      "gall bladder",
+      "biliary tree",
+      "extrahepatic biliary apparatus",
+      "bile",
+      "bile duct",
+      "common bile duct",
+      "choledochus",
+      "common hepatic duct",
+      "right hepatic duct",
+      "left hepatic duct",
+      "cystic duct",
+      "spiral valve of Heister",
+      "fundus",
+      "body of gallbladder",
+      "neck of gallbladder",
+      "Hartmann's pouch",
+      "Calot's triangle",
+      "hepatocystic triangle",
+      "cystic artery",
+      "right hepatic artery",
+      "gallbladder fossa",
+      "ninth costal cartilage",
+      "transpyloric plane",
+      "Murphy's sign",
+      "Boas' sign",
+      "biliary colic",
+      "cholelithiasis",
+      "cholecystitis",
+      "acute cholecystitis",
+      "chronic cholecystitis",
+      "empyema of the gallbladder",
+      "mucocoele",
+      "choledocholithiasis",
+      "obstructive jaundice",
+      "post-hepatic jaundice",
+      "pale stools",
+      "dark urine",
+      "pruritus",
+      "Charcot's triad",
+      "Reynolds pentad",
+      "ascending cholangitis",
+      "ampulla of Vater",
+      "hepatopancreatic ampulla",
+      "major duodenal papilla",
+      "sphincter of Oddi",
+      "sphincter of Boyden",
+      "pancreatic duct",
+      "gallstone pancreatitis",
+      "cholecystokinin",
+      "CCK",
+      "concentrates bile",
+      "bile salts",
+      "enterohepatic circulation",
+      "terminal ileum",
+      "cholesterol stones",
+      "pigment stones",
+      "mixed stones",
+      "sickle cell disease",
+      "haemolysis",
+      "fat forty female fertile",
+      "porcelain gallbladder",
+      "gallbladder carcinoma",
+      "Mirizzi syndrome",
+      "gallstone ileus",
+      "cholecystoduodenal fistula",
+      "Rigler's triad",
+      "Courvoisier's law",
+      "carcinoma of the head of the pancreas",
+      "cholecystectomy",
+      "critical view of safety",
+      "bile duct injury",
+      "ERCP",
+      "sphincterotomy",
+      "T-tube",
+      "epigastric pain",
+      "right shoulder tip pain",
+      "phrenic nerve",
+      "referred pain",
+      "portal triad",
+      "hepatoduodenal ligament",
+      "free edge of the lesser omentum",
+      "epiploic foramen",
+      "duct to the right artery to the left vein behind"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.3
+  },
+  "structures": [
+    {
+      "key": "gallbladder",
+      "name": "gallbladder",
+      "label": "Gallbladder",
+      "role": "part",
+      "group": "Biliary tree",
+      "layer": "organ",
+      "color": "#7d8c1f",
+      "refs": {
+        "bodyparts3d": "FMA7202"
+      },
+      "terms": [
+        "gallbladder",
+        "gall bladder",
+        "fundus",
+        "body of gallbladder",
+        "neck of gallbladder",
+        "Hartmann's pouch",
+        "gallbladder fossa",
+        "concentrates bile",
+        "Murphy's sign",
+        "cholecystitis",
+        "mucocoele",
+        "empyema of the gallbladder",
+        "porcelain gallbladder"
+      ],
+      "narration": "A pear-shaped sac of about fifty millilitres lying in a fossa on the visceral surface of the right lobe of the liver. It has three parts and each has its own clinical meaning. The fundus projects beyond the inferior border of the liver and touches the anterior abdominal wall — it is the only part you can reach on examination. The body lies against the first part of the duodenum and the transverse colon, which is why an inflamed gallbladder can erode into either. The neck narrows and turns backwards into the cystic duct, and its dilated posterior wall is Hartmann's pouch, where stones lodge. The gallbladder does not make bile; it stores it and concentrates it about ten-fold by absorbing water and salt, which is exactly why its bile precipitates stones and the liver's bile does not."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — where bile is made",
+      "role": "part",
+      "group": "Biliary tree",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "hepatic",
+        "right hepatic duct",
+        "left hepatic duct",
+        "common hepatic duct",
+        "porta hepatis",
+        "bile canaliculi",
+        "five hundred millilitres of bile",
+        "intrahepatic ducts",
+        "gallbladder fossa",
+        "cirrhosis",
+        "jaundice"
+      ],
+      "narration": "Hepatocytes secrete around half a litre of bile a day into canaliculi that drain, ever larger, towards the porta hepatis. There the right and left hepatic ducts emerge and unite to form the common hepatic duct — that union is the start of the extrahepatic biliary tree. Remember that bile leaves the liver at the porta on the visceral surface, in the same slit through which the portal vein and hepatic artery enter, so anything that clamps the inflow also clamps the outflow of bile."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — the bile duct's partner at the ampulla",
+      "role": "part",
+      "group": "Biliary tree",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreatic duct",
+        "duct of Wirsung",
+        "ampulla of Vater",
+        "hepatopancreatic ampulla",
+        "sphincter of Oddi",
+        "major duodenal papilla",
+        "gallstone pancreatitis",
+        "head of the pancreas",
+        "ERCP"
+      ],
+      "narration": "The main pancreatic duct runs the length of the gland and turns down in its head to meet the bile duct. The two join in a short common channel — the hepatopancreatic ampulla, the ampulla of Vater — which opens on the major duodenal papilla in the second part of the duodenum, guarded by the sphincter of Oddi. That shared last centimetre is the anatomical reason a gallstone impacted at the ampulla causes acute pancreatitis as well as jaundice: one stone blocks two systems. It is also the route the endoscopist takes at ERCP, cannulating the papilla to reach either duct."
+    },
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum — where bile arrives",
+      "role": "part",
+      "group": "Biliary tree",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "second part of the duodenum",
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "cholecystokinin",
+        "CCK",
+        "fatty meal",
+        "first part of the duodenum",
+        "cholecystoduodenal fistula",
+        "gallstone ileus",
+        "Rigler's triad",
+        "epiploic foramen"
+      ],
+      "narration": "The duodenum is both the trigger and the destination. Fat and protein arriving in its lumen release cholecystokinin from the mucosa; that hormone contracts the gallbladder and relaxes the sphincter of Oddi, so bile is delivered when there is fat to emulsify and not before. Anatomically the first part lies against the body of the gallbladder and forms the lower boundary of the epiploic foramen, and the second part receives the ampulla on its posteromedial wall. Adhesion between an inflamed gallbladder and that first part can ulcerate into a cholecystoduodenal fistula, letting a large stone pass into the gut and impact at the ileocaecal valve — gallstone ileus, with air in the biliary tree on the plain film."
+    },
+    {
+      "key": "cha",
+      "name": "common hepatic artery",
+      "label": "Hepatic artery — parent of the cystic artery",
+      "role": "part",
+      "group": "Calot's triangle",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14771"
+      },
+      "terms": [
+        "common hepatic artery",
+        "hepatic artery proper",
+        "right hepatic artery",
+        "cystic artery",
+        "Calot's triangle",
+        "hepatocystic triangle",
+        "cholecystectomy",
+        "critical view of safety",
+        "Moynihan's hump",
+        "caterpillar hump"
+      ],
+      "narration": "From the coeliac trunk the common hepatic artery becomes the hepatic artery proper and divides at the porta into right and left. The cystic artery is almost always a branch of the RIGHT hepatic artery, and it reaches the gallbladder by crossing Calot's triangle. That is the artery clipped at cholecystectomy, and mistaking a tortuous right hepatic artery — the caterpillar hump — for the cystic artery is one of the classic ways to devascularise a liver. In the free edge of the lesser omentum the artery lies to the LEFT of the bile duct, with the portal vein behind them both."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk",
+      "role": "context",
+      "group": "Calot's triangle",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "T12",
+        "foregut artery",
+        "common hepatic artery",
+        "referred pain",
+        "epigastric pain"
+      ],
+      "narration": "The gallbladder and bile ducts are foregut derivatives, so their artery comes from the coeliac trunk at T12 and their visceral afferents run back with the greater splanchnic nerves to T5 to T9. That is why the first pain of biliary colic is felt in the epigastrium, not in the right hypochondrium — the pain only moves to the right upper quadrant when inflammation reaches the parietal peritoneum."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein — forms the portal vein behind the duct",
+      "role": "context",
+      "group": "Portal relations",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal vein",
+        "confluence",
+        "neck of the pancreas",
+        "portal triad",
+        "vein behind"
+      ],
+      "narration": "Behind the neck of the pancreas this vein joins the splenic vein to become the portal vein, which then runs up behind the bile duct in the free edge of the lesser omentum. It is drawn here only to fix the third element of the triad: duct to the right, artery to the left, vein behind both."
+    },
+    {
+      "key": "splenic_v",
+      "name": "splenic vein",
+      "label": "Splenic vein",
+      "role": "context",
+      "group": "Portal relations",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "portal vein",
+        "confluence",
+        "behind the pancreas"
+      ],
+      "narration": "Runs behind the body of the pancreas to the confluence. Its only job in this scene is to show where the portal vein begins, so that the bile duct's course in front of it makes sense."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — behind the epiploic foramen",
+      "role": "context",
+      "group": "Portal relations",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "epiploic foramen",
+        "foramen of Winslow",
+        "Pringle manoeuvre",
+        "lesser sac",
+        "hepatoduodenal ligament"
+      ],
+      "narration": "The cava lies immediately behind the free edge of the lesser omentum, which is what makes the epiploic foramen a real door: the free edge with the triad in front, the cava behind, the caudate lobe above and the first part of the duodenum below. A finger in that foramen, pinching the free edge, occludes the bile duct along with the inflow — the Pringle manoeuvre, and the reason a surgeon can control the triad with one hand."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach — the lesser omentum runs from here",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "lesser omentum",
+        "hepatogastric ligament",
+        "lesser curvature",
+        "hepatoduodenal ligament",
+        "differential of epigastric pain",
+        "peptic ulcer"
+      ],
+      "narration": "The lesser omentum runs from the lesser curvature of the stomach to the liver, and its thickened right free edge is the hepatoduodenal ligament carrying the bile duct. The stomach is also the main differential: peptic ulcer pain and biliary colic both begin in the epigastrium, and it is the relation to fatty food, the radiation to the right scapula and the tenderness under the right costal margin that separate them."
+    },
+    {
+      "key": "rib9",
+      "name": "right ninth rib",
+      "label": "Right ninth rib — the surface marking",
+      "role": "context",
+      "group": "Surface markings",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA8364"
+      },
+      "terms": [
+        "right ninth rib",
+        "ninth costal cartilage",
+        "transpyloric plane",
+        "Murphy's point",
+        "lateral border of rectus abdominis",
+        "Murphy's sign",
+        "Boas' sign",
+        "fundus of gallbladder"
+      ],
+      "narration": "The fundus of the gallbladder lies where the lateral border of the right rectus abdominis crosses the ninth costal cartilage, close to the transpyloric plane at L1. Press there, ask the patient to breathe in, and the descending inflamed gallbladder meets your fingers and the breath catches — Murphy's sign. Tenderness felt below the right scapula, Boas' sign, comes from the same irritation referred through the lower intercostal nerves."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — the route to the shoulder tip",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "phrenic nerve",
+        "C3 C4 C5",
+        "right shoulder tip pain",
+        "referred pain",
+        "descends with inspiration",
+        "laparoscopy"
+      ],
+      "narration": "The gallbladder sits under the right dome and descends with it on inspiration, which is what makes Murphy's sign possible at all. When inflammation or gas reaches the underside of the diaphragm the phrenic nerve carries it to C3, C4 and C5, and the patient reports pain at the tip of the right shoulder — the same mechanism that causes shoulder pain after a laparoscopic cholecystectomy."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Find the gallbladder on the patient",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Portal relations"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gallbladder",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rib9",
+          "to": "gallbladder",
+          "kind": "surface marking of the fundus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "gallbladder",
+          "kind": "descends with inspiration"
+        }
+      ],
+      "narration": "Start on the surface, because this is an organ you examine before you image it. The fundus of the gallbladder lies at the tip of the ninth costal cartilage, where the lateral border of the right rectus abdominis crosses the costal margin — near the transpyloric plane at L1. The rest of the organ hides behind the liver in its fossa on the visceral surface. Because the liver and gallbladder both hang from the diaphragm, they descend on inspiration; place your fingers under the right costal margin at that point, ask the patient to take a deep breath, and if the gallbladder is inflamed the movement drives it onto your hand and the patient stops mid-breath. That is Murphy's sign, and its value is that it is positive in cholecystitis and negative in uncomplicated biliary colic."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Bile flows out, then bile flows back in",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Biliary tree"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:bile-storage",
+          "path": [
+            "liver",
+            "gallbladder"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:bile-release",
+          "path": [
+            "gallbladder",
+            "pancreatic_duct",
+            "duodenum"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gallbladder",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Learn the order of the tree once and it never leaves you. Right and left hepatic ducts leave the porta hepatis and unite as the common hepatic duct. The cystic duct comes off the gallbladder and joins it, and from that junction downwards the tube is called the common bile duct. The bile duct runs in the free edge of the lesser omentum, then behind the first part of the duodenum, then in a groove on the back of the head of the pancreas, and finally meets the main pancreatic duct in the ampulla of Vater to open on the major duodenal papilla. Now the flow. Between meals the sphincter of Oddi is shut, so bile leaving the liver takes the only open path — up the cystic duct into the gallbladder, where it is concentrated tenfold. When fat reaches the duodenum, cholecystokinin contracts the gallbladder and relaxes the sphincter, and concentrated bile is emptied down the same cystic duct into the bile duct and out at the papilla. The cystic duct is therefore a two-way street, and its spiral valve of Heister keeps it patent whichever way bile is moving. Ninety-five per cent of the bile salts are then reabsorbed in the terminal ileum and returned to the liver — the enterohepatic circulation, which is why ileal resection or Crohn's disease causes fat malabsorption and gallstones."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 3,
+      "title": "Calot's triangle and the free edge",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Biliary tree"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Calot's triangle"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Portal relations"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cha",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cha",
+          "to": "gallbladder",
+          "kind": "cystic artery crosses the triangle"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "smv",
+          "to": "splenic_v",
+          "kind": "unite to form the portal vein"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ivc",
+          "to": "duodenum",
+          "kind": "boundaries of the epiploic foramen"
+        }
+      ],
+      "narration": "Two arrangements are asked about again and again. First, Calot's triangle — the hepatocystic triangle — bounded by the cystic duct below and laterally, the common hepatic duct medially, and the inferior surface of the liver above. Inside it lie the cystic artery, the cystic lymph node of Lund and often the right hepatic artery. Every laparoscopic cholecystectomy dissects this triangle until only two structures are seen entering the gallbladder — the critical view of safety — because clipping what you assume rather than what you see is how the common bile duct gets divided. Second, the free edge of the lesser omentum, the hepatoduodenal ligament: duct to the right, artery to the left, portal vein behind both. Behind that edge is the epiploic foramen, with the inferior vena cava behind, the caudate lobe above and the first part of the duodenum below."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Where the stone stops decides the disease",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Biliary tree"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Biliary tree"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:gallstone",
+          "path": [
+            "gallbladder",
+            "pancreatic_duct",
+            "duodenum"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "gallbladder",
+            "pancreatic_duct"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        }
+      ],
+      "narration": "One stone, four different patients, and the difference is only where it lodges. Impacted in Hartmann's pouch or the cystic duct and then falling back: the gallbladder contracts against a closed outlet and the patient gets biliary colic — severe constant epigastric or right upper quadrant pain after a fatty meal, lasting hours, with no fever and no jaundice. Impacted and staying there: the trapped bile inflames the wall and you have acute cholecystitis — the same pain plus fever, right upper quadrant tenderness and a positive Murphy's sign, still without jaundice because the bile duct itself is open. If the obstruction stays sterile the gallbladder fills with mucus as a mucocoele; if it becomes infected, an empyema. Passed into the common bile duct: choledocholithiasis, and now bile cannot reach the gut at all — jaundice, pale stools, dark urine and itching, with a conjugated bilirubin and a raised alkaline phosphatase. Add infection behind that obstruction and it is ascending cholangitis: Charcot's triad of pain, fever with rigors and jaundice, becoming Reynolds pentad with confusion and shock. Impacted at the ampulla, where bile duct and pancreatic duct share a channel: bile refluxes into the pancreas and you have gallstone pancreatitis — which is why every patient with pancreatitis needs an ultrasound of the gallbladder."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "The neighbours it damages",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "gallbladder",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gallbladder",
+          "to": "duodenum",
+          "kind": "cholecystoduodenal fistula"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gallbladder",
+          "to": "liver",
+          "kind": "lies in the gallbladder fossa"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "gallbladder",
+          "to": "stomach",
+          "kind": "shared epigastric pain"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "The gallbladder's relations are its complications. Above and behind, the liver: the fossa is bare of peritoneum and cystic veins drain straight into the liver substance, which is why gallbladder carcinoma invades segments four and five early and why the gallbladder can be removed without a vascular reconstruction. In front, the anterior abdominal wall at the fundus, which is what you palpate. Below and behind, the first part of the duodenum and the transverse colon: chronic inflammation can fuse the gallbladder to either and a stone can ulcerate through, giving gallstone ileus with Rigler's triad on the abdominal film — small bowel obstruction, gas in the biliary tree and an ectopic stone. Medially, the common hepatic duct: a large stone in Hartmann's pouch can compress it from outside and cause jaundice without ever entering the duct — Mirizzi syndrome. And through the diaphragm above, the phrenic nerve, carrying the irritation to the right shoulder tip."
+    },
+    {
+      "mode": "comparison",
+      "beat": 6,
+      "title": "Reading the jaundice back to its level",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Biliary tree"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Calot's triangle"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "gallbladder",
+            "liver"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "duodenum",
+          "kind": "the shared ampulla"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pancreatic_duct",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Finish with the exam favourite. In a jaundiced patient, feel for the gallbladder. Courvoisier's law says that a palpable, non-tender gallbladder in a jaundiced patient is unlikely to be due to stones — because stones imply years of chronic inflammation and a shrunken fibrotic gallbladder that cannot distend. So a distended painless gallbladder points instead to obstruction of the bile duct from outside by a carcinoma of the head of the pancreas or of the ampulla. Learn the exceptions rather than the slogan: a stone in the bile duct with a previously healthy gallbladder, or a double pathology, will break the rule. And keep the levels straight, because the ultrasound report will describe them: intrahepatic duct dilatation alone means the block is at or above the porta, a dilated common bile duct with a normal pancreatic duct means the block is below the cystic duct but above the ampulla, and dilatation of both ducts — the double duct sign — means the block is at the head of the pancreas or the ampulla itself."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The ducts do not exist in the catalog. Searching all 934 entries for bile, biliary, cystic, choledoch, hepatic duct, ampulla, papilla and sphincter returns the gallbladder, the pancreatic duct and nothing else. So the common hepatic duct, the cystic duct, the right and left hepatic ducts and the common bile duct - the entire tree of this structure's name - are narrated and traced but cannot be drawn or clicked. This is why the scene is status:\"candidate\" and not \"ready\": the storage organ is real geometry, the plumbing is words. A student can learn the order of the tree from beat two and can point to the gallbladder, but cannot follow a duct with the cursor.",
+    "Bile itself is authored as concept:bile-storage and concept:bile-release, which is the declared abstraction for a path that is anatomy while its subject is not a model. The path walks liver to gallbladder, then gallbladder to pancreatic duct to duodenum. That is geometrically honest at every waypoint - each of those four is a real mesh in the right place - but the leg that the trace skips is precisely the cystic duct and the bile duct. The same is true of concept:gallstone in beat four.",
+    "The pancreatic duct is used as a member of the biliary group rather than as pancreatic anatomy, because it is the one mesh that reaches the ampulla. It genuinely ends where the bile duct ends, so it marks the destination correctly, but a student looking at it is seeing the pancreatic half of the common channel and not the biliary half. The label and the narration say this outright.",
+    "Calot's triangle cannot be shown as a triangle. Two of its three boundaries - the cystic duct and the common hepatic duct - have no mesh, so beat three teaches it against the hepatic artery and the gallbladder, which do exist, and names the boundaries in narration. The cystic artery has no mesh of its own either; it is taught through its parent, the common hepatic artery, under option (a).",
+    "No landmark anchors were authored. The fundus, Hartmann's pouch, the neck and the gallbladder fossa are all places ON the gallbladder mesh, and anchors in this corpus are measured on the actual geometry rather than typed in by eye. FMA7202 is not in the local decimated set, so nothing could be measured. Ingesting the gallbladder mesh locally would yield at least four anchors and would make beat one and beat five clickable rather than narrated.",
+    "The sphincter of Oddi, the major duodenal papilla and the second part of the duodenum are not separable - the duodenum is one model. Beat four therefore compares the gallbladder with the pancreatic duct to make the point about the shared channel, and the cross-section is authored on the duodenum as a whole. A papilla anchor on the duodenal mesh is the cheapest fix and is blocked by the same missing local geometry.",
+    "The peritoneum, the lesser omentum and the hepatoduodenal ligament have no meshes, the same absence recorded by the liver, peritoneum, pleura and pericardium scenes. The free edge and the epiploic foramen are taught in beat three as a relation between structures that do exist - the artery, the portal tributaries, the cava and the duodenum.",
+    "This scene does not claim to cover 'Pancreas' or 'Portal venous system' even though the pancreatic duct and both portal tributaries appear in it. They are here as the biliary tree's destination and as the third member of the triad, not as taught subjects."
+  ]
+}

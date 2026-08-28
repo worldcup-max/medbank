@@ -148,6 +148,24 @@
       "narration": "Where the whole limb finally drains. Behind the sternoclavicular joint the subclavian vein meets the internal jugular at the venous angle, and the lymph from the axilla joins the blood at exactly the same corner through the subclavian lymph trunk."
     },
     {
+      "key": "int_jugular",
+      "name": "right internal jugular vein",
+      "label": "Internal jugular vein",
+      "role": "context",
+      "group": "The vein",
+      "layer": "vessel",
+      "color": "#3a6f9e",
+      "refs": {
+        "bodyparts3d": "FMA4754"
+      },
+      "terms": [
+        "internal jugular vein",
+        "venous angle",
+        "right lymphatic duct"
+      ],
+      "narration": "The vein that comes down the neck inside the carotid sheath. Behind the sternoclavicular joint it meets the subclavian vein at the venous angle to form the brachiocephalic vein. That corner is where the lymphatic ducts empty — thoracic duct on the left, right lymphatic duct on the right — so the whole lymph of the body rejoins the blood at a junction you can point to."
+    },
+    {
       "key": "rib1",
       "name": "right first rib",
       "label": "1st rib — where the artery is born",

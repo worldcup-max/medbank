@@ -1,0 +1,698 @@
+{
+  "schema": 2,
+  "id": "gross__leg-foot__ankle-joint",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Leg & Foot",
+  "structure": "Ankle joint",
+  "covers": [
+    "Ankle joint"
+  ],
+  "learning_goal": "Describe the ankle as a mortise and tenon hinge, name what makes each wall of the mortise, explain why the joint is stable in dorsiflexion and loose in plantarflexion, and use that to say why an ankle is nearly always sprained in inversion and which ligament goes first.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "ankle",
+      "ankle joint",
+      "leg",
+      "foot",
+      "lower limb",
+      "joints",
+      "sprain",
+      "fracture",
+      "gait",
+      "mortise",
+      "subtalar joint"
+    ],
+    "terms": [
+      "ankle joint",
+      "talocrural joint",
+      "mortise",
+      "tenon",
+      "hinge joint",
+      "synovial joint",
+      "trochlea of talus",
+      "body of talus",
+      "neck of talus",
+      "head of talus",
+      "medial malleolus",
+      "lateral malleolus",
+      "inferior tibiofibular joint",
+      "syndesmosis",
+      "interosseous membrane",
+      "deltoid ligament",
+      "medial collateral ligament of ankle",
+      "lateral collateral ligament of ankle",
+      "anterior talofibular ligament",
+      "ATFL",
+      "calcaneofibular ligament",
+      "posterior talofibular ligament",
+      "dorsiflexion",
+      "plantarflexion",
+      "close packed position",
+      "inversion",
+      "eversion",
+      "subtalar joint",
+      "talocalcaneal joint",
+      "talonavicular joint",
+      "inversion sprain",
+      "sprained ankle",
+      "Pott's fracture",
+      "bimalleolar fracture",
+      "trimalleolar fracture",
+      "avascular necrosis of talus",
+      "avascular necrosis",
+      "flexor retinaculum of ankle",
+      "tarsal tunnel",
+      "tibialis posterior",
+      "fibularis longus",
+      "peroneus longus",
+      "calcaneal tendon",
+      "Achilles tendon",
+      "tendo calcaneus"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "talus",
+      "name": "right talus",
+      "label": "Talus",
+      "role": "part",
+      "group": "The joint",
+      "layer": "bone",
+      "color": "#f2e8cf",
+      "refs": {
+        "bodyparts3d": "FMA24482"
+      },
+      "terms": [
+        "talus",
+        "trochlea of talus",
+        "body of talus",
+        "neck of talus",
+        "head of talus",
+        "tenon",
+        "avascular necrosis"
+      ],
+      "narration": "The talus is the tenon of the joint — the block that sits inside the mortise. Its upper surface, the trochlea, is a pulley shaped like a segment of a cylinder, and it is wider in front than behind. The talus has a body, a neck and a head, and no muscle attaches to any of them. Every bit of its blood supply enters through small vessels in the ligaments and around the neck, which is why a fractured talar neck so readily leads to avascular necrosis of the body."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia — medial malleolus & roof",
+      "role": "part",
+      "group": "The joint",
+      "layer": "bone",
+      "color": "#e6dcc2",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "medial malleolus",
+        "inferior articular surface of tibia",
+        "roof of mortise",
+        "plafond"
+      ],
+      "narration": "The tibia gives the ankle two of its three walls. Its flat lower articular surface is the roof, and its medial malleolus comes down as the inner wall. That malleolus is short — it reaches only to about the middle of the medial side of the talus.",
+      "approx": {
+        "shown_as": "Tibia",
+        "detail": "medial malleolus & roof"
+      }
+    },
+    {
+      "key": "fibula",
+      "name": "right fibula",
+      "label": "Fibula — lateral malleolus",
+      "role": "part",
+      "group": "The joint",
+      "layer": "bone",
+      "color": "#ded1a6",
+      "refs": {
+        "bodyparts3d": "FMA24480"
+      },
+      "terms": [
+        "fibula",
+        "lateral malleolus",
+        "outer wall of mortise",
+        "lateral wall"
+      ],
+      "narration": "The fibula gives the third wall. Its lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out.",
+      "approx": {
+        "shown_as": "Fibula",
+        "detail": "lateral malleolus"
+      }
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right leg",
+      "label": "Interosseous membrane & syndesmosis",
+      "role": "part",
+      "group": "The joint",
+      "layer": "fascia",
+      "color": "#d8caa0",
+      "refs": {
+        "bodyparts3d": "FMA35192"
+      },
+      "terms": [
+        "interosseous membrane",
+        "inferior tibiofibular joint",
+        "syndesmosis",
+        "high ankle sprain"
+      ],
+      "narration": "The membrane between the two bones ends below as the inferior tibiofibular joint, a fibrous syndesmosis holding the malleoli together. This is what keeps the mortise the right width. Tear it — a high ankle sprain — and the mortise opens, the talus can shift, and the ankle stops being stable even though every bone is intact."
+    },
+    {
+      "key": "calcaneus",
+      "name": "right calcaneus",
+      "label": "Calcaneus",
+      "role": "part",
+      "group": "The joints below",
+      "layer": "bone",
+      "color": "#e4d9bd",
+      "refs": {
+        "bodyparts3d": "FMA24497"
+      },
+      "terms": [
+        "calcaneus",
+        "heel bone",
+        "subtalar joint",
+        "talocalcaneal joint",
+        "inversion",
+        "eversion",
+        "sustentaculum tali"
+      ],
+      "narration": "The talus rests on the calcaneus at the subtalar joint. This is where inversion and eversion actually happen — not at the ankle. Students lose marks every year by saying the ankle inverts the foot. The ankle only goes up and down; the joint below it turns the sole in and out."
+    },
+    {
+      "key": "navicular",
+      "name": "navicular bone of right foot",
+      "label": "Navicular",
+      "role": "part",
+      "group": "The joints below",
+      "layer": "bone",
+      "color": "#ddd2b6",
+      "refs": {
+        "bodyparts3d": "FMA24500"
+      },
+      "terms": [
+        "navicular",
+        "talonavicular joint",
+        "head of talus",
+        "midtarsal joint",
+        "tuberosity of navicular"
+      ],
+      "narration": "In front, the head of the talus meets the navicular. Together with the joint between calcaneus and cuboid this makes the midtarsal joint, which adds its own share to turning the forefoot. The tuberosity of the navicular is the palpable landmark for tibialis posterior."
+    },
+    {
+      "key": "tendo_calcaneus",
+      "name": "right calcaneal tendon",
+      "label": "Calcaneal tendon (Achilles)",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#c9b48a",
+      "refs": {
+        "bodyparts3d": "FMA258847"
+      },
+      "terms": [
+        "calcaneal tendon",
+        "Achilles tendon",
+        "tendo calcaneus",
+        "plantarflexion",
+        "push off"
+      ],
+      "narration": "The thickest tendon in the body, carrying gastrocnemius and soleus to the back of the calcaneus. It lies well behind the axis of the joint, so it has a long lever for plantarflexion. This is the main power stroke of walking."
+    },
+    {
+      "key": "soleus",
+      "name": "right soleus",
+      "label": "Soleus",
+      "role": "context",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#a0663f",
+      "refs": {
+        "bodyparts3d": "FMA22558"
+      },
+      "terms": [
+        "soleus",
+        "plantarflexion",
+        "postural muscle"
+      ],
+      "narration": "Soleus crosses the ankle but not the knee, so it plantarflexes whatever the knee is doing. It is the muscle holding you upright when you stand still."
+    },
+    {
+      "key": "tib_ant",
+      "name": "right tibialis anterior",
+      "label": "Tibialis anterior",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#d4694a",
+      "refs": {
+        "bodyparts3d": "FMA22544"
+      },
+      "terms": [
+        "tibialis anterior",
+        "dorsiflexion",
+        "in front of the axis",
+        "foot drop"
+      ],
+      "narration": "The strongest dorsiflexor, passing in front of the joint axis and medial to it. Anything crossing in front of the ankle dorsiflexes; anything crossing behind it plantarflexes. That one rule sorts every tendon at this joint."
+    },
+    {
+      "key": "ehl",
+      "name": "right extensor hallucis longus",
+      "label": "Extensor hallucis longus",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#c9843f",
+      "refs": {
+        "bodyparts3d": "FMA22546"
+      },
+      "terms": [
+        "extensor hallucis longus",
+        "deep fibular nerve",
+        "dorsiflexion",
+        "L5",
+        "great toe extension"
+      ],
+      "narration": "The middle of the three tendons in front of the axis, between tibialis anterior medially and extensor digitorum longus laterally. Deep fibular nerve. Its power of extending the great toe is the cleanest single test of the L5 root at the bedside."
+    },
+    {
+      "key": "edl",
+      "name": "right extensor digitorum longus",
+      "label": "Extensor digitorum longus",
+      "role": "context",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#b04a30",
+      "refs": {
+        "bodyparts3d": "FMA22548"
+      },
+      "terms": [
+        "extensor digitorum longus",
+        "dorsiflexion",
+        "extensor retinaculum"
+      ],
+      "narration": "Passes in front of the joint with the other extensors, held down by the extensor retinaculum so the tendons do not bowstring when the foot comes up."
+    },
+    {
+      "key": "tib_post",
+      "name": "right tibialis posterior",
+      "label": "Tibialis posterior",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#7f9ec4",
+      "refs": {
+        "bodyparts3d": "FMA65018"
+      },
+      "terms": [
+        "tibialis posterior",
+        "behind medial malleolus",
+        "inversion",
+        "tarsal tunnel",
+        "medial longitudinal arch"
+      ],
+      "narration": "Its tendon hooks behind the medial malleolus, using the bone as a pulley, then runs forward to the navicular. Behind that malleolus it is the first of four structures under the flexor retinaculum — the tarsal tunnel. Remember the order front to back as Tom, Dick and a Very Nervous Harry: tibialis posterior, flexor digitorum longus, the posterior tibial vessels, the tibial nerve, then flexor hallucis longus."
+    },
+    {
+      "key": "fhl",
+      "name": "right flexor hallucis longus",
+      "label": "Flexor hallucis longus",
+      "role": "context",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#5b7ea8",
+      "refs": {
+        "bodyparts3d": "FMA65014"
+      },
+      "terms": [
+        "flexor hallucis longus",
+        "sustentaculum tali",
+        "groove on posterior talus",
+        "tarsal tunnel"
+      ],
+      "narration": "Its tendon runs in a groove on the back of the talus and then under the sustentaculum tali of the calcaneus, so it is the most posterior structure in the tarsal tunnel and lies closest to the joint itself."
+    },
+    {
+      "key": "fib_longus",
+      "name": "right fibularis longus",
+      "label": "Fibularis longus (peroneus longus)",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#c9973f",
+      "refs": {
+        "bodyparts3d": "FMA22552"
+      },
+      "terms": [
+        "fibularis longus",
+        "peroneus longus",
+        "behind lateral malleolus",
+        "eversion",
+        "dynamic support"
+      ],
+      "narration": "Passes behind the lateral malleolus, so it plantarflexes as well as everts. The two fibularis tendons are the dynamic defence against an inversion injury — when they are too slow to fire, the lateral ligament takes the whole force."
+    },
+    {
+      "key": "fib_brevis",
+      "name": "right fibularis brevis",
+      "label": "Fibularis brevis (peroneus brevis)",
+      "role": "part",
+      "group": "Movers of the joint",
+      "layer": "muscle",
+      "color": "#b8862f",
+      "refs": {
+        "bodyparts3d": "FMA22554"
+      },
+      "terms": [
+        "fibularis brevis",
+        "peroneus brevis",
+        "base of fifth metatarsal",
+        "avulsion fracture"
+      ],
+      "narration": "Runs with the longus behind the malleolus to the base of the fifth metatarsal. In a severe inversion injury it can avulse that base, which is why a painful lateral foot after a twisted ankle needs an X-ray and not just a bandage."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where the ankle is",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "The joint",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The ankle, properly the talocrural joint, is the meeting of the two leg bones with the talus. It is a synovial hinge with one axis and two movements: dorsiflexion, bringing the foot up towards the shin, and plantarflexion, pointing it down. Its joint line is not where most people point — it is a finger's breadth above the tip of the medial malleolus, not at the malleolus itself."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Mortise and tenon",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "talus",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Carpenters cut a square hole, the mortise, and a matching block, the tenon. That is exactly this joint. The roof and the medial wall come from the tibia, the lateral wall from the fibula, and the trochlea of the talus is gripped between them. A joint built this way can only hinge — side to side movement is prevented by bone, not by ligament."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Why the two malleoli differ",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tibia",
+            "fibula"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Compare the two sides. The lateral malleolus is longer and set further back; the medial is short and set further forward. That asymmetry is why the axis of the hinge is not a straight side to side line — it runs downwards and backwards from medial to lateral. Because of that tilted axis, when the foot goes down it also turns slightly inwards, and when it comes up it turns slightly out."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Cut through the mortise",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Bring the cut down through the joint and look at the space between the bones. On a normal X-ray the gap is the same width all the way round the talus — above it, medial to it and lateral to it. Any widening of the medial clear space means the talus has shifted, and a shifted talus means either the deltoid ligament or the syndesmosis has gone, whatever the bones look like."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Tight up, loose down",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:dorsiflexion",
+          "path": [
+            "tibia",
+            "talus",
+            "calcaneus"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Look down on the trochlea. It is wider in front than behind. In dorsiflexion the wide front part is driven up into the mortise, the malleoli are pushed slightly apart, and the joint is packed tight — this is the close packed, most stable position. In plantarflexion the narrow back part comes up instead, the mortise has room to spare, and the joint is at its loosest. That single piece of geometry explains why almost every ankle injury happens with the foot pointed down, coming off a step or landing from a jump."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "What moves it, front and back",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tib_ant",
+            "tendo_calcaneus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Movers of the joint",
+          "intensity": 0.6
+        }
+      ],
+      "narration": "Every tendon at the ankle is either in front of the axis or behind it. In front are tibialis anterior, extensor hallucis longus and extensor digitorum longus, all dorsiflexors, all supplied by the deep fibular nerve. Behind are the calf through the calcaneal tendon, the deep three from the tibial nerve, and the two fibularis muscles from the superficial fibular nerve, all plantarflexors. Plantarflexion is far stronger than dorsiflexion — compare the bulk of the calf with the thin strip on the front of the shin, and remember that the calf must lift the whole body onto the toes."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The joint that actually inverts",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The joint"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The joints below"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "talus",
+          "to": "calcaneus",
+          "kind": "articulation"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "talus",
+          "to": "navicular",
+          "kind": "articulation"
+        }
+      ],
+      "narration": "Hold the ankle still and the sole can still be turned in and out. That movement is at the subtalar joint between talus and calcaneus, helped by the talonavicular joint in front. Inversion, turning the sole inwards, is done by tibialis anterior and tibialis posterior. Eversion, turning it outwards, is done by the two fibularis muscles and is the weaker of the two. This is also the mechanism that lets you walk on uneven ground without the leg itself having to tilt."
+    },
+    {
+      "mode": "location",
+      "beat": 8,
+      "title": "The ligaments — named, not shown",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:deltoid_ligament",
+          "path": [
+            "tibia",
+            "talus",
+            "calcaneus",
+            "navicular"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "On the inside is the deltoid ligament, a single strong triangle from the medial malleolus fanning down to the talus, the calcaneus and the navicular. The path traced here is its spread. It is so strong that a force big enough to tear it usually breaks the medial malleolus off instead. On the outside are three separate bands: the anterior talofibular, the calcaneofibular and the posterior talofibular. Three weak straps against one strong fan — that is the whole story of ankle sprains in one sentence."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "The inversion sprain",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The joint"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The joints below"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fib_longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fib_brevis"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lateral_ligament_complex",
+          "path": [
+            "fibula",
+            "talus",
+            "calcaneus"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The foot goes down and rolls in. The traced path follows the three lateral bands, and the anterior talofibular is the first to tear because in plantarflexion it lies almost in the line of the force. Tenderness in front of and below the lateral malleolus, swelling there, and pain on inversion is the ordinary sprain. Then check the base of the fifth metatarsal and the whole length of the fibula up to its neck, because a proximal fibular fracture with an unstable ankle is the pattern that gets missed."
+    },
+    {
+      "mode": "location",
+      "beat": 10,
+      "title": "When the malleoli break",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "fibula",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "iom",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Ankle fractures are named by how many walls of the mortise have failed. One malleolus is unimalleolar, both is bimalleolar, and both plus the back edge of the tibia is trimalleolar — the Pott's fractures. The question that decides treatment is not how many pieces there are but whether the talus still sits square in the mortise. One broken malleolus with an intact syndesmosis is stable and can be put in plaster. The same fracture with a torn syndesmosis is unstable and needs fixing."
+    },
+    {
+      "mode": "location",
+      "beat": 11,
+      "title": "Peel down to the joint",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The joint"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        }
+      ],
+      "narration": "Approach the ankle in layers: skin, the retinacula holding the tendons down, the tendons themselves in their sheaths, the capsule, then the joint. Behind the medial malleolus that list also contains the posterior tibial artery and the tibial nerve, so a swelling here can compress them and give the burning sole of tarsal tunnel syndrome. In front, the joint is only tendons deep, which is why an anterior wound at the ankle so readily enters the joint itself."
+    }
+  ],
+  "gaps": [
+    "There are no ligaments of the ankle in the catalog. The deltoid ligament, the anterior talofibular, calcaneofibular and posterior talofibular bands, the anterior and posterior tibiofibular ligaments of the syndesmosis and the joint capsule are the substance of this topic and none can be shown. They are authored as traced concept paths between the bones they join, and named in narration. This is the largest single gap in the scene and the first thing to revisit if a ligament set becomes available.",
+    "The syndesmosis is taught here by lighting the lower ends of the two bones and the membrane above; the inferior tibiofibular joint itself has no model.",
+    "Articular cartilage, the synovial membrane and the joint cavity are not modelled, so the cut-plane beat shows the bony gap and describes what the clear space on an X-ray means.",
+    "The flexor and extensor retinacula have no models, so the tarsal tunnel is described by naming its contents in order behind the medial malleolus rather than shown as a roofed space.",
+    "No arteries or nerves of the lower limb below the external iliac exist in the catalog, so the posterior tibial artery, the tibial nerve and the branches of the common fibular nerve are named in narration only.",
+    "The trochlea being wider in front than behind is the mechanical heart of this scene and is visible on the talus mesh from above, but there is no way to animate the malleoli spreading, so the close packed position is taught by the superior view plus a traced concept of the movement.",
+    "This scene does not cover Arches of the foot or Popliteal fossa. The navicular, the calcaneus and the long tendons appear here only where they act on the ankle and the joint below it."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

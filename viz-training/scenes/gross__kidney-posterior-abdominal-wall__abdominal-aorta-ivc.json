@@ -1,0 +1,1080 @@
+{
+  "schema": 2,
+  "id": "gross__kidney-posterior-abdominal-wall__abdominal-aorta-ivc",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Kidney & Posterior Abdominal Wall",
+  "structure": "Abdominal aorta & IVC",
+  "covers": [
+    "Abdominal aorta & IVC"
+  ],
+  "learning_goal": "Say where the aorta enters the abdomen and where it ends, list its three unpaired midline branches and their vertebral levels with the gut segments they feed, list the paired lateral branches, say where the cava is formed and where it leaves, name its tributaries and the three asymmetries between right and left, and use those levels and relations to explain an aneurysm, a caval obstruction and why the two vessels are approached differently at operation.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "abdominal aorta",
+      "inferior vena cava",
+      "great vessels of the abdomen",
+      "posterior abdominal wall",
+      "retroperitoneum",
+      "aortic branches",
+      "caval tributaries",
+      "vascular anatomy",
+      "aneurysm",
+      "abdomen",
+      "vertebral levels"
+    ],
+    "terms": [
+      "abdominal aorta",
+      "descending aorta",
+      "aorta",
+      "inferior vena cava",
+      "IVC",
+      "cava",
+      "great vessels",
+      "aortic hiatus",
+      "T12",
+      "caval opening",
+      "T8",
+      "oesophageal hiatus",
+      "T10",
+      "median arcuate ligament",
+      "crura of the diaphragm",
+      "aortic bifurcation",
+      "L4",
+      "umbilicus",
+      "supracristal plane",
+      "formation of the IVC",
+      "L5",
+      "common iliac veins",
+      "common iliac arteries",
+      "left of the midline",
+      "right of the midline",
+      "unpaired branches",
+      "paired branches",
+      "midline branches",
+      "coeliac trunk",
+      "celiac trunk",
+      "celiac artery",
+      "coeliac artery",
+      "T12 L1",
+      "foregut",
+      "left gastric artery",
+      "splenic artery",
+      "common hepatic artery",
+      "superior mesenteric artery",
+      "SMA",
+      "L1",
+      "midgut",
+      "inferior mesenteric artery",
+      "IMA",
+      "L3",
+      "hindgut",
+      "renal artery",
+      "renal arteries",
+      "L1 L2",
+      "suprarenal artery",
+      "gonadal artery",
+      "testicular artery",
+      "ovarian artery",
+      "L2",
+      "inferior phrenic artery",
+      "lumbar arteries",
+      "median sacral artery",
+      "common iliac artery",
+      "external iliac artery",
+      "internal iliac artery",
+      "renal vein",
+      "left renal vein",
+      "right renal vein",
+      "hepatic veins",
+      "suprarenal vein",
+      "gonadal vein",
+      "lumbar veins",
+      "azygos vein",
+      "portal vein",
+      "splenic vein",
+      "superior mesenteric vein",
+      "portal system",
+      "porto-systemic anastomosis",
+      "nutcracker syndrome",
+      "retroaortic renal vein",
+      "abdominal aortic aneurysm",
+      "AAA",
+      "expansile pulsation",
+      "ruptured aneurysm",
+      "back pain",
+      "aortic atherosclerosis",
+      "Leriche syndrome",
+      "mesenteric angina",
+      "median arcuate ligament syndrome",
+      "IVC obstruction",
+      "caval filter",
+      "tumour thrombus",
+      "renal cell carcinoma",
+      "Budd Chiari",
+      "SMA syndrome",
+      "third part of the duodenum",
+      "cisterna chyli",
+      "thoracic duct",
+      "para aortic nodes",
+      "aortocaval nodes",
+      "transpyloric plane",
+      "supine aortic compression",
+      "aortocaval compression",
+      "pregnancy"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Abdominal aorta",
+      "role": "part",
+      "group": "Aorta",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "aortic hiatus",
+        "T12",
+        "left of the midline",
+        "aortic bifurcation",
+        "L4",
+        "umbilicus",
+        "supracristal plane",
+        "aneurysm",
+        "expansile pulsation",
+        "median sacral artery",
+        "lumbar arteries",
+        "retroperitoneal"
+      ],
+      "narration": "The aorta enters the abdomen through the aortic hiatus of the diaphragm at T12, behind the median arcuate ligament between the two crura, and ends by dividing into the two common iliac arteries at L4 — the level of the umbilicus in a thin adult, and of the supracristal plane joining the highest points of the iliac crests. It lies on the bodies of the upper four lumbar vertebrae, just left of the midline, retroperitoneal, with the cava on its right. Because it sits on bone it can be compressed backwards against L4 in an emergency. Note the hiatus is a passage behind the diaphragm and not through it, which is why the aorta is not compressed with each breath while the cava, which passes through the central tendon, is. Below the bifurcation the small median sacral artery continues in the midline — the remnant of the tail artery. Four pairs of lumbar arteries run backwards from the aorta around the vertebral bodies to supply the posterior wall and the spinal canal."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava",
+      "role": "part",
+      "group": "Cava",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "IVC",
+        "cava",
+        "L5",
+        "formed by the common iliac veins",
+        "right of the midline",
+        "caval opening",
+        "T8",
+        "central tendon",
+        "right atrium",
+        "groove on the liver",
+        "aortocaval compression",
+        "caval filter"
+      ],
+      "narration": "The cava is formed at L5, behind and slightly to the right of the aortic bifurcation, by the union of the two common iliac veins. It ascends on the right of the aorta and the right of the vertebral bodies, lies in a deep groove on the back of the liver, then pierces the central tendon of the diaphragm at T8 and enters the right atrium almost at once. Three features follow from that route. Its opening is in the tendon, so the diaphragm's descent on inspiration pulls the opening wide and helps venous return, whereas the aortic hiatus behind the diaphragm shields the aorta from the same effect. Its groove on the liver means hepatic pathology and hepatic surgery are caval problems. And because it lies to the right, a supine pregnant woman at term compresses it against the vertebral column and drops her cardiac output — which is why she is nursed tilted to the left."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk — T12, foregut",
+      "role": "part",
+      "group": "Unpaired branches",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "coeliac artery",
+        "T12",
+        "foregut",
+        "tripod",
+        "left gastric artery",
+        "splenic artery",
+        "common hepatic artery",
+        "median arcuate ligament syndrome",
+        "referred pain epigastrium"
+      ],
+      "narration": "The first unpaired branch, leaving the front of the aorta at T12 as a short thick trunk about a centimetre long, immediately below the aortic hiatus. It divides into three — left gastric, splenic, common hepatic — and supplies the foregut and its derivatives: the abdominal oesophagus, the stomach, the first half of the duodenum as far as the entry of the bile duct, and with them the liver, gallbladder, spleen and most of the pancreas. Foregut pain is therefore felt in the epigastrium. A low median arcuate ligament can compress this trunk and cause post-prandial epigastric pain with an epigastric bruit in a young patient."
+    },
+    {
+      "key": "sma",
+      "name": "superior mesenteric artery",
+      "label": "Superior mesenteric artery — L1, midgut",
+      "role": "part",
+      "group": "Unpaired branches",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA14749"
+      },
+      "terms": [
+        "superior mesenteric artery",
+        "SMA",
+        "L1",
+        "transpyloric plane",
+        "midgut",
+        "second half of the duodenum",
+        "jejunum",
+        "ileum",
+        "caecum",
+        "appendix",
+        "ascending colon",
+        "two thirds of the transverse colon",
+        "periumbilical pain",
+        "acute mesenteric ischaemia",
+        "embolus",
+        "SMA syndrome",
+        "third part of the duodenum",
+        "left renal vein"
+      ],
+      "narration": "Leaves the front of the aorta at L1, on the transpyloric plane, one centimetre below the coeliac trunk, and runs downwards and forwards into the root of the mesentery. It supplies the midgut: the duodenum beyond the bile duct, all the jejunum and ileum, the caecum, appendix, ascending colon and the proximal two-thirds of the transverse colon. Midgut pain is periumbilical, which is the anatomical reason early appendicitis hurts around the navel before it localises. Two structures are caught in the narrow angle between this artery and the aorta — the left renal vein and the third part of the duodenum — giving the nutcracker and the superior mesenteric artery syndrome respectively, both of which appear in patients who have lost the fat pad in that angle. An embolus lodging in this vessel infarcts the whole midgut and presents as pain grossly out of proportion to the abdominal signs."
+    },
+    {
+      "key": "ima",
+      "name": "inferior mesenteric artery",
+      "label": "Inferior mesenteric artery — L3, hindgut",
+      "role": "part",
+      "group": "Unpaired branches",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "bodyparts3d": "FMA14750"
+      },
+      "terms": [
+        "inferior mesenteric artery",
+        "IMA",
+        "L3",
+        "hindgut",
+        "distal third of the transverse colon",
+        "descending colon",
+        "sigmoid colon",
+        "rectum",
+        "suprapubic pain",
+        "marginal artery",
+        "watershed",
+        "splenic flexure",
+        "ischaemic colitis",
+        "aortic surgery",
+        "horseshoe kidney"
+      ],
+      "narration": "Leaves the front of the aorta at L3, three or four centimetres above the bifurcation, and runs downwards and to the left. It supplies the hindgut: the distal third of the transverse colon, the descending and sigmoid colon and the upper rectum, so hindgut pain is suprapubic. The territory where its supply meets the superior mesenteric artery's — at the splenic flexure — is the watershed of the colon and the first place to become ischaemic when perfusion falls. This artery is also the hook under which an ascending horseshoe kidney is arrested, and it is routinely sacrificed in aortic aneurysm repair, which is why left colonic ischaemia is a recognised complication of that operation."
+    },
+    {
+      "key": "right_renal_artery",
+      "name": "right renal artery",
+      "label": "Right renal artery — L1 to L2",
+      "role": "part",
+      "group": "Paired branches",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14752"
+      },
+      "terms": [
+        "right renal artery",
+        "renal artery",
+        "L1 L2",
+        "paired lateral branch",
+        "longer",
+        "behind the inferior vena cava",
+        "accessory renal artery",
+        "renal artery stenosis"
+      ],
+      "narration": "One of the paired lateral branches. Both renal arteries leave the sides of the aorta just below the superior mesenteric artery, at about the L1 to L2 disc. Because the aorta lies left of the midline, the right artery is the longer and passes behind the cava. The paired lateral branches in order down the aorta are inferior phrenic, suprarenal, renal and gonadal — the sequence worth reciting, since only the renal and gonadal pairs exist as models here."
+    },
+    {
+      "key": "left_renal_artery",
+      "name": "left renal artery",
+      "label": "Left renal artery",
+      "role": "part",
+      "group": "Paired branches",
+      "layer": "vessel",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA14753"
+      },
+      "terms": [
+        "left renal artery",
+        "renal artery",
+        "shorter",
+        "twenty percent of cardiac output",
+        "renin"
+      ],
+      "narration": "Shorter, because the aorta is already on the left. Between them the renal arteries take about a fifth of the cardiac output, which is why the kidneys are the organs that suffer first when the aorta is cross-clamped and why a narrowed renal artery drives renin and secondary hypertension."
+    },
+    {
+      "key": "right_common_iliac_artery",
+      "name": "right common iliac artery",
+      "label": "Right common iliac artery — the end of the aorta",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA14765"
+      },
+      "terms": [
+        "right common iliac artery",
+        "aortic bifurcation",
+        "L4",
+        "terminal branch",
+        "sacroiliac joint",
+        "internal iliac",
+        "external iliac",
+        "Leriche syndrome"
+      ],
+      "narration": "The aorta ends at L4 by dividing into two common iliac arteries, each about five centimetres long, which run downwards and laterally to the level of the sacroiliac joint and there divide into internal and external iliac. Atherosclerosis at the bifurcation gives the Leriche picture — buttock and thigh claudication, absent femoral pulses and impotence in a man."
+    },
+    {
+      "key": "left_common_iliac_artery",
+      "name": "left common iliac artery",
+      "label": "Left common iliac artery",
+      "role": "part",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#a04034",
+      "refs": {
+        "bodyparts3d": "FMA14766"
+      },
+      "terms": [
+        "left common iliac artery",
+        "aortic bifurcation",
+        "right common iliac vein",
+        "May Thurner",
+        "crosses the vein"
+      ],
+      "narration": "The left common iliac artery crosses in front of the left common iliac vein where the vein runs to the right to join its fellow. That crossing compresses the vein against the fifth lumbar vertebra and is the reason deep vein thrombosis is commoner in the left leg than the right."
+    },
+    {
+      "key": "right_external_iliac_artery",
+      "name": "right external iliac artery",
+      "label": "External iliac artery",
+      "role": "context",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "femoral artery",
+        "inguinal ligament",
+        "limb supply"
+      ],
+      "narration": "Carries the blood destined for the limb, running along the medial border of psoas to pass under the inguinal ligament and become the femoral artery."
+    },
+    {
+      "key": "right_internal_iliac_artery",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery",
+      "role": "context",
+      "group": "Terminal branches",
+      "layer": "vessel",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "hypogastric artery",
+        "pelvic viscera",
+        "gluteal region"
+      ],
+      "narration": "Turns down into the pelvis to supply the pelvic viscera, the pelvic walls, the perineum and the gluteal region. It is the vessel ligated to control massive obstetric haemorrhage."
+    },
+    {
+      "key": "right_renal_vein",
+      "name": "right renal vein",
+      "label": "Right renal vein — a short tributary",
+      "role": "part",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14335"
+      },
+      "terms": [
+        "right renal vein",
+        "caval tributary",
+        "L1",
+        "short",
+        "right gonadal vein drains to the cava",
+        "right suprarenal vein drains to the cava"
+      ],
+      "narration": "Both renal veins enter the cava at about L1. The right is short and direct because the cava lies on that side, and it receives nothing of consequence: the right gonadal and right suprarenal veins drain straight into the cava themselves. Read the cava's tributaries from below up — common iliac veins, lumbar veins, right gonadal, both renal, right suprarenal, then the hepatic veins just before it pierces the diaphragm."
+    },
+    {
+      "key": "left_renal_vein",
+      "name": "left renal vein",
+      "label": "Left renal vein — crosses the aorta",
+      "role": "part",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#3498db",
+      "refs": {
+        "bodyparts3d": "FMA14336"
+      },
+      "terms": [
+        "left renal vein",
+        "crosses in front of the aorta",
+        "behind the superior mesenteric artery",
+        "nutcracker syndrome",
+        "left gonadal vein",
+        "left suprarenal vein",
+        "left varicocele",
+        "retroaortic renal vein",
+        "aortic surgery"
+      ],
+      "narration": "Three times the length of the right, because it must cross the midline in front of the aorta and behind the superior mesenteric artery. It collects the left suprarenal and left gonadal veins, which the right does not — so anything obstructing it, whether the nutcracker compression itself or a tumour thrombus, shows as a left varicocele that does not empty on lying down. It is also the vessel that must be identified and sometimes divided in aortic aneurysm repair, and a retroaortic left renal vein, present in a few per cent, is the variant that gets torn at that step."
+    },
+    {
+      "key": "right_common_iliac_vein",
+      "name": "right common iliac vein",
+      "label": "Right common iliac vein — forms the cava",
+      "role": "part",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "refs": {
+        "bodyparts3d": "FMA21387"
+      },
+      "terms": [
+        "right common iliac vein",
+        "formation of the IVC",
+        "L5",
+        "union of the common iliac veins",
+        "almost vertical"
+      ],
+      "narration": "The right common iliac vein is short and runs almost vertically upwards, so the cava is effectively its continuation. Both common iliac veins are formed in front of the sacroiliac joint by the union of the internal and external iliac veins."
+    },
+    {
+      "key": "left_common_iliac_vein",
+      "name": "left common iliac vein",
+      "label": "Left common iliac vein — the long one",
+      "role": "part",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA21388"
+      },
+      "terms": [
+        "left common iliac vein",
+        "crosses the midline",
+        "behind the right common iliac artery",
+        "May Thurner syndrome",
+        "left leg DVT",
+        "L5"
+      ],
+      "narration": "Longer and more oblique, because it must cross the midline behind the right common iliac artery to reach its fellow at L5. Pinned between that artery in front and the fifth lumbar vertebra behind, it is the compressed vein of May–Thurner syndrome — the anatomical reason left-sided iliofemoral thrombosis outnumbers right."
+    },
+    {
+      "key": "right_external_iliac_vein",
+      "name": "right external iliac vein",
+      "label": "External iliac vein",
+      "role": "context",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "external iliac vein",
+        "femoral vein",
+        "limb drainage",
+        "deep vein thrombosis"
+      ],
+      "narration": "The continuation of the femoral vein above the inguinal ligament, carrying the whole venous return of the lower limb — and therefore the route by which a thrombus from the calf reaches the lungs."
+    },
+    {
+      "key": "right_internal_iliac_vein",
+      "name": "right internal iliac vein",
+      "label": "Internal iliac vein",
+      "role": "context",
+      "group": "Caval tributaries",
+      "layer": "vessel",
+      "color": "#a9cce3",
+      "refs": {
+        "bodyparts3d": "FMA18887"
+      },
+      "terms": [
+        "internal iliac vein",
+        "pelvic venous plexus",
+        "prostatic venous plexus",
+        "valveless",
+        "vertebral venous plexus",
+        "prostate metastasis to spine"
+      ],
+      "narration": "Drains the pelvic plexuses, which are valveless and communicate with the vertebral venous plexus. That communication is the accepted route by which prostatic carcinoma reaches the lumbar spine without ever passing through the lungs."
+    },
+    {
+      "key": "portal_smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein — not a caval tributary",
+      "role": "context",
+      "group": "Portal system",
+      "layer": "vessel",
+      "color": "#1abc9c",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal vein",
+        "portal system",
+        "does not drain to the cava",
+        "gut venous drainage",
+        "porto-systemic anastomosis"
+      ],
+      "narration": "This is the trap in the topic. The arteries to the gut come off the aorta, but the veins from the gut do not go back to the cava — they join the splenic vein behind the neck of the pancreas to form the portal vein and go to the liver first. So the cava receives no direct tributary from the gastrointestinal tract at all. Everything the gut absorbs passes through hepatic sinusoids and only then reaches the cava by the hepatic veins."
+    },
+    {
+      "key": "portal_splenic",
+      "name": "splenic vein",
+      "label": "Splenic vein — the other portal root",
+      "role": "context",
+      "group": "Portal system",
+      "layer": "vessel",
+      "color": "#48c9b0",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "portal vein",
+        "inferior mesenteric vein",
+        "portal hypertension",
+        "oesophageal varices",
+        "caput medusae"
+      ],
+      "narration": "Runs behind the body of the pancreas, takes the inferior mesenteric vein, and joins the superior mesenteric vein to form the portal vein. When the liver obstructs that flow, blood finds the cava the long way round through porto-systemic anastomoses — oesophageal varices, caput medusae, rectal varices — and those are the visible signs of portal hypertension."
+    },
+    {
+      "key": "common_hepatic_artery",
+      "name": "common hepatic artery",
+      "label": "Common hepatic artery",
+      "role": "context",
+      "group": "Coeliac branches",
+      "layer": "vessel",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA14771"
+      },
+      "terms": [
+        "common hepatic artery",
+        "coeliac trunk",
+        "liver",
+        "gastroduodenal artery",
+        "right gastric artery"
+      ],
+      "narration": "One of the three limbs of the coeliac tripod, running to the right towards the porta hepatis and giving the gastroduodenal artery on the way — the artery eroded by a posterior duodenal ulcer."
+    },
+    {
+      "key": "splenic_artery",
+      "name": "splenic artery",
+      "label": "Splenic artery",
+      "role": "context",
+      "group": "Coeliac branches",
+      "layer": "vessel",
+      "color": "#e67e22",
+      "refs": {
+        "bodyparts3d": "FMA14773"
+      },
+      "terms": [
+        "splenic artery",
+        "coeliac trunk",
+        "tortuous",
+        "upper border of the pancreas",
+        "short gastric arteries",
+        "splenic artery aneurysm"
+      ],
+      "narration": "The largest and most tortuous limb, running left along the upper border of the pancreas to the hilum of the spleen. Its tortuosity is diagnostic on an angiogram, and it is the commonest visceral artery to form an aneurysm."
+    },
+    {
+      "key": "left_gastric_artery",
+      "name": "left gastric artery",
+      "label": "Left gastric artery",
+      "role": "context",
+      "group": "Coeliac branches",
+      "layer": "vessel",
+      "color": "#f39c12",
+      "refs": {
+        "bodyparts3d": "FMA14768"
+      },
+      "terms": [
+        "left gastric artery",
+        "coeliac trunk",
+        "lesser curvature",
+        "oesophageal branches",
+        "porto-systemic anastomosis"
+      ],
+      "narration": "The smallest limb, running up to the cardia and then along the lesser curvature. Its oesophageal branches accompany the veins that form the lower oesophageal porto-systemic anastomosis — the site of varices."
+    },
+    {
+      "key": "diaphragm",
+      "name": "diaphragm",
+      "label": "Diaphragm — two openings, two levels",
+      "role": "part",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA13295"
+      },
+      "terms": [
+        "diaphragm",
+        "aortic hiatus",
+        "T12",
+        "caval opening",
+        "T8",
+        "oesophageal hiatus",
+        "T10",
+        "central tendon",
+        "crura",
+        "median arcuate ligament",
+        "thoracic duct",
+        "azygos vein",
+        "cisterna chyli"
+      ],
+      "narration": "The roof, and the source of the two levels every student is asked for. The caval opening is at T8, in the central tendon, and it transmits the cava and the right phrenic nerve; because it lies in tendon rather than muscle it is pulled open by each descent of the diaphragm. The oesophageal hiatus is at T10 in the muscle of the right crus, and its muscular sling pinches shut on contraction. The aortic hiatus is at T12, behind the median arcuate ligament between the crura, so it is an opening behind the diaphragm rather than through it — and the aorta, the thoracic duct and the azygos vein pass through it uncompressed. Remember them by the vowels: at ten the oEsophagus, at twelve the Aorta, and the vena cava higher at eight."
+    },
+    {
+      "key": "l1",
+      "name": "first lumbar vertebra",
+      "label": "First lumbar vertebra — the transpyloric plane",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13072"
+      },
+      "terms": [
+        "first lumbar vertebra",
+        "L1",
+        "transpyloric plane",
+        "superior mesenteric artery",
+        "renal arteries",
+        "vertebral levels"
+      ],
+      "narration": "Fix the branches to bone. The coeliac trunk comes off at T12, the superior mesenteric artery at L1 on the transpyloric plane, the renal arteries just below at L1 to L2, the gonadal arteries at L2, the inferior mesenteric artery at L3, and the bifurcation at L4. Six levels, in order, and most examiners want no more than that."
+    },
+    {
+      "key": "l4",
+      "name": "fourth lumbar vertebra",
+      "label": "Fourth lumbar vertebra — the bifurcation",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#b2babb",
+      "refs": {
+        "bodyparts3d": "FMA13075"
+      },
+      "terms": [
+        "fourth lumbar vertebra",
+        "L4",
+        "aortic bifurcation",
+        "umbilicus",
+        "supracristal plane",
+        "iliac crest"
+      ],
+      "narration": "The aorta ends here. The supracristal plane through the highest points of the iliac crests passes through the body of L4 — the same plane used to find the L3-L4 or L4-L5 interspace for a lumbar puncture, which is why one landmark serves two very different purposes."
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "Fifth lumbar vertebra — the cava is formed",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "bone",
+      "color": "#ccd1d1",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "fifth lumbar vertebra",
+        "L5",
+        "formation of the IVC",
+        "May Thurner",
+        "common iliac veins"
+      ],
+      "narration": "The cava begins one vertebra lower than the aorta ends, at L5, and slightly to the right of it. That one-vertebra offset is worth holding: artery divides at four, vein is formed at five, and the vein is always the more posterior and the more right-sided of the pair."
+    },
+    {
+      "key": "right_psoas",
+      "name": "right psoas major",
+      "label": "Psoas major (right) — the vessels lie between them",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "posterior abdominal wall",
+        "lumbar vertebrae",
+        "sympathetic trunk",
+        "para aortic nodes"
+      ],
+      "narration": "Both great vessels lie in the gutter between the two psoas muscles, on the vertebral bodies. The lumbar sympathetic trunks run on the vertebral bodies along the medial border of psoas — the right trunk behind the cava, the left just lateral to the aorta — which is where they are found for a lumbar sympathectomy."
+    },
+    {
+      "key": "left_psoas",
+      "name": "left psoas major",
+      "label": "Psoas major (left)",
+      "role": "context",
+      "group": "Boundaries",
+      "layer": "muscle",
+      "color": "#b3541e",
+      "refs": {
+        "bodyparts3d": "FMA22343"
+      },
+      "terms": [
+        "psoas major",
+        "left",
+        "aorta lies on its medial side"
+      ],
+      "narration": "The aorta lies against the medial border of the left psoas for its whole abdominal course."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — the cava's groove",
+      "role": "context",
+      "group": "Related organs",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "groove for the inferior vena cava",
+        "hepatic veins",
+        "bare area",
+        "Budd Chiari syndrome",
+        "portal vein"
+      ],
+      "narration": "The cava is embedded in a groove on the posterior surface of the liver in its bare area, and the three hepatic veins empty into it there over a course of barely a centimetre. That intimacy is why hepatic resection is caval surgery, and why thrombosis of the hepatic veins — the Budd–Chiari syndrome — presents with a tender enlarged liver and ascites."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney — a lateral relation",
+      "role": "context",
+      "group": "Related organs",
+      "layer": "organ",
+      "color": "#8c3b2f",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "renal artery",
+        "renal vein",
+        "renal cell carcinoma",
+        "tumour thrombus",
+        "caval extension"
+      ],
+      "narration": "The kidneys flank the two vessels and are the reason the region matters clinically as often as it does. A renal cell carcinoma grows along the renal vein into the cava and can extend up to the right atrium — the tumour whose staging depends entirely on how far up this vein the thrombus has climbed."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "context",
+      "group": "Related organs",
+      "layer": "organ",
+      "color": "#a0463a",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "left renal vein",
+        "aorta",
+        "transpyloric plane"
+      ],
+      "narration": "The left kidney sits higher, and its vein is the one that must cross the front of the aorta to reach the cava."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Where each one starts and stops",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Related organs"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Portal system"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Coeliac branches"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "aorta",
+            "ivc"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "aorta",
+          "kind": "aortic hiatus at T12, behind the diaphragm"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "diaphragm",
+          "to": "ivc",
+          "kind": "caval opening at T8, in the central tendon"
+        }
+      ],
+      "narration": "Two vessels, side by side on the lumbar vertebrae, running in opposite directions. The aorta enters at T12 through the aortic hiatus behind the diaphragm, lies just left of the midline on the bodies of L1 to L4, and ends at L4 by dividing into the common iliac arteries. The cava does the reverse: it is formed at L5 by the union of the common iliac veins, ascends on the right of the aorta, grooves the back of the liver and leaves through the central tendon at T8. Hold the asymmetries, because almost every clinical point in this topic comes out of one of them. The aorta is on the left, the cava on the right. The aorta divides at L4, the cava is formed at L5 — one vertebra lower. The aorta passes behind the diaphragm and is not compressed by breathing; the cava passes through the tendon and is pulled open by it, so venous return rises on inspiration. And the aorta is a thick-walled pulsatile tube you can compress against L4 in an emergency, while the cava is a thin-walled collapsible one that a supine pregnant uterus can flatten — which is why she lies tilted to the left."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Three unpaired branches, three parts of the gut",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Unpaired branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Coeliac branches"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Unpaired branches",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-flow",
+          "path": [
+            "aorta",
+            "celiac",
+            "sma",
+            "ima",
+            "right_common_iliac_artery"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "Three branches leave the front of the aorta in the midline, and each feeds one embryological part of the gut. The coeliac trunk at T12 supplies the foregut — oesophagus, stomach, duodenum as far as the bile duct, and with it the liver, gallbladder, spleen and pancreas — and it divides at once into left gastric, splenic and common hepatic. The superior mesenteric artery at L1 supplies the midgut, from the bile duct to the junction of the middle and distal thirds of the transverse colon. The inferior mesenteric artery at L3 supplies the hindgut, from there to the upper rectum. That division explains referred pain exactly: foregut pain is epigastric, midgut pain periumbilical, hindgut pain suprapubic. It is why appendicitis begins around the umbilicus — the appendix is midgut — and only moves to the right iliac fossa when the inflamed organ irritates the parietal peritoneum, which has a somatic supply and knows precisely where it is. The paired lateral branches follow their own order down the aorta: inferior phrenic, suprarenal, renal at L1 to L2, gonadal at L2. And behind, four pairs of lumbar arteries and the median sacral artery below the bifurcation."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "What drains into the cava — and what does not",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Cava"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Caval tributaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Portal system"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Related organs"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-return",
+          "path": [
+            "right_external_iliac_vein",
+            "right_common_iliac_vein",
+            "ivc",
+            "liver"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_renal_vein",
+            "left_renal_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "portal_smv",
+          "to": "liver",
+          "kind": "gut blood goes to the liver first, not to the cava"
+        }
+      ],
+      "narration": "Read the tributaries from below upwards: the two common iliac veins that form it, the lumbar veins behind, the right gonadal vein, both renal veins at L1, the right suprarenal vein, and finally the hepatic veins as it leaves. Three asymmetries are the exam. The right gonadal and right suprarenal veins go straight into the cava; the left ones drain into the left renal vein — which is why a left varicocele can mean renal disease and a right one almost never does. The right renal vein is short, the left three times longer because it crosses in front of the aorta and behind the superior mesenteric artery, where it can be nipped. And the left common iliac vein must cross the midline behind the right common iliac artery, which pins it against L5 and makes left leg thrombosis commoner than right. Now the thing students get wrong. Nothing from the gastrointestinal tract drains directly into the cava. The gut's veins form the portal vein and go to the liver first, and only after passing through the sinusoids does that blood reach the cava by the hepatic veins. So the aorta supplies the gut directly, but the cava receives it only second-hand — and when the liver blocks that route, blood reaches the cava through porto-systemic anastomoses instead, which is what varices are."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Aorta and cava in section",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Aorta"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Cava"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Boundaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Related organs"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "left_renal_vein",
+          "intensity": 0.9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Cut across the abdomen at L1 and the arrangement is fixed. In the midline the vertebral body; on it, left of centre, the round thick-walled aorta; to its right the flatter, thin-walled cava; on either side of both, psoas major, and beyond them the kidneys in their fat. Crossing between the aorta and the superior mesenteric artery in front of it, the left renal vein — remember it as the vein that must pass through a gap. This is the section a CT reader works with, and three findings live on it. An aorta wider than three centimetres is an aneurysm; over five and a half and it is usually offered repair, because the risk of rupture then exceeds the risk of the operation. A cava that is flat and slit-like signals hypovolaemia, while a distended one signals a failing right heart or tamponade — the same measurement used at the bedside on ultrasound. And nodes lying between the two vessels, the aortocaval group, are the retroperitoneal nodes of testicular tumours, which is why an abdominal mass in a young man demands examination of the testes."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "What goes wrong with each",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "aorta",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "left_renal_vein",
+          "kind": "compressed in the angle — the nutcracker"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_common_iliac_artery",
+          "to": "left_common_iliac_vein",
+          "kind": "artery crosses and compresses the vein against L5"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_kidney",
+          "to": "ivc",
+          "kind": "route of tumour thrombus to the right atrium"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Coeliac branches"
+        }
+      ],
+      "narration": "Take the aorta first. An abdominal aortic aneurysm is the disease of this vessel: usually infrarenal, felt as an expansile mass above the umbilicus, and dangerous because rupture into the retroperitoneum presents as sudden back or abdominal pain with collapse and a pulsatile mass. Expansile means the fingers are pushed apart, not merely lifted, and that distinguishes an aneurysm from a mass transmitting the aortic pulse. Narrowing rather than dilatation gives two other pictures: occlusion at the bifurcation is the Leriche syndrome, and slow occlusion of the coeliac and mesenteric origins gives mesenteric angina — pain after meals, fear of eating and weight loss — while a sudden embolus into the superior mesenteric artery infarcts the midgut. Repair of any of these has to reckon with the inferior mesenteric artery, whose sacrifice can leave the left colon ischaemic. Now the cava. Its problems are obstruction rather than rupture: thrombus climbing from the iliac veins, a filter placed to stop that thrombus reaching the lungs, tumour thrombus growing up from a renal cell carcinoma, or simple external compression by a mass or a pregnant uterus. Obstruction below the renal veins gives bilateral leg swelling with dilated abdominal wall veins draining upwards; obstruction at or above the hepatic veins adds the tender liver and ascites of Budd–Chiari. And the two vessels behave differently for a surgeon: the aorta is thick and can be clamped and sewn, the cava is thin, low-pressure and tears — which is why caval injury in trauma carries the worse prognosis."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "There is no separate abdominal aorta in the catalog — FMA3784, 'descending aorta', is the whole thoracic and abdominal descending segment as one mesh. The aortic hiatus at T12 therefore cannot be shown as the point where thoracic becomes abdominal; it is narrated against the diaphragm instead, and a student cannot isolate the abdominal part alone.",
+    "The lumbar arteries, the median sacral artery, the inferior phrenic arteries, the suprarenal arteries and the gonadal arteries are all absent. Four of the paired lateral branches and all the posterior branches are therefore recited rather than shown, and only the renal pair can be pointed at. The order of the lateral branches down the aorta is a standard question and this scene answers it in narration only.",
+    "The hepatic veins are not in the catalog. The cava's most important tributaries — and the whole of the Budd–Chiari story — are taught against the liver mesh and the groove on its posterior surface.",
+    "The lumbar veins, the gonadal veins and the azygos vein are absent, so the vertebral venous plexus, the left varicocele and the azygos route of collateral return are narrated. The gonadal veins in particular are the asymmetry the beat-three narration leans on hardest and they cannot be drawn.",
+    "There is no portal vein and no inferior mesenteric vein in the catalog. The portal system is represented by the splenic and superior mesenteric veins only, so the confluence behind the neck of the pancreas is described rather than shown, and the porto-systemic anastomoses have no geometry at all. A companion diagram-mode scene of the portal system is the right home for that, and 'Portal venous system' remains a separate curriculum entry.",
+    "No anchors were authored. The six vertebral levels — T12, L1, L1 to L2, L2, L3, L4 — are the spine of this topic and each deserves a clickable point on the aorta. These meshes are not in the local decimated set, so a measured anchor could not be placed honestly; L1, L4 and L5 are included as whole vertebrae instead, which fixes three of the six levels visually and leaves the rest to narration.",
+    "The cisterna chyli, the thoracic duct, the lumbar sympathetic trunks and the para-aortic and aortocaval node groups have no models. They are named in beats four and five because a CT of this region is read for nodes as often as for vessels, but nothing can be pointed at.",
+    "This scene does not claim to cover 'Gut blood supply (coeliac/SMA/IMA)', 'Portal venous system', 'Kidney' or 'Psoas major & posterior wall', though all appear in it. The three unpaired branches are here as branches of the aorta with their vertebral levels and referred-pain territories, not as the arcades, marginal artery and anastomoses that a gut blood supply scene must teach; those entries stay on the worklist.",
+    "Iliac vessels are shown on the right side only for the external and internal branches, and both sides for the common vessels, because the teaching points that need both sides are the aortic bifurcation and the May-Thurner crossing. A student rotating the scene will see an incomplete pelvic tree."
+  ]
+}

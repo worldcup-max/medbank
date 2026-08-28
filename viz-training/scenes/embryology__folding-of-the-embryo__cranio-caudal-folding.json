@@ -1,0 +1,652 @@
+{
+  "schema": 2,
+  "id": "embryology__folding-of-the-embryo__cranio-caudal-folding",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Folding of the Embryo",
+  "structure": "Cranio-caudal folding",
+  "covers": [
+    "Cranio-caudal folding"
+  ],
+  "learning_goal": "Explain why the embryo folds in the median plane during week 4, draw the head fold and the tail fold in sagittal section, list in order what each fold carries and where it ends up — including the reversal that puts the heart caudal to the oropharyngeal membrane — and use those movements to account for ectopia cordis, a diaphragmatic hernia and caudal regression.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "folding of the embryo",
+      "cranio-caudal folding",
+      "craniocaudal folding",
+      "head fold",
+      "tail fold",
+      "week 4",
+      "embryonic folding",
+      "body form",
+      "foregut",
+      "hindgut"
+    ],
+    "terms": [
+      "cranio-caudal folding",
+      "craniocaudal folding",
+      "cephalocaudal folding",
+      "longitudinal folding",
+      "median plane",
+      "head fold",
+      "tail fold",
+      "week 4",
+      "day 22",
+      "day 28",
+      "trilaminar disc",
+      "flat disc",
+      "C-shaped embryo",
+      "neural tube",
+      "brain vesicles",
+      "differential growth",
+      "amnion",
+      "amniotic cavity",
+      "yolk sac",
+      "septum transversum",
+      "cardiogenic area",
+      "pericardial cavity",
+      "heart tube",
+      "oropharyngeal membrane",
+      "buccopharyngeal membrane",
+      "stomodeum",
+      "foregut",
+      "hindgut",
+      "midgut",
+      "primitive gut",
+      "vitelline duct",
+      "omphalomesenteric duct",
+      "connecting stalk",
+      "body stalk",
+      "allantois",
+      "cloaca",
+      "cloacal membrane",
+      "proctodeum",
+      "umbilical cord",
+      "umbilical ring",
+      "diaphragm development",
+      "phrenic nerve",
+      "C3 C4 C5",
+      "ectopia cordis",
+      "pentalogy of Cantrell",
+      "congenital diaphragmatic hernia",
+      "Bochdalek",
+      "caudal regression syndrome",
+      "sirenomelia",
+      "maternal diabetes",
+      "sacral agenesis",
+      "imperforate anus",
+      "anorectal malformation"
+    ]
+  },
+  "camera": {
+    "framing": "lateral"
+  },
+  "structures": [
+    {
+      "key": "flat_disc",
+      "label": "Where we start — a flat trilaminar disc",
+      "role": "context",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "trilaminar disc",
+        "flat disc",
+        "end of week 3",
+        "ectoderm",
+        "mesoderm",
+        "endoderm",
+        "amniotic cavity above",
+        "yolk sac below",
+        "pear-shaped"
+      ],
+      "narration": "At the end of week three the embryo is a flat, pear-shaped disc of three layers, with the amniotic cavity above it and the yolk sac hanging below. Nothing about that shape looks like a body yet. Everything in this scene is how that disc becomes a curled, cylindrical embryo in the space of about a week."
+    },
+    {
+      "key": "sagittal_frame",
+      "label": "Cut it in the median plane and watch from the side",
+      "role": "context",
+      "group": "Before folding",
+      "layer": "organ",
+      "color": "#95a5a6",
+      "terms": [
+        "median plane",
+        "sagittal section",
+        "midline",
+        "longitudinal",
+        "side view",
+        "cranial end",
+        "caudal end"
+      ],
+      "narration": "Cranio-caudal folding happens in the median plane, so draw it as a side view. One long cut from head end to tail end, and the same picture repeated at each stage. Lateral folding is the other plane and is a separate scene; if you try to draw both in one diagram you will confuse yourself and the examiner."
+    },
+    {
+      "key": "driver_growth",
+      "label": "Why it folds — the nervous system outgrows the disc",
+      "role": "part",
+      "group": "The mechanism",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "differential growth",
+        "rapid growth",
+        "neural tube",
+        "brain vesicles",
+        "somites",
+        "outgrows",
+        "yolk sac grows slowly",
+        "week 4"
+      ],
+      "narration": "Folding is not an act of will. The neural tube — especially the brain vesicles at the head end — grows extremely fast, while the yolk sac attached underneath barely grows at all. A sheet that grows quickly along its length while anchored below has only one option: it curls. That is the whole mechanism."
+    },
+    {
+      "key": "driver_amnion",
+      "label": "And the amnion presses in from outside",
+      "role": "part",
+      "group": "The mechanism",
+      "layer": "organ",
+      "color": "#1abc9c",
+      "terms": [
+        "amnion",
+        "amniotic cavity",
+        "expands",
+        "envelops",
+        "encircles the embryo",
+        "amniotic fluid",
+        "umbilical cord"
+      ],
+      "narration": "At the same time the amniotic cavity expands until it wraps around the embryo from every side. So the disc is pushed from within by growth and drawn round from without by the enlarging amnion. Where the amnion finally meets underneath is where the umbilical cord will be."
+    },
+    {
+      "key": "head_fold",
+      "label": "The head fold — the cranial end swings ventrally",
+      "role": "part",
+      "group": "The head fold",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "head fold",
+        "cranial fold",
+        "cephalic fold",
+        "ventrally",
+        "swings under",
+        "forebrain overhangs",
+        "C-shaped",
+        "day 22"
+      ],
+      "narration": "The cranial end of the disc grows forward past its own attachment and then curls downwards, so the future head comes to overhang the front of the embryo. Draw it as the top of a question mark. Everything that was lying flat in front of the head is now swung underneath it — and that is the part students get wrong."
+    },
+    {
+      "key": "head_order_before",
+      "label": "Before the fold: the order from head backwards",
+      "role": "part",
+      "group": "The head fold",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "septum transversum",
+        "pericardial cavity",
+        "cardiogenic area",
+        "heart tube",
+        "oropharyngeal membrane",
+        "buccopharyngeal membrane",
+        "cranial to the membrane",
+        "order before folding"
+      ],
+      "narration": "Learn this list in order, from the cranial edge working back: septum transversum, then the pericardial cavity, then the cardiogenic area with the heart tubes in it, then the oropharyngeal membrane, then the neural plate. That is the flat-disc order, and it is the only thing you have to memorise here — the fold does the rest."
+    },
+    {
+      "key": "head_order_after",
+      "label": "After the fold: the order is reversed",
+      "role": "part",
+      "group": "The head fold",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "reversal",
+        "order after folding",
+        "oropharyngeal membrane most cranial",
+        "heart ventral and caudal",
+        "septum transversum caudal to the heart",
+        "thorax",
+        "future diaphragm"
+      ],
+      "narration": "Now rotate that strip through half a turn, which is exactly what the head fold does to it. The oropharyngeal membrane ends up most cranial, the heart lies ventral and behind it, and the septum transversum ends up caudal to the heart, where the diaphragm will be. The list has flipped end for end. If you can reproduce that reversal you have understood cranio-caudal folding."
+    },
+    {
+      "key": "foregut",
+      "label": "The head fold pinches off the foregut",
+      "role": "part",
+      "group": "The head fold",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "foregut",
+        "dorsal part of yolk sac",
+        "incorporated",
+        "blind cranial end",
+        "oropharyngeal membrane",
+        "stomodeum",
+        "primitive pharynx",
+        "ruptures week 4"
+      ],
+      "narration": "As the head curls, the dorsal part of the yolk sac is taken into the embryo as a blind tube — the foregut. Its cranial end is sealed by the oropharyngeal membrane, with the stomodeum, the future mouth, as a dimple on the other side. That membrane breaks down in week four and the gut opens to the amniotic cavity for the first time."
+    },
+    {
+      "key": "septum_transversum",
+      "label": "The septum transversum is carried down to the diaphragm",
+      "role": "part",
+      "group": "The head fold",
+      "layer": "organ",
+      "color": "#ba4a00",
+      "terms": [
+        "septum transversum",
+        "central tendon of diaphragm",
+        "carried caudally",
+        "cervical level",
+        "C3 C4 C5",
+        "phrenic nerve",
+        "descends",
+        "liver bud"
+      ],
+      "narration": "The septum transversum starts at the cranial edge of the disc, opposite the future neck, and the head fold drags it back and down towards the thorax. That single journey explains a fact you were told to memorise: the diaphragm is supplied by C3, C4 and C5, because its central tendon was innervated while it still lay at cervical level and the phrenic nerve simply grew longer to follow it."
+    },
+    {
+      "key": "tail_fold",
+      "label": "The tail fold — the caudal end swings ventrally too",
+      "role": "part",
+      "group": "The tail fold",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "tail fold",
+        "caudal fold",
+        "primitive streak regresses",
+        "caudal eminence",
+        "swings ventrally",
+        "under the embryo",
+        "week 4"
+      ],
+      "narration": "The same thing happens at the other end. The caudal region grows past its attachment and curls forwards and under, so the tail end also comes to point towards the belly. The embryo now has the C-shape you see in every week-four picture."
+    },
+    {
+      "key": "hindgut",
+      "label": "The tail fold pinches off the hindgut and the cloaca",
+      "role": "part",
+      "group": "The tail fold",
+      "layer": "organ",
+      "color": "#3498db",
+      "terms": [
+        "hindgut",
+        "cloaca",
+        "cloacal membrane",
+        "allantois",
+        "incorporated",
+        "blind caudal end",
+        "proctodeum",
+        "urorectal septum"
+      ],
+      "narration": "At the tail end the yolk sac contributes the hindgut, ending blindly at the cloacal membrane. The allantois, which ran into the connecting stalk, is drawn in with it, so the terminal hindgut becomes the cloaca — the common chamber that will later be partitioned into rectum in front of one wall and bladder and urethra in front of the other."
+    },
+    {
+      "key": "stalk_ventral",
+      "label": "The connecting stalk is swung to the ventral surface",
+      "role": "part",
+      "group": "The tail fold",
+      "layer": "organ",
+      "color": "#2e86c1",
+      "terms": [
+        "connecting stalk",
+        "body stalk",
+        "moves ventrally",
+        "umbilical cord",
+        "amnion",
+        "vitelline duct",
+        "umbilical ring",
+        "cloacal membrane moves ventrally"
+      ],
+      "narration": "The connecting stalk began behind the tail end of the disc. The tail fold carries it round onto the ventral surface, where it meets the narrowing yolk stalk and is sheathed by amnion — and that combination is the umbilical cord. The cloacal membrane travels round with it and ends up on the ventral surface too, which is why an infra-umbilical wall defect and a bladder problem are the same accident."
+    },
+    {
+      "key": "midgut_yolk",
+      "label": "What is left in the middle — the midgut",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "midgut",
+        "still open to yolk sac",
+        "vitelline duct",
+        "omphalomesenteric duct",
+        "yolk stalk",
+        "narrows",
+        "foregut midgut hindgut",
+        "primitive gut tube"
+      ],
+      "narration": "The two folds seal the gut at each end but leave the middle open. The midgut stays in wide communication with the yolk sac, and the connection narrows into the vitelline duct. So the three parts of the primitive gut are simply a consequence of geometry: sealed in front by the head fold, sealed behind by the tail fold, still open in the middle. The gut tube itself is taught in its own scene."
+    },
+    {
+      "key": "result_shape",
+      "label": "The result — a C-shaped embryo with a tube inside it",
+      "role": "part",
+      "group": "The result",
+      "layer": "organ",
+      "color": "#9b59b6",
+      "terms": [
+        "C-shaped",
+        "cylindrical",
+        "curled",
+        "week 4 embryo",
+        "gut tube inside body tube",
+        "amnion surrounds",
+        "umbilical cord",
+        "dorsal convex"
+      ],
+      "narration": "Put the two folds together and the flat disc has become a curled cylinder, dorsally convex, with a gut tube running through it and a single narrow stalk at the belly. In under a week the embryo has acquired a head end, a tail end, a front and a back, and everything after this is refinement of that body plan."
+    },
+    {
+      "key": "ectopia_cordis",
+      "label": "Head fold fails — ectopia cordis",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "ectopia cordis",
+        "heart outside the chest",
+        "sternal cleft",
+        "failure of ventral body wall closure",
+        "pentalogy of Cantrell",
+        "epigastric omphalocele",
+        "pericardial defect",
+        "cardiac anomaly"
+      ],
+      "narration": "If the cranial part of the ventral wall never closes, the heart is left on the outside of the chest — ectopia cordis. In its full form it comes with four companions as the pentalogy of Cantrell: a sternal cleft, a midline epigastric omphalocele, a defect in the front of the diaphragm, a pericardial defect and an intracardiac malformation. Name it from the picture and you have named the failed fold."
+    },
+    {
+      "key": "cdh",
+      "label": "Septum transversum fails — congenital diaphragmatic hernia",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "congenital diaphragmatic hernia",
+        "Bochdalek",
+        "posterolateral",
+        "left side",
+        "pleuroperitoneal canal",
+        "bowel in the chest",
+        "pulmonary hypoplasia",
+        "scaphoid abdomen",
+        "respiratory distress at birth"
+      ],
+      "narration": "The septum transversum is only the front part of the diaphragm; the rest has to close behind it. When the posterolateral gap stays open — usually on the left — abdominal contents climb into the chest. That is a Bochdalek hernia. The baby is born in respiratory distress with a scaphoid abdomen, and the danger is not the hole but the lung that never had room to grow."
+    },
+    {
+      "key": "caudal_regression",
+      "label": "Tail fold fails — caudal regression",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "caudal regression syndrome",
+        "sacral agenesis",
+        "sirenomelia",
+        "mermaid syndrome",
+        "fused lower limbs",
+        "maternal diabetes",
+        "poorly controlled diabetes",
+        "imperforate anus",
+        "anorectal malformation",
+        "renal agenesis",
+        "neurogenic bladder"
+      ],
+      "narration": "Deficient mesoderm at the caudal end gives caudal regression syndrome: absent or shortened sacrum, lower limb weakness, a neurogenic bladder, anorectal and renal malformations, and in its extreme form sirenomelia with fused lower limbs. The association to remember for the exam is poorly controlled maternal diabetes. It is the single most quoted teratogenic link in this topic."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "Why a flat disc has to curl",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The mechanism"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "flat_disc"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "driver_growth",
+          "to": "flat_disc",
+          "kind": "grows far faster than, forcing it to curl"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "driver_amnion",
+          "to": "flat_disc",
+          "kind": "expands around and wraps"
+        }
+      ],
+      "narration": "Start with the flat trilaminar disc and ask one question: what would make a flat sheet curl? Two things. The neural tube along its midline grows enormously while the yolk sac below it does not, and the amniotic cavity swells around the whole embryo. Growth from inside, pressure from outside, and the disc folds in both planes at once. This scene follows the median plane."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "The head fold, and the reversal it causes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The head fold"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "head_fold",
+          "intensity": 0.95
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "head_order_before",
+            "head_order_after"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:head-fold-rotation",
+          "path": [
+            "head_order_before",
+            "head_fold",
+            "head_order_after"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Before the fold, working back from the cranial edge: septum transversum, pericardial cavity, cardiogenic area, oropharyngeal membrane. The head fold swings that whole strip through half a turn. Afterwards the oropharyngeal membrane is most cranial, the heart lies ventral and caudal to it, and the septum transversum sits behind the heart at the future diaphragm. Same four things, opposite order. Draw both panels side by side and the reversal teaches itself."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "The foregut appears, and the diaphragm starts its journey",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The head fold"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "septum_transversum",
+          "intensity": 0.9
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "head_fold",
+          "to": "foregut",
+          "kind": "takes the dorsal yolk sac into the embryo as"
+        }
+      ],
+      "narration": "Cut in the midline and watch the head fold roll the dorsal part of the yolk sac into the embryo. That blind tube is the foregut, sealed in front by the oropharyngeal membrane until it ruptures in week four. In the same movement the septum transversum is carried from opposite the neck down towards the thorax — which is why the diaphragm answers to C3, C4 and C5 and why the phrenic nerve is so long."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "The tail fold does the mirror image",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The tail fold"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tail_fold",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:tail-fold-rotation",
+          "path": [
+            "tail_fold",
+            "hindgut",
+            "stalk_ventral"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tail_fold",
+          "to": "stalk_ventral",
+          "kind": "carries onto the ventral surface"
+        }
+      ],
+      "narration": "The tail end curls the same way. It seals the hindgut at the cloacal membrane, pulls the allantois in so that the terminal hindgut becomes the cloaca, and swings the connecting stalk from behind the embryo round onto its belly. The cloacal membrane travels with it. Every one of those three movements is an exam answer somewhere else in the course."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "What the two folds leave behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The result"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "foregut"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "hindgut"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "midgut_yolk",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:gut-tube",
+          "path": [
+            "foregut",
+            "midgut_yolk",
+            "hindgut"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Sealed in front, sealed behind, still open in the middle. That is all foregut, midgut and hindgut means at this stage, and the midgut keeps its connection to the yolk sac through the narrowing vitelline duct. Step back and look at the embryo: a curled cylinder with a gut tube inside it and one stalk at the belly, where a flat disc stood a week ago."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "When a fold does not finish",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "head_fold",
+          "to": "ectopia_cordis",
+          "kind": "failing to close the ventral wall gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "septum_transversum",
+          "to": "cdh",
+          "kind": "an incomplete diaphragm gives"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "tail_fold",
+          "to": "caudal_regression",
+          "kind": "deficient caudal mesoderm gives"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Three lesions, one per fold. Cranial wall fails and the heart is outside the chest — ectopia cordis, and in full form the pentalogy of Cantrell. The diaphragm fails to close behind the septum transversum and bowel enters the chest — a Bochdalek hernia, where the killer is the hypoplastic lung, not the hole. And deficient mesoderm at the tail end gives caudal regression, from sacral agenesis to sirenomelia, classically with poorly controlled maternal diabetes. Learn the fold and the lesion comes free."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram, so diagram is recorded in deferred_modes. No 3d_anatomy option is listed for this structure and none is invented here.",
+    "Status is 'planned'. Seventeen regions, six beats, ops and narration complete, but no SVG artwork exists, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: a row of four median sagittal sections of the same embryo at days 22, 24, 26 and 28, drawn at one scale and one orientation, each showing amnion, yolk sac, neural tube, heart, septum transversum, oropharyngeal membrane, cloacal membrane and connecting stalk in their positions for that day; plus a two-panel inset showing the cranial strip before and after the fold with the four items numbered 1-4 in each so the reversal is visible at a glance.",
+    "The before/after panels in beat 2 are the centre of the scene and must be drawn with the four items numbered identically in both, at one scale. If the artist draws them as two unrelated pictures the reversal — the single most examined point here — becomes invisible.",
+    "Beats 2, 4 and 5 trace concept:head-fold-rotation, concept:tail-fold-rotation and concept:gut-tube. In each the subject is a movement or a lumen rather than a drawn object, so none can be a region.",
+    "Beat 6 authors PEEL_LAYER to lift the ventral body wall off the malformations. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because 'what is missing is the wall in front' is the teaching move that unites all three lesions.",
+    "'Primitive gut tube' is NOT claimed in covers[]. The foregut, midgut and hindgut are named here because the folds are what create them, but the regional derivatives, the arterial supply by gut division and the vitelline duct anomalies are that entry's work and are authored separately.",
+    "'Body cavity (coelom)' is NOT claimed. The pericardial cavity and the septum transversum are named as passengers of the head fold, but the splitting of lateral plate mesoderm and the partitioning of the coelom belong to that entry and to Lateral folding.",
+    "'Lateral folding' is NOT claimed. The two folds are simultaneous in life and the narration says so, but this scene draws only the median plane; the transverse story is authored alongside this one.",
+    "Diaphragm development is named only as far as the septum transversum's journey and the C3-C4-C5 innervation, because that is what the head fold explains. The pleuroperitoneal membranes, the dorsal mesentery of the oesophagus and the body wall contribution belong to a diaphragm scene and appear here in match.terms only, so a highlighted term still reaches this scene until that one exists.",
+    "Day numbers are the standard teaching approximations — folding through week 4, essentially complete by about day 28. Texts differ by a day or two; the narration gives them as approximations because no exam turns on the exact day of folding, unlike the neuropore dates.",
+    "Caudal regression is given with its diabetes association because that is the examined link. The narration names the malformation and its association and does not discuss management of an affected pregnancy, which is a counselling matter rather than an embryology one."
+  ]
+}

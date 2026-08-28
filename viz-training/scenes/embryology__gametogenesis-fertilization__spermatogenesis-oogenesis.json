@@ -1,0 +1,802 @@
+{
+  "schema": 2,
+  "id": "embryology__gametogenesis-fertilization__spermatogenesis-oogenesis",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Gametogenesis & Fertilization",
+  "structure": "Spermatogenesis & oogenesis",
+  "covers": [
+    "Spermatogenesis & oogenesis"
+  ],
+  "learning_goal": "Name every cell in the male and female germ line with its ploidy and chromatid number, say where each meiotic arrest happens and what releases it, and explain why the two processes differ in timing, yield and error rate.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "gametogenesis",
+      "spermatogenesis",
+      "oogenesis",
+      "meiosis",
+      "germ cells",
+      "reproduction",
+      "testis histology",
+      "ovary",
+      "ovarian cycle",
+      "infertility"
+    ],
+    "terms": [
+      "gametogenesis",
+      "spermatogenesis",
+      "spermiogenesis",
+      "spermiation",
+      "oogenesis",
+      "folliculogenesis",
+      "primordial germ cell",
+      "yolk sac endoderm",
+      "gonadal ridge",
+      "spermatogonium",
+      "type A dark spermatogonium",
+      "type A pale spermatogonium",
+      "type B spermatogonium",
+      "primary spermatocyte",
+      "secondary spermatocyte",
+      "spermatid",
+      "spermatozoon",
+      "acrosome",
+      "midpiece",
+      "flagellum",
+      "residual body",
+      "Sertoli cell",
+      "blood-testis barrier",
+      "sustentacular cell",
+      "androgen binding protein",
+      "inhibin",
+      "Leydig cell",
+      "interstitial cell",
+      "testosterone",
+      "FSH",
+      "LH",
+      "seminiferous tubule",
+      "seminiferous epithelium",
+      "oogonium",
+      "primary oocyte",
+      "secondary oocyte",
+      "ootid",
+      "ovum",
+      "first polar body",
+      "second polar body",
+      "zona pellucida",
+      "corona radiata",
+      "primordial follicle",
+      "primary follicle",
+      "secondary follicle",
+      "Graafian follicle",
+      "antrum",
+      "granulosa cells",
+      "theca interna",
+      "corpus luteum",
+      "meiosis",
+      "meiosis I",
+      "meiosis II",
+      "reductional division",
+      "equational division",
+      "prophase I",
+      "leptotene",
+      "zygotene",
+      "pachytene",
+      "diplotene",
+      "diakinesis",
+      "synaptonemal complex",
+      "crossing over",
+      "chiasma",
+      "independent assortment",
+      "dictyate arrest",
+      "prophase I arrest",
+      "metaphase II arrest",
+      "diploid",
+      "haploid",
+      "2n",
+      "1n",
+      "chromatid",
+      "nondisjunction",
+      "aneuploidy",
+      "trisomy 21",
+      "Down syndrome",
+      "Klinefelter syndrome",
+      "Turner syndrome",
+      "advanced maternal age",
+      "atresia",
+      "spermatogenic cycle",
+      "seminiferous epithelium cycle"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "pgc",
+      "label": "Primordial germ cells",
+      "role": "part",
+      "group": "Before either sex begins",
+      "layer": "organ",
+      "color": "#8e7cc3",
+      "terms": [
+        "primordial germ cell",
+        "PGC",
+        "yolk sac endoderm",
+        "hindgut",
+        "dorsal mesentery",
+        "gonadal ridge",
+        "week 4",
+        "week 6"
+      ],
+      "narration": "Both germ lines start in the same place and neither starts in the gonad. Primordial germ cells appear in the wall of the yolk sac in week four, then migrate along the dorsal mesentery of the hindgut to reach the gonadal ridge in week six. A cell that fails to arrive can survive where it stopped, which is why midline germ cell tumours turn up in the mediastinum and the sacrococcygeal region."
+    },
+    {
+      "key": "sem_tubule",
+      "label": "Seminiferous tubule",
+      "role": "context",
+      "group": "Male scaffolding",
+      "layer": "organ",
+      "color": "#c9a227",
+      "terms": [
+        "seminiferous tubule",
+        "seminiferous epithelium",
+        "basal compartment",
+        "adluminal compartment",
+        "lumen",
+        "rete testis"
+      ],
+      "narration": "The whole male sequence happens inside one tube, and it is read from the outside inward. The youngest cells sit on the basement membrane and each generation moves closer to the lumen. Read a section of testis that way and you can name every cell in it."
+    },
+    {
+      "key": "sertoli",
+      "label": "Sertoli cell & the blood-testis barrier",
+      "role": "part",
+      "group": "Male scaffolding",
+      "layer": "organ",
+      "color": "#5a8fd6",
+      "terms": [
+        "Sertoli cell",
+        "sustentacular cell",
+        "blood-testis barrier",
+        "tight junction",
+        "basal compartment",
+        "adluminal compartment",
+        "androgen binding protein",
+        "inhibin",
+        "FSH",
+        "anti-Mullerian hormone"
+      ],
+      "narration": "A tall cell running the full thickness of the epithelium, wrapped round every germ cell it is nursing. Its tight junctions divide the tubule into a basal compartment outside and an adluminal compartment inside, and that is the blood-testis barrier. Everything from the primary spermatocyte onward is haploid or recombining, so the immune system has never met it; the barrier is what stops it being attacked. Sertoli cells answer to FSH, make androgen binding protein to hold testosterone high in the tubule, and make inhibin to turn FSH back down."
+    },
+    {
+      "key": "leydig",
+      "label": "Leydig cell",
+      "role": "part",
+      "group": "Male scaffolding",
+      "layer": "organ",
+      "color": "#e07b39",
+      "terms": [
+        "Leydig cell",
+        "interstitial cell",
+        "testosterone",
+        "LH",
+        "interstitium"
+      ],
+      "narration": "Sits outside the tubule, between them, not in the epithelium. It answers to LH and makes testosterone. Spermatogenesis needs an intratubular testosterone far higher than blood levels, which is why exogenous anabolic steroids suppress LH, shut the Leydig cell down, and cause infertility while the man looks more virilised, not less."
+    },
+    {
+      "key": "spermatogonium",
+      "label": "Spermatogonium (2n, 2C)",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#3f7fbf",
+      "terms": [
+        "spermatogonium",
+        "type A dark",
+        "type A pale",
+        "type B spermatogonium",
+        "stem cell",
+        "mitosis",
+        "puberty",
+        "basement membrane"
+      ],
+      "narration": "The stem cell, sitting on the basement membrane. Type A dark is the reserve that divides rarely; type A pale divides by mitosis to renew itself and to produce type B; type B is committed and becomes a primary spermatocyte. This population sleeps from birth until puberty, then divides for the rest of life. The male germ line therefore accumulates mitoses with age, and that is why new dominant point mutations such as achondroplasia rise with paternal age."
+    },
+    {
+      "key": "primary_spermatocyte",
+      "label": "Primary spermatocyte (2n, 4C)",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#2e6da4",
+      "terms": [
+        "primary spermatocyte",
+        "prophase I",
+        "pachytene",
+        "crossing over",
+        "synaptonemal complex",
+        "largest germ cell",
+        "adluminal compartment"
+      ],
+      "narration": "The moment a type B spermatogonium duplicates its DNA it becomes a primary spermatocyte and crosses the blood-testis barrier into the adluminal compartment. It is the largest cell in the tubule and the one you see most of on a slide, because prophase I lasts about three weeks and the cell sits in it. Crossing over happens here."
+    },
+    {
+      "key": "secondary_spermatocyte",
+      "label": "Secondary spermatocyte (1n, 2C)",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#4a90c2",
+      "terms": [
+        "secondary spermatocyte",
+        "meiosis I complete",
+        "haploid",
+        "two chromatids",
+        "rarely seen",
+        "meiosis II"
+      ],
+      "narration": "The product of meiosis I. It is haploid but each chromosome still has two chromatids, so the DNA content is that of a normal diploid cell — this is the cell students get wrong. It is almost never seen on a slide because it enters meiosis II within hours."
+    },
+    {
+      "key": "spermatid",
+      "label": "Spermatid (1n, 1C)",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#7fb3d5",
+      "terms": [
+        "spermatid",
+        "round spermatid",
+        "meiosis II complete",
+        "haploid",
+        "one chromatid",
+        "intercellular bridge",
+        "syncytium"
+      ],
+      "narration": "Small, round, near the lumen, and four of them come from every primary spermatocyte. They stay joined by cytoplasmic bridges so a whole clone matures together, which is why an entire cohort in one part of the tubule looks the same stage."
+    },
+    {
+      "key": "spermiogenesis",
+      "label": "Spermiogenesis",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "spermiogenesis",
+        "acrosome",
+        "Golgi",
+        "nuclear condensation",
+        "protamine",
+        "midpiece",
+        "mitochondrial sheath",
+        "flagellum",
+        "axoneme",
+        "residual body",
+        "spermiation"
+      ],
+      "narration": "No division happens here — a round spermatid is remodelled into a spermatozoon. The Golgi makes the acrosome as a cap over the nucleus, the nucleus condenses as protamines replace histones, mitochondria coil round the neck to form the midpiece, the centriole grows the flagellum, and the surplus cytoplasm is shed as a residual body eaten by the Sertoli cell. Release into the lumen is spermiation."
+    },
+    {
+      "key": "spermatozoon",
+      "label": "Spermatozoon",
+      "role": "part",
+      "group": "Male germ line",
+      "layer": "organ",
+      "color": "#1f618d",
+      "terms": [
+        "spermatozoon",
+        "sperm",
+        "head",
+        "acrosome",
+        "neck",
+        "midpiece",
+        "principal piece",
+        "tail",
+        "epididymis",
+        "motility",
+        "64 days",
+        "74 days"
+      ],
+      "narration": "Structurally finished but not yet able to swim or fertilise. Motility is gained in the epididymis and fertilising ability only in the female tract, at capacitation. The whole run from spermatogonium to spermatozoon takes about sixty-four to seventy-four days, which is why any drug or fever that damages the process shows up in a semen count two to three months later, not next week."
+    },
+    {
+      "key": "oogonium",
+      "label": "Oogonium (2n, 2C)",
+      "role": "part",
+      "group": "Female germ line",
+      "layer": "organ",
+      "color": "#c2185b",
+      "terms": [
+        "oogonium",
+        "mitosis",
+        "fetal life",
+        "seven million",
+        "month 5",
+        "atresia"
+      ],
+      "narration": "Oogonia divide by mitosis only in fetal life. The number peaks at about seven million around month five of gestation and then falls by atresia — two million at birth, four hundred thousand at puberty, about four hundred ever ovulated. There are no oogonia left after birth, so a woman cannot make a new egg. That single fact drives everything else about oogenesis."
+    },
+    {
+      "key": "primary_oocyte",
+      "label": "Primary oocyte (2n, 4C) — arrested in prophase I",
+      "role": "part",
+      "group": "Female germ line",
+      "layer": "organ",
+      "color": "#ad1457",
+      "terms": [
+        "primary oocyte",
+        "prophase I arrest",
+        "dictyate arrest",
+        "diplotene",
+        "first meiotic arrest",
+        "oocyte maturation inhibitor",
+        "LH surge",
+        "advanced maternal age"
+      ],
+      "narration": "Every oogonium that survives enters meiosis I before birth and then stops in prophase I, at diplotene. It stays there until that follicle is recruited — up to fifty years. An oocyte ovulated at forty-five has held its chromosomes together on a spindle for forty-five years, and the cohesins holding sister chromatids degrade with time. That is the mechanism behind the rise in trisomy with maternal age; it is not the ovary getting tired."
+    },
+    {
+      "key": "secondary_oocyte",
+      "label": "Secondary oocyte (1n, 2C) — arrested in metaphase II",
+      "role": "part",
+      "group": "Female germ line",
+      "layer": "organ",
+      "color": "#e91e63",
+      "terms": [
+        "secondary oocyte",
+        "metaphase II arrest",
+        "second meiotic arrest",
+        "LH surge",
+        "ovulation",
+        "unequal cytoplasmic division",
+        "what is ovulated"
+      ],
+      "narration": "The LH surge releases the first arrest and meiosis I completes just before ovulation. The cell that leaves the ovary is a secondary oocyte in metaphase II, not an ovum — an examiner asks this every year. It stops again and waits, and only a fertilising sperm releases it."
+    },
+    {
+      "key": "polar_bodies",
+      "label": "First & second polar bodies",
+      "role": "part",
+      "group": "Female germ line",
+      "layer": "organ",
+      "color": "#f48fb1",
+      "terms": [
+        "first polar body",
+        "second polar body",
+        "unequal division",
+        "cytoplasm",
+        "polar body biopsy",
+        "one ovum per oocyte"
+      ],
+      "narration": "Both female meiotic divisions are deliberately unequal. One daughter takes nearly all the cytoplasm and the other is discarded as a polar body with almost none. One primary oocyte therefore yields one functional gamete, where one primary spermatocyte yields four. The cytoplasm matters because the zygote lives on maternal stores and maternal mitochondria until its own genome switches on."
+    },
+    {
+      "key": "ovum",
+      "label": "Ovum / mature oocyte (1n, 1C)",
+      "role": "part",
+      "group": "Female germ line",
+      "layer": "organ",
+      "color": "#d81b60",
+      "terms": [
+        "ovum",
+        "ootid",
+        "mature oocyte",
+        "meiosis II complete",
+        "fertilization",
+        "second polar body extruded"
+      ],
+      "narration": "Meiosis II finishes only after a sperm has entered. So a true ovum exists for minutes, inside an already fertilised cell, and the second polar body is extruded as it happens. If fertilisation does not occur, the secondary oocyte degenerates within about twenty-four hours still in metaphase II."
+    },
+    {
+      "key": "follicle",
+      "label": "The follicle around her",
+      "role": "context",
+      "group": "Female scaffolding",
+      "layer": "organ",
+      "color": "#ba68c8",
+      "terms": [
+        "primordial follicle",
+        "primary follicle",
+        "secondary follicle",
+        "antral follicle",
+        "Graafian follicle",
+        "antrum",
+        "granulosa cell",
+        "theca interna",
+        "zona pellucida",
+        "corona radiata",
+        "cumulus oophorus",
+        "corpus luteum"
+      ],
+      "narration": "The oocyte never matures alone. A flat layer of granulosa cells makes it a primordial follicle; those cells become cuboidal and lay down the zona pellucida in the primary follicle; fluid collects into an antrum in the secondary follicle; the Graafian follicle bulges from the surface and ruptures. Follicle growth and oocyte maturation are two clocks that must keep time with each other, and most assisted-reproduction failure is a mismatch between them."
+    },
+    {
+      "key": "meiosis_i",
+      "label": "Meiosis I — the reductional division",
+      "role": "part",
+      "group": "The shared machinery",
+      "layer": "organ",
+      "color": "#27ae60",
+      "terms": [
+        "meiosis I",
+        "reductional division",
+        "prophase I",
+        "leptotene",
+        "zygotene",
+        "pachytene",
+        "diplotene",
+        "diakinesis",
+        "synaptonemal complex",
+        "crossing over",
+        "chiasma",
+        "independent assortment",
+        "homologous chromosomes separate"
+      ],
+      "narration": "Homologous chromosomes pair, exchange segments, and then separate. Ploidy halves here — 2n becomes 1n — which is why it is called reductional. Two things create genetic variety and both happen in this division: crossing over at pachytene, and the independent assortment of maternal and paternal homologues at metaphase I. Remember the five stages of prophase I in order, because it is asked as a list."
+    },
+    {
+      "key": "meiosis_ii",
+      "label": "Meiosis II — the equational division",
+      "role": "part",
+      "group": "The shared machinery",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "meiosis II",
+        "equational division",
+        "sister chromatids separate",
+        "no DNA replication",
+        "mitosis-like",
+        "haploid to haploid"
+      ],
+      "narration": "Sister chromatids separate, exactly as in mitosis, and there is no DNA replication before it. Ploidy does not change — 1n before, 1n after — only the chromatid number halves. Say it as a rule: meiosis I halves the chromosomes, meiosis II halves the chromatids."
+    },
+    {
+      "key": "nondisjunction",
+      "label": "Nondisjunction",
+      "role": "part",
+      "group": "The shared machinery",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "nondisjunction",
+        "aneuploidy",
+        "trisomy 21",
+        "Down syndrome",
+        "trisomy 18",
+        "trisomy 13",
+        "Klinefelter syndrome",
+        "47 XXY",
+        "Turner syndrome",
+        "45 X",
+        "advanced maternal age",
+        "meiosis I error",
+        "meiosis II error"
+      ],
+      "narration": "A pair that fails to separate gives one gamete an extra chromosome and the other none. In meiosis I the error involves both homologues, so the gamete carries one of each parental chromosome; in meiosis II it involves sister chromatids, so the gamete carries two copies of the same one. Most trisomy 21 is a maternal meiosis I error, and the risk rises steeply after thirty-five for the arrest reason above. Turner syndrome is the one aneuploidy more often paternal in origin."
+    },
+    {
+      "key": "compare",
+      "label": "Male versus female — the six differences",
+      "role": "part",
+      "group": "The shared machinery",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "spermatogenesis versus oogenesis",
+        "four gametes versus one",
+        "continuous versus cyclical",
+        "puberty to death",
+        "fetal life",
+        "no arrest",
+        "two arrests",
+        "equal division",
+        "unequal division"
+      ],
+      "narration": "Six lines answer most questions on this topic. Start: he starts at puberty, she starts in fetal life. Yield: four gametes from one precursor, or one plus polar bodies. Duration: about seventy days start to finish, or up to fifty years. Arrests: none in the male, two in the female. Division: equal in the male, unequal in the female. End: his lasts until death, hers ends at the menopause."
+    }
+  ],
+  "views": [
+    {
+      "mode": "mechanism",
+      "beat": 1,
+      "title": "One origin, two destinies",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Before either sex begins"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pgc",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pgc",
+          "to": "spermatogonium",
+          "kind": "becomes, in the male gonad"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pgc",
+          "to": "oogonium",
+          "kind": "becomes, in the female gonad"
+        }
+      ],
+      "narration": "Both sequences begin with the same cell. Primordial germ cells form in the yolk sac wall in week four and migrate through the dorsal mesentery of the hindgut into the gonadal ridge by week six. In a male gonad they become spermatogonia and then wait for puberty. In a female gonad they become oogonia and start dividing at once. Everything that differs afterwards follows from that timing."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 2,
+      "title": "Reading a seminiferous tubule from outside in",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Male scaffolding"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Male germ line"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sertoli",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sertoli",
+          "to": "primary_spermatocyte",
+          "kind": "encloses in the adluminal compartment"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "leydig",
+          "to": "sem_tubule",
+          "kind": "supplies testosterone from outside"
+        }
+      ],
+      "narration": "Cut a tubule across and the sequence is laid out in space. Spermatogonia on the basement membrane, primary spermatocytes just inside, spermatids near the lumen, tails in the lumen itself. The Sertoli cell spans all of it, and its tight junctions make the blood-testis barrier that separates the basal compartment from the adluminal one. Cells beyond that barrier are haploid and immunologically foreign, so the barrier is what prevents autoimmune orchitis. Leydig cells sit outside the tubule in the interstitium and answer to LH."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The male line, with the numbers",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Male germ line"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sem_tubule"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:male-germ-line",
+          "path": [
+            "spermatogonium",
+            "primary_spermatocyte",
+            "secondary_spermatocyte",
+            "spermatid",
+            "spermiogenesis",
+            "spermatozoon"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "secondary_spermatocyte",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "Learn the chain with its ploidy attached. Spermatogonium 2n with two chromatids. Primary spermatocyte 2n with four, because DNA has replicated. Secondary spermatocyte 1n with two — haploid, but holding the DNA of a diploid cell, and that is the step most often got wrong. Spermatid 1n with one. Four spermatids from every primary spermatocyte, and no arrest anywhere in the run."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Spermiogenesis — remodelling, not division",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Male germ line"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "spermatogonium"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spermiogenesis",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spermiogenesis",
+          "to": "spermatozoon",
+          "kind": "produces"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sertoli",
+          "to": "spermiogenesis",
+          "kind": "phagocytoses the residual body"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "The chromosome work is finished; what remains is engineering. The Golgi builds the acrosome as a cap over the nucleus — it is a lysosome, and its enzymes will open the zona pellucida. The nucleus condenses as protamines replace histones. Mitochondria wrap the neck to make the midpiece that powers the tail. Surplus cytoplasm is shed as a residual body and eaten by the Sertoli cell. Then the cell is released into the lumen — spermiation. It still cannot swim, and it still cannot fertilise."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Her stock is fixed before she is born",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Female germ line"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "follicle"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "oogonium",
+          "intensity": 0.85
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "oogonium",
+          "to": "primary_oocyte",
+          "kind": "all enter meiosis I before birth"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "primary_oocyte",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Oogonia multiply by mitosis only in fetal life, peaking near seven million at about month five. All that survive enter meiosis I before birth and stop in prophase I. Two million remain at birth, four hundred thousand at puberty, and about four hundred are ever ovulated. So the cell released this month has been waiting since before the woman was born, and the longer it waited the more likely its chromosomes are to separate badly."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Two arrests and what releases each",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Female germ line"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "follicle"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:female-germ-line",
+          "path": [
+            "oogonium",
+            "primary_oocyte",
+            "secondary_oocyte",
+            "ovum",
+            "polar_bodies"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "secondary_oocyte",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "secondary_oocyte",
+          "to": "polar_bodies",
+          "kind": "unequal division"
+        }
+      ],
+      "narration": "The first arrest is prophase I and it is broken by the LH surge, which completes meiosis I hours before ovulation. What is ovulated is therefore a secondary oocyte in metaphase II — the second arrest. Only a fertilising sperm breaks that one, and the second polar body is thrown off as it does. If no sperm arrives, the cell dies within about a day, still in metaphase II. Each division sheds a polar body, so one primary oocyte gives one usable gamete, not four."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The division that halves, the division that does not",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The shared machinery"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "meiosis_i",
+            "meiosis_ii"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "meiosis_i",
+          "to": "nondisjunction",
+          "kind": "homologues fail to separate"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "meiosis_ii",
+          "to": "nondisjunction",
+          "kind": "chromatids fail to separate"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "nondisjunction",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Meiosis I separates homologous chromosomes and halves the ploidy; meiosis II separates sister chromatids and does not. Crossing over and independent assortment both belong to the first division, so that is where variety is made. It is also where most errors are made. Nondisjunction in meiosis I sends both parental homologues into one gamete; in meiosis II it sends two copies of the same chromosome. Most Down syndrome comes from maternal meiosis I, and its risk climbs with maternal age because the spindle has been held together for decades."
+    },
+    {
+      "mode": "comparison",
+      "beat": 8,
+      "title": "Six lines that answer the question",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Male germ line",
+            "Female germ line"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "compare",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Set the two side by side. He begins at puberty and continues until death; she begins in fetal life and stops at the menopause. He makes four gametes from one precursor; she makes one and discards the rest as polar bodies. His run takes about seventy days with no arrest; hers takes up to fifty years with two. His divisions are equal; hers are deliberately unequal so the egg keeps the cytoplasm. And because he is still dividing at seventy, his errors are new point mutations, while hers are chromosome errors from a spindle that has waited too long."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence, not as a downgrade. The curriculum lists sequence then diagram for this structure and no 3d option at all, because the subject is a cell lineage over time, not a spatial form. Nothing is deferred except diagram.",
+    "Status is 'planned'. The scene is fully authored — twenty regions, eight beats, ops and narration — but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a seminiferous tubule in cross-section with the four germ-cell generations stacked from basement membrane to lumen, the Sertoli cell spanning them with its tight junctions drawn, the Leydig cell in the interstitium, and a parallel female column running oogonium to ovum with both polar bodies and the follicle stages beside it.",
+    "First embryology scene in the corpus and the first genuine mode switch. Two authoring conventions are set here and should be followed or deliberately changed: ploidy is written into the label as (2n, 4C) so a student sees it without opening the narration, and the two germ lines are separate groups so ISOLATE_REGION can run one column at a time before beat 8 compares them.",
+    "Beats 3 and 6 trace concept:male-germ-line and concept:female-germ-line. The subject of a sequence-mode trace is the lineage itself, which has no drawn object — the waypoints are the cells and the order is the thing being rehearsed.",
+    "CROSS_SECTION in beat 2 is authored because the histological cross-section IS the teaching for the male line; on an SVG the drawing is already a section, so the op will be inert rather than degraded. Kept because it is the correct instruction the day the same scene is rendered on a tubule model.",
+    "Hormonal control is carried inside the Sertoli and Leydig narration rather than as its own group, because 'Spermatogenesis & oogenesis' is a cell-lineage structure and the hypothalamic-pituitary-gonadal axis belongs to physiology. If a later curriculum entry claims the axis, that content should move rather than be duplicated.",
+    "Figures are the standard teaching ones: seven million oogonia at month five, two million at birth, four hundred thousand at puberty, about four hundred ovulated; sixty-four to seventy-four days for a full spermatogenic run. Quoted as approximations in the narration for that reason."
+  ]
+}

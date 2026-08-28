@@ -1,0 +1,668 @@
+{
+  "schema": 2,
+  "id": "embryology__week-3-gastrulation__primitive-streak",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Week 3: Gastrulation",
+  "structure": "Primitive streak",
+  "covers": [
+    "Primitive streak"
+  ],
+  "learning_goal": "Say where and when the primitive streak appears, name its parts on a drawing of the dorsal disc, describe how epiblast cells leave the surface and where they go, use the streak to give the embryo three axes, and explain the three malformations that follow when it fails to regress or fails to signal.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "primitive streak",
+      "gastrulation",
+      "week 3",
+      "early development",
+      "germ layers",
+      "body axes",
+      "laterality",
+      "congenital malformation"
+    ],
+    "terms": [
+      "primitive streak",
+      "streak",
+      "gastrulation",
+      "day 15",
+      "day 16",
+      "week 3",
+      "epiblast",
+      "hypoblast",
+      "bilaminar disc",
+      "trilaminar disc",
+      "caudal end",
+      "cranial end",
+      "midline",
+      "dorsal surface",
+      "primitive groove",
+      "primitive pit",
+      "primitive node",
+      "Hensen's node",
+      "primitive knot",
+      "ingression",
+      "invagination",
+      "epithelial to mesenchymal transition",
+      "EMT",
+      "E-cadherin",
+      "FGF8",
+      "Brachyury",
+      "T gene",
+      "mesenchyme",
+      "definitive endoderm",
+      "intraembryonic mesoderm",
+      "ectoderm",
+      "mesoderm",
+      "endoderm",
+      "notochordal process",
+      "prenotochordal cells",
+      "craniocaudal axis",
+      "left-right axis",
+      "dorsoventral axis",
+      "bilateral symmetry",
+      "oropharyngeal membrane",
+      "prechordal plate",
+      "cloacal membrane",
+      "streak regression",
+      "day 26",
+      "week 4",
+      "cardiogenic area",
+      "nodal cilia",
+      "situs inversus",
+      "situs inversus totalis",
+      "Kartagener syndrome",
+      "primary ciliary dyskinesia",
+      "dextrocardia",
+      "sacrococcygeal teratoma",
+      "caudal dysgenesis",
+      "caudal regression syndrome",
+      "sirenomelia",
+      "maternal diabetes",
+      "14-day rule",
+      "individuation"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "disc_context",
+      "label": "The bilaminar disc, seen from above — day 15",
+      "role": "context",
+      "group": "Where and when",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "bilaminar disc",
+        "epiblast",
+        "hypoblast",
+        "dorsal surface",
+        "amniotic cavity",
+        "day 15",
+        "week 3",
+        "pear-shaped disc"
+      ],
+      "narration": "Week three opens with the disc still two layers thick. Look down on it from inside the amniotic cavity and you are looking at the epiblast. Everything in this scene happens on that surface. The disc is broader at the cranial end than the caudal end, so the shape itself tells you which way round it is."
+    },
+    {
+      "key": "streak",
+      "label": "Primitive streak",
+      "role": "part",
+      "group": "The streak itself",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "primitive streak",
+        "streak",
+        "day 15",
+        "caudal end",
+        "midline",
+        "epiblast",
+        "narrow groove",
+        "thickened band",
+        "first sign of gastrulation"
+      ],
+      "narration": "On about day fifteen a narrow band thickens in the midline at the caudal end of the epiblast. That is the primitive streak. Two facts define it and both are asked: it forms in the epiblast, and it forms caudally. It then extends forwards towards the middle of the disc, so the streak is a moving structure, not a fixed line."
+    },
+    {
+      "key": "groove",
+      "label": "Primitive groove",
+      "role": "part",
+      "group": "The streak itself",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "primitive groove",
+        "groove",
+        "narrow furrow",
+        "midline",
+        "entry point",
+        "ingression"
+      ],
+      "narration": "A shallow furrow runs down the middle of the streak. That is the primitive groove, and it is simply the doorway: it is where surface cells sink out of the epiblast. If a question asks how cells get from the top layer into the middle of the disc, the answer starts at this groove."
+    },
+    {
+      "key": "node",
+      "label": "Primitive node (Hensen's node)",
+      "role": "part",
+      "group": "The streak itself",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "primitive node",
+        "Hensen's node",
+        "primitive knot",
+        "cranial end of the streak",
+        "organiser",
+        "signalling centre",
+        "nodal cilia",
+        "prenotochordal cells"
+      ],
+      "narration": "The cranial end of the streak swells into a small mound — the primitive node, also called Hensen's node. Do not treat it as decoration. It is the embryo's chief organiser: the cells that build the midline pass through it, and the signals that decide which side is left come from it. Almost everything the streak does that is not simple layer-making is done here."
+    },
+    {
+      "key": "pit",
+      "label": "Primitive pit",
+      "role": "part",
+      "group": "The streak itself",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "primitive pit",
+        "depression in the node",
+        "notochordal process",
+        "notochordal canal",
+        "midline entry"
+      ],
+      "narration": "A small depression sits in the centre of the node — the primitive pit. Cells destined for the midline sink here rather than at the groove, and they run forward as a tube under the ectoderm. Groove for the layers, pit for the midline: that split is the cleanest way to hold the two routes apart."
+    },
+    {
+      "key": "ingression",
+      "label": "Ingression — cells leave the surface",
+      "role": "part",
+      "group": "How cells move",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "ingression",
+        "invagination",
+        "epithelial to mesenchymal transition",
+        "EMT",
+        "E-cadherin",
+        "loss of adhesion",
+        "flask-shaped cells",
+        "mesenchyme",
+        "FGF8",
+        "Brachyury",
+        "T gene",
+        "migration"
+      ],
+      "narration": "An epiblast cell reaching the groove loosens its junctions, loses E-cadherin, becomes flask-shaped and drops out of the sheet as a free mesenchymal cell. That change of state is an epithelial to mesenchymal transition, driven at the streak by FGF8, and it is the single mechanism the whole of gastrulation runs on. The same trick is reused by neural crest cells later, and by carcinoma cells when they metastasise — which is why examiners like it."
+    },
+    {
+      "key": "endoderm_route",
+      "label": "First wave — displacing the hypoblast",
+      "role": "part",
+      "group": "How cells move",
+      "layer": "organ",
+      "color": "#f1c40f",
+      "terms": [
+        "definitive endoderm",
+        "displaces the hypoblast",
+        "first wave",
+        "epiblast origin",
+        "lower layer",
+        "not from hypoblast"
+      ],
+      "narration": "The first cells through the groove push all the way down and displace the hypoblast entirely, replacing it as the definitive endoderm. Learn the direction of that sentence. The lower layer of the trilaminar disc is not the old hypoblast renamed — it is epiblast that migrated down and evicted it. Students lose this mark every year."
+    },
+    {
+      "key": "mesoderm_route",
+      "label": "Second wave — filling the middle",
+      "role": "part",
+      "group": "How cells move",
+      "layer": "organ",
+      "color": "#27ae60",
+      "terms": [
+        "intraembryonic mesoderm",
+        "second wave",
+        "middle layer",
+        "spreads laterally",
+        "spreads cranially",
+        "mesenchyme",
+        "extraembryonic mesoderm continuity"
+      ],
+      "narration": "The cells that follow stop between the two sheets and spread out as intraembryonic mesoderm. They fan sideways and forwards, meeting their opposite numbers in front of the prechordal plate to form the cardiogenic area. The epiblast left behind on the surface is now the ectoderm. One source, three layers, in that order."
+    },
+    {
+      "key": "notochordal_process",
+      "label": "Midline cells through the pit",
+      "role": "part",
+      "group": "How cells move",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "notochordal process",
+        "prenotochordal cells",
+        "primitive pit",
+        "notochordal canal",
+        "midline",
+        "cranial migration",
+        "prechordal plate",
+        "notochord"
+      ],
+      "narration": "Cells that enter through the pit take a different road. They run forward in the midline between ectoderm and endoderm as far as the prechordal plate and form the notochordal process, which becomes the notochord. This scene names that route because the pit has no other purpose; what the notochord then does is taught on its own."
+    },
+    {
+      "key": "axes",
+      "label": "Three axes at once",
+      "role": "part",
+      "group": "What the streak defines",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "craniocaudal axis",
+        "left-right axis",
+        "dorsoventral axis",
+        "bilateral symmetry",
+        "midline",
+        "body plan",
+        "median plane"
+      ],
+      "narration": "The moment the streak appears the embryo acquires a body plan. The streak is caudal, so there is a head end and a tail end. It lies in the midline, so there is a left and a right. Ectoderm is dorsal and endoderm ventral, so there is a back and a front. Three axes from one structure, and every later description of position depends on them."
+    },
+    {
+      "key": "membranes",
+      "label": "Two places mesoderm never reaches",
+      "role": "part",
+      "group": "What the streak defines",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "oropharyngeal membrane",
+        "buccopharyngeal membrane",
+        "prechordal plate",
+        "cloacal membrane",
+        "no mesoderm",
+        "ectoderm and endoderm fused",
+        "future mouth",
+        "future anus"
+      ],
+      "narration": "Mesoderm spreads everywhere except two spots where ectoderm and endoderm stay stuck together. Cranially that is the oropharyngeal membrane, at the prechordal plate, and it breaks down to open the mouth. Caudally it is the cloacal membrane, which breaks down to open the anus and the urogenital opening. Both are two-layered islands in a three-layered disc, and both later have to rupture."
+    },
+    {
+      "key": "regression",
+      "label": "The streak regresses",
+      "role": "part",
+      "group": "What the streak defines",
+      "layer": "organ",
+      "color": "#7f8c8d",
+      "terms": [
+        "streak regression",
+        "shortens",
+        "caudal",
+        "day 26",
+        "week 4",
+        "disappears",
+        "caudal eminence",
+        "remnant"
+      ],
+      "narration": "Once the streak has produced enough cells it stops growing and shrinks backwards, and by about day twenty-six it has all but gone. The order it built the body in is the order it leaves: cranial structures were laid down first, caudal ones last. Two of the three malformations in this topic are simply this shrinking going wrong."
+    },
+    {
+      "key": "laterality",
+      "label": "Why the heart is on the left",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#5dade2",
+      "terms": [
+        "nodal cilia",
+        "leftward flow",
+        "left-right asymmetry",
+        "laterality",
+        "situs inversus",
+        "situs inversus totalis",
+        "dextrocardia",
+        "Kartagener syndrome",
+        "primary ciliary dyskinesia",
+        "bronchiectasis",
+        "infertility"
+      ],
+      "narration": "Cilia on the primitive node beat in one direction and sweep signalling fluid to the left, which is how a symmetrical disc decides which side is which. If those cilia do not move, the side is settled by chance and about half of such embryos end up mirror-image — situs inversus. That is the link to Kartagener syndrome: immotile cilia give situs inversus with chronic sinusitis and bronchiectasis, and subfertility, because the same protein moves sperm tails and airway cilia."
+    },
+    {
+      "key": "teratoma",
+      "label": "A streak that does not disappear",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "terms": [
+        "sacrococcygeal teratoma",
+        "remnant of the primitive streak",
+        "pluripotent cells",
+        "sacrococcygeal region",
+        "newborn tumour",
+        "female predominance",
+        "all three germ layers",
+        "malignant change"
+      ],
+      "narration": "Streak cells are pluripotent, so a remnant left behind in the sacrococcygeal region can grow into a tumour containing tissue from all three germ layers — a sacrococcygeal teratoma. It is the commonest tumour of the newborn, far commoner in girls, and it is removed early because the risk of malignant change rises with age. When you are asked why it contains teeth or gut or nerve, the answer is that its parent cell had not yet chosen a layer."
+    },
+    {
+      "key": "caudal_dysgenesis",
+      "label": "A streak that makes too little",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#cd6155",
+      "terms": [
+        "caudal dysgenesis",
+        "caudal regression syndrome",
+        "sirenomelia",
+        "mermaid syndrome",
+        "insufficient mesoderm",
+        "maternal diabetes",
+        "sacral agenesis",
+        "fused lower limbs",
+        "renal agenesis",
+        "imperforate anus"
+      ],
+      "narration": "If too little mesoderm is made at the caudal end, the structures that depend on it are deficient — sacral agenesis, imperforate anus, absent or fused kidneys, and in the extreme the lower limb buds run together as sirenomelia. This is caudal dysgenesis, and its best-known association is poorly controlled maternal diabetes. It is one of the arguments for getting glucose under control before conception rather than after a positive test."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Look down on the disc and find the line",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The streak itself"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_context"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "streak",
+          "intensity": 0.95
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "One picture carries this topic: the disc seen from above, from inside the amniotic cavity, so you are looking at the epiblast. On about day fifteen a narrow thickened line appears in the midline at the caudal end. That is the primitive streak, and its appearance is the definition of week three. It then grows forwards, so it is a line that lengthens towards the middle of the disc."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Groove, node, pit — three named parts",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The streak itself"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "groove",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "streak",
+          "to": "node",
+          "kind": "swells at its cranial end into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "node",
+          "to": "pit",
+          "kind": "is depressed in its centre as"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "groove",
+            "pit"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Label three things on the streak and you can answer any question about it. A furrow down its length — the primitive groove. A mound at its cranial end — the primitive node, or Hensen's node. A dimple in that mound — the primitive pit. Cells for the germ layers go in at the groove; cells for the midline go in at the pit. Two doors, two destinations."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "How a surface cell becomes a wandering one",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How cells move"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "groove"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ingression",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "groove",
+          "to": "ingression",
+          "kind": "is where it happens"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "Cut across the streak and watch one cell. It reaches the groove, releases its hold on its neighbours, loses E-cadherin, narrows to a flask shape and drops out of the sheet as free mesenchyme. That is an epithelial to mesenchymal transition. It is worth a name because the embryo reuses it for neural crest, and because a carcinoma cell leaving its epithelium does exactly the same thing."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "Two waves, and the mistake everyone makes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How cells move"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:ingressing-cells",
+          "path": [
+            "ingression",
+            "endoderm_route",
+            "mesoderm_route"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "endoderm_route",
+            "mesoderm_route"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0
+        }
+      ],
+      "narration": "The first cells through go all the way to the bottom and push the hypoblast out completely; what they form is the definitive endoderm. The next cells stop halfway and spread as intraembryonic mesoderm. The epiblast that never moved stays on the surface as ectoderm. So all three germ layers come from one layer, the epiblast — and the lower layer of the new disc is not the old hypoblast under a new name. That is the sentence that separates a good answer from an average one."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "The pit sends cells straight up the middle",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How cells move"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pit"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "notochordal_process",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:midline-migration",
+          "path": [
+            "pit",
+            "notochordal_process",
+            "membranes"
+          ],
+          "duration": 5
+        }
+      ],
+      "narration": "Cells entering at the pit do not spread sideways. They run forward in the midline, between the ectoderm above and the new endoderm below, and stop at the prechordal plate. That column is the notochordal process and it becomes the notochord. Trace it here so the pit has a purpose; what the notochord induces is a separate story."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The embryo gets a head, a left and a back",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the streak defines"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "streak"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "axes",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "streak",
+          "to": "axes",
+          "kind": "being caudal and median, defines all three"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "membranes",
+          "to": "axes",
+          "kind": "marks the two ends of the gut tube"
+        }
+      ],
+      "narration": "Before the streak the disc is a plate with a head end and nothing else. After it there is a craniocaudal axis, because the streak is caudal; a left and a right, because it lies in the midline; and a dorsal and a ventral surface, because ectoderm is above and endoderm below. The oropharyngeal membrane and the cloacal membrane stay two-layered and mark where the mouth and the anus will open."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "Cilia on the node decide which side is left",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "node"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "laterality",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "node",
+          "to": "laterality",
+          "kind": "its cilia sweep fluid leftward"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        }
+      ],
+      "narration": "A symmetrical disc has to break its own symmetry. Cilia on the primitive node beat in one direction and drive fluid to the left, and the signal that collects there is what puts the heart, stomach and spleen on the left. When the cilia are immotile the choice is random, so about half of those embryos come out mirror-imaged. That is situs inversus, and paired with sinusitis, bronchiectasis and subfertility it is Kartagener syndrome — one broken motor protein, four findings."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "A streak that stays too long, and one that does too little",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "regression"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "regression",
+          "to": "teratoma",
+          "kind": "a remnant left behind grows into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "regression",
+          "to": "caudal_dysgenesis",
+          "kind": "too little caudal mesoderm gives"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "How cells move"
+        }
+      ],
+      "narration": "The streak should shrink away by about day twenty-six. Two things go wrong with that. Cells left behind in the sacrococcygeal region stay pluripotent and can grow into a sacrococcygeal teratoma — the commonest tumour of the newborn, mostly in girls, containing tissue from all three layers, and removed early because it can turn malignant. Or the streak makes too little caudal mesoderm, and you get sacral agenesis, imperforate anus, renal defects and, at the extreme, fused lower limbs. That is caudal dysgenesis, and it is the malformation most strongly linked to poorly controlled maternal diabetes — a reason to control glucose before conception, not after."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and offers no 3d option for this structure; the subject is a staged migration at a scale no mesh exists for. Only diagram is deferred. The curriculum asks for mechanism and location views and both are authored.",
+    "Status is 'planned'. Fifteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a dorsal view of the pear-shaped disc with the streak drawn caudal and lengthening cranially, groove, node and pit labelled separately, a transverse cut through the streak showing flask-shaped cells leaving the epiblast, a second cut showing the first wave reaching the lower layer and the second stopping in the middle, and the two membranes marked at the cranial and caudal ends.",
+    "The dorsal view must be drawn with the cranial end at the top in every panel. Beats 1, 6 and 8 all depend on the reader knowing which end is caudal without being told again, and flipping the disc between panels for layout would make the streak look cranial.",
+    "Beat 4 traces concept:ingressing-cells and beat 5 traces concept:midline-migration. In both the subject is a population of cells in motion, not a drawn object, so neither can be a region.",
+    "'Trilaminar disc (3 germ layers)' is a SEPARATE curriculum entry in this topic and is NOT claimed in covers[], although beat 4 describes the two waves that make the layers. This scene teaches how cells get out of the epiblast; what the three layers then become is that entry's work and is authored alongside this one.",
+    "'Notochord' is likewise NOT claimed. The notochordal process is named in beat 5 because the primitive pit has no other function, but the notochordal canal, the notochordal plate, induction of the neural plate and the fate of the notochord as nucleus pulposus belong to that entry.",
+    "'Neurulation (neural plate/tube)' is NOT claimed and is not named as a region. It follows from notochordal induction, which this scene does not teach.",
+    "Day numbers are the standard teaching ones — streak appears about day 15, regression largely complete by about day 26 — and are narrated as approximations. Texts differ by a day or two at both ends and no single figure is stated as fact.",
+    "The molecular detail is deliberately shallow: FGF8, Brachyury and E-cadherin appear as terms and FGF8 once in narration, because Nigerian MBBS papers name them but do not examine the pathways. If a molecular embryology topic is ever added, the signalling belongs there and this narration should not grow.",
+    "Kartagener syndrome is taught here rather than in a respiratory topic because the node cilia are the reason situs inversus and bronchiectasis appear in the same patient. The scene does not claim any respiratory curriculum entry; the terms sit in match.terms so a highlighted 'situs inversus' in a note lands on the mechanism.",
+    "The 14-day rule appears only in match.terms. It is taught in the bilaminar disc scene, where the argument is that the streak has not yet appeared, and repeating it here would duplicate rather than extend."
+  ]
+}

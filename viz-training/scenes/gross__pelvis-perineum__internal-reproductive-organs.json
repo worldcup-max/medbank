@@ -1,0 +1,857 @@
+{
+  "schema": 2,
+  "id": "gross__pelvis-perineum__internal-reproductive-organs",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pelvis & Perineum",
+  "structure": "Internal reproductive organs",
+  "covers": [
+    "Internal reproductive organs"
+  ],
+  "learning_goal": "Lay out the male internal genital organs in situ — testis and epididymis in the scrotum, the vas ascending in the cord and crossing the ureter, the seminal vesicles and ampullae on the base of the bladder, the ejaculatory ducts entering the prostate, and the three parts of the urethra — say what each contributes to semen and in what order, give the blood supply, venous drainage and lymphatic drainage of each and explain why testicular lymph goes to the para-aortic nodes while scrotal lymph goes to the groin, and reason from the anatomy to varicocele, hydrocele, torsion, undescended testis, vasectomy and benign versus malignant prostatic disease.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "internal reproductive organs",
+      "male reproductive system",
+      "genital organs",
+      "pelvis",
+      "pelvic viscera",
+      "perineum",
+      "urogenital",
+      "scrotum and testis",
+      "prostate",
+      "andrology",
+      "infertility"
+    ],
+    "terms": [
+      "internal reproductive organs",
+      "male genital organs",
+      "testis",
+      "testes",
+      "seminiferous tubule",
+      "rete testis",
+      "tunica albuginea",
+      "tunica vaginalis",
+      "processus vaginalis",
+      "mediastinum testis",
+      "epididymis",
+      "head of epididymis",
+      "body of epididymis",
+      "tail of epididymis",
+      "efferent ductules",
+      "vas deferens",
+      "ductus deferens",
+      "ampulla of the vas",
+      "spermatic cord",
+      "pampiniform plexus",
+      "cremaster",
+      "gubernaculum",
+      "seminal vesicle",
+      "ejaculatory duct",
+      "prostate",
+      "prostatic urethra",
+      "prostatic utricle",
+      "verumontanum",
+      "seminal colliculus",
+      "peripheral zone",
+      "transition zone",
+      "median lobe",
+      "bulbourethral gland",
+      "Cowper's gland",
+      "membranous urethra",
+      "spongy urethra",
+      "penile urethra",
+      "corpus cavernosum",
+      "corpus spongiosum",
+      "glans penis",
+      "crus of penis",
+      "deep artery of penis",
+      "testicular artery",
+      "testicular vein",
+      "pampiniform varicocele",
+      "left renal vein",
+      "para-aortic lymph nodes",
+      "superficial inguinal lymph nodes",
+      "internal iliac artery",
+      "inferior vesical artery",
+      "middle rectal artery",
+      "artery to the vas",
+      "prostatic venous plexus",
+      "vertebral venous plexus",
+      "undescended testis",
+      "cryptorchidism",
+      "testicular torsion",
+      "bell clapper deformity",
+      "hydrocele",
+      "haematocele",
+      "varicocele",
+      "epididymo-orchitis",
+      "seminoma",
+      "vasectomy",
+      "benign prostatic hyperplasia",
+      "prostate cancer",
+      "digital rectal examination",
+      "rectovesical pouch",
+      "erection",
+      "emission",
+      "ejaculation",
+      "point and shoot",
+      "S2 S3 S4",
+      "pelvic splanchnic nerves",
+      "hypogastric nerve",
+      "retrograde ejaculation",
+      "uterus",
+      "ovary",
+      "uterine tube",
+      "fallopian tube",
+      "broad ligament",
+      "round ligament of the uterus",
+      "vagina",
+      "cervix",
+      "pouch of Douglas",
+      "rectouterine pouch",
+      "uterine artery",
+      "water under the bridge"
+    ]
+  },
+  "camera": {
+    "framing": "lateral",
+    "autoRotate": 0.006,
+    "initialYaw": 0.45
+  },
+  "structures": [
+    {
+      "key": "right_testis",
+      "name": "right testis",
+      "label": "Testis (right) — the gonad, outside the body",
+      "role": "part",
+      "group": "Gonad",
+      "layer": "organ",
+      "color": "#c0705a",
+      "refs": {
+        "bodyparts3d": "FMA7211"
+      },
+      "terms": [
+        "testis",
+        "testes",
+        "seminiferous tubule",
+        "rete testis",
+        "tunica albuginea",
+        "tunica vaginalis",
+        "mediastinum testis",
+        "Leydig cell",
+        "Sertoli cell",
+        "undescended testis",
+        "cryptorchidism",
+        "testicular torsion",
+        "hydrocele",
+        "seminoma"
+      ],
+      "narration": "The testis is the only viscus that lives outside the body cavity, and almost every clinical fact about it follows from the journey it made to get there. It develops on the posterior abdominal wall beside the kidney, then descends through the inguinal canal into the scrotum, dragging its blood supply, its lymphatics and its nerves down with it from the level of L2. Inside, a tough tunica albuginea sends septa in to divide it into about two hundred and fifty lobules of seminiferous tubules, which converge on the rete testis at the mediastinum posteriorly. In front and at the sides it is wrapped by the tunica vaginalis, the closed-off remnant of the processus vaginalis. Fluid in that sac is a hydrocele, which transilluminates and which you can get above; blood in it after trauma is a haematocele, which does not. A patent processus is instead an indirect inguinal hernia in a child. And a testis that never completed the descent is five to ten times more likely to become malignant and is infertile at body temperature, which is why an empty scrotum in a newborn is examined and not simply noted."
+    },
+    {
+      "key": "left_testis",
+      "name": "left testis",
+      "label": "Testis (left) — hangs lower",
+      "role": "context",
+      "group": "Gonad",
+      "layer": "organ",
+      "color": "#b3634f",
+      "refs": {
+        "bodyparts3d": "FMA7212"
+      },
+      "terms": [
+        "left testis",
+        "varicocele",
+        "left testicular vein",
+        "left renal vein",
+        "pampiniform plexus",
+        "bag of worms"
+      ],
+      "narration": "The left testis normally hangs a little lower, and it is the left that matters in one specific way. The right testicular vein drains straight into the inferior vena cava at an oblique angle; the left drains at a right angle into the left renal vein, a longer column against higher resistance. So a varicocele — dilated pampiniform veins, the classic bag of worms that empties on lying down — is left-sided in the great majority of cases. A varicocele that appears suddenly in an adult, or one that does not empty when the patient lies flat, raises the question of a renal tumour obstructing the left renal vein and is investigated, not reassured."
+    },
+    {
+      "key": "right_epididymis",
+      "name": "right epididymis",
+      "label": "Epididymis (right) — head, body, tail",
+      "role": "part",
+      "group": "Duct system",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA18256"
+      },
+      "terms": [
+        "epididymis",
+        "head of epididymis",
+        "body of epididymis",
+        "tail of epididymis",
+        "efferent ductules",
+        "sperm maturation",
+        "epididymo-orchitis",
+        "Prehn's sign"
+      ],
+      "narration": "The epididymis lies along the posterolateral border of the testis: a head above, receiving twelve to twenty efferent ductules from the rete testis, a body behind, and a tail below that turns upwards to become the vas. Uncoiled it is about six metres of single duct, and sperm spend two weeks travelling it, acquiring motility and the ability to fertilise on the way — the testis makes sperm, the epididymis finishes them. Feel for it in every scrotal examination, because the position of the tenderness is the first discriminator: pain confined to a swollen epididymis with fever and dysuria in an older man is epididymo-orchitis, while pain in a high, transversely lying, exquisitely tender testis in a teenager is torsion until surgically proved otherwise. Torsion is a six-hour organ, so the rule is explore first and be wrong sometimes rather than scan and be right too late."
+    },
+    {
+      "key": "left_epididymis",
+      "name": "left epididymis",
+      "label": "Epididymis (left)",
+      "role": "context",
+      "group": "Duct system",
+      "layer": "organ",
+      "color": "#cd6155",
+      "refs": {
+        "bodyparts3d": "FMA18257"
+      },
+      "terms": [
+        "epididymis",
+        "left",
+        "spermatic cord",
+        "vasectomy"
+      ],
+      "narration": "The mirror duct. From the tail of each epididymis the vas deferens ascends in the spermatic cord — thick-walled, whipcord to the fingers, and the only structure in the cord you can positively identify by feel. That is what makes vasectomy a fifteen-minute scrotal operation: the duct is superficial, isolable and unaccompanied by anything you must not cut."
+    },
+    {
+      "key": "right_vas",
+      "name": "right deferent duct",
+      "label": "Vas deferens (right)",
+      "role": "part",
+      "group": "Duct system",
+      "layer": "organ",
+      "color": "#e6b0aa",
+      "refs": {
+        "bodyparts3d": "FMA19235"
+      },
+      "terms": [
+        "vas deferens",
+        "ductus deferens",
+        "deferent duct",
+        "vasectomy",
+        "spermatic cord",
+        "ampulla of the vas",
+        "ejaculatory duct"
+      ],
+      "narration": "The vas is the spine of the male tract: it runs from the tail of the epididymis, up through the inguinal canal in the spermatic cord, over the ureter and down to join the duct of the seminal vesicle as the ejaculatory duct. It is what makes testis, epididymis, ampulla and ejaculatory duct one continuous story, it is the structure a vasectomy divides, and it is the one that crosses above the ureter — water under the bridge, on the male side."
+    },
+    {
+      "key": "left_vas",
+      "name": "left deferent duct",
+      "label": "Vas deferens (left)",
+      "role": "part",
+      "group": "Duct system",
+      "layer": "organ",
+      "color": "#d7a09a",
+      "refs": {
+        "bodyparts3d": "FMA19236"
+      },
+      "terms": [
+        "vas deferens",
+        "ductus deferens",
+        "deferent duct"
+      ],
+      "narration": "The left vas, shown so the tract can be followed on both sides. Everything said of the right holds here."
+    },
+    {
+      "key": "right_seminal_vesicle",
+      "name": "right seminal vesicle",
+      "label": "Seminal vesicle (right) — on the base of the bladder",
+      "role": "part",
+      "group": "Accessory glands",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA19387"
+      },
+      "terms": [
+        "seminal vesicle",
+        "ampulla of the vas",
+        "ejaculatory duct",
+        "fructose",
+        "semen volume",
+        "base of the bladder",
+        "rectovesical pouch",
+        "digital rectal examination"
+      ],
+      "narration": "The seminal vesicle is not a store of sperm — it is a gland. Each is a coiled sacculated tube about five centimetres long, lying obliquely on the base of the bladder, lateral to the ampulla of the vas and separated from the rectum only by the rectovesical septum. Its alkaline, fructose-rich secretion makes up roughly seventy per cent of the volume of semen and is the fuel the sperm actually run on; absent fructose in an azoospermic sample points to obstruction or absence of the vesicles and vasa rather than to failure of the testis. Its duct joins the ampulla of the vas to form the ejaculatory duct."
+    },
+    {
+      "key": "left_seminal_vesicle",
+      "name": "left seminal vesicle",
+      "label": "Seminal vesicle (left)",
+      "role": "context",
+      "group": "Accessory glands",
+      "layer": "organ",
+      "color": "#bb8fce",
+      "refs": {
+        "bodyparts3d": "FMA19388"
+      },
+      "terms": [
+        "seminal vesicle",
+        "left",
+        "ejaculatory duct",
+        "verumontanum"
+      ],
+      "narration": "The pair. Both ejaculatory ducts, about two centimetres long, pierce the back of the prostate and open on the verumontanum in the prostatic urethra, one on each side of the prostatic utricle. That is the point where the genital tract joins the urinary tract, and everything below it is a shared passage."
+    },
+    {
+      "key": "prostate",
+      "name": "prostate",
+      "label": "Prostate — a chestnut under the bladder neck",
+      "role": "part",
+      "group": "Accessory glands",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA9600"
+      },
+      "terms": [
+        "prostate",
+        "prostatic urethra",
+        "verumontanum",
+        "seminal colliculus",
+        "prostatic utricle",
+        "median lobe",
+        "peripheral zone",
+        "transition zone",
+        "benign prostatic hyperplasia",
+        "prostate cancer",
+        "prostate specific antigen",
+        "digital rectal examination",
+        "prostatic venous plexus",
+        "vertebral venous plexus",
+        "sclerotic bone metastases"
+      ],
+      "narration": "The prostate is the size and shape of a chestnut, sitting on the pelvic floor with its base against the neck of the bladder above, its apex on the sphincter urethrae below, the rectum behind and the pubic symphysis in front. The urethra runs through it from base to apex, nearer the front. Its thin, milky, alkaline secretion is added at ejaculation and contains the acid phosphatase and the specific antigen you measure. Learn it by zone, not by lobe, because the two common diseases sit in different zones. Benign hyperplasia arises in the transition zone around the urethra, so it obstructs early and feels smooth, enlarged and mobile with the median sulcus preserved. Carcinoma arises in the peripheral zone against the rectum, so it obstructs late and feels hard, craggy and fixed with the sulcus lost — which is exactly what a finger reaches on rectal examination, and is why that examination remains worth doing. The prostatic venous plexus drains to the internal iliac veins but also communicates freely with the vertebral venous plexus, which is why prostatic cancer seeds the lumbar spine and pelvis and characteristically makes sclerotic, not lytic, deposits."
+    },
+    {
+      "key": "urethra",
+      "name": "urethra",
+      "label": "Urethra — the shared passage",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#f5b041",
+      "refs": {
+        "bodyparts3d": "FMA19667"
+      },
+      "terms": [
+        "male urethra",
+        "prostatic urethra",
+        "membranous urethra",
+        "spongy urethra",
+        "penile urethra",
+        "navicular fossa",
+        "bulbourethral gland",
+        "Cowper's gland",
+        "sphincter urethrae",
+        "urethral rupture",
+        "urethral stricture",
+        "retrograde ejaculation"
+      ],
+      "narration": "About twenty centimetres, in three parts. Prostatic, the widest and most dilatable, receiving the two ejaculatory ducts and the prostatic ductules on the verumontanum. Membranous, only a centimetre, piercing the perineal membrane where the sphincter urethrae surrounds it — the shortest, least mobile and most easily torn part, ruptured in pelvic fracture, and the part the two bulbourethral glands lie beside though they open further down. Spongy, running in the corpus spongiosum to the external meatus, widened at the bulb behind and at the navicular fossa in front, and injured in a straddle fall. Note what shares this tube: urine and semen use the same passage below the verumontanum, so the internal urethral sphincter at the bladder neck must close at ejaculation to send semen forwards. When that sphincter is damaged — after prostatectomy, or by autonomic neuropathy in diabetes — semen goes backwards into the bladder instead, and the man is dry at orgasm with cloudy urine afterwards."
+    },
+    {
+      "key": "corpus_cavernosum",
+      "name": "corpus cavernosum of penis",
+      "label": "Corpus cavernosum — the erectile column",
+      "role": "part",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#e8927c",
+      "refs": {
+        "bodyparts3d": "FMA19618"
+      },
+      "terms": [
+        "corpus cavernosum",
+        "corpora cavernosa",
+        "crus of penis",
+        "deep artery of penis",
+        "helicine arteries",
+        "tunica albuginea",
+        "erection",
+        "priapism",
+        "ischiocavernosus",
+        "internal pudendal artery"
+      ],
+      "narration": "Two corpora cavernosa lie side by side above, each beginning as a crus attached to the ischiopubic ramus and each carrying a deep artery of the penis in its centre. Erection is a vascular event with a nervous switch: parasympathetic fibres from S2, S3 and S4 — the pelvic splanchnic nerves — relax the smooth muscle of the helicine arteries, blood fills the sinusoids, and the expanding tissue compresses the emissary veins against the unyielding tunica albuginea so that the outflow is throttled by the inflow. Sympathetic fibres from L1 and L2 then drive emission, and the somatic pudendal nerve produces the rhythmic contraction of bulbospongiosus that expels. Parasympathetic point, sympathetic shoot — and both must be preserved in pelvic surgery, which is the whole rationale for nerve-sparing prostatectomy."
+    },
+    {
+      "key": "glans",
+      "name": "glans penis",
+      "label": "Glans — the end of the corpus spongiosum",
+      "role": "context",
+      "group": "Outflow",
+      "layer": "organ",
+      "color": "#f1948a",
+      "refs": {
+        "bodyparts3d": "FMA18247"
+      },
+      "terms": [
+        "glans penis",
+        "corpus spongiosum",
+        "external urethral meatus",
+        "navicular fossa",
+        "prepuce",
+        "phimosis",
+        "paraphimosis",
+        "superficial inguinal lymph nodes"
+      ],
+      "narration": "The single corpus spongiosum lies below the two cavernosa, carries the spongy urethra and expands at its far end into the glans. Remember its lymph, because it is the exception that examiners like: the skin of the penis and the scrotum drains to the superficial inguinal nodes, while the glans drains to the deep inguinal and external iliac nodes, and the testis drains to neither — it goes to the para-aortic nodes at L2, following the vessels back to where the gonad was formed. A scrotal skin lesion gives palpable groin nodes; a testicular tumour gives a normal groin and a mass on the aorta."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Bladder — the organ everything is arranged around",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "base of the bladder",
+        "bladder neck",
+        "trigone",
+        "internal urethral sphincter",
+        "rectovesical pouch",
+        "bladder outflow obstruction"
+      ],
+      "narration": "Use the bladder as the map. The prostate sits directly under its neck, the two seminal vesicles and the two ampullae of the vas lie on its base behind, and the ureters cross in from the sides above them. That single arrangement explains why prostatic enlargement obstructs urine before it does anything else, why the vesicles and the vas are palpable through the rectum beside the prostate, and why the male peritoneal cavity has one pouch here — the rectovesical — where the female has two."
+    },
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Ureter (right) — what the duct crosses",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "ureter",
+        "vas deferens crosses the ureter",
+        "water under the bridge",
+        "uterine artery",
+        "ureteric injury",
+        "hysterectomy"
+      ],
+      "narration": "One crossing is worth memorising for both sexes. In the male, the vas deferens turns medially over the top of the ureter near the back of the bladder — the duct crosses in front of the tube. In the female, the uterine artery does exactly the same thing, running forwards on top of the ureter about two centimetres lateral to the cervix. Water under the bridge, and the bridge is what gets clamped: the ureter is the structure injured when the uterine artery is tied at hysterectomy, and the reason a surgeon identifies the ureter before dividing anything in the pelvic sidewall."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum — the examining finger's route",
+      "role": "part",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "digital rectal examination",
+        "rectovesical pouch",
+        "rectovesical septum",
+        "Denonvilliers' fascia",
+        "median sulcus",
+        "pouch of Douglas",
+        "rectouterine pouch"
+      ],
+      "narration": "Behind everything is the rectum, and it is the reason the male internal genitalia are examinable at all. A finger in the rectum, pad forwards, meets the prostate about four centimetres up: feel its two lateral lobes, the median sulcus between them, and the seminal vesicles running upwards and laterally from its upper border. Only the thin rectovesical septum lies between. Above the prostate the finger reaches the rectovesical pouch, the lowest point of the male peritoneal cavity, where pus, blood or seeded tumour collects. In the female the equivalent is the rectouterine pouch, the pouch of Douglas, and the cervix is what the finger meets instead."
+    },
+    {
+      "key": "right_internal_iliac",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery (right) — supplies almost all of it",
+      "role": "part",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "inferior vesical artery",
+        "artery to the vas",
+        "middle rectal artery",
+        "internal pudendal artery",
+        "uterine artery",
+        "vaginal artery",
+        "prostatic branches"
+      ],
+      "narration": "Almost the whole of the internal genital tract is supplied from the internal iliac artery: the inferior vesical artery to the prostate, the seminal vesicles and the base of the bladder, with the artery to the vas usually arising from it; the middle rectal artery contributing to the prostate; and the internal pudendal artery running out and back into the perineum to supply the erectile tissue. In the female the same trunk gives the uterine and vaginal arteries. The two exceptions are worth naming because they come from far away: the testicular artery arises from the abdominal aorta at L2, and the artery of the vas anastomoses with it, which is why the testis usually survives when the vas and its vessel are divided."
+    },
+    {
+      "key": "left_internal_iliac",
+      "name": "left internal iliac artery",
+      "label": "Internal iliac artery (left)",
+      "role": "context",
+      "group": "Vessels",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA18810"
+      },
+      "terms": [
+        "internal iliac artery",
+        "left",
+        "pelvic blood supply",
+        "collateral circulation"
+      ],
+      "narration": "The mirror trunk. Because the pelvic organs are midline and supplied from both sides, the internal genitalia keep their blood supply if one internal iliac artery is ligated — the anastomosis across the midline is generous."
+    },
+    {
+      "key": "right_pubococcygeus",
+      "name": "right pubococcygeus",
+      "label": "Pubococcygeus (right) — the floor they sit on",
+      "role": "part",
+      "group": "Support",
+      "layer": "muscle",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA45854"
+      },
+      "terms": [
+        "pubococcygeus",
+        "levator ani",
+        "pelvic diaphragm",
+        "sphincter urethrae",
+        "perineal membrane",
+        "apex of the prostate"
+      ],
+      "narration": "The apex of the prostate rests on the pelvic floor, and immediately below it the urethra pierces the sphincter urethrae and the perineal membrane. That is the plane where pelvis becomes perineum, and it is why the prostate is approached from above and the bulbar urethra from below."
+    },
+    {
+      "key": "left_pubococcygeus",
+      "name": "left pubococcygeus",
+      "label": "Pubococcygeus (left)",
+      "role": "context",
+      "group": "Support",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA45855"
+      },
+      "terms": [
+        "pubococcygeus",
+        "left",
+        "pelvic floor"
+      ],
+      "narration": "The other half of the shelf, completing the floor the pelvic viscera stand on."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — the walls of the box",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "pubis",
+        "pubic symphysis",
+        "ischiopubic ramus",
+        "crus of penis",
+        "straddle injury"
+      ],
+      "narration": "The ischiopubic ramus gives attachment to the crus of the penis on each side, and the pubic bones are the anterior wall the prostate and bladder lie behind. A straddle injury drives the bulbar urethra against this bone; a fractured ramus tears the membranous urethra."
+    },
+    {
+      "key": "left_hip_bone",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "hip bone",
+        "left",
+        "pelvic ring"
+      ],
+      "narration": "The mirror bone, closing the ring at the symphysis in front."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the roots that run the tract",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "S2 S3 S4",
+        "pelvic splanchnic nerves",
+        "nervi erigentes",
+        "inferior hypogastric plexus",
+        "hypogastric nerve",
+        "pudendal nerve",
+        "erectile dysfunction"
+      ],
+      "narration": "The nerve supply of the whole tract comes off the front of the sacrum and the lumbar sympathetic chain. Parasympathetic pelvic splanchnic nerves from S2, S3 and S4 produce erection; sympathetic fibres from L1 and L2 through the hypogastric nerves close the bladder neck and drive emission; the pudendal nerve from S2 to S4 supplies the perineal muscles that expel and carries sensation from the glans. All of them travel in or beside the inferior hypogastric plexus on the pelvic sidewall, which is precisely the plane dissected in radical pelvic surgery — hence impotence as a recognised complication of rectal and prostatic resection."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The tract from gonad to meatus",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Duct system",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:sperm",
+          "path": [
+            "right_testis",
+            "right_epididymis",
+            "right_vas",
+            "right_seminal_vesicle",
+            "prostate",
+            "urethra",
+            "glans"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "Learn this as one continuous tube and the topic collapses into a single sentence. Sperm are made in the seminiferous tubules of the testis, collect in the rete testis, cross by the efferent ductules into the head of the epididymis, mature along its six metres, are stored in its tail, and are then carried up by the vas deferens through the inguinal canal into the pelvis. There the vas crosses over the ureter, widens into its ampulla on the base of the bladder, and is joined by the duct of the seminal vesicle to become the ejaculatory duct. That duct pierces the prostate and opens on the verumontanum in the prostatic urethra, and from there urine and semen share the same passage: prostatic, membranous, spongy, meatus. Notice what is added and where. The seminal vesicle contributes about seventy per cent of the volume with its fructose, the prostate a further twenty per cent of thin alkaline fluid, the bulbourethral glands a small pre-ejaculatory lubricant, and the testis itself contributes only a few per cent — the cells, not the fluid. That is why a man remains fully potent and ejaculates a normal-looking volume after vasectomy: only the cells are missing."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Why the testis lives outside — and what descent left behind",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Gonad"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Duct system"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_testis",
+            "left_testis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_testis",
+          "to": "right_epididymis",
+          "kind": "epididymis on the posterolateral border"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "left_testis",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Spermatogenesis needs a temperature two to three degrees below core, so the gonad is exported to the scrotum and kept there by the dartos and cremaster adjusting its distance from the body. But it was formed at L2, beside the kidney, and it never gave up its original vessels, lymphatics or nerves. Four consequences, and every one of them is examinable. First, the testicular artery arises from the abdominal aorta at L2, not from any pelvic vessel. Second, testicular lymph drains to the para-aortic nodes at L2 — so a testicular tumour presents with a mass on the aorta and a completely normal groin, and you must never biopsy a testicular lump through the scrotum because that spills tumour into a different lymphatic field. Third, pain from the testis is referred to the loin and the umbilical region, sharing T10 with the gut, which is why a torted testis can present as abdominal pain and why every boy with abdominal pain has his scrotum examined. Fourth, the veins form the pampiniform plexus, a heat exchanger around the artery, and it is the left side draining at right angles into the left renal vein that varicoceles. Descent also leaves the processus vaginalis: closed off it is the tunica vaginalis and can fill with fluid as a hydrocele; left open it is the track of an indirect inguinal hernia."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Inside the prostate: zones, ducts and the verumontanum",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Accessory glands"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Outflow"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "bladder"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "prostate",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_seminal_vesicle",
+          "to": "prostate",
+          "kind": "ejaculatory duct pierces the base"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prostate",
+          "to": "bladder",
+          "kind": "base against the bladder neck"
+        }
+      ],
+      "narration": "Cut the prostate across and orient yourself on the urethra, which runs through it nearer the front and turns forward at the verumontanum. On that ridge open the two ejaculatory ducts and, between them, the blind prostatic utricle — the male remnant of the paramesonephric ducts, the vestige of a uterus. The prostatic ductules open in the grooves on either side. Now the zones. The transition zone is the small collar of glandular tissue immediately around the urethra above the verumontanum, and it is where benign hyperplasia begins; because it is inside the urethral collar it obstructs early and it is the tissue resected transurethrally. The central zone surrounds the ejaculatory ducts. The peripheral zone is the largest, forming the back and the sides against the rectum, and it is where about seventy per cent of carcinomas arise; because it is peripheral it grows silently and the man presents late, with bone pain or a raised specific antigen rather than poor stream. Two diseases, two zones, two different presentations, and one finger through the rectal wall to tell them apart: smooth, rubbery and mobile with a preserved median sulcus is benign; hard, irregular and fixed with a lost sulcus is carcinoma until the biopsy says otherwise."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "The pelvic map — bladder in front, rectum behind, ureter crossed",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_vas",
+          "to": "right_ureter",
+          "kind": "the vas crosses above the ureter — water under the bridge"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prostate",
+          "to": "rectum",
+          "kind": "separated only by the rectovesical septum"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "rectum",
+          "kind": "rectovesical pouch between them"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "prostate",
+            "rectum"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Fix the order from front to back at the level of the prostate: pubis, retropubic fat, prostate and bladder neck, rectovesical septum, rectum. Above the prostate, peritoneum dips down between bladder and rectum to make the rectovesical pouch, the lowest point of the male peritoneal cavity — free fluid, pus and blood all end up there and it is drained per rectum. On the base of the bladder, from the midline outwards, lie the two ampullae of the vas and then the two seminal vesicles, and the ureter passes deep to the vas to reach the bladder. Say it once and keep it for life: the vas crosses the ureter from lateral to medial, in front — water under the bridge. The female arrangement is the same sentence with different nouns: the uterine artery crosses in front of the ureter two centimetres lateral to the cervix, and that is the ureter surgeons injure at hysterectomy. Because everything here is midline and paired, disease spreads by continuity in predictable directions — prostatic cancer forwards into the bladder base and along the ejaculatory ducts, rectal cancer forwards through the septum — and rectal examination reaches all of it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 5,
+      "title": "Supply, drainage and the clinic that follows",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Vessels",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac",
+          "to": "prostate",
+          "kind": "inferior vesical and middle rectal branches"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "corpus_cavernosum",
+          "kind": "pelvic splanchnic S2-S4 for erection"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:lymph",
+          "path": [
+            "right_testis",
+            "right_internal_iliac",
+            "sacrum"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Finish with the three tables that answer most questions on this topic. Arteries: testis from the abdominal aorta at L2; vas from the inferior vesical; seminal vesicle, prostate and bladder base from the inferior vesical and middle rectal; erectile tissue from the internal pudendal — everything except the testis from the internal iliac. Veins: the pampiniform plexus becomes the testicular vein, right into the cava and left into the left renal vein; the prostatic plexus drains to the internal iliac veins and, crucially, into the vertebral venous plexus, giving sclerotic spinal metastases. Lymph: testis to para-aortic at L2, prostate and seminal vesicles to internal iliac, scrotal and penile skin to superficial inguinal, glans to deep inguinal and external iliac. Nerves: parasympathetic S2 to S4 for erection, sympathetic L1 and L2 for emission and closure of the bladder neck, pudendal for expulsion and sensation — point and shoot. Now read the clinic straight off them. A left varicocele of sudden onset means look at the left kidney. A hard craggy prostate with back pain means peripheral zone cancer in the vertebral plexus until proved otherwise. A dry orgasm after prostatectomy is retrograde ejaculation from a damaged bladder neck. Impotence after rectal surgery is injury to the pelvic plexus on the sidewall. And an acutely painful, high-riding testis in a fifteen-year-old is torsion, explored within six hours, because no investigation is worth the gonad."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "There is no female internal genital organ in the catalog at all — no uterus, no ovary, no uterine tube, no vagina, no cervix, no broad or round ligament. The curriculum entry says 'male/female organs in situ' and half of it therefore has nothing on screen. Every female statement in this scene — the two peritoneal pouches, the pouch of Douglas, the uterine artery crossing the ureter, the uterine and vaginal branches of the internal iliac — is spoken over male viscera or over the rectum and bladder. THIS IS WHY THE SCENE IS status:'candidate' AND NOT 'ready': a scene that teaches one sex should not silently close a curriculum entry that names both. The decision a human needs to make is whether to (a) keep this as the male scene, split the curriculum entry into male and female, and leave the female half openly unauthored, or (b) source a female pelvis mesh set. The same missing set has now held back the bladder, the pelvic diaphragm and this scene.",
+    "The vas deferens is drawn nowhere in this scene, and it is the single most damaging omission for the male half. It is NOT absent from the catalog — 'right deferent duct' FMA19235 and 'left deferent duct' FMA19236 are both there, and were missed because the search used the clinical name rather than the catalog's. The vas is the spine of the whole tract — it is what makes the testis, the epididymis, the ampulla and the ejaculatory duct one continuous story, it is what crosses the ureter, and it is what a vasectomy divides. Beat one traces sperm from epididymis straight to seminal vesicle with the connecting duct invisible, and the 'water under the bridge' relationship in beat four is drawn from the seminal vesicle to the ureter as the nearest existing proxy for a crossing the student cannot see. A ductus deferens pair would upgrade this scene more than any other single model.",
+    "No spermatic cord, pampiniform plexus, testicular artery or testicular vein. The venous drainage asymmetry — right to the cava, left at a right angle into the left renal vein — is the mechanism of varicocele and is taught in beats two and five entirely in words, with COMPARE_STRUCTURES between the two testes as the only visual anchor.",
+    "No tunica vaginalis, tunica albuginea, seminiferous tubules or rete testis: the testis is one solid model. Hydrocele, haematocele and the internal architecture of beat two have nothing to appear in or on.",
+    "No prostatic zones. The transition and peripheral zones are the entire clinical point of beat three, and the prostate is a single undifferentiated mesh, so the CROSS_SECTION cuts a solid object while the narration names structures on a cut face that is not there. Three anchors on the prostate — verumontanum, transition zone, peripheral zone — would make that beat clickable and would be the highest-value addition to the male half of this scene.",
+    "No verumontanum, prostatic utricle, ejaculatory duct or bulbourethral gland meshes, so the junction where the genital tract joins the urinary tract is narrated over an intact urethra.",
+    "No corpus spongiosum in the catalog, although the corpus cavernosum and the glans are present. The spongy urethra therefore runs through nothing, and the bulb of the penis — the site of straddle injury — cannot be shown.",
+    "No nerve meshes anywhere in the catalog except the optic nerves, so the pelvic splanchnic nerves, hypogastric nerves, the inferior hypogastric plexus and the pudendal nerve are all narration. Beat five uses SHOW_RELATIONSHIP from the sacrum to the corpus cavernosum as an honest proxy for the S2-S4 supply, but it lights a bone where a nerve belongs.",
+    "No lymph nodes and no lymphatic vessels, so the para-aortic versus inguinal distinction — arguably the most examined single fact in this topic — is traced with concept:lymph along the internal iliac artery and the sacrum as stand-in waypoints rather than along a nodal chain.",
+    "This scene does not claim to cover 'Urinary bladder', 'Bony pelvis' or 'Pelvic diaphragm (levator ani)', all of which are already authored in this topic and appear here only as relations."
+  ]
+}

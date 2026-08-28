@@ -1,0 +1,831 @@
+{
+  "schema": 2,
+  "id": "gross__pelvis-perineum__internal-iliac-vessels",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pelvis & Perineum",
+  "structure": "Internal iliac vessels",
+  "covers": [
+    "Internal iliac vessels"
+  ],
+  "learning_goal": "Find the bifurcation of the common iliac artery at the sacroiliac joint, follow the internal iliac artery down the pelvic sidewall and divide its branches into an anterior and a posterior division, name what each branch supplies and which foramen it leaves by, explain why the ureter crosses the bifurcation and why that is the landmark for finding it, account for the internal iliac vein and its plexuses and their connection with the vertebral venous plexus, and use the collateral circulation to explain why internal iliac ligation controls pelvic haemorrhage without killing the pelvic organs.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "internal iliac vessels",
+      "internal iliac artery",
+      "pelvic blood supply",
+      "pelvis",
+      "pelvic sidewall",
+      "vasculature",
+      "obstetric haemorrhage",
+      "pelvic fracture",
+      "vascular anatomy",
+      "gluteal region"
+    ],
+    "terms": [
+      "internal iliac vessels",
+      "internal iliac artery",
+      "hypogastric artery",
+      "common iliac artery",
+      "external iliac artery",
+      "aortic bifurcation",
+      "L4",
+      "sacroiliac joint",
+      "anterior division",
+      "posterior division",
+      "umbilical artery",
+      "superior vesical artery",
+      "medial umbilical ligament",
+      "inferior vesical artery",
+      "vaginal artery",
+      "uterine artery",
+      "middle rectal artery",
+      "obturator artery",
+      "aberrant obturator artery",
+      "corona mortis",
+      "internal pudendal artery",
+      "inferior gluteal artery",
+      "iliolumbar artery",
+      "lateral sacral artery",
+      "superior gluteal artery",
+      "greater sciatic foramen",
+      "lesser sciatic foramen",
+      "suprapiriform",
+      "infrapiriform",
+      "pudendal canal",
+      "Alcock's canal",
+      "obturator canal",
+      "internal iliac vein",
+      "common iliac vein",
+      "external iliac vein",
+      "inferior vena cava",
+      "vesical venous plexus",
+      "prostatic venous plexus",
+      "uterine venous plexus",
+      "rectal venous plexus",
+      "vertebral venous plexus",
+      "Batson's plexus",
+      "median sacral artery",
+      "ureter crosses the bifurcation",
+      "water under the bridge",
+      "internal iliac artery ligation",
+      "pelvic packing",
+      "postpartum haemorrhage",
+      "pelvic fracture bleeding",
+      "internal iliac lymph nodes",
+      "obturator nerve",
+      "lumbosacral trunk",
+      "sacral plexus",
+      "collateral circulation",
+      "ovarian artery",
+      "superior rectal artery",
+      "pelvic angiography",
+      "embolisation"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.35
+  },
+  "structures": [
+    {
+      "key": "right_internal_iliac_artery",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery (right) — the pelvic trunk",
+      "role": "part",
+      "group": "Internal iliac artery",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "hypogastric artery",
+        "anterior division",
+        "posterior division",
+        "pelvic sidewall",
+        "greater sciatic foramen",
+        "internal iliac artery ligation",
+        "embolisation"
+      ],
+      "narration": "The internal iliac artery is the artery of the pelvis: about four centimetres long, arising where the common iliac divides in front of the sacroiliac joint, running down and back on the pelvic sidewall, and ending at the upper border of the greater sciatic foramen by dividing into an anterior and a posterior division. Learn the branches by division, because the divisions do different jobs. The posterior division is short and supplies the wall — iliolumbar, lateral sacral, and the superior gluteal artery which leaves above piriformis. The anterior division is long and supplies the viscera and the perineum — umbilical with its superior vesical branch, obturator, inferior vesical in the male or uterine and vaginal in the female, middle rectal, and then it ends as the internal pudendal and inferior gluteal, both leaving below piriformis. A useful mnemonic for all the branches of the internal iliac, both divisions together, is 'I Love Going Places In My Very Own Underwear': iliolumbar, lateral sacral, gluteal (superior and inferior), pudendal, inferior vesical, middle rectal, vaginal, obturator, umbilical."
+    },
+    {
+      "key": "left_internal_iliac_artery",
+      "name": "left internal iliac artery",
+      "label": "Internal iliac artery (left) — the mirror trunk",
+      "role": "part",
+      "group": "Internal iliac artery",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA18810"
+      },
+      "terms": [
+        "internal iliac artery",
+        "left",
+        "collateral circulation",
+        "bilateral ligation",
+        "midline anastomosis"
+      ],
+      "narration": "The left trunk mirrors the right, and the fact that there are two is the whole basis of pelvic haemostasis. The pelvic viscera sit in the midline and are supplied from both sides, and the internal iliac territory also anastomoses freely with the superior rectal artery from the inferior mesenteric, with the ovarian or testicular artery from the aorta, and with the median sacral, lumbar and deep femoral vessels. So one — or even both — internal iliac arteries can be tied without infarcting the bladder, rectum or uterus. Ligation does not stop the flow; it drops the pulse pressure distal to the tie by about eighty-five per cent and converts an arterial jet into a venous ooze that will clot."
+    },
+    {
+      "key": "right_common_iliac_artery",
+      "name": "right common iliac artery",
+      "label": "Common iliac artery (right) — where the division happens",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA14765"
+      },
+      "terms": [
+        "common iliac artery",
+        "aortic bifurcation",
+        "L4",
+        "sacroiliac joint",
+        "bifurcation",
+        "ureter crosses the bifurcation",
+        "pelvic brim"
+      ],
+      "narration": "The aorta ends at the fourth lumbar vertebra — level with the highest point of the iliac crests, and about a centimetre below and to the left of the umbilicus — by dividing into the two common iliac arteries. Each runs down and laterally along the pelvic brim for about five centimetres and divides again in front of the sacroiliac joint into external and internal iliac. That second bifurcation is the single most useful landmark in the pelvis, because the ureter crosses it: coming down over the pelvic brim, the ureter passes in front of the bifurcation and then runs on the sidewall medial to the internal iliac artery. Find the bifurcation and you have found the ureter, which is why every pelvic surgeon opens the sidewall here before dividing anything."
+    },
+    {
+      "key": "left_common_iliac_artery",
+      "name": "left common iliac artery",
+      "label": "Common iliac artery (left)",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA14766"
+      },
+      "terms": [
+        "common iliac artery",
+        "left",
+        "median sacral artery",
+        "May-Thurner"
+      ],
+      "narration": "The left common iliac artery is the one that matters for the veins, because it crosses in front of the left common iliac vein and can compress it against the fifth lumbar vertebra — the anatomical reason deep vein thrombosis is commoner in the left leg. Behind the bifurcation of the aorta, the small median sacral artery runs down the front of the sacrum; it is easily forgotten and easily torn."
+    },
+    {
+      "key": "right_external_iliac_artery",
+      "name": "right external iliac artery",
+      "label": "External iliac artery (right) — the one that leaves",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#e74c3c",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "femoral artery",
+        "inguinal ligament",
+        "inferior epigastric artery",
+        "deep circumflex iliac artery",
+        "aberrant obturator artery",
+        "corona mortis"
+      ],
+      "narration": "The external iliac is the larger branch and it supplies almost nothing in the pelvis — it runs along the medial border of psoas to pass under the inguinal ligament and become the femoral artery. Its only two branches are given off just before it leaves: the inferior epigastric, which turns up behind the rectus and is the medial boundary of the deep inguinal ring, and the deep circumflex iliac. One of them is a trap. In about a quarter of people the obturator artery arises not from the internal iliac but from the inferior epigastric, and this aberrant obturator artery then curves down over the superior pubic ramus close to the femoral ring, where it can be cut while releasing a strangulated femoral hernia. Its old name says how that ended: the corona mortis, the crown of death."
+    },
+    {
+      "key": "left_external_iliac_artery",
+      "name": "left external iliac artery",
+      "label": "External iliac artery (left)",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#ec7063",
+      "refs": {
+        "bodyparts3d": "FMA18807"
+      },
+      "terms": [
+        "external iliac artery",
+        "left",
+        "lower limb supply"
+      ],
+      "narration": "The mirror vessel, completing the rule: external iliac to the limb, internal iliac to the pelvis. Every branch that stays inside the pelvis comes from the internal iliac, with the two exceptions that come from above — the superior rectal from the inferior mesenteric, and the gonadal from the aorta."
+    },
+    {
+      "key": "right_internal_iliac_vein",
+      "name": "right internal iliac vein",
+      "label": "Internal iliac vein (right) — behind its artery",
+      "role": "part",
+      "group": "Internal iliac vein",
+      "layer": "vessel",
+      "color": "#2471a3",
+      "refs": {
+        "bodyparts3d": "FMA18887"
+      },
+      "terms": [
+        "internal iliac vein",
+        "vesical venous plexus",
+        "prostatic venous plexus",
+        "uterine venous plexus",
+        "rectal venous plexus",
+        "vertebral venous plexus",
+        "Batson's plexus",
+        "pelvic venous ooze"
+      ],
+      "narration": "The internal iliac vein lies behind and slightly medial to its artery and joins the external iliac vein to form the common iliac vein in front of the sacroiliac joint. Its tributaries do not simply mirror the arterial branches: most of the pelvic blood arrives in valveless plexuses — vesical, prostatic, uterine, vaginal and rectal — that lie in the loose tissue around each organ and communicate with each other across the midline. Two things follow. First, pelvic venous bleeding is diffuse and low-pressure and cannot be controlled by tying a named vessel; it is controlled by packing. Second, these plexuses communicate with the internal vertebral venous plexus through the sacral foramina, and because none of it has valves, tumour cells from the prostate, the bladder, the rectum or the uterus can pass straight into the vertebral canal without ever crossing the lungs. That is the anatomical explanation for isolated lumbar and pelvic bone metastases in pelvic cancer."
+    },
+    {
+      "key": "left_internal_iliac_vein",
+      "name": "left internal iliac vein",
+      "label": "Internal iliac vein (left)",
+      "role": "part",
+      "group": "Internal iliac vein",
+      "layer": "vessel",
+      "color": "#2e86c1",
+      "refs": {
+        "bodyparts3d": "FMA18888"
+      },
+      "terms": [
+        "internal iliac vein",
+        "left",
+        "valveless veins",
+        "pelvic congestion"
+      ],
+      "narration": "The left internal iliac vein does the same on its side. Because the plexuses cross the midline and carry no valves, blood in the pelvis can travel in either direction depending on pressure — which is what makes coughing, straining or a rising intra-abdominal pressure a pump that drives pelvic venous blood upwards into the vertebral plexus."
+    },
+    {
+      "key": "right_common_iliac_vein",
+      "name": "right common iliac vein",
+      "label": "Common iliac vein (right)",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#1a5276",
+      "refs": {
+        "bodyparts3d": "FMA21387"
+      },
+      "terms": [
+        "common iliac vein",
+        "inferior vena cava",
+        "L5",
+        "confluence"
+      ],
+      "narration": "The two common iliac veins unite in front of the fifth lumbar vertebra, to the right of the midline, to form the inferior vena cava. The right one is short and almost vertical; it lies behind and then lateral to its artery."
+    },
+    {
+      "key": "left_common_iliac_vein",
+      "name": "left common iliac vein",
+      "label": "Common iliac vein (left) — the compressed one",
+      "role": "part",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#21618c",
+      "refs": {
+        "bodyparts3d": "FMA21388"
+      },
+      "terms": [
+        "left common iliac vein",
+        "May-Thurner syndrome",
+        "iliac vein compression",
+        "left leg deep vein thrombosis"
+      ],
+      "narration": "The left common iliac vein is longer and more oblique, and it must pass behind the right common iliac artery to reach the cava. Trapped between that artery in front and the fifth lumbar vertebra behind, it can be chronically compressed — May-Thurner syndrome — and that mechanical detail is why left leg deep vein thrombosis outnumbers right by a considerable margin."
+    },
+    {
+      "key": "right_external_iliac_vein",
+      "name": "right external iliac vein",
+      "label": "External iliac vein (right)",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "external iliac vein",
+        "femoral vein",
+        "inguinal ligament",
+        "femoral ring"
+      ],
+      "narration": "The femoral vein becomes the external iliac vein at the inguinal ligament and runs up medial to its artery. It is the vein immediately lateral to the femoral ring, which is why a femoral hernia sac lies medial to it and why the neck of that sac is so tight."
+    },
+    {
+      "key": "left_external_iliac_vein",
+      "name": "left external iliac vein",
+      "label": "External iliac vein (left)",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA18886"
+      },
+      "terms": [
+        "external iliac vein",
+        "left",
+        "venous return"
+      ],
+      "narration": "The mirror vein, completing the venous ladder: femoral to external iliac, external iliac plus internal iliac to common iliac, common iliac plus common iliac to the cava."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta — ends at L4",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "aortic bifurcation",
+        "L4",
+        "median sacral artery",
+        "aortic aneurysm"
+      ],
+      "narration": "Shown so the pelvic supply is seen to begin somewhere. The aorta descends on the left of the midline and ends at L4; below that everything in the pelvis is fed through the two common iliacs, except what reaches it from the inferior mesenteric as the superior rectal artery. An aneurysm at this level commonly extends into the common iliac arteries, which is why they are measured whenever the aorta is."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — begins at L5",
+      "role": "context",
+      "group": "Parent vessels",
+      "layer": "vessel",
+      "color": "#154360",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "L5",
+        "confluence",
+        "venous return"
+      ],
+      "narration": "The cava begins one vertebra lower than the aorta ends, and on the other side of the midline. Aorta ends at L4 on the left, cava begins at L5 on the right — remember the pair together and neither is ever misplaced."
+    },
+    {
+      "key": "right_piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis — the key to the sciatic foramen",
+      "role": "part",
+      "group": "Sidewall landmarks",
+      "layer": "muscle",
+      "color": "#b7950b",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "superior gluteal artery",
+        "inferior gluteal artery",
+        "suprapiriform foramen",
+        "infrapiriform foramen",
+        "internal pudendal artery",
+        "lesser sciatic foramen"
+      ],
+      "narration": "Piriformis is the single most useful muscle in this region because it sorts the branches that leave the pelvis. It arises from the front of the sacrum and passes out through the greater sciatic foramen, filling it and dividing it into a gap above and a gap below. Above piriformis, the superior gluteal artery leaves with its nerve. Below piriformis, everything else leaves: the inferior gluteal artery and nerve, the internal pudendal artery, the pudendal nerve and the sciatic nerve. The internal pudendal artery is the one that does not stay out — it hooks round the ischial spine and re-enters the perineum through the lesser sciatic foramen, running in the pudendal canal on the side wall of the ischiorectal fossa to supply the anal canal, the perineum and the erectile tissue. Above or below piriformis is worth a mark in almost every pelvic viva."
+    },
+    {
+      "key": "right_obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus — the obturator canal and the pudendal canal",
+      "role": "part",
+      "group": "Sidewall landmarks",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "obturator artery",
+        "obturator nerve",
+        "obturator canal",
+        "pudendal canal",
+        "Alcock's canal",
+        "ischiorectal fossa",
+        "obturator hernia"
+      ],
+      "narration": "Obturator internus lines the pelvic sidewall, and two named canals run on it. The obturator artery, with its nerve above it and its vein below, runs forwards on the muscle and leaves the pelvis through the obturator canal at the top of the obturator foramen to reach the adductor compartment — the nerve above the artery, which is the order to quote. On the fascia over the lower part of the same muscle, the pudendal canal carries the internal pudendal vessels and the pudendal nerve forwards in the lateral wall of the ischiorectal fossa; that canal is where a pudendal nerve block is placed, using the ischial spine felt per vaginam as the target."
+    },
+    {
+      "key": "right_ureter",
+      "name": "right ureter",
+      "label": "Ureter (right) — crosses the bifurcation",
+      "role": "part",
+      "group": "Sidewall landmarks",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA15571"
+      },
+      "terms": [
+        "ureter",
+        "pelvic brim",
+        "bifurcation of the common iliac artery",
+        "uterine artery",
+        "water under the bridge",
+        "ureteric injury",
+        "hysterectomy"
+      ],
+      "narration": "The ureter enters the pelvis by crossing the bifurcation of the common iliac artery at the pelvic brim, then runs down on the sidewall in front of the internal iliac artery and medial to its branches, before turning forwards and medially to the bladder. Two crossings define its fate. Here at the brim it passes in front of the bifurcation, which is how it is found. Lower down, about two centimetres lateral to the cervix, the uterine artery crosses in front of it — water under the bridge — and that is where it is clamped and divided at hysterectomy. In the male the vas deferens makes the same crossing. A ureter that is not identified before the sidewall is dissected is a ureter that may already have been tied."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Bladder — the vesical branches",
+      "role": "context",
+      "group": "Territory",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "superior vesical artery",
+        "inferior vesical artery",
+        "umbilical artery",
+        "medial umbilical ligament",
+        "vesical venous plexus"
+      ],
+      "narration": "The umbilical artery is the first branch of the anterior division and it tells a developmental story: its proximal part stays open and gives the superior vesical arteries to the upper bladder, while the distal part closes after birth and remains as the medial umbilical ligament running up the inside of the anterior abdominal wall. The lower bladder and the base are supplied by the inferior vesical artery in the male and the vaginal artery in the female. So the whole bladder is internal iliac territory."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum — the middle rectal artery, and the watershed",
+      "role": "context",
+      "group": "Territory",
+      "layer": "organ",
+      "color": "#7e5109",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "middle rectal artery",
+        "superior rectal artery",
+        "inferior rectal artery",
+        "inferior mesenteric artery",
+        "rectal venous plexus",
+        "portosystemic anastomosis",
+        "haemorrhoids"
+      ],
+      "narration": "The rectum is where the internal iliac territory meets the gut territory, and both the arteries and the veins anastomose across the junction. Arterially: superior rectal from the inferior mesenteric above, middle rectal from the internal iliac in the middle, inferior rectal from the internal pudendal below. Venously the same three levels connect the portal system, through the superior rectal vein, with the systemic system through the middle and inferior rectal veins into the internal iliac — one of the classic portosystemic anastomoses, and the reason portal hypertension is felt here. It is also why internal iliac ligation does not devascularise the rectum: the superior rectal artery keeps it alive from above."
+    },
+    {
+      "key": "prostate",
+      "name": "prostate",
+      "label": "Prostate — the plexus that reaches the spine",
+      "role": "context",
+      "group": "Territory",
+      "layer": "organ",
+      "color": "#af7ac5",
+      "refs": {
+        "bodyparts3d": "FMA9600"
+      },
+      "terms": [
+        "prostate",
+        "prostatic venous plexus",
+        "vertebral venous plexus",
+        "sclerotic metastases",
+        "internal iliac vein",
+        "inferior vesical artery"
+      ],
+      "narration": "The prostate is supplied by the inferior vesical and middle rectal arteries and drained by the prostatic venous plexus, which lies in the retropubic space and empties into the internal iliac veins. It is the standing example of why the valveless pelvic veins matter: through their sacral connections with the vertebral venous plexus, prostatic cancer reaches the lumbar spine and pelvic bones directly."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — posterior division territory",
+      "role": "part",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "sacroiliac joint",
+        "lateral sacral artery",
+        "iliolumbar artery",
+        "median sacral artery",
+        "sacral foramina",
+        "presacral venous plexus",
+        "pelvic fracture bleeding"
+      ],
+      "narration": "The posterior division supplies the wall it lies against. The iliolumbar artery runs up and laterally into the iliac fossa; the lateral sacral arteries run down on the front of the sacrum and send branches into the sacral foramina to the contents of the canal, anastomosing across the midline with the median sacral artery. In front of the sacrum lies the presacral venous plexus, thin-walled and communicating through the foramina with the vertebral plexus — the source of the sudden, unstoppable bleeding in low rectal surgery, and a major reason a fractured pelvis loses litres of blood into the retroperitoneum before anything is visible."
+    },
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — the sidewall itself",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "sacroiliac joint",
+        "greater sciatic notch",
+        "ischial spine",
+        "lesser sciatic notch",
+        "obturator foramen",
+        "superior pubic ramus",
+        "corona mortis",
+        "pelvic fracture"
+      ],
+      "narration": "Every foramen the branches use is cut in this bone. The greater sciatic notch, closed by the sacrospinous ligament into the greater sciatic foramen, transmits the gluteal and pudendal vessels; the ischial spine between the two notches is the landmark you feel per vaginam; the lesser sciatic foramen readmits the internal pudendal vessels to the perineum; and the obturator foramen, closed except for its canal, transmits the obturator vessels and nerve. Across the superior pubic ramus runs the corona mortis when it exists. A fractured pelvis tears vessels against all of these edges at once, which is why it is a haemorrhagic and not merely an orthopaedic injury."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Two bifurcations: L4, then the sacroiliac joint",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Parent vessels"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Internal iliac artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_common_iliac_artery",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-flow",
+          "path": [
+            "aorta",
+            "right_common_iliac_artery",
+            "right_internal_iliac_artery"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_common_iliac_artery",
+          "to": "right_ureter",
+          "kind": "ureter crosses in front of the bifurcation"
+        }
+      ],
+      "narration": "Two divisions, one after the other, and you must be able to name the level of each. The aorta ends at the fourth lumbar vertebra by dividing into the common iliac arteries — the surface level is the highest point of the iliac crests, a little below and left of the umbilicus. Each common iliac then runs down and out along the pelvic brim for about five centimetres and divides in front of the sacroiliac joint into external and internal iliac. Fix that second bifurcation, because three things happen there. The ureter crosses in front of it as it enters the pelvis, so the bifurcation is how you find the ureter. The internal iliac vein lies behind it, so a needle or a clamp that goes too deep here bleeds from a vessel you cannot see. And the division of territory begins here: external iliac to the lower limb, internal iliac to the pelvis and the perineum. From this point on, if a structure is inside the pelvis, assume its artery is a branch of the internal iliac until you can name a reason it is not."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "Anterior division, posterior division",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Internal iliac artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Territory"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "sacrum"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_internal_iliac_artery",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "bladder",
+          "kind": "umbilical and vesical arteries"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "rectum",
+          "kind": "middle rectal artery"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "sacrum",
+          "kind": "posterior division to the wall"
+        }
+      ],
+      "narration": "Split the branches in two and they stop being a list. The posterior division supplies the walls and gives three: iliolumbar, running up into the iliac fossa; lateral sacral, running down on the sacrum to the foramina; and superior gluteal, the largest, which leaves through the greater sciatic foramen above piriformis. The anterior division supplies the viscera and the perineum. Umbilical first, whose patent proximal part gives the superior vesical arteries and whose obliterated distal part is the medial umbilical ligament. Then obturator, running forwards on obturator internus to the obturator canal. Then the visceral branches: inferior vesical in the male, and uterine and vaginal in the female — the uterine artery being the one that crosses the ureter. Then middle rectal. And the anterior division ends by dividing into internal pudendal and inferior gluteal, both leaving below piriformis. Sex differences are small and worth stating precisely: the male has an inferior vesical artery and the female has uterine and vaginal arteries in its place, and the artery to the vas or to the round ligament arises alongside. Everything else is identical."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 3,
+      "title": "How the branches leave: above or below piriformis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Internal iliac artery"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sidewall landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Territory"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "right_piriformis",
+          "kind": "gluteal arteries above and below"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_artery",
+          "to": "right_obturator_internus",
+          "kind": "obturator artery to the obturator canal"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_piriformis",
+            "right_obturator_internus"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Nothing leaves the pelvis except through a hole, and there are only three that matter here. The greater sciatic foramen is filled by piriformis, and piriformis sorts its traffic: superior gluteal artery and nerve above, and below it the inferior gluteal artery and nerve, the internal pudendal artery, the pudendal nerve and the sciatic nerve. The lesser sciatic foramen is the return door — the internal pudendal artery and the pudendal nerve hook round the back of the ischial spine and come straight back in through it to reach the perineum, running forwards in the pudendal canal on obturator internus. That is why a pudendal block is placed on the ischial spine, felt through the vaginal wall: at that point the nerve and the artery are both within reach and both about to enter the canal. The obturator canal is the third: the obturator nerve above, the artery, then the vein, passing to the adductor compartment. Remember one clinical consequence of each. Superior gluteal injury in a posterior hip approach denervates the abductors and gives a Trendelenburg gait. Internal pudendal injury or compression causes perineal pain and erectile dysfunction. And an obturator hernia through the canal presents as medial thigh pain on internal rotation — the Howship-Romberg sign — in a thin elderly woman."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "The veins: plexuses, not branches",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Sidewall landmarks"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Internal iliac vein",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_internal_iliac_artery",
+            "right_internal_iliac_vein"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:venous-return",
+          "path": [
+            "prostate",
+            "right_internal_iliac_vein",
+            "right_common_iliac_vein",
+            "ivc"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac_vein",
+          "to": "sacrum",
+          "kind": "sacral foramina to the vertebral venous plexus"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_common_iliac_vein",
+          "to": "right_common_iliac_artery",
+          "kind": "compressed against L5"
+        }
+      ],
+      "narration": "The veins are not a mirror image of the arteries and you lose marks by describing them as if they were. Pelvic venous blood collects first in valveless plexuses lying in the fat around each organ — vesical, prostatic, uterine, vaginal and rectal — which are continuous with one another and cross the midline freely. Only then does the blood leave in the internal iliac vein, which lies behind and medial to the artery and joins the external iliac vein in front of the sacroiliac joint to make the common iliac vein. The two common iliac veins meet at L5 to form the cava. Three consequences follow directly from the absence of valves. Pelvic haemorrhage from the plexuses is diffuse, low-pressure and unclampable, so it is packed, not tied — and the presacral plexus in front of the sacrum is the worst of them. Tumour from the prostate, bladder, rectum, cervix or uterus can pass through the sacral foramina into the internal vertebral venous plexus and reach the lumbar spine and pelvic bones without passing through the lungs first. And venous return from the left leg must cross behind the right common iliac artery, where chronic compression against L5 makes left-sided deep vein thrombosis the commoner one."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 5,
+      "title": "Why you can tie it: collateral supply and the bleeding pelvis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_internal_iliac_artery",
+            "left_internal_iliac_artery"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "left_internal_iliac_artery",
+          "to": "rectum",
+          "kind": "anastomosis with the superior rectal artery"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Internal iliac artery"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-flow",
+          "path": [
+            "aorta",
+            "left_common_iliac_artery",
+            "left_internal_iliac_artery",
+            "rectum",
+            "right_internal_iliac_artery"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "bone",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Internal iliac ligation is one of the operations a house officer in an obstetric unit may see, and the anatomy is the whole justification. The pelvis has a rich collateral network: right internal iliac to left internal iliac across the midline; middle rectal to superior rectal from the inferior mesenteric; uterine to ovarian from the aorta; iliolumbar and lateral sacral to the lumbar and median sacral arteries; and inferior gluteal to the medial and lateral circumflex femoral and the first perforating branch of the deep femoral. So tying the anterior division distal to the posterior division does not infarct the pelvis. What it does is measured: pulse pressure beyond the tie falls by about eighty-five per cent and mean flow by about half, converting a pulsatile arterial haemorrhage into a venous ooze that will clot and can be packed. That is why it is used for intractable postpartum haemorrhage, for bleeding from advanced cervical or bladder cancer, and in some centres before an operation known to be bloody — and why fertility and the viability of the uterus are usually preserved afterwards. Two cautions from the same anatomy. Tie it distal to the posterior division, or the gluteal supply goes with it and the patient gets buttock claudication. And identify the ureter first, because it lies immediately in front of the vessel you are about to pass a ligature around, and the internal iliac vein lies immediately behind. Where interventional radiology is available, selective embolisation exploits the same collateral network with a catheter instead of a ligature; where it is not, ligation is still the operation that saves the patient."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Not one named branch of the internal iliac artery exists in the catalog — no superior or inferior gluteal, no internal pudendal, no obturator, no umbilical or superior vesical, no inferior vesical, no middle rectal, no uterine or vaginal, no iliolumbar, no lateral sacral. The scene teaches all of them, so the entire branching pattern of beats two and three is narrated over the bare trunk. Where a branch could be taught through an adjacent structure that does exist, it has been: piriformis carries the above-and-below rule for the gluteal and pudendal vessels, obturator internus carries the obturator and pudendal canals, the bladder carries the vesical branches, the rectum the middle rectal, the sacrum the posterior division. That is the honest workaround, not a substitute — a student can see WHERE each branch goes and not WHAT it looks like.",
+    "The distinction between anterior and posterior division, which is the organising idea of the whole scene and the basis of correct ligation, cannot be shown at all: the trunk is a single mesh that ends without dividing. Two anchors on each internal iliac artery marking the origins of the two divisions would make beats two and five demonstrable rather than spoken, and would be the highest-value addition here.",
+    "No abdominal aorta as a separate model. FMA3784 is catalogued as the descending aorta and is used as context for the bifurcation at L4, so the thoracic part is on screen and the transition at the diaphragm is not marked. The same substitution was made in the Abdominal aorta & IVC scene, so it is at least consistent across the corpus.",
+    "No median sacral artery, and no presacral venous plexus. Both are named in the narration as sources of bleeding in low pelvic surgery and neither can be pointed at.",
+    "No venous plexuses of any kind — vesical, prostatic, uterine, vaginal, rectal or vertebral. The valveless-plexus mechanism is the single most examinable idea about the pelvic veins and it is the subject of beat four, which is forced to trace concept:venous-return from the prostate along the named trunks instead, and to use SHOW_RELATIONSHIP from the internal iliac vein to the sacrum as a stand-in for the sacral foraminal connections with the vertebral plexus.",
+    "No nerve meshes in the catalog except the optic nerves, so the obturator nerve, pudendal nerve, sciatic nerve, lumbosacral trunk and sacral plexus — all of which travel with these vessels and are named throughout beat three — have nothing on screen. The pudendal block landmark is taught on the ischial spine of the hip bone, which does exist, and that is the best available proxy.",
+    "No sacrospinous or sacrotuberous ligament, so the greater and lesser sciatic foramina are described as bounded by notches in bare bone. Since the whole above-or-below-piriformis rule depends on those foramina being closed by ligament, this weakens beat three visually.",
+    "No aberrant obturator artery, and no inferior epigastric artery, so the corona mortis in beat one exists only as a warning. Given how often it appears in surgical vivas it is worth flagging for a future catalog request.",
+    "No lymph nodes, so the internal and external iliac nodal groups that accompany these vessels are not shown; the scene deliberately does not attempt to teach pelvic lymphatic drainage as a result.",
+    "This scene does not claim to cover 'Bony pelvis', 'Urinary bladder' or 'Internal reproductive organs' in this topic, nor 'Abdominal aorta & IVC' in Kidney & Posterior Abdominal Wall; all appear here only as parent vessels, landmarks or territory."
+  ]
+}

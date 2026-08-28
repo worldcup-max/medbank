@@ -1,0 +1,767 @@
+{
+  "schema": 2,
+  "id": "embryology__week-3-gastrulation__neurulation-neural-plate-tube",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram",
+    "3d_anatomy"
+  ],
+  "course": "Embryology",
+  "topic": "Week 3: Gastrulation",
+  "structure": "Neurulation (neural plate/tube)",
+  "covers": [
+    "Neurulation (neural plate/tube)"
+  ],
+  "learning_goal": "Draw the four cross-sections of neurulation from plate to closed tube, say where closure starts and which day each neuropore shuts, name what neural crest becomes, and use a failure of closure at each end to explain anencephaly, spina bifida and their screening.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "neurulation",
+      "neural tube",
+      "neural plate",
+      "week 3",
+      "week 4",
+      "nervous system development",
+      "neural tube defects",
+      "antenatal screening",
+      "folic acid"
+    ],
+    "terms": [
+      "neurulation",
+      "primary neurulation",
+      "secondary neurulation",
+      "neural plate",
+      "neuroectoderm",
+      "neural groove",
+      "neural folds",
+      "neural tube",
+      "neuropore",
+      "cranial neuropore",
+      "rostral neuropore",
+      "anterior neuropore",
+      "caudal neuropore",
+      "posterior neuropore",
+      "day 18",
+      "day 22",
+      "day 25",
+      "day 27",
+      "somite",
+      "cervical",
+      "zipper",
+      "neural crest",
+      "neural crest cells",
+      "epithelial to mesenchymal transition",
+      "dorsal root ganglion",
+      "sympathetic chain",
+      "adrenal medulla",
+      "chromaffin cells",
+      "Schwann cells",
+      "melanocytes",
+      "enteric nervous system",
+      "pharyngeal arch cartilage",
+      "odontoblasts",
+      "canalisation",
+      "retrogressive differentiation",
+      "caudal eminence",
+      "conus medullaris",
+      "filum terminale",
+      "notochord",
+      "sonic hedgehog",
+      "SHH",
+      "floor plate",
+      "roof plate",
+      "alar plate",
+      "basal plate",
+      "sulcus limitans",
+      "neural tube defect",
+      "NTD",
+      "anencephaly",
+      "acrania",
+      "meroanencephaly",
+      "frog-like face",
+      "polyhydramnios",
+      "craniorachischisis",
+      "encephalocele",
+      "spina bifida",
+      "spina bifida occulta",
+      "meningocele",
+      "myelomeningocele",
+      "myeloschisis",
+      "rachischisis",
+      "tuft of hair",
+      "dimple",
+      "lumbosacral",
+      "L5",
+      "S1",
+      "Arnold-Chiari",
+      "Chiari II",
+      "hydrocephalus",
+      "alpha-fetoprotein",
+      "AFP",
+      "acetylcholinesterase",
+      "amniocentesis",
+      "folic acid",
+      "400 micrograms",
+      "5 mg",
+      "periconceptional",
+      "valproate",
+      "carbamazepine",
+      "maternal diabetes",
+      "hyperthermia",
+      "tethered cord"
+    ]
+  },
+  "camera": {
+    "framing": "posterior"
+  },
+  "structures": [
+    {
+      "key": "disc_context",
+      "label": "The trilaminar disc from above, with the notochord beneath",
+      "role": "context",
+      "group": "Setting",
+      "layer": "organ",
+      "color": "#aeb6bf",
+      "terms": [
+        "trilaminar disc",
+        "ectoderm",
+        "notochord",
+        "dorsal surface",
+        "midline",
+        "cranial end",
+        "caudal end",
+        "week 3"
+      ],
+      "narration": "Look down on the dorsal surface of the trilaminar disc. Under the midline lies the notochord, already a solid rod. Neurulation is the story of what the ectoderm directly above that rod does next, so keep the notochord in every picture even when you are drawing the surface."
+    },
+    {
+      "key": "induction",
+      "label": "The notochord gives the order",
+      "role": "part",
+      "group": "Setting",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "neural induction",
+        "notochord",
+        "signals",
+        "overlying ectoderm",
+        "thickens",
+        "neuroectoderm",
+        "sonic hedgehog",
+        "SHH"
+      ],
+      "narration": "Nothing here is spontaneous. The notochord signals up into the ectoderm lying over it, and that ectoderm becomes neuroectoderm. This is the link between the last scene and this one: the notochord induces, the ectoderm responds. Sonic hedgehog from the notochord keeps working afterwards to make the ventral half of the tube."
+    },
+    {
+      "key": "plate",
+      "label": "Stage 1 — the neural plate",
+      "role": "part",
+      "group": "Four cross-sections",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "terms": [
+        "neural plate",
+        "neuroectoderm",
+        "thickened ectoderm",
+        "slipper-shaped",
+        "day 18",
+        "broad cranially",
+        "narrow caudally",
+        "flat"
+      ],
+      "narration": "By about day eighteen the midline ectoderm has thickened into a flat, slipper-shaped neural plate — broad at the head end, narrow at the tail end. That difference in width is not decoration: the broad part becomes brain and the narrow part becomes spinal cord."
+    },
+    {
+      "key": "groove",
+      "label": "Stage 2 — the neural groove",
+      "role": "part",
+      "group": "Four cross-sections",
+      "layer": "organ",
+      "color": "#f5b041",
+      "terms": [
+        "neural groove",
+        "midline depression",
+        "invagination",
+        "sinks",
+        "day 19",
+        "day 20"
+      ],
+      "narration": "The middle of the plate sinks to form the neural groove, running the length of the midline. Draw this cross-section as a shallow dish: the floor is the future ventral cord and the rim is on its way to becoming the back of the tube."
+    },
+    {
+      "key": "folds",
+      "label": "Stage 3 — the neural folds rise",
+      "role": "part",
+      "group": "Four cross-sections",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "neural folds",
+        "elevated edges",
+        "approach each other",
+        "midline",
+        "lips of the groove",
+        "day 20",
+        "day 21"
+      ],
+      "narration": "The edges of the plate lift into the neural folds and lean towards each other over the groove. Everything up to this point is reversible-looking; from here the embryo is committed to closing a tube, and the fold tips are where the next two things both happen."
+    },
+    {
+      "key": "tube",
+      "label": "Stage 4 — the folds fuse into the neural tube",
+      "role": "part",
+      "group": "Four cross-sections",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "neural tube",
+        "fusion",
+        "closed",
+        "separates from surface ectoderm",
+        "sinks beneath",
+        "central canal",
+        "day 22",
+        "brain and spinal cord"
+      ],
+      "narration": "The fold tips meet and fuse, the tube separates from the surface ectoderm, and skin ectoderm closes over the top. The lumen left inside is the future ventricular system and central canal. Four pictures, in order: plate, groove, folds, tube. Draw those four and you have answered most of this topic."
+    },
+    {
+      "key": "zipper",
+      "label": "Closure starts in the middle and runs both ways",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "closure begins",
+        "fifth somite",
+        "cervical region",
+        "day 22",
+        "zipper",
+        "bidirectional",
+        "cranially and caudally",
+        "primary neurulation"
+      ],
+      "narration": "Fusion does not start at one end. It starts in the future cervical region, at about the fifth somite, on about day twenty-two, and then runs like a zip in both directions at once. That is why the two ends are the last to shut — and why the two ends are where defects appear."
+    },
+    {
+      "key": "cranial_neuropore",
+      "label": "The cranial neuropore — closes day 25",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#a93226",
+      "terms": [
+        "cranial neuropore",
+        "rostral neuropore",
+        "anterior neuropore",
+        "day 25",
+        "18-20 somites",
+        "last opening at the head end",
+        "closes first"
+      ],
+      "narration": "The opening at the head end is the cranial neuropore and it closes on about day twenty-five. Learn the number as a pair with the other one. Twenty-five at the top, twenty-seven at the bottom, and every defect in this topic is one of those two dates missed."
+    },
+    {
+      "key": "caudal_neuropore",
+      "label": "The caudal neuropore — closes day 27",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#922b21",
+      "terms": [
+        "caudal neuropore",
+        "posterior neuropore",
+        "day 27",
+        "25 somites",
+        "lumbosacral",
+        "end of week 4",
+        "closes second"
+      ],
+      "narration": "The tail-end opening is the caudal neuropore and it closes about two days later, on day twenty-seven, at roughly the level of the future lumbosacral spine. Once both are shut the tube is a closed system and the circulation of what will become cerebrospinal fluid can begin."
+    },
+    {
+      "key": "secondary",
+      "label": "Below that, the cord is made differently",
+      "role": "part",
+      "group": "How closure runs",
+      "layer": "organ",
+      "color": "#7b241c",
+      "terms": [
+        "secondary neurulation",
+        "canalisation",
+        "retrogressive differentiation",
+        "caudal eminence",
+        "solid cord cavitates",
+        "sacral",
+        "coccygeal",
+        "conus medullaris",
+        "filum terminale",
+        "tethered cord"
+      ],
+      "narration": "The lowest part of the cord is not made by folding at all. A solid cord of cells in the caudal eminence hollows out and joins on — canalisation, followed by retrogressive differentiation, which trims it back to the conus medullaris and filum terminale. Two mechanisms, one cord. It matters clinically: defects of secondary neurulation are the occult, skin-covered lumbosacral lesions rather than the open ones."
+    },
+    {
+      "key": "crest",
+      "label": "Neural crest — cells that leave at the seam",
+      "role": "part",
+      "group": "Neural crest",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "neural crest",
+        "neural crest cells",
+        "fold tips",
+        "epithelial to mesenchymal transition",
+        "EMT",
+        "migrate",
+        "fourth germ layer",
+        "delamination"
+      ],
+      "narration": "As the folds fuse, the cells at their tips do not join either the tube or the skin. They break loose and migrate away through the embryo. These are the neural crest cells, and they use the same epithelial to mesenchymal transition the primitive streak used. Some books call them the fourth germ layer, which tells you how much of the body they build."
+    },
+    {
+      "key": "crest_fates",
+      "label": "What neural crest becomes",
+      "role": "part",
+      "group": "Neural crest",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "dorsal root ganglion",
+        "sensory ganglia",
+        "sympathetic chain",
+        "parasympathetic ganglia",
+        "adrenal medulla",
+        "chromaffin cells",
+        "Schwann cells",
+        "melanocytes",
+        "enteric nervous system",
+        "pharyngeal arch cartilage",
+        "bones of the face",
+        "odontoblasts",
+        "meninges",
+        "pia",
+        "arachnoid"
+      ],
+      "narration": "Crest cells become the dorsal root ganglia, the autonomic ganglia and the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric nervous system, the pharyngeal arch cartilages and much of the face, the odontoblasts, and the pia and arachnoid. Learn the list, because it is the answer to why Hirschsprung disease, phaeochromocytoma and a facial cleft can all be called crest problems."
+    },
+    {
+      "key": "anencephaly",
+      "label": "Cranial end open — anencephaly",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#cb4335",
+      "terms": [
+        "anencephaly",
+        "meroanencephaly",
+        "acrania",
+        "cranial neuropore fails",
+        "day 25",
+        "no cranial vault",
+        "exposed brain",
+        "frog-like face",
+        "polyhydramnios",
+        "incompatible with life",
+        "raised AFP"
+      ],
+      "narration": "If the cranial neuropore does not close by day twenty-five, the forebrain is left exposed, degenerates, and the skull vault never forms over it. That is anencephaly. The face has the flattened, bulging-eyed look described as frog-like, and because the fetus cannot swallow, the mother has polyhydramnios. It is uniformly fatal — a fact worth stating plainly, because much of antenatal screening exists to detect it."
+    },
+    {
+      "key": "spina_bifida",
+      "label": "Caudal end open — the spina bifida spectrum",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "spina bifida",
+        "spina bifida occulta",
+        "meningocele",
+        "myelomeningocele",
+        "myeloschisis",
+        "rachischisis",
+        "caudal neuropore fails",
+        "day 27",
+        "lumbosacral",
+        "L5",
+        "S1",
+        "tuft of hair",
+        "dimple",
+        "lipoma",
+        "flaccid paralysis",
+        "bladder involvement",
+        "Chiari II",
+        "hydrocephalus"
+      ],
+      "narration": "At the other end the spectrum runs by how much is exposed. Spina bifida occulta is a vertebral arch defect with skin over it, often marked only by a tuft of hair or a dimple at L5 or S1 and usually harmless. A meningocele pushes meninges through the gap. A myelomeningocele pushes cord and roots out too, and that child has flaccid weakness and a neurogenic bladder below the lesion, commonly with a Chiari II malformation and hydrocephalus. Myeloschisis is the flat, unclosed plate lying open on the back."
+    },
+    {
+      "key": "other_ntd",
+      "label": "The rest of the spectrum",
+      "role": "part",
+      "group": "Clinical — the two ends",
+      "layer": "organ",
+      "color": "#ec7063",
+      "terms": [
+        "craniorachischisis",
+        "whole tube open",
+        "encephalocele",
+        "occipital",
+        "herniated brain",
+        "skull defect",
+        "rachischisis totalis"
+      ],
+      "narration": "Two more to name. If the tube never closes anywhere, that is craniorachischisis — the extreme, and stillborn. And if the tube closes but brain herniates later through a hole in the skull, usually occipital, that is an encephalocele, which is a skull defect rather than a closure defect. Distinguishing those two in a viva is easy money."
+    },
+    {
+      "key": "screening",
+      "label": "How they are found before birth",
+      "role": "part",
+      "group": "Clinical — prevention and detection",
+      "layer": "organ",
+      "color": "#5499c7",
+      "terms": [
+        "alpha-fetoprotein",
+        "AFP",
+        "raised maternal serum AFP",
+        "amniotic fluid AFP",
+        "acetylcholinesterase",
+        "amniocentesis",
+        "ultrasound",
+        "lemon sign",
+        "banana sign",
+        "open defect",
+        "closed defect"
+      ],
+      "narration": "An open defect leaks fetal protein into the amniotic fluid, so maternal serum alpha-fetoprotein is raised and amniotic acetylcholinesterase appears. That is why AFP screens for open neural tube defects and misses closed ones like spina bifida occulta — the skin seals the leak. Ultrasound confirms, with the lemon and banana signs of a myelomeningocele."
+    },
+    {
+      "key": "prevention",
+      "label": "Folate, and the timing that decides everything",
+      "role": "part",
+      "group": "Clinical — prevention and detection",
+      "layer": "organ",
+      "color": "#48c9b0",
+      "terms": [
+        "folic acid",
+        "400 micrograms",
+        "5 mg",
+        "high risk",
+        "previous affected child",
+        "periconceptional",
+        "before conception",
+        "first 28 days",
+        "valproate",
+        "carbamazepine",
+        "methotrexate",
+        "maternal diabetes",
+        "hyperthermia",
+        "obesity"
+      ],
+      "narration": "Folic acid before conception cuts the risk substantially — four hundred micrograms daily for most women, five milligrams where the risk is high, such as a previous affected pregnancy or a mother on valproate. Now look at the dates. Closure finishes on day twenty-seven, before many women know they are pregnant. That is the entire argument for supplementing every woman who might conceive rather than every woman who has tested positive, and it is the exam point, not the dose."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "The four pictures — plate, groove, folds, tube",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Four cross-sections"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "disc_context"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:neurulation",
+          "path": [
+            "plate",
+            "groove",
+            "folds",
+            "tube"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "Cut across the embryo and watch the same section four times. Flat thickened plate on about day eighteen. Then the middle sinks into a groove. Then the edges lift as folds and lean inwards. Then the folds meet, fuse, and the tube drops beneath a skin that closes over it. Learn to draw those four sections in sixty seconds and you can answer almost any question here."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Why the ectoderm bothered — induction from below",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Setting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "plate"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "induction",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "induction",
+          "to": "plate",
+          "kind": "signals upward and thickens ectoderm into"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "The plate does not appear on its own. The notochord underneath signals up into the ectoderm and converts it to neuroectoderm. This is why the two topics are taught together: if you are asked what induces the neural plate, the answer is the notochord, and if you are asked what the notochord does, this is the first thing on the list."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "It zips from the neck outwards",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How closure runs"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tube"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "zipper",
+          "intensity": 0.95
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:closure-front",
+          "path": [
+            "zipper",
+            "cranial_neuropore",
+            "caudal_neuropore"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Fusion begins in the future neck, around the fifth somite, on about day twenty-two, and travels both ways like a zip. So the last two places to shut are the two ends — the cranial neuropore on day twenty-five and the caudal neuropore on day twenty-seven. Fix those three numbers. Every malformation in this scene is one of them missed."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 4,
+      "title": "The tail end is built by a different method",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "How closure runs"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "tube",
+            "secondary"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "secondary",
+          "intensity": 0.9
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.4
+        }
+      ],
+      "narration": "Everything you have just drawn is primary neurulation — folding a sheet. The sacral and coccygeal cord is made the other way: a solid cell mass in the caudal eminence hollows out and joins the tube, then shrinks back to leave the conus medullaris and filum terminale. Compare the two sections side by side, because the mechanism predicts the lesion — folding failures are open and secondary neurulation failures are skin-covered."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "The cells that walk away from the seam",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Neural crest"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "folds"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "crest",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "folds",
+          "to": "crest",
+          "kind": "cells at the fusing tips break loose as"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:crest-migration",
+          "path": [
+            "crest",
+            "crest_fates"
+          ],
+          "duration": 5
+        }
+      ],
+      "narration": "At the moment of fusion, the cells at the very tips of the folds join neither the tube nor the skin. They lose their attachments and migrate off through the embryo. Follow them and you find the dorsal root ganglia, the sympathetic chain, the adrenal medulla, Schwann cells, melanocytes, the enteric plexuses, the pharyngeal arch cartilages, the odontoblasts and the pia and arachnoid. Half the questions that begin with why do these three unrelated things go wrong together end here."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 6,
+      "title": "Day 25 missed — anencephaly",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical — the two ends"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "cranial_neuropore"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "anencephaly",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cranial_neuropore",
+          "to": "anencephaly",
+          "kind": "failing to close on day 25 gives"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Neural crest"
+        }
+      ],
+      "narration": "Leave the cranial neuropore open and the forebrain sits exposed in amniotic fluid, breaks down, and no skull vault forms over it. That is anencephaly: a flattened head, prominent eyes, no cranial vault, and polyhydramnios because the fetus cannot swallow. It is not survivable. One date missed, at the top end."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 7,
+      "title": "Day 27 missed — how much is showing?",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical — the two ends"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "caudal_neuropore"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spina_bifida",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "caudal_neuropore",
+          "to": "spina_bifida",
+          "kind": "failing to close on day 27 gives"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "spina_bifida",
+            "other_ntd"
+          ],
+          "layout": "stacked"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0.6
+        }
+      ],
+      "narration": "At the lower end the question is simply how much comes through the gap. Nothing but a bony defect under intact skin is spina bifida occulta — a hairy patch or a dimple over L5 or S1, usually silent. Meninges through the gap is a meningocele. Cord and nerve roots as well is a myelomeningocele, with weakness and a neurogenic bladder below the level, and usually a Chiari II with hydrocephalus. An unclosed plate lying open is myeloschisis. And if nothing closes anywhere, craniorachischisis. Draw the cross-section each time; the picture answers the question faster than the name does."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Finding them, and preventing them",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical — prevention and detection"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spina_bifida"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "spina_bifida",
+          "to": "screening",
+          "kind": "an open lesion leaks protein, detected by"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "prevention",
+          "to": "caudal_neuropore",
+          "kind": "must be taken before this closes"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "An open defect leaks alpha-fetoprotein into the amniotic fluid and the mother's blood, and acetylcholinesterase appears in the fluid — which is why AFP screening finds anencephaly and myelomeningocele but not skin-covered occulta. Ultrasound then confirms. Prevention is folic acid: four hundred micrograms daily periconceptionally, five milligrams where risk is high, as after a previous affected child or on valproate. Then look at the calendar one more time. The tube is shut by day twenty-seven, often before a period is even missed, so the tablet has to be taken before conception. That is why folate is advised to women who might become pregnant, not to women who already know they are."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence, then diagram, then 3d_anatomy, so BOTH diagram and 3d_anatomy are recorded in deferred_modes. The 3d option is real and should be revisited: a closing neural tube with migrating crest is a genuinely spatial subject, and the day a provider holds staged embryo geometry this scene should be re-authored as 3d_anatomy. It is deferred because no such model exists in the catalog today, not because the subject is flat.",
+    "Status is 'planned'. Eighteen regions, eight beats, ops and narration complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with these labelled regions: four transverse sections in a row — flat plate, groove, raised folds, closed tube with skin ectoderm continuous over it and the notochord drawn beneath in all four; a dorsal view of the whole embryo with the closure front marked at the fifth somite and arrows running cranially and caudally; the two neuropores labelled separately with their days; a sagittal panel showing the caudal eminence cavitating; and four cross-sections of the spina bifida spectrum drawn to the same scale so occulta, meningocele, myelomeningocele and myeloschisis differ only in what comes through the gap.",
+    "The spina bifida panels in beat 7 must be drawn at one scale with the same vertebral outline. The teaching point is how much herniates, and a set of drawings at different magnifications destroys exactly that comparison.",
+    "Beats 1, 3 and 5 trace concept:neurulation, concept:closure-front and concept:crest-migration. In each the subject is a process or a moving cell population rather than a drawn object, so none can be a region.",
+    "Beat 8 authors PEEL_LAYER to lift the skin off an occult lesion. The current renderer degrades it to hiding structures tagged with that layer; the op is authored because the teaching move — 'the skin is what hides this one' — is exactly what separates occulta from an open defect.",
+    "'Notochord' is NOT claimed in covers[]. Induction is named in beat 2 because the plate has no other cause, but the four stages of notochord formation, its extent and its adult fate are that entry's work and are authored alongside this one.",
+    "'Primitive streak' and 'Trilaminar disc (3 germ layers)' are NOT claimed. Neural crest is described as using the same epithelial-to-mesenchymal transition the streak used, but the streak itself is taught in its own scene.",
+    "Nervous System Development is a separate embryology topic later in the curriculum. This scene stops at tube closure and neural crest fates; the alar and basal plates, the sulcus limitans and brain vesicle derivatives are named in match.terms only, so a highlighted term reaches the right scene once that topic is authored.",
+    "Day numbers are the standard teaching ones — plate about day 18, closure beginning about day 22 at the fifth somite, cranial neuropore about day 25, caudal about day 27. Texts vary by a day and by somite count; the narration gives them as approximations but keeps the 25/27 pair exact, because that pair is what the malformations hang on.",
+    "Folic acid doses are given as the widely taught 400 micrograms and 5 mg periconceptional figures. National guidance differs and changes; the scene teaches the principle — supplement before conception because closure finishes before pregnancy is usually recognised — and a note using this scene should not be read as a prescribing reference.",
+    "Anencephaly is stated plainly as fatal because that is the examined fact and softening it would mislead. The narration describes the malformation and the screening, and does not discuss management of an affected pregnancy, which is a counselling matter rather than an embryology one."
+  ]
+}

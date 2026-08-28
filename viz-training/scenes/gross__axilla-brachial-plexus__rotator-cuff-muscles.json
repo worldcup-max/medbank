@@ -1,0 +1,463 @@
+{
+  "schema": 2,
+  "id": "gross__axilla-brachial-plexus__rotator-cuff-muscles",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Axilla & Brachial Plexus",
+  "structure": "Rotator cuff muscles (SITS)",
+  "covers": [
+    "Rotator cuff muscles"
+  ],
+  "learning_goal": "Name the four cuff muscles, say which tubercle each one reaches, and predict the movement lost when one of them tears.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "rotator cuff",
+      "shoulder",
+      "shoulder joint",
+      "glenohumeral joint",
+      "scapular muscles",
+      "axilla",
+      "upper limb",
+      "pectoral girdle"
+    ],
+    "terms": [
+      "rotator cuff",
+      "SITS",
+      "supraspinatus",
+      "infraspinatus",
+      "teres minor",
+      "subscapularis",
+      "greater tubercle",
+      "lesser tubercle",
+      "painful arc",
+      "supraspinatus tendinitis",
+      "shoulder abduction",
+      "lateral rotation",
+      "medial rotation",
+      "suprascapular nerve",
+      "axillary nerve"
+    ]
+  },
+  "camera": {
+    "framing": "posterior",
+    "autoRotate": 0.006,
+    "initialYaw": 3.0
+  },
+  "structures": [
+    {
+      "key": "scapula",
+      "name": "right scapula",
+      "label": "Scapula",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "refs": {
+        "bodyparts3d": "FMA13395"
+      },
+      "terms": [
+        "scapula",
+        "shoulder blade",
+        "supraspinous fossa",
+        "infraspinous fossa",
+        "subscapular fossa",
+        "spine of scapula",
+        "acromion",
+        "glenoid cavity"
+      ],
+      "narration": "All four cuff muscles start on the scapula. Three on the back of it, one on the front."
+    },
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "greater tubercle",
+        "lesser tubercle",
+        "head of humerus"
+      ],
+      "narration": "All four end on the top of the humerus, so together they hold its head in the shallow glenoid."
+    },
+    {
+      "key": "supraspinatus",
+      "name": "right supraspinatus",
+      "label": "Supraspinatus",
+      "role": "part",
+      "group": "Rotator cuff",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA32544"
+      },
+      "terms": [
+        "supraspinatus",
+        "supraspinous fossa",
+        "S in SITS",
+        "first 15 degrees of abduction",
+        "painful arc",
+        "suprascapular nerve"
+      ],
+      "narration": "Above the spine of the scapula, running under the acromion to the greater tubercle. It starts abduction — the first fifteen degrees — before deltoid takes over."
+    },
+    {
+      "key": "infraspinatus",
+      "name": "right infraspinatus muscle",
+      "label": "Infraspinatus",
+      "role": "part",
+      "group": "Rotator cuff",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA32547"
+      },
+      "terms": [
+        "infraspinatus",
+        "infraspinous fossa",
+        "I in SITS",
+        "lateral rotation",
+        "external rotation",
+        "suprascapular nerve"
+      ],
+      "narration": "Below the spine, filling the infraspinous fossa. It rotates the arm laterally."
+    },
+    {
+      "key": "teres_minor",
+      "name": "right teres minor",
+      "label": "Teres minor",
+      "role": "part",
+      "group": "Rotator cuff",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "refs": {
+        "bodyparts3d": "FMA32553"
+      },
+      "terms": [
+        "teres minor",
+        "T in SITS",
+        "lateral border of scapula",
+        "lateral rotation",
+        "axillary nerve"
+      ],
+      "narration": "A narrow strip along the lateral border of the scapula, just below infraspinatus. It also rotates laterally, and it is the one cuff muscle supplied by the axillary nerve."
+    },
+    {
+      "key": "subscapularis",
+      "name": "right subscapularis",
+      "label": "Subscapularis",
+      "role": "part",
+      "group": "Rotator cuff",
+      "layer": "muscle",
+      "color": "#8f2f5e",
+      "refs": {
+        "bodyparts3d": "FMA13414"
+      },
+      "terms": [
+        "subscapularis",
+        "subscapular fossa",
+        "S in SITS",
+        "medial rotation",
+        "internal rotation",
+        "upper and lower subscapular nerves",
+        "anterior wall of axilla"
+      ],
+      "narration": "The only one on the front of the scapula, between the scapula and the ribs. It rotates the arm medially — the opposite of the other three."
+    },
+    {
+      "key": "teres_major",
+      "name": "right teres major",
+      "label": "Teres major — NOT cuff",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "muscle",
+      "color": "#7a7a86",
+      "refs": {
+        "bodyparts3d": "FMA32551"
+      },
+      "terms": [
+        "teres major",
+        "lower subscapular nerve",
+        "adduction",
+        "medial rotation"
+      ],
+      "narration": "Teres major sits right below teres minor and is a favourite exam trap. It is not part of the cuff — it crosses to the front of the humerus and does not blend with the capsule."
+    },
+    {
+      "key": "deltoid_acromial",
+      "name": "acromial part of right deltoid",
+      "label": "Deltoid — acromial part",
+      "role": "context",
+      "group": "Deltoid",
+      "layer": "muscle",
+      "color": "#6f6a80",
+      "refs": {
+        "bodyparts3d": "FMA34682"
+      },
+      "terms": [
+        "deltoid",
+        "acromial deltoid",
+        "abduction",
+        "axillary nerve"
+      ],
+      "narration": "Deltoid covers the cuff from outside. It takes abduction on after the first fifteen degrees."
+    },
+    {
+      "key": "deltoid_spinal",
+      "name": "spinal part of right deltoid",
+      "label": "Deltoid — spinal part",
+      "role": "context",
+      "group": "Deltoid",
+      "layer": "muscle",
+      "color": "#7d7890",
+      "refs": {
+        "bodyparts3d": "FMA34684"
+      },
+      "terms": [
+        "posterior deltoid",
+        "spinal part of deltoid",
+        "spine of scapula"
+      ],
+      "narration": "The back of deltoid, arising from the spine of the scapula — hiding infraspinatus and teres minor beneath it."
+    },
+    {
+      "key": "greater_tubercle",
+      "label": "Greater tubercle",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.515,
+          0.396,
+          0.921
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: the most lateral point of the proximal 12% of the humerus, measured on the mesh (14.1 mm lateral of the shaft axis) — see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "greater tubercle",
+        "greater tuberosity"
+      ],
+      "narration": "Three facets on one bump. Supraspinatus takes the top, infraspinatus the middle, teres minor the lowest."
+    },
+    {
+      "key": "lesser_tubercle",
+      "label": "Lesser tubercle",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffb020",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.816,
+          0.158,
+          0.903
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: nearest CONTACT point between the humerus and subscapularis, measured on the source meshes (gap 0.09 mm) — see tools/derive-humerus-landmarks.mjs",
+      "terms": [
+        "lesser tubercle",
+        "lesser tuberosity"
+      ],
+      "narration": "The smaller bump in front. Subscapularis alone reaches it — which is why it is the odd one out on movement too."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "From behind, deltoid covers everything. The cuff is the layer underneath, wrapped round the shoulder joint."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Take the deltoid off",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deltoid"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Rotator cuff",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Now the three posterior cuff muscles show: supraspinatus above the spine, infraspinatus below it, teres minor along the lateral border."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The fourth one is in front",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deltoid"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "subscapularis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Subscapularis lines the front of the scapula. You never see it from behind, and that is half the reason students forget it."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Where each one lands",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Rotator cuff"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "supraspinatus",
+          "to": "greater_tubercle",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "infraspinatus",
+          "to": "greater_tubercle",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "teres_minor",
+          "to": "greater_tubercle",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "subscapularis",
+          "to": "lesser_tubercle",
+          "kind": "inserts on"
+        }
+      ],
+      "narration": "Three go to the greater tubercle, one to the lesser. That single fact carries the whole movement story."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 5,
+      "title": "Rotate in, rotate out",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "subscapularis",
+            "infraspinatus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Subscapularis pulls the front of the humerus medially. Infraspinatus pulls the back of it laterally. Same joint, opposite directions, because they attach on opposite sides."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Follow supraspinatus",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "supraspinatus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "supraspinatus",
+          "path": [
+            "scapula",
+            "greater_tubercle"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "It runs from the supraspinous fossa, under the acromion, to the greater tubercle. That tunnel is narrow — squeeze the tendon there and you get the painful arc between sixty and one hundred and twenty degrees."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 7,
+      "title": "The trap: teres major",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "teres_minor",
+            "teres_major"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Teres minor is cuff, teres major is not. Minor goes to the greater tubercle and rotates laterally. Major crosses to the front of the humerus and rotates medially."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  },
+  "gaps": [
+    "The catalog has no separate meshes for the three facets of the greater tubercle, so the superior, middle and inferior facets are taught in narration on one landmark rather than as three targets.",
+    "There is no mesh for the joint capsule or the subacromial bursa, so the cuff's blending with the capsule and the site of subacromial impingement are described but not shown.",
+    "The greater tubercle anchor is an EXTREME (the most lateral point of the proximal 12% of the bone), not a contact measurement, because no supraspinatus mesh is held locally to measure a contact against. The lesser tubercle anchor IS a contact (subscapularis, gap 0.09 mm). Both stay status:\"needs-review\" until a human has looked at them once."
+  ]
+}

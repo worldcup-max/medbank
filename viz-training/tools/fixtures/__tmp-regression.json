@@ -1,0 +1,73 @@
+{
+  "_comment": "Regression fixture — a deliberately broken scene. Copy it into a scratch scenes/ folder and run validate-scenes.mjs: it must report all 11 errors across existence, canonical, ops, purity and lifecycle. FMA7196 is the SPLEEN; the v1 heart scene labelled it 'left lung'. If this fixture ever passes, the gate is broken.",
+  "schema": 2,
+  "id": "regression",
+  "mode": "3d_anatomy",
+  "status": "blocked",
+  "learning_goal": "x",
+  "provider": {
+    "primary": "bodyparts3d"
+  },
+  "provenance": {
+    "author": "ai"
+  },
+  "structures": [
+    {
+      "key": "heart",
+      "name": "heart",
+      "label": "Heart",
+      "role": "context",
+      "refs": {
+        "bodyparts3d": "FMA7088"
+      }
+    },
+    {
+      "key": "lung_l",
+      "name": "left lung",
+      "label": "Left lung",
+      "role": "part",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      }
+    },
+    {
+      "key": "ra",
+      "name": "right atrium",
+      "label": "Right atrium",
+      "role": "part",
+      "refs": {
+        "bodyparts3d": "FMA7096"
+      },
+      "url": "https://cdn.jsdelivr.net/gh/x/BodyParts3D@main/stl/FMA7096.stl"
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "title": "t",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "nonexistent"
+        },
+        {
+          "op": "FLY_THROUGH",
+          "target": "*"
+        }
+      ],
+      "narration": "n"
+    }
+  ],
+  "blocked_reason": [
+    "[existence] heart: FMA7088 is NOT in available-meshes.json — the model does not exist. Never invent an id.",
+    "[canonical] lung_l: name mismatch — scene says \"left lung\", catalog says \"spleen\" for FMA7196. This is how a spleen ends up labelled \"lung\".",
+    "[existence] ra: FMA7096 is NOT in available-meshes.json — the model does not exist. Never invent an id.",
+    "[ops] view \"t\" · SHOW_STRUCTURE: target \"nonexistent\" matches no structure key or group",
+    "[ops] view \"t\": unknown op \"FLY_THROUGH\"",
+    "[purity] the scene contains a URL — delivery belongs to the adapter, not the scene",
+    "[purity] the scene contains a file extension (.stl) — delivery belongs to the adapter, not the scene",
+    "[purity] the scene contains a CDN host — delivery belongs to the adapter, not the scene",
+    "[purity] the scene contains a delivery field — delivery belongs to the adapter, not the scene",
+    "[purity] the scene names a provider outside provider{} and refs{} — a scene should not know who renders it"
+  ]
+}

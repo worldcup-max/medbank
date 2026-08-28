@@ -1,0 +1,994 @@
+{
+  "schema": 2,
+  "id": "gross__forearm-hand__intrinsic-hand-muscles-arches",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Forearm & Hand",
+  "structure": "Intrinsic hand muscles & arches",
+  "covers": [
+    "Intrinsic hand muscles & arches"
+  ],
+  "learning_goal": "Group the small muscles of the hand into thenar, hypothenar, adductor, interossei and lumbricals, give each group its nerve, explain how the arches of the hand turn a flat palm into a grip, and predict the deformity that follows an ulnar nerve lesion at the wrist.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "hand",
+      "palm",
+      "intrinsic muscles of the hand",
+      "arches of the hand",
+      "grip",
+      "upper limb",
+      "ulnar nerve",
+      "median nerve",
+      "forearm and hand"
+    ],
+    "terms": [
+      "intrinsic hand muscles",
+      "thenar eminence",
+      "thenar muscles",
+      "abductor pollicis brevis",
+      "opponens pollicis",
+      "flexor pollicis brevis",
+      "adductor pollicis",
+      "oblique head",
+      "transverse head",
+      "hypothenar eminence",
+      "hypothenar muscles",
+      "abductor digiti minimi",
+      "flexor digiti minimi brevis",
+      "opponens digiti minimi",
+      "palmaris brevis",
+      "lumbricals",
+      "dorsal interossei",
+      "palmar interossei",
+      "PAD DAB",
+      "extensor expansion",
+      "dorsal digital expansion",
+      "carpal arch",
+      "proximal transverse arch",
+      "distal transverse arch",
+      "metacarpal arch",
+      "longitudinal arch",
+      "arches of the hand",
+      "superficial palmar arch",
+      "deep palmar arch",
+      "ulnar artery",
+      "radial artery",
+      "Allen test",
+      "ulnar nerve",
+      "deep branch of ulnar nerve",
+      "recurrent branch of median nerve",
+      "ulnar claw hand",
+      "claw hand",
+      "Froment sign",
+      "ape hand",
+      "opposition",
+      "power grip",
+      "precision grip",
+      "MCP flexion IP extension",
+      "flexor retinaculum"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "abd_poll_brevis",
+      "name": "right abductor pollicis brevis",
+      "label": "Abductor pollicis brevis",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#d8564a",
+      "refs": {
+        "bodyparts3d": "FMA37386"
+      },
+      "terms": [
+        "abductor pollicis brevis",
+        "thenar eminence",
+        "thumb abduction",
+        "recurrent branch of median nerve"
+      ],
+      "narration": "The most superficial thenar muscle. It lifts the thumb straight up out of the plane of the palm — the single movement you use to test the median nerve at the bedside."
+    },
+    {
+      "key": "opponens_pollicis",
+      "name": "right opponens pollicis",
+      "label": "Opponens pollicis",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#cb4c40",
+      "refs": {
+        "bodyparts3d": "FMA37390"
+      },
+      "terms": [
+        "opponens pollicis",
+        "opposition",
+        "first metacarpal",
+        "thenar eminence"
+      ],
+      "narration": "It pulls the whole first metacarpal across the palm and rotates it. Opposition is what separates a human hand from a paw, and this is the muscle that does it."
+    },
+    {
+      "key": "fpb_superficial",
+      "name": "superficial head of right flexor pollicis brevis",
+      "label": "Flexor pollicis brevis — superficial head",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#bf4239",
+      "refs": {
+        "bodyparts3d": "FMA65198"
+      },
+      "terms": [
+        "flexor pollicis brevis",
+        "superficial head",
+        "median nerve"
+      ],
+      "narration": "Median nerve, like the other two. Bends the thumb at its knuckle."
+    },
+    {
+      "key": "fpb_deep",
+      "name": "deep head of right flexor pollicis brevis",
+      "label": "Flexor pollicis brevis — deep head",
+      "role": "part",
+      "group": "Thenar muscles",
+      "layer": "muscle",
+      "color": "#a03d38",
+      "refs": {
+        "bodyparts3d": "FMA46110"
+      },
+      "terms": [
+        "deep head of flexor pollicis brevis",
+        "ulnar nerve",
+        "exception"
+      ],
+      "narration": "The exception in the thenar group: this head is ulnar. It is why a complete median nerve lesion still leaves a flicker of thumb flexion."
+    },
+    {
+      "key": "add_poll_oblique",
+      "name": "oblique head of right adductor pollicis",
+      "label": "Adductor pollicis — oblique head",
+      "role": "part",
+      "group": "Adductor pollicis",
+      "layer": "muscle",
+      "color": "#8e4bb0",
+      "refs": {
+        "bodyparts3d": "FMA46121"
+      },
+      "terms": [
+        "adductor pollicis",
+        "oblique head",
+        "capitate",
+        "deep branch of ulnar nerve"
+      ],
+      "narration": "From the capitate and the bases of the second and third metacarpals. Adductor pollicis is not a thenar muscle: it sits deep in the palm and it is ulnar, not median."
+    },
+    {
+      "key": "add_poll_transverse",
+      "name": "transverse head of right adductor pollicis",
+      "label": "Adductor pollicis — transverse head",
+      "role": "part",
+      "group": "Adductor pollicis",
+      "layer": "muscle",
+      "color": "#7c419c",
+      "refs": {
+        "bodyparts3d": "FMA46123"
+      },
+      "terms": [
+        "transverse head of adductor pollicis",
+        "third metacarpal",
+        "Froment sign",
+        "key pinch"
+      ],
+      "narration": "A broad fan from the shaft of the third metacarpal to the thumb. This is the muscle of key pinch — and the muscle whose failure gives Froment's sign, when the patient flexes the thumb tip to hold the paper because they cannot adduct."
+    },
+    {
+      "key": "abd_dig_min",
+      "name": "abductor digiti minimi of right hand",
+      "label": "Abductor digiti minimi",
+      "role": "part",
+      "group": "Hypothenar muscles",
+      "layer": "muscle",
+      "color": "#e08a3c",
+      "refs": {
+        "bodyparts3d": "FMA37396"
+      },
+      "terms": [
+        "abductor digiti minimi",
+        "hypothenar eminence",
+        "pisiform",
+        "deep branch of ulnar nerve"
+      ],
+      "narration": "From the pisiform to the little finger. The medial border of the hypothenar eminence — the muscle you see wasting first in an ulnar nerve lesion."
+    },
+    {
+      "key": "fdm_brevis",
+      "name": "flexor digiti minimi brevis of right hand",
+      "label": "Flexor digiti minimi brevis",
+      "role": "part",
+      "group": "Hypothenar muscles",
+      "layer": "muscle",
+      "color": "#d47c34",
+      "refs": {
+        "bodyparts3d": "FMA37398"
+      },
+      "terms": [
+        "flexor digiti minimi brevis",
+        "hook of hamate",
+        "hypothenar"
+      ],
+      "narration": "From the hook of the hamate and the retinaculum. Bends the little finger at its knuckle."
+    },
+    {
+      "key": "opponens_dig_min",
+      "name": "opponens digiti minimi of right hand",
+      "label": "Opponens digiti minimi",
+      "role": "part",
+      "group": "Hypothenar muscles",
+      "layer": "muscle",
+      "color": "#c06f2d",
+      "refs": {
+        "bodyparts3d": "FMA37400"
+      },
+      "terms": [
+        "opponens digiti minimi",
+        "fifth metacarpal",
+        "cupping the palm"
+      ],
+      "narration": "It rotates the fifth metacarpal forwards. This is the muscle that deepens the palm into a cup — the ulnar half of the same trick the thumb does at the other side."
+    },
+    {
+      "key": "lumbricals",
+      "name": "set of lumbricals of right hand",
+      "label": "Lumbricals",
+      "role": "part",
+      "group": "Deep muscles of the palm",
+      "layer": "muscle",
+      "color": "#4f8fbf",
+      "refs": {
+        "bodyparts3d": "FMA42398"
+      },
+      "terms": [
+        "lumbricals",
+        "extensor expansion",
+        "flexor digitorum profundus",
+        "MCP flexion",
+        "IP extension",
+        "lumbrical plus"
+      ],
+      "narration": "Four small muscles that arise from a tendon and insert into a tendon — from flexor digitorum profundus in the palm to the extensor expansion on the back of each finger. That crossing is why one muscle bends the knuckle and straightens the finger at the same time. The lateral two are median; the medial two are ulnar."
+    },
+    {
+      "key": "palmar_interossei",
+      "name": "set of palmar interossei of right hand",
+      "label": "Palmar interossei",
+      "role": "part",
+      "group": "Deep muscles of the palm",
+      "layer": "muscle",
+      "color": "#3f6f9e",
+      "refs": {
+        "bodyparts3d": "FMA42402"
+      },
+      "terms": [
+        "palmar interossei",
+        "PAD",
+        "adduction",
+        "deep branch of ulnar nerve"
+      ],
+      "narration": "Palmar interossei ADduct — PAD. They pull the fingers back towards the middle finger. All ulnar."
+    },
+    {
+      "key": "dorsal_interossei",
+      "name": "set of dorsal interossei of right hand",
+      "label": "Dorsal interossei",
+      "role": "part",
+      "group": "Deep muscles of the palm",
+      "layer": "muscle",
+      "color": "#33587e",
+      "refs": {
+        "bodyparts3d": "FMA42404"
+      },
+      "terms": [
+        "dorsal interossei",
+        "DAB",
+        "abduction",
+        "bipennate",
+        "first dorsal interosseous",
+        "guttering"
+      ],
+      "narration": "Dorsal interossei ABduct — DAB. They spread the fingers away from the middle finger, and being bipennate they fill the spaces between the metacarpals. When the ulnar nerve dies those spaces hollow out, and the first web space guttering is the sign you see across the room."
+    },
+    {
+      "key": "flexor_retinaculum",
+      "name": "flexor retinaculum of right wrist",
+      "label": "Flexor retinaculum",
+      "role": "part",
+      "group": "Proximal transverse arch",
+      "layer": "fascia",
+      "color": "#d8c39e",
+      "refs": {
+        "bodyparts3d": "FMA40120"
+      },
+      "terms": [
+        "flexor retinaculum",
+        "transverse carpal ligament",
+        "carpal arch",
+        "origin of thenar and hypothenar muscles"
+      ],
+      "narration": "The tie-beam across the carpal arch. Thenar and hypothenar muscles both take origin from it, so the band that roofs the carpal tunnel is also the anchor the small muscles pull against."
+    },
+    {
+      "key": "scaphoid",
+      "name": "right scaphoid",
+      "label": "Scaphoid",
+      "role": "context",
+      "group": "Proximal transverse arch",
+      "layer": "bone",
+      "color": "#efe6cd",
+      "refs": {
+        "bodyparts3d": "FMA24435"
+      },
+      "terms": [
+        "scaphoid",
+        "tubercle of scaphoid",
+        "carpal arch"
+      ],
+      "narration": "The lateral post of the carpal arch."
+    },
+    {
+      "key": "trapezium",
+      "name": "right trapezium",
+      "label": "Trapezium",
+      "role": "context",
+      "group": "Proximal transverse arch",
+      "layer": "bone",
+      "color": "#eae0c4",
+      "refs": {
+        "bodyparts3d": "FMA24443"
+      },
+      "terms": [
+        "trapezium",
+        "saddle joint",
+        "first carpometacarpal joint"
+      ],
+      "narration": "Its saddle joint with the first metacarpal is what lets the thumb swing across the palm. No saddle, no opposition."
+    },
+    {
+      "key": "pisiform",
+      "name": "right pisiform",
+      "label": "Pisiform",
+      "role": "context",
+      "group": "Proximal transverse arch",
+      "layer": "bone",
+      "color": "#efe6cd",
+      "refs": {
+        "bodyparts3d": "FMA24441"
+      },
+      "terms": [
+        "pisiform",
+        "hypothenar origin",
+        "medial post of the carpal arch"
+      ],
+      "narration": "The medial post, and the origin of abductor digiti minimi."
+    },
+    {
+      "key": "hamate",
+      "name": "right hamate",
+      "label": "Hamate",
+      "role": "context",
+      "group": "Proximal transverse arch",
+      "layer": "bone",
+      "color": "#eae0c4",
+      "refs": {
+        "bodyparts3d": "FMA24448"
+      },
+      "terms": [
+        "hamate",
+        "hook of hamate",
+        "Guyon's canal",
+        "deep branch of ulnar nerve"
+      ],
+      "narration": "The deep branch of the ulnar nerve hooks round this bone to reach the deep palm. A fractured hook of hamate can paralyse every ulnar-supplied muscle in the palm — the interossei, adductor pollicis, the medial two lumbricals and the hypothenar group — and leave sensation untouched. The three thenar muscles and the lateral two lumbricals are median and survive it."
+    },
+    {
+      "key": "capitate",
+      "name": "right capitate",
+      "label": "Capitate",
+      "role": "context",
+      "group": "Proximal transverse arch",
+      "layer": "bone",
+      "color": "#e3d8b9",
+      "refs": {
+        "bodyparts3d": "FMA24446"
+      },
+      "terms": [
+        "capitate",
+        "keystone",
+        "oblique head of adductor pollicis"
+      ],
+      "narration": "The keystone of the carpal arch and the fixed point the whole hand rotates around."
+    },
+    {
+      "key": "mc1",
+      "name": "right first metacarpal bone",
+      "label": "First metacarpal",
+      "role": "context",
+      "group": "Distal transverse arch",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24464"
+      },
+      "terms": [
+        "first metacarpal",
+        "thumb ray",
+        "mobile"
+      ],
+      "narration": "The most mobile ray. It sits rotated ninety degrees to the others before any muscle acts."
+    },
+    {
+      "key": "mc2",
+      "name": "right second metacarpal bone",
+      "label": "Second metacarpal",
+      "role": "context",
+      "group": "Distal transverse arch",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24466"
+      },
+      "terms": [
+        "second metacarpal",
+        "fixed ray",
+        "index"
+      ],
+      "narration": "Fixed. With the third it makes the rigid central pillar the mobile rays move around."
+    },
+    {
+      "key": "mc3",
+      "name": "right third metacarpal bone",
+      "label": "Third metacarpal",
+      "role": "context",
+      "group": "Distal transverse arch",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24468"
+      },
+      "terms": [
+        "third metacarpal",
+        "axis of the hand",
+        "middle finger"
+      ],
+      "narration": "The axis of the hand. Abduction and adduction of the fingers are defined relative to this line — which is why the middle finger has two dorsal interossei and no palmar one."
+    },
+    {
+      "key": "mc4",
+      "name": "right fourth metacarpal bone",
+      "label": "Fourth metacarpal",
+      "role": "context",
+      "group": "Distal transverse arch",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24470"
+      },
+      "terms": [
+        "fourth metacarpal",
+        "mobile ray",
+        "ring finger"
+      ],
+      "narration": "Mobile, and it folds towards the thumb when you cup the hand."
+    },
+    {
+      "key": "mc5",
+      "name": "right fifth metacarpal bone",
+      "label": "Fifth metacarpal",
+      "role": "context",
+      "group": "Distal transverse arch",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24472"
+      },
+      "terms": [
+        "fifth metacarpal",
+        "little finger",
+        "boxer's fracture",
+        "opponens digiti minimi"
+      ],
+      "narration": "The most mobile ray on the ulnar side. Break its neck — the boxer's fracture — and the arch of the palm is what you are trying to preserve when you reduce it."
+    },
+    {
+      "key": "pp_thumb",
+      "name": "proximal phalanx of right thumb",
+      "label": "Proximal phalanx — thumb",
+      "role": "context",
+      "group": "Longitudinal arch",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA24450"
+      },
+      "terms": [
+        "proximal phalanx of thumb",
+        "insertion of thenar muscles",
+        "adductor pollicis insertion"
+      ],
+      "narration": "Where the short thumb muscles land: abductor and flexor pollicis brevis on the lateral side, adductor pollicis on the medial side."
+    },
+    {
+      "key": "pp_index",
+      "name": "proximal phalanx of right index finger",
+      "label": "Proximal phalanx — index",
+      "role": "context",
+      "group": "Longitudinal arch",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA24451"
+      },
+      "terms": [
+        "proximal phalanx of index finger",
+        "extensor expansion",
+        "first dorsal interosseous insertion"
+      ],
+      "narration": "The first dorsal interosseous and the first lumbrical both reach this bone and its extensor expansion."
+    },
+    {
+      "key": "pp_middle",
+      "name": "proximal phalanx of right middle finger",
+      "label": "Proximal phalanx — middle",
+      "role": "context",
+      "group": "Longitudinal arch",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA24452"
+      },
+      "terms": [
+        "proximal phalanx of middle finger",
+        "axis of abduction"
+      ],
+      "narration": "Two dorsal interossei pull this finger, one to each side, because it is the line the others move away from."
+    },
+    {
+      "key": "pp_ring",
+      "name": "proximal phalanx of right ring finger",
+      "label": "Proximal phalanx — ring",
+      "role": "context",
+      "group": "Longitudinal arch",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA24453"
+      },
+      "terms": [
+        "proximal phalanx of ring finger",
+        "ulnar claw"
+      ],
+      "narration": "One of the two fingers that claws when the ulnar nerve fails, because its lumbrical is ulnar."
+    },
+    {
+      "key": "pp_little",
+      "name": "proximal phalanx of right little finger",
+      "label": "Proximal phalanx — little",
+      "role": "context",
+      "group": "Longitudinal arch",
+      "layer": "bone",
+      "color": "#d9d0b6",
+      "refs": {
+        "bodyparts3d": "FMA24454"
+      },
+      "terms": [
+        "proximal phalanx of little finger",
+        "ulnar claw",
+        "hypothenar insertion"
+      ],
+      "narration": "The other clawing finger, and where the hypothenar muscles insert."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "The muscles that live in the hand",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Thenar muscles",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hypothenar muscles",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "The long flexors and extensors move the fingers from the forearm. These muscles never leave the hand. They begin and end inside it, and they are what turns a set of hinges into a hand that can hold a pen. There are five groups: thenar, hypothenar, adductor pollicis, the interossei and the lumbricals."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The thenar eminence",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Thenar muscles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Proximal transverse arch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "opponens_pollicis",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Three muscles make the ball of the thumb, and the median nerve supplies all three: abductor pollicis brevis on top, flexor pollicis brevis beside it, opponens pollicis underneath running onto the shaft of the first metacarpal. The recurrent branch that carries them leaves the median nerve just past the retinaculum, a few millimetres deep to the skin."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The hypothenar eminence",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hypothenar muscles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Proximal transverse arch"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "abd_dig_min",
+          "to": "pisiform",
+          "kind": "arises from"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fdm_brevis",
+          "to": "hamate",
+          "kind": "arises from"
+        }
+      ],
+      "narration": "The same three jobs on the other side of the palm — abduct, flex, oppose — for the little finger. All three are ulnar. They arise from the pisiform, the hook of the hamate and the retinaculum between them."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 4,
+      "title": "Adductor pollicis is not a thenar muscle",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Thenar muscles",
+            "Adductor pollicis"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "This is the trap. Adductor pollicis works on the thumb but it does not belong to the thenar eminence — it lies deep in the palm, behind the flexor tendons, and it is supplied by the ulnar nerve. Two heads: oblique from the capitate and the second and third metacarpal bases, transverse from the shaft of the third metacarpal. Both converge on the medial side of the thumb."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 5,
+      "title": "PAD and DAB",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Deep muscles of the palm"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Longitudinal arch"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "palmar_interossei",
+            "dorsal_interossei"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        }
+      ],
+      "narration": "Palmar interossei adduct, dorsal interossei abduct — PAD and DAB. Three palmar, four dorsal. The dorsal ones are bipennate and take origin from two metacarpals each, which is why they bulge on the back of the hand and the palmar ones do not."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "The lumbricals cross from flexor to extensor",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "lumbricals"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Distal transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Longitudinal arch"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "lumbricals",
+          "path": [
+            "mc3",
+            "lumbricals",
+            "pp_index",
+            "pp_middle",
+            "pp_ring",
+            "pp_little"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Follow the muscle forwards. It starts on the tendon of flexor digitorum profundus in the palm, passes in front of the knuckle joint, then turns onto the back of the finger to join the extensor expansion. In front of one joint and behind the next: contracting bends the knuckle and straightens the finger. That posture — knuckles flexed, fingers straight — is the position the intrinsics hold, and losing it is what a claw hand means."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 7,
+      "title": "Cut across the palm",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Adductor pollicis",
+          "intensity": 0.8
+        }
+      ],
+      "narration": "A section through the middle of the palm shows the layers in order from front to back: skin and palmar aponeurosis, the long flexor tendons with the lumbricals between them, then adductor pollicis and the interossei on the metacarpals. Thenar muscles fill the lateral compartment, hypothenar the medial one. Pus in one compartment stays in it — which is why hand infections are described by compartment."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Three arches, not a flat plate",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep muscles of the palm"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Proximal transverse arch",
+          "intensity": 0.8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Distal transverse arch",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        }
+      ],
+      "narration": "The skeleton of the hand is arched three ways. A fixed transverse arch at the carpus, keystone the capitate, tied across by the retinaculum. A mobile transverse arch at the metacarpal heads, keystone the second and third rays, with the first, fourth and fifth folding forwards around them. And a longitudinal arch down each ray from carpus to fingertip. Opponens pollicis and opponens digiti minimi deepen the distal arch from each side; the interossei and lumbricals hold the longitudinal ones."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Grip is the arches closing",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "opponens_pollicis",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "opponens_dig_min",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mc1",
+          "to": "mc5",
+          "kind": "cupping the palm"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Power grip is the two mobile borders swinging towards each other and the fingers closing over. Precision grip is the thumb tip meeting the index tip, adductor pollicis and the first dorsal interosseous doing the squeezing. Every one of those muscles is an intrinsic. This is why a hand with normal long flexors but dead intrinsics can make a fist and still not hold a key."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 10,
+      "title": "The palmar arches",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Deep muscles of the palm"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:superficial_palmar_arch",
+          "path": [
+            "pisiform",
+            "abd_dig_min",
+            "mc5",
+            "mc3",
+            "mc2",
+            "abd_poll_brevis"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:deep_palmar_arch",
+          "path": [
+            "mc1",
+            "add_poll_oblique",
+            "mc3",
+            "mc5",
+            "hamate"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "The first path traced is the superficial palmar arch. The ulnar artery enters the palm beside the pisiform, curves across in front of the flexor tendons and is completed laterally by a branch of the radial artery. It lies level with the outstretched thumb. The second path is the deep palmar arch, made mainly by the radial artery coming through the first web space between the heads of the first dorsal interosseous, running behind the flexor tendons on the metacarpal bases, a finger's breadth proximal to the superficial arch. Two arches, joined at both ends: block one artery and the hand still lives. That is what Allen's test is asking before you cannibalise the radial artery."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "The ulnar nerve owns the palm",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Deep muscles of the palm",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hypothenar muscles",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Adductor pollicis",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Thenar muscles",
+            "Deep muscles of the palm"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Count the supply. The ulnar nerve takes all the interossei, the medial two lumbricals, all three hypothenar muscles, adductor pollicis and the deep head of flexor pollicis brevis — everything now lit. The median nerve keeps only the three thenar muscles and the lateral two lumbricals. So an ulnar lesion at the wrist wastes the whole palm."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 12,
+      "title": "Why the claw is worse at the wrist",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Thenar muscles"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pp_ring",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pp_little",
+          "intensity": 0.9
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "Take the intrinsics away and the long tendons act unopposed: the knuckles hyperextend and the fingers curl. It shows in the ring and little fingers because their lumbricals are ulnar. Now the paradox. A lesion at the wrist claws badly; the same nerve cut at the elbow claws less, because flexor digitorum profundus to those two fingers is also paralysed and cannot curl them. The more proximal the lesion, the uglier the injury and the prettier the hand."
+    }
+  ],
+  "gaps": [
+    "There is no palmaris brevis mesh in the catalog, so the small skin muscle over the hypothenar eminence — the one that puckers the ulnar border of the palm and the only hand muscle supplied by the superficial branch of the ulnar nerve — is described in narration but not shown.",
+    "No artery of the hand exists as a model: neither the superficial nor the deep palmar arch, nor the radial or ulnar artery in the forearm, nor the common and proper palmar digital branches. Both arches are therefore authored as traced concept paths along the bones and muscles they run over, with the level of each stated in narration. This is the single largest gap in the scene, because the curriculum entry names the arches explicitly.",
+    "No peripheral nerve of the upper limb is modelled, so the deep branch of the ulnar nerve hooking round the hamate, the recurrent branch of the median nerve to the thenar muscles, and the digital nerves are taught by lighting the muscles they supply rather than by tracing a nerve model.",
+    "The interossei and the lumbricals exist in the catalog only as sets, not as individually numbered muscles. First dorsal interosseous — clinically the most important single muscle in the hand — cannot be isolated and lit on its own; it is taught inside the dorsal interossei set.",
+    "There is no mesh for the extensor expansion, the palmar aponeurosis, the fibrous flexor sheaths or the deep transverse metacarpal ligament, so the lumbrical's insertion and the layers seen in the cross-section beat are narrated rather than rendered.",
+    "The arches of the hand are a shape, not an object: they are taught by grouping the bones that form each arch and rotating to a view that shows the curve. The three arch groups in this scene are authoring devices, and no mesh corresponds to an arch itself.",
+    "The carpal bones and the flexor retinaculum also appear in the Carpal tunnel scene. The overlap is deliberate: there they are the wall of a tunnel, here they are the fixed arch that the small muscles pull against."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

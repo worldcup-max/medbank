@@ -178,6 +178,28 @@
       "narration": "A small muscle running from the first costal cartilage out to the subclavian groove on the undersurface of the middle third. Its job is protective. It lies as a cushion between the bone and the vessels behind it, which is why the subclavian vessels usually survive a fractured clavicle."
     },
     {
+      "key": "scalenus_ant",
+      "name": "right scalenus anterior",
+      "label": "Scalenus anterior — the divider",
+      "role": "context",
+      "group": "What lies beneath",
+      "layer": "muscle",
+      "color": "#b0503f",
+      "refs": {
+        "bodyparts3d": "FMA13392"
+      },
+      "terms": [
+        "scalenus anterior",
+        "scalene tubercle",
+        "interscalene groove",
+        "subclavian artery",
+        "subclavian vein",
+        "phrenic nerve",
+        "thoracic outlet"
+      ],
+      "narration": "Descends from the cervical transverse processes to the scalene tubercle of the first rib, and it is the answer to the question examiners actually ask: the vein passes in FRONT of it, the artery and the trunks of the plexus BEHIND it. Subclavius lies higher again, between all of that and the clavicle. The phrenic nerve rides down its front surface."
+    },
+    {
       "key": "sternocleidomastoid",
       "name": "right sternocleidomastoid",
       "label": "Sternocleidomastoid",
@@ -306,6 +328,26 @@
         "cephalic vein"
       ],
       "narration": "The vein lies in front of the artery and slightly lower, separated from it by scalenus anterior, which descends between the two to insert on the scalene tubercle of the first rib. Subclavius lies higher again, between both vessels and the bone. A subclavian central line is aimed just under the middle of the clavicle and walked along the back of the bone precisely because the bone is the landmark you can feel and the vein is the tube you cannot."
+    },
+    {
+      "key": "int_jugular",
+      "name": "right internal jugular vein",
+      "label": "Internal jugular vein",
+      "role": "context",
+      "group": "Danger behind the bone",
+      "layer": "vessel",
+      "color": "#3a6f9e",
+      "refs": {
+        "bodyparts3d": "FMA4754"
+      },
+      "terms": [
+        "internal jugular vein",
+        "venous angle",
+        "carotid sheath",
+        "right lymphatic duct",
+        "central line"
+      ],
+      "narration": "The vein that comes down the neck inside the carotid sheath. Behind the sternoclavicular joint it meets the subclavian vein at the venous angle to form the brachiocephalic vein. That corner is where the lymphatic ducts empty — thoracic duct on the left, right lymphatic duct on the right — so the whole lymph of the body rejoins the blood at a junction you can point to."
     },
     {
       "key": "brachiocephalic_vein",

@@ -1,0 +1,783 @@
+{
+  "schema": 2,
+  "id": "gross__pelvis-perineum__bony-pelvis",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Pelvis & Perineum",
+  "structure": "Bony pelvis",
+  "covers": [
+    "Bony pelvis"
+  ],
+  "learning_goal": "Assemble the pelvis from two hip bones, the sacrum and the coccyx, name the three parts of the hip bone and the joints that close the ring, trace the pelvic brim and use it to separate the greater from the lesser pelvis, give the boundaries and the important diameters of the inlet and the outlet, name the ligaments that convert the sciatic notches into foramina and say what leaves through each, list the features that distinguish a female from a male pelvis, and read off from all of that why a pelvic fracture bleeds, why the obstetric conjugate matters and where the ischial spine is felt in labour.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "bony pelvis",
+      "pelvic girdle",
+      "pelvis",
+      "hip bone",
+      "sacrum",
+      "pelvic inlet",
+      "pelvic outlet",
+      "obstetric pelvis",
+      "pelvimetry",
+      "pelvic fracture",
+      "lower limb",
+      "labour",
+      "hip joint",
+      "perineum"
+    ],
+    "terms": [
+      "bony pelvis",
+      "pelvic girdle",
+      "hip bone",
+      "innominate bone",
+      "os coxae",
+      "ilium",
+      "ischium",
+      "pubis",
+      "acetabulum",
+      "triradiate cartilage",
+      "Y shaped cartilage",
+      "iliac crest",
+      "iliac fossa",
+      "anterior superior iliac spine",
+      "ASIS",
+      "anterior inferior iliac spine",
+      "posterior superior iliac spine",
+      "PSIS",
+      "dimples of Venus",
+      "iliac tubercle",
+      "arcuate line",
+      "pectineal line",
+      "pecten pubis",
+      "iliopubic eminence",
+      "pubic tubercle",
+      "pubic crest",
+      "pubic symphysis",
+      "symphysis pubis",
+      "body of the pubis",
+      "superior pubic ramus",
+      "inferior pubic ramus",
+      "ischiopubic ramus",
+      "ischial tuberosity",
+      "ischial spine",
+      "greater sciatic notch",
+      "lesser sciatic notch",
+      "obturator foramen",
+      "obturator canal",
+      "sacrum",
+      "sacral promontory",
+      "ala of the sacrum",
+      "sacral hiatus",
+      "sacral canal",
+      "anterior sacral foramina",
+      "coccyx",
+      "sacroiliac joint",
+      "auricular surface",
+      "sacrotuberous ligament",
+      "sacrospinous ligament",
+      "greater sciatic foramen",
+      "lesser sciatic foramen",
+      "iliolumbar ligament",
+      "lumbosacral angle",
+      "pelvic brim",
+      "linea terminalis",
+      "greater pelvis",
+      "false pelvis",
+      "lesser pelvis",
+      "true pelvis",
+      "pelvic inlet",
+      "pelvic outlet",
+      "pelvic cavity",
+      "pelvic axis",
+      "curve of Carus",
+      "anteroposterior diameter",
+      "transverse diameter",
+      "oblique diameter",
+      "true conjugate",
+      "anatomical conjugate",
+      "obstetric conjugate",
+      "diagonal conjugate",
+      "interspinous diameter",
+      "intertuberous diameter",
+      "subpubic angle",
+      "pubic arch",
+      "gynaecoid",
+      "android",
+      "anthropoid",
+      "platypelloid",
+      "female pelvis",
+      "male pelvis",
+      "sexual dimorphism",
+      "pelvimetry",
+      "cephalopelvic disproportion",
+      "contracted pelvis",
+      "ischial spine landmark",
+      "station zero",
+      "pudendal nerve block",
+      "engagement",
+      "open book fracture",
+      "lateral compression fracture",
+      "vertically unstable pelvis",
+      "pelvic binder",
+      "presacral venous plexus",
+      "superior gluteal artery",
+      "pelvic ring",
+      "weight transmission",
+      "sacroiliac to acetabulum",
+      "femoral head",
+      "bone marrow aspiration",
+      "iliac crest biopsy"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "right_hip_bone",
+      "name": "right hip bone",
+      "label": "Hip bone (right) — ilium, ischium and pubis fused",
+      "role": "part",
+      "group": "Hip bones",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "innominate bone",
+        "os coxae",
+        "ilium",
+        "ischium",
+        "pubis",
+        "acetabulum",
+        "triradiate cartilage",
+        "iliac crest",
+        "anterior superior iliac spine",
+        "ischial tuberosity",
+        "ischial spine",
+        "obturator foramen",
+        "greater sciatic notch",
+        "pubic tubercle"
+      ],
+      "narration": "One bone in the adult, three in the child. The ilium is the broad blade above, the ischium the thick strut behind and below, the pubis the bar in front. All three meet in the acetabulum, where until about the sixteenth year they are separated by the Y-shaped triradiate cartilage — which is why a child's acetabulum can be damaged by a fracture through that cartilage and grow up shallow. Run your eye over the features that get asked for: the iliac crest with the anterior superior iliac spine at its front end and the posterior superior spine behind; the iliac fossa on the inner surface; the arcuate line sweeping down and forwards from the sacroiliac joint to the pubis; the pubic tubercle; the huge obturator foramen; and behind, the greater sciatic notch, the ischial spine and the ischial tuberosity, in that order from above down."
+    },
+    {
+      "key": "left_hip_bone",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "part",
+      "group": "Hip bones",
+      "layer": "bone",
+      "color": "#d5d8dc",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "hip bone",
+        "left",
+        "pubic symphysis",
+        "pelvic ring",
+        "sacroiliac joint",
+        "weight transmission"
+      ],
+      "narration": "The mirror bone. The two hip bones meet in front at the pubic symphysis and behind at the sacrum, and that closes the pelvis into a ring. A ring cannot break in one place only: a displaced fracture on one side of the pelvis means a second break, or a joint disruption, somewhere else in the ring. That is the single most useful mechanical fact about this bone."
+    },
+    {
+      "key": "sacrum",
+      "name": "sacrum",
+      "label": "Sacrum — the keystone behind",
+      "role": "part",
+      "group": "Sacrum & spine",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16202"
+      },
+      "terms": [
+        "sacrum",
+        "five fused sacral vertebrae",
+        "sacral promontory",
+        "ala of the sacrum",
+        "auricular surface",
+        "sacroiliac joint",
+        "anterior sacral foramina",
+        "sacral canal",
+        "sacral hiatus",
+        "caudal block",
+        "median sacral crest"
+      ],
+      "narration": "Five vertebrae fused into a wedge, concave in front, driven down between the two hip bones. Its upper front edge is the sacral promontory, the central marker of the pelvic brim and the point measured from in every obstetric diameter. The four pairs of anterior sacral foramina transmit the ventral rami that form the sacral plexus. The sacral canal ends below at the sacral hiatus, between the two sacral cornua — the route for a caudal epidural. The auricular surface on each side takes the sacroiliac joint, and because that joint is wedged and irregular rather than smooth, body weight is transmitted through it and out along the arcuate line to the acetabulum when you stand, or to the ischial tuberosity when you sit.",
+      "approx": {
+        "shown_as": "Sacrum",
+        "detail": "the keystone behind"
+      }
+    },
+    {
+      "key": "l5",
+      "name": "fifth lumbar vertebra",
+      "label": "Fifth lumbar vertebra — the lumbosacral angle",
+      "role": "part",
+      "group": "Sacrum & spine",
+      "layer": "bone",
+      "color": "#aeb6bf",
+      "refs": {
+        "bodyparts3d": "FMA13076"
+      },
+      "terms": [
+        "fifth lumbar vertebra",
+        "L5",
+        "lumbosacral angle",
+        "sacral promontory",
+        "spondylolisthesis",
+        "iliolumbar ligament",
+        "lumbosacral trunk"
+      ],
+      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest.",
+      "approx": {
+        "shown_as": "Fifth lumbar vertebra",
+        "detail": "the lumbosacral angle"
+      }
+    },
+    {
+      "key": "right_femur",
+      "name": "right femur",
+      "label": "Femur (right) — what the acetabulum holds",
+      "role": "context",
+      "group": "Limb",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA24474"
+      },
+      "terms": [
+        "femur",
+        "femoral head",
+        "acetabulum",
+        "hip joint",
+        "weight transmission",
+        "standing"
+      ],
+      "narration": "The acetabulum is the point of the whole girdle: weight arrives from the vertebral column at the sacroiliac joint, travels forwards along the arcuate line and is handed to the head of the femur. Shown here as context, so the ring is seen as a load-bearing arch rather than a basin."
+    },
+    {
+      "key": "left_femur",
+      "name": "left femur",
+      "label": "Femur (left)",
+      "role": "context",
+      "group": "Limb",
+      "layer": "bone",
+      "color": "#e5e7e9",
+      "refs": {
+        "bodyparts3d": "FMA24475"
+      },
+      "terms": [
+        "femur",
+        "left",
+        "acetabulum",
+        "hip joint"
+      ],
+      "narration": "The same on the left. In sitting, the load bypasses the femur entirely and goes to the ischial tuberosities instead."
+    },
+    {
+      "key": "right_inguinal_ligament",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament (right) — ASIS to pubic tubercle",
+      "role": "part",
+      "group": "Surface landmarks",
+      "layer": "fascia",
+      "color": "#f0d9b5",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "anterior superior iliac spine",
+        "pubic tubercle",
+        "mid inguinal point",
+        "femoral pulse",
+        "abdomen and thigh boundary"
+      ],
+      "narration": "Slung between two of the bony points you have just named — the anterior superior iliac spine and the pubic tubercle — it is the line that separates abdomen from thigh, and it makes both points findable on a living patient. Halfway along it, the mid-inguinal point, is where the femoral artery is felt."
+    },
+    {
+      "key": "left_inguinal_ligament",
+      "name": "left inguinal ligament",
+      "label": "Inguinal ligament (left)",
+      "role": "context",
+      "group": "Surface landmarks",
+      "layer": "fascia",
+      "color": "#f0d9b5",
+      "refs": {
+        "bodyparts3d": "FMA21965"
+      },
+      "terms": [
+        "inguinal ligament",
+        "left",
+        "pubic tubercle"
+      ],
+      "narration": "The same on the left, completing the frame of the abdominal outlet in front."
+    },
+    {
+      "key": "right_common_iliac",
+      "name": "right common iliac artery",
+      "label": "Common iliac artery — dividing at the brim",
+      "role": "part",
+      "group": "Vessels at the brim",
+      "layer": "vessel",
+      "color": "#a93226",
+      "refs": {
+        "bodyparts3d": "FMA14765"
+      },
+      "terms": [
+        "common iliac artery",
+        "pelvic brim",
+        "bifurcation",
+        "sacroiliac joint",
+        "ureter crosses here",
+        "L4"
+      ],
+      "narration": "The aorta divides at L4 and each common iliac artery runs down along the brim to divide again in front of the sacroiliac joint. That bifurcation is a landmark, not just a vessel: the ureter crosses the brim exactly there, which is how it is found in pelvic surgery."
+    },
+    {
+      "key": "right_external_iliac",
+      "name": "right external iliac artery",
+      "label": "External iliac artery — following the brim out",
+      "role": "context",
+      "group": "Vessels at the brim",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "arcuate line",
+        "pelvic brim",
+        "inguinal ligament",
+        "femoral artery",
+        "greater pelvis"
+      ],
+      "narration": "Runs along the arcuate line, so it traces the brim for you, and passes under the inguinal ligament to become the femoral artery. Because it stays on the brim it belongs to the greater pelvis and supplies the limb, not the pelvic viscera."
+    },
+    {
+      "key": "right_internal_iliac",
+      "name": "right internal iliac artery",
+      "label": "Internal iliac artery — turning down into the true pelvis",
+      "role": "context",
+      "group": "Vessels at the brim",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA18809"
+      },
+      "terms": [
+        "internal iliac artery",
+        "true pelvis",
+        "lesser pelvis",
+        "pelvic viscera",
+        "superior gluteal artery",
+        "greater sciatic foramen",
+        "pelvic fracture bleeding"
+      ],
+      "narration": "Turns downwards over the brim into the lesser pelvis to supply the pelvic viscera, the pelvic walls, the perineum and the gluteal region. Its branches hug the bone — the superior gluteal artery passes out of the greater sciatic foramen right against the notch — which is why the branches tear when the ring fractures and why pelvic fractures bleed so heavily."
+    },
+    {
+      "key": "right_piriformis",
+      "name": "right piriformis",
+      "label": "Piriformis — filling the greater sciatic foramen",
+      "role": "part",
+      "group": "Pelvic walls",
+      "layer": "muscle",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA22340"
+      },
+      "terms": [
+        "piriformis",
+        "greater sciatic foramen",
+        "greater sciatic notch",
+        "sacrospinous ligament",
+        "sciatic nerve",
+        "superior gluteal vessels",
+        "inferior gluteal vessels",
+        "key to the gluteal region"
+      ],
+      "narration": "Arises from the front of the sacrum and leaves the pelvis through the greater sciatic foramen to reach the greater trochanter, and in doing so it almost fills that opening. It is the key to the gluteal region: everything else passing through the foramen is described as above it or below it. Superior gluteal vessels and nerve above; below it, the inferior gluteal vessels and nerve, the sciatic nerve, the posterior cutaneous nerve of the thigh, the nerve to quadratus femoris and the pudendal neurovascular bundle."
+    },
+    {
+      "key": "right_obturator_internus",
+      "name": "right obturator internus",
+      "label": "Obturator internus — the side wall, and the lesser foramen",
+      "role": "part",
+      "group": "Pelvic walls",
+      "layer": "muscle",
+      "color": "#ca8a04",
+      "refs": {
+        "bodyparts3d": "FMA22324"
+      },
+      "terms": [
+        "obturator internus",
+        "obturator foramen",
+        "obturator membrane",
+        "lesser sciatic foramen",
+        "ischial spine",
+        "pudendal canal",
+        "Alcock's canal",
+        "lateral wall of the pelvis"
+      ],
+      "narration": "Lines the lateral wall of the lesser pelvis, arising from the obturator membrane and the bone around it, then turning sharply through a right angle over the lesser sciatic notch to reach the femur. Two teaching points come with it. The obturator membrane closes the obturator foramen except for the obturator canal at its top, through which the obturator nerve and vessels leave. And the fascia over this muscle splits below to form the pudendal canal, through which the pudendal nerve and internal pudendal vessels re-enter the perineum after leaving through the greater foramen and hooking round the ischial spine."
+    },
+    {
+      "key": "right_coccygeus",
+      "name": "right coccygeus",
+      "label": "Coccygeus — lying on the sacrospinous ligament",
+      "role": "context",
+      "group": "Pelvic walls",
+      "layer": "muscle",
+      "color": "#9c640c",
+      "refs": {
+        "bodyparts3d": "FMA46443"
+      },
+      "terms": [
+        "coccygeus",
+        "sacrospinous ligament",
+        "ischial spine",
+        "sacrum",
+        "coccyx",
+        "greater sciatic foramen",
+        "lesser sciatic foramen"
+      ],
+      "narration": "A small triangular sheet from the ischial spine to the side of the sacrum and coccyx, lying directly on the sacrospinous ligament — the muscle and the ligament are effectively the same structure, one fleshy and one fibrous. It marks where the sacrospinous ligament runs, and therefore where the greater sciatic notch is separated from the lesser."
+    },
+    {
+      "key": "bladder",
+      "name": "urinary bladder",
+      "label": "Bladder — a resident of the lesser pelvis",
+      "role": "context",
+      "group": "Contents",
+      "layer": "organ",
+      "color": "#d4a017",
+      "refs": {
+        "bodyparts3d": "FMA15900"
+      },
+      "terms": [
+        "urinary bladder",
+        "true pelvis",
+        "lesser pelvis",
+        "retropubic space",
+        "pubic symphysis",
+        "pelvic fracture bladder injury"
+      ],
+      "narration": "The empty bladder lies wholly within the lesser pelvis, behind the pubic symphysis. It is here to show what the true pelvis contains and why the bony ring matters clinically: fractures of the pubic rami drive fragments into the retropubic space and the bladder or the membranous urethra behind it."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum — following the sacral curve",
+      "role": "context",
+      "group": "Contents",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "sacral curve",
+        "hollow of the sacrum",
+        "presacral venous plexus",
+        "digital rectal examination",
+        "ischial spine palpation"
+      ],
+      "narration": "The rectum follows the concavity of the sacrum, which is why it is curved and why a rigid instrument passed into it must be angled. It also puts a finger within reach of the bone: on rectal or vaginal examination the ischial spines, the sacral promontory in a small pelvis, and the coccyx are all palpable, and the presacral venous plexus stripped off the sacrum during rectal surgery is a notorious source of unstoppable bleeding."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Four bones, three joints, one ring",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pelvic walls"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Vessels at the brim"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Hip bones",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "right_hip_bone",
+          "kind": "sacroiliac joint"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_hip_bone",
+          "to": "left_hip_bone",
+          "kind": "pubic symphysis"
+        }
+      ],
+      "narration": "The bony pelvis is built from four bones: two hip bones, the sacrum and the coccyx. Each hip bone is itself three bones — ilium, ischium and pubis — fused in the adult at the acetabulum, where they met as a Y-shaped triradiate cartilage until adolescence. Three joints close the ring. Behind, a sacroiliac joint on each side, part synovial and part fibrous, so irregular and so tightly bound by ligaments that it barely moves. In front, the pubic symphysis, a secondary cartilaginous joint. Because it is a ring, load can pass round it and injury cannot stay in one place: a displaced fracture at one point implies a second break or a joint disruption elsewhere. Weight from the vertebral column enters at the sacroiliac joints and travels forwards along the arcuate line to the acetabulum in standing, or backwards to the ischial tuberosities in sitting. Learn those two arches and you have understood why the pelvis is shaped the way it is."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The brim — greater pelvis above, lesser pelvis below",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hip bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sacrum & spine"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Vessels at the brim"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Limb"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "superior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:pelvic-brim",
+          "path": [
+            "l5",
+            "sacrum",
+            "right_hip_bone",
+            "left_hip_bone"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_common_iliac",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Look down into the pelvis and one line divides it in two. Trace it from behind forwards: the sacral promontory, the anterior border of the ala of the sacrum, the arcuate line of the ilium, the pectineal line — the pecten — of the superior pubic ramus, the pubic crest, and the upper border of the pubic symphysis. That is the pelvic brim, or linea terminalis. Above it is the greater or false pelvis, walled by the iliac fossae and really part of the abdomen, holding coils of ileum and the sigmoid colon. Below it is the lesser or true pelvis, a short curved canal containing the bladder, the rectum and the internal reproductive organs. The brim is not just a boundary for description. The common iliac artery divides on it in front of the sacroiliac joint, and the ureter crosses it at exactly that point. The external iliac artery then follows the arcuate line out to the thigh while the internal iliac turns down into the true pelvis. Find the brim and you have found both."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 3,
+      "title": "Inlet, cavity and outlet — the diameters that matter",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hip bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sacrum & spine"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "x",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sacrum",
+          "to": "left_hip_bone",
+          "kind": "promontory to symphysis — the conjugate diameters"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacrum",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Cut the pelvis in the midline and the true pelvis is a curved canal, not a straight tube: a short anterior wall at the symphysis, about four centimetres, and a long concave posterior wall of sacrum and coccyx, about twelve. The axis therefore curves forwards — the curve of Carus — and that is the path a fetal head must follow. Three diameters of the inlet are named and all three run from the sacral promontory forwards. The anatomical or true conjugate reaches the upper border of the symphysis, about eleven centimetres. The obstetric conjugate reaches the nearest point on the back of the symphysis and is the shortest and the one that actually limits the head, about ten centimetres. The diagonal conjugate reaches the lower border of the symphysis and is the only one you can measure with a finger per vaginam, about twelve and a half; subtract one and a half to two centimetres to estimate the obstetric conjugate. Note the shape rule: at the inlet the widest diameter is transverse, at the outlet it is anteroposterior — which is why the head enters the pelvis facing sideways and rotates to face backwards before it is delivered. The outlet is bounded by the lower border of the symphysis, the ischiopubic rami, the ischial tuberosities, the sacrotuberous ligaments and the tip of the coccyx, with an intertuberous diameter of about eleven centimetres."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Notches into foramina — what leaves the pelvis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hip bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sacrum & spine"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Pelvic walls"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "right_piriformis",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_coccygeus",
+          "to": "sacrum",
+          "kind": "marks the sacrospinous ligament"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_obturator_internus",
+          "to": "right_hip_bone",
+          "kind": "lines the lateral wall over the obturator foramen"
+        }
+      ],
+      "narration": "Two ligaments turn the back of the pelvis from an open notch into two doorways. The sacrospinous ligament runs from the ischial spine to the side of the sacrum and coccyx; the sacrotuberous ligament runs from the ischial tuberosity up to the back of the sacrum, the coccyx and the posterior iliac spines. Between the greater sciatic notch above and the sacrospinous ligament below is the greater sciatic foramen; between the sacrospinous ligament above and the sacrotuberous below is the lesser sciatic foramen. Those two ligaments also do mechanical work: they resist the forward tilt of the upper sacrum that body weight tries to produce, and they are the reason the sacrum does not rotate out of the ring. Piriformis fills the greater foramen and is the key to what passes through it — superior gluteal vessels and nerve above the muscle; inferior gluteal vessels and nerve, the sciatic nerve, the posterior cutaneous nerve of the thigh, the nerve to quadratus femoris and the pudendal neurovascular bundle below it. The lesser foramen transmits the tendon of obturator internus and its nerve, and carries the pudendal nerve and internal pudendal vessels back into the perineum after they hook round the ischial spine. The third opening is anterior: the obturator foramen, closed by the obturator membrane except for the obturator canal at its upper edge, where the obturator nerve and vessels leave."
+    },
+    {
+      "mode": "comparison",
+      "beat": 5,
+      "title": "Female and male — a pelvis built to be passed through",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Hip bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Sacrum & spine"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Surface landmarks"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "right_hip_bone",
+            "left_hip_bone"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sacrum",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "The pelvis is the most sexually dimorphic part of the skeleton, and the differences are all in one direction: the female pelvis is built to let a head through. Compare feature by feature. The female inlet is oval or rounded and transversely wide; the male is heart-shaped, narrowed by a projecting promontory. The female cavity is shallow and roomy with straight side walls; the male is deep and funnel-shaped. The female sacrum is shorter, wider and less curved; the male is longer, narrower and more curved forwards. The female subpubic angle is a wide arch of eighty to ninety degrees, admitting two fingers; the male is a narrow V of fifty to sixty, admitting one. The female ischial spines are everted and the tuberosities are turned out, giving a wide intertuberous diameter; the male spines project inwards. The female greater sciatic notch is wide, near ninety degrees; the male is narrow, near seventy. And the female bone is generally lighter and smoother, with less prominent muscle markings. Four shapes are described — gynaecoid, the classic round female inlet; android, heart-shaped and male-like, the one that obstructs; anthropoid, oval front to back; platypelloid, flattened side to side — but in practice a pelvis is judged by how labour progresses, not by measuring it."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Reading the clinic off the bone",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Contents"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Vessels at the brim"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "right_internal_iliac",
+          "to": "right_hip_bone",
+          "kind": "branches torn when the ring fractures"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "bladder",
+          "to": "left_hip_bone",
+          "kind": "injured by pubic ramus fragments"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:fetal-head",
+          "path": [
+            "l5",
+            "sacrum",
+            "right_hip_bone"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        }
+      ],
+      "narration": "Five things the bone explains. Pelvic fracture and haemorrhage: the ring breaks in at least two places, the branches of the internal iliac artery and the presacral venous plexus lie against the bone, and the retroperitoneum will hold several litres — which is why an open-book injury is closed early with a binder and why the pelvis is one of the places a trauma patient bleeds to death without a drop appearing outside. Associated visceral injury: fragments of pubic ramus lie against the bladder and the membranous urethra, so blood at the meatus, a high-riding prostate and inability to pass urine mean a urethral injury and no catheter is passed. The ischial spine in obstetrics: it is palpable per vaginam, it defines station zero, and it is the target for a pudendal nerve block, because the nerve crosses the sacrospinous ligament just medial to the tip of the spine. Cephalopelvic disproportion: the obstetric conjugate is the narrowest point of the inlet and cannot be measured directly, so it is estimated from the diagonal conjugate — reach the promontory with a finger and the inlet is suspect. And the iliac crest: subcutaneous along its whole length, at the level of L4, it is the standard site for bone marrow aspiration and for taking a bone graft. Every one of those is a fact about a shape you can hold in your hand."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The coccyx is not in the catalog. It is one of the four bones of the pelvis and one boundary of the outlet, so a scene about the bony pelvis that cannot show it is incomplete. It is narrated throughout and carried in match.terms; the sacrum model ends where the coccyx would begin.",
+    "The hip bone is a single fused model. Ilium, ischium and pubis have no separate meshes, so the three constituent bones and the triradiate cartilage are named in narration over one object. The student cannot isolate the ischium or click the pubis. This is anatomically defensible in an adult, where the bones are fused, but it weakens the paediatric point about the triradiate cartilage.",
+    "No ligament of the pelvis exists in the catalog: no sacrospinous, no sacrotuberous, no iliolumbar, no pubic symphysis, no sacroiliac joint capsule and no obturator membrane. Beat four therefore teaches the two ligaments that convert the sciatic notches into foramina by narration, using coccygeus as a proxy marker for the sacrospinous ligament — the muscle lies directly on it — and piriformis to show where the greater foramen is. This is the largest gap in the scene, because the foramina and their contents are the most examined part of the topic.",
+    "There is no second pelvis to compare against, so beat five cannot actually show a male pelvis beside a female one. COMPARE_STRUCTURES is authored between the two hip bones so the beat has a visual anchor, but the sexual dimorphism is taught entirely in narration. A companion diagram-mode scene showing the two inlets side by side would be the single highest-value addition for this topic, and would make the obstetric material examinable rather than merely readable.",
+    "The individual bony landmarks — anterior superior iliac spine, ischial spine, ischial tuberosity, pubic tubercle, sacral promontory, pecten pubis — have no models and no anchors were authored for them. Anchors in this corpus are placed by measurement on the actual geometry and these meshes are not in the local decimated set. Ingesting the two hip bones and the sacrum locally would yield a dozen anchors and would turn beats one, three and five from narrated lists into clickable points, which for a bone scene is close to the whole value.",
+    "The diameters of the inlet and outlet cannot be drawn. CROSS_SECTION in beat three exposes the curved canal so the student sees the short anterior wall against the long posterior one, but the conjugates and the intertuberous diameter are numbers spoken over the picture. Measured anchors on the promontory and the symphysis would let a future renderer draw the lines.",
+    "This scene does not claim to cover 'Pelvic diaphragm (levator ani)', 'Urinary bladder' or 'Internal iliac vessels' although parts of all three appear in it. Coccygeus is here only as a marker for the sacrospinous ligament, the bladder and rectum only to show what the lesser pelvis holds, and the iliac arteries only to trace the brim. All three remain on the worklist as separate curriculum entries.",
+    "Piriformis, obturator internus, coccygeus and the iliac arteries are shown on the right side only. Their left counterparts exist in the catalog but were omitted so the bone stays visible through the scene; the teaching points are the openings and the brim, neither of which is side-specific."
+  ]
+}

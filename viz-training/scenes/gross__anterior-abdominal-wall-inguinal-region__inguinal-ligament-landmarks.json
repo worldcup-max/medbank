@@ -1,0 +1,806 @@
+{
+  "schema": 2,
+  "id": "gross__anterior-abdominal-wall-inguinal-region__inguinal-ligament-landmarks",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Anterior Abdominal Wall & Inguinal Region",
+  "structure": "Inguinal ligament & landmarks",
+  "covers": [
+    "Inguinal ligament & landmarks"
+  ],
+  "learning_goal": "Find the anterior superior iliac spine, the pubic tubercle and the inguinal ligament on a patient, mark the mid-inguinal point and the midpoint of the ligament and say what lies deep to each, and use the pubic tubercle to tell an inguinal hernia from a femoral one.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "inguinal region",
+      "inguinal ligament",
+      "groin",
+      "surface anatomy of the abdomen",
+      "anterior abdominal wall",
+      "hernia examination",
+      "femoral triangle",
+      "femoral artery",
+      "inguinal canal"
+    ],
+    "terms": [
+      "inguinal ligament",
+      "Poupart's ligament",
+      "rolled lower border of external oblique",
+      "anterior superior iliac spine",
+      "ASIS",
+      "pubic tubercle",
+      "pubic crest",
+      "pubic symphysis",
+      "iliac crest",
+      "tubercle of the iliac crest",
+      "mid-inguinal point",
+      "midpoint of the inguinal ligament",
+      "midinguinal point",
+      "femoral artery",
+      "femoral pulse",
+      "deep inguinal ring",
+      "superficial inguinal ring",
+      "lacunar ligament",
+      "pectineal ligament",
+      "Cooper's ligament",
+      "reflected part of the inguinal ligament",
+      "inguinal canal",
+      "floor of the inguinal canal",
+      "retinaculum",
+      "flexor retinaculum of the thigh",
+      "muscular compartment",
+      "vascular compartment",
+      "femoral sheath",
+      "femoral canal",
+      "femoral ring",
+      "femoral triangle",
+      "inguinal hernia",
+      "femoral hernia",
+      "above and medial to the pubic tubercle",
+      "below and lateral to the pubic tubercle",
+      "hernia examination",
+      "groin lump",
+      "McBurney's point",
+      "spermatic cord",
+      "round ligament",
+      "iliopsoas",
+      "sartorius",
+      "pectineus",
+      "external iliac artery"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.004,
+    "initialYaw": 0.25
+  },
+  "structures": [
+    {
+      "key": "inglig_r",
+      "name": "right inguinal ligament",
+      "label": "Inguinal ligament (right)",
+      "role": "part",
+      "group": "Inguinal ligament",
+      "layer": "fascia",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA21964"
+      },
+      "terms": [
+        "inguinal ligament",
+        "Poupart's ligament",
+        "rolled lower border of external oblique aponeurosis",
+        "ASIS to pubic tubercle",
+        "floor of the inguinal canal"
+      ],
+      "narration": "Not a true ligament at all. It is the lower border of the external oblique aponeurosis, which has no bone to attach to below, so it rolls backwards and upwards on itself to form a thickened cord. It runs from the anterior superior iliac spine to the pubic tubercle, and its rolled gutter is the floor of the inguinal canal. Learn it as a border, not as a band, and its behaviour stops being arbitrary."
+    },
+    {
+      "key": "inglig_l",
+      "name": "left inguinal ligament",
+      "label": "Inguinal ligament (left)",
+      "role": "part",
+      "group": "Inguinal ligament",
+      "layer": "fascia",
+      "color": "#f7dc6f",
+      "refs": {
+        "bodyparts3d": "FMA21965"
+      },
+      "terms": [
+        "inguinal ligament",
+        "left side",
+        "the two ligaments and the pubic bones make a bony arch"
+      ],
+      "narration": "The mirror image. Seen from in front, the two ligaments and the pubic bones between them make the arch that separates the abdomen from the two thighs — the boundary you are drawing whenever you decide whether a groin lump is abdominal or femoral."
+    },
+    {
+      "key": "extobl_r",
+      "name": "right external oblique",
+      "label": "External oblique — the ligament is its lower border",
+      "role": "part",
+      "group": "Inguinal ligament",
+      "layer": "muscle",
+      "color": "#f0b27a",
+      "refs": {
+        "bodyparts3d": "FMA13336"
+      },
+      "terms": [
+        "external oblique",
+        "external oblique aponeurosis",
+        "superficial inguinal ring",
+        "hands in pockets",
+        "rolled under"
+      ],
+      "narration": "Follow the external oblique down and its aponeurosis simply runs out of bone. Between the anterior superior iliac spine and the pubic tubercle it has no attachment, so the free edge folds under and back, and that fold is the inguinal ligament. A triangular defect in the same aponeurosis just above and lateral to the pubic tubercle is the superficial inguinal ring."
+    },
+    {
+      "key": "extiliac_a_r",
+      "name": "right external iliac artery",
+      "label": "External iliac artery — becomes femoral here",
+      "role": "part",
+      "group": "What passes beneath",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA18806"
+      },
+      "terms": [
+        "external iliac artery",
+        "femoral artery",
+        "femoral pulse",
+        "mid-inguinal point",
+        "name change at the inguinal ligament"
+      ],
+      "narration": "The artery changes its name, not its course, as it passes behind the inguinal ligament: external iliac above, femoral below. That is why you feel the femoral pulse just below the ligament, and why the mid-inguinal point is worth memorising — it is where you put your fingers."
+    },
+    {
+      "key": "extiliac_v_r",
+      "name": "right external iliac vein",
+      "label": "External iliac vein — medial to the artery",
+      "role": "part",
+      "group": "What passes beneath",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA18885"
+      },
+      "terms": [
+        "external iliac vein",
+        "femoral vein",
+        "medial to the artery",
+        "femoral sheath",
+        "femoral canal",
+        "NAVY",
+        "NAVEL"
+      ],
+      "narration": "The vein lies medial to the artery. Medial again to the vein is the femoral canal, an empty space with a lymph node in it, and that empty space is where a femoral hernia comes through. Remember the order from lateral to medial below the ligament: nerve, artery, vein, empty space, lymphatics."
+    },
+    {
+      "key": "asis",
+      "label": "Anterior superior iliac spine",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#5dade2",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.119,
+          0,
+          0.685
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONSTRAINED EXTREME — the most anterior vertex of the right hip bone within the upper 38% of its height (the iliac part), 87.8 mm from its surface centroid. The constraint is needed because the pubis is further forward than the ASIS on the unconstrained bone; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "anterior superior iliac spine",
+        "ASIS",
+        "lateral end of the inguinal ligament",
+        "sartorius origin",
+        "McBurney's point",
+        "leg length measurement"
+      ],
+      "narration": "The bony point you can feel through the skin at the front of the hip. Four things start or are measured from it: the inguinal ligament, the sartorius, McBurney's point two-thirds of the way from the umbilicus to here, and true leg length, measured from here to the medial malleolus. Put your thumb on it before you examine any groin."
+    },
+    {
+      "key": "pubic_crest",
+      "label": "Pubic crest — the pubic tubercle is at its lateral end",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#f5b041",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.962,
+          0.079,
+          0.264
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — nearest point on the right hip bone to the right rectus abdominis (gap 0.29 mm): the pubic crest, where the rectus takes origin. The PUBIC TUBERCLE sits at the lateral end of this crest and is not separately identifiable in this model, so the landmark is named for what was actually measured; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "pubic crest",
+        "pubic tubercle",
+        "medial end of the inguinal ligament",
+        "above and medial",
+        "below and lateral",
+        "hernia examination"
+      ],
+      "narration": "The pubic tubercle is the small bony knob at the lateral end of this crest, about two and a half centimetres from the midline. It is the single most useful point in the groin. A lump whose neck is above and medial to it is an inguinal hernia. A lump whose neck is below and lateral to it is a femoral hernia. Find the tubercle by walking your finger medially along the tendon of adductor longus, not by pressing blindly into a tender groin."
+    },
+    {
+      "key": "pubic_symphysis",
+      "label": "Pubic symphysis",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#d7bde2",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          1,
+          0.169,
+          0.217
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the most medial (most body-left, therefore closest to the midline) vertex of the right hip bone, 101.9 mm from its surface centroid: the symphyseal surface of the pubis; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "pubic symphysis",
+        "midline",
+        "lower end of the linea alba",
+        "mid-inguinal point is measured from here"
+      ],
+      "narration": "The midline joint between the two pubic bones. The linea alba ends here, and this is the medial point from which the mid-inguinal point is measured. Note carefully that it is a different point from the pubic tubercle — that difference is the whole of the next beat."
+    },
+    {
+      "key": "mid_inguinal_point",
+      "label": "Mid-inguinal point — the femoral artery",
+      "role": "part",
+      "group": "The two midpoints",
+      "color": "#e74c3c",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.559,
+          0.085,
+          0.451
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic symphysis. This is the textbook definition of the mid-inguinal point carried out on the bone, not an estimate. It lies off the bone surface, in soft tissue, which is correct: the femoral artery is there; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "mid-inguinal point",
+        "midway between ASIS and pubic symphysis",
+        "femoral artery",
+        "femoral pulse",
+        "femoral puncture",
+        "femoral line"
+      ],
+      "narration": "Midway between the anterior superior iliac spine and the pubic symphysis. The femoral artery passes deep to the ligament here, so this is where you feel the femoral pulse and where you enter the vessel for an angiogram or a femoral line. If you cannot feel a pulse here in a patient with a cold leg, you have already learnt something important."
+    },
+    {
+      "key": "midpoint_of_ligament",
+      "label": "Midpoint of the ligament — the deep ring is just above",
+      "role": "part",
+      "group": "The two midpoints",
+      "color": "#8e44ad",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.541,
+          0.04,
+          0.474
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: MIDPOINT — halfway between the measured ASIS and the measured pubic crest. The true midpoint of the inguinal ligament is halfway between ASIS and PUBIC TUBERCLE; the tubercle could not be isolated in this model, so the pubic crest stands in for it and this point sits slightly MEDIAL to the true midpoint. The deep inguinal ring itself is not emitted at all — it is an opening in the transversalis fascia, which has no model; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "midpoint of the inguinal ligament",
+        "midway between ASIS and pubic tubercle",
+        "deep inguinal ring",
+        "internal ring",
+        "one and a quarter centimetres above",
+        "indirect inguinal hernia",
+        "internal ring occlusion test"
+      ],
+      "narration": "This is the other midpoint, and students lose marks by confusing the two. The midpoint of the inguinal ligament is halfway between the anterior superior iliac spine and the pubic tubercle, not the symphysis, so it lies a little lateral to the mid-inguinal point. About one and a quarter centimetres above it is the deep inguinal ring. Press here after reducing a hernia: if the lump stays down, it was indirect; if it still bulges, it was direct."
+    },
+    {
+      "key": "iliac_crest",
+      "label": "Iliac crest — the tubercle",
+      "role": "part",
+      "group": "Landmarks",
+      "color": "#48c9b0",
+      "render": "anchor",
+      "anchor": {
+        "on": "hip_r",
+        "uvw": [
+          0.278,
+          0.574,
+          1
+        ],
+        "radius": 0.025
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME — the highest (most superior) vertex of the right hip bone, 103.4 mm from its surface centroid: the top of the iliac crest; see tools/derive-inguinal-sheath-landmarks.mjs",
+      "terms": [
+        "iliac crest",
+        "tubercle of the iliac crest",
+        "L4 level",
+        "supracristal plane",
+        "lumbar puncture",
+        "transtubercular plane"
+      ],
+      "narration": "The highest point of the crest sits at the level of the fourth lumbar vertebra — the line between the two crests is the plane you find before a lumbar puncture. The crest is also the upper attachment of the flat muscles, so it is the top of the wall whose lower border you are studying."
+    },
+    {
+      "key": "hip_r",
+      "name": "right hip bone",
+      "label": "Hip bone (right)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#d0d3d4",
+      "refs": {
+        "bodyparts3d": "FMA16586"
+      },
+      "terms": [
+        "hip bone",
+        "ilium",
+        "pubis",
+        "ischium",
+        "iliac crest",
+        "anterior superior iliac spine",
+        "pubic tubercle"
+      ],
+      "narration": "Every landmark in this region is on this one bone. The ligament simply spans from one end of it to the other across the gap at the front."
+    },
+    {
+      "key": "hip_l",
+      "name": "left hip bone",
+      "label": "Hip bone (left)",
+      "role": "context",
+      "group": "Bony frame",
+      "layer": "bone",
+      "color": "#cacfd2",
+      "refs": {
+        "bodyparts3d": "FMA16587"
+      },
+      "terms": [
+        "hip bone",
+        "left side",
+        "pubic symphysis"
+      ],
+      "narration": "The other half of the pelvic girdle. The two pubic bones meet at the symphysis in the midline."
+    },
+    {
+      "key": "psoas_r",
+      "name": "right psoas major",
+      "label": "Psoas major — under the lateral half",
+      "role": "context",
+      "group": "What passes beneath",
+      "layer": "muscle",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA22342"
+      },
+      "terms": [
+        "psoas major",
+        "iliopsoas",
+        "muscular compartment",
+        "femoral nerve lies on it",
+        "psoas abscess"
+      ],
+      "narration": "Psoas passes under the lateral part of the ligament into the thigh, taking the femoral nerve on its surface. This is the muscular compartment. A psoas abscess tracks down this same route and appears as a groin swelling below the ligament — a cold swelling, not a hernia."
+    },
+    {
+      "key": "iliacus_r",
+      "name": "right iliacus",
+      "label": "Iliacus — joins psoas beneath the ligament",
+      "role": "context",
+      "group": "What passes beneath",
+      "layer": "muscle",
+      "color": "#ba4a00",
+      "refs": {
+        "bodyparts3d": "FMA22322"
+      },
+      "terms": [
+        "iliacus",
+        "iliopsoas",
+        "iliac fossa",
+        "muscular compartment"
+      ],
+      "narration": "Iliacus fills the iliac fossa and joins psoas to pass under the ligament as iliopsoas. Together they form the floor of the lateral part of the femoral triangle."
+    },
+    {
+      "key": "sartorius_r",
+      "name": "right sartorius",
+      "label": "Sartorius — starts at the ASIS",
+      "role": "context",
+      "group": "What passes beneath",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA22354"
+      },
+      "terms": [
+        "sartorius",
+        "anterior superior iliac spine",
+        "lateral border of the femoral triangle",
+        "tailor's muscle"
+      ],
+      "narration": "Sartorius arises from the anterior superior iliac spine — the same point as the ligament — and runs down and medially as the lateral border of the femoral triangle. The ligament is the base of that triangle."
+    },
+    {
+      "key": "pectineus_r",
+      "name": "right pectineus",
+      "label": "Pectineus — floor of the medial triangle",
+      "role": "context",
+      "group": "What passes beneath",
+      "layer": "muscle",
+      "color": "#b7950b",
+      "refs": {
+        "bodyparts3d": "FMA22450"
+      },
+      "terms": [
+        "pectineus",
+        "pectineal line",
+        "pectineal ligament",
+        "Cooper's ligament",
+        "floor of the femoral triangle"
+      ],
+      "narration": "Pectineus lies on the superior ramus of the pubis and forms the medial floor of the femoral triangle. The pectineal ligament of Cooper runs along the bone beneath it, and it is one of the strong structures a surgeon anchors a hernia repair to."
+    },
+    {
+      "key": "addlong_r",
+      "name": "right adductor longus",
+      "label": "Adductor longus — the tendon that finds the tubercle",
+      "role": "context",
+      "group": "What passes beneath",
+      "layer": "muscle",
+      "color": "#9a7d0a",
+      "refs": {
+        "bodyparts3d": "FMA22456"
+      },
+      "terms": [
+        "adductor longus",
+        "medial border of the femoral triangle",
+        "finding the pubic tubercle",
+        "tendon"
+      ],
+      "narration": "The tight tendon you can feel in the groin when the thigh is adducted against resistance. Follow it upwards to its origin and you arrive at the pubic tubercle — the reliable way to find that landmark in a fat or tender groin."
+    },
+    {
+      "key": "rect_r",
+      "name": "right rectus abdominis",
+      "label": "Rectus abdominis",
+      "role": "context",
+      "group": "Abdominal wall above",
+      "layer": "muscle",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA13377"
+      },
+      "terms": [
+        "rectus abdominis",
+        "pubic crest origin",
+        "conjoint tendon lies in front of it"
+      ],
+      "narration": "The rectus ends on the pubic crest just above the medial end of the ligament. Its lateral border and the conjoint tendon in front of it make up the medial part of the posterior wall of the inguinal canal."
+    },
+    {
+      "key": "intobl_r",
+      "name": "right internal oblique",
+      "label": "Internal oblique — arches over the canal",
+      "role": "context",
+      "group": "Abdominal wall above",
+      "layer": "muscle",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA13892"
+      },
+      "terms": [
+        "internal oblique",
+        "arching fibres",
+        "roof of the inguinal canal",
+        "conjoint tendon",
+        "cremaster"
+      ],
+      "narration": "Internal oblique takes origin from the lateral part of the ligament itself, arches over the canal as its roof, and ends with transversus as the conjoint tendon on the pubic crest. Its lowest fibres come down over the cord as the cremaster."
+    },
+    {
+      "key": "transv_r",
+      "name": "right transversus abdominis",
+      "label": "Transversus abdominis — the deep arch",
+      "role": "context",
+      "group": "Abdominal wall above",
+      "layer": "muscle",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA22344"
+      },
+      "terms": [
+        "transversus abdominis",
+        "conjoint tendon",
+        "roof of the inguinal canal",
+        "shutter mechanism"
+      ],
+      "narration": "Transversus also arises from the lateral third of the ligament and arches over the canal. When the abdomen is braced, both arches flatten down onto the ligament and close the canal — the shutter mechanism that stops a hernia every time you cough."
+    },
+    {
+      "key": "linea_alba_m",
+      "name": "linea alba",
+      "label": "Linea alba",
+      "role": "context",
+      "group": "Abdominal wall above",
+      "layer": "fascia",
+      "color": "#f7f3e3",
+      "refs": {
+        "bodyparts3d": "FMA11336"
+      },
+      "terms": [
+        "linea alba",
+        "midline",
+        "ends at the pubic symphysis"
+      ],
+      "narration": "The midline of the wall, ending below at the pubic symphysis between the medial ends of the two ligaments."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "A border, not a band",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Inguinal ligament",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "extobl_r",
+          "to": "inglig_r",
+          "kind": "its free lower border rolls under to become this"
+        }
+      ],
+      "narration": "Between the anterior superior iliac spine and the pubic tubercle the external oblique aponeurosis has no bone to hold on to. Its free edge rolls backwards and upwards on itself, and that rolled edge is the inguinal ligament. Everything else follows from that. It has a gutter facing upwards, which is the floor of the inguinal canal. It gives origin to internal oblique and transversus, which is why those muscles arch over the canal. And it is the line where the abdomen stops and the thigh begins."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The two ends you can feel",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Inguinal ligament"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "inglig_r",
+          "path": [
+            "asis",
+            "midpoint_of_ligament",
+            "pubic_crest"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "asis",
+          "intensity": 1
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pubic_crest",
+          "intensity": 1
+        }
+      ],
+      "narration": "Trace it from lateral to medial. It begins at the anterior superior iliac spine, which you can always feel, and ends at the pubic tubercle at the lateral end of the pubic crest. Both ends are palpable in a living patient, and you should practise finding them on yourself. Near the medial end some fibres turn backwards and laterally to the pecten pubis as the lacunar ligament — that sharp crescentic edge is what strangulates a femoral hernia."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Two midpoints, two different answers",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The two midpoints"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "mid_inguinal_point",
+            "midpoint_of_ligament"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "mid_inguinal_point",
+          "to": "extiliac_a_r",
+          "kind": "the femoral artery lies deep to this point"
+        }
+      ],
+      "narration": "This is the classic examination trap, so learn both names as a pair. The mid-inguinal point is midway between the anterior superior iliac spine and the pubic symphysis, and the femoral artery lies deep to it. The midpoint of the inguinal ligament is midway between the anterior superior iliac spine and the pubic tubercle, and the deep inguinal ring lies about one and a quarter centimetres above it. The symphysis is medial to the tubercle, so the mid-inguinal point is the more medial of the two. Artery to the symphysis point, deep ring above the tubercle point."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "What passes underneath it",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "What passes beneath",
+          "intensity": 0.85
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "extiliac_a_r",
+            "extiliac_v_r"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "extiliac_a_r",
+          "path": [
+            "psoas_r",
+            "mid_inguinal_point",
+            "pectineus_r"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "The space under the ligament is divided into two compartments. Laterally, the muscular compartment carries iliopsoas and the femoral nerve. Medially, the vascular compartment carries the femoral artery and vein inside the femoral sheath. Name the contents from lateral to medial: nerve, artery, vein, canal, lymphatics. The femoral canal is the empty medial slot, and it is empty so the vein can expand — which is also why it is the one place a femoral hernia can escape."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "The one landmark that decides the diagnosis",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "pubic_crest",
+          "intensity": 1
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "addlong_r",
+          "to": "pubic_crest",
+          "kind": "follow this tendon up to find the tubercle"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "pubic_crest",
+            "mid_inguinal_point"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "outward"
+        }
+      ],
+      "narration": "In the groin, one bony point settles most of the argument. Reduce the lump, find its neck, and relate the neck to the pubic tubercle. Above and medial means inguinal. Below and lateral means femoral. Get this the wrong way round and you will call a strangulating femoral hernia in an elderly woman an inguinal one and lose time she does not have. Find the tubercle by following the adductor longus tendon upwards, and confirm with the ligament running up and laterally from it to the anterior superior iliac spine."
+    },
+    {
+      "mode": "location",
+      "beat": 6,
+      "title": "The landmarks as one chain",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Landmarks"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The two midpoints"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bony frame"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:surface-landmarks",
+          "path": [
+            "iliac_crest",
+            "asis",
+            "midpoint_of_ligament",
+            "mid_inguinal_point",
+            "pubic_crest",
+            "pubic_symphysis"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "Run the chain once from top to bottom and you have the surface anatomy of the whole region. Highest point of the iliac crest, the L4 level for a lumbar puncture. Anterior superior iliac spine, the start of the ligament and of sartorius, and the outer end of McBurney's point. Midpoint of the ligament, with the deep ring just above it. Mid-inguinal point, with the femoral artery under it. Pubic tubercle at the end of the pubic crest, the point that separates inguinal from femoral. Pubic symphysis in the midline. Six points, all palpable, all examinable."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The PUBIC TUBERCLE — the single most clinically useful point in this scene — has no separate model and could not be isolated geometrically: nothing in the surface of the hip bone distinguishes the tubercle from the rest of the pubic crest. The anchor therefore carries the honest name 'pubic crest', measured as the point where the rectus abdominis actually meets the bone, and the narration says the tubercle lies at its lateral end, about two and a half centimetres from the midline. Everything taught against the tubercle — the hernia rule, the midpoint of the ligament — is stated against a landmark that is a centimetre or two medial to it, and says so.",
+    "The DEEP INGUINAL RING and the SUPERFICIAL INGUINAL RING are both absent, and both for the same reason: a ring is a hole. The deep ring is an opening in transversalis fascia, which has no model at all; the superficial ring is a defect in the external oblique aponeurosis, and the external oblique here is a closed surface with no opening in it. Both are taught as measured offsets from landmarks that do exist, which is exactly how they are taught at the bedside.",
+    "The LACUNAR (Gimbernat's) and PECTINEAL (Cooper's) ligaments are not in the catalog. They are the medial and posterior boundaries of the femoral ring and therefore the reason a femoral hernia strangulates, so both are named in narration against the pubic bone and pectineus, which do exist.",
+    "The FEMORAL SHEATH and FEMORAL CANAL have no models. The canal in particular is a potential space, not an object, so no provider will ship it. Beat 4 teaches the lateral-to-medial order of the compartment as a list against the artery and vein, which are present.",
+    "The FEMORAL NERVE is not in the catalog, so the 'nerve' of nerve-artery-vein-canal-lymphatics is spoken but not shown. Nor is the ILIOINGUINAL nerve, which is the one at risk in a hernia repair and the reason a patient can be left with numbness over the scrotum or labium.",
+    "The SPERMATIC CORD, the ROUND LIGAMENT and the CONJOINT TENDON are all absent. The conjoint tendon is the common ending of internal oblique and transversus, and both of those parent muscles are in the scene, so it is taught as their shared insertion rather than as an object.",
+    "The inguinal ligament models themselves are in the catalog but were not on disk, so no anchor sits on the ligament. Every landmark here is measured on the right hip bone, which was available, and the ligament's course is authored as a trace between two measured bony points. Nothing was mirrored across the midline to fake a left-sided landmark.",
+    "All six anchors are measured extremes, contacts or midpoints of measured points, each records how it was placed, and all six remain status 'needs-review' until a human clears them in-app."
+  ]
+}

@@ -1,0 +1,944 @@
+{
+  "schema": 2,
+  "id": "gross__leg-foot__arches-of-the-foot",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Leg & Foot",
+  "structure": "Arches of the foot",
+  "covers": [
+    "Arches of the foot"
+  ],
+  "learning_goal": "Name the bones in each arch of the foot, list the four kinds of support that hold an arch up in order of strength, and use them to explain how the foot absorbs shock in walking and what fails in flat foot.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "arches of the foot",
+      "foot",
+      "leg",
+      "lower limb",
+      "gait",
+      "weight bearing",
+      "flat foot",
+      "shock absorption",
+      "tarsal bones"
+    ],
+    "terms": [
+      "arches of the foot",
+      "medial longitudinal arch",
+      "lateral longitudinal arch",
+      "transverse arch",
+      "longitudinal arch",
+      "calcaneus",
+      "talus",
+      "navicular",
+      "cuneiform",
+      "medial cuneiform",
+      "intermediate cuneiform",
+      "lateral cuneiform",
+      "cuboid",
+      "metatarsal",
+      "first metatarsal",
+      "fifth metatarsal",
+      "sesamoid bone",
+      "sustentaculum tali",
+      "keystone",
+      "spring ligament",
+      "plantar calcaneonavicular ligament",
+      "long plantar ligament",
+      "short plantar ligament",
+      "plantar calcaneocuboid ligament",
+      "plantar aponeurosis",
+      "plantar fascia",
+      "windlass mechanism",
+      "tibialis posterior",
+      "fibularis longus",
+      "peroneus longus",
+      "flexor hallucis longus",
+      "flexor digitorum longus",
+      "abductor hallucis",
+      "flexor digitorum brevis",
+      "abductor digiti minimi",
+      "tripod of the foot",
+      "pes planus",
+      "flat foot",
+      "fallen arches",
+      "pes cavus",
+      "plantar fasciitis",
+      "policeman's heel",
+      "shock absorption",
+      "toe off"
+    ]
+  },
+  "camera": {
+    "framing": "medial",
+    "autoRotate": 0.006,
+    "initialYaw": 1.4
+  },
+  "structures": [
+    {
+      "key": "calcaneus",
+      "name": "right calcaneus",
+      "label": "Calcaneus",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#efe4c8",
+      "refs": {
+        "bodyparts3d": "FMA24497"
+      },
+      "terms": [
+        "calcaneus",
+        "heel bone",
+        "sustentaculum tali",
+        "medial tubercle of calcaneus",
+        "posterior pillar",
+        "plantar fasciitis"
+      ],
+      "narration": "The calcaneus is the back pillar of both longitudinal arches. Its lower back part, the medial tubercle, is the only piece of the heel that touches the ground, and it takes about half of the body weight passed into the foot. The plantar aponeurosis and the first layer of short muscles all arise from that tubercle, which is why repeated pull there gives the heel pain of plantar fasciitis. On its medial side a shelf, the sustentaculum tali, props up the talus."
+    },
+    {
+      "key": "talus",
+      "name": "right talus",
+      "label": "Talus — the keystone",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#f6ecd2",
+      "refs": {
+        "bodyparts3d": "FMA24482"
+      },
+      "terms": [
+        "talus",
+        "keystone",
+        "head of talus",
+        "summit of the arch",
+        "weight transmission"
+      ],
+      "narration": "The talus is the keystone of the medial arch — the highest bone and the one that receives the whole body weight from the tibia. It has no muscle attached to it at all. Its job is purely to receive load from above and split it: backwards to the heel, forwards along the arch to the front of the foot.",
+      "approx": {
+        "shown_as": "Talus",
+        "detail": "the keystone"
+      }
+    },
+    {
+      "key": "navicular",
+      "name": "navicular bone of right foot",
+      "label": "Navicular",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#eee0be",
+      "refs": {
+        "bodyparts3d": "FMA24500"
+      },
+      "terms": [
+        "navicular",
+        "tuberosity of navicular",
+        "tibialis posterior insertion",
+        "spring ligament",
+        "flat foot"
+      ],
+      "narration": "The navicular carries the head of the talus. Its tuberosity on the medial side is the landmark you can feel and the main insertion of tibialis posterior. When that tendon fails the navicular drops, and a dropped navicular is what a flat foot actually is."
+    },
+    {
+      "key": "cuneiform_med",
+      "name": "right medial cuneiform bone",
+      "label": "Medial cuneiform",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#e9dbb8",
+      "refs": {
+        "bodyparts3d": "FMA24521"
+      },
+      "terms": [
+        "medial cuneiform",
+        "first cuneiform",
+        "tibialis anterior insertion",
+        "fibularis longus insertion",
+        "transverse arch"
+      ],
+      "narration": "The medial cuneiform is the biggest of the three and is wedge-shaped with its wide edge downwards. Tibialis anterior pulls up on it from the front and fibularis longus pulls across it from below and behind, so the two tendons make a stirrup around the medial side of the foot."
+    },
+    {
+      "key": "mt1",
+      "name": "right first metatarsal bone",
+      "label": "First metatarsal",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#e4d6b1",
+      "refs": {
+        "bodyparts3d": "FMA24507"
+      },
+      "terms": [
+        "first metatarsal",
+        "head of first metatarsal",
+        "anterior pillar",
+        "ball of the foot",
+        "tripod"
+      ],
+      "narration": "The first metatarsal is the front pillar of the medial arch. Its head is one of the three points on which the foot stands. This arch is tall, springy and mobile — it is the arch built for absorbing shock, not for taking steady load."
+    },
+    {
+      "key": "sesamoid",
+      "name": "sesamoid bone of right foot",
+      "label": "Sesamoid bone",
+      "role": "part",
+      "group": "Medial longitudinal arch",
+      "layer": "bone",
+      "color": "#ded0a8",
+      "refs": {
+        "bodyparts3d": "FMA45097"
+      },
+      "terms": [
+        "sesamoid bone",
+        "sesamoids of great toe",
+        "flexor hallucis brevis",
+        "ball of the foot"
+      ],
+      "narration": "Two small sesamoids sit under the head of the first metatarsal in the tendons of flexor hallucis brevis. They lift the metatarsal head off the ground, spread the pressure at push-off and give the flexor tendons a better angle of pull."
+    },
+    {
+      "key": "cuboid",
+      "name": "right cuboid bone",
+      "label": "Cuboid",
+      "role": "part",
+      "group": "Lateral longitudinal arch",
+      "layer": "bone",
+      "color": "#dccfa4",
+      "refs": {
+        "bodyparts3d": "FMA24528"
+      },
+      "terms": [
+        "cuboid",
+        "groove for fibularis longus",
+        "peroneal groove",
+        "lateral longitudinal arch"
+      ],
+      "narration": "The cuboid is the keystone of the lateral arch. A groove on its underside carries the tendon of fibularis longus across the sole, and the long plantar ligament roofs that groove into a tunnel."
+    },
+    {
+      "key": "mt5",
+      "name": "right fifth metatarsal bone",
+      "label": "Fifth metatarsal",
+      "role": "part",
+      "group": "Lateral longitudinal arch",
+      "layer": "bone",
+      "color": "#d7c99c",
+      "refs": {
+        "bodyparts3d": "FMA24515"
+      },
+      "terms": [
+        "fifth metatarsal",
+        "base of fifth metatarsal",
+        "tuberosity of fifth metatarsal",
+        "fibularis brevis",
+        "tripod"
+      ],
+      "narration": "The fifth metatarsal head is the third point of the tripod. Its base carries a tuberosity you can feel halfway along the outer border of the foot, where fibularis brevis inserts. The lateral arch is low and flat and touches the ground along its whole length — it is built to transmit weight, not to spring."
+    },
+    {
+      "key": "cuneiform_int",
+      "name": "right intermediate cuneiform bone",
+      "label": "Intermediate cuneiform",
+      "role": "part",
+      "group": "Transverse arch",
+      "layer": "bone",
+      "color": "#e6d8b4",
+      "refs": {
+        "bodyparts3d": "FMA24523"
+      },
+      "terms": [
+        "intermediate cuneiform",
+        "second cuneiform",
+        "keystone of transverse arch",
+        "second metatarsal"
+      ],
+      "narration": "The intermediate cuneiform is the shortest of the three and sits recessed between its neighbours. It is the keystone of the transverse arch, and the second metatarsal wedged into that recess is the most rigid ray of the whole foot."
+    },
+    {
+      "key": "cuneiform_lat",
+      "name": "right lateral cuneiform bone",
+      "label": "Lateral cuneiform",
+      "role": "part",
+      "group": "Transverse arch",
+      "layer": "bone",
+      "color": "#e0d2ac",
+      "refs": {
+        "bodyparts3d": "FMA24525"
+      },
+      "terms": [
+        "lateral cuneiform",
+        "third cuneiform",
+        "transverse arch"
+      ],
+      "narration": "The lateral cuneiform completes the row. All three cuneiforms are wedges with the narrow edge downwards, except the medial one, and stacking wedges side by side is exactly how you build an arch across the foot."
+    },
+    {
+      "key": "mt2",
+      "name": "right second metatarsal bone",
+      "label": "Second metatarsal",
+      "role": "context",
+      "group": "Transverse arch",
+      "layer": "bone",
+      "color": "#dbcda6",
+      "refs": {
+        "bodyparts3d": "FMA24509"
+      },
+      "terms": [
+        "second metatarsal",
+        "march fracture",
+        "stress fracture",
+        "rigid ray"
+      ],
+      "narration": "Locked into its recess between the cuneiforms, the second metatarsal barely moves. Because it cannot give, it is the bone that cracks under repeated load — the march fracture of a soldier or a new runner."
+    },
+    {
+      "key": "mt3",
+      "name": "right third metatarsal bone",
+      "label": "Third metatarsal",
+      "role": "context",
+      "group": "Transverse arch",
+      "layer": "bone",
+      "color": "#d6c8a0",
+      "refs": {
+        "bodyparts3d": "FMA24511"
+      },
+      "terms": [
+        "third metatarsal",
+        "transverse arch",
+        "metatarsal heads"
+      ],
+      "narration": "The middle metatarsal heads are held clear of the ground by the transverse arch. When that arch collapses they come down onto the sole and the skin under them thickens into painful callosities."
+    },
+    {
+      "key": "mt4",
+      "name": "right fourth metatarsal bone",
+      "label": "Fourth metatarsal",
+      "role": "context",
+      "group": "Transverse arch",
+      "layer": "bone",
+      "color": "#d1c39a",
+      "refs": {
+        "bodyparts3d": "FMA24513"
+      },
+      "terms": [
+        "fourth metatarsal",
+        "transverse arch"
+      ],
+      "narration": "The fourth completes the row across. A section through the metatarsal bases shows a half-dome; two feet together complete the dome."
+    },
+    {
+      "key": "long_plantar_lig",
+      "name": "right long plantar ligament",
+      "label": "Long plantar ligament",
+      "role": "part",
+      "group": "Ligaments — the second line",
+      "layer": "fascia",
+      "color": "#c9bd93",
+      "refs": {
+        "bodyparts3d": "FMA44249"
+      },
+      "terms": [
+        "long plantar ligament",
+        "plantar ligament",
+        "tie beam",
+        "lateral longitudinal arch",
+        "tunnel for fibularis longus"
+      ],
+      "narration": "The longest ligament in the sole, running from the underside of the calcaneus forward to the cuboid and on to the metatarsal bases. It is the tie beam of the lateral arch: it does not lift the arch, it stops the two ends spreading apart. Its forward fibres bridge the groove on the cuboid to make the tunnel for fibularis longus."
+    },
+    {
+      "key": "tib_post",
+      "name": "right tibialis posterior",
+      "label": "Tibialis posterior",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#7f9ec4",
+      "refs": {
+        "bodyparts3d": "FMA65018"
+      },
+      "terms": [
+        "tibialis posterior",
+        "sling",
+        "navicular tuberosity",
+        "spring ligament",
+        "acquired flat foot"
+      ],
+      "narration": "Tibialis posterior hooks behind the medial malleolus and fans out onto the navicular and the cuneiforms. It is the main muscular sling under the medial arch. Its slow degeneration in middle age is the commonest cause of a flat foot appearing in an adult, and the giveaway is that such a patient cannot rise onto the toes of that foot alone."
+    },
+    {
+      "key": "fib_longus",
+      "name": "right fibularis longus",
+      "label": "Fibularis longus",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#c9973f",
+      "refs": {
+        "bodyparts3d": "FMA22552"
+      },
+      "terms": [
+        "fibularis longus",
+        "peroneus longus",
+        "crosses the sole",
+        "transverse arch support",
+        "stirrup"
+      ],
+      "narration": "Fibularis longus comes down behind the lateral malleolus, turns under the cuboid and crosses the whole sole to reach the medial cuneiform and the first metatarsal. It is the only tendon that runs across the foot, so it is the main active support of the transverse arch, and with tibialis posterior it forms a stirrup slung under the foot."
+    },
+    {
+      "key": "fhl",
+      "name": "right flexor hallucis longus",
+      "label": "Flexor hallucis longus",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#5b7ea8",
+      "refs": {
+        "bodyparts3d": "FMA65014"
+      },
+      "terms": [
+        "flexor hallucis longus",
+        "bowstring",
+        "sustentaculum tali",
+        "push off"
+      ],
+      "narration": "Its tendon runs under the sustentaculum tali and forward under the whole length of the medial arch to the big toe. It lies like a bowstring across the concavity, so every time it contracts to push off it also pulls the two ends of the arch together."
+    },
+    {
+      "key": "fdl",
+      "name": "right flexor digitorum longus",
+      "label": "Flexor digitorum longus",
+      "role": "context",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#4d6f96",
+      "refs": {
+        "bodyparts3d": "FMA65016"
+      },
+      "terms": [
+        "flexor digitorum longus",
+        "bowstring",
+        "long flexors"
+      ],
+      "narration": "The other long bowstring, crossing the sole to the lateral four toes. Both long flexors support the arch while the foot is being loaded and then release it when the foot is off the ground."
+    },
+    {
+      "key": "abd_hallucis",
+      "name": "right abductor hallucis",
+      "label": "Abductor hallucis",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#b6704e",
+      "refs": {
+        "bodyparts3d": "FMA37459"
+      },
+      "terms": [
+        "abductor hallucis",
+        "first layer of sole",
+        "medial arch",
+        "short muscles of sole"
+      ],
+      "narration": "Along the medial border of the sole, from the medial tubercle of the calcaneus to the big toe. Together with the other short muscles of the first layer it acts as a tie between the two ends of the medial arch. Short muscles are the weakest of the four supports of an arch, but they are the ones that tire, and a foot that aches after a long day is a foot whose short muscles have given up before its ligaments have."
+    },
+    {
+      "key": "fdb",
+      "name": "right flexor digitorum brevis",
+      "label": "Flexor digitorum brevis",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#a86546",
+      "refs": {
+        "bodyparts3d": "FMA37461"
+      },
+      "terms": [
+        "flexor digitorum brevis",
+        "first layer of sole",
+        "tie beam",
+        "plantar aponeurosis"
+      ],
+      "narration": "Lying directly under the middle of the sole, deep to the plantar aponeurosis and arising with it from the heel. It runs the length of the arch and pulls its ends together. Think of the whole first layer of the sole as a set of tie beams, not as toe movers."
+    },
+    {
+      "key": "abd_dig_min",
+      "name": "abductor digiti minimi of right foot",
+      "label": "Abductor digiti minimi",
+      "role": "part",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#9a5c40",
+      "refs": {
+        "bodyparts3d": "FMA37463"
+      },
+      "terms": [
+        "abductor digiti minimi",
+        "first layer of sole",
+        "lateral arch",
+        "lateral border of foot"
+      ],
+      "narration": "The lateral member of the same layer, running along the outer border of the sole from the heel to the little toe. It ties the low lateral arch in the same way."
+    },
+    {
+      "key": "ext_dig_brevis",
+      "name": "right extensor digitorum brevis",
+      "label": "Extensor digitorum brevis",
+      "role": "context",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#c4864f",
+      "refs": {
+        "bodyparts3d": "FMA51142"
+      },
+      "terms": [
+        "extensor digitorum brevis",
+        "dorsum of foot",
+        "fleshy lump on dorsum"
+      ],
+      "narration": "The only muscle on the dorsum of the foot, shown to complete the picture. It plays no part in the arches — it is included because the fleshy lump it makes in front of the lateral malleolus is often mistaken for swelling."
+    },
+    {
+      "key": "tibia",
+      "name": "right tibia",
+      "label": "Tibia",
+      "role": "context",
+      "group": "Above the arch",
+      "layer": "bone",
+      "color": "#e2d7ba",
+      "refs": {
+        "bodyparts3d": "FMA24477"
+      },
+      "terms": [
+        "tibia",
+        "weight transmission",
+        "ankle"
+      ],
+      "narration": "Body weight comes down the tibia onto the talus. Everything below that point is the arch system splitting one vertical force into three points of ground contact."
+    },
+    {
+      "key": "plantar_io_1",
+      "name": "first plantar interosseous of right foot",
+      "label": "First plantar interosseous",
+      "role": "context",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#a8763f",
+      "refs": {
+        "bodyparts3d": "FMA37745"
+      },
+      "terms": [
+        "plantar interossei",
+        "interosseous",
+        "fourth layer of the sole",
+        "adduction of the toes",
+        "PAD"
+      ],
+      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+    },
+    {
+      "key": "plantar_io_2",
+      "name": "second plantar interosseous of right foot",
+      "label": "Second plantar interosseous",
+      "role": "context",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#98693a",
+      "refs": {
+        "bodyparts3d": "FMA37743"
+      },
+      "terms": [
+        "plantar interossei",
+        "interosseous",
+        "fourth layer of the sole",
+        "adduction of the toes",
+        "PAD"
+      ],
+      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+    },
+    {
+      "key": "plantar_io_3",
+      "name": "third plantar interosseous of right foot",
+      "label": "Third plantar interosseous",
+      "role": "context",
+      "group": "Muscular support",
+      "layer": "muscle",
+      "color": "#8a5e35",
+      "refs": {
+        "bodyparts3d": "FMA37741"
+      },
+      "terms": [
+        "plantar interossei",
+        "interosseous",
+        "fourth layer of the sole",
+        "adduction of the toes",
+        "PAD"
+      ],
+      "narration": "One of the three plantar interossei, the fourth layer of the sole. They adduct the toes towards the second — PAD, as in the hand — and with the other short muscles they are the active support of the arches, which is why the arch falls when the foot is tired and holds when it is working."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Why the foot is not flat",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Medial longitudinal arch",
+          "intensity": 0.85
+        }
+      ],
+      "narration": "Look at the foot from its inner side and the arch is obvious. A flat plate of bone would transmit the whole shock of every step straight up the leg. An arch bends under load and springs back, so it stores the force instead of passing it on. There are three arches: two running front to back and one running across."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "The medial longitudinal arch",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Medial longitudinal arch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "talus",
+          "intensity": 0.95
+        }
+      ],
+      "narration": "Back to front: calcaneus, talus, navicular, the three cuneiforms and the first three metatarsals. The talus is the keystone at the summit. This arch is tall and mobile and it is the springy one. Remember the bones as a chain from heel to big toe with the talus at the top, and you have most of what an examiner will ask."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "The lateral longitudinal arch",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Lateral longitudinal arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "calcaneus"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cuboid",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "The lateral arch is short and low: calcaneus, cuboid, and the fourth and fifth metatarsals, with the cuboid as its keystone. It rests on the ground along most of its length. The medial arch springs, the lateral arch carries. That is the difference to remember, and it is why a wet footprint shows contact along the outer border but a gap on the inner side."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "The transverse arch",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Transverse arch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cuneiform_int",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "cuneiform_med",
+            "cuneiform_lat"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Across the foot at the level of the cuneiforms and the metatarsal bases there is a third arch. Each cuneiform is a wedge, narrow below and wide above, and wedges stacked side by side make a vault. This arch is only half a dome on one foot; put the two feet together and the dome is complete, which is the classic way of describing it."
+    },
+    {
+      "mode": "location",
+      "beat": 5,
+      "title": "The tripod",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Medial longitudinal arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Lateral longitudinal arch"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "calcaneus",
+          "to": "mt1",
+          "kind": "load-path"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "calcaneus",
+          "to": "mt5",
+          "kind": "load-path"
+        }
+      ],
+      "narration": "Look at the sole. The foot stands on three points, not on a surface: the medial tubercle of the calcaneus behind, the head of the first metatarsal and the head of the fifth in front. Weight comes down the tibia into the talus and is split along the two connectors you can see — half back to the heel, half forward to the two front points. Everything between those three points is arched clear of the ground."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "What holds an arch up",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Ligaments — the second line",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Muscular support",
+          "intensity": 0.5
+        }
+      ],
+      "narration": "Four things hold an arch, and they are not equally important. First the shape of the bones themselves, wedges that lock together under load. Second, and strongest, the plantar ligaments: the spring ligament under the head of the talus, the long plantar ligament shown here, and the short plantar ligament. Third the plantar aponeurosis and the tendons that bowstring across the concavity. Fourth, and weakest, the short muscles of the sole. Ligaments hold the arch when you stand still; muscles matter when you move."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 7,
+      "title": "The tie beams",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Medial longitudinal arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Muscular support"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "long_plantar_lig"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:plantar_aponeurosis",
+          "path": [
+            "calcaneus",
+            "fdb",
+            "mt1"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "An arch fails by its ends spreading apart, so the strongest way to hold one is a tie between the two ends. The plantar aponeurosis, traced here from the heel forward to the toes, is that tie. Under it the first layer of short muscles runs the same course. Add the long flexor tendons crossing the concavity and you have four bowstrings under one arch."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "The slings",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Medial longitudinal arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Transverse arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "tib_post"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fib_longus"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "posterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:stirrup",
+          "path": [
+            "tib_post",
+            "navicular",
+            "cuneiform_med",
+            "fib_longus"
+          ],
+          "duration": 9
+        }
+      ],
+      "narration": "The other way to hold an arch is to hang it from above. Tibialis posterior comes down the inside and fans onto the navicular; fibularis longus comes down the outside, crosses the sole and ends on the same medial side. Together they make a stirrup slung under the foot, traced here from one side to the other. Tibialis posterior lifts the medial arch, fibularis longus pulls the transverse arch tight."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "The windlass at push-off",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Medial longitudinal arch"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "fdb"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:windlass_mechanism",
+          "path": [
+            "calcaneus",
+            "navicular",
+            "mt1",
+            "sesamoid"
+          ],
+          "duration": 8
+        }
+      ],
+      "narration": "The aponeurosis runs from the heel forward and ends on the toes, passing under the metatarsal heads. When you lift the heel and the toes bend up at push-off, the aponeurosis winds round the metatarsal heads like a rope round a windlass. It shortens, the two ends of the arch are pulled together, and the whole foot converts from a flexible shock absorber into a rigid lever in a single movement. A foot that could not do this could not push off."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 10,
+      "title": "A section across the foot",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Slide the cut along the foot and watch the shape of the section change. Across the tarsus it is a clear vault with the middle bones held high. Move forward to the metatarsal heads and the vault has almost flattened, because at that level the foot is meant to be in contact with the ground across its whole width. Losing the arch at the wrong level is what puts pressure on the middle metatarsal heads."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 11,
+      "title": "Flat foot and high arch",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "medial"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "navicular",
+          "intensity": 0.95
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tib_post",
+          "intensity": 0.85
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Medial longitudinal arch",
+            "Lateral longitudinal arch"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "Flat foot, pes planus, is a medial arch that has come down. In a child it is normal and usually corrects itself, and the test is simple: ask the child to stand on tiptoe and the arch reappears if the foot is mobile. In an adult it is usually the tendon of tibialis posterior giving way, the navicular dropping, and the heel drifting outwards, and that foot cannot rise onto its toes. The opposite, pes cavus, is an abnormally high arch with clawed toes, and it should make you think of a neurological cause rather than the foot itself."
+    },
+    {
+      "mode": "location",
+      "beat": 12,
+      "title": "Peel the sole away",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "muscle",
+          "direction": "inward"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "long_plantar_lig"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "inferior"
+        }
+      ],
+      "narration": "Take the sole apart from below and the order is fixed: skin with its thick fibro-fatty pad over the weight-bearing points, then the plantar aponeurosis, then four layers of muscle with the vessels and nerves between the first and second, and finally the plantar ligaments on the bones. Only the deepest of those, the ligaments, are strong enough to hold the arch on their own. Everything above them helps."
+    }
+  ],
+  "gaps": [
+    "The spring ligament, properly the plantar calcaneonavicular ligament, has no model in the catalog. It is the single most important passive support of the medial arch and its stretching is the mechanical basis of flat foot, so its absence is the biggest gap in this scene. It is named in narration and its position is shown by lighting the head of the talus and the navicular that it bridges.",
+    "The plantar aponeurosis has no model. It is the tie of the medial arch and the whole windlass mechanism depends on it, so it is authored twice as a traced concept along the sole, from the calcaneal tubercle forward to the toes.",
+    "The short plantar ligament, the plantar calcaneocuboid, is not in the catalog; only the long plantar ligament is. The lateral arch is therefore taught with one of its two plantar ligaments visible and the other named.",
+    "No nerves or vessels of the foot exist in the catalog, so the medial and lateral plantar nerves and the plantar arch are not shown. This matters for the layered dissection beat, where the neurovascular plane between the first and second layers can only be described.",
+    "The second, third and fourth layers of the sole are only partly in the catalog. Quadratus plantae is absent altogether, and adductor hallucis exists only as its two separate heads, so the layered anatomy of the sole is summarised in the peel beat rather than shown layer by layer. The three plantar interossei do exist individually (FMA37741, FMA37743, FMA37745) and could carry the fourth layer; it is the dorsal interossei of the foot that have no meshes.",
+    "There is no model of the fibro-fatty heel pad, and the only skin in the catalog is one undivided whole-body mesh, so the covering that actually takes ground contact is described only.",
+    "The transverse arch is really a half dome completed by the opposite foot, and only one foot is modelled here, so the completed dome is described in narration and cannot be shown."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  }
+}

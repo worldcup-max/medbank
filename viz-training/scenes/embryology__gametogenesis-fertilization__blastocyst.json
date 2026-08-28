@@ -1,0 +1,601 @@
+{
+  "schema": 2,
+  "id": "embryology__gametogenesis-fertilization__blastocyst",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Gametogenesis & Fertilization",
+  "structure": "Blastocyst",
+  "covers": [
+    "Blastocyst"
+  ],
+  "learning_goal": "Name the three parts of a blastocyst on a cut drawing, say what each becomes, explain how the cavity is made and why the embryo must hatch before it can implant, and date days five to six correctly.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "blastocyst",
+      "week 1",
+      "early development",
+      "preimplantation",
+      "implantation",
+      "trophoblast",
+      "inner cell mass",
+      "twinning",
+      "assisted reproduction",
+      "IVF",
+      "pregnancy test"
+    ],
+    "terms": [
+      "blastocyst",
+      "blastocyst cavity",
+      "blastocoele",
+      "blastocoel",
+      "cavitation",
+      "inner cell mass",
+      "embryoblast",
+      "trophoblast",
+      "trophectoderm",
+      "embryonic pole",
+      "abembryonic pole",
+      "polar trophoblast",
+      "mural trophoblast",
+      "sodium potassium ATPase",
+      "aquaporin",
+      "osmotic gradient",
+      "tight junction",
+      "zona pellucida",
+      "hatching",
+      "assisted hatching",
+      "day 5",
+      "day 6",
+      "day 7",
+      "free blastocyst",
+      "uterine cavity",
+      "endometrium",
+      "implantation",
+      "apposition",
+      "adhesion",
+      "invasion",
+      "posterior superior uterine wall",
+      "cytotrophoblast",
+      "syncytiotrophoblast",
+      "human chorionic gonadotropin",
+      "hCG",
+      "corpus luteum rescue",
+      "pregnancy test",
+      "epiblast",
+      "hypoblast",
+      "bilaminar disc",
+      "amnion",
+      "yolk sac",
+      "chorion",
+      "placenta",
+      "pluripotent",
+      "embryonic stem cells",
+      "blastocyst transfer",
+      "day 5 transfer",
+      "trophectoderm biopsy",
+      "preimplantation genetic testing",
+      "monochorionic diamniotic",
+      "monozygotic twins",
+      "hydatidiform mole",
+      "ectopic pregnancy",
+      "placenta praevia"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "uterine_cavity",
+      "label": "The uterine cavity — days 4 to 6",
+      "role": "context",
+      "group": "Where and when",
+      "layer": "organ",
+      "color": "#b07aa1",
+      "terms": [
+        "uterine cavity",
+        "endometrium",
+        "uterine glands",
+        "uterine milk",
+        "free blastocyst",
+        "day 4",
+        "day 5",
+        "day 6",
+        "secretory phase",
+        "window of implantation"
+      ],
+      "narration": "The morula arrives in the uterine cavity on about day four and floats free for a day or two, fed by secretions from the endometrial glands. The endometrium is in its secretory phase and is receptive for only a short window. Two clocks must match again: an embryo that arrives early or late meets a wall that will not take it."
+    },
+    {
+      "key": "cavitation",
+      "label": "Cavitation — making the cavity",
+      "role": "part",
+      "group": "Making the cavity",
+      "layer": "organ",
+      "color": "#3498db",
+      "terms": [
+        "cavitation",
+        "sodium potassium ATPase",
+        "sodium pump",
+        "aquaporin",
+        "osmotic gradient",
+        "tight junction",
+        "fluid accumulation",
+        "day 5"
+      ],
+      "narration": "The outer cells are sealed together by tight junctions and pump sodium inward with a sodium-potassium ATPase on their inner face. Water follows the salt through aquaporins, and because the seal will not let it leak back out, it collects in one growing space. That is cavitation, and it is pure physics — an ion pump plus a watertight sheet."
+    },
+    {
+      "key": "blastocoele",
+      "label": "Blastocyst cavity (blastocoele)",
+      "role": "part",
+      "group": "The three parts",
+      "layer": "organ",
+      "color": "#85c1e9",
+      "terms": [
+        "blastocoele",
+        "blastocoel",
+        "blastocyst cavity",
+        "fluid-filled cavity",
+        "expansion",
+        "eccentric inner cell mass"
+      ],
+      "narration": "The fluid space that turns a solid morula into a hollow blastocyst. It is what pushes the inner cell mass off-centre, and its expansion is what stretches and thins the zona until the embryo can escape. Grading in a laboratory is largely a judgement about how far this cavity has expanded."
+    },
+    {
+      "key": "icm",
+      "label": "Inner cell mass (embryoblast)",
+      "role": "part",
+      "group": "The three parts",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "inner cell mass",
+        "embryoblast",
+        "pluripotent",
+        "embryonic stem cells",
+        "epiblast",
+        "hypoblast",
+        "bilaminar disc",
+        "amnion",
+        "yolk sac",
+        "embryo proper"
+      ],
+      "narration": "A knot of cells at one end, inside the cavity. Everything in the fetus comes from here, and it also makes the amnion and the yolk sac. Within days it will split into epiblast and hypoblast to form the bilaminar disc. It is pluripotent, not totipotent — it can make any tissue of the body but can no longer make a placenta, and that distinction is the exam point. Embryonic stem cell lines are derived from it."
+    },
+    {
+      "key": "trophoblast",
+      "label": "Trophoblast",
+      "role": "part",
+      "group": "The three parts",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "trophoblast",
+        "trophectoderm",
+        "outer cell layer",
+        "placenta",
+        "chorion",
+        "fetal membranes",
+        "cytotrophoblast",
+        "syncytiotrophoblast",
+        "invasion",
+        "hydatidiform mole"
+      ],
+      "narration": "The single flattened layer around the outside. It becomes the placenta and the chorion and contributes nothing to the fetus. At implantation it splits into an inner cytotrophoblast, which keeps dividing, and an outer syncytiotrophoblast, which fuses into one multinucleate mass and does the invading. A tumour of this tissue is a hydatidiform mole — placenta without an embryo, which is why it produces enormous amounts of hCG and no fetal parts."
+    },
+    {
+      "key": "embryonic_pole",
+      "label": "Embryonic pole",
+      "role": "part",
+      "group": "Poles",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "embryonic pole",
+        "polar trophoblast",
+        "adhesion site",
+        "attaches first",
+        "site of implantation"
+      ],
+      "narration": "The end where the inner cell mass sits. The trophoblast overlying it is the polar trophoblast, and it is always the part that touches the endometrium first. So the embryo implants head-end first, and the placenta forms over the pole the embryo is attached to."
+    },
+    {
+      "key": "abembryonic_pole",
+      "label": "Abembryonic pole",
+      "role": "part",
+      "group": "Poles",
+      "layer": "organ",
+      "color": "#a569bd",
+      "terms": [
+        "abembryonic pole",
+        "mural trophoblast",
+        "opposite end",
+        "thin wall"
+      ],
+      "narration": "The opposite end, wall only, with the cavity behind it. Its trophoblast is thinner and does not invade. Naming the two poles is how you answer which surface implants — and it is asked that way."
+    },
+    {
+      "key": "hatching",
+      "label": "Hatching from the zona pellucida (day 5)",
+      "role": "part",
+      "group": "Hatching & implanting",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "hatching",
+        "zona pellucida",
+        "assisted hatching",
+        "expansion",
+        "thinning",
+        "lytic enzymes",
+        "day 5",
+        "must precede implantation"
+      ],
+      "narration": "The blastocyst cannot implant while the zona is around it, because the zona is exactly what has been preventing attachment for four days. On about day five the expanding cavity thins the shell and trophoblast enzymes help break it, and the blastocyst squeezes out. Hatching must come before implantation, always in that order. A zona too tough to breach is one cause of repeated failure after embryo transfer, which is why a laboratory sometimes thins it artificially."
+    },
+    {
+      "key": "implantation_start",
+      "label": "Implantation begins (day 6)",
+      "role": "part",
+      "group": "Hatching & implanting",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "implantation",
+        "apposition",
+        "adhesion",
+        "invasion",
+        "day 6",
+        "day 7",
+        "posterior superior uterine wall",
+        "endometrium",
+        "syncytiotrophoblast",
+        "interstitial implantation"
+      ],
+      "narration": "About day six the hatched blastocyst lies against the endometrium, sticks to it, and the syncytiotrophoblast begins to eat its way in. The usual site is the upper posterior wall of the uterus. A blastocyst that implants low sets up a placenta praevia; one that never reached the uterus implants in the tube. By the end of week one it is only partly embedded — full burial belongs to week two."
+    },
+    {
+      "key": "hcg",
+      "label": "hCG and the corpus luteum",
+      "role": "part",
+      "group": "Hatching & implanting",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "human chorionic gonadotropin",
+        "hCG",
+        "syncytiotrophoblast",
+        "corpus luteum rescue",
+        "progesterone",
+        "pregnancy test",
+        "missed period",
+        "LH receptor"
+      ],
+      "narration": "The syncytiotrophoblast starts secreting human chorionic gonadotropin almost as soon as it invades. hCG acts on the LH receptor of the corpus luteum and keeps it producing progesterone, so the endometrium is not shed and the period is missed. It is detectable in blood about eight days after fertilization. Every pregnancy test in every clinic is measuring a product of this cell layer, not of the embryo."
+    },
+    {
+      "key": "twinning_late",
+      "label": "Splitting after day 4 — shared membranes",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#9b59b6",
+      "terms": [
+        "monozygotic twins",
+        "monochorionic diamniotic",
+        "monochorionic monoamniotic",
+        "day 4 to 8",
+        "day 8 to 13",
+        "conjoined twins",
+        "twin-to-twin transfusion",
+        "shared placenta"
+      ],
+      "narration": "Once the trophoblast is committed, a split can no longer duplicate it. An inner cell mass that divides between days four and eight gives twins with one placenta and two amnions — monochorionic, diamniotic — and that shared placenta is what allows twin-to-twin transfusion syndrome. A split between days eight and thirteen shares the amnion too, and a later one leaves them conjoined. Read the membranes backwards and they date the split."
+    },
+    {
+      "key": "clinical",
+      "label": "Day 5 in a clinic",
+      "role": "part",
+      "group": "Clinical",
+      "layer": "organ",
+      "color": "#5a8fd6",
+      "terms": [
+        "blastocyst transfer",
+        "day 5 transfer",
+        "expansion grading",
+        "trophectoderm biopsy",
+        "preimplantation genetic testing",
+        "assisted hatching",
+        "embryonic stem cells",
+        "ectopic pregnancy",
+        "placenta praevia"
+      ],
+      "narration": "The blastocyst is where assisted reproduction now does most of its work. Transfer at day five selects the embryos that survived the genome handover, so fewer need to be replaced. Cells for genetic testing are taken from the trophectoderm rather than from the embryo itself, which is both safer and more representative than a day-three blastomere. The zona can be thinned to help hatching. And the two ways implantation goes wrong in position — too low, or never leaving the tube — are both decided in the next forty-eight hours."
+    }
+  ],
+  "views": [
+    {
+      "mode": "cross_section",
+      "beat": 1,
+      "title": "Cut it open — three parts, and only three",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three parts"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "icm",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trophoblast",
+          "to": "blastocoele",
+          "kind": "encloses"
+        }
+      ],
+      "narration": "A blastocyst cut across has three parts and you should never need a fourth. A single flattened outer layer, the trophoblast, which becomes the placenta. A fluid space, the blastocyst cavity. And a knot of cells at one end, the inner cell mass, which becomes the entire fetus. Name those three in that order and most of week one is answerable."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "How the cavity is made",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Making the cavity"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three parts"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "cavitation",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trophoblast",
+          "to": "cavitation",
+          "kind": "pumps sodium inward through a sealed sheet"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "cavitation",
+          "to": "blastocoele",
+          "kind": "fills and expands it"
+        }
+      ],
+      "narration": "The cavity is not a gap that appears; it is pumped. The outer cells are sealed to one another by tight junctions and drive sodium inward with a sodium-potassium ATPase. Water follows through aquaporins and cannot leak back out through the seal, so it accumulates in one space and inflates it. The morula becomes a blastocyst at about day five, and the growing cavity pushes the inner cell mass to one end."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "Two cell lines, two destinies",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The three parts"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "icm",
+            "trophoblast"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "trophoblast",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "cavitation"
+        }
+      ],
+      "narration": "The inner cell mass makes the embryo, the amnion and the yolk sac. The trophoblast makes the placenta and the chorion and no part of the fetus. Note the wording: the inner cell mass is pluripotent, not totipotent, because it can no longer produce a placenta. That is why a hydatidiform mole — a trophoblastic tumour — grows placental tissue with no embryo in it, and floods the blood with hCG."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Which end goes in first",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Poles"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three parts"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "embryonic_pole",
+            "abembryonic_pole"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "embryonic_pole",
+          "to": "icm",
+          "kind": "is the end the inner cell mass sits at"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        }
+      ],
+      "narration": "The blastocyst has an axis. The end carrying the inner cell mass is the embryonic pole; the far end is the abembryonic pole. The trophoblast over the embryonic pole is the part that touches the endometrium first and the part that invades, so the embryo attaches at the same end it will grow from. Ask which surface implants and this is the answer."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Hatching must come first",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hatching & implanting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "blastocoele"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hatching",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "blastocoele",
+          "to": "hatching",
+          "kind": "expansion thins the shell"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "For four days the zona pellucida has been stopping the embryo from sticking to anything. It now has to go. The expanding cavity stretches and thins it, trophoblast enzymes weaken it, and on about day five the blastocyst squeezes out. Hatching before implantation, in that order, every time. A zona that will not break is one recognised cause of repeated implantation failure after transfer."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Day 6 — attaching, and announcing it",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Hatching & implanting"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "uterine_cavity"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:implantation-onset",
+          "path": [
+            "hatching",
+            "embryonic_pole",
+            "implantation_start",
+            "hcg"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "hcg",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Apposition, adhesion, invasion — the hatched blastocyst lies against the endometrium at about day six, sticks, and the syncytiotrophoblast digs in at the embryonic pole. The usual site is the upper posterior uterine wall. As it invades it secretes hCG, which acts on the corpus luteum's LH receptor and keeps progesterone flowing, so the period is missed. A pregnancy test is detecting the placenta, not the embryo, from about eight days after fertilization."
+    },
+    {
+      "mode": "comparison",
+      "beat": 7,
+      "title": "A later split shares more",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Clinical"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The three parts"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "twinning_late",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "icm",
+          "to": "twinning_late",
+          "kind": "the part that can still divide in two"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "trophoblast",
+          "to": "twinning_late",
+          "kind": "already committed — so the placenta is shared"
+        }
+      ],
+      "narration": "Once a blastocyst has formed, only the inner cell mass can still split, and the trophoblast around it cannot be duplicated. So twins arising between days four and eight share one placenta and have two amnions, and that shared circulation is what makes twin-to-twin transfusion possible. A split between days eight and thirteen shares the amnion as well; later still and the twins are conjoined. The membranes on the scan date the split."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "Why day 5 is where the clinic works",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clinical",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical",
+          "to": "trophoblast",
+          "kind": "biopsied here, not from the embryo"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical",
+          "to": "hatching",
+          "kind": "the zona can be thinned to help"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical",
+          "to": "implantation_start",
+          "kind": "where it implants decides what goes wrong"
+        }
+      ],
+      "narration": "Four practical points. Transferring at day five selects embryos that survived the genome handover, so fewer are replaced and fewer twins result. Genetic testing takes cells from the trophectoderm, which is safer and more representative than a day-three blastomere and does not touch the future fetus. The zona can be thinned artificially when hatching keeps failing. And where the blastocyst lands settles two diagnoses in advance: too low in the uterus is a placenta praevia, still in the tube is an ectopic pregnancy."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is a staged process at cell scale. Only diagram is deferred. The curriculum asks for cross_section and mechanism views and both are authored — beat 1 is the cut.",
+    "Status is 'planned'. Twelve regions, eight beats, ops and narration are complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a cut blastocyst with the trophoblast drawn as a single flattened layer, an eccentric inner cell mass, a labelled cavity, both poles marked, the zona shown intact and then shed, and an endometrial-wall inset for beats 6 and 8.",
+    "Beat 6 traces concept:implantation-onset. The subject is the transition from hatching to attachment and hCG secretion, which is a process rather than a drawn object.",
+    "This scene stops at the START of implantation. Apposition, adhesion and the first invasion are named because they are what day six is, but trophoblast invasion proper, the lacunar stage and the bilaminar disc belong to 'Implantation' and 'Bilaminar embryonic disc' in the next topic. Those entries are NOT claimed in covers[].",
+    "Cytotrophoblast and syncytiotrophoblast are named inside the trophoblast narration rather than given their own regions, because they are strictly a week-two differentiation. If the implantation scene wants them as regions they should be authored there and this narration reduced to one line.",
+    "Twinning appears here and in the cleavage scene by design: the dichorionic split happens before day three and the monochorionic splits after, so the rule is met from both ends. Neither scene claims a twinning curriculum entry, and there is no such entry to claim.",
+    "Timings are the standard teaching ones — blastocyst at day five, hatching about day five, implantation beginning about day six, hCG detectable at about day eight — and are narrated as approximations. Cell counts are deliberately omitted from the labels here, unlike the cleavage scene, because published blastocyst counts vary too widely to be quoted as a fact a student should reproduce."
+  ]
+}

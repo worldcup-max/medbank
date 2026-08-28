@@ -1,0 +1,628 @@
+{
+  "schema": 2,
+  "id": "embryology__gametogenesis-fertilization__cleavage-morula",
+  "mode": "sequence",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Embryology",
+  "topic": "Gametogenesis & Fertilization",
+  "structure": "Cleavage & morula",
+  "covers": [
+    "Cleavage & morula"
+  ],
+  "learning_goal": "Put days one to four in order — zygote, two-cell, four-cell, eight-cell, compaction, morula — say where the embryo is on each day, explain why the embryo divides without growing, and name what compaction decides.",
+  "status": "planned",
+  "provider": {
+    "primary": "svg",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "cleavage",
+      "morula",
+      "week 1",
+      "early development",
+      "preimplantation",
+      "uterine tube",
+      "twinning",
+      "assisted reproduction",
+      "IVF"
+    ],
+    "terms": [
+      "cleavage",
+      "cleavage division",
+      "blastomere",
+      "zygote",
+      "two-cell stage",
+      "four-cell stage",
+      "eight-cell stage",
+      "morula",
+      "mulberry",
+      "16 cells",
+      "32 cells",
+      "compaction",
+      "E-cadherin",
+      "tight junction",
+      "gap junction",
+      "inner cell mass",
+      "outer cell layer",
+      "outer cells",
+      "polarisation",
+      "zona pellucida",
+      "hatching",
+      "totipotent",
+      "totipotency",
+      "pluripotent",
+      "embryonic genome activation",
+      "maternal-to-zygotic transition",
+      "maternal mRNA",
+      "no increase in size",
+      "decreasing cell size",
+      "day 1",
+      "day 2",
+      "day 3",
+      "day 4",
+      "ampulla",
+      "isthmus",
+      "uterine tube",
+      "fallopian tube",
+      "ciliary action",
+      "tubal peristalsis",
+      "uterine cavity",
+      "free-floating",
+      "uterine milk",
+      "monozygotic twins",
+      "dichorionic diamniotic",
+      "identical twins",
+      "cleavage-stage transfer",
+      "day 3 transfer",
+      "blastomere biopsy",
+      "preimplantation genetic testing",
+      "mosaicism",
+      "ectopic pregnancy",
+      "tubal pregnancy"
+    ]
+  },
+  "camera": {
+    "framing": "anterior"
+  },
+  "structures": [
+    {
+      "key": "tube_journey",
+      "label": "The uterine tube — the four-day journey",
+      "role": "context",
+      "group": "Where and when",
+      "layer": "organ",
+      "color": "#b07aa1",
+      "terms": [
+        "uterine tube",
+        "fallopian tube",
+        "ampulla",
+        "isthmus",
+        "ciliary action",
+        "tubal peristalsis",
+        "uterine cavity",
+        "day 3",
+        "day 4",
+        "ectopic pregnancy"
+      ],
+      "narration": "Cleavage happens on the move. The zygote forms in the ampulla and is swept medially by ciliary beating and smooth muscle peristalsis, reaching the uterine cavity at about day four as a morula. Nothing implants during this journey, and that is the point of the timetable — an embryo delayed in a scarred tube reaches the implanting stage before it reaches the uterus, and lodges where it stands as a tubal ectopic pregnancy."
+    },
+    {
+      "key": "zygote",
+      "label": "Zygote (day 1)",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#c0392b",
+      "terms": [
+        "zygote",
+        "one-cell embryo",
+        "first cleavage",
+        "30 hours",
+        "day 1",
+        "diploid",
+        "46 chromosomes"
+      ],
+      "narration": "One diploid cell, still inside the zona pellucida, carrying the cytoplasm and mitochondria the oocyte supplied. It divides about thirty hours after fertilization. Cleavage is dated from this division, so day one of development is the day the zygote first splits."
+    },
+    {
+      "key": "two_cell",
+      "label": "Two-cell stage",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#d35400",
+      "terms": [
+        "two-cell stage",
+        "blastomere",
+        "first cleavage division",
+        "asynchronous division",
+        "day 1",
+        "day 2"
+      ],
+      "narration": "The two daughter cells are called blastomeres. From here divisions are not synchronised, so odd numbers are normal — three-cell and five-cell embryos are seen routinely in a dish and are not abnormal."
+    },
+    {
+      "key": "four_cell",
+      "label": "Four-cell stage (day 2)",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#e67e22",
+      "terms": [
+        "four-cell stage",
+        "day 2",
+        "blastomere",
+        "embryonic genome activation",
+        "totipotent"
+      ],
+      "narration": "By day two the embryo is four cells and no larger than the zygote was. Each blastomere is still totipotent — separate one now and it can make a whole embryo."
+    },
+    {
+      "key": "eight_cell",
+      "label": "Eight-cell stage (day 3)",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#f1c40f",
+      "terms": [
+        "eight-cell stage",
+        "day 3",
+        "cleavage-stage transfer",
+        "blastomere biopsy",
+        "preimplantation genetic testing",
+        "loosely packed"
+      ],
+      "narration": "Day three, eight loosely packed cells with visible gaps between them, still round and still separable. This is the classic cleavage-stage embryo transferred in an older assisted-reproduction protocol, and it is where a single blastomere used to be removed for genetic testing."
+    },
+    {
+      "key": "no_growth",
+      "label": "Division without growth",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#7f8c8d",
+      "terms": [
+        "cleavage",
+        "no increase in size",
+        "decreasing cell size",
+        "high nucleus to cytoplasm ratio",
+        "zona pellucida constrains",
+        "no G1",
+        "short cell cycle"
+      ],
+      "narration": "This is the one idea that makes cleavage different from ordinary mitosis. The cell cycles are stripped down and almost skip the growth phases, so each division halves the cell size instead of restoring it. The embryo at eight cells is the same overall size as the zygote — it has been subdivided, not enlarged. The zona pellucida holds the whole thing to a fixed volume, and the nucleus-to-cytoplasm ratio climbs with every round."
+    },
+    {
+      "key": "genome_activation",
+      "label": "The embryo switches its own genome on",
+      "role": "part",
+      "group": "The divisions",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "terms": [
+        "embryonic genome activation",
+        "maternal-to-zygotic transition",
+        "maternal mRNA",
+        "four-cell stage",
+        "eight-cell stage",
+        "developmental arrest"
+      ],
+      "narration": "Until about the four-to-eight-cell stage the embryo runs entirely on messenger RNA and protein stockpiled by the oocyte. Then its own genome takes over. That handover explains why so many embryos arrest at exactly this point in a dish: the maternal supply runs out and a defective embryonic genome has nothing to replace it with."
+    },
+    {
+      "key": "compaction",
+      "label": "Compaction (8–16 cells)",
+      "role": "part",
+      "group": "Compaction & morula",
+      "layer": "organ",
+      "color": "#16a085",
+      "terms": [
+        "compaction",
+        "E-cadherin",
+        "tight junction",
+        "gap junction",
+        "polarisation",
+        "flattening",
+        "indistinct cell borders",
+        "first cell-fate decision"
+      ],
+      "narration": "At around the eight-to-sixteen-cell stage the blastomeres suddenly flatten against each other and the outlines between them blur. E-cadherin pulls them together, tight junctions seal the outside, and gap junctions couple the inside. This is the first cell-fate decision of a human life: a cell's position now decides what it will become, and no blastomere is fully totipotent afterwards."
+    },
+    {
+      "key": "morula",
+      "label": "Morula (12–32 cells, day 3–4)",
+      "role": "part",
+      "group": "Compaction & morula",
+      "layer": "organ",
+      "color": "#27ae60",
+      "terms": [
+        "morula",
+        "mulberry",
+        "16 cells",
+        "32 cells",
+        "day 3",
+        "day 4",
+        "solid ball",
+        "enters uterine cavity"
+      ],
+      "narration": "A solid ball of twelve to thirty-two cells, named from the Latin for mulberry because that is what it looks like. It reaches the uterine cavity at about day four and floats free there, nourished by secretions from the endometrial glands, while fluid begins to seep in between its cells."
+    },
+    {
+      "key": "inner_cells",
+      "label": "Inner cell mass — the embryo itself",
+      "role": "part",
+      "group": "Compaction & morula",
+      "layer": "organ",
+      "color": "#2980b9",
+      "terms": [
+        "inner cell mass",
+        "embryoblast",
+        "inner cells",
+        "pluripotent",
+        "embryo proper",
+        "embryonic stem cells"
+      ],
+      "narration": "The few cells sealed inside by compaction become the inner cell mass. Everything the fetus is made of comes from this small group, and nothing else does. Embryonic stem cell lines are derived from exactly these cells."
+    },
+    {
+      "key": "outer_cells",
+      "label": "Outer cells — the future placenta",
+      "role": "part",
+      "group": "Compaction & morula",
+      "layer": "organ",
+      "color": "#e74c3c",
+      "terms": [
+        "outer cell layer",
+        "outer cells",
+        "trophoblast precursor",
+        "placenta",
+        "fetal membranes",
+        "polarised cells",
+        "sodium pump"
+      ],
+      "narration": "The cells left on the outside become the placenta and membranes and contribute nothing to the fetus. They are polarised, with a sealed outer face, and they begin pumping sodium inward — which is what will inflate the cavity that turns this morula into a blastocyst. Inside becomes the child, outside becomes the afterbirth: that is the sentence to remember."
+    },
+    {
+      "key": "zona",
+      "label": "Zona pellucida — the shell that must not open yet",
+      "role": "context",
+      "group": "What the zona does",
+      "layer": "organ",
+      "color": "#f39c12",
+      "terms": [
+        "zona pellucida",
+        "hardened zona",
+        "zona reaction",
+        "hatching",
+        "premature implantation",
+        "ectopic pregnancy",
+        "assisted hatching",
+        "holds blastomeres together"
+      ],
+      "narration": "Three jobs, all of them still running during cleavage. It holds the loose blastomeres together as one embryo. It fixes the volume, which is why cleavage subdivides rather than grows. And it stops the embryo sticking to the wall of the tube on the way down — an embryo that lost its zona early would implant in the tube. It is shed only at day five, in the uterus, and only then can implantation start."
+    },
+    {
+      "key": "twinning",
+      "label": "When blastomeres separate — monozygotic twins",
+      "role": "part",
+      "group": "What the zona does",
+      "layer": "organ",
+      "color": "#9b59b6",
+      "terms": [
+        "monozygotic twins",
+        "identical twins",
+        "totipotent",
+        "splitting before day 3",
+        "dichorionic diamniotic",
+        "two placentas",
+        "two amnions",
+        "conjoined twins"
+      ],
+      "narration": "Because early blastomeres are totipotent, a cleavage-stage embryo that splits gives two complete embryos. Split in the first three days, before the outer cells are committed, and each half makes its own placenta and its own amnion — dichorionic, diamniotic identical twins, which look on a scan exactly like non-identical ones. Split later and they share, and the later the split the more they share. Timing of the split, not the fact of it, is what determines the membranes."
+    },
+    {
+      "key": "clinical",
+      "label": "Where this shows up clinically",
+      "role": "part",
+      "group": "What the zona does",
+      "layer": "organ",
+      "color": "#5a8fd6",
+      "terms": [
+        "cleavage-stage transfer",
+        "day 3 transfer",
+        "blastocyst transfer",
+        "blastomere biopsy",
+        "preimplantation genetic testing",
+        "mosaicism",
+        "embryo grading",
+        "ectopic pregnancy",
+        "emergency contraception"
+      ],
+      "narration": "Three uses. Embryos are graded on cell number and evenness at day two and three, so knowing what is normal on each day is a clinical skill. A single blastomere can be biopsied at eight cells for genetic testing, though mosaicism between blastomeres makes that result less reliable than a later one. And the four-day interval before the embryo reaches the uterus is the window in which post-coital contraception still acts, because nothing has yet attached."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Four days, one journey",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Where and when"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "tube_journey",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:embryo-transit",
+          "path": [
+            "zygote",
+            "two_cell",
+            "four_cell",
+            "eight_cell",
+            "morula"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Everything in this scene happens while the embryo is travelling. Fertilization is in the ampulla; the first division is about thirty hours later; the embryo is two cells on day one, four on day two, eight on day three, and a morula entering the uterine cavity on day four. Cilia and tubal peristalsis carry it. Hold that timetable, because a delay in it is an ectopic pregnancy."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 2,
+      "title": "Cleavage divides without growing",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The divisions"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "zona"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "no_growth",
+          "intensity": 0.9
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "zygote",
+            "eight_cell"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "zona",
+          "to": "no_growth",
+          "kind": "fixes the total volume"
+        }
+      ],
+      "narration": "Put the zygote and the eight-cell embryo side by side and they are the same size. Cleavage is mitosis with the growth phases cut out, so each round halves the cell rather than replacing what was divided. The zona pellucida fixes the outer volume, so the embryo is being subdivided into smaller and smaller blastomeres with a rising nucleus-to-cytoplasm ratio. Divisions are not synchronised, so a three-cell or five-cell embryo is normal."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 3,
+      "title": "The genome hands over",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "The divisions"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "genome_activation",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "genome_activation",
+          "to": "four_cell",
+          "kind": "handover begins here"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "genome_activation",
+          "to": "eight_cell",
+          "kind": "and is complete by here"
+        }
+      ],
+      "narration": "The first divisions are not run by the embryo. They are run by messenger RNA and protein the oocyte stored before ovulation. Somewhere between the four- and eight-cell stage the embryonic genome switches on and takes control. This is why a large share of embryos in a laboratory stop developing at exactly this stage — the maternal supply is exhausted and a faulty genome cannot take over."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 4,
+      "title": "Compaction — the first decision",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Compaction & morula"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "eight_cell"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "compaction",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "eight_cell",
+          "to": "compaction",
+          "kind": "cells flatten and seal against each other"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "compaction",
+          "to": "morula",
+          "kind": "produces"
+        }
+      ],
+      "narration": "At eight to sixteen cells the blastomeres stop looking like a bag of marbles. E-cadherin makes them flatten onto each other, tight junctions seal the outer surface and gap junctions couple the interior, so the individual outlines disappear. The embryo becomes a solid ball — the morula. Nothing has been added; the cells have simply committed to a position, and position is now destiny."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Cut the morula open — inside and outside",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Compaction & morula"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0,
+          "animate": true
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "inner_cells",
+            "outer_cells"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "compaction",
+          "to": "inner_cells",
+          "kind": "seals these cells inside"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "compaction",
+          "to": "outer_cells",
+          "kind": "polarises these on the surface"
+        }
+      ],
+      "narration": "Cut a morula across and there are two populations, not one. A small group sealed inside — the inner cell mass — becomes the entire embryo and nothing else. The larger group on the outside becomes the placenta and membranes and contributes nothing to the fetus. Inside becomes the child, outside becomes the afterbirth. The outer cells have already begun pumping sodium inward, and the water that follows will open the cavity that makes this a blastocyst."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "What the zona is for",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the zona does"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "morula"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "zona",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "zona",
+          "to": "tube_journey",
+          "kind": "prevents attachment on the way down"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "outward"
+        }
+      ],
+      "narration": "The zona pellucida is doing three jobs at once during cleavage. It keeps the loose blastomeres together as one embryo. It fixes the volume, which is what makes cleavage subdivide instead of grow. And it stops the embryo sticking to the tube wall while it travels. That last job is the clinically important one: shedding the zona early means implanting in the tube. It is shed at day five, in the uterus, and not before."
+    },
+    {
+      "mode": "comparison",
+      "beat": 7,
+      "title": "Splitting — how identical twins get their membranes",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "What the zona does"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "The divisions"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "twinning",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "four_cell",
+          "to": "twinning",
+          "kind": "totipotent — a split here gives two complete embryos"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "compaction",
+          "to": "twinning",
+          "kind": "after this, a split shares membranes"
+        }
+      ],
+      "narration": "An early blastomere can still make a whole embryo on its own, so a cleavage-stage embryo that splits produces monozygotic twins. Split within the first three days, before compaction has committed the outer cells, and each twin builds its own placenta and its own amnion — dichorionic and diamniotic, indistinguishable on a scan from non-identical twins. Split after compaction and they share, progressively more the later it happens. The membranes report the timing of the split, not the zygosity."
+    },
+    {
+      "mode": "associated_organs",
+      "beat": 8,
+      "title": "Day three in a clinic",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "clinical",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical",
+          "to": "eight_cell",
+          "kind": "graded and biopsied at this stage"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "clinical",
+          "to": "tube_journey",
+          "kind": "nothing has implanted yet"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "no_growth"
+        }
+      ],
+      "narration": "Three things follow from the timetable. Laboratories grade embryos on cell number and evenness at days two and three, so what is normal on each day is a working clinical fact. A blastomere can be removed at eight cells for genetic testing, but blastomeres differ from one another, so the result is less reliable than one taken later. And for four days nothing is attached to the mother — which is the window in which post-coital contraception can still act, and the window a scarred tube shortens into an ectopic pregnancy."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-28"
+  },
+  "gaps": [
+    "Routed to its FIRST preferred mode, sequence. The curriculum lists sequence then diagram and no 3d option; the subject is an ordered process at cell scale over four days. Only diagram is deferred.",
+    "Status is 'planned'. Fourteen regions, eight beats, ops and narration are complete, but no artwork exists for the SVG engine, so nothing renders today. Promote to 'ready' once a drawing exists with the labelled regions this scene names: a row of stages from zygote through two, four and eight cells to a compacted morula, all drawn to the SAME outer diameter so the no-growth point is visible without narration; a cut morula showing inner cells sealed by an outer polarised layer; and a tube-and-uterus inset with the day marked at each position along it.",
+    "The size-constancy point in beat 2 depends entirely on the artwork keeping every stage the same outer diameter. If the illustration enlarges the later stages for legibility it teaches the opposite of the narration, so this constraint is a requirement of the drawing, not a preference.",
+    "Beat 1 traces concept:embryo-transit. The subject is the embryo's passage down the tube over four days; the waypoints are stages in time, not parts in space, which is what a sequence-mode trace is for.",
+    "Cleavage stops at the morula on purpose. Cavitation, the blastocoele, the inner cell mass proper and hatching all belong to 'Blastocyst', the next curriculum structure, and are named here only far enough to hand over. The inner and outer cell populations ARE claimed here because compaction — which creates them — is the teaching of this structure.",
+    "Twinning is narrated here and will be narrated again in the blastocyst scene, deliberately: the dichorionic-diamniotic split happens before day three and the monochorionic splits happen after, so a student meets the same rule from both sides. Neither scene claims a twinning curriculum entry.",
+    "Timings are the standard teaching ones — first division about thirty hours, eight cells at day three, morula reaching the uterus at day four, twelve to thirty-two cells in a morula — and are narrated as approximations for that reason. Genome activation is placed at the four-to-eight-cell stage, which is the human figure and differs from the mouse most primary literature uses."
+  ]
+}

@@ -1110,7 +1110,7 @@
   },
   "gaps": [
     "Sub-parts of a vertebra — body, pedicle, lamina, spinous and transverse processes, vertebral foramen — are not separate models in the catalog. They are taught here by cross-section and narration rather than as labelled parts.",
-    "Only the five lumbar discs are included, as context for the load and cross-section beats. The full set of cervical and thoracic discs exists in the catalog and can be added without changing any op.",
+    "All twenty-three intervertebral discs are included, C2/3 to L5/S1. An earlier version of this scene carried only the five lumbar ones and this note still said so after they were added.",
     "No calibrated landmark anchors were placed. Anchor coordinates must be measured on the source geometry, which was not available offline this run; guessed anchors would be worse than none.",
     "The column is complete from the atlas to the sacrum: all 24 vertebrae and all 23 intervertebral discs. Earlier versions of this scene showed only part of it, which left visible gaps in the stack and made two isolated vertebrae float on their own with nothing between them and the rest.",
     "The COCCYX is present but not separately modelled: it is segmented together with the sacrum as a single mesh, which is why the catalog lists no coccyx. Measured on that mesh, 104.0 mm of sacrum sits above a 41.3 mm midline tail — textbook proportions for both — so the coccyx is labelled with a measured landmark anchor rather than declared missing."

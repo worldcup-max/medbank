@@ -1,0 +1,675 @@
+{
+  "schema": 2,
+  "id": "gross__forearm-hand__flexor-compartment",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Forearm & Hand",
+  "structure": "Flexor compartment of forearm",
+  "covers": [
+    "Flexor compartment of forearm"
+  ],
+  "learning_goal": "Name the three layers of the flexor compartment, say what each muscle moves, and tell flexor digitorum superficialis from profundus by the phalanx its tendon ends on.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "forearm",
+      "anterior compartment of forearm",
+      "flexor compartment",
+      "upper limb",
+      "wrist",
+      "cubital fossa",
+      "elbow"
+    ],
+    "terms": [
+      "flexor compartment",
+      "anterior compartment of forearm",
+      "common flexor origin",
+      "medial epicondyle",
+      "pronator teres",
+      "flexor carpi radialis",
+      "palmaris longus",
+      "flexor carpi ulnaris",
+      "flexor digitorum superficialis",
+      "flexor digitorum profundus",
+      "flexor pollicis longus",
+      "pronator quadratus",
+      "wrist flexion",
+      "pronation",
+      "superficial flexors",
+      "deep flexors"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.006,
+    "initialYaw": 0.4
+  },
+  "structures": [
+    {
+      "key": "humerus",
+      "name": "right humerus",
+      "label": "Humerus",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e9e1cc",
+      "refs": {
+        "bodyparts3d": "FMA23130"
+      },
+      "terms": [
+        "humerus",
+        "medial epicondyle",
+        "common flexor origin"
+      ],
+      "narration": "Most of this compartment starts on one small bump: the medial epicondyle."
+    },
+    {
+      "key": "radius",
+      "name": "right radius",
+      "label": "Radius",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23464"
+      },
+      "terms": [
+        "radius",
+        "lateral bone of forearm"
+      ],
+      "narration": "The lateral bone. It rotates over the ulna in pronation."
+    },
+    {
+      "key": "ulna",
+      "name": "right ulna",
+      "label": "Ulna",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#e4dcc4",
+      "refs": {
+        "bodyparts3d": "FMA23467"
+      },
+      "terms": [
+        "ulna",
+        "medial bone of forearm",
+        "coronoid process"
+      ],
+      "narration": "The medial bone. It stays still while the radius turns."
+    },
+    {
+      "key": "iom",
+      "name": "interosseous membrane of right forearm",
+      "label": "Interosseous membrane",
+      "role": "context",
+      "group": "Bones",
+      "layer": "fascia",
+      "color": "#cbb9a0",
+      "refs": {
+        "bodyparts3d": "FMA23707"
+      },
+      "terms": [
+        "interosseous membrane",
+        "interosseous border",
+        "compartment boundary",
+        "force transmission"
+      ],
+      "narration": "The sheet between radius and ulna. It is what makes the forearm two compartments rather than one space, its fibres run downwards and medially from radius to ulna so that force landing on the hand is carried up to the ulna and the elbow, and both deep muscle layers take origin from it."
+    },
+    {
+      "key": "mc3",
+      "name": "right third metacarpal bone",
+      "label": "Third metacarpal",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24468"
+      },
+      "terms": [
+        "third metacarpal",
+        "metacarpal"
+      ],
+      "narration": "The middle finger ray — the line the long flexor tendons follow into the hand."
+    },
+    {
+      "key": "middle_phalanx",
+      "name": "middle phalanx of right middle finger",
+      "label": "Middle phalanx",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24456"
+      },
+      "terms": [
+        "middle phalanx",
+        "proximal interphalangeal joint",
+        "PIP joint"
+      ],
+      "narration": "Superficialis stops here. That is why it bends the PIP joint and nothing beyond it."
+    },
+    {
+      "key": "distal_phalanx",
+      "name": "distal phalanx of right middle finger",
+      "label": "Distal phalanx",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0b45c",
+      "refs": {
+        "bodyparts3d": "FMA24461"
+      },
+      "terms": [
+        "distal phalanx",
+        "distal interphalangeal joint",
+        "DIP joint"
+      ],
+      "narration": "Profundus goes all the way here. It is the only muscle that bends the DIP joint."
+    },
+    {
+      "key": "flexor_retinaculum",
+      "name": "flexor retinaculum of right wrist",
+      "label": "Flexor retinaculum",
+      "role": "context",
+      "group": "Retinaculum",
+      "layer": "fascia",
+      "color": "#cbb9a0",
+      "refs": {
+        "bodyparts3d": "FMA40120"
+      },
+      "terms": [
+        "flexor retinaculum",
+        "transverse carpal ligament",
+        "roof of the carpal tunnel"
+      ],
+      "narration": "A tough band across the front of the wrist. The long flexor tendons pass under it."
+    },
+    {
+      "key": "pronator_teres_humeral",
+      "name": "humeral head of right pronator teres",
+      "label": "Pronator teres — humeral head",
+      "role": "part",
+      "group": "Pronator teres",
+      "layer": "muscle",
+      "color": "#c23a3a",
+      "refs": {
+        "bodyparts3d": "FMA38560"
+      },
+      "terms": [
+        "pronator teres",
+        "humeral head of pronator teres",
+        "medial epicondyle"
+      ],
+      "narration": "From the medial epicondyle. It is the most lateral of the superficial group and forms the medial border of the cubital fossa."
+    },
+    {
+      "key": "pronator_teres_ulnar",
+      "name": "ulnar head of right pronator teres",
+      "label": "Pronator teres — ulnar head",
+      "role": "part",
+      "group": "Pronator teres",
+      "layer": "muscle",
+      "color": "#b8352f",
+      "refs": {
+        "bodyparts3d": "FMA38562"
+      },
+      "terms": [
+        "ulnar head of pronator teres",
+        "coronoid process"
+      ],
+      "narration": "From the coronoid process of the ulna. The median nerve runs between the two heads — the site of pronator syndrome."
+    },
+    {
+      "key": "fcr",
+      "name": "right flexor carpi radialis",
+      "label": "Flexor carpi radialis",
+      "role": "part",
+      "group": "Flexor carpi radialis",
+      "layer": "muscle",
+      "color": "#d85a4a",
+      "refs": {
+        "bodyparts3d": "FMA38460"
+      },
+      "terms": [
+        "flexor carpi radialis",
+        "FCR",
+        "radial pulse landmark"
+      ],
+      "narration": "Runs to the base of the second metacarpal. Its tendon is the landmark you feel the radial pulse just lateral to."
+    },
+    {
+      "key": "palmaris_longus",
+      "name": "right palmaris longus",
+      "label": "Palmaris longus",
+      "role": "part",
+      "group": "Palmaris longus",
+      "layer": "muscle",
+      "color": "#e07a5f",
+      "refs": {
+        "bodyparts3d": "FMA38463"
+      },
+      "terms": [
+        "palmaris longus",
+        "palmar aponeurosis",
+        "absent in some people"
+      ],
+      "narration": "The thin one in the middle. Absent in about one person in seven, and the one surgeons harvest for grafts."
+    },
+    {
+      "key": "fcu_humeral",
+      "name": "humeral head of right flexor carpi ulnaris",
+      "label": "Flexor carpi ulnaris — humeral head",
+      "role": "part",
+      "group": "Flexor carpi ulnaris",
+      "layer": "muscle",
+      "color": "#a8443c",
+      "refs": {
+        "bodyparts3d": "FMA38617"
+      },
+      "terms": [
+        "flexor carpi ulnaris",
+        "FCU",
+        "humeral head"
+      ],
+      "narration": "From the medial epicondyle, like the rest of the superficial group."
+    },
+    {
+      "key": "fcu_ulnar",
+      "name": "ulnar head of right flexor carpi ulnaris",
+      "label": "Flexor carpi ulnaris — ulnar head",
+      "role": "part",
+      "group": "Flexor carpi ulnaris",
+      "layer": "muscle",
+      "color": "#93382f",
+      "refs": {
+        "bodyparts3d": "FMA38619"
+      },
+      "terms": [
+        "ulnar head of flexor carpi ulnaris",
+        "olecranon",
+        "ulnar nerve"
+      ],
+      "narration": "From the olecranon and the back of the ulna. The ulnar nerve enters the forearm between the two heads."
+    },
+    {
+      "key": "fds_humeroulnar",
+      "name": "humeroulnar head of right flexor digitorum superficialis",
+      "label": "Flexor digitorum superficialis — humeroulnar head",
+      "role": "part",
+      "group": "Flexor digitorum superficialis",
+      "layer": "muscle",
+      "color": "#a83a6a",
+      "refs": {
+        "bodyparts3d": "FMA38638"
+      },
+      "terms": [
+        "flexor digitorum superficialis",
+        "FDS",
+        "humeroulnar head",
+        "middle layer"
+      ],
+      "narration": "The middle layer sits by itself, deep to the four superficial muscles and superficial to the deep three."
+    },
+    {
+      "key": "fds_radial",
+      "name": "radial head of right flexor digitorum superficialis",
+      "label": "Flexor digitorum superficialis — radial head",
+      "role": "part",
+      "group": "Flexor digitorum superficialis",
+      "layer": "muscle",
+      "color": "#94305c",
+      "refs": {
+        "bodyparts3d": "FMA38640"
+      },
+      "terms": [
+        "radial head of flexor digitorum superficialis",
+        "tendinous arch"
+      ],
+      "narration": "The two heads arch over the median nerve and ulnar artery as they enter the forearm."
+    },
+    {
+      "key": "fdp",
+      "name": "right flexor digitorum profundus",
+      "label": "Flexor digitorum profundus",
+      "role": "part",
+      "group": "Flexor digitorum profundus",
+      "layer": "muscle",
+      "color": "#7e2b52",
+      "refs": {
+        "bodyparts3d": "FMA38479"
+      },
+      "terms": [
+        "flexor digitorum profundus",
+        "FDP",
+        "distal phalanx",
+        "DIP flexion"
+      ],
+      "narration": "The only muscle that flexes the distal interphalangeal joints. Its tendons pierce those of superficialis on the way."
+    },
+    {
+      "key": "fpl",
+      "name": "right flexor pollicis longus",
+      "label": "Flexor pollicis longus",
+      "role": "part",
+      "group": "Flexor pollicis longus",
+      "layer": "muscle",
+      "color": "#6f2a63",
+      "refs": {
+        "bodyparts3d": "FMA38482"
+      },
+      "terms": [
+        "flexor pollicis longus",
+        "FPL",
+        "thumb flexion",
+        "anterior interosseous nerve"
+      ],
+      "narration": "Bends the thumb at its interphalangeal joint. Supplied by the anterior interosseous nerve."
+    },
+    {
+      "key": "pronator_quadratus",
+      "name": "right pronator quadratus",
+      "label": "Pronator quadratus",
+      "role": "part",
+      "group": "Pronator quadratus",
+      "layer": "muscle",
+      "color": "#5d2a6e",
+      "refs": {
+        "bodyparts3d": "FMA38454"
+      },
+      "terms": [
+        "pronator quadratus",
+        "distal forearm",
+        "pronation"
+      ],
+      "narration": "A flat square across the front of the distal forearm. It is the prime pronator; pronator teres joins in when speed or force is needed."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "See it in the body",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "The flexor compartment is the front of the forearm. Everything here bends the wrist or the fingers, or turns the palm down."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Layer one: the superficial four",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Pronator teres",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Flexor carpi radialis",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Palmaris longus",
+          "intensity": 0.6
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Flexor carpi ulnaris",
+          "intensity": 0.6
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Four superficial muscles, all from the medial epicondyle. Lateral to medial: pronator teres, flexor carpi radialis, palmaris longus, flexor carpi ulnaris."
+    },
+    {
+      "mode": "location",
+      "beat": 3,
+      "title": "Layer two: superficialis alone",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Pronator teres"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Flexor carpi radialis"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Palmaris longus"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Flexor carpi ulnaris"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Flexor digitorum superficialis",
+          "intensity": 0.7
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Take the four off and one muscle is left in the middle layer: flexor digitorum superficialis, with a humeroulnar head and a radial head."
+    },
+    {
+      "mode": "location",
+      "beat": 4,
+      "title": "Layer three: the deep three",
+      "ops": [
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Flexor digitorum superficialis"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Flexor digitorum profundus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Flexor pollicis longus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Pronator quadratus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Three deep muscles lie straight on the bones: profundus on the ulna, flexor pollicis longus on the radius, pronator quadratus across both at the wrist."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Cut across the forearm",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "y",
+          "offset": 0,
+          "animate": true
+        }
+      ],
+      "narration": "In cross-section the three layers stack front to back, with radius and ulna behind them. Learn the compartment as layers and the cross-section reads itself."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 6,
+      "title": "Radial versus ulnar pull",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Flexor carpi radialis",
+            "Flexor carpi ulnaris"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        }
+      ],
+      "narration": "Both flex the wrist. Flexor carpi radialis also pulls it to the thumb side, flexor carpi ulnaris to the little finger side. Together they flex straight."
+    },
+    {
+      "mode": "contraction_filter",
+      "beat": 7,
+      "title": "Superficialis versus profundus",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Flexor digitorum superficialis",
+            "Flexor digitorum profundus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fds_humeroulnar",
+          "to": "middle_phalanx",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fdp",
+          "to": "distal_phalanx",
+          "kind": "inserts on"
+        }
+      ],
+      "narration": "The whole difference is where the tendon stops. Superficialis ends on the middle phalanx and bends the PIP joint. Profundus ends on the distal phalanx and bends the DIP joint. Hold the other fingers straight and ask the patient to bend one — that is how you test each."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 8,
+      "title": "Follow profundus into the hand",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Flexor digitorum profundus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Bones"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Retinaculum"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fdp",
+          "path": [
+            "ulna",
+            "flexor_retinaculum",
+            "mc3",
+            "distal_phalanx"
+          ],
+          "duration": 10
+        }
+      ],
+      "narration": "From the upper ulna, down the forearm, under the flexor retinaculum, along the finger, to the distal phalanx. One muscle belly, four long tendons."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 9,
+      "title": "Lift the retinaculum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "fascia",
+          "direction": "outward"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Flexor digitorum profundus",
+          "intensity": 0.7
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Flexor pollicis longus",
+          "intensity": 0.7
+        }
+      ],
+      "narration": "Take the retinaculum away and the long flexor tendons are exposed where they crowd through the wrist. That crowded space is the carpal tunnel, and the median nerve is in there with them."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 10,
+      "title": "Turning the palm down",
+      "ops": [
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "Pronator teres",
+            "Pronator quadratus"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pronator_teres_humeral",
+          "to": "radius",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pronator_quadratus",
+          "to": "radius",
+          "kind": "inserts on"
+        }
+      ],
+      "narration": "Both pronators grip the radius and swing it across the ulna. Pronator quadratus works every time; pronator teres is added for power."
+    }
+  ],
+  "gaps": [
+    "The catalog holds no nerve or artery meshes for the upper limb, so the median nerve between the heads of pronator teres, the ulnar nerve between the heads of flexor carpi ulnaris, and the radial and ulnar arteries are taught in narration only. Nerve supply — median nerve to everything here except flexor carpi ulnaris and the ulnar half of profundus — cannot be shown as a structure.",
+    "Pronator teres, flexor carpi ulnaris and flexor digitorum superficialis have no whole-muscle mesh; each is authored from its two heads, which is anatomically finer and teaches the nerve relationships better, but a student list will show two entries per muscle.",
+    "There is no mesh for the common flexor origin, the bicipital aponeurosis or the antebrachial fascia, so those attachments are described rather than shown. The interosseous membrane is NOT missing — FMA23707 is in the catalog and is authored as a part of the Radius & ulna scene — and it is the boundary this compartment is defined by, so it should be added here.",
+    "Only the middle finger is drawn as phalanges, so the four-tendon fan of superficialis and profundus is shown on one digit and described for the rest. That is a choice, not a limit: the catalog holds the proximal, middle and distal phalanges of all four fingers, and adding them would let the fan be shown on every digit the beat talks about."
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-26"
+  }
+}

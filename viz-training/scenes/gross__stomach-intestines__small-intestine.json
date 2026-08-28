@@ -1,0 +1,786 @@
+{
+  "schema": 2,
+  "id": "gross__stomach-intestines__small-intestine",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Stomach & Intestines",
+  "structure": "Small intestine",
+  "covers": [
+    "Small intestine"
+  ],
+  "learning_goal": "Name the three parts of the small intestine and say which is fixed and which is mobile, walk the four parts of the duodenum and their relations, tell jejunum from ileum on six features at a spotter table, follow the superior mesenteric artery to the gut it supplies, and explain how the wall is built for absorption.",
+  "status": "ready",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "small intestine",
+      "small bowel",
+      "duodenum",
+      "jejunum",
+      "ileum",
+      "midgut",
+      "foregut",
+      "abdomen",
+      "mesentery",
+      "superior mesenteric artery",
+      "intestinal obstruction",
+      "absorption",
+      "gastrointestinal tract"
+    ],
+    "terms": [
+      "small intestine",
+      "small bowel",
+      "duodenum",
+      "first part of the duodenum",
+      "duodenal cap",
+      "duodenal bulb",
+      "superior part of the duodenum",
+      "second part of the duodenum",
+      "descending part of the duodenum",
+      "third part of the duodenum",
+      "horizontal part of the duodenum",
+      "fourth part of the duodenum",
+      "ascending part of the duodenum",
+      "C-shaped",
+      "retroperitoneal",
+      "secondarily retroperitoneal",
+      "major duodenal papilla",
+      "ampulla of Vater",
+      "hepatopancreatic ampulla",
+      "sphincter of Oddi",
+      "minor duodenal papilla",
+      "bile duct",
+      "pancreatic duct",
+      "duodenojejunal flexure",
+      "ligament of Treitz",
+      "suspensory muscle of the duodenum",
+      "L2",
+      "jejunum",
+      "ileum",
+      "jejunum versus ileum",
+      "plicae circulares",
+      "valvulae conniventes",
+      "circular folds",
+      "villi",
+      "microvilli",
+      "brush border",
+      "crypts of Lieberkuhn",
+      "Brunner's glands",
+      "Peyer's patches",
+      "aggregated lymphoid follicles",
+      "goblet cells",
+      "mesentery",
+      "root of the mesentery",
+      "mesenteric border",
+      "antimesenteric border",
+      "vasa recta",
+      "arterial arcades",
+      "windows",
+      "fat encroachment",
+      "superior mesenteric artery",
+      "SMA",
+      "L1",
+      "jejunal arteries",
+      "ileal arteries",
+      "ileocolic artery",
+      "marginal artery",
+      "superior mesenteric vein",
+      "portal vein",
+      "midgut",
+      "foregut",
+      "midgut rotation",
+      "malrotation",
+      "ileocaecal junction",
+      "ileocaecal valve",
+      "caecum",
+      "appendix",
+      "terminal ileum",
+      "vitamin B12",
+      "bile salts",
+      "enterohepatic circulation",
+      "Meckel's diverticulum",
+      "rule of twos",
+      "vitellointestinal duct",
+      "intussusception",
+      "small bowel obstruction",
+      "valvulae conniventes on plain film",
+      "central gas shadows",
+      "adhesions",
+      "strangulated hernia",
+      "ileocaecal tuberculosis",
+      "typhoid",
+      "enteric fever",
+      "Peyer's patch ulceration",
+      "ileal perforation",
+      "ascariasis",
+      "segmentation",
+      "peristalsis",
+      "migrating motor complex",
+      "SMA syndrome",
+      "superior mesenteric artery syndrome"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum",
+      "role": "part",
+      "group": "Small intestine",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "duodenal cap",
+        "duodenal bulb",
+        "C-shaped",
+        "second part of the duodenum",
+        "third part of the duodenum",
+        "fourth part of the duodenum",
+        "retroperitoneal",
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "duodenojejunal flexure",
+        "ligament of Treitz",
+        "duodenal ulcer",
+        "SMA syndrome"
+      ],
+      "narration": "Twelve finger-breadths long, hence the name, and shaped like a letter C lying on its back around the head of the pancreas. Only its first inch is mobile; the rest is secondarily retroperitoneal, plastered to the posterior wall, which is why it does not have a mesentery and does not move. It is the junction of two embryological guts: everything above the entry of the bile duct is foregut and coeliac territory, everything below is midgut and superior mesenteric territory. That single line explains the whole of its blood supply and the referral of its pain."
+    },
+    {
+      "key": "jejunum",
+      "name": "jejunum",
+      "label": "Jejunum",
+      "role": "part",
+      "group": "Small intestine",
+      "layer": "organ",
+      "color": "#d68910",
+      "refs": {
+        "bodyparts3d": "FMA7207"
+      },
+      "terms": [
+        "jejunum",
+        "upper left quadrant",
+        "thick wall",
+        "wide lumen",
+        "plicae circulares",
+        "valvulae conniventes",
+        "long vasa recta",
+        "one or two arcades",
+        "windows",
+        "deep red"
+      ],
+      "narration": "The upper two fifths of the mobile small bowel, lying mostly in the upper left quadrant. Pick it up and it is thick-walled, wide, and deep red because it is well supplied. Its mesentery is almost fat-free near the gut, so you can see through the windows between the vessels, and its vasa recta are long and straight, arising from only one or two arcades. Its mucosal folds — the plicae circulares — are tall and closely set, which is what makes the jejunum the main site of absorption and what makes obstructed jejunum look like a stack of coins on a plain film."
+    },
+    {
+      "key": "ileum",
+      "name": "ileum",
+      "label": "Ileum",
+      "role": "part",
+      "group": "Small intestine",
+      "layer": "organ",
+      "color": "#b9770e",
+      "refs": {
+        "bodyparts3d": "FMA7208"
+      },
+      "terms": [
+        "ileum",
+        "terminal ileum",
+        "right iliac fossa",
+        "thin wall",
+        "narrow lumen",
+        "short vasa recta",
+        "four or five arcades",
+        "fat encroachment",
+        "Peyer's patches",
+        "vitamin B12",
+        "bile salts",
+        "Meckel's diverticulum",
+        "ileocaecal junction",
+        "ileocaecal tuberculosis"
+      ],
+      "narration": "The lower three fifths, lying mostly in the pelvis and the right iliac fossa, ending at the ileocaecal junction. It is thinner, narrower and paler than jejunum, its mesentery is loaded with fat right up to the bowel wall so there are no windows, and its vasa recta are short and arise from four or five tiers of arcades. Its folds are low and sparse. Its distinguishing feature is lymphoid: Peyer's patches on the antimesenteric border, which is where typhoid ulcerates and perforates. The last few centimetres — the terminal ileum — are the only place in the body that absorbs vitamin B12 and bile salts, so resect them and you get megaloblastic anaemia and fatty stools."
+    },
+    {
+      "key": "sma",
+      "name": "superior mesenteric artery",
+      "label": "Superior mesenteric artery",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#c0392b",
+      "refs": {
+        "bodyparts3d": "FMA14749"
+      },
+      "terms": [
+        "superior mesenteric artery",
+        "SMA",
+        "L1",
+        "midgut artery",
+        "jejunal arteries",
+        "ileal arteries",
+        "arcades",
+        "vasa recta",
+        "ileocolic artery",
+        "SMA syndrome",
+        "mesenteric ischaemia",
+        "malrotation"
+      ],
+      "narration": "The artery of the midgut, leaving the front of the aorta at L1, one centimetre below the coeliac trunk. It passes forward over the third part of the duodenum and enters the root of the mesentery, giving twelve to fifteen jejunal and ileal branches from its left side and the ileocolic and colic branches from its right. Because the whole midgut hangs on this one artery, an embolus into it kills bowel from the duodenojejunal flexure to two thirds of the way along the transverse colon — pain out of all proportion to the physical signs."
+    },
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein",
+      "role": "part",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "portal vein",
+        "on the right of the artery",
+        "neck of the pancreas",
+        "portal circulation"
+      ],
+      "narration": "Runs up the root of the mesentery on the right of its artery and joins the splenic vein behind the neck of the pancreas to form the portal vein. Everything absorbed from the small intestine except the long-chain fats goes to the liver first. The fats go into lacteals instead, up the thoracic duct, and reach the blood at the root of the neck — which is why they bypass the liver's first pass entirely."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct & the ampulla",
+      "role": "part",
+      "group": "What drains into it",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "pancreatic duct",
+        "duct of Wirsung",
+        "major duodenal papilla",
+        "ampulla of Vater",
+        "hepatopancreatic ampulla",
+        "sphincter of Oddi",
+        "accessory pancreatic duct",
+        "minor duodenal papilla",
+        "gallstone pancreatitis",
+        "ERCP"
+      ],
+      "narration": "The main pancreatic duct joins the bile duct and the two open together on the major duodenal papilla, halfway down the posteromedial wall of the second part of the duodenum. That common channel is the hepatopancreatic ampulla, guarded by the sphincter of Oddi. It explains gallstone pancreatitis: a stone impacted at the ampulla blocks pancreatic outflow as well as bile, and the patient gets jaundice and pancreatitis together."
+    },
+    {
+      "key": "gallbladder",
+      "name": "gallbladder",
+      "label": "Gallbladder & biliary drainage",
+      "role": "part",
+      "group": "What drains into it",
+      "layer": "organ",
+      "color": "#7d8c1f",
+      "refs": {
+        "bodyparts3d": "FMA7202"
+      },
+      "terms": [
+        "gallbladder",
+        "bile duct",
+        "common bile duct",
+        "cystic duct",
+        "bile",
+        "enterohepatic circulation",
+        "obstructive jaundice"
+      ],
+      "narration": "Bile is stored here and delivered to the second part of the duodenum through the bile duct. Ninety-five per cent of the bile salts released are reabsorbed in the terminal ileum and sent back to the liver — the enterohepatic circulation. That is a closed loop running the length of the small intestine, and cutting either end of it breaks fat absorption."
+    },
+    {
+      "key": "appendix",
+      "name": "appendix",
+      "label": "Appendix — the end of the road",
+      "role": "part",
+      "group": "Where it ends",
+      "layer": "organ",
+      "color": "#af601a",
+      "refs": {
+        "bodyparts3d": "FMA14542"
+      },
+      "terms": [
+        "appendix",
+        "caecum",
+        "ileocaecal junction",
+        "ileocaecal valve",
+        "right iliac fossa",
+        "McBurney's point",
+        "terminal ileum",
+        "ileocaecal tuberculosis",
+        "Meckel's diverticulum"
+      ],
+      "narration": "The ileum ends by opening into the caecum in the right iliac fossa, and the appendix hangs from the caecum just below that opening. Use the appendix to find the junction: the three taeniae of the caecum converge on its base. Two conditions live at this corner and are easily confused with appendicitis — ileocaecal tuberculosis, which is common in Nigeria, and a Meckel's diverticulum, which sits two feet proximal to the valve on the antimesenteric border of the ileum in about two per cent of people."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "stomach",
+        "pylorus",
+        "gastric emptying",
+        "chyme"
+      ],
+      "narration": "Delivers chyme through the pylorus a few millilitres at a time. The small intestine never receives a meal in one go, which is what allows an organ a few centimetres wide to handle it."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "porta hepatis",
+        "portal vein",
+        "first pass"
+      ],
+      "narration": "Sits above and in front of the duodenum and receives everything the small bowel absorbs, by way of the portal vein."
+    },
+    {
+      "key": "right_kidney",
+      "name": "right kidney",
+      "label": "Right kidney",
+      "role": "context",
+      "group": "Duodenal bed",
+      "layer": "organ",
+      "color": "#884ea0",
+      "refs": {
+        "bodyparts3d": "FMA7204"
+      },
+      "terms": [
+        "right kidney",
+        "hilum of the right kidney",
+        "right ureter",
+        "second part of the duodenum",
+        "retroperitoneal"
+      ],
+      "narration": "The hilum of the right kidney lies directly behind the second part of the duodenum. So does the right ureter. Both are at risk in surgery on that part, and both explain why duodenal disease can produce back pain."
+    },
+    {
+      "key": "left_kidney",
+      "name": "left kidney",
+      "label": "Left kidney",
+      "role": "context",
+      "group": "Duodenal bed",
+      "layer": "organ",
+      "color": "#8e44ad",
+      "refs": {
+        "bodyparts3d": "FMA7205"
+      },
+      "terms": [
+        "left kidney",
+        "fourth part of the duodenum",
+        "left renal vein",
+        "duodenojejunal flexure"
+      ],
+      "narration": "Lies behind the fourth part of the duodenum on the left of the aorta. The left renal vein crosses the aorta in the same fork as the third part of the duodenum, which is why an abnormally acute angle at the origin of the superior mesenteric artery compresses both."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Duodenal bed",
+      "layer": "vessel",
+      "color": "#922b21",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "L1",
+        "L3",
+        "superior mesenteric artery origin",
+        "inferior mesenteric artery",
+        "third part of the duodenum"
+      ],
+      "narration": "The third part of the duodenum crosses in front of the aorta at L3, held between the aorta behind and the superior mesenteric artery in front. That sandwich is the whole of superior mesenteric artery syndrome: lose the fat pad between the two vessels and the duodenum is pinched shut."
+    },
+    {
+      "key": "celiac",
+      "name": "celiac artery",
+      "label": "Coeliac trunk",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#cb4335",
+      "refs": {
+        "bodyparts3d": "FMA50737"
+      },
+      "terms": [
+        "coeliac trunk",
+        "celiac trunk",
+        "foregut",
+        "gastroduodenal artery",
+        "superior pancreaticoduodenal artery",
+        "T12"
+      ],
+      "narration": "Supplies the duodenum down as far as the entry of the bile duct, through the gastroduodenal and superior pancreaticoduodenal arteries. Below that line the supply comes from the superior mesenteric. The two anastomose in the pancreaticoduodenal arcade, so the duodenum is the one place where the foregut and midgut circulations meet."
+    },
+    {
+      "key": "ima",
+      "name": "inferior mesenteric artery",
+      "label": "Inferior mesenteric artery",
+      "role": "context",
+      "group": "Blood supply",
+      "layer": "vessel",
+      "color": "#d35400",
+      "refs": {
+        "bodyparts3d": "FMA14750"
+      },
+      "terms": [
+        "inferior mesenteric artery",
+        "hindgut",
+        "L3",
+        "marginal artery"
+      ],
+      "narration": "Included only to fix the three midline gut arteries in order: coeliac at T12 for the foregut, superior mesenteric at L1 for the midgut, inferior mesenteric at L3 for the hindgut. The small intestine belongs to the first two, never the third."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum",
+      "role": "context",
+      "group": "Neighbours",
+      "layer": "organ",
+      "color": "#a569bd",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "rectum",
+        "pelvis",
+        "coils of ileum",
+        "rectovesical pouch",
+        "pouch of Douglas"
+      ],
+      "narration": "Marks the floor of the abdomen for orientation. Coils of ileum drop into the pelvis in front of the rectum, which is why pelvic collections irritate small bowel and why free fluid gathers there first."
+    }
+  ],
+  "views": [
+    {
+      "mode": "location",
+      "beat": 1,
+      "title": "Three parts, six metres",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "Small intestine",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "duodenum",
+          "kind": "empties into"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ileum",
+          "to": "appendix",
+          "kind": "ends beside"
+        }
+      ],
+      "narration": "Duodenum, jejunum, ileum — about six metres in the cadaver and rather shorter in life because of muscle tone. Divide it by mobility, not by length. The duodenum is fixed to the back wall and cannot be delivered out of a wound. The jejunum and ileum hang on a mesentery and can be run through your fingers metre by metre, which is exactly what the surgeon does looking for a perforation. The jejunum takes the upper two fifths, the ileum the lower three, and there is no line between them — only a change in character."
+    },
+    {
+      "mode": "location",
+      "beat": 2,
+      "title": "Walking the duodenum",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "duodenum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Duodenal bed"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "What drains into it"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "duodenum",
+          "path": [
+            "duodenum",
+            "pancreatic_duct",
+            "right_kidney",
+            "aorta",
+            "left_kidney"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "pancreatic_duct",
+          "to": "duodenum",
+          "kind": "opens on the major papilla"
+        }
+      ],
+      "narration": "Four parts, and each is remembered by what lies behind it. The first runs back and up for five centimetres; only its first inch is intraperitoneal, and the gastroduodenal artery is behind it. The second descends on the right of L1 to L3 with the hilum of the right kidney behind and the bile and pancreatic ducts entering its posteromedial wall. The third runs left across the aorta and the inferior vena cava at L3, under the superior mesenteric vessels. The fourth ascends on the left of the aorta to L2 and turns forward at the duodenojejunal flexure, held up by the suspensory muscle of the duodenum — the ligament of Treitz — which is the surgical landmark for the start of the jejunum and the dividing line between upper and lower gastrointestinal bleeding."
+    },
+    {
+      "mode": "comparison",
+      "beat": 3,
+      "title": "Jejunum or ileum",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "jejunum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "ileum"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "jejunum",
+            "ileum"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "jejunum",
+          "intensity": 0.85
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ileum",
+          "intensity": 0.85
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        }
+      ],
+      "narration": "Six features, and you will be asked for them. Position: jejunum upper left, ileum lower right and pelvic. Wall: jejunum thick, ileum thin. Lumen: jejunum wide, ileum narrow. Folds: jejunum tall and crowded, ileum low and sparse, absent at the end. Mesentery: jejunum has clear windows and long straight vasa recta from one or two arcades, ileum is fat-laden with short vasa recta from four or five arcades. Lymphoid tissue: scattered in jejunum, aggregated into Peyer's patches in ileum. Hold a loop up to the light in theatre and the arcades alone will tell you where you are."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 4,
+      "title": "One artery holds the midgut",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Blood supply"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Small intestine"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "sma",
+          "intensity": 0.9
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:arterial-blood",
+          "path": [
+            "aorta",
+            "sma",
+            "jejunum",
+            "ileum"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "sma",
+          "to": "duodenum",
+          "kind": "crosses in front of the third part"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "celiac",
+            "sma"
+          ],
+          "layout": "side-by-side"
+        }
+      ],
+      "narration": "The coeliac trunk supplies the duodenum down to the major papilla; the superior mesenteric supplies it from there onwards and every centimetre of jejunum and ileum after it. The two meet in the pancreaticoduodenal arcade, the only anastomosis between foregut and midgut supply. Within the mesentery the branches form arcades and send vasa recta to the bowel wall — and those vasa recta are end arteries. Occlude one and you get a segmental infarct, which is why a mesenteric tear matters as much as a bowel tear."
+    },
+    {
+      "mode": "cross_section",
+      "beat": 5,
+      "title": "Built for absorption",
+      "ops": [
+        {
+          "op": "ISOLATE_REGION",
+          "target": "jejunum"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "lateral"
+        },
+        {
+          "op": "CROSS_SECTION",
+          "axis": "z",
+          "offset": 0.0,
+          "animate": true
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "jejunum",
+          "intensity": 0.8
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Cut across and the surface area is multiplied three times over. First the plicae circulares — permanent circular folds of mucosa and submucosa that do not flatten when the bowel distends, which is why they show as lines crossing the whole width of the bowel on a plain abdominal film. Then the villi, finger-like projections of mucosa, each with a central lacteal and a capillary net. Then the microvilli of the brush border on every enterocyte. Between the villi are the crypts of Lieberkuhn, which is where new cells are made and why the lining renews itself every few days. The duodenum adds Brunner's glands in its submucosa, secreting alkaline mucus to neutralise the acid arriving from the stomach — one of only two places in the gut with glands in the submucosa. The other is the oesophagus."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 6,
+      "title": "Follow it through",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Small intestine"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:chyme",
+          "path": [
+            "stomach",
+            "duodenum",
+            "jejunum",
+            "ileum",
+            "appendix"
+          ],
+          "duration": 10
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "ileum",
+          "intensity": 0.9
+        }
+      ],
+      "narration": "Two movements, not one. Segmentation is the commoner: rings of circular muscle contract and relax at intervals, chopping the column and mixing it with bile, pancreatic juice and intestinal secretion — it moves contents almost nowhere but it is what absorption depends on. Peristalsis carries it forward, and between meals a migrating motor complex sweeps the empty bowel clean every ninety minutes or so. A meal takes three to five hours to travel from pylorus to caecum. The ileocaecal valve then holds it back long enough for the terminal ileum to take up bile salts and vitamin B12, and stops colonic bacteria coming the other way."
+    },
+    {
+      "mode": "location",
+      "beat": 7,
+      "title": "Where it goes wrong",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "ileum"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "appendix"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "jejunum"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "appendix",
+          "intensity": 0.8
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "ileum",
+          "to": "appendix",
+          "kind": "ileocaecal junction"
+        }
+      ],
+      "narration": "Obstruction is the classic emergency: colicky central pain, vomiting early if the block is high, distension late, and central gas shadows crossed by valvulae conniventes on the film. In Nigeria the leading causes are adhesions, strangulated external hernia and, in children, intussusception and heavy Ascaris load. Two things at the ileocaecal corner mimic appendicitis: ileocaecal tuberculosis and a Meckel's diverticulum. Learn Meckel's by the rule of twos — two per cent of people, two feet from the valve, two inches long, two tissue types, and it usually presents before the age of two. And typhoid ulcerates the Peyer's patches of the terminal ileum, so an enteric fever in the third week that suddenly develops a rigid abdomen has perforated."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "gaps": [
+    "The duodenum is one model. The catalog holds no separate superior, descending, horizontal or ascending part, no duodenal cap, no major or minor duodenal papilla and no duodenojejunal flexure, so beat 2 walks the four parts by tracing along the duodenum and lighting each posterior relation in turn — the bed teaches the part. Every part name and the ligament of Treitz are in terms[], so a note naming any of them opens this scene.",
+    "No landmark anchors were authored. None of the meshes named here is in the local decimated set, so the duodenojejunal flexure, the major papilla and the ileocaecal junction could not be placed by measurement, and this corpus does not place anchors by eye. Ingesting FMA7206, FMA7207 and FMA7208 locally would allow at least three measured anchors — the duodenojejunal flexure as a duodenum-to-jejunum contact, the ileocaecal junction as an ileum-to-appendix contact, and the major papilla as the duodenum-to-pancreatic-duct contact.",
+    "There is no caecum and no colon wall of any kind in the catalog. The large-gut meshes that do exist are the three taeniae coli (FMA76891, FMA76892, FMA76893), the appendix, the rectum and the external anal sphincter — an earlier version of this note said only the appendix and the rectum, which the Large intestine scene disproved. So the ileum's ending is taught through the appendix, which hangs from the caecum a couple of centimetres below the ileocaecal opening and whose base is found by the converging taeniae. That is option (b) of the resolution rule, teaching a structure through an adjacent one that exists, and the label says what is being shown. The ileocaecal valve itself is narrated and not drawn.",
+    "No mesentery and no peritoneum. The root of the mesentery, its fifteen-centimetre oblique line from the duodenojejunal flexure to the right sacroiliac joint, the windows, and the fat encroachment that distinguishes ileum from jejunum are all narrated in beats 1 and 3 and all in terms[], but a double fold of peritoneum has no model. This is the single biggest omission in the scene, because half of the jejunum-versus-ileum answer is a statement about the mesentery. 'Peritoneum & mesentery' is its own curriculum entry and is still unauthored.",
+    "No pancreas mesh exists — only the pancreatic duct, FMA10419 — so the head of the pancreas, which the duodenum curves around and which is the whole reason the C is a C, is represented by the duct that runs through it. The label says so.",
+    "Villi, microvilli, crypts of Lieberkuhn, Brunner's glands and Peyer's patches are microscopic and belong to a microscopic-mode scene. They are taught here in narration because plicae circulares, villi and microvilli are one continuous idea about surface area and a student meets them together, but the corpus should carry a histology scene for the small intestine wall and this scene should link to it once it exists.",
+    "Jejunal and ileal arteries, the arcades and the vasa recta have no meshes; beat 4 traces from the aorta through the superior mesenteric artery to the two segments of bowel and narrates the arcade pattern. The pancreaticoduodenal arcade, which is the anastomosis between foregut and midgut supply, is named and not drawn.",
+    "The inferior mesenteric artery is carried as context purely to fix the T12 / L1 / L3 sequence in the student's head. It supplies no part of the small intestine, and its narration says so, so that nobody reads its presence as a claim."
+  ]
+}

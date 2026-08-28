@@ -1,0 +1,803 @@
+{
+  "schema": 2,
+  "id": "gross__liver-biliary-tract-pancreas-spleen__portal-venous-system",
+  "mode": "3d_anatomy",
+  "deferred_modes": [
+    "diagram"
+  ],
+  "course": "Gross Anatomy",
+  "topic": "Liver, Biliary Tract, Pancreas & Spleen",
+  "structure": "Portal venous system",
+  "covers": [
+    "Portal venous system"
+  ],
+  "learning_goal": "Say which two veins form the portal vein and where, list what drains into the portal system and what drains into the caval system, name the four porto-systemic anastomoses with the portal and systemic vein at each site, and use them to predict where a patient with portal hypertension bleeds and why the blood bypasses the liver.",
+  "status": "candidate",
+  "provider": {
+    "primary": "bodyparts3d",
+    "fallbacks": []
+  },
+  "match": {
+    "topics": [
+      "portal venous system",
+      "portal vein",
+      "portal circulation",
+      "porto-systemic anastomosis",
+      "portal hypertension",
+      "oesophageal varices",
+      "abdomen",
+      "liver",
+      "cirrhosis",
+      "gastrointestinal bleeding",
+      "haematemesis",
+      "ascites",
+      "haemorrhoids",
+      "schistosomiasis",
+      "gut venous drainage"
+    ],
+    "terms": [
+      "portal vein",
+      "hepatic portal vein",
+      "portal venous system",
+      "portal circulation",
+      "two capillary beds",
+      "no valves",
+      "superior mesenteric vein",
+      "splenic vein",
+      "inferior mesenteric vein",
+      "portal confluence",
+      "behind the neck of the pancreas",
+      "left gastric vein",
+      "coronary vein",
+      "right gastric vein",
+      "cystic vein",
+      "paraumbilical veins",
+      "superior rectal vein",
+      "middle rectal vein",
+      "inferior rectal vein",
+      "internal iliac vein",
+      "azygos vein",
+      "hemiazygos vein",
+      "inferior vena cava",
+      "caval system",
+      "systemic veins",
+      "porto-systemic anastomosis",
+      "portosystemic shunt",
+      "sites of anastomosis",
+      "lower end of the oesophagus",
+      "oesophageal varices",
+      "esophageal varices",
+      "gastric varices",
+      "anal canal",
+      "dentate line",
+      "haemorrhoids",
+      "internal haemorrhoids",
+      "umbilicus",
+      "caput medusae",
+      "ligamentum teres",
+      "falciform ligament",
+      "retroperitoneal veins",
+      "veins of Retzius",
+      "patent ductus venosus",
+      "portal hypertension",
+      "portal pressure",
+      "hepatic venous pressure gradient",
+      "cirrhosis",
+      "schistosomiasis",
+      "hepatic schistosomiasis",
+      "pipe stem fibrosis",
+      "portal vein thrombosis",
+      "budd chiari syndrome",
+      "prehepatic",
+      "intrahepatic",
+      "posthepatic",
+      "splenomegaly",
+      "congestive splenomegaly",
+      "hypersplenism",
+      "ascites",
+      "haematemesis",
+      "melaena",
+      "variceal bleeding",
+      "TIPSS",
+      "transjugular intrahepatic portosystemic shunt",
+      "splenorenal shunt",
+      "first pass metabolism",
+      "portal pyaemia",
+      "liver metastases",
+      "foregut midgut hindgut",
+      "hepatopetal",
+      "hepatofugal"
+    ]
+  },
+  "camera": {
+    "framing": "anterior",
+    "autoRotate": 0.005,
+    "initialYaw": 0.2
+  },
+  "structures": [
+    {
+      "key": "smv",
+      "name": "superior mesenteric vein",
+      "label": "Superior mesenteric vein — the midgut half",
+      "role": "part",
+      "group": "Portal tributaries",
+      "layer": "vessel",
+      "color": "#2874a6",
+      "refs": {
+        "bodyparts3d": "FMA14332"
+      },
+      "terms": [
+        "superior mesenteric vein",
+        "midgut drainage",
+        "right of its artery",
+        "portal confluence",
+        "neck of the pancreas",
+        "portal vein",
+        "jejunal and ileal veins",
+        "ileocolic vein",
+        "right colic vein",
+        "middle colic vein"
+      ],
+      "narration": "Runs up in the root of the mesentery on the right side of its own artery, collecting the jejunal, ileal, ileocolic, right colic and middle colic veins — the whole midgut, from the second part of the duodenum to the distal transverse colon. Behind the neck of the pancreas it meets the splenic vein. It is the larger of the two contributors, which is why it is the vessel a surgeon assesses first when deciding whether a pancreatic head tumour is resectable."
+    },
+    {
+      "key": "splenic_v",
+      "name": "splenic vein",
+      "label": "Splenic vein — the foregut and hindgut half",
+      "role": "part",
+      "group": "Portal tributaries",
+      "layer": "vessel",
+      "color": "#5499c7",
+      "refs": {
+        "bodyparts3d": "FMA14331"
+      },
+      "terms": [
+        "splenic vein",
+        "behind the body of the pancreas",
+        "inferior mesenteric vein",
+        "short gastric veins",
+        "left gastroepiploic vein",
+        "portal confluence",
+        "splenic vein thrombosis",
+        "left sided portal hypertension"
+      ],
+      "narration": "Leaves the splenic hilum and runs a straight course behind the body of the pancreas. On the way it takes the short gastric and left gastroepiploic veins from the stomach and, in most people, the inferior mesenteric vein carrying the whole hindgut. It joins the superior mesenteric vein behind the neck of the pancreas. Because it lies on the back of the pancreas, pancreatic disease thromboses it — and that gives isolated gastric varices in a patient whose liver is normal, called left-sided or sinistral portal hypertension."
+    },
+    {
+      "key": "liver",
+      "name": "liver",
+      "label": "Liver — the first capillary bed's destination",
+      "role": "part",
+      "group": "Portal tributaries",
+      "layer": "organ",
+      "color": "#8e4a2f",
+      "refs": {
+        "bodyparts3d": "FMA7197"
+      },
+      "terms": [
+        "liver",
+        "portal vein",
+        "porta hepatis",
+        "sinusoids",
+        "two capillary beds",
+        "first pass metabolism",
+        "seventy five percent of hepatic blood",
+        "cirrhosis",
+        "portal hypertension",
+        "liver metastases",
+        "hepatopetal flow"
+      ],
+      "narration": "The whole point of the system. Blood that has already passed through one capillary bed in the gut passes through a second in the liver sinusoids before it ever reaches the heart. That is what a portal system means, and everything that follows depends on it: oral drugs are metabolised on first pass, gut bacteria are filtered before they reach the circulation, absorbed nutrients are processed before they are distributed, and gut cancers seed the liver before anywhere else. When fibrosis obstructs those sinusoids, the pressure in front of them rises — and since portal veins have no valves, the blood simply reverses and looks for another way home."
+    },
+    {
+      "key": "ivc",
+      "name": "inferior vena cava",
+      "label": "Inferior vena cava — the systemic side",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#5b8def",
+      "refs": {
+        "bodyparts3d": "FMA10951"
+      },
+      "terms": [
+        "inferior vena cava",
+        "caval system",
+        "systemic veins",
+        "hepatic veins",
+        "right atrium",
+        "T8",
+        "budd chiari syndrome",
+        "posthepatic portal hypertension"
+      ],
+      "narration": "The systemic destination, and the vessel every porto-systemic anastomosis is trying to reach. Portal blood normally arrives here only after crossing the liver, by the hepatic veins. In portal hypertension it arrives by other routes instead — and each of those routes is a place a patient can bleed. Block the cava or the hepatic veins themselves and you have post-hepatic portal hypertension: Budd-Chiari, or constrictive pericarditis, or right heart failure."
+    },
+    {
+      "key": "esophagus",
+      "name": "esophagus",
+      "label": "Oesophagus — site 1, the dangerous one",
+      "role": "part",
+      "group": "Anastomotic sites",
+      "layer": "organ",
+      "color": "#c39bd3",
+      "refs": {
+        "bodyparts3d": "FMA7131"
+      },
+      "terms": [
+        "lower end of the oesophagus",
+        "oesophageal varices",
+        "esophageal varices",
+        "left gastric vein",
+        "coronary vein",
+        "oesophageal branches of the azygos vein",
+        "haematemesis",
+        "melaena",
+        "band ligation",
+        "sengstaken tube",
+        "terlipressin"
+      ],
+      "narration": "Site one and the one that kills. In the submucosa at the lower end of the oesophagus, the oesophageal tributaries of the left gastric vein — a portal vessel — meet the oesophageal tributaries of the azygos vein, which is systemic. Raise the portal pressure and this thin-walled submucosal plexus dilates into varices sitting directly under the mucosa of a tube that food is pushed down twice a day. They rupture without warning and bleed torrentially: haematemesis and melaena in a patient with stigmata of chronic liver disease. Learn the pair of veins, not just the site — left gastric to azygos — because that is what is asked."
+    },
+    {
+      "key": "rectum",
+      "name": "rectum",
+      "label": "Rectum and anal canal — site 2",
+      "role": "part",
+      "group": "Anastomotic sites",
+      "layer": "organ",
+      "color": "#a04000",
+      "refs": {
+        "bodyparts3d": "FMA14544"
+      },
+      "terms": [
+        "anal canal",
+        "dentate line",
+        "pectinate line",
+        "superior rectal vein",
+        "middle rectal vein",
+        "inferior rectal vein",
+        "internal haemorrhoids",
+        "haemorrhoids",
+        "internal iliac vein",
+        "inferior mesenteric vein"
+      ],
+      "narration": "Site two. Above the dentate line the superior rectal vein drains to the inferior mesenteric vein and so into the portal system; below it the middle and inferior rectal veins drain to the internal iliac vein and so into the cava. The two plexuses communicate in the wall of the anal canal. Note the caution the examiners like: haemorrhoids are common in people with entirely normal portal pressure, so they are a real anastomosis but a poor sign of portal hypertension. True portal hypertensive anorectal varices are a different and much rarer thing."
+    },
+    {
+      "key": "external_anal_sphincter",
+      "name": "external anal sphincter",
+      "label": "External anal sphincter — marking the anal canal below the line",
+      "role": "part",
+      "group": "Anastomotic sites",
+      "layer": "muscle",
+      "color": "#873600",
+      "refs": {
+        "bodyparts3d": "FMA21930"
+      },
+      "terms": [
+        "external anal sphincter",
+        "anal canal",
+        "below the dentate line",
+        "inferior rectal vein",
+        "external haemorrhoids",
+        "somatic innervation",
+        "painful"
+      ],
+      "narration": "Drawn to show where the lower half of the anal canal actually is, because the rectum mesh stops short of it. Everything at and below this level is systemic territory: inferior rectal vein to the internal pudendal to the internal iliac, and somatic innervation from the pudendal nerve — which is why disease below the line hurts and disease above it does not."
+    },
+    {
+      "key": "left_internal_iliac_v",
+      "name": "left internal iliac vein",
+      "label": "Internal iliac vein — the systemic partner at site 2",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#7fb3d5",
+      "refs": {
+        "bodyparts3d": "FMA18888"
+      },
+      "terms": [
+        "internal iliac vein",
+        "middle rectal vein",
+        "inferior rectal vein",
+        "common iliac vein",
+        "inferior vena cava",
+        "systemic drainage of the anal canal"
+      ],
+      "narration": "The systemic half of the anorectal anastomosis. Middle and inferior rectal veins reach it, it joins the external iliac to form the common iliac, and that reaches the cava — bypassing the liver entirely."
+    },
+    {
+      "key": "left_renal_v",
+      "name": "left renal vein",
+      "label": "Left renal vein — the surgical shunt and the retroperitoneal route",
+      "role": "part",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#85c1e9",
+      "refs": {
+        "bodyparts3d": "FMA14336"
+      },
+      "terms": [
+        "left renal vein",
+        "splenorenal shunt",
+        "retroperitoneal anastomosis",
+        "veins of Retzius",
+        "bare areas",
+        "spontaneous shunt",
+        "inferior vena cava"
+      ],
+      "narration": "Two roles. It is the systemic vessel used in a surgical splenorenal shunt, where the splenic vein is joined to it to decompress the portal system deliberately. It also marks the fourth, silent anastomosis: over the bare areas of the liver and behind the ascending and descending colon, small retroperitoneal veins — the veins of Retzius — connect portal tributaries to the renal, lumbar and phrenic veins. These bleed at laparotomy rather than into the gut, which is why a patient with portal hypertension is a difficult abdomen to open."
+    },
+    {
+      "key": "stomach",
+      "name": "stomach",
+      "label": "Stomach — where the left gastric vein runs",
+      "role": "part",
+      "group": "Anastomotic sites",
+      "layer": "organ",
+      "color": "#d98880",
+      "refs": {
+        "bodyparts3d": "FMA7148"
+      },
+      "terms": [
+        "left gastric vein",
+        "coronary vein",
+        "right gastric vein",
+        "short gastric veins",
+        "gastric varices",
+        "lesser curvature",
+        "cardia",
+        "portal hypertensive gastropathy"
+      ],
+      "narration": "The left gastric vein runs along the lesser curvature to the cardia and then down to the portal vein, and its oesophageal tributaries are the portal half of site one. The short gastric veins from the fundus go the other way, into the splenic vein — which is why splenic vein thrombosis produces gastric varices without oesophageal ones. Nothing about site one makes sense without the stomach in the picture."
+    },
+    {
+      "key": "spleen",
+      "name": "spleen",
+      "label": "Spleen — the pressure gauge",
+      "role": "part",
+      "group": "Portal tributaries",
+      "layer": "organ",
+      "color": "#7b3f5e",
+      "refs": {
+        "bodyparts3d": "FMA7196"
+      },
+      "terms": [
+        "spleen",
+        "congestive splenomegaly",
+        "splenomegaly",
+        "hypersplenism",
+        "pancytopenia",
+        "banti syndrome",
+        "schistosomiasis",
+        "portal hypertension"
+      ],
+      "narration": "The spleen drains into the portal system through the splenic vein and has nowhere else to go, so it swells as portal pressure rises. Congestive splenomegaly is often the first physical sign, and a big spleen that traps platelets and white cells gives the pancytopenia of hypersplenism. In much of West Africa the commonest cause of this picture is not alcohol but hepatic schistosomiasis, where periportal pipe-stem fibrosis raises portal pressure while liver function stays close to normal — a large spleen and varices in a patient who is not jaundiced."
+    },
+    {
+      "key": "pancreatic_duct",
+      "name": "pancreatic duct",
+      "label": "Pancreatic duct — marking the neck, where the two veins meet",
+      "role": "part",
+      "group": "Portal tributaries",
+      "layer": "organ",
+      "color": "#f4d03f",
+      "refs": {
+        "bodyparts3d": "FMA10419"
+      },
+      "terms": [
+        "neck of the pancreas",
+        "portal confluence",
+        "behind the neck of the pancreas",
+        "pancreatic duct",
+        "pancreatic head tumour",
+        "resectability",
+        "splenic vein thrombosis"
+      ],
+      "narration": "The duct runs the length of the gland, so it shows where the pancreas lies and, at its midpoint, where the neck is. The confluence happens directly behind that neck. Hold onto the position: it is why a tumour in the head or neck of the pancreas obstructs the portal vein and is declared unresectable, and why chronic pancreatitis thromboses the splenic vein."
+    },
+    {
+      "key": "duodenum",
+      "name": "duodenum",
+      "label": "Duodenum — the foregut-midgut boundary",
+      "role": "context",
+      "group": "Drainage territories",
+      "layer": "organ",
+      "color": "#e59866",
+      "refs": {
+        "bodyparts3d": "FMA7206"
+      },
+      "terms": [
+        "duodenum",
+        "second part of the duodenum",
+        "major duodenal papilla",
+        "foregut",
+        "midgut",
+        "pancreaticoduodenal veins",
+        "duodenal varices"
+      ],
+      "narration": "The watershed. Everything down to the major duodenal papilla is foregut and drains through the gastric and pancreaticoduodenal veins; everything beyond it is midgut and drains to the superior mesenteric vein. Both ends are portal, so the boundary matters for arteries and for embryology more than for venous destination — but the duodenum earns its place here because its retroperitoneal surfaces host one of the rarer anastomoses, and duodenal varices bleed in patients who have never had an oesophageal one."
+    },
+    {
+      "key": "jejunum",
+      "name": "jejunum",
+      "label": "Jejunum — midgut territory",
+      "role": "context",
+      "group": "Drainage territories",
+      "layer": "organ",
+      "color": "#f0b27a",
+      "refs": {
+        "bodyparts3d": "FMA7207"
+      },
+      "terms": [
+        "jejunum",
+        "jejunal veins",
+        "midgut",
+        "superior mesenteric vein",
+        "absorption",
+        "first pass metabolism"
+      ],
+      "narration": "Where most absorption happens, and every absorbed molecule leaves in a jejunal vein bound for the superior mesenteric vein and the liver. This is the anatomical basis of first-pass metabolism, and the reason a sublingual or rectal route partly escapes it."
+    },
+    {
+      "key": "ileum",
+      "name": "ileum",
+      "label": "Ileum — midgut territory",
+      "role": "context",
+      "group": "Drainage territories",
+      "layer": "organ",
+      "color": "#eb984e",
+      "refs": {
+        "bodyparts3d": "FMA7208"
+      },
+      "terms": [
+        "ileum",
+        "ileal veins",
+        "ileocolic vein",
+        "midgut",
+        "superior mesenteric vein"
+      ],
+      "narration": "Drains by ileal and ileocolic veins into the superior mesenteric vein. Included to show the size of the territory feeding one side of the confluence."
+    },
+    {
+      "key": "appendix",
+      "name": "appendix",
+      "label": "Appendix — how infection reaches the liver",
+      "role": "context",
+      "group": "Drainage territories",
+      "layer": "organ",
+      "color": "#dc7633",
+      "refs": {
+        "bodyparts3d": "FMA14542"
+      },
+      "terms": [
+        "appendix",
+        "appendicular vein",
+        "ileocolic vein",
+        "portal pyaemia",
+        "pylephlebitis",
+        "liver abscess",
+        "appendicitis"
+      ],
+      "narration": "A small structure with a large teaching point. Its vein joins the ileocolic and so the portal system, so suppurative appendicitis can send infected thrombus up the portal vein — pylephlebitis, or portal pyaemia — and produce liver abscesses. Any intra-abdominal sepsis in portal territory can do the same."
+    },
+    {
+      "key": "ima",
+      "name": "inferior mesenteric artery",
+      "label": "Inferior mesenteric artery — marking the hindgut territory",
+      "role": "context",
+      "group": "Drainage territories",
+      "layer": "vessel",
+      "color": "#b03a2e",
+      "refs": {
+        "bodyparts3d": "FMA14750"
+      },
+      "terms": [
+        "inferior mesenteric artery",
+        "inferior mesenteric vein",
+        "hindgut",
+        "descending colon",
+        "sigmoid colon",
+        "superior rectal vein",
+        "splenic vein"
+      ],
+      "narration": "Standing in for its vein, which the catalog does not hold. The artery marks the hindgut territory exactly — descending colon, sigmoid and upper rectum — and the inferior mesenteric vein drains that same territory, but instead of running back alongside the artery it ascends to the left of the duodenojejunal flexure and joins the splenic vein. Its lowest tributary is the superior rectal vein, which is the portal half of site two."
+    },
+    {
+      "key": "aorta",
+      "name": "descending aorta",
+      "label": "Aorta",
+      "role": "context",
+      "group": "Systemic veins",
+      "layer": "vessel",
+      "color": "#7b241c",
+      "refs": {
+        "bodyparts3d": "FMA3784"
+      },
+      "terms": [
+        "abdominal aorta",
+        "descending aorta",
+        "retroperitoneum"
+      ],
+      "narration": "Drawn only as a positional reference for the retroperitoneum, so the confluence and the renal vein can be placed against something familiar."
+    }
+  ],
+  "views": [
+    {
+      "mode": "vasculature",
+      "beat": 1,
+      "title": "Two veins make a third, behind the neck of the pancreas",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Portal tributaries"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "pancreatic_duct"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "smv",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "splenic_v",
+          "intensity": 0.9
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "smv",
+          "to": "splenic_v",
+          "kind": "unite behind the neck of the pancreas to form the portal vein"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "splenic_v",
+          "to": "liver",
+          "kind": "the portal vein continues to the porta hepatis"
+        }
+      ],
+      "narration": "There is no portal vein until two veins meet. The superior mesenteric vein comes up from the midgut on the right of its artery; the splenic vein comes across from the left behind the body of the pancreas, having already collected the inferior mesenteric vein. Behind the neck of the pancreas they unite, and from that point the vessel is the portal vein — about eight centimetres long, running up in the free edge of the lesser omentum behind the bile duct and the hepatic artery, dividing at the porta hepatis into right and left branches. Three things define it. It has no valves, so raised pressure is transmitted backwards without obstruction. It carries about three-quarters of the liver's blood. And it begins and ends in capillaries, which is what makes it a portal system at all."
+    },
+    {
+      "mode": "vasculature",
+      "beat": 2,
+      "title": "What drains into it — the whole gut from the abdominal oesophagus to the upper rectum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Systemic veins"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "ISOLATE_REGION",
+          "target": "Drainage territories"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Portal tributaries"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:portal-blood",
+          "path": [
+            "jejunum",
+            "ileum",
+            "smv",
+            "liver"
+          ],
+          "duration": 8
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:portal-blood",
+          "path": [
+            "ima",
+            "splenic_v",
+            "liver"
+          ],
+          "duration": 7
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "appendix",
+          "to": "liver",
+          "kind": "portal pyaemia reaches the liver this way"
+        }
+      ],
+      "narration": "The portal system drains the whole gastrointestinal tract from the abdominal oesophagus to the upper part of the rectum, plus the spleen, the pancreas and the gallbladder. Assemble it in three parcels. Foregut — lower oesophagus, stomach, duodenum to the papilla, pancreas, liver and gallbladder — drains by the left and right gastric veins, the pancreaticoduodenal veins and the cystic vein. Midgut — the rest of the duodenum, jejunum, ileum, caecum, ascending and most of the transverse colon — drains by the superior mesenteric vein. Hindgut — the remaining transverse colon, descending colon, sigmoid and upper rectum — drains by the inferior mesenteric vein into the splenic vein. Everything in those three parcels goes through the liver before it reaches the heart. That is why oral drugs are metabolised on first pass, why gut bacteria are filtered rather than released into the circulation, why appendicitis can seed liver abscesses, and why colorectal cancer metastasises to the liver first."
+    },
+    {
+      "mode": "comparison",
+      "beat": 3,
+      "title": "Site one — the lower oesophagus, left gastric to azygos",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "esophagus"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "stomach"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "splenic_v"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "spleen"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "esophagus",
+          "intensity": 0.95
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "stomach",
+          "to": "esophagus",
+          "kind": "left gastric vein meets the oesophageal veins here"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-flow",
+          "path": [
+            "splenic_v",
+            "stomach",
+            "esophagus"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "When the liver obstructs flow, portal blood reverses and escapes wherever portal and systemic veins touch. There are four such places, and this is the first and the most dangerous. In the submucosa at the lower end of the oesophagus, oesophageal tributaries of the left gastric vein — portal — anastomose with oesophageal tributaries of the azygos vein — systemic. Under pressure this plexus becomes varices: thin-walled veins bulging into the lumen of a tube that swallows solid food. Rupture gives sudden painless haematemesis with melaena in a patient who may have spider naevi, palmar erythema, ascites and a large spleen. Management follows the anatomy: resuscitate, terlipressin to drop splanchnic inflow, endoscopic band ligation of the varices, balloon tamponade if bleeding continues, and a TIPSS — a channel made inside the liver between the portal and hepatic veins — to decompress the system when everything else fails. Note that a shunt relieves the pressure at the cost of sending unfiltered gut blood to the brain, which is why encephalopathy follows."
+    },
+    {
+      "mode": "comparison",
+      "beat": 4,
+      "title": "Sites two, three and four — anal canal, umbilicus, retroperitoneum",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Anastomotic sites"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "Systemic veins"
+        },
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "liver"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "rectum",
+            "left_internal_iliac_v"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "rectum",
+          "to": "left_internal_iliac_v",
+          "kind": "superior rectal meets middle and inferior rectal veins"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "liver",
+          "to": "left_renal_v",
+          "kind": "retroperitoneal veins of Retzius"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-flow",
+          "path": [
+            "rectum",
+            "left_internal_iliac_v",
+            "ivc"
+          ],
+          "duration": 7
+        }
+      ],
+      "narration": "Site two is the anal canal. Above the dentate line the superior rectal vein drains to the inferior mesenteric vein and so is portal; below it the middle and inferior rectal veins drain to the internal iliac vein and so are systemic. Remember the caveat: ordinary haemorrhoids are not a sign of portal hypertension, though anorectal varices exist and are different. Site three is the umbilicus. Paraumbilical veins run in the falciform ligament alongside the ligamentum teres — the remains of the left umbilical vein — and meet the superficial epigastric and thoracoepigastric veins of the abdominal wall. When they reopen the result is caput medusae, dilated veins radiating from the umbilicus with flow directed away from it. Site four is the retroperitoneum: over the bare areas of the liver and behind the ascending and descending colon, small veins connect portal tributaries to the renal, lumbar and phrenic veins. They rarely bleed into the gut, but they bleed at surgery. Two more sites are worth naming for completeness — a patent ductus venosus, and adhesions or stomas where gut meets abdominal wall, which is why stomal varices occur."
+    },
+    {
+      "mode": "mechanism",
+      "beat": 5,
+      "title": "Portal hypertension — before, within, and beyond the liver",
+      "ops": [
+        {
+          "op": "SHOW_STRUCTURE",
+          "target": "*"
+        },
+        {
+          "op": "HIDE_STRUCTURE",
+          "target": "Drainage territories"
+        },
+        {
+          "op": "ROTATE_TO_VIEW",
+          "view": "anterior"
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "liver",
+          "intensity": 0.9
+        },
+        {
+          "op": "HIGHLIGHT_STRUCTURE",
+          "target": "spleen",
+          "intensity": 0.8
+        },
+        {
+          "op": "COMPARE_STRUCTURES",
+          "targets": [
+            "liver",
+            "ivc"
+          ],
+          "layout": "side-by-side"
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "concept:collateral-flow",
+          "path": [
+            "smv",
+            "splenic_v",
+            "stomach",
+            "esophagus"
+          ],
+          "duration": 9
+        },
+        {
+          "op": "PEEL_LAYER",
+          "layer": "organ",
+          "direction": "inward"
+        }
+      ],
+      "narration": "Normal portal pressure is about five to ten millimetres of mercury; above twelve the collaterals open and varices bleed. Classify the cause by where the obstruction sits relative to the liver, because it decides the picture. Pre-hepatic — portal vein thrombosis, often from neonatal umbilical sepsis or from a hypercoagulable state, and splenic vein thrombosis from pancreatic disease: a big spleen and varices in a patient with normal liver function and no ascites. Intra-hepatic — cirrhosis from alcohol, chronic hepatitis B or C, or the periportal pipe-stem fibrosis of schistosomiasis, which is the commonest cause across much of West Africa: varices plus jaundice, ascites and encephalopathy, except in schistosomiasis where synthetic function is preserved for years. Post-hepatic — hepatic vein thrombosis in Budd-Chiari, constrictive pericarditis, or right heart failure: a tender enlarged liver and gross ascites, with the spleen affected later. Whatever the cause, the consequences are the same four and they are all visible in this scene: splenomegaly with hypersplenism, varices at the four anastomoses, ascites from portal pressure and low albumin together, and encephalopathy as gut nitrogen bypasses the liver. Reversed, hepatofugal flow on Doppler ultrasound is the confirmation."
+    }
+  ],
+  "provenance": {
+    "author": "task",
+    "authored_at": "2026-08-27"
+  },
+  "blocked_reason": [],
+  "gaps": [
+    "THE SUBJECT ITSELF HAS NO MESH. Searching all 934 catalog entries for portal returns nothing: there is no portal vein, no right or left branch, and no hepatic vein. The scene is status:\"candidate\" for exactly that reason and must not be treated as ready. It is authored as 3d_anatomy rather than dropped to its deferred diagram mode because option (b) applies honestly here — the portal vein is defined as the union of two veins that both exist and are both drawn, its start point is fixed by the pancreatic duct marking the neck of the pancreas, and its end point is the liver, which exists. Every beat says out loud where the vessel would be. A single portal vein mesh would move this scene to ready in one edit, and it is now the fifth consecutive scene in this topic to record the same gap. It is the highest-value acquisition in the abdomen alongside the bile duct.",
+    "There is no inferior mesenteric vein. The hindgut half of the portal inflow, and the parent of the superior rectal vein that forms the portal side of the anorectal anastomosis, is taught through the inferior mesenteric ARTERY under the explicit label 'Inferior mesenteric artery - marking the hindgut territory'. The artery marks the same territory but not the same course: the vein leaves the artery's side and ascends to the left of the duodenojejunal flexure to reach the splenic vein, and the narration says so rather than letting the geometry imply otherwise.",
+    "There is no left gastric vein, no azygos vein and no hemiazygos vein. Site one — the most examined porto-systemic anastomosis in the corpus — therefore has neither of its two named vessels. It is taught as a relation between the stomach and the oesophagus, both of which exist, with the two veins named in every narration and in match.terms. The azygos system is also absent from the mediastinum scene, so a single azygos and hemiazygos pair would improve two scenes at once.",
+    "There is no superior, middle or inferior rectal vein. Site two is taught by the rectum and the left internal iliac vein, which is true at the level of destination — above the dentate line to portal, below it to systemic — but the plexus in the wall of the anal canal cannot be shown. The external anal sphincter is drawn only to mark where the lower canal is, because the rectum mesh stops above it.",
+    "There are no paraumbilical veins, no falciform ligament, no ligamentum teres and no anterior abdominal wall veins, so site three — the umbilicus and caput medusae — has no structure at all in the scene and is narration only in beat four. This is the weakest beat and it will stay weak until either the peritoneal ligaments or the superficial abdominal wall veins are acquired.",
+    "There is no colon of any kind — no caecum, ascending, transverse, descending or sigmoid. Two-thirds of the hindgut and a large part of the midgut territory in beat two are therefore named but not drawn, and the retroperitoneal anastomoses behind the ascending and descending colon in beat four have nothing to sit behind. The caecum and colon set is outstanding from run 29 and now blocks a third scene.",
+    "There is no pancreas mesh, only the pancreatic duct, used here under the honest label 'Pancreatic duct - marking the neck, where the two veins meet'. The confluence is the single most important location in this scene and it is fixed against a line inside the gland rather than the gland's own surface.",
+    "The right internal iliac vein exists in the catalog as FMA18887 and was deliberately left out: one side is enough to teach the systemic destination and two would clutter beat four without adding a fact.",
+    "No landmark anchors were authored. The confluence behind the neck of the pancreas, the porta hepatis and the dentate line are all points that would teach far better clicked than narrated, but none of these meshes is in the local decimated set and anchors in this corpus are measured on real geometry, never typed in by eye.",
+    "The four anastomoses are ultimately a diagram subject as much as a spatial one — they are submucosal plexuses, invisible at organ scale. The curriculum keeps diagram as this structure's second mode and it is recorded in deferred_modes. When the SVG engine is used for this topic, a paired portal-and-systemic vessel chart would complement rather than replace this scene.",
+    "This scene does not claim to cover 'Liver', 'Spleen' or 'Pancreas', all of which appear in it as context or as parts of the pathway. Each has its own scene in this topic."
+  ]
+}
