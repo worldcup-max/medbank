@@ -21,7 +21,16 @@
   function fmtTime(s){ s=Math.floor(s||0); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
   function esc(x){ return String(x==null?"":x).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 
-  /* scroll to + flash the passage a card came from, inside the rendered note */
+  /* Scroll to the passage the current line came from and KEEP it lit — breathing, glow to dim and
+     back — until the next line takes over. A single 2.4s flash was gone before the host had finished
+     the sentence it belonged to, which made the follow-along feel broken rather than absent. Only the
+     matched phrase is wrapped, not its whole paragraph, so the eye lands on the right words. */
+  var _liveMark=null;
+  function clearLiveMark(){
+    try{ var m=_liveMark; _liveMark=null;
+      if(m && m.parentNode){ var p=m.parentNode; while(m.firstChild) p.insertBefore(m.firstChild,m); p.removeChild(m); p.normalize(); }
+    }catch(_){}
+  }
   function highlightIn(container, phrase){
     if(!container || !phrase) return;
     var needle=(""+phrase).toLowerCase().replace(/\s+/g," ").trim(); if(needle.length<4) return;
@@ -30,18 +39,31 @@
       var frag=tries[k]; if(frag.length<4) continue;
       var walker=document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null), node;
       while((node=walker.nextNode())){
-        var tx=(node.nodeValue||"").toLowerCase().replace(/\s+/g," ");
-        if(tx.indexOf(frag)>=0){
-          var el=node.parentElement; if(!el) return;
-          var prev=el.style.background;
-          el.style.transition="background .5s"; el.style.background="#fff3bf"; el.style.borderRadius="5px";
-          try{ el.scrollIntoView({block:"center",behavior:"smooth"}); }catch(_){ el.scrollIntoView(); }
-          setTimeout(function(){ el.style.background=prev||"transparent"; }, 2400);
-          return;
+        var raw=node.nodeValue||""; var tx=raw.toLowerCase();
+        var at=tx.indexOf(frag);
+        if(at<0){                                   // whitespace in the note may not match the phrase's
+          var flat=tx.replace(/\s+/g," ");          // — fall back to the paragraph itself
+          if(flat.indexOf(frag)<0) continue;
+          at=-1;
         }
+        clearLiveMark();
+        var mark=document.createElement("span"); mark.className="mbdock-live";
+        if(at>=0){
+          var end=at+frag.length;
+          var after=node.splitText(at); after.splitText(frag.length);
+          mark.appendChild(document.createTextNode(after.nodeValue));
+          after.parentNode.replaceChild(mark, after);
+        } else {                                     // couldn't isolate the words — light the whole node
+          var pnode=node.parentNode; if(!pnode) return;
+          pnode.insertBefore(mark, node); mark.appendChild(node);
+        }
+        _liveMark=mark;
+        try{ mark.scrollIntoView({block:"center",behavior:"smooth"}); }catch(_){ try{ mark.scrollIntoView(); }catch(__){} }
+        return;
       }
     }
   }
+  window.MB_DOCK_UNHIGHLIGHT = clearLiveMark;
 
   function inject(){
     if(injected) return; injected=true;
@@ -50,6 +72,9 @@
       "#mbDockTab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9996;background:linear-gradient(135deg,#6d28d9,#5b21b6);color:#fff;"+
         "border:0;border-radius:14px 0 0 14px;padding:26px 13px;font:800 15px/1 -apple-system,Segoe UI,Roboto,sans-serif;cursor:pointer;"+
         "writing-mode:vertical-rl;text-orientation:mixed;box-shadow:0 6px 22px rgba(91,33,182,.45);letter-spacing:1px;display:none}"+
+      "@keyframes mbdockGlow{0%,100%{background:rgba(255,214,64,.20);box-shadow:0 0 0 rgba(245,158,11,0)}50%{background:rgba(255,214,64,.85);box-shadow:0 0 14px rgba(245,158,11,.55)}}"+
+      ".mbdock-live{border-radius:5px;padding:1px 2px;margin:0 -2px;color:inherit;font-weight:600;animation:mbdockGlow 1.9s ease-in-out infinite}"+
+      "@media(prefers-reduced-motion:reduce){.mbdock-live{animation:none;background:rgba(255,214,64,.6)}}"+
       "#mbDockScrim{position:fixed;inset:0;z-index:100000;background:rgba(28,20,45,.4);opacity:0;transition:opacity .2s;pointer-events:none}"+
       "#mbDockScrim.on{opacity:1;pointer-events:auto}"+
       "#mbDock{position:fixed;top:0;right:0;bottom:0;z-index:100001;width:min(420px,92vw);background:#fff;box-shadow:-14px 0 44px rgba(28,20,45,.25);"+

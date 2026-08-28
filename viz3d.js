@@ -780,7 +780,10 @@
               '<button class="mb3d-btn" data-r="retry" style="display:none">↻ Retry</button>' +
               '<button class="mb3d-btn" data-r="tour">Tour parts</button>' +
               '<button class="mb3d-btn" data-r="ghost">Ghost others</button>' +
-              '<button class="mb3d-btn" data-r="solo">Only this</button></div>' +
+              '<button class="mb3d-btn" data-r="solo">Only this</button>' +
+              '<select class="mb3d-btn" data-r="speed" title="Narration speed" style="padding:7px 8px">' +
+                [0.75,0.9,1,1.25,1.5,1.75,2].map(function(v){ return '<option value="'+v+'"'+(v===1?' selected':'')+'>'+v+'\u00d7</option>'; }).join('') +
+              '</select></div>' +
           '</div>' +
         '</div>' +
         '<div class="mb3d-slider" data-r="cliprow" style="display:none">Cut plane<input type="range" data-r="clip" min="-1" max="1" step="0.01" value="0"></div>' +
@@ -1586,6 +1589,18 @@
     });
     $('tour').addEventListener('click', function () { tourTimer ? stopTour() : startTour(); });
     $('play').addEventListener('click', function () { playTimer ? stopPlay() : startPlay(); });
+    /* Narration speed. The player does not own the voice — the app does — so this just tells the app's
+       narrator how fast to read, and it takes effect on the line already playing. */
+    (function () {
+      var sp = $('speed'); if (!sp) return;
+      try { var r = parseFloat(localStorage.getItem('mb3d_speed')) || (window.mbVoiceRateGet ? window.mbVoiceRateGet() : 1);
+        sp.value = String(r); if (window.mbVoiceRate) window.mbVoiceRate(r); } catch (e) {}
+      sp.addEventListener('change', function () {
+        var r = parseFloat(this.value) || 1;
+        try { localStorage.setItem('mb3d_speed', String(r)); } catch (e) {}
+        try { if (window.mbVoiceRate) window.mbVoiceRate(r); } catch (e) {}
+      });
+    })();
     $('retry').addEventListener('click', retryFailed);
 
     /* ---------- play the scene as a short narrated sequence ----------

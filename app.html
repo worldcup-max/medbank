@@ -1603,10 +1603,22 @@ function ttsEl(){ if(!_ttsAudio){ _ttsAudio=new Audio(); _ttsAudio.preload='auto
 function unlockAudio(){ try{ const a=ttsEl(); if(_ttsUnlocked) return; a.src=SILENT_WAV; const p=a.play();
   if(p&&p.then) p.then(()=>{ _ttsUnlocked=true; }).catch(()=>{}); }catch(e){} }
 function stopCloud(){ try{ const a=ttsEl(); a.onended=null; a.pause(); }catch(e){} }
+/* One narration speed for the whole app. The players' speed controls used to set u.rate on a
+   SpeechSynthesisUtterance only — which the server-rendered voice never goes near — so picking 1.5×
+   changed nothing at all for anyone on the app narrator. Loading a new clip also resets playbackRate
+   to defaultPlaybackRate, so both are set, on every clip. */
+let _ttsRate=1;
+window.mbVoiceRate=function(r){ r=parseFloat(r)||1; _ttsRate=Math.max(0.5,Math.min(3,r));
+  try{ const a=ttsEl(); a.defaultPlaybackRate=_ttsRate; a.playbackRate=_ttsRate; }catch(e){}
+  return _ttsRate; };
+window.mbVoiceRateGet=function(){ return _ttsRate; };
 function playCloudSrc(src, cb){
   const a=ttsEl();
   a.onended=()=>cb&&cb(); a.onerror=()=>cb&&cb();
-  try{ a.src=src; const p=a.play(); if(p&&p.catch) p.catch(()=>cb&&cb()); }catch(e){ cb&&cb(); }
+  try{ a.src=src; a.defaultPlaybackRate=_ttsRate; a.playbackRate=_ttsRate;
+    const p=a.play(); if(p&&p.catch) p.catch(()=>cb&&cb());
+    try{ a.addEventListener('loadedmetadata',function _r(){ a.removeEventListener('loadedmetadata',_r); a.playbackRate=_ttsRate; }); }catch(e){}
+  }catch(e){ cb&&cb(); }
 }
 function cloudSpeak(text, cb){
   const ent=CLOUD_VOICES.find(v=>v.id===(DATA.settings.cloudVoice||'Joanna'))||CLOUD_VOICES[0];
@@ -1655,8 +1667,9 @@ async function serverSpeak(text, cb, use){
     _ttsBlobCache[key]=URL.createObjectURL(await r.blob()); playCloudSrc(_ttsBlobCache[key], cb); return true;   // cache so replays are instant
   }catch(e){ return false; }
 }
-function voiceSpeak(text, cb, use){
+function voiceSpeak(text, cb, use, rate){
   unlockAudio();
+  if(rate!=null) window.mbVoiceRate(rate);
   serverSpeak(text, cb, use).then(function(ok){ if(!ok){ if(cloudVoiceOn()) cloudSpeak(text, cb); else deviceSpeakThen(text, cb); } });
 }
 /* Pre-fetch an AI-voice clip WITHOUT playing it. Resolves to {play, cancel} once the audio is ready,
@@ -4373,7 +4386,8 @@ function podVoiceGrid(host){
   var sel=host==='A'?POD.voiceA:POD.voiceB;
   return '<div class="pavgrid">'+(POD.voices||[]).map(function(v){ var on=v.voice_id===sel;
     return '<button type="button" class="povatar'+(on?' on':'')+'" onclick="podPick(\''+host+'\',\''+v.voice_id+'\')" title="'+esc(v.name)+'">'
-      +'<span class="pav-face">'+podAvatarSVG(v.voice_id)+(on?'<span class="pav-chk">✓</span>':'')+'</span>'
+      +'<span class="pav-face">'+podAvatarSVG(v.voice_id)+(on?'<span class="pav-chk">✓</span>':'')
+        +'<span class="pav-play" role="button" title="Hear '+esc(v.name)+'" onclick="podPlaySample(\''+v.voice_id+'\',event)">▶</span></span>'
       +'<span class="pav-name">'+esc(v.name)+'</span></button>'; }).join('')+'</div>';
 }
 let POD={topicId:null};
@@ -4411,7 +4425,7 @@ function renderPodcast(t){
 function podEnter(id,name){
   podAudioEl();
   if(POD.topicId!==id){ podStopAudio();
-    POD={ topicId:id, topicName:name||'', mode:null, lines:null, urls:null, voices:POD.voices||null, voiceA:POD.voiceA||null, voiceB:POD.voiceB||null, i:0, playing:false, speed:1, volume:(POD.volume==null?1:POD.volume), inserts:{}, phase:'mode', raise:false };
+    POD={ topicId:id, topicName:name||'', mode:null, lines:null, urls:null, voices:POD.voices||null, voiceA:POD.voiceA||null, voiceB:POD.voiceB||null, i:0, playing:false, speed:(function(){ try{ return parseFloat(localStorage.getItem('pod_speed'))||1; }catch(e){ return 1; } })(), volume:(POD.volume==null?1:POD.volume), inserts:{}, phase:'mode', raise:false };
     var saved=null,savedMode=null; try{ saved=localStorage.getItem('pod_combo_'+id); savedMode=localStorage.getItem('pod_mode_'+id); }catch(e){}
     if(saved && savedMode){ POD.mode=savedMode; podLoadScript(id, savedMode, true); return; }   // instant replay of what they already made
     podPaint(); return;                                                                     // otherwise: pick a format first
@@ -4538,10 +4552,10 @@ function podLoadLine(i,autoplay){
   var c=podClips(); if(!c.length) return;
   POD.i=Math.max(0,Math.min(i,(POD.lines?POD.lines.length:1)-1));
   var k=podClipIdx(POD.i), clip=c[k], a=podAudioEl();
-  a.playbackRate=POD.speed; a.volume=(POD.volume==null?1:POD.volume);
+  a.defaultPlaybackRate=POD.speed||1; a.playbackRate=POD.speed||1; a.volume=(POD.volume==null?1:POD.volume);
   var seekOff=function(){ try{ var o=clip.dur?podClipLineFrac(clip,POD.i)*clip.dur:0; if(o>0) a.currentTime=Math.min(o,(a.duration||o)); }catch(e){} };
   if(a.getAttribute('src')===clip.url){ seekOff(); if(autoplay) a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }
-  else { a.src=clip.url; var h=function(){ a.removeEventListener('loadedmetadata',h); seekOff(); if(autoplay) a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }; a.addEventListener('loadedmetadata',h); }
+  else { a.src=clip.url; var h=function(){ a.removeEventListener('loadedmetadata',h); a.playbackRate=POD.speed||1; seekOff(); if(autoplay) a.play().then(function(){POD.playing=true;podPaint();}).catch(function(){}); }; a.addEventListener('loadedmetadata',h); }
   try{ localStorage.setItem('pod_pos_'+POD.topicId, String(POD.i)); }catch(e){}
   try{ POD._pre=POD._pre||{}; if(c[k+1]&&!POD._pre[k+1]){ var pa=new Audio(); pa.preload='auto'; pa.src=c[k+1].url; POD._pre[k+1]=pa; } }catch(e){}   // preload next clip → gapless
   podUpdateMediaArt();
@@ -4579,7 +4593,7 @@ function podOpenNote(){ try{ var ln=POD.lines&&POD.lines[POD.i]; var src=ln&&ln.
 function podNext(){ if(!podClips().length) return; if(POD.i<POD.lines.length-1) podLoadLine(POD.i+1,true); else { POD.playing=false; podPaint(); } }
 function podPrev(){ if(!podClips().length) return; podLoadLine(Math.max(0,POD.i-1),true); }
 function podJump(i){ podLoadLine(i,true); }
-function podSpeed(){ const arr=[1,1.1,1.25,1.5,0.85,0.9]; POD.speed=arr[(arr.indexOf(POD.speed)+1)%arr.length]||1; podAudioEl().playbackRate=POD.speed; podPaint(); }
+function podSpeed(){ const arr=[1,1.1,1.25,1.5,0.85,0.9]; podSetSpeed(arr[(arr.indexOf(POD.speed)+1)%arr.length]||1); }
 /* ---- time-based scrubbing across the per-line clips ---- */
 function podFmt(s){ s=Math.max(0,Math.floor(s||0)); var m=Math.floor(s/60), ss=s%60; return m+':'+(ss<10?'0':'')+ss; }
 function podDurBefore(k){ var c=podClips(),a=0; for(var j=0;j<k;j++) a+=(c[j].dur||0); return a; }
@@ -4611,7 +4625,7 @@ function podSeekFrac(frac){
   var clip=c[k], off=T-acc, was=POD.playing, a=podAudioEl();
   POD.i = clip.dur? podClipLineAt(clip,(off/(clip.dur||1))) : clip.from;
   if(a.getAttribute('src')===clip.url){ try{ a.currentTime=Math.min(off,(a.duration||off)); }catch(e){} podPaintTimes(); return; }
-  a.src=clip.url; a.playbackRate=POD.speed; a.volume=(POD.volume==null?1:POD.volume);
+  a.src=clip.url; a.defaultPlaybackRate=POD.speed||1; a.playbackRate=POD.speed||1; a.volume=(POD.volume==null?1:POD.volume);
   var seek=function(){ a.removeEventListener('loadedmetadata',seek); try{ a.currentTime=Math.min(off,(a.duration||off)); }catch(e){} if(was) a.play().catch(function(){}); };
   a.addEventListener('loadedmetadata',seek);
   try{ localStorage.setItem('pod_pos_'+POD.topicId,String(POD.i)); }catch(e){}
@@ -4620,7 +4634,10 @@ function podSeekFrac(frac){
 function podScrubAt(ev,bar){ var r=bar.getBoundingClientRect(); var cx=(ev.touches&&ev.touches[0]?ev.touches[0].clientX:ev.clientX); podSeekFrac(r.width?((cx-r.left)/r.width):0); }
 function podScrubStart(ev,bar){ ev.preventDefault(); var move=function(e){ podScrubAt(e,bar); }; var up=function(){ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); }; document.addEventListener('pointermove',move); document.addEventListener('pointerup',up); podScrubAt(ev,bar); }
 /* ---- speed menu, volume, download, keyboard ---- */
-function podSetSpeed(v){ POD.speed=parseFloat(v)||1; try{ podAudioEl().playbackRate=POD.speed; }catch(e){} podPaint(); }
+function podSetSpeed(v){ POD.speed=parseFloat(v)||1;
+  try{ var a=podAudioEl(); a.defaultPlaybackRate=POD.speed; a.playbackRate=POD.speed; }catch(e){}
+  try{ localStorage.setItem('pod_speed', String(POD.speed)); }catch(e){}
+  podPaint(); }
 function podSetVol(v){ POD.volume=Math.max(0,Math.min(1,parseFloat(v))); try{ podAudioEl().volume=POD.volume; }catch(e){} var s=document.getElementById('podVol'); if(s) s.value=POD.volume; }
 async function podDownload(){
   if(!POD.urls||!POD.urls.length||!POD.urls.every(Boolean)){ mbToast('Finish generating the episode first.'); return; }
@@ -4710,6 +4727,73 @@ function podSetupMedia(){
     navigator.mediaSession.setActionHandler('previoustrack',podPrev);
   }catch(e){}
 }
+/* One shape for both waits: who is working, an honest sense of how far along, and something true and
+   useful to read while it happens. `pct` null = we genuinely don't know yet, so the bar slides rather
+   than pretending to a number. */
+function podWaitCard(o){
+  o=o||{};
+  var bars='';
+  for(var i=0;i<4;i++) bars+='<div class="podwait-row'+(i%2?' b':'')+'"><span class="podwait-dot"></span><span class="podwait-bar"></span></div>';
+  var eq=''; for(var k=0;k<5;k++) eq+='<i></i>';
+  var known=(o.pct!=null && !o.idle);
+  return '<div class="podwait">'
+    + '<div class="podwait-hd"><span class="podwait-ring">'+(o.icon||'🎧')+'</span>'
+    +   '<div><div class="podwait-t">'+esc(o.title||'')+'</div><div class="podwait-s">'+esc(o.sub||'')+'</div></div>'
+    +   '<span class="podwait-eq">'+eq+'</span></div>'
+    + '<div class="podwait-lines">'+bars+'</div>'
+    + '<div class="podwait-prog'+(known?'':' idle')+'">'+(known?'<i style="width:'+Math.max(4,Math.min(100,o.pct))+'%"></i>':'<i></i>')+'</div>'
+    + (o.meta?'<div class="podwait-meta"><span>'+esc(o.meta[0]||'')+'</span><span>'+esc(o.meta[1]||'')+'</span></div>':'')
+    + (o.tip?'<div class="podwait-tip">💡 '+esc(o.tip)+'</div>':'')
+    + '</div>';
+}
+/* ---- host voice samples ----------------------------------------------------------------
+   A student should hear a host before committing eight minutes to them. The sample is generated
+   ONCE per voice, ever: it is keyed on a fixed line, kept in memory for the session and written to
+   localStorage as a data URL, so a second tap — today or next month, on this device — replays the
+   stored clip and never touches /tts again. */
+var _podSample={}, _podSampleAu=null, _podSampleBusy={};
+function podSampleLine(name){ return "Hi, I'm "+(name||'your host')+". I'll be walking you through this one — let's make it stick."; }
+function _podSampleKey(id){ return 'pod_smp_v1_'+id; }
+function _podSampleStored(id){
+  if(_podSample[id]) return _podSample[id];
+  try{ var v=localStorage.getItem(_podSampleKey(id)); if(v){ _podSample[id]=v; return v; } }catch(e){}
+  return null;
+}
+function podStopSample(){ try{ if(_podSampleAu){ _podSampleAu.pause(); _podSampleAu.currentTime=0; } }catch(e){}
+  try{ Array.prototype.forEach.call(document.querySelectorAll('.pav-play.playing'),function(b){ b.classList.remove('playing'); b.textContent='▶'; }); }catch(e){} }
+function _podSamplePlay(id,btn){
+  var url=_podSampleStored(id); if(!url) return false;
+  podStopSample();
+  if(!_podSampleAu){ _podSampleAu=new Audio(); }
+  _podSampleAu.src=url; _podSampleAu.volume=1;
+  if(btn){ btn.classList.add('playing'); btn.textContent='❚❚'; }
+  _podSampleAu.onended=_podSampleAu.onerror=function(){ if(btn){ btn.classList.remove('playing'); btn.textContent='▶'; } };
+  _podSampleAu.play().catch(function(){ if(btn){ btn.classList.remove('playing'); btn.textContent='▶'; } });
+  return true;
+}
+async function podPlaySample(id, ev){
+  try{ if(ev&&ev.stopPropagation) ev.stopPropagation(); }catch(e){}
+  var btn=(ev&&ev.currentTarget)||null;
+  try{ if(window.unlockAudio) unlockAudio(); }catch(e){}
+  if(btn && btn.classList.contains('playing')){ podStopSample(); return; }
+  if(_podSamplePlay(id,btn)) return;                       // already bought once — replay is free
+  if(_podSampleBusy[id]) return;                            // one request per voice, ever, even on a double tap
+  _podSampleBusy[id]=1; if(btn){ btn.textContent='…'; }
+  try{
+    var CFG=window.MEDBANK_CONFIG||{};
+    var ses=await window.__mbSB.auth.getSession(); var tok=ses.data.session&&ses.data.session.access_token;
+    if(!tok) throw new Error('no session');
+    var r=await fetch(CFG.IMPORT_API.replace(/\/$/,'')+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify({text:podSampleLine(podName(id)),use:'tutor',voiceKey:id})});
+    if(!r.ok) throw new Error('tts');
+    var blob=await r.blob();
+    var dataUrl=await new Promise(function(res,rej){ var fr=new FileReader(); fr.onload=function(){res(fr.result);}; fr.onerror=rej; fr.readAsDataURL(blob); });
+    _podSample[id]=dataUrl;
+    try{ localStorage.setItem(_podSampleKey(id),dataUrl); }catch(e){}   // quota full → still cached for this session
+    if(btn) btn.textContent='▶';
+    _podSamplePlay(id,btn);
+  }catch(e){ if(btn) btn.textContent='▶'; mbToast("Couldn't play that sample — try again in a moment."); }
+  finally{ delete _podSampleBusy[id]; }
+}
 function podChapters(){ var out=[],seen={}; (POD.lines||[]).forEach(function(l,i){ var s=(l.section||'').trim(); if(s&&!seen[s]){ seen[s]=1; out.push({section:s,idx:i}); } }); return out; }
 function podPaint(){
   const root=document.getElementById('podRoot'); if(!root) return;
@@ -4722,14 +4806,22 @@ function podPaint(){
       +'</div></div>';
     return;
   }
-  if(POD.phase==='load'){ root.innerHTML='<div class="empty">✍️ Writing your '+(POD.mode==='quick'?'quick review':'deep-dive')+' script…</div>'; return; }
+  if(POD.phase==='load'){ root.innerHTML=podWaitCard({
+      icon:'✍️', title:'Writing your '+(POD.mode==='quick'?'quick review':'deep dive'),
+      sub:'Two hosts are being handed your lecture — they\'ll talk through it the way a good study partner would.',
+      idle:true, tip:'Every line comes from your own note, so nothing in the episode is invented.' }); return; }
   if(POD.phase==='error'){ root.innerHTML='<div class="empty">'+esc(POD.err||'Something went wrong')+'<br><br><button class="btn primary" onclick="podLoadScript(POD.topicId)">Try again</button></div>'; return; }
-  if(POD.phase==='gen'){ var gp=POD.genProgress; var gmsg=(gp&&gp.total)?('Recording the voices… '+gp.got+' / '+gp.total+' lines'):'Recording the voices… ~30–60s';
-    root.innerHTML='<div class="empty">🎙️ '+gmsg+'<br><span style="color:var(--dim);font-size:13px">Made once, then it\'s saved for instant replay — keep this open.</span></div>'; return; }
+  if(POD.phase==='gen'){ var gp=POD.genProgress;
+    root.innerHTML=podWaitCard({
+      icon:'🎙️', title:'Recording your hosts',
+      sub:'Playback starts as soon as the opening is laid down — the rest keeps recording while you listen.',
+      pct:(gp&&gp.total)?Math.round(gp.got/gp.total*100):null,
+      meta:(gp&&gp.total)?[gp.got+' of '+gp.total+' lines',(gp.got<2?'starting…':'nearly there')]:['warming up the studio','~30–60s'],
+      tip:'Recorded once and saved — every replay after this is instant, and costs you nothing.' }); return; }
   if(POD.phase==='voices'){
     const sameVoice = POD.voiceA && POD.voiceA===POD.voiceB;
     root.innerHTML='<div class="card" style="cursor:default"><div style="font-weight:800;margin-bottom:2px">🎧 Choose your two hosts</div>'
-      +'<div style="font-size:12px;color:var(--dim);margin-bottom:10px">Tap an avatar to set each host’s voice.</div>'
+      +'<div style="font-size:12px;color:var(--dim);margin-bottom:10px">Tap an avatar to set each host’s voice — or tap ▶ on a face to hear them first.</div>'
       +'<div class="pavhost"><span class="pavh-badge">Host A</span> <b>'+esc(podName(POD.voiceA))+'</b></div>'
       + podVoiceGrid('A')
       +'<div class="pavhost" style="margin-top:12px"><span class="pavh-badge b">Host B</span> <b>'+esc(podName(POD.voiceB))+'</b></div>'
@@ -6827,6 +6919,7 @@ function testVoiceNamed(name){ try{ if(!ttsOn())return; const v=VOICES.find(x=>x
   if(v) u.voice=v; u.rate=1; u.pitch=1; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
 function deviceSpeakThen(text, cb){ try{ if(!('speechSynthesis'in window)){ cb&&cb(); return; }
   const u=tuneUtter(new SpeechSynthesisUtterance(stripMd(text)));
+  try{ u.rate=(window.mbVoiceRateGet?window.mbVoiceRateGet():1); }catch(e){}
   u.onend=()=>cb&&cb(); u.onerror=()=>cb&&cb();
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }catch(e){ cb&&cb(); } }
@@ -7522,10 +7615,10 @@ try{ if(DATA.settings.useCloudVoice && typeof loadPuter==='function') loadPuter(
 <script src="import-tab.js"></script>
 <script src="lecture-record.js"></script>
 <script src="study-timer.js"></script>
-<script src="study-dock.js"></script>
+<script src="study-dock.js?v=20260828"></script>
 <script src="content-loader.js"></script>
 <script src="auth-ui.js"></script>
-<script src="viz3d.js"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
+<script src="viz3d.js?v=20260828"></script>   <!-- 3D anatomy player (FEATURES.MODEL3D); inert while the flag is off -->
 
 <script>document.addEventListener('DOMContentLoaded',function(){ try{ if(window.MB_SYNC) MB_SYNC.init(); }catch(e){} });
 /* safety: never let the "Loading your notes…" state stick if content can't load */
@@ -7656,6 +7749,40 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
 .pavhost{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
 .pavh-badge{font-size:10.5px;font-weight:800;letter-spacing:.03em;color:#fff;background:var(--primer,#6d28d9);border-radius:999px;padding:2px 9px}
 .pavh-badge.b{background:var(--recall,#0d9488)}
+/* podcast: the two waiting rooms — script, then recording. Both show the studio taking shape
+   instead of a bare spinner, so the wait reads as work being done on your lecture. */
+.podwait{background:var(--card,#fff);border:1px solid var(--line,#e7e3f0);border-radius:16px;padding:18px 16px 16px;overflow:hidden}
+.podwait-hd{display:flex;align-items:center;gap:12px}
+.podwait-mics{position:relative;display:flex;align-items:center;gap:-6px}
+.podwait-ring{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--panel2,#f1eff8)}
+.podwait-ring::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--primer,#7c3aed);opacity:.35;animation:podwaitPulse 2s ease-out infinite}
+@keyframes podwaitPulse{0%{transform:scale(.9);opacity:.45}70%{transform:scale(1.25);opacity:0}100%{opacity:0}}
+.podwait-t{font-weight:800;font-size:15px}
+.podwait-s{font-size:12.5px;color:var(--dim);margin-top:2px;line-height:1.4}
+.podwait-eq{display:flex;align-items:flex-end;gap:3px;height:22px;margin-left:auto}
+.podwait-eq i{display:block;width:3px;border-radius:2px;background:var(--primer,#7c3aed);opacity:.75;animation:podwaitEq 1.1s ease-in-out infinite}
+.podwait-eq i:nth-child(2){animation-delay:.15s}.podwait-eq i:nth-child(3){animation-delay:.3s}
+.podwait-eq i:nth-child(4){animation-delay:.45s}.podwait-eq i:nth-child(5){animation-delay:.6s}
+@keyframes podwaitEq{0%,100%{height:5px}50%{height:20px}}
+.podwait-lines{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.podwait-row{display:flex;gap:9px;align-items:center}
+.podwait-row.b{flex-direction:row-reverse}
+.podwait-dot{width:26px;height:26px;border-radius:50%;background:var(--panel2,#f1eff8);flex:0 0 auto}
+.podwait-bar{height:11px;border-radius:7px;flex:1;background:linear-gradient(90deg,var(--panel2,#f1eff8) 25%,rgba(124,58,237,.14) 37%,var(--panel2,#f1eff8) 63%);background-size:400% 100%;animation:podwaitShim 1.5s linear infinite}
+.podwait-row:nth-child(2) .podwait-bar{max-width:78%}
+.podwait-row:nth-child(3) .podwait-bar{max-width:64%}
+.podwait-row:nth-child(4) .podwait-bar{max-width:85%}
+@keyframes podwaitShim{0%{background-position:100% 0}100%{background-position:0 0}}
+.podwait-prog{margin-top:16px;height:7px;border-radius:7px;background:var(--panel2,#f1eff8);overflow:hidden}
+.podwait-prog i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#7c3aed,#a855f7);transition:width .4s ease}
+.podwait-prog.idle i{width:38%;animation:podwaitSlide 1.5s ease-in-out infinite}
+@keyframes podwaitSlide{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+.podwait-meta{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--dim);margin-top:8px}
+.podwait-tip{margin-top:14px;font-size:12px;color:var(--dim);background:var(--panel2,#f1eff8);border-radius:10px;padding:9px 11px;line-height:1.45}
+/* voice sampling in the host picker */
+.pav-play{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;border:2px solid var(--card,#fff);background:var(--primer,#7c3aed);color:#fff;font-size:9px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
+.pav-play.playing{background:#22c55e}
+@media(prefers-reduced-motion:reduce){.podwait-bar,.podwait-eq i,.podwait-ring::after,.podwait-prog.idle i{animation:none}}
 .pavgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:10px;margin:8px 0 2px}
 .povatar{background:none;border:0;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;border-radius:12px}
 .povatar:hover{background:rgba(124,58,237,.06)}
@@ -9133,7 +9260,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
     $('vizSimpler').onclick=function(){ simplerStep(); };
     $('vizSvg').addEventListener('click',onElClick);
     $('vizStage').addEventListener('click',function(e){ if(!(e.target.getAttribute&&e.target.getAttribute('data-el')))closeTip(); });
-    $('vizSpeed').onchange=function(){ vizRate=parseFloat(this.value)||1; };
+    $('vizSpeed').onchange=function(){ vizRate=parseFloat(this.value)||1; try{ window.mbVoiceRate(vizRate); }catch(e){} };   // takes effect on the clip already playing, not just the next one
     $('vizScrub').oninput=function(){ jump(+this.value); };
     fillVoices(); $('vizVoice').onchange=function(){ vizVoiceName=this.value; };
     render(0);
@@ -9202,7 +9329,7 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   /* the SPEED select only reaches the browser voice (u.rate); the app narrator is server-rendered audio and
      ignores it — so caption/watchdog timing must use the rate that is ACTUALLY in effect, or 1.5× runs the
      words (and the step advance) ahead of a clip still playing at 1×. */
-  function vizEffRate(){ return (vizVoiceName&&window.speechSynthesis)?(vizRate||1):1; }
+  function vizEffRate(){ return vizRate||1; }   // the app narrator honours the speed select now, so captions follow it as well
   function startKaraokeTimed(text){ karaokeReset(); var n=_kSpans.length; if(!n)return; var total=Math.max(1400,(text||'').length*68/vizEffRate()),per=Math.max(120,total/n),j=0;
     _kTimer=setInterval(function(){ setKaraoke(j); j++; if(j>=n){clearInterval(_kTimer);_kTimer=null;} },per); }
   function say(text,cb){
