@@ -4465,8 +4465,22 @@ async function podSetProvider(p,keep){
   POD.phase='voices'; podPaint();
 }
 async function podGenAudio(retry){
-  POD.phase='gen'; POD.genProgress=null; podPaint();
+  POD.phase='gen'; POD.genProgress=null; POD.genLive=true; podPaint();
   var maxPasses=14;   // each pass generates a chunk within the server's time budget; enough for a long episode + hiccups
+  /* Start listening as soon as the opening is recorded. The server keeps chunking the rest of the
+     episode in the background while the first sections play — by the time the listener reaches the end
+     of what exists, the next chunk has long since landed. Waiting for a whole 20-minute episode before
+     the play button worked made a finished feature feel broken. */
+  var live=false, softFails=0, SOFT_MAX=4;
+  /* Once the listener is already hearing the episode, a hiccup on a later chunk is not their problem:
+     retry it quietly a few times, with backoff, and only say something if the retries are exhausted. */
+  function podSoftRetry(){ if(!live || softFails>=SOFT_MAX) return 0; softFails++; maxPasses++; return 700*softFails; }
+  function podGoLive(){
+    if(live || !podClips().length) return; live=true;
+    var pos=0; try{ pos=parseInt(localStorage.getItem('pod_pos_'+POD.topicId)||'0',10)||0; }catch(e){}
+    POD.i=Math.min(pos,(POD.lines?POD.lines.length:1)-1);
+    POD.phase='ready'; podSetupMedia(); podMeasureDurations(); podLoadLine(POD.i,false); podPaint();
+  }
   try{
     for(var pass=0; pass<maxPasses; pass++){
       var r=null;
@@ -4474,10 +4488,12 @@ async function podGenAudio(retry){
         r=await podApi('/podcast-audio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic_id:POD.topicId,provider:POD.provider||'auto',voiceA:POD.voiceA,voiceB:POD.voiceB,level:podLevel(),mode:POD.mode||'deep',seamless:true,lines:POD.lines})});
       }catch(netErr){
         if(pass<maxPasses-1){ await new Promise(function(s){setTimeout(s,900);}); continue; }
+        var _w=podSoftRetry(); if(_w){ await new Promise(function(s){setTimeout(s,_w);}); continue; }
         throw netErr;
       }
       if(!r.ok){
         if((r.status===502||r.status===503||r.status===504) && pass<maxPasses-1){ await new Promise(function(s){setTimeout(s,900);}); continue; }
+        var _w2=podSoftRetry(); if(_w2){ await new Promise(function(s){setTimeout(s,_w2);}); continue; }
         throw new Error((r.data&&(r.data.reason||r.data.error))||'Could not generate the audio.');
       }
       if(r.data.degraded) mbKokoroBanner('Kokoro voice is down — this podcast used paid Fish credits. Fix medbank-kokoro on Render.');
@@ -4487,21 +4503,30 @@ async function podGenAudio(retry){
         var covered={}; POD.clips.forEach(function(s){ for(var i=s.from;i<=s.to;i++) covered[i]=1; });
         var cov=POD.lines.filter(function(_,i){return covered[i];}).length;
         POD.genProgress={got:cov,total:POD.lines.length}; podPaint();
+        if(POD.clips.length>=2 || r.data.done) podGoLive();      // opening sections are in → play now, keep fetching
         if(r.data.done){ break; }
       } else {                                    // per-line clips (fallback / basic)
         POD.seamless=false; var arr=r.data.urls||[]; var got=arr.filter(Boolean).length, total=arr.length||POD.lines.length;
         POD.genProgress={got:got,total:total}; podPaint();
-        if(r.data.done && arr.length && arr.every(Boolean)){ POD.urls=arr; POD.clips=arr.map(function(u,i){return {url:u,from:i,to:i};}); break; }
+        if(got>=2 && arr[0] && arr[1]){                          // first two lines recorded → start playing
+          var upto=0; while(upto<arr.length && arr[upto]) upto++;
+          POD.urls=arr.slice(0,upto); POD.clips=POD.urls.map(function(u,i){return {url:u,from:i,to:i};});
+          if(live){ podMeasureDurations(); podPaint(); } else podGoLive();
+        }
+        if(r.data.done && arr.length && arr.every(Boolean)){ POD.urls=arr; POD.clips=arr.map(function(u,i){return {url:u,from:i,to:i};}); if(live){ podMeasureDurations(); podPaint(); } break; }
       }
-      if(pass>=maxPasses-1) throw new Error('This episode is taking longer than expected — tap Generate again to finish it.');
+      if(pass>=maxPasses-1){ var _w3=podSoftRetry(); if(!_w3) throw new Error('This episode is taking longer than expected — tap Generate again to finish it.'); }
       await new Promise(function(s){setTimeout(s,250);});   // brief pause, then continue the next chunk
     }
     try{ localStorage.setItem('pod_combo_'+POD.topicId, (POD.provider||'auto')+'|'+POD.voiceA+'|'+POD.voiceB); }catch(e){}
-    let pos=0; try{ pos=parseInt(localStorage.getItem('pod_pos_'+POD.topicId)||'0',10)||0; }catch(e){}
-    POD.i=Math.min(pos,(POD.lines?POD.lines.length:1)-1); POD.phase='ready'; podSetupMedia(); podMeasureDurations(); podLoadLine(POD.i,false); podPaint();
+    if(live){ POD.phase='ready'; podMeasureDurations(); podPaint(); }   // already playing — just take in the finished tail
+    else podGoLive();
   }catch(e){
+    POD.genLive=false;
+    if(live){ podMeasureDurations(); podPaint(); mbToast('Couldn\'t finish recording the rest of this episode — tap ↻ Remake to complete it.'); return; }
     POD.phase='voices'; POD.err=cleanPodErr(e.message); podPaint(); mbToast(POD.err);
   }
+  POD.genLive=false;
 }
 /* ---- clip-based playback: a clip = one line (per-line mode) OR one seamless section (multi-speaker) ---- */
 function podClips(){ return POD.clips||[]; }
@@ -4523,7 +4548,16 @@ function podLoadLine(i,autoplay){
   try{ var ln=POD.lines&&POD.lines[POD.i]; if(ln&&ln.src&&window.MB_DOCK_FOLLOW) MB_DOCK_FOLLOW(ln.src); }catch(e){}
   podPaint();
 }
-function podClipEnded(){ var c=podClips(); var k=podClipIdx(POD.i); if(k<c.length-1){ podLoadLine(c[k+1].from,true); } else { POD.playing=false; podPaint(); } }
+function podClipEnded(){ var c=podClips(); var k=podClipIdx(POD.i);
+  if(k<c.length-1){ podLoadLine(c[k+1].from,true); return; }
+  /* Played to the edge of what has been recorded so far, but the rest is still coming in — hold the
+     play state and pick up the moment the next section lands, instead of stopping dead. */
+  if(POD.genLive){ POD.playing=true; podPaint();
+    var n=0; (function waitNext(){ if(!POD.genLive && podClips().length<=k+1){ POD.playing=false; podPaint(); return; }
+      if(podClips().length>k+1){ podLoadLine(podClips()[k+1].from,true); return; }
+      if(n++>240){ POD.playing=false; podPaint(); return; } setTimeout(waitNext,500); })();
+    return; }
+  POD.playing=false; podPaint(); }
 async function podRegenLine(idx){
   if(POD.seamless){ mbToast('This is a seamless episode — use ↻ Remake to regenerate it.'); return; }
   if(!POD.urls||POD.urls[idx]==null){ mbToast('Generate the episode first.'); return; }
@@ -9538,14 +9572,25 @@ setTimeout(function(){ try{ if(window.mbCheckTtsHealth) mbCheckTtsHealth(); }cat
   }
   function pvPreloadThenPlay(){
     if(!PV) return;
-    var texts=[]; PV.scenes.forEach(function(sc){ (((sc.blueprint||{}).narration_steps)||[]).forEach(function(s){ var t=(s.narration_text||'').trim(); if(t)texts.push(t); }); });
+    /* Gate on the FIRST TWO scenes only: as soon as their narration is cached the overlay
+       collapses and playback starts, while every later scene keeps downloading in the
+       background (still well ahead of the player, so the voice never breaks). */
+    var perScene=PV.scenes.map(function(sc){
+      return ((((sc.blueprint||{}).narration_steps)||[]).map(function(s){ return (s.narration_text||'').trim(); }).filter(Boolean));
+    });
+    var texts=[]; perScene.forEach(function(a){ texts=texts.concat(a); });
+    var gate=(perScene[0]||[]).length+(perScene[1]||[]).length;   // clips needed before we start
+    if(!gate) gate=texts.length;
     var total=texts.length, done=0, started=false;
     function start(){ if(started||!PV)return; started=true; try{ var l=document.getElementById('pvload'); if(l&&l.parentNode)l.parentNode.removeChild(l); }catch(e){} pvLoad(0); }
-    pvLoadingBar(0,total);
+    pvLoadingBar(0,Math.min(gate,total));
     if(!window.warmSpeak || !total || vizVoiceName){ start(); return; }   // device-voice users: no clips to pre-buy
     var next=0, active=0, MAXP=3;
     function one(){ if(!PV){return;} if(next>=texts.length){ if(active===0) start(); return; } var t=texts[next++]; active++;
-      window.warmSpeak(t,_vizUse).then(f,f); function f(){ active--; done++; try{pvLoadingBar(done,total);}catch(e){} if(done>=total) start(); else one(); } }
+      window.warmSpeak(t,_vizUse).then(f,f); function f(){ active--; done++;
+        if(!started){ try{pvLoadingBar(Math.min(done,gate),Math.min(gate,total));}catch(e){} }
+        if(done>=gate) start();                                  // gate met → play now, keep fetching below
+        one(); } }
     for(var p=0;p<MAXP;p++) one();
     setTimeout(start, 35000);   // safety: never trap the student behind a hung /tts
   }

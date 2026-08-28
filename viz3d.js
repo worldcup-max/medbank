@@ -1234,16 +1234,22 @@
       var all = [];
       views.forEach(function (v) { all = all.concat(linesOf(v)); });
       warmedAll = true;
+      /* Play only needs the first two views bought before it can start — everything after that keeps
+         arriving in the background while those first views are still being spoken. Waiting for the
+         whole scene made a long scene feel broken; waiting for two views feels instant and still never
+         runs the player into an ungenerated clip. */
+      var gate = (linesOf(views[0]).length + linesOf(views[1]).length) || all.length;
       var started = warm(all, function (done, total) {
+        var g = Math.min(gate, total);
         var box = $('warm'); if (!box) return;
-        if (done >= total) {
+        if (done >= g) {
           warmReady = true;
           box.classList.remove('on');
           return;
         }
         box.classList.add('on');
-        var bar = $('warmbar'); if (bar) bar.style.width = Math.round(done / Math.max(1, total) * 100) + '%';
-        var num = $('warmnum'); if (num) num.textContent = done + ' / ' + total;
+        var bar = $('warmbar'); if (bar) bar.style.width = Math.round(done / Math.max(1, g) * 100) + '%';
+        var num = $('warmnum'); if (num) num.textContent = done + ' / ' + g;
       });
       if (!started) warmReady = true;                 // no warmer registered — nothing to wait for
       /* Never let a hung voice service hold the scene hostage. */
