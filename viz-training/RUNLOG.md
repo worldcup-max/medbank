@@ -5648,3 +5648,76 @@ meshes, someone to commission artwork, someone to audit. The task can keep autho
 them will move. **Recommendation for Frank:** either point DEMAND.json at what students are actually hitting
 so the authoring at least tracks real gaps, or pause authoring and repoint the task at the audit queue, which
 is the one backlog it could genuinely clear on its own.
+
+---
+
+## Run 2026-08-28 (repair run) — REPAIR-BACKLOG section 1 items 14 and 15. **SECTION 1 IS NOW CLEAR.**
+
+Backlog run, not an audit run: sections 1/2 of REPAIR-BACKLOG.md still had unticked items, so the backlog
+outranked the cursor. Two items taken from the top. No new scenes authored. Authoring stays suspended.
+
+**sync-state, first thing:** 104 scenes, 64/64 gross scenes drawing complete, `next to audit` =
+`gross__anterior-abdominal-wall-inguinal-region__flat-abdominal-muscles` (untouched — it is the audit
+cursor's turn only once the backlog clears).
+
+### Item 1 — `gross__forearm-hand__flexor-compartment`: the four-tendon fan
+**Wrong:** beats 7 and 8 taught "one muscle belly, four long tendons" with exactly one digit drawn. The
+student was asked to see a fan and shown a single finger. gaps[3] already admitted this and said the
+phalanges were in the catalog.
+
+**Verified before writing, not remembered:** all nine ids looked up in `available-meshes.json`, plus a
+catalog-wide substring sweep on `phalan` (60 hits) to be sure the spelling was not hiding anything —
+FMA24451/24455/24460 index, FMA24453/24457/24462 ring, FMA24454/24458/24463 little, names character-for-
+character as the catalog spells them ("proximal phalanx of right index finger", etc.). All **right**-side,
+matching the scene's existing right humerus/radius/ulna — no left/right mixing.
+
+**Changed:** nine context structures added to the Bones group (19 → 28 structures). Beat 7 gained six
+SHOW_RELATIONSHIP ops — fds_humeroulnar → middle phalanx of index/ring/little, fdp → distal phalanx of the
+same — and its narration now says the same insertion pair repeats on all four fingers, so it reads as a
+rule rather than a feature of one digit. Beat 8 gained three more TRACE_STRUCTURE runs of fdp out to the
+index, ring and little fingers alongside the existing middle-finger trace, routed ulna → retinaculum →
+proximal phalanx → distal phalanx. gaps[3] rewritten from "that is a choice, not a limit" to a statement
+of what is now drawn and what is still missing.
+
+**Models in hand vs referenced: 22 of 28.** The three proximal phalanges are in meshes-lite; the six
+middle and distal phalanges of index, ring and little finger (FMA24455, FMA24460, FMA24457, FMA24462,
+FMA24458, FMA24463) are catalogued but not fetched, and the mirror is unreachable from this task.
+**Hollow until they arrive:** the three new insertion pairs in beat 7 and the three new fan traces in
+beat 8 — both beats still play correctly on the middle finger, so nothing regresses; the fan is simply
+still described for three of the four digits. sync-state now names this scene as `next to repair` and
+`mesh-gaps.txt` picked up the six ids automatically. **These six are the highest-value meshes to fetch
+next: they are the only thing between this scene and the lesson it claims to teach.**
+Status stays `ready` — the scene was ready before and every beat still teaches what it claims.
+
+### Item 2 — `gross__axilla-brachial-plexus__brachial-plexus`: routing re-opened, and CONFIRMED as diagram
+The backlog asked for this to be re-opened because the diagram routing was decided partly on a false
+absence: the scalenes were thought not to exist, and they do.
+
+**Re-searched the catalog rather than trusting either note.** `scalen` → six meshes, both sides of
+anterior, medius and posterior (FMA13392 right scalenus anterior, FMA13390 right scalenus medius).
+`first rib` → FMA7857 right. `axillar` → **nothing, under any spelling tried** — the axillary artery
+really is absent, so that gaps[] claim survives contact. But `subclavian` → FMA3953 right subclavian
+artery, and the subclavian artery is the vessel beat 1 actually names at the first rib, so the
+supraclavicular half of the journey is renderable. The interscalene groove of beat 1 could be built in 3D
+today. That much of the backlog's suspicion was right.
+
+**Decision: it stays `diagram`.** A fresh sweep for nerve / plexus / root / trunk / cord / ganglion returns
+four meshes in the entire 934-entry catalog — two optic nerves and two choroid plexuses, none of the upper
+limb. The scene has thirty nerve structures and all six beats are about them. The scalenes give the
+corridor; there is still no plexus to put in it, and a 3D scene here would draw an empty gap between two
+muscles. gaps[2] rewritten to record the re-opening, the searches, the subclavian finding, and the reason
+the answer did not change — so the next run does not re-litigate it. `3d_anatomy` stays first in
+preferred_modes and in deferred_modes; the day any upper-limb nerve mesh exists, nothing but the route
+needs to change. Status stays `planned` (no SVG artwork exists yet). Referenced models: none — this is an
+SVG scene and its context regions are drawn, not fetched.
+
+### Housekeeping
+- REPAIR-BACKLOG.md: both items ticked to DONE. **Section 1 is clear.** Section 2 (two curriculum-view
+  items) is next run's work; the audit walk does not start until it is done.
+- validate-scenes.mjs --mark: **104/104 valid.** No scene blocked. One scene "draws with holes":
+  6/28 missing on flexor-compartment, which is the hole I opened deliberately and documented above.
+- build-scene-index.mjs: **104 scenes (54 ready), 11696 term mappings.**
+- sync-state.mjs re-run: all three cursors in step; `next to repair` now points at flexor-compartment.
+- CORPUS.md: the two changed lines amended. No lines added.
+- Neither scene signed with `audited_at` — this was a repair run, not an audit, and a repair is not a
+  read-back. Both remain unaudited and will come round on the audit walk.

@@ -85,7 +85,7 @@
     {
       "key": "hip_bone",
       "name": "right hip bone",
-      "label": "Hip bone — the socket",
+      "label": "Hip bone",
       "role": "part",
       "group": "Bones of the joint",
       "layer": "bone",
@@ -103,16 +103,38 @@
         "ischium",
         "pubis"
       ],
-      "narration": "The socket is the acetabulum, and all three parts of the hip bone build it: ilium above, ischium behind and below, pubis in front. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament.",
-      "approx": {
-        "shown_as": "Hip bone",
-        "detail": "the socket"
-      }
+      "narration": "The socket is the acetabulum, and all three parts of the hip bone build it: ilium above, ischium behind and below, pubis in front. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament."
+    },
+    {
+      "key": "acetabulum",
+      "label": "Acetabulum",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.4783,
+          0.5466,
+          0.356
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the socket is where the femur meets the hip bone (gaps 1.02mm · 1 witness)",
+      "calibration_gap_mm": 1.02,
+      "terms": [
+        "acetabulum",
+        "the socket",
+        "hip socket"
+      ],
+      "narration": "The socket is the acetabulum, and all three parts of the hip bone build it: ilium above, ischium behind and below, pubis in front. Its articular surface is a horseshoe called the lunate surface; the floor inside the horseshoe, the acetabular fossa, is not articular and holds fat. The rim is deepened all round by a fibrocartilaginous labrum, and the gap below is bridged by the transverse acetabular ligament."
     },
     {
       "key": "femur",
       "name": "right femur",
-      "label": "Femur — the ball",
+      "label": "Femur",
       "role": "part",
       "group": "Bones of the joint",
       "layer": "bone",
@@ -131,11 +153,33 @@
         "intertrochanteric crest",
         "neck-shaft angle"
       ],
-      "narration": "The ball is the head of the femur, more than half a sphere, carried on a neck that runs up and medially at about one hundred and twenty-five degrees to the shaft. The small pit on the head is the fovea, where the ligament of the head attaches. That long neck is what gives the hip its range — and what makes it the classic fracture in an elderly patient.",
-      "approx": {
-        "shown_as": "Femur",
-        "detail": "the ball"
-      }
+      "narration": "The ball is the head of the femur, more than half a sphere, carried on a neck that runs up and medially at about one hundred and twenty-five degrees to the shaft. The small pit on the head is the fovea, where the ligament of the head attaches. That long neck is what gives the hip its range — and what makes it the classic fracture in an elderly patient."
+    },
+    {
+      "key": "femoral_head",
+      "label": "Head of femur",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.6636,
+          0.5122,
+          0.9774
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the ball is where the femur meets the hip bone (gaps 1.02mm · 1 witness)",
+      "calibration_gap_mm": 1.02,
+      "terms": [
+        "head of femur",
+        "femoral head",
+        "the ball"
+      ],
+      "narration": "The ball is the head of the femur, more than half a sphere, carried on a neck that runs up and medially at about one hundred and twenty-five degrees to the shaft. The small pit on the head is the fovea, where the ligament of the head attaches. That long neck is what gives the hip its range — and what makes it the classic fracture in an elderly patient."
     },
     {
       "key": "sacrum",
@@ -644,7 +688,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "femur",
-          "to": "hip_bone",
+          "to": "acetabulum",
           "kind": "articulation"
         },
         {
@@ -671,7 +715,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femoral_head",
           "intensity": 0.85
         }
       ],
@@ -694,7 +738,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femoral_head",
           "intensity": 0.9
         },
         {
@@ -716,7 +760,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "hip_bone",
-          "to": "femur",
+          "to": "femoral_head",
           "kind": "ligament"
         },
         {
@@ -740,8 +784,8 @@
           "target": "concept:body_weight",
           "path": [
             "sacrum",
-            "hip_bone",
-            "femur"
+            "acetabulum",
+            "femoral_head"
           ],
           "duration": 8
         },
@@ -917,7 +961,7 @@
           "path": [
             "piriformis",
             "quadratus_femoris",
-            "femur"
+            "femoral_head"
           ],
           "duration": 8
         },

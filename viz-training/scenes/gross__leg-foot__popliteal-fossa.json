@@ -235,7 +235,7 @@
     {
       "key": "femur",
       "name": "right femur",
-      "label": "Femur — popliteal surface",
+      "label": "Femur",
       "role": "part",
       "group": "Floor",
       "layer": "bone",
@@ -249,16 +249,36 @@
         "supracondylar fracture",
         "floor of popliteal fossa"
       ],
-      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel.",
-      "approx": {
-        "shown_as": "Femur",
-        "detail": "popliteal surface"
-      }
+      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel."
+    },
+    {
+      "key": "popliteal_surface",
+      "label": "Popliteal surface of the femur",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.8405,
+          1,
+          0.051
+        ],
+        "radius": 0.03
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +y within z:0,0.25 — the popliteal surface is the posterior aspect of the lower femur (EXTREME +y within z:0,0.25 · 195.6mm from centroid)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "popliteal surface"
+      ],
+      "narration": "The upper part of the floor is the flat popliteal surface of the femur between the two supracondylar lines. The artery lies directly on this bone. That is why a supracondylar fracture of the femur is an emergency: the lower fragment is pulled backwards by gastrocnemius, straight into the vessel."
     },
     {
       "key": "tibia",
       "name": "right tibia",
-      "label": "Tibia — posterior surface",
+      "label": "Tibia",
       "role": "context",
       "group": "Floor",
       "layer": "bone",
@@ -271,11 +291,31 @@
         "soleal line",
         "floor of popliteal fossa"
       ],
-      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends.",
-      "approx": {
-        "shown_as": "Tibia",
-        "detail": "posterior surface"
-      }
+      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends."
+    },
+    {
+      "key": "tibia_posterior",
+      "label": "Posterior surface of the tibia",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "tibia",
+        "uvw": [
+          0.7251,
+          1,
+          0.9518
+        ],
+        "radius": 0.03
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +y within z:0.7,1 — the floor of the fossa is the posterior aspect of the upper tibia (EXTREME +y within z:0.7,1 · 138.8mm from centroid)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "posterior surface of the tibia"
+      ],
+      "narration": "Below the joint the floor becomes the back of the tibia, covered by popliteus and then by the fascia over it. The soleal line on this surface gives origin to soleus, whose upper tendinous arch is where the fossa ends."
     },
     {
       "key": "fibula",
@@ -462,7 +502,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "popliteal_surface",
           "intensity": 0.85
         },
         {
@@ -496,7 +536,7 @@
           "target": "concept:popliteal_artery",
           "path": [
             "add_magnus",
-            "femur",
+            "popliteal_surface",
             "popliteus",
             "soleus"
           ],
@@ -523,7 +563,7 @@
           "target": "concept:tibial_nerve",
           "path": [
             "bic_long",
-            "femur",
+            "popliteal_surface",
             "popliteus",
             "soleus"
           ],
@@ -603,7 +643,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "popliteal_surface",
           "intensity": 0.9
         },
         {
@@ -640,7 +680,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "popliteal_surface",
           "intensity": 0.7
         }
       ],
@@ -667,9 +707,9 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:genicular_anastomosis",
           "path": [
-            "femur",
+            "popliteal_surface",
             "patella",
-            "tibia"
+            "tibia_posterior"
           ],
           "duration": 7
         }

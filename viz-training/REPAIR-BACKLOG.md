@@ -43,6 +43,10 @@ later run was built on those numbers.
 
 ## 1 · Structures to add — the mesh exists and the scene said it did not
 
+**STATUS 2026-08-28: thirteen of the fourteen are DONE** — applied in the same session that wrote this
+file, meshes fetched, decimated and uploaded, `104/104` valid, `64 of 64` gross scenes drawing complete.
+**Section 1 is now CLEAR (2026-08-28)** — all fourteen table rows and the routing re-open are DONE. Go to section 2.
+
 These are the direct consequence of failure mode 1. Each is one authoring job: add the structure with
 the catalog's `name` verbatim, put it in an existing group, give it a label, terms and narration, and
 show it in the beat that already talks about it. The `gaps[]` line has already been corrected in each
@@ -50,22 +54,22 @@ file to say the mesh exists, so the scene currently tells the reader to do this.
 
 | scene | add | why it matters |
 |---|---|---|
-| `forearm-hand__flexor-compartment` | `FMA23707` interosseous membrane of right forearm | the boundary the compartment is defined by |
-| `forearm-hand__extensor-compartment` | `FMA23707` | beat 3 already says "the membrane between them" |
-| `leg-foot__gastrocnemius-soleus` | `FMA35192` interosseous membrane of right leg | the fourth wall of the closed box the compartment-syndrome beat needs |
-| `thoracic-wall-diaphragm__intercostal-muscles` | `FMA74075` + `FMA74077` levatores costarum longi and breves, right | why the posterior wall looks thinner than it is |
-| `pelvis-perineum__internal-reproductive-organs` | `FMA19235` + `FMA19236` deferent ducts | **highest value on this list.** Beat 1 currently traces sperm from epididymis to seminal vesicle with the connecting duct invisible, and beat 4 draws "water under the bridge" from the seminal vesicle to the ureter as a proxy for a crossing the vas actually makes. Rewire both beats. |
-| `anterior-abdominal-wall-inguinal-region__inguinal-canal` | `FMA19235` | the principal content of the cord, currently a concept trace |
-| `kidney-posterior-abdominal-wall__ureters` | `FMA19235` as context | lets the vas-crosses-ureter relation be shown, not described |
-| `pectoral-region-breast__clavicle` | `FMA4754` right internal jugular vein; `FMA13392` right scalenus anterior | the venous angle is narrated as a junction with nothing to join; scalenus anterior is the answer to "what separates the subclavian artery from the vein", which this scene was getting wrong until today |
-| `pectoral-region-breast__axillary-vessels-lymph-nodes` | `FMA4754` | same venous angle, same scene pair |
-| `leg-foot__arches-of-the-foot` | `FMA37741`, `FMA37743`, `FMA37745` plantar interossei | the fourth layer of the sole, currently summarised because they were thought to exist only as sets |
-| `forearm-hand__flexor-compartment` | index, ring and little finger phalanges (`FMA24451/24455/24460`, `FMA24453/24457/24462`, `FMA24454/24458/24463`) | beats 7 and 8 teach a four-tendon fan on one digit |
-| `leg-foot__ankle-joint` | `FMA22546` right extensor hallucis longus | beat 6 names it as one of three tendons in front of the axis and does not draw it |
-| `arm__brachial-artery` | `FMA37665` coracobrachialis, `FMA37695` medial head of right triceps | beat 2 lists "three muscles in order" and draws one |
-| `axilla-brachial-plexus__axillary-vein` | `FMA79979` pectoralis major, `FMA13414` subscapularis as drawn regions | the cross-section beat asks the student to read five things and two are not there |
+| DONE `forearm-hand__flexor-compartment` | `FMA23707` interosseous membrane of right forearm | the boundary the compartment is defined by |
+| DONE `forearm-hand__extensor-compartment` | `FMA23707` | beat 3 already says "the membrane between them" |
+| DONE `leg-foot__gastrocnemius-soleus` | `FMA35192` interosseous membrane of right leg | the fourth wall of the closed box the compartment-syndrome beat needs |
+| DONE `thoracic-wall-diaphragm__intercostal-muscles` | `FMA74075` + `FMA74077` levatores costarum longi and breves, right | why the posterior wall looks thinner than it is |
+| DONE `pelvis-perineum__internal-reproductive-organs` | `FMA19235` + `FMA19236` deferent ducts | **highest value on this list.** Beat 1 currently traces sperm from epididymis to seminal vesicle with the connecting duct invisible, and beat 4 draws "water under the bridge" from the seminal vesicle to the ureter as a proxy for a crossing the vas actually makes. Rewire both beats. |
+| DONE `anterior-abdominal-wall-inguinal-region__inguinal-canal` | `FMA19235` | the principal content of the cord, currently a concept trace |
+| DONE `kidney-posterior-abdominal-wall__ureters` | `FMA19235` as context | lets the vas-crosses-ureter relation be shown, not described |
+| DONE `pectoral-region-breast__clavicle` | `FMA4754` right internal jugular vein; `FMA13392` right scalenus anterior | the venous angle is narrated as a junction with nothing to join; scalenus anterior is the answer to "what separates the subclavian artery from the vein", which this scene was getting wrong until today |
+| DONE `pectoral-region-breast__axillary-vessels-lymph-nodes` | `FMA4754` | same venous angle, same scene pair |
+| DONE `leg-foot__arches-of-the-foot` | `FMA37741`, `FMA37743`, `FMA37745` plantar interossei | the fourth layer of the sole, currently summarised because they were thought to exist only as sets |
+| DONE `forearm-hand__flexor-compartment` | index, ring and little finger phalanges (`FMA24451/24455/24460`, `FMA24453/24457/24462`, `FMA24454/24458/24463`) | beats 7 and 8 teach a four-tendon fan on one digit |
+| DONE `leg-foot__ankle-joint` | `FMA22546` right extensor hallucis longus | beat 6 names it as one of three tendons in front of the axis and does not draw it |
+| DONE (as drawn regions — this is an svg scene, so no model ids) `arm__brachial-artery` | `FMA37665` coracobrachialis, `FMA37695` medial head of right triceps | beat 2 lists "three muscles in order" and draws one |
+| DONE (as drawn regions — svg scene) `axilla-brachial-plexus__axillary-vein` | `FMA79979` pectoralis major, `FMA13414` subscapularis as drawn regions | the cross-section beat asks the student to read five things and two are not there |
 
-Also re-open one routing decision: **`axilla-brachial-plexus__brachial-plexus` was routed to `diagram`
+DONE (2026-08-28: re-opened, re-searched, routing CONFIRMED as `diagram` — no upper-limb nerve mesh exists, so the corridor is renderable but its subject is not) — also re-open one routing decision: **`axilla-brachial-plexus__brachial-plexus` was routed to `diagram`
 partly because the scalenes were thought not to exist.** They do (`FMA13392`, `FMA13390`), as do the
 first rib and clavicle, so the interscalene groove that beat 1 teaches is renderable in 3D today.
 

@@ -198,7 +198,7 @@
     {
       "key": "sacrum",
       "name": "sacrum",
-      "label": "Sacrum — the keystone behind",
+      "label": "Sacrum",
       "role": "part",
       "group": "Sacrum & spine",
       "layer": "bone",
@@ -219,16 +219,12 @@
         "caudal block",
         "median sacral crest"
       ],
-      "narration": "Five vertebrae fused into a wedge, concave in front, driven down between the two hip bones. Its upper front edge is the sacral promontory, the central marker of the pelvic brim and the point measured from in every obstetric diameter. The four pairs of anterior sacral foramina transmit the ventral rami that form the sacral plexus. The sacral canal ends below at the sacral hiatus, between the two sacral cornua — the route for a caudal epidural. The auricular surface on each side takes the sacroiliac joint, and because that joint is wedged and irregular rather than smooth, body weight is transmitted through it and out along the arcuate line to the acetabulum when you stand, or to the ischial tuberosity when you sit.",
-      "approx": {
-        "shown_as": "Sacrum",
-        "detail": "the keystone behind"
-      }
+      "narration": "Five vertebrae fused into a wedge, concave in front, driven down between the two hip bones. Its upper front edge is the sacral promontory, the central marker of the pelvic brim and the point measured from in every obstetric diameter. The four pairs of anterior sacral foramina transmit the ventral rami that form the sacral plexus. The sacral canal ends below at the sacral hiatus, between the two sacral cornua — the route for a caudal epidural. The auricular surface on each side takes the sacroiliac joint, and because that joint is wedged and irregular rather than smooth, body weight is transmitted through it and out along the arcuate line to the acetabulum when you stand, or to the ischial tuberosity when you sit."
     },
     {
       "key": "l5",
       "name": "fifth lumbar vertebra",
-      "label": "Fifth lumbar vertebra — the lumbosacral angle",
+      "label": "Fifth lumbar vertebra",
       "role": "part",
       "group": "Sacrum & spine",
       "layer": "bone",
@@ -245,11 +241,32 @@
         "iliolumbar ligament",
         "lumbosacral trunk"
       ],
-      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest.",
-      "approx": {
-        "shown_as": "Fifth lumbar vertebra",
-        "detail": "the lumbosacral angle"
-      }
+      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest."
+    },
+    {
+      "key": "lumbosacral_angle",
+      "label": "Lumbosacral angle",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "l5",
+        "uvw": [
+          0.2746,
+          0.6874,
+          0.3622
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — the angle is the L5/S1 junction (gaps 1.48mm · 1 witness)",
+      "calibration_gap_mm": 1.48,
+      "terms": [
+        "lumbosacral angle",
+        "sacral promontory"
+      ],
+      "narration": "The pelvis is tilted, not upright: the plane of the inlet makes an angle of about sixty degrees with the horizontal in the standing position, and the lumbar column meets the sacrum at a sharp lumbosacral angle. That angle is the reason L5 tends to slip forwards on the sacrum in spondylolisthesis, and it is held back mainly by the iliolumbar ligaments running from the L5 transverse process to the iliac crest."
     },
     {
       "key": "right_femur",
@@ -580,7 +597,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:pelvic-brim",
           "path": [
-            "l5",
+            "lumbosacral_angle",
             "sacrum",
             "right_hip_bone",
             "left_hip_bone"
@@ -751,7 +768,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:fetal-head",
           "path": [
-            "l5",
+            "lumbosacral_angle",
             "sacrum",
             "right_hip_bone"
           ],

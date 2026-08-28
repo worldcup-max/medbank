@@ -461,7 +461,7 @@
     {
       "key": "l4",
       "name": "fourth lumbar vertebra",
-      "label": "L4 — level of the iliac crests",
+      "label": "L4",
       "role": "part",
       "group": "Lumbar levels",
       "layer": "bone",
@@ -475,11 +475,7 @@
         "Tuffier's line",
         "lumbar puncture"
       ],
-      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it.",
-      "approx": {
-        "shown_as": "L4",
-        "detail": "level of the iliac crests"
-      }
+      "narration": "Below the cord. The canal here holds the cauda equina bathed in cerebrospinal fluid — roots float away from a needle instead of being pierced by it."
     },
     {
       "key": "l5",

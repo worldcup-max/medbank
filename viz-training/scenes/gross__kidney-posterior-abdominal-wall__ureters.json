@@ -359,7 +359,7 @@
     {
       "key": "right_hip_bone",
       "name": "right hip bone",
-      "label": "Hip bone — the ischial spine turn",
+      "label": "Hip bone",
       "role": "context",
       "group": "Bed & landmarks",
       "layer": "bone",
@@ -375,11 +375,31 @@
         "turns forwards and medially",
         "greater sciatic notch"
       ],
-      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it.",
-      "approx": {
-        "shown_as": "Hip bone",
-        "detail": "the ischial spine turn"
-      }
+      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it."
+    },
+    {
+      "key": "ischial_spine",
+      "label": "Ischial spine",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.6943,
+          0.7585,
+          0.3197
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — coccygeus arises from the ischial spine (gaps 0.34mm · 1 witness)",
+      "calibration_gap_mm": 0.34,
+      "terms": [
+        "ischial spine"
+      ],
+      "narration": "In the pelvis the ureter runs downwards and backwards on the lateral wall, in front of the internal iliac artery, as far as the ischial spine. There it turns sharply forwards and medially to reach the bladder. That right-angled turn at the spine is the single most useful landmark for finding the pelvic ureter at operation, and it is where the ureter is closest to the structures that endanger it."
     },
     {
       "key": "right_common_iliac_artery",
@@ -663,7 +683,7 @@
             "right_psoas",
             "l5",
             "right_common_iliac_artery",
-            "right_hip_bone",
+            "ischial_spine",
             "bladder"
           ],
           "duration": 9

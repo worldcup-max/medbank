@@ -540,7 +540,7 @@
     {
       "key": "hip_bone",
       "name": "right hip bone",
-      "label": "Hip bone — iliac crest",
+      "label": "Hip bone",
       "role": "context",
       "group": "Bony frame",
       "layer": "bone",
@@ -552,16 +552,36 @@
         "iliac crest",
         "posterior superior iliac spine"
       ],
-      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments.",
-      "approx": {
-        "shown_as": "Hip bone",
-        "detail": "iliac crest"
-      }
+      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments."
+    },
+    {
+      "key": "iliac_crest",
+      "label": "Iliac crest",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "hip_bone",
+        "uvw": [
+          0.7272,
+          0.9004,
+          0.7603
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — iliocostalis lumborum arises from the crest (gaps 0.16mm · 1 witness)",
+      "calibration_gap_mm": 0.16,
+      "terms": [
+        "iliac crest"
+      ],
+      "narration": "The rest of the origin: the medial part of the iliac crest and the sacroiliac ligaments."
     },
     {
       "key": "rib6",
       "name": "right sixth rib",
-      "label": "Sixth rib — angle",
+      "label": "Sixth rib",
       "role": "context",
       "group": "Bony frame",
       "layer": "bone",
@@ -572,11 +592,32 @@
       "terms": [
         "rib angle"
       ],
-      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines.",
-      "approx": {
-        "shown_as": "Sixth rib",
-        "detail": "angle"
-      }
+      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines."
+    },
+    {
+      "key": "rib6_angle",
+      "label": "Angle of the sixth rib",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "rib6",
+        "uvw": [
+          0.4775,
+          0.9916,
+          0.79
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — iliocostalis thoracis inserts on the rib angles (gaps 0.35mm · 1 witness)",
+      "calibration_gap_mm": 0.35,
+      "terms": [
+        "angle of the rib",
+        "rib angle"
+      ],
+      "narration": "Iliocostalis works along the angles of the ribs, which is the line of bone you can feel two finger-breadths lateral to the spines."
     },
     {
       "key": "rib12",
@@ -614,7 +655,7 @@
     {
       "key": "temporal",
       "name": "right temporal bone",
-      "label": "Temporal bone — mastoid process",
+      "label": "Temporal bone",
       "role": "context",
       "group": "Bony frame",
       "layer": "bone",
@@ -625,11 +666,32 @@
       "terms": [
         "mastoid process"
       ],
-      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process.",
-      "approx": {
-        "shown_as": "Temporal bone",
-        "detail": "mastoid process"
-      }
+      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process."
+    },
+    {
+      "key": "mastoid_process",
+      "label": "Mastoid process",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "temporal",
+        "uvw": [
+          0.2636,
+          0.758,
+          0.2645
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — longissimus capitis inserts on the mastoid (gaps 0.22mm · 1 witness)",
+      "calibration_gap_mm": 0.22,
+      "terms": [
+        "mastoid process",
+        "mastoid"
+      ],
+      "narration": "Longissimus capitis and splenius capitis both end on the mastoid process."
     }
   ],
   "views": [
@@ -849,12 +911,12 @@
           "target": "long_thoracis",
           "path": [
             "sacrum",
-            "hip_bone",
+            "iliac_crest",
             "rib12",
             "long_thoracis",
             "long_cervicis",
             "long_capitis",
-            "temporal"
+            "mastoid_process"
           ],
           "duration": 9
         },

@@ -399,7 +399,7 @@
     {
       "key": "right_hip_bone",
       "name": "right hip bone",
-      "label": "Hip bone (right) — the iliac fossa",
+      "label": "Hip bone (right)",
       "role": "part",
       "group": "Bony attachments",
       "layer": "bone",
@@ -417,16 +417,36 @@
         "pelvic brim",
         "anterior superior iliac spine"
       ],
-      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it. The inner lip of the iliac crest and the iliolumbar ligament give quadratus lumborum its lower attachment. Follow the brim forwards and both muscles are funnelled together under the inguinal ligament into the thigh.",
-      "approx": {
-        "shown_as": "Hip bone (right)",
-        "detail": "the iliac fossa"
-      }
+      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it. The inner lip of the iliac crest and the iliolumbar ligament give quadratus lumborum its lower attachment. Follow the brim forwards and both muscles are funnelled together under the inguinal ligament into the thigh."
+    },
+    {
+      "key": "iliac_fossa",
+      "label": "Iliac fossa",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.5108,
+          0.2141,
+          0.3644
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — iliacus fills the fossa (gaps 0.33mm · 1 witness)",
+      "calibration_gap_mm": 0.33,
+      "terms": [
+        "iliac fossa"
+      ],
+      "narration": "The smooth concave inner surface of the ilium is the iliac fossa, and iliacus lines it. The inner lip of the iliac crest and the iliolumbar ligament give quadratus lumborum its lower attachment. Follow the brim forwards and both muscles are funnelled together under the inguinal ligament into the thigh."
     },
     {
       "key": "right_femur",
       "name": "right femur",
-      "label": "Femur (right) — the lesser trochanter",
+      "label": "Femur (right)",
       "role": "part",
       "group": "Bony attachments",
       "layer": "bone",
@@ -441,11 +461,31 @@
         "hip flexion",
         "avulsion of the lesser trochanter"
       ],
-      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis.",
-      "approx": {
-        "shown_as": "Femur (right)",
-        "detail": "the lesser trochanter"
-      }
+      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis."
+    },
+    {
+      "key": "lesser_trochanter",
+      "label": "Lesser trochanter",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_femur",
+        "uvw": [
+          0.4568,
+          0.4523,
+          0.7735
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — psoas major inserts on the lesser trochanter (gaps 0.87mm · 1 witness)",
+      "calibration_gap_mm": 0.87,
+      "terms": [
+        "lesser trochanter"
+      ],
+      "narration": "Iliopsoas ends on the lesser trochanter, on the back and medial side of the upper femur. Because the tendon pulls the femur forwards and rotates it laterally, an avulsion fracture of the lesser trochanter in an adult is a red flag: the bone that gave way is usually weakened by a metastasis."
     },
     {
       "key": "right_inguinal_ligament",
@@ -659,13 +699,13 @@
             "l5",
             "right_psoas",
             "right_inguinal_ligament",
-            "right_femur"
+            "lesser_trochanter"
           ],
           "duration": 8
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "right_femur",
+          "target": "lesser_trochanter",
           "intensity": 0.85
         }
       ],
@@ -745,7 +785,7 @@
         {
           "op": "CROSS_SECTION",
           "axis": "y",
-          "offset": 0.0,
+          "offset": 0,
           "animate": true
         },
         {
@@ -845,7 +885,7 @@
             "l3",
             "right_psoas",
             "right_inguinal_ligament",
-            "right_femur"
+            "lesser_trochanter"
           ],
           "duration": 9
         },

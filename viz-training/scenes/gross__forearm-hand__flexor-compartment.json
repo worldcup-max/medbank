@@ -178,6 +178,168 @@
       "narration": "Profundus goes all the way here. It is the only muscle that bends the DIP joint."
     },
     {
+      "key": "index_pp",
+      "name": "proximal phalanx of right index finger",
+      "label": "Proximal phalanx (index finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24451"
+      },
+      "terms": [
+        "proximal phalanx",
+        "index finger",
+        "MCP joint"
+      ],
+      "narration": "The tendons run over the front of this bone on their way out to the tip; nothing in this compartment ends here."
+    },
+    {
+      "key": "index_mp",
+      "name": "middle phalanx of right index finger",
+      "label": "Middle phalanx (index finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24455"
+      },
+      "terms": [
+        "middle phalanx",
+        "index finger",
+        "PIP joint"
+      ],
+      "narration": "Superficialis stops here on this finger too. Same rule on every digit: middle phalanx, PIP joint."
+    },
+    {
+      "key": "index_dp",
+      "name": "distal phalanx of right index finger",
+      "label": "Distal phalanx (index finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0b45c",
+      "refs": {
+        "bodyparts3d": "FMA24460"
+      },
+      "terms": [
+        "distal phalanx",
+        "index finger",
+        "DIP joint"
+      ],
+      "narration": "Profundus runs on past superficialis to end here. Same rule on every digit: distal phalanx, DIP joint."
+    },
+    {
+      "key": "ring_pp",
+      "name": "proximal phalanx of right ring finger",
+      "label": "Proximal phalanx (ring finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24453"
+      },
+      "terms": [
+        "proximal phalanx",
+        "ring finger",
+        "MCP joint"
+      ],
+      "narration": "The tendons run over the front of this bone on their way out to the tip; nothing in this compartment ends here."
+    },
+    {
+      "key": "ring_mp",
+      "name": "middle phalanx of right ring finger",
+      "label": "Middle phalanx (ring finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24457"
+      },
+      "terms": [
+        "middle phalanx",
+        "ring finger",
+        "PIP joint"
+      ],
+      "narration": "Superficialis stops here on this finger too. Same rule on every digit: middle phalanx, PIP joint."
+    },
+    {
+      "key": "ring_dp",
+      "name": "distal phalanx of right ring finger",
+      "label": "Distal phalanx (ring finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0b45c",
+      "refs": {
+        "bodyparts3d": "FMA24462"
+      },
+      "terms": [
+        "distal phalanx",
+        "ring finger",
+        "DIP joint"
+      ],
+      "narration": "Profundus runs on past superficialis to end here. Same rule on every digit: distal phalanx, DIP joint."
+    },
+    {
+      "key": "little_pp",
+      "name": "proximal phalanx of right little finger",
+      "label": "Proximal phalanx (little finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#ded5bd",
+      "refs": {
+        "bodyparts3d": "FMA24454"
+      },
+      "terms": [
+        "proximal phalanx",
+        "little finger",
+        "MCP joint"
+      ],
+      "narration": "The tendons run over the front of this bone on their way out to the tip; nothing in this compartment ends here."
+    },
+    {
+      "key": "little_mp",
+      "name": "middle phalanx of right little finger",
+      "label": "Middle phalanx (little finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0c98a",
+      "refs": {
+        "bodyparts3d": "FMA24458"
+      },
+      "terms": [
+        "middle phalanx",
+        "little finger",
+        "PIP joint"
+      ],
+      "narration": "Superficialis stops here on this finger too. Same rule on every digit: middle phalanx, PIP joint."
+    },
+    {
+      "key": "little_dp",
+      "name": "distal phalanx of right little finger",
+      "label": "Distal phalanx (little finger)",
+      "role": "context",
+      "group": "Bones",
+      "layer": "bone",
+      "color": "#f0b45c",
+      "refs": {
+        "bodyparts3d": "FMA24463"
+      },
+      "terms": [
+        "distal phalanx",
+        "little finger",
+        "DIP joint"
+      ],
+      "narration": "Profundus runs on past superficialis to end here. Same rule on every digit: distal phalanx, DIP joint."
+    },
+    {
       "key": "flexor_retinaculum",
       "name": "flexor retinaculum of right wrist",
       "label": "Flexor retinaculum",
@@ -571,9 +733,45 @@
           "from": "fdp",
           "to": "distal_phalanx",
           "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fds_humeroulnar",
+          "to": "index_mp",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fds_humeroulnar",
+          "to": "ring_mp",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fds_humeroulnar",
+          "to": "little_mp",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fdp",
+          "to": "index_dp",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fdp",
+          "to": "ring_dp",
+          "kind": "inserts on"
+        },
+        {
+          "op": "SHOW_RELATIONSHIP",
+          "from": "fdp",
+          "to": "little_dp",
+          "kind": "inserts on"
         }
       ],
-      "narration": "The whole difference is where the tendon stops. Superficialis ends on the middle phalanx and bends the PIP joint. Profundus ends on the distal phalanx and bends the DIP joint. Hold the other fingers straight and ask the patient to bend one — that is how you test each."
+      "narration": "The whole difference is where the tendon stops. Superficialis ends on the middle phalanx and bends the PIP joint. Profundus runs past it to the distal phalanx and bends the DIP joint. The same pair of insertions repeats on the index, middle, ring and little fingers — all four are drawn here, so you can see it is a rule and not a feature of one digit. Hold the other fingers straight and ask the patient to bend one — that is how you test each."
     },
     {
       "mode": "mechanism",
@@ -602,9 +800,42 @@
             "distal_phalanx"
           ],
           "duration": 10
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fdp",
+          "path": [
+            "ulna",
+            "flexor_retinaculum",
+            "index_pp",
+            "index_dp"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fdp",
+          "path": [
+            "ulna",
+            "flexor_retinaculum",
+            "ring_pp",
+            "ring_dp"
+          ],
+          "duration": 6
+        },
+        {
+          "op": "TRACE_STRUCTURE",
+          "target": "fdp",
+          "path": [
+            "ulna",
+            "flexor_retinaculum",
+            "little_pp",
+            "little_dp"
+          ],
+          "duration": 6
         }
       ],
-      "narration": "From the upper ulna, down the forearm, under the flexor retinaculum, along the finger, to the distal phalanx. One muscle belly, four long tendons."
+      "narration": "From the upper ulna, down the forearm, under the flexor retinaculum, along the finger, to the distal phalanx. One muscle belly, four long tendons — and the other three are traced here beside the middle finger, to the index, ring and little fingers, because a single belly pulling four tendons is why you cannot bend one distal joint on its own."
     },
     {
       "mode": "mechanism",
@@ -666,7 +897,7 @@
     "The catalog holds no nerve or artery meshes for the upper limb, so the median nerve between the heads of pronator teres, the ulnar nerve between the heads of flexor carpi ulnaris, and the radial and ulnar arteries are taught in narration only. Nerve supply — median nerve to everything here except flexor carpi ulnaris and the ulnar half of profundus — cannot be shown as a structure.",
     "Pronator teres, flexor carpi ulnaris and flexor digitorum superficialis have no whole-muscle mesh; each is authored from its two heads, which is anatomically finer and teaches the nerve relationships better, but a student list will show two entries per muscle.",
     "There is no mesh for the common flexor origin, the bicipital aponeurosis or the antebrachial fascia, so those attachments are described rather than shown. The interosseous membrane is NOT missing — FMA23707 is in the catalog and is authored as a part of the Radius & ulna scene — and it is the boundary this compartment is defined by, so it should be added here.",
-    "Only the middle finger is drawn as phalanges, so the four-tendon fan of superficialis and profundus is shown on one digit and described for the rest. That is a choice, not a limit: the catalog holds the proximal, middle and distal phalanges of all four fingers, and adding them would let the fan be shown on every digit the beat talks about."
+    "All four fingers reached by the long flexor tendons are now drawn as proximal, middle and distal phalanges (FMA24451/24455/24460 index, FMA24452/24456/24461 middle, FMA24453/24457/24462 ring, FMA24454/24458/24463 little), so the four-tendon fan is shown rather than described. Of the six newly added, only the three proximal phalanges are in the local mesh set today; the middle and distal phalanges of index, ring and little finger (FMA24455, FMA24460, FMA24457, FMA24462, FMA24458, FMA24463) are catalogued but not yet fetched, so until they are, beat 7's insertion pairs and beat 8's fan traces render on the middle finger only."
   ],
   "provenance": {
     "author": "task",

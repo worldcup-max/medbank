@@ -122,7 +122,7 @@ anatomy scenes to add their bony landmarks.
   Held as `candidate`, not `ready`: a scene whose entire named subject is narrated rather than shown has not
   earned the status. Measured node anchors on the axillary walls are the one change that would release it.
 - **Brachial plexus** — `planned`. `gross__axilla-brachial-plexus__brachial-plexus`
-  · Gross Anatomy · Axilla & Brachial Plexus · diagram · 32 parts + 4 context · **planned**.
+  · Gross Anatomy · Axilla & Brachial Plexus · diagram · 32 parts + 4 context · **planned**. *(2026-08-28: diagram routing re-opened per the repair backlog and re-confirmed. The scalenes, first rib, clavicle and subclavian artery all exist as meshes, so the interscalene corridor is renderable — but a fresh search on nerve, plexus, root, trunk, cord and ganglion still returns four meshes in the whole catalog, none of the upper limb, so the subject of all six beats does not exist. Stays diagram.)*
   Routed to its deferred `diagram` mode because the catalog holds **no nerve of the upper limb at all** —
   a search of all 934 entries for plexus, nerve, root, trunk and cord returns two optic nerves and two
   choroid plexuses and nothing else. Thirty nerve structures, zero resolvable. Roots C5–T1, three trunks,
@@ -227,7 +227,7 @@ anatomy scenes to add their bony landmarks.
 
 ## Run 2026-08-26 (run 10) — the forearm, where the catalog finally cooperates
 - **Flexor compartment of forearm** — `ready`. `gross__forearm-hand__flexor-compartment` · Gross Anatomy ·
-  Forearm & Hand · 3d_anatomy · 11 parts + 7 context · **ready**. The first fully resolvable scene since
+  Forearm & Hand · 3d_anatomy · 11 parts + 16 context · **ready**. *(2026-08-28: the nine phalanges of the index, ring and little fingers added, so beats 7 and 8 show the four-tendon fan on all four digits instead of one; six of those meshes — the middle and distal phalanges of the three added digits — are catalogued but not yet fetched, so the scene now draws 22/28 and those two beats render on the middle finger only until they are.)* The first fully resolvable scene since
   the humerus: every muscle of all three flexor layers exists in the catalog. Superficial four (pronator
   teres by its humeral and ulnar heads, flexor carpi radialis, palmaris longus, flexor carpi ulnaris by its
   humeral and ulnar heads), the middle layer alone (flexor digitorum superficialis by its humeroulnar and

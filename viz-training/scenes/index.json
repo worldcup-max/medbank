@@ -12487,6 +12487,21 @@
           "key": "splenius_cervicis",
           "label": "Splenius cervicis",
           "group": "Splenius"
+        },
+        {
+          "key": "iliac_crest",
+          "label": "Iliac crest",
+          "group": "Landmarks"
+        },
+        {
+          "key": "rib6_angle",
+          "label": "Angle of the sixth rib",
+          "group": "Landmarks"
+        },
+        {
+          "key": "mastoid_process",
+          "label": "Mastoid process",
+          "group": "Landmarks"
         }
       ],
       "terms": {
@@ -12503,7 +12518,7 @@
         "longissimus cervicis": "long_cervicis",
         "right longissimus cervicis": "long_cervicis",
         "longissimus capitis": "long_capitis",
-        "mastoid process": "long_capitis",
+        "mastoid process": "mastoid_process",
         "right longissimus capitis": "long_capitis",
         "spinalis": "spin_thoracis",
         "spinalis thoracis": "spin_thoracis",
@@ -12562,23 +12577,26 @@
         "right serratus posterior inferior": "serratus_post_inf",
         "sacrum": "sacrum",
         "erector spinae origin": "sacrum",
-        "iliac crest": "hip_bone",
+        "iliac crest": "iliac_crest",
         "posterior superior iliac spine": "hip_bone",
-        "hip bone iliac crest": "hip_bone",
+        "hip bone": "hip_bone",
         "right hip bone": "hip_bone",
-        "rib angle": "rib6",
-        "sixth rib angle": "rib6",
+        "rib angle": "rib6_angle",
+        "sixth rib": "rib6",
         "right sixth rib": "rib6",
+        "angle of the rib": "rib6_angle",
+        "angle of the sixth rib": "rib6_angle",
         "twelfth rib": "rib12",
         "right twelfth rib": "rib12",
         "occipital bone": "occiput",
         "nuchal lines": "occiput",
-        "temporal bone mastoid process": "temporal",
-        "right temporal bone": "temporal"
+        "temporal bone": "temporal",
+        "right temporal bone": "temporal",
+        "mastoid": "mastoid_process"
       },
       "counts": {
-        "structures": 33,
-        "parts": 19,
+        "structures": 36,
+        "parts": 22,
         "views": 9
       }
     },
@@ -12954,7 +12972,7 @@
         },
         {
           "key": "l4",
-          "label": "L4 — level of the iliac crests",
+          "label": "L4",
           "group": "Lumbar levels"
         },
         {
@@ -13012,7 +13030,6 @@
         "third lumbar vertebra": "l3",
         "intercristal line": "l4",
         "tuffier s line": "l4",
-        "l4 level of the iliac crests": "l4",
         "fourth lumbar vertebra": "l4",
         "fifth lumbar vertebra": "l5",
         "sacrum": "sacrum",
@@ -14133,6 +14150,29 @@
         "distal interphalangeal joint": "distal_phalanx",
         "dip joint": "distal_phalanx",
         "distal phalanx of right middle finger": "distal_phalanx",
+        "proximal phalanx": "index_pp",
+        "index finger": "index_pp",
+        "mcp joint": "index_pp",
+        "proximal phalanx index finger": "index_pp",
+        "proximal phalanx of right index finger": "index_pp",
+        "middle phalanx index finger": "index_mp",
+        "middle phalanx of right index finger": "index_mp",
+        "distal phalanx index finger": "index_dp",
+        "distal phalanx of right index finger": "index_dp",
+        "ring finger": "ring_pp",
+        "proximal phalanx ring finger": "ring_pp",
+        "proximal phalanx of right ring finger": "ring_pp",
+        "middle phalanx ring finger": "ring_mp",
+        "middle phalanx of right ring finger": "ring_mp",
+        "distal phalanx ring finger": "ring_dp",
+        "distal phalanx of right ring finger": "ring_dp",
+        "little finger": "little_pp",
+        "proximal phalanx little finger": "little_pp",
+        "proximal phalanx of right little finger": "little_pp",
+        "middle phalanx little finger": "little_mp",
+        "middle phalanx of right little finger": "little_mp",
+        "distal phalanx little finger": "little_dp",
+        "distal phalanx of right little finger": "little_dp",
         "flexor retinaculum": "flexor_retinaculum",
         "transverse carpal ligament": "flexor_retinaculum",
         "roof of the carpal tunnel": "flexor_retinaculum",
@@ -14187,7 +14227,7 @@
         "right pronator quadratus": "pronator_quadratus"
       },
       "counts": {
-        "structures": 19,
+        "structures": 28,
         "parts": 11,
         "views": 10
       }
@@ -15217,13 +15257,23 @@
       "parts": [
         {
           "key": "hip_bone",
-          "label": "Hip bone — the socket",
+          "label": "Hip bone",
           "group": "Bones of the joint"
         },
         {
+          "key": "acetabulum",
+          "label": "Acetabulum",
+          "group": "Landmarks"
+        },
+        {
           "key": "femur",
-          "label": "Femur — the ball",
+          "label": "Femur",
           "group": "Bones of the joint"
+        },
+        {
+          "key": "femoral_head",
+          "label": "Head of femur",
+          "group": "Landmarks"
         },
         {
           "key": "psoas",
@@ -15338,17 +15388,18 @@
       ],
       "terms": {
         "hip bone": "hip_bone",
-        "acetabulum": "hip_bone",
+        "acetabulum": "acetabulum",
         "lunate surface": "hip_bone",
         "acetabular fossa": "hip_bone",
         "acetabular notch": "hip_bone",
         "ilium": "hip_bone",
         "ischium": "hip_bone",
         "pubis": "hip_bone",
-        "hip bone the socket": "hip_bone",
         "right hip bone": "hip_bone",
+        "the socket": "acetabulum",
+        "hip socket": "acetabulum",
         "femur": "femur",
-        "head of femur": "femur",
+        "head of femur": "femoral_head",
         "fovea capitis": "femur",
         "neck of femur": "femur",
         "greater trochanter": "femur",
@@ -15356,8 +15407,9 @@
         "intertrochanteric line": "femur",
         "intertrochanteric crest": "femur",
         "neck shaft angle": "femur",
-        "femur the ball": "femur",
         "right femur": "femur",
+        "femoral head": "femoral_head",
+        "the ball": "femoral_head",
         "sacrum": "sacrum",
         "sacroiliac joint": "sacrum",
         "weight transmission": "sacrum",
@@ -15460,8 +15512,8 @@
         "right obturator externus": "obturator_externus"
       },
       "counts": {
-        "structures": 26,
-        "parts": 24,
+        "structures": 28,
+        "parts": 26,
         "views": 13
       }
     },
@@ -15547,8 +15599,13 @@
       "parts": [
         {
           "key": "femur",
-          "label": "Femur — upper end",
+          "label": "Femur",
           "group": "Bone"
+        },
+        {
+          "key": "femur_upper_end",
+          "label": "Upper end of the femur",
+          "group": "Landmarks"
         },
         {
           "key": "glut_med",
@@ -15644,8 +15701,10 @@
         "quadrate tubercle": "femur",
         "gluteal tuberosity": "femur",
         "linea aspera": "femur",
-        "femur upper end": "femur",
         "right femur": "femur",
+        "upper end": "femur_upper_end",
+        "proximal femur": "femur_upper_end",
+        "upper end of the femur": "femur_upper_end",
         "hip bone": "hip_bone",
         "acetabulum": "hip_bone",
         "ischial tuberosity": "gemellus_inf",
@@ -15719,8 +15778,8 @@
         "right external iliac vein": "ext_iliac_vein"
       },
       "counts": {
-        "structures": 19,
-        "parts": 17,
+        "structures": 20,
+        "parts": 18,
         "views": 11
       }
     },
@@ -17718,13 +17777,23 @@
         },
         {
           "key": "right_hip_bone",
-          "label": "Hip bone (right) — the iliac fossa",
+          "label": "Hip bone (right)",
           "group": "Bony attachments"
         },
         {
+          "key": "iliac_fossa",
+          "label": "Iliac fossa",
+          "group": "Landmarks"
+        },
+        {
           "key": "right_femur",
-          "label": "Femur (right) — the lesser trochanter",
+          "label": "Femur (right)",
           "group": "Bony attachments"
+        },
+        {
+          "key": "lesser_trochanter",
+          "label": "Lesser trochanter",
+          "group": "Landmarks"
         },
         {
           "key": "right_inguinal_ligament",
@@ -17742,7 +17811,7 @@
         "psoas": "right_psoas",
         "iliopsoas": "right_psoas",
         "hip flexor": "right_psoas",
-        "lesser trochanter": "right_psoas",
+        "lesser trochanter": "lesser_trochanter",
         "lumbar transverse process": "right_psoas",
         "lumbar plexus": "right_psoas",
         "psoas shadow": "right_psoas",
@@ -17758,7 +17827,7 @@
         "psoas major left": "left_psoas",
         "left psoas major": "left_psoas",
         "iliacus": "right_iliacus",
-        "iliac fossa": "right_iliacus",
+        "iliac fossa": "iliac_fossa",
         "femoral nerve": "right_iliacus",
         "hip flexion": "right_iliacus",
         "l2 l3 l4": "right_iliacus",
@@ -17819,12 +17888,12 @@
         "iliacus origin": "right_hip_bone",
         "pelvic brim": "right_hip_bone",
         "anterior superior iliac spine": "right_hip_bone",
-        "hip bone right the iliac fossa": "right_hip_bone",
+        "hip bone right": "right_hip_bone",
         "right hip bone": "right_hip_bone",
         "femur": "right_femur",
         "iliopsoas insertion": "right_femur",
         "avulsion of the lesser trochanter": "right_femur",
-        "femur right the lesser trochanter": "right_femur",
+        "femur right": "right_femur",
         "right femur": "right_femur",
         "inguinal ligament": "right_inguinal_ligament",
         "muscular lacuna": "right_inguinal_ligament",
@@ -17871,8 +17940,8 @@
         "sacrum the floor of the wall behind": "sacrum"
       },
       "counts": {
-        "structures": 22,
-        "parts": 11,
+        "structures": 24,
+        "parts": 13,
         "views": 6
       }
     },
@@ -18285,6 +18354,11 @@
           "group": "Bed & landmarks"
         },
         {
+          "key": "ischial_spine",
+          "label": "Ischial spine",
+          "group": "Landmarks"
+        },
+        {
           "key": "right_common_iliac_artery",
           "label": "Common iliac artery (right) — the second constriction",
           "group": "Blood supply"
@@ -18360,11 +18434,10 @@
         "phlebolith": "sacrum",
         "sacrum the sacroiliac joint on the film": "sacrum",
         "hip bone": "right_hip_bone",
-        "ischial spine": "right_hip_bone",
+        "ischial spine": "ischial_spine",
         "lateral pelvic wall": "right_hip_bone",
         "turns forwards and medially": "right_hip_bone",
         "greater sciatic notch": "right_hip_bone",
-        "hip bone the ischial spine turn": "right_hip_bone",
         "right hip bone": "right_hip_bone",
         "common iliac artery": "right_common_iliac_artery",
         "bifurcation": "right_common_iliac_artery",
@@ -18420,8 +18493,8 @@
         "right seminal vesicle": "right_seminal_vesicle"
       },
       "counts": {
-        "structures": 21,
-        "parts": 5,
+        "structures": 22,
+        "parts": 6,
         "views": 5
       }
     },
@@ -18514,13 +18587,23 @@
         },
         {
           "key": "tibia",
-          "label": "Tibia — medial malleolus & roof",
+          "label": "Tibia",
           "group": "The joint"
         },
         {
+          "key": "medial_malleolus",
+          "label": "Medial malleolus",
+          "group": "Landmarks"
+        },
+        {
           "key": "fibula",
-          "label": "Fibula — lateral malleolus",
+          "label": "Fibula",
           "group": "The joint"
+        },
+        {
+          "key": "lateral_malleolus",
+          "label": "Lateral malleolus",
+          "group": "Landmarks"
         },
         {
           "key": "iom",
@@ -18578,17 +18661,15 @@
         "avascular necrosis": "talus",
         "right talus": "talus",
         "tibia": "tibia",
-        "medial malleolus": "tibia",
+        "medial malleolus": "medial_malleolus",
         "inferior articular surface of tibia": "tibia",
         "roof of mortise": "tibia",
         "plafond": "tibia",
-        "tibia medial malleolus roof": "tibia",
         "right tibia": "tibia",
         "fibula": "fibula",
-        "lateral malleolus": "fibula",
+        "lateral malleolus": "lateral_malleolus",
         "outer wall of mortise": "fibula",
         "lateral wall": "fibula",
-        "fibula lateral malleolus": "fibula",
         "right fibula": "fibula",
         "interosseous membrane": "iom",
         "inferior tibiofibular joint": "iom",
@@ -18653,8 +18734,8 @@
         "right fibularis brevis": "fib_brevis"
       },
       "counts": {
-        "structures": 15,
-        "parts": 12,
+        "structures": 17,
+        "parts": 14,
         "views": 11
       }
     },
@@ -18744,7 +18825,7 @@
         },
         {
           "key": "talus",
-          "label": "Talus — the keystone",
+          "label": "Talus",
           "group": "Medial longitudinal arch"
         },
         {
@@ -18836,7 +18917,6 @@
         "head of talus": "talus",
         "summit of the arch": "talus",
         "weight transmission": "talus",
-        "talus the keystone": "talus",
         "right talus": "talus",
         "navicular": "navicular",
         "tuberosity of navicular": "navicular",
@@ -19276,8 +19356,18 @@
         },
         {
           "key": "femur",
-          "label": "Femur — popliteal surface",
+          "label": "Femur",
           "group": "Floor"
+        },
+        {
+          "key": "popliteal_surface",
+          "label": "Popliteal surface of the femur",
+          "group": "Landmarks"
+        },
+        {
+          "key": "tibia_posterior",
+          "label": "Posterior surface of the tibia",
+          "group": "Landmarks"
         },
         {
           "key": "fibula",
@@ -19338,12 +19428,15 @@
         "popliteal surface of femur": "femur",
         "femoral condyles": "femur",
         "supracondylar fracture": "femur",
-        "femur popliteal surface": "femur",
+        "femur": "femur",
         "right femur": "femur",
+        "popliteal surface": "popliteal_surface",
+        "popliteal surface of the femur": "popliteal_surface",
         "posterior surface of tibia": "tibia",
         "soleal line": "tibia",
-        "tibia posterior surface": "tibia",
+        "tibia": "tibia",
         "right tibia": "tibia",
+        "posterior surface of the tibia": "tibia_posterior",
         "head of fibula": "fibula",
         "neck of fibula": "fibula",
         "common fibular nerve": "fibula",
@@ -19377,8 +19470,8 @@
         "right calcaneal tendon": "tendo_calcaneus"
       },
       "counts": {
-        "structures": 16,
-        "parts": 11,
+        "structures": 18,
+        "parts": 13,
         "views": 10
       }
     },
@@ -23059,6 +23152,11 @@
           "key": "pec_abdominal",
           "label": "Pectoralis major — abdominal head",
           "group": "Pectoralis major"
+        },
+        {
+          "key": "bicipital_groove",
+          "label": "Bicipital groove",
+          "group": "Landmarks"
         }
       ],
       "terms": {
@@ -23105,11 +23203,11 @@
         "rectus abdominis": "rectus_abdominis",
         "right rectus abdominis": "rectus_abdominis",
         "humerus": "humerus",
-        "bicipital groove": "humerus",
+        "bicipital groove": "bicipital_groove",
         "intertubercular sulcus": "humerus",
-        "lateral lip": "humerus",
-        "humerus bicipital groove": "humerus",
+        "lateral lip": "bicipital_groove",
         "right humerus": "humerus",
+        "intertubercular groove": "bicipital_groove",
         "pectoralis minor": "pec_minor",
         "coracoid process": "pec_minor",
         "third fourth fifth ribs": "pec_minor",
@@ -23128,8 +23226,8 @@
         "right latissimus dorsi": "latissimus"
       },
       "counts": {
-        "structures": 19,
-        "parts": 3,
+        "structures": 20,
+        "parts": 4,
         "views": 7
       }
     },
@@ -23455,13 +23553,18 @@
         },
         {
           "key": "sacrum",
-          "label": "Sacrum — the keystone behind",
+          "label": "Sacrum",
           "group": "Sacrum & spine"
         },
         {
           "key": "l5",
-          "label": "Fifth lumbar vertebra — the lumbosacral angle",
+          "label": "Fifth lumbar vertebra",
           "group": "Sacrum & spine"
+        },
+        {
+          "key": "lumbosacral_angle",
+          "label": "Lumbosacral angle",
+          "group": "Landmarks"
         },
         {
           "key": "right_inguinal_ligament",
@@ -23511,7 +23614,7 @@
         "left hip bone": "left_hip_bone",
         "sacrum": "sacrum",
         "five fused sacral vertebrae": "sacrum",
-        "sacral promontory": "sacrum",
+        "sacral promontory": "lumbosacral_angle",
         "ala of the sacrum": "sacrum",
         "auricular surface": "sacrum",
         "anterior sacral foramina": "sacrum",
@@ -23519,13 +23622,11 @@
         "sacral hiatus": "sacrum",
         "caudal block": "sacrum",
         "median sacral crest": "sacrum",
-        "sacrum the keystone behind": "sacrum",
         "fifth lumbar vertebra": "l5",
-        "lumbosacral angle": "l5",
+        "lumbosacral angle": "lumbosacral_angle",
         "spondylolisthesis": "l5",
         "iliolumbar ligament": "l5",
         "lumbosacral trunk": "l5",
-        "fifth lumbar vertebra the lumbosacral angle": "l5",
         "femur": "right_femur",
         "femoral head": "right_femur",
         "hip joint": "right_femur",
@@ -23596,8 +23697,8 @@
         "rectum following the sacral curve": "rectum"
       },
       "counts": {
-        "structures": 16,
-        "parts": 8,
+        "structures": 17,
+        "parts": 9,
         "views": 6
       }
     },
@@ -24447,12 +24548,22 @@
           "key": "urethra",
           "label": "Urethra — through the hiatus in front",
           "group": "Through the floor"
+        },
+        {
+          "key": "ischial_spine",
+          "label": "Ischial spine",
+          "group": "Landmarks"
+        },
+        {
+          "key": "pubis_body",
+          "label": "Body of the pubis",
+          "group": "Landmarks"
         }
       ],
       "terms": {
         "pubococcygeus": "right_pubococcygeus",
         "levator ani": "right_pubococcygeus",
-        "body of the pubis": "right_pubococcygeus",
+        "body of the pubis": "pubis_body",
         "anococcygeal body": "right_pubococcygeus",
         "pubovaginalis": "right_pubococcygeus",
         "levator prostatae": "right_pubococcygeus",
@@ -24484,7 +24595,7 @@
         "iliococcygeus": "right_iliococcygeus",
         "tendinous arch of levator ani": "tendinous_arch",
         "arcus tendineus": "right_iliococcygeus",
-        "ischial spine": "right_iliococcygeus",
+        "ischial spine": "ischial_spine",
         "anococcygeal raphe": "right_iliococcygeus",
         "levator plate": "right_iliococcygeus",
         "iliococcygeus right the thin lateral sheet": "right_iliococcygeus",
@@ -24563,8 +24674,9 @@
         "hip bone": "right_hip_bone",
         "ischiopubic ramus": "right_hip_bone",
         "pelvic outlet": "right_hip_bone",
-        "hip bone right pubis and ischial spine": "right_hip_bone",
+        "hip bone right": "right_hip_bone",
         "right hip bone": "right_hip_bone",
+        "pubis": "pubis_body",
         "pubic symphysis": "left_hip_bone",
         "outlet": "left_hip_bone",
         "hip bone left": "left_hip_bone",
@@ -24573,8 +24685,8 @@
         "sacrum the back of the floor": "sacrum"
       },
       "counts": {
-        "structures": 20,
-        "parts": 12,
+        "structures": 22,
+        "parts": 14,
         "views": 5
       }
     },

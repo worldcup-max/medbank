@@ -86,7 +86,7 @@
     {
       "key": "femur",
       "name": "right femur",
-      "label": "Femur — upper end",
+      "label": "Femur",
       "role": "part",
       "group": "Bone",
       "layer": "bone",
@@ -108,11 +108,32 @@
         "gluteal tuberosity",
         "linea aspera"
       ],
-      "narration": "The longest and strongest bone in the body. Its upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle.",
-      "approx": {
-        "shown_as": "Femur",
-        "detail": "upper end"
-      }
+      "narration": "The longest and strongest bone in the body. Its upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle."
+    },
+    {
+      "key": "femur_upper_end",
+      "label": "Upper end of the femur",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "femur",
+        "uvw": [
+          0.5767,
+          0.3063,
+          1
+        ],
+        "radius": 0.035
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +z — the upper end is the top of the bone (EXTREME +z · 232.2mm from centroid)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "upper end",
+        "proximal femur"
+      ],
+      "narration": "The longest and strongest bone in the body. Its upper end has four things to name: a head, a neck, and two trochanters. In front, the trochanters are joined by a rough intertrochanteric line; behind, by a sharper intertrochanteric crest that carries the quadrate tubercle."
     },
     {
       "key": "hip_bone",
@@ -470,7 +491,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femur_upper_end",
           "intensity": 0.9
         }
       ],
@@ -487,7 +508,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femur_upper_end",
           "intensity": 0.95
         },
         {
@@ -508,7 +529,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femur_upper_end",
           "intensity": 0.95
         },
         {
@@ -557,7 +578,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "femur",
+          "target": "femur_upper_end",
           "intensity": 0.85
         }
       ],
@@ -620,7 +641,7 @@
             "ext_iliac_artery",
             "quadratus_femoris",
             "obturator_externus",
-            "femur"
+            "femur_upper_end"
           ],
           "duration": 10
         },
@@ -650,7 +671,7 @@
           "path": [
             "int_iliac_artery",
             "hip_bone",
-            "femur"
+            "femur_upper_end"
           ],
           "duration": 8
         },
@@ -687,7 +708,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "hip_bone",
-          "to": "femur",
+          "to": "femur_upper_end",
           "kind": "capsule"
         },
         {

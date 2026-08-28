@@ -110,7 +110,7 @@
     {
       "key": "tibia",
       "name": "right tibia",
-      "label": "Tibia — medial malleolus & roof",
+      "label": "Tibia",
       "role": "part",
       "group": "The joint",
       "layer": "bone",
@@ -125,16 +125,36 @@
         "roof of mortise",
         "plafond"
       ],
-      "narration": "The tibia gives the ankle two of its three walls. Its flat lower articular surface is the roof, and its medial malleolus comes down as the inner wall. That malleolus is short — it reaches only to about the middle of the medial side of the talus.",
-      "approx": {
-        "shown_as": "Tibia",
-        "detail": "medial malleolus & roof"
-      }
+      "narration": "The tibia gives the ankle two of its three walls. Its flat lower articular surface is the roof, and its medial malleolus comes down as the inner wall. That malleolus is short — it reaches only to about the middle of the medial side of the talus."
+    },
+    {
+      "key": "medial_malleolus",
+      "label": "Medial malleolus",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "tibia",
+        "uvw": [
+          0.8713,
+          0.636,
+          0.0285
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME +x within z:0,0.2 — the medial malleolus is the most medial point of the lower tibia (right leg: medial is +X) (EXTREME +x within z:0,0.2 · 189.7mm from centroid)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "medial malleolus"
+      ],
+      "narration": "The tibia gives the ankle two of its three walls. Its flat lower articular surface is the roof, and its medial malleolus comes down as the inner wall. That malleolus is short — it reaches only to about the middle of the medial side of the talus."
     },
     {
       "key": "fibula",
       "name": "right fibula",
-      "label": "Fibula — lateral malleolus",
+      "label": "Fibula",
       "role": "part",
       "group": "The joint",
       "layer": "bone",
@@ -148,11 +168,31 @@
         "outer wall of mortise",
         "lateral wall"
       ],
-      "narration": "The fibula gives the third wall. Its lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out.",
-      "approx": {
-        "shown_as": "Fibula",
-        "detail": "lateral malleolus"
-      }
+      "narration": "The fibula gives the third wall. Its lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out."
+    },
+    {
+      "key": "lateral_malleolus",
+      "label": "Lateral malleolus",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "fibula",
+        "uvw": [
+          0.6033,
+          0.7918,
+          0
+        ],
+        "radius": 0.02
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: EXTREME -z — the lateral malleolus is the lowest point of the fibula (EXTREME -z · 177.3mm from centroid)",
+      "calibration_gap_mm": 0,
+      "terms": [
+        "lateral malleolus"
+      ],
+      "narration": "The fibula gives the third wall. Its lateral malleolus descends about two centimetres lower than the medial one and lies slightly further back. That extra length is a bony block against eversion, and it is the reason the foot turns inwards far more easily than it turns out."
     },
     {
       "key": "iom",
@@ -495,7 +535,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:dorsiflexion",
           "path": [
-            "tibia",
+            "medial_malleolus",
             "talus",
             "calcaneus"
           ],
@@ -582,7 +622,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:deltoid_ligament",
           "path": [
-            "tibia",
+            "medial_malleolus",
             "talus",
             "calcaneus",
             "navicular"
@@ -621,7 +661,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "concept:lateral_ligament_complex",
           "path": [
-            "fibula",
+            "lateral_malleolus",
             "talus",
             "calcaneus"
           ],
@@ -645,7 +685,7 @@
         },
         {
           "op": "HIGHLIGHT_STRUCTURE",
-          "target": "fibula",
+          "target": "lateral_malleolus",
           "intensity": 0.9
         },
         {

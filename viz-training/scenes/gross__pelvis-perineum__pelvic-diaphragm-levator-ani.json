@@ -489,7 +489,7 @@
     {
       "key": "right_hip_bone",
       "name": "right hip bone",
-      "label": "Hip bone (right) — pubis and ischial spine",
+      "label": "Hip bone (right)",
       "role": "context",
       "group": "Bony frame",
       "layer": "bone",
@@ -504,11 +504,56 @@
         "ischiopubic ramus",
         "pelvic outlet"
       ],
-      "narration": "Two points on this bone anchor the whole floor: the back of the body of the pubis in front and the ischial spine behind. The tendinous arch is the line stretched between them.",
-      "approx": {
-        "shown_as": "Hip bone (right)",
-        "detail": "pubis and ischial spine"
-      }
+      "narration": "Two points on this bone anchor the whole floor: the back of the body of the pubis in front and the ischial spine behind. The tendinous arch is the line stretched between them."
+    },
+    {
+      "key": "ischial_spine",
+      "label": "Ischial spine",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.6943,
+          0.7585,
+          0.3197
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — coccygeus arises from the ischial spine (gaps 0.34mm · 1 witness)",
+      "calibration_gap_mm": 0.34,
+      "terms": [
+        "ischial spine"
+      ],
+      "narration": "Two points on this bone anchor the whole floor: the back of the body of the pubis in front and the ischial spine behind. The tendinous arch is the line stretched between them."
+    },
+    {
+      "key": "pubis_body",
+      "label": "Body of the pubis",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "right_hip_bone",
+        "uvw": [
+          0.903,
+          0.3038,
+          0.1535
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — pubococcygeus arises from the body of the pubis (gaps 0.56mm · 1 witness)",
+      "calibration_gap_mm": 0.56,
+      "terms": [
+        "pubis",
+        "body of the pubis"
+      ],
+      "narration": "Two points on this bone anchor the whole floor: the back of the body of the pubis in front and the ischial spine behind. The tendinous arch is the line stretched between them."
     },
     {
       "key": "left_hip_bone",
@@ -610,7 +655,7 @@
           "op": "TRACE_STRUCTURE",
           "target": "tendinous_arch",
           "path": [
-            "right_hip_bone",
+            "pubis_body",
             "tendinous_arch",
             "right_iliococcygeus"
           ],

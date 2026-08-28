@@ -289,7 +289,7 @@
     {
       "key": "humerus",
       "name": "right humerus",
-      "label": "Humerus — bicipital groove",
+      "label": "Humerus",
       "role": "context",
       "group": "Insertion",
       "layer": "bone",
@@ -303,11 +303,33 @@
         "intertubercular sulcus",
         "lateral lip"
       ],
-      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor.",
-      "approx": {
-        "shown_as": "Humerus",
-        "detail": "bicipital groove"
-      }
+      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor."
+    },
+    {
+      "key": "bicipital_groove",
+      "label": "Bicipital groove",
+      "role": "part",
+      "group": "Landmarks",
+      "render": "anchor",
+      "color": "#ffcf5c",
+      "anchor": {
+        "on": "humerus",
+        "uvw": [
+          0.54,
+          0.2783,
+          0.7341
+        ],
+        "radius": 0.018
+      },
+      "status": "needs-review",
+      "calibrated_by": "geometry: CONTACT — both heads of pectoralis major insert on the lateral lip of the groove (gaps 0.17mm, 0.39mm · spread 31.18mm)",
+      "calibration_gap_mm": 0.17,
+      "terms": [
+        "bicipital groove",
+        "intertubercular groove",
+        "lateral lip"
+      ],
+      "narration": "All three heads converge on the lateral lip of the bicipital groove. Remember the three muscles of the groove: pectoralis major on the lateral lip, teres major on the medial lip, latissimus dorsi on the floor."
     },
     {
       "key": "pec_minor",
@@ -458,7 +480,7 @@
         {
           "op": "SHOW_RELATIONSHIP",
           "from": "pec_abdominal",
-          "to": "humerus",
+          "to": "bicipital_groove",
           "kind": "lowest fibres insert highest"
         },
         {
@@ -468,7 +490,7 @@
             "sternum_body",
             "cc4",
             "pec_sternocostal",
-            "humerus"
+            "bicipital_groove"
           ],
           "duration": 7
         },

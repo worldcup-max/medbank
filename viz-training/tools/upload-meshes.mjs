@@ -61,9 +61,18 @@ if (KEY && !CHECK) {
     if (/\s/.test(KEY)) console.error('  contains whitespace — the value was probably split or wrapped');
     if (/^["']|["']$/.test(process.env.SUPABASE_SERVICE_KEY || '')) console.error('  starts or ends with a quote');
     console.error(`  starts with: ${KEY.slice(0, 12)}…   ends with: …${KEY.slice(-8)}`);
-    console.error('\nA service_role key starts "eyJ" and is several hundred characters long. In cmd use');
-    console.error('  set SUPABASE_SERVICE_KEY=eyJ...        (no quotes, no spaces around the =)');
-    console.error('and set it in the SAME window you run node in — cmd and PowerShell do not share it.\n');
+    /* On 2026-08-28 this fired twice on the same person, and the second time was the tool's fault: the
+       instructions here show cmd syntax only, and the run was in PowerShell. Show all three, and say the
+       thing that actually went wrong — the placeholder from the instructions got pasted verbatim. */
+    if (/^eyJ\.{3}$|^eyJ…$|^<.*>$/.test(KEY)) {
+      console.error('\nThat is the PLACEHOLDER, not a key. Replace it with the real one.');
+    }
+    console.error('\nA service_role key starts "eyJ" and is several hundred characters long.');
+    console.error('  PowerShell:   $env:SUPABASE_SERVICE_KEY="eyJ..."     (keep the quotes)');
+    console.error('  Windows cmd:  set SUPABASE_SERVICE_KEY=eyJ...        (no quotes, no spaces around =)');
+    console.error('  bash:         export SUPABASE_SERVICE_KEY=eyJ...');
+    console.error('\nSet it in the SAME window you run node in — the three shells do not share it.');
+    console.error('Find it in the Supabase dashboard: Project Settings > API > service_role.\n');
     process.exit(2);
   }
 }

@@ -106,7 +106,7 @@
     {
       "key": "talus",
       "name": "right talus",
-      "label": "Talus — the keystone",
+      "label": "Talus",
       "role": "part",
       "group": "Medial longitudinal arch",
       "layer": "bone",
@@ -121,11 +121,7 @@
         "summit of the arch",
         "weight transmission"
       ],
-      "narration": "The talus is the keystone of the medial arch — the highest bone and the one that receives the whole body weight from the tibia. It has no muscle attached to it at all. Its job is purely to receive load from above and split it: backwards to the heel, forwards along the arch to the front of the foot.",
-      "approx": {
-        "shown_as": "Talus",
-        "detail": "the keystone"
-      }
+      "narration": "The talus is the keystone of the medial arch — the highest bone and the one that receives the whole body weight from the tibia. It has no muscle attached to it at all. Its job is purely to receive load from above and split it: backwards to the heel, forwards along the arch to the front of the foot."
     },
     {
       "key": "navicular",
