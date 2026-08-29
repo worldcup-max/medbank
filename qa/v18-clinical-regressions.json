@@ -1,0 +1,18 @@
+{
+  "note": "V1.8 regression set — the three TRUE clinical errors from Production Run #1 that R2 must now catch after the redundant/contraindicated-therapy + mechanism-wording checks. Run each via POST /admin/integrated/review-debug {stem,options,answer,...} after deploying V1.8. R2 must return valid=false (→ severity hard) FOR THE RIGHT REASON (the reason string must name the specific error). These are the acceptance test for V1.8; they join the permanent benchmark.",
+  "cases": [
+    { "id":"V18-1", "kind":"redundant-therapy", "family":"cardio_endocrine", "keyed_answer":2, "expected":"hard",
+      "must_cite":"already on empagliflozin — dapagliflozin is a second SGLT2 inhibitor",
+      "stem":"A 62-year-old woman with type 2 diabetes and heart failure with reduced ejection fraction (LVEF 30%) is on empagliflozin, sacubitril/valsartan, and carvedilol. She reports good adherence. Her HbA1c is 7.2%. Which of the following is the most appropriate next step in her management?",
+      "options":["Add sitagliptin to improve glycemic control","Add pioglitazone to improve glycemic control","Add dapagliflozin to further reduce heart failure risk","Increase carvedilol dose for heart failure"] },
+    { "id":"V18-2", "kind":"guideline-contradiction", "family":"endocrine_renal", "keyed_answer":2, "expected":"hard",
+      "must_cite":"metformin is dose-reduced not stopped at eGFR >=30",
+      "stem":"A 65-year-old woman with type 2 diabetes for 15 years and stage 3b chronic kidney disease (eGFR 38 mL/min/1.73m2) has persistent albuminuria (UACR 500 mg/g) despite lisinopril 20 mg. HbA1c 8.2. She takes metformin 500 mg twice daily and glimepiride 2 mg daily. Which of the following is the most appropriate change to her diabetes regimen?",
+      "options":["Continue current regimen and recheck HbA1c in 3 months","Increase glimepiride to 4 mg daily","Stop metformin and start an SGLT2 inhibitor","Switch metformin to insulin","Add linagliptin"] },
+    { "id":"V18-3", "kind":"mechanism-wording", "family":"cardio_renal", "keyed_answer":1, "expected":"hard",
+      "must_cite":"hyperkalaemia causes peaked T via altered/accelerated repolarisation, not 'delayed repolarisation'",
+      "stem":"A 68-year-old man with CKD stage 3 and hypertension presents with 3 days of oliguria and dyspnea. Bilateral crackles and pitting edema. ECG reveals peaked T waves in the precordial leads. Potassium 6.8 mmol/L, creatinine 320 umol/L (baseline 150), bicarbonate 16. Which of the following best explains the ECG finding?",
+      "options":["Uraemic pericarditis causing epicardial inflammation","Hyperkalaemia causing delayed repolarisation","Volume overload causing left ventricular strain","Metabolic acidosis causing increased intracellular potassium shift"] }
+  ],
+  "note2": "#V18-3 is subtle: the DIAGNOSIS (hyperkalaemia) is right but the MECHANISM wording is wrong. R2 should flag the mechanism inaccuracy. If R2 passes it because the association is correct, that is an acceptable-but-noted softer miss — the harder acceptance bar is V18-1 and V18-2 (unambiguous)."
+}
